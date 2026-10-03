@@ -1,0 +1,156 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.01s
+     Running unittests src/lib.rs (target/debug/deps/lts_audio-cad7c70e26e66635)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_domain-b88dcb0df572de61)
+
+running 20 tests
+test curriculum::tests::only_prerequisite_edges_are_hard_gates ... ok
+test curriculum::tests::prerequisite_record_is_scoped_by_dimension_and_state ... ok
+test curriculum::tests::serde_kebab_case ... ok
+test ids::tests::locale_tags ... ok
+test evidence::tests::only_scored_outcomes_count ... ok
+test ids::tests::model_is_locale_independent ... ok
+test ids::tests::pack_ids ... ok
+test evidence::tests::serde_roundtrip ... ok
+test ids::tests::parses_documented_examples ... ok
+test ids::tests::rejects_malformed_ids ... ok
+test ids::tests::serde_roundtrip_kebab_string ... ok
+test mastery::tests::serde_kebab_case ... ok
+test mastery::tests::state_order_is_canonical ... ok
+test mastery::tests::support_level_bounds ... ok
+test pack::tests::trust_state_order_is_monotonic ... ok
+test pack::tests::model_handles_any_locale_identically ... ok
+test pack::tests::unresolved_license_is_explicit_not_implicit ... ok
+test versioning::tests::accepts_prerelease_and_build_metadata ... ok
+test versioning::tests::engine_range_semantics ... ok
+test versioning::tests::prerelease_orders_before_release ... ok
+
+test result: ok. 20 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_langpack-c5b4e1674b515675)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/langpack-4be041cd0204074d)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_learner_model-f59cb739018d81b6)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_scheduler-e2f827e3aea2eaac)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_security-7a5d0fe4baf464ab)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_speech_api-119bdbda1afe8c2c)
+
+running 3 tests
+test tests::audio_duration_and_serde ... ok
+test tests::mismatch_is_the_only_non_usable_linguistic_signal ... ok
+test tests::providers_are_object_safe ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_speech_runtime-a62b47e1487f86c7)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_storage-fd6587f80c246056)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_audio
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_domain
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_langpack
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_learner_model
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_scheduler
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_security
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_speech_api
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_speech_runtime
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_storage
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+    Checking lts-domain v0.1.0 (/home/hunter/game-dev/LTS/crates/domain)
+    Checking lts-speech-api v0.1.0 (/home/hunter/game-dev/LTS/crates/speech-api)
+    Checking lts-langpack v0.1.0 (/home/hunter/game-dev/LTS/crates/langpack)
+    Checking lts-audio v0.1.0 (/home/hunter/game-dev/LTS/crates/audio)
+    Checking lts-learner-model v0.1.0 (/home/hunter/game-dev/LTS/crates/learner-model)
+    Checking lts-scheduler v0.1.0 (/home/hunter/game-dev/LTS/crates/scheduler)
+    Checking lts-storage v0.1.0 (/home/hunter/game-dev/LTS/crates/storage)
+    Checking lts-security v0.1.0 (/home/hunter/game-dev/LTS/crates/security)
+    Checking lts-langpack-cli v0.1.0 (/home/hunter/game-dev/LTS/crates/langpack-cli)
+    Checking lts-speech-runtime v0.1.0 (/home/hunter/game-dev/LTS/crates/speech-runtime)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.63s

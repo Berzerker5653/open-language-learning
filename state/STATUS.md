@@ -13,10 +13,12 @@ M0 — Bootstrap and technical proof
 ## Completed tasks
 
 - `BOOT-001` — monorepo, toolchains, CI, ADR-0004 (evidence: `state/evidence/BOOT-001/`).
+- `ARCH-001` — domain IDs/versions/evidence/mastery/curriculum/pack model + speech provider
+  contracts (evidence: `state/evidence/ARCH-001/`).
 
 ## Next task
 
-`ARCH-001` — Typed domain IDs/versions and provider interfaces.
+`BOOT-002` — Tauri desktop shell and shared UI skeleton.
 
 ## Owner decisions already resolved
 

@@ -22,6 +22,7 @@ lts-speech-runtime = { path = "crates/speech-runtime" }
 lts-audio = { path = "crates/audio" }
 lts-security = { path = "crates/security" }
 serde = { version = "1.0.229", features = ["derive"] }
+semver = { version = "1.0.28", features = ["serde"] }
 serde_json = "1.0.151"
 thiserror = "2.0.21"
 

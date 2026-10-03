@@ -1,13 +1,27 @@
-//! Core domain types. Must stay independent of any specific language pack
-//! and of provider implementations (docs/07 dependency rule).
+//! Core domain types: stable IDs, versions, evidence, mastery vocabulary,
+//! curriculum graph, and the language-pack model.
+//!
+//! Invariants (docs/07 dependency rule):
+//! - no dependency on any specific language pack or locale behavior;
+//! - no dependency on speech/storage providers;
+//! - packs are untrusted declarative data, never code.
 
-/// Placeholder so the workspace builds before ARCH-001 lands real types.
-pub const CRATE_NAME: &str = "lts-domain";
+pub mod curriculum;
+pub mod evidence;
+pub mod ids;
+pub mod mastery;
+pub mod pack;
+pub mod versioning;
 
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn crate_identifies_itself() {
-        assert_eq!(super::CRATE_NAME, "lts-domain");
-    }
-}
+pub use curriculum::{
+    CurriculumEdge, EdgeKind, NodeKind, PrerequisiteRecord, PrerequisiteStrength,
+};
+pub use evidence::{
+    ActivityModality, AssessmentKind, EvidenceCorrection, EvidenceEvent, Outcome, Score,
+};
+pub use ids::{ContentId, ContentKind, EventId, IdError, LocaleTag, PackId, ProfileId};
+pub use mastery::{EvidenceAvailability, MasteryDimension, MasteryState, SupportLevel};
+pub use pack::{
+    DeclaredCapability, FeatureMode, LicenseSummary, PackManifest, TextDirection, TrustState,
+};
+pub use versioning::{EngineCompat, SchemaVersion, SemVer, VersionError};

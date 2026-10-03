@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-02",
-  "active_task": "ARCH-001",
+  "active_task": "BOOT-002",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -14,6 +14,15 @@
       ]
     },
     "ARCH-001": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/ARCH-001.md",
+        "state/evidence/ARCH-001/cargo-test-2026-10-02.txt"
+      ]
+    },
+    "BOOT-002": {
       "status": "in_progress",
       "attempts": 0,
       "last_error": null,
