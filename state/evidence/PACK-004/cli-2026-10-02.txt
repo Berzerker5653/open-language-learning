@@ -1,0 +1,24 @@
+$ langpack build tests/fixtures/packs/valid-minimal -o min.lpk
+built /tmp/tmp.gFVjmoGYAF/min.lpk (2536 bytes)
+sha256 867c1224c40c672f60a852bbede4ee27eb0001ea41f85a3a123fed906c853fc6
+
+$ langpack build (again, determinism)
+built /tmp/tmp.gFVjmoGYAF/min2.lpk (2536 bytes)
+sha256 867c1224c40c672f60a852bbede4ee27eb0001ea41f85a3a123fed906c853fc6
+
+$ langpack inspect min.lpk
+lts-pack/1 org.openlanguage.test-minimal v0.1.0 (schema 0.2)
+         215  ad39aa8ae2db  assessments/definitions.jsonl
+         476  9690ced56428  curriculum/goals.yaml
+         120  ae412088d264  grammar/concepts.jsonl
+         144  1c83bc59f99e  lexicon/entries.jsonl
+         117  0ed9216eef29  licenses.jsonl
+         400  d3eaa9b80286  manifest.yaml
+         178  63a688be75e5  sources.jsonl
+
+$ langpack install min.lpk --store store
+installed org.openlanguage.test-minimal v0.1.0 at /tmp/tmp.gFVjmoGYAF/store/org.openlanguage.test-minimal/0.1.0
+
+$ langpack rollback (single version)
+error: rollback failed: invalid archive: no other installed version to roll back to for "org.openlanguage.test-minimal"
+exit=1

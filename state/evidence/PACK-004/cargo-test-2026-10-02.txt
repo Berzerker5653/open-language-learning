@@ -1,0 +1,64 @@
+
+running 4 tests
+test migrate::tests::bare_prerequisites_become_reviewable_records ... ok
+test migrate::tests::migrated_goal_validates_against_0_2_schema ... ok
+test migrate::tests::bare_prerequisites_are_rejected_by_0_2_schema ... ok
+test migrate::tests::migrated_records_trigger_review_warning ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+
+running 8 tests
+test install_rejects_path_traversal ... ok
+test build_rejects_invalid_pack ... ok
+test install_rejects_unlisted_and_symlink_entries ... ok
+test install_rejects_hash_mismatch ... ok
+test install_enforces_install_mode_gates ... ok
+test build_is_deterministic ... ok
+test install_upgrade_rollback_cycle ... ok
+test install_rejects_decompression_bomb ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.82s
+
+
+running 5 tests
+test attribution_requirement_without_entry_fails ... ok
+test clean_chain_audits_and_reports_attribution ... ok
+test unknown_license_blocks_reference_build ... ok
+test reference_only_source_cannot_be_bundled ... ok
+test seed_draft_blocks_redistribution_and_reports_sources ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 22 tests
+test dependency_mirror_must_agree_with_content_prerequisites ... ok
+test japanese_draft_seed_is_not_install_eligible ... ok
+test manifest_scripts_must_match_orthography_ids ... ok
+test inverted_engine_range_fails ... ok
+test dead_goal_audit_reports_unreachable_goals ... ok
+test locale_mismatch_fails ... ok
+test bad_id_grammar_fails ... ok
+test prerequisite_cycles_fail_with_cycle_path ... ok
+test bare_prerequisite_ids_fail_in_0_2 ... ok
+test scaffold_draft_is_accepted_as_scaffold_only ... ok
+test japanese_draft_seed_validates_as_scaffold ... ok
+test diagnostics_carry_actionable_locations ... ok
+test duplicate_ids_fail ... ok
+test draft_unresolved_reference_and_license_gates_block_install ... ok
+test out_of_range_support_level_fails ... ok
+test deferred_modality_prerequisites_are_representable ... ok
+test migrated_prerequisites_warn_for_human_review ... ok
+test undeclared_reference_warns_in_scaffold_and_errors_in_install ... ok
+test matching_dependency_mirror_is_clean ... ok
+test valid_minimal_is_clean_in_both_modes ... ok
+test engine_version_compatibility_is_checked ... ok
+test valid_full_covers_every_content_type ... ok
+
+test result: ok. 22 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

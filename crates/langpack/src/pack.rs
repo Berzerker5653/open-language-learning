@@ -38,7 +38,7 @@ pub struct Pack {
     pub(crate) structural: Vec<(String, Value)>,
     unknown_files: Vec<String>,
     parse_errors: Vec<(String, String)>,
-    manifest: Option<Value>,
+    pub(crate) manifest: Option<Value>,
 }
 
 impl Pack {
@@ -941,7 +941,11 @@ fn parse_document(rel: &str, text: &str) -> Result<Value, String> {
     }
 }
 
-fn collect_files(root: &Path, dir: &Path, out: &mut Vec<String>) -> Result<(), io::Error> {
+pub(crate) fn collect_files(
+    root: &Path,
+    dir: &Path,
+    out: &mut Vec<String>,
+) -> Result<(), io::Error> {
     for entry in fs::read_dir(dir)? {
         let entry = entry?;
         let path = entry.path();

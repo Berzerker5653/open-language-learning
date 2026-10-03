@@ -1,9 +1,11 @@
-//! `langpack` author CLI. PACK-001/002/003 deliver `validate` and
-//! `audit-licenses`; the remaining author workflow (init/build/inspect/
-//! migrate) lands with PACK-005.
+//! `langpack` author CLI: validate, audit-licenses, build, inspect,
+//! install, rollback. The remaining author workflow (init/lint/test/
+//! audit-curriculum/migrate) lands with PACK-005.
 
 use clap::{Parser, Subcommand, ValueEnum};
+use lts_langpack::archive;
 use lts_langpack::{Mode, Pack, Severity};
+use std::fs;
 use std::process::ExitCode;
 
 #[derive(Parser)]
@@ -42,6 +44,41 @@ enum Command {
         #[arg(long)]
         attribution_report: bool,
     },
+    /// Build a deterministic .lpk archive (sorted entries, fixed
+    /// timestamps, SHA-256 manifest).
+    Build {
+        /// Pack root directory.
+        path: String,
+        /// Output archive path.
+        #[arg(short, long)]
+        out: String,
+    },
+    /// Print an archive's manifest without extracting.
+    Inspect {
+        /// Archive path.
+        path: String,
+        #[arg(long)]
+        json: bool,
+    },
+    /// Verify and install an archive into a pack store.
+    Install {
+        /// Archive path.
+        path: String,
+        /// Pack store directory.
+        #[arg(long)]
+        store: String,
+    },
+    /// Point the installed pack's current version at another version.
+    Rollback {
+        /// Pack id.
+        pack_id: String,
+        /// Pack store directory.
+        #[arg(long)]
+        store: String,
+        /// Specific version to roll back to (default: highest other).
+        #[arg(long)]
+        to: Option<String>,
+    },
 }
 
 #[derive(Clone, Copy, ValueEnum)]
@@ -73,6 +110,13 @@ fn print_diags(diags: &[lts_langpack::Diagnostic]) {
         };
         println!("{sev}[{}] {loc}: {}", d.code, d.message);
     }
+}
+
+fn load_bytes(path: &str) -> Result<Vec<u8>, ExitCode> {
+    fs::read(path).map_err(|e| {
+        eprintln!("error: cannot read {path}: {e}");
+        ExitCode::from(2)
+    })
 }
 
 fn main() -> ExitCode {
@@ -177,6 +221,83 @@ fn main() -> ExitCode {
                 ExitCode::from(1)
             } else {
                 ExitCode::SUCCESS
+            }
+        }
+        Command::Build { path, out } => match archive::build(path.as_ref()) {
+            Ok((bytes, sha)) => {
+                if let Err(e) = fs::write(&out, &bytes) {
+                    eprintln!("error: cannot write {out}: {e}");
+                    return ExitCode::from(2);
+                }
+                println!("built {out} ({} bytes)", bytes.len());
+                println!("sha256 {sha}");
+                ExitCode::SUCCESS
+            }
+            Err(e) => {
+                eprintln!("error: build failed: {e}");
+                ExitCode::from(1)
+            }
+        },
+        Command::Inspect { path, json } => {
+            let bytes = match load_bytes(&path) {
+                Ok(b) => b,
+                Err(c) => return c,
+            };
+            match archive::inspect(&bytes) {
+                Ok(m) => {
+                    if json {
+                        println!("{}", serde_json::to_string(&m).unwrap());
+                    } else {
+                        println!(
+                            "{} {} v{} (schema {})",
+                            m.format, m.pack_id, m.version, m.schema_version
+                        );
+                        for f in &m.files {
+                            println!("  {:>10}  {}  {}", f.size, &f.sha256[..12], f.path);
+                        }
+                    }
+                    ExitCode::SUCCESS
+                }
+                Err(e) => {
+                    eprintln!("error: {e}");
+                    ExitCode::from(1)
+                }
+            }
+        }
+        Command::Install { path, store } => {
+            let bytes = match load_bytes(&path) {
+                Ok(b) => b,
+                Err(c) => return c,
+            };
+            match archive::install(&bytes, store.as_ref()) {
+                Ok(o) => {
+                    println!(
+                        "installed {} v{} at {}",
+                        o.pack_id,
+                        o.version,
+                        o.directory.display()
+                    );
+                    if let Some(prev) = &o.previous {
+                        println!("previous version: {prev} (rollback available)");
+                    }
+                    ExitCode::SUCCESS
+                }
+                Err(e) => {
+                    eprintln!("error: install rejected: {e}");
+                    ExitCode::from(1)
+                }
+            }
+        }
+        Command::Rollback { pack_id, store, to } => {
+            match archive::rollback(&pack_id, store.as_ref(), to.as_deref()) {
+                Ok(v) => {
+                    println!("{pack_id} current version is now {v}");
+                    ExitCode::SUCCESS
+                }
+                Err(e) => {
+                    eprintln!("error: rollback failed: {e}");
+                    ExitCode::from(1)
+                }
             }
         }
     }

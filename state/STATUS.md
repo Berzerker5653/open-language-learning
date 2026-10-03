@@ -33,10 +33,14 @@ M1 — Pack authoring and validation
   redistribution, reference-only bundling, missing license/attribution;
   attribution report; seed correctly non-distributable pending LIC-001
   (evidence: `state/evidence/PACK-003/`).
+- `PACK-004` — deterministic `lts-pack/1` archives; hardened install
+  (traversal/hash/bomb/symlink/unlisted-entry rejection, install-mode
+  gate); store with atomic current pointer; upgrade/rollback
+  (evidence: `state/evidence/PACK-004/`).
 
 ## Next task
 
-`PACK-004` — secure pack archive build/install/rollback (M1).
+`PACK-005` — complete langpack CLI author workflow (M1).
 
 ## Owner decisions already resolved
 

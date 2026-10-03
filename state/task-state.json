@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-02",
-  "active_task": "PACK-004",
+  "active_task": "PACK-005",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -87,6 +87,17 @@
       ]
     },
     "PACK-004": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/PACK-004.md",
+        "state/evidence/PACK-004/cargo-test-2026-10-02.txt",
+        "state/evidence/PACK-004/cli-2026-10-02.txt",
+        "state/evidence/PACK-004/ci-2026-10-02.txt"
+      ]
+    },
+    "PACK-005": {
       "status": "in_progress",
       "attempts": 0,
       "last_error": null,

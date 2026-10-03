@@ -14,3 +14,6 @@ serde_yaml.workspace = true
 jsonschema.workspace = true
 semver.workspace = true
 thiserror.workspace = true
+zip.workspace = true
+sha2.workspace = true
+tempfile.workspace = true
