@@ -93,6 +93,12 @@ export function Onboarding(p: OnboardingProps) {
               </div>
             ))}
           </fieldset>
+          <p>
+            <small>
+              You can import community packs or change the language you are learning later from the
+              Languages page. This never changes the app&apos;s own interface language.
+            </small>
+          </p>
           <button
             type="button"
             onClick={p.onContinue}

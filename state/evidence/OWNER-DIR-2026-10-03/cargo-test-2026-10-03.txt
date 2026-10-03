@@ -1,0 +1,82 @@
+   Compiling aws-lc-sys v0.45.0
+   Compiling glib-sys v0.18.1
+   Compiling gobject-sys v0.18.0
+   Compiling gio-sys v0.18.1
+   Compiling gdk-sys v0.18.2
+   Compiling cairo-sys-rs v0.18.2
+   Compiling pango-sys v0.18.0
+   Compiling gdk-pixbuf-sys v0.18.0
+   Compiling atk-sys v0.18.2
+   Compiling javascriptcore-rs-sys v1.1.1
+   Compiling soup3-sys v0.5.0
+   Compiling gtk-sys v0.18.2
+   Compiling gdkx11-sys v0.18.2
+   Compiling x11-dl v2.21.0
+   Compiling libdbus-sys v0.2.7
+   Compiling gtk v0.18.2
+   Compiling webkit2gtk-sys v2.0.2
+   Compiling wry v0.57.0
+   Compiling dbus v0.9.12
+   Compiling glib v0.18.5
+   Compiling gdkwayland-sys v0.18.2
+   Compiling aws-lc-rs v1.18.1
+   Compiling rustls v0.23.45
+   Compiling gio v0.18.4
+   Compiling cairo-rs v0.18.5
+   Compiling atk v0.18.2
+   Compiling javascriptcore-rs v1.1.2
+   Compiling rustls-webpki v0.103.15
+   Compiling tokio-rustls v0.26.6
+   Compiling rustls-platform-verifier v0.7.1
+   Compiling ureq v2.12.1
+   Compiling hyper-rustls v0.27.10
+   Compiling reqwest v0.13.5
+   Compiling jsonschema v0.58.5
+   Compiling pango v0.18.3
+   Compiling gdk-pixbuf v0.18.5
+   Compiling soup3 v0.5.0
+   Compiling gdk v0.18.2
+   Compiling lts-langpack v0.1.0 (/home/hunter/game-dev/LTS/crates/langpack)
+   Compiling lts-activity v0.1.0 (/home/hunter/game-dev/LTS/crates/activity)
+   Compiling gdkx11 v0.18.2
+   Compiling webkit2gtk v2.0.2
+   Compiling tao v0.37.1
+   Compiling muda v0.20.0
+   Compiling tauri-runtime v2.12.1
+   Compiling tauri-runtime-wry v2.12.1
+   Compiling tauri v2.12.1
+   Compiling lts-desktop v0.1.0 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 34.24s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-8ac6afde7f2f0134)
+
+running 15 tests
+test models::tests::catalog_entries_are_pinned_and_licensed ... ok
+test packs::tests::entries_are_hardened ... ok
+test tests::rfc3339_conversion_is_correct ... ok
+test models::tests::install_is_checksummed_atomic_and_removable ... ok
+test packs::tests::catalog_cache_roundtrip_and_view ... ok
+test packs::tests::tampered_archive_is_rejected ... ok
+test tests::bundled_japanese_pack_installs_and_records ... ok
+test tests::community_import_installs_and_switches_learning_language ... ok
+test tests::progress_shows_modality_differences ... ok
+test packs::tests::import_validates_then_installs_as_community ... ok
+test tests::fresh_user_onramp_flow_persists_and_resumes ... ok
+test tests::world_unlocks_follow_capabilities_not_activity_volume ... ok
+test tests::plan_uses_scheduler_values_under_budget ... ok
+test tests::speech_audio_prefers_licensed_media_then_synthesizes ... ok
+test tests::pronunciation_check_guides_vowel_length_and_abstains_on_mismatch ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.09s
+
+     Running unittests src/main.rs (target/debug/deps/lts_desktop-6a236eb523c71d5b)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_desktop
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

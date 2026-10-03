@@ -14,6 +14,7 @@ import {
   type WorldEnvironment,
 } from "./home";
 import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./pronunciation";
+import { LanguagePanel, type CatalogEntry, type InstalledPack } from "./language";
 
 type Invoke = (cmd: string, args?: Record<string, unknown>) => Promise<unknown>;
 
@@ -72,7 +73,9 @@ function toB64(bytes: Uint8Array): string {
  */
 export function App() {
   const [step, setStep] = useState<OnboardingStep>("welcome");
-  const [route, setRoute] = useState<"practice" | "progress" | "pronunciation">("practice");
+  const [route, setRoute] = useState<"practice" | "progress" | "pronunciation" | "language">(
+    "practice",
+  );
   const [notice, setNotice] = useState<PrivacyNotice>({
     title: "Your data stays on this device",
     points: [
@@ -93,6 +96,11 @@ export function App() {
   const [recording, setRecording] = useState(false);
   const [attemptUrl, setAttemptUrl] = useState<string | null>(null);
   const [environments, setEnvironments] = useState<WorldEnvironment[]>([]);
+  const [installed, setInstalled] = useState<InstalledPack[]>([]);
+  const [activeIds, setActiveIds] = useState<string[]>([]);
+  const [catalog, setCatalog] = useState<CatalogEntry[]>([]);
+  const [catalogStatus, setCatalogStatus] = useState("no-catalog-url");
+  const [langError, setLangError] = useState<string | null>(null);
 
   useEffect(() => {
     const inv = detectInvoke();
@@ -109,6 +117,48 @@ export function App() {
   }, []);
 
   const inv = detectInvoke();
+
+  async function refreshLanguages() {
+    if (!inv) return;
+    setInstalled((await inv("installed_packs")) as InstalledPack[]);
+    if (profileId) setActiveIds((await inv("active_pack", { profileId })) as string[]);
+    const c = (await inv("catalog_packs")) as { entries: CatalogEntry[]; status: string };
+    setCatalog(c.entries);
+    setCatalogStatus(c.status);
+  }
+
+  async function switchLearning(packId: string) {
+    if (!inv || !profileId) return;
+    try {
+      await inv("switch_pack", { profileId, packId });
+      setLangError(null);
+    } catch (e) {
+      setLangError(String(e));
+    }
+    await refreshLanguages();
+  }
+
+  async function installCatalogPack(packId: string) {
+    if (!inv) return;
+    try {
+      await inv("install_catalog_pack", { packId });
+      setLangError(null);
+    } catch (e) {
+      setLangError(String(e));
+    }
+    await refreshLanguages();
+  }
+
+  async function importPack(dataB64: string) {
+    if (!inv) return;
+    try {
+      await inv("import_pack", { dataB64 });
+      setLangError(null);
+    } catch (e) {
+      setLangError(String(e));
+    }
+    await refreshLanguages();
+  }
 
   async function createProfile() {
     if (inv) {
@@ -284,6 +334,17 @@ export function App() {
         />
       ) : route === "progress" ? (
         <ProgressView rows={progress} />
+      ) : route === "language" ? (
+        <LanguagePanel
+          installed={installed}
+          activeIds={activeIds}
+          catalog={catalog}
+          catalogStatus={catalogStatus}
+          error={langError}
+          onSwitch={(id) => void switchLearning(id)}
+          onInstallCatalog={(id) => void installCatalogPack(id)}
+          onImport={(b64) => void importPack(b64)}
+        />
       ) : (
         <Home
           displayName={displayName}
@@ -302,6 +363,15 @@ export function App() {
         </button>
         <button type="button" onClick={() => setRoute("pronunciation")}>
           Pronunciation
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setRoute("language");
+            void refreshLanguages();
+          }}
+        >
+          Languages
         </button>
       </nav>
     </AppShell>

@@ -2255,6 +2255,7 @@ dependencies = [
  "tauri-build",
  "tempfile",
  "ureq",
+ "url",
 ]
 
 [[package]]

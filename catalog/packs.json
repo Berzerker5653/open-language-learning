@@ -1,0 +1,5 @@
+{
+  "catalog_version": "0.1.0",
+  "note": "Maintained community language-pack catalog. Entries point at versioned GitHub release assets (.lpk archives built with `langpack build`). The app fetches this file from the URL configured in LTS_PACK_CATALOG_URL, verifies every entry (https + GitHub release hosts only, pinned SHA-256, pinned size), and installs through the same validation gate as bundled packs. Add an entry only after `langpack test <pack>` passes and licenses/provenance records are complete. review_status is the author's claim ('community' or 'reviewed'); the app never upgrades it to verified trust.",
+  "packs": []
+}

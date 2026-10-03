@@ -177,21 +177,49 @@ M2 — Local data and learner model
   capability snapshot; no counts/dates/streak parameters exist in the
   API; desktop `world_state` + "Places you can go" home section
   (evidence: `state/evidence/GAME-001/`).
+- Owner direction 2026-10-03 (not a ROADMAP id): MIT app license +
+  `THIRD-PARTY-NOTICES.md`; ja-JP draft provenance analysis
+  (`docs/provenance/ja-jp-draft-content.md` — project-original, no
+  copied third-party text); speech distribution audit
+  (`docs/provenance/speech-distribution-audit.md` — Kokoro/espeak-ng
+  chain confirmed absent from distributable builds); community pack
+  catalog + local import + language switching
+  (`apps/desktop/src-tauri/src/packs.rs`, `apps/desktop/src/language.tsx`,
+  `catalog/packs.json`, `templates/language-pack-template/`,
+  `docs/packs/CONTRIBUTING.md`) (evidence: `state/evidence/OWNER-DIR-2026-10-03/`).
 
 ## Next task
 
-No ROADMAP task is currently unblocked: the only tasks whose
-dependencies are all done are `REVIEW-001` (reviewer capacity) and
-`LIC-001` (final licensing decisions), both owner-only and never
-self-certifiable. Every remaining required task (`JA-A1-001..003`,
-`SPEECH-007`, the A2/B1/B2 content chains, `ACC-001`, `SEC-001`,
-`PLAT-001`, `PERF-002`, `PACK-AI-001`, `REL-001`) depends on at least
-one of those or on `SPEECH-007` (owner-supplied preregistered
-calibration data, docs/17). `active_task` is null until the owner
-unblocks one of these gates.
+Remaining ROADMAP gates after the 2026-10-03 owner direction:
+`REVIEW-001` (qualified reviewer capacity — blocks the whole JA-A1→B2
+content chain) and `SPEECH-007` (owner-supplied preregistered
+calibration recordings, docs/17). `LIC-001` is largely resolved: app
+code is MIT with third-party notices; the Kokoro/espeak-ng TTS chain is
+excluded from distributable builds pending an owner call
+(docs/provenance/speech-distribution-audit.md); the only open piece is
+the content license for project-original pack material (recommend
+CC-BY-4.0). An honestly labeled preview (draft content, community
+packs, guided-but-uncalibrated speech practice) is the sanctioned
+posture while review/calibration remain pending. `active_task` stays
+null: no ROADMAP task is unblocked without owner input.
 
 ## Owner decisions already resolved
 
+## Owner decisions from 2026-10-03 direction
+
+- Application code: MIT, third-party licenses preserved and scoped
+  (`LICENSE`, `THIRD-PARTY-NOTICES.md`).
+- ja-JP draft: keep (provenance supports distribution as
+  project-original); document, don't replace. Review gates unchanged.
+- Community packs on GitHub releases are a supported path; they stay
+  labeled community and never satisfy review/calibration gates.
+- Kokoro/espeak-ng TTS chain stays out of distributable builds until a
+  licensing call; report tradeoffs before replacing (done:
+  `docs/provenance/speech-distribution-audit.md`).
+- Preview posture allowed: honestly labeled draft content + guided
+  speech practice; no B2/calibrated/1.0 claims without evidence.
+
+## Owner decisions already resolved
 - OMP-only autonomous development workflow.
 - No streaks.
 - Local-first/offline-capable core.

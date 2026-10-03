@@ -1,0 +1,18 @@
+schema_version: "0.2"
+pack_id: "community.example.my-language"
+display_name: "My Language Pack"
+version: "0.0.1"
+target_locale: "eo"
+source_locales: ["en-US"]
+engine:
+  min_version: "0.1.0"
+  max_version_exclusive: null
+maturity: "experimental"
+capabilities:
+  listening: false
+  speaking: false
+  reading: false
+  writing: false
+license:
+  content_license: "TBD"
+  redistribution_allowed: false

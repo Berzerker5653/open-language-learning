@@ -8,6 +8,7 @@
 //! supplies paths), and an honest privacy notice (docs/08).
 
 mod models;
+mod packs;
 use lts_speech_api::{
     AcousticFeatureProvider, AlignmentProvider, PronunciationInterpreter, ProsodyProvider,
     SpeechSynthesisProvider,
@@ -136,6 +137,53 @@ fn install_bundled_pack(data: &Path, pack_id: &str) -> Result<PackCandidate, Str
 #[tauri::command]
 fn install_pack(pack_id: String) -> Result<PackCandidate, String> {
     install_bundled_pack(&data_dir(), &pack_id)
+}
+
+// ---------------------------------------------------------------------------
+// Community language packs: GitHub-release catalog + local import
+// ---------------------------------------------------------------------------
+
+#[derive(Serialize)]
+struct CatalogResponse {
+    entries: Vec<packs::CatalogView>,
+    status: String,
+}
+
+/// Browse the maintained community catalog (GitHub release assets).
+/// Falls back to the last good cached copy when offline.
+#[tauri::command]
+fn catalog_packs() -> CatalogResponse {
+    let (entries, status) = packs::catalog_view(&data_dir());
+    CatalogResponse { entries, status }
+}
+
+#[tauri::command]
+fn install_catalog_pack(pack_id: String) -> Result<packs::InstalledPack, String> {
+    packs::install_from_catalog(&data_dir(), &pack_id)
+}
+
+/// Import a locally supplied .lpk archive (contents cross IPC as base64;
+/// filesystem paths never do).
+#[tauri::command]
+fn import_pack(data_b64: String) -> Result<packs::InstalledPack, String> {
+    packs::import_pack_b64(&data_dir(), &data_b64)
+}
+
+#[tauri::command]
+fn installed_packs() -> Vec<packs::InstalledPack> {
+    packs::installed_packs(&data_dir())
+}
+
+#[tauri::command]
+fn active_pack(profile_id: String) -> Result<Vec<String>, String> {
+    packs::active_pack(&data_dir(), &profile_id)
+}
+
+/// Switch the language being learned. The app's own display language is
+/// a separate concern and is unaffected.
+#[tauri::command]
+fn switch_pack(profile_id: String, pack_id: String) -> Result<(), String> {
+    packs::switch_pack(&data_dir(), &profile_id, &pack_id)
 }
 
 #[derive(Serialize)]
@@ -1028,7 +1076,13 @@ pub fn run() {
             pronunciation_check,
             reference_audio,
             speech_audio,
-            world_state
+            world_state,
+            catalog_packs,
+            install_catalog_pack,
+            import_pack,
+            installed_packs,
+            active_pack,
+            switch_pack
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
@@ -1537,5 +1591,33 @@ mod tests {
             store.append_evidence(&ev).unwrap();
         }
         assert_eq!(world_state_at(data, &p.id).unwrap(), envs);
+    }
+
+    /// Community pack flow: a local .lpk import goes through the same
+    /// install gate, is recorded as community trust, and the learning
+    /// language can be switched to it; everything works offline.
+    #[test]
+    fn community_import_installs_and_switches_learning_language() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let dir = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("../../../tests/fixtures/packs/ja-demo");
+        let (bytes, _sha) = lts_langpack::archive::build(&dir).unwrap();
+        use base64::Engine;
+        let b64 = base64::engine::general_purpose::STANDARD.encode(&bytes);
+        let inst = packs::import_pack_b64(data, &b64).unwrap();
+        assert_eq!(inst.trust_state, "community");
+        assert_eq!(inst.pack_id, "org.openlanguage.ja-demo");
+
+        let p = create_local_profile(data, "Community").unwrap();
+        packs::switch_pack(data, &p.id, "org.openlanguage.ja-demo").unwrap();
+        assert_eq!(
+            packs::active_pack(data, &p.id).unwrap(),
+            vec!["org.openlanguage.ja-demo"]
+        );
+        // Offline: installed packs list without any network call.
+        assert_eq!(packs::installed_packs(data).len(), 1);
+        // A pack that was never installed cannot be switched to.
+        assert!(packs::switch_pack(data, &p.id, "community.example.absent").is_err());
     }
 }
