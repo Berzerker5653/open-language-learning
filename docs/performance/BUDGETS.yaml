@@ -1,0 +1,115 @@
+# PERF-001 performance test contract.
+# Status: PROVISIONAL PRODUCT TARGETS. These numbers are engineering targets chosen from
+# docs/05 "Performance targets" and product UX goals, NOT measured baselines. They are frozen
+# after the SPEECH-001 baseline spikes and before provider optimization or release measurement
+# (PERF-002). After freezing, a threshold may only change through an ADR with evidence; a failed
+# configuration may be transparently narrowed or dropped with compatible alternatives recorded,
+# but thresholds must never be raised silently to make a configuration pass (roadmap PERF-001).
+schema_version: "1.0"
+status: provisional
+frozen: false
+freeze_condition: >
+  Frozen when SPEECH-001 completes baseline provider spikes on the named tiers below and an ADR
+  records the actual provider/model combinations per tier. PERF-002 measures against the frozen
+  values.
+
+# ---------------------------------------------------------------------------
+# Named OS/hardware tiers
+# ---------------------------------------------------------------------------
+tiers:
+  ref-dev:
+    role: development-and-baseline-spikes-only   # not a support target
+    os: "CachyOS Linux 7.2.8 (Arch-based), x86-64-v3"
+    cpu: "AMD Ryzen 9 5950X (16c/32t)"
+    ram_gb: 128
+    gpu: "NVIDIA GeForce RTX 5090 32GB"
+    disk: "Samsung 980 PRO 2TB NVMe"
+    pinned: true
+  low:
+    role: minimum-supported-desktop
+    os: ["Linux (X11/Wayland)", "Windows 11"]
+    cpu: "4 physical cores / 8 threads x86-64 (Ryzen 5 2500U / Core i5-8250U class or better)"
+    ram_gb: 8
+    gpu: "integrated graphics only"
+    disk: "SATA SSD, >= 20 GB free"
+    power: "plugged-in or battery-saver disallowed during measurement; record governor"
+  typical:
+    role: primary-supported-desktop
+    os: ["Linux (X11/Wayland)", "Windows 11", "macOS (per PLAT-001)"]
+    cpu: "8 physical cores x86-64 or Apple Silicon M-class (Ryzen 7 5800X / i7-11700 class)"
+    ram_gb: 16
+    gpu: "integrated or entry discrete"
+    disk: "NVMe SSD, >= 20 GB free"
+  high:
+    role: accelerated-tier
+    os: ["Linux", "Windows 11"]
+    cpu: "16+ cores"
+    ram_gb: 32
+    gpu: "discrete GPU with >= 12 GB VRAM, CUDA-capable"
+    disk: "NVMe SSD"
+
+# ---------------------------------------------------------------------------
+# Measurement protocol
+# ---------------------------------------------------------------------------
+protocol:
+  trials:
+    warm: { runs: 20, after: "one warmup run excluded" }
+    cold: { runs: 3, after: "fresh process, model loaded on first use" }
+  utterance_length_buckets_s: [0.3, 1.0, 2.0, 5.0]
+  percentiles: [p50, p95]
+  latency_boundaries:
+    speech_pipeline_start: "capture-stop event (record button release) timestamped in UI process"
+    speech_pipeline_end: "first feedback frame painted (frame counter delta)"
+    tts_start: "synthesize() dispatch in native process"
+    tts_end: "first audio frame submitted to output device"
+    app_start: "process exec"
+    app_end: "first interactive paint (home route mounted, input handler attached)"
+  conditions:
+    network: "disabled after explicit model installation for all speech measurements"
+    threads: "provider thread count pinned per tier: low=4, typical=8, high=16"
+    background: "no other CPU-heavy processes; record loadavg before each run"
+    power: "CPU governor and power profile recorded per run"
+  artifacts: "tests/performance/results/<run-id>/summary.json per tests/performance/README.md"
+
+# ---------------------------------------------------------------------------
+# Budgets (provisional targets; per tier)
+# ---------------------------------------------------------------------------
+budgets:
+  app:
+    startup_to_home_interactive_ms: { typical: { p50: 800, p95: 2000 }, low: { p50: 1500, p95: 3500 } }
+    session_plan_10k_evidence_ms: { typical: { p50: 50, p95: 150 }, low: { p50: 120, p95: 400 } }
+    ui_responsiveness_during_inference:
+      input_to_paint_ms: { all_tiers: { p95: 100 } }
+      main_thread_max_block_ms: { all_tiers: { p95: 50 } }
+      method: "synthetic key event -> requestAnimationFrame delta sampled while ASR/TTS inference runs"
+    cancellation:
+      asr_cancel_effect_ms: { all_tiers: { p95: 250 } }
+      requirements:
+        - "no orphaned provider/helper processes after cancel"
+        - "model memory released back within 1000 ms"
+        - "cancelled attempts produce no evidence events (docs/03)"
+  memory:
+    app_rss_base_mb: { typical: 400, low: 400 }
+    total_with_compact_model_mb: { typical: 1500, low: 2000 }
+    gpu_vram_with_recommended_model_mb: { high: 6000 }
+  disk:
+    base_install_mb: { all_tiers: 250 }
+    compact_speech_bundle_mb: { all_tiers: 300 }
+    recommended_speech_bundle_mb: { all_tiers: 1500 }
+  speech:
+    # Provider-independent end-to-end targets. Model-specific budgets are added when
+    # SPEECH-001 freezes provider/model combinations per tier (freeze_condition above).
+    vad_quality_gate_2s_clip_ms: { typical: { p50: 50, p95: 150 }, low: { p50: 100, p95: 300 } }
+    asr_short_utterance_warm_ms: { typical: { p50: 500, p95: 1500 }, low: { p50: 1000, p95: 3000 } }
+    asr_cold_model_load_ms: { typical: { p95: 5000 }, low: { p95: 10000 } }
+    alignment_plus_features_ms: { typical: { p50: 150, p95: 500 }, low: { p50: 300, p95: 1000 } }
+    tts_short_phrase_warm_ms: { typical: { p50: 300, p95: 1000 }, low: { p50: 600, p95: 2000 } }
+    real_time_factor_max: { typical: 0.5, low: 1.0 }
+
+# ---------------------------------------------------------------------------
+# Narrowing policy (roadmap PERF-001 acceptance 3)
+# ---------------------------------------------------------------------------
+narrowing_policy:
+  - "A configuration that cannot meet a budget may be dropped or narrowed only with a recorded ADR naming the configuration, the measured failure, and the compatible alternative offered to users."
+  - "First-run model selection and release notes must state unsupported configurations (PERF-002)."
+  - "Raising a threshold to make a failing configuration pass requires the same ADR process and is prohibited as a silent change."

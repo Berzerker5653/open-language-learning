@@ -19,10 +19,12 @@ M0 — Bootstrap and technical proof
   (evidence: `state/evidence/BOOT-002/`).
 - `BOOT-003` — lint/quality gates, ADR + fixture conventions, secret scan + dependency audit
   baselines (evidence: `state/evidence/BOOT-003/`).
+- `PERF-001` — named hardware tiers, provisional frozen-then-measured budget contract
+  (`docs/performance/BUDGETS.yaml`, evidence: `state/evidence/PERF-001/`).
 
 ## Next task
 
-`PERF-001` — supported hardware tiers and performance test contract (`docs/performance/BUDGETS.yaml`).
+`PACK-001` — public pack schemas + structural validator (M1).
 
 ## Owner decisions already resolved
 
