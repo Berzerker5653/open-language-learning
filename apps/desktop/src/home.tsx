@@ -29,11 +29,19 @@ const REASON_LABELS: Record<PlannedItem["reason"], string> = {
   progression: "New material",
 };
 
+export interface WorldEnvironment {
+  id: string;
+  display_name: string;
+  unlocked: boolean;
+  missing: string[];
+}
+
 export interface HomeProps {
   displayName: string;
   plan: SessionPlan;
   activeBudget: number;
   onBudget(minutes: number): void;
+  environments?: WorldEnvironment[];
 }
 
 export function Home(p: HomeProps) {
@@ -66,6 +74,22 @@ export function Home(p: HomeProps) {
             </li>
           ))}
         </ul>
+      )}
+      {p.environments && p.environments.length > 0 && (
+        <section aria-label="Environments">
+          <h2>Places you can go</h2>
+          <p>
+            <small>Places open as your capabilities grow — not from activity counts.</small>
+          </p>
+          <ul>
+            {p.environments.map((e) => (
+              <li key={e.id} data-unlocked={e.unlocked ? "yes" : "no"}>
+                {e.display_name} —{" "}
+                {e.unlocked ? "open" : `locked (grows with: ${e.missing.join(", ")})`}
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
     </section>
   );

@@ -166,15 +166,29 @@ M2 — Local data and learner model
   with reliability masking and octave-jump detection; semitone-relative
   contours (no absolute-Hz rule); accessible SVG + text shapes;
   reference-only pack profile (evidence: `state/evidence/SPEECH-006/`).
+- `TTS-001` — local Japanese TTS: sherpa-onnx Kokoro subprocess provider
+  (Apache-2.0 model chain verified; espeak-ng-data GPLv3 flagged for
+  LIC-001), pinned model catalog, TTS benchmark protocol + dev-tier
+  results (RTF p50 1.43), media-first `speech_audio` with
+  `licensed-recording`/`model-output` provenance labels (evidence:
+  `state/evidence/TTS-001/`, `docs/provenance/tts-candidates.md`).
+- `GAME-001` — capability-gated world layer: `lts-world` crate (deps:
+  `lts-domain` only), declarative environments, pure `evaluate` over a
+  capability snapshot; no counts/dates/streak parameters exist in the
+  API; desktop `world_state` + "Places you can go" home section
+  (evidence: `state/evidence/GAME-001/`).
 
 ## Next task
 
-`TTS-001` — benchmark + local Japanese TTS provider (M5, P1).
-`SPEECH-007` (calibration) is owner-blocked: preregistered calibration
-needs permissioned human recordings + frozen gates (docs/17); stable
-1.0 stays blocked until the owner supplies/authorizes it.
-Note: `REVIEW-001` (reviewer capacity) and `LIC-001` (final licensing
-decisions) are owner-only and remain open blockers for release.
+No ROADMAP task is currently unblocked: the only tasks whose
+dependencies are all done are `REVIEW-001` (reviewer capacity) and
+`LIC-001` (final licensing decisions), both owner-only and never
+self-certifiable. Every remaining required task (`JA-A1-001..003`,
+`SPEECH-007`, the A2/B1/B2 content chains, `ACC-001`, `SEC-001`,
+`PLAT-001`, `PERF-002`, `PACK-AI-001`, `REL-001`) depends on at least
+one of those or on `SPEECH-007` (owner-supplied preregistered
+calibration data, docs/17). `active_task` is null until the owner
+unblocks one of these gates.
 
 ## Owner decisions already resolved
 

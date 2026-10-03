@@ -62,6 +62,31 @@ describe("home", () => {
     );
     expect(html).toContain("Nothing is due right now");
   });
+
+  it("shows capability-gated environments with unlock state", () => {
+    const html = renderToStaticMarkup(
+      <Home
+        displayName="Hunter"
+        plan={plan}
+        activeBudget={5}
+        onBudget={() => {}}
+        environments={[
+          { id: "greeting-desk", display_name: "Greeting desk", unlocked: true, missing: [] },
+          {
+            id: "cafe",
+            display_name: "Quiet cafe",
+            unlocked: false,
+            missing: ["comprehension-reading of ja.lex.demo.konnichiwa"],
+          },
+        ]}
+      />,
+    );
+    expect(html).toContain("Greeting desk");
+    expect(html).toContain("Quiet cafe");
+    expect(html).toContain('data-unlocked="yes"');
+    expect(html).toContain('data-unlocked="no"');
+    expect(html).toContain("not from activity counts");
+  });
 });
 
 describe("progress", () => {

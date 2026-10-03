@@ -6,7 +6,13 @@ import {
   type PackCandidate,
   type PrivacyNotice,
 } from "./onboarding";
-import { Home, ProgressView, type ProgressRow, type SessionPlan } from "./home";
+import {
+  Home,
+  ProgressView,
+  type ProgressRow,
+  type SessionPlan,
+  type WorldEnvironment,
+} from "./home";
 import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./pronunciation";
 
 type Invoke = (cmd: string, args?: Record<string, unknown>) => Promise<unknown>;
@@ -86,6 +92,7 @@ export function App() {
   const [pronResult, setPronResult] = useState<PronunciationResult | null>(null);
   const [recording, setRecording] = useState(false);
   const [attemptUrl, setAttemptUrl] = useState<string | null>(null);
+  const [environments, setEnvironments] = useState<WorldEnvironment[]>([]);
 
   useEffect(() => {
     const inv = detectInvoke();
@@ -131,6 +138,8 @@ export function App() {
       };
       setDisplayName(home.display_name);
       setPlan(home.plan);
+      const envs = (await inv("world_state", { profileId })) as WorldEnvironment[];
+      setEnvironments(envs);
     }
     setStep("done");
   }
@@ -281,6 +290,7 @@ export function App() {
           plan={plan}
           activeBudget={budget}
           onBudget={(m) => void changeBudget(m)}
+          environments={environments}
         />
       )}
       <nav aria-label="Routes">

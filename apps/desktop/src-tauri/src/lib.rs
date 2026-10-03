@@ -10,6 +10,7 @@
 mod models;
 use lts_speech_api::{
     AcousticFeatureProvider, AlignmentProvider, PronunciationInterpreter, ProsodyProvider,
+    SpeechSynthesisProvider,
 };
 use serde::Serialize;
 use std::path::Path;
@@ -515,6 +516,77 @@ fn progress_summary(profile_id: String) -> Result<Vec<ProgressRow>, String> {
 }
 
 // ---------------------------------------------------------------------------
+// GAME-001: capability-driven world layer. Unlocks come from derived
+// capabilities only — no activity counts, dates, or streaks feed this
+// path (ADR-0002). Pure logic; the UI may render nothing and the
+// engine is unaffected.
+// ---------------------------------------------------------------------------
+
+fn demo_world_config() -> lts_world::WorldConfig {
+    use lts_domain::{ActivityModality as M, MasteryState as S};
+    lts_world::WorldConfig {
+        environments: vec![
+            lts_world::Environment {
+                id: "cafe".into(),
+                display_name: "Café corner — read the menu".into(),
+                requires: vec![lts_world::CapabilityRequirement {
+                    content_id: "ja.lex.demo.konnichiwa".into(),
+                    modality: M::ComprehensionReading,
+                    min_state: S::Independent,
+                }],
+            },
+            lts_world::Environment {
+                id: "greeting-desk".into(),
+                display_name: "Greeting desk — say it yourself".into(),
+                requires: vec![lts_world::CapabilityRequirement {
+                    content_id: "ja.lex.demo.konnichiwa".into(),
+                    modality: M::RecallMeaning,
+                    min_state: S::Independent,
+                }],
+            },
+        ],
+        version: "world-demo-0.1.0".into(),
+    }
+}
+
+#[derive(Serialize, PartialEq, Debug)]
+struct WorldEnvironment {
+    id: String,
+    display_name: String,
+    unlocked: bool,
+    missing: Vec<String>,
+}
+
+#[tauri::command]
+fn world_state(profile_id: String) -> Result<Vec<WorldEnvironment>, String> {
+    world_state_at(&data_dir(), &profile_id)
+}
+
+fn world_state_at(data: &Path, profile_id: &str) -> Result<Vec<WorldEnvironment>, String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let derived = derive_pairs(&store, profile_id, &rfc3339_utc(now_secs()))?;
+    let snapshot = lts_world::CapabilitySnapshot {
+        states: derived
+            .iter()
+            .map(|d| ((d.content_id.clone(), d.dimension), d.state))
+            .collect(),
+    };
+    Ok(lts_world::evaluate(&demo_world_config(), &snapshot)
+        .into_iter()
+        .map(|e| WorldEnvironment {
+            id: e.id,
+            display_name: e.display_name,
+            unlocked: e.unlocked,
+            missing: e
+                .missing
+                .iter()
+                .map(|r| format!("{} ({:?})", r.content_id, r.modality))
+                .collect(),
+        })
+        .collect())
+}
+
+// ---------------------------------------------------------------------------
 // SPEECH-005: guided pronunciation practice (vowel-length contrast).
 // The pack's speech profile declares the feature assess-guided with
 // calibration null: this path NEVER records mastery. Recordings stay in
@@ -790,6 +862,84 @@ fn reference_audio_at(data: &Path, pack_id: &str, unit_id: &str) -> Result<Strin
     Ok(base64::engine::general_purpose::STANDARD.encode(&bytes))
 }
 
+/// TTS-001 acceptance 3: curated licensed recordings (pack media)
+/// always override synthesis; otherwise synthesize locally and label
+/// the result as model output (docs/10).
+#[derive(Serialize)]
+struct SpeechAudio {
+    wav_b64: String,
+    source: &'static str,
+}
+
+#[tauri::command]
+fn speech_audio(pack_id: String, unit_id: String, text: String) -> Result<SpeechAudio, String> {
+    speech_audio_at(&data_dir(), &pack_id, &unit_id, &text)
+}
+
+fn speech_audio_at(
+    data: &Path,
+    pack_id: &str,
+    unit_id: &str,
+    text: &str,
+) -> Result<SpeechAudio, String> {
+    if !bundled_packs().iter().any(|(c, _)| c.pack_id == pack_id) {
+        return Err("pack not allowlisted".into());
+    }
+    let unit = checked_unit(unit_id)?;
+    if text.is_empty() || text.chars().count() > 400 {
+        return Err("text out of range".into());
+    }
+    let data_packs = data.join("packs");
+    let version =
+        lts_langpack::archive::current_version(pack_id, &data_packs).ok_or("pack not installed")?;
+    use base64::Engine;
+    let media = data_packs
+        .join(pack_id)
+        .join(&version)
+        .join("media")
+        .join(format!("{unit}.wav"));
+    if let Ok(bytes) = std::fs::read(&media) {
+        return Ok(SpeechAudio {
+            wav_b64: base64::engine::general_purpose::STANDARD.encode(bytes),
+            source: "licensed-recording",
+        });
+    }
+    let vendor = match std::env::var("LTS_BENCH_VENDOR") {
+        Ok(v) => PathBuf::from(v),
+        Err(_) => match std::env::var("HOME") {
+            Ok(h) => PathBuf::from(h).join(".cache/lts-bench"),
+            Err(_) => return Err("tts-runtime-unavailable".into()),
+        },
+    };
+    let kokoro = vendor.join("kokoro-multi-lang-v1_0");
+    let tts = lts_speech_runtime::tts::SherpaSubprocessTts {
+        binary: vendor.join("sherpa-onnx-v1.13.8-linux-x64-shared/bin/sherpa-onnx-offline-tts"),
+        model: kokoro.join("model.onnx"),
+        voices: kokoro.join("voices.bin"),
+        tokens: kokoro.join("tokens.txt"),
+        data_dir: kokoro.join("espeak-ng-data"),
+        lang: "ja".into(),
+    };
+    if !tts.binary.exists() {
+        return Err("tts-runtime-unavailable".into());
+    }
+    let audio = tts.synthesize(
+        text,
+        &lts_speech_api::VoiceRef {
+            model_id: "org.openlanguage.tts.kokoro-multi-lang".into(),
+            voice_id: "37".into(),
+        },
+    );
+    match audio {
+        lts_speech_api::ProviderOutcome::Usable { value, .. } => Ok(SpeechAudio {
+            wav_b64: base64::engine::general_purpose::STANDARD
+                .encode(lts_speech_runtime::to_wav16(&value)),
+            source: "model-output",
+        }),
+        other => Err(format!("tts:{}", outcome_reason(&other))),
+    }
+}
+
 // ---------------------------------------------------------------------------
 // SPEECH-003: model manager (versioned, checksummed, licensed, removable)
 // ---------------------------------------------------------------------------
@@ -876,7 +1026,9 @@ pub fn run() {
             install_model,
             delete_model,
             pronunciation_check,
-            reference_audio
+            reference_audio,
+            speech_audio,
+            world_state
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
@@ -1298,5 +1450,92 @@ mod tests {
         assert!(!b64.is_empty());
         assert!(reference_audio_at(data, "org.openlanguage.ja-demo", "../etc/passwd").is_err());
         assert!(reference_audio_at(data, "org.evil.pack", "ja.lex.demo.obasan").is_err());
+    }
+
+    #[test]
+    fn speech_audio_prefers_licensed_media_then_synthesizes() {
+        let tmp = tempfile::TempDir::new().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        // Curated licensed recording wins (TTS runtime not needed).
+        let a = speech_audio_at(
+            data,
+            "org.openlanguage.ja-demo",
+            "ja.lex.demo.obasan",
+            "おばさん",
+        )
+        .unwrap();
+        assert_eq!(a.source, "licensed-recording");
+        assert!(!a.wav_b64.is_empty());
+        // Path safety + allowlist.
+        assert!(speech_audio_at(data, "org.openlanguage.ja-demo", "../etc/passwd", "x").is_err());
+        assert!(speech_audio_at(data, "org.evil.pack", "ja.lex.demo.obasan", "x").is_err());
+
+        // Fallback: no media for konnichiwa -> local synthesis, labeled.
+        let vendor = std::env::var("LTS_BENCH_VENDOR")
+            .map(PathBuf::from)
+            .unwrap_or_else(|_| {
+                PathBuf::from(std::env::var("HOME").unwrap()).join(".cache/lts-bench")
+            });
+        if !vendor.join("kokoro-multi-lang-v1_0/model.onnx").exists() {
+            eprintln!("SKIP: vendor TTS not present");
+            return;
+        }
+        let b = speech_audio_at(
+            data,
+            "org.openlanguage.ja-demo",
+            "ja.lex.demo.konnichiwa",
+            "こんにちは",
+        )
+        .unwrap();
+        assert_eq!(b.source, "model-output");
+        assert!(!b.wav_b64.is_empty());
+    }
+
+    #[test]
+    fn world_unlocks_follow_capabilities_not_activity_volume() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        // Two independent recalls (distinct prompt families, no support).
+        for (family, id, at) in [
+            ("ja.expr.demo.greet-p1", "r1", "2026-10-02T10:00:00Z"),
+            ("ja.expr.demo.greet-p2", "r2", "2026-10-02T11:00:00Z"),
+        ] {
+            let ev = attempt(
+                "ja.lex.demo.konnichiwa",
+                lts_domain::ActivityModality::RecallMeaning,
+                family,
+                0,
+                at,
+                id,
+                &p.id,
+            );
+            store.append_evidence(&ev).unwrap();
+        }
+        let envs = world_state_at(data, &p.id).unwrap();
+        let desk = envs.iter().find(|e| e.id == "greeting-desk").unwrap();
+        let cafe = envs.iter().find(|e| e.id == "cafe").unwrap();
+        assert!(desk.unlocked, "recall capability opens the desk");
+        assert!(!cafe.unlocked, "reading capability is still missing");
+        assert!(!cafe.missing.is_empty());
+
+        // Activity volume changes nothing: 50 more events on other
+        // content leave the unlock set identical (no streaks, ADR-0002).
+        for i in 0..50 {
+            let ev = attempt(
+                "ja.lex.demo.watashi",
+                lts_domain::ActivityModality::RecallMeaning,
+                "ja.expr.demo.self-a",
+                0,
+                "2026-10-02T12:00:00Z",
+                &format!("x{i}"),
+                &p.id,
+            );
+            store.append_evidence(&ev).unwrap();
+        }
+        assert_eq!(world_state_at(data, &p.id).unwrap(), envs);
     }
 }

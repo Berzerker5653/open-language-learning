@@ -2246,6 +2246,7 @@ dependencies = [
  "lts-speech-api",
  "lts-speech-runtime",
  "lts-storage",
+ "lts-world",
  "serde",
  "serde_json",
  "serde_yaml",
@@ -2357,6 +2358,13 @@ dependencies = [
  "tempfile",
  "thiserror 2.0.21",
  "uuid",
+]
+
+[[package]]
+name = "lts-world"
+version = "0.1.0"
+dependencies = [
+ "lts-domain",
 ]
 
 [[package]]

@@ -1,0 +1,10 @@
+[package]
+name = "lts-world"
+description = "Capability-driven world/progression layer: unlocks come from capabilities, never daily activity (docs/01, ADR-0002). Pure logic; no graphics dependency (GAME-001)."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+lts-domain.workspace = true

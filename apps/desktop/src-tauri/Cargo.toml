@@ -24,6 +24,7 @@ lts-scheduler.workspace = true
 lts-learner-model.workspace = true
 serde_yaml.workspace = true
 lts-activity.workspace = true
+lts-world.workspace = true
 lts-speech-api.workspace = true
 lts-speech-runtime.workspace = true
 base64 = "0.22"

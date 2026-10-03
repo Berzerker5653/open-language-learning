@@ -1,0 +1,72 @@
+== build frontend + native binary (debug, no bundle) ==
+        Info Looking up installed tauri packages to check mismatched versions...
+        Warn The bundle identifier "org.openlanguage.app" set in `"tauri.conf.json" identifier` ends with `.app`. This is not recommended because it conflicts with the application bundle extension on macOS.
+     Running beforeBuildCommand `pnpm build`
+$ vite build
+vite v8.3.2 building client environment for production...
+transforming...
+✓ 23 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                  0.34 kB │ gzip:  0.24 kB
+dist/assets/index-DlY6e83z.js  236.03 kB │ gzip: 74.35 kB
+
+[33m[INEFFECTIVE_DYNAMIC_IMPORT] [0m../../node_modules/.pnpm/@tauri-apps+api@2.12.1/node_modules/@tauri-apps/api/core.js is dynamically imported by src/App.tsx but also statically imported by src/main.tsx, dynamic import will not move module into another chunk.
+
+✓ built in 102ms
+   Compiling aws-lc-sys v0.45.0
+   Compiling glib-sys v0.18.1
+   Compiling gobject-sys v0.18.0
+   Compiling gio-sys v0.18.1
+   Compiling gdk-sys v0.18.2
+   Compiling gdk-pixbuf-sys v0.18.0
+   Compiling pango-sys v0.18.0
+   Compiling cairo-sys-rs v0.18.2
+   Compiling atk-sys v0.18.2
+   Compiling soup3-sys v0.5.0
+   Compiling javascriptcore-rs-sys v1.1.1
+   Compiling libdbus-sys v0.2.7
+   Compiling x11-dl v2.21.0
+   Compiling gtk-sys v0.18.2
+   Compiling gdkx11-sys v0.18.2
+   Compiling gtk v0.18.2
+   Compiling webkit2gtk-sys v2.0.2
+   Compiling wry v0.57.0
+   Compiling dbus v0.9.12
+   Compiling glib v0.18.5
+   Compiling gdkwayland-sys v0.18.2
+   Compiling gio v0.18.4
+   Compiling cairo-rs v0.18.5
+   Compiling atk v0.18.2
+   Compiling javascriptcore-rs v1.1.2
+   Compiling aws-lc-rs v1.18.1
+   Compiling rustls v0.23.45
+   Compiling rustls-webpki v0.103.15
+   Compiling tokio-rustls v0.26.6
+   Compiling rustls-platform-verifier v0.7.1
+   Compiling ureq v2.12.1
+   Compiling hyper-rustls v0.27.10
+   Compiling reqwest v0.13.5
+   Compiling jsonschema v0.58.5
+   Compiling gdk-pixbuf v0.18.5
+   Compiling pango v0.18.3
+   Compiling soup3 v0.5.0
+   Compiling gdk v0.18.2
+   Compiling lts-langpack v0.1.0 (/home/hunter/game-dev/LTS/crates/langpack)
+   Compiling lts-activity v0.1.0 (/home/hunter/game-dev/LTS/crates/activity)
+   Compiling gdkx11 v0.18.2
+   Compiling webkit2gtk v2.0.2
+   Compiling tao v0.37.1
+   Compiling muda v0.20.0
+   Compiling tauri-runtime v2.12.1
+   Compiling tauri-runtime-wry v2.12.1
+   Compiling tauri v2.12.1
+   Compiling lts-desktop v0.1.0 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 37.68s
+       Built application at: /home/hunter/game-dev/LTS/target/debug/lts-desktop
+== launch under Xvfb ==
+MESA-EGL: warning: DRI3 error: Could not get DRI3 device
+MESA-EGL: warning: Ensure your X server supports DRI3 to get accelerated rendering
+
+** (process:1350575): WARNING **: 02:11:41.987: Error loading the injected bundle (/usr/lib/webkit2gtk-4.1/injected-bundle/libwebkit2gtkinjectedbundle.so): /usr/lib/webkit2gtk-4.1/injected-bundle/libwebkit2gtkinjectedbundle.so: cannot open shared object file: No such file or directory
+smoke-ok homeSMOKE OK
