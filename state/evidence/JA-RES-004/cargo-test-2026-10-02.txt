@@ -1,0 +1,6 @@
+     Running tests/ja_goal_graph.rs (target/debug/deps/ja_goal_graph-fba583ded977ee23)
+test bands_cover_onramp_through_release_band ... ok
+test prerequisites_resolve_and_are_acyclic ... ok
+test goals_have_modalities_assessments_and_framework_refs ... ok
+test every_goal_validates_against_v02_goal_schema ... ok
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s

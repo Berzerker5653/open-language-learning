@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-02",
-  "active_task": "JA-RES-003",
+  "active_task": "JA-RES-005",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -206,6 +206,30 @@
       ]
     },
     "JA-RES-003": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/JA-RES-003.md",
+        "state/evidence/JA-RES-003/cargo-test-2026-10-02.txt",
+        "state/evidence/JA-RES-003/ci-2026-10-02.txt",
+        "docs/assessment/JA_ORTHOGRAPHY.yaml",
+        "docs/assessment/JA_ORTHOGRAPHY_POLICY.yaml",
+        "docs/assessment/JA_ORTHOGRAPHY_POLICY.md"
+      ]
+    },
+    "JA-RES-004": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/JA-RES-004.md",
+        "state/evidence/JA-RES-004/cargo-test-2026-10-02.txt",
+        "state/evidence/JA-RES-004/ci-2026-10-02.txt",
+        "docs/curriculum/JA_GOAL_GRAPH.yaml"
+      ]
+    },
+    "JA-RES-005": {
       "status": "in_progress",
       "attempts": 0,
       "last_error": null,

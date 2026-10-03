@@ -1,0 +1,383 @@
+# JA-RES-004 — Japanese communicative goal graph (schema 0.2 goals).
+#
+# Original goal IDs/descriptions from on-ramp through the planned
+# release band (B2-like, REL-001). Descriptions are project-authored
+# (AI-assisted, draft status); framework_refs cite the JF Standard as
+# a framework reference only — no restricted descriptor or assessment
+# prompt text is reproduced (docs/10, docs/16).
+#
+# Invariants enforced by crates/langpack/tests/ja_goal_graph.rs:
+# every goal validates against goal.schema.json; bands cover
+# on-ramp..B2; prerequisites are versioned records scoped by
+# dimension+state; prerequisite targets resolve inside the graph;
+# every goal has modalities + assessment plan ids; review_status is
+# draft (REVIEW-001 qualified review cannot be self-certified).
+
+goals:
+  # ------------------------------------------------------------- on-ramp
+  - id: ja.goal.onramp.greet-and-introduce
+    description: >
+      Recognize a greeting and name-ask in a first-meeting context and
+      respond with a simple greeting plus own name, with support
+      available.
+    band: on-ramp
+    framework_refs: ["jf-standard:onramp"]
+    contexts: ["ja.situation.first-meeting"]
+    modalities: [listening, speaking, interaction]
+    prerequisites: []
+    required_concepts:
+      - ja.lex.greeting.konnichiwa
+      - ja.lex.person.watashi
+      - ja.lex.name.hajimemashite
+    assessment_ids: ["ja.assess.onramp.greet-transfer"]
+    transfer_required: true
+    sources: ["jf-standard"]
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: "2026-10-02"
+      notes: original wording; JF Standard consulted as framework only
+
+  - id: ja.goal.onramp.numbers-and-thanks
+    description: >
+      Understand and produce small numbers (0-10) and basic thanks in
+      short transactional exchanges such as a market count or a
+      receipt handoff.
+    band: on-ramp
+    framework_refs: ["jf-standard:onramp"]
+    contexts: ["ja.situation.shopping-quick"]
+    modalities: [listening, speaking]
+    prerequisites:
+      - target: ja.goal.onramp.greet-and-introduce
+        dimension: comprehension-listening
+        required_state: introduced
+        strength: helpful
+    required_concepts:
+      - ja.lex.number.0-10
+      - ja.lex.polite.arigatou
+    assessment_ids: ["ja.assess.onramp.numbers-check"]
+    transfer_required: true
+    sources: ["jf-standard"]
+    review_status: draft
+    generation: {method: ai-assisted, tool: omp, model: strata/qwen3.8-flash-next, date: "2026-10-02"}
+
+  - id: ja.goal.onramp.kana-literacy-start
+    description: >
+      Read hiragana (base set plus dakuten) in supported words and
+      distinguish kana from kanji shapes in mixed text; reading-only
+      literacy, no production requirement yet.
+    band: on-ramp
+    framework_refs: ["jf-standard:onramp"]
+    contexts: ["ja.situation.labeled-materials"]
+    modalities: [reading]
+    prerequisites: []
+    required_concepts:
+      - ja.orth.hira.base
+      - ja.orth.hira.dakuten
+    assessment_ids: ["ja.assess.onramp.kana-read"]
+    transfer_required: false
+    sources: ["jf-standard"]
+    review_status: draft
+    generation: {method: ai-assisted, tool: omp, model: strata/qwen3.8-flash-next, date: "2026-10-02"}
+
+  # ---------------------------------------------------------------- A1
+  - id: ja.goal.a1.introduce-self-and-other
+    description: >
+      Give a short self-introduction (name, origin, simple job/role
+      noun) and introduce another person using basic copula patterns
+      in a low-pressure meeting.
+    band: A1
+    framework_refs: ["jf-standard:A1"]
+    contexts: ["ja.situation.first-meeting", "ja.situation.classroom"]
+    modalities: [speaking, interaction, writing]
+    prerequisites:
+      - target: ja.goal.onramp.greet-and-introduce
+        dimension: comprehension-listening
+        required_state: supported
+        strength: hard
+      - target: ja.goal.onramp.kana-literacy-start
+        dimension: comprehension-reading
+        required_state: supported
+        strength: helpful
+    required_concepts:
+      - ja.grammar.copula.polite-desu
+      - ja.lex.person.name-questions
+    assessment_ids:
+      - ja.assess.a1.intro-prompted
+      - ja.assess.a1.intro-transfer
+    transfer_required: true
+    sources: ["jf-standard"]
+    review_status: draft
+    generation: {method: ai-assisted, tool: omp, model: strata/qwen3.8-flash-next, date: "2026-10-02"}
+
+  - id: ja.goal.a1.shop-and-ask-price
+    description: >
+      Complete a short shop transaction: ask what something costs,
+      understand the number, indicate a choice, and close politely.
+    band: A1
+    framework_refs: ["jf-standard:A1"]
+    contexts: ["ja.situation.shopping-quick"]
+    modalities: [listening, speaking, interaction]
+    prerequisites:
+      - target: ja.goal.onramp.numbers-and-thanks
+        dimension: comprehension-listening
+        required_state: supported
+        strength: hard
+    required_concepts:
+      - ja.grammar.demonstratives.ko-so-a-do
+      - ja.lex.shopping.ikura
+    assessment_ids: ["ja.assess.a1.shop-scenario"]
+    transfer_required: true
+    sources: ["jf-standard"]
+    review_status: draft
+    generation: {method: ai-assisted, tool: omp, model: strata/qwen3.8-flash-next, date: "2026-10-02"}
+
+  - id: ja.goal.a1.describe-things-exist
+    description: >
+      Say what exists where using simple existence verbs and location
+      words, and answer simple location questions about familiar
+      rooms and objects.
+    band: A1
+    framework_refs: ["jf-standard:A1"]
+    contexts: ["ja.situation.home-tour"]
+    modalities: [speaking, listening, reading]
+    prerequisites:
+      - target: ja.goal.a1.introduce-self-and-other
+        dimension: comprehension-listening
+        required_state: introduced
+        strength: helpful
+    required_concepts:
+      - ja.grammar.existence.aru-iru
+      - ja.lex.location.basic
+    assessment_ids: ["ja.assess.a1.existence-check"]
+    transfer_required: true
+    sources: ["jf-standard"]
+    review_status: draft
+    generation: {method: ai-assisted, tool: omp, model: strata/qwen3.8-flash-next, date: "2026-10-02"}
+
+  # ---------------------------------------------------------------- A2
+  - id: ja.goal.a2.describe-past-day
+    description: >
+      Narrate what one did and did not do yesterday in a few linked
+      sentences, including time expressions and simple sequencing.
+    band: A2
+    framework_refs: ["jf-standard:A2"]
+    contexts: ["ja.situation.friends-chat"]
+    modalities: [speaking, writing]
+    prerequisites:
+      - target: ja.goal.a1.describe-things-exist
+        dimension: comprehension-listening
+        required_state: supported
+        strength: hard
+    required_concepts:
+      - ja.grammar.past-tense.ta
+      - ja.grammar.te-form.sequence
+      - ja.lex.time.days
+    assessment_ids:
+      - ja.assess.a2.past-day-prompted
+      - ja.assess.a2.past-day-transfer
+    transfer_required: true
+    sources: ["jf-standard"]
+    review_status: draft
+    generation: {method: ai-assisted, tool: omp, model: strata/qwen3.8-flash-next, date: "2026-10-02"}
+
+  - id: ja.goal.a2.make-requests-and-invites
+    description: >
+      Make a low-imposition request or invitation, accept, and
+      decline with a brief reason, using appropriately soft
+      phrasing with help available.
+    band: A2
+    framework_refs: ["jf-standard:A2"]
+    contexts: ["ja.situation.friends-chat", "ja.situation.work-casual"]
+    modalities: [speaking, interaction]
+    prerequisites:
+      - target: ja.goal.a2.describe-past-day
+        dimension: production-speaking
+        required_state: supported
+        strength: helpful
+    required_concepts:
+      - ja.grammar.request-may-might
+      - ja.pragmatics.softening
+    assessment_ids: ["ja.assess.a2.invite-scenario"]
+    transfer_required: true
+    sources: ["jf-standard"]
+    review_status: draft
+    generation: {method: ai-assisted, tool: omp, model: strata/qwen3.8-flash-next, date: "2026-10-02"}
+
+  - id: ja.goal.a2.read-notices-menus
+    description: >
+      Read short practical texts — signs, notices, simple menus,
+      app screens — and extract the key fact asked (price, place,
+      time, rule).
+    band: A2
+    framework_refs: ["jf-standard:A2"]
+    contexts: ["ja.situation.public-notices", "ja.situation.restaurant"]
+    modalities: [reading]
+    prerequisites:
+      - target: ja.goal.onramp.kana-literacy-start
+        dimension: comprehension-reading
+        required_state: independent
+        strength: hard
+    required_concepts:
+      - ja.orth.kanji.high-frequency-signs
+      - ja.lex.food.basic
+    assessment_ids: ["ja.assess.a2.notice-read"]
+    transfer_required: true
+    sources: ["jf-standard"]
+    review_status: draft
+    generation: {method: ai-assisted, tool: omp, model: strata/qwen3.8-flash-next, date: "2026-10-02"}
+
+  # ---------------------------------------------------------------- B1
+  - id: ja.goal.b1.explain-opinion-with-reasons
+    description: >
+      State an opinion about a familiar topic and support it with
+      two or three linked reasons, handling simple follow-up
+      questions with occasional repair.
+    band: B1
+    framework_refs: ["jf-standard:B1"]
+    contexts: ["ja.situation.classroom-discussion"]
+    modalities: [speaking, writing, interaction]
+    prerequisites:
+      - target: ja.goal.a2.describe-past-day
+        dimension: production-speaking
+        required_state: independent
+        strength: hard
+      - target: ja.goal.a2.make-requests-and-invites
+        dimension: interaction
+        required_state: supported
+        strength: helpful
+    required_concepts:
+      - ja.grammar.reason-nodekara-ni
+      - ja.grammar.opinion-to-omoimasu
+    assessment_ids:
+      - ja.assess.b1.opinion-prompted
+      - ja.assess.b1.opinion-transfer
+    transfer_required: true
+    sources: ["jf-standard"]
+    review_status: draft
+    generation: {method: ai-assisted, tool: omp, model: strata/qwen3.8-flash-next, date: "2026-10-02"}
+
+  - id: ja.goal.b1.handle-service-problems
+    description: >
+      Explain a problem in a service encounter (wrong item, late
+      delivery, booking issue), understand the response, and agree
+      on next steps with polite register maintained.
+    band: B1
+    framework_refs: ["jf-standard:B1"]
+    contexts: ["ja.situation.service-encounter"]
+    modalities: [listening, speaking, interaction]
+    prerequisites:
+      - target: ja.goal.a2.make-requests-and-invites
+        dimension: interaction
+        required_state: independent
+        strength: hard
+    required_concepts:
+      - ja.pragmatics.apology-repair
+      - ja.grammar.potential-passive-soft
+    assessment_ids: ["ja.assess.b1.service-scenario"]
+    transfer_required: true
+    sources: ["jf-standard"]
+    review_status: draft
+    generation: {method: ai-assisted, tool: omp, model: strata/qwen3.8-flash-next, date: "2026-10-02"}
+
+  - id: ja.goal.b1.read-news-summaries
+    description: >
+      Read short news-style summaries and forum posts on familiar
+      topics, identifying stance and main points; dictionary use
+      recorded as support.
+    band: B1
+    framework_refs: ["jf-standard:B1"]
+    contexts: ["ja.situation.media-daily"]
+    modalities: [reading]
+    prerequisites:
+      - target: ja.goal.a2.read-notices-menus
+        dimension: comprehension-reading
+        required_state: independent
+        strength: hard
+    required_concepts:
+      - ja.orth.kanji.news-frequency
+      - ja.grammar.relative-clauses
+    assessment_ids: ["ja.assess.b1.news-read"]
+    transfer_required: true
+    sources: ["jf-standard"]
+    review_status: draft
+    generation: {method: ai-assisted, tool: omp, model: strata/qwen3.8-flash-next, date: "2026-10-02"}
+
+  # ---------------------------------------------------------------- B2
+  - id: ja.goal.b2.sustain-complex-discussion
+    description: >
+      Sustain a discussion on abstract or contested topics: present
+      a position, respond to counterpoints, hedge appropriately,
+      and repair misunderstandings with little visible effort.
+    band: B2
+    framework_refs: ["jf-standard:B2"]
+    contexts: ["ja.situation.work-meeting", "ja.situation.debate"]
+    modalities: [speaking, interaction, listening]
+    prerequisites:
+      - target: ja.goal.b1.explain-opinion-with-reasons
+        dimension: production-speaking
+        required_state: independent
+        strength: hard
+    required_concepts:
+      - ja.grammar.concession-temo-ni
+      - ja.pragmatics.hedging-indirectness
+    assessment_ids:
+      - ja.assess.b2.discussion-live
+      - ja.assess.b2.discussion-transfer
+    transfer_required: true
+    sources: ["jf-standard"]
+    review_status: draft
+    generation: {method: ai-assisted, tool: omp, model: strata/qwen3.8-flash-next, date: "2026-10-02"}
+
+  - id: ja.goal.b2.write-structured-text
+    description: >
+      Write a structured text (email, opinion piece, report section)
+      with clear paragraph organization, appropriate register, and
+      connected argument; revision after feedback counts as support.
+    band: B2
+    framework_refs: ["jf-standard:B2"]
+    contexts: ["ja.situation.work-writing"]
+    modalities: [writing]
+    prerequisites:
+      - target: ja.goal.b1.explain-opinion-with-reasons
+        dimension: production-writing
+        required_state: independent
+        strength: hard
+    required_concepts:
+      - ja.grammar.connective-discourse
+      - ja.pragmatics.register-written
+    assessment_ids: ["ja.assess.b2.write-structured"]
+    transfer_required: true
+    sources: ["jf-standard"]
+    review_status: draft
+    generation: {method: ai-assisted, tool: omp, model: strata/qwen3.8-flash-next, date: "2026-10-02"}
+
+  - id: ja.goal.b2.follow-natural-discourse
+    description: >
+      Follow connected natural speech (talks, podcasts, fast
+      conversation) on familiar-to-abstract topics, tracking
+      speakers' stances even with reductions and connected-speech
+      phenomena.
+    band: B2
+    framework_refs: ["jf-standard:B2"]
+    contexts: ["ja.situation.media-daily", "ja.situation.lecture"]
+    modalities: [listening]
+    prerequisites:
+      - target: ja.goal.b1.read-news-summaries
+        dimension: comprehension-listening
+        required_state: independent
+        strength: helpful
+      - target: ja.goal.b1.handle-service-problems
+        dimension: comprehension-listening
+        required_state: independent
+        strength: hard
+    required_concepts:
+      - ja.phon.colloquial-reductions
+      - ja.grammar.reported-speech
+    assessment_ids: ["ja.assess.b2.discourse-follow"]
+    transfer_required: true
+    sources: ["jf-standard"]
+    review_status: draft
+    generation: {method: ai-assisted, tool: omp, model: strata/qwen3.8-flash-next, date: "2026-10-02"}

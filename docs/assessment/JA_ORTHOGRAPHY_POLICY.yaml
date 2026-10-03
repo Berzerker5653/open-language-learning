@@ -1,0 +1,86 @@
+# JA-RES-003 — machine-represented orthography scaffold policy.
+# Narrative + rationale: docs/assessment/JA_ORTHOGRAPHY_POLICY.md.
+# Invariants enforced by crates/langpack/tests/ja_orthography.rs.
+
+policy_version: "0.1.0"
+language: ja
+status: provisional-pending-review  # REVIEW-001 qualified review outstanding
+
+scripts:
+  hiragana:
+    introduce: on-ramp          # day one, alongside real language (docs/06)
+    scope: [base, dakuten-handakuten, contracted, small-sokuon, long-vowel-conventions]
+    parallel_with_real_language: true
+  katakana:
+    introduce: on-ramp-parallel # taught alongside hiragana, loanword conventions
+    scope: [base, dakuten-handakuten, contracted, small-extended, long-vowel-mark]
+  kanji:
+    introduce: A1
+    selection: communicative-value-and-frequency-context
+    forbidden_selection: arbitrary-list-order
+    tracked_facets:             # separate evidence, never conflated
+      - recognition-in-known-vocabulary
+      - readings-in-context
+      - semantic-associations
+      - writing-form-when-enabled
+  latin_romaji:
+    role: temporary-scaffold-and-native-mixed-use
+    system: modified-hepburn
+    canonical_form_rule: >
+      Canonical Japanese content is stored in Japanese script;
+      romanization is never the primary stored linguistic form.
+
+furigana:
+  supported: true
+  adaptive: true
+  visible_when: reading-support-needed
+  hide_when: mastery-state-at-or-above
+  hide_at_state: supported      # per (item, dimension) reading state
+  always_on_demand: true        # learner reveal is never blocked
+  reveal_counts_as: support     # recorded as support in evidence
+  never_on: [hiragana-only-items, katakana-only-items]
+
+romaji_fade:
+  goal: fade-not-permanent-dependency   # docs/06 §Zero/on-ramp
+  default_visible_at_start: true
+  user_modes: [auto, always, off]
+  auto_rules:
+    - hide-item-romaji-when:
+        item-reading-state-at-or-above: supported
+    - hide-item-romaji-when:
+        item-script: [hiragana, katakana]
+        kana-literacy: established
+    - keep-romaji-when:
+        item-reading-state-below: supported
+        reason: on-ramp-support
+  reveal_always_available: true
+  reveal_counts_as: support
+  fade_is_not_removal: true     # never permanently hidden against user will
+  never_gates:                  # romaji state never blocks progression
+    - speaking-progression
+    - listening-progression
+    - handwriting-track
+  input_policy:
+    romaji-input-allowed: early-stages
+    reading-writing-progress-measured-in: japanese-script
+
+competency_separation:
+  reading:
+    dimension: comprehension-reading
+    facets:
+      - character-recognition
+      - reading-in-words
+      - text-comprehension
+    rule: character-memorization-never-equates-to-comprehension
+  writing:
+    dimension: production-writing
+    tracks:                     # each tracked separately (docs/06)
+      - ime-selection
+      - kana-kanji-form-recall
+      - handwriting-when-device-supports
+      - message-sentence-discourse-composition
+    rule: handwriting-never-gates-speaking
+  cross_rule: >
+    Reading and writing competencies are distinct dimensions with
+    distinct evidence; success on one never grants the other
+    (docs/03 §4 dimension independence).
