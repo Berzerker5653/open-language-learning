@@ -1,0 +1,34 @@
+$ langpack audit-licenses tests/fixtures/packs/invalid-license-unknown
+error[missing_license] licenses.jsonl/0/scope/source_id: source "src-mystery" has no resolvable license for bundled/derived content "inv-derived"
+1 audit error(s)
+exit=1
+
+$ langpack audit-licenses tests/fixtures/packs/invalid-reference-only-bundled
+error[blocked_redistribution] licenses.jsonl/0/scope/source_id: source "src-cv" does not permit redistribution, but "inv-clip" bundles/derives from it
+error[reference_only_bundled] licenses.jsonl/0/scope: source "src-cv" is reference-only and cannot be marked as a bundled asset ("inv-clip")
+2 audit error(s)
+exit=1
+
+$ langpack audit-licenses tests/fixtures/packs/invalid-missing-attribution
+error[missing_attribution] licenses.jsonl/0: source "src-dict" requires attribution but inventory entry "inv-entries" carries none
+1 audit error(s)
+exit=1
+
+$ langpack audit-licenses tests/fixtures/packs/valid-audit
+0 audit error(s)
+exit=0
+
+$ langpack audit-licenses languages/ja-JP --attribution-report
+error[original_redistribution_blocked] LICENSES.yaml/pack_original_content: original content may not be redistributed until the owner resolves licensing (LIC-001)
+warning[license_pending] LICENSES.yaml/pack_original_content/status: original content license is an unresolved owner decision (LIC-001)
+--- attribution report ---
+JF Standard for Japanese-Language Education [unknown] (jf-standard)
+  The Japan Foundation — JF Standard for Japanese-Language Education
+JMdict / EDRDG dictionary project [CC-BY-SA-4.0] (edrdg-jmdict)
+  Electronic Dictionary Research and Development Group (EDRDG)
+pyopenjtalk / Open JTalk [mixed-component-see-upstream] (pyopenjtalk)
+  See upstream component licenses and dictionary/voice notices
+Common Voice Scripted Speech 27.0 — Japanese [CC0-1.0] (commonvoice-ja-27)
+  Mozilla Foundation — Common Voice Japanese Scripted Speech 27.0 (candidate source; not bundled)
+1 audit error(s)
+exit=1

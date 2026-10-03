@@ -33,9 +33,9 @@ pub(crate) struct Instance {
 pub struct Pack {
     root: PathBuf,
     version: String,
-    instances: Vec<Instance>,
+    pub(crate) instances: Vec<Instance>,
     /// Parsed documents without a schema (0.1 structural files).
-    structural: Vec<(String, Value)>,
+    pub(crate) structural: Vec<(String, Value)>,
     unknown_files: Vec<String>,
     parse_errors: Vec<(String, String)>,
     manifest: Option<Value>,

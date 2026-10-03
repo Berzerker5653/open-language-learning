@@ -29,10 +29,14 @@ M1 — Pack authoring and validation
 - `PACK-002` — cross-file curriculum graph: prerequisite cycles with cycle
   path, dependencies.yaml mirror consistency, unreachable/dead goal audit
   (evidence: `state/evidence/PACK-002/`).
+- `PACK-003` — source/license audit (`langpack audit-licenses`): blocked
+  redistribution, reference-only bundling, missing license/attribution;
+  attribution report; seed correctly non-distributable pending LIC-001
+  (evidence: `state/evidence/PACK-003/`).
 
 ## Next task
 
-`PACK-003` — source/license audit (M1).
+`PACK-004` — secure pack archive build/install/rollback (M1).
 
 ## Owner decisions already resolved
 

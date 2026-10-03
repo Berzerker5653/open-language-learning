@@ -144,9 +144,18 @@ pub(crate) fn check(graph: &Graph) -> Vec<Diagnostic> {
                     1 => {
                         // back edge: cycle is path from `next` to current + next
                         let pos = path.iter().position(|p| *p == next).unwrap();
-                        let mut cyc: Vec<String> =
-                            path[pos..].iter().map(|s| s.to_string()).collect();
-                        cyc.push(next.to_string());
+                        let ring: Vec<String> = path[pos..].iter().map(|s| s.to_string()).collect();
+                        // Open ring [a, b, ...]; rotate to smallest node,
+                        // then re-close for a deterministic cycle path.
+                        let min = ring
+                            .iter()
+                            .enumerate()
+                            .min_by_key(|(_, s)| s.as_str())
+                            .unwrap()
+                            .0;
+                        let mut cyc = ring;
+                        cyc.rotate_left(min);
+                        cyc.push(cyc[0].clone());
                         let key = cyc.clone();
                         if reported.insert(key) {
                             diags.push(Diagnostic::new(

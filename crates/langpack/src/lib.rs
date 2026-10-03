@@ -3,6 +3,7 @@
 //! Layout contract for schema 0.2 packs is defined in [`layout`]; schemas
 //! live in `schemas/v0.2/` and are embedded at build time.
 
+pub mod audit;
 pub mod diagnose;
 pub mod graph;
 pub mod layout;
