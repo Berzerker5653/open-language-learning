@@ -1,0 +1,9 @@
+[Unit]
+Description=Update the Open Language Learning desktop preview to the main branch
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/hunter/game-dev/LTS
+ExecStart=/home/hunter/game-dev/LTS/scripts/update-preview.sh
+# GUI restart needs the desktop session's X display.
+Environment=DISPLAY=:0
