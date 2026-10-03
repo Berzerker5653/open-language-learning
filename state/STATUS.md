@@ -127,10 +127,13 @@ M2 — Local data and learner model
   demo pack install via allowlisted ids, skippable microphone, honest
   privacy notice; desktop smoke handshake preserved (evidence:
   `state/evidence/UX-001/`).
+- `UX-002` — home with scheduler-reasoned next actions (no streaks),
+  5/10/20/30-minute budgeted practice from due/weak/progression inputs,
+  per-dimension capability progress (evidence: `state/evidence/UX-002/`).
 
 ## Next task
 
-`UX-002` — home, time-budget practice, capability progress UI (M4, P0).
+`WRITE-001` — Japanese typing/composition activities (M4, P0).
 Note: `REVIEW-001` (reviewer capacity) and `LIC-001` (final licensing
 decisions) are owner-only and remain open blockers for release.
 

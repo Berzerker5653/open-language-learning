@@ -20,6 +20,9 @@ serde_json.workspace = true
 lts-domain.workspace = true
 lts-langpack.workspace = true
 lts-storage.workspace = true
+lts-scheduler.workspace = true
+lts-learner-model.workspace = true
+serde_yaml.workspace = true
 
 [dev-dependencies]
 tempfile.workspace = true

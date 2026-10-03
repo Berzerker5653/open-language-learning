@@ -2239,9 +2239,12 @@ version = "0.1.0"
 dependencies = [
  "lts-domain",
  "lts-langpack",
+ "lts-learner-model",
+ "lts-scheduler",
  "lts-storage",
  "serde",
  "serde_json",
+ "serde_yaml",
  "tauri",
  "tauri-build",
  "tempfile",

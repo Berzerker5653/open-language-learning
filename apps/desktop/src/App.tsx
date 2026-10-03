@@ -6,6 +6,7 @@ import {
   type PackCandidate,
   type PrivacyNotice,
 } from "./onboarding";
+import { Home, ProgressView, type ProgressRow, type SessionPlan } from "./home";
 
 type Invoke = (cmd: string, args?: Record<string, unknown>) => Promise<unknown>;
 
@@ -18,13 +19,23 @@ function detectInvoke(): Invoke | null {
   return null;
 }
 
+const EMPTY_PLAN: SessionPlan = {
+  items: [],
+  total_seconds: 0,
+  budget_minutes: 5,
+  seed: 0,
+  planner_version: "session-planner-0.1.0",
+};
+
 /**
- * Desktop UI host. UX-001: onboarding (privacy notice, local profile,
- * Japanese pack install, skippable microphone). The smoke handshake
+ * Desktop UI host. UX-001 onboarding (privacy notice, local profile,
+ * Japanese pack install, skippable microphone), then UX-002 home /
+ * time-budget practice / capability progress. The smoke handshake
  * (BOOT-002) runs on mount regardless of route.
  */
 export function App() {
   const [step, setStep] = useState<OnboardingStep>("welcome");
+  const [route, setRoute] = useState<"practice" | "progress">("practice");
   const [notice, setNotice] = useState<PrivacyNotice>({
     title: "Your data stays on this device",
     points: [
@@ -37,6 +48,10 @@ export function App() {
   const [installedPacks, setInstalledPacks] = useState<string[]>([]);
   const [profileName, setProfileName] = useState("");
   const [profileId, setProfileId] = useState<string | null>(null);
+  const [displayName, setDisplayName] = useState("");
+  const [budget, setBudget] = useState(5);
+  const [plan, setPlan] = useState<SessionPlan>(EMPTY_PLAN);
+  const [progress, setProgress] = useState<ProgressRow[]>([]);
 
   useEffect(() => {
     const inv = detectInvoke();
@@ -56,10 +71,14 @@ export function App() {
 
   async function createProfile() {
     if (inv) {
-      const p = (await inv("create_profile", { displayName: profileName })) as { id: string };
-      setProfileId(p.id);
+      const p = (await inv("create_profile", { displayName: profileName })) as {
+        id: string;
+        display_name: string;
+      };
+      setDisplayName(p.display_name);
     } else {
       setProfileId("local-dev-profile");
+      setDisplayName(profileName);
     }
     setStep("packs");
   }
@@ -71,13 +90,29 @@ export function App() {
 
   async function finishOnboarding(micEnabled: boolean) {
     if (inv && profileId && selectedPack) {
-      await inv("complete_onboarding", {
-        profileId,
-        packId: selectedPack,
-        micEnabled,
-      });
+      await inv("complete_onboarding", { profileId, packId: selectedPack, micEnabled });
+      const home = (await inv("home_state", { profileId })) as {
+        display_name: string;
+        plan: SessionPlan;
+      };
+      setDisplayName(home.display_name);
+      setPlan(home.plan);
     }
     setStep("done");
+  }
+
+  async function changeBudget(minutes: number) {
+    setBudget(minutes);
+    if (inv && profileId) {
+      setPlan((await inv("practice_plan", { profileId, minutes })) as SessionPlan);
+    }
+  }
+
+  async function openProgress() {
+    setRoute("progress");
+    if (inv && profileId) {
+      setProgress((await inv("progress_summary", { profileId })) as ProgressRow[]);
+    }
   }
 
   if (step !== "done") {
@@ -114,11 +149,24 @@ export function App() {
         { id: "settings", label: "Settings" },
       ]}
     >
-      <h1>Welcome</h1>
-      <p>
-        Onboarding complete. The learning engine is under construction. See{" "}
-        <code>state/STATUS.md</code> for roadmap progress.
-      </p>
+      {route === "practice" ? (
+        <Home
+          displayName={displayName}
+          plan={plan}
+          activeBudget={budget}
+          onBudget={(m) => void changeBudget(m)}
+        />
+      ) : (
+        <ProgressView rows={progress} />
+      )}
+      <nav aria-label="Routes">
+        <button type="button" onClick={() => setRoute("practice")}>
+          Practice
+        </button>
+        <button type="button" onClick={() => void openProgress()}>
+          Progress
+        </button>
+      </nav>
     </AppShell>
   );
 }
