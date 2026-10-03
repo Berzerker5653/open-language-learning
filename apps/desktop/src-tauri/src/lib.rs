@@ -82,17 +82,27 @@ struct PackCandidate {
 /// Bundled pack candidates. The UI selects by id; paths never cross the
 /// IPC boundary (docs/07).
 fn bundled_packs() -> Vec<(PackCandidate, PathBuf)> {
-    let root =
-        PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../tests/fixtures/packs/ja-demo");
-    vec![(
-        PackCandidate {
-            pack_id: "org.openlanguage.ja-demo".into(),
-            display_name: "Japanese — demo lexicon (EDRDG-derived)".into(),
-            locale: "ja-JP".into(),
-            maturity: "community".into(),
-        },
-        root,
-    )]
+    let packs = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../tests/fixtures/packs");
+    vec![
+        (
+            PackCandidate {
+                pack_id: "org.openlanguage.ja-demo".into(),
+                display_name: "Japanese — demo lexicon (EDRDG-derived, unreviewed)".into(),
+                locale: "ja-JP".into(),
+                maturity: "community".into(),
+            },
+            packs.join("ja-demo"),
+        ),
+        (
+            PackCandidate {
+                pack_id: "org.openlanguage.eo-demo".into(),
+                display_name: "Esperanto — original demo (unreviewed)".into(),
+                locale: "eo".into(),
+                maturity: "community".into(),
+            },
+            packs.join("eo-demo"),
+        ),
+    ]
 }
 
 #[tauri::command]
@@ -221,7 +231,7 @@ fn finish_onboarding(
     let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
         .ok_or_else(|| "pack not installed".to_string())?;
     store
-        .select_pack(profile_id, pack_id, &version)
+        .set_active_pack(profile_id, pack_id, &version)
         .map_err(|e| e.to_string())?;
     store
         .set_setting(
@@ -1619,5 +1629,88 @@ mod tests {
         assert_eq!(packs::installed_packs(data).len(), 1);
         // A pack that was never installed cannot be switched to.
         assert!(packs::switch_pack(data, &p.id, "community.example.absent").is_err());
+    }
+
+    /// Preview first-run journey on the ORIGINAL eo-demo pack: select +
+    /// install, complete activities, restart with progress retained,
+    /// switch to another pack and back — all offline (tests never touch
+    /// the network).
+    #[test]
+    fn preview_journey_select_activity_restart_switch_retain() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.eo-demo").unwrap();
+        let p = create_local_profile(data, "Preview").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.eo-demo", false).unwrap();
+        assert_eq!(
+            packs::active_pack(data, &p.id).unwrap(),
+            vec!["org.openlanguage.eo-demo"]
+        );
+
+        // Complete activities: encounter + two recalls with distinct
+        // prompt families (the same flow the UI drives).
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let eo_attempt = |target: &str, family: &str, id: &str| {
+            lts_learner_model::AttemptDraft::new(
+                vec![cid(target)],
+                lts_domain::ActivityModality::RecallMeaning,
+                cid("eo.activity.demo.recall-greet"),
+                "org.openlanguage.eo-demo",
+                "0.1.0",
+            )
+            .prompt_family(cid(family))
+            .support(lts_domain::SupportLevel::new(0).unwrap(), vec![])
+            .scored(lts_domain::Score::Correct)
+            .finish(
+                lts_domain::EventId::new(id),
+                "2026-10-03T10:00:00Z",
+                lts_domain::ProfileId::new(&p.id),
+            )
+        };
+        for (i, (target, family)) in [
+            ("eo.lex.demo.saluton", "eo.expr.demo.kiel-iras"),
+            ("eo.lex.demo.saluton", "eo.expr.demo.bonan-tagon"),
+        ]
+        .iter()
+        .enumerate()
+        {
+            store
+                .append_evidence(&eo_attempt(target, family, &format!("eo{i}")))
+                .unwrap();
+        }
+
+        // Restart: fresh store handle over the same files; progress and
+        // the selected pack are retained.
+        let store2 = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let derived = derive_pairs(&store2, &p.id, &rfc3339_utc(1_791_014_400)).unwrap();
+        let saluton = derived
+            .iter()
+            .find(|d| d.content_id == "eo.lex.demo.saluton")
+            .expect("eo evidence derives mastery");
+        assert_eq!(saluton.state, lts_domain::MasteryState::Independent);
+        assert_eq!(
+            packs::active_pack(data, &p.id).unwrap(),
+            vec!["org.openlanguage.eo-demo"]
+        );
+
+        // Switch to the other bundled pack and back; mastery is intact.
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        packs::switch_pack(data, &p.id, "org.openlanguage.ja-demo").unwrap();
+        assert_eq!(
+            packs::active_pack(data, &p.id).unwrap(),
+            vec!["org.openlanguage.ja-demo"]
+        );
+        packs::switch_pack(data, &p.id, "org.openlanguage.eo-demo").unwrap();
+        let derived2 = derive_pairs(&store2, &p.id, &rfc3339_utc(1_791_014_400)).unwrap();
+        assert_eq!(
+            derived2
+                .iter()
+                .find(|d| d.content_id == "eo.lex.demo.saluton")
+                .unwrap()
+                .state,
+            lts_domain::MasteryState::Independent
+        );
+        // Both packs installed and listed offline.
+        assert_eq!(packs::installed_packs(data).len(), 2);
     }
 }

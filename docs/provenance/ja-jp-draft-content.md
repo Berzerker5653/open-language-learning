@@ -27,36 +27,47 @@ pack, and no bulk data files exist in the tree.
    lexical sourcing/review is still required. The goal description text is
    project phrasing (`framework_refs: []`), not JF Standard text.
    A reference to a framework is not evidence of copied content.
-3. **Content items are short functional seed examples** (e.g.
-   こんにちは / "hello / good day (context-dependent greeting)"). Words and
-   short functional glosses have thin copyrightability; even under the
-   most conservative reading (glosses informed by dictionary phrasing),
-   the only dictionary project referenced — JMdict/EDRDG — is
-   CC-BY-SA-4.0 with redistribution *allowed* under attribution +
-   share-alike (`SOURCES.yaml`), so no referenced source forbids the
-   distribution of these items as they stand.
-4. **No third-party data is bundled.** Common Voice: not bundled
-   (reference-only record). pyopenjtalk: candidate tooling only. No audio
-   files exist in this pack.
 
-## Conclusion
+## Classification by material class (honest version)
 
-The draft pack content is **project-original material informed by
-framework references**; nothing in the audit indicates copied third-party
-text. It is therefore licensable by the owner and does not need to be
-replaced on rights grounds.
+Owner correction 2026-10-03: presence in the baseline commit is NOT
+proof of authorship. Re-examined per material class:
 
-## What remains genuinely open (not a rights problem)
+1. **Headwords/forms** (こんにちは, はじめまして, 私, ...): individual
+   words are facts, not copyrightable expression. No rights question.
+2. **English glosses** ("hello / good day (context-dependent
+   greeting)", ...): short functional phrases. Authorship is unknown —
+   they arrived inside the owner's handoff bundle, which shows custody,
+   not creation. They do not match JMdict gloss phrasing, but "unknown
+   author" is not the same as "proven original". Treated as
+   **unresolved** (thin copyrightability makes them low-risk, but the
+   record cannot claim more than the evidence supports).
+3. **Framework alignment** (goal descriptions, `sources:
+   jf-standard`): project phrasing aligned to a can-do framework.
+   Frameworks are ideas, not protected expression; no JF Standard text
+   was found copied. Low risk, but the descriptions' authorship is
+   likewise unproven.
+4. **Grammar/pragmatics notes**: same situation as glosses — original
+   *appearance*, unproven authorship.
 
-- **Content license selection.** `LICENSES.yaml` still records
-  `pending-owner-license-selection`. The owner's MIT decision covers
-  application code; for text/media content we recommend **CC-BY-4.0**
-  (the conventional license for prose/media; MIT works too but is
-  code-shaped). This is a one-line owner decision.
-- **Quality/review status, unchanged.** The pack stays `experimental` /
-  `review-needed`; seed examples are not a curriculum, and qualified
-  human review (REVIEW-001) is still required before any promotion. This
-  document is a rights analysis, not a review.
-- **Release gate unchanged.** `--release-readiness` still fails for this
-  pack until license selection + review gates pass; that failure is
-  correct behavior, not a regression.
+## Conclusion (revised)
+
+Nothing in the audit shows copied third-party text, and every
+referenced source either permits redistribution (JMdict/EDRDG,
+CC-BY-SA-4.0) or is explicitly reference-only with copying forbidden —
+and no copying was detected. However, **originality of the draft's
+prose cannot be proven from repository evidence alone**, so the
+rights question is **not closed**. Per owner direction: the affected
+material is **excluded from the preview** (it already is: the pack is
+not bundled, and the install gate blocks it), preserved privately for
+reference, and does not block unrelated work. Closing it fully needs a
+statement from whoever authored the draft (likely the owner or a
+predecessor tool) or replacement of the prose.
+
+## Preview posture
+
+- Preview packs are the EDRDG-derived `ja-demo` (CC-BY-SA-4.0 with
+  attribution) and the fully original `eo-demo` (CC-BY-4.0); neither
+  depends on the unresolved ja-JP prose.
+- Stable-release gates for `languages/ja-JP` are unchanged:
+  `--release-readiness` still fails on it, correctly.

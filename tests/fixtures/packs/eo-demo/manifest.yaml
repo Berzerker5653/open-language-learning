@@ -1,0 +1,18 @@
+schema_version: "0.2"
+pack_id: "org.openlanguage.eo-demo"
+display_name: "Esperanto — original demo (unreviewed)"
+version: "0.1.0"
+target_locale: "eo"
+source_locales: ["en-US"]
+engine:
+  min_version: "0.1.0"
+  max_version_exclusive: null
+maturity: "community"
+capabilities:
+  listening: false
+  speaking: false
+  reading: true
+  writing: true
+license:
+  content_license: "CC-BY-4.0"
+  redistribution_allowed: true

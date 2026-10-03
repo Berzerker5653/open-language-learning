@@ -390,7 +390,7 @@ pub fn switch_pack(data: &Path, profile_id: &str, pack_id: &str) -> Result<(), S
         .ok_or_else(|| "pack not installed".to_string())?;
     let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
     store
-        .select_pack(profile_id, pack_id, &version)
+        .set_active_pack(profile_id, pack_id, &version)
         .map_err(|e| e.to_string())
 }
 

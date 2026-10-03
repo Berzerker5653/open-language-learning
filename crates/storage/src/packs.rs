@@ -65,6 +65,22 @@ impl Store {
         Ok(())
     }
 
+    /// Replace the profile's studied pack in one step: exactly one
+    /// learning language at a time. Evidence for the previous pack is
+    /// untouched and returns when the pack is re-selected.
+    pub fn set_active_pack(
+        &self,
+        profile_id: &str,
+        pack_id: &str,
+        version: &str,
+    ) -> Result<(), Error> {
+        self.conn.execute(
+            "DELETE FROM profile_pack_selections WHERE profile_id = ?1",
+            params![profile_id],
+        )?;
+        self.select_pack(profile_id, pack_id, version)
+    }
+
     pub fn selected_packs(&self, profile_id: &str) -> Result<Vec<(String, String)>, Error> {
         let mut stmt = self.conn.prepare(
             "SELECT pack_id, version FROM profile_pack_selections WHERE profile_id = ?1 ORDER BY pack_id",

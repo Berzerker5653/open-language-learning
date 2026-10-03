@@ -1,0 +1,15 @@
+goals:
+  - id: "eo.goal.demo.greet"
+    description: "Greet someone with basic Esperanto phrases (reading and writing)"
+    band: "A1"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - target: "eo.lex.demo.saluton"
+        dimension: "recall-meaning"
+        required_state: "independent"
+        strength: "hard"
+    required_concepts: ["eo.grammar.demo.n-form"]
+    assessment_ids: ["eo.assess.demo.greet"]
+    transfer_required: true
+    sources: ["original-authoring"]
+    review_status: "draft"
