@@ -167,6 +167,7 @@ export function App() {
         id: string;
         display_name: string;
       };
+      setProfileId(p.id);
       setDisplayName(p.display_name);
     } else {
       setProfileId("local-dev-profile");
