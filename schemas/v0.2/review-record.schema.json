@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlanguage.invalid/schemas/v0.2/review-record.schema.json",
+  "title": "Review record (0.2)",
+  "description": "One JSONL line per review. Qualified human review cannot be self-certified by an AI; reviewer_category records the qualification basis.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "target_id", "reviewer", "reviewer_category", "scope", "date", "outcome"],
+  "properties": {
+    "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+    "target_id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+    "reviewer": { "type": "string", "minLength": 1 },
+    "reviewer_category": {
+      "enum": ["qualified-human-expert", "qualified-human-native-speaker", "community-reviewer", "ai-assisted", "automated-check"]
+    },
+    "scope": { "type": "string", "minLength": 1 },
+    "date": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/date" },
+    "outcome": { "enum": ["approved", "approved-with-notes", "changes-requested", "rejected"] },
+    "notes": { "type": "string" },
+    "evidence": { "type": "string" }
+  }
+}

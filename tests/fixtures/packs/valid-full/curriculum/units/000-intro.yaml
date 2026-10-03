@@ -1,0 +1,16 @@
+id: "es.unit.intro"
+goal_id: "es.goal.intro.greet"
+title: "First contact"
+estimated_minutes: 15
+activities:
+  - id: "es.activity.intro.match"
+    type: "read-and-match"
+    modality: "reading"
+    support_level: 2
+    content_refs: ["es.lex.greet.hola"]
+    concept_refs: ["es.grammar.gender.noun"]
+  - id: "es.activity.intro.scenario"
+    type: "scenario"
+    modality: "interaction"
+    support_level: 1
+    scenario_id: "es.scenario.intro.meeting"

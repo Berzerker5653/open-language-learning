@@ -1,0 +1,2 @@
+{"id":"es.assess.intro.greet","goal_id":"es.goal.intro.greet","kind":"recall","modality":"writing","rubric":{"scale":"independent","criteria":["greets appropriately"]},"review_status":"draft"}
+{"id":"es.assess.intro.speak-greeting","goal_id":"es.goal.intro.speak-greeting","kind":"production","modality":"speaking","dimension":"production-speaking","rubric":{"scale":"developing","criteria":["intelligible greeting"]},"review_status":"draft"}

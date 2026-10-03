@@ -1,0 +1,11 @@
+schema_version: "0.2"
+registers:
+  - id: "es.register.neutral"
+    name: "Neutral"
+    description: "Default workplace register"
+    formality: 2
+situations:
+  - id: "es.situation.workplace"
+    name: "Workplace introduction"
+    description: "Meeting a colleague"
+    typical_registers: ["es.register.neutral"]

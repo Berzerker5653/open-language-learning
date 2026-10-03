@@ -1,0 +1,31 @@
+$ langpack validate languages/ja-JP
+info[declared_unresolved_reference] manifest.yaml/unresolved_references/0: draft pack declares unresolved reference to "ja.assess.onramp.greeting-transfer"; scaffold-only
+0 error(s), 0 warning(s)
+exit=0
+
+$ langpack validate languages/ja-JP --mode install
+error[license_inventory_missing] licenses.jsonl: install requires a non-empty licenses.jsonl (0.1 packs must migrate first)
+error[redistribution_blocked] manifest.yaml/license: manifest.license.redistribution_allowed must be true for install; resolve the license inventory first (LIC-001)
+error[declared_unresolved_reference] manifest.yaml/unresolved_references/0: declared unresolved reference to "ja.assess.onramp.greeting-transfer" blocks install/promotion
+3 error(s), 0 warning(s)
+exit=1
+
+$ langpack validate tests/fixtures/packs/invalid-support-level --json
+{
+    "diagnostics": [
+        {
+            "code": "schema",
+            "file": "curriculum/units/000-intro.yaml",
+            "message": "7 is greater than the maximum of 5",
+            "path": "/activities/0/support_level",
+            "severity": "error"
+        }
+    ],
+    "errors": 1,
+    "mode": "scaffold",
+    "pack": "tests/fixtures/packs/invalid-support-level",
+    "warnings": 0
+}
+
+$ langpack validate tests/fixtures/packs/valid-minimal --mode install --json
+{"diagnostics":[],"errors":0,"mode":"install","pack":"tests/fixtures/packs/valid-minimal","warnings":0}

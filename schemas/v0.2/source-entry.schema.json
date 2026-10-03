@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlanguage.invalid/schemas/v0.2/source-entry.schema.json",
+  "title": "Source provenance entry (0.2)",
+  "description": "One JSONL line per source. Access/use conditions are separate from the declared license; reference-only sources must not be re-hosted.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "title", "license", "access", "use"],
+  "properties": {
+    "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+    "title": { "type": "string", "minLength": 1 },
+    "url": { "type": "string", "minLength": 1 },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["spdx"],
+      "properties": {
+        "spdx": { "type": "string", "minLength": 1 },
+        "text_url": { "type": "string", "minLength": 1 },
+        "notes": { "type": "string" }
+      }
+    },
+    "access": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {
+        "mode": { "enum": ["public", "restricted", "reference-only"] },
+        "notes": { "type": "string" }
+      }
+    },
+    "use": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["redistribution_allowed"],
+      "properties": {
+        "redistribution_allowed": { "type": "boolean" },
+        "attribution_required": { "type": "boolean", "default": true },
+        "attribution_text": { "type": "string", "minLength": 1 },
+        "notes": { "type": "string" }
+      }
+    },
+    "retrieved": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/date" },
+    "content_hash": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/sha256" }
+  }
+}

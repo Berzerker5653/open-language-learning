@@ -1,0 +1,7 @@
+schema_version: "0.2"
+target_locale: "es-ES"
+language_name_english: "Spanish (test fixture)"
+language_name_native: "Español"
+source_locales: ["en-US"]
+external_ids:
+  iso639-3: "spa"

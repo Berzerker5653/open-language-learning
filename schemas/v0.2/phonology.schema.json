@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlanguage.invalid/schemas/v0.2/phonology.schema.json",
+  "title": "Phonology inventory (0.2)",
+  "description": "Each feature carries an explicit mode; teach/assess-automatic claims require a bound calibrated speech profile (semantic check).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "segments", "phonotactics", "prosody"],
+  "properties": {
+    "schema_version": { "const": "0.2" },
+    "segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["symbol", "type", "mode"],
+        "properties": {
+          "symbol": { "type": "string", "minLength": 1 },
+          "type": { "enum": ["consonant", "vowel"] },
+          "mode": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/featureMode" },
+          "examples": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "l1_contrast_notes": {
+            "type": "object",
+            "propertyNames": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/localeTag" },
+            "additionalProperties": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "phonotactics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "description", "mode"],
+        "properties": {
+          "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+          "description": { "type": "string", "minLength": 1 },
+          "mode": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/featureMode" }
+        }
+      }
+    },
+    "prosody": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "description", "mode"],
+        "properties": {
+          "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+          "description": { "type": "string", "minLength": 1 },
+          "mode": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/featureMode" },
+          "orthographic_cues": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+        }
+      }
+    }
+  }
+}

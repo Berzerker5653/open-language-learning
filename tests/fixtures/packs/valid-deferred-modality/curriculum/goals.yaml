@@ -1,0 +1,29 @@
+goals:
+  - id: "es.goal.intro.greet"
+    description: "Deferred-speaking track: speaking-scoped prerequisites are representable while the modality is deferred"
+    band: "A1"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - target: "es.lex.greet.hola"
+        dimension: "recall-meaning"
+        required_state: "independent"
+        strength: "hard"
+      - target: "es.goal.intro.speak-greeting"
+        dimension: "production-speaking"
+        required_state: "supported"
+        strength: "helpful"
+    required_concepts: ["es.grammar.gender.noun"]
+    assessment_ids: ["es.assess.intro.greet"]
+    transfer_required: true
+    sources: ["test-source"]
+    review_status: "draft"
+  - id: "es.goal.intro.speak-greeting"
+    description: "Spoken greeting goal, deferred while the pack has no speaking capability"
+    band: "A1"
+    modalities: ["speaking"]
+    prerequisites: []
+    required_concepts: []
+    assessment_ids: ["es.assess.intro.speak-greeting"]
+    transfer_required: true
+    sources: ["test-source"]
+    review_status: "draft"

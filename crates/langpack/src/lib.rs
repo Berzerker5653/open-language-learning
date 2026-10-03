@@ -1,11 +1,13 @@
-//! Pack model, schema validation, and queries. Populated by PACK-001..005.
+//! Pack loading, schema validation, and semantic checks (docs/04).
+//!
+//! Layout contract for schema 0.2 packs is defined in [`layout`]; schemas
+//! live in `schemas/v0.2/` and are embedded at build time.
 
-pub const CRATE_NAME: &str = "lts-langpack";
+pub mod diagnose;
+pub mod layout;
+pub mod migrate;
+pub mod pack;
+pub mod schema;
 
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn crate_identifies_itself() {
-        assert_eq!(super::CRATE_NAME, "lts-langpack");
-    }
-}
+pub use diagnose::{Diagnostic, Severity};
+pub use pack::{Mode, Pack};

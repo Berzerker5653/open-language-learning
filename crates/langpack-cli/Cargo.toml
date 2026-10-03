@@ -1,6 +1,6 @@
 [package]
 name = "lts-langpack-cli"
-description = "Authoring/build CLI for language packs (docs/04, PACK-005)."
+description = "Language pack author CLI (validate/build/inspect)."
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
@@ -12,3 +12,5 @@ path = "src/main.rs"
 
 [dependencies]
 lts-langpack.workspace = true
+clap.workspace = true
+serde_json.workspace = true

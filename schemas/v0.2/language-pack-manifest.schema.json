@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlanguage.invalid/schemas/v0.2/language-pack-manifest.schema.json",
+  "title": "Language Pack Manifest (0.2)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "pack_id",
+    "version",
+    "target_locale",
+    "source_locales",
+    "engine",
+    "maturity",
+    "capabilities",
+    "license"
+  ],
+  "properties": {
+    "schema_version": { "const": "0.2" },
+    "pack_id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/packId" },
+    "display_name": { "type": "string", "minLength": 1 },
+    "version": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/semver" },
+    "target_locale": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/localeTag" },
+    "source_locales": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/localeTag" }
+    },
+    "engine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["min_version"],
+      "properties": {
+        "min_version": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/semver" },
+        "max_version_exclusive": {
+          "anyOf": [
+            { "type": "null" },
+            { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/semver" }
+          ]
+        }
+      }
+    },
+    "maturity": {
+      "enum": ["experimental", "community", "validated", "verified", "reference"]
+    },
+    "authors": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "scripts": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true,
+      "description": "Script IDs declared in orthography/scripts.yaml; checked semantically against the orthography file."
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["listening", "speaking", "reading", "writing"],
+      "properties": {
+        "listening": { "type": "boolean" },
+        "speaking": { "type": "boolean" },
+        "reading": { "type": "boolean" },
+        "writing": { "type": "boolean" },
+        "pronunciation_assessment": { "type": "boolean", "default": false },
+        "prosody_assessment": { "type": "boolean", "default": false },
+        "handwriting": { "type": "boolean", "default": false },
+        "rtl": { "type": "boolean", "default": false }
+      }
+    },
+    "requested_model_capabilities": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["content_license"],
+      "properties": {
+        "content_license": { "type": "string", "minLength": 1 },
+        "license_file": { "type": "string", "minLength": 1 },
+        "attribution_file": { "type": "string", "minLength": 1 },
+        "redistribution_allowed": {
+          "type": "boolean",
+          "default": false,
+          "description": "Install/release eligibility requires true plus a resolved license inventory."
+        }
+      }
+    },
+    "unresolved_references": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "owner_id", "target_id", "reason"],
+        "properties": {
+          "kind": { "enum": ["assessment", "scenario", "asset", "review", "source"] },
+          "owner_id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+          "target_id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+          "reason": { "type": "string", "minLength": 10 }
+        }
+      }
+    }
+  }
+}

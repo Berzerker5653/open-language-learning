@@ -1,0 +1,17 @@
+schema_version: "0.2"
+pack_id: "org.openlanguage.test-broken"
+display_name: "Broken fixture"
+version: "0.1.0"
+target_locale: "es-ES"
+source_locales: ["en-US"]
+engine:
+  min_version: "0.2.0"
+  max_version_exclusive: "0.1.0"
+maturity: "experimental"
+capabilities:
+  listening: false
+  speaking: false
+  reading: true
+  writing: true
+license:
+  content_license: "CC0-1.0"

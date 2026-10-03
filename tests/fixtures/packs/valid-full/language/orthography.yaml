@@ -1,0 +1,6 @@
+schema_version: "0.2"
+scripts:
+  - id: "es.orth.latin"
+    name: "Latin"
+    direction: "ltr"
+    teaching_order: 0

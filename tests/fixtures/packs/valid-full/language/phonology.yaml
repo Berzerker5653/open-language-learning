@@ -1,0 +1,14 @@
+schema_version: "0.2"
+segments:
+  - symbol: "a"
+    type: "vowel"
+    mode: "reference-only"
+phonotactics:
+  - id: "es.phon.open-syllable"
+    description: "Preference for open syllables"
+    mode: "teach"
+prosody:
+  - id: "es.phon.stress"
+    description: "Lexical stress rules"
+    mode: "assess-guided"
+    orthographic_cues: ["accent marks"]

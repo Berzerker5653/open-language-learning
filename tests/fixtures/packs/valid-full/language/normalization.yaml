@@ -1,0 +1,6 @@
+schema_version: "0.2"
+unicode_normalization: "NFC"
+rules:
+  - id: "fold-diacritics"
+    description: "Diacritic folding for answer matching only, never display"
+    scope: "matching"

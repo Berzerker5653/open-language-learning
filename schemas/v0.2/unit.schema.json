@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlanguage.invalid/schemas/v0.2/unit.schema.json",
+  "title": "Curriculum unit (0.2)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "goal_id", "title", "activities"],
+  "properties": {
+    "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+    "goal_id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+    "title": { "type": "string", "minLength": 1 },
+    "summary": { "type": "string" },
+    "estimated_minutes": { "type": "integer", "minimum": 1 },
+    "activities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "type", "modality", "support_level"],
+        "properties": {
+          "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+          "type": { "type": "string", "minLength": 1 },
+          "modality": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/modality" },
+          "support_level": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/supportLevel" },
+          "scenario_id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+          "content_refs": {
+            "type": "array",
+            "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" }
+          },
+          "concept_refs": {
+            "type": "array",
+            "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" }
+          }
+        }
+      }
+    }
+  }
+}

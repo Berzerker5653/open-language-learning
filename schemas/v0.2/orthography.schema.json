@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlanguage.invalid/schemas/v0.2/orthography.schema.json",
+  "title": "Orthography scripts (0.2)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "scripts"],
+  "properties": {
+    "schema_version": { "const": "0.2" },
+    "scripts": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "direction"],
+        "properties": {
+          "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+          "name": { "type": "string", "minLength": 1 },
+          "direction": { "enum": ["ltr", "rtl", "vertical"] },
+          "unicode_blocks": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+          "teaching_order": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  }
+}

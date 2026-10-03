@@ -1,0 +1,1 @@
+{"id":"es.speech.test-tts","provider":"local-test","model":"test-voice-1","target_locale":"es-ES","features":[{"feature_id":"es.phon.stress","mode":"assess-guided","calibration":null}],"notes":"Guided comparison only; no automatic score without calibration (SPEECH-007)."}

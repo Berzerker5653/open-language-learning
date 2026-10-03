@@ -1,0 +1,11 @@
+goals:
+  - id: "Bad Goal Name"
+    description: "Goal id violates the stable ID grammar"
+    band: "A1"
+    modalities: ["writing"]
+    prerequisites: []
+    required_concepts: []
+    assessment_ids: ["es.assess.intro.greet"]
+    transfer_required: true
+    sources: ["test-source"]
+    review_status: "draft"

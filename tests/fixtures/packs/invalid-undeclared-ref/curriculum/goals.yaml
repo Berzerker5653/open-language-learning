@@ -1,0 +1,11 @@
+goals:
+  - id: "es.goal.intro.greet"
+    description: "References an assessment that does not exist and is not declared"
+    band: "A1"
+    modalities: ["writing"]
+    prerequisites: []
+    required_concepts: []
+    assessment_ids: ["es.assess.missing"]
+    transfer_required: true
+    sources: ["test-source"]
+    review_status: "draft"

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlanguage.invalid/schemas/v0.2/license-inventory.schema.json",
+  "title": "License inventory (0.2)",
+  "description": "One JSONL line per inventory entry. Every content class in the pack must be covered; redistribution_allowed false blocks install-mode eligibility.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "scope", "license", "redistribution_allowed"],
+  "properties": {
+    "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": { "enum": ["pack-original", "derived-from-source", "third-party-asset", "model-output"] },
+        "path_glob": { "type": "string", "minLength": 1 },
+        "source_id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["spdx"],
+      "properties": {
+        "spdx": { "type": "string", "minLength": 1 },
+        "pending": { "type": "boolean", "default": false },
+        "notes": { "type": "string" }
+      }
+    },
+    "redistribution_allowed": { "type": "boolean" },
+    "attribution": { "type": "string", "minLength": 1 }
+  }
+}

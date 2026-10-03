@@ -1,0 +1,19 @@
+schema_version: "0.2"
+pack_id: "org.openlanguage.test-full"
+display_name: "Test Full Pack"
+version: "0.1.0"
+target_locale: "es-ES"
+source_locales: ["en-US"]
+engine:
+  min_version: "0.1.0"
+  max_version_exclusive: "2.0.0"
+maturity: "community"
+scripts: ["es.orth.latin"]
+capabilities:
+  listening: false
+  speaking: false
+  reading: true
+  writing: true
+license:
+  content_license: "CC-BY-4.0"
+  redistribution_allowed: true

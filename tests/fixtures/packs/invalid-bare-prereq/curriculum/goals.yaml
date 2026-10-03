@@ -1,0 +1,11 @@
+goals:
+  - id: "es.goal.intro.greet"
+    description: "Bare prerequisite ids are invalid in 0.2"
+    band: "A1"
+    modalities: ["writing"]
+    prerequisites: ["es.lex.greet.hola"]
+    required_concepts: []
+    assessment_ids: ["es.assess.intro.greet"]
+    transfer_required: true
+    sources: ["test-source"]
+    review_status: "draft"

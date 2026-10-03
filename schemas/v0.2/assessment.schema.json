@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlanguage.invalid/schemas/v0.2/assessment.schema.json",
+  "title": "Assessment definition (0.2)",
+  "description": "Pronunciation assessments must bind a speech profile and rubric; ASR success alone never establishes pronunciation mastery.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "goal_id", "kind", "modality", "rubric", "review_status"],
+  "properties": {
+    "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+    "goal_id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+    "kind": { "enum": ["recognition", "recall", "production", "interaction", "transfer"] },
+    "modality": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/modality" },
+    "dimension": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/masteryDimension" },
+    "rubric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scale", "criteria"],
+      "properties": {
+        "scale": { "enum": ["observed", "developing", "independent", "flexible"] },
+        "criteria": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "speech_profile_id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+    "conditions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "time_limit_seconds": { "type": "integer", "minimum": 1 },
+        "supports_allowed": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "requires_transfer": { "type": "boolean", "default": false }
+      }
+    },
+    "review_status": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/reviewStatus" },
+    "review_records": {
+      "type": "array",
+      "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/reviewRef" }
+    }
+  }
+}

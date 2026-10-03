@@ -4,11 +4,11 @@ Generated handoff state: 2026-10-02
 
 ## Overall
 
-Implementation started 2026-10-02. Monorepo bootstrapped; domain core work in progress.
+Implementation started 2026-10-02. Bootstrap and pack-schema contracts in place; curriculum graph validation in progress.
 
 ## Current milestone
 
-M0 — Bootstrap and technical proof
+M1 — Pack authoring and validation
 
 ## Completed tasks
 
@@ -21,10 +21,15 @@ M0 — Bootstrap and technical proof
   baselines (evidence: `state/evidence/BOOT-003/`).
 - `PERF-001` — named hardware tiers, provisional frozen-then-measured budget contract
   (`docs/performance/BUDGETS.yaml`, evidence: `state/evidence/PERF-001/`).
+- `PACK-001` — 0.2 pack schemas for every logical content type, structural +
+  semantic validator (`crates/langpack`), `langpack validate` CLI with JSON
+  output, 0.1→0.2 prerequisite migration, conformance fixtures; 0.1 seed draft
+  validates as scaffold and correctly fails install gates (evidence:
+  `state/evidence/PACK-001/`).
 
 ## Next task
 
-`PACK-001` — public pack schemas + structural validator (M1).
+`PACK-002` — cross-file ID and curriculum graph validator (M1).
 
 ## Owner decisions already resolved
 

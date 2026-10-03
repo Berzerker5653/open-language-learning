@@ -1,0 +1,20 @@
+id: "es.scenario.intro.meeting"
+goal_id: "es.goal.intro.greet"
+title: "First meeting"
+situation: "es.situation.workplace"
+register: "es.register.neutral"
+nodes:
+  - id: "es.activity.intro.meeting.open"
+    prompt: "Greet your new colleague"
+    expected_actions: ["greeting"]
+    next: []
+support_ladder:
+  - support_level: 0
+    description: "No supports"
+  - support_level: 3
+    description: "Word bank with romanization"
+transfer_variants_required: 1
+transfer_variants:
+  - id: "es.scenario.intro.meeting.formal"
+    description: "Greet a senior executive"
+    changed_variable: "register"

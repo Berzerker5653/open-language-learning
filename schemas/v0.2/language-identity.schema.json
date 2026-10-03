@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlanguage.invalid/schemas/v0.2/language-identity.schema.json",
+  "title": "Language identity (0.2)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "target_locale", "language_name_english", "language_name_native", "source_locales"],
+  "properties": {
+    "schema_version": { "const": "0.2" },
+    "target_locale": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/localeTag" },
+    "language_name_english": { "type": "string", "minLength": 1 },
+    "language_name_native": { "type": "string", "minLength": 1 },
+    "source_locales": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/localeTag" }
+    },
+    "external_ids": {
+      "type": "object",
+      "propertyNames": { "type": "string", "minLength": 1 },
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
+    "notes": { "type": "string" }
+  }
+}

@@ -1,0 +1,15 @@
+goals:
+  - id: "es.goal.intro.greet"
+    description: "Greet a colleague appropriately"
+    band: "A1"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - target: "es.lex.greet.hola"
+        dimension: "recall-meaning"
+        required_state: "independent"
+        strength: "hard"
+    required_concepts: ["es.grammar.gender.noun"]
+    assessment_ids: ["es.assess.intro.greet"]
+    transfer_required: true
+    sources: ["test-source"]
+    review_status: "draft"

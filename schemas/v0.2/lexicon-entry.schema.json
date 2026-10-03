@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlanguage.invalid/schemas/v0.2/lexicon-entry.schema.json",
+  "title": "Lexical entry / expression (0.2)",
+  "description": "One JSONL line per entry. Covers vocabulary.jsonl and expressions.jsonl.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "status", "forms", "glosses", "sources"],
+  "properties": {
+    "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+    "status": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/reviewStatus" },
+    "forms": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text"],
+        "properties": {
+          "text": { "type": "string", "minLength": 1 },
+          "script": { "type": "string", "minLength": 1 },
+          "is_primary": { "type": "boolean", "default": false }
+        }
+      }
+    },
+    "readings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text"],
+        "properties": {
+          "text": { "type": "string", "minLength": 1 },
+          "script": { "type": "string", "minLength": 1 },
+          "transliteration_system": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "temporary_romanization": {
+      "type": "string",
+      "description": "Deprecated 0.1 field kept for migration; new packs use readings with transliteration_system."
+    },
+    "surface": { "type": "string", "description": "Deprecated 0.1 field kept for migration." },
+    "reading": { "type": "string", "description": "Deprecated 0.1 field kept for migration." },
+    "glosses": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/localeTag" },
+      "additionalProperties": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+    },
+    "part_of_speech": { "type": "string", "minLength": 1 },
+    "registers": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "semantic_tags": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "prerequisite_orthography": {
+      "type": "array",
+      "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" }
+    },
+    "example_refs": {
+      "type": "array",
+      "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" }
+    },
+    "sources": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "notes": { "type": "string" },
+    "generation": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/generation" },
+    "review_records": {
+      "type": "array",
+      "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/reviewRef" }
+    }
+  }
+}

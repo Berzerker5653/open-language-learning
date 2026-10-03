@@ -1,0 +1,9 @@
+id: "es.unit.intro"
+goal_id: "es.goal.intro.greet"
+title: "First contact"
+activities:
+  - id: "es.activity.intro.match"
+    type: "read-and-match"
+    modality: "reading"
+    support_level: 7
+    content_refs: []

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlanguage.invalid/schemas/v0.2/normalization.schema.json",
+  "title": "Text normalization rules (0.2)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "unicode_normalization", "rules"],
+  "properties": {
+    "schema_version": { "const": "0.2" },
+    "unicode_normalization": { "enum": ["NFC", "NFD", "NFKC", "NFKD"] },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "description"],
+        "properties": {
+          "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+          "description": { "type": "string", "minLength": 1 },
+          "scope": { "enum": ["display", "matching", "assessment"] }
+        }
+      }
+    }
+  }
+}
