@@ -1,0 +1,480 @@
+# JA-RES-001 — Authoritative Japanese source and license matrix
+#
+# Registry per docs/10_LICENSING_AND_PROVENANCE.md §Source registry.
+# Classification vocabulary (acceptance): allowed | derived |
+# reference-only | blocked | unknown.
+#   allowed        — license permits bundling/redistribution in our
+#                    product subject only to attribution/notice terms.
+#   derived        — usable but with share-alike/attribution/derivation
+#                    isolation duties (kept in the isolated data layer).
+#   reference-only — may inform design/derivation but its data may not
+#                    be copied into shipped packs.
+#   blocked        — terms are incompatible with our distribution model;
+#                    must not be used for shipped content.
+#   unknown        — license/terms not established; may not ship; each
+#                    entry lists an alternative or an explicit blocker.
+#
+# Every entry: id, title, org, url, license, license_url, accessed,
+# type, redistribution, attribution, notes, alternatives (when
+# unknown/blocked/reference-only).
+#
+# This matrix is engineering evidence for LIC-001, not a legal
+# determination. Final licensing decisions remain owner-only.
+
+meta:
+  task: JA-RES-001
+  matrix_version: "0.1.0"
+  compiled: "2026-10-02"
+  method: >
+    Candidate sources verified against publisher/project license pages
+    via primary URLs on the access date. Facts vs hypotheses are
+    distinguished in notes. Uncertain items are classified unknown and
+    carry alternatives or explicit blockers.
+  distribution_context: >
+    Desktop product with shipped language packs; final app/content
+    license pending LIC-001 (owner-only). Share-alike dictionary data
+    must stay isolated in the generated data layer so obligations are
+    auditable (docs/10).
+
+categories:
+  functional_standards:
+    - id: jf-standard
+      title: JF Standard for Japanese-Language Education
+      org: The Japan Foundation Japanese-Language Institute
+      url: https://www.jfstandard.jpf.go.jp/summaryen/ja/render.do
+      license: proprietary (site content); framework ideas referenced
+      license_url: https://www.jfstandard.jpf.go.jp/e_index.html
+      accessed: "2026-10-02"
+      type: official framework
+      redistribution: reference-only
+      attribution: cite the JF Standard when describing level alignment
+      notes: >
+        Can-do/CEFR-aligned A1-C2 framework. Do not copy site or
+        guidebook descriptors wholesale into packs.
+      alternative: >
+        Project-authored Can-do statements aligned to the framework,
+        AI-drafted then human-reviewed (REVIEW-001 capacity required).
+    - id: cefr
+      title: CEFR (Common European Framework of Reference for Languages)
+      org: Council of Europe
+      url: https://www.coe.int/en/web/common-european-framework-reference-languages
+      license: proprietary (Companion Volume); level names are factual
+      license_url: https://www.coe.int/en/web/common-european-framework-reference-languages/terms-of-use
+      accessed: "2026-10-02"
+      type: official framework
+      redistribution: reference-only
+      attribution: cite CEFR when using A1-C2 labels
+      notes: Level labels (A1..C2) are descriptive facts; descriptor
+        text is copyrighted.
+      alternative: project-authored descriptors; JF Standard alignment.
+    - id: actfl-2024
+      title: ACTFL Proficiency Guidelines 2024
+      org: ACTFL
+      url: https://www.actfl.org/proficiency-guidelines-overview
+      license: proprietary
+      license_url: https://www.actfl.org/proficiency-guidelines-overview
+      accessed: "2026-10-02"
+      type: official framework
+      redistribution: reference-only
+      attribution: cite for cross-checks only
+      notes: secondary cross-check per docs/SOURCES.md; no wholesale
+        reproduction.
+      alternative: JF Standard as primary; project-authored rubric text.
+
+  grammar:
+    - id: tae-kim
+      title: Tae Kim's Guide to Learning Japanese
+      org: Tae Kim
+      url: https://www.guidetojapanese.org/learn/grammar
+      license: CC BY-NC-SA 3.0 (non-commercial)
+      license_url: https://www.guidetojapanese.org/
+      accessed: "2026-10-02"
+      type: grammar reference
+      redistribution: blocked
+      attribution: n/a
+      notes: >
+        NC clause is incompatible with distributing a commercial-ish
+        product; do not derive pack text from it.
+      alternative: >
+        jkindrix/japanese-language-data grammar layer (CC BY-SA 4.0)
+        and project-authored explanations (human-reviewed).
+    - id: bunpou-grammar-db
+      title: japanese-grammar-db (Imabi + Tae Kim aggregation)
+      org: bunpou (third-party aggregator)
+      url: https://github.com/bunpou/japanese-grammar-db
+      license: unknown (upstream Imabi terms unclear; Tae Kim NC)
+      license_url: https://github.com/bunpou/japanese-grammar-db
+      accessed: "2026-10-02"
+      type: grammar dataset
+      redistribution: unknown
+      attribution: n/a until verified
+      notes: aggregation inherits upstream ambiguity; Imabi terms not
+        established.
+      blocker: >
+        Do not use until Imabi and Tae Kim terms are individually
+        verified; NC upstream makes most of it unusable anyway.
+      alternative: jkindrix grammar layer; project-authored content.
+    - id: jkindrix-jld
+      title: japanese-language-data (unified CC-BY-SA dataset)
+      org: jkindrix (aggregates JMdict, KANJIDIC2, KanjiVG, Tatoeba,
+        Kanjium, Waller JLPT)
+      url: https://github.com/jkindrix/japanese-language-data
+      license: CC BY-SA 4.0 (aggregation layer)
+      license_url: https://github.com/jkindrix/japanese-language-data
+      accessed: "2026-10-02"
+      type: grammar/lexicon dataset
+      redistribution: derived
+      attribution: per-component attribution preserved upstream;
+        verify component list before shipping
+      notes: >
+        Convenient cross-linked source; we must still honor each
+        component's terms (all verified CC BY-SA/CC0-class).
+    - id: openjlpt
+      title: OpenJLPT grammar/word seed datasets
+      org: evanclan
+      url: https://github.com/evanclan/OpenJLPT
+      license: claimed open; per-file terms not yet verified
+      license_url: https://github.com/evanclan/OpenJLPT
+      accessed: "2026-10-02"
+      type: grammar dataset
+      redistribution: unknown
+      attribution: n/a until verified
+      notes: claims "correctly-licensed" but per-record provenance
+        must be checked before any pack use.
+      alternative: jkindrix-jld; project-authored grammar points.
+
+  lexicon:
+    - id: jmdict
+      title: JMdict / JMnedict (EDRDG)
+      org: Electronic Dictionary Research and Development Group
+      url: https://www.edrdg.org/wiki/JMdict-EDICT_Dictionary_Project.html
+      license: CC BY-SA 4.0 (EDRDG dictionary licence)
+      license_url: https://www.edrdg.org/edrdg/licence.html
+      accessed: "2026-10-02"
+      type: dictionary
+      redistribution: derived
+      attribution: >
+        "JMdict/JMnedict © Electronic Dictionary Research and
+        Development Group, CC BY-SA 4.0" plus modification notice
+      notes: >
+        Primary lexicon. Share-alike applies to dictionary
+        adaptations; keep in isolated generated data layer (docs/10).
+    - id: kanjidic2
+      title: KANJIDIC2 (kanji dictionary)
+      org: EDRDG
+      url: https://www.edrdg.org/wiki/index.php/KANJIDIC_Project
+      license: CC BY-SA 4.0 (EDRDG dictionary licence)
+      license_url: https://www.edrdg.org/edrdg/licence.html
+      accessed: "2026-10-02"
+      type: dictionary
+      redistribution: derived
+      attribution: KANJIDIC2 © EDRDG, CC BY-SA 4.0
+      notes: meanings, readings, stroke counts, radicals for 13,108
+        kanji.
+    - id: kradfile
+      title: KRADFILE (kanji radical/decomposition data)
+      org: EDRDG
+      url: https://www.edrdg.org/wiki/index.php/KRADFILE
+      license: CC BY-SA 4.0 (EDRDG dictionary licence)
+      license_url: https://www.edrdg.org/edrdg/licence.html
+      accessed: "2026-10-02"
+      type: dictionary
+      redistribution: derived
+      attribution: KRADFILE © EDRDG, CC BY-SA 4.0
+      notes: radical decomposition for kanji lookup UX.
+    - id: unidic
+      title: UniDic (morphological dictionary, NINJAL)
+      org: NINJAL
+      url: https://clrd.ninjal.ac.jp/unidic/en/
+      license: triple GPL-2.0 / LGPL-2.1 / BSD-3-Clause (pick BSD)
+      license_url: https://clrd.ninjal.ac.jp/unidic/en/
+      accessed: "2026-10-02"
+      type: dictionary/morphology
+      redistribution: allowed
+      attribution: UniDic © NINJAL under the selected BSD option
+      notes: >
+        Verified triple license on the official download page;
+        BSD-3-Clause option makes bundling safe. Use for inflection
+        tables and morphology, not as learner lexicon.
+    - id: ipadic
+      title: IPAdic (MeCab dictionary, incl. accent/prosody fields)
+      org: NAIST (public via taku910/MeCab project)
+      url: https://taku910.github.io/mecab/
+      license: permissive NAIST/IPAdic license (MIT-like)
+      license_url: https://wiki.debian.org/IpadicLicense
+      accessed: "2026-10-02"
+      type: dictionary/morphology
+      redistribution: allowed
+      attribution: preserve the IPAdic copyright notice
+      notes: >
+        License text is short and permissive; SPDX registration was
+        proposed. Verify exact notice file in the shipped artifact.
+    - id: waller-jlpt
+      title: Waller JLPT word lists
+      org: Jonathan Waller
+      url: https://www.tanos.co.uk/jlpt/
+      license: believed public-domain/CC0-class; not confirmed on page
+      license_url: https://www.tanos.co.uk/jlpt/
+      accessed: "2026-10-02"
+      type: word list
+      redistribution: unknown
+      attribution: n/a until confirmed
+      notes: widely redistributed but the source page lacks an
+        explicit license statement.
+      alternative: >
+        jkindrix-jld (CC BY-SA 4.0 aggregation includes Waller) or
+        frequency lists derived from UniDic/BCCWJ statistics
+        (reference-only inputs, own output).
+
+  orthography:
+    - id: kanjivg
+      title: KanjiVG (stroke-order vector graphics)
+      org: Ulrich Apel
+      url: https://kanjivg.tagaini.net/
+      license: CC BY-SA 3.0
+      license_url: http://creativecommons.org/licenses/by-sa/3.0/
+      accessed: "2026-10-02"
+      type: asset (SVG stroke data)
+      redistribution: derived
+      attribution: '"KanjiVG © Ulrich Apel, CC BY-SA 3.0" per file set'
+      notes: >
+        Canonical stroke-order + component decomposition data;
+        share-alike applies to derived stroke assets.
+    - id: joyo-kanji
+      title: Joyo / Jinmei kanji lists (official notifications)
+      org: Agency for Cultural Affairs / Ministry of Justice
+      url: https://www.moj.go.jp/MINJI/minji05_00330.html
+      license: government publication; lists are factual data
+      license_url: https://www.moj.go.jp/MINJI/minji_000148823.html
+      accessed: "2026-10-02"
+      type: official standard
+      redistribution: reference-only
+      attribution: cite the notification when presenting grade lists
+      notes: >
+        The character set membership is fact (not copyrightable);
+        official PDF layout/annotations are not for copying. Encode
+        the codepoint lists ourselves.
+      alternative: encode the codepoint lists ourselves from the
+        published notification (facts, not copied documents)
+    - id: aozora-bunko
+      title: Aozora Bunko (digitized public-domain Japanese literature)
+      org: Aozora Bunko volunteers
+      url: https://www.aozora.gr.jp/
+      license: works copyright-free in Japan (17,352 of 17,840);
+        digitization files have their own terms
+      license_url: https://www.aozora.gr.jp/general/index.html
+      accessed: "2026-10-02"
+      type: corpus (reading texts)
+      redistribution: derived
+      attribution: per-work citation of Aozora Bunko edition
+      notes: >
+        Japan-PD is not world-PD (70-year rule in many countries);
+        exclude the 488 flagged in-copyright works and recent foreign
+        works; per-work verification required before pack inclusion.
+    - id: ja-wikipedia
+      title: Japanese Wikipedia extracts
+      org: Wikimedia Foundation
+      url: https://ja.wikipedia.org/
+      license: CC BY-SA 4.0
+      license_url: https://ja.wikipedia.org/wiki/Wikipedia:Copyrights
+      accessed: "2026-10-02"
+      type: corpus (reading texts)
+      redistribution: derived
+      attribution: per-article attribution + license link
+      notes: >
+        Useful for graded reading material; share-alike and per-article
+        attribution bookkeeping is heavy — prefer Aozora where possible.
+
+  phonology_prosody:
+    - id: ojad
+      title: OJAD — Online Japanese Accent Dictionary
+      org: University of Tokyo (Gavo lab)
+      url: https://www.gavo.t.u-tokyo.ac.jp/ojad/eng/
+      license: academic/educational use; for-profit use discouraged
+      license_url: https://gavo.t.u-tokyo.ac.jp/ojad/eng/pages/notes
+      accessed: "2026-10-02"
+      type: accent reference
+      redistribution: blocked
+      attribution: n/a
+      notes: >
+        Terms restrict use to academic/educational purposes; our
+        product distribution is incompatible. Never scrape/bundle.
+      alternative: >
+        IPAdic/UniDic accent fields (allowed) + project-authored
+        prosody drills with human review; record our own audio.
+    - id: nhk-accent
+      title: NHK Japanese Pronunciation Accent Dictionary (books/apps)
+      org: NHK
+      url: https://www.nhk.or.jp/book/
+      license: commercial copyright
+      license_url: https://www.nhk.or.jp/book/
+      accessed: "2026-10-02"
+      type: accent reference
+      redistribution: blocked
+      attribution: n/a
+      notes: reference for our authors only; no data extraction.
+      alternative: IPAdic/UniDic accent fields; expert-authored data.
+    - id: ipadic-accent
+      title: IPAdic accent/prosody fields (see lexicon ipadic)
+      org: NAIST
+      url: https://taku910.github.io/mecab/
+      license: permissive NAIST/IPAdic license
+      license_url: https://wiki.debian.org/IpadicLicense
+      accessed: "2026-10-02"
+      type: prosody data
+      redistribution: allowed
+      attribution: preserve IPAdic notice
+      notes: pitch forms for dictionary entries; primary allowed
+        prosody source.
+    - id: jsut-jvs
+      title: JSUT / JVS Japanese speech corpora
+      org: University of Tokyo (Saruwatari lab)
+      url: https://www.kagura-lab.t.u-tokyo.ac.jp/jsut/index.en.html
+      license: audio research/non-commercial/personal only; tags CC BY-SA 4.0
+      license_url: https://www.kagura-lab.t.u-tokyo.ac.jp/jsut/index.en.html
+      accessed: "2026-10-02"
+      type: corpus (audio)
+      redistribution: blocked
+      attribution: n/a for audio
+      notes: >
+        Explicitly non-commercial research/personal use for audio;
+        incompatible with shipped packs.
+      alternative: Mozilla Common Voice ja (CC0, see corpora_audio).
+
+  corpora_audio:
+    - id: common-voice-ja
+      title: Mozilla Common Voice — Japanese (release 27.0)
+      org: Mozilla / Community
+      url: https://mozilladatacollective.com/datasets/cmu5xbhnf00fmnq07z9p3aa70
+      license: CC0-1.0 dataset metadata; separate service access terms
+      license_url: https://commonvoice.mozilla.org/en/datasets
+      accessed: "2026-10-02"
+      type: corpus (audio)
+      redistribution: derived
+      attribution: cite dataset version; no speaker identification
+      notes: >
+        CC0 copyright waiver does NOT waive platform conditions:
+        no re-hosting/re-sharing raw dataset, no speaker
+        identification. Keep raw audio out of repo and packs; fetch
+        upstream at build/eval time with dataset/version/hash
+        manifest (docs/10 §107).
+    - id: tatoeba
+      title: Tatoeba sentence collection (ja)
+      org: Tatoeba association
+      url: https://tatoeba.org/en/downloads
+      license: CC BY 2.0 FR (default); some subsets CC0
+      license_url: https://tatoeba.org/en/terms_of_use
+      accessed: "2026-10-02"
+      type: corpus (sentences)
+      redistribution: derived
+      attribution: per-sentence contributor lists from the official
+        dump
+      notes: >
+        Primary example-sentence source. Track sentence ids and
+        contributors for attribution; prefer CC0-flagged subsets where
+        attribution burden is prohibitive.
+    - id: tanaka-corpus
+      title: Tanaka Corpus (ja-eng sentence pairs)
+      org: Jim Breen / public
+      url: https://tatoeba.org/en/downloads (historical subset)
+      license: public domain (per Tatoeba download notes)
+      license_url: https://tatoeba.org/en/downloads
+      accessed: "2026-10-02"
+      type: corpus (sentences)
+      redistribution: allowed
+      attribution: courtesy citation
+      notes: historical PD corpus now folded into Tatoeba dumps.
+    - id: csj
+      title: Corpus of Spontaneous Japanese
+      org: NINJAL et al.
+      url: https://clrd.ninjal.ac.jp/csj/en
+      license: research-use license via NINJAL portal application
+      license_url: https://clrd.ninjal.ac.jp/en (portal terms)
+      accessed: "2026-10-02"
+      type: corpus (audio)
+      redistribution: reference-only
+      attribution: cite corpus papers
+      notes: application-based academic access; no redistribution
+        into product.
+      alternative: Common Voice ja for eval audio.
+    - id: bccwj
+      title: Balanced Corpus of Contemporary Written Japanese
+      org: NINJAL
+      url: https://clrd.ninjal.ac.jp/bccwj/en/
+      license: NINJAL corpus license (application; research/education)
+      license_url: https://clrd.ninjal.ac.jp/bccwj/en/doc.html
+      accessed: "2026-10-02"
+      type: corpus (written)
+      redistribution: reference-only
+      attribution: cite BCCWJ
+      notes: >
+        Use only aggregate frequency statistics (facts) to inform our
+        own word lists; do not copy n-grams/texts into packs.
+      alternative: >
+        Tatoeba/Aozora for shipped texts; Common Voice ja for audio;
+        only aggregate frequency statistics (facts) inform our own
+        word lists.
+    - id: jnas-asj
+      title: JNAS / ASJ read-speech corpora (NII-SRC)
+      org: NII Speech Resources Consortium
+      url: https://research.nii.ac.jp/src/en/JNAS.html
+      license: paid/restricted commercial licenses
+      license_url: https://research.nii.ac.jp/src/en/JNAS.html
+      accessed: "2026-10-02"
+      type: corpus (audio)
+      redistribution: blocked
+      attribution: n/a
+      notes: licensing cost/restrictions; not viable for v1.
+      alternative: Common Voice ja.
+
+  speech_runtime_models:
+    - id: sherpa-onnx
+      title: sherpa-onnx (local ASR/TTS/VAD runtime)
+      org: k2-fsa
+      url: https://github.com/k2-fsa/sherpa-onnx
+      license: Apache-2.0 (code); models licensed separately
+      license_url: https://github.com/k2-fsa/sherpa-onnx/blob/master/LICENSE
+      accessed: "2026-10-02"
+      type: runtime dependency
+      redistribution: allowed
+      attribution: dependency license screen
+      notes: every model artifact needs its own license record
+        (docs/10 §separate licenses).
+    - id: whisper-cpp
+      title: whisper.cpp (local multilingual ASR)
+      org: ggml-org
+      url: https://github.com/ggml-org/whisper.cpp
+      license: MIT (code); model weights separate
+      license_url: https://github.com/ggml-org/whisper.cpp/blob/master/LICENSE
+      accessed: "2026-10-02"
+      type: runtime dependency
+      redistribution: allowed
+      attribution: dependency license screen
+      notes: openai whisper weights license must be audited before
+        any shipped model.
+    - id: open-jtalk
+      title: Open JTalk / pyopenjtalk (TTS + G2P frontend)
+      org: r9y9 / SourceForge Open JTalk
+      url: https://github.com/r9y9/pyopenjtalk
+      license: MIT wrapper; Modified BSD Open JTalk; voices separate
+      license_url: https://github.com/r9y9/pyopenjtalk
+      accessed: "2026-10-02"
+      type: runtime dependency
+      redistribution: derived
+      attribution: preserve bundled dictionary notices
+      notes: voice model terms vary (some non-commercial); audit each
+        voice artifact.
+    - id: piper
+      title: Piper TTS (original repo archived 2025)
+      org: rhasspy (archived)
+      url: https://github.com/rhasspy/piper
+      license: code MIT; voices varied; successor maintenance unclear
+      license_url: https://github.com/rhasspy/piper
+      accessed: "2026-10-02"
+      type: runtime dependency
+      redistribution: unknown
+      attribution: n/a
+      notes: archived upstream; per-voice licenses inconsistent.
+      blocker: >
+        Not selectable until a maintained successor and per-voice
+        licenses are verified; Open JTalk is the interim candidate.

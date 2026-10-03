@@ -1,0 +1,5 @@
+     Running tests/source_matrix.rs (target/debug/deps/source_matrix-fbe5f4011b06a764)
+test every_entry_is_classified_with_registry_fields ... ok
+test matrix_covers_required_categories ... ok
+test nonshippable_entries_have_alternative_or_blocker ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

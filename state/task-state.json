@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-02",
-  "active_task": "JA-RES-001",
+  "active_task": "JA-RES-002",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -183,6 +183,17 @@
       ]
     },
     "JA-RES-001": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/JA-RES-001.md",
+        "state/evidence/JA-RES-001/cargo-test-2026-10-02.txt",
+        "state/evidence/JA-RES-001/ci-2026-10-02.txt",
+        "docs/provenance/JA_SOURCE_MATRIX.yaml"
+      ]
+    },
+    "JA-RES-002": {
       "status": "in_progress",
       "attempts": 0,
       "last_error": null,
