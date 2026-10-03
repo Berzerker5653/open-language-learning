@@ -1,6 +1,6 @@
 - id: ja.goal.onramp.respond-to-greeting
-  description: Recognize a basic greeting in a supported first-meeting context and
-    make an appropriate simple response.
+  description: Hear a simple greeting in a supported first-introduction setting and
+    reply with a fitting short response.
   band: on-ramp
   framework_refs: []
   contexts:

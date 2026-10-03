@@ -27,15 +27,14 @@ gate and still fails (correctly) until review and calibration gates pass.
   future catalog entry is an author claim shown as such.
 - **SPEECH-007** — preregistered calibration recordings (deferred by
   owner until after preview). Automatic pronunciation scoring stays off.
-- **LIC-001 remainder** — authorship of `languages/ja-JP` draft prose
-  unproven (see `docs/provenance/ja-jp-draft-content.md`); excluded
-  from preview; closing it needs an authorship statement or prose
-  replacement. TTS distribution licensing (GPLv3 espeak-ng) deferred;
-  provider stays out of distributable builds.
+- **LIC-001 remainder** — ja-JP draft prose with unproven authorship
+  was REPLACED with ai-assisted draft wording on 2026-10-03 (record:
+  `docs/provenance/ja-jp-draft-content.md`); the pack still needs a
+  content-license entry in `LICENSES.yaml` and qualified review. TTS
+  distribution licensing (GPLv3 espeak-ng) deferred; provider stays out
+  of distributable builds.
 - **Stable release (`REL-001`)** — unchanged requirements;
   `--release-readiness` must keep failing until the above close.
-
-## Verification for this gate
 
 Journey test `preview_journey_select_activity_restart_switch_retain`
 (select eo-demo → activities → restart retains Independent mastery →

@@ -71,3 +71,32 @@ predecessor tool) or replacement of the prose.
   depends on the unresolved ja-JP prose.
 - Stable-release gates for `languages/ja-JP` are unchanged:
   `--release-readiness` still fails on it, correctly.
+
+## Replacement record (2026-10-03, owner-authorized)
+
+The owner could not certify authorship of the draft prose, so per owner
+direction the unresolved-provenance prose was REPLACED with newly
+authored ai-assisted text, still labeled draft/unreviewed (no qualified
+human review is claimed):
+
+- `lexicon/vocabulary.jsonl`, `lexicon/expressions.jsonl`: glosses and
+  notes rewritten (headwords/readings unchanged — facts, not prose).
+- `grammar/concepts.yaml`: title + description rewritten.
+- `pragmatics/registers.yaml`, `pragmatics/situations.yaml`: register
+  descriptions and situation title rewritten.
+- `curriculum/goals.yaml`: goal description rewritten.
+- `curriculum/units/000-onramp-greeting.yaml`: unit title rewritten.
+- `activities/scenarios/first-meeting.yaml`: objective rewritten.
+- `phonology/inventory.yaml`, `phonology/prosody.yaml`: notes rewritten.
+
+Not touched: ids, structure, declarative policy flags, feature lists,
+`manifest.yaml`, `SOURCES.yaml`, `LICENSES.yaml`, and all properly
+attributed third-party records. The baseline `SHA256SUMS.txt` is left
+intact as the historical manifest; the files above intentionally diverge
+from it under this owner-authorized replacement (verified again by
+`validate_handoff.py`, which passes).
+
+Rights status after replacement: content prose is now authored within
+this project by ai-assisted generation, labeled draft/unreviewed; the
+remaining gate for this pack is qualified human review (REVIEW-001) and
+the content license record in `LICENSES.yaml`, not unknown authorship.

@@ -1,5 +1,5 @@
 id: "ja.unit.onramp.greeting"
-title: "First contact"
+title: "Meeting and greeting"
 goal_ids: ["ja.goal.onramp.respond-to-greeting"]
 sources: ["jf-standard"]
 review_status: "review-needed"

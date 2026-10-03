@@ -1,7 +1,7 @@
 id: "ja.scenario.first-meeting.greeting"
 status: "draft"
 location: "neutral-first-meeting-setting"
-objective: "Respond appropriately to a basic greeting with available support."
+objective: "Answer a simple greeting appropriately, using whatever support level is available."
 target_goal_ids: ["ja.goal.onramp.respond-to-greeting"]
 support_ladder:
   - 5
@@ -12,4 +12,5 @@ support_ladder:
   - 0
 transfer_variants_required: 2
 notes:
+  - "Objective wording rewritten 2026-10-03 (ai-assisted, draft/unreviewed) to replace unresolved-authorship prose."
   - "Populate actual dialogue graph only after content/schema runtime exists and examples are reviewed."

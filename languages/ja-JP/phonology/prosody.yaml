@@ -14,4 +14,5 @@ target_policy:
   unreliable_or_unvoiced_f0_is_unavailable: true
   no_numeric_score_from_guided_comparison: true
 notes:
+  - "Note rewritten 2026-10-03 (ai-assisted, draft/unreviewed) to replace unresolved-authorship prose."
   - "Reference identity is declared in language/identity.yaml; phrase targets and accepted variants still require qualified review."

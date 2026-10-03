@@ -10,4 +10,5 @@ features_to_model:
   - "lexical-pitch-accent"
   - "phrase-intonation"
 notes:
+  - "Note rewritten 2026-10-03 (ai-assisted, draft/unreviewed) to replace unresolved-authorship prose."
   - "Populate a verified phone/phoneme inventory from authoritative sources during JA-RES tasks."

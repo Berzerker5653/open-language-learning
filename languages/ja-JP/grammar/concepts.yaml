@@ -1,8 +1,8 @@
 - id: "ja.grammar.copula.polite-desu"
   kind: "grammar"
   status: "review-needed"
-  title: "Polite copular です construction"
-  description: "Seed concept for schema testing; expand with form/function constraints and reviewed examples."
+  title: "The polite linking word です"
+  description: "Placeholder concept for schema testing: です links a topic to what is said about it in polite speech. Form and usage limits, plus example sentences, must be authored and reviewed before promotion."
   prerequisites: []
   related: []
   modalities: ["listening", "speaking", "reading", "writing", "interaction"]
