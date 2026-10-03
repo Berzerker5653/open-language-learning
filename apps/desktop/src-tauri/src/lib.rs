@@ -924,6 +924,166 @@ fn reference_audio_at(data: &Path, pack_id: &str, unit_id: &str) -> Result<Strin
     Ok(base64::engine::general_purpose::STANDARD.encode(&bytes))
 }
 
+// ---------------------------------------------------------------------------
+// WRITE-001: production-writing practice (typed answers via the platform
+// IME; no handwriting surface exists or is required).
+// ---------------------------------------------------------------------------
+
+/// Writing targets come from the active pack's lexicon. Entry ids are
+/// validated as content ids; no filesystem path is derived from them.
+fn writing_tasks(
+    data: &Path,
+    profile_id: &str,
+) -> Result<Vec<lts_activity::writing::WritingTask>, String> {
+    let active = packs::active_pack(data, profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    let path = data
+        .join("packs")
+        .join(pack_id)
+        .join(&version)
+        .join("lexicon")
+        .join("entries.jsonl");
+    let text = std::fs::read_to_string(&path).map_err(|_| "pack lexicon not found".to_string())?;
+    fn field<'a>(v: &'a serde_json::Value, key: &str) -> Option<&'a str> {
+        v.get(key).and_then(|x| x.as_str())
+    }
+    let mut tasks = Vec::new();
+    for line in text.lines() {
+        let Ok(entry) = serde_json::from_str::<serde_json::Value>(line) else {
+            continue;
+        };
+        let Some(id) = field(&entry, "id") else { continue };
+        if lts_domain::ContentId::parse(id).is_err() {
+            continue;
+        }
+        let Some(forms) = entry.get("forms").and_then(|v| v.as_array()) else {
+            continue;
+        };
+        let primary = forms
+            .iter()
+            .find(|f| f.get("is_primary").and_then(|b| b.as_bool()).unwrap_or(false))
+            .or(forms.first());
+        let Some(answer) = primary.and_then(|f| field(f, "text")).filter(|t| !t.is_empty()) else {
+            continue;
+        };
+        let accepted: Vec<String> = forms
+            .iter()
+            .filter_map(|f| field(f, "text"))
+            .filter(|t| *t != answer)
+            .map(String::from)
+            .collect();
+        let Some(prompt_text) = entry
+            .get("glosses")
+            .and_then(|g| g.as_object())
+            .and_then(|o| o.values().next())
+            .and_then(|v| v.as_array())
+            .and_then(|a| a.first())
+            .and_then(|v| v.as_str())
+            .filter(|t| !t.is_empty())
+        else {
+            continue;
+        };
+        let readings = entry.get("readings").and_then(|v| v.as_array());
+        let answer_reading = readings.as_ref().and_then(|a| {
+            a.iter()
+                .find(|r| field(r, "script") == Some("hiragana"))
+                .or(a.first())
+                .and_then(|r| field(r, "text"))
+                .map(String::from)
+        });
+        let answer_romaji = readings.as_ref().and_then(|a| {
+            a.iter()
+                .find(|r| r.get("transliteration_system").is_some())
+                .and_then(|r| field(r, "text"))
+                .map(String::from)
+        });
+        tasks.push(lts_activity::writing::WritingTask {
+            item_id: id.to_string(),
+            answer: answer.to_string(),
+            accepted,
+            prompt_text: prompt_text.to_string(),
+            answer_reading,
+            answer_romaji,
+        });
+    }
+    Ok(tasks)
+}
+
+/// Next unattempted writing target for the profile (deterministic order;
+/// attempted items rotate out so practice advances).
+#[tauri::command]
+fn writing_task(profile_id: String) -> Result<Option<lts_activity::writing::WritingTask>, String> {
+    let data = data_dir();
+    let tasks = writing_tasks(&data, &profile_id)?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let attempted: std::collections::HashSet<String> = store
+        .evidence_for_profile(&profile_id)
+        .map_err(|e| e.to_string())?
+        .iter()
+        .filter(|e| e.modality == lts_domain::ActivityModality::ProductionWriting)
+        .flat_map(|e| e.targets.iter().map(|c| c.as_str().to_string()))
+        .collect();
+    Ok(tasks.into_iter().find(|t| !attempted.contains(&t.item_id)))
+}
+
+/// Grade a typed answer and record production-writing evidence. Hint use
+/// is recorded as support, so a hinted success is never independent.
+#[tauri::command]
+fn writing_submit(
+    profile_id: String,
+    item_id: String,
+    answer: String,
+    used_hint: bool,
+) -> Result<lts_activity::writing::WritingGrade, String> {
+    let data = data_dir();
+    checked_unit(&item_id)?;
+    let tasks = writing_tasks(&data, &profile_id)?;
+    let task = tasks
+        .iter()
+        .find(|t| t.item_id == item_id)
+        .ok_or("unknown writing target")?
+        .clone();
+    let grade = lts_activity::writing::grade_writing(&answer, &task);
+    let active = packs::active_pack(&data, &profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let now = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map_err(|e| e.to_string())?;
+    let event = lts_learner_model::AttemptDraft::new(
+        vec![lts_domain::ContentId::parse(&item_id).map_err(|_| "invalid item id")?],
+        lts_domain::ActivityModality::ProductionWriting,
+        lts_domain::ContentId::parse("ja.activity.demo.writing-typing")
+            .map_err(|_| "invalid activity id")?,
+        pack_id,
+        &version,
+    )
+    .support(
+        lts_domain::SupportLevel::new(if used_hint { 1 } else { 0 }).ok_or("bad support")?,
+        if used_hint {
+            vec!["writing-hint".to_string()]
+        } else {
+            vec![]
+        },
+    )
+    .scored(if grade.correct {
+        lts_domain::Score::Correct
+    } else {
+        lts_domain::Score::Incorrect
+    })
+    .finish(
+        lts_domain::EventId::new(format!("write-{}-{}", now.as_secs(), now.subsec_nanos())),
+        &rfc3339_utc(now.as_secs()),
+        lts_domain::ProfileId::new(&profile_id),
+    );
+    store.append_evidence(&event).map_err(|e| e.to_string())?;
+    Ok(grade)
+}
+
 /// TTS-001 acceptance 3: curated licensed recordings (pack media)
 /// always override synthesis; otherwise synthesize locally and label
 /// the result as model output (docs/10).
@@ -1096,7 +1256,9 @@ pub fn run() {
             import_pack,
             installed_packs,
             active_pack,
-            switch_pack
+            switch_pack,
+            writing_task,
+            writing_submit
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

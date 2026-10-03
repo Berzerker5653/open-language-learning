@@ -15,6 +15,7 @@ import {
 } from "./home";
 import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./pronunciation";
 import { LanguagePanel, type CatalogEntry, type InstalledPack } from "./language";
+import { WritingPractice, type WritingTaskView } from "./writing";
 
 type Invoke = (cmd: string, args?: Record<string, unknown>) => Promise<unknown>;
 
@@ -73,9 +74,9 @@ function toB64(bytes: Uint8Array): string {
  */
 export function App() {
   const [step, setStep] = useState<OnboardingStep>("welcome");
-  const [route, setRoute] = useState<"practice" | "progress" | "pronunciation" | "language">(
-    "practice",
-  );
+  const [route, setRoute] = useState<
+    "practice" | "progress" | "pronunciation" | "writing" | "language"
+  >("practice");
   const [notice, setNotice] = useState<PrivacyNotice>({
     title: "Your data stays on this device",
     points: [
@@ -103,6 +104,22 @@ export function App() {
   const [audioMsg, setAudioMsg] = useState<string | null>(null);
   const [langError, setLangError] = useState<string | null>(null);
   const [onboardError, setOnboardError] = useState<string | null>(null);
+  const [writingTask, setWritingTask] = useState<WritingTaskView | null>(null);
+  const [writingScaffold, setWritingScaffold] = useState<{
+    reading?: string;
+    romaji?: string;
+  }>({});
+  const [writingDraft, setWritingDraft] = useState("");
+  const [writingGraded, setWritingGraded] = useState(false);
+  const [writingCorrect, setWritingCorrect] = useState(false);
+  const [writingUsedHint, setWritingUsedHint] = useState(false);
+  const [writingError, setWritingError] = useState<string | null>(null);
+
+  // The sticky header hides content when the page is scrolled; reset the
+  // scroll position whenever the onboarding step or main route changes.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [step, route]);
 
   useEffect(() => {
     const inv = detectInvoke();
@@ -230,6 +247,73 @@ export function App() {
     setRoute("progress");
     if (inv && profileId) {
       setProgress((await inv("progress_summary", { profileId })) as ProgressRow[]);
+    }
+  }
+
+  // WRITE-001: typed production-writing practice. Grading and evidence
+  // recording happen natively; hints are scaffolds recorded as support.
+  async function openWriting() {
+    setRoute("writing");
+    setWritingError(null);
+    setWritingDraft("");
+    setWritingGraded(false);
+    setWritingScaffold({});
+    setWritingUsedHint(false);
+    if (inv && profileId) {
+      try {
+        const t = (await inv("writing_task", { profileId })) as {
+          item_id: string;
+          prompt_text: string;
+          answer_reading: string | null;
+          answer_romaji: string | null;
+        } | null;
+        if (t) {
+          setWritingTask({ item_id: t.item_id, prompt_text: t.prompt_text });
+          setWritingScaffold({
+            reading: t.answer_reading ?? undefined,
+            romaji: t.answer_romaji ?? undefined,
+          });
+        } else {
+          setWritingTask(null);
+        }
+      } catch (e) {
+        setWritingTask(null);
+        setWritingError(String(e));
+      }
+    } else {
+      setWritingTask(null);
+    }
+  }
+
+  function showWritingHint(kind: "reading" | "romaji") {
+    setWritingUsedHint(true);
+    setWritingTask((prev) =>
+      prev
+        ? {
+            ...prev,
+            reading_hint: kind === "reading" ? writingScaffold.reading : prev.reading_hint,
+            romaji_hint: kind === "romaji" ? writingScaffold.romaji : prev.romaji_hint,
+          }
+        : prev,
+    );
+  }
+
+  async function submitWriting() {
+    if (!writingTask) return;
+    setWritingError(null);
+    if (inv && profileId) {
+      try {
+        const grade = (await inv("writing_submit", {
+          profileId,
+          itemId: writingTask.item_id,
+          answer: writingDraft,
+          usedHint: writingUsedHint,
+        })) as { correct: boolean };
+        setWritingCorrect(grade.correct);
+        setWritingGraded(true);
+      } catch (e) {
+        setWritingError(String(e));
+      }
     }
   }
 
@@ -377,6 +461,14 @@ export function App() {
           <button
             type="button"
             className="tab"
+            aria-current={route === "writing" ? "page" : undefined}
+            onClick={() => void openWriting()}
+          >
+            Writing
+          </button>
+          <button
+            type="button"
+            className="tab"
             aria-current={route === "language" ? "page" : undefined}
             onClick={() => {
               setRoute("language");
@@ -409,6 +501,33 @@ export function App() {
         </>
       ) : route === "progress" ? (
         <ProgressView rows={progress} />
+      ) : route === "writing" ? (
+        <>
+          {writingError && (
+            <p role="alert" className="alert">
+              {writingError}
+            </p>
+          )}
+          {writingTask ? (
+            <WritingPractice
+              task={writingTask}
+              draft={writingDraft}
+              graded={writingGraded}
+              correct={writingCorrect}
+              onDraft={setWritingDraft}
+              onSubmit={() => void submitWriting()}
+              onHint={showWritingHint}
+            />
+          ) : (
+            <section aria-label="Writing practice">
+              <h2>Writing practice</h2>
+              <p className="empty">
+                No new writing targets in this pack right now. Practice other activities to unlock
+                more, or install a larger language pack.
+              </p>
+            </section>
+          )}
+        </>
       ) : route === "language" ? (
         <LanguagePanel
           installed={installed}

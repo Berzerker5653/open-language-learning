@@ -43,3 +43,25 @@ Date: 2026-10-03
   `InputSurface` variant with its own ADR.
 - No new pack schema fields were needed; `produce`/writing activities
   already validate under the existing activity schema.
+
+## Live native verification (2026-10-03, desktop release candidate)
+
+End-to-end on the built debug binary (`tauri build --debug --no-bundle`)
+driven through the real GUI (XTEST clicks + OCR-guided):
+
+- New Tauri commands `writing_task` / `writing_submit` (lib.rs): task
+  comes from the active pack lexicon, rotates past items already having
+  `production-writing` evidence, grading + evidence append happen in
+  Rust so the mastery pipeline stays honest.
+- Writer9 profile: prompt "hello" → typed こんにちは → Check →
+  verdict "Correct"; DB row `production-writing | scored | support 0 |
+  ["ja.lex.demo.konnichiwa"]`.
+- Re-entering the Writing tab rotated to the next item (prompt "I
+  (neutral polite first person)"); used `Show romaji` then typed
+  `watashi` → DB row `production-writing | scored | support 1 |
+  ["writing-hint"] | ["ja.lex.demo.watashi"]`.
+- Two onboarding visibility bugs found and fixed while reaching the
+  route: (1) scroll position persisted across onboarding steps, hiding
+  the pack list under the sticky header (now `window.scrollTo(0, 0)`
+  on step/route change); (2) `text-wrap: balance` on headings made
+  WebKitGTK skip painting the step `<h1>` (removed).
