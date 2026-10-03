@@ -20,14 +20,14 @@ pub enum Mode {
 }
 
 #[derive(Clone, Debug)]
-struct Instance {
-    file: String,
-    schema: &'static str,
+pub(crate) struct Instance {
+    pub(crate) file: String,
+    pub(crate) schema: &'static str,
     /// JSON pointer prefix of this instance within its file.
-    pointer: String,
-    value: Value,
+    pub(crate) pointer: String,
+    pub(crate) value: Value,
     /// True when validated against the 0.2 contract.
-    v2: bool,
+    pub(crate) v2: bool,
 }
 
 pub struct Pack {
@@ -483,6 +483,10 @@ impl Pack {
                 ));
             }
         }
+
+        // --- cross-file curriculum graph (PACK-002) ---
+        let graph = crate::graph::build(&self.instances, &self.structural, v2);
+        diags.extend(crate::graph::check(&graph));
 
         // --- migrated prerequisites need human review ---
         if v2 {

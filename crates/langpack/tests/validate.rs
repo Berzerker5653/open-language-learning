@@ -1,4 +1,4 @@
-//! Conformance fixtures for the 0.2 pack validator (PACK-001).
+//! Conformance fixtures for the 0.2 pack validator (PACK-001/002).
 
 use lts_langpack::{Mode, Pack, Severity};
 use std::path::PathBuf;
@@ -240,6 +240,80 @@ fn undeclared_reference_warns_in_scaffold_and_errors_in_install() {
         .find(|d| d.code == "unresolved_reference")
         .expect("error expected");
     assert_eq!(d.severity, Severity::Error);
+}
+
+#[test]
+fn prerequisite_cycles_fail_with_cycle_path() {
+    let diags = validate("invalid-prereq-cycle", Mode::Scaffold);
+    let d = diags
+        .iter()
+        .find(|d| d.code == "prerequisite_cycle")
+        .expect("cycle error expected");
+    assert_eq!(d.severity, Severity::Error);
+    assert!(
+        d.message
+            .contains("es.goal.intro.greet -> es.goal.intro.speak-greeting -> es.goal.intro.greet"),
+        "message must carry the cycle path: {}",
+        d.message
+    );
+}
+
+#[test]
+fn dead_goal_audit_reports_unreachable_goals() {
+    let diags = validate("invalid-dead-goal", Mode::Scaffold);
+    let d = diags
+        .iter()
+        .find(|d| d.code == "unreachable_goal")
+        .expect("audit warning expected");
+    assert!(
+        d.message.contains("es.goal.island.unreferenced"),
+        "{:?}",
+        d.message
+    );
+    assert!(
+        !diags
+            .iter()
+            .any(|d| d.code == "unreachable_goal" && d.message.contains("es.goal.intro.greet")),
+        "delivered goal must not be flagged"
+    );
+    assert_eq!(
+        error_count(&diags),
+        0,
+        "audit is a warning, not an error: {diags:?}"
+    );
+}
+
+#[test]
+fn dependency_mirror_must_agree_with_content_prerequisites() {
+    let diags = validate("invalid-dependency-mismatch", Mode::Scaffold);
+    let m: Vec<&str> = diags
+        .iter()
+        .filter(|d| d.code == "dependency_graph_mismatch")
+        .map(|d| d.message.as_str())
+        .collect();
+    assert!(
+        m.iter()
+            .any(|s| s.contains("no matching content prerequisite")),
+        "{m:?}"
+    );
+    assert!(
+        m.iter()
+            .any(|s| s.contains("missing from dependencies.yaml mirror")),
+        "{m:?}"
+    );
+}
+
+#[test]
+fn matching_dependency_mirror_is_clean() {
+    let diags = validate("valid-full", Mode::Install);
+    assert!(
+        !diags.iter().any(|d| d.code == "dependency_graph_mismatch"),
+        "{diags:?}"
+    );
+    assert!(
+        !diags.iter().any(|d| d.code == "unreachable_goal"),
+        "{diags:?}"
+    );
 }
 
 #[test]

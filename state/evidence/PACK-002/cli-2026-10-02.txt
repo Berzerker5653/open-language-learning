@@ -1,0 +1,20 @@
+$ langpack validate tests/fixtures/packs/invalid-prereq-cycle
+error[prerequisite_cycle] curriculum/goals.yaml: prerequisite cycle: es.goal.intro.greet -> es.goal.intro.speak-greeting -> es.goal.intro.greet
+1 error(s), 0 warning(s)
+exit=1
+
+$ langpack validate tests/fixtures/packs/invalid-dead-goal
+warning[unreachable_goal] curriculum/goals.yaml: audit: goal "es.goal.island.unreferenced" is not referenced by any unit/scenario and is not a prerequisite of any delivered goal; it can never unlock for learners
+0 error(s), 1 warning(s)
+exit=0
+
+$ langpack validate tests/fixtures/packs/invalid-dependency-mismatch
+warning[unresolved_reference] curriculum/goals.yaml/goals/0/prerequisites/0/target: prerequisite target references "es.lex.greet.hola", which is not defined in this pack and not declared in manifest.unresolved_references
+warning[dependency_graph_mismatch] grammar/dependencies.yaml: dependencies.yaml edge es.goal.intro.greet -> es.grammar.gender.noun has no matching content prerequisite
+warning[dependency_graph_mismatch] grammar/dependencies.yaml: content prerequisite es.goal.intro.greet -> es.lex.greet.hola missing from dependencies.yaml mirror
+0 error(s), 3 warning(s)
+exit=0
+
+$ langpack validate tests/fixtures/packs/valid-full --mode install
+0 error(s), 0 warning(s)
+exit=0

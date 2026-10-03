@@ -26,10 +26,13 @@ M1 — Pack authoring and validation
   output, 0.1→0.2 prerequisite migration, conformance fixtures; 0.1 seed draft
   validates as scaffold and correctly fails install gates (evidence:
   `state/evidence/PACK-001/`).
+- `PACK-002` — cross-file curriculum graph: prerequisite cycles with cycle
+  path, dependencies.yaml mirror consistency, unreachable/dead goal audit
+  (evidence: `state/evidence/PACK-002/`).
 
 ## Next task
 
-`PACK-002` — cross-file ID and curriculum graph validator (M1).
+`PACK-003` — source/license audit (M1).
 
 ## Owner decisions already resolved
 

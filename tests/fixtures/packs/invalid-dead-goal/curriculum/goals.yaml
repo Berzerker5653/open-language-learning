@@ -1,0 +1,21 @@
+goals:
+  - id: "es.goal.intro.greet"
+    description: "Delivered by the unit"
+    band: "A1"
+    modalities: ["writing"]
+    prerequisites: []
+    required_concepts: []
+    assessment_ids: ["es.assess.intro.greet"]
+    transfer_required: true
+    sources: ["test-source"]
+    review_status: "draft"
+  - id: "es.goal.island.unreferenced"
+    description: "Defined but never delivered and never gates anything"
+    band: "A1"
+    modalities: ["writing"]
+    prerequisites: []
+    required_concepts: []
+    assessment_ids: ["es.assess.island.unreferenced"]
+    transfer_required: true
+    sources: ["test-source"]
+    review_status: "draft"

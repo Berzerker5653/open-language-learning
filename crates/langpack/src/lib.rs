@@ -4,6 +4,7 @@
 //! live in `schemas/v0.2/` and are embedded at build time.
 
 pub mod diagnose;
+pub mod graph;
 pub mod layout;
 pub mod migrate;
 pub mod pack;

@@ -1,0 +1,2 @@
+{"id":"es.assess.intro.greet","goal_id":"es.goal.intro.greet","kind":"recall","modality":"writing","rubric":{"scale":"independent","criteria":["greets"]},"review_status":"draft"}
+{"id":"es.assess.island.unreferenced","goal_id":"es.goal.island.unreferenced","kind":"recall","modality":"writing","rubric":{"scale":"independent","criteria":["does a thing"]},"review_status":"draft"}

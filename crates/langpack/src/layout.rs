@@ -14,8 +14,8 @@
 //! curriculum/units/*.yaml          unit                     (single doc)
 //! activities/scenarios/*.yaml      scenario                 (single doc)
 //! assessments/definitions.jsonl    assessment               (one per line)
-//! lexicon/entries.jsonl            lexicon-entry            (one per line)
 //! grammar/concepts.jsonl           concept                  (one per line)
+//! grammar/dependencies.yaml        (mirror of prerequisite edges; structural)
 //! sources.jsonl                    source-entry             (one per line)
 //! licenses.jsonl                   license-inventory        (one per line)
 //! reviews.jsonl                    review-record            (one per line)
@@ -110,6 +110,15 @@ pub fn classify(rel: &str) -> Option<Classified> {
             }
             if rel.starts_with("activities/scenarios/") && yaml(rel) {
                 return Some(single("scenario"));
+            }
+            if rel == "grammar/dependencies.yaml"
+                || rel == "grammar/dependencies.yml"
+                || rel == "grammar/dependencies.json"
+            {
+                return Some(Classified {
+                    schema: None,
+                    shape: DocShape::Single,
+                });
             }
             None
         }

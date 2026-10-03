@@ -1,0 +1,48 @@
+
+running 4 tests
+test migrate::tests::bare_prerequisites_become_reviewable_records ... ok
+test migrate::tests::migrated_goal_validates_against_0_2_schema ... ok
+test migrate::tests::bare_prerequisites_are_rejected_by_0_2_schema ... ok
+test migrate::tests::migrated_records_trigger_review_warning ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+
+running 22 tests
+test inverted_engine_range_fails ... ok
+test manifest_scripts_must_match_orthography_ids ... ok
+test japanese_draft_seed_is_not_install_eligible ... ok
+test prerequisite_cycles_fail_with_cycle_path ... FAILED
+test dead_goal_audit_reports_unreachable_goals ... ok
+test japanese_draft_seed_validates_as_scaffold ... ok
+test bad_id_grammar_fails ... ok
+test dependency_mirror_must_agree_with_content_prerequisites ... ok
+test out_of_range_support_level_fails ... ok
+test duplicate_ids_fail ... ok
+test bare_prerequisite_ids_fail_in_0_2 ... ok
+test locale_mismatch_fails ... ok
+test migrated_prerequisites_warn_for_human_review ... ok
+test diagnostics_carry_actionable_locations ... ok
+test draft_unresolved_reference_and_license_gates_block_install ... ok
+test scaffold_draft_is_accepted_as_scaffold_only ... ok
+test deferred_modality_prerequisites_are_representable ... ok
+test matching_dependency_mirror_is_clean ... ok
+test undeclared_reference_warns_in_scaffold_and_errors_in_install ... ok
+test valid_minimal_is_clean_in_both_modes ... ok
+test engine_version_compatibility_is_checked ... ok
+test valid_full_covers_every_content_type ... ok
+
+failures:
+
+---- prerequisite_cycles_fail_with_cycle_path stdout ----
+
+thread 'prerequisite_cycles_fail_with_cycle_path' (990013) panicked at crates/langpack/tests/validate.rs:253:5:
+message must carry the cycle path: prerequisite cycle: es.goal.intro.speak-greeting -> es.goal.intro.greet -> es.goal.intro.speak-greeting
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    prerequisite_cycles_fail_with_cycle_path
+
+test result: FAILED. 21 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+

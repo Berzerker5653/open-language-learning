@@ -1,0 +1,3 @@
+prerequisite_edges:
+  - from: "es.goal.intro.greet"
+    to: "es.lex.greet.hola"

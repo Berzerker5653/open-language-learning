@@ -1,0 +1,29 @@
+goals:
+  - id: "es.goal.intro.greet"
+    description: "Cycle: depends on speak-greeting which depends back"
+    band: "A1"
+    modalities: ["writing"]
+    prerequisites:
+      - target: "es.goal.intro.speak-greeting"
+        dimension: "recall-meaning"
+        required_state: "independent"
+        strength: "hard"
+    required_concepts: []
+    assessment_ids: ["es.assess.intro.greet"]
+    transfer_required: true
+    sources: ["test-source"]
+    review_status: "draft"
+  - id: "es.goal.intro.speak-greeting"
+    description: "Cycle: depends back on greet"
+    band: "A1"
+    modalities: ["writing"]
+    prerequisites:
+      - target: "es.goal.intro.greet"
+        dimension: "recall-meaning"
+        required_state: "independent"
+        strength: "hard"
+    required_concepts: []
+    assessment_ids: ["es.assess.intro.speak-greeting"]
+    transfer_required: true
+    sources: ["test-source"]
+    review_status: "draft"
