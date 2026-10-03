@@ -102,6 +102,7 @@ export function App() {
   const [catalogStatus, setCatalogStatus] = useState("no-catalog-url");
   const [audioMsg, setAudioMsg] = useState<string | null>(null);
   const [langError, setLangError] = useState<string | null>(null);
+  const [onboardError, setOnboardError] = useState<string | null>(null);
 
   useEffect(() => {
     const inv = detectInvoke();
@@ -162,13 +163,21 @@ export function App() {
   }
 
   async function createProfile() {
+    setOnboardError(null);
     if (inv) {
-      const p = (await inv("create_profile", { displayName: profileName })) as {
-        id: string;
-        display_name: string;
-      };
-      setProfileId(p.id);
-      setDisplayName(p.display_name);
+      try {
+        const p = (await inv("create_profile", { displayName: profileName })) as {
+          id: string;
+          display_name: string;
+        };
+        setProfileId(p.id);
+        setDisplayName(p.display_name);
+      } catch (e) {
+        setOnboardError(
+          `Could not create the local profile: ${String(e)} You can try again; nothing was sent off this device.`,
+        );
+        return;
+      }
     } else {
       setProfileId("local-dev-profile");
       setDisplayName(profileName);
@@ -177,21 +186,35 @@ export function App() {
   }
 
   async function install(id: string) {
-    if (inv) await inv("install_pack", { packId: id });
+    setOnboardError(null);
+    if (inv) {
+      try {
+        await inv("install_pack", { packId: id });
+      } catch (e) {
+        setOnboardError(`Could not install that pack: ${String(e)}`);
+        return;
+      }
+    }
     setInstalledPacks((prev) => (prev.includes(id) ? prev : [...prev, id]));
   }
 
   async function finishOnboarding(micEnabled: boolean) {
+    setOnboardError(null);
     if (inv && profileId && selectedPack) {
-      await inv("complete_onboarding", { profileId, packId: selectedPack, micEnabled });
-      const home = (await inv("home_state", { profileId })) as {
-        display_name: string;
-        plan: SessionPlan;
-      };
-      setDisplayName(home.display_name);
-      setPlan(home.plan);
-      const envs = (await inv("world_state", { profileId })) as WorldEnvironment[];
-      setEnvironments(envs);
+      try {
+        await inv("complete_onboarding", { profileId, packId: selectedPack, micEnabled });
+        const home = (await inv("home_state", { profileId })) as {
+          display_name: string;
+          plan: SessionPlan;
+        };
+        setDisplayName(home.display_name);
+        setPlan(home.plan);
+        const envs = (await inv("world_state", { profileId })) as WorldEnvironment[];
+        setEnvironments(envs);
+      } catch (e) {
+        setOnboardError(`Setup could not be completed: ${String(e)}`);
+        return;
+      }
     }
     setStep("done");
   }
@@ -315,6 +338,7 @@ export function App() {
           onEnableMic={() => void finishOnboarding(true)}
           onSkipMic={() => void finishOnboarding(false)}
           onContinue={() => setStep("microphone")}
+          error={onboardError}
         />
       </AppShell>
     );

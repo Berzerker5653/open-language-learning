@@ -33,6 +33,7 @@ export interface OnboardingProps {
   onEnableMic(): void;
   onSkipMic(): void;
   onContinue(): void;
+  error?: string | null;
 }
 
 export function Onboarding(p: OnboardingProps) {
@@ -44,6 +45,11 @@ export function Onboarding(p: OnboardingProps) {
         <li aria-current={p.step === "microphone" ? "step" : undefined}>Microphone</li>
         <li aria-current={p.step === "done" ? "step" : undefined}>Start</li>
       </ol>
+      {p.error && (
+        <p role="alert" className="alert">
+          {p.error}
+        </p>
+      )}
 
       {p.step === "welcome" && (
         <div className="card">

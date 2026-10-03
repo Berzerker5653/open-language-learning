@@ -111,7 +111,7 @@ fn available_packs() -> Vec<PackCandidate> {
 }
 
 fn data_dir() -> PathBuf {
-    match std::env::var("LTS_DATA_DIR") {
+    let dir = match std::env::var("LTS_DATA_DIR") {
         Ok(d) => PathBuf::from(d),
         Err(_) => {
             let home = std::env::var("HOME")
@@ -119,7 +119,11 @@ fn data_dir() -> PathBuf {
                 .unwrap_or_else(|_| PathBuf::from("."));
             home.join(".local/share/openlang")
         }
-    }
+    };
+    // rusqlite will not create missing parent directories; without this a
+    // first run fails to open profiles.db and onboarding silently stalls.
+    let _ = std::fs::create_dir_all(&dir);
+    dir
 }
 
 /// Build + install a bundled pack into the local pack store and record
