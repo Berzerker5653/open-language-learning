@@ -83,6 +83,13 @@ describe("language panel", () => {
     expect(reviewed).not.toContain("verified by us");
   });
 
+  it("explains the empty catalog and offers local import", () => {
+    const html = render({ catalogStatus: "no-catalog-url", catalog: [] });
+    expect(html).toContain("Community packs are coming soon");
+    expect(html).toContain("import a pack file");
+    expect(html).toContain('accept=".lpk"');
+  });
+
   it("surfaces install errors", () => {
     const html = render({ error: "install rejected: bad archive" });
     expect(html).toContain("install rejected");

@@ -100,6 +100,7 @@ export function App() {
   const [activeIds, setActiveIds] = useState<string[]>([]);
   const [catalog, setCatalog] = useState<CatalogEntry[]>([]);
   const [catalogStatus, setCatalogStatus] = useState("no-catalog-url");
+  const [audioMsg, setAudioMsg] = useState<string | null>(null);
   const [langError, setLangError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -226,12 +227,19 @@ export function App() {
     const inv = detectInvoke();
     if (!inv) return;
     const unitId = which === "short" ? DEMO_UNITS.short_unit : DEMO_UNITS.long_unit;
-    const b64 = (await inv("reference_audio", {
-      packId: selectedPack ?? "org.openlanguage.ja-demo",
-      unitId,
-    })) as string;
-    const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
-    playBlobUrl(URL.createObjectURL(new Blob([bytes], { type: "audio/wav" })));
+    try {
+      const b64 = (await inv("reference_audio", {
+        packId: selectedPack ?? "org.openlanguage.ja-demo",
+        unitId,
+      })) as string;
+      const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+      setAudioMsg(null);
+      playBlobUrl(URL.createObjectURL(new Blob([bytes], { type: "audio/wav" })));
+    } catch {
+      setAudioMsg(
+        "No licensed audio is available for this item yet, and this build does not include speech synthesis. Text practice still works.",
+      );
+    }
   }
 
   async function analyzeAttempt(blob: Blob) {
@@ -321,17 +329,20 @@ export function App() {
       ]}
     >
       {route === "pronunciation" ? (
-        <PronunciationPractice
-          shortText={DEMO_UNITS.short_text}
-          longText={DEMO_UNITS.long_text}
-          result={pronResult}
-          recording={recording}
-          hasAttempt={attemptUrl !== null}
-          onRecord={recordAttempt}
-          onStop={stopAndCheck}
-          onPlayReference={(w) => void playReference(w)}
-          onPlayAttempt={() => attemptUrl && playBlobUrl(attemptUrl)}
-        />
+        <>
+          {audioMsg && <p role="status">{audioMsg}</p>}
+          <PronunciationPractice
+            shortText={DEMO_UNITS.short_text}
+            longText={DEMO_UNITS.long_text}
+            result={pronResult}
+            recording={recording}
+            hasAttempt={attemptUrl !== null}
+            onRecord={recordAttempt}
+            onStop={stopAndCheck}
+            onPlayReference={(w) => void playReference(w)}
+            onPlayAttempt={() => attemptUrl && playBlobUrl(attemptUrl)}
+          />
+        </>
       ) : route === "progress" ? (
         <ProgressView rows={progress} />
       ) : route === "language" ? (

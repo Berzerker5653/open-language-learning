@@ -187,21 +187,28 @@ M2 — Local data and learner model
   (`apps/desktop/src-tauri/src/packs.rs`, `apps/desktop/src/language.tsx`,
   `catalog/packs.json`, `templates/language-pack-template/`,
   `docs/packs/CONTRIBUTING.md`) (evidence: `state/evidence/OWNER-DIR-2026-10-03/`).
+- Preview build-out 2026-10-03 (owner-authorized, not a ROADMAP id):
+  original `eo-demo` pack (CC-BY-4.0, unreviewed), single-active-pack
+  switching, empty-catalog + missing-TTS messaging, local release
+  archives + `catalog/preview-entries.json` (no URLs invented),
+  `state/PREVIEW_READINESS.md`, first-run journey test
+  (evidence: `state/evidence/PREVIEW-2026-10-03/`).
 
 ## Next task
 
-Remaining ROADMAP gates after the 2026-10-03 owner direction:
-`REVIEW-001` (qualified reviewer capacity — blocks the whole JA-A1→B2
-content chain) and `SPEECH-007` (owner-supplied preregistered
-calibration recordings, docs/17). `LIC-001` is largely resolved: app
-code is MIT with third-party notices; the Kokoro/espeak-ng TTS chain is
-excluded from distributable builds pending an owner call
-(docs/provenance/speech-distribution-audit.md); the only open piece is
-the content license for project-original pack material (recommend
-CC-BY-4.0). An honestly labeled preview (draft content, community
-packs, guided-but-uncalibrated speech practice) is the sanctioned
-posture while review/calibration remain pending. `active_task` stays
-null: no ROADMAP task is unblocked without owner input.
+**Preview is ready** (owner-authorized 2026-10-03): see
+`state/PREVIEW_READINESS.md` — locally runnable preview with the
+original `eo-demo` + EDRDG-derived `ja-demo` packs, language
+selector/switching, local import, offline use, guided-only speech.
+Stable-release gates stay open and visible: `REVIEW-001` (qualified
+reviewer capacity), `SPEECH-007` (calibration recordings — deferred by
+owner until after the preview), the unresolved authorship of
+`languages/ja-JP` draft prose (excluded from the preview; needs an
+authorship statement or replacement), and the TTS GPLv3 distribution
+call (provider stays out of distributable builds). Content licensing
+is now decided: MIT for app code, CC-BY-4.0 for original pack content,
+CC-BY-SA-4.0 preserved for dictionary-derived data. `active_task`
+stays null: no ROADMAP task is unblocked without owner input.
 
 ## Owner decisions already resolved
 

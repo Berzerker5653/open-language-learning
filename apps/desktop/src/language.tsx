@@ -40,9 +40,9 @@ export interface LanguagePanelProps {
 const STATUS_LABELS: Record<string, string> = {
   live: "Community catalog is live.",
   cached: "Showing the last saved community catalog.",
-  "offline-cached": "Offline — showing the last saved community catalog.",
+  "no-catalog-url":
+    "Community packs are coming soon — this build has no catalog configured yet. Meanwhile you can import a pack file you received from someone below.",
   "offline-no-cache": "Offline, and no catalog has been fetched on this device yet.",
-  "no-catalog-url": "No community catalog is configured for this build.",
 };
 
 function megabytes(bytes: number): string {

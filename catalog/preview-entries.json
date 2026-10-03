@@ -1,0 +1,35 @@
+{
+  "note": "PREVIEW ONLY — not the live catalog. These entries are prepared locally for when a real public repository and GitHub releases exist. The 'url' fields are deliberately unset: do not publish or invent URLs until the owner hosts the releases. To activate: publish dist/preview/*.lpk as versioned GitHub release assets, set url to the release asset URL, and merge these entries into catalog/packs.json. sha256/size were computed from the exact archives built by `langpack build` on 2026-10-03.",
+  "entries": [
+    {
+      "pack_id": "org.openlanguage.ja-demo",
+      "version": "0.1.0",
+      "display_name": "Japanese — demo lexicon (EDRDG-derived, unreviewed)",
+      "locale": "ja-JP",
+      "author": "Open Language Learning Platform (lexicon data © EDRDG)",
+      "license": "CC-BY-SA-4.0",
+      "review_status": "community",
+      "min_sdk_version": "0.1.0",
+      "url": "PENDING-RELEASE-URL",
+      "sha256": "0a284b46630dc8fc644f2bc256dac752514e86172d0292ce3c77c9f6572edd71",
+      "size_bytes": 74939,
+      "archive": "dist/preview/ja-demo-0.1.0.lpk",
+      "attribution": "JMdict/JMnedict © Electronic Dictionary Research and Development Group, CC BY 4.0 SA; reference audio synthesized with Kokoro TTS (Apache-2.0)"
+    },
+    {
+      "pack_id": "org.openlanguage.eo-demo",
+      "version": "0.1.0",
+      "display_name": "Esperanto — original demo (unreviewed)",
+      "locale": "eo",
+      "author": "Open Language Learning Platform contributors",
+      "license": "CC-BY-4.0",
+      "review_status": "community",
+      "min_sdk_version": "0.1.0",
+      "url": "PENDING-RELEASE-URL",
+      "sha256": "b8854f055099dbcdfd1609f2f833e44bc3831eabfbe689784103c68f83d6189d",
+      "size_bytes": 3628,
+      "archive": "dist/preview/eo-demo-0.1.0.lpk",
+      "attribution": "© Open Language Learning Platform contributors — CC BY 4.0; content is ai-assisted original draft, unreviewed"
+    }
+  ]
+}
