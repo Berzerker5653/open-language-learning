@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-03",
-  "active_task": "SPEECH-001",
+  "active_task": "SPEECH-002",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -343,6 +343,29 @@
       ]
     },
     "SPEECH-001": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/evidence/SPEECH-001/bench-summary-2026-10-03.json",
+        "state/evidence/SPEECH-001/ci-2026-10-03.txt",
+        "benchmarks/speech/protocols/ja-JP/asr-0.1.0.yaml",
+        "benchmarks/speech/harness/run_bench.py",
+        "docs/adr/0007-initial-speech-provider-selection.md"
+      ]
+    },
+    "SPEECH-003": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/evidence/SPEECH-003/cargo-test-2026-10-03.txt",
+        "state/evidence/SPEECH-003/ci-2026-10-03.txt",
+        "apps/desktop/src-tauri/src/models.rs",
+        "apps/desktop/src-tauri/models/catalog.json"
+      ]
+    },
+    "SPEECH-002": {
       "status": "in_progress",
       "attempts": 0,
       "last_error": null,

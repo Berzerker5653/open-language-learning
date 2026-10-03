@@ -1,0 +1,43 @@
+# Utterance fixtures for the SPEECH-001 provider benchmark.
+# Text only; audio is generated deterministically by the harness with the
+# pinned TTS model (see generation). Synthetic read-speech: accuracy
+# results are a proxy, never learner-speech claims (docs/17).
+dataset_id: "ja-onramp-synth-0.1.0"
+protocol: "asr-0.1.0"
+generation:
+  method: "tts-synthetic"
+  tool: "sherpa-onnx-offline-tts v1.13.8"
+  model: "kokoro-multi-lang-v1_0 (voice sid 37 = jf_alpha, lang ja)"
+  sample_rate: 24000
+  note: "fixed utterance list; no human recordings; no personal data"
+license:
+  text_source: "project-authored on-ramp phrases (unpublished)"
+  audio_terms: "governed by the TTS model license recorded in the run summary"
+privacy:
+  contains_personal_data: false
+  consent_required: false
+utterances:
+  - id: "u01"
+    text: "こんにちは"
+  - id: "u02"
+    text: "はじめまして"
+  - id: "u03"
+    text: "わたしは ハンター です"
+  - id: "u04"
+    text: "お元気ですか"
+  - id: "u05"
+    text: "ありがとうございます"
+  - id: "u06"
+    text: "すみません"
+  - id: "u07"
+    text: "これは 何ですか"
+  - id: "u08"
+    text: "駅は どこですか"
+  - id: "u09"
+    text: "もう一度 言ってください"
+  - id: "u10"
+    text: "ゆっくり 話してください"
+  - id: "u11"
+    text: "わかりません"
+  - id: "u12"
+    text: "では また明日"

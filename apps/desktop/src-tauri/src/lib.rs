@@ -7,6 +7,7 @@
 //! bundled Japanese pack install (allowlisted ids only — the UI never
 //! supplies paths), and an honest privacy notice (docs/08).
 
+mod models;
 use serde::Serialize;
 use std::path::Path;
 use std::path::PathBuf;
@@ -510,6 +511,42 @@ fn progress_summary(profile_id: String) -> Result<Vec<ProgressRow>, String> {
         .collect())
 }
 
+// ---------------------------------------------------------------------------
+// SPEECH-003: model manager (versioned, checksummed, licensed, removable)
+// ---------------------------------------------------------------------------
+
+/// Catalog + install status. The base app ships zero models; speech
+/// features report `missing` and stay recoverable (docs/05).
+#[tauri::command]
+fn available_models() -> Vec<models::ModelStatus> {
+    models::model_status(&data_dir())
+}
+
+#[tauri::command]
+fn install_model(model_id: String) -> Result<models::InstalledRecord, String> {
+    let entry = models::load_catalog()
+        .models
+        .into_iter()
+        .find(|m| m.id == model_id)
+        .ok_or("unknown model id")?;
+    models::install_model_files(
+        &data_dir(),
+        &entry,
+        &rfc3339_utc(now_secs()),
+        models::download,
+    )
+}
+
+#[tauri::command]
+fn delete_model(model_id: String) -> Result<(), String> {
+    let entry = models::load_catalog()
+        .models
+        .into_iter()
+        .find(|m| m.id == model_id)
+        .ok_or("unknown model id")?;
+    models::delete_model(&data_dir(), &entry)
+}
+
 fn now_secs() -> u64 {
     std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
@@ -555,7 +592,10 @@ pub fn run() {
             complete_onboarding,
             home_state,
             practice_plan,
-            progress_summary
+            progress_summary,
+            available_models,
+            install_model,
+            delete_model
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

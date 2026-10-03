@@ -1,0 +1,86 @@
+protocol_version: "asr-0.1.0"
+created: "2026-10-03"
+task: "SPEECH-001"
+language: "ja-JP"
+
+purpose: >
+  Provider/runtime selection benchmark for local Japanese ASR. Measures
+  an accuracy PROXY on synthetic read-speech fixtures plus operational
+  metrics. It does NOT measure learner-speech accuracy and cannot
+  authorize any automatic pronunciation feature (that gate is
+  SPEECH-007 with owner-supplied calibration data).
+
+features_in_scope:
+  - short-phrase transcription (on-ramp greetings, <= 6 s utterances)
+out_of_scope:
+  - pronunciation scoring
+  - learner-accent generalization claims
+  - prosody/length accuracy (character text accuracy is not acoustic accuracy)
+
+scoring_gates:
+  automatic_scoring: disabled
+  reason: >
+    Numeric false-correction limits and coverage thresholds are not
+    empirically justified by this handoff; per docs/17 unfilled limits
+    keep automatic scoring disabled. This benchmark informs provider
+    choice only.
+
+accuracy_proxy:
+  metric: "character error rate (CER)"
+  normalization: "NFKC; remove whitespace and ASCII+CJK punctuation; kana/kanji preserved (no romanization, no okurigana folding)"
+  unit: "edit distance over characters / reference length"
+  caveat: "synthetic TTS fixtures; a proxy for runtime correctness and stability, not for learner speech"
+
+fixtures:
+  dataset_id: "ja-onramp-synth-0.1.0"
+  kind: "synthetic read-speech (TTS-generated)"
+  note: "permitted for controlled testing only (docs/17); real-learner
+    accuracy claims are prohibited from this dataset"
+
+hardware_tiers:
+  measured:
+    tier: "typical-modern-desktop"
+    cpu: "32-core x86_64"
+    memory_gb: 125
+    os: "Linux (cachyos 7.2.8)"
+    backend: "CPU"
+    threads: 4
+  not_measured:
+    - tier: "low-desktop-laptop"
+      reason: "no representative low-tier device in this environment"
+    - tier: "gpu-accelerated"
+      reason: "CUDA toolchain present but CPU builds pinned for
+        reproducibility; GPU builds deferred to SPEECH-002 device matrix"
+
+latency_definition:
+  start: "process/recognizer invocation with warmed model"
+  end: "final transcript emitted"
+  cold_load: "measured separately as first invocation after model install"
+  buckets: "utterance length buckets recorded per trial"
+  trials: 3
+
+recorded_fields:
+  - cer
+  - latency_p50_ms
+  - latency_p95_ms
+  - cold_load_ms
+  - real_time_factor
+  - peak_rss_mb
+  - model_disk_mb
+  - timestamps_available
+  - license_code
+  - license_model
+  - platforms
+  - offline_verified
+
+exclusion_rules:
+  - "invocations that crash or emit no audio path are recorded as
+    provider-error, excluded from latency, counted in failures"
+
+sampling_plan:
+  utterances: 12
+  generated_with_pinned_seed: true
+
+release_limits:
+  - "provider choice may be revised when low-tier or learner-speech
+    measurements contradict these proxy results"

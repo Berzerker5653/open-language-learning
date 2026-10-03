@@ -1,0 +1,94 @@
+{
+  "candidate": "whisper.cpp",
+  "model": "ggml-tiny",
+  "cold_load_ms": 303.2,
+  "warm_latency_p50_ms": 336.8,
+  "warm_latency_p95_ms": 431.7,
+  "real_time_factor_median": 0.273,
+  "peak_rss_delta_mb": 180.4,
+  "model_disk_mb": 77.7,
+  "model_sha256": {
+    "ggml-tiny.bin": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21"
+  },
+  "timestamps_available": true,
+  "license_code": "MIT",
+  "license_model": "MIT (OpenAI model weights)",
+  "platforms": ["linux-x86_64"],
+  "offline_verified": true,
+  "invocation_failures": 0,
+  "cer_per_utterance": [
+    {
+      "id": "u01",
+      "ref": "こんにちは",
+      "hyp": "こんにちは",
+      "cer": 0.0
+    },
+    {
+      "id": "u02",
+      "ref": "はじめまして",
+      "hyp": "アディメマシテー",
+      "cer": 1.1667
+    },
+    {
+      "id": "u03",
+      "ref": "わたしは ハンター です",
+      "hyp": "私はハンターデース",
+      "cer": 0.5556
+    },
+    {
+      "id": "u04",
+      "ref": "お元気ですか",
+      "hyp": "おりすうか",
+      "cer": 0.6667
+    },
+    {
+      "id": "u05",
+      "ref": "ありがとうございます",
+      "hyp": "ありがとうございました。",
+      "cer": 0.2
+    },
+    {
+      "id": "u06",
+      "ref": "すみません",
+      "hyp": "すみません",
+      "cer": 0.0
+    },
+    {
+      "id": "u07",
+      "ref": "これは 何ですか",
+      "hyp": "こういう針数か",
+      "cer": 0.7143
+    },
+    {
+      "id": "u08",
+      "ref": "駅は どこですか",
+      "hyp": "ハードコリ数か",
+      "cer": 0.8571
+    },
+    {
+      "id": "u09",
+      "ref": "もう一度 言ってください",
+      "hyp": "もう、レクダサイ",
+      "cer": 0.8182
+    },
+    {
+      "id": "u10",
+      "ref": "ゆっくり 話してください",
+      "hyp": "入口し、指抵ください。",
+      "cer": 0.6364
+    },
+    {
+      "id": "u11",
+      "ref": "わかりません",
+      "hyp": "おわかじませ",
+      "cer": 0.5
+    },
+    {
+      "id": "u12",
+      "ref": "では また明日",
+      "hyp": "デーハマーター",
+      "cer": 1.0
+    }
+  ],
+  "cer_mean": 0.5929
+}

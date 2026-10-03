@@ -138,10 +138,19 @@ M2 — Local data and learner model
   ja-demo on-ramp (encounter text placeholder -> recall -> IME typing),
   state persists, restart resumes with due reviews; E2E test covers the
   flow; no streak/heart mechanics (evidence: `state/evidence/M4-E2E/`).
+- `SPEECH-001` — reproducible local ASR benchmark (whisper.cpp vs
+  sherpa-onnx, pinned models/checksums, CER proxy + latency/RAM/size/
+  license/timestamps; GPU + low tiers recorded unmeasured); ADR-0007
+  selects sherpa-onnx default, whisper.cpp fallback (evidence:
+  `state/evidence/SPEECH-001/`).
+- `SPEECH-003` — model manager: versioned/checksummed/licensed
+  removable models, staged atomic installs, corruption-aware status,
+  on-demand download, base app bundles zero models (evidence:
+  `state/evidence/SPEECH-003/`).
 
 ## Next task
 
-`SPEECH-001` — first speech milestone task (M5, see ROADMAP).
+`SPEECH-002` — microphone quality gate, VAD, local ASR adapter (M5, P0).
 Note: `REVIEW-001` (reviewer capacity) and `LIC-001` (final licensing
 decisions) are owner-only and remain open blockers for release.
 
