@@ -199,7 +199,7 @@ goals:
         strength: helpful
     required_concepts:
       - ja.grammar.request-may-might
-      - ja.pragmatics.softening
+      - ja.strategy.softening
     assessment_ids: ["ja.assess.a2.invite-scenario"]
     transfer_required: true
     sources: ["jf-standard"]
@@ -274,7 +274,7 @@ goals:
         required_state: independent
         strength: hard
     required_concepts:
-      - ja.pragmatics.apology-repair
+      - ja.strategy.apology-repair
       - ja.grammar.potential-passive-soft
     assessment_ids: ["ja.assess.b1.service-scenario"]
     transfer_required: true
@@ -322,7 +322,7 @@ goals:
         strength: hard
     required_concepts:
       - ja.grammar.concession-temo-ni
-      - ja.pragmatics.hedging-indirectness
+      - ja.strategy.hedging
     assessment_ids:
       - ja.assess.b2.discussion-live
       - ja.assess.b2.discussion-transfer
@@ -347,7 +347,7 @@ goals:
         strength: hard
     required_concepts:
       - ja.grammar.connective-discourse
-      - ja.pragmatics.register-written
+      - ja.strategy.register-selection
     assessment_ids: ["ja.assess.b2.write-structured"]
     transfer_required: true
     sources: ["jf-standard"]

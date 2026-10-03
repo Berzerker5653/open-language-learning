@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-10-02",
-  "active_task": "JA-RES-005",
+  "updated": "2026-10-03",
+  "active_task": "JA-RES-006",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -230,6 +230,19 @@
       ]
     },
     "JA-RES-005": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/JA-RES-005.md",
+        "state/evidence/JA-RES-005/cargo-test-2026-10-03.txt",
+        "state/evidence/JA-RES-005/ci-2026-10-03.txt",
+        "tests/fixtures/packs/ja-curriculum-draft/manifest.yaml",
+        "tests/fixtures/packs/ja-curriculum-draft/grammar/dependencies.yaml",
+        "tests/fixtures/packs/ja-curriculum-draft/language/pragmatics.yaml"
+      ]
+    },
+    "JA-RES-006": {
       "status": "in_progress",
       "attempts": 0,
       "last_error": null,

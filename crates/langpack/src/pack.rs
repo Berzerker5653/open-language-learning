@@ -20,14 +20,14 @@ pub enum Mode {
 }
 
 #[derive(Clone, Debug)]
-pub(crate) struct Instance {
-    pub(crate) file: String,
-    pub(crate) schema: &'static str,
+pub struct Instance {
+    pub file: String,
+    pub schema: &'static str,
     /// JSON pointer prefix of this instance within its file.
-    pub(crate) pointer: String,
-    pub(crate) value: Value,
+    pub pointer: String,
+    pub value: Value,
     /// True when validated against the 0.2 contract.
-    pub(crate) v2: bool,
+    pub v2: bool,
 }
 
 pub struct Pack {
@@ -42,6 +42,16 @@ pub struct Pack {
 }
 
 impl Pack {
+    /// Loaded schema-validated instances (audit/analysis consumers).
+    pub fn instances(&self) -> &[Instance] {
+        &self.instances
+    }
+
+    /// Parsed structural (non-schema) documents by relative path.
+    pub fn structural_docs(&self) -> &[(String, Value)] {
+        &self.structural
+    }
+
     /// Load every classified document under `root`. Parse failures are
     /// collected, not fatal, so one bad file does not hide the rest.
     pub fn load_dir(root: &Path) -> Result<Pack, io::Error> {

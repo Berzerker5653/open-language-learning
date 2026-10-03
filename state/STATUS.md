@@ -76,10 +76,35 @@ M2 — Local data and learner model
   silently overwrites (NewProfile/PreserveId/Overwrite modes),
   recordings opt-in, no binary payloads (evidence:
   `state/evidence/DATA-002/`).
+- `JA-RES-001` — authoritative Japanese source + license matrix:
+  31 entries across 7 categories with verified licenses,
+  classification (allowed/derived/reference-only/blocked/unknown) and
+  alternative-or-blocker for every non-allowed entry; contract tests
+  (evidence: `state/evidence/JA-RES-001/`).
+- `JA-RES-002` — Japanese phonology assessment model: segment/
+  phonotactics/prosody inventory (`docs/assessment/JA_PHONOLOGY.yaml`,
+  ids `ja.phon.*`), reference-variety + variant policy, pitch accent
+  assess-guided only pending SPEECH-007 calibration (evidence:
+  `state/evidence/JA-RES-002/`).
+- `JA-RES-003` — orthography + script policy: kana on-ramp, kanji
+  selection by frequency/communicative value (never arbitrary lists),
+  adaptive furigana, romaji fade support, comprehension/production
+  competency separation (`ja.orth.*` ids) (evidence:
+  `state/evidence/JA-RES-003/`).
+- `JA-RES-004` — Japanese goal graph: 15 draft goals on-ramp→B2 with
+  scoped prerequisite records, JF-standard band refs, required
+  concepts; DAG validated, all `review_status: draft` (evidence:
+  `state/evidence/JA-RES-004/`).
+- `JA-RES-005` — grammar/pragmatics dependency map: draft pack
+  `tests/fixtures/packs/ja-curriculum-draft` with 21 concepts,
+  authoritative concept→concept dependency edges (cycle +
+  missing-dependency checked), 6-register 0–4 formality model with
+  16 multi-register situations — politeness contextual, not binary
+  (evidence: `state/evidence/JA-RES-005/`).
 
 ## Next task
 
-`JA-RES-001` — authoritative Japanese source + license matrix (M3, P0).
+`JA-RES-006` — reviewed lexical import pipeline (M3, P1).
 Note: `REVIEW-001` (reviewer capacity) and `LIC-001` (final licensing
 decisions) are owner-only and remain open blockers for release.
 

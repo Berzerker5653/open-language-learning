@@ -36,12 +36,12 @@ fn required_feature_areas_are_encoded() {
         .map(|e| e["id"].as_str().unwrap().to_string())
         .collect();
     for required in [
-        "ja.phonotactics.mora-rhythm",
-        "ja.phonotactics.moraic-nasal",
-        "ja.phonotactics.gemination",
-        "ja.phonotactics.vowel-length",
-        "ja.prosody.lexical-pitch-accent",
-        "ja.prosody.phrase-intonation",
+        "ja.phon.mora-rhythm",
+        "ja.phon.moraic-nasal",
+        "ja.phon.gemination",
+        "ja.phon.vowel-length",
+        "ja.phon.pitch-accent-lexical",
+        "ja.phon.phrase-intonation",
     ] {
         assert!(ids.iter().any(|i| i == required), "missing {required}");
     }
@@ -72,7 +72,7 @@ fn no_automatic_scoring_without_calibration() {
     let prosody = doc["prosody"].as_sequence().unwrap();
     let accent = prosody
         .iter()
-        .find(|e| e["id"].as_str() == Some("ja.prosody.lexical-pitch-accent"))
+        .find(|e| e["id"].as_str() == Some("ja.phon.pitch-accent-lexical"))
         .unwrap();
     assert_eq!(accent["mode"].as_str().unwrap(), "assess-guided");
 }

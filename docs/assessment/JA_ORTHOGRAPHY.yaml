@@ -5,26 +5,26 @@
 schema_version: "0.2"
 
 scripts:
-  - id: ja.script.hiragana
+  - id: ja.orth.hiragana
     name: Hiragana
     direction: ltr
     unicode_blocks:
       - Hiragana
     teaching_order: 0
-  - id: ja.script.katakana
+  - id: ja.orth.katakana
     name: Katakana
     direction: ltr
     unicode_blocks:
       - Katakana
     teaching_order: 1
-  - id: ja.script.kanji
+  - id: ja.orth.kanji
     name: Kanji
     direction: ltr
     unicode_blocks:
       - CJK Unified Ideographs
       - CJK Unified Ideographs Extension A
     teaching_order: 2
-  - id: ja.script.latin
+  - id: ja.orth.latin
     name: Latin (romaji scaffold + native mixed-script use)
     direction: ltr
     unicode_blocks:

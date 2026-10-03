@@ -1,0 +1,33 @@
+# JA-RES-003 — Japanese scripts (schema 0.2 orthography document).
+# Scaffold policy + competency separation:
+# docs/assessment/JA_ORTHOGRAPHY_POLICY.yaml (+ .md narrative).
+
+schema_version: "0.2"
+
+scripts:
+  - id: ja.orth.hiragana
+    name: Hiragana
+    direction: ltr
+    unicode_blocks:
+      - Hiragana
+    teaching_order: 0
+  - id: ja.orth.katakana
+    name: Katakana
+    direction: ltr
+    unicode_blocks:
+      - Katakana
+    teaching_order: 1
+  - id: ja.orth.kanji
+    name: Kanji
+    direction: ltr
+    unicode_blocks:
+      - CJK Unified Ideographs
+      - CJK Unified Ideographs Extension A
+    teaching_order: 2
+  - id: ja.orth.latin
+    name: Latin (romaji scaffold + native mixed-script use)
+    direction: ltr
+    unicode_blocks:
+      - Basic Latin
+      - Latin-1 Supplement
+    teaching_order: 3

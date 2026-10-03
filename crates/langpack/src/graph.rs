@@ -17,6 +17,11 @@ pub struct Graph {
     pub mirror_edges: Option<Vec<(String, String)>>,
     pub goals: Vec<String>,
     pub delivered: HashSet<String>,
+    /// All instance ids in the pack (goals, concepts, lexicon, ...).
+    pub known_ids: HashSet<String>,
+    /// Whether the pack uses the 0.2 contract (concept dependency
+    /// edges live in the mirror; 0.1 keeps them on concept records).
+    pub v2: bool,
 }
 
 /// Collect the graph from loaded instances and structural documents.
@@ -28,8 +33,12 @@ pub(crate) fn build(
     let mut content_edges = Vec::new();
     let mut goals = Vec::new();
     let mut delivered = HashSet::new();
+    let mut known_ids = HashSet::new();
 
     for inst in instances {
+        if let Some(id) = inst.value.get("id").and_then(Value::as_str) {
+            known_ids.insert(id.to_string());
+        }
         match inst.schema {
             "goal" => {
                 if let Some(id) = inst.value.get("id").and_then(Value::as_str) {
@@ -109,6 +118,8 @@ pub(crate) fn build(
         mirror_edges,
         goals,
         delivered,
+        known_ids,
+        v2,
     }
 }
 
@@ -128,6 +139,24 @@ pub(crate) fn check(graph: &Graph) -> Vec<Diagnostic> {
     let mut adj: HashMap<&str, Vec<&str>> = HashMap::new();
     for (from, to) in &graph.content_edges {
         adj.entry(from).or_default().push(to);
+    }
+
+    // v0.2: concept→concept dependency edges are authoritative in the
+    // mirror (the concept schema carries no prerequisites field); they
+    // join cycle detection and the missing-dependency check but are
+    // exempt from goal-mirror comparison.
+    let mut concept_edges: Vec<(String, String)> = Vec::new();
+    if graph.v2 {
+        if let Some(mirror) = &graph.mirror_edges {
+            for e in mirror {
+                if !graph.goals.contains(&e.0) {
+                    concept_edges.push(e.clone());
+                }
+            }
+        }
+    }
+    for (from, to) in &concept_edges {
+        adj.entry(from.as_str()).or_default().push(to.as_str());
     }
 
     // --- cycles (authoritative content edges) ---
@@ -194,6 +223,9 @@ pub(crate) fn check(graph: &Graph) -> Vec<Diagnostic> {
         let content: HashSet<&(String, String)> = graph.content_edges.iter().collect();
         let mirrorset: HashSet<&(String, String)> = mirror.iter().collect();
         for e in mirror.iter() {
+            if graph.v2 && !graph.goals.contains(&e.0) {
+                continue; // authoritative concept dependency edge
+            }
             if !content.contains(e) {
                 diags.push(Diagnostic::new(
                     file,
@@ -208,6 +240,9 @@ pub(crate) fn check(graph: &Graph) -> Vec<Diagnostic> {
             }
         }
         for e in &graph.content_edges {
+            if graph.v2 && !graph.goals.contains(&e.0) {
+                continue;
+            }
             if !mirrorset.contains(e) {
                 diags.push(Diagnostic::new(
                     file,
@@ -220,6 +255,32 @@ pub(crate) fn check(graph: &Graph) -> Vec<Diagnostic> {
                     Severity::Warning,
                 ));
             }
+        }
+    }
+
+    // --- missing dependencies: every edge endpoint must resolve ---
+    for (from, to) in graph.content_edges.iter().chain(concept_edges.iter()) {
+        if !graph.known_ids.contains(to) {
+            diags.push(Diagnostic::new(
+                file,
+                "",
+                "missing_dependency",
+                format!(
+                    "prerequisite target {to:?} (from {from:?}) is not an instance in this pack"
+                ),
+                Severity::Warning,
+            ));
+        }
+    }
+    for (from, _to) in &concept_edges {
+        if !graph.known_ids.contains(from) {
+            diags.push(Diagnostic::new(
+                file,
+                "",
+                "missing_dependency",
+                format!("dependency source {from:?} is not an instance in this pack"),
+                Severity::Warning,
+            ));
         }
     }
 

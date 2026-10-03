@@ -1,0 +1,5 @@
+{"id":"lic-original-draft","scope":{"kind":"pack-original"},"license":{"spdx":"UNLICENSED","pending":true,"notes":"final content license is owner decision LIC-001"},"redistribution_allowed":false}
+{"id":"lic-model-output","scope":{"kind":"model-output"},"license":{"spdx":"UNLICENSED","pending":true,"notes":"AI-assisted drafts; human review (REVIEW-001) and owner licensing (LIC-001) outstanding"},"redistribution_allowed":false}
+{"id":"lic-jmdict-derived","scope":{"kind":"derived-from-source","source_id":"edrdg-jmdict"},"license":{"spdx":"CC-BY-SA-4.0"},"redistribution_allowed":true,"attribution":"JMdict/JMnedict © EDRDG, CC BY-SA 4.0"}
+{"id":"lic-kanjidic-derived","scope":{"kind":"derived-from-source","source_id":"edrdg-kanjidic2"},"license":{"spdx":"CC-BY-SA-4.0"},"redistribution_allowed":true,"attribution":"KANJIDIC2 © EDRDG, CC BY-SA 4.0"}
+{"id":"lic-jld-derived","scope":{"kind":"derived-from-source","source_id":"jld-ccby-sa"},"license":{"spdx":"CC-BY-SA-4.0"},"redistribution_allowed":true,"attribution":"informed by japanese-language-data (CC BY-SA 4.0)"}

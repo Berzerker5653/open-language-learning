@@ -1,0 +1,9 @@
+schema_version: "0.2"
+unicode_normalization: "NFC"
+rules:
+  - id: "fold-long-vowel-matching"
+    description: "Hiragana/katakana long-vowel spelling folding for answer matching only, never display"
+    scope: "matching"
+  - id: "normalize-prolonged-mark"
+    description: "Katakana prolonged sound mark (ー) normalization for matching only"
+    scope: "matching"

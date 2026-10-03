@@ -1,0 +1,23 @@
+schema_version: "0.2"
+pack_id: "org.openlanguage.ja-draft"
+display_name: "Japanese (draft curriculum pack)"
+version: "0.1.0"
+target_locale: "ja-JP"
+source_locales: ["en-US"]
+engine:
+  min_version: "0.1.0"
+  max_version_exclusive: "2.0.0"
+maturity: "community"
+scripts:
+  - "ja.orth.hiragana"
+  - "ja.orth.katakana"
+  - "ja.orth.kanji"
+  - "ja.orth.latin"
+capabilities:
+  listening: true
+  speaking: true
+  reading: true
+  writing: true
+license:
+  content_license: "UNLICENSED"
+  redistribution_allowed: false

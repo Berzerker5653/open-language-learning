@@ -1,0 +1,7 @@
+schema_version: "0.2"
+target_locale: "ja-JP"
+language_name_english: "Japanese (draft)"
+language_name_native: "日本語"
+source_locales: ["en-US"]
+external_ids:
+  iso639-3: "jpn"

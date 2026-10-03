@@ -11,9 +11,9 @@ The encoded inventory covers the docs/06 required feature set:
 - **segments**: five vowels (with the [ɯ] vs [u] learner contrast),
   consonant set relevant to feedback including [ɕ]/[tɕ]/[ɾ] contrasts,
   reference-only [ɸ] and [ʔ];
-- **length**: `ja.phonotactics.vowel-length` (contrastive long vowels,
+- **length**: `ja.phon.vowel-length` (contrastive long vowels,
   script-convention differences);
-- **gemination**: `ja.phonotactics.gemination` (mora-counting
+- **gemination**: `ja.phon.gemination` (mora-counting
   contrast; /N/ and /ʔ/ never geminate; /ɡ/ variable realization);
 - **mora structure**: `mora-rhythm`, `moraic-nasal` (context-conditioned
   [m n ŋ ɴ]), `syllable-shape`, `palatalization`;

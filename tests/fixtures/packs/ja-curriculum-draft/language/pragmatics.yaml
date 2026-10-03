@@ -1,0 +1,99 @@
+# JA-RES-005 — register/politeness modeled contextually: multiple
+# named registers on a formality scale + situation→typical-register
+# mappings. There is no single polite/plain boolean anywhere in the
+# contract; choice depends on situation, relationship, and topic.
+schema_version: "0.2"
+
+registers:
+  - id: ja.register.casual
+    name: "Casual (tameguchi)"
+    description: "Plain forms with close family/friends; also internal thought style."
+    formality: 0
+  - id: ja.register.polite-standard
+    name: "Standard polite (desu/masu)"
+    description: "Default learner-safe register for acquaintances and daily transactions."
+    formality: 2
+  - id: ja.register.formal-business
+    name: "Formal business (teineigo-heavy)"
+    description: "Written and spoken business communication with elevated polite vocabulary."
+    formality: 3
+  - id: ja.register.respectful
+    name: "Respectful (sonkeigo)"
+    description: "Elevating the other party; specific verb substitutions, not just masu."
+    formality: 4
+  - id: ja.register.humble
+    name: "Humble (kenjogo)"
+    description: "Lowering self to elevate the other; distinct substitution set."
+    formality: 4
+  - id: ja.register.honorific-negotiation
+    name: "Softening/negotiation register"
+    description: "Indirect, hedged phrasing for requests/refusals where bluntness is face-threatening."
+    formality: 3
+
+situations:
+  - id: ja.situation.first-meeting
+    name: "First meeting"
+    description: "Introductions among new acquaintances."
+    typical_registers: ["ja.register.polite-standard"]
+  - id: ja.situation.friends-chat
+    name: "Friends chatting"
+    description: "Casual conversation between friends."
+    typical_registers: ["ja.register.casual"]
+    notes: "Code-switching to polite occurs even among friends for jokes/quotes; variation is natural."
+  - id: ja.situation.work-casual
+    name: "Casual workplace"
+    description: "Close colleagues at work."
+    typical_registers: ["ja.register.casual", "ja.register.polite-standard"]
+  - id: ja.situation.work-meeting
+    name: "Work meeting"
+    description: "Internal or client meetings."
+    typical_registers: ["ja.register.polite-standard", "ja.register.formal-business"]
+  - id: ja.situation.work-writing
+    name: "Work writing"
+    description: "Emails, reports."
+    typical_registers: ["ja.register.formal-business"]
+  - id: ja.situation.service-encounter
+    name: "Service encounter"
+    description: "Staff and customer exchange, including complaints."
+    typical_registers: ["ja.register.polite-standard", "ja.register.humble"]
+    notes: "Staff use humble forms; customers may use plain or polite depending on stance."
+  - id: ja.situation.shopping-quick
+    name: "Quick shopping"
+    description: "Market/convenience transactions."
+    typical_registers: ["ja.register.polite-standard", "ja.register.casual"]
+  - id: ja.situation.restaurant
+    name: "Restaurant"
+    description: "Ordering and dining."
+    typical_registers: ["ja.register.polite-standard"]
+  - id: ja.situation.classroom
+    name: "Classroom"
+    description: "Teacher-learner interaction."
+    typical_registers: ["ja.register.polite-standard"]
+  - id: ja.situation.classroom-discussion
+    name: "Classroom discussion"
+    description: "Structured opinion exchange."
+    typical_registers: ["ja.register.polite-standard"]
+  - id: ja.situation.debate
+    name: "Debate"
+    description: "Contested-topic discussion."
+    typical_registers: ["ja.register.polite-standard", "ja.register.formal-business"]
+  - id: ja.situation.home-tour
+    name: "Home tour"
+    description: "Describing rooms and objects at home."
+    typical_registers: ["ja.register.casual", "ja.register.polite-standard"]
+  - id: ja.situation.public-notices
+    name: "Public notices"
+    description: "Signs and notices in public spaces."
+    typical_registers: ["ja.register.formal-business"]
+  - id: ja.situation.media-daily
+    name: "Daily media"
+    description: "News summaries, forums, podcasts."
+    typical_registers: ["ja.register.polite-standard", "ja.register.formal-business"]
+  - id: ja.situation.lecture
+    name: "Lecture"
+    description: "One-to-many formal talk."
+    typical_registers: ["ja.register.formal-business"]
+  - id: ja.situation.labeled-materials
+    name: "Labeled materials"
+    description: "Reading labels, menus, app screens."
+    typical_registers: ["ja.register.polite-standard"]

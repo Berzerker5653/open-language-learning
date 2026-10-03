@@ -127,49 +127,49 @@ segments:
     examples: ["促音 realization", "glottalization in natural speech"]
 
 phonotactics:
-  - id: ja.phonotactics.mora-rhythm
+  - id: ja.phon.mora-rhythm
     description: >
       Timing organizes around morae; teaching explains mora-based
       rhythm and contrasts WITHOUT claiming every mora has equal
       acoustic duration (docs/06 §Phonology).
     mode: teach
-  - id: ja.phonotactics.moraic-nasal
+  - id: ja.phon.moraic-nasal
     description: >
       Syllable-final moraic nasal /N/ with context-conditioned
       realizations [m n ŋ ɴ]; contrastive against /n/ + vowel
       (e.g. しん vs しい-type contrasts).
     mode: teach
-  - id: ja.phonotactics.gemination
+  - id: ja.phon.gemination
     description: >
       Geminate consonant (sokuon っ /Q/): duration contrast is
       mora-counting, e.g. きて vs きて; /N/ and /ʔ/ do not geminate;
       /ɡ/ gemination realized variably ([kː] ~ [ɡː]).
     mode: teach
-  - id: ja.phonotactics.vowel-length
+  - id: ja.phon.vowel-length
     description: >
       Contrastive long vowels (e.g. おばさん/おばあさん); orthographic
       conventions differ for native vs loanword spellings and must be
       taught per script convention.
     mode: teach
-  - id: ja.phonotactics.palatalization
+  - id: ja.phon.palatalization
     description: >
       Palatalized (y-glide) sequences: kyaku, hyaku, byakko etc.;
       contrast with plain sequences.
     mode: teach
-  - id: ja.phonotactics.vowel-devoicing
+  - id: ja.phon.vowel-devoicing
     description: >
       High vowels [i ɯ] devoice between voiceless consonants and
       word-finally after them (e.g. すき, です). Natural variation,
       not learner error; F0 is unavailable in devoiced regions, not
       low pitch (docs/05).
     mode: reference-only
-  - id: ja.phonotactics.syllable-shape
+  - id: ja.phon.syllable-shape
     description: >
       Core shape (C)V plus moraic /N/ and geminate /Q/; loanwords add
       permitted adaptations (epenthetic vowels, final-nasal
       substitution). Descriptive, not a production rule.
     mode: reference-only
-  - id: ja.phonotactics.rendaku
+  - id: ja.phon.rendaku
     description: >
       Sequential voicing (rendaku) is partially unpredictable and
       lexeme-specific; teach per item with dictionary support, never
@@ -177,7 +177,7 @@ phonotactics:
     mode: reference-only
 
 prosody:
-  - id: ja.prosody.lexical-pitch-accent
+  - id: ja.phon.pitch-accent-lexical
     description: >
       Word-level pitch accent with heiban/atamadaka/nakadaka/kifugo
       patterns and contrastive minimal pairs (e.g. ame[HLL] vs
@@ -189,7 +189,7 @@ prosody:
     orthographic_cues:
       - "accent-kifugo-numbering"
       - "downstep-arrows-in-teaching-material"
-  - id: ja.prosody.phrase-intonation
+  - id: ja.phon.phrase-intonation
     description: >
       Phrase/sentence contours depend on phrase boundaries, focus,
       sentence type, and following material. Isolated-word dictionary
@@ -197,13 +197,13 @@ prosody:
       contour (docs/05 §Japanese pitch-accent caution). Targets
       require reviewed utterance context.
     mode: reference-only
-  - id: ja.prosody.mora-timing-instruction
+  - id: ja.phon.mora-timing-instruction
     description: >
       Teaching framing for rhythm: mora-based contrasts (short vs
       geminate, short vs long vowel, N contrasts) taught explicitly;
       no equal-duration claim.
     mode: teach
-  - id: ja.prosody.final-particle-prosody
+  - id: ja.phon.final-particle-prosody
     description: >
       Particle-level pitch interactions (e.g. subject/object particles
       after accented stems) taught as part of phrase patterns, with
