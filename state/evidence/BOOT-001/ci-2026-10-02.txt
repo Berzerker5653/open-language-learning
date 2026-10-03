@@ -1,0 +1,239 @@
+== rust: format ==
+== rust: clippy ==
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.04s
+== rust: test ==
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.04s
+     Running unittests src/lib.rs (target/debug/deps/lts_audio-a12e8dcdce380416)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_domain-a12544c596b54e78)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_langpack-856eec435b715bb1)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/langpack-22f1be930f30553c)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_learner_model-c33725055173ed96)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_scheduler-af86e5297225adbe)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_security-b22720a97ca7b87d)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_speech_api-4fc97a99314b8835)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_speech_runtime-2bc54a0c7deabc2b)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_storage-721357cbe44590a7)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_audio
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_domain
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_langpack
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_learner_model
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_scheduler
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_security
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_speech_api
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_speech_runtime
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_storage
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+== web: install ==
+Scope: all 7 workspace projects
+✓ Lockfile passes supply-chain policies (verified 40s ago)
+Lockfile is up to date, resolution step is skipped
+Done in 14ms using pnpm v12.8.1
+== web: format ==
+$ prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+== web: typecheck ==
+$ pnpm -r typecheck
+packages/learner-ui typecheck$ tsc --noEmit
+packages/schemas typecheck$ tsc --noEmit
+packages/scenario-ui typecheck$ tsc --noEmit
+packages/shared typecheck$ tsc --noEmit
+packages/learner-ui typecheck: Done
+packages/ui typecheck$ tsc --noEmit
+packages/scenario-ui typecheck: Done
+packages/schemas typecheck: Done
+packages/shared typecheck: Done
+packages/ui typecheck: Done
+apps/desktop typecheck$ tsc --noEmit
+apps/desktop typecheck: Done
+== web: test ==
+$ pnpm -r test
+Scope: 6 of 7 workspace projects
+packages/scenario-ui test$ vitest run --passWithNoTests
+packages/learner-ui test$ vitest run --passWithNoTests
+packages/shared test$ vitest run --passWithNoTests
+packages/schemas test$ vitest run --passWithNoTests
+packages/schemas test: 
+packages/schemas test:  RUN  v5.0.3 /home/hunter/game-dev/LTS/packages/schemas
+packages/schemas test: 
+packages/schemas test: No test files found, exiting with code 0
+packages/schemas test: 
+packages/schemas test: include: **/*.{test,spec}.?(c|m)[jt]s?(x)
+packages/schemas test: exclude:  **/node_modules/**, **/.git/**
+packages/schemas test: 
+packages/shared test: 
+packages/scenario-ui test: 
+packages/shared test:  RUN  v5.0.3 /home/hunter/game-dev/LTS/packages/shared
+packages/shared test: 
+packages/scenario-ui test:  RUN  v5.0.3 /home/hunter/game-dev/LTS/packages/scenario-ui
+packages/scenario-ui test: 
+packages/learner-ui test: 
+packages/learner-ui test:  RUN  v5.0.3 /home/hunter/game-dev/LTS/packages/learner-ui
+packages/learner-ui test: 
+packages/scenario-ui test: No test files found, exiting with code 0
+packages/scenario-ui test: 
+packages/scenario-ui test: include: **/*.{test,spec}.?(c|m)[jt]s?(x)
+packages/scenario-ui test: exclude:  **/node_modules/**, **/.git/**
+packages/scenario-ui test: 
+packages/learner-ui test: No test files found, exiting with code 0
+packages/learner-ui test: 
+packages/learner-ui test: include: **/*.{test,spec}.?(c|m)[jt]s?(x)
+packages/learner-ui test: exclude:  **/node_modules/**, **/.git/**
+packages/learner-ui test: 
+packages/schemas test: Done
+packages/ui test$ vitest run --passWithNoTests
+packages/scenario-ui test: Done
+packages/learner-ui test: Done
+packages/shared test: 
+packages/shared test:  Test Files  1 passed (1)
+packages/shared test:       Tests  2 passed (2)
+packages/shared test:    Start at  22:06:04
+packages/shared test:    Duration  107ms (transform 54%, import 29%, worker 9%, tests 8%)
+packages/shared test: 
+packages/shared test: Done
+packages/ui test: 
+packages/ui test:  RUN  v5.0.3 /home/hunter/game-dev/LTS/packages/ui
+packages/ui test: 
+packages/ui test: No test files found, exiting with code 0
+packages/ui test: 
+packages/ui test: include: **/*.{test,spec}.?(c|m)[jt]s?(x)
+packages/ui test: exclude:  **/node_modules/**, **/.git/**
+packages/ui test: 
+packages/ui test: Done
+apps/desktop test$ vitest run --passWithNoTests
+apps/desktop test: 
+apps/desktop test:  RUN  v5.0.3 /home/hunter/game-dev/LTS/apps/desktop
+apps/desktop test: 
+apps/desktop test: No test files found, exiting with code 0
+apps/desktop test: 
+apps/desktop test: include: **/*.{test,spec}.?(c|m)[jt]s?(x)
+apps/desktop test: exclude:  **/node_modules/**, **/.git/**
+apps/desktop test: 
+apps/desktop test: Done
+== web: build ==
+$ pnpm -r build
+$ vite build
+vite v8.3.2 building client environment for production...
+transforming...
+✓ 17 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                  0.34 kB │ gzip:  0.24 kB
+dist/assets/index-Bq6ux4cw.js  220.43 kB │ gzip: 68.90 kB
+
+✓ built in 83ms
+== schemas/handoff ==
+WARN languages/ja-JP: draft distribution license unresolved; no redistribution/release authorization inferred
+WARN languages/ja-JP: explicit unresolved draft assessment ja.assess.onramp.greeting-transfer: Draft scaffold has no transfer assessment definition; author, schema-validate and review it before release-readiness.
+WARN examples/minimal-language-pack: manifest-only onboarding fixture; no instructional content or full pack conformance
+WARN scope: handoff structure checked; SDK completeness, linguistic correctness, source rights, calibration quality, build/install/runtime/UX/privacy/security remain unverified
+HANDOFF VALIDATION PASSED (31 data files checked)
+............................................
+----------------------------------------------------------------------
+Ran 44 tests in 5.912s
+
+OK
+CI OK

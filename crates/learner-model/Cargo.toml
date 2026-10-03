@@ -1,0 +1,12 @@
+[package]
+name = "lts-learner-model"
+description = "Derivation of multimodal mastery from evidence events (docs/03)."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+lts-domain.workspace = true
+serde.workspace = true
+thiserror.workspace = true

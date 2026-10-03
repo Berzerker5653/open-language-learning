@@ -1,0 +1,12 @@
+[package]
+name = "lts-speech-api"
+description = "Provider contracts for ASR/VAD/TTS/alignment/prosody with abstention (docs/05)."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+lts-domain.workspace = true
+serde.workspace = true
+thiserror.workspace = true

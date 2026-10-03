@@ -1,0 +1,11 @@
+[package]
+name = "lts-domain"
+description = "Target-language-independent domain types: stable IDs, versions, evidence, mastery states."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+serde.workspace = true
+thiserror.workspace = true

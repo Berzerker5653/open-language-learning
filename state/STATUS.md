@@ -4,15 +4,19 @@ Generated handoff state: 2026-10-02
 
 ## Overall
 
-Specification package prepared. Implementation has not started.
+Implementation started 2026-10-02. Monorepo bootstrapped; domain core work in progress.
 
 ## Current milestone
 
 M0 — Bootstrap and technical proof
 
+## Completed tasks
+
+- `BOOT-001` — monorepo, toolchains, CI, ADR-0004 (evidence: `state/evidence/BOOT-001/`).
+
 ## Next task
 
-`BOOT-001` — Initialize monorepo and toolchains.
+`ARCH-001` — Typed domain IDs/versions and provider interfaces.
 
 ## Owner decisions already resolved
 
@@ -26,8 +30,16 @@ M0 — Bootstrap and technical proof
 
 ## Do not ask the owner again for these unless they explicitly change them.
 
+## Environment blocker (affects BOOT-002 only)
+
+`webkit2gtk-4.1` is not installed on the Linux reference machine and `sudo` needs a password.
+Owner action when convenient: `sudo pacman -S webkit2gtk-4.1`. Native Tauri builds are blocked
+until then; all other work continues.
+
 ## Handoff audit status
 
-Proposed corrections prepared 2026-10-02. Original archive preserved. No implementation task has been completed by this audit. `BOOT-001` remains next.
+Proposed corrections prepared 2026-10-02; original archive preserved. Handoff validation passes
+(44 validator tests); strict pack preflight fails as expected (11 blockers) and those requirements
+are preserved. Implementation began 2026-10-02.
 
 Default goal: desktop Japanese B2-like release candidate (`REL-001`). Optional AI/mobile/web/advanced work and public publication require separate scope. Before public release, source-code and original-content licenses remain owner decisions (`LIC-001`); qualified review capacity, source rights and speech calibration are still future gates. See `REVIEW_REPORT.md` for findings and validation limits.

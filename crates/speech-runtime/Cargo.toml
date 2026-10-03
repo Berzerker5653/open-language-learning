@@ -1,0 +1,13 @@
+[package]
+name = "lts-speech-runtime"
+description = "Concrete local speech provider adapters (docs/05, docs/17)."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+lts-domain.workspace = true
+lts-speech-api.workspace = true
+serde.workspace = true
+thiserror.workspace = true

@@ -1,0 +1,29 @@
+# Rust workspace for the local-first language-learning platform.
+# Dependency direction rules (docs/07): domain crates must not depend on
+# language-pack data or provider implementations.
+[workspace]
+resolver = "2"
+members = ["crates/*"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+publish = false
+
+[workspace.dependencies]
+lts-domain = { path = "crates/domain" }
+lts-learner-model = { path = "crates/learner-model" }
+lts-scheduler = { path = "crates/scheduler" }
+lts-langpack = { path = "crates/langpack" }
+lts-storage = { path = "crates/storage" }
+lts-speech-api = { path = "crates/speech-api" }
+lts-speech-runtime = { path = "crates/speech-runtime" }
+lts-audio = { path = "crates/audio" }
+lts-security = { path = "crates/security" }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+thiserror = "2.0.21"
+
+[profile.release]
+lto = "thin"

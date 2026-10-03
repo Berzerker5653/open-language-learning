@@ -1,0 +1,14 @@
+[package]
+name = "lts-langpack-cli"
+description = "Authoring/build CLI for language packs (docs/04, PACK-005)."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "langpack"
+path = "src/main.rs"
+
+[dependencies]
+lts-langpack.workspace = true

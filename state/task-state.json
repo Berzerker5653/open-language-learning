@@ -1,10 +1,20 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-02",
-  "active_task": null,
+  "active_task": "ARCH-001",
   "tasks": {
     "BOOT-001": {
-      "status": "ready",
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/BOOT-001.md",
+        "state/evidence/BOOT-001/ci-2026-10-02.txt",
+        "docs/adr/0004-initial-stack.md"
+      ]
+    },
+    "ARCH-001": {
+      "status": "in_progress",
       "attempts": 0,
       "last_error": null,
       "evidence": []

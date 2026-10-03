@@ -1,0 +1,12 @@
+[package]
+name = "lts-scheduler"
+description = "Session planning and memory scheduling behind a deterministic interface (docs/03, docs/07)."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+lts-domain.workspace = true
+serde.workspace = true
+thiserror.workspace = true
