@@ -134,10 +134,14 @@ M2 — Local data and learner model
   surface (handwriting unmodeled), variant-tolerant grading, writing
   evidence dimension-distinct from recognition (evidence:
   `state/evidence/WRITE-001/`).
+- `M4-E2E` — no-speech vertical slice: fresh user completes the
+  ja-demo on-ramp (encounter text placeholder -> recall -> IME typing),
+  state persists, restart resumes with due reviews; E2E test covers the
+  flow; no streak/heart mechanics (evidence: `state/evidence/M4-E2E/`).
 
 ## Next task
 
-`M4-E2E` — first no-speech playable vertical slice (M4, P0).
+`SPEECH-001` — first speech milestone task (M5, see ROADMAP).
 Note: `REVIEW-001` (reviewer capacity) and `LIC-001` (final licensing
 decisions) are owner-only and remain open blockers for release.
 

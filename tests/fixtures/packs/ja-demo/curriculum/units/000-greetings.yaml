@@ -1,0 +1,20 @@
+id: "ja.unit.demo.greetings"
+goal_id: "ja.goal.demo.greet"
+title: "First greetings"
+estimated_minutes: 5
+activities:
+  - id: "ja.activity.demo.encounter-greet"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["ja.lex.demo.konnichiwa"]
+  - id: "ja.activity.demo.recall-greet"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["ja.lex.demo.konnichiwa"]
+  - id: "ja.activity.demo.type-greet"
+    type: "produce"
+    modality: "writing"
+    support_level: 0
+    content_refs: ["ja.lex.demo.konnichiwa"]

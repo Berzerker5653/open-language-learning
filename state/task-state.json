@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-03",
-  "active_task": "M4-E2E",
+  "active_task": "SPEECH-001",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -331,6 +331,18 @@
       ]
     },
     "M4-E2E": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/evidence/M4-E2E/cargo-test-2026-10-03.txt",
+        "state/evidence/M4-E2E/ci-2026-10-03.txt",
+        "state/evidence/M4-E2E/smoke-desktop-2026-10-03.txt",
+        "apps/desktop/src-tauri/src/lib.rs",
+        "tests/fixtures/packs/ja-demo/curriculum/units/000-greetings.yaml"
+      ]
+    },
+    "SPEECH-001": {
       "status": "in_progress",
       "attempts": 0,
       "last_error": null,

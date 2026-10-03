@@ -748,4 +748,153 @@ mod tests {
                 && dimension_kebab(d.dimension) == "production-writing")
         );
     }
+
+    /// M4-E2E: fresh user completes a small Japanese on-ramp flow
+    /// (encounter text placeholder -> recall -> IME typing), state
+    /// persists, restart resumes safely, and no streak/heart value is
+    /// exposed anywhere.
+    #[test]
+    fn fresh_user_onramp_flow_persists_and_resumes() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "New").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+
+        // Load the installed pack into the activity runtime.
+        let packs_root = data.join("packs");
+        let version =
+            lts_langpack::archive::current_version("org.openlanguage.ja-demo", &packs_root)
+                .unwrap();
+        let pack = lts_langpack::Pack::load_dir(
+            &packs_root.join("org.openlanguage.ja-demo").join(&version),
+        )
+        .unwrap();
+        let rt = lts_activity::ActivityRuntime::from_pack(&pack).unwrap();
+
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let t0: u64 = 1_762_128_000; // 2025-11-03T00:00:00Z
+        let spike = lts_scheduler::FsrsSpike {
+            w: lts_scheduler::fsrs::DEFAULT_W,
+            request_ret: lts_scheduler::fsrs::DEFAULT_REQUEST_RET,
+        };
+        let mut state: Option<lts_scheduler::ItemState> = None;
+
+        // 1. Encounter: text placeholder (pack declares listening: false).
+        let enc = rt.render("ja.activity.demo.encounter-greet").unwrap();
+        let a = lts_activity::Attempt::begin(
+            &enc,
+            vec![cid("ja.lex.demo.konnichiwa")],
+            Some("g-enc".into()),
+            Some(cid("ja.expr.demo.greet-p1")),
+        );
+        let o = a.submit(
+            lts_domain::Score::Correct,
+            lts_domain::EventId::new("e-enc"),
+            rfc3339_utc(t0),
+            lts_domain::ProfileId::new(&p.id),
+        );
+        store.append_evidence(&o.evidence).unwrap();
+
+        // 2. Two independent recalls on distinct prompts -> Independent
+        //    recall; each valid retrieval updates the scheduler.
+        for (i, fam) in ["ja.expr.demo.greet-p1", "ja.expr.demo.greet-p2"]
+            .iter()
+            .enumerate()
+        {
+            let at = t0 + 60 * (i as u64 + 1);
+            let act = rt.render("ja.activity.demo.recall-greet").unwrap();
+            let a = lts_activity::Attempt::begin(
+                &act,
+                vec![cid("ja.lex.demo.konnichiwa")],
+                Some(format!("g-r{i}")),
+                Some(cid(fam)),
+            );
+            let o = a.submit(
+                lts_domain::Score::Correct,
+                lts_domain::EventId::new(format!("e-r{i}")),
+                rfc3339_utc(at),
+                lts_domain::ProfileId::new(&p.id),
+            );
+            store.append_evidence(&o.evidence).unwrap();
+            let rating = lts_scheduler::rating_from_evidence(&o.evidence).unwrap();
+            let decision =
+                lts_scheduler::Scheduler::review(&spike, state.as_ref(), rating, at as i64);
+            state = Some(decision.state.clone());
+            store
+                .save_scheduler_state(
+                    &p.id,
+                    &lts_storage::SchedulerRecord {
+                        item_id: "ja.lex.demo.konnichiwa#recall-meaning".into(),
+                        scheduler: lts_scheduler::SPIKE_VERSION.into(),
+                        params_json: serde_json::to_string(&decision.state).unwrap(),
+                        due_at: rfc3339_utc(decision.due_at as u64),
+                    },
+                )
+                .unwrap();
+        }
+
+        // 3. Typed (IME) answer, graded against the canonical form.
+        let wact = rt.render("ja.activity.demo.type-greet").unwrap();
+        let wt = lts_activity::WritingTask {
+            item_id: "ja.lex.demo.konnichiwa".into(),
+            answer: "こんにちは".into(),
+            accepted: vec![],
+            prompt_text: "hello / good afternoon".into(),
+            answer_reading: None,
+            answer_romaji: None,
+        };
+        assert!(lts_activity::grade_writing("こんにちは", &wt).correct);
+        let a = lts_activity::Attempt::begin(
+            &wact,
+            vec![cid("ja.lex.demo.konnichiwa")],
+            Some("g-w".into()),
+            Some(cid("ja.expr.demo.greet-p3")),
+        );
+        let o = a.submit(
+            lts_domain::Score::Correct,
+            lts_domain::EventId::new("e-w"),
+            rfc3339_utc(t0 + 300),
+            lts_domain::ProfileId::new(&p.id),
+        );
+        store.append_evidence(&o.evidence).unwrap();
+
+        // 4. Persistence: progress reflects the whole flow.
+        let derived = derive_pairs(&store, &p.id, &rfc3339_utc(t0 + 3_600)).unwrap();
+        let recall = derived
+            .iter()
+            .find(|d| {
+                d.content_id == "ja.lex.demo.konnichiwa"
+                    && dimension_kebab(d.dimension) == "recall-meaning"
+            })
+            .unwrap();
+        assert_eq!(recall.state, lts_domain::MasteryState::Independent);
+        assert!(
+            derived
+                .iter()
+                .any(|d| dimension_kebab(d.dimension) == "production-writing"
+                    && d.state != lts_domain::MasteryState::Unseen)
+        );
+
+        // 5. Restart: reopen storage fresh; resume safely at a later
+        //    clock — the due review is planned, new material unlocked.
+        drop(store);
+        let later = t0 + 4 * 86_400;
+        let plan = build_plan(data, &p.id, 5, later).unwrap();
+        assert!(
+            plan.items
+                .iter()
+                .any(|i| i.reason == lts_scheduler::PlanReason::DueReview)
+        );
+        assert!(
+            plan.items
+                .iter()
+                .any(|i| i.reason == lts_scheduler::PlanReason::Progression)
+        );
+
+        // 6. No streak/heart mechanics anywhere in exposed state.
+        let json = serde_json::to_string(&plan).unwrap();
+        assert!(!json.contains("streak"));
+        assert!(!json.contains("heart"));
+    }
 }

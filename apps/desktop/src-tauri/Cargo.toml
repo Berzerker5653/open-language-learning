@@ -23,6 +23,7 @@ lts-storage.workspace = true
 lts-scheduler.workspace = true
 lts-learner-model.workspace = true
 serde_yaml.workspace = true
+lts-activity.workspace = true
 
 [dev-dependencies]
 tempfile.workspace = true

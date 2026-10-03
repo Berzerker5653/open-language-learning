@@ -2237,6 +2237,7 @@ dependencies = [
 name = "lts-desktop"
 version = "0.1.0"
 dependencies = [
+ "lts-activity",
  "lts-domain",
  "lts-langpack",
  "lts-learner-model",
