@@ -14,3 +14,18 @@ activities:
     modality: "interaction"
     support_level: 1
     scenario_id: "es.scenario.intro.meeting"
+  - id: "es.activity.intro.encounter"
+    type: "encounter-listen"
+    modality: "listening"
+    support_level: 0
+    content_refs: ["es.lex.greet.hola"]
+  - id: "es.activity.intro.recall"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["es.lex.greet.hola"]
+  - id: "es.activity.intro.why"
+    type: "explain-why"
+    modality: "interaction"
+    support_level: 1
+    concept_refs: ["es.grammar.gender.noun"]

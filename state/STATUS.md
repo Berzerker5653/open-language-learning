@@ -107,10 +107,16 @@ M2 — Local data and learner model
   attribution, non-redistributable sources rejected, imported entries
   always draft with no teaching order (evidence:
   `state/evidence/JA-RES-006/`).
+- `ACT-001` — activity runtime + support ladder: four activity kinds
+  (encounter/comprehension/retrieval/explanation) render from pack data
+  as serializable specs; hint/replay/translation actions recorded in
+  evidence with ordinal levels; correct-with-strong-help never flagged
+  independent and derives lower mastery (evidence:
+  `state/evidence/ACT-001/`).
 
 ## Next task
 
-`ACT-001` — activity runtime + support ladder (M4, P0).
+`READ-001` — adaptive kana/furigana/romaji support (M4, P0).
 Note: `REVIEW-001` (reviewer capacity) and `LIC-001` (final licensing
 decisions) are owner-only and remain open blockers for release.
 
