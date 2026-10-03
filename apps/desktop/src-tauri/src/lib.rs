@@ -8,7 +8,9 @@
 //! supplies paths), and an honest privacy notice (docs/08).
 
 mod models;
-use lts_speech_api::{AcousticFeatureProvider, AlignmentProvider, PronunciationInterpreter};
+use lts_speech_api::{
+    AcousticFeatureProvider, AlignmentProvider, PronunciationInterpreter, ProsodyProvider,
+};
 use serde::Serialize;
 use std::path::Path;
 use std::path::PathBuf;
@@ -540,10 +542,28 @@ struct PronunciationCorrection {
     feedback_template_id: String,
 }
 
+#[derive(Serialize, Clone, Default)]
+struct PitchComparison {
+    /// Normalized (semitones from speaker median) contours; never Hz.
+    reference: Vec<f64>,
+    attempt: Vec<f64>,
+    reference_shape: String,
+    attempt_shape: String,
+    unavailable_reason: Option<String>,
+}
+
 #[derive(Serialize)]
 struct PronunciationResult {
     corrections: Vec<PronunciationCorrection>,
     abstain_reason: Option<String>,
+    pitch: PitchComparison,
+}
+
+fn empty_pitch(reason: &str) -> PitchComparison {
+    PitchComparison {
+        unavailable_reason: Some(reason.into()),
+        ..Default::default()
+    }
 }
 
 fn band_kebab(b: &lts_speech_api::ConfidenceBand) -> &'static str {
@@ -633,6 +653,7 @@ fn pronunciation_check_at(
     let abstain = |reason: String| PronunciationResult {
         corrections: Vec::new(),
         abstain_reason: Some(reason),
+        pitch: empty_pitch("not-aligned"),
     };
     let packs_root = data.join("packs");
     let version = lts_langpack::archive::current_version(&attempt.pack_id, &packs_root)
@@ -678,6 +699,40 @@ fn pronunciation_check_at(
             lts_speech_api::ProviderOutcome::Usable { value, .. } => value,
             other => return Ok(abstain(outcome_reason(&other))),
         };
+    // SPEECH-006: normalized contour comparison (reference-only profile).
+    let prosody = lts_speech_runtime::prosody::AutocorrelationProsody::default();
+    let ref_alignment = lts_speech_api::Alignment {
+        spans: vec![lts_speech_api::AlignmentSpan {
+            unit_id: attempt.long_text.clone(),
+            start_sample: 0,
+            end_sample: lr.samples.len(),
+            confidence: Some(1.0),
+        }],
+        overall_confidence: Some(1.0),
+    };
+    let att_obs = prosody
+        .analyze(&audio, &alignment)
+        .value()
+        .map(|p| p.observations)
+        .unwrap_or_default();
+    let ref_obs = prosody
+        .analyze(&lr, &ref_alignment)
+        .value()
+        .map(|p| p.observations)
+        .unwrap_or_default();
+    let att_c = lts_speech_runtime::prosody::normalize_semitones(&att_obs);
+    let ref_c = lts_speech_runtime::prosody::normalize_semitones(&ref_obs);
+    let pitch = if att_c.is_empty() || ref_c.is_empty() {
+        empty_pitch("insufficient-voiced-material")
+    } else {
+        PitchComparison {
+            reference: ref_c.clone(),
+            attempt: att_c.clone(),
+            reference_shape: lts_speech_runtime::prosody::contour_shape_text(&ref_c),
+            attempt_shape: lts_speech_runtime::prosody::contour_shape_text(&att_c),
+            unavailable_reason: None,
+        }
+    };
     let evidence = lts_speech_api::PronunciationEvidence {
         alignment,
         features,
@@ -700,8 +755,13 @@ fn pronunciation_check_at(
                 })
                 .collect(),
             abstain_reason: None,
+            pitch,
         },
-        other => abstain(outcome_reason(&other)),
+        other => PronunciationResult {
+            corrections: Vec::new(),
+            abstain_reason: Some(outcome_reason(&other)),
+            pitch,
+        },
     })
 }
 
@@ -1211,6 +1271,13 @@ mod tests {
             res.corrections[0].feedback_template_id,
             "speech.long-vowel.close"
         );
+
+        // SPEECH-006: normalized contour comparison available.
+        assert_eq!(res.pitch.unavailable_reason, None);
+        assert!(!res.pitch.reference.is_empty() && !res.pitch.attempt.is_empty());
+        assert!(res.pitch.reference_shape.contains("overall"));
+        // Normalized: semitones around the speaker median, not Hz.
+        assert!(res.pitch.reference.iter().all(|v| v.abs() < 48.0));
 
         // Verification gate: only the short word against the expected pair.
         let mismatch = PronunciationAttempt {

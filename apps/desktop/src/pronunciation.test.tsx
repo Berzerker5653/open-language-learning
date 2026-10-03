@@ -2,7 +2,7 @@
 // playback controls. Recording plumbing is container-level (browser-only).
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
-import { PronunciationPractice } from "./pronunciation";
+import { EMPTY_PITCH, PronunciationPractice } from "./pronunciation";
 
 const base = {
   shortText: "おばさん",
@@ -38,6 +38,13 @@ describe("PronunciationPractice", () => {
             },
           ],
           abstain_reason: null,
+          pitch: {
+            reference: [0, 1, 2, 3],
+            attempt: [0, 0.5, 1],
+            reference_shape: "rising overall",
+            attempt_shape: "roughly level overall",
+            unavailable_reason: null,
+          },
         }}
       />,
     );
@@ -50,11 +57,41 @@ describe("PronunciationPractice", () => {
     const html = renderToStaticMarkup(
       <PronunciationPractice
         {...base}
-        result={{ corrections: [], abstain_reason: "mismatch:expected-text-not-matched" }}
+        result={{
+          corrections: [],
+          abstain_reason: "mismatch:expected-text-not-matched",
+          pitch: EMPTY_PITCH,
+        }}
       />,
     );
     expect(html).toMatch(/could not confidently match/);
     expect(html).not.toMatch(/holding the あ/);
+  });
+
+  it("shows normalized pitch contours accessibly, never Hz or grades", () => {
+    const html = renderToStaticMarkup(
+      <PronunciationPractice
+        {...base}
+        hasAttempt
+        result={{
+          corrections: [],
+          abstain_reason: null,
+          pitch: {
+            reference: [0, 1.2, 2.4, 1.1, 0.2],
+            attempt: [0, 0.3, 0.1, 0.4, 0],
+            reference_shape: "rising overall",
+            attempt_shape: "roughly level overall",
+            unavailable_reason: null,
+          },
+        }}
+      />,
+    );
+    expect(html).toContain("<svg");
+    expect(html).toContain("<polyline");
+    expect(html).toContain("Reference: rising overall");
+    expect(html).toContain("Your attempt: roughly level overall");
+    expect(html).not.toMatch(/[\d.]+\s*Hz/); // no numeric-Hz rule in the UI
+    expect(html).toMatch(/reference-only until calibration/);
   });
 
   it("offers stop control while recording", () => {

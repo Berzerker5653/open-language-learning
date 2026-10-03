@@ -16,3 +16,6 @@ prosody:
     description: "Contrastive vowel length: /obasan/ (aunt) vs /obaasan/ (grandmother) differ only in the duration of the second mora; length changes word meaning."
     mode: assess-guided
     orthographic_cues: ["あー (hiragana long vowels)", "おう/よう/えい patterns"]
+  - id: ja.phon.f0-contour
+    description: "Phrase F0 contour shape (normalized, speaker-relative). Reference comparison only: automatic accuracy is uncalibrated, so this is never graded and never uses absolute Hz."
+    mode: reference-only

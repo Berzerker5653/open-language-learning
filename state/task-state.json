@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-03",
-  "active_task": "SPEECH-006",
+  "active_task": "TTS-001",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -408,6 +408,20 @@
       ]
     },
     "SPEECH-006": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/evidence/SPEECH-006/cargo-test-2026-10-03.txt",
+        "state/evidence/SPEECH-006/ci-2026-10-03.txt",
+        "state/evidence/SPEECH-006/smoke-desktop-2026-10-03.txt",
+        "state/notes/SPEECH-006.md",
+        "crates/speech-runtime/src/prosody.rs",
+        "crates/speech-runtime/tests/prosody.rs",
+        "apps/desktop/src/pronunciation.tsx"
+      ]
+    },
+    "TTS-001": {
       "status": "in_progress",
       "attempts": 0,
       "last_error": null,

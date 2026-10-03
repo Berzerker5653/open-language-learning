@@ -12,9 +12,41 @@ export interface PronunciationCorrection {
   feedback_template_id: string;
 }
 
+export interface PitchComparison {
+  reference: number[];
+  attempt: number[];
+  reference_shape: string;
+  attempt_shape: string;
+  unavailable_reason: string | null;
+}
+
+export const EMPTY_PITCH: PitchComparison = {
+  reference: [],
+  attempt: [],
+  reference_shape: "",
+  attempt_shape: "",
+  unavailable_reason: "not-aligned",
+};
+
 export interface PronunciationResult {
   corrections: PronunciationCorrection[];
   abstain_reason: string | null;
+  pitch: PitchComparison;
+}
+
+/** Normalized (semitone-relative) contour as an accessible polyline. */
+function contourPoints(values: number[], width = 240, height = 60): string {
+  if (values.length === 0) return "";
+  const lo = Math.min(...values);
+  const hi = Math.max(...values);
+  const span = Math.max(hi - lo, 1);
+  return values
+    .map((v, i) => {
+      const x = (i / Math.max(values.length - 1, 1)) * width;
+      const y = height - ((v - lo) / span) * height;
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    })
+    .join(" ");
 }
 
 const TEMPLATE_TEXT: Record<string, string> = {
@@ -108,6 +140,47 @@ export function PronunciationPractice(props: PronunciationProps) {
               stays on this device and is never saved.
             </small>
           </p>
+          <div aria-label="Pitch contour comparison">
+            <h3>Pitch shape (reference vs your attempt)</h3>
+            {result.pitch.unavailable_reason ? (
+              <p>
+                Not enough clear voiced audio to compare pitch shapes this time. This is a reference
+                view, so nothing is scored either way.
+              </p>
+            ) : (
+              <>
+                <svg
+                  width="240"
+                  height="60"
+                  role="img"
+                  aria-label={`Reference contour: ${result.pitch.reference_shape}. Your attempt: ${result.pitch.attempt_shape}.`}
+                >
+                  <polyline
+                    fill="none"
+                    stroke="#888"
+                    strokeWidth="2"
+                    points={contourPoints(result.pitch.reference)}
+                  />
+                  <polyline
+                    fill="none"
+                    stroke="#0b6e4f"
+                    strokeWidth="2"
+                    points={contourPoints(result.pitch.attempt)}
+                  />
+                </svg>
+                <p>
+                  Reference: {result.pitch.reference_shape}. Your attempt:{" "}
+                  {result.pitch.attempt_shape}.
+                </p>
+                <p>
+                  <small>
+                    Pitch is shown relative to each speaker's own range — never in absolute Hz, and
+                    never graded. This feature is reference-only until calibration evidence exists.
+                  </small>
+                </p>
+              </>
+            )}
+          </div>
         </div>
       )}
     </section>

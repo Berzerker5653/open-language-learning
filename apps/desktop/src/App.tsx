@@ -7,7 +7,7 @@ import {
   type PrivacyNotice,
 } from "./onboarding";
 import { Home, ProgressView, type ProgressRow, type SessionPlan } from "./home";
-import { PronunciationPractice, type PronunciationResult } from "./pronunciation";
+import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./pronunciation";
 
 type Invoke = (cmd: string, args?: Record<string, unknown>) => Promise<unknown>;
 
@@ -180,7 +180,7 @@ export function App() {
     setAttemptUrl(URL.createObjectURL(blob));
     const inv = detectInvoke();
     if (!inv) {
-      setPronResult({ corrections: [], abstain_reason: "aligner-unavailable" });
+      setPronResult({ corrections: [], abstain_reason: "aligner-unavailable", pitch: EMPTY_PITCH });
       return;
     }
     try {
@@ -200,7 +200,11 @@ export function App() {
       })) as PronunciationResult;
       setPronResult(result);
     } catch {
-      setPronResult({ corrections: [], abstain_reason: "abstained:decode-failed" });
+      setPronResult({
+        corrections: [],
+        abstain_reason: "abstained:decode-failed",
+        pitch: EMPTY_PITCH,
+      });
     }
   }
 

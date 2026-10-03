@@ -162,10 +162,17 @@ M2 — Local data and learner model
   rate-normalized comparison, abstention with reasons; in-memory
   attempt + pack reference playback (evidence:
   `state/evidence/SPEECH-005/`).
+- `SPEECH-006` — normalized F0 visualization: autocorrelation prosody
+  with reliability masking and octave-jump detection; semitone-relative
+  contours (no absolute-Hz rule); accessible SVG + text shapes;
+  reference-only pack profile (evidence: `state/evidence/SPEECH-006/`).
 
 ## Next task
 
-`SPEECH-006` — pitch/F0 visualization and guided comparison (M5, P1).
+`TTS-001` — benchmark + local Japanese TTS provider (M5, P1).
+`SPEECH-007` (calibration) is owner-blocked: preregistered calibration
+needs permissioned human recordings + frozen gates (docs/17); stable
+1.0 stays blocked until the owner supplies/authorizes it.
 Note: `REVIEW-001` (reviewer capacity) and `LIC-001` (final licensing
 decisions) are owner-only and remain open blockers for release.
 

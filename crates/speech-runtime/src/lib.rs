@@ -5,6 +5,7 @@ pub mod acoustic;
 pub mod alignment;
 pub mod asr;
 pub mod interpret;
+pub mod prosody;
 pub mod quality;
 
 pub use acoustic::VoicedDurationFeature;
