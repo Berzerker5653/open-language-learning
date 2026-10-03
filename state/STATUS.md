@@ -123,10 +123,14 @@ M2 — Local data and learner model
   extension), transfer variants; per-node evidence; identical code
   path for Spanish and Japanese scenarios (evidence:
   `state/evidence/SCENARIO-001/`).
+- `UX-001` — onboarding: local profile (no account), bundled Japanese
+  demo pack install via allowlisted ids, skippable microphone, honest
+  privacy notice; desktop smoke handshake preserved (evidence:
+  `state/evidence/UX-001/`).
 
 ## Next task
 
-`UX-001` — onboarding + privacy-first Japanese selection (M4, P0).
+`UX-002` — home, time-budget practice, capability progress UI (M4, P0).
 Note: `REVIEW-001` (reviewer capacity) and `LIC-001` (final licensing
 decisions) are owner-only and remain open blockers for release.
 

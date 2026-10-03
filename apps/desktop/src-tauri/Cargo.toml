@@ -17,3 +17,9 @@ tauri-build = { version = "2.7.1", features = [] }
 tauri = { version = "2.12.1", features = [] }
 serde.workspace = true
 serde_json.workspace = true
+lts-domain.workspace = true
+lts-langpack.workspace = true
+lts-storage.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true

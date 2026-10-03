@@ -1,0 +1,221 @@
+     Running unittests src/lib.rs (target/debug/deps/lts_activity-ad55e631a6c30a05)
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/reading.rs (target/debug/deps/reading-377ff9356f5fafa5)
+test canonical_text_remains_japanese_script ... ok
+test on_demand_reveal_is_always_available_and_counts_as_support ... ok
+test visibility_responds_to_mastery ... ok
+test visibility_responds_to_settings_and_kana_literacy ... ok
+test reading_evidence_is_independent_from_listening_and_speaking ... ok
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/runtime.rs (target/debug/deps/runtime-dc1dec5b77d69abc)
+test modality_dimension_mapping_is_conservative ... ok
+test unknown_activity_types_are_rejected ... ok
+test hints_replays_translations_emit_support_evidence ... ok
+test all_four_activity_kinds_render_from_pack_data ... ok
+test correct_with_strong_help_is_not_independent_success ... ok
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/scenario.rs (target/debug/deps/scenario-75d79cd773e1f7de)
+test graph_supports_intents_ladder_recovery_and_transfers ... ok
+test evidence_events_record_support_per_node ... ok
+test runtime_is_language_agnostic ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+     Running unittests src/lib.rs (target/debug/deps/lts_audio-a3f0405df6110f04)
+test tests::crate_identifies_itself ... ok
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-cc65d7afec15b91b)
+test tests::rfc3339_conversion_is_correct ... ok
+test tests::bundled_japanese_pack_installs_and_records ... ok
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+     Running unittests src/main.rs (target/debug/deps/lts_desktop-419f5925dd88e045)
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/lts_domain-b0e1470299530aaf)
+test curriculum::tests::only_prerequisite_edges_are_hard_gates ... ok
+test curriculum::tests::prerequisite_record_is_scoped_by_dimension_and_state ... ok
+test curriculum::tests::serde_kebab_case ... ok
+test evidence::tests::only_scored_outcomes_count ... ok
+test ids::tests::model_is_locale_independent ... ok
+test evidence::tests::serde_roundtrip ... ok
+test ids::tests::locale_tags ... ok
+test ids::tests::pack_ids ... ok
+test ids::tests::parses_documented_examples ... ok
+test ids::tests::rejects_malformed_ids ... ok
+test ids::tests::serde_roundtrip_kebab_string ... ok
+test mastery::tests::serde_kebab_case ... ok
+test mastery::tests::state_order_is_canonical ... ok
+test mastery::tests::support_level_bounds ... ok
+test pack::tests::trust_state_order_is_monotonic ... ok
+test pack::tests::model_handles_any_locale_identically ... ok
+test pack::tests::unresolved_license_is_explicit_not_implicit ... ok
+test versioning::tests::accepts_prerelease_and_build_metadata ... ok
+test versioning::tests::engine_range_semantics ... ok
+test versioning::tests::prerelease_orders_before_release ... ok
+test result: ok. 20 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/lts_langpack-d0808a7a54bd8670)
+test migrate::tests::bare_prerequisites_become_reviewable_records ... ok
+test migrate::tests::migrated_goal_validates_against_0_2_schema ... ok
+test migrate::tests::bare_prerequisites_are_rejected_by_0_2_schema ... ok
+test migrate::tests::migrated_records_trigger_review_warning ... ok
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+     Running tests/archive.rs (target/debug/deps/archive-9cff439c1cc159fc)
+test install_rejects_path_traversal ... ok
+test build_rejects_invalid_pack ... ok
+test install_rejects_unlisted_and_symlink_entries ... ok
+test install_rejects_hash_mismatch ... ok
+test install_enforces_install_mode_gates ... ok
+test build_is_deterministic ... ok
+test install_upgrade_rollback_cycle ... ok
+test install_rejects_decompression_bomb ... ok
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.79s
+     Running tests/audit.rs (target/debug/deps/audit-a8455802e15b094e)
+test attribution_requirement_without_entry_fails ... ok
+test reference_only_source_cannot_be_bundled ... ok
+test clean_chain_audits_and_reports_attribution ... ok
+test unknown_license_blocks_reference_build ... ok
+test source_provenance_flags_gaps_and_term_conflicts ... ok
+test clean_source_chain_has_no_provenance_warnings ... ok
+test seed_draft_blocks_redistribution_and_reports_sources ... ok
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/ja_dependency_map.rs (target/debug/deps/ja_dependency_map-891da786e59df06d)
+test politeness_is_contextual_not_binary ... ok
+test concepts_cover_every_goal_required_concept ... ok
+test validator_reports_no_cycles_or_missing_dependencies ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+     Running tests/ja_goal_graph.rs (target/debug/deps/ja_goal_graph-c687e7353866cd5b)
+test goals_have_modalities_assessments_and_framework_refs ... ok
+test bands_cover_onramp_through_release_band ... ok
+test prerequisites_resolve_and_are_acyclic ... ok
+test every_goal_validates_against_v02_goal_schema ... ok
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+     Running tests/ja_orthography.rs (target/debug/deps/ja_orthography-387bc4e76660a1eb)
+test scaffold_policy_covers_all_five_scaffolds ... ok
+test romaji_fade_is_specified_and_never_gates ... ok
+test reading_and_writing_competencies_are_separate ... ok
+test scripts_document_validates_against_v02_schema ... ok
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+     Running tests/ja_phonology.rs (target/debug/deps/ja_phonology-5f2ad9e4aed3042d)
+test required_feature_areas_are_encoded ... ok
+test no_automatic_scoring_without_calibration ... ok
+test inventory_validates_against_v02_phonology_schema ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+     Running tests/leximport.rs (target/debug/deps/leximport-b52f8a15b3bc86fb)
+test deterministic_ids_and_collision_handling ... ok
+test non_redistributable_source_is_rejected ... ok
+test imported_data_never_becomes_teaching_order ... ok
+test import_is_reproducible_and_separated_from_curriculum ... ok
+test attribution_and_license_requirements_are_generated ... ok
+test pack_still_validates_after_import ... ok
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+     Running tests/source_matrix.rs (target/debug/deps/source_matrix-9469929242545def)
+test nonshippable_entries_have_alternative_or_blocker ... ok
+test matrix_covers_required_categories ... ok
+test every_entry_is_classified_with_registry_fields ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/validate.rs (target/debug/deps/validate-ae680cff90aac764)
+test inverted_engine_range_fails ... ok
+test bad_id_grammar_fails ... ok
+test prerequisite_cycles_fail_with_cycle_path ... ok
+test manifest_scripts_must_match_orthography_ids ... ok
+test out_of_range_support_level_fails ... ok
+test bare_prerequisite_ids_fail_in_0_2 ... ok
+test locale_mismatch_fails ... ok
+test scaffold_draft_is_accepted_as_scaffold_only ... ok
+test diagnostics_carry_actionable_locations ... ok
+test duplicate_ids_fail ... ok
+test draft_unresolved_reference_and_license_gates_block_install ... ok
+test japanese_draft_seed_is_not_install_eligible ... ok
+test dependency_mirror_must_agree_with_content_prerequisites ... ok
+test dead_goal_audit_reports_unreachable_goals ... ok
+test japanese_draft_seed_validates_as_scaffold ... ok
+test deferred_modality_prerequisites_are_representable ... ok
+test migrated_prerequisites_warn_for_human_review ... ok
+test undeclared_reference_warns_in_scaffold_and_errors_in_install ... ok
+test matching_dependency_mirror_is_clean ... ok
+test valid_minimal_is_clean_in_both_modes ... ok
+test engine_version_compatibility_is_checked ... ok
+test valid_full_covers_every_content_type ... ok
+test result: ok. 22 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+     Running unittests src/main.rs (target/debug/deps/langpack-0631b9169c8bde36)
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/cli.rs (target/debug/deps/cli-f7b59ab32156b10a)
+test audit_curriculum_and_sources_commands ... ok
+test lint_fails_on_warnings ... ok
+test test_gate_blocks_uninstallable_pack ... ok
+test init_validate_build_inspect_round_trip ... ok
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+     Running unittests src/lib.rs (target/debug/deps/lts_learner_model-07e1dc9b520499f5)
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/derive.rs (target/debug/deps/derive-d1004469c48bc735)
+test regression_and_needs_refresh_are_possible ... ok
+test reading_success_never_grants_speaking_mastery ... ok
+test supported_success_is_weaker_evidence_than_independent ... ok
+test snapshots_record_algorithm_and_policy_versions ... ok
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/evidence.rs (target/debug/deps/evidence-902ae6ed4806e0cf)
+test typed_attempt_carries_support_confidence_and_versions ... ok
+test technical_speech_failure_is_distinct_from_learner_error ... ok
+test events_remain_queryable_after_restart ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+     Running tests/policy.rs (target/debug/deps/policy-0b3845c9c45619a9)
+test policy_is_versioned_and_marks_thresholds_provisional ... ok
+test required_scenario_coverage ... ok
+test single_success_never_reaches_independent_even_repeated_same_prompt ... ok
+test policy_validation_rejects_broken_artifacts ... ok
+test every_declared_fixture_exists_and_derives_expected_states ... ok
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/lts_scheduler-67dd5d1b966f60d3)
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/planner.rs (target/debug/deps/planner-9cce5442f35122d0)
+test balances_due_review_weak_skills_and_progression ... ok
+test every_planned_item_has_a_learning_reason_no_attendance_objective ... ok
+test invalid_configs_are_rejected ... ok
+test modality_repetition_limit_is_enforced ... ok
+test plans_are_reproducible_with_fixed_input_and_seed ... ok
+test budget_presets_5_10_20_30_plus_all_fit_and_grow ... ok
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/spike.rs (target/debug/deps/spike-ed1cc8981756e7f1)
+test deterministic_under_test_clock ... ok
+test items_schedule_by_due_time_not_attendance ... ok
+test stability_grows_on_success_and_falls_on_lapse ... ok
+test unscored_attempts_are_never_reviews ... ok
+test scheduler_state_persists_and_queries_due_items ... ok
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/lts_security-1472d81922de1e2e)
+test tests::crate_identifies_itself ... ok
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/lts_speech_api-cb256d22bd9f68b2)
+test tests::audio_duration_and_serde ... ok
+test tests::mismatch_is_the_only_non_usable_linguistic_signal ... ok
+test tests::providers_are_object_safe ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/lts_speech_runtime-655780a23783d29e)
+test tests::crate_identifies_itself ... ok
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/lts_storage-2345ea9747274fbf)
+test migrations::tests::migrations_are_sequential_and_complete_history ... ok
+test tests::in_memory_store_migrates_to_head ... ok
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/export_import.rs (target/debug/deps/export_import-8edacfd1a3d83611)
+test unknown_bundle_versions_are_rejected ... ok
+test recordings_are_opt_in_to_export ... ok
+test round_trip_preserves_evidence_mastery_inputs_and_settings ... ok
+test import_never_silently_overwrites_an_existing_profile ... ok
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+     Running tests/store.rs (target/debug/deps/store-ae8e566f315099cd)
+test profile_created_without_account_or_network ... ok
+test settings_goals_and_pack_records_round_trip ... ok
+test delete_profile_removes_app_owned_learner_data ... ok
+test no_audio_blobs_and_no_recordings_by_default ... ok
+test evidence_survives_restart_and_rejects_duplicate_ids ... ok
+test migrations_apply_forward_from_initial_schema ... ok
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

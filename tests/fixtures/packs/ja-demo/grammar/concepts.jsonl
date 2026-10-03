@@ -1,0 +1,1 @@
+{"id":"ja.grammar.demo.greetings","name":"Greeting set","category":"pragmatics","status":"draft","definition":"Fixed greeting phrases (こんにちは / はじめまして) used at first contact; time-of-day distinctions not required at this stage.","sources":["edrdg-jmdict"],"generation":{"method":"imported","tool":"langpack-cli","notes":"phrase inventory derived from JMdict entries (CC BY-SA 4.0)"}}

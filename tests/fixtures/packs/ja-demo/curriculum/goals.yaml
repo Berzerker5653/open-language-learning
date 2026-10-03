@@ -1,0 +1,15 @@
+goals:
+  - id: "ja.goal.demo.greet"
+    description: "Greet someone and introduce yourself in hiragana phrases"
+    band: "A1"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - target: "ja.lex.demo.konnichiwa"
+        dimension: "recall-meaning"
+        required_state: "independent"
+        strength: "hard"
+    required_concepts: ["ja.grammar.demo.greetings"]
+    assessment_ids: ["ja.assess.demo.greet"]
+    transfer_required: true
+    sources: ["edrdg-jmdict"]
+    review_status: "draft"
