@@ -98,6 +98,7 @@ pub struct Retained {
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct Regression {
+    pub stale_after_days_without_valid_evidence: i64,
     pub downgrade_on_confident_mismatch: bool,
     pub consecutive_mismatches_to_downgrade: usize,
     pub downgrade_steps: usize,
@@ -233,17 +234,16 @@ pub struct Decision {
 }
 
 /// One observation after attempt-group collapsing.
-#[derive(Debug, Clone)]
-struct Obs {
-    at: i64,
-    score: Score,
-    support: u8,
-    prompt: String,
-    family: String,
-    assessment: Option<AssessmentKind>,
+pub struct Obs {
+    pub at: i64,
+    pub score: Score,
+    pub support: u8,
+    pub prompt: String,
+    pub family: String,
+    pub assessment: Option<AssessmentKind>,
 }
 
-fn epoch_seconds(ts: &str) -> Result<i64, String> {
+pub fn epoch_seconds(ts: &str) -> Result<i64, String> {
     // Strict RFC 3339 UTC: YYYY-MM-DDTHH:MM:SSZ
     let (date, time) = ts
         .split_once('T')
@@ -272,54 +272,35 @@ fn epoch_seconds(ts: &str) -> Result<i64, String> {
     Ok((era * 146097 + doe - 719468) * 86400 + nums[3] * 3600 + nums[4] * 60 + nums[5])
 }
 
-/// Deterministically derive the state for one dimension of one content
-/// target from fixture events, per the frozen policy.
-pub fn derive(
-    policy: &Policy,
-    fixture: &Fixture,
-    dimension: ActivityModality,
-) -> Result<Decision, String> {
-    let excluded: std::collections::HashSet<&str> = fixture
-        .corrections
-        .iter()
-        .flat_map(|c| c.references.iter().map(|r| r.as_str()))
-        .collect();
+/// Raw observation input before attempt-group collapsing.
+pub struct ObsInput<'a> {
+    pub event_id: &'a str,
+    pub occurred_at: &'a str,
+    pub score: Score,
+    pub support: u8,
+    pub prompt_family_id: Option<&'a str>,
+    pub attempt_group_id: Option<&'a str>,
+    pub assessment: Option<AssessmentKind>,
+}
 
-    // Eligible scored events for this dimension, never deleted originals.
-    let mut eligible: Vec<&FixEvent> = fixture
-        .events
-        .iter()
-        .filter(|e| e.modality == dimension)
-        .filter(|e| !excluded.contains(e.event_id.as_str()))
-        .filter(|e| e.outcome == Outcome::Scored && e.score.is_some())
-        .collect();
-    eligible.sort_by(|a, b| {
-        (a.occurred_at.as_str(), a.event_id.as_str())
-            .cmp(&(b.occurred_at.as_str(), b.event_id.as_str()))
-    });
-
-    // Collapse attempt groups: one observation per group (last scored).
+/// Collapse attempt groups (one observation per group, last scored wins)
+/// and return time-ordered observations.
+pub fn observations(policy: &Policy, mut inputs: Vec<ObsInput<'_>>) -> Result<Vec<Obs>, String> {
+    inputs.sort_by(|a, b| (a.occurred_at, a.event_id).cmp(&(b.occurred_at, b.event_id)));
     let mut obs: Vec<Obs> = Vec::new();
     let mut by_group: std::collections::HashMap<&str, usize> = std::collections::HashMap::new();
-    for e in eligible {
+    for e in inputs {
         let o = Obs {
-            at: epoch_seconds(&e.occurred_at)?,
-            score: e.score.unwrap(),
-            support: e.support_level,
-            prompt: e
-                .prompt_family_id
-                .clone()
-                .unwrap_or_else(|| e.event_id.clone()),
-            family: e
-                .prompt_family_id
-                .clone()
-                .unwrap_or_else(|| e.event_id.clone()),
-            assessment: e.assessment_kind,
+            at: epoch_seconds(e.occurred_at)?,
+            score: e.score,
+            support: e.support,
+            prompt: e.prompt_family_id.unwrap_or(e.event_id).to_string(),
+            family: e.prompt_family_id.unwrap_or(e.event_id).to_string(),
+            assessment: e.assessment,
         };
-        match e.attempt_group_id.as_deref() {
+        match e.attempt_group_id {
             Some(g) if policy.evidence.attempt_grouping.one_observation_per_group => {
                 match by_group.get(g) {
-                    // last-scored wins (events are time-ordered).
                     Some(&idx) => obs[idx] = o,
                     None => {
                         by_group.insert(g, obs.len());
@@ -330,7 +311,11 @@ pub fn derive(
             _ => obs.push(o),
         }
     }
+    Ok(obs)
+}
 
+/// Apply the frozen transition ladder and regression rules.
+pub fn ladder(policy: &Policy, obs: &[Obs]) -> MasteryState {
     let t = &policy.transitions;
     let full = |o: &Obs, max_support: u8| o.score == Score::Correct && o.support <= max_support;
 
@@ -395,7 +380,6 @@ pub fn derive(
                 || (s == "flexible" && state == MasteryState::Flexible)
         })
     {
-        // Establishment time: the Nth qualifying independent success.
         let mut times: Vec<i64> = ind_ok.iter().map(|o| o.at).collect();
         times.sort();
         if times.len() >= t.independent.min_successes {
@@ -413,7 +397,6 @@ pub fn derive(
         }
     }
 
-    // Confident-mismatch regression: consecutive trailing mismatches.
     if policy.regression.downgrade_on_confident_mismatch {
         let mismatches = obs
             .iter()
@@ -434,10 +417,41 @@ pub fn derive(
             }
         }
     }
+    state
+}
 
+/// Deterministically derive the state for one dimension of one content
+/// target from fixture events, per the frozen policy.
+pub fn derive(
+    policy: &Policy,
+    fixture: &Fixture,
+    dimension: ActivityModality,
+) -> Result<Decision, String> {
+    let excluded: std::collections::HashSet<&str> = fixture
+        .corrections
+        .iter()
+        .flat_map(|c| c.references.iter().map(|r| r.as_str()))
+        .collect();
+    let inputs: Vec<ObsInput<'_>> = fixture
+        .events
+        .iter()
+        .filter(|e| e.modality == dimension)
+        .filter(|e| !excluded.contains(e.event_id.as_str()))
+        .filter(|e| e.outcome == Outcome::Scored && e.score.is_some())
+        .map(|e| ObsInput {
+            event_id: &e.event_id,
+            occurred_at: &e.occurred_at,
+            score: e.score.unwrap(),
+            support: e.support_level,
+            prompt_family_id: e.prompt_family_id.as_deref(),
+            attempt_group_id: e.attempt_group_id.as_deref(),
+            assessment: e.assessment_kind,
+        })
+        .collect();
+    let obs = observations(policy, inputs)?;
     Ok(Decision {
         dimension,
-        state,
+        state: ladder(policy, &obs),
         policy_version: policy.policy_version.clone(),
     })
 }

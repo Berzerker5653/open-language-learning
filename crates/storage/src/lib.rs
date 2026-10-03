@@ -10,12 +10,14 @@
 
 mod error;
 mod evidence;
+mod mastery;
 mod migrations;
 mod packs;
 mod profile;
 
 pub use error::Error;
 pub use evidence::{NewRecording, Recording};
+pub use mastery::MasterySnapshot;
 pub use migrations::SCHEMA_VERSION;
 pub use packs::{ContentVersion, PackInstallation};
 pub use profile::{GoalStatus, LearnerGoal, Profile, Setting};

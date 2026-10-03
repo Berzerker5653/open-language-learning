@@ -56,10 +56,15 @@ M2 — Local data and learner model
   hypotheses), strict loader + deterministic evaluator, 9 worked
   fixtures covering transitions/regression/exclusions/deferred tracks
   (evidence: `state/evidence/LEARN-005/`).
+- `LEARN-002` — derived multimodal mastery: per-dimension
+  `derive_mastery` (reading never grants speaking), uncalibrated
+  confidence capped at 0.9 with support/diversity/recency factors,
+  regression + needs-refresh, versioned snapshots in storage
+  (evidence: `state/evidence/LEARN-002/`).
 
 ## Next task
 
-`LEARN-002` — derived multimodal mastery model (M2, P0).
+`LEARN-003` — memory scheduler abstraction + FSRS spike (M2, P0).
 
 ## Owner decisions already resolved
 

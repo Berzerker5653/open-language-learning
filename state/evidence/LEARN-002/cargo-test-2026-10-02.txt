@@ -1,0 +1,34 @@
+     Running unittests src/lib.rs (target/debug/deps/lts_learner_model-b72612f2b1d9ffc3)
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/derive.rs (target/debug/deps/derive-98cf199362803d3c)
+test supported_success_is_weaker_evidence_than_independent ... ok
+test reading_success_never_grants_speaking_mastery ... ok
+test regression_and_needs_refresh_are_possible ... ok
+test snapshots_record_algorithm_and_policy_versions ... ok
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/evidence.rs (target/debug/deps/evidence-35195c77b8543bb3)
+test technical_speech_failure_is_distinct_from_learner_error ... ok
+test typed_attempt_carries_support_confidence_and_versions ... ok
+test events_remain_queryable_after_restart ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+     Running tests/policy.rs (target/debug/deps/policy-522e5808653d69fa)
+test policy_is_versioned_and_marks_thresholds_provisional ... ok
+test required_scenario_coverage ... ok
+test single_success_never_reaches_independent_even_repeated_same_prompt ... ok
+test policy_validation_rejects_broken_artifacts ... ok
+test every_declared_fixture_exists_and_derives_expected_states ... ok
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/lts_storage-d78d73a2b198dcf1)
+test migrations::tests::migrations_are_sequential_and_complete_history ... ok
+test tests::in_memory_store_migrates_to_head ... ok
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/store.rs (target/debug/deps/store-d0eb576f33581d04)
+test settings_goals_and_pack_records_round_trip ... ok
+test profile_created_without_account_or_network ... ok
+test delete_profile_removes_app_owned_learner_data ... ok
+test no_audio_blobs_and_no_recordings_by_default ... ok
+test evidence_survives_restart_and_rejects_duplicate_ids ... ok
+test migrations_apply_forward_from_initial_schema ... ok
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
