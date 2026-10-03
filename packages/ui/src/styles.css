@@ -541,6 +541,29 @@ legend {
   font-size: 0.875rem;
 }
 
+.plan-item {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+  cursor: pointer;
+}
+
+.plan-surface {
+  font-size: 1.125rem;
+}
+
+.plan-gloss {
+  color: var(--ink-faint);
+}
+
 /* environments */
 .place-list {
   list-style: none;

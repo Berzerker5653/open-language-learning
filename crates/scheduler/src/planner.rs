@@ -247,6 +247,7 @@ pub fn plan_session(
     // remaining candidates, cycling objectives review → weak →
     // progression so no objective starves the others.
     'fill: while plan.total_seconds < budget {
+        let before = plan.total_seconds;
         for pass in 0..3 {
             if plan.total_seconds >= budget {
                 break 'fill;
@@ -303,9 +304,12 @@ pub fn plan_session(
                 }
             }
         }
-        // One full pass made no progress (all candidates exhausted or
-        // blocked by modality caps): stop.
-        if ri >= reviews.len() && wi >= weak.len() && pi >= progression.len() {
+        // A full pass that added nothing (candidates exhausted, blocked
+        // by modality caps, or simply too long for the remaining
+        // budget): stop. Comparing progress, not candidate positions,
+        // is what guarantees termination: candidates can remain while
+        // nothing fits anymore.
+        if plan.total_seconds == before {
             break 'fill;
         }
     }

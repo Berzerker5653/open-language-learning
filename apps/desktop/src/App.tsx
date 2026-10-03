@@ -8,6 +8,7 @@ import {
 } from "./onboarding";
 import {
   Home,
+  type PlannedItem,
   ProgressView,
   type ProgressRow,
   type SessionPlan,
@@ -16,6 +17,7 @@ import {
 import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./pronunciation";
 import { LanguagePanel, type CatalogEntry, type InstalledPack } from "./language";
 import { WritingPractice, type WritingTaskView } from "./writing";
+import { PracticeRunner, type PracticeTaskView } from "./practice";
 
 type Invoke = (cmd: string, args?: Record<string, unknown>) => Promise<unknown>;
 
@@ -37,7 +39,7 @@ const EMPTY_PLAN: SessionPlan = {
 };
 
 /** Mono 16-bit PCM WAV (the native command's audio envelope). */
-function toWav16(samples: Int16Array, rate: number): Uint8Array {
+function toWav16(samples: Int16Array, rate: number): Uint8Array<ArrayBuffer> {
   const buf = new ArrayBuffer(44 + samples.length * 2);
   const v = new DataView(buf);
   const wstr = (o: number, s: string) => {
@@ -114,6 +116,15 @@ export function App() {
   const [writingCorrect, setWritingCorrect] = useState(false);
   const [writingUsedHint, setWritingUsedHint] = useState(false);
   const [writingError, setWritingError] = useState<string | null>(null);
+  const [practiceTarget, setPracticeTarget] = useState<{
+    contentId: string;
+    modality: string;
+  } | null>(null);
+  const [practiceTask, setPracticeTask] = useState<PracticeTaskView | null>(null);
+  const [practiceGraded, setPracticeGraded] = useState(false);
+  const [practiceCorrect, setPracticeCorrect] = useState(false);
+  const [practiceCorrectChoice, setPracticeCorrectChoice] = useState("");
+  const [practiceError, setPracticeError] = useState<string | null>(null);
 
   // The sticky header hides content when the page is scrolled; reset the
   // scroll position whenever the onboarding step or main route changes.
@@ -314,6 +325,56 @@ export function App() {
       } catch (e) {
         setWritingError(String(e));
       }
+    }
+  }
+
+  // UX-003: first lessons. Plan items are runnable; grading, evidence,
+  // and scheduling happen natively.
+  async function openPractice(item: PlannedItem) {
+    setPracticeError(null);
+    setPracticeGraded(false);
+    setPracticeCorrectChoice("");
+    setPracticeTarget({ contentId: item.content_id, modality: item.modality });
+    if (inv && profileId) {
+      try {
+        setPracticeTask(
+          (await inv("practice_task", {
+            profileId,
+            contentId: item.content_id,
+            modality: item.modality,
+          })) as PracticeTaskView,
+        );
+      } catch (e) {
+        setPracticeTask(null);
+        setPracticeError(String(e));
+      }
+    } else {
+      setPracticeTask(null);
+    }
+  }
+
+  async function choosePractice(index: number) {
+    if (!practiceTarget || !inv || !profileId) return;
+    try {
+      const g = (await inv("practice_submit", {
+        profileId,
+        contentId: practiceTarget.contentId,
+        modality: practiceTarget.modality,
+        choiceIndex: index,
+      })) as { correct: boolean; correct_choice: string };
+      setPracticeCorrect(g.correct);
+      setPracticeCorrectChoice(g.correct_choice);
+      setPracticeGraded(true);
+    } catch (e) {
+      setPracticeError(String(e));
+    }
+  }
+
+  async function finishPractice() {
+    setPracticeTarget(null);
+    setPracticeTask(null);
+    if (inv && profileId) {
+      setPlan((await inv("practice_plan", { profileId, minutes: budget })) as SessionPlan);
     }
   }
 
@@ -578,6 +639,38 @@ export function App() {
           onInstallCatalog={(id) => void installCatalogPack(id)}
           onImport={(b64) => void importPack(b64)}
         />
+      ) : practiceTarget && practiceTask ? (
+        <>
+          {practiceError && (
+            <p role="alert" className="alert">
+              {practiceError}
+            </p>
+          )}
+          <PracticeRunner
+            task={practiceTask}
+            graded={practiceGraded}
+            correct={practiceCorrect}
+            correctChoice={practiceCorrectChoice}
+            onChoose={(i) => void choosePractice(i)}
+            onNext={() => void finishPractice()}
+          />
+        </>
+      ) : practiceTarget ? (
+        <section aria-label="Practice">
+          <p className="empty">
+            This activity has no practice runner yet.
+            {practiceError ? ` ${practiceError}` : ""}
+          </p>
+          <div className="btn-row">
+            <button
+              type="button"
+              className="btn btn--quiet"
+              onClick={() => setPracticeTarget(null)}
+            >
+              Back to plan
+            </button>
+          </div>
+        </section>
       ) : (
         <Home
           displayName={displayName}
@@ -585,6 +678,7 @@ export function App() {
           activeBudget={budget}
           onBudget={(m) => void changeBudget(m)}
           environments={environments}
+          onStart={(item) => void openPractice(item)}
         />
       )}
     </AppShell>

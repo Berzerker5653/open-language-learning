@@ -336,6 +336,94 @@ fn split_item_id(id: &str) -> Option<(String, lts_domain::ActivityModality)> {
     Some((content.to_string(), parse_dimension(dim)?))
 }
 
+/// A lexicon entry reduced to what the UI and the practice runner need.
+struct LexEntry {
+    id: String,
+    surface: String,
+    reading: Option<String>,
+    gloss: String,
+}
+
+/// Parse an installed pack's lexicon into display/practice entries.
+/// Malformed lines are skipped; ids are validated as content ids so
+/// they can never become path components.
+fn lexicon_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<LexEntry>, String> {
+    let path = data
+        .join("packs")
+        .join(pack_id)
+        .join(version)
+        .join("lexicon")
+        .join("entries.jsonl");
+    let text = std::fs::read_to_string(&path).map_err(|_| "pack lexicon not found".to_string())?;
+    let mut out = Vec::new();
+    for line in text.lines() {
+        let Ok(entry) = serde_json::from_str::<serde_json::Value>(line) else {
+            continue;
+        };
+        let Some(id) = entry.get("id").and_then(|v| v.as_str()) else {
+            continue;
+        };
+        if lts_domain::ContentId::parse(id).is_err() {
+            continue;
+        }
+        let Some(forms) = entry.get("forms").and_then(|v| v.as_array()) else {
+            continue;
+        };
+        let Some(surface) = forms
+            .iter()
+            .find(|f| {
+                f.get("is_primary")
+                    .and_then(|b| b.as_bool())
+                    .unwrap_or(false)
+            })
+            .or(forms.first())
+            .and_then(|f| f.get("text").and_then(|t| t.as_str()))
+            .filter(|t| !t.is_empty())
+        else {
+            continue;
+        };
+        let reading = entry
+            .get("readings")
+            .and_then(|v| v.as_array())
+            .and_then(|a| {
+                a.iter()
+                    .find(|r| r.get("script").and_then(|s| s.as_str()) == Some("hiragana"))
+                    .or(a.first())
+                    .and_then(|r| r.get("text").and_then(|t| t.as_str()))
+                    .map(String::from)
+            });
+        let Some(gloss) = entry
+            .get("glosses")
+            .and_then(|g| g.as_object())
+            .and_then(|o| o.values().next())
+            .and_then(|v| v.as_array())
+            .and_then(|a| a.first())
+            .and_then(|v| v.as_str())
+            .filter(|t| !t.is_empty())
+        else {
+            continue;
+        };
+        out.push(LexEntry {
+            id: id.to_string(),
+            surface: surface.to_string(),
+            reading,
+            gloss: gloss.to_string(),
+        });
+    }
+    Ok(out)
+}
+
+/// Deterministic non-cryptographic hash (FNV-1a): choice placement must
+/// be stable across runs without pulling in an RNG (planner invariant).
+fn fnv1a(s: &str) -> u64 {
+    let mut h: u64 = 0xcbf2_9ce4_8422_2325;
+    for b in s.bytes() {
+        h ^= b as u64;
+        h = h.wrapping_mul(0x0000_0100_0000_01b3);
+    }
+    h
+}
+
 #[derive(serde::Deserialize)]
 struct PackGoals {
     goals: Vec<PackGoal>,
@@ -493,7 +581,36 @@ fn build_plan(
             confidence: d.confidence as f64,
         })
         .collect();
-    let progression = progression_items(data, &store, profile_id, &derived)?;
+    let mut progression = progression_items(data, &store, profile_id, &derived)?;
+    // New-item stream: every selected pack's unseen lexicon entries are
+    // introduction candidates. The goal graph alone can gate an entire
+    // pack behind prerequisites, which leaves a brand-new profile with
+    // an empty session (docs/01: sessions must always offer learning).
+    {
+        let mut planned: std::collections::HashSet<String> = progression
+            .iter()
+            .map(|p| p.content_id.clone())
+            .chain(due_reviews.iter().map(|r| r.content_id.clone()))
+            .collect();
+        for (pack_id, _v) in store
+            .selected_packs(profile_id)
+            .map_err(|e| e.to_string())?
+        {
+            let version = lts_langpack::archive::current_version(&pack_id, &data.join("packs"))
+                .ok_or_else(|| format!("pack {pack_id} not installed"))?;
+            for entry in lexicon_entries(data, &pack_id, &version)? {
+                let seen = derived.iter().any(|d| d.content_id == entry.id);
+                if seen || planned.contains(&entry.id) {
+                    continue;
+                }
+                planned.insert(entry.id.clone());
+                progression.push(lts_scheduler::ProgressionItem {
+                    content_id: entry.id,
+                    modality: lts_domain::ActivityModality::RecallMeaning,
+                });
+            }
+        }
+    }
     let config = lts_scheduler::PlannerConfig {
         budget_minutes: minutes,
         ..Default::default()
@@ -509,10 +626,96 @@ fn build_plan(
     .map_err(|e| format!("{e:?}"))
 }
 
+/// Plan item enriched with the lexicon display info the UI needs to
+/// answer "what am I about to learn?" — the scheduler stays pure.
+#[derive(Serialize)]
+struct PlanItemView {
+    item_id: String,
+    content_id: String,
+    modality: &'static str,
+    reason: &'static str,
+    est_seconds: u32,
+    surface: Option<String>,
+    gloss: Option<String>,
+}
+
+#[derive(Serialize)]
+struct PlanView {
+    items: Vec<PlanItemView>,
+    total_seconds: u32,
+    budget_minutes: u32,
+    seed: u64,
+    planner_version: String,
+}
+
+fn reason_kebab(r: lts_scheduler::PlanReason) -> &'static str {
+    match r {
+        lts_scheduler::PlanReason::DueReview => "due-review",
+        lts_scheduler::PlanReason::WeakSkill => "weak-skill",
+        lts_scheduler::PlanReason::Progression => "progression",
+    }
+}
+
+/// Attach surface/gloss from the selected packs' lexicons to plan
+/// items; items with no lexicon entry (e.g. grammar goals) stay null.
+fn build_plan_view(
+    data: &Path,
+    profile_id: &str,
+    minutes: u32,
+    now_secs: u64,
+) -> Result<PlanView, String> {
+    let plan = build_plan(data, profile_id, minutes, now_secs)?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let mut display: std::collections::HashMap<String, (String, Option<String>, String)> =
+        Default::default();
+    for (pack_id, _v) in store
+        .selected_packs(profile_id)
+        .map_err(|e| e.to_string())?
+    {
+        let Ok(version) = lts_langpack::archive::current_version(&pack_id, &data.join("packs"))
+            .ok_or_else(|| format!("pack {pack_id} not installed"))
+        else {
+            continue;
+        };
+        if let Ok(entries) = lexicon_entries(data, &pack_id, &version) {
+            for e in entries {
+                display
+                    .entry(e.id)
+                    .or_insert((e.surface, e.reading, e.gloss));
+            }
+        }
+    }
+    Ok(PlanView {
+        items: plan
+            .items
+            .into_iter()
+            .map(|i| {
+                let (surface, gloss) = match display.get(&i.content_id) {
+                    Some((s, _, g)) => (Some(s.clone()), Some(g.clone())),
+                    None => (None, None),
+                };
+                PlanItemView {
+                    item_id: i.item_id,
+                    content_id: i.content_id,
+                    modality: dimension_kebab(i.modality),
+                    reason: reason_kebab(i.reason),
+                    est_seconds: i.est_seconds,
+                    surface,
+                    gloss,
+                }
+            })
+            .collect(),
+        total_seconds: plan.total_seconds,
+        budget_minutes: plan.budget_minutes,
+        seed: plan.seed,
+        planner_version: plan.planner_version,
+    })
+}
+
 #[derive(Serialize)]
 struct HomeState {
     display_name: String,
-    plan: lts_scheduler::SessionPlan,
+    plan: PlanView,
 }
 
 /// Home: next actions under the default 5-minute budget. No streak,
@@ -525,7 +728,7 @@ fn home_state(profile_id: String) -> Result<HomeState, String> {
         .get_profile(&profile_id)
         .map_err(|e| e.to_string())?
         .ok_or("unknown profile")?;
-    let plan = build_plan(&data, &profile_id, 5, now_secs())?;
+    let plan = build_plan_view(&data, &profile_id, 5, now_secs())?;
     Ok(HomeState {
         display_name: profile.display_name,
         plan,
@@ -533,8 +736,9 @@ fn home_state(profile_id: String) -> Result<HomeState, String> {
 }
 
 #[tauri::command]
-fn practice_plan(profile_id: String, minutes: u32) -> Result<lts_scheduler::SessionPlan, String> {
-    build_plan(&data_dir(), &profile_id, minutes, now_secs())
+
+fn practice_plan(profile_id: String, minutes: u32) -> Result<PlanView, String> {
+    build_plan_view(&data_dir(), &profile_id, minutes, now_secs())
 }
 
 #[derive(Serialize)]
@@ -954,7 +1158,9 @@ fn writing_tasks(
         let Ok(entry) = serde_json::from_str::<serde_json::Value>(line) else {
             continue;
         };
-        let Some(id) = field(&entry, "id") else { continue };
+        let Some(id) = field(&entry, "id") else {
+            continue;
+        };
         if lts_domain::ContentId::parse(id).is_err() {
             continue;
         }
@@ -963,9 +1169,16 @@ fn writing_tasks(
         };
         let primary = forms
             .iter()
-            .find(|f| f.get("is_primary").and_then(|b| b.as_bool()).unwrap_or(false))
+            .find(|f| {
+                f.get("is_primary")
+                    .and_then(|b| b.as_bool())
+                    .unwrap_or(false)
+            })
             .or(forms.first());
-        let Some(answer) = primary.and_then(|f| field(f, "text")).filter(|t| !t.is_empty()) else {
+        let Some(answer) = primary
+            .and_then(|f| field(f, "text"))
+            .filter(|t| !t.is_empty())
+        else {
             continue;
         };
         let accepted: Vec<String> = forms
@@ -1082,6 +1295,183 @@ fn writing_submit(
     );
     store.append_evidence(&event).map_err(|e| e.to_string())?;
     Ok(grade)
+}
+
+// ---------------------------------------------------------------------------
+// UX-003: first lessons — the runnable multiple-choice recall-meaning
+// runner. The correct answer never crosses IPC: the task is rebuilt
+// natively at submit and graded there, and every scored attempt feeds
+// the scheduler so the item later surfaces as a due review.
+// ---------------------------------------------------------------------------
+
+#[derive(Serialize)]
+struct PracticeTask {
+    item_id: String,
+    surface: String,
+    reading: Option<String>,
+    choices: Vec<String>,
+}
+
+#[derive(Serialize)]
+struct PracticeGrade {
+    correct: bool,
+    correct_choice: String,
+}
+
+/// Build a deterministic choice task: the entry's gloss is correct,
+/// distractors are other same-pack glosses in file order, and the
+/// correct position is a hash of the item id (stable, no RNG).
+/// Returns the task plus the correct choice (native-only).
+fn practice_build(
+    data: &Path,
+    profile_id: &str,
+    content_id: &str,
+    modality: &str,
+) -> Result<(PracticeTask, String), String> {
+    checked_unit(content_id)?;
+    if parse_dimension(modality) != Some(lts_domain::ActivityModality::RecallMeaning) {
+        return Err("no practice runner for this activity yet".to_string());
+    }
+    let active = packs::active_pack(data, profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    let entries = lexicon_entries(data, pack_id, &version)?;
+    let entry = entries
+        .iter()
+        .find(|e| e.id == content_id)
+        .ok_or("unknown practice target")?;
+    let mut choices: Vec<String> = entries
+        .iter()
+        .filter(|e| e.id != content_id && e.gloss != entry.gloss)
+        .map(|e| e.gloss.clone())
+        .take(3)
+        .collect();
+    if choices.is_empty() {
+        return Err("pack lexicon is too small for a choice task".to_string());
+    }
+    let item_id = format!("{content_id}#recall-meaning");
+    let pos = (fnv1a(&item_id) % (choices.len() as u64 + 1)) as usize;
+    choices.insert(pos, entry.gloss.clone());
+    let task = PracticeTask {
+        item_id,
+        surface: entry.surface.clone(),
+        reading: entry.reading.clone(),
+        choices,
+    };
+    let correct = entry.gloss.clone();
+    Ok((task, correct))
+}
+
+fn practice_task_at(
+    data: &Path,
+    profile_id: &str,
+    content_id: &str,
+    modality: &str,
+) -> Result<PracticeTask, String> {
+    practice_build(data, profile_id, content_id, modality).map(|(t, _)| t)
+}
+
+#[tauri::command]
+fn practice_task(
+    profile_id: String,
+    content_id: String,
+    modality: String,
+) -> Result<PracticeTask, String> {
+    practice_task_at(&data_dir(), &profile_id, &content_id, &modality)
+}
+
+/// Grade a choice natively, record recall-meaning evidence, and upsert
+/// the scheduler row so the item later appears in due reviews.
+#[tauri::command]
+fn practice_submit(
+    profile_id: String,
+    content_id: String,
+    modality: String,
+    choice_index: usize,
+) -> Result<PracticeGrade, String> {
+    practice_submit_at(
+        &data_dir(),
+        &profile_id,
+        &content_id,
+        &modality,
+        choice_index,
+    )
+}
+
+fn practice_submit_at(
+    data: &Path,
+    profile_id: &str,
+    content_id: &str,
+    modality: &str,
+    choice_index: usize,
+) -> Result<PracticeGrade, String> {
+    let (task, correct_choice) = practice_build(data, profile_id, content_id, modality)?;
+    let chosen = task
+        .choices
+        .get(choice_index)
+        .ok_or("choice out of range")?;
+    let correct = *chosen == correct_choice;
+    let active = packs::active_pack(data, profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let now = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map_err(|e| e.to_string())?;
+    let event = lts_learner_model::AttemptDraft::new(
+        vec![lts_domain::ContentId::parse(content_id).map_err(|_| "invalid item id")?],
+        lts_domain::ActivityModality::RecallMeaning,
+        lts_domain::ContentId::parse("ja.activity.demo.mc-recall")
+            .map_err(|_| "invalid activity id")?,
+        pack_id,
+        &version,
+    )
+    .support(
+        lts_domain::SupportLevel::new(0).ok_or("bad support")?,
+        vec![],
+    )
+    .scored(if correct {
+        lts_domain::Score::Correct
+    } else {
+        lts_domain::Score::Incorrect
+    })
+    .finish(
+        lts_domain::EventId::new(format!("practice-{}-{}", now.as_secs(), now.subsec_nanos())),
+        &rfc3339_utc(now.as_secs()),
+        lts_domain::ProfileId::new(profile_id),
+    );
+    store.append_evidence(&event).map_err(|e| e.to_string())?;
+    if let Some(rating) = lts_scheduler::rating_from_evidence(&event) {
+        let spike = lts_scheduler::FsrsSpike::default();
+        let prior = store
+            .scheduler_state(profile_id)
+            .map_err(|e| e.to_string())?
+            .into_iter()
+            .find(|r| r.item_id == task.item_id && r.scheduler == lts_scheduler::SPIKE_VERSION)
+            .map(|r| serde_json::from_str::<lts_scheduler::ItemState>(&r.params_json))
+            .transpose()
+            .map_err(|e| e.to_string())?;
+        let decision =
+            lts_scheduler::Scheduler::review(&spike, prior.as_ref(), rating, now.as_secs() as i64);
+        store
+            .save_scheduler_state(
+                profile_id,
+                &lts_storage::SchedulerRecord {
+                    item_id: task.item_id.clone(),
+                    scheduler: lts_scheduler::SPIKE_VERSION.to_string(),
+                    params_json: serde_json::to_string(&decision.state)
+                        .map_err(|e| e.to_string())?,
+                    due_at: rfc3339_utc(decision.due_at.max(0) as u64),
+                },
+            )
+            .map_err(|e| e.to_string())?;
+    }
+    Ok(PracticeGrade {
+        correct,
+        correct_choice,
+    })
 }
 
 /// TTS-001 acceptance 3: curated licensed recordings (pack media)
@@ -1241,20 +1631,16 @@ pub fn run() {
         // notice); everything else is denied.
         .setup(|app| {
             use tauri::webview::{PermissionKind, PermissionResponse};
-            let _win = tauri::WebviewWindowBuilder::new(
-                app,
-                "main",
-                tauri::WebviewUrl::default(),
-            )
-            .title("Open Language Learning Platform")
-            .inner_size(1100.0, 720.0)
-            .min_inner_size(800.0, 600.0)
-            .center()
-            .on_permission_request(|_webview, kind| match kind {
-                PermissionKind::Microphone => PermissionResponse::Allow,
-                _ => PermissionResponse::Deny,
-            })
-            .build()?;
+            let _win = tauri::WebviewWindowBuilder::new(app, "main", tauri::WebviewUrl::default())
+                .title("Open Language Learning Platform")
+                .inner_size(1100.0, 720.0)
+                .min_inner_size(800.0, 600.0)
+                .center()
+                .on_permission_request(|_webview, kind| match kind {
+                    PermissionKind::Microphone => PermissionResponse::Allow,
+                    _ => PermissionResponse::Deny,
+                })
+                .build()?;
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -1282,7 +1668,9 @@ pub fn run() {
             active_pack,
             switch_pack,
             writing_task,
-            writing_submit
+            writing_submit,
+            practice_task,
+            practice_submit
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
@@ -1902,5 +2290,80 @@ mod tests {
         );
         // Both packs installed and listed offline.
         assert_eq!(packs::installed_packs(data).len(), 2);
+    }
+
+    #[test]
+    fn new_profile_gets_first_lessons_and_runner_records_evidence() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+
+        // A brand-new profile must have something to learn: the
+        // unseen-lexicon stream fills the session even though every
+        // goal is gated behind prerequisites.
+        let plan = build_plan(data, &p.id, 5, 1_762_128_000).unwrap();
+        assert!(!plan.items.is_empty());
+        assert!(
+            plan.items
+                .iter()
+                .all(|i| i.reason == lts_scheduler::PlanReason::Progression)
+        );
+
+        // The view carries the actual word + gloss, not just ids.
+        let view = build_plan_view(data, &p.id, 5, 1_762_128_000).unwrap();
+        let first = view.items.first().unwrap();
+        assert!(first.surface.is_some() && first.gloss.is_some());
+
+        // Runner task: deterministic four-choice, correct gloss present.
+        let t1 = practice_task_at(data, &p.id, "ja.lex.demo.konnichiwa", "recall-meaning").unwrap();
+        let t2 = practice_task_at(data, &p.id, "ja.lex.demo.konnichiwa", "recall-meaning").unwrap();
+        assert_eq!(t1.choices, t2.choices);
+        assert_eq!(t1.choices.len(), 4);
+        assert!(t1.choices.contains(&"hello".to_string()));
+        assert_eq!(t1.surface, "こんにちは");
+
+        // Correct answer: scored evidence + a scheduler row appear.
+        let idx = t1.choices.iter().position(|c| c == "hello").unwrap();
+        let grade =
+            practice_submit_at(data, &p.id, "ja.lex.demo.konnichiwa", "recall-meaning", idx)
+                .unwrap();
+        assert!(grade.correct);
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        assert!(
+            store
+                .evidence_for_profile(&p.id)
+                .unwrap()
+                .iter()
+                .any(
+                    |e| e.modality == lts_domain::ActivityModality::RecallMeaning
+                        && e.outcome == lts_domain::Outcome::Scored
+                )
+        );
+        assert!(
+            store
+                .scheduler_state(&p.id)
+                .unwrap()
+                .iter()
+                .any(|r| r.item_id == "ja.lex.demo.konnichiwa#recall-meaning")
+        );
+
+        // Wrong choice grades incorrect (maps to a scheduler lapse).
+        let wrong_idx = t1.choices.iter().position(|c| c != "hello").unwrap();
+        let g2 = practice_submit_at(
+            data,
+            &p.id,
+            "ja.lex.demo.konnichiwa",
+            "recall-meaning",
+            wrong_idx,
+        )
+        .unwrap();
+        assert!(!g2.correct);
+
+        // Modalities without a runner abstain honestly.
+        assert!(
+            practice_task_at(data, &p.id, "ja.lex.demo.konnichiwa", "production-writing").is_err()
+        );
     }
 }

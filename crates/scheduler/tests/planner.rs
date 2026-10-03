@@ -219,3 +219,35 @@ fn invalid_configs_are_rejected() {
         Err(PlannerError::ModalityLimitMustBePositive)
     );
 }
+
+#[test]
+fn fill_phase_terminates_when_nothing_fits_anymore() {
+    // Regression: with leftover budget smaller than the next item's
+    // estimate but candidates still un-planned, the fill loop used to
+    // spin forever (candidate-position checks never became true).
+    let inputs = PlannerInputs {
+        weak_skills: vec![
+            WeakSkillItem {
+                content_id: "w-1".into(),
+                dimension: ProductionWriting,
+                confidence: 0.2,
+            },
+            WeakSkillItem {
+                content_id: "w-2".into(),
+                dimension: ProductionWriting,
+                confidence: 0.3,
+            },
+        ],
+        progression: (0..4)
+            .map(|i| ProgressionItem {
+                content_id: format!("p-{i}"),
+                modality: RecallMeaning,
+            })
+            .collect(),
+        ..PlannerInputs::default()
+    };
+    let plan = plan_session(&cfg(5), &inputs).unwrap();
+    assert!(plan.total_seconds <= 300);
+    // Genuinely packed: no remaining candidate fits the leftover budget.
+    assert!(plan.total_seconds + 60 > 300);
+}

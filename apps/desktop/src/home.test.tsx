@@ -63,6 +63,34 @@ describe("home", () => {
     expect(html).toContain("Nothing is due right now");
   });
 
+  it("makes recall-meaning plan items runnable with the actual word", () => {
+    const html = renderToStaticMarkup(
+      <Home
+        displayName="Hunter"
+        plan={{
+          ...plan,
+          items: [
+            {
+              item_id: "ja.lex.demo.konnichiwa:recallmeaning",
+              content_id: "ja.lex.demo.konnichiwa",
+              modality: "recall-meaning",
+              reason: "progression",
+              est_seconds: 60,
+              surface: "こんにちは",
+              gloss: "hello",
+            },
+          ],
+        }}
+        activeBudget={5}
+        onBudget={() => {}}
+        onStart={() => {}}
+      />,
+    );
+    expect(html).toContain('class="plan-item"');
+    expect(html).toContain("こんにちは");
+    expect(html).toContain("hello");
+  });
+
   it("shows capability-gated environments with unlock state", () => {
     const html = renderToStaticMarkup(
       <Home

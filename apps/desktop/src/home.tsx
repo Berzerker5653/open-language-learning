@@ -11,6 +11,8 @@ export interface PlannedItem {
   modality: string;
   reason: "due-review" | "weak-skill" | "progression";
   est_seconds: number;
+  surface?: string | null;
+  gloss?: string | null;
 }
 
 export interface SessionPlan {
@@ -42,6 +44,7 @@ export interface HomeProps {
   activeBudget: number;
   onBudget(minutes: number): void;
   environments?: WorldEnvironment[];
+  onStart?(item: PlannedItem): void;
 }
 
 export function Home(p: HomeProps) {
@@ -73,11 +76,33 @@ export function Home(p: HomeProps) {
         <ul className="plan-list">
           {p.plan.items.map((item) => (
             <li key={item.item_id}>
-              <span className="plan-reason">{REASON_LABELS[item.reason]}</span>
-              <code>{item.content_id}</code>
-              <span className="meta">
-                {item.modality}, ~{item.est_seconds}s
-              </span>
+              {p.onStart && item.modality === "recall-meaning" && item.surface ? (
+                <button type="button" className="plan-item" onClick={() => p.onStart!(item)}>
+                  <span className="plan-reason">{REASON_LABELS[item.reason]}</span>
+                  <strong className="plan-surface" lang="ja">
+                    {item.surface}
+                  </strong>
+                  {item.gloss && <span className="plan-gloss">{item.gloss}</span>}
+                  <span className="meta">~{item.est_seconds}s</span>
+                </button>
+              ) : (
+                <>
+                  <span className="plan-reason">{REASON_LABELS[item.reason]}</span>
+                  {item.surface ? (
+                    <>
+                      <strong className="plan-surface" lang="ja">
+                        {item.surface}
+                      </strong>
+                      {item.gloss && <span className="plan-gloss">{item.gloss}</span>}
+                    </>
+                  ) : (
+                    <code>{item.content_id}</code>
+                  )}
+                  <span className="meta">
+                    {item.modality}, ~{item.est_seconds}s
+                  </span>
+                </>
+              )}
             </li>
           ))}
         </ul>
