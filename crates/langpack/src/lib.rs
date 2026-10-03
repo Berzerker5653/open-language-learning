@@ -8,6 +8,7 @@ pub mod audit;
 pub mod diagnose;
 pub mod graph;
 pub mod layout;
+pub mod leximport;
 pub mod migrate;
 pub mod pack;
 pub mod schema;

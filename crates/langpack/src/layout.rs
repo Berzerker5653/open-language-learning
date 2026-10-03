@@ -105,6 +105,9 @@ pub fn classify(rel: &str) -> Option<Classified> {
                     shape: DocShape::Single,
                 });
             }
+            if rel.starts_with("lexicon/") && rel.ends_with(".jsonl") {
+                return Some(jsonl("lexicon-entry"));
+            }
             if rel.starts_with("curriculum/units/") && yaml(rel) {
                 return Some(single("unit"));
             }

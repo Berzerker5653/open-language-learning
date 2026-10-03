@@ -94,6 +94,24 @@ enum Command {
         #[arg(long)]
         attribution_report: bool,
     },
+    /// Import lexical data from a registered source into the pack as
+    /// unreviewed draft entries in a separate lexicon/imported-*.jsonl
+    /// file. Curriculum files are never touched; attribution/license
+    /// inventory entries are generated. Reference-only/blocked sources
+    /// are rejected (docs/10).
+    ImportLexicon {
+        /// Pack root directory.
+        path: String,
+        /// Source id registered in sources.jsonl.
+        #[arg(long)]
+        source: String,
+        /// Source-side JSONL export (key/form/reading/glosses/pos/tags).
+        #[arg(long)]
+        input: String,
+        /// Locale for the gloss field.
+        #[arg(long, default_value = "en-US")]
+        gloss_locale: String,
+    },
     /// Build a deterministic .lpk archive (sorted entries, fixed
     /// timestamps, SHA-256 manifest).
     Build {
@@ -435,6 +453,34 @@ fn main() -> ExitCode {
                 ExitCode::from(1)
             } else {
                 ExitCode::SUCCESS
+            }
+        }
+        Command::ImportLexicon {
+            path,
+            source,
+            input,
+            gloss_locale,
+        } => {
+            match lts_langpack::leximport::import_lexicon(
+                Path::new(&path),
+                &source,
+                Path::new(&input),
+                &gloss_locale,
+            ) {
+                Ok(o) => {
+                    println!("imported {} entries into {}", o.entries, o.output_file);
+                    println!("license entries added: {}", o.licenses_added);
+                    println!("--- required attribution ---");
+                    for e in &o.attribution {
+                        println!("{} [{}] ({})", e.title, e.license, e.source_id);
+                        println!("  {}", e.attribution);
+                    }
+                    ExitCode::SUCCESS
+                }
+                Err(e) => {
+                    eprintln!("error: import failed: {e}");
+                    ExitCode::from(1)
+                }
             }
         }
         Command::Build { path, out } => match archive::build(Path::new(&path)) {

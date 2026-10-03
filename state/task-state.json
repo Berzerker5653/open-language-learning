@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-03",
-  "active_task": "JA-RES-006",
+  "active_task": "ACT-001",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -243,6 +243,18 @@
       ]
     },
     "JA-RES-006": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/JA-RES-006.md",
+        "state/evidence/JA-RES-006/cargo-test-2026-10-03.txt",
+        "state/evidence/JA-RES-006/ci-2026-10-03.txt",
+        "crates/langpack/src/leximport.rs",
+        "tests/fixtures/leximport/jmdict-sample.jsonl"
+      ]
+    },
+    "ACT-001": {
       "status": "in_progress",
       "attempts": 0,
       "last_error": null,

@@ -101,10 +101,16 @@ M2 — Local data and learner model
   missing-dependency checked), 6-register 0–4 formality model with
   16 multi-register situations — politeness contextual, not binary
   (evidence: `state/evidence/JA-RES-005/`).
+- `JA-RES-006` — reviewed lexical import pipeline: reproducible
+  byte-identical imports into separate `lexicon/imported-*.jsonl`,
+  curriculum never touched, generated derived-from-source license +
+  attribution, non-redistributable sources rejected, imported entries
+  always draft with no teaching order (evidence:
+  `state/evidence/JA-RES-006/`).
 
 ## Next task
 
-`JA-RES-006` — reviewed lexical import pipeline (M3, P1).
+`ACT-001` — activity runtime + support ladder (M4, P0).
 Note: `REVIEW-001` (reviewer capacity) and `LIC-001` (final licensing
 decisions) are owner-only and remain open blockers for release.
 
