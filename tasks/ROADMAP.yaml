@@ -1,0 +1,1084 @@
+schema_version: '1.0'
+project: open-language-learning-platform
+selection_policy: eligible required task in lowest numbered milestone, then priority order, then stable task
+  ID; dependencies must be done; optional work needs explicit owner scope
+status_values:
+- blocked
+- ready
+- in_progress
+- review
+- done
+- retryable
+priorities:
+- P0
+- P1
+- P2
+- P3
+milestones:
+- id: M0
+  name: Bootstrap and technical proof
+- id: M1
+  name: Language Pack SDK and secure content core
+- id: M2
+  name: Learner model, scheduler, and persistence
+- id: M3
+  name: Japanese research foundation
+- id: M4
+  name: First playable learning vertical slice
+- id: M5
+  name: Local speech and pronunciation foundation
+- id: M6
+  name: Japanese A1-quality course
+- id: M7
+  name: Scenario/game expansion and A2
+- id: M8
+  name: Independent learner / B1
+- id: M9
+  name: B2 reference release coverage
+- id: M10
+  name: Cross-platform, audit, and 1.0 release
+- id: M11
+  name: Advanced/C1-C2-capable continuation
+tasks:
+- id: ARCH-001
+  milestone: M0
+  priority: P0
+  title: Define core domain IDs, versions, and provider interfaces
+  dependencies:
+  - BOOT-001
+  read_first:
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  - docs/05_SPEECH_SYSTEM.md
+  - docs/07_TECHNICAL_ARCHITECTURE.md
+  - docs/08_DATA_AND_PRIVACY.md
+  acceptance:
+  - Typed stable ID/version primitives exist.
+  - Speech/provider interfaces compile without concrete provider dependency.
+  - Language pack domain model has no ja-JP dependency.
+  required_for_desktop_1_0: true
+- id: BOOT-001
+  milestone: M0
+  priority: P0
+  title: Initialize monorepo and toolchains
+  dependencies: []
+  read_first:
+  - docs/00_MASTER_SPEC.md
+  - docs/07_TECHNICAL_ARCHITECTURE.md
+  - docs/15_AUTONOMOUS_DEVELOPMENT.md
+  - docs/19_PROJECT_FILE_ARCHITECTURE.md
+  acceptance:
+  - Clean checkout installs/builds with documented commands on Linux reference environment.
+  - Pinned lockfiles and workspace layout exist for app/packages/crates.
+  - CI executes formatting, typecheck, unit-test placeholders, and schema checks.
+  - ADR records final initial stack and current stable versions.
+  required_for_desktop_1_0: true
+- id: BOOT-002
+  milestone: M0
+  priority: P0
+  title: Create Tauri desktop shell and shared UI skeleton
+  dependencies:
+  - BOOT-001
+  read_first:
+  - docs/01_PRODUCT_AND_UX.md
+  - docs/07_TECHNICAL_ARCHITECTURE.md
+  - docs/11_ACCESSIBILITY_AND_LOCALIZATION.md
+  acceptance:
+  - Desktop app launches and renders a keyboard-navigable shell.
+  - UI layer has no Japanese-specific hardcoding in core components.
+  - Automated smoke test covers launch/home route.
+  required_for_desktop_1_0: true
+- id: BOOT-003
+  milestone: M0
+  priority: P0
+  title: Establish quality, lint, CI, and ADR conventions
+  dependencies:
+  - BOOT-001
+  read_first:
+  - AGENTS.md
+  - docs/09_TESTING_AND_ACCEPTANCE.md
+  acceptance:
+  - Formatting/lint/type/test commands are documented and CI-enforced.
+  - Test fixture and ADR conventions are documented.
+  - Secret scanning and dependency audit baseline are enabled where practical.
+  required_for_desktop_1_0: true
+- id: PERF-001
+  milestone: M0
+  priority: P1
+  title: Specify supported hardware and performance test contract
+  dependencies:
+  - BOOT-002
+  - ARCH-001
+  read_first:
+  - docs/05_SPEECH_SYSTEM.md
+  - docs/07_TECHNICAL_ARCHITECTURE.md
+  - docs/17_SPEECH_BENCHMARK_PLAN.md
+  acceptance:
+  - docs/performance/BUDGETS.yaml defines named OS/hardware tiers, sample lengths, warm/cold scenarios, latency
+    percentiles, memory/disk limits, cancellation, and UI responsiveness measurement.
+  - Provisional budgets are labeled product targets and frozen after baseline spikes, before optimizing providers
+    or running release measurements; actual hardware/model combinations are identified.
+  - Support may be narrowed transparently with compatible alternatives, but thresholds cannot be raised silently
+    to make a failed configuration pass.
+  required_for_desktop_1_0: true
+- id: LIC-001
+  milestone: M1
+  priority: P1
+  title: Resolve distribution licenses and component rights
+  dependencies:
+  - PACK-003
+  read_first:
+  - docs/10_LICENSING_AND_PROVENANCE.md
+  - docs/13_RELEASE_AND_DISTRIBUTION.md
+  - docs/SOURCES.md
+  acceptance:
+  - Record an owner-approved source-code license and original-content license before public redistribution;
+    include final license files only after compatibility checks.
+  - Application, original curriculum, imported dictionary derivatives, models/voices, media/fonts, and benchmark
+    datasets each have an auditable rights/attribution record.
+  - Access/use conditions are tracked separately from copyright license; restricted research fixtures are fetched
+    permissionably and are not re-hosted.
+  - Local implementation and alternative-source research may continue while any owner-only licensing choice
+    is pending; release remains blocked.
+  required_for_desktop_1_0: true
+- id: PACK-001
+  milestone: M1
+  priority: P0
+  title: Implement and complete public pack schemas and structural validator
+  dependencies:
+  - ARCH-001
+  - BOOT-003
+  read_first:
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  - schemas/README.md
+  acceptance:
+  - Minimal and Japanese draft manifests parse and validate.
+  - Malformed fixtures fail with actionable diagnostics.
+  - CLI has machine-readable JSON output.
+  - Publish schemas and conformance fixtures for every shipped logical content type including lexical entries,
+    scripts, phonology, pragmatics, scenarios, assessments, review and provenance records; seed schemas are
+    provisional.
+  - Stable ID grammar is consistent across docs and schemas, locale/script and engine SemVer compatibility
+    is checked semantically, and content generation/review provenance is representable.
+  - Every draft unresolved reference is explicit and rejects normal pack build/promotion; handoff scaffold
+    validation never confers installation or release eligibility.
+  - Evolve bare prerequisite IDs into versioned target/modality/dimension/state/hard-or-helpful records as
+    defined in docs/03, with migration and fixtures for deferred-modality tracks; the starter goal schema does
+    not yet implement this contract.
+  required_for_desktop_1_0: true
+- id: PACK-002
+  milestone: M1
+  priority: P0
+  title: Implement cross-file ID and curriculum graph validator
+  dependencies:
+  - PACK-001
+  read_first:
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  acceptance:
+  - Unknown references and duplicate IDs fail.
+  - Prerequisite cycles fail with cycle path.
+  - Unreachable/dead goal audit report is generated.
+  required_for_desktop_1_0: true
+- id: PACK-003
+  milestone: M1
+  priority: P0
+  title: Implement source/license audit
+  dependencies:
+  - PACK-001
+  read_first:
+  - docs/10_LICENSING_AND_PROVENANCE.md
+  - docs/SOURCES.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - Reference builds fail on unknown/blocked redistributed assets.
+  - Attribution report can be generated.
+  - Reference-only sources cannot be marked as bundled assets.
+  required_for_desktop_1_0: true
+- id: PACK-004
+  milestone: M1
+  priority: P0
+  title: Secure pack archive build/install/inspect
+  dependencies:
+  - PACK-001
+  - PACK-002
+  - PACK-003
+  read_first:
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  - docs/08_DATA_AND_PRIVACY.md
+  acceptance:
+  - Deterministic pack build produces hashes/manifest.
+  - Installer rejects path traversal, invalid hashes, oversized/decompression-bomb fixtures.
+  - Install/upgrade/rollback integration tests pass.
+  required_for_desktop_1_0: true
+- id: PACK-005
+  milestone: M1
+  priority: P1
+  title: Complete langpack CLI author workflow
+  dependencies:
+  - PACK-004
+  read_first:
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - init/validate/lint/test/audit-curriculum/audit-sources/audit-licenses/build/inspect commands exist.
+  - Minimal pack can be initialized, validated, built, and inspected from clean temp directory.
+  - Contributor quickstart is documented.
+  required_for_desktop_1_0: true
+- id: DATA-001
+  milestone: M2
+  priority: P0
+  title: Implement local SQLite profile storage and migrations
+  dependencies:
+  - ARCH-001
+  read_first:
+  - docs/08_DATA_AND_PRIVACY.md
+  - docs/07_TECHNICAL_ARCHITECTURE.md
+  acceptance:
+  - Profile can be created without account/network.
+  - Migrations are tested forward from initial schema.
+  - Sensitive/raw audio is not stored by default.
+  required_for_desktop_1_0: true
+- id: DATA-002
+  milestone: M2
+  priority: P1
+  title: Implement profile export/import
+  dependencies:
+  - DATA-001
+  - LEARN-001
+  read_first:
+  - docs/08_DATA_AND_PRIVACY.md
+  acceptance:
+  - Round-trip preserves evidence/mastery inputs/settings.
+  - Import never silently overwrites an existing profile.
+  - Recordings are opt-in to export.
+  required_for_desktop_1_0: true
+- id: LEARN-001
+  milestone: M2
+  priority: P0
+  title: Implement evidence event model
+  dependencies:
+  - DATA-001
+  - ARCH-001
+  read_first:
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  acceptance:
+  - Activities can append typed evidence with support/confidence/content versions.
+  - Events remain queryable after restart.
+  - Technical speech failures are representable separately from learner errors.
+  required_for_desktop_1_0: true
+- id: LEARN-002
+  milestone: M2
+  priority: P0
+  title: Implement derived multimodal mastery model
+  dependencies:
+  - LEARN-001
+  - LEARN-005
+  read_first:
+  - docs/02_LEARNING_SCIENCE.md
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  - docs/12_OBSERVABILITY_AND_RESEARCH.md
+  acceptance:
+  - Reading success does not automatically grant speaking/listening mastery.
+  - Support use weakens evidence strength relative to independent performance.
+  - Regression/needs-refresh state is possible.
+  - Algorithm version is recorded.
+  required_for_desktop_1_0: true
+- id: LEARN-003
+  milestone: M2
+  priority: P0
+  title: Implement memory scheduler abstraction and FSRS spike
+  dependencies:
+  - LEARN-001
+  read_first:
+  - docs/02_LEARNING_SCIENCE.md
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  - docs/SOURCES.md
+  acceptance:
+  - Research note compares current maintained FSRS implementation options and licenses.
+  - Discrete retrievable items can be scheduled without daily attendance requirement.
+  - Scheduler is behind an interface and deterministic under test clock/seed.
+  required_for_desktop_1_0: true
+- id: LEARN-004
+  milestone: M2
+  priority: P0
+  title: Implement session planner
+  dependencies:
+  - LEARN-002
+  - LEARN-003
+  - PACK-002
+  - LEARN-005
+  read_first:
+  - docs/01_PRODUCT_AND_UX.md
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  acceptance:
+  - Planner supports 5/10/20/30+ minute budgets.
+  - Balances due review, weak skills, progression, and modality repetition limits.
+  - No streak/day-presence objective exists.
+  - Plans are reproducible with fixed input/seed.
+  required_for_desktop_1_0: true
+- id: LEARN-005
+  milestone: M2
+  priority: P0
+  title: Specify versioned mastery, assessment, and prerequisite policy
+  dependencies:
+  - LEARN-001
+  - PACK-002
+  read_first:
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  - docs/09_TESTING_AND_ACCEPTANCE.md
+  - docs/11_ACCESSIBILITY_AND_LOCALIZATION.md
+  acceptance:
+  - docs/assessment/MASTERY_POLICY.yaml specifies evidence eligibility, dimension transitions, support levels,
+    diversity, delay, confidence, and modality-aware prerequisite evaluation with worked fixtures.
+  - Policy marks thresholds as initial implementation hypotheses; memory scheduling does not supply a proficiency
+    rubric.
+  - Technical failures, abstention, skipped tasks, latency alone, and invalid content never create negative
+    linguistic outcomes; elapsed-time memory decay is evaluated separately.
+  - Tests cover no-microphone/no-audio tracks, novice and already-known material, supported success, content
+    correction, repeated prompt memorization, and transfer/retention evidence.
+  - Policy version is recorded with derived decisions and evidence interpretation; policy is frozen before
+    LEARN-002 and revised only with documented evidence and migration impact.
+  required_for_desktop_1_0: true
+- id: JA-RES-001
+  milestone: M3
+  priority: P0
+  title: Build authoritative Japanese source and license matrix
+  dependencies:
+  - PACK-003
+  read_first:
+  - docs/06_JAPANESE_REFERENCE.md
+  - docs/10_LICENSING_AND_PROVENANCE.md
+  - docs/SOURCES.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - Source matrix covers functional standards, grammar, lexicon, orthography, phonology/prosody, corpora/audio.
+  - Every candidate is classified allowed/derived/reference-only/blocked/unknown.
+  - Unknown/unclear licenses have alternatives or explicit blockers.
+  required_for_desktop_1_0: true
+- id: JA-RES-002
+  milestone: M3
+  priority: P0
+  title: Define Japanese phonology/prosody model
+  dependencies:
+  - JA-RES-001
+  read_first:
+  - docs/05_SPEECH_SYSTEM.md
+  - docs/06_JAPANESE_REFERENCE.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - Verified inventory/model for mora, length, gemination, major pronunciation features is encoded.
+  - Reference variety and natural variant policy are documented.
+  - Pitch-accent data plan is license-compatible and does not depend on scraping restricted sources.
+  required_for_desktop_1_0: true
+- id: JA-RES-003
+  milestone: M3
+  priority: P0
+  title: Define Japanese orthography progression
+  dependencies:
+  - JA-RES-001
+  read_first:
+  - docs/06_JAPANESE_REFERENCE.md
+  - docs/02_LEARNING_SCIENCE.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - Hiragana/katakana/kanji/furigana/romaji scaffold policy is machine-represented.
+  - Reading and writing competencies remain separate.
+  - Romaji fade behavior is specified.
+  required_for_desktop_1_0: true
+- id: JA-RES-004
+  milestone: M3
+  priority: P0
+  title: Build Japanese communicative goal graph
+  dependencies:
+  - JA-RES-001
+  read_first:
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  - docs/06_JAPANESE_REFERENCE.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - On-ramp through planned release band has original goal IDs/descriptions and framework references.
+  - Goals have prerequisites/modalities/assessment plans.
+  - No copied restricted assessment prompts.
+  required_for_desktop_1_0: true
+- id: JA-RES-005
+  milestone: M3
+  priority: P0
+  title: Build Japanese grammar/pragmatics dependency map
+  dependencies:
+  - JA-RES-001
+  - JA-RES-004
+  read_first:
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  - docs/06_JAPANESE_REFERENCE.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - Structured grammar/pragmatics concepts cover dependencies needed by mapped goals.
+  - Register/politeness is contextual rather than one binary switch.
+  - Validator reports no cycles/missing dependencies.
+  required_for_desktop_1_0: true
+- id: JA-RES-006
+  milestone: M3
+  priority: P1
+  title: Create reviewed lexical import pipeline
+  dependencies:
+  - JA-RES-001
+  - PACK-003
+  read_first:
+  - docs/10_LICENSING_AND_PROVENANCE.md
+  - docs/06_JAPANESE_REFERENCE.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - Lexical import is reproducible and separated from original curriculum data.
+  - Attribution/license requirements are generated.
+  - Imported lexical data does not automatically become teaching order.
+  required_for_desktop_1_0: true
+- id: REVIEW-001
+  milestone: M3
+  priority: P0
+  title: Define finite Japanese coverage and qualified review gates
+  dependencies:
+  - JA-RES-001
+  - JA-RES-004
+  - JA-RES-005
+  - LEARN-005
+  read_first:
+  - docs/06_JAPANESE_REFERENCE.md
+  - docs/09_TESTING_AND_ACCEPTANCE.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  - docs/18_PUBLIC_CLAIMS_AND_SCOPE.md
+  acceptance:
+  - languages/ja-JP/review/REVIEW_POLICY.yaml defines reviewer qualifications by review type, review records,
+    disagreements, critical fixes, coverage percentages, sampling boundaries, and promotion authority.
+  - docs/assessment/RELEASE_COVERAGE.yaml enumerates a finite A1/A2/B1/B2 capability map with framework edition/descriptors,
+    modalities, linked prerequisites, assessments, transfer/retention rubrics, and review evidence.
+  - All scored targets, core reused instruction, answer variants, and reference pronunciation targets require
+    qualified human review before reference release; sampled lower-risk practice is separated and risk is disclosed.
+  - Missing reviewer capacity or source rights is recorded as an explicit blocker without self-certifying content
+    or contacting third parties without owner authorization.
+  - The coverage map is agreed and versioned before bulk authoring; narrowing mandatory objectives to make
+    gates pass is a scope decision requiring owner approval.
+  required_for_desktop_1_0: true
+- id: ACT-001
+  milestone: M4
+  priority: P0
+  title: Implement activity runtime and support ladder
+  dependencies:
+  - LEARN-004
+  - PACK-002
+  read_first:
+  - docs/01_PRODUCT_AND_UX.md
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  acceptance:
+  - Encounter/comprehension/retrieval/explanation activity types render from pack data.
+  - Hints/replays/translations emit support evidence.
+  - Correct answer with strong help is not equivalent to independent success.
+  required_for_desktop_1_0: true
+- id: M4-E2E
+  milestone: M4
+  priority: P0
+  title: First no-speech playable vertical slice
+  dependencies:
+  - ACT-001
+  - UX-001
+  - UX-002
+  - JA-RES-003
+  - JA-RES-004
+  - JA-RES-005
+  - JA-RES-006
+  - SCENARIO-001
+  - READ-001
+  - WRITE-001
+  read_first:
+  - docs/09_TESTING_AND_ACCEPTANCE.md
+  acceptance:
+  - Fresh user can complete a small on-ramp Japanese flow with contextual listening/text placeholders and persistence.
+  - Restart resumes safely.
+  - No streak/heart mechanics exist.
+  - End-to-end test covers flow.
+  required_for_desktop_1_0: true
+- id: READ-001
+  milestone: M4
+  priority: P0
+  title: Implement adaptive kana/furigana/romaji support
+  dependencies:
+  - JA-RES-003
+  - ACT-001
+  read_first:
+  - docs/06_JAPANESE_REFERENCE.md
+  - docs/11_ACCESSIBILITY_AND_LOCALIZATION.md
+  acceptance:
+  - Furigana and romaji visibility respond to learner mastery/settings.
+  - Canonical text remains Japanese script.
+  - Reading evidence is independent from listening/speaking.
+  required_for_desktop_1_0: true
+- id: SCENARIO-001
+  milestone: M4
+  priority: P0
+  title: Implement data-driven scenario/dialogue runtime
+  dependencies:
+  - ACT-001
+  - LEARN-004
+  - PACK-001
+  read_first:
+  - docs/01_PRODUCT_AND_UX.md
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  acceptance:
+  - Pack-defined scenario graph supports intents, support ladder, recovery branches, and transfer variants.
+  - Scenario runtime contains no Japanese-specific branch logic.
+  required_for_desktop_1_0: true
+- id: UX-001
+  milestone: M4
+  priority: P0
+  title: Implement onboarding and privacy-first Japanese selection
+  dependencies:
+  - BOOT-002
+  - PACK-004
+  - DATA-001
+  read_first:
+  - docs/01_PRODUCT_AND_UX.md
+  - docs/08_DATA_AND_PRIVACY.md
+  - docs/11_ACCESSIBILITY_AND_LOCALIZATION.md
+  acceptance:
+  - No account required.
+  - Japanese pack can be selected/installed.
+  - Microphone setup is skippable.
+  - Local-processing/privacy behavior is explained.
+  required_for_desktop_1_0: true
+- id: UX-002
+  milestone: M4
+  priority: P0
+  title: Implement home, time-budget practice, and capability progress UI
+  dependencies:
+  - LEARN-004
+  - BOOT-002
+  read_first:
+  - docs/01_PRODUCT_AND_UX.md
+  acceptance:
+  - Home presents useful next actions without streaks.
+  - 5-minute practice uses scheduler value, not trivial completion.
+  - Progress shows capability/modality differences.
+  required_for_desktop_1_0: true
+- id: WRITE-001
+  milestone: M4
+  priority: P1
+  title: Implement Japanese typing/composition activities
+  dependencies:
+  - READ-001
+  - LEARN-002
+  read_first:
+  - docs/06_JAPANESE_REFERENCE.md
+  acceptance:
+  - IME input works without requiring handwriting.
+  - Writing production evidence is distinct from recognition.
+  required_for_desktop_1_0: true
+- id: SPEECH-001
+  milestone: M5
+  priority: P0
+  title: Benchmark local ASR/VAD candidates for Japanese
+  dependencies:
+  - ARCH-001
+  - JA-RES-002
+  read_first:
+  - docs/05_SPEECH_SYSTEM.md
+  - docs/SOURCES.md
+  - docs/17_SPEECH_BENCHMARK_PLAN.md
+  acceptance:
+  - Reproducible benchmark compares at least sherpa-onnx and whisper.cpp-class candidate if feasible.
+  - Measures Japanese accuracy proxy, latency, RAM/CPU/GPU, size, timestamps, licenses, platforms.
+  - ADR chooses initial provider or records split-provider decision.
+  required_for_desktop_1_0: true
+- id: SPEECH-002
+  milestone: M5
+  priority: P0
+  title: Implement microphone quality gate, VAD, and local ASR adapter
+  dependencies:
+  - SPEECH-001
+  - BOOT-002
+  - SPEECH-003
+  read_first:
+  - docs/05_SPEECH_SYSTEM.md
+  - docs/08_DATA_AND_PRIVACY.md
+  - docs/17_SPEECH_BENCHMARK_PLAN.md
+  acceptance:
+  - Silence/noise/clipping can yield retry without negative mastery.
+  - Short Japanese utterance can be recognized locally after model install.
+  - Network-disabled integration test passes.
+  required_for_desktop_1_0: true
+- id: SPEECH-003
+  milestone: M5
+  priority: P0
+  title: Implement model manager/download metadata
+  dependencies:
+  - SPEECH-001
+  - PACK-004
+  read_first:
+  - docs/05_SPEECH_SYSTEM.md
+  - docs/13_RELEASE_AND_DISTRIBUTION.md
+  - docs/17_SPEECH_BENCHMARK_PLAN.md
+  acceptance:
+  - Models are versioned, checksummed, licensed, and removable.
+  - Base app does not require bundling all models.
+  - Missing model UX is recoverable.
+  required_for_desktop_1_0: true
+- id: SPEECH-004
+  milestone: M5
+  priority: P0
+  title: Japanese constrained alignment prototype
+  dependencies:
+  - SPEECH-002
+  - JA-RES-002
+  read_first:
+  - docs/05_SPEECH_SYSTEM.md
+  - docs/17_SPEECH_BENCHMARK_PLAN.md
+  acceptance:
+  - Expected short utterances can be aligned to useful units with confidence.
+  - Mismatch/low confidence abstains.
+  - Prototype decision records embedded-runtime approach vs preparation tooling.
+  required_for_desktop_1_0: true
+- id: SPEECH-005
+  milestone: M5
+  priority: P0
+  title: Implement Japanese acoustic feature and pronunciation feedback MVP
+  dependencies:
+  - SPEECH-004
+  read_first:
+  - docs/05_SPEECH_SYSTEM.md
+  - docs/06_JAPANESE_REFERENCE.md
+  - docs/17_SPEECH_BENCHMARK_PLAN.md
+  acceptance:
+  - At least one validated high-value Japanese contrast can be taught with actionable feedback.
+  - ASR success is not the pronunciation score.
+  - Feedback can abstain and exposes why.
+  - User can hear reference and own retained-in-memory attempt during immediate comparison.
+  required_for_desktop_1_0: true
+- id: SPEECH-006
+  milestone: M5
+  priority: P1
+  title: Pitch/F0 visualization and guided comparison
+  dependencies:
+  - SPEECH-004
+  - JA-RES-002
+  read_first:
+  - docs/05_SPEECH_SYSTEM.md
+  - docs/17_SPEECH_BENCHMARK_PLAN.md
+  acceptance:
+  - Normalized F0 contour can be shown accessibly for suitable voiced segments.
+  - No absolute-Hz correctness rule.
+  - Feature remains guided/reference if automatic accuracy is uncalibrated.
+  required_for_desktop_1_0: true
+- id: TTS-001
+  milestone: M5
+  priority: P1
+  title: Benchmark and implement local Japanese TTS provider
+  dependencies:
+  - SPEECH-003
+  - JA-RES-001
+  read_first:
+  - docs/05_SPEECH_SYSTEM.md
+  - docs/10_LICENSING_AND_PROVENANCE.md
+  - docs/17_SPEECH_BENCHMARK_PLAN.md
+  acceptance:
+  - Candidate voice/model licenses are audited separately from runtime code.
+  - Local Japanese TTS can generate scalable practice audio.
+  - Core curated targets can override TTS with licensed recordings.
+  required_for_desktop_1_0: true
+- id: JA-A1-001
+  milestone: M6
+  priority: P0
+  title: Author and validate Japanese on-ramp curriculum
+  dependencies:
+  - M4-E2E
+  - JA-RES-005
+  - JA-RES-006
+  - SPEECH-005
+  - REVIEW-001
+  - TTS-001
+  read_first:
+  - docs/02_LEARNING_SCIENCE.md
+  - docs/06_JAPANESE_REFERENCE.md
+  - docs/10_LICENSING_AND_PROVENANCE.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - Zero-knowledge learner path integrates listening/speaking/early script and basic interaction.
+  - Romaji is temporary and begins fading.
+  - Every shipped content item has required provenance/review state.
+  - Transfer checkpoint exists.
+  required_for_desktop_1_0: true
+- id: JA-A1-002
+  milestone: M6
+  priority: P0
+  title: Complete A1-like functional goal coverage
+  dependencies:
+  - JA-A1-001
+  - READ-001
+  - WRITE-001
+  - SCENARIO-001
+  read_first:
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  - docs/06_JAPANESE_REFERENCE.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - Mapped A1-like goals have lessons/scenarios/assessments and dependency coverage.
+  - Listening/speaking/reading/writing tracks are represented where appropriate.
+  - Automated curriculum audit passes.
+  required_for_desktop_1_0: true
+- id: JA-A1-003
+  milestone: M6
+  priority: P0
+  title: Qualified Japanese content review — A1
+  dependencies:
+  - JA-A1-002
+  - SPEECH-007
+  - REVIEW-001
+  read_first:
+  - docs/09_TESTING_AND_ACCEPTANCE.md
+  - docs/06_JAPANESE_REFERENCE.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  - docs/18_PUBLIC_CLAIMS_AND_SCOPE.md
+  acceptance:
+  - Review protocol and reviewer qualification are recorded.
+  - Critical naturalness/correctness issues are resolved.
+  - Reference pack trust state advances only if review gate criteria are met.
+  - The band coverage and qualified-human review gates defined by REVIEW-001 pass for the exact pack version;
+    unresolved mandatory coverage or critical findings keep this task blocked.
+  required_for_desktop_1_0: true
+- id: SPEECH-007
+  milestone: M6
+  priority: P0
+  title: Calibrate and gate each automated speech feedback feature
+  dependencies:
+  - SPEECH-005
+  - SPEECH-006
+  - TTS-001
+  - JA-A1-001
+  read_first:
+  - docs/05_SPEECH_SYSTEM.md
+  - docs/09_TESTING_AND_ACCEPTANCE.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  - docs/17_SPEECH_BENCHMARK_PLAN.md
+  acceptance:
+  - Permissioned calibration artifacts follow the preregistered protocol in docs/17, with speaker/prompt-independent
+    holdouts, label agreement, error rates, uncertainty intervals, and assessment coverage.
+  - Each automatic feature is enabled only for validated provider/model/content/hardware/variant conditions;
+    fallback remains guided or abstains outside this envelope.
+  - Registry binds feature, confidence definition, thresholds, versions/hashes and evidence report; model/provider/policy
+    changes invalidate eligibility until revalidation.
+  - If any feature cannot meet frozen accuracy and coverage limits, it remains guided/reference and cannot
+    generate automatic pronunciation mastery.
+  - Stable desktop 1.0 requires at least one high-value Japanese pronunciation contrast to qualify for automatic
+    feedback within a declared useful coverage envelope. If none meets the frozen gates, stable RC remains
+    blocked; guided alpha/beta practice may continue and changing this target requires an explicit owner scope
+    decision.
+  required_for_desktop_1_0: true
+- id: GAME-001
+  milestone: M7
+  priority: P1
+  title: Implement lightweight world/progression layer
+  dependencies:
+  - SCENARIO-001
+  - UX-002
+  read_first:
+  - docs/01_PRODUCT_AND_UX.md
+  acceptance:
+  - Capabilities unlock environments/interactions rather than daily activity.
+  - World layer remains optional enough that learning engine tests do not depend on graphics.
+  required_for_desktop_1_0: true
+- id: JA-A2-001
+  milestone: M7
+  priority: P0
+  title: Author A2-like Japanese goal/scenario coverage
+  dependencies:
+  - JA-A1-003
+  - SCENARIO-001
+  read_first:
+  - docs/06_JAPANESE_REFERENCE.md
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - Routine daily transactions/descriptions include transfer tasks and varied speakers/wording.
+  - Curriculum/source/license audits pass.
+  required_for_desktop_1_0: true
+- id: JA-A2-002
+  milestone: M7
+  priority: P0
+  title: Qualified Japanese content review — A2
+  dependencies:
+  - JA-A2-001
+  - REVIEW-001
+  read_first:
+  - docs/09_TESTING_AND_ACCEPTANCE.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  - docs/18_PUBLIC_CLAIMS_AND_SCOPE.md
+  acceptance:
+  - Review coverage/evidence meets defined A2 gate and critical issues resolved.
+  - The band coverage and qualified-human review gates defined by REVIEW-001 pass for the exact pack version;
+    unresolved mandatory coverage or critical findings keep this task blocked.
+  required_for_desktop_1_0: true
+- id: AI-001
+  milestone: M8
+  priority: P1
+  title: Optional constrained AI conversation/explanation provider
+  dependencies:
+  - JA-A2-002
+  - ARCH-001
+  read_first:
+  - docs/00_MASTER_SPEC.md
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  - docs/08_DATA_AND_PRIVACY.md
+  acceptance:
+  - Core app works with provider disabled.
+  - Provider receives explicit privacy/config consent.
+  - Scored advancement does not depend on unvalidated free-form AI judgment.
+  required_for_desktop_1_0: false
+- id: JA-B1-001
+  milestone: M8
+  priority: P0
+  title: Author B1-like independent-use Japanese coverage
+  dependencies:
+  - JA-A2-002
+  - GAME-001
+  read_first:
+  - docs/06_JAPANESE_REFERENCE.md
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - Connected discourse, common independent situations, repair/clarification, broader reading/listening are
+    covered.
+  - Translation dependence is materially reduced.
+  - Transfer and delayed retention checks exist.
+  required_for_desktop_1_0: true
+- id: JA-B1-002
+  milestone: M8
+  priority: P0
+  title: Qualified Japanese content review — B1
+  dependencies:
+  - JA-B1-001
+  - REVIEW-001
+  read_first:
+  - docs/09_TESTING_AND_ACCEPTANCE.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  - docs/18_PUBLIC_CLAIMS_AND_SCOPE.md
+  acceptance:
+  - Review gate passes with tracked resolutions.
+  - The band coverage and qualified-human review gates defined by REVIEW-001 pass for the exact pack version;
+    unresolved mandatory coverage or critical findings keep this task blocked.
+  required_for_desktop_1_0: true
+- id: JA-B2-001
+  milestone: M9
+  priority: P0
+  title: Author B2-like Japanese reference coverage
+  dependencies:
+  - JA-B1-002
+  read_first:
+  - docs/06_JAPANESE_REFERENCE.md
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - Declared B2-like capability map has curriculum, scenarios, assessments, and transfer evidence.
+  - Broader natural-speed listening and varied text genres are represented.
+  - Pragmatics/register coverage is substantially expanded.
+  required_for_desktop_1_0: true
+- id: JA-B2-002
+  milestone: M9
+  priority: P0
+  title: Qualified Japanese content review — B2
+  dependencies:
+  - JA-B2-001
+  - REVIEW-001
+  read_first:
+  - docs/09_TESTING_AND_ACCEPTANCE.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  - docs/18_PUBLIC_CLAIMS_AND_SCOPE.md
+  acceptance:
+  - Review evidence supports any public framework-alignment claims actually made.
+  - If B2 evidence is insufficient, keep stable 1.0 blocked and label previews partial; do not silently shrink
+    the stable target.
+  - The band coverage and qualified-human review gates defined by REVIEW-001 pass for the exact pack version;
+    unresolved mandatory coverage or critical findings keep this task blocked.
+  required_for_desktop_1_0: true
+- id: ACC-001
+  milestone: M10
+  priority: P0
+  title: Accessibility release audit
+  dependencies:
+  - JA-B2-002
+  - GAME-001
+  - READ-001
+  - WRITE-001
+  - TTS-001
+  - SPEECH-007
+  read_first:
+  - docs/11_ACCESSIBILITY_AND_LOCALIZATION.md
+  - docs/09_TESTING_AND_ACCEPTANCE.md
+  acceptance:
+  - Keyboard/screen-reader/zoom/reduced-motion/color/caption gates pass for critical paths.
+  required_for_desktop_1_0: true
+- id: PACK-AI-001
+  milestone: M10
+  priority: P1
+  title: AI-oriented language pack authoring kit
+  dependencies:
+  - PACK-005
+  - JA-B2-002
+  read_first:
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  - docs/10_LICENSING_AND_PROVENANCE.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  - tools/AI_LANGUAGE_PACK_AUTHOR_PROMPT.md
+  - schemas/README.md
+  acceptance:
+  - One self-contained prompt/template guides an AI from language research to candidate pack.
+  - Kit forces source/license matrix and unresolved-question output.
+  - A second toy/community language can be generated as a conformance proof without engine edits.
+  - Use at least one non-Japanese RTL/multi-script fixture to check direction, segmentation, and language-independent
+    assumptions; this proves conformance, not educational completeness.
+  required_for_desktop_1_0: true
+- id: PERF-002
+  milestone: M10
+  priority: P0
+  title: Measure release performance on supported configurations
+  dependencies:
+  - PERF-001
+  - PLAT-001
+  - SPEECH-007
+  - JA-B2-002
+  read_first:
+  - docs/07_TECHNICAL_ARCHITECTURE.md
+  - docs/09_TESTING_AND_ACCEPTANCE.md
+  - docs/17_SPEECH_BENCHMARK_PLAN.md
+  acceptance:
+  - Frozen performance budgets pass on every declared desktop hardware/model tier with repeatable scripts and
+    p50/p95, RAM/VRAM, startup, disk and UI responsiveness evidence.
+  - Cancellation and model failure recovery work under load; no UI/audio thread blocks on inference.
+  - Unsupported configurations are explicit in first-run model selection and release notes.
+  required_for_desktop_1_0: true
+- id: PLAT-001
+  milestone: M10
+  priority: P0
+  title: Windows/macOS desktop parity
+  dependencies:
+  - JA-B2-002
+  - SPEECH-003
+  - WRITE-001
+  - TTS-001
+  - SPEECH-007
+  read_first:
+  - docs/13_RELEASE_AND_DISTRIBUTION.md
+  acceptance:
+  - Automated builds and critical E2E pass on Linux/Windows/macOS.
+  - Speech/model behavior and install paths are documented per platform.
+  required_for_desktop_1_0: true
+- id: PLAT-002
+  milestone: M10
+  priority: P1
+  title: Android/iOS feasibility and implementation milestone
+  dependencies:
+  - PLAT-001
+  read_first:
+  - docs/07_TECHNICAL_ARCHITECTURE.md
+  - docs/13_RELEASE_AND_DISTRIBUTION.md
+  acceptance:
+  - Mobile build, permissions, storage, model memory/latency, and critical learning path are tested.
+  - If release quality is not yet feasible, exact blockers become follow-up tasks without blocking desktop
+    1.0.
+  required_for_desktop_1_0: false
+- id: REL-001
+  milestone: M10
+  priority: P0
+  title: 1.0 release candidate full gate
+  dependencies:
+  - ACC-001
+  - SEC-001
+  - PLAT-001
+  - JA-B2-002
+  - DATA-002
+  - PACK-AI-001
+  - PACK-005
+  - READ-001
+  - WRITE-001
+  - TTS-001
+  - SPEECH-006
+  - SPEECH-007
+  - LIC-001
+  - PERF-002
+  - REVIEW-001
+  read_first:
+  - docs/09_TESTING_AND_ACCEPTANCE.md
+  - docs/13_RELEASE_AND_DISTRIBUTION.md
+  - docs/10_LICENSING_AND_PROVENANCE.md
+  - docs/12_OBSERVABILITY_AND_RESEARCH.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  - docs/17_SPEECH_BENCHMARK_PLAN.md
+  - docs/18_PUBLIC_CLAIMS_AND_SCOPE.md
+  acceptance:
+  - All 1.0 release gates pass from clean checkout.
+  - License/source/model attribution audit is clean.
+  - Known limitations and supported claims are documented.
+  - No P0/P1 defects remain.
+  - All other tasks marked required_for_desktop_1_0 are done with evidence; REL-001 passes the remaining release
+    gates and records its own evidence before becoming done. Optional AI, mobile, advanced and web tasks do
+    not gate desktop 1.0.
+  - Audit reports identify the exact app commit, pack hash, dependency lockfiles, model/provider versions,
+    OS and hardware tiers; any affected later change reruns its gates.
+  - REL-001 completes a reviewable release candidate; public publishing, signing credentials, store enrollment,
+    payments, and external contacts require separate owner authorization.
+  required_for_desktop_1_0: true
+- id: SEC-001
+  milestone: M10
+  priority: P0
+  title: Security/privacy release audit
+  dependencies:
+  - PACK-004
+  - DATA-002
+  - SPEECH-005
+  - JA-B2-002
+  - TTS-001
+  - SPEECH-007
+  - WRITE-001
+  - GAME-001
+  read_first:
+  - docs/08_DATA_AND_PRIVACY.md
+  - docs/09_TESTING_AND_ACCEPTANCE.md
+  acceptance:
+  - Malicious pack suite passes.
+  - No unexpected speech upload in local mode.
+  - Secrets/logging/recording retention gates pass.
+  required_for_desktop_1_0: true
+- id: ADV-001
+  milestone: M11
+  priority: P1
+  title: Plan and extend Japanese C1/C2-capable content architecture
+  dependencies:
+  - REL-001
+  read_first:
+  - docs/06_JAPANESE_REFERENCE.md
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  acceptance:
+  - Advanced goals cover nuanced/specialized discourse and high-density authentic input without fake completeness.
+  - Additional source/review requirements are documented.
+  required_for_desktop_1_0: false
+- id: WEB-001
+  milestone: M11
+  priority: P2
+  title: Optional web/PWA capability subset
+  dependencies:
+  - REL-001
+  read_first:
+  - docs/07_TECHNICAL_ARCHITECTURE.md
+  - docs/13_RELEASE_AND_DISTRIBUTION.md
+  acceptance:
+  - Browser build clearly reports unavailable local-native capabilities rather than silently switching privacy
+    modes.
+  - Core reading/listening content remains usable where technically appropriate.
+  required_for_desktop_1_0: false
+execution_scope:
+  default_goal: desktop-1.0-release-candidate
+  completion_task: REL-001
+  required_flag: required_for_desktop_1_0
+  optional_tasks:
+  - ADV-001
+  - AI-001
+  - PLAT-002
+  - WEB-001
+  public_publication_authorized: false

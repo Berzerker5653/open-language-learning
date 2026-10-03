@@ -1,0 +1,12 @@
+{
+  "mode": "handoff",
+  "passed": true,
+  "data_files_checked": 31,
+  "errors": [],
+  "warnings": [
+    "languages/ja-JP: draft distribution license unresolved; no redistribution/release authorization inferred",
+    "languages/ja-JP: explicit unresolved draft assessment ja.assess.onramp.greeting-transfer: Draft scaffold has no transfer assessment definition; author, schema-validate and review it before release-readiness.",
+    "examples/minimal-language-pack: manifest-only onboarding fixture; no instructional content or full pack conformance",
+    "scope: handoff structure checked; SDK completeness, linguistic correctness, source rights, calibration quality, build/install/runtime/UX/privacy/security remain unverified"
+  ]
+}

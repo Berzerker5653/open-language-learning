@@ -1,0 +1,9 @@
+pack_original_content:
+  status: "pending-owner-license-selection"
+  redistribution: false
+third_party_policy:
+  require_source_record: true
+  require_license_record: true
+  unknown_license_blocks_reference_build: true
+  require_access_use_conditions_review: true
+  candidate_source_is_not_bundled_permission: true

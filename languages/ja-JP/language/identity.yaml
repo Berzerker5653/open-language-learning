@@ -1,0 +1,12 @@
+locale: "ja-JP"
+name:
+  en: "Japanese"
+  ja: "日本語"
+default_variant: "standard-japanese"
+default_script_direction: "ltr"
+segmentation:
+  whitespace_is_word_boundary: false
+  engine_tokenization_required: true
+variants:
+  - id: "standard-japanese"
+    description: "Broad standard Japanese teaching reference, Tokyo-oriented for pitch where reviewed data supports it; regional/natural variants must not be automatically treated as errors."

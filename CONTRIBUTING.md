@@ -1,0 +1,9 @@
+# Contributing
+
+Start with `README.md` and the relevant design document. For code changes, follow `AGENTS.md`. For language content, follow `docs/04_LANGUAGE_PACK_SPEC.md`, `docs/10_LICENSING_AND_PROVENANCE.md`, and `docs/16_CONTENT_AUTHORING_AND_REVIEW.md`.
+
+Do not submit copyrighted textbook/course content without compatible rights. Do not include private learner recordings. Language corrections should include source/review evidence when possible.
+
+Major architecture changes require an ADR. Public language-pack schema changes require versioning/migration consideration.
+
+Validate this scaffold with the setup and commands in `README.md`. The future `langpack` CLI is a roadmap deliverable, not included in this archive. Report draft unresolved references explicitly and keep them out of build/promotion eligibility. Reviewer/participant contact, private audio distribution, and final license decisions require owner authorization.

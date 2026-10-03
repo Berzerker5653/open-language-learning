@@ -1,0 +1,23 @@
+{
+  "mode": "pack-data-preflight",
+  "passed": false,
+  "data_files_checked": 31,
+  "errors": [
+    "languages/ja-JP: unknown assessment ja.assess.onramp.greeting-transfer on ja.goal.onramp.respond-to-greeting; only documented exact draft exceptions are allowed in handoff mode",
+    "languages/ja-JP: pack is experimental/unreviewed",
+    "languages/ja-JP: pack distribution license is unresolved",
+    "languages/ja-JP: content ja.grammar.copula.polite-desu is not reviewed for distribution",
+    "languages/ja-JP: content ja.goal.onramp.respond-to-greeting is not reviewed for distribution",
+    "languages/ja-JP: content ja.expr.introduction.hajimemashite is not reviewed for distribution",
+    "languages/ja-JP: content ja.lex.greeting.konnichiwa is not reviewed for distribution",
+    "languages/ja-JP: content ja.unit.onramp.greeting is not reviewed for distribution",
+    "languages/ja-JP: content ja.scenario.first-meeting.greeting is not reviewed for distribution",
+    "languages/ja-JP: SDK schemas for assessments/scenarios/assets/review evidence are incomplete: implement PACK-001/PACK-002/trust gates; this checker cannot certify release",
+    "examples/minimal-language-pack: manifest-only example is not a releasable language pack"
+  ],
+  "warnings": [
+    "languages/ja-JP: draft distribution license unresolved; no redistribution/release authorization inferred",
+    "examples/minimal-language-pack: manifest-only onboarding fixture; no instructional content or full pack conformance",
+    "scope: handoff structure checked; SDK completeness, linguistic correctness, source rights, calibration quality, build/install/runtime/UX/privacy/security remain unverified"
+  ]
+}

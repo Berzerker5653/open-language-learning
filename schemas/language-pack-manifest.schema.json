@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/language-pack-manifest.schema.json",
+  "title": "Language Pack Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "pack_id",
+    "version",
+    "target_locale",
+    "source_locales",
+    "engine",
+    "maturity",
+    "capabilities",
+    "license"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "pack_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "display_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$"
+    },
+    "target_locale": {
+      "type": "string",
+      "pattern": "^(?:[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*|[xX](?:-[A-Za-z0-9]{1,8})+)$"
+    },
+    "source_locales": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(?:[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*|[xX](?:-[A-Za-z0-9]{1,8})+)$"
+      }
+    },
+    "engine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "min_version"
+      ],
+      "properties": {
+        "min_version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$"
+        },
+        "max_version_exclusive": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$"
+        }
+      }
+    },
+    "maturity": {
+      "enum": [
+        "experimental",
+        "community",
+        "validated",
+        "verified",
+        "reference"
+      ]
+    },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "scripts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "listening",
+        "speaking",
+        "reading",
+        "writing"
+      ],
+      "properties": {
+        "listening": {
+          "type": "boolean"
+        },
+        "speaking": {
+          "type": "boolean"
+        },
+        "reading": {
+          "type": "boolean"
+        },
+        "writing": {
+          "type": "boolean"
+        },
+        "pronunciation_assessment": {
+          "type": "boolean",
+          "default": false
+        },
+        "prosody_assessment": {
+          "type": "boolean",
+          "default": false
+        },
+        "handwriting": {
+          "type": "boolean",
+          "default": false
+        },
+        "rtl": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "requested_model_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "content_license"
+      ],
+      "properties": {
+        "content_license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "license_file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "attribution_file": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "unresolved_references": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "owner_id",
+          "target_id",
+          "reason"
+        ],
+        "properties": {
+          "kind": {
+            "enum": [
+              "assessment"
+            ]
+          },
+          "owner_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "target_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 10
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+schema_version: '0.1'
+pack_id: org.example.minimal
+display_name: Minimal Example Pack
+version: 0.0.1
+target_locale: x-example
+source_locales:
+- en-US
+engine:
+  min_version: 0.1.0
+  max_version_exclusive: null
+maturity: experimental
+scripts:
+- Latin
+capabilities:
+  listening: false
+  speaking: false
+  reading: false
+  writing: false
+  pronunciation_assessment: false
+  prosody_assessment: false
+  handwriting: false
+  rtl: false
+requested_model_capabilities: []
+license:
+  content_license: UNLICENSED-DRAFT

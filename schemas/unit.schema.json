@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/unit.schema.json",
+  "title": "Curriculum Unit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "goal_ids",
+    "activities",
+    "review_status",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9.-]+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "goal_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "activities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "type",
+          "targets"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "encounter",
+              "comprehension",
+              "retrieval",
+              "speaking",
+              "pronunciation",
+              "reading",
+              "writing",
+              "scenario",
+              "explanation",
+              "assessment"
+            ]
+          },
+          "targets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "support_level": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 5
+          },
+          "scenario_id": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "scenario"
+                }
+              },
+              "required": [
+                "type"
+              ]
+            },
+            "then": {
+              "required": [
+                "scenario_id"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "review_status": {
+      "enum": [
+        "draft",
+        "review-needed",
+        "validated",
+        "verified"
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

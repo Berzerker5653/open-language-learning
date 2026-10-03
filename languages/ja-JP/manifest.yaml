@@ -1,0 +1,36 @@
+schema_version: "0.1"
+pack_id: "org.openlanguage.ja-jp.reference"
+display_name: "Japanese Reference Pack (Draft)"
+version: "0.0.2"
+target_locale: "ja-JP"
+source_locales: ["en-US"]
+engine:
+  min_version: "0.1.0"
+  max_version_exclusive: null
+maturity: "experimental"
+authors: ["Open Language Learning Platform contributors"]
+scripts: ["Hiragana", "Katakana", "Han", "Latin"]
+capabilities:
+  listening: true
+  speaking: true
+  reading: true
+  writing: true
+  pronunciation_assessment: false
+  prosody_assessment: false
+  handwriting: false
+  rtl: false
+requested_model_capabilities:
+  - "asr.ja"
+  - "vad"
+  - "tts.ja"
+  - "alignment.ja"
+  - "f0"
+unresolved_references:
+  - kind: "assessment"
+    owner_id: "ja.goal.onramp.respond-to-greeting"
+    target_id: "ja.assess.onramp.greeting-transfer"
+    reason: "Draft scaffold has no transfer assessment definition; author, schema-validate and review it before release-readiness."
+license:
+  content_license: "UNLICENSED-DRAFT"
+  license_file: "LICENSES.yaml"
+  attribution_file: "SOURCES.yaml"

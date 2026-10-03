@@ -1,0 +1,8 @@
+transcript_comparison:
+  unicode_normalization: "NFKC"
+  ignore_optional_terminal_punctuation: true
+  normalize_whitespace: true
+  preserve_length_contrasts: true
+  preserve_small_tsu_contrast: true
+notes:
+  - "Normalization must never erase contrasts that are learning targets."

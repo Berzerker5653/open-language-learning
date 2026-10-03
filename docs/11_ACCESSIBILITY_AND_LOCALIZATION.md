@@ -1,0 +1,59 @@
+# 11 — Accessibility and UI Localization
+
+## Accessibility is architecture
+
+Learning a spoken language may involve audio, but the application itself must remain navigable and understandable without relying on one sensory or motor modality.
+
+## Requirements
+
+Target WCAG 2.2 Level AA for the web UI, using [W3C WCAG 2.2](https://www.w3.org/TR/WCAG22/) and [WCAG2ICT](https://www.w3.org/TR/wcag2ict-22/) guidance to interpret the criteria for the native desktop application. This is a required future acceptance target, not a claim that this scaffold or a future build is already conformant. Record applicable A/AA criteria, justified non-applicability, additional product accommodations, and results in a versioned accessibility audit matrix.
+
+- keyboard-only navigation for desktop;
+- visible focus;
+- screen-reader-compatible semantic structure;
+- scalable text and responsive layouts;
+- text contrast at least 4.5:1 (3:1 for WCAG-defined large text) and required non-text component/state contrast at least 3:1, subject to the criterion's stated exceptions;
+- no correctness encoded only through red/green;
+- reduced-motion setting;
+- captions/transcripts for instructional audio where pedagogically appropriate;
+- waveform/pitch visualizations have text explanations;
+- audio controls have accessible labels;
+- error messages explain recovery;
+- time limits are avoidable except where timing is itself the assessed skill;
+- recording tasks expose input-device selection/level test where platform permits.
+
+Also require no keyboard traps; sensible dialog focus entry/return; focus not entirely obscured; programmatic name/role/value and non-disruptive status/error announcements; controls with names matching their visible labels; alternatives to dragging; and WCAG 2.2 target-size requirements/allowed exceptions. Validate 200% text resizing and 400% zoom/reflow for ordinary UI without loss of content or functionality. Any essential two-dimensional visualization exception needs an accessible explanation/control route.
+
+Test actual supported desktop accessibility stacks, at least one representative mainstream screen reader per supported OS (for example NVDA on Windows, VoiceOver on macOS, and Orca on Linux), plus keyboard-only and zoom/reduced-motion paths. Pin the tested OS, app/webview, screen-reader and relevant language-voice versions in the audit matrix. Automated checks supplement manual testing; they cannot establish conformance alone. Fix semantics as components are built, with a final complete-journey audit before release.
+
+Critical journeys include install/pack selection, onboarding, local/model permission or download flow, home/session planning, every shipped activity type and help/feedback state, later goal/scenario unlocks, interruption/recovery, settings, and export/import. Record pass/fail/not-applicable with evidence and rationale for each applicable criterion/journey; unresolved inaccessible critical paths fail the release gate.
+
+## Speech accessibility
+
+Learners unable/unwilling to use a microphone can learn other modalities. Speaking mastery remains unearned rather than faked. The UI should say "speaking not assessed" rather than penalize the entire course.
+
+Declined permission, missing device/model, and technical/quality failures are unscored recoverable outcomes. Deferral must continue to work at later goals and scenario unlocks, not just on the first-run microphone screen. A relevant alternative route may unlock track access while the speaking prerequisite remains unassessed; do not synthesize speaking mastery from typed responses.
+
+## Hearing accessibility
+
+A learner can pursue reading/writing tracks. Listening/speech competencies remain distinct and can be hidden/deferred by preference without losing access to application navigation.
+
+Provide transcript/caption controls for instructional media and text descriptions of important audio/visual states. If an assessment's construct is listening, exposing its transcript changes the evidence condition; score the appropriate text-supported/reading outcome or defer pure listening evidence. Essential audio/speech competencies cannot be made equivalent by relabeling a text activity. State those learning limitations plainly while keeping navigation and relevant other tracks usable.
+
+Timing is adjustable or avoidable unless essential to the declared assessed construct. Response latency alone must not penalize slow input, disability, IME composition, or assistive technology. Record accommodated assessment conditions and preserve unassessed skills honestly.
+
+## UI localization
+
+Application chrome is separate from target-language curriculum. Support localization resource files and RTL layout. Do not assume the UI language equals the learner's native language or the target language.
+
+Use explicit language/direction metadata for chrome and mixed-language content so assistive technology can select suitable pronunciation. Localization must cover error/recovery, privacy/permission, progress and uncertainty messages, text expansion, plural/number/date formatting, and pseudolocalized/RTL regression fixtures. Specify the interface locales actually shipped; infrastructure support does not imply all translations are available or reviewed.
+
+## Typography
+
+Language packs may declare font/script requirements, but do not distribute font files unless license permits. Prefer system/fallback font stacks where practical.
+
+## Japanese rendering
+
+Support ruby/furigana semantics, mixed Latin/kana/kanji layout, line wrapping appropriate to Japanese text, and selectable furigana visibility.
+
+Test selectable/copyable text and ruby reading order with the supported screen-reader matrix, avoiding duplicate or nonsensical announcements. Japanese IME composition must not be submitted/scored before composition ends; controls and shortcuts must not intercept ordinary text entry. User-requested furigana remains available, with its use recorded when it changes reading-assessment validity.

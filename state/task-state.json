@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "updated": "2026-10-02",
+  "active_task": null,
+  "tasks": {
+    "BOOT-001": {
+      "status": "ready",
+      "attempts": 0,
+      "last_error": null,
+      "evidence": []
+    }
+  },
+  "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence."
+}

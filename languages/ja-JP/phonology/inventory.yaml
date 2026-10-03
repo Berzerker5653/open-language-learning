@@ -1,0 +1,13 @@
+status: "research-required"
+timing_unit: "mora"
+features_to_model:
+  - "vowel-quality"
+  - "vowel-length"
+  - "moraic-nasal"
+  - "gemination"
+  - "palatalized-sequences"
+  - "rhythm"
+  - "lexical-pitch-accent"
+  - "phrase-intonation"
+notes:
+  - "Populate a verified phone/phoneme inventory from authoritative sources during JA-RES tasks."

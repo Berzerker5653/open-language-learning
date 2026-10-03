@@ -1,0 +1,9 @@
+registers:
+  - id: "neutral-common"
+    description: "Draft label for common greeting/introduction routines; appropriateness depends on situation and relationship, not a copular polite/plain form distinction."
+  - id: "polite-neutral"
+    description: "Initial pedagogical label; refine into Japanese-appropriate register model during research."
+  - id: "plain-casual"
+    description: "Planned; context-sensitive and not inherently interchangeable with polite forms."
+notes:
+  - "Do not reduce Japanese register to a binary polite/casual switch; expand through validated research."

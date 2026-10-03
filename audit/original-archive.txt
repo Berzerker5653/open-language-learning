@@ -1,0 +1,4 @@
+Original source archive preserved and extraction byte-compared against every file.
+File: language-learning-platform-handoff.zip
+SHA-256: b56df45dfaa4e88428341e97e8c4558a5aab3a1df8b891c4e6c088ef8b5a647d
+Review date: 2026-10-02 America/Denver

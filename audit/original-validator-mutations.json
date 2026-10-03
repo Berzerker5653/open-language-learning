@@ -1,0 +1,102 @@
+[
+  {
+    "case": "roadmap_cycle",
+    "returncode": 0,
+    "passed": true,
+    "tail": [
+      "PASS ja-JP speech profile",
+      "PASS roadmap unique task IDs (54)",
+      "HANDOFF VALIDATION PASSED"
+    ]
+  },
+  {
+    "case": "corrupt_lexicon",
+    "returncode": 0,
+    "passed": true,
+    "tail": [
+      "PASS ja-JP speech profile",
+      "PASS roadmap unique task IDs (54)",
+      "HANDOFF VALIDATION PASSED"
+    ]
+  },
+  {
+    "case": "missing_license_file",
+    "returncode": 0,
+    "passed": true,
+    "tail": [
+      "PASS ja-JP speech profile",
+      "PASS roadmap unique task IDs (54)",
+      "HANDOFF VALIDATION PASSED"
+    ]
+  },
+  {
+    "case": "unknown_goal_concept",
+    "returncode": 0,
+    "passed": true,
+    "tail": [
+      "PASS ja-JP speech profile",
+      "PASS roadmap unique task IDs (54)",
+      "HANDOFF VALIDATION PASSED"
+    ]
+  },
+  {
+    "case": "invalid_task_state",
+    "returncode": 0,
+    "passed": true,
+    "tail": [
+      "PASS ja-JP speech profile",
+      "PASS roadmap unique task IDs (54)",
+      "HANDOFF VALIDATION PASSED"
+    ]
+  },
+  {
+    "case": "false_reference_maturity",
+    "returncode": 0,
+    "passed": true,
+    "tail": [
+      "PASS ja-JP speech profile",
+      "PASS roadmap unique task IDs (54)",
+      "HANDOFF VALIDATION PASSED"
+    ]
+  },
+  {
+    "case": "invalid_locale",
+    "returncode": 0,
+    "passed": true,
+    "tail": [
+      "PASS ja-JP speech profile",
+      "PASS roadmap unique task IDs (54)",
+      "HANDOFF VALIDATION PASSED"
+    ]
+  },
+  {
+    "case": "invalid_engine_semver",
+    "returncode": 0,
+    "passed": true,
+    "tail": [
+      "PASS ja-JP speech profile",
+      "PASS roadmap unique task IDs (54)",
+      "HANDOFF VALIDATION PASSED"
+    ]
+  },
+  {
+    "case": "valid_semver_with_prerelease_and_build",
+    "returncode": 1,
+    "passed": false,
+    "tail": [
+      "PASS ja-JP speech profile",
+      "PASS roadmap unique task IDs (54)",
+      "HANDOFF VALIDATION FAILED"
+    ]
+  },
+  {
+    "case": "duplicate_yaml_key",
+    "returncode": 0,
+    "passed": true,
+    "tail": [
+      "PASS ja-JP speech profile",
+      "PASS roadmap unique task IDs (54)",
+      "HANDOFF VALIDATION PASSED"
+    ]
+  }
+]

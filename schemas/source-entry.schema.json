@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/source-entry.schema.json",
+  "title": "Source Entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "title", "source_type", "url", "redistribution", "accessed"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]+$"},
+    "title": {"type": "string", "minLength": 1},
+    "organization": {"type": "string"},
+    "authors": {"type": "array", "items": {"type": "string"}},
+    "source_type": {"enum": ["official-framework", "dictionary", "corpus", "paper", "book", "website", "model", "software", "asset", "human-review", "other"]},
+    "url": {"type": "string", "format": "uri"},
+    "doi": {"type": "string"},
+    "accessed": {"type": "string", "format": "date"},
+    "license": {"type": ["string", "null"]},
+    "license_url": {"type": ["string", "null"], "format": "uri"},
+    "redistribution": {"enum": ["allowed", "derived-only", "reference-only", "unknown", "blocked"]},
+    "attribution": {"type": "string"},
+    "notes": {"type": "string"}
+  }
+}

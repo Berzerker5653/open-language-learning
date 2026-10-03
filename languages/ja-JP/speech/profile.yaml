@@ -1,0 +1,21 @@
+locale: "ja-JP"
+reference_variant: "standard-japanese"
+alignment_units: ["mora", "phoneme"]
+features:
+  - id: "segmental-intelligibility"
+    mode: "assess-guided"
+    notes: "No calibrated automatic scorer exists. ASR recognition is not a segmental pronunciation grade."
+  - id: "mora-timing"
+    mode: "assess-guided"
+    notes: "Promote to automatic only after calibration."
+  - id: "vowel-length"
+    mode: "assess-guided"
+  - id: "gemination"
+    mode: "assess-guided"
+  - id: "lexical-pitch-accent"
+    mode: "assess-guided"
+    notes: "Variant-aware; automatic scoring blocked until reliable target data/calibration exists."
+  - id: "phrase-intonation"
+    mode: "reference-only"
+confidence_policy:
+  abstain_below: null

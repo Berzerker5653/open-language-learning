@@ -1,0 +1,20 @@
+- id: ja.goal.onramp.respond-to-greeting
+  description: Recognize a basic greeting in a supported first-meeting context and
+    make an appropriate simple response.
+  band: on-ramp
+  framework_refs: []
+  contexts:
+  - ja.situation.first-meeting
+  modalities:
+  - listening
+  - speaking
+  - interaction
+  prerequisites: []
+  required_concepts:
+  - ja.lex.greeting.konnichiwa
+  assessment_ids:
+  - ja.assess.onramp.greeting-transfer
+  transfer_required: true
+  sources:
+  - jf-standard
+  review_status: draft

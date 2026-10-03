@@ -1,0 +1,9 @@
+Final corrected checker mutation/regression tests
+Date: 2026-10-02 America/Denver
+Reproduce: python -m unittest discover -s tools -p test_validate_handoff.py
+
+............................................
+----------------------------------------------------------------------
+Ran 44 tests in 5.154s
+
+OK

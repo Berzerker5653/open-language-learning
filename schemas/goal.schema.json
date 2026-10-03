@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/goal.schema.json",
+  "title": "Communicative Goal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "description",
+    "band",
+    "modalities",
+    "prerequisites",
+    "required_concepts",
+    "assessment_ids",
+    "transfer_required",
+    "sources",
+    "review_status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9.-]+$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "band": {
+      "enum": [
+        "on-ramp",
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C2"
+      ]
+    },
+    "framework_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "contexts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "modalities": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "listening",
+          "speaking",
+          "reading",
+          "writing",
+          "interaction"
+        ]
+      }
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "required_concepts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "assessment_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "transfer_required": {
+      "type": "boolean"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "review_status": {
+      "enum": [
+        "draft",
+        "review-needed",
+        "validated",
+        "verified"
+      ]
+    }
+  }
+}

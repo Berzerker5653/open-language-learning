@@ -1,0 +1,23 @@
+id: "ja.unit.onramp.greeting"
+title: "First contact"
+goal_ids: ["ja.goal.onramp.respond-to-greeting"]
+sources: ["jf-standard"]
+review_status: "review-needed"
+activities:
+  - id: "encounter-1"
+    type: "encounter"
+    targets: ["ja.lex.greeting.konnichiwa"]
+    support_level: 5
+  - id: "listen-1"
+    type: "comprehension"
+    targets: ["ja.lex.greeting.konnichiwa"]
+    support_level: 3
+  - id: "speak-1"
+    type: "speaking"
+    targets: ["ja.lex.greeting.konnichiwa"]
+    support_level: 3
+  - id: "scenario-1"
+    type: "scenario"
+    targets: ["ja.goal.onramp.respond-to-greeting"]
+    support_level: 2
+    scenario_id: "ja.scenario.first-meeting.greeting"

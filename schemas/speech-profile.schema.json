@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/speech-profile.schema.json",
+  "title": "Language Speech Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "locale",
+    "alignment_units",
+    "features",
+    "confidence_policy"
+  ],
+  "properties": {
+    "locale": {
+      "type": "string"
+    },
+    "reference_variant": {
+      "type": "string"
+    },
+    "alignment_units": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "word",
+          "syllable",
+          "mora",
+          "phoneme",
+          "phone",
+          "character"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "features": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "mode"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "mode": {
+            "enum": [
+              "teach",
+              "assess-automatic",
+              "assess-guided",
+              "reference-only"
+            ]
+          },
+          "min_confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "notes": {
+            "type": "string"
+          },
+          "calibration": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "evidence_path",
+              "provider_id",
+              "provider_version",
+              "model_id",
+              "model_version",
+              "model_sha256",
+              "feature_version",
+              "reference_variant",
+              "pack_version",
+              "policy_path"
+            ],
+            "properties": {
+              "evidence_path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "provider_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "provider_version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "model_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "model_version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "feature_version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reference_variant": {
+                "type": "string",
+                "minLength": 1
+              },
+              "pack_version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "policy_path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "model_sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "mode": {
+                  "const": "assess-automatic"
+                }
+              },
+              "required": [
+                "mode"
+              ]
+            },
+            "then": {
+              "required": [
+                "min_confidence",
+                "calibration"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "confidence_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "abstain_below"
+      ],
+      "properties": {
+        "abstain_below": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "features": {
+            "contains": {
+              "properties": {
+                "mode": {
+                  "const": "assess-automatic"
+                }
+              },
+              "required": [
+                "mode"
+              ]
+            }
+          }
+        },
+        "required": [
+          "features"
+        ]
+      },
+      "then": {
+        "properties": {
+          "confidence_policy": {
+            "properties": {
+              "abstain_below": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

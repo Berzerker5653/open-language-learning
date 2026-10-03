@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/concept.schema.json",
+  "title": "Teachable Concept",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "kind", "status", "prerequisites", "sources"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z][a-z0-9.-]+$"},
+    "kind": {"enum": ["lexical", "grammar", "orthography", "phonology", "prosody", "pragmatics", "strategy", "culture"]},
+    "status": {"enum": ["draft", "review-needed", "validated", "verified"]},
+    "title": {"type": "string"},
+    "description": {"type": "string"},
+    "prerequisites": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "related": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "modalities": {"type": "array", "items": {"enum": ["listening", "speaking", "reading", "writing", "pronunciation", "prosody", "interaction"]}, "uniqueItems": true},
+    "registers": {"type": "array", "items": {"type": "string"}},
+    "common_errors": {"type": "array", "items": {"type": "string"}},
+    "sources": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true}
+  }
+}

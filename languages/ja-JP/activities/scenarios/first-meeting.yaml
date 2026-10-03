@@ -1,0 +1,15 @@
+id: "ja.scenario.first-meeting.greeting"
+status: "draft"
+location: "neutral-first-meeting-setting"
+objective: "Respond appropriately to a basic greeting with available support."
+target_goal_ids: ["ja.goal.onramp.respond-to-greeting"]
+support_ladder:
+  - 5
+  - 4
+  - 3
+  - 2
+  - 1
+  - 0
+transfer_variants_required: 2
+notes:
+  - "Populate actual dialogue graph only after content/schema runtime exists and examples are reviewed."

@@ -1,0 +1,17 @@
+reference_variant: "standard-japanese"
+absolute_f0_scoring: false
+normalize_to_speaker_range: true
+features:
+  lexical_pitch_accent:
+    state: "planned"
+    automatic_scoring_requires_calibration: true
+  phrase_intonation:
+    state: "planned"
+    automatic_scoring_requires_calibration: true
+target_policy:
+  isolated_word_accent_is_phrase_contour: false
+  reviewed_utterance_context_required: true
+  unreliable_or_unvoiced_f0_is_unavailable: true
+  no_numeric_score_from_guided_comparison: true
+notes:
+  - "Reference identity is declared in language/identity.yaml; phrase targets and accepted variants still require qualified review."
