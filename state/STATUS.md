@@ -147,10 +147,15 @@ M2 — Local data and learner model
   removable models, staged atomic installs, corruption-aware status,
   on-demand download, base app bundles zero models (evidence:
   `state/evidence/SPEECH-003/`).
+- `SPEECH-002` — local speech pipeline: energy VAD + quality gate
+  (silence/clipping/empty → neutral retryable rejections, never
+  negative mastery), sherpa-onnx subprocess ASR over installed model
+  files; whole suite passes in a network-disabled namespace
+  (evidence: `state/evidence/SPEECH-002/`).
 
 ## Next task
 
-`SPEECH-002` — microphone quality gate, VAD, local ASR adapter (M5, P0).
+`SPEECH-004` — Japanese constrained alignment prototype (M5, P0).
 Note: `REVIEW-001` (reviewer capacity) and `LIC-001` (final licensing
 decisions) are owner-only and remain open blockers for release.
 

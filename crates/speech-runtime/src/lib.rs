@@ -1,12 +1,10 @@
 //! Provider adapters only; linguistic interpretation comes from the pack.
-//! Populated by SPEECH-001..007.
+//! Populated by SPEECH-002..007.
+
+pub mod asr;
+pub mod quality;
+
+pub use asr::{SherpaSubprocessAsr, from_wav16, to_wav16};
+pub use quality::EnergyVad;
 
 pub const CRATE_NAME: &str = "lts-speech-runtime";
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn crate_identifies_itself() {
-        assert_eq!(super::CRATE_NAME, "lts-speech-runtime");
-    }
-}
