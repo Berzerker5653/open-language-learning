@@ -52,7 +52,7 @@ fn all_four_activity_kinds_render_from_pack_data() {
     // Scenario activity renders its pack-declared nodes + ladder.
     let scenario = rt.render("es.activity.intro.scenario").unwrap();
     let sc = scenario.scenario.clone().expect("scenario rendered");
-    assert_eq!(sc.nodes.len(), 1);
+    assert_eq!(sc.nodes.len(), 2);
     assert_eq!(sc.nodes[0].prompt, "Greet your new colleague");
     assert_eq!(sc.support_ladder.len(), 2);
     assert_eq!(sc.support_ladder[1].support_level, 3);

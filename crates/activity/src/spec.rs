@@ -129,6 +129,16 @@ pub struct PackUnit {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RecoveryBranch {
+    pub id: String,
+    pub prompt: String,
+    #[serde(default)]
+    pub expected_actions: Vec<String>,
+    #[serde(default)]
+    pub to: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ScenarioNode {
     pub id: String,
     pub prompt: String,
@@ -136,12 +146,22 @@ pub struct ScenarioNode {
     pub expected_actions: Vec<String>,
     #[serde(default)]
     pub next: Vec<String>,
+    #[serde(default)]
+    pub recovery: Vec<RecoveryBranch>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LadderStep {
     pub support_level: u8,
     pub description: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TransferVariant {
+    pub id: String,
+    pub description: String,
+    #[serde(default)]
+    pub changed_variable: Option<String>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -155,6 +175,10 @@ pub struct PackScenario {
     pub register: Option<String>,
     pub nodes: Vec<ScenarioNode>,
     pub support_ladder: Vec<LadderStep>,
+    #[serde(default)]
+    pub transfer_variants_required: u32,
+    #[serde(default)]
+    pub transfer_variants: Vec<TransferVariant>,
 }
 
 #[derive(Debug, Clone, Deserialize)]

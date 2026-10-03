@@ -118,10 +118,15 @@ M2 — Local data and learner model
   available and recorded as support; canonical stays Japanese script;
   reading evidence never touches listening/speaking dimensions
   (evidence: `state/evidence/READ-001/`).
+- `SCENARIO-001` — data-driven scenario runtime: pack-defined graph
+  with intents, support ladder, recovery branches (ADR-0006 schema
+  extension), transfer variants; per-node evidence; identical code
+  path for Spanish and Japanese scenarios (evidence:
+  `state/evidence/SCENARIO-001/`).
 
 ## Next task
 
-`SCENARIO-001` — data-driven scenario/dialogue runtime (M4, P0).
+`UX-001` — onboarding + privacy-first Japanese selection (M4, P0).
 Note: `REVIEW-001` (reviewer capacity) and `LIC-001` (final licensing
 decisions) are owner-only and remain open blockers for release.
 

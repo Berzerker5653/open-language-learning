@@ -6,7 +6,16 @@ register: "es.register.neutral"
 nodes:
   - id: "es.activity.intro.meeting.open"
     prompt: "Greet your new colleague"
-    expected_actions: ["greeting"]
+    expected_actions: ["greeting", "self-introduction"]
+    next: ["es.activity.intro.meeting.ask-name"]
+    recovery:
+      - id: "es.activity.intro.meeting.repair-repeat"
+        prompt: "You were not understood; ask them to repeat"
+        expected_actions: ["request-repetition"]
+        to: "es.activity.intro.meeting.open"
+  - id: "es.activity.intro.meeting.ask-name"
+    prompt: "Ask your colleague's name"
+    expected_actions: ["name-question"]
     next: []
 support_ladder:
   - support_level: 0

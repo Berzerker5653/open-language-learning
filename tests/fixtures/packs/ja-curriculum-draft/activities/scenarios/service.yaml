@@ -1,0 +1,31 @@
+id: "ja.scenario.b1.service"
+goal_id: "ja.goal.b1.handle-service-problems"
+title: "Problem at the counter"
+situation: "ja.situation.service-encounter"
+register: "ja.register.polite-standard"
+nodes:
+  - id: "ja.scenario.b1.service.open"
+    prompt: "Explain the problem to the shop assistant"
+    expected_actions: ["state-problem", "request-repair"]
+    next: ["ja.scenario.b1.service.agree"]
+    recovery:
+      - id: "ja.scenario.b1.service.repair-clarify"
+        prompt: "The assistant did not understand; clarify with simpler words"
+        expected_actions: ["clarify"]
+        to: "ja.scenario.b1.service.open"
+  - id: "ja.scenario.b1.service.agree"
+    prompt: "Agree on the next step"
+    expected_actions: ["confirm-next-step"]
+    next: []
+support_ladder:
+  - support_level: 0
+    description: "No supports"
+  - support_level: 2
+    description: "Key phrase card"
+  - support_level: 4
+    description: "Partial translation of the assistant's reply"
+transfer_variants_required: 1
+transfer_variants:
+  - id: "ja.scenario.b1.service.station"
+    description: "Same problem at the station ticket office"
+    changed_variable: "location"

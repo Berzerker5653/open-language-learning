@@ -25,6 +25,21 @@
           "next": {
             "type": "array",
             "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" }
+          },
+          "recovery": {
+            "type": "array",
+            "description": "Recovery branches offered when the learner's attempt does not satisfy the node (miscommunication, repair). Data-driven; the runtime never branches on language-specific rules (SCENARIO-001).",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "prompt"],
+              "properties": {
+                "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+                "prompt": { "type": "string", "minLength": 1 },
+                "expected_actions": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+                "to": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" }
+              }
+            }
           }
         }
       }
