@@ -745,7 +745,11 @@ fn structural_references(doc: &Value) -> Vec<(String, String, &'static str)> {
 }
 
 /// Reference fields per schema kind: (pointer, target, field-name).
-fn references(schema: &str, v2: bool, value: &Value) -> Vec<(String, String, &'static str)> {
+pub(crate) fn references(
+    schema: &str,
+    v2: bool,
+    value: &Value,
+) -> Vec<(String, String, &'static str)> {
     let mut out = Vec::new();
     let mut c = RefCollector { out: &mut out };
     c.collect(schema, v2, value);

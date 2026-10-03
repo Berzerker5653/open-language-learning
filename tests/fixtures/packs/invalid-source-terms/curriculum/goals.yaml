@@ -1,0 +1,11 @@
+goals:
+  - id: "es.goal.intro.greet"
+    description: "Greet a colleague appropriately"
+    band: "A1"
+    modalities: ["reading", "writing"]
+    prerequisites: []
+    required_concepts: []
+    assessment_ids: []
+    transfer_required: false
+    sources: ["src-nourl", "src-terms"]
+    review_status: "draft"

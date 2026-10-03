@@ -1,0 +1,96 @@
+//! End-to-end author workflow (PACK-005): init -> validate -> lint ->
+//! build -> inspect from a clean temporary directory.
+
+use std::path::Path;
+use std::process::Command;
+
+fn cli() -> Command {
+    Command::new(env!("CARGO_BIN_EXE_langpack"))
+}
+
+fn run(args: &[&str]) -> (String, String, bool) {
+    let out = cli().args(args).output().expect("run langpack");
+    (
+        String::from_utf8_lossy(&out.stdout).into_owned(),
+        String::from_utf8_lossy(&out.stderr).into_owned(),
+        out.status.success(),
+    )
+}
+
+fn fixture(name: &str) -> String {
+    Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tests/fixtures/packs")
+        .join(name)
+        .to_str()
+        .unwrap()
+        .to_string()
+}
+
+#[test]
+fn init_validate_build_inspect_round_trip() {
+    let dir = tempfile::tempdir().unwrap();
+    let pack = dir.path().join("my-pack");
+    let pack_s = pack.to_str().unwrap();
+
+    let (out, err, ok) = run(&["init", pack_s, "--pack-id", "dev.example.roundtrip"]);
+    assert!(ok, "init: {out}{err}");
+    assert!(Path::new(pack_s).join("manifest.yaml").exists());
+
+    let (out, err, ok) = run(&["validate", pack_s]);
+    assert!(ok, "validate: {out}{err}");
+    assert!(out.contains("0 error(s), 0 warning(s)"), "{out}");
+
+    let (out, _err, ok) = run(&["lint", pack_s]);
+    assert!(ok, "lint: {out}");
+
+    let archive = dir.path().join("roundtrip.lpk");
+    let archive_s = archive.to_str().unwrap();
+    let (out, err, ok) = run(&["build", pack_s, "-o", archive_s]);
+    assert!(ok, "build: {out}{err}");
+    assert!(out.contains("sha256"), "{out}");
+
+    let (out, err, ok) = run(&["inspect", archive_s]);
+    assert!(ok, "inspect: {out}{err}");
+    assert!(out.contains("dev.example.roundtrip"), "{out}");
+    assert!(out.contains("v0.0.1"), "{out}");
+
+    // init refuses a non-empty directory.
+    let (_out, err, ok) = run(&["init", pack_s]);
+    assert!(!ok && err.contains("not empty"), "{err}");
+}
+
+#[test]
+fn test_gate_blocks_uninstallable_pack() {
+    // valid-minimal is install-eligible; the seed draft is not.
+    let (out, _err, ok) = run(&["test", &fixture("valid-minimal")]);
+    assert!(ok, "valid-minimal must pass the full gate: {out}");
+
+    let seed = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../languages/ja-JP")
+        .to_str()
+        .unwrap()
+        .to_string();
+    let (out, _err, ok) = run(&["test", &seed]);
+    assert!(!ok, "seed draft must fail install gates: {out}");
+}
+
+#[test]
+fn lint_fails_on_warnings() {
+    // undeclared reference draft: scaffold-valid but warning-laden.
+    let (out, _err, ok) = run(&["lint", &fixture("valid-scaffold-draft")]);
+    assert!(!ok, "lint must fail on warnings: {out}");
+    let (_out, _err, ok) = run(&["validate", &fixture("valid-scaffold-draft")]);
+    assert!(ok, "same pack must pass scaffold validation");
+}
+
+#[test]
+fn audit_curriculum_and_sources_commands() {
+    let (out, _err, ok) = run(&["audit-curriculum", &fixture("invalid-prereq-cycle")]);
+    assert!(!ok, "cycle must fail: {out}");
+    assert!(out.contains("prerequisite_cycle"), "{out}");
+
+    let (out, _err, ok) = run(&["audit-sources", &fixture("invalid-source-terms")]);
+    assert!(ok, "provenance gaps are warnings: {out}");
+    assert!(out.contains("source_terms_inconsistent"), "{out}");
+    assert!(out.contains("unused_source"), "{out}");
+}

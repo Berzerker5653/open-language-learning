@@ -112,6 +112,13 @@ pub(crate) fn build(
     }
 }
 
+/// Curriculum graph audit only (cycles, mirror, reachability).
+pub fn audit_curriculum(pack: &crate::pack::Pack) -> Vec<Diagnostic> {
+    let v2 = pack.schema_version() != "0.1";
+    let graph = build(&pack.instances, &pack.structural, v2);
+    check(&graph)
+}
+
 /// Run graph diagnostics.
 pub(crate) fn check(graph: &Graph) -> Vec<Diagnostic> {
     let mut diags = Vec::new();

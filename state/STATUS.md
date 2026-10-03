@@ -4,11 +4,11 @@ Generated handoff state: 2026-10-02
 
 ## Overall
 
-Implementation started 2026-10-02. Bootstrap and pack-schema contracts in place; curriculum graph validation in progress.
+Implementation started 2026-10-02. M1 pack authoring toolchain complete; local data layer (M2) starting.
 
 ## Current milestone
 
-M1 — Pack authoring and validation
+M2 — Local data and learner model
 
 ## Completed tasks
 
@@ -37,10 +37,15 @@ M1 — Pack authoring and validation
   (traversal/hash/bomb/symlink/unlisted-entry rejection, install-mode
   gate); store with atomic current pointer; upgrade/rollback
   (evidence: `state/evidence/PACK-004/`).
+- `PACK-005` — full author CLI workflow (`init`/`lint`/`test`/
+  `audit-curriculum`/`audit-sources` added), provenance audit,
+  contributor quickstart (`docs/QUICKSTART_PACK_AUTHORING.md`),
+  init→validate→build→inspect round-trip test
+  (evidence: `state/evidence/PACK-005/`).
 
 ## Next task
 
-`PACK-005` — complete langpack CLI author workflow (M1).
+`DATA-001` — local SQLite profile storage and migrations (M2, P0).
 
 ## Owner decisions already resolved
 

@@ -1,0 +1,20 @@
+WARN languages/ja-JP: draft distribution license unresolved; no redistribution/release authorization inferred
+WARN languages/ja-JP: explicit unresolved draft assessment ja.assess.onramp.greeting-transfer: Draft scaffold has no transfer assessment definition; author, schema-validate and review it before release-readiness.
+WARN examples/minimal-language-pack: manifest-only onboarding fixture; no instructional content or full pack conformance
+WARN scope: handoff structure checked; SDK completeness, linguistic correctness, source rights, calibration quality, build/install/runtime/UX/privacy/security remain unverified
+HANDOFF VALIDATION PASSED (48 data files checked)
+FAIL languages/ja-JP: unknown assessment ja.assess.onramp.greeting-transfer on ja.goal.onramp.respond-to-greeting; only documented exact draft exceptions are allowed in handoff mode
+FAIL languages/ja-JP: pack is experimental/unreviewed
+FAIL languages/ja-JP: pack distribution license is unresolved
+FAIL languages/ja-JP: content ja.grammar.copula.polite-desu is not reviewed for distribution
+FAIL languages/ja-JP: content ja.goal.onramp.respond-to-greeting is not reviewed for distribution
+FAIL languages/ja-JP: content ja.expr.introduction.hajimemashite is not reviewed for distribution
+FAIL languages/ja-JP: content ja.lex.greeting.konnichiwa is not reviewed for distribution
+FAIL languages/ja-JP: content ja.unit.onramp.greeting is not reviewed for distribution
+FAIL languages/ja-JP: content ja.scenario.first-meeting.greeting is not reviewed for distribution
+FAIL languages/ja-JP: SDK schemas for assessments/scenarios/assets/review evidence are incomplete: implement PACK-001/PACK-002/trust gates; this checker cannot certify release
+FAIL examples/minimal-language-pack: manifest-only example is not a releasable language pack
+WARN languages/ja-JP: draft distribution license unresolved; no redistribution/release authorization inferred
+WARN examples/minimal-language-pack: manifest-only onboarding fixture; no instructional content or full pack conformance
+WARN scope: handoff structure checked; SDK completeness, linguistic correctness, source rights, calibration quality, build/install/runtime/UX/privacy/security remain unverified
+PACK-DATA-PREFLIGHT VALIDATION FAILED (48 data files checked)

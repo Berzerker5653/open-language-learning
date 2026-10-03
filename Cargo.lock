@@ -2217,6 +2217,7 @@ dependencies = [
  "clap",
  "lts-langpack",
  "serde_json",
+ "tempfile",
 ]
 
 [[package]]

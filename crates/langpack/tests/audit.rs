@@ -86,3 +86,42 @@ fn seed_draft_blocks_redistribution_and_reports_sources() {
             .any(|e| e.source_id == "commonvoice-ja-27" && e.attribution.contains("Mozilla"))
     );
 }
+
+#[test]
+fn source_provenance_flags_gaps_and_term_conflicts() {
+    let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tests/fixtures/packs")
+        .join("invalid-source-terms");
+    let pack = Pack::load_dir(&root).unwrap();
+    let diags = pack.audit_sources();
+    let codes: Vec<&str> = diags.iter().map(|d| d.code.as_str()).collect();
+    assert!(codes.contains(&"source_missing_url"), "{diags:?}");
+    assert!(codes.contains(&"source_missing_retrieved"), "{diags:?}");
+    assert!(codes.contains(&"source_terms_inconsistent"), "{diags:?}");
+    assert!(
+        diags
+            .iter()
+            .any(|d| d.code == "unused_source" && d.severity == Severity::Info),
+        "{diags:?}"
+    );
+    // Provenance gaps are quality warnings, not schema errors.
+    assert!(
+        diags.iter().all(|d| d.severity != Severity::Error),
+        "{diags:?}"
+    );
+}
+
+#[test]
+fn clean_source_chain_has_no_provenance_warnings() {
+    let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tests/fixtures/packs")
+        .join("valid-full");
+    let pack = Pack::load_dir(&root).unwrap();
+    let diags = pack.audit_sources();
+    assert!(
+        diags
+            .iter()
+            .all(|d| d.severity != Severity::Error && d.severity != Severity::Warning),
+        "clean provenance: {diags:?}"
+    );
+}

@@ -1,0 +1,59 @@
+     Running unittests src/lib.rs (target/debug/deps/lts_langpack-daf629763b7a5425)
+test migrate::tests::bare_prerequisites_become_reviewable_records ... ok
+test migrate::tests::migrated_goal_validates_against_0_2_schema ... ok
+test migrate::tests::bare_prerequisites_are_rejected_by_0_2_schema ... ok
+test migrate::tests::migrated_records_trigger_review_warning ... ok
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+     Running tests/archive.rs (target/debug/deps/archive-7ca1419ae2a2ecaf)
+test install_rejects_path_traversal ... ok
+test build_rejects_invalid_pack ... ok
+test install_rejects_hash_mismatch ... ok
+test install_rejects_unlisted_and_symlink_entries ... ok
+test install_enforces_install_mode_gates ... ok
+test build_is_deterministic ... ok
+test install_upgrade_rollback_cycle ... ok
+test install_rejects_decompression_bomb ... ok
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.80s
+     Running tests/audit.rs (target/debug/deps/audit-81346018e7c9c10d)
+test attribution_requirement_without_entry_fails ... ok
+test clean_chain_audits_and_reports_attribution ... ok
+test unknown_license_blocks_reference_build ... ok
+test reference_only_source_cannot_be_bundled ... ok
+test source_provenance_flags_gaps_and_term_conflicts ... ok
+test clean_source_chain_has_no_provenance_warnings ... ok
+test seed_draft_blocks_redistribution_and_reports_sources ... ok
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/validate.rs (target/debug/deps/validate-604e7d53d42b1793)
+test japanese_draft_seed_validates_as_scaffold ... ok
+test bare_prerequisite_ids_fail_in_0_2 ... ok
+test japanese_draft_seed_is_not_install_eligible ... ok
+test locale_mismatch_fails ... ok
+test manifest_scripts_must_match_orthography_ids ... ok
+test inverted_engine_range_fails ... ok
+test duplicate_ids_fail ... ok
+test dependency_mirror_must_agree_with_content_prerequisites ... ok
+test prerequisite_cycles_fail_with_cycle_path ... ok
+test scaffold_draft_is_accepted_as_scaffold_only ... ok
+test bad_id_grammar_fails ... ok
+test draft_unresolved_reference_and_license_gates_block_install ... ok
+test dead_goal_audit_reports_unreachable_goals ... ok
+test out_of_range_support_level_fails ... ok
+test diagnostics_carry_actionable_locations ... ok
+test deferred_modality_prerequisites_are_representable ... ok
+test migrated_prerequisites_warn_for_human_review ... ok
+test matching_dependency_mirror_is_clean ... ok
+test undeclared_reference_warns_in_scaffold_and_errors_in_install ... ok
+test valid_minimal_is_clean_in_both_modes ... ok
+test engine_version_compatibility_is_checked ... ok
+test valid_full_covers_every_content_type ... ok
+test result: ok. 22 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+     Running unittests src/main.rs (target/debug/deps/langpack-34eccd48704d71ce)
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/cli.rs (target/debug/deps/cli-a154fcb18cbb27cc)
+test audit_curriculum_and_sources_commands ... ok
+test test_gate_blocks_uninstallable_pack ... ok
+test lint_fails_on_warnings ... ok
+test init_validate_build_inspect_round_trip ... ok
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+   Doc-tests lts_langpack
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

@@ -1,0 +1,3 @@
+{"id":"src-nourl","title":"No locator source","license":{"spdx":"CC-BY-4.0"},"access":{"mode":"public"},"use":{"redistribution_allowed":false}}
+{"id":"src-terms","title":"Inconsistent terms source","url":"https://example.invalid/reference","license":{"spdx":"CC-BY-4.0"},"access":{"mode":"reference-only"},"use":{"redistribution_allowed":true}}
+{"id":"src-unused","title":"Unused source","url":"https://example.invalid/unused","retrieved":"2026-01-01","license":{"spdx":"CC0-1.0"},"access":{"mode":"public"},"use":{"redistribution_allowed":false}}

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-02",
-  "active_task": "PACK-005",
+  "active_task": "DATA-001",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -98,8 +98,20 @@
       ]
     },
     "PACK-005": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/PACK-005.md",
+        "state/evidence/PACK-005/cargo-test-2026-10-02.txt",
+        "state/evidence/PACK-005/cli-2026-10-02.txt",
+        "state/evidence/PACK-005/ci-2026-10-02.txt",
+        "docs/QUICKSTART_PACK_AUTHORING.md"
+      ]
+    },
+    "DATA-001": {
       "status": "in_progress",
-      "attempts": 0,
+      "attempts": 1,
       "last_error": null,
       "evidence": []
     }

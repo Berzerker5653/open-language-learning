@@ -1,0 +1,53 @@
+== langpack author workflow demo (PACK-005) ==
+
+$ langpack init demo --pack-id dev.example.demo --locale es-ES
+initialized 0.2 pack at /tmp/tmp.AsjpwXUAVy/demo
+next: langpack validate /tmp/tmp.AsjpwXUAVy/demo && langpack lint /tmp/tmp.AsjpwXUAVy/demo
+
+$ langpack validate demo
+validate(scaffold): 0 error(s), 0 warning(s)
+
+$ langpack lint demo
+lint: 0 error(s), 0 warning(s)
+
+$ langpack test demo (install gate: expected fail, empty licenses/sources)
+error[license_inventory_missing] licenses.jsonl: install requires a non-empty licenses.jsonl (0.1 packs must migrate first)
+error[redistribution_blocked] manifest.yaml/license: manifest.license.redistribution_allowed must be true for install; resolve the license inventory first (LIC-001)
+error[sources_missing] sources.jsonl: install requires provenance sources in sources.jsonl
+test: 3 error(s), 0 warning(s)
+exit=1
+
+$ langpack build demo -o demo.lpk
+built /tmp/tmp.AsjpwXUAVy/demo.lpk (1314 bytes)
+sha256 0811d703722f97a78bbd2102c29bb1ddd4bbef3077b7a2a915ba9535e6dff35b
+
+$ langpack inspect demo.lpk
+lts-pack/1 dev.example.demo v0.0.1 (schema 0.2)
+         121  9fe4d9ae4a78  curriculum/goals.yaml
+           0  e3b0c44298fc  grammar/concepts.jsonl
+           0  e3b0c44298fc  licenses.jsonl
+         378  ca48ca88c8d1  manifest.yaml
+           0  e3b0c44298fc  sources.jsonl
+
+$ langpack test valid-minimal (full gate pass)
+warning[source_missing_url] sources.jsonl/0: source "test-source" records no URL/DOI locator (docs/10 source registry)
+warning[source_missing_retrieved] sources.jsonl/0: source "test-source" records no accessed/retrieved date
+test: 0 error(s), 2 warning(s)
+note: 2 warning(s); promotion gates still pass
+
+$ langpack install demo.lpk --store store (expected fail: install-mode gate)
+error: install rejected: pack rejected by install validation: 3 error(s) — license_inventory_missing: install requires a non-empty licenses.jsonl (0.1 packs must migrate first); redistribution_blocked: manifest.license.redistribution_allowed must be true for install; resolve the license inventory first (LIC-001); sources_missing: install requires provenance sources in sources.jsonl
+exit=1
+
+$ langpack audit-sources invalid-source-terms
+warning[source_missing_url] sources.jsonl/0: source "src-nourl" records no URL/DOI locator (docs/10 source registry)
+warning[source_missing_retrieved] sources.jsonl/0: source "src-nourl" records no accessed/retrieved date
+warning[source_missing_retrieved] sources.jsonl/1: source "src-terms" records no accessed/retrieved date
+warning[source_terms_inconsistent] sources.jsonl/1/use: source "src-terms" is access mode reference-only but claims redistribution_allowed true; verify exact upstream terms
+info[unused_source] sources.jsonl/2: source "src-unused" is not referenced by any content record
+audit-sources: 0 error(s), 4 warning(s)
+
+$ langpack audit-curriculum invalid-prereq-cycle
+error[prerequisite_cycle] curriculum/goals.yaml: prerequisite cycle: es.goal.intro.greet -> es.goal.intro.speak-greeting -> es.goal.intro.greet
+audit-curriculum: 1 error(s), 0 warning(s)
+exit=1

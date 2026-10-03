@@ -35,6 +35,69 @@ fn unknown_license(spdx: Option<&str>) -> bool {
 }
 
 impl Pack {
+    /// Source provenance completeness audit (PACK-005 `audit-sources`).
+    pub fn audit_sources(&self) -> Vec<Diagnostic> {
+        let mut referenced: std::collections::HashSet<String> = std::collections::HashSet::new();
+        for inst in &self.instances {
+            for (_, target, field) in crate::pack::references(inst.schema, inst.v2, &inst.value) {
+                if field == "sources" || field == "scope.source_id" {
+                    referenced.insert(target);
+                }
+            }
+        }
+        let mut diags = Vec::new();
+        for inst in self.instances.iter().filter(|i| i.schema == "source-entry") {
+            let v = &inst.value;
+            let id = v.get("id").and_then(Value::as_str).unwrap_or("?");
+            if v.get("url").and_then(Value::as_str).is_none() {
+                diags.push(Diagnostic::new(
+                    &inst.file,
+                    inst.pointer.clone(),
+                    "source_missing_url",
+                    format!("source {id:?} records no URL/DOI locator (docs/10 source registry)"),
+                    Severity::Warning,
+                ));
+            }
+            if v.get("retrieved").is_none() {
+                diags.push(Diagnostic::new(
+                    &inst.file,
+                    inst.pointer.clone(),
+                    "source_missing_retrieved",
+                    format!("source {id:?} records no accessed/retrieved date"),
+                    Severity::Warning,
+                ));
+            }
+            let reference_only = v
+                .get("access")
+                .and_then(|a| a.get("mode"))
+                .and_then(Value::as_str)
+                == Some("reference-only");
+            let redistribution = v
+                .get("use")
+                .and_then(|u| u.get("redistribution_allowed"))
+                .and_then(Value::as_bool);
+            if reference_only && redistribution == Some(true) {
+                diags.push(Diagnostic::new(
+                    &inst.file,
+                    format!("{}/use", inst.pointer),
+                    "source_terms_inconsistent",
+                    format!("source {id:?} is access mode reference-only but claims redistribution_allowed true; verify exact upstream terms"),
+                    Severity::Warning,
+                ));
+            }
+            if !referenced.contains(id) {
+                diags.push(Diagnostic::new(
+                    &inst.file,
+                    inst.pointer.clone(),
+                    "unused_source",
+                    format!("source {id:?} is not referenced by any content record"),
+                    Severity::Info,
+                ));
+            }
+        }
+        diags
+    }
+
     /// License/redistribution audit + attribution report.
     pub fn audit_licenses(&self) -> (Vec<Diagnostic>, Vec<AttributionEntry>) {
         if self.schema_version() == "0.1" {
