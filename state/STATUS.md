@@ -4,7 +4,7 @@ Generated handoff state: 2026-10-02
 
 ## Overall
 
-Implementation started 2026-10-02. M1 pack authoring toolchain complete; local data layer (M2) starting.
+Implementation started 2026-10-02. M1 complete; M2 learner core underway with the SQLite profile store in place.
 
 ## Current milestone
 
@@ -42,10 +42,15 @@ M2 — Local data and learner model
   contributor quickstart (`docs/QUICKSTART_PACK_AUTHORING.md`),
   init→validate→build→inspect round-trip test
   (evidence: `state/evidence/PACK-005/`).
+- `DATA-001` — SQLite profile store (`crates/storage`): forward-only
+  migrations (v1→v2 tested from initial schema), offline profile
+  creation, append-only evidence with duplicate-id rejection,
+  metadata-only opt-in recordings, no BLOB columns (ADR-0005)
+  (evidence: `state/evidence/DATA-001/`).
 
 ## Next task
 
-`DATA-001` — local SQLite profile storage and migrations (M2, P0).
+`LEARN-001` — evidence event model on the store (M2, P0).
 
 ## Owner decisions already resolved
 

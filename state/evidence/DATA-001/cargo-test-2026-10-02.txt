@@ -1,0 +1,13 @@
+     Running unittests src/lib.rs (target/debug/deps/lts_storage-d78d73a2b198dcf1)
+test migrations::tests::migrations_are_sequential_and_complete_history ... ok
+test tests::in_memory_store_migrates_to_head ... ok
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/store.rs (target/debug/deps/store-d0eb576f33581d04)
+test settings_goals_and_pack_records_round_trip ... ok
+test profile_created_without_account_or_network ... ok
+test no_audio_blobs_and_no_recordings_by_default ... ok
+test evidence_survives_restart_and_rejects_duplicate_ids ... ok
+test delete_profile_removes_app_owned_learner_data ... ok
+test migrations_apply_forward_from_initial_schema ... ok
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
