@@ -54,7 +54,7 @@ pub fn models_root(data: &Path) -> PathBuf {
     data.join("models")
 }
 
-fn model_dir(data: &Path, entry: &ModelEntry) -> PathBuf {
+pub(crate) fn model_dir(data: &Path, entry: &ModelEntry) -> PathBuf {
     models_root(data).join(&entry.id).join(&entry.version)
 }
 

@@ -19,5 +19,9 @@ Existing:
 - 0002 no streaks
 - 0003 speech provider abstraction
 - 0004 initial stack and pinned versions
+- 0005 sqlite baseline schema
+- 0006 scenario recovery branches
+- 0007 initial speech provider selection
+- 0008 constrained alignment via embedded runtime
 
 Template: `template.md`.

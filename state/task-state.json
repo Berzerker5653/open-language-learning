@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-03",
-  "active_task": "SPEECH-004",
+  "active_task": "SPEECH-006",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -380,6 +380,34 @@
       ]
     },
     "SPEECH-004": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/evidence/SPEECH-004/cargo-test-2026-10-03.txt",
+        "state/evidence/SPEECH-004/ci-2026-10-03.txt",
+        "state/notes/SPEECH-004.md",
+        "docs/adr/0008-constrained-alignment-approach.md",
+        "crates/speech-runtime/src/alignment.rs",
+        "crates/speech-runtime/tests/alignment.rs"
+      ]
+    },
+    "SPEECH-005": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/evidence/SPEECH-005/cargo-test-2026-10-03.txt",
+        "state/evidence/SPEECH-005/ci-2026-10-03.txt",
+        "state/evidence/SPEECH-005/smoke-desktop-2026-10-03.txt",
+        "state/notes/SPEECH-005.md",
+        "crates/speech-runtime/src/acoustic.rs",
+        "crates/speech-runtime/src/interpret.rs",
+        "crates/speech-runtime/tests/pronunciation.rs",
+        "apps/desktop/src/pronunciation.tsx"
+      ]
+    },
+    "SPEECH-006": {
       "status": "in_progress",
       "attempts": 0,
       "last_error": null,

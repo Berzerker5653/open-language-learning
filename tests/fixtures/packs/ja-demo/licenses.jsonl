@@ -1,1 +1,2 @@
 {"id":"lic-jmdict-derived","scope":{"kind":"derived-from-source","source_id":"edrdg-jmdict"},"license":{"spdx":"CC-BY-SA-4.0"},"redistribution_allowed":true,"attribution":"JMdict/JMnedict © EDRDG, CC BY-SA 4.0"}
+{"id":"lic-kokoro-ref-audio","scope":{"kind":"model-output","path_glob":"media/*.wav","source_id":"kokoro-tts-sherpa"},"license":{"spdx":"Apache-2.0","notes":"synthesized with kokoro-multi-lang-v1_0 sid 37 (dev reference audio)"},"redistribution_allowed":true,"attribution":"Reference audio synthesized with Kokoro TTS (Apache-2.0)"}

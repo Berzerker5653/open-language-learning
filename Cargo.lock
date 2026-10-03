@@ -2237,11 +2237,14 @@ dependencies = [
 name = "lts-desktop"
 version = "0.1.0"
 dependencies = [
+ "base64 0.22.1",
  "lts-activity",
  "lts-domain",
  "lts-langpack",
  "lts-learner-model",
  "lts-scheduler",
+ "lts-speech-api",
+ "lts-speech-runtime",
  "lts-storage",
  "serde",
  "serde_json",
@@ -2339,6 +2342,7 @@ dependencies = [
  "lts-domain",
  "lts-speech-api",
  "serde",
+ "serde_json",
  "thiserror 2.0.21",
 ]
 

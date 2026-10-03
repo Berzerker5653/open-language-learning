@@ -1,0 +1,18 @@
+schema_version: "0.2"
+segments:
+  - symbol: "a"
+    type: vowel
+    mode: teach
+    examples: ["おばさん"]
+  - symbol: "a:"
+    type: vowel
+    mode: assess-guided
+    examples: ["おばあさん"]
+    l1_contrast_notes:
+      en-US: "English does not contrast vowel length; the long /a:/ in おばあさん roughly doubles the mora duration."
+phonotactics: []
+prosody:
+  - id: ja.phon.long-vowel
+    description: "Contrastive vowel length: /obasan/ (aunt) vs /obaasan/ (grandmother) differ only in the duration of the second mora; length changes word meaning."
+    mode: assess-guided
+    orthographic_cues: ["あー (hiragana long vowels)", "おう/よう/えい patterns"]

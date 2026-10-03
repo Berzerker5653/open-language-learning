@@ -333,3 +333,21 @@ fn diagnostics_carry_actionable_locations() {
         d.path
     );
 }
+
+#[test]
+fn media_assets_load_as_binary_and_pack_stays_clean() {
+    let pack = Pack::load_dir(&fixture("ja-demo")).expect("load ja-demo");
+    let media = pack.media_files();
+    assert!(
+        media.contains(&"media/ja.lex.demo.obasan.wav".to_string()),
+        "media: {media:?}"
+    );
+    assert!(
+        media.contains(&"media/ja.lex.demo.obaasan.wav".to_string()),
+        "media: {media:?}"
+    );
+    // Phonology + speech profile (assess-guided, calibration null) must
+    // validate cleanly in install mode; media never parsed as text.
+    let diags = pack.validate(Mode::Install, None);
+    assert_eq!(error_count(&diags), 0, "ja-demo install: {diags:?}");
+}

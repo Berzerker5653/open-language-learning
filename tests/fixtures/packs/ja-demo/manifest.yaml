@@ -10,7 +10,7 @@ engine:
 maturity: "community"
 capabilities:
   listening: false
-  speaking: false
+  speaking: true
   reading: true
   writing: true
 license:

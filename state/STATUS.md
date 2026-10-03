@@ -152,10 +152,20 @@ M2 — Local data and learner model
   negative mastery), sherpa-onnx subprocess ASR over installed model
   files; whole suite passes in a network-disabled namespace
   (evidence: `state/evidence/SPEECH-002/`).
+- `SPEECH-004` — constrained alignment prototype: whisper.cpp word
+  offsets + Needleman-Wunsch unit matching; abstains on mismatch/low
+  confidence; ADR-0008 records embedded-runtime vs preparation-tooling
+  (evidence: `state/evidence/SPEECH-004/`).
+- `SPEECH-005` — guided pronunciation feedback MVP: vowel-length
+  contrast (おばさん/おばあさん) declared in pack phonology + speech
+  profile (assess-guided, calibration null); duration features,
+  rate-normalized comparison, abstention with reasons; in-memory
+  attempt + pack reference playback (evidence:
+  `state/evidence/SPEECH-005/`).
 
 ## Next task
 
-`SPEECH-004` — Japanese constrained alignment prototype (M5, P0).
+`SPEECH-006` — pitch/F0 visualization and guided comparison (M5, P1).
 Note: `REVIEW-001` (reviewer capacity) and `LIC-001` (final licensing
 decisions) are owner-only and remain open blockers for release.
 

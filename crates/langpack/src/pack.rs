@@ -36,6 +36,8 @@ pub struct Pack {
     pub(crate) instances: Vec<Instance>,
     /// Parsed documents without a schema (0.1 structural files).
     pub(crate) structural: Vec<(String, Value)>,
+    /// Binary media assets (validated as present, never parsed as text).
+    pub(crate) media: Vec<String>,
     unknown_files: Vec<String>,
     parse_errors: Vec<(String, String)>,
     pub(crate) manifest: Option<Value>,
@@ -50,6 +52,11 @@ impl Pack {
     /// Parsed structural (non-schema) documents by relative path.
     pub fn structural_docs(&self) -> &[(String, Value)] {
         &self.structural
+    }
+
+    /// Relative paths of binary media assets.
+    pub fn media_files(&self) -> &[String] {
+        &self.media
     }
 
     /// Load every classified document under `root`. Parse failures are
@@ -73,6 +80,7 @@ impl Pack {
             version,
             instances: Vec::new(),
             structural: Vec::new(),
+            media: Vec::new(),
             unknown_files: Vec::new(),
             parse_errors: Vec::new(),
             manifest: None,
@@ -92,6 +100,15 @@ impl Pack {
                 }
                 continue;
             };
+            if rel.starts_with("media/") {
+                let meta = fs::metadata(root.join(&rel))?;
+                if meta.len() == 0 {
+                    pack.parse_errors.push((rel, "empty media asset".into()));
+                } else {
+                    pack.media.push(rel);
+                }
+                continue;
+            }
             let text = fs::read_to_string(root.join(&rel))?;
             let schema = classified.schema;
             match classified.shape {

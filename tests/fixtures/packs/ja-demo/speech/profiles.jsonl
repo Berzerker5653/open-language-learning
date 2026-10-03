@@ -1,0 +1,1 @@
+{"id":"ja.phon.demo.long-vowel-profile","provider":"lts-speech-runtime","model":"org.openlanguage.speech.whisper-ggml-tiny","target_locale":"ja-JP","features":[{"feature_id":"ja.phon.long-vowel","mode":"assess-guided","calibration":null}],"notes":"Guided-only: duration-ratio feedback against the pack reference audio. No automatic mastery; calibration is a SPEECH-007 owner gate."}

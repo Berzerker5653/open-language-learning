@@ -8,6 +8,7 @@
 //! supplies paths), and an honest privacy notice (docs/08).
 
 mod models;
+use lts_speech_api::{AcousticFeatureProvider, AlignmentProvider, PronunciationInterpreter};
 use serde::Serialize;
 use std::path::Path;
 use std::path::PathBuf;
@@ -512,6 +513,224 @@ fn progress_summary(profile_id: String) -> Result<Vec<ProgressRow>, String> {
 }
 
 // ---------------------------------------------------------------------------
+// SPEECH-005: guided pronunciation practice (vowel-length contrast).
+// The pack's speech profile declares the feature assess-guided with
+// calibration null: this path NEVER records mastery. Recordings stay in
+// memory (docs/08). ASR/alignment success is not a pronunciation score:
+// corrections require reliable duration evidence, every gap abstains
+// with a reason (docs/05).
+// ---------------------------------------------------------------------------
+
+#[derive(serde::Deserialize, Clone)]
+struct PronunciationAttempt {
+    pack_id: String,
+    /// Content ids (validated; address pack media).
+    short_unit: String,
+    long_unit: String,
+    /// Surface forms used as alignment units (pack-declared text).
+    short_text: String,
+    long_text: String,
+    wav_b64: String,
+}
+
+#[derive(Serialize)]
+struct PronunciationCorrection {
+    feature_id: String,
+    band: &'static str,
+    feedback_template_id: String,
+}
+
+#[derive(Serialize)]
+struct PronunciationResult {
+    corrections: Vec<PronunciationCorrection>,
+    abstain_reason: Option<String>,
+}
+
+fn band_kebab(b: &lts_speech_api::ConfidenceBand) -> &'static str {
+    match b {
+        lts_speech_api::ConfidenceBand::Confident => "confident",
+        lts_speech_api::ConfidenceBand::PossibleIssue => "possible-issue",
+        lts_speech_api::ConfidenceBand::UnableToAssess => "unable-to-assess",
+    }
+}
+
+fn outcome_reason<T>(o: &lts_speech_api::ProviderOutcome<T>) -> String {
+    use lts_speech_api::ProviderOutcome as O;
+    match o {
+        O::QualityRejected { reason } => format!("quality:{}", reason.as_str()),
+        O::UtteranceMismatch { reason } => format!("mismatch:{}", reason.as_str()),
+        O::Abstained { reason } => format!("abstained:{}", reason.as_str()),
+        O::Unsupported { reason } => format!("unsupported:{}", reason.as_str()),
+        O::ProviderError { reason } => format!("error:{}", reason.as_str()),
+        O::Usable { .. } => "usable".into(),
+    }
+}
+
+/// Content ids are the only safe path components (no traversal).
+fn checked_unit(raw: &str) -> Result<String, String> {
+    lts_domain::ContentId::parse(raw)
+        .map(|_| raw.to_string())
+        .map_err(|_| "invalid unit id".to_string())
+}
+
+/// Dev/vendor aligner path; production packaging ships whisper.cpp as a
+/// sidecar (ADR-0008). Model prefers the installed catalog copy.
+fn aligner_paths(data: &Path) -> Option<(PathBuf, PathBuf)> {
+    let vendor = match std::env::var("LTS_BENCH_VENDOR") {
+        Ok(v) => PathBuf::from(v),
+        Err(_) => match std::env::var("HOME") {
+            Ok(h) => PathBuf::from(h).join(".cache/lts-bench"),
+            Err(_) => return None,
+        },
+    };
+    let binary = vendor.join("whisper.cpp/build/bin/whisper-cli");
+    if !binary.exists() {
+        return None;
+    }
+    let entry = models::load_catalog()
+        .models
+        .into_iter()
+        .find(|m| m.id == "org.openlanguage.speech.whisper-ggml-tiny")?;
+    let installed = models::model_dir(data, &entry).join("ggml-tiny.bin");
+    let model = if installed.exists() {
+        installed
+    } else {
+        let v = vendor.join("ggml-tiny.bin");
+        if v.exists() {
+            v
+        } else {
+            return None;
+        }
+    };
+    Some((binary, model))
+}
+
+#[tauri::command]
+fn pronunciation_check(attempt: PronunciationAttempt) -> Result<PronunciationResult, String> {
+    pronunciation_check_at(&data_dir(), attempt)
+}
+
+fn pronunciation_check_at(
+    data: &Path,
+    attempt: PronunciationAttempt,
+) -> Result<PronunciationResult, String> {
+    if !bundled_packs()
+        .iter()
+        .any(|(c, _)| c.pack_id == attempt.pack_id)
+    {
+        return Err("pack not allowlisted".into());
+    }
+    let short = checked_unit(&attempt.short_unit)?;
+    let long = checked_unit(&attempt.long_unit)?;
+    use base64::Engine;
+    let wav_bytes = base64::engine::general_purpose::STANDARD
+        .decode(&attempt.wav_b64)
+        .map_err(|_| "invalid wav payload".to_string())?;
+    if wav_bytes.len() > 10 * 1024 * 1024 {
+        return Err("attempt too large".into());
+    }
+    let audio = lts_speech_runtime::from_wav16(&wav_bytes).map_err(|e| e.to_string())?;
+    let abstain = |reason: String| PronunciationResult {
+        corrections: Vec::new(),
+        abstain_reason: Some(reason),
+    };
+    let packs_root = data.join("packs");
+    let version = lts_langpack::archive::current_version(&attempt.pack_id, &packs_root)
+        .ok_or("pack not installed")?;
+    let pack_dir = packs_root.join(&attempt.pack_id).join(&version);
+    let Some((binary, model)) = aligner_paths(data) else {
+        return Ok(abstain("aligner-unavailable".into()));
+    };
+    let aligner = lts_speech_runtime::WhisperConstrainedAligner {
+        binary,
+        model,
+        language: "ja".into(),
+        threshold: 0.6,
+    };
+    let expected = lts_speech_api::ExpectedUtterance {
+        content_id: long.clone(),
+        units: vec![attempt.short_text.clone(), attempt.long_text.clone()],
+    };
+    // Verification gate first: alignment abstains on mismatch before any
+    // pronunciation evidence is considered (docs/05).
+    let alignment = match aligner.align(&audio, &expected) {
+        lts_speech_api::ProviderOutcome::Usable { value, .. } => value,
+        other => return Ok(abstain(outcome_reason(&other))),
+    };
+    let short_ref = pack_dir.join("media").join(format!("{short}.wav"));
+    let long_ref = pack_dir.join("media").join(format!("{long}.wav"));
+    let (Ok(sb), Ok(lb)) = (std::fs::read(&short_ref), std::fs::read(&long_ref)) else {
+        return Ok(abstain("reference-media-missing".into()));
+    };
+    let (Ok(sr), Ok(lr)) = (
+        lts_speech_runtime::from_wav16(&sb),
+        lts_speech_runtime::from_wav16(&lb),
+    ) else {
+        return Ok(abstain("reference-media-invalid".into()));
+    };
+    let rs = lts_speech_runtime::acoustic::voiced_seconds(&sr, 320, 0.01);
+    let rl = lts_speech_runtime::acoustic::voiced_seconds(&lr, 320, 0.01);
+    if rs <= 0.0 || rl <= 0.0 {
+        return Ok(abstain("reference-media-invalid".into()));
+    }
+    let features =
+        match lts_speech_runtime::VoicedDurationFeature::default().extract(&audio, &alignment) {
+            lts_speech_api::ProviderOutcome::Usable { value, .. } => value,
+            other => return Ok(abstain(outcome_reason(&other))),
+        };
+    let evidence = lts_speech_api::PronunciationEvidence {
+        alignment,
+        features,
+        prosody: None,
+    };
+    let interpreter = lts_speech_runtime::VowelLengthInterpreter {
+        short_unit_id: attempt.short_text.clone(),
+        long_unit_id: attempt.long_text.clone(),
+        reference_ratio: rl / rs,
+        ..Default::default()
+    };
+    Ok(match interpreter.interpret(&evidence) {
+        lts_speech_api::ProviderOutcome::Usable { value, .. } => PronunciationResult {
+            corrections: value
+                .iter()
+                .map(|c| PronunciationCorrection {
+                    feature_id: c.feature_id.clone(),
+                    band: band_kebab(&c.band),
+                    feedback_template_id: c.feedback_template_id.clone(),
+                })
+                .collect(),
+            abstain_reason: None,
+        },
+        other => abstain(outcome_reason(&other)),
+    })
+}
+
+/// Reference audio for immediate comparison; served from the installed
+/// pack's media, addressed only by allowlisted pack + validated content id.
+#[tauri::command]
+fn reference_audio(pack_id: String, unit_id: String) -> Result<String, String> {
+    reference_audio_at(&data_dir(), &pack_id, &unit_id)
+}
+
+fn reference_audio_at(data: &Path, pack_id: &str, unit_id: &str) -> Result<String, String> {
+    if !bundled_packs().iter().any(|(c, _)| c.pack_id == pack_id) {
+        return Err("pack not allowlisted".into());
+    }
+    let unit = checked_unit(unit_id)?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    let path = data
+        .join("packs")
+        .join(pack_id)
+        .join(&version)
+        .join("media")
+        .join(format!("{unit}.wav"));
+    let bytes = std::fs::read(&path).map_err(|_| "reference not found".to_string())?;
+    use base64::Engine;
+    Ok(base64::engine::general_purpose::STANDARD.encode(&bytes))
+}
+
+// ---------------------------------------------------------------------------
 // SPEECH-003: model manager (versioned, checksummed, licensed, removable)
 // ---------------------------------------------------------------------------
 
@@ -595,7 +814,9 @@ pub fn run() {
             progress_summary,
             available_models,
             install_model,
-            delete_model
+            delete_model,
+            pronunciation_check,
+            reference_audio
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
@@ -936,5 +1157,79 @@ mod tests {
         let json = serde_json::to_string(&plan).unwrap();
         assert!(!json.contains("streak"));
         assert!(!json.contains("heart"));
+    }
+
+    #[test]
+    fn pronunciation_check_guides_vowel_length_and_abstains_on_mismatch() {
+        use base64::Engine;
+        let vendor = std::env::var("LTS_BENCH_VENDOR")
+            .map(PathBuf::from)
+            .unwrap_or_else(|_| {
+                PathBuf::from(std::env::var("HOME").unwrap()).join(".cache/lts-bench")
+            });
+        if !vendor.join("whisper.cpp/build/bin/whisper-cli").exists() {
+            eprintln!("SKIP: vendor aligner not present");
+            return;
+        }
+        let tmp = tempfile::TempDir::new().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let packs_root = data.join("packs");
+        let version =
+            lts_langpack::archive::current_version("org.openlanguage.ja-demo", &packs_root)
+                .unwrap();
+        let media = packs_root
+            .join("org.openlanguage.ja-demo")
+            .join(&version)
+            .join("media");
+        let short = std::fs::read(media.join("ja.lex.demo.obasan.wav")).unwrap();
+        let long = std::fs::read(media.join("ja.lex.demo.obaasan.wav")).unwrap();
+        let sb = lts_speech_runtime::from_wav16(&short).unwrap();
+        let lb = lts_speech_runtime::from_wav16(&long).unwrap();
+        let mut samples = sb.samples.clone();
+        samples.extend(
+            std::iter::repeat_n(0.0f32, (0.2 * sb.sample_rate_hz as f32) as usize)
+                .chain(lb.samples.clone()),
+        );
+        let attempt_wav = lts_speech_runtime::to_wav16(&lts_speech_api::AudioBuffer {
+            samples,
+            sample_rate_hz: sb.sample_rate_hz,
+        });
+        let attempt = PronunciationAttempt {
+            pack_id: "org.openlanguage.ja-demo".into(),
+            short_unit: "ja.lex.demo.obasan".into(),
+            long_unit: "ja.lex.demo.obaasan".into(),
+            short_text: "おばさん".into(),
+            long_text: "おばあさん".into(),
+            wav_b64: base64::engine::general_purpose::STANDARD.encode(&attempt_wav),
+        };
+        let res = pronunciation_check_at(data, attempt.clone()).unwrap();
+        assert_eq!(res.abstain_reason, None, "got {:?}", res.abstain_reason);
+        assert_eq!(res.corrections.len(), 1);
+        assert_eq!(res.corrections[0].feature_id, "ja.phon.long-vowel");
+        assert_eq!(
+            res.corrections[0].feedback_template_id,
+            "speech.long-vowel.close"
+        );
+
+        // Verification gate: only the short word against the expected pair.
+        let mismatch = PronunciationAttempt {
+            wav_b64: base64::engine::general_purpose::STANDARD.encode(&short),
+            ..attempt
+        };
+        let res2 = pronunciation_check_at(data, mismatch).unwrap();
+        let reason = res2.abstain_reason.expect("must abstain");
+        assert!(
+            reason.starts_with("mismatch") || reason.starts_with("abstained"),
+            "unexpected reason {reason}"
+        );
+        assert!(res2.corrections.is_empty());
+
+        // Reference playback: allowlisted pack + validated content id only.
+        let b64 =
+            reference_audio_at(data, "org.openlanguage.ja-demo", "ja.lex.demo.obasan").unwrap();
+        assert!(!b64.is_empty());
+        assert!(reference_audio_at(data, "org.openlanguage.ja-demo", "../etc/passwd").is_err());
+        assert!(reference_audio_at(data, "org.evil.pack", "ja.lex.demo.obasan").is_err());
     }
 }
