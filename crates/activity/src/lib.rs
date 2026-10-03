@@ -16,6 +16,7 @@ pub mod reading;
 pub mod scenario;
 pub mod spec;
 pub mod support;
+pub mod writing;
 
 pub use attempt::{Attempt, AttemptOutcome};
 pub use reading::{
@@ -29,3 +30,7 @@ pub use spec::{
     dimension_for,
 };
 pub use support::{SupportAction, SupportLedger};
+pub use writing::{
+    InputSurface, WritingGrade, WritingHint, WritingPrompt, WritingTask, grade_writing,
+    normalize_typed, render_writing_prompt,
+};

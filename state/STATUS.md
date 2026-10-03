@@ -130,10 +130,14 @@ M2 — Local data and learner model
 - `UX-002` — home with scheduler-reasoned next actions (no streaks),
   5/10/20/30-minute budgeted practice from due/weak/progression inputs,
   per-dimension capability progress (evidence: `state/evidence/UX-002/`).
+- `WRITE-001` — Japanese typing/composition: keyboard/IME-only input
+  surface (handwriting unmodeled), variant-tolerant grading, writing
+  evidence dimension-distinct from recognition (evidence:
+  `state/evidence/WRITE-001/`).
 
 ## Next task
 
-`WRITE-001` — Japanese typing/composition activities (M4, P0).
+`M4-E2E` — first no-speech playable vertical slice (M4, P0).
 Note: `REVIEW-001` (reviewer capacity) and `LIC-001` (final licensing
 decisions) are owner-only and remain open blockers for release.
 

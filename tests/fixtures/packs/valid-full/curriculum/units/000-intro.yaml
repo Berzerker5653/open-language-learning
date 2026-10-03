@@ -29,3 +29,8 @@ activities:
     modality: "interaction"
     support_level: 1
     concept_refs: ["es.grammar.gender.noun"]
+  - id: "es.activity.intro.type-script"
+    type: "produce"
+    modality: "writing"
+    support_level: 0
+    content_refs: ["es.lex.greet.hola"]
