@@ -1,0 +1,15 @@
+     Running unittests src/lib.rs (target/debug/deps/lts_learner_model-b72612f2b1d9ffc3)
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/evidence.rs (target/debug/deps/evidence-35195c77b8543bb3)
+test typed_attempt_carries_support_confidence_and_versions ... ok
+test technical_speech_failure_is_distinct_from_learner_error ... ok
+test events_remain_queryable_after_restart ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+     Running tests/policy.rs (target/debug/deps/policy-522e5808653d69fa)
+test policy_is_versioned_and_marks_thresholds_provisional ... ok
+test required_scenario_coverage ... ok
+test single_success_never_reaches_independent_even_repeated_same_prompt ... ok
+test every_declared_fixture_exists_and_derives_expected_states ... ok
+test policy_validation_rejects_broken_artifacts ... ok
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

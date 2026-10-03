@@ -51,10 +51,15 @@ M2 — Local data and learner model
   (support/confidence/content versions), `failure_reason` for
   technical speech failures (migration v3), restart-queryable —
   (evidence: `state/evidence/LEARN-001/`).
+- `LEARN-005` — frozen versioned mastery policy
+  (`docs/assessment/MASTERY_POLICY.yaml` v0.1.0, provisional
+  hypotheses), strict loader + deterministic evaluator, 9 worked
+  fixtures covering transitions/regression/exclusions/deferred tracks
+  (evidence: `state/evidence/LEARN-005/`).
 
 ## Next task
 
-`LEARN-005` — versioned mastery policy contract (M2, P0).
+`LEARN-002` — derived multimodal mastery model (M2, P0).
 
 ## Owner decisions already resolved
 

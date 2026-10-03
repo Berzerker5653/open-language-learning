@@ -1,0 +1,33 @@
+name: deferred-speaking-track-no-fabricated-credit
+notes: >
+  No-microphone / deferred-speaking track (docs/03 §7): reading/writing
+  evidence advances normally while the speaking dimension stays `unseen`
+  — deferral preserves access without fabricated credit, and absence of
+  speaking evidence is never a negative outcome.
+events:
+  - event_id: e1
+    occurred_at: "2026-10-02T12:00:00Z"
+    modality: comprehension-reading
+    outcome: scored
+    score: correct
+    support_level: 0
+    activity_id: es.activity.read-match
+    prompt_family_id: es.expr.greet.hola
+    assessment_kind: formative
+    attempt_group_id: null
+  - event_id: e2
+    occurred_at: "2026-10-02T12:05:00Z"
+    modality: comprehension-reading
+    outcome: scored
+    score: correct
+    support_level: 0
+    activity_id: es.activity.read-type
+    prompt_family_id: es.expr.greet.adious
+    assessment_kind: formative
+    attempt_group_id: null
+corrections: []
+expectations:
+  - dimension: comprehension-reading
+    expected_state: independent
+  - dimension: production-speaking
+    expected_state: unseen

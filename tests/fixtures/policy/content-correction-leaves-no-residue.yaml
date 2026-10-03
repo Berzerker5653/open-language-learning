@@ -1,0 +1,53 @@
+name: content-correction-leaves-no-residue
+notes: >
+  Two confident mismatches would regress the state; a correction
+  excluding those events (invalid content) recomputes the state with no
+  lasting penalty or reward (docs/03 §11). Originals remain in history.
+events:
+  - event_id: e1
+    occurred_at: "2026-10-02T12:00:00Z"
+    modality: recall-meaning
+    outcome: scored
+    score: correct
+    support_level: 0
+    activity_id: es.activity.recall-choice
+    prompt_family_id: es.expr.greet.hola
+    assessment_kind: formative
+    attempt_group_id: null
+  - event_id: e2
+    occurred_at: "2026-10-02T12:05:00Z"
+    modality: recall-meaning
+    outcome: scored
+    score: correct
+    support_level: 0
+    activity_id: es.activity.recall-type
+    prompt_family_id: es.expr.greet.adious
+    assessment_kind: formative
+    attempt_group_id: null
+  - event_id: e3
+    occurred_at: "2026-10-02T12:10:00Z"
+    modality: recall-meaning
+    outcome: scored
+    score: incorrect
+    support_level: 0
+    activity_id: es.activity.recall-type
+    prompt_family_id: es.grammar.invalid-item
+    assessment_kind: formative
+    attempt_group_id: null
+  - event_id: e4
+    occurred_at: "2026-10-02T12:11:00Z"
+    modality: recall-meaning
+    outcome: scored
+    score: incorrect
+    support_level: 0
+    activity_id: es.activity.recall-type
+    prompt_family_id: es.grammar.invalid-item
+    assessment_kind: formative
+    attempt_group_id: null
+corrections:
+  - event_id: c1
+    references: [e3, e4]
+    reason: "item reported invalid; answer key wrong"
+expectations:
+  - dimension: recall-meaning
+    expected_state: independent

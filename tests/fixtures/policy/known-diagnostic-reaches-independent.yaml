@@ -1,0 +1,31 @@
+name: known-diagnostic-reaches-independent
+notes: >
+  Already-known material: a diagnostic with two correct independent
+  responses across two prompts establishes `independent` (diagnostics
+  may unlock known foundations, docs/03 §10) but not `flexible`
+  (novelty assessments required) nor `retained` (delay required).
+events:
+  - event_id: e1
+    occurred_at: "2026-10-02T12:00:00Z"
+    modality: recall-meaning
+    outcome: scored
+    score: correct
+    support_level: 0
+    activity_id: es.activity.recall-choice
+    prompt_family_id: es.expr.greet.hola
+    assessment_kind: diagnostic
+    attempt_group_id: null
+  - event_id: e2
+    occurred_at: "2026-10-02T12:05:00Z"
+    modality: recall-meaning
+    outcome: scored
+    score: correct
+    support_level: 0
+    activity_id: es.activity.recall-type
+    prompt_family_id: es.expr.greet.adious
+    assessment_kind: diagnostic
+    attempt_group_id: null
+corrections: []
+expectations:
+  - dimension: recall-meaning
+    expected_state: independent

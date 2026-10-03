@@ -1,0 +1,30 @@
+name: supported-successes-reach-supported-not-independent
+notes: >
+  Two successes with level-2 support (replay + meaning hint) reach
+  `supported`; they cannot satisfy the minimal-help requirement for
+  `independent`.
+events:
+  - event_id: e1
+    occurred_at: "2026-10-02T12:00:00Z"
+    modality: production-speaking
+    outcome: scored
+    score: correct
+    support_level: 2
+    activity_id: es.activity.speak.repeat
+    prompt_family_id: es.expr.greet.hola
+    assessment_kind: formative
+    attempt_group_id: null
+  - event_id: e2
+    occurred_at: "2026-10-02T12:10:00Z"
+    modality: production-speaking
+    outcome: scored
+    score: correct
+    support_level: 2
+    activity_id: es.activity.speak.repeat
+    prompt_family_id: es.expr.greet.adious
+    assessment_kind: formative
+    attempt_group_id: null
+corrections: []
+expectations:
+  - dimension: production-speaking
+    expected_state: supported

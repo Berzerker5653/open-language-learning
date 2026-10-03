@@ -1,0 +1,50 @@
+name: confident-mismatches-regress-one-step
+notes: >
+  Two consecutive confident mismatches (valid support conditions) after
+  the last success downgrade one step — `independent` to `supported` —
+  framing "needs refresh" without collapse (docs/03 §16).
+events:
+  - event_id: e1
+    occurred_at: "2026-10-02T12:00:00Z"
+    modality: recall-meaning
+    outcome: scored
+    score: correct
+    support_level: 0
+    activity_id: es.activity.recall-choice
+    prompt_family_id: es.expr.greet.hola
+    assessment_kind: formative
+    attempt_group_id: null
+  - event_id: e2
+    occurred_at: "2026-10-02T12:05:00Z"
+    modality: recall-meaning
+    outcome: scored
+    score: correct
+    support_level: 0
+    activity_id: es.activity.recall-type
+    prompt_family_id: es.expr.greet.adious
+    assessment_kind: formative
+    attempt_group_id: null
+  - event_id: e3
+    occurred_at: "2026-10-20T12:00:00Z"
+    modality: recall-meaning
+    outcome: scored
+    score: incorrect
+    support_level: 0
+    activity_id: es.activity.recall-type
+    prompt_family_id: es.expr.greet.bienvenue
+    assessment_kind: formative
+    attempt_group_id: null
+  - event_id: e4
+    occurred_at: "2026-10-20T12:01:00Z"
+    modality: recall-meaning
+    outcome: scored
+    score: incorrect
+    support_level: 0
+    activity_id: es.activity.recall-type
+    prompt_family_id: es.expr.greet.bonjour
+    assessment_kind: formative
+    attempt_group_id: null
+corrections: []
+expectations:
+  - dimension: recall-meaning
+    expected_state: supported

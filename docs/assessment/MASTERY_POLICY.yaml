@@ -1,0 +1,204 @@
+# Versioned mastery, assessment, and prerequisite policy (LEARN-005).
+#
+# STATUS OF THRESHOLDS: every numeric threshold in this file is an
+# initial implementation hypothesis — a provisional engineering default
+# with stated rationale, NOT a learning-science constant and NOT
+# statistically calibrated. Memory scheduling (FSRS/DSR) never supplies a
+# proficiency rubric; retrievability estimates must not grant
+# communicative mastery or determine a Can-do band (docs/03 §7).
+#
+# This policy is frozen before LEARN-002 implements derivation. Revisions
+# require documented evidence and a stated migration impact, and bump
+# policy_version. Derived decisions and evidence interpretation always
+# record the policy_version in effect (mastery_snapshots.policy_version,
+# evidence_events.policy_version).
+
+policy_version: "0.1.0"
+schema_version: 1
+status: provisional-hypotheses
+
+states:
+  - unseen
+  - introduced
+  - supported
+  - independent
+  - flexible
+  - retained
+
+# ---------------------------------------------------------------------------
+# Evidence eligibility
+# ---------------------------------------------------------------------------
+eligibility:
+  # Only valid scored results may affect linguistic mastery or memory
+  # retrieval ratings (docs/03 §3).
+  counted_outcomes: [scored]
+  # These NEVER create positive OR negative linguistic outcomes and never
+  # a failed memory-retrieval rating (docs/03 §6):
+  never_linguistic: [technical-failure, abstained, skipped, deferred, excluded]
+  # Latency alone is diagnostic; slow input is not a linguistic failure
+  # and fast input is not proof of guessing (docs/03 §9).
+  latency: diagnostic-only
+  # Invalid content: exclusion/correction events reference originals;
+  # affected mastery and scheduler inputs are recomputed; no lasting
+  # penalty or reward remains (docs/03 §11).
+  invalid_content: exclude-and-recompute
+  # A scored outcome without a score is incomplete, not evidence.
+  require_score_for_scored: true
+
+# ---------------------------------------------------------------------------
+# Support semantics (docs/03 §5 defaults; rubrics may remap per construct,
+# recording the mapping version)
+# ---------------------------------------------------------------------------
+support:
+  independent_max_level: 1   # 0-1 = minimal help (env cue at most)
+  supported_max_level: 3     # 2-3 = replay/hint/form cue
+  disqualifying_for:
+    # Support that supplies the assessed construct invalidates evidence
+    # FOR THAT DIMENSION (not for others).
+    comprehension-listening: [transcript, supplied-reading]
+    comprehension-reading: [audio-playback-of-target, translation]
+    production-speaking: [text-input-substitution, response-template]
+    production-writing: [dictation-of-target, romaji-substitution]
+    recall-meaning: [target-visible-in-options]
+  # Support revealed earlier in the same attempt stays part of that
+  # attempt's evidence even if hidden before submission.
+  support_persists_within_attempt: true
+
+# ---------------------------------------------------------------------------
+# Amount, diversity, and grouping
+# ---------------------------------------------------------------------------
+evidence:
+  attempt_grouping:
+    # Immediate retries share one attempt group and cannot create
+    # multiple independent observations (docs/03 §5).
+    one_observation_per_group: true
+    group_representative: last-scored   # final state of the group counts
+  prompt_family_grouping:
+    # Distinct prompt families measure transfer, not memorization.
+    track_families: true
+    # Same family repeated = exposure, not diversity.
+    diversity_unit: prompt-family
+  partial_credit:
+    # PartiallyCorrect counts toward introduced/supported but not
+    # toward independent/flexible/retained minimums.
+    counts_for: [introduced, supported]
+  held_out:
+    # Checkpoint/transfer/retention assessments need >=1 held-out or
+    # generated-but-validated variation; a once-held-out prompt is no
+    # longer held out after use (docs/03 §11).
+    required_for: [checkpoint, transfer, retention]
+    consumed_on_use: true
+    generated_variants_require: validation-before-mastery-credit
+  coached_retries:
+    # Repeated coached retries stay formative; they cannot substitute
+    # for fresh independent/transfer observations.
+    max_support_level_for_advancement: 1
+
+# ---------------------------------------------------------------------------
+# Transition minimums (PROVISIONAL HYPOTHESES — rationale per rule)
+# ---------------------------------------------------------------------------
+transitions:
+  introduced:
+    min_valid_events: 1
+    rationale: any completed valid encounter; deliberately weak.
+  supported:
+    min_successes: 2
+    max_support_level: 3
+    rationale: multiple scaffolded successes; one supported success is
+      still just an encounter.
+  independent:
+    min_successes: 2
+    max_support_level: 1
+    min_distinct_prompts: 2
+    rationale: "successful retrieval/production with minimal help across
+      more than one prompt (docs/03 §5); a single correct response can
+      never establish durable mastery."
+  flexible:
+    min_successes: 3
+    max_support_level: 1
+    min_distinct_prompt_families: 2
+    requires_assessment_kinds: [transfer, checkpoint]
+    rationale: success across novel wording/context requires at least
+      two families and an assessment designed for novelty; practice
+      exposure alone cannot reach flexible.
+  retained:
+    requires_prior_state: [independent, flexible]
+    min_delay_days: 7
+    min_successes_after_delay: 1
+    max_support_level: 1
+    rationale: "delayed re-check (docs/03 §10); 7 days is an arbitrary
+      first default pending calibration; recency is evaluated separately
+      from memory scheduling."
+
+regression:
+  # "needs refresh" framing (docs/03 §16); no shame, no streak logic.
+  stale_after_days_without_valid_evidence: 30   # provisional
+  downgrade_on_confident_mismatch: true
+  consecutive_mismatches_to_downgrade: 2   # provisional
+  downgrade_steps: 1
+  downgrade_rationale: two consecutive confident mismatches after the
+    last success suggest the state no longer holds; one step down, not
+    a collapse to unseen.
+  mismatch_definition: scored-incorrect with valid support conditions and
+    no disqualifying support; technical failures and abstentions never
+    downgrade.
+  # Elapsed-time memory decay is a scheduler concern (Layer A) and is
+  # evaluated separately from this mastery rubric.
+  time_decay_in_mastery: false
+
+# ---------------------------------------------------------------------------
+# Confidence semantics
+# ---------------------------------------------------------------------------
+confidence:
+  calibration_status: uncalibrated
+  heuristic: true
+  inputs: [amount, diversity, recency, provider-reliability]
+  limits:
+    - a heuristic confidence label is not a statistical interval
+    - raw provider confidence is never treated as accuracy
+    - unknown/uncalibrated evidence must never silently become
+      high-confidence proficiency
+    - low-confidence speech analysis must be allowed to abstain
+
+# ---------------------------------------------------------------------------
+# Modality-aware prerequisite evaluation (Layer C, docs/03 §7)
+# ---------------------------------------------------------------------------
+prerequisites:
+  # A prerequisite record names target, dimension, required state, and
+  # strength; a bare goal id never implies every modality is mastered.
+  require_dimension: true
+  require_state: true
+  strengths: [hard, helpful]
+  # Permission to enter an accessible track/scenario is distinct from
+  # evidence that a competency is mastered.
+  access_permission_neq_mastery: true
+  # Deferring hearing/speaking preserves reading/writing and navigation
+  # access without fabricated credit; only tasks whose assessed construct
+  # requires the deferred modality are postponed.
+  deferral_preserves_other_modalities: true
+  deferred_modality_display: deferred-not-failed
+
+# ---------------------------------------------------------------------------
+# Correction / recomputation
+# ---------------------------------------------------------------------------
+corrections:
+  # Corrections reference original events; originals are never deleted.
+  append_only: true
+  recompute: affected-dimensions-only
+  audit_trail: required
+  learner_explanation: required-when-recommendations-change
+
+# ---------------------------------------------------------------------------
+# Worked fixtures (deterministic; evaluated by learner-model tests)
+# ---------------------------------------------------------------------------
+fixtures_dir: tests/fixtures/policy
+fixtures:
+  - novice-single-success-stays-introduced
+  - known-diagnostic-reaches-independent
+  - supported-successes-reach-supported-not-independent
+  - content-correction-leaves-no-residue
+  - repeated-prompt-memorization-capped
+  - technical-failure-no-outcome
+  - transfer-then-delayed-recheck-reaches-retained
+  - confident-mismatches-regress-one-step
+  - deferred-speaking-track-no-fabricated-credit

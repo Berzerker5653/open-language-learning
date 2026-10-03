@@ -1,0 +1,60 @@
+name: repeated-prompt-memorization-capped
+notes: >
+  Five correct responses on the same prompt family (same prompt, coached
+  retries across groups) show exposure, not transfer. Independent
+  requires distinct prompts, so the state caps at `supported`.
+events:
+  - event_id: e1
+    occurred_at: "2026-10-02T12:00:00Z"
+    modality: recall-meaning
+    outcome: scored
+    score: correct
+    support_level: 0
+    activity_id: es.activity.recall-choice
+    prompt_family_id: es.expr.greet.hola
+    assessment_kind: formative
+    attempt_group_id: g1
+  - event_id: e2
+    occurred_at: "2026-10-02T12:01:00Z"
+    modality: recall-meaning
+    outcome: scored
+    score: correct
+    support_level: 0
+    activity_id: es.activity.recall-choice
+    prompt_family_id: es.expr.greet.hola
+    assessment_kind: formative
+    attempt_group_id: g2
+  - event_id: e3
+    occurred_at: "2026-10-02T12:02:00Z"
+    modality: recall-meaning
+    outcome: scored
+    score: correct
+    support_level: 0
+    activity_id: es.activity.recall-choice
+    prompt_family_id: es.expr.greet.hola
+    assessment_kind: formative
+    attempt_group_id: g3
+  - event_id: e4
+    occurred_at: "2026-10-02T12:03:00Z"
+    modality: recall-meaning
+    outcome: scored
+    score: correct
+    support_level: 0
+    activity_id: es.activity.recall-choice
+    prompt_family_id: es.expr.greet.hola
+    assessment_kind: formative
+    attempt_group_id: g4
+  - event_id: e5
+    occurred_at: "2026-10-02T12:04:00Z"
+    modality: recall-meaning
+    outcome: scored
+    score: correct
+    support_level: 0
+    activity_id: es.activity.recall-choice
+    prompt_family_id: es.expr.greet.hola
+    assessment_kind: formative
+    attempt_group_id: g5
+corrections: []
+expectations:
+  - dimension: recall-meaning
+    expected_state: supported
