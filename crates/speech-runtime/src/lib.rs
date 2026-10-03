@@ -7,6 +7,7 @@ pub mod asr;
 pub mod interpret;
 pub mod prosody;
 pub mod quality;
+pub mod tts;
 
 pub use acoustic::VoicedDurationFeature;
 pub use alignment::WhisperConstrainedAligner;

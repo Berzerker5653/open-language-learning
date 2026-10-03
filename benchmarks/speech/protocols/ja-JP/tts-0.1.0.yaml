@@ -1,0 +1,39 @@
+protocol_version: "tts-0.1.0"
+created: "2026-10-03"
+task: "TTS-001"
+language: "ja-JP"
+
+purpose: >
+  Local Japanese TTS provider selection and capacity check. Measures
+  synthesis wall-time / real-time factor and stability across the
+  on-ramp practice utterances. Intelligibility of synthesized audio is
+  NOT measured here; synthesized audio is for practice/reference use
+  and is always labeled as model output (docs/10).
+
+features_in_scope:
+  - short-phrase synthesis (on-ramp greetings, <= 6 s targets)
+out_of_scope:
+  - naturalness or intelligibility scoring
+  - voice licensing conclusions (audited separately in
+    docs/provenance/tts-candidates.md)
+  - using synthetic audio as pronunciation ground truth
+
+metrics:
+  - name: "wall_time_per_utterance"
+    method: "subprocess wall time, warm runtime, single thread set 4"
+  - name: "real_time_factor"
+    method: "synthesis wall time / produced audio duration"
+
+candidates:
+  - id: "sherpa-onnx-kokoro"
+    runtime: "sherpa-onnx v1.13.8 sherpa-onnx-offline-tts"
+    model: "kokoro-multi-lang-v1_0 (Kokoro-82M export), sid 37"
+    license_audit: "docs/provenance/tts-candidates.md"
+
+hardware_tiers:
+  measured: ["dev-desktop (CPU, this machine)"]
+  recorded_unmeasured: ["low-tier laptop", "single-board"]
+
+integrity:
+  fixtures: "generated per run into the results dir; audio not committed"
+  determinism: "kokoro is deterministic for fixed sid/lang; wall times vary"

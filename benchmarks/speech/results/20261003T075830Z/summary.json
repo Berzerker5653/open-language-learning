@@ -1,0 +1,94 @@
+{
+  "protocol": "tts-0.1.0",
+  "candidate": "sherpa-onnx-kokoro (kokoro-multi-lang-v1_0, sid 37)",
+  "hardware": "dev-desktop CPU, measured",
+  "utterances": [
+    {
+      "id": "t01",
+      "text": "こんにちは",
+      "wall_s": 1.774,
+      "audio_s": 1.224,
+      "rtf": 1.45
+    },
+    {
+      "id": "t02",
+      "text": "はじめまして",
+      "wall_s": 1.769,
+      "audio_s": 1.239,
+      "rtf": 1.428
+    },
+    {
+      "id": "t03",
+      "text": "わたしは ハンター です",
+      "wall_s": 2.059,
+      "audio_s": 1.736,
+      "rtf": 1.186
+    },
+    {
+      "id": "t04",
+      "text": "お元気ですか",
+      "wall_s": 1.734,
+      "audio_s": 1.147,
+      "rtf": 1.511
+    },
+    {
+      "id": "t05",
+      "text": "ありがとうございます",
+      "wall_s": 2.083,
+      "audio_s": 1.74,
+      "rtf": 1.197
+    },
+    {
+      "id": "t06",
+      "text": "すみません",
+      "wall_s": 1.721,
+      "audio_s": 1.149,
+      "rtf": 1.498
+    },
+    {
+      "id": "t07",
+      "text": "これは 何ですか",
+      "wall_s": 1.784,
+      "audio_s": 1.252,
+      "rtf": 1.425
+    },
+    {
+      "id": "t08",
+      "text": "駅は どこですか",
+      "wall_s": 1.809,
+      "audio_s": 1.314,
+      "rtf": 1.376
+    },
+    {
+      "id": "t09",
+      "text": "もう一度 言ってください",
+      "wall_s": 2.191,
+      "audio_s": 1.617,
+      "rtf": 1.355
+    },
+    {
+      "id": "t10",
+      "text": "ゆっくり 話してください",
+      "wall_s": 2.615,
+      "audio_s": 2.244,
+      "rtf": 1.166
+    },
+    {
+      "id": "t11",
+      "text": "わかりません",
+      "wall_s": 1.743,
+      "audio_s": 1.172,
+      "rtf": 1.488
+    },
+    {
+      "id": "t12",
+      "text": "では また明日",
+      "wall_s": 1.665,
+      "audio_s": 1.076,
+      "rtf": 1.547
+    }
+  ],
+  "wall_p50_s": 1.784,
+  "rtf_p50": 1.428,
+  "note": "synthetic model output; not pronunciation ground truth"
+}
