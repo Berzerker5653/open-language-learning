@@ -1,0 +1,30 @@
+== build frontend + native binary (debug, no bundle) ==
+        Info Looking up installed tauri packages to check mismatched versions...
+        Warn The bundle identifier "org.openlanguage.app" set in `"tauri.conf.json" identifier` ends with `.app`. This is not recommended because it conflicts with the application bundle extension on macOS.
+     Running beforeBuildCommand `pnpm build`
+$ vite build
+vite v8.3.2 building client environment for production...
+transforming...
+✓ 19 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                  0.34 kB │ gzip:  0.24 kB
+dist/assets/index-BTsqV8oD.js  220.69 kB │ gzip: 69.05 kB
+
+✓ built in 86ms
+   Compiling libdbus-sys v0.2.7
+   Compiling x11-dl v2.21.0
+   Compiling dbus v0.9.12
+   Compiling tao v0.37.1
+   Compiling wry v0.57.0
+   Compiling tauri-runtime-wry v2.12.1
+   Compiling tauri v2.12.1
+   Compiling lts-desktop v0.1.0 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 8.22s
+       Built application at: /home/hunter/game-dev/LTS/target/debug/lts-desktop
+== launch under Xvfb ==
+MESA-EGL: warning: DRI3 error: Could not get DRI3 device
+MESA-EGL: warning: Ensure your X server supports DRI3 to get accelerated rendering
+
+** (process:925491): WARNING **: 22:21:39.714: Error loading the injected bundle (/usr/lib/webkit2gtk-4.1/injected-bundle/libwebkit2gtkinjectedbundle.so): /usr/lib/webkit2gtk-4.1/injected-bundle/libwebkit2gtkinjectedbundle.so: cannot open shared object file: No such file or directory
+smoke-ok home-renderedSMOKE OK

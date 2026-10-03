@@ -15,10 +15,12 @@ M0 — Bootstrap and technical proof
 - `BOOT-001` — monorepo, toolchains, CI, ADR-0004 (evidence: `state/evidence/BOOT-001/`).
 - `ARCH-001` — domain IDs/versions/evidence/mastery/curriculum/pack model + speech provider
   contracts (evidence: `state/evidence/ARCH-001/`).
+- `BOOT-002` — Tauri 2 shell + shared UI skeleton + automated launch/home-route smoke test
+  (evidence: `state/evidence/BOOT-002/`).
 
 ## Next task
 
-`BOOT-002` — Tauri desktop shell and shared UI skeleton.
+`BOOT-003` — quality, lint, CI, and ADR conventions.
 
 ## Owner decisions already resolved
 
@@ -32,11 +34,11 @@ M0 — Bootstrap and technical proof
 
 ## Do not ask the owner again for these unless they explicitly change them.
 
-## Environment blocker (affects BOOT-002 only)
+## Environment note (native builds)
 
-`webkit2gtk-4.1` is not installed on the Linux reference machine and `sudo` needs a password.
-Owner action when convenient: `sudo pacman -S webkit2gtk-4.1`. Native Tauri builds are blocked
-until then; all other work continues.
+`webkit2gtk-4.1` is not installed system-wide and `sudo` needs a password. BOOT-002 is unblocked
+via the user-local sysroot (`scripts/setup-tauri-sysroot.sh` + `scripts/tauri-env.sh`); smoke and
+CI pass. Optional owner convenience: `sudo pacman -S webkit2gtk-4.1` makes the workaround inert.
 
 ## Handoff audit status
 

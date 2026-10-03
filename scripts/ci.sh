@@ -2,6 +2,7 @@
 # Local mirror of .github/workflows/ci.yml. Run from anywhere.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+source scripts/tauri-env.sh
 
 echo "== rust: format =="
 cargo fmt --all --check

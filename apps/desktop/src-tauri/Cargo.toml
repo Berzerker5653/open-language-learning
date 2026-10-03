@@ -1,0 +1,19 @@
+[package]
+name = "lts-desktop"
+description = "Tauri 2 native shell hosting the shared web UI (BOOT-002)."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[lib]
+name = "lts_desktop"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.7.1", features = [] }
+
+[dependencies]
+tauri = { version = "2.12.1", features = [] }
+serde.workspace = true
+serde_json.workspace = true

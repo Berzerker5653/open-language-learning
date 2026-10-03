@@ -173,7 +173,9 @@ class HandoffMutationTests(unittest.TestCase):
         self.fails_with("unknown task")
 
     def test_ready_task_requires_done_dependencies(self):
-        self.edit_state(lambda v: v["tasks"].update({"BOOT-002":{"status":"ready","attempts":0}}))
+        # ADV-001 depends on REL-001, which stays incomplete until the release
+        # gate; a task whose own dependencies are complete would not trigger.
+        self.edit_state(lambda v: v["tasks"].update({"ADV-001":{"status":"ready","attempts":0}}))
         self.fails_with("incomplete prerequisite")
 
     def test_done_requires_evidence(self):

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-02",
-  "active_task": "BOOT-002",
+  "active_task": "BOOT-003",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -23,6 +23,16 @@
       ]
     },
     "BOOT-002": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/BOOT-002.md",
+        "state/evidence/BOOT-002/smoke-2026-10-02.txt",
+        "state/evidence/BOOT-002/ci-2026-10-02.txt"
+      ]
+    },
+    "BOOT-003": {
       "status": "in_progress",
       "attempts": 0,
       "last_error": null,
