@@ -1,0 +1,18 @@
+     Running unittests src/lib.rs (target/debug/deps/lts_scheduler-1c8af2d1345736a0)
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/planner.rs (target/debug/deps/planner-d47b2372a98fe9ad)
+test balances_due_review_weak_skills_and_progression ... ok
+test every_planned_item_has_a_learning_reason_no_attendance_objective ... ok
+test invalid_configs_are_rejected ... ok
+test plans_are_reproducible_with_fixed_input_and_seed ... ok
+test modality_repetition_limit_is_enforced ... ok
+test budget_presets_5_10_20_30_plus_all_fit_and_grow ... ok
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/spike.rs (target/debug/deps/spike-bf8c3b1196edf2d0)
+test deterministic_under_test_clock ... ok
+test items_schedule_by_due_time_not_attendance ... ok
+test stability_grows_on_success_and_falls_on_lapse ... ok
+test unscored_attempts_are_never_reviews ... ok
+test scheduler_state_persists_and_queries_due_items ... ok
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

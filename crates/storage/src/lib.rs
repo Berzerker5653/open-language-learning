@@ -10,6 +10,7 @@
 
 mod error;
 mod evidence;
+mod export;
 mod mastery;
 mod migrations;
 mod packs;
@@ -18,6 +19,7 @@ mod scheduler;
 
 pub use error::Error;
 pub use evidence::{NewRecording, Recording};
+pub use export::{EXPORT_FORMAT_VERSION, ExportBundle, ExportOptions, ImportError, ImportMode};
 pub use mastery::MasterySnapshot;
 pub use migrations::SCHEMA_VERSION;
 pub use packs::{ContentVersion, PackInstallation};

@@ -14,8 +14,13 @@
 //!   clock, no RNG.
 
 pub mod fsrs;
+pub mod planner;
 
 pub use fsrs::{FsrsSpike, ItemState, Rating, SPIKE_VERSION, ScheduleDecision, Scheduler};
+pub use planner::{
+    BUDGET_PRESETS, DueReviewItem, PLANNER_VERSION, PlanReason, PlannedItem, PlannerConfig,
+    PlannerError, PlannerInputs, ProgressionItem, SessionPlan, WeakSkillItem, plan_session,
+};
 
 use lts_domain::{EvidenceEvent, Outcome, Score};
 

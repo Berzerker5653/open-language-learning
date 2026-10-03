@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-02",
-  "active_task": "LEARN-004",
+  "active_task": "JA-RES-001",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -163,6 +163,26 @@
       ]
     },
     "LEARN-004": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/LEARN-004.md",
+        "state/evidence/LEARN-004/cargo-test-2026-10-02.txt",
+        "state/evidence/LEARN-004/ci-2026-10-02.txt"
+      ]
+    },
+    "DATA-002": {
+      "status": "done",
+      "attempts": 2,
+      "last_error": "import FK failure: evidence/corrections carried source profile_id; remapped to target id",
+      "evidence": [
+        "state/notes/DATA-002.md",
+        "state/evidence/DATA-002/cargo-test-2026-10-02.txt",
+        "state/evidence/DATA-002/ci-2026-10-02.txt"
+      ]
+    },
+    "JA-RES-001": {
       "status": "in_progress",
       "attempts": 0,
       "last_error": null,

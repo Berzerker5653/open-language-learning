@@ -61,4 +61,21 @@ impl Store {
         })?;
         rows.collect::<Result<_, _>>().map_err(Error::from)
     }
+
+    /// All scheduler rows for a profile (export/portability).
+    pub fn scheduler_state(&self, profile_id: &str) -> Result<Vec<SchedulerRecord>, Error> {
+        let mut stmt = self.conn.prepare(
+            "SELECT item_id, scheduler, params_json, due_at
+             FROM scheduler_state WHERE profile_id = ?1 ORDER BY due_at, item_id",
+        )?;
+        let rows = stmt.query_map(params![profile_id], |r| {
+            Ok(SchedulerRecord {
+                item_id: r.get(0)?,
+                scheduler: r.get(1)?,
+                params_json: r.get(2)?,
+                due_at: r.get(3)?,
+            })
+        })?;
+        rows.collect::<Result<_, _>>().map_err(Error::from)
+    }
 }

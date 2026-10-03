@@ -67,12 +67,21 @@ M2 — Local data and learner model
   per-item due-time persistence + due query, bit-deterministic under
   fixed clock; research note compares fsrs-rs/rs-fsrs/ts-fsrs licenses
   (evidence: `state/evidence/LEARN-003/`).
+- `LEARN-004` — session planner: 5/10/20/30+ budgets, balances due
+  review / weak skills / progression with modality repetition caps,
+  no attendance/streak objective, pure-function reproducible plans
+  (evidence: `state/evidence/LEARN-004/`).
+- `DATA-002` — profile export/import: versioned JSON bundle,
+  round-trip preserves evidence/mastery/settings, import never
+  silently overwrites (NewProfile/PreserveId/Overwrite modes),
+  recordings opt-in, no binary payloads (evidence:
+  `state/evidence/DATA-002/`).
 
 ## Next task
 
-`LEARN-004` — session planner: fixed time budgets, balances due review /
-weak skills / progression / modality repetition, no streak objective,
-reproducible with fixed input/seed (M2, P0).
+`JA-RES-001` — authoritative Japanese source + license matrix (M3, P0).
+Note: `REVIEW-001` (reviewer capacity) and `LIC-001` (final licensing
+decisions) are owner-only and remain open blockers for release.
 
 ## Owner decisions already resolved
 
