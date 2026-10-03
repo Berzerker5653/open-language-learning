@@ -34,7 +34,6 @@ describe("AppShell", () => {
   });
 
   it("contains no Japanese script (core components are language-neutral)", () => {
-    // eslint-disable-next-line no-misleading-character-class
     const japanese = /[\u3040-\u30ff\u4e00-\u9fff]/;
     expect(japanese.test(html)).toBe(false);
   });

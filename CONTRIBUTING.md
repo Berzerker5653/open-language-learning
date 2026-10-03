@@ -13,12 +13,16 @@ cargo build             # Rust workspace
 cargo test              # Rust unit tests
 pnpm test               # TS unit tests (vitest)
 pnpm typecheck          # tsc across packages
+pnpm lint               # eslint (flat config, typescript-eslint)
 pnpm fmt:check          # prettier check (pnpm fmt to fix)
 ./scripts/ci.sh         # full local CI mirror (rust fmt/clippy/test, web checks, schema checks)
 ```
 
-CI runs the same gates on GitHub Actions (`.github/workflows/ci.yml`). The Tauri native shell
-(BOOT-002) additionally needs system packages such as `webkit2gtk-4.1` on Linux.
+CI (`.github/workflows/ci.yml`) enforces the same gates plus a `desktop-smoke` job (launches the
+built app under Xvfb) and a `security` job (gitleaks secret scan, `pnpm audit --audit-level=high`,
+`cargo audit`). Test fixture conventions: `tests/README.md`. ADR conventions: `docs/adr/README.md`.
+On the Linux reference machine without system `webkit2gtk-4.1`, run
+`scripts/setup-tauri-sysroot.sh` once and `source scripts/tauri-env.sh` before native builds.
 
 Do not submit copyrighted textbook/course content without compatible rights. Do not include private learner recordings. Language corrections should include source/review evidence when possible.
 

@@ -2,6 +2,9 @@ packages:
   - apps/*
   - packages/*
 
+minimumReleaseAgeExclude:
+  - eslint@10.12.0
+
 onlyBuiltDependencies:
   - esbuild
   - "@tauri-apps/cli"

@@ -17,10 +17,12 @@ M0 — Bootstrap and technical proof
   contracts (evidence: `state/evidence/ARCH-001/`).
 - `BOOT-002` — Tauri 2 shell + shared UI skeleton + automated launch/home-route smoke test
   (evidence: `state/evidence/BOOT-002/`).
+- `BOOT-003` — lint/quality gates, ADR + fixture conventions, secret scan + dependency audit
+  baselines (evidence: `state/evidence/BOOT-003/`).
 
 ## Next task
 
-`BOOT-003` — quality, lint, CI, and ADR conventions.
+`PERF-001` — supported hardware tiers and performance test contract (`docs/performance/BUDGETS.yaml`).
 
 ## Owner decisions already resolved
 

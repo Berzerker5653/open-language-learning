@@ -22,6 +22,9 @@ pnpm fmt:check
 echo "== web: typecheck =="
 pnpm typecheck
 
+echo "== web: lint =="
+pnpm lint
+
 echo "== web: test =="
 pnpm test
 
