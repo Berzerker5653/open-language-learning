@@ -24,31 +24,48 @@ export interface WritingPracticeProps {
 export function WritingPractice(p: WritingPracticeProps) {
   return (
     <section aria-label="Writing practice">
-      <p>{p.task.prompt_text}</p>
+      <h2>Writing practice</h2>
+      <p className="prompt">{p.task.prompt_text}</p>
       {p.task.reading_hint && (
         <p aria-label="Reading hint" lang="ja">
           {p.task.reading_hint}
         </p>
       )}
       {p.task.romaji_hint && <p aria-label="Romaji hint">{p.task.romaji_hint}</p>}
-      <label htmlFor="writing-answer">Type the answer in Japanese (IME supported)</label>
-      <input
-        id="writing-answer"
-        type="text"
-        lang="ja"
-        value={p.draft}
-        onChange={(e) => p.onDraft(e.target.value)}
-      />
-      <button type="button" onClick={() => p.onHint("reading")}>
-        Show reading
-      </button>
-      <button type="button" onClick={() => p.onHint("romaji")}>
-        Show romaji
-      </button>
-      <button type="submit" onClick={p.onSubmit} disabled={p.draft.trim() === ""}>
-        Check
-      </button>
-      {p.graded && <p aria-live="polite">{p.correct ? "Correct" : "Try again"}</p>}
+      <div className="field">
+        <label htmlFor="writing-answer">Type the answer in Japanese (IME supported)</label>
+        <input
+          id="writing-answer"
+          type="text"
+          lang="ja"
+          value={p.draft}
+          onChange={(e) => p.onDraft(e.target.value)}
+        />
+      </div>
+      <div className="btn-row">
+        <button type="button" className="btn btn--quiet" onClick={() => p.onHint("reading")}>
+          Show reading
+        </button>
+        <button type="button" className="btn btn--quiet" onClick={() => p.onHint("romaji")}>
+          Show romaji
+        </button>
+        <button
+          type="submit"
+          className="btn btn--primary"
+          onClick={p.onSubmit}
+          disabled={p.draft.trim() === ""}
+        >
+          Check
+        </button>
+      </div>
+      {p.graded && (
+        <p
+          aria-live="polite"
+          className={p.correct ? "verdict verdict--correct" : "verdict verdict--retry"}
+        >
+          {p.correct ? "Correct" : "Try again"}
+        </p>
+      )}
     </section>
   );
 }

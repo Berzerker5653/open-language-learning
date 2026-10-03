@@ -67,20 +67,28 @@ export function LanguagePanel(p: LanguagePanelProps) {
           language is separate and unchanged. Installed packs work offline.
         </small>
       </p>
-      {p.error && <p role="alert">{p.error}</p>}
+      {p.error && (
+        <p role="alert" className="alert">
+          {p.error}
+        </p>
+      )}
 
       <h2>Installed packs</h2>
       {p.installed.length === 0 ? (
-        <p>No packs installed yet.</p>
+        <p className="empty">No packs installed yet.</p>
       ) : (
-        <ul>
+        <ul className="pack-list">
           {p.installed.map((i) => (
             <li key={i.pack_id} data-active={p.activeIds.includes(i.pack_id) ? "yes" : "no"}>
               {i.display_name} ({i.locale}) — v{i.version}, {i.trust_state}
               {p.activeIds.includes(i.pack_id) ? (
-                <span> · learning this language</span>
+                <span className="badge badge--active">learning this language</span>
               ) : (
-                <button type="button" onClick={() => p.onSwitch(i.pack_id)}>
+                <button
+                  type="button"
+                  className="btn btn--quiet"
+                  onClick={() => p.onSwitch(i.pack_id)}
+                >
                   Learn this
                 </button>
               )}
@@ -98,11 +106,11 @@ export function LanguagePanel(p: LanguagePanelProps) {
         </small>
       </p>
       {p.catalog.length > 0 && (
-        <ul>
+        <ul className="pack-list">
           {p.catalog.map((c) => (
             <li key={c.pack_id}>
               <strong>{c.display_name}</strong> ({c.locale}) — community content by {c.author}
-              <ul>
+              <ul className="meta-list">
                 <li>version {c.version}</li>
                 <li>license: {c.license}</li>
                 <li>size: {megabytes(c.size_bytes)} MB</li>
@@ -113,9 +121,13 @@ export function LanguagePanel(p: LanguagePanelProps) {
                 </li>
               </ul>
               {c.installed_version === c.version ? (
-                <span>installed (v{c.installed_version})</span>
+                <span className="badge">installed (v{c.installed_version})</span>
               ) : (
-                <button type="button" onClick={() => p.onInstallCatalog(c.pack_id)}>
+                <button
+                  type="button"
+                  className="btn btn--primary"
+                  onClick={() => p.onInstallCatalog(c.pack_id)}
+                >
                   {c.installed_version ? `Update to v${c.version}` : `Install v${c.version}`}
                 </button>
               )}

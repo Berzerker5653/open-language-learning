@@ -323,15 +323,54 @@ export function App() {
   return (
     <AppShell
       productName="Open Language Learning Platform"
-      nav={[
-        { id: "practice", label: "Practice" },
-        { id: "progress", label: "Progress" },
-        { id: "settings", label: "Settings" },
-      ]}
+      nav={[]}
+      routeNav={
+        <nav aria-label="Routes" className="routes">
+          <button
+            type="button"
+            className="tab"
+            aria-current={route === "practice" ? "page" : undefined}
+            onClick={() => setRoute("practice")}
+          >
+            Practice
+          </button>
+          <button
+            type="button"
+            className="tab"
+            aria-current={route === "progress" ? "page" : undefined}
+            onClick={() => void openProgress()}
+          >
+            Progress
+          </button>
+          <button
+            type="button"
+            className="tab"
+            aria-current={route === "pronunciation" ? "page" : undefined}
+            onClick={() => setRoute("pronunciation")}
+          >
+            Pronunciation
+          </button>
+          <button
+            type="button"
+            className="tab"
+            aria-current={route === "language" ? "page" : undefined}
+            onClick={() => {
+              setRoute("language");
+              void refreshLanguages();
+            }}
+          >
+            Languages
+          </button>
+        </nav>
+      }
     >
       {route === "pronunciation" ? (
         <>
-          {audioMsg && <p role="status">{audioMsg}</p>}
+          {audioMsg && (
+            <p role="status" className="notice">
+              {audioMsg}
+            </p>
+          )}
           <PronunciationPractice
             shortText={DEMO_UNITS.short_text}
             longText={DEMO_UNITS.long_text}
@@ -366,26 +405,6 @@ export function App() {
           environments={environments}
         />
       )}
-      <nav aria-label="Routes">
-        <button type="button" onClick={() => setRoute("practice")}>
-          Practice
-        </button>
-        <button type="button" onClick={() => void openProgress()}>
-          Progress
-        </button>
-        <button type="button" onClick={() => setRoute("pronunciation")}>
-          Pronunciation
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            setRoute("language");
-            void refreshLanguages();
-          }}
-        >
-          Languages
-        </button>
-      </nav>
     </AppShell>
   );
 }

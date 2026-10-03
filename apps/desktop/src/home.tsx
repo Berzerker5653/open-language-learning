@@ -47,12 +47,14 @@ export interface HomeProps {
 export function Home(p: HomeProps) {
   return (
     <section aria-label="Practice">
-      <h1>Hi {p.displayName} — what to practice now</h1>
-      <div role="group" aria-label="Time budget">
+      <h1>Hi {p.displayName}</h1>
+      <p className="prompt">what to practice now</p>
+      <div role="group" aria-label="Time budget" className="seg">
         {BUDGET_PRESETS.map((m) => (
           <button
             key={m}
             type="button"
+            className="seg-btn"
             aria-pressed={p.activeBudget === m}
             onClick={() => p.onBudget(m)}
           >
@@ -60,17 +62,22 @@ export function Home(p: HomeProps) {
           </button>
         ))}
       </div>
-      <p>
+      <p className="plan-summary">
         {p.plan.items.length} activities · about {Math.round(p.plan.total_seconds / 60)} minutes
       </p>
       {p.plan.items.length === 0 ? (
-        <p>Nothing is due right now. Come back when reviews are due, or explore new material.</p>
+        <p className="empty">
+          Nothing is due right now. Come back when reviews are due, or explore new material.
+        </p>
       ) : (
-        <ul>
+        <ul className="plan-list">
           {p.plan.items.map((item) => (
             <li key={item.item_id}>
-              <span>{REASON_LABELS[item.reason]}</span> — <code>{item.content_id}</code> (
-              {item.modality}, ~{item.est_seconds}s)
+              <span className="plan-reason">{REASON_LABELS[item.reason]}</span>
+              <code>{item.content_id}</code>
+              <span className="meta">
+                {item.modality}, ~{item.est_seconds}s
+              </span>
             </li>
           ))}
         </ul>
@@ -81,11 +88,18 @@ export function Home(p: HomeProps) {
           <p>
             <small>Places open as your capabilities grow — not from activity counts.</small>
           </p>
-          <ul>
+          <ul className="place-list">
             {p.environments.map((e) => (
               <li key={e.id} data-unlocked={e.unlocked ? "yes" : "no"}>
-                {e.display_name} —{" "}
-                {e.unlocked ? "open" : `locked (grows with: ${e.missing.join(", ")})`}
+                <span className="plan-reason">{e.display_name}</span>
+                {e.unlocked ? (
+                  <span className="badge badge--open">open</span>
+                ) : (
+                  <>
+                    <span className="badge">locked</span>
+                    <span className="meta">grows with: {e.missing.join(", ")}</span>
+                  </>
+                )}
               </li>
             ))}
           </ul>
@@ -115,35 +129,37 @@ export function ProgressView({ rows }: { rows: ProgressRow[] }) {
       <h1>Capability progress</h1>
       <p>Each skill grows independently — reading does not imply speaking.</p>
       {rows.length === 0 ? (
-        <p>No evidence yet. Practice to see capability differences here.</p>
+        <p className="empty">No evidence yet. Practice to see capability differences here.</p>
       ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Content</th>
-              <th>Dimension</th>
-              <th>State</th>
-              <th>Confidence</th>
-            </tr>
-          </thead>
-          <tbody>
-            {[...byContent.entries()].map(([content, list]) =>
-              list.map((row) => (
-                <tr key={`${content}#${row.dimension}`}>
-                  <td>
-                    <code>{content}</code>
-                  </td>
-                  <td>{row.dimension}</td>
-                  <td>
-                    {row.state}
-                    {row.needs_refresh ? " (needs refresh)" : ""}
-                  </td>
-                  <td>{Math.round(row.confidence * 100)}%</td>
-                </tr>
-              )),
-            )}
-          </tbody>
-        </table>
+        <div className="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Content</th>
+                <th>Dimension</th>
+                <th>State</th>
+                <th>Confidence</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[...byContent.entries()].map(([content, list]) =>
+                list.map((row) => (
+                  <tr key={`${content}#${row.dimension}`}>
+                    <td>
+                      <code>{content}</code>
+                    </td>
+                    <td>{row.dimension}</td>
+                    <td>
+                      {row.state}{" "}
+                      {row.needs_refresh ? <span className="badge">needs refresh</span> : null}
+                    </td>
+                    <td>{Math.round(row.confidence * 100)}%</td>
+                  </tr>
+                )),
+              )}
+            </tbody>
+          </table>
+        </div>
       )}
     </section>
   );

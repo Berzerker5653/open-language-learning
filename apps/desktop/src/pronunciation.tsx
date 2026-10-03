@@ -93,39 +93,60 @@ export function PronunciationPractice(props: PronunciationProps) {
   return (
     <section aria-label="Pronunciation practice">
       <h2>Pronunciation: long vs short vowels</h2>
-      <p>
-        Say both words, one after the other: <strong lang="ja">{shortText}</strong> then{" "}
-        <strong lang="ja">{longText}</strong>. They differ only in vowel length — the second holds
-        the あ about twice as long.
+      <p className="prompt">
+        Say both words, one after the other:{" "}
+        <strong lang="ja" className="target-word">
+          {shortText}
+        </strong>{" "}
+        then{" "}
+        <strong lang="ja" className="target-word">
+          {longText}
+        </strong>
+        . They differ only in vowel length — the second holds the あ about twice as long.
       </p>
-      <div role="group" aria-label="Playback">
-        <button type="button" onClick={() => props.onPlayReference("short")}>
+      <div role="group" aria-label="Playback" className="btn-row">
+        <button
+          type="button"
+          className="btn btn--quiet"
+          onClick={() => props.onPlayReference("short")}
+        >
           Hear reference: {shortText}
         </button>
-        <button type="button" onClick={() => props.onPlayReference("long")}>
+        <button
+          type="button"
+          className="btn btn--quiet"
+          onClick={() => props.onPlayReference("long")}
+        >
           Hear reference: {longText}
         </button>
-        <button type="button" onClick={() => props.onPlayAttempt()} disabled={!hasAttempt}>
+        <button
+          type="button"
+          className="btn btn--quiet"
+          onClick={() => props.onPlayAttempt()}
+          disabled={!hasAttempt}
+        >
           Hear your attempt
         </button>
       </div>
-      <div role="group" aria-label="Recording">
+      <div role="group" aria-label="Recording" className="btn-row">
         {recording ? (
-          <button type="button" onClick={() => props.onStop()}>
+          <button type="button" className="btn btn--primary" onClick={() => props.onStop()}>
             Stop and check
           </button>
         ) : (
-          <button type="button" onClick={() => props.onRecord()}>
+          <button type="button" className="btn btn--primary" onClick={() => props.onRecord()}>
             Record attempt
           </button>
         )}
       </div>
       {result && (
-        <div aria-live="polite">
+        <div aria-live="polite" className="card">
           {result.abstain_reason ? (
-            <p data-testid="abstain-reason">{reasonLabel(result.abstain_reason)}</p>
+            <p data-testid="abstain-reason" className="notice">
+              {reasonLabel(result.abstain_reason)}
+            </p>
           ) : (
-            <ul>
+            <ul className="feedback">
               {result.corrections.map((c) => (
                 <li key={c.feature_id} data-band={c.band}>
                   {TEMPLATE_TEXT[c.feedback_template_id] ??
@@ -154,16 +175,17 @@ export function PronunciationPractice(props: PronunciationProps) {
                   height="60"
                   role="img"
                   aria-label={`Reference contour: ${result.pitch.reference_shape}. Your attempt: ${result.pitch.attempt_shape}.`}
+                  className="contour"
                 >
                   <polyline
+                    className="contour--reference"
                     fill="none"
-                    stroke="#888"
                     strokeWidth="2"
                     points={contourPoints(result.pitch.reference)}
                   />
                   <polyline
+                    className="contour--attempt"
                     fill="none"
-                    stroke="#0b6e4f"
                     strokeWidth="2"
                     points={contourPoints(result.pitch.attempt)}
                   />

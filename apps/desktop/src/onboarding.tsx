@@ -38,7 +38,7 @@ export interface OnboardingProps {
 export function Onboarding(p: OnboardingProps) {
   return (
     <section aria-label="Onboarding">
-      <ol aria-label="Progress">
+      <ol aria-label="Progress" className="stepper">
         <li aria-current={p.step === "welcome" ? "step" : undefined}>Welcome</li>
         <li aria-current={p.step === "packs" ? "step" : undefined}>Language</li>
         <li aria-current={p.step === "microphone" ? "step" : undefined}>Microphone</li>
@@ -46,7 +46,7 @@ export function Onboarding(p: OnboardingProps) {
       </ol>
 
       {p.step === "welcome" && (
-        <div>
+        <div className="card">
           <h1>{p.notice.title}</h1>
           <p>No account required. Everything stays on this device.</p>
           <ul>
@@ -54,26 +54,33 @@ export function Onboarding(p: OnboardingProps) {
               <li key={point}>{point}</li>
             ))}
           </ul>
-          <label htmlFor="profile-name">Your name (local only)</label>
-          <input
-            id="profile-name"
-            type="text"
-            value={p.profileName}
-            onChange={(e) => p.onProfileName(e.target.value)}
-          />
-          <button type="button" onClick={p.onCreateProfile} disabled={p.profileName.trim() === ""}>
+          <div className="field">
+            <label htmlFor="profile-name">Your name (local only)</label>
+            <input
+              id="profile-name"
+              type="text"
+              value={p.profileName}
+              onChange={(e) => p.onProfileName(e.target.value)}
+            />
+          </div>
+          <button
+            type="button"
+            className="btn btn--primary"
+            onClick={p.onCreateProfile}
+            disabled={p.profileName.trim() === ""}
+          >
             Create local profile
           </button>
         </div>
       )}
 
       {p.step === "packs" && (
-        <div>
+        <div className="card">
           <h1>Choose a language pack</h1>
           <fieldset>
             <legend>Available packs</legend>
             {p.packs.map((pack) => (
-              <div key={pack.pack_id}>
+              <div key={pack.pack_id} className="radio-row">
                 <label>
                   <input
                     type="radio"
@@ -85,6 +92,7 @@ export function Onboarding(p: OnboardingProps) {
                 </label>
                 <button
                   type="button"
+                  className="btn btn--quiet"
                   onClick={() => p.onInstall(pack.pack_id)}
                   disabled={p.installedPacks.includes(pack.pack_id)}
                 >
@@ -101,6 +109,7 @@ export function Onboarding(p: OnboardingProps) {
           </p>
           <button
             type="button"
+            className="btn btn--primary"
             onClick={p.onContinue}
             disabled={p.selectedPack === null || !p.installedPacks.includes(p.selectedPack)}
           >
@@ -110,28 +119,30 @@ export function Onboarding(p: OnboardingProps) {
       )}
 
       {p.step === "microphone" && (
-        <div>
+        <div className="card">
           <h1>Microphone (optional)</h1>
           <p>
             Speaking activities need a microphone, but it is never required. You can skip this and
             enable it later in Settings; skipping never blocks progress.
           </p>
-          <button type="button" onClick={p.onEnableMic}>
-            Enable microphone
-          </button>
-          <button type="button" onClick={p.onSkipMic}>
-            Skip for now
-          </button>
+          <div className="btn-row">
+            <button type="button" className="btn btn--primary" onClick={p.onEnableMic}>
+              Enable microphone
+            </button>
+            <button type="button" className="btn btn--quiet" onClick={p.onSkipMic}>
+              Skip for now
+            </button>
+          </div>
         </div>
       )}
 
       {p.step === "done" && (
-        <div>
+        <div className="card">
           <h1>Ready</h1>
           <p>
             Profile created locally. Language pack installed. Microphone can be enabled anytime.
           </p>
-          <button type="button" onClick={p.onContinue}>
+          <button type="button" className="btn btn--primary" onClick={p.onContinue}>
             Start learning
           </button>
         </div>
