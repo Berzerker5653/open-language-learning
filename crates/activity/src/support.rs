@@ -2,11 +2,13 @@
 //! concretely; the ordinal level is a summary, never a mastery weight.
 
 use lts_domain::SupportLevel;
+use serde::{Deserialize, Serialize};
 
 /// Concrete scaffold a learner can take during an attempt. Default
 /// levels follow the docs/03 §5 table; a rubric may remap per construct
 /// (recorded separately; not implemented here).
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
 pub enum SupportAction {
     /// Extra environmental/context cue; no response form or meaning.
     ContextCue,
@@ -30,6 +32,12 @@ pub enum SupportAction {
     FullTranslation,
     /// Full modeled response available to copy/repeat.
     ModeledResponse,
+    /// Kana reading (furigana) revealed on demand for a kanji item;
+    /// supplied readings cannot establish unsupported script decoding
+    /// (docs/03 §5, JA_ORTHOGRAPHY_POLICY reveal_counts_as: support).
+    SuppliedReading,
+    /// Romaji revealed on demand against the auto-fade rule.
+    RomajiReveal,
 }
 
 impl SupportAction {
@@ -38,7 +46,11 @@ impl SupportAction {
         match self {
             Self::ContextCue => 1,
             Self::Replay | Self::SlowInput | Self::MeaningHint => 2,
-            Self::TextCue | Self::WordBank | Self::ChoiceSupport => 3,
+            Self::TextCue
+            | Self::WordBank
+            | Self::ChoiceSupport
+            | Self::SuppliedReading
+            | Self::RomajiReveal => 3,
             Self::PartialTranslation | Self::ResponseTemplate => 4,
             Self::FullTranslation | Self::ModeledResponse => 5,
         }
@@ -58,6 +70,8 @@ impl SupportAction {
             Self::ResponseTemplate => "response-template",
             Self::FullTranslation => "full-translation",
             Self::ModeledResponse => "modeled-response",
+            Self::SuppliedReading => "supplied-reading",
+            Self::RomajiReveal => "romaji-revealed",
         }
     }
 

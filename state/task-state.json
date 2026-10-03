@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-03",
-  "active_task": "READ-001",
+  "active_task": "SCENARIO-001",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -268,6 +268,17 @@
       ]
     },
     "READ-001": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/READ-001.md",
+        "state/evidence/READ-001/cargo-test-2026-10-03.txt",
+        "state/evidence/READ-001/ci-2026-10-03.txt",
+        "crates/activity/src/reading.rs"
+      ]
+    },
+    "SCENARIO-001": {
       "status": "in_progress",
       "attempts": 0,
       "last_error": null,

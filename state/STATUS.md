@@ -113,10 +113,15 @@ M2 — Local data and learner model
   evidence with ordinal levels; correct-with-strong-help never flagged
   independent and derives lower mastery (evidence:
   `state/evidence/ACT-001/`).
+- `READ-001` — adaptive kana/furigana/romaji support: visibility
+  adapts to per-item reading mastery + user modes; reveals always
+  available and recorded as support; canonical stays Japanese script;
+  reading evidence never touches listening/speaking dimensions
+  (evidence: `state/evidence/READ-001/`).
 
 ## Next task
 
-`READ-001` — adaptive kana/furigana/romaji support (M4, P0).
+`SCENARIO-001` — data-driven scenario/dialogue runtime (M4, P0).
 Note: `REVIEW-001` (reviewer capacity) and `LIC-001` (final licensing
 decisions) are owner-only and remain open blockers for release.
 
