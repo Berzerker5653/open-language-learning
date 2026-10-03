@@ -1,0 +1,5 @@
+     Running tests/ja_phonology.rs (target/debug/deps/ja_phonology-a9a5969979841084)
+test no_automatic_scoring_without_calibration ... ok
+test required_feature_areas_are_encoded ... ok
+test inventory_validates_against_v02_phonology_schema ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s

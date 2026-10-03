@@ -1,0 +1,211 @@
+# JA-RES-002 — Japanese phonology/prosody inventory (schema 0.2)
+#
+# Encoded inventory for the ja-JP reference pack (docs/06
+# §Phonology/prosody). Modes per schemas/v0.2 featureMode:
+# teach | assess-automatic | assess-guided | reference-only.
+# No assess-automatic claims: automatic pronunciation scoring requires
+# a bound calibrated speech profile (docs/05, SPEECH-007 calibration
+# data is owner-gated). Policy narrative and variant handling live in
+# docs/assessment/JA_PHONOLOGY_MODEL.md.
+#
+# Segment symbols are phonemic; predictable allophony is noted in
+# examples. Facts verified against open reference descriptions on
+# 2026-10-02; nuanced naturalness still requires REVIEW-001 qualified
+# review (docs/16).
+
+schema_version: "0.2"
+
+segments:
+  # Vowels: five-quality system.
+  - symbol: a
+    type: vowel
+    mode: teach
+    examples: ["あ", "か"]
+  - symbol: i
+    type: vowel
+    mode: teach
+    examples: ["い", "き"]
+    l1_contrast_notes:
+      en: "tense [i]; no laxing contrast like ship/sheep"
+  - symbol: "ɯ"
+    type: vowel
+    mode: teach
+    examples: ["う"]
+    l1_contrast_notes:
+      en: "unrounded back [ɯ], not English [u]; lips do not round"
+  - symbol: e
+    type: vowel
+    mode: teach
+    examples: ["え", "け"]
+  - symbol: o
+    type: vowel
+    mode: teach
+    examples: ["お", "こ"]
+    l1_contrast_notes:
+      en: "no offglide; not [oʊ]"
+
+  # Consonants relevant to learner feedback.
+  - symbol: k
+    type: consonant
+    mode: teach
+    examples: ["か", "き"]
+  - symbol: ɡ
+    type: consonant
+    mode: teach
+    examples: ["が", "ぎ"]
+  - symbol: s
+    type: consonant
+    mode: teach
+    examples: ["さ", "す"]
+  - symbol: ɕ
+    type: consonant
+    mode: teach
+    examples: ["し"]
+    l1_contrast_notes:
+      en: "alveolo-palatal [ɕ] before i; distinct from [s]"
+  - symbol: z
+    type: consonant
+    mode: teach
+    examples: ["ざ", "ず"]
+  - symbol: t
+    type: consonant
+    mode: teach
+    examples: ["た", "つ"]
+  - symbol: tɕ
+    type: consonant
+    mode: teach
+    examples: ["ち"]
+  - symbol: d
+    type: consonant
+    mode: teach
+    examples: ["だ", "づ"]
+  - symbol: dʑ
+    type: consonant
+    mode: teach
+    examples: ["ぢ"]
+  - symbol: h
+    type: consonant
+    mode: teach
+    examples: ["は", "ふ"]
+  - symbol: ɸ
+    type: consonant
+    mode: reference-only
+    examples: ["ふ"]
+  - symbol: m
+    type: consonant
+    mode: teach
+    examples: ["ま", "み"]
+  - symbol: n
+    type: consonant
+    mode: teach
+    examples: ["な", "に"]
+  - symbol: ɾ
+    type: consonant
+    mode: teach
+    examples: ["ら", "り"]
+    l1_contrast_notes:
+      en: "alveolar tap; between English r and l; not English [ɹ]"
+  - symbol: b
+    type: consonant
+    mode: teach
+    examples: ["ば", "び"]
+  - symbol: p
+    type: consonant
+    mode: teach
+    examples: ["ぱ", "ぴ"]
+  - symbol: j
+    type: consonant
+    mode: teach
+    examples: ["や", "ゆ"]
+  - symbol: ɰ
+    type: consonant
+    mode: teach
+    examples: ["わ", "い"]
+  - symbol: "ʔ"
+    type: consonant
+    mode: reference-only
+    examples: ["促音 realization", "glottalization in natural speech"]
+
+phonotactics:
+  - id: ja.phonotactics.mora-rhythm
+    description: >
+      Timing organizes around morae; teaching explains mora-based
+      rhythm and contrasts WITHOUT claiming every mora has equal
+      acoustic duration (docs/06 §Phonology).
+    mode: teach
+  - id: ja.phonotactics.moraic-nasal
+    description: >
+      Syllable-final moraic nasal /N/ with context-conditioned
+      realizations [m n ŋ ɴ]; contrastive against /n/ + vowel
+      (e.g. しん vs しい-type contrasts).
+    mode: teach
+  - id: ja.phonotactics.gemination
+    description: >
+      Geminate consonant (sokuon っ /Q/): duration contrast is
+      mora-counting, e.g. きて vs きて; /N/ and /ʔ/ do not geminate;
+      /ɡ/ gemination realized variably ([kː] ~ [ɡː]).
+    mode: teach
+  - id: ja.phonotactics.vowel-length
+    description: >
+      Contrastive long vowels (e.g. おばさん/おばあさん); orthographic
+      conventions differ for native vs loanword spellings and must be
+      taught per script convention.
+    mode: teach
+  - id: ja.phonotactics.palatalization
+    description: >
+      Palatalized (y-glide) sequences: kyaku, hyaku, byakko etc.;
+      contrast with plain sequences.
+    mode: teach
+  - id: ja.phonotactics.vowel-devoicing
+    description: >
+      High vowels [i ɯ] devoice between voiceless consonants and
+      word-finally after them (e.g. すき, です). Natural variation,
+      not learner error; F0 is unavailable in devoiced regions, not
+      low pitch (docs/05).
+    mode: reference-only
+  - id: ja.phonotactics.syllable-shape
+    description: >
+      Core shape (C)V plus moraic /N/ and geminate /Q/; loanwords add
+      permitted adaptations (epenthetic vowels, final-nasal
+      substitution). Descriptive, not a production rule.
+    mode: reference-only
+  - id: ja.phonotactics.rendaku
+    description: >
+      Sequential voicing (rendaku) is partially unpredictable and
+      lexeme-specific; teach per item with dictionary support, never
+      as a productive rule.
+    mode: reference-only
+
+prosody:
+  - id: ja.prosody.lexical-pitch-accent
+    description: >
+      Word-level pitch accent with heiban/atamadaka/nakadaka/kifugo
+      patterns and contrastive minimal pairs (e.g. ame[HLL] vs
+      ame[HLH]-type contrasts). Assess-guided only: guided comparison
+      with labeled contours, never a numeric grade (docs/05);
+      automatic scoring requires a bound calibrated profile and
+      SPEECH-007 calibration data (owner-gated, not established).
+    mode: assess-guided
+    orthographic_cues:
+      - "accent-kifugo-numbering"
+      - "downstep-arrows-in-teaching-material"
+  - id: ja.prosody.phrase-intonation
+    description: >
+      Phrase/sentence contours depend on phrase boundaries, focus,
+      sentence type, and following material. Isolated-word dictionary
+      accent patterns must NOT be scored against a natural phrase
+      contour (docs/05 §Japanese pitch-accent caution). Targets
+      require reviewed utterance context.
+    mode: reference-only
+  - id: ja.prosody.mora-timing-instruction
+    description: >
+      Teaching framing for rhythm: mora-based contrasts (short vs
+      geminate, short vs long vowel, N contrasts) taught explicitly;
+      no equal-duration claim.
+    mode: teach
+  - id: ja.prosody.final-particle-prosody
+    description: >
+      Particle-level pitch interactions (e.g. subject/object particles
+      after accented stems) taught as part of phrase patterns, with
+      reviewed recordings as targets.
+    mode: teach

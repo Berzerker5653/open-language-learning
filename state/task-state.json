@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-02",
-  "active_task": "JA-RES-002",
+  "active_task": "JA-RES-003",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -194,6 +194,18 @@
       ]
     },
     "JA-RES-002": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/JA-RES-002.md",
+        "state/evidence/JA-RES-002/cargo-test-2026-10-02.txt",
+        "state/evidence/JA-RES-002/ci-2026-10-02.txt",
+        "docs/assessment/JA_PHONOLOGY.yaml",
+        "docs/assessment/JA_PHONOLOGY_MODEL.md"
+      ]
+    },
+    "JA-RES-003": {
       "status": "in_progress",
       "attempts": 0,
       "last_error": null,
