@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-02",
-  "active_task": "LEARN-001",
+  "active_task": "LEARN-005",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -121,6 +121,16 @@
       ]
     },
     "LEARN-001": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/LEARN-001.md",
+        "state/evidence/LEARN-001/cargo-test-2026-10-02.txt",
+        "state/evidence/LEARN-001/ci-2026-10-02.txt"
+      ]
+    },
+    "LEARN-005": {
       "status": "in_progress",
       "attempts": 1,
       "last_error": null,

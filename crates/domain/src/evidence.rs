@@ -96,6 +96,10 @@ pub struct EvidenceEvent {
     pub policy_version: Option<String>,
     /// Privacy-safe device/provider metadata for reproducibility.
     pub provider_id: Option<String>,
+    /// Machine-readable reason for non-linguistic outcomes
+    /// (TechnicalFailure/Abstained), e.g. "asr-timeout", "mic-denied".
+    /// Never contains transcript or audio content (docs/08).
+    pub failure_reason: Option<String>,
 }
 
 impl EvidenceEvent {
@@ -145,6 +149,7 @@ mod tests {
             rubric_version: None,
             policy_version: None,
             provider_id: None,
+            failure_reason: None,
         }
     }
 

@@ -1,11 +1,6 @@
-//! Evidence -> mastery derivation. Populated by LEARN-002/LEARN-005.
+//! Evidence -> mastery derivation. Evidence construction (LEARN-001)
+//! lives in [`evidence`]; derivation lands with LEARN-002/LEARN-005.
 
-pub const CRATE_NAME: &str = "lts-learner-model";
+pub mod evidence;
 
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn crate_identifies_itself() {
-        assert_eq!(super::CRATE_NAME, "lts-learner-model");
-    }
-}
+pub use evidence::AttemptDraft;

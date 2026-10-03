@@ -22,8 +22,9 @@ impl Store {
                event_id, occurred_at, profile_id, targets_json, modality, activity_id,
                prompt_family_id, attempt_group_id, support_level, support_actions_json,
                outcome, score_json, assessment_kind, held_out, provider_confidence,
-               pack_id, pack_version, rubric_version, policy_version, provider_id)
-             VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,?13,?14,?15,?16,?17,?18,?19,?20)
+               pack_id, pack_version, rubric_version, policy_version, provider_id,
+               failure_reason)
+             VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,?13,?14,?15,?16,?17,?18,?19,?20,?21)
              ON CONFLICT(event_id) DO NOTHING",
             params![
                 event.event_id.as_str(),
@@ -49,6 +50,7 @@ impl Store {
                 event.rubric_version,
                 event.policy_version,
                 event.provider_id,
+                event.failure_reason,
             ],
         )?;
         Ok(changed == 1)
@@ -61,7 +63,8 @@ impl Store {
             "SELECT event_id, occurred_at, profile_id, targets_json, modality, activity_id,
                     prompt_family_id, attempt_group_id, support_level, support_actions_json,
                     outcome, score_json, assessment_kind, held_out, provider_confidence,
-                    pack_id, pack_version, rubric_version, policy_version, provider_id
+                    pack_id, pack_version, rubric_version, policy_version, provider_id,
+                    failure_reason
              FROM evidence_events WHERE profile_id = ?1
              ORDER BY occurred_at, event_id",
         )?;
@@ -190,6 +193,7 @@ fn row_to_event(r: &rusqlite::Row<'_>) -> rusqlite::Result<EvidenceEvent> {
         rubric_version: opt_text(17)?,
         policy_version: opt_text(18)?,
         provider_id: opt_text(19)?,
+        failure_reason: opt_text(20)?,
     })
 }
 

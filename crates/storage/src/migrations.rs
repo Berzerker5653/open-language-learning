@@ -9,10 +9,12 @@
 //!    snapshots, scheduler state, sessions, retained recordings
 //!    (metadata only), content reports.
 
+//! 3. `evidence_events.failure_reason` (LEARN-001 technical-failure
+//!    representation).
 use crate::error::Error;
 use rusqlite::Connection;
 
-pub const SCHEMA_VERSION: i64 = 2;
+pub const SCHEMA_VERSION: i64 = 3;
 
 struct Migration {
     version: i64,
@@ -143,6 +145,12 @@ CREATE TABLE reports (
 );
 CREATE INDEX idx_evidence_profile_time ON evidence_events(profile_id, occurred_at);
 CREATE INDEX idx_evidence_activity ON evidence_events(activity_id);
+",
+    },
+    Migration {
+        version: 3,
+        sql: "
+ALTER TABLE evidence_events ADD COLUMN failure_reason TEXT;
 ",
     },
 ];

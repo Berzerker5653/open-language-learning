@@ -1,0 +1,44 @@
+     Running unittests src/lib.rs (target/debug/deps/lts_domain-b88dcb0df572de61)
+test curriculum::tests::only_prerequisite_edges_are_hard_gates ... ok
+test curriculum::tests::prerequisite_record_is_scoped_by_dimension_and_state ... ok
+test curriculum::tests::serde_kebab_case ... ok
+test ids::tests::locale_tags ... ok
+test evidence::tests::only_scored_outcomes_count ... ok
+test ids::tests::model_is_locale_independent ... ok
+test evidence::tests::serde_roundtrip ... ok
+test ids::tests::pack_ids ... ok
+test ids::tests::parses_documented_examples ... ok
+test ids::tests::rejects_malformed_ids ... ok
+test ids::tests::serde_roundtrip_kebab_string ... ok
+test mastery::tests::serde_kebab_case ... ok
+test mastery::tests::state_order_is_canonical ... ok
+test mastery::tests::support_level_bounds ... ok
+test pack::tests::trust_state_order_is_monotonic ... ok
+test pack::tests::model_handles_any_locale_identically ... ok
+test pack::tests::unresolved_license_is_explicit_not_implicit ... ok
+test versioning::tests::accepts_prerelease_and_build_metadata ... ok
+test versioning::tests::engine_range_semantics ... ok
+test versioning::tests::prerelease_orders_before_release ... ok
+test result: ok. 20 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/lts_learner_model-cb211e760969cd87)
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/evidence.rs (target/debug/deps/evidence-9d75ab53cca0fade)
+test typed_attempt_carries_support_confidence_and_versions ... ok
+test technical_speech_failure_is_distinct_from_learner_error ... ok
+test events_remain_queryable_after_restart ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+     Running unittests src/lib.rs (target/debug/deps/lts_storage-d78d73a2b198dcf1)
+test migrations::tests::migrations_are_sequential_and_complete_history ... ok
+test tests::in_memory_store_migrates_to_head ... ok
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/store.rs (target/debug/deps/store-d0eb576f33581d04)
+test no_audio_blobs_and_no_recordings_by_default ... ok
+test profile_created_without_account_or_network ... ok
+test delete_profile_removes_app_owned_learner_data ... ok
+test settings_goals_and_pack_records_round_trip ... ok
+test migrations_apply_forward_from_initial_schema ... ok
+test evidence_survives_restart_and_rejects_duplicate_ids ... ok
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

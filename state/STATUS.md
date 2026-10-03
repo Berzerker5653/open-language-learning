@@ -47,10 +47,14 @@ M2 — Local data and learner model
   creation, append-only evidence with duplicate-id rejection,
   metadata-only opt-in recordings, no BLOB columns (ADR-0005)
   (evidence: `state/evidence/DATA-001/`).
+- `LEARN-001` — typed evidence events: `AttemptDraft` builder
+  (support/confidence/content versions), `failure_reason` for
+  technical speech failures (migration v3), restart-queryable —
+  (evidence: `state/evidence/LEARN-001/`).
 
 ## Next task
 
-`LEARN-001` — evidence event model on the store (M2, P0).
+`LEARN-005` — versioned mastery policy contract (M2, P0).
 
 ## Owner decisions already resolved
 

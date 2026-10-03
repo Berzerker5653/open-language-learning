@@ -29,6 +29,7 @@ fn sample_event(profile: &ProfileId, id: &str) -> EvidenceEvent {
         rubric_version: Some("r1".into()),
         policy_version: Some("p1".into()),
         provider_id: None,
+        failure_reason: None,
     }
 }
 
@@ -94,7 +95,7 @@ fn migrations_apply_forward_from_initial_schema() {
         .unwrap()
         .collect::<Result<_, _>>()
         .unwrap();
-    assert_eq!(versions, vec![1, 2]);
+    assert_eq!(versions, vec![1, 2, 3]);
 }
 
 #[test]
