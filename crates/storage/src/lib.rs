@@ -14,6 +14,7 @@ mod mastery;
 mod migrations;
 mod packs;
 mod profile;
+mod scheduler;
 
 pub use error::Error;
 pub use evidence::{NewRecording, Recording};
@@ -21,6 +22,7 @@ pub use mastery::MasterySnapshot;
 pub use migrations::SCHEMA_VERSION;
 pub use packs::{ContentVersion, PackInstallation};
 pub use profile::{GoalStatus, LearnerGoal, Profile, Setting};
+pub use scheduler::SchedulerRecord;
 
 use rusqlite::Connection;
 use std::path::Path;

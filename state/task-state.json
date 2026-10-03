@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-02",
-  "active_task": "LEARN-003",
+  "active_task": "LEARN-004",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -152,8 +152,19 @@
       ]
     },
     "LEARN-003": {
+      "status": "done",
+      "attempts": 2,
+      "last_error": "spike params from memory produced absurd post-failure stability; replaced with labeled placeholder values",
+      "evidence": [
+        "state/notes/LEARN-003.md",
+        "state/evidence/LEARN-003/cargo-test-2026-10-02.txt",
+        "state/evidence/LEARN-003/ci-2026-10-02.txt",
+        "docs/assessment/SCHEDULING_RESEARCH.md"
+      ]
+    },
+    "LEARN-004": {
       "status": "in_progress",
-      "attempts": 1,
+      "attempts": 0,
       "last_error": null,
       "evidence": []
     }

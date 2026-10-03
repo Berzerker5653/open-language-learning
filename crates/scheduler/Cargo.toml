@@ -10,3 +10,8 @@ publish.workspace = true
 lts-domain.workspace = true
 serde.workspace = true
 thiserror.workspace = true
+
+[dev-dependencies]
+lts-learner-model.workspace = true
+lts-storage.workspace = true
+serde_json.workspace = true

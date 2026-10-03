@@ -2285,7 +2285,10 @@ name = "lts-scheduler"
 version = "0.1.0"
 dependencies = [
  "lts-domain",
+ "lts-learner-model",
+ "lts-storage",
  "serde",
+ "serde_json",
  "thiserror 2.0.21",
 ]
 

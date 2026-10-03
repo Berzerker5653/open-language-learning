@@ -1,0 +1,23 @@
+     Running unittests src/lib.rs (target/debug/deps/lts_scheduler-0007cff715906d1a)
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/spike.rs (target/debug/deps/spike-a63c60104ce8ec77)
+test deterministic_under_test_clock ... ok
+test items_schedule_by_due_time_not_attendance ... ok
+test stability_grows_on_success_and_falls_on_lapse ... ok
+test unscored_attempts_are_never_reviews ... ok
+test scheduler_state_persists_and_queries_due_items ... ok
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/lts_storage-d78d73a2b198dcf1)
+test migrations::tests::migrations_are_sequential_and_complete_history ... ok
+test tests::in_memory_store_migrates_to_head ... ok
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/store.rs (target/debug/deps/store-d0eb576f33581d04)
+test settings_goals_and_pack_records_round_trip ... ok
+test profile_created_without_account_or_network ... ok
+test delete_profile_removes_app_owned_learner_data ... ok
+test no_audio_blobs_and_no_recordings_by_default ... ok
+test migrations_apply_forward_from_initial_schema ... ok
+test evidence_survives_restart_and_rejects_duplicate_ids ... ok
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

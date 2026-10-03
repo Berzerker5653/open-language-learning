@@ -61,10 +61,18 @@ M2 — Local data and learner model
   confidence capped at 0.9 with support/diversity/recency factors,
   regression + needs-refresh, versioned snapshots in storage
   (evidence: `state/evidence/LEARN-002/`).
+- `LEARN-003` — scheduler abstraction + FSRS spike: `Scheduler` trait,
+  dependency-free `FsrsSpike` (labeled placeholder params, FSRS-4.5
+  shape), evidence→rating mapping that never reviews unscored events,
+  per-item due-time persistence + due query, bit-deterministic under
+  fixed clock; research note compares fsrs-rs/rs-fsrs/ts-fsrs licenses
+  (evidence: `state/evidence/LEARN-003/`).
 
 ## Next task
 
-`LEARN-003` — memory scheduler abstraction + FSRS spike (M2, P0).
+`LEARN-004` — session planner: fixed time budgets, balances due review /
+weak skills / progression / modality repetition, no streak objective,
+reproducible with fixed input/seed (M2, P0).
 
 ## Owner decisions already resolved
 
