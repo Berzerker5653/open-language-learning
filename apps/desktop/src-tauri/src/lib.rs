@@ -1233,6 +1233,30 @@ fn rfc3339_utc(secs: u64) -> String {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        // The window is built here (not via tauri.conf.json) so the
+        // webview permission handler can be attached: the pronunciation
+        // feature calls getUserMedia, and WebKitGTK denies permission
+        // requests unless the app answers them. Microphone is allowed
+        // (the UI gates it behind the explicit mic setting + privacy
+        // notice); everything else is denied.
+        .setup(|app| {
+            use tauri::webview::{PermissionKind, PermissionResponse};
+            let _win = tauri::WebviewWindowBuilder::new(
+                app,
+                "main",
+                tauri::WebviewUrl::default(),
+            )
+            .title("Open Language Learning Platform")
+            .inner_size(1100.0, 720.0)
+            .min_inner_size(800.0, 600.0)
+            .center()
+            .on_permission_request(|_webview, kind| match kind {
+                PermissionKind::Microphone => PermissionResponse::Allow,
+                _ => PermissionResponse::Deny,
+            })
+            .build()?;
+            Ok(())
+        })
         .invoke_handler(tauri::generate_handler![
             app_mode,
             smoke_ack,

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AppShell } from "@openlang/ui";
 import {
   Onboarding,
@@ -350,22 +350,13 @@ export function App() {
     }
   }
 
-  async function analyzeAttempt(blob: Blob) {
-    if (attemptUrl) URL.revokeObjectURL(attemptUrl);
-    setAttemptUrl(URL.createObjectURL(blob));
+  async function analyzeWav(wav: Uint8Array) {
     const inv = detectInvoke();
     if (!inv) {
       setPronResult({ corrections: [], abstain_reason: "aligner-unavailable", pitch: EMPTY_PITCH });
       return;
     }
     try {
-      const decoded = await new AudioContext().decodeAudioData(await blob.arrayBuffer());
-      const pcm = decoded.getChannelData(0);
-      const i16 = new Int16Array(pcm.length);
-      for (let i = 0; i < pcm.length; i++) {
-        i16[i] = Math.max(-32767, Math.min(32767, Math.round((pcm[i] ?? 0) * 32767)));
-      }
-      const wav = toWav16(i16, decoded.sampleRate);
       const result = (await inv("pronunciation_check", {
         attempt: {
           pack_id: selectedPack ?? "org.openlanguage.ja-demo",
@@ -377,29 +368,77 @@ export function App() {
     } catch {
       setPronResult({
         corrections: [],
-        abstain_reason: "abstained:decode-failed",
+        abstain_reason: "abstained:engine-error",
         pitch: EMPTY_PITCH,
       });
     }
   }
 
+  // WebKitGTK does not enable MediaRecorder, so capture PCM directly via
+  // WebAudio (enabled by default) and build the WAV in JS. The attempt
+  // lives in memory only (docs/08); nothing audio is ever persisted.
+  interface Capture {
+    ctx: AudioContext;
+    src: MediaStreamAudioSourceNode;
+    proc: ScriptProcessorNode;
+    stream: MediaStream;
+    bufs: Float32Array[];
+  }
+  const captureRef = useRef<Capture | null>(null);
+
   function recordAttempt() {
     void (async () => {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const rec = new MediaRecorder(stream);
-      const chunks: Blob[] = [];
-      rec.ondataavailable = (e) => chunks.push(e.data);
-      rec.onstop = () => {
+      let stream: MediaStream;
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      } catch (e) {
+        setAudioMsg(`Microphone unavailable: ${String(e)}`);
+        return;
+      }
+      try {
+        const ctx = new AudioContext();
+        const src = ctx.createMediaStreamSource(stream);
+        const proc = ctx.createScriptProcessor(4096, 1, 1);
+        const bufs: Float32Array[] = [];
+        proc.onaudioprocess = (e) => bufs.push(new Float32Array(e.inputBuffer.getChannelData(0)));
+        src.connect(proc);
+        proc.connect(ctx.destination);
+        captureRef.current = { ctx, src, proc, stream, bufs };
+        setAudioMsg(null);
+        setRecording(true);
+      } catch (e) {
         stream.getTracks().forEach((t) => t.stop());
-        void analyzeAttempt(new Blob(chunks, { type: rec.mimeType }));
-      };
-      setRecording(true);
-      rec.start();
+        setAudioMsg(`Audio capture is not supported here: ${String(e)}`);
+      }
     })();
   }
 
   function stopAndCheck() {
     setRecording(false);
+    const cap = captureRef.current;
+    captureRef.current = null;
+    if (!cap) return;
+    cap.proc.onaudioprocess = null;
+    cap.proc.disconnect();
+    cap.src.disconnect();
+    cap.stream.getTracks().forEach((t) => t.stop());
+    const rate = cap.ctx.sampleRate;
+    void cap.ctx.close();
+    const total = cap.bufs.reduce((n, b) => n + b.length, 0);
+    const pcm = new Float32Array(total);
+    let off = 0;
+    for (const b of cap.bufs) {
+      pcm.set(b, off);
+      off += b.length;
+    }
+    const i16 = new Int16Array(pcm.length);
+    for (let i = 0; i < pcm.length; i++) {
+      i16[i] = Math.max(-32767, Math.min(32767, Math.round((pcm[i] ?? 0) * 32767)));
+    }
+    const wav = toWav16(i16, rate);
+    if (attemptUrl) URL.revokeObjectURL(attemptUrl);
+    setAttemptUrl(URL.createObjectURL(new Blob([wav], { type: "audio/wav" })));
+    void analyzeWav(wav);
   }
 
   if (step !== "done") {

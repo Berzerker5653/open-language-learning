@@ -8,4 +8,6 @@ if [ -d "$SYSROOT/usr/lib/pkgconfig" ]; then
   export LD_LIBRARY_PATH="$SYSROOT/usr/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
   # WebKitGTK resolves helper processes from a build-time path; point it at the sysroot.
   export WEBKIT_EXEC_PATH="$SYSROOT/usr/lib/webkit2gtk-4.1"
+  # WebKitGTK's audio stack is GStreamer; the sysroot carries its own plugin set.
+  export GST_PLUGIN_PATH="$SYSROOT/usr/lib/gstreamer-1.0${GST_PLUGIN_PATH:+:$GST_PLUGIN_PATH}"
 fi
