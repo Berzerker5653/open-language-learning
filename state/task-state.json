@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-03",
-  "active_task": "K-22",
+  "active_task": "K-23",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -649,6 +649,16 @@
     }
     ,
     "K-22": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/K-22.md",
+        "state/evidence/K-22/chunked-pack-validate-2026-10-03.txt"
+      ]
+    }
+    ,
+    "K-23": {
       "status": "in_progress",
       "attempts": 1,
       "last_error": null,

@@ -86,6 +86,28 @@ Author one lesson at a time:
    (allowed vocab/grammar, new-item budget, register, validation
    method); the validator then enforces the envelope the unit promised.
 
+## Chunking conventions (packs past A1)
+
+Every `*` path in the layout table accepts many files; ids are global
+to the pack and duplicates across files fail (`duplicate_ids`). The
+conventions that keep large packs navigable:
+
+- **Lexicon by topic**: `lexicon/<topic>.jsonl`, kebab-case topic
+  (`lexicon/food.jsonl`, `lexicon/numbers.jsonl`). Never shard
+  alphabetically — topic shards match how units cite vocabulary.
+- **One unit per lesson**: `curriculum/units/NNN-<topic>.yaml` with a
+  zero-padded sequence number (`000-greetings.yaml`,
+  `012-market.yaml`). The number is presentation order, not an id;
+  unit ids stay semantic (`<locale>.unit.<topic>.<lesson>`).
+- **Sentences / kanji**: shard the same way when a single file passes
+  ~200 records (`sentences/food.jsonl`, `kanji/n5.jsonl`); the engine
+  reads every `*.jsonl` under those directories in file-name order.
+- **Stories**: one file per reader text (`stories/<topic>-<band>.yaml`).
+- **Goals**: single `curriculum/goals.yaml` (sharding is K-23).
+
+These are conventions, not schema: `langpack validate` accepts any
+file set the table allows; the CI template enforces the gates.
+
 ## Worked example
 
 `tools/pack-templates/example-pack/` is a complete, minimal,

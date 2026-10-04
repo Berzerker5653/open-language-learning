@@ -1,0 +1,3 @@
+== chunked lexicon (core.jsonl + food.jsonl) + second unit 010-market.yaml ==
+validate(scaffold): 0 error(s), 0 warning(s)
+lint: 0 error(s), 0 warning(s)
