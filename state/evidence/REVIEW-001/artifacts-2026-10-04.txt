@@ -1,4 +1,4 @@
-REVIEW-001 artifacts — 2026-10-04 (pending owner in-chat approval)
+REVIEW-001 artifacts — 2026-10-04 (owner approved in-chat 2026-10-04; both artifacts agreed)
 
 Artifacts:
 - languages/ja-JP/review/REVIEW_POLICY.yaml (policy_version 1.0.0):

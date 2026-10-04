@@ -38,13 +38,13 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-32 | default pack replaced: on-ramp `org.openlanguage.ja-jp.reference` bundled (owner CC BY 4.0 decision 2026-10-04 unblocked install), ja-demo retired from candidates, pronunciation demo pack-driven, audio allowlists generalized (`state/notes/K-32.md`) | JA-A1-001 |
 | TTS-002 | TTS variants per ADR-0009: directory-capable model catalog (archive-pinned, corruption-aware), kokoro+sherpa payload entries, layered TTS resolution (bundled/model/LTS_TTS_DIR/bench), `scripts/build-tts-variants.sh` staging + tauri overlay, payload-scoped GPL notices & source offer, attribution UI in Languages (`state/notes/TTS-002.md`) | TTS-002 |
 | POLISH-001 | pre-publication hardening: honest failure-path tests (no-partial-install, honest catalog status, TTS abstention, unknown-model rejection), latency baseline, full-route UI walkthrough (smoke drives onboarding + all 11 routes, script asserts marker) (`state/evidence/POLISH-001/`) | quality |
+| REVIEW-001 | review policy v1.0.0 (ai_screening acceleration-only layer, qualification categories, sampling rules, BLK-REVIEW-CAPACITY) + finite A1–B2 coverage map v1.0.0 (agreed by owner 2026-10-04) + reviewer kit; admits JA-A1-001/002 (`state/evidence/REVIEW-001/`) | REVIEW-001 |
+| SPEECH-007-infra | eligibility registry (version/hash-bound, fail-closed), pronunciation guided/automatic gating with honest UI labels, preregistration protocol skeleton; calibration DATA blocked on owner decision (`state/evidence/SPEECH-007/`) | SPEECH-007 |
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
-| REVIEW-001 | quality | review policy (AI screening honest layer, qualification categories, sampling rules, BLK-REVIEW-CAPACITY) + finite A1–B2 coverage map (on-ramp 5, A1 15 implemented; A2/B1/B2 frozen targets) + reviewer kit; awaiting owner in-chat approval (`state/evidence/REVIEW-001/`) | REVIEW-001 |
-| SPEECH-007-infra | speech | eligibility registry (version/hash-bound, fail-closed), pronunciation gating with honest guided/automatic labels, preregistration protocol skeleton; calibration DATA blocked (owner decision: license dataset or consented recordings) (`state/evidence/SPEECH-007/`) | SPEECH-007 |
 
 ## next — training methods the research says we're missing
 

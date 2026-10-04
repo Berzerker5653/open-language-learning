@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "active_task": "REVIEW-001",
+  "active_task": null,
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -771,11 +771,39 @@
       ]
     },
     "REVIEW-001": {
-      "status": "in_progress",
+      "status": "done",
       "attempts": 1,
       "last_error": null,
       "evidence": [
         "state/evidence/REVIEW-001/artifacts-2026-10-04.txt"
+      ]
+    },
+    "JA-A1-001": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/evidence/JA-A1-001/acceptance-2026-10-04.txt",
+        "state/notes/K-30.md",
+        "state/evidence/K-30/cargo-test-2026-10-03.txt",
+        "state/evidence/K-30/pack-gates-2026-10-03.txt"
+      ]
+    },
+    "JA-A1-002": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/evidence/JA-A1-002/audit-2026-10-04.txt",
+        "state/evidence/K-31/coverage-2026-10-03.txt"
+      ]
+    },
+    "SPEECH-007": {
+      "status": "blocked",
+      "attempts": 1,
+      "last_error": "no permissioned learner-speech calibration data or human labelers (owner decision required); infrastructure complete and fail-closed",
+      "evidence": [
+        "state/evidence/SPEECH-007/infra-blocked-2026-10-04.txt"
       ]
     }
   },

@@ -12,7 +12,7 @@
 
 policy_version: "1.0.0"
 schema_version: 1
-status: draft-pending-owner-approval   # flips to agreed-<date> on owner in-chat approval
+status: agreed-owner-2026-10-04   # owner in-chat approval (REVIEW-001)
 
 # ---------------------------------------------------------------------------
 # Review types and required qualifications
