@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 weather-seasons); content refs are pack data; qualified review pending.
+id: ja.unit.weather-weather-talk
+goal_id: ja.goal.a2.weather-seasons
+title: Talking about weather
+summary: Want, become, stop (rain), deepening.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.weather2.hoshii
+  - ja.lex.weather2.naru
+  - ja.lex.weather2.yamu
+  - ja.lex.weather2.fukau
+  - ja.lex.weather2.amu
+  - ja.sent.despite-rain
+  allowed_grammar:
+  - ja.grammar.conjunction.noni-contrast
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.weather-weather-talk-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.weather2.hoshii
+  - ja.lex.weather2.naru
+  - ja.lex.weather2.yamu
+  - ja.lex.weather2.fukau
+  - ja.lex.weather2.amu
+  - ja.sent.despite-rain
+  - ja.sent.despite-rain
+- id: ja.activity.weather-weather-talk-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.weather2.hoshii
+  - ja.lex.weather2.naru
+  - ja.lex.weather2.yamu
+  - ja.lex.weather2.fukau
+  - ja.lex.weather2.amu
+  - ja.sent.despite-rain
+- id: ja.activity.weather-weather-talk-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.weather2.hoshii
+  - ja.lex.weather2.naru
+  - ja.lex.weather2.yamu
+  - ja.lex.weather2.fukau
+  - ja.lex.weather2.amu
+  - ja.sent.despite-rain
+- id: ja.activity.weather-weather-talk-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.weather2.hoshii
+  - ja.lex.weather2.naru
+  - ja.lex.weather2.yamu
+  - ja.lex.weather2.fukau
+  - ja.lex.weather2.amu
+  - ja.sent.despite-rain
+- id: ja.activity.weather-weather-talk-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.despite-rain

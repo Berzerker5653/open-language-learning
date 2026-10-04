@@ -1,0 +1,106 @@
+# ai-assisted draft unit (Mode B A2 weather-seasons); content refs are pack data; qualified review pending.
+id: ja.unit.weather-seasons
+goal_id: ja.goal.a2.weather-seasons
+title: Four seasons
+summary: Spring, summer, autumn, winter, season.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.weather2.haru
+  - ja.lex.weather2.natsu
+  - ja.lex.weather2.aki
+  - ja.lex.weather2.fuyu
+  - ja.lex.weather2.kisetsu
+  - ja.sent.spring-sakura
+  - ja.sent.summer-hanabi
+  - ja.sent.autumn-momiji
+  - ja.sent.winter-yuki
+  allowed_grammar:
+  - ja.grammar.particle.ni-destination
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.weather-seasons-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.weather2.haru
+  - ja.lex.weather2.natsu
+  - ja.lex.weather2.aki
+  - ja.lex.weather2.fuyu
+  - ja.lex.weather2.kisetsu
+  - ja.sent.spring-sakura
+  - ja.sent.summer-hanabi
+  - ja.sent.autumn-momiji
+  - ja.sent.winter-yuki
+  - ja.sent.spring-sakura
+  - ja.sent.summer-hanabi
+  - ja.sent.autumn-momiji
+  - ja.sent.winter-yuki
+- id: ja.activity.weather-seasons-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.weather2.haru
+  - ja.lex.weather2.natsu
+  - ja.lex.weather2.aki
+  - ja.lex.weather2.fuyu
+  - ja.lex.weather2.kisetsu
+  - ja.sent.spring-sakura
+  - ja.sent.summer-hanabi
+  - ja.sent.autumn-momiji
+  - ja.sent.winter-yuki
+- id: ja.activity.weather-seasons-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.weather2.haru
+  - ja.lex.weather2.natsu
+  - ja.lex.weather2.aki
+  - ja.lex.weather2.fuyu
+  - ja.lex.weather2.kisetsu
+  - ja.sent.spring-sakura
+  - ja.sent.summer-hanabi
+  - ja.sent.autumn-momiji
+  - ja.sent.winter-yuki
+- id: ja.activity.weather-seasons-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.weather2.haru
+  - ja.lex.weather2.natsu
+  - ja.lex.weather2.aki
+  - ja.lex.weather2.fuyu
+  - ja.lex.weather2.kisetsu
+  - ja.sent.spring-sakura
+  - ja.sent.summer-hanabi
+  - ja.sent.autumn-momiji
+  - ja.sent.winter-yuki
+- id: ja.activity.weather-seasons-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.spring-sakura
+- id: ja.activity.weather-seasons-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.summer-hanabi
+- id: ja.activity.weather-seasons-cloze2
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.autumn-momiji
+- id: ja.activity.weather-seasons-cloze3
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.winter-yuki

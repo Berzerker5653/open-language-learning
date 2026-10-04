@@ -1,0 +1,58 @@
+# ai-assisted draft unit (Mode B A2 weather-seasons); content refs are pack data; qualified review pending.
+id: ja.unit.weather-small-big
+goal_id: ja.goal.a2.weather-seasons
+title: Small and new
+summary: Small, new, old, clean, dirty.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.weather2.chiisai
+  - ja.lex.weather2.atarashii
+  - ja.lex.weather2.furui
+  - ja.lex.weather2.kirei
+  - ja.lex.weather2.kitanai
+  allowed_grammar:
+  - ja.grammar.adjectives.na-attributive
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.weather-small-big-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.weather2.chiisai
+  - ja.lex.weather2.atarashii
+  - ja.lex.weather2.furui
+  - ja.lex.weather2.kirei
+  - ja.lex.weather2.kitanai
+- id: ja.activity.weather-small-big-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.weather2.chiisai
+  - ja.lex.weather2.atarashii
+  - ja.lex.weather2.furui
+  - ja.lex.weather2.kirei
+  - ja.lex.weather2.kitanai
+- id: ja.activity.weather-small-big-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.weather2.chiisai
+  - ja.lex.weather2.atarashii
+  - ja.lex.weather2.furui
+  - ja.lex.weather2.kirei
+  - ja.lex.weather2.kitanai
+- id: ja.activity.weather-small-big-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.weather2.chiisai
+  - ja.lex.weather2.atarashii
+  - ja.lex.weather2.furui
+  - ja.lex.weather2.kirei
+  - ja.lex.weather2.kitanai

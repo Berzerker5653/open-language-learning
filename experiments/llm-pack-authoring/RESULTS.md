@@ -416,3 +416,10 @@ Goal `ja.goal.a2.communication` (prereq health-body, mirrored), 10
 units, 50-word `lexicon/communication.jsonl`, 2 grammar
 (`verb.tara-conditional`, `conjunction.node-reason`), 8 sentences,
 1 assessment. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 12: A2 units 170-179 (weather-seasons)
+
+Goal `ja.goal.a2.weather-seasons` (prereq communication, mirrored), 10
+units, 50-word `lexicon/weather2.jsonl` (initial write clobbered baseline
+`weather.jsonl`; restored from git, shard renamed), 1 grammar
+(`conjunction.noni-contrast`), 9 sentences, 1 assessment. Score: **7/7**.

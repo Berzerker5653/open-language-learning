@@ -1,0 +1,63 @@
+# ai-assisted draft unit (Mode B A2 weather-seasons); content refs are pack data; qualified review pending.
+id: ja.unit.weather-temperature
+goal_id: ja.goal.a2.weather-seasons
+title: Temperature
+summary: Temperature, humidity, air pressure, heat, cold.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.weather2.ondo
+  - ja.lex.weather2.shitsudo
+  - ja.lex.weather2.kiatsu
+  - ja.lex.weather2.atsusa
+  - ja.lex.weather2.samusa
+  - ja.sent.temperature-drop
+  allowed_grammar:
+  - ja.grammar.copula.polite-desu
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.weather-temperature-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.weather2.ondo
+  - ja.lex.weather2.shitsudo
+  - ja.lex.weather2.kiatsu
+  - ja.lex.weather2.atsusa
+  - ja.lex.weather2.samusa
+  - ja.sent.temperature-drop
+- id: ja.activity.weather-temperature-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.weather2.ondo
+  - ja.lex.weather2.shitsudo
+  - ja.lex.weather2.kiatsu
+  - ja.lex.weather2.atsusa
+  - ja.lex.weather2.samusa
+  - ja.sent.temperature-drop
+- id: ja.activity.weather-temperature-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.weather2.ondo
+  - ja.lex.weather2.shitsudo
+  - ja.lex.weather2.kiatsu
+  - ja.lex.weather2.atsusa
+  - ja.lex.weather2.samusa
+  - ja.sent.temperature-drop
+- id: ja.activity.weather-temperature-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.weather2.ondo
+  - ja.lex.weather2.shitsudo
+  - ja.lex.weather2.kiatsu
+  - ja.lex.weather2.atsusa
+  - ja.lex.weather2.samusa
+  - ja.sent.temperature-drop

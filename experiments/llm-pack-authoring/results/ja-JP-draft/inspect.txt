@@ -4,8 +4,8 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2420  2dda84132085  activities/scenarios/first-meeting.yaml
         1561  6b8655e2f7b6  activities/scenarios/ordering.yaml
         1486  b56884663696  activities/scenarios/shopping.yaml
-        8740  6b52d3dda8cf  assessments/definitions.jsonl
-       24672  2ebb330b4b71  curriculum/goals.yaml
+        9089  56d735f0103d  assessments/definitions.jsonl
+       25512  811fdfbc8935  curriculum/goals.yaml
          919  ad3f5f62d1b3  curriculum/units/000-onramp-greeting.yaml
         1514  bd53db6f2cfe  curriculum/units/010-kana-hiragana-vowels-ko.yaml
         1957  c02be8a37693  curriculum/units/011-kana-hiragana-stn.yaml
@@ -144,8 +144,18 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         1734  0e63722f540b  curriculum/units/167-how-to.yaml
         2062  1a8caa3c0adb  curriculum/units/168-translation.yaml
         1695  90cdfc415e83  curriculum/units/169-language-class.yaml
-       19540  dbe03c03dd31  grammar/concepts.jsonl
-        4228  a0b5e4cc5257  grammar/dependencies.yaml
+        2680  395c6f78e945  curriculum/units/170-seasons.yaml
+        1906  6492cbe7c830  curriculum/units/171-rainy-season.yaml
+        1909  381983e85702  curriculum/units/172-storms.yaml
+        1879  68b549360dba  curriculum/units/173-forecast.yaml
+        1729  162a8947781c  curriculum/units/174-temperature.yaml
+        1538  564896ba5652  curriculum/units/175-cold-warm.yaml
+        1580  fd6653a3d8ef  curriculum/units/176-small-big.yaml
+        1695  cb53aea0b1b4  curriculum/units/177-winter-things.yaml
+        1971  25a5ff5ffe2c  curriculum/units/178-summer-things.yaml
+        1845  b85999ee1fb3  curriculum/units/179-weather-talk.yaml
+       20092  7ea4f03b07bc  grammar/concepts.jsonl
+        4374  cfec1e0e17cf  grammar/dependencies.yaml
        30369  1401b6e0388e  kanji/entries.jsonl
          485  860cdf8185db  language/identity.yaml
          823  5d72613ab378  language/normalization.yaml
@@ -176,6 +186,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
        42054  eefefcc4c69c  lexicon/transport.jsonl
        22174  7bb1a6586408  lexicon/verbs.jsonl
         6316  45a79fa9065d  lexicon/weather.jsonl
+       39728  2511ed628b3e  lexicon/weather2.jsonl
        40202  8c9992a52778  lexicon/work.jsonl
          621  85200bbf0cd0  licenses.jsonl
          764  89015aa9e861  manifest.yaml
@@ -184,7 +195,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
-       79568  0a70fa2b403a  sentences/entries.jsonl
+       84942  7fd4ba40303a  sentences/entries.jsonl
         3915  e270f808c26e  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml
          539  842cce82e5d5  stories/first-day.yaml

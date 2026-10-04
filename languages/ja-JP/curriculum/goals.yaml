@@ -951,3 +951,35 @@ goals:
       tool: omp
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
+  - id: ja.goal.a2.weather-seasons
+    description: 'Describe weather, seasons, and forecasts; express reasons and
+      contrasts with ので and のに.'
+    band: A2
+    framework_refs: []
+    contexts:
+    - ja.situation.home-routine
+    modalities:
+    - listening
+    - speaking
+    - reading
+    - writing
+    prerequisites:
+    - target: ja.goal.a2.communication
+      dimension: grammar-controlled
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.lex.weather2.kisetsu
+    - ja.lex.weather2.tenki-yohou
+    assessment_ids:
+    - ja.assess.weather-seasons
+    transfer_required: true
+    sources:
+    - jf-standard
+    - ai-drafted-extension
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next-iq3_s
+      date: '2026-10-04'

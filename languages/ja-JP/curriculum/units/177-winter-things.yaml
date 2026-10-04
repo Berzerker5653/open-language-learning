@@ -1,0 +1,63 @@
+# ai-assisted draft unit (Mode B A2 weather-seasons); content refs are pack data; qualified review pending.
+id: ja.unit.weather-winter-things
+goal_id: ja.goal.a2.weather-seasons
+title: Winter things
+summary: Frost, ice, snowy road, snowmelt.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.weather2.shimo
+  - ja.lex.weather2.kouri
+  - ja.lex.weather2.yukidoke
+  - ja.lex.weather2.naga
+  - ja.lex.weather2.mijikai
+  - ja.sent.winter-yuki
+  allowed_grammar:
+  - ja.grammar.particle.de-means
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.weather-winter-things-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.weather2.shimo
+  - ja.lex.weather2.kouri
+  - ja.lex.weather2.yukidoke
+  - ja.lex.weather2.naga
+  - ja.lex.weather2.mijikai
+  - ja.sent.winter-yuki
+- id: ja.activity.weather-winter-things-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.weather2.shimo
+  - ja.lex.weather2.kouri
+  - ja.lex.weather2.yukidoke
+  - ja.lex.weather2.naga
+  - ja.lex.weather2.mijikai
+  - ja.sent.winter-yuki
+- id: ja.activity.weather-winter-things-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.weather2.shimo
+  - ja.lex.weather2.kouri
+  - ja.lex.weather2.yukidoke
+  - ja.lex.weather2.naga
+  - ja.lex.weather2.mijikai
+  - ja.sent.winter-yuki
+- id: ja.activity.weather-winter-things-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.weather2.shimo
+  - ja.lex.weather2.kouri
+  - ja.lex.weather2.yukidoke
+  - ja.lex.weather2.naga
+  - ja.lex.weather2.mijikai
+  - ja.sent.winter-yuki

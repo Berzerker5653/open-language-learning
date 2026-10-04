@@ -1,0 +1,58 @@
+# ai-assisted draft unit (Mode B A2 weather-seasons); content refs are pack data; qualified review pending.
+id: ja.unit.weather-cold-warm
+goal_id: ja.goal.a2.weather-seasons
+title: Hot and cold
+summary: Strong, weak, fast, slow, big, small.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.weather2.tsuyoi
+  - ja.lex.weather2.yowai
+  - ja.lex.weather2.hayai
+  - ja.lex.weather2.osoi
+  - ja.lex.weather2.ookii
+  allowed_grammar:
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.weather-cold-warm-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.weather2.tsuyoi
+  - ja.lex.weather2.yowai
+  - ja.lex.weather2.hayai
+  - ja.lex.weather2.osoi
+  - ja.lex.weather2.ookii
+- id: ja.activity.weather-cold-warm-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.weather2.tsuyoi
+  - ja.lex.weather2.yowai
+  - ja.lex.weather2.hayai
+  - ja.lex.weather2.osoi
+  - ja.lex.weather2.ookii
+- id: ja.activity.weather-cold-warm-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.weather2.tsuyoi
+  - ja.lex.weather2.yowai
+  - ja.lex.weather2.hayai
+  - ja.lex.weather2.osoi
+  - ja.lex.weather2.ookii
+- id: ja.activity.weather-cold-warm-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.weather2.tsuyoi
+  - ja.lex.weather2.yowai
+  - ja.lex.weather2.hayai
+  - ja.lex.weather2.osoi
+  - ja.lex.weather2.ookii

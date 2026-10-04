@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 weather-seasons); content refs are pack data; qualified review pending.
+id: ja.unit.weather-forecast
+goal_id: ja.goal.a2.weather-seasons
+title: Forecast
+summary: Weather forecast, forecast, fair day, climate.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.weather2.tenki-yohou
+  - ja.lex.weather2.yohou
+  - ja.lex.weather2.kijitsu
+  - ja.lex.weather2.kishou
+  - ja.lex.weather2.kiri
+  - ja.sent.forecast-today
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.weather-forecast-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.weather2.tenki-yohou
+  - ja.lex.weather2.yohou
+  - ja.lex.weather2.kijitsu
+  - ja.lex.weather2.kishou
+  - ja.lex.weather2.kiri
+  - ja.sent.forecast-today
+  - ja.sent.forecast-today
+- id: ja.activity.weather-forecast-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.weather2.tenki-yohou
+  - ja.lex.weather2.yohou
+  - ja.lex.weather2.kijitsu
+  - ja.lex.weather2.kishou
+  - ja.lex.weather2.kiri
+  - ja.sent.forecast-today
+- id: ja.activity.weather-forecast-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.weather2.tenki-yohou
+  - ja.lex.weather2.yohou
+  - ja.lex.weather2.kijitsu
+  - ja.lex.weather2.kishou
+  - ja.lex.weather2.kiri
+  - ja.sent.forecast-today
+- id: ja.activity.weather-forecast-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.weather2.tenki-yohou
+  - ja.lex.weather2.yohou
+  - ja.lex.weather2.kijitsu
+  - ja.lex.weather2.kishou
+  - ja.lex.weather2.kiri
+  - ja.sent.forecast-today
+- id: ja.activity.weather-forecast-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.forecast-today
