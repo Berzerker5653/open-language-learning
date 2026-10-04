@@ -36,6 +36,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-34 | PLAT-001 build config only: win/mac bundle targets + icons, CI compile-check matrix, docs/13 marks win/mac untested (Linux-only runtime testing) (`state/notes/K-34.md`) | PLAT-001 |
 | K-35 | catalog happy path: `langpack catalog` generates packs.json entries (hash/version/size/tested_platforms) from built .lpk archives; `scripts/build-catalog.sh` builds all shipped pack artifacts; live catalog merge stays O-05 (`state/notes/K-35.md`) | GAP-VERIFY gap |
 | K-32 | default pack replaced: on-ramp `org.openlanguage.ja-jp.reference` bundled (owner CC BY 4.0 decision 2026-10-04 unblocked install), ja-demo retired from candidates, pronunciation demo pack-driven, audio allowlists generalized (`state/notes/K-32.md`) | JA-A1-001 |
+| TTS-002 | TTS variants per ADR-0009: directory-capable model catalog (archive-pinned, corruption-aware), kokoro+sherpa payload entries, layered TTS resolution (bundled/model/LTS_TTS_DIR/bench), `scripts/build-tts-variants.sh` staging + tauri overlay, payload-scoped GPL notices & source offer, attribution UI in Languages (`state/notes/TTS-002.md`) | TTS-002 |
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 
@@ -56,7 +57,6 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
-| TTS-002 | speech | TTS distribution variants per ADR-0009 (owner decision 2026-10-04): TTS-bundled vs bare downloads, GPL notices scoped to payload, directory-capable model catalog for in-app TTS download, bring-your-own runtime path | TTS-002 |
 
 ## owner — human/owner gates (never self-certifiable)
 

@@ -3305,25 +3305,7 @@ fn speech_audio_at(
             source: "licensed-recording",
         });
     }
-    let vendor = match std::env::var("LTS_BENCH_VENDOR") {
-        Ok(v) => PathBuf::from(v),
-        Err(_) => match std::env::var("HOME") {
-            Ok(h) => PathBuf::from(h).join(".cache/lts-bench"),
-            Err(_) => return Err("tts-runtime-unavailable".into()),
-        },
-    };
-    let kokoro = vendor.join("kokoro-multi-lang-v1_0");
-    let tts = lts_speech_runtime::tts::SherpaSubprocessTts {
-        binary: vendor.join("sherpa-onnx-v1.13.8-linux-x64-shared/bin/sherpa-onnx-offline-tts"),
-        model: kokoro.join("model.onnx"),
-        voices: kokoro.join("voices.bin"),
-        tokens: kokoro.join("tokens.txt"),
-        data_dir: kokoro.join("espeak-ng-data"),
-        lang: "ja".into(),
-    };
-    if !tts.binary.exists() {
-        return Err("tts-runtime-unavailable".into());
-    }
+    let (_, tts) = resolve_tts(data).ok_or("tts-runtime-unavailable")?;
     let audio = tts.synthesize(
         text,
         &lts_speech_api::VoiceRef {
@@ -3338,6 +3320,133 @@ fn speech_audio_at(
             source: "model-output",
         }),
         other => Err(format!("tts:{}", outcome_reason(&other))),
+    }
+}
+
+/// Where the TTS-bundled variant's payload lives (`<resource_dir>/tts`).
+/// Set once at startup; unset for bare/dev builds (ADR-0009).
+static BUNDLED_TTS: std::sync::OnceLock<PathBuf> = std::sync::OnceLock::new();
+
+/// TTS-002 (ADR-0009): resolve the offline TTS runtime + model from,
+/// in priority order:
+/// 1. `bundled` — the TTS-bundled variant's staged payload
+///    (`<resource_dir>/tts/{sherpa,kokoro}`);
+/// 2. `model` — model-manager installs (bare variant + optional in-app
+///    download of the same payload);
+/// 3. `env` — bring-your-own: `LTS_TTS_DIR` containing `sherpa/` (with
+///    `bin/sherpa-onnx-offline-tts`) and `kokoro/` (the export);
+/// 4. `bench` — development bench vendor (`LTS_BENCH_VENDOR` /
+///    `~/.cache/lts-bench`; never shipped, kept for local benchmarking).
+///
+/// `None` => honest degradation (`tts-runtime-unavailable`); absence of
+/// TTS never blocks non-audio practice.
+fn resolve_tts(
+    data: &Path,
+) -> Option<(&'static str, lts_speech_runtime::tts::SherpaSubprocessTts)> {
+    let mut roots: Vec<(&'static str, PathBuf, PathBuf)> = Vec::new();
+    if let Some(b) = BUNDLED_TTS.get() {
+        roots.push(("bundled", b.join("sherpa"), b.join("kokoro")));
+    }
+    let payload = |id: &str| -> Option<PathBuf> {
+        let entry = models::load_catalog()
+            .models
+            .into_iter()
+            .find(|m| m.id == id)?;
+        let p = models::model_dir(data, &entry).join("payload");
+        p.exists().then_some(p)
+    };
+    if let (Some(rt), Some(model)) = (payload(TTS_RUNTIME_ID), payload(TTS_MODEL_ID)) {
+        roots.push(("model", rt, model));
+    }
+    if let Ok(dir) = std::env::var("LTS_TTS_DIR") {
+        let dir = PathBuf::from(dir);
+        roots.push(("env", dir.join("sherpa"), dir.join("kokoro")));
+    }
+    let vendor = match std::env::var("LTS_BENCH_VENDOR") {
+        Ok(v) => Some(PathBuf::from(v)),
+        Err(_) => std::env::var("HOME")
+            .ok()
+            .map(|h| PathBuf::from(h).join(".cache/lts-bench")),
+    };
+    if let Some(v) = vendor {
+        roots.push((
+            "bench",
+            v.join("sherpa-onnx-v1.13.8-linux-x64-shared"),
+            v.join("kokoro-multi-lang-v1_0"),
+        ));
+    }
+    for (source, runtime, model) in roots {
+        let tts = lts_speech_runtime::tts::SherpaSubprocessTts {
+            binary: runtime.join("bin/sherpa-onnx-offline-tts"),
+            model: model.join("model.onnx"),
+            voices: model.join("voices.bin"),
+            tokens: model.join("tokens.txt"),
+            data_dir: model.join("espeak-ng-data"),
+            lang: "ja".into(),
+        };
+        if tts.binary.exists() && tts.model.exists() {
+            return Some((source, tts));
+        }
+    }
+    None
+}
+
+/// Component attribution the TTS payload requires (ADR-0009): the
+/// espeak-ng GPL-3.0 obligations are carried for the payload, and the
+/// UI must show them whenever a payload is active.
+#[derive(Serialize)]
+struct TtsAttribution {
+    name: &'static str,
+    license: &'static str,
+    role: &'static str,
+}
+
+fn tts_attribution() -> Vec<TtsAttribution> {
+    [
+        ("espeak-ng", "GPL-3.0", "pronunciation data for synthesis"),
+        ("sherpa-onnx", "Apache-2.0", "speech runtime"),
+        ("ONNX Runtime", "MIT", "model inference engine"),
+        ("Kokoro", "Apache-2.0", "Japanese voice model"),
+    ]
+    .into_iter()
+    .map(|(name, license, role)| TtsAttribution {
+        name,
+        license,
+        role,
+    })
+    .collect()
+}
+
+/// The two directory catalog entries that make up the downloadable TTS
+/// payload (ADR-0009).
+const TTS_RUNTIME_ID: &str = "org.openlanguage.speech.sherpa-onnx-runtime";
+const TTS_MODEL_ID: &str = "org.openlanguage.speech.kokoro-multi-lang";
+
+/// Which TTS payload is active (if any), the install state of the
+/// in-app payload models, and the required attribution.
+#[derive(Serialize)]
+struct TtsStatus {
+    source: &'static str,
+    components: Vec<TtsAttribution>,
+    models: Vec<models::ModelStatus>,
+}
+
+#[tauri::command]
+fn tts_status() -> TtsStatus {
+    let data = data_dir();
+    let source = resolve_tts(&data).map(|(s, _)| s).unwrap_or("none");
+    let models = models::model_status(&data)
+        .into_iter()
+        .filter(|m| m.id == TTS_RUNTIME_ID || m.id == TTS_MODEL_ID)
+        .collect();
+    TtsStatus {
+        components: if source == "none" {
+            Vec::new()
+        } else {
+            tts_attribution()
+        },
+        models,
+        source,
     }
 }
 
@@ -3458,6 +3567,13 @@ pub fn run() {
                     _ => PermissionResponse::Deny,
                 })
                 .build()?;
+            // TTS-002 (ADR-0009): the TTS-bundled variant stages its
+            // payload under `<resource_dir>/tts`; bare builds have no
+            // such directory and degrade honestly.
+            use tauri::Manager;
+            if let Ok(rd) = app.path().resource_dir() {
+                let _ = BUNDLED_TTS.set(rd.join("tts"));
+            }
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -3480,6 +3596,7 @@ pub fn run() {
             pronunciation_demo,
             reference_audio,
             speech_audio,
+            tts_status,
             world_state,
             catalog_packs,
             install_catalog_pack,
@@ -3607,6 +3724,22 @@ mod tests {
         // Packs without phonology data abstain rather than invent content.
         install_bundled_pack(data, "org.openlanguage.eo-demo").unwrap();
         assert!(pronunciation_demo_at(data, "org.openlanguage.eo-demo").is_err());
+    }
+
+    #[test]
+    fn resolve_tts_prefers_model_manager_installs() {
+        // ADR-0009: an in-app model install must win over the dev bench
+        // vendor (which may exist on developer machines).
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let rt = data.join("models/org.openlanguage.speech.sherpa-onnx-runtime/1.13.8/payload/bin");
+        std::fs::create_dir_all(&rt).unwrap();
+        std::fs::write(rt.join("sherpa-onnx-offline-tts"), b"fake").unwrap();
+        let model = data.join("models/org.openlanguage.speech.kokoro-multi-lang/1.0.0/payload");
+        std::fs::create_dir_all(&model).unwrap();
+        std::fs::write(model.join("model.onnx"), b"fake").unwrap();
+        let (source, _tts) = resolve_tts(data).expect("model payload must resolve");
+        assert_eq!(source, "model");
     }
 
     fn cid(s: &str) -> lts_domain::ContentId {

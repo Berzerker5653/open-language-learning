@@ -45,6 +45,9 @@ function render(over: Partial<Parameters<typeof LanguagePanel>[0]> = {}) {
       onSwitch={() => {}}
       onInstallCatalog={() => {}}
       onImport={() => {}}
+      tts={null}
+      onInstallModel={() => {}}
+      onDeleteModel={() => {}}
       {...over}
     />,
   );
@@ -93,5 +96,54 @@ describe("language panel", () => {
   it("surfaces install errors", () => {
     const html = render({ error: "install rejected: bad archive" });
     expect(html).toContain("install rejected");
+  });
+
+  it("shows required attribution whenever a TTS payload is active", () => {
+    const html = render({
+      tts: {
+        source: "bundled",
+        components: [
+          { name: "espeak-ng", license: "GPL-3.0", role: "pronunciation data for synthesis" },
+          { name: "sherpa-onnx", license: "Apache-2.0", role: "speech runtime" },
+          { name: "ONNX Runtime", license: "MIT", role: "model inference engine" },
+          { name: "Kokoro", license: "Apache-2.0", role: "Japanese voice model" },
+        ],
+        models: [
+          {
+            id: "org.openlanguage.speech.kokoro-multi-lang",
+            version: "1.0.0",
+            license_code: "Apache-2.0",
+            installed: true,
+          },
+        ],
+      },
+    });
+    expect(html).toContain("included in this download");
+    expect(html).toContain("espeak-ng");
+    expect(html).toContain("GPL-3.0");
+    expect(html).toContain("ONNX Runtime");
+    expect(html).toContain("Japanese voice model (Kokoro)");
+    expect(html).toContain("Remove");
+  });
+
+  it("degrades honestly when no TTS payload is present", () => {
+    const html = render({
+      tts: {
+        source: "none",
+        components: [],
+        models: [
+          {
+            id: "org.openlanguage.speech.sherpa-onnx-runtime",
+            version: "1.13.8",
+            license_code: "Apache-2.0",
+            installed: false,
+          },
+        ],
+      },
+    });
+    expect(html).toContain("No speech synthesis is installed");
+    expect(html).toContain("Audio activities are disabled");
+    expect(html).toContain("Download");
+    expect(html).not.toContain("GPL-3.0");
   });
 });

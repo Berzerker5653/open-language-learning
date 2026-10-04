@@ -1,6 +1,5 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-10-03",
   "active_task": null,
   "tasks": {
     "BOOT-001": {
@@ -738,6 +737,16 @@
       "evidence": [
         "state/notes/K-32.md",
         "state/evidence/K-32/cutover-2026-10-04.txt"
+      ]
+    }
+    ,
+    "TTS-002": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/TTS-002.md",
+        "state/evidence/TTS-002/implementation-2026-10-04.txt"
       ]
     }
   },

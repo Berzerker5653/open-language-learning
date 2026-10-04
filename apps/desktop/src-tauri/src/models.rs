@@ -23,6 +23,20 @@ pub struct ModelFile {
     pub url: String,
     pub sha256: String,
     pub size_bytes: u64,
+    /// TTS-002 (ADR-0009): when true, `url` is a zip archive and `path`
+    /// is the directory it expands into. The archive hash pins every
+    /// member (multi-file pin); extraction records per-member hashes so
+    /// corruption of any member reads as missing.
+    #[serde(default)]
+    pub dir: bool,
+}
+
+/// One extracted member of a directory entry, hashed at install time.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct HashedFile {
+    pub path: String,
+    pub sha256: String,
+    pub size_bytes: u64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -77,6 +91,8 @@ pub struct InstalledRecord {
     pub license_code: String,
     pub license_model: String,
     pub files: Vec<ModelFile>,
+    #[serde(default)]
+    pub extracted: Vec<HashedFile>,
     pub installed_at: String,
 }
 
@@ -117,6 +133,7 @@ pub fn install_model_files(
     fs::create_dir_all(&staging).map_err(|e| e.to_string())?;
 
     let result = (|| -> Result<InstalledRecord, String> {
+        let mut extracted: Vec<HashedFile> = Vec::new();
         for f in &entry.files {
             let bytes = fetch(f)?;
             let mut hasher = Sha256::new();
@@ -136,11 +153,15 @@ pub fn install_model_files(
                     bytes.len()
                 ));
             }
-            let out = staging.join(&f.path);
-            if let Some(parent) = out.parent() {
-                fs::create_dir_all(parent).map_err(|e| e.to_string())?;
+            if f.dir {
+                extracted.extend(extract_dir_entry(&staging, f, &bytes)?);
+            } else {
+                let out = staging.join(&f.path);
+                if let Some(parent) = out.parent() {
+                    fs::create_dir_all(parent).map_err(|e| e.to_string())?;
+                }
+                fs::write(&out, &bytes).map_err(|e| e.to_string())?;
             }
-            fs::write(&out, &bytes).map_err(|e| e.to_string())?;
         }
         let record = InstalledRecord {
             id: entry.id.clone(),
@@ -149,6 +170,7 @@ pub fn install_model_files(
             license_code: entry.license_code.clone(),
             license_model: entry.license_model.clone(),
             files: entry.files.clone(),
+            extracted,
             installed_at: now_rfc.to_string(),
         };
         fs::write(
@@ -171,6 +193,88 @@ pub fn install_model_files(
     result
 }
 
+/// Extract a directory entry's zip archive into `staging/<path>`.
+/// Safety: member names must be relative and contained (no absolute
+/// paths, no `..` traversal), symlinks are rejected, and the total
+/// extracted size is capped at 10x the pinned archive size (zip-bomb
+/// guard). Unix permission bits are preserved (the sherpa runtime
+/// archive carries executable modes). Returns the per-member hash
+/// manifest recorded in `installed.json` so later corruption of ANY
+/// member reads as missing.
+fn extract_dir_entry(
+    staging: &Path,
+    f: &ModelFile,
+    bytes: &[u8],
+) -> Result<Vec<HashedFile>, String> {
+    let cursor = std::io::Cursor::new(bytes);
+    let mut archive =
+        zip::ZipArchive::new(cursor).map_err(|e| format!("{}: invalid zip: {e}", f.path))?;
+    let dest = staging.join(&f.path);
+    let cap = f.size_bytes.saturating_mul(10);
+    let mut total = 0u64;
+    let mut manifest = Vec::new();
+    for i in 0..archive.len() {
+        let mut member = archive.by_index(i).map_err(|e| e.to_string())?;
+        let name = match member.enclosed_name() {
+            Some(n) if !n.as_os_str().is_empty() => n,
+            _ => return Err(format!("{}: unsafe archive member path", f.path)),
+        };
+        if member.is_dir() {
+            fs::create_dir_all(dest.join(&name)).map_err(|e| e.to_string())?;
+            continue;
+        }
+        if member.is_symlink() {
+            return Err(format!(
+                "{}: archive contains a symlink ({})",
+                f.path,
+                name.display()
+            ));
+        }
+        let out = dest.join(&name);
+        if let Some(parent) = out.parent() {
+            fs::create_dir_all(parent).map_err(|e| e.to_string())?;
+        }
+        let mut data = Vec::new();
+        member.read_to_end(&mut data).map_err(|e| e.to_string())?;
+        total += data.len() as u64;
+        if total > cap {
+            return Err(format!(
+                "{}: extracted size exceeds 10x pinned archive size",
+                f.path
+            ));
+        }
+        let mut hasher = Sha256::new();
+        hasher.update(&data);
+        manifest.push(HashedFile {
+            path: format!("{}/{}", f.path, name.to_string_lossy()),
+            sha256: format!("{:x}", hasher.finalize()),
+            size_bytes: data.len() as u64,
+        });
+        fs::write(&out, &data).map_err(|e| e.to_string())?;
+        #[cfg(unix)]
+        if let Some(mode) = member.unix_mode() {
+            use std::os::unix::fs::PermissionsExt;
+            fs::set_permissions(&out, fs::Permissions::from_mode(mode & 0o7777))
+                .map_err(|e| e.to_string())?;
+        }
+    }
+    Ok(manifest)
+}
+
+fn hash_matches(path: &Path, want: &str) -> Result<bool, String> {
+    let mut file = fs::File::open(path).map_err(|e| e.to_string())?;
+    let mut hasher = Sha256::new();
+    let mut buf = [0u8; 1 << 16];
+    loop {
+        let n = file.read(&mut buf).map_err(|e| e.to_string())?;
+        if n == 0 {
+            break;
+        }
+        hasher.update(&buf[..n]);
+    }
+    Ok(format!("{:x}", hasher.finalize()) == want)
+}
+
 /// Verify an installed model still matches its recorded checksums
 /// (guards against silent corruption; mismatch => treat as missing).
 pub fn verify_installed(data: &Path, entry: &ModelEntry) -> Result<bool, String> {
@@ -180,17 +284,17 @@ pub fn verify_installed(data: &Path, entry: &ModelEntry) -> Result<bool, String>
     )
     .map_err(|e| e.to_string())?;
     for f in &record.files {
-        let mut file = fs::File::open(dir.join(&f.path)).map_err(|e| e.to_string())?;
-        let mut hasher = Sha256::new();
-        let mut buf = [0u8; 1 << 16];
-        loop {
-            let n = file.read(&mut buf).map_err(|e| e.to_string())?;
-            if n == 0 {
-                break;
+        if f.dir {
+            // Directory entries keep no archive on disk; verify the
+            // recorded per-member hashes instead.
+            for h in &record.extracted {
+                if !hash_matches(&dir.join(&h.path), &h.sha256)? {
+                    return Ok(false);
+                }
             }
-            hasher.update(&buf[..n]);
+            continue;
         }
-        if format!("{:x}", hasher.finalize()) != f.sha256 {
+        if !hash_matches(&dir.join(&f.path), &f.sha256)? {
             return Ok(false);
         }
     }
@@ -243,6 +347,7 @@ mod tests {
                 // sha256("hello")
                 sha256: "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824".into(),
                 size_bytes: 5,
+                dir: false,
             }],
             license_code: "MIT".into(),
             license_model: "test".into(),
@@ -275,6 +380,106 @@ mod tests {
         // Removable: status returns to missing.
         delete_model(data, &e).unwrap();
         assert!(!model_dir(data, &e).exists());
+    }
+
+    fn zip_bytes(members: Vec<(&str, &[u8], u32)>) -> Vec<u8> {
+        use std::io::Write;
+        let mut buf = std::io::Cursor::new(Vec::new());
+        {
+            let mut w = zip::ZipWriter::new(&mut buf);
+            for (name, data, mode) in members {
+                let opts = zip::write::SimpleFileOptions::default().unix_permissions(mode);
+                w.start_file(name, opts).unwrap();
+                w.write_all(data).unwrap();
+            }
+            w.finish().unwrap();
+        }
+        buf.into_inner()
+    }
+
+    fn dir_entry(archive: &[u8]) -> ModelEntry {
+        let mut hasher = Sha256::new();
+        hasher.update(archive);
+        ModelEntry {
+            id: "test.dirmodel".into(),
+            version: "1.0.0".into(),
+            runtime: "test".into(),
+            tier: "development".into(),
+            files: vec![ModelFile {
+                path: "payload".into(),
+                url: "unused".into(),
+                sha256: format!("{:x}", hasher.finalize()),
+                size_bytes: archive.len() as u64,
+                dir: true,
+            }],
+            license_code: "Apache-2.0".into(),
+            license_model: "test".into(),
+            source: "test".into(),
+        }
+    }
+
+    #[test]
+    fn directory_entry_installs_verifies_and_rejects_unsafe_archives() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let archive = zip_bytes(vec![
+            ("model.onnx", b"weights".as_slice(), 0o644),
+            ("espeak-ng-data/index", b"idx".as_slice(), 0o644),
+            ("bin/tool", b"#!/bin/sh".as_slice(), 0o755),
+        ]);
+        let e = dir_entry(&archive);
+
+        let rec =
+            install_model_files(data, &e, "2026-10-04T00:00:00Z", |_| Ok(archive.clone())).unwrap();
+        assert_eq!(rec.extracted.len(), 3);
+        let dir = model_dir(data, &e);
+        assert!(dir.join("payload/espeak-ng-data/index").exists());
+        // Executable modes survive extraction (runtime binaries must run).
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::PermissionsExt;
+            let mode = fs::metadata(dir.join("payload/bin/tool"))
+                .unwrap()
+                .permissions()
+                .mode();
+            assert_ne!(mode & 0o111, 0);
+        }
+        assert!(verify_installed(data, &e).unwrap());
+
+        // Corruption of ANY member reads as missing.
+        fs::write(dir.join("payload/espeak-ng-data/index"), b"tamper").unwrap();
+        assert!(!verify_installed(data, &e).unwrap());
+
+        // Path traversal rejected: nothing escapes the model dir and
+        // staging is cleaned (same id as the install above, so check
+        // the escaped path and the staging sibling, not the model dir).
+        let evil = zip_bytes(vec![("../evil", b"x".as_slice(), 0o644)]);
+        let e2 = dir_entry(&evil);
+        assert!(
+            install_model_files(data, &e2, "2026-10-04T00:00:00Z", |_| Ok(evil.clone())).is_err()
+        );
+        assert!(!data.join("evil").exists());
+        assert!(!model_dir(data, &e).with_extension("staging").exists());
+
+        // Symlinks rejected: no member created, staging cleaned.
+        let mut lbuf = std::io::Cursor::new(Vec::new());
+        {
+            let mut w = zip::ZipWriter::new(&mut lbuf);
+            w.add_symlink(
+                "sneaky",
+                "/etc/passwd",
+                zip::write::SimpleFileOptions::default(),
+            )
+            .unwrap();
+            w.finish().unwrap();
+        }
+        let link = lbuf.into_inner();
+        let e3 = dir_entry(&link);
+        assert!(
+            install_model_files(data, &e3, "2026-10-04T00:00:00Z", |_| Ok(link.clone())).is_err()
+        );
+        assert!(!model_dir(data, &e).join("payload/sneaky").exists());
+        assert!(!model_dir(data, &e).with_extension("staging").exists());
     }
 
     #[test]

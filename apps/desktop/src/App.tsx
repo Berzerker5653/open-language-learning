@@ -16,7 +16,12 @@ import {
   type WorldEnvironment,
 } from "./home";
 import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./pronunciation";
-import { LanguagePanel, type CatalogEntry, type InstalledPack } from "./language";
+import {
+  LanguagePanel,
+  type CatalogEntry,
+  type InstalledPack,
+  type TtsStatus,
+} from "./language";
 import { WritingPractice, type WritingTaskView } from "./writing";
 import { PracticeRunner, type PracticeTaskView } from "./practice";
 import {
@@ -124,6 +129,7 @@ export function App() {
   const [catalogStatus, setCatalogStatus] = useState("no-catalog-url");
   const [audioMsg, setAudioMsg] = useState<string | null>(null);
   const [langError, setLangError] = useState<string | null>(null);
+  const [ttsStatus, setTtsStatus] = useState<TtsStatus | null>(null);
   const [onboardError, setOnboardError] = useState<string | null>(null);
   const [writingTask, setWritingTask] = useState<WritingTaskView | null>(null);
   const [writingScaffold, setWritingScaffold] = useState<{
@@ -309,6 +315,33 @@ export function App() {
       setLangError(String(e));
     }
     await refreshLanguages();
+  }
+
+  async function refreshTts() {
+    if (!inv) return;
+    setTtsStatus((await inv("tts_status")) as TtsStatus);
+  }
+
+  async function installTtsModel(modelId: string) {
+    if (!inv) return;
+    try {
+      await inv("install_model", { modelId });
+      setLangError(null);
+    } catch (e) {
+      setLangError(String(e));
+    }
+    await refreshTts();
+  }
+
+  async function deleteTtsModel(modelId: string) {
+    if (!inv) return;
+    try {
+      await inv("delete_model", { modelId });
+      setLangError(null);
+    } catch (e) {
+      setLangError(String(e));
+    }
+    await refreshTts();
   }
 
   async function createProfile() {
@@ -1279,6 +1312,7 @@ export function App() {
             onClick={() => {
               setRoute("language");
               void refreshLanguages();
+              void refreshTts();
             }}
           >
             Languages
@@ -1781,6 +1815,9 @@ export function App() {
           error={langError}
           onSwitch={(id) => void switchLearning(id)}
           onInstallCatalog={(id) => void installCatalogPack(id)}
+          tts={ttsStatus}
+          onInstallModel={(id) => void installTtsModel(id)}
+          onDeleteModel={(id) => void deleteTtsModel(id)}
           onImport={(b64) => void importPack(b64)}
         />
       ) : route === "scenarios" ? (

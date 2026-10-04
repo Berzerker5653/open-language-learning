@@ -1,0 +1,45 @@
+TTS-002 implementation evidence — 2026-10-04
+
+Directory-capable model catalog (models.rs + models/catalog.json)
+- ModelFile.dir flag: url = zip archive, path = target directory;
+  archive sha256 pins every member; extraction rejects traversal
+  (enclosed_name) and symlinks, caps extracted size at 10x archive,
+  preserves unix modes; per-member hashes recorded in installed.json
+  and re-verified by verify_installed (corruption of any member reads
+  as missing). Staged install + atomic rename unchanged.
+- Catalog gains two directory entries: kokoro-multi-lang
+  (sha 99b5c311306e674c502b0dd390dde81f6cee4a2f9b71329129c671548f4e2b7d,
+  345065270 B) and sherpa-onnx-runtime 1.13.8
+  (sha 8157f4a2c689314f44f80cf2fc4e9054cc18d5127dd6d11d9a9eb354f06ce713,
+  30454382 B). URLs are PENDING-RELEASE-URL until O-05 publishing.
+
+TTS resolution (lib.rs resolve_tts)
+- Priority: bundled (<resource_dir>/tts, set at setup) > model-manager
+  installs > LTS_TTS_DIR (bring-your-own) > bench vendor.
+  None => tts-runtime-unavailable (unchanged honest degradation).
+- speech_audio_at now uses resolve_tts; whisper bench path untouched.
+
+Variants (scripts/build-tts-variants.sh)
+- Stages dist/variants/tts/resources/tts/{sherpa,kokoro} + GPL-3.0.txt,
+  Apache-2.0.txt, ONNX-Runtime-MIT.txt, NOTICE.md (source offer) and
+  emits dist/variants/tauri.tts.json overlay. Bare = default config.
+- Proof overlay is parsed: bad resource path build fails with
+  "resource path `/nonexistent-xyz` doesn't exist"; real overlay build
+  succeeds: `tauri build --debug --no-bundle --config <overlay>` ->
+  "Built application at: .../target/debug/lts-desktop".
+
+Attribution UI
+- tts_status command (source + components + payload model install
+  state); Languages panel "Speech & attribution" section: status line,
+  espeak-ng GPL-3.0 / sherpa-onnx Apache-2.0 / ONNX Runtime MIT /
+  Kokoro Apache-2.0 list when a payload is active, Download/Remove
+  buttons for the two payload models, honest "no speech synthesis"
+  copy when none.
+
+Gates
+- cargo test --workspace: 53 suites ok (lts-desktop 32, +2 new:
+  directory_entry_installs_verifies_and_rejects_unsafe_archives,
+  resolve_tts_prefers_model_manager_installs).
+- clippy --workspace --all-targets -D warnings: clean; fmt clean.
+- tsc clean; vitest desktop 89 (+2 attribution tests), ui 3.
+- Smoke (bare binary, custom-protocol): marker "smoke-ok home".

@@ -26,6 +26,25 @@ export interface CatalogEntry {
   installed_version: string | null;
 }
 
+export interface TtsComponent {
+  name: string;
+  license: string;
+  role: string;
+}
+
+export interface TtsModel {
+  id: string;
+  version: string;
+  license_code: string;
+  installed: boolean;
+}
+
+export interface TtsStatus {
+  source: string;
+  components: TtsComponent[];
+  models: TtsModel[];
+}
+
 export interface LanguagePanelProps {
   installed: InstalledPack[];
   activeIds: string[];
@@ -34,6 +53,9 @@ export interface LanguagePanelProps {
   error: string | null;
   onSwitch(packId: string): void;
   onInstallCatalog(packId: string): void;
+  tts: TtsStatus | null;
+  onInstallModel(modelId: string): void;
+  onDeleteModel(modelId: string): void;
   onImport(dataB64: string): void;
 }
 
@@ -43,6 +65,19 @@ const STATUS_LABELS: Record<string, string> = {
   "no-catalog-url":
     "Community packs are coming soon — this build has no catalog configured yet. Meanwhile you can import a pack file you received from someone below.",
   "offline-no-cache": "Offline, and no catalog has been fetched on this device yet.",
+};
+
+const TTS_SOURCE_LABELS: Record<string, string> = {
+  bundled: "Speech synthesis is included in this download.",
+  model: "Speech synthesis is installed as a model download.",
+  env: "Speech synthesis uses the local runtime you configured (LTS_TTS_DIR).",
+  bench: "Speech synthesis uses a development runtime (not a shipped configuration).",
+  none: "No speech synthesis is installed. Audio activities are disabled; everything else works offline.",
+};
+
+const TTS_MODEL_LABELS: Record<string, string> = {
+  "org.openlanguage.speech.sherpa-onnx-runtime": "Speech runtime",
+  "org.openlanguage.speech.kokoro-multi-lang": "Japanese voice model (Kokoro)",
 };
 
 function megabytes(bytes: number): string {
@@ -152,6 +187,54 @@ export function LanguagePanel(p: LanguagePanelProps) {
           if (f) void readFileB64(f).then(p.onImport);
         }}
       />
+
+      <h2>Speech &amp; attribution</h2>
+      <p>
+        <small>
+          Speech synthesis is optional and separate from packs. Some downloads include it; you can
+          also install it here or point the app at your own runtime.
+        </small>
+      </p>
+      {p.tts ? (
+        <>
+          <p>{TTS_SOURCE_LABELS[p.tts.source] ?? p.tts.source}</p>
+          {p.tts.components.length > 0 && (
+            <ul className="meta-list">
+              {p.tts.components.map((c) => (
+                <li key={c.name}>
+                  {c.name} — {c.license} ({c.role})
+                </li>
+              ))}
+            </ul>
+          )}
+          <ul className="pack-list">
+            {p.tts.models.map((m) => (
+              <li key={m.id}>
+                {TTS_MODEL_LABELS[m.id] ?? m.id} — v{m.version}, {m.license_code}
+                {m.installed ? (
+                  <button
+                    type="button"
+                    className="btn btn--quiet"
+                    onClick={() => p.onDeleteModel(m.id)}
+                  >
+                    Remove
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="btn btn--primary"
+                    onClick={() => p.onInstallModel(m.id)}
+                  >
+                    Download
+                  </button>
+                )}
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <p className="empty">Speech status unavailable.</p>
+      )}
     </section>
   );
 }

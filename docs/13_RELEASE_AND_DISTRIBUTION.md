@@ -42,6 +42,23 @@ Downloads come in two variants, same binary, different staged resources:
   installing the TTS payload later as an optional in-app model download
   (TTS-002).
 
+Build mechanics: `scripts/build-tts-variants.sh` stages the payload
+(runtime + model + license texts + `NOTICE.md` source offer) and emits
+the Tauri config overlay; the bare variant is the default config. The
+app resolves TTS in priority order: bundled payload → model-manager
+installs (in-app download of the same payload, pinned as directory
+catalog entries) → bring-your-own `LTS_TTS_DIR` → development bench
+vendor (never shipped). Bring-your-own layout:
+
+```
+$LTS_TTS_DIR/sherpa/bin/sherpa-onnx-offline-tts   # any local TTS runtime build
+$LTS_TTS_DIR/kokoro/model.onnx                    # + voices.bin, tokens.txt,
+                                                  #   espeak-ng-data/ (or your own)
+```
+
+When no source resolves, audio features report
+`tts-runtime-unavailable` and non-audio practice is unaffected.
+
 Variant builds and their notices are release-gated (REL-001/O-04); the
 application's own license remains independent of optional payloads.
 
