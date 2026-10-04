@@ -1729,7 +1729,7 @@ fn writing_submit(
     })
     .finish(
         lts_domain::EventId::new(format!("write-{}-{}", now.as_secs(), now.subsec_nanos())),
-        &rfc3339_utc(now.as_secs()),
+        rfc3339_utc(now.as_secs()),
         lts_domain::ProfileId::new(&profile_id),
     );
     store.append_evidence(&event).map_err(|e| e.to_string())?;
@@ -2465,7 +2465,7 @@ fn story_list_at(data: &Path, profile_id: &str) -> Result<Vec<StorySummary>, Str
     let pack_id = active.first().ok_or("no active language pack")?;
     let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
         .ok_or("pack not installed")?;
-    Ok(story_entries(&data, pack_id, &version)?
+    Ok(story_entries(data, pack_id, &version)?
         .into_iter()
         .map(|s| StorySummary {
             sentence_count: s.sentences.len(),
@@ -2620,13 +2620,15 @@ fn mine_add_at(
     let id = format!("mine-{}-{}", now.as_secs(), now.subsec_nanos());
     store
         .add_mined(
-            &profile_id,
-            &id,
-            &surface,
-            reading.as_deref(),
-            gloss.as_deref(),
-            source_citation.trim(),
-            &rfc3339_utc(now.as_secs()),
+            profile_id,
+            lts_storage::NewMinedItem {
+                id: &id,
+                surface: &surface,
+                reading: reading.as_deref(),
+                gloss: gloss.as_deref(),
+                source_citation: source_citation.trim(),
+                created_at: &rfc3339_utc(now.as_secs()),
+            },
         )
         .map_err(|e| e.to_string())?;
     Ok(MinedItemView {
@@ -2859,29 +2861,37 @@ fn practice_submit_at(
         content_id,
         modality,
         choice_index,
-        answer,
-        reveal_reading,
-        None,
+        SubmitOpts {
+            answer,
+            reveal_reading,
+            diagnostic: None,
+        },
     )
 }
+/// Grading options shared by practice and placement submits.
 /// `diagnostic = Some(assessment_id)` tags the evidence Diagnostic and
 /// attributes it to the assessment (K-15); otherwise formative practice.
+#[derive(Default)]
+struct SubmitOpts<'a> {
+    answer: Option<String>,
+    reveal_reading: bool,
+    diagnostic: Option<&'a str>,
+}
+
 fn practice_submit_inner(
     data: &Path,
     profile_id: &str,
     content_id: &str,
     modality: &str,
     choice_index: usize,
-    answer: Option<String>,
-    reveal_reading: bool,
-    diagnostic: Option<&str>,
+    opts: SubmitOpts<'_>,
 ) -> Result<PracticeGrade, String> {
     let (task, correct_choice, reveals) =
-        practice_build(data, profile_id, content_id, modality, reveal_reading)?;
+        practice_build(data, profile_id, content_id, modality, opts.reveal_reading)?;
     let correct = if task.typed {
         // K-12: typed grading is exact-match on the trimmed string;
         // the expected answer was built server-side and never sent.
-        answer
+        opts.answer
             .map(|a| a.trim() == correct_choice.trim())
             .unwrap_or(false)
     } else {
@@ -2899,7 +2909,7 @@ fn practice_submit_inner(
     let now = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
         .map_err(|e| e.to_string())?;
-    let dim = parse_dimension(&modality).ok_or("unknown modality")?;
+    let dim = parse_dimension(modality).ok_or("unknown modality")?;
     let activity_id = match dim {
         lts_domain::ActivityModality::ComprehensionListening => "ja.activity.demo.mc-listen",
         // The orthography unit itself is the practiced activity; no
@@ -2915,7 +2925,7 @@ fn practice_submit_inner(
         _ => "ja.activity.demo.mc-recall",
     };
     // K-15: a diagnostic attempt is attributed to the pack assessment.
-    let activity_id = diagnostic.unwrap_or(activity_id);
+    let activity_id = opts.diagnostic.unwrap_or(activity_id);
     let event = lts_learner_model::AttemptDraft::new(
         vec![lts_domain::ContentId::parse(content_id).map_err(|_| "invalid item id")?],
         dim,
@@ -2923,7 +2933,7 @@ fn practice_submit_inner(
         pack_id,
         &version,
     )
-    .assessment_kind(if diagnostic.is_some() {
+    .assessment_kind(if opts.diagnostic.is_some() {
         lts_domain::AssessmentKind::Diagnostic
     } else {
         lts_domain::AssessmentKind::Formative
@@ -2943,7 +2953,7 @@ fn practice_submit_inner(
     })
     .finish(
         lts_domain::EventId::new(format!("practice-{}-{}", now.as_secs(), now.subsec_nanos())),
-        &rfc3339_utc(now.as_secs()),
+        rfc3339_utc(now.as_secs()),
         lts_domain::ProfileId::new(profile_id),
     );
     store.append_evidence(&event).map_err(|e| e.to_string())?;
@@ -3108,9 +3118,11 @@ fn placement_submit(
         &content_id,
         &modality,
         choice_index,
-        None,
-        false,
-        Some(&assessment_id),
+        SubmitOpts {
+            answer: None,
+            reveal_reading: false,
+            diagnostic: Some(&assessment_id),
+        },
     )
 }
 
@@ -4827,13 +4839,12 @@ mod tests {
                     .unwrap();
             }
         }
-        assert_ne!(
-            store
+        assert!(
+            !store
                 .get_setting(&p.id, "kana-literacy-established")
                 .unwrap()
                 .map(|v| v.as_bool().unwrap_or(false))
                 .unwrap_or(false),
-            true,
             "roll-up only fires from a submit"
         );
         practice_submit_at(
@@ -4929,9 +4940,11 @@ mod tests {
                 &greet.content_id,
                 &greet.modality,
                 idx,
-                None,
-                false,
-                Some(&greet.assessment_id),
+                SubmitOpts {
+                    answer: None,
+                    reveal_reading: false,
+                    diagnostic: Some(&greet.assessment_id),
+                },
             )
             .unwrap();
             assert!(g.correct);

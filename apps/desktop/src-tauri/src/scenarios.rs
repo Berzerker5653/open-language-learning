@@ -366,7 +366,7 @@ pub fn support_at(
     level: u8,
     sessions: &SessionStore,
 ) -> Result<ScenarioView, String> {
-    let (ok, sc) = with_session(sessions, profile_id, scenario_id, data, |s| {
+    let ((), sc) = with_session(sessions, profile_id, scenario_id, data, |s| {
         if s.use_support(level) {
             Ok(())
         } else {
@@ -375,7 +375,6 @@ pub fn support_at(
             ))
         }
     })?;
-    let _ = ok;
     let mut guard = sessions.lock().map_err(|_| "session store poisoned")?;
     let session = guard
         .get_mut(&session_key(profile_id, scenario_id))

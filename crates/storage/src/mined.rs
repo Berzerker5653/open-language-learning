@@ -18,21 +18,23 @@ pub struct MinedItem {
     pub created_at: String,
 }
 
+/// Input for `add_mined`; keeps the API under the argument-count lint.
+#[derive(Debug, Clone)]
+pub struct NewMinedItem<'a> {
+    pub id: &'a str,
+    pub surface: &'a str,
+    pub reading: Option<&'a str>,
+    pub gloss: Option<&'a str>,
+    pub source_citation: &'a str,
+    pub created_at: &'a str,
+}
+
 impl Store {
-    pub fn add_mined(
-        &self,
-        profile_id: &str,
-        id: &str,
-        surface: &str,
-        reading: Option<&str>,
-        gloss: Option<&str>,
-        source_citation: &str,
-        created_at: &str,
-    ) -> Result<(), Error> {
+    pub fn add_mined(&self, profile_id: &str, item: NewMinedItem<'_>) -> Result<(), Error> {
         self.conn.execute(
             "INSERT INTO mined_items(id, profile_id, surface, reading, gloss, source_citation, created_at)
              VALUES (?1,?2,?3,?4,?5,?6,?7)",
-            params![id, profile_id, surface, reading, gloss, source_citation, created_at],
+            params![item.id, profile_id, item.surface, item.reading, item.gloss, item.source_citation, item.created_at],
         )?;
         Ok(())
     }

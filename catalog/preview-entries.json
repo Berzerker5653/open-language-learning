@@ -11,8 +11,8 @@
       "review_status": "community",
       "min_sdk_version": "0.1.0",
       "url": "PENDING-RELEASE-URL",
-      "sha256": "0a284b46630dc8fc644f2bc256dac752514e86172d0292ce3c77c9f6572edd71",
-      "size_bytes": 74939,
+      "sha256": "9e918f2da713f608044bc2d61c1edaa9c6428e48cd2aeaa3dfdcc46e2c564780",
+      "size_bytes": 183533,
       "archive": "dist/preview/ja-demo-0.1.0.lpk",
       "attribution": "JMdict/JMnedict © Electronic Dictionary Research and Development Group, CC BY 4.0 SA; reference audio synthesized with Kokoro TTS (Apache-2.0)"
     },

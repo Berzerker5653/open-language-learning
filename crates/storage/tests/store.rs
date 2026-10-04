@@ -295,23 +295,27 @@ fn mined_items_crud_and_cascade() {
     store
         .add_mined(
             &p.id,
-            "mine-1",
-            "ねこ",
-            None,
-            Some("cat"),
-            "ja.story.demo.first-meeting",
-            "2026-10-03T09:00:00Z",
+            lts_storage::NewMinedItem {
+                id: "mine-1",
+                surface: "ねこ",
+                reading: None,
+                gloss: Some("cat"),
+                source_citation: "ja.story.demo.first-meeting",
+                created_at: "2026-10-03T09:00:00Z",
+            },
         )
         .unwrap();
     store
         .add_mined(
             &p.id,
-            "mine-2",
-            "いぬ",
-            Some("犬"),
-            Some("dog"),
-            "manual",
-            "2026-10-03T09:01:00Z",
+            lts_storage::NewMinedItem {
+                id: "mine-2",
+                surface: "いぬ",
+                reading: Some("犬"),
+                gloss: Some("dog"),
+                source_citation: "manual",
+                created_at: "2026-10-03T09:01:00Z",
+            },
         )
         .unwrap();
     let items = store.mined_items(&p.id).unwrap();

@@ -163,3 +163,86 @@ fn new_unit_and_lexicon_scaffold_validate_clean() {
     let (out, _err, ok) = run(&["new-lexicon", pack_s, "xx.unit.wrongkind"]);
     assert!(!ok, "wrong kind must fail: {out}");
 }
+
+#[test]
+fn catalog_upsert_from_built_archive() {
+    let dir = tempfile::tempdir().unwrap();
+    let pack = dir.path().join("cat-pack");
+    let pack_s = pack.to_str().unwrap();
+    let (out, err, ok) = run(&[
+        "init",
+        pack_s,
+        "--pack-id",
+        "dev.example.catalog",
+        "--name",
+        "Catalog Demo",
+    ]);
+    assert!(ok, "init: {out}{err}");
+
+    let archive = dir.path().join("catalog-demo.lpk");
+    let archive_s = archive.to_str().unwrap();
+    let (out, err, ok) = run(&["build", pack_s, "-o", archive_s]);
+    assert!(ok, "build: {out}{err}");
+    let built_sha = out
+        .lines()
+        .find_map(|l| l.strip_prefix("sha256 "))
+        .expect("build prints sha256")
+        .to_string();
+
+    let catalog = dir.path().join("packs.json");
+    let catalog_s = catalog.to_str().unwrap();
+    let url = "https://github.com/example/releases/download/v{version}/{filename}";
+    let (out, err, ok) = run(&[
+        "catalog",
+        archive_s,
+        "--file",
+        catalog_s,
+        "--url-template",
+        url,
+    ]);
+    assert!(ok, "catalog: {out}{err}");
+
+    let v: serde_json::Value =
+        serde_json::from_str(&std::fs::read_to_string(&catalog).unwrap()).unwrap();
+    // PLAT-001 marker: only Linux runtime is tested (docs/13).
+    assert_eq!(v["tested_platforms"], serde_json::json!(["linux"]));
+    let packs = v["packs"].as_array().unwrap();
+    assert_eq!(packs.len(), 1);
+    let e = &packs[0];
+    assert_eq!(e["pack_id"], "dev.example.catalog");
+    assert_eq!(e["version"], "0.0.1");
+    assert_eq!(e["display_name"], "Catalog Demo");
+    assert_eq!(e["review_status"], "community");
+    assert_eq!(e["sha256"], built_sha);
+    assert!(e["size_bytes"].as_u64().unwrap() > 0);
+    assert!(e["url"].as_str().unwrap().ends_with("catalog-demo.lpk"));
+
+    // Re-running is an upsert, not a duplicate, and the deterministic
+    // archive keeps the same hash.
+    let (out, _err, ok) = run(&["build", pack_s, "-o", archive_s]);
+    assert!(ok);
+    assert!(out.contains(&built_sha), "archive must be deterministic");
+    let (_out, err, ok) = run(&[
+        "catalog",
+        archive_s,
+        "--file",
+        catalog_s,
+        "--url-template",
+        url,
+    ]);
+    assert!(ok, "catalog re-run: {err}");
+    let v: serde_json::Value =
+        serde_json::from_str(&std::fs::read_to_string(&catalog).unwrap()).unwrap();
+    assert_eq!(v["packs"].as_array().unwrap().len(), 1);
+
+    // Non-https URLs are refused (the app enforces https at install).
+    let (_out, err, ok) = run(&[
+        "catalog",
+        archive_s,
+        "--file",
+        catalog_s,
+        "--url-template",
+        "http://evil.example/{filename}",
+    ]);
+    assert!(!ok && err.contains("https"), "must reject http: {err}");
+}

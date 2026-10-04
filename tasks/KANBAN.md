@@ -34,6 +34,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-31 | A1 functional goal coverage: 20 goals all lesson+assessment-mapped, five modalities, ordering scenario wired, audit clean (`state/notes/K-31.md`) | JA-A1-002 |
 | K-33 | automated a11y audit in CI: landmarks/skip-link, button+field naming, live regions, AA contrast math, reduced-motion/focus-visible CSS; ink-faint darkened to AA (`state/notes/K-33.md`) | ACC-001 |
 | K-34 | PLAT-001 build config only: win/mac bundle targets + icons, CI compile-check matrix, docs/13 marks win/mac untested (Linux-only runtime testing) (`state/notes/K-34.md`) | PLAT-001 |
+| K-35 | catalog happy path: `langpack catalog` generates packs.json entries (hash/version/size/tested_platforms) from built .lpk archives; `scripts/build-catalog.sh` builds all shipped pack artifacts; live catalog merge stays O-05 (`state/notes/K-35.md`) | GAP-VERIFY gap |
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 
@@ -54,7 +55,6 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
-| K-35 | kit | Community catalog happy path: publish `dist/preview/*.lpk` as release assets + `catalog/packs.json` entries | GAP-VERIFY gap |
 
 ## owner — human/owner gates (never self-certifiable)
 

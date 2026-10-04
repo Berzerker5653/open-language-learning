@@ -346,7 +346,7 @@ impl Pack {
                                         if !allowed.contains(s) {
                                             diags.push(Diagnostic::new(
                                                 &inst.file,
-                                                &format!("{}/activities/{}/{}/{}", inst.pointer, i, field, j),
+                                                format!("{}/activities/{}/{}/{}", inst.pointer, i, field, j),
                                                 "content_outside_generation_contract",
                                                 format!(
                                                     "{s:?} is used by the unit but not in the generation contract"
@@ -438,7 +438,7 @@ impl Pack {
                             if !text.contains(target) {
                                 diags.push(Diagnostic::new(
                                     &inst.file,
-                                    &format!("{}/cloze_targets/{}", inst.pointer, i),
+                                    format!("{}/cloze_targets/{}", inst.pointer, i),
                                     "cloze_target_not_in_text",
                                     format!("cloze target {target:?} does not occur in text"),
                                     Severity::Error,

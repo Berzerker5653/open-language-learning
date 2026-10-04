@@ -49,7 +49,7 @@ pub enum ArchiveError {
     Validation(String),
 }
 
-fn hex_sha256(bytes: &[u8]) -> String {
+pub fn hex_sha256(bytes: &[u8]) -> String {
     let mut h = Sha256::new();
     h.update(bytes);
     h.finalize().iter().map(|b| format!("{b:02x}")).collect()
@@ -146,6 +146,14 @@ pub fn inspect(bytes: &[u8]) -> Result<ArchiveManifest, ArchiveError> {
         )));
     }
     Ok(am)
+}
+
+/// Read a single named entry from the archive without extracting to disk.
+pub fn read_entry(bytes: &[u8], name: &str) -> Result<Vec<u8>, ArchiveError> {
+    let mut zip = zip::ZipArchive::new(Cursor::new(bytes))?;
+    let mut buf = Vec::new();
+    zip.by_name(name)?.read_to_end(&mut buf)?;
+    Ok(buf)
 }
 
 /// Validate a zip entry name; None when unsafe (traversal, absolute,
