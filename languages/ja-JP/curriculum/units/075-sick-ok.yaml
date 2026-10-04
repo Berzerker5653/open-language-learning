@@ -1,0 +1,64 @@
+# ai-assisted draft unit (Mode B A1 health-basics); content refs are pack data; qualified review pending.
+id: ja.unit.health-sick-ok
+goal_id: ja.goal.a1.health-basics
+title: Sick or all right
+summary: Describe how you feel; heavy and light.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.health.byouki
+  - ja.lex.health.daijoubu
+  - ja.lex.health.omoi
+  - ja.lex.health.karui
+  - ja.lex.health.kowai
+  - ja.lex.places.byouin
+  allowed_grammar:
+  - ja.grammar.adjectives.na-attributive
+  - ja.grammar.copula.polite-desu
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.health-sick-ok-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.health.byouki
+  - ja.lex.health.daijoubu
+  - ja.lex.health.omoi
+  - ja.lex.health.karui
+  - ja.lex.health.kowai
+  - ja.lex.places.byouin
+- id: ja.activity.health-sick-ok-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.health.byouki
+  - ja.lex.health.daijoubu
+  - ja.lex.health.omoi
+  - ja.lex.health.karui
+  - ja.lex.health.kowai
+  - ja.lex.places.byouin
+- id: ja.activity.health-sick-ok-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.health.byouki
+  - ja.lex.health.daijoubu
+  - ja.lex.health.omoi
+  - ja.lex.health.karui
+  - ja.lex.health.kowai
+  - ja.lex.places.byouin
+- id: ja.activity.health-sick-ok-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.health.byouki
+  - ja.lex.health.daijoubu
+  - ja.lex.health.omoi
+  - ja.lex.health.karui
+  - ja.lex.health.kowai
+  - ja.lex.places.byouin

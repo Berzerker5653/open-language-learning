@@ -1,0 +1,81 @@
+# ai-assisted draft unit (Mode B A1 health-basics); content refs are pack data; qualified review pending.
+id: ja.unit.health-medicine
+goal_id: ja.goal.a1.health-basics
+title: Medicine and pharmacy
+summary: Pharmacy, nurse, check-up, medicine.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.health.kangofu
+  - ja.lex.health.kusuri
+  - ja.lex.health.kensa
+  - ja.lex.health.yakkyoku
+  - ja.lex.health.kenkou
+  - ja.lex.people.isha
+  - ja.lex.verbs.nomimasu
+  - ja.sent.take-medicine
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  - ja.grammar.particle.ni-destination
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.health-medicine-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.health.kangofu
+  - ja.lex.health.kusuri
+  - ja.lex.health.kensa
+  - ja.lex.health.yakkyoku
+  - ja.lex.health.kenkou
+  - ja.lex.people.isha
+  - ja.lex.verbs.nomimasu
+  - ja.sent.take-medicine
+  - ja.sent.take-medicine
+- id: ja.activity.health-medicine-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.health.kangofu
+  - ja.lex.health.kusuri
+  - ja.lex.health.kensa
+  - ja.lex.health.yakkyoku
+  - ja.lex.health.kenkou
+  - ja.lex.people.isha
+  - ja.lex.verbs.nomimasu
+  - ja.sent.take-medicine
+- id: ja.activity.health-medicine-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.health.kangofu
+  - ja.lex.health.kusuri
+  - ja.lex.health.kensa
+  - ja.lex.health.yakkyoku
+  - ja.lex.health.kenkou
+  - ja.lex.people.isha
+  - ja.lex.verbs.nomimasu
+  - ja.sent.take-medicine
+- id: ja.activity.health-medicine-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.health.kangofu
+  - ja.lex.health.kusuri
+  - ja.lex.health.kensa
+  - ja.lex.health.yakkyoku
+  - ja.lex.health.kenkou
+  - ja.lex.people.isha
+  - ja.lex.verbs.nomimasu
+  - ja.sent.take-medicine
+- id: ja.activity.health-medicine-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.take-medicine

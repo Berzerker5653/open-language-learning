@@ -1,0 +1,75 @@
+# ai-assisted draft unit (Mode B A1 health-basics); content refs are pack data; qualified review pending.
+id: ja.unit.health-habits
+goal_id: ja.goal.a1.health-basics
+title: Healthy habits
+summary: Daily life, preparation, breaks, exercise.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.health.seikatsu
+  - ja.lex.health.junbi
+  - ja.lex.health.kyuukei
+  - ja.lex.health.undou
+  - ja.lex.health.hashirimasu
+  - ja.lex.time.kyou
+  - ja.sent.rest-today
+  allowed_grammar:
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.health-habits-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.health.seikatsu
+  - ja.lex.health.junbi
+  - ja.lex.health.kyuukei
+  - ja.lex.health.undou
+  - ja.lex.health.hashirimasu
+  - ja.lex.time.kyou
+  - ja.sent.rest-today
+  - ja.sent.rest-today
+- id: ja.activity.health-habits-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.health.seikatsu
+  - ja.lex.health.junbi
+  - ja.lex.health.kyuukei
+  - ja.lex.health.undou
+  - ja.lex.health.hashirimasu
+  - ja.lex.time.kyou
+  - ja.sent.rest-today
+- id: ja.activity.health-habits-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.health.seikatsu
+  - ja.lex.health.junbi
+  - ja.lex.health.kyuukei
+  - ja.lex.health.undou
+  - ja.lex.health.hashirimasu
+  - ja.lex.time.kyou
+  - ja.sent.rest-today
+- id: ja.activity.health-habits-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.health.seikatsu
+  - ja.lex.health.junbi
+  - ja.lex.health.kyuukei
+  - ja.lex.health.undou
+  - ja.lex.health.hashirimasu
+  - ja.lex.time.kyou
+  - ja.sent.rest-today
+- id: ja.activity.health-habits-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.rest-today

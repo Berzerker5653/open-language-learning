@@ -1,0 +1,64 @@
+# ai-assisted draft unit (Mode B A1 health-basics); content refs are pack data; qualified review pending.
+id: ja.unit.health-adverbs
+goal_id: ja.goal.a1.health-basics
+title: Everyday adverbs
+summary: Well, a little, already, right away, properly.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.health.yoku
+  - ja.lex.health.sukoshi
+  - ja.lex.health.mou
+  - ja.lex.health.sugu
+  - ja.lex.health.chanto
+  - ja.lex.numbers.juu
+  allowed_grammar:
+  - ja.grammar.counters.general
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.health-adverbs-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.health.yoku
+  - ja.lex.health.sukoshi
+  - ja.lex.health.mou
+  - ja.lex.health.sugu
+  - ja.lex.health.chanto
+  - ja.lex.numbers.juu
+- id: ja.activity.health-adverbs-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.health.yoku
+  - ja.lex.health.sukoshi
+  - ja.lex.health.mou
+  - ja.lex.health.sugu
+  - ja.lex.health.chanto
+  - ja.lex.numbers.juu
+- id: ja.activity.health-adverbs-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.health.yoku
+  - ja.lex.health.sukoshi
+  - ja.lex.health.mou
+  - ja.lex.health.sugu
+  - ja.lex.health.chanto
+  - ja.lex.numbers.juu
+- id: ja.activity.health-adverbs-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.health.yoku
+  - ja.lex.health.sukoshi
+  - ja.lex.health.mou
+  - ja.lex.health.sugu
+  - ja.lex.health.chanto
+  - ja.lex.numbers.juu

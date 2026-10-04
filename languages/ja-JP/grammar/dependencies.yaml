@@ -94,7 +94,13 @@ prerequisite_edges:
   dimension: recall-meaning
   required_state: supported
   strength: hard
+- from: ja.goal.a1.health-basics
+  to: ja.goal.a1.transport
+  dimension: grammar-controlled
+  required_state: independent
+  strength: hard
 notes:
 - Mirror of goal prerequisite edges (PACK-002); generated from curriculum/goals.yaml
   during K-30 authoring.
+
 

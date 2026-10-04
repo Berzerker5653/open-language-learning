@@ -1,0 +1,80 @@
+# ai-assisted draft unit (Mode B A1 health-basics); content refs are pack data; qualified review pending.
+id: ja.unit.health-clinic-visit
+goal_id: ja.goal.a1.health-basics
+title: At the clinic
+summary: Worry, fatigue, sleep; meet the doctor.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.health.kega
+  - ja.lex.health.shinpai
+  - ja.lex.health.tsukare
+  - ja.lex.health.nemuri
+  - ja.lex.health.kimochi
+  - ja.lex.people.isha
+  - ja.lex.places.byouin
+  - ja.sent.see-doctor
+  allowed_grammar:
+  - ja.grammar.particle.ni-destination
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.health-clinic-visit-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.health.kega
+  - ja.lex.health.shinpai
+  - ja.lex.health.tsukare
+  - ja.lex.health.nemuri
+  - ja.lex.health.kimochi
+  - ja.lex.people.isha
+  - ja.lex.places.byouin
+  - ja.sent.see-doctor
+  - ja.sent.see-doctor
+- id: ja.activity.health-clinic-visit-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.health.kega
+  - ja.lex.health.shinpai
+  - ja.lex.health.tsukare
+  - ja.lex.health.nemuri
+  - ja.lex.health.kimochi
+  - ja.lex.people.isha
+  - ja.lex.places.byouin
+  - ja.sent.see-doctor
+- id: ja.activity.health-clinic-visit-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.health.kega
+  - ja.lex.health.shinpai
+  - ja.lex.health.tsukare
+  - ja.lex.health.nemuri
+  - ja.lex.health.kimochi
+  - ja.lex.people.isha
+  - ja.lex.places.byouin
+  - ja.sent.see-doctor
+- id: ja.activity.health-clinic-visit-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.health.kega
+  - ja.lex.health.shinpai
+  - ja.lex.health.tsukare
+  - ja.lex.health.nemuri
+  - ja.lex.health.kimochi
+  - ja.lex.people.isha
+  - ja.lex.places.byouin
+  - ja.sent.see-doctor
+- id: ja.activity.health-clinic-visit-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.see-doctor

@@ -1,0 +1,64 @@
+# ai-assisted draft unit (Mode B A1 health-basics); content refs are pack data; qualified review pending.
+id: ja.unit.health-verbs-care
+goal_id: ja.goal.a1.health-basics
+title: Care verbs
+summary: Rest, wash, cure, be late, move.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.health.yasumasu
+  - ja.lex.health.araimasu
+  - ja.lex.health.naoshimasu
+  - ja.lex.health.okuremasu
+  - ja.lex.health.ugokimasu
+  - ja.lex.verbs.arimasu
+  allowed_grammar:
+  - ja.grammar.verb.past-negative
+  - ja.grammar.verb.polite-masu
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.health-verbs-care-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.health.yasumasu
+  - ja.lex.health.araimasu
+  - ja.lex.health.naoshimasu
+  - ja.lex.health.okuremasu
+  - ja.lex.health.ugokimasu
+  - ja.lex.verbs.arimasu
+- id: ja.activity.health-verbs-care-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.health.yasumasu
+  - ja.lex.health.araimasu
+  - ja.lex.health.naoshimasu
+  - ja.lex.health.okuremasu
+  - ja.lex.health.ugokimasu
+  - ja.lex.verbs.arimasu
+- id: ja.activity.health-verbs-care-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.health.yasumasu
+  - ja.lex.health.araimasu
+  - ja.lex.health.naoshimasu
+  - ja.lex.health.okuremasu
+  - ja.lex.health.ugokimasu
+  - ja.lex.verbs.arimasu
+- id: ja.activity.health-verbs-care-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.health.yasumasu
+  - ja.lex.health.araimasu
+  - ja.lex.health.naoshimasu
+  - ja.lex.health.okuremasu
+  - ja.lex.health.ugokimasu
+  - ja.lex.verbs.arimasu

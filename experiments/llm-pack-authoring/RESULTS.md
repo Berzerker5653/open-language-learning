@@ -346,3 +346,11 @@ Agent-authored in place: goal `ja.goal.a1.transport`, 10 units, 50-word
 7 sentences, 1 assessment (`ja.assess.transport`), 1 source
 (`ai-drafted-extension`). Goal prerequisite mirrored in
 `grammar/dependencies.yaml`. Score: **7/7** (`results/ja-JP-draft`).
+
+## 2026-10-04 — ja-JP batch 2: A1 units 072-081 (health-basics)
+
+Goal `ja.goal.a1.health-basics` (prereq transport, mirrored in
+dependencies), 10 units, 50-word `lexicon/health.jsonl`, 5 grammar
+(`verb.tai-desu`, `adjectives.na-attributive`, `particle.ni-destination`,
+`verb.past-negative`, `counters.general`), 5 sentences, 1 assessment
+(`ja.assess.health-basics`). Score: **7/7**.

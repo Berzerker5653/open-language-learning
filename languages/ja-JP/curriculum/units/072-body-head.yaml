@@ -1,0 +1,71 @@
+# ai-assisted draft unit (Mode B A1 health-basics); content refs are pack data; qualified review pending.
+id: ja.unit.health-body-head
+goal_id: ja.goal.a1.health-basics
+title: Body and head
+summary: Name the head and face; say where it hurts.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.health.atama
+  - ja.lex.health.me
+  - ja.lex.health.hana
+  - ja.lex.health.kuchi
+  - ja.lex.health.nodo
+  - ja.sent.head-hurts
+  allowed_grammar:
+  - ja.grammar.copula.polite-desu
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.health-body-head-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.health.atama
+  - ja.lex.health.me
+  - ja.lex.health.hana
+  - ja.lex.health.kuchi
+  - ja.lex.health.nodo
+  - ja.sent.head-hurts
+  - ja.sent.head-hurts
+- id: ja.activity.health-body-head-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.health.atama
+  - ja.lex.health.me
+  - ja.lex.health.hana
+  - ja.lex.health.kuchi
+  - ja.lex.health.nodo
+  - ja.sent.head-hurts
+- id: ja.activity.health-body-head-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.health.atama
+  - ja.lex.health.me
+  - ja.lex.health.hana
+  - ja.lex.health.kuchi
+  - ja.lex.health.nodo
+  - ja.sent.head-hurts
+- id: ja.activity.health-body-head-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.health.atama
+  - ja.lex.health.me
+  - ja.lex.health.hana
+  - ja.lex.health.kuchi
+  - ja.lex.health.nodo
+  - ja.sent.head-hurts
+- id: ja.activity.health-body-head-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.head-hurts

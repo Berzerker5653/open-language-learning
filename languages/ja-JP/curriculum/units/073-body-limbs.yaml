@@ -1,0 +1,75 @@
+# ai-assisted draft unit (Mode B A1 health-basics); content refs are pack data; qualified review pending.
+id: ja.unit.health-body-limbs
+goal_id: ja.goal.a1.health-basics
+title: Arms, legs, hands
+summary: Body parts and taking medicine.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.health.kata
+  - ja.lex.health.hara
+  - ja.lex.health.ashi
+  - ja.lex.health.te
+  - ja.lex.health.hiza
+  - ja.lex.verbs.nomimasu
+  - ja.sent.take-medicine
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.health-body-limbs-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.health.kata
+  - ja.lex.health.hara
+  - ja.lex.health.ashi
+  - ja.lex.health.te
+  - ja.lex.health.hiza
+  - ja.lex.verbs.nomimasu
+  - ja.sent.take-medicine
+  - ja.sent.take-medicine
+- id: ja.activity.health-body-limbs-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.health.kata
+  - ja.lex.health.hara
+  - ja.lex.health.ashi
+  - ja.lex.health.te
+  - ja.lex.health.hiza
+  - ja.lex.verbs.nomimasu
+  - ja.sent.take-medicine
+- id: ja.activity.health-body-limbs-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.health.kata
+  - ja.lex.health.hara
+  - ja.lex.health.ashi
+  - ja.lex.health.te
+  - ja.lex.health.hiza
+  - ja.lex.verbs.nomimasu
+  - ja.sent.take-medicine
+- id: ja.activity.health-body-limbs-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.health.kata
+  - ja.lex.health.hara
+  - ja.lex.health.ashi
+  - ja.lex.health.te
+  - ja.lex.health.hiza
+  - ja.lex.verbs.nomimasu
+  - ja.sent.take-medicine
+- id: ja.activity.health-body-limbs-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.take-medicine

@@ -1,0 +1,64 @@
+# ai-assisted draft unit (Mode B A1 health-basics); content refs are pack data; qualified review pending.
+id: ja.unit.health-symptoms
+goal_id: ja.goal.a1.health-basics
+title: Symptoms
+summary: Fever and pain; say what you want.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.health.netsu
+  - ja.lex.health.itami
+  - ja.lex.health.itai
+  - ja.lex.health.tsurai
+  - ja.lex.health.kurushii
+  - ja.lex.verbs.arimasu
+  allowed_grammar:
+  - ja.grammar.verb.tai-desu
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.health-symptoms-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.health.netsu
+  - ja.lex.health.itami
+  - ja.lex.health.itai
+  - ja.lex.health.tsurai
+  - ja.lex.health.kurushii
+  - ja.lex.verbs.arimasu
+- id: ja.activity.health-symptoms-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.health.netsu
+  - ja.lex.health.itami
+  - ja.lex.health.itai
+  - ja.lex.health.tsurai
+  - ja.lex.health.kurushii
+  - ja.lex.verbs.arimasu
+- id: ja.activity.health-symptoms-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.health.netsu
+  - ja.lex.health.itami
+  - ja.lex.health.itai
+  - ja.lex.health.tsurai
+  - ja.lex.health.kurushii
+  - ja.lex.verbs.arimasu
+- id: ja.activity.health-symptoms-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.health.netsu
+  - ja.lex.health.itami
+  - ja.lex.health.itai
+  - ja.lex.health.tsurai
+  - ja.lex.health.kurushii
+  - ja.lex.verbs.arimasu

@@ -1,0 +1,75 @@
+# ai-assisted draft unit (Mode B A1 health-basics); content refs are pack data; qualified review pending.
+id: ja.unit.health-verbs-feel
+goal_id: ja.goal.a1.health-basics
+title: Tired, breathing, warm
+summary: Feelings and temperature; want to sleep.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.health.tsukaremasu
+  - ja.lex.health.kuukimasu
+  - ja.lex.health.komaru
+  - ja.lex.health.atatakai
+  - ja.lex.health.tsumetai
+  - ja.lex.verbs.nemasu
+  - ja.sent.want-sleep
+  allowed_grammar:
+  - ja.grammar.verb.tai-desu
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.health-verbs-feel-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.health.tsukaremasu
+  - ja.lex.health.kuukimasu
+  - ja.lex.health.komaru
+  - ja.lex.health.atatakai
+  - ja.lex.health.tsumetai
+  - ja.lex.verbs.nemasu
+  - ja.sent.want-sleep
+  - ja.sent.want-sleep
+- id: ja.activity.health-verbs-feel-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.health.tsukaremasu
+  - ja.lex.health.kuukimasu
+  - ja.lex.health.komaru
+  - ja.lex.health.atatakai
+  - ja.lex.health.tsumetai
+  - ja.lex.verbs.nemasu
+  - ja.sent.want-sleep
+- id: ja.activity.health-verbs-feel-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.health.tsukaremasu
+  - ja.lex.health.kuukimasu
+  - ja.lex.health.komaru
+  - ja.lex.health.atatakai
+  - ja.lex.health.tsumetai
+  - ja.lex.verbs.nemasu
+  - ja.sent.want-sleep
+- id: ja.activity.health-verbs-feel-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.health.tsukaremasu
+  - ja.lex.health.kuukimasu
+  - ja.lex.health.komaru
+  - ja.lex.health.atatakai
+  - ja.lex.health.tsumetai
+  - ja.lex.verbs.nemasu
+  - ja.sent.want-sleep
+- id: ja.activity.health-verbs-feel-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.want-sleep
