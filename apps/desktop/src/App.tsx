@@ -5,6 +5,7 @@ import {
   type OnboardingStep,
   type PackCandidate,
   type PrivacyNotice,
+  type ProfileSummary,
 } from "./onboarding";
 import {
   Home,
@@ -97,6 +98,7 @@ export function App() {
   const [selectedPack, setSelectedPack] = useState<string | null>(null);
   const [installedPacks, setInstalledPacks] = useState<string[]>([]);
   const [profileName, setProfileName] = useState("");
+  const [profiles, setProfiles] = useState<ProfileSummary[]>([]);
   const [profileId, setProfileId] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState("");
   const [budget, setBudget] = useState(5);
@@ -158,8 +160,21 @@ export function App() {
         await inv("smoke_ack", { note: "home" });
         return;
       }
-      setNotice((await inv("privacy_notice")) as PrivacyNotice);
-      setPacks((await inv("available_packs")) as PackCandidate[]);
+      // K-05: restart resumes an existing profile instead of re-running
+      // onboarding (FIRST-LESSON known limit). This runs first: a pack
+      // or notice failure must never strand a returning learner back at
+      // the wizard.
+      const ps = (await inv("list_profiles")) as ProfileSummary[];
+      if (ps.length > 0) {
+        setProfiles(ps);
+        setStep("resume");
+      }
+      try {
+        setNotice((await inv("privacy_notice")) as PrivacyNotice);
+        setPacks((await inv("available_packs")) as PackCandidate[]);
+      } catch {
+        /* defaults render; onboarding install step will surface errors */
+      }
     })();
   }, []);
 
@@ -262,6 +277,29 @@ export function App() {
       }
     }
     setStep("done");
+  }
+
+  // K-05: resume an existing local profile at launch. The native side
+  // validates the id; nothing is sent off this device.
+  async function resumeProfile(id: string) {
+    setOnboardError(null);
+    if (!inv) return;
+    try {
+      const p = (await inv("resume_profile", { profileId: id })) as ProfileSummary;
+      setProfileId(p.id);
+      setDisplayName(p.display_name);
+      const home = (await inv("home_state", { profileId: p.id })) as {
+        display_name: string;
+        plan: SessionPlan;
+      };
+      setDisplayName(home.display_name);
+      setPlan(home.plan);
+      const envs = (await inv("world_state", { profileId: p.id })) as WorldEnvironment[];
+      setEnvironments(envs);
+      setStep("done");
+    } catch (e) {
+      setOnboardError(`Could not resume this profile: ${String(e)}`);
+    }
   }
 
   async function changeBudget(minutes: number) {
@@ -696,6 +734,9 @@ export function App() {
           onEnableMic={() => void finishOnboarding(true)}
           onSkipMic={() => void finishOnboarding(false)}
           onContinue={() => setStep("microphone")}
+          profiles={profiles}
+          onResume={(id) => void resumeProfile(id)}
+          onCreateNew={() => setStep("welcome")}
           error={onboardError}
         />
       </AppShell>

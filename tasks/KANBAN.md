@@ -16,12 +16,12 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-02 | Listening runner: transcript hidden natively, media-first audio with honest provenance, per-modality scheduler row (`state/notes/K-02.md`) | UX follow-on |
 | K-03 | READ-001 reader in practice: mastery-faded furigana/romaji, script-gated (never locale), reveals recorded as support 3 (`state/notes/K-03.md`) | READ-001 follow-on |
 | K-04 | Script-instruction activity: `orthography/*.jsonl` pack data, `orthography-recognition` dimension, kana-literacy roll-up by Unicode script (`state/notes/K-04.md`) | feeds JA-A1-001 |
+| K-05 | Profile picker / resume: launch opens "Welcome back" when profiles exist; wizard only for new profiles (`state/notes/K-05.md`) | UX follow-on |
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
-| K-05 | loop | Profile picker / resume (app restart re-runs onboarding — known limit in FIRST-LESSON note) | UX follow-on |
 | K-06 | content | Populate `first-meeting` scenario dialogue graph + on-ramp assessments (`ja.assess.onramp.greeting-transfer` is referenced but missing) | JA-A1-001 |
 
 ## next — training methods the research says we're missing

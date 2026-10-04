@@ -201,7 +201,7 @@ fn switch_pack(profile_id: String, pack_id: String) -> Result<(), String> {
     packs::switch_pack(&data_dir(), &profile_id, &pack_id)
 }
 
-#[derive(Serialize)]
+#[derive(Debug, Serialize)]
 struct ProfileInfo {
     id: String,
     display_name: String,
@@ -224,6 +224,45 @@ fn create_profile(display_name: String) -> Result<ProfileInfo, String> {
     create_local_profile(&data_dir(), &display_name)
 }
 
+/// K-05: profiles already on this device, for the resume-at-launch
+/// picker. Restart must never re-run onboarding for an existing user.
+fn list_profiles_at(data: &Path) -> Result<Vec<ProfileInfo>, String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    Ok(store
+        .list_profiles()
+        .map_err(|e| e.to_string())?
+        .into_iter()
+        .map(|p| ProfileInfo {
+            id: p.id,
+            display_name: p.display_name,
+        })
+        .collect())
+}
+
+/// Validate a resume target before the UI commits to it.
+fn resume_profile_at(data: &Path, profile_id: &str) -> Result<ProfileInfo, String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let profile = store
+        .list_profiles()
+        .map_err(|e| e.to_string())?
+        .into_iter()
+        .find(|p| p.id == profile_id)
+        .ok_or("unknown profile")?;
+    Ok(ProfileInfo {
+        id: profile.id,
+        display_name: profile.display_name,
+    })
+}
+
+#[tauri::command]
+fn list_profiles() -> Result<Vec<ProfileInfo>, String> {
+    list_profiles_at(&data_dir())
+}
+
+#[tauri::command]
+fn resume_profile(profile_id: String) -> Result<ProfileInfo, String> {
+    resume_profile_at(&data_dir(), &profile_id)
+}
 /// Record which pack the profile studies plus the microphone decision
 /// (skippable; never gates progress).
 fn finish_onboarding(
@@ -2130,6 +2169,8 @@ pub fn run() {
             available_packs,
             install_pack,
             create_profile,
+            list_profiles,
+            resume_profile,
             complete_onboarding,
             home_state,
             practice_plan,
@@ -3292,6 +3333,35 @@ mod tests {
                 .and_then(|v| v.as_bool()),
             Some(true),
             "all kana supported establishes literacy"
+        );
+    }
+
+    #[test]
+    fn list_and_resume_profiles_round_trip() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let a = create_local_profile(data, "Hunter").unwrap();
+        let b = create_local_profile(data, "Aiko").unwrap();
+
+        let listed = list_profiles_at(data).unwrap();
+        assert!(
+            listed
+                .iter()
+                .any(|p| p.id == a.id && p.display_name == "Hunter")
+        );
+        assert!(
+            listed
+                .iter()
+                .any(|p| p.id == b.id && p.display_name == "Aiko")
+        );
+
+        let resumed = resume_profile_at(data, &b.id).unwrap();
+        assert_eq!(resumed.id, b.id);
+        assert_eq!(resumed.display_name, "Aiko");
+        assert_eq!(
+            resume_profile_at(data, "nope").unwrap_err(),
+            "unknown profile",
+            "unknown profile never resumes"
         );
     }
 }

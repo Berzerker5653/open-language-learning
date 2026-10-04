@@ -29,6 +29,8 @@ const base: OnboardingProps = {
   onEnableMic: () => {},
   onSkipMic: () => {},
   onContinue: () => {},
+  onResume: () => {},
+  onCreateNew: () => {},
 };
 
 function render(overrides: Partial<OnboardingProps>) {
@@ -76,5 +78,22 @@ describe("onboarding", () => {
     expect(html).toContain("Start learning");
     expect(html).not.toContain("sign up");
     expect(html).not.toContain("log in");
+  });
+
+  it("offers existing profiles for resume before onboarding", () => {
+    const html = render({
+      step: "resume",
+      profiles: [
+        { id: "p1", display_name: "Hunter" },
+        { id: "p2", display_name: "Aiko" },
+      ],
+    });
+    expect(html).toContain("Welcome back");
+    expect(html).toContain("Hunter");
+    expect(html).toContain("Aiko");
+    expect(html).toContain("Create a new profile");
+    // Resume is not the onboarding wizard: no stepper, no account talk.
+    expect(html).not.toContain('aria-label="Progress"');
+    expect(html).not.toContain("sign up");
   });
 });

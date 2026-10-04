@@ -17,7 +17,12 @@ export interface PackCandidate {
   maturity: string;
 }
 
-export type OnboardingStep = "welcome" | "packs" | "microphone" | "done";
+export type OnboardingStep = "resume" | "welcome" | "packs" | "microphone" | "done";
+
+export interface ProfileSummary {
+  id: string;
+  display_name: string;
+}
 
 export interface OnboardingProps {
   step: OnboardingStep;
@@ -33,22 +38,51 @@ export interface OnboardingProps {
   onEnableMic(): void;
   onSkipMic(): void;
   onContinue(): void;
+  profiles?: ProfileSummary[];
+  onResume(id: string): void;
+  onCreateNew(): void;
   error?: string | null;
 }
 
 export function Onboarding(p: OnboardingProps) {
   return (
     <section aria-label="Onboarding">
-      <ol aria-label="Progress" className="stepper">
-        <li aria-current={p.step === "welcome" ? "step" : undefined}>Welcome</li>
-        <li aria-current={p.step === "packs" ? "step" : undefined}>Language</li>
-        <li aria-current={p.step === "microphone" ? "step" : undefined}>Microphone</li>
-        <li aria-current={p.step === "done" ? "step" : undefined}>Start</li>
-      </ol>
+      {p.step !== "resume" && (
+        <ol aria-label="Progress" className="stepper">
+          <li aria-current={p.step === "welcome" ? "step" : undefined}>Welcome</li>
+          <li aria-current={p.step === "packs" ? "step" : undefined}>Language</li>
+          <li aria-current={p.step === "microphone" ? "step" : undefined}>Microphone</li>
+          <li aria-current={p.step === "done" ? "step" : undefined}>Start</li>
+        </ol>
+      )}
       {p.error && (
         <p role="alert" className="alert">
           {p.error}
         </p>
+      )}
+
+      {p.step === "resume" && (
+        <div className="card">
+          <h1>Welcome back</h1>
+          <p>These profiles live on this device. Pick one to continue.</p>
+          <div role="group" aria-label="Profiles" className="btn-row">
+            {(p.profiles ?? []).map((profile) => (
+              <button
+                key={profile.id}
+                type="button"
+                className="btn btn--primary"
+                onClick={() => p.onResume(profile.id)}
+              >
+                {profile.display_name}
+              </button>
+            ))}
+          </div>
+          <div className="btn-row">
+            <button type="button" className="btn btn--quiet" onClick={p.onCreateNew}>
+              Create a new profile
+            </button>
+          </div>
+        </div>
       )}
 
       {p.step === "welcome" && (
