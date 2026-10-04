@@ -53,9 +53,11 @@ them. Root cause was the brief, not the LLM:
    Rule rewritten to state per-type scope.
 2. **Rule 5 said "every content record cites `sources:`"** — same problem;
    units/activities/assessments have no `sources` field. Rule rewritten.
-3. **Prettier had re-wrapped the brief's JSONL examples into multi-line
-   JSON** (contradicting "one JSON object per line"). Fences switched to
-   ` ```jsonl ` so prettier leaves them verbatim.
+3. **Prettier re-wrapped the brief's JSONL examples into multi-line
+   JSON** (contradicting "one JSON object per line"). Prettier formats
+   ` ```json ` AND ` ```jsonl ` fences; only ` ```text ` is left verbatim.
+   Examples now live in ` ```text ` fences and stay single-line through
+   `pnpm fmt` (verified prettier-stable).
 
 After removing the forbidden fields (mechanical, no language judgment),
 7/7 PASS. Content review (my read; NOT a substitute for qualified human
@@ -77,3 +79,18 @@ review — everything stays `draft`):
 Verdict: the kit's calibration fixes (prerequisite records, enums) held —
 the external LLM got those right first try. Remaining brief defects were
 mine, now fixed.
+
+## Kit re-validation before external re-run (2026-10-04)
+
+Static audit of the corrected brief (automated dry-run unavailable in
+this environment: no completion tiers or subagent model configured):
+
+- 37 claims in the brief checked against `schemas/v0.2/*` programmatically
+  (status/review_status/generation/sources per record type, all enums,
+  id pattern, manifest capabilities). All consistent; the single
+  intentional delta: the brief REQUIRES `generation_contract` on units
+  while the schema leaves it optional (brief is stricter — by design).
+- All 9 worked-example blocks in the brief are semantically identical to
+  `tools/pack-templates/example-pack/`, which scores 7/7.
+- Brief is prettier-stable (JSONL examples in ` ```text ` fences).
+- Target language block pre-filled Russian (`ru-RU`) for the re-run.
