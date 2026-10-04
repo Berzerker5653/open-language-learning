@@ -1,0 +1,11 @@
+goals:
+  - id: "xx.goal.demo.greet"
+    description: "Greet someone using the two taught example words"
+    band: "on-ramp"
+    modalities: ["reading", "writing"]
+    prerequisites: []
+    required_concepts: ["xx.grammar.demo.word-order"]
+    assessment_ids: ["xx.assess.demo.greet"]
+    transfer_required: false
+    sources: ["template-original"]
+    review_status: "draft"

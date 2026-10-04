@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-03",
-  "active_task": "K-21",
+  "active_task": "K-22",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -638,6 +638,17 @@
     }
     ,
     "K-21": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/K-21.md",
+        "state/evidence/K-21/cli-gates-2026-10-03.txt",
+        "state/evidence/K-21/cargo-test-2026-10-03.txt"
+      ]
+    }
+    ,
+    "K-22": {
       "status": "in_progress",
       "attempts": 1,
       "last_error": null,

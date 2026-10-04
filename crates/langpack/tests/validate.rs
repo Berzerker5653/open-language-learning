@@ -374,3 +374,12 @@ fn media_assets_load_as_binary_and_pack_stays_clean() {
     let diags = pack.validate(Mode::Install, None);
     assert_eq!(error_count(&diags), 0, "ja-demo install: {diags:?}");
 }
+
+#[test]
+fn generation_contract_envelopes_unit_content() {
+    let diags = validate("invalid-generation-ref", Mode::Scaffold);
+    assert!(
+        codes(&diags).contains(&"content_outside_generation_contract"),
+        "content outside the declared contract must fail: {diags:?}"
+    );
+}

@@ -326,6 +326,39 @@ impl Pack {
                             }
                         }
                     }
+                    // K-21: a declared generation contract is a hard
+                    // envelope — every content/concept the unit uses
+                    // must be inside it (docs/03 §12).
+                    if let Some(gc) = inst.value.get("generation_contract") {
+                        let mut allowed: std::collections::HashSet<&str> =
+                            std::collections::HashSet::new();
+                        for field in ["allowed_vocab", "allowed_grammar"] {
+                            for (_, v) in array(gc, field) {
+                                if let Some(s) = v.as_str() {
+                                    allowed.insert(s);
+                                }
+                            }
+                        }
+                        for (i, act) in array(&inst.value, "activities") {
+                            for field in ["content_refs", "concept_refs"] {
+                                for (j, r) in array(act, field) {
+                                    if let Some(s) = r.as_str() {
+                                        if !allowed.contains(s) {
+                                            diags.push(Diagnostic::new(
+                                                &inst.file,
+                                                &format!("{}/activities/{}/{}/{}", inst.pointer, i, field, j),
+                                                "content_outside_generation_contract",
+                                                format!(
+                                                    "{s:?} is used by the unit but not in the generation contract"
+                                                ),
+                                                Severity::Error,
+                                            ));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 "scenario" => {
                     for (i, node) in array(&inst.value, "nodes") {
@@ -897,6 +930,19 @@ impl RefCollector<'_> {
                             format!("/activities/{i}/targets"),
                             act.get("targets").and_then(Value::as_array),
                             "targets",
+                        );
+                    }
+                }
+                if let Some(gc) = value.get("generation_contract") {
+                    for (field, label) in [
+                        ("allowed_vocab", "allowed_vocab"),
+                        ("allowed_grammar", "allowed_grammar"),
+                        ("register", "register"),
+                    ] {
+                        self.push_array(
+                            format!("/generation_contract/{field}"),
+                            gc.get(field).and_then(Value::as_array),
+                            label,
                         );
                     }
                 }

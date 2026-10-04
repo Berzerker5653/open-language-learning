@@ -1,0 +1,6 @@
+validate(scaffold): 0 error(s), 0 warning(s)
+lint: 0 error(s), 0 warning(s)
+--- invalid fixture:
+error[content_outside_generation_contract] curriculum/units/000-greetings.yaml/activities/2/content_refs/0: "xx.sent.demo.greet-friend" is used by the unit but not in the generation contract
+error[content_outside_generation_contract] curriculum/units/000-greetings.yaml/activities/3/content_refs/0: "xx.sent.demo.greet-friend" is used by the unit but not in the generation contract
+validate(scaffold): 2 error(s), 0 warning(s)

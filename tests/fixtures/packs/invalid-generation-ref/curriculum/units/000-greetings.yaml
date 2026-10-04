@@ -1,0 +1,35 @@
+id: "xx.unit.demo.greetings"
+goal_id: "xx.goal.demo.greet"
+title: "First greetings"
+summary: "Worked example: the smallest unit that exercises reading and writing."
+estimated_minutes: 5
+activities:
+  - id: "xx.activity.demo.encounter-greet"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["xx.lex.demo.tola", "xx.lex.demo.mara"]
+  - id: "xx.activity.demo.recall-greet"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["xx.lex.demo.tola"]
+  - id: "xx.activity.demo.cloze-greet"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["xx.sent.demo.greet-friend"]
+  - id: "xx.activity.demo.dictation-greet"
+    type: "dictation"
+    modality: "listening"
+    support_level: 1
+    content_refs: ["xx.sent.demo.greet-friend"]
+generation_contract:
+  allowed_vocab: ["xx.lex.demo.tola", "xx.lex.demo.mara"]
+  allowed_grammar: ["xx.grammar.demo.word-order"]
+  new_item_budget: 3
+  register: []
+  expected_interpretations: ["greeting a friend"]
+  prohibited_ambiguity: []
+  target_proficiency: "on-ramp"
+  validation_method: "choice"

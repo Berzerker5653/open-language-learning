@@ -283,6 +283,13 @@ When AI or procedural generation creates an activity, the generation contract sp
 
 Generated content that cannot be deterministically or confidently evaluated should be used for exploration/practice, not high-stakes advancement.
 
+Implemented (K-21): a unit may declare a `generation_contract` (unit
+schema) carrying these constraints; the validator rejects any activity
+content/concept reference outside `allowed_vocab`/`allowed_grammar` and
+resolves every contract id against the pack, so an AI-drafted unit is
+checked against its own declared envelope.
+
+
 ## 13. Capability map
 
 The learner sees a human-friendly map of communicative goals. Internal grammar/vocabulary nodes can be visible in detail views but should not dominate the top-level journey.

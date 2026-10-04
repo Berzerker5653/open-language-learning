@@ -26,6 +26,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-15 | Placement/diagnostic: per-assessment low-stakes tasks, `Diagnostic`-tagged evidence, known foundations unlock via prereq gating (`state/notes/K-15.md`) | docs/03 §10 |
 | K-16 | Kanji instruction: `kanji/entries.jsonl` pack data, meaning/reading drills on existing dimensions, SRS-gated resurfacing, mnemonics labelled by review status (`state/notes/K-16.md`) | WaniKani/Heisig practice |
 | K-20 | Authoring contract: `docs/PACK_AUTHORING_CONTRACT.md` + unit-brief + lint-clean worked example pack + community CI template, all CI-checked (`state/notes/K-20.md`) | PACK-AI-001 |
+| K-21 | Generation contract: `generation_contract` on units (allowed vocab/grammar, budget, register, validation method); validator enforces the envelope (`state/notes/K-21.md`) | docs/03 §12 |
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 
@@ -41,7 +42,6 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
-| K-21 | kit | **Generation contract in pack schema**: expose docs/03 §12 (allowed vocab/grammar, new-item budget, register, validation method) as machine-checkable per-unit fields so AI-drafted units can be validated against their own constraints | docs/03 §12; AI-curricular-alignment research |
 | K-22 | kit | **Chunking conventions**: document topic-sharded lexicon (`lexicon/food.jsonl`, …) and unit-per-lesson naming; already legal in layout contract, needs convention + template | layout.rs supports `lexicon/*.jsonl` |
 | K-23 | kit | Allow `curriculum/goals/*.yaml` sharding (only single-file remaining as packs grow past A1) | schema v0.3 candidate |
 | K-24 | kit | `langpack new-unit` / `new-lexicon` scaffold subcommands so agents author one lesson at a time with instant `validate` feedback | PACK-005 follow-on |

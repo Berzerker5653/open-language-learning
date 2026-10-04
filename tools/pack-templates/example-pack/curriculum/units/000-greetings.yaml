@@ -24,3 +24,12 @@ activities:
     modality: "listening"
     support_level: 1
     content_refs: ["xx.sent.demo.greet-friend"]
+generation_contract:
+  allowed_vocab: ["xx.lex.demo.tola", "xx.lex.demo.mara", "xx.sent.demo.greet-friend"]
+  allowed_grammar: ["xx.grammar.demo.word-order"]
+  new_item_budget: 3
+  register: []
+  expected_interpretations: ["greeting a friend"]
+  prohibited_ambiguity: []
+  target_proficiency: "on-ramp"
+  validation_method: "choice"

@@ -82,6 +82,9 @@ Author one lesson at a time:
 3. `langpack validate <pack>` after every file; fix before continuing.
 4. Keep new-item budget honest: a unit introduces a bounded number of
    new items (the engine's planner assumes small, dense lessons).
+5. For AI-drafted lessons, declare the unit's `generation_contract`
+   (allowed vocab/grammar, new-item budget, register, validation
+   method); the validator then enforces the envelope the unit promised.
 
 ## Worked example
 

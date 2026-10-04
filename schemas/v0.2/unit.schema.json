@@ -34,6 +34,35 @@
           }
         }
       }
+    },
+    "generation_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed_vocab", "new_item_budget", "validation_method"],
+      "description": "K-21: machine-checkable dynamic-content constraints (docs/03 §12). When present, every activity content_ref/concept_ref must be covered by allowed_vocab/allowed_grammar, and referenced ids must exist in the pack.",
+      "properties": {
+        "allowed_vocab": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" }
+        },
+        "allowed_grammar": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" }
+        },
+        "new_item_budget": { "type": "integer", "minimum": 0 },
+        "register": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" }
+        },
+        "expected_interpretations": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "prohibited_ambiguity": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "target_proficiency": { "enum": ["on-ramp", "A1", "A2", "B1", "B2", "C1", "C2"] },
+        "validation_method": { "enum": ["exact-match", "choice", "human-review", "model-validated"] }
+      }
     }
   }
 }
