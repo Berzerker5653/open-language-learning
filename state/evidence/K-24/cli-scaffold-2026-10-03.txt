@@ -1,0 +1,37 @@
+== K-24 CLI scaffold smoke 2026-10-03 ==
+initialized 0.2 pack at /tmp/scaf2
+next: langpack validate /tmp/scaf2 && langpack lint /tmp/scaf2
+appended xx.lex.food.apple to /tmp/scaf2/lexicon/entries.jsonl
+replace: form text, reading, gloss, and the REPLACE-SOURCE citation
+next: langpack validate /tmp/scaf2
+created /tmp/scaf2/curriculum/units/000-food-market.yaml
+replace: title, summary, goal_id (if REPLACE), activity content_refs
+next: langpack validate /tmp/scaf2
+--- units/000-food-market.yaml ---
+id: "xx.unit.food.market"
+goal_id: "xx.goal.replace-me"
+title: "REPLACE: lesson title"
+summary: "REPLACE: one-line summary"
+estimated_minutes: 5
+activities:
+  - id: "xx.activity.food.market-encounter"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 0
+    content_refs: []
+--- lexicon/entries.jsonl ---
+{"id":"xx.lex.food.apple","status":"draft","forms":[{"text":"REPLACE","is_primary":true}],"readings":[{"text":"REPLACE","script":"latin"}],"glosses":{"en-US":["REPLACE"]},"sources":["REPLACE-SOURCE"]}
+--- validate (scaffold) ---
+warning[unresolved_reference] curriculum/units/000-food-market.yaml/goal_id: goal_id references "xx.goal.replace-me", which is not defined in this pack and not declared in manifest.unresolved_references
+warning[unresolved_reference] lexicon/entries.jsonl/0/sources/0: sources references "REPLACE-SOURCE", which is not defined in this pack and not declared in manifest.unresolved_references
+validate(scaffold): 0 error(s), 2 warning(s)
+--- goal auto-pickup + NNN+10 on example-pack ---
+created /tmp/ep3/curriculum/units/010-food-market.yaml
+replace: title, summary, goal_id (if REPLACE), activity content_refs
+next: langpack validate /tmp/ep3
+id: "xx.unit.food.market"
+goal_id: "xx.goal.demo.greet"
+validate(scaffold): 0 error(s), 0 warning(s)
+--- wrong-kind rejection ---
+error: id "xx.unit.wrongkind" must be a lex id (segment `lex`)
+exit=1

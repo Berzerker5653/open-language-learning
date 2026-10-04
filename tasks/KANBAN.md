@@ -28,6 +28,9 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-20 | Authoring contract: `docs/PACK_AUTHORING_CONTRACT.md` + unit-brief + lint-clean worked example pack + community CI template, all CI-checked (`state/notes/K-20.md`) | PACK-AI-001 |
 | K-21 | Generation contract: `generation_contract` on units (allowed vocab/grammar, budget, register, validation method); validator enforces the envelope (`state/notes/K-21.md`) | docs/03 §12 |
 | K-22 | Chunking conventions: topic-sharded lexicon, `NNN-<topic>` unit naming, sentence/kanji/story sharding rules — documented and validator-proven (`state/notes/K-22.md`) | layout contract |
+| K-23 | Goals sharding: `curriculum/goals/*.yaml` accepted (ids pack-global, cross-file dupes fail) (`state/notes/K-23.md`) | layout contract |
+| K-24 | `new-unit`/`new-lexicon` scaffold subcommands: schema-valid starters, goal auto-pickup, NNN+10 naming, placeholders as warnings (`state/notes/K-24.md`) | PACK-005 |
+
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 
@@ -43,8 +46,6 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
-| K-23 | kit | Allow `curriculum/goals/*.yaml` sharding (only single-file remaining as packs grow past A1) | schema v0.3 candidate |
-| K-24 | kit | `langpack new-unit` / `new-lexicon` scaffold subcommands so agents author one lesson at a time with instant `validate` feedback | PACK-005 follow-on |
 
 ## later — content production & expansion
 

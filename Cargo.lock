@@ -2289,8 +2289,10 @@ name = "lts-langpack-cli"
 version = "0.1.0"
 dependencies = [
  "clap",
+ "lts-domain",
  "lts-langpack",
  "serde_json",
+ "serde_yaml",
  "tempfile",
 ]
 

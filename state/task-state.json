@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-03",
-  "active_task": "K-23",
+  "active_task": null,
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -659,10 +659,25 @@
     }
     ,
     "K-23": {
-      "status": "in_progress",
+      "status": "done",
       "attempts": 1,
       "last_error": null,
-      "evidence": []
+      "evidence": [
+        "state/notes/K-23.md",
+        "state/evidence/K-23/cli-gates-2026-10-03.txt",
+        "state/evidence/K-23/cargo-test-2026-10-03.txt"
+      ]
+    }
+    ,
+    "K-24": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/K-24.md",
+        "state/evidence/K-24/cargo-test-2026-10-03.txt",
+        "state/evidence/K-24/cli-scaffold-2026-10-03.txt"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence."

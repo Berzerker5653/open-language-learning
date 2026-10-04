@@ -111,3 +111,55 @@ fn worked_example_template_pack_stays_clean() {
     let (out, _err, ok) = run(&["audit-curriculum", &pack]);
     assert!(ok, "example pack curriculum must audit clean: {out}");
 }
+
+#[test]
+fn goals_shards_dedupe_ids_across_files() {
+    let dir = tempfile::tempdir().unwrap();
+    let pack = dir.path().join("dup-goals");
+    let pack_s = pack.to_str().unwrap();
+    let (out, err, ok) = run(&["init", pack_s, "--pack-id", "dev.example.dupgoals"]);
+    assert!(ok, "init: {out}{err}");
+    std::fs::remove_file(pack.join("curriculum/goals.yaml")).unwrap();
+    let shard = |name: &str| {
+        std::fs::write(
+            pack.join("curriculum/goals").join(name),
+            "goals:\n  - id: \"xx.goal.demo.same\"\n    description: \"dup\"\n    band: \"A1\"\n    modalities: [\"reading\"]\n    prerequisites: []\n    required_concepts: []\n    assessment_ids: [\"xx.assess.demo.x\"]\n    transfer_required: false\n    sources: [\"s\"]\n    review_status: \"draft\"\n",
+        )
+        .unwrap()
+    };
+    std::fs::create_dir_all(pack.join("curriculum/goals")).unwrap();
+    shard("a.yaml");
+    shard("b.yaml");
+    let (out, _err, ok) = run(&["validate", pack_s]);
+    assert!(!ok, "same id in two shards must fail: {out}");
+    assert!(out.contains("duplicate_id"), "{out}");
+}
+
+#[test]
+fn new_unit_and_lexicon_scaffold_validate_clean() {
+    let dir = tempfile::tempdir().unwrap();
+    let pack = dir.path().join("scaffold");
+    let pack_s = pack.to_str().unwrap();
+    let (out, err, ok) = run(&[
+        "init",
+        pack_s,
+        "--pack-id",
+        "dev.example.scaffold",
+        "--locale",
+        "xx-XX",
+    ]);
+    assert!(ok, "init: {out}{err}");
+    let (out, err, ok) = run(&["new-lexicon", pack_s, "xx.lex.food.apple"]);
+    assert!(ok, "new-lexicon: {out}{err}");
+    let (out, err, ok) = run(&["new-unit", pack_s, "xx.unit.food.market"]);
+    assert!(ok, "new-unit: {out}{err}");
+    assert!(pack.join("curriculum/units/000-food-market.yaml").exists());
+    // Scaffolds are schema-valid immediately; placeholders surface as
+    // warnings, never errors (docs/03 §12 authoring loop).
+    let (out, _err, ok) = run(&["validate", pack_s]);
+    assert!(ok, "scaffolded pack must validate: {out}");
+    assert!(out.contains("unresolved_reference"), "{out}");
+    // Wrong kind is rejected.
+    let (out, _err, ok) = run(&["new-lexicon", pack_s, "xx.unit.wrongkind"]);
+    assert!(!ok, "wrong kind must fail: {out}");
+}

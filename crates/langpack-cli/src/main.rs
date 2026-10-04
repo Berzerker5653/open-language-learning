@@ -112,6 +112,23 @@ enum Command {
         #[arg(long, default_value = "en-US")]
         gloss_locale: String,
     },
+    /// Scaffold a schema-valid starter unit (K-24): draft status,
+    /// REPLACE placeholders marked for the author; validates with
+    /// warnings until filled in.
+    NewUnit {
+        /// Pack root directory.
+        path: String,
+        /// Unit content id, e.g. xx.unit.food.market.
+        id: String,
+    },
+    /// Append a schema-valid starter lexicon entry (K-24) to
+    /// lexicon/entries.jsonl.
+    NewLexicon {
+        /// Pack root directory.
+        path: String,
+        /// Lexicon content id, e.g. xx.lex.food.apple.
+        id: String,
+    },
     /// Build a deterministic .lpk archive (sorted entries, fixed
     /// timestamps, SHA-256 manifest).
     Build {
@@ -321,6 +338,161 @@ fn cmd_init(path: &str, pack_id: &str, locale: &str, name: &str) -> ExitCode {
     ExitCode::SUCCESS
 }
 
+fn parse_id(raw: &str, want_kind: &str) -> Result<lts_domain::ContentId, ExitCode> {
+    let parsed = lts_domain::ContentId::parse(raw).map_err(|e| {
+        eprintln!("error: invalid content id {raw:?}: {e}");
+        ExitCode::from(1)
+    })?;
+    if parsed.kind().segment() != want_kind {
+        eprintln!("error: id {raw:?} must be a {want_kind} id (segment `{want_kind}`)");
+        return Err(ExitCode::from(1));
+    }
+    Ok(parsed)
+}
+
+fn first_goal_id(root: &Path, locale: &str) -> String {
+    let mut files: Vec<std::path::PathBuf> = Vec::new();
+    for cand in [
+        root.join("curriculum/goals.yaml"),
+        root.join("curriculum/goals.yml"),
+    ] {
+        if cand.exists() {
+            files.push(cand);
+        }
+    }
+    if let Ok(rd) = fs::read_dir(root.join("curriculum/goals")) {
+        for e in rd.filter_map(|e| e.ok()) {
+            let p = e.path();
+            if matches!(
+                p.extension().and_then(|x| x.to_str()),
+                Some("yaml") | Some("yml")
+            ) {
+                files.push(p);
+            }
+        }
+    }
+    files.sort();
+    for f in files {
+        if let Some(serde_yaml::Value::Mapping(map)) = fs::read_to_string(&f)
+            .ok()
+            .and_then(|t| serde_yaml::from_str::<serde_yaml::Value>(&t).ok())
+        {
+            if let Some(serde_yaml::Value::Sequence(goals)) =
+                map.get(serde_yaml::Value::String("goals".into()))
+            {
+                for g in goals {
+                    if let serde_yaml::Value::Mapping(m) = g {
+                        if let Some(serde_yaml::Value::String(id)) =
+                            m.get(serde_yaml::Value::String("id".into()))
+                        {
+                            return id.clone();
+                        }
+                    }
+                }
+            }
+        }
+    }
+    format!("{locale}.goal.replace-me")
+}
+
+fn cmd_new_unit(path: &str, id: &str) -> ExitCode {
+    if let Err(code) = parse_id(id, "unit") {
+        return code;
+    }
+    let root = Path::new(path);
+    if !root.join("manifest.yaml").exists() {
+        eprintln!("error: {path} is not a pack (no manifest.yaml)");
+        return ExitCode::from(1);
+    }
+    let segments: Vec<&str> = id.split('.').collect();
+    let locale = segments[0];
+    // slug: everything after the `unit` kind segment.
+    let slug = segments[2..].join("-");
+    // Next sequence number: max existing NNN prefix + 10.
+    let units_dir = root.join("curriculum/units");
+    let mut max_seq: Option<u32> = None;
+    if let Ok(rd) = fs::read_dir(&units_dir) {
+        for e in rd.filter_map(|e| e.ok()) {
+            let name = e.file_name().to_string_lossy().to_string();
+            if let Some(n) = name.get(0..3).and_then(|p| p.parse::<u32>().ok()) {
+                max_seq = Some(max_seq.map_or(n, |m| m.max(n)));
+            }
+        }
+    }
+    let seq = max_seq.map_or(0, |m| m + 10);
+    let file = units_dir.join(format!("{seq:03}-{slug}.yaml"));
+    if file.exists() {
+        eprintln!("error: {} already exists", file.display());
+        return ExitCode::from(1);
+    }
+    let goal_id = first_goal_id(root, locale);
+    let activity_id = format!("{}.activity.{}-encounter", locale, segments[2..].join("."));
+    let contents = [
+        format!("id: \"{id}\""),
+        format!("goal_id: \"{goal_id}\""),
+        "title: \"REPLACE: lesson title\"".to_string(),
+        "summary: \"REPLACE: one-line summary\"".to_string(),
+        "estimated_minutes: 5".to_string(),
+        "activities:".to_string(),
+        format!("  - id: \"{activity_id}\""),
+        "    type: \"encounter-read\"".to_string(),
+        "    modality: \"reading\"".to_string(),
+        "    support_level: 0".to_string(),
+        "    content_refs: []".to_string(),
+    ]
+    .join("\n")
+        + "\n";
+    if let Err(e) = fs::create_dir_all(&units_dir) {
+        eprintln!("error: cannot create {}: {e}", units_dir.display());
+        return ExitCode::from(2);
+    }
+    if let Err(e) = fs::write(&file, contents) {
+        eprintln!("error: cannot write {}: {e}", file.display());
+        return ExitCode::from(2);
+    }
+    println!("created {}", file.display());
+    println!("replace: title, summary, goal_id (if REPLACE), activity content_refs");
+    println!("next: langpack validate {path}");
+    ExitCode::SUCCESS
+}
+
+fn cmd_new_lexicon(path: &str, id: &str) -> ExitCode {
+    if let Err(code) = parse_id(id, "lex") {
+        return code;
+    }
+    let root = Path::new(path);
+    if !root.join("manifest.yaml").exists() {
+        eprintln!("error: {path} is not a pack (no manifest.yaml)");
+        return ExitCode::from(1);
+    }
+    let file = root.join("lexicon/entries.jsonl");
+    if let Some(dir) = file.parent() {
+        if let Err(e) = fs::create_dir_all(dir) {
+            eprintln!("error: cannot create {}: {e}", dir.display());
+            return ExitCode::from(2);
+        }
+    }
+    let line = format!(
+        "{{\"id\":\"{id}\",\"status\":\"draft\",\"forms\":[{{\"text\":\"REPLACE\",\"is_primary\":true}}],\"readings\":[{{\"text\":\"REPLACE\",\"script\":\"latin\"}}],\"glosses\":{{\"en-US\":[\"REPLACE\"]}},\"sources\":[\"REPLACE-SOURCE\"]}}\n"
+    );
+    match fs::OpenOptions::new().append(true).create(true).open(&file) {
+        Ok(mut f) => {
+            if let Err(e) = f.write_all(line.as_bytes()) {
+                eprintln!("error: cannot write {}: {e}", file.display());
+                return ExitCode::from(2);
+            }
+        }
+        Err(e) => {
+            eprintln!("error: cannot open {}: {e}", file.display());
+            return ExitCode::from(2);
+        }
+    }
+    println!("appended {id} to {}", file.display());
+    println!("replace: form text, reading, gloss, and the REPLACE-SOURCE citation");
+    println!("next: langpack validate {path}");
+    ExitCode::SUCCESS
+}
+
 fn main() -> ExitCode {
     let cli = Cli::parse();
     match cli.command {
@@ -330,6 +502,8 @@ fn main() -> ExitCode {
             locale,
             name,
         } => cmd_init(&path, &pack_id, &locale, &name),
+        Command::NewUnit { path, id } => cmd_new_unit(&path, &id),
+        Command::NewLexicon { path, id } => cmd_new_lexicon(&path, &id),
         Command::Validate {
             path,
             mode,
