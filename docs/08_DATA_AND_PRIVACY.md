@@ -70,6 +70,8 @@ Key tables/entities:
 - learner_goals;
 - settings;
 - retained_recordings (metadata only + local path);
+- mined_items (learner-owned words with source citations, K-14;
+  device-local, deletable together with their SRS rows);
 - reports.
 
 ## Evidence immutability

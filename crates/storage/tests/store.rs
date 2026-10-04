@@ -95,7 +95,7 @@ fn migrations_apply_forward_from_initial_schema() {
         .unwrap()
         .collect::<Result<_, _>>()
         .unwrap();
-    assert_eq!(versions, vec![1, 2, 3]);
+    assert_eq!(versions, vec![1, 2, 3, 4]);
 }
 
 #[test]
@@ -283,4 +283,61 @@ fn settings_goals_and_pack_records_round_trip() {
             .unwrap(),
         Some("3".into())
     );
+}
+
+#[test]
+fn mined_items_crud_and_cascade() {
+    let dir = tempfile::tempdir().unwrap();
+    let db = dir.path().join("learner.db");
+    let store = lts_storage::Store::open(&db).unwrap();
+    let p = store.create_profile("Ana", "2026-10-03T09:00:00Z").unwrap();
+
+    store
+        .add_mined(
+            &p.id,
+            "mine-1",
+            "ねこ",
+            None,
+            Some("cat"),
+            "ja.story.demo.first-meeting",
+            "2026-10-03T09:00:00Z",
+        )
+        .unwrap();
+    store
+        .add_mined(
+            &p.id,
+            "mine-2",
+            "いぬ",
+            Some("犬"),
+            Some("dog"),
+            "manual",
+            "2026-10-03T09:01:00Z",
+        )
+        .unwrap();
+    let items = store.mined_items(&p.id).unwrap();
+    assert_eq!(items.len(), 2);
+    assert_eq!(items[0].source_citation, "ja.story.demo.first-meeting");
+
+    // Deleting a mined word also drops its SRS row.
+    store
+        .save_scheduler_state(
+            &p.id,
+            &lts_storage::SchedulerRecord {
+                item_id: "mine-1".into(),
+                scheduler: "fsrs-spike-0.1.0".into(),
+                params_json: "{}".into(),
+                due_at: "2026-10-04T09:00:00Z".into(),
+            },
+        )
+        .unwrap();
+    assert!(store.remove_mined(&p.id, "mine-1").unwrap());
+    assert_eq!(store.mined_items(&p.id).unwrap().len(), 1);
+    assert!(
+        store
+            .scheduler_state(&p.id)
+            .unwrap()
+            .iter()
+            .all(|r| r.item_id != "mine-1")
+    );
+    assert!(!store.remove_mined(&p.id, "mine-1").unwrap());
 }

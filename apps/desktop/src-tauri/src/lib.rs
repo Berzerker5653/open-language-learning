@@ -2311,6 +2311,189 @@ fn story_audio(profile_id: String, sentence_id: String) -> Result<SpeechAudio, S
     dictation_audio_at(&data_dir(), &profile_id, &sentence_id)
 }
 
+/// K-14: sentence mining — the learner's own lexicon with source
+/// citations. Language-agnostic engine feature (not pack data). Mined
+/// items get their own SRS rows (`mine-*` item ids) and NEVER write
+/// mastery evidence or touch pack-content scheduler rows.
+#[derive(Serialize)]
+struct MinedItemView {
+    id: String,
+    surface: String,
+    reading: Option<String>,
+    gloss: Option<String>,
+    source_citation: String,
+    created_at: String,
+    due_at: Option<String>,
+}
+
+fn is_mined_item(item_id: &str) -> bool {
+    item_id.starts_with("mine-")
+}
+
+#[tauri::command]
+fn mine_add(
+    profile_id: String,
+    surface: String,
+    reading: Option<String>,
+    gloss: Option<String>,
+    source_citation: String,
+) -> Result<MinedItemView, String> {
+    mine_add_at(
+        &data_dir(),
+        &profile_id,
+        surface,
+        reading,
+        gloss,
+        source_citation,
+    )
+}
+
+fn mine_add_at(
+    data: &Path,
+    profile_id: &str,
+    surface: String,
+    reading: Option<String>,
+    gloss: Option<String>,
+    source_citation: String,
+) -> Result<MinedItemView, String> {
+    let surface = surface.trim().to_string();
+    if surface.is_empty() || surface.chars().count() > 100 {
+        return Err("surface out of range".into());
+    }
+    if source_citation.trim().is_empty() {
+        return Err("a source citation is required".into());
+    }
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let now = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map_err(|e| e.to_string())?;
+    let id = format!("mine-{}-{}", now.as_secs(), now.subsec_nanos());
+    store
+        .add_mined(
+            &profile_id,
+            &id,
+            &surface,
+            reading.as_deref(),
+            gloss.as_deref(),
+            source_citation.trim(),
+            &rfc3339_utc(now.as_secs()),
+        )
+        .map_err(|e| e.to_string())?;
+    Ok(MinedItemView {
+        id,
+        surface,
+        reading,
+        gloss,
+        source_citation: source_citation.trim().to_string(),
+        created_at: rfc3339_utc(now.as_secs()),
+        due_at: None,
+    })
+}
+
+#[tauri::command]
+fn mine_list(profile_id: String) -> Result<Vec<MinedItemView>, String> {
+    mine_list_at(&data_dir(), &profile_id)
+}
+
+fn mine_list_at(data: &Path, profile_id: &str) -> Result<Vec<MinedItemView>, String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let due: std::collections::HashMap<String, String> = store
+        .scheduler_state(profile_id)
+        .map_err(|e| e.to_string())?
+        .into_iter()
+        .filter(|r| is_mined_item(&r.item_id) && r.scheduler == lts_scheduler::SPIKE_VERSION)
+        .map(|r| (r.item_id, r.due_at))
+        .collect();
+    Ok(store
+        .mined_items(profile_id)
+        .map_err(|e| e.to_string())?
+        .into_iter()
+        .map(|m| MinedItemView {
+            due_at: due.get(&m.id).cloned(),
+            id: m.id,
+            surface: m.surface,
+            reading: m.reading,
+            gloss: m.gloss,
+            source_citation: m.source_citation,
+            created_at: m.created_at,
+        })
+        .collect())
+}
+
+#[tauri::command]
+fn mine_remove(profile_id: String, item_id: String) -> Result<bool, String> {
+    if !is_mined_item(&item_id) {
+        return Err("not a mined item id".into());
+    }
+    let data = data_dir();
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    store
+        .remove_mined(&profile_id, &item_id)
+        .map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn mine_due(profile_id: String) -> Result<Vec<MinedItemView>, String> {
+    let data = data_dir();
+    let all = mine_list_at(&data, &profile_id)?;
+    let now = rfc3339_utc(now_secs());
+    Ok(all
+        .into_iter()
+        .filter(|m| m.due_at.as_deref().is_some_and(|d| d <= now.as_str()))
+        .collect())
+}
+
+/// Self-graded recall review of a mined word (surface -> recall the
+/// meaning). Updates only the mined item's SRS row; no evidence.
+#[tauri::command]
+fn mine_grade(profile_id: String, item_id: String, again: bool) -> Result<String, String> {
+    mine_grade_at(&data_dir(), &profile_id, &item_id, again)
+}
+
+fn mine_grade_at(
+    data: &Path,
+    profile_id: &str,
+    item_id: &str,
+    again: bool,
+) -> Result<String, String> {
+    if !is_mined_item(item_id) {
+        return Err("not a mined item id".into());
+    }
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let now = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map_err(|e| e.to_string())?;
+    let spike = lts_scheduler::FsrsSpike::default();
+    let prior = store
+        .scheduler_state(profile_id)
+        .map_err(|e| e.to_string())?
+        .into_iter()
+        .find(|r| r.item_id == item_id && r.scheduler == lts_scheduler::SPIKE_VERSION)
+        .map(|r| serde_json::from_str::<lts_scheduler::ItemState>(&r.params_json))
+        .transpose()
+        .map_err(|e| e.to_string())?;
+    let rating = if again {
+        lts_scheduler::Rating::Again
+    } else {
+        lts_scheduler::Rating::Good
+    };
+    let decision =
+        lts_scheduler::Scheduler::review(&spike, prior.as_ref(), rating, now.as_secs() as i64);
+    let due_at = rfc3339_utc(decision.due_at.max(0) as u64);
+    store
+        .save_scheduler_state(
+            profile_id,
+            &lts_storage::SchedulerRecord {
+                item_id: item_id.to_string(),
+                scheduler: lts_scheduler::SPIKE_VERSION.to_string(),
+                params_json: serde_json::to_string(&decision.state).map_err(|e| e.to_string())?,
+                due_at: due_at.clone(),
+            },
+        )
+        .map_err(|e| e.to_string())?;
+    Ok(due_at)
+}
+
 /// K-04: once every kana-script orthography unit the active pack
 /// teaches has reached at least `supported` recognition mastery, mark
 /// kana literacy established (JA_ORTHOGRAPHY_POLICY romaji_fade rule:
@@ -2840,6 +3023,11 @@ pub fn run() {
             story_view,
             story_audio,
             listening_audio,
+            mine_add,
+            mine_list,
+            mine_remove,
+            mine_due,
+            mine_grade,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
@@ -3988,6 +4176,40 @@ mod tests {
         // FORMATIVE ONLY: reading records no evidence at all.
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
         assert!(store.evidence_for_profile(&p.id).unwrap().is_empty());
+    }
+
+    #[test]
+    fn mined_words_schedule_without_touching_mastery_evidence() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+
+        let item = mine_add_at(
+            data,
+            &p.id,
+            "ねこ".to_string(),
+            None,
+            Some("cat".to_string()),
+            "ja.story.demo.first-meeting".to_string(),
+        )
+        .unwrap();
+        assert!(item.id.starts_with("mine-"));
+        assert_eq!(item.source_citation, "ja.story.demo.first-meeting");
+
+        // Self-graded review schedules the mined item only.
+        mine_grade_at(data, &p.id, &item.id, false).unwrap();
+        let listed = mine_list_at(data, &p.id).unwrap();
+        assert_eq!(listed.len(), 1);
+        assert!(listed[0].due_at.is_some());
+
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        // NEVER mastery evidence, and no pack-content scheduler rows.
+        assert!(store.evidence_for_profile(&p.id).unwrap().is_empty());
+        let rows = store.scheduler_state(&p.id).unwrap();
+        assert_eq!(rows.len(), 1);
+        assert!(rows[0].item_id.starts_with("mine-"));
     }
 
     #[test]

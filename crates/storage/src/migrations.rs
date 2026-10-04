@@ -14,7 +14,7 @@
 use crate::error::Error;
 use rusqlite::Connection;
 
-pub const SCHEMA_VERSION: i64 = 3;
+pub const SCHEMA_VERSION: i64 = 4;
 
 struct Migration {
     version: i64,
@@ -151,6 +151,21 @@ CREATE INDEX idx_evidence_activity ON evidence_events(activity_id);
         version: 3,
         sql: "
 ALTER TABLE evidence_events ADD COLUMN failure_reason TEXT;
+",
+    },
+    Migration {
+        version: 4,
+        sql: "
+CREATE TABLE mined_items (
+  id TEXT PRIMARY KEY,
+  profile_id TEXT NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
+  surface TEXT NOT NULL,
+  reading TEXT,
+  gloss TEXT,
+  source_citation TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  UNIQUE (profile_id, surface)
+);
 ",
     },
 ];

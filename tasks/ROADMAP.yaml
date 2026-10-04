@@ -896,6 +896,17 @@ tasks:
   acceptance:
   - Packs declare stories (`stories/*.yaml`: ordered sentence content ids); the app renders an interlinear reader with per-sentence media-first audio and tap-to-lookup (sentence scaffolds + lexicon entries whose surface occurs in the sentence), scaffolds faded by comprehension-reading mastery via the READ-001 reader.
   - The mode is FORMATIVE input practice: it records no mastery evidence; grading means ordering sentences by learner-known content, not scoring.
+- id: K-14
+  milestone: M6
+  priority: P2
+  title: Sentence mining / learner-owned lexicon
+  dependencies: []
+  read_first:
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  - docs/08_DATA_AND_PRIVACY.md
+  acceptance:
+  - Learners add any encountered word (surface/reading/gloss) with a source citation to a personal, device-local lexicon (storage migration + CRUD commands); mining from the story reader cites the story content id.
+  - Mined items get their own SRS scheduling (due reviews surfaced in the app, self-graded recall updates the scheduler) and NEVER write mastery evidence or touch pack-content scheduler rows.
 - id: GAME-001
   milestone: M7
   priority: P1

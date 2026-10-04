@@ -22,6 +22,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-11 | Shadowing: speak-along loop (model audio → record → self-compare), formative only, never evidence (`state/notes/K-11.md`) | K-11 |
 | K-12 | Cloze + dictation: `sentences/entries.jsonl` pack data, typed grading, `orthographic-encoding` dimension keeps dictation off production-writing (`state/notes/K-12.md`) | docs/03 §9 |
 | K-13 | Graded reading: `stories/*.yaml` pack data, interlinear reader with media-first audio + word lookup, formative only (`state/notes/K-13.md`) | community practice |
+| K-14 | Sentence mining: `mined_items` table (migration v4), cited learner-owned words with own SRS rows, never mastery evidence (`state/notes/K-14.md`) | docs/03 §17 |
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 
@@ -32,7 +33,6 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 | card | epic | what | evidence |
 | --- | --- | --- | --- |
-| K-14 | methods | **Sentence mining / learner-owned lexicon**: add any encountered word to personal SRS with source citation; the core "any language" flexibility lever. Language-agnostic engine feature, not pack data | docs/03 §17 learner control; immersion/mining practice |
 | K-15 | methods | **Placement/diagnostic assessment**: low-stakes diagnosis unlocking known foundations (specified, never built) | docs/03 §10 |
 | K-16 | methods | **Kanji instruction** (radicals + mnemonic stories + Heisig/WaniKani-style SRS gating) for A1+ reading track | WaniKani/Heisig practice; JA-RES-003 kanji selection rules |
 

@@ -93,6 +93,7 @@ export function App() {
     | "scenarios"
     | "shadowing"
     | "reading"
+    | "words"
   >("practice");
   const [notice, setNotice] = useState<PrivacyNotice>({
     title: "Your data stays on this device",
@@ -186,6 +187,26 @@ export function App() {
   } | null>(null);
   const [storyLookup, setStoryLookup] = useState<string | null>(null);
   const [storyError, setStoryError] = useState<string | null>(null);
+  const [mineItems, setMineItems] = useState<
+    {
+      id: string;
+      surface: string;
+      reading: string | null;
+      gloss: string | null;
+      source_citation: string;
+      created_at: string;
+      due_at: string | null;
+    }[]
+  >([]);
+  const [mineSurface, setMineSurface] = useState("");
+  const [mineReading, setMineReading] = useState("");
+  const [mineGloss, setMineGloss] = useState("");
+  const [mineSource, setMineSource] = useState("");
+  const [mineError, setMineError] = useState<string | null>(null);
+  const [mineReview, setMineReview] = useState<{
+    item: (typeof mineItems)[number];
+    revealed: boolean;
+  } | null>(null);
   const [shadowError, setShadowError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -614,6 +635,92 @@ export function App() {
     }
   }
 
+  // K-14: learner-owned lexicon. Mined words are device-local, cited,
+  // and scheduled by their own SRS rows — never mastery evidence.
+  async function refreshMine() {
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    try {
+      setMineItems((await inv("mine_list", { profileId })) as typeof mineItems);
+      setMineError(null);
+    } catch (e) {
+      setMineError(String(e));
+    }
+  }
+
+  async function openWords() {
+    setRoute("words");
+    setMineReview(null);
+    await refreshMine();
+  }
+
+  async function addMine(sourceCitation?: string) {
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    try {
+      await inv("mine_add", {
+        profileId,
+        surface: mineSurface,
+        reading: mineReading || null,
+        gloss: mineGloss || null,
+        sourceCitation: (sourceCitation ?? mineSource) || "manual",
+      });
+      setMineSurface("");
+      setMineReading("");
+      setMineGloss("");
+      setMineSource("");
+      await refreshMine();
+    } catch (e) {
+      setMineError(String(e));
+    }
+  }
+
+  async function mineFromStory(surface: string, reading: string | null, gloss: string) {
+    const inv = detectInvoke();
+    if (!inv || !profileId || !storyActive) return;
+    try {
+      await inv("mine_add", {
+        profileId,
+        surface,
+        reading,
+        gloss,
+        sourceCitation: storyActive.id,
+      });
+      await refreshMine();
+    } catch (e) {
+      setStoryError(String(e));
+    }
+  }
+
+  async function removeMine(id: string) {
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    try {
+      await inv("mine_remove", { profileId, itemId: id });
+      await refreshMine();
+    } catch (e) {
+      setMineError(String(e));
+    }
+  }
+
+  async function gradeMine(again: boolean) {
+    const inv = detectInvoke();
+    if (!inv || !profileId || !mineReview) return;
+    try {
+      await inv("mine_grade", { profileId, itemId: mineReview.item.id, again });
+      setMineReview(null);
+      await refreshMine();
+    } catch (e) {
+      setMineError(String(e));
+    }
+  }
+
+  function startMineReview() {
+    const now = new Date().toISOString();
+    const due = mineItems.find((m) => m.due_at !== null && m.due_at <= now);
+    if (due) setMineReview({ item: due, revealed: false });
+  }
+
   // READ-001: revealing a faded scaffold refetches the task with the
   // reading shown; the submit then records it as support (level 3).
   async function revealPracticeReading() {
@@ -974,6 +1081,14 @@ export function App() {
           >
             Reading
           </button>
+          <button
+            type="button"
+            className="tab"
+            aria-current={route === "words" ? "page" : undefined}
+            onClick={() => void openWords()}
+          >
+            My Words
+          </button>
         </nav>
       }
     >
@@ -1139,6 +1254,14 @@ export function App() {
                               {w.surface}
                               {w.reading ? ` (${w.reading})` : ""}
                               {w.romaji ? ` ${w.romaji}` : ""} — {w.gloss}
+                              {"  "}
+                              <button
+                                type="button"
+                                className="btn btn--quiet"
+                                onClick={() => void mineFromStory(w.surface, w.reading, w.gloss)}
+                              >
+                                Mine
+                              </button>
                             </li>
                           ))}
                         </ul>
@@ -1148,6 +1271,120 @@ export function App() {
                 </div>
               ))}
             </>
+          )}
+        </section>
+      ) : route === "words" ? (
+        <section aria-label="My words">
+          <h2>My words</h2>
+          <p className="empty">
+            Words you chose to keep, with where you met them. Reviews are self-graded and stay on
+            this device; they never count as mastery evidence.
+          </p>
+          {mineError && (
+            <p role="alert" className="alert">
+              {mineError}
+            </p>
+          )}
+          {mineReview ? (
+            <div className="field">
+              <p className="prompt">{mineReview.item.surface}</p>
+              {mineReview.revealed ? (
+                <>
+                  <p>{mineReview.item.gloss ?? mineReview.item.reading ?? "(no gloss)"}</p>
+                  <p className="notice">Met in: {mineReview.item.source_citation}</p>
+                  <div className="btn-row">
+                    <button type="button" className="btn" onClick={() => void gradeMine(false)}>
+                      I knew it
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn--quiet"
+                      onClick={() => void gradeMine(true)}
+                    >
+                      Again
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <div className="btn-row">
+                  <button
+                    type="button"
+                    className="btn btn--primary"
+                    onClick={() => setMineReview({ ...mineReview, revealed: true })}
+                  >
+                    Reveal
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="btn-row">
+              <button type="button" className="btn btn--primary" onClick={startMineReview}>
+                Review due words
+              </button>
+            </div>
+          )}
+          <div className="field">
+            <label htmlFor="mine-surface">Word or phrase</label>
+            <input
+              id="mine-surface"
+              value={mineSurface}
+              onChange={(e) => setMineSurface(e.target.value)}
+            />
+            <label htmlFor="mine-reading">Reading (optional)</label>
+            <input
+              id="mine-reading"
+              value={mineReading}
+              onChange={(e) => setMineReading(e.target.value)}
+            />
+            <label htmlFor="mine-gloss">Meaning (optional)</label>
+            <input
+              id="mine-gloss"
+              value={mineGloss}
+              onChange={(e) => setMineGloss(e.target.value)}
+            />
+            <label htmlFor="mine-source">Where did you meet it? (citation)</label>
+            <input
+              id="mine-source"
+              value={mineSource}
+              onChange={(e) => setMineSource(e.target.value)}
+            />
+            <div className="btn-row">
+              <button
+                type="button"
+                className="btn btn--primary"
+                disabled={mineSurface.trim() === ""}
+                onClick={() => void addMine()}
+              >
+                Add to my words
+              </button>
+            </div>
+          </div>
+          {mineItems.length === 0 ? (
+            <p className="empty">Nothing mined yet. Add a word above or from a story lookup.</p>
+          ) : (
+            <ul>
+              {mineItems.map((m) => (
+                <li key={m.id}>
+                  {m.surface}
+                  {m.reading ? ` (${m.reading})` : ""}
+                  {m.gloss ? ` — ${m.gloss}` : ""}
+                  {"  ·  "}
+                  <small>
+                    {m.source_citation}
+                    {m.due_at ? ` · due ${m.due_at.slice(0, 10)}` : " · not scheduled yet"}
+                  </small>
+                  {"  "}
+                  <button
+                    type="button"
+                    className="btn btn--quiet"
+                    onClick={() => void removeMine(m.id)}
+                  >
+                    Remove
+                  </button>
+                </li>
+              ))}
+            </ul>
           )}
         </section>
       ) : route === "progress" ? (

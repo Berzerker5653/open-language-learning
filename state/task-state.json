@@ -586,6 +586,19 @@
         "state/evidence/K-13/smoke-desktop-2026-10-03.txt"
       ]
     }
+    ,
+    "K-14": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/K-14.md",
+        "state/evidence/K-14/cli-validate-2026-10-03.txt",
+        "state/evidence/K-14/cargo-test-2026-10-03.txt",
+        "state/evidence/K-14/vitest-2026-10-03.txt",
+        "state/evidence/K-14/smoke-desktop-2026-10-03.txt"
+      ]
+    }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence."
 }
