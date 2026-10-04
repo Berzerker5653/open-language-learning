@@ -9,8 +9,10 @@ one pass — i.e. whether the kit's requirements are unambiguous.
 1. Fill in the **Target language** block in `BRIEF.md` (language name +
    `target_locale`; the id prefix is derived from the locale — that is the
    only language-specific edit needed). Paste the whole file to the test LLM.
-2. Save its response's files into `experiments/llm-pack-authoring/candidates/<name>/`
-   preserving the relative paths (manifest.yaml at the pack root).
+2. Save the model's FULL response text to a file (e.g.
+   `/tmp/<name>-response.md`) — no manual file copying — and run
+   `./experiments/llm-pack-authoring/parse_response.py <response-file> <name>`
+   to reconstruct `candidates/<name>/`.
 3. Score: `./experiments/llm-pack-authoring/score.sh experiments/llm-pack-authoring/candidates/<name> <name>`
 4. Record the outcome in `RESULTS.md` (gates passed, diagnostics, and any
    kit ambiguity the failure reveals).

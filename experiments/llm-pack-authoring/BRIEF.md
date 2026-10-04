@@ -113,7 +113,9 @@ line `### <relative/path>`:
 ```
 
 JSONL files: one JSON object per line, no trailing commas, no comments.
-YAML: two-space indent.
+YAML: two-space indent. Your text response IS the deliverable: the
+harness reconstructs the folder from these blocks. Do NOT create or
+offer to create a zip, archive, or downloadable file.
 
 ## Worked example (structurally perfect — same shapes, replace content and locale)
 
