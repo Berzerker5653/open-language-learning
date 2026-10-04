@@ -1,0 +1,39 @@
+goals:
+  - id: "de.goal.onramp.greet"
+    description: "Greet someone and say goodbye at different times of day"
+    band: "on-ramp"
+    modalities: ["reading", "writing"]
+    prerequisites: []
+    required_concepts: ["de.grammar.onramp.verb-second"]
+    assessment_ids: ["de.assess.onramp.greet"]
+    transfer_required: false
+    sources: ["calibration-original"]
+    review_status: "draft"
+  - id: "de.goal.onramp.introduce"
+    description: "Say your own name and ask someone else's name"
+    prerequisites:
+      - target: "de.goal.onramp.greet"
+        dimension: "recall-meaning"
+        required_state: "independent"
+        strength: "helpful"
+    band: "on-ramp"
+    modalities: ["reading", "writing"]
+    required_concepts: ["de.grammar.onramp.verb-second"]
+    assessment_ids: ["de.assess.onramp.introduce"]
+    transfer_required: false
+    sources: ["calibration-original"]
+    review_status: "draft"
+  - id: "de.goal.a1.ask-price"
+    description: "Ask what something costs and read simple prices"
+    prerequisites:
+      - target: "de.goal.onramp.introduce"
+        dimension: "recall-meaning"
+        required_state: "independent"
+        strength: "helpful"
+    band: "A1"
+    modalities: ["reading", "writing"]
+    required_concepts: ["de.grammar.a1.articles"]
+    assessment_ids: ["de.assess.a1.ask-price"]
+    transfer_required: false
+    sources: ["calibration-original"]
+    review_status: "draft"

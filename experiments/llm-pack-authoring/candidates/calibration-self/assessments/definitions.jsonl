@@ -1,0 +1,3 @@
+{"id":"de.assess.onramp.greet","goal_id":"de.goal.onramp.greet","kind":"recall","modality":"reading","rubric":{"scale":"observed","criteria":["greeting matched to time of day"]},"review_status":"draft"}
+{"id":"de.assess.onramp.introduce","goal_id":"de.goal.onramp.introduce","kind":"production","modality":"writing","rubric":{"scale":"observed","criteria":["name stated with correct verb form"]},"review_status":"draft"}
+{"id":"de.assess.a1.ask-price","goal_id":"de.goal.a1.ask-price","kind":"production","modality":"writing","rubric":{"scale":"observed","criteria":["cost question word order restored"]},"review_status":"draft"}

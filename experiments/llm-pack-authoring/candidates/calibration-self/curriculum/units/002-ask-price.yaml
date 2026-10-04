@@ -1,0 +1,30 @@
+id: "de.unit.a1.ask-price"
+goal_id: "de.goal.a1.ask-price"
+title: "What does it cost?"
+summary: "Ask wie viel kostet … and read simple prices with numbers."
+estimated_minutes: 6
+activities:
+  - id: "de.activity.a1.encounter-price"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["de.lex.everyday.wie", "de.lex.everyday.kosten", "de.lex.everyday.euro", "de.lex.everyday.drei", "de.lex.everyday.fuenf"]
+  - id: "de.activity.a1.cloze-cost"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["de.sent.a1.wie-viel-kostet-der-euro"]
+  - id: "de.activity.a1.recall-numbers"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["de.lex.everyday.drei", "de.lex.everyday.fuenf"]
+generation_contract:
+  allowed_vocab: ["de.lex.everyday.wie", "de.lex.everyday.kosten", "de.lex.everyday.euro", "de.lex.everyday.drei", "de.lex.everyday.fuenf", "de.sent.a1.wie-viel-kostet-der-euro"]
+  allowed_grammar: ["de.grammar.a1.articles"]
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["asking a price", "reading a price"]
+  prohibited_ambiguity: []
+  target_proficiency: "A1"
+  validation_method: "choice"

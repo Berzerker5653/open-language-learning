@@ -1,0 +1,13 @@
+lts-pack/1 dev.experiment.de-de v0.0.1 (schema 0.2)
+         630  9414082c4fb7  assessments/definitions.jsonl
+        1420  bb9d8db9a22b  curriculum/goals.yaml
+        1264  692d0a618a53  curriculum/units/000-greetings.yaml
+        1056  e8f083335639  curriculum/units/001-introductions.yaml
+        1207  f90b9f16c4c1  curriculum/units/002-ask-price.yaml
+        1421  3498edc8dfea  grammar/concepts.jsonl
+        2660  4c2ba92e1b8c  lexicon/everyday.jsonl
+        1577  1430239722c0  lexicon/greetings.jsonl
+         126  f74a26f0f40f  licenses.jsonl
+         405  cffe3810b6be  manifest.yaml
+        1093  4e876e755a1f  sentences/entries.jsonl
+         436  42eee88ef277  sources.jsonl
