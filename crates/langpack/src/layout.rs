@@ -227,10 +227,11 @@ pub fn is_documentation(rel: &str) -> bool {
 }
 
 /// Governance metadata allowed inside a pack tree (REVIEW-001): the pack's
-/// review policy and version-bound review records. Not content; never
-/// schema-validated as content, but constrained to known paths so typos and
-/// smuggled files still surface as unknown_file warnings.
+/// review policy. Not content; never schema-validated as content, but
+/// constrained to the known path so smuggled files still surface as
+/// unknown_file warnings. Review RECORDS are content: they live in
+/// reviews.jsonl under the review-record schema, enforced by the validator
+/// (status flips require an approved record).
 pub fn is_governance(rel: &str) -> bool {
     rel == "review/REVIEW_POLICY.yaml"
-        || (rel.starts_with("review/records/") && rel.ends_with(".yaml"))
 }

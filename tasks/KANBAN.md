@@ -66,7 +66,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | card | what |
 | --- | --- |
 | O-01 | LIC-001 — CLOSED 2026-10-04: code Apache-2.0 (ADR-0010, owner delegation), pack content CC BY 4.0, TTS GPL payload-scoped (ADR-0009/TTS-002); publishing still gated by O-05 |
-| O-02 | JA-A1-003: qualified human review of A1 content — owner 2026-10-04: owner is a learner, not a qualified reviewer, and cannot perform this gate; content stays labeled draft/unreviewed until an external reviewer is engaged (or the owner explicitly accepts draft labeling at release) |
+| O-02 | JA-A1-003: qualified human review of A1 content — owner 2026-10-04: owner is a learner and cannot perform the gate. DECIDED 2026-10-04: review delegated to GitHub contributors (REVIEWER_KIT + reviews.jsonl records; validator enforces record on status flip; community-reviewer → `validated`, qualified-human → `verified`); all content ships labeled AI-generated/draft until merged review PRs promote it |
 | O-03 | Screen-reader matrix (NVDA/VoiceOver/Orca) + IME composition audit |
 | O-04 | REL-001 release gates incl. pedagogical review + speech calibration |
 | O-05 | GitHub publishing authorization for catalog assets |

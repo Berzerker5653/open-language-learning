@@ -775,7 +775,8 @@
       "attempts": 1,
       "last_error": null,
       "evidence": [
-        "state/evidence/REVIEW-001/artifacts-2026-10-04.txt"
+        "state/evidence/REVIEW-001/artifacts-2026-10-04.txt",
+        "state/evidence/REVIEW-001/github-review-flow-2026-10-04.txt"
       ]
     },
     "JA-A1-001": {

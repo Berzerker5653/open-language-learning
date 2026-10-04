@@ -1,0 +1,32 @@
+O-02 owner decision + GitHub review mechanism — 2026-10-04
+
+Owner decision (this session): content ships labeled AI-generated/draft;
+qualified review is delegated to GitHub contributors; merged review PRs
+switch items to reviewed/verified by the named reviewer.
+
+Mechanism (built + enforced):
+- Validator rule (crates/langpack/src/pack.rs): content status `validated`
+  requires an approved reviews.jsonl record with reviewer_category
+  qualified-human-expert | qualified-human-native-speaker |
+  community-reviewer; `verified` requires a qualified-human category.
+  ai-assisted/automated-check records never promote. Error at install,
+  warning at scaffold.
+- Fixtures/tests: valid-reviewed-item (flip + record installs clean),
+  invalid-fake-promotion (ai-assisted approval cannot support `verified`;
+  scaffold warning + install error). valid-full fixture gained the records
+  its three `validated` items always claimed.
+- reviews.jsonl (schemas/v0.2/review-record.schema.json) is the single
+  record mechanism; the parallel review/records/ path was removed (clean
+  cutover): is_governance now allows only review/REVIEW_POLICY.yaml.
+- REVIEW_POLICY.yaml records section + BLK-REVIEW-CAPACITY updated with
+  the github_flow; REVIEWER_KIT.md documents the exact PR recipe with a
+  sample record line; docs/packs/CONTRIBUTING.md layout contract updated;
+  kanban O-02 marked DECIDED.
+
+Honesty boundaries kept: community reviewers reach `validated`; `verified`
+still requires qualified human categories (docs/09 §Finite-reference-band:
+"Structural validation or one AI reviewing another AI cannot satisfy any
+required human gate"). Band completeness claims stay off until coverage
+gates pass; JA-A1-003 remains open until review PRs land.
+
+Gates: 53 suites green, clippy -D warnings, fmt, pack validate 0/0.

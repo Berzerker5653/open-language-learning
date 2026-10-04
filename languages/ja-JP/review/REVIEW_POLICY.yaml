@@ -80,18 +80,23 @@ coverage:
 # Review records
 # ---------------------------------------------------------------------------
 records:
-  location: languages/ja-JP/review/records/
-  required_fields:
-    - reviewer_qualification_category   # category id from review_types above
-    - reviewer_pseudonym                # personal details private unless consent
-    - attribution_consent               # explicit; default false
-    - reviewed_ids_or_range
-    - content_versions                  # pack/content version bound
-    - review_type
-    - date
-    - issues: [{severity, id, description, resolution}]
-    - unresolved_disagreements
-    - adjudication                      # escalation path outcome
+  location: >
+    reviews.jsonl (pack root; schema v0.2 review-record, one JSONL line per
+    review — the validator ENFORCES that content status flips carry an
+    approved record: `validated` needs reviewer_category qualified-human-*
+    or community-reviewer; `verified` needs qualified-human-expert or
+    qualified-human-native-speaker; ai-assisted and automated-check records
+    never promote)
+  github_flow: >
+    Owner decision 2026-10-04: review is delegated to GitHub contributors.
+    A reviewer forks the repo, reviews a batch, then opens ONE PR that (a)
+    adds the reviews.jsonl record line(s) and (b) flips the reviewed items'
+    status in the same PR. Merging the PR is what switches content to
+    "reviewed/verified by <reviewer pseudonym>" — the record names who did
+    it. A PR that flips status without a qualifying record fails the
+    validator (review_promotion_unsupported) and cannot merge.
+  record_fields: see schemas/v0.2/review-record.schema.json (reviewer,
+    reviewer_category, scope, date, outcome, notes, evidence)
   severity_scale: docs/09 §Severity (P0..P3)
   promotion_blockers: any unresolved P0 or P1 in scope
   corrections: docs/16 §Corrections (stable IDs, version bump, regression test,
@@ -144,11 +149,15 @@ blockers:
   - id: BLK-REVIEW-CAPACITY
     since: 2026-10-04
     description: >
-      No qualified human reviewer engaged. Owner (2026-08/2026-10-04) is a
+      No qualified human reviewer engaged yet. Owner (2026-10-04) is a
       learner, not a qualified reviewer, and cannot perform the gate.
-      Multi-model AI screening is approved as an acceleration layer only.
+      Owner decision 2026-10-04: review is delegated to GitHub
+      contributors (see records.github_flow); all shipped content is
+      labeled AI-generated/draft until a merged review PR promotes it.
+      Multi-model AI screening is an acceleration layer only.
     blocks: [screened->reviewed, reviewed->verified, verified->reference]
     unblock_path: >
-      Engage qualified reviewer(s) via reviewer kit
-      (languages/ja-JP/review/REVIEWER_KIT.md); free paths listed there.
-      Alternative owner path: accept_draft_labeling_at_release.
+      Reviewers submit records + status flips via PR per the reviewer kit
+      (languages/ja-JP/review/REVIEWER_KIT.md); validator enforces the
+      record. Community reviewers reach `validated`; `verified` still
+      requires qualified human categories.

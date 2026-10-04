@@ -1,1 +1,4 @@
 {"id":"test-review-1","target_id":"es.goal.intro.greet","reviewer":"Test Reviewer","reviewer_category":"community-reviewer","scope":"goal wording and band placement","date":"2026-10-01","outcome":"approved-with-notes","notes":"Fixture review; not a qualified human review."}
+{"id":"test-review-2","target_id":"es.contrast.stress.canto","reviewer":"Community Reviewer","reviewer_category":"community-reviewer","scope":"contrast description","date":"2026-10-04","outcome":"approved"}
+{"id":"test-review-3","target_id":"es.sent.demo.canto","reviewer":"Community Reviewer","reviewer_category":"community-reviewer","scope":"sentence wording","date":"2026-10-04","outcome":"approved"}
+{"id":"test-review-4","target_id":"es.story.demo.intro","reviewer":"Community Reviewer","reviewer_category":"community-reviewer","scope":"story wording","date":"2026-10-04","outcome":"approved"}

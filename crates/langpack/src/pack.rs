@@ -735,6 +735,77 @@ impl Pack {
             }
         }
 
+        // Trust promotion enforcement (REVIEW-001 GitHub review flow):
+        // items claiming `validated`/`verified` must be targeted by an
+        // approved review record in reviews.jsonl with a qualifying
+        // reviewer category. ai-assisted/automated-check records may
+        // document screening but never promote content (docs/16).
+        {
+            use std::collections::HashMap;
+            let mut approvals: HashMap<&str, Vec<&str>> = HashMap::new();
+            for inst in &self.instances {
+                if inst.schema != "review-record" {
+                    continue;
+                }
+                let outcome = inst.value.get("outcome").and_then(Value::as_str);
+                if !matches!(outcome, Some("approved") | Some("approved-with-notes")) {
+                    continue;
+                }
+                if let (Some(t), Some(c)) = (
+                    inst.value.get("target_id").and_then(Value::as_str),
+                    inst.value.get("reviewer_category").and_then(Value::as_str),
+                ) {
+                    approvals.entry(t).or_default().push(c);
+                }
+            }
+            for inst in &self.instances {
+                let (Some(status), Some(id)) = (
+                    inst.value.get("status").and_then(Value::as_str),
+                    inst.value.get("id").and_then(Value::as_str),
+                ) else {
+                    continue;
+                };
+                let qualified = match status {
+                    "validated" => Some("qualified human or community reviewer"),
+                    "verified" => Some("qualified-human-expert or qualified-human-native-speaker"),
+                    _ => None,
+                };
+                let Some(needed) = qualified else { continue };
+                let cats: &[&str] = approvals.get(id).map(|v| v.as_slice()).unwrap_or(&[]);
+                let ok = match status {
+                    "validated" => cats.iter().any(|c| {
+                        matches!(
+                            *c,
+                            "qualified-human-expert"
+                                | "qualified-human-native-speaker"
+                                | "community-reviewer"
+                        )
+                    }),
+                    _ => cats.iter().any(|c| {
+                        matches!(
+                            *c,
+                            "qualified-human-expert" | "qualified-human-native-speaker"
+                        )
+                    }),
+                };
+                if !ok {
+                    diags.push(Diagnostic::new(
+                        &inst.file,
+                        inst.pointer.clone(),
+                        "review_promotion_unsupported",
+                        format!(
+                            "item {id} claims status `{status}` but reviews.jsonl has no approved record from a qualifying reviewer category ({needed}); flip status only together with the review record"
+                        ),
+                        if mode == Mode::Install {
+                            Severity::Error
+                        } else {
+                            Severity::Warning
+                        },
+                    ));
+                }
+            }
+        }
+
         diags.sort_by(|a, b| {
             a.file
                 .cmp(&b.file)

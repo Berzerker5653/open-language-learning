@@ -30,13 +30,33 @@ prerequisites, and what the learner is asked to do.
   attribution only with explicit consent.
 - No access to learner data. Review is of content files only.
 
-## How to record a review
+## How to record a review (the GitHub flow)
 
-Copy `review/records/TEMPLATE.yaml`, fill it in, and submit as a PR (or send
-to the maintainer if you prefer). One record per batch per review type.
-Severity scale: P0 materially wrong instruction / P1 major path broken /
-P2 localized defect / P3 cosmetic. Unresolved P0/P1 block promotion; say so
-plainly — a "no" is a valuable result.
+One PR per batch. In it:
+
+1. Add your review record(s) to `languages/ja-JP/reviews.jsonl` — one JSONL
+   line per reviewed item, e.g.:
+
+   ```json
+   {"id":"rev-2026-10-05-ana-1","target_id":"ja.lex.food-drink.sushi","reviewer":"yuki-p","reviewer_category":"community-reviewer","scope":"gloss, form, register","date":"2026-10-05","outcome":"approved","notes":"natural as written"}
+   ```
+
+2. In the SAME PR, flip each approved item's `"status"` from `"draft"` to
+   `"validated"` (community/qualified reviewers) or `"verified"` (qualified
+   human experts only).
+
+3. `reviewer_category` must be honest: `community-reviewer` for engaged
+   volunteers, `qualified-human-expert` / `qualified-human-native-speaker`
+   only if you genuinely meet the categories in `REVIEW_POLICY.yaml`.
+   `ai-assisted` records document screening and never promote content.
+
+CI runs the pack validator: a status flip without a qualifying approved
+record fails (`review_promotion_unsupported`) and cannot merge. Merging
+your PR is what switches the content to "reviewed by <your pseudonym>" —
+the record names who did it. Severity scale: P0 materially wrong
+instruction / P1 major path broken / P2 localized defect / P3 cosmetic;
+use `changes-requested` or `rejected` outcomes with notes instead of
+flipping status — a "no" is a valuable result.
 
 ## Free recruitment paths (owner options, none engaged yet)
 

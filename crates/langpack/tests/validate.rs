@@ -424,3 +424,34 @@ fn stray_file_under_review_dir_flagged() {
         .any(|d| d.code == "unknown_file" && d.file == "review/stray.yaml");
     assert!(flagged, "only known governance paths are exempt: {diags:?}");
 }
+
+#[test]
+fn status_flip_with_review_record_is_clean() {
+    // GitHub review flow: a PR that flips status must add the record.
+    let diags = validate("valid-reviewed-item", Mode::Install);
+    assert_eq!(
+        error_count(&diags),
+        0,
+        "reviewed item with record must install: {diags:?}"
+    );
+    assert!(
+        !codes(&diags).contains(&"review_promotion_unsupported"),
+        "{diags:?}"
+    );
+}
+
+#[test]
+fn ai_only_approval_cannot_promote_to_verified() {
+    let diags = validate("invalid-fake-promotion", Mode::Scaffold);
+    assert!(
+        codes(&diags).contains(&"review_promotion_unsupported"),
+        "ai-assisted approval must not support `verified`: {diags:?}"
+    );
+    let install = validate("invalid-fake-promotion", Mode::Install);
+    assert!(
+        install
+            .iter()
+            .any(|d| d.code == "review_promotion_unsupported" && d.severity == Severity::Error),
+        "install must hard-fail a fabricated promotion: {install:?}"
+    );
+}
