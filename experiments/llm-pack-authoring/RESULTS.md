@@ -409,3 +409,10 @@ baseline dupes replaced), 2 grammar (`verb.kanoukei-intro`,
 Goal `ja.goal.a2.health-body` (prereq shopping-services, mirrored), 10
 units, 50-word `lexicon/body.jsonl`, 1 grammar (`verb.ba-conditional`),
 8 sentences, 1 assessment. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 11: A2 units 160-169 (communication)
+
+Goal `ja.goal.a2.communication` (prereq health-body, mirrored), 10
+units, 50-word `lexicon/communication.jsonl`, 2 grammar
+(`verb.tara-conditional`, `conjunction.node-reason`), 8 sentences,
+1 assessment. Score: **7/7**.

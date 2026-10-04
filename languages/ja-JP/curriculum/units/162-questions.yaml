@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 communication); content refs are pack data; qualified review pending.
+id: ja.unit.comm-questions
+goal_id: ja.goal.a2.communication
+title: Questions
+summary: Question, conversation, explanation, reply.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.communication.shitsumon
+  - ja.lex.communication.kaiwa
+  - ja.lex.communication.setsumei
+  - ja.lex.communication.henji
+  - ja.lex.communication.jiko-shoukai
+  - ja.sent.ask-question
+  allowed_grammar:
+  - ja.grammar.particle.ni-destination
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.comm-questions-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.communication.shitsumon
+  - ja.lex.communication.kaiwa
+  - ja.lex.communication.setsumei
+  - ja.lex.communication.henji
+  - ja.lex.communication.jiko-shoukai
+  - ja.sent.ask-question
+  - ja.sent.ask-question
+- id: ja.activity.comm-questions-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.communication.shitsumon
+  - ja.lex.communication.kaiwa
+  - ja.lex.communication.setsumei
+  - ja.lex.communication.henji
+  - ja.lex.communication.jiko-shoukai
+  - ja.sent.ask-question
+- id: ja.activity.comm-questions-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.communication.shitsumon
+  - ja.lex.communication.kaiwa
+  - ja.lex.communication.setsumei
+  - ja.lex.communication.henji
+  - ja.lex.communication.jiko-shoukai
+  - ja.sent.ask-question
+- id: ja.activity.comm-questions-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.communication.shitsumon
+  - ja.lex.communication.kaiwa
+  - ja.lex.communication.setsumei
+  - ja.lex.communication.henji
+  - ja.lex.communication.jiko-shoukai
+  - ja.sent.ask-question
+- id: ja.activity.comm-questions-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.ask-question

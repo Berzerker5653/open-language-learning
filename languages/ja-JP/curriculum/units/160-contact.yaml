@@ -1,0 +1,82 @@
+# ai-assisted draft unit (Mode B A2 communication); content refs are pack data; qualified review pending.
+id: ja.unit.comm-contact
+goal_id: ja.goal.a2.communication
+title: Contact info
+summary: Phone number, email, message, app, contact.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.communication.denwaban-go
+  - ja.lex.communication.mail
+  - ja.lex.communication.messeji
+  - ja.lex.communication.app
+  - ja.lex.communication.renraku
+  - ja.sent.call-friend
+  - ja.sent.send-message
+  allowed_grammar:
+  - ja.grammar.particle.ni-destination
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.comm-contact-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.communication.denwaban-go
+  - ja.lex.communication.mail
+  - ja.lex.communication.messeji
+  - ja.lex.communication.app
+  - ja.lex.communication.renraku
+  - ja.sent.call-friend
+  - ja.sent.send-message
+  - ja.sent.call-friend
+  - ja.sent.send-message
+- id: ja.activity.comm-contact-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.communication.denwaban-go
+  - ja.lex.communication.mail
+  - ja.lex.communication.messeji
+  - ja.lex.communication.app
+  - ja.lex.communication.renraku
+  - ja.sent.call-friend
+  - ja.sent.send-message
+- id: ja.activity.comm-contact-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.communication.denwaban-go
+  - ja.lex.communication.mail
+  - ja.lex.communication.messeji
+  - ja.lex.communication.app
+  - ja.lex.communication.renraku
+  - ja.sent.call-friend
+  - ja.sent.send-message
+- id: ja.activity.comm-contact-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.communication.denwaban-go
+  - ja.lex.communication.mail
+  - ja.lex.communication.messeji
+  - ja.lex.communication.app
+  - ja.lex.communication.renraku
+  - ja.sent.call-friend
+  - ja.sent.send-message
+- id: ja.activity.comm-contact-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.call-friend
+- id: ja.activity.comm-contact-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.send-message

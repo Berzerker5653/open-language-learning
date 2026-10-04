@@ -1,0 +1,58 @@
+# ai-assisted draft unit (Mode B A2 communication); content refs are pack data; qualified review pending.
+id: ja.unit.comm-how-to
+goal_id: ja.goal.a2.communication
+title: Ways of doing
+summary: How to listen/read/write/speak, word of mouth.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.communication.kikikata
+  - ja.lex.communication.yomikata
+  - ja.lex.communication.kakikata
+  - ja.lex.communication.hanashikata
+  - ja.lex.communication.kuchikomi
+  allowed_grammar:
+  - ja.grammar.verb.koto-no-noun
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.comm-how-to-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.communication.kikikata
+  - ja.lex.communication.yomikata
+  - ja.lex.communication.kakikata
+  - ja.lex.communication.hanashikata
+  - ja.lex.communication.kuchikomi
+- id: ja.activity.comm-how-to-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.communication.kikikata
+  - ja.lex.communication.yomikata
+  - ja.lex.communication.kakikata
+  - ja.lex.communication.hanashikata
+  - ja.lex.communication.kuchikomi
+- id: ja.activity.comm-how-to-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.communication.kikikata
+  - ja.lex.communication.yomikata
+  - ja.lex.communication.kakikata
+  - ja.lex.communication.hanashikata
+  - ja.lex.communication.kuchikomi
+- id: ja.activity.comm-how-to-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.communication.kikikata
+  - ja.lex.communication.yomikata
+  - ja.lex.communication.kakikata
+  - ja.lex.communication.hanashikata
+  - ja.lex.communication.kuchikomi

@@ -919,3 +919,35 @@ goals:
       tool: omp
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
+  - id: ja.goal.a2.communication
+    description: 'Make simple contacts by phone/email, ask and answer questions, and
+      talk about language learning using reason and conditional forms.'
+    band: A2
+    framework_refs: []
+    contexts:
+    - ja.situation.first-meeting
+    modalities:
+    - listening
+    - speaking
+    - reading
+    - writing
+    prerequisites:
+    - target: ja.goal.a2.health-body
+      dimension: grammar-controlled
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.lex.communication.renraku
+    - ja.lex.communication.shitsumon
+    assessment_ids:
+    - ja.assess.communication
+    transfer_required: true
+    sources:
+    - jf-standard
+    - ai-drafted-extension
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next-iq3_s
+      date: '2026-10-04'

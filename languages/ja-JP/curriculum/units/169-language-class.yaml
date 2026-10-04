@@ -1,0 +1,58 @@
+# ai-assisted draft unit (Mode B A2 communication); content refs are pack data; qualified review pending.
+id: ja.unit.comm-language-class
+goal_id: ja.goal.a2.communication
+title: Language class
+summary: Grammar, vocabulary, dialogue, contents, notation.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.communication.bunpou
+  - ja.lex.communication.goi
+  - ja.lex.communication.taigi
+  - ja.lex.communication.mokuji
+  - ja.lex.communication.hyouki
+  allowed_grammar:
+  - ja.grammar.conjunction.node-reason
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.comm-language-class-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.communication.bunpou
+  - ja.lex.communication.goi
+  - ja.lex.communication.taigi
+  - ja.lex.communication.mokuji
+  - ja.lex.communication.hyouki
+- id: ja.activity.comm-language-class-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.communication.bunpou
+  - ja.lex.communication.goi
+  - ja.lex.communication.taigi
+  - ja.lex.communication.mokuji
+  - ja.lex.communication.hyouki
+- id: ja.activity.comm-language-class-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.communication.bunpou
+  - ja.lex.communication.goi
+  - ja.lex.communication.taigi
+  - ja.lex.communication.mokuji
+  - ja.lex.communication.hyouki
+- id: ja.activity.comm-language-class-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.communication.bunpou
+  - ja.lex.communication.goi
+  - ja.lex.communication.taigi
+  - ja.lex.communication.mokuji
+  - ja.lex.communication.hyouki

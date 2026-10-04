@@ -1,0 +1,58 @@
+# ai-assisted draft unit (Mode B A2 communication); content refs are pack data; qualified review pending.
+id: ja.unit.comm-writing
+goal_id: ja.goal.a2.communication
+title: Writing systems
+summary: Character, kanji, hiragana, katakana, romaji.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.communication.ji
+  - ja.lex.communication.kanji
+  - ja.lex.communication.hiragana
+  - ja.lex.communication.katakana
+  - ja.lex.communication.romaji
+  allowed_grammar:
+  - ja.grammar.particle.de-means
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.comm-writing-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.communication.ji
+  - ja.lex.communication.kanji
+  - ja.lex.communication.hiragana
+  - ja.lex.communication.katakana
+  - ja.lex.communication.romaji
+- id: ja.activity.comm-writing-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.communication.ji
+  - ja.lex.communication.kanji
+  - ja.lex.communication.hiragana
+  - ja.lex.communication.katakana
+  - ja.lex.communication.romaji
+- id: ja.activity.comm-writing-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.communication.ji
+  - ja.lex.communication.kanji
+  - ja.lex.communication.hiragana
+  - ja.lex.communication.katakana
+  - ja.lex.communication.romaji
+- id: ja.activity.comm-writing-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.communication.ji
+  - ja.lex.communication.kanji
+  - ja.lex.communication.hiragana
+  - ja.lex.communication.katakana
+  - ja.lex.communication.romaji
