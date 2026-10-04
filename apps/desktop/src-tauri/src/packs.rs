@@ -171,6 +171,12 @@ pub fn fetch_catalog(url: &str) -> Result<PackCatalog, String> {
 /// status string ("live", "cached", "no-catalog-url", "offline-no-cache").
 pub fn catalog_view(data: &Path) -> (Vec<CatalogView>, String) {
     let url = std::env::var("LTS_PACK_CATALOG_URL").unwrap_or_default();
+    catalog_view_with(data, &url)
+}
+
+/// Env-independent core (url passed explicitly) so the honest status
+/// behavior is testable without mutating process environment.
+pub fn catalog_view_with(data: &Path, url: &str) -> (Vec<CatalogView>, String) {
     let (catalog, status) = if url.is_empty() {
         let cached = load_cache(data);
         let status = if cached.is_some() {
@@ -180,7 +186,7 @@ pub fn catalog_view(data: &Path) -> (Vec<CatalogView>, String) {
         };
         (cached, status.to_string())
     } else {
-        match fetch_catalog(&url) {
+        match fetch_catalog(url) {
             Ok(c) => {
                 write_cache(data, &c);
                 (Some(c), "live".to_string())
@@ -439,6 +445,47 @@ mod tests {
         let mut e = entry("https://github.com/o/r/x");
         e.size_bytes = lts_langpack::archive::MAX_TOTAL_BYTES + 1;
         assert!(validate_entry(&e).is_err());
+    }
+
+    #[test]
+    fn catalog_status_is_honest_when_unset_offline_or_cached() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        // No url configured, no cache: honest empty state, never "live".
+        let (views, status) = catalog_view_with(data, "");
+        assert_eq!(status, "no-catalog-url");
+        assert!(views.is_empty());
+        // Configured but unreachable: reports offline, invents nothing.
+        let (views, status) = catalog_view_with(data, "https://127.0.0.1:9/catalog.json");
+        assert_eq!(status, "offline-no-cache");
+        assert!(views.is_empty());
+        // A good cached copy survives an offline fetch.
+        write_cache(
+            data,
+            &PackCatalog {
+                catalog_version: "1".into(),
+                note: String::new(),
+                packs: vec![entry("https://github.com/o/r/releases/download/v1/p.lpk")],
+            },
+        );
+        let (views, status) = catalog_view_with(data, "https://127.0.0.1:9/catalog.json");
+        assert_eq!(status, "offline-cached");
+        assert_eq!(views.len(), 1);
+        let (_, status) = catalog_view_with(data, "");
+        assert_eq!(status, "cached");
+    }
+
+    #[test]
+    fn import_rejects_garbage_honestly() {
+        let tmp = tempfile::tempdir().unwrap();
+        // Not base64 at all.
+        assert!(import_pack_b64(tmp.path(), "not base64!!").is_err());
+        // Valid base64, not an archive.
+        use base64::Engine;
+        let b64 = base64::engine::general_purpose::STANDARD.encode(b"definitely not an lpk");
+        assert!(import_pack_b64(tmp.path(), &b64).is_err());
+        // Nothing was installed by the failed attempts.
+        assert!(installed_packs(tmp.path()).is_empty());
     }
 
     fn ja_demo_archive() -> Vec<u8> {

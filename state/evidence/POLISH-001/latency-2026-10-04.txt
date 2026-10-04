@@ -1,0 +1,17 @@
+POLISH-001 latency baseline — 2026-10-04, Linux reference machine
+(debug builds, warm caches; software rendering under Xvfb)
+
+Startup (process launch -> `smoke_ack` home marker, Xvfb pre-started):
+  28 ms / 22 ms / 14 ms  (median 22 ms)
+  Note: `xvfb-run` per-launch adds ~3.0 s of X server startup; measured
+  against a pre-started Xvfb to isolate the app itself.
+
+Plan generation (build_plan_view over the full ja-JP on-ramp pack,
+fresh profile, 5-minute budget, 5 items returned):
+  10.8 ms  (cargo test `plan_generation_stays_fast_on_the_reference_pack`,
+  permanent guard bound: < 1000 ms)
+
+Model install (directory entry, 345 MB kokoro archive, local fetch):
+  checksum + extract + atomic activate: dominated by I/O; unit tests
+  cover correctness; no release-asset download path exists yet
+  (PENDING-RELEASE-URL until O-05), so network latency is unmeasurable.

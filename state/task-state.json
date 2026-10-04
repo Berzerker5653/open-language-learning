@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "active_task": "POLISH-001",
+  "active_task": null,
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -762,10 +762,13 @@
       ]
     },
     "POLISH-001": {
-      "status": "in_progress",
+      "status": "done",
       "attempts": 1,
       "last_error": null,
-      "evidence": []
+      "evidence": [
+        "state/evidence/POLISH-001/latency-2026-10-04.txt",
+        "state/evidence/POLISH-001/walkthrough-2026-10-04.txt"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence."

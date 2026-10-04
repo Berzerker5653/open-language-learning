@@ -382,6 +382,20 @@ mod tests {
         assert!(!model_dir(data, &e).exists());
     }
 
+    #[test]
+    fn fetch_failure_leaves_no_partial_install() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let e = test_entry();
+        let err = install_model_files(data, &e, "2026-10-04T00:00:00Z", |_| {
+            Err("network down".into())
+        })
+        .unwrap_err();
+        assert!(err.contains("network down"));
+        assert!(!model_dir(data, &e).exists());
+        assert!(!model_dir(data, &e).with_extension("staging").exists());
+    }
+
     fn zip_bytes(members: Vec<(&str, &[u8], u32)>) -> Vec<u8> {
         use std::io::Write;
         let mut buf = std::io::Cursor::new(Vec::new());

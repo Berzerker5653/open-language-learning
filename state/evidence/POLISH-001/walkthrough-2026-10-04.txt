@@ -1,0 +1,41 @@
+POLISH-001 full-route UI walkthrough — 2026-10-04, Linux reference machine
+
+Harness change (permanent):
+- Smoke mode now drives the real app end-to-end: creates/resumes a local
+  profile, installs the bundled default pack, completes onboarding
+  (micEnabled=false), then clicks every route nav button so the real
+  open* handlers run. Each route acks from the UI; the shell exits 0 only
+  on the terminal `routes-complete`/`walkthrough-error` note.
+- scripts/smoke-desktop.sh runs the walkthrough against a temp
+  LTS_DATA_DIR (no developer-data pollution) and fails unless the marker
+  contains all route acks (>= 11), `routes-complete`, and no
+  `walkthrough-error`.
+
+scripts/smoke-desktop.sh run (debug binary, Xvfb, user-local sysroot):
+
+  smoke-ok home
+  smoke-ok home-rendered
+  smoke-ok route:Practice
+  smoke-ok route:Progress
+  smoke-ok route:Pronunciation
+  smoke-ok route:Writing
+  smoke-ok route:Languages
+  smoke-ok route:Scenarios
+  smoke-ok route:Shadowing
+  smoke-ok route:Reading
+  smoke-ok route:My Words
+  smoke-ok route:Placement
+  smoke-ok route:Kanji
+  smoke-ok routes-complete:11
+  SMOKE OK (11 routes walked)
+
+Gates at this commit (same machine):
+- cargo test --workspace: 53 suites ok (lts-desktop 41, incl. the new
+  honest failure-path tests: fetch-failure no-partial-install, honest
+  catalog status, TTS abstention/bring-your-own, unknown-model-id
+  rejection, plan-latency guard, lexicon coverage, situation labels).
+- cargo clippy --workspace --all-targets -- -D warnings: clean.
+- cargo fmt --all --check: clean.
+- tsc --noEmit (desktop + ui): clean (base target raised to ES2024 for
+  Promise.withResolvers; WebKitGTK 2.44+ supports it).
+- vitest: desktop 89 passed, ui 3 passed; prettier check clean.

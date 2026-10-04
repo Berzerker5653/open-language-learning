@@ -16,12 +16,7 @@ import {
   type WorldEnvironment,
 } from "./home";
 import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./pronunciation";
-import {
-  LanguagePanel,
-  type CatalogEntry,
-  type InstalledPack,
-  type TtsStatus,
-} from "./language";
+import { LanguagePanel, type CatalogEntry, type InstalledPack, type TtsStatus } from "./language";
 import { WritingPractice, type WritingTaskView } from "./writing";
 import { PracticeRunner, type PracticeTaskView } from "./practice";
 import {
@@ -253,6 +248,59 @@ export function App() {
       const mode = (await inv("app_mode")) as { smoke: boolean };
       if (mode.smoke) {
         await inv("smoke_ack", { note: "home" });
+        // POLISH-001: full-route walkthrough. Drive onboarding
+        // deterministically (local profile + bundled default pack), then
+        // click each route nav button so the real open* handlers run.
+        // Wait n animation frames so React commits and paints.
+        const painted = async (frames: number) => {
+          const { promise, resolve } = Promise.withResolvers<void>();
+          let left = frames;
+          const tick = () => (left-- > 0 ? requestAnimationFrame(tick) : resolve());
+          requestAnimationFrame(tick);
+          await promise;
+        };
+        try {
+          const existing = (await inv("list_profiles")) as ProfileSummary[];
+          const first = existing[0];
+          const p = first
+            ? ((await inv("resume_profile", {
+                profileId: first.id,
+              })) as ProfileSummary)
+            : ((await inv("create_profile", {
+                displayName: "smoke",
+              })) as ProfileSummary);
+          setProfileId(p.id);
+          setDisplayName(p.display_name);
+          const packId = "org.openlanguage.ja-jp.reference";
+          setSelectedPack(packId);
+          await inv("install_pack", { packId });
+          await inv("complete_onboarding", {
+            profileId: p.id,
+            packId,
+            micEnabled: false,
+          });
+          const home = (await inv("home_state", {
+            profileId: p.id,
+          })) as { display_name: string; plan: SessionPlan };
+          setDisplayName(home.display_name);
+          setPlan(home.plan);
+          setEnvironments((await inv("world_state", { profileId: p.id })) as WorldEnvironment[]);
+          setStep("done");
+          await painted(4);
+          const buttons = Array.from(document.querySelectorAll('nav[aria-label="Routes"] button'));
+          for (const b of buttons) {
+            (b as HTMLButtonElement).click();
+            await painted(4);
+            await inv("smoke_ack", {
+              note: `route:${(b.textContent ?? "").trim()}`,
+            });
+          }
+          await inv("smoke_ack", {
+            note: `routes-complete:${buttons.length}`,
+          });
+        } catch (e) {
+          await inv("smoke_ack", { note: `walkthrough-error:${String(e)}` });
+        }
         return;
       }
       // K-05: restart resumes an existing profile instead of re-running

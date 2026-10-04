@@ -32,14 +32,26 @@ fn app_mode() -> AppMode {
     }
 }
 
-/// Called by the home route after first paint in smoke mode. Writes the
-/// marker and exits 0; ignored entirely outside smoke mode.
+/// Called by the UI in smoke mode. Each ack appends one line to the
+/// marker (launch handshake, then one per route in the POLISH-001
+/// full-route walkthrough). The shell exits 0 only on the terminal
+/// `routes-complete` / `walkthrough-error` note so the launcher can
+/// assert the full route list. Ignored entirely outside smoke mode.
 #[tauri::command]
 fn smoke_ack(app: tauri::AppHandle, note: String) {
     if let Ok(path) = std::env::var("LTS_SMOKE_FILE") {
-        let _ = std::fs::write(path, format!("smoke-ok {note}"));
+        use std::io::Write;
+        if let Ok(mut f) = std::fs::OpenOptions::new()
+            .create(true)
+            .append(true)
+            .open(path)
+        {
+            let _ = writeln!(f, "smoke-ok {note}");
+        }
+        if note.starts_with("routes-complete") || note.starts_with("walkthrough-error") {
+            app.exit(0);
+        }
     }
-    app.exit(0);
 }
 
 // ---------------------------------------------------------------------------
@@ -392,17 +404,36 @@ struct LexEntry {
     gloss: String,
 }
 
+/// Read every `lexicon/*.jsonl` of an installed pack, sorted for
+/// determinism. The pack format allows multiple lexicon files
+/// (`langpack` layout accepts any `lexicon/*.jsonl`); reading only
+/// `entries.jsonl` would hide entries the scheduler still plans.
+fn lexicon_texts(data: &Path, pack_id: &str, version: &str) -> Result<Vec<String>, String> {
+    let dir = data
+        .join("packs")
+        .join(pack_id)
+        .join(version)
+        .join("lexicon");
+    let mut files: Vec<PathBuf> = std::fs::read_dir(&dir)
+        .map_err(|_| "pack lexicon not found".to_string())?
+        .filter_map(|e| e.ok().map(|e| e.path()))
+        .filter(|p| p.extension().and_then(|x| x.to_str()) == Some("jsonl"))
+        .collect();
+    files.sort();
+    if files.is_empty() {
+        return Err("pack lexicon not found".into());
+    }
+    files
+        .iter()
+        .map(|p| std::fs::read_to_string(p).map_err(|_| "pack lexicon not found".to_string()))
+        .collect()
+}
+
 /// Parse an installed pack's lexicon into display/practice entries.
 /// Malformed lines are skipped; ids are validated as content ids so
 /// they can never become path components.
 fn lexicon_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<LexEntry>, String> {
-    let path = data
-        .join("packs")
-        .join(pack_id)
-        .join(version)
-        .join("lexicon")
-        .join("entries.jsonl");
-    let text = std::fs::read_to_string(&path).map_err(|_| "pack lexicon not found".to_string())?;
+    let text = lexicon_texts(data, pack_id, version)?.join("\n");
     let mut out = Vec::new();
     for line in text.lines() {
         let Ok(entry) = serde_json::from_str::<serde_json::Value>(line) else {
@@ -1638,13 +1669,7 @@ fn writing_tasks(
     let pack_id = active.first().ok_or("no active language pack")?;
     let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
         .ok_or("pack not installed")?;
-    let path = data
-        .join("packs")
-        .join(pack_id)
-        .join(&version)
-        .join("lexicon")
-        .join("entries.jsonl");
-    let text = std::fs::read_to_string(&path).map_err(|_| "pack lexicon not found".to_string())?;
+    let text = lexicon_texts(data, pack_id, &version)?.join("\n");
     fn field<'a>(v: &'a serde_json::Value, key: &str) -> Option<&'a str> {
         v.get(key).and_then(|x| x.as_str())
     }
@@ -3343,6 +3368,23 @@ static BUNDLED_TTS: std::sync::OnceLock<PathBuf> = std::sync::OnceLock::new();
 fn resolve_tts(
     data: &Path,
 ) -> Option<(&'static str, lts_speech_runtime::tts::SherpaSubprocessTts)> {
+    let byo = std::env::var("LTS_TTS_DIR").map(PathBuf::from).ok();
+    let vendor = match std::env::var("LTS_BENCH_VENDOR") {
+        Ok(v) => Some(PathBuf::from(v)),
+        Err(_) => std::env::var("HOME")
+            .ok()
+            .map(|h| PathBuf::from(h).join(".cache/lts-bench")),
+    };
+    resolve_tts_with(data, byo.as_deref(), vendor.as_deref())
+}
+
+/// Env-independent core: `byo`/`vendor` arrive explicitly so priority
+/// and abstention are testable without mutating process environment.
+fn resolve_tts_with(
+    data: &Path,
+    byo: Option<&Path>,
+    vendor: Option<&Path>,
+) -> Option<(&'static str, lts_speech_runtime::tts::SherpaSubprocessTts)> {
     let mut roots: Vec<(&'static str, PathBuf, PathBuf)> = Vec::new();
     if let Some(b) = BUNDLED_TTS.get() {
         roots.push(("bundled", b.join("sherpa"), b.join("kokoro")));
@@ -3358,16 +3400,9 @@ fn resolve_tts(
     if let (Some(rt), Some(model)) = (payload(TTS_RUNTIME_ID), payload(TTS_MODEL_ID)) {
         roots.push(("model", rt, model));
     }
-    if let Ok(dir) = std::env::var("LTS_TTS_DIR") {
-        let dir = PathBuf::from(dir);
+    if let Some(dir) = byo {
         roots.push(("env", dir.join("sherpa"), dir.join("kokoro")));
     }
-    let vendor = match std::env::var("LTS_BENCH_VENDOR") {
-        Ok(v) => Some(PathBuf::from(v)),
-        Err(_) => std::env::var("HOME")
-            .ok()
-            .map(|h| PathBuf::from(h).join(".cache/lts-bench")),
-    };
     if let Some(v) = vendor {
         roots.push((
             "bench",
@@ -3738,8 +3773,104 @@ mod tests {
         let model = data.join("models/org.openlanguage.speech.kokoro-multi-lang/1.0.0/payload");
         std::fs::create_dir_all(&model).unwrap();
         std::fs::write(model.join("model.onnx"), b"fake").unwrap();
-        let (source, _tts) = resolve_tts(data).expect("model payload must resolve");
+        let (source, _tts) =
+            resolve_tts_with(data, None, None).expect("model payload must resolve");
         assert_eq!(source, "model");
+    }
+
+    #[test]
+    fn resolve_tts_abstains_when_no_payload_exists() {
+        // Honest degradation: with no payload anywhere, the resolver
+        // returns None (speech_audio_at maps that to
+        // `tts-runtime-unavailable`) rather than half-configuring.
+        let tmp = tempfile::tempdir().unwrap();
+        assert!(resolve_tts_with(tmp.path(), None, None).is_none());
+    }
+
+    #[test]
+    fn resolve_tts_accepts_bring_your_own_payload() {
+        // ADR-0009: a user-supplied runtime directory resolves without
+        // any model-manager install.
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let byo = tmp.path().join("byo");
+        let rt = byo.join("sherpa/bin");
+        std::fs::create_dir_all(&rt).unwrap();
+        std::fs::write(rt.join("sherpa-onnx-offline-tts"), b"fake").unwrap();
+        let model = byo.join("kokoro");
+        std::fs::create_dir_all(&model).unwrap();
+        std::fs::write(model.join("model.onnx"), b"fake").unwrap();
+        let (source, _tts) =
+            resolve_tts_with(data, Some(&byo), None).expect("byo payload must resolve");
+        assert_eq!(source, "env");
+    }
+
+    #[test]
+    fn unknown_model_id_is_rejected_before_any_download() {
+        assert_eq!(
+            install_model("org.evil.model".into()).unwrap_err(),
+            "unknown model id"
+        );
+    }
+
+    #[test]
+    fn plan_generation_stays_fast_on_the_reference_pack() {
+        // POLISH-001 latency baseline: plan generation over the full
+        // on-ramp pack stays well inside the interactive budget. The
+        // bound is a generous regression guard, not a benchmark.
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        packs::switch_pack(data, &p.id, "org.openlanguage.ja-jp.reference").unwrap();
+        let start = std::time::Instant::now();
+        let view = build_plan_view(data, &p.id, 5, 1_760_000_000).unwrap();
+        let elapsed = start.elapsed();
+        println!("plan_generation: {elapsed:?} ({} items)", view.items.len());
+        assert!(
+            elapsed.as_millis() < 1000,
+            "plan generation regressed: {elapsed:?}"
+        );
+    }
+
+    #[test]
+    fn lexicon_entries_covers_all_pack_lexicon_files() {
+        // The pack format allows multiple lexicon/*.jsonl files; the
+        // scheduler plans entries from side files (greetings, time, …),
+        // so display/practice readers must see them too — otherwise the
+        // plan renders raw content ids instead of surfaces.
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let version = lts_langpack::archive::current_version(
+            "org.openlanguage.ja-jp.reference",
+            &data.join("packs"),
+        )
+        .unwrap();
+        let entries = lexicon_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
+        let by_id: std::collections::HashMap<&str, &LexEntry> =
+            entries.iter().map(|e| (e.id.as_str(), e)).collect();
+        let arigatou = by_id
+            .get("ja.lex.greetings.arigatou-gozaimasu")
+            .expect("side-file entry must be visible");
+        assert_eq!(arigatou.surface, "ありがとうございます");
+        assert_eq!(by_id.get("ja.lex.time.nanji").unwrap().surface, "なんじ");
+        assert!(entries.len() > 200, "expected the full pack lexicon");
+    }
+
+    #[test]
+    fn situation_ids_resolve_to_human_labels() {
+        // Scenario cards must show the pack-defined situation name,
+        // never a raw `ja.situation.*` id, and must fall back to the
+        // id (never an invented label) when the pack defines no name.
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        assert_eq!(
+            scenarios::situation_label(data, "ja.situation.first-meeting").as_deref(),
+            Some("An introduction where people have not met before")
+        );
+        assert_eq!(scenarios::situation_label(data, "ja.situation.nope"), None);
     }
 
     fn cid(s: &str) -> lts_domain::ContentId {

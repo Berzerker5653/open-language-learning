@@ -37,12 +37,12 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-35 | catalog happy path: `langpack catalog` generates packs.json entries (hash/version/size/tested_platforms) from built .lpk archives; `scripts/build-catalog.sh` builds all shipped pack artifacts; live catalog merge stays O-05 (`state/notes/K-35.md`) | GAP-VERIFY gap |
 | K-32 | default pack replaced: on-ramp `org.openlanguage.ja-jp.reference` bundled (owner CC BY 4.0 decision 2026-10-04 unblocked install), ja-demo retired from candidates, pronunciation demo pack-driven, audio allowlists generalized (`state/notes/K-32.md`) | JA-A1-001 |
 | TTS-002 | TTS variants per ADR-0009: directory-capable model catalog (archive-pinned, corruption-aware), kokoro+sherpa payload entries, layered TTS resolution (bundled/model/LTS_TTS_DIR/bench), `scripts/build-tts-variants.sh` staging + tauri overlay, payload-scoped GPL notices & source offer, attribution UI in Languages (`state/notes/TTS-002.md`) | TTS-002 |
+| POLISH-001 | pre-publication hardening: honest failure-path tests (no-partial-install, honest catalog status, TTS abstention, unknown-model rejection), latency baseline, full-route UI walkthrough (smoke drives onboarding + all 11 routes, script asserts marker) (`state/evidence/POLISH-001/`) | quality |
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
-| POLISH-001 | quality | pre-publication hardening (owner-approved 2026-10-04): full-suite green gate, honest failure-path tests, latency baseline, full-route UI walkthrough; publishing stays O-05 | POLISH-001 |
 
 ## next — training methods the research says we're missing
 

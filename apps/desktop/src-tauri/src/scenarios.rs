@@ -209,7 +209,10 @@ pub fn list_at(data: &Path, profile_id: &str) -> Result<Vec<ScenarioSummary>, St
             out.push(ScenarioSummary {
                 scenario_id: sc.id.clone(),
                 title: sc.title.clone(),
-                situation: sc.situation.clone(),
+                situation: sc
+                    .situation
+                    .clone()
+                    .map(|s| situation_label(data, &s).unwrap_or(s)),
                 goal_id: sc.goal_id.clone(),
                 unlocked,
                 locked_reason,
@@ -220,13 +223,50 @@ pub fn list_at(data: &Path, profile_id: &str) -> Result<Vec<ScenarioSummary>, St
     Ok(out)
 }
 
-fn view_of(sc: &PackScenario, session: &ScenarioSession) -> ScenarioView {
+/// Resolve a situation id to its human label from an installed pack's
+/// `language/pragmatics.yaml`. `None` when no name is defined; callers
+/// fall back to the raw id (honest, never invented).
+pub(crate) fn situation_label(data: &Path, id: &str) -> Option<String> {
+    let packs_dir = data.join("packs");
+    let Ok(packs) = std::fs::read_dir(&packs_dir) else {
+        return None;
+    };
+    for pack in packs.filter_map(|e| e.ok()) {
+        let Ok(versions) = std::fs::read_dir(pack.path()) else {
+            continue;
+        };
+        for v in versions.filter_map(|e| e.ok()) {
+            let Ok(text) = std::fs::read_to_string(v.path().join("language/pragmatics.yaml"))
+            else {
+                continue;
+            };
+            let Ok(doc) = serde_yaml::from_str::<serde_yaml::Value>(&text) else {
+                continue;
+            };
+            if let Some(situations) = doc.get("situations").and_then(|s| s.as_sequence()) {
+                for s in situations {
+                    if s.get("id").and_then(|i| i.as_str()) == Some(id) {
+                        if let Some(name) = s.get("name").and_then(|n| n.as_str()) {
+                            return Some(name.to_string());
+                        }
+                    }
+                }
+            }
+        }
+    }
+    None
+}
+
+fn view_of(data: &Path, sc: &PackScenario, session: &ScenarioSession) -> ScenarioView {
     let (prompt, actions) = session.active_prompt();
     let node = session.current_node();
     ScenarioView {
         scenario_id: sc.id.clone(),
         title: sc.title.clone(),
-        situation: sc.situation.clone(),
+        situation: sc
+            .situation
+            .clone()
+            .map(|s| situation_label(data, &s).unwrap_or(s)),
         node: NodeView {
             id: node.id.clone(),
             prompt: prompt.to_string(),
@@ -293,7 +333,7 @@ pub fn start_at(
     }
     let (_pack_id, sc) = found.ok_or("scenario not found")?;
     let session = ScenarioSession::begin(&sc).ok_or("scenario has no nodes")?;
-    let view = view_of(&sc, &session);
+    let view = view_of(data, &sc, &session);
     let mut guard = sessions.lock().map_err(|_| "session store poisoned")?;
     guard.insert(session_key(profile_id, scenario_id), session);
     Ok(view)
@@ -349,7 +389,7 @@ pub fn attempt_at(
         Completed => ("completed", Vec::new(), true),
         NotSatisfied { recovery } => ("not-satisfied", recovery.clone(), false),
     };
-    let mut view = view_of(&sc, session);
+    let mut view = view_of(data, &sc, session);
     view.support_used = session.support_used_snapshot();
     Ok(StepView {
         result: name.to_string(),
@@ -379,7 +419,7 @@ pub fn support_at(
     let session = guard
         .get_mut(&session_key(profile_id, scenario_id))
         .ok_or("no session")?;
-    let mut view = view_of(&sc, session);
+    let mut view = view_of(data, &sc, session);
     view.support_used = session.support_used_snapshot();
     Ok(view)
 }
@@ -402,7 +442,7 @@ pub fn recovery_at(
     let session = guard
         .get_mut(&session_key(profile_id, scenario_id))
         .ok_or("no session")?;
-    let mut view = view_of(&sc, session);
+    let mut view = view_of(data, &sc, session);
     view.support_used = session.support_used_snapshot();
     Ok(view)
 }
@@ -425,7 +465,7 @@ pub fn transfer_at(
     let session = guard
         .get_mut(&session_key(profile_id, scenario_id))
         .ok_or("no session")?;
-    let mut view = view_of(&sc, session);
+    let mut view = view_of(data, &sc, session);
     view.support_used = session.support_used_snapshot();
     for t in &mut view.transfers {
         t.done = session.transfer_done(&t.id);
