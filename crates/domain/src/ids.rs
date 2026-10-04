@@ -99,6 +99,8 @@ pub enum ContentKind {
     Sent,
     /// Graded-reader story (K-13).
     Story,
+    /// Character-instruction item (K-16 kanji drill).
+    Kanji,
 }
 
 impl ContentKind {
@@ -125,6 +127,7 @@ impl ContentKind {
             "culture" => Self::Culture,
             "sent" => Self::Sent,
             "story" => Self::Story,
+            "kanji" => Self::Kanji,
             _ => return None,
         })
     }
@@ -152,6 +155,7 @@ impl ContentKind {
             Self::Culture => "culture",
             Self::Sent => "sent",
             Self::Story => "story",
+            Self::Kanji => "kanji",
         }
     }
 }

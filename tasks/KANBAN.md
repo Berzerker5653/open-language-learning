@@ -24,6 +24,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-13 | Graded reading: `stories/*.yaml` pack data, interlinear reader with media-first audio + word lookup, formative only (`state/notes/K-13.md`) | community practice |
 | K-14 | Sentence mining: `mined_items` table (migration v4), cited learner-owned words with own SRS rows, never mastery evidence (`state/notes/K-14.md`) | docs/03 §17 |
 | K-15 | Placement/diagnostic: per-assessment low-stakes tasks, `Diagnostic`-tagged evidence, known foundations unlock via prereq gating (`state/notes/K-15.md`) | docs/03 §10 |
+| K-16 | Kanji instruction: `kanji/entries.jsonl` pack data, meaning/reading drills on existing dimensions, SRS-gated resurfacing, mnemonics labelled by review status (`state/notes/K-16.md`) | WaniKani/Heisig practice |
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 
@@ -34,7 +35,6 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 | card | epic | what | evidence |
 | --- | --- | --- | --- |
-| K-16 | methods | **Kanji instruction** (radicals + mnemonic stories + Heisig/WaniKani-style SRS gating) for A1+ reading track | WaniKani/Heisig practice; JA-RES-003 kanji selection rules |
 
 ## next — AI authoring kit (the GitHub community-pack goal)
 

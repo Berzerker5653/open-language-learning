@@ -22,6 +22,7 @@
 //! speech/profiles.jsonl            speech-profile           (one per line)
 //! phonology/contrasts.jsonl        phonology-contrast       (one per line)
 //! sentences/entries.jsonl         sentence                 (one per line)
+//! kanji/entries.jsonl            kanji                    (one per line)
 //! stories/*.yaml                  story                  (single document)
 //! ```
 //!
@@ -119,6 +120,9 @@ pub fn classify(rel: &str) -> Option<Classified> {
             }
             if rel.starts_with("sentences/") && rel.ends_with(".jsonl") {
                 return Some(jsonl("sentence"));
+            }
+            if rel.starts_with("kanji/") && rel.ends_with(".jsonl") {
+                return Some(jsonl("kanji"));
             }
             if rel.starts_with("stories/") && yaml(rel) {
                 return Some(single("story"));

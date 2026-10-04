@@ -918,6 +918,16 @@ tasks:
   acceptance:
   - Packs declare assessments (`assessments/definitions.jsonl`, goal-linked); the app runs a low-stakes placement pass that builds one practice task per pack assessment from its goal's unit content, with evidence tagged Diagnostic.
   - Correct diagnostic answers raise mastery state through the normal derivation path, so known foundations unlock via existing prerequisite gating; the diagnostic NEVER fabricates evidence for constructs the learner did not attempt.
+- id: K-16
+  milestone: M6
+  priority: P2
+  title: Kanji instruction (radicals + mnemonic stories + SRS gating)
+  dependencies: []
+  read_first:
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  acceptance:
+  - Packs declare kanji instruction data (character, meaning/reading prompts, radical decomposition, optional mnemonic story, review_status); the app runs a Heisig/WaniKani-style low-stakes drill (meaning and reading recognition from the character) whose evidence lands on existing dimensions only.
+  - Instruction is gated by SRS: newly drilled characters resurface on the scheduler's due date; untaught/unreviewed characters never enter the stream; AI-drafted mnemonics stay `draft`/`review-needed` and are labelled as such in the UI.
 - id: GAME-001
   milestone: M7
   priority: P1

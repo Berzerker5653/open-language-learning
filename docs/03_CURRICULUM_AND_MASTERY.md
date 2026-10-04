@@ -115,6 +115,14 @@ prerequisites. Cloze exercises the writing dimension honestly: a
 pack-declared target is blanked in its sentence and typed from context,
 with the target never visible during the attempt.
 
+K-16 character instruction (`kanji/entries.jsonl`: character, meanings,
+readings, radical decomposition, optional mnemonic with review status)
+adds no new dimensions: the meaning drill records `recall-meaning` and
+the reading drill records `orthography-recognition` evidence on the
+character content id, and the SRS scheduler decides when each character
+resurfaces. Kanji reading evidence never counts toward the kana-literacy
+roll-up, which only considers the pack's kana chart units.
+
 ## 5. Mastery state machine
 
 States are derived, not blindly incremented:

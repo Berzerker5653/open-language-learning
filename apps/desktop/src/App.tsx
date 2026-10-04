@@ -95,6 +95,7 @@ export function App() {
     | "reading"
     | "words"
     | "placement"
+    | "kanji"
   >("practice");
   const [notice, setNotice] = useState<PrivacyNotice>({
     title: "Your data stays on this device",
@@ -164,6 +165,24 @@ export function App() {
   const [placementHits, setPlacementHits] = useState(0);
   const [placementFinished, setPlacementFinished] = useState(false);
   const [placementError, setPlacementError] = useState<string | null>(null);
+  const [kanjiCards, setKanjiCards] = useState<
+    {
+      id: string;
+      character: string;
+      radicals: string[];
+      mnemonic: string | null;
+      status: string;
+      meaning_due: string | null;
+      reading_due: string | null;
+    }[]
+  >([]);
+  const [kanjiActive, setKanjiActive] = useState<(typeof kanjiCards)[number] | null>(null);
+  const [kanjiStage, setKanjiStage] = useState<"meaning" | "reading" | null>(null);
+  const [kanjiTask, setKanjiTask] = useState<PracticeTaskView | null>(null);
+  const [kanjiGraded, setKanjiGraded] = useState(false);
+  const [kanjiCorrect, setKanjiCorrect] = useState(false);
+  const [kanjiCorrectChoice, setKanjiCorrectChoice] = useState("");
+  const [kanjiError, setKanjiError] = useState<string | null>(null);
 
   const [practiceDraft, setPracticeDraft] = useState("");
   // The sticky header hides content when the page is scrolled; reset the
@@ -641,6 +660,96 @@ export function App() {
       );
     } catch (e) {
       setPlacementError(String(e));
+    }
+  }
+
+  // K-16: kanji drill — WaniKani-style meaning then reading for one
+  // character; grading and evidence go native on the two existing
+  // dimensions, and the scheduler decides when it resurfaces.
+  async function openKanji() {
+    setRoute("kanji");
+    setKanjiActive(null);
+    setKanjiStage(null);
+    setKanjiTask(null);
+    setKanjiError(null);
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    try {
+      setKanjiCards((await inv("kanji_list", { profileId })) as typeof kanjiCards);
+    } catch (e) {
+      setKanjiError(String(e));
+    }
+  }
+
+  async function startKanji(card: (typeof kanjiCards)[number]) {
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    setKanjiActive(card);
+    setKanjiStage("meaning");
+    setKanjiGraded(false);
+    setKanjiError(null);
+    try {
+      setKanjiTask(
+        (await inv("practice_task", {
+          profileId,
+          contentId: card.id,
+          modality: "recall-meaning",
+          revealReading: false,
+        })) as PracticeTaskView,
+      );
+    } catch (e) {
+      setKanjiTask(null);
+      setKanjiError(String(e));
+    }
+  }
+
+  async function chooseKanji(index: number) {
+    const inv = detectInvoke();
+    if (!inv || !profileId || !kanjiActive || !kanjiStage) return;
+    try {
+      const g = (await inv("practice_submit", {
+        profileId,
+        contentId: kanjiActive.id,
+        modality: kanjiStage === "meaning" ? "recall-meaning" : "orthography-recognition",
+        choiceIndex: index,
+        revealReading: false,
+      })) as { correct: boolean; correct_choice: string };
+      setKanjiCorrect(g.correct);
+      setKanjiCorrectChoice(g.correct_choice);
+      setKanjiGraded(true);
+    } catch (e) {
+      setKanjiError(String(e));
+    }
+  }
+
+  async function nextKanji() {
+    const inv = detectInvoke();
+    if (!inv || !profileId || !kanjiActive) return;
+    setKanjiGraded(false);
+    if (kanjiStage === "meaning") {
+      setKanjiStage("reading");
+      try {
+        setKanjiTask(
+          (await inv("practice_task", {
+            profileId,
+            contentId: kanjiActive.id,
+            modality: "orthography-recognition",
+            revealReading: false,
+          })) as PracticeTaskView,
+        );
+      } catch (e) {
+        setKanjiTask(null);
+        setKanjiError(String(e));
+      }
+      return;
+    }
+    setKanjiActive(null);
+    setKanjiStage(null);
+    setKanjiTask(null);
+    try {
+      setKanjiCards((await inv("kanji_list", { profileId })) as typeof kanjiCards);
+    } catch (e) {
+      setKanjiError(String(e));
     }
   }
 
@@ -1197,6 +1306,14 @@ export function App() {
           >
             Placement
           </button>
+          <button
+            type="button"
+            className="tab"
+            aria-current={route === "kanji" ? "page" : undefined}
+            onClick={() => void openKanji()}
+          >
+            Kanji
+          </button>
         </nav>
       }
     >
@@ -1542,6 +1659,61 @@ export function App() {
                 Start placement
               </button>
             </div>
+          )}
+        </section>
+      ) : route === "kanji" ? (
+        <section aria-label="Kanji">
+          <h2>Kanji</h2>
+          <p className="empty">
+            Characters your pack teaches, with their decomposition. Drill the meaning, then the
+            reading; the scheduler brings each one back when it is due.
+          </p>
+          {kanjiError && (
+            <p role="alert" className="alert">
+              {kanjiError}
+            </p>
+          )}
+          {kanjiActive && kanjiTask ? (
+            <div className="field">
+              <p className="prompt" lang="ja">
+                {kanjiActive.character}
+              </p>
+              <p>
+                <small>
+                  {kanjiActive.radicals.join(" + ")}
+                  {kanjiActive.mnemonic ? (
+                    <>
+                      {" — "}
+                      <em>{kanjiActive.mnemonic}</em> (story status: {kanjiActive.status})
+                    </>
+                  ) : null}
+                </small>
+              </p>
+              <PracticeRunner
+                task={kanjiTask}
+                graded={kanjiGraded}
+                correct={kanjiCorrect}
+                correctChoice={kanjiCorrectChoice}
+                heading={kanjiStage === "meaning" ? "What does it mean?" : "How do you read it?"}
+                onChoose={(i) => void chooseKanji(i)}
+                onNext={() => void nextKanji()}
+              />
+            </div>
+          ) : (
+            <ul className="story-list">
+              {kanjiCards.map((c) => (
+                <li key={c.id}>
+                  <button type="button" className="btn" onClick={() => void startKanji(c)}>
+                    <span lang="ja">{c.character}</span>{" "}
+                    <small>
+                      {(c.meaning_due ?? c.reading_due)
+                        ? `due ${c.meaning_due ?? c.reading_due}`
+                        : "new"}
+                    </small>
+                  </button>
+                </li>
+              ))}
+            </ul>
           )}
         </section>
       ) : route === "progress" ? (

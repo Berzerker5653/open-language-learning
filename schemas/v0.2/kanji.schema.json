@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlanguage.invalid/schemas/v0.2/kanji.schema.json",
+  "title": "Kanji instruction entry (0.2)",
+  "description": "One JSONL line per character-instruction item (K-16, Heisig/WaniKani-style). Language-neutral schema: any pack whose writing system teaches characters by decomposition may use it. The engine drills meaning and reading recognition from the character; it never interprets the language itself. Mnemonics are pack data; AI-drafted ones must carry `generation` provenance and a non-approved `status`.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "status", "character", "meanings", "readings", "radicals", "sources"],
+  "properties": {
+    "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+    "status": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/reviewStatus" },
+    "character": { "type": "string", "minLength": 1, "description": "The character drilled." },
+    "meanings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Meaning prompts in the pack's metalanguage; the meaning-recognition drill's correct answers.",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "readings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Reading prompts; the reading-recognition drill's correct answers.",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "radicals": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Decomposition shown as scaffolding before the attempt.",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "mnemonic": { "type": "string", "minLength": 1, "description": "Optional mnemonic story; labelled with its review status in the UI." },
+    "sources": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "notes": { "type": "string" },
+    "generation": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/generation" },
+    "review_records": {
+      "type": "array",
+      "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/reviewRef" }
+    }
+  }
+}

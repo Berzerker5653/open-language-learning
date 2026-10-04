@@ -532,6 +532,87 @@ fn orth_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<OrthEnt
     Ok(out)
 }
 
+/// K-16: a character-instruction item reduced to what the kanji drill
+/// needs (Heisig/WaniKani-style). Packs declare the decomposition and
+/// prompts; the engine drills meaning/reading recognition and never
+/// interprets the language itself (language neutrality, docs/00).
+struct KanjiEntry {
+    id: String,
+    character: String,
+    meanings: Vec<String>,
+    readings: Vec<String>,
+    radicals: Vec<String>,
+    mnemonic: Option<String>,
+    status: String,
+}
+
+/// Parse an installed pack's `kanji/entries.jsonl`. A pack without
+/// character instruction is not an error: empty list.
+fn kanji_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<KanjiEntry>, String> {
+    let path = data
+        .join("packs")
+        .join(pack_id)
+        .join(version)
+        .join("kanji")
+        .join("entries.jsonl");
+    let Ok(text) = std::fs::read_to_string(&path) else {
+        return Ok(Vec::new());
+    };
+    let mut out = Vec::new();
+    for line in text.lines() {
+        let Ok(entry) = serde_json::from_str::<serde_json::Value>(line) else {
+            continue;
+        };
+        let Some(id) = entry.get("id").and_then(|v| v.as_str()) else {
+            continue;
+        };
+        if lts_domain::ContentId::parse(id).is_err() {
+            continue;
+        }
+        let str_array = |key: &str| -> Vec<String> {
+            entry
+                .get(key)
+                .and_then(|v| v.as_array())
+                .map(|a| {
+                    a.iter()
+                        .filter_map(|s| s.as_str())
+                        .filter(|s| !s.is_empty())
+                        .map(String::from)
+                        .collect()
+                })
+                .unwrap_or_default()
+        };
+        let (Some(character), Some(status)) = (
+            entry.get("character").and_then(|v| v.as_str()),
+            entry.get("status").and_then(|v| v.as_str()),
+        ) else {
+            continue;
+        };
+        let (meanings, readings, radicals) = (
+            str_array("meanings"),
+            str_array("readings"),
+            str_array("radicals"),
+        );
+        if character.is_empty() || meanings.is_empty() || readings.is_empty() {
+            continue;
+        }
+        out.push(KanjiEntry {
+            id: id.to_string(),
+            character: character.to_string(),
+            meanings,
+            readings,
+            radicals,
+            mnemonic: entry
+                .get("mnemonic")
+                .and_then(|v| v.as_str())
+                .filter(|s| !s.is_empty())
+                .map(String::from),
+            status: status.to_string(),
+        });
+    }
+    Ok(out)
+}
+
 /// A phonological contrast reduced to what the discrimination runner
 /// needs (K-10). Packs declare the contrast set; the engine plays one
 /// member and offers all members as choices. It never interprets the
@@ -735,56 +816,19 @@ fn progression_items(
     Ok(items)
 }
 
-/// Compose a time-budgeted session from scheduler values: due reviews
-/// (retrievability), weak skills (derived confidence), and curriculum
-/// progression. Never a trivial "next card" queue (docs/01).
-fn build_plan(
+/// New-item stream: every selected pack's unseen lexicon, script,
+/// contrast, sentence, and character items are introduction
+/// candidates. The goal graph alone can gate an entire pack behind
+/// prerequisites, which leaves a brand-new profile with an empty
+/// session (docs/01: sessions must always offer learning).
+fn add_new_item_candidates(
     data: &Path,
+    store: &lts_storage::Store,
     profile_id: &str,
-    minutes: u32,
-    now_secs: u64,
-) -> Result<lts_scheduler::SessionPlan, String> {
-    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
-    let now_rfc = rfc3339_utc(now_secs);
-    let spike = lts_scheduler::FsrsSpike {
-        w: lts_scheduler::fsrs::DEFAULT_W,
-        request_ret: lts_scheduler::fsrs::DEFAULT_REQUEST_RET,
-    };
-    let mut due_reviews = Vec::new();
-    for rec in store
-        .due_items(profile_id, lts_scheduler::SPIKE_VERSION, &now_rfc)
-        .map_err(|e| e.to_string())?
-    {
-        let state: lts_scheduler::ItemState =
-            serde_json::from_str(&rec.params_json).map_err(|e| e.to_string())?;
-        let (content_id, modality) =
-            split_item_id(&rec.item_id).ok_or_else(|| format!("bad item id {}", rec.item_id))?;
-        due_reviews.push(lts_scheduler::DueReviewItem {
-            item_id: rec.item_id,
-            content_id,
-            modality,
-            retrievability: lts_scheduler::Scheduler::retrievability(
-                &spike,
-                &state,
-                now_secs as i64,
-            ),
-        });
-    }
-    let derived = derive_pairs(&store, profile_id, &now_rfc)?;
-    let weak_skills: Vec<lts_scheduler::WeakSkillItem> = derived
-        .iter()
-        .filter(|d| d.state != lts_domain::MasteryState::Unseen && d.confidence < WEAK_CONFIDENCE)
-        .map(|d| lts_scheduler::WeakSkillItem {
-            content_id: d.content_id.clone(),
-            dimension: d.dimension,
-            confidence: d.confidence as f64,
-        })
-        .collect();
-    let mut progression = progression_items(data, &store, profile_id, &derived)?;
-    // New-item stream: every selected pack's unseen lexicon entries are
-    // introduction candidates. The goal graph alone can gate an entire
-    // pack behind prerequisites, which leaves a brand-new profile with
-    // an empty session (docs/01: sessions must always offer learning).
+    derived: &[lts_learner_model::DerivedMastery],
+    progression: &mut Vec<lts_scheduler::ProgressionItem>,
+    due_reviews: &[lts_scheduler::DueReviewItem],
+) -> Result<(), String> {
     {
         let mut planned: std::collections::HashSet<String> = progression
             .iter()
@@ -899,8 +943,92 @@ fn build_plan(
                     });
                 }
             }
+            // K-16: character instruction joins the new-item stream
+            // for both drills (meaning = recall-meaning, reading =
+            // orthography-recognition); SRS due reviews then resurface
+            // drilled characters through the existing scheduler path.
+            for entry in kanji_entries(data, &pack_id, &version)? {
+                let modes = [
+                    lts_domain::ActivityModality::RecallMeaning,
+                    lts_domain::ActivityModality::OrthographyRecognition,
+                ];
+                for m in modes {
+                    if derived
+                        .iter()
+                        .any(|d| d.content_id == entry.id && d.dimension == m)
+                    {
+                        continue;
+                    }
+                    let key = format!("{}#{}", entry.id, dimension_kebab(m));
+                    if planned.contains(&key) {
+                        continue;
+                    }
+                    planned.insert(key);
+                    progression.push(lts_scheduler::ProgressionItem {
+                        content_id: entry.id.clone(),
+                        modality: m,
+                    });
+                }
+            }
         }
     }
+    Ok(())
+}
+
+/// Compose a time-budgeted session from scheduler values: due reviews
+/// (retrievability), weak skills (derived confidence), and curriculum
+/// progression. Never a trivial "next card" queue (docs/01).
+fn build_plan(
+    data: &Path,
+    profile_id: &str,
+    minutes: u32,
+    now_secs: u64,
+) -> Result<lts_scheduler::SessionPlan, String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let now_rfc = rfc3339_utc(now_secs);
+    let spike = lts_scheduler::FsrsSpike {
+        w: lts_scheduler::fsrs::DEFAULT_W,
+        request_ret: lts_scheduler::fsrs::DEFAULT_REQUEST_RET,
+    };
+    let mut due_reviews = Vec::new();
+    for rec in store
+        .due_items(profile_id, lts_scheduler::SPIKE_VERSION, &now_rfc)
+        .map_err(|e| e.to_string())?
+    {
+        let state: lts_scheduler::ItemState =
+            serde_json::from_str(&rec.params_json).map_err(|e| e.to_string())?;
+        let (content_id, modality) =
+            split_item_id(&rec.item_id).ok_or_else(|| format!("bad item id {}", rec.item_id))?;
+        due_reviews.push(lts_scheduler::DueReviewItem {
+            item_id: rec.item_id,
+            content_id,
+            modality,
+            retrievability: lts_scheduler::Scheduler::retrievability(
+                &spike,
+                &state,
+                now_secs as i64,
+            ),
+        });
+    }
+    let derived = derive_pairs(&store, profile_id, &now_rfc)?;
+    let weak_skills: Vec<lts_scheduler::WeakSkillItem> = derived
+        .iter()
+        .filter(|d| d.state != lts_domain::MasteryState::Unseen && d.confidence < WEAK_CONFIDENCE)
+        .map(|d| lts_scheduler::WeakSkillItem {
+            content_id: d.content_id.clone(),
+            dimension: d.dimension,
+            confidence: d.confidence as f64,
+        })
+        .collect();
+    let mut progression = progression_items(data, &store, profile_id, &derived)?;
+    add_new_item_candidates(
+        data,
+        &store,
+        profile_id,
+        &derived,
+        &mut progression,
+        &due_reviews,
+    )?;
     let config = lts_scheduler::PlannerConfig {
         budget_minutes: minutes,
         ..Default::default()
@@ -1744,6 +1872,23 @@ fn practice_build(
     if dim == lts_domain::ActivityModality::OrthographicEncoding {
         return dictation_task_build(data, pack_id, &version, content_id);
     }
+    // K-16: kanji ids drill meaning/reading recognition; kana chart
+    // ids keep the orthography runner. Dispatch is by declared pack
+    // data, never by script literals.
+    if dim == lts_domain::ActivityModality::OrthographyRecognition
+        && kanji_entries(data, pack_id, &version)?
+            .iter()
+            .any(|e| e.id == content_id)
+    {
+        return kanji_task_build(data, pack_id, &version, content_id, dim);
+    }
+    if dim == lts_domain::ActivityModality::RecallMeaning
+        && kanji_entries(data, pack_id, &version)?
+            .iter()
+            .any(|e| e.id == content_id)
+    {
+        return kanji_task_build(data, pack_id, &version, content_id, dim);
+    }
     if dim == lts_domain::ActivityModality::OrthographyRecognition {
         return orth_task_build(data, pack_id, &version, content_id);
     }
@@ -1856,6 +2001,111 @@ fn orth_task_build(
         typed: false,
     };
     Ok((task, answer.clone(), Vec::new()))
+}
+
+/// K-16 character drill: meaning recognition (recall-meaning) or
+/// reading recognition (orthography-recognition) from the character.
+/// The prompt is always the character; the answer is the entry's first
+/// declared meaning/reading, distractors are other entries' first
+/// meaning/reading in file order — the same deterministic choice
+/// construction as the orthography runner.
+fn kanji_task_build(
+    data: &Path,
+    pack_id: &str,
+    version: &str,
+    content_id: &str,
+    dim: lts_domain::ActivityModality,
+) -> Result<(PracticeTask, String, Vec<String>), String> {
+    let entries = kanji_entries(data, pack_id, version)?;
+    let entry = entries
+        .iter()
+        .find(|e| e.id == content_id)
+        .ok_or("unknown kanji target")?;
+    let reading = dim == lts_domain::ActivityModality::OrthographyRecognition;
+    let answer = if reading {
+        entry.readings[0].clone()
+    } else {
+        entry.meanings[0].clone()
+    };
+    let mut seen = std::collections::HashSet::from([answer.clone()]);
+    let mut choices: Vec<String> = entries
+        .iter()
+        .filter(|e| e.id != content_id)
+        .map(|e| {
+            if reading {
+                e.readings[0].clone()
+            } else {
+                e.meanings[0].clone()
+            }
+        })
+        .filter(|c| seen.insert(c.clone()))
+        .take(3)
+        .collect();
+    if choices.is_empty() {
+        return Err("pack kanji set is too small for a choice task".to_string());
+    }
+    let item_id = format!("{content_id}#{}", dimension_kebab(dim));
+    let pos = (fnv1a(&item_id) % (choices.len() as u64 + 1)) as usize;
+    choices.insert(pos, answer.clone());
+    let task = PracticeTask {
+        item_id,
+        surface: Some(entry.character.clone()),
+        reading: None,
+        furigana: None,
+        romaji: None,
+        faded_by_mastery: false,
+        choices,
+        typed: false,
+    };
+    Ok((task, answer, Vec::new()))
+}
+
+/// K-16 UI view: every pack-declared character with its SRS due dates
+/// per drill. Undrilled characters show no due date (they enter the
+/// plan stream as new items); drilled ones resurface on schedule.
+#[derive(Serialize)]
+struct KanjiCard {
+    id: String,
+    character: String,
+    radicals: Vec<String>,
+    mnemonic: Option<String>,
+    status: String,
+    meaning_due: Option<String>,
+    reading_due: Option<String>,
+}
+
+fn kanji_list_at(data: &Path, profile_id: &str) -> Result<Vec<KanjiCard>, String> {
+    let active = packs::active_pack(data, profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    let entries = kanji_entries(data, pack_id, &version)?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let rows = store
+        .scheduler_state(profile_id)
+        .map_err(|e| e.to_string())?;
+    let due = |id: &str, dim: &str| {
+        rows.iter()
+            .find(|r| r.item_id == format!("{id}#{dim}"))
+            .map(|r| r.due_at.clone())
+    };
+    Ok(entries
+        .into_iter()
+        .map(|e| KanjiCard {
+            meaning_due: due(&e.id, "recall-meaning"),
+            reading_due: due(&e.id, "orthography-recognition"),
+            id: e.id,
+            character: e.character,
+            radicals: e.radicals,
+            mnemonic: e.mnemonic,
+            status: e.status,
+        })
+        .collect())
+}
+
+#[tauri::command]
+fn kanji_list(profile_id: String) -> Result<Vec<KanjiCard>, String> {
+    kanji_list_at(&data_dir(), &profile_id)
 }
 
 /// K-10 perceptual discrimination runner: play one member of a
@@ -3174,6 +3424,7 @@ pub fn run() {
             practice_submit,
             placement_plan,
             placement_submit,
+            kanji_list,
             scenario_list,
             scenario_start,
             scenario_attempt,
@@ -4724,5 +4975,108 @@ mod tests {
                 .any(|i| i.content_id == "ja.grammar.demo.greetings"),
             "greet goal unlocks after diagnosis"
         );
+    }
+
+    #[test]
+    fn kanji_drill_uses_existing_dimensions_and_srs_gates_resurfacing() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+
+        // Pack-declared characters join the new-item stream for both
+        // drills (meaning + reading).
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let derived = derive_pairs(&store, &p.id, &rfc3339_utc(1_760_000_000)).unwrap();
+        let mut candidates = Vec::new();
+        add_new_item_candidates(data, &store, &p.id, &derived, &mut candidates, &[]).unwrap();
+        assert!(
+            candidates
+                .iter()
+                .any(|i| i.content_id.starts_with("ja.kanji.demo.")),
+            "kanji items join the new-item stream"
+        );
+
+        // Meaning drill: character -> meaning choices.
+        let (t, correct, _) =
+            practice_build(data, &p.id, "ja.kanji.demo.hito", "recall-meaning", false).unwrap();
+        assert_eq!(t.surface.as_deref(), Some("人"));
+        assert_eq!(correct, "person");
+        let idx = t.choices.iter().position(|c| c == "person").unwrap();
+        let g = practice_submit_at(
+            data,
+            &p.id,
+            "ja.kanji.demo.hito",
+            "recall-meaning",
+            idx,
+            None,
+            false,
+        )
+        .unwrap();
+        assert!(g.correct);
+
+        // Reading drill: character -> reading choices.
+        let (t2, correct2, _) = practice_build(
+            data,
+            &p.id,
+            "ja.kanji.demo.hito",
+            "orthography-recognition",
+            false,
+        )
+        .unwrap();
+        assert_eq!(t2.surface.as_deref(), Some("人"));
+        assert_eq!(correct2, "hito");
+        let idx2 = t2.choices.iter().position(|c| c == "hito").unwrap();
+        let g2 = practice_submit_at(
+            data,
+            &p.id,
+            "ja.kanji.demo.hito",
+            "orthography-recognition",
+            idx2,
+            None,
+            false,
+        )
+        .unwrap();
+        assert!(g2.correct);
+
+        // Evidence lands on the two EXISTING dimensions only.
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let events = store.evidence_for_profile(&p.id).unwrap();
+        for dim in [
+            lts_domain::ActivityModality::RecallMeaning,
+            lts_domain::ActivityModality::OrthographyRecognition,
+        ] {
+            assert!(
+                events.iter().any(|e| {
+                    e.modality == dim
+                        && e.targets.iter().any(|t| t.as_str() == "ja.kanji.demo.hito")
+                }),
+                "kanji drill evidence on {dim:?}"
+            );
+        }
+        // Kanji reading recognition must NOT establish kana literacy:
+        // the roll-up only counts the pack's kana chart units.
+        assert_ne!(
+            store
+                .get_setting(&p.id, "kana-literacy-established")
+                .unwrap()
+                .and_then(|v| v.as_bool()),
+            Some(true),
+            "kanji drills do not establish kana literacy"
+        );
+
+        // SRS gating: drilled drills now carry due dates; the mnemonic
+        // and its review status surface for the UI.
+        let cards = kanji_list_at(data, &p.id).unwrap();
+        let hito = cards.iter().find(|c| c.id == "ja.kanji.demo.hito").unwrap();
+        assert!(hito.meaning_due.is_some() && hito.reading_due.is_some());
+        let yasu = cards.iter().find(|c| c.id == "ja.kanji.demo.yasu").unwrap();
+        assert!(
+            yasu.meaning_due.is_none() && yasu.reading_due.is_none(),
+            "undrilled characters have no due rows"
+        );
+        assert_eq!(yasu.status, "review-needed");
+        assert!(yasu.mnemonic.is_some(), "mnemonic surfaces for the UI");
     }
 }

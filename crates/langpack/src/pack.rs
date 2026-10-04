@@ -297,6 +297,7 @@ impl Pack {
                     | "orthography-unit"
                     | "phonology-contrast"
                     | "sentence"
+                    | "kanji"
                     | "story"
                     | "concept"
                     | "lexical-entry"
