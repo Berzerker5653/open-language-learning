@@ -10,4 +10,4 @@ lts-pack/1 dev.experiment.de-de v0.0.1 (schema 0.2)
          126  f74a26f0f40f  licenses.jsonl
          405  cffe3810b6be  manifest.yaml
         1093  4e876e755a1f  sentences/entries.jsonl
-         436  42eee88ef277  sources.jsonl
+         452  630215a376f8  sources.jsonl

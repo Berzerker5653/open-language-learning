@@ -13,7 +13,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
       - name: Install langpack CLI
         run: |
-          git clone --depth 1 https://github.com/openlanguage-lts/LTS.git lts-tooling
+          git clone --depth 1 https://github.com/Berzerker5653/open-language-learning.git lts-tooling
           cargo install --path lts-tooling/crates/langpack-cli --locked
       - name: Full conformance gate
         run: langpack test .

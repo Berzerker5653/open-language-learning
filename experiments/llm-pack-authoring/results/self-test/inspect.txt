@@ -7,4 +7,4 @@ lts-pack/1 dev.example.xx v0.0.1 (schema 0.2)
          123  0fdcef873a76  licenses.jsonl
          396  dc59f3072d65  manifest.yaml
          273  6fbf0fd9d2e4  sentences/entries.jsonl
-         398  41473876f0a1  sources.jsonl
+         414  081251b6348f  sources.jsonl
