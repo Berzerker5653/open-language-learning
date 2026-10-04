@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 relationships); content refs are pack data; qualified review pending.
+id: ja.unit.rel-memories
+goal_id: ja.goal.a2.relationships
+title: Memories
+summary: Memory, memory box, memory trip, memory song.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.rel.omoide
+  - ja.lex.rel.omoide-bako
+  - ja.lex.rel.omoide-no-tabi
+  - ja.lex.rel.omoide-no-uta
+  - ja.lex.rel.omoide-no-hi
+  - ja.sent.memory-song
+  allowed_grammar:
+  - ja.grammar.quotative.to-itta-koto
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.rel-memories-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.rel.omoide
+  - ja.lex.rel.omoide-bako
+  - ja.lex.rel.omoide-no-tabi
+  - ja.lex.rel.omoide-no-uta
+  - ja.lex.rel.omoide-no-hi
+  - ja.sent.memory-song
+  - ja.sent.memory-song
+- id: ja.activity.rel-memories-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.rel.omoide
+  - ja.lex.rel.omoide-bako
+  - ja.lex.rel.omoide-no-tabi
+  - ja.lex.rel.omoide-no-uta
+  - ja.lex.rel.omoide-no-hi
+  - ja.sent.memory-song
+- id: ja.activity.rel-memories-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.rel.omoide
+  - ja.lex.rel.omoide-bako
+  - ja.lex.rel.omoide-no-tabi
+  - ja.lex.rel.omoide-no-uta
+  - ja.lex.rel.omoide-no-hi
+  - ja.sent.memory-song
+- id: ja.activity.rel-memories-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.rel.omoide
+  - ja.lex.rel.omoide-bako
+  - ja.lex.rel.omoide-no-tabi
+  - ja.lex.rel.omoide-no-uta
+  - ja.lex.rel.omoide-no-hi
+  - ja.sent.memory-song
+- id: ja.activity.rel-memories-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.memory-song

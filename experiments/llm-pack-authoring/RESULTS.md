@@ -436,3 +436,9 @@ Score: **7/7**.
 Goal `ja.goal.a2.sports-fitness` (prereq entertainment, mirrored), 10
 units, 50-word `lexicon/sports.jsonl`, 1 grammar
 (`quotative.to-itta-koto`), 9 sentences, 1 assessment. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 15: A2 units 200-209 (relationships)
+
+Goal `ja.goal.a2.relationships` (prereq sports-fitness, mirrored), 10
+units, 50-word `lexicon/relationships.jsonl`, 1 grammar
+(`particle.youni-versus-to`), 9 sentences, 1 assessment. Score: **7/7**.

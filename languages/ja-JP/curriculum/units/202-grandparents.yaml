@@ -1,0 +1,82 @@
+# ai-assisted draft unit (Mode B A2 relationships); content refs are pack data; qualified review pending.
+id: ja.unit.rel-grandparents
+goal_id: ja.goal.a2.relationships
+title: Grandparents and relatives
+summary: Grandmother, grandfather, aunt, uncle, cousin.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.rel.obaa-chan
+  - ja.lex.rel.ojii-chan
+  - ja.lex.rel.oba
+  - ja.lex.rel.oji
+  - ja.lex.rel.itoko
+  - ja.sent.grandma-cook
+  - ja.sent.cousin-visit
+  allowed_grammar:
+  - ja.grammar.particle.ni-destination
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.rel-grandparents-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.rel.obaa-chan
+  - ja.lex.rel.ojii-chan
+  - ja.lex.rel.oba
+  - ja.lex.rel.oji
+  - ja.lex.rel.itoko
+  - ja.sent.grandma-cook
+  - ja.sent.cousin-visit
+  - ja.sent.grandma-cook
+  - ja.sent.cousin-visit
+- id: ja.activity.rel-grandparents-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.rel.obaa-chan
+  - ja.lex.rel.ojii-chan
+  - ja.lex.rel.oba
+  - ja.lex.rel.oji
+  - ja.lex.rel.itoko
+  - ja.sent.grandma-cook
+  - ja.sent.cousin-visit
+- id: ja.activity.rel-grandparents-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.rel.obaa-chan
+  - ja.lex.rel.ojii-chan
+  - ja.lex.rel.oba
+  - ja.lex.rel.oji
+  - ja.lex.rel.itoko
+  - ja.sent.grandma-cook
+  - ja.sent.cousin-visit
+- id: ja.activity.rel-grandparents-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.rel.obaa-chan
+  - ja.lex.rel.ojii-chan
+  - ja.lex.rel.oba
+  - ja.lex.rel.oji
+  - ja.lex.rel.itoko
+  - ja.sent.grandma-cook
+  - ja.sent.cousin-visit
+- id: ja.activity.rel-grandparents-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.grandma-cook
+- id: ja.activity.rel-grandparents-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.cousin-visit

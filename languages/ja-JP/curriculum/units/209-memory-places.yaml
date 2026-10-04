@@ -1,0 +1,58 @@
+# ai-assisted draft unit (Mode B A2 relationships); content refs are pack data; qualified review pending.
+id: ja.unit.rel-memory-places
+goal_id: ja.goal.a2.relationships
+title: Memory places
+summary: Memory day, town, person, tree, sky.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.rel.omoide-no-machi
+  - ja.lex.rel.omoide-no-hito
+  - ja.lex.rel.omoide-no-ki
+  - ja.lex.rel.omoide-no-sora
+  - ja.lex.rel.omoide-no-kioku
+  allowed_grammar:
+  - ja.grammar.particle.youni-versus-to
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.rel-memory-places-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.rel.omoide-no-machi
+  - ja.lex.rel.omoide-no-hito
+  - ja.lex.rel.omoide-no-ki
+  - ja.lex.rel.omoide-no-sora
+  - ja.lex.rel.omoide-no-kioku
+- id: ja.activity.rel-memory-places-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.rel.omoide-no-machi
+  - ja.lex.rel.omoide-no-hito
+  - ja.lex.rel.omoide-no-ki
+  - ja.lex.rel.omoide-no-sora
+  - ja.lex.rel.omoide-no-kioku
+- id: ja.activity.rel-memory-places-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.rel.omoide-no-machi
+  - ja.lex.rel.omoide-no-hito
+  - ja.lex.rel.omoide-no-ki
+  - ja.lex.rel.omoide-no-sora
+  - ja.lex.rel.omoide-no-kioku
+- id: ja.activity.rel-memory-places-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.rel.omoide-no-machi
+  - ja.lex.rel.omoide-no-hito
+  - ja.lex.rel.omoide-no-ki
+  - ja.lex.rel.omoide-no-sora
+  - ja.lex.rel.omoide-no-kioku

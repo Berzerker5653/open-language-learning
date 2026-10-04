@@ -1047,3 +1047,35 @@ goals:
       tool: omp
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
+  - id: ja.goal.a2.relationships
+    description: 'Describe family, friends, and feelings using relationship words,
+      memory forms, and ように/と distinctions.'
+    band: A2
+    framework_refs: []
+    contexts:
+    - ja.situation.first-meeting
+    modalities:
+    - listening
+    - speaking
+    - reading
+    - writing
+    prerequisites:
+    - target: ja.goal.a2.sports-fitness
+      dimension: grammar-controlled
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.lex.rel.kazoku
+    - ja.lex.rel.shinrai
+    assessment_ids:
+    - ja.assess.relationships
+    transfer_required: true
+    sources:
+    - jf-standard
+    - ai-drafted-extension
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next-iq3_s
+      date: '2026-10-04'

@@ -1,0 +1,58 @@
+# ai-assisted draft unit (Mode B A2 relationships); content refs are pack data; qualified review pending.
+id: ja.unit.rel-family-members
+goal_id: ja.goal.a2.relationships
+title: Family members
+summary: Family member, family unit, family will, older/younger.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.rel.kazoku-no-kata
+  - ja.lex.rel.kazoku-no-uni
+  - ja.lex.rel.kazoku-no-ishi
+  - ja.lex.rel.jijou-betsu
+  - ja.lex.rel.kyoudai-ue
+  allowed_grammar:
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.rel-family-members-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.rel.kazoku-no-kata
+  - ja.lex.rel.kazoku-no-uni
+  - ja.lex.rel.kazoku-no-ishi
+  - ja.lex.rel.jijou-betsu
+  - ja.lex.rel.kyoudai-ue
+- id: ja.activity.rel-family-members-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.rel.kazoku-no-kata
+  - ja.lex.rel.kazoku-no-uni
+  - ja.lex.rel.kazoku-no-ishi
+  - ja.lex.rel.jijou-betsu
+  - ja.lex.rel.kyoudai-ue
+- id: ja.activity.rel-family-members-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.rel.kazoku-no-kata
+  - ja.lex.rel.kazoku-no-uni
+  - ja.lex.rel.kazoku-no-ishi
+  - ja.lex.rel.jijou-betsu
+  - ja.lex.rel.kyoudai-ue
+- id: ja.activity.rel-family-members-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.rel.kazoku-no-kata
+  - ja.lex.rel.kazoku-no-uni
+  - ja.lex.rel.kazoku-no-ishi
+  - ja.lex.rel.jijou-betsu
+  - ja.lex.rel.kyoudai-ue

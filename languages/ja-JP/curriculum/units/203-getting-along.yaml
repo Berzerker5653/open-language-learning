@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 relationships); content refs are pack data; qualified review pending.
+id: ja.unit.rel-getting-along
+goal_id: ja.goal.a2.relationships
+title: Getting along
+summary: Get along, quarrel, reconcile, wish.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.rel.nakayoku
+  - ja.lex.rel.kenka
+  - ja.lex.rel.yori-modosu
+  - ja.lex.rel.negai
+  - ja.lex.rel.fushi
+  - ja.sent.quarrel-reconcile
+  allowed_grammar:
+  - ja.grammar.verb.te-form-sequence
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.rel-getting-along-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.rel.nakayoku
+  - ja.lex.rel.kenka
+  - ja.lex.rel.yori-modosu
+  - ja.lex.rel.negai
+  - ja.lex.rel.fushi
+  - ja.sent.quarrel-reconcile
+  - ja.sent.quarrel-reconcile
+- id: ja.activity.rel-getting-along-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.rel.nakayoku
+  - ja.lex.rel.kenka
+  - ja.lex.rel.yori-modosu
+  - ja.lex.rel.negai
+  - ja.lex.rel.fushi
+  - ja.sent.quarrel-reconcile
+- id: ja.activity.rel-getting-along-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.rel.nakayoku
+  - ja.lex.rel.kenka
+  - ja.lex.rel.yori-modosu
+  - ja.lex.rel.negai
+  - ja.lex.rel.fushi
+  - ja.sent.quarrel-reconcile
+- id: ja.activity.rel-getting-along-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.rel.nakayoku
+  - ja.lex.rel.kenka
+  - ja.lex.rel.yori-modosu
+  - ja.lex.rel.negai
+  - ja.lex.rel.fushi
+  - ja.sent.quarrel-reconcile
+- id: ja.activity.rel-getting-along-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.quarrel-reconcile

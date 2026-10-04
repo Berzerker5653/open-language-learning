@@ -1,0 +1,82 @@
+# ai-assisted draft unit (Mode B A2 relationships); content refs are pack data; qualified review pending.
+id: ja.unit.rel-family
+goal_id: ja.goal.a2.relationships
+title: Family
+summary: Family, siblings, relatives, ancestors.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.rel.kazoku
+  - ja.lex.rel.kyoudai
+  - ja.lex.rel.shinrui
+  - ja.lex.rel.senzoku
+  - ja.lex.rel.kyoudai-ue
+  - ja.sent.family-photo
+  - ja.sent.siblings-get-along
+  allowed_grammar:
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.rel-family-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.rel.kazoku
+  - ja.lex.rel.kyoudai
+  - ja.lex.rel.shinrui
+  - ja.lex.rel.senzoku
+  - ja.lex.rel.kyoudai-ue
+  - ja.sent.family-photo
+  - ja.sent.siblings-get-along
+  - ja.sent.family-photo
+  - ja.sent.siblings-get-along
+- id: ja.activity.rel-family-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.rel.kazoku
+  - ja.lex.rel.kyoudai
+  - ja.lex.rel.shinrui
+  - ja.lex.rel.senzoku
+  - ja.lex.rel.kyoudai-ue
+  - ja.sent.family-photo
+  - ja.sent.siblings-get-along
+- id: ja.activity.rel-family-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.rel.kazoku
+  - ja.lex.rel.kyoudai
+  - ja.lex.rel.shinrui
+  - ja.lex.rel.senzoku
+  - ja.lex.rel.kyoudai-ue
+  - ja.sent.family-photo
+  - ja.sent.siblings-get-along
+- id: ja.activity.rel-family-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.rel.kazoku
+  - ja.lex.rel.kyoudai
+  - ja.lex.rel.shinrui
+  - ja.lex.rel.senzoku
+  - ja.lex.rel.kyoudai-ue
+  - ja.sent.family-photo
+  - ja.sent.siblings-get-along
+- id: ja.activity.rel-family-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.family-photo
+- id: ja.activity.rel-family-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.siblings-get-along

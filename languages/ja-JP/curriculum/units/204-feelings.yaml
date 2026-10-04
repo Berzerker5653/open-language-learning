@@ -1,0 +1,58 @@
+# ai-assisted draft unit (Mode B A2 relationships); content refs are pack data; qualified review pending.
+id: ja.unit.rel-feelings
+goal_id: ja.goal.a2.relationships
+title: Feelings
+summary: Grief, lonely, mental preparation, consideration.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.rel.tsuui
+  - ja.lex.rel.sabishii
+  - ja.lex.rel.kokoro-gamae
+  - ja.lex.rel.kokoro-bazuka
+  - ja.lex.rel.omoiyari
+  allowed_grammar:
+  - ja.grammar.adjectives.na-attributive
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.rel-feelings-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.rel.tsuui
+  - ja.lex.rel.sabishii
+  - ja.lex.rel.kokoro-gamae
+  - ja.lex.rel.kokoro-bazuka
+  - ja.lex.rel.omoiyari
+- id: ja.activity.rel-feelings-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.rel.tsuui
+  - ja.lex.rel.sabishii
+  - ja.lex.rel.kokoro-gamae
+  - ja.lex.rel.kokoro-bazuka
+  - ja.lex.rel.omoiyari
+- id: ja.activity.rel-feelings-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.rel.tsuui
+  - ja.lex.rel.sabishii
+  - ja.lex.rel.kokoro-gamae
+  - ja.lex.rel.kokoro-bazuka
+  - ja.lex.rel.omoiyari
+- id: ja.activity.rel-feelings-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.rel.tsuui
+  - ja.lex.rel.sabishii
+  - ja.lex.rel.kokoro-gamae
+  - ja.lex.rel.kokoro-bazuka
+  - ja.lex.rel.omoiyari

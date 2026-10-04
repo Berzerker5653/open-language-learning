@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 relationships); content refs are pack data; qualified review pending.
+id: ja.unit.rel-life-events
+goal_id: ja.goal.a2.relationships
+title: Life events
+summary: Marriage, engagement, separation, couple.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.rel.kekkon
+  - ja.lex.rel.kon-yaku
+  - ja.lex.rel.wakare
+  - ja.lex.rel.fufu
+  - ja.lex.rel.boshi
+  - ja.sent.marriage-day
+  allowed_grammar:
+  - ja.grammar.verb.experience-ta
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.rel-life-events-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.rel.kekkon
+  - ja.lex.rel.kon-yaku
+  - ja.lex.rel.wakare
+  - ja.lex.rel.fufu
+  - ja.lex.rel.boshi
+  - ja.sent.marriage-day
+  - ja.sent.marriage-day
+- id: ja.activity.rel-life-events-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.rel.kekkon
+  - ja.lex.rel.kon-yaku
+  - ja.lex.rel.wakare
+  - ja.lex.rel.fufu
+  - ja.lex.rel.boshi
+  - ja.sent.marriage-day
+- id: ja.activity.rel-life-events-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.rel.kekkon
+  - ja.lex.rel.kon-yaku
+  - ja.lex.rel.wakare
+  - ja.lex.rel.fufu
+  - ja.lex.rel.boshi
+  - ja.sent.marriage-day
+- id: ja.activity.rel-life-events-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.rel.kekkon
+  - ja.lex.rel.kon-yaku
+  - ja.lex.rel.wakare
+  - ja.lex.rel.fufu
+  - ja.lex.rel.boshi
+  - ja.sent.marriage-day
+- id: ja.activity.rel-life-events-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.marriage-day
