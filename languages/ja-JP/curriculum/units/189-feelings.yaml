@@ -1,0 +1,63 @@
+# ai-assisted draft unit (Mode B A2 entertainment); content refs are pack data; qualified review pending.
+id: ja.unit.ent-feelings
+goal_id: ja.goal.a2.entertainment
+title: Entertainment feelings
+summary: Enthusiasm, sadness, boring, perfect, perfectly.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.ent.senkyou
+  - ja.lex.ent.kanashimi
+  - ja.lex.ent.tsumaranai
+  - ja.lex.ent.kanpeki
+  - ja.lex.ent.kanzen
+  - ja.grammar.verb.hajimeru-owaru
+  allowed_grammar:
+  - ja.grammar.verb.hajimeru-owaru
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.ent-feelings-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.ent.senkyou
+  - ja.lex.ent.kanashimi
+  - ja.lex.ent.tsumaranai
+  - ja.lex.ent.kanpeki
+  - ja.lex.ent.kanzen
+  - ja.grammar.verb.hajimeru-owaru
+- id: ja.activity.ent-feelings-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.ent.senkyou
+  - ja.lex.ent.kanashimi
+  - ja.lex.ent.tsumaranai
+  - ja.lex.ent.kanpeki
+  - ja.lex.ent.kanzen
+  - ja.grammar.verb.hajimeru-owaru
+- id: ja.activity.ent-feelings-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.ent.senkyou
+  - ja.lex.ent.kanashimi
+  - ja.lex.ent.tsumaranai
+  - ja.lex.ent.kanpeki
+  - ja.lex.ent.kanzen
+  - ja.grammar.verb.hajimeru-owaru
+- id: ja.activity.ent-feelings-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.ent.senkyou
+  - ja.lex.ent.kanashimi
+  - ja.lex.ent.tsumaranai
+  - ja.lex.ent.kanpeki
+  - ja.lex.ent.kanzen
+  - ja.grammar.verb.hajimeru-owaru

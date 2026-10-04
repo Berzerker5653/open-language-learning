@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 entertainment); content refs are pack data; qualified review pending.
+id: ja.unit.ent-sports
+goal_id: ja.goal.a2.entertainment
+title: Sports
+summary: Athlete, coach, referee, sportsman, sports channel.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.ent.senshu
+  - ja.lex.ent.coach
+  - ja.lex.ent.referee
+  - ja.lex.ent.supootsu-man
+  - ja.lex.ent.supa
+  - ja.sent.team-match
+  allowed_grammar:
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.ent-sports-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.ent.senshu
+  - ja.lex.ent.coach
+  - ja.lex.ent.referee
+  - ja.lex.ent.supootsu-man
+  - ja.lex.ent.supa
+  - ja.sent.team-match
+  - ja.sent.team-match
+- id: ja.activity.ent-sports-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.ent.senshu
+  - ja.lex.ent.coach
+  - ja.lex.ent.referee
+  - ja.lex.ent.supootsu-man
+  - ja.lex.ent.supa
+  - ja.sent.team-match
+- id: ja.activity.ent-sports-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.ent.senshu
+  - ja.lex.ent.coach
+  - ja.lex.ent.referee
+  - ja.lex.ent.supootsu-man
+  - ja.lex.ent.supa
+  - ja.sent.team-match
+- id: ja.activity.ent-sports-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.ent.senshu
+  - ja.lex.ent.coach
+  - ja.lex.ent.referee
+  - ja.lex.ent.supootsu-man
+  - ja.lex.ent.supa
+  - ja.sent.team-match
+- id: ja.activity.ent-sports-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.team-match

@@ -1,0 +1,82 @@
+# ai-assisted draft unit (Mode B A2 entertainment); content refs are pack data; qualified review pending.
+id: ja.unit.ent-music
+goal_id: ja.goal.a2.entertainment
+title: Music events
+summary: Concert, live show, karaoke, ballet.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.ent.konsaato
+  - ja.lex.ent.raibu
+  - ja.lex.ent.karaoke
+  - ja.lex.ent.ballet
+  - ja.lex.ent.onsen-nyuujou
+  - ja.sent.concert-fun
+  - ja.sent.karaoke-night
+  allowed_grammar:
+  - ja.grammar.particle.de-means
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.ent-music-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.ent.konsaato
+  - ja.lex.ent.raibu
+  - ja.lex.ent.karaoke
+  - ja.lex.ent.ballet
+  - ja.lex.ent.onsen-nyuujou
+  - ja.sent.concert-fun
+  - ja.sent.karaoke-night
+  - ja.sent.concert-fun
+  - ja.sent.karaoke-night
+- id: ja.activity.ent-music-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.ent.konsaato
+  - ja.lex.ent.raibu
+  - ja.lex.ent.karaoke
+  - ja.lex.ent.ballet
+  - ja.lex.ent.onsen-nyuujou
+  - ja.sent.concert-fun
+  - ja.sent.karaoke-night
+- id: ja.activity.ent-music-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.ent.konsaato
+  - ja.lex.ent.raibu
+  - ja.lex.ent.karaoke
+  - ja.lex.ent.ballet
+  - ja.lex.ent.onsen-nyuujou
+  - ja.sent.concert-fun
+  - ja.sent.karaoke-night
+- id: ja.activity.ent-music-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.ent.konsaato
+  - ja.lex.ent.raibu
+  - ja.lex.ent.karaoke
+  - ja.lex.ent.ballet
+  - ja.lex.ent.onsen-nyuujou
+  - ja.sent.concert-fun
+  - ja.sent.karaoke-night
+- id: ja.activity.ent-music-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.concert-fun
+- id: ja.activity.ent-music-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.karaoke-night

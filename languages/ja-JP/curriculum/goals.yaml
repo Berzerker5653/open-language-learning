@@ -983,3 +983,35 @@ goals:
       tool: omp
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
+  - id: ja.goal.a2.entertainment
+    description: 'Talk about entertainment: venues, music, TV, sports, theater, and
+      parties, using effort and start/finish forms.'
+    band: A2
+    framework_refs: []
+    contexts:
+    - ja.situation.shopping
+    modalities:
+    - listening
+    - speaking
+    - reading
+    - writing
+    prerequisites:
+    - target: ja.goal.a2.weather-seasons
+      dimension: grammar-controlled
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.lex.ent.konsaato
+    - ja.lex.ent.bangumi
+    assessment_ids:
+    - ja.assess.entertainment
+    transfer_required: true
+    sources:
+    - jf-standard
+    - ai-drafted-extension
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next-iq3_s
+      date: '2026-10-04'

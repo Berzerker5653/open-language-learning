@@ -1,0 +1,58 @@
+# ai-assisted draft unit (Mode B A2 entertainment); content refs are pack data; qualified review pending.
+id: ja.unit.ent-theater
+goal_id: ja.goal.a2.entertainment
+title: Theater
+summary: Play, performance, role, lines.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.ent.engeki
+  - ja.lex.ent.kangeki
+  - ja.lex.ent.yakuwari
+  - ja.lex.ent.serifu
+  - ja.lex.ent.purii
+  allowed_grammar:
+  - ja.grammar.syntax.relative-clauses
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.ent-theater-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.ent.engeki
+  - ja.lex.ent.kangeki
+  - ja.lex.ent.yakuwari
+  - ja.lex.ent.serifu
+  - ja.lex.ent.purii
+- id: ja.activity.ent-theater-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.ent.engeki
+  - ja.lex.ent.kangeki
+  - ja.lex.ent.yakuwari
+  - ja.lex.ent.serifu
+  - ja.lex.ent.purii
+- id: ja.activity.ent-theater-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.ent.engeki
+  - ja.lex.ent.kangeki
+  - ja.lex.ent.yakuwari
+  - ja.lex.ent.serifu
+  - ja.lex.ent.purii
+- id: ja.activity.ent-theater-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.ent.engeki
+  - ja.lex.ent.kangeki
+  - ja.lex.ent.yakuwari
+  - ja.lex.ent.serifu
+  - ja.lex.ent.purii

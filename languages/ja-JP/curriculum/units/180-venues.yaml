@@ -1,0 +1,82 @@
+# ai-assisted draft unit (Mode B A2 entertainment); content refs are pack data; qualified review pending.
+id: ja.unit.ent-venues
+goal_id: ja.goal.a2.entertainment
+title: Entertainment venues
+summary: Movie theater, theater, museum, zoo, park.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.ent.eiga-kan
+  - ja.lex.ent.gekijou
+  - ja.lex.ent.hakubutsukan
+  - ja.lex.ent.dobutsu-en
+  - ja.lex.ent.yuenchi
+  - ja.sent.movie-cinema
+  - ja.sent.go-zoo
+  allowed_grammar:
+  - ja.grammar.particle.de-means
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.ent-venues-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.ent.eiga-kan
+  - ja.lex.ent.gekijou
+  - ja.lex.ent.hakubutsukan
+  - ja.lex.ent.dobutsu-en
+  - ja.lex.ent.yuenchi
+  - ja.sent.movie-cinema
+  - ja.sent.go-zoo
+  - ja.sent.movie-cinema
+  - ja.sent.go-zoo
+- id: ja.activity.ent-venues-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.ent.eiga-kan
+  - ja.lex.ent.gekijou
+  - ja.lex.ent.hakubutsukan
+  - ja.lex.ent.dobutsu-en
+  - ja.lex.ent.yuenchi
+  - ja.sent.movie-cinema
+  - ja.sent.go-zoo
+- id: ja.activity.ent-venues-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.ent.eiga-kan
+  - ja.lex.ent.gekijou
+  - ja.lex.ent.hakubutsukan
+  - ja.lex.ent.dobutsu-en
+  - ja.lex.ent.yuenchi
+  - ja.sent.movie-cinema
+  - ja.sent.go-zoo
+- id: ja.activity.ent-venues-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.ent.eiga-kan
+  - ja.lex.ent.gekijou
+  - ja.lex.ent.hakubutsukan
+  - ja.lex.ent.dobutsu-en
+  - ja.lex.ent.yuenchi
+  - ja.sent.movie-cinema
+  - ja.sent.go-zoo
+- id: ja.activity.ent-venues-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.movie-cinema
+- id: ja.activity.ent-venues-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.go-zoo

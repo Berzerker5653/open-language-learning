@@ -1,0 +1,58 @@
+# ai-assisted draft unit (Mode B A2 entertainment); content refs are pack data; qualified review pending.
+id: ja.unit.ent-results
+goal_id: ja.goal.a2.entertainment
+title: Results
+summary: Victory, defeat, tie, rating.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.ent.shou
+  - ja.lex.ent.make
+  - ja.lex.ent.hikiwake
+  - ja.lex.ent.hyouban
+  - ja.lex.ent.debyuu
+  allowed_grammar:
+  - ja.grammar.copula.polite-desu
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.ent-results-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.ent.shou
+  - ja.lex.ent.make
+  - ja.lex.ent.hikiwake
+  - ja.lex.ent.hyouban
+  - ja.lex.ent.debyuu
+- id: ja.activity.ent-results-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.ent.shou
+  - ja.lex.ent.make
+  - ja.lex.ent.hikiwake
+  - ja.lex.ent.hyouban
+  - ja.lex.ent.debyuu
+- id: ja.activity.ent-results-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.ent.shou
+  - ja.lex.ent.make
+  - ja.lex.ent.hikiwake
+  - ja.lex.ent.hyouban
+  - ja.lex.ent.debyuu
+- id: ja.activity.ent-results-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.ent.shou
+  - ja.lex.ent.make
+  - ja.lex.ent.hikiwake
+  - ja.lex.ent.hyouban
+  - ja.lex.ent.debyuu

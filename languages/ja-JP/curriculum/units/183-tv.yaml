@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 entertainment); content refs are pack data; qualified review pending.
+id: ja.unit.ent-tv
+goal_id: ja.goal.a2.entertainment
+title: TV programs
+summary: Program, drama, variety, news program, channel.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.ent.bangumi
+  - ja.lex.ent.dorama
+  - ja.lex.ent.variety
+  - ja.lex.ent.nyuusu-bangumi
+  - ja.lex.ent.channeru
+  - ja.sent.watch-dorama
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.ent-tv-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.ent.bangumi
+  - ja.lex.ent.dorama
+  - ja.lex.ent.variety
+  - ja.lex.ent.nyuusu-bangumi
+  - ja.lex.ent.channeru
+  - ja.sent.watch-dorama
+  - ja.sent.watch-dorama
+- id: ja.activity.ent-tv-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.ent.bangumi
+  - ja.lex.ent.dorama
+  - ja.lex.ent.variety
+  - ja.lex.ent.nyuusu-bangumi
+  - ja.lex.ent.channeru
+  - ja.sent.watch-dorama
+- id: ja.activity.ent-tv-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.ent.bangumi
+  - ja.lex.ent.dorama
+  - ja.lex.ent.variety
+  - ja.lex.ent.nyuusu-bangumi
+  - ja.lex.ent.channeru
+  - ja.sent.watch-dorama
+- id: ja.activity.ent-tv-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.ent.bangumi
+  - ja.lex.ent.dorama
+  - ja.lex.ent.variety
+  - ja.lex.ent.nyuusu-bangumi
+  - ja.lex.ent.channeru
+  - ja.sent.watch-dorama
+- id: ja.activity.ent-tv-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.watch-dorama

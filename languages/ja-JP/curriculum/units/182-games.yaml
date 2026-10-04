@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 entertainment); content refs are pack data; qualified review pending.
+id: ja.unit.ent-games
+goal_id: ja.goal.a2.entertainment
+title: Games
+summary: Game center, pachinko, video game.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.ent.geemu-senta
+  - ja.lex.ent.pachinko
+  - ja.lex.ent.geemu-soft
+  - ja.lex.ent.taimu
+  - ja.lex.ent.matchi
+  - ja.sent.team-match
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.ent-games-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.ent.geemu-senta
+  - ja.lex.ent.pachinko
+  - ja.lex.ent.geemu-soft
+  - ja.lex.ent.taimu
+  - ja.lex.ent.matchi
+  - ja.sent.team-match
+  - ja.sent.team-match
+- id: ja.activity.ent-games-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.ent.geemu-senta
+  - ja.lex.ent.pachinko
+  - ja.lex.ent.geemu-soft
+  - ja.lex.ent.taimu
+  - ja.lex.ent.matchi
+  - ja.sent.team-match
+- id: ja.activity.ent-games-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.ent.geemu-senta
+  - ja.lex.ent.pachinko
+  - ja.lex.ent.geemu-soft
+  - ja.lex.ent.taimu
+  - ja.lex.ent.matchi
+  - ja.sent.team-match
+- id: ja.activity.ent-games-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.ent.geemu-senta
+  - ja.lex.ent.pachinko
+  - ja.lex.ent.geemu-soft
+  - ja.lex.ent.taimu
+  - ja.lex.ent.matchi
+  - ja.sent.team-match
+- id: ja.activity.ent-games-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.team-match
