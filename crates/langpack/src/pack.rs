@@ -297,6 +297,7 @@ impl Pack {
                     | "orthography-unit"
                     | "phonology-contrast"
                     | "sentence"
+                    | "story"
                     | "concept"
                     | "lexical-entry"
                     | "unit"
@@ -971,6 +972,11 @@ impl RefCollector<'_> {
             }
             "phonology-contrast" => {
                 self.push("/feature_id".into(), value.get("feature_id"), "feature_id");
+            }
+            "story" => {
+                for (i, s) in array(value, "sentences") {
+                    self.push(format!("/sentences/{i}"), Some(s), "sentences");
+                }
             }
             "pragmatics" => {
                 for (i, s) in array(value, "situations") {

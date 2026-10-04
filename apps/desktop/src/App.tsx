@@ -85,7 +85,14 @@ function toB64(bytes: Uint8Array): string {
 export function App() {
   const [step, setStep] = useState<OnboardingStep>("welcome");
   const [route, setRoute] = useState<
-    "practice" | "progress" | "pronunciation" | "writing" | "language" | "scenarios" | "shadowing"
+    | "practice"
+    | "progress"
+    | "pronunciation"
+    | "writing"
+    | "language"
+    | "scenarios"
+    | "shadowing"
+    | "reading"
   >("practice");
   const [notice, setNotice] = useState<PrivacyNotice>({
     title: "Your data stays on this device",
@@ -155,6 +162,30 @@ export function App() {
     { content_id: string; surface: string; reading: string | null; romaji: string | null }[]
   >([]);
   const [shadowIdx, setShadowIdx] = useState(0);
+  const [storyList, setStoryList] = useState<
+    { id: string; title: string; description: string | null; sentence_count: number }[]
+  >([]);
+  const [storyActive, setStoryActive] = useState<{
+    id: string;
+    title: string;
+    sentences: {
+      content_id: string;
+      text: string;
+      furigana: string | null;
+      romaji: string | null;
+      faded_by_mastery: boolean;
+      gloss: string | null;
+      known: {
+        id: string;
+        surface: string;
+        reading: string | null;
+        romaji: string | null;
+        gloss: string;
+      }[];
+    }[];
+  } | null>(null);
+  const [storyLookup, setStoryLookup] = useState<string | null>(null);
+  const [storyError, setStoryError] = useState<string | null>(null);
   const [shadowError, setShadowError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -540,6 +571,49 @@ export function App() {
 
   const shadowCurrent = shadowItems[shadowIdx] ?? null;
 
+  // K-13: graded reading — formative input practice. No scoring, no
+  // evidence; scaffolds fade by mastery natively, audio is media-first.
+  async function openReading() {
+    setRoute("reading");
+    setStoryActive(null);
+    setStoryLookup(null);
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    try {
+      setStoryList((await inv("story_list", { profileId })) as typeof storyList);
+      setStoryError(null);
+    } catch (e) {
+      setStoryError(String(e));
+    }
+  }
+
+  async function openStory(id: string) {
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    try {
+      setStoryActive((await inv("story_view", { profileId, storyId: id })) as typeof storyActive);
+      setStoryLookup(null);
+      setStoryError(null);
+    } catch (e) {
+      setStoryError(String(e));
+    }
+  }
+
+  async function playStoryAudio(sentenceId: string) {
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    try {
+      const a = (await inv("story_audio", { profileId, sentenceId })) as {
+        wav_b64: string;
+        source: string;
+      };
+      const bytes = Uint8Array.from(atob(a.wav_b64), (c) => c.charCodeAt(0));
+      playBlobUrl(URL.createObjectURL(new Blob([bytes], { type: "audio/wav" })));
+    } catch (e) {
+      setStoryError(`No audio is available for this sentence yet (${String(e)}).`);
+    }
+  }
+
   // READ-001: revealing a faded scaffold refetches the task with the
   // reading shown; the submit then records it as support (level 3).
   async function revealPracticeReading() {
@@ -892,6 +966,14 @@ export function App() {
           >
             Shadowing
           </button>
+          <button
+            type="button"
+            className="tab"
+            aria-current={route === "reading" ? "page" : undefined}
+            onClick={() => void openReading()}
+          >
+            Reading
+          </button>
         </nav>
       }
     >
@@ -983,6 +1065,88 @@ export function App() {
                   Next
                 </button>
               </div>
+            </>
+          )}
+        </section>
+      ) : route === "reading" ? (
+        <section aria-label="Graded reading">
+          <h2>{storyActive ? storyActive.title : "Graded reading"}</h2>
+          <p className="empty">
+            Read along at your level. Tapping a sentence plays its audio and looks up the words from
+            your pack that appear in it. Reading is formative: nothing is scored or saved.
+          </p>
+          {storyError && (
+            <p role="alert" className="alert">
+              {storyError}
+            </p>
+          )}
+          {!storyActive ? (
+            storyList.length === 0 ? (
+              <p className="empty">No stories are available in this pack yet.</p>
+            ) : (
+              <div role="group" aria-label="Stories" className="btn-row">
+                {storyList.map((s) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    className="btn btn--quiet"
+                    onClick={() => void openStory(s.id)}
+                  >
+                    {s.title} ({s.sentence_count})
+                  </button>
+                ))}
+              </div>
+            )
+          ) : (
+            <>
+              <div className="btn-row">
+                <button type="button" className="btn btn--quiet" onClick={() => void openReading()}>
+                  All stories
+                </button>
+              </div>
+              {storyActive.sentences.map((s) => (
+                <div key={s.content_id} className="field">
+                  <button
+                    type="button"
+                    className="btn btn--quiet"
+                    onClick={() => {
+                      setStoryLookup(storyLookup === s.content_id ? null : s.content_id);
+                      void playStoryAudio(s.content_id);
+                    }}
+                  >
+                    {s.furigana && (
+                      <small>
+                        {s.furigana}
+                        <br />
+                      </small>
+                    )}
+                    {s.text}
+                  </button>
+                  {s.romaji && (
+                    <p aria-label="Romaji">
+                      <small>{s.romaji}</small>
+                    </p>
+                  )}
+                  {storyLookup === s.content_id && (
+                    <div aria-label="Word lookup">
+                      {s.gloss && <p className="notice">{s.gloss}</p>}
+                      {s.known.length === 0 ? (
+                        <p className="empty">No pack words match this sentence yet.</p>
+                      ) : (
+                        <ul>
+                          {s.known.map((w) => (
+                            <li key={w.id}>
+                              {w.surface}
+                              {w.reading ? ` (${w.reading})` : ""}
+                              {w.romaji ? ` ${w.romaji}` : ""} — {w.gloss}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))}
             </>
           )}
         </section>

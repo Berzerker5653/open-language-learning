@@ -1,0 +1,6 @@
+id: "es.story.demo.intro"
+status: "validated"
+title: "Intro"
+sentences:
+  - "es.sent.demo.canto"
+sources: ["test-source"]

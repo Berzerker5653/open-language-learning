@@ -97,6 +97,8 @@ pub enum ContentKind {
     Culture,
     /// Sentence (K-12 cloze/dictation host).
     Sent,
+    /// Graded-reader story (K-13).
+    Story,
 }
 
 impl ContentKind {
@@ -122,6 +124,7 @@ impl ContentKind {
             "contrast" => Self::Contrast,
             "culture" => Self::Culture,
             "sent" => Self::Sent,
+            "story" => Self::Story,
             _ => return None,
         })
     }
@@ -148,6 +151,7 @@ impl ContentKind {
             Self::Contrast => "contrast",
             Self::Culture => "culture",
             Self::Sent => "sent",
+            Self::Story => "story",
         }
     }
 }

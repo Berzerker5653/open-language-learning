@@ -383,6 +383,7 @@ fn split_item_id(id: &str) -> Option<(String, lts_domain::ActivityModality)> {
 }
 
 /// A lexicon entry reduced to what the UI and the practice runner need.
+#[derive(serde::Serialize, Clone)]
 struct LexEntry {
     id: String,
     surface: String,
@@ -1978,6 +1979,8 @@ fn shadowing_items_at(data: &Path, profile_id: &str) -> Result<Vec<ShadowItem>, 
 struct SentenceEntry {
     id: String,
     text: String,
+    reading: Option<String>,
+    romaji: Option<String>,
     gloss: Option<String>,
     cloze_targets: Vec<String>,
 }
@@ -2012,6 +2015,14 @@ fn sentence_entries(
         out.push(SentenceEntry {
             id: id.to_string(),
             text: sent.to_string(),
+            reading: entry
+                .get("reading")
+                .and_then(|v| v.as_str())
+                .map(String::from),
+            romaji: entry
+                .get("romaji")
+                .and_then(|v| v.as_str())
+                .map(String::from),
             gloss: entry
                 .get("gloss")
                 .and_then(|v| v.as_str())
@@ -2112,6 +2123,192 @@ fn dictation_audio_at(
         .find(|e| e.id == content_id)
         .ok_or("unknown sentence target")?;
     speech_audio_at(data, pack_id, content_id, &entry.text)
+}
+
+/// K-13: graded reading. Stories are pack-declared ordered sentence
+/// sequences (`stories/*.yaml`). The mode is FORMATIVE input practice:
+/// it records NO evidence — "graded" means ordered by learner-known
+/// content and scaffolded by the READ-001 reader, not scored.
+#[derive(Debug, Clone)]
+struct StoryEntry {
+    id: String,
+    title: String,
+    description: Option<String>,
+    sentences: Vec<String>,
+}
+
+fn story_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<StoryEntry>, String> {
+    let dir = data
+        .join("packs")
+        .join(pack_id)
+        .join(version)
+        .join("stories");
+    let mut out = Vec::new();
+    let Ok(rd) = std::fs::read_dir(&dir) else {
+        return Ok(out); // packs without stories simply offer none
+    };
+    let mut files: Vec<_> = rd
+        .filter_map(|e| e.ok())
+        .map(|e| e.path())
+        .filter(|p| {
+            p.extension()
+                .map(|x| x == "yaml" || x == "yml")
+                .unwrap_or(false)
+        })
+        .collect();
+    files.sort();
+    for path in files {
+        let Ok(text) = std::fs::read_to_string(&path) else {
+            continue;
+        };
+        let Ok(doc) = serde_yaml::from_str::<serde_yaml::Value>(&text) else {
+            continue;
+        };
+        let Some(id) = doc.get("id").and_then(|v| v.as_str()) else {
+            continue;
+        };
+        if lts_domain::ContentId::parse(id).is_err() {
+            continue;
+        }
+        let sentences = doc
+            .get("sentences")
+            .and_then(|v| v.as_sequence())
+            .map(|a| {
+                a.iter()
+                    .filter_map(|s| s.as_str().map(String::from))
+                    .filter(|s| lts_domain::ContentId::parse(s).is_ok())
+                    .collect()
+            })
+            .unwrap_or_default();
+        out.push(StoryEntry {
+            id: id.to_string(),
+            title: doc
+                .get("title")
+                .and_then(|v| v.as_str())
+                .unwrap_or("")
+                .to_string(),
+            description: doc
+                .get("description")
+                .and_then(|v| v.as_str())
+                .map(String::from),
+            sentences,
+        });
+    }
+    Ok(out)
+}
+
+#[derive(Serialize)]
+struct StorySummary {
+    id: String,
+    title: String,
+    description: Option<String>,
+    sentence_count: usize,
+}
+
+#[tauri::command]
+fn story_list(profile_id: String) -> Result<Vec<StorySummary>, String> {
+    story_list_at(&data_dir(), &profile_id)
+}
+
+fn story_list_at(data: &Path, profile_id: &str) -> Result<Vec<StorySummary>, String> {
+    let active = packs::active_pack(data, profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    Ok(story_entries(&data, pack_id, &version)?
+        .into_iter()
+        .map(|s| StorySummary {
+            sentence_count: s.sentences.len(),
+            id: s.id,
+            title: s.title,
+            description: s.description,
+        })
+        .collect())
+}
+
+#[derive(Serialize)]
+struct StorySentenceView {
+    content_id: String,
+    text: String,
+    /// Reader-faded scaffolds (READ-001 rules; Unicode-script based).
+    furigana: Option<String>,
+    romaji: Option<String>,
+    faded_by_mastery: bool,
+    gloss: Option<String>,
+    /// Lexicon entries whose surface occurs in the sentence — the
+    /// tap-to-lookup panel. Substring matching is script-agnostic;
+    /// lookup is an aid, never evidence.
+    known: Vec<LexEntry>,
+}
+
+#[derive(Serialize)]
+struct StoryView {
+    id: String,
+    title: String,
+    sentences: Vec<StorySentenceView>,
+}
+
+#[tauri::command]
+fn story_view(profile_id: String, story_id: String) -> Result<StoryView, String> {
+    story_view_at(&data_dir(), &profile_id, &story_id)
+}
+
+fn story_view_at(data: &Path, profile_id: &str, story_id: &str) -> Result<StoryView, String> {
+    checked_unit(story_id)?;
+    let active = packs::active_pack(data, profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    let story = story_entries(data, pack_id, &version)?
+        .into_iter()
+        .find(|s| s.id == story_id)
+        .ok_or("unknown story")?;
+    let sentences = sentence_entries(data, pack_id, &version)?;
+    let lex = lexicon_entries(data, pack_id, &version).unwrap_or_default();
+    let mut views = Vec::new();
+    for sid in &story.sentences {
+        let Some(entry) = sentences.iter().find(|e| e.id == *sid) else {
+            continue;
+        };
+        // Reuse the READ-001 reader for per-sentence scaffold fading:
+        // the sentence is rendered as a reading item against its own
+        // comprehension-reading mastery.
+        let proxy = LexEntry {
+            id: entry.id.clone(),
+            surface: entry.text.clone(),
+            reading: entry.reading.clone(),
+            romaji: entry.romaji.clone(),
+            gloss: entry.gloss.clone().unwrap_or_default(),
+        };
+        let display = reader_display(data, profile_id, &proxy, false);
+        let known: Vec<LexEntry> = lex
+            .iter()
+            .filter(|e| !e.surface.is_empty() && entry.text.contains(&e.surface))
+            .cloned()
+            .collect();
+        views.push(StorySentenceView {
+            content_id: entry.id.clone(),
+            text: entry.text.clone(),
+            furigana: display.as_ref().and_then(|d| d.furigana.clone()),
+            romaji: display.as_ref().and_then(|d| d.romaji.clone()),
+            faded_by_mastery: display.as_ref().is_some_and(|d| d.faded_by_mastery),
+            gloss: entry.gloss.clone(),
+            known,
+        });
+    }
+    Ok(StoryView {
+        id: story.id,
+        title: story.title,
+        sentences: views,
+    })
+}
+
+/// K-13: per-sentence audio, media-first with model-output fallback
+/// (same path as dictation; the written form is already visible in the
+/// reader, so no IPC secrecy constraint applies to the text here).
+#[tauri::command]
+fn story_audio(profile_id: String, sentence_id: String) -> Result<SpeechAudio, String> {
+    dictation_audio_at(&data_dir(), &profile_id, &sentence_id)
 }
 
 /// K-04: once every kana-script orthography unit the active pack
@@ -2639,6 +2836,9 @@ pub fn run() {
             contrast_audio,
             shadowing_items,
             dictation_audio,
+            story_list,
+            story_view,
+            story_audio,
             listening_audio,
         ])
         .run(tauri::generate_context!())
@@ -3755,6 +3955,39 @@ mod tests {
                     .iter()
                     .any(|t| t.as_str() == "ja.sent.demo.obasan-aunt")
         }));
+    }
+
+    #[test]
+    fn story_reader_shows_scaffolds_and_lookup_without_evidence() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+
+        let list = story_list_at(data, &p.id).unwrap();
+        assert!(
+            list.iter()
+                .any(|s| s.id == "ja.story.demo.first-meeting" && s.sentence_count == 3)
+        );
+
+        let v = story_view_at(data, &p.id, "ja.story.demo.first-meeting").unwrap();
+        assert_eq!(v.sentences.len(), 3);
+        // Tap-to-lookup: lexicon surfaces occurring in the sentence.
+        let obasan = v
+            .sentences
+            .iter()
+            .find(|s| s.content_id == "ja.sent.demo.obasan-aunt")
+            .unwrap();
+        assert!(obasan.known.iter().any(|w| w.id == "ja.lex.demo.obasan"));
+
+        // Per-sentence audio is media-first where a recording exists.
+        let a = dictation_audio_at(data, &p.id, "ja.sent.demo.obasan-aunt").unwrap();
+        assert_eq!(a.source, "licensed-recording");
+
+        // FORMATIVE ONLY: reading records no evidence at all.
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        assert!(store.evidence_for_profile(&p.id).unwrap().is_empty());
     }
 
     #[test]

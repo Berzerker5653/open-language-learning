@@ -1,0 +1,14 @@
+id: "ja.story.demo.first-meeting"
+status: "review-needed"
+title: "First meeting"
+description: "Three greetings from the demo unit, read in order."
+sentences:
+  - "ja.sent.demo.konnichiwa"
+  - "ja.sent.demo.hajimemashite"
+  - "ja.sent.demo.obasan-aunt"
+sources: ["edrdg-jmdict"]
+generation:
+  method: ai-assisted
+  tool: omp
+  model: strata/qwen3.8-flash-next
+  date: "2026-10-03"

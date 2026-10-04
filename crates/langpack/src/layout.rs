@@ -22,6 +22,7 @@
 //! speech/profiles.jsonl            speech-profile           (one per line)
 //! phonology/contrasts.jsonl        phonology-contrast       (one per line)
 //! sentences/entries.jsonl         sentence                 (one per line)
+//! stories/*.yaml                  story                  (single document)
 //! ```
 //!
 //! Schema 0.1 (frozen legacy; the ja-JP draft pack) — only the seven seed
@@ -118,6 +119,9 @@ pub fn classify(rel: &str) -> Option<Classified> {
             }
             if rel.starts_with("sentences/") && rel.ends_with(".jsonl") {
                 return Some(jsonl("sentence"));
+            }
+            if rel.starts_with("stories/") && yaml(rel) {
+                return Some(single("story"));
             }
             if rel.starts_with("curriculum/units/") && yaml(rel) {
                 return Some(single("unit"));

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlanguage.invalid/schemas/v0.2/story.schema.json",
+  "title": "Graded reader story (0.2)",
+  "description": "An ordered sequence of sentence content ids for the interlinear reading mode (K-13). Language-neutral: the engine renders scaffolds via the reader and plays media-first audio per sentence; it never parses the language. Reading is formative input practice and records no mastery evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "status", "title", "sentences", "sources"],
+  "properties": {
+    "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+    "status": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/reviewStatus" },
+    "title": { "type": "string", "minLength": 1 },
+    "description": { "type": "string" },
+    "sentences": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Ordered sentence content ids (`sent` kind) shown top to bottom.",
+      "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" }
+    },
+    "sources": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "notes": { "type": "string" },
+    "generation": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/generation" },
+    "review_records": {
+      "type": "array",
+      "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/reviewRef" }
+    }
+  }
+}

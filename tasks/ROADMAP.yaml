@@ -884,6 +884,18 @@ tasks:
   acceptance:
   - Packs declare sentence content (`sentences/entries.jsonl`); cloze blanks a declared target in the sentence and grades typed recall as production-writing (target never visible), satisfying docs/03 section 9 typed-recall guidance.
   - Dictation plays target audio (media-first, model-output labeled) and grades typed transcription on a dedicated `orthographic-encoding` dimension; it never grants production-writing evidence (MASTERY_POLICY lists dictation-of-target as disqualifying for that dimension).
+- id: K-13
+  milestone: M6
+  priority: P2
+  title: Graded reading (interlinear story mode)
+  dependencies:
+  - TTS-001
+  - READ-001
+  read_first:
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  acceptance:
+  - Packs declare stories (`stories/*.yaml`: ordered sentence content ids); the app renders an interlinear reader with per-sentence media-first audio and tap-to-lookup (sentence scaffolds + lexicon entries whose surface occurs in the sentence), scaffolds faded by comprehension-reading mastery via the READ-001 reader.
+  - The mode is FORMATIVE input practice: it records no mastery evidence; grading means ordering sentences by learner-known content, not scoring.
 - id: GAME-001
   milestone: M7
   priority: P1
