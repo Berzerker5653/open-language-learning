@@ -9,7 +9,7 @@ engine:
   max_version_exclusive: null
 maturity: "experimental"
 capabilities:
-  listening: false
+  listening: true
   speaking: false
   reading: true
   writing: true

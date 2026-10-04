@@ -1,0 +1,18 @@
+schema_version: "0.2"
+pack_id: "dev.example.ru"
+display_name: "Russian Starter Pack"
+version: "0.0.1"
+target_locale: "ru-RU"
+source_locales: ["en-US"]
+engine:
+  min_version: "0.1.0"
+  max_version_exclusive: null
+maturity: "experimental"
+capabilities:
+  listening: false
+  speaking: false
+  reading: true
+  writing: true
+license:
+  content_license: "CC0-1.0"
+  redistribution_allowed: true

@@ -1,0 +1,263 @@
+Here is the complete starter language-learning pack for Russian (`ru-RU`), authored from scratch according to all provided schema requirements and constraints.
+
+```text
+manifest.yaml
+sources.jsonl
+licenses.jsonl
+curriculum/goals.yaml
+curriculum/units/000-informal-greetings.yaml
+curriculum/units/001-basic-drinks.yaml
+curriculum/units/002-time-of-day.yaml
+grammar/concepts.jsonl
+lexicon/greetings.jsonl
+lexicon/everyday.jsonl
+sentences/entries.jsonl
+assessments/definitions.jsonl
+
+```
+
+### manifest.yaml
+
+```yaml
+schema_version: "0.2"
+pack_id: "dev.example.ru"
+display_name: "Russian Starter Pack"
+version: "0.0.1"
+target_locale: "ru-RU"
+source_locales: ["en-US"]
+engine:
+  min_version: "0.1.0"
+  max_version_exclusive: null
+maturity: "experimental"
+capabilities:
+  listening: false
+  speaking: false
+  reading: true
+  writing: true
+license:
+  content_license: "CC0-1.0"
+  redistribution_allowed: true
+
+```
+
+### sources.jsonl
+
+```text
+{"id":"ru-original-ai","title":"Original AI-drafted content for Russian starter pack","url":"https://github.com/Berzerker5653/open-language-learning","license":{"spdx":"CC0-1.0","text_url":"https://creativecommons.org/publicdomain/zero/1.0/"},"access":{"mode":"public"},"use":{"redistribution_allowed":true,"attribution_required":false},"retrieved":"2026-10-04"}
+
+```
+
+### licenses.jsonl
+
+```text
+{"id":"lic-ru-original","scope":{"kind":"pack-original"},"license":{"spdx":"CC0-1.0"},"redistribution_allowed":true}
+
+```
+
+### curriculum/goals.yaml
+
+```yaml
+goals:
+  - id: "ru.goal.greetings.informal"
+    description: "Greet someone informally and ask how they are"
+    band: "on-ramp"
+    modalities: ["reading", "writing"]
+    prerequisites: []
+    required_concepts: ["ru.grammar.pragmatics.tv-distinction"]
+    assessment_ids: ["ru.assess.greetings.informal"]
+    transfer_required: false
+    sources: ["ru-original-ai"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "Gemini"
+      date: "2026-10-04"
+      notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.everyday.identify-drinks"
+    description: "Identify basic drinks using the omitted present tense copula"
+    band: "on-ramp"
+    modalities: ["reading", "writing"]
+    prerequisites: []
+    required_concepts: ["ru.grammar.syntax.omitted-copula"]
+    assessment_ids: ["ru.assess.everyday.identify-drinks"]
+    transfer_required: false
+    sources: ["ru-original-ai"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "Gemini"
+      date: "2026-10-04"
+      notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.greetings.time-of-day"
+    description: "Use time-of-day greetings recognizing basic gender agreement"
+    band: "on-ramp"
+    modalities: ["reading", "writing"]
+    prerequisites: []
+    required_concepts: ["ru.grammar.morphology.gender-intro"]
+    assessment_ids: ["ru.assess.greetings.time-of-day"]
+    transfer_required: false
+    sources: ["ru-original-ai"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "Gemini"
+      date: "2026-10-04"
+      notes: "ai-drafted; needs dictionary sourcing and human review"
+
+```
+
+### curriculum/units/000-informal-greetings.yaml
+
+```yaml
+id: "ru.unit.greetings.informal"
+goal_id: "ru.goal.greetings.informal"
+title: "Informal Greetings"
+summary: "Learn how to greet someone informally in Russian."
+estimated_minutes: 10
+activities:
+  - id: "ru.activity.greetings.encounter-informal"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["ru.lex.greeting.privet", "ru.lex.greeting.kak-dela"]
+  - id: "ru.activity.greetings.recall-informal"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["ru.lex.greeting.privet"]
+  - id: "ru.activity.greetings.cloze-informal"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.greeting.privet-kak-dela"]
+  - id: "ru.activity.greetings.dictation-informal"
+    type: "dictation"
+    modality: "listening"
+    support_level: 1
+    content_refs: ["ru.sent.greeting.privet-kak-dela"]
+generation_contract:
+  allowed_vocab: ["ru.lex.greeting.privet", "ru.lex.greeting.kak-dela", "ru.sent.greeting.privet-kak-dela"]
+  allowed_grammar: ["ru.grammar.pragmatics.tv-distinction"]
+  new_item_budget: 3
+  register: []
+  expected_interpretations: ["greeting a friend informally"]
+  prohibited_ambiguity: []
+  target_proficiency: "on-ramp"
+  validation_method: "choice"
+
+```
+
+### curriculum/units/001-basic-drinks.yaml
+
+```yaml
+id: "ru.unit.everyday.identify-drinks"
+goal_id: "ru.goal.everyday.identify-drinks"
+title: "Basic Drinks"
+summary: "Learn to identify basic drinks like coffee and tea."
+estimated_minutes: 5
+activities:
+  - id: "ru.activity.everyday.encounter-drinks"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["ru.lex.everyday.eto", "ru.lex.everyday.kofe", "ru.lex.everyday.chay"]
+  - id: "ru.activity.everyday.cloze-drinks"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.everyday.eto-kofe"]
+generation_contract:
+  allowed_vocab: ["ru.lex.everyday.eto", "ru.lex.everyday.kofe", "ru.lex.everyday.chay", "ru.sent.everyday.eto-kofe"]
+  allowed_grammar: ["ru.grammar.syntax.omitted-copula"]
+  new_item_budget: 4
+  register: []
+  expected_interpretations: ["identifying a drink"]
+  prohibited_ambiguity: []
+  target_proficiency: "on-ramp"
+  validation_method: "choice"
+
+```
+
+### curriculum/units/002-time-of-day.yaml
+
+```yaml
+id: "ru.unit.greetings.time-of-day"
+goal_id: "ru.goal.greetings.time-of-day"
+title: "Morning Greetings"
+summary: "Learn how to wish someone a good morning."
+estimated_minutes: 5
+activities:
+  - id: "ru.activity.greetings.encounter-morning"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["ru.lex.greeting.dobroye-utro"]
+  - id: "ru.activity.greetings.cloze-morning"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.greeting.dobroye-utro"]
+generation_contract:
+  allowed_vocab: ["ru.lex.greeting.dobroye-utro", "ru.sent.greeting.dobroye-utro"]
+  allowed_grammar: ["ru.grammar.morphology.gender-intro"]
+  new_item_budget: 2
+  register: []
+  expected_interpretations: ["greeting someone in the morning"]
+  prohibited_ambiguity: []
+  target_proficiency: "on-ramp"
+  validation_method: "choice"
+
+```
+
+### grammar/concepts.jsonl
+
+```text
+{"id":"ru.grammar.pragmatics.tv-distinction","name":"T-V Distinction","category":"pragmatics","status":"draft","definition":"Russian distinguishes between the informal 'ты' (for friends and family) and the formal/plural 'вы' (for strangers, elders, or groups). This changes the appropriate greetings to use.","sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+{"id":"ru.grammar.syntax.omitted-copula","name":"Omitted Copula","category":"syntax","status":"draft","definition":"In the present tense, the verb 'to be' is typically omitted. For example, 'This is coffee' is translated directly as 'Это кофе' (This coffee) without any verb.","sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+{"id":"ru.grammar.morphology.gender-intro","name":"Noun Gender Introduction","category":"morphology","status":"draft","definition":"Russian nouns inherently have one of three grammatical genders (masculine, feminine, neuter). This dictates agreement with adjectives. For instance, 'утро' (morning) is neuter, so the adjective becomes 'доброе'.","sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+
+```
+
+### lexicon/greetings.jsonl
+
+```text
+{"id":"ru.lex.greeting.privet","status":"draft","forms":[{"text":"привет","is_primary":true}],"readings":[{"text":"привет","script":"cyrillic"}],"glosses":{"en-US":["hi"]},"sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+{"id":"ru.lex.greeting.zdravstvuyte","status":"draft","forms":[{"text":"здравствуйте","is_primary":true}],"readings":[{"text":"здравствуйте","script":"cyrillic"}],"glosses":{"en-US":["hello"]},"sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+{"id":"ru.lex.greeting.poka","status":"draft","forms":[{"text":"пока","is_primary":true}],"readings":[{"text":"пока","script":"cyrillic"}],"glosses":{"en-US":["bye"]},"sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+{"id":"ru.lex.greeting.dobroye-utro","status":"draft","forms":[{"text":"доброе утро","is_primary":true}],"readings":[{"text":"доброе утро","script":"cyrillic"}],"glosses":{"en-US":["good morning"]},"sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+{"id":"ru.lex.greeting.kak-dela","status":"draft","forms":[{"text":"как дела","is_primary":true}],"readings":[{"text":"как дела","script":"cyrillic"}],"glosses":{"en-US":["how are you"]},"sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+{"id":"ru.lex.greeting.spasibo","status":"draft","forms":[{"text":"спасибо","is_primary":true}],"readings":[{"text":"спасибо","script":"cyrillic"}],"glosses":{"en-US":["thank you"]},"sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+{"id":"ru.lex.greeting.pozhaluysta","status":"draft","forms":[{"text":"пожалуйста","is_primary":true}],"readings":[{"text":"пожалуйста","script":"cyrillic"}],"glosses":{"en-US":["please","you are welcome"]},"sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+
+```
+
+### lexicon/everyday.jsonl
+
+```text
+{"id":"ru.lex.everyday.ya","status":"draft","forms":[{"text":"я","is_primary":true}],"readings":[{"text":"я","script":"cyrillic"}],"glosses":{"en-US":["I"]},"sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+{"id":"ru.lex.everyday.ty","status":"draft","forms":[{"text":"ты","is_primary":true}],"readings":[{"text":"ты","script":"cyrillic"}],"glosses":{"en-US":["you"]},"sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+{"id":"ru.lex.everyday.eto","status":"draft","forms":[{"text":"это","is_primary":true}],"readings":[{"text":"это","script":"cyrillic"}],"glosses":{"en-US":["this is"]},"sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+{"id":"ru.lex.everyday.kofe","status":"draft","forms":[{"text":"кофе","is_primary":true}],"readings":[{"text":"кофе","script":"cyrillic"}],"glosses":{"en-US":["coffee"]},"sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+{"id":"ru.lex.everyday.chay","status":"draft","forms":[{"text":"чай","is_primary":true}],"readings":[{"text":"чай","script":"cyrillic"}],"glosses":{"en-US":["tea"]},"sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+{"id":"ru.lex.everyday.da","status":"draft","forms":[{"text":"да","is_primary":true}],"readings":[{"text":"да","script":"cyrillic"}],"glosses":{"en-US":["yes"]},"sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+{"id":"ru.lex.everyday.net","status":"draft","forms":[{"text":"нет","is_primary":true}],"readings":[{"text":"нет","script":"cyrillic"}],"glosses":{"en-US":["no"]},"sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+
+```
+
+### sentences/entries.jsonl
+
+```text
+{"id":"ru.sent.greeting.privet-kak-dela","status":"draft","text":"Привет, как дела?","gloss":"Hi, how are you?","cloze_targets":["Привет"],"sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+{"id":"ru.sent.everyday.eto-kofe","status":"draft","text":"Это кофе.","gloss":"This is coffee.","cloze_targets":["Это"],"sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+{"id":"ru.sent.greeting.dobroye-utro","status":"draft","text":"Доброе утро!","gloss":"Good morning!","cloze_targets":["утро"],"sources":["ru-original-ai"],"generation":{"method":"ai-assisted","tool":"Gemini","date":"2026-10-04","notes":"ai-drafted; needs dictionary sourcing and human review"}}
+
+```
+
+### assessments/definitions.jsonl
+
+```text
+{"id":"ru.assess.greetings.informal","goal_id":"ru.goal.greetings.informal","kind":"recall","modality":"reading","rubric":{"scale":"observed","criteria":["correct informal greeting used"]},"review_status":"draft"}
+{"id":"ru.assess.everyday.identify-drinks","goal_id":"ru.goal.everyday.identify-drinks","kind":"recall","modality":"reading","rubric":{"scale":"observed","criteria":["correct drink identified in context"]},"review_status":"draft"}
+{"id":"ru.assess.greetings.time-of-day","goal_id":"ru.goal.greetings.time-of-day","kind":"recall","modality":"reading","rubric":{"scale":"observed","criteria":["correct time of day greeting matched to situation"]},"review_status":"draft"}
+
+```

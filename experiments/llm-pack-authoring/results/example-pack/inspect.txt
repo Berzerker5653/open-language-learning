@@ -1,0 +1,10 @@
+lts-pack/1 dev.example.xx v0.0.1 (schema 0.2)
+         197  d031c4300db2  assessments/definitions.jsonl
+         512  b840741fe062  curriculum/goals.yaml
+        1158  ef32c1b873e0  curriculum/units/000-greetings.yaml
+         417  1a2ec459b8b2  grammar/concepts.jsonl
+         955  493a2343a86e  lexicon/entries.jsonl
+         123  0fdcef873a76  licenses.jsonl
+         395  70fb00c6c35e  manifest.yaml
+         273  6fbf0fd9d2e4  sentences/entries.jsonl
+         414  081251b6348f  sources.jsonl

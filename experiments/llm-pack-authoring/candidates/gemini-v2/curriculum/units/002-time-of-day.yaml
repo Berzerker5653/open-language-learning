@@ -1,0 +1,25 @@
+id: "ru.unit.greetings.time-of-day"
+goal_id: "ru.goal.greetings.time-of-day"
+title: "Morning Greetings"
+summary: "Learn how to wish someone a good morning."
+estimated_minutes: 5
+activities:
+  - id: "ru.activity.greetings.encounter-morning"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["ru.lex.greeting.dobroye-utro"]
+  - id: "ru.activity.greetings.cloze-morning"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.greeting.dobroye-utro"]
+generation_contract:
+  allowed_vocab: ["ru.lex.greeting.dobroye-utro", "ru.sent.greeting.dobroye-utro"]
+  allowed_grammar: ["ru.grammar.morphology.gender-intro"]
+  new_item_budget: 2
+  register: []
+  expected_interpretations: ["greeting someone in the morning"]
+  prohibited_ambiguity: []
+  target_proficiency: "on-ramp"
+  validation_method: "choice"

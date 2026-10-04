@@ -1,0 +1,46 @@
+goals:
+  - id: "ru.goal.greetings.informal"
+    description: "Greet someone informally and ask how they are"
+    band: "on-ramp"
+    modalities: ["reading", "writing"]
+    prerequisites: []
+    required_concepts: ["ru.grammar.pragmatics.tv-distinction"]
+    assessment_ids: ["ru.assess.greetings.informal"]
+    transfer_required: false
+    sources: ["ru-original-ai"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "Gemini"
+      date: "2026-10-04"
+      notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.everyday.identify-drinks"
+    description: "Identify basic drinks using the omitted present tense copula"
+    band: "on-ramp"
+    modalities: ["reading", "writing"]
+    prerequisites: []
+    required_concepts: ["ru.grammar.syntax.omitted-copula"]
+    assessment_ids: ["ru.assess.everyday.identify-drinks"]
+    transfer_required: false
+    sources: ["ru-original-ai"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "Gemini"
+      date: "2026-10-04"
+      notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.greetings.time-of-day"
+    description: "Use time-of-day greetings recognizing basic gender agreement"
+    band: "on-ramp"
+    modalities: ["reading", "writing"]
+    prerequisites: []
+    required_concepts: ["ru.grammar.morphology.gender-intro"]
+    assessment_ids: ["ru.assess.greetings.time-of-day"]
+    transfer_required: false
+    sources: ["ru-original-ai"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "Gemini"
+      date: "2026-10-04"
+      notes: "ai-drafted; needs dictionary sourcing and human review"

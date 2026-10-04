@@ -81,6 +81,13 @@ Required minimum content:
    script actually used; `glosses` stay in `en-US`.
 8. **Small dense lessons**: each unit's `new_item_budget` ≤ 6 and its
    `content_refs` must stay inside `allowed_vocab`/`allowed_grammar`.
+9. **Honest capabilities**: manifest `capabilities` must match the
+   modalities your pack actually uses. If any activity or assessment uses
+   `listening` (e.g. a dictation activity) or `speaking`, set that
+   capability `true`; set it `false` only if the pack uses none. The
+   worked example includes a dictation activity, so its manifest declares
+   `listening: true` — keep that consistent if you keep or drop the
+   activity.
 
 ## Schema notes (fields the example leaves implicit)
 
@@ -149,7 +156,7 @@ engine:
   max_version_exclusive: null
 maturity: "experimental"
 capabilities:
-  listening: false
+  listening: true
   speaking: false
   reading: true
   writing: true

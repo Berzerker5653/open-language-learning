@@ -1,0 +1,36 @@
+id: "ru.unit.greetings.informal"
+goal_id: "ru.goal.greetings.informal"
+title: "Informal Greetings"
+summary: "Learn how to greet someone informally in Russian."
+estimated_minutes: 10
+activities:
+  - id: "ru.activity.greetings.encounter-informal"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["ru.lex.greeting.privet", "ru.lex.greeting.kak-dela"]
+  - id: "ru.activity.greetings.recall-informal"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["ru.lex.greeting.privet"]
+  - id: "ru.activity.greetings.cloze-informal"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.greeting.privet-kak-dela"]
+  - id: "ru.activity.greetings.dictation-informal"
+    type: "dictation"
+    modality: "listening"
+    support_level: 1
+    content_refs: ["ru.sent.greeting.privet-kak-dela"]
+generation_contract:
+  allowed_vocab:
+    ["ru.lex.greeting.privet", "ru.lex.greeting.kak-dela", "ru.sent.greeting.privet-kak-dela"]
+  allowed_grammar: ["ru.grammar.pragmatics.tv-distinction"]
+  new_item_budget: 3
+  register: []
+  expected_interpretations: ["greeting a friend informally"]
+  prohibited_ambiguity: []
+  target_proficiency: "on-ramp"
+  validation_method: "choice"

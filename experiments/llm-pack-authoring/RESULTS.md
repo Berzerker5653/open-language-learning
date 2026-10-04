@@ -6,12 +6,13 @@ test / build). The strict bar is lint = 0 errors **and 0 warnings**.
 
 ## Runs
 
-| Date       | Candidate                                                                                                                      | Result                                               | Notes                                                                                                                                                                                                  |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 2026-10-04 | `self-test` (`tools/pack-templates/example-pack`)                                                                              | 7/7 PASS                                             | proves the harness itself works                                                                                                                                                                        |
-| 2026-10-04 | `calibration-self` (`candidates/calibration-self/`)                                                                            | 7/7 PASS                                             | self-authored German pack scored with the kit; proves `BRIEF.md` is achievable as written                                                                                                              |
-| 2026-10-04 | `ru-starter` (`candidates/ru-starter/`) — external LLM (GPT-6 Astra Pro), Russian `ru-RU`                                      | 18 errors first pass → 7/7 PASS after mechanical fix | only failures: schema-forbidden `status`/`sources` on goals/units/activities/assessments — invited by brief rules 3+5 wording (fixed). Russian content itself accurate; no language corrections needed |
-| 2026-10-04 | `russian-starter-v2` (`candidates/russian-starter-v2/`) — external LLM (GPT-6 Astra Pro), Russian `ru-RU`, **corrected brief** | **7/7 PASS first try**                               | zero errors, zero warnings, no fixes needed. Confirms the brief fixes closed the run-1 defects. Russian content accurate (see below)                                                                   |
+| Date       | Candidate                                                                                                                      | Result                                               | Notes                                                                                                                                                                                                               |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-10-04 | `self-test` (`tools/pack-templates/example-pack`)                                                                              | 7/7 PASS                                             | proves the harness itself works                                                                                                                                                                                     |
+| 2026-10-04 | `calibration-self` (`candidates/calibration-self/`)                                                                            | 7/7 PASS                                             | self-authored German pack scored with the kit; proves `BRIEF.md` is achievable as written                                                                                                                           |
+| 2026-10-04 | `ru-starter` (`candidates/ru-starter/`) — external LLM (GPT-6 Astra Pro), Russian `ru-RU`                                      | 18 errors first pass → 7/7 PASS after mechanical fix | only failures: schema-forbidden `status`/`sources` on goals/units/activities/assessments — invited by brief rules 3+5 wording (fixed). Russian content itself accurate; no language corrections needed              |
+| 2026-10-04 | `russian-starter-v2` (`candidates/russian-starter-v2/`) — external LLM (GPT-6 Astra Pro), Russian `ru-RU`, **corrected brief** | **7/7 PASS first try**                               | zero errors, zero warnings, no fixes needed. Confirms the brief fixes closed the run-1 defects. Russian content accurate (see below)                                                                                |
+| 2026-10-04 | `gemini-v2` (`candidates/gemini-v2/`) — external LLM (Gemini), Russian `ru-RU`, **corrected brief**                            | **7/7 PASS first try**                               | text response parsed by `parse_response.py`; zero errors/warnings. Copied one latent contradiction from the worked example (dictation activity + `listening: false`) — kit fixed (rule 9). Russian content accurate |
 
 ## Calibration findings (brief gaps found and fixed)
 
@@ -124,3 +125,51 @@ everything stays `draft`):
 
 Verdict: corrected brief yields a clean first-pass pack from this model.
 Awaiting the second model for the cross-model consistency check.
+
+## Corrected-brief re-run #2: gemini-v2 + cross-model comparison (2026-10-04)
+
+Second model (self-reported "Gemini"), same corrected brief, Russian
+`ru-RU`. Delivered as a chat text response (it even refused the owner's
+requests to produce a zip, correctly citing the brief's output-format
+rule). `parse_response.py` reconstructed all 12 files; **7/7 PASS on the
+first pass.**
+
+Content review (my read; NOT a substitute for qualified human review —
+everything stays `draft`):
+
+- All Russian forms correct: привет, как дела, здравствуйте, пока, доброе
+  утро, спасибо, пожалуйста, я, ты, это, кофе, чай, да, нет.
+- Grammar accurate: T-V distinction (ты/вы), omitted present copula
+  (Это кофе), gender intro (утро neuter → доброе).
+- Flags for human review: `это` glossed "this is" (loose — it is "this",
+  used identificationally); пожалуйста carries both the request and
+  reply-to-thanks senses in one entry with an empty
+  `prohibited_ambiguity` — the exact trap the ru-starter run fenced.
+
+**Cross-model consistency (the point of the two-model run):** shapes
+match. Both packs: 12 files, same layout (3 units, 2 lexicon shards, one
+each of grammar/sentences/assessments/sources/licenses); `status` only on
+lexicon/concepts/sentences; `review_status` on goals/assessments;
+`generation` on all four record types; `sources` on goals/lexicon/
+concepts/sentences and nowhere else; identical source/license/rubric
+shapes; all-draft statuses; valid enums throughout. Content legitimately
+differs (topics, examples). Pedagogical depth differs — GPT-6 produced
+prerequisite records, 6 assessments (recognition+production per goal) and
+substantive `prohibited_ambiguity`; Gemini left all prerequisites `[]`,
+one assessment per goal, empty ambiguity fences, and 6 unreferenced
+lexicon entries. All schema-legal; the gates grade structure, not
+pedagogy — human review still owns quality.
+
+**Latent kit defect found by the diff:** Gemini faithfully copied the
+worked example's contradiction — a `dictation`/`listening` activity while
+the manifest declared `listening: false`. No gate cross-checks activity
+modality against manifest capabilities (validator gap, noted for the
+Rust side). Kit fixed: example-pack manifest now declares `listening:
+true` (re-scored 7/7), brief gained hard rule 9 (honest capabilities),
+and all 9 worked-example blocks re-verified semantically identical to the
+example pack. `gemini-v2` stays as delivered — the contradiction was the
+kit's, not the model's.
+
+**Verdict: success criterion met.** With the corrected brief, two
+different models (GPT-6 Astra Pro, Gemini) both produce 7/7 first-pass
+packs with matching shapes — the brief, not the model, is doing the work.

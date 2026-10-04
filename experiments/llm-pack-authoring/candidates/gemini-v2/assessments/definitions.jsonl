@@ -1,0 +1,3 @@
+{"id":"ru.assess.greetings.informal","goal_id":"ru.goal.greetings.informal","kind":"recall","modality":"reading","rubric":{"scale":"observed","criteria":["correct informal greeting used"]},"review_status":"draft"}
+{"id":"ru.assess.everyday.identify-drinks","goal_id":"ru.goal.everyday.identify-drinks","kind":"recall","modality":"reading","rubric":{"scale":"observed","criteria":["correct drink identified in context"]},"review_status":"draft"}
+{"id":"ru.assess.greetings.time-of-day","goal_id":"ru.goal.greetings.time-of-day","kind":"recall","modality":"reading","rubric":{"scale":"observed","criteria":["correct time of day greeting matched to situation"]},"review_status":"draft"}

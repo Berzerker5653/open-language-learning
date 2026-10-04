@@ -1,0 +1,31 @@
+id: "ru.unit.everyday.identify-drinks"
+goal_id: "ru.goal.everyday.identify-drinks"
+title: "Basic Drinks"
+summary: "Learn to identify basic drinks like coffee and tea."
+estimated_minutes: 5
+activities:
+  - id: "ru.activity.everyday.encounter-drinks"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["ru.lex.everyday.eto", "ru.lex.everyday.kofe", "ru.lex.everyday.chay"]
+  - id: "ru.activity.everyday.cloze-drinks"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.everyday.eto-kofe"]
+generation_contract:
+  allowed_vocab:
+    [
+      "ru.lex.everyday.eto",
+      "ru.lex.everyday.kofe",
+      "ru.lex.everyday.chay",
+      "ru.sent.everyday.eto-kofe",
+    ]
+  allowed_grammar: ["ru.grammar.syntax.omitted-copula"]
+  new_item_budget: 4
+  register: []
+  expected_interpretations: ["identifying a drink"]
+  prohibited_ambiguity: []
+  target_proficiency: "on-ramp"
+  validation_method: "choice"
