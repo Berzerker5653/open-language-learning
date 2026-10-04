@@ -23,6 +23,16 @@ activities:
     modality: "speaking"
     support_level: 3
     content_refs: ["ja.lex.demo.konnichiwa"]
+  - id: "ja.activity.demo.cloze-greet"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ja.sent.demo.hajimemashite"]
+  - id: "ja.activity.demo.dictation-greet"
+    type: "dictation"
+    modality: "listening"
+    support_level: 1
+    content_refs: ["ja.sent.demo.obasan-aunt"]
   - id: "ja.activity.demo.scenario-greet"
     type: "scenario"
     modality: "interaction"

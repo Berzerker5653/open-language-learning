@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlanguage.invalid/schemas/v0.2/sentence.schema.json",
+  "title": "Sentence (0.2)",
+  "description": "One JSONL line per sentence (K-12). Language-neutral: the engine blanks declared cloze targets or plays the sentence for dictation; it never parses the language itself. Audio is media-first (`media/<id>.wav`) with model-output synthesis fallback. Each `cloze_targets` entry must occur verbatim in `text` (enforced at load).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "status", "text", "sources"],
+  "properties": {
+    "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+    "status": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/reviewStatus" },
+    "text": { "type": "string", "minLength": 1, "description": "Canonical written sentence; the dictation answer and the cloze host." },
+    "reading": { "type": "string", "minLength": 1, "description": "Optional phonetic reading (shown only after grading, never during a cloze or dictation attempt)." },
+    "romaji": { "type": "string", "minLength": 1, "description": "Optional transliteration (shown only after grading)." },
+    "gloss": { "type": "string", "minLength": 1, "description": "Meaning in the pack's metalanguage; shown for cloze context hints only after grading." },
+    "cloze_targets": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Substrings of `text` the learner types from context. The engine blanks one deterministically; the target is never visible during the attempt.",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "sources": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "notes": { "type": "string" },
+    "generation": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/generation" },
+    "review_records": {
+      "type": "array",
+      "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/reviewRef" }
+    }
+  }
+}

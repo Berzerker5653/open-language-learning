@@ -296,6 +296,7 @@ impl Pack {
                     | "assessment"
                     | "orthography-unit"
                     | "phonology-contrast"
+                    | "sentence"
                     | "concept"
                     | "lexical-entry"
                     | "unit"
@@ -388,6 +389,25 @@ impl Pack {
                                         &mut diags,
                                     );
                                 }
+                            }
+                        }
+                    }
+                }
+                "sentence" => {
+                    // Cross-field rule JSON Schema cannot express: every
+                    // cloze target must occur verbatim in the sentence
+                    // text, or the engine could never blank it.
+                    let text = inst.value.get("text").and_then(Value::as_str).unwrap_or("");
+                    for (i, t) in array(&inst.value, "cloze_targets") {
+                        if let Some(target) = t.as_str() {
+                            if !text.contains(target) {
+                                diags.push(Diagnostic::new(
+                                    &inst.file,
+                                    &format!("{}/cloze_targets/{}", inst.pointer, i),
+                                    "cloze_target_not_in_text",
+                                    format!("cloze target {target:?} does not occur in text"),
+                                    Severity::Error,
+                                ));
                             }
                         }
                     }

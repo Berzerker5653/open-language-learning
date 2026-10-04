@@ -20,6 +20,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-06 | `languages/ja-JP` migrated 0.1→0.2 in place; first-meeting scenario graph populated; `ja.assess.onramp.greeting-transfer` authored; install blocked only by LIC-001 (`state/notes/K-06.md`) | JA-A1-001 |
 | K-10 | HVPT/minimal-pair perceptual training: `phonology/contrasts.jsonl` pack data, `phonological-discrimination` dimension (perception ≠ production), media-first audio (`state/notes/K-10.md`) | K-10 |
 | K-11 | Shadowing: speak-along loop (model audio → record → self-compare), formative only, never evidence (`state/notes/K-11.md`) | K-11 |
+| K-12 | Cloze + dictation: `sentences/entries.jsonl` pack data, typed grading, `orthographic-encoding` dimension keeps dictation off production-writing (`state/notes/K-12.md`) | docs/03 §9 |
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 
@@ -30,7 +31,6 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 | card | epic | what | evidence |
 | --- | --- | --- | --- |
-| K-12 | methods | **Cloze + dictation activity types**: typed recall required by docs/03 §9 guessing-resistance; writing route exists but no sentence-level gap/dictation practice | docs/03 §9 |
 | K-13 | methods | **Graded reading**: interlinear story mode with per-sentence audio + tap-to-lookup, built on scenario runtime (Satori Reader pattern) | community practice; scenario runtime exists |
 | K-14 | methods | **Sentence mining / learner-owned lexicon**: add any encountered word to personal SRS with source citation; the core "any language" flexibility lever. Language-agnostic engine feature, not pack data | docs/03 §17 learner control; immersion/mining practice |
 | K-15 | methods | **Placement/diagnostic assessment**: low-stakes diagnosis unlocking known foundations (specified, never built) | docs/03 §10 |

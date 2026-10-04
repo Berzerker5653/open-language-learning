@@ -27,6 +27,7 @@ them); `schema_version` in `manifest.yaml` selects the contract.
 | `reviews.jsonl` | `review-record` | one per line |
 | `speech/profiles.jsonl` | `speech-profile` | one per line |
 | `phonology/contrasts.jsonl` | `phonology-contrast` | one per line |
+| `sentences/entries.jsonl` | `sentence` | one per line |
 
 `media/**` holds binary assets. Markdown/txt docs and `LICENSE`/`NOTICE*`
 are allowed anywhere. Anything else is reported as `unknown_file`.
@@ -35,7 +36,7 @@ are allowed anywhere. Anything else is reported as `unknown_file`.
 
 - **Content IDs** (`goal`, `unit`, `activity`, `scenario`, scenario node,
   `assessment`, lexicon entry, `concept`, script, phonology feature,
-  register, situation) must satisfy the shared grammar
+  `sent` sentence, register, situation) must satisfy the shared grammar
   `^[a-z0-9]+(?:[._-][a-z0-9]+)*$` with at least a locale segment and a
   known kind segment (see `lts-domain::ContentKind`), and the first segment
   must equal the manifest `target_locale` primary subtag

@@ -1,0 +1,9 @@
+
+ RUN  v5.0.3 /home/hunter/game-dev/LTS/apps/desktop
+
+
+ Test Files  7 passed (7)
+      Tests  38 passed (38)
+   Start at  19:12:28
+   Duration  183ms (transform 53%, import 30%, tests 13%, worker 4%)
+

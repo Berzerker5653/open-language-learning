@@ -76,6 +76,7 @@ Recommended dimensions:
 - pronunciation-segmental;
 - pronunciation-prosody;
 - phonological-discrimination;
+- orthographic-encoding;
 - grammar-controlled;
 - grammar-spontaneous;
 - pragmatic-use;
@@ -103,6 +104,16 @@ Audio is media-first (licensed pack recordings win); synthesized audio
 is labeled model output and packs must not declare contrasts the
 synthesizer cannot actually produce (e.g. pitch-accent pairs without
 accent control).
+
+`orthographic-encoding` tracks perceptual encoding of written form
+(K-12 dictation): the learner hears a pack-declared sentence
+(`sentences/entries.jsonl`) and types the transcription. It is
+deliberately separate from `production-writing`: MASTERY_POLICY lists
+dictation-of-target as disqualifying support for generative writing,
+so transcription evidence must never satisfy production-writing
+prerequisites. Cloze exercises the writing dimension honestly: a
+pack-declared target is blanked in its sentence and typed from context,
+with the target never visible during the attempt.
 
 ## 5. Mastery state machine
 

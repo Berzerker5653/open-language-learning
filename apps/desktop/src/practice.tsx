@@ -17,6 +17,8 @@ export interface PracticeTaskView {
   romaji?: string | null;
   faded_by_mastery?: boolean;
   choices: string[];
+  /// K-12: typed-answer runner (cloze/dictation); choices are empty.
+  typed?: boolean;
 }
 
 export interface PracticeRunnerProps {
@@ -36,6 +38,10 @@ export interface PracticeRunnerProps {
   onNext(): void;
   onPlayAudio?(): void;
   onReveal?(): void;
+  /// Typed runner only: the draft answer and grading trigger.
+  draft?: string;
+  onDraft?(value: string): void;
+  onCheck?(): void;
 }
 
 export function PracticeRunner(p: PracticeRunnerProps) {
@@ -92,19 +98,42 @@ export function PracticeRunner(p: PracticeRunnerProps) {
           )}
         </>
       )}
-      <div role="group" aria-label="Choices" className="btn-row">
-        {p.task.choices.map((choice, i) => (
-          <button
-            key={choice}
-            type="button"
-            className="btn btn--quiet"
+      {p.task.typed ? (
+        <div className="field">
+          <label htmlFor="practice-answer">Type your answer</label>
+          <input
+            id="practice-answer"
+            type="text"
+            value={p.draft ?? ""}
             disabled={p.graded}
-            onClick={() => p.onChoose(i)}
-          >
-            {choice}
-          </button>
-        ))}
-      </div>
+            onChange={(e) => p.onDraft?.(e.target.value)}
+          />
+          <div className="btn-row">
+            <button
+              type="button"
+              className="btn btn--primary"
+              disabled={p.graded || (p.draft ?? "").trim() === ""}
+              onClick={() => p.onCheck?.()}
+            >
+              Check
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div role="group" aria-label="Choices" className="btn-row">
+          {p.task.choices.map((choice, i) => (
+            <button
+              key={choice}
+              type="button"
+              className="btn btn--quiet"
+              disabled={p.graded}
+              onClick={() => p.onChoose(i)}
+            >
+              {choice}
+            </button>
+          ))}
+        </div>
+      )}
       {p.graded && (
         <>
           <p

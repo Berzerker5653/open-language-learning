@@ -26,7 +26,7 @@ pub enum ActivityError {
     },
 }
 
-/// The six renderable activity families.
+/// The seven renderable activity families.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum ActivityKind {
@@ -35,6 +35,7 @@ pub enum ActivityKind {
     Retrieval,
     Explanation,
     Discrimination,
+    Dictation,
     Shadowing,
 }
 
@@ -50,7 +51,7 @@ pub enum PackModality {
 }
 
 /// Documented mapping from free-form pack activity `type` strings to
-/// the six runtime families. Unknown types are rejected at load time
+/// the seven runtime families. Unknown types are rejected at load time
 /// so a pack can never silently render an unhandled activity.
 pub fn classify_type(pack_type: &str) -> Result<ActivityKind, ActivityError> {
     const ENCOUNTER: &[&str] = &[
@@ -74,6 +75,8 @@ pub fn classify_type(pack_type: &str) -> Result<ActivityKind, ActivityError> {
         "fill-blank",
         "produce",
         "scenario",
+        "cloze",
+        "gap-fill",
     ];
     const EXPLANATION: &[&str] = &["explanation", "explain-why", "grammar-explain"];
     const DISCRIMINATION: &[&str] = &[
@@ -83,6 +86,7 @@ pub fn classify_type(pack_type: &str) -> Result<ActivityKind, ActivityError> {
         "hvpt",
     ];
     const SHADOWING: &[&str] = &["shadow", "shadowing", "echo"];
+    const DICTATION: &[&str] = &["dictation", "write-what-you-hear", "listen-write"];
     for (kind, names) in [
         (ActivityKind::Encounter, ENCOUNTER),
         (ActivityKind::Comprehension, COMPREHENSION),
@@ -90,6 +94,7 @@ pub fn classify_type(pack_type: &str) -> Result<ActivityKind, ActivityError> {
         (ActivityKind::Explanation, EXPLANATION),
         (ActivityKind::Discrimination, DISCRIMINATION),
         (ActivityKind::Shadowing, SHADOWING),
+        (ActivityKind::Dictation, DICTATION),
     ] {
         if names.contains(&pack_type) {
             return Ok(kind);
@@ -114,6 +119,12 @@ pub fn dimension_for(kind: ActivityKind, modality: PackModality) -> MasteryDimen
         // record mastery evidence (docs/05). The mapping exists for a
         // future calibrated path, not to grant credit today.
         (ActivityKind::Shadowing, PackModality::Speaking) => MasteryDimension::ProductionSpeaking,
+        // K-12: dictation encodes written form from sound. It must NOT
+        // land on production-writing — MASTERY_POLICY lists
+        // dictation-of-target as disqualifying support there.
+        (ActivityKind::Dictation, PackModality::Listening) => {
+            MasteryDimension::OrthographicEncoding
+        }
         (_, PackModality::Listening) => MasteryDimension::ComprehensionListening,
         (_, PackModality::Reading) => MasteryDimension::ComprehensionReading,
         (_, PackModality::Writing) => MasteryDimension::ProductionWriting,

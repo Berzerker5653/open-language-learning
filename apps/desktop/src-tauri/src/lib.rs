@@ -315,6 +315,7 @@ fn dimension_kebab(d: lts_domain::ActivityModality) -> &'static str {
         lts_domain::ActivityModality::RecallMeaning => "recall-meaning",
         lts_domain::ActivityModality::OrthographyRecognition => "orthography-recognition",
         lts_domain::ActivityModality::PhonologicalDiscrimination => "phonological-discrimination",
+        lts_domain::ActivityModality::OrthographicEncoding => "orthographic-encoding",
         lts_domain::ActivityModality::ProductionSpeaking => "production-speaking",
         lts_domain::ActivityModality::ProductionWriting => "production-writing",
         lts_domain::ActivityModality::PronunciationSegmental => "pronunciation-segmental",
@@ -333,6 +334,7 @@ fn parse_dimension(s: &str) -> Option<lts_domain::ActivityModality> {
         "comprehension-listening" => M::ComprehensionListening,
         "comprehension-reading" => M::ComprehensionReading,
         "recall-meaning" => M::RecallMeaning,
+        "orthographic-encoding" => M::OrthographicEncoding,
         "phonological-discrimination" => M::PhonologicalDiscrimination,
         "orthography-recognition" => M::OrthographyRecognition,
         "production-speaking" => M::ProductionSpeaking,
@@ -865,6 +867,37 @@ fn build_plan(
                     modality: m,
                 });
             }
+            // K-12: sentences join the new-item stream for both typed
+            // recall modes — cloze (production-writing) and dictation
+            // (orthographic-encoding) — wherever a pack declares them.
+            for entry in sentence_entries(data, &pack_id, &version)? {
+                let modes = [
+                    lts_domain::ActivityModality::ProductionWriting,
+                    lts_domain::ActivityModality::OrthographicEncoding,
+                ];
+                for m in modes {
+                    if m == lts_domain::ActivityModality::ProductionWriting
+                        && entry.cloze_targets.is_empty()
+                    {
+                        continue;
+                    }
+                    if derived
+                        .iter()
+                        .any(|d| d.content_id == entry.id && d.dimension == m)
+                    {
+                        continue;
+                    }
+                    let key = format!("{}#{}", entry.id, dimension_kebab(m));
+                    if planned.contains(&key) {
+                        continue;
+                    }
+                    planned.insert(key);
+                    progression.push(lts_scheduler::ProgressionItem {
+                        content_id: entry.id.clone(),
+                        modality: m,
+                    });
+                }
+            }
         }
     }
     let config = lts_scheduler::PlannerConfig {
@@ -950,6 +983,15 @@ fn build_plan_view(
                 display
                     .entry(e.id)
                     .or_insert((e.items[0].text.clone(), None, e.description));
+            }
+        }
+        if let Ok(entries) = sentence_entries(data, &pack_id, &version) {
+            for e in entries {
+                display.entry(e.id).or_insert((
+                    e.text.clone(),
+                    None,
+                    e.gloss.clone().unwrap_or_default(),
+                ));
             }
         }
     }
@@ -1586,8 +1628,11 @@ struct PracticeTask {
     romaji: Option<String>,
     faded_by_mastery: bool,
     choices: Vec<String>,
+    /// K-12: typed-answer runner (cloze/dictation) instead of choices.
+    /// Grading compares the typed string server-side; the answer never
+    /// crosses IPC before grading.
+    typed: bool,
 }
-
 #[derive(Serialize)]
 struct PracticeGrade {
     correct: bool,
@@ -1678,6 +1723,8 @@ fn practice_build(
             | lts_domain::ActivityModality::ComprehensionListening
             | lts_domain::ActivityModality::OrthographyRecognition
             | lts_domain::ActivityModality::PhonologicalDiscrimination
+            | lts_domain::ActivityModality::ProductionWriting
+            | lts_domain::ActivityModality::OrthographicEncoding
     ) {
         return Err("no practice runner for this activity yet".to_string());
     }
@@ -1685,6 +1732,17 @@ fn practice_build(
     let pack_id = active.first().ok_or("no active language pack")?;
     let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
         .ok_or("pack not installed")?;
+    // K-12: typed runners. Cloze blanks a pack-declared target in the
+    // sentence (production-writing: the target is never visible);
+    // dictation hides the text entirely and grades the transcription
+    // on orthographic-encoding (dictation-of-target is disqualifying
+    // support for production-writing, so it must never land there).
+    if dim == lts_domain::ActivityModality::ProductionWriting {
+        return cloze_task_build(data, pack_id, &version, content_id);
+    }
+    if dim == lts_domain::ActivityModality::OrthographicEncoding {
+        return dictation_task_build(data, pack_id, &version, content_id);
+    }
     if dim == lts_domain::ActivityModality::OrthographyRecognition {
         return orth_task_build(data, pack_id, &version, content_id);
     }
@@ -1738,6 +1796,7 @@ fn practice_build(
         romaji: display.as_ref().and_then(|d| d.romaji.clone()),
         faded_by_mastery: display.as_ref().is_some_and(|d| d.faded_by_mastery),
         choices,
+        typed: false,
     };
     let correct = entry.gloss.clone();
     Ok((task, correct, reveals))
@@ -1793,6 +1852,7 @@ fn orth_task_build(
         romaji: None,
         faded_by_mastery: false,
         choices,
+        typed: false,
     };
     Ok((task, answer.clone(), Vec::new()))
 }
@@ -1829,6 +1889,7 @@ fn contrast_task_build(
         romaji: None,
         faded_by_mastery: false,
         choices,
+        typed: false,
     };
     Ok((task, answer, Vec::new()))
 }
@@ -1908,6 +1969,149 @@ fn shadowing_items_at(data: &Path, profile_id: &str) -> Result<Vec<ShadowItem>, 
             romaji: e.romaji,
         })
         .collect())
+}
+
+/// K-12: pack-declared sentence content (`sentences/entries.jsonl`).
+/// Language-neutral: the engine blanks declared cloze targets or plays
+/// the sentence for dictation; it never parses the language.
+#[derive(Debug, Clone)]
+struct SentenceEntry {
+    id: String,
+    text: String,
+    gloss: Option<String>,
+    cloze_targets: Vec<String>,
+}
+
+fn sentence_entries(
+    data: &Path,
+    pack_id: &str,
+    version: &str,
+) -> Result<Vec<SentenceEntry>, String> {
+    let path = data
+        .join("packs")
+        .join(pack_id)
+        .join(version)
+        .join("sentences")
+        .join("entries.jsonl");
+    let text =
+        std::fs::read_to_string(&path).map_err(|_| "pack sentences not found".to_string())?;
+    let mut out = Vec::new();
+    for line in text.lines() {
+        let Ok(entry) = serde_json::from_str::<serde_json::Value>(line) else {
+            continue;
+        };
+        let Some(id) = entry.get("id").and_then(|v| v.as_str()) else {
+            continue;
+        };
+        if lts_domain::ContentId::parse(id).is_err() {
+            continue;
+        }
+        let Some(sent) = entry.get("text").and_then(|v| v.as_str()) else {
+            continue;
+        };
+        out.push(SentenceEntry {
+            id: id.to_string(),
+            text: sent.to_string(),
+            gloss: entry
+                .get("gloss")
+                .and_then(|v| v.as_str())
+                .map(String::from),
+            cloze_targets: entry
+                .get("cloze_targets")
+                .and_then(|v| v.as_array())
+                .map(|a| {
+                    a.iter()
+                        .filter_map(|t| t.as_str().map(String::from))
+                        .collect()
+                })
+                .unwrap_or_default(),
+        });
+    }
+    Ok(out)
+}
+
+/// K-12 cloze: one declared target is blanked deterministically per
+/// sentence (stable across runs, no RNG); the learner types it from
+/// context. The target string never appears in the task payload, so
+/// production-writing evidence stays valid (no disqualifying support).
+fn cloze_task_build(
+    data: &Path,
+    pack_id: &str,
+    version: &str,
+    content_id: &str,
+) -> Result<(PracticeTask, String, Vec<String>), String> {
+    let entry = sentence_entries(data, pack_id, version)?
+        .into_iter()
+        .find(|e| e.id == content_id)
+        .ok_or("unknown sentence target")?;
+    let target = entry
+        .cloze_targets
+        .get((fnv1a(content_id) % entry.cloze_targets.len() as u64) as usize)
+        .ok_or("sentence declares no cloze targets")?
+        .clone();
+    let prompt = entry.text.replacen(&target, "______", 1);
+    let item_id = format!("{content_id}#production-writing");
+    let task = PracticeTask {
+        item_id,
+        surface: Some(prompt),
+        reading: None,
+        furigana: None,
+        romaji: None,
+        faded_by_mastery: false,
+        choices: Vec::new(),
+        typed: true,
+    };
+    Ok((task, target, Vec::new()))
+}
+
+/// K-12 dictation: the written form is fully hidden (a visible target
+/// would be disqualifying support); the learner types what they hear.
+fn dictation_task_build(
+    data: &Path,
+    pack_id: &str,
+    version: &str,
+    content_id: &str,
+) -> Result<(PracticeTask, String, Vec<String>), String> {
+    let entry = sentence_entries(data, pack_id, version)?
+        .into_iter()
+        .find(|e| e.id == content_id)
+        .ok_or("unknown sentence target")?;
+    let item_id = format!("{content_id}#orthographic-encoding");
+    let task = PracticeTask {
+        item_id,
+        surface: None,
+        reading: None,
+        furigana: None,
+        romaji: None,
+        faded_by_mastery: false,
+        choices: Vec::new(),
+        typed: true,
+    };
+    Ok((task, entry.text, Vec::new()))
+}
+
+/// K-12: dictation audio. Media-first (`media/<sentence-id>.wav`), TTS
+/// fallback; the transcript is chosen server-side and never crosses IPC.
+#[tauri::command]
+fn dictation_audio(profile_id: String, content_id: String) -> Result<SpeechAudio, String> {
+    dictation_audio_at(&data_dir(), &profile_id, &content_id)
+}
+
+fn dictation_audio_at(
+    data: &Path,
+    profile_id: &str,
+    content_id: &str,
+) -> Result<SpeechAudio, String> {
+    checked_unit(content_id)?;
+    let active = packs::active_pack(data, profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    let entry = sentence_entries(data, pack_id, &version)?
+        .into_iter()
+        .find(|e| e.id == content_id)
+        .ok_or("unknown sentence target")?;
+    speech_audio_at(data, pack_id, content_id, &entry.text)
 }
 
 /// K-04: once every kana-script orthography unit the active pack
@@ -1997,6 +2201,7 @@ fn practice_submit(
     content_id: String,
     modality: String,
     choice_index: usize,
+    answer: Option<String>,
     reveal_reading: bool,
 ) -> Result<PracticeGrade, String> {
     practice_submit_at(
@@ -2005,6 +2210,7 @@ fn practice_submit(
         &content_id,
         &modality,
         choice_index,
+        answer,
         reveal_reading,
     )
 }
@@ -2014,15 +2220,24 @@ fn practice_submit_at(
     content_id: &str,
     modality: &str,
     choice_index: usize,
+    answer: Option<String>,
     reveal_reading: bool,
 ) -> Result<PracticeGrade, String> {
     let (task, correct_choice, reveals) =
         practice_build(data, profile_id, content_id, modality, reveal_reading)?;
-    let chosen = task
-        .choices
-        .get(choice_index)
-        .ok_or("choice out of range")?;
-    let correct = *chosen == correct_choice;
+    let correct = if task.typed {
+        // K-12: typed grading is exact-match on the trimmed string;
+        // the expected answer was built server-side and never sent.
+        answer
+            .map(|a| a.trim() == correct_choice.trim())
+            .unwrap_or(false)
+    } else {
+        let chosen = task
+            .choices
+            .get(choice_index)
+            .ok_or("choice out of range")?;
+        *chosen == correct_choice
+    };
     let active = packs::active_pack(data, profile_id)?;
     let pack_id = active.first().ok_or("no active language pack")?;
     let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
@@ -2039,6 +2254,10 @@ fn practice_submit_at(
         lts_domain::ActivityModality::OrthographyRecognition => content_id,
         // The contrast itself is the practiced activity; no
         // language-specific activity id literal (engine neutrality).
+        // K-12: the sentence itself is the practiced activity; no
+        // language-specific activity id literal (engine neutrality).
+        lts_domain::ActivityModality::ProductionWriting
+        | lts_domain::ActivityModality::OrthographicEncoding => content_id,
         lts_domain::ActivityModality::PhonologicalDiscrimination => content_id,
         _ => "ja.activity.demo.mc-recall",
     };
@@ -2419,6 +2638,7 @@ pub fn run() {
             scenario_finish,
             contrast_audio,
             shadowing_items,
+            dictation_audio,
             listening_audio,
         ])
         .run(tauri::generate_context!())
@@ -3095,6 +3315,7 @@ mod tests {
             "ja.lex.demo.konnichiwa",
             "recall-meaning",
             idx,
+            None,
             false,
         )
         .unwrap();
@@ -3126,6 +3347,7 @@ mod tests {
             "ja.lex.demo.konnichiwa",
             "recall-meaning",
             wrong_idx,
+            None,
             false,
         )
         .unwrap();
@@ -3290,6 +3512,7 @@ mod tests {
             "ja.lex.demo.konnichiwa",
             "comprehension-listening",
             idx,
+            None,
             false,
         )
         .unwrap();
@@ -3378,6 +3601,7 @@ mod tests {
             "ja.contrast.demo.vowel-length",
             "phonological-discrimination",
             target,
+            None,
             false,
         )
         .unwrap();
@@ -3422,6 +3646,118 @@ mod tests {
     }
 
     #[test]
+    fn cloze_and_dictation_grade_typed_answers_on_correct_dimensions() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+
+        // Cloze: the declared target is blanked in the sentence and the
+        // target string never appears in the task payload.
+        let t = practice_task_at(
+            data,
+            &p.id,
+            "ja.sent.demo.hajimemashite",
+            "production-writing",
+            false,
+        )
+        .unwrap();
+        assert!(t.typed);
+        let prompt = t.surface.clone().expect("cloze shows the sentence");
+        assert!(prompt.contains("______"));
+        assert!(!prompt.contains("はじめまして"), "target must stay hidden");
+        assert_eq!(t.item_id, "ja.sent.demo.hajimemashite#production-writing");
+
+        // Dictation: the written form is fully hidden (visible target =
+        // disqualifying support for transcription grading).
+        let d = practice_task_at(
+            data,
+            &p.id,
+            "ja.sent.demo.obasan-aunt",
+            "orthographic-encoding",
+            false,
+        )
+        .unwrap();
+        assert!(d.typed && d.surface.is_none());
+        assert_eq!(d.item_id, "ja.sent.demo.obasan-aunt#orthographic-encoding");
+
+        // Dictation audio: media-first, transcript never crosses IPC.
+        let a = dictation_audio_at(data, &p.id, "ja.sent.demo.obasan-aunt").unwrap();
+        assert_eq!(a.source, "licensed-recording");
+
+        // Both join the new-item stream for a fresh profile.
+        let plan = build_plan_view(data, &p.id, 60, 1_760_000_000).unwrap();
+        assert!(
+            plan.items.iter().any(|i| i.modality == "production-writing"
+                && i.content_id == "ja.sent.demo.hajimemashite")
+        );
+        assert!(
+            plan.items
+                .iter()
+                .any(|i| i.modality == "orthographic-encoding"
+                    && i.content_id == "ja.sent.demo.obasan-aunt")
+        );
+
+        // Typed grading lands on the right dimensions: cloze on
+        // production-writing, dictation on orthographic-encoding —
+        // NEVER production-writing (MASTERY_POLICY disqualifying rule).
+        let g = practice_submit_at(
+            data,
+            &p.id,
+            "ja.sent.demo.hajimemashite",
+            "production-writing",
+            0,
+            Some("はじめまして".to_string()),
+            false,
+        )
+        .unwrap();
+        assert!(g.correct);
+        let g2 = practice_submit_at(
+            data,
+            &p.id,
+            "ja.sent.demo.obasan-aunt",
+            "orthographic-encoding",
+            0,
+            Some("おばさんです。".to_string()),
+            false,
+        )
+        .unwrap();
+        assert!(g2.correct);
+        let g3 = practice_submit_at(
+            data,
+            &p.id,
+            "ja.sent.demo.obasan-aunt",
+            "orthographic-encoding",
+            0,
+            Some("おばあさん".to_string()),
+            false,
+        )
+        .unwrap();
+        assert!(!g3.correct, "near-miss transcription must not pass");
+
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let events = store.evidence_for_profile(&p.id).unwrap();
+        let cloze = events
+            .iter()
+            .find(|e| e.modality == lts_domain::ActivityModality::ProductionWriting)
+            .expect("cloze evidence on production-writing");
+        assert_eq!(cloze.activity_id.as_str(), "ja.sent.demo.hajimemashite");
+        let dict = events
+            .iter()
+            .find(|e| e.modality == lts_domain::ActivityModality::OrthographicEncoding)
+            .expect("dictation evidence on orthographic-encoding");
+        assert_eq!(dict.activity_id.as_str(), "ja.sent.demo.obasan-aunt");
+        // Dictation never grants production-writing for this sentence.
+        assert!(!events.iter().any(|e| {
+            e.modality == lts_domain::ActivityModality::ProductionWriting
+                && e.targets
+                    .iter()
+                    .any(|t| t.as_str() == "ja.sent.demo.obasan-aunt")
+        }));
+    }
+
+    #[test]
     fn reader_fades_scaffolds_and_reveals_record_support() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
@@ -3448,6 +3784,7 @@ mod tests {
             "ja.lex.demo.watashi",
             "recall-meaning",
             idx,
+            None,
             true,
         )
         .unwrap();
@@ -3483,6 +3820,7 @@ mod tests {
             "ja.lex.demo.watashi",
             "recall-meaning",
             idx,
+            None,
             true,
         )
         .unwrap();
@@ -3573,6 +3911,7 @@ mod tests {
             "ja.orth.hira.a",
             "orthography-recognition",
             idx,
+            None,
             false,
         )
         .unwrap();
@@ -3632,6 +3971,7 @@ mod tests {
             "ja.orth.hira.ko",
             "orthography-recognition",
             0,
+            None,
             false,
         )
         .unwrap();

@@ -194,6 +194,26 @@ fn inverted_engine_range_fails() {
 }
 
 #[test]
+fn cloze_target_not_in_text_fails() {
+    let diags = validate("invalid-cloze-target", Mode::Scaffold);
+    assert!(
+        codes(&diags).contains(&"cloze_target_not_in_text"),
+        "{diags:?}"
+    );
+    assert_eq!(
+        error_count(&diags),
+        1,
+        "only the cloze rule should fail: {diags:?}"
+    );
+}
+
+#[test]
+fn sentence_content_validates_in_0_2() {
+    let diags = validate("valid-full", Mode::Scaffold);
+    assert_eq!(error_count(&diags), 0, "{diags:?}");
+}
+
+#[test]
 fn bare_prerequisite_ids_fail_in_0_2() {
     let diags = validate("invalid-bare-prereq", Mode::Scaffold);
     assert!(

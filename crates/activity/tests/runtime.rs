@@ -202,6 +202,8 @@ fn unknown_activity_types_are_rejected() {
     );
     assert_eq!(classify_type("hvpt").unwrap(), ActivityKind::Discrimination);
     assert_eq!(classify_type("shadow").unwrap(), ActivityKind::Shadowing);
+    assert_eq!(classify_type("cloze").unwrap(), ActivityKind::Retrieval);
+    assert_eq!(classify_type("dictation").unwrap(), ActivityKind::Dictation);
 }
 
 #[test]
@@ -231,6 +233,17 @@ fn modality_dimension_mapping_is_conservative() {
     assert_eq!(
         dimension_for(ActivityKind::Shadowing, PackModality::Speaking),
         MasteryDimension::ProductionSpeaking
+    );
+    // K-12: dictation never lands on production-writing (MASTERY_POLICY
+    // lists dictation-of-target as disqualifying support there).
+    assert_eq!(
+        dimension_for(ActivityKind::Dictation, PackModality::Listening),
+        MasteryDimension::OrthographicEncoding
+    );
+    // Cloze is typed recall from context: production-writing stands.
+    assert_eq!(
+        dimension_for(ActivityKind::Retrieval, PackModality::Writing),
+        MasteryDimension::ProductionWriting
     );
     assert_eq!(
         dimension_for(ActivityKind::Explanation, PackModality::Writing),

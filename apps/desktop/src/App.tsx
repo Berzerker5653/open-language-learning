@@ -145,6 +145,7 @@ export function App() {
   );
   const [practiceAudioError, setPracticeAudioError] = useState<string | null>(null);
 
+  const [practiceDraft, setPracticeDraft] = useState("");
   // The sticky header hides content when the page is scrolled; reset the
   // scroll position whenever the onboarding step or main route changes.
   useEffect(() => {
@@ -409,13 +410,16 @@ export function App() {
         setPracticeTask(task);
         if (
           item.modality === "comprehension-listening" ||
-          item.modality === "phonological-discrimination"
+          item.modality === "phonological-discrimination" ||
+          item.modality === "orthographic-encoding"
         ) {
           try {
             const a = (await inv(
               item.modality === "phonological-discrimination"
                 ? "contrast_audio"
-                : "listening_audio",
+                : item.modality === "orthographic-encoding"
+                  ? "dictation_audio"
+                  : "listening_audio",
               {
                 profileId,
                 contentId: item.content_id,
@@ -455,11 +459,33 @@ export function App() {
     }
   }
 
+  // K-12: typed grading. The draft goes native; the expected string was
+  // never sent to the UI, so cloze/dictation evidence stays honest.
+  async function checkPractice() {
+    if (!practiceTarget || !inv || !profileId) return;
+    try {
+      const g = (await inv("practice_submit", {
+        profileId,
+        contentId: practiceTarget.contentId,
+        modality: practiceTarget.modality,
+        choiceIndex: 0,
+        answer: practiceDraft,
+        revealReading: practiceRevealed,
+      })) as { correct: boolean; correct_choice: string };
+      setPracticeCorrect(g.correct);
+      setPracticeCorrectChoice(g.correct_choice);
+      setPracticeGraded(true);
+    } catch (e) {
+      setPracticeError(String(e));
+    }
+  }
+
   async function finishPractice() {
     setPracticeTarget(null);
     setPracticeTask(null);
     setPracticeAudio(null);
     setPracticeAudioError(null);
+    setPracticeDraft("");
     setPracticeRevealed(false);
     if (inv && profileId) {
       setPlan((await inv("practice_plan", { profileId, minutes: budget })) as SessionPlan);
@@ -1037,12 +1063,19 @@ export function App() {
             heading={
               practiceTarget.modality === "orthography-recognition"
                 ? "Which one matches?"
-                : undefined
+                : practiceTarget.modality === "production-writing"
+                  ? "Fill in the blank"
+                  : undefined
             }
+            draft={practiceDraft}
+            onDraft={setPracticeDraft}
+            onCheck={() => void checkPractice()}
             revealed={practiceRevealed}
             onReveal={
               practiceTarget.modality === "orthography-recognition" ||
-              practiceTarget.modality === "phonological-discrimination"
+              practiceTarget.modality === "phonological-discrimination" ||
+              practiceTarget.modality === "production-writing" ||
+              practiceTarget.modality === "orthographic-encoding"
                 ? undefined
                 : () => void revealPracticeReading()
             }

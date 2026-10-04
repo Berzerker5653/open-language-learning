@@ -42,6 +42,10 @@ const V2_TEXTS: &[(&str, &str)] = &[
         include_str!("../../../schemas/v0.2/phonology-contrast.schema.json"),
     ),
     (
+        "sentence",
+        include_str!("../../../schemas/v0.2/sentence.schema.json"),
+    ),
+    (
         "pragmatics",
         include_str!("../../../schemas/v0.2/pragmatics.schema.json"),
     ),

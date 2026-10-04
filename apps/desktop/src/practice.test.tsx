@@ -62,6 +62,42 @@ describe("practice runner", () => {
     expect(html).toContain("hello");
   });
 
+  it("renders a typed answer field for cloze and hides choices", () => {
+    const html = render({
+      task: {
+        item_id: "ja.sent.demo.hajimemashite#production-writing",
+        surface: "______。",
+        choices: [],
+        typed: true,
+      },
+      heading: "Fill in the blank",
+      draft: "",
+    });
+    expect(html).toContain("______");
+    expect(html).toContain("Fill in the blank");
+    expect(html).toContain('id="practice-answer"');
+    expect(html).not.toContain('aria-label="Choices"');
+    // Check is disabled until the learner types something.
+    expect(html).toContain("disabled");
+  });
+
+  it("shows audio and a typed field for dictation with no text shown", () => {
+    const html = render({
+      task: {
+        item_id: "ja.sent.demo.obasan-aunt#orthographic-encoding",
+        surface: null,
+        choices: [],
+        typed: true,
+      },
+      draft: "お",
+      audioSource: "licensed-recording",
+    });
+    expect(html).toContain("What did you hear?");
+    expect(html).toContain("Play the audio");
+    expect(html).toContain("Type your answer");
+    expect(html).not.toContain("おばさん");
+  });
+
   it("labels synthesized audio honestly and surfaces honest audio errors", () => {
     const ok = render({
       task: { item_id: "x#comprehension-listening", surface: null, choices: ["hello", "aunt"] },

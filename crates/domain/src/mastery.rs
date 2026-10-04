@@ -21,6 +21,12 @@ pub enum MasteryDimension {
     /// producing it (docs/03 §4 — evidence in one dimension informs but
     /// never automatically grants another).
     PhonologicalDiscrimination,
+    /// Perceptual encoding of written form (K-12 dictation): hearing a
+    /// target and typing its spelling. Kept separate from
+    /// production-writing — MASTERY_POLICY lists dictation-of-target as
+    /// disqualifying support for generative writing, so dictation
+    /// evidence must never land there.
+    OrthographicEncoding,
     ProductionSpeaking,
     ProductionWriting,
     PronunciationSegmental,
