@@ -1,0 +1,24 @@
+test models::tests::catalog_entries_are_pinned_and_licensed ... ok
+test packs::tests::entries_are_hardened ... ok
+test models::tests::install_is_checksummed_atomic_and_removable ... ok
+test tests::rfc3339_conversion_is_correct ... ok
+test packs::tests::catalog_cache_roundtrip_and_view ... ok
+test packs::tests::tampered_archive_is_rejected ... ok
+test tests::fresh_user_onramp_flow_persists_and_resumes ... ok
+test tests::community_import_installs_and_switches_learning_language ... ok
+test tests::progress_shows_modality_differences ... ok
+test tests::bundled_japanese_pack_installs_and_records ... ok
+test tests::world_unlocks_follow_capabilities_not_activity_volume ... ok
+test tests::listening_runner_hides_transcript_and_schedules_listening_row ... ok
+test tests::plan_uses_scheduler_values_under_budget ... ok
+test packs::tests::import_validates_then_installs_as_community ... ok
+test tests::orth_recognition_runner_records_evidence_and_establishes_kana_literacy ... ok
+test tests::preview_journey_select_activity_restart_switch_retain ... ok
+test tests::reader_fades_scaffolds_and_reveals_record_support ... ok
+test tests::new_profile_gets_first_lessons_and_runner_records_evidence ... ok
+test tests::scenario_locks_until_prereqs_then_records_interaction_evidence ... ok
+test tests::pronunciation_check_guides_vowel_length_and_abstains_on_mismatch ... ok
+test tests::speech_audio_prefers_licensed_media_then_synthesizes ... ok
+test result: ok. 21 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.26s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

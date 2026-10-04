@@ -489,6 +489,21 @@
         "apps/desktop/src-tauri/src/lib.rs",
         "apps/desktop/src/practice.tsx"
       ]
+    },
+    "K-04": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/K-04.md",
+        "state/evidence/K-04/cargo-test-2026-10-03.txt",
+        "state/evidence/K-04/langpack-validate-2026-10-03.txt",
+        "state/evidence/K-04/vitest-2026-10-03.txt",
+        "state/evidence/K-04/smoke-desktop-2026-10-03.txt",
+        "schemas/v0.2/orthography-unit.schema.json",
+        "tests/fixtures/packs/ja-demo/orthography/units.jsonl",
+        "apps/desktop/src-tauri/src/lib.rs"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence."

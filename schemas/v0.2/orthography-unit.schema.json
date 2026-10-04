@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlanguage.invalid/schemas/v0.2/orthography-unit.schema.json",
+  "title": "Orthography unit (0.2)",
+  "description": "One JSONL line per teachable script unit (kana, hangul jamo, diacritics, ...). Language-neutral: the engine never interprets `script` or `mnemonic`; it only schedules and renders them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "status", "symbol", "reading", "sources"],
+  "properties": {
+    "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+    "status": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/reviewStatus" },
+    "script": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Free-form script label for grouping (e.g. hiragana, hangul). Display/grouping only."
+    },
+    "symbol": { "type": "string", "minLength": 1 },
+    "reading": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The canonical reading the learner maps the symbol to (romanization, roman letter name, ...)."
+    },
+    "mnemonic": { "type": "string", "description": "Optional memory story shown on introduction." },
+    "teaching_order": { "type": "integer", "minimum": 0 },
+    "similar_to": {
+      "type": "array",
+      "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+      "uniqueItems": true
+    },
+    "sources": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "notes": { "type": "string" },
+    "generation": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/generation" },
+    "review_records": {
+      "type": "array",
+      "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/reviewRef" }
+    }
+  }
+}

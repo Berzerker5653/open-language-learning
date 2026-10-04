@@ -118,4 +118,18 @@ describe("practice runner", () => {
     expect(after).not.toContain("Show reading");
     expect(after).toContain("わたし");
   });
+
+  it("renders script-instruction tasks without a reading reveal", () => {
+    const html = render({
+      task: {
+        item_id: "ja.orth.hira.a#orthography-recognition",
+        surface: "あ",
+        choices: ["a", "ko", "ta", "n"],
+      },
+      heading: "Which one matches?",
+    });
+    expect(html).toContain("Which one matches?");
+    expect(html).toContain("あ");
+    expect(html).not.toContain("Show reading");
+  });
 });

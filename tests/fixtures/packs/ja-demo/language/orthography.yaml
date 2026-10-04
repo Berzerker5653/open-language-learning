@@ -1,0 +1,7 @@
+schema_version: "0.2"
+scripts:
+  - id: "ja.orth.hiragana"
+    name: "Hiragana"
+    direction: "ltr"
+    unicode_blocks: ["U+3040-U+309F"]
+    teaching_order: 0

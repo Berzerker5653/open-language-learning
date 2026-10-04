@@ -4,6 +4,7 @@ display_name: "Japanese (demo lexicon, EDRDG-derived)"
 version: "0.1.0"
 target_locale: "ja-JP"
 source_locales: ["en-US"]
+scripts: ["ja.orth.hiragana"]
 engine:
   min_version: "0.1.0"
   max_version_exclusive: null

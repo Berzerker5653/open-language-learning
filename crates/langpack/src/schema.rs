@@ -30,6 +30,10 @@ const V2_TEXTS: &[(&str, &str)] = &[
         include_str!("../../../schemas/v0.2/orthography.schema.json"),
     ),
     (
+        "orthography-unit",
+        include_str!("../../../schemas/v0.2/orthography-unit.schema.json"),
+    ),
+    (
         "phonology",
         include_str!("../../../schemas/v0.2/phonology.schema.json"),
     ),

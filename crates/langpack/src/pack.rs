@@ -295,6 +295,7 @@ impl Pack {
                 "goal"
                     | "assessment"
                     | "lexicon-entry"
+                    | "orthography-unit"
                     | "concept"
                     | "lexical-entry"
                     | "unit"

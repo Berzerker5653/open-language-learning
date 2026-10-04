@@ -14,6 +14,7 @@ pub enum MasteryDimension {
     ComprehensionListening,
     ComprehensionReading,
     RecallMeaning,
+    OrthographyRecognition,
     ProductionSpeaking,
     ProductionWriting,
     PronunciationSegmental,

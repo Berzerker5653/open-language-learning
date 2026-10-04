@@ -855,8 +855,17 @@ export function App() {
             onChoose={(i) => void choosePractice(i)}
             onNext={() => void finishPractice()}
             onPlayAudio={playPracticeAudio}
+            heading={
+              practiceTarget.modality === "orthography-recognition"
+                ? "Which one matches?"
+                : undefined
+            }
             revealed={practiceRevealed}
-            onReveal={() => void revealPracticeReading()}
+            onReveal={
+              practiceTarget.modality === "orthography-recognition"
+                ? undefined
+                : () => void revealPracticeReading()
+            }
           />
         </>
       ) : practiceTarget ? (

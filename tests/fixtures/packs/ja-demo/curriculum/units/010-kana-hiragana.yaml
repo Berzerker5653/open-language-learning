@@ -1,0 +1,53 @@
+id: "ja.unit.demo.kana-hiragana"
+goal_id: "ja.goal.demo.kana-hiragana"
+title: "Hiragana basics: a ko ta n ni chi wa shi ma ha"
+estimated_minutes: 6
+activities:
+  - id: "ja.activity.demo.encounter-kana-set1"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ja.orth.hira.a",
+        "ja.orth.hira.ko",
+        "ja.orth.hira.ta",
+        "ja.orth.hira.n",
+        "ja.orth.hira.ni",
+      ]
+  - id: "ja.activity.demo.recall-kana-set1"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ja.orth.hira.a",
+        "ja.orth.hira.ko",
+        "ja.orth.hira.ta",
+        "ja.orth.hira.n",
+        "ja.orth.hira.ni",
+      ]
+  - id: "ja.activity.demo.encounter-kana-set2"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ja.orth.hira.chi",
+        "ja.orth.hira.wa",
+        "ja.orth.hira.shi",
+        "ja.orth.hira.ma",
+        "ja.orth.hira.ha",
+      ]
+  - id: "ja.activity.demo.recall-kana-set2"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ja.orth.hira.chi",
+        "ja.orth.hira.wa",
+        "ja.orth.hira.shi",
+        "ja.orth.hira.ma",
+        "ja.orth.hira.ha",
+      ]

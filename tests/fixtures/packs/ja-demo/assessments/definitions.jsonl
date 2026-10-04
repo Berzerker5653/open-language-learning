@@ -1,1 +1,2 @@
 {"id":"ja.assess.demo.greet","goal_id":"ja.goal.demo.greet","kind":"recall","modality":"reading","rubric":{"scale":"observed","criteria":["phrase matched to situation"]},"review_status":"draft"}
+{"id":"ja.assess.demo.kana-recognize","goal_id":"ja.goal.demo.kana-hiragana","kind":"recall","modality":"reading","rubric":{"scale":"observed","criteria":["symbol mapped to reading"]},"review_status":"review-needed"}

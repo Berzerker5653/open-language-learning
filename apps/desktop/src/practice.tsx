@@ -29,6 +29,9 @@ export interface PracticeRunnerProps {
   audioError?: string | null;
   /// True once the learner revealed reading scaffolds this attempt.
   revealed?: boolean;
+  /// Task question; defaults to the word-meaning prompt. Script
+  /// instruction passes its own (the direction is decided natively).
+  heading?: string;
   onChoose(index: number): void;
   onNext(): void;
   onPlayAudio?(): void;
@@ -40,7 +43,7 @@ export function PracticeRunner(p: PracticeRunnerProps) {
     <section aria-label="Practice">
       {p.task.surface ? (
         <>
-          <h2>What does this mean?</h2>
+          <h2>{p.heading ?? "What does this mean?"}</h2>
           {p.task.furigana && (
             <p aria-label="Reading" lang="ja">
               <small>{p.task.furigana}</small>

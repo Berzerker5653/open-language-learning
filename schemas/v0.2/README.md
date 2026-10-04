@@ -20,6 +20,7 @@ them); `schema_version` in `manifest.yaml` selects the contract.
 | `activities/scenarios/*.yaml` | `scenario` | single doc |
 | `assessments/definitions.jsonl` | `assessment` | one per line |
 | `lexicon/entries.jsonl` | `lexicon-entry` | one per line |
+| `orthography/*.jsonl` | `orthography-unit` | one per line |
 | `grammar/concepts.jsonl` | `concept` | one per line |
 | `sources.jsonl` | `source-entry` | one per line |
 | `licenses.jsonl` | `license-inventory` | one per line |

@@ -274,6 +274,7 @@ fn dimension_kebab(d: lts_domain::ActivityModality) -> &'static str {
         lts_domain::ActivityModality::ComprehensionListening => "comprehension-listening",
         lts_domain::ActivityModality::ComprehensionReading => "comprehension-reading",
         lts_domain::ActivityModality::RecallMeaning => "recall-meaning",
+        lts_domain::ActivityModality::OrthographyRecognition => "orthography-recognition",
         lts_domain::ActivityModality::ProductionSpeaking => "production-speaking",
         lts_domain::ActivityModality::ProductionWriting => "production-writing",
         lts_domain::ActivityModality::PronunciationSegmental => "pronunciation-segmental",
@@ -292,6 +293,7 @@ fn parse_dimension(s: &str) -> Option<lts_domain::ActivityModality> {
         "comprehension-listening" => M::ComprehensionListening,
         "comprehension-reading" => M::ComprehensionReading,
         "recall-meaning" => M::RecallMeaning,
+        "orthography-recognition" => M::OrthographyRecognition,
         "production-speaking" => M::ProductionSpeaking,
         "production-writing" => M::ProductionWriting,
         "pronunciation-segmental" => M::PronunciationSegmental,
@@ -423,6 +425,79 @@ fn lexicon_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<LexE
         });
     }
     Ok(out)
+}
+
+/// An orthography unit reduced to what the script-instruction runner
+/// needs. Packs for any writing system can supply these; the engine
+/// never interprets `script` beyond Unicode-script detection for the
+/// kana-literacy roll-up (language neutrality, docs/00).
+struct OrthEntry {
+    id: String,
+    symbol: String,
+    reading: String,
+}
+
+/// Parse an installed pack's `orthography/*.jsonl` units. A pack
+/// without orthography instruction is not an error: empty list.
+fn orth_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<OrthEntry>, String> {
+    let dir = data
+        .join("packs")
+        .join(pack_id)
+        .join(version)
+        .join("orthography");
+    let mut out = Vec::new();
+    let Ok(rd) = std::fs::read_dir(&dir) else {
+        return Ok(out);
+    };
+    let mut files: Vec<_> = rd
+        .filter_map(|e| e.ok())
+        .map(|e| e.path())
+        .filter(|p| p.extension().and_then(|x| x.to_str()) == Some("jsonl"))
+        .collect();
+    files.sort();
+    for path in files {
+        let Ok(text) = std::fs::read_to_string(&path) else {
+            continue;
+        };
+        for line in text.lines() {
+            let Ok(entry) = serde_json::from_str::<serde_json::Value>(line) else {
+                continue;
+            };
+            let Some(id) = entry.get("id").and_then(|v| v.as_str()) else {
+                continue;
+            };
+            if lts_domain::ContentId::parse(id).is_err() {
+                continue;
+            }
+            let (Some(symbol), Some(reading)) = (
+                entry.get("symbol").and_then(|v| v.as_str()),
+                entry.get("reading").and_then(|v| v.as_str()),
+            ) else {
+                continue;
+            };
+            if symbol.is_empty() || reading.is_empty() {
+                continue;
+            }
+            out.push(OrthEntry {
+                id: id.to_string(),
+                symbol: symbol.to_string(),
+                reading: reading.to_string(),
+            });
+        }
+    }
+    Ok(out)
+}
+
+/// True when every character of `s` is Hiragana or Katakana. Script
+/// detection is Unicode-based, never locale-based (engine neutrality).
+fn is_kana_script(s: &str) -> bool {
+    !s.is_empty()
+        && s.chars().all(|c| {
+            matches!(
+                lts_activity::script_of(c),
+                lts_activity::ScriptKind::Hiragana | lts_activity::ScriptKind::Katakana
+            )
+        })
 }
 
 /// Deterministic non-cryptographic hash (FNV-1a): choice placement must
@@ -639,6 +714,27 @@ fn build_plan(
                     });
                 }
             }
+            // K-04: script-instruction units join the new-item stream
+            // so a brand-new profile can start learning the alphabet
+            // immediately (the zero-knowledge on-ramp).
+            for entry in orth_entries(data, &pack_id, &version)? {
+                let m = lts_domain::ActivityModality::OrthographyRecognition;
+                if derived
+                    .iter()
+                    .any(|d| d.content_id == entry.id && d.dimension == m)
+                {
+                    continue;
+                }
+                let key = format!("{}#{}", entry.id, dimension_kebab(m));
+                if planned.contains(&key) {
+                    continue;
+                }
+                planned.insert(key);
+                progression.push(lts_scheduler::ProgressionItem {
+                    content_id: entry.id.clone(),
+                    modality: m,
+                });
+            }
         }
     }
     let config = lts_scheduler::PlannerConfig {
@@ -712,6 +808,11 @@ fn build_plan_view(
                 display
                     .entry(e.id)
                     .or_insert((e.surface, e.reading, e.gloss));
+            }
+        }
+        if let Ok(entries) = orth_entries(data, &pack_id, &version) {
+            for e in entries {
+                display.entry(e.id).or_insert((e.symbol, None, e.reading));
             }
         }
     }
@@ -1438,6 +1539,7 @@ fn practice_build(
         dim,
         lts_domain::ActivityModality::RecallMeaning
             | lts_domain::ActivityModality::ComprehensionListening
+            | lts_domain::ActivityModality::OrthographyRecognition
     ) {
         return Err("no practice runner for this activity yet".to_string());
     }
@@ -1445,6 +1547,9 @@ fn practice_build(
     let pack_id = active.first().ok_or("no active language pack")?;
     let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
         .ok_or("pack not installed")?;
+    if dim == lts_domain::ActivityModality::OrthographyRecognition {
+        return orth_task_build(data, pack_id, &version, content_id);
+    }
     let entries = lexicon_entries(data, pack_id, &version)?;
     let entry = entries
         .iter()
@@ -1495,6 +1600,113 @@ fn practice_build(
     };
     let correct = entry.gloss.clone();
     Ok((task, correct, reveals))
+}
+
+/// K-04 script-instruction runner: symbol<->reading choice task from
+/// pack-declared orthography units. Direction is deterministic per unit
+/// (half the chart practices symbol->reading, half reading->symbol), so
+/// tasks are stable across runs without RNG. Distractors are other
+/// units' readings/symbols in file order.
+fn orth_task_build(
+    data: &Path,
+    pack_id: &str,
+    version: &str,
+    content_id: &str,
+) -> Result<(PracticeTask, String, Vec<String>), String> {
+    let entries = orth_entries(data, pack_id, version)?;
+    let entry = entries
+        .iter()
+        .find(|e| e.id == content_id)
+        .ok_or("unknown practice target")?;
+    let recognize = fnv1a(content_id) % 2 == 0;
+    let (prompt, answer) = if recognize {
+        (&entry.symbol, &entry.reading)
+    } else {
+        (&entry.reading, &entry.symbol)
+    };
+    let mut seen = std::collections::HashSet::from([answer.clone()]);
+    let mut choices: Vec<String> = entries
+        .iter()
+        .filter(|e| e.id != content_id)
+        .map(|e| {
+            if recognize {
+                e.reading.clone()
+            } else {
+                e.symbol.clone()
+            }
+        })
+        .filter(|c| seen.insert(c.clone()))
+        .take(3)
+        .collect();
+    if choices.is_empty() {
+        return Err("pack orthography set is too small for a choice task".to_string());
+    }
+    let item_id = format!("{content_id}#orthography-recognition");
+    let pos = (fnv1a(&item_id) % (choices.len() as u64 + 1)) as usize;
+    choices.insert(pos, answer.clone());
+    let task = PracticeTask {
+        item_id,
+        surface: Some(prompt.clone()),
+        reading: None,
+        furigana: None,
+        romaji: None,
+        faded_by_mastery: false,
+        choices,
+    };
+    Ok((task, answer.clone(), Vec::new()))
+}
+
+/// K-04: once every kana-script orthography unit the active pack
+/// teaches has reached at least `supported` recognition mastery, mark
+/// kana literacy established (JA_ORTHOGRAPHY_POLICY romaji_fade rule:
+/// `hide-item-romaji-when: item-script [hiragana, katakana] +
+/// kana-literacy established`). Detection is Unicode-script based, so
+/// any pack teaching any script gets the same roll-up for its kana-like
+/// base alphabet; the setting is monotonic (a later regression fades
+/// scaffolds per-item but does not re-teach the alphabet).
+fn establish_kana_literacy(
+    data: &Path,
+    store: &lts_storage::Store,
+    profile_id: &str,
+    pack_id: &str,
+    version: &str,
+    now_secs: u64,
+) -> Result<(), String> {
+    let kana: Vec<String> = orth_entries(data, pack_id, version)?
+        .into_iter()
+        .filter(|e| is_kana_script(&e.symbol))
+        .map(|e| e.id)
+        .collect();
+    if kana.is_empty() {
+        return Ok(());
+    }
+    if store
+        .get_setting(profile_id, "kana-literacy-established")
+        .ok()
+        .flatten()
+        .and_then(|v| v.as_bool())
+        == Some(true)
+    {
+        return Ok(());
+    }
+    let derived = derive_pairs(store, profile_id, &rfc3339_utc(now_secs))?;
+    let all_supported = kana.iter().all(|id| {
+        derived.iter().any(|d| {
+            d.content_id == *id
+                && d.dimension == lts_domain::ActivityModality::OrthographyRecognition
+                && d.state >= lts_domain::MasteryState::Supported
+        })
+    });
+    if all_supported {
+        store
+            .set_setting(
+                profile_id,
+                "kana-literacy-established",
+                &serde_json::json!(true),
+            )
+            .map_err(|e| e.to_string())?;
+    }
+    Ok(())
 }
 
 fn practice_task_at(
@@ -1566,10 +1778,12 @@ fn practice_submit_at(
         .duration_since(std::time::UNIX_EPOCH)
         .map_err(|e| e.to_string())?;
     let dim = parse_dimension(&modality).ok_or("unknown modality")?;
-    let activity_id = if dim == lts_domain::ActivityModality::ComprehensionListening {
-        "ja.activity.demo.mc-listen"
-    } else {
-        "ja.activity.demo.mc-recall"
+    let activity_id = match dim {
+        lts_domain::ActivityModality::ComprehensionListening => "ja.activity.demo.mc-listen",
+        // The orthography unit itself is the practiced activity; no
+        // language-specific activity id literal (engine neutrality).
+        lts_domain::ActivityModality::OrthographyRecognition => content_id,
+        _ => "ja.activity.demo.mc-recall",
     };
     let event = lts_learner_model::AttemptDraft::new(
         vec![lts_domain::ContentId::parse(content_id).map_err(|_| "invalid item id")?],
@@ -1597,6 +1811,9 @@ fn practice_submit_at(
         lts_domain::ProfileId::new(profile_id),
     );
     store.append_evidence(&event).map_err(|e| e.to_string())?;
+    if dim == lts_domain::ActivityModality::OrthographyRecognition {
+        establish_kana_literacy(data, &store, profile_id, pack_id, &version, now.as_secs())?;
+    }
     if let Some(rating) = lts_scheduler::rating_from_evidence(&event) {
         let spike = lts_scheduler::FsrsSpike::default();
         let prior = store
@@ -2964,5 +3181,117 @@ mod tests {
         )
         .unwrap();
         assert!(t3.romaji.is_none(), "kana romaji fades with literacy");
+    }
+
+    #[test]
+    fn orth_recognition_runner_records_evidence_and_establishes_kana_literacy() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+
+        // New profiles see script-instruction items in the plan.
+        let view = build_plan_view(data, &p.id, 10, 1_760_000_000).unwrap();
+        assert!(
+            view.items
+                .iter()
+                .any(|i| i.modality == "orthography-recognition"
+                    && i.content_id.starts_with("ja.orth.hira.")),
+            "orth units join the new-item stream"
+        );
+
+        // A deterministic symbol<->reading choice task builds and grades.
+        let t = practice_task_at(
+            data,
+            &p.id,
+            "ja.orth.hira.a",
+            "orthography-recognition",
+            false,
+        )
+        .unwrap();
+        assert_eq!(t.item_id, "ja.orth.hira.a#orthography-recognition");
+        assert_eq!(t.choices.len(), 4);
+        let idx = t
+            .choices
+            .iter()
+            .position(|c| c == "a" || c == "あ")
+            .unwrap();
+        let g = practice_submit_at(
+            data,
+            &p.id,
+            "ja.orth.hira.a",
+            "orthography-recognition",
+            idx,
+            false,
+        )
+        .unwrap();
+        assert!(g.correct);
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let events = store.evidence_for_profile(&p.id).unwrap();
+        let ev = events
+            .iter()
+            .find(|e| {
+                e.modality == lts_domain::ActivityModality::OrthographyRecognition
+                    && e.targets.iter().any(|t| t.as_str() == "ja.orth.hira.a")
+            })
+            .expect("orthography evidence recorded");
+        // The unit itself is the activity id: no language literals.
+        assert_eq!(ev.activity_id.as_str(), "ja.orth.hira.a");
+        let rows = store.scheduler_state(&p.id).unwrap();
+        assert!(
+            rows.iter()
+                .any(|r| r.item_id == "ja.orth.hira.a#orthography-recognition")
+        );
+
+        // Drive every kana unit the pack teaches to `supported`
+        // (two successes, distinct prompt families); the roll-up fires
+        // on the next orth submit.
+        let orth = orth_entries(data, "org.openlanguage.ja-demo", "0.1.0").unwrap();
+        assert_eq!(orth.len(), 16, "ja-demo ships 16 kana units");
+        for (i, e) in orth.iter().enumerate() {
+            for (j, fam) in ["ja.expr.demo.kana-p1", "ja.expr.demo.kana-p2"]
+                .iter()
+                .enumerate()
+            {
+                store
+                    .append_evidence(&attempt(
+                        &e.id,
+                        lts_domain::ActivityModality::OrthographyRecognition,
+                        fam,
+                        0,
+                        &format!("2026-10-0{}T00:0{}:00Z", (i % 9) + 1, j),
+                        &format!("ev-kana-{i}-{j}"),
+                        &p.id,
+                    ))
+                    .unwrap();
+            }
+        }
+        assert_ne!(
+            store
+                .get_setting(&p.id, "kana-literacy-established")
+                .unwrap()
+                .map(|v| v.as_bool().unwrap_or(false))
+                .unwrap_or(false),
+            true,
+            "roll-up only fires from a submit"
+        );
+        practice_submit_at(
+            data,
+            &p.id,
+            "ja.orth.hira.ko",
+            "orthography-recognition",
+            0,
+            false,
+        )
+        .unwrap();
+        assert_eq!(
+            store
+                .get_setting(&p.id, "kana-literacy-established")
+                .unwrap()
+                .and_then(|v| v.as_bool()),
+            Some(true),
+            "all kana supported establishes literacy"
+        );
     }
 }

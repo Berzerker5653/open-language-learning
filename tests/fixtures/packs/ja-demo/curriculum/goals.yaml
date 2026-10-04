@@ -13,3 +13,13 @@ goals:
     transfer_required: true
     sources: ["edrdg-jmdict"]
     review_status: "draft"
+  - id: "ja.goal.demo.kana-hiragana"
+    description: "Read the taught hiragana symbols and map them to their readings"
+    band: "A1"
+    modalities: ["reading"]
+    prerequisites: []
+    required_concepts: []
+    assessment_ids: ["ja.assess.demo.kana-recognize"]
+    transfer_required: false
+    sources: ["ai-drafted-kana"]
+    review_status: "review-needed"

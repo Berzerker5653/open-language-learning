@@ -70,6 +70,7 @@ Recommended dimensions:
 - comprehension-listening;
 - comprehension-reading;
 - recall-meaning;
+- orthography-recognition;
 - production-speaking;
 - production-writing;
 - pronunciation-segmental;
@@ -81,6 +82,14 @@ Recommended dimensions:
 - retention.
 
 Not every target uses every dimension.
+
+`orthography-recognition` tracks symbol↔reading mapping for
+script-instruction units (`orthography/*.jsonl`, K-04). When every
+kana-script unit taught by the active pack reaches at least `supported`
+on this dimension, the profile setting `kana-literacy-established` is
+set (Unicode-script detection, never locale), which fades kana romaji
+scaffolds per JA_ORTHOGRAPHY_POLICY. The roll-up is monotonic: later
+per-item regressions fade scaffolds but do not re-establish literacy.
 
 ## 5. Mastery state machine
 

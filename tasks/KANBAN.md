@@ -15,12 +15,12 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-01 | Scenario runtime wired into app UI: unlock by goal prereqs, per-node interaction evidence, pack-data dialogue graphs (`state/notes/K-01.md`) | SCENARIO-001 follow-on |
 | K-02 | Listening runner: transcript hidden natively, media-first audio with honest provenance, per-modality scheduler row (`state/notes/K-02.md`) | UX follow-on |
 | K-03 | READ-001 reader in practice: mastery-faded furigana/romaji, script-gated (never locale), reveals recorded as support 3 (`state/notes/K-03.md`) | READ-001 follow-on |
+| K-04 | Script-instruction activity: `orthography/*.jsonl` pack data, `orthography-recognition` dimension, kana-literacy roll-up by Unicode script (`state/notes/K-04.md`) | feeds JA-A1-001 |
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
-| K-04 | methods | **Kana instruction activity**: hiragana/katakana chart + mnemonic stories + radical-free stroke order refs + SRS-gated mini-quizzes. The zero-knowledge blocker; policy (JA-RES-003) and reader (READ-001) exist, teaching does not | new; feeds JA-A1-001 |
 | K-05 | loop | Profile picker / resume (app restart re-runs onboarding — known limit in FIRST-LESSON note) | UX follow-on |
 | K-06 | content | Populate `first-meeting` scenario dialogue graph + on-ramp assessments (`ja.assess.onramp.greeting-transfer` is referenced but missing) | JA-A1-001 |
 
