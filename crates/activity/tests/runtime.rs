@@ -201,6 +201,7 @@ fn unknown_activity_types_are_rejected() {
         ActivityKind::Discrimination
     );
     assert_eq!(classify_type("hvpt").unwrap(), ActivityKind::Discrimination);
+    assert_eq!(classify_type("shadow").unwrap(), ActivityKind::Shadowing);
 }
 
 #[test]
@@ -224,6 +225,12 @@ fn modality_dimension_mapping_is_conservative() {
     assert_eq!(
         dimension_for(ActivityKind::Discrimination, PackModality::Listening),
         MasteryDimension::PhonologicalDiscrimination
+    );
+    // K-11: shadowing maps to production-speaking for a future
+    // calibrated path, but the runtime itself is formative-only.
+    assert_eq!(
+        dimension_for(ActivityKind::Shadowing, PackModality::Speaking),
+        MasteryDimension::ProductionSpeaking
     );
     assert_eq!(
         dimension_for(ActivityKind::Explanation, PackModality::Writing),

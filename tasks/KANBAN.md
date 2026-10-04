@@ -19,17 +19,17 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-05 | Profile picker / resume: launch opens "Welcome back" when profiles exist; wizard only for new profiles (`state/notes/K-05.md`) | UX follow-on |
 | K-06 | `languages/ja-JP` migrated 0.1→0.2 in place; first-meeting scenario graph populated; `ja.assess.onramp.greeting-transfer` authored; install blocked only by LIC-001 (`state/notes/K-06.md`) | JA-A1-001 |
 | K-10 | HVPT/minimal-pair perceptual training: `phonology/contrasts.jsonl` pack data, `phonological-discrimination` dimension (perception ≠ production), media-first audio (`state/notes/K-10.md`) | K-10 |
+| K-11 | Shadowing: speak-along loop (model audio → record → self-compare), formative only, never evidence (`state/notes/K-11.md`) | K-11 |
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 
-_(empty — next work is `next`-column methods/kit cards; each needs the
-activity-kind decision batched first)_
+| card | epic | what | maps to |
+| --- | --- | --- | --- |
 
 ## next — training methods the research says we're missing
 
 | card | epic | what | evidence |
 | --- | --- | --- | --- |
-| K-11 | methods | **Shadowing activity**: hear → speak along with audio, scored loosely (formative only, never checkpoint evidence) | Shadowing systematic review (Oxford 2023+) |
 | K-12 | methods | **Cloze + dictation activity types**: typed recall required by docs/03 §9 guessing-resistance; writing route exists but no sentence-level gap/dictation practice | docs/03 §9 |
 | K-13 | methods | **Graded reading**: interlinear story mode with per-sentence audio + tap-to-lookup, built on scenario runtime (Satori Reader pattern) | community practice; scenario runtime exists |
 | K-14 | methods | **Sentence mining / learner-owned lexicon**: add any encountered word to personal SRS with source citation; the core "any language" flexibility lever. Language-agnostic engine feature, not pack data | docs/03 §17 learner control; immersion/mining practice |

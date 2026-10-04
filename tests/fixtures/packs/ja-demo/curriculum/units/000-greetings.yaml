@@ -18,6 +18,11 @@ activities:
     modality: "writing"
     support_level: 0
     content_refs: ["ja.lex.demo.konnichiwa"]
+  - id: "ja.activity.demo.shadow-greet"
+    type: "shadow"
+    modality: "speaking"
+    support_level: 3
+    content_refs: ["ja.lex.demo.konnichiwa"]
   - id: "ja.activity.demo.scenario-greet"
     type: "scenario"
     modality: "interaction"

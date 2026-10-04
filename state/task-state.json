@@ -547,6 +547,19 @@
         "apps/desktop/src-tauri/src/lib.rs"
       ]
     }
+    ,
+    "K-11": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/K-11.md",
+        "state/evidence/K-11/cli-validate-2026-10-03.txt",
+        "state/evidence/K-11/cargo-test-2026-10-03.txt",
+        "state/evidence/K-11/vitest-2026-10-03.txt",
+        "state/evidence/K-11/smoke-desktop-2026-10-03.txt"
+      ]
+    }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence."
 }

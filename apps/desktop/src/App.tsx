@@ -85,7 +85,7 @@ function toB64(bytes: Uint8Array): string {
 export function App() {
   const [step, setStep] = useState<OnboardingStep>("welcome");
   const [route, setRoute] = useState<
-    "practice" | "progress" | "pronunciation" | "writing" | "language" | "scenarios"
+    "practice" | "progress" | "pronunciation" | "writing" | "language" | "scenarios" | "shadowing"
   >("practice");
   const [notice, setNotice] = useState<PrivacyNotice>({
     title: "Your data stays on this device",
@@ -150,6 +150,11 @@ export function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [step, route]);
+  const [shadowItems, setShadowItems] = useState<
+    { content_id: string; surface: string; reading: string | null; romaji: string | null }[]
+  >([]);
+  const [shadowIdx, setShadowIdx] = useState(0);
+  const [shadowError, setShadowError] = useState<string | null>(null);
 
   useEffect(() => {
     const inv = detectInvoke();
@@ -467,6 +472,48 @@ export function App() {
     playBlobUrl(URL.createObjectURL(new Blob([bytes], { type: "audio/wav" })));
   }
 
+  // K-11: shadowing is a formative speak-along loop — play the model,
+  // speak, play your own recording back. No analysis, no evidence.
+  async function openShadowing() {
+    setRoute("shadowing");
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    try {
+      setShadowItems(
+        (await inv("shadowing_items", { profileId })) as {
+          content_id: string;
+          surface: string;
+          reading: string | null;
+          romaji: string | null;
+        }[],
+      );
+      setShadowIdx(0);
+      setShadowError(null);
+    } catch (e) {
+      setShadowError(String(e));
+    }
+  }
+
+  async function playShadowModel() {
+    const inv = detectInvoke();
+    const item = shadowItems[shadowIdx];
+    if (!inv || !item) return;
+    try {
+      const a = (await inv("speech_audio", {
+        packId: selectedPack ?? "org.openlanguage.ja-demo",
+        unitId: item.content_id,
+        text: item.surface,
+      })) as { wav_b64: string; source: string };
+      setAudioMsg(null);
+      const bytes = Uint8Array.from(atob(a.wav_b64), (c) => c.charCodeAt(0));
+      playBlobUrl(URL.createObjectURL(new Blob([bytes], { type: "audio/wav" })));
+    } catch (e) {
+      setAudioMsg(`No model audio is available for this item yet (${String(e)}).`);
+    }
+  }
+
+  const shadowCurrent = shadowItems[shadowIdx] ?? null;
+
   // READ-001: revealing a faded scaffold refetches the task with the
   // reading shown; the submit then records it as support (level 3).
   async function revealPracticeReading() {
@@ -632,6 +679,9 @@ export function App() {
   }
 
   async function analyzeWav(wav: Uint8Array) {
+    // K-11: in the shadowing route the recording is for self-comparison
+    // only — no scorer exists, so nothing is analyzed (docs/05).
+    if (route === "shadowing") return;
     const inv = detectInvoke();
     if (!inv) {
       setPronResult({ corrections: [], abstain_reason: "aligner-unavailable", pitch: EMPTY_PITCH });
@@ -808,6 +858,14 @@ export function App() {
           >
             Scenarios
           </button>
+          <button
+            type="button"
+            className="tab"
+            aria-current={route === "shadowing" ? "page" : undefined}
+            onClick={() => void openShadowing()}
+          >
+            Shadowing
+          </button>
         </nav>
       }
     >
@@ -830,6 +888,78 @@ export function App() {
             onPlayAttempt={() => attemptUrl && playBlobUrl(attemptUrl)}
           />
         </>
+      ) : route === "shadowing" ? (
+        <section aria-label="Shadowing">
+          <h2>Shadowing</h2>
+          <p className="empty">
+            Play the model audio, speak along with it, then play your recording back. Shadowing is
+            formative practice: nothing is scored or saved.
+          </p>
+          {shadowError && (
+            <p role="alert" className="alert">
+              {shadowError}
+            </p>
+          )}
+          {audioMsg && (
+            <p role="status" className="notice">
+              {audioMsg}
+            </p>
+          )}
+          {!shadowCurrent ? (
+            <p className="empty">No shadowing targets are available in this pack yet.</p>
+          ) : (
+            <>
+              <p className="surface">{shadowCurrent.surface}</p>
+              {(shadowCurrent.reading ?? shadowCurrent.romaji) && (
+                <p className="reading">{shadowCurrent.reading ?? shadowCurrent.romaji}</p>
+              )}
+              <div className="btn-row">
+                <button type="button" className="btn" onClick={() => void playShadowModel()}>
+                  Play model audio
+                </button>
+                {!recording ? (
+                  <button type="button" className="btn" onClick={recordAttempt}>
+                    Record
+                  </button>
+                ) : (
+                  <button type="button" className="btn" onClick={stopAndCheck}>
+                    Stop
+                  </button>
+                )}
+                {attemptUrl && (
+                  <button
+                    type="button"
+                    className="btn btn--quiet"
+                    onClick={() => playBlobUrl(attemptUrl)}
+                  >
+                    Play my recording
+                  </button>
+                )}
+              </div>
+              <div className="btn-row">
+                <button
+                  type="button"
+                  className="btn btn--quiet"
+                  disabled={shadowIdx === 0}
+                  onClick={() => setShadowIdx((i) => Math.max(0, i - 1))}
+                >
+                  Previous
+                </button>
+                <span>
+                  {shadowIdx + 1} / {shadowItems.length}
+                </span>
+                <button
+                  type="button"
+                  className="btn btn--quiet"
+                  disabled={shadowIdx >= shadowItems.length - 1}
+                  onClick={() => setShadowIdx((i) => Math.min(shadowItems.length - 1, i + 1))}
+                >
+                  Next
+                </button>
+              </div>
+            </>
+          )}
+        </section>
       ) : route === "progress" ? (
         <ProgressView rows={progress} />
       ) : route === "writing" ? (

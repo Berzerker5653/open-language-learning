@@ -26,7 +26,7 @@ pub enum ActivityError {
     },
 }
 
-/// The five renderable activity families.
+/// The six renderable activity families.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum ActivityKind {
@@ -35,6 +35,7 @@ pub enum ActivityKind {
     Retrieval,
     Explanation,
     Discrimination,
+    Shadowing,
 }
 
 /// Pack modality as declared in unit activity data (schemas/v0.2).
@@ -49,7 +50,7 @@ pub enum PackModality {
 }
 
 /// Documented mapping from free-form pack activity `type` strings to
-/// the four runtime families. Unknown types are rejected at load time
+/// the six runtime families. Unknown types are rejected at load time
 /// so a pack can never silently render an unhandled activity.
 pub fn classify_type(pack_type: &str) -> Result<ActivityKind, ActivityError> {
     const ENCOUNTER: &[&str] = &[
@@ -81,12 +82,14 @@ pub fn classify_type(pack_type: &str) -> Result<ActivityKind, ActivityError> {
         "listen-discriminate",
         "hvpt",
     ];
+    const SHADOWING: &[&str] = &["shadow", "shadowing", "echo"];
     for (kind, names) in [
         (ActivityKind::Encounter, ENCOUNTER),
         (ActivityKind::Comprehension, COMPREHENSION),
         (ActivityKind::Retrieval, RETRIEVAL),
         (ActivityKind::Explanation, EXPLANATION),
         (ActivityKind::Discrimination, DISCRIMINATION),
+        (ActivityKind::Shadowing, SHADOWING),
     ] {
         if names.contains(&pack_type) {
             return Ok(kind);
@@ -106,6 +109,11 @@ pub fn dimension_for(kind: ActivityKind, modality: PackModality) -> MasteryDimen
         (ActivityKind::Discrimination, PackModality::Listening) => {
             MasteryDimension::PhonologicalDiscrimination
         }
+        // K-11: shadowing informs production-speaking but the runtime
+        // is FORMATIVE ONLY — with no calibrated scorer it must never
+        // record mastery evidence (docs/05). The mapping exists for a
+        // future calibrated path, not to grant credit today.
+        (ActivityKind::Shadowing, PackModality::Speaking) => MasteryDimension::ProductionSpeaking,
         (_, PackModality::Listening) => MasteryDimension::ComprehensionListening,
         (_, PackModality::Reading) => MasteryDimension::ComprehensionReading,
         (_, PackModality::Writing) => MasteryDimension::ProductionWriting,

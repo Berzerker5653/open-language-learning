@@ -1876,6 +1876,40 @@ fn contrast_audio_at(
     speech_audio_at(data, pack_id, &media_id, &entry.items[target].text)
 }
 
+/// K-11: shadowing (speak-along) targets. FORMATIVE ONLY: this path
+/// never records evidence — with no calibrated scorer, shadowing
+/// feedback is self-comparison (play model audio, speak, play your
+/// recording back). Exposing the pack lexicon keeps the activity
+/// pack-data-driven for any language.
+#[derive(Serialize)]
+struct ShadowItem {
+    content_id: String,
+    surface: String,
+    reading: Option<String>,
+    romaji: Option<String>,
+}
+
+#[tauri::command]
+fn shadowing_items(profile_id: String) -> Result<Vec<ShadowItem>, String> {
+    shadowing_items_at(&data_dir(), &profile_id)
+}
+
+fn shadowing_items_at(data: &Path, profile_id: &str) -> Result<Vec<ShadowItem>, String> {
+    let active = packs::active_pack(data, profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    Ok(lexicon_entries(data, pack_id, &version)?
+        .into_iter()
+        .map(|e| ShadowItem {
+            content_id: e.id,
+            surface: e.surface,
+            reading: e.reading,
+            romaji: e.romaji,
+        })
+        .collect())
+}
+
 /// K-04: once every kana-script orthography unit the active pack
 /// teaches has reached at least `supported` recognition mastery, mark
 /// kana literacy established (JA_ORTHOGRAPHY_POLICY romaji_fade rule:
@@ -2384,6 +2418,7 @@ pub fn run() {
             scenario_transfer,
             scenario_finish,
             contrast_audio,
+            shadowing_items,
             listening_audio,
         ])
         .run(tauri::generate_context!())
@@ -3360,6 +3395,30 @@ mod tests {
             rows.iter()
                 .any(|r| r.item_id == "ja.contrast.demo.vowel-length#phonological-discrimination")
         );
+    }
+
+    #[test]
+    fn shadowing_targets_come_from_pack_and_record_no_evidence() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+
+        // Shadowing targets are the pack lexicon — pack-data-driven,
+        // no language literals in the engine.
+        let items = shadowing_items_at(data, &p.id).unwrap();
+        assert!(
+            items
+                .iter()
+                .any(|i| i.content_id == "ja.lex.demo.konnichiwa")
+        );
+
+        // FORMATIVE ONLY: the shadowing path never writes evidence or
+        // scheduler state (docs/05 — no calibrated scorer exists).
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        assert!(store.evidence_for_profile(&p.id).unwrap().is_empty());
+        assert!(store.scheduler_state(&p.id).unwrap().is_empty());
     }
 
     #[test]

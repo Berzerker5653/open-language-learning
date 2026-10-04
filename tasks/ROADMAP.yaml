@@ -861,6 +861,17 @@ tasks:
   - docs/assessment/JA_PHONOLOGY_MODEL.md
   acceptance:
   - Pack-declared phonological contrasts (`phonology/contrasts.jsonl`) drive a listen-and-choose discrimination runner; scored evidence lands on a dedicated `phonological-discrimination` dimension (perception never grants production dimensions); audio is media-first with model-output labeling.
+- id: K-11
+  milestone: M6
+  priority: P2
+  title: Shadowing activity (formative speak-along practice)
+  dependencies:
+  - TTS-001
+  - SPEECH-005
+  read_first:
+  - docs/05_SPEECH_SYSTEM.md
+  acceptance:
+  - Packs can declare shadow activities (classify_type family); the app offers a speak-along loop (model audio -> record -> self-compare) that records NO mastery evidence, since no calibrated scorer exists; audio is media-first with model-output labeling.
 - id: GAME-001
   milestone: M7
   priority: P1
