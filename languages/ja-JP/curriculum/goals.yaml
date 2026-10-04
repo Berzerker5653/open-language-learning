@@ -599,3 +599,35 @@ goals:
       tool: omp
       model: strata/qwen3.8-flash-next
       date: '2026-10-03'
+  - id: ja.goal.a1.transport
+    description: 'Use trains, buses, and basic directions: tickets, boarding, transfers,
+      and simple direction statements.'
+    band: A1
+    framework_refs: []
+    contexts:
+    - ja.situation.directions
+    modalities:
+    - listening
+    - speaking
+    - reading
+    - writing
+    prerequisites:
+    - target: ja.lex.places.eki
+      dimension: recall-meaning
+      required_state: supported
+      strength: hard
+    required_concepts:
+    - ja.lex.transport.norimasu
+    - ja.lex.transport.orimasu
+    assessment_ids:
+    - ja.assess.transport
+    transfer_required: true
+    sources:
+    - jf-standard
+    - ai-drafted-extension
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next-iq3_s
+      date: '2026-10-04'

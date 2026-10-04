@@ -1,0 +1,81 @@
+# ai-assisted draft unit (Mode B A1 transport); content refs are pack data; qualified review pending.
+id: ja.unit.transport-station-tickets
+goal_id: ja.goal.a1.transport
+title: Station and tickets
+summary: Buy a ticket and find the platform.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.transport.kippu
+  - ja.lex.transport.kaisatsu
+  - ja.lex.transport.hoomu
+  - ja.lex.transport.noriba
+  - ja.lex.transport.machimasu
+  - ja.lex.places.eki
+  - ja.lex.verbs.kaimasu
+  - ja.sent.buy-ticket
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  - ja.grammar.copula.polite-desu
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.transport-station-tickets-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.transport.kippu
+  - ja.lex.transport.kaisatsu
+  - ja.lex.transport.hoomu
+  - ja.lex.transport.noriba
+  - ja.lex.transport.machimasu
+  - ja.lex.places.eki
+  - ja.lex.verbs.kaimasu
+  - ja.sent.buy-ticket
+  - ja.sent.buy-ticket
+- id: ja.activity.transport-station-tickets-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.transport.kippu
+  - ja.lex.transport.kaisatsu
+  - ja.lex.transport.hoomu
+  - ja.lex.transport.noriba
+  - ja.lex.transport.machimasu
+  - ja.lex.places.eki
+  - ja.lex.verbs.kaimasu
+  - ja.sent.buy-ticket
+- id: ja.activity.transport-station-tickets-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.transport.kippu
+  - ja.lex.transport.kaisatsu
+  - ja.lex.transport.hoomu
+  - ja.lex.transport.noriba
+  - ja.lex.transport.machimasu
+  - ja.lex.places.eki
+  - ja.lex.verbs.kaimasu
+  - ja.sent.buy-ticket
+- id: ja.activity.transport-station-tickets-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.transport.kippu
+  - ja.lex.transport.kaisatsu
+  - ja.lex.transport.hoomu
+  - ja.lex.transport.noriba
+  - ja.lex.transport.machimasu
+  - ja.lex.places.eki
+  - ja.lex.verbs.kaimasu
+  - ja.sent.buy-ticket
+- id: ja.activity.transport-station-tickets-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.buy-ticket

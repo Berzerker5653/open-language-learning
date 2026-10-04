@@ -1,0 +1,69 @@
+# ai-assisted draft unit (Mode B A1 transport); content refs are pack data; qualified review pending.
+id: ja.unit.transport-getting-on-off
+goal_id: ja.goal.a1.transport
+title: Getting on and off
+summary: Board, transfer, and arrive; sequence with the て form.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.transport.norimasu
+  - ja.lex.transport.orimasu
+  - ja.lex.transport.norikaemasu
+  - ja.lex.transport.demasu
+  - ja.lex.transport.tsukimasu
+  - ja.lex.objects.densha
+  - ja.lex.places.eki
+  allowed_grammar:
+  - ja.grammar.verb.te-form-connect
+  - ja.grammar.particle.de-means
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.transport-getting-on-off-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.transport.norimasu
+  - ja.lex.transport.orimasu
+  - ja.lex.transport.norikaemasu
+  - ja.lex.transport.demasu
+  - ja.lex.transport.tsukimasu
+  - ja.lex.objects.densha
+  - ja.lex.places.eki
+- id: ja.activity.transport-getting-on-off-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.transport.norimasu
+  - ja.lex.transport.orimasu
+  - ja.lex.transport.norikaemasu
+  - ja.lex.transport.demasu
+  - ja.lex.transport.tsukimasu
+  - ja.lex.objects.densha
+  - ja.lex.places.eki
+- id: ja.activity.transport-getting-on-off-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.transport.norimasu
+  - ja.lex.transport.orimasu
+  - ja.lex.transport.norikaemasu
+  - ja.lex.transport.demasu
+  - ja.lex.transport.tsukimasu
+  - ja.lex.objects.densha
+  - ja.lex.places.eki
+- id: ja.activity.transport-getting-on-off-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.transport.norimasu
+  - ja.lex.transport.orimasu
+  - ja.lex.transport.norikaemasu
+  - ja.lex.transport.demasu
+  - ja.lex.transport.tsukimasu
+  - ja.lex.objects.densha
+  - ja.lex.places.eki

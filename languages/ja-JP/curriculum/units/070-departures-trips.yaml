@@ -1,0 +1,81 @@
+# ai-assisted draft unit (Mode B A1 transport); content refs are pack data; qualified review pending.
+id: ja.unit.transport-departures-trips
+goal_id: ja.goal.a1.transport
+title: Departures and trips
+summary: Departure, arrival, and talking about trips.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.transport.shuppatsu
+  - ja.lex.transport.chakubatsu
+  - ja.lex.transport.tabi
+  - ja.lex.transport.ryokou
+  - ja.lex.transport.yasumi
+  - ja.lex.time.ashita
+  - ja.lex.verbs.ikimasu
+  - ja.sent.trip-long
+  allowed_grammar:
+  - ja.grammar.particle.de-means
+  - ja.grammar.range.kara-made
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.transport-departures-trips-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.transport.shuppatsu
+  - ja.lex.transport.chakubatsu
+  - ja.lex.transport.tabi
+  - ja.lex.transport.ryokou
+  - ja.lex.transport.yasumi
+  - ja.lex.time.ashita
+  - ja.lex.verbs.ikimasu
+  - ja.sent.trip-long
+  - ja.sent.trip-long
+- id: ja.activity.transport-departures-trips-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.transport.shuppatsu
+  - ja.lex.transport.chakubatsu
+  - ja.lex.transport.tabi
+  - ja.lex.transport.ryokou
+  - ja.lex.transport.yasumi
+  - ja.lex.time.ashita
+  - ja.lex.verbs.ikimasu
+  - ja.sent.trip-long
+- id: ja.activity.transport-departures-trips-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.transport.shuppatsu
+  - ja.lex.transport.chakubatsu
+  - ja.lex.transport.tabi
+  - ja.lex.transport.ryokou
+  - ja.lex.transport.yasumi
+  - ja.lex.time.ashita
+  - ja.lex.verbs.ikimasu
+  - ja.sent.trip-long
+- id: ja.activity.transport-departures-trips-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.transport.shuppatsu
+  - ja.lex.transport.chakubatsu
+  - ja.lex.transport.tabi
+  - ja.lex.transport.ryokou
+  - ja.lex.transport.yasumi
+  - ja.lex.time.ashita
+  - ja.lex.verbs.ikimasu
+  - ja.sent.trip-long
+- id: ja.activity.transport-departures-trips-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.trip-long

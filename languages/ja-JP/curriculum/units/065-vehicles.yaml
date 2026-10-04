@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B A1 transport); content refs are pack data; qualified review pending.
+id: ja.unit.transport-vehicles
+goal_id: ja.goal.a1.transport
+title: Ways to get around
+summary: Bicycles, taxis, boats, and cars; で with each.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.transport.jitensha
+  - ja.lex.transport.takushii
+  - ja.lex.transport.fune
+  - ja.lex.transport.jidousha
+  - ja.lex.transport.norimono
+  - ja.lex.objects.basu
+  - ja.lex.objects.kuruma
+  - ja.lex.verbs.ikimasu
+  - ja.sent.go-by-bike
+  allowed_grammar:
+  - ja.grammar.particle.de-means
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.transport-vehicles-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.transport.jitensha
+  - ja.lex.transport.takushii
+  - ja.lex.transport.fune
+  - ja.lex.transport.jidousha
+  - ja.lex.transport.norimono
+  - ja.lex.objects.basu
+  - ja.lex.objects.kuruma
+  - ja.lex.verbs.ikimasu
+  - ja.sent.go-by-bike
+  - ja.sent.go-by-bike
+- id: ja.activity.transport-vehicles-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.transport.jitensha
+  - ja.lex.transport.takushii
+  - ja.lex.transport.fune
+  - ja.lex.transport.jidousha
+  - ja.lex.transport.norimono
+  - ja.lex.objects.basu
+  - ja.lex.objects.kuruma
+  - ja.lex.verbs.ikimasu
+  - ja.sent.go-by-bike
+- id: ja.activity.transport-vehicles-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.transport.jitensha
+  - ja.lex.transport.takushii
+  - ja.lex.transport.fune
+  - ja.lex.transport.jidousha
+  - ja.lex.transport.norimono
+  - ja.lex.objects.basu
+  - ja.lex.objects.kuruma
+  - ja.lex.verbs.ikimasu
+  - ja.sent.go-by-bike
+- id: ja.activity.transport-vehicles-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.transport.jitensha
+  - ja.lex.transport.takushii
+  - ja.lex.transport.fune
+  - ja.lex.transport.jidousha
+  - ja.lex.transport.norimono
+  - ja.lex.objects.basu
+  - ja.lex.objects.kuruma
+  - ja.lex.verbs.ikimasu
+  - ja.sent.go-by-bike
+- id: ja.activity.transport-vehicles-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.go-by-bike

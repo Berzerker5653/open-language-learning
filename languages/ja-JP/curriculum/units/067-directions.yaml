@@ -1,0 +1,76 @@
+# ai-assisted draft unit (Mode B A1 transport); content refs are pack data; qualified review pending.
+id: ja.unit.transport-directions
+goal_id: ja.goal.a1.transport
+title: Left, right, straight
+summary: Give and follow simple directions.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.transport.migi
+  - ja.lex.transport.hidari
+  - ja.lex.transport.mae
+  - ja.lex.transport.ushiro
+  - ja.lex.transport.tsugi
+  - ja.lex.demonstratives.koko
+  - ja.sent.next-left
+  allowed_grammar:
+  - ja.grammar.copula.polite-desu
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.transport-directions-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.transport.migi
+  - ja.lex.transport.hidari
+  - ja.lex.transport.mae
+  - ja.lex.transport.ushiro
+  - ja.lex.transport.tsugi
+  - ja.lex.demonstratives.koko
+  - ja.sent.next-left
+  - ja.sent.next-left
+- id: ja.activity.transport-directions-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.transport.migi
+  - ja.lex.transport.hidari
+  - ja.lex.transport.mae
+  - ja.lex.transport.ushiro
+  - ja.lex.transport.tsugi
+  - ja.lex.demonstratives.koko
+  - ja.sent.next-left
+- id: ja.activity.transport-directions-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.transport.migi
+  - ja.lex.transport.hidari
+  - ja.lex.transport.mae
+  - ja.lex.transport.ushiro
+  - ja.lex.transport.tsugi
+  - ja.lex.demonstratives.koko
+  - ja.sent.next-left
+- id: ja.activity.transport-directions-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.transport.migi
+  - ja.lex.transport.hidari
+  - ja.lex.transport.mae
+  - ja.lex.transport.ushiro
+  - ja.lex.transport.tsugi
+  - ja.lex.demonstratives.koko
+  - ja.sent.next-left
+- id: ja.activity.transport-directions-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.next-left

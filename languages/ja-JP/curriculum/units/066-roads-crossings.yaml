@@ -1,0 +1,64 @@
+# ai-assisted draft unit (Mode B A1 transport); content refs are pack data; qualified review pending.
+id: ja.unit.transport-roads-crossings
+goal_id: ja.goal.a1.transport
+title: Roads and crossings
+summary: Streets, bridges, and crossing safely; を marks the path.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.transport.michi
+  - ja.lex.transport.hashi
+  - ja.lex.transport.shingou
+  - ja.lex.transport.oudanhodou
+  - ja.lex.transport.massugu
+  - ja.lex.verbs.arukimasu
+  allowed_grammar:
+  - ja.grammar.particle.wo-traversal
+  - ja.grammar.particle.de-means
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.transport-roads-crossings-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.transport.michi
+  - ja.lex.transport.hashi
+  - ja.lex.transport.shingou
+  - ja.lex.transport.oudanhodou
+  - ja.lex.transport.massugu
+  - ja.lex.verbs.arukimasu
+- id: ja.activity.transport-roads-crossings-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.transport.michi
+  - ja.lex.transport.hashi
+  - ja.lex.transport.shingou
+  - ja.lex.transport.oudanhodou
+  - ja.lex.transport.massugu
+  - ja.lex.verbs.arukimasu
+- id: ja.activity.transport-roads-crossings-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.transport.michi
+  - ja.lex.transport.hashi
+  - ja.lex.transport.shingou
+  - ja.lex.transport.oudanhodou
+  - ja.lex.transport.massugu
+  - ja.lex.verbs.arukimasu
+- id: ja.activity.transport-roads-crossings-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.transport.michi
+  - ja.lex.transport.hashi
+  - ja.lex.transport.shingou
+  - ja.lex.transport.oudanhodou
+  - ja.lex.transport.massugu
+  - ja.lex.verbs.arukimasu

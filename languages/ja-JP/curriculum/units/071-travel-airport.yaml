@@ -1,0 +1,76 @@
+# ai-assisted draft unit (Mode B A1 transport); content refs are pack data; qualified review pending.
+id: ja.unit.transport-travel-airport
+goal_id: ja.goal.a1.transport
+title: Travel and airport
+summary: Sightseeing, guidance, and the airport.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.transport.kankou
+  - ja.lex.transport.annai
+  - ja.lex.transport.kuukou
+  - ja.lex.transport.tobu
+  - ja.lex.transport.nagai
+  - ja.lex.objects.hikouki
+  - ja.sent.plane-fly
+  allowed_grammar:
+  - ja.grammar.particle.topic-wa
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.transport-travel-airport-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.transport.kankou
+  - ja.lex.transport.annai
+  - ja.lex.transport.kuukou
+  - ja.lex.transport.tobu
+  - ja.lex.transport.nagai
+  - ja.lex.objects.hikouki
+  - ja.sent.plane-fly
+  - ja.sent.plane-fly
+- id: ja.activity.transport-travel-airport-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.transport.kankou
+  - ja.lex.transport.annai
+  - ja.lex.transport.kuukou
+  - ja.lex.transport.tobu
+  - ja.lex.transport.nagai
+  - ja.lex.objects.hikouki
+  - ja.sent.plane-fly
+- id: ja.activity.transport-travel-airport-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.transport.kankou
+  - ja.lex.transport.annai
+  - ja.lex.transport.kuukou
+  - ja.lex.transport.tobu
+  - ja.lex.transport.nagai
+  - ja.lex.objects.hikouki
+  - ja.sent.plane-fly
+- id: ja.activity.transport-travel-airport-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.transport.kankou
+  - ja.lex.transport.annai
+  - ja.lex.transport.kuukou
+  - ja.lex.transport.tobu
+  - ja.lex.transport.nagai
+  - ja.lex.objects.hikouki
+  - ja.sent.plane-fly
+- id: ja.activity.transport-travel-airport-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.plane-fly

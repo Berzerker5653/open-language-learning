@@ -1,0 +1,81 @@
+# ai-assisted draft unit (Mode B A1 transport); content refs are pack data; qualified review pending.
+id: ja.unit.transport-near-far
+goal_id: ja.goal.a1.transport
+title: Near and far
+summary: Say how far things are; enter and exit.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.transport.chikai
+  - ja.lex.transport.tooi
+  - ja.lex.transport.ekimae
+  - ja.lex.transport.koutsuu
+  - ja.lex.transport.hairimasu
+  - ja.lex.places.eki
+  - ja.lex.verbs.arimasu
+  - ja.sent.station-near
+  allowed_grammar:
+  - ja.grammar.copula.polite-desu
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.transport-near-far-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.transport.chikai
+  - ja.lex.transport.tooi
+  - ja.lex.transport.ekimae
+  - ja.lex.transport.koutsuu
+  - ja.lex.transport.hairimasu
+  - ja.lex.places.eki
+  - ja.lex.verbs.arimasu
+  - ja.sent.station-near
+  - ja.sent.station-near
+- id: ja.activity.transport-near-far-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.transport.chikai
+  - ja.lex.transport.tooi
+  - ja.lex.transport.ekimae
+  - ja.lex.transport.koutsuu
+  - ja.lex.transport.hairimasu
+  - ja.lex.places.eki
+  - ja.lex.verbs.arimasu
+  - ja.sent.station-near
+- id: ja.activity.transport-near-far-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.transport.chikai
+  - ja.lex.transport.tooi
+  - ja.lex.transport.ekimae
+  - ja.lex.transport.koutsuu
+  - ja.lex.transport.hairimasu
+  - ja.lex.places.eki
+  - ja.lex.verbs.arimasu
+  - ja.sent.station-near
+- id: ja.activity.transport-near-far-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.transport.chikai
+  - ja.lex.transport.tooi
+  - ja.lex.transport.ekimae
+  - ja.lex.transport.koutsuu
+  - ja.lex.transport.hairimasu
+  - ja.lex.places.eki
+  - ja.lex.verbs.arimasu
+  - ja.sent.station-near
+- id: ja.activity.transport-near-far-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.station-near

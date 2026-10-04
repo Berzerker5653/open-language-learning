@@ -11,8 +11,8 @@
     "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
     "bands_done": [],
-    "units_next": "062",
+    "units_next": "072",
     "last_score": "7/7 (2026-10-04, results/ja-JP-draft)",
-    "notes": "extension plan authored by agent, checker OK (54 goals, 740 units, 3789 new words); authoring starts at 062-071 (A1 transport)"
+    "notes": "extension plan authored by agent, checker OK (54 goals, 740 units, 3789 new words); batch 1 done: units 062-071 goal ja.goal.a1.transport (50 lex transport, 3 grammar, 7 sentences, 1 assessment); next 072-081 health-basics"
   }
 }

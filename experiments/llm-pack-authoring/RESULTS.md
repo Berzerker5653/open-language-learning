@@ -337,3 +337,12 @@ per band; capacity exact in every band. Authoring starts at 062-071.
 ru-RU: A1 units 020-029 stay reserved for the external model's Phase
 2; agent authoring resumes at 030 once that batch lands (goals.yaml is
 single-writer).
+
+## 2026-10-04 — ja-JP batch 1: A1 units 062-071 (transport)
+
+Agent-authored in place: goal `ja.goal.a1.transport`, 10 units, 50-word
+`lexicon/transport.jsonl` (kana-only forms), 3 grammar records
+(`particle.de-means`, `verb.te-form-connect`, `particle.wo-traversal`),
+7 sentences, 1 assessment (`ja.assess.transport`), 1 source
+(`ai-drafted-extension`). Goal prerequisite mirrored in
+`grammar/dependencies.yaml`. Score: **7/7** (`results/ja-JP-draft`).
