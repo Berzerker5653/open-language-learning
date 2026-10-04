@@ -13,6 +13,20 @@ Version separately:
 
 Target signed/packaged releases for Linux, Windows, and macOS after platform gates pass. Linux is the primary development reference but not the only 1.0 target.
 
+### Platform test status (PLAT-001, owner decision 2026-10-03)
+
+- **Linux**: the only tested platform. CI runs the full test suite plus the
+  xvfb desktop smoke (`desktop-smoke` job).
+- **Windows / macOS**: build configurations exist (Tauri bundle targets
+  `nsis`/`msi` and `app`/`dmg`) and CI compile-checks the desktop crate on
+  `windows-latest`/`macos-latest` (`platform-compile` job), but runtime
+  behavior is **untested**. Any published Windows/macOS artifacts must be
+  labeled untested in release notes and in the pack/app catalog
+  (`tested_platforms: ["linux"]`) so public users know these are
+  best-effort builds and can report issues.
+- Promoting a platform to "tested" requires a human-run runtime pass
+  (owner gate); compile checks alone never establish it.
+
 ## Mobile
 
 Tauri 2 supports Android/iOS targets, but mobile is a separate milestone because microphone permissions, app-store packaging, model memory/storage, background behavior, and native dependencies need validation.

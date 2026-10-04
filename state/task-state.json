@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-03",
-  "active_task": "K-34",
+  "active_task": "K-35",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -708,6 +708,16 @@
       "evidence": [
         "state/notes/K-33.md",
         "state/evidence/K-33/audit-2026-10-03.txt"
+      ]
+    }
+    ,
+    "K-34": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/K-34.md",
+        "state/evidence/K-34/build-config-2026-10-03.txt"
       ]
     }
   },

@@ -33,6 +33,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-30 | JA-A1 on-ramp curriculum authored: 31 units, 20 goals+assessments, 211 lexicon, 147 kana, 57 kanji, 61 sentences, 7 contrasts, 4 scenarios, 3 stories — all draft/review-needed, install blocked only by LIC-001 (`state/notes/K-30.md`) | JA-A1-001 |
 | K-31 | A1 functional goal coverage: 20 goals all lesson+assessment-mapped, five modalities, ordering scenario wired, audit clean (`state/notes/K-31.md`) | JA-A1-002 |
 | K-33 | automated a11y audit in CI: landmarks/skip-link, button+field naming, live regions, AA contrast math, reduced-motion/focus-visible CSS; ink-faint darkened to AA (`state/notes/K-33.md`) | ACC-001 |
+| K-34 | PLAT-001 build config only: win/mac bundle targets + icons, CI compile-check matrix, docs/13 marks win/mac untested (Linux-only runtime testing) (`state/notes/K-34.md`) | PLAT-001 |
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 
@@ -53,7 +54,6 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
-| K-34 | platform | PLAT-001 Windows/macOS parity | PLAT-001 |
 | K-35 | kit | Community catalog happy path: publish `dist/preview/*.lpk` as release assets + `catalog/packs.json` entries | GAP-VERIFY gap |
 
 ## owner — human/owner gates (never self-certifiable)

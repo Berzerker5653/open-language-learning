@@ -1,0 +1,58 @@
+# K-34 PLAT-001 build-config-only evidence — 2026-10-03
+
+## ci.yml platform-compile job (compile-only, no runtime tests)
+  # PLAT-001 (K-34): Windows/macOS parity is compile-only. Runtime behavior
+  # is tested on Linux (desktop-smoke above); Windows/macOS builds are
+  # published marked untested so users can report issues (owner decision
+  # 2026-10-03). Do not add runtime test steps here without owner scope.
+  platform-compile:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 26
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - uses: dtolnay/rust-toolchain@1.97.1
+      - uses: Swatinem/rust-cache@v2
+      - name: Compile-check desktop app
+        run: cargo check -p lts-desktop --all-targets
+
+## ci.yml YAML validity
+OK
+
+## tauri.conf.json bundle targets
+['deb', 'appimage', 'nsis', 'msi', 'app', 'dmg']
+['icons/32x32.png', 'icons/128x128.png', 'icons/128x128@2x.png', 'icons/icon.icns', 'icons/icon.ico', 'icons/icon.png']
+
+## generated desktop icons
+128x128.png
+128x128@2x.png
+32x32.png
+64x64.png
+Square107x107Logo.png
+Square142x142Logo.png
+Square150x150Logo.png
+Square284x284Logo.png
+Square30x30Logo.png
+Square310x310Logo.png
+Square44x44Logo.png
+Square71x71Logo.png
+Square89x89Logo.png
+StoreLogo.png
+icon.icns
+icon.ico
+icon.png
+
+## Linux compile check (same command CI runs on win/mac, minus platform)
+cargo check OK
+
+## Linux desktop smoke after config change
+smoke-ok home-rendered

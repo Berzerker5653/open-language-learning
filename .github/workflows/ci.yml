@@ -55,6 +55,30 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - run: ./scripts/smoke-desktop.sh
 
+  # PLAT-001 (K-34): Windows/macOS parity is compile-only. Runtime behavior
+  # is tested on Linux (desktop-smoke above); Windows/macOS builds are
+  # published marked untested so users can report issues (owner decision
+  # 2026-10-03). Do not add runtime test steps here without owner scope.
+  platform-compile:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 26
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - uses: dtolnay/rust-toolchain@1.97.1
+      - uses: Swatinem/rust-cache@v2
+      - name: Compile-check desktop app
+        run: cargo check -p lts-desktop --all-targets
+
   security:
     runs-on: ubuntu-24.04
     steps:
