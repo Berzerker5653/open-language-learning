@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "active_task": null,
+  "active_task": "POLISH-001",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -748,6 +748,24 @@
         "state/notes/TTS-002.md",
         "state/evidence/TTS-002/implementation-2026-10-04.txt"
       ]
+    }
+    ,
+    "LIC-001": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "docs/adr/0010-code-license-apache-2-0.md",
+        "docs/adr/0009-tts-distribution-variants.md",
+        "docs/10_LICENSING_AND_PROVENANCE.md",
+        "state/evidence/K-32/cutover-2026-10-04.txt"
+      ]
+    },
+    "POLISH-001": {
+      "status": "in_progress",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": []
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence."

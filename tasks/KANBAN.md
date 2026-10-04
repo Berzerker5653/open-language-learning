@@ -42,6 +42,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
+| POLISH-001 | quality | pre-publication hardening (owner-approved 2026-10-04): full-suite green gate, honest failure-path tests, latency baseline, full-route UI walkthrough; publishing stays O-05 | POLISH-001 |
 
 ## next — training methods the research says we're missing
 
@@ -62,8 +63,8 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 | card | what |
 | --- | --- |
-| O-01 | LIC-001 — PARTIAL: pack content CC BY 4.0 (2026-10-04); espeak-ng GPL posture decided via ADR-0009 variants (implementation = TTS-002); final app LICENSE still open |
-| O-02 | JA-A1-003: qualified human review of A1 content |
+| O-01 | LIC-001 — CLOSED 2026-10-04: code Apache-2.0 (ADR-0010, owner delegation), pack content CC BY 4.0, TTS GPL payload-scoped (ADR-0009/TTS-002); publishing still gated by O-05 |
+| O-02 | JA-A1-003: qualified human review of A1 content — owner 2026-10-04: owner is a learner, not a qualified reviewer, and cannot perform this gate; content stays labeled draft/unreviewed until an external reviewer is engaged (or the owner explicitly accepts draft labeling at release) |
 | O-03 | Screen-reader matrix (NVDA/VoiceOver/Orca) + IME composition audit |
 | O-04 | REL-001 release gates incl. pedagogical review + speech calibration |
 | O-05 | GitHub publishing authorization for catalog assets |

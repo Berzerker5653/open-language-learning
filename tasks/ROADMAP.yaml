@@ -699,6 +699,20 @@ tasks:
   - "The TTS variant carries GPL-3.0 obligations for its payload only: espeak-ng source offer, component license texts, and attribution UI entries for espeak-ng (GPLv3), sherpa-onnx (Apache-2.0), ONNX Runtime (MIT), Kokoro (Apache-2.0)."
   - "The TTS payload is installable into the bare variant as an optional in-app download: directory-capable model catalog entries (multi-file pin, hash verify, atomic activation) with the kokoro export as the first entry."
   - "Bring-your-own: the bare variant accepts a user-supplied local TTS runtime via documented configuration; absence never blocks non-audio practice."
+- id: POLISH-001
+  milestone: M6
+  priority: P1
+  title: "Pre-publication hardening pass (owner-approved 2026-10-04: polish before publishing)"
+  dependencies:
+  - TTS-002
+  read_first:
+  - docs/13_RELEASE_AND_DISTRIBUTION.md
+  - docs/15_TASK_STATE_AND_SELECTION.md
+  acceptance:
+  - "Full fast suite green on the Linux reference machine: cargo workspace tests, clippy -D warnings, fmt, tsc, vitest, desktop smoke."
+  - "Failure paths produce honest, actionable messages and are covered by tests: offline/absent catalog, invalid pack import, missing TTS payload, failed or checksum-mismatched model download, unknown model id."
+  - "Startup and plan-generation latency measured and recorded as a baseline artifact in state/evidence."
+  - "UI walkthrough of every route on the reference machine; rough edges found are fixed or filed as new cards."
 - id: JA-A1-001
   milestone: M6
   priority: P0

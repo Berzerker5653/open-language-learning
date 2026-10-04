@@ -21,7 +21,9 @@ A permissive inference library does not imply its downloaded model is permissive
 
 ## Recommended project source license
 
-OMP should evaluate MIT vs Apache-2.0 during bootstrap and record an ADR. Apache-2.0 is a reasonable default for a broad open-source SDK due to explicit patent language, but owner preference controls final choice.
+Resolved 2026-10-04 (ADR-0010, owner delegation under LIC-001): the
+application code is licensed **Apache-2.0** (`LICENSE` + `NOTICE`).
+Content and payload licenses remain separate (see below and ADR-0009).
 
 Do not stamp a final license without verifying all intended bundled code/content compatibility.
 
@@ -102,6 +104,6 @@ The app needs a Sources/Licenses screen able to aggregate:
 
 ## Current draft distribution status
 
-The handoff intentionally has no final application `LICENSE`. Owner decision 2026-10-04 (LIC-001, pack content): the `languages/ja-JP` on-ramp pack's original content (ai-assisted drafts) is licensed **CC BY 4.0** with redistribution allowed; the pack passes install gates and is the bundled default (K-32, replacing `ja-demo`). That decision covers only this pack's content. The final application `LICENSE` and the espeak-ng/Open JTalk GPL obligations for the speech stack remain unresolved under `LIC-001` — this is not permission to distribute the completed project as open source. `LIC-001` continues to prepare compatibility/attribution evidence and record the owner's remaining code and content choices. Never relabel third-party derived content under an incompatible project license.
+Owner decisions 2026-10-04 close `LIC-001`: (1) the `languages/ja-JP` on-ramp pack's original content (ai-assisted drafts) is licensed **CC BY 4.0** with redistribution allowed; the pack passes install gates and is the bundled default (K-32, replacing `ja-demo`); (2) the espeak-ng GPL posture is resolved by ADR-0009 — obligations are scoped to the optional TTS payload (notices + source offer staged with it, attribution UI when active); (3) the application code license is **Apache-2.0** per ADR-0010 (owner delegated the expert choice; `LICENSE` + `NOTICE` committed). These decisions settle the rights record; they do **not** authorize public distribution — publishing remains owner gate O-05, and AI-drafted content remains draft/review-needed regardless of license. Never relabel third-party derived content under an incompatible project license.
 
 Common Voice copyright metadata may say CC0 while the download service imposes separate access/use conditions. The checked Japanese release page also prohibits attempts to identify speakers and re-hosting/re-sharing the dataset. Keep raw benchmark data outside the repository and shipped packs; use authorized upstream fetches, a dataset/version/hash manifest, and aggregate results. Verify current service conditions at acquisition. See the exact release link in `docs/SOURCES.md`.

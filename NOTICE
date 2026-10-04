@@ -1,0 +1,23 @@
+# NOTICE
+
+Open Language Learning Platform
+Copyright 2026 the Open Language Learning Platform authors
+
+The application source code is licensed under the Apache License,
+Version 2.0 (see `LICENSE`). This product bundles or optionally
+distributes third-party components whose notices must be preserved:
+
+- This application depends on Apache-2.0, MIT, and BSD-licensed
+  libraries (see `Cargo.lock` and `pnpm-lock.yaml` for the exact set).
+- The optional TTS payload (TTS-bundled download variant and in-app
+  model download) includes espeak-ng (GPL-3.0), sherpa-onnx
+  (Apache-2.0), ONNX Runtime (MIT), and Kokoro model weights
+  (Apache-2.0). Its obligations are payload-scoped; see
+  `third-party/notices/NOTICE.md` and the license texts staged beside
+  the payload.
+- Language-pack content is licensed separately per pack
+  (e.g. `languages/ja-JP/licenses.jsonl`: CC BY 4.0). Packs are data,
+  not code, and never inherit the code license.
+
+This product includes code and models developed by third parties;
+copyrights are held by their respective owners.
