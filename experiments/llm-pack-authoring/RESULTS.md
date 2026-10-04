@@ -204,3 +204,26 @@ Owner direction: assume learners know NOTHING about the target language
 Not yet re-run against external models: the two-model agreement was
 proven for Mode A pre-v2; a fresh round (and a Mode B dry run) is owed
 after this contract change.
+
+## Mode B dry run #1: external plan rejected by capacity math (2026-10-04)
+
+Owner fed the v2 brief to an external model; Phase 0 returned
+`plans/ru-fullkit-v0.yaml` (10 goals, 10 units, budgets 50→4,000,
+33 Cyrillic symbols). Owner's question: why gate the plan past a human
+who cannot judge Russian? Correct objection — the gate was never
+supposed to be pedagogy judgment. Kit fixed accordingly:
+
+- New `validate_plan.py`: mechanically checks band order, id grammar,
+  unit numbering, goal↔unit coverage, shard sanity, and the capacity
+  math implied by hard rule 8 (`units × 6 ≥ promised new items`).
+  The human now confirms SCOPE only (bands, effort); pedagogy stays
+  under qualified human review (everything remains `draft`).
+- The dry-run plan FAILS: 10 units carry at most 60 items but promise
+  4,033; on-ramp alone needs ≥14 units, A1 ≥75, full B2 kit hundreds.
+  Also mis-sharded `orthography.jsonl` under lexicon. Saved as
+  `plans/ru-fullkit-v0.yaml` for the record.
+- Protocol fix: "one band per response" was impossible — replaced with
+  capacity-bounded batches (≤10 units per response; a band spans as
+  many responses as its budget requires). Phase 1 likewise capped.
+  Checker smoke-tested both ways (rejects v0, accepts a valid
+  on-ramp-only plan).

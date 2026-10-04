@@ -26,9 +26,14 @@ Same brief, but the model works in phases in ONE chat (plan → on-ramp →
 one band per response). Procedure per batch:
 
 1. Phase 0 emits `CURRICULUM_PLAN.yaml`; `parse_response.py` saves it to
-   `plans/<name>.yaml` (outside the pack, never scored). Review/approve
-   the plan — word budgets and grammar inventories are planning estimates
-   needing human sign-off — then tell the model to continue.
+   `plans/<name>.yaml` (outside the pack, never scored). Run
+   `.venv/bin/python experiments/llm-pack-authoring/validate_plan.py
+   experiments/llm-pack-authoring/plans/<name>.yaml` — it mechanically
+   checks id grammar, band order, coverage and the capacity math
+   (units × 6 ≥ promised items). On errors, feed the diagnostics back
+   and make the model replan. The human then confirms SCOPE only
+   (bands, effort) — pedagogy is not certified here; content stays
+   `draft` pending qualified human review.
 2. For each later response, save the full text and run
    `parse_response.py <response-file> <name>` again with the SAME label:
    batches merge into `candidates/<name>/` (a touched file is replaced

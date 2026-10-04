@@ -1,0 +1,114 @@
+bands:
+  on-ramp:
+    goals:
+      - id: "ru.goal.script.cyrillic"
+        description: "Read and write the 33 letters of the Cyrillic alphabet."
+      - id: "ru.goal.basics.greet"
+        description: "Greet people, introduce yourself, and say goodbye."
+  A1:
+    goals:
+      - id: "ru.goal.everyday.personal-info"
+        description: "Give basic personal information like age, origin, and profession."
+      - id: "ru.goal.everyday.shopping"
+        description: "Buy basic items, understand numbers, and handle prices."
+  A2:
+    goals:
+      - id: "ru.goal.travel.directions"
+        description: "Ask for and follow simple directions in a city."
+      - id: "ru.goal.social.past-events"
+        description: "Describe past activities, weekends, and simple stories."
+  B1:
+    goals:
+      - id: "ru.goal.work.routines"
+        description: "Discuss work routines, office life, and professional goals."
+      - id: "ru.goal.opinions.express"
+        description: "Express, explain, and justify opinions on various topics."
+  B2:
+    goals:
+      - id: "ru.goal.media.news"
+        description: "Understand and discuss contemporary news reports and media."
+      - id: "ru.goal.social.debates"
+        description: "Participate actively in complex debates and social discussions."
+
+units:
+  on-ramp:
+    - file: "000-cyrillic-1.yaml"
+      topic: "Cyrillic vowels and common consonants"
+      goal: "ru.goal.script.cyrillic"
+    - file: "001-cyrillic-2.yaml"
+      topic: "Cyrillic remaining consonants and signs"
+      goal: "ru.goal.script.cyrillic"
+    - file: "010-greetings.yaml"
+      topic: "Basic greetings and introductions"
+      goal: "ru.goal.basics.greet"
+  A1:
+    - file: "020-personal-info.yaml"
+      topic: "Stating age, nationality, and profession"
+      goal: "ru.goal.everyday.personal-info"
+    - file: "030-shopping.yaml"
+      topic: "Food, numbers, and shopping"
+      goal: "ru.goal.everyday.shopping"
+  A2:
+    - file: "040-directions.yaml"
+      topic: "Navigating the city and asking for directions"
+      goal: "ru.goal.travel.directions"
+    - file: "050-past-weekend.yaml"
+      topic: "Talking about the weekend and past events"
+      goal: "ru.goal.social.past-events"
+  B1:
+    - file: "060-workplace.yaml"
+      topic: "Office life and career discussions"
+      goal: "ru.goal.work.routines"
+    - file: "070-opinions.yaml"
+      topic: "Agreeing, disagreeing, and debating"
+      goal: "ru.goal.opinions.express"
+  B2:
+    - file: "080-news.yaml"
+      topic: "Media consumption and current events"
+      goal: "ru.goal.media.news"
+    - file: "090-debates.yaml"
+      topic: "Arguing viewpoints on abstract topics"
+      goal: "ru.goal.social.debates"
+
+lexicon:
+  on-ramp:
+    budget: 50
+    shards: ["orthography.jsonl", "greetings.jsonl"]
+  A1:
+    budget: 500
+    shards: ["personal.jsonl", "shopping.jsonl", "numbers.jsonl"]
+  A2:
+    budget: 1000
+    shards: ["directions.jsonl", "time.jsonl", "verbs-past.jsonl"]
+  B1:
+    budget: 2000
+    shards: ["work.jsonl", "abstract.jsonl"]
+  B2:
+    budget: 4000
+    shards: ["news.jsonl", "debate.jsonl"]
+
+grammar:
+  on-ramp:
+    - "ru.grammar.syntax.word-order-basic"
+    - "ru.grammar.verbs.zero-copula-present"
+  A1:
+    - "ru.grammar.nouns.gender"
+    - "ru.grammar.nouns.prepositional-case"
+    - "ru.grammar.nouns.accusative-case"
+  A2:
+    - "ru.grammar.nouns.genitive-case"
+    - "ru.grammar.nouns.dative-case"
+    - "ru.grammar.verbs.past-tense"
+    - "ru.grammar.verbs.motion-basic"
+  B1:
+    - "ru.grammar.nouns.instrumental-case"
+    - "ru.grammar.verbs.aspect"
+    - "ru.grammar.verbs.conditional"
+  B2:
+    - "ru.grammar.verbs.participles"
+    - "ru.grammar.verbs.gerunds"
+    - "ru.grammar.syntax.complex-subordination"
+
+orthography:
+  scripts: ["cyrillic"]
+  symbol_count: 33

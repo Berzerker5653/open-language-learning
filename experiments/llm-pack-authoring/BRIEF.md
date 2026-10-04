@@ -86,21 +86,31 @@ human, NOT part of the pack) with:
 - `orthography:` scripts to teach and symbol counts, if the target script
   is not Latin (see hard rule 10).
 
-Then STOP and wait for the human to approve or correct the plan. Do not
-emit pack files before approval.
+Then STOP. The human runs the kit's `validate_plan.py` on your plan; if
+it reports errors you must emit a corrected plan (repeat until it
+passes). Only then does the human confirm scope — which bands and how
+much effort — and say "continue". You do NOT need the human to judge
+pedagogy; content stays `draft` pending qualified human review either
+way.
 
-**Phase 1 — skeleton + on-ramp band:** manifest, sources, licenses, the
-orthography layer (if rule 10 applies), on-ramp goals/units/assessments,
-and exactly the lexicon/sentence/grammar records those units use.
+**Phase 1 — skeleton + start of on-ramp:** manifest, sources, licenses,
+the orthography layer (if rule 10 applies), on-ramp goals/assessments,
+and AT MOST 10 units with exactly the lexicon/sentence/grammar records
+those units use (the on-ramp band may span several responses).
 
-**Phase 2+ — one band per response:** new goals, units, assessments and
-the new lexicon/sentence/grammar records they use. Re-emit IN FULL every
-file you touch — e.g. `curriculum/goals.yaml` must contain ALL goals,
-old and new. Keep each unit's `new_item_budget` ≤ 6 at every band.
+**Phase 2+ — capacity-bounded batches:** each response delivers AT MOST
+10 units (a band may take many responses; finish a band before starting
+the next). New goals, units, assessments and the new lexicon/sentence/
+grammar records they use. Re-emit IN FULL every file you touch — e.g.
+`curriculum/goals.yaml` must contain ALL goals, old and new. Keep each
+unit's `new_item_budget` ≤ 6 at every band.
 
-Planning targets (planning estimates, not research claims; the human
-reviews the plan): on-ramp = full basic script + ~50 words; A1 ≈ 500
-cumulative words; A2 ≈ 1,000; B1 ≈ 2,000; B2 ≈ 4,000.
+Planning targets (planning estimates, not research claims): on-ramp =
+full basic script + ~50 words; A1 ≈ 500 cumulative words; A2 ≈ 1,000;
+B1 ≈ 2,000; B2 ≈ 4,000. These budgets FORCE the unit count: at ≤ 6 new
+items per unit, A1 needs 75+ units and a full B2 kit needs hundreds.
+Plan unit lists accordingly — a plan whose unit count cannot carry its
+budgets is rejected by `validate_plan.py`.
 
 ## Hard rules (violations = failure)
 
