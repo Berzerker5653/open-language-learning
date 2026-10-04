@@ -35,6 +35,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-33 | automated a11y audit in CI: landmarks/skip-link, button+field naming, live regions, AA contrast math, reduced-motion/focus-visible CSS; ink-faint darkened to AA (`state/notes/K-33.md`) | ACC-001 |
 | K-34 | PLAT-001 build config only: win/mac bundle targets + icons, CI compile-check matrix, docs/13 marks win/mac untested (Linux-only runtime testing) (`state/notes/K-34.md`) | PLAT-001 |
 | K-35 | catalog happy path: `langpack catalog` generates packs.json entries (hash/version/size/tested_platforms) from built .lpk archives; `scripts/build-catalog.sh` builds all shipped pack artifacts; live catalog merge stays O-05 (`state/notes/K-35.md`) | GAP-VERIFY gap |
+| K-32 | default pack replaced: on-ramp `org.openlanguage.ja-jp.reference` bundled (owner CC BY 4.0 decision 2026-10-04 unblocked install), ja-demo retired from candidates, pronunciation demo pack-driven, audio allowlists generalized (`state/notes/K-32.md`) | JA-A1-001 |
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 
@@ -60,8 +61,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 | card | what |
 | --- | --- |
-| K-32 | Replace `ja-demo` default with the on-ramp pack — BLOCKED by O-01: `langpack test` fails only on LIC-001 gates, so the pack cannot install yet |
-| O-01 | LIC-001: espeak-ng GPLv3 distribution obligation + final content licensing |
+| O-01 | LIC-001: espeak-ng GPLv3 distribution obligation + final content licensing — PARTIAL: pack content licensed CC BY 4.0 by owner 2026-10-04; speech-stack GPL + final app LICENSE still open |
 | O-02 | JA-A1-003: qualified human review of A1 content |
 | O-03 | Screen-reader matrix (NVDA/VoiceOver/Orca) + IME composition audit |
 | O-04 | REL-001 release gates incl. pedagogical review + speech calibration |

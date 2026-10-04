@@ -1,0 +1,44 @@
+# K-32 default-pack cutover evidence — 2026-10-04
+
+## owner decision
+LIC-001 (pack content): CC BY 4.0, approved by owner via ask 2026-10-04. espeak-ng GPL + final app LICENSE remain open.
+
+## pack gates
+test: 0 error(s), 1 warning(s)
+note: 1 warning(s); promotion gates still pass
+lint: 0 error(s), 1 warning(s)
+
+## install round-trip (production gate)
+built /tmp/ja-jp.lpk (70618 bytes)
+sha256 1a06565199e07c64e4d38220a6180cad0b7b1237b9e5de51dc5964d38716377c
+installed org.openlanguage.ja-jp.reference v0.1.0 at /tmp/tmp.EyrJnV477V/org.openlanguage.ja-jp.reference/0.1.0
+
+## desktop tests (bundled install + pronunciation demo + world unlock)
+test result: ok. 30 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.17s
+
+## workspace
+fmt OK
+clippy OK
+53 suites ok
+
+## frontend
+tsc OK
+   Start at  07:59:03
+   Duration  195ms (transform 46%, import 37%, tests 12%, worker 4%)
+
+   Start at  07:59:04
+   Duration  121ms (import 50%, transform 40%, worker 5%, tests 4%)
+
+
+## smoke
+smoke-ok home
+(marker note is a pre-existing race between two smoke_ack callers; script only requires the marker — UX-001 era, unchanged by K-32)
+
+## rebuilt artifacts
+total 260
+drwxr-xr-x 1 hunter hunter    138 Oct  3 21:54 .
+drwxr-xr-x 1 hunter hunter     14 Oct  3 05:59 ..
+-rw-r--r-- 1 hunter hunter   3628 Oct  4 07:58 eo-demo-0.1.0.lpk
+-rw-r--r-- 1 hunter hunter 183533 Oct  4 07:58 ja-demo-0.1.0.lpk
+-rw-r--r-- 1 hunter hunter  70618 Oct  4 07:58 ja-jp-reference-0.1.0.lpk
+-rw-r--r-- 1 hunter hunter   1838 Oct  4 07:58 packs.json

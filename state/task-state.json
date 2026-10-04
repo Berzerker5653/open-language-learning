@@ -730,6 +730,16 @@
         "state/evidence/K-35/catalog-happy-path-2026-10-03.txt"
       ]
     }
+    ,
+    "K-32": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/K-32.md",
+        "state/evidence/K-32/cutover-2026-10-04.txt"
+      ]
+    }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence."
 }

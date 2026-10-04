@@ -80,7 +80,7 @@ fn is_hex64(s: &str) -> bool {
 }
 
 /// Reverse-domain pack ids only; keeps ids out of path shape.
-fn valid_pack_id(s: &str) -> bool {
+pub fn valid_pack_id(s: &str) -> bool {
     let parts: Vec<&str> = s.split('.').collect();
     parts.len() >= 3
         && parts

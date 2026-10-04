@@ -787,7 +787,7 @@ export function App() {
     if (!inv || !item) return;
     try {
       const a = (await inv("speech_audio", {
-        packId: selectedPack ?? "org.openlanguage.ja-demo",
+        packId: selectedPack ?? "org.openlanguage.ja-jp.reference",
         unitId: item.content_id,
         text: item.surface,
       })) as { wav_b64: string; source: string };
@@ -1062,13 +1062,29 @@ export function App() {
     }
   }
   // SPEECH-005: guided pronunciation practice. The attempt blob lives in
-  // memory only (docs/08); nothing audio is ever persisted.
-  const DEMO_UNITS = {
-    short_unit: "ja.lex.demo.obasan",
-    long_unit: "ja.lex.demo.obaasan",
-    short_text: "おばさん",
-    long_text: "おばあさん",
-  };
+  // memory only (docs/08); nothing audio is ever persisted. The contrast
+  // pair comes from the installed pack's phonology data (K-32), never from
+  // app-internal language content.
+  interface PronDemo {
+    short_unit: string;
+    long_unit: string;
+    short_text: string;
+    long_text: string;
+  }
+  const [pronDemo, setPronDemo] = useState<PronDemo | null>(null);
+  useEffect(() => {
+    const inv = detectInvoke();
+    if (!inv) return;
+    let live = true;
+    void inv("pronunciation_demo", {
+      packId: selectedPack ?? "org.openlanguage.ja-jp.reference",
+    })
+      .then((d) => live && setPronDemo(d as PronDemo))
+      .catch(() => live && setPronDemo(null));
+    return () => {
+      live = false;
+    };
+  }, [selectedPack]);
 
   function playBlobUrl(url: string) {
     const audio = new Audio(url);
@@ -1078,10 +1094,11 @@ export function App() {
   async function playReference(which: "short" | "long") {
     const inv = detectInvoke();
     if (!inv) return;
-    const unitId = which === "short" ? DEMO_UNITS.short_unit : DEMO_UNITS.long_unit;
+    if (!pronDemo) return;
+    const unitId = which === "short" ? pronDemo.short_unit : pronDemo.long_unit;
     try {
       const b64 = (await inv("reference_audio", {
-        packId: selectedPack ?? "org.openlanguage.ja-demo",
+        packId: selectedPack ?? "org.openlanguage.ja-jp.reference",
         unitId,
       })) as string;
       const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
@@ -1099,15 +1116,15 @@ export function App() {
     // only — no scorer exists, so nothing is analyzed (docs/05).
     if (route === "shadowing") return;
     const inv = detectInvoke();
-    if (!inv) {
+    if (!inv || !pronDemo) {
       setPronResult({ corrections: [], abstain_reason: "aligner-unavailable", pitch: EMPTY_PITCH });
       return;
     }
     try {
       const result = (await inv("pronunciation_check", {
         attempt: {
-          pack_id: selectedPack ?? "org.openlanguage.ja-demo",
-          ...DEMO_UNITS,
+          pack_id: selectedPack ?? "org.openlanguage.ja-jp.reference",
+          ...pronDemo,
           wav_b64: toB64(wav),
         },
       })) as PronunciationResult;
@@ -1324,17 +1341,27 @@ export function App() {
               {audioMsg}
             </p>
           )}
-          <PronunciationPractice
-            shortText={DEMO_UNITS.short_text}
-            longText={DEMO_UNITS.long_text}
-            result={pronResult}
-            recording={recording}
-            hasAttempt={attemptUrl !== null}
-            onRecord={recordAttempt}
-            onStop={stopAndCheck}
-            onPlayReference={(w) => void playReference(w)}
-            onPlayAttempt={() => attemptUrl && playBlobUrl(attemptUrl)}
-          />
+          {pronDemo ? (
+            <PronunciationPractice
+              shortText={pronDemo.short_text}
+              longText={pronDemo.long_text}
+              result={pronResult}
+              recording={recording}
+              hasAttempt={attemptUrl !== null}
+              onRecord={recordAttempt}
+              onStop={stopAndCheck}
+              onPlayReference={(w) => void playReference(w)}
+              onPlayAttempt={() => attemptUrl && playBlobUrl(attemptUrl)}
+            />
+          ) : (
+            <section aria-label="Pronunciation">
+              <h2>Pronunciation</h2>
+              <p className="empty">
+                The selected pack declares no pronunciation contrasts yet, so there is nothing to
+                practice here.
+              </p>
+            </section>
+          )}
         </>
       ) : route === "shadowing" ? (
         <section aria-label="Shadowing">

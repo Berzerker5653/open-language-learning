@@ -2,6 +2,21 @@
   "note": "PREVIEW ONLY — not the live catalog. These entries are prepared locally for when a real public repository and GitHub releases exist. The 'url' fields are deliberately unset: do not publish or invent URLs until the owner hosts the releases. To activate: publish dist/preview/*.lpk as versioned GitHub release assets, set url to the release asset URL, and merge these entries into catalog/packs.json. sha256/size were computed from the exact archives built by `langpack build` on 2026-10-03.",
   "entries": [
     {
+      "pack_id": "org.openlanguage.ja-jp.reference",
+      "version": "0.1.0",
+      "display_name": "Japanese — A1 on-ramp (draft, unreviewed)",
+      "locale": "ja-JP",
+      "author": "Open Language Learning Platform contributors",
+      "license": "CC-BY-4.0",
+      "review_status": "community",
+      "min_sdk_version": "0.1.0",
+      "url": "PENDING-RELEASE-URL",
+      "sha256": "1a06565199e07c64e4d38220a6180cad0b7b1237b9e5de51dc5964d38716377c",
+      "size_bytes": 70618,
+      "archive": "dist/preview/ja-jp-reference-0.1.0.lpk",
+      "attribution": "© Open Language Learning Platform contributors — CC BY 4.0; content is ai-assisted original draft, unreviewed (owner licensing decision 2026-10-04)"
+    },
+    {
       "pack_id": "org.openlanguage.ja-demo",
       "version": "0.1.0",
       "display_name": "Japanese — demo lexicon (EDRDG-derived, unreviewed)",

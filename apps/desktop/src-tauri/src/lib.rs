@@ -83,16 +83,16 @@ struct PackCandidate {
 /// Bundled pack candidates. The UI selects by id; paths never cross the
 /// IPC boundary (docs/07).
 fn bundled_packs() -> Vec<(PackCandidate, PathBuf)> {
-    let packs = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../tests/fixtures/packs");
+    let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../..");
     vec![
         (
             PackCandidate {
-                pack_id: "org.openlanguage.ja-demo".into(),
-                display_name: "Japanese — demo lexicon (EDRDG-derived, unreviewed)".into(),
+                pack_id: "org.openlanguage.ja-jp.reference".into(),
+                display_name: "Japanese — A1 on-ramp (draft, unreviewed)".into(),
                 locale: "ja-JP".into(),
-                maturity: "community".into(),
+                maturity: "experimental".into(),
             },
-            packs.join("ja-demo"),
+            root.join("languages/ja-JP"),
         ),
         (
             PackCandidate {
@@ -101,7 +101,7 @@ fn bundled_packs() -> Vec<(PackCandidate, PathBuf)> {
                 locale: "eo".into(),
                 maturity: "community".into(),
             },
-            packs.join("eo-demo"),
+            root.join("tests/fixtures/packs/eo-demo"),
         ),
     ]
 }
@@ -1235,7 +1235,7 @@ fn demo_world_config() -> lts_world::WorldConfig {
                 id: "cafe".into(),
                 display_name: "Café corner — read the menu".into(),
                 requires: vec![lts_world::CapabilityRequirement {
-                    content_id: "ja.lex.demo.konnichiwa".into(),
+                    content_id: "ja.lex.greeting.konnichiwa".into(),
                     modality: M::ComprehensionReading,
                     min_state: S::Independent,
                 }],
@@ -1244,7 +1244,7 @@ fn demo_world_config() -> lts_world::WorldConfig {
                 id: "greeting-desk".into(),
                 display_name: "Greeting desk — say it yourself".into(),
                 requires: vec![lts_world::CapabilityRequirement {
-                    content_id: "ja.lex.demo.konnichiwa".into(),
+                    content_id: "ja.lex.greeting.konnichiwa".into(),
                     modality: M::RecallMeaning,
                     min_state: S::Independent,
                 }],
@@ -1370,6 +1370,65 @@ fn checked_unit(raw: &str) -> Result<String, String> {
         .map_err(|_| "invalid unit id".to_string())
 }
 
+/// Pack-driven pronunciation demo pair: the first vowel-length contrast in
+/// the installed pack's phonology data (fallback: first contrast). Keeps
+/// language content in the pack, not the app (docs/07).
+#[derive(Serialize, Clone)]
+struct PronunciationDemo {
+    short_unit: String,
+    long_unit: String,
+    short_text: String,
+    long_text: String,
+}
+
+#[tauri::command]
+fn pronunciation_demo(pack_id: String) -> Result<PronunciationDemo, String> {
+    pronunciation_demo_at(&data_dir(), &pack_id)
+}
+
+fn pronunciation_demo_at(data: &Path, pack_id: &str) -> Result<PronunciationDemo, String> {
+    if !packs::valid_pack_id(pack_id) {
+        return Err("pack not allowlisted".into());
+    }
+    let packs_root = data.join("packs");
+    let version =
+        lts_langpack::archive::current_version(pack_id, &packs_root).ok_or("pack not installed")?;
+    let path = packs_root
+        .join(pack_id)
+        .join(&version)
+        .join("phonology")
+        .join("contrasts.jsonl")
+        .clone();
+    let text = std::fs::read_to_string(path)
+        .map_err(|_| "pack declares no phonology contrasts".to_string())?;
+    let mut fallback: Option<PronunciationDemo> = None;
+    for line in text.lines().filter(|l| !l.trim().is_empty()) {
+        let v: serde_json::Value =
+            serde_json::from_str(line).map_err(|_| "bad contrasts.jsonl".to_string())?;
+        let id = v["id"].as_str().ok_or("contrast missing id")?;
+        let items = match v["items"].as_array() {
+            Some(a) if a.len() >= 2 => a,
+            _ => continue,
+        };
+        let demo = PronunciationDemo {
+            short_unit: format!("{id}.short"),
+            long_unit: format!("{id}.long"),
+            short_text: items[0]["text"].as_str().unwrap_or("").to_string(),
+            long_text: items[1]["text"].as_str().unwrap_or("").to_string(),
+        };
+        if v["feature_id"]
+            .as_str()
+            .is_some_and(|f| f.contains("vowel-length"))
+        {
+            return Ok(demo);
+        }
+        if fallback.is_none() {
+            fallback = Some(demo);
+        }
+    }
+    fallback.ok_or_else(|| "pack declares no phonology contrasts".into())
+}
+
 /// Dev/vendor aligner path; production packaging ships whisper.cpp as a
 /// sidecar (ADR-0008). Model prefers the installed catalog copy.
 fn aligner_paths(data: &Path) -> Option<(PathBuf, PathBuf)> {
@@ -1411,10 +1470,7 @@ fn pronunciation_check_at(
     data: &Path,
     attempt: PronunciationAttempt,
 ) -> Result<PronunciationResult, String> {
-    if !bundled_packs()
-        .iter()
-        .any(|(c, _)| c.pack_id == attempt.pack_id)
-    {
+    if !packs::valid_pack_id(&attempt.pack_id) {
         return Err("pack not allowlisted".into());
     }
     let short = checked_unit(&attempt.short_unit)?;
@@ -1550,7 +1606,7 @@ fn reference_audio(pack_id: String, unit_id: String) -> Result<String, String> {
 }
 
 fn reference_audio_at(data: &Path, pack_id: &str, unit_id: &str) -> Result<String, String> {
-    if !bundled_packs().iter().any(|(c, _)| c.pack_id == pack_id) {
+    if !packs::valid_pack_id(pack_id) {
         return Err("pack not allowlisted".into());
     }
     let unit = checked_unit(unit_id)?;
@@ -3227,7 +3283,7 @@ fn speech_audio_at(
     unit_id: &str,
     text: &str,
 ) -> Result<SpeechAudio, String> {
-    if !bundled_packs().iter().any(|(c, _)| c.pack_id == pack_id) {
+    if !packs::valid_pack_id(pack_id) {
         return Err("pack not allowlisted".into());
     }
     let unit = checked_unit(unit_id)?;
@@ -3421,6 +3477,7 @@ pub fn run() {
             install_model,
             delete_model,
             pronunciation_check,
+            pronunciation_demo,
             reference_audio,
             speech_audio,
             world_state,
@@ -3465,6 +3522,41 @@ pub fn run() {
 mod tests {
     use super::*;
 
+    /// Test shim (K-32 cutover): bundled ids go through the production
+    /// install path; the retired ja-demo fixture installs directly from
+    /// tests/fixtures/packs so engine tests keep their stable content ids.
+    fn install_bundled_pack(data: &Path, pack_id: &str) -> Result<PackCandidate, String> {
+        if bundled_packs().iter().any(|(c, _)| c.pack_id == pack_id) {
+            return crate::install_bundled_pack(data, pack_id);
+        }
+        let name = pack_id
+            .strip_prefix("org.openlanguage.")
+            .filter(|n| !n.is_empty() && *n != "ja-jp.reference")
+            .ok_or("unknown pack id")?;
+        let dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("../../../tests/fixtures/packs")
+            .join(name);
+        let (bytes, _sha) = lts_langpack::archive::build(&dir).map_err(|e| e.to_string())?;
+        let outcome = lts_langpack::archive::install(&bytes, &data.join("packs"))
+            .map_err(|e| e.to_string())?;
+        let store =
+            lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+        store
+            .record_installation(&lts_storage::PackInstallation {
+                pack_id: outcome.pack_id.clone(),
+                version: outcome.version.clone(),
+                installed_at: rfc3339_utc(now_secs()),
+                trust_state: "community".into(),
+            })
+            .map_err(|e| e.to_string())?;
+        Ok(PackCandidate {
+            pack_id: outcome.pack_id,
+            display_name: "test fixture".into(),
+            locale: "ja-JP".into(),
+            maturity: "community".into(),
+        })
+    }
+
     #[test]
     fn rfc3339_conversion_is_correct() {
         assert_eq!(rfc3339_utc(0), "1970-01-01T00:00:00Z");
@@ -3475,14 +3567,17 @@ mod tests {
     fn bundled_japanese_pack_installs_and_records() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        let candidate = install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        // K-32: the on-ramp reference pack is the bundled Japanese default;
+        // it must pass the install-mode license gate (CC BY 4.0, owner
+        // decision 2026-10-04).
+        let candidate = install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
         assert_eq!(candidate.locale, "ja-JP");
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
         let insts = store.installations().unwrap();
         assert!(
             insts
                 .iter()
-                .any(|i| i.pack_id == "org.openlanguage.ja-demo")
+                .any(|i| i.pack_id == "org.openlanguage.ja-jp.reference")
         );
 
         // Unknown ids are rejected (allowlist; no path from UI).
@@ -3490,13 +3585,28 @@ mod tests {
 
         // Profile + selection + skippable mic setting round-trip.
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
         let selected = store.selected_packs(&p.id).unwrap();
-        assert_eq!(selected[0].0, "org.openlanguage.ja-demo");
+        assert_eq!(selected[0].0, "org.openlanguage.ja-jp.reference");
         assert_eq!(
             store.get_setting(&p.id, "microphone-enabled").unwrap(),
             Some(serde_json::json!(false))
         );
+    }
+
+    #[test]
+    fn pronunciation_demo_comes_from_pack_contrasts() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let demo = pronunciation_demo_at(data, "org.openlanguage.ja-jp.reference").unwrap();
+        // The pack's first vowel-length contrast is obasan/obaasan.
+        assert_eq!(demo.short_text, "おばさん");
+        assert_eq!(demo.long_text, "おばあさん");
+        assert!(demo.short_unit.starts_with("ja.contrast.vowel-length."));
+        // Packs without phonology data abstain rather than invent content.
+        install_bundled_pack(data, "org.openlanguage.eo-demo").unwrap();
+        assert!(pronunciation_demo_at(data, "org.openlanguage.eo-demo").is_err());
     }
 
     fn cid(s: &str) -> lts_domain::ContentId {
@@ -3923,7 +4033,7 @@ mod tests {
     fn world_unlocks_follow_capabilities_not_activity_volume() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
         // Two independent recalls (distinct prompt families, no support).
@@ -3932,7 +4042,7 @@ mod tests {
             ("ja.expr.demo.greet-p2", "r2", "2026-10-02T11:00:00Z"),
         ] {
             let ev = attempt(
-                "ja.lex.demo.konnichiwa",
+                "ja.lex.greeting.konnichiwa",
                 lts_domain::ActivityModality::RecallMeaning,
                 family,
                 0,

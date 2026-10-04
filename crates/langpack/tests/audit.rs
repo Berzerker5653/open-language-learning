@@ -63,23 +63,22 @@ fn clean_chain_audits_and_reports_attribution() {
 }
 
 #[test]
-fn seed_draft_blocks_redistribution_and_reports_sources() {
+fn seed_pack_licensed_and_reports_sources() {
     let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../languages/ja-JP");
     let pack = Pack::load_dir(&root).unwrap();
     let (diags, report) = pack.audit_licenses();
+    // K-32: owner decision 2026-10-04 licensed the pack content CC BY 4.0;
+    // the license gate must now pass cleanly (was blocked pending LIC-001).
     assert!(
-        error_codes(&diags).contains(&"original_redistribution_blocked"),
-        "{diags:?}"
-    );
-    assert!(
-        diags.iter().any(|d| d.code == "license_pending"),
-        "{diags:?}"
+        diags.iter().all(|d| d.severity != Severity::Error),
+        "licensed pack must pass the gate: {diags:?}"
     );
     for id in [
         "jf-standard",
         "edrdg-jmdict",
         "pyopenjtalk",
         "commonvoice-ja-27",
+        "ai-drafted-kana",
     ] {
         assert!(
             report.iter().any(|e| e.source_id == id),
@@ -90,6 +89,11 @@ fn seed_draft_blocks_redistribution_and_reports_sources() {
         report
             .iter()
             .any(|e| e.source_id == "commonvoice-ja-27" && e.attribution.contains("Mozilla"))
+    );
+    assert!(
+        report
+            .iter()
+            .any(|e| e.source_id == "ai-drafted-kana" && e.attribution.contains("CC BY 4.0"))
     );
 }
 

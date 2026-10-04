@@ -68,15 +68,20 @@ fn japanese_draft_seed_validates_as_scaffold() {
 }
 
 #[test]
-fn japanese_draft_seed_is_not_install_eligible() {
+fn japanese_seed_is_install_eligible() {
     let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../languages/ja-JP");
     let pack = Pack::load_dir(&root).unwrap();
     let diags = pack.validate(Mode::Install, None);
-    let c = codes(&diags);
-    // Structure is install-eligible; only the owner license decision
-    // (LIC-001) blocks install.
-    assert!(c.contains(&"redistribution_blocked"), "{diags:?}");
-    assert!(c.contains(&"license_pending"), "{diags:?}");
+    // K-32: owner decision 2026-10-04 (LIC-001, pack content) licensed the
+    // on-ramp pack CC BY 4.0; install-mode validation must now be clean.
+    assert_eq!(
+        diags
+            .iter()
+            .filter(|d| d.severity == Severity::Error)
+            .count(),
+        0,
+        "licensed seed must pass install validation: {diags:?}"
+    );
 }
 
 #[test]

@@ -127,3 +127,16 @@ unresolved assessment `ja.assess.onramp.greeting-transfer` were authored.
 - Install remains blocked solely by LIC-001 (`licenses.jsonl` pending
   entries + manifest `redistribution_allowed: false`); scaffold validation
   is 0 errors / 0 warnings.
+
+## Licensing resolution and default-pack promotion (2026-10-04, K-32)
+
+- Owner decision 2026-10-04 (LIC-001, pack content): all pack content is
+  licensed **CC BY 4.0** (`lic-original-draft` and `lic-model-output`
+  resolved; `ai-drafted-kana` source record updated; manifest
+  `redistribution_allowed: true`). Install-mode validation and the full
+  `langpack test` gate now pass (0 errors).
+- The pack became the bundled default in the desktop app, replacing the
+  `ja-demo` fixture pack (which stays as an engine test fixture).
+- Qualified human review (REVIEW-001 / O-02) remains outstanding; the CC
+  BY 4.0 license does not upgrade any `draft`/`review-needed` content
+  status, and the espeak-ng GPL question stays open under LIC-001.

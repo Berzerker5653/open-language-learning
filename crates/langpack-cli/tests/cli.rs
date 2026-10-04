@@ -60,8 +60,9 @@ fn init_validate_build_inspect_round_trip() {
 }
 
 #[test]
-fn test_gate_blocks_uninstallable_pack() {
-    // valid-minimal is install-eligible; the seed draft is not.
+fn test_gate_passes_licensed_seed_and_blocks_bad_packs() {
+    // K-32: the on-ramp seed is licensed CC BY 4.0 (owner decision
+    // 2026-10-04) and now passes the full gate; broken packs still fail.
     let (out, _err, ok) = run(&["test", &fixture("valid-minimal")]);
     assert!(ok, "valid-minimal must pass the full gate: {out}");
 
@@ -71,7 +72,10 @@ fn test_gate_blocks_uninstallable_pack() {
         .unwrap()
         .to_string();
     let (out, _err, ok) = run(&["test", &seed]);
-    assert!(!ok, "seed draft must fail install gates: {out}");
+    assert!(ok, "licensed seed must pass the full gate: {out}");
+
+    let (out, _err, ok) = run(&["test", &fixture("invalid-license-unknown")]);
+    assert!(!ok, "unknown license must fail the gate: {out}");
 }
 
 #[test]
