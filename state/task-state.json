@@ -532,6 +532,20 @@
         "languages/ja-JP/assessments/definitions.jsonl",
         "crates/activity/tests/scenario.rs"
       ]
+    },
+    "K-10": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/K-10.md",
+        "state/evidence/K-10/cli-validate-2026-10-03.txt",
+        "state/evidence/K-10/cargo-test-2026-10-03.txt",
+        "state/evidence/K-10/vitest-2026-10-03.txt",
+        "state/evidence/K-10/smoke-desktop-2026-10-03.txt",
+        "schemas/v0.2/phonology-contrast.schema.json",
+        "apps/desktop/src-tauri/src/lib.rs"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence."

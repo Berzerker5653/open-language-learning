@@ -75,6 +75,7 @@ Recommended dimensions:
 - production-writing;
 - pronunciation-segmental;
 - pronunciation-prosody;
+- phonological-discrimination;
 - grammar-controlled;
 - grammar-spontaneous;
 - pragmatic-use;
@@ -90,6 +91,18 @@ on this dimension, the profile setting `kana-literacy-established` is
 set (Unicode-script detection, never locale), which fades kana romaji
 scaffolds per JA_ORTHOGRAPHY_POLICY. The roll-up is monotonic: later
 per-item regressions fade scaffolds but do not re-establish literacy.
+
+`phonological-discrimination` tracks perceptual contrast recognition
+(K-10): the pack declares contrast sets (`phonology/contrasts.jsonl`,
+each bound to a phonology feature id); the runner plays one member and
+the learner identifies which was heard. It is deliberately separate
+from the production pronunciation dimensions: hearing a contrast is
+evidence about perception and never grants credit for producing it,
+so prerequisite records scoped to `pronunciation-*` stay honest.
+Audio is media-first (licensed pack recordings win); synthesized audio
+is labeled model output and packs must not declare contrasts the
+synthesizer cannot actually produce (e.g. pitch-accent pairs without
+accent control).
 
 ## 5. Mastery state machine
 

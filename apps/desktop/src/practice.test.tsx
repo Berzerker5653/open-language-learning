@@ -132,4 +132,20 @@ describe("practice runner", () => {
     expect(html).toContain("あ");
     expect(html).not.toContain("Show reading");
   });
+
+  it("renders discrimination tasks with audio, written choices, no reveal", () => {
+    const html = render({
+      task: {
+        item_id: "ja.contrast.demo.vowel-length#phonological-discrimination",
+        surface: null,
+        choices: ["おばあさん", "おばさん"],
+      },
+      audioSource: "licensed-recording",
+    });
+    expect(html).toContain("What did you hear?");
+    expect(html).toContain('aria-label="Play the audio"');
+    // The written forms ARE the answer space (two-alternative forced
+    // choice), but no reading scaffold is offered while listening.
+    expect(html).not.toContain("Show reading");
+  });
 });

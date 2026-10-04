@@ -26,7 +26,7 @@ pub enum ActivityError {
     },
 }
 
-/// The four renderable activity families.
+/// The five renderable activity families.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum ActivityKind {
@@ -34,6 +34,7 @@ pub enum ActivityKind {
     Comprehension,
     Retrieval,
     Explanation,
+    Discrimination,
 }
 
 /// Pack modality as declared in unit activity data (schemas/v0.2).
@@ -74,11 +75,18 @@ pub fn classify_type(pack_type: &str) -> Result<ActivityKind, ActivityError> {
         "scenario",
     ];
     const EXPLANATION: &[&str] = &["explanation", "explain-why", "grammar-explain"];
+    const DISCRIMINATION: &[&str] = &[
+        "discriminate",
+        "minimal-pair",
+        "listen-discriminate",
+        "hvpt",
+    ];
     for (kind, names) in [
         (ActivityKind::Encounter, ENCOUNTER),
         (ActivityKind::Comprehension, COMPREHENSION),
         (ActivityKind::Retrieval, RETRIEVAL),
         (ActivityKind::Explanation, EXPLANATION),
+        (ActivityKind::Discrimination, DISCRIMINATION),
     ] {
         if names.contains(&pack_type) {
             return Ok(kind);
@@ -93,6 +101,11 @@ pub fn dimension_for(kind: ActivityKind, modality: PackModality) -> MasteryDimen
     match (kind, modality) {
         (ActivityKind::Explanation, _) => MasteryDimension::GrammarControlled,
         (ActivityKind::Retrieval, PackModality::Reading) => MasteryDimension::RecallMeaning,
+        // K-10: perceptual contrast training exercises perception, not
+        // production; it must never land on the production dimensions.
+        (ActivityKind::Discrimination, PackModality::Listening) => {
+            MasteryDimension::PhonologicalDiscrimination
+        }
         (_, PackModality::Listening) => MasteryDimension::ComprehensionListening,
         (_, PackModality::Reading) => MasteryDimension::ComprehensionReading,
         (_, PackModality::Writing) => MasteryDimension::ProductionWriting,

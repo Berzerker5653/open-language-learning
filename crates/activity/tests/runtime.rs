@@ -196,6 +196,11 @@ fn unknown_activity_types_are_rejected() {
         classify_type("explain-why").unwrap(),
         ActivityKind::Explanation
     );
+    assert_eq!(
+        classify_type("minimal-pair").unwrap(),
+        ActivityKind::Discrimination
+    );
+    assert_eq!(classify_type("hvpt").unwrap(), ActivityKind::Discrimination);
 }
 
 #[test]
@@ -213,6 +218,12 @@ fn modality_dimension_mapping_is_conservative() {
     assert_eq!(
         dimension_for(ActivityKind::Retrieval, PackModality::Reading),
         MasteryDimension::RecallMeaning
+    );
+    // K-10: perceptual discrimination never lands on a production
+    // dimension, even though it is listening-based.
+    assert_eq!(
+        dimension_for(ActivityKind::Discrimination, PackModality::Listening),
+        MasteryDimension::PhonologicalDiscrimination
     );
     assert_eq!(
         dimension_for(ActivityKind::Explanation, PackModality::Writing),

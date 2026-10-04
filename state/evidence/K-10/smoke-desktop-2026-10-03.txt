@@ -1,0 +1,5 @@
+MESA-EGL: warning: DRI3 error: Could not get DRI3 device
+MESA-EGL: warning: Ensure your X server supports DRI3 to get accelerated rendering
+
+** (process:2216148): WARNING **: 18:48:25.418: Error loading the injected bundle (/usr/lib/webkit2gtk-4.1/injected-bundle/libwebkit2gtkinjectedbundle.so): /usr/lib/webkit2gtk-4.1/injected-bundle/libwebkit2gtkinjectedbundle.so: cannot open shared object file: No such file or directory
+smoke-ok home-rendered

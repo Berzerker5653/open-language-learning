@@ -849,6 +849,18 @@ tasks:
   - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
   acceptance:
   - Referenced on-ramp assessment goals exist in the pack and validate; scenario dialogue graph is populated from pack data.
+- id: K-10
+  milestone: M6
+  priority: P1
+  title: HVPT / minimal-pair perceptual discrimination training
+  dependencies:
+  - JA-RES-002
+  - ACT-001
+  read_first:
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  - docs/assessment/JA_PHONOLOGY_MODEL.md
+  acceptance:
+  - Pack-declared phonological contrasts (`phonology/contrasts.jsonl`) drive a listen-and-choose discrimination runner; scored evidence lands on a dedicated `phonological-discrimination` dimension (perception never grants production dimensions); audio is media-first with model-output labeling.
 - id: GAME-001
   milestone: M7
   priority: P1

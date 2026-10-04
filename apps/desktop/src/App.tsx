@@ -402,12 +402,20 @@ export function App() {
           revealReading: false,
         })) as PracticeTaskView;
         setPracticeTask(task);
-        if (item.modality === "comprehension-listening") {
+        if (
+          item.modality === "comprehension-listening" ||
+          item.modality === "phonological-discrimination"
+        ) {
           try {
-            const a = (await inv("listening_audio", {
-              profileId,
-              contentId: item.content_id,
-            })) as { wav_b64: string; source: string };
+            const a = (await inv(
+              item.modality === "phonological-discrimination"
+                ? "contrast_audio"
+                : "listening_audio",
+              {
+                profileId,
+                contentId: item.content_id,
+              },
+            )) as { wav_b64: string; source: string };
             setPracticeAudio({ wavB64: a.wav_b64, source: a.source });
           } catch (e) {
             setPracticeAudioError(
@@ -903,7 +911,8 @@ export function App() {
             }
             revealed={practiceRevealed}
             onReveal={
-              practiceTarget.modality === "orthography-recognition"
+              practiceTarget.modality === "orthography-recognition" ||
+              practiceTarget.modality === "phonological-discrimination"
                 ? undefined
                 : () => void revealPracticeReading()
             }

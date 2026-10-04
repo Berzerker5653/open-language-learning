@@ -314,6 +314,7 @@ fn dimension_kebab(d: lts_domain::ActivityModality) -> &'static str {
         lts_domain::ActivityModality::ComprehensionReading => "comprehension-reading",
         lts_domain::ActivityModality::RecallMeaning => "recall-meaning",
         lts_domain::ActivityModality::OrthographyRecognition => "orthography-recognition",
+        lts_domain::ActivityModality::PhonologicalDiscrimination => "phonological-discrimination",
         lts_domain::ActivityModality::ProductionSpeaking => "production-speaking",
         lts_domain::ActivityModality::ProductionWriting => "production-writing",
         lts_domain::ActivityModality::PronunciationSegmental => "pronunciation-segmental",
@@ -332,6 +333,7 @@ fn parse_dimension(s: &str) -> Option<lts_domain::ActivityModality> {
         "comprehension-listening" => M::ComprehensionListening,
         "comprehension-reading" => M::ComprehensionReading,
         "recall-meaning" => M::RecallMeaning,
+        "phonological-discrimination" => M::PhonologicalDiscrimination,
         "orthography-recognition" => M::OrthographyRecognition,
         "production-speaking" => M::ProductionSpeaking,
         "production-writing" => M::ProductionWriting,
@@ -523,6 +525,74 @@ fn orth_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<OrthEnt
                 reading: reading.to_string(),
             });
         }
+    }
+    Ok(out)
+}
+
+/// A phonological contrast reduced to what the discrimination runner
+/// needs (K-10). Packs declare the contrast set; the engine plays one
+/// member and offers all members as choices. It never interprets the
+/// phonology itself (language neutrality, docs/00).
+struct ContrastEntry {
+    id: String,
+    description: String,
+    items: Vec<ContrastItem>,
+}
+
+struct ContrastItem {
+    text: String,
+}
+
+/// Parse an installed pack's `phonology/contrasts.jsonl`. A pack
+/// without perceptual training is not an error: empty list.
+fn contrast_entries(
+    data: &Path,
+    pack_id: &str,
+    version: &str,
+) -> Result<Vec<ContrastEntry>, String> {
+    let path = data
+        .join("packs")
+        .join(pack_id)
+        .join(version)
+        .join("phonology")
+        .join("contrasts.jsonl");
+    let Ok(text) = std::fs::read_to_string(&path) else {
+        return Ok(Vec::new());
+    };
+    let mut out = Vec::new();
+    for line in text.lines() {
+        let Ok(entry) = serde_json::from_str::<serde_json::Value>(line) else {
+            continue;
+        };
+        let Some(id) = entry.get("id").and_then(|v| v.as_str()) else {
+            continue;
+        };
+        if lts_domain::ContentId::parse(id).is_err() {
+            continue;
+        }
+        let Some(items) = entry.get("items").and_then(|v| v.as_array()) else {
+            continue;
+        };
+        let items: Vec<ContrastItem> = items
+            .iter()
+            .filter_map(|i| i.get("text").and_then(|t| t.as_str()))
+            .filter(|t| !t.is_empty())
+            .map(|t| ContrastItem {
+                text: t.to_string(),
+            })
+            .collect();
+        if items.len() < 2 {
+            continue;
+        }
+        out.push(ContrastEntry {
+            id: id.to_string(),
+            description: entry
+                .get("description")
+                .and_then(|v| v.as_str())
+                .unwrap_or("phonological contrast")
+                .to_string(),
+            items,
+        });
     }
     Ok(out)
 }
@@ -774,6 +844,27 @@ fn build_plan(
                     modality: m,
                 });
             }
+            // K-10: perceptual contrasts join the new-item stream so
+            // pronunciation-adjacent listening practice is available
+            // from day one wherever a pack declares contrasts.
+            for entry in contrast_entries(data, &pack_id, &version)? {
+                let m = lts_domain::ActivityModality::PhonologicalDiscrimination;
+                if derived
+                    .iter()
+                    .any(|d| d.content_id == entry.id && d.dimension == m)
+                {
+                    continue;
+                }
+                let key = format!("{}#{}", entry.id, dimension_kebab(m));
+                if planned.contains(&key) {
+                    continue;
+                }
+                planned.insert(key);
+                progression.push(lts_scheduler::ProgressionItem {
+                    content_id: entry.id.clone(),
+                    modality: m,
+                });
+            }
         }
     }
     let config = lts_scheduler::PlannerConfig {
@@ -852,6 +943,13 @@ fn build_plan_view(
         if let Ok(entries) = orth_entries(data, &pack_id, &version) {
             for e in entries {
                 display.entry(e.id).or_insert((e.symbol, None, e.reading));
+            }
+        }
+        if let Ok(entries) = contrast_entries(data, &pack_id, &version) {
+            for e in entries {
+                display
+                    .entry(e.id)
+                    .or_insert((e.items[0].text.clone(), None, e.description));
             }
         }
     }
@@ -1579,6 +1677,7 @@ fn practice_build(
         lts_domain::ActivityModality::RecallMeaning
             | lts_domain::ActivityModality::ComprehensionListening
             | lts_domain::ActivityModality::OrthographyRecognition
+            | lts_domain::ActivityModality::PhonologicalDiscrimination
     ) {
         return Err("no practice runner for this activity yet".to_string());
     }
@@ -1588,6 +1687,9 @@ fn practice_build(
         .ok_or("pack not installed")?;
     if dim == lts_domain::ActivityModality::OrthographyRecognition {
         return orth_task_build(data, pack_id, &version, content_id);
+    }
+    if dim == lts_domain::ActivityModality::PhonologicalDiscrimination {
+        return contrast_task_build(data, pack_id, &version, content_id);
     }
     let entries = lexicon_entries(data, pack_id, &version)?;
     let entry = entries
@@ -1693,6 +1795,85 @@ fn orth_task_build(
         choices,
     };
     Ok((task, answer.clone(), Vec::new()))
+}
+
+/// K-10 perceptual discrimination runner: play one member of a
+/// pack-declared phonological contrast (minimal pair / HVPT set) and
+/// ask which was heard. The target member is chosen deterministically
+/// per contrast (hash of the content id), so tasks are stable without
+/// RNG; the choices are the whole contrast set — the written forms ARE
+/// the answer space (two-alternative forced choice), but the target is
+/// never marked and the correct answer never crosses IPC pre-grading.
+/// The surface stays hidden while listening, the same disqualification
+/// rule the listening runner enforces (MASTERY_POLICY).
+fn contrast_task_build(
+    data: &Path,
+    pack_id: &str,
+    version: &str,
+    content_id: &str,
+) -> Result<(PracticeTask, String, Vec<String>), String> {
+    let entries = contrast_entries(data, pack_id, version)?;
+    let entry = entries
+        .iter()
+        .find(|e| e.id == content_id)
+        .ok_or("unknown contrast target")?;
+    let target = (fnv1a(content_id) % entry.items.len() as u64) as usize;
+    let answer = entry.items[target].text.clone();
+    let choices: Vec<String> = entry.items.iter().map(|i| i.text.clone()).collect();
+    let item_id = format!("{content_id}#phonological-discrimination");
+    let task = PracticeTask {
+        item_id,
+        surface: None,
+        reading: None,
+        furigana: None,
+        romaji: None,
+        faded_by_mastery: false,
+        choices,
+    };
+    Ok((task, answer, Vec::new()))
+}
+
+/// K-10: audio for the discrimination runner. The played member is
+/// resolved natively with the same deterministic target index the
+/// grader uses, so the transcript never crosses IPC. Media-first:
+/// `media/<contrast-id>-<item-index>.wav` (licensed recordings win),
+/// otherwise local synthesis labeled as model output (TTS-001).
+#[tauri::command]
+fn contrast_audio(profile_id: String, content_id: String) -> Result<SpeechAudio, String> {
+    contrast_audio_at(&data_dir(), &profile_id, &content_id)
+}
+
+fn contrast_audio_at(
+    data: &Path,
+    profile_id: &str,
+    content_id: &str,
+) -> Result<SpeechAudio, String> {
+    checked_unit(content_id)?;
+    let active = packs::active_pack(data, profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    let entries = contrast_entries(data, pack_id, &version)?;
+    let entry = entries
+        .iter()
+        .find(|e| e.id == content_id)
+        .ok_or("unknown contrast")?;
+    let target = (fnv1a(content_id) % entry.items.len() as u64) as usize;
+    let media_id = format!("{content_id}-{target}");
+    use base64::Engine;
+    let media = data
+        .join("packs")
+        .join(pack_id)
+        .join(&version)
+        .join("media")
+        .join(format!("{media_id}.wav"));
+    if let Ok(bytes) = std::fs::read(&media) {
+        return Ok(SpeechAudio {
+            wav_b64: base64::engine::general_purpose::STANDARD.encode(bytes),
+            source: "licensed-recording",
+        });
+    }
+    speech_audio_at(data, pack_id, &media_id, &entry.items[target].text)
 }
 
 /// K-04: once every kana-script orthography unit the active pack
@@ -1822,6 +2003,9 @@ fn practice_submit_at(
         // The orthography unit itself is the practiced activity; no
         // language-specific activity id literal (engine neutrality).
         lts_domain::ActivityModality::OrthographyRecognition => content_id,
+        // The contrast itself is the practiced activity; no
+        // language-specific activity id literal (engine neutrality).
+        lts_domain::ActivityModality::PhonologicalDiscrimination => content_id,
         _ => "ja.activity.demo.mc-recall",
     };
     let event = lts_learner_model::AttemptDraft::new(
@@ -2199,6 +2383,7 @@ pub fn run() {
             scenario_recovery,
             scenario_transfer,
             scenario_finish,
+            contrast_audio,
             listening_audio,
         ])
         .run(tauri::generate_context!())
@@ -3109,6 +3294,71 @@ mod tests {
                 false
             )
             .is_err(),
+        );
+    }
+    #[test]
+    fn discrimination_runner_records_phonological_dimension_evidence() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+
+        // The contrast set IS the answer space; the written target is
+        // never visible while listening (surface hidden like listening).
+        let t = practice_task_at(
+            data,
+            &p.id,
+            "ja.contrast.demo.vowel-length",
+            "phonological-discrimination",
+            false,
+        )
+        .unwrap();
+        assert!(t.surface.is_none() && t.reading.is_none());
+        assert_eq!(
+            t.item_id,
+            "ja.contrast.demo.vowel-length#phonological-discrimination"
+        );
+        assert_eq!(t.choices.len(), 2);
+
+        // Contrasts join the new-item stream for a fresh profile.
+        let plan = build_plan_view(data, &p.id, 60, 1_760_000_000).unwrap();
+        assert!(
+            plan.items
+                .iter()
+                .any(|i| i.modality == "phonological-discrimination"
+                    && i.content_id == "ja.contrast.demo.vowel-length")
+        );
+
+        // Audio: licensed media named `<id>-<item-index>.wav` wins, and
+        // the played member is the same deterministic target the grader
+        // uses (transcript never crosses IPC).
+        let a = contrast_audio_at(data, &p.id, "ja.contrast.demo.vowel-length").unwrap();
+        assert_eq!(a.source, "licensed-recording");
+        let target = (fnv1a("ja.contrast.demo.vowel-length") % 2) as usize;
+
+        let g = practice_submit_at(
+            data,
+            &p.id,
+            "ja.contrast.demo.vowel-length",
+            "phonological-discrimination",
+            target,
+            false,
+        )
+        .unwrap();
+        assert!(g.correct);
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let events = store.evidence_for_profile(&p.id).unwrap();
+        let disc = events
+            .iter()
+            .find(|e| e.modality == lts_domain::ActivityModality::PhonologicalDiscrimination)
+            .expect("discrimination evidence recorded");
+        // The contrast itself is the activity id: no language literals.
+        assert_eq!(disc.activity_id.as_str(), "ja.contrast.demo.vowel-length");
+        let rows = store.scheduler_state(&p.id).unwrap();
+        assert!(
+            rows.iter()
+                .any(|r| r.item_id == "ja.contrast.demo.vowel-length#phonological-discrimination")
         );
     }
 

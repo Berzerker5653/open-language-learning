@@ -18,17 +18,17 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-04 | Script-instruction activity: `orthography/*.jsonl` pack data, `orthography-recognition` dimension, kana-literacy roll-up by Unicode script (`state/notes/K-04.md`) | feeds JA-A1-001 |
 | K-05 | Profile picker / resume: launch opens "Welcome back" when profiles exist; wizard only for new profiles (`state/notes/K-05.md`) | UX follow-on |
 | K-06 | `languages/ja-JP` migrated 0.1→0.2 in place; first-meeting scenario graph populated; `ja.assess.onramp.greeting-transfer` authored; install blocked only by LIC-001 (`state/notes/K-06.md`) | JA-A1-001 |
+| K-10 | HVPT/minimal-pair perceptual training: `phonology/contrasts.jsonl` pack data, `phonological-discrimination` dimension (perception ≠ production), media-first audio (`state/notes/K-10.md`) | K-10 |
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 
-_(empty — K-01..K-06 complete; next work is `next`-column methods/kit cards,
-which need the activity-kind schema decision batched first)_
+_(empty — next work is `next`-column methods/kit cards; each needs the
+activity-kind decision batched first)_
 
 ## next — training methods the research says we're missing
 
 | card | epic | what | evidence |
 | --- | --- | --- | --- |
-| K-10 | methods | **HVPT / minimal-pair perceptual training**: high-variability listening discrimination over the existing phonology inventory (pitch-accent pairs, long/short vowels, gemination, /r/–/l/). Meta-analyzed effective; maps to `pronunciation-segmental`/`prosody` dimensions | Kim & Webb 2022 meta-analysis line; HVPT meta-analysis (Applied Psycholinguistics); our own `phonology/inventory.yaml` |
 | K-11 | methods | **Shadowing activity**: hear → speak along with audio, scored loosely (formative only, never checkpoint evidence) | Shadowing systematic review (Oxford 2023+) |
 | K-12 | methods | **Cloze + dictation activity types**: typed recall required by docs/03 §9 guessing-resistance; writing route exists but no sentence-level gap/dictation practice | docs/03 §9 |
 | K-13 | methods | **Graded reading**: interlinear story mode with per-sentence audio + tap-to-lookup, built on scenario runtime (Satori Reader pattern) | community practice; scenario runtime exists |

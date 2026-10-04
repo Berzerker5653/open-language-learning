@@ -1,0 +1,7 @@
+# langpack validate with phonology/contrasts.jsonl — 2026-10-03
+== tests/fixtures/packs/valid-full
+validate(scaffold): 0 error(s), 0 warning(s)
+== tests/fixtures/packs/ja-demo
+validate(scaffold): 0 error(s), 0 warning(s)
+== tests/fixtures/packs/ja-curriculum-draft
+validate(scaffold): 0 error(s), 8 warning(s)

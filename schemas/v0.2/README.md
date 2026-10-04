@@ -26,6 +26,7 @@ them); `schema_version` in `manifest.yaml` selects the contract.
 | `licenses.jsonl` | `license-inventory` | one per line |
 | `reviews.jsonl` | `review-record` | one per line |
 | `speech/profiles.jsonl` | `speech-profile` | one per line |
+| `phonology/contrasts.jsonl` | `phonology-contrast` | one per line |
 
 `media/**` holds binary assets. Markdown/txt docs and `LICENSE`/`NOTICE*`
 are allowed anywhere. Anything else is reported as `unknown_file`.

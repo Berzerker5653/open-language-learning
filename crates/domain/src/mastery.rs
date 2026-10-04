@@ -15,6 +15,12 @@ pub enum MasteryDimension {
     ComprehensionReading,
     RecallMeaning,
     OrthographyRecognition,
+    /// Perceptual contrast discrimination (K-10, HVPT/minimal-pair
+    /// training). Kept separate from the production pronunciation
+    /// dimensions: hearing a contrast does not grant credit for
+    /// producing it (docs/03 §4 — evidence in one dimension informs but
+    /// never automatically grants another).
+    PhonologicalDiscrimination,
     ProductionSpeaking,
     ProductionWriting,
     PronunciationSegmental,

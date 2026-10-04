@@ -294,8 +294,8 @@ impl Pack {
                 inst.schema,
                 "goal"
                     | "assessment"
-                    | "lexicon-entry"
                     | "orthography-unit"
+                    | "phonology-contrast"
                     | "concept"
                     | "lexical-entry"
                     | "unit"
@@ -948,6 +948,9 @@ impl RefCollector<'_> {
                         "feature_id",
                     );
                 }
+            }
+            "phonology-contrast" => {
+                self.push("/feature_id".into(), value.get("feature_id"), "feature_id");
             }
             "pragmatics" => {
                 for (i, s) in array(value, "situations") {
