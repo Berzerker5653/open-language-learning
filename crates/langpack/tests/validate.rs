@@ -383,3 +383,14 @@ fn generation_contract_envelopes_unit_content() {
         "content outside the declared contract must fail: {diags:?}"
     );
 }
+
+#[test]
+fn goals_sharding_accepted() {
+    // K-23: goals may be split across curriculum/goals/*.yaml.
+    let diags = validate("valid-goals-sharded", Mode::Scaffold);
+    assert_eq!(
+        error_count(&diags),
+        0,
+        "sharded goals must validate: {diags:?}"
+    );
+}

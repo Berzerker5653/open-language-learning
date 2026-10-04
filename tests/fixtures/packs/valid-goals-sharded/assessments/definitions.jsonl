@@ -1,0 +1,1 @@
+{"id":"xx.assess.demo.greet","goal_id":"xx.goal.demo.greet","kind":"recall","modality":"reading","rubric":{"scale":"observed","criteria":["greeting matched to situation"]},"review_status":"draft"}

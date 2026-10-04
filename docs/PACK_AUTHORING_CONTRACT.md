@@ -33,7 +33,7 @@ and those disagree, they win — fix this document.
 | `language/orthography.yaml` | orthography | single doc |
 | `language/phonology.yaml` | phonology | single doc |
 | `language/pragmatics.yaml` | pragmatics | single doc |
-| `curriculum/goals.yaml` | goal | `{goals: [...]}` |
+| `curriculum/goals.yaml` or `curriculum/goals/*.yaml` | goal | `{goals: [...]}` |
 | `curriculum/units/*.yaml` | unit | single doc |
 | `activities/scenarios/*.yaml` | scenario | single doc |
 | `assessments/definitions.jsonl` | assessment | one per line |
@@ -103,7 +103,9 @@ conventions that keep large packs navigable:
   ~200 records (`sentences/food.jsonl`, `kanji/n5.jsonl`); the engine
   reads every `*.jsonl` under those directories in file-name order.
 - **Stories**: one file per reader text (`stories/<topic>-<band>.yaml`).
-- **Goals**: single `curriculum/goals.yaml` (sharding is K-23).
+- **Goals**: `curriculum/goals/<band>.yaml` shards (K-23), e.g.
+  `goals/on-ramp.yaml`, `goals/a1.yaml`; the single
+  `curriculum/goals.yaml` remains valid.
 
 These are conventions, not schema: `langpack validate` accepts any
 file set the table allows; the CI template enforces the gates.

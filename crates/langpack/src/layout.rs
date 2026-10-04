@@ -11,6 +11,7 @@
 //! language/phonology.yaml          phonology                (single doc)
 //! language/pragmatics.yaml         pragmatics               (single doc)
 //! curriculum/goals.yaml            goal                     ({goals: [...]})
+//! curriculum/goals/*.yaml          goal                     ({goals: [...]}, K-23 sharding)
 //! curriculum/units/*.yaml          unit                     (single doc)
 //! activities/scenarios/*.yaml      scenario                 (single doc)
 //! assessments/definitions.jsonl    assessment               (one per line)
@@ -108,6 +109,12 @@ pub fn classify(rel: &str) -> Option<Classified> {
                 return Some(Classified {
                     schema: None,
                     shape: DocShape::Single,
+                });
+            }
+            if rel.starts_with("curriculum/goals/") && yaml(rel) {
+                return Some(Classified {
+                    schema: Some("goal"),
+                    shape: DocShape::ArrayField("goals"),
                 });
             }
             if rel.starts_with("lexicon/") && rel.ends_with(".jsonl") {

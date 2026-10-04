@@ -1,0 +1,2 @@
+validate(scaffold): 0 error(s), 0 warning(s)
+lint: 0 error(s), 0 warning(s)
