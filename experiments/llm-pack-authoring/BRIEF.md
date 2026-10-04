@@ -1,16 +1,20 @@
 # LLM Pack-Authoring Brief — any target language
 
-**How to use this file (human, not the LLM):** fill in the three values in
-the Target language block below — that is the ONLY language-specific part of
-this document. Then paste the entire file to the LLM. Do not edit anything
-else; every other rule is language-neutral and derives from the block.
+**How to use this file (human, not the LLM):** fill in the four values in
+the Target language block below — that is the ONLY language-specific part
+of this document. Then paste the entire file to the LLM. Do not edit
+anything else; every other rule is language-neutral and derives from the
+block.
 
-Two modes share one contract:
+Two modes share one contract; the Target language block selects exactly
+one, and the model MUST follow the selected mode:
 
-- **Mode A — starter pack** (default): one response, one pack, scored once.
-- **Mode B — full kit**: the same pack grown band-by-band (on-ramp → A1 →
-  A2 → …) across several responses in ONE chat, per the protocol section.
-  Score after every batch.
+- **Mode B — full kit (production path):** the real deliverable — the
+  learner's complete path from zero through the bands, built band-by-band
+  across several responses in ONE chat. Score after every batch.
+- **Mode A — starter pack (calibration run):** one response, one tiny
+  pack, scored once. Used ONLY to validate the kit itself — when testing
+  a new model or after any brief change — not as a product deliverable.
 
 ---
 
@@ -20,18 +24,22 @@ an automated validator, and any rule you break will be reported.
 
 ## Target language
 
-| Field                                                                 | Value       |
-| --------------------------------------------------------------------- | ----------- |
-| Language                                                              | **Russian** |
-| `target_locale` (BCP 47)                                              | **`ru-RU`** |
-| id prefix `<p>` (derived: first subtag of `target_locale`, lowercase) | **`ru`**    |
+| Field                                                                 | Value            |
+| --------------------------------------------------------------------- | ---------------- |
+| Language                                                              | **Russian**      |
+| `target_locale` (BCP 47)                                              | **`ru-RU`**      |
+| id prefix `<p>` (derived: first subtag of `target_locale`, lowercase) | **`ru`**         |
+| Mode                                                                  | **B — full kit** |
 
 "the target language" below always means the language in this table.
 `<p>` always means the derived id prefix. The worked example at the end uses
 the placeholder locale `xx-XX` and prefix `xx` — replace both with the
 values above; change nothing else about the shapes.
 
-## Mode A — starter pack (single response)
+## Mode A — starter pack (calibration run, single response)
+
+Use this mode only to validate the kit; a starter pack alone is not a
+shippable language path.
 
 Author a **starter pack for the target language** from scratch. Deliver, in
 your response, the complete file tree and the FULL contents of every file.
@@ -55,7 +63,7 @@ Required minimum content:
 - `sentences/entries.jsonl` — at least 3 sentences with `cloze_targets`
 - `assessments/definitions.jsonl` — at least one per goal
 
-## Mode B — full-kit protocol (all bands, batched in one chat)
+## Mode B — full-kit protocol (production path, all bands, batched in one chat)
 
 A starter pack is a few hours of study. A full kit takes a learner from
 zero through the bands: `on-ramp` (script + first words), `A1`, `A2`,

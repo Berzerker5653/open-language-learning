@@ -2,15 +2,16 @@
 
 Measures whether the pack-authoring kit (contract + example pack) is
 sufficient for a *different* LLM to produce a validator-perfect pack in
-one pass — i.e. whether the kit's requirements are unambiguous. Mode A
-(starter) is the validated one-shot contract; Mode B grows the same pack
-band-by-band in one chat (see below).
+one pass — i.e. whether the kit's requirements are unambiguous. Mode B
+(full kit) is the production path; Mode A (starter) is the calibration
+run that validates the kit itself.
 
-## Procedure
+## Procedure (Mode A calibration run)
 
 1. Fill in the **Target language** block in `BRIEF.md` (language name +
-   `target_locale`; the id prefix is derived from the locale — that is the
-   only language-specific edit needed). Paste the whole file to the test LLM.
+   `target_locale`; the id prefix is derived from the locale) and set the
+   Mode row to **A** for calibration runs. Paste the whole file to the
+   test LLM.
 2. Save the model's FULL response text to a file (e.g.
    `/tmp/<name>-response.md`) — no manual file copying — and run
    `./experiments/llm-pack-authoring/parse_response.py <response-file> <name>`
