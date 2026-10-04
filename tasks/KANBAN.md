@@ -31,12 +31,12 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-23 | Goals sharding: `curriculum/goals/*.yaml` accepted (ids pack-global, cross-file dupes fail) (`state/notes/K-23.md`) | layout contract |
 | K-24 | `new-unit`/`new-lexicon` scaffold subcommands: schema-valid starters, goal auto-pickup, NNN+10 naming, placeholders as warnings (`state/notes/K-24.md`) | PACK-005 |
 | K-30 | JA-A1 on-ramp curriculum authored: 31 units, 20 goals+assessments, 211 lexicon, 147 kana, 57 kanji, 61 sentences, 7 contrasts, 4 scenarios, 3 stories — all draft/review-needed, install blocked only by LIC-001 (`state/notes/K-30.md`) | JA-A1-001 |
+| K-31 | A1 functional goal coverage: 20 goals all lesson+assessment-mapped, five modalities, ordering scenario wired, audit clean (`state/notes/K-31.md`) | JA-A1-002 |
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
-| K-31 | content | JA-A1-002: A1 functional goal coverage | JA-A1-002 |
 
 ## next — training methods the research says we're missing
 
@@ -52,7 +52,6 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
-| K-32 | content | Replace `ja-demo` default with real on-ramp pack once K-30 passes `langpack test` | — |
 | K-33 | platform | ACC-001 accessibility audit (auto portion) | ACC-001 |
 | K-34 | platform | PLAT-001 Windows/macOS parity | PLAT-001 |
 | K-35 | kit | Community catalog happy path: publish `dist/preview/*.lpk` as release assets + `catalog/packs.json` entries | GAP-VERIFY gap |
@@ -61,6 +60,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 | card | what |
 | --- | --- |
+| K-32 | Replace `ja-demo` default with the on-ramp pack — BLOCKED by O-01: `langpack test` fails only on LIC-001 gates, so the pack cannot install yet |
 | O-01 | LIC-001: espeak-ng GPLv3 distribution obligation + final content licensing |
 | O-02 | JA-A1-003: qualified human review of A1 content |
 | O-03 | Screen-reader matrix (NVDA/VoiceOver/Orca) + IME composition audit |

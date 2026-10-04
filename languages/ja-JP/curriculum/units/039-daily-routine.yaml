@@ -39,3 +39,10 @@ activities:
   modality: speaking
   support_level: 2
   content_refs: *id001
+- id: ja.activity.day-write
+  type: fill-blank
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.wake-up
+  - ja.sent.eat-breakfast

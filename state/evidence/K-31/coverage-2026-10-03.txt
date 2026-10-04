@@ -1,0 +1,15 @@
+== K-31 coverage audit 2026-10-03 ==
+validate(scaffold): 0 error(s), 0 warning(s)
+lint: 0 error(s), 1 warning(s)
+goals: 20
+goals without lesson/scenario: []
+goals without assessment: []
+modalities covered: ['interaction', 'listening', 'reading', 'speaking', 'writing']
+transfer goals: 16
+all draft: True
+introductions covered
+shopping covered
+food covered
+directions covered
+time covered
+routines covered

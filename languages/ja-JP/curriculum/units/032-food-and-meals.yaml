@@ -34,3 +34,8 @@ activities:
   modality: reading
   support_level: 1
   content_refs: *id001
+- id: ja.activity.food-scenario
+  type: scenario
+  modality: interaction
+  support_level: 2
+  scenario_id: ja.scenario.restaurant.order

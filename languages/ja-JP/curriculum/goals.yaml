@@ -405,6 +405,7 @@ goals:
     modalities:
     - speaking
     - reading
+    - writing
     prerequisites:
     - target: ja.lex.verbs.okimasu
       dimension: recall-meaning
