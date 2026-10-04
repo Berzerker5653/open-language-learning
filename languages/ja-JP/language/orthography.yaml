@@ -1,0 +1,33 @@
+# Script declarations carried over from the 0.1 orthography/scripts.yaml.
+# Scaffold policy (romanization as temporary scaffold with automatic fade
+# and user reveal) lives in docs/assessment/JA_ORTHOGRAPHY_POLICY.yaml;
+# canonical content stays in Japanese script. Ruby furigana is supported.
+schema_version: "0.2"
+
+scripts:
+  - id: ja.orth.hiragana
+    name: Hiragana
+    direction: ltr
+    unicode_blocks:
+      - Hiragana
+    teaching_order: 0
+  - id: ja.orth.katakana
+    name: Katakana
+    direction: ltr
+    unicode_blocks:
+      - Katakana
+    teaching_order: 1
+  - id: ja.orth.kanji
+    name: Kanji
+    direction: ltr
+    unicode_blocks:
+      - CJK Unified Ideographs
+      - CJK Unified Ideographs Extension A
+    teaching_order: 2
+  - id: ja.orth.latin
+    name: "Latin / romaji (temporary scaffold and native mixed-script use)"
+    direction: ltr
+    unicode_blocks:
+      - Basic Latin
+      - Latin-1 Supplement
+    teaching_order: 3

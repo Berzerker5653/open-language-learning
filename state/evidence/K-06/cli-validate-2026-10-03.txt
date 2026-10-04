@@ -1,0 +1,33 @@
+# langpack validate (scaffold) — 2026-10-03
+validate(scaffold): 0 error(s), 0 warning(s)
+exit=0
+
+# langpack test (install gate) — expected LIC-001 failures
+error[license_redistribution_blocked] licenses.jsonl/0: inventory entry "lic-original-draft" forbids redistribution; install is blocked until resolved
+error[license_pending] licenses.jsonl/0/license: license selection is pending (owner decision LIC-001); install is blocked
+error[license_redistribution_blocked] licenses.jsonl/1: inventory entry "lic-model-output" forbids redistribution; install is blocked until resolved
+error[license_pending] licenses.jsonl/1/license: license selection is pending (owner decision LIC-001); install is blocked
+error[redistribution_blocked] manifest.yaml/license: manifest.license.redistribution_allowed must be true for install; resolve the license inventory first (LIC-001)
+info[unused_source] sources.jsonl/1: source "edrdg-jmdict" is not referenced by any content record
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+error[license_pending] licenses.jsonl/0/license: inventory entry "lic-original-draft" has a pending license (owner decision LIC-001); reference build blocked
+error[original_redistribution_blocked] licenses.jsonl/0: original content "lic-original-draft" may not be redistributed until the owner resolves licensing (LIC-001)
+error[license_pending] licenses.jsonl/1/license: inventory entry "lic-model-output" has a pending license (owner decision LIC-001); reference build blocked
+test: 8 error(s), 0 warning(s)
+exit=1
+
+# audit-licenses
+error[license_pending] licenses.jsonl/0/license: inventory entry "lic-original-draft" has a pending license (owner decision LIC-001); reference build blocked
+error[original_redistribution_blocked] licenses.jsonl/0: original content "lic-original-draft" may not be redistributed until the owner resolves licensing (LIC-001)
+error[license_pending] licenses.jsonl/1/license: inventory entry "lic-model-output" has a pending license (owner decision LIC-001); reference build blocked
+audit-licenses: 3 error(s), 0 warning(s)
+
+# audit-sources
+info[unused_source] sources.jsonl/1: source "edrdg-jmdict" is not referenced by any content record
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+audit-sources: 0 error(s), 0 warning(s)
+
+# audit-curriculum
+audit-curriculum: 0 error(s), 0 warning(s)

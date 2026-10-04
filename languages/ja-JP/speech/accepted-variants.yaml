@@ -1,4 +1,0 @@
-policy:
-  default: "Do not mark a production wrong solely because it differs from the reference variety when it is a documented natural variant."
-  empty_registry_behavior: "No verified automatic variant handling exists; keep feedback guided/reference and do not interpret this empty list as rejecting all non-reference forms."
-variants: []

@@ -17,12 +17,12 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-03 | READ-001 reader in practice: mastery-faded furigana/romaji, script-gated (never locale), reveals recorded as support 3 (`state/notes/K-03.md`) | READ-001 follow-on |
 | K-04 | Script-instruction activity: `orthography/*.jsonl` pack data, `orthography-recognition` dimension, kana-literacy roll-up by Unicode script (`state/notes/K-04.md`) | feeds JA-A1-001 |
 | K-05 | Profile picker / resume: launch opens "Welcome back" when profiles exist; wizard only for new profiles (`state/notes/K-05.md`) | UX follow-on |
+| K-06 | `languages/ja-JP` migrated 0.1→0.2 in place; first-meeting scenario graph populated; `ja.assess.onramp.greeting-transfer` authored; install blocked only by LIC-001 (`state/notes/K-06.md`) | JA-A1-001 |
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 
-| card | epic | what | maps to |
-| --- | --- | --- | --- |
-| K-06 | content | Populate `first-meeting` scenario dialogue graph + on-ramp assessments (`ja.assess.onramp.greeting-transfer` is referenced but missing) | JA-A1-001 |
+_(empty — K-01..K-06 complete; next work is `next`-column methods/kit cards,
+which need the activity-kind schema decision batched first)_
 
 ## next — training methods the research says we're missing
 

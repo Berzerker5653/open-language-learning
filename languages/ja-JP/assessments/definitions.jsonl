@@ -1,0 +1,1 @@
+{"id":"ja.assess.onramp.greeting-transfer","goal_id":"ja.goal.onramp.respond-to-greeting","kind":"transfer","modality":"interaction","rubric":{"scale":"observed","criteria":["communicative task completed","errors do not block meaning"]},"review_status":"review-needed"}

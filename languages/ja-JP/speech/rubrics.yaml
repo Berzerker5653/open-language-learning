@@ -1,8 +1,0 @@
-feedback_order:
-  - "input-quality"
-  - "utterance-understood"
-  - "positive-observation"
-  - "highest-value-correction"
-  - "reference-comparison"
-  - "retry"
-maximum_simultaneous_corrections_beginner: 1

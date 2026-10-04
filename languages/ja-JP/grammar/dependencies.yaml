@@ -1,3 +1,7 @@
+# Dependency map mirror (PACK-002): goal prerequisite edges must match
+# curriculum/goals.yaml exactly; concept→concept dependencies live here
+# because the 0.2 concept schema carries no prerequisites field.
+
 prerequisite_edges: []
 notes:
   - "Generated validator must compare this graph with concept and goal prerequisites and reject cycles."

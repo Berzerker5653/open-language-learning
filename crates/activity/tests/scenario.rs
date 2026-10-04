@@ -144,3 +144,63 @@ fn runtime_is_language_agnostic() {
         assert!(s.transfer_requirement_met());
     }
 }
+
+#[test]
+fn ja_seed_first_meeting_graph_runs_end_to_end() {
+    // K-06: the reference pack's populated graph must be consumable by
+    // the runtime, not only schema-valid.
+    let dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../languages/ja-JP");
+    let pack = Pack::load_dir(&dir).unwrap();
+    let scenario: PackScenario = pack
+        .instances()
+        .iter()
+        .filter(|i| i.schema == "scenario")
+        .find(|i| i.file.contains("first-meeting"))
+        .map(|i| serde_json::from_value(i.value.clone()).unwrap())
+        .expect("seed first-meeting scenario");
+    assert_eq!(scenario.nodes.len(), 3);
+    assert_eq!(scenario.transfer_variants_required, 2);
+
+    let mut s = ScenarioSession::begin(&scenario).unwrap();
+    // Wrong intent at the opening node names the pack-defined repair.
+    assert_eq!(
+        s.attempt("say-closing"),
+        StepResult::NotSatisfied {
+            recovery: vec!["ja.scenario.first-meeting.greeting.repair-repeat".into()]
+        }
+    );
+    assert!(s.enter_recovery("ja.scenario.first-meeting.greeting.repair-repeat"));
+    assert_eq!(
+        s.attempt("ask-repeat"),
+        StepResult::Advanced {
+            to: "ja.scenario.first-meeting.greeting.open".into()
+        }
+    );
+    // Support ladder: only declared levels (0/3/5) are accepted.
+    assert!(s.use_support(3));
+    assert!(!s.use_support(1));
+    // Walk the greeting chain to completion.
+    assert_eq!(
+        s.attempt("respond-greeting"),
+        StepResult::Advanced {
+            to: "ja.scenario.first-meeting.greeting.introduce".into()
+        }
+    );
+    assert_eq!(
+        s.attempt("state-first-meeting"),
+        StepResult::Advanced {
+            to: "ja.scenario.first-meeting.greeting.close".into()
+        }
+    );
+    assert_eq!(s.attempt("say-closing"), StepResult::Completed);
+    // Transfer requirement: both declared variants needed.
+    assert!(s.complete_transfer("ja.scenario.first-meeting.greeting.classmate"));
+    assert!(!s.transfer_requirement_met());
+    assert!(s.complete_transfer("ja.scenario.first-meeting.greeting.neighbour"));
+    assert!(s.transfer_requirement_met());
+
+    let out = s.finish();
+    assert_eq!(out.nodes.len(), 3);
+    assert!(out.nodes.iter().all(|n| n.succeeded));
+    assert!(out.transfer_requirement_met);
+}

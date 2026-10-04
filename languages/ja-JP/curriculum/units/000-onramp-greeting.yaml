@@ -1,23 +1,28 @@
 id: "ja.unit.onramp.greeting"
+goal_id: "ja.goal.onramp.respond-to-greeting"
 title: "Meeting and greeting"
-goal_ids: ["ja.goal.onramp.respond-to-greeting"]
-sources: ["jf-standard"]
-review_status: "review-needed"
+summary: >
+  Encounter, comprehend, and produce a first-meeting greeting routine,
+  ending in a supported scenario interaction.
+estimated_minutes: 10
 activities:
-  - id: "encounter-1"
+  - id: "ja.activity.onramp.encounter-greet"
     type: "encounter"
-    targets: ["ja.lex.greeting.konnichiwa"]
+    modality: "reading"
     support_level: 5
-  - id: "listen-1"
+    content_refs: ["ja.lex.greeting.konnichiwa"]
+  - id: "ja.activity.onramp.listen-greet"
     type: "comprehension"
-    targets: ["ja.lex.greeting.konnichiwa"]
+    modality: "listening"
     support_level: 3
-  - id: "speak-1"
-    type: "speaking"
-    targets: ["ja.lex.greeting.konnichiwa"]
+    content_refs: ["ja.lex.greeting.konnichiwa"]
+  - id: "ja.activity.onramp.speak-greet"
+    type: "retrieval"
+    modality: "speaking"
     support_level: 3
-  - id: "scenario-1"
+    content_refs: ["ja.lex.greeting.konnichiwa"]
+  - id: "ja.activity.onramp.scenario-greet"
     type: "scenario"
-    targets: ["ja.goal.onramp.respond-to-greeting"]
+    modality: "interaction"
     support_level: 2
     scenario_id: "ja.scenario.first-meeting.greeting"

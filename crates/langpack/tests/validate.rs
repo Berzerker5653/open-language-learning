@@ -44,7 +44,7 @@ fn valid_minimal_is_clean_in_both_modes() {
 fn japanese_draft_seed_validates_as_scaffold() {
     let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../languages/ja-JP");
     let pack = Pack::load_dir(&root).unwrap();
-    assert_eq!(pack.schema_version(), "0.1");
+    assert_eq!(pack.schema_version(), "0.2");
     let diags = pack.validate(Mode::Scaffold, None);
     assert_eq!(
         error_count(&diags),
@@ -59,9 +59,11 @@ fn japanese_draft_seed_validates_as_scaffold() {
         0,
         "seed draft must be warning-clean: {diags:?}"
     );
+    // The on-ramp transfer assessment is now authored (K-06); the pack
+    // no longer declares unresolved references.
     assert!(
-        codes(&diags).contains(&"declared_unresolved_reference"),
-        "draft ref must be visible: {diags:?}"
+        !codes(&diags).contains(&"declared_unresolved_reference"),
+        "migrated seed must not declare unresolved references: {diags:?}"
     );
 }
 
@@ -71,9 +73,10 @@ fn japanese_draft_seed_is_not_install_eligible() {
     let pack = Pack::load_dir(&root).unwrap();
     let diags = pack.validate(Mode::Install, None);
     let c = codes(&diags);
-    assert!(c.contains(&"declared_unresolved_reference"), "{diags:?}");
+    // Structure is install-eligible; only the owner license decision
+    // (LIC-001) blocks install.
     assert!(c.contains(&"redistribution_blocked"), "{diags:?}");
-    assert!(c.contains(&"license_inventory_missing"), "{diags:?}");
+    assert!(c.contains(&"license_pending"), "{diags:?}");
 }
 
 #[test]

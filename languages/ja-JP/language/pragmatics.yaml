@@ -1,0 +1,34 @@
+# Register labels carried over from the 0.1 pragmatics/registers.yaml.
+# These are provisional working labels; no formality numbers are claimed
+# until research validates them. Do not reduce Japanese register to a
+# binary polite/casual switch; choice depends on situation, relationship,
+# and setting.
+schema_version: "0.2"
+
+registers:
+  - id: ja.register.neutral-common
+    name: "Neutral-common (working label)"
+    description: >
+      Working label for everyday greeting and introduction routines; what
+      fits depends on the situation and relationship rather than on a
+      single polite/plain switch.
+  - id: ja.register.polite-neutral
+    name: "Polite-neutral (working label)"
+    description: >
+      Starting label for teaching purposes; a Japanese-appropriate register
+      model must be built during research tasks.
+  - id: ja.register.plain-casual
+    name: "Plain-casual (planned label)"
+    description: >
+      Planned label; usage is situation-bound and not freely
+      interchangeable with polite wording.
+
+situations:
+  - id: ja.situation.first-meeting
+    name: "An introduction where people have not met before"
+    description: >
+      First introductions; fit is shaped by relationship, setting, and
+      relative formality rather than a single politeness switch.
+    typical_registers:
+      - ja.register.polite-neutral
+      - ja.register.neutral-common

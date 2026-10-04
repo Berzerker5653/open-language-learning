@@ -1,5 +1,0 @@
-situations:
-  - id: "ja.situation.first-meeting"
-    title: "An introduction where people have not met before"
-    factors: ["relationship", "setting", "relative-formality"]
-    review_status: "draft"

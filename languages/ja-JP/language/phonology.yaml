@@ -1,0 +1,19 @@
+# Carried over from the 0.1 phonology/inventory.yaml + prosody.yaml stance:
+# status is research-required. No verified phone/prosody inventory is
+# claimed for this reference pack; populate from authoritative sources
+# during the JA-RES research tasks (see tests/fixtures/packs/
+# ja-curriculum-draft/language/phonology.yaml for the encoded inventory
+# under development). Timing unit is the mora. Features to model when
+# researched: vowel quality/length, moraic nasal, gemination, palatalized
+# sequences, rhythm, lexical pitch accent, phrase intonation.
+# No assess-automatic claims: automatic prosody scoring requires a bound
+# calibrated speech profile and reviewed utterance-context targets;
+# absolute F0 scoring is off, speaker-range normalization on, and guided
+# comparison never yields a numeric score.
+schema_version: "0.2"
+
+segments: []
+
+phonotactics: []
+
+prosody: []

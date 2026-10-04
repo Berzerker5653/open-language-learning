@@ -1,16 +1,49 @@
+# First-meeting greeting scenario graph (schema 0.2 scenario).
+# Populated 2026-10-03 (ai-assisted, draft/unreviewed) now that the
+# scenario runtime exists (SCENARIO-001); the 0.1 structural placeholder
+# deferred the graph until then. Dialogue wording requires qualified
+# human review (REVIEW-001) before promotion; prompts use the pack's
+# own draft lexicon items and working register labels.
 id: "ja.scenario.first-meeting.greeting"
-status: "draft"
-location: "neutral-first-meeting-setting"
-objective: "Answer a simple greeting appropriately, using whatever support level is available."
-target_goal_ids: ["ja.goal.onramp.respond-to-greeting"]
+goal_id: "ja.goal.onramp.respond-to-greeting"
+title: "First meeting"
+situation: "ja.situation.first-meeting"
+register: "ja.register.polite-neutral"
+nodes:
+  - id: "ja.scenario.first-meeting.greeting.open"
+    prompt: "Someone you have not met before greets you: こんにちは。Reply with a fitting short greeting."
+    expected_actions: ["respond-greeting"]
+    next: ["ja.scenario.first-meeting.greeting.introduce"]
+    recovery:
+      - id: "ja.scenario.first-meeting.greeting.repair-repeat"
+        prompt: "You did not catch the greeting. Politely ask them to repeat it."
+        expected_actions: ["ask-repeat"]
+        to: "ja.scenario.first-meeting.greeting.open"
+  - id: "ja.scenario.first-meeting.greeting.introduce"
+    prompt: "They wait, smiling. Mark that you have not met before and give your name."
+    expected_actions: ["state-first-meeting", "state-name"]
+    next: ["ja.scenario.first-meeting.greeting.close"]
+    recovery:
+      - id: "ja.scenario.first-meeting.greeting.repair-slower"
+        prompt: "You are unsure how to say your name. Ask them to say theirs slowly first."
+        expected_actions: ["ask-slowly"]
+        to: "ja.scenario.first-meeting.greeting.introduce"
+  - id: "ja.scenario.first-meeting.greeting.close"
+    prompt: "Wrap up the introduction with a polite closing."
+    expected_actions: ["say-closing"]
+    next: []
 support_ladder:
-  - 5
-  - 4
-  - 3
-  - 2
-  - 1
-  - 0
+  - support_level: 0
+    description: "No supports"
+  - support_level: 3
+    description: "Model response in Japanese script with romaji scaffold"
+  - support_level: 5
+    description: "Full suggested wording including a first-language gloss"
 transfer_variants_required: 2
-notes:
-  - "Objective wording rewritten 2026-10-03 (ai-assisted, draft/unreviewed) to replace unresolved-authorship prose."
-  - "Populate actual dialogue graph only after content/schema runtime exists and examples are reviewed."
+transfer_variants:
+  - id: "ja.scenario.first-meeting.greeting.classmate"
+    description: "First meeting with a new classmate"
+    changed_variable: "relationship"
+  - id: "ja.scenario.first-meeting.greeting.neighbour"
+    description: "Greeting a neighbour you have not met, outside the home"
+    changed_variable: "location"

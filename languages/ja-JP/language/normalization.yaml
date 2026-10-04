@@ -1,8 +1,18 @@
-transcript_comparison:
-  unicode_normalization: "NFKC"
-  ignore_optional_terminal_punctuation: true
-  normalize_whitespace: true
-  preserve_length_contrasts: true
-  preserve_small_tsu_contrast: true
-notes:
-  - "Normalization must never erase contrasts that are learning targets."
+# Transcript-comparison policy carried over from the 0.1 seed
+# (transcript_comparison block). Normalization must never erase contrasts
+# that are learning targets.
+schema_version: "0.2"
+unicode_normalization: "NFKC"
+rules:
+  - id: "ignore-optional-terminal-punctuation"
+    description: "Optional terminal punctuation is ignored when comparing learner transcripts"
+    scope: "matching"
+  - id: "normalize-whitespace"
+    description: "Whitespace runs are normalized for transcript comparison"
+    scope: "matching"
+  - id: "preserve-length-contrasts"
+    description: "Long-vowel and geminate contrasts are never normalized away; they are learning targets"
+    scope: "matching"
+  - id: "preserve-small-tsu-contrast"
+    description: "Small tsu (っ) is never folded into its full-size counterpart"
+    scope: "matching"

@@ -1,7 +1,0 @@
-learner_romanization:
-  system: "modified-hepburn"
-  purpose: "temporary pronunciation/readability scaffold"
-  default_visible_at_start: true
-  automatic_fade: true
-  user_can_reveal: true
-warning: "Canonical Japanese content remains in Japanese script; romanization is not stored as the primary linguistic form."

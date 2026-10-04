@@ -519,6 +519,19 @@
         "apps/desktop/src/onboarding.tsx",
         "apps/desktop/src/App.tsx"
       ]
+    },
+    "K-06": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/K-06.md",
+        "state/evidence/K-06/cli-validate-2026-10-03.txt",
+        "state/evidence/K-06/cargo-test-2026-10-03.txt",
+        "languages/ja-JP/activities/scenarios/first-meeting.yaml",
+        "languages/ja-JP/assessments/definitions.jsonl",
+        "crates/activity/tests/scenario.rs"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence."

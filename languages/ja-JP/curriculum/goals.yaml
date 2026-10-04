@@ -1,20 +1,25 @@
-- id: ja.goal.onramp.respond-to-greeting
-  description: Hear a simple greeting in a supported first-introduction setting and
-    reply with a fitting short response.
-  band: on-ramp
-  framework_refs: []
-  contexts:
-  - ja.situation.first-meeting
-  modalities:
-  - listening
-  - speaking
-  - interaction
-  prerequisites: []
-  required_concepts:
-  - ja.lex.greeting.konnichiwa
-  assessment_ids:
-  - ja.assess.onramp.greeting-transfer
-  transfer_required: true
-  sources:
-  - jf-standard
-  review_status: draft
+# Communicative goal graph (schema 0.2 goals). Descriptions are
+# project-authored (ai-assisted, draft status); framework alignment cites
+# the JF Standard as a reference only — no restricted descriptor text is
+# reproduced (docs/10, docs/16). Qualified human review (REVIEW-001)
+# cannot be self-certified; review_status stays draft.
+goals:
+  - id: ja.goal.onramp.respond-to-greeting
+    description: >
+      Hear a simple greeting in a supported first-introduction setting and
+      reply with a fitting short response.
+    band: on-ramp
+    framework_refs: []
+    contexts: ["ja.situation.first-meeting"]
+    modalities: [listening, speaking, interaction]
+    prerequisites: []
+    required_concepts: ["ja.lex.greeting.konnichiwa"]
+    assessment_ids: ["ja.assess.onramp.greeting-transfer"]
+    transfer_required: true
+    sources: ["jf-standard"]
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: "2026-10-03"

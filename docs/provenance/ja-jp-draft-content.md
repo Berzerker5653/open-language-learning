@@ -100,3 +100,30 @@ Rights status after replacement: content prose is now authored within
 this project by ai-assisted generation, labeled draft/unreviewed; the
 remaining gate for this pack is qualified human review (REVIEW-001) and
 the content license record in `LICENSES.yaml`, not unknown authorship.
+
+## Migration record (2026-10-03, K-06)
+
+The pack was migrated in place from schema 0.1 to 0.2 (version 0.1.0):
+0.1 packs cannot author assessments, and the scenario runtime (SCENARIO-001)
+now exists, so the deferred dialogue graph and the previously declared
+unresolved assessment `ja.assess.onramp.greeting-transfer` were authored.
+
+- Rewritten to 0.2 layout: `manifest.yaml`, `language/{identity,normalization}.yaml`,
+  new `language/{orthography,phonology,pragmatics}.yaml`,
+  `lexicon/entries.jsonl`, `grammar/concepts.jsonl`, `curriculum/goals.yaml`,
+  `curriculum/units/000-onramp-greeting.yaml`,
+  `activities/scenarios/first-meeting.yaml` (graph populated),
+  new `assessments/definitions.jsonl`, `sources.jsonl`, `licenses.jsonl`.
+- Deleted 0.1-only files with no 0.2 home: `SOURCES.yaml`, `LICENSES.yaml`,
+  `orthography/`, `phonology/`, `pragmatics/`, `speech/`. Their policy
+  narratives live in `docs/assessment/`; phonology/speech profiles stay
+  intentionally empty (research-required stance preserved).
+- All new prose (scenario prompts, ladder descriptions, transfer variants,
+  assessment rubric criteria, register/situation descriptions) is
+  ai-assisted, labeled `draft`/`review-needed`, with `generation`
+  provenance where the schema carries it and YAML comments otherwise.
+  Qualified human review (REVIEW-001) remains outstanding; the rights
+  status from the replacement record above is unchanged.
+- Install remains blocked solely by LIC-001 (`licenses.jsonl` pending
+  entries + manifest `redistribution_allowed: false`); scaffold validation
+  is 0 errors / 0 warnings.

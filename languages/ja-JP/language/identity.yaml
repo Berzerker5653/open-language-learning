@@ -1,12 +1,13 @@
-locale: "ja-JP"
-name:
-  en: "Japanese"
-  ja: "日本語"
-default_variant: "standard-japanese"
-default_script_direction: "ltr"
-segmentation:
-  whitespace_is_word_boundary: false
-  engine_tokenization_required: true
-variants:
-  - id: "standard-japanese"
-    description: "Broad standard Japanese teaching reference, Tokyo-oriented for pitch where reviewed data supports it; regional/natural variants must not be automatically treated as errors."
+schema_version: "0.2"
+target_locale: "ja-JP"
+language_name_english: "Japanese"
+language_name_native: "日本語"
+source_locales: ["en-US"]
+external_ids:
+  iso639-3: "jpn"
+notes: >
+  Broad standard Japanese teaching reference, Tokyo-oriented for pitch where
+  reviewed data supports it (reference variant "standard-japanese").
+  Segmentation: whitespace is not a word boundary; engine tokenization is
+  required. Regional/natural variants must not be automatically treated as
+  errors.
