@@ -1,0 +1,29 @@
+# K-33 automated accessibility audit evidence — 2026-10-03
+
+## apps/desktop vitest (includes src/a11y.test.tsx, 49 new assertions)
+ Test Files  8 passed (8)
+      Tests  87 passed (87)
+   Start at  21:44:00
+   Duration  196ms (transform 43%, import 40%, tests 13%, worker 4%)
+
+
+## packages/ui vitest
+      Tests  3 passed (3)
+   Start at  21:44:01
+   Duration  124ms (import 52%, transform 38%, worker 5%, tests 5%)
+
+
+## tsc --noEmit (apps/desktop)
+OK
+
+## prettier --check + eslint on changed files
+Checking formatting...
+All matched files use Prettier code style!
+eslint OK
+
+## cargo test --workspace
+53 suites ok, 0 failed
+
+## CI wiring
+37:      - run: pnpm typecheck
+38:      - run: pnpm test

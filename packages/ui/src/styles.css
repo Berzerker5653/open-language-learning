@@ -24,7 +24,7 @@
   --surface-sunk: #ece5d8;
   --ink: #241f18;
   --ink-soft: #5c544a;
-  --ink-faint: #776e60;
+  --ink-faint: #756c5d; /* AA: >=4.5 on both bg and surface (K-33 audit) */
   --line: #e2dacc;
   --line-strong: #c9beab;
 
