@@ -1,0 +1,32 @@
+id: ru.unit.everyday.identify-objects
+goal_id: ru.goal.everyday.identify-objects
+title: This is a house, table, or book
+summary: Read and write это followed by a taught object noun. Keep это unchanged and omit a present-tense verb for English is. This lesson does not depend on the greeting lesson.
+estimated_minutes: 7
+activities:
+  - id: ru.activity.everyday.read-identification
+    type: encounter-read
+    modality: reading
+    support_level: 0
+    content_refs: [ru.lex.everyday.this, ru.lex.everyday.house, ru.lex.everyday.table, ru.lex.everyday.book, ru.sent.everyday.this-is-a-book]
+  - id: ru.activity.everyday.recall-object-words
+    type: recall
+    modality: writing
+    support_level: 0
+    content_refs: [ru.lex.everyday.this, ru.lex.everyday.house, ru.lex.everyday.table, ru.lex.everyday.book]
+  - id: ru.activity.everyday.cloze-identification
+    type: cloze
+    modality: writing
+    support_level: 1
+    content_refs: [ru.sent.everyday.this-is-a-book]
+generation_contract:
+  allowed_vocab: [ru.lex.everyday.this, ru.lex.everyday.house, ru.lex.everyday.table, ru.lex.everyday.book, ru.sent.everyday.this-is-a-book]
+  allowed_grammar: [ru.grammar.everyday.present-tense-identification]
+  new_item_budget: 6
+  register: []
+  expected_interpretations: [identifying a house, identifying a table, identifying a book]
+  prohibited_ambiguity:
+    - Use это only in an identification statement, not as a noun-modifying demonstrative.
+    - Use only the taught nominative noun forms.
+  target_proficiency: A1
+  validation_method: choice

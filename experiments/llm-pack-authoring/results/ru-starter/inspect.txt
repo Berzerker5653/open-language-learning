@@ -1,0 +1,13 @@
+lts-pack/1 dev.example.ru v0.0.1 (schema 0.2)
+        1933  04acf4ece06a  assessments/definitions.jsonl
+        2104  ad02ccdae5a2  curriculum/goals.yaml
+        1661  0e1afedb33e5  curriculum/units/000-greetings.yaml
+        1554  56f10dbe51b5  curriculum/units/001-identification.yaml
+        1840  1f2efe95c942  curriculum/units/002-possession.yaml
+        2158  6c0a3a5b7cf7  grammar/concepts.jsonl
+        3063  4742d4faef94  lexicon/everyday.jsonl
+        1533  2017390e686b  lexicon/greetings.jsonl
+         117  5548458a0de4  licenses.jsonl
+         373  12b4ecc92f87  manifest.yaml
+         969  03df4a055e65  sentences/entries.jsonl
+         415  b89c971c6466  sources.jsonl

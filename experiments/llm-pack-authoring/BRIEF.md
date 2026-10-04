@@ -55,18 +55,21 @@ Required minimum content:
    segments, first segment = the derived id prefix `<p>` (must match the
    manifest `target_locale`). Kinds: `goal`, `lex`, `grammar`, `sent`,
    `assess`, `unit`, `activity`, `story`, `scenario`.
-3. **Honest statuses**: every content record uses `"status": "draft"` (or
-   `review-needed`). NEVER use `validated` or `verified` — those require a
-   human review record you cannot create.
+3. **Honest statuses**: lexicon entries, grammar concepts and sentences use
+   `"status": "draft"` (or `review-needed`); goals and assessments use
+   `review_status: "draft"`. Units and activities have NO status field —
+   the schema rejects one. NEVER use `validated` or `verified` — those
+   require a human review record you cannot create.
 4. **AI provenance**: every goal, grammar concept, lexicon entry and
    sentence carries a `generation` object:
    `{"method": "ai-assisted", "tool": "<your model name>", "date":
 "YYYY-MM-DD", "notes": "ai-drafted; needs dictionary sourcing and human review"}`.
    (The schema does NOT allow `generation` on assessments or units.)
-5. **Every content record cites `sources:`** ids that exist in
-   `sources.jsonl`. Do not cite dictionaries you did not actually consult;
-   if your knowledge is your own training, use the single "original"
-   source entry pattern from the example.
+5. **Goals, grammar concepts, lexicon entries and sentences cite `sources:`**
+   ids that exist in `sources.jsonl` (units, activities and assessments have
+   no `sources` field — the schema rejects one). Do not cite dictionaries
+   you did not actually consult; if your knowledge is your own training,
+   use the single "original" source entry pattern from the example.
 6. **References must resolve**: every `content_refs`, `required_concepts`,
    `assessment_ids`, `allowed_vocab`, `allowed_grammar`, `prerequisites`
    value must be an id that exists in the pack.
@@ -155,30 +158,14 @@ license:
 
 ### sources.jsonl
 
-```json
-{
-  "id": "template-original",
-  "title": "Original example content authored for this template pack",
-  "url": "https://github.com/Berzerker5653/open-language-learning/tree/main/tools/pack-templates/example-pack",
-  "license": {
-    "spdx": "CC0-1.0",
-    "text_url": "https://creativecommons.org/publicdomain/zero/1.0/"
-  },
-  "access": { "mode": "public" },
-  "use": { "redistribution_allowed": true, "attribution_required": false },
-  "retrieved": "2026-10-03"
-}
+```jsonl
+{"id":"template-original","title":"Original example content authored for this template pack","url":"https://github.com/Berzerker5653/open-language-learning/tree/main/tools/pack-templates/example-pack","license":{"spdx":"CC0-1.0","text_url":"https://creativecommons.org/publicdomain/zero/1.0/"},"access":{"mode":"public"},"use":{"redistribution_allowed":true,"attribution_required":false},"retrieved":"2026-10-03"}
 ```
 
 ### licenses.jsonl
 
-```json
-{
-  "id": "lic-template-original",
-  "scope": { "kind": "pack-original" },
-  "license": { "spdx": "CC0-1.0" },
-  "redistribution_allowed": true
-}
+```jsonl
+{"id":"lic-template-original","scope":{"kind":"pack-original"},"license":{"spdx":"CC0-1.0"},"redistribution_allowed":true}
 ```
 
 ### curriculum/goals.yaml
@@ -243,25 +230,13 @@ generation_contract:
 
 ### grammar/concepts.jsonl
 
-```json
-{
-  "id": "xx.grammar.demo.word-order",
-  "name": "Basic word order",
-  "category": "syntax",
-  "status": "draft",
-  "definition": "Example language places the greeting before the addressee (tola mara = hello friend). Placeholder rule for the template; replace with a sourced rule.",
-  "sources": ["template-original"],
-  "generation": {
-    "method": "human",
-    "date": "2026-10-03",
-    "notes": "placeholder template content; replace with sourced content"
-  }
-}
+```jsonl
+{"id":"xx.grammar.demo.word-order","name":"Basic word order","category":"syntax","status":"draft","definition":"Example language places the greeting before the addressee (tola mara = hello friend). Placeholder rule for the template; replace with a sourced rule.","sources":["template-original"],"generation":{"method":"human","date":"2026-10-03","notes":"placeholder template content; replace with sourced content"}}
 ```
 
 ### lexicon/entries.jsonl
 
-```json
+```jsonl
 {"id":"xx.lex.demo.tola","status":"draft","forms":[{"text":"tola","is_primary":true}],"readings":[{"text":"tola","script":"latin"}],"glosses":{"en-US":["hello"]},"sources":["template-original"],"generation":{"method":"human","date":"2026-10-03","notes":"placeholder template content; replace with sourced content"}}
 {"id":"xx.lex.demo.mara","status":"draft","forms":[{"text":"mara","is_primary":true}],"readings":[{"text":"mara","script":"latin"}],"glosses":{"en-US":["friend"]},"sources":["template-original"],"generation":{"method":"human","date":"2026-10-03","notes":"placeholder template content; replace with sourced content"}}
 {"id":"xx.lex.demo.shina","status":"draft","forms":[{"text":"shina","is_primary":true}],"readings":[{"text":"shina","script":"latin"}],"glosses":{"en-US":["good day"]},"sources":["template-original"],"generation":{"method":"human","date":"2026-10-03","notes":"placeholder template content; replace with sourced content"}}
@@ -269,33 +244,14 @@ generation_contract:
 
 ### sentences/entries.jsonl
 
-```json
-{
-  "id": "xx.sent.demo.greet-friend",
-  "status": "draft",
-  "text": "tola mara",
-  "gloss": "hello, friend",
-  "cloze_targets": ["tola"],
-  "sources": ["template-original"],
-  "generation": {
-    "method": "human",
-    "date": "2026-10-03",
-    "notes": "placeholder template content; replace with sourced content"
-  }
-}
+```jsonl
+{"id":"xx.sent.demo.greet-friend","status":"draft","text":"tola mara","gloss":"hello, friend","cloze_targets":["tola"],"sources":["template-original"],"generation":{"method":"human","date":"2026-10-03","notes":"placeholder template content; replace with sourced content"}}
 ```
 
 ### assessments/definitions.jsonl
 
-```json
-{
-  "id": "xx.assess.demo.greet",
-  "goal_id": "xx.goal.demo.greet",
-  "kind": "recall",
-  "modality": "reading",
-  "rubric": { "scale": "observed", "criteria": ["greeting matched to situation"] },
-  "review_status": "draft"
-}
+```jsonl
+{"id":"xx.assess.demo.greet","goal_id":"xx.goal.demo.greet","kind":"recall","modality":"reading","rubric":{"scale":"observed","criteria":["greeting matched to situation"]},"review_status":"draft"}
 ```
 
 ## Success criteria (how you will be graded)

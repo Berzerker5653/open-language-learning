@@ -1,0 +1,33 @@
+id: ru.unit.everyday.express-possession
+goal_id: ru.goal.everyday.express-possession
+title: My and our objects and drinks
+summary: Reuse the identification pattern and object nouns. Add мой/моя, наш/наша, чай, and вода. Choose possessive forms by the noun's gender. Only singular nominative phrases are taught.
+estimated_minutes: 8
+activities:
+  - id: ru.activity.everyday.read-possession
+    type: encounter-read
+    modality: reading
+    support_level: 0
+    content_refs: [ru.lex.everyday.this, ru.lex.everyday.house, ru.lex.everyday.table, ru.lex.everyday.book, ru.lex.everyday.my, ru.lex.everyday.our, ru.lex.everyday.tea, ru.lex.everyday.water, ru.sent.everyday.this-is-our-water]
+  - id: ru.activity.everyday.recall-possessive-forms
+    type: recall
+    modality: writing
+    support_level: 0
+    content_refs: [ru.lex.everyday.my, ru.lex.everyday.our, ru.lex.everyday.tea, ru.lex.everyday.water]
+  - id: ru.activity.everyday.cloze-possession
+    type: cloze
+    modality: writing
+    support_level: 1
+    content_refs: [ru.sent.everyday.this-is-our-water]
+generation_contract:
+  allowed_vocab: [ru.lex.everyday.this, ru.lex.everyday.house, ru.lex.everyday.table, ru.lex.everyday.book, ru.lex.everyday.my, ru.lex.everyday.our, ru.lex.everyday.tea, ru.lex.everyday.water, ru.sent.everyday.this-is-our-water]
+  allowed_grammar: [ru.grammar.everyday.present-tense-identification, ru.grammar.everyday.possessive-gender-agreement]
+  new_item_budget: 6
+  register: []
+  expected_interpretations: [identifying something as mine, identifying something as ours]
+  prohibited_ambiguity:
+    - Possessive agreement follows the noun's gender, not the owner's gender.
+    - Do not introduce neuter, plural, or oblique-case forms.
+    - Keep my and our distinct in meaning.
+  target_proficiency: A1
+  validation_method: choice

@@ -1,0 +1,50 @@
+goals:
+  - id: ru.goal.greetings.polite-exchanges
+    description: Write a neutral daytime greeting, a thank-you, and a reply to thanks using the taught expressions.
+    band: on-ramp
+    modalities: [reading, writing]
+    prerequisites: []
+    required_concepts: [ru.grammar.greetings.adjective-noun-agreement]
+    assessment_ids: [ru.assess.greetings.polite-exchanges]
+    transfer_required: false
+    sources: [ru-original]
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: GPT-6 Astra Pro
+      date: '2026-10-04'
+      notes: ai-drafted; needs dictionary sourcing and human review
+  - id: ru.goal.everyday.identify-objects
+    description: Write «Это ...» statements identifying a house, a table, or a book, without inserting a present-tense word for 'is'.
+    band: A1
+    modalities: [reading, writing]
+    prerequisites: []
+    required_concepts: [ru.grammar.everyday.present-tense-identification]
+    assessment_ids: [ru.assess.everyday.identify-objects]
+    transfer_required: false
+    sources: [ru-original]
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: GPT-6 Astra Pro
+      date: '2026-10-04'
+      notes: ai-drafted; needs dictionary sourcing and human review
+  - id: ru.goal.everyday.express-possession
+    description: Write «Это ...» statements for the taught objects and drinks using the masculine and feminine singular forms of 'my' and 'our' in agreement with the noun.
+    band: A1
+    modalities: [reading, writing]
+    prerequisites:
+      - target: ru.goal.everyday.identify-objects
+        dimension: production-writing
+        required_state: independent
+        strength: hard
+    required_concepts: [ru.grammar.everyday.present-tense-identification, ru.grammar.everyday.possessive-gender-agreement]
+    assessment_ids: [ru.assess.everyday.express-possession]
+    transfer_required: false
+    sources: [ru-original]
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: GPT-6 Astra Pro
+      date: '2026-10-04'
+      notes: ai-drafted; needs dictionary sourcing and human review

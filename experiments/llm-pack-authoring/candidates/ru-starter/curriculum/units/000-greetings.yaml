@@ -1,0 +1,32 @@
+id: ru.unit.greetings.polite-exchanges
+goal_id: ru.goal.greetings.polite-exchanges
+title: Daytime greetings and thanks
+summary: Read and write Добрый день, Спасибо, and Пожалуйста. Treat пожалуйста only as a reply to thanks. Notice adjective-noun agreement inside the fixed greeting.
+estimated_minutes: 6
+activities:
+  - id: ru.activity.greetings.read-polite-exchanges
+    type: encounter-read
+    modality: reading
+    support_level: 0
+    content_refs: [ru.lex.greetings.good, ru.lex.greetings.day, ru.lex.greetings.thanks, ru.lex.greetings.you-are-welcome, ru.sent.greetings.good-afternoon]
+  - id: ru.activity.greetings.recall-polite-exchanges
+    type: recall
+    modality: writing
+    support_level: 0
+    content_refs: [ru.lex.greetings.good, ru.lex.greetings.day, ru.lex.greetings.thanks, ru.lex.greetings.you-are-welcome]
+  - id: ru.activity.greetings.cloze-good-afternoon
+    type: cloze
+    modality: writing
+    support_level: 1
+    content_refs: [ru.sent.greetings.good-afternoon]
+generation_contract:
+  allowed_vocab: [ru.lex.greetings.good, ru.lex.greetings.day, ru.lex.greetings.thanks, ru.lex.greetings.you-are-welcome, ru.sent.greetings.good-afternoon]
+  allowed_grammar: [ru.grammar.greetings.adjective-noun-agreement]
+  new_item_budget: 6
+  register: []
+  expected_interpretations: [a neutral daytime greeting, expressing thanks, replying to thanks]
+  prohibited_ambiguity:
+    - Use пожалуйста only as a reply to thanks, not as a request marker.
+    - Use Добрый день as a daytime greeting, not as a wish about a future day.
+  target_proficiency: on-ramp
+  validation_method: choice
