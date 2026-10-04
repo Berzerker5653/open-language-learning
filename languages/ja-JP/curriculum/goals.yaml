@@ -823,3 +823,35 @@ goals:
       tool: omp
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
+  - id: ja.goal.a2.food-cooking
+    description: 'Describe food, tastes, and simple recipes; order and talk about
+      meals using opinion and nominalization forms.'
+    band: A2
+    framework_refs: []
+    contexts:
+    - ja.situation.restaurant
+    modalities:
+    - listening
+    - speaking
+    - reading
+    - writing
+    prerequisites:
+    - target: ja.goal.a2.city-services
+      dimension: grammar-controlled
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.lex.food.shio
+    - ja.lex.food.oishii
+    assessment_ids:
+    - ja.assess.food-cooking
+    transfer_required: true
+    sources:
+    - jf-standard
+    - ai-drafted-extension
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next-iq3_s
+      date: '2026-10-04'

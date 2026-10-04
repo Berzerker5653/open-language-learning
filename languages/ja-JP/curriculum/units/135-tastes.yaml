@@ -1,0 +1,63 @@
+# ai-assisted draft unit (Mode B A2 food-cooking); content refs are pack data; qualified review pending.
+id: ja.unit.food-tastes
+goal_id: ja.goal.a2.food-cooking
+title: Tastes
+summary: Sweet, salty, sour, flavor.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.food.amai
+  - ja.lex.food.shoppai
+  - ja.lex.food.suppai
+  - ja.lex.food.ajiwai
+  - ja.lex.food.nomimono
+  - ja.lex.food-drink.mizu
+  allowed_grammar:
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.food-tastes-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.food.amai
+  - ja.lex.food.shoppai
+  - ja.lex.food.suppai
+  - ja.lex.food.ajiwai
+  - ja.lex.food.nomimono
+  - ja.lex.food-drink.mizu
+- id: ja.activity.food-tastes-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.food.amai
+  - ja.lex.food.shoppai
+  - ja.lex.food.suppai
+  - ja.lex.food.ajiwai
+  - ja.lex.food.nomimono
+  - ja.lex.food-drink.mizu
+- id: ja.activity.food-tastes-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.food.amai
+  - ja.lex.food.shoppai
+  - ja.lex.food.suppai
+  - ja.lex.food.ajiwai
+  - ja.lex.food.nomimono
+  - ja.lex.food-drink.mizu
+- id: ja.activity.food-tastes-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.food.amai
+  - ja.lex.food.shoppai
+  - ja.lex.food.suppai
+  - ja.lex.food.ajiwai
+  - ja.lex.food.nomimono
+  - ja.lex.food-drink.mizu

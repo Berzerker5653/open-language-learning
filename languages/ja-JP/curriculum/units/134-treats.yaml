@@ -1,0 +1,75 @@
+# ai-assisted draft unit (Mode B A2 food-cooking); content refs are pack data; qualified review pending.
+id: ja.unit.food-treats
+goal_id: ja.goal.a2.food-cooking
+title: Treats
+summary: Cookie, cake, pudding, rice ball, mochi.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.food.cookie
+  - ja.lex.food.keeki
+  - ja.lex.food.onigiri
+  - ja.lex.food.mochi
+  - ja.lex.food.aji
+  - ja.lex.food.oishii
+  - ja.sent.tasty-food
+  allowed_grammar:
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.food-treats-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.food.cookie
+  - ja.lex.food.keeki
+  - ja.lex.food.onigiri
+  - ja.lex.food.mochi
+  - ja.lex.food.aji
+  - ja.lex.food.oishii
+  - ja.sent.tasty-food
+  - ja.sent.tasty-food
+- id: ja.activity.food-treats-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.food.cookie
+  - ja.lex.food.keeki
+  - ja.lex.food.onigiri
+  - ja.lex.food.mochi
+  - ja.lex.food.aji
+  - ja.lex.food.oishii
+  - ja.sent.tasty-food
+- id: ja.activity.food-treats-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.food.cookie
+  - ja.lex.food.keeki
+  - ja.lex.food.onigiri
+  - ja.lex.food.mochi
+  - ja.lex.food.aji
+  - ja.lex.food.oishii
+  - ja.sent.tasty-food
+- id: ja.activity.food-treats-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.food.cookie
+  - ja.lex.food.keeki
+  - ja.lex.food.onigiri
+  - ja.lex.food.mochi
+  - ja.lex.food.aji
+  - ja.lex.food.oishii
+  - ja.sent.tasty-food
+- id: ja.activity.food-treats-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.tasty-food

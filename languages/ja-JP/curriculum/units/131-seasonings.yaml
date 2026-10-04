@@ -1,0 +1,63 @@
+# ai-assisted draft unit (Mode B A2 food-cooking); content refs are pack data; qualified review pending.
+id: ja.unit.food-seasonings
+goal_id: ja.goal.a2.food-cooking
+title: Seasonings
+summary: Salt, sugar, vinegar, broth, soy sauce.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.food.shio
+  - ja.lex.food.satou
+  - ja.lex.food.su
+  - ja.lex.food.dashi
+  - ja.lex.food.shouyu
+  - ja.lex.health.sukoshi
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.food-seasonings-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.food.shio
+  - ja.lex.food.satou
+  - ja.lex.food.su
+  - ja.lex.food.dashi
+  - ja.lex.food.shouyu
+  - ja.lex.health.sukoshi
+- id: ja.activity.food-seasonings-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.food.shio
+  - ja.lex.food.satou
+  - ja.lex.food.su
+  - ja.lex.food.dashi
+  - ja.lex.food.shouyu
+  - ja.lex.health.sukoshi
+- id: ja.activity.food-seasonings-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.food.shio
+  - ja.lex.food.satou
+  - ja.lex.food.su
+  - ja.lex.food.dashi
+  - ja.lex.food.shouyu
+  - ja.lex.health.sukoshi
+- id: ja.activity.food-seasonings-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.food.shio
+  - ja.lex.food.satou
+  - ja.lex.food.su
+  - ja.lex.food.dashi
+  - ja.lex.food.shouyu
+  - ja.lex.health.sukoshi

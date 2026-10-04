@@ -1,0 +1,69 @@
+# ai-assisted draft unit (Mode B A2 food-cooking); content refs are pack data; qualified review pending.
+id: ja.unit.food-food-talk
+goal_id: ja.goal.a2.food-cooking
+title: Talking about food
+summary: Food, drink, rice bowl, spoon, opinion.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.food.chawan
+  - ja.lex.food.renge
+  - ja.lex.food.hamburger
+  - ja.lex.food.bento
+  - ja.lex.food.kudamono
+  - ja.grammar.verb.to-omou
+  - ja.grammar.verb.koto-no-noun
+  allowed_grammar:
+  - ja.grammar.verb.to-omou
+  - ja.grammar.verb.koto-no-noun
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.food-food-talk-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.food.chawan
+  - ja.lex.food.renge
+  - ja.lex.food.hamburger
+  - ja.lex.food.bento
+  - ja.lex.food.kudamono
+  - ja.grammar.verb.to-omou
+  - ja.grammar.verb.koto-no-noun
+- id: ja.activity.food-food-talk-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.food.chawan
+  - ja.lex.food.renge
+  - ja.lex.food.hamburger
+  - ja.lex.food.bento
+  - ja.lex.food.kudamono
+  - ja.grammar.verb.to-omou
+  - ja.grammar.verb.koto-no-noun
+- id: ja.activity.food-food-talk-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.food.chawan
+  - ja.lex.food.renge
+  - ja.lex.food.hamburger
+  - ja.lex.food.bento
+  - ja.lex.food.kudamono
+  - ja.grammar.verb.to-omou
+  - ja.grammar.verb.koto-no-noun
+- id: ja.activity.food-food-talk-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.food.chawan
+  - ja.lex.food.renge
+  - ja.lex.food.hamburger
+  - ja.lex.food.bento
+  - ja.lex.food.kudamono
+  - ja.grammar.verb.to-omou
+  - ja.grammar.verb.koto-no-noun

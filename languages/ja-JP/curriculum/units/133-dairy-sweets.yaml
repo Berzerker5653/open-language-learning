@@ -1,0 +1,63 @@
+# ai-assisted draft unit (Mode B A2 food-cooking); content refs are pack data; qualified review pending.
+id: ja.unit.food-dairy-sweets
+goal_id: ja.goal.a2.food-cooking
+title: Dairy and sweets
+summary: Milk, cheese, butter, yogurt, pudding.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.food.gyuunyuu
+  - ja.lex.food.chiizu
+  - ja.lex.food.bataa
+  - ja.lex.food.yogurt
+  - ja.lex.food.purin
+  - ja.lex.food-drink.gohan
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.food-dairy-sweets-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.food.gyuunyuu
+  - ja.lex.food.chiizu
+  - ja.lex.food.bataa
+  - ja.lex.food.yogurt
+  - ja.lex.food.purin
+  - ja.lex.food-drink.gohan
+- id: ja.activity.food-dairy-sweets-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.food.gyuunyuu
+  - ja.lex.food.chiizu
+  - ja.lex.food.bataa
+  - ja.lex.food.yogurt
+  - ja.lex.food.purin
+  - ja.lex.food-drink.gohan
+- id: ja.activity.food-dairy-sweets-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.food.gyuunyuu
+  - ja.lex.food.chiizu
+  - ja.lex.food.bataa
+  - ja.lex.food.yogurt
+  - ja.lex.food.purin
+  - ja.lex.food-drink.gohan
+- id: ja.activity.food-dairy-sweets-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.food.gyuunyuu
+  - ja.lex.food.chiizu
+  - ja.lex.food.bataa
+  - ja.lex.food.yogurt
+  - ja.lex.food.purin
+  - ja.lex.food-drink.gohan

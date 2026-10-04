@@ -389,3 +389,9 @@ words, 12 grammar, 44 sentences, 6 assessments. Next: A2 120-219.
 Goal `ja.goal.a2.city-services` (prereq a1.past-stories, mirrored), 10
 units, 50-word `lexicon/city.jsonl`, 2 grammar (`verb.te-ichidan`,
 `verb.nakereba-naranai`), 8 sentences, 1 assessment. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 8: A2 units 130-139 (food-cooking)
+
+Goal `ja.goal.a2.food-cooking` (prereq city-services, mirrored), 10
+units, 50-word `lexicon/food.jsonl`, 2 grammar (`verb.to-omou`,
+`verb.koto-no-noun`), 6 sentences, 1 assessment. Score: **7/7**.
