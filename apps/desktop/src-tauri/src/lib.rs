@@ -2603,6 +2603,29 @@ fn practice_submit_at(
     answer: Option<String>,
     reveal_reading: bool,
 ) -> Result<PracticeGrade, String> {
+    practice_submit_inner(
+        data,
+        profile_id,
+        content_id,
+        modality,
+        choice_index,
+        answer,
+        reveal_reading,
+        None,
+    )
+}
+/// `diagnostic = Some(assessment_id)` tags the evidence Diagnostic and
+/// attributes it to the assessment (K-15); otherwise formative practice.
+fn practice_submit_inner(
+    data: &Path,
+    profile_id: &str,
+    content_id: &str,
+    modality: &str,
+    choice_index: usize,
+    answer: Option<String>,
+    reveal_reading: bool,
+    diagnostic: Option<&str>,
+) -> Result<PracticeGrade, String> {
     let (task, correct_choice, reveals) =
         practice_build(data, profile_id, content_id, modality, reveal_reading)?;
     let correct = if task.typed {
@@ -2641,6 +2664,8 @@ fn practice_submit_at(
         lts_domain::ActivityModality::PhonologicalDiscrimination => content_id,
         _ => "ja.activity.demo.mc-recall",
     };
+    // K-15: a diagnostic attempt is attributed to the pack assessment.
+    let activity_id = diagnostic.unwrap_or(activity_id);
     let event = lts_learner_model::AttemptDraft::new(
         vec![lts_domain::ContentId::parse(content_id).map_err(|_| "invalid item id")?],
         dim,
@@ -2648,6 +2673,11 @@ fn practice_submit_at(
         pack_id,
         &version,
     )
+    .assessment_kind(if diagnostic.is_some() {
+        lts_domain::AssessmentKind::Diagnostic
+    } else {
+        lts_domain::AssessmentKind::Formative
+    })
     .support(
         // A reading revealed against the auto-fade rule is a form cue:
         // support level 3, with the actual reveal actions recorded
@@ -2699,6 +2729,139 @@ fn practice_submit_at(
         correct,
         correct_choice,
     })
+}
+
+// ---------------------------------------------------------------------------
+// K-15: placement / diagnostic assessment (docs/03 §10). Packs declare
+// goal-linked assessments; the placement pass runs one low-stakes task
+// per assessment against its goal's unit content. Evidence is tagged
+// Diagnostic and flows through normal mastery derivation, so correct
+// answers raise state and known foundations unlock via the existing
+// prerequisite gating. Constructs without a low-stakes auto-runner
+// (speaking/writing/interaction) are skipped, never fabricated.
+// ---------------------------------------------------------------------------
+
+#[derive(serde::Deserialize)]
+struct PackAssessment {
+    id: String,
+    goal_id: String,
+    #[serde(default)]
+    modality: String,
+}
+
+#[derive(serde::Deserialize)]
+struct PackUnit {
+    goal_id: String,
+    #[serde(default)]
+    activities: Vec<PackUnitActivity>,
+}
+
+#[derive(serde::Deserialize)]
+struct PackUnitActivity {
+    modality: String,
+    #[serde(default)]
+    content_refs: Vec<String>,
+}
+
+#[derive(Serialize)]
+struct PlacementItem {
+    assessment_id: String,
+    goal_id: String,
+    content_id: String,
+    /// Kebab-case practice-runner dimension (recall-meaning /
+    /// comprehension-listening): the low-stakes auto-runners.
+    modality: String,
+}
+
+fn placement_plan_at(data: &Path, profile_id: &str) -> Result<Vec<PlacementItem>, String> {
+    let active = packs::active_pack(data, profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    let root = data.join("packs").join(pack_id).join(&version);
+    let text =
+        std::fs::read_to_string(root.join("assessments/definitions.jsonl")).unwrap_or_default();
+    let mut assessments: Vec<PackAssessment> = Vec::new();
+    for line in text.lines() {
+        if line.trim().is_empty() {
+            continue;
+        }
+        assessments.push(serde_json::from_str(line).map_err(|e| format!("assessment: {e}"))?);
+    }
+    let mut units: Vec<PackUnit> = Vec::new();
+    let units_dir = root.join("curriculum/units");
+    if let Ok(rd) = std::fs::read_dir(&units_dir) {
+        let mut paths: Vec<_> = rd.filter_map(|e| e.ok().map(|e| e.path())).collect();
+        paths.sort();
+        for p in paths {
+            if p.extension().and_then(|e| e.to_str()) != Some("yaml") {
+                continue;
+            }
+            let Ok(t) = std::fs::read_to_string(&p) else {
+                continue;
+            };
+            if let Ok(u) = serde_yaml::from_str::<PackUnit>(&t) {
+                units.push(u);
+            }
+        }
+    }
+    let mut items = Vec::new();
+    for a in assessments {
+        let runner = match a.modality.as_str() {
+            "reading" => "recall-meaning",
+            "listening" => "comprehension-listening",
+            // No low-stakes auto-runner for these constructs yet.
+            _ => continue,
+        };
+        let Some(unit) = units.iter().find(|u| u.goal_id == a.goal_id) else {
+            continue;
+        };
+        let Some(content) = unit
+            .activities
+            .iter()
+            .find(|ac| ac.modality == a.modality && !ac.content_refs.is_empty())
+            .or_else(|| {
+                unit.activities
+                    .iter()
+                    .find(|ac| !ac.content_refs.is_empty())
+            })
+            .and_then(|ac| ac.content_refs.first())
+        else {
+            continue;
+        };
+        items.push(PlacementItem {
+            assessment_id: a.id,
+            goal_id: a.goal_id,
+            content_id: content.clone(),
+            modality: runner.to_string(),
+        });
+    }
+    Ok(items)
+}
+
+#[tauri::command]
+fn placement_plan(profile_id: String) -> Result<Vec<PlacementItem>, String> {
+    placement_plan_at(&data_dir(), &profile_id)
+}
+
+#[tauri::command]
+fn placement_submit(
+    profile_id: String,
+    assessment_id: String,
+    content_id: String,
+    modality: String,
+    choice_index: usize,
+) -> Result<PracticeGrade, String> {
+    practice_submit_inner(
+        &data_dir(),
+        &profile_id,
+        &content_id,
+        &modality,
+        choice_index,
+        None,
+        false,
+        Some(&assessment_id),
+    )
 }
 
 // ---------------------------------------------------------------------------
@@ -3009,6 +3172,8 @@ pub fn run() {
             writing_submit,
             practice_task,
             practice_submit,
+            placement_plan,
+            placement_submit,
             scenario_list,
             scenario_start,
             scenario_attempt,
@@ -4466,6 +4631,98 @@ mod tests {
             resume_profile_at(data, "nope").unwrap_err(),
             "unknown profile",
             "unknown profile never resumes"
+        );
+    }
+
+    #[test]
+    fn placement_records_diagnostic_evidence_and_unlocks() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+
+        // One low-stakes task per pack assessment, built from the
+        // assessment's goal unit content.
+        let plan = placement_plan_at(data, &p.id).unwrap();
+        assert_eq!(plan.len(), 2, "both ja-demo assessments plan tasks");
+        let greet = plan
+            .iter()
+            .find(|i| i.assessment_id == "ja.assess.demo.greet")
+            .unwrap();
+        assert_eq!(greet.content_id, "ja.lex.demo.konnichiwa");
+        assert_eq!(greet.modality, "recall-meaning");
+
+        // The greet goal's hard prereq (konnichiwa recall-meaning
+        // independent) gates progression before any diagnosis.
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let derived = derive_pairs(&store, &p.id, &rfc3339_utc(1_760_000_000)).unwrap();
+        assert!(
+            !progression_items(data, &store, &p.id, &derived)
+                .unwrap()
+                .iter()
+                .any(|i| i.content_id == "ja.grammar.demo.greetings"),
+            "greet goal locked before diagnosis"
+        );
+
+        // Two correct support-0 diagnostic answers reach `independent`
+        // through the normal derivation path (policy fixture
+        // known-diagnostic-reaches-independent).
+        for _ in 0..2 {
+            let (t, correct_choice, _) =
+                practice_build(data, &p.id, &greet.content_id, &greet.modality, false).unwrap();
+            let idx = t.choices.iter().position(|c| *c == correct_choice).unwrap();
+            let g = practice_submit_inner(
+                data,
+                &p.id,
+                &greet.content_id,
+                &greet.modality,
+                idx,
+                None,
+                false,
+                Some(&greet.assessment_id),
+            )
+            .unwrap();
+            assert!(g.correct);
+        }
+
+        // Evidence is tagged Diagnostic and attributed to the assessment.
+        let events = store.evidence_for_profile(&p.id).unwrap();
+        let diags: Vec<_> = events
+            .iter()
+            .filter(|e| {
+                e.assessment_kind == Some(lts_domain::AssessmentKind::Diagnostic)
+                    && e.targets
+                        .iter()
+                        .any(|t| t.as_str() == "ja.lex.demo.konnichiwa")
+            })
+            .collect();
+        assert_eq!(diags.len(), 2, "both attempts recorded as diagnostic");
+        assert!(
+            diags
+                .iter()
+                .all(|e| e.activity_id.as_str() == "ja.assess.demo.greet")
+        );
+
+        // Known foundation unlocked: state rose and the gated goal now
+        // enters the progression stream.
+        let derived = derive_pairs(&store, &p.id, &rfc3339_utc(1_760_000_000)).unwrap();
+        assert_eq!(
+            derived
+                .iter()
+                .find(|d| d.content_id == "ja.lex.demo.konnichiwa"
+                    && d.dimension == lts_domain::ActivityModality::RecallMeaning)
+                .unwrap()
+                .state,
+            lts_domain::MasteryState::Independent,
+            "diagnostic unlocks known foundations"
+        );
+        assert!(
+            progression_items(data, &store, &p.id, &derived)
+                .unwrap()
+                .iter()
+                .any(|i| i.content_id == "ja.grammar.demo.greetings"),
+            "greet goal unlocks after diagnosis"
         );
     }
 }

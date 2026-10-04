@@ -94,6 +94,7 @@ export function App() {
     | "shadowing"
     | "reading"
     | "words"
+    | "placement"
   >("practice");
   const [notice, setNotice] = useState<PrivacyNotice>({
     title: "Your data stays on this device",
@@ -152,6 +153,17 @@ export function App() {
     null,
   );
   const [practiceAudioError, setPracticeAudioError] = useState<string | null>(null);
+  const [placementItems, setPlacementItems] = useState<
+    { assessment_id: string; goal_id: string; content_id: string; modality: string }[]
+  >([]);
+  const [placementIdx, setPlacementIdx] = useState(0);
+  const [placementTask, setPlacementTask] = useState<PracticeTaskView | null>(null);
+  const [placementGraded, setPlacementGraded] = useState(false);
+  const [placementCorrect, setPlacementCorrect] = useState(false);
+  const [placementCorrectChoice, setPlacementCorrectChoice] = useState("");
+  const [placementHits, setPlacementHits] = useState(0);
+  const [placementFinished, setPlacementFinished] = useState(false);
+  const [placementError, setPlacementError] = useState<string | null>(null);
 
   const [practiceDraft, setPracticeDraft] = useState("");
   // The sticky header hides content when the page is scrolled; reset the
@@ -541,6 +553,94 @@ export function App() {
     setPracticeRevealed(false);
     if (inv && profileId) {
       setPlan((await inv("practice_plan", { profileId, minutes: budget })) as SessionPlan);
+    }
+  }
+
+  // K-15: placement — low-stakes diagnosis per pack assessment. Each
+  // goal gets two support-0 questions (two correct diagnostic answers
+  // across prompts reach `independent`, so known foundations unlock via
+  // prerequisite gating). Evidence is tagged Diagnostic natively.
+  async function openPlacement() {
+    setRoute("placement");
+    setPlacementFinished(false);
+    setPlacementGraded(false);
+    setPlacementHits(0);
+    setPlacementError(null);
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    try {
+      const planned = (await inv("placement_plan", { profileId })) as typeof placementItems;
+      const seq = planned.flatMap((p) => [p, p]);
+      setPlacementItems(seq);
+      setPlacementIdx(0);
+      const first = seq[0];
+      if (first) {
+        setPlacementTask(
+          (await inv("practice_task", {
+            profileId,
+            contentId: first.content_id,
+            modality: first.modality,
+            revealReading: false,
+          })) as PracticeTaskView,
+        );
+      } else {
+        setPlacementTask(null);
+        setPlacementFinished(true);
+      }
+    } catch (e) {
+      setPlacementError(String(e));
+    }
+  }
+
+  async function answerPlacement(index: number) {
+    const inv = detectInvoke();
+    const item = placementItems[placementIdx];
+    if (!inv || !profileId || !item) return;
+    try {
+      const g = (await inv("placement_submit", {
+        profileId,
+        assessmentId: item.assessment_id,
+        contentId: item.content_id,
+        modality: item.modality,
+        choiceIndex: index,
+      })) as { correct: boolean; correct_choice: string };
+      if (g.correct) setPlacementHits((c) => c + 1);
+      setPlacementCorrect(g.correct);
+      setPlacementCorrectChoice(g.correct_choice);
+      setPlacementGraded(true);
+    } catch (e) {
+      setPlacementError(String(e));
+    }
+  }
+
+  async function nextPlacement() {
+    const inv = detectInvoke();
+    const next = placementIdx + 1;
+    setPlacementGraded(false);
+    if (next >= placementItems.length) {
+      setPlacementFinished(true);
+      setPlacementTask(null);
+      return;
+    }
+    const item = placementItems[next];
+    if (!item) {
+      setPlacementFinished(true);
+      setPlacementTask(null);
+      return;
+    }
+    setPlacementIdx(next);
+    if (!inv || !profileId) return;
+    try {
+      setPlacementTask(
+        (await inv("practice_task", {
+          profileId,
+          contentId: item.content_id,
+          modality: item.modality,
+          revealReading: false,
+        })) as PracticeTaskView,
+      );
+    } catch (e) {
+      setPlacementError(String(e));
     }
   }
 
@@ -1089,6 +1189,14 @@ export function App() {
           >
             My Words
           </button>
+          <button
+            type="button"
+            className="tab"
+            aria-current={route === "placement" ? "page" : undefined}
+            onClick={() => void openPlacement()}
+          >
+            Placement
+          </button>
         </nav>
       }
     >
@@ -1385,6 +1493,55 @@ export function App() {
                 </li>
               ))}
             </ul>
+          )}
+        </section>
+      ) : route === "placement" ? (
+        <section aria-label="Placement">
+          <h2>Placement</h2>
+          <p className="empty">
+            Low-stakes checks on what you may already know — two quick questions per goal. Correct
+            answers mark known foundations, and practice skips ahead automatically.
+          </p>
+          {placementError && (
+            <p role="alert" className="alert">
+              {placementError}
+            </p>
+          )}
+          {placementFinished ? (
+            <div className="field">
+              <p>
+                Placement complete: {placementHits} of {placementItems.length} correct. Known
+                foundations unlock in Practice automatically.
+              </p>
+              <div className="btn-row">
+                <button
+                  type="button"
+                  className="btn btn--primary"
+                  onClick={() => void openPlacement()}
+                >
+                  Run again
+                </button>
+              </div>
+            </div>
+          ) : placementTask ? (
+            <PracticeRunner
+              task={placementTask}
+              graded={placementGraded}
+              correct={placementCorrect}
+              correctChoice={placementCorrectChoice}
+              onChoose={(i) => void answerPlacement(i)}
+              onNext={() => void nextPlacement()}
+            />
+          ) : (
+            <div className="btn-row">
+              <button
+                type="button"
+                className="btn btn--primary"
+                onClick={() => void openPlacement()}
+              >
+                Start placement
+              </button>
+            </div>
           )}
         </section>
       ) : route === "progress" ? (

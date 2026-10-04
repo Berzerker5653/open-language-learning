@@ -229,6 +229,13 @@ Speed alone is not evidence of guessing, and slow input is not a linguistic fail
 
 Placement or targeted diagnosis; low stakes; can unlock known foundations.
 
+Implemented: the app's Placement pass builds one low-stakes task per
+pack-declared assessment (`assessments/definitions.jsonl`) from its
+goal's unit content, records the attempts as `diagnostic` evidence, and
+lets normal derivation unlock gated goals (policy fixture
+`known-diagnostic-reaches-independent`). Constructs without a
+low-stakes auto-runner are skipped, never fabricated.
+
 ### Formative
 
 Continuous evidence during learning; can use support.

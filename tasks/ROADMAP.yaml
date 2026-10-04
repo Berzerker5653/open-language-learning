@@ -907,6 +907,17 @@ tasks:
   acceptance:
   - Learners add any encountered word (surface/reading/gloss) with a source citation to a personal, device-local lexicon (storage migration + CRUD commands); mining from the story reader cites the story content id.
   - Mined items get their own SRS scheduling (due reviews surfaced in the app, self-graded recall updates the scheduler) and NEVER write mastery evidence or touch pack-content scheduler rows.
+- id: K-15
+  milestone: M6
+  priority: P2
+  title: Placement/diagnostic assessment
+  dependencies: []
+  read_first:
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  - docs/08_DATA_AND_PRIVACY.md
+  acceptance:
+  - Packs declare assessments (`assessments/definitions.jsonl`, goal-linked); the app runs a low-stakes placement pass that builds one practice task per pack assessment from its goal's unit content, with evidence tagged Diagnostic.
+  - Correct diagnostic answers raise mastery state through the normal derivation path, so known foundations unlock via existing prerequisite gating; the diagnostic NEVER fabricates evidence for constructs the learner did not attempt.
 - id: GAME-001
   milestone: M7
   priority: P1
