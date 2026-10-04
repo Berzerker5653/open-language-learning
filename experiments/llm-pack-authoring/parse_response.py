@@ -12,6 +12,7 @@ file list. Then score with:
     ./score.sh experiments/llm-pack-authoring/candidates/<label> <label>
 """
 from __future__ import annotations
+import json
 import re
 import sys
 from pathlib import Path
@@ -27,7 +28,7 @@ REQUIRED = [
     "assessments/definitions.jsonl",
 ]
 SAFE = re.compile(r"^[A-Za-z0-9._/-]+$")
-BLOCK = re.compile(r"^### (\S+)\n+```[a-zA-Z0-9]*\n(.*?)\n```", re.M | re.S)
+BLOCK = re.compile(r"^### (\S+)( \(append\))?\n+```[a-zA-Z0-9]*\n(.*?)\n```", re.M | re.S)
 
 
 def main(argv):
@@ -43,7 +44,7 @@ def main(argv):
         return 1
     out = HERE / "candidates" / label
     written, skipped = [], []
-    for rel, body in blocks:
+    for rel, append_flag, body in blocks:
         rel = rel.strip().removeprefix("./")
         if not SAFE.match(rel) or ".." in rel.split("/") or rel.startswith("/"):
             skipped.append(rel)
@@ -57,6 +58,31 @@ def main(argv):
             continue
         dest = out / rel
         dest.parent.mkdir(parents=True, exist_ok=True)
+        if append_flag:
+            if not rel.endswith(".jsonl"):
+                print(f"SKIPPED append on non-JSONL file: {rel}", file=sys.stderr)
+                skipped.append(rel)
+                continue
+            new_lines = [ln for ln in body.splitlines() if ln.strip()]
+            existing = dest.read_text(encoding="utf-8").splitlines() if dest.is_file() else []
+            ids = set()
+            for ln in existing + new_lines:
+                try:
+                    rid = json.loads(ln).get("id")
+                except ValueError:
+                    print(f"SKIPPED append to {rel}: unparseable JSONL line", file=sys.stderr)
+                    skipped.append(rel)
+                    break
+                if rid in ids:
+                    print(f"SKIPPED append to {rel}: duplicate id {rid}", file=sys.stderr)
+                    skipped.append(rel)
+                    break
+                ids.add(rid)
+            else:
+                dest.write_text("\n".join(existing + new_lines).rstrip() + "\n", encoding="utf-8")
+                written.append(f"{rel} (+{len(new_lines)} appended)")
+                continue
+            continue
         dest.write_text(body.rstrip() + "\n", encoding="utf-8")
         written.append(rel)
     print(f"wrote {len(written)} files to {out}")

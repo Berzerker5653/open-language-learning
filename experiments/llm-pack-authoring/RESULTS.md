@@ -227,3 +227,39 @@ supposed to be pedagogy judgment. Kit fixed accordingly:
   many responses as its budget requires). Phase 1 likewise capped.
   Checker smoke-tested both ways (rejects v0, accepts a valid
   on-ramp-only plan).
+
+## Mode B dry run #2: v1 plan passes the checker (2026-10-04)
+
+Same external model replanned after the v0 rejection:
+`plans/ru-fullkit-v1.yaml` — 45 goals, 810 units (on-ramp 15, A1 90,
+A2 90, B1 200, B2 400), cumulative budgets 60/540/600/1,200/2,400 new
+items, 67 Cyrillic symbol records (33 upper + 33 lower + stress mark).
+`validate_plan.py` rewritten to accept the plan's block shape (per-band
+blocks with `lessons`/`files`, `cumulative_word_budget`, grammar
+`concepts` maps, per-band `sentences.band_budgets`, orthography
+`scripts[].total_symbol_records` + `teaching_order` sum check,
+prerequisite-target existence, `unit_count` cross-check, block-aware
+capacity math). **Result: plan OK, exit 0** (v0 still rejected).
+
+Capacity is exactly at the cap in every band (e.g. A1: 90 units × 6 =
+540 promised) — legal but zero slack: any unit that introduces 7 items
+breaks the plan. Flagged for the model to keep 5 lex + 1
+grammar-or-sentence per unit.
+
+Content review of the plan (my read; NOT qualified human review):
+Cyrillic teaching order is look-alike-first (А О М Т К Е Н С …), the
+sound standard approach; Е/Ё and И/Й handled as distinct letters with
+explicit notes; stress mark U+0301 treated as a teaching annotation,
+not a letter — correct. Grammar staging (cases A1→B1, aspect A2/B1,
+participles B1/B2) is conventional. Reading/writing-only scope is
+honest vs capabilities. Cursive and audio explicitly deferred.
+
+**Harness gap this plan exposed:** re-emitting whole 4,000-line JSONL
+shards per batch is impossible (the plan's own `delivery_risk` said
+so). `parse_response.py` now supports `### <path> (append)` blocks for
+JSONL shards — appends only the new lines, rejects duplicate ids,
+skips the block (preserving the shard) on violation; YAML files stay
+whole-file. Smoke-tested: create → append → duplicate-rejected, shard
+intact. Brief + README updated with the append convention.
+
+Verdict: v1 plan needs no further adjustments; Phase 1 may start.

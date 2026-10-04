@@ -1,0 +1,2309 @@
+target_locale: "ru-RU"
+id_prefix: "ru"
+mode: "B"
+phase: 0
+approval_status: "pending"
+
+scope:
+  modalities: ["reading", "writing"]
+  planned_capabilities:
+    listening: false
+    speaking: false
+    reading: true
+    writing: true
+  band_interpretation: "A text-based curriculum through B2; not a claim of assessed listening, speaking, or certified CEFR attainment."
+  content_basis: "Original AI-drafted instructional content, requiring dictionary sourcing and human review."
+  extended_texts: "Original instructional texts built from coherent sequences of sentence records, without invented real-world attribution."
+  delivery_risk: "Later-band batches may exceed a single response once complete touched-file re-emission is included. This remains a delivery constraint for human review."
+
+sequence:
+  ordering_rule: "Learning order follows prerequisites and the sequence below, not filename sorting."
+  clusters:
+    - {
+        band: "on-ramp",
+        blocks: "010-019",
+        purpose: "Printed Cyrillic and the teaching stress mark",
+      }
+    - { band: "on-ramp", blocks: "000-009", purpose: "First words and short written messages" }
+    - { band: "A1", blocks: "020-109", purpose: "Basic everyday written communication" }
+    - { band: "A2", blocks: "110-209", purpose: "Connected routine written communication" }
+    - { band: "B1", blocks: "210-409", purpose: "Independent connected reading and writing" }
+    - { band: "B2", blocks: "410-809", purpose: "Extended, nuanced reading and writing" }
+
+unit_design:
+  total_units: 810
+  ordinary_units: 800
+  script_units: 10
+  ordinary_new_item_budget: 6
+  new_lexical_entries_per_ordinary_unit: 5
+  additional_new_records_per_ordinary_unit: 1
+  additional_record_rule: "Introduce one grammar concept OR one sentence, never both in the same ordinary unit."
+  counting_rule: "The six-item ceiling counts newly introduced lexical, grammar, and sentence learning records; reused records do not count again."
+  script_new_item_budget: 0
+  script_validation_method: "exact-match"
+  grammar_sequence: "Introduce each concept before the first activity that requires it."
+  recycling: "Reuse previously introduced vocabulary, grammar, and sentences for retrieval, cloze work, and cumulative practice."
+  passage_construction: "Combine coherent sentence sequences in later reading activities using explicit ordered content references."
+  assessment_plan:
+    minimum_per_goal: 2
+    reading: "Recognition, recall, or transfer appropriate to the goal."
+    writing: "Production or transfer appropriate to the goal."
+    script: "Separate recognition and copying or typing checks."
+    later_bands: "Include extended responses, interpretation, synthesis, and revision using taught resources."
+  planned_record_totals:
+    lexical_entries: 4000
+    grammar_concepts: 83
+    sentence_records: 717
+    orthography_records: 67
+    goals: 45
+    minimum_assessments: 90
+
+prerequisite_templates:
+  script_ready: &script-ready
+    target: "ru.goal.on-ramp.cyrillic"
+    dimension: "orthography-recognition"
+    required_state: "independent"
+    strength: "hard"
+
+bands:
+  on-ramp:
+    unit_count: 20
+    goals:
+      - id: "ru.goal.on-ramp.cyrillic"
+        can_do: "Recognize and copy all printed Cyrillic letter case forms and interpret the teaching stress mark."
+        prerequisites: []
+      - id: "ru.goal.on-ramp.greetings"
+        can_do: "Read and write taught greetings, farewells, and polite responses in short text exchanges."
+        prerequisites: [*script-ready]
+      - id: "ru.goal.on-ramp.self-introduction"
+        can_do: "Read and write a name and a minimal self-introduction using taught patterns."
+        prerequisites: [*script-ready]
+      - id: "ru.goal.on-ramp.classroom"
+        can_do: "Recognize essential written learning instructions and use taught clarification requests."
+        prerequisites: [*script-ready]
+      - id: "ru.goal.on-ramp.everyday"
+        can_do: "Identify familiar people and objects in short written identification statements."
+        prerequisites: [*script-ready]
+      - id: "ru.goal.on-ramp.numbers"
+        can_do: "Match and write the number words zero through nine and their digits."
+        prerequisites: [*script-ready]
+
+  A1:
+    unit_count: 90
+    goals:
+      - id: "ru.goal.a1.personal-details"
+        can_do: "Read and complete simple personal profiles with names, origin, age, and contact details."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.on-ramp.self-introduction",
+              dimension: "comprehension-reading",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.a1.people-family"
+        can_do: "Read and write basic descriptions of people, family relationships, and possessions."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a1.personal-details",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.a1.home"
+        can_do: "Describe a home and locate familiar objects using short written sentences."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a1.people-family",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.a1.routines"
+        can_do: "Read and write about everyday routines, frequency, and simple recent or planned activities."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a1.personal-details",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.a1.food"
+        can_do: "Understand a simple menu and write basic food preferences and order requests."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a1.routines",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.a1.shopping"
+        can_do: "Read prices and product descriptions and write simple purchase requests."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a1.personal-details",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+          - {
+              target: "ru.goal.a1.food",
+              dimension: "pragmatic-use",
+              required_state: "independent",
+              strength: "helpful",
+            }
+      - id: "ru.goal.a1.city"
+        can_do: "Understand basic place descriptions and write simple location and route information."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a1.home",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.a1.time-plans"
+        can_do: "Read and write times, dates, schedules, and basic plans."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.on-ramp.numbers",
+              dimension: "recall-meaning",
+              required_state: "independent",
+              strength: "hard",
+            }
+          - {
+              target: "ru.goal.a1.routines",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.a1.basic-messages"
+        can_do: "Exchange brief written invitations, arrangements, and everyday messages."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a1.time-plans",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+
+  A2:
+    unit_count: 100
+    goals:
+      - id: "ru.goal.a2.past-events"
+        can_do: "Write a connected account of familiar past events with a clear time sequence."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a1.routines",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.a2.travel"
+        can_do: "Read routine travel information and write booking, itinerary, and transport messages."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a1.city",
+              dimension: "comprehension-reading",
+              required_state: "independent",
+              strength: "hard",
+            }
+          - {
+              target: "ru.goal.a1.time-plans",
+              dimension: "comprehension-reading",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.a2.services"
+        can_do: "Understand routine service information and write requests for common transactions."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a1.shopping",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.a2.wellbeing"
+        can_do: "Read everyday wellbeing information and write simple descriptions of symptoms, needs, and appointments."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a1.personal-details",
+              dimension: "comprehension-reading",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.a2.work-study"
+        can_do: "Describe familiar work or study duties, experience, and immediate goals in writing."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a1.routines",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.a2.social-plans"
+        can_do: "Exchange written invitations, suggestions, acceptances, refusals, and arrangements."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a1.basic-messages",
+              dimension: "pragmatic-use",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.a2.comparisons"
+        can_do: "Compare familiar people, products, places, and options and state simple reasons."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a1.people-family",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.a2.instructions"
+        can_do: "Understand and write short practical instructions in a clear sequence."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a1.routines",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.a2.problems-solutions"
+        can_do: "Explain a familiar practical problem in writing and request or suggest a solution."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a2.services",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+          - {
+              target: "ru.goal.a2.past-events",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.a2.connected-messages"
+        can_do: "Write connected personal messages using taught links, descriptions, and event sequences."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a2.past-events",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+          - {
+              target: "ru.goal.a2.social-plans",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+
+  B1:
+    unit_count: 200
+    goals:
+      - id: "ru.goal.b1.narration"
+        can_do: "Write connected narratives that distinguish background, main events, and outcomes."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a2.past-events",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.b1.experiences"
+        can_do: "Describe experiences, reactions, and lessons learned in connected written accounts."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a2.travel",
+              dimension: "comprehension-reading",
+              required_state: "independent",
+              strength: "hard",
+            }
+          - {
+              target: "ru.goal.b1.narration",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.b1.practical-problems"
+        can_do: "Handle less predictable everyday problems through clear explanatory correspondence."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a2.problems-solutions",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.b1.learning-work"
+        can_do: "Write about learning and work processes, experience, aims, and practical decisions."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a2.work-study",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.b1.relationships"
+        can_do: "Explain relationships, feelings, expectations, and misunderstandings in personal correspondence."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a2.social-plans",
+              dimension: "pragmatic-use",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.b1.culture-media"
+        can_do: "Understand accessible cultural and media texts and write a reasoned personal response."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a2.connected-messages",
+              dimension: "comprehension-reading",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.b1.opinions"
+        can_do: "Develop an opinion in writing with reasons, examples, and respectful responses to alternatives."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a2.comparisons",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.b1.information-summary"
+        can_do: "Identify main points in straightforward informational texts and summarize them in writing."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a2.connected-messages",
+              dimension: "comprehension-reading",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.b1.future-conditions"
+        can_do: "Explain plans, consequences, possibilities, and hypothetical choices in writing."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.a2.social-plans",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.b1.extended-writing"
+        can_do: "Produce organized longer personal and practical texts with coherent paragraphs and appropriate endings."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.b1.narration",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+          - {
+              target: "ru.goal.b1.information-summary",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+
+  B2:
+    unit_count: 400
+    goals:
+      - id: "ru.goal.b2.argumentation"
+        can_do: "Write a sustained argument with a clear position, supporting evidence, qualifications, and counterarguments."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.b1.opinions",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+          - {
+              target: "ru.goal.b1.extended-writing",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.b2.critical-reading"
+        can_do: "Analyze how a complex text organizes claims, signals stance, and distinguishes evidence from inference."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.b1.information-summary",
+              dimension: "comprehension-reading",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.b2.synthesis"
+        can_do: "Compare and synthesize information from multiple supplied texts with accurate attribution and paraphrase."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.b1.extended-writing",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+          - {
+              target: "ru.goal.b2.critical-reading",
+              dimension: "comprehension-reading",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.b2.academic-study"
+        can_do: "Read study-oriented texts and write structured notes, explanations, and findings summaries."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.b2.synthesis",
+              dimension: "comprehension-reading",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.b2.professional-writing"
+        can_do: "Write clear professional correspondence, proposals, process descriptions, and applications."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.b1.learning-work",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+          - {
+              target: "ru.goal.b1.extended-writing",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.b2.negotiation"
+        can_do: "Negotiate requests, competing priorities, and compromises through sustained written exchanges."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.b1.practical-problems",
+              dimension: "pragmatic-use",
+              required_state: "independent",
+              strength: "hard",
+            }
+          - {
+              target: "ru.goal.b1.opinions",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.b2.society-policy"
+        can_do: "Compare social and public-policy options in writing using balanced reasoning and clearly stated trade-offs."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.b2.argumentation",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.b2.science-environment"
+        can_do: "Explain supplied scientific, technological, and environmental information while preserving uncertainty and limits."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.b2.critical-reading",
+              dimension: "comprehension-reading",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.b2.culture-perspectives"
+        can_do: "Interpret cultural texts and compare perspectives without treating generalizations as universal facts."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.b1.culture-media",
+              dimension: "comprehension-reading",
+              required_state: "independent",
+              strength: "hard",
+            }
+          - {
+              target: "ru.goal.b2.critical-reading",
+              dimension: "comprehension-reading",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ru.goal.b2.style-register"
+        can_do: "Revise extended texts for precision, cohesion, grammatical control, and an appropriate written register."
+        prerequisites:
+          - *script-ready
+          - {
+              target: "ru.goal.b2.professional-writing",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+          - {
+              target: "ru.goal.b2.synthesis",
+              dimension: "production-writing",
+              required_state: "independent",
+              strength: "hard",
+            }
+
+units:
+  base_directory: "curriculum/units"
+  file_metadata_rule: "Every filename in a files list is a separate unit with the enclosing topic and goal. All filenames are relative to base_directory."
+  ordinary_unit_rule: "Every non-script file introduces five lexical entries and one grammar or sentence record."
+  suffix_rule: "Numbered suffixes identify distinct successive micro-lessons, not alternative filenames."
+
+  on-ramp:
+    - block: "000-009"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "000-greetings-01.yaml",
+            topic: "First polite greetings",
+            goal: "ru.goal.on-ramp.greetings",
+          }
+        - {
+            file: "001-greetings-02.yaml",
+            topic: "Farewells and polite responses",
+            goal: "ru.goal.on-ramp.greetings",
+          }
+        - {
+            file: "002-self-introduction-01.yaml",
+            topic: "Names and personal reference",
+            goal: "ru.goal.on-ramp.self-introduction",
+          }
+        - {
+            file: "003-self-introduction-02.yaml",
+            topic: "Minimal written introductions",
+            goal: "ru.goal.on-ramp.self-introduction",
+          }
+        - {
+            file: "004-classroom-01.yaml",
+            topic: "Essential written learning instructions",
+            goal: "ru.goal.on-ramp.classroom",
+          }
+        - {
+            file: "005-classroom-02.yaml",
+            topic: "Taught clarification requests",
+            goal: "ru.goal.on-ramp.classroom",
+          }
+        - {
+            file: "006-everyday-01.yaml",
+            topic: "Familiar people and objects",
+            goal: "ru.goal.on-ramp.everyday",
+          }
+        - {
+            file: "007-everyday-02.yaml",
+            topic: "Simple written identification",
+            goal: "ru.goal.on-ramp.everyday",
+          }
+        - {
+            file: "008-numbers-01.yaml",
+            topic: "Number words zero through four",
+            goal: "ru.goal.on-ramp.numbers",
+          }
+        - {
+            file: "009-numbers-02.yaml",
+            topic: "Number words five through nine",
+            goal: "ru.goal.on-ramp.numbers",
+          }
+
+    - block: "010-019"
+      new_item_budget: 0
+      validation_method: "exact-match"
+      lessons:
+        - {
+            file: "010-cyrillic-a-o-m-t.yaml",
+            topic: "Printed case pairs А а, О о, М м, Т т",
+            goal: "ru.goal.on-ramp.cyrillic",
+          }
+        - {
+            file: "011-cyrillic-k-e-n-s.yaml",
+            topic: "Printed case pairs К к, Е е, Н н, С с",
+            goal: "ru.goal.on-ramp.cyrillic",
+          }
+        - {
+            file: "012-cyrillic-r-v-u-kh.yaml",
+            topic: "Printed case pairs Р р, В в, У у, Х х",
+            goal: "ru.goal.on-ramp.cyrillic",
+          }
+        - {
+            file: "013-cyrillic-b-p-d-g.yaml",
+            topic: "Printed case pairs Б б, П п, Д д, Г г",
+            goal: "ru.goal.on-ramp.cyrillic",
+          }
+        - {
+            file: "014-cyrillic-l-z-zh-i.yaml",
+            topic: "Printed case pairs Л л, З з, Ж ж, И и",
+            goal: "ru.goal.on-ramp.cyrillic",
+          }
+        - {
+            file: "015-cyrillic-y-short-i-yo-yu.yaml",
+            topic: "Printed case pairs Ы ы, Й й, Ё ё, Ю ю",
+            goal: "ru.goal.on-ramp.cyrillic",
+          }
+        - {
+            file: "016-cyrillic-ya-eh-f.yaml",
+            topic: "Printed case pairs Я я, Э э, Ф ф",
+            goal: "ru.goal.on-ramp.cyrillic",
+          }
+        - {
+            file: "017-cyrillic-ts-ch-sh.yaml",
+            topic: "Printed case pairs Ц ц, Ч ч, Ш ш",
+            goal: "ru.goal.on-ramp.cyrillic",
+          }
+        - {
+            file: "018-cyrillic-shch-soft-hard.yaml",
+            topic: "Printed case pairs Щ щ, Ь ь, Ъ ъ",
+            goal: "ru.goal.on-ramp.cyrillic",
+          }
+        - {
+            file: "019-cyrillic-stress-review.yaml",
+            topic: "Teaching stress mark and cumulative symbol recognition",
+            goal: "ru.goal.on-ramp.cyrillic",
+          }
+
+  A1:
+    - block: "020-029"
+      topic: "Personal profiles and contact details"
+      goal: "ru.goal.a1.personal-details"
+      files:
+        [
+          020-personal-details-01.yaml,
+          021-personal-details-02.yaml,
+          022-personal-details-03.yaml,
+          023-personal-details-04.yaml,
+          024-personal-details-05.yaml,
+          025-personal-details-06.yaml,
+          026-personal-details-07.yaml,
+          027-personal-details-08.yaml,
+          028-personal-details-09.yaml,
+          029-personal-details-10.yaml,
+        ]
+
+    - block: "030-039"
+      topic: "People, family, and possessions"
+      goal: "ru.goal.a1.people-family"
+      files:
+        [
+          030-people-family-01.yaml,
+          031-people-family-02.yaml,
+          032-people-family-03.yaml,
+          033-people-family-04.yaml,
+          034-people-family-05.yaml,
+          035-people-family-06.yaml,
+          036-people-family-07.yaml,
+          037-people-family-08.yaml,
+          038-people-family-09.yaml,
+          039-people-family-10.yaml,
+        ]
+
+    - block: "040-049"
+      topic: "Rooms, household objects, and locations"
+      goal: "ru.goal.a1.home"
+      files:
+        [
+          040-home-01.yaml,
+          041-home-02.yaml,
+          042-home-03.yaml,
+          043-home-04.yaml,
+          044-home-05.yaml,
+          045-home-06.yaml,
+          046-home-07.yaml,
+          047-home-08.yaml,
+          048-home-09.yaml,
+          049-home-10.yaml,
+        ]
+
+    - block: "050-059"
+      topic: "Daily routines and basic time reference"
+      goal: "ru.goal.a1.routines"
+      files:
+        [
+          050-routines-01.yaml,
+          051-routines-02.yaml,
+          052-routines-03.yaml,
+          053-routines-04.yaml,
+          054-routines-05.yaml,
+          055-routines-06.yaml,
+          056-routines-07.yaml,
+          057-routines-08.yaml,
+          058-routines-09.yaml,
+          059-routines-10.yaml,
+        ]
+
+    - block: "060-069"
+      topic: "Food, menus, and simple orders"
+      goal: "ru.goal.a1.food"
+      files:
+        [
+          060-food-01.yaml,
+          061-food-02.yaml,
+          062-food-03.yaml,
+          063-food-04.yaml,
+          064-food-05.yaml,
+          065-food-06.yaml,
+          066-food-07.yaml,
+          067-food-08.yaml,
+          068-food-09.yaml,
+          069-food-10.yaml,
+        ]
+
+    - block: "070-079"
+      topic: "Prices, products, and purchase requests"
+      goal: "ru.goal.a1.shopping"
+      files:
+        [
+          070-shopping-01.yaml,
+          071-shopping-02.yaml,
+          072-shopping-03.yaml,
+          073-shopping-04.yaml,
+          074-shopping-05.yaml,
+          075-shopping-06.yaml,
+          076-shopping-07.yaml,
+          077-shopping-08.yaml,
+          078-shopping-09.yaml,
+          079-shopping-10.yaml,
+        ]
+
+    - block: "080-089"
+      topic: "Places, locations, and simple routes"
+      goal: "ru.goal.a1.city"
+      files:
+        [
+          080-city-01.yaml,
+          081-city-02.yaml,
+          082-city-03.yaml,
+          083-city-04.yaml,
+          084-city-05.yaml,
+          085-city-06.yaml,
+          086-city-07.yaml,
+          087-city-08.yaml,
+          088-city-09.yaml,
+          089-city-10.yaml,
+        ]
+
+    - block: "090-099"
+      topic: "Times, dates, schedules, and plans"
+      goal: "ru.goal.a1.time-plans"
+      files:
+        [
+          090-time-plans-01.yaml,
+          091-time-plans-02.yaml,
+          092-time-plans-03.yaml,
+          093-time-plans-04.yaml,
+          094-time-plans-05.yaml,
+          095-time-plans-06.yaml,
+          096-time-plans-07.yaml,
+          097-time-plans-08.yaml,
+          098-time-plans-09.yaml,
+          099-time-plans-10.yaml,
+        ]
+
+    - block: "100-109"
+      topic: "Invitations, arrangements, and brief messages"
+      goal: "ru.goal.a1.basic-messages"
+      files:
+        [
+          100-basic-messages-01.yaml,
+          101-basic-messages-02.yaml,
+          102-basic-messages-03.yaml,
+          103-basic-messages-04.yaml,
+          104-basic-messages-05.yaml,
+          105-basic-messages-06.yaml,
+          106-basic-messages-07.yaml,
+          107-basic-messages-08.yaml,
+          108-basic-messages-09.yaml,
+          109-basic-messages-10.yaml,
+        ]
+
+  A2:
+    - block: "110-119"
+      topic: "Past events and time sequence"
+      goal: "ru.goal.a2.past-events"
+      files:
+        [
+          110-past-events-01.yaml,
+          111-past-events-02.yaml,
+          112-past-events-03.yaml,
+          113-past-events-04.yaml,
+          114-past-events-05.yaml,
+          115-past-events-06.yaml,
+          116-past-events-07.yaml,
+          117-past-events-08.yaml,
+          118-past-events-09.yaml,
+          119-past-events-10.yaml,
+        ]
+
+    - block: "120-129"
+      topic: "Bookings, itineraries, and transport"
+      goal: "ru.goal.a2.travel"
+      files:
+        [
+          120-travel-01.yaml,
+          121-travel-02.yaml,
+          122-travel-03.yaml,
+          123-travel-04.yaml,
+          124-travel-05.yaml,
+          125-travel-06.yaml,
+          126-travel-07.yaml,
+          127-travel-08.yaml,
+          128-travel-09.yaml,
+          129-travel-10.yaml,
+        ]
+
+    - block: "130-139"
+      topic: "Routine service transactions"
+      goal: "ru.goal.a2.services"
+      files:
+        [
+          130-services-01.yaml,
+          131-services-02.yaml,
+          132-services-03.yaml,
+          133-services-04.yaml,
+          134-services-05.yaml,
+          135-services-06.yaml,
+          136-services-07.yaml,
+          137-services-08.yaml,
+          138-services-09.yaml,
+          139-services-10.yaml,
+        ]
+
+    - block: "140-149"
+      topic: "Symptoms, needs, and appointments"
+      goal: "ru.goal.a2.wellbeing"
+      files:
+        [
+          140-wellbeing-01.yaml,
+          141-wellbeing-02.yaml,
+          142-wellbeing-03.yaml,
+          143-wellbeing-04.yaml,
+          144-wellbeing-05.yaml,
+          145-wellbeing-06.yaml,
+          146-wellbeing-07.yaml,
+          147-wellbeing-08.yaml,
+          148-wellbeing-09.yaml,
+          149-wellbeing-10.yaml,
+        ]
+
+    - block: "150-159"
+      topic: "Duties, experience, and immediate goals"
+      goal: "ru.goal.a2.work-study"
+      files:
+        [
+          150-work-study-01.yaml,
+          151-work-study-02.yaml,
+          152-work-study-03.yaml,
+          153-work-study-04.yaml,
+          154-work-study-05.yaml,
+          155-work-study-06.yaml,
+          156-work-study-07.yaml,
+          157-work-study-08.yaml,
+          158-work-study-09.yaml,
+          159-work-study-10.yaml,
+        ]
+
+    - block: "160-169"
+      topic: "Invitations, suggestions, and arrangements"
+      goal: "ru.goal.a2.social-plans"
+      files:
+        [
+          160-social-plans-01.yaml,
+          161-social-plans-02.yaml,
+          162-social-plans-03.yaml,
+          163-social-plans-04.yaml,
+          164-social-plans-05.yaml,
+          165-social-plans-06.yaml,
+          166-social-plans-07.yaml,
+          167-social-plans-08.yaml,
+          168-social-plans-09.yaml,
+          169-social-plans-10.yaml,
+        ]
+
+    - block: "170-179"
+      topic: "Comparisons and simple reasons"
+      goal: "ru.goal.a2.comparisons"
+      files:
+        [
+          170-comparisons-01.yaml,
+          171-comparisons-02.yaml,
+          172-comparisons-03.yaml,
+          173-comparisons-04.yaml,
+          174-comparisons-05.yaml,
+          175-comparisons-06.yaml,
+          176-comparisons-07.yaml,
+          177-comparisons-08.yaml,
+          178-comparisons-09.yaml,
+          179-comparisons-10.yaml,
+        ]
+
+    - block: "180-189"
+      topic: "Practical instructions and procedures"
+      goal: "ru.goal.a2.instructions"
+      files:
+        [
+          180-instructions-01.yaml,
+          181-instructions-02.yaml,
+          182-instructions-03.yaml,
+          183-instructions-04.yaml,
+          184-instructions-05.yaml,
+          185-instructions-06.yaml,
+          186-instructions-07.yaml,
+          187-instructions-08.yaml,
+          188-instructions-09.yaml,
+          189-instructions-10.yaml,
+        ]
+
+    - block: "190-199"
+      topic: "Problems, requests, and remedies"
+      goal: "ru.goal.a2.problems-solutions"
+      files:
+        [
+          190-problems-solutions-01.yaml,
+          191-problems-solutions-02.yaml,
+          192-problems-solutions-03.yaml,
+          193-problems-solutions-04.yaml,
+          194-problems-solutions-05.yaml,
+          195-problems-solutions-06.yaml,
+          196-problems-solutions-07.yaml,
+          197-problems-solutions-08.yaml,
+          198-problems-solutions-09.yaml,
+          199-problems-solutions-10.yaml,
+        ]
+
+    - block: "200-209"
+      topic: "Connected personal correspondence"
+      goal: "ru.goal.a2.connected-messages"
+      files:
+        [
+          200-connected-messages-01.yaml,
+          201-connected-messages-02.yaml,
+          202-connected-messages-03.yaml,
+          203-connected-messages-04.yaml,
+          204-connected-messages-05.yaml,
+          205-connected-messages-06.yaml,
+          206-connected-messages-07.yaml,
+          207-connected-messages-08.yaml,
+          208-connected-messages-09.yaml,
+          209-connected-messages-10.yaml,
+        ]
+
+  B1:
+    - block: "210-219"
+      topic: "Narrative sequence and outcomes"
+      goal: "ru.goal.b1.narration"
+      files:
+        [
+          210-narration-sequence-01.yaml,
+          211-narration-sequence-02.yaml,
+          212-narration-sequence-03.yaml,
+          213-narration-sequence-04.yaml,
+          214-narration-sequence-05.yaml,
+          215-narration-sequence-06.yaml,
+          216-narration-sequence-07.yaml,
+          217-narration-sequence-08.yaml,
+          218-narration-sequence-09.yaml,
+          219-narration-sequence-10.yaml,
+        ]
+
+    - block: "220-229"
+      topic: "Narrative background and viewpoint"
+      goal: "ru.goal.b1.narration"
+      files:
+        [
+          220-narration-background-01.yaml,
+          221-narration-background-02.yaml,
+          222-narration-background-03.yaml,
+          223-narration-background-04.yaml,
+          224-narration-background-05.yaml,
+          225-narration-background-06.yaml,
+          226-narration-background-07.yaml,
+          227-narration-background-08.yaml,
+          228-narration-background-09.yaml,
+          229-narration-background-10.yaml,
+        ]
+
+    - block: "230-239"
+      topic: "Life experiences and reactions"
+      goal: "ru.goal.b1.experiences"
+      files:
+        [
+          230-life-experiences-01.yaml,
+          231-life-experiences-02.yaml,
+          232-life-experiences-03.yaml,
+          233-life-experiences-04.yaml,
+          234-life-experiences-05.yaml,
+          235-life-experiences-06.yaml,
+          236-life-experiences-07.yaml,
+          237-life-experiences-08.yaml,
+          238-life-experiences-09.yaml,
+          239-life-experiences-10.yaml,
+        ]
+
+    - block: "240-249"
+      topic: "Travel experiences and lessons learned"
+      goal: "ru.goal.b1.experiences"
+      files:
+        [
+          240-travel-experiences-01.yaml,
+          241-travel-experiences-02.yaml,
+          242-travel-experiences-03.yaml,
+          243-travel-experiences-04.yaml,
+          244-travel-experiences-05.yaml,
+          245-travel-experiences-06.yaml,
+          246-travel-experiences-07.yaml,
+          247-travel-experiences-08.yaml,
+          248-travel-experiences-09.yaml,
+          249-travel-experiences-10.yaml,
+        ]
+
+    - block: "250-259"
+      topic: "Service failures and explanatory correspondence"
+      goal: "ru.goal.b1.practical-problems"
+      files:
+        [
+          250-service-problems-01.yaml,
+          251-service-problems-02.yaml,
+          252-service-problems-03.yaml,
+          253-service-problems-04.yaml,
+          254-service-problems-05.yaml,
+          255-service-problems-06.yaml,
+          256-service-problems-07.yaml,
+          257-service-problems-08.yaml,
+          258-service-problems-09.yaml,
+          259-service-problems-10.yaml,
+        ]
+
+    - block: "260-269"
+      topic: "Housing and community problems"
+      goal: "ru.goal.b1.practical-problems"
+      files:
+        [
+          260-community-problems-01.yaml,
+          261-community-problems-02.yaml,
+          262-community-problems-03.yaml,
+          263-community-problems-04.yaml,
+          264-community-problems-05.yaml,
+          265-community-problems-06.yaml,
+          266-community-problems-07.yaml,
+          267-community-problems-08.yaml,
+          268-community-problems-09.yaml,
+          269-community-problems-10.yaml,
+        ]
+
+    - block: "270-279"
+      topic: "Learning methods, progress, and decisions"
+      goal: "ru.goal.b1.learning-work"
+      files:
+        [
+          270-learning-processes-01.yaml,
+          271-learning-processes-02.yaml,
+          272-learning-processes-03.yaml,
+          273-learning-processes-04.yaml,
+          274-learning-processes-05.yaml,
+          275-learning-processes-06.yaml,
+          276-learning-processes-07.yaml,
+          277-learning-processes-08.yaml,
+          278-learning-processes-09.yaml,
+          279-learning-processes-10.yaml,
+        ]
+
+    - block: "280-289"
+      topic: "Work processes, experience, and aims"
+      goal: "ru.goal.b1.learning-work"
+      files:
+        [
+          280-work-processes-01.yaml,
+          281-work-processes-02.yaml,
+          282-work-processes-03.yaml,
+          283-work-processes-04.yaml,
+          284-work-processes-05.yaml,
+          285-work-processes-06.yaml,
+          286-work-processes-07.yaml,
+          287-work-processes-08.yaml,
+          288-work-processes-09.yaml,
+          289-work-processes-10.yaml,
+        ]
+
+    - block: "290-299"
+      topic: "Relationships and social expectations"
+      goal: "ru.goal.b1.relationships"
+      files:
+        [
+          290-social-relationships-01.yaml,
+          291-social-relationships-02.yaml,
+          292-social-relationships-03.yaml,
+          293-social-relationships-04.yaml,
+          294-social-relationships-05.yaml,
+          295-social-relationships-06.yaml,
+          296-social-relationships-07.yaml,
+          297-social-relationships-08.yaml,
+          298-social-relationships-09.yaml,
+          299-social-relationships-10.yaml,
+        ]
+
+    - block: "300-309"
+      topic: "Feelings, misunderstandings, and repair"
+      goal: "ru.goal.b1.relationships"
+      files:
+        [
+          300-feelings-conflict-01.yaml,
+          301-feelings-conflict-02.yaml,
+          302-feelings-conflict-03.yaml,
+          303-feelings-conflict-04.yaml,
+          304-feelings-conflict-05.yaml,
+          305-feelings-conflict-06.yaml,
+          306-feelings-conflict-07.yaml,
+          307-feelings-conflict-08.yaml,
+          308-feelings-conflict-09.yaml,
+          309-feelings-conflict-10.yaml,
+        ]
+
+    - block: "310-319"
+      topic: "Cultural experiences and personal responses"
+      goal: "ru.goal.b1.culture-media"
+      files:
+        [
+          310-cultural-events-01.yaml,
+          311-cultural-events-02.yaml,
+          312-cultural-events-03.yaml,
+          313-cultural-events-04.yaml,
+          314-cultural-events-05.yaml,
+          315-cultural-events-06.yaml,
+          316-cultural-events-07.yaml,
+          317-cultural-events-08.yaml,
+          318-cultural-events-09.yaml,
+          319-cultural-events-10.yaml,
+        ]
+
+    - block: "320-329"
+      topic: "Media accounts, reviews, and reactions"
+      goal: "ru.goal.b1.culture-media"
+      files:
+        [
+          320-media-reviews-01.yaml,
+          321-media-reviews-02.yaml,
+          322-media-reviews-03.yaml,
+          323-media-reviews-04.yaml,
+          324-media-reviews-05.yaml,
+          325-media-reviews-06.yaml,
+          326-media-reviews-07.yaml,
+          327-media-reviews-08.yaml,
+          328-media-reviews-09.yaml,
+          329-media-reviews-10.yaml,
+        ]
+
+    - block: "330-339"
+      topic: "Opinions, reasons, and examples"
+      goal: "ru.goal.b1.opinions"
+      files:
+        [
+          330-opinion-reasons-01.yaml,
+          331-opinion-reasons-02.yaml,
+          332-opinion-reasons-03.yaml,
+          333-opinion-reasons-04.yaml,
+          334-opinion-reasons-05.yaml,
+          335-opinion-reasons-06.yaml,
+          336-opinion-reasons-07.yaml,
+          337-opinion-reasons-08.yaml,
+          338-opinion-reasons-09.yaml,
+          339-opinion-reasons-10.yaml,
+        ]
+
+    - block: "340-349"
+      topic: "Alternative views and respectful responses"
+      goal: "ru.goal.b1.opinions"
+      files:
+        [
+          340-opinion-responses-01.yaml,
+          341-opinion-responses-02.yaml,
+          342-opinion-responses-03.yaml,
+          343-opinion-responses-04.yaml,
+          344-opinion-responses-05.yaml,
+          345-opinion-responses-06.yaml,
+          346-opinion-responses-07.yaml,
+          347-opinion-responses-08.yaml,
+          348-opinion-responses-09.yaml,
+          349-opinion-responses-10.yaml,
+        ]
+
+    - block: "350-359"
+      topic: "Main points and clear explanations"
+      goal: "ru.goal.b1.information-summary"
+      files:
+        [
+          350-information-explanation-01.yaml,
+          351-information-explanation-02.yaml,
+          352-information-explanation-03.yaml,
+          353-information-explanation-04.yaml,
+          354-information-explanation-05.yaml,
+          355-information-explanation-06.yaml,
+          356-information-explanation-07.yaml,
+          357-information-explanation-08.yaml,
+          358-information-explanation-09.yaml,
+          359-information-explanation-10.yaml,
+        ]
+
+    - block: "360-369"
+      topic: "Selection, compression, and summaries"
+      goal: "ru.goal.b1.information-summary"
+      files:
+        [
+          360-information-summary-01.yaml,
+          361-information-summary-02.yaml,
+          362-information-summary-03.yaml,
+          363-information-summary-04.yaml,
+          364-information-summary-05.yaml,
+          365-information-summary-06.yaml,
+          366-information-summary-07.yaml,
+          367-information-summary-08.yaml,
+          368-information-summary-09.yaml,
+          369-information-summary-10.yaml,
+        ]
+
+    - block: "370-379"
+      topic: "Plans, possibilities, and consequences"
+      goal: "ru.goal.b1.future-conditions"
+      files:
+        [
+          370-future-plans-01.yaml,
+          371-future-plans-02.yaml,
+          372-future-plans-03.yaml,
+          373-future-plans-04.yaml,
+          374-future-plans-05.yaml,
+          375-future-plans-06.yaml,
+          376-future-plans-07.yaml,
+          377-future-plans-08.yaml,
+          378-future-plans-09.yaml,
+          379-future-plans-10.yaml,
+        ]
+
+    - block: "380-389"
+      topic: "Conditions and hypothetical choices"
+      goal: "ru.goal.b1.future-conditions"
+      files:
+        [
+          380-hypothetical-choices-01.yaml,
+          381-hypothetical-choices-02.yaml,
+          382-hypothetical-choices-03.yaml,
+          383-hypothetical-choices-04.yaml,
+          384-hypothetical-choices-05.yaml,
+          385-hypothetical-choices-06.yaml,
+          386-hypothetical-choices-07.yaml,
+          387-hypothetical-choices-08.yaml,
+          388-hypothetical-choices-09.yaml,
+          389-hypothetical-choices-10.yaml,
+        ]
+
+    - block: "390-399"
+      topic: "Organized personal and practical letters"
+      goal: "ru.goal.b1.extended-writing"
+      files:
+        [
+          390-extended-correspondence-01.yaml,
+          391-extended-correspondence-02.yaml,
+          392-extended-correspondence-03.yaml,
+          393-extended-correspondence-04.yaml,
+          394-extended-correspondence-05.yaml,
+          395-extended-correspondence-06.yaml,
+          396-extended-correspondence-07.yaml,
+          397-extended-correspondence-08.yaml,
+          398-extended-correspondence-09.yaml,
+          399-extended-correspondence-10.yaml,
+        ]
+
+    - block: "400-409"
+      topic: "Paragraphing, cohesion, and revision"
+      goal: "ru.goal.b1.extended-writing"
+      files:
+        [
+          400-extended-texts-01.yaml,
+          401-extended-texts-02.yaml,
+          402-extended-texts-03.yaml,
+          403-extended-texts-04.yaml,
+          404-extended-texts-05.yaml,
+          405-extended-texts-06.yaml,
+          406-extended-texts-07.yaml,
+          407-extended-texts-08.yaml,
+          408-extended-texts-09.yaml,
+          409-extended-texts-10.yaml,
+        ]
+
+  B2:
+    - block: "410-419"
+      topic: "Positions, claims, and argument structure"
+      goal: "ru.goal.b2.argumentation"
+      files:
+        [
+          410-argument-claims-01.yaml,
+          411-argument-claims-02.yaml,
+          412-argument-claims-03.yaml,
+          413-argument-claims-04.yaml,
+          414-argument-claims-05.yaml,
+          415-argument-claims-06.yaml,
+          416-argument-claims-07.yaml,
+          417-argument-claims-08.yaml,
+          418-argument-claims-09.yaml,
+          419-argument-claims-10.yaml,
+        ]
+
+    - block: "420-429"
+      topic: "Evidence, examples, and justification"
+      goal: "ru.goal.b2.argumentation"
+      files:
+        [
+          420-argument-evidence-01.yaml,
+          421-argument-evidence-02.yaml,
+          422-argument-evidence-03.yaml,
+          423-argument-evidence-04.yaml,
+          424-argument-evidence-05.yaml,
+          425-argument-evidence-06.yaml,
+          426-argument-evidence-07.yaml,
+          427-argument-evidence-08.yaml,
+          428-argument-evidence-09.yaml,
+          429-argument-evidence-10.yaml,
+        ]
+
+    - block: "430-439"
+      topic: "Counterarguments and qualification"
+      goal: "ru.goal.b2.argumentation"
+      files:
+        [
+          430-argument-counterpoints-01.yaml,
+          431-argument-counterpoints-02.yaml,
+          432-argument-counterpoints-03.yaml,
+          433-argument-counterpoints-04.yaml,
+          434-argument-counterpoints-05.yaml,
+          435-argument-counterpoints-06.yaml,
+          436-argument-counterpoints-07.yaml,
+          437-argument-counterpoints-08.yaml,
+          438-argument-counterpoints-09.yaml,
+          439-argument-counterpoints-10.yaml,
+        ]
+
+    - block: "440-449"
+      topic: "Evaluation and reasoned conclusions"
+      goal: "ru.goal.b2.argumentation"
+      files:
+        [
+          440-argument-conclusions-01.yaml,
+          441-argument-conclusions-02.yaml,
+          442-argument-conclusions-03.yaml,
+          443-argument-conclusions-04.yaml,
+          444-argument-conclusions-05.yaml,
+          445-argument-conclusions-06.yaml,
+          446-argument-conclusions-07.yaml,
+          447-argument-conclusions-08.yaml,
+          448-argument-conclusions-09.yaml,
+          449-argument-conclusions-10.yaml,
+        ]
+
+    - block: "450-459"
+      topic: "Structure and relationships between claims"
+      goal: "ru.goal.b2.critical-reading"
+      files:
+        [
+          450-reading-structure-01.yaml,
+          451-reading-structure-02.yaml,
+          452-reading-structure-03.yaml,
+          453-reading-structure-04.yaml,
+          454-reading-structure-05.yaml,
+          455-reading-structure-06.yaml,
+          456-reading-structure-07.yaml,
+          457-reading-structure-08.yaml,
+          458-reading-structure-09.yaml,
+          459-reading-structure-10.yaml,
+        ]
+
+    - block: "460-469"
+      topic: "Stance, implication, and rhetorical choices"
+      goal: "ru.goal.b2.critical-reading"
+      files:
+        [
+          460-reading-stance-01.yaml,
+          461-reading-stance-02.yaml,
+          462-reading-stance-03.yaml,
+          463-reading-stance-04.yaml,
+          464-reading-stance-05.yaml,
+          465-reading-stance-06.yaml,
+          466-reading-stance-07.yaml,
+          467-reading-stance-08.yaml,
+          468-reading-stance-09.yaml,
+          469-reading-stance-10.yaml,
+        ]
+
+    - block: "470-479"
+      topic: "Evidence quality and source limitations"
+      goal: "ru.goal.b2.critical-reading"
+      files:
+        [
+          470-reading-sources-01.yaml,
+          471-reading-sources-02.yaml,
+          472-reading-sources-03.yaml,
+          473-reading-sources-04.yaml,
+          474-reading-sources-05.yaml,
+          475-reading-sources-06.yaml,
+          476-reading-sources-07.yaml,
+          477-reading-sources-08.yaml,
+          478-reading-sources-09.yaml,
+          479-reading-sources-10.yaml,
+        ]
+
+    - block: "480-489"
+      topic: "Competing interpretations and inference"
+      goal: "ru.goal.b2.critical-reading"
+      files:
+        [
+          480-reading-interpretation-01.yaml,
+          481-reading-interpretation-02.yaml,
+          482-reading-interpretation-03.yaml,
+          483-reading-interpretation-04.yaml,
+          484-reading-interpretation-05.yaml,
+          485-reading-interpretation-06.yaml,
+          486-reading-interpretation-07.yaml,
+          487-reading-interpretation-08.yaml,
+          488-reading-interpretation-09.yaml,
+          489-reading-interpretation-10.yaml,
+        ]
+
+    - block: "490-499"
+      topic: "Accurate paraphrase and attribution"
+      goal: "ru.goal.b2.synthesis"
+      files:
+        [
+          490-synthesis-paraphrase-01.yaml,
+          491-synthesis-paraphrase-02.yaml,
+          492-synthesis-paraphrase-03.yaml,
+          493-synthesis-paraphrase-04.yaml,
+          494-synthesis-paraphrase-05.yaml,
+          495-synthesis-paraphrase-06.yaml,
+          496-synthesis-paraphrase-07.yaml,
+          497-synthesis-paraphrase-08.yaml,
+          498-synthesis-paraphrase-09.yaml,
+          499-synthesis-paraphrase-10.yaml,
+        ]
+
+    - block: "500-509"
+      topic: "Selective summaries across supplied texts"
+      goal: "ru.goal.b2.synthesis"
+      files:
+        [
+          500-synthesis-summaries-01.yaml,
+          501-synthesis-summaries-02.yaml,
+          502-synthesis-summaries-03.yaml,
+          503-synthesis-summaries-04.yaml,
+          504-synthesis-summaries-05.yaml,
+          505-synthesis-summaries-06.yaml,
+          506-synthesis-summaries-07.yaml,
+          507-synthesis-summaries-08.yaml,
+          508-synthesis-summaries-09.yaml,
+          509-synthesis-summaries-10.yaml,
+        ]
+
+    - block: "510-519"
+      topic: "Agreement, disagreement, and source comparison"
+      goal: "ru.goal.b2.synthesis"
+      files:
+        [
+          510-synthesis-comparison-01.yaml,
+          511-synthesis-comparison-02.yaml,
+          512-synthesis-comparison-03.yaml,
+          513-synthesis-comparison-04.yaml,
+          514-synthesis-comparison-05.yaml,
+          515-synthesis-comparison-06.yaml,
+          516-synthesis-comparison-07.yaml,
+          517-synthesis-comparison-08.yaml,
+          518-synthesis-comparison-09.yaml,
+          519-synthesis-comparison-10.yaml,
+        ]
+
+    - block: "520-529"
+      topic: "Integrated reports with clear attribution"
+      goal: "ru.goal.b2.synthesis"
+      files:
+        [
+          520-synthesis-reports-01.yaml,
+          521-synthesis-reports-02.yaml,
+          522-synthesis-reports-03.yaml,
+          523-synthesis-reports-04.yaml,
+          524-synthesis-reports-05.yaml,
+          525-synthesis-reports-06.yaml,
+          526-synthesis-reports-07.yaml,
+          527-synthesis-reports-08.yaml,
+          528-synthesis-reports-09.yaml,
+          529-synthesis-reports-10.yaml,
+        ]
+
+    - block: "530-539"
+      topic: "Study-oriented reading and definitions"
+      goal: "ru.goal.b2.academic-study"
+      files:
+        [
+          530-academic-reading-01.yaml,
+          531-academic-reading-02.yaml,
+          532-academic-reading-03.yaml,
+          533-academic-reading-04.yaml,
+          534-academic-reading-05.yaml,
+          535-academic-reading-06.yaml,
+          536-academic-reading-07.yaml,
+          537-academic-reading-08.yaml,
+          538-academic-reading-09.yaml,
+          539-academic-reading-10.yaml,
+        ]
+
+    - block: "540-549"
+      topic: "Structured notes and conceptual relationships"
+      goal: "ru.goal.b2.academic-study"
+      files:
+        [
+          540-academic-notes-01.yaml,
+          541-academic-notes-02.yaml,
+          542-academic-notes-03.yaml,
+          543-academic-notes-04.yaml,
+          544-academic-notes-05.yaml,
+          545-academic-notes-06.yaml,
+          546-academic-notes-07.yaml,
+          547-academic-notes-08.yaml,
+          548-academic-notes-09.yaml,
+          549-academic-notes-10.yaml,
+        ]
+
+    - block: "550-559"
+      topic: "Methods, procedures, and limitations"
+      goal: "ru.goal.b2.academic-study"
+      files:
+        [
+          550-academic-methods-01.yaml,
+          551-academic-methods-02.yaml,
+          552-academic-methods-03.yaml,
+          553-academic-methods-04.yaml,
+          554-academic-methods-05.yaml,
+          555-academic-methods-06.yaml,
+          556-academic-methods-07.yaml,
+          557-academic-methods-08.yaml,
+          558-academic-methods-09.yaml,
+          559-academic-methods-10.yaml,
+        ]
+
+    - block: "560-569"
+      topic: "Findings, interpretations, and discussion"
+      goal: "ru.goal.b2.academic-study"
+      files:
+        [
+          560-academic-findings-01.yaml,
+          561-academic-findings-02.yaml,
+          562-academic-findings-03.yaml,
+          563-academic-findings-04.yaml,
+          564-academic-findings-05.yaml,
+          565-academic-findings-06.yaml,
+          566-academic-findings-07.yaml,
+          567-academic-findings-08.yaml,
+          568-academic-findings-09.yaml,
+          569-academic-findings-10.yaml,
+        ]
+
+    - block: "570-579"
+      topic: "Professional requests and correspondence"
+      goal: "ru.goal.b2.professional-writing"
+      files:
+        [
+          570-professional-emails-01.yaml,
+          571-professional-emails-02.yaml,
+          572-professional-emails-03.yaml,
+          573-professional-emails-04.yaml,
+          574-professional-emails-05.yaml,
+          575-professional-emails-06.yaml,
+          576-professional-emails-07.yaml,
+          577-professional-emails-08.yaml,
+          578-professional-emails-09.yaml,
+          579-professional-emails-10.yaml,
+        ]
+
+    - block: "580-589"
+      topic: "Proposals, benefits, and constraints"
+      goal: "ru.goal.b2.professional-writing"
+      files:
+        [
+          580-professional-proposals-01.yaml,
+          581-professional-proposals-02.yaml,
+          582-professional-proposals-03.yaml,
+          583-professional-proposals-04.yaml,
+          584-professional-proposals-05.yaml,
+          585-professional-proposals-06.yaml,
+          586-professional-proposals-07.yaml,
+          587-professional-proposals-08.yaml,
+          588-professional-proposals-09.yaml,
+          589-professional-proposals-10.yaml,
+        ]
+
+    - block: "590-599"
+      topic: "Process descriptions and responsibilities"
+      goal: "ru.goal.b2.professional-writing"
+      files:
+        [
+          590-professional-processes-01.yaml,
+          591-professional-processes-02.yaml,
+          592-professional-processes-03.yaml,
+          593-professional-processes-04.yaml,
+          594-professional-processes-05.yaml,
+          595-professional-processes-06.yaml,
+          596-professional-processes-07.yaml,
+          597-professional-processes-08.yaml,
+          598-professional-processes-09.yaml,
+          599-professional-processes-10.yaml,
+        ]
+
+    - block: "600-609"
+      topic: "Applications and professional self-presentation"
+      goal: "ru.goal.b2.professional-writing"
+      files:
+        [
+          600-professional-applications-01.yaml,
+          601-professional-applications-02.yaml,
+          602-professional-applications-03.yaml,
+          603-professional-applications-04.yaml,
+          604-professional-applications-05.yaml,
+          605-professional-applications-06.yaml,
+          606-professional-applications-07.yaml,
+          607-professional-applications-08.yaml,
+          608-professional-applications-09.yaml,
+          609-professional-applications-10.yaml,
+        ]
+
+    - block: "610-619"
+      topic: "Requests, boundaries, and polite firmness"
+      goal: "ru.goal.b2.negotiation"
+      files:
+        [
+          610-negotiation-requests-01.yaml,
+          611-negotiation-requests-02.yaml,
+          612-negotiation-requests-03.yaml,
+          613-negotiation-requests-04.yaml,
+          614-negotiation-requests-05.yaml,
+          615-negotiation-requests-06.yaml,
+          616-negotiation-requests-07.yaml,
+          617-negotiation-requests-08.yaml,
+          618-negotiation-requests-09.yaml,
+          619-negotiation-requests-10.yaml,
+        ]
+
+    - block: "620-629"
+      topic: "Competing positions and priorities"
+      goal: "ru.goal.b2.negotiation"
+      files:
+        [
+          620-negotiation-priorities-01.yaml,
+          621-negotiation-priorities-02.yaml,
+          622-negotiation-priorities-03.yaml,
+          623-negotiation-priorities-04.yaml,
+          624-negotiation-priorities-05.yaml,
+          625-negotiation-priorities-06.yaml,
+          626-negotiation-priorities-07.yaml,
+          627-negotiation-priorities-08.yaml,
+          628-negotiation-priorities-09.yaml,
+          629-negotiation-priorities-10.yaml,
+        ]
+
+    - block: "630-639"
+      topic: "Concessions, conditions, and compromise"
+      goal: "ru.goal.b2.negotiation"
+      files:
+        [
+          630-negotiation-compromise-01.yaml,
+          631-negotiation-compromise-02.yaml,
+          632-negotiation-compromise-03.yaml,
+          633-negotiation-compromise-04.yaml,
+          634-negotiation-compromise-05.yaml,
+          635-negotiation-compromise-06.yaml,
+          636-negotiation-compromise-07.yaml,
+          637-negotiation-compromise-08.yaml,
+          638-negotiation-compromise-09.yaml,
+          639-negotiation-compromise-10.yaml,
+        ]
+
+    - block: "640-649"
+      topic: "Clarification, mediation, and agreement"
+      goal: "ru.goal.b2.negotiation"
+      files:
+        [
+          640-negotiation-mediation-01.yaml,
+          641-negotiation-mediation-02.yaml,
+          642-negotiation-mediation-03.yaml,
+          643-negotiation-mediation-04.yaml,
+          644-negotiation-mediation-05.yaml,
+          645-negotiation-mediation-06.yaml,
+          646-negotiation-mediation-07.yaml,
+          647-negotiation-mediation-08.yaml,
+          648-negotiation-mediation-09.yaml,
+          649-negotiation-mediation-10.yaml,
+        ]
+
+    - block: "650-659"
+      topic: "Public services and competing needs"
+      goal: "ru.goal.b2.society-policy"
+      files:
+        [
+          650-society-services-01.yaml,
+          651-society-services-02.yaml,
+          652-society-services-03.yaml,
+          653-society-services-04.yaml,
+          654-society-services-05.yaml,
+          655-society-services-06.yaml,
+          656-society-services-07.yaml,
+          657-society-services-08.yaml,
+          658-society-services-09.yaml,
+          659-society-services-10.yaml,
+        ]
+
+    - block: "660-669"
+      topic: "Policy options, costs, and benefits"
+      goal: "ru.goal.b2.society-policy"
+      files:
+        [
+          660-policy-options-01.yaml,
+          661-policy-options-02.yaml,
+          662-policy-options-03.yaml,
+          663-policy-options-04.yaml,
+          664-policy-options-05.yaml,
+          665-policy-options-06.yaml,
+          666-policy-options-07.yaml,
+          667-policy-options-08.yaml,
+          668-policy-options-09.yaml,
+          669-policy-options-10.yaml,
+        ]
+
+    - block: "670-679"
+      topic: "Institutions, participation, and responsibilities"
+      goal: "ru.goal.b2.society-policy"
+      files:
+        [
+          670-society-institutions-01.yaml,
+          671-society-institutions-02.yaml,
+          672-society-institutions-03.yaml,
+          673-society-institutions-04.yaml,
+          674-society-institutions-05.yaml,
+          675-society-institutions-06.yaml,
+          676-society-institutions-07.yaml,
+          677-society-institutions-08.yaml,
+          678-society-institutions-09.yaml,
+          679-society-institutions-10.yaml,
+        ]
+
+    - block: "680-689"
+      topic: "Balanced discussion of public issues"
+      goal: "ru.goal.b2.society-policy"
+      files:
+        [
+          680-public-debate-01.yaml,
+          681-public-debate-02.yaml,
+          682-public-debate-03.yaml,
+          683-public-debate-04.yaml,
+          684-public-debate-05.yaml,
+          685-public-debate-06.yaml,
+          686-public-debate-07.yaml,
+          687-public-debate-08.yaml,
+          688-public-debate-09.yaml,
+          689-public-debate-10.yaml,
+        ]
+
+    - block: "690-699"
+      topic: "Scientific explanation from supplied information"
+      goal: "ru.goal.b2.science-environment"
+      files:
+        [
+          690-science-explanation-01.yaml,
+          691-science-explanation-02.yaml,
+          692-science-explanation-03.yaml,
+          693-science-explanation-04.yaml,
+          694-science-explanation-05.yaml,
+          695-science-explanation-06.yaml,
+          696-science-explanation-07.yaml,
+          697-science-explanation-08.yaml,
+          698-science-explanation-09.yaml,
+          699-science-explanation-10.yaml,
+        ]
+
+    - block: "700-709"
+      topic: "Technology, applications, and impacts"
+      goal: "ru.goal.b2.science-environment"
+      files:
+        [
+          700-technology-impacts-01.yaml,
+          701-technology-impacts-02.yaml,
+          702-technology-impacts-03.yaml,
+          703-technology-impacts-04.yaml,
+          704-technology-impacts-05.yaml,
+          705-technology-impacts-06.yaml,
+          706-technology-impacts-07.yaml,
+          707-technology-impacts-08.yaml,
+          708-technology-impacts-09.yaml,
+          709-technology-impacts-10.yaml,
+        ]
+
+    - block: "710-719"
+      topic: "Environmental choices and trade-offs"
+      goal: "ru.goal.b2.science-environment"
+      files:
+        [
+          710-environment-choices-01.yaml,
+          711-environment-choices-02.yaml,
+          712-environment-choices-03.yaml,
+          713-environment-choices-04.yaml,
+          714-environment-choices-05.yaml,
+          715-environment-choices-06.yaml,
+          716-environment-choices-07.yaml,
+          717-environment-choices-08.yaml,
+          718-environment-choices-09.yaml,
+          719-environment-choices-10.yaml,
+        ]
+
+    - block: "720-729"
+      topic: "Risk, probability, and uncertainty"
+      goal: "ru.goal.b2.science-environment"
+      files:
+        [
+          720-risk-uncertainty-01.yaml,
+          721-risk-uncertainty-02.yaml,
+          722-risk-uncertainty-03.yaml,
+          723-risk-uncertainty-04.yaml,
+          724-risk-uncertainty-05.yaml,
+          725-risk-uncertainty-06.yaml,
+          726-risk-uncertainty-07.yaml,
+          727-risk-uncertainty-08.yaml,
+          728-risk-uncertainty-09.yaml,
+          729-risk-uncertainty-10.yaml,
+        ]
+
+    - block: "730-739"
+      topic: "Literary extracts and interpretive responses"
+      goal: "ru.goal.b2.culture-perspectives"
+      files:
+        [
+          730-culture-literature-01.yaml,
+          731-culture-literature-02.yaml,
+          732-culture-literature-03.yaml,
+          733-culture-literature-04.yaml,
+          734-culture-literature-05.yaml,
+          735-culture-literature-06.yaml,
+          736-culture-literature-07.yaml,
+          737-culture-literature-08.yaml,
+          738-culture-literature-09.yaml,
+          739-culture-literature-10.yaml,
+        ]
+
+    - block: "740-749"
+      topic: "Historical perspectives in supplied cultural texts"
+      goal: "ru.goal.b2.culture-perspectives"
+      files:
+        [
+          740-culture-memory-01.yaml,
+          741-culture-memory-02.yaml,
+          742-culture-memory-03.yaml,
+          743-culture-memory-04.yaml,
+          744-culture-memory-05.yaml,
+          745-culture-memory-06.yaml,
+          746-culture-memory-07.yaml,
+          747-culture-memory-08.yaml,
+          748-culture-memory-09.yaml,
+          749-culture-memory-10.yaml,
+        ]
+
+    - block: "750-759"
+      topic: "Identity, belonging, and representation"
+      goal: "ru.goal.b2.culture-perspectives"
+      files:
+        [
+          750-culture-identity-01.yaml,
+          751-culture-identity-02.yaml,
+          752-culture-identity-03.yaml,
+          753-culture-identity-04.yaml,
+          754-culture-identity-05.yaml,
+          755-culture-identity-06.yaml,
+          756-culture-identity-07.yaml,
+          757-culture-identity-08.yaml,
+          758-culture-identity-09.yaml,
+          759-culture-identity-10.yaml,
+        ]
+
+    - block: "760-769"
+      topic: "Intercultural comparison and perspective taking"
+      goal: "ru.goal.b2.culture-perspectives"
+      files:
+        [
+          760-culture-perspectives-01.yaml,
+          761-culture-perspectives-02.yaml,
+          762-culture-perspectives-03.yaml,
+          763-culture-perspectives-04.yaml,
+          764-culture-perspectives-05.yaml,
+          765-culture-perspectives-06.yaml,
+          766-culture-perspectives-07.yaml,
+          767-culture-perspectives-08.yaml,
+          768-culture-perspectives-09.yaml,
+          769-culture-perspectives-10.yaml,
+        ]
+
+    - block: "770-779"
+      topic: "Lexical precision and ambiguity reduction"
+      goal: "ru.goal.b2.style-register"
+      files:
+        [
+          770-style-precision-01.yaml,
+          771-style-precision-02.yaml,
+          772-style-precision-03.yaml,
+          773-style-precision-04.yaml,
+          774-style-precision-05.yaml,
+          775-style-precision-06.yaml,
+          776-style-precision-07.yaml,
+          777-style-precision-08.yaml,
+          778-style-precision-09.yaml,
+          779-style-precision-10.yaml,
+        ]
+
+    - block: "780-789"
+      topic: "Formality, politeness, and genre conventions"
+      goal: "ru.goal.b2.style-register"
+      files:
+        [
+          780-style-formality-01.yaml,
+          781-style-formality-02.yaml,
+          782-style-formality-03.yaml,
+          783-style-formality-04.yaml,
+          784-style-formality-05.yaml,
+          785-style-formality-06.yaml,
+          786-style-formality-07.yaml,
+          787-style-formality-08.yaml,
+          788-style-formality-09.yaml,
+          789-style-formality-10.yaml,
+        ]
+
+    - block: "790-799"
+      topic: "Cohesion, information flow, and emphasis"
+      goal: "ru.goal.b2.style-register"
+      files:
+        [
+          790-style-cohesion-01.yaml,
+          791-style-cohesion-02.yaml,
+          792-style-cohesion-03.yaml,
+          793-style-cohesion-04.yaml,
+          794-style-cohesion-05.yaml,
+          795-style-cohesion-06.yaml,
+          796-style-cohesion-07.yaml,
+          797-style-cohesion-08.yaml,
+          798-style-cohesion-09.yaml,
+          799-style-cohesion-10.yaml,
+        ]
+
+    - block: "800-809"
+      topic: "Integrated grammatical and stylistic revision"
+      goal: "ru.goal.b2.style-register"
+      files:
+        [
+          800-style-revision-01.yaml,
+          801-style-revision-02.yaml,
+          802-style-revision-03.yaml,
+          803-style-revision-04.yaml,
+          804-style-revision-05.yaml,
+          805-style-revision-06.yaml,
+          806-style-revision-07.yaml,
+          807-style-revision-08.yaml,
+          808-style-revision-09.yaml,
+          809-style-revision-10.yaml,
+        ]
+
+lexicon:
+  budget_basis: "Planning word budgets count distinct lexical entries, including taught fixed expressions. Inflected forms and reused entries are not counted again."
+  shard_policy: "Topic shards persist across bands. A later addition to a shard retains all earlier records."
+  recycling_policy: "Earlier shards remain available for explicitly declared reuse."
+  native_forms: "Cyrillic"
+  readings: "Cyrillic, with pedagogical stress marking where useful."
+  gloss_locale: "en-US"
+
+  on-ramp:
+    new_entry_budget: 50
+    cumulative_word_budget: 50
+    shard_additions:
+      lexicon/greetings.jsonl: 10
+      lexicon/personal.jsonl: 10
+      lexicon/classroom.jsonl: 10
+      lexicon/everyday.jsonl: 10
+      lexicon/numbers-time.jsonl: 10
+
+  A1:
+    new_entry_budget: 450
+    cumulative_word_budget: 500
+    shard_additions:
+      lexicon/personal.jsonl: 50
+      lexicon/family.jsonl: 50
+      lexicon/home.jsonl: 50
+      lexicon/routines.jsonl: 50
+      lexicon/food.jsonl: 50
+      lexicon/shopping.jsonl: 50
+      lexicon/places.jsonl: 50
+      lexicon/numbers-time.jsonl: 50
+      lexicon/messages.jsonl: 50
+
+  A2:
+    new_entry_budget: 500
+    cumulative_word_budget: 1000
+    shard_additions:
+      lexicon/events.jsonl: 50
+      lexicon/travel.jsonl: 50
+      lexicon/services.jsonl: 50
+      lexicon/wellbeing.jsonl: 50
+      lexicon/work-study.jsonl: 50
+      lexicon/social-life.jsonl: 50
+      lexicon/descriptions.jsonl: 50
+      lexicon/instructions.jsonl: 50
+      lexicon/problems.jsonl: 50
+      lexicon/messages.jsonl: 50
+
+  B1:
+    new_entry_budget: 1000
+    cumulative_word_budget: 2000
+    shard_additions:
+      lexicon/events.jsonl: 100
+      lexicon/experiences.jsonl: 100
+      lexicon/problems.jsonl: 100
+      lexicon/work-study.jsonl: 100
+      lexicon/relationships.jsonl: 100
+      lexicon/culture-media.jsonl: 100
+      lexicon/opinions.jsonl: 100
+      lexicon/information.jsonl: 100
+      lexicon/plans-conditions.jsonl: 100
+      lexicon/messages.jsonl: 100
+
+  B2:
+    new_entry_budget: 2000
+    cumulative_word_budget: 4000
+    shard_additions:
+      lexicon/argumentation.jsonl: 200
+      lexicon/critical-reading.jsonl: 200
+      lexicon/synthesis.jsonl: 200
+      lexicon/academic.jsonl: 200
+      lexicon/professional.jsonl: 200
+      lexicon/negotiation.jsonl: 200
+      lexicon/society.jsonl: 200
+      lexicon/science-environment.jsonl: 200
+      lexicon/culture-media.jsonl: 200
+      lexicon/style-register.jsonl: 200
+
+grammar:
+  file: "grammar/concepts.jsonl"
+  introduction_policy: "Each listed concept occupies the single additional-record slot of an ordinary unit before dependent use."
+  later_practice: "Previously introduced concepts recur without receiving replacement IDs."
+
+  on-ramp:
+    new_concepts: 3
+    cumulative_concepts: 3
+    concepts:
+      ru.grammar.on-ramp.formulaic-politeness: "Fixed polite messages as whole expressions; no productive verb rule inferred."
+      ru.grammar.on-ramp.zero-present-copula: "Simple present-tense nominal identification without an overt copula."
+      ru.grammar.on-ramp.eto-identification: "Basic identification with это and a nominative noun."
+
+  A1:
+    new_concepts: 20
+    cumulative_concepts: 23
+    concepts:
+      ru.grammar.a1.subject-pronouns: "Subject pronouns and basic personal reference."
+      ru.grammar.a1.noun-gender: "Basic noun gender patterns and taught exceptions."
+      ru.grammar.a1.noun-number: "Nominative singular and plural forms."
+      ru.grammar.a1.adjective-agreement: "Nominative adjective agreement with nouns."
+      ru.grammar.a1.possessives: "Basic possessive forms and agreement."
+      ru.grammar.a1.present-conjugation: "Present-tense verb forms in the two main conjugation patterns."
+      ru.grammar.a1.questions: "Basic written yes-no and question-word patterns."
+      ru.grammar.a1.negation: "Basic sentence and constituent negation with не."
+      ru.grammar.a1.accusative-inanimate: "Direct objects with taught inanimate noun patterns."
+      ru.grammar.a1.accusative-animate: "Basic direct-object patterns for taught animate nouns."
+      ru.grammar.a1.prepositional-location: "Location with в or на and the prepositional case."
+      ru.grammar.a1.genitive-basic: "Taught genitive patterns for possession, absence, and origin."
+      ru.grammar.a1.u-menya-est: "Basic possession with у and optional есть in the taught contexts."
+      ru.grammar.a1.dative-recipient-age: "Taught dative patterns for recipients and age."
+      ru.grammar.a1.instrumental-companionship: "Companionship with с and the instrumental case."
+      ru.grammar.a1.numerals-time: "Core number, clock, and date expressions taught in limited patterns."
+      ru.grammar.a1.infinitive-modals: "Basic modal or desire expressions followed by an infinitive."
+      ru.grammar.a1.past-tense: "Basic past-tense gender and number agreement."
+      ru.grammar.a1.future-imperfective: "Basic future with a form of быть and an imperfective infinitive."
+      ru.grammar.a1.basic-connectors: "Simple coordination, contrast, and reason links."
+
+  A2:
+    new_concepts: 20
+    cumulative_concepts: 43
+    concepts:
+      ru.grammar.a2.past-time-sequencing: "Time expressions and links for connected past accounts."
+      ru.grammar.a2.aspect-past-basic: "Basic imperfective and perfective choices in contextualized past accounts."
+      ru.grammar.a2.aspect-future-basic: "Imperfective and perfective future reference in taught contexts."
+      ru.grammar.a2.accusative-animacy-extended: "Extended singular and plural accusative animacy patterns."
+      ru.grammar.a2.adjective-oblique-cases: "Adjective agreement in the taught oblique-case patterns."
+      ru.grammar.a2.pronoun-oblique-cases: "Oblique personal and demonstrative pronoun forms."
+      ru.grammar.a2.genitive-quantity: "Core quantity and numeral constructions in nominative or accusative contexts."
+      ru.grammar.a2.dative-experiencer: "Taught dative experiencer constructions for feelings and preferences."
+      ru.grammar.a2.instrumental-roles: "Instrumental patterns for roles, occupations, and changes of state."
+      ru.grammar.a2.direction-origin: "Direction and origin with contrasting prepositions and cases."
+      ru.grammar.a2.unprefixed-motion: "Core идти/ходить and ехать/ездить contrasts in context."
+      ru.grammar.a2.prefixed-motion-basic: "Common arrival and departure patterns with taught prefixed motion verbs."
+      ru.grammar.a2.imperatives-basic: "Productive basic instructions and polite requests."
+      ru.grammar.a2.reflexive-verbs-basic: "Common functions of verbs in -ся without treating them all as literal reflexives."
+      ru.grammar.a2.comparison: "Basic comparative and superlative patterns."
+      ru.grammar.a2.purpose-infinitive: "Same-subject purpose with чтобы and an infinitive."
+      ru.grammar.a2.content-clauses: "Basic content clauses introduced by что."
+      ru.grammar.a2.relative-basic: "Relative clauses with nominative or accusative который."
+      ru.grammar.a2.impersonal-modals: "Expanded permission, prohibition, and necessity patterns."
+      ru.grammar.a2.frequency-duration: "Taught expressions of frequency and duration."
+
+  B1:
+    new_concepts: 20
+    cumulative_concepts: 63
+    concepts:
+      ru.grammar.b1.aspect-narration: "Aspect choices across narrative background, main events, and repetition."
+      ru.grammar.b1.aspect-negation: "Context-sensitive aspect choices under negation."
+      ru.grammar.b1.motion-prefix-system: "A wider system of motion prefixes in contextualized route accounts."
+      ru.grammar.b1.transport-carrying: "Core carrying and transporting verb contrasts."
+      ru.grammar.b1.relative-oblique: "Relative pronouns in oblique cases, including prepositional phrases."
+      ru.grammar.b1.reported-speech: "Reported statements with appropriate person and time reference."
+      ru.grammar.b1.indirect-questions: "Indirect question structures."
+      ru.grammar.b1.conditions-real: "Real and open conditional relationships."
+      ru.grammar.b1.conditional-by: "Hypothetical and counterfactual constructions with бы."
+      ru.grammar.b1.concession-basic: "Basic concessive clauses and phrases."
+      ru.grammar.b1.cause-result: "Expanded causal and result structures with their case patterns."
+      ru.grammar.b1.purpose-different-subjects: "Purpose and desired-event clauses with different subjects."
+      ru.grammar.b1.temporal-clauses: "Temporal clauses with contextualized tense and aspect choices."
+      ru.grammar.b1.short-adjectives: "Common short-form predicative adjectives."
+      ru.grammar.b1.passive-reflexive: "Contextualized passive uses of verbs in -ся."
+      ru.grammar.b1.present-active-participles: "Recognition and controlled use of common present active participles."
+      ru.grammar.b1.past-active-participles: "Recognition and controlled use of common past active participles."
+      ru.grammar.b1.short-passive-participles: "Common short passive participles in result and event descriptions."
+      ru.grammar.b1.adverbial-participles-basic: "Basic adverbial participles with shared-subject control."
+      ru.grammar.b1.information-order: "Word order for context, focus, and written emphasis."
+
+  B2:
+    new_concepts: 20
+    cumulative_concepts: 83
+    concepts:
+      ru.grammar.b2.full-passive-participles: "Full passive participles and agreement in complex noun phrases."
+      ru.grammar.b2.participial-punctuation: "Participial phrase placement and punctuation."
+      ru.grammar.b2.adverbial-participles-aspect: "Aspect and temporal interpretation in adverbial participle constructions."
+      ru.grammar.b2.adverbial-participles-control: "Shared-subject restrictions and revision of faulty constructions."
+      ru.grammar.b2.aspect-discourse: "Nuanced aspect choices in extended explanatory and argumentative contexts."
+      ru.grammar.b2.aspect-imperatives: "Context-sensitive aspect choices in requests, permissions, and prohibitions."
+      ru.grammar.b2.advanced-motion-prefixes: "Extended motion-prefix contrasts and figurative uses supported by taught entries."
+      ru.grammar.b2.nested-relative-clauses: "Nested relative clauses with clear reference and case control."
+      ru.grammar.b2.correlative-structures: "Correlative patterns linking clause elements and propositions."
+      ru.grammar.b2.concession-condition: "Complex concessive and conditional relationships."
+      ru.grammar.b2.complex-cause-purpose: "Formal and complex causal and purpose expressions."
+      ru.grammar.b2.nominalization: "Nominalization and the argument structure of derived nouns."
+      ru.grammar.b2.complex-noun-phrases: "Case relationships and ambiguity control in extended noun phrases."
+      ru.grammar.b2.numeral-declension: "Declension of compound numerals and their dependent noun phrases."
+      ru.grammar.b2.complex-agreement: "Agreement choices in complex subject and quantity constructions."
+      ru.grammar.b2.stance-qualification: "Parenthetical and modal expressions for stance, evidence, and uncertainty."
+      ru.grammar.b2.connective-scope: "Scope, placement, and punctuation of discourse connectives."
+      ru.grammar.b2.ellipsis-reference: "Recoverable ellipsis and reference across connected text."
+      ru.grammar.b2.register-syntax: "Register-sensitive choices between personal, impersonal, verbal, and nominal structures."
+      ru.grammar.b2.word-formation: "Productive word-formation patterns with attention to lexical restrictions."
+
+sentences:
+  file: "sentences/entries.jsonl"
+  cloze_policy: "Every sentence record includes cloze targets drawn from its actual Russian text."
+  introduction_policy: "A new sentence occupies the additional-record slot of an ordinary unit that introduces no new grammar concept."
+  reuse_policy: "Grammar-introduction units may reuse earlier sentences within their declared contracts."
+  band_budgets:
+    on-ramp: { new_records: 7, cumulative_records: 7 }
+    A1: { new_records: 70, cumulative_records: 77 }
+    A2: { new_records: 80, cumulative_records: 157 }
+    B1: { new_records: 180, cumulative_records: 337 }
+    B2: { new_records: 380, cumulative_records: 717 }
+
+orthography:
+  configuration_file: "language/orthography.yaml"
+  scripts:
+    - id: "ru.orth.cyrillic"
+      name: "Russian Cyrillic"
+      direction: "ltr"
+      symbol_file: "orthography/cyrillic.jsonl"
+      alphabet_letter_count: 33
+      uppercase_letter_symbols: 33
+      lowercase_letter_symbols: 33
+      additional_teaching_symbols: 1
+      total_symbol_records: 67
+      record_policy: "One record per uppercase glyph and one per lowercase glyph, plus one record for the pedagogical combining acute accent."
+      presentation: "Printed upright forms; uppercase and lowercase partners are taught together."
+      additional_symbol:
+        id: "ru.orth.cyrillic.stress-mark"
+        unicode: "U+0301"
+        name: "Combining acute accent"
+        purpose: "Pedagogical marking of the stressed vowel"
+        alphabet_letter: false
+      important_distinctions:
+        - "Е and Ё are distinct letters."
+        - "И and Й are distinct letters."
+        - "Ь and Ъ are letters with sign functions, not independent vowel or consonant sounds."
+        - "The stress mark is a teaching annotation, not an additional Russian alphabet letter."
+      teaching_order:
+        - unit_file: "010-cyrillic-a-o-m-t.yaml"
+          case_pairs: ["А а", "О о", "М м", "Т т"]
+          symbol_records: 8
+          record_order: "0-7"
+        - unit_file: "011-cyrillic-k-e-n-s.yaml"
+          case_pairs: ["К к", "Е е", "Н н", "С с"]
+          symbol_records: 8
+          record_order: "8-15"
+        - unit_file: "012-cyrillic-r-v-u-kh.yaml"
+          case_pairs: ["Р р", "В в", "У у", "Х х"]
+          symbol_records: 8
+          record_order: "16-23"
+        - unit_file: "013-cyrillic-b-p-d-g.yaml"
+          case_pairs: ["Б б", "П п", "Д д", "Г г"]
+          symbol_records: 8
+          record_order: "24-31"
+        - unit_file: "014-cyrillic-l-z-zh-i.yaml"
+          case_pairs: ["Л л", "З з", "Ж ж", "И и"]
+          symbol_records: 8
+          record_order: "32-39"
+        - unit_file: "015-cyrillic-y-short-i-yo-yu.yaml"
+          case_pairs: ["Ы ы", "Й й", "Ё ё", "Ю ю"]
+          symbol_records: 8
+          record_order: "40-47"
+        - unit_file: "016-cyrillic-ya-eh-f.yaml"
+          case_pairs: ["Я я", "Э э", "Ф ф"]
+          symbol_records: 6
+          record_order: "48-53"
+        - unit_file: "017-cyrillic-ts-ch-sh.yaml"
+          case_pairs: ["Ц ц", "Ч ч", "Ш ш"]
+          symbol_records: 6
+          record_order: "54-59"
+        - unit_file: "018-cyrillic-shch-soft-hard.yaml"
+          case_pairs: ["Щ щ", "Ь ь", "Ъ ъ"]
+          symbol_records: 6
+          record_order: "60-65"
+        - unit_file: "019-cyrillic-stress-review.yaml"
+          additional_symbol_id: "ru.orth.cyrillic.stress-mark"
+          symbol_records: 1
+          record_order: "66"
+          review_scope: "All previously introduced printed case forms."
+      deferred_scope:
+        - "Handwritten cursive and italic-specific glyph recognition."
+        - "Audio-based sound discrimination and pronunciation assessment."

@@ -37,7 +37,10 @@ one band per response). Procedure per batch:
 2. For each later response, save the full text and run
    `parse_response.py <response-file> <name>` again with the SAME label:
    batches merge into `candidates/<name>/` (a touched file is replaced
-   whole; untouched files persist).
+   whole; untouched files persist). JSONL shards can be extended with a
+   `### <path> (append)` block containing only the new lines — the
+   parser appends them and rejects duplicate ids, so the model never
+   has to re-emit a whole large shard.
 3. `score.sh` after EVERY batch, not just the last. A batch that breaks
    a gate is fixed before the next band starts.
 4. `RESULTS.md` records the per-batch gate results.

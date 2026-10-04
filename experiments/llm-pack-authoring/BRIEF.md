@@ -101,9 +101,12 @@ those units use (the on-ramp band may span several responses).
 **Phase 2+ — capacity-bounded batches:** each response delivers AT MOST
 10 units (a band may take many responses; finish a band before starting
 the next). New goals, units, assessments and the new lexicon/sentence/
-grammar records they use. Re-emit IN FULL every file you touch — e.g.
-`curriculum/goals.yaml` must contain ALL goals, old and new. Keep each
-unit's `new_item_budget` ≤ 6 at every band.
+grammar records they use. To extend an existing JSONL shard, head the
+block `### <path> (append)` and emit ONLY the new lines — the harness
+appends them and rejects duplicate ids; never re-emit a whole large
+shard. YAML files (`curriculum/goals.yaml`, unit files) are always
+re-emitted IN FULL — `goals.yaml` must contain ALL goals, old and new.
+Keep each unit's `new_item_budget` ≤ 6 at every band.
 
 Planning targets (planning estimates, not research claims): on-ramp =
 full basic script + ~50 words; A1 ≈ 500 cumulative words; A2 ≈ 1,000;
@@ -208,8 +211,11 @@ harness reconstructs the folder from these blocks. Do NOT create or
 offer to create a zip, archive, or downloadable file.
 
 In Mode B, every response uses this same format for the files it touches;
-the harness merges the batches into one pack folder. `CURRICULUM_PLAN.yaml`
-is saved by the harness outside the pack folder — it is never scored.
+the harness merges the batches into one pack folder. To add records to an
+existing JSONL shard without re-emitting it, write
+`### <relative/path> (append)` followed by only the new lines.
+`CURRICULUM_PLAN.yaml` is saved by the harness outside the pack folder —
+it is never scored.
 
 ## Worked example (structurally perfect — same shapes, replace content and locale)
 
