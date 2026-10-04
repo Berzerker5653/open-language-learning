@@ -1,0 +1,64 @@
+# ai-assisted draft unit (Mode B A1 free-time); content refs are pack data; qualified review pending.
+id: ja.unit.leisure-swim-sing
+goal_id: ja.goal.a1.free-time
+title: Swimming and singing
+summary: Swim, sing, dance; list actions with て.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.leisure.suiei
+  - ja.lex.leisure.utai
+  - ja.lex.leisure.odori
+  - ja.lex.leisure.oyogimasu
+  - ja.lex.leisure.utaimasu
+  - ja.lex.health.ugokimasu
+  allowed_grammar:
+  - ja.grammar.verb.te-form-sequence
+  - ja.grammar.verb.te-form-connect
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.leisure-swim-sing-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.leisure.suiei
+  - ja.lex.leisure.utai
+  - ja.lex.leisure.odori
+  - ja.lex.leisure.oyogimasu
+  - ja.lex.leisure.utaimasu
+  - ja.lex.health.ugokimasu
+- id: ja.activity.leisure-swim-sing-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.leisure.suiei
+  - ja.lex.leisure.utai
+  - ja.lex.leisure.odori
+  - ja.lex.leisure.oyogimasu
+  - ja.lex.leisure.utaimasu
+  - ja.lex.health.ugokimasu
+- id: ja.activity.leisure-swim-sing-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.suiei
+  - ja.lex.leisure.utai
+  - ja.lex.leisure.odori
+  - ja.lex.leisure.oyogimasu
+  - ja.lex.leisure.utaimasu
+  - ja.lex.health.ugokimasu
+- id: ja.activity.leisure-swim-sing-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.suiei
+  - ja.lex.leisure.utai
+  - ja.lex.leisure.odori
+  - ja.lex.leisure.oyogimasu
+  - ja.lex.leisure.utaimasu
+  - ja.lex.health.ugokimasu

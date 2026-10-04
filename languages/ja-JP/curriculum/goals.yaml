@@ -663,3 +663,35 @@ goals:
       tool: omp
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
+  - id: ja.goal.a1.free-time
+    description: 'Write about hobbies, favorites, and arrange leisure plans in writing:
+      media, sports, outings, and past experiences.'
+    band: A1
+    framework_refs: []
+    contexts:
+    - ja.situation.home-routine
+    modalities:
+    - listening
+    - speaking
+    - reading
+    - writing
+    prerequisites:
+    - target: ja.goal.a1.health-basics
+      dimension: grammar-controlled
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.lex.leisure.shumi
+    - ja.lex.leisure.ongaku
+    assessment_ids:
+    - ja.assess.free-time
+    transfer_required: true
+    sources:
+    - jf-standard
+    - ai-drafted-extension
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next-iq3_s
+      date: '2026-10-04'

@@ -1,0 +1,80 @@
+# ai-assisted draft unit (Mode B A1 free-time); content refs are pack data; qualified review pending.
+id: ja.unit.leisure-reading-media
+goal_id: ja.goal.a1.free-time
+title: Reading and media
+summary: Magazines, news, videos, picture books; interesting.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.leisure.zasshi
+  - ja.lex.leisure.nyuusu
+  - ja.lex.leisure.douga
+  - ja.lex.leisure.e-hon
+  - ja.lex.leisure.omoshiroi
+  - ja.lex.objects.hon
+  - ja.lex.verbs.yomimasu
+  - ja.sent.listen-news
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.leisure-reading-media-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.leisure.zasshi
+  - ja.lex.leisure.nyuusu
+  - ja.lex.leisure.douga
+  - ja.lex.leisure.e-hon
+  - ja.lex.leisure.omoshiroi
+  - ja.lex.objects.hon
+  - ja.lex.verbs.yomimasu
+  - ja.sent.listen-news
+  - ja.sent.listen-news
+- id: ja.activity.leisure-reading-media-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.leisure.zasshi
+  - ja.lex.leisure.nyuusu
+  - ja.lex.leisure.douga
+  - ja.lex.leisure.e-hon
+  - ja.lex.leisure.omoshiroi
+  - ja.lex.objects.hon
+  - ja.lex.verbs.yomimasu
+  - ja.sent.listen-news
+- id: ja.activity.leisure-reading-media-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.zasshi
+  - ja.lex.leisure.nyuusu
+  - ja.lex.leisure.douga
+  - ja.lex.leisure.e-hon
+  - ja.lex.leisure.omoshiroi
+  - ja.lex.objects.hon
+  - ja.lex.verbs.yomimasu
+  - ja.sent.listen-news
+- id: ja.activity.leisure-reading-media-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.zasshi
+  - ja.lex.leisure.nyuusu
+  - ja.lex.leisure.douga
+  - ja.lex.leisure.e-hon
+  - ja.lex.leisure.omoshiroi
+  - ja.lex.objects.hon
+  - ja.lex.verbs.yomimasu
+  - ja.sent.listen-news
+- id: ja.activity.leisure-reading-media-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.listen-news

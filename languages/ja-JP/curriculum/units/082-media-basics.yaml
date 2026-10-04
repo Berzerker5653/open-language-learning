@@ -1,0 +1,75 @@
+# ai-assisted draft unit (Mode B A1 free-time); content refs are pack data; qualified review pending.
+id: ja.unit.leisure-media-basics
+goal_id: ja.goal.a1.free-time
+title: Music, movies, manga
+summary: Media and games; watch TV.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.leisure.ongaku
+  - ja.lex.leisure.eiga
+  - ja.lex.leisure.manga
+  - ja.lex.leisure.anime
+  - ja.lex.leisure.geemu
+  - ja.lex.objects.terebi
+  - ja.sent.watch-movie
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.leisure-media-basics-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.leisure.ongaku
+  - ja.lex.leisure.eiga
+  - ja.lex.leisure.manga
+  - ja.lex.leisure.anime
+  - ja.lex.leisure.geemu
+  - ja.lex.objects.terebi
+  - ja.sent.watch-movie
+  - ja.sent.watch-movie
+- id: ja.activity.leisure-media-basics-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.leisure.ongaku
+  - ja.lex.leisure.eiga
+  - ja.lex.leisure.manga
+  - ja.lex.leisure.anime
+  - ja.lex.leisure.geemu
+  - ja.lex.objects.terebi
+  - ja.sent.watch-movie
+- id: ja.activity.leisure-media-basics-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.ongaku
+  - ja.lex.leisure.eiga
+  - ja.lex.leisure.manga
+  - ja.lex.leisure.anime
+  - ja.lex.leisure.geemu
+  - ja.lex.objects.terebi
+  - ja.sent.watch-movie
+- id: ja.activity.leisure-media-basics-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.ongaku
+  - ja.lex.leisure.eiga
+  - ja.lex.leisure.manga
+  - ja.lex.leisure.anime
+  - ja.lex.leisure.geemu
+  - ja.lex.objects.terebi
+  - ja.sent.watch-movie
+- id: ja.activity.leisure-media-basics-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.watch-movie

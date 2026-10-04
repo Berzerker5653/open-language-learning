@@ -1,0 +1,69 @@
+# ai-assisted draft unit (Mode B A1 free-time); content refs are pack data; qualified review pending.
+id: ja.unit.leisure-busy-time
+goal_id: ja.goal.a1.free-time
+title: Busy and free
+summary: Busy, for a while, always, very, not very.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.leisure.isogashii
+  - ja.lex.leisure.shibaraku
+  - ja.lex.leisure.zutto
+  - ja.lex.leisure.totemo
+  - ja.lex.leisure.amari
+  - ja.lex.time.kyou
+  - ja.lex.time.ashita
+  allowed_grammar:
+  - ja.grammar.syntax.relative-clauses
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.leisure-busy-time-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.leisure.isogashii
+  - ja.lex.leisure.shibaraku
+  - ja.lex.leisure.zutto
+  - ja.lex.leisure.totemo
+  - ja.lex.leisure.amari
+  - ja.lex.time.kyou
+  - ja.lex.time.ashita
+- id: ja.activity.leisure-busy-time-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.leisure.isogashii
+  - ja.lex.leisure.shibaraku
+  - ja.lex.leisure.zutto
+  - ja.lex.leisure.totemo
+  - ja.lex.leisure.amari
+  - ja.lex.time.kyou
+  - ja.lex.time.ashita
+- id: ja.activity.leisure-busy-time-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.isogashii
+  - ja.lex.leisure.shibaraku
+  - ja.lex.leisure.zutto
+  - ja.lex.leisure.totemo
+  - ja.lex.leisure.amari
+  - ja.lex.time.kyou
+  - ja.lex.time.ashita
+- id: ja.activity.leisure-busy-time-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.isogashii
+  - ja.lex.leisure.shibaraku
+  - ja.lex.leisure.zutto
+  - ja.lex.leisure.totemo
+  - ja.lex.leisure.amari
+  - ja.lex.time.kyou
+  - ja.lex.time.ashita

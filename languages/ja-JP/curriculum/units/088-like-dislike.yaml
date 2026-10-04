@@ -1,0 +1,76 @@
+# ai-assisted draft unit (Mode B A1 free-time); content refs are pack data; qualified review pending.
+id: ja.unit.leisure-like-dislike
+goal_id: ja.goal.a1.free-time
+title: Likes and skills
+summary: Love, good at, bad at; free time.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.leisure.daisuki
+  - ja.lex.leisure.umai
+  - ja.lex.leisure.heta
+  - ja.lex.leisure.kibishii
+  - ja.lex.leisure.hima
+  - ja.lex.adjectives.suki
+  - ja.sent.like-music
+  allowed_grammar:
+  - ja.grammar.adjectives.na-attributive
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.leisure-like-dislike-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.leisure.daisuki
+  - ja.lex.leisure.umai
+  - ja.lex.leisure.heta
+  - ja.lex.leisure.kibishii
+  - ja.lex.leisure.hima
+  - ja.lex.adjectives.suki
+  - ja.sent.like-music
+  - ja.sent.like-music
+- id: ja.activity.leisure-like-dislike-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.leisure.daisuki
+  - ja.lex.leisure.umai
+  - ja.lex.leisure.heta
+  - ja.lex.leisure.kibishii
+  - ja.lex.leisure.hima
+  - ja.lex.adjectives.suki
+  - ja.sent.like-music
+- id: ja.activity.leisure-like-dislike-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.daisuki
+  - ja.lex.leisure.umai
+  - ja.lex.leisure.heta
+  - ja.lex.leisure.kibishii
+  - ja.lex.leisure.hima
+  - ja.lex.adjectives.suki
+  - ja.sent.like-music
+- id: ja.activity.leisure-like-dislike-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.daisuki
+  - ja.lex.leisure.umai
+  - ja.lex.leisure.heta
+  - ja.lex.leisure.kibishii
+  - ja.lex.leisure.hima
+  - ja.lex.adjectives.suki
+  - ja.sent.like-music
+- id: ja.activity.leisure-like-dislike-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.like-music

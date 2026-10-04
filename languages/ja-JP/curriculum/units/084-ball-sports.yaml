@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A1 free-time); content refs are pack data; qualified review pending.
+id: ja.unit.leisure-ball-sports
+goal_id: ja.goal.a1.free-time
+title: Ball sports
+summary: Soccer, basketball, tennis, baseball, karate.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.leisure.saakaa
+  - ja.lex.leisure.basuketta
+  - ja.lex.leisure.tenisu
+  - ja.lex.leisure.yakyuu
+  - ja.lex.leisure.karate
+  - ja.sent.play-soccer
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.leisure-ball-sports-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.leisure.saakaa
+  - ja.lex.leisure.basuketta
+  - ja.lex.leisure.tenisu
+  - ja.lex.leisure.yakyuu
+  - ja.lex.leisure.karate
+  - ja.sent.play-soccer
+  - ja.sent.play-soccer
+- id: ja.activity.leisure-ball-sports-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.leisure.saakaa
+  - ja.lex.leisure.basuketta
+  - ja.lex.leisure.tenisu
+  - ja.lex.leisure.yakyuu
+  - ja.lex.leisure.karate
+  - ja.sent.play-soccer
+- id: ja.activity.leisure-ball-sports-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.saakaa
+  - ja.lex.leisure.basuketta
+  - ja.lex.leisure.tenisu
+  - ja.lex.leisure.yakyuu
+  - ja.lex.leisure.karate
+  - ja.sent.play-soccer
+- id: ja.activity.leisure-ball-sports-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.saakaa
+  - ja.lex.leisure.basuketta
+  - ja.lex.leisure.tenisu
+  - ja.lex.leisure.yakyuu
+  - ja.lex.leisure.karate
+  - ja.sent.play-soccer
+- id: ja.activity.leisure-ball-sports-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.play-soccer

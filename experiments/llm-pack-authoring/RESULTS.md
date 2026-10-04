@@ -354,3 +354,12 @@ dependencies), 10 units, 50-word `lexicon/health.jsonl`, 5 grammar
 (`verb.tai-desu`, `adjectives.na-attributive`, `particle.ni-destination`,
 `verb.past-negative`, `counters.general`), 5 sentences, 1 assessment
 (`ja.assess.health-basics`). Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 3: A1 units 082-091 (free-time)
+
+Goal `ja.goal.a1.free-time` (prereq health-basics, mirrored), 10 units,
+50-word `lexicon/leisure.jsonl`, 5 grammar (`verb.te-form-sequence`,
+`verb.ageru-kureru-morau`, `syntax.relative-clauses`, `time.expressions`,
+`verb.experience-ta`), 5 sentences (2 initial ids collided with baseline
+sentences; replaced with `watch-movie`/`listen-news`), 1 assessment.
+Score: **7/7**. A1 grammar quota (12) now fully consumed.

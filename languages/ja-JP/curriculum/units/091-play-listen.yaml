@@ -1,0 +1,71 @@
+# ai-assisted draft unit (Mode B A1 free-time); content refs are pack data; qualified review pending.
+id: ja.unit.leisure-play-listen
+goal_id: ja.goal.a1.free-time
+title: Play, watch, listen
+summary: Play, watch, listen, dance; completely.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.leisure.asobimasu
+  - ja.lex.leisure.miimasu
+  - ja.lex.leisure.kikiimasu
+  - ja.lex.leisure.odorimasu
+  - ja.lex.leisure.mattaku
+  - ja.sent.japan-experience
+  allowed_grammar:
+  - ja.grammar.verb.experience-ta
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.leisure-play-listen-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.leisure.asobimasu
+  - ja.lex.leisure.miimasu
+  - ja.lex.leisure.kikiimasu
+  - ja.lex.leisure.odorimasu
+  - ja.lex.leisure.mattaku
+  - ja.sent.japan-experience
+  - ja.sent.japan-experience
+- id: ja.activity.leisure-play-listen-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.leisure.asobimasu
+  - ja.lex.leisure.miimasu
+  - ja.lex.leisure.kikiimasu
+  - ja.lex.leisure.odorimasu
+  - ja.lex.leisure.mattaku
+  - ja.sent.japan-experience
+- id: ja.activity.leisure-play-listen-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.asobimasu
+  - ja.lex.leisure.miimasu
+  - ja.lex.leisure.kikiimasu
+  - ja.lex.leisure.odorimasu
+  - ja.lex.leisure.mattaku
+  - ja.sent.japan-experience
+- id: ja.activity.leisure-play-listen-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.asobimasu
+  - ja.lex.leisure.miimasu
+  - ja.lex.leisure.kikiimasu
+  - ja.lex.leisure.odorimasu
+  - ja.lex.leisure.mattaku
+  - ja.sent.japan-experience
+- id: ja.activity.leisure-play-listen-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.japan-experience

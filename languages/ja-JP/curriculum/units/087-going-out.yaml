@@ -1,0 +1,64 @@
+# ai-assisted draft unit (Mode B A1 free-time); content refs are pack data; qualified review pending.
+id: ja.unit.leisure-going-out
+goal_id: ja.goal.a1.free-time
+title: Going out
+summary: Picnics, camping, trips, food tours; past experience.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.leisure.pikunikku
+  - ja.lex.leisure.kampu
+  - ja.lex.leisure.ryoushuu
+  - ja.lex.leisure.tabehou
+  - ja.lex.leisure.dekakemasu
+  - ja.lex.places.eki
+  allowed_grammar:
+  - ja.grammar.verb.experience-ta
+  - ja.grammar.particle.ni-destination
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.leisure-going-out-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.leisure.pikunikku
+  - ja.lex.leisure.kampu
+  - ja.lex.leisure.ryoushuu
+  - ja.lex.leisure.tabehou
+  - ja.lex.leisure.dekakemasu
+  - ja.lex.places.eki
+- id: ja.activity.leisure-going-out-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.leisure.pikunikku
+  - ja.lex.leisure.kampu
+  - ja.lex.leisure.ryoushuu
+  - ja.lex.leisure.tabehou
+  - ja.lex.leisure.dekakemasu
+  - ja.lex.places.eki
+- id: ja.activity.leisure-going-out-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.pikunikku
+  - ja.lex.leisure.kampu
+  - ja.lex.leisure.ryoushuu
+  - ja.lex.leisure.tabehou
+  - ja.lex.leisure.dekakemasu
+  - ja.lex.places.eki
+- id: ja.activity.leisure-going-out-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.pikunikku
+  - ja.lex.leisure.kampu
+  - ja.lex.leisure.ryoushuu
+  - ja.lex.leisure.tabehou
+  - ja.lex.leisure.dekakemasu
+  - ja.lex.places.eki

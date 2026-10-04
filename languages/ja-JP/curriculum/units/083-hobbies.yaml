@@ -1,0 +1,69 @@
+# ai-assisted draft unit (Mode B A1 free-time); content refs are pack data; qualified review pending.
+id: ja.unit.leisure-hobbies
+goal_id: ja.goal.a1.free-time
+title: Hobbies and routines
+summary: Hobbies, sports, walks, hot springs; time expressions.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.leisure.shumi
+  - ja.lex.leisure.supootsu
+  - ja.lex.leisure.shoppingu
+  - ja.lex.leisure.sanpo
+  - ja.lex.leisure.onsen
+  - ja.lex.time.kyou
+  - ja.lex.health.undou
+  allowed_grammar:
+  - ja.grammar.time.expressions
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.leisure-hobbies-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.leisure.shumi
+  - ja.lex.leisure.supootsu
+  - ja.lex.leisure.shoppingu
+  - ja.lex.leisure.sanpo
+  - ja.lex.leisure.onsen
+  - ja.lex.time.kyou
+  - ja.lex.health.undou
+- id: ja.activity.leisure-hobbies-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.leisure.shumi
+  - ja.lex.leisure.supootsu
+  - ja.lex.leisure.shoppingu
+  - ja.lex.leisure.sanpo
+  - ja.lex.leisure.onsen
+  - ja.lex.time.kyou
+  - ja.lex.health.undou
+- id: ja.activity.leisure-hobbies-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.shumi
+  - ja.lex.leisure.supootsu
+  - ja.lex.leisure.shoppingu
+  - ja.lex.leisure.sanpo
+  - ja.lex.leisure.onsen
+  - ja.lex.time.kyou
+  - ja.lex.health.undou
+- id: ja.activity.leisure-hobbies-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.shumi
+  - ja.lex.leisure.supootsu
+  - ja.lex.leisure.shoppingu
+  - ja.lex.leisure.sanpo
+  - ja.lex.leisure.onsen
+  - ja.lex.time.kyou
+  - ja.lex.health.undou

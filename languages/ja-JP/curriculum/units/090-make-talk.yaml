@@ -1,0 +1,64 @@
+# ai-assisted draft unit (Mode B A1 free-time); content refs are pack data; qualified review pending.
+id: ja.unit.leisure-make-talk
+goal_id: ja.goal.a1.free-time
+title: Making and talking
+summary: Make, talk, enjoy, continue, remember; giving verbs.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.leisure.tsukurimasu
+  - ja.lex.leisure.hanashimasu
+  - ja.lex.leisure.tanoshimu
+  - ja.lex.leisure.tsuzukeru
+  - ja.lex.leisure.oboemasu
+  - ja.lex.pronouns.tomodachi
+  allowed_grammar:
+  - ja.grammar.verb.ageru-kureru-morau
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.leisure-make-talk-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.leisure.tsukurimasu
+  - ja.lex.leisure.hanashimasu
+  - ja.lex.leisure.tanoshimu
+  - ja.lex.leisure.tsuzukeru
+  - ja.lex.leisure.oboemasu
+  - ja.lex.pronouns.tomodachi
+- id: ja.activity.leisure-make-talk-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.leisure.tsukurimasu
+  - ja.lex.leisure.hanashimasu
+  - ja.lex.leisure.tanoshimu
+  - ja.lex.leisure.tsuzukeru
+  - ja.lex.leisure.oboemasu
+  - ja.lex.pronouns.tomodachi
+- id: ja.activity.leisure-make-talk-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.tsukurimasu
+  - ja.lex.leisure.hanashimasu
+  - ja.lex.leisure.tanoshimu
+  - ja.lex.leisure.tsuzukeru
+  - ja.lex.leisure.oboemasu
+  - ja.lex.pronouns.tomodachi
+- id: ja.activity.leisure-make-talk-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.leisure.tsukurimasu
+  - ja.lex.leisure.hanashimasu
+  - ja.lex.leisure.tanoshimu
+  - ja.lex.leisure.tsuzukeru
+  - ja.lex.leisure.oboemasu
+  - ja.lex.pronouns.tomodachi
