@@ -173,3 +173,34 @@ kit's, not the model's.
 **Verdict: success criterion met.** With the corrected brief, two
 different models (GPT-6 Astra Pro, Gemini) both produce 7/7 first-pass
 packs with matching shapes — the brief, not the model, is doing the work.
+
+## Kit v2: script on-ramp + full-kit protocol (2026-10-04)
+
+Owner direction: assume learners know NOTHING about the target language
+(alphabet first), and let one chat produce all bands, not just a starter.
+
+- **Hard rule 10 (script on-ramp):** non-Latin targets MUST ship
+  `language/orthography.yaml` + `orthography/<script>.jsonl` (one record
+  per symbol, `teaching_order`/`mnemonic`), a script-teaching on-ramp
+  goal, and a symbol-drill unit (`exact-match`, `new_item_budget: 0`);
+  script-reading goals get an `orthography-recognition` prerequisite on
+  the script goal. Mirrors the proven ja-JP shape (`000` greeting →
+  `010`-`015` kana → `020`+ vocabulary).
+- **Mode B (full-kit protocol):** Phase 0 emits `CURRICULUM_PLAN.yaml`
+  (bands, goal can-dos, numbered unit syllabus, per-band word budgets,
+  grammar inventory) for human approval BEFORE any pack file; then
+  skeleton+on-ramp, then one band per response, re-emitting touched
+  files whole, never deleting delivered ids. `score.sh` after every
+  batch. Word budgets (A1 ≈ 500 … B2 ≈ 4,000 cumulative) are marked
+  planning estimates, not research claims.
+- `parse_response.py` routes `CURRICULUM_PLAN.yaml` to `plans/<label>.yaml`
+  (never scored); repeated parses with the same label merge batches.
+- Verified: 16 new claims checked against `schemas/v0.2/*` (orthography
+  required/optional fields, direction enum, layout recognition,
+  `orthography-recognition` dimension, `exact-match` method, band enum,
+  `framework_refs`) — all consistent; 9 worked-example blocks still
+  identical to the example pack; parser plan-routing smoke-tested.
+
+Not yet re-run against external models: the two-model agreement was
+proven for Mode A pre-v2; a fresh round (and a Mode B dry run) is owed
+after this contract change.

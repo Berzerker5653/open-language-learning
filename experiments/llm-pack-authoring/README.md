@@ -2,7 +2,9 @@
 
 Measures whether the pack-authoring kit (contract + example pack) is
 sufficient for a *different* LLM to produce a validator-perfect pack in
-one pass — i.e. whether the kit's requirements are unambiguous.
+one pass — i.e. whether the kit's requirements are unambiguous. Mode A
+(starter) is the validated one-shot contract; Mode B grows the same pack
+band-by-band in one chat (see below).
 
 ## Procedure
 
@@ -16,6 +18,23 @@ one pass — i.e. whether the kit's requirements are unambiguous.
 3. Score: `./experiments/llm-pack-authoring/score.sh experiments/llm-pack-authoring/candidates/<name> <name>`
 4. Record the outcome in `RESULTS.md` (gates passed, diagnostics, and any
    kit ambiguity the failure reveals).
+
+### Mode B (full kit, batched)
+
+Same brief, but the model works in phases in ONE chat (plan → on-ramp →
+one band per response). Procedure per batch:
+
+1. Phase 0 emits `CURRICULUM_PLAN.yaml`; `parse_response.py` saves it to
+   `plans/<name>.yaml` (outside the pack, never scored). Review/approve
+   the plan — word budgets and grammar inventories are planning estimates
+   needing human sign-off — then tell the model to continue.
+2. For each later response, save the full text and run
+   `parse_response.py <response-file> <name>` again with the SAME label:
+   batches merge into `candidates/<name>/` (a touched file is replaced
+   whole; untouched files persist).
+3. `score.sh` after EVERY batch, not just the last. A batch that breaks
+   a gate is fixed before the next band starts.
+4. `RESULTS.md` records the per-batch gate results.
 
 ## What "perfect" means
 

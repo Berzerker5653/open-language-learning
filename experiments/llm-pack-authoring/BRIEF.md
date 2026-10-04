@@ -5,9 +5,16 @@ the Target language block below — that is the ONLY language-specific part of
 this document. Then paste the entire file to the LLM. Do not edit anything
 else; every other rule is language-neutral and derives from the block.
 
+Two modes share one contract:
+
+- **Mode A — starter pack** (default): one response, one pack, scored once.
+- **Mode B — full kit**: the same pack grown band-by-band (on-ramp → A1 →
+  A2 → …) across several responses in ONE chat, per the protocol section.
+  Score after every batch.
+
 ---
 
-You are authoring a starter language-learning pack for the **Open Language
+You are authoring a language-learning pack for the **Open Language
 Learning Platform**. Follow the contract exactly; the pack will be checked by
 an automated validator, and any rule you break will be reported.
 
@@ -24,7 +31,7 @@ an automated validator, and any rule you break will be reported.
 the placeholder locale `xx-XX` and prefix `xx` — replace both with the
 values above; change nothing else about the shapes.
 
-## Task
+## Mode A — starter pack (single response)
 
 Author a **starter pack for the target language** from scratch. Deliver, in
 your response, the complete file tree and the FULL contents of every file.
@@ -48,13 +55,52 @@ Required minimum content:
 - `sentences/entries.jsonl` — at least 3 sentences with `cloze_targets`
 - `assessments/definitions.jsonl` — at least one per goal
 
+## Mode B — full-kit protocol (all bands, batched in one chat)
+
+A starter pack is a few hours of study. A full kit takes a learner from
+zero through the bands: `on-ramp` (script + first words), `A1`, `A2`,
+`B1`, `B2`. No single response can hold that much content, so work in
+phases inside one conversation. Every phase obeys ALL hard rules and
+extends the SAME pack — later phases never rewrite or delete an id that
+was already delivered.
+
+**Phase 0 — curriculum plan (before any pack file).** Output one fenced
+block headed `### CURRICULUM_PLAN.yaml` (a planning artifact for the
+human, NOT part of the pack) with:
+
+- `bands:` every band you will cover; per band, the goal ids and one-line
+  can-do descriptions;
+- `units:` per band, the planned unit file names using blocks of ten
+  (`000`-`009` first cluster, `010`-`019` script, `020`-`029` next
+  cluster, …), each with topic and the goal it serves;
+- `lexicon:` cumulative word budget per band and the topic shards used;
+- `grammar:` the grammar concepts each band introduces;
+- `orthography:` scripts to teach and symbol counts, if the target script
+  is not Latin (see hard rule 10).
+
+Then STOP and wait for the human to approve or correct the plan. Do not
+emit pack files before approval.
+
+**Phase 1 — skeleton + on-ramp band:** manifest, sources, licenses, the
+orthography layer (if rule 10 applies), on-ramp goals/units/assessments,
+and exactly the lexicon/sentence/grammar records those units use.
+
+**Phase 2+ — one band per response:** new goals, units, assessments and
+the new lexicon/sentence/grammar records they use. Re-emit IN FULL every
+file you touch — e.g. `curriculum/goals.yaml` must contain ALL goals,
+old and new. Keep each unit's `new_item_budget` ≤ 6 at every band.
+
+Planning targets (planning estimates, not research claims; the human
+reviews the plan): on-ramp = full basic script + ~50 words; A1 ≈ 500
+cumulative words; A2 ≈ 1,000; B1 ≈ 2,000; B2 ≈ 4,000.
+
 ## Hard rules (violations = failure)
 
 1. **Packs are data.** No code, no scripts, no HTML.
 2. **ID grammar**: every id is `<p>.<kind>.<topic…>`, kebab case, ≥2
    segments, first segment = the derived id prefix `<p>` (must match the
    manifest `target_locale`). Kinds: `goal`, `lex`, `grammar`, `sent`,
-   `assess`, `unit`, `activity`, `story`, `scenario`.
+   `assess`, `unit`, `activity`, `story`, `scenario`, `orth`.
 3. **Honest statuses**: lexicon entries, grammar concepts and sentences use
    `"status": "draft"` (or `review-needed`); goals and assessments use
    `review_status: "draft"`. Units and activities have NO status field —
@@ -88,6 +134,21 @@ Required minimum content:
    worked example includes a dictation activity, so its manifest declares
    `listening: true` — keep that consistent if you keep or drop the
    activity.
+10. **Script on-ramp (non-Latin targets):** assume the learner knows
+    NOTHING — not even the alphabet. If the target language is not written
+    in Latin script, the pack MUST include `language/orthography.yaml`
+    (`schema_version` plus `scripts[]`; each script: `id`, `name`,
+    `direction` ∈ `ltr|rtl|vertical`, optional `unicode_blocks`,
+    `teaching_order`) and `orthography/<script>.jsonl` with one record per
+    teachable symbol (required: `id`, `status`, `symbol`, `reading`,
+    `sources`; include `script`, `mnemonic`, `teaching_order`,
+    `similar_to` where useful; `status` follows rule 3). Add an on-ramp
+    goal that teaches the script and at least one unit whose
+    `allowed_vocab`/`content_refs` reference those `<p>.orth.*` ids
+    (`validation_method: "exact-match"`, `new_item_budget: 0` for symbol
+    drills). Every goal that reads or writes the target script lists the
+    script goal in `prerequisites` with dimension
+    `orthography-recognition`.
 
 ## Schema notes (fields the example leaves implicit)
 
@@ -106,6 +167,10 @@ Required minimum content:
   assessment kind.)
 - Assessment `modality` must be one of: `listening`, `reading`, `speaking`,
   `writing`, `interaction`.
+- Orthography symbol records (rule 10) look like lexicon records but are
+  their own kind, e.g.
+  `{"id":"xx.orth.demo.letter-a","status":"draft","script":"example","symbol":"a","reading":"a as in cat","mnemonic":"round open mouth","teaching_order":0,"sources":["template-original"],"generation":{"method":"human","date":"2026-10-03","notes":"placeholder"}}`.
+  The `orthography-recognition` mastery dimension tracks them.
 
 ## Output format
 
@@ -123,6 +188,10 @@ JSONL files: one JSON object per line, no trailing commas, no comments.
 YAML: two-space indent. Your text response IS the deliverable: the
 harness reconstructs the folder from these blocks. Do NOT create or
 offer to create a zip, archive, or downloadable file.
+
+In Mode B, every response uses this same format for the files it touches;
+the harness merges the batches into one pack folder. `CURRICULUM_PLAN.yaml`
+is saved by the harness outside the pack folder — it is never scored.
 
 ## Worked example (structurally perfect — same shapes, replace content and locale)
 
@@ -276,3 +345,6 @@ Your pack is written to disk and run through the real toolchain:
 Also graded by a human: correctness of the target language (forms,
 agreement, naturalness) and whether the content actually teaches the stated
 goals.
+
+In Mode B every batch must pass all gates: the pack is scored after each
+phase, not only at the end.

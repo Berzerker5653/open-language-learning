@@ -48,6 +48,13 @@ def main(argv):
         if not SAFE.match(rel) or ".." in rel.split("/") or rel.startswith("/"):
             skipped.append(rel)
             continue
+        if rel == "CURRICULUM_PLAN.yaml":
+            # Mode B planning artifact: saved outside the pack, never scored.
+            plan = HERE / "plans" / f"{label}.yaml"
+            plan.parent.mkdir(parents=True, exist_ok=True)
+            plan.write_text(body.rstrip() + "\n", encoding="utf-8")
+            print(f"plan saved to {plan} (not part of the pack)")
+            continue
         dest = out / rel
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(body.rstrip() + "\n", encoding="utf-8")
