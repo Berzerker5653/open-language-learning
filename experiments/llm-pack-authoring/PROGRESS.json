@@ -11,8 +11,8 @@
     "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
     "bands_done": ["A1"],
-    "units_next": "120",
+    "units_next": "130",
     "last_score": "7/7 (2026-10-04, results/ja-JP-draft)",
-    "notes": "extension plan authored by agent, checker OK (54 goals, 740 units, 3789 new words); A1 band complete: 062-118 (6 goals: transport, health-basics, free-time, home-life, work-school, past-stories); next A2 120-219, first batch 120-129"
+    "notes": "extension plan authored by agent, checker OK (54 goals, 740 units, 3789 new words); A1 complete (062-118); A2 batches done: 120-129 city-services; next 130-139 food-cooking"
   }
 }

@@ -1,0 +1,64 @@
+# ai-assisted draft unit (Mode B A2 city-services); content refs are pack data; qualified review pending.
+id: ja.unit.city-time-every
+goal_id: ja.goal.a2.city-services
+title: Every period
+summary: This/next month; every year, month, week.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.city.kongetsu
+  - ja.lex.city.raigetsu
+  - ja.lex.city.mainen
+  - ja.lex.city.maitsuki
+  - ja.lex.city.maishuu
+  - ja.lex.time.kyou
+  allowed_grammar:
+  - ja.grammar.time.expressions
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.city-time-every-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.city.kongetsu
+  - ja.lex.city.raigetsu
+  - ja.lex.city.mainen
+  - ja.lex.city.maitsuki
+  - ja.lex.city.maishuu
+  - ja.lex.time.kyou
+- id: ja.activity.city-time-every-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.city.kongetsu
+  - ja.lex.city.raigetsu
+  - ja.lex.city.mainen
+  - ja.lex.city.maitsuki
+  - ja.lex.city.maishuu
+  - ja.lex.time.kyou
+- id: ja.activity.city-time-every-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.city.kongetsu
+  - ja.lex.city.raigetsu
+  - ja.lex.city.mainen
+  - ja.lex.city.maitsuki
+  - ja.lex.city.maishuu
+  - ja.lex.time.kyou
+- id: ja.activity.city-time-every-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.city.kongetsu
+  - ja.lex.city.raigetsu
+  - ja.lex.city.mainen
+  - ja.lex.city.maitsuki
+  - ja.lex.city.maishuu
+  - ja.lex.time.kyou

@@ -383,3 +383,9 @@ Goal `ja.goal.a1.past-stories` (prereq work-school, mirrored), 8 units,
 40-word `lexicon/narrative.jsonl`, 8 sentences, 1 assessment. Score:
 **7/7**. A1 extension complete: 57 units (062-118), 6 goals, 280 new
 words, 12 grammar, 44 sentences, 6 assessments. Next: A2 120-219.
+
+## 2026-10-04 — ja-JP batch 7: A2 units 120-129 (city-services)
+
+Goal `ja.goal.a2.city-services` (prereq a1.past-stories, mirrored), 10
+units, 50-word `lexicon/city.jsonl`, 2 grammar (`verb.te-ichidan`,
+`verb.nakereba-naranai`), 8 sentences, 1 assessment. Score: **7/7**.

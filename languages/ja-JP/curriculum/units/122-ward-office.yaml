@@ -1,0 +1,71 @@
+# ai-assisted draft unit (Mode B A2 city-services); content refs are pack data; qualified review pending.
+id: ja.unit.city-ward-office
+goal_id: ja.goal.a2.city-services
+title: Ward office
+summary: Address, seal, license, registration.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.city.yakuba
+  - ja.lex.city.jusho
+  - ja.lex.city.inkan
+  - ja.lex.city.menkyo
+  - ja.lex.city.todokedemasu
+  - ja.sent.report-address
+  allowed_grammar:
+  - ja.grammar.particle.de-means
+  - ja.grammar.verb.nakereba-naranai
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.city-ward-office-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.city.yakuba
+  - ja.lex.city.jusho
+  - ja.lex.city.inkan
+  - ja.lex.city.menkyo
+  - ja.lex.city.todokedemasu
+  - ja.sent.report-address
+  - ja.sent.report-address
+- id: ja.activity.city-ward-office-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.city.yakuba
+  - ja.lex.city.jusho
+  - ja.lex.city.inkan
+  - ja.lex.city.menkyo
+  - ja.lex.city.todokedemasu
+  - ja.sent.report-address
+- id: ja.activity.city-ward-office-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.city.yakuba
+  - ja.lex.city.jusho
+  - ja.lex.city.inkan
+  - ja.lex.city.menkyo
+  - ja.lex.city.todokedemasu
+  - ja.sent.report-address
+- id: ja.activity.city-ward-office-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.city.yakuba
+  - ja.lex.city.jusho
+  - ja.lex.city.inkan
+  - ja.lex.city.menkyo
+  - ja.lex.city.todokedemasu
+  - ja.sent.report-address
+- id: ja.activity.city-ward-office-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.report-address

@@ -1,0 +1,75 @@
+# ai-assisted draft unit (Mode B A2 city-services); content refs are pack data; qualified review pending.
+id: ja.unit.city-city-hall
+goal_id: ja.goal.a2.city-services
+title: City hall
+summary: City hall, information desk, occupation, receive.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.city.kuyakusho
+  - ja.lex.city.annaijo
+  - ja.lex.city.shokugyou
+  - ja.lex.city.mawarimasu
+  - ja.lex.city.ukeru
+  - ja.sent.city-hall
+  - ja.lex.work.shoukai-shimasu
+  allowed_grammar:
+  - ja.grammar.particle.de-means
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.city-city-hall-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.city.kuyakusho
+  - ja.lex.city.annaijo
+  - ja.lex.city.shokugyou
+  - ja.lex.city.mawarimasu
+  - ja.lex.city.ukeru
+  - ja.sent.city-hall
+  - ja.lex.work.shoukai-shimasu
+  - ja.sent.city-hall
+- id: ja.activity.city-city-hall-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.city.kuyakusho
+  - ja.lex.city.annaijo
+  - ja.lex.city.shokugyou
+  - ja.lex.city.mawarimasu
+  - ja.lex.city.ukeru
+  - ja.sent.city-hall
+  - ja.lex.work.shoukai-shimasu
+- id: ja.activity.city-city-hall-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.city.kuyakusho
+  - ja.lex.city.annaijo
+  - ja.lex.city.shokugyou
+  - ja.lex.city.mawarimasu
+  - ja.lex.city.ukeru
+  - ja.sent.city-hall
+  - ja.lex.work.shoukai-shimasu
+- id: ja.activity.city-city-hall-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.city.kuyakusho
+  - ja.lex.city.annaijo
+  - ja.lex.city.shokugyou
+  - ja.lex.city.mawarimasu
+  - ja.lex.city.ukeru
+  - ja.sent.city-hall
+  - ja.lex.work.shoukai-shimasu
+- id: ja.activity.city-city-hall-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.city-hall

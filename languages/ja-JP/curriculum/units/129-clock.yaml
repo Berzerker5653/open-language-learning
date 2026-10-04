@@ -1,0 +1,64 @@
+# ai-assisted draft unit (Mode B A2 city-services); content refs are pack data; qualified review pending.
+id: ja.unit.city-clock
+goal_id: ja.goal.a2.city-services
+title: At the shop, on time
+summary: Clerk, stop, every morning, seven, eight.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.city.tenin
+  - ja.lex.city.tomemasu
+  - ja.lex.city.maiasa
+  - ja.lex.city.shichiji
+  - ja.lex.city.hachiji
+  - ja.lex.time.kyou
+  allowed_grammar:
+  - ja.grammar.particle.ni-destination
+  - ja.grammar.verb.past-negative
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.city-clock-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.city.tenin
+  - ja.lex.city.tomemasu
+  - ja.lex.city.maiasa
+  - ja.lex.city.shichiji
+  - ja.lex.city.hachiji
+  - ja.lex.time.kyou
+- id: ja.activity.city-clock-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.city.tenin
+  - ja.lex.city.tomemasu
+  - ja.lex.city.maiasa
+  - ja.lex.city.shichiji
+  - ja.lex.city.hachiji
+  - ja.lex.time.kyou
+- id: ja.activity.city-clock-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.city.tenin
+  - ja.lex.city.tomemasu
+  - ja.lex.city.maiasa
+  - ja.lex.city.shichiji
+  - ja.lex.city.hachiji
+  - ja.lex.time.kyou
+- id: ja.activity.city-clock-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.city.tenin
+  - ja.lex.city.tomemasu
+  - ja.lex.city.maiasa
+  - ja.lex.city.shichiji
+  - ja.lex.city.hachiji
+  - ja.lex.time.kyou

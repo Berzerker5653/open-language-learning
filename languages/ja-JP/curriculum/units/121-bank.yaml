@@ -1,0 +1,71 @@
+# ai-assisted draft unit (Mode B A2 city-services); content refs are pack data; qualified review pending.
+id: ja.unit.city-bank
+goal_id: ja.goal.a2.city-services
+title: Bank
+summary: Bank, cash, currency, pay, withdraw.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.city.ginkou
+  - ja.lex.city.genkin
+  - ja.lex.city.tsuuka
+  - ja.lex.city.haraimasu
+  - ja.lex.city.oroshimasu
+  - ja.sent.withdraw-money
+  allowed_grammar:
+  - ja.grammar.particle.de-means
+  - ja.grammar.verb.te-ichidan
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.city-bank-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.city.ginkou
+  - ja.lex.city.genkin
+  - ja.lex.city.tsuuka
+  - ja.lex.city.haraimasu
+  - ja.lex.city.oroshimasu
+  - ja.sent.withdraw-money
+  - ja.sent.withdraw-money
+- id: ja.activity.city-bank-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.city.ginkou
+  - ja.lex.city.genkin
+  - ja.lex.city.tsuuka
+  - ja.lex.city.haraimasu
+  - ja.lex.city.oroshimasu
+  - ja.sent.withdraw-money
+- id: ja.activity.city-bank-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.city.ginkou
+  - ja.lex.city.genkin
+  - ja.lex.city.tsuuka
+  - ja.lex.city.haraimasu
+  - ja.lex.city.oroshimasu
+  - ja.sent.withdraw-money
+- id: ja.activity.city-bank-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.city.ginkou
+  - ja.lex.city.genkin
+  - ja.lex.city.tsuuka
+  - ja.lex.city.haraimasu
+  - ja.lex.city.oroshimasu
+  - ja.sent.withdraw-money
+- id: ja.activity.city-bank-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.withdraw-money

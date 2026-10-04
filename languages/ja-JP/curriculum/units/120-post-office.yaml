@@ -1,0 +1,71 @@
+# ai-assisted draft unit (Mode B A2 city-services); content refs are pack data; qualified review pending.
+id: ja.unit.city-post-office
+goal_id: ja.goal.a2.city-services
+title: Post office
+summary: Mail, stamps, sending letters.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.city.yubinkyoku
+  - ja.lex.city.yuubin
+  - ja.lex.city.kitte
+  - ja.lex.city.hyou
+  - ja.lex.city.kyaku
+  - ja.sent.send-letter
+  allowed_grammar:
+  - ja.grammar.particle.de-means
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.city-post-office-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.city.yubinkyoku
+  - ja.lex.city.yuubin
+  - ja.lex.city.kitte
+  - ja.lex.city.hyou
+  - ja.lex.city.kyaku
+  - ja.sent.send-letter
+  - ja.sent.send-letter
+- id: ja.activity.city-post-office-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.city.yubinkyoku
+  - ja.lex.city.yuubin
+  - ja.lex.city.kitte
+  - ja.lex.city.hyou
+  - ja.lex.city.kyaku
+  - ja.sent.send-letter
+- id: ja.activity.city-post-office-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.city.yubinkyoku
+  - ja.lex.city.yuubin
+  - ja.lex.city.kitte
+  - ja.lex.city.hyou
+  - ja.lex.city.kyaku
+  - ja.sent.send-letter
+- id: ja.activity.city-post-office-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.city.yubinkyoku
+  - ja.lex.city.yuubin
+  - ja.lex.city.kitte
+  - ja.lex.city.hyou
+  - ja.lex.city.kyaku
+  - ja.sent.send-letter
+- id: ja.activity.city-post-office-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.send-letter

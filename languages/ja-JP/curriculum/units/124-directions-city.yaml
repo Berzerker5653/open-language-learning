@@ -1,0 +1,71 @@
+# ai-assisted draft unit (Mode B A2 city-services); content refs are pack data; qualified review pending.
+id: ja.unit.city-directions-city
+goal_id: ja.goal.a2.city-services
+title: Getting around town
+summary: Map, road, transfer, tax, purchase.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.city.chizu
+  - ja.lex.city.douro
+  - ja.lex.city.furikomasu
+  - ja.lex.city.zeikin
+  - ja.lex.city.kounyuu-shimasu
+  - ja.sent.read-map
+  allowed_grammar:
+  - ja.grammar.particle.wo-traversal
+  - ja.grammar.particle.de-means
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.city-directions-city-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.city.chizu
+  - ja.lex.city.douro
+  - ja.lex.city.furikomasu
+  - ja.lex.city.zeikin
+  - ja.lex.city.kounyuu-shimasu
+  - ja.sent.read-map
+  - ja.sent.read-map
+- id: ja.activity.city-directions-city-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.city.chizu
+  - ja.lex.city.douro
+  - ja.lex.city.furikomasu
+  - ja.lex.city.zeikin
+  - ja.lex.city.kounyuu-shimasu
+  - ja.sent.read-map
+- id: ja.activity.city-directions-city-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.city.chizu
+  - ja.lex.city.douro
+  - ja.lex.city.furikomasu
+  - ja.lex.city.zeikin
+  - ja.lex.city.kounyuu-shimasu
+  - ja.sent.read-map
+- id: ja.activity.city-directions-city-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.city.chizu
+  - ja.lex.city.douro
+  - ja.lex.city.furikomasu
+  - ja.lex.city.zeikin
+  - ja.lex.city.kounyuu-shimasu
+  - ja.sent.read-map
+- id: ja.activity.city-directions-city-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.read-map

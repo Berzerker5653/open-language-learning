@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 city-services); content refs are pack data; qualified review pending.
+id: ja.unit.city-police-fire
+goal_id: ja.goal.a2.city-services
+title: Police and fire
+summary: Police box, fire brigade, surveillance, help.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.city.kouban
+  - ja.lex.city.shouboutai
+  - ja.lex.city.mibai
+  - ja.lex.city.sousa
+  - ja.lex.city.tasukemasu
+  - ja.sent.call-police
+  allowed_grammar:
+  - ja.grammar.particle.ni-destination
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.city-police-fire-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.city.kouban
+  - ja.lex.city.shouboutai
+  - ja.lex.city.mibai
+  - ja.lex.city.sousa
+  - ja.lex.city.tasukemasu
+  - ja.sent.call-police
+  - ja.sent.call-police
+- id: ja.activity.city-police-fire-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.city.kouban
+  - ja.lex.city.shouboutai
+  - ja.lex.city.mibai
+  - ja.lex.city.sousa
+  - ja.lex.city.tasukemasu
+  - ja.sent.call-police
+- id: ja.activity.city-police-fire-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.city.kouban
+  - ja.lex.city.shouboutai
+  - ja.lex.city.mibai
+  - ja.lex.city.sousa
+  - ja.lex.city.tasukemasu
+  - ja.sent.call-police
+- id: ja.activity.city-police-fire-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.city.kouban
+  - ja.lex.city.shouboutai
+  - ja.lex.city.mibai
+  - ja.lex.city.sousa
+  - ja.lex.city.tasukemasu
+  - ja.sent.call-police
+- id: ja.activity.city-police-fire-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.call-police

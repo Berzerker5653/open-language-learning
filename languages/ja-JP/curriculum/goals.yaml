@@ -791,3 +791,35 @@ goals:
       tool: omp
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
+  - id: ja.goal.a2.city-services
+    description: 'Handle city-service exchanges: post office, bank, ward office,
+      police, signs, and time expressions for schedules.'
+    band: A2
+    framework_refs: []
+    contexts:
+    - ja.situation.directions
+    modalities:
+    - listening
+    - speaking
+    - reading
+    - writing
+    prerequisites:
+    - target: ja.goal.a1.past-stories
+      dimension: grammar-controlled
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.lex.city.yubinkyoku
+    - ja.lex.city.ginkou
+    assessment_ids:
+    - ja.assess.city-services
+    transfer_required: true
+    sources:
+    - jf-standard
+    - ai-drafted-extension
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next-iq3_s
+      date: '2026-10-04'

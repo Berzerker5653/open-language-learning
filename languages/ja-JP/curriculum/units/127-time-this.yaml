@@ -1,0 +1,69 @@
+# ai-assisted draft unit (Mode B A2 city-services); content refs are pack data; qualified review pending.
+id: ja.unit.city-time-this
+goal_id: ja.goal.a2.city-services
+title: This and last
+summary: This/last/next year, this/next week.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.city.kanen
+  - ja.lex.city.kyonen
+  - ja.lex.city.rainen
+  - ja.lex.city.konshu
+  - ja.lex.city.raishu
+  - ja.lex.time.kyou
+  - ja.lex.time.ashita
+  allowed_grammar:
+  - ja.grammar.time.expressions
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.city-time-this-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.city.kanen
+  - ja.lex.city.kyonen
+  - ja.lex.city.rainen
+  - ja.lex.city.konshu
+  - ja.lex.city.raishu
+  - ja.lex.time.kyou
+  - ja.lex.time.ashita
+- id: ja.activity.city-time-this-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.city.kanen
+  - ja.lex.city.kyonen
+  - ja.lex.city.rainen
+  - ja.lex.city.konshu
+  - ja.lex.city.raishu
+  - ja.lex.time.kyou
+  - ja.lex.time.ashita
+- id: ja.activity.city-time-this-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.city.kanen
+  - ja.lex.city.kyonen
+  - ja.lex.city.rainen
+  - ja.lex.city.konshu
+  - ja.lex.city.raishu
+  - ja.lex.time.kyou
+  - ja.lex.time.ashita
+- id: ja.activity.city-time-this-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.city.kanen
+  - ja.lex.city.kyonen
+  - ja.lex.city.rainen
+  - ja.lex.city.konshu
+  - ja.lex.city.raishu
+  - ja.lex.time.kyou
+  - ja.lex.time.ashita
