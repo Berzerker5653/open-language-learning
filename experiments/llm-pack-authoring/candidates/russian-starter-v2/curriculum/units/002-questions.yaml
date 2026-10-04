@@ -1,0 +1,81 @@
+id: "ru.unit.everyday.questions"
+goal_id: "ru.goal.everyday.ask-yes-no"
+title: "Is this a pen?"
+summary: "Reuse the identification pattern and это. Introduce two writing instruments and two answer words. Read question marks, complete a question, and write questions and one-word answers from explicit English situations. New items: four lexical entries, one sentence, and one grammar concept."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.everyday.encounter-question-words"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      [
+        "ru.lex.everyday.this",
+        "ru.lex.everyday.yes",
+        "ru.lex.everyday.no",
+        "ru.lex.everyday.pen",
+        "ru.lex.everyday.pencil",
+      ]
+  - id: "ru.activity.everyday.encounter-question-pattern"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      [
+        "ru.grammar.everyday.zero-copula",
+        "ru.grammar.everyday.yes-no-questions",
+        "ru.sent.everyday.is-this-a-pen",
+      ]
+  - id: "ru.activity.everyday.recall-question-meanings"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      ["ru.lex.everyday.yes", "ru.lex.everyday.no", "ru.lex.everyday.pen", "ru.lex.everyday.pencil"]
+  - id: "ru.activity.everyday.complete-question"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.everyday.is-this-a-pen"]
+  - id: "ru.activity.everyday.write-questions-and-answers"
+    type: "recall"
+    modality: "writing"
+    support_level: 1
+    content_refs:
+      [
+        "ru.lex.everyday.this",
+        "ru.lex.everyday.yes",
+        "ru.lex.everyday.no",
+        "ru.lex.everyday.pen",
+        "ru.lex.everyday.pencil",
+        "ru.sent.everyday.is-this-a-pen",
+      ]
+generation_contract:
+  allowed_vocab:
+    [
+      "ru.lex.everyday.this",
+      "ru.lex.everyday.yes",
+      "ru.lex.everyday.no",
+      "ru.lex.everyday.pen",
+      "ru.lex.everyday.pencil",
+      "ru.sent.everyday.is-this-a-pen",
+    ]
+  allowed_grammar: ["ru.grammar.everyday.zero-copula", "ru.grammar.everyday.yes-no-questions"]
+  new_item_budget: 6
+  register: []
+  expected_interpretations:
+    [
+      "asking whether one identified writing instrument is a pen",
+      "asking whether one identified writing instrument is a pencil",
+      "answering yes when an explicitly supplied object identity matches the question",
+      "answering no when an explicitly supplied object identity does not match the question",
+    ]
+  prohibited_ambiguity:
+    [
+      "Use ручка only for a writing pen, not a handle or another sense.",
+      "Supply the object identity in English; do not ask learners to guess unseen context.",
+      "Use only positive yes-or-no questions and one-word да or нет answers; do not introduce negated questions or existence constructions.",
+      "Do not infer or assess spoken intonation from written punctuation.",
+    ]
+  target_proficiency: "A1"
+  validation_method: "choice"

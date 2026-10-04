@@ -1,0 +1,76 @@
+id: "ru.unit.everyday.objects"
+goal_id: "ru.goal.everyday.identify-objects"
+title: "This is a book"
+summary: "Learn four written forms with English glosses. Read the object-identification pattern, fill its noun slot, and write identifications from English prompts with a word bank. Earlier whole-form reading practice is helpful, not required. New items: four lexical entries, one sentence, and one grammar concept."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.everyday.encounter-object-words"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      [
+        "ru.lex.everyday.this",
+        "ru.lex.everyday.book",
+        "ru.lex.everyday.table",
+        "ru.lex.everyday.chair",
+      ]
+  - id: "ru.activity.everyday.encounter-identification"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs: ["ru.grammar.everyday.zero-copula", "ru.sent.everyday.this-is-a-book"]
+  - id: "ru.activity.everyday.recall-object-meanings"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ru.lex.everyday.this",
+        "ru.lex.everyday.book",
+        "ru.lex.everyday.table",
+        "ru.lex.everyday.chair",
+      ]
+  - id: "ru.activity.everyday.complete-identification"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.everyday.this-is-a-book"]
+  - id: "ru.activity.everyday.write-identifications"
+    type: "recall"
+    modality: "writing"
+    support_level: 1
+    content_refs:
+      [
+        "ru.lex.everyday.this",
+        "ru.lex.everyday.book",
+        "ru.lex.everyday.table",
+        "ru.lex.everyday.chair",
+        "ru.sent.everyday.this-is-a-book",
+      ]
+generation_contract:
+  allowed_vocab:
+    [
+      "ru.lex.everyday.this",
+      "ru.lex.everyday.book",
+      "ru.lex.everyday.table",
+      "ru.lex.everyday.chair",
+      "ru.sent.everyday.this-is-a-book",
+    ]
+  allowed_grammar: ["ru.grammar.everyday.zero-copula"]
+  new_item_budget: 6
+  register: []
+  expected_interpretations:
+    [
+      "identifying one object as a book",
+      "identifying one object as a table",
+      "identifying one object as a chair",
+    ]
+  prohibited_ambiguity:
+    [
+      "Use это only as the unchanged introductory element of the taught identification pattern, not as an attributive demonstrative.",
+      "Use only singular nominative naming nouns and present-time identifications.",
+      "Use стол only for a table and стул only for a chair; do not introduce other senses.",
+    ]
+  target_proficiency: "A1"
+  validation_method: "choice"

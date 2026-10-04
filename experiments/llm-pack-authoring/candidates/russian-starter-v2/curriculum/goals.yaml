@@ -1,0 +1,56 @@
+goals:
+  - id: "ru.goal.greetings.daypart"
+    description: "Recognize the four taught greeting and farewell phrases, and reproduce their fixed written forms with model support, preserving the taught adjective endings."
+    band: "on-ramp"
+    modalities: ["reading", "writing"]
+    prerequisites: []
+    required_concepts: ["ru.grammar.greetings.daypart-agreement"]
+    assessment_ids: ["ru.assess.greetings.recognize-formulas", "ru.assess.greetings.write-formulas"]
+    transfer_required: false
+    sources: ["ru-original"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "GPT-6 Astra Pro"
+      date: "2026-10-04"
+      notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.everyday.identify-objects"
+    description: "Read and write the taught 'Это + noun' pattern to identify a book, a table, or a chair, with a word bank available."
+    band: "A1"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - target: "ru.goal.greetings.daypart"
+        dimension: "orthography-recognition"
+        required_state: "supported"
+        strength: "helpful"
+    required_concepts: ["ru.grammar.everyday.zero-copula"]
+    assessment_ids:
+      ["ru.assess.everyday.recognize-identifications", "ru.assess.everyday.write-identifications"]
+    transfer_required: false
+    sources: ["ru-original"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "GPT-6 Astra Pro"
+      date: "2026-10-04"
+      notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.everyday.ask-yes-no"
+    description: "Read and write 'Это + noun?' questions about a pen or a pencil, and use да or нет to answer explicitly specified yes-or-no situations, with a word bank available."
+    band: "A1"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - target: "ru.goal.everyday.identify-objects"
+        dimension: "grammar-controlled"
+        required_state: "supported"
+        strength: "hard"
+    required_concepts: ["ru.grammar.everyday.zero-copula", "ru.grammar.everyday.yes-no-questions"]
+    assessment_ids:
+      ["ru.assess.everyday.recognize-questions", "ru.assess.everyday.write-questions-and-answers"]
+    transfer_required: false
+    sources: ["ru-original"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "GPT-6 Astra Pro"
+      date: "2026-10-04"
+      notes: "ai-drafted; needs dictionary sourcing and human review"

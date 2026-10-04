@@ -1,0 +1,71 @@
+id: "ru.unit.greetings.daypart"
+goal_id: "ru.goal.greetings.daypart"
+title: "Greetings for the day"
+summary: "Match four fixed phrases to English meanings and explicit situations. Notice adjective endings, complete the morning greeting, and reproduce the phrases with a model. No independent Cyrillic decoding is assumed. New items: four lexical phrases, one sentence, and one grammar concept."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.greetings.encounter-formulas"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      [
+        "ru.lex.greetings.good-morning",
+        "ru.lex.greetings.good-day",
+        "ru.lex.greetings.good-evening",
+        "ru.lex.greetings.goodbye",
+      ]
+  - id: "ru.activity.greetings.encounter-agreement"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs: ["ru.grammar.greetings.daypart-agreement", "ru.sent.greetings.good-morning"]
+  - id: "ru.activity.greetings.recall-formulas"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ru.lex.greetings.good-morning",
+        "ru.lex.greetings.good-day",
+        "ru.lex.greetings.good-evening",
+        "ru.lex.greetings.goodbye",
+      ]
+  - id: "ru.activity.greetings.complete-morning"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.greetings.good-morning"]
+  - id: "ru.activity.greetings.write-formulas"
+    type: "recall"
+    modality: "writing"
+    support_level: 1
+    content_refs:
+      [
+        "ru.lex.greetings.good-morning",
+        "ru.lex.greetings.good-day",
+        "ru.lex.greetings.good-evening",
+        "ru.lex.greetings.goodbye",
+      ]
+generation_contract:
+  allowed_vocab:
+    [
+      "ru.lex.greetings.good-morning",
+      "ru.lex.greetings.good-day",
+      "ru.lex.greetings.good-evening",
+      "ru.lex.greetings.goodbye",
+      "ru.sent.greetings.good-morning",
+    ]
+  allowed_grammar: ["ru.grammar.greetings.daypart-agreement"]
+  new_item_budget: 6
+  register: []
+  expected_interpretations:
+    ["a morning greeting", "a daytime greeting", "an evening greeting", "a farewell when leaving"]
+  prohibited_ambiguity:
+    [
+      "Use explicit morning, daytime, evening, or departure contexts; do not test exact clock-time boundaries.",
+      "Treat the four lexical phrases as fixed expressions; do not generate new adjective-noun combinations.",
+      "Do not introduce informal alternatives or a bedtime farewell.",
+    ]
+  target_proficiency: "on-ramp"
+  validation_method: "choice"

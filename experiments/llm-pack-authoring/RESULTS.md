@@ -6,11 +6,12 @@ test / build). The strict bar is lint = 0 errors **and 0 warnings**.
 
 ## Runs
 
-| Date       | Candidate                                                                                 | Result                                               | Notes                                                                                                                                                                                                  |
-| ---------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 2026-10-04 | `self-test` (`tools/pack-templates/example-pack`)                                         | 7/7 PASS                                             | proves the harness itself works                                                                                                                                                                        |
-| 2026-10-04 | `calibration-self` (`candidates/calibration-self/`)                                       | 7/7 PASS                                             | self-authored German pack scored with the kit; proves `BRIEF.md` is achievable as written                                                                                                              |
-| 2026-10-04 | `ru-starter` (`candidates/ru-starter/`) — external LLM (GPT-6 Astra Pro), Russian `ru-RU` | 18 errors first pass → 7/7 PASS after mechanical fix | only failures: schema-forbidden `status`/`sources` on goals/units/activities/assessments — invited by brief rules 3+5 wording (fixed). Russian content itself accurate; no language corrections needed |
+| Date       | Candidate                                                                                                                      | Result                                               | Notes                                                                                                                                                                                                  |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 2026-10-04 | `self-test` (`tools/pack-templates/example-pack`)                                                                              | 7/7 PASS                                             | proves the harness itself works                                                                                                                                                                        |
+| 2026-10-04 | `calibration-self` (`candidates/calibration-self/`)                                                                            | 7/7 PASS                                             | self-authored German pack scored with the kit; proves `BRIEF.md` is achievable as written                                                                                                              |
+| 2026-10-04 | `ru-starter` (`candidates/ru-starter/`) — external LLM (GPT-6 Astra Pro), Russian `ru-RU`                                      | 18 errors first pass → 7/7 PASS after mechanical fix | only failures: schema-forbidden `status`/`sources` on goals/units/activities/assessments — invited by brief rules 3+5 wording (fixed). Russian content itself accurate; no language corrections needed |
+| 2026-10-04 | `russian-starter-v2` (`candidates/russian-starter-v2/`) — external LLM (GPT-6 Astra Pro), Russian `ru-RU`, **corrected brief** | **7/7 PASS first try**                               | zero errors, zero warnings, no fixes needed. Confirms the brief fixes closed the run-1 defects. Russian content accurate (see below)                                                                   |
 
 ## Calibration findings (brief gaps found and fixed)
 
@@ -94,3 +95,32 @@ this environment: no completion tiers or subagent model configured):
   `tools/pack-templates/example-pack/`, which scores 7/7.
 - Brief is prettier-stable (JSONL examples in ` ```text ` fences).
 - Target language block pre-filled Russian (`ru-RU`) for the re-run.
+
+## Corrected-brief re-run #1: russian-starter-v2 (2026-10-04)
+
+Same model as run 1 (GPT-6 Astra Pro), corrected brief, delivered as a
+zip. **7/7 PASS on the first pass — no mechanical fixes required.** The
+run-1 failure class (schema-forbidden `status`/`sources`) is gone: units,
+activities and assessments carry no status/sources fields; goals and
+assessments use `review_status`. The corrected rules 3+5 did their job.
+
+Content review (my read; NOT a substitute for qualified human review —
+everything stays `draft`):
+
+- All Russian forms correct: доброе утро, добрый день, добрый вечер, до
+  свидания, это, книга, стол, стул, да, нет, ручка, карандаш.
+- Grammar accurate and well-scoped: neuter утро→доброе vs masculine
+  день/вечер→добрый agreement; zero copula with Это; yes/no questions by
+  question mark with да/нет one-word answers. Explicit out-of-scope notes
+  (no negated questions, no existence constructions, no spoken-intonation
+  inference).
+- `prohibited_ambiguity` pedagogically careful: ручка = writing pen not
+  handle; supply object identity in English rather than force guessing;
+  written-only questions.
+- `new_item_budget: 6` matches the summary's item count (4 lex + 1 sent +
+  1 grammar) — internally consistent.
+- Prerequisite records use valid dimension/state/strength and a sensible
+  progression (greetings → identify → yes/no questions).
+
+Verdict: corrected brief yields a clean first-pass pack from this model.
+Awaiting the second model for the cross-model consistency check.
