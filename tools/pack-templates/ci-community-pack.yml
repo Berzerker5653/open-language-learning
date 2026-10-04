@@ -1,0 +1,27 @@
+# CI template for community language-pack repositories.
+# Copy into .github/workflows/pack.yml. The engine repo hosts the
+# `langpack` CLI; pin a release tag for reproducibility.
+name: pack
+on:
+  push:
+  pull_request:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install langpack CLI
+        run: |
+          git clone --depth 1 https://github.com/openlanguage-lts/LTS.git lts-tooling
+          cargo install --path lts-tooling/crates/langpack-cli --locked
+      - name: Full conformance gate
+        run: langpack test .
+      - name: Build archive on tags
+        if: startsWith(github.ref, 'refs/tags/')
+        run: langpack build . -o pack.lpk
+      - uses: actions/upload-artifact@v4
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          name: pack-lpk
+          path: pack.lpk

@@ -1,0 +1,3 @@
+{"id":"xx.lex.demo.tola","status":"draft","forms":[{"text":"tola","is_primary":true}],"readings":[{"text":"tola","script":"latin"}],"glosses":{"en-US":["hello"]},"sources":["template-original"]}
+{"id":"xx.lex.demo.mara","status":"draft","forms":[{"text":"mara","is_primary":true}],"readings":[{"text":"mara","script":"latin"}],"glosses":{"en-US":["friend"]},"sources":["template-original"]}
+{"id":"xx.lex.demo.shina","status":"draft","forms":[{"text":"shina","is_primary":true}],"readings":[{"text":"shina","script":"latin"}],"glosses":{"en-US":["good day"]},"sources":["template-original"]}

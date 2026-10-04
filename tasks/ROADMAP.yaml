@@ -927,7 +927,55 @@ tasks:
   - docs/03_CURRICULUM_AND_MASTERY.md
   acceptance:
   - Packs declare kanji instruction data (character, meaning/reading prompts, radical decomposition, optional mnemonic story, review_status); the app runs a Heisig/WaniKani-style low-stakes drill (meaning and reading recognition from the character) whose evidence lands on existing dimensions only.
-  - Instruction is gated by SRS: newly drilled characters resurface on the scheduler's due date; untaught/unreviewed characters never enter the stream; AI-drafted mnemonics stay `draft`/`review-needed` and are labelled as such in the UI.
+  - Instruction is gated by the scheduler; newly drilled characters resurface on the scheduler's due date; untaught/unreviewed characters never enter the stream; AI-drafted mnemonics stay `draft`/`review-needed` and are labelled as such in the UI.
+- id: K-20
+  milestone: M6
+  priority: P2
+  title: Agent-facing pack authoring contract (PACK-AI-001 subset)
+  dependencies: []
+  read_first:
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  - schemas/README.md
+  - tools/AI_LANGUAGE_PACK_AUTHOR_PROMPT.md
+  acceptance:
+  - One agent-facing authoring contract document merges the requirements digest (layout contract, schema list, review/provenance rules), a per-unit authoring brief template, and a worked complete-unit example; a CI template for community pack repos runs `langpack validate`/`test` on every change.
+- id: K-21
+  milestone: M6
+  priority: P2
+  title: Generation contract fields in unit schema
+  dependencies: []
+  read_first:
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  acceptance:
+  - Units may declare a machine-checkable generation contract (docs/03 §12 — allowed vocab/grammar references, new-item budget, register, validation method); the validator checks referenced ids exist and the fields are well-formed, so AI-drafted units can be validated against their own declared constraints.
+- id: K-22
+  milestone: M6
+  priority: P2
+  title: Chunking conventions for growing packs
+  dependencies: []
+  read_first:
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  acceptance:
+  - Documented conventions (with template examples) for topic-sharded lexicon files (`lexicon/<topic>.jsonl`) and unit-per-lesson naming; already layout-legal, so no engine change — the convention doc must match what `langpack validate` actually accepts.
+- id: K-23
+  milestone: M6
+  priority: P2
+  title: goals/*.yaml sharding
+  dependencies: []
+  read_first:
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  acceptance:
+  - "`curriculum/goals/*.yaml` is accepted alongside the single `curriculum/goals.yaml` (top-level `goals:` array per file, ids deduped across files); existing packs validate unchanged."
+- id: K-24
+  milestone: M6
+  priority: P2
+  title: langpack new-unit / new-lexicon scaffold subcommands
+  dependencies: []
+  read_first:
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  acceptance:
+  - "`langpack new-unit <pack> <id>` and `langpack new-lexicon <pack> <id>` write schema-valid starter files (status draft, sources placeholder marked for replacement) into the pack directory so an agent authors one lesson at a time with instant `validate` feedback."
 - id: GAME-001
   milestone: M7
   priority: P1

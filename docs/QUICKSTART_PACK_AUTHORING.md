@@ -5,6 +5,9 @@ contract and per-type schemas live in `schemas/v0.2/` (see its README);
 this document is the workflow around it. All commands are the
 `langpack` CLI (`cargo run -p lts-langpack-cli --` or a built binary).
 
+The single agent-facing contract — requirements digest, templates,
+worked example, CI — is `docs/PACK_AUTHORING_CONTRACT.md`.
+
 ## 1. Start a pack
 
 ```sh

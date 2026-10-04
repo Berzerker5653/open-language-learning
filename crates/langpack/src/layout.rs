@@ -15,6 +15,7 @@
 //! activities/scenarios/*.yaml      scenario                 (single doc)
 //! assessments/definitions.jsonl    assessment               (one per line)
 //! grammar/concepts.jsonl           concept                  (one per line)
+//! lexicon/*.jsonl                  lexical-entry            (one per line)
 //! grammar/dependencies.yaml        (mirror of prerequisite edges; structural)
 //! sources.jsonl                    source-entry             (one per line)
 //! licenses.jsonl                   license-inventory        (one per line)

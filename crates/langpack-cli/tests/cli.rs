@@ -94,3 +94,20 @@ fn audit_curriculum_and_sources_commands() {
     assert!(out.contains("source_terms_inconsistent"), "{out}");
     assert!(out.contains("unused_source"), "{out}");
 }
+
+#[test]
+fn worked_example_template_pack_stays_clean() {
+    // The contract's worked example (docs/PACK_AUTHORING_CONTRACT.md)
+    // must stay lint-clean so agents can copy it with confidence.
+    let pack = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tools/pack-templates/example-pack")
+        .to_str()
+        .unwrap()
+        .to_string();
+    let (out, err, ok) = run(&["validate", &pack]);
+    assert!(ok, "example pack must validate: {out}{err}");
+    let (out, _err, ok) = run(&["lint", &pack]);
+    assert!(ok, "example pack must be lint-clean: {out}");
+    let (out, _err, ok) = run(&["audit-curriculum", &pack]);
+    assert!(ok, "example pack curriculum must audit clean: {out}");
+}

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-03",
-  "active_task": null,
+  "active_task": "K-21",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -624,6 +624,24 @@
         "state/evidence/K-16/vitest-2026-10-03.txt",
         "state/evidence/K-16/smoke-desktop-2026-10-03.txt"
       ]
+    }
+    ,
+    "K-20": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/K-20.md",
+        "state/evidence/K-20/example-pack-gates-2026-10-03.txt",
+        "state/evidence/K-20/cargo-test-2026-10-03.txt"
+      ]
+    }
+    ,
+    "K-21": {
+      "status": "in_progress",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": []
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence."
