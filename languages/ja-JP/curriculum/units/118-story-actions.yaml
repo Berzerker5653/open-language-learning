@@ -1,0 +1,71 @@
+# ai-assisted draft unit (Mode B A1 past-stories); content refs are pack data; qualified review pending.
+id: ja.unit.narrative-story-actions
+goal_id: ja.goal.a1.past-stories
+title: Story actions
+summary: Climb, cross; suddenly, and then, surely.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.narrative.noborimasu
+  - ja.lex.narrative.watarimasu
+  - ja.lex.narrative.totsuzen
+  - ja.lex.narrative.sorekara
+  - ja.lex.narrative.kanarazu
+  - ja.sent.suddenly-rain
+  allowed_grammar:
+  - ja.grammar.verb.te-form-sequence
+  - ja.grammar.particle.de-means
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.narrative-story-actions-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.narrative.noborimasu
+  - ja.lex.narrative.watarimasu
+  - ja.lex.narrative.totsuzen
+  - ja.lex.narrative.sorekara
+  - ja.lex.narrative.kanarazu
+  - ja.sent.suddenly-rain
+  - ja.sent.suddenly-rain
+- id: ja.activity.narrative-story-actions-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.narrative.noborimasu
+  - ja.lex.narrative.watarimasu
+  - ja.lex.narrative.totsuzen
+  - ja.lex.narrative.sorekara
+  - ja.lex.narrative.kanarazu
+  - ja.sent.suddenly-rain
+- id: ja.activity.narrative-story-actions-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.narrative.noborimasu
+  - ja.lex.narrative.watarimasu
+  - ja.lex.narrative.totsuzen
+  - ja.lex.narrative.sorekara
+  - ja.lex.narrative.kanarazu
+  - ja.sent.suddenly-rain
+- id: ja.activity.narrative-story-actions-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.narrative.noborimasu
+  - ja.lex.narrative.watarimasu
+  - ja.lex.narrative.totsuzen
+  - ja.lex.narrative.sorekara
+  - ja.lex.narrative.kanarazu
+  - ja.sent.suddenly-rain
+- id: ja.activity.narrative-story-actions-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.suddenly-rain

@@ -1,0 +1,76 @@
+# ai-assisted draft unit (Mode B A1 past-stories); content refs are pack data; qualified review pending.
+id: ja.unit.narrative-story-feelings
+goal_id: ja.goal.a1.past-stories
+title: Story feelings
+summary: Amazing, strange, happy, sad, nostalgic.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.narrative.sugoi
+  - ja.lex.narrative.fushigi
+  - ja.lex.narrative.ureshii
+  - ja.lex.narrative.kanashii
+  - ja.lex.narrative.natsukashii
+  - ja.lex.leisure.utai
+  - ja.sent.nostalgic-song
+  allowed_grammar:
+  - ja.grammar.particle.topic-wa
+  - ja.grammar.copula.polite-desu
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.narrative-story-feelings-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.narrative.sugoi
+  - ja.lex.narrative.fushigi
+  - ja.lex.narrative.ureshii
+  - ja.lex.narrative.kanashii
+  - ja.lex.narrative.natsukashii
+  - ja.lex.leisure.utai
+  - ja.sent.nostalgic-song
+  - ja.sent.nostalgic-song
+- id: ja.activity.narrative-story-feelings-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.narrative.sugoi
+  - ja.lex.narrative.fushigi
+  - ja.lex.narrative.ureshii
+  - ja.lex.narrative.kanashii
+  - ja.lex.narrative.natsukashii
+  - ja.lex.leisure.utai
+  - ja.sent.nostalgic-song
+- id: ja.activity.narrative-story-feelings-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.narrative.sugoi
+  - ja.lex.narrative.fushigi
+  - ja.lex.narrative.ureshii
+  - ja.lex.narrative.kanashii
+  - ja.lex.narrative.natsukashii
+  - ja.lex.leisure.utai
+  - ja.sent.nostalgic-song
+- id: ja.activity.narrative-story-feelings-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.narrative.sugoi
+  - ja.lex.narrative.fushigi
+  - ja.lex.narrative.ureshii
+  - ja.lex.narrative.kanashii
+  - ja.lex.narrative.natsukashii
+  - ja.lex.leisure.utai
+  - ja.sent.nostalgic-song
+- id: ja.activity.narrative-story-feelings-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.nostalgic-song

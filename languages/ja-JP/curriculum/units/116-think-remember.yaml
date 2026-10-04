@@ -1,0 +1,76 @@
+# ai-assisted draft unit (Mode B A1 past-stories); content refs are pack data; qualified review pending.
+id: ja.unit.narrative-think-remember
+goal_id: ja.goal.a1.past-stories
+title: Thinking and remembering
+summary: Think, tell, convey, know, remember.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.narrative.omoimasu
+  - ja.lex.narrative.katarimasu
+  - ja.lex.narrative.tsutaemasu
+  - ja.lex.narrative.shirimasu
+  - ja.lex.narrative.omoidasu
+  - ja.sent.remember-trip
+  - ja.lex.leisure.ryoushuu
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  - ja.grammar.syntax.relative-clauses
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.narrative-think-remember-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.narrative.omoimasu
+  - ja.lex.narrative.katarimasu
+  - ja.lex.narrative.tsutaemasu
+  - ja.lex.narrative.shirimasu
+  - ja.lex.narrative.omoidasu
+  - ja.sent.remember-trip
+  - ja.lex.leisure.ryoushuu
+  - ja.sent.remember-trip
+- id: ja.activity.narrative-think-remember-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.narrative.omoimasu
+  - ja.lex.narrative.katarimasu
+  - ja.lex.narrative.tsutaemasu
+  - ja.lex.narrative.shirimasu
+  - ja.lex.narrative.omoidasu
+  - ja.sent.remember-trip
+  - ja.lex.leisure.ryoushuu
+- id: ja.activity.narrative-think-remember-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.narrative.omoimasu
+  - ja.lex.narrative.katarimasu
+  - ja.lex.narrative.tsutaemasu
+  - ja.lex.narrative.shirimasu
+  - ja.lex.narrative.omoidasu
+  - ja.sent.remember-trip
+  - ja.lex.leisure.ryoushuu
+- id: ja.activity.narrative-think-remember-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.narrative.omoimasu
+  - ja.lex.narrative.katarimasu
+  - ja.lex.narrative.tsutaemasu
+  - ja.lex.narrative.shirimasu
+  - ja.lex.narrative.omoidasu
+  - ja.sent.remember-trip
+  - ja.lex.leisure.ryoushuu
+- id: ja.activity.narrative-think-remember-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.remember-trip

@@ -376,3 +376,10 @@ Goal `ja.goal.a1.work-school` (prereq home-life, mirrored), 10 units,
 50-word `lexicon/work.jsonl` (suru-verb ids hyphenated to satisfy id
 schema), 10 sentences (one collided with baseline `study-japanese`;
 renamed to `study-everyday`), 1 assessment. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 6: A1 units 111-118 (past-stories) — A1 BAND COMPLETE
+
+Goal `ja.goal.a1.past-stories` (prereq work-school, mirrored), 8 units,
+40-word `lexicon/narrative.jsonl`, 8 sentences, 1 assessment. Score:
+**7/7**. A1 extension complete: 57 units (062-118), 6 goals, 280 new
+words, 12 grammar, 44 sentences, 6 assessments. Next: A2 120-219.

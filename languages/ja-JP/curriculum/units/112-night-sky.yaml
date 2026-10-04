@@ -1,0 +1,71 @@
+# ai-assisted draft unit (Mode B A1 past-stories); content refs are pack data; qualified review pending.
+id: ja.unit.narrative-night-sky
+goal_id: ja.goal.a1.past-stories
+title: The night sky
+summary: Sky, stars, moon, clouds, snow.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.narrative.sora
+  - ja.lex.narrative.hoshi
+  - ja.lex.narrative.tsuki
+  - ja.lex.narrative.kumo
+  - ja.lex.narrative.yuki
+  - ja.sent.stars-in-sky
+  allowed_grammar:
+  - ja.grammar.particle.ni-destination
+  - ja.grammar.copula.polite-desu
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.narrative-night-sky-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.narrative.sora
+  - ja.lex.narrative.hoshi
+  - ja.lex.narrative.tsuki
+  - ja.lex.narrative.kumo
+  - ja.lex.narrative.yuki
+  - ja.sent.stars-in-sky
+  - ja.sent.stars-in-sky
+- id: ja.activity.narrative-night-sky-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.narrative.sora
+  - ja.lex.narrative.hoshi
+  - ja.lex.narrative.tsuki
+  - ja.lex.narrative.kumo
+  - ja.lex.narrative.yuki
+  - ja.sent.stars-in-sky
+- id: ja.activity.narrative-night-sky-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.narrative.sora
+  - ja.lex.narrative.hoshi
+  - ja.lex.narrative.tsuki
+  - ja.lex.narrative.kumo
+  - ja.lex.narrative.yuki
+  - ja.sent.stars-in-sky
+- id: ja.activity.narrative-night-sky-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.narrative.sora
+  - ja.lex.narrative.hoshi
+  - ja.lex.narrative.tsuki
+  - ja.lex.narrative.kumo
+  - ja.lex.narrative.yuki
+  - ja.sent.stars-in-sky
+- id: ja.activity.narrative-night-sky-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.stars-in-sky

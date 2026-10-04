@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A1 past-stories); content refs are pack data; qualified review pending.
+id: ja.unit.narrative-land-sea
+goal_id: ja.goal.a1.past-stories
+title: Mountain, river, sea
+summary: Landscape nouns; moon over the mountain.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.narrative.yama
+  - ja.lex.narrative.kawa
+  - ja.lex.narrative.mori
+  - ja.lex.narrative.umi
+  - ja.lex.narrative.ishi
+  - ja.sent.moon-over-mountain
+  allowed_grammar:
+  - ja.grammar.particle.ni-destination
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.narrative-land-sea-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.narrative.yama
+  - ja.lex.narrative.kawa
+  - ja.lex.narrative.mori
+  - ja.lex.narrative.umi
+  - ja.lex.narrative.ishi
+  - ja.sent.moon-over-mountain
+  - ja.sent.moon-over-mountain
+- id: ja.activity.narrative-land-sea-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.narrative.yama
+  - ja.lex.narrative.kawa
+  - ja.lex.narrative.mori
+  - ja.lex.narrative.umi
+  - ja.lex.narrative.ishi
+  - ja.sent.moon-over-mountain
+- id: ja.activity.narrative-land-sea-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.narrative.yama
+  - ja.lex.narrative.kawa
+  - ja.lex.narrative.mori
+  - ja.lex.narrative.umi
+  - ja.lex.narrative.ishi
+  - ja.sent.moon-over-mountain
+- id: ja.activity.narrative-land-sea-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.narrative.yama
+  - ja.lex.narrative.kawa
+  - ja.lex.narrative.mori
+  - ja.lex.narrative.umi
+  - ja.lex.narrative.ishi
+  - ja.sent.moon-over-mountain
+- id: ja.activity.narrative-land-sea-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.moon-over-mountain
