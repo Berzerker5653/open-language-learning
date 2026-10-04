@@ -1,0 +1,70 @@
+id: "ru.unit.on-ramp.cyrillic-k-e-n-s"
+goal_id: "ru.goal.on-ramp.cyrillic"
+title: "Printed Cyrillic: К к, Е е, Н н, С с"
+summary: "Recognize these printed case pairs, match each letter to its partner and copy the requested case. Letter-name labels are not audio tasks."
+estimated_minutes: 5
+activities:
+  - id: "ru.activity.on-ramp.cyrillic-k-e-n-s-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      [
+        "ru.orth.cyrillic.k-upper",
+        "ru.orth.cyrillic.k-lower",
+        "ru.orth.cyrillic.e-upper",
+        "ru.orth.cyrillic.e-lower",
+        "ru.orth.cyrillic.n-upper",
+        "ru.orth.cyrillic.n-lower",
+        "ru.orth.cyrillic.s-upper",
+        "ru.orth.cyrillic.s-lower",
+      ]
+  - id: "ru.activity.on-ramp.cyrillic-k-e-n-s-recognize"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ru.orth.cyrillic.k-upper",
+        "ru.orth.cyrillic.k-lower",
+        "ru.orth.cyrillic.e-upper",
+        "ru.orth.cyrillic.e-lower",
+        "ru.orth.cyrillic.n-upper",
+        "ru.orth.cyrillic.n-lower",
+        "ru.orth.cyrillic.s-upper",
+        "ru.orth.cyrillic.s-lower",
+      ]
+  - id: "ru.activity.on-ramp.cyrillic-k-e-n-s-copy"
+    type: "recall"
+    modality: "writing"
+    support_level: 1
+    content_refs:
+      [
+        "ru.orth.cyrillic.k-upper",
+        "ru.orth.cyrillic.k-lower",
+        "ru.orth.cyrillic.e-upper",
+        "ru.orth.cyrillic.e-lower",
+        "ru.orth.cyrillic.n-upper",
+        "ru.orth.cyrillic.n-lower",
+        "ru.orth.cyrillic.s-upper",
+        "ru.orth.cyrillic.s-lower",
+      ]
+generation_contract:
+  allowed_vocab:
+    [
+      "ru.orth.cyrillic.k-upper",
+      "ru.orth.cyrillic.k-lower",
+      "ru.orth.cyrillic.e-upper",
+      "ru.orth.cyrillic.e-lower",
+      "ru.orth.cyrillic.n-upper",
+      "ru.orth.cyrillic.n-lower",
+      "ru.orth.cyrillic.s-upper",
+      "ru.orth.cyrillic.s-lower",
+    ]
+  allowed_grammar: []
+  new_item_budget: 0
+  register: []
+  expected_interpretations: ["Recognition and copying of the exact requested Cyrillic symbol."]
+  prohibited_ambiguity: ["Reject a Latin lookalike or the wrong case."]
+  target_proficiency: "on-ramp"
+  validation_method: "exact-match"

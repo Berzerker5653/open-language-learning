@@ -1,0 +1,71 @@
+id: "ru.unit.on-ramp.self-introduction-02"
+goal_id: "ru.goal.on-ramp.self-introduction"
+title: "Minimal written introductions"
+summary: "Read two names and three naming expressions. Contrast the fixed polite question with the first-person answer; complete the identity model and write an introduction using a taught name."
+estimated_minutes: 6
+activities:
+  - id: "ru.activity.on-ramp.self-introduction-02-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      [
+        "ru.lex.personal.anna",
+        "ru.lex.personal.ivan",
+        "ru.lex.personal.imya",
+        "ru.lex.personal.menya-zovut",
+        "ru.lex.personal.kak-vas-zovut",
+        "ru.sent.on-ramp.anna-introduction",
+      ]
+  - id: "ru.activity.on-ramp.self-introduction-02-recall"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ru.lex.personal.ya",
+        "ru.lex.personal.ty",
+        "ru.lex.personal.vy",
+        "ru.lex.personal.on",
+        "ru.lex.personal.ona",
+      ]
+  - id: "ru.activity.on-ramp.self-introduction-02-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.on-ramp.anna-introduction"]
+  - id: "ru.activity.on-ramp.self-introduction-02-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs:
+      [
+        "ru.lex.personal.anna",
+        "ru.lex.personal.ivan",
+        "ru.lex.personal.imya",
+        "ru.lex.personal.menya-zovut",
+        "ru.lex.personal.kak-vas-zovut",
+      ]
+generation_contract:
+  allowed_vocab:
+    [
+      "ru.lex.personal.ya",
+      "ru.lex.personal.ty",
+      "ru.lex.personal.vy",
+      "ru.lex.personal.on",
+      "ru.lex.personal.ona",
+      "ru.lex.personal.anna",
+      "ru.lex.personal.ivan",
+      "ru.lex.personal.imya",
+      "ru.lex.personal.menya-zovut",
+      "ru.lex.personal.kak-vas-zovut",
+      "ru.sent.on-ramp.anna-introduction",
+    ]
+  allowed_grammar:
+    ["ru.grammar.on-ramp.formulaic-politeness", "ru.grammar.on-ramp.zero-present-copula"]
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["A taught name, fixed naming question or first-person introduction."]
+  prohibited_ambiguity: ["Do not infer productive case or verb rules from a naming chunk."]
+  target_proficiency: "on-ramp"
+  validation_method: "choice"

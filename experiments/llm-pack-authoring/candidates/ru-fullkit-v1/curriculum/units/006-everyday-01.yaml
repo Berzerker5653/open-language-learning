@@ -1,0 +1,60 @@
+id: "ru.unit.on-ramp.everyday-01"
+goal_id: "ru.goal.on-ramp.everyday"
+title: "Familiar people and objects"
+summary: "Read four familiar nouns and the identification word. Learn that это stays unchanged in the identification pattern; complete sentence practice follows in unit 007."
+estimated_minutes: 6
+activities:
+  - id: "ru.activity.on-ramp.everyday-01-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      [
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+        "ru.lex.everyday.stol",
+        "ru.lex.everyday.kniga",
+        "ru.lex.everyday.mama",
+        "ru.grammar.on-ramp.eto-identification",
+      ]
+  - id: "ru.activity.on-ramp.everyday-01-recognize"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+        "ru.lex.everyday.stol",
+        "ru.lex.everyday.kniga",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.on-ramp.everyday-01-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 1
+    content_refs:
+      [
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+        "ru.lex.everyday.stol",
+        "ru.lex.everyday.kniga",
+        "ru.lex.everyday.mama",
+      ]
+generation_contract:
+  allowed_vocab:
+    [
+      "ru.lex.everyday.eto",
+      "ru.lex.everyday.dom",
+      "ru.lex.everyday.stol",
+      "ru.lex.everyday.kniga",
+      "ru.lex.everyday.mama",
+    ]
+  allowed_grammar:
+    ["ru.grammar.on-ramp.zero-present-copula", "ru.grammar.on-ramp.eto-identification"]
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Naming a person or object with the fixed identification pattern."]
+  prohibited_ambiguity: ["Do not change это to agree with the following noun."]
+  target_proficiency: "on-ramp"
+  validation_method: "choice"

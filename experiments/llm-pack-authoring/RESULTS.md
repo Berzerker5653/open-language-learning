@@ -263,3 +263,47 @@ whole-file. Smoke-tested: create → append → duplicate-rejected, shard
 intact. Brief + README updated with the append convention.
 
 Verdict: v1 plan needs no further adjustments; Phase 1 may start.
+
+## Mode B Phase 1 batch: on-ramp delivered (2026-10-04)
+
+External model's Phase 1 response (Russian on-ramp): 20 units (000-009
+first words, 010-019 Cyrillic), 6 on-ramp goals, 67 symbol records, 50
+lexicon + 7 sentences + 3 grammar concepts = exactly the 60 new items
+the v1 plan promised for the band. Pasted as an attachment, which
+truncated mid-record (last assessment `ru.assess.on-ramp.numbers-writing`
+cut at `"kind":"p`) and stripped the `###`/fence markers — files were
+transcribed manually into `candidates/ru-fullkit-v1/` instead of
+`parse_response.py`.
+
+Score: 6/7. The single failure chain is the truncated assessment
+record (unresolved reference → lint warning → test/build fail).
+Everything else green first pass: validate 0/0, all audits, build.
+
+**Kit defect found:** the model wrote script-level `teaching_order` as
+a list of symbol ids — the schema wants an INTEGER (script order among
+the language's scripts, cf. ja-JP 0-3); per-symbol order lives in each
+symbol record's own `teaching_order`. The brief's rule 10 never stated
+the type. Fixed in the brief (explicit integer + "NOT a list of symbol
+ids"); candidate fixed mechanically.
+
+Protocol note: the model delivered 20 units in one response (Phase 1
+cap is ≤10). It matched the plan's on-ramp block exactly and scored
+clean, so the cap is a reliability guard, not a content gate — watch
+it on bigger bands where response size actually bites.
+
+Content review of the batch (my read; NOT qualified human review —
+everything stays `draft`): letter names and mnemonics correct
+(эм/тэ/ка/эн/эс/эр/вэ/ха/бэ/пэ/дэ/гэ/эль/зэ/жэ/и краткое/эф/цэ/че/ша/ща,
+мягкий/твёрдый знак "no independent sound"); stress marks in all 50
+readings correct (здра́вствуйте, спаси́бо, пожа́луйста, извини́те,
+чита́йте, пиши́те, вы́берите, повтори́те, объясни́те, помоги́те,
+четы́ре, во́семь, де́вять, …); T-V distinction fenced; ручка fenced to
+the pen sense; это-identification "unchanged before feminine noun"
+correct; commands fenced as fixed chunks, not imperative rules;
+capabilities honest (no listening/speaking activities). Source URL is
+`urn:uuid:…` — audit-sources accepts it (has a url), a new variant of
+the original-source pattern; fine.
+
+Pending: owner to resend the tail of the response (the
+`numbers-writing` assessment record) as an append block or plain text;
+then re-score for 7/7.

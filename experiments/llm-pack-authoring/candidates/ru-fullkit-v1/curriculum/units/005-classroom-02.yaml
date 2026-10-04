@@ -1,0 +1,69 @@
+id: "ru.unit.on-ramp.classroom-02"
+goal_id: "ru.goal.on-ramp.classroom"
+title: "Taught clarification requests"
+summary: "Learn five clarification chunks for text exchanges. Ask for repetition or explanation of a written message and complete the repeat request."
+estimated_minutes: 6
+activities:
+  - id: "ru.activity.on-ramp.classroom-02-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      [
+        "ru.lex.classroom.povtorite",
+        "ru.lex.classroom.ne-ponimayu",
+        "ru.lex.classroom.obyasnite",
+        "ru.lex.classroom.pomogite",
+        "ru.lex.classroom.eshchyo-raz",
+        "ru.lex.greetings.pozhaluysta",
+        "ru.sent.on-ramp.repeat-please",
+      ]
+  - id: "ru.activity.on-ramp.classroom-02-recognize"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ru.lex.classroom.povtorite",
+        "ru.lex.classroom.ne-ponimayu",
+        "ru.lex.classroom.obyasnite",
+        "ru.lex.classroom.pomogite",
+        "ru.lex.classroom.eshchyo-raz",
+      ]
+  - id: "ru.activity.on-ramp.classroom-02-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.on-ramp.repeat-please"]
+  - id: "ru.activity.on-ramp.classroom-02-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs:
+      [
+        "ru.lex.classroom.povtorite",
+        "ru.lex.classroom.ne-ponimayu",
+        "ru.lex.classroom.obyasnite",
+        "ru.lex.classroom.pomogite",
+        "ru.lex.classroom.eshchyo-raz",
+      ]
+generation_contract:
+  allowed_vocab:
+    [
+      "ru.lex.classroom.povtorite",
+      "ru.lex.classroom.ne-ponimayu",
+      "ru.lex.classroom.obyasnite",
+      "ru.lex.classroom.pomogite",
+      "ru.lex.classroom.eshchyo-raz",
+      "ru.lex.greetings.pozhaluysta",
+      "ru.sent.on-ramp.repeat-please",
+    ]
+  allowed_grammar: ["ru.grammar.on-ramp.formulaic-politeness"]
+  new_item_budget: 6
+  register: []
+  expected_interpretations:
+    ["Non-understanding or a request to repeat, explain or help in writing."]
+  prohibited_ambiguity:
+    ["No listening or pronunciation task is implied by repeating a written message."]
+  target_proficiency: "on-ramp"
+  validation_method: "choice"

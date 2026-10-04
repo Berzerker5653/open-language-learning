@@ -1,0 +1,69 @@
+id: "ru.unit.on-ramp.classroom-01"
+goal_id: "ru.goal.on-ramp.classroom"
+title: "Essential written learning instructions"
+summary: "Read three written task instructions and the labels for word and letter. Treat commands as fixed chunks and complete the polite reading request."
+estimated_minutes: 6
+activities:
+  - id: "ru.activity.on-ramp.classroom-01-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      [
+        "ru.lex.classroom.chitayte",
+        "ru.lex.classroom.pishite",
+        "ru.lex.classroom.vyberite",
+        "ru.lex.classroom.slovo",
+        "ru.lex.classroom.bukva",
+        "ru.lex.greetings.pozhaluysta",
+        "ru.sent.on-ramp.read-please",
+      ]
+  - id: "ru.activity.on-ramp.classroom-01-recognize"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ru.lex.classroom.chitayte",
+        "ru.lex.classroom.pishite",
+        "ru.lex.classroom.vyberite",
+        "ru.lex.classroom.slovo",
+        "ru.lex.classroom.bukva",
+      ]
+  - id: "ru.activity.on-ramp.classroom-01-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.on-ramp.read-please"]
+  - id: "ru.activity.on-ramp.classroom-01-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs:
+      [
+        "ru.lex.classroom.chitayte",
+        "ru.lex.classroom.pishite",
+        "ru.lex.classroom.vyberite",
+        "ru.lex.classroom.slovo",
+        "ru.lex.classroom.bukva",
+      ]
+generation_contract:
+  allowed_vocab:
+    [
+      "ru.lex.classroom.chitayte",
+      "ru.lex.classroom.pishite",
+      "ru.lex.classroom.vyberite",
+      "ru.lex.classroom.slovo",
+      "ru.lex.classroom.bukva",
+      "ru.lex.greetings.pozhaluysta",
+      "ru.sent.on-ramp.read-please",
+    ]
+  allowed_grammar: ["ru.grammar.on-ramp.formulaic-politeness"]
+  new_item_budget: 6
+  register: []
+  expected_interpretations:
+    ["A fixed instruction to read, write or choose, or a written word/letter label."]
+  prohibited_ambiguity:
+    ["The taught commands are polite or plural chunks, not a general imperative rule."]
+  target_proficiency: "on-ramp"
+  validation_method: "choice"

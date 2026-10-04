@@ -1,0 +1,77 @@
+id: "ru.unit.on-ramp.everyday-02"
+goal_id: "ru.goal.on-ramp.everyday"
+title: "Simple written identification"
+summary: "Learn five further person/object nouns. Read and complete the book identification, then reuse the same pattern with taught nominative nouns."
+estimated_minutes: 6
+activities:
+  - id: "ru.activity.on-ramp.everyday-02-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      [
+        "ru.lex.everyday.papa",
+        "ru.lex.everyday.drug",
+        "ru.lex.everyday.podruga",
+        "ru.lex.everyday.ruchka",
+        "ru.lex.everyday.stul",
+        "ru.sent.on-ramp.this-is-book",
+      ]
+  - id: "ru.activity.on-ramp.everyday-02-recognize"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+        "ru.lex.everyday.stol",
+        "ru.lex.everyday.kniga",
+        "ru.lex.everyday.mama",
+        "ru.lex.everyday.papa",
+        "ru.lex.everyday.drug",
+        "ru.lex.everyday.podruga",
+        "ru.lex.everyday.ruchka",
+        "ru.lex.everyday.stul",
+      ]
+  - id: "ru.activity.on-ramp.everyday-02-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.on-ramp.this-is-book"]
+  - id: "ru.activity.on-ramp.everyday-02-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs:
+      [
+        "ru.lex.everyday.papa",
+        "ru.lex.everyday.drug",
+        "ru.lex.everyday.podruga",
+        "ru.lex.everyday.ruchka",
+        "ru.lex.everyday.stul",
+      ]
+generation_contract:
+  allowed_vocab:
+    [
+      "ru.lex.everyday.eto",
+      "ru.lex.everyday.dom",
+      "ru.lex.everyday.stol",
+      "ru.lex.everyday.kniga",
+      "ru.lex.everyday.mama",
+      "ru.lex.everyday.papa",
+      "ru.lex.everyday.drug",
+      "ru.lex.everyday.podruga",
+      "ru.lex.everyday.ruchka",
+      "ru.lex.everyday.stul",
+      "ru.sent.on-ramp.this-is-book",
+    ]
+  allowed_grammar:
+    ["ru.grammar.on-ramp.zero-present-copula", "ru.grammar.on-ramp.eto-identification"]
+  new_item_budget: 6
+  register: []
+  expected_interpretations:
+    ["Identifying a familiar person or object rather than describing ownership."]
+  prohibited_ambiguity: ["Use the writing-instrument meaning of ручка."]
+  target_proficiency: "on-ramp"
+  validation_method: "choice"

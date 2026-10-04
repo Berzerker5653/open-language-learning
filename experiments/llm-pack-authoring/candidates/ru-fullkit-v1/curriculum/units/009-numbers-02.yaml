@@ -1,0 +1,83 @@
+id: "ru.unit.on-ramp.numbers-02"
+goal_id: "ru.goal.on-ramp.numbers"
+title: "Number words five through nine"
+summary: "Match number words five through nine to digits, review all ten and complete the model for printed digit 5. Write words from digits and digits from words."
+estimated_minutes: 6
+activities:
+  - id: "ru.activity.on-ramp.numbers-02-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      [
+        "ru.lex.numbers-time.pyat",
+        "ru.lex.numbers-time.shest",
+        "ru.lex.numbers-time.sem",
+        "ru.lex.numbers-time.vosem",
+        "ru.lex.numbers-time.devyat",
+        "ru.lex.everyday.eto",
+        "ru.sent.on-ramp.this-is-five",
+      ]
+  - id: "ru.activity.on-ramp.numbers-02-recognize"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ru.lex.numbers-time.nol",
+        "ru.lex.numbers-time.odin",
+        "ru.lex.numbers-time.dva",
+        "ru.lex.numbers-time.tri",
+        "ru.lex.numbers-time.chetyre",
+        "ru.lex.numbers-time.pyat",
+        "ru.lex.numbers-time.shest",
+        "ru.lex.numbers-time.sem",
+        "ru.lex.numbers-time.vosem",
+        "ru.lex.numbers-time.devyat",
+      ]
+  - id: "ru.activity.on-ramp.numbers-02-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.on-ramp.this-is-five"]
+  - id: "ru.activity.on-ramp.numbers-02-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs:
+      [
+        "ru.lex.numbers-time.nol",
+        "ru.lex.numbers-time.odin",
+        "ru.lex.numbers-time.dva",
+        "ru.lex.numbers-time.tri",
+        "ru.lex.numbers-time.chetyre",
+        "ru.lex.numbers-time.pyat",
+        "ru.lex.numbers-time.shest",
+        "ru.lex.numbers-time.sem",
+        "ru.lex.numbers-time.vosem",
+        "ru.lex.numbers-time.devyat",
+      ]
+generation_contract:
+  allowed_vocab:
+    [
+      "ru.lex.numbers-time.nol",
+      "ru.lex.numbers-time.odin",
+      "ru.lex.numbers-time.dva",
+      "ru.lex.numbers-time.tri",
+      "ru.lex.numbers-time.chetyre",
+      "ru.lex.numbers-time.pyat",
+      "ru.lex.numbers-time.shest",
+      "ru.lex.numbers-time.sem",
+      "ru.lex.numbers-time.vosem",
+      "ru.lex.numbers-time.devyat",
+      "ru.lex.everyday.eto",
+      "ru.sent.on-ramp.this-is-five",
+    ]
+  allowed_grammar: ["ru.grammar.on-ramp.eto-identification"]
+  new_item_budget: 6
+  register: []
+  expected_interpretations:
+    ["Recognizing and writing the ten digit names, including the printed 5."]
+  prohibited_ambiguity: ["Use isolated digit names rather than quantity-plus-noun constructions."]
+  target_proficiency: "on-ramp"
+  validation_method: "choice"

@@ -1,0 +1,62 @@
+id: "ru.unit.on-ramp.cyrillic-shch-soft-hard"
+goal_id: "ru.goal.on-ramp.cyrillic"
+title: "Printed Cyrillic: Щ щ, Ь ь, Ъ ъ"
+summary: "Recognize these printed case pairs, match each letter to its partner and copy the requested case. Letter-name labels are not audio tasks."
+estimated_minutes: 5
+activities:
+  - id: "ru.activity.on-ramp.cyrillic-shch-soft-hard-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      [
+        "ru.orth.cyrillic.shch-upper",
+        "ru.orth.cyrillic.shch-lower",
+        "ru.orth.cyrillic.soft-sign-upper",
+        "ru.orth.cyrillic.soft-sign-lower",
+        "ru.orth.cyrillic.hard-sign-upper",
+        "ru.orth.cyrillic.hard-sign-lower",
+      ]
+  - id: "ru.activity.on-ramp.cyrillic-shch-soft-hard-recognize"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ru.orth.cyrillic.shch-upper",
+        "ru.orth.cyrillic.shch-lower",
+        "ru.orth.cyrillic.soft-sign-upper",
+        "ru.orth.cyrillic.soft-sign-lower",
+        "ru.orth.cyrillic.hard-sign-upper",
+        "ru.orth.cyrillic.hard-sign-lower",
+      ]
+  - id: "ru.activity.on-ramp.cyrillic-shch-soft-hard-copy"
+    type: "recall"
+    modality: "writing"
+    support_level: 1
+    content_refs:
+      [
+        "ru.orth.cyrillic.shch-upper",
+        "ru.orth.cyrillic.shch-lower",
+        "ru.orth.cyrillic.soft-sign-upper",
+        "ru.orth.cyrillic.soft-sign-lower",
+        "ru.orth.cyrillic.hard-sign-upper",
+        "ru.orth.cyrillic.hard-sign-lower",
+      ]
+generation_contract:
+  allowed_vocab:
+    [
+      "ru.orth.cyrillic.shch-upper",
+      "ru.orth.cyrillic.shch-lower",
+      "ru.orth.cyrillic.soft-sign-upper",
+      "ru.orth.cyrillic.soft-sign-lower",
+      "ru.orth.cyrillic.hard-sign-upper",
+      "ru.orth.cyrillic.hard-sign-lower",
+    ]
+  allowed_grammar: []
+  new_item_budget: 0
+  register: []
+  expected_interpretations: ["Recognition and copying of the exact requested Cyrillic symbol."]
+  prohibited_ambiguity: ["Reject a Latin lookalike or the wrong case."]
+  target_proficiency: "on-ramp"
+  validation_method: "exact-match"

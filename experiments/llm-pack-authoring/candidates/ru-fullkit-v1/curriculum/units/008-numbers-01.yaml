@@ -1,0 +1,67 @@
+id: "ru.unit.on-ramp.numbers-01"
+goal_id: "ru.goal.on-ramp.numbers"
+title: "Number words zero through four"
+summary: "Match number words zero through four to digits and write the words. Complete the model identifying the printed digit 0; do not combine numerals with counted nouns."
+estimated_minutes: 6
+activities:
+  - id: "ru.activity.on-ramp.numbers-01-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      [
+        "ru.lex.numbers-time.nol",
+        "ru.lex.numbers-time.odin",
+        "ru.lex.numbers-time.dva",
+        "ru.lex.numbers-time.tri",
+        "ru.lex.numbers-time.chetyre",
+        "ru.lex.everyday.eto",
+        "ru.sent.on-ramp.this-is-zero",
+      ]
+  - id: "ru.activity.on-ramp.numbers-01-recognize"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ru.lex.numbers-time.nol",
+        "ru.lex.numbers-time.odin",
+        "ru.lex.numbers-time.dva",
+        "ru.lex.numbers-time.tri",
+        "ru.lex.numbers-time.chetyre",
+      ]
+  - id: "ru.activity.on-ramp.numbers-01-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.on-ramp.this-is-zero"]
+  - id: "ru.activity.on-ramp.numbers-01-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs:
+      [
+        "ru.lex.numbers-time.nol",
+        "ru.lex.numbers-time.odin",
+        "ru.lex.numbers-time.dva",
+        "ru.lex.numbers-time.tri",
+        "ru.lex.numbers-time.chetyre",
+      ]
+generation_contract:
+  allowed_vocab:
+    [
+      "ru.lex.numbers-time.nol",
+      "ru.lex.numbers-time.odin",
+      "ru.lex.numbers-time.dva",
+      "ru.lex.numbers-time.tri",
+      "ru.lex.numbers-time.chetyre",
+      "ru.lex.everyday.eto",
+      "ru.sent.on-ramp.this-is-zero",
+    ]
+  allowed_grammar: ["ru.grammar.on-ramp.eto-identification"]
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Naming printed digits 0 through 4 using the taught number forms."]
+  prohibited_ambiguity: ["No counted noun, gender substitution or numeral declension is requested."]
+  target_proficiency: "on-ramp"
+  validation_method: "choice"

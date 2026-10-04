@@ -1,0 +1,119 @@
+goals:
+  - id: "ru.goal.on-ramp.cyrillic"
+    description: "Recognize and copy all printed Cyrillic letter case forms and interpret the teaching stress mark."
+    band: "on-ramp"
+    modalities: ["reading", "writing"]
+    prerequisites: []
+    required_concepts: []
+    assessment_ids: ["ru.assess.on-ramp.cyrillic-recognition", "ru.assess.on-ramp.cyrillic-writing"]
+    transfer_required: false
+    sources: ["ru-original"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "GPT-6 Astra Pro"
+      date: "2026-10-04"
+      notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.on-ramp.greetings"
+    description: "Read and write taught greetings, farewells, and polite responses in short text exchanges."
+    band: "on-ramp"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - target: "ru.goal.on-ramp.cyrillic"
+        dimension: "orthography-recognition"
+        required_state: "independent"
+        strength: "hard"
+    required_concepts: ["ru.grammar.on-ramp.formulaic-politeness"]
+    assessment_ids:
+      ["ru.assess.on-ramp.greetings-recognition", "ru.assess.on-ramp.greetings-writing"]
+    transfer_required: false
+    sources: ["ru-original"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "GPT-6 Astra Pro"
+      date: "2026-10-04"
+      notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.on-ramp.self-introduction"
+    description: "Read and write a name and a minimal self-introduction using taught patterns."
+    band: "on-ramp"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - target: "ru.goal.on-ramp.cyrillic"
+        dimension: "orthography-recognition"
+        required_state: "independent"
+        strength: "hard"
+    required_concepts:
+      ["ru.grammar.on-ramp.formulaic-politeness", "ru.grammar.on-ramp.zero-present-copula"]
+    assessment_ids:
+      [
+        "ru.assess.on-ramp.self-introduction-recognition",
+        "ru.assess.on-ramp.self-introduction-writing",
+      ]
+    transfer_required: false
+    sources: ["ru-original"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "GPT-6 Astra Pro"
+      date: "2026-10-04"
+      notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.on-ramp.classroom"
+    description: "Recognize essential written learning instructions and use taught clarification requests."
+    band: "on-ramp"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - target: "ru.goal.on-ramp.cyrillic"
+        dimension: "orthography-recognition"
+        required_state: "independent"
+        strength: "hard"
+    required_concepts: ["ru.grammar.on-ramp.formulaic-politeness"]
+    assessment_ids:
+      ["ru.assess.on-ramp.classroom-recognition", "ru.assess.on-ramp.classroom-writing"]
+    transfer_required: false
+    sources: ["ru-original"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "GPT-6 Astra Pro"
+      date: "2026-10-04"
+      notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.on-ramp.everyday"
+    description: "Identify familiar people and objects in short written identification statements."
+    band: "on-ramp"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - target: "ru.goal.on-ramp.cyrillic"
+        dimension: "orthography-recognition"
+        required_state: "independent"
+        strength: "hard"
+    required_concepts:
+      ["ru.grammar.on-ramp.zero-present-copula", "ru.grammar.on-ramp.eto-identification"]
+    assessment_ids: ["ru.assess.on-ramp.everyday-recognition", "ru.assess.on-ramp.everyday-writing"]
+    transfer_required: false
+    sources: ["ru-original"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "GPT-6 Astra Pro"
+      date: "2026-10-04"
+      notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.on-ramp.numbers"
+    description: "Match and write the number words zero through nine and their digits."
+    band: "on-ramp"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - target: "ru.goal.on-ramp.cyrillic"
+        dimension: "orthography-recognition"
+        required_state: "independent"
+        strength: "hard"
+    required_concepts: ["ru.grammar.on-ramp.eto-identification"]
+    assessment_ids: ["ru.assess.on-ramp.numbers-recognition", "ru.assess.on-ramp.numbers-writing"]
+    transfer_required: false
+    sources: ["ru-original"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "GPT-6 Astra Pro"
+      date: "2026-10-04"
+      notes: "ai-drafted; needs dictionary sourcing and human review"

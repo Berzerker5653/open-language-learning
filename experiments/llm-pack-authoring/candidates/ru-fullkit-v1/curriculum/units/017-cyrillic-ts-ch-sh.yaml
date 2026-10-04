@@ -1,0 +1,62 @@
+id: "ru.unit.on-ramp.cyrillic-ts-ch-sh"
+goal_id: "ru.goal.on-ramp.cyrillic"
+title: "Printed Cyrillic: Ц ц, Ч ч, Ш ш"
+summary: "Recognize these printed case pairs, match each letter to its partner and copy the requested case. Letter-name labels are not audio tasks."
+estimated_minutes: 5
+activities:
+  - id: "ru.activity.on-ramp.cyrillic-ts-ch-sh-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      [
+        "ru.orth.cyrillic.ts-upper",
+        "ru.orth.cyrillic.ts-lower",
+        "ru.orth.cyrillic.ch-upper",
+        "ru.orth.cyrillic.ch-lower",
+        "ru.orth.cyrillic.sh-upper",
+        "ru.orth.cyrillic.sh-lower",
+      ]
+  - id: "ru.activity.on-ramp.cyrillic-ts-ch-sh-recognize"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ru.orth.cyrillic.ts-upper",
+        "ru.orth.cyrillic.ts-lower",
+        "ru.orth.cyrillic.ch-upper",
+        "ru.orth.cyrillic.ch-lower",
+        "ru.orth.cyrillic.sh-upper",
+        "ru.orth.cyrillic.sh-lower",
+      ]
+  - id: "ru.activity.on-ramp.cyrillic-ts-ch-sh-copy"
+    type: "recall"
+    modality: "writing"
+    support_level: 1
+    content_refs:
+      [
+        "ru.orth.cyrillic.ts-upper",
+        "ru.orth.cyrillic.ts-lower",
+        "ru.orth.cyrillic.ch-upper",
+        "ru.orth.cyrillic.ch-lower",
+        "ru.orth.cyrillic.sh-upper",
+        "ru.orth.cyrillic.sh-lower",
+      ]
+generation_contract:
+  allowed_vocab:
+    [
+      "ru.orth.cyrillic.ts-upper",
+      "ru.orth.cyrillic.ts-lower",
+      "ru.orth.cyrillic.ch-upper",
+      "ru.orth.cyrillic.ch-lower",
+      "ru.orth.cyrillic.sh-upper",
+      "ru.orth.cyrillic.sh-lower",
+    ]
+  allowed_grammar: []
+  new_item_budget: 0
+  register: []
+  expected_interpretations: ["Recognition and copying of the exact requested Cyrillic symbol."]
+  prohibited_ambiguity: ["Reject a Latin lookalike or the wrong case."]
+  target_proficiency: "on-ramp"
+  validation_method: "exact-match"

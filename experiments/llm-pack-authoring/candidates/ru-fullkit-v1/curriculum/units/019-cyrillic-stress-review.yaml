@@ -1,0 +1,188 @@
+id: "ru.unit.on-ramp.cyrillic-stress-review"
+goal_id: "ru.goal.on-ramp.cyrillic"
+title: "Teaching stress mark and cumulative symbol review"
+summary: "Learn the combining acute accent by attaching it to a taught vowel. Review every printed case form and contrast Е/Ё, И/Й and Ь/Ъ. Copy a marked vowel; no new word or audio task is introduced."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.on-ramp.cyrillic-stress-review-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      ["ru.orth.cyrillic.stress-mark", "ru.orth.cyrillic.a-upper", "ru.orth.cyrillic.a-lower"]
+  - id: "ru.activity.on-ramp.cyrillic-stress-review-recognize"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ru.orth.cyrillic.a-upper",
+        "ru.orth.cyrillic.a-lower",
+        "ru.orth.cyrillic.o-upper",
+        "ru.orth.cyrillic.o-lower",
+        "ru.orth.cyrillic.m-upper",
+        "ru.orth.cyrillic.m-lower",
+        "ru.orth.cyrillic.t-upper",
+        "ru.orth.cyrillic.t-lower",
+        "ru.orth.cyrillic.k-upper",
+        "ru.orth.cyrillic.k-lower",
+        "ru.orth.cyrillic.e-upper",
+        "ru.orth.cyrillic.e-lower",
+        "ru.orth.cyrillic.n-upper",
+        "ru.orth.cyrillic.n-lower",
+        "ru.orth.cyrillic.s-upper",
+        "ru.orth.cyrillic.s-lower",
+        "ru.orth.cyrillic.r-upper",
+        "ru.orth.cyrillic.r-lower",
+        "ru.orth.cyrillic.v-upper",
+        "ru.orth.cyrillic.v-lower",
+        "ru.orth.cyrillic.u-upper",
+        "ru.orth.cyrillic.u-lower",
+        "ru.orth.cyrillic.kh-upper",
+        "ru.orth.cyrillic.kh-lower",
+        "ru.orth.cyrillic.b-upper",
+        "ru.orth.cyrillic.b-lower",
+        "ru.orth.cyrillic.p-upper",
+        "ru.orth.cyrillic.p-lower",
+        "ru.orth.cyrillic.d-upper",
+        "ru.orth.cyrillic.d-lower",
+        "ru.orth.cyrillic.g-upper",
+        "ru.orth.cyrillic.g-lower",
+        "ru.orth.cyrillic.l-upper",
+        "ru.orth.cyrillic.l-lower",
+        "ru.orth.cyrillic.z-upper",
+        "ru.orth.cyrillic.z-lower",
+        "ru.orth.cyrillic.zh-upper",
+        "ru.orth.cyrillic.zh-lower",
+        "ru.orth.cyrillic.i-upper",
+        "ru.orth.cyrillic.i-lower",
+        "ru.orth.cyrillic.y-upper",
+        "ru.orth.cyrillic.y-lower",
+        "ru.orth.cyrillic.short-i-upper",
+        "ru.orth.cyrillic.short-i-lower",
+        "ru.orth.cyrillic.yo-upper",
+        "ru.orth.cyrillic.yo-lower",
+        "ru.orth.cyrillic.yu-upper",
+        "ru.orth.cyrillic.yu-lower",
+        "ru.orth.cyrillic.ya-upper",
+        "ru.orth.cyrillic.ya-lower",
+        "ru.orth.cyrillic.eh-upper",
+        "ru.orth.cyrillic.eh-lower",
+        "ru.orth.cyrillic.f-upper",
+        "ru.orth.cyrillic.f-lower",
+        "ru.orth.cyrillic.ts-upper",
+        "ru.orth.cyrillic.ts-lower",
+        "ru.orth.cyrillic.ch-upper",
+        "ru.orth.cyrillic.ch-lower",
+        "ru.orth.cyrillic.sh-upper",
+        "ru.orth.cyrillic.sh-lower",
+        "ru.orth.cyrillic.shch-upper",
+        "ru.orth.cyrillic.shch-lower",
+        "ru.orth.cyrillic.soft-sign-upper",
+        "ru.orth.cyrillic.soft-sign-lower",
+        "ru.orth.cyrillic.hard-sign-upper",
+        "ru.orth.cyrillic.hard-sign-lower",
+        "ru.orth.cyrillic.stress-mark",
+      ]
+  - id: "ru.activity.on-ramp.cyrillic-stress-review-copy"
+    type: "recall"
+    modality: "writing"
+    support_level: 1
+    content_refs:
+      [
+        "ru.orth.cyrillic.a-upper",
+        "ru.orth.cyrillic.a-lower",
+        "ru.orth.cyrillic.e-upper",
+        "ru.orth.cyrillic.e-lower",
+        "ru.orth.cyrillic.yo-upper",
+        "ru.orth.cyrillic.yo-lower",
+        "ru.orth.cyrillic.i-upper",
+        "ru.orth.cyrillic.i-lower",
+        "ru.orth.cyrillic.short-i-upper",
+        "ru.orth.cyrillic.short-i-lower",
+        "ru.orth.cyrillic.soft-sign-upper",
+        "ru.orth.cyrillic.soft-sign-lower",
+        "ru.orth.cyrillic.hard-sign-upper",
+        "ru.orth.cyrillic.hard-sign-lower",
+        "ru.orth.cyrillic.stress-mark",
+      ]
+generation_contract:
+  allowed_vocab:
+    [
+      "ru.orth.cyrillic.a-upper",
+      "ru.orth.cyrillic.a-lower",
+      "ru.orth.cyrillic.o-upper",
+      "ru.orth.cyrillic.o-lower",
+      "ru.orth.cyrillic.m-upper",
+      "ru.orth.cyrillic.m-lower",
+      "ru.orth.cyrillic.t-upper",
+      "ru.orth.cyrillic.t-lower",
+      "ru.orth.cyrillic.k-upper",
+      "ru.orth.cyrillic.k-lower",
+      "ru.orth.cyrillic.e-upper",
+      "ru.orth.cyrillic.e-lower",
+      "ru.orth.cyrillic.n-upper",
+      "ru.orth.cyrillic.n-lower",
+      "ru.orth.cyrillic.s-upper",
+      "ru.orth.cyrillic.s-lower",
+      "ru.orth.cyrillic.r-upper",
+      "ru.orth.cyrillic.r-lower",
+      "ru.orth.cyrillic.v-upper",
+      "ru.orth.cyrillic.v-lower",
+      "ru.orth.cyrillic.u-upper",
+      "ru.orth.cyrillic.u-lower",
+      "ru.orth.cyrillic.kh-upper",
+      "ru.orth.cyrillic.kh-lower",
+      "ru.orth.cyrillic.b-upper",
+      "ru.orth.cyrillic.b-lower",
+      "ru.orth.cyrillic.p-upper",
+      "ru.orth.cyrillic.p-lower",
+      "ru.orth.cyrillic.d-upper",
+      "ru.orth.cyrillic.d-lower",
+      "ru.orth.cyrillic.g-upper",
+      "ru.orth.cyrillic.g-lower",
+      "ru.orth.cyrillic.l-upper",
+      "ru.orth.cyrillic.l-lower",
+      "ru.orth.cyrillic.z-upper",
+      "ru.orth.cyrillic.z-lower",
+      "ru.orth.cyrillic.zh-upper",
+      "ru.orth.cyrillic.zh-lower",
+      "ru.orth.cyrillic.i-upper",
+      "ru.orth.cyrillic.i-lower",
+      "ru.orth.cyrillic.y-upper",
+      "ru.orth.cyrillic.y-lower",
+      "ru.orth.cyrillic.short-i-upper",
+      "ru.orth.cyrillic.short-i-lower",
+      "ru.orth.cyrillic.yo-upper",
+      "ru.orth.cyrillic.yo-lower",
+      "ru.orth.cyrillic.yu-upper",
+      "ru.orth.cyrillic.yu-lower",
+      "ru.orth.cyrillic.ya-upper",
+      "ru.orth.cyrillic.ya-lower",
+      "ru.orth.cyrillic.eh-upper",
+      "ru.orth.cyrillic.eh-lower",
+      "ru.orth.cyrillic.f-upper",
+      "ru.orth.cyrillic.f-lower",
+      "ru.orth.cyrillic.ts-upper",
+      "ru.orth.cyrillic.ts-lower",
+      "ru.orth.cyrillic.ch-upper",
+      "ru.orth.cyrillic.ch-lower",
+      "ru.orth.cyrillic.sh-upper",
+      "ru.orth.cyrillic.sh-lower",
+      "ru.orth.cyrillic.shch-upper",
+      "ru.orth.cyrillic.shch-lower",
+      "ru.orth.cyrillic.soft-sign-upper",
+      "ru.orth.cyrillic.soft-sign-lower",
+      "ru.orth.cyrillic.hard-sign-upper",
+      "ru.orth.cyrillic.hard-sign-lower",
+      "ru.orth.cyrillic.stress-mark",
+    ]
+  allowed_grammar: []
+  new_item_budget: 0
+  register: []
+  expected_interpretations:
+    ["Exact letter recognition and interpretation of a vowel-attached teaching stress mark."]
+  prohibited_ambiguity:
+    ["The accent is not an alphabet letter; do not replace ё with е or й with и."]
+  target_proficiency: "on-ramp"
+  validation_method: "exact-match"

@@ -1,0 +1,7 @@
+schema_version: "0.2"
+scripts:
+  - id: "ru.orth.cyrillic"
+    name: "Russian Cyrillic — printed forms and teaching stress mark"
+    direction: "ltr"
+    unicode_blocks: ["Cyrillic", "Combining Diacritical Marks"]
+    teaching_order: 0

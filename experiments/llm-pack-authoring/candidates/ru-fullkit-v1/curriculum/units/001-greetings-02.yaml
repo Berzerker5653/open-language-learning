@@ -1,0 +1,75 @@
+id: "ru.unit.on-ramp.greetings-02"
+goal_id: "ru.goal.on-ramp.greetings"
+title: "Farewells and polite responses"
+summary: "Learn five further response expressions, review the earlier greetings and complete the farewell model."
+estimated_minutes: 6
+activities:
+  - id: "ru.activity.on-ramp.greetings-02-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      [
+        "ru.lex.greetings.do-svidaniya",
+        "ru.lex.greetings.pozhaluysta",
+        "ru.lex.greetings.izvinite",
+        "ru.lex.greetings.da",
+        "ru.lex.greetings.net",
+        "ru.sent.on-ramp.farewell",
+      ]
+  - id: "ru.activity.on-ramp.greetings-02-recognize"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ru.lex.greetings.zdravstvuyte",
+        "ru.lex.greetings.dobroe-utro",
+        "ru.lex.greetings.dobryy-den",
+        "ru.lex.greetings.dobryy-vecher",
+        "ru.lex.greetings.spasibo",
+        "ru.lex.greetings.do-svidaniya",
+        "ru.lex.greetings.pozhaluysta",
+        "ru.lex.greetings.izvinite",
+        "ru.lex.greetings.da",
+        "ru.lex.greetings.net",
+      ]
+  - id: "ru.activity.on-ramp.greetings-02-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.on-ramp.farewell"]
+  - id: "ru.activity.on-ramp.greetings-02-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs:
+      [
+        "ru.lex.greetings.do-svidaniya",
+        "ru.lex.greetings.pozhaluysta",
+        "ru.lex.greetings.izvinite",
+        "ru.lex.greetings.da",
+        "ru.lex.greetings.net",
+      ]
+generation_contract:
+  allowed_vocab:
+    [
+      "ru.lex.greetings.zdravstvuyte",
+      "ru.lex.greetings.dobroe-utro",
+      "ru.lex.greetings.dobryy-den",
+      "ru.lex.greetings.dobryy-vecher",
+      "ru.lex.greetings.spasibo",
+      "ru.lex.greetings.do-svidaniya",
+      "ru.lex.greetings.pozhaluysta",
+      "ru.lex.greetings.izvinite",
+      "ru.lex.greetings.da",
+      "ru.lex.greetings.net",
+      "ru.sent.on-ramp.farewell",
+    ]
+  allowed_grammar: ["ru.grammar.on-ramp.formulaic-politeness"]
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["A farewell, courteous response or yes/no response matching the cue."]
+  prohibited_ambiguity: ["Select the meaning of пожалуйста from the written situation."]
+  target_proficiency: "on-ramp"
+  validation_method: "choice"

@@ -159,8 +159,11 @@ budgets is rejected by `validate_plan.py`.
     NOTHING — not even the alphabet. If the target language is not written
     in Latin script, the pack MUST include `language/orthography.yaml`
     (`schema_version` plus `scripts[]`; each script: `id`, `name`,
-    `direction` ∈ `ltr|rtl|vertical`, optional `unicode_blocks`,
-    `teaching_order`) and `orthography/<script>.jsonl` with one record per
+    `direction` ∈ `ltr|rtl|vertical`, optional `unicode_blocks` (list of
+    strings) and `teaching_order` (an INTEGER giving this script's order
+    among the language's scripts — NOT a list of symbol ids). The
+    per-symbol order lives in each symbol record's own `teaching_order`
+    integer.) and `orthography/<script>.jsonl` with one record per
     teachable symbol (required: `id`, `status`, `symbol`, `reading`,
     `sources`; include `script`, `mnemonic`, `teaching_order`,
     `similar_to` where useful; `status` follows rule 3). Add an on-ramp

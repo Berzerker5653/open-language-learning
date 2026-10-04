@@ -1,0 +1,2 @@
+warning[unresolved_reference] curriculum/goals.yaml/goals/5/assessment_ids/1: assessment_ids references "ru.assess.on-ramp.numbers-writing", which is not defined in this pack and not declared in manifest.unresolved_references
+validate(scaffold): 0 error(s), 1 warning(s)

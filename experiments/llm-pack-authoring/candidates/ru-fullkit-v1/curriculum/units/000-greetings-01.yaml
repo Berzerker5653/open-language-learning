@@ -1,0 +1,59 @@
+id: "ru.unit.on-ramp.greetings-01"
+goal_id: "ru.goal.on-ramp.greetings"
+title: "First polite greetings"
+summary: "After units 010-019, learn five fixed greetings or polite expressions. Match their meanings and write the expressions; do not infer productive adjective or verb forms."
+estimated_minutes: 6
+activities:
+  - id: "ru.activity.on-ramp.greetings-01-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      [
+        "ru.lex.greetings.zdravstvuyte",
+        "ru.lex.greetings.dobroe-utro",
+        "ru.lex.greetings.dobryy-den",
+        "ru.lex.greetings.dobryy-vecher",
+        "ru.lex.greetings.spasibo",
+        "ru.grammar.on-ramp.formulaic-politeness",
+      ]
+  - id: "ru.activity.on-ramp.greetings-01-recognize"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ru.lex.greetings.zdravstvuyte",
+        "ru.lex.greetings.dobroe-utro",
+        "ru.lex.greetings.dobryy-den",
+        "ru.lex.greetings.dobryy-vecher",
+        "ru.lex.greetings.spasibo",
+      ]
+  - id: "ru.activity.on-ramp.greetings-01-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 1
+    content_refs:
+      [
+        "ru.lex.greetings.zdravstvuyte",
+        "ru.lex.greetings.dobroe-utro",
+        "ru.lex.greetings.dobryy-den",
+        "ru.lex.greetings.dobryy-vecher",
+        "ru.lex.greetings.spasibo",
+      ]
+generation_contract:
+  allowed_vocab:
+    [
+      "ru.lex.greetings.zdravstvuyte",
+      "ru.lex.greetings.dobroe-utro",
+      "ru.lex.greetings.dobryy-den",
+      "ru.lex.greetings.dobryy-vecher",
+      "ru.lex.greetings.spasibo",
+    ]
+  allowed_grammar: ["ru.grammar.on-ramp.formulaic-politeness"]
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["A polite greeting for the situation or a thank-you."]
+  prohibited_ambiguity: ["Fixed expressions do not teach productive inflection."]
+  target_proficiency: "on-ramp"
+  validation_method: "choice"

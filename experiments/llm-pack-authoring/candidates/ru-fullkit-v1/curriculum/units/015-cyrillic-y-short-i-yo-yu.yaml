@@ -1,0 +1,70 @@
+id: "ru.unit.on-ramp.cyrillic-y-short-i-yo-yu"
+goal_id: "ru.goal.on-ramp.cyrillic"
+title: "Printed Cyrillic: Ы ы, Й й, Ё ё, Ю ю"
+summary: "Recognize these printed case pairs, match each letter to its partner and copy the requested case. Letter-name labels are not audio tasks."
+estimated_minutes: 5
+activities:
+  - id: "ru.activity.on-ramp.cyrillic-y-short-i-yo-yu-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      [
+        "ru.orth.cyrillic.y-upper",
+        "ru.orth.cyrillic.y-lower",
+        "ru.orth.cyrillic.short-i-upper",
+        "ru.orth.cyrillic.short-i-lower",
+        "ru.orth.cyrillic.yo-upper",
+        "ru.orth.cyrillic.yo-lower",
+        "ru.orth.cyrillic.yu-upper",
+        "ru.orth.cyrillic.yu-lower",
+      ]
+  - id: "ru.activity.on-ramp.cyrillic-y-short-i-yo-yu-recognize"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs:
+      [
+        "ru.orth.cyrillic.y-upper",
+        "ru.orth.cyrillic.y-lower",
+        "ru.orth.cyrillic.short-i-upper",
+        "ru.orth.cyrillic.short-i-lower",
+        "ru.orth.cyrillic.yo-upper",
+        "ru.orth.cyrillic.yo-lower",
+        "ru.orth.cyrillic.yu-upper",
+        "ru.orth.cyrillic.yu-lower",
+      ]
+  - id: "ru.activity.on-ramp.cyrillic-y-short-i-yo-yu-copy"
+    type: "recall"
+    modality: "writing"
+    support_level: 1
+    content_refs:
+      [
+        "ru.orth.cyrillic.y-upper",
+        "ru.orth.cyrillic.y-lower",
+        "ru.orth.cyrillic.short-i-upper",
+        "ru.orth.cyrillic.short-i-lower",
+        "ru.orth.cyrillic.yo-upper",
+        "ru.orth.cyrillic.yo-lower",
+        "ru.orth.cyrillic.yu-upper",
+        "ru.orth.cyrillic.yu-lower",
+      ]
+generation_contract:
+  allowed_vocab:
+    [
+      "ru.orth.cyrillic.y-upper",
+      "ru.orth.cyrillic.y-lower",
+      "ru.orth.cyrillic.short-i-upper",
+      "ru.orth.cyrillic.short-i-lower",
+      "ru.orth.cyrillic.yo-upper",
+      "ru.orth.cyrillic.yo-lower",
+      "ru.orth.cyrillic.yu-upper",
+      "ru.orth.cyrillic.yu-lower",
+    ]
+  allowed_grammar: []
+  new_item_budget: 0
+  register: []
+  expected_interpretations: ["Recognition and copying of the exact requested Cyrillic symbol."]
+  prohibited_ambiguity: ["Reject a Latin lookalike or the wrong case."]
+  target_proficiency: "on-ramp"
+  validation_method: "exact-match"
