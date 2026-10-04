@@ -1,4 +1,4 @@
-schema_version: '0.2'
+schema_version: "0.2"
 pack_id: dev.example.ru
 display_name: Russian Starter Pack
 version: 0.0.1

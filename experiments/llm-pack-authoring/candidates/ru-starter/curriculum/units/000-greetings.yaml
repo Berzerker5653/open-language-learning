@@ -8,19 +8,39 @@ activities:
     type: encounter-read
     modality: reading
     support_level: 0
-    content_refs: [ru.lex.greetings.good, ru.lex.greetings.day, ru.lex.greetings.thanks, ru.lex.greetings.you-are-welcome, ru.sent.greetings.good-afternoon]
+    content_refs:
+      [
+        ru.lex.greetings.good,
+        ru.lex.greetings.day,
+        ru.lex.greetings.thanks,
+        ru.lex.greetings.you-are-welcome,
+        ru.sent.greetings.good-afternoon,
+      ]
   - id: ru.activity.greetings.recall-polite-exchanges
     type: recall
     modality: writing
     support_level: 0
-    content_refs: [ru.lex.greetings.good, ru.lex.greetings.day, ru.lex.greetings.thanks, ru.lex.greetings.you-are-welcome]
+    content_refs:
+      [
+        ru.lex.greetings.good,
+        ru.lex.greetings.day,
+        ru.lex.greetings.thanks,
+        ru.lex.greetings.you-are-welcome,
+      ]
   - id: ru.activity.greetings.cloze-good-afternoon
     type: cloze
     modality: writing
     support_level: 1
     content_refs: [ru.sent.greetings.good-afternoon]
 generation_contract:
-  allowed_vocab: [ru.lex.greetings.good, ru.lex.greetings.day, ru.lex.greetings.thanks, ru.lex.greetings.you-are-welcome, ru.sent.greetings.good-afternoon]
+  allowed_vocab:
+    [
+      ru.lex.greetings.good,
+      ru.lex.greetings.day,
+      ru.lex.greetings.thanks,
+      ru.lex.greetings.you-are-welcome,
+      ru.sent.greetings.good-afternoon,
+    ]
   allowed_grammar: [ru.grammar.greetings.adjective-noun-agreement]
   new_item_budget: 6
   register: []

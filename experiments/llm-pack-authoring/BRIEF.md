@@ -159,13 +159,38 @@ license:
 ### sources.jsonl
 
 ```jsonl
-{"id":"template-original","title":"Original example content authored for this template pack","url":"https://github.com/Berzerker5653/open-language-learning/tree/main/tools/pack-templates/example-pack","license":{"spdx":"CC0-1.0","text_url":"https://creativecommons.org/publicdomain/zero/1.0/"},"access":{"mode":"public"},"use":{"redistribution_allowed":true,"attribution_required":false},"retrieved":"2026-10-03"}
+{
+  "id": "template-original",
+  "title": "Original example content authored for this template pack",
+  "url": "https://github.com/Berzerker5653/open-language-learning/tree/main/tools/pack-templates/example-pack",
+  "license": {
+    "spdx": "CC0-1.0",
+    "text_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "access": {
+    "mode": "public"
+  },
+  "use": {
+    "redistribution_allowed": true,
+    "attribution_required": false
+  },
+  "retrieved": "2026-10-03"
+}
 ```
 
 ### licenses.jsonl
 
 ```jsonl
-{"id":"lic-template-original","scope":{"kind":"pack-original"},"license":{"spdx":"CC0-1.0"},"redistribution_allowed":true}
+{
+  "id": "lic-template-original",
+  "scope": {
+    "kind": "pack-original"
+  },
+  "license": {
+    "spdx": "CC0-1.0"
+  },
+  "redistribution_allowed": true
+}
 ```
 
 ### curriculum/goals.yaml
@@ -231,7 +256,21 @@ generation_contract:
 ### grammar/concepts.jsonl
 
 ```jsonl
-{"id":"xx.grammar.demo.word-order","name":"Basic word order","category":"syntax","status":"draft","definition":"Example language places the greeting before the addressee (tola mara = hello friend). Placeholder rule for the template; replace with a sourced rule.","sources":["template-original"],"generation":{"method":"human","date":"2026-10-03","notes":"placeholder template content; replace with sourced content"}}
+{
+  "id": "xx.grammar.demo.word-order",
+  "name": "Basic word order",
+  "category": "syntax",
+  "status": "draft",
+  "definition": "Example language places the greeting before the addressee (tola mara = hello friend). Placeholder rule for the template; replace with a sourced rule.",
+  "sources": [
+    "template-original"
+  ],
+  "generation": {
+    "method": "human",
+    "date": "2026-10-03",
+    "notes": "placeholder template content; replace with sourced content"
+  }
+}
 ```
 
 ### lexicon/entries.jsonl
@@ -245,13 +284,41 @@ generation_contract:
 ### sentences/entries.jsonl
 
 ```jsonl
-{"id":"xx.sent.demo.greet-friend","status":"draft","text":"tola mara","gloss":"hello, friend","cloze_targets":["tola"],"sources":["template-original"],"generation":{"method":"human","date":"2026-10-03","notes":"placeholder template content; replace with sourced content"}}
+{
+  "id": "xx.sent.demo.greet-friend",
+  "status": "draft",
+  "text": "tola mara",
+  "gloss": "hello, friend",
+  "cloze_targets": [
+    "tola"
+  ],
+  "sources": [
+    "template-original"
+  ],
+  "generation": {
+    "method": "human",
+    "date": "2026-10-03",
+    "notes": "placeholder template content; replace with sourced content"
+  }
+}
 ```
 
 ### assessments/definitions.jsonl
 
 ```jsonl
-{"id":"xx.assess.demo.greet","goal_id":"xx.goal.demo.greet","kind":"recall","modality":"reading","rubric":{"scale":"observed","criteria":["greeting matched to situation"]},"review_status":"draft"}
+{
+  "id": "xx.assess.demo.greet",
+  "goal_id": "xx.goal.demo.greet",
+  "kind": "recall",
+  "modality": "reading",
+  "rubric": {
+    "scale": "observed",
+    "criteria": [
+      "greeting matched to situation"
+    ]
+  },
+  "review_status": "draft"
+}
 ```
 
 ## Success criteria (how you will be graded)

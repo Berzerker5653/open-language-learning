@@ -8,19 +8,34 @@ activities:
     type: encounter-read
     modality: reading
     support_level: 0
-    content_refs: [ru.lex.everyday.this, ru.lex.everyday.house, ru.lex.everyday.table, ru.lex.everyday.book, ru.sent.everyday.this-is-a-book]
+    content_refs:
+      [
+        ru.lex.everyday.this,
+        ru.lex.everyday.house,
+        ru.lex.everyday.table,
+        ru.lex.everyday.book,
+        ru.sent.everyday.this-is-a-book,
+      ]
   - id: ru.activity.everyday.recall-object-words
     type: recall
     modality: writing
     support_level: 0
-    content_refs: [ru.lex.everyday.this, ru.lex.everyday.house, ru.lex.everyday.table, ru.lex.everyday.book]
+    content_refs:
+      [ru.lex.everyday.this, ru.lex.everyday.house, ru.lex.everyday.table, ru.lex.everyday.book]
   - id: ru.activity.everyday.cloze-identification
     type: cloze
     modality: writing
     support_level: 1
     content_refs: [ru.sent.everyday.this-is-a-book]
 generation_contract:
-  allowed_vocab: [ru.lex.everyday.this, ru.lex.everyday.house, ru.lex.everyday.table, ru.lex.everyday.book, ru.sent.everyday.this-is-a-book]
+  allowed_vocab:
+    [
+      ru.lex.everyday.this,
+      ru.lex.everyday.house,
+      ru.lex.everyday.table,
+      ru.lex.everyday.book,
+      ru.sent.everyday.this-is-a-book,
+    ]
   allowed_grammar: [ru.grammar.everyday.present-tense-identification]
   new_item_budget: 6
   register: []

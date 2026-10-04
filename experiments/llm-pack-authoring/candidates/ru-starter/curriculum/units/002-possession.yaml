@@ -8,20 +8,47 @@ activities:
     type: encounter-read
     modality: reading
     support_level: 0
-    content_refs: [ru.lex.everyday.this, ru.lex.everyday.house, ru.lex.everyday.table, ru.lex.everyday.book, ru.lex.everyday.my, ru.lex.everyday.our, ru.lex.everyday.tea, ru.lex.everyday.water, ru.sent.everyday.this-is-our-water]
+    content_refs:
+      [
+        ru.lex.everyday.this,
+        ru.lex.everyday.house,
+        ru.lex.everyday.table,
+        ru.lex.everyday.book,
+        ru.lex.everyday.my,
+        ru.lex.everyday.our,
+        ru.lex.everyday.tea,
+        ru.lex.everyday.water,
+        ru.sent.everyday.this-is-our-water,
+      ]
   - id: ru.activity.everyday.recall-possessive-forms
     type: recall
     modality: writing
     support_level: 0
-    content_refs: [ru.lex.everyday.my, ru.lex.everyday.our, ru.lex.everyday.tea, ru.lex.everyday.water]
+    content_refs:
+      [ru.lex.everyday.my, ru.lex.everyday.our, ru.lex.everyday.tea, ru.lex.everyday.water]
   - id: ru.activity.everyday.cloze-possession
     type: cloze
     modality: writing
     support_level: 1
     content_refs: [ru.sent.everyday.this-is-our-water]
 generation_contract:
-  allowed_vocab: [ru.lex.everyday.this, ru.lex.everyday.house, ru.lex.everyday.table, ru.lex.everyday.book, ru.lex.everyday.my, ru.lex.everyday.our, ru.lex.everyday.tea, ru.lex.everyday.water, ru.sent.everyday.this-is-our-water]
-  allowed_grammar: [ru.grammar.everyday.present-tense-identification, ru.grammar.everyday.possessive-gender-agreement]
+  allowed_vocab:
+    [
+      ru.lex.everyday.this,
+      ru.lex.everyday.house,
+      ru.lex.everyday.table,
+      ru.lex.everyday.book,
+      ru.lex.everyday.my,
+      ru.lex.everyday.our,
+      ru.lex.everyday.tea,
+      ru.lex.everyday.water,
+      ru.sent.everyday.this-is-our-water,
+    ]
+  allowed_grammar:
+    [
+      ru.grammar.everyday.present-tense-identification,
+      ru.grammar.everyday.possessive-gender-agreement,
+    ]
   new_item_budget: 6
   register: []
   expected_interpretations: [identifying something as mine, identifying something as ours]

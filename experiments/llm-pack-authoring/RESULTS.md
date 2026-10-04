@@ -6,10 +6,10 @@ test / build). The strict bar is lint = 0 errors **and 0 warnings**.
 
 ## Runs
 
-| Date       | Candidate                                           | Result   | Notes                                                                                     |
-| ---------- | --------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------- |
-| 2026-10-04 | `self-test` (`tools/pack-templates/example-pack`)   | 7/7 PASS | proves the harness itself works                                                           |
-| 2026-10-04 | `calibration-self` (`candidates/calibration-self/`) | 7/7 PASS | self-authored German pack scored with the kit; proves `BRIEF.md` is achievable as written |
+| Date       | Candidate                                                                                 | Result                                               | Notes                                                                                                                                                                                                  |
+| ---------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 2026-10-04 | `self-test` (`tools/pack-templates/example-pack`)                                         | 7/7 PASS                                             | proves the harness itself works                                                                                                                                                                        |
+| 2026-10-04 | `calibration-self` (`candidates/calibration-self/`)                                       | 7/7 PASS                                             | self-authored German pack scored with the kit; proves `BRIEF.md` is achievable as written                                                                                                              |
 | 2026-10-04 | `ru-starter` (`candidates/ru-starter/`) — external LLM (GPT-6 Astra Pro), Russian `ru-RU` | 18 errors first pass → 7/7 PASS after mechanical fix | only failures: schema-forbidden `status`/`sources` on goals/units/activities/assessments — invited by brief rules 3+5 wording (fixed). Russian content itself accurate; no language corrections needed |
 
 ## Calibration findings (brief gaps found and fixed)

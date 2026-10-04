@@ -12,7 +12,7 @@ goals:
     generation:
       method: ai-assisted
       tool: GPT-6 Astra Pro
-      date: '2026-10-04'
+      date: "2026-10-04"
       notes: ai-drafted; needs dictionary sourcing and human review
   - id: ru.goal.everyday.identify-objects
     description: Write «Это ...» statements identifying a house, a table, or a book, without inserting a present-tense word for 'is'.
@@ -27,7 +27,7 @@ goals:
     generation:
       method: ai-assisted
       tool: GPT-6 Astra Pro
-      date: '2026-10-04'
+      date: "2026-10-04"
       notes: ai-drafted; needs dictionary sourcing and human review
   - id: ru.goal.everyday.express-possession
     description: Write «Это ...» statements for the taught objects and drinks using the masculine and feminine singular forms of 'my' and 'our' in agreement with the noun.
@@ -38,7 +38,11 @@ goals:
         dimension: production-writing
         required_state: independent
         strength: hard
-    required_concepts: [ru.grammar.everyday.present-tense-identification, ru.grammar.everyday.possessive-gender-agreement]
+    required_concepts:
+      [
+        ru.grammar.everyday.present-tense-identification,
+        ru.grammar.everyday.possessive-gender-agreement,
+      ]
     assessment_ids: [ru.assess.everyday.express-possession]
     transfer_required: false
     sources: [ru-original]
@@ -46,5 +50,5 @@ goals:
     generation:
       method: ai-assisted
       tool: GPT-6 Astra Pro
-      date: '2026-10-04'
+      date: "2026-10-04"
       notes: ai-drafted; needs dictionary sourcing and human review
