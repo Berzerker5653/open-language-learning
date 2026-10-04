@@ -683,6 +683,22 @@ tasks:
   - Local Japanese TTS can generate scalable practice audio.
   - Core curated targets can override TTS with licensed recordings.
   required_for_desktop_1_0: true
+- id: TTS-002
+  milestone: M6
+  priority: P1
+  title: "TTS distribution variants: bundled, bare, bring-your-own (ADR-0009)"
+  dependencies:
+  - TTS-001
+  read_first:
+  - docs/adr/0009-tts-distribution-variants.md
+  - docs/05_SPEECH_SYSTEM.md
+  - docs/13_RELEASE_AND_DISTRIBUTION.md
+  - docs/provenance/tts-candidates.md
+  acceptance:
+  - "Two release variants are produced: TTS-bundled (sherpa-onnx + Kokoro + espeak-ng-data staged as payload) and bare (no TTS payload; audio features degrade honestly). Same binary; variants differ in staged resources."
+  - "The TTS variant carries GPL-3.0 obligations for its payload only: espeak-ng source offer, component license texts, and attribution UI entries for espeak-ng (GPLv3), sherpa-onnx (Apache-2.0), ONNX Runtime (MIT), Kokoro (Apache-2.0)."
+  - "The TTS payload is installable into the bare variant as an optional in-app download: directory-capable model catalog entries (multi-file pin, hash verify, atomic activation) with the kokoro export as the first entry."
+  - "Bring-your-own: the bare variant accepts a user-supplied local TTS runtime via documented configuration; absence never blocks non-audio practice."
 - id: JA-A1-001
   milestone: M6
   priority: P0

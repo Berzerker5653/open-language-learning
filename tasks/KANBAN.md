@@ -56,12 +56,13 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
+| TTS-002 | speech | TTS distribution variants per ADR-0009 (owner decision 2026-10-04): TTS-bundled vs bare downloads, GPL notices scoped to payload, directory-capable model catalog for in-app TTS download, bring-your-own runtime path | TTS-002 |
 
 ## owner — human/owner gates (never self-certifiable)
 
 | card | what |
 | --- | --- |
-| O-01 | LIC-001: espeak-ng GPLv3 distribution obligation + final content licensing — PARTIAL: pack content licensed CC BY 4.0 by owner 2026-10-04; speech-stack GPL + final app LICENSE still open |
+| O-01 | LIC-001 — PARTIAL: pack content CC BY 4.0 (2026-10-04); espeak-ng GPL posture decided via ADR-0009 variants (implementation = TTS-002); final app LICENSE still open |
 | O-02 | JA-A1-003: qualified human review of A1 content |
 | O-03 | Screen-reader matrix (NVDA/VoiceOver/Orca) + IME composition audit |
 | O-04 | REL-001 release gates incl. pedagogical review + speech calibration |

@@ -27,6 +27,24 @@ Target signed/packaged releases for Linux, Windows, and macOS after platform gat
 - Promoting a platform to "tested" requires a human-run runtime pass
   (owner gate); compile checks alone never establish it.
 
+### TTS distribution variants (ADR-0009, owner decision 2026-10-04)
+
+Downloads come in two variants, same binary, different staged resources:
+
+- **TTS variant**: ships the offline synthesis payload (sherpa-onnx
+  runtime, Kokoro model/voices, espeak-ng-data). The espeak-ng GPL-3.0
+  obligations (source offer, component license texts, attribution UI
+  entries) are carried for this variant's payload only.
+- **Bare variant**: no TTS payload; audio-dependent features degrade
+  honestly and never block non-audio practice. Users who reject GPL
+  components or want their own synthesis use this variant, optionally
+  pointing at a user-supplied local TTS runtime (documented config), or
+  installing the TTS payload later as an optional in-app model download
+  (TTS-002).
+
+Variant builds and their notices are release-gated (REL-001/O-04); the
+application's own license remains independent of optional payloads.
+
 ## Mobile
 
 Tauri 2 supports Android/iOS targets, but mobile is a separate milestone because microphone permissions, app-store packaging, model memory/storage, background behavior, and native dependencies need validation.

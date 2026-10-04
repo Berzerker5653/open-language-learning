@@ -48,7 +48,11 @@ not the final licensing decision (LIC-001, owner-only).
 - The ja-demo fixture pack's reference audio is labeled
   `model-output` / Apache-2.0 with the kokoro source entry.
 - Stable distribution packaging must resolve espeak-ng GPL obligations
-  (bundle source offer, component notices) — owner gate LIC-001.
+  (bundle source offer, component notices) — RESOLVED by owner decision
+  2026-10-04 (ADR-0009): two download variants. The TTS-bundled variant
+  carries the GPL payload with source offer + component notices; the
+  bare variant ships no TTS and supports bring-your-own runtime.
+  Implementation tracked as TTS-002.
 - Model manager cataloging of kokoro is deferred: the export includes a
   multi-file data directory (`espeak-ng-data`), which the current
   per-file catalog entries cannot pin atomically; a directory-capable
