@@ -4,8 +4,8 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2420  2dda84132085  activities/scenarios/first-meeting.yaml
         1561  6b8655e2f7b6  activities/scenarios/ordering.yaml
         1486  b56884663696  activities/scenarios/shopping.yaml
-        8035  1ddafa358f33  assessments/definitions.jsonl
-       22945  b7f0bfc1c927  curriculum/goals.yaml
+        8392  d5fcc19234c9  assessments/definitions.jsonl
+       23793  c1cd884b8d53  curriculum/goals.yaml
          919  ad3f5f62d1b3  curriculum/units/000-onramp-greeting.yaml
         1514  bd53db6f2cfe  curriculum/units/010-kana-hiragana-vowels-ko.yaml
         1957  c02be8a37693  curriculum/units/011-kana-hiragana-stn.yaml
@@ -124,8 +124,18 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2103  b55c5305199a  curriculum/units/147-fitting.yaml
         2080  1c5fdfe33278  curriculum/units/148-paying.yaml
         1938  2f472bb88828  curriculum/units/149-can-do.yaml
-       17910  acf813e5d48d  grammar/concepts.jsonl
-        3940  034105ee7c2e  grammar/dependencies.yaml
+        2044  bb97b26e0849  curriculum/units/150-symptoms.yaml
+        1778  4be097c31118  curriculum/units/151-clinic-visit2.yaml
+        1752  2ebe19e7c0f6  curriculum/units/152-prevention.yaml
+        1932  07e67e69710e  curriculum/units/153-sleep.yaml
+        1700  825f3b57a6e9  curriculum/units/154-recovery.yaml
+        1605  e8a7b26b42eb  curriculum/units/155-hospital.yaml
+        1578  5fbfb6fea99e  curriculum/units/156-body-parts2.yaml
+        1825  b09b40a1f179  curriculum/units/157-minor-ailments.yaml
+        1803  fda0f6f23df6  curriculum/units/158-habits.yaml
+        1722  c9bef85c53a5  curriculum/units/159-checkup.yaml
+       18435  497b7711572a  grammar/concepts.jsonl
+        4086  fc78cbda9f98  grammar/dependencies.yaml
        30369  1401b6e0388e  kanji/entries.jsonl
          485  860cdf8185db  language/identity.yaml
          823  5d72613ab378  language/normalization.yaml
@@ -133,6 +143,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         6598  bb8962bf6355  language/phonology.yaml
         2575  479faeb409fe  language/pragmatics.yaml
        16963  b18c24cb909d  lexicon/adjectives.jsonl
+       39897  547ce24558d9  lexicon/body.jsonl
        40213  03309a6ed83d  lexicon/city.jsonl
         7349  caf23017d109  lexicon/demonstratives.jsonl
         1837  bf555ef5009f  lexicon/entries.jsonl
@@ -162,7 +173,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
-       69987  75d7cdf7d74d  sentences/entries.jsonl
+       74770  017178bf9d50  sentences/entries.jsonl
         3915  e270f808c26e  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml
          539  842cce82e5d5  stories/first-day.yaml

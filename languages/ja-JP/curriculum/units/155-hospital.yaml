@@ -1,0 +1,63 @@
+# ai-assisted draft unit (Mode B A2 health-body); content refs are pack data; qualified review pending.
+id: ja.unit.body-hospital
+goal_id: ja.goal.a2.health-body
+title: Hospital
+summary: Hospitalization, surgery, internal medicine, admission.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.body.nyuuyin
+  - ja.lex.body.geka
+  - ja.lex.body.naishou
+  - ja.lex.body.kounyuu
+  - ja.lex.body.shinryoujo
+  - ja.lex.places.byouin
+  allowed_grammar:
+  - ja.grammar.particle.ni-destination
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.body-hospital-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.body.nyuuyin
+  - ja.lex.body.geka
+  - ja.lex.body.naishou
+  - ja.lex.body.kounyuu
+  - ja.lex.body.shinryoujo
+  - ja.lex.places.byouin
+- id: ja.activity.body-hospital-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.body.nyuuyin
+  - ja.lex.body.geka
+  - ja.lex.body.naishou
+  - ja.lex.body.kounyuu
+  - ja.lex.body.shinryoujo
+  - ja.lex.places.byouin
+- id: ja.activity.body-hospital-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.body.nyuuyin
+  - ja.lex.body.geka
+  - ja.lex.body.naishou
+  - ja.lex.body.kounyuu
+  - ja.lex.body.shinryoujo
+  - ja.lex.places.byouin
+- id: ja.activity.body-hospital-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.body.nyuuyin
+  - ja.lex.body.geka
+  - ja.lex.body.naishou
+  - ja.lex.body.kounyuu
+  - ja.lex.body.shinryoujo
+  - ja.lex.places.byouin

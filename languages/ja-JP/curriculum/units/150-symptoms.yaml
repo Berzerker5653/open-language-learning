@@ -1,0 +1,82 @@
+# ai-assisted draft unit (Mode B A2 health-body); content refs are pack data; qualified review pending.
+id: ja.unit.body-symptoms
+goal_id: ja.goal.a2.health-body
+title: Symptoms
+summary: Temperature, symptom, condition, sore spots.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.body.taion
+  - ja.lex.body.shoumyou
+  - ja.lex.body.byoutai
+  - ja.lex.body.senaka
+  - ja.lex.body.kata-kori
+  - ja.sent.check-temp
+  - ja.sent.describe-symptom
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.body-symptoms-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.body.taion
+  - ja.lex.body.shoumyou
+  - ja.lex.body.byoutai
+  - ja.lex.body.senaka
+  - ja.lex.body.kata-kori
+  - ja.sent.check-temp
+  - ja.sent.describe-symptom
+  - ja.sent.check-temp
+  - ja.sent.describe-symptom
+- id: ja.activity.body-symptoms-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.body.taion
+  - ja.lex.body.shoumyou
+  - ja.lex.body.byoutai
+  - ja.lex.body.senaka
+  - ja.lex.body.kata-kori
+  - ja.sent.check-temp
+  - ja.sent.describe-symptom
+- id: ja.activity.body-symptoms-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.body.taion
+  - ja.lex.body.shoumyou
+  - ja.lex.body.byoutai
+  - ja.lex.body.senaka
+  - ja.lex.body.kata-kori
+  - ja.sent.check-temp
+  - ja.sent.describe-symptom
+- id: ja.activity.body-symptoms-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.body.taion
+  - ja.lex.body.shoumyou
+  - ja.lex.body.byoutai
+  - ja.lex.body.senaka
+  - ja.lex.body.kata-kori
+  - ja.sent.check-temp
+  - ja.sent.describe-symptom
+- id: ja.activity.body-symptoms-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.check-temp
+- id: ja.activity.body-symptoms-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.describe-symptom

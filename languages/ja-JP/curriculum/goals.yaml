@@ -887,3 +887,35 @@ goals:
       tool: omp
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
+  - id: ja.goal.a2.health-body
+    description: 'Describe health in more detail and handle appointments and care
+      writing: symptoms, clinic visits, prevention, and recovery.'
+    band: A2
+    framework_refs: []
+    contexts:
+    - ja.situation.home-routine
+    modalities:
+    - listening
+    - speaking
+    - reading
+    - writing
+    prerequisites:
+    - target: ja.goal.a2.shopping-services
+      dimension: grammar-controlled
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.lex.body.taion
+    - ja.lex.body.yogen
+    assessment_ids:
+    - ja.assess.health-body
+    transfer_required: true
+    sources:
+    - jf-standard
+    - ai-drafted-extension
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next-iq3_s
+      date: '2026-10-04'

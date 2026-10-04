@@ -1,0 +1,68 @@
+# ai-assisted draft unit (Mode B A2 health-body); content refs are pack data; qualified review pending.
+id: ja.unit.body-clinic-visit2
+goal_id: ja.goal.a2.health-body
+title: At the clinic
+summary: Examination, fee, insurance card, procedure.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.body.shinryou
+  - ja.lex.body.shinryou-shin
+  - ja.lex.body.hokenshou
+  - ja.lex.body.tetsuzuki
+  - ja.lex.body.touki
+  - ja.lex.people.isha
+  - ja.lex.places.byouin
+  allowed_grammar:
+  - ja.grammar.particle.de-means
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.body-clinic-visit2-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.body.shinryou
+  - ja.lex.body.shinryou-shin
+  - ja.lex.body.hokenshou
+  - ja.lex.body.tetsuzuki
+  - ja.lex.body.touki
+  - ja.lex.people.isha
+  - ja.lex.places.byouin
+- id: ja.activity.body-clinic-visit2-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.body.shinryou
+  - ja.lex.body.shinryou-shin
+  - ja.lex.body.hokenshou
+  - ja.lex.body.tetsuzuki
+  - ja.lex.body.touki
+  - ja.lex.people.isha
+  - ja.lex.places.byouin
+- id: ja.activity.body-clinic-visit2-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.body.shinryou
+  - ja.lex.body.shinryou-shin
+  - ja.lex.body.hokenshou
+  - ja.lex.body.tetsuzuki
+  - ja.lex.body.touki
+  - ja.lex.people.isha
+  - ja.lex.places.byouin
+- id: ja.activity.body-clinic-visit2-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.body.shinryou
+  - ja.lex.body.shinryou-shin
+  - ja.lex.body.hokenshou
+  - ja.lex.body.tetsuzuki
+  - ja.lex.body.touki
+  - ja.lex.people.isha
+  - ja.lex.places.byouin

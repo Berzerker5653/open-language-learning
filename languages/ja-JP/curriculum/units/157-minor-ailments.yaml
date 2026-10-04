@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 health-body); content refs are pack data; qualified review pending.
+id: ja.unit.body-minor-ailments
+goal_id: ja.goal.a2.health-body
+title: Minor ailments
+summary: Cough, blister, shoulder stiffness, numbness.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.body.kaffa
+  - ja.lex.body.kutsu-bure
+  - ja.lex.body.shoujiki
+  - ja.lex.body.choki
+  - ja.lex.body.fukatsu
+  - ja.sent.describe-symptom
+  allowed_grammar:
+  - ja.grammar.adjectives.na-attributive
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.body-minor-ailments-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.body.kaffa
+  - ja.lex.body.kutsu-bure
+  - ja.lex.body.shoujiki
+  - ja.lex.body.choki
+  - ja.lex.body.fukatsu
+  - ja.sent.describe-symptom
+  - ja.sent.describe-symptom
+- id: ja.activity.body-minor-ailments-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.body.kaffa
+  - ja.lex.body.kutsu-bure
+  - ja.lex.body.shoujiki
+  - ja.lex.body.choki
+  - ja.lex.body.fukatsu
+  - ja.sent.describe-symptom
+- id: ja.activity.body-minor-ailments-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.body.kaffa
+  - ja.lex.body.kutsu-bure
+  - ja.lex.body.shoujiki
+  - ja.lex.body.choki
+  - ja.lex.body.fukatsu
+  - ja.sent.describe-symptom
+- id: ja.activity.body-minor-ailments-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.body.kaffa
+  - ja.lex.body.kutsu-bure
+  - ja.lex.body.shoujiki
+  - ja.lex.body.choki
+  - ja.lex.body.fukatsu
+  - ja.sent.describe-symptom
+- id: ja.activity.body-minor-ailments-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.describe-symptom

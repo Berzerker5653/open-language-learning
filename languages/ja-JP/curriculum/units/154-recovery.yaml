@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 health-body); content refs are pack data; qualified review pending.
+id: ja.unit.body-recovery
+goal_id: ja.goal.a2.health-body
+title: Recovery
+summary: Improvement, recovery, cured, minor.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.body.joushou
+  - ja.lex.body.fukkyuu
+  - ja.lex.body.naoru
+  - ja.lex.body.shoukouna
+  - ja.lex.body.yoku-naru
+  - ja.sent.cured
+  allowed_grammar:
+  - ja.grammar.verb.past-negative
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.body-recovery-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.body.joushou
+  - ja.lex.body.fukkyuu
+  - ja.lex.body.naoru
+  - ja.lex.body.shoukouna
+  - ja.lex.body.yoku-naru
+  - ja.sent.cured
+  - ja.sent.cured
+- id: ja.activity.body-recovery-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.body.joushou
+  - ja.lex.body.fukkyuu
+  - ja.lex.body.naoru
+  - ja.lex.body.shoukouna
+  - ja.lex.body.yoku-naru
+  - ja.sent.cured
+- id: ja.activity.body-recovery-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.body.joushou
+  - ja.lex.body.fukkyuu
+  - ja.lex.body.naoru
+  - ja.lex.body.shoukouna
+  - ja.lex.body.yoku-naru
+  - ja.sent.cured
+- id: ja.activity.body-recovery-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.body.joushou
+  - ja.lex.body.fukkyuu
+  - ja.lex.body.naoru
+  - ja.lex.body.shoukouna
+  - ja.lex.body.yoku-naru
+  - ja.sent.cured
+- id: ja.activity.body-recovery-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.cured

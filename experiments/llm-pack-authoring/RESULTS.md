@@ -403,3 +403,9 @@ units, 50-word `lexicon/shopping.jsonl` (apostrophe ids fixed to hyphens;
 baseline dupes replaced), 2 grammar (`verb.kanoukei-intro`,
 `adjectives.jouzu-heta-ni`), 8 sentences (1 collided with baseline
 `how-much`; reused baseline), 1 assessment. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 10: A2 units 150-159 (health-body)
+
+Goal `ja.goal.a2.health-body` (prereq shopping-services, mirrored), 10
+units, 50-word `lexicon/body.jsonl`, 1 grammar (`verb.ba-conditional`),
+8 sentences, 1 assessment. Score: **7/7**.

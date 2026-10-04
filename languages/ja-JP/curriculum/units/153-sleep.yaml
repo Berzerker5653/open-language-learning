@@ -1,0 +1,82 @@
+# ai-assisted draft unit (Mode B A2 health-body); content refs are pack data; qualified review pending.
+id: ja.unit.body-sleep
+goal_id: ja.goal.a2.health-body
+title: Sleep
+summary: Sleep, insomnia, snoring, every day.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.body.suimin
+  - ja.lex.body.fumin
+  - ja.lex.body.ibiki
+  - ja.lex.body.mainichi
+  - ja.lex.body.saikin
+  - ja.sent.sleep-well
+  - ja.sent.insomnia
+  allowed_grammar:
+  - ja.grammar.verb.ba-conditional
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.body-sleep-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.body.suimin
+  - ja.lex.body.fumin
+  - ja.lex.body.ibiki
+  - ja.lex.body.mainichi
+  - ja.lex.body.saikin
+  - ja.sent.sleep-well
+  - ja.sent.insomnia
+  - ja.sent.sleep-well
+  - ja.sent.insomnia
+- id: ja.activity.body-sleep-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.body.suimin
+  - ja.lex.body.fumin
+  - ja.lex.body.ibiki
+  - ja.lex.body.mainichi
+  - ja.lex.body.saikin
+  - ja.sent.sleep-well
+  - ja.sent.insomnia
+- id: ja.activity.body-sleep-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.body.suimin
+  - ja.lex.body.fumin
+  - ja.lex.body.ibiki
+  - ja.lex.body.mainichi
+  - ja.lex.body.saikin
+  - ja.sent.sleep-well
+  - ja.sent.insomnia
+- id: ja.activity.body-sleep-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.body.suimin
+  - ja.lex.body.fumin
+  - ja.lex.body.ibiki
+  - ja.lex.body.mainichi
+  - ja.lex.body.saikin
+  - ja.sent.sleep-well
+  - ja.sent.insomnia
+- id: ja.activity.body-sleep-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.sleep-well
+- id: ja.activity.body-sleep-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.insomnia
