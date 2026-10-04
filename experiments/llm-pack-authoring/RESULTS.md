@@ -307,3 +307,14 @@ the original-source pattern; fine.
 Pending: owner to resend the tail of the response (the
 `numbers-writing` assessment record) as an append block or plain text;
 then re-score for 7/7.
+
+**Phase 1 closed: 7/7 (2026-10-04).** The model re-emitted the whole
+pack (34 files, ~1,190 lines) instead of the requested single missing
+record — the exact whole-file re-emission the `(append)` convention
+exists to prevent; harmless here but it also re-emitted the invalid
+`teaching_order` list (the model's chat still holds the pre-fix brief),
+so the 12th assessment was appended manually and the orthography fix
+kept. The recovered record is sound: «четыре/восемь/девять» soft-sign
+spelling is exactly the on-ramp number trap. On-ramp band done: 6
+goals, 20 units, 67 symbols, 50 lex, 7 sentences, 3 grammar, 12
+assessments — all gates green.
