@@ -5,7 +5,7 @@ title: Food, meals, and table phrases
 summary: Everyday food words plus before/after-meal set phrases.
 estimated_minutes: 8
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.lex.food-drink.gohan
   - ja.lex.food-drink.pan
   - ja.lex.food-drink.mizu
@@ -23,17 +23,44 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 5
-  content_refs: *id001
+  content_refs:
+  - ja.lex.food-drink.gohan
+  - ja.lex.food-drink.pan
+  - ja.lex.food-drink.mizu
+  - ja.lex.food-drink.ocha
+  - ja.lex.food-drink.ringo
+  - ja.lex.greetings.itadakimasu
+  - ja.lex.greetings.gochisousama
+  - ja.sent.eat-before-words
+  - ja.sent.after-meal
 - id: ja.activity.food-listen
   type: listen-and-choose
   modality: listening
   support_level: 3
-  content_refs: *id001
+  content_refs:
+  - ja.lex.food-drink.gohan
+  - ja.lex.food-drink.pan
+  - ja.lex.food-drink.mizu
+  - ja.lex.food-drink.ocha
+  - ja.lex.food-drink.ringo
+  - ja.lex.greetings.itadakimasu
+  - ja.lex.greetings.gochisousama
+  - ja.sent.eat-before-words
+  - ja.sent.after-meal
 - id: ja.activity.food-recall
   type: recall-choice
   modality: reading
   support_level: 1
-  content_refs: *id001
+  content_refs:
+  - ja.lex.food-drink.gohan
+  - ja.lex.food-drink.pan
+  - ja.lex.food-drink.mizu
+  - ja.lex.food-drink.ocha
+  - ja.lex.food-drink.ringo
+  - ja.lex.greetings.itadakimasu
+  - ja.lex.greetings.gochisousama
+  - ja.sent.eat-before-words
+  - ja.sent.after-meal
 - id: ja.activity.food-scenario
   type: scenario
   modality: interaction

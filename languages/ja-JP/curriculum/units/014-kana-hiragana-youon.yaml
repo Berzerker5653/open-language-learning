@@ -5,7 +5,7 @@ title: 'Hiragana: contracted sounds'
 summary: 'Youon combinations: base kana plus small ya/yu/yo.'
 estimated_minutes: 10
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.orth.hira.kya
   - ja.orth.hira.kyu
   - ja.orth.hira.kyo
@@ -44,14 +44,104 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 4
-  content_refs: *id001
+  content_refs:
+  - ja.orth.hira.kya
+  - ja.orth.hira.kyu
+  - ja.orth.hira.kyo
+  - ja.orth.hira.sha
+  - ja.orth.hira.shu
+  - ja.orth.hira.sho
+  - ja.orth.hira.cha
+  - ja.orth.hira.chu
+  - ja.orth.hira.cho
+  - ja.orth.hira.nya
+  - ja.orth.hira.nyu
+  - ja.orth.hira.nyo
+  - ja.orth.hira.hya
+  - ja.orth.hira.hyu
+  - ja.orth.hira.hyo
+  - ja.orth.hira.mya
+  - ja.orth.hira.myu
+  - ja.orth.hira.myo
+  - ja.orth.hira.rya
+  - ja.orth.hira.ryu
+  - ja.orth.hira.ryo
+  - ja.orth.hira.gya
+  - ja.orth.hira.gyu
+  - ja.orth.hira.gyo
+  - ja.orth.hira.ja
+  - ja.orth.hira.ju
+  - ja.orth.hira.jo
+  - ja.orth.hira.bya
+  - ja.orth.hira.byu
+  - ja.orth.hira.byo
 - id: ja.activity.kana-hira-yon-match
   type: match
   modality: reading
   support_level: 2
-  content_refs: *id001
+  content_refs:
+  - ja.orth.hira.kya
+  - ja.orth.hira.kyu
+  - ja.orth.hira.kyo
+  - ja.orth.hira.sha
+  - ja.orth.hira.shu
+  - ja.orth.hira.sho
+  - ja.orth.hira.cha
+  - ja.orth.hira.chu
+  - ja.orth.hira.cho
+  - ja.orth.hira.nya
+  - ja.orth.hira.nyu
+  - ja.orth.hira.nyo
+  - ja.orth.hira.hya
+  - ja.orth.hira.hyu
+  - ja.orth.hira.hyo
+  - ja.orth.hira.mya
+  - ja.orth.hira.myu
+  - ja.orth.hira.myo
+  - ja.orth.hira.rya
+  - ja.orth.hira.ryu
+  - ja.orth.hira.ryo
+  - ja.orth.hira.gya
+  - ja.orth.hira.gyu
+  - ja.orth.hira.gyo
+  - ja.orth.hira.ja
+  - ja.orth.hira.ju
+  - ja.orth.hira.jo
+  - ja.orth.hira.bya
+  - ja.orth.hira.byu
+  - ja.orth.hira.byo
 - id: ja.activity.kana-hira-yon-recall
   type: recall-choice
   modality: reading
   support_level: 1
-  content_refs: *id001
+  content_refs:
+  - ja.orth.hira.kya
+  - ja.orth.hira.kyu
+  - ja.orth.hira.kyo
+  - ja.orth.hira.sha
+  - ja.orth.hira.shu
+  - ja.orth.hira.sho
+  - ja.orth.hira.cha
+  - ja.orth.hira.chu
+  - ja.orth.hira.cho
+  - ja.orth.hira.nya
+  - ja.orth.hira.nyu
+  - ja.orth.hira.nyo
+  - ja.orth.hira.hya
+  - ja.orth.hira.hyu
+  - ja.orth.hira.hyo
+  - ja.orth.hira.mya
+  - ja.orth.hira.myu
+  - ja.orth.hira.myo
+  - ja.orth.hira.rya
+  - ja.orth.hira.ryu
+  - ja.orth.hira.ryo
+  - ja.orth.hira.gya
+  - ja.orth.hira.gyu
+  - ja.orth.hira.gyo
+  - ja.orth.hira.ja
+  - ja.orth.hira.ju
+  - ja.orth.hira.jo
+  - ja.orth.hira.bya
+  - ja.orth.hira.byu
+  - ja.orth.hira.byo

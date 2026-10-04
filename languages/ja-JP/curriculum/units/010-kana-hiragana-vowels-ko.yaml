@@ -5,7 +5,7 @@ title: 'Hiragana: vowels and K-row'
 summary: First ten hiragana with symbol/reading drills.
 estimated_minutes: 8
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.orth.hira.a
   - ja.orth.hira.i
   - ja.orth.hira.u
@@ -24,14 +24,44 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 5
-  content_refs: *id001
+  content_refs:
+  - ja.orth.hira.a
+  - ja.orth.hira.i
+  - ja.orth.hira.u
+  - ja.orth.hira.e
+  - ja.orth.hira.o
+  - ja.orth.hira.ka
+  - ja.orth.hira.ki
+  - ja.orth.hira.ku
+  - ja.orth.hira.ke
+  - ja.orth.hira.ko
 - id: ja.activity.kana-hira-vk-match
   type: match
   modality: reading
   support_level: 3
-  content_refs: *id001
+  content_refs:
+  - ja.orth.hira.a
+  - ja.orth.hira.i
+  - ja.orth.hira.u
+  - ja.orth.hira.e
+  - ja.orth.hira.o
+  - ja.orth.hira.ka
+  - ja.orth.hira.ki
+  - ja.orth.hira.ku
+  - ja.orth.hira.ke
+  - ja.orth.hira.ko
 - id: ja.activity.kana-hira-vk-recall
   type: recall-choice
   modality: reading
   support_level: 1
-  content_refs: *id001
+  content_refs:
+  - ja.orth.hira.a
+  - ja.orth.hira.i
+  - ja.orth.hira.u
+  - ja.orth.hira.e
+  - ja.orth.hira.o
+  - ja.orth.hira.ka
+  - ja.orth.hira.ki
+  - ja.orth.hira.ku
+  - ja.orth.hira.ke
+  - ja.orth.hira.ko

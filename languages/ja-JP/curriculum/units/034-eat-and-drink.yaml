@@ -5,7 +5,7 @@ title: Eating and drinking sentences
 summary: Verb practice with the object marker.
 estimated_minutes: 7
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.lex.verbs.tabemasu
   - ja.lex.verbs.nomimasu
   - ja.lex.food-drink.gohan
@@ -24,7 +24,15 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 5
-  content_refs: *id001
+  content_refs:
+  - ja.lex.verbs.tabemasu
+  - ja.lex.verbs.nomimasu
+  - ja.lex.food-drink.gohan
+  - ja.lex.food-drink.mizu
+  - ja.lex.food-drink.kohi
+  - ja.sent.i-eat-rice
+  - ja.sent.i-drink-water
+  - ja.sent.drink-coffee
 - id: ja.activity.eatv-cloze
   type: cloze
   modality: reading
@@ -36,4 +44,12 @@ activities:
   type: retrieval
   modality: speaking
   support_level: 2
-  content_refs: *id001
+  content_refs:
+  - ja.lex.verbs.tabemasu
+  - ja.lex.verbs.nomimasu
+  - ja.lex.food-drink.gohan
+  - ja.lex.food-drink.mizu
+  - ja.lex.food-drink.kohi
+  - ja.sent.i-eat-rice
+  - ja.sent.i-drink-water
+  - ja.sent.drink-coffee

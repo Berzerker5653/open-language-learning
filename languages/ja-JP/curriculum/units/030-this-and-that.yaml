@@ -5,7 +5,7 @@ title: This, that, and over there
 summary: Demonstratives with the topic marker.
 estimated_minutes: 7
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.lex.demonstratives.kore
   - ja.lex.demonstratives.sore
   - ja.lex.demonstratives.are
@@ -28,14 +28,47 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 5
-  content_refs: *id001
+  content_refs:
+  - ja.lex.demonstratives.kore
+  - ja.lex.demonstratives.sore
+  - ja.lex.demonstratives.are
+  - ja.lex.demonstratives.kono
+  - ja.lex.demonstratives.sono
+  - ja.lex.objects.hon
+  - ja.lex.objects.pen
+  - ja.lex.objects.kasa
+  - ja.sent.this-is-book
+  - ja.sent.that-is-pen
+  - ja.sent.what-is-this
 - id: ja.activity.dem-match
   type: match
   modality: reading
   support_level: 3
-  content_refs: *id001
+  content_refs:
+  - ja.lex.demonstratives.kore
+  - ja.lex.demonstratives.sore
+  - ja.lex.demonstratives.are
+  - ja.lex.demonstratives.kono
+  - ja.lex.demonstratives.sono
+  - ja.lex.objects.hon
+  - ja.lex.objects.pen
+  - ja.lex.objects.kasa
+  - ja.sent.this-is-book
+  - ja.sent.that-is-pen
+  - ja.sent.what-is-this
 - id: ja.activity.dem-recall
   type: recall-choice
   modality: reading
   support_level: 1
-  content_refs: *id001
+  content_refs:
+  - ja.lex.demonstratives.kore
+  - ja.lex.demonstratives.sore
+  - ja.lex.demonstratives.are
+  - ja.lex.demonstratives.kono
+  - ja.lex.demonstratives.sono
+  - ja.lex.objects.hon
+  - ja.lex.objects.pen
+  - ja.lex.objects.kasa
+  - ja.sent.this-is-book
+  - ja.sent.that-is-pen
+  - ja.sent.what-is-this

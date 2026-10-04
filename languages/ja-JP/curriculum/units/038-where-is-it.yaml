@@ -5,7 +5,7 @@ title: Asking where things are
 summary: Question word and here/there answers.
 estimated_minutes: 7
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.lex.questions.doko
   - ja.lex.demonstratives.koko
   - ja.lex.demonstratives.soko
@@ -22,12 +22,26 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 5
-  content_refs: *id001
+  content_refs:
+  - ja.lex.questions.doko
+  - ja.lex.demonstratives.koko
+  - ja.lex.demonstratives.soko
+  - ja.lex.demonstratives.asoko
+  - ja.lex.places.eki
+  - ja.sent.where-station
+  - ja.sent.here-it-is
 - id: ja.activity.loc-speak
   type: retrieval
   modality: speaking
   support_level: 2
-  content_refs: *id001
+  content_refs:
+  - ja.lex.questions.doko
+  - ja.lex.demonstratives.koko
+  - ja.lex.demonstratives.soko
+  - ja.lex.demonstratives.asoko
+  - ja.lex.places.eki
+  - ja.sent.where-station
+  - ja.sent.here-it-is
 - id: ja.activity.loc-scenario
   type: scenario
   modality: interaction

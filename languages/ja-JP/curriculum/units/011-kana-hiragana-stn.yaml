@@ -5,7 +5,7 @@ title: 'Hiragana: S, T, N rows'
 summary: Fifteen more hiragana; watch the shi/tsu and ta/no look-alikes.
 estimated_minutes: 10
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.orth.hira.sa
   - ja.orth.hira.shi
   - ja.orth.hira.su
@@ -29,14 +29,59 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 5
-  content_refs: *id001
+  content_refs:
+  - ja.orth.hira.sa
+  - ja.orth.hira.shi
+  - ja.orth.hira.su
+  - ja.orth.hira.se
+  - ja.orth.hira.so
+  - ja.orth.hira.ta
+  - ja.orth.hira.chi
+  - ja.orth.hira.tsu
+  - ja.orth.hira.te
+  - ja.orth.hira.to
+  - ja.orth.hira.na
+  - ja.orth.hira.ni
+  - ja.orth.hira.nu
+  - ja.orth.hira.ne
+  - ja.orth.hira.no
 - id: ja.activity.kana-hira-stn-match
   type: match
   modality: reading
   support_level: 3
-  content_refs: *id001
+  content_refs:
+  - ja.orth.hira.sa
+  - ja.orth.hira.shi
+  - ja.orth.hira.su
+  - ja.orth.hira.se
+  - ja.orth.hira.so
+  - ja.orth.hira.ta
+  - ja.orth.hira.chi
+  - ja.orth.hira.tsu
+  - ja.orth.hira.te
+  - ja.orth.hira.to
+  - ja.orth.hira.na
+  - ja.orth.hira.ni
+  - ja.orth.hira.nu
+  - ja.orth.hira.ne
+  - ja.orth.hira.no
 - id: ja.activity.kana-hira-stn-recall
   type: recall-choice
   modality: reading
   support_level: 1
-  content_refs: *id001
+  content_refs:
+  - ja.orth.hira.sa
+  - ja.orth.hira.shi
+  - ja.orth.hira.su
+  - ja.orth.hira.se
+  - ja.orth.hira.so
+  - ja.orth.hira.ta
+  - ja.orth.hira.chi
+  - ja.orth.hira.tsu
+  - ja.orth.hira.te
+  - ja.orth.hira.to
+  - ja.orth.hira.na
+  - ja.orth.hira.ni
+  - ja.orth.hira.nu
+  - ja.orth.hira.ne
+  - ja.orth.hira.no

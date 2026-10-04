@@ -11,6 +11,7 @@ import re
 import sys
 from pathlib import Path, PurePosixPath
 try:
+    from referencing import Registry, Resource
     import yaml
     from jsonschema import Draft202012Validator, FormatChecker
 except ImportError as exc:
@@ -20,8 +21,6 @@ except ImportError as exc:
 ROOT = Path(__file__).resolve().parents[1]
 MAX_DATA_BYTES = 2_000_000
 TRUSTED = {"validated", "verified", "reference"}
-# Exact documented exception; cannot authorize any other unknown reference.
-DRAFT_REFERENCE_ALLOWLIST = {("org.openlanguage.ja-jp.reference", "assessment", "ja.goal.onramp.respond-to-greeting", "ja.assess.onramp.greeting-transfer")}
 
 
 class DuplicateKeyError(ValueError):
@@ -94,6 +93,7 @@ class Audit:
         self.warnings = []
         self.cache = {}
         self.schemas = {}
+        self.registry = Registry()
         self.checked = 0
 
     def fail(self, label, message):
@@ -137,7 +137,7 @@ class Audit:
         if schema is None:
             self.fail(label, f"missing usable schema {name}")
             return False
-        errors = sorted(Draft202012Validator(schema, format_checker=FormatChecker()).iter_errors(value), key=lambda e: str(list(e.path)))
+        errors = sorted(Draft202012Validator(schema, registry=self.registry, format_checker=FormatChecker()).iter_errors(value), key=lambda e: str(list(e.path)))
         for error in errors:
             self.fail(label, f"{'/'.join(map(str,error.path)) or '<root>'}: {error.message}")
         return not errors
@@ -188,11 +188,11 @@ class Audit:
                 self.fail(label, f"{record.get('id')} needs {field}")
 
     def load_schemas(self):
-        expected = {"concept.schema.json", "goal.schema.json", "unit.schema.json", "source-entry.schema.json", "speech-profile.schema.json", "language-pack-manifest.schema.json", "lexical-entry.schema.json"}
+        expected = {"concept.schema.json", "goal.schema.json", "unit.schema.json", "source-entry.schema.json", "language-pack-manifest.schema.json", "lexicon-entry.schema.json", "sentence.schema.json", "assessment.schema.json", "license-inventory.schema.json"}
         for name in sorted(expected):
-            if not (self.root / "schemas" / name).is_file():
+            if not (self.root / "schemas" / "v0.2" / name).is_file():
                 self.fail("schemas", f"missing {name}")
-        for path in sorted((self.root / "schemas").glob("*.schema.json")):
+        for path in sorted((self.root / "schemas" / "v0.2").glob("*.schema.json")):
             schema = self.data(path)
             if schema is None:
                 continue
@@ -203,6 +203,8 @@ class Audit:
                 self.schemas[path.name] = schema
             except Exception as exc:
                 self.fail(str(path.relative_to(self.root)), f"invalid schema: {exc}")
+        self.registry = Registry().with_resources(
+            [(schema["$id"], Resource.from_contents(schema)) for schema in self.schemas.values() if "$id" in schema])
 
     def pack(self, base):
         label = str(base.relative_to(self.root))
@@ -212,8 +214,7 @@ class Audit:
         upper = manifest["engine"].get("max_version_exclusive")
         if upper and semver_tuple(manifest["engine"]["min_version"]) >= semver_tuple(upper):
             self.fail(label, "engine compatibility range is empty/reversed")
-        maturity = manifest["maturity"]
-        if maturity != "experimental":
+        if manifest["maturity"] != "experimental":
             self.fail(label, "this scaffold checker cannot authorize trust promotion; implement SDK review/trust gates before changing maturity")
         for field in ["license_file", "attribution_file"]:
             if field in manifest["license"]:
@@ -223,126 +224,44 @@ class Audit:
             if self.release:
                 self.fail(label, "manifest-only example is not a releasable language pack")
             return
-        for name in ["SOURCES.yaml", "LICENSES.yaml", "grammar/concepts.yaml", "grammar/dependencies.yaml",
-                     "curriculum/goals.yaml", "language/identity.yaml", "language/normalization.yaml",
-                     "lexicon/vocabulary.jsonl", "lexicon/expressions.jsonl", "orthography/scripts.yaml",
-                     "orthography/transliteration.yaml", "phonology/inventory.yaml", "phonology/prosody.yaml",
-                     "pragmatics/registers.yaml", "pragmatics/situations.yaml", "speech/profile.yaml",
-                     "speech/accepted-variants.yaml", "speech/rubrics.yaml"]:
+        for name in ["sources.jsonl", "licenses.jsonl", "curriculum/goals.yaml", "grammar/concepts.jsonl",
+                     "sentences/entries.jsonl", "assessments/definitions.jsonl"]:
             self.relative_file(base, name, label)
+        if not sorted((base / "lexicon").glob("*.jsonl")):
+            self.fail(label, "pack needs at least one lexicon/*.jsonl file")
+        if not sorted((base / "curriculum" / "units").glob("*.yaml")):
+            self.fail(label, "pack needs at least one curriculum/units/*.yaml file")
         if "UNLICENSED" in manifest["license"]["content_license"] or "UNKNOWN" in manifest["license"]["content_license"]:
             self.warn(label, "draft distribution license unresolved; no redistribution/release authorization inferred")
-        sources = self.records(self.data(base / "SOURCES.yaml"), label + "/SOURCES.yaml")
-        for source in sources:
-            self.schema("source-entry.schema.json", source, label + "/source")
-        source_ids = self.index(sources, label + "/sources")
-        license_data = self.data(base / "LICENSES.yaml")
-        if not isinstance(license_data, dict):
-            self.fail(label + "/LICENSES.yaml", "expected license policy object")
-        groups = {}
         for name, paths, schema in [
-            ("concept", [base / "grammar/concepts.yaml"], "concept.schema.json"),
-            ("goal", [base / "curriculum/goals.yaml"], "goal.schema.json"),
-            ("lexical", sorted((base / "lexicon").glob("*.jsonl")), "lexical-entry.schema.json"),
-            ("unit", sorted((base / "curriculum/units").glob("*.yaml")), "unit.schema.json"),
-            ("scenario", sorted((base / "activities/scenarios").glob("*.yaml")), None),
-            ("assessment", sorted((base / "curriculum/assessments").glob("*.yaml")), None),
+            ("source", [base / "sources.jsonl"], "source-entry.schema.json"),
+            ("license", [base / "licenses.jsonl"], "license-inventory.schema.json"),
+            ("concept", [base / "grammar/concepts.jsonl"], "concept.schema.json"),
+            ("lexical", sorted((base / "lexicon").glob("*.jsonl")), "lexicon-entry.schema.json"),
+            ("sentence", [base / "sentences/entries.jsonl"], "sentence.schema.json"),
+            ("assessment", [base / "assessments/definitions.jsonl"], "assessment.schema.json"),
+            ("unit", sorted((base / "curriculum" / "units").glob("*.yaml")), "unit.schema.json"),
         ]:
-            records = []
             for path in paths:
+                if not path.is_file():
+                    continue
                 data = self.data(path)
                 values = data if isinstance(data, list) else [data]
-                values = self.records(values, str(path.relative_to(self.root)))
-                for record in values:
-                    if schema and not self.schema(schema, record, str(path.relative_to(self.root))):
-                        continue
-                    records.append(record)
-            groups[name] = self.index(records, label + "/" + name)
-        for name in ["goal", "lexical", "unit"]:
-            if not groups[name]:
-                self.fail(label, f"seed instructional pack needs at least one {name} record")
-        all_ids = {}
-        for records in groups.values():
-            for ident, record in records.items():
-                if ident in all_ids:
-                    self.fail(label, f"ID {ident} reused across record types")
-                all_ids[ident] = record
-        for name in ["concept", "goal", "lexical", "unit"]:
-            self.refs(groups[name].values(), "sources", source_ids, label, required=True)
-        self.refs(groups["concept"].values(), "related", all_ids, label)
-        self.refs(groups["goal"].values(), "required_concepts", {**groups["concept"], **groups["lexical"]}, label)
-        self.refs(groups["unit"].values(), "goal_ids", groups["goal"], label)
-        self.refs(groups["scenario"].values(), "target_goal_ids", groups["goal"], label)
-        graph_nodes = {**groups["concept"], **groups["goal"], **groups["lexical"]}
-        self.dag({ident: rec.get("prerequisites", []) for ident, rec in graph_nodes.items()}, label + "/curriculum")
-        actual_missing = set()
-        declarations = {(entry["kind"], entry["owner_id"], entry["target_id"]): entry for entry in manifest.get("unresolved_references", [])}
-        if len(declarations) != len(manifest.get("unresolved_references", [])):
-            self.fail(label, "duplicate unresolved-reference declaration")
-        for goal in groups["goal"].values():
-            for target in goal.get("assessment_ids", []):
-                if target in groups["assessment"]:
-                    continue
-                key = ("assessment", goal["id"], target)
-                actual_missing.add(key)
-                full = (manifest["pack_id"],) + key
-                if key in declarations and full in DRAFT_REFERENCE_ALLOWLIST and not self.release:
-                    self.warn(label, f"explicit unresolved draft assessment {target}: {declarations[key]['reason']}")
-                else:
-                    self.fail(label, f"unknown assessment {target} on {goal['id']}; only documented exact draft exceptions are allowed in handoff mode")
-        for key in declarations:
-            if key not in actual_missing:
-                self.fail(label, f"stale/unsupported unresolved-reference declaration {key}")
-        for unit in groups["unit"].values():
-            activity_ids = set()
-            for activity in unit.get("activities", []):
-                ident = activity["id"]
-                if ident in activity_ids:
-                    self.fail(label, f"duplicate activity ID {ident} in {unit['id']}")
-                activity_ids.add(ident)
-                self.refs([activity], "targets", all_ids, label)
-                if activity.get("scenario_id") and activity["scenario_id"] not in groups["scenario"]:
-                    self.fail(label, f"unknown scenario {activity['scenario_id']}")
-        dependencies = self.data(base / "grammar/dependencies.yaml")
-        if not isinstance(dependencies, dict) or dependencies.get("prerequisite_edges") != []:
-            self.fail(label, "seed redundant prerequisite_edges must stay empty until PACK-002 defines and validates edge encoding")
-        identity = self.data(base / "language/identity.yaml")
-        registers = self.data(base / "pragmatics/registers.yaml")
-        situations = self.data(base / "pragmatics/situations.yaml")
-        if not isinstance(situations, dict):
-            self.fail(label, "situations file must declare a situation list")
-        situation_ids = self.index(self.records(situations.get("situations"), label + "/situations"), label + "/situations") if isinstance(situations, dict) else {}
-        self.refs(groups["goal"].values(), "contexts", situation_ids, label)
-        if not isinstance(identity, dict) or identity.get("locale") != manifest["target_locale"]:
-            self.fail(label, "language identity locale differs from manifest")
-        variants = self.index(identity.get("variants", []), label + "/variants") if isinstance(identity, dict) else {}
-        register_ids = self.index(registers.get("registers", []), label + "/registers") if isinstance(registers, dict) else {}
-        for name in ["concept", "lexical"]:
-            self.refs(groups[name].values(), "registers", register_ids, label)
-        profile = self.data(base / "speech/profile.yaml")
-        if self.schema("speech-profile.schema.json", profile, label + "/speech/profile.yaml"):
-            if profile["locale"] != manifest["target_locale"]:
-                self.fail(label, "speech locale differs from manifest")
-            if profile.get("reference_variant") not in variants:
-                self.fail(label, "speech reference variant is not a language identity variant")
-            features = self.index(profile["features"], label + "/speech/features")
-            for feature in features.values():
-                calibration = feature.get("calibration")
-                if calibration:
-                    for field in ["evidence_path", "policy_path"]:
-                        self.relative_file(base, calibration[field], label + "/calibration")
-                    if calibration["pack_version"] != manifest["version"] or calibration["reference_variant"] != profile.get("reference_variant"):
-                        self.fail(label, "calibration pack version/reference variety binding mismatch")
+                for record in self.records(values, str(path.relative_to(self.root))):
+                    self.schema(schema, record, str(path.relative_to(self.root)))
+        goal_paths = sorted((base / "curriculum").glob("goals*.yaml")) + sorted((base / "curriculum" / "goals").glob("*.yaml"))
+        if not goal_paths:
+            self.fail(label, "pack needs curriculum/goals.yaml or curriculum/goals/*.yaml")
+        for path in goal_paths:
+            data = self.data(path)
+            goals = data.get("goals") if isinstance(data, dict) else None
+            for record in self.records(goals, str(path.relative_to(self.root))):
+                self.schema("goal.schema.json", record, str(path.relative_to(self.root)))
         if self.release:
-            if maturity not in TRUSTED:
+            if manifest["maturity"] not in TRUSTED:
                 self.fail(label, "pack is experimental/unreviewed")
             if "UNLICENSED" in manifest["license"]["content_license"] or "UNKNOWN" in manifest["license"]["content_license"]:
                 self.fail(label, "pack distribution license is unresolved")
-            for ident, record in all_ids.items():
-                state = record.get("review_status", record.get("status"))
-                if state not in {"validated", "verified"}:
-                    self.fail(label, f"content {ident} is not reviewed for distribution")
-            self.fail(label, "SDK schemas for assessments/scenarios/assets/review evidence are incomplete: implement PACK-001/PACK-002/trust gates; this checker cannot certify release")
 
     def roadmap(self):
         value = self.data(self.root / "tasks/ROADMAP.yaml")

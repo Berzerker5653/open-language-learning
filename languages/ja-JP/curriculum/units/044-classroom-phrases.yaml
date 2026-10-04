@@ -5,7 +5,7 @@ title: In the classroom
 summary: Teacher/student words and comprehension-repair practice.
 estimated_minutes: 6
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.lex.pronouns.sensei
   - ja.lex.people.gakusei
   - ja.lex.verbs.benkyou-shimasu
@@ -22,14 +22,35 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 5
-  content_refs: *id001
+  content_refs:
+  - ja.lex.pronouns.sensei
+  - ja.lex.people.gakusei
+  - ja.lex.verbs.benkyou-shimasu
+  - ja.lex.verbs.wakarimasu
+  - ja.sent.understand
+  - ja.sent.dont-understand
+  - ja.sent.again-please
 - id: ja.activity.cls-listen
   type: listen-and-choose
   modality: listening
   support_level: 3
-  content_refs: *id001
+  content_refs:
+  - ja.lex.pronouns.sensei
+  - ja.lex.people.gakusei
+  - ja.lex.verbs.benkyou-shimasu
+  - ja.lex.verbs.wakarimasu
+  - ja.sent.understand
+  - ja.sent.dont-understand
+  - ja.sent.again-please
 - id: ja.activity.cls-speak
   type: retrieval
   modality: speaking
   support_level: 1
-  content_refs: *id001
+  content_refs:
+  - ja.lex.pronouns.sensei
+  - ja.lex.people.gakusei
+  - ja.lex.verbs.benkyou-shimasu
+  - ja.lex.verbs.wakarimasu
+  - ja.sent.understand
+  - ja.sent.dont-understand
+  - ja.sent.again-please

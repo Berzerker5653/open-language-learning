@@ -5,7 +5,7 @@ title: Greetings by time of day
 summary: Match greetings to morning, evening, and night.
 estimated_minutes: 6
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.lex.greetings.ohayou-gozaimasu
   - ja.lex.greetings.konbanwa
   - ja.lex.greetings.oyasumi-nasai
@@ -21,14 +21,32 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 5
-  content_refs: *id001
+  content_refs:
+  - ja.lex.greetings.ohayou-gozaimasu
+  - ja.lex.greetings.konbanwa
+  - ja.lex.greetings.oyasumi-nasai
+  - ja.sent.greet-morning
+  - ja.sent.greet-evening
+  - ja.sent.greet-night
 - id: ja.activity.greet-times-listen
   type: listen-and-choose
   modality: listening
   support_level: 3
-  content_refs: *id001
+  content_refs:
+  - ja.lex.greetings.ohayou-gozaimasu
+  - ja.lex.greetings.konbanwa
+  - ja.lex.greetings.oyasumi-nasai
+  - ja.sent.greet-morning
+  - ja.sent.greet-evening
+  - ja.sent.greet-night
 - id: ja.activity.greet-times-speak
   type: retrieval
   modality: speaking
   support_level: 2
-  content_refs: *id001
+  content_refs:
+  - ja.lex.greetings.ohayou-gozaimasu
+  - ja.lex.greetings.konbanwa
+  - ja.lex.greetings.oyasumi-nasai
+  - ja.sent.greet-morning
+  - ja.sent.greet-evening
+  - ja.sent.greet-night

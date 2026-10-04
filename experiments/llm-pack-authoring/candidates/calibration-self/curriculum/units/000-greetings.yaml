@@ -8,7 +8,13 @@ activities:
     type: "encounter-read"
     modality: "reading"
     support_level: 0
-    content_refs: ["de.lex.greetings.hallo", "de.lex.greetings.guten-morgen", "de.lex.greetings.guten-abend", "de.lex.greetings.tschuess"]
+    content_refs:
+      [
+        "de.lex.greetings.hallo",
+        "de.lex.greetings.guten-morgen",
+        "de.lex.greetings.guten-abend",
+        "de.lex.greetings.tschuess",
+      ]
   - id: "de.activity.onramp.recall-guten-morgen"
     type: "recall"
     modality: "reading"
@@ -20,7 +26,14 @@ activities:
     support_level: 1
     content_refs: ["de.sent.onramp.guten-morgen-maria"]
 generation_contract:
-  allowed_vocab: ["de.lex.greetings.hallo", "de.lex.greetings.guten-morgen", "de.lex.greetings.guten-abend", "de.lex.greetings.tschuess", "de.sent.onramp.guten-morgen-maria"]
+  allowed_vocab:
+    [
+      "de.lex.greetings.hallo",
+      "de.lex.greetings.guten-morgen",
+      "de.lex.greetings.guten-abend",
+      "de.lex.greetings.tschuess",
+      "de.sent.onramp.guten-morgen-maria",
+    ]
   allowed_grammar: ["de.grammar.onramp.verb-second"]
   new_item_budget: 5
   register: []

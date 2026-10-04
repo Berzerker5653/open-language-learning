@@ -5,7 +5,7 @@ title: My day
 summary: Routine verbs with time markers.
 estimated_minutes: 8
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.lex.verbs.okimasu
   - ja.lex.verbs.nemasu
   - ja.lex.time.mainichi
@@ -26,7 +26,17 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 5
-  content_refs: *id001
+  content_refs:
+  - ja.lex.verbs.okimasu
+  - ja.lex.verbs.nemasu
+  - ja.lex.time.mainichi
+  - ja.lex.time.asa
+  - ja.lex.time.hiru
+  - ja.lex.time.ban
+  - ja.lex.time.yoru
+  - ja.sent.wake-up
+  - ja.sent.sleep-night
+  - ja.sent.eat-breakfast
 - id: ja.activity.day-dict
   type: dictation
   modality: listening
@@ -38,7 +48,17 @@ activities:
   type: retrieval
   modality: speaking
   support_level: 2
-  content_refs: *id001
+  content_refs:
+  - ja.lex.verbs.okimasu
+  - ja.lex.verbs.nemasu
+  - ja.lex.time.mainichi
+  - ja.lex.time.asa
+  - ja.lex.time.hiru
+  - ja.lex.time.ban
+  - ja.lex.time.yoru
+  - ja.sent.wake-up
+  - ja.sent.sleep-night
+  - ja.sent.eat-breakfast
 - id: ja.activity.day-write
   type: fill-blank
   modality: writing

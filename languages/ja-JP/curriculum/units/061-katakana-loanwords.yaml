@@ -5,7 +5,7 @@ title: Katakana loanwords in the wild
 summary: Common loanwords that show katakana doing everyday work.
 estimated_minutes: 6
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.lex.food-drink.pan
   - ja.lex.food-drink.kohi
   - ja.lex.food-drink.juusu
@@ -25,14 +25,47 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 4
-  content_refs: *id001
+  content_refs:
+  - ja.lex.food-drink.pan
+  - ja.lex.food-drink.kohi
+  - ja.lex.food-drink.juusu
+  - ja.lex.food-drink.biiru
+  - ja.lex.food-drink.miruku
+  - ja.lex.objects.terebi
+  - ja.lex.objects.basu
+  - ja.lex.objects.pen
+  - ja.lex.places.toire
+  - ja.lex.places.resutoran
+  - ja.lex.places.depaato
 - id: ja.activity.loan-match
   type: match
   modality: reading
   support_level: 2
-  content_refs: *id001
+  content_refs:
+  - ja.lex.food-drink.pan
+  - ja.lex.food-drink.kohi
+  - ja.lex.food-drink.juusu
+  - ja.lex.food-drink.biiru
+  - ja.lex.food-drink.miruku
+  - ja.lex.objects.terebi
+  - ja.lex.objects.basu
+  - ja.lex.objects.pen
+  - ja.lex.places.toire
+  - ja.lex.places.resutoran
+  - ja.lex.places.depaato
 - id: ja.activity.loan-recall
   type: recall-choice
   modality: reading
   support_level: 1
-  content_refs: *id001
+  content_refs:
+  - ja.lex.food-drink.pan
+  - ja.lex.food-drink.kohi
+  - ja.lex.food-drink.juusu
+  - ja.lex.food-drink.biiru
+  - ja.lex.food-drink.miruku
+  - ja.lex.objects.terebi
+  - ja.lex.objects.basu
+  - ja.lex.objects.pen
+  - ja.lex.places.toire
+  - ja.lex.places.resutoran
+  - ja.lex.places.depaato

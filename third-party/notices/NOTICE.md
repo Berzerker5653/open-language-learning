@@ -7,12 +7,12 @@ components.
 
 ## Components
 
-| Component | License | Role |
-| --- | --- | --- |
-| espeak-ng (data + linked library) | GPL-3.0 | grapheme-to-phoneme data for Japanese synthesis |
-| sherpa-onnx | Apache-2.0 | speech runtime |
-| ONNX Runtime | MIT | model inference engine |
-| Kokoro (kokoro-multi-lang-v1_0) | Apache-2.0 | Japanese voice model |
+| Component                         | License    | Role                                            |
+| --------------------------------- | ---------- | ----------------------------------------------- |
+| espeak-ng (data + linked library) | GPL-3.0    | grapheme-to-phoneme data for Japanese synthesis |
+| sherpa-onnx                       | Apache-2.0 | speech runtime                                  |
+| ONNX Runtime                      | MIT        | model inference engine                          |
+| Kokoro (kokoro-multi-lang-v1_0)   | Apache-2.0 | Japanese voice model                            |
 
 License texts: `GPL-3.0.txt`, `Apache-2.0.txt`, `ONNX-Runtime-MIT.txt`
 (next to this file; staged into the payload at build time).

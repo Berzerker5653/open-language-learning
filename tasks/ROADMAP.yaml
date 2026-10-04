@@ -699,6 +699,7 @@ tasks:
   - "The TTS variant carries GPL-3.0 obligations for its payload only: espeak-ng source offer, component license texts, and attribution UI entries for espeak-ng (GPLv3), sherpa-onnx (Apache-2.0), ONNX Runtime (MIT), Kokoro (Apache-2.0)."
   - "The TTS payload is installable into the bare variant as an optional in-app download: directory-capable model catalog entries (multi-file pin, hash verify, atomic activation) with the kokoro export as the first entry."
   - "Bring-your-own: the bare variant accepts a user-supplied local TTS runtime via documented configuration; absence never blocks non-audio practice."
+  required_for_desktop_1_0: false
 - id: POLISH-001
   milestone: M6
   priority: P1
@@ -707,12 +708,13 @@ tasks:
   - TTS-002
   read_first:
   - docs/13_RELEASE_AND_DISTRIBUTION.md
-  - docs/15_TASK_STATE_AND_SELECTION.md
+  - docs/15_AUTONOMOUS_DEVELOPMENT.md
   acceptance:
   - "Full fast suite green on the Linux reference machine: cargo workspace tests, clippy -D warnings, fmt, tsc, vitest, desktop smoke."
   - "Failure paths produce honest, actionable messages and are covered by tests: offline/absent catalog, invalid pack import, missing TTS payload, failed or checksum-mismatched model download, unknown model id."
   - "Startup and plan-generation latency measured and recorded as a baseline artifact in state/evidence."
   - "UI walkthrough of every route on the reference machine; rough edges found are fixed or filed as new cards."
+  required_for_desktop_1_0: false
 - id: JA-A1-001
   milestone: M6
   priority: P0
@@ -815,6 +817,7 @@ tasks:
   - Scenario list/start/attempt/finish reachable from the app; unlock follows goal hard prereqs via derived mastery, not activity count.
   - Completion records one scored interaction evidence event per node; no scheduler rows for scenario nodes.
   - Dialogue graph, recovery branches, support ladder, and transfer variants come only from pack data.
+  required_for_desktop_1_0: false
 - id: K-02
   milestone: M6
   priority: P1
@@ -829,6 +832,7 @@ tasks:
   - Listening tasks hide the transcript natively (visible transcript disqualifies the evidence).
   - Audio resolves licensed pack media first, then local synthesis labeled as model output, then an honest error.
   - Grading records comprehension-listening evidence and its own per-modality scheduler row.
+  required_for_desktop_1_0: false
 - id: K-03
   milestone: M6
   priority: P1
@@ -843,6 +847,7 @@ tasks:
   - Furigana/romaji scaffolds follow per-item reading mastery and reader settings; fades at supported state.
   - Reader gating is script-based, never locale-based; non-Japanese packs keep the plain reading aid.
   - Revealing a faded scaffold records support level 3 with the concrete reveal action; revealing an already-shown scaffold records none.
+  required_for_desktop_1_0: false
 - id: K-04
   milestone: M6
   priority: P0
@@ -857,7 +862,8 @@ tasks:
   acceptance:
   - Orthography-unit content records (symbol, reading, romaji, mnemonic) are declarative pack data validated by the pack schema.
   - Recognize/recall runner modes schedule like vocabulary and feed the kana-literacy-established setting at threshold.
-  - Engine stays language-neutral: any pack may ship orthography instruction for its script.
+  - "Engine stays language-neutral: any pack may ship orthography instruction for its script."
+  required_for_desktop_1_0: false
 - id: K-05
   milestone: M6
   priority: P1
@@ -868,6 +874,7 @@ tasks:
   - docs/08_DATA_AND_PRIVACY.md
   acceptance:
   - Existing profiles are listed and resumable at launch; onboarding runs only for new profiles.
+  required_for_desktop_1_0: false
 - id: K-06
   milestone: M6
   priority: P1
@@ -879,6 +886,7 @@ tasks:
   - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
   acceptance:
   - Referenced on-ramp assessment goals exist in the pack and validate; scenario dialogue graph is populated from pack data.
+  required_for_desktop_1_0: false
 - id: K-10
   milestone: M6
   priority: P1
@@ -891,6 +899,7 @@ tasks:
   - docs/assessment/JA_PHONOLOGY_MODEL.md
   acceptance:
   - Pack-declared phonological contrasts (`phonology/contrasts.jsonl`) drive a listen-and-choose discrimination runner; scored evidence lands on a dedicated `phonological-discrimination` dimension (perception never grants production dimensions); audio is media-first with model-output labeling.
+  required_for_desktop_1_0: false
 - id: K-11
   milestone: M6
   priority: P2
@@ -902,6 +911,7 @@ tasks:
   - docs/05_SPEECH_SYSTEM.md
   acceptance:
   - Packs can declare shadow activities (classify_type family); the app offers a speak-along loop (model audio -> record -> self-compare) that records NO mastery evidence, since no calibrated scorer exists; audio is media-first with model-output labeling.
+  required_for_desktop_1_0: false
 - id: K-12
   milestone: M6
   priority: P2
@@ -914,6 +924,7 @@ tasks:
   acceptance:
   - Packs declare sentence content (`sentences/entries.jsonl`); cloze blanks a declared target in the sentence and grades typed recall as production-writing (target never visible), satisfying docs/03 section 9 typed-recall guidance.
   - Dictation plays target audio (media-first, model-output labeled) and grades typed transcription on a dedicated `orthographic-encoding` dimension; it never grants production-writing evidence (MASTERY_POLICY lists dictation-of-target as disqualifying for that dimension).
+  required_for_desktop_1_0: false
 - id: K-13
   milestone: M6
   priority: P2
@@ -924,8 +935,9 @@ tasks:
   read_first:
   - docs/03_CURRICULUM_AND_MASTERY.md
   acceptance:
-  - Packs declare stories (`stories/*.yaml`: ordered sentence content ids); the app renders an interlinear reader with per-sentence media-first audio and tap-to-lookup (sentence scaffolds + lexicon entries whose surface occurs in the sentence), scaffolds faded by comprehension-reading mastery via the READ-001 reader.
-  - The mode is FORMATIVE input practice: it records no mastery evidence; grading means ordering sentences by learner-known content, not scoring.
+  - "Packs declare stories (`stories/*.yaml`: ordered sentence content ids); the app renders an interlinear reader with per-sentence media-first audio and tap-to-lookup (sentence scaffolds + lexicon entries whose surface occurs in the sentence), scaffolds faded by comprehension-reading mastery via the READ-001 reader."
+  - "The mode is FORMATIVE input practice: it records no mastery evidence; grading means ordering sentences by learner-known content, not scoring."
+  required_for_desktop_1_0: false
 - id: K-14
   milestone: M6
   priority: P2
@@ -937,6 +949,7 @@ tasks:
   acceptance:
   - Learners add any encountered word (surface/reading/gloss) with a source citation to a personal, device-local lexicon (storage migration + CRUD commands); mining from the story reader cites the story content id.
   - Mined items get their own SRS scheduling (due reviews surfaced in the app, self-graded recall updates the scheduler) and NEVER write mastery evidence or touch pack-content scheduler rows.
+  required_for_desktop_1_0: false
 - id: K-15
   milestone: M6
   priority: P2
@@ -948,6 +961,7 @@ tasks:
   acceptance:
   - Packs declare assessments (`assessments/definitions.jsonl`, goal-linked); the app runs a low-stakes placement pass that builds one practice task per pack assessment from its goal's unit content, with evidence tagged Diagnostic.
   - Correct diagnostic answers raise mastery state through the normal derivation path, so known foundations unlock via existing prerequisite gating; the diagnostic NEVER fabricates evidence for constructs the learner did not attempt.
+  required_for_desktop_1_0: false
 - id: K-16
   milestone: M6
   priority: P2
@@ -958,6 +972,7 @@ tasks:
   acceptance:
   - Packs declare kanji instruction data (character, meaning/reading prompts, radical decomposition, optional mnemonic story, review_status); the app runs a Heisig/WaniKani-style low-stakes drill (meaning and reading recognition from the character) whose evidence lands on existing dimensions only.
   - Instruction is gated by the scheduler; newly drilled characters resurface on the scheduler's due date; untaught/unreviewed characters never enter the stream; AI-drafted mnemonics stay `draft`/`review-needed` and are labelled as such in the UI.
+  required_for_desktop_1_0: false
 - id: K-20
   milestone: M6
   priority: P2
@@ -969,6 +984,7 @@ tasks:
   - tools/AI_LANGUAGE_PACK_AUTHOR_PROMPT.md
   acceptance:
   - One agent-facing authoring contract document merges the requirements digest (layout contract, schema list, review/provenance rules), a per-unit authoring brief template, and a worked complete-unit example; a CI template for community pack repos runs `langpack validate`/`test` on every change.
+  required_for_desktop_1_0: false
 - id: K-21
   milestone: M6
   priority: P2
@@ -979,6 +995,7 @@ tasks:
   - docs/04_LANGUAGE_PACK_SPEC.md
   acceptance:
   - Units may declare a machine-checkable generation contract (docs/03 §12 — allowed vocab/grammar references, new-item budget, register, validation method); the validator checks referenced ids exist and the fields are well-formed, so AI-drafted units can be validated against their own declared constraints.
+  required_for_desktop_1_0: false
 - id: K-22
   milestone: M6
   priority: P2
@@ -988,6 +1005,7 @@ tasks:
   - docs/04_LANGUAGE_PACK_SPEC.md
   acceptance:
   - Documented conventions (with template examples) for topic-sharded lexicon files (`lexicon/<topic>.jsonl`) and unit-per-lesson naming; already layout-legal, so no engine change — the convention doc must match what `langpack validate` actually accepts.
+  required_for_desktop_1_0: false
 - id: K-23
   milestone: M6
   priority: P2
@@ -997,6 +1015,7 @@ tasks:
   - docs/04_LANGUAGE_PACK_SPEC.md
   acceptance:
   - "`curriculum/goals/*.yaml` is accepted alongside the single `curriculum/goals.yaml` (top-level `goals:` array per file, ids deduped across files); existing packs validate unchanged."
+  required_for_desktop_1_0: false
 - id: K-24
   milestone: M6
   priority: P2
@@ -1006,6 +1025,7 @@ tasks:
   - docs/04_LANGUAGE_PACK_SPEC.md
   acceptance:
   - "`langpack new-unit <pack> <id>` and `langpack new-lexicon <pack> <id>` write schema-valid starter files (status draft, sources placeholder marked for replacement) into the pack directory so an agent authors one lesson at a time with instant `validate` feedback."
+  required_for_desktop_1_0: false
 - id: K-30
   milestone: M6
   priority: P1
@@ -1018,6 +1038,7 @@ tasks:
   - docs/PACK_AUTHORING_CONTRACT.md
   acceptance:
   - "languages/ja-JP grows to a kana-first on-ramp: ~30+ units, hundreds of lexicon entries, sentences, kanji, phonology contrasts, and scenario graphs; every item carries generation provenance and draft/review-needed status; `langpack validate`/`test` clean; content remains blocked from install only by LIC-001."
+  required_for_desktop_1_0: false
 - id: K-31
   milestone: M6
   priority: P1
@@ -1028,6 +1049,7 @@ tasks:
   - docs/06_JAPANESE_REFERENCE.md
   acceptance:
   - "Goal graph covers A1-like functional areas (introductions, shopping, food, directions, time, routines) with per-goal assessments and transfer checkpoints; review_status stays draft pending JA-A1-003."
+  required_for_desktop_1_0: false
 - id: K-32
   milestone: M6
   priority: P1
@@ -1038,24 +1060,27 @@ tasks:
   - docs/04_LANGUAGE_PACK_SPEC.md
   acceptance:
   - "The desktop default/bundled pack for ja-JP is the authored on-ramp pack once it passes `langpack test`; ja-demo is removed or demoted to a fixture."
+  required_for_desktop_1_0: false
 - id: K-33
   milestone: M6
   priority: P2
   title: ACC-001 automated accessibility audit portion
   dependencies: []
   read_first:
-  - docs/07_ACCESSIBILITY.md
+  - docs/11_ACCESSIBILITY_AND_LOCALIZATION.md
   acceptance:
   - "Automated checks (ARIA semantics on interactive routes, focus order, contrast, reduced-motion) run in CI; the human screen-reader matrix remains an owner gate (O-03)."
+  required_for_desktop_1_0: false
 - id: K-34
   milestone: M6
   priority: P2
   title: PLAT-001 Windows/macOS parity — build config only, Linux-tested
   dependencies: []
   read_first:
-  - docs/08_PACKAGING_AND_RELEASE.md
+  - docs/13_RELEASE_AND_DISTRIBUTION.md
   acceptance:
   - "Windows/macOS build configurations and CI compile checks exist; runtime behavior is tested on Linux only, and release notes/catalog mark Windows/macOS builds as untested so public users can report issues (owner decision 2026-10-03)."
+  required_for_desktop_1_0: false
 - id: K-35
   milestone: M6
   priority: P2
@@ -1066,6 +1091,7 @@ tasks:
   - docs/04_LANGUAGE_PACK_SPEC.md
   acceptance:
   - "`langpack pack` produces installable .lpk artifacts for shipped packs and a catalog/packs.json listing them with hashes/versions; publishing to GitHub remains an owner gate (O-05)."
+  required_for_desktop_1_0: false
 - id: GAME-001
   milestone: M7
   priority: P1
@@ -1376,4 +1402,30 @@ execution_scope:
   - AI-001
   - PLAT-002
   - WEB-001
+  - TTS-002
+  - POLISH-001
+  - K-01
+  - K-02
+  - K-03
+  - K-04
+  - K-05
+  - K-06
+  - K-10
+  - K-11
+  - K-12
+  - K-13
+  - K-14
+  - K-15
+  - K-16
+  - K-20
+  - K-21
+  - K-22
+  - K-23
+  - K-24
+  - K-30
+  - K-31
+  - K-32
+  - K-33
+  - K-34
+  - K-35
   public_publication_authorized: false

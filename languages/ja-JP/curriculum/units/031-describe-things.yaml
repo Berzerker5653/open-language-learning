@@ -5,7 +5,7 @@ title: Saying what things are like
 summary: Basic adjectives with the topic marker.
 estimated_minutes: 8
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.lex.adjectives.oishii
   - ja.lex.adjectives.takai
   - ja.lex.adjectives.yasui
@@ -27,14 +27,47 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 5
-  content_refs: *id001
+  content_refs:
+  - ja.lex.adjectives.oishii
+  - ja.lex.adjectives.takai
+  - ja.lex.adjectives.yasui
+  - ja.lex.adjectives.ookii
+  - ja.lex.adjectives.chiisai
+  - ja.lex.adjectives.atarashii
+  - ja.lex.objects.hon
+  - ja.lex.objects.kasa
+  - ja.sent.book-expensive
+  - ja.sent.umbrella-big
+  - ja.sent.rice-delicious
 - id: ja.activity.adj-match
   type: match
   modality: reading
   support_level: 3
-  content_refs: *id001
+  content_refs:
+  - ja.lex.adjectives.oishii
+  - ja.lex.adjectives.takai
+  - ja.lex.adjectives.yasui
+  - ja.lex.adjectives.ookii
+  - ja.lex.adjectives.chiisai
+  - ja.lex.adjectives.atarashii
+  - ja.lex.objects.hon
+  - ja.lex.objects.kasa
+  - ja.sent.book-expensive
+  - ja.sent.umbrella-big
+  - ja.sent.rice-delicious
 - id: ja.activity.adj-speak
   type: retrieval
   modality: speaking
   support_level: 2
-  content_refs: *id001
+  content_refs:
+  - ja.lex.adjectives.oishii
+  - ja.lex.adjectives.takai
+  - ja.lex.adjectives.yasui
+  - ja.lex.adjectives.ookii
+  - ja.lex.adjectives.chiisai
+  - ja.lex.adjectives.atarashii
+  - ja.lex.objects.hon
+  - ja.lex.objects.kasa
+  - ja.sent.book-expensive
+  - ja.sent.umbrella-big
+  - ja.sent.rice-delicious

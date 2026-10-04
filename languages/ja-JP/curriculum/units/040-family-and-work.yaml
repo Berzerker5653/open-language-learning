@@ -5,7 +5,7 @@ title: Family and what they do
 summary: Own-family terms with occupation statements.
 estimated_minutes: 8
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.lex.people.kazoku
   - ja.lex.people.chichi
   - ja.lex.people.haha
@@ -27,9 +27,31 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 5
-  content_refs: *id001
+  content_refs:
+  - ja.lex.people.kazoku
+  - ja.lex.people.chichi
+  - ja.lex.people.haha
+  - ja.lex.people.ani
+  - ja.lex.people.imouto
+  - ja.lex.pronouns.sensei
+  - ja.lex.people.gakusei
+  - ja.lex.people.isha
+  - ja.sent.family-four
+  - ja.sent.my-father-teacher
+  - ja.sent.friend-student
 - id: ja.activity.fam-speak
   type: retrieval
   modality: speaking
   support_level: 2
-  content_refs: *id001
+  content_refs:
+  - ja.lex.people.kazoku
+  - ja.lex.people.chichi
+  - ja.lex.people.haha
+  - ja.lex.people.ani
+  - ja.lex.people.imouto
+  - ja.lex.pronouns.sensei
+  - ja.lex.people.gakusei
+  - ja.lex.people.isha
+  - ja.sent.family-four
+  - ja.sent.my-father-teacher
+  - ja.sent.friend-student

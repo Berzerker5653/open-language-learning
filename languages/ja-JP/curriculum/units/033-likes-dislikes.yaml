@@ -5,7 +5,7 @@ title: What you like and don't like
 summary: Suki/kirai constructions with food vocabulary.
 estimated_minutes: 7
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.lex.adjectives.suki
   - ja.lex.adjectives.kirai
   - ja.lex.food-drink.ocha
@@ -22,9 +22,21 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 5
-  content_refs: *id001
+  content_refs:
+  - ja.lex.adjectives.suki
+  - ja.lex.adjectives.kirai
+  - ja.lex.food-drink.ocha
+  - ja.lex.food-drink.kohi
+  - ja.sent.like-tea
+  - ja.sent.dislike-coffee
 - id: ja.activity.suki-speak
   type: retrieval
   modality: speaking
   support_level: 2
-  content_refs: *id001
+  content_refs:
+  - ja.lex.adjectives.suki
+  - ja.lex.adjectives.kirai
+  - ja.lex.food-drink.ocha
+  - ja.lex.food-drink.kohi
+  - ja.sent.like-tea
+  - ja.sent.dislike-coffee

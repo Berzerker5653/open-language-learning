@@ -13,11 +13,11 @@ an automated validator, and any rule you break will be reported.
 
 ## Target language
 
-| Field | Value |
-|---|---|
-| Language | **German** |
-| `target_locale` (BCP 47) | **`de-DE`** |
-| id prefix `<p>` (derived: first subtag of `target_locale`, lowercase) | **`de`** |
+| Field                                                                 | Value       |
+| --------------------------------------------------------------------- | ----------- |
+| Language                                                              | **German**  |
+| `target_locale` (BCP 47)                                              | **`de-DE`** |
+| id prefix `<p>` (derived: first subtag of `target_locale`, lowercase) | **`de`**    |
 
 "the target language" below always means the language in this table.
 `<p>` always means the derived id prefix. The worked example at the end uses
@@ -30,6 +30,7 @@ Author a **starter pack for the target language** from scratch. Deliver, in
 your response, the complete file tree and the FULL contents of every file.
 
 Required minimum content:
+
 - `manifest.yaml`
 - `sources.jsonl` — every source you cite; original AI-drafted content gets
   one "original" source entry (see example)
@@ -60,7 +61,7 @@ Required minimum content:
 4. **AI provenance**: every goal, grammar concept, lexicon entry and
    sentence carries a `generation` object:
    `{"method": "ai-assisted", "tool": "<your model name>", "date":
-   "YYYY-MM-DD", "notes": "ai-drafted; needs dictionary sourcing and human review"}`.
+"YYYY-MM-DD", "notes": "ai-drafted; needs dictionary sourcing and human review"}`.
    (The schema does NOT allow `generation` on assessments or units.)
 5. **Every content record cites `sources:`** ids that exist in
    `sources.jsonl`. Do not cite dictionaries you did not actually consult;
@@ -82,7 +83,7 @@ Required minimum content:
 
 - Goal `prerequisites` entries are RECORDS, not ids:
   `{"target": "<id>", "dimension": "<mastery-dimension>", "required_state":
-  "<state>", "strength": "hard"|"helpful"}` written in YAML mapping form.
+"<state>", "strength": "hard"|"helpful"}` written in YAML mapping form.
   Valid `dimension`: `comprehension-listening`, `comprehension-reading`,
   `recall-meaning`, `orthography-recognition`, `phonological-discrimination`,
   `orthographic-encoding`, `production-speaking`, `production-writing`,
@@ -130,6 +131,7 @@ assessments/definitions.jsonl
 ```
 
 ### manifest.yaml
+
 ```yaml
 schema_version: "0.2"
 pack_id: "dev.example.xx"
@@ -152,16 +154,35 @@ license:
 ```
 
 ### sources.jsonl
+
 ```json
-{"id":"template-original","title":"Original example content authored for this template pack","url":"https://github.com/Berzerker5653/open-language-learning/tree/main/tools/pack-templates/example-pack","license":{"spdx":"CC0-1.0","text_url":"https://creativecommons.org/publicdomain/zero/1.0/"},"access":{"mode":"public"},"use":{"redistribution_allowed":true,"attribution_required":false},"retrieved":"2026-10-03"}
+{
+  "id": "template-original",
+  "title": "Original example content authored for this template pack",
+  "url": "https://github.com/Berzerker5653/open-language-learning/tree/main/tools/pack-templates/example-pack",
+  "license": {
+    "spdx": "CC0-1.0",
+    "text_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "access": { "mode": "public" },
+  "use": { "redistribution_allowed": true, "attribution_required": false },
+  "retrieved": "2026-10-03"
+}
 ```
 
 ### licenses.jsonl
+
 ```json
-{"id":"lic-template-original","scope":{"kind":"pack-original"},"license":{"spdx":"CC0-1.0"},"redistribution_allowed":true}
+{
+  "id": "lic-template-original",
+  "scope": { "kind": "pack-original" },
+  "license": { "spdx": "CC0-1.0" },
+  "redistribution_allowed": true
+}
 ```
 
 ### curriculum/goals.yaml
+
 ```yaml
 goals:
   - id: "xx.goal.demo.greet"
@@ -181,6 +202,7 @@ goals:
 ```
 
 ### curriculum/units/000-greetings.yaml
+
 ```yaml
 id: "xx.unit.demo.greetings"
 goal_id: "xx.goal.demo.greet"
@@ -220,11 +242,25 @@ generation_contract:
 ```
 
 ### grammar/concepts.jsonl
+
 ```json
-{"id":"xx.grammar.demo.word-order","name":"Basic word order","category":"syntax","status":"draft","definition":"Example language places the greeting before the addressee (tola mara = hello friend). Placeholder rule for the template; replace with a sourced rule.","sources":["template-original"],"generation":{"method":"human","date":"2026-10-03","notes":"placeholder template content; replace with sourced content"}}
+{
+  "id": "xx.grammar.demo.word-order",
+  "name": "Basic word order",
+  "category": "syntax",
+  "status": "draft",
+  "definition": "Example language places the greeting before the addressee (tola mara = hello friend). Placeholder rule for the template; replace with a sourced rule.",
+  "sources": ["template-original"],
+  "generation": {
+    "method": "human",
+    "date": "2026-10-03",
+    "notes": "placeholder template content; replace with sourced content"
+  }
+}
 ```
 
 ### lexicon/entries.jsonl
+
 ```json
 {"id":"xx.lex.demo.tola","status":"draft","forms":[{"text":"tola","is_primary":true}],"readings":[{"text":"tola","script":"latin"}],"glosses":{"en-US":["hello"]},"sources":["template-original"],"generation":{"method":"human","date":"2026-10-03","notes":"placeholder template content; replace with sourced content"}}
 {"id":"xx.lex.demo.mara","status":"draft","forms":[{"text":"mara","is_primary":true}],"readings":[{"text":"mara","script":"latin"}],"glosses":{"en-US":["friend"]},"sources":["template-original"],"generation":{"method":"human","date":"2026-10-03","notes":"placeholder template content; replace with sourced content"}}
@@ -232,18 +268,40 @@ generation_contract:
 ```
 
 ### sentences/entries.jsonl
+
 ```json
-{"id":"xx.sent.demo.greet-friend","status":"draft","text":"tola mara","gloss":"hello, friend","cloze_targets":["tola"],"sources":["template-original"],"generation":{"method":"human","date":"2026-10-03","notes":"placeholder template content; replace with sourced content"}}
+{
+  "id": "xx.sent.demo.greet-friend",
+  "status": "draft",
+  "text": "tola mara",
+  "gloss": "hello, friend",
+  "cloze_targets": ["tola"],
+  "sources": ["template-original"],
+  "generation": {
+    "method": "human",
+    "date": "2026-10-03",
+    "notes": "placeholder template content; replace with sourced content"
+  }
+}
 ```
 
 ### assessments/definitions.jsonl
+
 ```json
-{"id":"xx.assess.demo.greet","goal_id":"xx.goal.demo.greet","kind":"recall","modality":"reading","rubric":{"scale":"observed","criteria":["greeting matched to situation"]},"review_status":"draft"}
+{
+  "id": "xx.assess.demo.greet",
+  "goal_id": "xx.goal.demo.greet",
+  "kind": "recall",
+  "modality": "reading",
+  "rubric": { "scale": "observed", "criteria": ["greeting matched to situation"] },
+  "review_status": "draft"
+}
 ```
 
 ## Success criteria (how you will be graded)
 
 Your pack is written to disk and run through the real toolchain:
+
 1. `langpack validate` — 0 errors
 2. `langpack lint` — 0 errors AND 0 warnings (this is the strict gate)
 3. `langpack audit-curriculum` / `audit-sources` / `audit-licenses` — 0 errors

@@ -5,7 +5,7 @@ title: 'Kanji: numbers'
 summary: Numeric kanji; meaning and reading drills, SRS-gated.
 estimated_minutes: 6
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.kanji.ichi
   - ja.kanji.ni
   - ja.kanji.san
@@ -27,9 +27,35 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 2
-  content_refs: *id001
+  content_refs:
+  - ja.kanji.ichi
+  - ja.kanji.ni
+  - ja.kanji.san
+  - ja.kanji.yon
+  - ja.kanji.go
+  - ja.kanji.roku
+  - ja.kanji.nana
+  - ja.kanji.hachi
+  - ja.kanji.kyuu
+  - ja.kanji.juu
+  - ja.kanji.hyaku
+  - ja.kanji.sen
+  - ja.kanji.man
 - id: ja.activity.kan-num-recall
   type: recall
   modality: reading
   support_level: 1
-  content_refs: *id001
+  content_refs:
+  - ja.kanji.ichi
+  - ja.kanji.ni
+  - ja.kanji.san
+  - ja.kanji.yon
+  - ja.kanji.go
+  - ja.kanji.roku
+  - ja.kanji.nana
+  - ja.kanji.hachi
+  - ja.kanji.kyuu
+  - ja.kanji.juu
+  - ja.kanji.hyaku
+  - ja.kanji.sen
+  - ja.kanji.man

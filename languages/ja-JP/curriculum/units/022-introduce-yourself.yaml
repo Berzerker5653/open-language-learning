@@ -5,7 +5,7 @@ title: Introducing yourself
 summary: Name marker and first-meeting set phrases, ending in the scenario.
 estimated_minutes: 10
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.lex.pronouns.watashi
   - ja.lex.greetings.ohayou-gozaimasu
   - ja.sent.nice-meet
@@ -22,17 +22,35 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 5
-  content_refs: *id001
+  content_refs:
+  - ja.lex.pronouns.watashi
+  - ja.lex.greetings.ohayou-gozaimasu
+  - ja.sent.nice-meet
+  - ja.sent.my-name-wa
+  - ja.sent.name-desu
+  - ja.sent.nice-to-meet
 - id: ja.activity.intro-listen
   type: listen-and-choose
   modality: listening
   support_level: 3
-  content_refs: *id001
+  content_refs:
+  - ja.lex.pronouns.watashi
+  - ja.lex.greetings.ohayou-gozaimasu
+  - ja.sent.nice-meet
+  - ja.sent.my-name-wa
+  - ja.sent.name-desu
+  - ja.sent.nice-to-meet
 - id: ja.activity.intro-speak
   type: retrieval
   modality: speaking
   support_level: 2
-  content_refs: *id001
+  content_refs:
+  - ja.lex.pronouns.watashi
+  - ja.lex.greetings.ohayou-gozaimasu
+  - ja.sent.nice-meet
+  - ja.sent.my-name-wa
+  - ja.sent.name-desu
+  - ja.sent.nice-to-meet
 - id: ja.activity.intro-scenario
   type: scenario
   modality: interaction

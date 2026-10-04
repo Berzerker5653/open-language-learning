@@ -6,9 +6,9 @@ test / build). The strict bar is lint = 0 errors **and 0 warnings**.
 
 ## Runs
 
-| Date | Candidate | Result | Notes |
-|---|---|---|---|
-| 2026-10-04 | `self-test` (`tools/pack-templates/example-pack`) | 7/7 PASS | proves the harness itself works |
+| Date       | Candidate                                           | Result   | Notes                                                                                     |
+| ---------- | --------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------- |
+| 2026-10-04 | `self-test` (`tools/pack-templates/example-pack`)   | 7/7 PASS | proves the harness itself works                                                           |
 | 2026-10-04 | `calibration-self` (`candidates/calibration-self/`) | 7/7 PASS | self-authored German pack scored with the kit; proves `BRIEF.md` is achievable as written |
 
 ## Calibration findings (brief gaps found and fixed)
@@ -18,13 +18,13 @@ external LLM would also hit. `BRIEF.md` was amended:
 
 1. **Goal `prerequisites` are records, not ids** —
    `{target, dimension, required_state, strength}`. The worked example only
-   showed `prerequisites: []`. Added a *Schema notes* section with the full
+   showed `prerequisites: []`. Added a _Schema notes_ section with the full
    record shape and the `dimension` / `required_state` / `strength` enums.
 2. **Assessment `kind` enum** is `recognition | recall | production |
-   interaction | transfer` — "cloze" is not a kind (cloze lives in unit
-   activities). Documented in *Schema notes*.
+interaction | transfer` — "cloze" is not a kind (cloze lives in unit
+   activities). Documented in _Schema notes_.
 3. **Assessment `modality` enum** `listening | speaking | reading | writing |
-   interaction` documented.
+interaction` documented.
 4. **`generation` provenance scope**: hard rule 4 demanded it on "every
    content record", but the schema allows it only on goals, grammar concepts,
    lexicon entries and sentences (not assessments/units), and the worked

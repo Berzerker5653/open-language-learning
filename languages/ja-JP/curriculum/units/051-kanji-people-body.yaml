@@ -5,7 +5,7 @@ title: 'Kanji: people, body, basics'
 summary: Core concrete kanji; meaning and reading drills.
 estimated_minutes: 7
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.kanji.hito
   - ja.kanji.oo
   - ja.kanji.chii
@@ -28,9 +28,37 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 2
-  content_refs: *id001
+  content_refs:
+  - ja.kanji.hito
+  - ja.kanji.oo
+  - ja.kanji.chii
+  - ja.kanji.naka
+  - ja.kanji.ue
+  - ja.kanji.shita
+  - ja.kanji.hidari
+  - ja.kanji.migi
+  - ja.kanji.kuchi
+  - ja.kanji.me
+  - ja.kanji.mimi
+  - ja.kanji.te
+  - ja.kanji.ashi
+  - ja.kanji.ki
 - id: ja.activity.kan-pb-recall
   type: recall
   modality: reading
   support_level: 1
-  content_refs: *id001
+  content_refs:
+  - ja.kanji.hito
+  - ja.kanji.oo
+  - ja.kanji.chii
+  - ja.kanji.naka
+  - ja.kanji.ue
+  - ja.kanji.shita
+  - ja.kanji.hidari
+  - ja.kanji.migi
+  - ja.kanji.kuchi
+  - ja.kanji.me
+  - ja.kanji.mimi
+  - ja.kanji.te
+  - ja.kanji.ashi
+  - ja.kanji.ki

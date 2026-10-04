@@ -1,0 +1,88 @@
+{
+  "catalog_version": "0.1.0",
+  "note": "Development-tier speech models pinned for SPEECH-002/003 work. Production tiers are added after the SPEECH-002 re-benchmark (ADR-0007). Models are downloaded on demand; the base app never bundles them.",
+  "models": [
+    {
+      "id": "org.openlanguage.speech.whisper-ggml-tiny",
+      "version": "1.0.0",
+      "runtime": "whisper.cpp",
+      "tier": "development",
+      "files": [
+        {
+          "path": "ggml-tiny.bin",
+          "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.bin",
+          "sha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+          "size_bytes": 77691713
+        }
+      ],
+      "license_code": "MIT",
+      "license_model": "MIT (OpenAI Whisper weights, upstream terms recorded)",
+      "source": "https://github.com/ggml-org/whisper.cpp"
+    },
+    {
+      "id": "org.openlanguage.speech.sherpa-whisper-tiny",
+      "version": "1.0.0",
+      "runtime": "sherpa-onnx",
+      "tier": "development",
+      "files": [
+        {
+          "path": "tiny-encoder.onnx",
+          "url": "https://huggingface.co/csukuangfj/sherpa-onnx-whisper-tiny/resolve/main/tiny-encoder.onnx",
+          "sha256": "42c1d4cbf889632ba21ab6f0d4064c80209755f265ce5cd630db4a6793e7089c",
+          "size_bytes": 37647080
+        },
+        {
+          "path": "tiny-decoder.onnx",
+          "url": "https://huggingface.co/csukuangfj/sherpa-onnx-whisper-tiny/resolve/main/tiny-decoder.onnx",
+          "sha256": "e144c07dc6b55cece24392811f2d934b97013811f5e677d1315d341a0a74a25d",
+          "size_bytes": 114505801
+        },
+        {
+          "path": "tiny-tokens.txt",
+          "url": "https://huggingface.co/csukuangfj/sherpa-onnx-whisper-tiny/resolve/main/tiny-tokens.txt",
+          "sha256": "b34b360dbb493e781e479794586d661700670d65564001f23024971d1f2fa126",
+          "size_bytes": 816730
+        }
+      ],
+      "license_code": "Apache-2.0",
+      "license_model": "OpenAI Whisper weights (upstream terms recorded)",
+      "source": "https://github.com/k2-fsa/sherpa-onnx"
+    },
+    {
+      "id": "org.openlanguage.speech.kokoro-multi-lang",
+      "version": "1.0.0",
+      "runtime": "sherpa-onnx",
+      "tier": "development",
+      "files": [
+        {
+          "path": "payload",
+          "url": "https://PENDING-RELEASE-URL/tts/kokoro-multi-lang-v1_0.zip",
+          "sha256": "99b5c311306e674c502b0dd390dde81f6cee4a2f9b71329129c671548f4e2b7d",
+          "size_bytes": 345065270,
+          "dir": true
+        }
+      ],
+      "license_code": "Apache-2.0",
+      "license_model": "Kokoro weights Apache-2.0; embedded espeak-ng-data is GPL-3.0 (payload carries the notices and source offer)",
+      "source": "https://github.com/k2-fsa/sherpa-onnx"
+    },
+    {
+      "id": "org.openlanguage.speech.sherpa-onnx-runtime",
+      "version": "1.13.8",
+      "runtime": "sherpa-onnx",
+      "tier": "development",
+      "files": [
+        {
+          "path": "payload",
+          "url": "https://PENDING-RELEASE-URL/tts/sherpa-onnx-v1.13.8-linux-x64-shared.zip",
+          "sha256": "8157f4a2c689314f44f80cf2fc4e9054cc18d5127dd6d11d9a9eb354f06ce713",
+          "size_bytes": 30454382,
+          "dir": true
+        }
+      ],
+      "license_code": "Apache-2.0",
+      "license_model": "sherpa-onnx Apache-2.0; bundles ONNX Runtime (MIT), links espeak-ng (GPL-3.0). linux-x64 only.",
+      "source": "https://github.com/k2-fsa/sherpa-onnx"
+    }
+  ]
+}

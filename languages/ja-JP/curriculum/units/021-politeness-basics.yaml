@@ -5,7 +5,7 @@ title: Thanks and excuse me
 summary: Core polite phrases and when they fit.
 estimated_minutes: 6
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.lex.greetings.arigatou-gozaimasu
   - ja.lex.greetings.arigatou
   - ja.lex.greetings.sumimasen
@@ -21,14 +21,32 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 5
-  content_refs: *id001
+  content_refs:
+  - ja.lex.greetings.arigatou-gozaimasu
+  - ja.lex.greetings.arigatou
+  - ja.lex.greetings.sumimasen
+  - ja.lex.greetings.shitsurei-shimasu
+  - ja.sent.thanks-polite
+  - ja.sent.excuse-me
 - id: ja.activity.poli-listen
   type: listen-and-choose
   modality: listening
   support_level: 3
-  content_refs: *id001
+  content_refs:
+  - ja.lex.greetings.arigatou-gozaimasu
+  - ja.lex.greetings.arigatou
+  - ja.lex.greetings.sumimasen
+  - ja.lex.greetings.shitsurei-shimasu
+  - ja.sent.thanks-polite
+  - ja.sent.excuse-me
 - id: ja.activity.poli-speak
   type: retrieval
   modality: speaking
   support_level: 2
-  content_refs: *id001
+  content_refs:
+  - ja.lex.greetings.arigatou-gozaimasu
+  - ja.lex.greetings.arigatou
+  - ja.lex.greetings.sumimasen
+  - ja.lex.greetings.shitsurei-shimasu
+  - ja.sent.thanks-polite
+  - ja.sent.excuse-me

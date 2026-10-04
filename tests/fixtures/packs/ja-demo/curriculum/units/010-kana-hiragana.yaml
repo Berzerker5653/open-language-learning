@@ -8,25 +8,13 @@ activities:
     modality: "reading"
     support_level: 0
     content_refs:
-      [
-        "ja.orth.hira.a",
-        "ja.orth.hira.ko",
-        "ja.orth.hira.ta",
-        "ja.orth.hira.n",
-        "ja.orth.hira.ni",
-      ]
+      ["ja.orth.hira.a", "ja.orth.hira.ko", "ja.orth.hira.ta", "ja.orth.hira.n", "ja.orth.hira.ni"]
   - id: "ja.activity.demo.recall-kana-set1"
     type: "recall"
     modality: "reading"
     support_level: 0
     content_refs:
-      [
-        "ja.orth.hira.a",
-        "ja.orth.hira.ko",
-        "ja.orth.hira.ta",
-        "ja.orth.hira.n",
-        "ja.orth.hira.ni",
-      ]
+      ["ja.orth.hira.a", "ja.orth.hira.ko", "ja.orth.hira.ta", "ja.orth.hira.n", "ja.orth.hira.ni"]
   - id: "ja.activity.demo.encounter-kana-set2"
     type: "encounter-read"
     modality: "reading"

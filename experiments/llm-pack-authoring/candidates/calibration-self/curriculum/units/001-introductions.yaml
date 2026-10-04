@@ -20,7 +20,8 @@ activities:
     support_level: 0
     content_refs: ["de.lex.everyday.heissen"]
 generation_contract:
-  allowed_vocab: ["de.lex.everyday.ich", "de.lex.everyday.heissen", "de.sent.onramp.ich-heisse-anna"]
+  allowed_vocab:
+    ["de.lex.everyday.ich", "de.lex.everyday.heissen", "de.sent.onramp.ich-heisse-anna"]
   allowed_grammar: ["de.grammar.onramp.verb-second"]
   new_item_budget: 3
   register: []

@@ -147,7 +147,7 @@ ai_screening:
 # ---------------------------------------------------------------------------
 blockers:
   - id: BLK-REVIEW-CAPACITY
-    since: 2026-10-04
+    since: "2026-10-04"
     description: >
       No qualified human reviewer engaged yet. Owner (2026-10-04) is a
       learner, not a qualified reviewer, and cannot perform the gate.

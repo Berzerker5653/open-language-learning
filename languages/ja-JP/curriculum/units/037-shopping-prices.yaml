@@ -5,7 +5,7 @@ title: Shopping and prices
 summary: Asking prices and buying with counters.
 estimated_minutes: 8
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.lex.questions.ikura
   - ja.lex.numbers.en
   - ja.lex.numbers.hyaku
@@ -25,7 +25,17 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 5
-  content_refs: *id001
+  content_refs:
+  - ja.lex.questions.ikura
+  - ja.lex.numbers.en
+  - ja.lex.numbers.hyaku
+  - ja.lex.numbers.satsu
+  - ja.lex.verbs.kaimasu
+  - ja.lex.verbs.kaimono-shimasu
+  - ja.sent.how-much
+  - ja.sent.hundred-yen
+  - ja.sent.buy-bread
+  - ja.sent.three-books
 - id: ja.activity.shop-cloze
   type: cloze
   modality: reading

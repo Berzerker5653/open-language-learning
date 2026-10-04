@@ -5,7 +5,7 @@ title: Going places
 summary: Motion verbs with the destination particle.
 estimated_minutes: 8
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.lex.verbs.ikimasu
   - ja.lex.verbs.kimasu
   - ja.lex.verbs.kaerimasu
@@ -28,14 +28,50 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 5
-  content_refs: *id001
+  content_refs:
+  - ja.lex.verbs.ikimasu
+  - ja.lex.verbs.kimasu
+  - ja.lex.verbs.kaerimasu
+  - ja.lex.verbs.arukimasu
+  - ja.lex.places.gakkou
+  - ja.lex.places.eki
+  - ja.lex.places.uchi
+  - ja.lex.places.kouen
+  - ja.sent.go-school
+  - ja.sent.go-station
+  - ja.sent.come-home
+  - ja.sent.walk-park
 - id: ja.activity.go-listen
   type: listen-and-choose
   modality: listening
   support_level: 3
-  content_refs: *id001
+  content_refs:
+  - ja.lex.verbs.ikimasu
+  - ja.lex.verbs.kimasu
+  - ja.lex.verbs.kaerimasu
+  - ja.lex.verbs.arukimasu
+  - ja.lex.places.gakkou
+  - ja.lex.places.eki
+  - ja.lex.places.uchi
+  - ja.lex.places.kouen
+  - ja.sent.go-school
+  - ja.sent.go-station
+  - ja.sent.come-home
+  - ja.sent.walk-park
 - id: ja.activity.go-speak
   type: retrieval
   modality: speaking
   support_level: 2
-  content_refs: *id001
+  content_refs:
+  - ja.lex.verbs.ikimasu
+  - ja.lex.verbs.kimasu
+  - ja.lex.verbs.kaerimasu
+  - ja.lex.verbs.arukimasu
+  - ja.lex.places.gakkou
+  - ja.lex.places.eki
+  - ja.lex.places.uchi
+  - ja.lex.places.kouen
+  - ja.sent.go-school
+  - ja.sent.go-station
+  - ja.sent.come-home
+  - ja.sent.walk-park

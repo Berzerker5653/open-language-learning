@@ -21,6 +21,12 @@ jobs:
       - run: cargo fmt --all --check
       - run: cargo clippy --workspace --all-targets -- -D warnings
       - run: cargo test --workspace
+      - name: Pack conformance (ja-JP + example template)
+        run: |
+          cargo run -q -p lts-langpack-cli -- validate languages/ja-JP
+          cargo run -q -p lts-langpack-cli -- lint languages/ja-JP
+          cargo run -q -p lts-langpack-cli -- test languages/ja-JP
+          cargo run -q -p lts-langpack-cli -- lint tools/pack-templates/example-pack
 
   web:
     runs-on: ubuntu-24.04

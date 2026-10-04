@@ -8,7 +8,14 @@ activities:
     type: "encounter-read"
     modality: "reading"
     support_level: 0
-    content_refs: ["de.lex.everyday.wie", "de.lex.everyday.kosten", "de.lex.everyday.euro", "de.lex.everyday.drei", "de.lex.everyday.fuenf"]
+    content_refs:
+      [
+        "de.lex.everyday.wie",
+        "de.lex.everyday.kosten",
+        "de.lex.everyday.euro",
+        "de.lex.everyday.drei",
+        "de.lex.everyday.fuenf",
+      ]
   - id: "de.activity.a1.cloze-cost"
     type: "cloze"
     modality: "writing"
@@ -20,7 +27,15 @@ activities:
     support_level: 0
     content_refs: ["de.lex.everyday.drei", "de.lex.everyday.fuenf"]
 generation_contract:
-  allowed_vocab: ["de.lex.everyday.wie", "de.lex.everyday.kosten", "de.lex.everyday.euro", "de.lex.everyday.drei", "de.lex.everyday.fuenf", "de.sent.a1.wie-viel-kostet-der-euro"]
+  allowed_vocab:
+    [
+      "de.lex.everyday.wie",
+      "de.lex.everyday.kosten",
+      "de.lex.everyday.euro",
+      "de.lex.everyday.drei",
+      "de.lex.everyday.fuenf",
+      "de.sent.a1.wie-viel-kostet-der-euro",
+    ]
   allowed_grammar: ["de.grammar.a1.articles"]
   new_item_budget: 6
   register: []

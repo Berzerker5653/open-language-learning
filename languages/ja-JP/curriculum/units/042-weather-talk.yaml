@@ -5,7 +5,7 @@ title: Talking about weather
 summary: Weather nouns and temperature adjectives.
 estimated_minutes: 7
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.lex.weather.tenki
   - ja.lex.weather.ame
   - ja.lex.weather.yuki
@@ -24,9 +24,27 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 5
-  content_refs: *id001
+  content_refs:
+  - ja.lex.weather.tenki
+  - ja.lex.weather.ame
+  - ja.lex.weather.yuki
+  - ja.lex.weather.hare
+  - ja.lex.adjectives.samui
+  - ja.lex.adjectives.atsui
+  - ja.sent.weather-good
+  - ja.sent.rain-today
+  - ja.sent.cold-tomorrow
 - id: ja.activity.wea-speak
   type: retrieval
   modality: speaking
   support_level: 2
-  content_refs: *id001
+  content_refs:
+  - ja.lex.weather.tenki
+  - ja.lex.weather.ame
+  - ja.lex.weather.yuki
+  - ja.lex.weather.hare
+  - ja.lex.adjectives.samui
+  - ja.lex.adjectives.atsui
+  - ja.sent.weather-good
+  - ja.sent.rain-today
+  - ja.sent.cold-tomorrow

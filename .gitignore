@@ -1,5 +1,7 @@
 # Models / large generated assets
 models/
+!apps/desktop/src-tauri/models/
+!apps/desktop/src-tauri/models/catalog.json
 *.onnx
 *.gguf
 *.bin

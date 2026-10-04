@@ -5,7 +5,7 @@ title: Saying goodbye
 summary: Parting phrases across formal and casual settings.
 estimated_minutes: 5
 generation_contract:
-  allowed_vocab: &id001
+  allowed_vocab:
   - ja.lex.greetings.sayounara
   - ja.lex.greetings.ja-ne
   - ja.lex.greetings.mata-ashita
@@ -20,14 +20,29 @@ activities:
   type: encounter-read
   modality: reading
   support_level: 5
-  content_refs: *id001
+  content_refs:
+  - ja.lex.greetings.sayounara
+  - ja.lex.greetings.ja-ne
+  - ja.lex.greetings.mata-ashita
+  - ja.sent.see-you-tomorrow
+  - ja.sent.greet-night
 - id: ja.activity.part-listen
   type: listen-and-choose
   modality: listening
   support_level: 3
-  content_refs: *id001
+  content_refs:
+  - ja.lex.greetings.sayounara
+  - ja.lex.greetings.ja-ne
+  - ja.lex.greetings.mata-ashita
+  - ja.sent.see-you-tomorrow
+  - ja.sent.greet-night
 - id: ja.activity.part-speak
   type: retrieval
   modality: speaking
   support_level: 2
-  content_refs: *id001
+  content_refs:
+  - ja.lex.greetings.sayounara
+  - ja.lex.greetings.ja-ne
+  - ja.lex.greetings.mata-ashita
+  - ja.sent.see-you-tomorrow
+  - ja.sent.greet-night
