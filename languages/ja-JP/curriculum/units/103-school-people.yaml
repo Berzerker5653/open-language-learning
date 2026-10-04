@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B A1 work-school); content refs are pack data; qualified review pending.
+id: ja.unit.work-school-people
+goal_id: ja.goal.a1.work-school
+title: School people
+summary: Teacher, student, class, cram school, seminar.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.work.kyoushi
+  - ja.lex.work.seito
+  - ja.lex.work.jugyou
+  - ja.lex.work.juku
+  - ja.lex.work.semina
+  - ja.lex.places.gakkou
+  - ja.lex.pronouns.sensei
+  - ja.lex.people.gakusei
+  - ja.sent.teacher-teaches
+  allowed_grammar:
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.work-school-people-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.work.kyoushi
+  - ja.lex.work.seito
+  - ja.lex.work.jugyou
+  - ja.lex.work.juku
+  - ja.lex.work.semina
+  - ja.lex.places.gakkou
+  - ja.lex.pronouns.sensei
+  - ja.lex.people.gakusei
+  - ja.sent.teacher-teaches
+  - ja.sent.teacher-teaches
+- id: ja.activity.work-school-people-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.work.kyoushi
+  - ja.lex.work.seito
+  - ja.lex.work.jugyou
+  - ja.lex.work.juku
+  - ja.lex.work.semina
+  - ja.lex.places.gakkou
+  - ja.lex.pronouns.sensei
+  - ja.lex.people.gakusei
+  - ja.sent.teacher-teaches
+- id: ja.activity.work-school-people-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.work.kyoushi
+  - ja.lex.work.seito
+  - ja.lex.work.jugyou
+  - ja.lex.work.juku
+  - ja.lex.work.semina
+  - ja.lex.places.gakkou
+  - ja.lex.pronouns.sensei
+  - ja.lex.people.gakusei
+  - ja.sent.teacher-teaches
+- id: ja.activity.work-school-people-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.work.kyoushi
+  - ja.lex.work.seito
+  - ja.lex.work.jugyou
+  - ja.lex.work.juku
+  - ja.lex.work.semina
+  - ja.lex.places.gakkou
+  - ja.lex.pronouns.sensei
+  - ja.lex.people.gakusei
+  - ja.sent.teacher-teaches
+- id: ja.activity.work-school-people-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.teacher-teaches

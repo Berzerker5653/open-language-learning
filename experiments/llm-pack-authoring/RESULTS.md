@@ -369,3 +369,10 @@ Score: **7/7**. A1 grammar quota (12) now fully consumed.
 Goal `ja.goal.a1.home-life` (prereq free-time, mirrored), 9 units,
 45-word `lexicon/home.jsonl`, 9 sentences (A1 grammar quota already
 consumed), 1 assessment. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 5: A1 units 101-110 (work-school)
+
+Goal `ja.goal.a1.work-school` (prereq home-life, mirrored), 10 units,
+50-word `lexicon/work.jsonl` (suru-verb ids hyphenated to satisfy id
+schema), 10 sentences (one collided with baseline `study-japanese`;
+renamed to `study-everyday`), 1 assessment. Score: **7/7**.

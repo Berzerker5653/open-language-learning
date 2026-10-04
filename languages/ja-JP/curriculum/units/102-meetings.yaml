@@ -1,0 +1,71 @@
+# ai-assisted draft unit (Mode B A1 work-school); content refs are pack data; qualified review pending.
+id: ja.unit.work-meetings
+goal_id: ja.goal.a1.work-school
+title: Meetings and introductions
+summary: Meeting, business cards, introduce, notice, finish.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.work.kaigi
+  - ja.lex.work.meishi
+  - ja.lex.work.shoukai-shimasu
+  - ja.lex.work.kizukimasu
+  - ja.lex.work.kanryou-shimasu
+  - ja.sent.meeting-starts
+  allowed_grammar:
+  - ja.grammar.particle.topic-wa
+  - ja.grammar.verb.te-form-sequence
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.work-meetings-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.work.kaigi
+  - ja.lex.work.meishi
+  - ja.lex.work.shoukai-shimasu
+  - ja.lex.work.kizukimasu
+  - ja.lex.work.kanryou-shimasu
+  - ja.sent.meeting-starts
+  - ja.sent.meeting-starts
+- id: ja.activity.work-meetings-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.work.kaigi
+  - ja.lex.work.meishi
+  - ja.lex.work.shoukai-shimasu
+  - ja.lex.work.kizukimasu
+  - ja.lex.work.kanryou-shimasu
+  - ja.sent.meeting-starts
+- id: ja.activity.work-meetings-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.work.kaigi
+  - ja.lex.work.meishi
+  - ja.lex.work.shoukai-shimasu
+  - ja.lex.work.kizukimasu
+  - ja.lex.work.kanryou-shimasu
+  - ja.sent.meeting-starts
+- id: ja.activity.work-meetings-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.work.kaigi
+  - ja.lex.work.meishi
+  - ja.lex.work.shoukai-shimasu
+  - ja.lex.work.kizukimasu
+  - ja.lex.work.kanryou-shimasu
+  - ja.sent.meeting-starts
+- id: ja.activity.work-meetings-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

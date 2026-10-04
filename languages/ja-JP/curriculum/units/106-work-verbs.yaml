@@ -1,0 +1,71 @@
+# ai-assisted draft unit (Mode B A1 work-school); content refs are pack data; qualified review pending.
+id: ja.unit.work-work-verbs
+goal_id: ja.goal.a1.work-school
+title: Work verbs
+summary: Work, teach, learn, pay attention, decide.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.work.hatarakimasu
+  - ja.lex.work.oshiemasu
+  - ja.lex.work.naraimasu
+  - ja.lex.work.chuumoku-shimasu
+  - ja.lex.work.kesshin-shimasu
+  - ja.sent.learn-by-listening
+  allowed_grammar:
+  - ja.grammar.verb.te-form-connect
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.work-work-verbs-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.work.hatarakimasu
+  - ja.lex.work.oshiemasu
+  - ja.lex.work.naraimasu
+  - ja.lex.work.chuumoku-shimasu
+  - ja.lex.work.kesshin-shimasu
+  - ja.sent.learn-by-listening
+  - ja.sent.learn-by-listening
+- id: ja.activity.work-work-verbs-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.work.hatarakimasu
+  - ja.lex.work.oshiemasu
+  - ja.lex.work.naraimasu
+  - ja.lex.work.chuumoku-shimasu
+  - ja.lex.work.kesshin-shimasu
+  - ja.sent.learn-by-listening
+- id: ja.activity.work-work-verbs-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.work.hatarakimasu
+  - ja.lex.work.oshiemasu
+  - ja.lex.work.naraimasu
+  - ja.lex.work.chuumoku-shimasu
+  - ja.lex.work.kesshin-shimasu
+  - ja.sent.learn-by-listening
+- id: ja.activity.work-work-verbs-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.work.hatarakimasu
+  - ja.lex.work.oshiemasu
+  - ja.lex.work.naraimasu
+  - ja.lex.work.chuumoku-shimasu
+  - ja.lex.work.kesshin-shimasu
+  - ja.sent.learn-by-listening
+- id: ja.activity.work-work-verbs-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.learn-by-listening

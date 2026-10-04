@@ -1,0 +1,71 @@
+# ai-assisted draft unit (Mode B A1 work-school); content refs are pack data; qualified review pending.
+id: ja.unit.work-work-social
+goal_id: ja.goal.a1.work-school
+title: Work and social life
+summary: Surely, probably; party, overtime, easy.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.work.kitto
+  - ja.lex.work.tabun
+  - ja.lex.work.kanpai
+  - ja.lex.work.zangyou
+  - ja.lex.work.yasashii
+  - ja.sent.exchange-cards
+  allowed_grammar:
+  - ja.grammar.adjectives.na-attributive
+  - ja.grammar.particle.de-means
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.work-work-social-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.work.kitto
+  - ja.lex.work.tabun
+  - ja.lex.work.kanpai
+  - ja.lex.work.zangyou
+  - ja.lex.work.yasashii
+  - ja.sent.exchange-cards
+  - ja.sent.exchange-cards
+- id: ja.activity.work-work-social-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.work.kitto
+  - ja.lex.work.tabun
+  - ja.lex.work.kanpai
+  - ja.lex.work.zangyou
+  - ja.lex.work.yasashii
+  - ja.sent.exchange-cards
+- id: ja.activity.work-work-social-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.work.kitto
+  - ja.lex.work.tabun
+  - ja.lex.work.kanpai
+  - ja.lex.work.zangyou
+  - ja.lex.work.yasashii
+  - ja.sent.exchange-cards
+- id: ja.activity.work-work-social-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.work.kitto
+  - ja.lex.work.tabun
+  - ja.lex.work.kanpai
+  - ja.lex.work.zangyou
+  - ja.lex.work.yasashii
+  - ja.sent.exchange-cards
+- id: ja.activity.work-work-social-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.exchange-cards

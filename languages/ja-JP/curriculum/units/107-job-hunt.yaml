@@ -1,0 +1,76 @@
+# ai-assisted draft unit (Mode B A1 work-school); content refs are pack data; qualified review pending.
+id: ja.unit.work-job-hunt
+goal_id: ja.goal.a1.work-school
+title: Job hunting
+summary: Recruitment, interview, research, mailing, activity.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.work.boshu
+  - ja.lex.work.intabyuu
+  - ja.lex.work.chousa
+  - ja.lex.work.hakkou
+  - ja.lex.work.katsudou
+  - ja.lex.health.junbi
+  - ja.sent.interview-prep
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  - ja.grammar.verb.experience-ta
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.work-job-hunt-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.work.boshu
+  - ja.lex.work.intabyuu
+  - ja.lex.work.chousa
+  - ja.lex.work.hakkou
+  - ja.lex.work.katsudou
+  - ja.lex.health.junbi
+  - ja.sent.interview-prep
+  - ja.sent.interview-prep
+- id: ja.activity.work-job-hunt-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.work.boshu
+  - ja.lex.work.intabyuu
+  - ja.lex.work.chousa
+  - ja.lex.work.hakkou
+  - ja.lex.work.katsudou
+  - ja.lex.health.junbi
+  - ja.sent.interview-prep
+- id: ja.activity.work-job-hunt-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.work.boshu
+  - ja.lex.work.intabyuu
+  - ja.lex.work.chousa
+  - ja.lex.work.hakkou
+  - ja.lex.work.katsudou
+  - ja.lex.health.junbi
+  - ja.sent.interview-prep
+- id: ja.activity.work-job-hunt-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.work.boshu
+  - ja.lex.work.intabyuu
+  - ja.lex.work.chousa
+  - ja.lex.work.hakkou
+  - ja.lex.work.katsudou
+  - ja.lex.health.junbi
+  - ja.sent.interview-prep
+- id: ja.activity.work-job-hunt-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.interview-prep

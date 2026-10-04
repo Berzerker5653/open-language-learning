@@ -1,0 +1,76 @@
+# ai-assisted draft unit (Mode B A1 work-school); content refs are pack data; qualified review pending.
+id: ja.unit.work-workplace
+goal_id: ja.goal.a1.work-school
+title: At the workplace
+summary: Job, hours, role, team, day off.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.work.shigoto
+  - ja.lex.work.shigyou
+  - ja.lex.work.yaku
+  - ja.lex.work.team
+  - ja.lex.work.kyuuka
+  - ja.lex.places.kaisha
+  - ja.sent.work-company
+  allowed_grammar:
+  - ja.grammar.particle.de-means
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.work-workplace-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.work.shigoto
+  - ja.lex.work.shigyou
+  - ja.lex.work.yaku
+  - ja.lex.work.team
+  - ja.lex.work.kyuuka
+  - ja.lex.places.kaisha
+  - ja.sent.work-company
+  - ja.sent.work-company
+- id: ja.activity.work-workplace-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.work.shigoto
+  - ja.lex.work.shigyou
+  - ja.lex.work.yaku
+  - ja.lex.work.team
+  - ja.lex.work.kyuuka
+  - ja.lex.places.kaisha
+  - ja.sent.work-company
+- id: ja.activity.work-workplace-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.work.shigoto
+  - ja.lex.work.shigyou
+  - ja.lex.work.yaku
+  - ja.lex.work.team
+  - ja.lex.work.kyuuka
+  - ja.lex.places.kaisha
+  - ja.sent.work-company
+- id: ja.activity.work-workplace-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.work.shigoto
+  - ja.lex.work.shigyou
+  - ja.lex.work.yaku
+  - ja.lex.work.team
+  - ja.lex.work.kyuuka
+  - ja.lex.places.kaisha
+  - ja.sent.work-company
+- id: ja.activity.work-workplace-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.work-company

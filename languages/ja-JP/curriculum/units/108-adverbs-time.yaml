@@ -1,0 +1,71 @@
+# ai-assisted draft unit (Mode B A1 work-school); content refs are pack data; qualified review pending.
+id: ja.unit.work-adverbs-time
+goal_id: ja.goal.a1.work-school
+title: Sequencing adverbs
+summary: First, last, a lot, little by little, whole life.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.work.saisho
+  - ja.lex.work.saigo
+  - ja.lex.work.ippai
+  - ja.lex.work.sukoshi-zutsu
+  - ja.lex.work.isshou
+  - ja.sent.finish-work
+  allowed_grammar:
+  - ja.grammar.particle.topic-wa
+  - ja.grammar.verb.past-negative
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.work-adverbs-time-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.work.saisho
+  - ja.lex.work.saigo
+  - ja.lex.work.ippai
+  - ja.lex.work.sukoshi-zutsu
+  - ja.lex.work.isshou
+  - ja.sent.finish-work
+  - ja.sent.finish-work
+- id: ja.activity.work-adverbs-time-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.work.saisho
+  - ja.lex.work.saigo
+  - ja.lex.work.ippai
+  - ja.lex.work.sukoshi-zutsu
+  - ja.lex.work.isshou
+  - ja.sent.finish-work
+- id: ja.activity.work-adverbs-time-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.work.saisho
+  - ja.lex.work.saigo
+  - ja.lex.work.ippai
+  - ja.lex.work.sukoshi-zutsu
+  - ja.lex.work.isshou
+  - ja.sent.finish-work
+- id: ja.activity.work-adverbs-time-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.work.saisho
+  - ja.lex.work.saigo
+  - ja.lex.work.ippai
+  - ja.lex.work.sukoshi-zutsu
+  - ja.lex.work.isshou
+  - ja.sent.finish-work
+- id: ja.activity.work-adverbs-time-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.finish-work

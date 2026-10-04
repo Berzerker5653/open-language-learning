@@ -1,0 +1,71 @@
+# ai-assisted draft unit (Mode B A1 work-school); content refs are pack data; qualified review pending.
+id: ja.unit.work-classroom
+goal_id: ja.goal.a1.work-school
+title: In the classroom
+summary: Pen, bag, handouts, experiment, conversation.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.work.pen
+  - ja.lex.work.kaban
+  - ja.lex.work.shiryou
+  - ja.lex.work.jissen
+  - ja.lex.work.kaiwan
+  - ja.sent.study-everyday
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  - ja.grammar.syntax.relative-clauses
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.work-classroom-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.work.pen
+  - ja.lex.work.kaban
+  - ja.lex.work.shiryou
+  - ja.lex.work.jissen
+  - ja.lex.work.kaiwan
+  - ja.sent.study-everyday
+  - ja.sent.study-everyday
+- id: ja.activity.work-classroom-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.work.pen
+  - ja.lex.work.kaban
+  - ja.lex.work.shiryou
+  - ja.lex.work.jissen
+  - ja.lex.work.kaiwan
+  - ja.sent.study-everyday
+- id: ja.activity.work-classroom-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.work.pen
+  - ja.lex.work.kaban
+  - ja.lex.work.shiryou
+  - ja.lex.work.jissen
+  - ja.lex.work.kaiwan
+  - ja.sent.study-everyday
+- id: ja.activity.work-classroom-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.work.pen
+  - ja.lex.work.kaban
+  - ja.lex.work.shiryou
+  - ja.lex.work.jissen
+  - ja.lex.work.kaiwan
+  - ja.sent.study-everyday
+- id: ja.activity.work-classroom-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.study-everyday

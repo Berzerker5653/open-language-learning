@@ -1,0 +1,75 @@
+# ai-assisted draft unit (Mode B A1 work-school); content refs are pack data; qualified review pending.
+id: ja.unit.work-adverbs-degree
+goal_id: ja.goal.a1.work-school
+title: Degree adverbs
+summary: Not at all, completely, not much, each, especially.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.work.zenzen
+  - ja.lex.work.kanzen-ni
+  - ja.lex.work.taishita
+  - ja.lex.work.sorezore
+  - ja.lex.work.tokuni
+  - ja.lex.verbs.kaimasu
+  - ja.sent.buy-textbook
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.work-adverbs-degree-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.work.zenzen
+  - ja.lex.work.kanzen-ni
+  - ja.lex.work.taishita
+  - ja.lex.work.sorezore
+  - ja.lex.work.tokuni
+  - ja.lex.verbs.kaimasu
+  - ja.sent.buy-textbook
+  - ja.sent.buy-textbook
+- id: ja.activity.work-adverbs-degree-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.work.zenzen
+  - ja.lex.work.kanzen-ni
+  - ja.lex.work.taishita
+  - ja.lex.work.sorezore
+  - ja.lex.work.tokuni
+  - ja.lex.verbs.kaimasu
+  - ja.sent.buy-textbook
+- id: ja.activity.work-adverbs-degree-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.work.zenzen
+  - ja.lex.work.kanzen-ni
+  - ja.lex.work.taishita
+  - ja.lex.work.sorezore
+  - ja.lex.work.tokuni
+  - ja.lex.verbs.kaimasu
+  - ja.sent.buy-textbook
+- id: ja.activity.work-adverbs-degree-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.work.zenzen
+  - ja.lex.work.kanzen-ni
+  - ja.lex.work.taishita
+  - ja.lex.work.sorezore
+  - ja.lex.work.tokuni
+  - ja.lex.verbs.kaimasu
+  - ja.sent.buy-textbook
+- id: ja.activity.work-adverbs-degree-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.buy-textbook

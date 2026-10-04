@@ -1,0 +1,75 @@
+# ai-assisted draft unit (Mode B A1 work-school); content refs are pack data; qualified review pending.
+id: ja.unit.work-study
+goal_id: ja.goal.a1.work-school
+title: Study and homework
+summary: Study, homework, test, textbook, notebook.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.work.benkyou
+  - ja.lex.work.shukudai
+  - ja.lex.work.tesuto
+  - ja.lex.work.kyoukasho
+  - ja.lex.work.nobun
+  - ja.lex.objects.hon
+  - ja.sent.do-homework
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.work-study-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.work.benkyou
+  - ja.lex.work.shukudai
+  - ja.lex.work.tesuto
+  - ja.lex.work.kyoukasho
+  - ja.lex.work.nobun
+  - ja.lex.objects.hon
+  - ja.sent.do-homework
+  - ja.sent.do-homework
+- id: ja.activity.work-study-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.work.benkyou
+  - ja.lex.work.shukudai
+  - ja.lex.work.tesuto
+  - ja.lex.work.kyoukasho
+  - ja.lex.work.nobun
+  - ja.lex.objects.hon
+  - ja.sent.do-homework
+- id: ja.activity.work-study-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.work.benkyou
+  - ja.lex.work.shukudai
+  - ja.lex.work.tesuto
+  - ja.lex.work.kyoukasho
+  - ja.lex.work.nobun
+  - ja.lex.objects.hon
+  - ja.sent.do-homework
+- id: ja.activity.work-study-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.work.benkyou
+  - ja.lex.work.shukudai
+  - ja.lex.work.tesuto
+  - ja.lex.work.kyoukasho
+  - ja.lex.work.nobun
+  - ja.lex.objects.hon
+  - ja.sent.do-homework
+- id: ja.activity.work-study-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.do-homework
