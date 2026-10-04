@@ -1,0 +1,4271 @@
+target_locale: "ja-JP"
+id_prefix: "ja"
+mode: "B"
+phase: 0
+approval_status: "pending-owner-scope"
+
+scope:
+  plan_type: "extension"
+  modalities: ["listening", "speaking", "reading", "writing"]
+  delivered_baseline: "31 units (000-061), 20 goals, 211 lexicon entries, 61 sentences, 15 grammar concepts, 147 kana symbol records, 57 kanji entries; all gates 7/7."
+  budget_semantics: "lexicon budgets are cumulative NEW words introduced by this plan; the 211 already-delivered words are not counted."
+  content_basis: "Original AI-drafted instructional content, requiring dictionary sourcing and human review."
+  kanji_staging: "kanji/entries.jsonl grows with the bands: A1 completion +60 (to ~117), A2 +150, B1 +450, B2 +1000 cumulative reading targets; kanji introduced only after kana and alongside taught vocabulary."
+  romaji_policy: "Romaji only in readings where the existing pack already uses it; forms stay in kana/kanji."
+  pitch_accent: "Deferred; marked for human review, not taught in this plan."
+  delivery_risk: "Batches are append-only for JSONL shards; goals.yaml re-emitted in full."
+
+sequence:
+  ordering_rule: "Learning order follows prerequisites and the sequence below, not filename sorting."
+  clusters:
+    - { band: "A1", blocks: "062-118", purpose: "remaining A1 units" }
+    - { band: "A2", blocks: "120-219", purpose: "remaining A2 units" }
+    - { band: "B1", blocks: "220-414", purpose: "remaining B1 units" }
+    - { band: "B2", blocks: "420-807", purpose: "remaining B2 units" }
+
+unit_design:
+  total_units: 740
+  ordinary_new_item_budget: 6
+  new_lexical_entries_per_ordinary_unit: 5
+  additional_record_rule: "Introduce one grammar concept OR one sentence, never both in the same ordinary unit."
+  counting_rule: "Newly introduced lexical, grammar, and sentence records only; reused records do not count."
+  planned_record_totals:
+    new_lexical_entries: 6656
+    new_grammar_concepts: 67
+    new_sentence_records: 570
+    new_goals: 54
+
+bands:
+  A1:
+    unit_count: 57
+    goals:
+      - id: "ja.goal.a1.transport"
+        can_do: "Read and write basic travel information: tickets, transport choices, simple directions."
+        prerequisites: []
+      - id: "ja.goal.a1.health-basics"
+        can_do: "Describe simple symptoms and understand basic health instructions and visits."
+        prerequisites:
+          - {
+              target: "ja.goal.a1.transport",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.a1.free-time"
+        can_do: "Write about hobbies, favorites, and arrange leisure plans in writing."
+        prerequisites:
+          - {
+              target: "ja.goal.a1.health-basics",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.a1.home-life"
+        can_do: "Describe living spaces, objects, chores, and simple housing situations."
+        prerequisites:
+          - {
+              target: "ja.goal.a1.free-time",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.a1.work-school"
+        can_do: "Describe familiar work and study tasks, schedules, and simple workplace messages."
+        prerequisites:
+          - {
+              target: "ja.goal.a1.home-life",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.a1.past-stories"
+        can_do: "Write connected simple accounts of past events with reasons and sequence."
+        prerequisites:
+          - {
+              target: "ja.goal.a1.work-school",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+  A2:
+    unit_count: 100
+    goals:
+      - id: "ja.goal.a2.city-services"
+        can_do: "Handle routine city transactions and services in writing."
+        prerequisites:
+          - {
+              target: "ja.goal.a1.past-stories",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.a2.food-cooking"
+        can_do: "Read recipes and menus and write about food needs and plans."
+        prerequisites:
+          - {
+              target: "ja.goal.a2.city-services",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.a2.shopping-services"
+        can_do: "Manage purchases, returns, and service requests in writing."
+        prerequisites:
+          - {
+              target: "ja.goal.a2.food-cooking",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.a2.health-body"
+        can_do: "Describe health in more detail and handle appointments and care writing."
+        prerequisites:
+          - {
+              target: "ja.goal.a2.shopping-services",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.a2.communication"
+        can_do: "Write and understand phone, message, and arrangement communication."
+        prerequisites:
+          - {
+              target: "ja.goal.a2.health-body",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.a2.weather-seasons"
+        can_do: "Talk about weather, seasons, and seasonal plans in connected writing."
+        prerequisites:
+          - {
+              target: "ja.goal.a2.communication",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.a2.entertainment"
+        can_do: "Discuss films, events, and books and write recommendations."
+        prerequisites:
+          - {
+              target: "ja.goal.a2.weather-seasons",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.a2.sports-fitness"
+        can_do: "Discuss sports, fitness goals, and event plans."
+        prerequisites:
+          - {
+              target: "ja.goal.a2.entertainment",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.a2.relationships"
+        can_do: "Write about relationships, feelings, and social support."
+        prerequisites:
+          - {
+              target: "ja.goal.a2.sports-fitness",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.a2.daily-admin"
+        can_do: "Handle everyday administrative documents and obligations."
+        prerequisites:
+          - {
+              target: "ja.goal.a2.relationships",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+  B1:
+    unit_count: 195
+    goals:
+      - id: "ja.goal.b1.work-professional"
+        can_do: "Function in professional written communication: reports, feedback, meetings."
+        prerequisites:
+          - {
+              target: "ja.goal.a2.daily-admin",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b1.education-academic"
+        can_do: "Handle academic study writing: notes, essays, applications."
+        prerequisites:
+          - {
+              target: "ja.goal.b1.work-professional",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b1.media-news"
+        can_do: "Read news critically and write summaries and responses."
+        prerequisites:
+          - {
+              target: "ja.goal.b1.education-academic",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b1.technology"
+        can_do: "Discuss technology use, problems, and digital life."
+        prerequisites:
+          - {
+              target: "ja.goal.b1.media-news",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b1.culture-tradition"
+        can_do: "Explain customs and write about culture and tradition."
+        prerequisites:
+          - {
+              target: "ja.goal.b1.technology",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b1.society-rules"
+        can_do: "Understand rules, rights, and civic participation writing."
+        prerequisites:
+          - {
+              target: "ja.goal.b1.culture-tradition",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b1.environment"
+        can_do: "Discuss environmental issues and sustainable choices."
+        prerequisites:
+          - {
+              target: "ja.goal.b1.society-rules",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b1.travel-extended"
+        can_do: "Plan extended travel and write travel accounts."
+        prerequisites:
+          - {
+              target: "ja.goal.b1.environment",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b1.emotions-personality"
+        can_do: "Describe personality and emotions with nuance."
+        prerequisites:
+          - {
+              target: "ja.goal.b1.travel-extended",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b1.advice-opinion"
+        can_do: "Give advice and structured opinions politely."
+        prerequisites:
+          - {
+              target: "ja.goal.b1.emotions-personality",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b1.comparison-debate"
+        can_do: "Compare options and construct basic debate."
+        prerequisites:
+          - {
+              target: "ja.goal.b1.advice-opinion",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b1.storytelling"
+        can_do: "Write structured narratives and personal essays."
+        prerequisites:
+          - {
+              target: "ja.goal.b1.comparison-debate",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b1.health-wellness"
+        can_do: "Discuss wellbeing, habits, and health information."
+        prerequisites:
+          - {
+              target: "ja.goal.b1.storytelling",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+  B2:
+    unit_count: 388
+    goals:
+      - id: "ja.goal.b2.politics-governance"
+        can_do: "Discuss politics and governance with abstract precision."
+        prerequisites:
+          - {
+              target: "ja.goal.b1.health-wellness",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.economics-work"
+        can_do: "Discuss economics, work, and organizations."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.politics-governance",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.law-justice"
+        can_do: "Discuss law, justice, and rights."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.economics-work",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.philosophy-ethics"
+        can_do: "Engage abstract ethical and philosophical writing."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.law-justice",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.literature-study"
+        can_do: "Read and analyze literature."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.philosophy-ethics",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.film-analysis"
+        can_do: "Analyze film and visual media."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.literature-study",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.history-critical"
+        can_do: "Read history critically and write historical argument."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.film-analysis",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.society-change"
+        can_do: "Analyze social change and demographic issues."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.history-critical",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.science-tech-ethics"
+        can_do: "Discuss science, technology, and their ethics."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.society-change",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.education-debate"
+        can_do: "Debate education theory and policy."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.science-tech-ethics",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.global-issues"
+        can_do: "Analyze global interdependence and challenges."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.education-debate",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.academic-writing"
+        can_do: "Master academic writing conventions."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.global-issues",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.formal-correspondence"
+        can_do: "Write formal and official correspondence."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.academic-writing",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.art-design"
+        can_do: "Discuss art, design, and aesthetics."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.formal-correspondence",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.media-critique"
+        can_do: "Critique media systems and discourse."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.art-design",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.psychology-mind"
+        can_do: "Discuss psychology and mind with precision."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.media-critique",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.medicine-society"
+        can_do: "Discuss medicine, public health, and society."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.psychology-mind",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.urban-life"
+        can_do: "Analyze cities and urban living."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.medicine-society",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.environment-policy"
+        can_do: "Analyze environmental policy and action."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.urban-life",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.language-linguistics"
+        can_do: "Discuss language and linguistics."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.environment-policy",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.culture-identity"
+        can_do: "Analyze culture, identity, and belonging."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.language-linguistics",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.abstract-debate"
+        can_do: "Construct and sustain abstract argument."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.culture-identity",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.nuance-register"
+        can_do: "Command register, nuance, and style."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.abstract-debate",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.humor-wordplay"
+        can_do: "Understand and produce humor and wordplay."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.nuance-register",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+      - id: "ja.goal.b2.relationships-deep"
+        can_do: "Navigate complex relationships in writing."
+        prerequisites:
+          - {
+              target: "ja.goal.b2.humor-wordplay",
+              dimension: "grammar-controlled",
+              required_state: "independent",
+              strength: "hard",
+            }
+
+units:
+  base_directory: "curriculum/units"
+  A1:
+    - block: "062-071"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "062-station-platform.yaml",
+            topic: "station platform",
+            goal: "ja.goal.a1.transport",
+          }
+        - { file: "063-train-types.yaml", topic: "train types", goal: "ja.goal.a1.transport" }
+        - { file: "064-ticket-buying.yaml", topic: "ticket buying", goal: "ja.goal.a1.transport" }
+        - { file: "065-bus-tram-lines.yaml", topic: "bus tram lines", goal: "ja.goal.a1.transport" }
+        - { file: "066-taxi-ride.yaml", topic: "taxi ride", goal: "ja.goal.a1.transport" }
+        - {
+            file: "067-asking-directions.yaml",
+            topic: "asking directions",
+            goal: "ja.goal.a1.transport",
+          }
+        - {
+            file: "068-giving-directions.yaml",
+            topic: "giving directions",
+            goal: "ja.goal.a1.transport",
+          }
+        - { file: "069-maps-and-apps.yaml", topic: "maps and apps", goal: "ja.goal.a1.transport" }
+        - {
+            file: "070-leaving-arriving.yaml",
+            topic: "leaving arriving",
+            goal: "ja.goal.a1.transport",
+          }
+        - {
+            file: "071-travel-problems.yaml",
+            topic: "travel problems",
+            goal: "ja.goal.a1.transport",
+          }
+    - block: "072-081"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "072-body-symptoms.yaml",
+            topic: "body symptoms",
+            goal: "ja.goal.a1.health-basics",
+          }
+        - {
+            file: "073-pharmacy-visit.yaml",
+            topic: "pharmacy visit",
+            goal: "ja.goal.a1.health-basics",
+          }
+        - {
+            file: "074-clinic-booking.yaml",
+            topic: "clinic booking",
+            goal: "ja.goal.a1.health-basics",
+          }
+        - {
+            file: "075-at-the-clinic.yaml",
+            topic: "at the clinic",
+            goal: "ja.goal.a1.health-basics",
+          }
+        - { file: "076-rest-advice.yaml", topic: "rest advice", goal: "ja.goal.a1.health-basics" }
+        - {
+            file: "077-emergency-numbers.yaml",
+            topic: "emergency numbers",
+            goal: "ja.goal.a1.health-basics",
+          }
+        - {
+            file: "078-injuries-basic.yaml",
+            topic: "injuries basic",
+            goal: "ja.goal.a1.health-basics",
+          }
+        - {
+            file: "079-healthy-habits.yaml",
+            topic: "healthy habits",
+            goal: "ja.goal.a1.health-basics",
+          }
+        - {
+            file: "080-watching-sports.yaml",
+            topic: "watching sports",
+            goal: "ja.goal.a1.free-time",
+          }
+        - { file: "081-playing-sports.yaml", topic: "playing sports", goal: "ja.goal.a1.free-time" }
+    - block: "082-091"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "082-music-and-films.yaml",
+            topic: "music and films",
+            goal: "ja.goal.a1.free-time",
+          }
+        - { file: "083-reading-habits.yaml", topic: "reading habits", goal: "ja.goal.a1.free-time" }
+        - {
+            file: "084-weekend-outings.yaml",
+            topic: "weekend outings",
+            goal: "ja.goal.a1.free-time",
+          }
+        - {
+            file: "085-writing-invitations.yaml",
+            topic: "writing invitations",
+            goal: "ja.goal.a1.free-time",
+          }
+        - {
+            file: "086-accepting-refusing.yaml",
+            topic: "accepting refusing",
+            goal: "ja.goal.a1.free-time",
+          }
+        - {
+            file: "087-making-arrangements.yaml",
+            topic: "making arrangements",
+            goal: "ja.goal.a1.free-time",
+          }
+        - {
+            file: "088-sharing-hobbies.yaml",
+            topic: "sharing hobbies",
+            goal: "ja.goal.a1.free-time",
+          }
+        - {
+            file: "089-talking-favorites.yaml",
+            topic: "talking favorites",
+            goal: "ja.goal.a1.free-time",
+          }
+        - {
+            file: "090-rooms-and-places.yaml",
+            topic: "rooms and places",
+            goal: "ja.goal.a1.home-life",
+          }
+        - {
+            file: "091-furniture-objects.yaml",
+            topic: "furniture objects",
+            goal: "ja.goal.a1.home-life",
+          }
+    - block: "092-101"
+      new_item_budget: 6
+      lessons:
+        - { file: "092-daily-chores.yaml", topic: "daily chores", goal: "ja.goal.a1.home-life" }
+        - {
+            file: "093-using-appliances.yaml",
+            topic: "using appliances",
+            goal: "ja.goal.a1.home-life",
+          }
+        - {
+            file: "094-apartment-rules.yaml",
+            topic: "apartment rules",
+            goal: "ja.goal.a1.home-life",
+          }
+        - { file: "095-neighbor-talk.yaml", topic: "neighbor talk", goal: "ja.goal.a1.home-life" }
+        - { file: "096-moving-house.yaml", topic: "moving house", goal: "ja.goal.a1.home-life" }
+        - { file: "097-repairs-help.yaml", topic: "repairs help", goal: "ja.goal.a1.home-life" }
+        - { file: "098-lost-and-found.yaml", topic: "lost and found", goal: "ja.goal.a1.home-life" }
+        - { file: "099-job-names.yaml", topic: "job names", goal: "ja.goal.a1.work-school" }
+        - { file: "100-office-tasks.yaml", topic: "office tasks", goal: "ja.goal.a1.work-school" }
+        - {
+            file: "101-daily-schedule.yaml",
+            topic: "daily schedule",
+            goal: "ja.goal.a1.work-school",
+          }
+    - block: "102-111"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "102-simple-meetings.yaml",
+            topic: "simple meetings",
+            goal: "ja.goal.a1.work-school",
+          }
+        - {
+            file: "103-study-subjects.yaml",
+            topic: "study subjects",
+            goal: "ja.goal.a1.work-school",
+          }
+        - {
+            file: "104-classroom-phrases-2.yaml",
+            topic: "classroom phrases 2",
+            goal: "ja.goal.a1.work-school",
+          }
+        - {
+            file: "105-colleague-talk.yaml",
+            topic: "colleague talk",
+            goal: "ja.goal.a1.work-school",
+          }
+        - { file: "106-part-time-job.yaml", topic: "part time job", goal: "ja.goal.a1.work-school" }
+        - {
+            file: "107-application-basics.yaml",
+            topic: "application basics",
+            goal: "ja.goal.a1.work-school",
+          }
+        - { file: "108-work-messages.yaml", topic: "work messages", goal: "ja.goal.a1.work-school" }
+        - {
+            file: "109-telling-yesterday.yaml",
+            topic: "telling yesterday",
+            goal: "ja.goal.a1.past-stories",
+          }
+        - {
+            file: "110-past-sequences.yaml",
+            topic: "past sequences",
+            goal: "ja.goal.a1.past-stories",
+          }
+        - { file: "111-diary-entry.yaml", topic: "diary entry", goal: "ja.goal.a1.past-stories" }
+    - block: "112-118"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "112-sharing-experiences.yaml",
+            topic: "sharing experiences",
+            goal: "ja.goal.a1.past-stories",
+          }
+        - {
+            file: "113-childhood-memories.yaml",
+            topic: "childhood memories",
+            goal: "ja.goal.a1.past-stories",
+          }
+        - {
+            file: "114-plans-versus-past.yaml",
+            topic: "plans versus past",
+            goal: "ja.goal.a1.past-stories",
+          }
+        - {
+            file: "115-giving-reasons.yaml",
+            topic: "giving reasons",
+            goal: "ja.goal.a1.past-stories",
+          }
+        - {
+            file: "116-writing-apologies.yaml",
+            topic: "writing apologies",
+            goal: "ja.goal.a1.past-stories",
+          }
+        - {
+            file: "117-explaining-problems.yaml",
+            topic: "explaining problems",
+            goal: "ja.goal.a1.past-stories",
+          }
+        - {
+            file: "118-short-anecdotes.yaml",
+            topic: "short anecdotes",
+            goal: "ja.goal.a1.past-stories",
+          }
+
+  A2:
+    - block: "120-129"
+      new_item_budget: 6
+      lessons:
+        - { file: "120-post-office.yaml", topic: "post office", goal: "ja.goal.a2.city-services" }
+        - { file: "121-bank-basics.yaml", topic: "bank basics", goal: "ja.goal.a2.city-services" }
+        - {
+            file: "122-government-forms.yaml",
+            topic: "government forms",
+            goal: "ja.goal.a2.city-services",
+          }
+        - {
+            file: "123-setting-up-utilities.yaml",
+            topic: "setting up utilities",
+            goal: "ja.goal.a2.city-services",
+          }
+        - {
+            file: "124-internet-contract.yaml",
+            topic: "internet contract",
+            goal: "ja.goal.a2.city-services",
+          }
+        - {
+            file: "125-repair-services.yaml",
+            topic: "repair services",
+            goal: "ja.goal.a2.city-services",
+          }
+        - {
+            file: "126-cleaning-services.yaml",
+            topic: "cleaning services",
+            goal: "ja.goal.a2.city-services",
+          }
+        - {
+            file: "127-planning-a-trip.yaml",
+            topic: "planning a trip",
+            goal: "ja.goal.a2.city-services",
+          }
+        - { file: "128-hotel-stay.yaml", topic: "hotel stay", goal: "ja.goal.a2.city-services" }
+        - {
+            file: "129-renting-a-car.yaml",
+            topic: "renting a car",
+            goal: "ja.goal.a2.city-services",
+          }
+    - block: "130-139"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "130-ingredients-taste.yaml",
+            topic: "ingredients taste",
+            goal: "ja.goal.a2.food-cooking",
+          }
+        - {
+            file: "131-reading-recipes.yaml",
+            topic: "reading recipes",
+            goal: "ja.goal.a2.food-cooking",
+          }
+        - {
+            file: "132-cooking-steps.yaml",
+            topic: "cooking steps",
+            goal: "ja.goal.a2.food-cooking",
+          }
+        - {
+            file: "133-full-restaurant-visit.yaml",
+            topic: "full restaurant visit",
+            goal: "ja.goal.a2.food-cooking",
+          }
+        - {
+            file: "134-dietary-needs.yaml",
+            topic: "dietary needs",
+            goal: "ja.goal.a2.food-cooking",
+          }
+        - {
+            file: "135-food-shopping.yaml",
+            topic: "food shopping",
+            goal: "ja.goal.a2.food-cooking",
+          }
+        - {
+            file: "136-eating-out-plans.yaml",
+            topic: "eating out plans",
+            goal: "ja.goal.a2.food-cooking",
+          }
+        - {
+            file: "137-cafe-conversation.yaml",
+            topic: "cafe conversation",
+            goal: "ja.goal.a2.food-cooking",
+          }
+        - {
+            file: "138-comparing-groceries.yaml",
+            topic: "comparing groceries",
+            goal: "ja.goal.a2.food-cooking",
+          }
+        - { file: "139-picnic-plans.yaml", topic: "picnic plans", goal: "ja.goal.a2.food-cooking" }
+    - block: "140-149"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "140-clothes-sizes.yaml",
+            topic: "clothes sizes",
+            goal: "ja.goal.a2.shopping-services",
+          }
+        - {
+            file: "141-trying-things-on.yaml",
+            topic: "trying things on",
+            goal: "ja.goal.a2.shopping-services",
+          }
+        - {
+            file: "142-returns-refunds.yaml",
+            topic: "returns refunds",
+            goal: "ja.goal.a2.shopping-services",
+          }
+        - {
+            file: "143-sales-and-deals.yaml",
+            topic: "sales and deals",
+            goal: "ja.goal.a2.shopping-services",
+          }
+        - {
+            file: "144-online-shopping.yaml",
+            topic: "online shopping",
+            goal: "ja.goal.a2.shopping-services",
+          }
+        - {
+            file: "145-delivery-services.yaml",
+            topic: "delivery services",
+            goal: "ja.goal.a2.shopping-services",
+          }
+        - {
+            file: "146-barber-and-beauty.yaml",
+            topic: "barber and beauty",
+            goal: "ja.goal.a2.shopping-services",
+          }
+        - {
+            file: "147-electronics-shop.yaml",
+            topic: "electronics shop",
+            goal: "ja.goal.a2.shopping-services",
+          }
+        - {
+            file: "148-choosing-gifts.yaml",
+            topic: "choosing gifts",
+            goal: "ja.goal.a2.shopping-services",
+          }
+        - {
+            file: "149-writing-complaints.yaml",
+            topic: "writing complaints",
+            goal: "ja.goal.a2.shopping-services",
+          }
+    - block: "150-159"
+      new_item_budget: 6
+      lessons:
+        - { file: "150-body-parts.yaml", topic: "body parts", goal: "ja.goal.a2.health-body" }
+        - {
+            file: "151-detailed-symptoms.yaml",
+            topic: "detailed symptoms",
+            goal: "ja.goal.a2.health-body",
+          }
+        - {
+            file: "152-writing-appointments.yaml",
+            topic: "writing appointments",
+            goal: "ja.goal.a2.health-body",
+          }
+        - {
+            file: "153-pharmacy-followup.yaml",
+            topic: "pharmacy followup",
+            goal: "ja.goal.a2.health-body",
+          }
+        - {
+            file: "154-healthy-routine.yaml",
+            topic: "healthy routine",
+            goal: "ja.goal.a2.health-body",
+          }
+        - {
+            file: "155-exercise-and-diet.yaml",
+            topic: "exercise and diet",
+            goal: "ja.goal.a2.health-body",
+          }
+        - {
+            file: "156-rest-and-recuperation.yaml",
+            topic: "rest and recuperation",
+            goal: "ja.goal.a2.health-body",
+          }
+        - {
+            file: "157-doctor-conversation.yaml",
+            topic: "doctor conversation",
+            goal: "ja.goal.a2.health-body",
+          }
+        - {
+            file: "158-insurance-basics.yaml",
+            topic: "insurance basics",
+            goal: "ja.goal.a2.health-body",
+          }
+        - {
+            file: "159-caring-for-family.yaml",
+            topic: "caring for family",
+            goal: "ja.goal.a2.health-body",
+          }
+    - block: "160-169"
+      new_item_budget: 6
+      lessons:
+        - { file: "160-phone-calls.yaml", topic: "phone calls", goal: "ja.goal.a2.communication" }
+        - {
+            file: "161-text-messages.yaml",
+            topic: "text messages",
+            goal: "ja.goal.a2.communication",
+          }
+        - { file: "162-email-basics.yaml", topic: "email basics", goal: "ja.goal.a2.communication" }
+        - {
+            file: "163-arranging-meetings.yaml",
+            topic: "arranging meetings",
+            goal: "ja.goal.a2.communication",
+          }
+        - { file: "164-rescheduling.yaml", topic: "rescheduling", goal: "ja.goal.a2.communication" }
+        - {
+            file: "165-confirming-details.yaml",
+            topic: "confirming details",
+            goal: "ja.goal.a2.communication",
+          }
+        - {
+            file: "166-polite-phone-style.yaml",
+            topic: "polite phone style",
+            goal: "ja.goal.a2.communication",
+          }
+        - {
+            file: "167-customer-service-chat.yaml",
+            topic: "customer service chat",
+            goal: "ja.goal.a2.communication",
+          }
+        - { file: "168-form-filling.yaml", topic: "form filling", goal: "ja.goal.a2.communication" }
+        - {
+            file: "169-notifications-announcements.yaml",
+            topic: "notifications announcements",
+            goal: "ja.goal.a2.communication",
+          }
+    - block: "170-179"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "170-weather-reports.yaml",
+            topic: "weather reports",
+            goal: "ja.goal.a2.weather-seasons",
+          }
+        - {
+            file: "171-seasonal-feelings.yaml",
+            topic: "seasonal feelings",
+            goal: "ja.goal.a2.weather-seasons",
+          }
+        - {
+            file: "172-seasonal-clothing.yaml",
+            topic: "seasonal clothing",
+            goal: "ja.goal.a2.weather-seasons",
+          }
+        - {
+            file: "173-annual-festivals.yaml",
+            topic: "annual festivals",
+            goal: "ja.goal.a2.weather-seasons",
+          }
+        - {
+            file: "174-seasonal-travel.yaml",
+            topic: "seasonal travel",
+            goal: "ja.goal.a2.weather-seasons",
+          }
+        - {
+            file: "175-nature-observation.yaml",
+            topic: "nature observation",
+            goal: "ja.goal.a2.weather-seasons",
+          }
+        - {
+            file: "176-disaster-safety.yaml",
+            topic: "disaster safety",
+            goal: "ja.goal.a2.weather-seasons",
+          }
+        - {
+            file: "177-weather-dependent-plans.yaml",
+            topic: "weather dependent plans",
+            goal: "ja.goal.a2.weather-seasons",
+          }
+        - {
+            file: "178-seasonal-photography.yaml",
+            topic: "seasonal photography",
+            goal: "ja.goal.a2.weather-seasons",
+          }
+        - {
+            file: "179-seasonal-poetry.yaml",
+            topic: "seasonal poetry",
+            goal: "ja.goal.a2.weather-seasons",
+          }
+    - block: "180-189"
+      new_item_budget: 6
+      lessons:
+        - { file: "180-cinema-visit.yaml", topic: "cinema visit", goal: "ja.goal.a2.entertainment" }
+        - {
+            file: "181-concert-events.yaml",
+            topic: "concert events",
+            goal: "ja.goal.a2.entertainment",
+          }
+        - {
+            file: "182-museum-visits.yaml",
+            topic: "museum visits",
+            goal: "ja.goal.a2.entertainment",
+          }
+        - { file: "183-theatre-talk.yaml", topic: "theatre talk", goal: "ja.goal.a2.entertainment" }
+        - {
+            file: "184-games-and-hobbies.yaml",
+            topic: "games and hobbies",
+            goal: "ja.goal.a2.entertainment",
+          }
+        - { file: "185-book-reviews.yaml", topic: "book reviews", goal: "ja.goal.a2.entertainment" }
+        - {
+            file: "186-series-discussion.yaml",
+            topic: "series discussion",
+            goal: "ja.goal.a2.entertainment",
+          }
+        - {
+            file: "187-sharing-favorites.yaml",
+            topic: "sharing favorites",
+            goal: "ja.goal.a2.entertainment",
+          }
+        - {
+            file: "188-writing-recommendations.yaml",
+            topic: "writing recommendations",
+            goal: "ja.goal.a2.entertainment",
+          }
+        - {
+            file: "189-planning-events.yaml",
+            topic: "planning events",
+            goal: "ja.goal.a2.entertainment",
+          }
+    - block: "190-199"
+      new_item_budget: 6
+      lessons:
+        - { file: "190-gym-routine.yaml", topic: "gym routine", goal: "ja.goal.a2.sports-fitness" }
+        - { file: "191-team-sports.yaml", topic: "team sports", goal: "ja.goal.a2.sports-fitness" }
+        - {
+            file: "192-watching-games.yaml",
+            topic: "watching games",
+            goal: "ja.goal.a2.sports-fitness",
+          }
+        - {
+            file: "193-fitness-goals.yaml",
+            topic: "fitness goals",
+            goal: "ja.goal.a2.sports-fitness",
+          }
+        - { file: "194-sports-news.yaml", topic: "sports news", goal: "ja.goal.a2.sports-fitness" }
+        - {
+            file: "195-sports-injury-care.yaml",
+            topic: "sports injury care",
+            goal: "ja.goal.a2.sports-fitness",
+          }
+        - {
+            file: "196-outdoor-hiking.yaml",
+            topic: "outdoor hiking",
+            goal: "ja.goal.a2.sports-fitness",
+          }
+        - {
+            file: "197-city-cycling.yaml",
+            topic: "city cycling",
+            goal: "ja.goal.a2.sports-fitness",
+          }
+        - {
+            file: "198-learning-to-swim.yaml",
+            topic: "learning to swim",
+            goal: "ja.goal.a2.sports-fitness",
+          }
+        - { file: "199-match-plans.yaml", topic: "match plans", goal: "ja.goal.a2.sports-fitness" }
+    - block: "200-209"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "200-extended-family.yaml",
+            topic: "extended family",
+            goal: "ja.goal.a2.relationships",
+          }
+        - {
+            file: "201-friend-character.yaml",
+            topic: "friend character",
+            goal: "ja.goal.a2.relationships",
+          }
+        - {
+            file: "202-meeting-new-people.yaml",
+            topic: "meeting new people",
+            goal: "ja.goal.a2.relationships",
+          }
+        - {
+            file: "203-deeper-small-talk.yaml",
+            topic: "deeper small talk",
+            goal: "ja.goal.a2.relationships",
+          }
+        - {
+            file: "204-sharing-feelings.yaml",
+            topic: "sharing feelings",
+            goal: "ja.goal.a2.relationships",
+          }
+        - {
+            file: "205-supporting-friends.yaml",
+            topic: "supporting friends",
+            goal: "ja.goal.a2.relationships",
+          }
+        - { file: "206-celebrations.yaml", topic: "celebrations", goal: "ja.goal.a2.relationships" }
+        - {
+            file: "207-sincere-apologies.yaml",
+            topic: "sincere apologies",
+            goal: "ja.goal.a2.relationships",
+          }
+        - {
+            file: "208-polite-boundaries.yaml",
+            topic: "polite boundaries",
+            goal: "ja.goal.a2.relationships",
+          }
+        - {
+            file: "209-reunion-plans.yaml",
+            topic: "reunion plans",
+            goal: "ja.goal.a2.relationships",
+          }
+    - block: "210-219"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "210-bank-statement.yaml",
+            topic: "bank statement",
+            goal: "ja.goal.a2.daily-admin",
+          }
+        - { file: "211-tax-basics.yaml", topic: "tax basics", goal: "ja.goal.a2.daily-admin" }
+        - {
+            file: "212-insurance-conversation.yaml",
+            topic: "insurance conversation",
+            goal: "ja.goal.a2.daily-admin",
+          }
+        - {
+            file: "213-reading-contracts.yaml",
+            topic: "reading contracts",
+            goal: "ja.goal.a2.daily-admin",
+          }
+        - {
+            file: "214-apartment-contract.yaml",
+            topic: "apartment contract",
+            goal: "ja.goal.a2.daily-admin",
+          }
+        - {
+            file: "215-moving-paperwork.yaml",
+            topic: "moving paperwork",
+            goal: "ja.goal.a2.daily-admin",
+          }
+        - {
+            file: "216-transport-pass.yaml",
+            topic: "transport pass",
+            goal: "ja.goal.a2.daily-admin",
+          }
+        - { file: "217-eco-habits.yaml", topic: "eco habits", goal: "ja.goal.a2.daily-admin" }
+        - {
+            file: "218-personal-budget.yaml",
+            topic: "personal budget",
+            goal: "ja.goal.a2.daily-admin",
+          }
+        - {
+            file: "219-community-help.yaml",
+            topic: "community help",
+            goal: "ja.goal.a2.daily-admin",
+          }
+
+  B1:
+    - block: "220-229"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "220-job-interview-prep.yaml",
+            topic: "job interview prep",
+            goal: "ja.goal.b1.work-professional",
+          }
+        - {
+            file: "221-writing-a-resume.yaml",
+            topic: "writing a resume",
+            goal: "ja.goal.b1.work-professional",
+          }
+        - {
+            file: "222-workplace-communication.yaml",
+            topic: "workplace communication",
+            goal: "ja.goal.b1.work-professional",
+          }
+        - {
+            file: "223-meeting-opinions.yaml",
+            topic: "meeting opinions",
+            goal: "ja.goal.b1.work-professional",
+          }
+        - {
+            file: "224-project-reports.yaml",
+            topic: "project reports",
+            goal: "ja.goal.b1.work-professional",
+          }
+        - {
+            file: "225-deadline-negotiation.yaml",
+            topic: "deadline negotiation",
+            goal: "ja.goal.b1.work-professional",
+          }
+        - {
+            file: "226-giving-feedback.yaml",
+            topic: "giving feedback",
+            goal: "ja.goal.b1.work-professional",
+          }
+        - {
+            file: "227-accepting-feedback.yaml",
+            topic: "accepting feedback",
+            goal: "ja.goal.b1.work-professional",
+          }
+        - {
+            file: "228-career-change-plans.yaml",
+            topic: "career change plans",
+            goal: "ja.goal.b1.work-professional",
+          }
+        - {
+            file: "229-professional-email.yaml",
+            topic: "professional email",
+            goal: "ja.goal.b1.work-professional",
+          }
+    - block: "230-239"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "230-team-conflict.yaml",
+            topic: "team conflict",
+            goal: "ja.goal.b1.work-professional",
+          }
+        - {
+            file: "231-customer-escalation.yaml",
+            topic: "customer escalation",
+            goal: "ja.goal.b1.work-professional",
+          }
+        - {
+            file: "232-presentation-structure.yaml",
+            topic: "presentation structure",
+            goal: "ja.goal.b1.work-professional",
+          }
+        - {
+            file: "233-networking-messages.yaml",
+            topic: "networking messages",
+            goal: "ja.goal.b1.work-professional",
+          }
+        - {
+            file: "234-promotion-conversations.yaml",
+            topic: "promotion conversations",
+            goal: "ja.goal.b1.work-professional",
+          }
+        - {
+            file: "235-university-system.yaml",
+            topic: "university system",
+            goal: "ja.goal.b1.education-academic",
+          }
+        - {
+            file: "236-application-essay.yaml",
+            topic: "application essay",
+            goal: "ja.goal.b1.education-academic",
+          }
+        - {
+            file: "237-lecture-notes.yaml",
+            topic: "lecture notes",
+            goal: "ja.goal.b1.education-academic",
+          }
+        - {
+            file: "238-seminar-discussion.yaml",
+            topic: "seminar discussion",
+            goal: "ja.goal.b1.education-academic",
+          }
+        - {
+            file: "239-citation-basics.yaml",
+            topic: "citation basics",
+            goal: "ja.goal.b1.education-academic",
+          }
+    - block: "240-249"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "240-choosing-a-topic.yaml",
+            topic: "choosing a topic",
+            goal: "ja.goal.b1.education-academic",
+          }
+        - {
+            file: "241-essay-structure.yaml",
+            topic: "essay structure",
+            goal: "ja.goal.b1.education-academic",
+          }
+        - {
+            file: "242-argument-paragraphs.yaml",
+            topic: "argument paragraphs",
+            goal: "ja.goal.b1.education-academic",
+          }
+        - {
+            file: "243-study-abroad-plans.yaml",
+            topic: "study abroad plans",
+            goal: "ja.goal.b1.education-academic",
+          }
+        - {
+            file: "244-scholarship-writing.yaml",
+            topic: "scholarship writing",
+            goal: "ja.goal.b1.education-academic",
+          }
+        - {
+            file: "245-academic-email.yaml",
+            topic: "academic email",
+            goal: "ja.goal.b1.education-academic",
+          }
+        - {
+            file: "246-exam-strategy.yaml",
+            topic: "exam strategy",
+            goal: "ja.goal.b1.education-academic",
+          }
+        - {
+            file: "247-library-research.yaml",
+            topic: "library research",
+            goal: "ja.goal.b1.education-academic",
+          }
+        - {
+            file: "248-academic-presentation.yaml",
+            topic: "academic presentation",
+            goal: "ja.goal.b1.education-academic",
+          }
+        - {
+            file: "249-degree-conversations.yaml",
+            topic: "degree conversations",
+            goal: "ja.goal.b1.education-academic",
+          }
+    - block: "250-259"
+      new_item_budget: 6
+      lessons:
+        - { file: "250-reading-news.yaml", topic: "reading news", goal: "ja.goal.b1.media-news" }
+        - {
+            file: "251-headline-style.yaml",
+            topic: "headline style",
+            goal: "ja.goal.b1.media-news",
+          }
+        - {
+            file: "252-opinion-versus-fact.yaml",
+            topic: "opinion versus fact",
+            goal: "ja.goal.b1.media-news",
+          }
+        - {
+            file: "253-article-summary.yaml",
+            topic: "article summary",
+            goal: "ja.goal.b1.media-news",
+          }
+        - {
+            file: "254-discussing-news.yaml",
+            topic: "discussing news",
+            goal: "ja.goal.b1.media-news",
+          }
+        - {
+            file: "255-social-media-use.yaml",
+            topic: "social media use",
+            goal: "ja.goal.b1.media-news",
+          }
+        - {
+            file: "256-checking-misinformation.yaml",
+            topic: "checking misinformation",
+            goal: "ja.goal.b1.media-news",
+          }
+        - { file: "257-media-habits.yaml", topic: "media habits", goal: "ja.goal.b1.media-news" }
+        - {
+            file: "258-photo-captions.yaml",
+            topic: "photo captions",
+            goal: "ja.goal.b1.media-news",
+          }
+        - {
+            file: "259-broadcast-style.yaml",
+            topic: "broadcast style",
+            goal: "ja.goal.b1.media-news",
+          }
+    - block: "260-269"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "260-reading-editorials.yaml",
+            topic: "reading editorials",
+            goal: "ja.goal.b1.media-news",
+          }
+        - {
+            file: "261-responding-to-news.yaml",
+            topic: "responding to news",
+            goal: "ja.goal.b1.media-news",
+          }
+        - {
+            file: "262-current-events.yaml",
+            topic: "current events",
+            goal: "ja.goal.b1.media-news",
+          }
+        - { file: "263-class-debate.yaml", topic: "class debate", goal: "ja.goal.b1.media-news" }
+        - { file: "264-media-ethics.yaml", topic: "media ethics", goal: "ja.goal.b1.media-news" }
+        - { file: "265-daily-devices.yaml", topic: "daily devices", goal: "ja.goal.b1.technology" }
+        - {
+            file: "266-internet-safety.yaml",
+            topic: "internet safety",
+            goal: "ja.goal.b1.technology",
+          }
+        - {
+            file: "267-privacy-settings.yaml",
+            topic: "privacy settings",
+            goal: "ja.goal.b1.technology",
+          }
+        - { file: "268-software-help.yaml", topic: "software help", goal: "ja.goal.b1.technology" }
+        - {
+            file: "269-online-services.yaml",
+            topic: "online services",
+            goal: "ja.goal.b1.technology",
+          }
+    - block: "270-279"
+      new_item_budget: 6
+      lessons:
+        - { file: "270-tech-problems.yaml", topic: "tech problems", goal: "ja.goal.b1.technology" }
+        - { file: "271-ai-tool-talk.yaml", topic: "ai tool talk", goal: "ja.goal.b1.technology" }
+        - {
+            file: "272-digital-habits.yaml",
+            topic: "digital habits",
+            goal: "ja.goal.b1.technology",
+          }
+        - {
+            file: "273-comparing-gadgets.yaml",
+            topic: "comparing gadgets",
+            goal: "ja.goal.b1.technology",
+          }
+        - {
+            file: "274-tech-support-visit.yaml",
+            topic: "tech support visit",
+            goal: "ja.goal.b1.technology",
+          }
+        - { file: "275-coding-basics.yaml", topic: "coding basics", goal: "ja.goal.b1.technology" }
+        - { file: "276-smart-home.yaml", topic: "smart home", goal: "ja.goal.b1.technology" }
+        - {
+            file: "277-online-communities.yaml",
+            topic: "online communities",
+            goal: "ja.goal.b1.technology",
+          }
+        - {
+            file: "278-technology-change.yaml",
+            topic: "technology change",
+            goal: "ja.goal.b1.technology",
+          }
+        - { file: "279-digital-detox.yaml", topic: "digital detox", goal: "ja.goal.b1.technology" }
+    - block: "280-289"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "280-explaining-customs.yaml",
+            topic: "explaining customs",
+            goal: "ja.goal.b1.culture-tradition",
+          }
+        - {
+            file: "281-festival-details.yaml",
+            topic: "festival details",
+            goal: "ja.goal.b1.culture-tradition",
+          }
+        - {
+            file: "282-traditional-crafts.yaml",
+            topic: "traditional crafts",
+            goal: "ja.goal.b1.culture-tradition",
+          }
+        - {
+            file: "283-etiquette-rules.yaml",
+            topic: "etiquette rules",
+            goal: "ja.goal.b1.culture-tradition",
+          }
+        - {
+            file: "284-regional-cultures.yaml",
+            topic: "regional cultures",
+            goal: "ja.goal.b1.culture-tradition",
+          }
+        - {
+            file: "285-culture-comparison.yaml",
+            topic: "culture comparison",
+            goal: "ja.goal.b1.culture-tradition",
+          }
+        - {
+            file: "286-museum-exhibits.yaml",
+            topic: "museum exhibits",
+            goal: "ja.goal.b1.culture-tradition",
+          }
+        - {
+            file: "287-historical-sites.yaml",
+            topic: "historical sites",
+            goal: "ja.goal.b1.culture-tradition",
+          }
+        - {
+            file: "288-tradition-change.yaml",
+            topic: "tradition change",
+            goal: "ja.goal.b1.culture-tradition",
+          }
+        - {
+            file: "289-cultural-pride.yaml",
+            topic: "cultural pride",
+            goal: "ja.goal.b1.culture-tradition",
+          }
+    - block: "290-299"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "290-host-and-guest.yaml",
+            topic: "host and guest",
+            goal: "ja.goal.b1.culture-tradition",
+          }
+        - {
+            file: "291-gift-customs.yaml",
+            topic: "gift customs",
+            goal: "ja.goal.b1.culture-tradition",
+          }
+        - {
+            file: "292-polite-taboos.yaml",
+            topic: "polite taboos",
+            goal: "ja.goal.b1.culture-tradition",
+          }
+        - {
+            file: "293-attending-ceremonies.yaml",
+            topic: "attending ceremonies",
+            goal: "ja.goal.b1.culture-tradition",
+          }
+        - {
+            file: "294-culture-essay.yaml",
+            topic: "culture essay",
+            goal: "ja.goal.b1.culture-tradition",
+          }
+        - {
+            file: "295-everyday-laws.yaml",
+            topic: "everyday laws",
+            goal: "ja.goal.b1.society-rules",
+          }
+        - {
+            file: "296-rights-and-duties.yaml",
+            topic: "rights and duties",
+            goal: "ja.goal.b1.society-rules",
+          }
+        - {
+            file: "297-neighborhood-rules.yaml",
+            topic: "neighborhood rules",
+            goal: "ja.goal.b1.society-rules",
+          }
+        - {
+            file: "298-public-ethics.yaml",
+            topic: "public ethics",
+            goal: "ja.goal.b1.society-rules",
+          }
+        - { file: "299-volunteering.yaml", topic: "volunteering", goal: "ja.goal.b1.society-rules" }
+    - block: "300-309"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "300-community-problems.yaml",
+            topic: "community problems",
+            goal: "ja.goal.b1.society-rules",
+          }
+        - {
+            file: "301-writing-petitions.yaml",
+            topic: "writing petitions",
+            goal: "ja.goal.b1.society-rules",
+          }
+        - {
+            file: "302-local-government.yaml",
+            topic: "local government",
+            goal: "ja.goal.b1.society-rules",
+          }
+        - {
+            file: "303-voting-information.yaml",
+            topic: "voting information",
+            goal: "ja.goal.b1.society-rules",
+          }
+        - {
+            file: "304-social-issues.yaml",
+            topic: "social issues",
+            goal: "ja.goal.b1.society-rules",
+          }
+        - {
+            file: "305-inequality-discussion.yaml",
+            topic: "inequality discussion",
+            goal: "ja.goal.b1.society-rules",
+          }
+        - {
+            file: "306-urban-versus-rural.yaml",
+            topic: "urban versus rural",
+            goal: "ja.goal.b1.society-rules",
+          }
+        - {
+            file: "307-generational-difference.yaml",
+            topic: "generational difference",
+            goal: "ja.goal.b1.society-rules",
+          }
+        - {
+            file: "308-polite-protest.yaml",
+            topic: "polite protest",
+            goal: "ja.goal.b1.society-rules",
+          }
+        - {
+            file: "309-civic-participation.yaml",
+            topic: "civic participation",
+            goal: "ja.goal.b1.society-rules",
+          }
+    - block: "310-319"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "310-weather-versus-climate.yaml",
+            topic: "weather versus climate",
+            goal: "ja.goal.b1.environment",
+          }
+        - {
+            file: "311-recycling-systems.yaml",
+            topic: "recycling systems",
+            goal: "ja.goal.b1.environment",
+          }
+        - {
+            file: "312-energy-choices.yaml",
+            topic: "energy choices",
+            goal: "ja.goal.b1.environment",
+          }
+        - {
+            file: "313-reducing-waste.yaml",
+            topic: "reducing waste",
+            goal: "ja.goal.b1.environment",
+          }
+        - { file: "314-eco-transport.yaml", topic: "eco transport", goal: "ja.goal.b1.environment" }
+        - {
+            file: "315-nature-protection.yaml",
+            topic: "nature protection",
+            goal: "ja.goal.b1.environment",
+          }
+        - {
+            file: "316-wildlife-discussion.yaml",
+            topic: "wildlife discussion",
+            goal: "ja.goal.b1.environment",
+          }
+        - {
+            file: "317-pollution-problems.yaml",
+            topic: "pollution problems",
+            goal: "ja.goal.b1.environment",
+          }
+        - {
+            file: "318-sustainable-shopping.yaml",
+            topic: "sustainable shopping",
+            goal: "ja.goal.b1.environment",
+          }
+        - {
+            file: "319-environmental-policy.yaml",
+            topic: "environmental policy",
+            goal: "ja.goal.b1.environment",
+          }
+    - block: "320-329"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "320-disaster-preparation.yaml",
+            topic: "disaster preparation",
+            goal: "ja.goal.b1.environment",
+          }
+        - { file: "321-water-issues.yaml", topic: "water issues", goal: "ja.goal.b1.environment" }
+        - { file: "322-food-waste.yaml", topic: "food waste", goal: "ja.goal.b1.environment" }
+        - { file: "323-green-cities.yaml", topic: "green cities", goal: "ja.goal.b1.environment" }
+        - {
+            file: "324-personal-footprint.yaml",
+            topic: "personal footprint",
+            goal: "ja.goal.b1.environment",
+          }
+        - {
+            file: "325-itinerary-planning.yaml",
+            topic: "itinerary planning",
+            goal: "ja.goal.b1.travel-extended",
+          }
+        - {
+            file: "326-booking-problems.yaml",
+            topic: "booking problems",
+            goal: "ja.goal.b1.travel-extended",
+          }
+        - {
+            file: "327-travel-essay.yaml",
+            topic: "travel essay",
+            goal: "ja.goal.b1.travel-extended",
+          }
+        - {
+            file: "328-hosting-interaction.yaml",
+            topic: "hosting interaction",
+            goal: "ja.goal.b1.travel-extended",
+          }
+        - {
+            file: "329-culture-shock.yaml",
+            topic: "culture shock",
+            goal: "ja.goal.b1.travel-extended",
+          }
+    - block: "330-339"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "330-travel-safety.yaml",
+            topic: "travel safety",
+            goal: "ja.goal.b1.travel-extended",
+          }
+        - {
+            file: "331-border-documentation.yaml",
+            topic: "border documentation",
+            goal: "ja.goal.b1.travel-extended",
+          }
+        - {
+            file: "332-homestay-letters.yaml",
+            topic: "homestay letters",
+            goal: "ja.goal.b1.travel-extended",
+          }
+        - {
+            file: "333-guided-tours.yaml",
+            topic: "guided tours",
+            goal: "ja.goal.b1.travel-extended",
+          }
+        - {
+            file: "334-travel-companions.yaml",
+            topic: "travel companions",
+            goal: "ja.goal.b1.travel-extended",
+          }
+        - {
+            file: "335-lost-belongings.yaml",
+            topic: "lost belongings",
+            goal: "ja.goal.b1.travel-extended",
+          }
+        - {
+            file: "336-travel-budgeting.yaml",
+            topic: "travel budgeting",
+            goal: "ja.goal.b1.travel-extended",
+          }
+        - {
+            file: "337-route-changes.yaml",
+            topic: "route changes",
+            goal: "ja.goal.b1.travel-extended",
+          }
+        - {
+            file: "338-travel-reflection.yaml",
+            topic: "travel reflection",
+            goal: "ja.goal.b1.travel-extended",
+          }
+        - {
+            file: "339-postcard-writing.yaml",
+            topic: "postcard writing",
+            goal: "ja.goal.b1.travel-extended",
+          }
+    - block: "340-349"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "340-personality-description.yaml",
+            topic: "personality description",
+            goal: "ja.goal.b1.emotions-personality",
+          }
+        - {
+            file: "341-emotion-vocabulary.yaml",
+            topic: "emotion vocabulary",
+            goal: "ja.goal.b1.emotions-personality",
+          }
+        - {
+            file: "342-mood-conversation.yaml",
+            topic: "mood conversation",
+            goal: "ja.goal.b1.emotions-personality",
+          }
+        - {
+            file: "343-expressing-empathy.yaml",
+            topic: "expressing empathy",
+            goal: "ja.goal.b1.emotions-personality",
+          }
+        - {
+            file: "344-conflict-feelings.yaml",
+            topic: "conflict feelings",
+            goal: "ja.goal.b1.emotions-personality",
+          }
+        - {
+            file: "345-sincere-apology.yaml",
+            topic: "sincere apology",
+            goal: "ja.goal.b1.emotions-personality",
+          }
+        - {
+            file: "346-deepened-gratitude.yaml",
+            topic: "deepened gratitude",
+            goal: "ja.goal.b1.emotions-personality",
+          }
+        - {
+            file: "347-encouragement-words.yaml",
+            topic: "encouragement words",
+            goal: "ja.goal.b1.emotions-personality",
+          }
+        - {
+            file: "348-stress-discussion.yaml",
+            topic: "stress discussion",
+            goal: "ja.goal.b1.emotions-personality",
+          }
+        - {
+            file: "349-coping-habits.yaml",
+            topic: "coping habits",
+            goal: "ja.goal.b1.emotions-personality",
+          }
+    - block: "350-359"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "350-temperament-comparison.yaml",
+            topic: "temperament comparison",
+            goal: "ja.goal.b1.emotions-personality",
+          }
+        - {
+            file: "351-emotional-story.yaml",
+            topic: "emotional story",
+            goal: "ja.goal.b1.emotions-personality",
+          }
+        - {
+            file: "352-emotional-advice.yaml",
+            topic: "emotional advice",
+            goal: "ja.goal.b1.emotions-personality",
+          }
+        - {
+            file: "353-reconciliation.yaml",
+            topic: "reconciliation",
+            goal: "ja.goal.b1.emotions-personality",
+          }
+        - {
+            file: "354-self-reflection.yaml",
+            topic: "self reflection",
+            goal: "ja.goal.b1.emotions-personality",
+          }
+        - {
+            file: "355-giving-advice.yaml",
+            topic: "giving advice",
+            goal: "ja.goal.b1.advice-opinion",
+          }
+        - { file: "356-soft-advice.yaml", topic: "soft advice", goal: "ja.goal.b1.advice-opinion" }
+        - {
+            file: "357-opinion-structure.yaml",
+            topic: "opinion structure",
+            goal: "ja.goal.b1.advice-opinion",
+          }
+        - {
+            file: "358-partial-agreement.yaml",
+            topic: "partial agreement",
+            goal: "ja.goal.b1.advice-opinion",
+          }
+        - {
+            file: "359-polite-disagreement.yaml",
+            topic: "polite disagreement",
+            goal: "ja.goal.b1.advice-opinion",
+          }
+    - block: "360-369"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "360-gentle-persuasion.yaml",
+            topic: "gentle persuasion",
+            goal: "ja.goal.b1.advice-opinion",
+          }
+        - {
+            file: "361-suggestion-forms.yaml",
+            topic: "suggestion forms",
+            goal: "ja.goal.b1.advice-opinion",
+          }
+        - {
+            file: "362-polite-warnings.yaml",
+            topic: "polite warnings",
+            goal: "ja.goal.b1.advice-opinion",
+          }
+        - {
+            file: "363-expressing-regret.yaml",
+            topic: "expressing regret",
+            goal: "ja.goal.b1.advice-opinion",
+          }
+        - {
+            file: "364-expressing-hope.yaml",
+            topic: "expressing hope",
+            goal: "ja.goal.b1.advice-opinion",
+          }
+        - {
+            file: "365-explaining-preference.yaml",
+            topic: "explaining preference",
+            goal: "ja.goal.b1.advice-opinion",
+          }
+        - {
+            file: "366-stating-priorities.yaml",
+            topic: "stating priorities",
+            goal: "ja.goal.b1.advice-opinion",
+          }
+        - {
+            file: "367-compromise-writing.yaml",
+            topic: "compromise writing",
+            goal: "ja.goal.b1.advice-opinion",
+          }
+        - {
+            file: "368-decision-talk.yaml",
+            topic: "decision talk",
+            goal: "ja.goal.b1.advice-opinion",
+          }
+        - {
+            file: "369-reflection-essay.yaml",
+            topic: "reflection essay",
+            goal: "ja.goal.b1.advice-opinion",
+          }
+    - block: "370-379"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "370-product-reviews.yaml",
+            topic: "product reviews",
+            goal: "ja.goal.b1.comparison-debate",
+          }
+        - {
+            file: "371-service-comparison.yaml",
+            topic: "service comparison",
+            goal: "ja.goal.b1.comparison-debate",
+          }
+        - {
+            file: "372-pros-and-cons.yaml",
+            topic: "pros and cons",
+            goal: "ja.goal.b1.comparison-debate",
+          }
+        - {
+            file: "373-explaining-choices.yaml",
+            topic: "explaining choices",
+            goal: "ja.goal.b1.comparison-debate",
+          }
+        - {
+            file: "374-ranking-with-reasons.yaml",
+            topic: "ranking with reasons",
+            goal: "ja.goal.b1.comparison-debate",
+          }
+        - {
+            file: "375-debate-basics.yaml",
+            topic: "debate basics",
+            goal: "ja.goal.b1.comparison-debate",
+          }
+        - {
+            file: "376-using-evidence.yaml",
+            topic: "using evidence",
+            goal: "ja.goal.b1.comparison-debate",
+          }
+        - {
+            file: "377-counter-arguments.yaml",
+            topic: "counter arguments",
+            goal: "ja.goal.b1.comparison-debate",
+          }
+        - {
+            file: "378-conceding-points.yaml",
+            topic: "conceding points",
+            goal: "ja.goal.b1.comparison-debate",
+          }
+        - {
+            file: "379-writing-conclusions.yaml",
+            topic: "writing conclusions",
+            goal: "ja.goal.b1.comparison-debate",
+          }
+    - block: "380-389"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "380-review-posts.yaml",
+            topic: "review posts",
+            goal: "ja.goal.b1.comparison-debate",
+          }
+        - {
+            file: "381-rating-systems.yaml",
+            topic: "rating systems",
+            goal: "ja.goal.b1.comparison-debate",
+          }
+        - {
+            file: "382-budget-comparison.yaml",
+            topic: "budget comparison",
+            goal: "ja.goal.b1.comparison-debate",
+          }
+        - {
+            file: "383-travel-comparison.yaml",
+            topic: "travel comparison",
+            goal: "ja.goal.b1.comparison-debate",
+          }
+        - {
+            file: "384-decision-essay.yaml",
+            topic: "decision essay",
+            goal: "ja.goal.b1.comparison-debate",
+          }
+        - {
+            file: "385-narrative-structure.yaml",
+            topic: "narrative structure",
+            goal: "ja.goal.b1.storytelling",
+          }
+        - {
+            file: "386-background-setting.yaml",
+            topic: "background setting",
+            goal: "ja.goal.b1.storytelling",
+          }
+        - {
+            file: "387-plot-sequencing.yaml",
+            topic: "plot sequencing",
+            goal: "ja.goal.b1.storytelling",
+          }
+        - {
+            file: "388-character-description.yaml",
+            topic: "character description",
+            goal: "ja.goal.b1.storytelling",
+          }
+        - {
+            file: "389-setting-description.yaml",
+            topic: "setting description",
+            goal: "ja.goal.b1.storytelling",
+          }
+    - block: "390-399"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "390-building-suspense.yaml",
+            topic: "building suspense",
+            goal: "ja.goal.b1.storytelling",
+          }
+        - {
+            file: "391-writing-dialogue.yaml",
+            topic: "writing dialogue",
+            goal: "ja.goal.b1.storytelling",
+          }
+        - {
+            file: "392-perspective-shifts.yaml",
+            topic: "perspective shifts",
+            goal: "ja.goal.b1.storytelling",
+          }
+        - {
+            file: "393-writing-endings.yaml",
+            topic: "writing endings",
+            goal: "ja.goal.b1.storytelling",
+          }
+        - {
+            file: "394-story-revision.yaml",
+            topic: "story revision",
+            goal: "ja.goal.b1.storytelling",
+          }
+        - {
+            file: "395-anecdote-telling.yaml",
+            topic: "anecdote telling",
+            goal: "ja.goal.b1.storytelling",
+          }
+        - { file: "396-polite-humor.yaml", topic: "polite humor", goal: "ja.goal.b1.storytelling" }
+        - {
+            file: "397-folktale-reading.yaml",
+            topic: "folktale reading",
+            goal: "ja.goal.b1.storytelling",
+          }
+        - {
+            file: "398-story-retelling.yaml",
+            topic: "story retelling",
+            goal: "ja.goal.b1.storytelling",
+          }
+        - {
+            file: "399-personal-essay.yaml",
+            topic: "personal essay",
+            goal: "ja.goal.b1.storytelling",
+          }
+    - block: "400-409"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "400-wellness-routines.yaml",
+            topic: "wellness routines",
+            goal: "ja.goal.b1.health-wellness",
+          }
+        - {
+            file: "401-sleep-habits.yaml",
+            topic: "sleep habits",
+            goal: "ja.goal.b1.health-wellness",
+          }
+        - {
+            file: "402-balanced-nutrition.yaml",
+            topic: "balanced nutrition",
+            goal: "ja.goal.b1.health-wellness",
+          }
+        - {
+            file: "403-exercise-planning.yaml",
+            topic: "exercise planning",
+            goal: "ja.goal.b1.health-wellness",
+          }
+        - {
+            file: "404-stress-management.yaml",
+            topic: "stress management",
+            goal: "ja.goal.b1.health-wellness",
+          }
+        - {
+            file: "405-mental-health-talk.yaml",
+            topic: "mental health talk",
+            goal: "ja.goal.b1.health-wellness",
+          }
+        - {
+            file: "406-habit-change.yaml",
+            topic: "habit change",
+            goal: "ja.goal.b1.health-wellness",
+          }
+        - {
+            file: "407-quitting-habits.yaml",
+            topic: "quitting habits",
+            goal: "ja.goal.b1.health-wellness",
+          }
+        - {
+            file: "408-medical-information.yaml",
+            topic: "medical information",
+            goal: "ja.goal.b1.health-wellness",
+          }
+        - {
+            file: "409-vaccination-discussion.yaml",
+            topic: "vaccination discussion",
+            goal: "ja.goal.b1.health-wellness",
+          }
+    - block: "410-414"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "410-care-and-aging.yaml",
+            topic: "care and aging",
+            goal: "ja.goal.b1.health-wellness",
+          }
+        - {
+            file: "411-fitness-club-life.yaml",
+            topic: "fitness club life",
+            goal: "ja.goal.b1.health-wellness",
+          }
+        - {
+            file: "412-diet-culture.yaml",
+            topic: "diet culture",
+            goal: "ja.goal.b1.health-wellness",
+          }
+        - {
+            file: "413-wellbeing-apps.yaml",
+            topic: "wellbeing apps",
+            goal: "ja.goal.b1.health-wellness",
+          }
+        - {
+            file: "414-health-debate.yaml",
+            topic: "health debate",
+            goal: "ja.goal.b1.health-wellness",
+          }
+
+  B2:
+    - block: "420-429"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "420-electoral-systems.yaml",
+            topic: "electoral systems",
+            goal: "ja.goal.b2.politics-governance",
+          }
+        - {
+            file: "421-parliament-debate.yaml",
+            topic: "parliament debate",
+            goal: "ja.goal.b2.politics-governance",
+          }
+        - {
+            file: "422-voting-behavior.yaml",
+            topic: "voting behavior",
+            goal: "ja.goal.b2.politics-governance",
+          }
+        - {
+            file: "423-party-systems.yaml",
+            topic: "party systems",
+            goal: "ja.goal.b2.politics-governance",
+          }
+        - {
+            file: "424-policy-analysis.yaml",
+            topic: "policy analysis",
+            goal: "ja.goal.b2.politics-governance",
+          }
+        - {
+            file: "425-public-debate.yaml",
+            topic: "public debate",
+            goal: "ja.goal.b2.politics-governance",
+          }
+        - {
+            file: "426-campaign-critique.yaml",
+            topic: "campaign critique",
+            goal: "ja.goal.b2.politics-governance",
+          }
+        - {
+            file: "427-constitutional-ideas.yaml",
+            topic: "constitutional ideas",
+            goal: "ja.goal.b2.politics-governance",
+          }
+        - {
+            file: "428-rights-discussion.yaml",
+            topic: "rights discussion",
+            goal: "ja.goal.b2.politics-governance",
+          }
+        - {
+            file: "429-local-governance.yaml",
+            topic: "local governance",
+            goal: "ja.goal.b2.politics-governance",
+          }
+    - block: "430-439"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "430-international-relations.yaml",
+            topic: "international relations",
+            goal: "ja.goal.b2.politics-governance",
+          }
+        - {
+            file: "431-diplomacy-language.yaml",
+            topic: "diplomacy language",
+            goal: "ja.goal.b2.politics-governance",
+          }
+        - {
+            file: "432-protest-movements.yaml",
+            topic: "protest movements",
+            goal: "ja.goal.b2.politics-governance",
+          }
+        - {
+            file: "433-public-opinion.yaml",
+            topic: "public opinion",
+            goal: "ja.goal.b2.politics-governance",
+          }
+        - {
+            file: "434-political-figures.yaml",
+            topic: "political figures",
+            goal: "ja.goal.b2.politics-governance",
+          }
+        - {
+            file: "435-governance-essay.yaml",
+            topic: "governance essay",
+            goal: "ja.goal.b2.politics-governance",
+          }
+        - {
+            file: "436-market-basics.yaml",
+            topic: "market basics",
+            goal: "ja.goal.b2.economics-work",
+          }
+        - {
+            file: "437-supply-demand.yaml",
+            topic: "supply demand",
+            goal: "ja.goal.b2.economics-work",
+          }
+        - {
+            file: "438-employment-trends.yaml",
+            topic: "employment trends",
+            goal: "ja.goal.b2.economics-work",
+          }
+        - {
+            file: "439-wage-discussion.yaml",
+            topic: "wage discussion",
+            goal: "ja.goal.b2.economics-work",
+          }
+    - block: "440-449"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "440-startup-culture.yaml",
+            topic: "startup culture",
+            goal: "ja.goal.b2.economics-work",
+          }
+        - {
+            file: "441-management-styles.yaml",
+            topic: "management styles",
+            goal: "ja.goal.b2.economics-work",
+          }
+        - {
+            file: "442-labor-rights.yaml",
+            topic: "labor rights",
+            goal: "ja.goal.b2.economics-work",
+          }
+        - {
+            file: "443-automation-impact.yaml",
+            topic: "automation impact",
+            goal: "ja.goal.b2.economics-work",
+          }
+        - {
+            file: "444-consumer-behavior.yaml",
+            topic: "consumer behavior",
+            goal: "ja.goal.b2.economics-work",
+          }
+        - {
+            file: "445-financial-literacy.yaml",
+            topic: "financial literacy",
+            goal: "ja.goal.b2.economics-work",
+          }
+        - {
+            file: "446-economic-history.yaml",
+            topic: "economic history",
+            goal: "ja.goal.b2.economics-work",
+          }
+        - {
+            file: "447-inequality-data.yaml",
+            topic: "inequality data",
+            goal: "ja.goal.b2.economics-work",
+          }
+        - {
+            file: "448-workplace-motivation.yaml",
+            topic: "workplace motivation",
+            goal: "ja.goal.b2.economics-work",
+          }
+        - {
+            file: "449-career-markets.yaml",
+            topic: "career markets",
+            goal: "ja.goal.b2.economics-work",
+          }
+    - block: "450-459"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "450-globalization.yaml",
+            topic: "globalization",
+            goal: "ja.goal.b2.economics-work",
+          }
+        - {
+            file: "451-economic-debate.yaml",
+            topic: "economic debate",
+            goal: "ja.goal.b2.economics-work",
+          }
+        - { file: "452-legal-systems.yaml", topic: "legal systems", goal: "ja.goal.b2.law-justice" }
+        - { file: "453-court-process.yaml", topic: "court process", goal: "ja.goal.b2.law-justice" }
+        - { file: "454-contract-law.yaml", topic: "contract law", goal: "ja.goal.b2.law-justice" }
+        - {
+            file: "455-criminal-justice.yaml",
+            topic: "criminal justice",
+            goal: "ja.goal.b2.law-justice",
+          }
+        - { file: "456-civil-rights.yaml", topic: "civil rights", goal: "ja.goal.b2.law-justice" }
+        - {
+            file: "457-legal-vocabulary.yaml",
+            topic: "legal vocabulary",
+            goal: "ja.goal.b2.law-justice",
+          }
+        - { file: "458-jury-debate.yaml", topic: "jury debate", goal: "ja.goal.b2.law-justice" }
+        - {
+            file: "459-punishment-theory.yaml",
+            topic: "punishment theory",
+            goal: "ja.goal.b2.law-justice",
+          }
+    - block: "460-469"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "460-restorative-justice.yaml",
+            topic: "restorative justice",
+            goal: "ja.goal.b2.law-justice",
+          }
+        - { file: "461-privacy-law.yaml", topic: "privacy law", goal: "ja.goal.b2.law-justice" }
+        - {
+            file: "462-consumer-protection.yaml",
+            topic: "consumer protection",
+            goal: "ja.goal.b2.law-justice",
+          }
+        - { file: "463-labor-law.yaml", topic: "labor law", goal: "ja.goal.b2.law-justice" }
+        - {
+            file: "464-international-law.yaml",
+            topic: "international law",
+            goal: "ja.goal.b2.law-justice",
+          }
+        - { file: "465-legal-news.yaml", topic: "legal news", goal: "ja.goal.b2.law-justice" }
+        - { file: "466-ethics-of-law.yaml", topic: "ethics of law", goal: "ja.goal.b2.law-justice" }
+        - { file: "467-justice-essay.yaml", topic: "justice essay", goal: "ja.goal.b2.law-justice" }
+        - {
+            file: "468-ethical-frameworks.yaml",
+            topic: "ethical frameworks",
+            goal: "ja.goal.b2.philosophy-ethics",
+          }
+        - {
+            file: "469-moral-dilemmas.yaml",
+            topic: "moral dilemmas",
+            goal: "ja.goal.b2.philosophy-ethics",
+          }
+    - block: "470-479"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "470-free-will-debate.yaml",
+            topic: "free will debate",
+            goal: "ja.goal.b2.philosophy-ethics",
+          }
+        - {
+            file: "471-justice-theory.yaml",
+            topic: "justice theory",
+            goal: "ja.goal.b2.philosophy-ethics",
+          }
+        - {
+            file: "472-happiness-philosophy.yaml",
+            topic: "happiness philosophy",
+            goal: "ja.goal.b2.philosophy-ethics",
+          }
+        - {
+            file: "473-duty-versus-good.yaml",
+            topic: "duty versus good",
+            goal: "ja.goal.b2.philosophy-ethics",
+          }
+        - {
+            file: "474-technology-ethics.yaml",
+            topic: "technology ethics",
+            goal: "ja.goal.b2.philosophy-ethics",
+          }
+        - {
+            file: "475-environmental-ethics.yaml",
+            topic: "environmental ethics",
+            goal: "ja.goal.b2.philosophy-ethics",
+          }
+        - {
+            file: "476-medical-ethics.yaml",
+            topic: "medical ethics",
+            goal: "ja.goal.b2.philosophy-ethics",
+          }
+        - {
+            file: "477-truth-and-lies.yaml",
+            topic: "truth and lies",
+            goal: "ja.goal.b2.philosophy-ethics",
+          }
+        - {
+            file: "478-responsibility-concepts.yaml",
+            topic: "responsibility concepts",
+            goal: "ja.goal.b2.philosophy-ethics",
+          }
+        - {
+            file: "479-aesthetics-ideas.yaml",
+            topic: "aesthetics ideas",
+            goal: "ja.goal.b2.philosophy-ethics",
+          }
+    - block: "480-489"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "480-logic-basics.yaml",
+            topic: "logic basics",
+            goal: "ja.goal.b2.philosophy-ethics",
+          }
+        - {
+            file: "481-fallacy-hunting.yaml",
+            topic: "fallacy hunting",
+            goal: "ja.goal.b2.philosophy-ethics",
+          }
+        - {
+            file: "482-philosophy-reading.yaml",
+            topic: "philosophy reading",
+            goal: "ja.goal.b2.philosophy-ethics",
+          }
+        - {
+            file: "483-ethics-essay.yaml",
+            topic: "ethics essay",
+            goal: "ja.goal.b2.philosophy-ethics",
+          }
+        - {
+            file: "484-short-story-analysis.yaml",
+            topic: "short story analysis",
+            goal: "ja.goal.b2.literature-study",
+          }
+        - {
+            file: "485-novel-excerpts.yaml",
+            topic: "novel excerpts",
+            goal: "ja.goal.b2.literature-study",
+          }
+        - {
+            file: "486-poetry-modern.yaml",
+            topic: "poetry modern",
+            goal: "ja.goal.b2.literature-study",
+          }
+        - {
+            file: "487-poetry-classical.yaml",
+            topic: "poetry classical",
+            goal: "ja.goal.b2.literature-study",
+          }
+        - {
+            file: "488-haiku-tradition.yaml",
+            topic: "haiku tradition",
+            goal: "ja.goal.b2.literature-study",
+          }
+        - {
+            file: "489-literary-motifs.yaml",
+            topic: "literary motifs",
+            goal: "ja.goal.b2.literature-study",
+          }
+    - block: "490-499"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "490-narrator-analysis.yaml",
+            topic: "narrator analysis",
+            goal: "ja.goal.b2.literature-study",
+          }
+        - {
+            file: "491-symbol-reading.yaml",
+            topic: "symbol reading",
+            goal: "ja.goal.b2.literature-study",
+          }
+        - {
+            file: "492-genre-comparison.yaml",
+            topic: "genre comparison",
+            goal: "ja.goal.b2.literature-study",
+          }
+        - {
+            file: "493-author-context.yaml",
+            topic: "author context",
+            goal: "ja.goal.b2.literature-study",
+          }
+        - {
+            file: "494-translation-comparison.yaml",
+            topic: "translation comparison",
+            goal: "ja.goal.b2.literature-study",
+          }
+        - {
+            file: "495-literary-vocabulary.yaml",
+            topic: "literary vocabulary",
+            goal: "ja.goal.b2.literature-study",
+          }
+        - {
+            file: "496-close-reading.yaml",
+            topic: "close reading",
+            goal: "ja.goal.b2.literature-study",
+          }
+        - {
+            file: "497-essay-on-novel.yaml",
+            topic: "essay on novel",
+            goal: "ja.goal.b2.literature-study",
+          }
+        - {
+            file: "498-theatre-text.yaml",
+            topic: "theatre text",
+            goal: "ja.goal.b2.literature-study",
+          }
+        - {
+            file: "499-literature-essay.yaml",
+            topic: "literature essay",
+            goal: "ja.goal.b2.literature-study",
+          }
+    - block: "500-509"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "500-film-language.yaml",
+            topic: "film language",
+            goal: "ja.goal.b2.film-analysis",
+          }
+        - {
+            file: "501-genre-analysis.yaml",
+            topic: "genre analysis",
+            goal: "ja.goal.b2.film-analysis",
+          }
+        - {
+            file: "502-director-style.yaml",
+            topic: "director style",
+            goal: "ja.goal.b2.film-analysis",
+          }
+        - {
+            file: "503-camera-meaning.yaml",
+            topic: "camera meaning",
+            goal: "ja.goal.b2.film-analysis",
+          }
+        - { file: "504-sound-design.yaml", topic: "sound design", goal: "ja.goal.b2.film-analysis" }
+        - {
+            file: "505-adaptation-study.yaml",
+            topic: "adaptation study",
+            goal: "ja.goal.b2.film-analysis",
+          }
+        - {
+            file: "506-documentary-critique.yaml",
+            topic: "documentary critique",
+            goal: "ja.goal.b2.film-analysis",
+          }
+        - { file: "507-film-history.yaml", topic: "film history", goal: "ja.goal.b2.film-analysis" }
+        - {
+            file: "508-animation-arts.yaml",
+            topic: "animation arts",
+            goal: "ja.goal.b2.film-analysis",
+          }
+        - { file: "509-film-reviews.yaml", topic: "film reviews", goal: "ja.goal.b2.film-analysis" }
+    - block: "510-519"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "510-scene-analysis.yaml",
+            topic: "scene analysis",
+            goal: "ja.goal.b2.film-analysis",
+          }
+        - {
+            file: "511-cultural-film.yaml",
+            topic: "cultural film",
+            goal: "ja.goal.b2.film-analysis",
+          }
+        - {
+            file: "512-festival-culture.yaml",
+            topic: "festival culture",
+            goal: "ja.goal.b2.film-analysis",
+          }
+        - {
+            file: "513-viewer-response.yaml",
+            topic: "viewer response",
+            goal: "ja.goal.b2.film-analysis",
+          }
+        - { file: "514-film-ethics.yaml", topic: "film ethics", goal: "ja.goal.b2.film-analysis" }
+        - {
+            file: "515-analysis-essay.yaml",
+            topic: "analysis essay",
+            goal: "ja.goal.b2.film-analysis",
+          }
+        - {
+            file: "516-primary-sources.yaml",
+            topic: "primary sources",
+            goal: "ja.goal.b2.history-critical",
+          }
+        - {
+            file: "517-historiography-basics.yaml",
+            topic: "historiography basics",
+            goal: "ja.goal.b2.history-critical",
+          }
+        - {
+            file: "518-meiji-modernization.yaml",
+            topic: "meiji modernization",
+            goal: "ja.goal.b2.history-critical",
+          }
+        - { file: "519-war-memory.yaml", topic: "war memory", goal: "ja.goal.b2.history-critical" }
+    - block: "520-529"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "520-economic-history.yaml",
+            topic: "economic history",
+            goal: "ja.goal.b2.history-critical",
+          }
+        - {
+            file: "521-social-history.yaml",
+            topic: "social history",
+            goal: "ja.goal.b2.history-critical",
+          }
+        - {
+            file: "522-regional-history.yaml",
+            topic: "regional history",
+            goal: "ja.goal.b2.history-critical",
+          }
+        - {
+            file: "523-history-and-identity.yaml",
+            topic: "history and identity",
+            goal: "ja.goal.b2.history-critical",
+          }
+        - {
+            file: "524-monument-debate.yaml",
+            topic: "monument debate",
+            goal: "ja.goal.b2.history-critical",
+          }
+        - {
+            file: "525-archives-research.yaml",
+            topic: "archives research",
+            goal: "ja.goal.b2.history-critical",
+          }
+        - {
+            file: "526-historical-method.yaml",
+            topic: "historical method",
+            goal: "ja.goal.b2.history-critical",
+          }
+        - {
+            file: "527-revisionism-debate.yaml",
+            topic: "revisionism debate",
+            goal: "ja.goal.b2.history-critical",
+          }
+        - {
+            file: "528-oral-history.yaml",
+            topic: "oral history",
+            goal: "ja.goal.b2.history-critical",
+          }
+        - {
+            file: "529-museums-memory.yaml",
+            topic: "museums memory",
+            goal: "ja.goal.b2.history-critical",
+          }
+    - block: "530-539"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "530-history-comparison.yaml",
+            topic: "history comparison",
+            goal: "ja.goal.b2.history-critical",
+          }
+        - {
+            file: "531-history-essay.yaml",
+            topic: "history essay",
+            goal: "ja.goal.b2.history-critical",
+          }
+        - {
+            file: "532-demographic-shift.yaml",
+            topic: "demographic shift",
+            goal: "ja.goal.b2.society-change",
+          }
+        - {
+            file: "533-aging-society.yaml",
+            topic: "aging society",
+            goal: "ja.goal.b2.society-change",
+          }
+        - {
+            file: "534-family-change.yaml",
+            topic: "family change",
+            goal: "ja.goal.b2.society-change",
+          }
+        - {
+            file: "535-urbanization.yaml",
+            topic: "urbanization",
+            goal: "ja.goal.b2.society-change",
+          }
+        - {
+            file: "536-migration-debate.yaml",
+            topic: "migration debate",
+            goal: "ja.goal.b2.society-change",
+          }
+        - {
+            file: "537-work-culture-change.yaml",
+            topic: "work culture change",
+            goal: "ja.goal.b2.society-change",
+          }
+        - {
+            file: "538-education-reform.yaml",
+            topic: "education reform",
+            goal: "ja.goal.b2.society-change",
+          }
+        - {
+            file: "539-gender-studies.yaml",
+            topic: "gender studies",
+            goal: "ja.goal.b2.society-change",
+          }
+    - block: "540-549"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "540-media-effects.yaml",
+            topic: "media effects",
+            goal: "ja.goal.b2.society-change",
+          }
+        - {
+            file: "541-inequality-policy.yaml",
+            topic: "inequality policy",
+            goal: "ja.goal.b2.society-change",
+          }
+        - {
+            file: "542-community-resilience.yaml",
+            topic: "community resilience",
+            goal: "ja.goal.b2.society-change",
+          }
+        - {
+            file: "543-youth-culture.yaml",
+            topic: "youth culture",
+            goal: "ja.goal.b2.society-change",
+          }
+        - {
+            file: "544-welfare-debate.yaml",
+            topic: "welfare debate",
+            goal: "ja.goal.b2.society-change",
+          }
+        - {
+            file: "545-housing-crisis.yaml",
+            topic: "housing crisis",
+            goal: "ja.goal.b2.society-change",
+          }
+        - {
+            file: "546-social-mobility.yaml",
+            topic: "social mobility",
+            goal: "ja.goal.b2.society-change",
+          }
+        - {
+            file: "547-change-essay.yaml",
+            topic: "change essay",
+            goal: "ja.goal.b2.society-change",
+          }
+        - {
+            file: "548-scientific-method.yaml",
+            topic: "scientific method",
+            goal: "ja.goal.b2.science-tech-ethics",
+          }
+        - {
+            file: "549-research-reading.yaml",
+            topic: "research reading",
+            goal: "ja.goal.b2.science-tech-ethics",
+          }
+    - block: "550-559"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "550-statistics-literacy.yaml",
+            topic: "statistics literacy",
+            goal: "ja.goal.b2.science-tech-ethics",
+          }
+        - {
+            file: "551-energy-technology.yaml",
+            topic: "energy technology",
+            goal: "ja.goal.b2.science-tech-ethics",
+          }
+        - {
+            file: "552-biotechnology.yaml",
+            topic: "biotechnology",
+            goal: "ja.goal.b2.science-tech-ethics",
+          }
+        - {
+            file: "553-ai-society.yaml",
+            topic: "ai society",
+            goal: "ja.goal.b2.science-tech-ethics",
+          }
+        - {
+            file: "554-data-ethics.yaml",
+            topic: "data ethics",
+            goal: "ja.goal.b2.science-tech-ethics",
+          }
+        - {
+            file: "555-space-exploration.yaml",
+            topic: "space exploration",
+            goal: "ja.goal.b2.science-tech-ethics",
+          }
+        - {
+            file: "556-medical-advance.yaml",
+            topic: "medical advance",
+            goal: "ja.goal.b2.science-tech-ethics",
+          }
+        - {
+            file: "557-climate-science.yaml",
+            topic: "climate science",
+            goal: "ja.goal.b2.science-tech-ethics",
+          }
+        - {
+            file: "558-risk-communication.yaml",
+            topic: "risk communication",
+            goal: "ja.goal.b2.science-tech-ethics",
+          }
+        - {
+            file: "559-science-education.yaml",
+            topic: "science education",
+            goal: "ja.goal.b2.science-tech-ethics",
+          }
+    - block: "560-569"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "560-tech-regulation.yaml",
+            topic: "tech regulation",
+            goal: "ja.goal.b2.science-tech-ethics",
+          }
+        - {
+            file: "561-innovation-economics.yaml",
+            topic: "innovation economics",
+            goal: "ja.goal.b2.science-tech-ethics",
+          }
+        - {
+            file: "562-science-communication.yaml",
+            topic: "science communication",
+            goal: "ja.goal.b2.science-tech-ethics",
+          }
+        - {
+            file: "563-ethics-debate.yaml",
+            topic: "ethics debate",
+            goal: "ja.goal.b2.science-tech-ethics",
+          }
+        - {
+            file: "564-learning-theory.yaml",
+            topic: "learning theory",
+            goal: "ja.goal.b2.education-debate",
+          }
+        - {
+            file: "565-classroom-methods.yaml",
+            topic: "classroom methods",
+            goal: "ja.goal.b2.education-debate",
+          }
+        - {
+            file: "566-assessment-debate.yaml",
+            topic: "assessment debate",
+            goal: "ja.goal.b2.education-debate",
+          }
+        - {
+            file: "567-curriculum-design.yaml",
+            topic: "curriculum design",
+            goal: "ja.goal.b2.education-debate",
+          }
+        - {
+            file: "568-language-acquisition.yaml",
+            topic: "language acquisition",
+            goal: "ja.goal.b2.education-debate",
+          }
+        - {
+            file: "569-bilingual-education.yaml",
+            topic: "bilingual education",
+            goal: "ja.goal.b2.education-debate",
+          }
+    - block: "570-579"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "570-technology-in-class.yaml",
+            topic: "technology in class",
+            goal: "ja.goal.b2.education-debate",
+          }
+        - {
+            file: "571-teacher-roles.yaml",
+            topic: "teacher roles",
+            goal: "ja.goal.b2.education-debate",
+          }
+        - {
+            file: "572-student-agency.yaml",
+            topic: "student agency",
+            goal: "ja.goal.b2.education-debate",
+          }
+        - {
+            file: "573-early-childhood.yaml",
+            topic: "early childhood",
+            goal: "ja.goal.b2.education-debate",
+          }
+        - {
+            file: "574-higher-education-future.yaml",
+            topic: "higher education future",
+            goal: "ja.goal.b2.education-debate",
+          }
+        - {
+            file: "575-vocational-training.yaml",
+            topic: "vocational training",
+            goal: "ja.goal.b2.education-debate",
+          }
+        - {
+            file: "576-equity-in-schools.yaml",
+            topic: "equity in schools",
+            goal: "ja.goal.b2.education-debate",
+          }
+        - {
+            file: "577-parent-involvement.yaml",
+            topic: "parent involvement",
+            goal: "ja.goal.b2.education-debate",
+          }
+        - {
+            file: "578-global-comparison.yaml",
+            topic: "global comparison",
+            goal: "ja.goal.b2.education-debate",
+          }
+        - {
+            file: "579-education-essay.yaml",
+            topic: "education essay",
+            goal: "ja.goal.b2.education-debate",
+          }
+    - block: "580-589"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "580-globalization-debate.yaml",
+            topic: "globalization debate",
+            goal: "ja.goal.b2.global-issues",
+          }
+        - {
+            file: "581-trade-systems.yaml",
+            topic: "trade systems",
+            goal: "ja.goal.b2.global-issues",
+          }
+        - {
+            file: "582-migration-global.yaml",
+            topic: "migration global",
+            goal: "ja.goal.b2.global-issues",
+          }
+        - {
+            file: "583-climate-diplomacy.yaml",
+            topic: "climate diplomacy",
+            goal: "ja.goal.b2.global-issues",
+          }
+        - {
+            file: "584-global-health.yaml",
+            topic: "global health",
+            goal: "ja.goal.b2.global-issues",
+          }
+        - {
+            file: "585-development-goals.yaml",
+            topic: "development goals",
+            goal: "ja.goal.b2.global-issues",
+          }
+        - {
+            file: "586-cultural-exchange.yaml",
+            topic: "cultural exchange",
+            goal: "ja.goal.b2.global-issues",
+          }
+        - { file: "587-media-global.yaml", topic: "media global", goal: "ja.goal.b2.global-issues" }
+        - {
+            file: "588-conflict-resolution.yaml",
+            topic: "conflict resolution",
+            goal: "ja.goal.b2.global-issues",
+          }
+        - {
+            file: "589-refugee-policy.yaml",
+            topic: "refugee policy",
+            goal: "ja.goal.b2.global-issues",
+          }
+    - block: "590-599"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "590-resource-politics.yaml",
+            topic: "resource politics",
+            goal: "ja.goal.b2.global-issues",
+          }
+        - {
+            file: "591-global-cities.yaml",
+            topic: "global cities",
+            goal: "ja.goal.b2.global-issues",
+          }
+        - {
+            file: "592-tourism-impact.yaml",
+            topic: "tourism impact",
+            goal: "ja.goal.b2.global-issues",
+          }
+        - {
+            file: "593-supply-chains.yaml",
+            topic: "supply chains",
+            goal: "ja.goal.b2.global-issues",
+          }
+        - {
+            file: "594-global-governance.yaml",
+            topic: "global governance",
+            goal: "ja.goal.b2.global-issues",
+          }
+        - { file: "595-global-essay.yaml", topic: "global essay", goal: "ja.goal.b2.global-issues" }
+        - {
+            file: "596-thesis-construction.yaml",
+            topic: "thesis construction",
+            goal: "ja.goal.b2.academic-writing",
+          }
+        - {
+            file: "597-literature-review.yaml",
+            topic: "literature review",
+            goal: "ja.goal.b2.academic-writing",
+          }
+        - {
+            file: "598-methodology-basics.yaml",
+            topic: "methodology basics",
+            goal: "ja.goal.b2.academic-writing",
+          }
+        - {
+            file: "599-data-presentation.yaml",
+            topic: "data presentation",
+            goal: "ja.goal.b2.academic-writing",
+          }
+    - block: "600-609"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "600-academic-hedging.yaml",
+            topic: "academic hedging",
+            goal: "ja.goal.b2.academic-writing",
+          }
+        - {
+            file: "601-formal-style.yaml",
+            topic: "formal style",
+            goal: "ja.goal.b2.academic-writing",
+          }
+        - {
+            file: "602-paragraph-cohesion.yaml",
+            topic: "paragraph cohesion",
+            goal: "ja.goal.b2.academic-writing",
+          }
+        - {
+            file: "603-counter-evidence.yaml",
+            topic: "counter evidence",
+            goal: "ja.goal.b2.academic-writing",
+          }
+        - {
+            file: "604-abstract-writing.yaml",
+            topic: "abstract writing",
+            goal: "ja.goal.b2.academic-writing",
+          }
+        - {
+            file: "605-peer-review-ideas.yaml",
+            topic: "peer review ideas",
+            goal: "ja.goal.b2.academic-writing",
+          }
+        - {
+            file: "606-research-ethics.yaml",
+            topic: "research ethics",
+            goal: "ja.goal.b2.academic-writing",
+          }
+        - {
+            file: "607-conference-talk.yaml",
+            topic: "conference talk",
+            goal: "ja.goal.b2.academic-writing",
+          }
+        - {
+            file: "608-poster-writing.yaml",
+            topic: "poster writing",
+            goal: "ja.goal.b2.academic-writing",
+          }
+        - {
+            file: "609-citation-advanced.yaml",
+            topic: "citation advanced",
+            goal: "ja.goal.b2.academic-writing",
+          }
+    - block: "610-619"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "610-thesis-defense.yaml",
+            topic: "thesis defense",
+            goal: "ja.goal.b2.academic-writing",
+          }
+        - {
+            file: "611-publication-basics.yaml",
+            topic: "publication basics",
+            goal: "ja.goal.b2.academic-writing",
+          }
+        - {
+            file: "612-business-letters.yaml",
+            topic: "business letters",
+            goal: "ja.goal.b2.formal-correspondence",
+          }
+        - {
+            file: "613-formal-email-register.yaml",
+            topic: "formal email register",
+            goal: "ja.goal.b2.formal-correspondence",
+          }
+        - {
+            file: "614-official-notices.yaml",
+            topic: "official notices",
+            goal: "ja.goal.b2.formal-correspondence",
+          }
+        - {
+            file: "615-application-letters.yaml",
+            topic: "application letters",
+            goal: "ja.goal.b2.formal-correspondence",
+          }
+        - {
+            file: "616-invitation-formal.yaml",
+            topic: "invitation formal",
+            goal: "ja.goal.b2.formal-correspondence",
+          }
+        - {
+            file: "617-apology-formal.yaml",
+            topic: "apology formal",
+            goal: "ja.goal.b2.formal-correspondence",
+          }
+        - {
+            file: "618-complaint-formal.yaml",
+            topic: "complaint formal",
+            goal: "ja.goal.b2.formal-correspondence",
+          }
+        - {
+            file: "619-negotiation-writing.yaml",
+            topic: "negotiation writing",
+            goal: "ja.goal.b2.formal-correspondence",
+          }
+    - block: "620-629"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "620-meeting-minutes.yaml",
+            topic: "meeting minutes",
+            goal: "ja.goal.b2.formal-correspondence",
+          }
+        - {
+            file: "621-contract-terms.yaml",
+            topic: "contract terms",
+            goal: "ja.goal.b2.formal-correspondence",
+          }
+        - {
+            file: "622-legal-correspondence.yaml",
+            topic: "legal correspondence",
+            goal: "ja.goal.b2.formal-correspondence",
+          }
+        - {
+            file: "623-diplomatic-style.yaml",
+            topic: "diplomatic style",
+            goal: "ja.goal.b2.formal-correspondence",
+          }
+        - {
+            file: "624-ceremony-speech.yaml",
+            topic: "ceremony speech",
+            goal: "ja.goal.b2.formal-correspondence",
+          }
+        - {
+            file: "625-public-announcements.yaml",
+            topic: "public announcements",
+            goal: "ja.goal.b2.formal-correspondence",
+          }
+        - {
+            file: "626-editorial-letters.yaml",
+            topic: "editorial letters",
+            goal: "ja.goal.b2.formal-correspondence",
+          }
+        - {
+            file: "627-correspondence-portfolio.yaml",
+            topic: "correspondence portfolio",
+            goal: "ja.goal.b2.formal-correspondence",
+          }
+        - {
+            file: "628-visual-analysis.yaml",
+            topic: "visual analysis",
+            goal: "ja.goal.b2.art-design",
+          }
+        - {
+            file: "629-design-principles.yaml",
+            topic: "design principles",
+            goal: "ja.goal.b2.art-design",
+          }
+    - block: "630-639"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "630-traditional-arts.yaml",
+            topic: "traditional arts",
+            goal: "ja.goal.b2.art-design",
+          }
+        - { file: "631-modern-art.yaml", topic: "modern art", goal: "ja.goal.b2.art-design" }
+        - {
+            file: "632-architecture-talk.yaml",
+            topic: "architecture talk",
+            goal: "ja.goal.b2.art-design",
+          }
+        - { file: "633-urban-design.yaml", topic: "urban design", goal: "ja.goal.b2.art-design" }
+        - {
+            file: "634-craft-aesthetics.yaml",
+            topic: "craft aesthetics",
+            goal: "ja.goal.b2.art-design",
+          }
+        - {
+            file: "635-photography-art.yaml",
+            topic: "photography art",
+            goal: "ja.goal.b2.art-design",
+          }
+        - {
+            file: "636-music-analysis.yaml",
+            topic: "music analysis",
+            goal: "ja.goal.b2.art-design",
+          }
+        - { file: "637-art-market.yaml", topic: "art market", goal: "ja.goal.b2.art-design" }
+        - { file: "638-public-art.yaml", topic: "public art", goal: "ja.goal.b2.art-design" }
+        - { file: "639-design-ethics.yaml", topic: "design ethics", goal: "ja.goal.b2.art-design" }
+    - block: "640-649"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "640-art-and-culture.yaml",
+            topic: "art and culture",
+            goal: "ja.goal.b2.art-design",
+          }
+        - {
+            file: "641-exhibition-writing.yaml",
+            topic: "exhibition writing",
+            goal: "ja.goal.b2.art-design",
+          }
+        - {
+            file: "642-aesthetics-essay.yaml",
+            topic: "aesthetics essay",
+            goal: "ja.goal.b2.art-design",
+          }
+        - {
+            file: "643-discourse-analysis.yaml",
+            topic: "discourse analysis",
+            goal: "ja.goal.b2.media-critique",
+          }
+        - {
+            file: "644-framing-theory.yaml",
+            topic: "framing theory",
+            goal: "ja.goal.b2.media-critique",
+          }
+        - {
+            file: "645-propaganda-history.yaml",
+            topic: "propaganda history",
+            goal: "ja.goal.b2.media-critique",
+          }
+        - {
+            file: "646-news-production.yaml",
+            topic: "news production",
+            goal: "ja.goal.b2.media-critique",
+          }
+        - {
+            file: "647-platform-effects.yaml",
+            topic: "platform effects",
+            goal: "ja.goal.b2.media-critique",
+          }
+        - {
+            file: "648-audience-studies.yaml",
+            topic: "audience studies",
+            goal: "ja.goal.b2.media-critique",
+          }
+        - {
+            file: "649-journalism-standards.yaml",
+            topic: "journalism standards",
+            goal: "ja.goal.b2.media-critique",
+          }
+    - block: "650-659"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "650-visual-rhetoric.yaml",
+            topic: "visual rhetoric",
+            goal: "ja.goal.b2.media-critique",
+          }
+        - {
+            file: "651-advertising-critique.yaml",
+            topic: "advertising critique",
+            goal: "ja.goal.b2.media-critique",
+          }
+        - {
+            file: "652-public-relations.yaml",
+            topic: "public relations",
+            goal: "ja.goal.b2.media-critique",
+          }
+        - {
+            file: "653-media-economics.yaml",
+            topic: "media economics",
+            goal: "ja.goal.b2.media-critique",
+          }
+        - {
+            file: "654-digital-discourse.yaml",
+            topic: "digital discourse",
+            goal: "ja.goal.b2.media-critique",
+          }
+        - {
+            file: "655-cancel-culture.yaml",
+            topic: "cancel culture",
+            goal: "ja.goal.b2.media-critique",
+          }
+        - {
+            file: "656-press-freedom.yaml",
+            topic: "press freedom",
+            goal: "ja.goal.b2.media-critique",
+          }
+        - {
+            file: "657-critique-essay.yaml",
+            topic: "critique essay",
+            goal: "ja.goal.b2.media-critique",
+          }
+        - {
+            file: "658-cognition-basics.yaml",
+            topic: "cognition basics",
+            goal: "ja.goal.b2.psychology-mind",
+          }
+        - {
+            file: "659-memory-systems.yaml",
+            topic: "memory systems",
+            goal: "ja.goal.b2.psychology-mind",
+          }
+    - block: "660-669"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "660-motivation-theory.yaml",
+            topic: "motivation theory",
+            goal: "ja.goal.b2.psychology-mind",
+          }
+        - {
+            file: "661-personality-psychology.yaml",
+            topic: "personality psychology",
+            goal: "ja.goal.b2.psychology-mind",
+          }
+        - {
+            file: "662-development-stages.yaml",
+            topic: "development stages",
+            goal: "ja.goal.b2.psychology-mind",
+          }
+        - {
+            file: "663-social-psychology.yaml",
+            topic: "social psychology",
+            goal: "ja.goal.b2.psychology-mind",
+          }
+        - {
+            file: "664-emotion-theory.yaml",
+            topic: "emotion theory",
+            goal: "ja.goal.b2.psychology-mind",
+          }
+        - {
+            file: "665-stress-science.yaml",
+            topic: "stress science",
+            goal: "ja.goal.b2.psychology-mind",
+          }
+        - {
+            file: "666-wellbeing-research.yaml",
+            topic: "wellbeing research",
+            goal: "ja.goal.b2.psychology-mind",
+          }
+        - {
+            file: "667-behavior-change.yaml",
+            topic: "behavior change",
+            goal: "ja.goal.b2.psychology-mind",
+          }
+        - {
+            file: "668-perception-study.yaml",
+            topic: "perception study",
+            goal: "ja.goal.b2.psychology-mind",
+          }
+        - {
+            file: "669-language-and-mind.yaml",
+            topic: "language and mind",
+            goal: "ja.goal.b2.psychology-mind",
+          }
+    - block: "670-679"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "670-decision-science.yaml",
+            topic: "decision science",
+            goal: "ja.goal.b2.psychology-mind",
+          }
+        - {
+            file: "671-mental-health-policy.yaml",
+            topic: "mental health policy",
+            goal: "ja.goal.b2.psychology-mind",
+          }
+        - {
+            file: "672-psychology-essay.yaml",
+            topic: "psychology essay",
+            goal: "ja.goal.b2.psychology-mind",
+          }
+        - {
+            file: "673-public-health.yaml",
+            topic: "public health",
+            goal: "ja.goal.b2.medicine-society",
+          }
+        - {
+            file: "674-epidemiology-basics.yaml",
+            topic: "epidemiology basics",
+            goal: "ja.goal.b2.medicine-society",
+          }
+        - {
+            file: "675-healthcare-systems.yaml",
+            topic: "healthcare systems",
+            goal: "ja.goal.b2.medicine-society",
+          }
+        - {
+            file: "676-preventive-medicine.yaml",
+            topic: "preventive medicine",
+            goal: "ja.goal.b2.medicine-society",
+          }
+        - {
+            file: "677-patient-communication.yaml",
+            topic: "patient communication",
+            goal: "ja.goal.b2.medicine-society",
+          }
+        - {
+            file: "678-medical-research.yaml",
+            topic: "medical research",
+            goal: "ja.goal.b2.medicine-society",
+          }
+        - {
+            file: "679-pharma-debate.yaml",
+            topic: "pharma debate",
+            goal: "ja.goal.b2.medicine-society",
+          }
+    - block: "680-689"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "680-mental-health-services.yaml",
+            topic: "mental health services",
+            goal: "ja.goal.b2.medicine-society",
+          }
+        - {
+            file: "681-aging-medicine.yaml",
+            topic: "aging medicine",
+            goal: "ja.goal.b2.medicine-society",
+          }
+        - {
+            file: "682-nutrition-science.yaml",
+            topic: "nutrition science",
+            goal: "ja.goal.b2.medicine-society",
+          }
+        - {
+            file: "683-health-inequality.yaml",
+            topic: "health inequality",
+            goal: "ja.goal.b2.medicine-society",
+          }
+        - {
+            file: "684-digital-medicine.yaml",
+            topic: "digital medicine",
+            goal: "ja.goal.b2.medicine-society",
+          }
+        - {
+            file: "685-medical-ethics.yaml",
+            topic: "medical ethics",
+            goal: "ja.goal.b2.medicine-society",
+          }
+        - {
+            file: "686-pandemic-lessons.yaml",
+            topic: "pandemic lessons",
+            goal: "ja.goal.b2.medicine-society",
+          }
+        - {
+            file: "687-health-policy-essay.yaml",
+            topic: "health policy essay",
+            goal: "ja.goal.b2.medicine-society",
+          }
+        - { file: "688-city-planning.yaml", topic: "city planning", goal: "ja.goal.b2.urban-life" }
+        - {
+            file: "689-transport-systems.yaml",
+            topic: "transport systems",
+            goal: "ja.goal.b2.urban-life",
+          }
+    - block: "690-699"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "690-housing-policy.yaml",
+            topic: "housing policy",
+            goal: "ja.goal.b2.urban-life",
+          }
+        - { file: "691-public-spaces.yaml", topic: "public spaces", goal: "ja.goal.b2.urban-life" }
+        - { file: "692-urban-economy.yaml", topic: "urban economy", goal: "ja.goal.b2.urban-life" }
+        - { file: "693-smart-cities.yaml", topic: "smart cities", goal: "ja.goal.b2.urban-life" }
+        - { file: "694-green-urban.yaml", topic: "green urban", goal: "ja.goal.b2.urban-life" }
+        - {
+            file: "695-urban-community.yaml",
+            topic: "urban community",
+            goal: "ja.goal.b2.urban-life",
+          }
+        - { file: "696-city-history.yaml", topic: "city history", goal: "ja.goal.b2.urban-life" }
+        - {
+            file: "697-urban-environment.yaml",
+            topic: "urban environment",
+            goal: "ja.goal.b2.urban-life",
+          }
+        - {
+            file: "698-mobility-debate.yaml",
+            topic: "mobility debate",
+            goal: "ja.goal.b2.urban-life",
+          }
+        - { file: "699-public-safety.yaml", topic: "public safety", goal: "ja.goal.b2.urban-life" }
+    - block: "700-709"
+      new_item_budget: 6
+      lessons:
+        - { file: "700-city-culture.yaml", topic: "city culture", goal: "ja.goal.b2.urban-life" }
+        - {
+            file: "701-rural-urban-link.yaml",
+            topic: "rural urban link",
+            goal: "ja.goal.b2.urban-life",
+          }
+        - { file: "702-urban-essay.yaml", topic: "urban essay", goal: "ja.goal.b2.urban-life" }
+        - {
+            file: "703-climate-policy.yaml",
+            topic: "climate policy",
+            goal: "ja.goal.b2.environment-policy",
+          }
+        - {
+            file: "704-energy-transition.yaml",
+            topic: "energy transition",
+            goal: "ja.goal.b2.environment-policy",
+          }
+        - {
+            file: "705-carbon-economics.yaml",
+            topic: "carbon economics",
+            goal: "ja.goal.b2.environment-policy",
+          }
+        - {
+            file: "706-biodiversity.yaml",
+            topic: "biodiversity",
+            goal: "ja.goal.b2.environment-policy",
+          }
+        - {
+            file: "707-circular-economy.yaml",
+            topic: "circular economy",
+            goal: "ja.goal.b2.environment-policy",
+          }
+        - {
+            file: "708-environmental-law.yaml",
+            topic: "environmental law",
+            goal: "ja.goal.b2.environment-policy",
+          }
+        - {
+            file: "709-activism-movements.yaml",
+            topic: "activism movements",
+            goal: "ja.goal.b2.environment-policy",
+          }
+    - block: "710-719"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "710-corporate-responsibility.yaml",
+            topic: "corporate responsibility",
+            goal: "ja.goal.b2.environment-policy",
+          }
+        - {
+            file: "711-international-agreements.yaml",
+            topic: "international agreements",
+            goal: "ja.goal.b2.environment-policy",
+          }
+        - {
+            file: "712-local-environment.yaml",
+            topic: "local environment",
+            goal: "ja.goal.b2.environment-policy",
+          }
+        - {
+            file: "713-environmental-justice.yaml",
+            topic: "environmental justice",
+            goal: "ja.goal.b2.environment-policy",
+          }
+        - {
+            file: "714-risk-and-precaution.yaml",
+            topic: "risk and precaution",
+            goal: "ja.goal.b2.environment-policy",
+          }
+        - {
+            file: "715-sustainable-business.yaml",
+            topic: "sustainable business",
+            goal: "ja.goal.b2.environment-policy",
+          }
+        - {
+            file: "716-consumption-debate.yaml",
+            topic: "consumption debate",
+            goal: "ja.goal.b2.environment-policy",
+          }
+        - {
+            file: "717-policy-essay.yaml",
+            topic: "policy essay",
+            goal: "ja.goal.b2.environment-policy",
+          }
+        - {
+            file: "718-language-structure.yaml",
+            topic: "language structure",
+            goal: "ja.goal.b2.language-linguistics",
+          }
+        - {
+            file: "719-sound-systems.yaml",
+            topic: "sound systems",
+            goal: "ja.goal.b2.language-linguistics",
+          }
+    - block: "720-729"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "720-word-formation.yaml",
+            topic: "word formation",
+            goal: "ja.goal.b2.language-linguistics",
+          }
+        - {
+            file: "721-sentence-variation.yaml",
+            topic: "sentence variation",
+            goal: "ja.goal.b2.language-linguistics",
+          }
+        - {
+            file: "722-meaning-context.yaml",
+            topic: "meaning context",
+            goal: "ja.goal.b2.language-linguistics",
+          }
+        - {
+            file: "723-pragmatics-politeness.yaml",
+            topic: "pragmatics politeness",
+            goal: "ja.goal.b2.language-linguistics",
+          }
+        - {
+            file: "724-dialect-variation.yaml",
+            topic: "dialect variation",
+            goal: "ja.goal.b2.language-linguistics",
+          }
+        - {
+            file: "725-language-change.yaml",
+            topic: "language change",
+            goal: "ja.goal.b2.language-linguistics",
+          }
+        - {
+            file: "726-writing-systems.yaml",
+            topic: "writing systems",
+            goal: "ja.goal.b2.language-linguistics",
+          }
+        - {
+            file: "727-language-acquisition.yaml",
+            topic: "language acquisition",
+            goal: "ja.goal.b2.language-linguistics",
+          }
+        - {
+            file: "728-bilingualism.yaml",
+            topic: "bilingualism",
+            goal: "ja.goal.b2.language-linguistics",
+          }
+        - {
+            file: "729-translation-theory.yaml",
+            topic: "translation theory",
+            goal: "ja.goal.b2.language-linguistics",
+          }
+    - block: "730-739"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "730-corpus-linguistics.yaml",
+            topic: "corpus linguistics",
+            goal: "ja.goal.b2.language-linguistics",
+          }
+        - {
+            file: "731-register-analysis.yaml",
+            topic: "register analysis",
+            goal: "ja.goal.b2.language-linguistics",
+          }
+        - {
+            file: "732-linguistics-essay.yaml",
+            topic: "linguistics essay",
+            goal: "ja.goal.b2.language-linguistics",
+          }
+        - {
+            file: "733-identity-construction.yaml",
+            topic: "identity construction",
+            goal: "ja.goal.b2.culture-identity",
+          }
+        - {
+            file: "734-cultural-belonging.yaml",
+            topic: "cultural belonging",
+            goal: "ja.goal.b2.culture-identity",
+          }
+        - {
+            file: "735-heritage-debate.yaml",
+            topic: "heritage debate",
+            goal: "ja.goal.b2.culture-identity",
+          }
+        - {
+            file: "736-multiculturalism.yaml",
+            topic: "multiculturalism",
+            goal: "ja.goal.b2.culture-identity",
+          }
+        - {
+            file: "737-subculture-study.yaml",
+            topic: "subculture study",
+            goal: "ja.goal.b2.culture-identity",
+          }
+        - {
+            file: "738-pop-culture.yaml",
+            topic: "pop culture",
+            goal: "ja.goal.b2.culture-identity",
+          }
+        - {
+            file: "739-tradition-invention.yaml",
+            topic: "tradition invention",
+            goal: "ja.goal.b2.culture-identity",
+          }
+    - block: "740-749"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "740-language-identity.yaml",
+            topic: "language identity",
+            goal: "ja.goal.b2.culture-identity",
+          }
+        - {
+            file: "741-migration-identity.yaml",
+            topic: "migration identity",
+            goal: "ja.goal.b2.culture-identity",
+          }
+        - {
+            file: "742-generational-identity.yaml",
+            topic: "generational identity",
+            goal: "ja.goal.b2.culture-identity",
+          }
+        - {
+            file: "743-national-narrative.yaml",
+            topic: "national narrative",
+            goal: "ja.goal.b2.culture-identity",
+          }
+        - {
+            file: "744-cultural-appropriation.yaml",
+            topic: "cultural appropriation",
+            goal: "ja.goal.b2.culture-identity",
+          }
+        - {
+            file: "745-hybrid-cultures.yaml",
+            topic: "hybrid cultures",
+            goal: "ja.goal.b2.culture-identity",
+          }
+        - {
+            file: "746-memory-politics.yaml",
+            topic: "memory politics",
+            goal: "ja.goal.b2.culture-identity",
+          }
+        - {
+            file: "747-identity-essay.yaml",
+            topic: "identity essay",
+            goal: "ja.goal.b2.culture-identity",
+          }
+        - {
+            file: "748-concept-definition.yaml",
+            topic: "concept definition",
+            goal: "ja.goal.b2.abstract-debate",
+          }
+        - {
+            file: "749-assumption-hunting.yaml",
+            topic: "assumption hunting",
+            goal: "ja.goal.b2.abstract-debate",
+          }
+    - block: "750-759"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "750-analogy-critique.yaml",
+            topic: "analogy critique",
+            goal: "ja.goal.b2.abstract-debate",
+          }
+        - {
+            file: "751-evidence-evaluation.yaml",
+            topic: "evidence evaluation",
+            goal: "ja.goal.b2.abstract-debate",
+          }
+        - {
+            file: "752-causation-correlation.yaml",
+            topic: "causation correlation",
+            goal: "ja.goal.b2.abstract-debate",
+          }
+        - {
+            file: "753-generalization-limits.yaml",
+            topic: "generalization limits",
+            goal: "ja.goal.b2.abstract-debate",
+          }
+        - {
+            file: "754-value-conflict.yaml",
+            topic: "value conflict",
+            goal: "ja.goal.b2.abstract-debate",
+          }
+        - {
+            file: "755-stakeholder-analysis.yaml",
+            topic: "stakeholder analysis",
+            goal: "ja.goal.b2.abstract-debate",
+          }
+        - {
+            file: "756-scenario-reasoning.yaml",
+            topic: "scenario reasoning",
+            goal: "ja.goal.b2.abstract-debate",
+          }
+        - {
+            file: "757-abstraction-ladders.yaml",
+            topic: "abstraction ladders",
+            goal: "ja.goal.b2.abstract-debate",
+          }
+        - {
+            file: "758-counterfactual-thinking.yaml",
+            topic: "counterfactual thinking",
+            goal: "ja.goal.b2.abstract-debate",
+          }
+        - {
+            file: "759-definition-debate.yaml",
+            topic: "definition debate",
+            goal: "ja.goal.b2.abstract-debate",
+          }
+    - block: "760-769"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "760-consistency-checks.yaml",
+            topic: "consistency checks",
+            goal: "ja.goal.b2.abstract-debate",
+          }
+        - {
+            file: "761-steel-manning.yaml",
+            topic: "steel manning",
+            goal: "ja.goal.b2.abstract-debate",
+          }
+        - {
+            file: "762-synthesis-essay.yaml",
+            topic: "synthesis essay",
+            goal: "ja.goal.b2.abstract-debate",
+          }
+        - {
+            file: "763-formal-versus-casual.yaml",
+            topic: "formal versus casual",
+            goal: "ja.goal.b2.nuance-register",
+          }
+        - {
+            file: "764-written-style-variation.yaml",
+            topic: "written style variation",
+            goal: "ja.goal.b2.nuance-register",
+          }
+        - {
+            file: "765-politeness-scales.yaml",
+            topic: "politeness scales",
+            goal: "ja.goal.b2.nuance-register",
+          }
+        - {
+            file: "766-indirect-expression.yaml",
+            topic: "indirect expression",
+            goal: "ja.goal.b2.nuance-register",
+          }
+        - { file: "767-hedge-words.yaml", topic: "hedge words", goal: "ja.goal.b2.nuance-register" }
+        - {
+            file: "768-emphasis-devices.yaml",
+            topic: "emphasis devices",
+            goal: "ja.goal.b2.nuance-register",
+          }
+        - {
+            file: "769-connotation-awareness.yaml",
+            topic: "connotation awareness",
+            goal: "ja.goal.b2.nuance-register",
+          }
+    - block: "770-779"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "770-dialect-register.yaml",
+            topic: "dialect register",
+            goal: "ja.goal.b2.nuance-register",
+          }
+        - {
+            file: "771-age-register.yaml",
+            topic: "age register",
+            goal: "ja.goal.b2.nuance-register",
+          }
+        - {
+            file: "772-gendered-language.yaml",
+            topic: "gendered language",
+            goal: "ja.goal.b2.nuance-register",
+          }
+        - {
+            file: "773-business-register.yaml",
+            topic: "business register",
+            goal: "ja.goal.b2.nuance-register",
+          }
+        - {
+            file: "774-literary-register.yaml",
+            topic: "literary register",
+            goal: "ja.goal.b2.nuance-register",
+          }
+        - {
+            file: "775-humor-register.yaml",
+            topic: "humor register",
+            goal: "ja.goal.b2.nuance-register",
+          }
+        - {
+            file: "776-style-imitation.yaml",
+            topic: "style imitation",
+            goal: "ja.goal.b2.nuance-register",
+          }
+        - {
+            file: "777-register-portfolio.yaml",
+            topic: "register portfolio",
+            goal: "ja.goal.b2.nuance-register",
+          }
+        - {
+            file: "778-pun-mechanics.yaml",
+            topic: "pun mechanics",
+            goal: "ja.goal.b2.humor-wordplay",
+          }
+        - {
+            file: "779-manzai-comedy.yaml",
+            topic: "manzai comedy",
+            goal: "ja.goal.b2.humor-wordplay",
+          }
+    - block: "780-789"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "780-comedy-timing.yaml",
+            topic: "comedy timing",
+            goal: "ja.goal.b2.humor-wordplay",
+          }
+        - {
+            file: "781-satire-reading.yaml",
+            topic: "satire reading",
+            goal: "ja.goal.b2.humor-wordplay",
+          }
+        - {
+            file: "782-irony-detection.yaml",
+            topic: "irony detection",
+            goal: "ja.goal.b2.humor-wordplay",
+          }
+        - {
+            file: "783-wordplay-creation.yaml",
+            topic: "wordplay creation",
+            goal: "ja.goal.b2.humor-wordplay",
+          }
+        - { file: "784-joke-ethics.yaml", topic: "joke ethics", goal: "ja.goal.b2.humor-wordplay" }
+        - { file: "785-manga-humor.yaml", topic: "manga humor", goal: "ja.goal.b2.humor-wordplay" }
+        - {
+            file: "786-comic-reading.yaml",
+            topic: "comic reading",
+            goal: "ja.goal.b2.humor-wordplay",
+          }
+        - {
+            file: "787-humor-translation.yaml",
+            topic: "humor translation",
+            goal: "ja.goal.b2.humor-wordplay",
+          }
+        - {
+            file: "788-witty-replies.yaml",
+            topic: "witty replies",
+            goal: "ja.goal.b2.humor-wordplay",
+          }
+        - {
+            file: "789-parody-writing.yaml",
+            topic: "parody writing",
+            goal: "ja.goal.b2.humor-wordplay",
+          }
+    - block: "790-799"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "790-absurd-humor.yaml",
+            topic: "absurd humor",
+            goal: "ja.goal.b2.humor-wordplay",
+          }
+        - {
+            file: "791-self-deprecating.yaml",
+            topic: "self deprecating",
+            goal: "ja.goal.b2.humor-wordplay",
+          }
+        - { file: "792-humor-essay.yaml", topic: "humor essay", goal: "ja.goal.b2.humor-wordplay" }
+        - {
+            file: "793-long-term-commitment.yaml",
+            topic: "long term commitment",
+            goal: "ja.goal.b2.relationships-deep",
+          }
+        - {
+            file: "794-family-conflict.yaml",
+            topic: "family conflict",
+            goal: "ja.goal.b2.relationships-deep",
+          }
+        - {
+            file: "795-caregiving-talk.yaml",
+            topic: "caregiving talk",
+            goal: "ja.goal.b2.relationships-deep",
+          }
+        - {
+            file: "796-friendship-maintenance.yaml",
+            topic: "friendship maintenance",
+            goal: "ja.goal.b2.relationships-deep",
+          }
+        - {
+            file: "797-mentor-relationship.yaml",
+            topic: "mentor relationship",
+            goal: "ja.goal.b2.relationships-deep",
+          }
+        - {
+            file: "798-conflict-mediation.yaml",
+            topic: "conflict mediation",
+            goal: "ja.goal.b2.relationships-deep",
+          }
+        - {
+            file: "799-boundary-setting.yaml",
+            topic: "boundary setting",
+            goal: "ja.goal.b2.relationships-deep",
+          }
+    - block: "800-807"
+      new_item_budget: 6
+      lessons:
+        - {
+            file: "800-vulnerability-trust.yaml",
+            topic: "vulnerability trust",
+            goal: "ja.goal.b2.relationships-deep",
+          }
+        - {
+            file: "801-forgiveness-process.yaml",
+            topic: "forgiveness process",
+            goal: "ja.goal.b2.relationships-deep",
+          }
+        - {
+            file: "802-relationship-transitions.yaml",
+            topic: "relationship transitions",
+            goal: "ja.goal.b2.relationships-deep",
+          }
+        - {
+            file: "803-loss-and-grief.yaml",
+            topic: "loss and grief",
+            goal: "ja.goal.b2.relationships-deep",
+          }
+        - {
+            file: "804-community-belonging.yaml",
+            topic: "community belonging",
+            goal: "ja.goal.b2.relationships-deep",
+          }
+        - {
+            file: "805-cross-cultural-friendship.yaml",
+            topic: "cross cultural friendship",
+            goal: "ja.goal.b2.relationships-deep",
+          }
+        - {
+            file: "806-relationship-reflection.yaml",
+            topic: "relationship reflection",
+            goal: "ja.goal.b2.relationships-deep",
+          }
+        - {
+            file: "807-wisdom-essay.yaml",
+            topic: "wisdom essay",
+            goal: "ja.goal.b2.relationships-deep",
+          }
+
+lexicon:
+  A1:
+    budget: 289
+    shard_additions:
+      - "lexicon/transport.jsonl"
+      - "lexicon/health.jsonl"
+      - "lexicon/leisure.jsonl"
+      - "lexicon/home.jsonl"
+      - "lexicon/work.jsonl"
+      - "lexicon/narrative.jsonl"
+  A2:
+    budget: 789
+    shard_additions:
+      - "lexicon/services.jsonl"
+      - "lexicon/food-extended.jsonl"
+      - "lexicon/shopping.jsonl"
+      - "lexicon/health-extended.jsonl"
+      - "lexicon/communication.jsonl"
+      - "lexicon/seasons.jsonl"
+      - "lexicon/entertainment.jsonl"
+      - "lexicon/sports.jsonl"
+      - "lexicon/social.jsonl"
+      - "lexicon/admin.jsonl"
+  B1:
+    budget: 1789
+    shard_additions:
+      - "lexicon/work-professional.jsonl"
+      - "lexicon/education-academic.jsonl"
+      - "lexicon/media-news.jsonl"
+      - "lexicon/technology.jsonl"
+      - "lexicon/culture-tradition.jsonl"
+      - "lexicon/society-rules.jsonl"
+      - "lexicon/environment.jsonl"
+      - "lexicon/travel-extended.jsonl"
+      - "lexicon/emotions-personality.jsonl"
+      - "lexicon/advice-opinion.jsonl"
+      - "lexicon/comparison-debate.jsonl"
+      - "lexicon/storytelling.jsonl"
+      - "lexicon/health-wellness.jsonl"
+  B2:
+    budget: 3789
+    shard_additions:
+      - "lexicon/politics-governance.jsonl"
+      - "lexicon/economics-work.jsonl"
+      - "lexicon/law-justice.jsonl"
+      - "lexicon/philosophy-ethics.jsonl"
+      - "lexicon/literature-study.jsonl"
+      - "lexicon/film-analysis.jsonl"
+      - "lexicon/history-critical.jsonl"
+      - "lexicon/society-change.jsonl"
+      - "lexicon/science-tech-ethics.jsonl"
+      - "lexicon/education-debate.jsonl"
+      - "lexicon/global-issues.jsonl"
+      - "lexicon/academic-writing.jsonl"
+      - "lexicon/formal-correspondence.jsonl"
+      - "lexicon/art-design.jsonl"
+      - "lexicon/media-critique.jsonl"
+      - "lexicon/psychology-mind.jsonl"
+      - "lexicon/medicine-society.jsonl"
+      - "lexicon/urban-life.jsonl"
+      - "lexicon/environment-policy.jsonl"
+      - "lexicon/language-linguistics.jsonl"
+      - "lexicon/culture-identity.jsonl"
+      - "lexicon/abstract-debate.jsonl"
+      - "lexicon/nuance-register.jsonl"
+      - "lexicon/humor-wordplay.jsonl"
+      - "lexicon/relationships-deep.jsonl"
+
+grammar:
+  A1:
+    new_concepts: 12
+    concepts:
+      - "ja.grammar.a1.te-form-connect"
+      - "ja.grammar.a1.te-form-sequence"
+      - "ja.grammar.a1.tai-desu"
+      - "ja.grammar.a1.ageru-kureru-morau"
+      - "ja.grammar.a1.relative-clauses"
+      - "ja.grammar.a1.past-negative"
+      - "ja.grammar.a1.na-adjectives-attributive"
+      - "ja.grammar.a1.counters-general"
+      - "ja.grammar.a1.time-expressions-expansion"
+      - "ja.grammar.a1.destination-with-ni"
+      - "ja.grammar.a1.means-with-de"
+      - "ja.grammar.a1.experience-with-ta"
+  A2:
+    new_concepts: 15
+    concepts:
+      - "ja.grammar.a2.te-form-permission"
+      - "ja.grammar.a2.te-form-prohibition"
+      - "ja.grammar.a2.nakereba-naranai"
+      - "ja.grammar.a2.to-omou"
+      - "ja.grammar.a2.to-itta-koto"
+      - "ja.grammar.a2.koto-no-noun"
+      - "ja.grammar.a2.kanoukei-intro"
+      - "ja.grammar.a2.jouzu-heta-ni"
+      - "ja.grammar.a2.ba-conditional"
+      - "ja.grammar.a2.tara-conditional"
+      - "ja.grammar.a2.node-reason"
+      - "ja.grammar.a2.noni-contrast"
+      - "ja.grammar.a2.youni-versus-to"
+      - "ja.grammar.a2.you-ni-suru"
+      - "ja.grammar.a2.hajimeru-owaru"
+  B1:
+    new_concepts: 20
+    concepts:
+      - "ja.grammar.b1.ukemi-passive"
+      - "ja.grammar.b1.ukemi-indirect"
+      - "ja.grammar.b1.shieki-causative"
+      - "ja.grammar.b1.shieki-ukemi"
+      - "ja.grammar.b1.kanoukei-expansion"
+      - "ja.grammar.b1.kedo-keredo"
+      - "ja.grammar.b1.toba-conditional"
+      - "ja.grammar.b1.zu-ni-de"
+      - "ja.grammar.b1.azu-ni"
+      - "ja.grammar.b1.maeni-ato-de"
+      - "ja.grammar.b1.you-form-volitional"
+      - "ja.grammar.b1.te-iku-te-kuru"
+      - "ja.grammar.b1.susume-continuity"
+      - "ja.grammar.b1.ba-formal"
+      - "ja.grammar.b1.node-versus-kara"
+      - "ja.grammar.b1.to-iu-toka"
+      - "ja.grammar.b1.rashii-sou-youda"
+      - "ja.grammar.b1.dake-bakari-shika"
+      - "ja.grammar.b1.keigo-soncho-intro"
+      - "ja.grammar.b1.onaji-chigai"
+  B2:
+    new_concepts: 20
+    concepts:
+      - "ja.grammar.b2.keigo-kenjou"
+      - "ja.grammar.b2.keigo-soncho-complete"
+      - "ja.grammar.b2.keigo-bikago"
+      - "ja.grammar.b2.dearu-style"
+      - "ja.grammar.b2.ukemi-impersonal"
+      - "ja.grammar.b2.formal-conditional"
+      - "ja.grammar.b2.toshite"
+      - "ja.grammar.b2.ni-totte"
+      - "ja.grammar.b2.ni-yoru-to"
+      - "ja.grammar.b2.wo-motte"
+      - "ja.grammar.b2.ni-kanshite"
+      - "ja.grammar.b2.wo-chushin-ni"
+      - "ja.grammar.b2.ni-hikibaku"
+      - "ja.grammar.b2.wa-ga-contrast"
+      - "ja.grammar.b2.even-so"
+      - "ja.grammar.b2.sara-ni"
+      - "ja.grammar.b2.tabi-ni"
+      - "ja.grammar.b2.sae-ba"
+      - "ja.grammar.b2.namaide-shinai"
+      - "ja.grammar.b2.bakari-ka-wa"
+
+sentences:
+  band_budgets:
+    A1: { new_records: 40 }
+    A2: { new_records: 80 }
+    B1: { new_records: 150 }
+    B2: { new_records: 300 }
+
+orthography:
+  scripts:
+    - { id: "ja.orth.hiragana", total_symbol_records: 101, status: "delivered" }
+    - { id: "ja.orth.katakana", total_symbol_records: 46, status: "delivered" }
+
+notes:
+  - "Extension plan: units 000-061 already delivered; new numbering starts at 062."
+  - "Capacity is exact per band (units x 6 >= new words + new grammar + new sentences); every unit stays at 5 lex + 1 grammar-or-sentence."
+  - "All content remains draft pending qualified human review."

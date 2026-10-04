@@ -318,3 +318,22 @@ kept. The recovered record is sound: «четыре/восемь/девять» 
 spelling is exactly the on-ramp number trap. On-ramp band done: 6
 goals, 20 units, 67 symbols, 50 lex, 7 sentences, 3 grammar, 12
 assessments — all gates green.
+
+## Takeover: agent authors the remaining bands (2026-10-04)
+
+Owner directive: after the model's Phase 2 batch, the agent finishes
+both kits (overnight-capable). Staged: `TAKEOVER_PLAN.md` (protocol +
+definition of done), `BATCH_AUTHOR_GUIDE.md` (per-batch contract),
+`PROGRESS.json` (resumable state — any session resumes from it).
+Subagent delegation is unavailable in this environment (no model
+configured for task agents), so batches are authored inline.
+
+ja-JP: baseline re-scored **7/7** (`results/ja-JP-draft`). Extension
+plan `plans/ja-fullkit-v1.yaml` authored and checker-approved: 54 new
+goals, 740 new units (062-807), 3,789 new words (→ ~4,000 cumulative),
+72 grammar concepts, 570 sentences; kanji staging +60/+150/+450/+1000
+per band; capacity exact in every band. Authoring starts at 062-071.
+
+ru-RU: A1 units 020-029 stay reserved for the external model's Phase
+2; agent authoring resumes at 030 once that batch lands (goals.yaml is
+single-writer).

@@ -8,11 +8,11 @@
     "notes": "units 020-029 reserved for external model Phase 2; if it never arrives, agent takes them over and records it here"
   },
   "ja-JP": {
-    "plan": null,
+    "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
     "bands_done": [],
     "units_next": "062",
     "last_score": "7/7 (2026-10-04, results/ja-JP-draft)",
-    "notes": "extend in place; CURRICULUM_PLAN not yet authored"
+    "notes": "extension plan authored by agent, checker OK (54 goals, 740 units, 3789 new words); authoring starts at 062-071 (A1 transport)"
   }
 }
