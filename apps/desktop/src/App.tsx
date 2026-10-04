@@ -18,6 +18,13 @@ import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./
 import { LanguagePanel, type CatalogEntry, type InstalledPack } from "./language";
 import { WritingPractice, type WritingTaskView } from "./writing";
 import { PracticeRunner, type PracticeTaskView } from "./practice";
+import {
+  ScenarioPanel,
+  type ScenarioOutcomeView,
+  type ScenarioStepResult,
+  type ScenarioSummaryView,
+  type ScenarioView,
+} from "./scenario";
 
 type Invoke = (cmd: string, args?: Record<string, unknown>) => Promise<unknown>;
 
@@ -77,7 +84,7 @@ function toB64(bytes: Uint8Array): string {
 export function App() {
   const [step, setStep] = useState<OnboardingStep>("welcome");
   const [route, setRoute] = useState<
-    "practice" | "progress" | "pronunciation" | "writing" | "language"
+    "practice" | "progress" | "pronunciation" | "writing" | "language" | "scenarios"
   >("practice");
   const [notice, setNotice] = useState<PrivacyNotice>({
     title: "Your data stays on this device",
@@ -125,6 +132,16 @@ export function App() {
   const [practiceCorrect, setPracticeCorrect] = useState(false);
   const [practiceCorrectChoice, setPracticeCorrectChoice] = useState("");
   const [practiceError, setPracticeError] = useState<string | null>(null);
+  const [practiceRevealed, setPracticeRevealed] = useState(false);
+  const [scenarioList, setScenarioList] = useState<ScenarioSummaryView[]>([]);
+  const [scenarioActive, setScenarioActive] = useState<ScenarioView | null>(null);
+  const [scenarioStep, setScenarioStep] = useState<ScenarioStepResult | null>(null);
+  const [scenarioOutcome, setScenarioOutcome] = useState<ScenarioOutcomeView | null>(null);
+  const [scenarioError, setScenarioError] = useState<string | null>(null);
+  const [practiceAudio, setPracticeAudio] = useState<{ wavB64: string; source: string } | null>(
+    null,
+  );
+  const [practiceAudioError, setPracticeAudioError] = useState<string | null>(null);
 
   // The sticky header hides content when the page is scrolled; reset the
   // scroll position whenever the onboarding step or main route changes.
@@ -334,16 +351,32 @@ export function App() {
     setPracticeError(null);
     setPracticeGraded(false);
     setPracticeCorrectChoice("");
+    setPracticeRevealed(false);
     setPracticeTarget({ contentId: item.content_id, modality: item.modality });
     if (inv && profileId) {
+      setPracticeAudio(null);
+      setPracticeAudioError(null);
       try {
-        setPracticeTask(
-          (await inv("practice_task", {
-            profileId,
-            contentId: item.content_id,
-            modality: item.modality,
-          })) as PracticeTaskView,
-        );
+        const task = (await inv("practice_task", {
+          profileId,
+          contentId: item.content_id,
+          modality: item.modality,
+          revealReading: false,
+        })) as PracticeTaskView;
+        setPracticeTask(task);
+        if (item.modality === "comprehension-listening") {
+          try {
+            const a = (await inv("listening_audio", {
+              profileId,
+              contentId: item.content_id,
+            })) as { wav_b64: string; source: string };
+            setPracticeAudio({ wavB64: a.wav_b64, source: a.source });
+          } catch (e) {
+            setPracticeAudioError(
+              `No audio is available for this item yet (${String(e)}). Try again after installing a speech model, or practice other activities.`,
+            );
+          }
+        }
       } catch (e) {
         setPracticeTask(null);
         setPracticeError(String(e));
@@ -361,6 +394,7 @@ export function App() {
         contentId: practiceTarget.contentId,
         modality: practiceTarget.modality,
         choiceIndex: index,
+        revealReading: practiceRevealed,
       })) as { correct: boolean; correct_choice: string };
       setPracticeCorrect(g.correct);
       setPracticeCorrectChoice(g.correct_choice);
@@ -373,11 +407,151 @@ export function App() {
   async function finishPractice() {
     setPracticeTarget(null);
     setPracticeTask(null);
+    setPracticeAudio(null);
+    setPracticeAudioError(null);
+    setPracticeRevealed(false);
     if (inv && profileId) {
       setPlan((await inv("practice_plan", { profileId, minutes: budget })) as SessionPlan);
     }
   }
 
+  function playPracticeAudio() {
+    if (!practiceAudio) return;
+    const bytes = Uint8Array.from(atob(practiceAudio.wavB64), (c) => c.charCodeAt(0));
+    playBlobUrl(URL.createObjectURL(new Blob([bytes], { type: "audio/wav" })));
+  }
+
+  // READ-001: revealing a faded scaffold refetches the task with the
+  // reading shown; the submit then records it as support (level 3).
+  async function revealPracticeReading() {
+    if (!practiceTarget || !inv || !profileId) return;
+    setPracticeRevealed(true);
+    try {
+      const task = (await inv("practice_task", {
+        profileId,
+        contentId: practiceTarget.contentId,
+        modality: practiceTarget.modality,
+        revealReading: true,
+      })) as PracticeTaskView;
+      setPracticeTask(task);
+    } catch (e) {
+      setPracticeError(String(e));
+    }
+  }
+
+  // K-01: scenario sessions. The dialogue graph, intents, recovery,
+  // ladder, and transfers all come from pack data via the native
+  // runtime; the UI only sends ids and intent labels.
+  async function openScenarios() {
+    setRoute("scenarios");
+    setScenarioActive(null);
+    setScenarioStep(null);
+    setScenarioOutcome(null);
+    setScenarioError(null);
+    if (inv && profileId) {
+      try {
+        setScenarioList((await inv("scenario_list", { profileId })) as ScenarioSummaryView[]);
+      } catch (e) {
+        setScenarioList([]);
+        setScenarioError(String(e));
+      }
+    }
+  }
+
+  async function startScenario(scenarioId: string) {
+    if (!inv || !profileId) return;
+    setScenarioError(null);
+    setScenarioOutcome(null);
+    setScenarioStep(null);
+    try {
+      setScenarioActive((await inv("scenario_start", { profileId, scenarioId })) as ScenarioView);
+    } catch (e) {
+      setScenarioError(String(e));
+    }
+  }
+
+  async function attemptScenario(intent: string) {
+    if (!inv || !profileId || !scenarioActive) return;
+    setScenarioError(null);
+    try {
+      const step = (await inv("scenario_attempt", {
+        profileId,
+        scenarioId: scenarioActive.scenario_id,
+        intent,
+      })) as ScenarioStepResult & { view: ScenarioView };
+      setScenarioStep({ result: step.result, recovery: step.recovery, completed: step.completed });
+      setScenarioActive(step.view);
+    } catch (e) {
+      setScenarioError(String(e));
+    }
+  }
+
+  async function supportScenario(level: number) {
+    if (!inv || !profileId || !scenarioActive) return;
+    setScenarioError(null);
+    try {
+      setScenarioActive(
+        (await inv("scenario_support", {
+          profileId,
+          scenarioId: scenarioActive.scenario_id,
+          level,
+        })) as ScenarioView,
+      );
+    } catch (e) {
+      setScenarioError(String(e));
+    }
+  }
+
+  async function recoveryScenario(recoveryId: string) {
+    if (!inv || !profileId || !scenarioActive) return;
+    setScenarioError(null);
+    setScenarioStep(null);
+    try {
+      setScenarioActive(
+        (await inv("scenario_recovery", {
+          profileId,
+          scenarioId: scenarioActive.scenario_id,
+          recoveryId,
+        })) as ScenarioView,
+      );
+    } catch (e) {
+      setScenarioError(String(e));
+    }
+  }
+
+  async function transferScenario(variantId: string) {
+    if (!inv || !profileId || !scenarioActive) return;
+    setScenarioError(null);
+    try {
+      setScenarioActive(
+        (await inv("scenario_transfer", {
+          profileId,
+          scenarioId: scenarioActive.scenario_id,
+          variantId,
+        })) as ScenarioView,
+      );
+    } catch (e) {
+      setScenarioError(String(e));
+    }
+  }
+
+  async function finishScenario() {
+    if (!inv || !profileId || !scenarioActive) return;
+    setScenarioError(null);
+    try {
+      setScenarioOutcome(
+        (await inv("scenario_finish", {
+          profileId,
+          scenarioId: scenarioActive.scenario_id,
+        })) as ScenarioOutcomeView,
+      );
+      setScenarioActive(null);
+      setScenarioStep(null);
+      setScenarioList((await inv("scenario_list", { profileId })) as ScenarioSummaryView[]);
+    } catch (e) {
+      setScenarioError(String(e));
+    }
+  }
   // SPEECH-005: guided pronunciation practice. The attempt blob lives in
   // memory only (docs/08); nothing audio is ever persisted.
   const DEMO_UNITS = {
@@ -577,6 +751,14 @@ export function App() {
           >
             Languages
           </button>
+          <button
+            type="button"
+            className="tab"
+            aria-current={route === "scenarios" ? "page" : undefined}
+            onClick={() => void openScenarios()}
+          >
+            Scenarios
+          </button>
         </nav>
       }
     >
@@ -639,6 +821,21 @@ export function App() {
           onInstallCatalog={(id) => void installCatalogPack(id)}
           onImport={(b64) => void importPack(b64)}
         />
+      ) : route === "scenarios" ? (
+        <ScenarioPanel
+          scenarios={scenarioList}
+          active={scenarioActive}
+          lastStep={scenarioStep}
+          outcome={scenarioOutcome}
+          error={scenarioError}
+          onStart={(id) => void startScenario(id)}
+          onAttempt={(intent) => void attemptScenario(intent)}
+          onSupport={(level) => void supportScenario(level)}
+          onRecovery={(id) => void recoveryScenario(id)}
+          onTransfer={(id) => void transferScenario(id)}
+          onFinish={() => void finishScenario()}
+          onBack={() => void openScenarios()}
+        />
       ) : practiceTarget && practiceTask ? (
         <>
           {practiceError && (
@@ -651,8 +848,15 @@ export function App() {
             graded={practiceGraded}
             correct={practiceCorrect}
             correctChoice={practiceCorrectChoice}
+            audioSource={
+              practiceAudio ? (practiceAudio.source as "licensed-recording" | "model-output") : null
+            }
+            audioError={practiceAudioError}
             onChoose={(i) => void choosePractice(i)}
             onNext={() => void finishPractice()}
+            onPlayAudio={playPracticeAudio}
+            revealed={practiceRevealed}
+            onReveal={() => void revealPracticeReading()}
           />
         </>
       ) : practiceTarget ? (

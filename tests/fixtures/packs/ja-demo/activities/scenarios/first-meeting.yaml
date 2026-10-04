@@ -1,0 +1,31 @@
+id: "ja.scenario.demo.first-meeting"
+goal_id: "ja.goal.demo.greet"
+title: "First meeting"
+situation: "Meeting someone for the first time"
+register: "neutral-polite"
+nodes:
+  - id: "ja.activity.demo.sc.open"
+    prompt: "Someone bows and greets you: こんにちは。Respond with a greeting."
+    expected_actions: ["greeting"]
+    next: ["ja.activity.demo.sc.ask-name"]
+    recovery:
+      - id: "ja.activity.demo.sc.repair-repeat"
+        prompt: "You were not understood. Ask them to repeat."
+        expected_actions: ["request-repetition"]
+        to: "ja.activity.demo.sc.open"
+  - id: "ja.activity.demo.sc.ask-name"
+    prompt: "They answer politely. Keep the conversation going: ask their name."
+    expected_actions: ["name-question"]
+    next: []
+support_ladder:
+  - support_level: 0
+    description: "No supports"
+  - support_level: 3
+    description: "Word bank with hiragana and romaji"
+  - support_level: 5
+    description: "Full modeled response you can repeat"
+transfer_variants_required: 1
+transfer_variants:
+  - id: "ja.scenario.demo.first-meeting.formal"
+    description: "Greet a senior colleague in a formal setting"
+    changed_variable: "register"

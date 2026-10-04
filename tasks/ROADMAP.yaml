@@ -771,6 +771,84 @@ tasks:
     blocked; guided alpha/beta practice may continue and changing this target requires an explicit owner scope
     decision.
   required_for_desktop_1_0: true
+- id: K-01
+  milestone: M6
+  priority: P1
+  title: Wire scenario runtime into the desktop app (learner-visible SCENARIO-001)
+  dependencies:
+  - SCENARIO-001
+  - UX-002
+  read_first:
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  - schemas/v0.2/scenario.schema.json
+  acceptance:
+  - Scenario list/start/attempt/finish reachable from the app; unlock follows goal hard prereqs via derived mastery, not activity count.
+  - Completion records one scored interaction evidence event per node; no scheduler rows for scenario nodes.
+  - Dialogue graph, recovery branches, support ladder, and transfer variants come only from pack data.
+- id: K-02
+  milestone: M6
+  priority: P1
+  title: Listening comprehension runner with media-first audio
+  dependencies:
+  - TTS-001
+  - UX-002
+  read_first:
+  - docs/05_SPEECH_SYSTEM.md
+  - docs/assessment/MASTERY_POLICY.yaml
+  acceptance:
+  - Listening tasks hide the transcript natively (visible transcript disqualifies the evidence).
+  - Audio resolves licensed pack media first, then local synthesis labeled as model output, then an honest error.
+  - Grading records comprehension-listening evidence and its own per-modality scheduler row.
+- id: K-03
+  milestone: M6
+  priority: P1
+  title: Wire READ-001 adaptive furigana/romaji reader into practice surfaces
+  dependencies:
+  - READ-001
+  - UX-002
+  read_first:
+  - docs/assessment/JA_ORTHOGRAPHY_POLICY.yaml
+  - crates/activity/src/reading.rs
+  acceptance:
+  - Furigana/romaji scaffolds follow per-item reading mastery and reader settings; fades at supported state.
+  - Reader gating is script-based, never locale-based; non-Japanese packs keep the plain reading aid.
+  - Revealing a faded scaffold records support level 3 with the concrete reveal action; revealing an already-shown scaffold records none.
+- id: K-04
+  milestone: M6
+  priority: P0
+  title: Kana/script-instruction activity (orthography units as pack data)
+  dependencies:
+  - READ-001
+  - JA-RES-003
+  - LEARN-002
+  read_first:
+  - docs/assessment/JA_ORTHOGRAPHY.yaml
+  - docs/assessment/JA_ORTHOGRAPHY_POLICY.yaml
+  acceptance:
+  - Orthography-unit content records (symbol, reading, romaji, mnemonic) are declarative pack data validated by the pack schema.
+  - Recognize/recall runner modes schedule like vocabulary and feed the kana-literacy-established setting at threshold.
+  - Engine stays language-neutral: any pack may ship orthography instruction for its script.
+- id: K-05
+  milestone: M6
+  priority: P1
+  title: Profile picker and resume (restart must not re-run onboarding)
+  dependencies:
+  - UX-001
+  read_first:
+  - docs/08_DATA_AND_PRIVACY.md
+  acceptance:
+  - Existing profiles are listed and resumable at launch; onboarding runs only for new profiles.
+- id: K-06
+  milestone: M6
+  priority: P1
+  title: On-ramp assessments and first-meeting scenario content for the ja-JP draft pack
+  dependencies:
+  - SCENARIO-001
+  - JA-A1-001
+  read_first:
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - Referenced on-ramp assessment goals exist in the pack and validate; scenario dialogue graph is populated from pack data.
 - id: GAME-001
   milestone: M7
   priority: P1

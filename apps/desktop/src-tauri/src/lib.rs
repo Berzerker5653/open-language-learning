@@ -9,6 +9,7 @@
 
 mod models;
 mod packs;
+mod scenarios;
 use lts_speech_api::{
     AcousticFeatureProvider, AlignmentProvider, PronunciationInterpreter, ProsodyProvider,
     SpeechSynthesisProvider,
@@ -341,6 +342,7 @@ struct LexEntry {
     id: String,
     surface: String,
     reading: Option<String>,
+    romaji: Option<String>,
     gloss: String,
 }
 
@@ -403,10 +405,20 @@ fn lexicon_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<LexE
         else {
             continue;
         };
+        let romaji = entry
+            .get("readings")
+            .and_then(|v| v.as_array())
+            .and_then(|a| {
+                a.iter()
+                    .find(|r| r.get("transliteration_system").is_some())
+                    .and_then(|r| r.get("text").and_then(|t| t.as_str()))
+                    .map(String::from)
+            });
         out.push(LexEntry {
             id: id.to_string(),
             surface: surface.to_string(),
             reading,
+            romaji,
             gloss: gloss.to_string(),
         });
     }
@@ -589,8 +601,12 @@ fn build_plan(
     {
         let mut planned: std::collections::HashSet<String> = progression
             .iter()
-            .map(|p| p.content_id.clone())
-            .chain(due_reviews.iter().map(|r| r.content_id.clone()))
+            .map(|p| format!("{}#{}", p.content_id, dimension_kebab(p.modality)))
+            .chain(
+                due_reviews
+                    .iter()
+                    .map(|r| format!("{}#{}", r.content_id, dimension_kebab(r.modality))),
+            )
             .collect();
         for (pack_id, _v) in store
             .selected_packs(profile_id)
@@ -599,15 +615,29 @@ fn build_plan(
             let version = lts_langpack::archive::current_version(&pack_id, &data.join("packs"))
                 .ok_or_else(|| format!("pack {pack_id} not installed"))?;
             for entry in lexicon_entries(data, &pack_id, &version)? {
-                let seen = derived.iter().any(|d| d.content_id == entry.id);
-                if seen || planned.contains(&entry.id) {
-                    continue;
+                // Introduce unseen items in both runner modalities;
+                // dedupe is per (content, modality) so a word practiced
+                // for recall can still surface for listening.
+                for m in [
+                    lts_domain::ActivityModality::RecallMeaning,
+                    lts_domain::ActivityModality::ComprehensionListening,
+                ] {
+                    if derived
+                        .iter()
+                        .any(|d| d.content_id == entry.id && d.dimension == m)
+                    {
+                        continue;
+                    }
+                    let key = format!("{}#{}", entry.id, dimension_kebab(m));
+                    if planned.contains(&key) {
+                        continue;
+                    }
+                    planned.insert(key);
+                    progression.push(lts_scheduler::ProgressionItem {
+                        content_id: entry.id.clone(),
+                        modality: m,
+                    });
                 }
-                planned.insert(entry.id.clone());
-                progression.push(lts_scheduler::ProgressionItem {
-                    content_id: entry.id,
-                    modality: lts_domain::ActivityModality::RecallMeaning,
-                });
             }
         }
     }
@@ -1307,8 +1337,16 @@ fn writing_submit(
 #[derive(Serialize)]
 struct PracticeTask {
     item_id: String,
-    surface: String,
+    /// Hidden for listening tasks: a visible transcript would
+    /// disqualify comprehension-listening evidence (MASTERY_POLICY
+    /// `disqualifying_for`).
+    surface: Option<String>,
+    /// Non-Japanese packs: plain reading aid. Japanese packs use the
+    /// adaptive reader fields below (READ-001).
     reading: Option<String>,
+    furigana: Option<String>,
+    romaji: Option<String>,
+    faded_by_mastery: bool,
     choices: Vec<String>,
 }
 
@@ -1318,18 +1356,89 @@ struct PracticeGrade {
     correct_choice: String,
 }
 
+/// READ-001: adaptive kana/furigana/romaji display for Japanese-script
+/// items. Returns None for non-Japanese surfaces (the reader's
+/// canonical-form rule is Japanese-specific; other scripts keep the
+/// plain reading aid). Settings come from profile settings; reveals
+/// against the auto-fade rule are recorded as support actions.
+fn reader_display(
+    data: &Path,
+    profile_id: &str,
+    entry: &LexEntry,
+    reveal: bool,
+) -> Option<lts_activity::ReadingDisplay> {
+    use lts_activity::{ScriptKind, script_of};
+    let is_japanese = entry.surface.chars().any(|c| {
+        matches!(
+            script_of(c),
+            ScriptKind::Hiragana | ScriptKind::Katakana | ScriptKind::Kanji
+        )
+    });
+    if !is_japanese {
+        return None;
+    }
+    let item = lts_activity::ReadingItem {
+        item_id: entry.id.clone(),
+        text: entry.surface.clone(),
+        reading: entry.reading.clone(),
+        romaji: entry.romaji.clone(),
+    };
+    let store = lts_storage::Store::open(data.join("profiles.db")).ok()?;
+    let reading_state = derive_pairs(&store, profile_id, &rfc3339_utc(now_secs()))
+        .ok()?
+        .into_iter()
+        .find(|d| {
+            d.content_id == entry.id
+                && d.dimension == lts_domain::ActivityModality::ComprehensionReading
+        })
+        .map(|d| d.state);
+    let romaji_mode = store
+        .get_setting(profile_id, "romaji-mode")
+        .ok()
+        .flatten()
+        .and_then(|v| v.as_str().map(String::from))
+        .map(|s| match s.as_str() {
+            "always" => lts_activity::RomajiUserMode::Always,
+            "off" => lts_activity::RomajiUserMode::Off,
+            _ => lts_activity::RomajiUserMode::Auto,
+        })
+        .unwrap_or_default();
+    let kana_literacy = store
+        .get_setting(profile_id, "kana-literacy-established")
+        .ok()
+        .flatten()
+        .and_then(|v| v.as_bool())
+        .unwrap_or(false);
+    let settings = lts_activity::ReaderSettings {
+        romaji_mode,
+        furigana_forced: reveal.then_some(true),
+        romaji_forced: reveal.then_some(true),
+        kana_literacy_established: kana_literacy,
+    };
+    Some(lts_activity::render_reading_display(
+        &item,
+        reading_state,
+        &settings,
+    ))
+}
+
 /// Build a deterministic choice task: the entry's gloss is correct,
 /// distractors are other same-pack glosses in file order, and the
 /// correct position is a hash of the item id (stable, no RNG).
-/// Returns the task plus the correct choice (native-only).
 fn practice_build(
     data: &Path,
     profile_id: &str,
     content_id: &str,
     modality: &str,
-) -> Result<(PracticeTask, String), String> {
+    reveal_reading: bool,
+) -> Result<(PracticeTask, String, Vec<String>), String> {
     checked_unit(content_id)?;
-    if parse_dimension(modality) != Some(lts_domain::ActivityModality::RecallMeaning) {
+    let dim = parse_dimension(modality).ok_or("unknown modality")?;
+    if !matches!(
+        dim,
+        lts_domain::ActivityModality::RecallMeaning
+            | lts_domain::ActivityModality::ComprehensionListening
+    ) {
         return Err("no practice runner for this activity yet".to_string());
     }
     let active = packs::active_pack(data, profile_id)?;
@@ -1350,17 +1459,42 @@ fn practice_build(
     if choices.is_empty() {
         return Err("pack lexicon is too small for a choice task".to_string());
     }
-    let item_id = format!("{content_id}#recall-meaning");
+    let item_id = format!("{content_id}#{}", dimension_kebab(dim));
     let pos = (fnv1a(&item_id) % (choices.len() as u64 + 1)) as usize;
     choices.insert(pos, entry.gloss.clone());
+    // READ-001: Japanese-script items render through the adaptive
+    // reader (furigana/romaji fade with per-item reading mastery and
+    // user settings); other scripts keep the plain reading aid.
+    let display = (dim == lts_domain::ActivityModality::RecallMeaning)
+        .then(|| reader_display(data, profile_id, entry, reveal_reading))
+        .flatten();
+    let reveals = display
+        .as_ref()
+        .map(|d| {
+            d.support_reveals
+                .iter()
+                .map(|a| a.label().to_string())
+                .collect()
+        })
+        .unwrap_or_default();
     let task = PracticeTask {
         item_id,
-        surface: entry.surface.clone(),
-        reading: entry.reading.clone(),
+        surface: (dim == lts_domain::ActivityModality::RecallMeaning)
+            .then(|| entry.surface.clone()),
+        reading: if display.is_some() {
+            None
+        } else {
+            (dim == lts_domain::ActivityModality::RecallMeaning)
+                .then(|| entry.reading.clone())
+                .flatten()
+        },
+        furigana: display.as_ref().and_then(|d| d.furigana.clone()),
+        romaji: display.as_ref().and_then(|d| d.romaji.clone()),
+        faded_by_mastery: display.as_ref().is_some_and(|d| d.faded_by_mastery),
         choices,
     };
     let correct = entry.gloss.clone();
-    Ok((task, correct))
+    Ok((task, correct, reveals))
 }
 
 fn practice_task_at(
@@ -1368,8 +1502,9 @@ fn practice_task_at(
     profile_id: &str,
     content_id: &str,
     modality: &str,
+    reveal_reading: bool,
 ) -> Result<PracticeTask, String> {
-    practice_build(data, profile_id, content_id, modality).map(|(t, _)| t)
+    practice_build(data, profile_id, content_id, modality, reveal_reading).map(|(t, _, _)| t)
 }
 
 #[tauri::command]
@@ -1377,8 +1512,15 @@ fn practice_task(
     profile_id: String,
     content_id: String,
     modality: String,
+    reveal_reading: bool,
 ) -> Result<PracticeTask, String> {
-    practice_task_at(&data_dir(), &profile_id, &content_id, &modality)
+    practice_task_at(
+        &data_dir(),
+        &profile_id,
+        &content_id,
+        &modality,
+        reveal_reading,
+    )
 }
 
 /// Grade a choice natively, record recall-meaning evidence, and upsert
@@ -1389,6 +1531,7 @@ fn practice_submit(
     content_id: String,
     modality: String,
     choice_index: usize,
+    reveal_reading: bool,
 ) -> Result<PracticeGrade, String> {
     practice_submit_at(
         &data_dir(),
@@ -1396,17 +1539,19 @@ fn practice_submit(
         &content_id,
         &modality,
         choice_index,
+        reveal_reading,
     )
 }
-
 fn practice_submit_at(
     data: &Path,
     profile_id: &str,
     content_id: &str,
     modality: &str,
     choice_index: usize,
+    reveal_reading: bool,
 ) -> Result<PracticeGrade, String> {
-    let (task, correct_choice) = practice_build(data, profile_id, content_id, modality)?;
+    let (task, correct_choice, reveals) =
+        practice_build(data, profile_id, content_id, modality, reveal_reading)?;
     let chosen = task
         .choices
         .get(choice_index)
@@ -1420,17 +1565,26 @@ fn practice_submit_at(
     let now = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
         .map_err(|e| e.to_string())?;
+    let dim = parse_dimension(&modality).ok_or("unknown modality")?;
+    let activity_id = if dim == lts_domain::ActivityModality::ComprehensionListening {
+        "ja.activity.demo.mc-listen"
+    } else {
+        "ja.activity.demo.mc-recall"
+    };
     let event = lts_learner_model::AttemptDraft::new(
         vec![lts_domain::ContentId::parse(content_id).map_err(|_| "invalid item id")?],
-        lts_domain::ActivityModality::RecallMeaning,
-        lts_domain::ContentId::parse("ja.activity.demo.mc-recall")
-            .map_err(|_| "invalid activity id")?,
+        dim,
+        lts_domain::ContentId::parse(activity_id).map_err(|_| "invalid activity id")?,
         pack_id,
         &version,
     )
     .support(
-        lts_domain::SupportLevel::new(0).ok_or("bad support")?,
-        vec![],
+        // A reading revealed against the auto-fade rule is a form cue:
+        // support level 3, with the actual reveal actions recorded
+        // (docs/03 §5; the success is never independent).
+        lts_domain::SupportLevel::new(if reveals.is_empty() { 0 } else { 3 })
+            .ok_or("bad support")?,
+        reveals,
     )
     .scored(if correct {
         lts_domain::Score::Correct
@@ -1474,10 +1628,91 @@ fn practice_submit_at(
     })
 }
 
+// ---------------------------------------------------------------------------
+// K-01: scenario sessions (SCENARIO-001 runtime → UI). Unlock follows the
+// versioned prerequisite contract; finishing records scored interaction
+// evidence with the support actually used.
+// ---------------------------------------------------------------------------
+
+#[tauri::command]
+fn scenario_list(profile_id: String) -> Result<Vec<scenarios::ScenarioSummary>, String> {
+    scenarios::list_at(&data_dir(), &profile_id)
+}
+
+#[tauri::command]
+fn scenario_start(
+    profile_id: String,
+    scenario_id: String,
+    sessions: tauri::State<'_, scenarios::SessionStore>,
+) -> Result<scenarios::ScenarioView, String> {
+    scenarios::start_at(&data_dir(), &profile_id, &scenario_id, &sessions)
+}
+
+#[tauri::command]
+fn scenario_attempt(
+    profile_id: String,
+    scenario_id: String,
+    intent: String,
+    sessions: tauri::State<'_, scenarios::SessionStore>,
+) -> Result<scenarios::StepView, String> {
+    scenarios::attempt_at(&data_dir(), &profile_id, &scenario_id, &intent, &sessions)
+}
+
+#[tauri::command]
+fn scenario_support(
+    profile_id: String,
+    scenario_id: String,
+    level: u8,
+    sessions: tauri::State<'_, scenarios::SessionStore>,
+) -> Result<scenarios::ScenarioView, String> {
+    scenarios::support_at(&data_dir(), &profile_id, &scenario_id, level, &sessions)
+}
+
+#[tauri::command]
+fn scenario_recovery(
+    profile_id: String,
+    scenario_id: String,
+    recovery_id: String,
+    sessions: tauri::State<'_, scenarios::SessionStore>,
+) -> Result<scenarios::ScenarioView, String> {
+    scenarios::recovery_at(
+        &data_dir(),
+        &profile_id,
+        &scenario_id,
+        &recovery_id,
+        &sessions,
+    )
+}
+
+#[tauri::command]
+fn scenario_transfer(
+    profile_id: String,
+    scenario_id: String,
+    variant_id: String,
+    sessions: tauri::State<'_, scenarios::SessionStore>,
+) -> Result<scenarios::ScenarioView, String> {
+    scenarios::transfer_at(
+        &data_dir(),
+        &profile_id,
+        &scenario_id,
+        &variant_id,
+        &sessions,
+    )
+}
+
+#[tauri::command]
+fn scenario_finish(
+    profile_id: String,
+    scenario_id: String,
+    sessions: tauri::State<'_, scenarios::SessionStore>,
+) -> Result<scenarios::OutcomeView, String> {
+    scenarios::finish_at(&data_dir(), &profile_id, &scenario_id, &sessions)
+}
+
 /// TTS-001 acceptance 3: curated licensed recordings (pack media)
 /// always override synthesis; otherwise synthesize locally and label
 /// the result as model output (docs/10).
-#[derive(Serialize)]
+#[derive(Debug, Serialize)]
 struct SpeechAudio {
     wav_b64: String,
     source: &'static str,
@@ -1552,6 +1787,33 @@ fn speech_audio_at(
     }
 }
 
+/// K-02: audio for the listening runner. The active pack and the item's
+/// surface are resolved natively so the transcript never crosses IPC:
+/// a visible transcript would disqualify comprehension-listening
+/// evidence (MASTERY_POLICY `disqualifying_for`).
+#[tauri::command]
+fn listening_audio(profile_id: String, content_id: String) -> Result<SpeechAudio, String> {
+    listening_audio_at(&data_dir(), &profile_id, &content_id)
+}
+
+fn listening_audio_at(
+    data: &Path,
+    profile_id: &str,
+    content_id: &str,
+) -> Result<SpeechAudio, String> {
+    checked_unit(content_id)?;
+    let active = packs::active_pack(data, profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    let entries = lexicon_entries(data, pack_id, &version)?;
+    let entry = entries
+        .iter()
+        .find(|e| e.id == content_id)
+        .ok_or("unknown item")?;
+    speech_audio_at(data, pack_id, content_id, &entry.surface)
+}
+
 // ---------------------------------------------------------------------------
 // SPEECH-003: model manager (versioned, checksummed, licensed, removable)
 // ---------------------------------------------------------------------------
@@ -1623,6 +1885,7 @@ fn rfc3339_utc(secs: u64) -> String {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .manage(scenarios::SessionStore::default())
         // The window is built here (not via tauri.conf.json) so the
         // webview permission handler can be attached: the pronunciation
         // feature calls getUserMedia, and WebKitGTK denies permission
@@ -1670,7 +1933,15 @@ pub fn run() {
             writing_task,
             writing_submit,
             practice_task,
-            practice_submit
+            practice_submit,
+            scenario_list,
+            scenario_start,
+            scenario_attempt,
+            scenario_support,
+            scenario_recovery,
+            scenario_transfer,
+            scenario_finish,
+            listening_audio,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
@@ -2317,18 +2588,38 @@ mod tests {
         assert!(first.surface.is_some() && first.gloss.is_some());
 
         // Runner task: deterministic four-choice, correct gloss present.
-        let t1 = practice_task_at(data, &p.id, "ja.lex.demo.konnichiwa", "recall-meaning").unwrap();
-        let t2 = practice_task_at(data, &p.id, "ja.lex.demo.konnichiwa", "recall-meaning").unwrap();
+        let t1 = practice_task_at(
+            data,
+            &p.id,
+            "ja.lex.demo.konnichiwa",
+            "recall-meaning",
+            false,
+        )
+        .unwrap();
+        let t2 = practice_task_at(
+            data,
+            &p.id,
+            "ja.lex.demo.konnichiwa",
+            "recall-meaning",
+            false,
+        )
+        .unwrap();
         assert_eq!(t1.choices, t2.choices);
         assert_eq!(t1.choices.len(), 4);
         assert!(t1.choices.contains(&"hello".to_string()));
-        assert_eq!(t1.surface, "こんにちは");
+        assert_eq!(t1.surface.as_deref(), Some("こんにちは"));
 
         // Correct answer: scored evidence + a scheduler row appear.
         let idx = t1.choices.iter().position(|c| c == "hello").unwrap();
-        let grade =
-            practice_submit_at(data, &p.id, "ja.lex.demo.konnichiwa", "recall-meaning", idx)
-                .unwrap();
+        let grade = practice_submit_at(
+            data,
+            &p.id,
+            "ja.lex.demo.konnichiwa",
+            "recall-meaning",
+            idx,
+            false,
+        )
+        .unwrap();
         assert!(grade.correct);
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
         assert!(
@@ -2357,13 +2648,321 @@ mod tests {
             "ja.lex.demo.konnichiwa",
             "recall-meaning",
             wrong_idx,
+            false,
         )
         .unwrap();
         assert!(!g2.correct);
 
         // Modalities without a runner abstain honestly.
         assert!(
-            practice_task_at(data, &p.id, "ja.lex.demo.konnichiwa", "production-writing").is_err()
+            practice_task_at(
+                data,
+                &p.id,
+                "ja.lex.demo.konnichiwa",
+                "production-writing",
+                false
+            )
+            .is_err(),
         );
+    }
+
+    #[test]
+    fn scenario_locks_until_prereqs_then_records_interaction_evidence() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        let sessions = scenarios::SessionStore::default();
+        let sid = "ja.scenario.demo.first-meeting";
+
+        // Fresh profile: the scenario is listed but locked, with an
+        // actionable reason naming the unmet prerequisite.
+        let list = scenarios::list_at(data, &p.id).unwrap();
+        let sc = list.iter().find(|s| s.scenario_id == sid).unwrap();
+        assert!(!sc.unlocked);
+        assert!(
+            sc.locked_reason
+                .as_deref()
+                .unwrap()
+                .contains("ja.lex.demo.konnichiwa")
+        );
+        assert!(scenarios::start_at(data, &p.id, sid, &sessions).is_err());
+
+        // Meet the hard prerequisite: two independent successes
+        // (support <= 1) across two prompt families.
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        for (fam, id, at) in [
+            (
+                "ja.expr.demo.scen-p1",
+                "ev-prereq-a",
+                "2026-10-01T00:00:00Z",
+            ),
+            (
+                "ja.expr.demo.scen-p2",
+                "ev-prereq-b",
+                "2026-10-01T00:05:00Z",
+            ),
+        ] {
+            store
+                .append_evidence(&attempt(
+                    "ja.lex.demo.konnichiwa",
+                    lts_domain::ActivityModality::RecallMeaning,
+                    fam,
+                    0,
+                    at,
+                    id,
+                    &p.id,
+                ))
+                .unwrap();
+        }
+        let list = scenarios::list_at(data, &p.id).unwrap();
+        assert!(list.iter().find(|s| s.scenario_id == sid).unwrap().unlocked);
+
+        // Session flow: wrong intent offers pack-declared recovery;
+        // recovery resolves back to the node; ladder support is recorded.
+        let view = scenarios::start_at(data, &p.id, sid, &sessions).unwrap();
+        assert_eq!(view.node.actions, ["greeting"]);
+        let step = scenarios::attempt_at(data, &p.id, sid, "small-talk", &sessions).unwrap();
+        assert_eq!(step.result, "not-satisfied");
+        assert_eq!(step.recovery, vec!["ja.activity.demo.sc.repair-repeat"]);
+        scenarios::recovery_at(
+            data,
+            &p.id,
+            sid,
+            "ja.activity.demo.sc.repair-repeat",
+            &sessions,
+        )
+        .unwrap();
+        let step =
+            scenarios::attempt_at(data, &p.id, sid, "request-repetition", &sessions).unwrap();
+        assert_eq!(step.result, "advanced");
+        // Undeclared ladder levels are rejected; declared ones recorded.
+        assert!(scenarios::support_at(data, &p.id, sid, 4, &sessions).is_err());
+        scenarios::support_at(data, &p.id, sid, 3, &sessions).unwrap();
+        let step = scenarios::attempt_at(data, &p.id, sid, "greeting", &sessions).unwrap();
+        assert_eq!(step.result, "advanced");
+        let step = scenarios::attempt_at(data, &p.id, sid, "name-question", &sessions).unwrap();
+        assert_eq!(step.result, "completed");
+        scenarios::transfer_at(
+            data,
+            &p.id,
+            sid,
+            "ja.scenario.demo.first-meeting.formal",
+            &sessions,
+        )
+        .unwrap();
+        let out = scenarios::finish_at(data, &p.id, sid, &sessions).unwrap();
+        assert_eq!(out.nodes_completed, 2);
+        assert!(out.transfer_requirement_met);
+
+        // One scored interaction event per completed node, with the
+        // support actually used at that node (3 at open, 0 at ask-name).
+        let events = store.evidence_for_profile(&p.id).unwrap();
+        let inter: Vec<_> = events
+            .iter()
+            .filter(|e| e.modality == lts_domain::ActivityModality::Interaction)
+            .collect();
+        assert_eq!(inter.len(), 2);
+        assert!(inter.iter().any(|e| {
+            e.targets
+                .iter()
+                .any(|t| t.as_str() == "ja.activity.demo.sc.open")
+                && e.support_level.value() == 3
+        }));
+        assert!(inter.iter().any(|e| {
+            e.targets
+                .iter()
+                .any(|t| t.as_str() == "ja.activity.demo.sc.ask-name")
+                && e.support_level.value() == 0
+        }));
+
+        // The session is consumed by finish; further attempts error.
+        assert!(scenarios::attempt_at(data, &p.id, sid, "greeting", &sessions).is_err());
+    }
+
+    #[test]
+    fn listening_runner_hides_transcript_and_schedules_listening_row() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+
+        // A listening task never carries the transcript: a visible
+        // surface would disqualify the evidence (MASTERY_POLICY).
+        let t = practice_task_at(
+            data,
+            &p.id,
+            "ja.lex.demo.konnichiwa",
+            "comprehension-listening",
+            false,
+        )
+        .unwrap();
+        assert!(t.surface.is_none() && t.reading.is_none());
+        assert_eq!(t.item_id, "ja.lex.demo.konnichiwa#comprehension-listening");
+        assert_eq!(t.choices.len(), 4);
+
+        // Grading records comprehension-listening evidence and its own
+        // scheduler row (per-modality memory, docs/03 §7).
+        let idx = t.choices.iter().position(|c| c == "hello").unwrap();
+        let g = practice_submit_at(
+            data,
+            &p.id,
+            "ja.lex.demo.konnichiwa",
+            "comprehension-listening",
+            idx,
+            false,
+        )
+        .unwrap();
+        assert!(g.correct);
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let events = store.evidence_for_profile(&p.id).unwrap();
+        let listen = events
+            .iter()
+            .find(|e| e.modality == lts_domain::ActivityModality::ComprehensionListening)
+            .expect("listening evidence recorded");
+        assert_eq!(listen.activity_id.as_str(), "ja.activity.demo.mc-listen");
+        let rows = store.scheduler_state(&p.id).unwrap();
+        assert!(
+            rows.iter()
+                .any(|r| r.item_id == "ja.lex.demo.konnichiwa#comprehension-listening")
+        );
+
+        // Audio resolves natively: licensed pack media wins; otherwise
+        // local synthesis or an honest error — never a transcript.
+        let a = listening_audio_at(data, &p.id, "ja.lex.demo.obasan").unwrap();
+        assert_eq!(a.source, "licensed-recording");
+        // Unknown items never reach the audio path. (Synthesis itself is
+        // covered by speech_audio_prefers_licensed_media_then_synthesizes;
+        // running two sherpa subprocesses concurrently flaps the box.)
+        assert_eq!(
+            listening_audio_at(data, &p.id, "ja.lex.demo.nonexistent").unwrap_err(),
+            "unknown item"
+        );
+
+        // Modalities without a runner still abstain honestly.
+        assert!(
+            practice_task_at(
+                data,
+                &p.id,
+                "ja.lex.demo.konnichiwa",
+                "production-speaking",
+                false
+            )
+            .is_err(),
+        );
+    }
+
+    #[test]
+    fn reader_fades_scaffolds_and_reveals_record_support() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+
+        // Kanji item, no reading history: furigana and romaji visible
+        // as on-ramp scaffolds (READ-001 auto rules).
+        let t =
+            practice_task_at(data, &p.id, "ja.lex.demo.watashi", "recall-meaning", false).unwrap();
+        assert_eq!(t.furigana.as_deref(), Some("わたし"));
+        assert_eq!(t.romaji.as_deref(), Some("watashi"));
+        assert!(!t.faded_by_mastery);
+        // Reveal against already-auto scaffolds adds no support.
+        let idx = t
+            .choices
+            .iter()
+            .position(|c| c == "I (neutral polite first person)")
+            .unwrap();
+        let g = practice_submit_at(
+            data,
+            &p.id,
+            "ja.lex.demo.watashi",
+            "recall-meaning",
+            idx,
+            true,
+        )
+        .unwrap();
+        assert!(g.correct);
+
+        // Reading mastery at `supported` hides furigana automatically.
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        for (fam, id, at) in [
+            ("ja.expr.demo.read-p1", "ev-read-a", "2026-10-01T00:00:00Z"),
+            ("ja.expr.demo.read-p2", "ev-read-b", "2026-10-01T00:05:00Z"),
+        ] {
+            store
+                .append_evidence(&attempt(
+                    "ja.lex.demo.watashi",
+                    lts_domain::ActivityModality::ComprehensionReading,
+                    fam,
+                    0,
+                    at,
+                    id,
+                    &p.id,
+                ))
+                .unwrap();
+        }
+        let t2 =
+            practice_task_at(data, &p.id, "ja.lex.demo.watashi", "recall-meaning", false).unwrap();
+        assert!(t2.furigana.is_none(), "furigana must fade at supported");
+        assert!(t2.faded_by_mastery);
+
+        // Revealing against the fade rule is recorded as support.
+        let g2 = practice_submit_at(
+            data,
+            &p.id,
+            "ja.lex.demo.watashi",
+            "recall-meaning",
+            idx,
+            true,
+        )
+        .unwrap();
+        assert!(g2.correct);
+        let events = store.evidence_for_profile(&p.id).unwrap();
+        let recall = |ev: &lts_domain::EvidenceEvent| {
+            ev.modality == lts_domain::ActivityModality::RecallMeaning
+                && ev
+                    .targets
+                    .iter()
+                    .any(|t| t.as_str() == "ja.lex.demo.watashi")
+        };
+        // The reveal submit recorded support 3 with the concrete action.
+        assert!(
+            events.iter().any(|ev| {
+                recall(ev)
+                    && ev.support_level.value() == 3
+                    && ev.support_actions.iter().any(|a| a == "supplied-reading")
+            }),
+            "reveal recorded as support: {:?}",
+            events
+                .iter()
+                .filter(|e| recall(e))
+                .map(|e| (&e.support_actions, e.support_level.value()))
+                .collect::<Vec<_>>()
+        );
+        // The first submit (reveal against already-auto scaffolds) stayed
+        // unscored-support: revealing what is already shown is not a crutch.
+        assert!(
+            events.iter().any(|ev| recall(ev)
+                && ev.support_level.value() == 0
+                && ev.support_actions.is_empty()),
+            "auto scaffold reveal is not support"
+        );
+
+        // Kana literacy (set once kana is learned) fades kana romaji.
+        store
+            .set_setting(&p.id, "kana-literacy-established", &serde_json::json!(true))
+            .unwrap();
+        let t3 = practice_task_at(
+            data,
+            &p.id,
+            "ja.lex.demo.konnichiwa",
+            "recall-meaning",
+            false,
+        )
+        .unwrap();
+        assert!(t3.romaji.is_none(), "kana romaji fades with literacy");
     }
 }

@@ -210,6 +210,15 @@ impl ScenarioSession {
     pub fn transfer_requirement_met(&self) -> bool {
         self.transfers.len() as u32 >= self.scenario.transfer_variants_required
     }
+    /// Support levels consumed at the current node (for honest UI state).
+    pub fn support_used_snapshot(&self) -> Vec<u8> {
+        self.support_used.clone()
+    }
+
+    /// Whether a transfer variant has been performed in this session.
+    pub fn transfer_done(&self, variant_id: &str) -> bool {
+        self.transfers.iter().any(|t| t == variant_id)
+    }
 
     /// Finalize: node records + transfer coverage.
     pub fn finish(self) -> ScenarioOutcome {

@@ -403,6 +403,10 @@ impl ActivityRuntime {
         self.units.values()
     }
 
+    pub fn scenarios(&self) -> impl Iterator<Item = &PackScenario> {
+        self.scenarios.values()
+    }
+
     pub fn activities(&self) -> impl Iterator<Item = (&str, &PackActivity)> {
         self.units
             .values()

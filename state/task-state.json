@@ -448,6 +448,47 @@
         "crates/world/tests/world.rs",
         "apps/desktop/src/home.test.tsx"
       ]
+    },
+    "K-01": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/K-01.md",
+        "state/evidence/K-01/cargo-test-2026-10-03.txt",
+        "state/evidence/K-01/vitest-2026-10-03.txt",
+        "state/evidence/K-01/smoke-desktop-2026-10-03.txt",
+        "apps/desktop/src-tauri/src/scenarios.rs",
+        "apps/desktop/src/scenario.tsx",
+        "tests/fixtures/packs/ja-demo/activities/scenarios/first-meeting.yaml"
+      ]
+    },
+    "K-02": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/K-02.md",
+        "state/evidence/K-02/cargo-test-2026-10-03.txt",
+        "state/evidence/K-02/vitest-2026-10-03.txt",
+        "state/evidence/K-02/smoke-desktop-2026-10-03.txt",
+        "apps/desktop/src-tauri/src/lib.rs",
+        "apps/desktop/src/practice.tsx"
+      ]
+    },
+    "K-03": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": "manual cargo build omitted tauri custom-protocol so the webview loaded devUrl; fixed by exposing the feature in apps/desktop/src-tauri/Cargo.toml",
+      "evidence": [
+        "state/notes/K-03.md",
+        "state/evidence/K-03/cargo-test-2026-10-03.txt",
+        "state/evidence/K-03/vitest-2026-10-03.txt",
+        "state/evidence/K-03/smoke-desktop-2026-10-03.txt",
+        "crates/activity/src/reading.rs",
+        "apps/desktop/src-tauri/src/lib.rs",
+        "apps/desktop/src/practice.tsx"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence."

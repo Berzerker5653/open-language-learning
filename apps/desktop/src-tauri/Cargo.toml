@@ -10,6 +10,11 @@ publish.workspace = true
 name = "lts_desktop"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
+[features]
+# Smoke/release builds embed `frontendDist` instead of loading the dev
+# server URL; `cargo build -p lts-desktop --features custom-protocol`.
+custom-protocol = ["tauri/custom-protocol"]
+
 [build-dependencies]
 tauri-build = { version = "2.7.1", features = [] }
 
