@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 sports-fitness); content refs are pack data; qualified review pending.
+id: ja.unit.sports-running
+goal_id: ja.goal.a2.sports-fitness
+title: Running
+summary: Marathon, jogging, jump rope, skating.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.sports.marason
+  - ja.lex.sports.jogging
+  - ja.lex.sports.janpu-ro-pu
+  - ja.lex.sports.suke-to
+  - ja.lex.sports.paten
+  - ja.sent.jog-morning
+  allowed_grammar:
+  - ja.grammar.particle.de-means
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.sports-running-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.sports.marason
+  - ja.lex.sports.jogging
+  - ja.lex.sports.janpu-ro-pu
+  - ja.lex.sports.suke-to
+  - ja.lex.sports.paten
+  - ja.sent.jog-morning
+  - ja.sent.jog-morning
+- id: ja.activity.sports-running-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.sports.marason
+  - ja.lex.sports.jogging
+  - ja.lex.sports.janpu-ro-pu
+  - ja.lex.sports.suke-to
+  - ja.lex.sports.paten
+  - ja.sent.jog-morning
+- id: ja.activity.sports-running-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.sports.marason
+  - ja.lex.sports.jogging
+  - ja.lex.sports.janpu-ro-pu
+  - ja.lex.sports.suke-to
+  - ja.lex.sports.paten
+  - ja.sent.jog-morning
+- id: ja.activity.sports-running-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.sports.marason
+  - ja.lex.sports.jogging
+  - ja.lex.sports.janpu-ro-pu
+  - ja.lex.sports.suke-to
+  - ja.lex.sports.paten
+  - ja.sent.jog-morning
+- id: ja.activity.sports-running-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.jog-morning

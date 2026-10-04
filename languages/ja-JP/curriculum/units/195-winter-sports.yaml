@@ -1,0 +1,58 @@
+# ai-assisted draft unit (Mode B A2 sports-fitness); content refs are pack data; qualified review pending.
+id: ja.unit.sports-winter-sports
+goal_id: ja.goal.a2.sports-fitness
+title: Winter and water sports
+summary: Skiing, snowboard, surfing, diving.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.sports.sukii
+  - ja.lex.sports.sunoobo-do
+  - ja.lex.sports.sa-fingu
+  - ja.lex.sports.daibingu
+  - ja.lex.sports.sui-ren
+  allowed_grammar:
+  - ja.grammar.particle.de-means
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.sports-winter-sports-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.sports.sukii
+  - ja.lex.sports.sunoobo-do
+  - ja.lex.sports.sa-fingu
+  - ja.lex.sports.daibingu
+  - ja.lex.sports.sui-ren
+- id: ja.activity.sports-winter-sports-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.sports.sukii
+  - ja.lex.sports.sunoobo-do
+  - ja.lex.sports.sa-fingu
+  - ja.lex.sports.daibingu
+  - ja.lex.sports.sui-ren
+- id: ja.activity.sports-winter-sports-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.sports.sukii
+  - ja.lex.sports.sunoobo-do
+  - ja.lex.sports.sa-fingu
+  - ja.lex.sports.daibingu
+  - ja.lex.sports.sui-ren
+- id: ja.activity.sports-winter-sports-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.sports.sukii
+  - ja.lex.sports.sunoobo-do
+  - ja.lex.sports.sa-fingu
+  - ja.lex.sports.daibingu
+  - ja.lex.sports.sui-ren

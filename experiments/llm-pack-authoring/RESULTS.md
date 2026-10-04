@@ -430,3 +430,9 @@ Goal `ja.goal.a2.entertainment` (prereq weather-seasons, mirrored), 10
 units, 50-word `lexicon/entertainment.jsonl`, 2 grammar
 (`verb.you-ni-suru`, `verb.hajimeru-owaru`), 8 sentences, 1 assessment.
 Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 14: A2 units 190-199 (sports-fitness)
+
+Goal `ja.goal.a2.sports-fitness` (prereq entertainment, mirrored), 10
+units, 50-word `lexicon/sports.jsonl`, 1 grammar
+(`quotative.to-itta-koto`), 9 sentences, 1 assessment. Score: **7/7**.

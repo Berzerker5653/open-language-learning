@@ -1,0 +1,82 @@
+# ai-assisted draft unit (Mode B A2 sports-fitness); content refs are pack data; qualified review pending.
+id: ja.unit.sports-recovery
+goal_id: ja.goal.a2.sports-fitness
+title: Recovery
+summary: Recovery, massage, results show, result rate.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.sports.rikabari
+  - ja.lex.sports.massaji
+  - ja.lex.sports.kessan-bangumi
+  - ja.lex.sports.kessan-houritsu
+  - ja.lex.sports.taiku-kai
+  - ja.sent.recovery-onsen
+  - ja.sent.coach-said
+  allowed_grammar:
+  - ja.grammar.quotative.to-itta-koto
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.sports-recovery-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.sports.rikabari
+  - ja.lex.sports.massaji
+  - ja.lex.sports.kessan-bangumi
+  - ja.lex.sports.kessan-houritsu
+  - ja.lex.sports.taiku-kai
+  - ja.sent.recovery-onsen
+  - ja.sent.coach-said
+  - ja.sent.recovery-onsen
+  - ja.sent.coach-said
+- id: ja.activity.sports-recovery-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.sports.rikabari
+  - ja.lex.sports.massaji
+  - ja.lex.sports.kessan-bangumi
+  - ja.lex.sports.kessan-houritsu
+  - ja.lex.sports.taiku-kai
+  - ja.sent.recovery-onsen
+  - ja.sent.coach-said
+- id: ja.activity.sports-recovery-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.sports.rikabari
+  - ja.lex.sports.massaji
+  - ja.lex.sports.kessan-bangumi
+  - ja.lex.sports.kessan-houritsu
+  - ja.lex.sports.taiku-kai
+  - ja.sent.recovery-onsen
+  - ja.sent.coach-said
+- id: ja.activity.sports-recovery-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.sports.rikabari
+  - ja.lex.sports.massaji
+  - ja.lex.sports.kessan-bangumi
+  - ja.lex.sports.kessan-houritsu
+  - ja.lex.sports.taiku-kai
+  - ja.sent.recovery-onsen
+  - ja.sent.coach-said
+- id: ja.activity.sports-recovery-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.recovery-onsen
+- id: ja.activity.sports-recovery-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.coach-said

@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 sports-fitness); content refs are pack data; qualified review pending.
+id: ja.unit.sports-gym
+goal_id: ja.goal.a2.sports-fitness
+title: Gym and training
+summary: Gym, training, weight training, dumbbell, barbell.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.sports.jimu
+  - ja.lex.sports.training
+  - ja.lex.sports.tanso-undo
+  - ja.lex.sports.danburu
+  - ja.lex.sports.ba-beru
+  - ja.sent.gym-training
+  allowed_grammar:
+  - ja.grammar.particle.de-means
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.sports-gym-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.sports.jimu
+  - ja.lex.sports.training
+  - ja.lex.sports.tanso-undo
+  - ja.lex.sports.danburu
+  - ja.lex.sports.ba-beru
+  - ja.sent.gym-training
+  - ja.sent.gym-training
+- id: ja.activity.sports-gym-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.sports.jimu
+  - ja.lex.sports.training
+  - ja.lex.sports.tanso-undo
+  - ja.lex.sports.danburu
+  - ja.lex.sports.ba-beru
+  - ja.sent.gym-training
+- id: ja.activity.sports-gym-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.sports.jimu
+  - ja.lex.sports.training
+  - ja.lex.sports.tanso-undo
+  - ja.lex.sports.danburu
+  - ja.lex.sports.ba-beru
+  - ja.sent.gym-training
+- id: ja.activity.sports-gym-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.sports.jimu
+  - ja.lex.sports.training
+  - ja.lex.sports.tanso-undo
+  - ja.lex.sports.danburu
+  - ja.lex.sports.ba-beru
+  - ja.sent.gym-training
+- id: ja.activity.sports-gym-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.gym-training

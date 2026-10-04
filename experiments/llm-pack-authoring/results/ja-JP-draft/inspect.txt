@@ -4,8 +4,8 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2420  2dda84132085  activities/scenarios/first-meeting.yaml
         1561  6b8655e2f7b6  activities/scenarios/ordering.yaml
         1486  b56884663696  activities/scenarios/shopping.yaml
-        9433  a96bb4fd967f  assessments/definitions.jsonl
-       26349  05ed839f7fbb  curriculum/goals.yaml
+        9797  e4d02d00f8c3  assessments/definitions.jsonl
+       27171  18c146d22dde  curriculum/goals.yaml
          919  ad3f5f62d1b3  curriculum/units/000-onramp-greeting.yaml
         1514  bd53db6f2cfe  curriculum/units/010-kana-hiragana-vowels-ko.yaml
         1957  c02be8a37693  curriculum/units/011-kana-hiragana-stn.yaml
@@ -164,8 +164,18 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         1681  42d1987fb41e  curriculum/units/187-people.yaml
         1708  db49ad3d75c9  curriculum/units/188-parties.yaml
         1652  b5c979e98976  curriculum/units/189-feelings.yaml
-       21256  79022fa7dc55  grammar/concepts.jsonl
-        4520  cdfb66374429  grammar/dependencies.yaml
+        1803  9c20b09f3bed  curriculum/units/190-gym.yaml
+        1804  18649f3c09d8  curriculum/units/191-running.yaml
+        1760  782f516a5b75  curriculum/units/192-mind-body.yaml
+        1764  73ee146b7860  curriculum/units/193-martial.yaml
+        1789  44310fd9369d  curriculum/units/194-combat.yaml
+        1575  6bc2e4167ad2  curriculum/units/195-winter-sports.yaml
+        1497  f07d2a48cb1d  curriculum/units/196-gear.yaml
+        1813  3011c49371a1  curriculum/units/197-fitness.yaml
+        1890  767bd8ed4e93  curriculum/units/198-competition.yaml
+        2195  3c355dcbfc18  curriculum/units/199-recovery.yaml
+       21857  74723c59aafa  grammar/concepts.jsonl
+        4665  760dbd5de330  grammar/dependencies.yaml
        30369  1401b6e0388e  kanji/entries.jsonl
          485  860cdf8185db  language/identity.yaml
          823  5d72613ab378  language/normalization.yaml
@@ -193,6 +203,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         7287  02009ef0d4fa  lexicon/pronouns.jsonl
         7967  bf7e5bb834c7  lexicon/questions.jsonl
        39756  f58e5a59ec5b  lexicon/shopping.jsonl
+       40086  1b6444cabb81  lexicon/sports.jsonl
        15910  d3e03534b8e1  lexicon/time.jsonl
        42054  eefefcc4c69c  lexicon/transport.jsonl
        22174  7bb1a6586408  lexicon/verbs.jsonl
@@ -206,7 +217,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
-       89678  bcf027f46cfb  sentences/entries.jsonl
+       95154  8f8d763732b3  sentences/entries.jsonl
         3915  e270f808c26e  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml
          539  842cce82e5d5  stories/first-day.yaml

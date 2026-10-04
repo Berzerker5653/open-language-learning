@@ -1,0 +1,58 @@
+# ai-assisted draft unit (Mode B A2 sports-fitness); content refs are pack data; qualified review pending.
+id: ja.unit.sports-gear
+goal_id: ja.goal.a2.sports-fitness
+title: Gear
+summary: Judo uniform, kendo uniform, hot spring bath.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.sports.judougi
+  - ja.lex.sports.kendo-gi
+  - ja.lex.sports.onsen-tou
+  - ja.lex.sports.koshi
+  - ja.lex.health.kata
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.sports-gear-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.sports.judougi
+  - ja.lex.sports.kendo-gi
+  - ja.lex.sports.onsen-tou
+  - ja.lex.sports.koshi
+  - ja.lex.health.kata
+- id: ja.activity.sports-gear-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.sports.judougi
+  - ja.lex.sports.kendo-gi
+  - ja.lex.sports.onsen-tou
+  - ja.lex.sports.koshi
+  - ja.lex.health.kata
+- id: ja.activity.sports-gear-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.sports.judougi
+  - ja.lex.sports.kendo-gi
+  - ja.lex.sports.onsen-tou
+  - ja.lex.sports.koshi
+  - ja.lex.health.kata
+- id: ja.activity.sports-gear-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.sports.judougi
+  - ja.lex.sports.kendo-gi
+  - ja.lex.sports.onsen-tou
+  - ja.lex.sports.koshi
+  - ja.lex.health.kata

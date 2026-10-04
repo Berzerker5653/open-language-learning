@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 sports-fitness); content refs are pack data; qualified review pending.
+id: ja.unit.sports-fitness
+goal_id: ja.goal.a2.sports-fitness
+title: Fitness
+summary: Physical strength, condition, range, practice.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.sports.tairyoku
+  - ja.lex.sports.joutairyoku
+  - ja.lex.sports.ryouiki
+  - ja.lex.sports.renshuu
+  - ja.lex.sports.junbi-undo
+  - ja.sent.warm-up
+  allowed_grammar:
+  - ja.grammar.verb.you-ni-suru
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.sports-fitness-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.sports.tairyoku
+  - ja.lex.sports.joutairyoku
+  - ja.lex.sports.ryouiki
+  - ja.lex.sports.renshuu
+  - ja.lex.sports.junbi-undo
+  - ja.sent.warm-up
+  - ja.sent.warm-up
+- id: ja.activity.sports-fitness-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.sports.tairyoku
+  - ja.lex.sports.joutairyoku
+  - ja.lex.sports.ryouiki
+  - ja.lex.sports.renshuu
+  - ja.lex.sports.junbi-undo
+  - ja.sent.warm-up
+- id: ja.activity.sports-fitness-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.sports.tairyoku
+  - ja.lex.sports.joutairyoku
+  - ja.lex.sports.ryouiki
+  - ja.lex.sports.renshuu
+  - ja.lex.sports.junbi-undo
+  - ja.sent.warm-up
+- id: ja.activity.sports-fitness-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.sports.tairyoku
+  - ja.lex.sports.joutairyoku
+  - ja.lex.sports.ryouiki
+  - ja.lex.sports.renshuu
+  - ja.lex.sports.junbi-undo
+  - ja.sent.warm-up
+- id: ja.activity.sports-fitness-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.warm-up
