@@ -1,0 +1,81 @@
+# ai-assisted draft unit (Mode B A1 home-life); content refs are pack data; qualified review pending.
+id: ja.unit.home-rooms
+goal_id: ja.goal.a1.home-life
+title: Rooms of the home
+summary: Kitchen, bath, entryway, garden, shoes.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.home.daidokoro
+  - ja.lex.home.furo
+  - ja.lex.home.genkan
+  - ja.lex.home.niwa
+  - ja.lex.home.kutsu
+  - ja.lex.places.heya
+  - ja.lex.places.toire
+  - ja.sent.clean-room
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.home-rooms-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.home.daidokoro
+  - ja.lex.home.furo
+  - ja.lex.home.genkan
+  - ja.lex.home.niwa
+  - ja.lex.home.kutsu
+  - ja.lex.places.heya
+  - ja.lex.places.toire
+  - ja.sent.clean-room
+  - ja.sent.clean-room
+- id: ja.activity.home-rooms-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.home.daidokoro
+  - ja.lex.home.furo
+  - ja.lex.home.genkan
+  - ja.lex.home.niwa
+  - ja.lex.home.kutsu
+  - ja.lex.places.heya
+  - ja.lex.places.toire
+  - ja.sent.clean-room
+- id: ja.activity.home-rooms-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.home.daidokoro
+  - ja.lex.home.furo
+  - ja.lex.home.genkan
+  - ja.lex.home.niwa
+  - ja.lex.home.kutsu
+  - ja.lex.places.heya
+  - ja.lex.places.toire
+  - ja.sent.clean-room
+- id: ja.activity.home-rooms-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.home.daidokoro
+  - ja.lex.home.furo
+  - ja.lex.home.genkan
+  - ja.lex.home.niwa
+  - ja.lex.home.kutsu
+  - ja.lex.places.heya
+  - ja.lex.places.toire
+  - ja.sent.clean-room
+- id: ja.activity.home-rooms-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.clean-room

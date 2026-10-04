@@ -1,0 +1,76 @@
+# ai-assisted draft unit (Mode B A1 home-life); content refs are pack data; qualified review pending.
+id: ja.unit.home-adverbs-home
+goal_id: ja.goal.a1.home-life
+title: Home adverbs
+summary: Noisy; sometimes, again, more, why.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.home.urusai
+  - ja.lex.home.tokidoki
+  - ja.lex.home.mata
+  - ja.lex.home.motto
+  - ja.lex.home.naze
+  - ja.lex.leisure.tsukurimasu
+  - ja.sent.cook-dinner
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.home-adverbs-home-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.home.urusai
+  - ja.lex.home.tokidoki
+  - ja.lex.home.mata
+  - ja.lex.home.motto
+  - ja.lex.home.naze
+  - ja.lex.leisure.tsukurimasu
+  - ja.sent.cook-dinner
+  - ja.sent.cook-dinner
+- id: ja.activity.home-adverbs-home-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.home.urusai
+  - ja.lex.home.tokidoki
+  - ja.lex.home.mata
+  - ja.lex.home.motto
+  - ja.lex.home.naze
+  - ja.lex.leisure.tsukurimasu
+  - ja.sent.cook-dinner
+- id: ja.activity.home-adverbs-home-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.home.urusai
+  - ja.lex.home.tokidoki
+  - ja.lex.home.mata
+  - ja.lex.home.motto
+  - ja.lex.home.naze
+  - ja.lex.leisure.tsukurimasu
+  - ja.sent.cook-dinner
+- id: ja.activity.home-adverbs-home-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.home.urusai
+  - ja.lex.home.tokidoki
+  - ja.lex.home.mata
+  - ja.lex.home.motto
+  - ja.lex.home.naze
+  - ja.lex.leisure.tsukurimasu
+  - ja.sent.cook-dinner
+- id: ja.activity.home-adverbs-home-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.cook-dinner

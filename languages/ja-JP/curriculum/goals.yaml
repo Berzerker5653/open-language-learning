@@ -695,3 +695,35 @@ goals:
       tool: omp
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
+  - id: ja.goal.a1.home-life
+    description: 'Describe living spaces, objects, chores, and simple housing situations:
+      rooms, furniture, appliances, and household verbs.'
+    band: A1
+    framework_refs: []
+    contexts:
+    - ja.situation.home-routine
+    modalities:
+    - listening
+    - speaking
+    - reading
+    - writing
+    prerequisites:
+    - target: ja.goal.a1.free-time
+      dimension: grammar-controlled
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.lex.home.apato
+    - ja.lex.home.ryouri
+    assessment_ids:
+    - ja.assess.home-life
+    transfer_required: true
+    sources:
+    - jf-standard
+    - ai-drafted-extension
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next-iq3_s
+      date: '2026-10-04'

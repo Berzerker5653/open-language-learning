@@ -1,0 +1,76 @@
+# ai-assisted draft unit (Mode B A1 home-life); content refs are pack data; qualified review pending.
+id: ja.unit.home-chore-verbs
+goal_id: ja.goal.a1.home-life
+title: Chore verbs
+summary: Tidy, wipe, open, close, cut.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.home.katazukemasu
+  - ja.lex.home.fukimasu
+  - ja.lex.home.hirakemasu
+  - ja.lex.home.tojimasu
+  - ja.lex.home.kirimasu
+  - ja.lex.objects.hon
+  - ja.sent.tidy-up
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  - ja.grammar.verb.past-negative
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.home-chore-verbs-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.home.katazukemasu
+  - ja.lex.home.fukimasu
+  - ja.lex.home.hirakemasu
+  - ja.lex.home.tojimasu
+  - ja.lex.home.kirimasu
+  - ja.lex.objects.hon
+  - ja.sent.tidy-up
+  - ja.sent.tidy-up
+- id: ja.activity.home-chore-verbs-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.home.katazukemasu
+  - ja.lex.home.fukimasu
+  - ja.lex.home.hirakemasu
+  - ja.lex.home.tojimasu
+  - ja.lex.home.kirimasu
+  - ja.lex.objects.hon
+  - ja.sent.tidy-up
+- id: ja.activity.home-chore-verbs-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.home.katazukemasu
+  - ja.lex.home.fukimasu
+  - ja.lex.home.hirakemasu
+  - ja.lex.home.tojimasu
+  - ja.lex.home.kirimasu
+  - ja.lex.objects.hon
+  - ja.sent.tidy-up
+- id: ja.activity.home-chore-verbs-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.home.katazukemasu
+  - ja.lex.home.fukimasu
+  - ja.lex.home.hirakemasu
+  - ja.lex.home.tojimasu
+  - ja.lex.home.kirimasu
+  - ja.lex.objects.hon
+  - ja.sent.tidy-up
+- id: ja.activity.home-chore-verbs-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.tidy-up

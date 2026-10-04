@@ -363,3 +363,9 @@ Goal `ja.goal.a1.free-time` (prereq health-basics, mirrored), 10 units,
 `verb.experience-ta`), 5 sentences (2 initial ids collided with baseline
 sentences; replaced with `watch-movie`/`listen-news`), 1 assessment.
 Score: **7/7**. A1 grammar quota (12) now fully consumed.
+
+## 2026-10-04 — ja-JP batch 4: A1 units 092-100 (home-life)
+
+Goal `ja.goal.a1.home-life` (prereq free-time, mirrored), 9 units,
+45-word `lexicon/home.jsonl`, 9 sentences (A1 grammar quota already
+consumed), 1 assessment. Score: **7/7**.

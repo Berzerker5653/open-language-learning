@@ -1,0 +1,76 @@
+# ai-assisted draft unit (Mode B A1 home-life); content refs are pack data; qualified review pending.
+id: ja.unit.home-structure
+goal_id: ja.goal.a1.home-life
+title: Walls, windows, doors
+summary: Open and close parts of the house.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.home.mado
+  - ja.lex.home.tobira
+  - ja.lex.home.kabe
+  - ja.lex.home.yane
+  - ja.lex.home.yuka
+  - ja.lex.objects.tsukue
+  - ja.sent.open-window
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  - ja.grammar.verb.te-form-sequence
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.home-structure-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.home.mado
+  - ja.lex.home.tobira
+  - ja.lex.home.kabe
+  - ja.lex.home.yane
+  - ja.lex.home.yuka
+  - ja.lex.objects.tsukue
+  - ja.sent.open-window
+  - ja.sent.open-window
+- id: ja.activity.home-structure-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.home.mado
+  - ja.lex.home.tobira
+  - ja.lex.home.kabe
+  - ja.lex.home.yane
+  - ja.lex.home.yuka
+  - ja.lex.objects.tsukue
+  - ja.sent.open-window
+- id: ja.activity.home-structure-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.home.mado
+  - ja.lex.home.tobira
+  - ja.lex.home.kabe
+  - ja.lex.home.yane
+  - ja.lex.home.yuka
+  - ja.lex.objects.tsukue
+  - ja.sent.open-window
+- id: ja.activity.home-structure-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.home.mado
+  - ja.lex.home.tobira
+  - ja.lex.home.kabe
+  - ja.lex.home.yane
+  - ja.lex.home.yuka
+  - ja.lex.objects.tsukue
+  - ja.sent.open-window
+- id: ja.activity.home-structure-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.open-window

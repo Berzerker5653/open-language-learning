@@ -1,0 +1,76 @@
+# ai-assisted draft unit (Mode B A1 home-life); content refs are pack data; qualified review pending.
+id: ja.unit.home-house-adjectives
+goal_id: ja.goal.a1.home-life
+title: Describing a home
+summary: Spacious, narrow, quiet, dirty, dark.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.home.hiroi
+  - ja.lex.home.semai
+  - ja.lex.home.shizuka
+  - ja.lex.home.kitanai
+  - ja.lex.home.kurai
+  - ja.lex.health.te
+  - ja.sent.wash-hands
+  allowed_grammar:
+  - ja.grammar.adjectives.na-attributive
+  - ja.grammar.copula.polite-desu
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.home-house-adjectives-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.home.hiroi
+  - ja.lex.home.semai
+  - ja.lex.home.shizuka
+  - ja.lex.home.kitanai
+  - ja.lex.home.kurai
+  - ja.lex.health.te
+  - ja.sent.wash-hands
+  - ja.sent.wash-hands
+- id: ja.activity.home-house-adjectives-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.home.hiroi
+  - ja.lex.home.semai
+  - ja.lex.home.shizuka
+  - ja.lex.home.kitanai
+  - ja.lex.home.kurai
+  - ja.lex.health.te
+  - ja.sent.wash-hands
+- id: ja.activity.home-house-adjectives-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.home.hiroi
+  - ja.lex.home.semai
+  - ja.lex.home.shizuka
+  - ja.lex.home.kitanai
+  - ja.lex.home.kurai
+  - ja.lex.health.te
+  - ja.sent.wash-hands
+- id: ja.activity.home-house-adjectives-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.home.hiroi
+  - ja.lex.home.semai
+  - ja.lex.home.shizuka
+  - ja.lex.home.kitanai
+  - ja.lex.home.kurai
+  - ja.lex.health.te
+  - ja.sent.wash-hands
+- id: ja.activity.home-house-adjectives-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.wash-hands

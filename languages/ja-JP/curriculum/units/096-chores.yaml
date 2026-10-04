@@ -1,0 +1,75 @@
+# ai-assisted draft unit (Mode B A1 home-life); content refs are pack data; qualified review pending.
+id: ja.unit.home-chores
+goal_id: ja.goal.a1.home-life
+title: Chores
+summary: Cleaning, laundry, trash, tidying, cooking.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.home.souji
+  - ja.lex.home.sentaku
+  - ja.lex.home.gomi
+  - ja.lex.home.katazuke
+  - ja.lex.home.ryouri
+  - ja.lex.health.te
+  - ja.sent.do-laundry
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.home-chores-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.home.souji
+  - ja.lex.home.sentaku
+  - ja.lex.home.gomi
+  - ja.lex.home.katazuke
+  - ja.lex.home.ryouri
+  - ja.lex.health.te
+  - ja.sent.do-laundry
+  - ja.sent.do-laundry
+- id: ja.activity.home-chores-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.home.souji
+  - ja.lex.home.sentaku
+  - ja.lex.home.gomi
+  - ja.lex.home.katazuke
+  - ja.lex.home.ryouri
+  - ja.lex.health.te
+  - ja.sent.do-laundry
+- id: ja.activity.home-chores-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.home.souji
+  - ja.lex.home.sentaku
+  - ja.lex.home.gomi
+  - ja.lex.home.katazuke
+  - ja.lex.home.ryouri
+  - ja.lex.health.te
+  - ja.sent.do-laundry
+- id: ja.activity.home-chores-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.home.souji
+  - ja.lex.home.sentaku
+  - ja.lex.home.gomi
+  - ja.lex.home.katazuke
+  - ja.lex.home.ryouri
+  - ja.lex.health.te
+  - ja.sent.do-laundry
+- id: ja.activity.home-chores-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.do-laundry

@@ -1,0 +1,71 @@
+# ai-assisted draft unit (Mode B A1 home-life); content refs are pack data; qualified review pending.
+id: ja.unit.home-home-appliances
+goal_id: ja.goal.a1.home-life
+title: Apartment and appliances
+summary: Apartment, clothes, fridge, washer; change.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.home.apato
+  - ja.lex.home.fuku
+  - ja.lex.home.reizouko
+  - ja.lex.home.sentakuki
+  - ja.lex.home.kaemasu
+  - ja.sent.apartment-roomy
+  allowed_grammar:
+  - ja.grammar.adjectives.na-attributive
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.home-home-appliances-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.home.apato
+  - ja.lex.home.fuku
+  - ja.lex.home.reizouko
+  - ja.lex.home.sentakuki
+  - ja.lex.home.kaemasu
+  - ja.sent.apartment-roomy
+  - ja.sent.apartment-roomy
+- id: ja.activity.home-home-appliances-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.home.apato
+  - ja.lex.home.fuku
+  - ja.lex.home.reizouko
+  - ja.lex.home.sentakuki
+  - ja.lex.home.kaemasu
+  - ja.sent.apartment-roomy
+- id: ja.activity.home-home-appliances-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.home.apato
+  - ja.lex.home.fuku
+  - ja.lex.home.reizouko
+  - ja.lex.home.sentakuki
+  - ja.lex.home.kaemasu
+  - ja.sent.apartment-roomy
+- id: ja.activity.home-home-appliances-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.home.apato
+  - ja.lex.home.fuku
+  - ja.lex.home.reizouko
+  - ja.lex.home.sentakuki
+  - ja.lex.home.kaemasu
+  - ja.sent.apartment-roomy
+- id: ja.activity.home-home-appliances-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.apartment-roomy

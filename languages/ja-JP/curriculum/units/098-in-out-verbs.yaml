@@ -1,0 +1,71 @@
+# ai-assisted draft unit (Mode B A1 home-life); content refs are pack data; qualified review pending.
+id: ja.unit.home-in-out-verbs
+goal_id: ja.goal.a1.home-life
+title: In and out verbs
+summary: Put away, take out, break, carry; still.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.home.shimaimasu
+  - ja.lex.home.dasimasu
+  - ja.lex.home.kowaresu
+  - ja.lex.home.mochimasu
+  - ja.lex.home.mada
+  - ja.sent.take-out-trash
+  allowed_grammar:
+  - ja.grammar.particle.ni-destination
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.home-in-out-verbs-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.home.shimaimasu
+  - ja.lex.home.dasimasu
+  - ja.lex.home.kowaresu
+  - ja.lex.home.mochimasu
+  - ja.lex.home.mada
+  - ja.sent.take-out-trash
+  - ja.sent.take-out-trash
+- id: ja.activity.home-in-out-verbs-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.home.shimaimasu
+  - ja.lex.home.dasimasu
+  - ja.lex.home.kowaresu
+  - ja.lex.home.mochimasu
+  - ja.lex.home.mada
+  - ja.sent.take-out-trash
+- id: ja.activity.home-in-out-verbs-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.home.shimaimasu
+  - ja.lex.home.dasimasu
+  - ja.lex.home.kowaresu
+  - ja.lex.home.mochimasu
+  - ja.lex.home.mada
+  - ja.sent.take-out-trash
+- id: ja.activity.home-in-out-verbs-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.home.shimaimasu
+  - ja.lex.home.dasimasu
+  - ja.lex.home.kowaresu
+  - ja.lex.home.mochimasu
+  - ja.lex.home.mada
+  - ja.sent.take-out-trash
+- id: ja.activity.home-in-out-verbs-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.take-out-trash
