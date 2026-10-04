@@ -1,0 +1,31 @@
+SPEECH-007 calibration infrastructure — 2026-10-04
+(owner scope 2026-10-04: build calibration infra only; eligibility stays
+blocked pending permissioned data.)
+
+Built:
+- crates/speech-api/src/calibration.rs: version-bound eligibility registry.
+  CalibrationRecord binds feature + provider/model/interpreter/pack versions
+  + model sha256 + protocol/dataset/result artifact hashes + frozen
+  thresholds + held-out metrics + coverage envelope. status(): unfilled
+  thresholds, missing metrics, unbound hashes, or measured limit breaches =>
+  NotQualified. eligibility_for(): any version/hash drift or
+  variety/context outside the envelope => Guided; exact match inside =>
+  Automatic. 6 unit tests cover each fail-closed path.
+- Desktop pronunciation_check_at now consults the registry before
+  interpreting: no record => Guided("no-calibration-record"); result carries
+  mode ("guided"|"automatic") + mode_reason; UI labels the two honestly
+  (vitest: distinct automatic vs guided label test).
+- benchmarks/speech/protocols/ja-JP/vowel-length-0.1.0.yaml:
+  preregistration skeleton per docs/17 — method frozen, numeric limits
+  explicitly null (unfilled limits keep automatic scoring disabled),
+  speaker/word-family holdout plan, 2-labeler rubric, permission rules.
+
+Blocker (explicit, per docs/17 §129): no permissioned learner-speech
+calibration data and no human labelers engaged. No feature is Qualified;
+automatic pronunciation scoring remains disabled; the stable-1.0 minimum
+("at least one high-value contrast qualified") remains open and is NOT
+satisfiable by infrastructure alone. Data acquisition (licensed dataset or
+consented recordings) is an owner decision.
+
+Gates: cargo test --workspace 53 suites green; clippy -D warnings clean;
+desktop smoke green (11 routes) with the gating in place.

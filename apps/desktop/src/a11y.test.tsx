@@ -174,6 +174,8 @@ const surfaces: Record<string, string> = {
           },
         ],
         abstain_reason: null,
+        mode: "guided",
+        mode_reason: "no-calibration-record",
         pitch: EMPTY_PITCH,
       }}
       onRecord={() => {}}

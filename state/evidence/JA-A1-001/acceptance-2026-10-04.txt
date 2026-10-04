@@ -1,0 +1,28 @@
+JA-A1-001 acceptance verification — 2026-10-04
+(formal completion recorded only after REVIEW-001 done; this is the
+acceptance-criteria check against the shipped pack.)
+
+Pack: org.openlanguage.ja-jp.reference v0.1.0 (languages/ja-JP), authored
+under K-30/K-31/K-32.
+
+- Zero-knowledge path integrates listening/speaking/early script/basic
+  interaction: on-ramp goals cover greetings, kana (hiragana incl.
+  dakuten/youon, katakana), politeness basics, self-introduction; 4
+  scenarios (ordering, shopping, directions, first-meeting-style
+  interactions) wired; pronunciation demo pack-driven. K-31 coverage audit
+  (state/evidence/K-31/coverage-2026-10-03.txt) + fresh audit-curriculum
+  0 errors 2026-10-04.
+- Romaji temporary and fading: orthography declares ja.orth.latin as
+  "temporary scaffold and native mixed-script use"; romaji appears only as
+  reading support; unit activity ladders descend support_level 5->2
+  (docs/03 §support_level); writing hints (romaji) are opt-in and recorded
+  as support, which weakens evidence rather than granting decoding mastery
+  (docs/09 E2E rule; LEARN-002 policy).
+- Every shipped content item has provenance/review state: validator
+  enforces status + source links; validate 0 errors; all items
+  draft/review-needed (never falsely promoted).
+- Transfer checkpoint exists: 7 transfer-kind assessments across the band
+  (assessments/definitions.jsonl), incl. greeting transfer.
+
+Verdict: acceptance criteria met at draft trust level. Promotion beyond
+draft remains gated by BLK-REVIEW-CAPACITY (correct per policy).

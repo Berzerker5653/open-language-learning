@@ -1,0 +1,18 @@
+JA-A1-002 acceptance verification — 2026-10-04
+
+- All 20 goals (5 on-ramp + 15 A1) lesson- and assessment-mapped with
+  dependency coverage: langpack audit-curriculum 0 errors 0 warnings
+  (2026-10-04, fresh); K-31 coverage audit
+  (state/evidence/K-31/coverage-2026-10-03.txt) established the mapping.
+- Modalities represented: goals declare listening/speaking/reading/writing
+  per goal; writing track (K-31), kana/kanji reading, listening via
+  reference audio + scenarios.
+- Automated curriculum audit passes: audit-curriculum, audit-sources
+  (0 errors; 1 known warning: ai-drafted-kana has no external URL — original
+  AI-drafted content, correct to have no locator), audit-licenses 0 errors.
+- Coverage map linkage: docs/assessment/RELEASE_COVERAGE.yaml rows for
+  on-ramp/A1 reference exactly these goal/assessment ids (cross-checked
+  programmatically 2026-10-04).
+
+Verdict: acceptance criteria met; band label stays "A1-like coverage,
+partial (review pending)" per claim rules.

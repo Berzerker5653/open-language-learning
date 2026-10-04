@@ -225,3 +225,12 @@ pub fn is_documentation(rel: &str) -> bool {
         || rel.starts_with("NOTICE")
         || rel.starts_with(".")
 }
+
+/// Governance metadata allowed inside a pack tree (REVIEW-001): the pack's
+/// review policy and version-bound review records. Not content; never
+/// schema-validated as content, but constrained to known paths so typos and
+/// smuggled files still surface as unknown_file warnings.
+pub fn is_governance(rel: &str) -> bool {
+    rel == "review/REVIEW_POLICY.yaml"
+        || (rel.starts_with("review/records/") && rel.ends_with(".yaml"))
+}

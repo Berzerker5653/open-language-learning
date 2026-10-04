@@ -43,6 +43,8 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
+| REVIEW-001 | quality | review policy (AI screening honest layer, qualification categories, sampling rules, BLK-REVIEW-CAPACITY) + finite A1–B2 coverage map (on-ramp 5, A1 15 implemented; A2/B1/B2 frozen targets) + reviewer kit; awaiting owner in-chat approval (`state/evidence/REVIEW-001/`) | REVIEW-001 |
+| SPEECH-007-infra | speech | eligibility registry (version/hash-bound, fail-closed), pronunciation gating with honest guided/automatic labels, preregistration protocol skeleton; calibration DATA blocked (owner decision: license dataset or consented recordings) (`state/evidence/SPEECH-007/`) | SPEECH-007 |
 
 ## next — training methods the research says we're missing
 

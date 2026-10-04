@@ -399,3 +399,28 @@ fn goals_sharding_accepted() {
         "sharded goals must validate: {diags:?}"
     );
 }
+
+#[test]
+fn review_governance_paths_accepted() {
+    // REVIEW-001: review/REVIEW_POLICY.yaml is governance metadata, not an
+    // unknown file.
+    let diags = validate("valid-review-dir", Mode::Scaffold);
+    assert_eq!(
+        error_count(&diags),
+        0,
+        "review policy must validate: {diags:?}"
+    );
+    assert!(
+        !codes(&diags).contains(&"unknown_file"),
+        "review/REVIEW_POLICY.yaml must not be flagged: {diags:?}"
+    );
+}
+
+#[test]
+fn stray_file_under_review_dir_flagged() {
+    let diags = validate("invalid-review-stray", Mode::Scaffold);
+    let flagged = diags
+        .iter()
+        .any(|d| d.code == "unknown_file" && d.file == "review/stray.yaml");
+    assert!(flagged, "only known governance paths are exempt: {diags:?}");
+}

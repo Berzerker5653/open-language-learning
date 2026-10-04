@@ -1,0 +1,57 @@
+# Preregistered calibration protocol skeleton (docs/17 §Protocol and
+# permission gates). SPEECH-007 infrastructure: this artifact freezes the
+# METHOD now; numeric limits must be filled and frozen BEFORE any held-out
+# result is viewed, and unfilled limits keep automatic scoring disabled.
+# Nothing here is evidence of calibration.
+
+protocol_version: "0.1.0"
+status: skeleton-limits-unfrozen
+feature_id: ja.phon.long-vowel
+language: ja
+variety: standard-japanese
+
+scope_declaration: >
+  Phrase-scoped vowel-length contrast (おばさん/おばあさん family) inside
+  taught lesson contexts. This feature must NOT inherit broad Japanese
+  pronunciation claims (docs/17 §23).
+
+features_measured:
+  - false_correction_rate            # corrections on human-acceptable attempts
+  - incorrect_actionable_corrections # among all issued corrections
+  - missed_meaningful_errors         # conditional on scored AND overall
+  - false_acceptance_rate            # misleading-praise risk
+  - abstention_retry_rate
+  - scoring_coverage                 # eligible attempts scored
+  - confidence_reliability_at_bands  # calibration, not raw provider score
+
+frozen_limits:            # MUST be filled before held-out evaluation; None = disabled
+  max_false_correction_rate: null
+  min_scoring_coverage: null
+  min_label_agreement: null
+
+data_plan:
+  dev_holdout_split: speaker-disjoint; repeated attempts grouped by speaker
+  word_family_holdout: true           # claims cover unseen phrase families
+  learner_speech_required: true       # read-speech corpora are ASR baselines only
+  includes: [acceptable-reference, learner-errors, ambiguous, wrong-utterance,
+             silence, noise, clipping]
+  permissions: >
+    Dataset licenses/consents recorded in benchmarks/speech/datasets/<id>/manifest.yaml
+    BEFORE use; microphone permission != evaluation retention/training/publication.
+    Raw audio stays outside source control; only permitted aggregates/checksums ship.
+
+labeling:
+  reviewers: 2 independent qualified labelers, labels frozen before model
+    outputs revealed
+  rubric: distinguish intelligibility, task success, specific contrast,
+    stylistic preference; accepted natural variants are NOT negatives
+  disagreements: adjudicated and recorded; unresolvable cases excluded from
+    automatic judgments but reported
+
+hardware_tiers: [low-cpu-desktop, typical-desktop]   # mobile deferred (PLAT-002)
+configuration_binding: >
+  Passing records bind provider/model/interpreter/pack versions + model
+  checksum + protocol/dataset/result hashes (see lts_speech_api::calibration);
+  any drift invalidates eligibility until revalidation.
+
+sampling_rationale: TBD-justify-sample-sizes-before-heldout

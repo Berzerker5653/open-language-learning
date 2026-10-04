@@ -1,0 +1,34 @@
+REVIEW-001 artifacts — 2026-10-04 (pending owner in-chat approval)
+
+Artifacts:
+- languages/ja-JP/review/REVIEW_POLICY.yaml (policy_version 1.0.0):
+  review types (structural/ai_screening/linguistic/pedagogical/technical),
+  qualification categories per type, full-review core vs stratified sampling
+  for unscored periphery, version-bound record schema, trust-state promotion
+  rules with promotion authority (AI caps at screened), owner scope paths
+  (accept_draft_labeling_at_release; recorded narrowing), and the declared
+  blocker BLK-REVIEW-CAPACITY.
+- docs/assessment/RELEASE_COVERAGE.yaml (coverage_version 1.0.0):
+  finite required objective sets — on-ramp 5 + A1 15 (implemented-draft,
+  linked to pack goal/assessment ids), A2 14, B1 14, B2 12 (frozen target
+  sets, not authored). Framework: JF Standard (primary) + CEFR CV 2020
+  (reference), alignment rationale, prohibited claims, machine-verifiable
+  gates, claim rules, explicit exclusions.
+- languages/ja-JP/review/REVIEWER_KIT.md + review/records/TEMPLATE.yaml:
+  reviewer ask, privacy rules, record template, free recruitment paths.
+
+AI-review boundary (owner proposal 2026-10-04): multi-model AI consensus is
+encoded as `ai_screening` — gates bulk batches and flags defects, records
+model/version/verdicts, routes inter-model disagreement to a human queue —
+but per docs/16/docs/09 it never satisfies a human gate and never promotes
+past `screened`. Owner's alternative for release without reviewers is the
+explicit `accept_draft_labeling_at_release` path.
+
+Validator proof of the new governance layout path (review/REVIEW_POLICY.yaml,
+review/records/*.yaml): fixtures valid-review-dir / invalid-review-stray;
+tests review_governance_paths_accepted + stray_file_under_review_dir_flagged;
+docs/packs/CONTRIBUTING.md layout contract updated.
+`langpack validate languages/ja-JP`: 0 errors, 0 warnings.
+
+Status: awaiting owner approval to flip both artifacts to agreed-<date> and
+mark REVIEW-001 done.

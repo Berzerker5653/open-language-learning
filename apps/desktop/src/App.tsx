@@ -1198,7 +1198,13 @@ export function App() {
     if (route === "shadowing") return;
     const inv = detectInvoke();
     if (!inv || !pronDemo) {
-      setPronResult({ corrections: [], abstain_reason: "aligner-unavailable", pitch: EMPTY_PITCH });
+      setPronResult({
+        corrections: [],
+        abstain_reason: "aligner-unavailable",
+        pitch: EMPTY_PITCH,
+        mode: "guided",
+        mode_reason: "no-calibration-record",
+      });
       return;
     }
     try {
@@ -1215,6 +1221,8 @@ export function App() {
         corrections: [],
         abstain_reason: "abstained:engine-error",
         pitch: EMPTY_PITCH,
+        mode: "guided",
+        mode_reason: "no-calibration-record",
       });
     }
   }

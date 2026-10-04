@@ -1,0 +1,154 @@
+# Japanese reference-pack review policy (REVIEW-001).
+#
+# Formalizes docs/16 §Trust-Promotion and docs/09 §Content-review-gates into a
+# machine-readable policy. Review records live in languages/ja-JP/review/records/
+# as version-bound YAML files referencing this policy_version.
+#
+# HONESTY RULE (non-negotiable, docs/16 line "AI review can flag issues ... and
+# cannot serve as that human reviewer"; docs/09 §Finite-reference-band):
+# no required human gate may be satisfied by AI, including multi-model AI
+# consensus. ai_screening is an acceleration layer that finds defects early;
+# it never promotes content and never counts toward coverage percentages.
+
+policy_version: "1.0.0"
+schema_version: 1
+status: draft-pending-owner-approval   # flips to agreed-<date> on owner in-chat approval
+
+# ---------------------------------------------------------------------------
+# Review types and required qualifications
+# ---------------------------------------------------------------------------
+review_types:
+  structural:
+    executor: automated            # schema/ID/graph/license audits (langpack CLI)
+    counts_toward_human_gates: false
+  ai_screening:
+    executor: ai                   # multi-model screening, see ai_screening section
+    counts_toward_human_gates: false
+    purpose: >
+      Flag likely linguistic/pedagogical defects before human review time is
+      spent; gate bulk generation batches (a batch must pass structural +
+      ai_screening before the next batch is generated).
+  linguistic:
+    executor: qualified_human
+    scope: naturalness, meaning, grammar, readings/pronunciation, accepted
+      variants, register, translation adequacy, distractor plausibility
+    qualifications:
+      required_any:
+        - native_japanese
+        - near_native_japanese_documented   # documented evidence, not self-claim
+      required_also_any:
+        - japanese_linguistics_training     # incl. phonetics for pronunciation targets
+        - japanese_language_teaching_credential
+    note: native/near-native status alone does not qualify (docs/06 §Content-review).
+  pedagogical:
+    executor: qualified_human
+    scope: difficulty, prerequisite load, task validity, scaffolding,
+      distractor quality, transfer value, accessibility of instructional form
+    qualifications:
+      required_any:
+        - language_teaching_experience_documented   # any language, assessed level
+        - curriculum_or_assessment_design_experience
+      required_also_any:
+        - native_japanese
+        - near_native_japanese_documented
+  technical:
+    executor: qualified_human
+    scope: rendering, audio linkage, speech targets, determinism, platform
+      behavior; listening to actual reference/TTS audio in lesson context
+    qualifications:
+      required_any: [project_technical_reviewer]   # maintainer-authorized engineer
+      required_also_any: [native_japanese, near_native_japanese_documented]
+
+# ---------------------------------------------------------------------------
+# Full-review core vs sampled periphery (docs/09 §Finite-reference-band)
+# ---------------------------------------------------------------------------
+coverage:
+  full_review_required:             # 100% of these need qualified human review
+    - all scored targets and assessment items (including answer variants)
+    - reused core instructional content (explanations, examples, dialogs)
+    - target readings and reference audio/prosody used for teaching or scoring
+    - coverage-map objective statements themselves (curriculum/assessment expertise)
+  sampling_allowed_for:             # lower-risk unscored generated practice only
+    population: unscored generated practice variants outside the full-review core
+    method: stratified by goal band and content type; seed recorded per batch
+    min_sample: 25 percent or 20 items per stratum, whichever is larger
+    record: [population, selection_seed, size, findings, expansion_rule,
+             unreviewed_ids, residual_risk]
+    limits: labeled unreviewed; excluded from decisive mastery/coverage claims
+
+# ---------------------------------------------------------------------------
+# Review records
+# ---------------------------------------------------------------------------
+records:
+  location: languages/ja-JP/review/records/
+  required_fields:
+    - reviewer_qualification_category   # category id from review_types above
+    - reviewer_pseudonym                # personal details private unless consent
+    - attribution_consent               # explicit; default false
+    - reviewed_ids_or_range
+    - content_versions                  # pack/content version bound
+    - review_type
+    - date
+    - issues: [{severity, id, description, resolution}]
+    - unresolved_disagreements
+    - adjudication                      # escalation path outcome
+  severity_scale: docs/09 §Severity (P0..P3)
+  promotion_blockers: any unresolved P0 or P1 in scope
+  corrections: docs/16 §Corrections (stable IDs, version bump, regression test,
+    evidence re-evaluation, correction notes)
+
+# ---------------------------------------------------------------------------
+# Trust states and promotion authority
+# ---------------------------------------------------------------------------
+trust_states: [draft, screened, reviewed, verified, reference]
+promotion_rules:
+  draft->screened: structural pass + ai_screening pass (never implies correctness)
+  screened->reviewed: qualified_human records complete for the item's scope
+  reviewed->verified: all review types complete, no unresolved P0/P1,
+    source/license audit pass
+  verified->reference: coverage gates below pass for the claimed band
+promotion_authority:
+  ai: may promote only to screened
+  qualified_human: may promote to reviewed/verified
+  owner: may promote to reference only when coverage gates pass and evidence
+    records exist; owner may NOT substitute self-review for qualified review
+owner_scope_paths:
+  # The only owner actions that change review requirements (both recorded,
+  # never silent):
+  - accept_draft_labeling_at_release: content ships labeled draft/unreviewed;
+      band completeness claims forbidden (docs/18 §Course-completeness)
+  - change_required_objective_set: requires recorded rationale + renewed
+      claim assessment (docs/09); narrowing to pass gates is a scope decision
+
+# ---------------------------------------------------------------------------
+# AI screening layer (owner-requested 2026-10-04; honest boundaries)
+# ---------------------------------------------------------------------------
+ai_screening:
+  enabled: true
+  method: multi-model independent review of each batch
+  required_models: ">=2 distinct model families, run independently"
+  record: [{model_id, model_version, date, prompt_version, verdicts,
+            issues_raised, disagreements_between_models}]
+  inter_model_disagreement: routes item to human-review priority queue
+  never:
+    - counts as any human gate
+    - promotes beyond screened
+    - certifies naturalness, register, or pronunciation
+  disagreement_with_human: human record wins; AI verdict archived
+
+# ---------------------------------------------------------------------------
+# Declared blockers (docs/09: missing reviewer capacity is a blocker, not
+# permission to invent approval)
+# ---------------------------------------------------------------------------
+blockers:
+  - id: BLK-REVIEW-CAPACITY
+    since: 2026-10-04
+    description: >
+      No qualified human reviewer engaged. Owner (2026-08/2026-10-04) is a
+      learner, not a qualified reviewer, and cannot perform the gate.
+      Multi-model AI screening is approved as an acceleration layer only.
+    blocks: [screened->reviewed, reviewed->verified, verified->reference]
+    unblock_path: >
+      Engage qualified reviewer(s) via reviewer kit
+      (languages/ja-JP/review/REVIEWER_KIT.md); free paths listed there.
+      Alternative owner path: accept_draft_labeling_at_release.

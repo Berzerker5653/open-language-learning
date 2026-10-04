@@ -1,0 +1,226 @@
+# Finite release coverage map (REVIEW-001) — the denominator for all band
+# completeness claims (docs/09 §Finite-reference-band, docs/18 §Course-completeness).
+#
+# A band may be labeled complete only when every required objective row here
+# passes the machine-verifiable gates below. Narrowing the required set is an
+# owner scope decision requiring recorded rationale, never a silent edit.
+#
+# STATUS: on-ramp/A1 objectives are implemented (draft review state, pack
+# org.openlanguage.ja-jp.reference v0.1.0). A2/B1/B2 objectives are the frozen
+# target set; content is not authored. No band may be claimed complete until
+# gates pass; all bands are currently partial by review state.
+
+coverage_version: "1.0.0"
+schema_version: 1
+status: draft-pending-owner-approval   # flips to agreed-<date> on owner in-chat approval
+language_pack: org.openlanguage.ja-jp.reference
+variant: standard-japanese
+
+frameworks:
+  primary:
+    name: Japan Foundation Standard "Can-do" descriptors
+    edition: JF Standard for Japanese-Language Education (CEFR-aligned A1-C2;
+      activity descriptors through A1-B2)
+    use: functional objective wording and activity framing
+  reference:
+    name: CEFR Companion Volume
+    edition: "2020"
+    use: modality/support-condition vocabulary and level anchoring
+  alignment_rationale: >
+    JF Standard is the established functional framework for Japanese and is
+    CEFR-aligned by its authors; CEFR CV supplies descriptor scales and
+    support-condition language. Alignment is "informed by/aligned with", NOT
+    an equivalence or certification claim (docs/18). Level breadth per band
+    follows JF activity descriptor ranges; qualified curriculum/assessment
+    reviewers must approve breadth at promotion.
+  prohibited_claims: [official certification, direct framework equivalence,
+    proficiency from course completion alone]
+
+# ---------------------------------------------------------------------------
+# Required objective sets (finite)
+# ---------------------------------------------------------------------------
+bands:
+  onramp:
+    label: zero-knowledge entry (not a CEFR band)
+    objectives:   # implemented; linked to pack goal IDs
+      - {id: ja.goal.onramp.respond-to-greeting, modalities: [listening, speaking],
+         contexts: [daily greetings], assessments: [ja.assess.onramp.greeting-transfer],
+         content_status: implemented-draft}
+      - {id: ja.goal.onramp.kana-hiragana, modalities: [reading, writing],
+         contexts: [hiragana inventory incl. dakuten/youon], assessments: [ja.assess.kana-hiragana],
+         content_status: implemented-draft}
+      - {id: ja.goal.onramp.kana-katakana, modalities: [reading, writing],
+         contexts: [katakana inventory, loanwords], assessments: [ja.assess.kana-katakana],
+         content_status: implemented-draft}
+      - {id: ja.goal.onramp.politeness-basics, modalities: [listening, speaking],
+         contexts: [desu/masu framing, set phrases], assessments: [ja.assess.politeness-basics],
+         content_status: implemented-draft}
+      - {id: ja.goal.onramp.introduce-yourself, modalities: [listening, speaking, reading],
+         contexts: [name, origin, simple self-intro], assessments: [ja.assess.introduce-yourself],
+         content_status: implemented-draft}
+  A1:
+    label: A1-like (breakthrough)
+    objectives:   # implemented; 15 functional goals, all lesson+assessment mapped (K-31 audit)
+      - {id: ja.goal.a1.identify-objects, modalities: [listening, speaking, reading],
+         contexts: [this/that, objects nearby], assessments: [ja.assess.identify-objects],
+         content_status: implemented-draft}
+      - {id: ja.goal.a1.describe-qualities, modalities: [listening, speaking, reading],
+         contexts: [adjectives, simple description], assessments: [ja.assess.describe-qualities],
+         content_status: implemented-draft}
+      - {id: ja.goal.a1.talk-about-meals, modalities: [listening, speaking, reading],
+         contexts: [food, like/dislike framing, ordering basics], assessments: [ja.assess.talk-about-meals],
+         content_status: implemented-draft}
+      - {id: ja.goal.a1.likes-dislikes, modalities: [listening, speaking, reading],
+         contexts: [preferences, activities], assessments: [ja.assess.likes-dislikes],
+         content_status: implemented-draft}
+      - {id: ja.goal.a1.go-places, modalities: [listening, speaking],
+         contexts: [movement, destinations], assessments: [ja.assess.go-places],
+         content_status: implemented-draft}
+      - {id: ja.goal.a1.tell-time, modalities: [listening, speaking, reading],
+         contexts: [times, days, schedules], assessments: [ja.assess.tell-time],
+         content_status: implemented-draft}
+      - {id: ja.goal.a1.shop-ask-price, modalities: [listening, speaking],
+         contexts: [service encounters, prices], assessments: [ja.assess.shop-ask-price],
+         content_status: implemented-draft}
+      - {id: ja.goal.a1.ask-location, modalities: [listening, speaking],
+         contexts: [places, existence, location Qs], assessments: [ja.assess.ask-location],
+         content_status: implemented-draft}
+      - {id: ja.goal.a1.daily-routine, modalities: [listening, speaking, reading, writing],
+         contexts: [routine narration, particles], assessments: [ja.assess.daily-routine],
+         content_status: implemented-draft}
+      - {id: ja.goal.a1.family-work, modalities: [listening, speaking, reading],
+         contexts: [people, jobs, possession], assessments: [ja.assess.family-work],
+         content_status: implemented-draft}
+      - {id: ja.goal.a1.conversation-repair, modalities: [listening, speaking],
+         contexts: [clarification, repetition requests], assessments: [ja.assess.conversation-repair],
+         content_status: implemented-draft}
+      - {id: ja.goal.a1.kanji-core, modalities: [reading],
+         contexts: [high-frequency kanji in known words], assessments: [ja.assess.kanji-core],
+         content_status: implemented-draft}
+      - {id: ja.goal.a1.sound-contrasts, modalities: [listening, speaking],
+         contexts: [core Japanese contrasts (docs/06 §Phonology)], assessments: [ja.assess.sound-contrasts],
+         content_status: implemented-draft}
+      - {id: ja.goal.a1.weather-chat, modalities: [listening, speaking],
+         contexts: [weather, seasons, small talk], assessments: [ja.assess.weather-chat],
+         content_status: implemented-draft}
+      - {id: ja.goal.a1.numbers-counters, modalities: [listening, speaking, reading],
+         contexts: [counting, counters, quantities], assessments: [ja.assess.numbers-counters],
+         content_status: implemented-draft}
+  A2:
+    label: A2-like (waystage, entry)
+    objectives:   # frozen target set; original can-do wording; NOT YET AUTHORED
+      - {id: ja.goal.a2.describe-past-event, modalities: [speaking, writing],
+         contexts: [narrating yesterday/last weekend], prerequisites: [ja.goal.a1.daily-routine],
+         assessment_plan: [checkpoint production, transfer novel-prompt, retention check]}
+      - {id: ja.goal.a2.make-plans, modalities: [listening, speaking],
+         contexts: [invitations, scheduling with others]}
+      - {id: ja.goal.a2.give-directions, modalities: [listening, speaking],
+         contexts: [locations, routes, simple maps]}
+      - {id: ja.goal.a2.compare-things, modalities: [speaking, reading],
+         contexts: [comparatives, superlatives in familiar topics]}
+      - {id: ja.goal.a2.healthy-life, modalities: [listening, speaking],
+         contexts: [body, symptoms at pharmacy/clinic framing]}
+      - {id: ja.goal.a2.past-experiences, modalities: [speaking],
+         contexts: [experience/experience-not-yet framing]}
+      - {id: ja.goal.a2.reasons-opinions-simple, modalities: [speaking, writing],
+         contexts: [because, like/dislike reasons, preferences]}
+      - {id: ja.goal.a2.requests-favors, modalities: [listening, speaking],
+         contexts: [requests, permission, refusals with mitigation]}
+      - {id: ja.goal.a2.rules-obligation, modalities: [reading, speaking],
+         contexts: [signs, notices, must/must-not situations]}
+      - {id: ja.goal.a2.describe-people-places, modalities: [speaking, writing],
+         contexts: [relative clauses on familiar nouns]}
+      - {id: ja.goal.a2.short-messages, modalities: [reading, writing],
+         contexts: [notes, emails, SNS-style short text]}
+      - {id: ja.goal.a2.daily-needs-shop2, modalities: [listening, speaking],
+         contexts: [returns, exchanges, specifying choices]}
+      - {id: ja.goal.a2.conditional-hypothetical, modalities: [speaking],
+         contexts: [if/when in familiar routines]}
+      - {id: ja.goal.a2.listen-announcements, modalities: [listening],
+         contexts: [station/platform announcements, constrained natural speed]}
+  B1:
+    label: B1-like (threshold)
+    objectives:   # frozen target set; NOT YET AUTHORED
+      - {id: ja.goal.b1.travel-situations, modalities: [listening, speaking],
+         contexts: [unplanned travel problems, accommodation, transport]}
+      - {id: ja.goal.b1.narrate-story, modalities: [speaking, writing],
+         contexts: [connected past narrative with evaluation]}
+      - {id: ja.goal.b1.explain-opinion, modalities: [speaking, writing],
+         contexts: [opinion + reasons + simple counterpoint]}
+      - {id: ja.goal.b1.work-school-tasks, modalities: [listening, speaking, reading],
+         contexts: [routine work/school communication, instructions]}
+      - {id: ja.goal.b1.dreams-goals, modalities: [speaking, writing],
+         contexts: [plans, hopes, intentions]}
+      - {id: ja.goal.b1.agree-disagree, modalities: [listening, speaking],
+         contexts: [interaction: partial agreement, soft disagreement]}
+      - {id: ja.goal.b1.passive-impersonal, modalities: [reading, listening],
+         contexts: [news-style passive, is/wa vs ga topic framing]}
+      - {id: ja.goal.b1.giving-receiving-network, modalities: [speaking, listening],
+         contexts: [age/morae/ageru/morau/kudasaru with social framing]}
+      - {id: ja.goal.b1.transact-services2, modalities: [listening, speaking],
+         contexts: [appointments, phone basics, form-filling]}
+      - {id: ja.goal.b1.read-articles-simple, modalities: [reading],
+         contexts: [short graded articles with furigana support fading]}
+      - {id: ja.goal.b1.write-correspondence, modalities: [writing],
+         contexts: [apology/thanks/invitation messages, register choice]}
+      - {id: ja.goal.b1.handle-breakdown, modalities: [listening, speaking],
+         contexts: [repair, paraphrase, circumlocution on familiar topics]}
+      - {id: ja.goal.b1.emotions-reactions, modalities: [speaking, reading],
+         contexts: [adjective-derived reactions, -tai/-souda framing]}
+      - {id: ja.goal.b1.compare-perspectives, modalities: [reading, speaking],
+         contexts: [two short texts on one familiar issue, compare stance]}
+  B2:
+    label: B2-like (vantage)
+    objectives:   # frozen target set; NOT YET AUTHORED
+      - {id: ja.goal.b2.argue-position, modalities: [speaking, writing],
+         contexts: [structured argument on general issues, hedging]}
+      - {id: ja.goal.b2.discuss-abstract, modalities: [listening, speaking],
+         contexts: [social/cultural topics beyond personal experience]}
+      - {id: ja.goal.b2.connected-texts, modalities: [reading, writing],
+         contexts: [essays, reports, connectors, nominalization]}
+      - {id: ja.goal.b2.fluency-interaction, modalities: [listening, speaking],
+         contexts: [spontaneous interaction, native-speed multi-turn]}
+      - {id: ja.goal.b2.register-shifting, modalities: [speaking, writing],
+         contexts: [plain/formal/humble-appreciative switching by context]}
+      - {id: ja.goal.b2.summarize-paraphrase, modalities: [listening, speaking, writing],
+         contexts: [summary of talks/articles, restating for different audiences]}
+      - {id: ja.goal.b2.conditionals-advanced, modalities: [reading, speaking],
+         contexts: [tara/to/ba/nu-to nuance in argument]}
+      - {id: ja.goal.b2.passive-causative-complex, modalities: [reading, listening],
+         contexts: [causative-passive, victim narratives, journalistic passive]}
+      - {id: ja.goal.b2.ambiguity-ellipsis, modalities: [reading, listening],
+         contexts: [omission recovery, context-dependent reference]}
+      - {id: ja.goal.b2.authentic-media, modalities: [listening, reading],
+         contexts: [news, podcasts, opinion columns with support fading]}
+      - {id: ja.goal.b2.presentation, modalities: [speaking],
+         contexts: [short structured presentation with Q&A]}
+      - {id: ja.goal.b2.style-differences, modalities: [reading, writing],
+         contexts: [spoken vs written style, colloquial contractions awareness]}
+
+# ---------------------------------------------------------------------------
+# Machine-verifiable gates (docs/09) — evaluated per claimed band
+# ---------------------------------------------------------------------------
+gates:
+  coverage_linkage: 100% of required objectives linked to implemented
+    lessons/tasks + checkpoint/transfer plans + retention checks; zero missing
+    dependencies or unresolved references (langpack audit-curriculum)
+  review_core: 100% of full_review_required scope (REVIEW_POLICY) has
+    version-bound qualified_human records; no unresolved P0/P1
+  sampling_disclosed: sampled periphery records complete and labeled
+  speech_features: automatic feedback features pass docs/17 qualification
+    registry or remain guided/unscored
+  sources_licenses: audit-sources/audit-licenses clean for band content
+promotion: band label (partial/complete) computed from gates; complete only
+  when all gates pass; any significant change to required set requires
+  recorded review and renewed claim assessment
+
+claim_rules:
+  - bands here are targets; current pack claims at most "A1-like coverage,
+    partial (review pending)" until gates pass
+  - checkpoint performance != proficiency; transfer under stated conditions only
+  - sampled unreviewed practice excluded from decisive claims
+
+exclusions_explicit:
+  - kanji handwriting production as a gate for speaking bands
+  - pitch-accent automatic scoring beyond SPEECH-007 qualified envelope
+  - certification/equivalence claims of any kind

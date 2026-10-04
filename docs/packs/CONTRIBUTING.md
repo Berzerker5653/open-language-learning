@@ -30,6 +30,10 @@ cargo run -p lts-langpack-cli -- build my-pack --out my-pack-1.0.0.lpk
   `review-needed` → reviewed only by humans).
 - `activities/scenarios/*.yaml`, `language/phonology.yaml`,
   `media/*.wav` — optional; media requires rights for distribution.
+- `review/REVIEW_POLICY.yaml`, `review/records/*.yaml` — optional governance
+  metadata (a pack's review policy and version-bound review records). Not
+  content; exempt from content schema validation but restricted to these
+  exact paths.
 
 ## Licensing and provenance rules
 

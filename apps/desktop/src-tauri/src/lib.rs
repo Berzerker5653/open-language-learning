@@ -1365,6 +1365,10 @@ struct PronunciationResult {
     corrections: Vec<PronunciationCorrection>,
     abstain_reason: Option<String>,
     pitch: PitchComparison,
+    /// SPEECH-007: "guided" unless a Qualified calibration record binds the
+    /// exact installed combination and the request sits inside its envelope.
+    mode: &'static str,
+    mode_reason: Option<String>,
 }
 
 fn empty_pitch(reason: &str) -> PitchComparison {
@@ -1518,6 +1522,8 @@ fn pronunciation_check_at(
         corrections: Vec::new(),
         abstain_reason: Some(reason),
         pitch: empty_pitch("not-aligned"),
+        mode: "guided",
+        mode_reason: Some("not-scored".into()),
     };
     let packs_root = data.join("packs");
     let version = lts_langpack::archive::current_version(&attempt.pack_id, &packs_root)
@@ -1608,6 +1614,61 @@ fn pronunciation_check_at(
         reference_ratio: rl / rs,
         ..Default::default()
     };
+    // SPEECH-007 gate: automatic feedback only when a Qualified calibration
+    // record binds this exact installed combination and the request sits
+    // inside its declared envelope; otherwise guided (docs/17 §97).
+    use lts_speech_api::calibration::{ComponentRef, InstalledCombination, load_records};
+    let info = lts_speech_api::PronunciationInterpreter::info(&interpreter);
+    let model_entry = models::load_catalog()
+        .models
+        .into_iter()
+        .find(|m| m.id == "org.openlanguage.speech.whisper-ggml-tiny");
+    let installed = InstalledCombination {
+        provider: ComponentRef {
+            id: "whisper.cpp".into(),
+            // No version introspection from the sidecar binary: an empty
+            // version can never match a record, so drift fails closed.
+            version: String::new(),
+            sha256: None,
+        },
+        model: ComponentRef {
+            id: "org.openlanguage.speech.whisper-ggml-tiny".into(),
+            version: model_entry
+                .as_ref()
+                .map(|m| m.version.clone())
+                .unwrap_or_default(),
+            sha256: model_entry
+                .as_ref()
+                .and_then(|m| m.files.iter().map(|f| f.sha256.clone()).max()),
+        },
+        interpreter: ComponentRef {
+            id: info.id,
+            version: info.version,
+            sha256: None,
+        },
+        pack: ComponentRef {
+            id: attempt.pack_id.clone(),
+            version: version.clone(),
+            sha256: None,
+        },
+        variety: "standard-japanese".into(),
+        context: "pronunciation-practice".into(),
+    };
+    let eligibility = match load_records(&pack_dir)
+        .into_iter()
+        .find(|r| r.feature_id == "ja.phon.long-vowel")
+    {
+        None => lts_speech_api::calibration::Eligibility::Guided {
+            reason: "no-calibration-record".into(),
+        },
+        Some(rec) => lts_speech_api::calibration::eligibility_for(&rec, &installed),
+    };
+    let (mode, mode_reason) = match &eligibility {
+        lts_speech_api::calibration::Eligibility::Automatic => ("automatic", None),
+        lts_speech_api::calibration::Eligibility::Guided { reason } => {
+            ("guided", Some(reason.clone()))
+        }
+    };
     Ok(match interpreter.interpret(&evidence) {
         lts_speech_api::ProviderOutcome::Usable { value, .. } => PronunciationResult {
             corrections: value
@@ -1620,11 +1681,15 @@ fn pronunciation_check_at(
                 .collect(),
             abstain_reason: None,
             pitch,
+            mode,
+            mode_reason,
         },
         other => PronunciationResult {
             corrections: Vec::new(),
             abstain_reason: Some(outcome_reason(&other)),
             pitch,
+            mode,
+            mode_reason,
         },
     })
 }

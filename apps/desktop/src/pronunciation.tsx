@@ -32,6 +32,10 @@ export interface PronunciationResult {
   corrections: PronunciationCorrection[];
   abstain_reason: string | null;
   pitch: PitchComparison;
+  /** SPEECH-007: "guided" unless a qualified calibration record binds the
+   * exact installed provider/model/interpreter/pack combination. */
+  mode: "guided" | "automatic";
+  mode_reason: string | null;
 }
 
 /** Normalized (semitone-relative) contour as an accessible polyline. */
@@ -156,9 +160,11 @@ export function PronunciationPractice(props: PronunciationProps) {
             </ul>
           )}
           <p>
-            <small>
-              Guided feedback only: this comparison is a reference, not a grade. Your recording
-              stays on this device and is never saved.
+            <small data-testid="feedback-mode">
+              {result.mode === "automatic"
+                ? "Calibrated automatic feedback: validated for this exact model and configuration."
+                : "Guided feedback only: this comparison is a reference, not a grade. Your recording" +
+                  " stays on this device and is never saved."}
             </small>
           </p>
           <div aria-label="Pitch contour comparison">

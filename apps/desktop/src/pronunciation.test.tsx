@@ -38,6 +38,8 @@ describe("PronunciationPractice", () => {
             },
           ],
           abstain_reason: null,
+          mode: "guided",
+          mode_reason: "no-calibration-record",
           pitch: {
             reference: [0, 1, 2, 3],
             attempt: [0, 0.5, 1],
@@ -61,6 +63,8 @@ describe("PronunciationPractice", () => {
           corrections: [],
           abstain_reason: "mismatch:expected-text-not-matched",
           pitch: EMPTY_PITCH,
+          mode: "guided",
+          mode_reason: "no-calibration-record",
         }}
       />,
     );
@@ -76,6 +80,8 @@ describe("PronunciationPractice", () => {
         result={{
           corrections: [],
           abstain_reason: null,
+          mode: "guided",
+          mode_reason: "no-calibration-record",
           pitch: {
             reference: [0, 1.2, 2.4, 1.1, 0.2],
             attempt: [0, 0.3, 0.1, 0.4, 0],
@@ -92,6 +98,30 @@ describe("PronunciationPractice", () => {
     expect(html).toContain("Your attempt: roughly level overall");
     expect(html).not.toMatch(/[\d.]+\s*Hz/); // no numeric-Hz rule in the UI
     expect(html).toMatch(/reference-only until calibration/);
+  });
+
+  it("labels calibrated automatic feedback distinctly from guided", () => {
+    const html = renderToStaticMarkup(
+      <PronunciationPractice
+        {...base}
+        hasAttempt
+        result={{
+          corrections: [
+            {
+              feature_id: "ja.phon.long-vowel",
+              band: "possible-issue",
+              feedback_template_id: "speech.long-vowel.shorter",
+            },
+          ],
+          abstain_reason: null,
+          mode: "automatic",
+          mode_reason: null,
+          pitch: EMPTY_PITCH,
+        }}
+      />,
+    );
+    expect(html).toContain("Calibrated automatic feedback");
+    expect(html).not.toContain("Guided feedback only");
   });
 
   it("offers stop control while recording", () => {

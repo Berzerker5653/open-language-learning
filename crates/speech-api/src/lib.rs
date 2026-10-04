@@ -6,6 +6,7 @@
 //! preserving per-stage reason codes so a technical failure is never treated
 //! as a learner error.
 
+pub mod calibration;
 use serde::{Deserialize, Serialize};
 
 /// Outcome classification shared by all provider stages (docs/05).

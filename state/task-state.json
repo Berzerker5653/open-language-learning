@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "active_task": null,
+  "active_task": "REVIEW-001",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -768,6 +768,14 @@
       "evidence": [
         "state/evidence/POLISH-001/latency-2026-10-04.txt",
         "state/evidence/POLISH-001/walkthrough-2026-10-04.txt"
+      ]
+    },
+    "REVIEW-001": {
+      "status": "in_progress",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/evidence/REVIEW-001/artifacts-2026-10-04.txt"
       ]
     }
   },

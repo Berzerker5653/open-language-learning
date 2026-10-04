@@ -95,7 +95,7 @@ impl Pack {
                 layout::classify(&rel)
             };
             let Some(classified) = classified else {
-                if !layout::is_documentation(&rel) {
+                if !layout::is_documentation(&rel) && !layout::is_governance(&rel) {
                     pack.unknown_files.push(rel);
                 }
                 continue;
