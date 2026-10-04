@@ -1,0 +1,37 @@
+== K-30 pack gates 2026-10-03 ==
+--- validate ---
+validate(scaffold): 0 error(s), 0 warning(s)
+--- lint ---
+info[unused_source] sources.jsonl/1: source "edrdg-jmdict" is not referenced by any content record
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+warning[source_missing_url] sources.jsonl/4: source "ai-drafted-kana" records no URL/DOI locator (docs/10 source registry)
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+lint: 0 error(s), 1 warning(s)
+--- test (expected: LIC-001 gates only) ---
+error[license_redistribution_blocked] licenses.jsonl/0: inventory entry "lic-original-draft" forbids redistribution; install is blocked until resolved
+error[license_pending] licenses.jsonl/0/license: license selection is pending (owner decision LIC-001); install is blocked
+error[license_redistribution_blocked] licenses.jsonl/1: inventory entry "lic-model-output" forbids redistribution; install is blocked until resolved
+error[license_pending] licenses.jsonl/1/license: license selection is pending (owner decision LIC-001); install is blocked
+error[redistribution_blocked] manifest.yaml/license: manifest.license.redistribution_allowed must be true for install; resolve the license inventory first (LIC-001)
+info[unused_source] sources.jsonl/1: source "edrdg-jmdict" is not referenced by any content record
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+warning[source_missing_url] sources.jsonl/4: source "ai-drafted-kana" records no URL/DOI locator (docs/10 source registry)
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+error[license_pending] licenses.jsonl/0/license: inventory entry "lic-original-draft" has a pending license (owner decision LIC-001); reference build blocked
+error[original_redistribution_blocked] licenses.jsonl/0: original content "lic-original-draft" may not be redistributed until the owner resolves licensing (LIC-001)
+error[license_pending] licenses.jsonl/1/license: inventory entry "lic-model-output" has a pending license (owner decision LIC-001); reference build blocked
+test: 8 error(s), 1 warning(s)
+--- counts ---
+units: 31
+lexicon: 211
+sentences: 61
+kanji: 57
+orthography: 147
+contrasts: 7
+concepts: 15
+goals: 20
+assessments: 20
+scenarios: 4
+stories: 3

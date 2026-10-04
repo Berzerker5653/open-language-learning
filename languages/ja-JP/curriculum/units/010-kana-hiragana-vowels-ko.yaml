@@ -1,0 +1,37 @@
+# ai-assisted draft unit (K-30); content refs are pack data; qualified review pending.
+id: ja.unit.kana-hiragana-vowels-ko
+goal_id: ja.goal.onramp.kana-hiragana
+title: 'Hiragana: vowels and K-row'
+summary: First ten hiragana with symbol/reading drills.
+estimated_minutes: 8
+generation_contract:
+  allowed_vocab: &id001
+  - ja.orth.hira.a
+  - ja.orth.hira.i
+  - ja.orth.hira.u
+  - ja.orth.hira.e
+  - ja.orth.hira.o
+  - ja.orth.hira.ka
+  - ja.orth.hira.ki
+  - ja.orth.hira.ku
+  - ja.orth.hira.ke
+  - ja.orth.hira.ko
+  allowed_grammar: []
+  new_item_budget: 0
+  validation_method: exact-match
+activities:
+- id: ja.activity.kana-hira-vk-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs: *id001
+- id: ja.activity.kana-hira-vk-match
+  type: match
+  modality: reading
+  support_level: 3
+  content_refs: *id001
+- id: ja.activity.kana-hira-vk-recall
+  type: recall-choice
+  modality: reading
+  support_level: 1
+  content_refs: *id001

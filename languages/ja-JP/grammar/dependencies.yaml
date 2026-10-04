@@ -1,7 +1,94 @@
-# Dependency map mirror (PACK-002): goal prerequisite edges must match
-# curriculum/goals.yaml exactly; concept→concept dependencies live here
-# because the 0.2 concept schema carries no prerequisites field.
-
-prerequisite_edges: []
+prerequisite_edges:
+- from: ja.goal.onramp.kana-katakana
+  to: ja.orth.hira.a
+  dimension: orthography-recognition
+  required_state: independent
+  strength: helpful
+- from: ja.goal.onramp.politeness-basics
+  to: ja.lex.greeting.konnichiwa
+  dimension: recall-meaning
+  required_state: supported
+  strength: helpful
+- from: ja.goal.onramp.introduce-yourself
+  to: ja.lex.greeting.konnichiwa
+  dimension: recall-meaning
+  required_state: supported
+  strength: hard
+- from: ja.goal.onramp.introduce-yourself
+  to: ja.expr.introduction.hajimemashite
+  dimension: recall-meaning
+  required_state: supported
+  strength: helpful
+- from: ja.goal.a1.identify-objects
+  to: ja.grammar.copula.polite-desu
+  dimension: grammar-controlled
+  required_state: supported
+  strength: hard
+- from: ja.goal.a1.describe-qualities
+  to: ja.grammar.particle.topic-wa
+  dimension: grammar-controlled
+  required_state: supported
+  strength: hard
+- from: ja.goal.a1.talk-about-meals
+  to: ja.lex.food-drink.gohan
+  dimension: recall-meaning
+  required_state: supported
+  strength: hard
+- from: ja.goal.a1.likes-dislikes
+  to: ja.grammar.copula.polite-desu
+  dimension: grammar-controlled
+  required_state: supported
+  strength: hard
+- from: ja.goal.a1.go-places
+  to: ja.lex.verbs.ikimasu
+  dimension: recall-meaning
+  required_state: supported
+  strength: hard
+- from: ja.goal.a1.tell-time
+  to: ja.lex.numbers.juu
+  dimension: recall-meaning
+  required_state: supported
+  strength: helpful
+- from: ja.goal.a1.shop-ask-price
+  to: ja.lex.questions.ikura
+  dimension: recall-meaning
+  required_state: supported
+  strength: hard
+- from: ja.goal.a1.ask-location
+  to: ja.lex.demonstratives.koko
+  dimension: recall-meaning
+  required_state: supported
+  strength: hard
+- from: ja.goal.a1.daily-routine
+  to: ja.lex.verbs.okimasu
+  dimension: recall-meaning
+  required_state: supported
+  strength: hard
+- from: ja.goal.a1.family-work
+  to: ja.grammar.copula.polite-desu
+  dimension: grammar-controlled
+  required_state: supported
+  strength: hard
+- from: ja.goal.a1.conversation-repair
+  to: ja.lex.verbs.wakarimasu
+  dimension: recall-meaning
+  required_state: supported
+  strength: hard
+- from: ja.goal.a1.kanji-core
+  to: ja.orth.hira.a
+  dimension: orthography-recognition
+  required_state: independent
+  strength: hard
+- from: ja.goal.a1.weather-chat
+  to: ja.lex.adjectives.samui
+  dimension: recall-meaning
+  required_state: supported
+  strength: helpful
+- from: ja.goal.a1.numbers-counters
+  to: ja.lex.numbers.juu
+  dimension: recall-meaning
+  required_state: independent
+  strength: hard
 notes:
-  - "Generated validator must compare this graph with concept and goal prerequisites and reject cycles."
+- Mirror of goal prerequisite edges (PACK-002); generated from curriculum/goals.yaml
+  during K-30 authoring.

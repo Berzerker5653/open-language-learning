@@ -1,0 +1,73 @@
+# ai-assisted draft unit (K-30); content refs are pack data; qualified review pending.
+id: ja.unit.kana-katakana
+goal_id: ja.goal.onramp.kana-katakana
+title: 'Katakana: the full basic set'
+summary: Katakana chart; loanword spellings appear in later units.
+estimated_minutes: 12
+generation_contract:
+  allowed_vocab: &id001
+  - ja.orth.kata.a
+  - ja.orth.kata.i
+  - ja.orth.kata.u
+  - ja.orth.kata.e
+  - ja.orth.kata.o
+  - ja.orth.kata.ka
+  - ja.orth.kata.ki
+  - ja.orth.kata.ku
+  - ja.orth.kata.ke
+  - ja.orth.kata.ko
+  - ja.orth.kata.sa
+  - ja.orth.kata.shi
+  - ja.orth.kata.su
+  - ja.orth.kata.se
+  - ja.orth.kata.so
+  - ja.orth.kata.ta
+  - ja.orth.kata.chi
+  - ja.orth.kata.tsu
+  - ja.orth.kata.te
+  - ja.orth.kata.to
+  - ja.orth.kata.na
+  - ja.orth.kata.ni
+  - ja.orth.kata.nu
+  - ja.orth.kata.ne
+  - ja.orth.kata.no
+  - ja.orth.kata.ha
+  - ja.orth.kata.hi
+  - ja.orth.kata.fu
+  - ja.orth.kata.he
+  - ja.orth.kata.ho
+  - ja.orth.kata.ma
+  - ja.orth.kata.mi
+  - ja.orth.kata.mu
+  - ja.orth.kata.me
+  - ja.orth.kata.mo
+  - ja.orth.kata.ya
+  - ja.orth.kata.yu
+  - ja.orth.kata.yo
+  - ja.orth.kata.ra
+  - ja.orth.kata.ri
+  - ja.orth.kata.ru
+  - ja.orth.kata.re
+  - ja.orth.kata.ro
+  - ja.orth.kata.wa
+  - ja.orth.kata.wo
+  - ja.orth.kata.n
+  allowed_grammar: []
+  new_item_budget: 0
+  validation_method: exact-match
+activities:
+- id: ja.activity.kana-kata-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs: *id001
+- id: ja.activity.kana-kata-match
+  type: match
+  modality: reading
+  support_level: 3
+  content_refs: *id001
+- id: ja.activity.kana-kata-recall
+  type: recall-choice
+  modality: reading
+  support_level: 1
+  content_refs: *id001

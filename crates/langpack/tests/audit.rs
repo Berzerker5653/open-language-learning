@@ -75,11 +75,12 @@ fn seed_draft_blocks_redistribution_and_reports_sources() {
         diags.iter().any(|d| d.code == "license_pending"),
         "{diags:?}"
     );
-    assert_eq!(
-        report.len(),
-        4,
-        "all four seed sources must appear in the attribution report"
-    );
+    for id in ["jf-standard", "edrdg-jmdict", "pyopenjtalk", "commonvoice-ja-27"] {
+        assert!(
+            report.iter().any(|e| e.source_id == id),
+            "seed source {id} missing from the attribution report"
+        );
+    }
     assert!(
         report
             .iter()

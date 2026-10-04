@@ -1,0 +1,34 @@
+# ai-assisted draft unit (K-30); content refs are pack data; qualified review pending.
+id: ja.unit.politeness-basics
+goal_id: ja.goal.onramp.politeness-basics
+title: Thanks and excuse me
+summary: Core polite phrases and when they fit.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab: &id001
+  - ja.lex.greetings.arigatou-gozaimasu
+  - ja.lex.greetings.arigatou
+  - ja.lex.greetings.sumimasen
+  - ja.lex.greetings.shitsurei-shimasu
+  - ja.sent.thanks-polite
+  - ja.sent.excuse-me
+  allowed_grammar:
+  - ja.grammar.politeness.register
+  new_item_budget: 0
+  validation_method: exact-match
+activities:
+- id: ja.activity.poli-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs: *id001
+- id: ja.activity.poli-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs: *id001
+- id: ja.activity.poli-speak
+  type: retrieval
+  modality: speaking
+  support_level: 2
+  content_refs: *id001

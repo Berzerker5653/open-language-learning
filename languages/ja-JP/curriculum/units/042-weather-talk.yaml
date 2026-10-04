@@ -1,0 +1,32 @@
+# ai-assisted draft unit (K-30); content refs are pack data; qualified review pending.
+id: ja.unit.weather-talk
+goal_id: ja.goal.a1.weather-chat
+title: Talking about weather
+summary: Weather nouns and temperature adjectives.
+estimated_minutes: 7
+generation_contract:
+  allowed_vocab: &id001
+  - ja.lex.weather.tenki
+  - ja.lex.weather.ame
+  - ja.lex.weather.yuki
+  - ja.lex.weather.hare
+  - ja.lex.adjectives.samui
+  - ja.lex.adjectives.atsui
+  - ja.sent.weather-good
+  - ja.sent.rain-today
+  - ja.sent.cold-tomorrow
+  allowed_grammar:
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 0
+  validation_method: exact-match
+activities:
+- id: ja.activity.wea-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs: *id001
+- id: ja.activity.wea-speak
+  type: retrieval
+  modality: speaking
+  support_level: 2
+  content_refs: *id001

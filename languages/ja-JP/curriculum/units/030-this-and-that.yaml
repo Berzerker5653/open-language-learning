@@ -1,0 +1,41 @@
+# ai-assisted draft unit (K-30); content refs are pack data; qualified review pending.
+id: ja.unit.this-and-that
+goal_id: ja.goal.a1.identify-objects
+title: This, that, and over there
+summary: Demonstratives with the topic marker.
+estimated_minutes: 7
+generation_contract:
+  allowed_vocab: &id001
+  - ja.lex.demonstratives.kore
+  - ja.lex.demonstratives.sore
+  - ja.lex.demonstratives.are
+  - ja.lex.demonstratives.kono
+  - ja.lex.demonstratives.sono
+  - ja.lex.objects.hon
+  - ja.lex.objects.pen
+  - ja.lex.objects.kasa
+  - ja.sent.this-is-book
+  - ja.sent.that-is-pen
+  - ja.sent.what-is-this
+  allowed_grammar:
+  - ja.grammar.copula.polite-desu
+  - ja.grammar.particle.topic-wa
+  - ja.grammar.demonstratives.kore-sore-are
+  new_item_budget: 0
+  validation_method: exact-match
+activities:
+- id: ja.activity.dem-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs: *id001
+- id: ja.activity.dem-match
+  type: match
+  modality: reading
+  support_level: 3
+  content_refs: *id001
+- id: ja.activity.dem-recall
+  type: recall-choice
+  modality: reading
+  support_level: 1
+  content_refs: *id001

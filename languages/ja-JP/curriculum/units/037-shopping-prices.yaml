@@ -1,0 +1,40 @@
+# ai-assisted draft unit (K-30); content refs are pack data; qualified review pending.
+id: ja.unit.shopping-prices
+goal_id: ja.goal.a1.shop-ask-price
+title: Shopping and prices
+summary: Asking prices and buying with counters.
+estimated_minutes: 8
+generation_contract:
+  allowed_vocab: &id001
+  - ja.lex.questions.ikura
+  - ja.lex.numbers.en
+  - ja.lex.numbers.hyaku
+  - ja.lex.numbers.satsu
+  - ja.lex.verbs.kaimasu
+  - ja.lex.verbs.kaimono-shimasu
+  - ja.sent.how-much
+  - ja.sent.hundred-yen
+  - ja.sent.buy-bread
+  - ja.sent.three-books
+  allowed_grammar:
+  - ja.grammar.counters.basic
+  new_item_budget: 0
+  validation_method: exact-match
+activities:
+- id: ja.activity.shop-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs: *id001
+- id: ja.activity.shop-cloze
+  type: cloze
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.sent.how-much
+  - ja.sent.hundred-yen
+- id: ja.activity.shop-scenario
+  type: scenario
+  modality: interaction
+  support_level: 2
+  scenario_id: ja.scenario.shopping.market

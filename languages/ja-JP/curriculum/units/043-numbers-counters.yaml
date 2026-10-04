@@ -1,0 +1,47 @@
+# ai-assisted draft unit (K-30); content refs are pack data; qualified review pending.
+id: ja.unit.numbers-counters
+goal_id: ja.goal.a1.numbers-counters
+title: Numbers and counters
+summary: Counting prices, people, and objects.
+estimated_minutes: 8
+generation_contract:
+  allowed_vocab: &id001
+  - ja.lex.numbers.ichi
+  - ja.lex.numbers.ni
+  - ja.lex.numbers.san
+  - ja.lex.numbers.yon
+  - ja.lex.numbers.go
+  - ja.lex.numbers.roku
+  - ja.lex.numbers.nana
+  - ja.lex.numbers.hachi
+  - ja.lex.numbers.kyuu
+  - ja.lex.numbers.juu
+  - ja.lex.numbers.hyaku
+  - ja.lex.numbers.sen
+  - ja.lex.numbers.mai-mai
+  - ja.lex.numbers.hon-counter
+  - ja.lex.numbers.satsu
+  - ja.lex.numbers.nin
+  - ja.lex.numbers.kai-counter
+  - ja.sent.two-people
+  - ja.sent.three-books
+  allowed_grammar:
+  - ja.grammar.counters.basic
+  new_item_budget: 0
+  validation_method: exact-match
+activities:
+- id: ja.activity.num-enc
+  type: encounter-read
+  modality: reading
+  support_level: 4
+  content_refs: *id001
+- id: ja.activity.num-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs: *id001
+- id: ja.activity.num-speak
+  type: retrieval
+  modality: speaking
+  support_level: 1
+  content_refs: *id001

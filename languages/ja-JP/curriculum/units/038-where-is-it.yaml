@@ -1,0 +1,35 @@
+# ai-assisted draft unit (K-30); content refs are pack data; qualified review pending.
+id: ja.unit.where-is-it
+goal_id: ja.goal.a1.ask-location
+title: Asking where things are
+summary: Question word and here/there answers.
+estimated_minutes: 7
+generation_contract:
+  allowed_vocab: &id001
+  - ja.lex.questions.doko
+  - ja.lex.demonstratives.koko
+  - ja.lex.demonstratives.soko
+  - ja.lex.demonstratives.asoko
+  - ja.lex.places.eki
+  - ja.sent.where-station
+  - ja.sent.here-it-is
+  allowed_grammar:
+  - ja.grammar.demonstratives.kore-sore-are
+  new_item_budget: 0
+  validation_method: exact-match
+activities:
+- id: ja.activity.loc-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs: *id001
+- id: ja.activity.loc-speak
+  type: retrieval
+  modality: speaking
+  support_level: 2
+  content_refs: *id001
+- id: ja.activity.loc-scenario
+  type: scenario
+  modality: interaction
+  support_level: 2
+  scenario_id: ja.scenario.directions.station

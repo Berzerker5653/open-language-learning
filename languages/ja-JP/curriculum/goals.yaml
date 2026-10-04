@@ -23,3 +23,578 @@ goals:
       tool: omp
       model: strata/qwen3.8-flash-next
       date: "2026-10-03"
+
+  - id: ja.goal.onramp.kana-hiragana
+    description: Recognize hiragana chart symbols on sight (both directions) well enough
+      to read supported kana text.
+    band: on-ramp
+    framework_refs: []
+    contexts: []
+    modalities:
+    - reading
+    prerequisites: []
+    required_concepts:
+    - ja.orth.hira.a
+    - ja.orth.hira.i
+    - ja.orth.hira.u
+    - ja.orth.hira.e
+    - ja.orth.hira.o
+    assessment_ids:
+    - ja.assess.kana-hiragana
+    transfer_required: false
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'
+
+  - id: ja.goal.onramp.kana-katakana
+    description: Recognize katakana chart symbols on sight, including common loanword
+      spellings.
+    band: on-ramp
+    framework_refs: []
+    contexts: []
+    modalities:
+    - reading
+    prerequisites:
+    - target: ja.orth.hira.a
+      dimension: orthography-recognition
+      required_state: independent
+      strength: helpful
+    required_concepts:
+    - ja.orth.kata.a
+    - ja.orth.kata.i
+    - ja.orth.kata.u
+    - ja.orth.kata.e
+    - ja.orth.kata.o
+    assessment_ids:
+    - ja.assess.kana-katakana
+    transfer_required: false
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'
+
+  - id: ja.goal.onramp.politeness-basics
+    description: Use thanks, apology, and attention-getting phrases appropriately in supported
+      situations.
+    band: on-ramp
+    framework_refs: []
+    contexts:
+    - ja.situation.classroom
+    modalities:
+    - listening
+    - speaking
+    - interaction
+    prerequisites:
+    - target: ja.lex.greeting.konnichiwa
+      dimension: recall-meaning
+      required_state: supported
+      strength: helpful
+    required_concepts:
+    - ja.lex.greetings.arigatou-gozaimasu
+    - ja.lex.greetings.sumimasen
+    assessment_ids:
+    - ja.assess.politeness-basics
+    transfer_required: true
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'
+
+  - id: ja.goal.onramp.introduce-yourself
+    description: 'Give a first-meeting introduction: name marker and set phrases, in a
+      supported scenario.'
+    band: on-ramp
+    framework_refs: []
+    contexts:
+    - ja.situation.first-meeting
+    modalities:
+    - listening
+    - speaking
+    - interaction
+    prerequisites:
+    - target: ja.lex.greeting.konnichiwa
+      dimension: recall-meaning
+      required_state: supported
+      strength: hard
+    - target: ja.expr.introduction.hajimemashite
+      dimension: recall-meaning
+      required_state: supported
+      strength: helpful
+    required_concepts:
+    - ja.lex.pronouns.watashi
+    - ja.grammar.particle.topic-wa
+    - ja.grammar.copula.polite-desu
+    assessment_ids:
+    - ja.assess.introduce-yourself
+    transfer_required: true
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'
+
+  - id: ja.goal.a1.identify-objects
+    description: Identify nearby and distant objects using this/that words with the topic
+      marker.
+    band: A1
+    framework_refs: []
+    contexts:
+    - ja.situation.classroom
+    modalities:
+    - listening
+    - reading
+    - speaking
+    prerequisites:
+    - target: ja.grammar.copula.polite-desu
+      dimension: grammar-controlled
+      required_state: supported
+      strength: hard
+    required_concepts:
+    - ja.lex.demonstratives.kore
+    - ja.lex.demonstratives.sore
+    - ja.lex.demonstratives.are
+    assessment_ids:
+    - ja.assess.identify-objects
+    transfer_required: true
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'
+
+  - id: ja.goal.a1.describe-qualities
+    description: Describe people, objects, and food with basic adjectives.
+    band: A1
+    framework_refs: []
+    contexts:
+    - ja.situation.classroom
+    modalities:
+    - listening
+    - speaking
+    - reading
+    prerequisites:
+    - target: ja.grammar.particle.topic-wa
+      dimension: grammar-controlled
+      required_state: supported
+      strength: hard
+    required_concepts:
+    - ja.lex.adjectives.oishii
+    - ja.lex.adjectives.takai
+    - ja.lex.adjectives.ookii
+    assessment_ids:
+    - ja.assess.describe-qualities
+    transfer_required: true
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'
+
+  - id: ja.goal.a1.talk-about-meals
+    description: 'Talk about eating and drinking: food vocabulary, verbs, and meal set
+      phrases.'
+    band: A1
+    framework_refs: []
+    contexts:
+    - ja.situation.restaurant
+    modalities:
+    - listening
+    - speaking
+    - reading
+    prerequisites:
+    - target: ja.lex.food-drink.gohan
+      dimension: recall-meaning
+      required_state: supported
+      strength: hard
+    required_concepts:
+    - ja.lex.verbs.tabemasu
+    - ja.lex.verbs.nomimasu
+    - ja.lex.greetings.itadakimasu
+    assessment_ids:
+    - ja.assess.talk-about-meals
+    transfer_required: true
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'
+
+  - id: ja.goal.a1.likes-dislikes
+    description: State likes and dislikes using suki/kirai constructions.
+    band: A1
+    framework_refs: []
+    contexts:
+    - ja.situation.restaurant
+    modalities:
+    - speaking
+    - reading
+    prerequisites:
+    - target: ja.grammar.copula.polite-desu
+      dimension: grammar-controlled
+      required_state: supported
+      strength: hard
+    required_concepts:
+    - ja.lex.adjectives.suki
+    - ja.lex.adjectives.kirai
+    - ja.grammar.adjectives.suki-na
+    assessment_ids:
+    - ja.assess.likes-dislikes
+    transfer_required: true
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'
+
+  - id: ja.goal.a1.go-places
+    description: Say where you go using destination particles and place vocabulary.
+    band: A1
+    framework_refs: []
+    contexts:
+    - ja.situation.directions
+    modalities:
+    - listening
+    - speaking
+    - reading
+    prerequisites:
+    - target: ja.lex.verbs.ikimasu
+      dimension: recall-meaning
+      required_state: supported
+      strength: hard
+    required_concepts:
+    - ja.lex.places.gakkou
+    - ja.lex.places.eki
+    - ja.grammar.particle.goal-e
+    assessment_ids:
+    - ja.assess.go-places
+    transfer_required: true
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'
+
+  - id: ja.goal.a1.tell-time
+    description: Ask and tell the time and name days of the week.
+    band: A1
+    framework_refs: []
+    contexts:
+    - ja.situation.classroom
+    modalities:
+    - listening
+    - speaking
+    prerequisites:
+    - target: ja.lex.numbers.juu
+      dimension: recall-meaning
+      required_state: supported
+      strength: helpful
+    required_concepts:
+    - ja.lex.time.nanji
+    - ja.lex.time.kyou
+    - ja.lex.time.getsuyoubi
+    assessment_ids:
+    - ja.assess.tell-time
+    transfer_required: true
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'
+
+  - id: ja.goal.a1.shop-ask-price
+    description: Ask prices and buy something using counters and polite request forms.
+    band: A1
+    framework_refs: []
+    contexts:
+    - ja.situation.shopping
+    modalities:
+    - listening
+    - speaking
+    - interaction
+    prerequisites:
+    - target: ja.lex.questions.ikura
+      dimension: recall-meaning
+      required_state: supported
+      strength: hard
+    required_concepts:
+    - ja.lex.numbers.en
+    - ja.lex.verbs.kaimasu
+    - ja.grammar.counters.basic
+    assessment_ids:
+    - ja.assess.shop-ask-price
+    transfer_required: true
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'
+
+  - id: ja.goal.a1.ask-location
+    description: Ask where something is and answer with here/there words.
+    band: A1
+    framework_refs: []
+    contexts:
+    - ja.situation.directions
+    modalities:
+    - listening
+    - speaking
+    prerequisites:
+    - target: ja.lex.demonstratives.koko
+      dimension: recall-meaning
+      required_state: supported
+      strength: hard
+    required_concepts:
+    - ja.lex.questions.doko
+    - ja.lex.demonstratives.koko
+    - ja.lex.demonstratives.soko
+    assessment_ids:
+    - ja.assess.ask-location
+    transfer_required: true
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'
+
+  - id: ja.goal.a1.daily-routine
+    description: Describe a simple daily routine with time markers and routine verbs.
+    band: A1
+    framework_refs: []
+    contexts:
+    - ja.situation.home-routine
+    modalities:
+    - speaking
+    - reading
+    prerequisites:
+    - target: ja.lex.verbs.okimasu
+      dimension: recall-meaning
+      required_state: supported
+      strength: hard
+    required_concepts:
+    - ja.lex.verbs.nemasu
+    - ja.lex.time.mainichi
+    - ja.grammar.particle.time-ni
+    assessment_ids:
+    - ja.assess.daily-routine
+    transfer_required: true
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'
+
+  - id: ja.goal.a1.family-work
+    description: Say who your family are and what they do using own-family terms.
+    band: A1
+    framework_refs: []
+    contexts:
+    - ja.situation.first-meeting
+    modalities:
+    - speaking
+    - reading
+    prerequisites:
+    - target: ja.grammar.copula.polite-desu
+      dimension: grammar-controlled
+      required_state: supported
+      strength: hard
+    required_concepts:
+    - ja.lex.people.kazoku
+    - ja.lex.people.chichi
+    - ja.lex.people.haha
+    assessment_ids:
+    - ja.assess.family-work
+    transfer_required: true
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'
+
+  - id: ja.goal.a1.conversation-repair
+    description: Keep a conversation going with comprehension-repair phrases (I don't
+      understand; one more time; slowly).
+    band: A1
+    framework_refs: []
+    contexts:
+    - ja.situation.classroom
+    modalities:
+    - listening
+    - speaking
+    - interaction
+    prerequisites:
+    - target: ja.lex.verbs.wakarimasu
+      dimension: recall-meaning
+      required_state: supported
+      strength: hard
+    required_concepts:
+    - ja.sent.dont-understand
+    - ja.sent.again-please
+    - ja.sent.slowly-please
+    assessment_ids:
+    - ja.assess.conversation-repair
+    transfer_required: true
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'
+
+  - id: ja.goal.a1.kanji-core
+    description: Recognize core N5 kanji by meaning and reading (SRS-gated).
+    band: A1
+    framework_refs: []
+    contexts: []
+    modalities:
+    - reading
+    prerequisites:
+    - target: ja.orth.hira.a
+      dimension: orthography-recognition
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.kanji.hito
+    - ja.kanji.ichi
+    - ja.kanji.hi
+    assessment_ids:
+    - ja.assess.kanji-core
+    transfer_required: false
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'
+
+  - id: ja.goal.a1.sound-contrasts
+    description: Perceptually distinguish common Japanese sound contrasts in isolated
+      words.
+    band: A1
+    framework_refs: []
+    contexts: []
+    modalities:
+    - listening
+    prerequisites: []
+    required_concepts:
+    - ja.contrast.vowel-length.obasan
+    - ja.contrast.gemination.kite
+    assessment_ids:
+    - ja.assess.sound-contrasts
+    transfer_required: false
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'
+
+  - id: ja.goal.a1.weather-chat
+    description: Comment on the weather with basic expressions.
+    band: A1
+    framework_refs: []
+    contexts:
+    - ja.situation.classroom
+    modalities:
+    - speaking
+    - listening
+    prerequisites:
+    - target: ja.lex.adjectives.samui
+      dimension: recall-meaning
+      required_state: supported
+      strength: helpful
+    required_concepts:
+    - ja.lex.weather.tenki
+    - ja.lex.weather.ame
+    assessment_ids:
+    - ja.assess.weather-chat
+    transfer_required: true
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'
+
+  - id: ja.goal.a1.numbers-counters
+    description: Use numbers and basic counters for prices, people, and objects.
+    band: A1
+    framework_refs: []
+    contexts:
+    - ja.situation.shopping
+    modalities:
+    - listening
+    - speaking
+    prerequisites:
+    - target: ja.lex.numbers.juu
+      dimension: recall-meaning
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.lex.numbers.hyaku
+    - ja.lex.numbers.satsu
+    - ja.lex.numbers.nin
+    assessment_ids:
+    - ja.assess.numbers-counters
+    transfer_required: true
+    sources:
+    - jf-standard
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next
+      date: '2026-10-03'

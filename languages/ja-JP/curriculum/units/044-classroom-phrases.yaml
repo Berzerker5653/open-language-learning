@@ -1,0 +1,35 @@
+# ai-assisted draft unit (K-30); content refs are pack data; qualified review pending.
+id: ja.unit.classroom-phrases
+goal_id: ja.goal.a1.conversation-repair
+title: In the classroom
+summary: Teacher/student words and comprehension-repair practice.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab: &id001
+  - ja.lex.pronouns.sensei
+  - ja.lex.people.gakusei
+  - ja.lex.verbs.benkyou-shimasu
+  - ja.lex.verbs.wakarimasu
+  - ja.sent.understand
+  - ja.sent.dont-understand
+  - ja.sent.again-please
+  allowed_grammar:
+  - ja.grammar.politeness.register
+  new_item_budget: 0
+  validation_method: exact-match
+activities:
+- id: ja.activity.cls-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs: *id001
+- id: ja.activity.cls-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs: *id001
+- id: ja.activity.cls-speak
+  type: retrieval
+  modality: speaking
+  support_level: 1
+  content_refs: *id001

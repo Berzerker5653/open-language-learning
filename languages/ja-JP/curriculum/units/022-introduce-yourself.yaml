@@ -1,0 +1,40 @@
+# ai-assisted draft unit (K-30); content refs are pack data; qualified review pending.
+id: ja.unit.introduce-yourself
+goal_id: ja.goal.onramp.introduce-yourself
+title: Introducing yourself
+summary: Name marker and first-meeting set phrases, ending in the scenario.
+estimated_minutes: 10
+generation_contract:
+  allowed_vocab: &id001
+  - ja.lex.pronouns.watashi
+  - ja.lex.greetings.ohayou-gozaimasu
+  - ja.sent.nice-meet
+  - ja.sent.my-name-wa
+  - ja.sent.name-desu
+  - ja.sent.nice-to-meet
+  allowed_grammar:
+  - ja.grammar.copula.polite-desu
+  - ja.grammar.particle.topic-wa
+  new_item_budget: 0
+  validation_method: exact-match
+activities:
+- id: ja.activity.intro-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs: *id001
+- id: ja.activity.intro-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs: *id001
+- id: ja.activity.intro-speak
+  type: retrieval
+  modality: speaking
+  support_level: 2
+  content_refs: *id001
+- id: ja.activity.intro-scenario
+  type: scenario
+  modality: interaction
+  support_level: 2
+  scenario_id: ja.scenario.first-meeting.greeting

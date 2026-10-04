@@ -1,0 +1,21 @@
+# ai-assisted graded story (K-30); sentence ids only; reading is formative.
+id: ja.story.first-day
+status: draft
+title: A first day
+description: Graded reader text built from pack sentences.
+sentences:
+- ja.sent.greet-morning
+- ja.sent.nice-meet
+- ja.sent.my-name-wa
+- ja.sent.this-is-book
+- ja.sent.book-expensive
+- ja.sent.greet-day
+- ja.sent.see-you-tomorrow
+sources:
+- jf-standard
+notes: ai-assisted draft; qualified review pending.
+generation:
+  method: ai-assisted
+  tool: omp
+  model: strata/qwen3.8-flash-next
+  date: '2026-10-03'

@@ -1,0 +1,52 @@
+# ai-assisted draft unit (K-30); content refs are pack data; qualified review pending.
+id: ja.unit.kana-hiragana-dakuten
+goal_id: ja.goal.onramp.kana-hiragana
+title: 'Hiragana: voiced and semi-voiced marks'
+summary: Dakuten and handakuten families built on known base characters.
+estimated_minutes: 10
+generation_contract:
+  allowed_vocab: &id001
+  - ja.orth.hira.ga
+  - ja.orth.hira.gi
+  - ja.orth.hira.gu
+  - ja.orth.hira.ge
+  - ja.orth.hira.go
+  - ja.orth.hira.za
+  - ja.orth.hira.ji
+  - ja.orth.hira.zu
+  - ja.orth.hira.ze
+  - ja.orth.hira.zo
+  - ja.orth.hira.da
+  - ja.orth.hira.ji2
+  - ja.orth.hira.zu2
+  - ja.orth.hira.de
+  - ja.orth.hira.do
+  - ja.orth.hira.ba
+  - ja.orth.hira.bi
+  - ja.orth.hira.bu
+  - ja.orth.hira.be
+  - ja.orth.hira.bo
+  - ja.orth.hira.pa
+  - ja.orth.hira.pi
+  - ja.orth.hira.pu
+  - ja.orth.hira.pe
+  - ja.orth.hira.po
+  allowed_grammar: []
+  new_item_budget: 0
+  validation_method: exact-match
+activities:
+- id: ja.activity.kana-hira-dak-enc
+  type: encounter-read
+  modality: reading
+  support_level: 4
+  content_refs: *id001
+- id: ja.activity.kana-hira-dak-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs: *id001
+- id: ja.activity.kana-hira-dak-recall
+  type: recall-choice
+  modality: reading
+  support_level: 1
+  content_refs: *id001

@@ -30,12 +30,13 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-22 | Chunking conventions: topic-sharded lexicon, `NNN-<topic>` unit naming, sentence/kanji/story sharding rules — documented and validator-proven (`state/notes/K-22.md`) | layout contract |
 | K-23 | Goals sharding: `curriculum/goals/*.yaml` accepted (ids pack-global, cross-file dupes fail) (`state/notes/K-23.md`) | layout contract |
 | K-24 | `new-unit`/`new-lexicon` scaffold subcommands: schema-valid starters, goal auto-pickup, NNN+10 naming, placeholders as warnings (`state/notes/K-24.md`) | PACK-005 |
-
+| K-30 | JA-A1 on-ramp curriculum authored: 31 units, 20 goals+assessments, 211 lexicon, 147 kana, 57 kanji, 61 sentences, 7 contrasts, 4 scenarios, 3 stories — all draft/review-needed, install blocked only by LIC-001 (`state/notes/K-30.md`) | JA-A1-001 |
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
+| K-31 | content | JA-A1-002: A1 functional goal coverage | JA-A1-002 |
 
 ## next — training methods the research says we're missing
 
@@ -47,12 +48,10 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
 
-## later — content production & expansion
+## next — content production & expansion (owner-approved 2026-10-03)
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
-| K-30 | content | JA-A1-001: author full on-ramp curriculum (kana-first, ~30–50 units, hundreds of sourced entries) using the CLI loop; AI-drafted, `review-needed` | JA-A1-001 |
-| K-31 | content | JA-A1-002: A1 functional goal coverage | JA-A1-002 |
 | K-32 | content | Replace `ja-demo` default with real on-ramp pack once K-30 passes `langpack test` | — |
 | K-33 | platform | ACC-001 accessibility audit (auto portion) | ACC-001 |
 | K-34 | platform | PLAT-001 Windows/macOS parity | PLAT-001 |

@@ -1,0 +1,41 @@
+# ai-assisted draft unit (K-30); content refs are pack data; qualified review pending.
+id: ja.unit.daily-routine
+goal_id: ja.goal.a1.daily-routine
+title: My day
+summary: Routine verbs with time markers.
+estimated_minutes: 8
+generation_contract:
+  allowed_vocab: &id001
+  - ja.lex.verbs.okimasu
+  - ja.lex.verbs.nemasu
+  - ja.lex.time.mainichi
+  - ja.lex.time.asa
+  - ja.lex.time.hiru
+  - ja.lex.time.ban
+  - ja.lex.time.yoru
+  - ja.sent.wake-up
+  - ja.sent.sleep-night
+  - ja.sent.eat-breakfast
+  allowed_grammar:
+  - ja.grammar.particle.time-ni
+  - ja.grammar.verb.polite-masu
+  new_item_budget: 0
+  validation_method: exact-match
+activities:
+- id: ja.activity.day-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs: *id001
+- id: ja.activity.day-dict
+  type: dictation
+  modality: listening
+  support_level: 2
+  content_refs:
+  - ja.sent.wake-up
+  - ja.sent.sleep-night
+- id: ja.activity.day-speak
+  type: retrieval
+  modality: speaking
+  support_level: 2
+  content_refs: *id001

@@ -1,0 +1,46 @@
+# ai-assisted draft scenario (K-30); wording pending qualified review.
+id: ja.scenario.shopping.market
+goal_id: ja.goal.a1.shop-ask-price
+title: At the shop
+situation: ja.situation.shopping
+register: ja.register.polite-neutral
+nodes:
+- id: ja.scenario.shopping.market.open
+  prompt: You pick up an item. Ask how much it is.
+  expected_actions:
+  - ask-price
+  next:
+  - ja.scenario.shopping.market.buy
+  recovery:
+  - id: ja.scenario.shopping.market.repair-repeat
+    prompt: You did not catch the price. Politely ask them to repeat it.
+    expected_actions:
+    - ask-repeat
+    to: ja.scenario.shopping.market.open
+- id: ja.scenario.shopping.market.buy
+  prompt: The price is fine. Say you will buy it and hand over money.
+  expected_actions:
+  - state-buy
+  - hand-money
+  next:
+  - ja.scenario.shopping.market.close
+- id: ja.scenario.shopping.market.close
+  prompt: They thank you. Close with a polite thanks.
+  expected_actions:
+  - say-thanks
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Model response in Japanese script with romaji scaffold
+- support_level: 5
+  description: Full suggested wording including a first-language gloss
+transfer_variants_required: 2
+transfer_variants:
+- id: ja.scenario.shopping.market.bookstore
+  description: Buying books at a bookstore
+  changed_variable: shop kind
+- id: ja.scenario.shopping.market.bakery
+  description: Buying bread in the morning
+  changed_variable: time and goods

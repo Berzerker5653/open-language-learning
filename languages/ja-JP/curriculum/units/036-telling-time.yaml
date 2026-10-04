@@ -1,0 +1,40 @@
+# ai-assisted draft unit (K-30); content refs are pack data; qualified review pending.
+id: ja.unit.telling-time
+goal_id: ja.goal.a1.tell-time
+title: Time and days
+summary: Asking the time, telling hours, naming days.
+estimated_minutes: 8
+generation_contract:
+  allowed_vocab: &id001
+  - ja.lex.time.nanji
+  - ja.lex.time.han
+  - ja.lex.time.kyou
+  - ja.lex.time.ashita
+  - ja.lex.time.getsuyoubi
+  - ja.lex.time.kayoubi
+  - ja.lex.numbers.san
+  - ja.sent.what-time
+  - ja.sent.three-oclock
+  - ja.sent.half-past
+  - ja.sent.today-monday
+  - ja.sent.tomorrow-tuesday
+  allowed_grammar:
+  - ja.grammar.particle.time-ni
+  new_item_budget: 0
+  validation_method: exact-match
+activities:
+- id: ja.activity.time-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs: *id001
+- id: ja.activity.time-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs: *id001
+- id: ja.activity.time-speak
+  type: retrieval
+  modality: speaking
+  support_level: 2
+  content_refs: *id001

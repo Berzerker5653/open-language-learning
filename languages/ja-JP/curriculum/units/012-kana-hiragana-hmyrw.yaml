@@ -1,0 +1,48 @@
+# ai-assisted draft unit (K-30); content refs are pack data; qualified review pending.
+id: ja.unit.kana-hiragana-hmyrw
+goal_id: ja.goal.onramp.kana-hiragana
+title: 'Hiragana: H, M, Y, R, W rows and ん'
+summary: Completes the basic hiragana set; look-alike pairs drilled explicitly.
+estimated_minutes: 12
+generation_contract:
+  allowed_vocab: &id001
+  - ja.orth.hira.ha
+  - ja.orth.hira.hi
+  - ja.orth.hira.fu
+  - ja.orth.hira.he
+  - ja.orth.hira.ho
+  - ja.orth.hira.ma
+  - ja.orth.hira.mi
+  - ja.orth.hira.mu
+  - ja.orth.hira.me
+  - ja.orth.hira.mo
+  - ja.orth.hira.ya
+  - ja.orth.hira.yu
+  - ja.orth.hira.yo
+  - ja.orth.hira.ra
+  - ja.orth.hira.ri
+  - ja.orth.hira.ru
+  - ja.orth.hira.re
+  - ja.orth.hira.ro
+  - ja.orth.hira.wa
+  - ja.orth.hira.wo
+  - ja.orth.hira.n
+  allowed_grammar: []
+  new_item_budget: 0
+  validation_method: exact-match
+activities:
+- id: ja.activity.kana-hira-hmyrw-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs: *id001
+- id: ja.activity.kana-hira-hmyrw-match
+  type: match
+  modality: reading
+  support_level: 3
+  content_refs: *id001
+- id: ja.activity.kana-hira-hmyrw-recall
+  type: recall-choice
+  modality: reading
+  support_level: 1
+  content_refs: *id001

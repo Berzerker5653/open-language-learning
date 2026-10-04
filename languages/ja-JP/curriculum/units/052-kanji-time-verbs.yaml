@@ -1,0 +1,51 @@
+# ai-assisted draft unit (K-30); content refs are pack data; qualified review pending.
+id: ja.unit.kanji-time-verbs
+goal_id: ja.goal.a1.kanji-core
+title: 'Kanji: time, nature, verbs'
+summary: Time/nature/verb kanji; meaning and reading drills.
+estimated_minutes: 9
+generation_contract:
+  allowed_vocab: &id001
+  - ja.kanji.hi
+  - ja.kanji.tsuki
+  - ja.kanji.toshi
+  - ja.kanji.ji
+  - ja.kanji.ima
+  - ja.kanji.aka
+  - ja.kanji.ato
+  - ja.kanji.go-n
+  - ja.kanji.mae
+  - ja.kanji.na
+  - ja.kanji.hon
+  - ja.kanji.kuni
+  - ja.kanji.nani
+  - ja.kanji.yama
+  - ja.kanji.kawa
+  - ja.kanji.ta
+  - ja.kanji.onna
+  - ja.kanji.otoko
+  - ja.kanji.mi
+  - ja.kanji.kiku
+  - ja.kanji.yomu
+  - ja.kanji.kaku
+  - ja.kanji.taberu
+  - ja.kanji.nomu
+  - ja.kanji.iku
+  - ja.kanji.kuru
+  - ja.kanji.kaeru
+  - ja.kanji.deru
+  - ja.kanji.hairu
+  allowed_grammar: []
+  new_item_budget: 0
+  validation_method: exact-match
+activities:
+- id: ja.activity.kan-tv-enc
+  type: encounter-read
+  modality: reading
+  support_level: 2
+  content_refs: *id001
+- id: ja.activity.kan-tv-recall
+  type: recall
+  modality: reading
+  support_level: 1
+  content_refs: *id001

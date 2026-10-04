@@ -32,3 +32,36 @@ situations:
     typical_registers:
       - ja.register.polite-neutral
       - ja.register.neutral-common
+  - id: ja.situation.classroom
+    name: "A classroom or practice setting"
+    description: >
+      Learning-focused interaction; supports and repair phrases are expected.
+    typical_registers:
+      - ja.register.polite-neutral
+      - ja.register.neutral-common
+  - id: ja.situation.shopping
+    name: "Buying something in a shop"
+    description: >
+      Asking prices and completing a small purchase.
+    typical_registers:
+      - ja.register.polite-neutral
+  - id: ja.situation.restaurant
+    name: "Ordering at an eatery"
+    description: >
+      Choosing and receiving food or drink; meal set phrases fit here.
+    typical_registers:
+      - ja.register.polite-neutral
+  - id: ja.situation.directions
+    name: "Asking where something is"
+    description: >
+      Locating places and objects; here/there words and place vocabulary.
+    typical_registers:
+      - ja.register.polite-neutral
+      - ja.register.neutral-common
+  - id: ja.situation.home-routine
+    name: "Talking about a daily routine"
+    description: >
+      Describing one's own day; plain register common with family.
+    typical_registers:
+      - ja.register.neutral-common
+      - ja.register.plain-casual

@@ -1,0 +1,20 @@
+# ai-assisted graded story (K-30); sentence ids only; reading is formative.
+id: ja.story.at-the-shop
+status: draft
+title: At the shop
+description: Graded reader text built from pack sentences.
+sentences:
+- ja.sent.greet-day
+- ja.sent.what-is-this
+- ja.sent.how-much
+- ja.sent.hundred-yen
+- ja.sent.buy-bread
+- ja.sent.thanks-polite
+sources:
+- jf-standard
+notes: ai-assisted draft; qualified review pending.
+generation:
+  method: ai-assisted
+  tool: omp
+  model: strata/qwen3.8-flash-next
+  date: '2026-10-03'

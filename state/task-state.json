@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-03",
-  "active_task": null,
+  "active_task": "K-31",
   "tasks": {
     "BOOT-001": {
       "status": "done",
@@ -677,6 +677,17 @@
         "state/notes/K-24.md",
         "state/evidence/K-24/cargo-test-2026-10-03.txt",
         "state/evidence/K-24/cli-scaffold-2026-10-03.txt"
+      ]
+    }
+    ,
+    "K-30": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/notes/K-30.md",
+        "state/evidence/K-30/pack-gates-2026-10-03.txt",
+        "state/evidence/K-30/cargo-test-2026-10-03.txt"
       ]
     }
   },

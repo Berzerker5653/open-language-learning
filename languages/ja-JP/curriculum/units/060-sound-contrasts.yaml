@@ -1,0 +1,65 @@
+# ai-assisted draft unit (K-30); content refs are pack data; qualified review pending.
+id: ja.unit.sound-contrasts
+goal_id: ja.goal.a1.sound-contrasts
+title: Hearing the difference
+summary: Perceptual contrast training; perception only, never production credit.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.kanji.hi
+  - ja.kanji.tsuki
+  - ja.kanji.toshi
+  - ja.kanji.ji
+  - ja.kanji.ima
+  - ja.kanji.aka
+  - ja.kanji.ato
+  - ja.kanji.go-n
+  - ja.kanji.mae
+  - ja.kanji.na
+  - ja.kanji.hon
+  - ja.kanji.kuni
+  - ja.kanji.nani
+  - ja.kanji.yama
+  - ja.kanji.kawa
+  - ja.kanji.ta
+  - ja.kanji.onna
+  - ja.kanji.otoko
+  - ja.kanji.mi
+  - ja.kanji.kiku
+  - ja.kanji.yomu
+  - ja.kanji.kaku
+  - ja.kanji.taberu
+  - ja.kanji.nomu
+  - ja.kanji.iku
+  - ja.kanji.kuru
+  - ja.kanji.kaeru
+  - ja.kanji.deru
+  - ja.kanji.hairu
+  allowed_grammar: []
+  new_item_budget: 0
+  validation_method: exact-match
+activities:
+- id: ja.activity.snd-hvpt1
+  type: hvpt
+  modality: listening
+  support_level: 0
+  content_refs:
+  - ja.kanji.hi
+- id: ja.activity.snd-hvpt2
+  type: hvpt
+  modality: listening
+  support_level: 0
+  content_refs:
+  - ja.kanji.tsuki
+- id: ja.activity.snd-hvpt3
+  type: hvpt
+  modality: listening
+  support_level: 0
+  content_refs:
+  - ja.kanji.toshi
+- id: ja.activity.snd-hvpt4
+  type: hvpt
+  modality: listening
+  support_level: 0
+  content_refs:
+  - ja.kanji.ji

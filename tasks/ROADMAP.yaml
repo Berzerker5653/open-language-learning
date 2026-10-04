@@ -976,6 +976,66 @@ tasks:
   - docs/04_LANGUAGE_PACK_SPEC.md
   acceptance:
   - "`langpack new-unit <pack> <id>` and `langpack new-lexicon <pack> <id>` write schema-valid starter files (status draft, sources placeholder marked for replacement) into the pack directory so an agent authors one lesson at a time with instant `validate` feedback."
+- id: K-30
+  milestone: M6
+  priority: P1
+  title: Author JA-A1 on-ramp curriculum with the kit loop
+  dependencies:
+  - K-24
+  read_first:
+  - docs/06_JAPANESE_REFERENCE.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  - docs/PACK_AUTHORING_CONTRACT.md
+  acceptance:
+  - "languages/ja-JP grows to a kana-first on-ramp: ~30+ units, hundreds of lexicon entries, sentences, kanji, phonology contrasts, and scenario graphs; every item carries generation provenance and draft/review-needed status; `langpack validate`/`test` clean; content remains blocked from install only by LIC-001."
+- id: K-31
+  milestone: M6
+  priority: P1
+  title: A1 functional goal coverage in ja-JP pack
+  dependencies:
+  - K-30
+  read_first:
+  - docs/06_JAPANESE_REFERENCE.md
+  acceptance:
+  - "Goal graph covers A1-like functional areas (introductions, shopping, food, directions, time, routines) with per-goal assessments and transfer checkpoints; review_status stays draft pending JA-A1-003."
+- id: K-32
+  milestone: M6
+  priority: P1
+  title: Replace ja-demo default pack with the on-ramp pack
+  dependencies:
+  - K-30
+  read_first:
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  acceptance:
+  - "The desktop default/bundled pack for ja-JP is the authored on-ramp pack once it passes `langpack test`; ja-demo is removed or demoted to a fixture."
+- id: K-33
+  milestone: M6
+  priority: P2
+  title: ACC-001 automated accessibility audit portion
+  dependencies: []
+  read_first:
+  - docs/07_ACCESSIBILITY.md
+  acceptance:
+  - "Automated checks (ARIA semantics on interactive routes, focus order, contrast, reduced-motion) run in CI; the human screen-reader matrix remains an owner gate (O-03)."
+- id: K-34
+  milestone: M6
+  priority: P2
+  title: PLAT-001 Windows/macOS parity — build config only, Linux-tested
+  dependencies: []
+  read_first:
+  - docs/08_PACKAGING_AND_RELEASE.md
+  acceptance:
+  - "Windows/macOS build configurations and CI compile checks exist; runtime behavior is tested on Linux only, and release notes/catalog mark Windows/macOS builds as untested so public users can report issues (owner decision 2026-10-03)."
+- id: K-35
+  milestone: M6
+  priority: P2
+  title: Community catalog happy path artifacts
+  dependencies:
+  - K-30
+  read_first:
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  acceptance:
+  - "`langpack pack` produces installable .lpk artifacts for shipped packs and a catalog/packs.json listing them with hashes/versions; publishing to GitHub remains an owner gate (O-05)."
 - id: GAME-001
   milestone: M7
   priority: P1

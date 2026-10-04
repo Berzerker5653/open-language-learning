@@ -1,0 +1,21 @@
+# ai-assisted graded story (K-30); sentence ids only; reading is formative.
+id: ja.story.my-day
+status: draft
+title: My day
+description: Graded reader text built from pack sentences.
+sentences:
+- ja.sent.wake-up
+- ja.sent.eat-breakfast
+- ja.sent.go-school
+- ja.sent.what-time
+- ja.sent.three-oclock
+- ja.sent.come-home
+- ja.sent.sleep-night
+sources:
+- jf-standard
+notes: ai-assisted draft; qualified review pending.
+generation:
+  method: ai-assisted
+  tool: omp
+  model: strata/qwen3.8-flash-next
+  date: '2026-10-03'

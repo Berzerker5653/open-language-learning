@@ -1,0 +1,41 @@
+# ai-assisted draft unit (K-30); content refs are pack data; qualified review pending.
+id: ja.unit.go-to-places
+goal_id: ja.goal.a1.go-places
+title: Going places
+summary: Motion verbs with the destination particle.
+estimated_minutes: 8
+generation_contract:
+  allowed_vocab: &id001
+  - ja.lex.verbs.ikimasu
+  - ja.lex.verbs.kimasu
+  - ja.lex.verbs.kaerimasu
+  - ja.lex.verbs.arukimasu
+  - ja.lex.places.gakkou
+  - ja.lex.places.eki
+  - ja.lex.places.uchi
+  - ja.lex.places.kouen
+  - ja.sent.go-school
+  - ja.sent.go-station
+  - ja.sent.come-home
+  - ja.sent.walk-park
+  allowed_grammar:
+  - ja.grammar.particle.goal-e
+  - ja.grammar.verb.polite-masu
+  new_item_budget: 0
+  validation_method: exact-match
+activities:
+- id: ja.activity.go-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs: *id001
+- id: ja.activity.go-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs: *id001
+- id: ja.activity.go-speak
+  type: retrieval
+  modality: speaking
+  support_level: 2
+  content_refs: *id001

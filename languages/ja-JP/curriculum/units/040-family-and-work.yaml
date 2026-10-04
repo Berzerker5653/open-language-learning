@@ -1,0 +1,35 @@
+# ai-assisted draft unit (K-30); content refs are pack data; qualified review pending.
+id: ja.unit.family-and-work
+goal_id: ja.goal.a1.family-work
+title: Family and what they do
+summary: Own-family terms with occupation statements.
+estimated_minutes: 8
+generation_contract:
+  allowed_vocab: &id001
+  - ja.lex.people.kazoku
+  - ja.lex.people.chichi
+  - ja.lex.people.haha
+  - ja.lex.people.ani
+  - ja.lex.people.imouto
+  - ja.lex.pronouns.sensei
+  - ja.lex.people.gakusei
+  - ja.lex.people.isha
+  - ja.sent.family-four
+  - ja.sent.my-father-teacher
+  - ja.sent.friend-student
+  allowed_grammar:
+  - ja.grammar.copula.polite-desu
+  - ja.grammar.particle.possessive-no
+  new_item_budget: 0
+  validation_method: exact-match
+activities:
+- id: ja.activity.fam-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs: *id001
+- id: ja.activity.fam-speak
+  type: retrieval
+  modality: speaking
+  support_level: 2
+  content_refs: *id001
