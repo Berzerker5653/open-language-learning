@@ -6,7 +6,9 @@ one pass — i.e. whether the kit's requirements are unambiguous.
 
 ## Procedure
 
-1. Paste `BRIEF.md` (everything below the header line) into the test LLM.
+1. Fill in the **Target language** block in `BRIEF.md` (language name +
+   `target_locale`; the id prefix is derived from the locale — that is the
+   only language-specific edit needed). Paste the whole file to the test LLM.
 2. Save its response's files into `experiments/llm-pack-authoring/candidates/<name>/`
    preserving the relative paths (manifest.yaml at the pack root).
 3. Score: `./experiments/llm-pack-authoring/score.sh experiments/llm-pack-authoring/candidates/<name> <name>`
@@ -17,8 +19,8 @@ one pass — i.e. whether the kit's requirements are unambiguous.
 
 All gates green: validate 0 errors; **lint 0 errors 0 warnings**; all three
 audits 0 errors; install-mode `test`; deterministic `build`. Plus human
-review of German correctness — the validator cannot certify language
-quality, only structure/references/honesty.
+review of target-language correctness — the validator cannot certify
+language quality, only structure/references/honesty.
 
 ## Harness self-test
 

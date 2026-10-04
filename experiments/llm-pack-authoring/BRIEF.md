@@ -1,13 +1,33 @@
-# LLM Pack-Authoring Test — Brief (paste everything below this line to the test LLM)
+# LLM Pack-Authoring Brief — any target language
+
+**How to use this file (human, not the LLM):** fill in the three values in
+the Target language block below — that is the ONLY language-specific part of
+this document. Then paste the entire file to the LLM. Do not edit anything
+else; every other rule is language-neutral and derives from the block.
+
+---
 
 You are authoring a starter language-learning pack for the **Open Language
 Learning Platform**. Follow the contract exactly; the pack will be checked by
 an automated validator, and any rule you break will be reported.
 
+## Target language
+
+| Field | Value |
+|---|---|
+| Language | **German** |
+| `target_locale` (BCP 47) | **`de-DE`** |
+| id prefix `<p>` (derived: first subtag of `target_locale`, lowercase) | **`de`** |
+
+"the target language" below always means the language in this table.
+`<p>` always means the derived id prefix. The worked example at the end uses
+the placeholder locale `xx-XX` and prefix `xx` — replace both with the
+values above; change nothing else about the shapes.
+
 ## Task
 
-Author a **German starter pack** (`de-DE`) from scratch. Deliver, in your
-response, the complete file tree and the FULL contents of every file.
+Author a **starter pack for the target language** from scratch. Deliver, in
+your response, the complete file tree and the FULL contents of every file.
 
 Required minimum content:
 - `manifest.yaml`
@@ -30,9 +50,9 @@ Required minimum content:
 ## Hard rules (violations = failure)
 
 1. **Packs are data.** No code, no scripts, no HTML.
-2. **ID grammar**: every id is `<locale-primary>.<kind>.<topic…>`, kebab
-   case, ≥2 segments, first segment = `de` (matches manifest
-   `target_locale: de-DE`). Kinds: `goal`, `lex`, `grammar`, `sent`,
+2. **ID grammar**: every id is `<p>.<kind>.<topic…>`, kebab case, ≥2
+   segments, first segment = the derived id prefix `<p>` (must match the
+   manifest `target_locale`). Kinds: `goal`, `lex`, `grammar`, `sent`,
    `assess`, `unit`, `activity`, `story`, `scenario`.
 3. **Honest statuses**: every content record uses `"status": "draft"` (or
    `review-needed`). NEVER use `validated` or `verified` — those require a
@@ -49,9 +69,12 @@ Required minimum content:
 6. **References must resolve**: every `content_refs`, `required_concepts`,
    `assessment_ids`, `allowed_vocab`, `allowed_grammar`, `prerequisites`
    value must be an id that exists in the pack.
-7. **German must be correct**: correct forms, genders/declensions where
-   relevant, natural register (mark register in `registers` where the
-   schema shows it; otherwise keep neutral). Do not invent idioms.
+7. **The target language must be correct**: correct forms, gender/case
+   agreement where the language has them, natural register (mark register
+   in `registers` where the schema shows it; otherwise keep neutral). Do
+   not invent idioms. If the language is not written in Latin script, keep
+   the native script in `forms[].text` and set `readings[].script` to the
+   script actually used; `glosses` stay in `en-US`.
 8. **Small dense lessons**: each unit's `new_item_budget` ≤ 6 and its
    `content_refs` must stay inside `allowed_vocab`/`allowed_grammar`.
 
@@ -90,7 +113,9 @@ YAML: two-space indent.
 
 ## Worked example (structurally perfect — same shapes, replace content and locale)
 
-A minimal pack that passes every gate. Mirror its shapes exactly.
+A minimal pack that passes every gate. Mirror its shapes exactly. It uses
+the placeholder locale `xx-XX` and prefix `xx`; in YOUR pack these are the
+Target language values above.
 
 ```
 manifest.yaml
@@ -225,5 +250,6 @@ Your pack is written to disk and run through the real toolchain:
 4. `langpack test` — install-mode conformance
 5. `langpack build` — deterministic archive builds
 
-Also graded by a human: German correctness (forms, gender, naturalness) and
-whether the content actually teaches the stated goals.
+Also graded by a human: correctness of the target language (forms,
+agreement, naturalness) and whether the content actually teaches the stated
+goals.
