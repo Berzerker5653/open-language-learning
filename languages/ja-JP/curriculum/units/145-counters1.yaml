@@ -1,0 +1,58 @@
+# ai-assisted draft unit (Mode B A2 shopping-services); content refs are pack data; qualified review pending.
+id: ja.unit.shopping-counters1
+goal_id: ja.goal.a2.shopping-services
+title: Counters I
+summary: Two/three flat items, flat counter.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.shopping.nimai
+  - ja.lex.shopping.sanmai
+  - ja.lex.shopping.mai
+  - ja.lex.shopping.mittsu
+  - ja.lex.shopping.ikutsu
+  allowed_grammar:
+  - ja.grammar.counters.general
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.shopping-counters1-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.shopping.nimai
+  - ja.lex.shopping.sanmai
+  - ja.lex.shopping.mai
+  - ja.lex.shopping.mittsu
+  - ja.lex.shopping.ikutsu
+- id: ja.activity.shopping-counters1-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.shopping.nimai
+  - ja.lex.shopping.sanmai
+  - ja.lex.shopping.mai
+  - ja.lex.shopping.mittsu
+  - ja.lex.shopping.ikutsu
+- id: ja.activity.shopping-counters1-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping.nimai
+  - ja.lex.shopping.sanmai
+  - ja.lex.shopping.mai
+  - ja.lex.shopping.mittsu
+  - ja.lex.shopping.ikutsu
+- id: ja.activity.shopping-counters1-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping.nimai
+  - ja.lex.shopping.sanmai
+  - ja.lex.shopping.mai
+  - ja.lex.shopping.mittsu
+  - ja.lex.shopping.ikutsu

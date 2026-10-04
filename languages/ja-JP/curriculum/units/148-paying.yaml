@@ -1,0 +1,82 @@
+# ai-assisted draft unit (Mode B A2 shopping-services); content refs are pack data; qualified review pending.
+id: ja.unit.shopping-paying
+goal_id: ja.goal.a2.shopping-services
+title: Paying
+summary: Points, pay, sell, fold.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.shopping.point
+  - ja.lex.shopping.urimasu
+  - ja.lex.shopping.tatamu
+  - ja.lex.shopping.honya
+  - ja.lex.shopping.kutsuya
+  - ja.sent.pay-points
+  - ja.sent.fold-shirt
+  allowed_grammar:
+  - ja.grammar.particle.de-means
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.shopping-paying-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.shopping.point
+  - ja.lex.shopping.urimasu
+  - ja.lex.shopping.tatamu
+  - ja.lex.shopping.honya
+  - ja.lex.shopping.kutsuya
+  - ja.sent.pay-points
+  - ja.sent.fold-shirt
+  - ja.sent.pay-points
+  - ja.sent.fold-shirt
+- id: ja.activity.shopping-paying-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.shopping.point
+  - ja.lex.shopping.urimasu
+  - ja.lex.shopping.tatamu
+  - ja.lex.shopping.honya
+  - ja.lex.shopping.kutsuya
+  - ja.sent.pay-points
+  - ja.sent.fold-shirt
+- id: ja.activity.shopping-paying-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping.point
+  - ja.lex.shopping.urimasu
+  - ja.lex.shopping.tatamu
+  - ja.lex.shopping.honya
+  - ja.lex.shopping.kutsuya
+  - ja.sent.pay-points
+  - ja.sent.fold-shirt
+- id: ja.activity.shopping-paying-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping.point
+  - ja.lex.shopping.urimasu
+  - ja.lex.shopping.tatamu
+  - ja.lex.shopping.honya
+  - ja.lex.shopping.kutsuya
+  - ja.sent.pay-points
+  - ja.sent.fold-shirt
+- id: ja.activity.shopping-paying-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.pay-points
+- id: ja.activity.shopping-paying-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.fold-shirt

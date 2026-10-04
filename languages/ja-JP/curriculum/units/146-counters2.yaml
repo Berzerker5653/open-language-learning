@@ -1,0 +1,63 @@
+# ai-assisted draft unit (Mode B A2 shopping-services); content refs are pack data; qualified review pending.
+id: ja.unit.shopping-counters2
+goal_id: ja.goal.a2.shopping-services
+title: Counters II
+summary: Long items, machines, floors, years, books, animals.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.shopping.sanbon
+  - ja.lex.shopping.dai
+  - ja.lex.shopping.kai
+  - ja.lex.shopping.sai
+  - ja.lex.shopping.satsu
+  - ja.lex.shopping.hiki
+  allowed_grammar:
+  - ja.grammar.counters.general
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.shopping-counters2-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.shopping.sanbon
+  - ja.lex.shopping.dai
+  - ja.lex.shopping.kai
+  - ja.lex.shopping.sai
+  - ja.lex.shopping.satsu
+  - ja.lex.shopping.hiki
+- id: ja.activity.shopping-counters2-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.shopping.sanbon
+  - ja.lex.shopping.dai
+  - ja.lex.shopping.kai
+  - ja.lex.shopping.sai
+  - ja.lex.shopping.satsu
+  - ja.lex.shopping.hiki
+- id: ja.activity.shopping-counters2-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping.sanbon
+  - ja.lex.shopping.dai
+  - ja.lex.shopping.kai
+  - ja.lex.shopping.sai
+  - ja.lex.shopping.satsu
+  - ja.lex.shopping.hiki
+- id: ja.activity.shopping-counters2-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping.sanbon
+  - ja.lex.shopping.dai
+  - ja.lex.shopping.kai
+  - ja.lex.shopping.sai
+  - ja.lex.shopping.satsu
+  - ja.lex.shopping.hiki

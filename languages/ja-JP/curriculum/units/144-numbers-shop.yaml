@@ -1,0 +1,58 @@
+# ai-assisted draft unit (Mode B A2 shopping-services); content refs are pack data; qualified review pending.
+id: ja.unit.shopping-numbers-shop
+goal_id: ja.goal.a2.shopping-services
+title: Numbers at the shop
+summary: Five hundred, three hundred, two thousand, ten thousand.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.shopping.go-hyaku
+  - ja.lex.shopping.san-byaku
+  - ja.lex.shopping.ni-sen
+  - ja.lex.shopping.ichiman
+  - ja.lex.shopping.futatsu
+  allowed_grammar:
+  - ja.grammar.copula.polite-desu
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.shopping-numbers-shop-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.shopping.go-hyaku
+  - ja.lex.shopping.san-byaku
+  - ja.lex.shopping.ni-sen
+  - ja.lex.shopping.ichiman
+  - ja.lex.shopping.futatsu
+- id: ja.activity.shopping-numbers-shop-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.shopping.go-hyaku
+  - ja.lex.shopping.san-byaku
+  - ja.lex.shopping.ni-sen
+  - ja.lex.shopping.ichiman
+  - ja.lex.shopping.futatsu
+- id: ja.activity.shopping-numbers-shop-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping.go-hyaku
+  - ja.lex.shopping.san-byaku
+  - ja.lex.shopping.ni-sen
+  - ja.lex.shopping.ichiman
+  - ja.lex.shopping.futatsu
+- id: ja.activity.shopping-numbers-shop-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping.go-hyaku
+  - ja.lex.shopping.san-byaku
+  - ja.lex.shopping.ni-sen
+  - ja.lex.shopping.ichiman
+  - ja.lex.shopping.futatsu

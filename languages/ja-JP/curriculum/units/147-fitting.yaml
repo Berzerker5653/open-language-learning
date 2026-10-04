@@ -1,0 +1,82 @@
+# ai-assisted draft unit (Mode B A2 shopping-services); content refs are pack data; qualified review pending.
+id: ja.unit.shopping-fitting
+goal_id: ja.goal.a2.shopping-services
+title: Fitting room
+summary: Fitting room, size, try, wear, receipt.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.shopping.tryon
+  - ja.lex.shopping.size
+  - ja.lex.shopping.fukuban
+  - ja.lex.shopping.reshiito
+  - ja.lex.shopping.bag
+  - ja.sent.try-jacket
+  - ja.sent.get-receipt
+  allowed_grammar:
+  - ja.grammar.verb.te-form-connect
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.shopping-fitting-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.shopping.tryon
+  - ja.lex.shopping.size
+  - ja.lex.shopping.fukuban
+  - ja.lex.shopping.reshiito
+  - ja.lex.shopping.bag
+  - ja.sent.try-jacket
+  - ja.sent.get-receipt
+  - ja.sent.try-jacket
+  - ja.sent.get-receipt
+- id: ja.activity.shopping-fitting-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.shopping.tryon
+  - ja.lex.shopping.size
+  - ja.lex.shopping.fukuban
+  - ja.lex.shopping.reshiito
+  - ja.lex.shopping.bag
+  - ja.sent.try-jacket
+  - ja.sent.get-receipt
+- id: ja.activity.shopping-fitting-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping.tryon
+  - ja.lex.shopping.size
+  - ja.lex.shopping.fukuban
+  - ja.lex.shopping.reshiito
+  - ja.lex.shopping.bag
+  - ja.sent.try-jacket
+  - ja.sent.get-receipt
+- id: ja.activity.shopping-fitting-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping.tryon
+  - ja.lex.shopping.size
+  - ja.lex.shopping.fukuban
+  - ja.lex.shopping.reshiito
+  - ja.lex.shopping.bag
+  - ja.sent.try-jacket
+  - ja.sent.get-receipt
+- id: ja.activity.shopping-fitting-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.try-jacket
+- id: ja.activity.shopping-fitting-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.get-receipt

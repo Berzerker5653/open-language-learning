@@ -395,3 +395,11 @@ units, 50-word `lexicon/city.jsonl`, 2 grammar (`verb.te-ichidan`,
 Goal `ja.goal.a2.food-cooking` (prereq city-services, mirrored), 10
 units, 50-word `lexicon/food.jsonl`, 2 grammar (`verb.to-omou`,
 `verb.koto-no-noun`), 6 sentences, 1 assessment. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 9: A2 units 140-149 (shopping-services)
+
+Goal `ja.goal.a2.shopping-services` (prereq food-cooking, mirrored), 10
+units, 50-word `lexicon/shopping.jsonl` (apostrophe ids fixed to hyphens;
+baseline dupes replaced), 2 grammar (`verb.kanoukei-intro`,
+`adjectives.jouzu-heta-ni`), 8 sentences (1 collided with baseline
+`how-much`; reused baseline), 1 assessment. Score: **7/7**.

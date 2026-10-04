@@ -1,0 +1,82 @@
+# ai-assisted draft unit (Mode B A2 shopping-services); content refs are pack data; qualified review pending.
+id: ja.unit.shopping-price-tags
+goal_id: ja.goal.a2.shopping-services
+title: Prices
+summary: Price tag, discount, sale, money, order.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.shopping.shouhyou
+  - ja.lex.shopping.waribiki
+  - ja.lex.shopping.seruku
+  - ja.lex.shopping.okane
+  - ja.lex.shopping.chuumon
+  - ja.sent.check-price
+  - ja.sent.on-sale
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.shopping-price-tags-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.shopping.shouhyou
+  - ja.lex.shopping.waribiki
+  - ja.lex.shopping.seruku
+  - ja.lex.shopping.okane
+  - ja.lex.shopping.chuumon
+  - ja.sent.check-price
+  - ja.sent.on-sale
+  - ja.sent.check-price
+  - ja.sent.on-sale
+- id: ja.activity.shopping-price-tags-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.shopping.shouhyou
+  - ja.lex.shopping.waribiki
+  - ja.lex.shopping.seruku
+  - ja.lex.shopping.okane
+  - ja.lex.shopping.chuumon
+  - ja.sent.check-price
+  - ja.sent.on-sale
+- id: ja.activity.shopping-price-tags-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping.shouhyou
+  - ja.lex.shopping.waribiki
+  - ja.lex.shopping.seruku
+  - ja.lex.shopping.okane
+  - ja.lex.shopping.chuumon
+  - ja.sent.check-price
+  - ja.sent.on-sale
+- id: ja.activity.shopping-price-tags-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping.shouhyou
+  - ja.lex.shopping.waribiki
+  - ja.lex.shopping.seruku
+  - ja.lex.shopping.okane
+  - ja.lex.shopping.chuumon
+  - ja.sent.check-price
+  - ja.sent.on-sale
+- id: ja.activity.shopping-price-tags-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.check-price
+- id: ja.activity.shopping-price-tags-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.on-sale

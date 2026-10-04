@@ -1,0 +1,63 @@
+# ai-assisted draft unit (Mode B A2 shopping-services); content refs are pack data; qualified review pending.
+id: ja.unit.shopping-accessories
+goal_id: ja.goal.a2.shopping-services
+title: Accessories
+summary: Helmet, muffler, handbag, shoelace, socks.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.shopping.kabuto
+  - ja.lex.shopping.muffu
+  - ja.lex.shopping.handobaggu
+  - ja.lex.shopping.kutsu-ito
+  - ja.lex.shopping.kutsushita
+  - ja.lex.home.kutsu
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.shopping-accessories-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.shopping.kabuto
+  - ja.lex.shopping.muffu
+  - ja.lex.shopping.handobaggu
+  - ja.lex.shopping.kutsu-ito
+  - ja.lex.shopping.kutsushita
+  - ja.lex.home.kutsu
+- id: ja.activity.shopping-accessories-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.shopping.kabuto
+  - ja.lex.shopping.muffu
+  - ja.lex.shopping.handobaggu
+  - ja.lex.shopping.kutsu-ito
+  - ja.lex.shopping.kutsushita
+  - ja.lex.home.kutsu
+- id: ja.activity.shopping-accessories-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping.kabuto
+  - ja.lex.shopping.muffu
+  - ja.lex.shopping.handobaggu
+  - ja.lex.shopping.kutsu-ito
+  - ja.lex.shopping.kutsushita
+  - ja.lex.home.kutsu
+- id: ja.activity.shopping-accessories-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping.kabuto
+  - ja.lex.shopping.muffu
+  - ja.lex.shopping.handobaggu
+  - ja.lex.shopping.kutsu-ito
+  - ja.lex.shopping.kutsushita
+  - ja.lex.home.kutsu

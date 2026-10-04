@@ -1,0 +1,69 @@
+# ai-assisted draft unit (Mode B A2 shopping-services); content refs are pack data; qualified review pending.
+id: ja.unit.shopping-can-do
+goal_id: ja.goal.a2.shopping-services
+title: Skills and shopping
+summary: Can/cannot; good at / bad at.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.shopping.kaimono
+  - ja.lex.shopping.hiki
+  - ja.lex.shopping.keshi
+  - ja.lex.shopping.mon
+  - ja.lex.shopping.tsuu
+  - ja.grammar.adjectives.jouzu-heta-ni
+  - ja.grammar.verb.kanoukei-intro
+  allowed_grammar:
+  - ja.grammar.adjectives.jouzu-heta-ni
+  - ja.grammar.verb.kanoukei-intro
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.shopping-can-do-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.shopping.kaimono
+  - ja.lex.shopping.hiki
+  - ja.lex.shopping.keshi
+  - ja.lex.shopping.mon
+  - ja.lex.shopping.tsuu
+  - ja.grammar.adjectives.jouzu-heta-ni
+  - ja.grammar.verb.kanoukei-intro
+- id: ja.activity.shopping-can-do-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.shopping.kaimono
+  - ja.lex.shopping.hiki
+  - ja.lex.shopping.keshi
+  - ja.lex.shopping.mon
+  - ja.lex.shopping.tsuu
+  - ja.grammar.adjectives.jouzu-heta-ni
+  - ja.grammar.verb.kanoukei-intro
+- id: ja.activity.shopping-can-do-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping.kaimono
+  - ja.lex.shopping.hiki
+  - ja.lex.shopping.keshi
+  - ja.lex.shopping.mon
+  - ja.lex.shopping.tsuu
+  - ja.grammar.adjectives.jouzu-heta-ni
+  - ja.grammar.verb.kanoukei-intro
+- id: ja.activity.shopping-can-do-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping.kaimono
+  - ja.lex.shopping.hiki
+  - ja.lex.shopping.keshi
+  - ja.lex.shopping.mon
+  - ja.lex.shopping.tsuu
+  - ja.grammar.adjectives.jouzu-heta-ni
+  - ja.grammar.verb.kanoukei-intro

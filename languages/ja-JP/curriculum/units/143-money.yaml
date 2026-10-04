@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 shopping-services); content refs are pack data; qualified review pending.
+id: ja.unit.shopping-money
+goal_id: ja.goal.a2.shopping-services
+title: Money
+summary: Yen, dollar, hundred, thousand, ten thousand.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.shopping.en
+  - ja.lex.shopping.dollar
+  - ja.lex.shopping.hyakuen
+  - ja.lex.shopping.sen-en
+  - ja.lex.shopping.man-en
+  - ja.sent.how-much
+  allowed_grammar:
+  - ja.grammar.copula.polite-desu
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.shopping-money-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.shopping.en
+  - ja.lex.shopping.dollar
+  - ja.lex.shopping.hyakuen
+  - ja.lex.shopping.sen-en
+  - ja.lex.shopping.man-en
+  - ja.sent.how-much
+  - ja.sent.how-much
+- id: ja.activity.shopping-money-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.shopping.en
+  - ja.lex.shopping.dollar
+  - ja.lex.shopping.hyakuen
+  - ja.lex.shopping.sen-en
+  - ja.lex.shopping.man-en
+  - ja.sent.how-much
+- id: ja.activity.shopping-money-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping.en
+  - ja.lex.shopping.dollar
+  - ja.lex.shopping.hyakuen
+  - ja.lex.shopping.sen-en
+  - ja.lex.shopping.man-en
+  - ja.sent.how-much
+- id: ja.activity.shopping-money-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping.en
+  - ja.lex.shopping.dollar
+  - ja.lex.shopping.hyakuen
+  - ja.lex.shopping.sen-en
+  - ja.lex.shopping.man-en
+  - ja.sent.how-much
+- id: ja.activity.shopping-money-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.how-much
