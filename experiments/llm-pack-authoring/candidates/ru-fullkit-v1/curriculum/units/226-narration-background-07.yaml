@@ -1,0 +1,46 @@
+id: "ru.unit.b1.narration-background-07"
+goal_id: "ru.goal.b1.narration"
+title: "Clothes"
+summary: "одежда, шляпа, зонт, пальто and шапка."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u226-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.narration2.odezhda",
+        "ru.lex.narration2.shlyapa",
+        "ru.lex.narration2.zont",
+        "ru.lex.home.palto",
+        "ru.lex.shopping.shapka",
+        "ru.sent.b1.u226",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u226-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u226-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u226"]
+  - id: "ru.activity.b1.u226-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Clothes: background with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse шляпа (hat) with шапка (winter cap)."]
+  target_proficiency: "B1"
+  validation_method: "choice"

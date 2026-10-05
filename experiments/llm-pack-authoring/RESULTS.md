@@ -911,3 +911,9 @@ Goal `ru.goal.b1.narration` created (+2 assessments; B1 band starts). Units 210-
 Goal `ja.goal.b2.language-linguistics` created (+ASSESS +DEP). Units 710-719
 (environment tail + linguistics start), 50 words (`env4.jsonl`, `ling.jsonl`), 2 grammar
 (`b2-hazu-da`, `b2-to-naruto`), 8 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 20
+
+Units 220-229 (narration continued), 50 words (`lexicon/narration2.jsonl`),
+2 grammar (`b1.imperfective-background`, `b1.viewpoint-markers`), 10 sentences.
+Score: **7/7**.

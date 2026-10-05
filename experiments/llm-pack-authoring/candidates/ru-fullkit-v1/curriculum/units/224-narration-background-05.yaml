@@ -1,0 +1,46 @@
+id: "ru.unit.b1.narration-background-05"
+goal_id: "ru.goal.b1.narration"
+title: "People"
+summary: "приятель, незнакомый, парень, девушка and человек."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u224-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.narration2.priyatel",
+        "ru.lex.narration2.neznakomy",
+        "ru.lex.narration2.paren",
+        "ru.lex.narration2.devushka",
+        "ru.lex.family.chelovek",
+        "ru.sent.b1.u224",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u224-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u224-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u224"]
+  - id: "ru.activity.b1.u224-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["People: background with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse приятель (buddy) with незнакомый (stranger)."]
+  target_proficiency: "B1"
+  validation_method: "choice"

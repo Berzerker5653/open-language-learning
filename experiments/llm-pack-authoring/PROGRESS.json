@@ -3,9 +3,9 @@
     "plan": "plans/ru-fullkit-v1.yaml",
     "pack": "candidates/ru-fullkit-v1",
     "bands_done": ["on-ramp", "A1", "A2"],
-    "units_next": "220",
+    "units_next": "230",
     "last_score": "7/7 (2026-10-04, results/ru-fullkit-v1)",
-    "notes": "A2 complete (110-209) + B1 narration (210-219) 7/7; B1 goals: narration; pack 220 units; next: block 220-229 per plan"
+    "notes": "B1: ru19-ru20 (210-229) 7/7; goal narration; pack 230 units; next: block 230-239 per plan"
   },
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",

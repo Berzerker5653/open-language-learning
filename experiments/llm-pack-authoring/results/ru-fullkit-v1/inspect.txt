@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
        21824  492cf2135fda  assessments/definitions.jsonl
-       30658  9287efed30e7  curriculum/goals.yaml
+       30850  c92fe385a5f5  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -210,17 +210,27 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1463  0c2a879469fa  curriculum/units/207-connected-messages-08.yaml
         1487  c7c181a1503b  curriculum/units/208-connected-messages-09.yaml
         1473  a07b4cc0ffb3  curriculum/units/209-connected-messages-10.yaml
-        1345  43b776946be4  curriculum/units/210-narration-sequence-01.yaml
-        1407  19d95e1d3661  curriculum/units/211-narration-sequence-02.yaml
-        1340  2e181db9853a  curriculum/units/212-narration-sequence-03.yaml
-        1355  725fd53ea8eb  curriculum/units/213-narration-sequence-04.yaml
-        1327  784a139887c6  curriculum/units/214-narration-sequence-05.yaml
-        1367  0629a48886a4  curriculum/units/215-narration-sequence-06.yaml
-        1408  b311f270c5ab  curriculum/units/216-narration-sequence-07.yaml
-        1360  8e234f56857e  curriculum/units/217-narration-sequence-08.yaml
-        1319  a3a32a1e7bd4  curriculum/units/218-narration-sequence-09.yaml
-        1337  5c4df7501608  curriculum/units/219-narration-sequence-10.yaml
-       27979  0b9efc9ea87b  grammar/concepts.jsonl
+        1430  bf9315fda8f8  curriculum/units/210-narration-sequence-01.yaml
+        1492  259f0a2df5cf  curriculum/units/211-narration-sequence-02.yaml
+        1425  6db61aab0956  curriculum/units/212-narration-sequence-03.yaml
+        1440  2c218531dcb3  curriculum/units/213-narration-sequence-04.yaml
+        1412  7df492a9f66a  curriculum/units/214-narration-sequence-05.yaml
+        1452  bde54404a79c  curriculum/units/215-narration-sequence-06.yaml
+        1493  de5c7ee04c19  curriculum/units/216-narration-sequence-07.yaml
+        1445  956d6c9d653f  curriculum/units/217-narration-sequence-08.yaml
+        1404  0aae8563dcd9  curriculum/units/218-narration-sequence-09.yaml
+        1422  623a03d9fb4d  curriculum/units/219-narration-sequence-10.yaml
+        1386  c97ab614104a  curriculum/units/220-narration-background-01.yaml
+        1401  a5a4beed0651  curriculum/units/221-narration-background-02.yaml
+        1317  908c64e47841  curriculum/units/222-narration-background-03.yaml
+        1370  8b0640063b2d  curriculum/units/223-narration-background-04.yaml
+        1370  e91baedf1da9  curriculum/units/224-narration-background-05.yaml
+        1364  847883a13612  curriculum/units/225-narration-background-06.yaml
+        1319  2052e5087ea9  curriculum/units/226-narration-background-07.yaml
+        1344  df1218d4edb7  curriculum/units/227-narration-background-08.yaml
+        1392  c16b0c2dec65  curriculum/units/228-narration-background-09.yaml
+        1355  29c781787fdf  curriculum/units/229-narration-background-10.yaml
+       28976  1ecbb596c385  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        21189  03a4503c7371  lexicon/city.jsonl
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
@@ -234,6 +244,7 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
        21605  e163676f7140  lexicon/messages.jsonl
        21843  8199231c9f6f  lexicon/messages2.jsonl
        21791  a189f555f672  lexicon/narration.jsonl
+       21611  ab0515f8cf08  lexicon/narration2.jsonl
         3672  8e7e960a1252  lexicon/numbers-time.jsonl
        21375  d93c1521663d  lexicon/pastevents.jsonl
        22380  8c501a5154bc  lexicon/personal.jsonl
@@ -249,5 +260,5 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-       66851  9809d32bac56  sentences/entries.jsonl
+       70536  3b278448c945  sentences/entries.jsonl
          391  74babc055676  sources.jsonl
