@@ -10,7 +10,7 @@
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
-    "units_next": "650",
-    "notes": "b47-b60 (510-649) 7/7; goal media-critique created (643-649, prereq society-change, shard media3); LESSON: check existing shard filenames before writing (media/media2 existed); next: units 650+"
+    "units_next": "660",
+    "notes": "b47-b61 (510-659) 7/7; goal psychology-mind created (658-659, prereq science-tech-ethics, shard critique); media-critique spans 643-657; next: units 660+"
   }
 }

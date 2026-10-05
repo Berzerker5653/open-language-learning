@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.press-freedom
+goal_id: ja.goal.b2.media-critique
+title: press freedom
+summary: B2 language for press freedom.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.critique.seikaku2
+  - ja.lex.critique.koui
+  - ja.lex.critique.doushutsu
+  - ja.lex.critique.mushiki
+  - ja.lex.critique.shinji
+  - ja.sent.press-freedom
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.press-freedom-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.critique.seikaku2
+  - ja.lex.critique.koui
+  - ja.lex.critique.doushutsu
+  - ja.lex.critique.mushiki
+  - ja.lex.critique.shinji
+  - ja.sent.press-freedom
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.press-freedom-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.critique.seikaku2
+  - ja.lex.critique.koui
+  - ja.lex.critique.doushutsu
+  - ja.lex.critique.mushiki
+  - ja.lex.critique.shinji
+  - ja.sent.press-freedom
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.press-freedom-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.critique.seikaku2
+  - ja.lex.critique.koui
+  - ja.lex.critique.doushutsu
+  - ja.lex.critique.mushiki
+  - ja.lex.critique.shinji
+  - ja.sent.press-freedom
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.press-freedom-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.critique.seikaku2
+  - ja.lex.critique.koui
+  - ja.lex.critique.doushutsu
+  - ja.lex.critique.mushiki
+  - ja.lex.critique.shinji
+  - ja.sent.press-freedom
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.press-freedom-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.press-freedom
+- id: ja.activity.press-freedom-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

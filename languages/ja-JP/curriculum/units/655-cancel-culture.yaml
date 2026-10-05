@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.cancel-culture
+goal_id: ja.goal.b2.media-critique
+title: cancel culture
+summary: B2 language for cancel culture.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.critique.hifan
+  - ja.lex.critique.jinken
+  - ja.lex.critique.kakushin
+  - ja.lex.critique.jiko
+  - ja.lex.critique.kanjou
+  - ja.sent.cancel-culture
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.cancel-culture-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.critique.hifan
+  - ja.lex.critique.jinken
+  - ja.lex.critique.kakushin
+  - ja.lex.critique.jiko
+  - ja.lex.critique.kanjou
+  - ja.sent.cancel-culture
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.cancel-culture-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.critique.hifan
+  - ja.lex.critique.jinken
+  - ja.lex.critique.kakushin
+  - ja.lex.critique.jiko
+  - ja.lex.critique.kanjou
+  - ja.sent.cancel-culture
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.cancel-culture-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.critique.hifan
+  - ja.lex.critique.jinken
+  - ja.lex.critique.kakushin
+  - ja.lex.critique.jiko
+  - ja.lex.critique.kanjou
+  - ja.sent.cancel-culture
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.cancel-culture-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.critique.hifan
+  - ja.lex.critique.jinken
+  - ja.lex.critique.kakushin
+  - ja.lex.critique.jiko
+  - ja.lex.critique.kanjou
+  - ja.sent.cancel-culture
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.cancel-culture-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.cancel-culture
+- id: ja.activity.cancel-culture-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

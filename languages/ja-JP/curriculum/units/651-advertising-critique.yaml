@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.advertising-critique
+goal_id: ja.goal.b2.media-critique
+title: advertising critique
+summary: B2 language for advertising critique.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.critique.koukoku
+  - ja.lex.critique.houbi
+  - ja.lex.critique.boikotto
+  - ja.lex.critique.shihai
+  - ja.lex.critique.eigyou
+  - ja.sent.advertising-critique
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.advertising-critique-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.critique.koukoku
+  - ja.lex.critique.houbi
+  - ja.lex.critique.boikotto
+  - ja.lex.critique.shihai
+  - ja.lex.critique.eigyou
+  - ja.sent.advertising-critique
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.advertising-critique-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.critique.koukoku
+  - ja.lex.critique.houbi
+  - ja.lex.critique.boikotto
+  - ja.lex.critique.shihai
+  - ja.lex.critique.eigyou
+  - ja.sent.advertising-critique
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.advertising-critique-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.critique.koukoku
+  - ja.lex.critique.houbi
+  - ja.lex.critique.boikotto
+  - ja.lex.critique.shihai
+  - ja.lex.critique.eigyou
+  - ja.sent.advertising-critique
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.advertising-critique-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.critique.koukoku
+  - ja.lex.critique.houbi
+  - ja.lex.critique.boikotto
+  - ja.lex.critique.shihai
+  - ja.lex.critique.eigyou
+  - ja.sent.advertising-critique
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.advertising-critique-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.advertising-critique
+- id: ja.activity.advertising-critique-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

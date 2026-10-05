@@ -314,6 +314,11 @@ prerequisite_edges:
   dimension: grammar-controlled
   required_state: independent
   strength: hard
+- from: ja.goal.b2.psychology-mind
+  to: ja.goal.b2.science-tech-ethics
+  dimension: grammar-controlled
+  required_state: independent
+  strength: hard
 notes:
 - Mirror of goal prerequisite edges (PACK-002); generated from curriculum/goals.yaml
   during K-30 authoring.

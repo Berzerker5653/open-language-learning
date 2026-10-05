@@ -835,3 +835,9 @@ restored, shard renamed media3.) Score: **7/7**.
 Goal `ru.goal.a2.work-study` created (+2 assessments). Units 150-159,
 50 words (`lexicon/workstudy.jsonl`), 2 grammar (`a2.instrumental-role`,
 `a2.genitive-of-achievement`), 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 61
+
+Goal `ja.goal.b2.psychology-mind` created (+assess, +deps). Units 650-659,
+50 words (`lexicon/critique.jsonl`), 2 grammar (`b2-ni-yoru`, `b2-wake-dewa-nai`),
+8 sentences. Score: **7/7**.
