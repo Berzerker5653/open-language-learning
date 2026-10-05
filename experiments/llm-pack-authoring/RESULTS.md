@@ -1262,3 +1262,9 @@ Score: **7/7**.
 Units 720-729 (risk, probability, and uncertainty), goal `ru.goal.b2.science-environment` (existing),
 50 words (`lexicon/sci4.jsonl`), 2 grammar (`b2-veroyatnost-taka`, `b2-v-sluchae`), 10 sentences.
 Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 71
+
+Units 730-739 (literary extracts and interpretive responses), NEW goal `ru.goal.b2.culture-perspectives`
+(+2 assessments), 50 words (`lexicon/cult.jsonl`), 2 grammar (`b2-na-moy-vzglyad`, `b2-skvoz`),
+10 sentences. Score: **7/7**.
