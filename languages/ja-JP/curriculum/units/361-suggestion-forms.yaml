@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.suggestion-forms
+goal_id: ja.goal.b1.advice-opinion
+title: suggestion forms
+summary: B1 language for suggestion forms.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.advice2.sengaku
+  - ja.lex.advice2.yuusen
+  - ja.lex.advice2.kyoushou
+  - ja.lex.advice2.hansei2
+  - ja.lex.advice2.mouichido
+  - ja.sent.suggestion-form
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.suggestion-forms-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.advice2.sengaku
+  - ja.lex.advice2.yuusen
+  - ja.lex.advice2.kyoushou
+  - ja.lex.advice2.hansei2
+  - ja.lex.advice2.mouichido
+  - ja.sent.suggestion-form
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.suggestion-forms-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.advice2.sengaku
+  - ja.lex.advice2.yuusen
+  - ja.lex.advice2.kyoushou
+  - ja.lex.advice2.hansei2
+  - ja.lex.advice2.mouichido
+  - ja.sent.suggestion-form
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.suggestion-forms-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.advice2.sengaku
+  - ja.lex.advice2.yuusen
+  - ja.lex.advice2.kyoushou
+  - ja.lex.advice2.hansei2
+  - ja.lex.advice2.mouichido
+  - ja.sent.suggestion-form
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.suggestion-forms-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.advice2.sengaku
+  - ja.lex.advice2.yuusen
+  - ja.lex.advice2.kyoushou
+  - ja.lex.advice2.hansei2
+  - ja.lex.advice2.mouichido
+  - ja.sent.suggestion-form
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.suggestion-forms-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.suggestion-form
+- id: ja.activity.suggestion-forms-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

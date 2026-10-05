@@ -551,3 +551,9 @@ spans 355-369) started, 5 units. 10 units, 50 words split across
 `lexicon/emotion2.jsonl` + `lexicon/advice.jsonl`, 2 grammar
 (`b1.hou-ga-yoi`, `b1.to-omoimasu`), 8 sentences, 1 assessment.
 Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 31: B1 units 360-369 (advice-opinion complete)
+
+Goal `ja.goal.b1.advice-opinion` complete (355-369). 10 units,
+50-word `lexicon/advice2.jsonl`, 2 grammar (`b1.to-itara-domo`,
+`b1.ni-chuui`), 8 sentences. Score: **7/7**.

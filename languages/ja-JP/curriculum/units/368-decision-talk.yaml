@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.decision-talk
+goal_id: ja.goal.b1.advice-opinion
+title: decision talk
+summary: B1 language for decision talk.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.advice2.niwa2
+  - ja.lex.advice2.mori2
+  - ja.lex.advice2.umi2
+  - ja.lex.advice2.suna2
+  - ja.lex.advice2.ishi2
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b1.ni-chuui
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.decision-talk-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.advice2.niwa2
+  - ja.lex.advice2.mori2
+  - ja.lex.advice2.umi2
+  - ja.lex.advice2.suna2
+  - ja.lex.advice2.ishi2
+  - ja.grammar.b1.ni-chuui
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.decision-talk-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.advice2.niwa2
+  - ja.lex.advice2.mori2
+  - ja.lex.advice2.umi2
+  - ja.lex.advice2.suna2
+  - ja.lex.advice2.ishi2
+  - ja.grammar.b1.ni-chuui
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.decision-talk-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.advice2.niwa2
+  - ja.lex.advice2.mori2
+  - ja.lex.advice2.umi2
+  - ja.lex.advice2.suna2
+  - ja.lex.advice2.ishi2
+  - ja.grammar.b1.ni-chuui
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.decision-talk-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.advice2.niwa2
+  - ja.lex.advice2.mori2
+  - ja.lex.advice2.umi2
+  - ja.lex.advice2.suna2
+  - ja.lex.advice2.ishi2
+  - ja.grammar.b1.ni-chuui
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.decision-talk-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.decision-talk-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

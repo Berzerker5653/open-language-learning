@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.explaining-preference
+goal_id: ja.goal.b1.advice-opinion
+title: explaining preference
+summary: B1 language for explaining preference.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.advice2.mono2
+  - ja.lex.advice2.koto2
+  - ja.lex.advice2.basho2
+  - ja.lex.advice2.toki2
+  - ja.lex.advice2.michi2
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b1.to-itara-domo
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.explaining-preference-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.advice2.mono2
+  - ja.lex.advice2.koto2
+  - ja.lex.advice2.basho2
+  - ja.lex.advice2.toki2
+  - ja.lex.advice2.michi2
+  - ja.grammar.b1.to-itara-domo
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.explaining-preference-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.advice2.mono2
+  - ja.lex.advice2.koto2
+  - ja.lex.advice2.basho2
+  - ja.lex.advice2.toki2
+  - ja.lex.advice2.michi2
+  - ja.grammar.b1.to-itara-domo
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.explaining-preference-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.advice2.mono2
+  - ja.lex.advice2.koto2
+  - ja.lex.advice2.basho2
+  - ja.lex.advice2.toki2
+  - ja.lex.advice2.michi2
+  - ja.grammar.b1.to-itara-domo
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.explaining-preference-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.advice2.mono2
+  - ja.lex.advice2.koto2
+  - ja.lex.advice2.basho2
+  - ja.lex.advice2.toki2
+  - ja.lex.advice2.michi2
+  - ja.grammar.b1.to-itara-domo
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.explaining-preference-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.explaining-preference-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email
