@@ -30,6 +30,11 @@ them); `schema_version` in `manifest.yaml` selects the contract.
 | `sentences/entries.jsonl` | `sentence` | one per line |
 | `stories/*.yaml` | `story` | single document |
 
+Field additions (backward-compatible, optional): `lexicon-entry.gender`
+(enum masculine/feminine/neuter/common) added 2026-10-05 for gendered
+languages; derived values must name their source in `notes` and require
+human review before `verified` status.
+
 `media/**` holds binary assets. Markdown/txt docs and `LICENSE`/`NOTICE*`
 are allowed anywhere. Anything else is reported as `unknown_file`.
 

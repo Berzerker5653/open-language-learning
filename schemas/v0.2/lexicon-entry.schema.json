@@ -49,6 +49,11 @@
       "additionalProperties": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
     },
     "part_of_speech": { "type": "string", "minLength": 1 },
+    "gender": {
+      "type": "string",
+      "enum": ["masculine", "feminine", "neuter", "common"],
+      "description": "Grammatical gender for gendered languages (e.g. Russian nouns). Derived values must name their source in notes; human review required before verified status."
+    },
     "registers": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
     "semantic_tags": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
     "prerequisite_orthography": {
