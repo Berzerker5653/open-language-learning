@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.thesis-construction
+goal_id: ja.goal.b2.academic-skills
+title: thesis construction
+summary: B2 language for thesis construction.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.academic.ronsho
+  - ja.lex.academic.bunpatsu
+  - ja.lex.academic.mokuji
+  - ja.lex.academic.yougaki
+  - ja.lex.academic.kensa
+  - ja.sent.thesis-construction
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.thesis-construction-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.academic.ronsho
+  - ja.lex.academic.bunpatsu
+  - ja.lex.academic.mokuji
+  - ja.lex.academic.yougaki
+  - ja.lex.academic.kensa
+  - ja.sent.thesis-construction
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.thesis-construction-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.academic.ronsho
+  - ja.lex.academic.bunpatsu
+  - ja.lex.academic.mokuji
+  - ja.lex.academic.yougaki
+  - ja.lex.academic.kensa
+  - ja.sent.thesis-construction
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.thesis-construction-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.academic.ronsho
+  - ja.lex.academic.bunpatsu
+  - ja.lex.academic.mokuji
+  - ja.lex.academic.yougaki
+  - ja.lex.academic.kensa
+  - ja.sent.thesis-construction
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.thesis-construction-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.academic.ronsho
+  - ja.lex.academic.bunpatsu
+  - ja.lex.academic.mokuji
+  - ja.lex.academic.yougaki
+  - ja.lex.academic.kensa
+  - ja.sent.thesis-construction
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.thesis-construction-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.thesis-construction
+- id: ja.activity.thesis-construction-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

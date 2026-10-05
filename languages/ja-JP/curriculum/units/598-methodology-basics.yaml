@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.methodology-basics
+goal_id: ja.goal.b2.academic-skills
+title: methodology basics
+summary: B2 language for methodology basics.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.academic.sakuho
+  - ja.lex.academic.hikaku2
+  - ja.lex.academic.bunseki2
+  - ja.lex.academic.shouko2
+  - ja.lex.academic.shiji
+  - ja.sent.methodology-basics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.methodology-basics-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.academic.sakuho
+  - ja.lex.academic.hikaku2
+  - ja.lex.academic.bunseki2
+  - ja.lex.academic.shouko2
+  - ja.lex.academic.shiji
+  - ja.sent.methodology-basics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.methodology-basics-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.academic.sakuho
+  - ja.lex.academic.hikaku2
+  - ja.lex.academic.bunseki2
+  - ja.lex.academic.shouko2
+  - ja.lex.academic.shiji
+  - ja.sent.methodology-basics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.methodology-basics-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.academic.sakuho
+  - ja.lex.academic.hikaku2
+  - ja.lex.academic.bunseki2
+  - ja.lex.academic.shouko2
+  - ja.lex.academic.shiji
+  - ja.sent.methodology-basics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.methodology-basics-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.academic.sakuho
+  - ja.lex.academic.hikaku2
+  - ja.lex.academic.bunseki2
+  - ja.lex.academic.shouko2
+  - ja.lex.academic.shiji
+  - ja.sent.methodology-basics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.methodology-basics-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.methodology-basics
+- id: ja.activity.methodology-basics-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

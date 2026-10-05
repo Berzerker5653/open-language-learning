@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.data-presentation
+goal_id: ja.goal.b2.academic-skills
+title: data presentation
+summary: B2 language for data presentation.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.academic.zu
+  - ja.lex.academic.hyou
+  - ja.lex.academic.hyouji
+  - ja.lex.academic.ronbun
+  - ja.lex.academic.shukyou
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2.ni-hiku
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.data-presentation-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.academic.zu
+  - ja.lex.academic.hyou
+  - ja.lex.academic.hyouji
+  - ja.lex.academic.ronbun
+  - ja.lex.academic.shukyou
+  - ja.grammar.b2.ni-hiku
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.data-presentation-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.academic.zu
+  - ja.lex.academic.hyou
+  - ja.lex.academic.hyouji
+  - ja.lex.academic.ronbun
+  - ja.lex.academic.shukyou
+  - ja.grammar.b2.ni-hiku
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.data-presentation-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.academic.zu
+  - ja.lex.academic.hyou
+  - ja.lex.academic.hyouji
+  - ja.lex.academic.ronbun
+  - ja.lex.academic.shukyou
+  - ja.grammar.b2.ni-hiku
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.data-presentation-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.academic.zu
+  - ja.lex.academic.hyou
+  - ja.lex.academic.hyouji
+  - ja.lex.academic.ronbun
+  - ja.lex.academic.shukyou
+  - ja.grammar.b2.ni-hiku
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.data-presentation-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.data-presentation-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

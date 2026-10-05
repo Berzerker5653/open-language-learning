@@ -765,3 +765,10 @@ society3, society4, science, science2, edu3, edu4, global) had English text in
 `forms`/`readings`; all 350 entries rewritten to hiragana/katakana with correct
 script tags; part_of_speech normalized (n→noun, adj-na→na-adjective, v→verb).
 Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 55
+
+Goal `ja.goal.b2.academic-skills` created (+deps, +assessment). Units 590-599,
+50 words (`lexicon/global2.jsonl` 20, `lexicon/academic.jsonl` 30), 2 grammar
+(`b2.ni-chikai`, `b2.ni-hiku`), 8 sentences. Kana authored directly in WORDS.
+Score: **7/7**.

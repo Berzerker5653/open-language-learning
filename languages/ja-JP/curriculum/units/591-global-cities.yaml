@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.global-cities
+goal_id: ja.goal.b2.global-issues
+title: global cities
+summary: B2 language for global cities.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.global2.toshi2
+  - ja.lex.global2.jinko2
+  - ja.lex.global2.kutsu2
+  - ja.lex.global2.kankakusha
+  - ja.lex.global2.shigai2
+  - ja.sent.global-cities
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.global-cities-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.global2.toshi2
+  - ja.lex.global2.jinko2
+  - ja.lex.global2.kutsu2
+  - ja.lex.global2.kankakusha
+  - ja.lex.global2.shigai2
+  - ja.sent.global-cities
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.global-cities-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.global2.toshi2
+  - ja.lex.global2.jinko2
+  - ja.lex.global2.kutsu2
+  - ja.lex.global2.kankakusha
+  - ja.lex.global2.shigai2
+  - ja.sent.global-cities
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.global-cities-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.global2.toshi2
+  - ja.lex.global2.jinko2
+  - ja.lex.global2.kutsu2
+  - ja.lex.global2.kankakusha
+  - ja.lex.global2.shigai2
+  - ja.sent.global-cities
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.global-cities-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.global2.toshi2
+  - ja.lex.global2.jinko2
+  - ja.lex.global2.kutsu2
+  - ja.lex.global2.kankakusha
+  - ja.lex.global2.shigai2
+  - ja.sent.global-cities
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.global-cities-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.global-cities
+- id: ja.activity.global-cities-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

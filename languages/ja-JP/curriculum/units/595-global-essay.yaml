@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.global-essay
+goal_id: ja.goal.b2.academic-skills
+title: global essay
+summary: B2 language for global essay.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.academic.junbi
+  - ja.lex.academic.inyou
+  - ja.lex.academic.sansa
+  - ja.lex.academic.koubun2
+  - ja.lex.academic.gouki
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2.ni-chikai
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.global-essay-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.academic.junbi
+  - ja.lex.academic.inyou
+  - ja.lex.academic.sansa
+  - ja.lex.academic.koubun2
+  - ja.lex.academic.gouki
+  - ja.grammar.b2.ni-chikai
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.global-essay-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.academic.junbi
+  - ja.lex.academic.inyou
+  - ja.lex.academic.sansa
+  - ja.lex.academic.koubun2
+  - ja.lex.academic.gouki
+  - ja.grammar.b2.ni-chikai
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.global-essay-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.academic.junbi
+  - ja.lex.academic.inyou
+  - ja.lex.academic.sansa
+  - ja.lex.academic.koubun2
+  - ja.lex.academic.gouki
+  - ja.grammar.b2.ni-chikai
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.global-essay-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.academic.junbi
+  - ja.lex.academic.inyou
+  - ja.lex.academic.sansa
+  - ja.lex.academic.koubun2
+  - ja.lex.academic.gouki
+  - ja.grammar.b2.ni-chikai
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.global-essay-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.global-essay-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email
