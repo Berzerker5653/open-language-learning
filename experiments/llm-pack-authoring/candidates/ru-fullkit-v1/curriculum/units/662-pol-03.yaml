@@ -1,0 +1,46 @@
+id: "ru.unit.b2.pol-03"
+goal_id: "ru.goal.b2.society-policy"
+title: "Cuts"
+summary: "урезание, урезать, реструктуризация, реструктурировать and консолидация."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u662-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.soc.urezanie",
+        "ru.lex.soc.urezat",
+        "ru.lex.soc.restrukturizaciya",
+        "ru.lex.soc.restrukturirovat",
+        "ru.lex.soc.konsolidaciya",
+        "ru.sent.b2.u662",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u662-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u662-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u662"]
+  - id: "ru.activity.b2.u662-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Cuts: policy notice with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse урезание (cutting) with реструктуризация (restructuring)."]
+  target_proficiency: "B2"
+  validation_method: "choice"
