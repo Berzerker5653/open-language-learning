@@ -3,9 +3,9 @@
     "plan": "plans/ru-fullkit-v1.yaml",
     "pack": "candidates/ru-fullkit-v1",
     "bands_done": ["on-ramp"],
-    "units_next": "040",
+    "units_next": "050",
     "last_score": "7/7 (2026-10-04, results/ru-fullkit-v1)",
-    "notes": "external model Phase 2 (020-029) merged 7/7; agent batch ru01 (030-039 people-family) 7/7; pack 40 units, 8 goals, 150 lex, 11 grammar, 19 sentences, 16 assessments; next block 040-049 per plan"
+    "notes": "agent batches ru01 (030-039 people-family) and ru02 (040-049 home) 7/7; pack 50 units, 9 goals, 200 lex, 13 grammar, 27 sentences, 18 assessments; next block 050-059 per plan"
   },
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",

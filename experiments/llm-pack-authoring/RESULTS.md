@@ -672,3 +672,9 @@ Score: **7/7**.
 Goal `ru.goal.a1.people-family` created. 10 units, 50-word
 `lexicon/family.jsonl`, 2 grammar (`a1.u-possession`,
 `a1.possessive-pronouns`), 8 sentences, 2 assessments. Score: **7/7**.
+
+## 2026-10-04 — ru-RU agent batch ru02: A1 units 040-049 (home)
+
+Goal `ru.goal.a1.home` created. 10 units, 50-word `lexicon/home.jsonl`,
+2 grammar (`a1.location-v-na`, `a1.na-vs-v`), 8 sentences, 2 assessments.
+Score: **7/7**.

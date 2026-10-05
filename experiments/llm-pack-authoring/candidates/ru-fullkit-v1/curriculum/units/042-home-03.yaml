@@ -1,0 +1,47 @@
+id: "ru.unit.a1.home-03"
+goal_id: "ru.goal.a1.home"
+title: "Bedroom furniture"
+summary: "кровать, шкаф, комод, зеркало, лампа named with это."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u042-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.home.krovat",
+        "ru.lex.home.shkaf",
+        "ru.lex.home.komod",
+        "ru.lex.home.zerkalo",
+        "ru.lex.home.lampa",
+        "ru.sent.a1.u042",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u042-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a1.u042-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a1.u042"]
+  - id: "ru.activity.a1.u042-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations:
+    ["Bedroom furniture: naming and simple location with taught forms only."]
+  prohibited_ambiguity: ["Do not treat шкаф as feminine; it is masculine and takes no ending."]
+  target_proficiency: "A1"
+  validation_method: "choice"

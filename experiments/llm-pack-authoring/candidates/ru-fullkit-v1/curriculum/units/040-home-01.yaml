@@ -1,0 +1,46 @@
+id: "ru.unit.a1.home-01"
+goal_id: "ru.goal.a1.home"
+title: "Rooms"
+summary: "комната, кухня, ванная, спальня, прихожая named with это."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u040-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.home.komnata",
+        "ru.lex.home.kuhnya",
+        "ru.lex.home.vannaya",
+        "ru.lex.home.spalnya",
+        "ru.lex.home.peredaya",
+        "ru.sent.a1.u040",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u040-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a1.u040-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a1.u040"]
+  - id: "ru.activity.a1.u040-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Rooms: naming and simple location with taught forms only."]
+  prohibited_ambiguity: ["Do not use ванная as an adjective; here it names the bathroom room."]
+  target_proficiency: "A1"
+  validation_method: "choice"
