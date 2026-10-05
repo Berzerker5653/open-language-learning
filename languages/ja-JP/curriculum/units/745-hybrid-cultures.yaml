@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.745-hybrid-cultures
+goal_id: ja.goal.b2.culture-identity
+title: hybrid cultures
+summary: B2 language for hybrid cultures.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.cult2.hantai4
+  - ja.lex.cult2.rikken2
+  - ja.lex.cult2.jiyu3
+  - ja.lex.cult2.kizon2
+  - ja.lex.cult2.tokui
+  - ja.sent.hybrid-cultures
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.745-hybrid-cultures-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.cult2.hantai4
+  - ja.lex.cult2.rikken2
+  - ja.lex.cult2.jiyu3
+  - ja.lex.cult2.kizon2
+  - ja.lex.cult2.tokui
+  - ja.sent.hybrid-cultures
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.745-hybrid-cultures-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.cult2.hantai4
+  - ja.lex.cult2.rikken2
+  - ja.lex.cult2.jiyu3
+  - ja.lex.cult2.kizon2
+  - ja.lex.cult2.tokui
+  - ja.sent.hybrid-cultures
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.745-hybrid-cultures-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.cult2.hantai4
+  - ja.lex.cult2.rikken2
+  - ja.lex.cult2.jiyu3
+  - ja.lex.cult2.kizon2
+  - ja.lex.cult2.tokui
+  - ja.sent.hybrid-cultures
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.745-hybrid-cultures-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.cult2.hantai4
+  - ja.lex.cult2.rikken2
+  - ja.lex.cult2.jiyu3
+  - ja.lex.cult2.kizon2
+  - ja.lex.cult2.tokui
+  - ja.sent.hybrid-cultures
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.745-hybrid-cultures-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.hybrid-cultures
+- id: ja.activity.745-hybrid-cultures-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.741-migration-identity
+goal_id: ja.goal.b2.culture-identity
+title: migration identity
+summary: B2 language for migration identity.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.cult2.danho
+  - ja.lex.cult2.kyosei2
+  - ja.lex.cult2.tekisho
+  - ja.lex.cult2.bunka2
+  - ja.lex.cult2.kozou3
+  - ja.sent.migration-identity
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.741-migration-identity-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.cult2.danho
+  - ja.lex.cult2.kyosei2
+  - ja.lex.cult2.tekisho
+  - ja.lex.cult2.bunka2
+  - ja.lex.cult2.kozou3
+  - ja.sent.migration-identity
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.741-migration-identity-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.cult2.danho
+  - ja.lex.cult2.kyosei2
+  - ja.lex.cult2.tekisho
+  - ja.lex.cult2.bunka2
+  - ja.lex.cult2.kozou3
+  - ja.sent.migration-identity
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.741-migration-identity-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.cult2.danho
+  - ja.lex.cult2.kyosei2
+  - ja.lex.cult2.tekisho
+  - ja.lex.cult2.bunka2
+  - ja.lex.cult2.kozou3
+  - ja.sent.migration-identity
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.741-migration-identity-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.cult2.danho
+  - ja.lex.cult2.kyosei2
+  - ja.lex.cult2.tekisho
+  - ja.lex.cult2.bunka2
+  - ja.lex.cult2.kozou3
+  - ja.sent.migration-identity
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.741-migration-identity-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.migration-identity
+- id: ja.activity.741-migration-identity-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -939,3 +939,9 @@ Goal `ja.goal.b2.culture-identity` created (+ASSESS +DEP). Units 730-739
 
 Units 240-249 (experiences: travel), 50 words (`lexicon/travel2.jsonl`),
 2 grammar (`b1.travel-reflexives`, `b1.lessons-perfective`), 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 70
+
+Units 740-749 (culture-identity tail, abstract-debate start), 50 words
+(`lexicon/cult2.jsonl`, `lexicon/abst.jsonl`), 2 grammar (`b2-to-sureba`, `b2-ni-hokanaranai`),
+8 sentences, new goal `ja.goal.b2.abstract-debate` + assessment + DEP edge. Score: **7/7**.

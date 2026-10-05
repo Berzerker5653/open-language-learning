@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.747-identity-essay
+goal_id: ja.goal.b2.culture-identity
+title: identity essay
+summary: B2 language for identity essay.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.cult2.shingakusha
+  - ja.lex.cult2.kenkyusha
+  - ja.lex.cult2.shogen
+  - ja.lex.cult2.kaiso2
+  - ja.lex.cult2.denki
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-to-sureba
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.747-identity-essay-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.cult2.shingakusha
+  - ja.lex.cult2.kenkyusha
+  - ja.lex.cult2.shogen
+  - ja.lex.cult2.kaiso2
+  - ja.lex.cult2.denki
+  - ja.grammar.b2-to-sureba
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.747-identity-essay-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.cult2.shingakusha
+  - ja.lex.cult2.kenkyusha
+  - ja.lex.cult2.shogen
+  - ja.lex.cult2.kaiso2
+  - ja.lex.cult2.denki
+  - ja.grammar.b2-to-sureba
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.747-identity-essay-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.cult2.shingakusha
+  - ja.lex.cult2.kenkyusha
+  - ja.lex.cult2.shogen
+  - ja.lex.cult2.kaiso2
+  - ja.lex.cult2.denki
+  - ja.grammar.b2-to-sureba
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.747-identity-essay-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.cult2.shingakusha
+  - ja.lex.cult2.kenkyusha
+  - ja.lex.cult2.shogen
+  - ja.lex.cult2.kaiso2
+  - ja.lex.cult2.denki
+  - ja.grammar.b2-to-sureba
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.747-identity-essay-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.747-identity-essay-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

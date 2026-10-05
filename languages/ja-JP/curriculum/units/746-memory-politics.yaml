@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.746-memory-politics
+goal_id: ja.goal.b2.culture-identity
+title: memory politics
+summary: B2 language for memory politics.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.cult2.fumei
+  - ja.lex.cult2.himei
+  - ja.lex.cult2.soshiki
+  - ja.lex.cult2.kikan2
+  - ja.lex.cult2.renmei
+  - ja.sent.memory-politics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.746-memory-politics-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.cult2.fumei
+  - ja.lex.cult2.himei
+  - ja.lex.cult2.soshiki
+  - ja.lex.cult2.kikan2
+  - ja.lex.cult2.renmei
+  - ja.sent.memory-politics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.746-memory-politics-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.cult2.fumei
+  - ja.lex.cult2.himei
+  - ja.lex.cult2.soshiki
+  - ja.lex.cult2.kikan2
+  - ja.lex.cult2.renmei
+  - ja.sent.memory-politics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.746-memory-politics-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.cult2.fumei
+  - ja.lex.cult2.himei
+  - ja.lex.cult2.soshiki
+  - ja.lex.cult2.kikan2
+  - ja.lex.cult2.renmei
+  - ja.sent.memory-politics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.746-memory-politics-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.cult2.fumei
+  - ja.lex.cult2.himei
+  - ja.lex.cult2.soshiki
+  - ja.lex.cult2.kikan2
+  - ja.lex.cult2.renmei
+  - ja.sent.memory-politics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.746-memory-politics-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.memory-politics
+- id: ja.activity.746-memory-politics-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -2201,3 +2201,34 @@ goals:
       tool: omp
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-05'
+  - id: ja.goal.b2.abstract-debate
+    description: 'Argue at the abstract level: define concepts, surface assumptions, and weigh counterarguments.'
+    band: B2
+    framework_refs: []
+    contexts:
+    - ja.situation.classroom
+    modalities:
+    - listening
+    - speaking
+    - reading
+    - writing
+    prerequisites:
+    - target: ja.goal.b2.academic-skills
+      dimension: grammar-controlled
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.lex.abst.gainen
+    - ja.lex.abst.teigi
+    assessment_ids:
+    - ja.assess.abstract-debate
+    transfer_required: true
+    sources:
+    - jf-standard
+    - ai-drafted-extension
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next-iq3_s
+      date: '2026-10-05'

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.743-national-narrative
+goal_id: ja.goal.b2.culture-identity
+title: national narrative
+summary: B2 language for national narrative.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.cult2.ronso
+  - ja.lex.cult2.shiki
+  - ja.lex.cult2.kachi5
+  - ja.lex.cult2.hakai
+  - ja.lex.cult2.hogo2
+  - ja.sent.national-narrative
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.743-national-narrative-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.cult2.ronso
+  - ja.lex.cult2.shiki
+  - ja.lex.cult2.kachi5
+  - ja.lex.cult2.hakai
+  - ja.lex.cult2.hogo2
+  - ja.sent.national-narrative
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.743-national-narrative-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.cult2.ronso
+  - ja.lex.cult2.shiki
+  - ja.lex.cult2.kachi5
+  - ja.lex.cult2.hakai
+  - ja.lex.cult2.hogo2
+  - ja.sent.national-narrative
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.743-national-narrative-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.cult2.ronso
+  - ja.lex.cult2.shiki
+  - ja.lex.cult2.kachi5
+  - ja.lex.cult2.hakai
+  - ja.lex.cult2.hogo2
+  - ja.sent.national-narrative
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.743-national-narrative-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.cult2.ronso
+  - ja.lex.cult2.shiki
+  - ja.lex.cult2.kachi5
+  - ja.lex.cult2.hakai
+  - ja.lex.cult2.hogo2
+  - ja.sent.national-narrative
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.743-national-narrative-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.national-narrative
+- id: ja.activity.743-national-narrative-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
