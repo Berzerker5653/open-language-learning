@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.revisionism-debate
+goal_id: ja.goal.b2.history-critical
+title: revisionism debate
+summary: B2 language for revisionism debate.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.history2.sagitou
+  - ja.lex.history2.toui
+  - ja.lex.history2.seimen
+  - ja.lex.history2.jissai
+  - ja.lex.history2.honne2
+  - ja.sent.revisionism-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.revisionism-debate-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.history2.sagitou
+  - ja.lex.history2.toui
+  - ja.lex.history2.seimen
+  - ja.lex.history2.jissai
+  - ja.lex.history2.honne2
+  - ja.sent.revisionism-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.revisionism-debate-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.history2.sagitou
+  - ja.lex.history2.toui
+  - ja.lex.history2.seimen
+  - ja.lex.history2.jissai
+  - ja.lex.history2.honne2
+  - ja.sent.revisionism-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.revisionism-debate-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.history2.sagitou
+  - ja.lex.history2.toui
+  - ja.lex.history2.seimen
+  - ja.lex.history2.jissai
+  - ja.lex.history2.honne2
+  - ja.sent.revisionism-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.revisionism-debate-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.history2.sagitou
+  - ja.lex.history2.toui
+  - ja.lex.history2.seimen
+  - ja.lex.history2.jissai
+  - ja.lex.history2.honne2
+  - ja.sent.revisionism-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.revisionism-debate-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.revisionism-debate
+- id: ja.activity.revisionism-debate-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.economic-history-b
+goal_id: ja.goal.b2.history-critical
+title: economic history
+summary: B2 language for economic history.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.history2.kinkyo
+  - ja.lex.history2.seicho
+  - ja.lex.history2.fukko
+  - ja.lex.history2.senjo
+  - ja.lex.history2.sengo2
+  - ja.sent.economic-history-b
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.economic-history-b-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.history2.kinkyo
+  - ja.lex.history2.seicho
+  - ja.lex.history2.fukko
+  - ja.lex.history2.senjo
+  - ja.lex.history2.sengo2
+  - ja.sent.economic-history-b
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.economic-history-b-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.history2.kinkyo
+  - ja.lex.history2.seicho
+  - ja.lex.history2.fukko
+  - ja.lex.history2.senjo
+  - ja.lex.history2.sengo2
+  - ja.sent.economic-history-b
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.economic-history-b-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.history2.kinkyo
+  - ja.lex.history2.seicho
+  - ja.lex.history2.fukko
+  - ja.lex.history2.senjo
+  - ja.lex.history2.sengo2
+  - ja.sent.economic-history-b
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.economic-history-b-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.history2.kinkyo
+  - ja.lex.history2.seicho
+  - ja.lex.history2.fukko
+  - ja.lex.history2.senjo
+  - ja.lex.history2.sengo2
+  - ja.sent.economic-history-b
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.economic-history-b-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.economic-history-b
+- id: ja.activity.economic-history-b-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

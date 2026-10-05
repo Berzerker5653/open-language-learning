@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.history-and-identity
+goal_id: ja.goal.b2.history-critical
+title: history and identity
+summary: B2 language for history and identity.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.history2.kioku
+  - ja.lex.history2.kachi
+  - ja.lex.history2.risou
+  - ja.lex.history2.konkyo
+  - ja.lex.history2.gijinka
+  - ja.sent.history-and-identity
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.history-and-identity-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.history2.kioku
+  - ja.lex.history2.kachi
+  - ja.lex.history2.risou
+  - ja.lex.history2.konkyo
+  - ja.lex.history2.gijinka
+  - ja.sent.history-and-identity
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.history-and-identity-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.history2.kioku
+  - ja.lex.history2.kachi
+  - ja.lex.history2.risou
+  - ja.lex.history2.konkyo
+  - ja.lex.history2.gijinka
+  - ja.sent.history-and-identity
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.history-and-identity-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.history2.kioku
+  - ja.lex.history2.kachi
+  - ja.lex.history2.risou
+  - ja.lex.history2.konkyo
+  - ja.lex.history2.gijinka
+  - ja.sent.history-and-identity
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.history-and-identity-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.history2.kioku
+  - ja.lex.history2.kachi
+  - ja.lex.history2.risou
+  - ja.lex.history2.konkyo
+  - ja.lex.history2.gijinka
+  - ja.sent.history-and-identity
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.history-and-identity-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.history-and-identity
+- id: ja.activity.history-and-identity-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

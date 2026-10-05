@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.social-history
+goal_id: ja.goal.b2.history-critical
+title: social history
+summary: B2 language for social history.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.history2.koseki
+  - ja.lex.history2.chosa
+  - ja.lex.history2.nikki
+  - ja.lex.history2.tegami
+  - ja.lex.history2.mousho
+  - ja.sent.social-history
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.social-history-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.history2.koseki
+  - ja.lex.history2.chosa
+  - ja.lex.history2.nikki
+  - ja.lex.history2.tegami
+  - ja.lex.history2.mousho
+  - ja.sent.social-history
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.social-history-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.history2.koseki
+  - ja.lex.history2.chosa
+  - ja.lex.history2.nikki
+  - ja.lex.history2.tegami
+  - ja.lex.history2.mousho
+  - ja.sent.social-history
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.social-history-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.history2.koseki
+  - ja.lex.history2.chosa
+  - ja.lex.history2.nikki
+  - ja.lex.history2.tegami
+  - ja.lex.history2.mousho
+  - ja.sent.social-history
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.social-history-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.history2.koseki
+  - ja.lex.history2.chosa
+  - ja.lex.history2.nikki
+  - ja.lex.history2.tegami
+  - ja.lex.history2.mousho
+  - ja.sent.social-history
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.social-history-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.social-history
+- id: ja.activity.social-history-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

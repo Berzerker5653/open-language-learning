@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.archives-research
+goal_id: ja.goal.b2.history-critical
+title: archives research
+summary: B2 language for archives research.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.history2.shiryoukan
+  - ja.lex.history2.teikyou
+  - ja.lex.history2.kousatsu
+  - ja.lex.history2.kento
+  - ja.lex.history2.soshi
+  - ja.sent.archives-research
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.archives-research-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.history2.shiryoukan
+  - ja.lex.history2.teikyou
+  - ja.lex.history2.kousatsu
+  - ja.lex.history2.kento
+  - ja.lex.history2.soshi
+  - ja.sent.archives-research
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.archives-research-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.history2.shiryoukan
+  - ja.lex.history2.teikyou
+  - ja.lex.history2.kousatsu
+  - ja.lex.history2.kento
+  - ja.lex.history2.soshi
+  - ja.sent.archives-research
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.archives-research-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.history2.shiryoukan
+  - ja.lex.history2.teikyou
+  - ja.lex.history2.kousatsu
+  - ja.lex.history2.kento
+  - ja.lex.history2.soshi
+  - ja.sent.archives-research
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.archives-research-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.history2.shiryoukan
+  - ja.lex.history2.teikyou
+  - ja.lex.history2.kousatsu
+  - ja.lex.history2.kento
+  - ja.lex.history2.soshi
+  - ja.sent.archives-research
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.archives-research-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.archives-research
+- id: ja.activity.archives-research-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

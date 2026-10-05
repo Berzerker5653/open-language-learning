@@ -489,7 +489,17 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2297  95310f2392e4  curriculum/units/517-historiography-basics.yaml
         2212  71587e4e0142  curriculum/units/518-meiji-modernization.yaml
         2137  81211b3d888f  curriculum/units/519-war-memory.yaml
-       54106  1be9d2353e1f  grammar/concepts.jsonl
+        2238  8407cc9ec369  curriculum/units/520-economic-history.yaml
+        2182  e2fc41ed5025  curriculum/units/521-social-history.yaml
+        2222  0e7f8850becc  curriculum/units/522-regional-history.yaml
+        2272  a972116870e9  curriculum/units/523-history-and-identity.yaml
+        2227  3d3de0cf5852  curriculum/units/524-monument-debate.yaml
+        2262  bc5e65055ba3  curriculum/units/525-archives-research.yaml
+        2211  43d6a5839375  curriculum/units/526-historical-method.yaml
+        2247  573294002edd  curriculum/units/527-revisionism-debate.yaml
+        2192  ef17aeab1acf  curriculum/units/528-oral-history.yaml
+        2222  9dec4001d680  curriculum/units/529-museums-memory.yaml
+       55086  176f5752c6cc  grammar/concepts.jsonl
         7877  ed57c3c31abb  grammar/dependencies.yaml
        30369  1401b6e0388e  kanji/entries.jsonl
          485  860cdf8185db  language/identity.yaml
@@ -529,6 +539,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
        39615  3b18fdcab07c  lexicon/health2.jsonl
        19839  92bb930477c4  lexicon/health3.jsonl
        15783  3616e9979756  lexicon/history.jsonl
+       39449  af49330148ec  lexicon/history2.jsonl
        35425  8a5dc79bc046  lexicon/home.jsonl
        31460  75cc2c582272  lexicon/law.jsonl
        32313  7ab1a7525155  lexicon/law2.jsonl
@@ -575,7 +586,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
-      262733  c086fbcebef1  sentences/entries.jsonl
+      267622  0b1f27a3e906  sentences/entries.jsonl
         3915  e270f808c26e  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml
          539  842cce82e5d5  stories/first-day.yaml

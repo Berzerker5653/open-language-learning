@@ -10,7 +10,7 @@
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
-    "units_next": "520",
-    "notes": "b47 (510-519: film-analysis tail + history-critical start) 7/7; goal ja.goal.b2.history-critical created with deps edge; next B2 goals per plans/ja-fullkit-v1.yaml from 520"
+    "units_next": "530",
+    "notes": "b47+b48 (510-529) 7/7; history-critical goal complete (516-529); next: 530-531 history-critical tail then society-change 532+"
   }
 }
