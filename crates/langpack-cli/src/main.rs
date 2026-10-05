@@ -1,5 +1,5 @@
 //! `langpack` author CLI: init, validate, lint, test, audit-licenses,
-//! audit-curriculum, audit-sources, build, catalog, inspect, install, rollback.
+//! audit-curriculum, audit-sources, audit-lexicon, build, catalog, inspect, install, rollback.
 
 use clap::{Parser, Subcommand, ValueEnum};
 use lts_langpack::archive;
@@ -77,6 +77,14 @@ enum Command {
     /// Source provenance audit: locators, retrieved dates, term
     /// consistency, unused sources.
     AuditSources {
+        /// Pack root directory.
+        path: String,
+        #[arg(long)]
+        json: bool,
+    },
+    /// Lexicon script-purity and stress audit: writing-system
+    /// contamination and Cyrillic stress self-consistency.
+    AuditLexicon {
         /// Pack root directory.
         path: String,
         #[arg(long)]
@@ -554,6 +562,7 @@ fn main() -> ExitCode {
             let mut diags = pack.validate(Mode::Scaffold, None);
             diags.extend(graph::audit_curriculum(&pack));
             diags.extend(pack.audit_sources());
+            diags.extend(pack.audit_lexicon());
             let (errors, warnings) = report("lint", &diags, json, None);
             if errors > 0 || warnings > 0 {
                 ExitCode::from(1)
@@ -573,6 +582,7 @@ fn main() -> ExitCode {
             let mut diags = pack.validate(Mode::Install, engine_version.as_deref());
             diags.extend(graph::audit_curriculum(&pack));
             diags.extend(pack.audit_sources());
+            diags.extend(pack.audit_lexicon());
             let (lic_diags, report_entries) = pack.audit_licenses();
             diags.extend(lic_diags);
             let (errors, warnings) = report(
@@ -610,6 +620,19 @@ fn main() -> ExitCode {
             };
             let diags = pack.audit_sources();
             let (errors, _) = report("audit-sources", &diags, json, None);
+            if errors > 0 {
+                ExitCode::from(1)
+            } else {
+                ExitCode::SUCCESS
+            }
+        }
+        Command::AuditLexicon { path, json } => {
+            let pack = match load_pack(&path, json) {
+                Ok(pack) => pack,
+                Err(c) => return c,
+            };
+            let diags = pack.audit_lexicon();
+            let (errors, _) = report("audit-lexicon", &diags, json, None);
             if errors > 0 {
                 ExitCode::from(1)
             } else {

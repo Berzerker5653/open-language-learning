@@ -289,6 +289,7 @@ langpack lint <path>
 langpack test <path>
 langpack audit-curriculum <path>
 langpack audit-sources <path>
+langpack audit-lexicon <path>
 langpack audit-licenses <path>
 langpack build <path>
 langpack inspect <archive>

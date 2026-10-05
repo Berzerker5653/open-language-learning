@@ -455,3 +455,31 @@ fn ai_only_approval_cannot_promote_to_verified() {
         "install must hard-fail a fabricated promotion: {install:?}"
     );
 }
+
+#[test]
+fn lexicon_script_contamination_and_stress_defects_are_caught() {
+    let pack = Pack::load_dir(&fixture("invalid-lexicon-script")).unwrap();
+    let diags = pack.audit_lexicon();
+    let c = codes(&diags);
+    assert!(
+        c.contains(&"lexicon_script_contamination"),
+        "precomposed accents, Hangul, and Latin-in-kana must be flagged: {diags:?}"
+    );
+    assert!(
+        diags
+            .iter()
+            .any(|d| d.code == "lexicon_stress_multiple" && d.severity == Severity::Error),
+        "double stress mark must be an error: {diags:?}"
+    );
+    assert!(
+        c.contains(&"lexicon_form_no_target_script"),
+        "romaji-only primary form must be flagged: {diags:?}"
+    );
+    // The clean demo pack must stay clean under the same audit.
+    let clean = Pack::load_dir(&fixture("eo-demo")).unwrap();
+    assert!(
+        clean.audit_lexicon().is_empty(),
+        "eo-demo must pass audit-lexicon: {:?}",
+        clean.audit_lexicon()
+    );
+}

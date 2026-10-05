@@ -1,0 +1,20 @@
+id: "eo.unit.demo.greetings"
+goal_id: "eo.goal.demo.greet"
+title: "First greetings"
+estimated_minutes: 5
+activities:
+  - id: "eo.activity.demo.encounter-greet"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["eo.lex.demo.saluton"]
+  - id: "eo.activity.demo.recall-greet"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["eo.lex.demo.saluton"]
+  - id: "eo.activity.demo.type-greet"
+    type: "produce"
+    modality: "writing"
+    support_level: 0
+    content_refs: ["eo.expr.demo.bonan-tagon"]

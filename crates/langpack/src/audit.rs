@@ -370,6 +370,162 @@ impl Pack {
             .collect();
         (diags, report)
     }
+
+    /// Lexicon script-purity + stress audit (`audit-lexicon`).
+    /// Catches writing-system contamination (Latin/Hangul/precomposed
+    /// accented Latin inside Cyrillic or kana fields) and Russian word
+    /// stress defects (missing/multiple combining marks). Dictionary
+    /// cross-checks (JMdict, Zalizniak) stay offline review tooling —
+    /// this gate asserts only self-consistency, no third-party data.
+    pub fn audit_lexicon(&self) -> Vec<Diagnostic> {
+        let mut diags = Vec::new();
+        for inst in self
+            .instances
+            .iter()
+            .filter(|i| i.schema == "lexicon-entry")
+        {
+            let target_reading = inst
+                .value
+                .get("readings")
+                .and_then(Value::as_array)
+                .map(|a| {
+                    a.iter().any(|r| {
+                        matches!(
+                            r.get("script").and_then(Value::as_str),
+                            Some("cyrillic") | Some("hiragana") | Some("katakana")
+                        )
+                    })
+                })
+                .unwrap_or(false);
+            for field in ["forms", "readings"] {
+                let arr = inst
+                    .value
+                    .get(field)
+                    .and_then(Value::as_array)
+                    .map(|items| items.iter().enumerate().collect::<Vec<_>>())
+                    .unwrap_or_default();
+                for (i, item) in arr {
+                    let Some(text) = item.get("text").and_then(Value::as_str) else {
+                        continue;
+                    };
+                    let script = item.get("script").and_then(Value::as_str).unwrap_or("");
+                    let pointer = format!("{}/{}/{}/text", inst.pointer, field, i);
+                    let has_cyr = text.chars().any(|c| ('\u{0400}'..='\u{04ff}').contains(&c));
+                    let has_kana = text
+                        .chars()
+                        .any(|c| ('\u{3040}'..='\u{30ff}').contains(&c));
+                    let has_cjk = text
+                        .chars()
+                        .any(|c| ('\u{4e00}'..='\u{9fff}').contains(&c));
+                    // Hangul is never a legitimate script in these packs.
+                    if text.chars().any(|c| {
+                        ('\u{1100}'..='\u{11ff}').contains(&c)
+                            || ('\u{3130}'..='\u{318f}').contains(&c)
+                            || ('\u{ac00}'..='\u{d7a3}').contains(&c)
+                    }) {
+                        diags.push(Diagnostic::new(
+                            &inst.file,
+                            pointer.clone(),
+                            "lexicon_script_contamination",
+                            format!("text {text:?} contains Hangul codepoints; wrong writing system"),
+                            Severity::Error,
+                        ));
+                    }
+                    if script == "cyrillic" || (script.is_empty() && has_cyr) {
+                        for ch in text.chars() {
+                            let ok = ('\u{0400}'..='\u{04ff}').contains(&ch)
+                                || ch == '\u{0301}'
+                                || ch == '-'
+                                || ch == ' ';
+                            if !ok {
+                                diags.push(Diagnostic::new(
+                                    &inst.file,
+                                    pointer.clone(),
+                                    "lexicon_script_contamination",
+                                    format!(
+                                        "cyrillic text {text:?} contains {ch:?} (U+{:04X}); \
+                                         expected Cyrillic + combining stress only",
+                                        ch as u32
+                                    ),
+                                    Severity::Error,
+                                ));
+                            }
+                        }
+                    }
+                    if script == "hiragana" || script == "katakana" {
+                        for ch in text.chars() {
+                            let ok = ('\u{3040}'..='\u{30ff}').contains(&ch) || ch == ' ';
+                            if !ok {
+                                diags.push(Diagnostic::new(
+                                    &inst.file,
+                                    pointer.clone(),
+                                    "lexicon_script_contamination",
+                                    format!(
+                                        "kana reading {text:?} contains {ch:?} (U+{:04X}); \
+                                         expected kana only",
+                                        ch as u32
+                                    ),
+                                    Severity::Error,
+                                ));
+                            }
+                        }
+                    }
+                    if field == "forms" && target_reading && !has_cyr && !has_kana && !has_cjk {
+                        diags.push(Diagnostic::new(
+                            &inst.file,
+                            pointer.clone(),
+                            "lexicon_form_no_target_script",
+                            format!("form {text:?} contains no Cyrillic/kana/CJK characters"),
+                            Severity::Warning,
+                        ));
+                    }
+                    // Russian lexical stress: every Cyrillic word with two
+                    // or more vowels carries exactly one combining acute.
+                    // Readings carry pronunciation; forms are orthography.
+                    if has_cyr && script == "cyrillic" {
+                        for word in text
+                            .split(|c: char| !('\u{0400}'..='\u{04ff}').contains(&c) && c != '\u{0301}')
+                        {
+                            let vowels = word
+                                .chars()
+                                .filter(|c| "аеёиоуыэюяАЕЁИОУЫЭЮЯ".contains(*c))
+                                .count();
+                            let inherent_yo = word.contains('ё') || word.contains('Ё');
+                            let marks = word.chars().filter(|c| *c == '\u{0301}').count();
+                            if word.chars().any(|c| c == '\u{0300}') {
+                                diags.push(Diagnostic::new(
+                                    &inst.file,
+                                    pointer.clone(),
+                                    "lexicon_stress_secondary",
+                                    format!("word {word:?} uses combining grave (secondary stress); not supported"),
+                                    Severity::Error,
+                                ));
+                            }
+                            if vowels >= 2 && marks == 0 && !inherent_yo {
+                                diags.push(Diagnostic::new(
+                                    &inst.file,
+                                    pointer.clone(),
+                                    "lexicon_stress_missing",
+                                    format!("Cyrillic word {word:?} has {vowels} vowels but no stress mark"),
+                                    Severity::Warning,
+                                ));
+                            }
+                            if marks > 1 {
+                                diags.push(Diagnostic::new(
+                                    &inst.file,
+                                    pointer.clone(),
+                                    "lexicon_stress_multiple",
+                                    format!("Cyrillic word {word:?} has {marks} stress marks"),
+                                    Severity::Error,
+                                ));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        diags
+    }
 }
 
 fn build_report(instances: &[crate::pack::Instance]) -> Vec<AttributionEntry> {

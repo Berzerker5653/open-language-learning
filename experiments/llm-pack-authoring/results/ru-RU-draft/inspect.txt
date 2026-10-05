@@ -828,7 +828,7 @@ lts-pack/1 org.openlanguage.ru-ru.reference v0.1.0 (schema 0.2)
        39403  07315fa475fc  lexicon/cult3.jsonl
        38915  3bb5bac97741  lexicon/cult4.jsonl
        38771  6a62d7b3e88a  lexicon/culture.jsonl
-        7995  333cf940d720  lexicon/everyday.jsonl
+        7997  b30cbf65b263  lexicon/everyday.jsonl
        40295  5e37147b6d97  lexicon/experiences.jsonl
        40095  21a44bdd9d82  lexicon/family.jsonl
        38692  8e759c1032bb  lexicon/feelings.jsonl
@@ -842,8 +842,8 @@ lts-pack/1 org.openlanguage.ru-ru.reference v0.1.0 (schema 0.2)
        39349  f502afb55708  lexicon/learning.jsonl
        36128  669f0bc88808  lexicon/media.jsonl
        39316  d8695916b3b1  lexicon/messages.jsonl
-       40384  e4b1575b14b9  lexicon/messages2.jsonl
-       35962  8f66d57428a2  lexicon/narration.jsonl
+       40386  816cec32b431  lexicon/messages2.jsonl
+       35964  c6dbfef725f2  lexicon/narration.jsonl
        39597  2e4fa39b3505  lexicon/narration2.jsonl
        37817  e0ad53e88100  lexicon/neg.jsonl
        38676  8b35ca2917e0  lexicon/neg2.jsonl
@@ -851,7 +851,7 @@ lts-pack/1 org.openlanguage.ru-ru.reference v0.1.0 (schema 0.2)
        39221  a3e5113e525b  lexicon/neg4.jsonl
         7694  7953d51dd796  lexicon/numbers-time.jsonl
        39553  22e3a9ae8d83  lexicon/opinions.jsonl
-       38538  6de11ef563c5  lexicon/pastevents.jsonl
+       38540  881d9cb00c76  lexicon/pastevents.jsonl
        43741  be73dfa2ebf2  lexicon/personal.jsonl
        40619  f081f9e74a2f  lexicon/problems.jsonl
        39148  ddaed2d9b7fd  lexicon/problems2.jsonl

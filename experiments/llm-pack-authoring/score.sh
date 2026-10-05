@@ -29,6 +29,7 @@ run_gate validate          validate
 run_gate lint              lint
 run_gate audit-curriculum  audit-curriculum
 run_gate audit-sources     audit-sources
+run_gate audit-lexicon    audit-lexicon
 run_gate audit-licenses    audit-licenses
 run_gate test              test
 if "${CLI[@]}" build "$PACK" -o "$OUT/pack.lpk" > "$OUT/build.txt" 2>&1; then

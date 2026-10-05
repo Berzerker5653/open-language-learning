@@ -41,6 +41,7 @@ langpack validate my-pack          # schema + layout + semantics (draft posture)
 langpack lint my-pack              # fails on warnings too (quality gate)
 langpack audit-curriculum my-pack  # prerequisite cycles, mirror, dead goals
 langpack audit-sources my-pack     # provenance completeness
+langpack audit-lexicon my-pack   # script purity + stress self-consistency
 langpack audit-licenses my-pack    # redistribution gates + attribution report
 ```
 

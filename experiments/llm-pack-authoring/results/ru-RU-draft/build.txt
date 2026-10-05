@@ -1,2 +1,2 @@
-built experiments/llm-pack-authoring/results/ru-RU-draft/pack.lpk (906091 bytes)
-sha256 a73e80383f0d4c9a4b4cbbd8ac7abcde6a9079df1c8e6f317befb518379d0bef
+built experiments/llm-pack-authoring/results/ru-RU-draft/pack.lpk (906096 bytes)
+sha256 a47d5c7b5ebbbb9b37328fefdd17460924b4dd046815842ac9889190b735e60a

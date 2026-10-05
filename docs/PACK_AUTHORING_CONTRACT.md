@@ -61,6 +61,7 @@ langpack validate <pack>          # schema + layout + semantic refs (draft postu
 langpack lint <pack>              # fails on warnings too — quality gate
 langpack audit-curriculum <pack>  # prereq cycles, mirror agreement, dead goals
 langpack audit-sources <pack>     # provenance completeness
+langpack audit-lexicon <pack>    # script purity + Cyrillic stress self-consistency
 langpack audit-licenses <pack>    # redistribution gates + attribution report
 langpack test <pack>              # install-mode validation + all audits (release gate)
 langpack build <pack> -o out.lpk  # deterministic archive; requires scaffold-clean
