@@ -10,7 +10,7 @@
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
-    "units_next": "720",
-    "notes": "B2: b47-b67 (560-719) 7/7; goals incl environment-policy, language-linguistics; pack 720 units; next: units 720+ per plan"
+    "units_next": "730",
+    "notes": "B2: b47-b68 (560-729) 7/7; goals incl language-linguistics; pack 730 units; next: units 730+ per plan"
   }
 }

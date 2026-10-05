@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.725-language-change
+goal_id: ja.goal.b2.language-linguistics
+title: language change
+summary: B2 language for language change.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.ling2.henka
+  - ja.lex.ling2.henyou
+  - ja.lex.ling2.jidai
+  - ja.lex.ling2.kindai
+  - ja.lex.ling2.gendai
+  - ja.sent.language-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.725-language-change-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.ling2.henka
+  - ja.lex.ling2.henyou
+  - ja.lex.ling2.jidai
+  - ja.lex.ling2.kindai
+  - ja.lex.ling2.gendai
+  - ja.sent.language-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.725-language-change-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.ling2.henka
+  - ja.lex.ling2.henyou
+  - ja.lex.ling2.jidai
+  - ja.lex.ling2.kindai
+  - ja.lex.ling2.gendai
+  - ja.sent.language-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.725-language-change-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.ling2.henka
+  - ja.lex.ling2.henyou
+  - ja.lex.ling2.jidai
+  - ja.lex.ling2.kindai
+  - ja.lex.ling2.gendai
+  - ja.sent.language-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.725-language-change-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.ling2.henka
+  - ja.lex.ling2.henyou
+  - ja.lex.ling2.jidai
+  - ja.lex.ling2.kindai
+  - ja.lex.ling2.gendai
+  - ja.sent.language-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.725-language-change-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.language-change
+- id: ja.activity.725-language-change-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

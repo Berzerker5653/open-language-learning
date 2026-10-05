@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.727-language-acquisition
+goal_id: ja.goal.b2.language-linguistics
+title: language acquisition
+summary: B2 language for language acquisition.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.ling2.shutoku
+  - ja.lex.ling2.bogo
+  - ja.lex.ling2.fuyuukyo
+  - ja.lex.ling2.gakushuu
+  - ja.lex.ling2.shiyou
+  - ja.sent.acquisition-study
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.727-language-acquisition-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.ling2.shutoku
+  - ja.lex.ling2.bogo
+  - ja.lex.ling2.fuyuukyo
+  - ja.lex.ling2.gakushuu
+  - ja.lex.ling2.shiyou
+  - ja.sent.acquisition-study
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.727-language-acquisition-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.ling2.shutoku
+  - ja.lex.ling2.bogo
+  - ja.lex.ling2.fuyuukyo
+  - ja.lex.ling2.gakushuu
+  - ja.lex.ling2.shiyou
+  - ja.sent.acquisition-study
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.727-language-acquisition-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.ling2.shutoku
+  - ja.lex.ling2.bogo
+  - ja.lex.ling2.fuyuukyo
+  - ja.lex.ling2.gakushuu
+  - ja.lex.ling2.shiyou
+  - ja.sent.acquisition-study
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.727-language-acquisition-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.ling2.shutoku
+  - ja.lex.ling2.bogo
+  - ja.lex.ling2.fuyuukyo
+  - ja.lex.ling2.gakushuu
+  - ja.lex.ling2.shiyou
+  - ja.sent.acquisition-study
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.727-language-acquisition-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.acquisition-study
+- id: ja.activity.727-language-acquisition-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

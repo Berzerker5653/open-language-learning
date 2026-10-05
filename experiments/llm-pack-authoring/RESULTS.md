@@ -917,3 +917,8 @@ Goal `ja.goal.b2.language-linguistics` created (+ASSESS +DEP). Units 710-719
 Units 220-229 (narration continued), 50 words (`lexicon/narration2.jsonl`),
 2 grammar (`b1.imperfective-background`, `b1.viewpoint-markers`), 10 sentences.
 Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 68
+
+Units 720-729 (language-linguistics), 50 words (`lexicon/ling2.jsonl`), 2 grammar
+(`b2-darou`, `b2-to-omo-u`), 8 sentences. Score: **7/7**.

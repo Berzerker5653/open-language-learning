@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.726-writing-systems
+goal_id: ja.goal.b2.language-linguistics
+title: writing systems
+summary: B2 language for writing systems.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.ling2.moji
+  - ja.lex.ling2.kanji2
+  - ja.lex.ling2.kana2
+  - ja.lex.ling2.kakikata
+  - ja.lex.ling2.hyouki
+  - ja.sent.writing-systems
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.726-writing-systems-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.ling2.moji
+  - ja.lex.ling2.kanji2
+  - ja.lex.ling2.kana2
+  - ja.lex.ling2.kakikata
+  - ja.lex.ling2.hyouki
+  - ja.sent.writing-systems
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.726-writing-systems-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.ling2.moji
+  - ja.lex.ling2.kanji2
+  - ja.lex.ling2.kana2
+  - ja.lex.ling2.kakikata
+  - ja.lex.ling2.hyouki
+  - ja.sent.writing-systems
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.726-writing-systems-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.ling2.moji
+  - ja.lex.ling2.kanji2
+  - ja.lex.ling2.kana2
+  - ja.lex.ling2.kakikata
+  - ja.lex.ling2.hyouki
+  - ja.sent.writing-systems
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.726-writing-systems-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.ling2.moji
+  - ja.lex.ling2.kanji2
+  - ja.lex.ling2.kana2
+  - ja.lex.ling2.kakikata
+  - ja.lex.ling2.hyouki
+  - ja.sent.writing-systems
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.726-writing-systems-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.writing-systems
+- id: ja.activity.726-writing-systems-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

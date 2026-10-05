@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.728-bilingualism
+goal_id: ja.goal.b2.language-linguistics
+title: bilingualism
+summary: B2 language for bilingualism.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.ling2.bilingual
+  - ja.lex.ling2.nikokugo
+  - ja.lex.ling2.tsuuyaku
+  - ja.lex.ling2.honyaku
+  - ja.lex.ling2.yakusha
+  - ja.sent.bilingualism
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.728-bilingualism-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.ling2.bilingual
+  - ja.lex.ling2.nikokugo
+  - ja.lex.ling2.tsuuyaku
+  - ja.lex.ling2.honyaku
+  - ja.lex.ling2.yakusha
+  - ja.sent.bilingualism
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.728-bilingualism-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.ling2.bilingual
+  - ja.lex.ling2.nikokugo
+  - ja.lex.ling2.tsuuyaku
+  - ja.lex.ling2.honyaku
+  - ja.lex.ling2.yakusha
+  - ja.sent.bilingualism
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.728-bilingualism-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.ling2.bilingual
+  - ja.lex.ling2.nikokugo
+  - ja.lex.ling2.tsuuyaku
+  - ja.lex.ling2.honyaku
+  - ja.lex.ling2.yakusha
+  - ja.sent.bilingualism
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.728-bilingualism-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.ling2.bilingual
+  - ja.lex.ling2.nikokugo
+  - ja.lex.ling2.tsuuyaku
+  - ja.lex.ling2.honyaku
+  - ja.lex.ling2.yakusha
+  - ja.sent.bilingualism
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.728-bilingualism-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.bilingualism
+- id: ja.activity.728-bilingualism-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.722-meaning-context
+goal_id: ja.goal.b2.language-linguistics
+title: meaning context
+summary: B2 language for meaning context.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.ling2.imi2
+  - ja.lex.ling2.bunmyaku
+  - ja.lex.ling2.hatsuwa
+  - ja.lex.ling2.taishou
+  - ja.lex.ling2.kotae2
+  - ja.sent.meaning-context
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.722-meaning-context-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.ling2.imi2
+  - ja.lex.ling2.bunmyaku
+  - ja.lex.ling2.hatsuwa
+  - ja.lex.ling2.taishou
+  - ja.lex.ling2.kotae2
+  - ja.sent.meaning-context
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.722-meaning-context-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.ling2.imi2
+  - ja.lex.ling2.bunmyaku
+  - ja.lex.ling2.hatsuwa
+  - ja.lex.ling2.taishou
+  - ja.lex.ling2.kotae2
+  - ja.sent.meaning-context
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.722-meaning-context-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.ling2.imi2
+  - ja.lex.ling2.bunmyaku
+  - ja.lex.ling2.hatsuwa
+  - ja.lex.ling2.taishou
+  - ja.lex.ling2.kotae2
+  - ja.sent.meaning-context
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.722-meaning-context-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.ling2.imi2
+  - ja.lex.ling2.bunmyaku
+  - ja.lex.ling2.hatsuwa
+  - ja.lex.ling2.taishou
+  - ja.lex.ling2.kotae2
+  - ja.sent.meaning-context
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.722-meaning-context-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meaning-context
+- id: ja.activity.722-meaning-context-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
