@@ -1,0 +1,46 @@
+id: "ru.unit.b2.iden-06"
+goal_id: "ru.goal.b2.culture-perspectives"
+title: "Dissent"
+summary: "диссидент, восприятие, ощущение, чужой and свой."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u755-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.cult.dissident",
+        "ru.lex.cult.vospriyatie",
+        "ru.lex.cult.oshchushchenie",
+        "ru.lex.cult.chuzhoy",
+        "ru.lex.cult.svoy",
+        "ru.sent.b2.u755",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u755-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u755-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u755"]
+  - id: "ru.activity.b2.u755-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Dissent: literary response with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse чужой (someone else's) with свой (one's own)."]
+  target_proficiency: "B2"
+  validation_method: "choice"

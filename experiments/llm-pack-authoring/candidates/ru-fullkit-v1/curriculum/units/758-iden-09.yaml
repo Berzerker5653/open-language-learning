@@ -1,0 +1,46 @@
+id: "ru.unit.b2.iden-09"
+goal_id: "ru.goal.b2.culture-perspectives"
+title: "Representation"
+summary: "репрезентация, расизм, застенчивость, трусость and храбрость."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u758-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.cult.reprezentaciya",
+        "ru.lex.cult.rasizm",
+        "ru.lex.cult.zastenchivost",
+        "ru.lex.cult.trusost",
+        "ru.lex.cult.hrabrost",
+        "ru.sent.b2.u758",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u758-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u758-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u758"]
+  - id: "ru.activity.b2.u758-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Representation: literary response with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse застенчивость (shyness) with трусость (cowardice)."]
+  target_proficiency: "B2"
+  validation_method: "choice"
