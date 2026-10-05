@@ -684,3 +684,9 @@ Score: **7/7**.
 Goal `ru.goal.a1.routines` created. 10 units, 50-word `lexicon/routines.jsonl`,
 2 grammar (`a1.telling-time`, `a1.frequency-adverbs`), 8 sentences, 2 assessments.
 Score: **7/7**.
+
+## 2026-10-04 — ru-RU agent batch ru04: A1 units 060-069 (food)
+
+Goal `ru.goal.a1.food` created. 10 units, 50-word `lexicon/food.jsonl`,
+2 grammar (`a1.accusative-food`, `a1.polite-order`), 8 sentences, 2 assessments.
+Score: **7/7**.

@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
-        8413  f88a533cfcaa  assessments/definitions.jsonl
-       10596  ac316a4a5ea1  curriculum/goals.yaml
+        9273  0199cdb2ba85  assessments/definitions.jsonl
+       11842  36db961619e2  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -61,11 +61,22 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1442  1a2c8949ff70  curriculum/units/057-routines-08.yaml
         1400  6ad5ea793efd  curriculum/units/058-routines-09.yaml
         1368  6baa88bfe052  curriculum/units/059-routines-10.yaml
-       10687  e016bfebe7c4  grammar/concepts.jsonl
+        1387  5f8ef950ce71  curriculum/units/060-food-01.yaml
+        1381  1497392df402  curriculum/units/061-food-02.yaml
+        1377  7327c5ad7b99  curriculum/units/062-food-03.yaml
+        1391  eca76a40e75e  curriculum/units/063-food-04.yaml
+        1386  f3e69a5a6537  curriculum/units/064-food-05.yaml
+        1368  2a8941735c6b  curriculum/units/065-food-06.yaml
+        1392  7e4c530b2070  curriculum/units/066-food-07.yaml
+        1384  5277265fdf00  curriculum/units/067-food-08.yaml
+        1385  c00029943cf6  curriculum/units/068-food-09.yaml
+        1368  51ff3ad6920e  curriculum/units/069-food-10.yaml
+       11923  001995800cf4  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
         3655  dbb5543b101e  lexicon/everyday.jsonl
        21072  e82dce96cc01  lexicon/family.jsonl
+       20787  618656b3d458  lexicon/food.jsonl
         3882  2331dd495806  lexicon/greetings.jsonl
        20917  300574a2724b  lexicon/home.jsonl
         3672  8e7e960a1252  lexicon/numbers-time.jsonl
@@ -74,5 +85,5 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-       12183  f700c17ed8b1  sentences/entries.jsonl
+       14973  77095e3f09f3  sentences/entries.jsonl
          391  74babc055676  sources.jsonl

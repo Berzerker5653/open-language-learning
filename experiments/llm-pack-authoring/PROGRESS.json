@@ -3,9 +3,9 @@
     "plan": "plans/ru-fullkit-v1.yaml",
     "pack": "candidates/ru-fullkit-v1",
     "bands_done": ["on-ramp"],
-    "units_next": "060",
+    "units_next": "070",
     "last_score": "7/7 (2026-10-04, results/ru-fullkit-v1)",
-    "notes": "agent batches ru01-ru03 (030-059: people-family, home, routines) 7/7; pack 60 units, 10 goals, 250 lex, 15 grammar, 35 sentences, 20 assessments; next block 060-069 per plan"
+    "notes": "agent batches ru01-ru04 (030-069: people-family, home, routines, food) 7/7; pack 70 units, 11 goals, 300 lex, 17 grammar, 43 sentences, 22 assessments; next block 070-079 per plan"
   },
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",
