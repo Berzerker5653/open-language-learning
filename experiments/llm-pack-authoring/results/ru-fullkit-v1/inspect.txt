@@ -260,7 +260,17 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1476  6ed1728c83ef  curriculum/units/257-service-problems-08.yaml
         1479  6d37ed5749d9  curriculum/units/258-service-problems-09.yaml
         1542  d09bae9d33bc  curriculum/units/259-service-problems-10.yaml
-       32012  2399423b8339  grammar/concepts.jsonl
+        1343  8fdc319a28d8  curriculum/units/260-housing-problems-01.yaml
+        1328  f0f0fe9fe8b9  curriculum/units/261-housing-problems-02.yaml
+        1333  6a21461cb960  curriculum/units/262-housing-problems-03.yaml
+        1321  363a64f9bfb7  curriculum/units/263-housing-problems-04.yaml
+        1339  e2104a560a70  curriculum/units/264-housing-problems-05.yaml
+        1336  06e3553181fc  curriculum/units/265-housing-problems-06.yaml
+        1323  ff3912289b27  curriculum/units/266-housing-problems-07.yaml
+        1340  381bb703192b  curriculum/units/267-housing-problems-08.yaml
+        1366  df5ac85c5a39  curriculum/units/268-housing-problems-09.yaml
+        1334  768fdd1f23f8  curriculum/units/269-housing-problems-10.yaml
+       32922  04480fd67fac  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        21189  03a4503c7371  lexicon/city.jsonl
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
@@ -271,6 +281,7 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
        20787  618656b3d458  lexicon/food.jsonl
         3882  2331dd495806  lexicon/greetings.jsonl
        20917  300574a2724b  lexicon/home.jsonl
+       19156  519760247f8a  lexicon/housing.jsonl
        21889  4721e0675b0c  lexicon/instructions.jsonl
        21605  e163676f7140  lexicon/messages.jsonl
        21843  8199231c9f6f  lexicon/messages2.jsonl
@@ -293,5 +304,5 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-       81481  2b3404a28324  sentences/entries.jsonl
+       85067  31a004dfd568  sentences/entries.jsonl
          391  74babc055676  sources.jsonl

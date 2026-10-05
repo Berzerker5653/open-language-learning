@@ -1,0 +1,46 @@
+id: "ru.unit.b1.housing-problems-10"
+goal_id: "ru.goal.b1.practical-problems"
+title: "Bedroom"
+summary: "подушка, одеяло, простыня, мебель and стул."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u269-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.housing.podushka",
+        "ru.lex.housing.odeyalo",
+        "ru.lex.housing.prostynya",
+        "ru.lex.housing.mebel",
+        "ru.lex.housing.stul",
+        "ru.sent.b1.u269",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u269-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u269-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u269"]
+  - id: "ru.activity.b1.u269-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Bedroom: housing with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse подушка (pillow) with одеяло (blanket)."]
+  target_proficiency: "B1"
+  validation_method: "choice"

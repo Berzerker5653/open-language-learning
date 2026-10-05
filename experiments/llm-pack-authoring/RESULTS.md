@@ -962,3 +962,8 @@ Units 750-759 (abstract-debate reasoning), 50 words (`lexicon/abst2.jsonl`),
 Units 760-769 (abstract-debate tail, nuance-register start), 50 words
 (`lexicon/abst3.jsonl`, `lexicon/reg1.jsonl`), 2 grammar (`b2-ni-kagiru`, `b2-to-itara`), 9 sentences,
 new goal `ja.goal.b2.nuance-register` + assessment + DEP edge. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 24
+
+Units 260-269 (housing and community problems), 50 words (`lexicon/housing.jsonl`),
+2 grammar (`b1.net-genitive`, `b1.instrumental-tools`), 10 sentences. Score: **7/7**.

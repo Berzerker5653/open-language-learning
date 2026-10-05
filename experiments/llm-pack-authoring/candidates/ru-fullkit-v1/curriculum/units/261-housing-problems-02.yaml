@@ -1,0 +1,46 @@
+id: "ru.unit.b1.housing-problems-02"
+goal_id: "ru.goal.b1.practical-problems"
+title: "Rent"
+summary: "аренда, арендатор, квартира, счётчик and газ."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u261-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.housing.arenda",
+        "ru.lex.housing.arendator",
+        "ru.lex.housing.kvartira",
+        "ru.lex.housing.schetchik",
+        "ru.lex.housing.gaz",
+        "ru.sent.b1.u261",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u261-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u261-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u261"]
+  - id: "ru.activity.b1.u261-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Rent: housing with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse аренда (rent) with хозяин (owner)."]
+  target_proficiency: "B1"
+  validation_method: "choice"
