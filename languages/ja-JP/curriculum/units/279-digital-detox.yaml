@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.digital-detox
+goal_id: ja.goal.b1.technology
+title: digital detox
+summary: B1 language for digital detox.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.tech2.detokku
+  - ja.lex.tech2.shizen
+  - ja.lex.tech2.yutori
+  - ja.lex.tech2.seishin
+  - ja.lex.tech2.hanare
+  - ja.sent.detox-nature
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.digital-detox-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.tech2.detokku
+  - ja.lex.tech2.shizen
+  - ja.lex.tech2.yutori
+  - ja.lex.tech2.seishin
+  - ja.lex.tech2.hanare
+  - ja.sent.detox-nature
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.digital-detox-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.tech2.detokku
+  - ja.lex.tech2.shizen
+  - ja.lex.tech2.yutori
+  - ja.lex.tech2.seishin
+  - ja.lex.tech2.hanare
+  - ja.sent.detox-nature
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.digital-detox-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.tech2.detokku
+  - ja.lex.tech2.shizen
+  - ja.lex.tech2.yutori
+  - ja.lex.tech2.seishin
+  - ja.lex.tech2.hanare
+  - ja.sent.detox-nature
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.digital-detox-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.tech2.detokku
+  - ja.lex.tech2.shizen
+  - ja.lex.tech2.yutori
+  - ja.lex.tech2.seishin
+  - ja.lex.tech2.hanare
+  - ja.sent.detox-nature
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.digital-detox-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.detox-nature
+- id: ja.activity.digital-detox-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

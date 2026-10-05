@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.ai-tool-talk
+goal_id: ja.goal.b1.technology
+title: ai tool talk
+summary: B1 language for ai tool talk.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.tech2.jinkou-chinou
+  - ja.lex.tech2.robotto
+  - ja.lex.tech2.genkai
+  - ja.lex.tech2.kanou
+  - ja.lex.tech2.mirai
+  - ja.sent.ai-limit-talk
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.ai-tool-talk-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.tech2.jinkou-chinou
+  - ja.lex.tech2.robotto
+  - ja.lex.tech2.genkai
+  - ja.lex.tech2.kanou
+  - ja.lex.tech2.mirai
+  - ja.sent.ai-limit-talk
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.ai-tool-talk-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.tech2.jinkou-chinou
+  - ja.lex.tech2.robotto
+  - ja.lex.tech2.genkai
+  - ja.lex.tech2.kanou
+  - ja.lex.tech2.mirai
+  - ja.sent.ai-limit-talk
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.ai-tool-talk-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.tech2.jinkou-chinou
+  - ja.lex.tech2.robotto
+  - ja.lex.tech2.genkai
+  - ja.lex.tech2.kanou
+  - ja.lex.tech2.mirai
+  - ja.sent.ai-limit-talk
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.ai-tool-talk-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.tech2.jinkou-chinou
+  - ja.lex.tech2.robotto
+  - ja.lex.tech2.genkai
+  - ja.lex.tech2.kanou
+  - ja.lex.tech2.mirai
+  - ja.sent.ai-limit-talk
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.ai-tool-talk-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.ai-limit-talk
+- id: ja.activity.ai-tool-talk-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

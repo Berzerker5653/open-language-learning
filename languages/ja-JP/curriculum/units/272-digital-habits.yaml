@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.digital-habits
+goal_id: ja.goal.b1.technology
+title: digital habits
+summary: B1 language for digital habits.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.tech2.ryuuri
+  - ja.lex.tech2.senzu
+  - ja.lex.tech2.kankaku
+  - ja.lex.tech2.kyoumi
+  - ja.lex.tech2.kuse
+  - ja.sent.net-habit
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.digital-habits-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.tech2.ryuuri
+  - ja.lex.tech2.senzu
+  - ja.lex.tech2.kankaku
+  - ja.lex.tech2.kyoumi
+  - ja.lex.tech2.kuse
+  - ja.sent.net-habit
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.digital-habits-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.tech2.ryuuri
+  - ja.lex.tech2.senzu
+  - ja.lex.tech2.kankaku
+  - ja.lex.tech2.kyoumi
+  - ja.lex.tech2.kuse
+  - ja.sent.net-habit
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.digital-habits-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.tech2.ryuuri
+  - ja.lex.tech2.senzu
+  - ja.lex.tech2.kankaku
+  - ja.lex.tech2.kyoumi
+  - ja.lex.tech2.kuse
+  - ja.sent.net-habit
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.digital-habits-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.tech2.ryuuri
+  - ja.lex.tech2.senzu
+  - ja.lex.tech2.kankaku
+  - ja.lex.tech2.kyoumi
+  - ja.lex.tech2.kuse
+  - ja.sent.net-habit
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.digital-habits-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.net-habit
+- id: ja.activity.digital-habits-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

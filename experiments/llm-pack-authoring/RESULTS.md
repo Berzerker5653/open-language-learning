@@ -486,3 +486,9 @@ Goals `ja.goal.b1.media-news` (complete, 250-264) and
 10 units, 25-word `lexicon/media2.jsonl` + 25-word `lexicon/tech.jsonl`,
 2 grammar (`b1.shieki-causative`, `b1.kanoukei-expansion`), 8
 sentences, 1 assessment. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 22: B1 units 270-279 (technology goal complete)
+
+Goal `ja.goal.b1.technology` complete (265-279), 10 units, 50-word
+`lexicon/tech2.jsonl`, 2 grammar (`b1.onaji-chigai`,
+`b1.te-iku-te-kuru`), 8 sentences. Score: **7/7**.

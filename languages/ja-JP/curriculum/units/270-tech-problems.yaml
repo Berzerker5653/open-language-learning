@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.tech-problems
+goal_id: ja.goal.b1.technology
+title: tech problems
+summary: B1 language for tech problems.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.tech2.koi
+  - ja.lex.tech2.shuuri
+  - ja.lex.tech2.kairyou
+  - ja.lex.tech2.benri
+  - ja.lex.tech2.fuben
+  - ja.sent.tech-problem-fix
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.tech-problems-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.tech2.koi
+  - ja.lex.tech2.shuuri
+  - ja.lex.tech2.kairyou
+  - ja.lex.tech2.benri
+  - ja.lex.tech2.fuben
+  - ja.sent.tech-problem-fix
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.tech-problems-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.tech2.koi
+  - ja.lex.tech2.shuuri
+  - ja.lex.tech2.kairyou
+  - ja.lex.tech2.benri
+  - ja.lex.tech2.fuben
+  - ja.sent.tech-problem-fix
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.tech-problems-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.tech2.koi
+  - ja.lex.tech2.shuuri
+  - ja.lex.tech2.kairyou
+  - ja.lex.tech2.benri
+  - ja.lex.tech2.fuben
+  - ja.sent.tech-problem-fix
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.tech-problems-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.tech2.koi
+  - ja.lex.tech2.shuuri
+  - ja.lex.tech2.kairyou
+  - ja.lex.tech2.benri
+  - ja.lex.tech2.fuben
+  - ja.sent.tech-problem-fix
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.tech-problems-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.tech-problem-fix
+- id: ja.activity.tech-problems-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

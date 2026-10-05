@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.online-communities
+goal_id: ja.goal.b1.technology
+title: online communities
+summary: B1 language for online communities.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.tech2.komyuniti
+  - ja.lex.tech2.forumu
+  - ja.lex.tech2.groupu
+  - ja.lex.tech2.kodou
+  - ja.lex.tech2.shinko
+  - ja.sent.community-post
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.online-communities-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.tech2.komyuniti
+  - ja.lex.tech2.forumu
+  - ja.lex.tech2.groupu
+  - ja.lex.tech2.kodou
+  - ja.lex.tech2.shinko
+  - ja.sent.community-post
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.online-communities-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.tech2.komyuniti
+  - ja.lex.tech2.forumu
+  - ja.lex.tech2.groupu
+  - ja.lex.tech2.kodou
+  - ja.lex.tech2.shinko
+  - ja.sent.community-post
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.online-communities-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.tech2.komyuniti
+  - ja.lex.tech2.forumu
+  - ja.lex.tech2.groupu
+  - ja.lex.tech2.kodou
+  - ja.lex.tech2.shinko
+  - ja.sent.community-post
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.online-communities-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.tech2.komyuniti
+  - ja.lex.tech2.forumu
+  - ja.lex.tech2.groupu
+  - ja.lex.tech2.kodou
+  - ja.lex.tech2.shinko
+  - ja.sent.community-post
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.online-communities-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.community-post
+- id: ja.activity.online-communities-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

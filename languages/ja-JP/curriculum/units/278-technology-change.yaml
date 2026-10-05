@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.technology-change
+goal_id: ja.goal.b1.technology
+title: technology change
+summary: B1 language for technology change.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.tech2.henka
+  - ja.lex.tech2.shinka
+  - ja.lex.tech2.jidai
+  - ja.lex.tech2.kakushin
+  - ja.lex.tech2.saisei
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b1.te-iku-te-kuru
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.technology-change-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.tech2.henka
+  - ja.lex.tech2.shinka
+  - ja.lex.tech2.jidai
+  - ja.lex.tech2.kakushin
+  - ja.lex.tech2.saisei
+  - ja.grammar.b1.te-iku-te-kuru
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.technology-change-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.tech2.henka
+  - ja.lex.tech2.shinka
+  - ja.lex.tech2.jidai
+  - ja.lex.tech2.kakushin
+  - ja.lex.tech2.saisei
+  - ja.grammar.b1.te-iku-te-kuru
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.technology-change-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.tech2.henka
+  - ja.lex.tech2.shinka
+  - ja.lex.tech2.jidai
+  - ja.lex.tech2.kakushin
+  - ja.lex.tech2.saisei
+  - ja.grammar.b1.te-iku-te-kuru
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.technology-change-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.tech2.henka
+  - ja.lex.tech2.shinka
+  - ja.lex.tech2.jidai
+  - ja.lex.tech2.kakushin
+  - ja.lex.tech2.saisei
+  - ja.grammar.b1.te-iku-te-kuru
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.technology-change-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.technology-change-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email
