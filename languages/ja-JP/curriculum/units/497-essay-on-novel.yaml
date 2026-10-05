@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.essay-on-novel
+goal_id: ja.goal.b2.literature-study
+title: essay on novel
+summary: B2 language for essay on novel.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.lit3.ronsetsu
+  - ja.lex.lit3.kijutsu
+  - ja.lex.lit3.genpon
+  - ja.lex.lit3.henkan
+  - ja.lex.lit3.sousaku
+  - ja.sent.essay-on-novel
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.essay-on-novel-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.lit3.ronsetsu
+  - ja.lex.lit3.kijutsu
+  - ja.lex.lit3.genpon
+  - ja.lex.lit3.henkan
+  - ja.lex.lit3.sousaku
+  - ja.sent.essay-on-novel
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.essay-on-novel-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.lit3.ronsetsu
+  - ja.lex.lit3.kijutsu
+  - ja.lex.lit3.genpon
+  - ja.lex.lit3.henkan
+  - ja.lex.lit3.sousaku
+  - ja.sent.essay-on-novel
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.essay-on-novel-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.lit3.ronsetsu
+  - ja.lex.lit3.kijutsu
+  - ja.lex.lit3.genpon
+  - ja.lex.lit3.henkan
+  - ja.lex.lit3.sousaku
+  - ja.sent.essay-on-novel
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.essay-on-novel-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.lit3.ronsetsu
+  - ja.lex.lit3.kijutsu
+  - ja.lex.lit3.genpon
+  - ja.lex.lit3.henkan
+  - ja.lex.lit3.sousaku
+  - ja.sent.essay-on-novel
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.essay-on-novel-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.essay-on-novel
+- id: ja.activity.essay-on-novel-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.theatre-text
+goal_id: ja.goal.b2.literature-study
+title: theatre text
+summary: B2 language for theatre text.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.lit3.butai
+  - ja.lex.lit3.serifu
+  - ja.lex.lit3.kyogen
+  - ja.lex.lit3.kabuki
+  - ja.lex.lit3.engei
+  - ja.sent.theatre-text
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.theatre-text-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.lit3.butai
+  - ja.lex.lit3.serifu
+  - ja.lex.lit3.kyogen
+  - ja.lex.lit3.kabuki
+  - ja.lex.lit3.engei
+  - ja.sent.theatre-text
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.theatre-text-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.lit3.butai
+  - ja.lex.lit3.serifu
+  - ja.lex.lit3.kyogen
+  - ja.lex.lit3.kabuki
+  - ja.lex.lit3.engei
+  - ja.sent.theatre-text
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.theatre-text-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.lit3.butai
+  - ja.lex.lit3.serifu
+  - ja.lex.lit3.kyogen
+  - ja.lex.lit3.kabuki
+  - ja.lex.lit3.engei
+  - ja.sent.theatre-text
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.theatre-text-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.lit3.butai
+  - ja.lex.lit3.serifu
+  - ja.lex.lit3.kyogen
+  - ja.lex.lit3.kabuki
+  - ja.lex.lit3.engei
+  - ja.sent.theatre-text
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.theatre-text-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.theatre-text
+- id: ja.activity.theatre-text-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

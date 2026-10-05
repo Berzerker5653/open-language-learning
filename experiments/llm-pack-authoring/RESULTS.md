@@ -645,3 +645,9 @@ Goal `ja.goal.b2.literature-study` created (484-498). 10 units,
 
 5 units, 25-word `lexicon/lit2.jsonl`, 1 grammar (`b2.ni-kagite`),
 5 sentences. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 45: B2 units 495-499 (literature-study complete)
+
+Goal `ja.goal.b2.literature-study` complete (484-499). 5 units,
+25-word `lexicon/lit3.jsonl`, 1 grammar (`b2.ni-yoru-to`), 4 sentences.
+Score: **7/7**.

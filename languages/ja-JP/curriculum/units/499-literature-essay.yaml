@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.literature-essay
+goal_id: ja.goal.b2.literature-study
+title: literature essay
+summary: B2 language for literature essay.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.lit3.yohyaku
+  - ja.lex.lit3.gaiyou
+  - ja.lex.lit3.hihyou
+  - ja.lex.lit3.shoukai
+  - ja.lex.lit3.saku
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2.ni-yoru-to
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.literature-essay-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.lit3.yohyaku
+  - ja.lex.lit3.gaiyou
+  - ja.lex.lit3.hihyou
+  - ja.lex.lit3.shoukai
+  - ja.lex.lit3.saku
+  - ja.grammar.b2.ni-yoru-to
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.literature-essay-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.lit3.yohyaku
+  - ja.lex.lit3.gaiyou
+  - ja.lex.lit3.hihyou
+  - ja.lex.lit3.shoukai
+  - ja.lex.lit3.saku
+  - ja.grammar.b2.ni-yoru-to
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.literature-essay-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.lit3.yohyaku
+  - ja.lex.lit3.gaiyou
+  - ja.lex.lit3.hihyou
+  - ja.lex.lit3.shoukai
+  - ja.lex.lit3.saku
+  - ja.grammar.b2.ni-yoru-to
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.literature-essay-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.lit3.yohyaku
+  - ja.lex.lit3.gaiyou
+  - ja.lex.lit3.hihyou
+  - ja.lex.lit3.shoukai
+  - ja.lex.lit3.saku
+  - ja.grammar.b2.ni-yoru-to
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.literature-essay-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.literature-essay-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email
