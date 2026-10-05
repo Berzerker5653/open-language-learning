@@ -1,0 +1,46 @@
+id: "ru.unit.b1.opinions-03"
+goal_id: "ru.goal.b1.opinions"
+title: "Disagreement"
+summary: "несогласие, протест, возражение, замечание and поправка."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u332-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.opinions.nesoglasie",
+        "ru.lex.opinions.protest",
+        "ru.lex.opinions.vozrazhenie",
+        "ru.lex.opinions.zamechanie",
+        "ru.lex.opinions.popravka",
+        "ru.sent.b1.u332",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u332-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u332-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u332"]
+  - id: "ru.activity.b1.u332-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Disagreement: opinions with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse протест (protest) with возражение (objection)."]
+  target_proficiency: "B1"
+  validation_method: "choice"

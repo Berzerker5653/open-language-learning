@@ -1,0 +1,46 @@
+id: "ru.unit.b1.opinions-04"
+goal_id: "ru.goal.b1.opinions"
+title: "Objection"
+summary: "возражение, опровержение, улика, вердикт and заключение."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u333-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.opinions.vozrazhenie",
+        "ru.lex.opinions.oprazhdenie",
+        "ru.lex.opinions.ulika",
+        "ru.lex.opinions.verdict",
+        "ru.lex.opinions.zaklyuchenie",
+        "ru.sent.b1.u333",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u333-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u333-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u333"]
+  - id: "ru.activity.b1.u333-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Objection: opinions with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse опровержение (refutation) with заключение (conclusion)."]
+  target_proficiency: "B1"
+  validation_method: "choice"

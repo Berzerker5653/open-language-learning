@@ -1023,3 +1023,9 @@ new goal `ru.goal.b1.culture-media` + 2 assessments. Score: **7/7**.
 
 Units 320-329 (media accounts, reviews, reactions), 50 words (`lexicon/media.jsonl`),
 2 grammar (`b1.podpisatsya-na`, `b1.po-mneniyu`), 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 31
+
+Units 330-339 (opinions, reasons, examples), 50 words (`lexicon/opinions.jsonl`),
+2 grammar (`b1.po-mneniyu-gen`, `b1.naprimier`), 10 sentences,
+new goal `ru.goal.b1.opinions` + 2 assessments. Score: **7/7**.

@@ -1,0 +1,47 @@
+id: "ru.unit.b1.opinions-09"
+goal_id: "ru.goal.b1.opinions"
+title: "Judgment"
+summary: "суждение, точность, неточность, обобщение and частность."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u338-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.opinions.suzhdenie",
+        "ru.lex.opinions.tochnost",
+        "ru.lex.opinions.netochnost",
+        "ru.lex.opinions.obobshchenie",
+        "ru.lex.opinions.chastnost",
+        "ru.sent.b1.u338",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u338-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u338-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u338"]
+  - id: "ru.activity.b1.u338-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Judgment: opinions with taught forms only."]
+  prohibited_ambiguity:
+    ["Do not confuse обобщение (generalization) with частность (particular case)."]
+  target_proficiency: "B1"
+  validation_method: "choice"
