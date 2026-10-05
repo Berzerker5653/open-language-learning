@@ -1,0 +1,160 @@
+# Russian reference-pack review policy (draft; mirrors languages/ja-JP/review/REVIEW_POLICY.yaml).
+#
+# Formalizes docs/16 §Trust-Promotion and docs/09 §Content-review-gates into a
+# machine-readable policy. NOT yet owner-approved: ja-JP's policy was agreed
+# in chat 2026-10-04; this ru-RU variant requires the same owner sign-off
+# before it governs promotion. Until then it is the operating draft.
+#
+# HONESTY RULE (non-negotiable, docs/16): no required human gate may be
+# satisfied by AI, including multi-model AI consensus. ai_screening is an
+# acceleration layer that finds defects early; it never promotes content and
+# never counts toward coverage percentages.
+
+policy_version: "1.0.0-draft"
+schema_version: 1
+status: proposed-pending-owner-approval   # do not treat as agreed
+
+# ---------------------------------------------------------------------------
+# Review types and required qualifications
+# ---------------------------------------------------------------------------
+review_types:
+  structural:
+    executor: automated            # schema/ID/graph/license/lexicon audits (langpack CLI)
+    counts_toward_human_gates: false
+  ai_screening:
+    executor: ai                   # multi-model screening, see ai_screening section
+    counts_toward_human_gates: false
+    purpose: >
+      Flag likely linguistic/pedagogical defects before human review time is
+      spent; gate bulk generation batches (a batch must pass structural +
+      ai_screening before the next batch is generated).
+  linguistic:
+    executor: qualified_human
+    scope: naturalness, meaning, grammar (case government, aspect, motion
+      verbs), word stress (lexical stress is a first-class correctness
+      target in Russian), accepted variants, register, translation adequacy,
+      distractor plausibility
+    qualifications:
+      required_any:
+        - native_russian
+        - near_native_russian_documented      # documented evidence, not self-claim
+      required_also_any:
+        - russian_linguistics_training        # incl. phonetics/stress for pronunciation targets
+        - russian_language_teaching_credential
+    note: native/near-native status alone does not qualify (docs/06 §Content-review).
+  pedagogical:
+    executor: qualified_human
+    scope: difficulty, prerequisite load, task validity, scaffolding,
+      distractor quality, transfer value, accessibility of instructional form
+    qualifications:
+      required_any:
+        - language_teaching_experience_documented   # any language, assessed level
+        - curriculum_or_assessment_design_experience
+      required_also_any:
+        - native_russian
+        - near_native_russian_documented
+  technical:
+    executor: qualified_human
+    scope: rendering (Cyrillic + combining stress marks render correctly on
+      all target platforms), audio linkage, speech targets, determinism,
+      platform behavior
+    qualifications:
+      required_any: [project_technical_reviewer]    # maintainer-authorized engineer
+      required_also_any: [native_russian, near_native_russian_documented]
+
+# ---------------------------------------------------------------------------
+# Full-review core vs sampled periphery (docs/09 §Finite-reference-band)
+# ---------------------------------------------------------------------------
+coverage:
+  full_review_required:             # 100% of these need qualified human review
+    - all scored targets and assessment items (including answer variants)
+    - reused core instructional content (explanations, examples, dialogs)
+    - target readings/stress marks and reference audio used for teaching or scoring
+    - coverage-map objective statements themselves (curriculum/assessment expertise)
+  sampling_allowed_for:             # lower-risk unscored generated practice only
+    population: unscored generated practice variants outside the full-review core
+    method: stratified by goal band and content type; seed recorded per batch
+    min_sample: 25 percent or 20 items per stratum, whichever is larger
+    record: [population, selection_seed, size, findings, expansion_rule,
+             unreviewed_ids, residual_risk]
+    limits: labeled unreviewed; excluded from decisive mastery/coverage claims
+
+# ---------------------------------------------------------------------------
+# Review records
+# ---------------------------------------------------------------------------
+records:
+  location: >
+    reviews.jsonl (pack root; schema v0.2 review-record, one JSONL line per
+    review — the validator ENFORCES that content status flips carry an
+    approved record: `validated` needs reviewer_category qualified-human-*
+    or community-reviewer; `verified` needs qualified-human-expert or
+    qualified-human-native-speaker; ai-assisted and automated-check records
+    never promote)
+  github_flow: >
+    Same owner decision as ja-JP (2026-10-04): review is delegated to GitHub
+    contributors. A reviewer forks the repo, reviews a batch, then opens ONE
+    PR that (a) adds the reviews.jsonl record line(s) and (b) flips the
+    reviewed items' status in the same PR. A PR that flips status without a
+    qualifying record fails the validator (review_promotion_unsupported).
+  record_fields: see schemas/v0.2/review-record.schema.json (reviewer,
+    reviewer_category, scope, date, outcome, notes, evidence)
+  severity_scale: docs/09 §Severity (P0..P3)
+  promotion_blockers: any unresolved P0 or P1 in scope
+  corrections: docs/16 §Corrections (stable IDs, version bump, regression test,
+    evidence re-evaluation, correction notes)
+
+# ---------------------------------------------------------------------------
+# Trust states and promotion authority
+# ---------------------------------------------------------------------------
+trust_states: [draft, screened, reviewed, verified, reference]
+promotion_rules:
+  draft->screened: structural pass + ai_screening pass (never implies correctness)
+  screened->reviewed: qualified_human records complete for the item's scope
+  reviewed->verified: all review types complete, no unresolved P0/P1,
+    source/license audit pass
+  verified->reference: coverage gates pass for the claimed band
+promotion_authority:
+  ai: may promote only to screened
+  qualified_human: may promote to reviewed/verified
+  owner: may promote to reference only when coverage gates pass and evidence
+    records exist; owner may NOT substitute self-review for qualified review
+owner_scope_paths:
+  - accept_draft_labeling_at_release: content ships labeled draft/unreviewed;
+      band completeness claims forbidden (docs/18 §Course-completeness)
+  - change_required_objective_set: requires recorded rationale + renewed
+      claim assessment (docs/09); narrowing to pass gates is a scope decision
+
+# ---------------------------------------------------------------------------
+# AI screening layer (owner-requested 2026-10-04; honest boundaries)
+# ---------------------------------------------------------------------------
+ai_screening:
+  enabled: true
+  method: multi-model independent review of each batch
+  required_models: ">=2 distinct model families, run independently"
+  record: [{model_id, model_version, date, prompt_version, verdicts,
+            issues_raised, disagreements_between_models}]
+  inter_model_disagreement: routes item to human-review priority queue
+  never:
+    - counts as any human gate
+    - promotes beyond screened
+    - certifies naturalness, register, or pronunciation
+  disagreement_with_human: human record wins; AI verdict archived
+
+# ---------------------------------------------------------------------------
+# Declared blockers
+# ---------------------------------------------------------------------------
+blockers:
+  - id: BLK-REVIEW-CAPACITY
+    since: "2026-10-05"
+    description: >
+      No qualified human reviewer engaged for ru-RU. The owner is a learner,
+      not a qualified reviewer. Review is delegated to GitHub contributors
+      (see records.github_flow); all shipped content is labeled
+      AI-generated/draft until a merged review PR promotes it. Multi-model
+      AI screening is an acceleration layer only.
+    blocks: [screened->reviewed, reviewed->verified, verified->reference]
+    unblock_path: >
+      Reviewers submit records + status flips via PR per the reviewer kit
+      (languages/ru-RU/review/REVIEWER_KIT.md); validator enforces the
+      record. Community reviewers reach `validated`; `verified` still
+      requires qualified human categories.

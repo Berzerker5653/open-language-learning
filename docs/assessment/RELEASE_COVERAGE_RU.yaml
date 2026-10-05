@@ -1,0 +1,248 @@
+# Finite release coverage map — ru-RU (draft, mirrors ja-JP RELEASE_COVERAGE.yaml).
+#
+# A band may be labeled complete only when every required objective row here
+# passes the machine-verifiable gates below. Narrowing the required set is an
+# owner scope decision requiring recorded rationale, never a silent edit.
+#
+# STATUS: proposed draft prepared 2026-10-05 by omp (ai-assisted). NOT yet
+# owner-approved; the frozen denominator for ru-RU band-completeness claims
+# does not exist until the owner approves this file (or a revised version).
+# All rows are content_status: implemented-draft — authored and structurally
+# validated, zero qualified human review records (BLK-REVIEW-CAPACITY).
+
+coverage_version: "0.1.0-draft"
+schema_version: 1
+status: proposed-pending-owner-approval   # do not treat as agreed
+variant: standard-russian
+
+frameworks:
+  primary:
+    name: CEFR Companion Volume
+    edition: "2020"
+    use: functional objective wording and level anchoring
+  reference:
+    name: TRLN/ТРKI task formats
+    edition: "reference only"
+    use: activity framing sanity-check; no descriptor or exam text reproduced
+  alignment_rationale: >
+    There is no single canonical functional framework for Russian comparable
+    to the JF Standard for Japanese; CEFR CV supplies descriptor scales and
+    modality language. Alignment is "informed by/aligned with", NOT an
+    equivalence or certification claim (docs/18). Qualified curriculum/
+    assessment reviewers must approve breadth at promotion.
+  prohibited_claims: [official certification, direct framework equivalence,
+    proficiency from course completion alone]
+
+# ---------------------------------------------------------------------------
+# Required objective sets (finite) — derived from the authored pack goal graph
+# (languages/ru-RU/curriculum/goals.yaml, 60 goals, 809 units).
+# ---------------------------------------------------------------------------
+bands:
+  onramp:
+    label: zero-knowledge entry (not a CEFR band)
+    objectives:   # authored; linked to pack goal IDs
+      - {id: ru.goal.on-ramp.cyrillic, modalities: [reading, writing],
+         assessments: [ru.assess.on-ramp.cyrillic-recognition, ru.assess.on-ramp.cyrillic-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.on-ramp.greetings, modalities: [reading, writing],
+         assessments: [ru.assess.on-ramp.greetings-recognition, ru.assess.on-ramp.greetings-writing], units: 2,
+         content_status: implemented-draft}
+      - {id: ru.goal.on-ramp.self-introduction, modalities: [reading, writing],
+         assessments: [ru.assess.on-ramp.self-introduction-recognition, ru.assess.on-ramp.self-introduction-writing], units: 2,
+         content_status: implemented-draft}
+      - {id: ru.goal.on-ramp.classroom, modalities: [reading, writing],
+         assessments: [ru.assess.on-ramp.classroom-recognition, ru.assess.on-ramp.classroom-writing], units: 2,
+         content_status: implemented-draft}
+      - {id: ru.goal.on-ramp.everyday, modalities: [reading, writing],
+         assessments: [ru.assess.on-ramp.everyday-recognition, ru.assess.on-ramp.everyday-writing], units: 2,
+         content_status: implemented-draft}
+      - {id: ru.goal.on-ramp.numbers, modalities: [reading, writing],
+         assessments: [ru.assess.on-ramp.numbers-recognition, ru.assess.on-ramp.numbers-writing], units: 2,
+         content_status: implemented-draft}
+  A1:
+    label: A1
+    objectives:   # authored; linked to pack goal IDs
+      - {id: ru.goal.a1.personal-details, modalities: [reading, writing],
+         assessments: [ru.assess.a1.personal-details-reading, ru.assess.a1.personal-details-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.a1.people-family, modalities: [reading, writing],
+         assessments: [ru.assess.a1.people-family-reading, ru.assess.a1.people-family-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.a1.home, modalities: [reading, writing],
+         assessments: [ru.assess.a1.home-reading, ru.assess.a1.home-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.a1.routines, modalities: [reading, writing],
+         assessments: [ru.assess.a1.routines-reading, ru.assess.a1.routines-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.a1.food, modalities: [reading, writing],
+         assessments: [ru.assess.a1.food-reading, ru.assess.a1.food-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.a1.shopping, modalities: [reading, writing],
+         assessments: [ru.assess.a1.shopping-reading, ru.assess.a1.shopping-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.a1.city, modalities: [reading, writing],
+         assessments: [ru.assess.a1.city-reading, ru.assess.a1.city-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.a1.time-plans, modalities: [reading, writing],
+         assessments: [ru.assess.a1.time-plans-reading, ru.assess.a1.time-plans-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.a1.basic-messages, modalities: [reading, writing],
+         assessments: [ru.assess.a1.basic-messages-reading, ru.assess.a1.basic-messages-writing], units: 10,
+         content_status: implemented-draft}
+  A2:
+    label: A2
+    objectives:   # authored; linked to pack goal IDs
+      - {id: ru.goal.a2.past-events, modalities: [reading, writing],
+         assessments: [ru.assess.a2.past-events-reading, ru.assess.a2.past-events-writing], units: 9,
+         content_status: implemented-draft}
+      - {id: ru.goal.a2.travel, modalities: [reading, writing],
+         assessments: [ru.assess.a2.travel-reading, ru.assess.a2.travel-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.a2.services, modalities: [reading, writing],
+         assessments: [ru.assess.a2.services-reading, ru.assess.a2.services-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.a2.wellbeing, modalities: [reading, writing],
+         assessments: [ru.assess.a2.wellbeing-reading, ru.assess.a2.wellbeing-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.a2.work-study, modalities: [reading, writing],
+         assessments: [ru.assess.a2.work-study-reading, ru.assess.a2.work-study-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.a2.social-plans, modalities: [reading, writing],
+         assessments: [ru.assess.a2.social-plans-reading, ru.assess.a2.social-plans-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.a2.comparisons, modalities: [reading, writing],
+         assessments: [ru.assess.a2.comparisons-reading, ru.assess.a2.comparisons-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.a2.instructions, modalities: [reading, writing],
+         assessments: [ru.assess.a2.instructions-reading, ru.assess.a2.instructions-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.a2.problems-solutions, modalities: [reading, writing],
+         assessments: [ru.assess.a2.problems-solutions-reading, ru.assess.a2.problems-solutions-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.a2.connected-messages, modalities: [reading, writing],
+         assessments: [ru.assess.a2.connected-messages-reading, ru.assess.a2.connected-messages-writing], units: 10,
+         content_status: implemented-draft}
+  B1:
+    label: B1
+    objectives:   # authored; linked to pack goal IDs
+      - {id: ru.goal.b1.narration, modalities: [reading, writing],
+         assessments: [ru.assess.b1.narration-reading, ru.assess.b1.narration-writing], units: 20,
+         content_status: implemented-draft}
+      - {id: ru.goal.b1.experiences, modalities: [reading, writing],
+         assessments: [ru.assess.b1.experiences-reading, ru.assess.b1.experiences-writing], units: 20,
+         content_status: implemented-draft}
+      - {id: ru.goal.b1.practical-problems, modalities: [reading, writing],
+         assessments: [ru.assess.b1.practical-problems-reading, ru.assess.b1.practical-problems-writing], units: 20,
+         content_status: implemented-draft}
+      - {id: ru.goal.b1.learning-work, modalities: [reading, writing],
+         assessments: [ru.assess.b1.learning-work-reading, ru.assess.b1.learning-work-writing], units: 20,
+         content_status: implemented-draft}
+      - {id: ru.goal.b1.relationships, modalities: [reading, writing],
+         assessments: [ru.assess.b1.relationships-reading, ru.assess.b1.relationships-writing], units: 20,
+         content_status: implemented-draft}
+      - {id: ru.goal.b1.culture-media, modalities: [reading, writing],
+         assessments: [ru.assess.b1.culture-media-reading, ru.assess.b1.culture-media-writing], units: 20,
+         content_status: implemented-draft}
+      - {id: ru.goal.b1.opinions, modalities: [reading, writing],
+         assessments: [ru.assess.b1.opinions-reading, ru.assess.b1.opinions-writing], units: 20,
+         content_status: implemented-draft}
+      - {id: ru.goal.b1.information-summary, modalities: [reading, writing],
+         assessments: [ru.assess.b1.info-summary-reading, ru.assess.b1.info-summary-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b1.information-summary2, modalities: [reading, writing],
+         assessments: [ru.assess.b1.info-summary-reading2, ru.assess.b1.info-summary-writing2], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b1.future-conditions, modalities: [reading, writing],
+         assessments: [ru.assess.b1.future-conditions-reading, ru.assess.b1.future-conditions-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b1.future-conditions2, modalities: [reading, writing],
+         assessments: [ru.assess.b1.future-conditions-reading2, ru.assess.b1.future-conditions-writing2], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b1.extended-writing, modalities: [reading, writing],
+         assessments: [ru.assess.b1.extended-writing-reading, ru.assess.b1.extended-writing-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b1.extended-writing2, modalities: [reading, writing],
+         assessments: [ru.assess.b1.extended-writing-reading2, ru.assess.b1.extended-writing-writing2], units: 10,
+         content_status: implemented-draft}
+  B2:
+    label: B2
+    objectives:   # authored; linked to pack goal IDs
+      - {id: ru.goal.b2.argumentation, modalities: [reading, writing],
+         assessments: [ru.assess.b2.argumentation-reading, ru.assess.b2.argumentation-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.argumentation2, modalities: [reading, writing],
+         assessments: [ru.assess.b2.argumentation-reading2, ru.assess.b2.argumentation-writing2], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.argumentation3, modalities: [reading, writing],
+         assessments: [ru.assess.b2.argumentation-reading3, ru.assess.b2.argumentation-writing3], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.argumentation4, modalities: [reading, writing],
+         assessments: [ru.assess.b2.argumentation-reading4, ru.assess.b2.argumentation-writing4], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.critical-reading, modalities: [reading, writing],
+         assessments: [ru.assess.b2.critical-reading-reading, ru.assess.b2.critical-reading-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.critical-reading2, modalities: [reading, writing],
+         assessments: [ru.assess.b2.critical-reading-reading2, ru.assess.b2.critical-reading-writing2], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.critical-reading3, modalities: [reading, writing],
+         assessments: [ru.assess.b2.critical-reading-reading3, ru.assess.b2.critical-reading-writing3], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.critical-reading4, modalities: [reading, writing],
+         assessments: [ru.assess.b2.critical-reading-reading4, ru.assess.b2.critical-reading-writing4], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.synthesis, modalities: [reading, writing],
+         assessments: [ru.assess.b2.synthesis-reading, ru.assess.b2.synthesis-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.synthesis2, modalities: [reading, writing],
+         assessments: [ru.assess.b2.synthesis-reading2, ru.assess.b2.synthesis-writing2], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.synthesis3, modalities: [reading, writing],
+         assessments: [ru.assess.b2.synthesis-reading3, ru.assess.b2.synthesis-writing3], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.synthesis4, modalities: [reading, writing],
+         assessments: [ru.assess.b2.synthesis-reading4, ru.assess.b2.synthesis-writing4], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.academic-study, modalities: [reading, writing],
+         assessments: [ru.assess.b2.academic-study-reading, ru.assess.b2.academic-study-writing], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.academic-study2, modalities: [reading, writing],
+         assessments: [ru.assess.b2.academic-study-reading2, ru.assess.b2.academic-study-writing2], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.academic-study3, modalities: [reading, writing],
+         assessments: [ru.assess.b2.academic-study-reading3, ru.assess.b2.academic-study-writing3], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.academic-study4, modalities: [reading, writing],
+         assessments: [ru.assess.b2.academic-study-reading4, ru.assess.b2.academic-study-writing4], units: 10,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.professional-writing, modalities: [reading, writing],
+         assessments: [ru.assess.b2.professional-writing-reading, ru.assess.b2.professional-writing-writing], units: 40,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.negotiation, modalities: [reading, writing],
+         assessments: [ru.assess.b2.negotiation-reading, ru.assess.b2.negotiation-writing], units: 40,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.society-policy, modalities: [reading, writing],
+         assessments: [ru.assess.b2.society-policy-reading, ru.assess.b2.society-policy-writing], units: 40,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.science-environment, modalities: [reading, writing],
+         assessments: [ru.assess.b2.science-environment-reading, ru.assess.b2.science-environment-writing], units: 40,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.culture-perspectives, modalities: [reading, writing],
+         assessments: [ru.assess.b2.culture-perspectives-reading, ru.assess.b2.culture-perspectives-writing], units: 40,
+         content_status: implemented-draft}
+      - {id: ru.goal.b2.style-register, modalities: [reading, writing],
+         assessments: [ru.assess.b2.style-register-reading, ru.assess.b2.style-register-writing], units: 40,
+         content_status: implemented-draft}
+
+# ---------------------------------------------------------------------------
+# Machine-verifiable gates (same semantics as ja-JP map)
+# ---------------------------------------------------------------------------
+gates:
+  coverage_linkage: 100% of required objectives in a claimed band link to a
+    pack goal with >=1 authored unit
+  review_core: 100% of the full-review core (REVIEW_POLICY) carries approved
+    qualified-human records; sampling rules per REVIEW_POLICY
+  sampling_disclosed: sampling method/seed/residual risk recorded per batch
+  speech_features: scored listening/speaking only after docs/17 qualification;
+    until then speech activities render guided/unscored
+  sources_licenses: audit-sources and audit-licenses clean at build
