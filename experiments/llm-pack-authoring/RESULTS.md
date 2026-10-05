@@ -1118,3 +1118,9 @@ Units 470-479 (evidence quality and source limitations), NEW goal `ru.goal.b2.cr
 Units 480-489 (competing interpretations and inference), NEW goal `ru.goal.b2.critical-reading4`
 (+2 assessments), 50 words (`lexicon/critical4.jsonl`), 2 grammar (`b2-iz-etogo-sleduet`, `b2-mozhno-tolkovat`),
 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 47
+
+Units 490-499 (accurate paraphrase and attribution), NEW goal `ru.goal.b2.synthesis`
+(+2 assessments), 50 words (`lexicon/synthesis.jsonl`), 2 grammar (`b2-po-mneniyu`, `b2-drugimi-slovami2`),
+10 sentences. Score: **7/7**.
