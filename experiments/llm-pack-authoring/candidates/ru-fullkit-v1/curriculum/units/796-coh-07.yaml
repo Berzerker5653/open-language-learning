@@ -1,0 +1,46 @@
+id: "ru.unit.b2.coh-07"
+goal_id: "ru.goal.b2.style-register"
+title: "Emphasis"
+summary: "эмфаза, акцентирование, выпуклость, рельефность and рема."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u796-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.style.emfaza",
+        "ru.lex.style.akcentirovanie",
+        "ru.lex.style.vypuklost",
+        "ru.lex.style.relefmost",
+        "ru.lex.style.rema",
+        "ru.sent.b2.u796",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u796-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u796-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u796"]
+  - id: "ru.activity.b2.u796-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Emphasis: precision response with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse эмфаза (emphasis) with акцентирование (accenting)."]
+  target_proficiency: "B2"
+  validation_method: "choice"

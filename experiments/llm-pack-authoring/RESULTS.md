@@ -1298,3 +1298,9 @@ Score: **7/7**.
 Units 780-789 (formality, politeness, and genre conventions), goal `ru.goal.b2.style-register` (existing),
 50 words (`lexicon/style2.jsonl`), 2 grammar (`b2-budte-dobry`, `b2-mozhno-li-mne`), 10 sentences.
 Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 77
+
+Units 790-799 (cohesion, information flow, and emphasis), goal `ru.goal.b2.style-register` (existing),
+50 words (`lexicon/style3.jsonl`), 2 grammar (`b2-krome-togo`, `b2-v-chastnosti`), 10 sentences.
+Score: **7/7**.
