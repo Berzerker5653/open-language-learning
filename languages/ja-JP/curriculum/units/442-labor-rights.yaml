@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.labor-rights
+goal_id: ja.goal.b2.economics-work
+title: labor rights
+summary: B2 language for labor rights.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.economy.tenshoku
+  - ja.lex.economy.tsutome
+  - ja.lex.economy.hataraki
+  - ja.lex.economy.senyou
+  - ja.lex.economy.jitsuryoku
+  - ja.sent.labor-rights
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.labor-rights-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.economy.tenshoku
+  - ja.lex.economy.tsutome
+  - ja.lex.economy.hataraki
+  - ja.lex.economy.senyou
+  - ja.lex.economy.jitsuryoku
+  - ja.sent.labor-rights
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.labor-rights-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.economy.tenshoku
+  - ja.lex.economy.tsutome
+  - ja.lex.economy.hataraki
+  - ja.lex.economy.senyou
+  - ja.lex.economy.jitsuryoku
+  - ja.sent.labor-rights
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.labor-rights-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.economy.tenshoku
+  - ja.lex.economy.tsutome
+  - ja.lex.economy.hataraki
+  - ja.lex.economy.senyou
+  - ja.lex.economy.jitsuryoku
+  - ja.sent.labor-rights
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.labor-rights-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.economy.tenshoku
+  - ja.lex.economy.tsutome
+  - ja.lex.economy.hataraki
+  - ja.lex.economy.senyou
+  - ja.lex.economy.jitsuryoku
+  - ja.sent.labor-rights
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.labor-rights-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.labor-rights
+- id: ja.activity.labor-rights-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

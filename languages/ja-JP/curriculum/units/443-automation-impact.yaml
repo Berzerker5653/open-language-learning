@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.automation-impact
+goal_id: ja.goal.b2.economics-work
+title: automation impact
+summary: B2 language for automation impact.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.economy.jidosuka
+  - ja.lex.economy.gijutsusha
+  - ja.lex.economy.shouhi
+  - ja.lex.economy.shohi
+  - ja.lex.economy.yuyutu
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2.ni-shite
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.automation-impact-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.economy.jidosuka
+  - ja.lex.economy.gijutsusha
+  - ja.lex.economy.shouhi
+  - ja.lex.economy.shohi
+  - ja.lex.economy.yuyutu
+  - ja.grammar.b2.ni-shite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.automation-impact-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.economy.jidosuka
+  - ja.lex.economy.gijutsusha
+  - ja.lex.economy.shouhi
+  - ja.lex.economy.shohi
+  - ja.lex.economy.yuyutu
+  - ja.grammar.b2.ni-shite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.automation-impact-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.economy.jidosuka
+  - ja.lex.economy.gijutsusha
+  - ja.lex.economy.shouhi
+  - ja.lex.economy.shohi
+  - ja.lex.economy.yuyutu
+  - ja.grammar.b2.ni-shite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.automation-impact-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.economy.jidosuka
+  - ja.lex.economy.gijutsusha
+  - ja.lex.economy.shouhi
+  - ja.lex.economy.shohi
+  - ja.lex.economy.yuyutu
+  - ja.grammar.b2.ni-shite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.automation-impact-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.automation-impact-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

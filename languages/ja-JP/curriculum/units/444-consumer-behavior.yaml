@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.consumer-behavior
+goal_id: ja.goal.b2.economics-work
+title: consumer behavior
+summary: B2 language for consumer behavior.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.economy.kinyuu
+  - ja.lex.economy.toushi
+  - ja.lex.economy.shihonshugi
+  - ja.lex.economy.kabushiki
+  - ja.lex.economy.kabuka
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2.dake-de
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.consumer-behavior-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.economy.kinyuu
+  - ja.lex.economy.toushi
+  - ja.lex.economy.shihonshugi
+  - ja.lex.economy.kabushiki
+  - ja.lex.economy.kabuka
+  - ja.grammar.b2.dake-de
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.consumer-behavior-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.economy.kinyuu
+  - ja.lex.economy.toushi
+  - ja.lex.economy.shihonshugi
+  - ja.lex.economy.kabushiki
+  - ja.lex.economy.kabuka
+  - ja.grammar.b2.dake-de
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.consumer-behavior-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.economy.kinyuu
+  - ja.lex.economy.toushi
+  - ja.lex.economy.shihonshugi
+  - ja.lex.economy.kabushiki
+  - ja.lex.economy.kabuka
+  - ja.grammar.b2.dake-de
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.consumer-behavior-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.economy.kinyuu
+  - ja.lex.economy.toushi
+  - ja.lex.economy.shihonshugi
+  - ja.lex.economy.kabushiki
+  - ja.lex.economy.kabuka
+  - ja.grammar.b2.dake-de
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.consumer-behavior-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.consumer-behavior-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

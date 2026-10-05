@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.management-styles
+goal_id: ja.goal.b2.economics-work
+title: management styles
+summary: B2 language for management styles.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.economy.yakushoku
+  - ja.lex.economy.bucho
+  - ja.lex.economy.idou
+  - ja.lex.economy.kyougyou
+  - ja.lex.economy.senmonka
+  - ja.sent.management-styles
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.management-styles-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.economy.yakushoku
+  - ja.lex.economy.bucho
+  - ja.lex.economy.idou
+  - ja.lex.economy.kyougyou
+  - ja.lex.economy.senmonka
+  - ja.sent.management-styles
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.management-styles-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.economy.yakushoku
+  - ja.lex.economy.bucho
+  - ja.lex.economy.idou
+  - ja.lex.economy.kyougyou
+  - ja.lex.economy.senmonka
+  - ja.sent.management-styles
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.management-styles-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.economy.yakushoku
+  - ja.lex.economy.bucho
+  - ja.lex.economy.idou
+  - ja.lex.economy.kyougyou
+  - ja.lex.economy.senmonka
+  - ja.sent.management-styles
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.management-styles-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.economy.yakushoku
+  - ja.lex.economy.bucho
+  - ja.lex.economy.idou
+  - ja.lex.economy.kyougyou
+  - ja.lex.economy.senmonka
+  - ja.sent.management-styles
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.management-styles-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.management-styles
+- id: ja.activity.management-styles-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

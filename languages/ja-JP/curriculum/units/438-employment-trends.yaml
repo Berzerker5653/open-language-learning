@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.employment-trends
+goal_id: ja.goal.b2.economics-work
+title: employment trends
+summary: B2 language for employment trends.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.economy.roudou
+  - ja.lex.economy.mugyou
+  - ja.lex.economy.toshin
+  - ja.lex.economy.haken
+  - ja.lex.economy.seishain
+  - ja.sent.employment-trends
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.employment-trends-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.economy.roudou
+  - ja.lex.economy.mugyou
+  - ja.lex.economy.toshin
+  - ja.lex.economy.haken
+  - ja.lex.economy.seishain
+  - ja.sent.employment-trends
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.employment-trends-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.economy.roudou
+  - ja.lex.economy.mugyou
+  - ja.lex.economy.toshin
+  - ja.lex.economy.haken
+  - ja.lex.economy.seishain
+  - ja.sent.employment-trends
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.employment-trends-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.economy.roudou
+  - ja.lex.economy.mugyou
+  - ja.lex.economy.toshin
+  - ja.lex.economy.haken
+  - ja.lex.economy.seishain
+  - ja.sent.employment-trends
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.employment-trends-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.economy.roudou
+  - ja.lex.economy.mugyou
+  - ja.lex.economy.toshin
+  - ja.lex.economy.haken
+  - ja.lex.economy.seishain
+  - ja.sent.employment-trends
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.employment-trends-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.employment-trends
+- id: ja.activity.employment-trends-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -601,3 +601,10 @@ units, 50 words split across `lexicon/health3.jsonl` +
 Goal `ja.goal.b2.politics-governance` complete (420-434). 10
 units, 50-word `lexicon/politics2.jsonl`, 2 grammar
 (`b2.ni-yotte`, `b2.toiu-koto`), 8 sentences. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 38: B2 units 435-444 (economics-work start)
+
+Unit 435 (governance-essay) closes politics-governance. Goal
+`ja.goal.b2.economics-work` created (436-449; 445-449 remain). 10 units,
+50-word `lexicon/economy.jsonl`, 2 grammar (`b2.ni-shite`, `b2.dake-de`),
+8 sentences, assessment `ja.assess.economics-work`. Score: **7/7**.
