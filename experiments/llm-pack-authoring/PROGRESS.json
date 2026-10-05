@@ -5,13 +5,13 @@
     "bands_done": ["on-ramp", "A1", "A2"],
     "units_next": "done",
     "last_score": "7/7 (2026-10-05, results/ru-RU-draft)",
-    "notes": "PROMOTED: languages/ru-RU (810 units, 81 blocks, all draft). 7/7 as ru-RU-draft. Next: external accuracy review + improvements list."
+    "notes": "PROMOTED: languages/ru-RU (810 units). 7/7 as ru-RU-draft. External review done (Zaliznyak): stress fixed f57d253. See docs/review/2026-10-05-external-pack-review.md"
   },
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
     "units_next": "done",
-    "notes": "B2 complete: b76 (800-807) 7/7; pack 808 units (000-807) = full B2 kit per plan; all 7 gates green",
+    "notes": "Pack complete 808 units, 7/7. External review done (JMdict): 11 malformed forms fixed; ~684 gloss-divergence entries need human review. See docs/review/2026-10-05-external-pack-review.md",
     "bands_done": ["A1", "A2", "B1", "B2"]
   }
 }

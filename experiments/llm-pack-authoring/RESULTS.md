@@ -1316,3 +1316,10 @@ Plan complete: 810 units (000-809), all 81 blocks. Score: **7/7**.
 `candidates/ru-fullkit-v1/` → `languages/ru-RU/` (pack_id `org.openlanguage.ru-ru.reference`,
 display "Russian Reference Pack (Draft)"). 810 units, all content `draft`/`review_status: draft`.
 Score: **7/7** as `ru-RU-draft`.
+
+## 2026-10-05 — external accuracy review
+
+Sources: jmdict-simplified (CC BY-SA, EDRDG), gramdict/zalizniak-2010 (CC BY-NC, rights-holder), pymorphy3 (MIT).
+ru-RU: ~2,100 Latin-accent readings converted, ~340 stress positions corrected, ~60 letter typos repaired (0 mismatches remain).
+ja-JP: 11 malformed forms fixed (Hangul/Latin/kanji contamination); ~684 gloss-divergence entries flagged for human review.
+Report: `docs/review/2026-10-05-external-pack-review.md`. Improvements: `docs/review/2026-10-05-improvements.md`.
