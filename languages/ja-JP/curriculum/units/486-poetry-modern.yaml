@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.poetry-modern
+goal_id: ja.goal.b2.literature-study
+title: poetry modern
+summary: B2 language for poetry modern.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.lit.shi
+  - ja.lex.lit.shika
+  - ja.lex.lit.shijin
+  - ja.lex.lit.gendai
+  - ja.lex.lit.gendai-bungaku
+  - ja.sent.poetry-modern
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.poetry-modern-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.lit.shi
+  - ja.lex.lit.shika
+  - ja.lex.lit.shijin
+  - ja.lex.lit.gendai
+  - ja.lex.lit.gendai-bungaku
+  - ja.sent.poetry-modern
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.poetry-modern-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.lit.shi
+  - ja.lex.lit.shika
+  - ja.lex.lit.shijin
+  - ja.lex.lit.gendai
+  - ja.lex.lit.gendai-bungaku
+  - ja.sent.poetry-modern
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.poetry-modern-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.lit.shi
+  - ja.lex.lit.shika
+  - ja.lex.lit.shijin
+  - ja.lex.lit.gendai
+  - ja.lex.lit.gendai-bungaku
+  - ja.sent.poetry-modern
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.poetry-modern-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.lit.shi
+  - ja.lex.lit.shika
+  - ja.lex.lit.shijin
+  - ja.lex.lit.gendai
+  - ja.lex.lit.gendai-bungaku
+  - ja.sent.poetry-modern
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.poetry-modern-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.poetry-modern
+- id: ja.activity.poetry-modern-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

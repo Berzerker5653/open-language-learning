@@ -633,3 +633,10 @@ Goal `ja.goal.b2.philosophy-ethics` created (468-482). 10 units,
 
 10 units, 50-word `lexicon/philosophy2.jsonl`, 2 grammar
 (`b2.toiu-mono`, `b2.mono-ka`), 8 sentences. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 43: B2 units 480-489 (philosophy-ethics complete, literature-study start)
+
+Goal `ja.goal.b2.literature-study` created (484-498). 10 units,
+20-word `lexicon/philosophy3.jsonl` + 30-word `lexicon/lit.jsonl`, 2 grammar
+(`b2.ni-kagiru`, `b2.ni-junzuru`), 8 sentences, assessment
+`ja.assess.literature-study`. Score: **7/7**.

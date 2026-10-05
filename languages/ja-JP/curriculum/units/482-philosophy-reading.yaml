@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.philosophy-reading
+goal_id: ja.goal.b2.philosophy-ethics
+title: philosophy reading
+summary: B2 language for philosophy reading.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.philosophy3.jiyu-ison
+  - ja.lex.philosophy3.seigi-ron
+  - ja.lex.philosophy3.sonzai-ron
+  - ja.lex.philosophy3.ishiki-ron
+  - ja.lex.philosophy3.jiyu-ron
+  - ja.sent.philosophy-reading
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.philosophy-reading-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.philosophy3.jiyu-ison
+  - ja.lex.philosophy3.seigi-ron
+  - ja.lex.philosophy3.sonzai-ron
+  - ja.lex.philosophy3.ishiki-ron
+  - ja.lex.philosophy3.jiyu-ron
+  - ja.sent.philosophy-reading
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.philosophy-reading-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.philosophy3.jiyu-ison
+  - ja.lex.philosophy3.seigi-ron
+  - ja.lex.philosophy3.sonzai-ron
+  - ja.lex.philosophy3.ishiki-ron
+  - ja.lex.philosophy3.jiyu-ron
+  - ja.sent.philosophy-reading
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.philosophy-reading-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.philosophy3.jiyu-ison
+  - ja.lex.philosophy3.seigi-ron
+  - ja.lex.philosophy3.sonzai-ron
+  - ja.lex.philosophy3.ishiki-ron
+  - ja.lex.philosophy3.jiyu-ron
+  - ja.sent.philosophy-reading
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.philosophy-reading-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.philosophy3.jiyu-ison
+  - ja.lex.philosophy3.seigi-ron
+  - ja.lex.philosophy3.sonzai-ron
+  - ja.lex.philosophy3.ishiki-ron
+  - ja.lex.philosophy3.jiyu-ron
+  - ja.sent.philosophy-reading
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.philosophy-reading-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.philosophy-reading
+- id: ja.activity.philosophy-reading-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
