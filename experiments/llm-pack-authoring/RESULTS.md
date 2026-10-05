@@ -1304,3 +1304,9 @@ Score: **7/7**.
 Units 790-799 (cohesion, information flow, and emphasis), goal `ru.goal.b2.style-register` (existing),
 50 words (`lexicon/style3.jsonl`), 2 grammar (`b2-krome-togo`, `b2-v-chastnosti`), 10 sentences.
 Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 78 (FINAL)
+
+Units 800-809 (integrated grammatical and stylistic revision), goal `ru.goal.b2.style-register` (existing),
+50 words (`lexicon/style4.jsonl`), 2 grammar (`b2-pered-otpravkoy`, `b2-esli-nuzhno`), 10 sentences.
+Plan complete: 810 units (000-809), all 81 blocks. Score: **7/7**.

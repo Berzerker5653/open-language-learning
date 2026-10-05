@@ -3,9 +3,9 @@
     "plan": "plans/ru-fullkit-v1.yaml",
     "pack": "candidates/ru-fullkit-v1",
     "bands_done": ["on-ramp", "A1", "A2"],
-    "units_next": "800",
+    "units_next": "done",
     "last_score": "7/7 (2026-10-04, results/ru-fullkit-v1)",
-    "notes": "B2: ru77 (790-799) 7/7; style-register goal; pack 800 units; next: FINAL block 800-809 then promote to languages/ru-RU"
+    "notes": "B2: ru78 (800-809) 7/7; style-register goal; pack 810 units; plan complete (81 blocks); next: promote to languages/ru-RU"
   },
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",

@@ -1,0 +1,46 @@
+id: "ru.unit.b2.rev-04"
+goal_id: "ru.goal.b2.style-register"
+title: "Joining"
+summary: "увязывать, стыковать, склеивать, сшивать and вкрапление."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u803-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.style.uvyzyvat",
+        "ru.lex.style.stykovat",
+        "ru.lex.style.skleivat",
+        "ru.lex.style.sshivat",
+        "ru.lex.style.vkraplenie",
+        "ru.sent.b2.u803",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u803-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u803-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u803"]
+  - id: "ru.activity.b2.u803-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Joining: precision response with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse склеивать (to glue) with сшивать (to stitch)."]
+  target_proficiency: "B2"
+  validation_method: "choice"
