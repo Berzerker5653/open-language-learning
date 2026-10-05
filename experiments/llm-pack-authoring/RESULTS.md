@@ -1076,3 +1076,9 @@ Units 400-409 (paragraphing, cohesion, revision), NEW goal `ru.goal.b1.extended-
 Units 410-419 (positions, claims, argument structure) — B2 band started. NEW goal
 `ru.goal.b2.argumentation` (+2 assessments), 50 words (`lexicon/argue.jsonl`), 2 grammar
 (`b2.ya-schitayu-chto`, `b2.s-drugoy-storony`), 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 40
+
+Units 420-429 (evidence, examples, justification), NEW goal `ru.goal.b2.argumentation2`
+(+2 assessments), 50 words (`lexicon/argue2.jsonl`), 2 grammar (`b2.naprimer-tak`, `b2-etogo-dokazyvaet`),
+10 sentences. Score: **7/7**.
