@@ -858,3 +858,9 @@ Units 660-669 (psychology-mind), 50 words (`lexicon/psych.jsonl`),
 Goal `ru.goal.a2.comparisons` created (+2 assessments). Units 170-179,
 50 words (`lexicon/comparisons.jsonl`), 2 grammar (`a2.comparative-short`,
 `a2.potomu-chto`), 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 63
+
+Goal `ja.goal.b2.medicine-society` created (+ASSESS +DEP). Units 670-679
+(psych tail + medicine start), 50 words (`lexicon/med.jsonl`), 2 grammar
+(`b2-ni-wakat-te`, `b2-ppoi`), 8 sentences. Score: **7/7**.

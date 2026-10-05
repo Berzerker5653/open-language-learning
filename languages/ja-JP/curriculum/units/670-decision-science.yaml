@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.670-decision-science
+goal_id: ja.goal.b2.psychology-mind
+title: decision science
+summary: B2 language for decision science.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.med.kettei
+  - ja.lex.med.sentaku
+  - ja.lex.med.risuku
+  - ja.lex.med.kouka
+  - ja.lex.med.koushou
+  - ja.sent.decision-science
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.670-decision-science-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.med.kettei
+  - ja.lex.med.sentaku
+  - ja.lex.med.risuku
+  - ja.lex.med.kouka
+  - ja.lex.med.koushou
+  - ja.sent.decision-science
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.670-decision-science-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.med.kettei
+  - ja.lex.med.sentaku
+  - ja.lex.med.risuku
+  - ja.lex.med.kouka
+  - ja.lex.med.koushou
+  - ja.sent.decision-science
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.670-decision-science-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.med.kettei
+  - ja.lex.med.sentaku
+  - ja.lex.med.risuku
+  - ja.lex.med.kouka
+  - ja.lex.med.koushou
+  - ja.sent.decision-science
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.670-decision-science-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.med.kettei
+  - ja.lex.med.sentaku
+  - ja.lex.med.risuku
+  - ja.lex.med.kouka
+  - ja.lex.med.koushou
+  - ja.sent.decision-science
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.670-decision-science-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.decision-science
+- id: ja.activity.670-decision-science-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

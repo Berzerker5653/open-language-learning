@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.671-mental-health-policy
+goal_id: ja.goal.b2.psychology-mind
+title: mental health policy
+summary: B2 language for mental health policy.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.med.seishin
+  - ja.lex.med.hoken
+  - ja.lex.med.byouin
+  - ja.lex.med.kusuri
+  - ja.lex.med.kanja
+  - ja.sent.mental-health-policy
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.671-mental-health-policy-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.med.seishin
+  - ja.lex.med.hoken
+  - ja.lex.med.byouin
+  - ja.lex.med.kusuri
+  - ja.lex.med.kanja
+  - ja.sent.mental-health-policy
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.671-mental-health-policy-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.med.seishin
+  - ja.lex.med.hoken
+  - ja.lex.med.byouin
+  - ja.lex.med.kusuri
+  - ja.lex.med.kanja
+  - ja.sent.mental-health-policy
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.671-mental-health-policy-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.med.seishin
+  - ja.lex.med.hoken
+  - ja.lex.med.byouin
+  - ja.lex.med.kusuri
+  - ja.lex.med.kanja
+  - ja.sent.mental-health-policy
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.671-mental-health-policy-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.med.seishin
+  - ja.lex.med.hoken
+  - ja.lex.med.byouin
+  - ja.lex.med.kusuri
+  - ja.lex.med.kanja
+  - ja.sent.mental-health-policy
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.671-mental-health-policy-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.mental-health-policy
+- id: ja.activity.671-mental-health-policy-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

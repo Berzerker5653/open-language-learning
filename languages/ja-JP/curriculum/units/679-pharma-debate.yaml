@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.679-pharma-debate
+goal_id: ja.goal.b2.medicine-society
+title: pharma debate
+summary: B2 language for pharma debate.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.med.seiyaku
+  - ja.lex.med.fukusayou
+  - ja.lex.med.kouchou
+  - ja.lex.med.taisaku
+  - ja.lex.med.kachi
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-ppoi
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.679-pharma-debate-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.med.seiyaku
+  - ja.lex.med.fukusayou
+  - ja.lex.med.kouchou
+  - ja.lex.med.taisaku
+  - ja.lex.med.kachi
+  - ja.grammar.b2-ppoi
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.679-pharma-debate-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.med.seiyaku
+  - ja.lex.med.fukusayou
+  - ja.lex.med.kouchou
+  - ja.lex.med.taisaku
+  - ja.lex.med.kachi
+  - ja.grammar.b2-ppoi
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.679-pharma-debate-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.med.seiyaku
+  - ja.lex.med.fukusayou
+  - ja.lex.med.kouchou
+  - ja.lex.med.taisaku
+  - ja.lex.med.kachi
+  - ja.grammar.b2-ppoi
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.679-pharma-debate-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.med.seiyaku
+  - ja.lex.med.fukusayou
+  - ja.lex.med.kouchou
+  - ja.lex.med.taisaku
+  - ja.lex.med.kachi
+  - ja.grammar.b2-ppoi
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.679-pharma-debate-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.679-pharma-debate-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

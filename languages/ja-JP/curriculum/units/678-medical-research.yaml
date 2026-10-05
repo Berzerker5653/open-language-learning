@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.678-medical-research
+goal_id: ja.goal.b2.medicine-society
+title: medical research
+summary: B2 language for medical research.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.med.iyaku
+  - ja.lex.med.jikken
+  - ja.lex.med.katsuyou
+  - ja.lex.med.shinkou
+  - ja.lex.med.seika
+  - ja.sent.medical-research
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.678-medical-research-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.med.iyaku
+  - ja.lex.med.jikken
+  - ja.lex.med.katsuyou
+  - ja.lex.med.shinkou
+  - ja.lex.med.seika
+  - ja.sent.medical-research
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.678-medical-research-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.med.iyaku
+  - ja.lex.med.jikken
+  - ja.lex.med.katsuyou
+  - ja.lex.med.shinkou
+  - ja.lex.med.seika
+  - ja.sent.medical-research
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.678-medical-research-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.med.iyaku
+  - ja.lex.med.jikken
+  - ja.lex.med.katsuyou
+  - ja.lex.med.shinkou
+  - ja.lex.med.seika
+  - ja.sent.medical-research
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.678-medical-research-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.med.iyaku
+  - ja.lex.med.jikken
+  - ja.lex.med.katsuyou
+  - ja.lex.med.shinkou
+  - ja.lex.med.seika
+  - ja.sent.medical-research
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.678-medical-research-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.medical-research
+- id: ja.activity.678-medical-research-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

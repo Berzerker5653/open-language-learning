@@ -2046,3 +2046,34 @@ goals:
       tool: omp
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-05'
+  - id: ja.goal.b2.medicine-society
+    description: 'Discuss medicine and public health: prevention, systems, and research.'
+    band: B2
+    framework_refs: []
+    contexts:
+    - ja.situation.classroom
+    modalities:
+    - listening
+    - speaking
+    - reading
+    - writing
+    prerequisites:
+    - target: ja.goal.b2.science-tech-ethics
+      dimension: grammar-controlled
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.lex.med.eisei
+    - ja.lex.med.kenkou
+    assessment_ids:
+    - ja.assess.medicine-society
+    transfer_required: true
+    sources:
+    - jf-standard
+    - ai-drafted-extension
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next-iq3_s
+      date: '2026-10-05'
