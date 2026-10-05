@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.viewer-response
+goal_id: ja.goal.b2.film-analysis
+title: viewer response
+summary: B2 language for viewer response.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.film2.hana
+  - ja.lex.film2.tsuki
+  - ja.lex.film2.hoshi
+  - ja.lex.film2.yama
+  - ja.lex.film2.kagayaki
+  - ja.sent.viewer-response
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.viewer-response-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.film2.hana
+  - ja.lex.film2.tsuki
+  - ja.lex.film2.hoshi
+  - ja.lex.film2.yama
+  - ja.lex.film2.kagayaki
+  - ja.sent.viewer-response
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.viewer-response-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.film2.hana
+  - ja.lex.film2.tsuki
+  - ja.lex.film2.hoshi
+  - ja.lex.film2.yama
+  - ja.lex.film2.kagayaki
+  - ja.sent.viewer-response
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.viewer-response-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.film2.hana
+  - ja.lex.film2.tsuki
+  - ja.lex.film2.hoshi
+  - ja.lex.film2.yama
+  - ja.lex.film2.kagayaki
+  - ja.sent.viewer-response
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.viewer-response-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.film2.hana
+  - ja.lex.film2.tsuki
+  - ja.lex.film2.hoshi
+  - ja.lex.film2.yama
+  - ja.lex.film2.kagayaki
+  - ja.sent.viewer-response
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.viewer-response-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.viewer-response
+- id: ja.activity.viewer-response-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

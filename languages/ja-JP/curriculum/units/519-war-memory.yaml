@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.war-memory
+goal_id: ja.goal.b2.history-critical
+title: war memory
+summary: B2 language for war memory.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.history.dekigoto
+  - ja.lex.history.genin
+  - ja.lex.history.eikyou
+  - ja.lex.history.kodai
+  - ja.lex.history.hakubutsukan
+  - ja.sent.war-memory
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.war-memory-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.history.dekigoto
+  - ja.lex.history.genin
+  - ja.lex.history.eikyou
+  - ja.lex.history.kodai
+  - ja.lex.history.hakubutsukan
+  - ja.sent.war-memory
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.war-memory-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.history.dekigoto
+  - ja.lex.history.genin
+  - ja.lex.history.eikyou
+  - ja.lex.history.kodai
+  - ja.lex.history.hakubutsukan
+  - ja.sent.war-memory
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.war-memory-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.history.dekigoto
+  - ja.lex.history.genin
+  - ja.lex.history.eikyou
+  - ja.lex.history.kodai
+  - ja.lex.history.hakubutsukan
+  - ja.sent.war-memory
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.war-memory-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.history.dekigoto
+  - ja.lex.history.genin
+  - ja.lex.history.eikyou
+  - ja.lex.history.kodai
+  - ja.lex.history.hakubutsukan
+  - ja.sent.war-memory
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.war-memory-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.war-memory
+- id: ja.activity.war-memory-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

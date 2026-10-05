@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.film-ethics
+goal_id: ja.goal.b2.film-analysis
+title: film ethics
+summary: B2 language for film ethics.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.film2.bakuhatsu
+  - ja.lex.film2.tatakai
+  - ja.lex.film2.inbou
+  - ja.lex.film2.hantai
+  - ja.lex.film2.shippai
+  - ja.sent.film-ethics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.film-ethics-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.film2.bakuhatsu
+  - ja.lex.film2.tatakai
+  - ja.lex.film2.inbou
+  - ja.lex.film2.hantai
+  - ja.lex.film2.shippai
+  - ja.sent.film-ethics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.film-ethics-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.film2.bakuhatsu
+  - ja.lex.film2.tatakai
+  - ja.lex.film2.inbou
+  - ja.lex.film2.hantai
+  - ja.lex.film2.shippai
+  - ja.sent.film-ethics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.film-ethics-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.film2.bakuhatsu
+  - ja.lex.film2.tatakai
+  - ja.lex.film2.inbou
+  - ja.lex.film2.hantai
+  - ja.lex.film2.shippai
+  - ja.sent.film-ethics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.film-ethics-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.film2.bakuhatsu
+  - ja.lex.film2.tatakai
+  - ja.lex.film2.inbou
+  - ja.lex.film2.hantai
+  - ja.lex.film2.shippai
+  - ja.sent.film-ethics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.film-ethics-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.film-ethics
+- id: ja.activity.film-ethics-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.meiji-modernization
+goal_id: ja.goal.b2.history-critical
+title: modernization
+summary: B2 language for modernization.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.history.sensou
+  - ja.lex.history.kakumei
+  - ja.lex.history.joyaku
+  - ja.lex.history.kenpou
+  - ja.lex.history.kindai
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2.ni-tomonai
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.meiji-modernization-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.history.sensou
+  - ja.lex.history.kakumei
+  - ja.lex.history.joyaku
+  - ja.lex.history.kenpou
+  - ja.lex.history.kindai
+  - ja.grammar.b2.ni-tomonai
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.meiji-modernization-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.history.sensou
+  - ja.lex.history.kakumei
+  - ja.lex.history.joyaku
+  - ja.lex.history.kenpou
+  - ja.lex.history.kindai
+  - ja.grammar.b2.ni-tomonai
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.meiji-modernization-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.history.sensou
+  - ja.lex.history.kakumei
+  - ja.lex.history.joyaku
+  - ja.lex.history.kenpou
+  - ja.lex.history.kindai
+  - ja.grammar.b2.ni-tomonai
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.meiji-modernization-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.history.sensou
+  - ja.lex.history.kakumei
+  - ja.lex.history.joyaku
+  - ja.lex.history.kenpou
+  - ja.lex.history.kindai
+  - ja.grammar.b2.ni-tomonai
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.meiji-modernization-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.meiji-modernization-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

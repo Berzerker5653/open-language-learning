@@ -714,3 +714,9 @@ Score: **7/7**.
 Goal `ru.goal.a1.basic-messages` created. 10 units, 50-word
 `lexicon/messages.jsonl`, 2 grammar (`a1.modal-impersonal`, `a1.polite-requests`),
 8 sentences, 2 assessments. Score: **7/7**. **A1 band complete (000-109).**
+
+## 2026-10-04 — ja-JP batch 47: B2 units 510-519 (film-analysis tail + history-critical start)
+
+Goal `ja.goal.b2.history-critical` created (+deps edge, +assessment). 10 units,
+30-word `lexicon/film2.jsonl`, 20-word `lexicon/history.jsonl`,
+2 grammar (`b2.ni-oujite`, `b2.ni-tomonai`), 8 sentences. Score: **7/7**.

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.festival-culture
+goal_id: ja.goal.b2.film-analysis
+title: festival culture
+summary: B2 language for festival culture.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.film2.umi
+  - ja.lex.film2.sora
+  - ja.lex.film2.tori
+  - ja.lex.film2.sakana
+  - ja.lex.film2.ki
+  - ja.sent.festival-culture
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.festival-culture-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.film2.umi
+  - ja.lex.film2.sora
+  - ja.lex.film2.tori
+  - ja.lex.film2.sakana
+  - ja.lex.film2.ki
+  - ja.sent.festival-culture
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.festival-culture-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.film2.umi
+  - ja.lex.film2.sora
+  - ja.lex.film2.tori
+  - ja.lex.film2.sakana
+  - ja.lex.film2.ki
+  - ja.sent.festival-culture
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.festival-culture-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.film2.umi
+  - ja.lex.film2.sora
+  - ja.lex.film2.tori
+  - ja.lex.film2.sakana
+  - ja.lex.film2.ki
+  - ja.sent.festival-culture
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.festival-culture-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.film2.umi
+  - ja.lex.film2.sora
+  - ja.lex.film2.tori
+  - ja.lex.film2.sakana
+  - ja.lex.film2.ki
+  - ja.sent.festival-culture
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.festival-culture-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.festival-culture
+- id: ja.activity.festival-culture-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
