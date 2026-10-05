@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.local-government
+goal_id: ja.goal.b1.society-rules
+title: local government
+summary: B1 language for local government.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.society2.gyousei
+  - ja.lex.society2.kinmu
+  - ja.lex.society2.houchi
+  - ja.lex.society2.hosei
+  - ja.lex.society2.yakuin
+  - ja.sent.civic-hall-meeting
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.local-government-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.society2.gyousei
+  - ja.lex.society2.kinmu
+  - ja.lex.society2.houchi
+  - ja.lex.society2.hosei
+  - ja.lex.society2.yakuin
+  - ja.sent.civic-hall-meeting
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.local-government-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.society2.gyousei
+  - ja.lex.society2.kinmu
+  - ja.lex.society2.houchi
+  - ja.lex.society2.hosei
+  - ja.lex.society2.yakuin
+  - ja.sent.civic-hall-meeting
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.local-government-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.society2.gyousei
+  - ja.lex.society2.kinmu
+  - ja.lex.society2.houchi
+  - ja.lex.society2.hosei
+  - ja.lex.society2.yakuin
+  - ja.sent.civic-hall-meeting
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.local-government-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.society2.gyousei
+  - ja.lex.society2.kinmu
+  - ja.lex.society2.houchi
+  - ja.lex.society2.hosei
+  - ja.lex.society2.yakuin
+  - ja.sent.civic-hall-meeting
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.local-government-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.civic-hall-meeting
+- id: ja.activity.local-government-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

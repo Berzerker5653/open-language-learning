@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.community-problems
+goal_id: ja.goal.b1.society-rules
+title: community problems
+summary: B1 language for community problems.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.society2.yuuutsu
+  - ja.lex.society2.soudan
+  - ja.lex.society2.kotsuu
+  - ja.lex.society2.chuga
+  - ja.lex.society2.kouon
+  - ja.sent.community-worry
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.community-problems-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.society2.yuuutsu
+  - ja.lex.society2.soudan
+  - ja.lex.society2.kotsuu
+  - ja.lex.society2.chuga
+  - ja.lex.society2.kouon
+  - ja.sent.community-worry
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.community-problems-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.society2.yuuutsu
+  - ja.lex.society2.soudan
+  - ja.lex.society2.kotsuu
+  - ja.lex.society2.chuga
+  - ja.lex.society2.kouon
+  - ja.sent.community-worry
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.community-problems-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.society2.yuuutsu
+  - ja.lex.society2.soudan
+  - ja.lex.society2.kotsuu
+  - ja.lex.society2.chuga
+  - ja.lex.society2.kouon
+  - ja.sent.community-worry
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.community-problems-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.society2.yuuutsu
+  - ja.lex.society2.soudan
+  - ja.lex.society2.kotsuu
+  - ja.lex.society2.chuga
+  - ja.lex.society2.kouon
+  - ja.sent.community-worry
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.community-problems-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.community-worry
+- id: ja.activity.community-problems-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.social-issues
+goal_id: ja.goal.b1.society-rules
+title: social issues
+summary: B1 language for social issues.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.society2.kodoku
+  - ja.lex.society2.hikikomori
+  - ja.lex.society2.kyuugyou
+  - ja.lex.society2.kyoufu
+  - ja.lex.society2.shisan
+  - ja.sent.social-issue
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.social-issues-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.society2.kodoku
+  - ja.lex.society2.hikikomori
+  - ja.lex.society2.kyuugyou
+  - ja.lex.society2.kyoufu
+  - ja.lex.society2.shisan
+  - ja.sent.social-issue
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.social-issues-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.society2.kodoku
+  - ja.lex.society2.hikikomori
+  - ja.lex.society2.kyuugyou
+  - ja.lex.society2.kyoufu
+  - ja.lex.society2.shisan
+  - ja.sent.social-issue
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.social-issues-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.society2.kodoku
+  - ja.lex.society2.hikikomori
+  - ja.lex.society2.kyuugyou
+  - ja.lex.society2.kyoufu
+  - ja.lex.society2.shisan
+  - ja.sent.social-issue
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.social-issues-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.society2.kodoku
+  - ja.lex.society2.hikikomori
+  - ja.lex.society2.kyuugyou
+  - ja.lex.society2.kyoufu
+  - ja.lex.society2.shisan
+  - ja.sent.social-issue
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.social-issues-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.social-issue
+- id: ja.activity.social-issues-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

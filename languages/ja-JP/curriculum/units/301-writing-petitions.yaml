@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.writing-petitions
+goal_id: ja.goal.b1.society-rules
+title: writing petitions
+summary: B1 language for writing petitions.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.society2.seimen
+  - ja.lex.society2.shomei
+  - ja.lex.society2.kyoutei
+  - ja.lex.society2.seikyuu
+  - ja.lex.society2.seido
+  - ja.sent.petition-signature
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.writing-petitions-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.society2.seimen
+  - ja.lex.society2.shomei
+  - ja.lex.society2.kyoutei
+  - ja.lex.society2.seikyuu
+  - ja.lex.society2.seido
+  - ja.sent.petition-signature
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.writing-petitions-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.society2.seimen
+  - ja.lex.society2.shomei
+  - ja.lex.society2.kyoutei
+  - ja.lex.society2.seikyuu
+  - ja.lex.society2.seido
+  - ja.sent.petition-signature
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.writing-petitions-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.society2.seimen
+  - ja.lex.society2.shomei
+  - ja.lex.society2.kyoutei
+  - ja.lex.society2.seikyuu
+  - ja.lex.society2.seido
+  - ja.sent.petition-signature
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.writing-petitions-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.society2.seimen
+  - ja.lex.society2.shomei
+  - ja.lex.society2.kyoutei
+  - ja.lex.society2.seikyuu
+  - ja.lex.society2.seido
+  - ja.sent.petition-signature
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.writing-petitions-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.petition-signature
+- id: ja.activity.writing-petitions-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -507,3 +507,9 @@ Goals `ja.goal.b1.culture-tradition` (complete, 280-294) and
 295-309), 10 units, 25-word `lexicon/culture2.jsonl` + 25-word
 `lexicon/society.jsonl`, 2 grammar (`b1.ukemi-indirect`,
 `b1.dake-bakari-shika`), 9 sentences, 1 assessment. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 25: B1 units 300-309 (society-rules goal complete)
+
+Goal `ja.goal.b1.society-rules` complete (295-309), 10 units, 50-word
+`lexicon/society2.jsonl`, 2 grammar (`b1.azu-ni`,
+`b1.toba-conditional`), 8 sentences. Score: **7/7**.
