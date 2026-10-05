@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.culture-shock
+goal_id: ja.goal.b1.travel-extended
+title: culture shock
+summary: B1 language for culture shock.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.travel.pasupoto
+  - ja.lex.travel.nyukan
+  - ja.lex.travel.annai-zu
+  - ja.lex.travel.ryokan
+  - ja.lex.travel.minshuku
+  - ja.sent.culture-shock
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.culture-shock-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.travel.pasupoto
+  - ja.lex.travel.nyukan
+  - ja.lex.travel.annai-zu
+  - ja.lex.travel.ryokan
+  - ja.lex.travel.minshuku
+  - ja.sent.culture-shock
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.culture-shock-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.travel.pasupoto
+  - ja.lex.travel.nyukan
+  - ja.lex.travel.annai-zu
+  - ja.lex.travel.ryokan
+  - ja.lex.travel.minshuku
+  - ja.sent.culture-shock
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.culture-shock-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.travel.pasupoto
+  - ja.lex.travel.nyukan
+  - ja.lex.travel.annai-zu
+  - ja.lex.travel.ryokan
+  - ja.lex.travel.minshuku
+  - ja.sent.culture-shock
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.culture-shock-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.travel.pasupoto
+  - ja.lex.travel.nyukan
+  - ja.lex.travel.annai-zu
+  - ja.lex.travel.ryokan
+  - ja.lex.travel.minshuku
+  - ja.sent.culture-shock
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.culture-shock-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.culture-shock
+- id: ja.activity.culture-shock-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

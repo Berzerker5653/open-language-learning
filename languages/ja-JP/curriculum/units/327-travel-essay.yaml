@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.travel-essay
+goal_id: ja.goal.b1.travel-extended
+title: travel essay
+summary: B1 language for travel essay.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.travel.shinkou
+  - ja.lex.travel.bunka-shock
+  - ja.lex.travel.ureshii
+  - ja.lex.travel.kantan
+  - ja.lex.travel.mendou
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b1.nai-u-de
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.travel-essay-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.travel.shinkou
+  - ja.lex.travel.bunka-shock
+  - ja.lex.travel.ureshii
+  - ja.lex.travel.kantan
+  - ja.lex.travel.mendou
+  - ja.grammar.b1.nai-u-de
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.travel-essay-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.travel.shinkou
+  - ja.lex.travel.bunka-shock
+  - ja.lex.travel.ureshii
+  - ja.lex.travel.kantan
+  - ja.lex.travel.mendou
+  - ja.grammar.b1.nai-u-de
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.travel-essay-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.travel.shinkou
+  - ja.lex.travel.bunka-shock
+  - ja.lex.travel.ureshii
+  - ja.lex.travel.kantan
+  - ja.lex.travel.mendou
+  - ja.grammar.b1.nai-u-de
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.travel-essay-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.travel.shinkou
+  - ja.lex.travel.bunka-shock
+  - ja.lex.travel.ureshii
+  - ja.lex.travel.kantan
+  - ja.lex.travel.mendou
+  - ja.grammar.b1.nai-u-de
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.travel-essay-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.travel-essay-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

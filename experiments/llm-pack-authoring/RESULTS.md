@@ -520,3 +520,12 @@ Goal `ja.goal.b1.environment` (prereq society-rules, mirrored; spans
 310-324), 10 units, 50-word `lexicon/env.jsonl`, 2 grammar
 (`b1.shieki-ukemi`, `b1.ni-yotte`), 8 sentences, 1 assessment.
 Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 27: B1 units 320-329 (environment complete, travel-extended start)
+
+Goal `ja.goal.b1.environment` complete (310-324). Goal
+`ja.goal.b1.travel-extended` (prereq environment, mirrored; spans
+325-339) started, 5 units. 10 units, 50 words split across
+`lexicon/env2.jsonl` + `lexicon/travel.jsonl`, 2 grammar
+(`b1.nai-u-de`, `b1.toi-toka`), 8 sentences, 1 assessment.
+Score: **7/7**.

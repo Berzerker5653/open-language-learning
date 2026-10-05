@@ -11,8 +11,8 @@
     "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
     "bands_done": ["A1", "A2"],
-    "units_next": "320",
+    "units_next": "330",
     "last_score": "7/7 (2026-10-04, results/ja-JP-draft)",
-    "notes": "extension plan authored by agent, checker OK (54 goals, 740 units, 3789 new words); A1 complete (062-118); A2 complete (120-219); B1: 220-319 done (environment started 310-319, spans 310-324); next batch 320-329"
+    "notes": "extension plan authored by agent, checker OK (54 goals, 740 units, 3789 new words); A1 complete (062-118); A2 complete (120-219); B1: 220-329 done (environment complete 310-324, travel-extended started 325-329, spans 325-339); next batch 330-339"
   }
 }
