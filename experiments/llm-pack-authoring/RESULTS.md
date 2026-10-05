@@ -793,3 +793,9 @@ Goals `ja.goal.b2.academic-writing` + `ja.goal.b2.formal-correspondence` created
 (+assessments, +deps; prereq b1.work-professional). Units 610-619,
 50 words (`lexicon/formal.jsonl`), 2 grammar (`b2.moushi-agemasu`,
 `b2-yoroshiku`), 9 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 10
+
+Goal `ru.goal.a2.travel` created (+2 assessments). Units 120-129,
+50 words (`lexicon/travel.jsonl`), 2 grammar (`a2.prepositional-transport`,
+`a2.time-of-departure`), 10 sentences. Score: **7/7**.

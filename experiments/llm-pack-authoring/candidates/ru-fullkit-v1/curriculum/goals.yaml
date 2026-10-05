@@ -526,3 +526,42 @@ goals:
       model: "strata/qwen3.8-flash-next-iq3_s"
       date: "2026-10-05"
       notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.a2.travel"
+    description: "Book travel, read itineraries, and describe transport."
+    band: "A2"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - {
+          target: "ru.goal.a2.past-events",
+          dimension: "comprehension-reading",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.a1.city",
+          dimension: "comprehension-reading",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.on-ramp.everyday",
+          dimension: "recall-meaning",
+          required_state: "independent",
+          strength: "hard",
+        }
+    required_concepts:
+      [
+        "ru.grammar.a2.prepositional-transport",
+        "ru.grammar.a2.time-of-departure",
+        "ru.grammar.on-ramp.zero-present-copula",
+      ]
+    assessment_ids: ["ru.assess.a2.travel-reading", "ru.assess.a2.travel-writing"]
+    transfer_required: false
+    sources: ["ru-original"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "omp"
+      model: "strata/qwen3.8-flash-next-iq3_s"
+      date: "2026-10-05"
+      notes: "ai-drafted; needs dictionary sourcing and human review"

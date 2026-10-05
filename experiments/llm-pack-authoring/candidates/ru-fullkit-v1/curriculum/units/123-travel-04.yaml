@@ -1,0 +1,46 @@
+id: "ru.unit.a2.travel-04"
+goal_id: "ru.goal.a2.travel"
+title: "Schedules"
+summary: "расписание, отправление, прибытие, опоздание and пересадка."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a2.u123-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.travel.raspisanie",
+        "ru.lex.travel.otpravlenie",
+        "ru.lex.travel.pribytie",
+        "ru.lex.travel.opozdanie",
+        "ru.lex.travel.peresadka",
+        "ru.sent.a2.u123",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.a2.u123-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a2.u123-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a2.u123"]
+  - id: "ru.activity.a2.u123-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Schedules: travel with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse отправление (departure) with прибытие (arrival)."]
+  target_proficiency: "A2"
+  validation_method: "choice"
