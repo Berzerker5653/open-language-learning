@@ -1007,3 +1007,8 @@ ja-JP B2 kit COMPLETE: 808 units (000-807), all bands done.
 Units 290-299 (relationships and social expectations), 50 words (`lexicon/rel.jsonl`),
 2 grammar (`b1.dativum-feelings`, `b1.ustupit-kompromiss`), 10 sentences,
 new goal `ru.goal.b1.relationships` + 2 assessments. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 28
+
+Units 300-309 (feelings, misunderstandings, repair), 50 words (`lexicon/feelings.jsonl`),
+2 grammar (`b1.perezhivat-o`, `b1.repair-chunks`), 10 sentences. Score: **7/7**.

@@ -1,0 +1,46 @@
+id: "ru.unit.b1.feelings-01"
+goal_id: "ru.goal.b1.relationships"
+title: "Emotions"
+summary: "эмоция, печаль, тоска, тревога and грустный."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u300-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.feelings.emociya",
+        "ru.lex.feelings.pechal",
+        "ru.lex.feelings.toska",
+        "ru.lex.feelings.trevoga",
+        "ru.lex.feelings.grustnyj",
+        "ru.sent.b1.u300",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u300-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u300-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u300"]
+  - id: "ru.activity.b1.u300-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Emotions: feelings with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse печаль (sorrow) with тоска (melancholy)."]
+  target_proficiency: "B1"
+  validation_method: "choice"

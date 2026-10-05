@@ -1,0 +1,46 @@
+id: "ru.unit.b1.feelings-06"
+goal_id: "ru.goal.b1.relationships"
+title: "Silence"
+summary: "молчание, разлад, напряжение, доверять and поддерживать."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u305-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.feelings.molchanie",
+        "ru.lex.feelings.razlad",
+        "ru.lex.feelings.napryazhenie",
+        "ru.lex.feelings.doveryat",
+        "ru.lex.feelings.podderzhat",
+        "ru.sent.b1.u305",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u305-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u305-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u305"]
+  - id: "ru.activity.b1.u305-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Silence: feelings with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse молчание (silence) with разлад (discord)."]
+  target_proficiency: "B1"
+  validation_method: "choice"

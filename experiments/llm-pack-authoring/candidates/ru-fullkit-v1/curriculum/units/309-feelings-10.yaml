@@ -1,0 +1,46 @@
+id: "ru.unit.b1.feelings-10"
+goal_id: "ru.goal.b1.relationships"
+title: "Delight"
+summary: "восторг, удивление, вдохновение, нежность and плакать."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u309-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.feelings.vostorg",
+        "ru.lex.feelings.udivlenie",
+        "ru.lex.feelings.vdokhnovenie",
+        "ru.lex.feelings.nezhnost",
+        "ru.lex.feelings.plakat",
+        "ru.sent.b1.u309",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u309-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u309-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u309"]
+  - id: "ru.activity.b1.u309-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Delight: feelings with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse вдохновение (inspiration) with удивление (surprise)."]
+  target_proficiency: "B1"
+  validation_method: "choice"

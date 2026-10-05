@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
        25081  f580451c93e4  assessments/definitions.jsonl
-       35766  f444cf145277  curriculum/goals.yaml
+       35958  9ae8f4d66fe6  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -290,17 +290,27 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1468  eee1c7b5f452  curriculum/units/287-work-processes-08.yaml
         1435  885c8b292ad3  curriculum/units/288-work-processes-09.yaml
         1406  1bbd29226ad5  curriculum/units/289-work-processes-10.yaml
-        1325  e4e55815b9db  curriculum/units/290-relationships-01.yaml
-        1303  2e918216a9ca  curriculum/units/291-relationships-02.yaml
-        1360  edaf0db09604  curriculum/units/292-relationships-03.yaml
-        1322  63ca16919f0b  curriculum/units/293-relationships-04.yaml
-        1347  39155103f465  curriculum/units/294-relationships-05.yaml
-        1286  5d95448e84b1  curriculum/units/295-relationships-06.yaml
-        1342  dab41f077ad5  curriculum/units/296-relationships-07.yaml
-        1336  c752b3b03a21  curriculum/units/297-relationships-08.yaml
-        1363  3bc5ac5adc31  curriculum/units/298-relationships-09.yaml
-        1362  eb9e2a7190e0  curriculum/units/299-relationships-10.yaml
-       35841  4f0e74d5dcf5  grammar/concepts.jsonl
+        1410  4edd4b53dfb5  curriculum/units/290-relationships-01.yaml
+        1388  9631a8e41102  curriculum/units/291-relationships-02.yaml
+        1445  07bff4d63a50  curriculum/units/292-relationships-03.yaml
+        1407  7522a73120fa  curriculum/units/293-relationships-04.yaml
+        1432  947954bb0218  curriculum/units/294-relationships-05.yaml
+        1371  c810e6d230a2  curriculum/units/295-relationships-06.yaml
+        1427  fe85974e8021  curriculum/units/296-relationships-07.yaml
+        1421  4f1ceb1e37da  curriculum/units/297-relationships-08.yaml
+        1448  11fc9bc7c2cd  curriculum/units/298-relationships-09.yaml
+        1447  a5e2a7070620  curriculum/units/299-relationships-10.yaml
+        1330  d88d24595675  curriculum/units/300-feelings-01.yaml
+        1365  21516bb815eb  curriculum/units/301-feelings-02.yaml
+        1373  8d2c063471ff  curriculum/units/302-feelings-03.yaml
+        1403  12d13398391b  curriculum/units/303-feelings-04.yaml
+        1361  2c6a311ef0e7  curriculum/units/304-feelings-05.yaml
+        1368  25a443a3ea5f  curriculum/units/305-feelings-06.yaml
+        1345  246a6f591786  curriculum/units/306-feelings-07.yaml
+        1337  e320f00b67ca  curriculum/units/307-feelings-08.yaml
+        1321  feeec452995e  curriculum/units/308-feelings-09.yaml
+        1378  10e33d1820b2  curriculum/units/309-feelings-10.yaml
+       36820  1013507d03fa  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        21189  03a4503c7371  lexicon/city.jsonl
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
@@ -308,6 +318,7 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         3655  dbb5543b101e  lexicon/everyday.jsonl
        22280  a1be61684b79  lexicon/experiences.jsonl
        21072  e82dce96cc01  lexicon/family.jsonl
+       19638  f85fde5c06a9  lexicon/feelings.jsonl
        20787  618656b3d458  lexicon/food.jsonl
         3882  2331dd495806  lexicon/greetings.jsonl
        20917  300574a2724b  lexicon/home.jsonl
@@ -337,5 +348,5 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-       95960  1a122f5080b1  sentences/entries.jsonl
+       99624  3b1ccee8a37f  sentences/entries.jsonl
          391  74babc055676  sources.jsonl
