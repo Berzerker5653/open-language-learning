@@ -573,3 +573,9 @@ spans 385-399) started, 5 units. 10 units, 50 words split across
 `lexicon/debate2.jsonl` + `lexicon/story.jsonl`, 2 grammar
 (`b1.yori-mo`, `b1.to-toki`), 8 sentences, 1 assessment.
 Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 34: B1 units 390-399 (storytelling complete)
+
+Goal `ja.goal.b1.storytelling` complete (385-399). 10 units,
+50-word `lexicon/story2.jsonl`, 2 grammar (`b1.dakara`,
+`b1.sou-da`), 8 sentences. Score: **7/7**.

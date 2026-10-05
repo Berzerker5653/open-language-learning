@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.folktale-reading
+goal_id: ja.goal.b1.storytelling
+title: folktale reading
+summary: B1 language for folktale reading.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.story2.shiroi
+  - ja.lex.story2.kuroi
+  - ja.lex.story2.akai
+  - ja.lex.story2.aoi
+  - ja.lex.story2.kiiroi
+  - ja.sent.polite-humor
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.folktale-reading-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.story2.shiroi
+  - ja.lex.story2.kuroi
+  - ja.lex.story2.akai
+  - ja.lex.story2.aoi
+  - ja.lex.story2.kiiroi
+  - ja.sent.polite-humor
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.folktale-reading-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.story2.shiroi
+  - ja.lex.story2.kuroi
+  - ja.lex.story2.akai
+  - ja.lex.story2.aoi
+  - ja.lex.story2.kiiroi
+  - ja.sent.polite-humor
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.folktale-reading-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.story2.shiroi
+  - ja.lex.story2.kuroi
+  - ja.lex.story2.akai
+  - ja.lex.story2.aoi
+  - ja.lex.story2.kiiroi
+  - ja.sent.polite-humor
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.folktale-reading-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.story2.shiroi
+  - ja.lex.story2.kuroi
+  - ja.lex.story2.akai
+  - ja.lex.story2.aoi
+  - ja.lex.story2.kiiroi
+  - ja.sent.polite-humor
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.folktale-reading-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.polite-humor
+- id: ja.activity.folktale-reading-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

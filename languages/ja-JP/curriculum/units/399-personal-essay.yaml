@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.personal-essay
+goal_id: ja.goal.b1.storytelling
+title: personal essay
+summary: B1 language for personal essay.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.story2.takai2
+  - ja.lex.story2.mijikai2
+  - ja.lex.story2.oishii2
+  - ja.lex.story2.ongaku2
+  - ja.lex.story2.odori2
+  - ja.sent.personal-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.personal-essay-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.story2.takai2
+  - ja.lex.story2.mijikai2
+  - ja.lex.story2.oishii2
+  - ja.lex.story2.ongaku2
+  - ja.lex.story2.odori2
+  - ja.sent.personal-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.personal-essay-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.story2.takai2
+  - ja.lex.story2.mijikai2
+  - ja.lex.story2.oishii2
+  - ja.lex.story2.ongaku2
+  - ja.lex.story2.odori2
+  - ja.sent.personal-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.personal-essay-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.story2.takai2
+  - ja.lex.story2.mijikai2
+  - ja.lex.story2.oishii2
+  - ja.lex.story2.ongaku2
+  - ja.lex.story2.odori2
+  - ja.sent.personal-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.personal-essay-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.story2.takai2
+  - ja.lex.story2.mijikai2
+  - ja.lex.story2.oishii2
+  - ja.lex.story2.ongaku2
+  - ja.lex.story2.odori2
+  - ja.sent.personal-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.personal-essay-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.personal-essay
+- id: ja.activity.personal-essay-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

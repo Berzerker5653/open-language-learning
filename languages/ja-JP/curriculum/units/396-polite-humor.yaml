@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.polite-humor
+goal_id: ja.goal.b1.storytelling
+title: polite humor
+summary: B1 language for polite humor.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.story2.inu
+  - ja.lex.story2.neko
+  - ja.lex.story2.tori
+  - ja.lex.story2.sakana2
+  - ja.lex.story2.mazui
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b1.dakara
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.polite-humor-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.story2.inu
+  - ja.lex.story2.neko
+  - ja.lex.story2.tori
+  - ja.lex.story2.sakana2
+  - ja.lex.story2.mazui
+  - ja.grammar.b1.dakara
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.polite-humor-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.story2.inu
+  - ja.lex.story2.neko
+  - ja.lex.story2.tori
+  - ja.lex.story2.sakana2
+  - ja.lex.story2.mazui
+  - ja.grammar.b1.dakara
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.polite-humor-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.story2.inu
+  - ja.lex.story2.neko
+  - ja.lex.story2.tori
+  - ja.lex.story2.sakana2
+  - ja.lex.story2.mazui
+  - ja.grammar.b1.dakara
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.polite-humor-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.story2.inu
+  - ja.lex.story2.neko
+  - ja.lex.story2.tori
+  - ja.lex.story2.sakana2
+  - ja.lex.story2.mazui
+  - ja.grammar.b1.dakara
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.polite-humor-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.polite-humor-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

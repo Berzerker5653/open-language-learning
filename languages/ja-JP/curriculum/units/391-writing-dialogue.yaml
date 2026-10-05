@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.writing-dialogue
+goal_id: ja.goal.b1.storytelling
+title: writing dialogue
+summary: B1 language for writing dialogue.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.story2.dokugeki
+  - ja.lex.story2.mimi
+  - ja.lex.story2.oto
+  - ja.lex.story2.uta
+  - ja.lex.story2.kuchi2
+  - ja.sent.write-dialogue
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.writing-dialogue-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.story2.dokugeki
+  - ja.lex.story2.mimi
+  - ja.lex.story2.oto
+  - ja.lex.story2.uta
+  - ja.lex.story2.kuchi2
+  - ja.sent.write-dialogue
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.writing-dialogue-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.story2.dokugeki
+  - ja.lex.story2.mimi
+  - ja.lex.story2.oto
+  - ja.lex.story2.uta
+  - ja.lex.story2.kuchi2
+  - ja.sent.write-dialogue
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.writing-dialogue-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.story2.dokugeki
+  - ja.lex.story2.mimi
+  - ja.lex.story2.oto
+  - ja.lex.story2.uta
+  - ja.lex.story2.kuchi2
+  - ja.sent.write-dialogue
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.writing-dialogue-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.story2.dokugeki
+  - ja.lex.story2.mimi
+  - ja.lex.story2.oto
+  - ja.lex.story2.uta
+  - ja.lex.story2.kuchi2
+  - ja.sent.write-dialogue
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.writing-dialogue-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.write-dialogue
+- id: ja.activity.writing-dialogue-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

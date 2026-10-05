@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.story-retelling
+goal_id: ja.goal.b1.storytelling
+title: story retelling
+summary: B1 language for story retelling.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.story2.murasaki
+  - ja.lex.story2.kin
+  - ja.lex.story2.gin
+  - ja.lex.story2.ookii2
+  - ja.lex.story2.chiisai2
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b1.sou-da
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.story-retelling-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.story2.murasaki
+  - ja.lex.story2.kin
+  - ja.lex.story2.gin
+  - ja.lex.story2.ookii2
+  - ja.lex.story2.chiisai2
+  - ja.grammar.b1.sou-da
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.story-retelling-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.story2.murasaki
+  - ja.lex.story2.kin
+  - ja.lex.story2.gin
+  - ja.lex.story2.ookii2
+  - ja.lex.story2.chiisai2
+  - ja.grammar.b1.sou-da
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.story-retelling-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.story2.murasaki
+  - ja.lex.story2.kin
+  - ja.lex.story2.gin
+  - ja.lex.story2.ookii2
+  - ja.lex.story2.chiisai2
+  - ja.grammar.b1.sou-da
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.story-retelling-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.story2.murasaki
+  - ja.lex.story2.kin
+  - ja.lex.story2.gin
+  - ja.lex.story2.ookii2
+  - ja.lex.story2.chiisai2
+  - ja.grammar.b1.sou-da
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.story-retelling-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.story-retelling-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email
