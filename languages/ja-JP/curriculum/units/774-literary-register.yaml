@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.774-literary-register
+goal_id: ja.goal.b2.nuance-register
+title: literary register
+summary: B2 language for literary register.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.reg2.bunpo
+  - ja.lex.reg2.bungaku
+  - ja.lex.reg2.shosetsu
+  - ja.lex.reg2.shi
+  - ja.lex.reg2.koudan
+  - ja.sent.literary-register
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.774-literary-register-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.reg2.bunpo
+  - ja.lex.reg2.bungaku
+  - ja.lex.reg2.shosetsu
+  - ja.lex.reg2.shi
+  - ja.lex.reg2.koudan
+  - ja.sent.literary-register
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.774-literary-register-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.reg2.bunpo
+  - ja.lex.reg2.bungaku
+  - ja.lex.reg2.shosetsu
+  - ja.lex.reg2.shi
+  - ja.lex.reg2.koudan
+  - ja.sent.literary-register
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.774-literary-register-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.reg2.bunpo
+  - ja.lex.reg2.bungaku
+  - ja.lex.reg2.shosetsu
+  - ja.lex.reg2.shi
+  - ja.lex.reg2.koudan
+  - ja.sent.literary-register
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.774-literary-register-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.reg2.bunpo
+  - ja.lex.reg2.bungaku
+  - ja.lex.reg2.shosetsu
+  - ja.lex.reg2.shi
+  - ja.lex.reg2.koudan
+  - ja.sent.literary-register
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.774-literary-register-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.literary-register
+- id: ja.activity.774-literary-register-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

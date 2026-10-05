@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.775-humor-register
+goal_id: ja.goal.b2.nuance-register
+title: humor register
+summary: B2 language for humor register.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.reg2.omoshiroi
+  - ja.lex.reg2.warai
+  - ja.lex.reg2.tsukkomi
+  - ja.lex.reg2.boke
+  - ja.lex.reg2.rakugo
+  - ja.sent.humor-register
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.775-humor-register-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.reg2.omoshiroi
+  - ja.lex.reg2.warai
+  - ja.lex.reg2.tsukkomi
+  - ja.lex.reg2.boke
+  - ja.lex.reg2.rakugo
+  - ja.sent.humor-register
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.775-humor-register-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.reg2.omoshiroi
+  - ja.lex.reg2.warai
+  - ja.lex.reg2.tsukkomi
+  - ja.lex.reg2.boke
+  - ja.lex.reg2.rakugo
+  - ja.sent.humor-register
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.775-humor-register-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.reg2.omoshiroi
+  - ja.lex.reg2.warai
+  - ja.lex.reg2.tsukkomi
+  - ja.lex.reg2.boke
+  - ja.lex.reg2.rakugo
+  - ja.sent.humor-register
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.775-humor-register-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.reg2.omoshiroi
+  - ja.lex.reg2.warai
+  - ja.lex.reg2.tsukkomi
+  - ja.lex.reg2.boke
+  - ja.lex.reg2.rakugo
+  - ja.sent.humor-register
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.775-humor-register-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.humor-register
+- id: ja.activity.775-humor-register-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

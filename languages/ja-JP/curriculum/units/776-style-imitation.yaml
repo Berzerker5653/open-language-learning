@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.776-style-imitation
+goal_id: ja.goal.b2.nuance-register
+title: style imitation
+summary: B2 language for style imitation.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.reg2.hyogen
+  - ja.lex.reg2.jouhou
+  - ja.lex.reg2.tsuushin
+  - ja.lex.reg2.koukyuu
+  - ja.lex.reg2.koukoku
+  - ja.sent.style-imitation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.776-style-imitation-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.reg2.hyogen
+  - ja.lex.reg2.jouhou
+  - ja.lex.reg2.tsuushin
+  - ja.lex.reg2.koukyuu
+  - ja.lex.reg2.koukoku
+  - ja.sent.style-imitation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.776-style-imitation-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.reg2.hyogen
+  - ja.lex.reg2.jouhou
+  - ja.lex.reg2.tsuushin
+  - ja.lex.reg2.koukyuu
+  - ja.lex.reg2.koukoku
+  - ja.sent.style-imitation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.776-style-imitation-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.reg2.hyogen
+  - ja.lex.reg2.jouhou
+  - ja.lex.reg2.tsuushin
+  - ja.lex.reg2.koukyuu
+  - ja.lex.reg2.koukoku
+  - ja.sent.style-imitation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.776-style-imitation-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.reg2.hyogen
+  - ja.lex.reg2.jouhou
+  - ja.lex.reg2.tsuushin
+  - ja.lex.reg2.koukyuu
+  - ja.lex.reg2.koukoku
+  - ja.sent.style-imitation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.776-style-imitation-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.style-imitation
+- id: ja.activity.776-style-imitation-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

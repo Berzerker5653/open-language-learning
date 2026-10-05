@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.777-register-portfolio
+goal_id: ja.goal.b2.nuance-register
+title: register portfolio
+summary: B2 language for register portfolio.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.reg2.denwa
+  - ja.lex.reg2.kangae
+  - ja.lex.reg2.iro
+  - ja.lex.reg2.aji
+  - ja.lex.reg2.dajare
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-ni-shite-wa
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.777-register-portfolio-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.reg2.denwa
+  - ja.lex.reg2.kangae
+  - ja.lex.reg2.iro
+  - ja.lex.reg2.aji
+  - ja.lex.reg2.dajare
+  - ja.grammar.b2-ni-shite-wa
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.777-register-portfolio-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.reg2.denwa
+  - ja.lex.reg2.kangae
+  - ja.lex.reg2.iro
+  - ja.lex.reg2.aji
+  - ja.lex.reg2.dajare
+  - ja.grammar.b2-ni-shite-wa
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.777-register-portfolio-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.reg2.denwa
+  - ja.lex.reg2.kangae
+  - ja.lex.reg2.iro
+  - ja.lex.reg2.aji
+  - ja.lex.reg2.dajare
+  - ja.grammar.b2-ni-shite-wa
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.777-register-portfolio-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.reg2.denwa
+  - ja.lex.reg2.kangae
+  - ja.lex.reg2.iro
+  - ja.lex.reg2.aji
+  - ja.lex.reg2.dajare
+  - ja.grammar.b2-ni-shite-wa
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.777-register-portfolio-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.777-register-portfolio-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

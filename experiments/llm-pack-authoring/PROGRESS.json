@@ -10,7 +10,7 @@
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
-    "units_next": "770",
-    "notes": "B2: b72 (760-769) 7/7; goal nuance-register; pack 770 units; next: units 770+ per plan"
+    "units_next": "780",
+    "notes": "B2: b73 (770-779) 7/7; goal humor-wordplay; pack 780 units; next: units 780+ per plan"
   }
 }
