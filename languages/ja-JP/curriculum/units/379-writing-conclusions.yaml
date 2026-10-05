@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.writing-conclusions
+goal_id: ja.goal.b1.comparison-debate
+title: writing conclusions
+summary: B1 language for writing conclusions.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.debate.koukan
+  - ja.lex.debate.kairyou2
+  - ja.lex.debate.ketsuron2
+  - ja.lex.debate.saisho2
+  - ja.lex.debate.saigo2
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b1.shitsumon-ni-kotae
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.writing-conclusions-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.debate.koukan
+  - ja.lex.debate.kairyou2
+  - ja.lex.debate.ketsuron2
+  - ja.lex.debate.saisho2
+  - ja.lex.debate.saigo2
+  - ja.grammar.b1.shitsumon-ni-kotae
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.writing-conclusions-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.debate.koukan
+  - ja.lex.debate.kairyou2
+  - ja.lex.debate.ketsuron2
+  - ja.lex.debate.saisho2
+  - ja.lex.debate.saigo2
+  - ja.grammar.b1.shitsumon-ni-kotae
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.writing-conclusions-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.debate.koukan
+  - ja.lex.debate.kairyou2
+  - ja.lex.debate.ketsuron2
+  - ja.lex.debate.saisho2
+  - ja.lex.debate.saigo2
+  - ja.grammar.b1.shitsumon-ni-kotae
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.writing-conclusions-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.debate.koukan
+  - ja.lex.debate.kairyou2
+  - ja.lex.debate.ketsuron2
+  - ja.lex.debate.saisho2
+  - ja.lex.debate.saigo2
+  - ja.grammar.b1.shitsumon-ni-kotae
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.writing-conclusions-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.writing-conclusions-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

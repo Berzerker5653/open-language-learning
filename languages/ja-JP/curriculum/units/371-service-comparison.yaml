@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.service-comparison
+goal_id: ja.goal.b1.comparison-debate
+title: service comparison
+summary: B1 language for service comparison.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.debate.kansa
+  - ja.lex.debate.kenko
+  - ja.lex.debate.kenkyu
+  - ja.lex.debate.kento
+  - ja.lex.debate.kaishaku
+  - ja.sent.service-compare
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.service-comparison-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.debate.kansa
+  - ja.lex.debate.kenko
+  - ja.lex.debate.kenkyu
+  - ja.lex.debate.kento
+  - ja.lex.debate.kaishaku
+  - ja.sent.service-compare
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.service-comparison-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.debate.kansa
+  - ja.lex.debate.kenko
+  - ja.lex.debate.kenkyu
+  - ja.lex.debate.kento
+  - ja.lex.debate.kaishaku
+  - ja.sent.service-compare
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.service-comparison-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.debate.kansa
+  - ja.lex.debate.kenko
+  - ja.lex.debate.kenkyu
+  - ja.lex.debate.kento
+  - ja.lex.debate.kaishaku
+  - ja.sent.service-compare
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.service-comparison-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.debate.kansa
+  - ja.lex.debate.kenko
+  - ja.lex.debate.kenkyu
+  - ja.lex.debate.kento
+  - ja.lex.debate.kaishaku
+  - ja.sent.service-compare
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.service-comparison-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.service-compare
+- id: ja.activity.service-comparison-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

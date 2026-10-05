@@ -4,8 +4,8 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2420  2dda84132085  activities/scenarios/first-meeting.yaml
         1561  6b8655e2f7b6  activities/scenarios/ordering.yaml
         1486  b56884663696  activities/scenarios/shopping.yaml
-       13915  83b1dedc629a  assessments/definitions.jsonl
-       36878  c74b54917d8a  curriculum/goals.yaml
+       14272  2b19d6d0d2eb  assessments/definitions.jsonl
+       37686  75429ddc3c05  curriculum/goals.yaml
          919  ad3f5f62d1b3  curriculum/units/000-onramp-greeting.yaml
         1514  bd53db6f2cfe  curriculum/units/010-kana-hiragana-vowels-ko.yaml
         1957  c02be8a37693  curriculum/units/011-kana-hiragana-stn.yaml
@@ -344,8 +344,18 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2198  59e0a772a1bb  curriculum/units/367-compromise-writing.yaml
         2123  b4e313c61f5c  curriculum/units/368-decision-talk.yaml
         2135  28cb2c81145d  curriculum/units/369-reflection-essay.yaml
-       39802  8b632b9739d9  grammar/concepts.jsonl
-        6409  b4a908bdf8e4  grammar/dependencies.yaml
+        2122  c5cb1ee4bf5f  curriculum/units/370-product-reviews.yaml
+        2180  ccc22821a6ef  curriculum/units/371-service-comparison.yaml
+        2129  8b191f44032b  curriculum/units/372-pros-and-cons.yaml
+        2149  2ff205a6671c  curriculum/units/373-explaining-choices.yaml
+        2193  a51e5a0d0a7c  curriculum/units/374-ranking-with-reasons.yaml
+        2138  5c96e11884fa  curriculum/units/375-debate-basics.yaml
+        2126  3c35bd9fd7a6  curriculum/units/376-using-evidence.yaml
+        2174  1059d797294c  curriculum/units/377-counter-arguments.yaml
+        2133  415057c9e85f  curriculum/units/378-conceding-points.yaml
+        2265  579227c443f2  curriculum/units/379-writing-conclusions.yaml
+       40790  0e2fc66003d2  grammar/concepts.jsonl
+        6557  91fab72e0826  grammar/dependencies.yaml
        30369  1401b6e0388e  kanji/entries.jsonl
          485  860cdf8185db  language/identity.yaml
          823  5d72613ab378  language/normalization.yaml
@@ -361,6 +371,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
        40716  1a17a98795c2  lexicon/communication.jsonl
        39768  5d3e7d92a00c  lexicon/culture.jsonl
        19984  23bf749929f6  lexicon/culture2.jsonl
+       39661  df5f277b6d63  lexicon/debate.jsonl
         7349  caf23017d109  lexicon/demonstratives.jsonl
        40282  c3d72b402ae5  lexicon/edu.jsonl
        40188  0b543c090d65  lexicon/edu2.jsonl
@@ -408,7 +419,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
-      187805  772258ac3583  sentences/entries.jsonl
+      192707  20541e653224  sentences/entries.jsonl
         3915  e270f808c26e  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml
          539  842cce82e5d5  stories/first-day.yaml

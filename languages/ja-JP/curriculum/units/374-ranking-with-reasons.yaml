@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.ranking-with-reasons
+goal_id: ja.goal.b1.comparison-debate
+title: ranking with reasons
+summary: B1 language for ranking with reasons.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.debate.yuui
+  - ja.lex.debate.retsu
+  - ja.lex.debate.joretsu
+  - ja.lex.debate.saikou
+  - ja.lex.debate.saiaku
+  - ja.sent.ranking-reasons
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.ranking-with-reasons-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.debate.yuui
+  - ja.lex.debate.retsu
+  - ja.lex.debate.joretsu
+  - ja.lex.debate.saikou
+  - ja.lex.debate.saiaku
+  - ja.sent.ranking-reasons
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.ranking-with-reasons-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.debate.yuui
+  - ja.lex.debate.retsu
+  - ja.lex.debate.joretsu
+  - ja.lex.debate.saikou
+  - ja.lex.debate.saiaku
+  - ja.sent.ranking-reasons
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.ranking-with-reasons-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.debate.yuui
+  - ja.lex.debate.retsu
+  - ja.lex.debate.joretsu
+  - ja.lex.debate.saikou
+  - ja.lex.debate.saiaku
+  - ja.sent.ranking-reasons
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.ranking-with-reasons-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.debate.yuui
+  - ja.lex.debate.retsu
+  - ja.lex.debate.joretsu
+  - ja.lex.debate.saikou
+  - ja.lex.debate.saiaku
+  - ja.sent.ranking-reasons
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.ranking-with-reasons-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.ranking-reasons
+- id: ja.activity.ranking-with-reasons-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

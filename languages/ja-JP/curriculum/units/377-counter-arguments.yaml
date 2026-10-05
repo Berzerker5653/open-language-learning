@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.counter-arguments
+goal_id: ja.goal.b1.comparison-debate
+title: counter arguments
+summary: B1 language for counter arguments.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.debate.meiwaku
+  - ja.lex.debate.ronzetsu
+  - ja.lex.debate.shutten
+  - ja.lex.debate.gimon
+  - ja.lex.debate.ippan
+  - ja.sent.counter-argue
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.counter-arguments-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.debate.meiwaku
+  - ja.lex.debate.ronzetsu
+  - ja.lex.debate.shutten
+  - ja.lex.debate.gimon
+  - ja.lex.debate.ippan
+  - ja.sent.counter-argue
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.counter-arguments-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.debate.meiwaku
+  - ja.lex.debate.ronzetsu
+  - ja.lex.debate.shutten
+  - ja.lex.debate.gimon
+  - ja.lex.debate.ippan
+  - ja.sent.counter-argue
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.counter-arguments-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.debate.meiwaku
+  - ja.lex.debate.ronzetsu
+  - ja.lex.debate.shutten
+  - ja.lex.debate.gimon
+  - ja.lex.debate.ippan
+  - ja.sent.counter-argue
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.counter-arguments-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.debate.meiwaku
+  - ja.lex.debate.ronzetsu
+  - ja.lex.debate.shutten
+  - ja.lex.debate.gimon
+  - ja.lex.debate.ippan
+  - ja.sent.counter-argue
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.counter-arguments-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.counter-argue
+- id: ja.activity.counter-arguments-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

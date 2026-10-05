@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.conceding-points
+goal_id: ja.goal.b1.comparison-debate
+title: conceding points
+summary: B1 language for conceding points.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.debate.tokui
+  - ja.lex.debate.unmei
+  - ja.lex.debate.kika
+  - ja.lex.debate.riyuu
+  - ja.lex.debate.koushin
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b1.ni-yori
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.conceding-points-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.debate.tokui
+  - ja.lex.debate.unmei
+  - ja.lex.debate.kika
+  - ja.lex.debate.riyuu
+  - ja.lex.debate.koushin
+  - ja.grammar.b1.ni-yori
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.conceding-points-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.debate.tokui
+  - ja.lex.debate.unmei
+  - ja.lex.debate.kika
+  - ja.lex.debate.riyuu
+  - ja.lex.debate.koushin
+  - ja.grammar.b1.ni-yori
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.conceding-points-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.debate.tokui
+  - ja.lex.debate.unmei
+  - ja.lex.debate.kika
+  - ja.lex.debate.riyuu
+  - ja.lex.debate.koushin
+  - ja.grammar.b1.ni-yori
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.conceding-points-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.debate.tokui
+  - ja.lex.debate.unmei
+  - ja.lex.debate.kika
+  - ja.lex.debate.riyuu
+  - ja.lex.debate.koushin
+  - ja.grammar.b1.ni-yori
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.conceding-points-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.conceding-points-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

@@ -557,3 +557,10 @@ Score: **7/7**.
 Goal `ja.goal.b1.advice-opinion` complete (355-369). 10 units,
 50-word `lexicon/advice2.jsonl`, 2 grammar (`b1.to-itara-domo`,
 `b1.ni-chuui`), 8 sentences. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 32: B1 units 370-379 (comparison-debate part 1)
+
+Goal `ja.goal.b1.comparison-debate` (prereq advice-opinion,
+mirrored; spans 370-384) started, 10 units, 50-word
+`lexicon/debate.jsonl`, 2 grammar (`b1.ni-yori`,
+`b1.shitsumon-ni-kotae`), 8 sentences, 1 assessment. Score: **7/7**.
