@@ -10,7 +10,7 @@
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
-    "units_next": "640",
-    "notes": "b47-b59 (510-639) 7/7; art-design spans 628-639 (shards formal2+art2); next: units 640+ per plan"
+    "units_next": "650",
+    "notes": "b47-b60 (510-649) 7/7; goal media-critique created (643-649, prereq society-change, shard media3); LESSON: check existing shard filenames before writing (media/media2 existed); next: units 650+"
   }
 }

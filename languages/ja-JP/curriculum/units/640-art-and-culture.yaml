@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.art-and-culture
+goal_id: ja.goal.b2.art-design
+title: art and culture
+summary: B2 language for art and culture.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.media3.bunka3
+  - ja.lex.media3.geijutsu2
+  - ja.lex.media3.tenji2
+  - ja.lex.media3.kata
+  - ja.lex.media3.kairyou2
+  - ja.sent.art-and-culture
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.art-and-culture-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.media3.bunka3
+  - ja.lex.media3.geijutsu2
+  - ja.lex.media3.tenji2
+  - ja.lex.media3.kata
+  - ja.lex.media3.kairyou2
+  - ja.sent.art-and-culture
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.art-and-culture-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.media3.bunka3
+  - ja.lex.media3.geijutsu2
+  - ja.lex.media3.tenji2
+  - ja.lex.media3.kata
+  - ja.lex.media3.kairyou2
+  - ja.sent.art-and-culture
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.art-and-culture-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.media3.bunka3
+  - ja.lex.media3.geijutsu2
+  - ja.lex.media3.tenji2
+  - ja.lex.media3.kata
+  - ja.lex.media3.kairyou2
+  - ja.sent.art-and-culture
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.art-and-culture-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.media3.bunka3
+  - ja.lex.media3.geijutsu2
+  - ja.lex.media3.tenji2
+  - ja.lex.media3.kata
+  - ja.lex.media3.kairyou2
+  - ja.sent.art-and-culture
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.art-and-culture-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.art-and-culture
+- id: ja.activity.art-and-culture-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.aesthetics-essay
+goal_id: ja.goal.b2.art-design
+title: aesthetics essay
+summary: B2 language for aesthetics essay.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.media3.kachi
+  - ja.lex.media3.risou3
+  - ja.lex.media3.genjitsu
+  - ja.lex.media3.jissai
+  - ja.lex.media3.shikou
+  - ja.sent.aesthetics-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.aesthetics-essay-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.media3.kachi
+  - ja.lex.media3.risou3
+  - ja.lex.media3.genjitsu
+  - ja.lex.media3.jissai
+  - ja.lex.media3.shikou
+  - ja.sent.aesthetics-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.aesthetics-essay-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.media3.kachi
+  - ja.lex.media3.risou3
+  - ja.lex.media3.genjitsu
+  - ja.lex.media3.jissai
+  - ja.lex.media3.shikou
+  - ja.sent.aesthetics-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.aesthetics-essay-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.media3.kachi
+  - ja.lex.media3.risou3
+  - ja.lex.media3.genjitsu
+  - ja.lex.media3.jissai
+  - ja.lex.media3.shikou
+  - ja.sent.aesthetics-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.aesthetics-essay-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.media3.kachi
+  - ja.lex.media3.risou3
+  - ja.lex.media3.genjitsu
+  - ja.lex.media3.jissai
+  - ja.lex.media3.shikou
+  - ja.sent.aesthetics-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.aesthetics-essay-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.aesthetics-essay
+- id: ja.activity.aesthetics-essay-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

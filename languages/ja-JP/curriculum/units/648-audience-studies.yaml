@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.audience-studies
+goal_id: ja.goal.b2.media-critique
+title: audience studies
+summary: B2 language for audience studies.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.media3.chousa2
+  - ja.lex.media3.touhyo2
+  - ja.lex.media3.intabyuu
+  - ja.lex.media3.taimu
+  - ja.lex.media3.shaka
+  - ja.sent.audience-studies
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.audience-studies-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.media3.chousa2
+  - ja.lex.media3.touhyo2
+  - ja.lex.media3.intabyuu
+  - ja.lex.media3.taimu
+  - ja.lex.media3.shaka
+  - ja.sent.audience-studies
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.audience-studies-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.media3.chousa2
+  - ja.lex.media3.touhyo2
+  - ja.lex.media3.intabyuu
+  - ja.lex.media3.taimu
+  - ja.lex.media3.shaka
+  - ja.sent.audience-studies
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.audience-studies-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.media3.chousa2
+  - ja.lex.media3.touhyo2
+  - ja.lex.media3.intabyuu
+  - ja.lex.media3.taimu
+  - ja.lex.media3.shaka
+  - ja.sent.audience-studies
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.audience-studies-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.media3.chousa2
+  - ja.lex.media3.touhyo2
+  - ja.lex.media3.intabyuu
+  - ja.lex.media3.taimu
+  - ja.lex.media3.shaka
+  - ja.sent.audience-studies
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.audience-studies-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.audience-studies
+- id: ja.activity.audience-studies-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

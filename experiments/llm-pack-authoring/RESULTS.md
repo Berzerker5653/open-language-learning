@@ -822,3 +822,10 @@ Units 630-639 (art-design), 50 words (`lexicon/art2.jsonl`),
 Goal `ru.goal.a2.wellbeing` created (+2 assessments). Units 140-149,
 50 words (`lexicon/wellbeing.jsonl`), 2 grammar (`a2.dative-health`,
 `a2.imperative-advice`), 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 60
+
+Goal `ja.goal.b2.media-critique` created (+assess, +deps). Units 640-649,
+50 words (`lexicon/media3.jsonl`), 2 grammar (`b2-to-iu-koto`, `b2-wake-da`),
+8 sentences. (First run clobbered existing `media.jsonl`/`media2.jsonl`;
+restored, shard renamed media3.) Score: **7/7**.

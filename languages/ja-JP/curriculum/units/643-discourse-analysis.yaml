@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.discourse-analysis
+goal_id: ja.goal.b2.media-critique
+title: discourse analysis
+summary: B2 language for discourse analysis.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.media3.seiron
+  - ja.lex.media3.kouchiku3
+  - ja.lex.media3.hihan
+  - ja.lex.media3.media
+  - ja.lex.media3.tsuushin5
+  - ja.sent.discourse-analysis
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.discourse-analysis-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.media3.seiron
+  - ja.lex.media3.kouchiku3
+  - ja.lex.media3.hihan
+  - ja.lex.media3.media
+  - ja.lex.media3.tsuushin5
+  - ja.sent.discourse-analysis
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.discourse-analysis-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.media3.seiron
+  - ja.lex.media3.kouchiku3
+  - ja.lex.media3.hihan
+  - ja.lex.media3.media
+  - ja.lex.media3.tsuushin5
+  - ja.sent.discourse-analysis
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.discourse-analysis-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.media3.seiron
+  - ja.lex.media3.kouchiku3
+  - ja.lex.media3.hihan
+  - ja.lex.media3.media
+  - ja.lex.media3.tsuushin5
+  - ja.sent.discourse-analysis
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.discourse-analysis-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.media3.seiron
+  - ja.lex.media3.kouchiku3
+  - ja.lex.media3.hihan
+  - ja.lex.media3.media
+  - ja.lex.media3.tsuushin5
+  - ja.sent.discourse-analysis
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.discourse-analysis-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.discourse-analysis
+- id: ja.activity.discourse-analysis-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

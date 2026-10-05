@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.platform-effects
+goal_id: ja.goal.b2.media-critique
+title: platform effects
+summary: B2 language for platform effects.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.media3.jouhou2
+  - ja.lex.media3.ryutsuu2
+  - ja.lex.media3.shuuryuu
+  - ja.lex.media3.data
+  - ja.lex.media3.denwa2
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-wake-da
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.platform-effects-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.media3.jouhou2
+  - ja.lex.media3.ryutsuu2
+  - ja.lex.media3.shuuryuu
+  - ja.lex.media3.data
+  - ja.lex.media3.denwa2
+  - ja.grammar.b2-wake-da
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.platform-effects-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.media3.jouhou2
+  - ja.lex.media3.ryutsuu2
+  - ja.lex.media3.shuuryuu
+  - ja.lex.media3.data
+  - ja.lex.media3.denwa2
+  - ja.grammar.b2-wake-da
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.platform-effects-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.media3.jouhou2
+  - ja.lex.media3.ryutsuu2
+  - ja.lex.media3.shuuryuu
+  - ja.lex.media3.data
+  - ja.lex.media3.denwa2
+  - ja.grammar.b2-wake-da
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.platform-effects-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.media3.jouhou2
+  - ja.lex.media3.ryutsuu2
+  - ja.lex.media3.shuuryuu
+  - ja.lex.media3.data
+  - ja.lex.media3.denwa2
+  - ja.grammar.b2-wake-da
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.platform-effects-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.platform-effects-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email
