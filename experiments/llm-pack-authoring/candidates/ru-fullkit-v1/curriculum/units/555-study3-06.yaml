@@ -1,0 +1,46 @@
+id: "ru.unit.b2.study3-06"
+goal_id: "ru.goal.b2.academic-study3"
+title: "Explicit"
+summary: "явный, скрытый, очевидный, неочевидный and понятный."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u555-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.study3.yavnyy",
+        "ru.lex.study3.skrytyy",
+        "ru.lex.study3.ochevidnyy",
+        "ru.lex.study3.neochevidnyy",
+        "ru.lex.study3.ponytnyy",
+        "ru.sent.b2.u555",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u555-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u555-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u555"]
+  - id: "ru.activity.b2.u555-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Explicit: method with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse явный (explicit) with скрытый (hidden)."]
+  target_proficiency: "B2"
+  validation_method: "choice"

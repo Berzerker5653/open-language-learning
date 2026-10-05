@@ -1,0 +1,46 @@
+id: "ru.unit.b2.study3-02"
+goal_id: "ru.goal.b2.academic-study3"
+title: "Limitation"
+summary: "ограничение, лимит, квота, барьер and стадия."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u551-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.study3.ogranichenie",
+        "ru.lex.study3.limit",
+        "ru.lex.study3.kvota",
+        "ru.lex.study3.barer",
+        "ru.lex.study3.stadiya",
+        "ru.sent.b2.u551",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u551-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u551-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u551"]
+  - id: "ru.activity.b2.u551-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Limitation: method with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse лимит (limit) with квота (quota)."]
+  target_proficiency: "B2"
+  validation_method: "choice"
