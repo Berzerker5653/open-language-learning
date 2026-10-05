@@ -1,0 +1,46 @@
+id: "ru.unit.a2.instructions-02"
+goal_id: "ru.goal.a2.instructions"
+title: "Tools"
+summary: "инструмент, отвёртка, молоток, гвоздь and линейка."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a2.u181-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.instructions.instrument",
+        "ru.lex.instructions.otvyortka",
+        "ru.lex.instructions.molotok",
+        "ru.lex.instructions.gvozd",
+        "ru.lex.instructions.lineika",
+        "ru.sent.a2.u181",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.a2.u181-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a2.u181-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a2.u181"]
+  - id: "ru.activity.a2.u181-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Tools: instructions with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse молоток (hammer) with отвёртка (screwdriver)."]
+  target_proficiency: "A2"
+  validation_method: "choice"

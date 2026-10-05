@@ -864,3 +864,9 @@ Goal `ru.goal.a2.comparisons` created (+2 assessments). Units 170-179,
 Goal `ja.goal.b2.medicine-society` created (+ASSESS +DEP). Units 670-679
 (psych tail + medicine start), 50 words (`lexicon/med.jsonl`), 2 grammar
 (`b2-ni-wakat-te`, `b2-ppoi`), 8 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 16
+
+Goal `ru.goal.a2.instructions` created (+2 assessments). Units 180-189,
+50 words (`lexicon/instructions.jsonl`), 2 grammar (`a2.imperative-instructions`,
+`a2.infinitive-steps`), 10 sentences. Score: **7/7**.

@@ -1,0 +1,46 @@
+id: "ru.unit.a2.instructions-09"
+goal_id: "ru.goal.a2.instructions"
+title: "Cleaning"
+summary: "вытереть, вымыть, пылесос, губка and средство."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a2.u188-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.instructions.vyteret",
+        "ru.lex.instructions.vymyt",
+        "ru.lex.instructions.pylesos",
+        "ru.lex.instructions.gubka",
+        "ru.lex.instructions.sredstvo",
+        "ru.sent.a2.u188",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.a2.u188-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a2.u188-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a2.u188"]
+  - id: "ru.activity.a2.u188-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Cleaning: instructions with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse вытереть (to wipe) with вымыть (to wash)."]
+  target_proficiency: "A2"
+  validation_method: "choice"
