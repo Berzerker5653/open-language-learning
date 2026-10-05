@@ -887,3 +887,9 @@ Goal `ru.goal.a2.problems-solutions` created (+2 assessments). Units 190-199,
 
 Units 690-699 (urban-life), 50 words (`lexicon/urban2.jsonl`), 2 grammar
 (`b2-wake-ka`, `b2-to-itte`), 8 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 18
+
+Goal `ru.goal.a2.connected-messages` created (+2 assessments). Units 200-209,
+50 words (`lexicon/messages2.jsonl`), 2 grammar (`a2.connectors`,
+`a2.reflexive-feelings`), 10 sentences. Score: **7/7**.

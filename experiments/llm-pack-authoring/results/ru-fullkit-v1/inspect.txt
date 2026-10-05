@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
-       20132  bb19b2954165  assessments/definitions.jsonl
-       28077  aee774a682ca  curriculum/goals.yaml
+       20963  ef31d0b7d9f8  assessments/definitions.jsonl
+       29386  758925fa5780  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -190,17 +190,27 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1499  a3cd9a271913  curriculum/units/187-instructions-08.yaml
         1449  be1e290b4bea  curriculum/units/188-instructions-09.yaml
         1454  604621f8905c  curriculum/units/189-instructions-10.yaml
-        1362  8ce6a7eb373b  curriculum/units/190-problems-solutions-01.yaml
-        1367  b66101d81932  curriculum/units/191-problems-solutions-02.yaml
-        1344  bb35c7380116  curriculum/units/192-problems-solutions-03.yaml
-        1400  4f7791a68dd2  curriculum/units/193-problems-solutions-04.yaml
-        1375  a847f711325d  curriculum/units/194-problems-solutions-05.yaml
-        1384  677c5c34f432  curriculum/units/195-problems-solutions-06.yaml
-        1388  0bdf000ce280  curriculum/units/196-problems-solutions-07.yaml
-        1359  ddb1b42c9143  curriculum/units/197-problems-solutions-08.yaml
-        1380  91dd55d11634  curriculum/units/198-problems-solutions-09.yaml
-        1381  8799b40a6618  curriculum/units/199-problems-solutions-10.yaml
-       25954  b00e52435298  grammar/concepts.jsonl
+        1447  dc031235f5c6  curriculum/units/190-problems-solutions-01.yaml
+        1452  ee9de03ad2ea  curriculum/units/191-problems-solutions-02.yaml
+        1429  f566400ab150  curriculum/units/192-problems-solutions-03.yaml
+        1485  cf538c14a9ae  curriculum/units/193-problems-solutions-04.yaml
+        1460  c98ec2069e62  curriculum/units/194-problems-solutions-05.yaml
+        1469  35df85c96397  curriculum/units/195-problems-solutions-06.yaml
+        1473  5a7ffe5b21c4  curriculum/units/196-problems-solutions-07.yaml
+        1444  04da9c430ca3  curriculum/units/197-problems-solutions-08.yaml
+        1465  86b645c4a0a0  curriculum/units/198-problems-solutions-09.yaml
+        1466  5a781c0da333  curriculum/units/199-problems-solutions-10.yaml
+        1370  4bac5881ea9b  curriculum/units/200-connected-messages-01.yaml
+        1381  c173aa3862bc  curriculum/units/201-connected-messages-02.yaml
+        1357  a91de731f2c0  curriculum/units/202-connected-messages-03.yaml
+        1398  a95b5ac6c825  curriculum/units/203-connected-messages-04.yaml
+        1315  0435340efe57  curriculum/units/204-connected-messages-05.yaml
+        1372  654770960ee3  curriculum/units/205-connected-messages-06.yaml
+        1361  27fb9ad77ac9  curriculum/units/206-connected-messages-07.yaml
+        1378  b89082a81a52  curriculum/units/207-connected-messages-08.yaml
+        1402  c8ba2eb02702  curriculum/units/208-connected-messages-09.yaml
+        1388  27b201ecec6a  curriculum/units/209-connected-messages-10.yaml
+       26983  77fb405d47ab  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        21189  03a4503c7371  lexicon/city.jsonl
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
@@ -212,6 +222,7 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
        20917  300574a2724b  lexicon/home.jsonl
        21889  4721e0675b0c  lexicon/instructions.jsonl
        21605  e163676f7140  lexicon/messages.jsonl
+       21843  8199231c9f6f  lexicon/messages2.jsonl
         3672  8e7e960a1252  lexicon/numbers-time.jsonl
        21375  d93c1521663d  lexicon/pastevents.jsonl
        22380  8c501a5154bc  lexicon/personal.jsonl
@@ -227,5 +238,5 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-       59536  d8a38072342e  sentences/entries.jsonl
+       63149  61ef2ce5137c  sentences/entries.jsonl
          391  74babc055676  sources.jsonl

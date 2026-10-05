@@ -3,9 +3,9 @@
     "plan": "plans/ru-fullkit-v1.yaml",
     "pack": "candidates/ru-fullkit-v1",
     "bands_done": ["on-ramp", "A1"],
-    "units_next": "200",
+    "units_next": "210",
     "last_score": "7/7 (2026-10-04, results/ru-fullkit-v1)",
-    "notes": "A2: ru09-ru17 (110-199) 7/7; goals a2 past-events travel services wellbeing work-study social-plans comparisons instructions problems-solutions; pack 200 units; next: block 200-209 per plan"
+    "notes": "A2: ru09-ru18 (110-209) 7/7; goals a2 past-events travel services wellbeing work-study social-plans comparisons instructions problems-solutions connected-messages; pack 210 units; next: block 210-219 per plan"
   },
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",
