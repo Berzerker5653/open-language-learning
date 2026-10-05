@@ -1088,3 +1088,9 @@ Units 420-429 (evidence, examples, justification), NEW goal `ru.goal.b2.argument
 Units 430-439 (counterarguments and qualification), NEW goal `ru.goal.b2.argumentation3`
 (+2 assessments), 50 words (`lexicon/argue3.jsonl`), 2 grammar (`b2.esli-i`, `b2-pravda`),
 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 42
+
+Units 440-449 (evaluation and reasoned conclusions), NEW goal `ru.goal.b2.argumentation4`
+(+2 assessments), 50 words (`lexicon/argue4.jsonl`), 2 grammar (`b2-sledovatelno`, `b2-s-tochki-zreniya`),
+10 sentences. Score: **7/7**.

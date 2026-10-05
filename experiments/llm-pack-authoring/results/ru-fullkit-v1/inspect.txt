@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
-       34273  4f33c98e253d  assessments/definitions.jsonl
-       49778  5ac9035b7d74  curriculum/goals.yaml
+       35153  aeb051b3781a  assessments/definitions.jsonl
+       51004  407d16ab8396  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -430,21 +430,32 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1475  ac634a51a7e6  curriculum/units/427-argue2-08.yaml
         1455  3f59402cbba1  curriculum/units/428-argue2-09.yaml
         1488  d4a12ece4110  curriculum/units/429-argue2-10.yaml
-        1357  deeab72d5292  curriculum/units/430-argue3-01.yaml
-        1333  9d57ba6cb172  curriculum/units/431-argue3-02.yaml
-        1297  7b900c13e250  curriculum/units/432-argue3-03.yaml
-        1297  e61d882842e7  curriculum/units/433-argue3-04.yaml
-        1370  6b38c7da5407  curriculum/units/434-argue3-05.yaml
-        1360  d5e2549ed0fa  curriculum/units/435-argue3-06.yaml
-        1385  a2b72e7bca4e  curriculum/units/436-argue3-07.yaml
-        1330  30cbc3904f72  curriculum/units/437-argue3-08.yaml
-        1340  88d1bbff0b9a  curriculum/units/438-argue3-09.yaml
-        1350  1dff3cab7fb8  curriculum/units/439-argue3-10.yaml
-       49224  0d16c76d92bf  grammar/concepts.jsonl
+        1442  46791e261716  curriculum/units/430-argue3-01.yaml
+        1418  cffdaf67dcac  curriculum/units/431-argue3-02.yaml
+        1382  1da34d052f26  curriculum/units/432-argue3-03.yaml
+        1382  0e5cea66be71  curriculum/units/433-argue3-04.yaml
+        1455  7534d96a1ec5  curriculum/units/434-argue3-05.yaml
+        1445  42d21b2fb447  curriculum/units/435-argue3-06.yaml
+        1470  666d929cd2df  curriculum/units/436-argue3-07.yaml
+        1415  152300eeff61  curriculum/units/437-argue3-08.yaml
+        1425  920cfb3649f9  curriculum/units/438-argue3-09.yaml
+        1435  de8bff34255d  curriculum/units/439-argue3-10.yaml
+        1448  96ee511e6708  curriculum/units/440-argue4-01.yaml
+        1316  a7ec0778139e  curriculum/units/441-argue4-02.yaml
+        1433  96723753b1a2  curriculum/units/442-argue4-03.yaml
+        1433  b04b97b3d233  curriculum/units/443-argue4-04.yaml
+        1325  d2eb2de07afe  curriculum/units/444-argue4-05.yaml
+        1401  60011dea6602  curriculum/units/445-argue4-06.yaml
+        1334  d2d35507cbe9  curriculum/units/446-argue4-07.yaml
+        1285  57373472f3d7  curriculum/units/447-argue4-08.yaml
+        1307  ab3552ee3b66  curriculum/units/448-argue4-09.yaml
+        1311  6d4539ee693f  curriculum/units/449-argue4-10.yaml
+       50191  ff242c2ef19a  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        19883  88e6a1307edd  lexicon/argue.jsonl
        19764  9c172a07e9a5  lexicon/argue2.jsonl
        19480  d97881020d4f  lexicon/argue3.jsonl
+       19676  d05512711313  lexicon/argue4.jsonl
        21189  03a4503c7371  lexicon/city.jsonl
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
        21726  cc469700bc35  lexicon/comparisons.jsonl
@@ -491,5 +502,5 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-      147104  1a89a433dcfe  sentences/entries.jsonl
+      150725  3825a334d212  sentences/entries.jsonl
          391  74babc055676  sources.jsonl
