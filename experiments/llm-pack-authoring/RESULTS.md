@@ -805,3 +805,9 @@ Goal `ru.goal.a2.travel` created (+2 assessments). Units 120-129,
 Goal `ja.goal.b2.art-design` created (+assess, +deps). Units 620-629,
 50 words (`lexicon/formal2.jsonl`), 2 grammar (`b2-ni-tomonau`, `b2-ni-totte`),
 9 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 11
+
+Goal `ru.goal.a2.services` created (+2 assessments). Units 130-139,
+50 words (`lexicon/services.jsonl`), 2 grammar (`a2.want-accusative`,
+`a2.genitive-negation`), 10 sentences. Score: **7/7**.
