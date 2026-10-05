@@ -1,0 +1,46 @@
+id: "ru.unit.a1.time-plans-03"
+goal_id: "ru.goal.a1.time-plans"
+title: "Months, part one"
+summary: "январь, февраль, март, апрель and май."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u092-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.timeplans.yanvar",
+        "ru.lex.timeplans.fevral",
+        "ru.lex.timeplans.mart",
+        "ru.lex.timeplans.aprel",
+        "ru.lex.timeplans.may",
+        "ru.sent.a1.u092",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u092-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a1.u092-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a1.u092"]
+  - id: "ru.activity.a1.u092-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Months, part one: dates and plans with taught forms only."]
+  prohibited_ambiguity: ["Do not guess month genders; the supplied month forms are masculine."]
+  target_proficiency: "A1"
+  validation_method: "choice"

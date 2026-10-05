@@ -702,3 +702,9 @@ Score: **7/7**.
 Goal `ru.goal.a1.city` created. 10 units, 50-word `lexicon/city.jsonl`,
 2 grammar (`a1.motion-idti-ehat`, `a1.direction-prepositions`), 8 sentences, 2 assessments.
 Score: **7/7**.
+
+## 2026-10-04 — ru-RU agent batch ru07: A1 units 090-099 (time-plans)
+
+Goal `ru.goal.a1.time-plans` created. 10 units, 50-word `lexicon/timeplans.jsonl`,
+2 grammar (`a1.plan-construction`, `a1.time-when`), 8 sentences, 2 assessments.
+Score: **7/7**.

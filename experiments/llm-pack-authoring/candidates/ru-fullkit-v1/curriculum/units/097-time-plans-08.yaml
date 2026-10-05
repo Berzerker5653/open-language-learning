@@ -1,0 +1,46 @@
+id: "ru.unit.a1.time-plans-08"
+goal_id: "ru.goal.a1.time-plans"
+title: "Celebrations"
+summary: "день рождения, праздник, годовщина, сюрприз and свечи."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u097-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.timeplans.den-rozhdeniya",
+        "ru.lex.timeplans.prazdnik",
+        "ru.lex.timeplans.godovshchina",
+        "ru.lex.timeplans.siurpriz",
+        "ru.lex.timeplans.svechi",
+        "ru.sent.a1.u097",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u097-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a1.u097-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a1.u097"]
+  - id: "ru.activity.a1.u097-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Celebrations: dates and plans with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse день рождения (birthday) with праздник (holiday)."]
+  target_proficiency: "A1"
+  validation_method: "choice"

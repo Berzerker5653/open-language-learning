@@ -1,0 +1,48 @@
+id: "ru.unit.a1.time-plans-07"
+goal_id: "ru.goal.a1.time-plans"
+title: "Making plans"
+summary: "вчерашний, завтрашний, записываться, переносить and договориться."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u096-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.timeplans.vcheraishniy",
+        "ru.lex.timeplans.zavtrashniy",
+        "ru.lex.timeplans.zapisat",
+        "ru.lex.timeplans.perenesti",
+        "ru.lex.timeplans.dogovorit",
+        "ru.grammar.a1.plan-construction",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u096-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g [
+        "ru.grammar.a1.plan-construction",
+        "ru.grammar.on-ramp.eto-identification",
+        "ru.grammar.on-ramp.zero-present-copula",
+      ]
+  - id: "ru.activity.a1.u096-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Making plans: dates and plans with taught forms only."]
+  prohibited_ambiguity:
+    [
+      "Do not build future forms of these verbs yourself; use the supplied собираться plus infinitive chunk.",
+    ]
+  target_proficiency: "A1"
+  validation_method: "choice"

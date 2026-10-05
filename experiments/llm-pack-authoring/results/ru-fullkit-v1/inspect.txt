@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
-       11007  822555d9d353  assessments/definitions.jsonl
-       14367  58b92210b314  curriculum/goals.yaml
+       11916  4f29ce4ecca5  assessments/definitions.jsonl
+       15590  a8a8f25b701e  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -91,7 +91,17 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1350  1a70aeee1a81  curriculum/units/087-city-08.yaml
         1428  a0b52a254da8  curriculum/units/088-city-09.yaml
         1434  e0a1899a40c0  curriculum/units/089-city-10.yaml
-       14288  a2cd0570c6b9  grammar/concepts.jsonl
+        1455  04d4e5677b95  curriculum/units/090-time-plans-01.yaml
+        1467  e7dd5583c4fc  curriculum/units/091-time-plans-02.yaml
+        1423  e9dc691178f0  curriculum/units/092-time-plans-03.yaml
+        1419  722937028f56  curriculum/units/093-time-plans-04.yaml
+        1419  518f44899380  curriculum/units/094-time-plans-05.yaml
+        1462  138f4735aa83  curriculum/units/095-time-plans-06.yaml
+        1501  c8a6421f6d01  curriculum/units/096-time-plans-07.yaml
+        1487  cf1f835ece4b  curriculum/units/097-time-plans-08.yaml
+        1449  ded61653e750  curriculum/units/098-time-plans-09.yaml
+        1460  b0c92c4c5750  curriculum/units/099-time-plans-10.yaml
+       15531  26bafc244195  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        21189  03a4503c7371  lexicon/city.jsonl
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
@@ -104,8 +114,9 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
        22380  8c501a5154bc  lexicon/personal.jsonl
        21337  77ca388bc863  lexicon/routines.jsonl
        21290  daeb36ea4066  lexicon/shopping.jsonl
+       21640  21f9a881afb5  lexicon/timeplans.jsonl
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-       20713  dbd2ff69c01a  sentences/entries.jsonl
+       23578  6588d2511f6d  sentences/entries.jsonl
          391  74babc055676  sources.jsonl

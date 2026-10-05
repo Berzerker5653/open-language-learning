@@ -1,0 +1,46 @@
+id: "ru.unit.a1.time-plans-10"
+goal_id: "ru.goal.a1.time-plans"
+title: "Appointments"
+summary: "свидание, упоминать, напомнить, собираться and уважение with the Когда model."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u099-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.timeplans.svidanie",
+        "ru.lex.timeplans.pominut",
+        "ru.lex.timeplans.napomnit",
+        "ru.lex.timeplans.sobratsya",
+        "ru.lex.timeplans.uvazhenie",
+        "ru.grammar.a1.time-when",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u099-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g [
+        "ru.grammar.a1.time-when",
+        "ru.grammar.on-ramp.eto-identification",
+        "ru.grammar.on-ramp.zero-present-copula",
+      ]
+  - id: "ru.activity.a1.u099-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Appointments: dates and plans with taught forms only."]
+  prohibited_ambiguity:
+    ["Do not answer Когда? with a bare nominative; use the supplied в + prepositional time phrase."]
+  target_proficiency: "A1"
+  validation_method: "choice"
