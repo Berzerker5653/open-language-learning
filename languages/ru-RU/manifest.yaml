@@ -1,6 +1,6 @@
 schema_version: "0.2"
-pack_id: "dev.example.ru"
-display_name: "Russian — reading and writing"
+pack_id: "org.openlanguage.ru-ru.reference"
+display_name: "Russian Reference Pack (Draft)"
 version: "0.1.0"
 target_locale: "ru-RU"
 source_locales: ["en-US"]

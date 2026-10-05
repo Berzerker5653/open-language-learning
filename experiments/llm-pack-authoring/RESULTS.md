@@ -1310,3 +1310,9 @@ Score: **7/7**.
 Units 800-809 (integrated grammatical and stylistic revision), goal `ru.goal.b2.style-register` (existing),
 50 words (`lexicon/style4.jsonl`), 2 grammar (`b2-pered-otpravkoy`, `b2-esli-nuzhno`), 10 sentences.
 Plan complete: 810 units (000-809), all 81 blocks. Score: **7/7**.
+
+## 2026-10-05 — ru-RU PROMOTED
+
+`candidates/ru-fullkit-v1/` → `languages/ru-RU/` (pack_id `org.openlanguage.ru-ru.reference`,
+display "Russian Reference Pack (Draft)"). 810 units, all content `draft`/`review_status: draft`.
+Score: **7/7** as `ru-RU-draft`.
