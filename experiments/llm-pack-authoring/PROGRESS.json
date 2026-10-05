@@ -5,7 +5,7 @@
     "bands_done": ["on-ramp"],
     "units_next": "030",
     "last_score": "7/7 (2026-10-04, results/ru-fullkit-v1)",
-    "notes": "units 020-029 reserved for external model Phase 2; if it never arrives, agent takes them over and records it here"
+    "notes": "external model Phase 2 (units 020-029 personal-details) received 2026-10-04, merged via parse_response.py, 7/7; pack now 30 units, 7 goals, 100 lex, 9 grammar, 11 sentences, 14 assessments; agent authors 030+ (plan blocks 030-039 people-family next)"
   },
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",

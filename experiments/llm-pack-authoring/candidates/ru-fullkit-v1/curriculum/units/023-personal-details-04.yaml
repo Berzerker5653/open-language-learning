@@ -1,0 +1,44 @@
+id: "ru.unit.a1.personal-details-04"
+goal_id: "ru.goal.a1.personal-details"
+title: "Origin and the genitive"
+summary: "Read four country names and the origin preposition. Practice their taught genitive forms and recognize possession and absence patterns with previously learned words."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u023-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.personal.iz",
+        "ru.lex.personal.rossiya",
+        "ru.lex.personal.kanada",
+        "ru.lex.personal.frantsiya",
+        "ru.lex.personal.germaniya",
+        "ru.lex.greetings.net",
+        "ru.lex.personal.ya",
+        "ru.lex.personal.ty",
+        "ru.lex.personal.my",
+        "ru.lex.personal.vy",
+        "ru.lex.everyday.kniga",
+      ]
+  - id: "ru.activity.a1.u023-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs: &g ["ru.grammar.a1.genitive-basic", "ru.grammar.a1.noun-gender"]
+  - id: "ru.activity.a1.u023-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Origin from a named country and basic genitive relationships."]
+  prohibited_ambiguity:
+    ["A country of origin is not automatically a claim about citizenship or ethnicity."]
+  target_proficiency: "A1"
+  validation_method: "choice"

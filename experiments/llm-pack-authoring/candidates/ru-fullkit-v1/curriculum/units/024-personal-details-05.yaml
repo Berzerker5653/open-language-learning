@@ -1,0 +1,51 @@
+id: "ru.unit.a1.personal-details-05"
+goal_id: "ru.goal.a1.personal-details"
+title: "Age and the person concerned"
+summary: "Learn age, year, twenty, thirty and the quantity question word. Match dative pronoun forms to people; the number-year agreement practice follows in unit 025."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u024-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.personal.god",
+        "ru.lex.personal.vozrast",
+        "ru.lex.personal.dvadtsat",
+        "ru.lex.personal.tridtsat",
+        "ru.lex.personal.skolko",
+        "ru.lex.personal.ya",
+        "ru.lex.personal.ty",
+        "ru.lex.personal.on",
+        "ru.lex.personal.ona",
+        "ru.lex.personal.my",
+        "ru.lex.personal.vy",
+        "ru.lex.personal.anna",
+        "ru.lex.personal.ivan",
+      ]
+  - id: "ru.activity.a1.u024-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g [
+        "ru.grammar.a1.dative-recipient-age",
+        "ru.grammar.a1.subject-pronouns",
+        "ru.grammar.a1.noun-gender",
+      ]
+  - id: "ru.activity.a1.u024-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["The dative person in a simple age statement."]
+  prohibited_ambiguity:
+    ["Do not request a full age sentence before the number-year pattern is practiced."]
+  target_proficiency: "A1"
+  validation_method: "choice"

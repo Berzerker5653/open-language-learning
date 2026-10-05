@@ -1,0 +1,57 @@
+id: "ru.unit.a1.personal-details-06"
+goal_id: "ru.goal.a1.personal-details"
+title: "Numbers for age and form fields"
+summary: "Read ten through thirteen and forty, recycling the earlier numbers. Match digits and number words, then choose the supplied year form; calendar cases are reserved for later drills."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u025-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.personal.desyat",
+        "ru.lex.personal.odinnadtsat",
+        "ru.lex.personal.dvenadtsat",
+        "ru.lex.personal.trinadtsat",
+        "ru.lex.personal.sorok",
+        "ru.lex.personal.god",
+        "ru.lex.personal.vozrast",
+        "ru.lex.personal.dvadtsat",
+        "ru.lex.personal.tridtsat",
+        "ru.lex.numbers-time.nol",
+        "ru.lex.numbers-time.odin",
+        "ru.lex.numbers-time.dva",
+        "ru.lex.numbers-time.tri",
+        "ru.lex.numbers-time.chetyre",
+        "ru.lex.numbers-time.pyat",
+        "ru.lex.numbers-time.shest",
+        "ru.lex.numbers-time.sem",
+        "ru.lex.numbers-time.vosem",
+        "ru.lex.numbers-time.devyat",
+      ]
+  - id: "ru.activity.a1.u025-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g [
+        "ru.grammar.a1.numerals-time",
+        "ru.grammar.a1.genitive-basic",
+        "ru.grammar.a1.dative-recipient-age",
+      ]
+  - id: "ru.activity.a1.u025-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Numbers and the matching year form in an age expression."]
+  prohibited_ambiguity:
+    ["Do not require calendar vocabulary, oblique numerals or spoken ordinal dates here."]
+  target_proficiency: "A1"
+  validation_method: "choice"

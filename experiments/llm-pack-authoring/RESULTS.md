@@ -657,3 +657,12 @@ Score: **7/7**.
 Goal `ja.goal.b2.film-analysis` created (500-514). 10 units,
 50-word `lexicon/film.jsonl`, 2 grammar (`b2.ni-tsurete`, `b2.dake-dewa`),
 8 sentences, assessment `ja.assess.film-analysis`. Score: **7/7**.
+
+## 2026-10-04 — ru-RU Phase 2 merged (units 020-029 personal-details)
+
+External model response (`responses/phase2-personal-details.md`) parsed via
+`parse_response.py` into `candidates/ru-fullkit-v1/`: 10 units, goal
+`ru.goal.a1.personal-details`, 50 new lex (`lexicon/personal.jsonl` full
+supersede, 60 total), 6 grammar, 4 sentences, 2 assessments. Pack totals:
+30 units, 7 goals, 100 lex, 9 grammar, 11 sentences, 14 assessments.
+Score: **7/7**.

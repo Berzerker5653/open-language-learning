@@ -1,0 +1,39 @@
+id: "ru.unit.a1.personal-details-07"
+goal_id: "ru.goal.a1.personal-details"
+title: "Names and further countries"
+summary: "Learn two names and three further countries. Read the origin model, complete its country form and write an analogous identity or origin statement using declared words."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u026-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.personal.anton",
+        "ru.lex.personal.mariya",
+        "ru.lex.personal.angliya",
+        "ru.lex.personal.italiya",
+        "ru.lex.personal.ispaniya",
+        "ru.lex.personal.iz",
+        "ru.sent.a1.u026",
+      ]
+  - id: "ru.activity.a1.u026-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a1.u026"]
+  - id: "ru.activity.a1.u026-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: ["ru.grammar.on-ramp.zero-present-copula", "ru.grammar.a1.genitive-basic"]
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["A named person is from the stated country."]
+  prohibited_ambiguity: ["Do not infer citizenship from an origin statement."]
+  target_proficiency: "A1"
+  validation_method: "choice"

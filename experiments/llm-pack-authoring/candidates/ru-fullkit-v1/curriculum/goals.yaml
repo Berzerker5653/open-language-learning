@@ -117,3 +117,65 @@ goals:
       tool: "GPT-6 Astra Pro"
       date: "2026-10-04"
       notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.a1.personal-details"
+    description: "Read and complete simple personal profiles with names, origin, age, and contact details."
+    band: "A1"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - {
+          target: "ru.goal.on-ramp.cyrillic",
+          dimension: "orthography-recognition",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.on-ramp.self-introduction",
+          dimension: "comprehension-reading",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.on-ramp.greetings",
+          dimension: "recall-meaning",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.on-ramp.everyday",
+          dimension: "recall-meaning",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.on-ramp.classroom",
+          dimension: "recall-meaning",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.on-ramp.numbers",
+          dimension: "recall-meaning",
+          required_state: "independent",
+          strength: "hard",
+        }
+    required_concepts:
+      [
+        "ru.grammar.a1.subject-pronouns",
+        "ru.grammar.on-ramp.zero-present-copula",
+        "ru.grammar.a1.noun-gender",
+        "ru.grammar.a1.questions",
+        "ru.grammar.on-ramp.eto-identification",
+        "ru.grammar.a1.genitive-basic",
+        "ru.grammar.a1.dative-recipient-age",
+        "ru.grammar.a1.numerals-time",
+      ]
+    assessment_ids:
+      ["ru.assess.a1.personal-details-reading", "ru.assess.a1.personal-details-writing"]
+    transfer_required: false
+    sources: ["ru-original"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "GPT-6 Astra Pro"
+      date: "2026-10-04"
+      notes: "ai-drafted; needs dictionary sourcing and human review"

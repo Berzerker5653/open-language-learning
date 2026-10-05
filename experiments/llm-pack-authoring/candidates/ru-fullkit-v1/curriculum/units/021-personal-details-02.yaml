@@ -1,0 +1,42 @@
+id: "ru.unit.a1.personal-details-02"
+goal_id: "ru.goal.a1.personal-details"
+title: "Gender in personal information"
+summary: "Read country, city and contact labels. Sort the taught nouns by gender, using earlier family and classroom nouns for exceptions rather than guessing from English."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u021-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.personal.strana",
+        "ru.lex.personal.gorod",
+        "ru.lex.personal.adres",
+        "ru.lex.personal.telefon",
+        "ru.lex.personal.pasport",
+        "ru.lex.everyday.mama",
+        "ru.lex.everyday.papa",
+        "ru.lex.personal.imya",
+        "ru.lex.classroom.slovo",
+        "ru.lex.everyday.kniga",
+      ]
+  - id: "ru.activity.a1.u021-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs: &g ["ru.grammar.a1.noun-gender"]
+  - id: "ru.activity.a1.u021-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Gender classification of the taught nouns."]
+  prohibited_ambiguity: ["A soft sign alone does not determine gender; keep the taught exceptions."]
+  target_proficiency: "A1"
+  validation_method: "choice"
