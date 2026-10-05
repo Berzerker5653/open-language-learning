@@ -799,3 +799,43 @@ goals:
       model: "strata/qwen3.8-flash-next-iq3_s"
       date: "2026-10-05"
       notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.a2.problems-solutions"
+    description: "Describe problems, make requests, and agree on remedies."
+    band: "A2"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - {
+          target: "ru.goal.a2.instructions",
+          dimension: "comprehension-reading",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.a1.time-plans",
+          dimension: "comprehension-reading",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.on-ramp.everyday",
+          dimension: "recall-meaning",
+          required_state: "independent",
+          strength: "hard",
+        }
+    required_concepts:
+      [
+        "ru.grammar.a2.prosba-requests",
+        "ru.grammar.a2.genitive-shortage",
+        "ru.grammar.on-ramp.zero-present-copula",
+      ]
+    assessment_ids:
+      ["ru.assess.a2.problems-solutions-reading", "ru.assess.a2.problems-solutions-writing"]
+    transfer_required: false
+    sources: ["ru-original"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "omp"
+      model: "strata/qwen3.8-flash-next-iq3_s"
+      date: "2026-10-05"
+      notes: "ai-drafted; needs dictionary sourcing and human review"

@@ -876,3 +876,9 @@ Goal `ru.goal.a2.instructions` created (+2 assessments). Units 180-189,
 Goal `ja.goal.b2.urban-life` created (+ASSESS +DEP). Units 680-689
 (medicine tail + urban start), 50 words (`med2.jsonl`, `urban.jsonl`), 2 grammar
 (`b2-dake-atte`, `b2-muke-no`), 8 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 17
+
+Goal `ru.goal.a2.problems-solutions` created (+2 assessments). Units 190-199,
+50 words (`lexicon/problems.jsonl`), 2 grammar (`a2.prosba-requests`,
+`a2.genitive-shortage`), 10 sentences. Score: **7/7**.

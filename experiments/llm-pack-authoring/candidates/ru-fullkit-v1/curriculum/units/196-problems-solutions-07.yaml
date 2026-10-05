@@ -1,0 +1,46 @@
+id: "ru.unit.a2.problems-solutions-07"
+goal_id: "ru.goal.a2.problems-solutions"
+title: "Running short"
+summary: "не хватать, недостаточно, кончиться, запас and излишек."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a2.u196-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.problems.ne-hvatat",
+        "ru.lex.problems.nedostatochno",
+        "ru.lex.problems.konchitsya",
+        "ru.lex.problems.zapad2",
+        "ru.lex.problems.izlishok",
+        "ru.sent.a2.u196",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.a2.u196-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a2.u196-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a2.u196"]
+  - id: "ru.activity.a2.u196-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Running short: problems with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse запас (reserve) with излишек (excess)."]
+  target_proficiency: "A2"
+  validation_method: "choice"

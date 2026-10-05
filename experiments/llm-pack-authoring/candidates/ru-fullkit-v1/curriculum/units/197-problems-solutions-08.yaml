@@ -1,0 +1,46 @@
+id: "ru.unit.a2.problems-solutions-08"
+goal_id: "ru.goal.a2.problems-solutions"
+title: "Enough or not"
+summary: "достаточно, полный, пустой, целый and половина."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a2.u197-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.problems.dostatochno",
+        "ru.lex.problems.polnyi",
+        "ru.lex.problems.pustoi",
+        "ru.lex.problems.tsely",
+        "ru.lex.problems.polovina",
+        "ru.sent.a2.u197",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.a2.u197-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a2.u197-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a2.u197"]
+  - id: "ru.activity.a2.u197-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Enough or not: problems with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse полный (full) with пустой (empty)."]
+  target_proficiency: "A2"
+  validation_method: "choice"
