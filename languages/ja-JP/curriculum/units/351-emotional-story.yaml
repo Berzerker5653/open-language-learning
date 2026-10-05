@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.emotional-story
+goal_id: ja.goal.b1.emotions-personality
+title: emotional story
+summary: B1 language for emotional story.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.emotion2.odoroki
+  - ja.lex.emotion2.uragiri
+  - ja.lex.emotion2.shippai
+  - ja.lex.emotion2.seika
+  - ja.lex.emotion2.nukumori
+  - ja.sent.emotional-story
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.emotional-story-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.emotion2.odoroki
+  - ja.lex.emotion2.uragiri
+  - ja.lex.emotion2.shippai
+  - ja.lex.emotion2.seika
+  - ja.lex.emotion2.nukumori
+  - ja.sent.emotional-story
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.emotional-story-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.emotion2.odoroki
+  - ja.lex.emotion2.uragiri
+  - ja.lex.emotion2.shippai
+  - ja.lex.emotion2.seika
+  - ja.lex.emotion2.nukumori
+  - ja.sent.emotional-story
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.emotional-story-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.emotion2.odoroki
+  - ja.lex.emotion2.uragiri
+  - ja.lex.emotion2.shippai
+  - ja.lex.emotion2.seika
+  - ja.lex.emotion2.nukumori
+  - ja.sent.emotional-story
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.emotional-story-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.emotion2.odoroki
+  - ja.lex.emotion2.uragiri
+  - ja.lex.emotion2.shippai
+  - ja.lex.emotion2.seika
+  - ja.lex.emotion2.nukumori
+  - ja.sent.emotional-story
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.emotional-story-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.emotional-story
+- id: ja.activity.emotional-story-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

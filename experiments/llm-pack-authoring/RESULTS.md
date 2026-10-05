@@ -542,3 +542,12 @@ Goal `ja.goal.b1.emotions-personality` (prereq travel-extended,
 mirrored; spans 340-354) started, 10 units, 50-word
 `lexicon/emotion.jsonl`, 2 grammar (`b1.ni-kuru`, `b1.wake-da`),
 8 sentences, 1 assessment. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 30: B1 units 350-359 (emotions complete, advice-opinion start)
+
+Goal `ja.goal.b1.emotions-personality` complete (340-354). Goal
+`ja.goal.b1.advice-opinion` (prereq emotions-personality, mirrored;
+spans 355-369) started, 5 units. 10 units, 50 words split across
+`lexicon/emotion2.jsonl` + `lexicon/advice.jsonl`, 2 grammar
+(`b1.hou-ga-yoi`, `b1.to-omoimasu`), 8 sentences, 1 assessment.
+Score: **7/7**.

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.emotional-advice
+goal_id: ja.goal.b1.emotions-personality
+title: emotional advice
+summary: B1 language for emotional advice.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.emotion2.setsunai
+  - ja.lex.emotion2.koto
+  - ja.lex.emotion2.honto
+  - ja.lex.emotion2.tashika
+  - ja.lex.emotion2.hakkiri
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b1.hou-ga-yoi
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.emotional-advice-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.emotion2.setsunai
+  - ja.lex.emotion2.koto
+  - ja.lex.emotion2.honto
+  - ja.lex.emotion2.tashika
+  - ja.lex.emotion2.hakkiri
+  - ja.grammar.b1.hou-ga-yoi
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.emotional-advice-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.emotion2.setsunai
+  - ja.lex.emotion2.koto
+  - ja.lex.emotion2.honto
+  - ja.lex.emotion2.tashika
+  - ja.lex.emotion2.hakkiri
+  - ja.grammar.b1.hou-ga-yoi
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.emotional-advice-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.emotion2.setsunai
+  - ja.lex.emotion2.koto
+  - ja.lex.emotion2.honto
+  - ja.lex.emotion2.tashika
+  - ja.lex.emotion2.hakkiri
+  - ja.grammar.b1.hou-ga-yoi
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.emotional-advice-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.emotion2.setsunai
+  - ja.lex.emotion2.koto
+  - ja.lex.emotion2.honto
+  - ja.lex.emotion2.tashika
+  - ja.lex.emotion2.hakkiri
+  - ja.grammar.b1.hou-ga-yoi
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.emotional-advice-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.emotional-advice-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

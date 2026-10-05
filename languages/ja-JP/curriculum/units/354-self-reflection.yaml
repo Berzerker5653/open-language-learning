@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.self-reflection
+goal_id: ja.goal.b1.emotions-personality
+title: self reflection
+summary: B1 language for self reflection.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.emotion2.namida
+  - ja.lex.emotion2.kagayaki
+  - ja.lex.emotion2.risou
+  - ja.lex.emotion2.mokuteki
+  - ja.lex.emotion2.karami
+  - ja.sent.self-reflect
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.self-reflection-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.emotion2.namida
+  - ja.lex.emotion2.kagayaki
+  - ja.lex.emotion2.risou
+  - ja.lex.emotion2.mokuteki
+  - ja.lex.emotion2.karami
+  - ja.sent.self-reflect
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.self-reflection-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.emotion2.namida
+  - ja.lex.emotion2.kagayaki
+  - ja.lex.emotion2.risou
+  - ja.lex.emotion2.mokuteki
+  - ja.lex.emotion2.karami
+  - ja.sent.self-reflect
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.self-reflection-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.emotion2.namida
+  - ja.lex.emotion2.kagayaki
+  - ja.lex.emotion2.risou
+  - ja.lex.emotion2.mokuteki
+  - ja.lex.emotion2.karami
+  - ja.sent.self-reflect
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.self-reflection-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.emotion2.namida
+  - ja.lex.emotion2.kagayaki
+  - ja.lex.emotion2.risou
+  - ja.lex.emotion2.mokuteki
+  - ja.lex.emotion2.karami
+  - ja.sent.self-reflect
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.self-reflection-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.self-reflect
+- id: ja.activity.self-reflection-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
