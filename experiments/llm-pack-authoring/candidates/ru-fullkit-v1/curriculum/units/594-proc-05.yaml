@@ -1,0 +1,47 @@
+id: "ru.unit.b2.proc-05"
+goal_id: "ru.goal.b2.professional-writing"
+title: "Delegation"
+summary: "распределить, делегировать, делегирование, эскалация and эскалировать."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u594-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.prof.raspredelit",
+        "ru.lex.prof.delegirovat",
+        "ru.lex.prof.delegirovanie",
+        "ru.lex.prof.eskalcia",
+        "ru.lex.prof.eskalirovat",
+        "ru.sent.b2.u594",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u594-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u594-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u594"]
+  - id: "ru.activity.b2.u594-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Delegation: business letter with taught forms only."]
+  prohibited_ambiguity:
+    ["Do not confuse делегировать (to delegate) with эскалировать (to escalate)."]
+  target_proficiency: "B2"
+  validation_method: "choice"

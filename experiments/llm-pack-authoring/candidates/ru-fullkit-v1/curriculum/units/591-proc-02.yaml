@@ -1,0 +1,46 @@
+id: "ru.unit.b2.proc-02"
+goal_id: "ru.goal.b2.professional-writing"
+title: "Approval chain"
+summary: "утверждённый, согласованный, параф, исполнитель and подрядчик."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u591-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.prof.utverzhdennyy",
+        "ru.lex.prof.soglasovannyy",
+        "ru.lex.prof.paraf",
+        "ru.lex.prof.ispolnitel",
+        "ru.lex.prof.podryadchik",
+        "ru.sent.b2.u591",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u591-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u591-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u591"]
+  - id: "ru.activity.b2.u591-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Approval chain: business letter with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse исполнитель (executor) with подрядчик (contractor)."]
+  target_proficiency: "B2"
+  validation_method: "choice"
