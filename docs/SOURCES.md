@@ -83,6 +83,22 @@ Metadata checked 2026-10-02: Common Voice Scripted Speech 27.0 Japanese, CC0-1.0
 Separate access conditions on the release page prohibit attempting speaker identification and re-hosting/re-sharing the dataset. A CC0 label does not waive those service conditions. Do not bundle/re-host raw benchmark audio; fetch from upstream under the applicable terms and retain dataset/version/hash/consent records.
 Warning: exact releases, sizes, access process and conditions change; verify at acquisition.
 
+## Dictionary data used for verification (2026-10-05 external review)
+
+### jmdict-simplified (ja-JP verification)
+URL: https://github.com/scriptin/jmdict-simplified
+Release: 3.6.2+20260928191014, `jmdict-eng` JSON; sha256 5f54504a62a7f45741e1bf6fd28f6e1e5add6405f2829748cc004a802839a3aa.
+License: CC BY-SA 4.0 (underlying JMdict data © EDRDG).
+Role: verification pointer for the ja-JP pack — entry forms/readings/glosses spot-checked against this exact release (2,958 of 3,922 entries matched form+meaning; divergences queued for human review). Registered in `languages/ja-JP/sources.jsonl` as `jmdict-simplified` with `content_hash`.
+Boundary: NOT bundled or mirrored in this repo; no dictionary definition text reproduced in pack content; packs remain CC0/CC BY project-authored wording. See docs/review/2026-10-05-external-pack-review.md.
+
+### Zalizniak 6th ed. data via gramdict/zalizniak-2010 (ru-RU verification)
+URL: https://github.com/gramdict/zalizniak-2010
+Checkout: git commit c39322cb50aec024dd46aa182796520f77bf3dab; content_hash 2c35b16f02cc468f7abf28868a0e964063ff2f2ad5b98e6b3865ad0aecd456d7 = sha256 of the sha256sum manifest over `dictionary/Нарицательные` + `dictionary/Глаголы` (find -type f | LC_ALL=C sort | xargs sha256sum | sha256sum).
+License: CC BY-NC 4.0 (rights-holder-published; non-commercial verification use only).
+Role: verification pointer for the ru-RU pack — stress marks and word forms checked against this exact checkout (3,684 of 4,000 entries matched a headword; 0 stress mismatches after repair). Registered in `languages/ru-RU/sources.jsonl` as `zalizniak-2010` with `content_hash`.
+Boundary: NOT bundled or mirrored in this repo; no dictionary text reproduced in pack content; packs remain CC0. See docs/review/2026-10-05-external-pack-review.md.
+
 ## Application framework
 
 ### Tauri 2
