@@ -1,0 +1,46 @@
+id: "ru.unit.b2.risk-06"
+goal_id: "ru.goal.b2.science-environment"
+title: "Emergency"
+summary: "аварийный, потери, эвакуация, эвакуировать and кризисный."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u725-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.sci.avariynyy",
+        "ru.lex.sci.poteri",
+        "ru.lex.sci.evakuaciya",
+        "ru.lex.sci.evakuirovat",
+        "ru.lex.sci.krizisnyy",
+        "ru.sent.b2.u725",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u725-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u725-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u725"]
+  - id: "ru.activity.b2.u725-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Emergency: science report with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse эвакуация (evacuation) with предотвращение (prevention)."]
+  target_proficiency: "B2"
+  validation_method: "choice"

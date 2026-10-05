@@ -710,17 +710,27 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1488  d7683c4b3192  curriculum/units/707-tec-08.yaml
         1401  e56b732883ae  curriculum/units/708-tec-09.yaml
         1433  1ed897669e82  curriculum/units/709-tec-10.yaml
-        1340  7032edc2c392  curriculum/units/710-env-01.yaml
-        1344  021a45109cff  curriculum/units/711-env-02.yaml
-        1383  9dd73403d154  curriculum/units/712-env-03.yaml
-        1371  572d88902079  curriculum/units/713-env-04.yaml
-        1394  81913a459b40  curriculum/units/714-env-05.yaml
-        1375  cd4949b92fb1  curriculum/units/715-env-06.yaml
-        1407  0a6be912da5b  curriculum/units/716-env-07.yaml
-        1353  6bf32b7b7ff1  curriculum/units/717-env-08.yaml
-        1346  49ca09044ab2  curriculum/units/718-env-09.yaml
-        1376  559107a1a5ce  curriculum/units/719-env-10.yaml
-       75929  9c944d819b94  grammar/concepts.jsonl
+        1425  4d4bc3b29646  curriculum/units/710-env-01.yaml
+        1429  ded0db24a3d2  curriculum/units/711-env-02.yaml
+        1468  f18015a126fb  curriculum/units/712-env-03.yaml
+        1456  7716e96aaea9  curriculum/units/713-env-04.yaml
+        1479  bd8a2adcd853  curriculum/units/714-env-05.yaml
+        1460  c6c3db4170ff  curriculum/units/715-env-06.yaml
+        1496  17d658ebf46a  curriculum/units/716-env-07.yaml
+        1438  80354713ecf4  curriculum/units/717-env-08.yaml
+        1431  a38940d9d5bc  curriculum/units/718-env-09.yaml
+        1461  c888ffe5929c  curriculum/units/719-env-10.yaml
+        1457  870b96cc4bdc  curriculum/units/720-risk-01.yaml
+        1434  3e31b6a59ebe  curriculum/units/721-risk-02.yaml
+        1384  cfa854351e66  curriculum/units/722-risk-03.yaml
+        1363  e269f3deecb7  curriculum/units/723-risk-04.yaml
+        1367  903b27258805  curriculum/units/724-risk-05.yaml
+        1381  4ce06a91736b  curriculum/units/725-risk-06.yaml
+        1463  961d71b00026  curriculum/units/726-risk-07.yaml
+        1399  2eae01b9e373  curriculum/units/727-risk-08.yaml
+        1420  12c590e5c741  curriculum/units/728-risk-09.yaml
+        1375  42cee3c2383e  curriculum/units/729-risk-10.yaml
+       76912  7aa9b833d3ba  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        19883  88e6a1307edd  lexicon/argue.jsonl
        19764  9c172a07e9a5  lexicon/argue2.jsonl
@@ -771,6 +781,7 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
        20360  bb5b84f2b430  lexicon/sci.jsonl
        20013  98a3065aacd9  lexicon/sci2.jsonl
        19855  de3c3f674710  lexicon/sci3.jsonl
+       20193  3e45e5af37ea  lexicon/sci4.jsonl
        21837  78c9c9a40760  lexicon/services.jsonl
        21290  daeb36ea4066  lexicon/shopping.jsonl
        20502  98228ed8a718  lexicon/soc.jsonl
@@ -799,5 +810,5 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-      250463  b2e72e310ae4  sentences/entries.jsonl
+      254192  6d696bb6f128  sentences/entries.jsonl
          391  74babc055676  sources.jsonl
