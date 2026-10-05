@@ -651,3 +651,9 @@ Goal `ja.goal.b2.literature-study` created (484-498). 10 units,
 Goal `ja.goal.b2.literature-study` complete (484-499). 5 units,
 25-word `lexicon/lit3.jsonl`, 1 grammar (`b2.ni-yoru-to`), 4 sentences.
 Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 46: B2 units 500-509 (film-analysis start)
+
+Goal `ja.goal.b2.film-analysis` created (500-514). 10 units,
+50-word `lexicon/film.jsonl`, 2 grammar (`b2.ni-tsurete`, `b2.dake-dewa`),
+8 sentences, assessment `ja.assess.film-analysis`. Score: **7/7**.

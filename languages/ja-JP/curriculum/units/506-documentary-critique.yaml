@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.documentary-critique
+goal_id: ja.goal.b2.film-analysis
+title: documentary critique
+summary: B2 language for documentary critique.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.film.kiroku
+  - ja.lex.film.hihyou
+  - ja.lex.film.hakyuu
+  - ja.lex.film.katsuyaku
+  - ja.lex.film.zokusei
+  - ja.sent.documentary-critique
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.documentary-critique-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.film.kiroku
+  - ja.lex.film.hihyou
+  - ja.lex.film.hakyuu
+  - ja.lex.film.katsuyaku
+  - ja.lex.film.zokusei
+  - ja.sent.documentary-critique
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.documentary-critique-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.film.kiroku
+  - ja.lex.film.hihyou
+  - ja.lex.film.hakyuu
+  - ja.lex.film.katsuyaku
+  - ja.lex.film.zokusei
+  - ja.sent.documentary-critique
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.documentary-critique-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.film.kiroku
+  - ja.lex.film.hihyou
+  - ja.lex.film.hakyuu
+  - ja.lex.film.katsuyaku
+  - ja.lex.film.zokusei
+  - ja.sent.documentary-critique
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.documentary-critique-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.film.kiroku
+  - ja.lex.film.hihyou
+  - ja.lex.film.hakyuu
+  - ja.lex.film.katsuyaku
+  - ja.lex.film.zokusei
+  - ja.sent.documentary-critique
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.documentary-critique-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.documentary-critique
+- id: ja.activity.documentary-critique-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

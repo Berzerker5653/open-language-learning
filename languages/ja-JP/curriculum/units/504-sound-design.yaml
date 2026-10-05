@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.sound-design
+goal_id: ja.goal.b2.film-analysis
+title: sound design
+summary: B2 language for sound design.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.film.setkei
+  - ja.lex.film.onsetsu
+  - ja.lex.film.eizo2
+  - ja.lex.film.zum
+  - ja.lex.film.appu
+  - ja.sent.sound-design
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.sound-design-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.film.setkei
+  - ja.lex.film.onsetsu
+  - ja.lex.film.eizo2
+  - ja.lex.film.zum
+  - ja.lex.film.appu
+  - ja.sent.sound-design
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.sound-design-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.film.setkei
+  - ja.lex.film.onsetsu
+  - ja.lex.film.eizo2
+  - ja.lex.film.zum
+  - ja.lex.film.appu
+  - ja.sent.sound-design
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.sound-design-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.film.setkei
+  - ja.lex.film.onsetsu
+  - ja.lex.film.eizo2
+  - ja.lex.film.zum
+  - ja.lex.film.appu
+  - ja.sent.sound-design
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.sound-design-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.film.setkei
+  - ja.lex.film.onsetsu
+  - ja.lex.film.eizo2
+  - ja.lex.film.zum
+  - ja.lex.film.appu
+  - ja.sent.sound-design
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.sound-design-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.sound-design
+- id: ja.activity.sound-design-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

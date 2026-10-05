@@ -11,8 +11,8 @@
     "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
     "bands_done": ["A1", "A2", "B1"],
-    "units_next": "500",
+    "units_next": "510",
     "last_score": "7/7 (2026-10-04, results/ja-JP-draft)",
-    "notes": "extension plan authored by agent, checker OK (54 goals, 740 units, 3789 new words); A1 complete (062-118); A2 complete (120-219); B1 complete (220-414); B2: politics-governance 420-434, economics-work 436-451, law-justice 452-467, philosophy-ethics 468-483, literature-study 484-499 complete; next batch 500-509 (film-analysis start; grep plan for goal ranges)"
+    "notes": "extension plan authored by agent, checker OK (54 goals, 740 units, 3789 new words); A1 complete (062-118); A2 complete (120-219); B1 complete (220-414); B2: politics-governance 420-434, economics-work 436-451, law-justice 452-467, philosophy-ethics 468-483, literature-study 484-499 complete; film-analysis 500-509 done (510-514 remain); next batch 510-519 (film-analysis finish + history-critical start)"
   }
 }

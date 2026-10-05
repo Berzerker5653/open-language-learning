@@ -4,8 +4,8 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2420  2dda84132085  activities/scenarios/first-meeting.yaml
         1561  6b8655e2f7b6  activities/scenarios/ordering.yaml
         1486  b56884663696  activities/scenarios/shopping.yaml
-       16592  e2676a5ad99c  assessments/definitions.jsonl
-       43309  c3f3a4c298d2  curriculum/goals.yaml
+       16926  fdf6d57447a9  assessments/definitions.jsonl
+       44096  92395e745e75  curriculum/goals.yaml
          919  ad3f5f62d1b3  curriculum/units/000-onramp-greeting.yaml
         1514  bd53db6f2cfe  curriculum/units/010-kana-hiragana-vowels-ko.yaml
         1957  c02be8a37693  curriculum/units/011-kana-hiragana-stn.yaml
@@ -469,8 +469,18 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2112  90c6448c98ab  curriculum/units/497-essay-on-novel.yaml
         2052  e5709140db30  curriculum/units/498-theatre-text.yaml
         2117  b97f43c0522c  curriculum/units/499-literature-essay.yaml
-       52131  15b611e22dd0  grammar/concepts.jsonl
-        7585  f776b269ef41  grammar/dependencies.yaml
+        2029  b6c7e61f213b  curriculum/units/500-film-language.yaml
+        2119  a56bb4c98891  curriculum/units/501-genre-analysis.yaml
+        2124  42f633ef730a  curriculum/units/502-director-style.yaml
+        2089  bcd9ebd1516f  curriculum/units/503-camera-meaning.yaml
+        2034  9a18569cf7ef  curriculum/units/504-sound-design.yaml
+        2144  fd2b76f308a5  curriculum/units/505-adaptation-study.yaml
+        2199  8771205c1cfc  curriculum/units/506-documentary-critique.yaml
+        2079  fd65ff4e4594  curriculum/units/507-film-history.yaml
+        2126  4351c2abb517  curriculum/units/508-animation-arts.yaml
+        2078  2fceddfa7a7a  curriculum/units/509-film-reviews.yaml
+       53101  cd9ae64c8246  grammar/concepts.jsonl
+        7731  6d018cb167ea  grammar/dependencies.yaml
        30369  1401b6e0388e  kanji/entries.jsonl
          485  860cdf8185db  language/identity.yaml
          823  5d72613ab378  language/normalization.yaml
@@ -500,6 +510,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         1837  bf555ef5009f  lexicon/entries.jsonl
        39784  314479e0666c  lexicon/env.jsonl
        20064  8a9f218db815  lexicon/env2.jsonl
+       39563  d2a6cae69011  lexicon/film.jsonl
        17645  6e329d0a38e0  lexicon/food-drink.jsonl
        39274  95db0ceb4af6  lexicon/food.jsonl
        11095  b08be982d890  lexicon/greetings.jsonl
@@ -552,7 +563,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
-      252485  4c4db4c5b451  sentences/entries.jsonl
+      257706  b442275f8762  sentences/entries.jsonl
         3915  e270f808c26e  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml
          539  842cce82e5d5  stories/first-day.yaml
