@@ -979,3 +979,8 @@ new goal `ja.goal.b2.humor-wordplay` + assessment + DEP edge. Score: **7/7**.
 Units 270-279 (learning methods, progress, decisions), 50 words (`lexicon/learning.jsonl`),
 2 grammar (`b1.chtoby-goals`, `b1.reshit-vybrat`), 10 sentences,
 new goal `ru.goal.b1.learning-work` + 2 assessments. Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 74
+
+Units 780-789 (humor-wordplay: comedy, satire, manga), 50 words (`lexicon/play2.jsonl`),
+2 grammar (`b2-ni-totte-iru`, `b2-wake-deshou`), 9 sentences. Score: **7/7**.

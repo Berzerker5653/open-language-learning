@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.786-comic-reading
+goal_id: ja.goal.b2.humor-wordplay
+title: comic reading
+summary: B2 language for comic reading.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.play2.iro2
+  - ja.lex.play2.oto
+  - ja.lex.play2.koe
+  - ja.lex.play2.uchi
+  - ja.lex.play2.soto
+  - ja.sent.comic-reading
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.786-comic-reading-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.play2.iro2
+  - ja.lex.play2.oto
+  - ja.lex.play2.koe
+  - ja.lex.play2.uchi
+  - ja.lex.play2.soto
+  - ja.sent.comic-reading
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.786-comic-reading-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.play2.iro2
+  - ja.lex.play2.oto
+  - ja.lex.play2.koe
+  - ja.lex.play2.uchi
+  - ja.lex.play2.soto
+  - ja.sent.comic-reading
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.786-comic-reading-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.play2.iro2
+  - ja.lex.play2.oto
+  - ja.lex.play2.koe
+  - ja.lex.play2.uchi
+  - ja.lex.play2.soto
+  - ja.sent.comic-reading
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.786-comic-reading-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.play2.iro2
+  - ja.lex.play2.oto
+  - ja.lex.play2.koe
+  - ja.lex.play2.uchi
+  - ja.lex.play2.soto
+  - ja.sent.comic-reading
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.786-comic-reading-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.comic-reading
+- id: ja.activity.786-comic-reading-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

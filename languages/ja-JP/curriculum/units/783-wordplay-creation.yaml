@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.783-wordplay-creation
+goal_id: ja.goal.b2.humor-wordplay
+title: wordplay creation
+summary: B2 language for wordplay creation.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.play2.kaze
+  - ja.lex.play2.yuki
+  - ja.lex.play2.hana
+  - ja.lex.play2.ne
+  - ja.lex.play2.kusa
+  - ja.sent.wordplay-creation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.783-wordplay-creation-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.play2.kaze
+  - ja.lex.play2.yuki
+  - ja.lex.play2.hana
+  - ja.lex.play2.ne
+  - ja.lex.play2.kusa
+  - ja.sent.wordplay-creation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.783-wordplay-creation-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.play2.kaze
+  - ja.lex.play2.yuki
+  - ja.lex.play2.hana
+  - ja.lex.play2.ne
+  - ja.lex.play2.kusa
+  - ja.sent.wordplay-creation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.783-wordplay-creation-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.play2.kaze
+  - ja.lex.play2.yuki
+  - ja.lex.play2.hana
+  - ja.lex.play2.ne
+  - ja.lex.play2.kusa
+  - ja.sent.wordplay-creation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.783-wordplay-creation-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.play2.kaze
+  - ja.lex.play2.yuki
+  - ja.lex.play2.hana
+  - ja.lex.play2.ne
+  - ja.lex.play2.kusa
+  - ja.sent.wordplay-creation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.783-wordplay-creation-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.wordplay-creation
+- id: ja.activity.783-wordplay-creation-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

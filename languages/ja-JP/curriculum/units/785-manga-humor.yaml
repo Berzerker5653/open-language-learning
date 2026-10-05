@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.785-manga-humor
+goal_id: ja.goal.b2.humor-wordplay
+title: manga humor
+summary: B2 language for manga humor.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.play2.suna
+  - ja.lex.play2.mori
+  - ja.lex.play2.hara
+  - ja.lex.play2.oka
+  - ja.lex.play2.tani
+  - ja.sent.manga-humor
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.785-manga-humor-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.play2.suna
+  - ja.lex.play2.mori
+  - ja.lex.play2.hara
+  - ja.lex.play2.oka
+  - ja.lex.play2.tani
+  - ja.sent.manga-humor
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.785-manga-humor-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.play2.suna
+  - ja.lex.play2.mori
+  - ja.lex.play2.hara
+  - ja.lex.play2.oka
+  - ja.lex.play2.tani
+  - ja.sent.manga-humor
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.785-manga-humor-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.play2.suna
+  - ja.lex.play2.mori
+  - ja.lex.play2.hara
+  - ja.lex.play2.oka
+  - ja.lex.play2.tani
+  - ja.sent.manga-humor
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.785-manga-humor-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.play2.suna
+  - ja.lex.play2.mori
+  - ja.lex.play2.hara
+  - ja.lex.play2.oka
+  - ja.lex.play2.tani
+  - ja.sent.manga-humor
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.785-manga-humor-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.manga-humor
+- id: ja.activity.785-manga-humor-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

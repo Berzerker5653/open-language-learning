@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.780-comedy-timing
+goal_id: ja.goal.b2.humor-wordplay
+title: comedy timing
+summary: B2 language for comedy timing.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.play2.taiming
+  - ja.lex.play2.ma
+  - ja.lex.play2.komi
+  - ja.lex.play2.age
+  - ja.lex.play2.furi
+  - ja.sent.comedy-timing
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.780-comedy-timing-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.play2.taiming
+  - ja.lex.play2.ma
+  - ja.lex.play2.komi
+  - ja.lex.play2.age
+  - ja.lex.play2.furi
+  - ja.sent.comedy-timing
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.780-comedy-timing-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.play2.taiming
+  - ja.lex.play2.ma
+  - ja.lex.play2.komi
+  - ja.lex.play2.age
+  - ja.lex.play2.furi
+  - ja.sent.comedy-timing
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.780-comedy-timing-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.play2.taiming
+  - ja.lex.play2.ma
+  - ja.lex.play2.komi
+  - ja.lex.play2.age
+  - ja.lex.play2.furi
+  - ja.sent.comedy-timing
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.780-comedy-timing-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.play2.taiming
+  - ja.lex.play2.ma
+  - ja.lex.play2.komi
+  - ja.lex.play2.age
+  - ja.lex.play2.furi
+  - ja.sent.comedy-timing
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.780-comedy-timing-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.comedy-timing
+- id: ja.activity.780-comedy-timing-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

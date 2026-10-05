@@ -749,7 +749,17 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2132  e002a2e8c8c8  curriculum/units/777-register-portfolio.yaml
         2138  573193aed467  curriculum/units/778-pun-mechanics.yaml
         2141  de4ef7e3d321  curriculum/units/779-manzai-comedy.yaml
-       79943  51a213f34d4b  grammar/concepts.jsonl
+        2078  ab375c106f33  curriculum/units/780-comedy-timing.yaml
+        2108  4c5723c21683  curriculum/units/781-satire-reading.yaml
+        2103  4a72e7ac448e  curriculum/units/782-irony-detection.yaml
+        2128  49a732d00631  curriculum/units/783-wordplay-creation.yaml
+        2033  cab701e23bd9  curriculum/units/784-joke-ethics.yaml
+        2043  478f4808649a  curriculum/units/785-manga-humor.yaml
+        2068  3cd876f81672  curriculum/units/786-comic-reading.yaml
+        2133  28c9b69c13c2  curriculum/units/787-humor-translation.yaml
+        2078  0600e6eec9f4  curriculum/units/788-witty-replies.yaml
+        2115  aa906d48c2b6  curriculum/units/789-parody-writing.yaml
+       80965  77431f282b4e  grammar/concepts.jsonl
        10539  ae63ef2a35f8  grammar/dependencies.yaml
        30369  1401b6e0388e  kanji/entries.jsonl
          485  860cdf8185db  language/identity.yaml
@@ -832,6 +842,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
        16391  237d3c6f2509  lexicon/philosophy3.jsonl
        14456  7f233fae36e4  lexicon/places.jsonl
         7887  571c38d68db5  lexicon/play1.jsonl
+       38746  e3fb8e577a8f  lexicon/play2.jsonl
        20016  5056b7029669  lexicon/politics.jsonl
        39980  da7b14ef98ca  lexicon/politics2.jsonl
         7287  02009ef0d4fa  lexicon/pronouns.jsonl
@@ -871,7 +882,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
-      399277  4550248b4eab  sentences/entries.jsonl
+      405157  2497463765a0  sentences/entries.jsonl
         3915  e270f808c26e  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml
          539  842cce82e5d5  stories/first-day.yaml

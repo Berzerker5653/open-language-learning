@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.781-satire-reading
+goal_id: ja.goal.b2.humor-wordplay
+title: satire reading
+summary: B2 language for satire reading.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.play2.inaka
+  - ja.lex.play2.mura
+  - ja.lex.play2.akito
+  - ja.lex.play2.haru
+  - ja.lex.play2.natsu
+  - ja.sent.satire-reading
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.781-satire-reading-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.play2.inaka
+  - ja.lex.play2.mura
+  - ja.lex.play2.akito
+  - ja.lex.play2.haru
+  - ja.lex.play2.natsu
+  - ja.sent.satire-reading
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.781-satire-reading-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.play2.inaka
+  - ja.lex.play2.mura
+  - ja.lex.play2.akito
+  - ja.lex.play2.haru
+  - ja.lex.play2.natsu
+  - ja.sent.satire-reading
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.781-satire-reading-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.play2.inaka
+  - ja.lex.play2.mura
+  - ja.lex.play2.akito
+  - ja.lex.play2.haru
+  - ja.lex.play2.natsu
+  - ja.sent.satire-reading
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.781-satire-reading-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.play2.inaka
+  - ja.lex.play2.mura
+  - ja.lex.play2.akito
+  - ja.lex.play2.haru
+  - ja.lex.play2.natsu
+  - ja.sent.satire-reading
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.781-satire-reading-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.satire-reading
+- id: ja.activity.781-satire-reading-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

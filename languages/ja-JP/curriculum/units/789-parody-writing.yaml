@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.789-parody-writing
+goal_id: ja.goal.b2.humor-wordplay
+title: parody writing
+summary: B2 language for parody writing.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.play2.sora
+  - ja.lex.play2.tori
+  - ja.lex.play2.hashi
+  - ja.lex.play2.tsuki
+  - ja.lex.play2.hana
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-wake-deshou
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.789-parody-writing-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.play2.sora
+  - ja.lex.play2.tori
+  - ja.lex.play2.hashi
+  - ja.lex.play2.tsuki
+  - ja.lex.play2.hana
+  - ja.grammar.b2-wake-deshou
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.789-parody-writing-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.play2.sora
+  - ja.lex.play2.tori
+  - ja.lex.play2.hashi
+  - ja.lex.play2.tsuki
+  - ja.lex.play2.hana
+  - ja.grammar.b2-wake-deshou
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.789-parody-writing-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.play2.sora
+  - ja.lex.play2.tori
+  - ja.lex.play2.hashi
+  - ja.lex.play2.tsuki
+  - ja.lex.play2.hana
+  - ja.grammar.b2-wake-deshou
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.789-parody-writing-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.play2.sora
+  - ja.lex.play2.tori
+  - ja.lex.play2.hashi
+  - ja.lex.play2.tsuki
+  - ja.lex.play2.hana
+  - ja.grammar.b2-wake-deshou
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.789-parody-writing-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.789-parody-writing-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

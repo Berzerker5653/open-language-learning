@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.782-irony-detection
+goal_id: ja.goal.b2.humor-wordplay
+title: irony detection
+summary: B2 language for irony detection.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.play2.fuyu
+  - ja.lex.play2.ame
+  - ja.lex.play2.hoshi
+  - ja.lex.play2.tsuki
+  - ja.lex.play2.hi
+  - ja.sent.irony-detection
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.782-irony-detection-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.play2.fuyu
+  - ja.lex.play2.ame
+  - ja.lex.play2.hoshi
+  - ja.lex.play2.tsuki
+  - ja.lex.play2.hi
+  - ja.sent.irony-detection
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.782-irony-detection-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.play2.fuyu
+  - ja.lex.play2.ame
+  - ja.lex.play2.hoshi
+  - ja.lex.play2.tsuki
+  - ja.lex.play2.hi
+  - ja.sent.irony-detection
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.782-irony-detection-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.play2.fuyu
+  - ja.lex.play2.ame
+  - ja.lex.play2.hoshi
+  - ja.lex.play2.tsuki
+  - ja.lex.play2.hi
+  - ja.sent.irony-detection
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.782-irony-detection-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.play2.fuyu
+  - ja.lex.play2.ame
+  - ja.lex.play2.hoshi
+  - ja.lex.play2.tsuki
+  - ja.lex.play2.hi
+  - ja.sent.irony-detection
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.782-irony-detection-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.irony-detection
+- id: ja.activity.782-irony-detection-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
