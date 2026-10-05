@@ -903,6 +903,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
+        6376  adaba117ae46  review/WORKLIST-2026-10-05.md
       414502  5f21368ebd4f  sentences/entries.jsonl
         5146  56ced0ea35df  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml

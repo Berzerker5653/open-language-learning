@@ -900,5 +900,6 @@ lts-pack/1 org.openlanguage.ru-ru.reference v0.1.0 (schema 0.2)
        26026  05a86f2e790c  orthography/cyrillic.jsonl
         4384  87f3714c5ae8  review/REVIEWER_KIT.md
         8450  d55b51c7c080  review/REVIEW_POLICY.yaml
+        1100  2b1ceae87046  review/WORKLIST-2026-10-05.md
       283551  1292da071e49  sentences/entries.jsonl
         1891  bd8eb33142a5  sources.jsonl

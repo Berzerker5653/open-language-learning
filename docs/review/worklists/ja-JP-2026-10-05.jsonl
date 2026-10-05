@@ -1,0 +1,964 @@
+{"id": "ja.lex.abst3.chujutsu", "form": "ちゅうじゅつ", "pack_gloss": "quotation", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.academic.yougaki", "form": "ようがき", "pack_gloss": "terminology, glossary", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.academic.bunpatsu", "form": "ぶんぱつ", "pack_gloss": "paragraph", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.academic2.rondatate", "form": "ろんたて", "pack_gloss": "argument structure", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.academic2.kyouyoku", "form": "きょうよく", "pack_gloss": "curiosity", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.admin.katei-nittei", "form": "かていにってい", "pack_gloss": "household schedule", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.admin.yoyaku-jima", "form": "よやくじま", "pack_gloss": "reservation time", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.admin.hiharai", "form": "ひはらい", "pack_gloss": "expense", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.admin.shutsu-harai", "form": "しゅつはらい", "pack_gloss": "expenditure", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.admin.kyoufu-kin", "form": "きょうふきん", "pack_gloss": "tuition", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.admin.seikatsu-suru", "form": "せいかつします", "pack_gloss": "to live", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.admin.kanri-suru", "form": "かんりします", "pack_gloss": "to manage", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.admin.yoyaku-suru", "form": "よやくします", "pack_gloss": "to reserve", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.admin.kakunin-suru", "form": "かくにんします", "pack_gloss": "to confirm", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.admin.mibungou", "form": "みぶんごう", "pack_gloss": "identification", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.admin.shinsei-suru", "form": "しんせいします", "pack_gloss": "to apply", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.admin.hoken-jo", "form": "ほけんじょう", "pack_gloss": "insurance certificate", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.admin.jushou-todoke", "form": "じゅうしょとどけ", "pack_gloss": "address registration", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.admin.inkan-shou", "form": "いんかんしょう", "pack_gloss": "seal certificate", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.admin.taishu-kin", "form": "たいしゅうきん", "pack_gloss": "withdrawal money", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.admin.maichi", "form": "まいち", "pack_gloss": "market", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.art2.melodi", "form": "めるでぃ", "pack_gloss": "melody", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.art2.shiminkou", "form": "しみんこう", "pack_gloss": "civic demand", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.body.shoukouna", "form": "しょうこうな", "pack_gloss": "minor; mild", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.body.seikatsu-sukan", "form": "せいかつすかん", "pack_gloss": "lifestyle habit", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.body.shinryou-shin", "form": "しんりょうしん", "pack_gloss": "consultation fee", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.body.kutsu-bure", "form": "くつぶれ", "pack_gloss": "blister from shoes", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.city.yubinkyoku", "form": "ゆびんきょく", "pack_gloss": "post office", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.city.mibai", "form": "みばい", "pack_gloss": "surveillance camera", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.city.kounyuu-shimasu", "form": "こうにゅうします", "pack_gloss": "to purchase", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.communication.messeji", "form": "めっせじ", "pack_gloss": "message", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.communication.denwa-wo-kakeru", "form": "でんわを かけます", "pack_gloss": "to call", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.communication.denwa-wo-ukeru", "form": "でんわを うけます", "pack_gloss": "to answer the phone", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.communication.setsumei-suru", "form": "せつめいします", "pack_gloss": "to explain", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.communication.renraku-suru", "form": "れんらくします", "pack_gloss": "to contact", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.critique.platformu", "form": "ぷらっとむ", "pack_gloss": "platform", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.critique.tsuugou", "form": "つうごう", "pack_gloss": "communication merger", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.critique.binzuke", "form": "びんづけ", "pack_gloss": "branding, labeling", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.critique.hakuriki", "form": "はくりき", "pack_gloss": "memory power", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.cult.shiminkai", "form": "しみんかい", "pack_gloss": "citizens' group", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.cult.tairi", "form": "たいり", "pack_gloss": "endurance, patience", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.cult2.danho", "form": "だんほう", "pack_gloss": "discrimination", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.culture.shinko-zai", "form": "しんこうざい", "pack_gloss": "article of faith", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.culture2.douhankai", "form": "どうかんかい", "pack_gloss": "drinking party", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.culture2.bunkaron", "form": "ぶんかろん", "pack_gloss": "cultural theory", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.debate.jissai", "form": "じつさい", "pack_gloss": "facts", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.debate.shojitsu", "form": "しょうじつ", "pack_gloss": "truth", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.debate.ronsou", "form": "そうさう", "pack_gloss": "discussion", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.debate2.hyoten", "form": "ひょうかひょう", "pack_gloss": "rating chart", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.debate2.ryakusuji", "form": "りゃくすじ", "pack_gloss": "outline", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.debate2.rondan", "form": "ろんたん", "pack_gloss": "discussion", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.economy.uchinage", "form": "うちなげ", "pack_gloss": "dumping", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.economy.shibora", "form": "しぼら", "pack_gloss": "deflation", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.economy.tekiseki", "form": "てきせき", "pack_gloss": "suitability", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu.iwakai", "form": "いわかい", "pack_gloss": "banquet; party", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu.fuman-ire", "form": "ふまんいれ", "pack_gloss": "grievance box", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu.fukyu", "form": "ふくゆう", "pack_gloss": "wealth; affluence", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu.shokuba-ryou", "form": "しょくばりょう", "pack_gloss": "workplace etiquette", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu.moushiage", "form": "もうしあげ", "pack_gloss": "reporting (humble)", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu.kyouiku-ken", "form": "きょういくけん", "pack_gloss": "right to education", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu.jugyou-ryaku", "form": "じゅぎょうりゃく", "pack_gloss": "class summary", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu2.kronji", "form": "くろんじ", "pack_gloss": "counter-evidence", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu2.ryugaku-seikatsu", "form": "りゅうがくせいかつ", "pack_gloss": "life abroad", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu2.ryuji", "form": "りゅうじ", "pack_gloss": "schedule", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu2.shinsei-hyou", "form": "しんせいひょう", "pack_gloss": "application form", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu2.rissho", "form": "りっしょ", "pack_gloss": "document", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu2.shoukaku-shinsei", "form": "しょうがくしんせい", "pack_gloss": "scholarship application", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu2.mouhibiki", "form": "もうひき", "pack_gloss": "quotation", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu2.kashu-sho", "form": "かしゅしょう", "pack_gloss": "library card", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu2.yakku", "form": "やっく", "pack_gloss": "dictionary", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu2.fuyuujunou", "form": "ふゆうじゅんのう", "pack_gloss": "popularization", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu3.togihou", "form": "とうぎほう", "pack_gloss": "discussion method", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu4.gijutsu-kyouiku", "form": "きょういくぎじゅつ", "pack_gloss": "educational technology", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu4.kunren", "form": "くんにん", "pack_gloss": "training", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu4.bunkachi", "form": "ぶんかち", "pack_gloss": "cultural value", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.edu4.kyouiku-houritsu", "form": "きょういくほうりつ", "pack_gloss": "education law", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.emotion.yasashisa", "form": "やさしさ", "pack_gloss": "kindness", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.emotion.akire", "form": "あきれ", "pack_gloss": "exasperation", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.emotion.yui", "form": "ゆい", "pack_gloss": "bond", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.emotion.sukunaku", "form": "すくなく", "pack_gloss": "at least", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.ent.onsen-nyuujou", "form": "おんせんにゅうじょう", "pack_gloss": "hot spring bath", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.ent.purii", "form": "ぷりー", "pack_gloss": "premiere", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.ent.getsumon", "form": "げつもん", "pack_gloss": "monthly feature", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.env.puratsu", "form": "ぷらつ", "pack_gloss": "plate", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.env.gomi-bunkatsu", "form": "ごみぶんかつ", "pack_gloss": "waste sorting", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.env.kiko-ene", "form": "きこえね", "pack_gloss": "renewable energy", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.env.ikubutsu", "form": "いくぶつ", "pack_gloss": "living thing", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.env.tan-so-ka", "form": "たんそか", "pack_gloss": "carbonization", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.env.eco-kuruma", "form": "エコくるま", "pack_gloss": "eco car", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.env.ene-ki", "form": "えねき", "pack_gloss": "power plant", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.env2.bousai-houzu", "form": "ぼうさいほうじ", "pack_gloss": "disaster preparedness", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.env2.mizu-bubun", "form": "みずぶぶん", "pack_gloss": "water resources", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.env2.resucha", "form": "れすちゃ", "pack_gloss": "leftover tea", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.env2.shizen-hozen", "form": "しぜんほぜん", "pack_gloss": "nature preservation", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.env3.taniso2", "form": "たんにょう", "pack_gloss": "carbon dioxide equivalent", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.env3.baishutsu", "form": "ばいしゅつ", "pack_gloss": "emission", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.env3.shakubutsu", "form": "しゃくぶつ", "pack_gloss": "species", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.env4.seikatsu-fushuu", "form": "せいかつふしゅう", "pack_gloss": "living expenses", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.film.setkei", "form": "せつけい", "pack_gloss": "design", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.film.satsueijou", "form": "さつえいじょう", "pack_gloss": "filming stage", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.film.chokusatsu", "form": "ちょくさつ", "pack_gloss": "directing", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.film2.kagayaki", "form": "かぎやき", "pack_gloss": "brightness, glow", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.food.furukon", "form": "ふろーく", "pack_gloss": "fork", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.food.hamburger", "form": "はんばーガー", "pack_gloss": "hamburger", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.formal.guchou", "form": "ぐちょう", "pack_gloss": "greeting words", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.formal.hatsuu", "form": "はつゆう", "pack_gloss": "mailing, sending mail", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.formal2.houmonsho", "form": "ほうもんしょ", "pack_gloss": "letter of visit request", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.formal2.mimaijo", "form": "みまいじょ", "pack_gloss": "get-well letter", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.formal2.iansho", "form": "いあんしょ", "pack_gloss": "condolence letter", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.formal2.gankajou", "form": "がんかじょう", "pack_gloss": "year-end greeting letter", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.formal2.chuuomimai", "form": "ちゅうおみまい", "pack_gloss": "midsummer greeting", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.formal2.gasaku", "form": "がさく", "pack_gloss": "painting", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.formal2.bunkaten", "form": "ぶんかてん", "pack_gloss": "cultural event", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.formal2.motsuchi", "form": "もつち", "pack_gloss": "material, medium", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.global2.kankakusha", "form": "かんきゃくしゃ", "pack_gloss": "tourist", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.health2.nebuki", "form": "ねぶき", "pack_gloss": "sleeplessness", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.health2.yakubou", "form": "やくぼう", "pack_gloss": "pharmacy", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.health2.seka", "form": "せか", "pack_gloss": "world (prefix)", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.health3.junren", "form": "じゅんれん", "pack_gloss": "practice", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.health3.uebi", "form": "うえび", "pack_gloss": "upper", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.health3.ureba", "form": "うれば", "pack_gloss": "lower", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.history.hakukutsu", "form": "はくくつ", "pack_gloss": "excavation", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.history.kakumei", "form": "かかくめい", "pack_gloss": "revolution", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.history2.hyougeki", "form": "ひょうげき", "pack_gloss": "controversy", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.history2.saikoutei", "form": "さいこうてい", "pack_gloss": "reassessment", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.history2.kuchikami", "form": "くちかみ", "pack_gloss": "oral tradition", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.history3.shimei", "form": "しみめい", "pack_gloss": "clarification", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.home.apato", "form": "あぱと", "pack_gloss": "apartment", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.law.sonin", "form": "そんにん", "pack_gloss": "damage", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.law.hanza", "form": "はんざ", "pack_gloss": "crime", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.law.hoiho", "form": "ほいほ", "pack_gloss": "arrest", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.law2.kufuku", "form": "くふく", "pack_gloss": "restoration", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.law2.zaimuko", "form": "ざいむこ", "pack_gloss": "inventory", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.law2.yojo", "form": "ようぞう", "pack_gloss": "reserve", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.leisure.saakaa", "form": "さーかー", "pack_gloss": "soccer", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.leisure.basuketta", "form": "ばすけった", "pack_gloss": "basketball", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.leisure.pikunikku", "form": "ぴくにくく", "pack_gloss": "picnic", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.leisure.tabehou", "form": "たべほう", "pack_gloss": "gourmet eating; food tour", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.ling.inron", "form": "いんろん", "pack_gloss": "phonology, sound theory", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.ling2.fuyuukyo", "form": "ふゆうきょう", "pack_gloss": "foreign language education", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.ling2.nikokugo", "form": "にこくご", "pack_gloss": "two languages", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.ling3.tally", "form": "たっりー", "pack_gloss": "tally, count", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.lit.bungaku-ka", "form": "ぶんがくか", "pack_gloss": "man of letters", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.lit.engoki", "form": "えんぎき", "pack_gloss": "drama", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.lit.bungaku-hyou", "form": "ぶんがくひょう", "pack_gloss": "literary criticism", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.lit2.shiteisha", "form": "していしゃ", "pack_gloss": "narrator", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.lit2.shanru", "form": "しゃんる", "pack_gloss": "genre", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.lit2.chiyaku", "form": "ちやく", "pack_gloss": "supporting role", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.lit2.bunpatsu", "form": "ぶんぱつ", "pack_gloss": "phrase", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.lit2.goju", "form": "ごじゅ", "pack_gloss": "phrase", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.lit3.yakimoku", "form": "やくもく", "pack_gloss": "assigned role", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.med.denkan", "form": "でんかん", "pack_gloss": "contagion, transmission", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.med.houkenryou", "form": "ほうけんりょう", "pack_gloss": "insurance premium", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.med2.fubyou", "form": "ふびょう", "pack_gloss": "inequality", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.media.head", "form": "へッド", "pack_gloss": "headline", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.media.fukkyuu-saigai", "form": "ふっきゅうさいがい", "pack_gloss": "disaster recovery", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.media.ninoki", "form": "にのき", "pack_gloss": "popularity", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.media.media-habits", "form": "めでぃあはびつ", "pack_gloss": "media habits", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.media2.editorial", "form": "えでとりある", "pack_gloss": "editorial", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.media2.ronsa", "form": "ろんさ", "pack_gloss": "discussion", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.media2.sesaku", "form": "せさく", "pack_gloss": "current affairs", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.media2.ronsuu", "form": "ろんすう", "pack_gloss": "debate", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.media2.taaron", "form": "たあろん", "pack_gloss": "counter-argument", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.media3.media", "form": "めであ", "pack_gloss": "media", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.philosophy.gijiron", "form": "ぎじろん", "pack_gloss": "epistemology", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.philosophy.kiso-gairon", "form": "きそがいろん", "pack_gloss": "elementary introduction", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.philosophy2.jiyu-ishiki", "form": "じゆういしき", "pack_gloss": "sense of free will", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.philosophy2.sekai-kan", "form": "せいかいかん", "pack_gloss": "worldview", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.philosophy2.meiyo-kan", "form": "めいよかん", "pack_gloss": "sense of honor", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.philosophy2.jiko-kan", "form": "じこかん", "pack_gloss": "sense of self", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.philosophy3.dotoku-kan", "form": "どうとくかん", "pack_gloss": "moral sense", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.philosophy3.sekinin-ron", "form": "せきにんろん", "pack_gloss": "theory of responsibility", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.philosophy3.seigi-ron", "form": "せいぎろん", "pack_gloss": "theory of justice", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.philosophy3.ishiki-ron", "form": "いしきろん", "pack_gloss": "theory of consciousness", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.philosophy3.jiyu-ron", "form": "じゆうろん", "pack_gloss": "theory of freedom", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.philosophy3.jikukettei-ron", "form": "じこけっていろん", "pack_gloss": "theory of self-determination", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.play2.akito", "form": "あきと", "pack_gloss": "autumn fields", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.politics.buon", "form": "ぶのう", "pack_gloss": "field", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.politics.sangin", "form": "さんぎん", "pack_gloss": "upper house member", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.politics.rougo", "form": "ろうごう", "pack_gloss": "labor union", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.politics2.shuyuu", "form": "しゅゆう", "pack_gloss": "mainstream", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.politics2.shouba", "form": "しょうば", "pack_gloss": "market", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.politics2.shouzei", "form": "しょうぜい", "pack_gloss": "commerce tax", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.politics2.giinkai", "form": "ぎいんかい", "pack_gloss": "legislative body", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.politics2.hoju", "form": "ほじゅ", "pack_gloss": "support", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.politics2.chouan", "form": "ちょうあん", "pack_gloss": "long-term plan", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.reg1.nyuansu", "form": "にゅうあんす", "pack_gloss": "nuance", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.reg1.moyo", "form": "もうよう", "pack_gloss": "manner, style", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.reg1.jouretsu", "form": "じょうれつ", "pack_gloss": "courteous", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel1.yamaimadara", "form": "やまいただら", "pack_gloss": "hopes and worries", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel2.chieki", "form": "ちえき", "pack_gloss": "wisdom", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.yori-modosu", "form": "よりもどす", "pack_gloss": "to reconcile", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.omoiden", "form": "おもいでん", "pack_gloss": "memories", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.kokoro-bazuka", "form": "こころばずか", "pack_gloss": "consideration", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.shinrai-suru", "form": "しんらいします", "pack_gloss": "to trust", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.kazoku-no-kizuna", "form": "かぞくのきずな", "pack_gloss": "family bond", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.kazoku-no-kata", "form": "かぞくかた", "pack_gloss": "family member", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.kazoku-no-uni", "form": "かぞくのうに", "pack_gloss": "family unit", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.kazoku-no-ishi", "form": "かぞくのいし", "pack_gloss": "family will", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.kyoudai-ue", "form": "きょうだいうえ", "pack_gloss": "older sibling", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.kyoudai-shita", "form": "きょうだいした", "pack_gloss": "younger sibling", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.jijou-betsu", "form": "じじょうべつ", "pack_gloss": "affection distinction", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.omoide-bako", "form": "おもいでばこ", "pack_gloss": "memory box", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.omoide-no-kioku", "form": "おもいで の きおく", "pack_gloss": "memory", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.omoide-no-tabi", "form": "おもいで の たび", "pack_gloss": "memory trip", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.omoide-no-uta", "form": "おもいで の うた", "pack_gloss": "memory song", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.omoide-no-hi", "form": "おもいで の ひ", "pack_gloss": "memory day", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.omoide-no-machi", "form": "おもいで の まち", "pack_gloss": "memory town", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.omoide-no-hito", "form": "おもいで の ひと", "pack_gloss": "memory person", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.omoide-no-ki", "form": "おもいで の き", "pack_gloss": "memory tree", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.rel.omoide-no-sora", "form": "おもいで の そら", "pack_gloss": "memory sky", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.science.heikinkyou", "form": "へいきんちゅう", "pack_gloss": "average value", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.science2.touka", "form": "とーけんか", "pack_gloss": "tokenization", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.shopping.tryon", "form": "とらいおん", "pack_gloss": "fitting room", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.shopping.seruku", "form": "せるく", "pack_gloss": "sale", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.shopping.fukuban", "form": "ふくばん", "pack_gloss": "name tag", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.shopping.seetaa", "form": "せてー", "pack_gloss": "sweater", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.shopping.kutsu-ito", "form": "くついと", "pack_gloss": "shoelace", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.shopping.ni-sen", "form": "にせん", "pack_gloss": "two thousand", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.society.riso", "form": "りぞ", "pack_gloss": "neighbor", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.society.yuwa", "form": "ゆわ", "pack_gloss": "harmony", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.society.boryuntia", "form": "ぼりゅんてぃあ", "pack_gloss": "volunteer", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.society2.chuga", "form": "ちゅうが", "pack_gloss": "congestion", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.society3.noureka", "form": "のうれか", "pack_gloss": "aging", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.society3.hakushou", "form": "しゅうしゅつりつ", "pack_gloss": "birth rate", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.society4.keieki", "form": "けいえき", "pack_gloss": "management", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.society4.jichitsu", "form": "じちつ", "pack_gloss": "self-reliance", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.society4.jogai", "form": "ぎょうらい", "pack_gloss": "volunteer", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.society4.noutoku", "form": "のうとく", "pack_gloss": "acquisition", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.society4.yoiron", "form": "ようろん", "pack_gloss": "public opinion", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.sports.taiku-kai", "form": "たいくかい", "pack_gloss": "athletic meet", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.sports.tanso-undo", "form": "たんそううんどう", "pack_gloss": "weight training", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.sports.massaji", "form": "ますーじ", "pack_gloss": "massage", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.sports.onsen-tou", "form": "おんせんとう", "pack_gloss": "hot spring bath", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.sports.taekwondo", "form": "てくわんど", "pack_gloss": "taekwondo", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.sports.sa-fingu", "form": "さーふぃんぐ", "pack_gloss": "surfing", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.sports.paten", "form": "ぱてん", "pack_gloss": "roller skates", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.sports.janpu-ro-pu", "form": "じゃんぷろーぷ", "pack_gloss": "jump rope", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.sports.joutairyoku", "form": "じょうたいりょく", "pack_gloss": "condition", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.sports.sen-taku-sen", "form": "せんたくせん", "pack_gloss": "selection match", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.sports.densetsu-senshu", "form": "でんせつせんしゅ", "pack_gloss": "legendary athlete", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.sports.kessan-bangumi", "form": "けっさんばんぐみ", "pack_gloss": "results show", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.sports.kessan-houritsu", "form": "けっさんほうりつ", "pack_gloss": "result rate", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.story.keimatsu", "form": "けいまつ", "pack_gloss": "ending", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.story2.dokugeki", "form": "どくげき", "pack_gloss": "monologue", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.story2.hairon", "form": "はいろん", "pack_gloss": "plagiarism", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.tech.debisu", "form": "でびす", "pack_gloss": "device", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.tech.settings", "form": "せっとぃんぐ", "pack_gloss": "settings", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.tech.account", "form": "あくあんと", "pack_gloss": "account", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.tech2.sensoru", "form": "せんさーる", "pack_gloss": "sensor", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.tech2.detokku", "form": "デトック", "pack_gloss": "detox", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.transport.chakubatsu", "form": "ちゃくばつ", "pack_gloss": "arrival", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.travel.itinerari", "form": "イティネラリ", "pack_gloss": "itinerary", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.travel.bunka-shock", "form": "ぶんかしょっく", "pack_gloss": "culture shock", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.travel2.hikou-min", "form": "ひこうみん", "pack_gloss": "evacuee", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.travel2.gaido", "form": "がいどう", "pack_gloss": "guided tour", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.travel2.sanin", "form": "さにん", "pack_gloss": "three people", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.travel2.ochimono", "form": "おちもの", "pack_gloss": "lost item", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.travel2.engaki", "form": "えんがき", "pack_gloss": "round-trip ticket", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.travel2.shuhiki", "form": "しゅひき", "pack_gloss": "withdrawal", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.travel2.hatsuken", "form": "はつけん", "pack_gloss": "discovery", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.urban2.puratsu", "form": "ぷらつ", "pack_gloss": "plaza", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.urban2.senso", "form": "せんそー", "pack_gloss": "sensor", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.urban2.mimamori", "form": "みまもり", "pack_gloss": "watching over, lookout", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.verbs.kaimono-shimasu", "form": "かいものします", "pack_gloss": "to go shopping", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.verbs.benkyou-shimasu", "form": "べんきょうします", "pack_gloss": "to study", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.verbs.shigoto-shimasu", "form": "しごとします", "pack_gloss": "to work", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.verbs.aisatsu-shimasu", "form": "あいさつします", "pack_gloss": "to greet", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.verbs.shoukai-shimasu", "form": "しょうかいします", "pack_gloss": "to introduce", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.weather2.kaze-no-tsuyosa", "form": "かぜのつよさ", "pack_gloss": "wind strength", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.weather2.yuki-yinga", "form": "ゆきいんが", "pack_gloss": "snowscape", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.weather2.tenki-amari", "form": "てんきあまり", "pack_gloss": "leftover weather", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.weather2.fukau", "form": "ふかくなる", "pack_gloss": "deepening", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.work.shoukai-shimasu", "form": "しょうかいします", "pack_gloss": "to introduce", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.work.kesshin-shimasu", "form": "けっしんします", "pack_gloss": "to decide; to make up one's mind", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.work.chuumoku-shimasu", "form": "ちゅうもくします", "pack_gloss": "to pay attention", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.work.kanryou-shimasu", "form": "かんりょうします", "pack_gloss": "to finish", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.work.kanzen-ni", "form": "かんぜんに", "pack_gloss": "completely", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.work.taishita", "form": "たした", "pack_gloss": "not much", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.work2.danmoku", "form": "だんもく", "pack_gloss": "silence", "kind": "not-in-jmdict", "kana_suggestions": []}
+{"id": "ja.lex.abst.zenso", "form": "ぜんそう", "pack_gloss": "assumption, premise", "kind": "gloss-divergence", "jmdict_sense_candidates": ["prelude", "overture", "muzzle loading"]}
+{"id": "ja.lex.abst.hantai5", "form": "はんたい", "pack_gloss": "counterargument", "kind": "gloss-divergence", "jmdict_sense_candidates": ["opposition", "resistance", "antagonism"]}
+{"id": "ja.lex.abst.kosetsu", "form": "こうせつ", "pack_gloss": "hypothesis", "kind": "gloss-divergence", "jmdict_sense_candidates": ["sexual intercourse", "copulation", "mating"]}
+{"id": "ja.lex.abst.fuyu2", "form": "ふゆう", "pack_gloss": "immersion (debate)", "kind": "gloss-divergence", "jmdict_sense_candidates": ["wealthy", "rich", "affluent"]}
+{"id": "ja.lex.abst2.kenso", "form": "けんそう", "pack_gloss": "consideration", "kind": "gloss-divergence", "jmdict_sense_candidates": ["tumult", "great noise", "clatter"]}
+{"id": "ja.lex.abst2.juri", "form": "じゅり", "pack_gloss": "logic", "kind": "gloss-divergence", "jmdict_sense_candidates": ["acceptance"]}
+{"id": "ja.lex.abst2.gaisetsu", "form": "がいせつ", "pack_gloss": "generalization", "kind": "gloss-divergence", "jmdict_sense_candidates": ["circumscription", "being circumscribed", "overview"]}
+{"id": "ja.lex.abst2.shuuyou", "form": "しゅうよう", "pack_gloss": "generalization (usage)", "kind": "gloss-divergence", "jmdict_sense_candidates": ["accommodation", "taking in", "receiving"]}
+{"id": "ja.lex.abst2.kenji", "form": "けんじ", "pack_gloss": "indication", "kind": "gloss-divergence", "jmdict_sense_candidates": ["stalwart youth", "sacred sword and jewels (imperial regalia)", "adhering to (a view, policy, etc.)"]}
+{"id": "ja.lex.abst2.shimei2", "form": "しめい", "pack_gloss": "hint, indication", "kind": "gloss-divergence", "jmdict_sense_candidates": ["mission", "errand", "task"]}
+{"id": "ja.lex.abst2.betsubetsu", "form": "べつべつ", "pack_gloss": "distinction", "kind": "gloss-divergence", "jmdict_sense_candidates": ["separate", "respective", "different"]}
+{"id": "ja.lex.abst2.yuukyuu", "form": "ゆうきゅう", "pack_gloss": "validity", "kind": "gloss-divergence", "jmdict_sense_candidates": ["eternal", "everlasting", "perpetual"]}
+{"id": "ja.lex.abst2.taisha", "form": "たいしゃ", "pack_gloss": "conflict", "kind": "gloss-divergence", "jmdict_sense_candidates": ["resignation", "leaving office", "leaving work (e.g. at the end of the day)"]}
+{"id": "ja.lex.abst2.shikaku", "form": "しかく", "pack_gloss": "qualification", "kind": "gloss-divergence", "jmdict_sense_candidates": ["assassin", "candidate fielded by a political party to oust an incumbent of the same party", "quadrilateral"]}
+{"id": "ja.lex.abst3.yoryo", "form": "ようりょう", "pack_gloss": "summary", "kind": "gloss-divergence", "jmdict_sense_candidates": ["capacity", "volume", "capacitance"]}
+{"id": "ja.lex.abst3.kyoten", "form": "きょうてん", "pack_gloss": "common point", "kind": "gloss-divergence", "jmdict_sense_candidates": ["scriptures", "canon", "teaching guide"]}
+{"id": "ja.lex.abst3.kyoka", "form": "きょうか", "pack_gloss": "commonality", "kind": "gloss-divergence", "jmdict_sense_candidates": ["strengthening", "intensifying", "reinforcement"]}
+{"id": "ja.lex.academic.ronsho", "form": "ろんしょ", "pack_gloss": "thesis, paper", "kind": "gloss-divergence", "jmdict_sense_candidates": ["textbook of Buddhist treatises (containing interpretation of the sutras)"]}
+{"id": "ja.lex.academic.bunko", "form": "ぶんこ", "pack_gloss": "literature", "kind": "gloss-divergence", "jmdict_sense_candidates": ["library", "book collection", "paperback book"]}
+{"id": "ja.lex.academic.seika3", "form": "せいか", "pack_gloss": "correctness, accuracy", "kind": "gloss-divergence", "jmdict_sense_candidates": ["influential family", "the man in power", "(good) result"]}
+{"id": "ja.lex.academic.sansa", "form": "さんさ", "pack_gloss": "reference, consultation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["major (JGSDF)"]}
+{"id": "ja.lex.academic.shiji", "form": "しじ", "pack_gloss": "instruction, direction", "kind": "gloss-divergence", "jmdict_sense_candidates": ["studying under", "looking up to", "apprenticing oneself to"]}
+{"id": "ja.lex.academic.gouki", "form": "ごうき", "pack_gloss": "combination", "kind": "gloss-divergence", "jmdict_sense_candidates": ["fortitude", "firmness of character", "sturdiness"]}
+{"id": "ja.lex.academic.shukyou", "form": "しゅうきょう", "pack_gloss": "emphasis", "kind": "gloss-divergence", "jmdict_sense_candidates": ["religion", "religious affiliation", "belief"]}
+{"id": "ja.lex.academic.sakuho", "form": "さくほう", "pack_gloss": "method, technique", "kind": "gloss-divergence", "jmdict_sense_candidates": ["manners", "etiquette", "propriety"]}
+{"id": "ja.lex.academic2.yohou", "form": "ようほう", "pack_gloss": "prediction", "kind": "gloss-divergence", "jmdict_sense_candidates": ["way of using (something)", "usage", "use"]}
+{"id": "ja.lex.academic2.kentei", "form": "けんてい", "pack_gloss": "proposal", "kind": "gloss-divergence", "jmdict_sense_candidates": ["official certification", "official approval", "inspection"]}
+{"id": "ja.lex.academic2.happyou", "form": "はっぴょう", "pack_gloss": "presentation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["announcement", "publication", "presenting"]}
+{"id": "ja.lex.academic2.juyou", "form": "じゅうよう", "pack_gloss": "importance", "kind": "gloss-divergence", "jmdict_sense_candidates": ["appropriation to", "earmarking for", "appointing someone to a position of trust"]}
+{"id": "ja.lex.academic2.kairyou", "form": "かいりょう", "pack_gloss": "understanding, comprehension", "kind": "gloss-divergence", "jmdict_sense_candidates": ["improvement", "reform"]}
+{"id": "ja.lex.academic2.teki2", "form": "てき", "pack_gloss": "target, objective", "kind": "gloss-divergence", "jmdict_sense_candidates": ["beefsteak", "-ical", "-ive"]}
+{"id": "ja.lex.academic2.seimei", "form": "せいめい", "pack_gloss": "clarity", "kind": "gloss-divergence", "jmdict_sense_candidates": ["(full) name", "family name and given name", "pure and clear"]}
+{"id": "ja.lex.academic2.kyotsuu", "form": "きょうつう", "pack_gloss": "commonality", "kind": "gloss-divergence", "jmdict_sense_candidates": ["common", "shared", "mutual"]}
+{"id": "ja.lex.academic2.seikaku", "form": "せいかく", "pack_gloss": "accuracy", "kind": "gloss-divergence", "jmdict_sense_candidates": ["character (of a person)", "personality", "disposition"]}
+{"id": "ja.lex.academic2.taigen", "form": "たいげん", "pack_gloss": "representation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["personification", "impersonation", "embodiment"]}
+{"id": "ja.lex.academic2.kyozetsu", "form": "きょぜつ", "pack_gloss": "quotation, citation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["refusal", "rejection"]}
+{"id": "ja.lex.adjectives.kirai", "form": "きらい", "pack_gloss": "dislike; disliked (na-adjective)", "kind": "gloss-divergence", "jmdict_sense_candidates": ["(sea) mine", "disliking", "hating"]}
+{"id": "ja.lex.adjectives.heta", "form": "へた", "pack_gloss": "bad at (na-adjective)", "kind": "gloss-divergence", "jmdict_sense_candidates": ["calyx", "unskillful", "poor"]}
+{"id": "ja.lex.admin.kinen-bi", "form": "きねんび", "pack_gloss": "national holiday", "kind": "gloss-divergence", "jmdict_sense_candidates": ["memorial day", "commemoration day", "anniversary"]}
+{"id": "ja.lex.admin.torihiki", "form": "とりひき", "pack_gloss": "transaction", "kind": "gloss-divergence", "jmdict_sense_candidates": ["transactions", "dealings", "business"]}
+{"id": "ja.lex.admin.kin-yuu", "form": "きんゆう", "pack_gloss": "deposit", "kind": "gloss-divergence", "jmdict_sense_candidates": ["finance", "financing", "credit transacting"]}
+{"id": "ja.lex.admin.kessaku", "form": "けっさく", "pack_gloss": "balance", "kind": "gloss-divergence", "jmdict_sense_candidates": ["masterpiece", "masterwork", "chef d'oeuvre"]}
+{"id": "ja.lex.admin.kaisan", "form": "かいさん", "pack_gloss": "calculation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["breaking up (a meeting, gathering, etc.)", "dispersal (e.g. of a crowd)", "dissolution (of a company, organization, etc.)"]}
+{"id": "ja.lex.admin.denpyou", "form": "でんぴょう", "pack_gloss": "receipt", "kind": "gloss-divergence", "jmdict_sense_candidates": ["chit", "slip", "ticket"]}
+{"id": "ja.lex.admin.nyuusatsu", "form": "にゅうさつ", "pack_gloss": "income", "kind": "gloss-divergence", "jmdict_sense_candidates": ["bid", "tender", "bidding"]}
+{"id": "ja.lex.admin.yaku-wari", "form": "やくわり", "pack_gloss": "duty", "kind": "gloss-divergence", "jmdict_sense_candidates": ["part", "assigning (allotment of) parts", "role"]}
+{"id": "ja.lex.advice.sagen", "form": "さげん", "pack_gloss": "advice", "kind": "gloss-divergence", "jmdict_sense_candidates": ["port (left side of vessel)"]}
+{"id": "ja.lex.advice.ichibun", "form": "いちぶん", "pack_gloss": "share", "kind": "gloss-divergence", "jmdict_sense_candidates": ["duty", "honor", "honour"]}
+{"id": "ja.lex.advice.fumei", "form": "ふめい", "pack_gloss": "obscurity", "kind": "gloss-divergence", "jmdict_sense_candidates": ["unclear", "obscure", "indistinct"]}
+{"id": "ja.lex.advice.koutai", "form": "こうたい", "pack_gloss": "alternative", "kind": "gloss-divergence", "jmdict_sense_candidates": ["rise and fall (of nations)", "retreat", "falling back"]}
+{"id": "ja.lex.advice.hatsu", "form": "はつ", "pack_gloss": "utterance", "kind": "gloss-divergence", "jmdict_sense_candidates": ["animal heart (usu. grilled on skewers)", "first", "new"]}
+{"id": "ja.lex.advice.shouko", "form": "しょうこう", "pack_gloss": "reference", "kind": "gloss-divergence", "jmdict_sense_candidates": ["commerce and industry", "commercial port", "commissioned officer"]}
+{"id": "ja.lex.advice.koudan", "form": "こうたん", "pack_gloss": "assertion", "kind": "gloss-divergence", "jmdict_sense_candidates": ["(tail) end", "birth (of a saint, monarch, etc.)", "nativity"]}
+{"id": "ja.lex.advice.ketai", "form": "けたい", "pack_gloss": "undignified", "kind": "gloss-divergence", "jmdict_sense_candidates": ["laziness", "indolence", "negligence (of duties)"]}
+{"id": "ja.lex.advice2.suusei", "form": "すうせい", "pack_gloss": "persuasion", "kind": "gloss-divergence", "jmdict_sense_candidates": ["tendency", "trend"]}
+{"id": "ja.lex.advice2.youchuu", "form": "ようちょう", "pack_gloss": "negotiation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["punishment (of an enemy)", "chastisement", "winding"]}
+{"id": "ja.lex.advice2.kokuhan", "form": "こくはん", "pack_gloss": "warning", "kind": "gloss-divergence", "jmdict_sense_candidates": ["black spot", "black speck"]}
+{"id": "ja.lex.advice2.sengaku", "form": "せんがく", "pack_gloss": "preference", "kind": "gloss-divergence", "jmdict_sense_candidates": ["shallow knowledge", "superficial learning", "academic predecessor"]}
+{"id": "ja.lex.advice2.kyoushou", "form": "きょうしょう", "pack_gloss": "compromise", "kind": "gloss-divergence", "jmdict_sense_candidates": ["agreement", "entente", "understanding"]}
+{"id": "ja.lex.advice2.inoko2", "form": "いのこ", "pack_gloss": "child", "kind": "gloss-divergence", "jmdict_sense_candidates": ["wild boar", "infant wild boar", "pig"]}
+{"id": "ja.lex.advice2.tetsudo", "form": "てつどう", "pack_gloss": "to help out", "kind": "gloss-divergence", "jmdict_sense_candidates": ["railroad", "railway", "rail transport"]}
+{"id": "ja.lex.art2.kadou", "form": "かどう", "pack_gloss": "calligraphy", "kind": "gloss-divergence", "jmdict_sense_candidates": ["vortex", "mobile", "moveable"]}
+{"id": "ja.lex.art2.minamo", "form": "みなも", "pack_gloss": "grace, elegance", "kind": "gloss-divergence", "jmdict_sense_candidates": ["water's surface"]}
+{"id": "ja.lex.art2.shitsunai", "form": "しつない", "pack_gloss": "interior design", "kind": "gloss-divergence", "jmdict_sense_candidates": ["indoor", "inside the room"]}
+{"id": "ja.lex.art2.fukushoku", "form": "ふくしょく", "pack_gloss": "interior decoration", "kind": "gloss-divergence", "jmdict_sense_candidates": ["side dish", "supplementary food", "reinstatement"]}
+{"id": "ja.lex.art2.maketto", "form": "まけっと", "pack_gloss": "market", "kind": "gloss-divergence", "jmdict_sense_candidates": ["maquette"]}
+{"id": "ja.lex.art2.kouchou", "form": "こうちょう", "pack_gloss": "extension, elongation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["Japanese bush warbler (Horornis diphone)", "black-naped oriole (Oriolus chinensis)", "bird of passage"]}
+{"id": "ja.lex.body.shoumyou", "form": "しょうめい", "pack_gloss": "symptom", "kind": "gloss-divergence", "jmdict_sense_candidates": ["call", "divine call", "illumination"]}
+{"id": "ja.lex.body.joushou", "form": "じょうしょう", "pack_gloss": "improvement", "kind": "gloss-divergence", "jmdict_sense_candidates": ["rising", "ascending", "climbing"]}
+{"id": "ja.lex.body.fukkyuu", "form": "ふっきゅう", "pack_gloss": "recovery", "kind": "gloss-divergence", "jmdict_sense_candidates": ["reprisal", "revenge", "restoration"]}
+{"id": "ja.lex.body.yochou", "form": "ようちょう", "pack_gloss": "health management", "kind": "gloss-divergence", "jmdict_sense_candidates": ["punishment (of an enemy)", "chastisement", "winding"]}
+{"id": "ja.lex.body.taiku", "form": "たいく", "pack_gloss": "exercise", "kind": "gloss-divergence", "jmdict_sense_candidates": ["physical education", "PE", "gym (class)"]}
+{"id": "ja.lex.body.junyou", "form": "じゅんよう", "pack_gloss": "regularity", "kind": "gloss-divergence", "jmdict_sense_candidates": ["to apply (the law) with necessary modifications", "to apply mutatis mutandis", "to apply correspondingly"]}
+{"id": "ja.lex.body.shoujiki", "form": "しょうじき", "pack_gloss": "honesty", "kind": "gloss-divergence", "jmdict_sense_candidates": ["honest", "frank", "candid"]}
+{"id": "ja.lex.body.kounyuu", "form": "こうにゅう", "pack_gloss": "admission", "kind": "gloss-divergence", "jmdict_sense_candidates": ["purchase", "buying"]}
+{"id": "ja.lex.body.touki", "form": "とうき", "pack_gloss": "waiting time", "kind": "gloss-divergence", "jmdict_sense_candidates": ["registry", "registration", "winter season"]}
+{"id": "ja.lex.body.fukutai", "form": "ふくたい", "pack_gloss": "abdomen", "kind": "gloss-divergence", "jmdict_sense_candidates": ["bellyband", "maternity belt", "(saddle) girth"]}
+{"id": "ja.lex.body.kata-kori", "form": "かたこり", "pack_gloss": "shoulder stiffness", "kind": "gloss-divergence", "jmdict_sense_candidates": ["stiff neck", "stiff shoulders"]}
+{"id": "ja.lex.body.kaffa", "form": "かふ", "pack_gloss": "cough", "kind": "gloss-divergence", "jmdict_sense_candidates": ["grant", "issue", "steward"]}
+{"id": "ja.lex.body.shokukan", "form": "しょうかん", "pack_gloss": "digestion", "kind": "gloss-divergence", "jmdict_sense_candidates": ["repayment", "redemption", "amortization"]}
+{"id": "ja.lex.body.yogen", "form": "よげん", "pack_gloss": "prevention", "kind": "gloss-divergence", "jmdict_sense_candidates": ["cosine", "prediction", "prophecy"]}
+{"id": "ja.lex.body.fukatsu", "form": "ふかつ", "pack_gloss": "constipation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["activation", "invigoration", "stimulation"]}
+{"id": "ja.lex.body.shinryoujo", "form": "しんりょうじょ", "pack_gloss": "waiting room", "kind": "gloss-divergence", "jmdict_sense_candidates": ["clinic", "medical office", "infirmary"]}
+{"id": "ja.lex.body.seisatsu", "form": "せいさつ", "pack_gloss": "sanitation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["reflection", "consideration", "roadside prohibition-edict boards"]}
+{"id": "ja.lex.city.yakuba", "form": "やくば", "pack_gloss": "neighborhood office", "kind": "gloss-divergence", "jmdict_sense_candidates": ["town hall"]}
+{"id": "ja.lex.city.kuyakusho", "form": "くやくしょ", "pack_gloss": "city hall", "kind": "gloss-divergence", "jmdict_sense_candidates": ["ward office", "council (regional)"]}
+{"id": "ja.lex.city.tenin", "form": "てんにん", "pack_gloss": "shop clerk", "kind": "gloss-divergence", "jmdict_sense_candidates": ["change of post", "Tennin era (1108.8.3-1110.7.13)", "heavenly being"]}
+{"id": "ja.lex.city.kanen", "form": "かねん", "pack_gloss": "this year", "kind": "gloss-divergence", "jmdict_sense_candidates": ["adding years", "inflammable", "flammable"]}
+{"id": "ja.lex.communication.app", "form": "あっぷ", "pack_gloss": "app", "kind": "gloss-divergence", "jmdict_sense_candidates": ["rise", "increase", "raising"]}
+{"id": "ja.lex.communication.bappu", "form": "ばっぷ", "pack_gloss": "map code", "kind": "gloss-divergence", "jmdict_sense_candidates": ["bop", "penalty payment", "points forfeited due to a rule violation"]}
+{"id": "ja.lex.communication.kuchi-komi", "form": "くちこみ", "pack_gloss": "rumor", "kind": "gloss-divergence", "jmdict_sense_candidates": ["word of mouth", "comments written online (about a product, service, etc.)", "online reviews"]}
+{"id": "ja.lex.communication.yakushi", "form": "やくし", "pack_gloss": "interpreter", "kind": "gloss-divergence", "jmdict_sense_candidates": ["Bhaisajyaguru", "Pindola", "The Healing Buddha"]}
+{"id": "ja.lex.communication.taigi", "form": "たいぎ", "pack_gloss": "dialogue", "kind": "gloss-divergence", "jmdict_sense_candidates": ["fighting sport", "combat sport", "martial art"]}
+{"id": "ja.lex.critique.puburisshu", "form": "ぱぶりっしゅ", "pack_gloss": "public relations", "kind": "gloss-divergence", "jmdict_sense_candidates": ["publishing"]}
+{"id": "ja.lex.critique.shieki", "form": "しえき", "pack_gloss": "share, equity", "kind": "gloss-divergence", "jmdict_sense_candidates": ["setting (someone) to work", "employment", "using"]}
+{"id": "ja.lex.critique.hatsuho", "form": "はっぽう", "pack_gloss": "publication, release", "kind": "gloss-divergence", "jmdict_sense_candidates": ["all sides", "the four cardinal directions and the four ordinal directions", "large hanging paper lantern"]}
+{"id": "ja.lex.critique.shinrou", "form": "しんろう", "pack_gloss": "fatigue, tiredness", "kind": "gloss-divergence", "jmdict_sense_candidates": ["anxiety", "worry", "fear"]}
+{"id": "ja.lex.critique.suiryoku", "form": "すいりょく", "pack_gloss": "sleep", "kind": "gloss-divergence", "jmdict_sense_candidates": ["hydraulic power", "water power", "thrust"]}
+{"id": "ja.lex.critique.mushiki", "form": "むしき", "pack_gloss": "unconsciousness", "kind": "gloss-divergence", "jmdict_sense_candidates": ["steamer", "steam cooker"]}
+{"id": "ja.lex.critique.shinji", "form": "しんじ", "pack_gloss": "belief, faith", "kind": "gloss-divergence", "jmdict_sense_candidates": ["newly created character", "newly introduced (kanji) character (in a textbook)", "new character form"]}
+{"id": "ja.lex.critique.koui", "form": "こうい", "pack_gloss": "behavior, action", "kind": "gloss-divergence", "jmdict_sense_candidates": ["kindness (shown by others)", "courtesy", "favor"]}
+{"id": "ja.lex.critique.doushutsu", "form": "どうしゅつ", "pack_gloss": "impulse, emission", "kind": "gloss-divergence", "jmdict_sense_candidates": ["derivation", "drawing (a conclusion)"]}
+{"id": "ja.lex.critique.shukan", "form": "しゅかん", "pack_gloss": "habit", "kind": "gloss-divergence", "jmdict_sense_candidates": ["chief editor", "managing editor", "manager"]}
+{"id": "ja.lex.critique.senryou", "form": "せんりょう", "pack_gloss": "measurement, test", "kind": "gloss-divergence", "jmdict_sense_candidates": ["glabrous sarcandra herb (Sarcandra glabra)", "very large sum (of money)", "very high value"]}
+{"id": "ja.lex.cult.denkou", "form": "でんこう", "pack_gloss": "tradition, transmission", "kind": "gloss-divergence", "jmdict_sense_candidates": ["lightning", "electric illumination", "light from an electric source"]}
+{"id": "ja.lex.cult.kaizoku", "form": "かいぞく", "pack_gloss": "belonging", "kind": "gloss-divergence", "jmdict_sense_candidates": ["pirate", "Hui (Islamic ethnic minority group of China)"]}
+{"id": "ja.lex.cult.juni", "form": "じゅうに", "pack_gloss": "residence, living", "kind": "gloss-divergence", "jmdict_sense_candidates": ["twelve", "12", "queen"]}
+{"id": "ja.lex.cult.rikken", "form": "りっけん", "pack_gloss": "recognition", "kind": "gloss-divergence", "jmdict_sense_candidates": ["constitutionalism", "Constitutional Democratic Party of Japan", "assembling a criminal case"]}
+{"id": "ja.lex.cult.kaiso", "form": "かいそ", "pack_gloss": "consideration, deliberation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["reorganization", "reorganisation", "reshuffle"]}
+{"id": "ja.lex.cult.kouchi", "form": "こうち", "pack_gloss": "will, motivation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["back-end", "postposition", "detention"]}
+{"id": "ja.lex.cult.senzoku", "form": "せんぞく", "pack_gloss": "ancestors", "kind": "gloss-divergence", "jmdict_sense_candidates": ["exclusive", "attached to", "specialist"]}
+{"id": "ja.lex.cult.kanko", "form": "かんこ", "pack_gloss": "tolerance, endurance", "kind": "gloss-divergence", "jmdict_sense_candidates": ["drying and hardening", "completely drying up", "acclamation"]}
+{"id": "ja.lex.cult.fuyu", "form": "ふゆう", "pack_gloss": "immersion", "kind": "gloss-divergence", "jmdict_sense_candidates": ["wealthy", "rich", "affluent"]}
+{"id": "ja.lex.cult.shinchou", "form": "しんちょう", "pack_gloss": "growth, development", "kind": "gloss-divergence", "jmdict_sense_candidates": ["careful", "cautious", "prudent"]}
+{"id": "ja.lex.cult2.hasshu", "form": "はっしゅ", "pack_gloss": "ethnicity, descent", "kind": "gloss-divergence", "jmdict_sense_candidates": ["hash (function, table, etc.)", "hash", "hash (sign)"]}
+{"id": "ja.lex.cult2.tekisho", "form": "てきしょう", "pack_gloss": "appropriation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["enemy general"]}
+{"id": "ja.lex.cult2.konketsu", "form": "こんけつ", "pack_gloss": "mixing, hybridity", "kind": "gloss-divergence", "jmdict_sense_candidates": ["mixed race", "mixed parentage", "being in a difficult position"]}
+{"id": "ja.lex.cult2.furon", "form": "ふろん", "pack_gloss": "borderline", "kind": "gloss-divergence", "jmdict_sense_candidates": ["fluorocarbon", "chlorofluorohydrocarbon", "CFC"]}
+{"id": "ja.lex.cult2.rikken2", "form": "りっけん", "pack_gloss": "recognition", "kind": "gloss-divergence", "jmdict_sense_candidates": ["constitutionalism", "Constitutional Democratic Party of Japan", "assembling a criminal case"]}
+{"id": "ja.lex.cult2.kizon2", "form": "きぞん", "pack_gloss": "respect, existence", "kind": "gloss-divergence", "jmdict_sense_candidates": ["existing"]}
+{"id": "ja.lex.cult2.himei", "form": "ひめい", "pack_gloss": "confidentiality", "kind": "gloss-divergence", "jmdict_sense_candidates": ["shriek", "scream", "inscription"]}
+{"id": "ja.lex.cult2.shingakusha", "form": "しんがくしゃ", "pack_gloss": "scholar", "kind": "gloss-divergence", "jmdict_sense_candidates": ["theologian"]}
+{"id": "ja.lex.culture.girei", "form": "ぎれい", "pack_gloss": "ceremony", "kind": "gloss-divergence", "jmdict_sense_candidates": ["courtesy", "etiquette", "formality"]}
+{"id": "ja.lex.culture.nenchuu", "form": "ねんちゅう", "pack_gloss": "annual", "kind": "gloss-divergence", "jmdict_sense_candidates": ["whole year", "all year round", "throughout the year"]}
+{"id": "ja.lex.culture.koge", "form": "こうげ", "pack_gloss": "craft", "kind": "gloss-divergence", "jmdict_sense_candidates": ["flowers and incense (given as a Buddhist offering)", "rise and fall (e.g. prices)", "fluctuation"]}
+{"id": "ja.lex.culture.teaji", "form": "てあい", "pack_gloss": "help", "kind": "gloss-divergence", "jmdict_sense_candidates": ["that kind", "competition", "match"]}
+{"id": "ja.lex.culture.saiho", "form": "さいほう", "pack_gloss": "worship", "kind": "gloss-divergence", "jmdict_sense_candidates": ["cell", "cell (in an organization, esp. a communist party)", "sewing"]}
+{"id": "ja.lex.culture.fuhaku", "form": "ふはく", "pack_gloss": "exhibition", "kind": "gloss-divergence", "jmdict_sense_candidates": ["frivolous", "fickle", "insincere"]}
+{"id": "ja.lex.culture.tenji-butsu", "form": "てんじぶつ", "pack_gloss": "exhibit", "kind": "gloss-divergence", "jmdict_sense_candidates": ["display items"]}
+{"id": "ja.lex.culture.shaji", "form": "しゃじ", "pack_gloss": "castle", "kind": "gloss-divergence", "jmdict_sense_candidates": ["copying", "transcription", "words of thanks"]}
+{"id": "ja.lex.culture.denkyou", "form": "でんきょう", "pack_gloss": "inheritance", "kind": "gloss-divergence", "jmdict_sense_candidates": ["missionary work (esp. Buddhist)", "preaching"]}
+{"id": "ja.lex.culture.tsuuke", "form": "つうかく", "pack_gloss": "fluency", "kind": "gloss-divergence", "jmdict_sense_candidates": ["sense of pain", "common case"]}
+{"id": "ja.lex.culture.shasei", "form": "しゃせい", "pack_gloss": "sketch", "kind": "gloss-divergence", "jmdict_sense_candidates": ["sketching", "drawing from nature", "portrayal"]}
+{"id": "ja.lex.culture2.kansen", "form": "かんせん", "pack_gloss": "greeting card", "kind": "gloss-divergence", "jmdict_sense_candidates": ["psoriasis", "main line", "trunk line"]}
+{"id": "ja.lex.culture2.tsutsumi", "form": "つつみ", "pack_gloss": "wrapping", "kind": "gloss-divergence", "jmdict_sense_candidates": ["bank", "embankment", "dike"]}
+{"id": "ja.lex.culture2.shitsurei", "form": "しつれい", "pack_gloss": "rudeness", "kind": "gloss-divergence", "jmdict_sense_candidates": ["discourtesy", "impoliteness", "excuse me"]}
+{"id": "ja.lex.culture2.shugo", "form": "しゅごう", "pack_gloss": "congratulation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["heavy drinker"]}
+{"id": "ja.lex.culture2.engi", "form": "えんぎ", "pack_gloss": "engagement", "kind": "gloss-divergence", "jmdict_sense_candidates": ["drama", "play", "acting"]}
+{"id": "ja.lex.culture2.sosai", "form": "そうさい", "pack_gloss": "funeral", "kind": "gloss-divergence", "jmdict_sense_candidates": ["funerals and festivals", "offset", "offsetting each other"]}
+{"id": "ja.lex.culture2.hanamuko", "form": "はなむこ", "pack_gloss": "groom", "kind": "gloss-divergence", "jmdict_sense_candidates": ["bridegroom"]}
+{"id": "ja.lex.culture2.hassou", "form": "はっそう", "pack_gloss": "interpretation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["idea", "conception", "way of thinking"]}
+{"id": "ja.lex.culture2.kousatsu", "form": "こうさつ", "pack_gloss": "observation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["strangling (to death)", "strangulation", "consideration"]}
+{"id": "ja.lex.debate.koryo", "form": "こうりょう", "pack_gloss": "talented", "kind": "gloss-divergence", "jmdict_sense_candidates": ["amount of light", "quantity of light", "duchy"]}
+{"id": "ja.lex.debate.kansa", "form": "かんさ", "pack_gloss": "observation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["investigation", "inspection", "audit"]}
+{"id": "ja.lex.debate.kento", "form": "けんと", "pack_gloss": "hardship", "kind": "gloss-divergence", "jmdict_sense_candidates": ["prefectural capital"]}
+{"id": "ja.lex.debate.jundo", "form": "じゅんどう", "pack_gloss": "order", "kind": "gloss-divergence", "jmdict_sense_candidates": ["pure copper"]}
+{"id": "ja.lex.debate.hifun", "form": "ひふん", "pack_gloss": "criticism", "kind": "gloss-divergence", "jmdict_sense_candidates": ["indignation", "resentment"]}
+{"id": "ja.lex.debate.fusan", "form": "ふさん", "pack_gloss": "negation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["absence", "nonattendance", "nonappearance"]}
+{"id": "ja.lex.debate.jiyu", "form": "じゆう", "pack_gloss": "free", "kind": "gloss-divergence", "jmdict_sense_candidates": ["reason", "cause", "whys and wherefores"]}
+{"id": "ja.lex.debate.kiso", "form": "きそ", "pack_gloss": "base", "kind": "gloss-divergence", "jmdict_sense_candidates": ["foundation", "basis", "prosecution"]}
+{"id": "ja.lex.debate.joretsu", "form": "じょれつ", "pack_gloss": "inferior", "kind": "gloss-divergence", "jmdict_sense_candidates": ["rank", "ranking order", "hierarchy"]}
+{"id": "ja.lex.debate.kyotsu", "form": "きょうつう", "pack_gloss": "commonality", "kind": "gloss-divergence", "jmdict_sense_candidates": ["common", "shared", "mutual"]}
+{"id": "ja.lex.debate.meiwaku", "form": "めいわく", "pack_gloss": "troublesome", "kind": "gloss-divergence", "jmdict_sense_candidates": ["trouble", "bother", "annoyance"]}
+{"id": "ja.lex.debate.shutten", "form": "しゅってん", "pack_gloss": "point of discussion", "kind": "gloss-divergence", "jmdict_sense_candidates": ["source (e.g. quotation)", "authority", "exhibit"]}
+{"id": "ja.lex.debate.tokui", "form": "とくい", "pack_gloss": "good at", "kind": "gloss-divergence", "jmdict_sense_candidates": ["satisfaction", "pride", "triumph"]}
+{"id": "ja.lex.debate.kika", "form": "きか", "pack_gloss": "mechanism", "kind": "gloss-divergence", "jmdict_sense_candidates": ["geometry", "mechanization", "mechanisation"]}
+{"id": "ja.lex.debate2.kaisou2", "form": "かいそう", "pack_gloss": "brainstorm", "kind": "gloss-divergence", "jmdict_sense_candidates": ["attendance at a funeral", "recollection", "retrospection"]}
+{"id": "ja.lex.debate2.jaramu", "form": "じょうめん", "pack_gloss": "scene", "kind": "gloss-divergence", "jmdict_sense_candidates": ["top (side)", "surface"]}
+{"id": "ja.lex.debate2.shutten2", "form": "しゅってん", "pack_gloss": "issue", "kind": "gloss-divergence", "jmdict_sense_candidates": ["source (e.g. quotation)", "authority", "exhibit"]}
+{"id": "ja.lex.debate2.akari2", "form": "あかり", "pack_gloss": "lighting", "kind": "gloss-divergence", "jmdict_sense_candidates": ["light", "glow", "gleam"]}
+{"id": "ja.lex.debate2.danraku", "form": "だんらく", "pack_gloss": "fall", "kind": "gloss-divergence", "jmdict_sense_candidates": ["paragraph", "end", "stopping place"]}
+{"id": "ja.lex.debate2.gou", "form": "ごう", "pack_gloss": "combination", "kind": "gloss-divergence", "jmdict_sense_candidates": ["karma", "result of one's karma", "fate"]}
+{"id": "ja.lex.economy.shohi", "form": "しょうもう", "pack_gloss": "depletion", "kind": "gloss-divergence", "jmdict_sense_candidates": ["exhaustion", "consumption", "using up"]}
+{"id": "ja.lex.economy.mugyou", "form": "むよう", "pack_gloss": "unemployment", "kind": "gloss-divergence", "jmdict_sense_candidates": ["useless", "futile", "unnecessary"]}
+{"id": "ja.lex.economy.kabushiki", "form": "かぶしき", "pack_gloss": "shares", "kind": "gloss-divergence", "jmdict_sense_candidates": ["share (in a company)", "stock"]}
+{"id": "ja.lex.economy.tsutome", "form": "つとめ", "pack_gloss": "employment", "kind": "gloss-divergence", "jmdict_sense_candidates": ["service", "duty", "business"]}
+{"id": "ja.lex.economy.kyougyou", "form": "きょうぎょう", "pack_gloss": "industry", "kind": "gloss-divergence", "jmdict_sense_candidates": ["cooperation", "collaboration", "cooperative work"]}
+{"id": "ja.lex.economy.saiyou", "form": "さいよう", "pack_gloss": "hiring", "kind": "gloss-divergence", "jmdict_sense_candidates": ["use", "adoption", "acceptance"]}
+{"id": "ja.lex.economy.senyou", "form": "せんよう", "pack_gloss": "specialization", "kind": "gloss-divergence", "jmdict_sense_candidates": ["adenoid", "exceeding one's authority to use something", "(one's) exclusive use"]}
+{"id": "ja.lex.economy.jiken", "form": "じけん", "pack_gloss": "experience", "kind": "gloss-divergence", "jmdict_sense_candidates": ["event", "affair", "incident"]}
+{"id": "ja.lex.economy.hensoku", "form": "げんそく", "pack_gloss": "slowdown", "kind": "gloss-divergence", "jmdict_sense_candidates": ["principle", "general rule", "as a rule"]}
+{"id": "ja.lex.economy2.akachin", "form": "あかちん", "pack_gloss": "deficit", "kind": "gloss-divergence", "jmdict_sense_candidates": ["mercurochrome", "merbromin solution"]}
+{"id": "ja.lex.economy2.boeki", "form": "ぼえき", "pack_gloss": "trade", "kind": "gloss-divergence", "jmdict_sense_candidates": ["mother liquor"]}
+{"id": "ja.lex.economy2.fuukyou", "form": "ふっきょう", "pack_gloss": "recession", "kind": "gloss-divergence", "jmdict_sense_candidates": ["dawn", "daybreak"]}
+{"id": "ja.lex.economy2.kaso", "form": "かさ", "pack_gloss": "disparity", "kind": "gloss-divergence", "jmdict_sense_candidates": ["conical hat (East-Asian style)", "coolie hat", "something shaped like a conical hat or an umbrella"]}
+{"id": "ja.lex.economy3.seiri", "form": "せいり", "pack_gloss": "profit", "kind": "gloss-divergence", "jmdict_sense_candidates": ["sorting", "arrangement", "organization"]}
+{"id": "ja.lex.edu.kenkai", "form": "けんかい", "pack_gloss": "luncheon meeting", "kind": "gloss-divergence", "jmdict_sense_candidates": ["prefectural assembly", "opinion", "point of view"]}
+{"id": "ja.lex.edu.shuumei", "form": "しゅうめい", "pack_gloss": "assembly; gathering", "kind": "gloss-divergence", "jmdict_sense_candidates": ["ruler's orders", "master's orders", "succession to another's professional name"]}
+{"id": "ja.lex.edu.kaihen", "form": "かいへん", "pack_gloss": "reply", "kind": "gloss-divergence", "jmdict_sense_candidates": ["change", "alteration", "modification"]}
+{"id": "ja.lex.edu.kachou", "form": "かちょう", "pack_gloss": "satisfaction", "kind": "gloss-divergence", "jmdict_sense_candidates": ["good tune", "audible", "head of a family"]}
+{"id": "ja.lex.edu.shishou", "form": "ししょう", "pack_gloss": "supervisor; advisor", "kind": "gloss-divergence", "jmdict_sense_candidates": ["stab", "puncture wound", "stabbing"]}
+{"id": "ja.lex.edu2.sentai", "form": "せんたい", "pack_gloss": "topic selection", "kind": "gloss-divergence", "jmdict_sense_candidates": ["squadron", "fleet", "moss"]}
+{"id": "ja.lex.edu2.danshaku", "form": "だんしゃく", "pack_gloss": "paragraph", "kind": "gloss-divergence", "jmdict_sense_candidates": ["baron", "Irish cobbler (variety of potato)"]}
+{"id": "ja.lex.edu2.ronshu", "form": "ろんしゅう", "pack_gloss": "argument; reasoning", "kind": "gloss-divergence", "jmdict_sense_candidates": ["collection of essays", "collection of treatises", "collection of theses"]}
+{"id": "ja.lex.edu2.kenji", "form": "けんじ", "pack_gloss": "evidence", "kind": "gloss-divergence", "jmdict_sense_candidates": ["stalwart youth", "sacred sword and jewels (imperial regalia)", "adhering to (a view, policy, etc.)"]}
+{"id": "ja.lex.edu2.shukufuku", "form": "しゅくふく", "pack_gloss": "lodging", "kind": "gloss-divergence", "jmdict_sense_candidates": ["celebration (of a joyous occasion)", "blessing", "giving one's blessing"]}
+{"id": "ja.lex.edu2.denja", "form": "でんじゃ", "pack_gloss": "email (formal)", "kind": "gloss-divergence", "jmdict_sense_candidates": ["country", "country home"]}
+{"id": "ja.lex.edu2.sanko-bunken", "form": "さんこうぶんけん", "pack_gloss": "reference book", "kind": "gloss-divergence", "jmdict_sense_candidates": ["works cited", "references"]}
+{"id": "ja.lex.edu2.kashu", "form": "かしゅ", "pack_gloss": "lending", "kind": "gloss-divergence", "jmdict_sense_candidates": ["good taste", "good impression", "good wine"]}
+{"id": "ja.lex.edu2.jikan-wari", "form": "じかんわり", "pack_gloss": "time allocation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["timetable (esp. a weekly school timetable)", "schedule"]}
+{"id": "ja.lex.edu2.kenta", "form": "けんた", "pack_gloss": "consideration", "kind": "gloss-divergence", "jmdict_sense_candidates": ["Kentucky Fried Chicken", "KFC"]}
+{"id": "ja.lex.edu2.houtei", "form": "ほうてい", "pack_gloss": "definition", "kind": "gloss-divergence", "jmdict_sense_candidates": ["legal", "designated by law", "court (of law)"]}
+{"id": "ja.lex.edu2.senkyuu", "form": "せんきゅう", "pack_gloss": "area; region", "kind": "gloss-divergence", "jmdict_sense_candidates": ["ship's classification", "waiting for a good hit at a pitch", "hermit's residence"]}
+{"id": "ja.lex.edu2.gengou", "form": "げんごう", "pack_gloss": "word combination", "kind": "gloss-divergence", "jmdict_sense_candidates": ["name of an imperial era (e.g. Heisei, Shōwa)", "Japanese era name", "minus sign"]}
+{"id": "ja.lex.edu2.yakuseki", "form": "やくせき", "pack_gloss": "translation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["various medicines", "medical treatment", "supper in a Zen temple"]}
+{"id": "ja.lex.edu2.chukai", "form": "ちゅうかい", "pack_gloss": "interpretation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["agency", "intermediation", "gloss"]}
+{"id": "ja.lex.edu2.chushi", "form": "ちゅうし", "pack_gloss": "note; annotation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["Central China", "interruption", "discontinuance"]}
+{"id": "ja.lex.edu3.shikaku", "form": "しかく", "pack_gloss": "qualification", "kind": "gloss-divergence", "jmdict_sense_candidates": ["assassin", "candidate fielded by a political party to oust an incumbent of the same party", "quadrilateral"]}
+{"id": "ja.lex.edu3.happyou", "form": "はっぴょう", "pack_gloss": "presentation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["announcement", "publication", "presenting"]}
+{"id": "ja.lex.edu3.riki", "form": "りき", "pack_gloss": "comprehension", "kind": "gloss-divergence", "jmdict_sense_candidates": ["strength", "power", "proficiency"]}
+{"id": "ja.lex.edu3.saidou", "form": "せいた", "pack_gloss": "adaptation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["backboard", "dorsal plate", "tergum"]}
+{"id": "ja.lex.edu3.koubun", "form": "こうぶん", "pack_gloss": "passage, text", "kind": "gloss-divergence", "jmdict_sense_candidates": ["official document", "archives", "sentence structure"]}
+{"id": "ja.lex.edu3.choukai", "form": "ちょうかい", "pack_gloss": "dialogue", "kind": "gloss-divergence", "jmdict_sense_candidates": ["discipline", "punishment", "reprimand"]}
+{"id": "ja.lex.edu4.shokubun", "form": "しょくぶん", "pack_gloss": "professionalism", "kind": "gloss-divergence", "jmdict_sense_candidates": ["one's duty", "vocation", "phase of an eclipse"]}
+{"id": "ja.lex.edu4.shumoku", "form": "しょくむ", "pack_gloss": "vocation, occupation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["professional duties"]}
+{"id": "ja.lex.edu4.senkousei", "form": "せんこう", "pack_gloss": "priorities", "kind": "gloss-divergence", "jmdict_sense_candidates": ["batting first", "preceding emperor", "(one's) late father"]}
+{"id": "ja.lex.edu4.tokucho", "form": "とくちょう", "pack_gloss": "characteristics", "kind": "gloss-divergence", "jmdict_sense_candidates": ["feature", "trait", "characteristic"]}
+{"id": "ja.lex.edu4.hoiku", "form": "いく", "pack_gloss": "childcare", "kind": "gloss-divergence", "jmdict_sense_candidates": ["reverence", "awe", "fear"]}
+{"id": "ja.lex.edu4.jitsugyo", "form": "じつぎょう", "pack_gloss": "practicum", "kind": "gloss-divergence", "jmdict_sense_candidates": ["industry", "business"]}
+{"id": "ja.lex.edu4.byoudou", "form": "びょうどう", "pack_gloss": "equity", "kind": "gloss-divergence", "jmdict_sense_candidates": ["equality", "impartiality", "evenness"]}
+{"id": "ja.lex.edu4.kyousei2", "form": "ふうとう", "pack_gloss": "disadvantage", "kind": "gloss-divergence", "jmdict_sense_candidates": ["envelope", "maple sugar", "wind and waves"]}
+{"id": "ja.lex.edu4.kuni", "form": "くに", "pack_gloss": "nation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["country", "state", "region"]}
+{"id": "ja.lex.edu4.hiyou", "form": "ひよう", "pack_gloss": "expenditure", "kind": "gloss-divergence", "jmdict_sense_candidates": ["cost", "expense", "flying"]}
+{"id": "ja.lex.edu4.zentai", "form": "ぜんたい", "pack_gloss": "overall", "kind": "gloss-divergence", "jmdict_sense_candidates": ["whole", "entirety", "to begin with"]}
+{"id": "ja.lex.emotion.majime", "form": "まじめ", "pack_gloss": "diligent", "kind": "gloss-divergence", "jmdict_sense_candidates": ["serious", "earnest", "sober"]}
+{"id": "ja.lex.emotion.ousetsu", "form": "おうせつ", "pack_gloss": "gregarious", "kind": "gloss-divergence", "jmdict_sense_candidates": ["reception (e.g. of visitors)", "dealing with"]}
+{"id": "ja.lex.emotion.kenmei", "form": "けんめい", "pack_gloss": "conscientious", "kind": "gloss-divergence", "jmdict_sense_candidates": ["subject", "title", "subject (of an email)"]}
+{"id": "ja.lex.emotion.ki-kokochi", "form": "きごこち", "pack_gloss": "sensation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["(good or bad) feel when wearing something"]}
+{"id": "ja.lex.emotion.wakuwaku", "form": "わくわく", "pack_gloss": "excitement", "kind": "gloss-divergence", "jmdict_sense_candidates": ["to be excited", "to be nervous", "to be thrilled"]}
+{"id": "ja.lex.emotion.iraira", "form": "いらいら", "pack_gloss": "irritation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["to get irritated", "to get annoyed", "to be on the edge"]}
+{"id": "ja.lex.emotion.dokidoki", "form": "どきどき", "pack_gloss": "palpitation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["thump-thump", "bang-bang", "pit-a-pat"]}
+{"id": "ja.lex.emotion.ki-gamae", "form": "きまえ", "pack_gloss": "mental readiness", "kind": "gloss-divergence", "jmdict_sense_candidates": ["generosity"]}
+{"id": "ja.lex.emotion.ki-oku", "form": "きおく", "pack_gloss": "consideration", "kind": "gloss-divergence", "jmdict_sense_candidates": ["memory", "recollection", "remembrance"]}
+{"id": "ja.lex.emotion.ki-magu", "form": "きまぐれ", "pack_gloss": "moodiness", "kind": "gloss-divergence", "jmdict_sense_candidates": ["whim", "caprice", "fancy"]}
+{"id": "ja.lex.emotion.kizukai", "form": "きづかい", "pack_gloss": "thoughtfulness", "kind": "gloss-divergence", "jmdict_sense_candidates": ["consideration", "concern", "fear"]}
+{"id": "ja.lex.emotion.genkotsu", "form": "げんこつ", "pack_gloss": "scolding", "kind": "gloss-divergence", "jmdict_sense_candidates": ["(clenched) fist", "knuckles", "thighbone (esp. in pigs)"]}
+{"id": "ja.lex.emotion.shougi", "form": "しょうぎ", "pack_gloss": "apology", "kind": "gloss-divergence", "jmdict_sense_candidates": ["conference", "consultation", "prostitute"]}
+{"id": "ja.lex.emotion.mottai", "form": "もったい", "pack_gloss": "cherishing", "kind": "gloss-divergence", "jmdict_sense_candidates": ["superior airs", "air of importance", "overemphasis"]}
+{"id": "ja.lex.emotion.yamashii", "form": "やましい", "pack_gloss": "ashamed", "kind": "gloss-divergence", "jmdict_sense_candidates": ["feeling guilty", "having a guilty conscience", "having qualms about"]}
+{"id": "ja.lex.emotion.joutou", "form": "じょうとう", "pack_gloss": "running account", "kind": "gloss-divergence", "jmdict_sense_candidates": ["raising the ridgepole", "superior", "first-class"]}
+{"id": "ja.lex.emotion.shouki", "form": "しょうき", "pack_gloss": "encouragement", "kind": "gloss-divergence", "jmdict_sense_candidates": ["affectation", "desire to be impressive", "business opportunity"]}
+{"id": "ja.lex.emotion.shoujin", "form": "しょうじん", "pack_gloss": "exhortation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["promotion", "advancement", "rising in rank"]}
+{"id": "ja.lex.emotion.akui", "form": "あくい", "pack_gloss": "ulterior motive", "kind": "gloss-divergence", "jmdict_sense_candidates": ["ill will", "spite", "evil intention"]}
+{"id": "ja.lex.emotion.tenko", "form": "てんこう", "pack_gloss": "turning point", "kind": "gloss-divergence", "jmdict_sense_candidates": ["weather", "queen of heaven", "work of nature"]}
+{"id": "ja.lex.emotion.sara-ni", "form": "さらに", "pack_gloss": "further", "kind": "gloss-divergence", "jmdict_sense_candidates": ["furthermore", "again", "after all"]}
+{"id": "ja.lex.emotion2.kibune", "form": "きぶね", "pack_gloss": "temperament", "kind": "gloss-divergence", "jmdict_sense_candidates": ["wooden vat (esp. for sake brewing)", "wooden tank"]}
+{"id": "ja.lex.emotion2.waku", "form": "わく", "pack_gloss": "excitement", "kind": "gloss-divergence", "jmdict_sense_candidates": ["frame", "framework", "border"]}
+{"id": "ja.lex.emotion2.seika", "form": "せいか", "pack_gloss": "success", "kind": "gloss-divergence", "jmdict_sense_candidates": ["influential family", "the man in power", "(good) result"]}
+{"id": "ja.lex.emotion2.setsunai", "form": "せつない", "pack_gloss": "bittersweet", "kind": "gloss-divergence", "jmdict_sense_candidates": ["painful", "heartrending", "trying"]}
+{"id": "ja.lex.emotion2.kirakira", "form": "きらきら", "pack_gloss": "sparkle", "kind": "gloss-divergence", "jmdict_sense_candidates": ["glittering", "sparkling", "glistening"]}
+{"id": "ja.lex.ent.eiga-kan", "form": "えいかん", "pack_gloss": "movie theater", "kind": "gloss-divergence", "jmdict_sense_candidates": ["emperor's approval", "crown of victory", "laurels"]}
+{"id": "ja.lex.ent.kangeki", "form": "かんげき", "pack_gloss": "performance viewing", "kind": "gloss-divergence", "jmdict_sense_candidates": ["deep emotion", "impression", "inspiration"]}
+{"id": "ja.lex.ent.supa", "form": "すぱー", "pack_gloss": "sports channel", "kind": "gloss-divergence", "jmdict_sense_candidates": ["spar", "spa (mineral spring)", "spa (establishment with facilities for beauty treatment, weight loss, relaxation, etc.)"]}
+{"id": "ja.lex.ent.hyouban", "form": "ひょうばん", "pack_gloss": "rating", "kind": "gloss-divergence", "jmdict_sense_candidates": ["reputation", "(public) estimation", "popularity"]}
+{"id": "ja.lex.ent.senkyou", "form": "せんきょう", "pack_gloss": "enthusiasm", "kind": "gloss-divergence", "jmdict_sense_candidates": ["religious mission", "religious proclamation", "fairyland"]}
+{"id": "ja.lex.ent.kanzen", "form": "かんぜん", "pack_gloss": "perfectly", "kind": "gloss-divergence", "jmdict_sense_candidates": ["perfect", "complete", "boldly"]}
+{"id": "ja.lex.ent.taimu", "form": "たいむ", "pack_gloss": "team", "kind": "gloss-divergence", "jmdict_sense_candidates": ["time (for, to do)", "time (to finish a race, lap, etc.)", "time-out"]}
+{"id": "ja.lex.ent.joju", "form": "じゅじゅ", "pack_gloss": "attendance", "kind": "gloss-divergence", "jmdict_sense_candidates": ["giving and receiving", "transferring", "transfer"]}
+{"id": "ja.expr.introduction.hajimemashite", "form": "はじめまして", "pack_gloss": "said at a first introduction; roughly marks 'we have not met before'", "kind": "gloss-divergence", "jmdict_sense_candidates": ["nice to meet you", "I'm glad to make your acquaintance", "how do you do?"]}
+{"id": "ja.lex.env.kikaku", "form": "きかく", "pack_gloss": "specification", "kind": "gloss-divergence", "jmdict_sense_candidates": ["planning", "plan", "project"]}
+{"id": "ja.lex.env.seita", "form": "せいた", "pack_gloss": "ecosystem", "kind": "gloss-divergence", "jmdict_sense_candidates": ["backboard", "dorsal plate", "tergum"]}
+{"id": "ja.lex.env.kiko", "form": "きこ", "pack_gloss": "machine", "kind": "gloss-divergence", "jmdict_sense_candidates": ["banner and drums", "army", "old and strange"]}
+{"id": "ja.lex.env.koushou", "form": "こうしょう", "pack_gloss": "emission", "kind": "gloss-divergence", "jmdict_sense_candidates": ["spring of yellow buds", "negotiations", "bargaining"]}
+{"id": "ja.lex.env.seizou", "form": "せいぞう", "pack_gloss": "manufacturing", "kind": "gloss-divergence", "jmdict_sense_candidates": ["years", "time", "manufacture"]}
+{"id": "ja.lex.env.seisi", "form": "せいし", "pack_gloss": "cleanliness", "kind": "gloss-divergence", "jmdict_sense_candidates": ["heir", "successor", "control"]}
+{"id": "ja.lex.env2.shinan", "form": "しなん", "pack_gloss": "drill", "kind": "gloss-divergence", "jmdict_sense_candidates": ["instruction (in martial arts, performance, etc.)", "teaching", "coaching"]}
+{"id": "ja.lex.env2.yokei", "form": "よけい", "pack_gloss": "warning", "kind": "gloss-divergence", "jmdict_sense_candidates": ["fortunate heredity", "blessings", "the rewards of virtue"]}
+{"id": "ja.lex.env2.bousui", "form": "ぼうすい", "pack_gloss": "flood prevention", "kind": "gloss-divergence", "jmdict_sense_candidates": ["spindle", "waterproofing", "making watertight"]}
+{"id": "ja.lex.env2.nouhin", "form": "のうひん", "pack_gloss": "farm product", "kind": "gloss-divergence", "jmdict_sense_candidates": ["delivery of goods"]}
+{"id": "ja.lex.env2.setsuyaku", "form": "せつやく", "pack_gloss": "thrift", "kind": "gloss-divergence", "jmdict_sense_candidates": ["saving (e.g. time, money, resources)", "economising", "economizing"]}
+{"id": "ja.lex.env2.muda-zukai", "form": "むだづかい", "pack_gloss": "wasteful use", "kind": "gloss-divergence", "jmdict_sense_candidates": ["waste (of money, time, etc.)", "squandering", "frittering away"]}
+{"id": "ja.lex.env3.cooling", "form": "くりーにんぐ", "pack_gloss": "cooling", "kind": "gloss-divergence", "jmdict_sense_candidates": ["cleaning", "dry cleaning", "laundry service"]}
+{"id": "ja.lex.env3.shifuku", "form": "しふく", "pack_gloss": "transition, shift", "kind": "gloss-divergence", "jmdict_sense_candidates": ["paper width", "allotted number of pages (e.g. for article in magazine)", "assigned space"]}
+{"id": "ja.lex.env3.risshou", "form": "りっしょう", "pack_gloss": "establishment, founding", "kind": "gloss-divergence", "jmdict_sense_candidates": ["establishing proof", "demonstration", "substantiation"]}
+{"id": "ja.lex.env3.teiki", "form": "てき", "pack_gloss": "appropriate, suitable", "kind": "gloss-divergence", "jmdict_sense_candidates": ["beefsteak", "-ical", "-ive"]}
+{"id": "ja.lex.env3.seikyou", "form": "せいきょう", "pack_gloss": "request, appeal", "kind": "gloss-divergence", "jmdict_sense_candidates": ["orthodoxy", "(Greek) orthodox church", "co-op"]}
+{"id": "ja.lex.env3.kisan", "form": "きさん", "pack_gloss": "base, foundation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["reckoning from some position (e.g. point, date, etc.)", "returning", "coming back"]}
+{"id": "ja.lex.env3.chiseki", "form": "ちせき", "pack_gloss": "trace, vestige", "kind": "gloss-divergence", "jmdict_sense_candidates": ["(legacy of an) administration", "area of a piece of land", "acreage"]}
+{"id": "ja.lex.env4.shakai-kinou", "form": "しゃかいきのう", "pack_gloss": "social responsibility", "kind": "gloss-divergence", "jmdict_sense_candidates": ["functioning of society", "functions of society"]}
+{"id": "ja.lex.env4.fuyou", "form": "ふよう", "pack_gloss": "need, necessity", "kind": "gloss-divergence", "jmdict_sense_candidates": ["support (e.g. of one's dependents)", "maintenance", "floating (e.g. in air, water)"]}
+{"id": "ja.lex.env4.kansa2", "form": "かんさ", "pack_gloss": "observation, monitoring", "kind": "gloss-divergence", "jmdict_sense_candidates": ["investigation", "inspection", "audit"]}
+{"id": "ja.lex.env4.kenso", "form": "けんそ", "pack_gloss": "modesty, humility", "kind": "gloss-divergence", "jmdict_sense_candidates": ["economical and simple", "steep (terrain)", "precipitous"]}
+{"id": "ja.lex.env4.ikou", "form": "いこう", "pack_gloss": "conduct, behavior", "kind": "gloss-divergence", "jmdict_sense_candidates": ["on and after", "from ... onward", "since"]}
+{"id": "ja.lex.env4.yoka", "form": "ようか", "pack_gloss": "effect, influence", "kind": "gloss-divergence", "jmdict_sense_candidates": ["8th day of the month", "eight days", "pupation"]}
+{"id": "ja.lex.env4.hosei", "form": "ほうせい", "pack_gloss": "regulation, correction", "kind": "gloss-divergence", "jmdict_sense_candidates": ["legislation", "laws", "verbal message"]}
+{"id": "ja.lex.env4.yueki", "form": "ゆうえき", "pack_gloss": "profit, benefit", "kind": "gloss-divergence", "jmdict_sense_candidates": ["beneficial", "profitable", "useful"]}
+{"id": "ja.lex.env4.kyougi", "form": "きょうぎ", "pack_gloss": "opposition", "kind": "gloss-divergence", "jmdict_sense_candidates": ["game", "match", "contest"]}
+{"id": "ja.lex.env4.kison", "form": "きそん", "pack_gloss": "respect", "kind": "gloss-divergence", "jmdict_sense_candidates": ["existing", "damage", "injury"]}
+{"id": "ja.lex.env4.fuhou", "form": "ふほう", "pack_gloss": "unfairness", "kind": "gloss-divergence", "jmdict_sense_candidates": ["unlawful", "illegal", "unreasonable"]}
+{"id": "ja.lex.env4.kaken", "form": "かけん", "pack_gloss": "danger, risk", "kind": "gloss-divergence", "jmdict_sense_candidates": ["family constitution", "beautiful eyelids", "adding to the Constitution (e.g. an article)"]}
+{"id": "ja.lex.film.joryu", "form": "じょりゅう", "pack_gloss": "genre", "kind": "gloss-divergence", "jmdict_sense_candidates": ["woman (writer, artist, aviator, etc.)"]}
+{"id": "ja.lex.film.onsetsu", "form": "おんせつ", "pack_gloss": "sound setting", "kind": "gloss-divergence", "jmdict_sense_candidates": ["syllable"]}
+{"id": "ja.lex.film.hyouban", "form": "ひょうばん", "pack_gloss": "billboard", "kind": "gloss-divergence", "jmdict_sense_candidates": ["reputation", "(public) estimation", "popularity"]}
+{"id": "ja.lex.film.kanyuu", "form": "かんにゅう", "pack_gloss": "screening admission", "kind": "gloss-divergence", "jmdict_sense_candidates": ["subsidence", "depression", "sinking"]}
+{"id": "ja.lex.film.kanyuu2", "form": "かんにゅう", "pack_gloss": "admission", "kind": "gloss-divergence", "jmdict_sense_candidates": ["subsidence", "depression", "sinking"]}
+{"id": "ja.lex.film.seika", "form": "せいか", "pack_gloss": "success", "kind": "gloss-divergence", "jmdict_sense_candidates": ["influential family", "the man in power", "(good) result"]}
+{"id": "ja.lex.film.zum", "form": "ずむ", "pack_gloss": "zoom", "kind": "gloss-divergence", "jmdict_sense_candidates": ["-ism"]}
+{"id": "ja.lex.film.fukuzai", "form": "ふくざい", "pack_gloss": "complexity", "kind": "gloss-divergence", "jmdict_sense_candidates": ["lying concealed", "being hidden", "penal servitude"]}
+{"id": "ja.lex.film.hakyuu", "form": "はっきゅう", "pack_gloss": "expansion", "kind": "gloss-divergence", "jmdict_sense_candidates": ["small salary", "meagre salary", "low pay"]}
+{"id": "ja.lex.film.katsuyaku", "form": "かつやく", "pack_gloss": "performance", "kind": "gloss-divergence", "jmdict_sense_candidates": ["activity (esp. energetic or successful)", "great efforts", "active participation"]}
+{"id": "ja.lex.film.kouchou", "form": "こうちょう", "pack_gloss": "growth", "kind": "gloss-divergence", "jmdict_sense_candidates": ["Japanese bush warbler (Horornis diphone)", "black-naped oriole (Oriolus chinensis)", "bird of passage"]}
+{"id": "ja.lex.film2.ketsui", "form": "けつい", "pack_gloss": "resolve", "kind": "gloss-divergence", "jmdict_sense_candidates": ["decision", "determination", "resolution"]}
+{"id": "ja.lex.film2.taifu", "form": "たいふ", "pack_gloss": "richness, depth", "kind": "gloss-divergence", "jmdict_sense_candidates": ["high steward", "grand master", "Grand Tutor (second of the top three civil positions of the Zhou dynasty)"]}
+{"id": "ja.lex.food.houshi", "form": "ほうし", "pack_gloss": "simmering", "kind": "gloss-divergence", "jmdict_sense_candidates": ["service", "ministry", "attendance"]}
+{"id": "ja.lex.food.tsukemono", "form": "つけもの", "pack_gloss": "pickles", "kind": "gloss-divergence", "jmdict_sense_candidates": ["tsukemono (pickled vegetables)"]}
+{"id": "ja.lex.formal.kaihen", "form": "かいへん", "pack_gloss": "reply, response", "kind": "gloss-divergence", "jmdict_sense_candidates": ["change", "alteration", "modification"]}
+{"id": "ja.lex.formal.shikaku", "form": "しかく", "pack_gloss": "qualification", "kind": "gloss-divergence", "jmdict_sense_candidates": ["assassin", "candidate fielded by a political party to oust an incumbent of the same party", "quadrilateral"]}
+{"id": "ja.lex.formal.kokuho", "form": "こうほ", "pack_gloss": "public announcement", "kind": "gloss-divergence", "jmdict_sense_candidates": ["candidate", "contender", "prospect"]}
+{"id": "ja.lex.formal.teikou", "form": "ていこう", "pack_gloss": "submission", "kind": "gloss-divergence", "jmdict_sense_candidates": ["resistance", "opposition", "standing up to"]}
+{"id": "ja.lex.formal.koushou", "form": "こうしょう", "pack_gloss": "negotiation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["spring of yellow buds", "negotiations", "bargaining"]}
+{"id": "ja.lex.formal.torihiki", "form": "とりひき", "pack_gloss": "transaction", "kind": "gloss-divergence", "jmdict_sense_candidates": ["transactions", "dealings", "business"]}
+{"id": "ja.lex.formal.houshou", "form": "ほうしょう", "pack_gloss": "guarantee", "kind": "gloss-divergence", "jmdict_sense_candidates": ["compensation", "indemnity", "reparation"]}
+{"id": "ja.lex.formal.gankou", "form": "がんこう", "pack_gloss": "year-end", "kind": "gloss-divergence", "jmdict_sense_candidates": ["sparkle of one's eyes", "insight", "discernment"]}
+{"id": "ja.lex.formal2.hotei", "form": "ほうてい", "pack_gloss": "provision, clause", "kind": "gloss-divergence", "jmdict_sense_candidates": ["legal", "designated by law", "court (of law)"]}
+{"id": "ja.lex.formal2.shoukaijo", "form": "しょうかいじょ", "pack_gloss": "letter of introduction", "kind": "gloss-divergence", "jmdict_sense_candidates": ["agency"]}
+{"id": "ja.lex.formal2.ansho", "form": "あんしょ", "pack_gloss": "reply letter", "kind": "gloss-divergence", "jmdict_sense_candidates": ["dark place", "unlit spot", "darkness"]}
+{"id": "ja.lex.formal2.keijou", "form": "けいじょう", "pack_gloss": "celebratory letter", "kind": "gloss-divergence", "jmdict_sense_candidates": ["place of execution", "shape", "form"]}
+{"id": "ja.lex.formal2.shougi", "form": "しょうぎ", "pack_gloss": "argument, dispute", "kind": "gloss-divergence", "jmdict_sense_candidates": ["conference", "consultation", "prostitute"]}
+{"id": "ja.lex.formal2.toukyou", "form": "とうきょう", "pack_gloss": "sculpture", "kind": "gloss-divergence", "jmdict_sense_candidates": ["Tokyo"]}
+{"id": "ja.lex.formal2.ryousen", "form": "りょうせん", "pack_gloss": "perspective", "kind": "gloss-divergence", "jmdict_sense_candidates": ["consort ship", "ridgeline", "lines of a mountain ridge"]}
+{"id": "ja.lex.formal2.hyoushiki", "form": "ひょうしき", "pack_gloss": "expression form", "kind": "gloss-divergence", "jmdict_sense_candidates": ["sign", "mark", "marker"]}
+{"id": "ja.lex.formal2.denpou", "form": "でんぽう", "pack_gloss": "telegraph, wire", "kind": "gloss-divergence", "jmdict_sense_candidates": ["brazen (esp. of a woman's behavior)", "bold", "brave"]}
+{"id": "ja.lex.formal2.kairan", "form": "かいらん", "pack_gloss": "viewing, inspection", "kind": "gloss-divergence", "jmdict_sense_candidates": ["brooding", "weighing anchor", "unmooring"]}
+{"id": "ja.lex.formal2.shizei", "form": "しぜい", "pack_gloss": "natural form", "kind": "gloss-divergence", "jmdict_sense_candidates": ["city tax"]}
+{"id": "ja.lex.formal2.hennyu", "form": "へんにゅう", "pack_gloss": "insertion, amendment", "kind": "gloss-divergence", "jmdict_sense_candidates": ["admission", "incorporation", "enlistment"]}
+{"id": "ja.lex.global.kuiki", "form": "くいき", "pack_gloss": "region, bloc", "kind": "gloss-divergence", "jmdict_sense_candidates": ["area", "zone", "district"]}
+{"id": "ja.lex.global.kyouryoku", "form": "きょうりょく", "pack_gloss": "authority, power", "kind": "gloss-divergence", "jmdict_sense_candidates": ["powerful", "strong", "cooperation"]}
+{"id": "ja.lex.global.choukai2", "form": "こうしょう", "pack_gloss": "negotiation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["spring of yellow buds", "negotiations", "bargaining"]}
+{"id": "ja.lex.global.kyousei3", "form": "しゃくぜん", "pack_gloss": "ceasefire", "kind": "gloss-divergence", "jmdict_sense_candidates": ["fully satisfied (with an explanation, apology, etc.)", "happy", "cleared of doubt"]}
+{"id": "ja.lex.global.kizon", "form": "きぞん", "pack_gloss": "survival, existence", "kind": "gloss-divergence", "jmdict_sense_candidates": ["existing"]}
+{"id": "ja.lex.global.denshin", "form": "でんしん", "pack_gloss": "transmission, broadcasting", "kind": "gloss-divergence", "jmdict_sense_candidates": ["(electric) telegraph", "telegraphy", "telegraphic communication"]}
+{"id": "ja.lex.global.hatten3", "form": "はってん", "pack_gloss": "developing", "kind": "gloss-divergence", "jmdict_sense_candidates": ["development", "growth", "expansion"]}
+{"id": "ja.lex.global.fukkyuu2", "form": "ふっきゅう", "pack_gloss": "recovery", "kind": "gloss-divergence", "jmdict_sense_candidates": ["reprisal", "revenge", "restoration"]}
+{"id": "ja.lex.global.josei", "form": "じょうせい", "pack_gloss": "financial support", "kind": "gloss-divergence", "jmdict_sense_candidates": ["superior make", "luxury binding", "state of things"]}
+{"id": "ja.lex.global.aisou", "form": "そう", "pack_gloss": "conflict", "kind": "gloss-divergence", "jmdict_sense_candidates": ["appearing that", "seeming that", "looking like"]}
+{"id": "ja.lex.global.kaitai", "form": "かいたい", "pack_gloss": "resolution", "kind": "gloss-divergence", "jmdict_sense_candidates": ["demolition", "taking down", "dismantling"]}
+{"id": "ja.lex.global.ryuukou", "form": "りゅうこう", "pack_gloss": "travel", "kind": "gloss-divergence", "jmdict_sense_candidates": ["fashion", "trend", "vogue"]}
+{"id": "ja.lex.global.yusei", "form": "ゆうせい", "pack_gloss": "priority", "kind": "gloss-divergence", "jmdict_sense_candidates": ["superiority", "superior power", "predominance"]}
+{"id": "ja.lex.global.kankaku", "form": "かんかく", "pack_gloss": "sensitivity, awareness", "kind": "gloss-divergence", "jmdict_sense_candidates": ["sense", "sensation", "feeling"]}
+{"id": "ja.lex.global2.shigen2", "form": "しげん", "pack_gloss": "resource", "kind": "gloss-divergence", "jmdict_sense_candidates": ["apt remark", "wise saying", "resources"]}
+{"id": "ja.lex.global2.unyu", "form": "うんゆ", "pack_gloss": "transport of goods", "kind": "gloss-divergence", "jmdict_sense_candidates": ["transportation"]}
+{"id": "ja.lex.global2.kutsu2", "form": "くう", "pack_gloss": "housing shortage", "kind": "gloss-divergence", "jmdict_sense_candidates": ["to eat", "to live", "to make a living"]}
+{"id": "ja.lex.global2.shigai2", "form": "しがい", "pack_gloss": "over-tourism", "kind": "gloss-divergence", "jmdict_sense_candidates": ["outside the city", "suburbs", "urban areas"]}
+{"id": "ja.lex.global2.kokusai3", "form": "こくさい", "pack_gloss": "internationality", "kind": "gloss-divergence", "jmdict_sense_candidates": ["national debt", "national securities", "government bonds"]}
+{"id": "ja.lex.global2.hoitsu", "form": "ほういつ", "pack_gloss": "law, legislation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["self-indulgence", "looseness", "dissoluteness"]}
+{"id": "ja.lex.global2.koso", "form": "こそう", "pack_gloss": "construction, organization", "kind": "gloss-divergence", "jmdict_sense_candidates": ["drying up", "parching", "dry grass"]}
+{"id": "ja.lex.greetings.itadakimasu", "form": "いただきます", "pack_gloss": "said before eating", "kind": "gloss-divergence", "jmdict_sense_candidates": ["thank you (for the meal just served)", "I receive (this meal)"]}
+{"id": "ja.lex.greetings.gochisousama", "form": "ごちそうさま", "pack_gloss": "said after eating", "kind": "gloss-divergence", "jmdict_sense_candidates": ["thank you (for the meal)", "that was a delicious meal", "thank you (for displaying lovey-dovey behaviour)"]}
+{"id": "ja.lex.health2.seikatsu2", "form": "せいかつ", "pack_gloss": "lifestyle", "kind": "gloss-divergence", "jmdict_sense_candidates": ["secant (trigonometric function)", "life", "living"]}
+{"id": "ja.lex.health2.taikyuu", "form": "たいきゅう", "pack_gloss": "rest", "kind": "gloss-divergence", "jmdict_sense_candidates": ["endurance", "persistence", "Daegu (South Korea)"]}
+{"id": "ja.lex.health2.koku2", "form": "こく", "pack_gloss": "meal", "kind": "gloss-divergence", "jmdict_sense_candidates": ["ancient expression", "old poem", "period of time (usu. a period of approx. two hours corresponding to one of the signs of the Chinese zodiac)"]}
+{"id": "ja.lex.health2.unsou", "form": "うんそう", "pack_gloss": "exercise", "kind": "gloss-divergence", "jmdict_sense_candidates": ["transport", "freight", "shipping"]}
+{"id": "ja.lex.health2.junou", "form": "じゅのう", "pack_gloss": "flexible", "kind": "gloss-divergence", "jmdict_sense_candidates": ["acceptance", "receiving"]}
+{"id": "ja.lex.health2.kinyu", "form": "きんゆ", "pack_gloss": "bath", "kind": "gloss-divergence", "jmdict_sense_candidates": ["embargo"]}
+{"id": "ja.lex.health2.kessha", "form": "けっしゃ", "pack_gloss": "facility", "kind": "gloss-divergence", "jmdict_sense_candidates": ["association", "society"]}
+{"id": "ja.lex.health2.fuka", "form": "ふか", "pack_gloss": "depth", "kind": "gloss-divergence", "jmdict_sense_candidates": ["wrong", "bad", "improper"]}
+{"id": "ja.lex.health2.fuan2", "form": "ふあん", "pack_gloss": "unease", "kind": "gloss-divergence", "jmdict_sense_candidates": ["fan", "enthusiast", "lover (of)"]}
+{"id": "ja.lex.health2.shoujou", "form": "しょうじょう", "pack_gloss": "symptom", "kind": "gloss-divergence", "jmdict_sense_candidates": ["letter of invitation", "market conditions", "symptoms"]}
+{"id": "ja.lex.health2.shinryou2", "form": "しんりょう", "pack_gloss": "counseling", "kind": "gloss-divergence", "jmdict_sense_candidates": ["diagnosis and treatment", "medical care", "coolness of autumn"]}
+{"id": "ja.lex.health2.kessan3", "form": "けっさん", "pack_gloss": "accounting", "kind": "gloss-divergence", "jmdict_sense_candidates": ["settlement of accounts", "closing accounts", "financial results"]}
+{"id": "ja.lex.health2.gakkai", "form": "がっかい", "pack_gloss": "association", "kind": "gloss-divergence", "jmdict_sense_candidates": ["learned society", "scientific society", "academy"]}
+{"id": "ja.lex.health2.chouryou", "form": "ちょうりょう", "pack_gloss": "portion", "kind": "gloss-divergence", "jmdict_sense_candidates": ["jumping about", "rampancy", "domination"]}
+{"id": "ja.lex.health2.ryouki", "form": "りょうき", "pack_gloss": "convalescence", "kind": "gloss-divergence", "jmdict_sense_candidates": ["consort plane", "cool air", "seeking the bizarre (abnormal, grotesque, etc.)"]}
+{"id": "ja.lex.health2.tsuuka2", "form": "つうか", "pack_gloss": "communication", "kind": "gloss-divergence", "jmdict_sense_candidates": ["currency", "passing through (a tunnel, station, town, etc.)", "passing by (e.g. of a typhoon)"]}
+{"id": "ja.lex.health3.rourei", "form": "ろうれい", "pack_gloss": "elderly", "kind": "gloss-divergence", "jmdict_sense_candidates": ["old age", "advanced age"]}
+{"id": "ja.lex.health3.taizen2", "form": "たいぜん", "pack_gloss": "full", "kind": "gloss-divergence", "jmdict_sense_candidates": ["calm", "composed", "self-possessed"]}
+{"id": "ja.lex.health3.kyoubu", "form": "きょうぶ", "pack_gloss": "club", "kind": "gloss-divergence", "jmdict_sense_candidates": ["isthmus", "chest", "breast"]}
+{"id": "ja.lex.health3.taikyu2", "form": "たいきゅう", "pack_gloss": "absence", "kind": "gloss-divergence", "jmdict_sense_candidates": ["endurance", "persistence", "Daegu (South Korea)"]}
+{"id": "ja.lex.health3.choushin", "form": "ちょうしん", "pack_gloss": "dieting", "kind": "gloss-divergence", "jmdict_sense_candidates": ["long hand", "minute hand", "tall figure"]}
+{"id": "ja.lex.health3.kenkou3", "form": "けんこう", "pack_gloss": "wellness", "kind": "gloss-divergence", "jmdict_sense_candidates": ["health", "healthy", "sound"]}
+{"id": "ja.lex.health3.hankou", "form": "はんこう", "pack_gloss": "countering", "kind": "gloss-divergence", "jmdict_sense_candidates": ["opposition", "resistance", "insubordination"]}
+{"id": "ja.lex.history2.shouzou", "form": "ぞうしょう", "pack_gloss": "statue", "kind": "gloss-divergence", "jmdict_sense_candidates": ["Minister of Finance", "expansion (in space) of a sales area", "increase in the number of beds (in a hospital, etc.)"]}
+{"id": "ja.lex.history2.hoko", "form": "ほこう", "pack_gloss": "emblem, symbol", "kind": "gloss-divergence", "jmdict_sense_candidates": ["walking", "walk", "supplementary lecture"]}
+{"id": "ja.lex.history2.sagitou", "form": "ぎとう", "pack_gloss": "debate", "kind": "gloss-divergence", "jmdict_sense_candidates": ["ceremonial sword", "technical knockout", "TKO"]}
+{"id": "ja.lex.history2.kousatsu", "form": "こうさつ", "pack_gloss": "verification", "kind": "gloss-divergence", "jmdict_sense_candidates": ["strangling (to death)", "strangulation", "consideration"]}
+{"id": "ja.lex.history2.teikyou", "form": "ていきょう", "pack_gloss": "submission", "kind": "gloss-divergence", "jmdict_sense_candidates": ["imperial capital", "heaven", "offer"]}
+{"id": "ja.lex.history2.hensen", "form": "へんせん", "pack_gloss": "revision", "kind": "gloss-divergence", "jmdict_sense_candidates": ["change", "transition", "vicissitudes"]}
+{"id": "ja.lex.history2.denko", "form": "でんこう", "pack_gloss": "transmission, passing down", "kind": "gloss-divergence", "jmdict_sense_candidates": ["lightning", "electric illumination", "light from an electric source"]}
+{"id": "ja.lex.history2.senjo", "form": "せんじょう", "pack_gloss": "prewar", "kind": "gloss-divergence", "jmdict_sense_candidates": ["battlefield", "battleground", "stirring up strong emotions"]}
+{"id": "ja.lex.history2.kinkyo", "form": "きんきょう", "pack_gloss": "economic crisis", "kind": "gloss-divergence", "jmdict_sense_candidates": ["recent state", "present state", "present condition"]}
+{"id": "ja.lex.history2.seimen", "form": "せいめん", "pack_gloss": "facade", "kind": "gloss-divergence", "jmdict_sense_candidates": ["new field", "noodle making", "raw noodles"]}
+{"id": "ja.lex.history2.fuhai", "form": "ふはい", "pack_gloss": "distribution", "kind": "gloss-divergence", "jmdict_sense_candidates": ["undefeated", "unbeatable", "invincible"]}
+{"id": "ja.lex.history2.ihan", "form": "いはん", "pack_gloss": "deviation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["violation", "offense", "offence"]}
+{"id": "ja.lex.history2.soshi", "form": "そし", "pack_gloss": "clue, hint", "kind": "gloss-divergence", "jmdict_sense_candidates": ["element (esp. component in electronics)", "elemental device", "device"]}
+{"id": "ja.lex.history2.mousho", "form": "もうしょ", "pack_gloss": "written document", "kind": "gloss-divergence", "jmdict_sense_candidates": ["heat wave", "fierce heat"]}
+{"id": "ja.lex.history3.taiou", "form": "たいおう", "pack_gloss": "comparison", "kind": "gloss-divergence", "jmdict_sense_candidates": ["correspondence (to)", "equivalence", "suitability"]}
+{"id": "ja.lex.history3.rondai", "form": "ろんだい", "pack_gloss": "agenda, topic for debate", "kind": "gloss-divergence", "jmdict_sense_candidates": ["subject", "theme"]}
+{"id": "ja.lex.history3.denshou2", "form": "でんしょう", "pack_gloss": "legacy, heritage", "kind": "gloss-divergence", "jmdict_sense_candidates": ["handing down (information)", "legend", "tradition"]}
+{"id": "ja.lex.history3.kaisai", "form": "かいさい", "pack_gloss": "disclosure", "kind": "gloss-divergence", "jmdict_sense_candidates": ["joy", "exultation", "settlement"]}
+{"id": "ja.lex.home.kirimasu", "form": "きります", "pack_gloss": "to cut", "kind": "gloss-divergence", "jmdict_sense_candidates": ["Cyrillic"]}
+{"id": "ja.lex.humor2.kyofu", "form": "きょうふ", "pack_gloss": "absurdity", "kind": "gloss-divergence", "jmdict_sense_candidates": ["fear", "dread", "dismay"]}
+{"id": "ja.lex.humor2.baki", "form": "ばか", "pack_gloss": "foolishness", "kind": "gloss-divergence", "jmdict_sense_candidates": ["idiot", "moron", "fool"]}
+{"id": "ja.lex.law.hourei", "form": "ほうれい", "pack_gloss": "decree", "kind": "gloss-divergence", "jmdict_sense_candidates": ["statute", "law", "act"]}
+{"id": "ja.lex.law.houkou", "form": "ほうこう", "pack_gloss": "regulation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["live-in domestic service", "live-in apprenticeship", "public duty"]}
+{"id": "ja.lex.law.shikoku", "form": "しこく", "pack_gloss": "prosecution office", "kind": "gloss-divergence", "jmdict_sense_candidates": ["Shikoku (smallest of the four main islands of Japan)", "city-state (e.g. the Vatican)"]}
+{"id": "ja.lex.law.chukan", "form": "ちゅうかん", "pack_gloss": "mediation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["second volume (of three)", "second book", "volume two"]}
+{"id": "ja.lex.law.sosa", "form": "そさ", "pack_gloss": "investigation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["conduct", "behaviour", "movements"]}
+{"id": "ja.lex.law.enzan", "form": "えんざん", "pack_gloss": "wrongful prosecution", "kind": "gloss-divergence", "jmdict_sense_candidates": ["operation", "calculation", "distant mountain"]}
+{"id": "ja.lex.law.siso", "form": "そそ", "pack_gloss": "litigation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["graceful", "neat", "come on"]}
+{"id": "ja.lex.law.soshou", "form": "そしょう", "pack_gloss": "complaint", "kind": "gloss-divergence", "jmdict_sense_candidates": ["lawsuit", "suit", "(legal) action"]}
+{"id": "ja.lex.law.kokuso", "form": "こくそ", "pack_gloss": "appeal", "kind": "gloss-divergence", "jmdict_sense_candidates": ["accusation", "complaint", "charge"]}
+{"id": "ja.lex.law.jyouso", "form": "じょうそう", "pack_gloss": "appeal", "kind": "gloss-divergence", "jmdict_sense_candidates": ["report to the emperor", "upper stratum (classes, stories, storeys)", "upper layer"]}
+{"id": "ja.lex.law.kufu", "form": "くふ", "pack_gloss": "distribution", "kind": "gloss-divergence", "jmdict_sense_candidates": ["fear", "dread", "dismay"]}
+{"id": "ja.lex.law2.chouyaku", "form": "ちょうやく", "pack_gloss": "treaty", "kind": "gloss-divergence", "jmdict_sense_candidates": ["indirect translation", "translation of a translation", "preparing a prescription"]}
+{"id": "ja.lex.law2.fukumu", "form": "ふくむ", "pack_gloss": "duties", "kind": "gloss-divergence", "jmdict_sense_candidates": ["to contain", "to comprise", "to have"]}
+{"id": "ja.lex.law2.yakujo", "form": "やくじょう", "pack_gloss": "role", "kind": "gloss-divergence", "jmdict_sense_candidates": ["agreement", "stipulation", "contract"]}
+{"id": "ja.lex.law2.hifu", "form": "ひふ", "pack_gloss": "expenses", "kind": "gloss-divergence", "jmdict_sense_candidates": ["skin", "non-negative", "coat worn over a kimono"]}
+{"id": "ja.lex.law2.shuukyu", "form": "しゅうきゅう", "pack_gloss": "levy", "kind": "gloss-divergence", "jmdict_sense_candidates": ["football (soccer, rugby, American football, etc.; esp. soccer)", "weekly holiday", "weekly pay"]}
+{"id": "ja.lex.law2.kansoku", "form": "かんそく", "pack_gloss": "supervision", "kind": "gloss-divergence", "jmdict_sense_candidates": ["observation", "survey", "measurement"]}
+{"id": "ja.lex.law2.touzoku", "form": "とうぞく", "pack_gloss": "theft", "kind": "gloss-divergence", "jmdict_sense_candidates": ["thief", "robber", "burglar"]}
+{"id": "ja.lex.law2.joron", "form": "じょろん", "pack_gloss": "preliminary discussion", "kind": "gloss-divergence", "jmdict_sense_candidates": ["introduction", "preface"]}
+{"id": "ja.lex.law2.kyoka", "form": "きょうか", "pack_gloss": "permission", "kind": "gloss-divergence", "jmdict_sense_candidates": ["strengthening", "intensifying", "reinforcement"]}
+{"id": "ja.lex.law2.hinka", "form": "ひんか", "pack_gloss": "dignity", "kind": "gloss-divergence", "jmdict_sense_candidates": ["poor home"]}
+{"id": "ja.lex.law2.touhi", "form": "とうひ", "pack_gloss": "opposition", "kind": "gloss-divergence", "jmdict_sense_candidates": ["escape", "evasion", "flight"]}
+{"id": "ja.lex.law2.unyu", "form": "うんゆ", "pack_gloss": "distribution of goods", "kind": "gloss-divergence", "jmdict_sense_candidates": ["transportation"]}
+{"id": "ja.lex.law2.houitsu", "form": "ほういつ", "pack_gloss": "uniformity", "kind": "gloss-divergence", "jmdict_sense_candidates": ["self-indulgence", "looseness", "dissoluteness"]}
+{"id": "ja.lex.law2.kizon", "form": "きぞん", "pack_gloss": "existence", "kind": "gloss-divergence", "jmdict_sense_candidates": ["existing"]}
+{"id": "ja.lex.law2.genshitsu", "form": "げんしつ", "pack_gloss": "essence", "kind": "gloss-divergence", "jmdict_sense_candidates": ["commitment", "pledge", "promise"]}
+{"id": "ja.lex.law2.denrou", "form": "でんろう", "pack_gloss": "tradition", "kind": "gloss-divergence", "jmdict_sense_candidates": ["high palace tower"]}
+{"id": "ja.lex.law2.haka", "form": "はか", "pack_gloss": "frame", "kind": "gloss-divergence", "jmdict_sense_candidates": ["age 16 (of a girl)", "pubescence", "puberty"]}
+{"id": "ja.lex.law2.giwa", "form": "ぎわ", "pack_gloss": "doubt", "kind": "gloss-divergence", "jmdict_sense_candidates": ["edge", "brink", "verge"]}
+{"id": "ja.lex.leisure.utai", "form": "うたい", "pack_gloss": "singing", "kind": "gloss-divergence", "jmdict_sense_candidates": ["noh chanting", "noh chant"]}
+{"id": "ja.lex.leisure.ryoushuu", "form": "りょうしゅう", "pack_gloss": "travel; sightseeing tour", "kind": "gloss-divergence", "jmdict_sense_candidates": ["receipt (of money)", "receiving", "leader"]}
+{"id": "ja.lex.leisure.hanashimasu", "form": "はなします", "pack_gloss": "to speak; to talk", "kind": "gloss-divergence", "jmdict_sense_candidates": ["(liquid) nasal mucus", "nasal discharge", "pituita"]}
+{"id": "ja.lex.ling.shiteki", "form": "してき", "pack_gloss": "point, mark", "kind": "gloss-divergence", "jmdict_sense_candidates": ["historic", "historical", "pointing out"]}
+{"id": "ja.lex.ling.hoki", "form": "ほうき", "pack_gloss": "writing system, notation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["abandonment", "renouncement", "renunciation"]}
+{"id": "ja.lex.ling2.boshi", "form": "ぼし", "pack_gloss": "suffix", "kind": "gloss-divergence", "jmdict_sense_candidates": ["epitaph", "inscription on a tomb", "mother and child"]}
+{"id": "ja.lex.ling2.genin", "form": "げんにん", "pack_gloss": "origin, etymology", "kind": "gloss-divergence", "jmdict_sense_candidates": ["present post", "Gennin era (1224.11.20-1225.4.20)", "witnessing (at the scene)"]}
+{"id": "ja.lex.ling2.kansetsu", "form": "かんせつ", "pack_gloss": "clause, passage", "kind": "gloss-divergence", "jmdict_sense_candidates": ["segment (of worm)", "indirection", "indirectness"]}
+{"id": "ja.lex.ling2.taishou", "form": "たいしょう", "pack_gloss": "choice, option", "kind": "gloss-divergence", "jmdict_sense_candidates": ["contrast", "antithesis", "comparison"]}
+{"id": "ja.lex.ling2.iimawashi", "form": "いいまわし", "pack_gloss": "phrasing, way of saying", "kind": "gloss-divergence", "jmdict_sense_candidates": ["expression", "phraseology"]}
+{"id": "ja.lex.ling2.henyou", "form": "へんよう", "pack_gloss": "usage shift", "kind": "gloss-divergence", "jmdict_sense_candidates": ["change in appearance", "transformation"]}
+{"id": "ja.lex.ling2.gikou", "form": "ぎこう", "pack_gloss": "device, ingenuity", "kind": "gloss-divergence", "jmdict_sense_candidates": ["technique", "finesse", "craft"]}
+{"id": "ja.lex.ling2.yakusha", "form": "やくしゃ", "pack_gloss": "interpreter", "kind": "gloss-divergence", "jmdict_sense_candidates": ["actor", "actress", "man of wits"]}
+{"id": "ja.lex.ling2.taiou", "form": "たいおう", "pack_gloss": "corresponding", "kind": "gloss-divergence", "jmdict_sense_candidates": ["correspondence (to)", "equivalence", "suitability"]}
+{"id": "ja.lex.ling3.korpusu", "form": "こーぷす", "pack_gloss": "corpus", "kind": "gloss-divergence", "jmdict_sense_candidates": ["corpse"]}
+{"id": "ja.lex.ling3.taigen2", "form": "たいげん", "pack_gloss": "body, main part", "kind": "gloss-divergence", "jmdict_sense_candidates": ["personification", "impersonation", "embodiment"]}
+{"id": "ja.lex.lit.gendai", "form": "げんだい", "pack_gloss": "contemporary period", "kind": "gloss-divergence", "jmdict_sense_candidates": ["present age", "present day", "today"]}
+{"id": "ja.lex.lit.haikai", "form": "かいかい", "pack_gloss": "comic linked verse", "kind": "gloss-divergence", "jmdict_sense_candidates": ["opening of a meeting", "scratching", "itchy spot"]}
+{"id": "ja.lex.lit.senryuu", "form": "せんりゅう", "pack_gloss": "senryu", "kind": "gloss-divergence", "jmdict_sense_candidates": ["senryū", "comic haiku", "humorous seventeen-mora poem"]}
+{"id": "ja.lex.lit.setwa", "form": "せつわ", "pack_gloss": "anecdote", "kind": "gloss-divergence", "jmdict_sense_candidates": ["tale", "narrative"]}
+{"id": "ja.lex.lit2.shitei", "form": "してい", "pack_gloss": "viewpoint", "kind": "gloss-divergence", "jmdict_sense_candidates": ["servant", "janitor", "messenger"]}
+{"id": "ja.lex.lit2.shuppan", "form": "しゅっぱん", "pack_gloss": "publishing", "kind": "gloss-divergence", "jmdict_sense_candidates": ["setting sail", "departure (from a port)", "publication"]}
+{"id": "ja.lex.lit2.hen", "form": "へん", "pack_gloss": "chapter", "kind": "gloss-divergence", "jmdict_sense_candidates": ["left-hand radical of a character", "strange", "odd"]}
+{"id": "ja.lex.lit3.kyoumu", "form": "きょうむ", "pack_gloss": "interest", "kind": "gloss-divergence", "jmdict_sense_candidates": ["inauspicious dream", "bad dream", "academic affairs"]}
+{"id": "ja.lex.lit3.shinmi", "form": "しんみ", "pack_gloss": "depth", "kind": "gloss-divergence", "jmdict_sense_candidates": ["fresh taste", "novelty", "originality"]}
+{"id": "ja.lex.lit3.ronsetsu", "form": "ろんせつ", "pack_gloss": "essay", "kind": "gloss-divergence", "jmdict_sense_candidates": ["article", "discourse", "dissertation"]}
+{"id": "ja.lex.lit3.henkan", "form": "へんかん", "pack_gloss": "editing", "kind": "gloss-divergence", "jmdict_sense_candidates": ["change", "conversion", "transformation"]}
+{"id": "ja.lex.lit3.serifu", "form": "せりふ", "pack_gloss": "dialogue", "kind": "gloss-divergence", "jmdict_sense_candidates": ["serif", "(spoken) line (in a play, film, comic, etc.)", "one's lines"]}
+{"id": "ja.lex.med.koushou", "form": "こうしょう", "pack_gloss": "trade-off, concession", "kind": "gloss-divergence", "jmdict_sense_candidates": ["spring of yellow buds", "negotiations", "bargaining"]}
+{"id": "ja.lex.med.hoken", "form": "ほうけん", "pack_gloss": "health insurance", "kind": "gloss-divergence", "jmdict_sense_candidates": ["feudalism", "dedication", "presentation"]}
+{"id": "ja.lex.med.hassen", "form": "はっせん", "pack_gloss": "outbreak", "kind": "gloss-divergence", "jmdict_sense_candidates": ["8000", "eight thousand", "many"]}
+{"id": "ja.lex.med.shokujou", "form": "しょくじょう", "pack_gloss": "diet, eating habits", "kind": "gloss-divergence", "jmdict_sense_candidates": ["mace", "(ceremonial) staff", "wiping and purifying"]}
+{"id": "ja.lex.med.kouchou", "form": "こうちょう", "pack_gloss": "benefit, profit", "kind": "gloss-divergence", "jmdict_sense_candidates": ["Japanese bush warbler (Horornis diphone)", "black-naped oriole (Oriolus chinensis)", "bird of passage"]}
+{"id": "ja.lex.med2.teigen", "form": "ていげん", "pack_gloss": "objection", "kind": "gloss-divergence", "jmdict_sense_candidates": ["decrease", "reduction", "fall"]}
+{"id": "ja.lex.med2.shian", "form": "しあん", "pack_gloss": "guideline", "kind": "gloss-divergence", "jmdict_sense_candidates": ["cyan", "careful thought", "consideration"]}
+{"id": "ja.lex.media.hassha", "form": "はっしゃ", "pack_gloss": "broadcasting", "kind": "gloss-divergence", "jmdict_sense_candidates": ["firing (esp. a rocket or missile)", "launching", "shooting"]}
+{"id": "ja.lex.media.toron", "form": "とろん", "pack_gloss": "debate", "kind": "gloss-divergence", "jmdict_sense_candidates": ["TRON", "The Realtime Operating System Nucleus", "appearing drowsy or intoxicated (of eyes, actions, etc.)"]}
+{"id": "ja.lex.media.hadan", "form": "はだん", "pack_gloss": "speculation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["breaking off (an engagement, negotiations, etc.)", "cancellation", "rupture"]}
+{"id": "ja.lex.media.gijou", "form": "ぎじょう", "pack_gloss": "circumstances", "kind": "gloss-divergence", "jmdict_sense_candidates": ["ceremonial weapon", "ceremony", "assembly hall"]}
+{"id": "ja.lex.media.kaga", "form": "かか", "pack_gloss": "fire", "kind": "gloss-divergence", "jmdict_sense_candidates": ["(laughing) loudly", "Huaxia (historical concept of China)", "civilized land"]}
+{"id": "ja.lex.media.choui", "form": "ちょうい", "pack_gloss": "caution", "kind": "gloss-divergence", "jmdict_sense_candidates": ["tide level", "close siege", "condolence"]}
+{"id": "ja.lex.media.maruke", "form": "まーけ", "pack_gloss": "market", "kind": "gloss-divergence", "jmdict_sense_candidates": ["marketing"]}
+{"id": "ja.lex.media2.ronsetsu", "form": "ろんせつ", "pack_gloss": "argumentative writing", "kind": "gloss-divergence", "jmdict_sense_candidates": ["article", "discourse", "dissertation"]}
+{"id": "ja.lex.media2.kaiken", "form": "かいけん", "pack_gloss": "opinion; experience", "kind": "gloss-divergence", "jmdict_sense_candidates": ["interview", "audience", "meeting"]}
+{"id": "ja.lex.media2.kouchou", "form": "こうちょう", "pack_gloss": "advantage; pros", "kind": "gloss-divergence", "jmdict_sense_candidates": ["Japanese bush warbler (Horornis diphone)", "black-naped oriole (Oriolus chinensis)", "bird of passage"]}
+{"id": "ja.lex.media2.shino", "form": "しんのう", "pack_gloss": "trust", "kind": "gloss-divergence", "jmdict_sense_candidates": ["prince of royal blood", "Imperial prince", "pericardium"]}
+{"id": "ja.lex.media3.shaka", "form": "しゃか", "pack_gloss": "society", "kind": "gloss-divergence", "jmdict_sense_candidates": ["Gautama Buddha", "Shakyamuni", "the historical Buddha"]}
+{"id": "ja.lex.media3.fureimu", "form": "ふれいむ", "pack_gloss": "framing", "kind": "gloss-divergence", "jmdict_sense_candidates": ["flame"]}
+{"id": "ja.lex.media3.dempatsu", "form": "でんぱつ", "pack_gloss": "propaganda", "kind": "gloss-divergence", "jmdict_sense_candidates": ["perm (hairstyle)", "permanent wave"]}
+{"id": "ja.lex.media3.tsuushin5", "form": "つうしん", "pack_gloss": "communications", "kind": "gloss-divergence", "jmdict_sense_candidates": ["correspondence", "communication", "transmission"]}
+{"id": "ja.lex.media3.shuuryuu", "form": "しゅうりゅう", "pack_gloss": "trend, flow", "kind": "gloss-divergence", "jmdict_sense_candidates": ["flowing around"]}
+{"id": "ja.lex.media3.kairyou2", "form": "かいりょう", "pack_gloss": "understanding", "kind": "gloss-divergence", "jmdict_sense_candidates": ["improvement", "reform"]}
+{"id": "ja.lex.media3.ronbun2", "form": "ろんぶん", "pack_gloss": "written argument", "kind": "gloss-divergence", "jmdict_sense_candidates": ["thesis", "essay", "treatise"]}
+{"id": "ja.lex.narrative.totsuzen", "form": "とつぜん", "pack_gloss": "suddenly", "kind": "gloss-divergence", "jmdict_sense_candidates": ["abrupt", "sudden", "unexpected"]}
+{"id": "ja.lex.philosophy.hasei", "form": "はせい", "pack_gloss": "genesis", "kind": "gloss-divergence", "jmdict_sense_candidates": ["derivation"]}
+{"id": "ja.lex.philosophy.hensen", "form": "へんせん", "pack_gloss": "evolution", "kind": "gloss-divergence", "jmdict_sense_candidates": ["change", "transition", "vicissitudes"]}
+{"id": "ja.lex.philosophy2.shinjin", "form": "しんじん", "pack_gloss": "trust", "kind": "gloss-divergence", "jmdict_sense_candidates": ["faith", "belief", "piety"]}
+{"id": "ja.lex.philosophy2.izen", "form": "いぜん", "pack_gloss": "previous generation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["before", "prior to", "ago"]}
+{"id": "ja.lex.philosophy2.dousei", "form": "どうせい", "pack_gloss": "shared life", "kind": "gloss-divergence", "jmdict_sense_candidates": ["same surname", "same sex", "cohabitation (esp. of an unmarried couple)"]}
+{"id": "ja.lex.philosophy2.urei", "form": "ゆうれい", "pack_gloss": "concern", "kind": "gloss-divergence", "jmdict_sense_candidates": ["ghost", "specter", "spectre"]}
+{"id": "ja.lex.philosophy2.kyoi", "form": "きょうい", "pack_gloss": "consensus", "kind": "gloss-divergence", "jmdict_sense_candidates": ["emphasis", "chest measurement", "threat"]}
+{"id": "ja.lex.philosophy2.nenrei", "form": "ねんれい", "pack_gloss": "era", "kind": "gloss-divergence", "jmdict_sense_candidates": ["New Year's greetings", "age", "years"]}
+{"id": "ja.lex.philosophy2.yuuai", "form": "ゆうあい", "pack_gloss": "benevolence", "kind": "gloss-divergence", "jmdict_sense_candidates": ["fraternity", "friendship"]}
+{"id": "ja.lex.philosophy3.kyoiku-hou", "form": "きょういくほう", "pack_gloss": "education law", "kind": "gloss-divergence", "jmdict_sense_candidates": ["teaching method"]}
+{"id": "ja.lex.places.bankou", "form": "ばんこう", "pack_gloss": "bank", "kind": "gloss-divergence", "jmdict_sense_candidates": ["act of barbarity", "barbarism", "brutality"]}
+{"id": "ja.lex.play2.komi", "form": "こみ", "pack_gloss": "buildup", "kind": "gloss-divergence", "jmdict_sense_candidates": ["including ...", "inclusive of ...", "bundling together (items of different size, quality, etc.)"]}
+{"id": "ja.lex.play2.age", "form": "あげ", "pack_gloss": "punchline delivery", "kind": "gloss-divergence", "jmdict_sense_candidates": ["tuck (e.g. in a dress)", "rise (e.g. in price)", "deep-frying"]}
+{"id": "ja.lex.politics.giin", "form": "ぎいん", "pack_gloss": "legislator", "kind": "gloss-divergence", "jmdict_sense_candidates": ["forged seal", "member of an assembly", "member of the Diet"]}
+{"id": "ja.lex.politics.kyohi", "form": "きょひ", "pack_gloss": "abstention", "kind": "gloss-divergence", "jmdict_sense_candidates": ["enormous expenditure", "huge expense", "huge outlay"]}
+{"id": "ja.lex.politics.yushu", "form": "ゆうしゅう", "pack_gloss": "superiority", "kind": "gloss-divergence", "jmdict_sense_candidates": ["superior", "excellent", "brilliant"]}
+{"id": "ja.lex.politics.hankyou", "form": "はんきょう", "pack_gloss": "opposition", "kind": "gloss-divergence", "jmdict_sense_candidates": ["anticommunism", "echo", "reverberation"]}
+{"id": "ja.lex.politics.toushou", "form": "とうしょう", "pack_gloss": "vote count", "kind": "gloss-divergence", "jmdict_sense_candidates": ["frostbite", "chilblains", "swordsmith"]}
+{"id": "ja.lex.politics.hansou", "form": "はんそう", "pack_gloss": "debate", "kind": "gloss-divergence", "jmdict_sense_candidates": ["sailing", "transportation", "conveyance"]}
+{"id": "ja.lex.politics.touhou", "form": "とうほう", "pack_gloss": "faction", "kind": "gloss-divergence", "jmdict_sense_candidates": ["eastern direction", "the Orient", "eastern fighter in a match (e.g. sumo wrestling)"]}
+{"id": "ja.lex.politics.seikan", "form": "せいかん", "pack_gloss": "administration", "kind": "gloss-divergence", "jmdict_sense_candidates": ["watchful waiting", "careful supervision", "returning alive"]}
+{"id": "ja.lex.politics.kentei2", "form": "けんてい", "pack_gloss": "consideration", "kind": "gloss-divergence", "jmdict_sense_candidates": ["official certification", "official approval", "inspection"]}
+{"id": "ja.lex.politics.houpatsu", "form": "ほうはつ", "pack_gloss": "bill", "kind": "gloss-divergence", "jmdict_sense_candidates": ["unkempt hair", "disheveled hair", "tousled hair"]}
+{"id": "ja.lex.politics.shugiin", "form": "しゅうぎん", "pack_gloss": "lower house member", "kind": "gloss-divergence", "jmdict_sense_candidates": ["splendid poem"]}
+{"id": "ja.lex.politics.shounen", "form": "しょうねん", "pack_gloss": "youth", "kind": "gloss-divergence", "jmdict_sense_candidates": ["boy", "juvenile", "child"]}
+{"id": "ja.lex.politics2.koku", "form": "こく", "pack_gloss": "nation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["ancient expression", "old poem", "period of time (usu. a period of approx. two hours corresponding to one of the signs of the Chinese zodiac)"]}
+{"id": "ja.lex.politics2.bunkou", "form": "ぶんこう", "pack_gloss": "division", "kind": "gloss-divergence", "jmdict_sense_candidates": ["separation of light into its spectral components", "dispersion", "branch school"]}
+{"id": "ja.lex.politics2.zeimu", "form": "ぜいむ", "pack_gloss": "tax affairs", "kind": "gloss-divergence", "jmdict_sense_candidates": ["taxation business"]}
+{"id": "ja.lex.politics2.kogen", "form": "こうげん", "pack_gloss": "statement", "kind": "gloss-divergence", "jmdict_sense_candidates": ["light source", "declaration", "profession"]}
+{"id": "ja.lex.politics2.shimei", "form": "しめい", "pack_gloss": "designation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["mission", "errand", "task"]}
+{"id": "ja.lex.politics2.june", "form": "じゅんれい", "pack_gloss": "order", "kind": "gloss-divergence", "jmdict_sense_candidates": ["pilgrimage", "pilgrim"]}
+{"id": "ja.lex.politics2.hotei", "form": "ほてい", "pack_gloss": "legal ruling", "kind": "gloss-divergence", "jmdict_sense_candidates": ["mending", "revision", "supplementation"]}
+{"id": "ja.lex.politics2.shoukou", "form": "しょうこう", "pack_gloss": "reference", "kind": "gloss-divergence", "jmdict_sense_candidates": ["commerce and industry", "commercial port", "commissioned officer"]}
+{"id": "ja.lex.politics2.shuryuu", "form": "しゅうりゅう", "pack_gloss": "trend", "kind": "gloss-divergence", "jmdict_sense_candidates": ["flowing around"]}
+{"id": "ja.lex.politics2.shourei", "form": "しょうれい", "pack_gloss": "reward", "kind": "gloss-divergence", "jmdict_sense_candidates": ["encouragement", "promotion", "inducement"]}
+{"id": "ja.lex.politics2.senkyoku", "form": "せんきょく", "pack_gloss": "constituency", "kind": "gloss-divergence", "jmdict_sense_candidates": ["state of the war", "war situation", "selection of music"]}
+{"id": "ja.lex.politics2.hoshu", "form": "ほしゅ", "pack_gloss": "demand", "kind": "gloss-divergence", "jmdict_sense_candidates": ["maintenance", "conservatism", "conservativeness"]}
+{"id": "ja.lex.politics2.choushou", "form": "ちょうしょう", "pack_gloss": "petition", "kind": "gloss-divergence", "jmdict_sense_candidates": ["funeral bell", "death knell", "scornful laughter"]}
+{"id": "ja.lex.politics2.chouka", "form": "ちょうか", "pack_gloss": "degradation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["elegy", "dirge", "machiya"]}
+{"id": "ja.lex.politics2.hansen", "form": "はんせん", "pack_gloss": "rebellion", "kind": "gloss-divergence", "jmdict_sense_candidates": ["anti-war", "sailing ship", "sailing boat"]}
+{"id": "ja.lex.politics2.koi", "form": "こい", "pack_gloss": "petition", "kind": "gloss-divergence", "jmdict_sense_candidates": ["ancient ways", "the feelings of the ancients", "intent"]}
+{"id": "ja.lex.psych.douki", "form": "どうき", "pack_gloss": "motivation, impulse", "kind": "gloss-divergence", "jmdict_sense_candidates": ["motive", "incentive", "motif"]}
+{"id": "ja.lex.psych.ansei", "form": "あんせい", "pack_gloss": "calmness, composure", "kind": "gloss-divergence", "jmdict_sense_candidates": ["rest", "quiet", "repose"]}
+{"id": "ja.lex.psych.hatsusei", "form": "はっせい", "pack_gloss": "adolescence", "kind": "gloss-divergence", "jmdict_sense_candidates": ["occurrence", "incidence", "outbreak"]}
+{"id": "ja.lex.psych.hiyou", "form": "ひよう", "pack_gloss": "criticism, censure", "kind": "gloss-divergence", "jmdict_sense_candidates": ["cost", "expense", "flying"]}
+{"id": "ja.lex.psych.wakuwaku", "form": "わくわく", "pack_gloss": "excitement, anticipation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["to be excited", "to be nervous", "to be thrilled"]}
+{"id": "ja.lex.psych.yuutsu", "form": "ゆううつ", "pack_gloss": "depressed, low", "kind": "gloss-divergence", "jmdict_sense_candidates": ["depression", "melancholy", "dejection"]}
+{"id": "ja.lex.psych.shiawase", "form": "しあわせ", "pack_gloss": "happy, fortunate", "kind": "gloss-divergence", "jmdict_sense_candidates": ["happiness", "good fortune", "luck"]}
+{"id": "ja.lex.psych.danran", "form": "だんらん", "pack_gloss": "togetherness, family chat", "kind": "gloss-divergence", "jmdict_sense_candidates": ["sitting together in a circle", "happy circle", "harmony"]}
+{"id": "ja.lex.reg1.koushiki", "form": "こうしき", "pack_gloss": "formality", "kind": "gloss-divergence", "jmdict_sense_candidates": ["official", "formal", "formula (e.g. mathematical)"]}
+{"id": "ja.lex.reg1.kudai", "form": "くだい", "pack_gloss": "humility", "kind": "gloss-divergence", "jmdict_sense_candidates": ["subject for a haiku"]}
+{"id": "ja.lex.reg1.hogen", "form": "ほうげん", "pack_gloss": "phrase, expression", "kind": "gloss-divergence", "jmdict_sense_candidates": ["careless remark", "dialect", "provincialism"]}
+{"id": "ja.lex.reg1.kotei2", "form": "こうてい", "pack_gloss": "set phrase", "kind": "gloss-divergence", "jmdict_sense_candidates": ["official (rate, price, etc.)", "officially fixed", "place of ceremony"]}
+{"id": "ja.lex.reg1.yougen", "form": "ようげん", "pack_gloss": "assertion", "kind": "gloss-divergence", "jmdict_sense_candidates": ["independent inflectable word (in Japanese)", "opening declaration", "profession"]}
+{"id": "ja.lex.reg1.kougen", "form": "こうげん", "pack_gloss": "utterance", "kind": "gloss-divergence", "jmdict_sense_candidates": ["light source", "declaration", "profession"]}
+{"id": "ja.lex.reg2.bunpo", "form": "ぶんぽう", "pack_gloss": "writing style", "kind": "gloss-divergence", "jmdict_sense_candidates": ["hiving off", "swarming", "dividing a fief"]}
+{"id": "ja.lex.reg2.kuchiguse", "form": "くちぐせ", "pack_gloss": "verbal habit", "kind": "gloss-divergence", "jmdict_sense_candidates": ["pet saying", "favorite phrase", "stock phrase"]}
+{"id": "ja.lex.reg2.koukyuu", "form": "こうきゅう", "pack_gloss": "public", "kind": "gloss-divergence", "jmdict_sense_candidates": ["legal holiday", "permanence", "perpetuity"]}
+{"id": "ja.lex.reg2.tsuuyou", "form": "つうよう", "pack_gloss": "usage", "kind": "gloss-divergence", "jmdict_sense_candidates": ["pain and itching", "mental anguish", "unhealthy emotions"]}
+{"id": "ja.lex.rel1.kaitaku", "form": "かいたく", "pack_gloss": "relief", "kind": "gloss-divergence", "jmdict_sense_candidates": ["reclamation (e.g. of wasteland)", "cultivation", "development"]}
+{"id": "ja.lex.rel1.omoide", "form": "おもいで", "pack_gloss": "memory", "kind": "gloss-divergence", "jmdict_sense_candidates": ["memories", "recollections", "reminiscence"]}
+{"id": "ja.lex.rel1.kenzai", "form": "けんざい", "pack_gloss": "examination", "kind": "gloss-divergence", "jmdict_sense_candidates": ["in good health", "alive and well", "going strong"]}
+{"id": "ja.lex.rel1.chokai", "form": "ちょうかい", "pack_gloss": "understanding", "kind": "gloss-divergence", "jmdict_sense_candidates": ["discipline", "punishment", "reprimand"]}
+{"id": "ja.lex.rel1.hakai2", "form": "はかい", "pack_gloss": "respect", "kind": "gloss-divergence", "jmdict_sense_candidates": ["destruction", "disruption", "(application) crash"]}
+{"id": "ja.lex.rel1.kofuku", "form": "こうふく", "pack_gloss": "happy", "kind": "gloss-divergence", "jmdict_sense_candidates": ["happiness", "well-being", "joy"]}
+{"id": "ja.lex.rel1.hangeki", "form": "はんげき", "pack_gloss": "revenge", "kind": "gloss-divergence", "jmdict_sense_candidates": ["counterattack", "counteroffensive", "counterblow"]}
+{"id": "ja.lex.rel2.yuuutsu", "form": "ゆううつ", "pack_gloss": "dejected", "kind": "gloss-divergence", "jmdict_sense_candidates": ["depression", "melancholy", "dejection"]}
+{"id": "ja.lex.rel2.hankan", "form": "はんかん", "pack_gloss": "regret", "kind": "gloss-divergence", "jmdict_sense_candidates": ["antipathy", "antagonism", "animosity"]}
+{"id": "ja.lex.rel2.fukki", "form": "ふっき", "pack_gloss": "resolution", "kind": "gloss-divergence", "jmdict_sense_candidates": ["riches and honours (honors)", "wealth and rank", "return"]}
+{"id": "ja.lex.rel2.tsuige", "form": "つげ", "pack_gloss": "sorrow", "kind": "gloss-divergence", "jmdict_sense_candidates": ["Japanese box tree (Buxus microphylla var. japonica)", "Japanese boxwood"]}
+{"id": "ja.lex.rel2.kaisi", "form": "かいし", "pack_gloss": "reflection", "kind": "gloss-divergence", "jmdict_sense_candidates": ["mysterious death", "start", "commencement"]}
+{"id": "ja.lex.rel2.hokai", "form": "ほうかい", "pack_gloss": "embrace", "kind": "gloss-divergence", "jmdict_sense_candidates": ["collapse", "crumbling", "breaking down"]}
+{"id": "ja.lex.rel2.omoide2", "form": "おもいで", "pack_gloss": "memory", "kind": "gloss-divergence", "jmdict_sense_candidates": ["memories", "recollections", "reminiscence"]}
+{"id": "ja.lex.rel2.shinko2", "form": "しんこう", "pack_gloss": "trust", "kind": "gloss-divergence", "jmdict_sense_candidates": ["(religious) faith", "belief", "creed"]}
+{"id": "ja.lex.rel2.kaitaku2", "form": "かいたく", "pack_gloss": "relief", "kind": "gloss-divergence", "jmdict_sense_candidates": ["reclamation (e.g. of wasteland)", "cultivation", "development"]}
+{"id": "ja.lex.rel2.sogo", "form": "そうごう", "pack_gloss": "mutual", "kind": "gloss-divergence", "jmdict_sense_candidates": ["priest's religious name", "synthesis", "combination"]}
+{"id": "ja.lex.rel2.chiiki", "form": "ちいき", "pack_gloss": "community", "kind": "gloss-divergence", "jmdict_sense_candidates": ["area", "region", "district"]}
+{"id": "ja.lex.rel2.shimpei", "form": "しんぺい", "pack_gloss": "fair, equitable", "kind": "gloss-divergence", "jmdict_sense_candidates": ["new recruit", "conscript", "soldier dispatched by a god"]}
+{"id": "ja.lex.rel.senzoku", "form": "せんぞく", "pack_gloss": "ancestor", "kind": "gloss-divergence", "jmdict_sense_candidates": ["exclusive", "attached to", "specialist"]}
+{"id": "ja.lex.rel.obaa-chan", "form": "おばあちゃん", "pack_gloss": "grandmother", "kind": "gloss-divergence", "jmdict_sense_candidates": ["granny", "grandma", "gran"]}
+{"id": "ja.lex.rel.ojii-chan", "form": "おじいちゃん", "pack_gloss": "grandfather", "kind": "gloss-divergence", "jmdict_sense_candidates": ["grandpa", "granddad"]}
+{"id": "ja.lex.rel.tsuui", "form": "つい", "pack_gloss": "grief", "kind": "gloss-divergence", "jmdict_sense_candidates": ["just (now)", "quite (near)", "unintentionally"]}
+{"id": "ja.lex.rel.jijou", "form": "じじょう", "pack_gloss": "affection", "kind": "gloss-divergence", "jmdict_sense_candidates": ["circumstances", "conditions", "situation"]}
+{"id": "ja.lex.rel.aishi", "form": "あいし", "pack_gloss": "love", "kind": "gloss-divergence", "jmdict_sense_candidates": ["sad story", "tragic history", "message of condolence"]}
+{"id": "ja.lex.rel.omoide", "form": "おもいで", "pack_gloss": "memory", "kind": "gloss-divergence", "jmdict_sense_candidates": ["memories", "recollections", "reminiscence"]}
+{"id": "ja.lex.science.hyousou", "form": "ひょうそう", "pack_gloss": "chart", "kind": "gloss-divergence", "jmdict_sense_candidates": ["surface", "outer layer", "mounting (of a picture)"]}
+{"id": "ja.lex.science.taiyou", "form": "たいよう", "pack_gloss": "solar", "kind": "gloss-divergence", "jmdict_sense_candidates": ["Sun", "state", "condition"]}
+{"id": "ja.lex.science.genshi", "form": "げんし", "pack_gloss": "nuclear", "kind": "gloss-divergence", "jmdict_sense_candidates": ["origin", "beginning", "genesis"]}
+{"id": "ja.lex.science.denpo", "form": "でんぱつ", "pack_gloss": "power plant", "kind": "gloss-divergence", "jmdict_sense_candidates": ["perm (hairstyle)", "permanent wave"]}
+{"id": "ja.lex.science.igen", "form": "いでん", "pack_gloss": "gene", "kind": "gloss-divergence", "jmdict_sense_candidates": ["heredity", "(genetic) inheritance", "farmland given to nobles of the fifth rank or above (ritsuryō system)"]}
+{"id": "ja.lex.science.saikou", "form": "さいこう", "pack_gloss": "cultivation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["revival", "restoration", "resuscitation"]}
+{"id": "ja.lex.science.gaisei", "form": "かいせい", "pack_gloss": "modification", "kind": "gloss-divergence", "jmdict_sense_candidates": ["resurrection", "resuscitation", "coming back to life"]}
+{"id": "ja.lex.science.getsuyou", "form": "げつよう", "pack_gloss": "lunar surface", "kind": "gloss-divergence", "jmdict_sense_candidates": ["Monday"]}
+{"id": "ja.lex.science.yakuhin", "form": "やくひん", "pack_gloss": "pharmaceuticals", "kind": "gloss-divergence", "jmdict_sense_candidates": ["medicine", "drug", "chemical (agent)"]}
+{"id": "ja.lex.science.seika2", "form": "せいか", "pack_gloss": "achievement", "kind": "gloss-divergence", "jmdict_sense_candidates": ["influential family", "the man in power", "(good) result"]}
+{"id": "ja.lex.science2.hoshou2", "form": "ほうしょう", "pack_gloss": "assurance", "kind": "gloss-divergence", "jmdict_sense_candidates": ["compensation", "indemnity", "reparation"]}
+{"id": "ja.lex.science2.shinko2", "form": "しんしん", "pack_gloss": "emerging", "kind": "gloss-divergence", "jmdict_sense_candidates": ["falling heavily (of rain, snow, etc.)", "mind and body", "rising"]}
+{"id": "ja.lex.science2.kiso2", "form": "きそ", "pack_gloss": "basic, fundamental", "kind": "gloss-divergence", "jmdict_sense_candidates": ["foundation", "basis", "prosecution"]}
+{"id": "ja.lex.shopping.shouhyou", "form": "しょうひょう", "pack_gloss": "price tag", "kind": "gloss-divergence", "jmdict_sense_candidates": ["trademark", "certificate", "voucher"]}
+{"id": "ja.lex.shopping.bag", "form": "ばぐ", "pack_gloss": "bag", "kind": "gloss-divergence", "jmdict_sense_candidates": ["(software) bug", "horse tack", "horse gear"]}
+{"id": "ja.lex.shopping.muffu", "form": "まふ", "pack_gloss": "muffler", "kind": "gloss-divergence", "jmdict_sense_candidates": ["muff", "hemp cloth", "linen"]}
+{"id": "ja.lex.shopping.keshi", "form": "けし", "pack_gloss": "eraser", "kind": "gloss-divergence", "jmdict_sense_candidates": ["opium poppy (Papaver somniferum)", "steward in charge of the affairs of nobles of the third rank and higher (from the middle of the Heian period)", "administrative position (Kamakura and Muromachi periods)"]}
+{"id": "ja.lex.shopping.mon", "form": "もん", "pack_gloss": "text", "kind": "gloss-divergence", "jmdict_sense_candidates": ["person", "thing", "object"]}
+{"id": "ja.lex.shopping.man-en", "form": "まんえん", "pack_gloss": "ten thousand yen", "kind": "gloss-divergence", "jmdict_sense_candidates": ["spread (e.g. of a disease)", "rampancy", "infestation"]}
+{"id": "ja.lex.society.kinben", "form": "きんべん", "pack_gloss": "abstinence", "kind": "gloss-divergence", "jmdict_sense_candidates": ["diligent", "hard-working", "industrious"]}
+{"id": "ja.lex.society.yimu", "form": "いむ", "pack_gloss": "obligation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["medical affairs", "to avoid", "to refrain from"]}
+{"id": "ja.lex.society.youmu", "form": "ようむ", "pack_gloss": "duty; task", "kind": "gloss-divergence", "jmdict_sense_candidates": ["business", "important business", "grey parrot (Psittacus erithacus)"]}
+{"id": "ja.lex.society2.yuuutsu", "form": "ゆううつ", "pack_gloss": "worry", "kind": "gloss-divergence", "jmdict_sense_candidates": ["depression", "melancholy", "dejection"]}
+{"id": "ja.lex.society2.kouon", "form": "こうおん", "pack_gloss": "noise", "kind": "gloss-divergence", "jmdict_sense_candidates": ["great favor", "great favour", "obligation"]}
+{"id": "ja.lex.society2.seimen", "form": "せいめん", "pack_gloss": "petition", "kind": "gloss-divergence", "jmdict_sense_candidates": ["new field", "noodle making", "raw noodles"]}
+{"id": "ja.lex.society2.shomei", "form": "しょうめい", "pack_gloss": "signature", "kind": "gloss-divergence", "jmdict_sense_candidates": ["call", "divine call", "illumination"]}
+{"id": "ja.lex.society2.houchi", "form": "ほうち", "pack_gloss": "public order", "kind": "gloss-divergence", "jmdict_sense_candidates": ["information", "news", "intelligence"]}
+{"id": "ja.lex.society2.kensei", "form": "けんせい", "pack_gloss": "policy", "kind": "gloss-divergence", "jmdict_sense_candidates": ["constitutional government", "exemplary government", "excellent government"]}
+{"id": "ja.lex.society2.kyuugyou", "form": "きゅうぎょう", "pack_gloss": "unemployment", "kind": "gloss-divergence", "jmdict_sense_candidates": ["suspension of business", "temporary closure (of a store, school, etc.)", "shutdown"]}
+{"id": "ja.lex.society2.shizukasa", "form": "しずけさ", "pack_gloss": "quietness", "kind": "gloss-divergence", "jmdict_sense_candidates": ["stillness", "silence", "quiet"]}
+{"id": "ja.lex.society2.sedai", "form": "せいだい", "pack_gloss": "generation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["fairness", "justice", "grand"]}
+{"id": "ja.lex.society2.ishiki", "form": "しき", "pack_gloss": "awareness", "kind": "gloss-divergence", "jmdict_sense_candidates": ["the four seasons", "morale (of troops, team, etc.)", "esprit de corps"]}
+{"id": "ja.lex.society2.akusei", "form": "あこう", "pack_gloss": "accusation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["subclass", "Japanese sea fig (Ficus superba var. japonica)", "Matsubara's red rockfish (Sebastes matsubarae)"]}
+{"id": "ja.lex.society2.houfuku", "form": "ほうふく", "pack_gloss": "response", "kind": "gloss-divergence", "jmdict_sense_candidates": ["retaliation", "revenge", "reprisal"]}
+{"id": "ja.lex.society3.shoushou", "form": "しょうしょう", "pack_gloss": "shrinking", "kind": "gloss-divergence", "jmdict_sense_candidates": ["major general", "rear admiral", "air commodore"]}
+{"id": "ja.lex.society3.yobikou", "form": "よびこう", "pack_gloss": "reserve, preparation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["preparatory school (for entrance examinations)", "cram school", "cramming school"]}
+{"id": "ja.lex.society3.koyou", "form": "こうよう", "pack_gloss": "employment", "kind": "gloss-divergence", "jmdict_sense_candidates": ["official business", "government business", "public business"]}
+{"id": "ja.lex.society3.jitsugyou", "form": "じつぎょう", "pack_gloss": "practical", "kind": "gloss-divergence", "jmdict_sense_candidates": ["industry", "business"]}
+{"id": "ja.lex.society3.iju", "form": "いきょ", "pack_gloss": "relocation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["dependence", "excellent deeds", "latitude"]}
+{"id": "ja.lex.society3.ikei", "form": "いけい", "pack_gloss": "shift", "kind": "gloss-divergence", "jmdict_sense_candidates": ["reverence", "awe", "respect"]}
+{"id": "ja.lex.society3.danjyo", "form": "だんじょ", "pack_gloss": "gender", "kind": "gloss-divergence", "jmdict_sense_candidates": ["men and women", "man and woman", "both sexes"]}
+{"id": "ja.lex.society3.komei", "form": "こうめい", "pack_gloss": "public", "kind": "gloss-divergence", "jmdict_sense_candidates": ["bright light", "hope", "bright future"]}
+{"id": "ja.lex.society4.hataraki", "form": "はたらき", "pack_gloss": "way of working", "kind": "gloss-divergence", "jmdict_sense_candidates": ["work", "labor", "labour"]}
+{"id": "ja.lex.society4.shigen", "form": "しげん", "pack_gloss": "resource", "kind": "gloss-divergence", "jmdict_sense_candidates": ["apt remark", "wise saying", "resources"]}
+{"id": "ja.lex.society4.saishi", "form": "さいし", "pack_gloss": "recycling", "kind": "gloss-divergence", "jmdict_sense_candidates": ["reconsideration", "wife and children", "wife"]}
+{"id": "ja.lex.society4.aisan", "form": "ざいし", "pack_gloss": "allocation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["staying in China", "residing in China", "being stationed in China"]}
+{"id": "ja.lex.society4.kaihyou", "form": "きょう", "pack_gloss": "disappearance", "kind": "gloss-divergence", "jmdict_sense_candidates": ["imperial capital (esp. Kyoto)", "final word of an iroha poem", "10^16"]}
+{"id": "ja.lex.society4.fukyu", "form": "ふきゅう", "pack_gloss": "inequality", "kind": "gloss-divergence", "jmdict_sense_candidates": ["in no hurry", "nonessential (industry)", "everlasting"]}
+{"id": "ja.lex.society4.kyousei", "form": "きょうせい", "pack_gloss": "compulsory", "kind": "gloss-divergence", "jmdict_sense_candidates": ["coexistence", "living together", "symbiosis"]}
+{"id": "ja.lex.society4.hoshou", "form": "ほうしょう", "pack_gloss": "guarantee", "kind": "gloss-divergence", "jmdict_sense_candidates": ["compensation", "indemnity", "reparation"]}
+{"id": "ja.lex.society4.suisin", "form": "すいしん", "pack_gloss": "progress", "kind": "gloss-divergence", "jmdict_sense_candidates": ["propulsion", "drive", "promotion (of a policy, project, movement, etc.)"]}
+{"id": "ja.lex.society4.totsunyuu", "form": "とうしゅう", "pack_gloss": "investment", "kind": "gloss-divergence", "jmdict_sense_candidates": ["following (a precedent, former policy, etc.)", "continuing with", "sticking to"]}
+{"id": "ja.lex.society4.kakyu", "form": "きゅう", "pack_gloss": "supply", "kind": "gloss-divergence", "jmdict_sense_candidates": ["sudden", "abrupt", "unexpected"]}
+{"id": "ja.lex.society4.juyou", "form": "じゅうよう", "pack_gloss": "demand", "kind": "gloss-divergence", "jmdict_sense_candidates": ["appropriation to", "earmarking for", "appointing someone to a position of trust"]}
+{"id": "ja.lex.society4.tousei", "form": "とうせい", "pack_gloss": "governance", "kind": "gloss-divergence", "jmdict_sense_candidates": ["eastern expedition", "military campaign to the east", "present-day"]}
+{"id": "ja.lex.society4.senyuu", "form": "せんゆう", "pack_gloss": "leading, advance", "kind": "gloss-divergence", "jmdict_sense_candidates": ["possession", "occupation", "occupancy"]}
+{"id": "ja.lex.sports.bokushin", "form": "ぼくしん", "pack_gloss": "boxing", "kind": "gloss-divergence", "jmdict_sense_candidates": ["god of shepherds, herdsmen, flocks and herds", "Pan", "Faunus"]}
+{"id": "ja.lex.sports.danburu", "form": "だんぶる", "pack_gloss": "dumbbell", "kind": "gloss-divergence", "jmdict_sense_candidates": ["(ship's) hold"]}
+{"id": "ja.lex.sports.ryouiki", "form": "りょういき", "pack_gloss": "range", "kind": "gloss-divergence", "jmdict_sense_candidates": ["territory", "domain", "field"]}
+{"id": "ja.lex.story.shuyaku", "form": "しゅやく", "pack_gloss": "lead role", "kind": "gloss-divergence", "jmdict_sense_candidates": ["leading part", "leading actor", "leading actress"]}
+{"id": "ja.lex.story2.kikkai", "form": "きっかい", "pack_gloss": "opportunity", "kind": "gloss-divergence", "jmdict_sense_candidates": ["strange", "wonderful", "weird"]}
+{"id": "ja.lex.story2.tenkan2", "form": "てんかん", "pack_gloss": "turn", "kind": "gloss-divergence", "jmdict_sense_candidates": ["Milky Way", "conversion", "diversion"]}
+{"id": "ja.lex.story2.fukkyaku", "form": "ふっきゃく", "pack_gloss": "revival", "kind": "gloss-divergence", "jmdict_sense_candidates": ["abdominal leg", "proleg", "pleopod"]}
+{"id": "ja.lex.story2.shisen", "form": "しせん", "pack_gloss": "perspective", "kind": "gloss-divergence", "jmdict_sense_candidates": ["Sichuan (China)", "Szechuan", "Szechwan"]}
+{"id": "ja.lex.story2.shuwei", "form": "しゅうい", "pack_gloss": "habit", "kind": "gloss-divergence", "jmdict_sense_candidates": ["surroundings", "environs", "circumference"]}
+{"id": "ja.lex.story2.kaiso", "form": "かいそ", "pack_gloss": "recollection", "kind": "gloss-divergence", "jmdict_sense_candidates": ["reorganization", "reorganisation", "reshuffle"]}
+{"id": "ja.lex.story2.yokai", "form": "ようかい", "pack_gloss": "spirit", "kind": "gloss-divergence", "jmdict_sense_candidates": ["ghost", "apparition", "phantom"]}
+{"id": "ja.lex.tech.purinto", "form": "ぷりんと", "pack_gloss": "printer", "kind": "gloss-divergence", "jmdict_sense_candidates": ["print", "printing", "(printed) copy"]}
+{"id": "ja.lex.tech2.koi", "form": "こい", "pack_gloss": "malfunction", "kind": "gloss-divergence", "jmdict_sense_candidates": ["ancient ways", "the feelings of the ancients", "intent"]}
+{"id": "ja.lex.tech2.fuben", "form": "ふべん", "pack_gloss": "inconvenient", "kind": "gloss-divergence", "jmdict_sense_candidates": ["inconvenience", "inexpediency", "unhandiness"]}
+{"id": "ja.lex.tech2.ryuuri", "form": "りゅうり", "pack_gloss": "flow", "kind": "gloss-divergence", "jmdict_sense_candidates": ["wandering (e.g. bird, exile, lifestyle)", "wandering alone in a strange country"]}
+{"id": "ja.lex.tech2.senzu", "form": "せんず", "pack_gloss": "anxiety", "kind": "gloss-divergence", "jmdict_sense_candidates": ["diagram", "chart"]}
+{"id": "ja.lex.tech2.kosei", "form": "こうせい", "pack_gloss": "cost-performance", "kind": "gloss-divergence", "jmdict_sense_candidates": ["posterity", "future generations", "future life"]}
+{"id": "ja.lex.tech2.koui", "form": "こうい", "pack_gloss": "performance", "kind": "gloss-divergence", "jmdict_sense_candidates": ["kindness (shown by others)", "courtesy", "favor"]}
+{"id": "ja.lex.tech2.kikan", "form": "きかん", "pack_gloss": "mechanism", "kind": "gloss-divergence", "jmdict_sense_candidates": ["organ", "mainstay", "nucleus"]}
+{"id": "ja.lex.tech2.onkyou", "form": "おんきょう", "pack_gloss": "remote control", "kind": "gloss-divergence", "jmdict_sense_candidates": ["sound", "noise", "audio"]}
+{"id": "ja.lex.tech2.forumu", "form": "ふぉーむ", "pack_gloss": "forum", "kind": "gloss-divergence", "jmdict_sense_candidates": ["form", "foam"]}
+{"id": "ja.lex.tech2.shinko", "form": "しんこう", "pack_gloss": "relationship", "kind": "gloss-divergence", "jmdict_sense_candidates": ["(religious) faith", "belief", "creed"]}
+{"id": "ja.lex.tech2.saisei", "form": "さいせい", "pack_gloss": "renewal", "kind": "gloss-divergence", "jmdict_sense_candidates": ["second punitive expedition", "restoration to life", "coming to life again"]}
+{"id": "ja.lex.tech2.hanare", "form": "はなれ", "pack_gloss": "separation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["detached building", "solitary house", "room detached from main house"]}
+{"id": "ja.lex.travel.henkyo", "form": "へんきょう", "pack_gloss": "change (booking)", "kind": "gloss-divergence", "jmdict_sense_candidates": ["monomania", "monomaniac", "narrow-mindedness"]}
+{"id": "ja.lex.travel.ryokou-ki", "form": "りょこうき", "pack_gloss": "travel diary", "kind": "gloss-divergence", "jmdict_sense_candidates": ["journal of one's travels"]}
+{"id": "ja.lex.travel.shinkou", "form": "しんこう", "pack_gloss": "trust", "kind": "gloss-divergence", "jmdict_sense_candidates": ["(religious) faith", "belief", "creed"]}
+{"id": "ja.lex.travel.taihen", "form": "たいへん", "pack_gloss": "tough", "kind": "gloss-divergence", "jmdict_sense_candidates": ["very", "greatly", "terribly"]}
+{"id": "ja.lex.travel.mendou", "form": "めんどう", "pack_gloss": "troublesome", "kind": "gloss-divergence", "jmdict_sense_candidates": ["trouble", "bother", "difficulty"]}
+{"id": "ja.lex.travel.nyukan", "form": "にゅうかん", "pack_gloss": "customs", "kind": "gloss-divergence", "jmdict_sense_candidates": ["placing in the coffin", "imprisonment", "cleavage (between breasts)"]}
+{"id": "ja.lex.travel.minshuku", "form": "みんしゅく", "pack_gloss": "guesthouse", "kind": "gloss-divergence", "jmdict_sense_candidates": ["guest house", "private home providing lodging for travelers", "bed and breakfast"]}
+{"id": "ja.lex.travel2.kiki", "form": "きき", "pack_gloss": "danger", "kind": "gloss-divergence", "jmdict_sense_candidates": ["crisis", "critical situation", "emergency"]}
+{"id": "ja.lex.travel2.tenkan", "form": "てんかん", "pack_gloss": "transfer", "kind": "gloss-divergence", "jmdict_sense_candidates": ["Milky Way", "conversion", "diversion"]}
+{"id": "ja.lex.travel2.kyoka-sho", "form": "きょうかしょ", "pack_gloss": "permission slip", "kind": "gloss-divergence", "jmdict_sense_candidates": ["textbook", "coursebook", "schoolbook"]}
+{"id": "ja.lex.travel2.issho", "form": "いっしょ", "pack_gloss": "togetherness", "kind": "gloss-divergence", "jmdict_sense_candidates": ["(doing) together", "one lump", "one mixture"]}
+{"id": "ja.lex.travel2.meguri", "form": "めぐり", "pack_gloss": "sightseeing circuit", "kind": "gloss-divergence", "jmdict_sense_candidates": ["circumference", "girth", "tour"]}
+{"id": "ja.lex.travel2.dekake", "form": "でかけ", "pack_gloss": "outing", "kind": "gloss-divergence", "jmdict_sense_candidates": ["(on the) point of going out", "(at the) moment one is about to leave", "just after leaving"]}
+{"id": "ja.lex.travel2.keihaku", "form": "けいはく", "pack_gloss": "stay", "kind": "gloss-divergence", "jmdict_sense_candidates": ["frivolous", "flippant", "superficial"]}
+{"id": "ja.lex.travel2.wasuremono", "form": "わすれもの", "pack_gloss": "forgotten item", "kind": "gloss-divergence", "jmdict_sense_candidates": ["lost article", "thing left behind", "leaving something behind"]}
+{"id": "ja.lex.travel2.kakaku", "form": "かくかく", "pack_gloss": "price", "kind": "gloss-divergence", "jmdict_sense_candidates": ["brilliant", "bright", "glorious"]}
+{"id": "ja.lex.travel2.nyuuryoku", "form": "にゅうりょく", "pack_gloss": "income", "kind": "gloss-divergence", "jmdict_sense_candidates": ["input", "(data) entry", "typing"]}
+{"id": "ja.lex.travel2.keikou", "form": "けいこう", "pack_gloss": "route", "kind": "gloss-divergence", "jmdict_sense_candidates": ["tendency", "trend", "inclination"]}
+{"id": "ja.lex.travel2.ryouga", "form": "りょうが", "pack_gloss": "currency", "kind": "gloss-divergence", "jmdict_sense_candidates": ["excelling", "surpassing", "outdoing"]}
+{"id": "ja.lex.urban.kouchiku", "form": "こうちく", "pack_gloss": "public facility", "kind": "gloss-divergence", "jmdict_sense_candidates": ["construction", "building", "putting up"]}
+{"id": "ja.lex.urban2.kachiku", "form": "かちく", "pack_gloss": "land price", "kind": "gloss-divergence", "jmdict_sense_candidates": ["domestic animals", "livestock", "cattle"]}
+{"id": "ja.lex.urban2.kissa", "form": "きっさ", "pack_gloss": "café", "kind": "gloss-divergence", "jmdict_sense_candidates": ["tea drinking", "teahouse", "tearoom"]}
+{"id": "ja.lex.urban2.kyousou", "form": "きょうそう", "pack_gloss": "cooperation, collaboration", "kind": "gloss-divergence", "jmdict_sense_candidates": ["regatta", "boat race", "competition"]}
+{"id": "ja.lex.urban2.genzai", "form": "げんざい", "pack_gloss": "current state", "kind": "gloss-divergence", "jmdict_sense_candidates": ["original sin", "the present", "present time"]}
+{"id": "ja.lex.urban2.koukou2", "form": "こうこう", "pack_gloss": "walking", "kind": "gloss-divergence", "jmdict_sense_candidates": ["greenhorn", "youthfulness and lack of experience", "princes and marquises"]}
+{"id": "ja.lex.urban2.touban", "form": "とうばん", "pack_gloss": "night watch", "kind": "gloss-divergence", "jmdict_sense_candidates": ["being on duty", "person on duty", "one's turn"]}
+{"id": "ja.lex.urban3.hisshou", "form": "ひっしょう", "pack_gloss": "necessity, must", "kind": "gloss-divergence", "jmdict_sense_candidates": ["certain victory"]}
+{"id": "ja.lex.verbs.arukimasu", "form": "あるきます", "pack_gloss": "to walk", "kind": "gloss-divergence", "jmdict_sense_candidates": ["alkyl"]}
+{"id": "ja.lex.verbs.arimasu", "form": "あります", "pack_gloss": "there is / are (things); to exist", "kind": "gloss-divergence", "jmdict_sense_candidates": ["allyl"]}
+{"id": "ja.lex.verbs.imasu", "form": "います", "pack_gloss": "there is / are (people, animals)", "kind": "gloss-divergence", "jmdict_sense_candidates": ["to be", "to go", "to come"]}
+{"id": "ja.lex.verbs.hanashimasu", "form": "はなします", "pack_gloss": "to speak; to talk", "kind": "gloss-divergence", "jmdict_sense_candidates": ["(liquid) nasal mucus", "nasal discharge", "pituita"]}
+{"id": "ja.lex.weather.samusa", "form": "さむさ", "pack_gloss": "cold (noun)", "kind": "gloss-divergence", "jmdict_sense_candidates": ["coldness"]}
+{"id": "ja.lex.weather2.kousui", "form": "こうすい", "pack_gloss": "flood", "kind": "gloss-divergence", "jmdict_sense_candidates": ["hard water", "rainfall", "precipitation"]}
+{"id": "ja.lex.weather2.kishou", "form": "きしょう", "pack_gloss": "climate", "kind": "gloss-divergence", "jmdict_sense_candidates": ["beauty spot", "place with beautiful scenery", "unexpected victory"]}
+{"id": "ja.lex.weather2.teru-teru-bouzu", "form": "てるてるぼうず", "pack_gloss": "teru-teru-bouzu charm", "kind": "gloss-divergence", "jmdict_sense_candidates": ["paper doll to which children pray for fine weather (usu. white, and shaped like a Buddhist priest)"]}
+{"id": "ja.lex.weather2.yukidoke", "form": "ゆきどけ", "pack_gloss": "snowmelt", "kind": "gloss-divergence", "jmdict_sense_candidates": ["thawing of snow", "thaw", "thaw (in relations)"]}
+{"id": "ja.lex.weather2.amagasa", "form": "あまがさ", "pack_gloss": "raincoat", "kind": "gloss-divergence", "jmdict_sense_candidates": ["rain hat", "umbrella"]}
+{"id": "ja.lex.weather2.naga", "form": "なが", "pack_gloss": "length", "kind": "gloss-divergence", "jmdict_sense_candidates": ["long"]}
+{"id": "ja.lex.weather2.samusa", "form": "さむさ", "pack_gloss": "cold", "kind": "gloss-divergence", "jmdict_sense_candidates": ["coldness"]}
+{"id": "ja.lex.work.nobun", "form": "のぶん", "pack_gloss": "notebook", "kind": "gloss-divergence", "jmdict_sense_candidates": ["kanji \"strike\" radical at right (radical 66)"]}
+{"id": "ja.lex.work.shigyou", "form": "しぎょう", "pack_gloss": "working hours", "kind": "gloss-divergence", "jmdict_sense_candidates": ["start of work", "commencement", "opening"]}
+{"id": "ja.lex.work.hakkou", "form": "はっこう", "pack_gloss": "mailing; posting", "kind": "gloss-divergence", "jmdict_sense_candidates": ["the eight directions", "the whole land", "the whole world"]}
+{"id": "ja.lex.work2.shoubei", "form": "しょうべい", "pack_gloss": "negotiation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["polished rice", "white rice", "husking rice with a mortar and pestle"]}
+{"id": "ja.lex.work2.shouhou", "form": "しょうほう", "pack_gloss": "proposal", "kind": "gloss-divergence", "jmdict_sense_candidates": ["business practice", "business method", "commerce"]}
+{"id": "ja.lex.work2.nyuuka", "form": "にゅうか", "pack_gloss": "receiving; intake", "kind": "gloss-divergence", "jmdict_sense_candidates": ["emulsification", "milk-based candy", "sweet made with milk"]}
+{"id": "ja.lex.work2.tanpin", "form": "たんぴん", "pack_gloss": "shortage", "kind": "gloss-divergence", "jmdict_sense_candidates": ["individual item (i.e. not part of a set)", "single article", "single item out of a set"]}
+{"id": "ja.lex.work2.keiri", "form": "けいり", "pack_gloss": "profit", "kind": "gloss-divergence", "jmdict_sense_candidates": ["executioner", "accounting", "administration (of money)"]}
+{"id": "ja.lex.work2.baibai", "form": "ばいばい", "pack_gloss": "sales", "kind": "gloss-divergence", "jmdict_sense_candidates": ["trade", "buying and selling", "trafficking (e.g. of humans, arms, drugs)"]}
+{"id": "ja.lex.work2.aite", "form": "あいて", "pack_gloss": "counterpart", "kind": "gloss-divergence", "jmdict_sense_candidates": ["companion", "partner", "company"]}
+{"id": "ja.lex.work2.shikaku", "form": "しかく", "pack_gloss": "qualification", "kind": "gloss-divergence", "jmdict_sense_candidates": ["assassin", "candidate fielded by a political party to oust an incumbent of the same party", "quadrilateral"]}
+{"id": "ja.lex.work2.shouhou", "form": "しょうほう", "pack_gloss": "praise", "kind": "gloss-divergence", "jmdict_sense_candidates": ["business practice", "business method", "commerce"]}
+{"id": "ja.lex.work2.kouchiku", "form": "こうちく", "pack_gloss": "accumulation", "kind": "gloss-divergence", "jmdict_sense_candidates": ["construction", "building", "putting up"]}
+{"id": "ja.lex.work2.yuutou", "form": "ゆうとう", "pack_gloss": "superior; outstanding", "kind": "gloss-divergence", "jmdict_sense_candidates": ["(academic) excellence", "superiority", "honors (e.g. graduating with)"]}
+{"id": "ja.lex.work2.tenyaku", "form": "てんやく", "pack_gloss": "job transfer", "kind": "gloss-divergence", "jmdict_sense_candidates": ["court physician", "translating into Braille", "applying eye drops"]}
