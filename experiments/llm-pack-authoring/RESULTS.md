@@ -1184,3 +1184,9 @@ Score: **7/7**.
 Units 590-599 (process descriptions and responsibilities), goal `ru.goal.b2.professional-writing` (existing),
 50 words (`lexicon/prof3.jsonl`), 2 grammar (`b2-otvechaet-za`, `b2-v-ramkakh`), 10 sentences.
 Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 58
+
+Units 600-609 (applications and professional self-presentation), goal `ru.goal.b2.professional-writing` (existing),
+50 words (`lexicon/prof4.jsonl`), 2 grammar (`b2-imeyu-opyt`, `b2-gotov-k`), 10 sentences.
+Score: **7/7**.
