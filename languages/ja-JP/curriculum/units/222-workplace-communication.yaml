@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1 work-professional); content refs are pack data; qualified review pending.
+id: ja.unit.workplace-comm
+goal_id: ja.goal.b1.work-professional
+title: workplace communication
+summary: Professional workplace language for workplace communication.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.work2.renkei
+  - ja.lex.work2.kyoudou
+  - ja.lex.work2.chousei
+  - ja.lex.work2.danmoku
+  - ja.lex.work2.gijiroku
+  - ja.sent.minutes-written
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.workplace-comm-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.work2.renkei
+  - ja.lex.work2.kyoudou
+  - ja.lex.work2.chousei
+  - ja.lex.work2.danmoku
+  - ja.lex.work2.gijiroku
+  - ja.sent.minutes-written
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.workplace-comm-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.work2.renkei
+  - ja.lex.work2.kyoudou
+  - ja.lex.work2.chousei
+  - ja.lex.work2.danmoku
+  - ja.lex.work2.gijiroku
+  - ja.sent.minutes-written
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.workplace-comm-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.work2.renkei
+  - ja.lex.work2.kyoudou
+  - ja.lex.work2.chousei
+  - ja.lex.work2.danmoku
+  - ja.lex.work2.gijiroku
+  - ja.sent.minutes-written
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.workplace-comm-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.work2.renkei
+  - ja.lex.work2.kyoudou
+  - ja.lex.work2.chousei
+  - ja.lex.work2.danmoku
+  - ja.lex.work2.gijiroku
+  - ja.sent.minutes-written
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.workplace-comm-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.minutes-written
+- id: ja.activity.workplace-comm-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

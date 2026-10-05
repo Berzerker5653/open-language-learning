@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1 work-professional); content refs are pack data; qualified review pending.
+id: ja.unit.career-change-plans
+goal_id: ja.goal.b1.work-professional
+title: career change plans
+summary: Professional workplace language for career change plans.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.work2.keiyaku
+  - ja.lex.work2.keiyaku-sho
+  - ja.lex.work2.shouhou
+  - ja.lex.work2.chingin
+  - ja.lex.work2.hoshou
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b1.keigo-soncho-intro
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.career-change-plans-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.work2.keiyaku
+  - ja.lex.work2.keiyaku-sho
+  - ja.lex.work2.shouhou
+  - ja.lex.work2.chingin
+  - ja.lex.work2.hoshou
+  - ja.grammar.b1.keigo-soncho-intro
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.career-change-plans-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.work2.keiyaku
+  - ja.lex.work2.keiyaku-sho
+  - ja.lex.work2.shouhou
+  - ja.lex.work2.chingin
+  - ja.lex.work2.hoshou
+  - ja.grammar.b1.keigo-soncho-intro
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.career-change-plans-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.work2.keiyaku
+  - ja.lex.work2.keiyaku-sho
+  - ja.lex.work2.shouhou
+  - ja.lex.work2.chingin
+  - ja.lex.work2.hoshou
+  - ja.grammar.b1.keigo-soncho-intro
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.career-change-plans-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.work2.keiyaku
+  - ja.lex.work2.keiyaku-sho
+  - ja.lex.work2.shouhou
+  - ja.lex.work2.chingin
+  - ja.lex.work2.hoshou
+  - ja.grammar.b1.keigo-soncho-intro
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.career-change-plans-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.career-change-plans-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

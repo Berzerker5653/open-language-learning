@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1 work-professional); content refs are pack data; qualified review pending.
+id: ja.unit.meeting-opinions
+goal_id: ja.goal.b1.work-professional
+title: meeting opinions
+summary: Professional workplace language for meeting opinions.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.work2.iken
+  - ja.lex.work2.hantai
+  - ja.lex.work2.kettei
+  - ja.lex.work2.kettei-ken
+  - ja.lex.work2.mokuhyou
+  - ja.sent.opinion-before-decision
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.meeting-opinions-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.work2.iken
+  - ja.lex.work2.hantai
+  - ja.lex.work2.kettei
+  - ja.lex.work2.kettei-ken
+  - ja.lex.work2.mokuhyou
+  - ja.sent.opinion-before-decision
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.meeting-opinions-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.work2.iken
+  - ja.lex.work2.hantai
+  - ja.lex.work2.kettei
+  - ja.lex.work2.kettei-ken
+  - ja.lex.work2.mokuhyou
+  - ja.sent.opinion-before-decision
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.meeting-opinions-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.work2.iken
+  - ja.lex.work2.hantai
+  - ja.lex.work2.kettei
+  - ja.lex.work2.kettei-ken
+  - ja.lex.work2.mokuhyou
+  - ja.sent.opinion-before-decision
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.meeting-opinions-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.work2.iken
+  - ja.lex.work2.hantai
+  - ja.lex.work2.kettei
+  - ja.lex.work2.kettei-ken
+  - ja.lex.work2.mokuhyou
+  - ja.sent.opinion-before-decision
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.meeting-opinions-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.opinion-before-decision
+- id: ja.activity.meeting-opinions-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

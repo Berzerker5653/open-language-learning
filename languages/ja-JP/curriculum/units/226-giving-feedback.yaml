@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1 work-professional); content refs are pack data; qualified review pending.
+id: ja.unit.giving-feedback
+goal_id: ja.goal.b1.work-professional
+title: giving feedback
+summary: Professional workplace language for giving feedback.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.work2.shouhou
+  - ja.lex.work2.taishou
+  - ja.lex.work2.aite
+  - ja.lex.work2.kokyaku
+  - ja.lex.work2.buchou
+  - ja.sent.praise-words
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.giving-feedback-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.work2.shouhou
+  - ja.lex.work2.taishou
+  - ja.lex.work2.aite
+  - ja.lex.work2.kokyaku
+  - ja.lex.work2.buchou
+  - ja.sent.praise-words
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.giving-feedback-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.work2.shouhou
+  - ja.lex.work2.taishou
+  - ja.lex.work2.aite
+  - ja.lex.work2.kokyaku
+  - ja.lex.work2.buchou
+  - ja.sent.praise-words
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.giving-feedback-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.work2.shouhou
+  - ja.lex.work2.taishou
+  - ja.lex.work2.aite
+  - ja.lex.work2.kokyaku
+  - ja.lex.work2.buchou
+  - ja.sent.praise-words
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.giving-feedback-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.work2.shouhou
+  - ja.lex.work2.taishou
+  - ja.lex.work2.aite
+  - ja.lex.work2.kokyaku
+  - ja.lex.work2.buchou
+  - ja.sent.praise-words
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.giving-feedback-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.praise-words
+- id: ja.activity.giving-feedback-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1 work-professional); content refs are pack data; qualified review pending.
+id: ja.unit.project-reports
+goal_id: ja.goal.b1.work-professional
+title: project reports
+summary: Professional workplace language for project reports.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.work2.keiei
+  - ja.lex.work2.kouritsu
+  - ja.lex.work2.sonshitsu
+  - ja.lex.work2.keiri
+  - ja.lex.work2.baibai
+  - ja.sent.profit-loss
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.project-reports-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.work2.keiei
+  - ja.lex.work2.kouritsu
+  - ja.lex.work2.sonshitsu
+  - ja.lex.work2.keiri
+  - ja.lex.work2.baibai
+  - ja.sent.profit-loss
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.project-reports-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.work2.keiei
+  - ja.lex.work2.kouritsu
+  - ja.lex.work2.sonshitsu
+  - ja.lex.work2.keiri
+  - ja.lex.work2.baibai
+  - ja.sent.profit-loss
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.project-reports-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.work2.keiei
+  - ja.lex.work2.kouritsu
+  - ja.lex.work2.sonshitsu
+  - ja.lex.work2.keiri
+  - ja.lex.work2.baibai
+  - ja.sent.profit-loss
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.project-reports-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.work2.keiei
+  - ja.lex.work2.kouritsu
+  - ja.lex.work2.sonshitsu
+  - ja.lex.work2.keiri
+  - ja.lex.work2.baibai
+  - ja.sent.profit-loss
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.project-reports-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.profit-loss
+- id: ja.activity.project-reports-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

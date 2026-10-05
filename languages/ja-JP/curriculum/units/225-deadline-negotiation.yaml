@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1 work-professional); content refs are pack data; qualified review pending.
+id: ja.unit.deadline-negotiation
+goal_id: ja.goal.b1.work-professional
+title: deadline negotiation
+summary: Professional workplace language for deadline negotiation.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.work2.shoubei
+  - ja.lex.work2.haitatsu
+  - ja.lex.work2.shukka
+  - ja.lex.work2.nyuuka
+  - ja.lex.work2.tanpin
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b1.ukemi-passive
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.deadline-negotiation-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.work2.shoubei
+  - ja.lex.work2.haitatsu
+  - ja.lex.work2.shukka
+  - ja.lex.work2.nyuuka
+  - ja.lex.work2.tanpin
+  - ja.grammar.b1.ukemi-passive
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.deadline-negotiation-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.work2.shoubei
+  - ja.lex.work2.haitatsu
+  - ja.lex.work2.shukka
+  - ja.lex.work2.nyuuka
+  - ja.lex.work2.tanpin
+  - ja.grammar.b1.ukemi-passive
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.deadline-negotiation-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.work2.shoubei
+  - ja.lex.work2.haitatsu
+  - ja.lex.work2.shukka
+  - ja.lex.work2.nyuuka
+  - ja.lex.work2.tanpin
+  - ja.grammar.b1.ukemi-passive
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.deadline-negotiation-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.work2.shoubei
+  - ja.lex.work2.haitatsu
+  - ja.lex.work2.shukka
+  - ja.lex.work2.nyuuka
+  - ja.lex.work2.tanpin
+  - ja.grammar.b1.ukemi-passive
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.deadline-negotiation-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.deadline-negotiation-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

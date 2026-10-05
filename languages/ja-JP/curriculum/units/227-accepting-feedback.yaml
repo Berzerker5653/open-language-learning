@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1 work-professional); content refs are pack data; qualified review pending.
+id: ja.unit.accepting-feedback
+goal_id: ja.goal.b1.work-professional
+title: accepting feedback
+summary: Professional workplace language for accepting feedback.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.work2.kacho
+  - ja.lex.work2.shacho
+  - ja.lex.work2.jigyounushi
+  - ja.lex.work2.roushi
+  - ja.lex.work2.rodo
+  - ja.sent.union-talks
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.accepting-feedback-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.work2.kacho
+  - ja.lex.work2.shacho
+  - ja.lex.work2.jigyounushi
+  - ja.lex.work2.roushi
+  - ja.lex.work2.rodo
+  - ja.sent.union-talks
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.accepting-feedback-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.work2.kacho
+  - ja.lex.work2.shacho
+  - ja.lex.work2.jigyounushi
+  - ja.lex.work2.roushi
+  - ja.lex.work2.rodo
+  - ja.sent.union-talks
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.accepting-feedback-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.work2.kacho
+  - ja.lex.work2.shacho
+  - ja.lex.work2.jigyounushi
+  - ja.lex.work2.roushi
+  - ja.lex.work2.rodo
+  - ja.sent.union-talks
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.accepting-feedback-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.work2.kacho
+  - ja.lex.work2.shacho
+  - ja.lex.work2.jigyounushi
+  - ja.lex.work2.roushi
+  - ja.lex.work2.rodo
+  - ja.sent.union-talks
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.accepting-feedback-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.union-talks
+- id: ja.activity.accepting-feedback-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

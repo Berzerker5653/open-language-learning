@@ -450,3 +450,10 @@ units, 50-word `lexicon/admin.jsonl`, 10 sentences (A2 grammar quota
 consumed), 1 assessment. Score: **7/7**. A2 extension complete: 100
 units (120-219), 10 goals, 500 new words, 15 grammar, 80 sentences,
 10 assessments. Next: B1 220-414.
+
+## 2026-10-04 — ja-JP batch 17: B1 units 220-229 (work-professional part 1)
+
+Goal `ja.goal.b1.work-professional` (prereq daily-admin, mirrored;
+spans 220-234), 10 units, 50-word `lexicon/work2.jsonl`, 2 grammar
+(`b1.ukemi-passive`, `b1.keigo-soncho-intro`), 8 sentences, 1
+assessment. Score: **7/7**.
