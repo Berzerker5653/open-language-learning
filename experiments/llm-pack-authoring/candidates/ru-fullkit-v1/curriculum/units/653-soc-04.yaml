@@ -1,0 +1,47 @@
+id: "ru.unit.b2.soc-04"
+goal_id: "ru.goal.b2.society-policy"
+title: "Officials"
+summary: "нуждающийся, госслужащий, чиновничий, надзорный and бюрократический."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u653-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.soc.nuzhdayushchiysya",
+        "ru.lex.soc.gossluzhashchiy",
+        "ru.lex.soc.chinovnichiy",
+        "ru.lex.soc.nadzornyy",
+        "ru.lex.soc.byurokraticheskiy",
+        "ru.sent.b2.u653",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u653-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u653-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u653"]
+  - id: "ru.activity.b2.u653-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Officials: policy notice with taught forms only."]
+  prohibited_ambiguity:
+    ["Do not confuse госслужащий (civil servant) with нуждающийся (needy person)."]
+  target_proficiency: "B2"
+  validation_method: "choice"

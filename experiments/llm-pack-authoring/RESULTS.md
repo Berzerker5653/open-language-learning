@@ -1214,3 +1214,9 @@ Score: **7/7**.
 Units 640-649 (clarification, mediation, and agreement), goal `ru.goal.b2.negotiation` (existing),
 50 words (`lexicon/neg4.jsonl`), 2 grammar (`b2-poyasnite-pozhaluysta`, `b2-takim-obrazom`), 10 sentences.
 Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 63
+
+Units 650-659 (public services and competing needs), NEW goal `ru.goal.b2.society-policy`
+(+2 assessments), 50 words (`lexicon/soc.jsonl`), 2 grammar (`b2-gosudarstvo-obespechivaet`,
+`b2-v-interesakh`), 10 sentences. Score: **7/7**.
