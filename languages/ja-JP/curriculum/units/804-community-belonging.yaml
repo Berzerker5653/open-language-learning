@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.804-community-belonging
+goal_id: ja.goal.b2.relationships-deep
+title: community belonging
+summary: B2 language for community belonging.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.rel2.chiiki
+  - ja.lex.rel2.koryu6
+  - ja.lex.rel2.sogo
+  - ja.lex.rel2.taiwa2
+  - ja.lex.rel2.kokan2
+  - ja.sent.community-belonging
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.804-community-belonging-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.rel2.chiiki
+  - ja.lex.rel2.koryu6
+  - ja.lex.rel2.sogo
+  - ja.lex.rel2.taiwa2
+  - ja.lex.rel2.kokan2
+  - ja.sent.community-belonging
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.804-community-belonging-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.rel2.chiiki
+  - ja.lex.rel2.koryu6
+  - ja.lex.rel2.sogo
+  - ja.lex.rel2.taiwa2
+  - ja.lex.rel2.kokan2
+  - ja.sent.community-belonging
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.804-community-belonging-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.rel2.chiiki
+  - ja.lex.rel2.koryu6
+  - ja.lex.rel2.sogo
+  - ja.lex.rel2.taiwa2
+  - ja.lex.rel2.kokan2
+  - ja.sent.community-belonging
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.804-community-belonging-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.rel2.chiiki
+  - ja.lex.rel2.koryu6
+  - ja.lex.rel2.sogo
+  - ja.lex.rel2.taiwa2
+  - ja.lex.rel2.kokan2
+  - ja.sent.community-belonging
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.804-community-belonging-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.community-belonging
+- id: ja.activity.804-community-belonging-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

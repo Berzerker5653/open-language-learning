@@ -995,3 +995,9 @@ Units 280-289 (work processes, experience, aims), 50 words (`lexicon/work.jsonl`
 Units 790-799 (humor tail, relationships-deep start), 50 words (`lexicon/humor2.jsonl`,
 `lexicon/rel1.jsonl`), 2 grammar (`b2-ni-tsurete-ite`, `b2-ni-hansite`), 8 sentences,
 new goal `ja.goal.b2.relationships-deep` + assessment + DEP edge. Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 76 (FINAL)
+
+Units 800-807 (relationships-deep tail; plan end), 50 words (`lexicon/rel2.jsonl`),
+2 grammar (`b2-ni-oujite-iru`, `b2-wake-ni-wa-ikenai2`), 6 sentences. Score: **7/7**.
+ja-JP B2 kit COMPLETE: 808 units (000-807), all bands done.

@@ -769,7 +769,15 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2202  b7642c382451  curriculum/units/797-mentor-relationship.yaml
         2160  db4b05c18f7a  curriculum/units/798-conflict-mediation.yaml
         2157  b6bfd32272ce  curriculum/units/799-boundary-setting.yaml
-       81955  0a8f4a321a32  grammar/concepts.jsonl
+        2227  d0b495a3ee40  curriculum/units/800-vulnerability-trust.yaml
+        2202  e6fc65e3ad72  curriculum/units/801-forgiveness-process.yaml
+        2257  54e42c4b7deb  curriculum/units/802-relationship-transitions.yaml
+        2082  cbbf0250526e  curriculum/units/803-loss-and-grief.yaml
+        2187  291e6816c933  curriculum/units/804-community-belonging.yaml
+        2292  21dd29bd9a8f  curriculum/units/805-cross-cultural-friendship.yaml
+        2280  397a4ac0577c  curriculum/units/806-relationship-reflection.yaml
+        2131  a21a1ca2e408  curriculum/units/807-wisdom-essay.yaml
+       82977  c1116ad82fa3  grammar/concepts.jsonl
        10690  6ecb81295694  grammar/dependencies.yaml
        30369  1401b6e0388e  kanji/entries.jsonl
          485  860cdf8185db  language/identity.yaml
@@ -862,6 +870,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
        27968  ec69faf32a59  lexicon/reg1.jsonl
        31716  480ed3a1e5bc  lexicon/reg2.jsonl
        27959  21a195b1964b  lexicon/rel1.jsonl
+       39842  412e74fcf267  lexicon/rel2.jsonl
        40483  2573737e5193  lexicon/relationships.jsonl
        39975  a20f7c6560b1  lexicon/science.jsonl
        16017  c03fe813cba9  lexicon/science2.jsonl
@@ -894,7 +903,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
-      410536  a43889ee2c6d  sentences/entries.jsonl
+      414502  5f21368ebd4f  sentences/entries.jsonl
         3915  e270f808c26e  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml
          539  842cce82e5d5  stories/first-day.yaml

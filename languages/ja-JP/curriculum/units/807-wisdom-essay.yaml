@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.807-wisdom-essay
+goal_id: ja.goal.b2.relationships-deep
+title: wisdom essay
+summary: B2 language for wisdom essay.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.rel2.chieki
+  - ja.lex.rel2.fukai2
+  - ja.lex.rel2.asai
+  - ja.lex.rel2.nagai
+  - ja.lex.rel2.hayai
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-wake-ni-wa-ikenai2
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.807-wisdom-essay-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.rel2.chieki
+  - ja.lex.rel2.fukai2
+  - ja.lex.rel2.asai
+  - ja.lex.rel2.nagai
+  - ja.lex.rel2.hayai
+  - ja.grammar.b2-wake-ni-wa-ikenai2
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.807-wisdom-essay-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.rel2.chieki
+  - ja.lex.rel2.fukai2
+  - ja.lex.rel2.asai
+  - ja.lex.rel2.nagai
+  - ja.lex.rel2.hayai
+  - ja.grammar.b2-wake-ni-wa-ikenai2
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.807-wisdom-essay-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.rel2.chieki
+  - ja.lex.rel2.fukai2
+  - ja.lex.rel2.asai
+  - ja.lex.rel2.nagai
+  - ja.lex.rel2.hayai
+  - ja.grammar.b2-wake-ni-wa-ikenai2
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.807-wisdom-essay-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.rel2.chieki
+  - ja.lex.rel2.fukai2
+  - ja.lex.rel2.asai
+  - ja.lex.rel2.nagai
+  - ja.lex.rel2.hayai
+  - ja.grammar.b2-wake-ni-wa-ikenai2
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.807-wisdom-essay-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.807-wisdom-essay-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email
