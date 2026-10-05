@@ -1,0 +1,47 @@
+id: "ru.unit.a1.city-06"
+goal_id: "ru.goal.a1.city"
+title: "Buildings and stops"
+summary: "этаж, подъезд, гостиница, площадка and остановка."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u085-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.city.etazh",
+        "ru.lex.city.podezd",
+        "ru.lex.city.gostinitsa",
+        "ru.lex.city.ploshchadka",
+        "ru.lex.city.ostanovka",
+        "ru.sent.a1.u085",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u085-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a1.u085-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a1.u085"]
+  - id: "ru.activity.a1.u085-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Buildings and stops: city and routes with taught forms only."]
+  prohibited_ambiguity:
+    ["Do not confuse этаж (building floor) with the already-taught пол (floor underfoot)."]
+  target_proficiency: "A1"
+  validation_method: "choice"

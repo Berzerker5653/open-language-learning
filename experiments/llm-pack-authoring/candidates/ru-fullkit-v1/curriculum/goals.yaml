@@ -374,3 +374,42 @@ goals:
       model: "strata/qwen3.8-flash-next-iq3_s"
       date: "2026-10-04"
       notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.a1.city"
+    description: "Read and write simple statements about places, locations, and simple routes."
+    band: "A1"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - {
+          target: "ru.goal.a1.shopping",
+          dimension: "comprehension-reading",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.a1.home",
+          dimension: "comprehension-reading",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.on-ramp.everyday",
+          dimension: "recall-meaning",
+          required_state: "independent",
+          strength: "hard",
+        }
+    required_concepts:
+      [
+        "ru.grammar.a1.motion-idti-ehat",
+        "ru.grammar.a1.direction-prepositions",
+        "ru.grammar.a1.location-v-na",
+      ]
+    assessment_ids: ["ru.assess.a1.city-reading", "ru.assess.a1.city-writing"]
+    transfer_required: false
+    sources: ["ru-original"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "omp"
+      model: "strata/qwen3.8-flash-next-iq3_s"
+      date: "2026-10-04"
+      notes: "ai-drafted; needs dictionary sourcing and human review"

@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
-       10152  c50bf2a6517a  assessments/definitions.jsonl
-       13114  87870434dfcf  curriculum/goals.yaml
+       11007  822555d9d353  assessments/definitions.jsonl
+       14367  58b92210b314  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -81,8 +81,19 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1448  413f742c64f1  curriculum/units/077-shopping-08.yaml
         1422  a2dfe901ae57  curriculum/units/078-shopping-09.yaml
         1477  1c0c09428206  curriculum/units/079-shopping-10.yaml
-       13127  fb969c3ab1fc  grammar/concepts.jsonl
+        1410  6278e82c131d  curriculum/units/080-city-01.yaml
+        1410  a048a1a3354f  curriculum/units/081-city-02.yaml
+        1418  bd6d6e0cd4a3  curriculum/units/082-city-03.yaml
+        1403  eefe59953699  curriculum/units/083-city-04.yaml
+        1386  813546b5b727  curriculum/units/084-city-05.yaml
+        1458  2359a9ba2b56  curriculum/units/085-city-06.yaml
+        1386  9e8fac9c2b78  curriculum/units/086-city-07.yaml
+        1350  1a70aeee1a81  curriculum/units/087-city-08.yaml
+        1428  a0b52a254da8  curriculum/units/088-city-09.yaml
+        1434  e0a1899a40c0  curriculum/units/089-city-10.yaml
+       14288  a2cd0570c6b9  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
+       21189  03a4503c7371  lexicon/city.jsonl
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
         3655  dbb5543b101e  lexicon/everyday.jsonl
        21072  e82dce96cc01  lexicon/family.jsonl
@@ -96,5 +107,5 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-       17842  bc37edc66e60  sentences/entries.jsonl
+       20713  dbd2ff69c01a  sentences/entries.jsonl
          391  74babc055676  sources.jsonl

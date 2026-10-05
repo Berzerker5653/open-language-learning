@@ -1,0 +1,46 @@
+id: "ru.unit.a1.city-09"
+goal_id: "ru.goal.a1.city"
+title: "Travel things"
+summary: "пассажир, чемодан, документ, почти and конечно."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u088-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.city.passazhir",
+        "ru.lex.city.chemodan",
+        "ru.lex.city.dokument",
+        "ru.lex.city.pochti",
+        "ru.lex.city.konechno",
+        "ru.sent.a1.u088",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u088-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a1.u088-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a1.u088"]
+  - id: "ru.activity.a1.u088-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Travel things: city and routes with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse чемодан (suitcase) with the already-taught сумка (bag)."]
+  target_proficiency: "A1"
+  validation_method: "choice"

@@ -1,0 +1,46 @@
+id: "ru.unit.a1.city-04"
+goal_id: "ru.goal.a1.city"
+title: "Getting around"
+summary: "ехать, идти, маршрут, пробка and водитель."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u083-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.city.ehat",
+        "ru.lex.city.idti",
+        "ru.lex.city.marshrut",
+        "ru.lex.city.probka",
+        "ru.lex.city.voditel",
+        "ru.sent.a1.u083",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u083-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a1.u083-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a1.u083"]
+  - id: "ru.activity.a1.u083-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Getting around: city and routes with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse водитель (driver) with пассажир (passenger)."]
+  target_proficiency: "A1"
+  validation_method: "choice"

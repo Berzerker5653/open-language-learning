@@ -696,3 +696,9 @@ Score: **7/7**.
 Goal `ru.goal.a1.shopping` created. 10 units, 50-word `lexicon/shopping.jsonl`,
 2 grammar (`a1.adjective-agreement`, `a1.genitive-quantity`), 8 sentences, 2 assessments.
 Score: **7/7**.
+
+## 2026-10-04 — ru-RU agent batch ru06: A1 units 080-089 (city)
+
+Goal `ru.goal.a1.city` created. 10 units, 50-word `lexicon/city.jsonl`,
+2 grammar (`a1.motion-idti-ehat`, `a1.direction-prepositions`), 8 sentences, 2 assessments.
+Score: **7/7**.

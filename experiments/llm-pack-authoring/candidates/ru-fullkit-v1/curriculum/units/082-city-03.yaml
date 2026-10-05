@@ -1,0 +1,46 @@
+id: "ru.unit.a1.city-03"
+goal_id: "ru.goal.a1.city"
+title: "Tickets and vehicles"
+summary: "такси, самолёт, поезд, велосипед and билет."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u082-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.city.taks",
+        "ru.lex.city.samol",
+        "ru.lex.city.poezd",
+        "ru.lex.city.velosiped",
+        "ru.lex.city.biliet",
+        "ru.sent.a1.u082",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u082-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a1.u082-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a1.u082"]
+  - id: "ru.activity.a1.u082-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Tickets and vehicles: city and routes with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse билет (ticket) with the already-taught чек (receipt)."]
+  target_proficiency: "A1"
+  validation_method: "choice"
