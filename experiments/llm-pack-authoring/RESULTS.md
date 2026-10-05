@@ -1136,3 +1136,9 @@ Units 500-509 (selective summaries across supplied texts), NEW goal `ru.goal.b2.
 Units 510-519 (agreement, disagreement, source comparison), NEW goal `ru.goal.b2.synthesis3`
 (+2 assessments), 50 words (`lexicon/synthesis3.jsonl`), 2 grammar (`b2-v-otlicie-ot`, `b2-vmeste-s-tim`),
 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 50
+
+Units 520-529 (integrated reports with clear attribution), NEW goal `ru.goal.b2.synthesis4`
+(+2 assessments), 50 words (`lexicon/synthesis4.jsonl`), 2 grammar (`b2-soglasno-dannym`, `b2-kak-otmechaet`),
+10 sentences. Score: **7/7**.
