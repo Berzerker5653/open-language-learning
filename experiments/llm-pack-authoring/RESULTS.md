@@ -1226,3 +1226,9 @@ Units 650-659 (public services and competing needs), NEW goal `ru.goal.b2.societ
 Units 660-669 (policy options, costs, and benefits), goal `ru.goal.b2.society-policy` (existing),
 50 words (`lexicon/soc2.jsonl`), 2 grammar (`b2-variant-predpolagaet`, `b2-za-schet`), 10 sentences.
 Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 65
+
+Units 670-679 (institutions, participation, and responsibilities), goal `ru.goal.b2.society-policy` (existing),
+50 words (`lexicon/soc3.jsonl`), 2 grammar (`b2-otvechaet-pered`, `b2-uchastvuet-v`), 10 sentences.
+Score: **7/7**.

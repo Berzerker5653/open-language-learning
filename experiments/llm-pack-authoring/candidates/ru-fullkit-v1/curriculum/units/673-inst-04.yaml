@@ -1,0 +1,47 @@
+id: "ru.unit.b2.inst-04"
+goal_id: "ru.goal.b2.society-policy"
+title: "Indifference"
+summary: "равнодушие, равнодушный, безразличие, безразличный and причастность."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u673-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.soc.ravnodushie",
+        "ru.lex.soc.ravnodushnyy",
+        "ru.lex.soc.bezrazlichie",
+        "ru.lex.soc.bezrazlichnyy",
+        "ru.lex.soc.prichastnost",
+        "ru.sent.b2.u673",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u673-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u673-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u673"]
+  - id: "ru.activity.b2.u673-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Indifference: policy notice with taught forms only."]
+  prohibited_ambiguity:
+    ["Do not confuse равнодушие (indifference) with причастность (implication)."]
+  target_proficiency: "B2"
+  validation_method: "choice"
