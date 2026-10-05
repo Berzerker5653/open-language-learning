@@ -1148,3 +1148,9 @@ Units 520-529 (integrated reports with clear attribution), NEW goal `ru.goal.b2.
 Units 530-539 (study-oriented reading and definitions), NEW goal `ru.goal.b2.academic-study`
 (+2 assessments), 50 words (`lexicon/study.jsonl`), 2 grammar (`b2-nazyvaetsya`, `b2-pod-kotorym-ponimayu`),
 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 52
+
+Units 540-549 (structured notes and conceptual relationships), NEW goal `ru.goal.b2.academic-study2`
+(+2 assessments), 50 words (`lexicon/study2.jsonl`), 2 grammar (`b2-v-ramkah`, `b2-v-svyazi-s`),
+10 sentences. Score: **7/7**.
