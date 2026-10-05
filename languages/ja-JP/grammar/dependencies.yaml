@@ -229,6 +229,11 @@ prerequisite_edges:
   dimension: grammar-controlled
   required_state: independent
   strength: hard
+- from: ja.goal.b1.health-wellness
+  to: ja.goal.b1.storytelling
+  dimension: grammar-controlled
+  required_state: independent
+  strength: hard
 notes:
 - Mirror of goal prerequisite edges (PACK-002); generated from curriculum/goals.yaml
   during K-30 authoring.

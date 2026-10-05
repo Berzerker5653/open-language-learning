@@ -579,3 +579,10 @@ Score: **7/7**.
 Goal `ja.goal.b1.storytelling` complete (385-399). 10 units,
 50-word `lexicon/story2.jsonl`, 2 grammar (`b1.dakara`,
 `b1.sou-da`), 8 sentences. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 35: B1 units 400-409 (health-wellness part 1)
+
+Goal `ja.goal.b1.health-wellness` (prereq storytelling, mirrored;
+spans 400-414) started, 10 units, 50-word `lexicon/health2.jsonl`,
+2 grammar (`b1.nagara`, `b1.mazu`), 8 sentences, 1 assessment.
+Score: **7/7**.

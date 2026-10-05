@@ -11,8 +11,8 @@
     "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
     "bands_done": ["A1", "A2"],
-    "units_next": "400",
+    "units_next": "410",
     "last_score": "7/7 (2026-10-04, results/ja-JP-draft)",
-    "notes": "extension plan authored by agent, checker OK (54 goals, 740 units, 3789 new words); A1 complete (062-118); A2 complete (120-219); B1: 220-399 done (storytelling complete 385-399); next batch 400-409 (health-wellness start, spans 400-414)"
+    "notes": "extension plan authored by agent, checker OK (54 goals, 740 units, 3789 new words); A1 complete (062-118); A2 complete (120-219); B1: 220-409 done (health-wellness started 400-409, spans 400-414); next batch 410-419 (health finish 410-414, B1 band ends 414)"
   }
 }

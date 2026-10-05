@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.medical-information
+goal_id: ja.goal.b1.health-wellness
+title: medical information
+summary: B1 language for medical information.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.health2.seka
+  - ja.lex.health2.seka2
+  - ja.lex.health2.chishiki
+  - ja.lex.health2.chiryou
+  - ja.lex.health2.ryouki
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b1.mazu
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.medical-information-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.health2.seka
+  - ja.lex.health2.seka2
+  - ja.lex.health2.chishiki
+  - ja.lex.health2.chiryou
+  - ja.lex.health2.ryouki
+  - ja.grammar.b1.mazu
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.medical-information-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.health2.seka
+  - ja.lex.health2.seka2
+  - ja.lex.health2.chishiki
+  - ja.lex.health2.chiryou
+  - ja.lex.health2.ryouki
+  - ja.grammar.b1.mazu
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.medical-information-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.health2.seka
+  - ja.lex.health2.seka2
+  - ja.lex.health2.chishiki
+  - ja.lex.health2.chiryou
+  - ja.lex.health2.ryouki
+  - ja.grammar.b1.mazu
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.medical-information-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.health2.seka
+  - ja.lex.health2.seka2
+  - ja.lex.health2.chishiki
+  - ja.lex.health2.chiryou
+  - ja.lex.health2.ryouki
+  - ja.grammar.b1.mazu
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.medical-information-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.medical-information-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.habit-change
+goal_id: ja.goal.b1.health-wellness
+title: habit change
+summary: B1 language for habit change.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.health2.shuusei
+  - ja.lex.health2.kessan3
+  - ja.lex.health2.kagaku
+  - ja.lex.health2.gakkai
+  - ja.lex.health2.igaku
+  - ja.sent.habit-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.habit-change-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.health2.shuusei
+  - ja.lex.health2.kessan3
+  - ja.lex.health2.kagaku
+  - ja.lex.health2.gakkai
+  - ja.lex.health2.igaku
+  - ja.sent.habit-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.habit-change-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.health2.shuusei
+  - ja.lex.health2.kessan3
+  - ja.lex.health2.kagaku
+  - ja.lex.health2.gakkai
+  - ja.lex.health2.igaku
+  - ja.sent.habit-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.habit-change-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.health2.shuusei
+  - ja.lex.health2.kessan3
+  - ja.lex.health2.kagaku
+  - ja.lex.health2.gakkai
+  - ja.lex.health2.igaku
+  - ja.sent.habit-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.habit-change-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.health2.shuusei
+  - ja.lex.health2.kessan3
+  - ja.lex.health2.kagaku
+  - ja.lex.health2.gakkai
+  - ja.lex.health2.igaku
+  - ja.sent.habit-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.habit-change-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.habit-change
+- id: ja.activity.habit-change-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
