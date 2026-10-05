@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
-       22646  5dd39df78be6  assessments/definitions.jsonl
-       32122  caa5db554318  curriculum/goals.yaml
+       23452  804dd110b6f5  assessments/definitions.jsonl
+       33404  ae5ae8d906ee  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -240,17 +240,27 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1453  5b365b61e0c6  curriculum/units/237-life-experiences-08.yaml
         1504  9c9fa0eb573b  curriculum/units/238-life-experiences-09.yaml
         1484  d85aeac94bdd  curriculum/units/239-life-experiences-10.yaml
-        1332  8c91ce1bff3d  curriculum/units/240-travel-experiences-01.yaml
-        1357  a2a2b6c64d71  curriculum/units/241-travel-experiences-02.yaml
-        1363  243e4fbb8ec6  curriculum/units/242-travel-experiences-03.yaml
-        1383  f7d79a3f57ed  curriculum/units/243-travel-experiences-04.yaml
-        1393  7c3475d6667a  curriculum/units/244-travel-experiences-05.yaml
-        1437  84ec055017c0  curriculum/units/245-travel-experiences-06.yaml
-        1366  d414f36db910  curriculum/units/246-travel-experiences-07.yaml
-        1387  5f2aa0e1f3c2  curriculum/units/247-travel-experiences-08.yaml
-        1369  5a05f945ae8d  curriculum/units/248-travel-experiences-09.yaml
-        1357  cb4cde38ba68  curriculum/units/249-travel-experiences-10.yaml
-       31006  c3b66fbd77a9  grammar/concepts.jsonl
+        1417  2be365fc7147  curriculum/units/240-travel-experiences-01.yaml
+        1442  b070a6a6b4a5  curriculum/units/241-travel-experiences-02.yaml
+        1448  72cc64134402  curriculum/units/242-travel-experiences-03.yaml
+        1468  47f022ae5b57  curriculum/units/243-travel-experiences-04.yaml
+        1478  10a663c4527e  curriculum/units/244-travel-experiences-05.yaml
+        1522  f50a46318ce2  curriculum/units/245-travel-experiences-06.yaml
+        1451  f3ae4185caf8  curriculum/units/246-travel-experiences-07.yaml
+        1472  2f6d6c7b09aa  curriculum/units/247-travel-experiences-08.yaml
+        1454  5d3158b0e2d7  curriculum/units/248-travel-experiences-09.yaml
+        1442  976416772b53  curriculum/units/249-travel-experiences-10.yaml
+        1473  0a923833676a  curriculum/units/250-service-problems-01.yaml
+        1450  2b813eba1356  curriculum/units/251-service-problems-02.yaml
+        1479  b16e008d9e18  curriculum/units/252-service-problems-03.yaml
+        1463  e92da2241f50  curriculum/units/253-service-problems-04.yaml
+        1449  e3ddd608d500  curriculum/units/254-service-problems-05.yaml
+        1470  e73181e7b48a  curriculum/units/255-service-problems-06.yaml
+        1476  f72241b2cb22  curriculum/units/256-service-problems-07.yaml
+        1476  6ed1728c83ef  curriculum/units/257-service-problems-08.yaml
+        1479  6d37ed5749d9  curriculum/units/258-service-problems-09.yaml
+        1542  d09bae9d33bc  curriculum/units/259-service-problems-10.yaml
+       32012  2399423b8339  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        21189  03a4503c7371  lexicon/city.jsonl
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
@@ -270,6 +280,7 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
        21375  d93c1521663d  lexicon/pastevents.jsonl
        22380  8c501a5154bc  lexicon/personal.jsonl
        21982  3e3964bc7992  lexicon/problems.jsonl
+       19907  763912bb4aac  lexicon/problems2.jsonl
        21337  77ca388bc863  lexicon/routines.jsonl
        21837  78c9c9a40760  lexicon/services.jsonl
        21290  daeb36ea4066  lexicon/shopping.jsonl
@@ -282,5 +293,5 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-       77833  9ef5e93c2802  sentences/entries.jsonl
+       81481  2b3404a28324  sentences/entries.jsonl
          391  74babc055676  sources.jsonl

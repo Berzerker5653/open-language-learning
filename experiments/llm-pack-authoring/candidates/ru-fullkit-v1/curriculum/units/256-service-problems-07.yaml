@@ -1,0 +1,46 @@
+id: "ru.unit.b1.service-problems-07"
+goal_id: "ru.goal.b1.practical-problems"
+title: "Checks"
+summary: "аргумент, рассмотреть, основание, пункт and процедура."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u256-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.problems2.argument",
+        "ru.lex.problems2.rassmotret",
+        "ru.lex.problems2.osnovanie",
+        "ru.lex.problems2.punkt",
+        "ru.lex.problems2.procedura",
+        "ru.sent.b1.u256",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u256-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u256-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u256"]
+  - id: "ru.activity.b1.u256-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Checks: service problems with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse основание (grounds) with аргумент (argument)."]
+  target_proficiency: "B1"
+  validation_method: "choice"

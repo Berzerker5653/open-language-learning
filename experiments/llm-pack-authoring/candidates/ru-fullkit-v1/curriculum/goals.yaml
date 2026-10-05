@@ -957,3 +957,43 @@ goals:
       model: "strata/qwen3.8-flash-next-iq3_s"
       date: "2026-10-05"
       notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.b1.practical-problems"
+    description: "Report a service failure and explain it in writing."
+    band: "B1"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - {
+          target: "ru.goal.b1.experiences",
+          dimension: "comprehension-reading",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.b1.narration",
+          dimension: "comprehension-reading",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.on-ramp.everyday",
+          dimension: "recall-meaning",
+          required_state: "independent",
+          strength: "hard",
+        }
+    required_concepts:
+      [
+        "ru.grammar.b1.proshu-requests",
+        "ru.grammar.b1.v-svyazi-s",
+        "ru.grammar.on-ramp.zero-present-copula",
+      ]
+    assessment_ids:
+      ["ru.assess.b1.practical-problems-reading", "ru.assess.b1.practical-problems-writing"]
+    transfer_required: false
+    sources: ["ru-original"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "omp"
+      model: "strata/qwen3.8-flash-next-iq3_s"
+      date: "2026-10-05"
+      notes: "ai-drafted; needs dictionary sourcing and human review"

@@ -945,3 +945,9 @@ Units 240-249 (experiences: travel), 50 words (`lexicon/travel2.jsonl`),
 Units 740-749 (culture-identity tail, abstract-debate start), 50 words
 (`lexicon/cult2.jsonl`, `lexicon/abst.jsonl`), 2 grammar (`b2-to-sureba`, `b2-ni-hokanaranai`),
 8 sentences, new goal `ja.goal.b2.abstract-debate` + assessment + DEP edge. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 23
+
+Units 250-259 (service failures, explanatory correspondence), 50 words
+(`lexicon/problems2.jsonl`), 2 grammar (`b1.proshu-requests`, `b1.v-svyazi-s`), 10 sentences,
+new goal `ru.goal.b1.practical-problems` + 2 assessments. Score: **7/7**.
