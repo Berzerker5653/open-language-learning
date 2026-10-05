@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.translation-comparison
+goal_id: ja.goal.b2.literature-study
+title: translation comparison
+summary: B2 language for translation comparison.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.lit2.honyaku-ka
+  - ja.lex.lit2.yakubun
+  - ja.lex.lit2.genbun
+  - ja.lex.lit2.jiten
+  - ja.lex.lit2.reibun
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2.ni-kagite
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.translation-comparison-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.lit2.honyaku-ka
+  - ja.lex.lit2.yakubun
+  - ja.lex.lit2.genbun
+  - ja.lex.lit2.jiten
+  - ja.lex.lit2.reibun
+  - ja.grammar.b2.ni-kagite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.translation-comparison-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.lit2.honyaku-ka
+  - ja.lex.lit2.yakubun
+  - ja.lex.lit2.genbun
+  - ja.lex.lit2.jiten
+  - ja.lex.lit2.reibun
+  - ja.grammar.b2.ni-kagite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.translation-comparison-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.lit2.honyaku-ka
+  - ja.lex.lit2.yakubun
+  - ja.lex.lit2.genbun
+  - ja.lex.lit2.jiten
+  - ja.lex.lit2.reibun
+  - ja.grammar.b2.ni-kagite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.translation-comparison-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.lit2.honyaku-ka
+  - ja.lex.lit2.yakubun
+  - ja.lex.lit2.genbun
+  - ja.lex.lit2.jiten
+  - ja.lex.lit2.reibun
+  - ja.grammar.b2.ni-kagite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.translation-comparison-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.translation-comparison-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

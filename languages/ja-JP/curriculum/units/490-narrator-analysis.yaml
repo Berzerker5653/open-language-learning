@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.narrator-analysis
+goal_id: ja.goal.b2.literature-study
+title: narrator analysis
+summary: B2 language for narrator analysis.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.lit2.shiteisha
+  - ja.lex.lit2.shitei
+  - ja.lex.lit2.dokusha
+  - ja.lex.lit2.dokusho
+  - ja.lex.lit2.kotoba
+  - ja.sent.narrator-analysis
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.narrator-analysis-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.lit2.shiteisha
+  - ja.lex.lit2.shitei
+  - ja.lex.lit2.dokusha
+  - ja.lex.lit2.dokusho
+  - ja.lex.lit2.kotoba
+  - ja.sent.narrator-analysis
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.narrator-analysis-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.lit2.shiteisha
+  - ja.lex.lit2.shitei
+  - ja.lex.lit2.dokusha
+  - ja.lex.lit2.dokusho
+  - ja.lex.lit2.kotoba
+  - ja.sent.narrator-analysis
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.narrator-analysis-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.lit2.shiteisha
+  - ja.lex.lit2.shitei
+  - ja.lex.lit2.dokusha
+  - ja.lex.lit2.dokusho
+  - ja.lex.lit2.kotoba
+  - ja.sent.narrator-analysis
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.narrator-analysis-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.lit2.shiteisha
+  - ja.lex.lit2.shitei
+  - ja.lex.lit2.dokusha
+  - ja.lex.lit2.dokusho
+  - ja.lex.lit2.kotoba
+  - ja.sent.narrator-analysis
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.narrator-analysis-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.narrator-analysis
+- id: ja.activity.narrator-analysis-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

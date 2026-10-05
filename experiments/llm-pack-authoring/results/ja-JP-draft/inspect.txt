@@ -459,7 +459,12 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2112  7c600c9fab7d  curriculum/units/487-poetry-classical.yaml
         2067  94f81dbde68e  curriculum/units/488-haiku-tradition.yaml
         2158  3093771de309  curriculum/units/489-literary-motifs.yaml
-       51123  f47831585b11  grammar/concepts.jsonl
+        2162  31f0a94cc6c9  curriculum/units/490-narrator-analysis.yaml
+        2102  e60791c783dd  curriculum/units/491-symbol-reading.yaml
+        2157  624abd08ff23  curriculum/units/492-genre-comparison.yaml
+        2017  aa59da89a7cd  curriculum/units/493-author-context.yaml
+        2186  31cb1d46ea1f  curriculum/units/494-translation-comparison.yaml
+       51631  562a9d12911d  grammar/concepts.jsonl
         7585  f776b269ef41  grammar/dependencies.yaml
        30369  1401b6e0388e  kanji/entries.jsonl
          485  860cdf8185db  language/identity.yaml
@@ -501,6 +506,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
        32313  7ab1a7525155  lexicon/law2.jsonl
        40024  c6b183bacb48  lexicon/leisure.jsonl
        24108  44f4a0329139  lexicon/lit.jsonl
+       19833  18e956186411  lexicon/lit2.jsonl
        39598  c49e6c4dbf64  lexicon/media.jsonl
        19842  d684600348c8  lexicon/media2.jsonl
        31964  167842db4dee  lexicon/narrative.jsonl
@@ -540,7 +546,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
-      246621  ac9b6b75a048  sentences/entries.jsonl
+      249877  d21d90636e8c  sentences/entries.jsonl
         3915  e270f808c26e  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml
          539  842cce82e5d5  stories/first-day.yaml

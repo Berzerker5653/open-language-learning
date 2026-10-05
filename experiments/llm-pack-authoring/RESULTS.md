@@ -640,3 +640,8 @@ Goal `ja.goal.b2.literature-study` created (484-498). 10 units,
 20-word `lexicon/philosophy3.jsonl` + 30-word `lexicon/lit.jsonl`, 2 grammar
 (`b2.ni-kagiru`, `b2.ni-junzuru`), 8 sentences, assessment
 `ja.assess.literature-study`. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 44: B2 units 490-494 (literature-study cont)
+
+5 units, 25-word `lexicon/lit2.jsonl`, 1 grammar (`b2.ni-kagite`),
+5 sentences. Score: **7/7**.
