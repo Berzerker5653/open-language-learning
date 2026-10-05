@@ -1,0 +1,46 @@
+id: "ru.unit.b1.narration-sequence-02"
+goal_id: "ru.goal.b1.narration"
+title: "It happened"
+summary: "неожиданно, оказалось, выяснилось, случилось and произошло."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u211-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.narration.neozhidanno",
+        "ru.lex.narration.okazalos",
+        "ru.lex.narration.vyyasnilos",
+        "ru.lex.narration.sluchilos",
+        "ru.lex.narration.proizoshlo",
+        "ru.sent.b1.u211",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u211-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u211-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u211"]
+  - id: "ru.activity.b1.u211-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["It happened: narration with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse случилось (happened) with произошло (occurred)."]
+  target_proficiency: "B1"
+  validation_method: "choice"

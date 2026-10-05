@@ -899,3 +899,9 @@ Goal `ru.goal.a2.connected-messages` created (+2 assessments). Units 200-209,
 Goal `ja.goal.b2.environment-policy` created (+ASSESS +DEP). Units 700-709
 (urban tail + environment start), 51 words (`urban3.jsonl`, `env3.jsonl`), 2 grammar
 (`b2-to-ha`, `b2-ni-kaete`), 8 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 19
+
+Goal `ru.goal.b1.narration` created (+2 assessments; B1 band starts). Units 210-219,
+50 words (`lexicon/narration.jsonl`), 2 grammar (`b1.narrative-past`,
+`b1.sequence-connectors`), 10 sentences. Score: **7/7**.
