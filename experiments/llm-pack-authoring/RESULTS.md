@@ -1208,3 +1208,9 @@ Score: **7/7**.
 Units 630-639 (concessions, conditions, and compromise), goal `ru.goal.b2.negotiation` (existing),
 50 words (`lexicon/neg3.jsonl`), 2 grammar (`b2-pri-uslovii-chto`, `b2-v-zamyan`), 10 sentences.
 Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 62
+
+Units 640-649 (clarification, mediation, and agreement), goal `ru.goal.b2.negotiation` (existing),
+50 words (`lexicon/neg4.jsonl`), 2 grammar (`b2-poyasnite-pozhaluysta`, `b2-takim-obrazom`), 10 sentences.
+Score: **7/7**.
