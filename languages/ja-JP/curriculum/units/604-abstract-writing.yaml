@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.abstract-writing
+goal_id: ja.goal.b2.academic-skills
+title: abstract writing
+summary: B2 language for abstract writing.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.academic2.youyaku
+  - ja.lex.academic2.seikaku
+  - ja.lex.academic2.kaisetsu
+  - ja.lex.academic2.houkoku
+  - ja.lex.academic2.seido
+  - ja.sent.abstract-writing
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.abstract-writing-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.academic2.youyaku
+  - ja.lex.academic2.seikaku
+  - ja.lex.academic2.kaisetsu
+  - ja.lex.academic2.houkoku
+  - ja.lex.academic2.seido
+  - ja.sent.abstract-writing
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.abstract-writing-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.academic2.youyaku
+  - ja.lex.academic2.seikaku
+  - ja.lex.academic2.kaisetsu
+  - ja.lex.academic2.houkoku
+  - ja.lex.academic2.seido
+  - ja.sent.abstract-writing
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.abstract-writing-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.academic2.youyaku
+  - ja.lex.academic2.seikaku
+  - ja.lex.academic2.kaisetsu
+  - ja.lex.academic2.houkoku
+  - ja.lex.academic2.seido
+  - ja.sent.abstract-writing
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.abstract-writing-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.academic2.youyaku
+  - ja.lex.academic2.seikaku
+  - ja.lex.academic2.kaisetsu
+  - ja.lex.academic2.houkoku
+  - ja.lex.academic2.seido
+  - ja.sent.abstract-writing
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.abstract-writing-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.abstract-writing
+- id: ja.activity.abstract-writing-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

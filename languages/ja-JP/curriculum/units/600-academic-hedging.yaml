@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.academic-hedging
+goal_id: ja.goal.b2.academic-skills
+title: academic hedging
+summary: B2 language for academic hedging.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.academic2.yohou
+  - ja.lex.academic2.kentei
+  - ja.lex.academic2.rondatate
+  - ja.lex.academic2.kijun
+  - ja.lex.academic2.kairyou
+  - ja.sent.academic-hedging
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.academic-hedging-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.academic2.yohou
+  - ja.lex.academic2.kentei
+  - ja.lex.academic2.rondatate
+  - ja.lex.academic2.kijun
+  - ja.lex.academic2.kairyou
+  - ja.sent.academic-hedging
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.academic-hedging-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.academic2.yohou
+  - ja.lex.academic2.kentei
+  - ja.lex.academic2.rondatate
+  - ja.lex.academic2.kijun
+  - ja.lex.academic2.kairyou
+  - ja.sent.academic-hedging
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.academic-hedging-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.academic2.yohou
+  - ja.lex.academic2.kentei
+  - ja.lex.academic2.rondatate
+  - ja.lex.academic2.kijun
+  - ja.lex.academic2.kairyou
+  - ja.sent.academic-hedging
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.academic-hedging-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.academic2.yohou
+  - ja.lex.academic2.kentei
+  - ja.lex.academic2.rondatate
+  - ja.lex.academic2.kijun
+  - ja.lex.academic2.kairyou
+  - ja.sent.academic-hedging
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.academic-hedging-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.academic-hedging
+- id: ja.activity.academic-hedging-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

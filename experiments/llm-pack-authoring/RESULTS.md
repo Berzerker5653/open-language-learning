@@ -772,3 +772,9 @@ Goal `ja.goal.b2.academic-skills` created (+deps, +assessment). Units 590-599,
 50 words (`lexicon/global2.jsonl` 20, `lexicon/academic.jsonl` 30), 2 grammar
 (`b2.ni-chikai`, `b2.ni-hiku`), 8 sentences. Kana authored directly in WORDS.
 Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 56
+
+Units 600-609 (academic-skills tail), 50 words (`lexicon/academic2.jsonl`),
+2 grammar (`b2.wake-ni-wa-ikanai`, `b2.zaru-o-enai`), 8 sentences.
+Score: **7/7**.

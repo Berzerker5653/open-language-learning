@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.poster-writing
+goal_id: ja.goal.b2.academic-skills
+title: poster writing
+summary: B2 language for poster writing.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.academic2.seisaku
+  - ja.lex.academic2.bunya
+  - ja.lex.academic2.tassei
+  - ja.lex.academic2.kouritsu
+  - ja.lex.academic2.riyou
+  - ja.sent.poster-writing
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.poster-writing-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.academic2.seisaku
+  - ja.lex.academic2.bunya
+  - ja.lex.academic2.tassei
+  - ja.lex.academic2.kouritsu
+  - ja.lex.academic2.riyou
+  - ja.sent.poster-writing
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.poster-writing-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.academic2.seisaku
+  - ja.lex.academic2.bunya
+  - ja.lex.academic2.tassei
+  - ja.lex.academic2.kouritsu
+  - ja.lex.academic2.riyou
+  - ja.sent.poster-writing
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.poster-writing-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.academic2.seisaku
+  - ja.lex.academic2.bunya
+  - ja.lex.academic2.tassei
+  - ja.lex.academic2.kouritsu
+  - ja.lex.academic2.riyou
+  - ja.sent.poster-writing
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.poster-writing-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.academic2.seisaku
+  - ja.lex.academic2.bunya
+  - ja.lex.academic2.tassei
+  - ja.lex.academic2.kouritsu
+  - ja.lex.academic2.riyou
+  - ja.sent.poster-writing
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.poster-writing-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.poster-writing
+- id: ja.activity.poster-writing-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

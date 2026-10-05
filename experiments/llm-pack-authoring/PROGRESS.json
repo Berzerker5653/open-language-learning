@@ -10,7 +10,7 @@
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
-    "units_next": "600",
-    "notes": "b47-b55 (510-599) 7/7; academic-skills goal created (596-599); kana authored directly in WORDS since b55; next: units 600+ per plan"
+    "units_next": "610",
+    "notes": "b47-b56 (510-609) 7/7; academic-skills goal spans 596-609; kana authored directly in WORDS; next: units 610+ per plan"
   }
 }
