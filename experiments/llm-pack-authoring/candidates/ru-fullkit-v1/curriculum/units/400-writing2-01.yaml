@@ -1,0 +1,46 @@
+id: "ru.unit.b1.writing2-01"
+goal_id: "ru.goal.b1.extended-writing2"
+title: "Link"
+summary: "связка, союз, предлог, наречие and местоимение."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u400-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.writing2.svyazka",
+        "ru.lex.writing2.soyuz",
+        "ru.lex.writing2.predlog",
+        "ru.lex.writing2.narechie",
+        "ru.lex.writing2.mestoimenie",
+        "ru.sent.b1.u400",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u400-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u400-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u400"]
+  - id: "ru.activity.b1.u400-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Link: revision with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse союз (conjunction) with предлог (preposition)."]
+  target_proficiency: "B1"
+  validation_method: "choice"

@@ -1351,3 +1351,43 @@ goals:
       model: "strata/qwen3.8-flash-next-iq3_s"
       date: "2026-10-05"
       notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.b1.extended-writing2"
+    description: "Paragraph, connect, and revise extended writing."
+    band: "B1"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - {
+          target: "ru.goal.b1.extended-writing",
+          dimension: "comprehension-reading",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.b1.information-summary2",
+          dimension: "comprehension-reading",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.on-ramp.everyday",
+          dimension: "recall-meaning",
+          required_state: "independent",
+          strength: "hard",
+        }
+    required_concepts:
+      [
+        "ru.grammar.b1.krome-togo2",
+        "ru.grammar.b1.drugimi-slovami",
+        "ru.grammar.on-ramp.zero-present-copula",
+      ]
+    assessment_ids:
+      ["ru.assess.b1.extended-writing-reading2", "ru.assess.b1.extended-writing-writing2"]
+    transfer_required: false
+    sources: ["ru-original"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "omp"
+      model: "strata/qwen3.8-flash-next-iq3_s"
+      date: "2026-10-05"
+      notes: "ai-drafted; needs dictionary sourcing and human review"
