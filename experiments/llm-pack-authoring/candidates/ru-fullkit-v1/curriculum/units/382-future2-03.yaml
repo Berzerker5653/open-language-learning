@@ -1,0 +1,46 @@
+id: "ru.unit.b1.future2-03"
+goal_id: "ru.goal.b1.future-conditions2"
+title: "Trial"
+summary: "испытание, измерение, различие, сходство and отличие."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u382-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.future2.ispytanie",
+        "ru.lex.future2.izmerenie",
+        "ru.lex.future2.razlichie",
+        "ru.lex.future2.shodstvo",
+        "ru.lex.future2.otlichie",
+        "ru.sent.b1.u382",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u382-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u382-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u382"]
+  - id: "ru.activity.b1.u382-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Trial: hypothetical with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse различие (difference) with отличие (distinction)."]
+  target_proficiency: "B1"
+  validation_method: "choice"

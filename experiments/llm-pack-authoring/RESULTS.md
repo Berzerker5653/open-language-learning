@@ -1052,3 +1052,9 @@ Units 360-369 (selection, compression, summaries), NEW goal `ru.goal.b1.informat
 Units 370-379 (plans, possibilities, consequences), NEW goal `ru.goal.b1.future-conditions`
 (+2 assessments), 50 words (`lexicon/future.jsonl`), 2 grammar (`b1.esli-togda`, `b1.mozhet-byt`),
 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 36
+
+Units 380-389 (conditions and hypothetical choices), NEW goal `ru.goal.b1.future-conditions2`
+(+2 assessments), 50 words (`lexicon/future2.jsonl`), 2 grammar (`b1.esli-by`, `b1.luchshe-by`),
+10 sentences. Score: **7/7**.
