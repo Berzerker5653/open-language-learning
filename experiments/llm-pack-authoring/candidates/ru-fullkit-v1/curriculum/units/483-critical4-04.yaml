@@ -1,0 +1,46 @@
+id: "ru.unit.b2.critical4-04"
+goal_id: "ru.goal.b2.critical-reading4"
+title: "Interpretation"
+summary: "трактовка, прочтение, интерпретация, аллюзия and отсылка."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u483-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.critical4.traktovka",
+        "ru.lex.critical4.prochtenie",
+        "ru.lex.critical4.interpretaciya",
+        "ru.lex.critical4.allyuziya",
+        "ru.lex.critical4.otsylka",
+        "ru.sent.b2.u483",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u483-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u483-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u483"]
+  - id: "ru.activity.b2.u483-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Interpretation: inference with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse трактовка (interpretation) with прочтение (reading)."]
+  target_proficiency: "B2"
+  validation_method: "choice"

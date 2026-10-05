@@ -1112,3 +1112,9 @@ Units 460-469 (stance, implication, rhetorical choices), NEW goal `ru.goal.b2.cr
 Units 470-479 (evidence quality and source limitations), NEW goal `ru.goal.b2.critical-reading3`
 (+2 assessments), 50 words (`lexicon/critical3.jsonl`), 2 grammar (`b2-soglasno`, `b2-pri-etom`),
 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 46
+
+Units 480-489 (competing interpretations and inference), NEW goal `ru.goal.b2.critical-reading4`
+(+2 assessments), 50 words (`lexicon/critical4.jsonl`), 2 grammar (`b2-iz-etogo-sleduet`, `b2-mozhno-tolkovat`),
+10 sentences. Score: **7/7**.
