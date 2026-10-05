@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.683-health-inequality
+goal_id: ja.goal.b2.medicine-society
+title: health inequality
+summary: B2 language for health inequality.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.med2.fubyou
+  - ja.lex.med2.kakusa
+  - ja.lex.med2.binbou
+  - ja.lex.med2.koukyou
+  - ja.lex.med2.kenri
+  - ja.sent.health-inequality
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.683-health-inequality-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.med2.fubyou
+  - ja.lex.med2.kakusa
+  - ja.lex.med2.binbou
+  - ja.lex.med2.koukyou
+  - ja.lex.med2.kenri
+  - ja.sent.health-inequality
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.683-health-inequality-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.med2.fubyou
+  - ja.lex.med2.kakusa
+  - ja.lex.med2.binbou
+  - ja.lex.med2.koukyou
+  - ja.lex.med2.kenri
+  - ja.sent.health-inequality
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.683-health-inequality-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.med2.fubyou
+  - ja.lex.med2.kakusa
+  - ja.lex.med2.binbou
+  - ja.lex.med2.koukyou
+  - ja.lex.med2.kenri
+  - ja.sent.health-inequality
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.683-health-inequality-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.med2.fubyou
+  - ja.lex.med2.kakusa
+  - ja.lex.med2.binbou
+  - ja.lex.med2.koukyou
+  - ja.lex.med2.kenri
+  - ja.sent.health-inequality
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.683-health-inequality-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.health-inequality
+- id: ja.activity.683-health-inequality-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

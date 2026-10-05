@@ -870,3 +870,9 @@ Goal `ja.goal.b2.medicine-society` created (+ASSESS +DEP). Units 670-679
 Goal `ru.goal.a2.instructions` created (+2 assessments). Units 180-189,
 50 words (`lexicon/instructions.jsonl`), 2 grammar (`a2.imperative-instructions`,
 `a2.infinitive-steps`), 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 64
+
+Goal `ja.goal.b2.urban-life` created (+ASSESS +DEP). Units 680-689
+(medicine tail + urban start), 50 words (`med2.jsonl`, `urban.jsonl`), 2 grammar
+(`b2-dake-atte`, `b2-muke-no`), 8 sentences. Score: **7/7**.

@@ -4,8 +4,8 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2420  2dda84132085  activities/scenarios/first-meeting.yaml
         1561  6b8655e2f7b6  activities/scenarios/ordering.yaml
         1486  b56884663696  activities/scenarios/shopping.yaml
-       20977  e7d6eddedb20  assessments/definitions.jsonl
-       53784  11be7ec95467  curriculum/goals.yaml
+       21286  608a09ed9795  assessments/definitions.jsonl
+       54558  6f0c5a32f016  curriculum/goals.yaml
          919  ad3f5f62d1b3  curriculum/units/000-onramp-greeting.yaml
         1514  bd53db6f2cfe  curriculum/units/010-kana-hiragana-vowels-ko.yaml
         1957  c02be8a37693  curriculum/units/011-kana-hiragana-stn.yaml
@@ -649,8 +649,18 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2230  8ab4066cfa4a  curriculum/units/677-patient-communication.yaml
         2130  a19f2b89dded  curriculum/units/678-medical-research.yaml
         2088  9e6d1c093e8d  curriculum/units/679-pharma-debate.yaml
-       70030  98f15e05d563  grammar/concepts.jsonl
-        9506  9d2e3463f003  grammar/dependencies.yaml
+        2245  8dfb86a594c7  curriculum/units/680-mental-health-services.yaml
+        2100  a88475a45032  curriculum/units/681-aging-medicine.yaml
+        2215  099bb8a6422a  curriculum/units/682-nutrition-science.yaml
+        2165  06b69390b146  curriculum/units/683-health-inequality.yaml
+        2135  724683ff7085  curriculum/units/684-digital-medicine.yaml
+        2104  76573f89423f  curriculum/units/685-medical-ethics.yaml
+        2180  4963ab3673cc  curriculum/units/686-pandemic-lessons.yaml
+        2167  d362a9b44b98  curriculum/units/687-health-policy-essay.yaml
+        2129  df69443ebe92  curriculum/units/688-city-planning.yaml
+        2153  025fcd389e9f  curriculum/units/689-transport-systems.yaml
+       71026  7247d03c5659  grammar/concepts.jsonl
+        9647  2483e29982dd  grammar/dependencies.yaml
        30369  1401b6e0388e  kanji/entries.jsonl
          485  860cdf8185db  language/identity.yaml
          823  5d72613ab378  language/normalization.yaml
@@ -709,6 +719,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
        19833  18e956186411  lexicon/lit2.jsonl
        19813  693d01cdb444  lexicon/lit3.jsonl
        39983  41eb8878a65f  lexicon/med.jsonl
+       31871  4783918b06df  lexicon/med2.jsonl
        39598  c49e6c4dbf64  lexicon/media.jsonl
        19842  d684600348c8  lexicon/media2.jsonl
        39818  873a4ca614be  lexicon/media3.jsonl
@@ -742,6 +753,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
        42054  eefefcc4c69c  lexicon/transport.jsonl
        19982  101c76704a6e  lexicon/travel.jsonl
        39787  98f5b32a7c7a  lexicon/travel2.jsonl
+        7909  55f23ec753ed  lexicon/urban.jsonl
        22174  7bb1a6586408  lexicon/verbs.jsonl
         6316  45a79fa9065d  lexicon/weather.jsonl
        39728  2511ed628b3e  lexicon/weather2.jsonl
@@ -754,7 +766,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
-      346009  41200723929e  sentences/entries.jsonl
+      351164  6156f150a7a8  sentences/entries.jsonl
         3915  e270f808c26e  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml
          539  842cce82e5d5  stories/first-day.yaml

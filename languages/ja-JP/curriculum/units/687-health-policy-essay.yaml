@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.687-health-policy-essay
+goal_id: ja.goal.b2.medicine-society
+title: health policy essay
+summary: B2 language for health policy essay.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.med2.seisaku
+  - ja.lex.med2.houan
+  - ja.lex.med2.bunseki
+  - ja.lex.med2.kouron
+  - ja.lex.med2.shian
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-dake-atte
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.687-health-policy-essay-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.med2.seisaku
+  - ja.lex.med2.houan
+  - ja.lex.med2.bunseki
+  - ja.lex.med2.kouron
+  - ja.lex.med2.shian
+  - ja.grammar.b2-dake-atte
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.687-health-policy-essay-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.med2.seisaku
+  - ja.lex.med2.houan
+  - ja.lex.med2.bunseki
+  - ja.lex.med2.kouron
+  - ja.lex.med2.shian
+  - ja.grammar.b2-dake-atte
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.687-health-policy-essay-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.med2.seisaku
+  - ja.lex.med2.houan
+  - ja.lex.med2.bunseki
+  - ja.lex.med2.kouron
+  - ja.lex.med2.shian
+  - ja.grammar.b2-dake-atte
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.687-health-policy-essay-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.med2.seisaku
+  - ja.lex.med2.houan
+  - ja.lex.med2.bunseki
+  - ja.lex.med2.kouron
+  - ja.lex.med2.shian
+  - ja.grammar.b2-dake-atte
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.687-health-policy-essay-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.687-health-policy-essay-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.680-mental-health-services
+goal_id: ja.goal.b2.medicine-society
+title: mental health services
+summary: B2 language for mental health services.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.med2.iryou
+  - ja.lex.med2.fukushi
+  - ja.lex.med2.soudan
+  - ja.lex.med2.houmon
+  - ja.lex.med2.chiryou
+  - ja.sent.mental-health-services
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.680-mental-health-services-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.med2.iryou
+  - ja.lex.med2.fukushi
+  - ja.lex.med2.soudan
+  - ja.lex.med2.houmon
+  - ja.lex.med2.chiryou
+  - ja.sent.mental-health-services
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.680-mental-health-services-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.med2.iryou
+  - ja.lex.med2.fukushi
+  - ja.lex.med2.soudan
+  - ja.lex.med2.houmon
+  - ja.lex.med2.chiryou
+  - ja.sent.mental-health-services
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.680-mental-health-services-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.med2.iryou
+  - ja.lex.med2.fukushi
+  - ja.lex.med2.soudan
+  - ja.lex.med2.houmon
+  - ja.lex.med2.chiryou
+  - ja.sent.mental-health-services
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.680-mental-health-services-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.med2.iryou
+  - ja.lex.med2.fukushi
+  - ja.lex.med2.soudan
+  - ja.lex.med2.houmon
+  - ja.lex.med2.chiryou
+  - ja.sent.mental-health-services
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.680-mental-health-services-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.mental-health-services
+- id: ja.activity.680-mental-health-services-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.681-aging-medicine
+goal_id: ja.goal.b2.medicine-society
+title: aging medicine
+summary: B2 language for aging medicine.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.med2.roujin
+  - ja.lex.med2.yogo
+  - ja.lex.med2.kaigo
+  - ja.lex.med2.katei
+  - ja.lex.med2.kofuku
+  - ja.sent.aging-medicine
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.681-aging-medicine-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.med2.roujin
+  - ja.lex.med2.yogo
+  - ja.lex.med2.kaigo
+  - ja.lex.med2.katei
+  - ja.lex.med2.kofuku
+  - ja.sent.aging-medicine
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.681-aging-medicine-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.med2.roujin
+  - ja.lex.med2.yogo
+  - ja.lex.med2.kaigo
+  - ja.lex.med2.katei
+  - ja.lex.med2.kofuku
+  - ja.sent.aging-medicine
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.681-aging-medicine-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.med2.roujin
+  - ja.lex.med2.yogo
+  - ja.lex.med2.kaigo
+  - ja.lex.med2.katei
+  - ja.lex.med2.kofuku
+  - ja.sent.aging-medicine
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.681-aging-medicine-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.med2.roujin
+  - ja.lex.med2.yogo
+  - ja.lex.med2.kaigo
+  - ja.lex.med2.katei
+  - ja.lex.med2.kofuku
+  - ja.sent.aging-medicine
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.681-aging-medicine-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.aging-medicine
+- id: ja.activity.681-aging-medicine-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
