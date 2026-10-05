@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.art-market
+goal_id: ja.goal.b2.art-design
+title: art market
+summary: B2 language for art market.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.art2.maketto
+  - ja.lex.art2.ne
+  - ja.lex.art2.kyaku
+  - ja.lex.art2.shouhin2
+  - ja.lex.art2.yogen
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-to-shite
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.art-market-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.art2.maketto
+  - ja.lex.art2.ne
+  - ja.lex.art2.kyaku
+  - ja.lex.art2.shouhin2
+  - ja.lex.art2.yogen
+  - ja.grammar.b2-to-shite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.art-market-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.art2.maketto
+  - ja.lex.art2.ne
+  - ja.lex.art2.kyaku
+  - ja.lex.art2.shouhin2
+  - ja.lex.art2.yogen
+  - ja.grammar.b2-to-shite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.art-market-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.art2.maketto
+  - ja.lex.art2.ne
+  - ja.lex.art2.kyaku
+  - ja.lex.art2.shouhin2
+  - ja.lex.art2.yogen
+  - ja.grammar.b2-to-shite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.art-market-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.art2.maketto
+  - ja.lex.art2.ne
+  - ja.lex.art2.kyaku
+  - ja.lex.art2.shouhin2
+  - ja.lex.art2.yogen
+  - ja.grammar.b2-to-shite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.art-market-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.art-market-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

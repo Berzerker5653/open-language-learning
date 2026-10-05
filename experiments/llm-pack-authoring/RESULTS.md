@@ -811,3 +811,8 @@ Goal `ja.goal.b2.art-design` created (+assess, +deps). Units 620-629,
 Goal `ru.goal.a2.services` created (+2 assessments). Units 130-139,
 50 words (`lexicon/services.jsonl`), 2 grammar (`a2.want-accusative`,
 `a2.genitive-negation`), 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 59
+
+Units 630-639 (art-design), 50 words (`lexicon/art2.jsonl`),
+2 grammar (`b2-to-shite`, `b2-ni-motte`), 8 sentences. Score: **7/7**.

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.craft-aesthetics
+goal_id: ja.goal.b2.art-design
+title: craft aesthetics
+summary: B2 language for craft aesthetics.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.art2.bi2
+  - ja.lex.art2.minamo
+  - ja.lex.art2.tsukurite
+  - ja.lex.art2.purodakuto
+  - ja.lex.art2.kagu
+  - ja.sent.craft-aesthetics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.craft-aesthetics-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.art2.bi2
+  - ja.lex.art2.minamo
+  - ja.lex.art2.tsukurite
+  - ja.lex.art2.purodakuto
+  - ja.lex.art2.kagu
+  - ja.sent.craft-aesthetics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.craft-aesthetics-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.art2.bi2
+  - ja.lex.art2.minamo
+  - ja.lex.art2.tsukurite
+  - ja.lex.art2.purodakuto
+  - ja.lex.art2.kagu
+  - ja.sent.craft-aesthetics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.craft-aesthetics-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.art2.bi2
+  - ja.lex.art2.minamo
+  - ja.lex.art2.tsukurite
+  - ja.lex.art2.purodakuto
+  - ja.lex.art2.kagu
+  - ja.sent.craft-aesthetics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.craft-aesthetics-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.art2.bi2
+  - ja.lex.art2.minamo
+  - ja.lex.art2.tsukurite
+  - ja.lex.art2.purodakuto
+  - ja.lex.art2.kagu
+  - ja.sent.craft-aesthetics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.craft-aesthetics-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.craft-aesthetics
+- id: ja.activity.craft-aesthetics-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

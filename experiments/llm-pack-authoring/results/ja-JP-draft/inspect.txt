@@ -599,7 +599,17 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2322  5daefa784870  curriculum/units/627-correspondence-portfolio.yaml
         2191  8b15b58dc7b7  curriculum/units/628-visual-analysis.yaml
         2245  fd19928ac910  curriculum/units/629-design-principles.yaml
-       65089  0f26b827343a  grammar/concepts.jsonl
+        2106  8df8606621f4  curriculum/units/630-traditional-arts.yaml
+        2006  d270d97b180f  curriculum/units/631-modern-art.yaml
+        2151  63b29653da1f  curriculum/units/632-architecture-talk.yaml
+        2046  0a38d6075cd3  curriculum/units/633-urban-design.yaml
+        2126  2c5cd05b9a4e  curriculum/units/634-craft-aesthetics.yaml
+        2121  1633a6abb51c  curriculum/units/635-photography-art.yaml
+        2091  71e55ba8c246  curriculum/units/636-music-analysis.yaml
+        2032  41e165f13106  curriculum/units/637-art-market.yaml
+        2051  66daec886b35  curriculum/units/638-public-art.yaml
+        2069  44a7a3c4ce04  curriculum/units/639-design-ethics.yaml
+       66057  bcd0f93bcd3f  grammar/concepts.jsonl
         9058  3c547ba03b18  grammar/dependencies.yaml
        30369  1401b6e0388e  kanji/entries.jsonl
          485  860cdf8185db  language/identity.yaml
@@ -613,6 +623,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
        40217  69439fd4ac72  lexicon/admin.jsonl
        19732  ed27c9bbcc8d  lexicon/advice.jsonl
        39273  abc05a391dfa  lexicon/advice2.jsonl
+       39495  47dcfc30290d  lexicon/art2.jsonl
        39897  547ce24558d9  lexicon/body.jsonl
        40213  03309a6ed83d  lexicon/city.jsonl
        40716  1a17a98795c2  lexicon/communication.jsonl
@@ -699,7 +710,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
-      319365  1dd8b4fad098  sentences/entries.jsonl
+      324434  1ee7ce42af8d  sentences/entries.jsonl
         3915  e270f808c26e  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml
          539  842cce82e5d5  stories/first-day.yaml

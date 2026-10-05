@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.design-ethics
+goal_id: ja.goal.b2.art-design
+title: design ethics
+summary: B2 language for design ethics.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.art2.rinen
+  - ja.lex.art2.hakai2
+  - ja.lex.art2.mirai
+  - ja.lex.art2.shinkou
+  - ja.lex.art2.risou2
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-ni-motte
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.design-ethics-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.art2.rinen
+  - ja.lex.art2.hakai2
+  - ja.lex.art2.mirai
+  - ja.lex.art2.shinkou
+  - ja.lex.art2.risou2
+  - ja.grammar.b2-ni-motte
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.design-ethics-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.art2.rinen
+  - ja.lex.art2.hakai2
+  - ja.lex.art2.mirai
+  - ja.lex.art2.shinkou
+  - ja.lex.art2.risou2
+  - ja.grammar.b2-ni-motte
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.design-ethics-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.art2.rinen
+  - ja.lex.art2.hakai2
+  - ja.lex.art2.mirai
+  - ja.lex.art2.shinkou
+  - ja.lex.art2.risou2
+  - ja.grammar.b2-ni-motte
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.design-ethics-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.art2.rinen
+  - ja.lex.art2.hakai2
+  - ja.lex.art2.mirai
+  - ja.lex.art2.shinkou
+  - ja.lex.art2.risou2
+  - ja.grammar.b2-ni-motte
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.design-ethics-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.design-ethics-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

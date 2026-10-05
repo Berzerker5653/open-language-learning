@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.photography-art
+goal_id: ja.goal.b2.art-design
+title: photography art
+summary: B2 language for photography art.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.art2.shitsunai
+  - ja.lex.art2.fukushoku
+  - ja.lex.art2.dezain2
+  - ja.lex.art2.ato
+  - ja.lex.art2.kaitou
+  - ja.sent.photography-art
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.photography-art-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.art2.shitsunai
+  - ja.lex.art2.fukushoku
+  - ja.lex.art2.dezain2
+  - ja.lex.art2.ato
+  - ja.lex.art2.kaitou
+  - ja.sent.photography-art
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.photography-art-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.art2.shitsunai
+  - ja.lex.art2.fukushoku
+  - ja.lex.art2.dezain2
+  - ja.lex.art2.ato
+  - ja.lex.art2.kaitou
+  - ja.sent.photography-art
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.photography-art-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.art2.shitsunai
+  - ja.lex.art2.fukushoku
+  - ja.lex.art2.dezain2
+  - ja.lex.art2.ato
+  - ja.lex.art2.kaitou
+  - ja.sent.photography-art
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.photography-art-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.art2.shitsunai
+  - ja.lex.art2.fukushoku
+  - ja.lex.art2.dezain2
+  - ja.lex.art2.ato
+  - ja.lex.art2.kaitou
+  - ja.sent.photography-art
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.photography-art-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.photography-art
+- id: ja.activity.photography-art-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
