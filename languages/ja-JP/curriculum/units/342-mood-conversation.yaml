@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.mood-conversation
+goal_id: ja.goal.b1.emotions-personality
+title: mood conversation
+summary: B1 language for mood conversation.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.emotion.wakuwaku
+  - ja.lex.emotion.iraira
+  - ja.lex.emotion.dokidoki
+  - ja.lex.emotion.ki-gamae
+  - ja.lex.emotion.ki-ryoku
+  - ja.sent.mood-chat
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.mood-conversation-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.emotion.wakuwaku
+  - ja.lex.emotion.iraira
+  - ja.lex.emotion.dokidoki
+  - ja.lex.emotion.ki-gamae
+  - ja.lex.emotion.ki-ryoku
+  - ja.sent.mood-chat
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.mood-conversation-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.emotion.wakuwaku
+  - ja.lex.emotion.iraira
+  - ja.lex.emotion.dokidoki
+  - ja.lex.emotion.ki-gamae
+  - ja.lex.emotion.ki-ryoku
+  - ja.sent.mood-chat
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.mood-conversation-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.emotion.wakuwaku
+  - ja.lex.emotion.iraira
+  - ja.lex.emotion.dokidoki
+  - ja.lex.emotion.ki-gamae
+  - ja.lex.emotion.ki-ryoku
+  - ja.sent.mood-chat
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.mood-conversation-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.emotion.wakuwaku
+  - ja.lex.emotion.iraira
+  - ja.lex.emotion.dokidoki
+  - ja.lex.emotion.ki-gamae
+  - ja.lex.emotion.ki-ryoku
+  - ja.sent.mood-chat
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.mood-conversation-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.mood-chat
+- id: ja.activity.mood-conversation-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.encouragement-words
+goal_id: ja.goal.b1.emotions-personality
+title: encouragement words
+summary: B1 language for encouragement words.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.emotion.shoujin
+  - ja.lex.emotion.omoikiri
+  - ja.lex.emotion.jouzu
+  - ja.lex.emotion.kawaii
+  - ja.lex.emotion.akui
+  - ja.sent.encouragement
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.encouragement-words-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.emotion.shoujin
+  - ja.lex.emotion.omoikiri
+  - ja.lex.emotion.jouzu
+  - ja.lex.emotion.kawaii
+  - ja.lex.emotion.akui
+  - ja.sent.encouragement
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.encouragement-words-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.emotion.shoujin
+  - ja.lex.emotion.omoikiri
+  - ja.lex.emotion.jouzu
+  - ja.lex.emotion.kawaii
+  - ja.lex.emotion.akui
+  - ja.sent.encouragement
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.encouragement-words-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.emotion.shoujin
+  - ja.lex.emotion.omoikiri
+  - ja.lex.emotion.jouzu
+  - ja.lex.emotion.kawaii
+  - ja.lex.emotion.akui
+  - ja.sent.encouragement
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.encouragement-words-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.emotion.shoujin
+  - ja.lex.emotion.omoikiri
+  - ja.lex.emotion.jouzu
+  - ja.lex.emotion.kawaii
+  - ja.lex.emotion.akui
+  - ja.sent.encouragement
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.encouragement-words-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.encouragement
+- id: ja.activity.encouragement-words-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

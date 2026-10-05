@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.deepened-gratitude
+goal_id: ja.goal.b1.emotions-personality
+title: deepened gratitude
+summary: B1 language for deepened gratitude.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.emotion.aijou
+  - ja.lex.emotion.yui
+  - ja.lex.emotion.wa2
+  - ja.lex.emotion.chikara
+  - ja.lex.emotion.shouki
+  - ja.sent.gratitude
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.deepened-gratitude-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.emotion.aijou
+  - ja.lex.emotion.yui
+  - ja.lex.emotion.wa2
+  - ja.lex.emotion.chikara
+  - ja.lex.emotion.shouki
+  - ja.sent.gratitude
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.deepened-gratitude-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.emotion.aijou
+  - ja.lex.emotion.yui
+  - ja.lex.emotion.wa2
+  - ja.lex.emotion.chikara
+  - ja.lex.emotion.shouki
+  - ja.sent.gratitude
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.deepened-gratitude-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.emotion.aijou
+  - ja.lex.emotion.yui
+  - ja.lex.emotion.wa2
+  - ja.lex.emotion.chikara
+  - ja.lex.emotion.shouki
+  - ja.sent.gratitude
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.deepened-gratitude-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.emotion.aijou
+  - ja.lex.emotion.yui
+  - ja.lex.emotion.wa2
+  - ja.lex.emotion.chikara
+  - ja.lex.emotion.shouki
+  - ja.sent.gratitude
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.deepened-gratitude-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.gratitude
+- id: ja.activity.deepened-gratitude-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

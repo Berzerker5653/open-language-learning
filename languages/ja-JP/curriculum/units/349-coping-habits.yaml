@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.coping-habits
+goal_id: ja.goal.b1.emotions-personality
+title: coping habits
+summary: B1 language for coping habits.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.emotion.subete
+  - ja.lex.emotion.sukunaku
+  - ja.lex.emotion.ooku
+  - ja.lex.emotion.kokuhaku
+  - ja.lex.emotion.gaman
+  - ja.sent.coping
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.coping-habits-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.emotion.subete
+  - ja.lex.emotion.sukunaku
+  - ja.lex.emotion.ooku
+  - ja.lex.emotion.kokuhaku
+  - ja.lex.emotion.gaman
+  - ja.sent.coping
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.coping-habits-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.emotion.subete
+  - ja.lex.emotion.sukunaku
+  - ja.lex.emotion.ooku
+  - ja.lex.emotion.kokuhaku
+  - ja.lex.emotion.gaman
+  - ja.sent.coping
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.coping-habits-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.emotion.subete
+  - ja.lex.emotion.sukunaku
+  - ja.lex.emotion.ooku
+  - ja.lex.emotion.kokuhaku
+  - ja.lex.emotion.gaman
+  - ja.sent.coping
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.coping-habits-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.emotion.subete
+  - ja.lex.emotion.sukunaku
+  - ja.lex.emotion.ooku
+  - ja.lex.emotion.kokuhaku
+  - ja.lex.emotion.gaman
+  - ja.sent.coping
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.coping-habits-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.coping
+- id: ja.activity.coping-habits-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

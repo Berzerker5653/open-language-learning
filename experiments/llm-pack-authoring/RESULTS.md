@@ -535,3 +535,10 @@ Score: **7/7**.
 Goal `ja.goal.b1.travel-extended` complete (325-339). 10 units,
 50-word `lexicon/travel2.jsonl`, 2 grammar (`b1.te-shimau`,
 `b1.darou`), 8 sentences. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 29: B1 units 340-349 (emotions-personality part 1)
+
+Goal `ja.goal.b1.emotions-personality` (prereq travel-extended,
+mirrored; spans 340-354) started, 10 units, 50-word
+`lexicon/emotion.jsonl`, 2 grammar (`b1.ni-kuru`, `b1.wake-da`),
+8 sentences, 1 assessment. Score: **7/7**.
