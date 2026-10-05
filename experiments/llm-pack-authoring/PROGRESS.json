@@ -3,9 +3,9 @@
     "plan": "plans/ru-fullkit-v1.yaml",
     "pack": "candidates/ru-fullkit-v1",
     "bands_done": ["on-ramp", "A1", "A2"],
-    "units_next": "290",
+    "units_next": "300",
     "last_score": "7/7 (2026-10-04, results/ru-fullkit-v1)",
-    "notes": "B1: ru26 (280-289) 7/7; learning-work continued; pack 290 units; next: block 290-299 per plan"
+    "notes": "B1: ru27 (290-299) 7/7; goal relationships; pack 300 units; next: block 300-309 per plan"
   },
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",

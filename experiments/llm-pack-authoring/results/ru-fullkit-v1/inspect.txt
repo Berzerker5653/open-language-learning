@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
-       24261  ec83e1dd67ae  assessments/definitions.jsonl
-       34679  5acdd712846a  curriculum/goals.yaml
+       25081  f580451c93e4  assessments/definitions.jsonl
+       35766  f444cf145277  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -280,17 +280,27 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1504  45cd2eb32dd8  curriculum/units/277-learning-work-08.yaml
         1473  c94cec0b0d51  curriculum/units/278-learning-work-09.yaml
         1437  baaa365f7822  curriculum/units/279-learning-work-10.yaml
-        1316  e9e4a57e81a1  curriculum/units/280-work-processes-01.yaml
-        1345  f2bc591928eb  curriculum/units/281-work-processes-02.yaml
-        1320  0348066ed097  curriculum/units/282-work-processes-03.yaml
-        1340  6ecdaed34c1f  curriculum/units/283-work-processes-04.yaml
-        1311  d9b532555d5b  curriculum/units/284-work-processes-05.yaml
-        1382  9ef95085d69c  curriculum/units/285-work-processes-06.yaml
-        1345  11b50ccc6d3d  curriculum/units/286-work-processes-07.yaml
-        1383  c94f84649d60  curriculum/units/287-work-processes-08.yaml
-        1350  43228ec16731  curriculum/units/288-work-processes-09.yaml
-        1321  a86bbb6ae578  curriculum/units/289-work-processes-10.yaml
-       34887  a2196e5c2ace  grammar/concepts.jsonl
+        1401  44921ed0e198  curriculum/units/280-work-processes-01.yaml
+        1430  f9214278fa0c  curriculum/units/281-work-processes-02.yaml
+        1405  627a6f2c5592  curriculum/units/282-work-processes-03.yaml
+        1425  8e3cf5f65e71  curriculum/units/283-work-processes-04.yaml
+        1396  b834ab4bdd19  curriculum/units/284-work-processes-05.yaml
+        1467  ec8222120dbb  curriculum/units/285-work-processes-06.yaml
+        1430  76763c3ae50b  curriculum/units/286-work-processes-07.yaml
+        1468  eee1c7b5f452  curriculum/units/287-work-processes-08.yaml
+        1435  885c8b292ad3  curriculum/units/288-work-processes-09.yaml
+        1406  1bbd29226ad5  curriculum/units/289-work-processes-10.yaml
+        1325  e4e55815b9db  curriculum/units/290-relationships-01.yaml
+        1303  2e918216a9ca  curriculum/units/291-relationships-02.yaml
+        1360  edaf0db09604  curriculum/units/292-relationships-03.yaml
+        1322  63ca16919f0b  curriculum/units/293-relationships-04.yaml
+        1347  39155103f465  curriculum/units/294-relationships-05.yaml
+        1286  5d95448e84b1  curriculum/units/295-relationships-06.yaml
+        1342  dab41f077ad5  curriculum/units/296-relationships-07.yaml
+        1336  c752b3b03a21  curriculum/units/297-relationships-08.yaml
+        1363  3bc5ac5adc31  curriculum/units/298-relationships-09.yaml
+        1362  eb9e2a7190e0  curriculum/units/299-relationships-10.yaml
+       35841  4f0e74d5dcf5  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        21189  03a4503c7371  lexicon/city.jsonl
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
@@ -313,6 +323,7 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
        22380  8c501a5154bc  lexicon/personal.jsonl
        21982  3e3964bc7992  lexicon/problems.jsonl
        19907  763912bb4aac  lexicon/problems2.jsonl
+       19247  9b1a5ec5acee  lexicon/rel.jsonl
        21337  77ca388bc863  lexicon/routines.jsonl
        21837  78c9c9a40760  lexicon/services.jsonl
        21290  daeb36ea4066  lexicon/shopping.jsonl
@@ -326,5 +337,5 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-       92348  d363666dbfa7  sentences/entries.jsonl
+       95960  1a122f5080b1  sentences/entries.jsonl
          391  74babc055676  sources.jsonl

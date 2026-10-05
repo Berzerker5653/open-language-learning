@@ -1036,3 +1036,42 @@ goals:
       model: "strata/qwen3.8-flash-next-iq3_s"
       date: "2026-10-05"
       notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.b1.relationships"
+    description: "Talk about relationships and social expectations."
+    band: "B1"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - {
+          target: "ru.goal.b1.learning-work",
+          dimension: "comprehension-reading",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.b1.practical-problems",
+          dimension: "comprehension-reading",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.on-ramp.everyday",
+          dimension: "recall-meaning",
+          required_state: "independent",
+          strength: "hard",
+        }
+    required_concepts:
+      [
+        "ru.grammar.b1.dativum-feelings",
+        "ru.grammar.b1.ustupit-kompromiss",
+        "ru.grammar.on-ramp.zero-present-copula",
+      ]
+    assessment_ids: ["ru.assess.b1.relationships-reading", "ru.assess.b1.relationships-writing"]
+    transfer_required: false
+    sources: ["ru-original"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "omp"
+      model: "strata/qwen3.8-flash-next-iq3_s"
+      date: "2026-10-05"
+      notes: "ai-drafted; needs dictionary sourcing and human review"

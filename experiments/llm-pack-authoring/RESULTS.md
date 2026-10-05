@@ -1001,3 +1001,9 @@ new goal `ja.goal.b2.relationships-deep` + assessment + DEP edge. Score: **7/7**
 Units 800-807 (relationships-deep tail; plan end), 50 words (`lexicon/rel2.jsonl`),
 2 grammar (`b2-ni-oujite-iru`, `b2-wake-ni-wa-ikenai2`), 6 sentences. Score: **7/7**.
 ja-JP B2 kit COMPLETE: 808 units (000-807), all bands done.
+
+## 2026-10-05 — ru-RU batch 27
+
+Units 290-299 (relationships and social expectations), 50 words (`lexicon/rel.jsonl`),
+2 grammar (`b1.dativum-feelings`, `b1.ustupit-kompromiss`), 10 sentences,
+new goal `ru.goal.b1.relationships` + 2 assessments. Score: **7/7**.
