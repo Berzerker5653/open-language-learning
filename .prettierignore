@@ -22,3 +22,5 @@ REVIEW_REPORT.md
 VALIDATION_REPORT.md
 PACKAGE_MANIFEST.md
 SHA256SUMS.txt
+# External model responses: verbatim provenance records, never reformat.
+experiments/llm-pack-authoring/responses/

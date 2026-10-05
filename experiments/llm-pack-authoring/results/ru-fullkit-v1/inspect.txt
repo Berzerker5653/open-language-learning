@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         5877  c5772c89754b  assessments/definitions.jsonl
-        6300  ac8932df695f  curriculum/goals.yaml
+        6746  0ace6828d114  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -21,16 +21,16 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1990  e5e9d7a1fb8c  curriculum/units/017-cyrillic-ts-ch-sh.yaml
         2142  05a2ebab4d42  curriculum/units/018-cyrillic-shch-soft-hard.yaml
         6774  6628c29431a8  curriculum/units/019-cyrillic-stress-review.yaml
-        1339  edb743a946c3  curriculum/units/020-personal-details-01.yaml
-        1319  dc851c719191  curriculum/units/021-personal-details-02.yaml
-        1450  4255eb073875  curriculum/units/022-personal-details-03.yaml
-        1391  b699cbf0468d  curriculum/units/023-personal-details-04.yaml
-        1453  22fcc3a5a881  curriculum/units/024-personal-details-05.yaml
-        1712  75bff4eafe8a  curriculum/units/025-personal-details-06.yaml
-        1268  080a4cb7bd32  curriculum/units/026-personal-details-07.yaml
-        1318  cc20050da15f  curriculum/units/027-personal-details-08.yaml
-        1307  e66f9786bd44  curriculum/units/028-personal-details-09.yaml
-        2149  83fbdefcb233  curriculum/units/029-personal-details-10.yaml
+        1434  6655d1cfa314  curriculum/units/020-personal-details-01.yaml
+        1414  ae5b52ad40d5  curriculum/units/021-personal-details-02.yaml
+        1596  d57e30732778  curriculum/units/022-personal-details-03.yaml
+        1498  b027ac748ef1  curriculum/units/023-personal-details-04.yaml
+        1615  bdd0fc6e1def  curriculum/units/024-personal-details-05.yaml
+        1922  b7fc798f9893  curriculum/units/025-personal-details-06.yaml
+        1339  f05d358e8e20  curriculum/units/026-personal-details-07.yaml
+        1409  796b38a4298f  curriculum/units/027-personal-details-08.yaml
+        1386  7ec9d2e859cc  curriculum/units/028-personal-details-09.yaml
+        2479  914ea5844537  curriculum/units/029-personal-details-10.yaml
         6673  e61c15e38e3e  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
