@@ -1202,3 +1202,9 @@ Units 610-619 (requests, boundaries, polite firmness), NEW goal `ru.goal.b2.nego
 Units 620-629 (competing positions and priorities), goal `ru.goal.b2.negotiation` (existing),
 50 words (`lexicon/neg2.jsonl`), 2 grammar (`b2-v-prioritete`, `b2-my-ne-soglasny`), 10 sentences.
 Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 61
+
+Units 630-639 (concessions, conditions, and compromise), goal `ru.goal.b2.negotiation` (existing),
+50 words (`lexicon/neg3.jsonl`), 2 grammar (`b2-pri-uslovii-chto`, `b2-v-zamyan`), 10 sentences.
+Score: **7/7**.

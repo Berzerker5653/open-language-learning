@@ -1,0 +1,47 @@
+id: "ru.unit.b2.con-02"
+goal_id: "ru.goal.b2.negotiation"
+title: "Mutuality"
+summary: "взаимный, взаимовыгодный, разменять, поступиться and жертвовать."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u631-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.neg.vzaimnyy",
+        "ru.lex.neg.vzaimovygodnyy",
+        "ru.lex.neg.razmenyat",
+        "ru.lex.neg.postupitsya",
+        "ru.lex.neg.zhertvovat",
+        "ru.sent.b2.u631",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u631-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u631-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u631"]
+  - id: "ru.activity.b2.u631-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Mutuality: negotiation exchange with taught forms only."]
+  prohibited_ambiguity:
+    ["Do not confuse поступиться (to relinquish) with жертвовать (to sacrifice)."]
+  target_proficiency: "B2"
+  validation_method: "choice"
