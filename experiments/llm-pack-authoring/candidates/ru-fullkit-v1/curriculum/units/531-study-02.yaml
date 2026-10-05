@@ -1,0 +1,46 @@
+id: "ru.unit.b2.study-02"
+goal_id: "ru.goal.b2.academic-study"
+title: "Usage"
+summary: "употребление, потребление, значение, дефиниция and глоссарий."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u531-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.study.upotreblenie",
+        "ru.lex.study.potreblenie",
+        "ru.lex.study.znachenie",
+        "ru.lex.study.definiciya",
+        "ru.lex.study.glossariy",
+        "ru.sent.b2.u531",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u531-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u531-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u531"]
+  - id: "ru.activity.b2.u531-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Usage: definition with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse употребление (usage) with потребление (consumption)."]
+  target_proficiency: "B2"
+  validation_method: "choice"
