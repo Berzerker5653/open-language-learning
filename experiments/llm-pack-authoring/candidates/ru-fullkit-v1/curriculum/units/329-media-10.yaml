@@ -1,0 +1,46 @@
+id: "ru.unit.b1.media-10"
+goal_id: "ru.goal.b1.culture-media"
+title: "Newspaper"
+summary: "газета, журнал, читатель, радио and телевидение."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u329-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.media.gazeta",
+        "ru.lex.media.zhurnal",
+        "ru.lex.media.chitatel",
+        "ru.lex.media.radio",
+        "ru.lex.media.televidenie",
+        "ru.sent.b1.u329",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u329-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u329-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u329"]
+  - id: "ru.activity.b1.u329-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Newspaper: media with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse журнал (magazine) with газета (newspaper)."]
+  target_proficiency: "B1"
+  validation_method: "choice"

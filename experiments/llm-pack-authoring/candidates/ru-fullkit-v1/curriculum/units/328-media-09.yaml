@@ -1,0 +1,46 @@
+id: "ru.unit.b1.media-09"
+goal_id: "ru.goal.b1.culture-media"
+title: "Podcast"
+summary: "подкаст, сезон, трейлер, тизер and принт."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u328-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.media.podkast",
+        "ru.lex.media.sezon",
+        "ru.lex.media.treyler",
+        "ru.lex.media.tizer",
+        "ru.lex.media.print",
+        "ru.sent.b1.u328",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u328-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u328-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u328"]
+  - id: "ru.activity.b1.u328-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Podcast: media with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse трейлер (trailer) with тизер (teaser)."]
+  target_proficiency: "B1"
+  validation_method: "choice"
