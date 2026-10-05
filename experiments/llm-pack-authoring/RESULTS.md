@@ -1094,3 +1094,9 @@ Units 430-439 (counterarguments and qualification), NEW goal `ru.goal.b2.argumen
 Units 440-449 (evaluation and reasoned conclusions), NEW goal `ru.goal.b2.argumentation4`
 (+2 assessments), 50 words (`lexicon/argue4.jsonl`), 2 grammar (`b2-sledovatelno`, `b2-s-tochki-zreniya`),
 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 43
+
+Units 450-459 (structure and relationships between claims), NEW goal `ru.goal.b2.critical-reading`
+(+2 assessments), 50 words (`lexicon/critical.jsonl`), 2 grammar (`b2-tak-kak`, `b2-ne-tolko-no`),
+10 sentences. Score: **7/7**.
