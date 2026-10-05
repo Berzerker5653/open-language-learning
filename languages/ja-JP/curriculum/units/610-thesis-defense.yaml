@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.thesis-defense
+goal_id: ja.goal.b2.academic-writing
+title: thesis defense
+summary: B2 language for thesis defense.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.formal.bouei
+  - ja.lex.formal.kaihen
+  - ja.lex.formal.shinpan
+  - ja.lex.formal.ketsuron
+  - ja.lex.formal.iken
+  - ja.sent.thesis-defense
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.thesis-defense-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.formal.bouei
+  - ja.lex.formal.kaihen
+  - ja.lex.formal.shinpan
+  - ja.lex.formal.ketsuron
+  - ja.lex.formal.iken
+  - ja.sent.thesis-defense
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.thesis-defense-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.formal.bouei
+  - ja.lex.formal.kaihen
+  - ja.lex.formal.shinpan
+  - ja.lex.formal.ketsuron
+  - ja.lex.formal.iken
+  - ja.sent.thesis-defense
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.thesis-defense-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.formal.bouei
+  - ja.lex.formal.kaihen
+  - ja.lex.formal.shinpan
+  - ja.lex.formal.ketsuron
+  - ja.lex.formal.iken
+  - ja.sent.thesis-defense
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.thesis-defense-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.formal.bouei
+  - ja.lex.formal.kaihen
+  - ja.lex.formal.shinpan
+  - ja.lex.formal.ketsuron
+  - ja.lex.formal.iken
+  - ja.sent.thesis-defense
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.thesis-defense-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.thesis-defense
+- id: ja.activity.thesis-defense-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

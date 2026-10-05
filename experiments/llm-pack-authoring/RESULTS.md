@@ -786,3 +786,10 @@ Goal `ru.goal.a2.past-events` created (+2 assessments). Units 110-119,
 `a2.time-connectors`), 10 sentences. Cloze targets must match text
 case-sensitively (capitalized sentence-initial words fail).
 Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 57
+
+Goals `ja.goal.b2.academic-writing` + `ja.goal.b2.formal-correspondence` created
+(+assessments, +deps; prereq b1.work-professional). Units 610-619,
+50 words (`lexicon/formal.jsonl`), 2 grammar (`b2.moushi-agemasu`,
+`b2-yoroshiku`), 9 sentences. Score: **7/7**.

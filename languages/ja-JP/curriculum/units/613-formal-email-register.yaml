@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.formal-email-register
+goal_id: ja.goal.b2.formal-correspondence
+title: formal email register
+summary: B2 language for formal email register.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.formal.kizukai
+  - ja.lex.formal.irei
+  - ja.lex.formal.kaiwa
+  - ja.lex.formal.shoukai2
+  - ja.lex.formal.hatsuu
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-yoroshiku
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.formal-email-register-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.formal.kizukai
+  - ja.lex.formal.irei
+  - ja.lex.formal.kaiwa
+  - ja.lex.formal.shoukai2
+  - ja.lex.formal.hatsuu
+  - ja.grammar.b2-yoroshiku
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.formal-email-register-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.formal.kizukai
+  - ja.lex.formal.irei
+  - ja.lex.formal.kaiwa
+  - ja.lex.formal.shoukai2
+  - ja.lex.formal.hatsuu
+  - ja.grammar.b2-yoroshiku
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.formal-email-register-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.formal.kizukai
+  - ja.lex.formal.irei
+  - ja.lex.formal.kaiwa
+  - ja.lex.formal.shoukai2
+  - ja.lex.formal.hatsuu
+  - ja.grammar.b2-yoroshiku
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.formal-email-register-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.formal.kizukai
+  - ja.lex.formal.irei
+  - ja.lex.formal.kaiwa
+  - ja.lex.formal.shoukai2
+  - ja.lex.formal.hatsuu
+  - ja.grammar.b2-yoroshiku
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.formal-email-register-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.formal-email-register-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

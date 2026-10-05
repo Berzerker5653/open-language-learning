@@ -1891,3 +1891,65 @@ goals:
       tool: omp
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
+  - id: ja.goal.b2.academic-writing
+    description: 'Academic writing in practice: thesis defense and publication basics.'
+    band: B2
+    framework_refs: []
+    contexts:
+    - ja.situation.classroom
+    modalities:
+    - listening
+    - speaking
+    - reading
+    - writing
+    prerequisites:
+    - target: ja.goal.b2.academic-skills
+      dimension: grammar-controlled
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.lex.formal.bouei
+    - ja.lex.formal.ketsuron
+    assessment_ids:
+    - ja.assess.academic-writing
+    transfer_required: true
+    sources:
+    - jf-standard
+    - ai-drafted-extension
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next-iq3_s
+      date: '2026-10-05'
+  - id: ja.goal.b2.formal-correspondence
+    description: 'Formal Japanese correspondence: letters, notices, applications, apologies, complaints, negotiations.'
+    band: B2
+    framework_refs: []
+    contexts:
+    - ja.situation.classroom
+    modalities:
+    - listening
+    - speaking
+    - reading
+    - writing
+    prerequisites:
+    - target: ja.goal.b1.work-professional
+      dimension: grammar-controlled
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.lex.formal.shokan
+    - ja.lex.formal.moushikomi
+    assessment_ids:
+    - ja.assess.formal-correspondence
+    transfer_required: true
+    sources:
+    - jf-standard
+    - ai-drafted-extension
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next-iq3_s
+      date: '2026-10-05'

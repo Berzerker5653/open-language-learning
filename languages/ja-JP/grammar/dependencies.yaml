@@ -294,6 +294,16 @@ prerequisite_edges:
   dimension: grammar-controlled
   required_state: independent
   strength: hard
+- from: ja.goal.b2.academic-writing
+  to: ja.goal.b2.academic-skills
+  dimension: grammar-controlled
+  required_state: independent
+  strength: hard
+- from: ja.goal.b2.formal-correspondence
+  to: ja.goal.b1.work-professional
+  dimension: grammar-controlled
+  required_state: independent
+  strength: hard
 notes:
 - Mirror of goal prerequisite edges (PACK-002); generated from curriculum/goals.yaml
   during K-30 authoring.
