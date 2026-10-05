@@ -478,3 +478,11 @@ Goal `ja.goal.b1.media-news` (prereq education-academic, mirrored;
 spans 250-264), 10 units, 50-word `lexicon/media.jsonl`, 2 grammar
 (`b1.node-versus-kara`, `b1.zu-ni-de`), 8 sentences, 1 assessment.
 Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 21: B1 units 260-269 (media-news complete + technology start)
+
+Goals `ja.goal.b1.media-news` (complete, 250-264) and
+`ja.goal.b1.technology` (prereq media-news, mirrored; spans 265-279),
+10 units, 25-word `lexicon/media2.jsonl` + 25-word `lexicon/tech.jsonl`,
+2 grammar (`b1.shieki-causative`, `b1.kanoukei-expansion`), 8
+sentences, 1 assessment. Score: **7/7**.

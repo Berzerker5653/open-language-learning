@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.daily-devices
+goal_id: ja.goal.b1.technology
+title: daily devices
+summary: B1 language for daily devices.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.tech.debisu
+  - ja.lex.tech.sumaho
+  - ja.lex.tech.pasokon
+  - ja.lex.tech.taburet
+  - ja.lex.tech.purinto
+  - ja.sent.device-daily
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.daily-devices-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.tech.debisu
+  - ja.lex.tech.sumaho
+  - ja.lex.tech.pasokon
+  - ja.lex.tech.taburet
+  - ja.lex.tech.purinto
+  - ja.sent.device-daily
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.daily-devices-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.tech.debisu
+  - ja.lex.tech.sumaho
+  - ja.lex.tech.pasokon
+  - ja.lex.tech.taburet
+  - ja.lex.tech.purinto
+  - ja.sent.device-daily
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.daily-devices-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.tech.debisu
+  - ja.lex.tech.sumaho
+  - ja.lex.tech.pasokon
+  - ja.lex.tech.taburet
+  - ja.lex.tech.purinto
+  - ja.sent.device-daily
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.daily-devices-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.tech.debisu
+  - ja.lex.tech.sumaho
+  - ja.lex.tech.pasokon
+  - ja.lex.tech.taburet
+  - ja.lex.tech.purinto
+  - ja.sent.device-daily
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.daily-devices-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.device-daily
+- id: ja.activity.daily-devices-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

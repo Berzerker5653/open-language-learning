@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.reading-editorials
+goal_id: ja.goal.b1.media-news
+title: reading editorials
+summary: B1 language for reading editorials.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.media2.editorial
+  - ja.lex.media2.ronsa
+  - ja.lex.media2.shiten
+  - ja.lex.media2.kaisetsu
+  - ja.lex.media2.ronsetsu
+  - ja.sent.editorial-viewpoint
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.reading-editorials-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.media2.editorial
+  - ja.lex.media2.ronsa
+  - ja.lex.media2.shiten
+  - ja.lex.media2.kaisetsu
+  - ja.lex.media2.ronsetsu
+  - ja.sent.editorial-viewpoint
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.reading-editorials-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.media2.editorial
+  - ja.lex.media2.ronsa
+  - ja.lex.media2.shiten
+  - ja.lex.media2.kaisetsu
+  - ja.lex.media2.ronsetsu
+  - ja.sent.editorial-viewpoint
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.reading-editorials-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.media2.editorial
+  - ja.lex.media2.ronsa
+  - ja.lex.media2.shiten
+  - ja.lex.media2.kaisetsu
+  - ja.lex.media2.ronsetsu
+  - ja.sent.editorial-viewpoint
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.reading-editorials-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.media2.editorial
+  - ja.lex.media2.ronsa
+  - ja.lex.media2.shiten
+  - ja.lex.media2.kaisetsu
+  - ja.lex.media2.ronsetsu
+  - ja.sent.editorial-viewpoint
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.reading-editorials-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.editorial-viewpoint
+- id: ja.activity.reading-editorials-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.current-events
+goal_id: ja.goal.b1.media-news
+title: current events
+summary: B1 language for current events.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.media2.sesaku
+  - ja.lex.media2.kokunai
+  - ja.lex.media2.kokusai
+  - ja.lex.media2.chiiki
+  - ja.lex.media2.sekai
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b1.shieki-causative
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.current-events-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.media2.sesaku
+  - ja.lex.media2.kokunai
+  - ja.lex.media2.kokusai
+  - ja.lex.media2.chiiki
+  - ja.lex.media2.sekai
+  - ja.grammar.b1.shieki-causative
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.current-events-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.media2.sesaku
+  - ja.lex.media2.kokunai
+  - ja.lex.media2.kokusai
+  - ja.lex.media2.chiiki
+  - ja.lex.media2.sekai
+  - ja.grammar.b1.shieki-causative
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.current-events-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.media2.sesaku
+  - ja.lex.media2.kokunai
+  - ja.lex.media2.kokusai
+  - ja.lex.media2.chiiki
+  - ja.lex.media2.sekai
+  - ja.grammar.b1.shieki-causative
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.current-events-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.media2.sesaku
+  - ja.lex.media2.kokunai
+  - ja.lex.media2.kokusai
+  - ja.lex.media2.chiiki
+  - ja.lex.media2.sekai
+  - ja.grammar.b1.shieki-causative
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.current-events-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.current-events-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

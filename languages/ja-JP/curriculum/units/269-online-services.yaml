@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.online-services
+goal_id: ja.goal.b1.technology
+title: online services
+summary: B1 language for online services.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.tech.web-site
+  - ja.lex.tech.search
+  - ja.lex.tech.database
+  - ja.lex.tech.cloud
+  - ja.lex.tech.backup
+  - ja.sent.online-search
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.online-services-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.tech.web-site
+  - ja.lex.tech.search
+  - ja.lex.tech.database
+  - ja.lex.tech.cloud
+  - ja.lex.tech.backup
+  - ja.sent.online-search
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.online-services-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.tech.web-site
+  - ja.lex.tech.search
+  - ja.lex.tech.database
+  - ja.lex.tech.cloud
+  - ja.lex.tech.backup
+  - ja.sent.online-search
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.online-services-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.tech.web-site
+  - ja.lex.tech.search
+  - ja.lex.tech.database
+  - ja.lex.tech.cloud
+  - ja.lex.tech.backup
+  - ja.sent.online-search
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.online-services-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.tech.web-site
+  - ja.lex.tech.search
+  - ja.lex.tech.database
+  - ja.lex.tech.cloud
+  - ja.lex.tech.backup
+  - ja.sent.online-search
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.online-services-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.online-search
+- id: ja.activity.online-services-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

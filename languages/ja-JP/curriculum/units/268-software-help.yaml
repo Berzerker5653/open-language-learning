@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.software-help
+goal_id: ja.goal.b1.technology
+title: software help
+summary: B1 language for software help.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.tech.apurikeeshon
+  - ja.lex.tech.software
+  - ja.lex.tech.update
+  - ja.lex.tech.download
+  - ja.lex.tech.bug
+  - ja.sent.software-update
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.software-help-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.tech.apurikeeshon
+  - ja.lex.tech.software
+  - ja.lex.tech.update
+  - ja.lex.tech.download
+  - ja.lex.tech.bug
+  - ja.sent.software-update
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.software-help-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.tech.apurikeeshon
+  - ja.lex.tech.software
+  - ja.lex.tech.update
+  - ja.lex.tech.download
+  - ja.lex.tech.bug
+  - ja.sent.software-update
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.software-help-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.tech.apurikeeshon
+  - ja.lex.tech.software
+  - ja.lex.tech.update
+  - ja.lex.tech.download
+  - ja.lex.tech.bug
+  - ja.sent.software-update
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.software-help-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.tech.apurikeeshon
+  - ja.lex.tech.software
+  - ja.lex.tech.update
+  - ja.lex.tech.download
+  - ja.lex.tech.bug
+  - ja.sent.software-update
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.software-help-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.software-update
+- id: ja.activity.software-help-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
