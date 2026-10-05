@@ -1,0 +1,46 @@
+id: "ru.unit.b1.work-processes-08"
+goal_id: "ru.goal.b1.learning-work"
+title: "Quality"
+summary: "качество, концентрация, эффективность, стандарт and норма."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u287-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.work.kachestvo",
+        "ru.lex.work.koncentraciya",
+        "ru.lex.work.effektivnost",
+        "ru.lex.work.standart",
+        "ru.lex.work.norma",
+        "ru.sent.b1.u287",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u287-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u287-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u287"]
+  - id: "ru.activity.b1.u287-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Quality: work processes with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse эффективность (efficiency) with качество (quality)."]
+  target_proficiency: "B1"
+  validation_method: "choice"

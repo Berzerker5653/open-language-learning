@@ -1,0 +1,46 @@
+id: "ru.unit.b1.work-processes-02"
+goal_id: "ru.goal.b1.learning-work"
+title: "Equipment"
+summary: "оборудование, станок, конвейер, наладка and цех."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u281-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.work.oborudovanie",
+        "ru.lex.work.stanok",
+        "ru.lex.work.konveyer",
+        "ru.lex.work.naladka",
+        "ru.lex.work.ceh",
+        "ru.sent.b1.u281",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u281-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u281-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u281"]
+  - id: "ru.activity.b1.u281-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Equipment: work processes with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse станок (machine tool) with конвейер (conveyor)."]
+  target_proficiency: "B1"
+  validation_method: "choice"

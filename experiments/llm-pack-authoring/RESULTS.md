@@ -984,3 +984,8 @@ new goal `ru.goal.b1.learning-work` + 2 assessments. Score: **7/7**.
 
 Units 780-789 (humor-wordplay: comedy, satire, manga), 50 words (`lexicon/play2.jsonl`),
 2 grammar (`b2-ni-totte-iru`, `b2-wake-deshou`), 9 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 26
+
+Units 280-289 (work processes, experience, aims), 50 words (`lexicon/work.jsonl`),
+2 grammar (`b1.dlya-dostizheniya`, `b1.prioritetnyj-konstruktsii`), 10 sentences. Score: **7/7**.

@@ -1,0 +1,46 @@
+id: "ru.unit.b1.work-processes-04"
+goal_id: "ru.goal.b1.learning-work"
+title: "Shifts"
+summary: "смена, перемена, перерыв, переработка and стаж."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u283-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.work.smena",
+        "ru.lex.work.peremena",
+        "ru.lex.work.pereryv",
+        "ru.lex.work.pererabotka",
+        "ru.lex.work.stazh",
+        "ru.sent.b1.u283",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u283-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u283-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u283"]
+  - id: "ru.activity.b1.u283-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Shifts: work processes with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse перемена (break) with переработка (overtime)."]
+  target_proficiency: "B1"
+  validation_method: "choice"
