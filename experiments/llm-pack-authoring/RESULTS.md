@@ -708,3 +708,9 @@ Score: **7/7**.
 Goal `ru.goal.a1.time-plans` created. 10 units, 50-word `lexicon/timeplans.jsonl`,
 2 grammar (`a1.plan-construction`, `a1.time-when`), 8 sentences, 2 assessments.
 Score: **7/7**.
+
+## 2026-10-04 — ru-RU agent batch ru08: A1 units 100-109 (basic-messages)
+
+Goal `ru.goal.a1.basic-messages` created. 10 units, 50-word
+`lexicon/messages.jsonl`, 2 grammar (`a1.modal-impersonal`, `a1.polite-requests`),
+8 sentences, 2 assessments. Score: **7/7**. **A1 band complete (000-109).**

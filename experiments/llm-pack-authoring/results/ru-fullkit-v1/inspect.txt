@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
-       11916  4f29ce4ecca5  assessments/definitions.jsonl
-       15590  a8a8f25b701e  curriculum/goals.yaml
+       12811  9dcba27abeef  assessments/definitions.jsonl
+       16880  35e57d05f6d2  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -101,7 +101,17 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1487  cf1f835ece4b  curriculum/units/097-time-plans-08.yaml
         1449  ded61653e750  curriculum/units/098-time-plans-09.yaml
         1460  b0c92c4c5750  curriculum/units/099-time-plans-10.yaml
-       15531  26bafc244195  grammar/concepts.jsonl
+        1429  06d0f163de52  curriculum/units/100-basic-messages-01.yaml
+        1478  68c2f2474ab8  curriculum/units/101-basic-messages-02.yaml
+        1463  96306f14a15b  curriculum/units/102-basic-messages-03.yaml
+        1473  7c0b6f72c595  curriculum/units/103-basic-messages-04.yaml
+        1487  5115b4d49c36  curriculum/units/104-basic-messages-05.yaml
+        1430  218647d11576  curriculum/units/105-basic-messages-06.yaml
+        1424  7f6945242510  curriculum/units/106-basic-messages-07.yaml
+        1398  c7cd38c8370a  curriculum/units/107-basic-messages-08.yaml
+        1501  00ff3201999c  curriculum/units/108-basic-messages-09.yaml
+        1459  01849f65c428  curriculum/units/109-basic-messages-10.yaml
+       16710  42cb5debc9b3  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        21189  03a4503c7371  lexicon/city.jsonl
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
@@ -110,6 +120,7 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
        20787  618656b3d458  lexicon/food.jsonl
         3882  2331dd495806  lexicon/greetings.jsonl
        20917  300574a2724b  lexicon/home.jsonl
+       21605  e163676f7140  lexicon/messages.jsonl
         3672  8e7e960a1252  lexicon/numbers-time.jsonl
        22380  8c501a5154bc  lexicon/personal.jsonl
        21337  77ca388bc863  lexicon/routines.jsonl
@@ -118,5 +129,5 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-       23578  6588d2511f6d  sentences/entries.jsonl
+       26455  97deb316b3fc  sentences/entries.jsonl
          391  74babc055676  sources.jsonl

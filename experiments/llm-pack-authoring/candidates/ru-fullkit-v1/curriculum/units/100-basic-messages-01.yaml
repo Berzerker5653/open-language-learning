@@ -1,0 +1,46 @@
+id: "ru.unit.a1.basic-messages-01"
+goal_id: "ru.goal.a1.basic-messages"
+title: "Ways to write"
+summary: "письмо, сообщение, звонок, смс and конверт."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u100-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.messages.pismo",
+        "ru.lex.messages.soobshchenie",
+        "ru.lex.messages.zvonok",
+        "ru.lex.messages.sms",
+        "ru.lex.messages.konvert",
+        "ru.sent.a1.u100",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u100-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a1.u100-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a1.u100"]
+  - id: "ru.activity.a1.u100-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Ways to write: messages with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse смс (text message) with письмо (letter)."]
+  target_proficiency: "A1"
+  validation_method: "choice"

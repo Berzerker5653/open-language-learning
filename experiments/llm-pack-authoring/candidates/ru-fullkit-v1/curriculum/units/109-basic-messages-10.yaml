@@ -1,0 +1,46 @@
+id: "ru.unit.a1.basic-messages-10"
+goal_id: "ru.goal.a1.basic-messages"
+title: "Seeming and expecting"
+summary: "казаться, ожидать, разрешение, привет and удачи with the request model."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u109-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.messages.kazhetsya",
+        "ru.lex.messages.ozhidaet",
+        "ru.lex.messages.razreshenie",
+        "ru.lex.messages.privet",
+        "ru.lex.messages.udachi",
+        "ru.grammar.a1.polite-requests",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u109-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g [
+        "ru.grammar.a1.polite-requests",
+        "ru.grammar.on-ramp.eto-identification",
+        "ru.grammar.on-ramp.zero-present-copula",
+      ]
+  - id: "ru.activity.a1.u109-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Seeming and expecting: messages with taught forms only."]
+  prohibited_ambiguity:
+    ["Do not put the requested thing in the genitive after просить; use the supplied form."]
+  target_proficiency: "A1"
+  validation_method: "choice"

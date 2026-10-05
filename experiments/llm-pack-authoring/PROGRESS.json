@@ -2,10 +2,10 @@
   "ru-RU": {
     "plan": "plans/ru-fullkit-v1.yaml",
     "pack": "candidates/ru-fullkit-v1",
-    "bands_done": ["on-ramp"],
-    "units_next": "100",
+    "bands_done": ["on-ramp", "A1"],
+    "units_next": "110",
     "last_score": "7/7 (2026-10-04, results/ru-fullkit-v1)",
-    "notes": "agent batches ru01-ru07 (030-099: people-family, home, routines, food, shopping, city, time-plans) 7/7; pack 100 units, 14 goals, 450 lex, 23 grammar, 67 sentences, 28 assessments; next block 100-109 per plan (last A1 block)"
+    "notes": "A1 band complete: ru01-ru08 (030-109) all 7/7; pack 110 units, 15 goals, 500 lex, 25 grammar, 75 sentences, 30 assessments; next: A2 blocks per plans/ru-fullkit-v1.yaml"
   },
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",

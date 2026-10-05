@@ -1,0 +1,47 @@
+id: "ru.unit.a1.basic-messages-04"
+goal_id: "ru.goal.a1.basic-messages"
+title: "On the phone"
+summary: "голос, слушать, говорить, сказать and созвон."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u103-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.messages.golos",
+        "ru.lex.messages.slushat",
+        "ru.lex.messages.govorit",
+        "ru.lex.messages.skazat",
+        "ru.lex.messages.sozvon",
+        "ru.sent.a1.u103",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u103-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a1.u103-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a1.u103"]
+  - id: "ru.activity.a1.u103-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["On the phone: messages with taught forms only."]
+  prohibited_ambiguity:
+    ["Do not confuse слушать (to listen) with any other perception verb; only слушать is taught."]
+  target_proficiency: "A1"
+  validation_method: "choice"
