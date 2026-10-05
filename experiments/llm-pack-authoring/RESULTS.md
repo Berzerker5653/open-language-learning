@@ -852,3 +852,9 @@ Goal `ru.goal.a2.social-plans` created (+2 assessments). Units 160-169,
 
 Units 660-669 (psychology-mind), 50 words (`lexicon/psych.jsonl`),
 2 grammar (`b2-ni-hikurabete`, `b2-ni-tsurezuru`), 8 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 15
+
+Goal `ru.goal.a2.comparisons` created (+2 assessments). Units 170-179,
+50 words (`lexicon/comparisons.jsonl`), 2 grammar (`a2.comparative-short`,
+`a2.potomu-chto`), 10 sentences. Score: **7/7**.

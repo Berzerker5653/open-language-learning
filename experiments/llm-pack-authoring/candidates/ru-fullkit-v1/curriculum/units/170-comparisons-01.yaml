@@ -1,0 +1,46 @@
+id: "ru.unit.a2.comparisons-01"
+goal_id: "ru.goal.a2.comparisons"
+title: "More and less"
+summary: "больше, меньше, чем, сравнение and разница."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a2.u170-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.comparisons.bolshe",
+        "ru.lex.comparisons.menshe",
+        "ru.lex.comparisons.chem",
+        "ru.lex.comparisons.sravnenie",
+        "ru.lex.comparisons.raznica",
+        "ru.sent.a2.u170",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.a2.u170-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a2.u170-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a2.u170"]
+  - id: "ru.activity.a2.u170-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["More and less: comparisons with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse больше (more) with меньше (less)."]
+  target_proficiency: "A2"
+  validation_method: "choice"

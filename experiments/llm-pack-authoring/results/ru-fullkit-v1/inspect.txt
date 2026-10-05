@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
-       17661  408a355dd9f2  assessments/definitions.jsonl
-       24263  1fce36d866e3  curriculum/goals.yaml
+       18478  9274794be16f  assessments/definitions.jsonl
+       25511  64c76aa2306b  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -160,20 +160,31 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1436  9acd3a40dcb8  curriculum/units/157-work-study-08.yaml
         1444  48fbe7d43dbe  curriculum/units/158-work-study-09.yaml
         1440  2f6985e64583  curriculum/units/159-work-study-10.yaml
-        1430  972d2c7a0c05  curriculum/units/160-social-plans-01.yaml
-        1389  d4aed7f36b00  curriculum/units/161-social-plans-02.yaml
-        1340  aea92463c0a1  curriculum/units/162-social-plans-03.yaml
-        1352  9ad4c31e7928  curriculum/units/163-social-plans-04.yaml
-        1388  f97d159ed789  curriculum/units/164-social-plans-05.yaml
-        1395  755344f92b43  curriculum/units/165-social-plans-06.yaml
-        1374  fc92c9c1331d  curriculum/units/166-social-plans-07.yaml
-        1376  6c618650b34b  curriculum/units/167-social-plans-08.yaml
-        1334  9d196a048009  curriculum/units/168-social-plans-09.yaml
-        1386  755d96c01d15  curriculum/units/169-social-plans-10.yaml
-       22936  8e8e90a98460  grammar/concepts.jsonl
+        1515  a72b996cc2c2  curriculum/units/160-social-plans-01.yaml
+        1474  63a759cb7d9e  curriculum/units/161-social-plans-02.yaml
+        1425  120b4bbf98e5  curriculum/units/162-social-plans-03.yaml
+        1437  d427c5c340a9  curriculum/units/163-social-plans-04.yaml
+        1473  6690720794cf  curriculum/units/164-social-plans-05.yaml
+        1480  292c9d44ed33  curriculum/units/165-social-plans-06.yaml
+        1459  963424c70bda  curriculum/units/166-social-plans-07.yaml
+        1461  1a5e24b2ec74  curriculum/units/167-social-plans-08.yaml
+        1419  d92bcb54c036  curriculum/units/168-social-plans-09.yaml
+        1471  789bfce0ebac  curriculum/units/169-social-plans-10.yaml
+        1350  2d2678a32131  curriculum/units/170-comparisons-01.yaml
+        1356  f8ed6221742b  curriculum/units/171-comparisons-02.yaml
+        1357  e78147c887c5  curriculum/units/172-comparisons-03.yaml
+        1322  51ccbbe7ed2d  curriculum/units/173-comparisons-04.yaml
+        1354  2a036f99f71f  curriculum/units/174-comparisons-05.yaml
+        1362  39949ae61b70  curriculum/units/175-comparisons-06.yaml
+        1343  0245e7c56a10  curriculum/units/176-comparisons-07.yaml
+        1394  2e15ca5488d4  curriculum/units/177-comparisons-08.yaml
+        1370  b74f42227b37  curriculum/units/178-comparisons-09.yaml
+        1337  f3655ec4843a  curriculum/units/179-comparisons-10.yaml
+       23964  47888a2f018a  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        21189  03a4503c7371  lexicon/city.jsonl
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
+       21726  cc469700bc35  lexicon/comparisons.jsonl
         3655  dbb5543b101e  lexicon/everyday.jsonl
        21072  e82dce96cc01  lexicon/family.jsonl
        20787  618656b3d458  lexicon/food.jsonl
@@ -194,5 +205,5 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-       48364  ee9cabc294f0  sentences/entries.jsonl
+       52303  5c43614a2a5c  sentences/entries.jsonl
          391  74babc055676  sources.jsonl
