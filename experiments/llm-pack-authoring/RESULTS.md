@@ -778,3 +778,11 @@ Score: **7/7**.
 Units 600-609 (academic-skills tail), 50 words (`lexicon/academic2.jsonl`),
 2 grammar (`b2.wake-ni-wa-ikanai`, `b2.zaru-o-enai`), 8 sentences.
 Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 9 (A2 start)
+
+Goal `ru.goal.a2.past-events` created (+2 assessments). Units 110-119,
+50 words (`lexicon/pastevents.jsonl`), 2 grammar (`a2.past-tense`,
+`a2.time-connectors`), 10 sentences. Cloze targets must match text
+case-sensitively (capitalized sentence-initial words fail).
+Score: **7/7**.

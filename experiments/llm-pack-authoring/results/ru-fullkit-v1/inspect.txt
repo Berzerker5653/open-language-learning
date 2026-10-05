@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
-       12811  9dcba27abeef  assessments/definitions.jsonl
-       16880  35e57d05f6d2  curriculum/goals.yaml
+       13644  b79969f864bd  assessments/definitions.jsonl
+       17949  b13e471d07aa  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -111,7 +111,16 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1398  c7cd38c8370a  curriculum/units/107-basic-messages-08.yaml
         1501  00ff3201999c  curriculum/units/108-basic-messages-09.yaml
         1459  01849f65c428  curriculum/units/109-basic-messages-10.yaml
-       16710  42cb5debc9b3  grammar/concepts.jsonl
+        1331  99d958a37f1c  curriculum/units/110-past-events-01.yaml
+        1336  bb76ea5dccee  curriculum/units/111-past-events-02.yaml
+        1368  5be88b8f4545  curriculum/units/112-past-events-03.yaml
+        1335  9a587945ab1e  curriculum/units/113-past-events-04.yaml
+        1348  a2ad36f96b6a  curriculum/units/114-past-events-05.yaml
+        1350  02da57304a40  curriculum/units/115-past-events-06.yaml
+        1330  e601e9d6fc43  curriculum/units/117-past-events-08.yaml
+        1346  17df5898c5b5  curriculum/units/118-past-events-09.yaml
+        1364  a4ebe6972a69  curriculum/units/119-past-events-10.yaml
+       17796  cf1932993437  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        21189  03a4503c7371  lexicon/city.jsonl
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
@@ -122,6 +131,7 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
        20917  300574a2724b  lexicon/home.jsonl
        21605  e163676f7140  lexicon/messages.jsonl
         3672  8e7e960a1252  lexicon/numbers-time.jsonl
+       21375  d93c1521663d  lexicon/pastevents.jsonl
        22380  8c501a5154bc  lexicon/personal.jsonl
        21337  77ca388bc863  lexicon/routines.jsonl
        21290  daeb36ea4066  lexicon/shopping.jsonl
@@ -129,5 +139,5 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-       26455  97deb316b3fc  sentences/entries.jsonl
+       30271  5b4adcdf630c  sentences/entries.jsonl
          391  74babc055676  sources.jsonl
