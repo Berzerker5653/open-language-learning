@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.postcard-writing
+goal_id: ja.goal.b1.travel-extended
+title: postcard writing
+summary: B1 language for postcard writing.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.travel2.hagaki
+  - ja.lex.travel2.egaku
+  - ja.lex.travel2.ryouga
+  - ja.lex.travel2.futsuu
+  - ja.lex.travel2.shirabe
+  - ja.sent.postcard
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.postcard-writing-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.travel2.hagaki
+  - ja.lex.travel2.egaku
+  - ja.lex.travel2.ryouga
+  - ja.lex.travel2.futsuu
+  - ja.lex.travel2.shirabe
+  - ja.sent.postcard
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.postcard-writing-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.travel2.hagaki
+  - ja.lex.travel2.egaku
+  - ja.lex.travel2.ryouga
+  - ja.lex.travel2.futsuu
+  - ja.lex.travel2.shirabe
+  - ja.sent.postcard
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.postcard-writing-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.travel2.hagaki
+  - ja.lex.travel2.egaku
+  - ja.lex.travel2.ryouga
+  - ja.lex.travel2.futsuu
+  - ja.lex.travel2.shirabe
+  - ja.sent.postcard
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.postcard-writing-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.travel2.hagaki
+  - ja.lex.travel2.egaku
+  - ja.lex.travel2.ryouga
+  - ja.lex.travel2.futsuu
+  - ja.lex.travel2.shirabe
+  - ja.sent.postcard
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.postcard-writing-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.postcard
+- id: ja.activity.postcard-writing-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

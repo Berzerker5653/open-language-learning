@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.route-changes
+goal_id: ja.goal.b1.travel-extended
+title: route changes
+summary: B1 language for route changes.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.travel2.okure
+  - ja.lex.travel2.keikou
+  - ja.lex.travel2.teishi
+  - ja.lex.travel2.engaki
+  - ja.lex.travel2.shuhiki
+  - ja.sent.route-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.route-changes-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.travel2.okure
+  - ja.lex.travel2.keikou
+  - ja.lex.travel2.teishi
+  - ja.lex.travel2.engaki
+  - ja.lex.travel2.shuhiki
+  - ja.sent.route-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.route-changes-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.travel2.okure
+  - ja.lex.travel2.keikou
+  - ja.lex.travel2.teishi
+  - ja.lex.travel2.engaki
+  - ja.lex.travel2.shuhiki
+  - ja.sent.route-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.route-changes-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.travel2.okure
+  - ja.lex.travel2.keikou
+  - ja.lex.travel2.teishi
+  - ja.lex.travel2.engaki
+  - ja.lex.travel2.shuhiki
+  - ja.sent.route-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.route-changes-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.travel2.okure
+  - ja.lex.travel2.keikou
+  - ja.lex.travel2.teishi
+  - ja.lex.travel2.engaki
+  - ja.lex.travel2.shuhiki
+  - ja.sent.route-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.route-changes-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.route-change
+- id: ja.activity.route-changes-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.lost-belongings
+goal_id: ja.goal.b1.travel-extended
+title: lost belongings
+summary: B1 language for lost belongings.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.travel2.wasuremono
+  - ja.lex.travel2.otoiawase
+  - ja.lex.travel2.saifu
+  - ja.lex.travel2.kagi
+  - ja.lex.travel2.ochimono
+  - ja.sent.lost-belongings
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.lost-belongings-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.travel2.wasuremono
+  - ja.lex.travel2.otoiawase
+  - ja.lex.travel2.saifu
+  - ja.lex.travel2.kagi
+  - ja.lex.travel2.ochimono
+  - ja.sent.lost-belongings
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.lost-belongings-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.travel2.wasuremono
+  - ja.lex.travel2.otoiawase
+  - ja.lex.travel2.saifu
+  - ja.lex.travel2.kagi
+  - ja.lex.travel2.ochimono
+  - ja.sent.lost-belongings
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.lost-belongings-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.travel2.wasuremono
+  - ja.lex.travel2.otoiawase
+  - ja.lex.travel2.saifu
+  - ja.lex.travel2.kagi
+  - ja.lex.travel2.ochimono
+  - ja.sent.lost-belongings
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.lost-belongings-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.travel2.wasuremono
+  - ja.lex.travel2.otoiawase
+  - ja.lex.travel2.saifu
+  - ja.lex.travel2.kagi
+  - ja.lex.travel2.ochimono
+  - ja.sent.lost-belongings
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.lost-belongings-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.lost-belongings
+- id: ja.activity.lost-belongings-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

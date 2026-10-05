@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.travel-companions
+goal_id: ja.goal.b1.travel-extended
+title: travel companions
+summary: B1 language for travel companions.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.travel2.dekake
+  - ja.lex.travel2.sanin
+  - ja.lex.travel2.chotto
+  - ja.lex.travel2.keihaku
+  - ja.lex.travel2.hansei
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b1.te-shimau
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.travel-companions-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.travel2.dekake
+  - ja.lex.travel2.sanin
+  - ja.lex.travel2.chotto
+  - ja.lex.travel2.keihaku
+  - ja.lex.travel2.hansei
+  - ja.grammar.b1.te-shimau
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.travel-companions-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.travel2.dekake
+  - ja.lex.travel2.sanin
+  - ja.lex.travel2.chotto
+  - ja.lex.travel2.keihaku
+  - ja.lex.travel2.hansei
+  - ja.grammar.b1.te-shimau
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.travel-companions-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.travel2.dekake
+  - ja.lex.travel2.sanin
+  - ja.lex.travel2.chotto
+  - ja.lex.travel2.keihaku
+  - ja.lex.travel2.hansei
+  - ja.grammar.b1.te-shimau
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.travel-companions-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.travel2.dekake
+  - ja.lex.travel2.sanin
+  - ja.lex.travel2.chotto
+  - ja.lex.travel2.keihaku
+  - ja.lex.travel2.hansei
+  - ja.grammar.b1.te-shimau
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.travel-companions-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.travel-companions-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

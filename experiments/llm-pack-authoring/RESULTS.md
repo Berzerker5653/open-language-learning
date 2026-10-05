@@ -529,3 +529,9 @@ Goal `ja.goal.b1.environment` complete (310-324). Goal
 `lexicon/env2.jsonl` + `lexicon/travel.jsonl`, 2 grammar
 (`b1.nai-u-de`, `b1.toi-toka`), 8 sentences, 1 assessment.
 Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 28: B1 units 330-339 (travel-extended complete)
+
+Goal `ja.goal.b1.travel-extended` complete (325-339). 10 units,
+50-word `lexicon/travel2.jsonl`, 2 grammar (`b1.te-shimau`,
+`b1.darou`), 8 sentences. Score: **7/7**.
