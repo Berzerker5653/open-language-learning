@@ -1175,3 +1175,34 @@ goals:
       tool: omp
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
+  - id: ja.goal.b1.media-news
+    description: 'Read news critically and write summaries and responses.'
+    band: B1
+    framework_refs: []
+    contexts:
+    - ja.situation.classroom
+    modalities:
+    - listening
+    - speaking
+    - reading
+    - writing
+    prerequisites:
+    - target: ja.goal.b1.education-academic
+      dimension: grammar-controlled
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.lex.media.kiji
+    - ja.lex.media.jijitsu
+    assessment_ids:
+    - ja.assess.media-news
+    transfer_required: true
+    sources:
+    - jf-standard
+    - ai-drafted-extension
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next-iq3_s
+      date: '2026-10-04'

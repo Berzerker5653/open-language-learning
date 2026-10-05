@@ -471,3 +471,10 @@ sentences, 1 assessment. Score: **7/7**.
 Goal `ja.goal.b1.education-academic` complete (235-249), 10 units,
 50-word `lexicon/edu2.jsonl`, 2 grammar (`b1.kedo-keredo`,
 `b1.rashii-sou-youda`), 8 sentences. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 20: B1 units 250-259 (media-news part 1)
+
+Goal `ja.goal.b1.media-news` (prereq education-academic, mirrored;
+spans 250-264), 10 units, 50-word `lexicon/media.jsonl`, 2 grammar
+(`b1.node-versus-kara`, `b1.zu-ni-de`), 8 sentences, 1 assessment.
+Score: **7/7**.

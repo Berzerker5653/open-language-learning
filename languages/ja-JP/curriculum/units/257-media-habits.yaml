@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.media-habits
+goal_id: ja.goal.b1.media-news
+title: media habits
+summary: B1 language for media habits.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.media.media-habits
+  - ja.lex.media.toron
+  - ja.lex.media.houmon
+  - ja.lex.media.gazou
+  - ja.lex.media.caption
+  - ja.sent.media-habits-night
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.media-habits-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.media.media-habits
+  - ja.lex.media.toron
+  - ja.lex.media.houmon
+  - ja.lex.media.gazou
+  - ja.lex.media.caption
+  - ja.sent.media-habits-night
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.media-habits-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.media.media-habits
+  - ja.lex.media.toron
+  - ja.lex.media.houmon
+  - ja.lex.media.gazou
+  - ja.lex.media.caption
+  - ja.sent.media-habits-night
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.media-habits-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.media.media-habits
+  - ja.lex.media.toron
+  - ja.lex.media.houmon
+  - ja.lex.media.gazou
+  - ja.lex.media.caption
+  - ja.sent.media-habits-night
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.media-habits-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.media.media-habits
+  - ja.lex.media.toron
+  - ja.lex.media.houmon
+  - ja.lex.media.gazou
+  - ja.lex.media.caption
+  - ja.sent.media-habits-night
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.media-habits-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.media-habits-night
+- id: ja.activity.media-habits-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

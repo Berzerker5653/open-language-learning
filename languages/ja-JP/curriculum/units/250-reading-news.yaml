@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.reading-news
+goal_id: ja.goal.b1.media-news
+title: reading news
+summary: B1 language for reading news.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.media.news
+  - ja.lex.media.shimbun
+  - ja.lex.media.head
+  - ja.lex.media.houdou
+  - ja.lex.media.kiji
+  - ja.sent.news-morning
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.reading-news-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.media.news
+  - ja.lex.media.shimbun
+  - ja.lex.media.head
+  - ja.lex.media.houdou
+  - ja.lex.media.kiji
+  - ja.sent.news-morning
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.reading-news-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.media.news
+  - ja.lex.media.shimbun
+  - ja.lex.media.head
+  - ja.lex.media.houdou
+  - ja.lex.media.kiji
+  - ja.sent.news-morning
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.reading-news-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.media.news
+  - ja.lex.media.shimbun
+  - ja.lex.media.head
+  - ja.lex.media.houdou
+  - ja.lex.media.kiji
+  - ja.sent.news-morning
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.reading-news-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.media.news
+  - ja.lex.media.shimbun
+  - ja.lex.media.head
+  - ja.lex.media.houdou
+  - ja.lex.media.kiji
+  - ja.sent.news-morning
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.reading-news-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.news-morning
+- id: ja.activity.reading-news-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

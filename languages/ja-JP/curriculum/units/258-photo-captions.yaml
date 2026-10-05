@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.photo-captions
+goal_id: ja.goal.b1.media-news
+title: photo captions
+summary: B1 language for photo captions.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.media.denshi-media
+  - ja.lex.media.ninoki
+  - ja.lex.media.ryuukou
+  - ja.lex.media.burando
+  - ja.lex.media.maruke
+  - ja.sent.photo-caption
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.photo-captions-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.media.denshi-media
+  - ja.lex.media.ninoki
+  - ja.lex.media.ryuukou
+  - ja.lex.media.burando
+  - ja.lex.media.maruke
+  - ja.sent.photo-caption
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.photo-captions-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.media.denshi-media
+  - ja.lex.media.ninoki
+  - ja.lex.media.ryuukou
+  - ja.lex.media.burando
+  - ja.lex.media.maruke
+  - ja.sent.photo-caption
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.photo-captions-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.media.denshi-media
+  - ja.lex.media.ninoki
+  - ja.lex.media.ryuukou
+  - ja.lex.media.burando
+  - ja.lex.media.maruke
+  - ja.sent.photo-caption
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.photo-captions-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.media.denshi-media
+  - ja.lex.media.ninoki
+  - ja.lex.media.ryuukou
+  - ja.lex.media.burando
+  - ja.lex.media.maruke
+  - ja.sent.photo-caption
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.photo-captions-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.photo-caption
+- id: ja.activity.photo-captions-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
