@@ -608,3 +608,9 @@ Unit 435 (governance-essay) closes politics-governance. Goal
 `ja.goal.b2.economics-work` created (436-449; 445-449 remain). 10 units,
 50-word `lexicon/economy.jsonl`, 2 grammar (`b2.ni-shite`, `b2.dake-de`),
 8 sentences, assessment `ja.assess.economics-work`. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 39: B2 units 445-449 (economics-work 436-449 done)
+
+5 units, 25-word `lexicon/economy2.jsonl`, 1 grammar (`b2.mono-da`),
+4 sentences. Plan note: economics-work spans 436-451; 450-451 in batch 40.
+Score: **7/7**.

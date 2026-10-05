@@ -414,7 +414,12 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2180  fdc522e7bfbb  curriculum/units/442-labor-rights.yaml
         2214  190458e3b37e  curriculum/units/443-automation-impact.yaml
         2224  8ff64634891c  curriculum/units/444-consumer-behavior.yaml
-       46692  0e7eb7e395ff  grammar/concepts.jsonl
+        2255  f41772175d1d  curriculum/units/445-financial-literacy.yaml
+        2220  9369b92a0b4d  curriculum/units/446-economic-history.yaml
+        2210  b2b0d6123444  curriculum/units/447-inequality-data.yaml
+        2320  975020b7d17d  curriculum/units/448-workplace-motivation.yaml
+        2212  f640230f258c  curriculum/units/449-career-markets.yaml
+       47226  6d7b0e3d5b64  grammar/concepts.jsonl
         7148  65e79d3e1a1e  grammar/dependencies.yaml
        30369  1401b6e0388e  kanji/entries.jsonl
          485  860cdf8185db  language/identity.yaml
@@ -435,6 +440,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
        19821  f104c0b11cd3  lexicon/debate2.jsonl
         7349  caf23017d109  lexicon/demonstratives.jsonl
        40105  f67ae9bda07f  lexicon/economy.jsonl
+       20056  50fcd454122c  lexicon/economy2.jsonl
        40282  c3d72b402ae5  lexicon/edu.jsonl
        40188  0b543c090d65  lexicon/edu2.jsonl
        39892  a0f784d7e875  lexicon/emotion.jsonl
@@ -487,7 +493,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
-      223283  77133717bc75  sentences/entries.jsonl
+      225908  aa2ee2f51b47  sentences/entries.jsonl
         3915  e270f808c26e  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml
          539  842cce82e5d5  stories/first-day.yaml

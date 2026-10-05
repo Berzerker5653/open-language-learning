@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.inequality-data
+goal_id: ja.goal.b2.economics-work
+title: inequality data
+summary: B2 language for inequality data.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.economy2.kaso
+  - ja.lex.economy2.toukei
+  - ja.lex.economy2.wariai
+  - ja.lex.economy2.gakureki
+  - ja.lex.economy2.kokugai
+  - ja.sent.inequality-data
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.inequality-data-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.economy2.kaso
+  - ja.lex.economy2.toukei
+  - ja.lex.economy2.wariai
+  - ja.lex.economy2.gakureki
+  - ja.lex.economy2.kokugai
+  - ja.sent.inequality-data
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.inequality-data-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.economy2.kaso
+  - ja.lex.economy2.toukei
+  - ja.lex.economy2.wariai
+  - ja.lex.economy2.gakureki
+  - ja.lex.economy2.kokugai
+  - ja.sent.inequality-data
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.inequality-data-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.economy2.kaso
+  - ja.lex.economy2.toukei
+  - ja.lex.economy2.wariai
+  - ja.lex.economy2.gakureki
+  - ja.lex.economy2.kokugai
+  - ja.sent.inequality-data
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.inequality-data-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.economy2.kaso
+  - ja.lex.economy2.toukei
+  - ja.lex.economy2.wariai
+  - ja.lex.economy2.gakureki
+  - ja.lex.economy2.kokugai
+  - ja.sent.inequality-data
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.inequality-data-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.inequality-data
+- id: ja.activity.inequality-data-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
