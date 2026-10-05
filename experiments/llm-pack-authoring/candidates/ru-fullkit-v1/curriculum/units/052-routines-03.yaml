@@ -1,0 +1,46 @@
+id: "ru.unit.a1.routines-03"
+goal_id: "ru.goal.a1.routines"
+title: "Reading and drinks"
+summary: "читать, писать, смотреть with кофе and чай."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u052-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.routines.chitat",
+        "ru.lex.routines.pisat",
+        "ru.lex.routines.smotret",
+        "ru.lex.routines.kofe",
+        "ru.lex.routines.chay",
+        "ru.sent.a1.u054",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u052-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a1.u052-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a1.u054"]
+  - id: "ru.activity.a1.u052-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Reading and drinks: routines and time with taught forms only."]
+  prohibited_ambiguity: ["Do not decline кофе; it never changes form."]
+  target_proficiency: "A1"
+  validation_method: "choice"

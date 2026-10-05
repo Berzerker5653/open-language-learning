@@ -1,0 +1,49 @@
+id: "ru.unit.a1.routines-01"
+goal_id: "ru.goal.a1.routines"
+title: "Morning routine"
+summary: "просыпаться, вставать, умываться, чистить and будильник."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u050-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.routines.prosypatsya",
+        "ru.lex.routines.vstavat",
+        "ru.lex.routines.umyvat-sya",
+        "ru.lex.routines.chistit",
+        "ru.lex.routines.budilnik",
+        "ru.sent.a1.u052",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u050-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a1.u050-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a1.u052"]
+  - id: "ru.activity.a1.u050-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Morning routine: routines and time with taught forms only."]
+  prohibited_ambiguity:
+    [
+      "Do not form past tenses of the taught verbs; only the infinitive and supplied forms are taught.",
+    ]
+  target_proficiency: "A1"
+  validation_method: "choice"
