@@ -1286,3 +1286,9 @@ Score: **7/7**.
 Units 760-769 (intercultural comparison and perspective taking), goal `ru.goal.b2.culture-perspectives` (existing),
 50 words (`lexicon/cult4.jsonl`), 2 grammar (`b2-po-sravneniyu-s`, `b2-glazami-drugogo`), 10 sentences.
 Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 75
+
+Units 770-779 (lexical precision and ambiguity reduction), NEW goal `ru.goal.b2.style-register` (+2 assessments),
+50 words (`lexicon/style.jsonl`), 2 grammar (`b2-imeet-vidu`, `b2-inache-govorya`), 10 sentences.
+Score: **7/7**.
