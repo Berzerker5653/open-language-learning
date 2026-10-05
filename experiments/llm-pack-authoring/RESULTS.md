@@ -744,3 +744,9 @@ Score: **7/7**.
 Goal `ja.goal.b2.science-tech-ethics` created (+deps edge, +assessment). 10 units,
 50-word `lexicon/science.jsonl`, 2 grammar (`b2.ni-totoi`, `b2.wake-hodo`),
 8 sentences. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 52: B2 units 560-569 (science-tech-ethics tail + education-pedagogy start)
+
+Goal `ja.goal.b2.education-pedagogy` created (+deps edge, +assessment). 10 units,
+20-word `lexicon/science2.jsonl`, 30-word `lexicon/edu3.jsonl`,
+2 grammar (`b2.ni-sotte`, `b2.bakari-da`), 8 sentences. Score: **7/7**.

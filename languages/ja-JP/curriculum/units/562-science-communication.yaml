@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.science-communication
+goal_id: ja.goal.b2.science-tech-ethics
+title: science communication
+summary: B2 language for science communication.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.science2.tsuuyou
+  - ja.lex.science2.kiso2
+  - ja.lex.science2.shoumei
+  - ja.lex.science2.hanrei
+  - ja.lex.science2.kairyou
+  - ja.sent.science-communication
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.science-communication-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.science2.tsuuyou
+  - ja.lex.science2.kiso2
+  - ja.lex.science2.shoumei
+  - ja.lex.science2.hanrei
+  - ja.lex.science2.kairyou
+  - ja.sent.science-communication
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.science-communication-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.science2.tsuuyou
+  - ja.lex.science2.kiso2
+  - ja.lex.science2.shoumei
+  - ja.lex.science2.hanrei
+  - ja.lex.science2.kairyou
+  - ja.sent.science-communication
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.science-communication-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.science2.tsuuyou
+  - ja.lex.science2.kiso2
+  - ja.lex.science2.shoumei
+  - ja.lex.science2.hanrei
+  - ja.lex.science2.kairyou
+  - ja.sent.science-communication
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.science-communication-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.science2.tsuuyou
+  - ja.lex.science2.kiso2
+  - ja.lex.science2.shoumei
+  - ja.lex.science2.hanrei
+  - ja.lex.science2.kairyou
+  - ja.sent.science-communication
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.science-communication-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.science-communication
+- id: ja.activity.science-communication-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

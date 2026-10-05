@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.bilingual-education
+goal_id: ja.goal.b2.education-pedagogy
+title: bilingual education
+summary: B2 language for bilingual education.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.edu3.bunkou
+  - ja.lex.edu3.saidou
+  - ja.lex.edu3.oen
+  - ja.lex.edu3.jiko
+  - ja.lex.edu3.seminaa
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2.bakari-da
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.bilingual-education-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.edu3.bunkou
+  - ja.lex.edu3.saidou
+  - ja.lex.edu3.oen
+  - ja.lex.edu3.jiko
+  - ja.lex.edu3.seminaa
+  - ja.grammar.b2.bakari-da
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.bilingual-education-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.edu3.bunkou
+  - ja.lex.edu3.saidou
+  - ja.lex.edu3.oen
+  - ja.lex.edu3.jiko
+  - ja.lex.edu3.seminaa
+  - ja.grammar.b2.bakari-da
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.bilingual-education-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.edu3.bunkou
+  - ja.lex.edu3.saidou
+  - ja.lex.edu3.oen
+  - ja.lex.edu3.jiko
+  - ja.lex.edu3.seminaa
+  - ja.grammar.b2.bakari-da
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.bilingual-education-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.edu3.bunkou
+  - ja.lex.edu3.saidou
+  - ja.lex.edu3.oen
+  - ja.lex.edu3.jiko
+  - ja.lex.edu3.seminaa
+  - ja.grammar.b2.bakari-da
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.bilingual-education-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.bilingual-education-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.tech-regulation
+goal_id: ja.goal.b2.science-tech-ethics
+title: tech regulation
+summary: B2 language for tech regulation.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.science2.kitei
+  - ja.lex.science2.tousei2
+  - ja.lex.science2.hantai3
+  - ja.lex.science2.hoshou2
+  - ja.lex.science2.seinin
+  - ja.sent.tech-regulation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.tech-regulation-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.science2.kitei
+  - ja.lex.science2.tousei2
+  - ja.lex.science2.hantai3
+  - ja.lex.science2.hoshou2
+  - ja.lex.science2.seinin
+  - ja.sent.tech-regulation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.tech-regulation-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.science2.kitei
+  - ja.lex.science2.tousei2
+  - ja.lex.science2.hantai3
+  - ja.lex.science2.hoshou2
+  - ja.lex.science2.seinin
+  - ja.sent.tech-regulation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.tech-regulation-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.science2.kitei
+  - ja.lex.science2.tousei2
+  - ja.lex.science2.hantai3
+  - ja.lex.science2.hoshou2
+  - ja.lex.science2.seinin
+  - ja.sent.tech-regulation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.tech-regulation-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.science2.kitei
+  - ja.lex.science2.tousei2
+  - ja.lex.science2.hantai3
+  - ja.lex.science2.hoshou2
+  - ja.lex.science2.seinin
+  - ja.sent.tech-regulation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.tech-regulation-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.tech-regulation
+- id: ja.activity.tech-regulation-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

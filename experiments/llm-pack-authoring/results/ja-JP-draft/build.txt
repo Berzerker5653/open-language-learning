@@ -1,2 +1,2 @@
-built experiments/llm-pack-authoring/results/ja-JP-draft/pack.lpk (574455 bytes)
-sha256 86d7fed48aa5b7d6e274effd874052fd4f10a6b75c0aebb43560beccbcb3c037
+built experiments/llm-pack-authoring/results/ja-JP-draft/pack.lpk (584791 bytes)
+sha256 30de41526af5f9c5236bdabed77ae4c0200de30446001d2834a9bc10c6e47818
