@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
-       15281  04cdaa26036d  assessments/definitions.jsonl
-       20465  b81d23b42988  curriculum/goals.yaml
+       16053  5b7651c2b419  assessments/definitions.jsonl
+       21715  df0220a48770  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -130,17 +130,27 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1421  cda9e977f994  curriculum/units/127-travel-08.yaml
         1447  2acc943bfb6c  curriculum/units/128-travel-09.yaml
         1434  6611407f8249  curriculum/units/129-travel-10.yaml
-        1359  81900568f3ef  curriculum/units/130-services-01.yaml
-        1308  f2fbc7f8edb3  curriculum/units/131-services-02.yaml
-        1341  e4c5b489b02c  curriculum/units/132-services-03.yaml
-        1346  0a7a65774e76  curriculum/units/133-services-04.yaml
-        1346  99e3de38f6eb  curriculum/units/134-services-05.yaml
-        1359  e45b7a6cdf8b  curriculum/units/135-services-06.yaml
-        1343  367fb463e5d9  curriculum/units/136-services-07.yaml
-        1423  645a9df12409  curriculum/units/137-services-08.yaml
-        1370  7a353c8b7f7e  curriculum/units/138-services-09.yaml
-        1352  066ca090d751  curriculum/units/139-services-10.yaml
-       19832  8d9392d4250e  grammar/concepts.jsonl
+        1444  254f62a9c1f1  curriculum/units/130-services-01.yaml
+        1393  85d24f917c38  curriculum/units/131-services-02.yaml
+        1426  2e0c48afaf10  curriculum/units/132-services-03.yaml
+        1431  d20c676bb620  curriculum/units/133-services-04.yaml
+        1431  01f43a6d9b43  curriculum/units/134-services-05.yaml
+        1444  b0379273a10f  curriculum/units/135-services-06.yaml
+        1428  6d957d16fc71  curriculum/units/136-services-07.yaml
+        1512  b2be56531c11  curriculum/units/137-services-08.yaml
+        1455  0bb2dd53c0af  curriculum/units/138-services-09.yaml
+        1437  25e4afd32f9e  curriculum/units/139-services-10.yaml
+        1329  ff66fe467aaf  curriculum/units/140-wellbeing-01.yaml
+        1341  fe4f58b2c70a  curriculum/units/141-wellbeing-02.yaml
+        1348  a9a3cd973cfb  curriculum/units/142-wellbeing-03.yaml
+        1352  9c36049212ab  curriculum/units/143-wellbeing-04.yaml
+        1329  ac55813b5ace  curriculum/units/144-wellbeing-05.yaml
+        1352  13840df64287  curriculum/units/145-wellbeing-06.yaml
+        1306  0ea72bcb4bd5  curriculum/units/146-wellbeing-07.yaml
+        1361  973bf8e8e2d1  curriculum/units/147-wellbeing-08.yaml
+        1325  87ff20037505  curriculum/units/148-wellbeing-09.yaml
+        1367  42c4bca36847  curriculum/units/149-wellbeing-10.yaml
+       20833  fcfd340b4d5c  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        21189  03a4503c7371  lexicon/city.jsonl
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
@@ -158,8 +168,9 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
        21290  daeb36ea4066  lexicon/shopping.jsonl
        21640  21f9a881afb5  lexicon/timeplans.jsonl
        21525  80458a7c1092  lexicon/travel.jsonl
+       21644  4a1e18f9c4e9  lexicon/wellbeing.jsonl
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-       37536  250ad7c29c92  sentences/entries.jsonl
+       41123  4668bcd87b92  sentences/entries.jsonl
          391  74babc055676  sources.jsonl

@@ -1,0 +1,46 @@
+id: "ru.unit.a2.wellbeing-03"
+goal_id: "ru.goal.a2.wellbeing"
+title: "Doctors"
+summary: "врач, врачиха, стоматолог, травматолог and клиника."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a2.u142-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.wellbeing.vrach",
+        "ru.lex.wellbeing.vrach2",
+        "ru.lex.wellbeing.stomatolog",
+        "ru.lex.wellbeing.travmatolog",
+        "ru.lex.wellbeing.klinik",
+        "ru.sent.a2.u142",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.a2.u142-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a2.u142-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a2.u142"]
+  - id: "ru.activity.a2.u142-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Doctors: wellbeing with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse стоматолог with травматолог."]
+  target_proficiency: "A2"
+  validation_method: "choice"

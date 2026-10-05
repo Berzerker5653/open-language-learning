@@ -816,3 +816,9 @@ Goal `ru.goal.a2.services` created (+2 assessments). Units 130-139,
 
 Units 630-639 (art-design), 50 words (`lexicon/art2.jsonl`),
 2 grammar (`b2-to-shite`, `b2-ni-motte`), 8 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 12
+
+Goal `ru.goal.a2.wellbeing` created (+2 assessments). Units 140-149,
+50 words (`lexicon/wellbeing.jsonl`), 2 grammar (`a2.dative-health`,
+`a2.imperative-advice`), 10 sentences. Score: **7/7**.
