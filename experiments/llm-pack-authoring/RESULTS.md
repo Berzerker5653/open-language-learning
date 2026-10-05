@@ -1034,3 +1034,9 @@ new goal `ru.goal.b1.opinions` + 2 assessments. Score: **7/7**.
 
 Units 340-349 (alternative views, respectful responses), 50 words (`lexicon/respect.jsonl`),
 2 grammar (`b1.sdrugoy-storony`, `b1.ya-vashego-mneniya`), 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 33
+
+Units 350-359 (main points and clear explanations), NEW goal `ru.goal.b1.information-summary`
+(+2 assessments), 50 words (`lexicon/summary.jsonl`), 2 grammar (`b1.glavnoe-chto`, `b1.inymi-slovami`),
+10 sentences. Score: **7/7**.

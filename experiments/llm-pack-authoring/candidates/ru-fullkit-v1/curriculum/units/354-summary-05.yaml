@@ -1,0 +1,47 @@
+id: "ru.unit.b1.summary-05"
+goal_id: "ru.goal.b1.information-summary"
+title: "Term"
+summary: "термин, толкование, сущность, предмет and явление."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u354-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.summary.termin",
+        "ru.lex.summary.tolkovanie",
+        "ru.lex.summary.sushchnost2",
+        "ru.lex.summary.predmet",
+        "ru.lex.summary.yavlenie",
+        "ru.sent.b1.u354",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u354-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u354-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u354"]
+  - id: "ru.activity.b1.u354-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Term: summary with taught forms only."]
+  prohibited_ambiguity:
+    ["Do not confuse толкование (interpretation) with определение (definition)."]
+  target_proficiency: "B1"
+  validation_method: "choice"
