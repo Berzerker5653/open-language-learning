@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.climate-science
+goal_id: ja.goal.b2.science-tech-ethics
+title: climate science
+summary: B2 language for climate science.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.science.kikou
+  - ja.lex.science.yosoku
+  - ja.lex.science.kankyou-hoju
+  - ja.lex.science.tenkan2
+  - ja.lex.science.kisha2
+  - ja.sent.climate-science
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.climate-science-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.science.kikou
+  - ja.lex.science.yosoku
+  - ja.lex.science.kankyou-hoju
+  - ja.lex.science.tenkan2
+  - ja.lex.science.kisha2
+  - ja.sent.climate-science
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.climate-science-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.science.kikou
+  - ja.lex.science.yosoku
+  - ja.lex.science.kankyou-hoju
+  - ja.lex.science.tenkan2
+  - ja.lex.science.kisha2
+  - ja.sent.climate-science
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.climate-science-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.science.kikou
+  - ja.lex.science.yosoku
+  - ja.lex.science.kankyou-hoju
+  - ja.lex.science.tenkan2
+  - ja.lex.science.kisha2
+  - ja.sent.climate-science
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.climate-science-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.science.kikou
+  - ja.lex.science.yosoku
+  - ja.lex.science.kankyou-hoju
+  - ja.lex.science.tenkan2
+  - ja.lex.science.kisha2
+  - ja.sent.climate-science
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.climate-science-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.climate-science
+- id: ja.activity.climate-science-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.ai-society
+goal_id: ja.goal.b2.science-tech-ethics
+title: AI and society
+summary: B2 language for AI and society.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.science.kikai
+  - ja.lex.science.jinkou-chou
+  - ja.lex.science.robo
+  - ja.lex.science.arugo
+  - ja.lex.science.bunseki
+  - ja.sent.ai-society
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.ai-society-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.science.kikai
+  - ja.lex.science.jinkou-chou
+  - ja.lex.science.robo
+  - ja.lex.science.arugo
+  - ja.lex.science.bunseki
+  - ja.sent.ai-society
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.ai-society-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.science.kikai
+  - ja.lex.science.jinkou-chou
+  - ja.lex.science.robo
+  - ja.lex.science.arugo
+  - ja.lex.science.bunseki
+  - ja.sent.ai-society
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.ai-society-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.science.kikai
+  - ja.lex.science.jinkou-chou
+  - ja.lex.science.robo
+  - ja.lex.science.arugo
+  - ja.lex.science.bunseki
+  - ja.sent.ai-society
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.ai-society-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.science.kikai
+  - ja.lex.science.jinkou-chou
+  - ja.lex.science.robo
+  - ja.lex.science.arugo
+  - ja.lex.science.bunseki
+  - ja.sent.ai-society
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.ai-society-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.ai-society
+- id: ja.activity.ai-society-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

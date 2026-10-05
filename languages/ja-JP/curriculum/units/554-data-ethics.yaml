@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.data-ethics
+goal_id: ja.goal.b2.science-tech-ethics
+title: data ethics
+summary: B2 language for data ethics.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.science.zouho
+  - ja.lex.science.kojin
+  - ja.lex.science.jouhou2
+  - ja.lex.science.shakunin
+  - ja.lex.science.poribaishikku
+  - ja.sent.data-ethics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.data-ethics-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.science.zouho
+  - ja.lex.science.kojin
+  - ja.lex.science.jouhou2
+  - ja.lex.science.shakunin
+  - ja.lex.science.poribaishikku
+  - ja.sent.data-ethics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.data-ethics-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.science.zouho
+  - ja.lex.science.kojin
+  - ja.lex.science.jouhou2
+  - ja.lex.science.shakunin
+  - ja.lex.science.poribaishikku
+  - ja.sent.data-ethics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.data-ethics-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.science.zouho
+  - ja.lex.science.kojin
+  - ja.lex.science.jouhou2
+  - ja.lex.science.shakunin
+  - ja.lex.science.poribaishikku
+  - ja.sent.data-ethics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.data-ethics-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.science.zouho
+  - ja.lex.science.kojin
+  - ja.lex.science.jouhou2
+  - ja.lex.science.shakunin
+  - ja.lex.science.poribaishikku
+  - ja.sent.data-ethics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.data-ethics-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.data-ethics
+- id: ja.activity.data-ethics-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
