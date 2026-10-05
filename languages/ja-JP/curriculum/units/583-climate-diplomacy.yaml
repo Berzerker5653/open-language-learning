@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.climate-diplomacy
+goal_id: ja.goal.b2.global-issues
+title: climate diplomacy
+summary: B2 language for climate diplomacy.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.global.kokuren
+  - ja.lex.global.kyouryoku
+  - ja.lex.global.chousei
+  - ja.lex.global.heiwa
+  - ja.lex.global.kyoudou
+  - ja.sent.climate-diplomacy
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.climate-diplomacy-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.global.kokuren
+  - ja.lex.global.kyouryoku
+  - ja.lex.global.chousei
+  - ja.lex.global.heiwa
+  - ja.lex.global.kyoudou
+  - ja.sent.climate-diplomacy
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.climate-diplomacy-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.global.kokuren
+  - ja.lex.global.kyouryoku
+  - ja.lex.global.chousei
+  - ja.lex.global.heiwa
+  - ja.lex.global.kyoudou
+  - ja.sent.climate-diplomacy
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.climate-diplomacy-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.global.kokuren
+  - ja.lex.global.kyouryoku
+  - ja.lex.global.chousei
+  - ja.lex.global.heiwa
+  - ja.lex.global.kyoudou
+  - ja.sent.climate-diplomacy
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.climate-diplomacy-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.global.kokuren
+  - ja.lex.global.kyouryoku
+  - ja.lex.global.chousei
+  - ja.lex.global.heiwa
+  - ja.lex.global.kyoudou
+  - ja.sent.climate-diplomacy
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.climate-diplomacy-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.climate-diplomacy
+- id: ja.activity.climate-diplomacy-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

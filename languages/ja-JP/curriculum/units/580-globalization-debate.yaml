@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.globalization-debate
+goal_id: ja.goal.b2.global-issues
+title: globalization debate
+summary: B2 language for globalization debate.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.global.mushou
+  - ja.lex.global.zei2
+  - ja.lex.global.boeki
+  - ja.lex.global.kyoutei
+  - ja.lex.global.kuiki
+  - ja.sent.globalization-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.globalization-debate-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.global.mushou
+  - ja.lex.global.zei2
+  - ja.lex.global.boeki
+  - ja.lex.global.kyoutei
+  - ja.lex.global.kuiki
+  - ja.sent.globalization-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.globalization-debate-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.global.mushou
+  - ja.lex.global.zei2
+  - ja.lex.global.boeki
+  - ja.lex.global.kyoutei
+  - ja.lex.global.kuiki
+  - ja.sent.globalization-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.globalization-debate-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.global.mushou
+  - ja.lex.global.zei2
+  - ja.lex.global.boeki
+  - ja.lex.global.kyoutei
+  - ja.lex.global.kuiki
+  - ja.sent.globalization-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.globalization-debate-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.global.mushou
+  - ja.lex.global.zei2
+  - ja.lex.global.boeki
+  - ja.lex.global.kyoutei
+  - ja.lex.global.kuiki
+  - ja.sent.globalization-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.globalization-debate-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.globalization-debate
+- id: ja.activity.globalization-debate-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

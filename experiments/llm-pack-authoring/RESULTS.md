@@ -755,3 +755,13 @@ Goal `ja.goal.b2.education-pedagogy` created (+deps edge, +assessment). 10 units
 
 10 units, 50-word `lexicon/edu4.jsonl`, 2 grammar (`b2.ni-kanren-shite`,
 `b2.ni-kagiri`), 8 sentences. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 54 + lexicon kana data fix
+
+Goal `ja.goal.b2.global-issues` created (+deps, +assessment). Units 580-589,
+50-word `lexicon/global.jsonl`, 2 grammar (`b2.ni-jou-shite`, `b2.dake-no-hanwa`).
+**Data fix** (`fix_kana.py`): b47-b54 shards (film2, history, history2, history3,
+society3, society4, science, science2, edu3, edu4, global) had English text in
+`forms`/`readings`; all 350 entries rewritten to hiragana/katakana with correct
+script tags; part_of_speech normalized (n→noun, adj-na→na-adjective, v→verb).
+Score: **7/7**.
