@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.choosing-topic
+goal_id: ja.goal.b1.education-academic
+title: choosing a topic
+summary: B1 language for choosing a topic.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.edu2.sentai
+  - ja.lex.edu2.mondai
+  - ja.lex.edu2.ten
+  - ja.lex.edu2.bunsho
+  - ja.lex.edu2.chushi
+  - ja.sent.topic-choice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.choosing-topic-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.edu2.sentai
+  - ja.lex.edu2.mondai
+  - ja.lex.edu2.ten
+  - ja.lex.edu2.bunsho
+  - ja.lex.edu2.chushi
+  - ja.sent.topic-choice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.choosing-topic-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.edu2.sentai
+  - ja.lex.edu2.mondai
+  - ja.lex.edu2.ten
+  - ja.lex.edu2.bunsho
+  - ja.lex.edu2.chushi
+  - ja.sent.topic-choice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.choosing-topic-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.edu2.sentai
+  - ja.lex.edu2.mondai
+  - ja.lex.edu2.ten
+  - ja.lex.edu2.bunsho
+  - ja.lex.edu2.chushi
+  - ja.sent.topic-choice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.choosing-topic-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.edu2.sentai
+  - ja.lex.edu2.mondai
+  - ja.lex.edu2.ten
+  - ja.lex.edu2.bunsho
+  - ja.lex.edu2.chushi
+  - ja.sent.topic-choice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.choosing-topic-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.topic-choice
+- id: ja.activity.choosing-topic-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

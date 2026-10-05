@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.degree-conversations
+goal_id: ja.goal.b1.education-academic
+title: degree conversations
+summary: B1 language for degree conversations.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.edu2.koyou
+  - ja.lex.edu2.senkyuu
+  - ja.lex.edu2.bunya
+  - ja.lex.edu2.gengou
+  - ja.lex.edu2.senmon
+  - ja.sent.degree-talk
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.degree-conversations-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.edu2.koyou
+  - ja.lex.edu2.senkyuu
+  - ja.lex.edu2.bunya
+  - ja.lex.edu2.gengou
+  - ja.lex.edu2.senmon
+  - ja.sent.degree-talk
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.degree-conversations-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.edu2.koyou
+  - ja.lex.edu2.senkyuu
+  - ja.lex.edu2.bunya
+  - ja.lex.edu2.gengou
+  - ja.lex.edu2.senmon
+  - ja.sent.degree-talk
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.degree-conversations-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.edu2.koyou
+  - ja.lex.edu2.senkyuu
+  - ja.lex.edu2.bunya
+  - ja.lex.edu2.gengou
+  - ja.lex.edu2.senmon
+  - ja.sent.degree-talk
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.degree-conversations-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.edu2.koyou
+  - ja.lex.edu2.senkyuu
+  - ja.lex.edu2.bunya
+  - ja.lex.edu2.gengou
+  - ja.lex.edu2.senmon
+  - ja.sent.degree-talk
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.degree-conversations-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.degree-talk
+- id: ja.activity.degree-conversations-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

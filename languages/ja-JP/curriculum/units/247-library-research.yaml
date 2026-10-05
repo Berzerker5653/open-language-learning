@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.library-research
+goal_id: ja.goal.b1.education-academic
+title: library research
+summary: B1 language for library research.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.edu2.shicho
+  - ja.lex.edu2.kashu
+  - ja.lex.edu2.kashu-sho
+  - ja.lex.edu2.fukushuu
+  - ja.lex.edu2.kenta
+  - ja.sent.library-card
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.library-research-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.edu2.shicho
+  - ja.lex.edu2.kashu
+  - ja.lex.edu2.kashu-sho
+  - ja.lex.edu2.fukushuu
+  - ja.lex.edu2.kenta
+  - ja.sent.library-card
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.library-research-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.edu2.shicho
+  - ja.lex.edu2.kashu
+  - ja.lex.edu2.kashu-sho
+  - ja.lex.edu2.fukushuu
+  - ja.lex.edu2.kenta
+  - ja.sent.library-card
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.library-research-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.edu2.shicho
+  - ja.lex.edu2.kashu
+  - ja.lex.edu2.kashu-sho
+  - ja.lex.edu2.fukushuu
+  - ja.lex.edu2.kenta
+  - ja.sent.library-card
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.library-research-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.edu2.shicho
+  - ja.lex.edu2.kashu
+  - ja.lex.edu2.kashu-sho
+  - ja.lex.edu2.fukushuu
+  - ja.lex.edu2.kenta
+  - ja.sent.library-card
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.library-research-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.library-card
+- id: ja.activity.library-research-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

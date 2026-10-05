@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.academic-email
+goal_id: ja.goal.b1.education-academic
+title: academic email
+summary: B1 language for academic email.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.edu2.mouhibiki
+  - ja.lex.edu2.sanko-bunken
+  - ja.lex.edu2.sakuin
+  - ja.lex.edu2.chukai
+  - ja.lex.edu2.yakuseki
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b1.kedo-keredo
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.academic-email-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.edu2.mouhibiki
+  - ja.lex.edu2.sanko-bunken
+  - ja.lex.edu2.sakuin
+  - ja.lex.edu2.chukai
+  - ja.lex.edu2.yakuseki
+  - ja.grammar.b1.kedo-keredo
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.academic-email-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.edu2.mouhibiki
+  - ja.lex.edu2.sanko-bunken
+  - ja.lex.edu2.sakuin
+  - ja.lex.edu2.chukai
+  - ja.lex.edu2.yakuseki
+  - ja.grammar.b1.kedo-keredo
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.academic-email-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.edu2.mouhibiki
+  - ja.lex.edu2.sanko-bunken
+  - ja.lex.edu2.sakuin
+  - ja.lex.edu2.chukai
+  - ja.lex.edu2.yakuseki
+  - ja.grammar.b1.kedo-keredo
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.academic-email-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.edu2.mouhibiki
+  - ja.lex.edu2.sanko-bunken
+  - ja.lex.edu2.sakuin
+  - ja.lex.edu2.chukai
+  - ja.lex.edu2.yakuseki
+  - ja.grammar.b1.kedo-keredo
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.academic-email-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.academic-email-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

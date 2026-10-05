@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.study-abroad-plans
+goal_id: ja.goal.b1.education-academic
+title: study abroad plans
+summary: B1 language for study abroad plans.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.edu2.ryugaku
+  - ja.lex.edu2.ryugaku-seikatsu
+  - ja.lex.edu2.shukufuku
+  - ja.lex.edu2.homestay
+  - ja.lex.edu2.ryuji
+  - ja.sent.abroad-prep
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.study-abroad-plans-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.edu2.ryugaku
+  - ja.lex.edu2.ryugaku-seikatsu
+  - ja.lex.edu2.shukufuku
+  - ja.lex.edu2.homestay
+  - ja.lex.edu2.ryuji
+  - ja.sent.abroad-prep
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.study-abroad-plans-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.edu2.ryugaku
+  - ja.lex.edu2.ryugaku-seikatsu
+  - ja.lex.edu2.shukufuku
+  - ja.lex.edu2.homestay
+  - ja.lex.edu2.ryuji
+  - ja.sent.abroad-prep
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.study-abroad-plans-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.edu2.ryugaku
+  - ja.lex.edu2.ryugaku-seikatsu
+  - ja.lex.edu2.shukufuku
+  - ja.lex.edu2.homestay
+  - ja.lex.edu2.ryuji
+  - ja.sent.abroad-prep
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.study-abroad-plans-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.edu2.ryugaku
+  - ja.lex.edu2.ryugaku-seikatsu
+  - ja.lex.edu2.shukufuku
+  - ja.lex.edu2.homestay
+  - ja.lex.edu2.ryuji
+  - ja.sent.abroad-prep
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.study-abroad-plans-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.abroad-prep
+- id: ja.activity.study-abroad-plans-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

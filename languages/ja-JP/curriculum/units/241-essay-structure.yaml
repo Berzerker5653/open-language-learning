@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.essay-structure
+goal_id: ja.goal.b1.education-academic
+title: essay structure
+summary: B1 language for essay structure.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.edu2.danshaku
+  - ja.lex.edu2.zensho
+  - ja.lex.edu2.yakku
+  - ja.lex.edu2.ketsuron
+  - ja.lex.edu2.ronshu
+  - ja.sent.paragraph-point
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.essay-structure-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.edu2.danshaku
+  - ja.lex.edu2.zensho
+  - ja.lex.edu2.yakku
+  - ja.lex.edu2.ketsuron
+  - ja.lex.edu2.ronshu
+  - ja.sent.paragraph-point
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.essay-structure-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.edu2.danshaku
+  - ja.lex.edu2.zensho
+  - ja.lex.edu2.yakku
+  - ja.lex.edu2.ketsuron
+  - ja.lex.edu2.ronshu
+  - ja.sent.paragraph-point
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.essay-structure-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.edu2.danshaku
+  - ja.lex.edu2.zensho
+  - ja.lex.edu2.yakku
+  - ja.lex.edu2.ketsuron
+  - ja.lex.edu2.ronshu
+  - ja.sent.paragraph-point
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.essay-structure-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.edu2.danshaku
+  - ja.lex.edu2.zensho
+  - ja.lex.edu2.yakku
+  - ja.lex.edu2.ketsuron
+  - ja.lex.edu2.ronshu
+  - ja.sent.paragraph-point
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.essay-structure-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.paragraph-point
+- id: ja.activity.essay-structure-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

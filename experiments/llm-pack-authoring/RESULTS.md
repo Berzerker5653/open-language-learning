@@ -465,3 +465,9 @@ Goals `ja.goal.b1.work-professional` (complete, 220-234) and
 spans 235-249), 10 units, 50-word `lexicon/edu.jsonl`, 3 grammar
 (`b1.susume-continuity`, `b1.to-iu-toka`, `b1.you-form-volitional`), 8
 sentences, 1 assessment. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 19: B1 units 240-249 (education-academic part 2 — goal complete)
+
+Goal `ja.goal.b1.education-academic` complete (235-249), 10 units,
+50-word `lexicon/edu2.jsonl`, 2 grammar (`b1.kedo-keredo`,
+`b1.rashii-sou-youda`), 8 sentences. Score: **7/7**.
