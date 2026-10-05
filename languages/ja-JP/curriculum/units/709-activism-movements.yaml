@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.709-activism-movements
+goal_id: ja.goal.b2.environment-policy
+title: activism movements
+summary: B2 language for activism movements.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.env3.moyoroshi
+  - ja.lex.env3.shiminundo
+  - ja.lex.env3.katsudou2
+  - ja.lex.env3.mirai2
+  - ja.lex.env3.kokusai2
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-ni-kaete
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.709-activism-movements-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.env3.moyoroshi
+  - ja.lex.env3.shiminundo
+  - ja.lex.env3.katsudou2
+  - ja.lex.env3.mirai2
+  - ja.lex.env3.kokusai2
+  - ja.grammar.b2-ni-kaete
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.709-activism-movements-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.env3.moyoroshi
+  - ja.lex.env3.shiminundo
+  - ja.lex.env3.katsudou2
+  - ja.lex.env3.mirai2
+  - ja.lex.env3.kokusai2
+  - ja.grammar.b2-ni-kaete
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.709-activism-movements-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.env3.moyoroshi
+  - ja.lex.env3.shiminundo
+  - ja.lex.env3.katsudou2
+  - ja.lex.env3.mirai2
+  - ja.lex.env3.kokusai2
+  - ja.grammar.b2-ni-kaete
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.709-activism-movements-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.env3.moyoroshi
+  - ja.lex.env3.shiminundo
+  - ja.lex.env3.katsudou2
+  - ja.lex.env3.mirai2
+  - ja.lex.env3.kokusai2
+  - ja.grammar.b2-ni-kaete
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.709-activism-movements-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.709-activism-movements-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

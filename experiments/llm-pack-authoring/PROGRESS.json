@@ -10,7 +10,7 @@
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
-    "units_next": "700",
-    "notes": "B2: b47-b65 (560-699) 7/7; goals incl urban-life; pack 700 units; next: units 700+ per plan"
+    "units_next": "710",
+    "notes": "B2: b47-b66 (560-709) 7/7; goals incl urban-life, environment-policy; pack 710 units; next: units 710+ per plan"
   }
 }

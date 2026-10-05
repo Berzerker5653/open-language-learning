@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.704-energy-transition
+goal_id: ja.goal.b2.environment-policy
+title: energy transition
+summary: B2 language for energy transition.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.env3.ene2
+  - ja.lex.env3.shifuku
+  - ja.lex.env3.denryoku
+  - ja.lex.env3.seiji
+  - ja.lex.env3.teiki
+  - ja.sent.energy-transition
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.704-energy-transition-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.env3.ene2
+  - ja.lex.env3.shifuku
+  - ja.lex.env3.denryoku
+  - ja.lex.env3.seiji
+  - ja.lex.env3.teiki
+  - ja.sent.energy-transition
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.704-energy-transition-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.env3.ene2
+  - ja.lex.env3.shifuku
+  - ja.lex.env3.denryoku
+  - ja.lex.env3.seiji
+  - ja.lex.env3.teiki
+  - ja.sent.energy-transition
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.704-energy-transition-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.env3.ene2
+  - ja.lex.env3.shifuku
+  - ja.lex.env3.denryoku
+  - ja.lex.env3.seiji
+  - ja.lex.env3.teiki
+  - ja.sent.energy-transition
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.704-energy-transition-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.env3.ene2
+  - ja.lex.env3.shifuku
+  - ja.lex.env3.denryoku
+  - ja.lex.env3.seiji
+  - ja.lex.env3.teiki
+  - ja.sent.energy-transition
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.704-energy-transition-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.energy-transition
+- id: ja.activity.704-energy-transition-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -893,3 +893,9 @@ Units 690-699 (urban-life), 50 words (`lexicon/urban2.jsonl`), 2 grammar
 Goal `ru.goal.a2.connected-messages` created (+2 assessments). Units 200-209,
 50 words (`lexicon/messages2.jsonl`), 2 grammar (`a2.connectors`,
 `a2.reflexive-feelings`), 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 66
+
+Goal `ja.goal.b2.environment-policy` created (+ASSESS +DEP). Units 700-709
+(urban tail + environment start), 51 words (`urban3.jsonl`, `env3.jsonl`), 2 grammar
+(`b2-to-ha`, `b2-ni-kaete`), 8 sentences. Score: **7/7**.

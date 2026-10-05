@@ -4,8 +4,8 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2420  2dda84132085  activities/scenarios/first-meeting.yaml
         1561  6b8655e2f7b6  activities/scenarios/ordering.yaml
         1486  b56884663696  activities/scenarios/shopping.yaml
-       21286  608a09ed9795  assessments/definitions.jsonl
-       54558  6f0c5a32f016  curriculum/goals.yaml
+       21627  2c4a912531b5  assessments/definitions.jsonl
+       55350  df8d09e94ea2  curriculum/goals.yaml
          919  ad3f5f62d1b3  curriculum/units/000-onramp-greeting.yaml
         1514  bd53db6f2cfe  curriculum/units/010-kana-hiragana-vowels-ko.yaml
         1957  c02be8a37693  curriculum/units/011-kana-hiragana-stn.yaml
@@ -669,8 +669,18 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2189  ea86978e8f0d  curriculum/units/697-urban-environment.yaml
         2215  c8d9983bc974  curriculum/units/698-mobility-debate.yaml
         2154  b71a72fb4f35  curriculum/units/699-public-safety.yaml
-       71972  1f6052da8f0b  grammar/concepts.jsonl
-        9647  2483e29982dd  grammar/dependencies.yaml
+        2189  d49dc0f37691  curriculum/units/700-city-culture.yaml
+        2209  a9ca1c48204f  curriculum/units/701-rural-urban-link.yaml
+        2104  b16889b2cb23  curriculum/units/702-urban-essay.yaml
+        2127  50bbd9c3e9e6  curriculum/units/703-climate-policy.yaml
+        2162  16b40bacf5db  curriculum/units/704-energy-transition.yaml
+        2162  1f2ccde59ace  curriculum/units/705-carbon-economics.yaml
+        2117  ccb18e7ccd6a  curriculum/units/706-biodiversity.yaml
+        2167  d7a14d65ed6e  curriculum/units/707-circular-economy.yaml
+        2212  fb53cd59c458  curriculum/units/708-environmental-law.yaml
+        2215  fc8ec4e607a6  curriculum/units/709-activism-movements.yaml
+       72935  e0821e028496  grammar/concepts.jsonl
+        9795  c75812752bf8  grammar/dependencies.yaml
        30369  1401b6e0388e  kanji/entries.jsonl
          485  860cdf8185db  language/identity.yaml
          823  5d72613ab378  language/normalization.yaml
@@ -706,6 +716,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         1837  bf555ef5009f  lexicon/entries.jsonl
        39784  314479e0666c  lexicon/env.jsonl
        20064  8a9f218db815  lexicon/env2.jsonl
+       32165  74b69a0d9188  lexicon/env3.jsonl
        39563  d2a6cae69011  lexicon/film.jsonl
        23391  d2645b95f6b8  lexicon/film2.jsonl
        17645  6e329d0a38e0  lexicon/food-drink.jsonl
@@ -765,6 +776,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
        39787  98f5b32a7c7a  lexicon/travel2.jsonl
         7909  55f23ec753ed  lexicon/urban.jsonl
        39747  a4c4052da975  lexicon/urban2.jsonl
+        8871  4af1e75a8c42  lexicon/urban3.jsonl
        22174  7bb1a6586408  lexicon/verbs.jsonl
         6316  45a79fa9065d  lexicon/weather.jsonl
        39728  2511ed628b3e  lexicon/weather2.jsonl
@@ -777,7 +789,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
-      356353  5c11b093e453  sentences/entries.jsonl
+      361666  12761877cf2d  sentences/entries.jsonl
         3915  e270f808c26e  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml
          539  842cce82e5d5  stories/first-day.yaml

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.703-climate-policy
+goal_id: ja.goal.b2.environment-policy
+title: climate policy
+summary: B2 language for climate policy.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.env3.kikou
+  - ja.lex.env3.seisaku2
+  - ja.lex.env3.cooling
+  - ja.lex.env3.kiki
+  - ja.lex.env3.kokumin
+  - ja.sent.climate-policy
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.703-climate-policy-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.env3.kikou
+  - ja.lex.env3.seisaku2
+  - ja.lex.env3.cooling
+  - ja.lex.env3.kiki
+  - ja.lex.env3.kokumin
+  - ja.sent.climate-policy
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.703-climate-policy-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.env3.kikou
+  - ja.lex.env3.seisaku2
+  - ja.lex.env3.cooling
+  - ja.lex.env3.kiki
+  - ja.lex.env3.kokumin
+  - ja.sent.climate-policy
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.703-climate-policy-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.env3.kikou
+  - ja.lex.env3.seisaku2
+  - ja.lex.env3.cooling
+  - ja.lex.env3.kiki
+  - ja.lex.env3.kokumin
+  - ja.sent.climate-policy
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.703-climate-policy-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.env3.kikou
+  - ja.lex.env3.seisaku2
+  - ja.lex.env3.cooling
+  - ja.lex.env3.kiki
+  - ja.lex.env3.kokumin
+  - ja.sent.climate-policy
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.703-climate-policy-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.climate-policy
+- id: ja.activity.703-climate-policy-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
