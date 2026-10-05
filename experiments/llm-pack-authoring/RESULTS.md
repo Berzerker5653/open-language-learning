@@ -1268,3 +1268,9 @@ Score: **7/7**.
 Units 730-739 (literary extracts and interpretive responses), NEW goal `ru.goal.b2.culture-perspectives`
 (+2 assessments), 50 words (`lexicon/cult.jsonl`), 2 grammar (`b2-na-moy-vzglyad`, `b2-skvoz`),
 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 72
+
+Units 740-749 (historical perspectives in supplied cultural texts), goal `ru.goal.b2.culture-perspectives` (existing),
+50 words (`lexicon/cult2.jsonl`), 2 grammar (`b2-v-epokhu`, `b2-v-opposition`), 10 sentences.
+Score: **7/7**.
