@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
-       35962  7ff6549009f1  assessments/definitions.jsonl
-       52274  e6d647d613b0  curriculum/goals.yaml
+       36789  e9d32678277d  assessments/definitions.jsonl
+       53562  14d9e56947d1  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -450,17 +450,27 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1370  2e4776c104fc  curriculum/units/447-argue4-08.yaml
         1392  b54b2d20a3d9  curriculum/units/448-argue4-09.yaml
         1396  82f65116eb47  curriculum/units/449-argue4-10.yaml
-        1398  2ae6cdc6c3a9  curriculum/units/450-critical-01.yaml
-        1446  e61e8dca32a2  curriculum/units/451-critical-02.yaml
-        1359  edb7d995c217  curriculum/units/452-critical-03.yaml
-        1371  d22df787d6af  curriculum/units/453-critical-04.yaml
-        1402  3b7b3ec9fe82  curriculum/units/454-critical-05.yaml
-        1354  35247e3f9c7f  curriculum/units/455-critical-06.yaml
-        1381  1ee0b825f336  curriculum/units/456-critical-07.yaml
-        1387  aff0d2fe849e  curriculum/units/457-critical-08.yaml
-        1377  d7b4d6ef7e78  curriculum/units/458-critical-09.yaml
-        1409  c3130c8b75a9  curriculum/units/459-critical-10.yaml
-       51129  0050ff664691  grammar/concepts.jsonl
+        1483  7d34e1502db6  curriculum/units/450-critical-01.yaml
+        1531  1e51d47ea744  curriculum/units/451-critical-02.yaml
+        1444  005c913ca968  curriculum/units/452-critical-03.yaml
+        1456  28104f44f69f  curriculum/units/453-critical-04.yaml
+        1487  a6da87fccff9  curriculum/units/454-critical-05.yaml
+        1439  bc326656d3ee  curriculum/units/455-critical-06.yaml
+        1466  7c049a97eaaf  curriculum/units/456-critical-07.yaml
+        1472  c394f4d688a7  curriculum/units/457-critical-08.yaml
+        1462  6517ca0494b7  curriculum/units/458-critical-09.yaml
+        1494  b23b3b09ef00  curriculum/units/459-critical-10.yaml
+        1363  a7286d44389d  curriculum/units/460-critical2-01.yaml
+        1392  22029751f2d4  curriculum/units/461-critical2-02.yaml
+        1322  e8adfd1dfabf  curriculum/units/462-critical2-03.yaml
+        1381  aea121dd336e  curriculum/units/463-critical2-04.yaml
+        1313  bd3c41c17575  curriculum/units/464-critical2-05.yaml
+        1344  2ccec46dfd86  curriculum/units/465-critical2-06.yaml
+        1430  82c4a2acc84d  curriculum/units/466-critical2-07.yaml
+        1416  73e73eee1397  curriculum/units/467-critical2-08.yaml
+        1311  6811c31a1704  curriculum/units/468-critical2-09.yaml
+        1358  6b11fd5d4aed  curriculum/units/469-critical2-10.yaml
+       52063  9d543bcef507  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        19883  88e6a1307edd  lexicon/argue.jsonl
        19764  9c172a07e9a5  lexicon/argue2.jsonl
@@ -470,6 +480,7 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
        21726  cc469700bc35  lexicon/comparisons.jsonl
        19809  7f42219b9698  lexicon/critical.jsonl
+       19668  c1b7b4b9a5a1  lexicon/critical2.jsonl
        19482  89f2317e6bd5  lexicon/culture.jsonl
         3655  dbb5543b101e  lexicon/everyday.jsonl
        22280  a1be61684b79  lexicon/experiences.jsonl
@@ -513,5 +524,5 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-      154357  a0f3f99dceb6  sentences/entries.jsonl
+      157969  3ecea7cddf8f  sentences/entries.jsonl
          391  74babc055676  sources.jsonl

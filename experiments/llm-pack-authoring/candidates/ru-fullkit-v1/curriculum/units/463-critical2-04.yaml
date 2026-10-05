@@ -1,0 +1,46 @@
+id: "ru.unit.b2.critical2-04"
+goal_id: "ru.goal.b2.critical-reading2"
+title: "Bold"
+summary: "дерзкий, робкий, осторожный, сдержанный and настойчивость."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u463-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.critical2.derzkiy",
+        "ru.lex.critical2.robkiy",
+        "ru.lex.critical2.ostorozhnyy",
+        "ru.lex.critical2.sderzhannyy",
+        "ru.lex.critical2.nastoychivost",
+        "ru.sent.b2.u463",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u463-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u463-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u463"]
+  - id: "ru.activity.b2.u463-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Bold: stance with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse дерзкий (bold) with осторожный (cautious)."]
+  target_proficiency: "B2"
+  validation_method: "choice"

@@ -1100,3 +1100,9 @@ Units 440-449 (evaluation and reasoned conclusions), NEW goal `ru.goal.b2.argume
 Units 450-459 (structure and relationships between claims), NEW goal `ru.goal.b2.critical-reading`
 (+2 assessments), 50 words (`lexicon/critical.jsonl`), 2 grammar (`b2-tak-kak`, `b2-ne-tolko-no`),
 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 44
+
+Units 460-469 (stance, implication, rhetorical choices), NEW goal `ru.goal.b2.critical-reading2`
+(+2 assessments), 50 words (`lexicon/critical2.jsonl`), 2 grammar (`b2-imeya-v-vydu`, `b2-podchjorkivayu`),
+10 sentences. Score: **7/7**.
