@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.correspondence-portfolio
+goal_id: ja.goal.b2.formal-correspondence
+title: correspondence portfolio
+summary: B2 language for correspondence portfolio.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.formal2.toukyou
+  - ja.lex.formal2.fuukei
+  - ja.lex.formal2.shashin
+  - ja.lex.formal2.e2
+  - ja.lex.formal2.motsuchi
+  - ja.sent.correspondence-portfolio
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.correspondence-portfolio-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.formal2.toukyou
+  - ja.lex.formal2.fuukei
+  - ja.lex.formal2.shashin
+  - ja.lex.formal2.e2
+  - ja.lex.formal2.motsuchi
+  - ja.sent.correspondence-portfolio
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.correspondence-portfolio-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.formal2.toukyou
+  - ja.lex.formal2.fuukei
+  - ja.lex.formal2.shashin
+  - ja.lex.formal2.e2
+  - ja.lex.formal2.motsuchi
+  - ja.sent.correspondence-portfolio
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.correspondence-portfolio-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.formal2.toukyou
+  - ja.lex.formal2.fuukei
+  - ja.lex.formal2.shashin
+  - ja.lex.formal2.e2
+  - ja.lex.formal2.motsuchi
+  - ja.sent.correspondence-portfolio
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.correspondence-portfolio-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.formal2.toukyou
+  - ja.lex.formal2.fuukei
+  - ja.lex.formal2.shashin
+  - ja.lex.formal2.e2
+  - ja.lex.formal2.motsuchi
+  - ja.sent.correspondence-portfolio
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.correspondence-portfolio-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.correspondence-portfolio
+- id: ja.activity.correspondence-portfolio-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

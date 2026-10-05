@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.editorial-letters
+goal_id: ja.goal.b2.formal-correspondence
+title: editorial letters
+summary: B2 language for editorial letters.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.formal2.biijutsu
+  - ja.lex.formal2.gasaku
+  - ja.lex.formal2.sakuhin
+  - ja.lex.formal2.kanshou
+  - ja.lex.formal2.shiten
+  - ja.sent.editorial-letters
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.editorial-letters-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.formal2.biijutsu
+  - ja.lex.formal2.gasaku
+  - ja.lex.formal2.sakuhin
+  - ja.lex.formal2.kanshou
+  - ja.lex.formal2.shiten
+  - ja.sent.editorial-letters
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.editorial-letters-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.formal2.biijutsu
+  - ja.lex.formal2.gasaku
+  - ja.lex.formal2.sakuhin
+  - ja.lex.formal2.kanshou
+  - ja.lex.formal2.shiten
+  - ja.sent.editorial-letters
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.editorial-letters-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.formal2.biijutsu
+  - ja.lex.formal2.gasaku
+  - ja.lex.formal2.sakuhin
+  - ja.lex.formal2.kanshou
+  - ja.lex.formal2.shiten
+  - ja.sent.editorial-letters
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.editorial-letters-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.formal2.biijutsu
+  - ja.lex.formal2.gasaku
+  - ja.lex.formal2.sakuhin
+  - ja.lex.formal2.kanshou
+  - ja.lex.formal2.shiten
+  - ja.sent.editorial-letters
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.editorial-letters-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.editorial-letters
+- id: ja.activity.editorial-letters-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

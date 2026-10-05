@@ -10,7 +10,7 @@
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
-    "units_next": "620",
-    "notes": "b47-b57 (510-619) 7/7; goals academic-writing (610-611) + formal-correspondence (612-619, prereq b1.work-professional) created; next: units 620+ per plan"
+    "units_next": "630",
+    "notes": "b47-b58 (510-629) 7/7; goal art-design created (628-629, prereq film-analysis); formal-correspondence spans 612-627; next: units 630+ per plan"
   }
 }

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.diplomatic-style
+goal_id: ja.goal.b2.formal-correspondence
+title: diplomatic style
+summary: B2 language for diplomatic style.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.formal2.iansho
+  - ja.lex.formal2.gankajou
+  - ja.lex.formal2.chuuomimai
+  - ja.lex.formal2.keijou
+  - ja.lex.formal2.denpou
+  - ja.sent.diplomatic-style
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.diplomatic-style-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.formal2.iansho
+  - ja.lex.formal2.gankajou
+  - ja.lex.formal2.chuuomimai
+  - ja.lex.formal2.keijou
+  - ja.lex.formal2.denpou
+  - ja.sent.diplomatic-style
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.diplomatic-style-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.formal2.iansho
+  - ja.lex.formal2.gankajou
+  - ja.lex.formal2.chuuomimai
+  - ja.lex.formal2.keijou
+  - ja.lex.formal2.denpou
+  - ja.sent.diplomatic-style
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.diplomatic-style-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.formal2.iansho
+  - ja.lex.formal2.gankajou
+  - ja.lex.formal2.chuuomimai
+  - ja.lex.formal2.keijou
+  - ja.lex.formal2.denpou
+  - ja.sent.diplomatic-style
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.diplomatic-style-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.formal2.iansho
+  - ja.lex.formal2.gankajou
+  - ja.lex.formal2.chuuomimai
+  - ja.lex.formal2.keijou
+  - ja.lex.formal2.denpou
+  - ja.sent.diplomatic-style
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.diplomatic-style-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.diplomatic-style
+- id: ja.activity.diplomatic-style-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

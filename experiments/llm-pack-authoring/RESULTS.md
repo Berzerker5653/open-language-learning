@@ -799,3 +799,9 @@ Goals `ja.goal.b2.academic-writing` + `ja.goal.b2.formal-correspondence` created
 Goal `ru.goal.a2.travel` created (+2 assessments). Units 120-129,
 50 words (`lexicon/travel.jsonl`), 2 grammar (`a2.prepositional-transport`,
 `a2.time-of-departure`), 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 58
+
+Goal `ja.goal.b2.art-design` created (+assess, +deps). Units 620-629,
+50 words (`lexicon/formal2.jsonl`), 2 grammar (`b2-ni-tomonau`, `b2-ni-totte`),
+9 sentences. Score: **7/7**.
