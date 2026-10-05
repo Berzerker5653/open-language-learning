@@ -1070,3 +1070,9 @@ Units 390-399 (organized personal and practical letters), NEW goal `ru.goal.b1.e
 Units 400-409 (paragraphing, cohesion, revision), NEW goal `ru.goal.b1.extended-writing2`
 (+2 assessments), 50 words (`lexicon/writing2.jsonl`), 2 grammar (`b1.krome-togo2`, `b1.drugimi-slovami`),
 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 39
+
+Units 410-419 (positions, claims, argument structure) — B2 band started. NEW goal
+`ru.goal.b2.argumentation` (+2 assessments), 50 words (`lexicon/argue.jsonl`), 2 grammar
+(`b2.ya-schitayu-chto`, `b2.s-drugoy-storony`), 10 sentences. Score: **7/7**.
