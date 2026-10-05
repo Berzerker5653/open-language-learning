@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.758-counterfactual-thinking
+goal_id: ja.goal.b2.abstract-debate
+title: counterfactual thinking
+summary: B2 language for counterfactual thinking.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.abst2.teigen
+  - ja.lex.abst2.taiwa
+  - ja.lex.abst2.haken
+  - ja.lex.abst2.hohou
+  - ja.lex.abst2.tekiyou
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-ni-taishite
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.758-counterfactual-thinking-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.abst2.teigen
+  - ja.lex.abst2.taiwa
+  - ja.lex.abst2.haken
+  - ja.lex.abst2.hohou
+  - ja.lex.abst2.tekiyou
+  - ja.grammar.b2-ni-taishite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.758-counterfactual-thinking-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.abst2.teigen
+  - ja.lex.abst2.taiwa
+  - ja.lex.abst2.haken
+  - ja.lex.abst2.hohou
+  - ja.lex.abst2.tekiyou
+  - ja.grammar.b2-ni-taishite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.758-counterfactual-thinking-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.abst2.teigen
+  - ja.lex.abst2.taiwa
+  - ja.lex.abst2.haken
+  - ja.lex.abst2.hohou
+  - ja.lex.abst2.tekiyou
+  - ja.grammar.b2-ni-taishite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.758-counterfactual-thinking-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.abst2.teigen
+  - ja.lex.abst2.taiwa
+  - ja.lex.abst2.haken
+  - ja.lex.abst2.hohou
+  - ja.lex.abst2.tekiyou
+  - ja.grammar.b2-ni-taishite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.758-counterfactual-thinking-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.758-counterfactual-thinking-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

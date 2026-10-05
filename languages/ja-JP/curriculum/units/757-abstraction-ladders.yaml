@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.757-abstraction-ladders
+goal_id: ja.goal.b2.abstract-debate
+title: abstraction ladders
+summary: B2 language for abstraction ladders.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.abst2.juni2
+  - ja.lex.abst2.chishiki
+  - ja.lex.abst2.ninchi
+  - ja.lex.abst2.bunken
+  - ja.lex.abst2.ronbun
+  - ja.sent.abstraction-ladders
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.757-abstraction-ladders-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.abst2.juni2
+  - ja.lex.abst2.chishiki
+  - ja.lex.abst2.ninchi
+  - ja.lex.abst2.bunken
+  - ja.lex.abst2.ronbun
+  - ja.sent.abstraction-ladders
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.757-abstraction-ladders-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.abst2.juni2
+  - ja.lex.abst2.chishiki
+  - ja.lex.abst2.ninchi
+  - ja.lex.abst2.bunken
+  - ja.lex.abst2.ronbun
+  - ja.sent.abstraction-ladders
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.757-abstraction-ladders-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.abst2.juni2
+  - ja.lex.abst2.chishiki
+  - ja.lex.abst2.ninchi
+  - ja.lex.abst2.bunken
+  - ja.lex.abst2.ronbun
+  - ja.sent.abstraction-ladders
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.757-abstraction-ladders-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.abst2.juni2
+  - ja.lex.abst2.chishiki
+  - ja.lex.abst2.ninchi
+  - ja.lex.abst2.bunken
+  - ja.lex.abst2.ronbun
+  - ja.sent.abstraction-ladders
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.757-abstraction-ladders-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.abstraction-ladders
+- id: ja.activity.757-abstraction-ladders-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

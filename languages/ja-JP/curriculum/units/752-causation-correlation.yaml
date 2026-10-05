@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.752-causation-correlation
+goal_id: ja.goal.b2.abstract-debate
+title: causation correlation
+summary: B2 language for causation correlation.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.abst2.genin
+  - ja.lex.abst2.kankei2
+  - ja.lex.abst2.kurikaeshi
+  - ja.lex.abst2.hannou
+  - ja.lex.abst2.koutei
+  - ja.sent.causation-correlation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.752-causation-correlation-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.abst2.genin
+  - ja.lex.abst2.kankei2
+  - ja.lex.abst2.kurikaeshi
+  - ja.lex.abst2.hannou
+  - ja.lex.abst2.koutei
+  - ja.sent.causation-correlation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.752-causation-correlation-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.abst2.genin
+  - ja.lex.abst2.kankei2
+  - ja.lex.abst2.kurikaeshi
+  - ja.lex.abst2.hannou
+  - ja.lex.abst2.koutei
+  - ja.sent.causation-correlation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.752-causation-correlation-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.abst2.genin
+  - ja.lex.abst2.kankei2
+  - ja.lex.abst2.kurikaeshi
+  - ja.lex.abst2.hannou
+  - ja.lex.abst2.koutei
+  - ja.sent.causation-correlation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.752-causation-correlation-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.abst2.genin
+  - ja.lex.abst2.kankei2
+  - ja.lex.abst2.kurikaeshi
+  - ja.lex.abst2.hannou
+  - ja.lex.abst2.koutei
+  - ja.sent.causation-correlation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.752-causation-correlation-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.causation-correlation
+- id: ja.activity.752-causation-correlation-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

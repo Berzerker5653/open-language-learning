@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.756-scenario-reasoning
+goal_id: ja.goal.b2.abstract-debate
+title: scenario reasoning
+summary: B2 language for scenario reasoning.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.abst2.youken
+  - ja.lex.abst2.koka
+  - ja.lex.abst2.kekka2
+  - ja.lex.abst2.hatten
+  - ja.lex.abst2.kaiketsu
+  - ja.sent.scenario-reasoning
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.756-scenario-reasoning-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.abst2.youken
+  - ja.lex.abst2.koka
+  - ja.lex.abst2.kekka2
+  - ja.lex.abst2.hatten
+  - ja.lex.abst2.kaiketsu
+  - ja.sent.scenario-reasoning
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.756-scenario-reasoning-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.abst2.youken
+  - ja.lex.abst2.koka
+  - ja.lex.abst2.kekka2
+  - ja.lex.abst2.hatten
+  - ja.lex.abst2.kaiketsu
+  - ja.sent.scenario-reasoning
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.756-scenario-reasoning-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.abst2.youken
+  - ja.lex.abst2.koka
+  - ja.lex.abst2.kekka2
+  - ja.lex.abst2.hatten
+  - ja.lex.abst2.kaiketsu
+  - ja.sent.scenario-reasoning
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.756-scenario-reasoning-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.abst2.youken
+  - ja.lex.abst2.koka
+  - ja.lex.abst2.kekka2
+  - ja.lex.abst2.hatten
+  - ja.lex.abst2.kaiketsu
+  - ja.sent.scenario-reasoning
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.756-scenario-reasoning-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.scenario-reasoning
+- id: ja.activity.756-scenario-reasoning-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

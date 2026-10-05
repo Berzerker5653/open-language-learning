@@ -951,3 +951,8 @@ Units 740-749 (culture-identity tail, abstract-debate start), 50 words
 Units 250-259 (service failures, explanatory correspondence), 50 words
 (`lexicon/problems2.jsonl`), 2 grammar (`b1.proshu-requests`, `b1.v-svyazi-s`), 10 sentences,
 new goal `ru.goal.b1.practical-problems` + 2 assessments. Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 71
+
+Units 750-759 (abstract-debate reasoning), 50 words (`lexicon/abst2.jsonl`),
+2 grammar (`b2-ni-taishite`, `b2-to-areba`), 8 sentences. Score: **7/7**.

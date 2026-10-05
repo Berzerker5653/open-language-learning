@@ -719,7 +719,17 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2182  134930d21a53  curriculum/units/747-identity-essay.yaml
         2169  ac6302f5c734  curriculum/units/748-concept-definition.yaml
         2202  f748a6d44a05  curriculum/units/749-assumption-hunting.yaml
-       76840  152b2d61986b  grammar/concepts.jsonl
+        2189  7e25189d2ef9  curriculum/units/750-analogy-critique.yaml
+        2199  462e354cfa86  curriculum/units/751-evidence-evaluation.yaml
+        2269  2c80b76aa9b1  curriculum/units/752-causation-correlation.yaml
+        2289  5aad208f9eda  curriculum/units/753-generalization-limits.yaml
+        2144  4fae9992370c  curriculum/units/754-value-conflict.yaml
+        2244  4dbd436ad17e  curriculum/units/755-stakeholder-analysis.yaml
+        2204  f7970ef52f15  curriculum/units/756-scenario-reasoning.yaml
+        2224  e6d5adfbb5ee  curriculum/units/757-abstraction-ladders.yaml
+        2227  4cf48ebdd63a  curriculum/units/758-counterfactual-thinking.yaml
+        2188  4d4b2739533f  curriculum/units/759-definition-debate.yaml
+       77906  e3094f2dbf3c  grammar/concepts.jsonl
        10241  f755e80bc97e  grammar/dependencies.yaml
        30369  1401b6e0388e  kanji/entries.jsonl
          485  860cdf8185db  language/identity.yaml
@@ -728,6 +738,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         6598  bb8962bf6355  language/phonology.yaml
         2575  479faeb409fe  language/pragmatics.yaml
         8010  7ee05eca3edf  lexicon/abst.jsonl
+       39778  579da0901b3d  lexicon/abst2.jsonl
        24031  c120ccee4120  lexicon/academic.jsonl
        40245  a603743d054f  lexicon/academic2.jsonl
        16963  b18c24cb909d  lexicon/adjectives.jsonl
@@ -836,7 +847,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
-      382974  49ca2efd269d  sentences/entries.jsonl
+      388132  f514e79f0cb4  sentences/entries.jsonl
         3915  e270f808c26e  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml
          539  842cce82e5d5  stories/first-day.yaml

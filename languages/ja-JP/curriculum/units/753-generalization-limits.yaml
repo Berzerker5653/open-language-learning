@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.753-generalization-limits
+goal_id: ja.goal.b2.abstract-debate
+title: generalization limits
+summary: B2 language for generalization limits.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.abst2.gaisetsu
+  - ja.lex.abst2.shuuyou
+  - ja.lex.abst2.genkai
+  - ja.lex.abst2.yuukyuu
+  - ja.lex.abst2.betsubetsu
+  - ja.sent.generalization-limits
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.753-generalization-limits-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.abst2.gaisetsu
+  - ja.lex.abst2.shuuyou
+  - ja.lex.abst2.genkai
+  - ja.lex.abst2.yuukyuu
+  - ja.lex.abst2.betsubetsu
+  - ja.sent.generalization-limits
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.753-generalization-limits-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.abst2.gaisetsu
+  - ja.lex.abst2.shuuyou
+  - ja.lex.abst2.genkai
+  - ja.lex.abst2.yuukyuu
+  - ja.lex.abst2.betsubetsu
+  - ja.sent.generalization-limits
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.753-generalization-limits-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.abst2.gaisetsu
+  - ja.lex.abst2.shuuyou
+  - ja.lex.abst2.genkai
+  - ja.lex.abst2.yuukyuu
+  - ja.lex.abst2.betsubetsu
+  - ja.sent.generalization-limits
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.753-generalization-limits-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.abst2.gaisetsu
+  - ja.lex.abst2.shuuyou
+  - ja.lex.abst2.genkai
+  - ja.lex.abst2.yuukyuu
+  - ja.lex.abst2.betsubetsu
+  - ja.sent.generalization-limits
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.753-generalization-limits-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.generalization-limits
+- id: ja.activity.753-generalization-limits-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

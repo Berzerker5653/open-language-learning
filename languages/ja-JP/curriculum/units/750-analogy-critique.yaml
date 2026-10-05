@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.750-analogy-critique
+goal_id: ja.goal.b2.abstract-debate
+title: analogy critique
+summary: B2 language for analogy critique.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.abst2.hikaku
+  - ja.lex.abst2.kosaten
+  - ja.lex.abst2.setsuzoku
+  - ja.lex.abst2.tenkan
+  - ja.lex.abst2.risu3
+  - ja.sent.analogy-critique
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.750-analogy-critique-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.abst2.hikaku
+  - ja.lex.abst2.kosaten
+  - ja.lex.abst2.setsuzoku
+  - ja.lex.abst2.tenkan
+  - ja.lex.abst2.risu3
+  - ja.sent.analogy-critique
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.750-analogy-critique-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.abst2.hikaku
+  - ja.lex.abst2.kosaten
+  - ja.lex.abst2.setsuzoku
+  - ja.lex.abst2.tenkan
+  - ja.lex.abst2.risu3
+  - ja.sent.analogy-critique
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.750-analogy-critique-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.abst2.hikaku
+  - ja.lex.abst2.kosaten
+  - ja.lex.abst2.setsuzoku
+  - ja.lex.abst2.tenkan
+  - ja.lex.abst2.risu3
+  - ja.sent.analogy-critique
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.750-analogy-critique-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.abst2.hikaku
+  - ja.lex.abst2.kosaten
+  - ja.lex.abst2.setsuzoku
+  - ja.lex.abst2.tenkan
+  - ja.lex.abst2.risu3
+  - ja.sent.analogy-critique
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.750-analogy-critique-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.analogy-critique
+- id: ja.activity.750-analogy-critique-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.759-definition-debate
+goal_id: ja.goal.b2.abstract-debate
+title: definition debate
+summary: B2 language for definition debate.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.abst2.ronso2
+  - ja.lex.abst2.mondai2
+  - ja.lex.abst2.kenkyu2
+  - ja.lex.abst2.shiryou3
+  - ja.lex.abst2.koutei
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-to-areba
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.759-definition-debate-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.abst2.ronso2
+  - ja.lex.abst2.mondai2
+  - ja.lex.abst2.kenkyu2
+  - ja.lex.abst2.shiryou3
+  - ja.lex.abst2.koutei
+  - ja.grammar.b2-to-areba
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.759-definition-debate-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.abst2.ronso2
+  - ja.lex.abst2.mondai2
+  - ja.lex.abst2.kenkyu2
+  - ja.lex.abst2.shiryou3
+  - ja.lex.abst2.koutei
+  - ja.grammar.b2-to-areba
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.759-definition-debate-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.abst2.ronso2
+  - ja.lex.abst2.mondai2
+  - ja.lex.abst2.kenkyu2
+  - ja.lex.abst2.shiryou3
+  - ja.lex.abst2.koutei
+  - ja.grammar.b2-to-areba
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.759-definition-debate-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.abst2.ronso2
+  - ja.lex.abst2.mondai2
+  - ja.lex.abst2.kenkyu2
+  - ja.lex.abst2.shiryou3
+  - ja.lex.abst2.koutei
+  - ja.grammar.b2-to-areba
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.759-definition-debate-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.759-definition-debate-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

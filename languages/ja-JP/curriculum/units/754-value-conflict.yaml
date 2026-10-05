@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.754-value-conflict
+goal_id: ja.goal.b2.abstract-debate
+title: value conflict
+summary: B2 language for value conflict.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.abst2.kachi6
+  - ja.lex.abst2.taisha
+  - ja.lex.abst2.keni
+  - ja.lex.abst2.shikaku
+  - ja.lex.abst2.hantai6
+  - ja.sent.value-conflict
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.754-value-conflict-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.abst2.kachi6
+  - ja.lex.abst2.taisha
+  - ja.lex.abst2.keni
+  - ja.lex.abst2.shikaku
+  - ja.lex.abst2.hantai6
+  - ja.sent.value-conflict
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.754-value-conflict-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.abst2.kachi6
+  - ja.lex.abst2.taisha
+  - ja.lex.abst2.keni
+  - ja.lex.abst2.shikaku
+  - ja.lex.abst2.hantai6
+  - ja.sent.value-conflict
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.754-value-conflict-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.abst2.kachi6
+  - ja.lex.abst2.taisha
+  - ja.lex.abst2.keni
+  - ja.lex.abst2.shikaku
+  - ja.lex.abst2.hantai6
+  - ja.sent.value-conflict
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.754-value-conflict-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.abst2.kachi6
+  - ja.lex.abst2.taisha
+  - ja.lex.abst2.keni
+  - ja.lex.abst2.shikaku
+  - ja.lex.abst2.hantai6
+  - ja.sent.value-conflict
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.754-value-conflict-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.value-conflict
+- id: ja.activity.754-value-conflict-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

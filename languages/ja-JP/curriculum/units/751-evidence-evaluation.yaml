@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.751-evidence-evaluation
+goal_id: ja.goal.b2.abstract-debate
+title: evidence evaluation
+summary: B2 language for evidence evaluation.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.abst2.shoko
+  - ja.lex.abst2.chosa
+  - ja.lex.abst2.kenji
+  - ja.lex.abst2.shimei2
+  - ja.lex.abst2.kagi
+  - ja.sent.evidence-evaluation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.751-evidence-evaluation-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.abst2.shoko
+  - ja.lex.abst2.chosa
+  - ja.lex.abst2.kenji
+  - ja.lex.abst2.shimei2
+  - ja.lex.abst2.kagi
+  - ja.sent.evidence-evaluation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.751-evidence-evaluation-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.abst2.shoko
+  - ja.lex.abst2.chosa
+  - ja.lex.abst2.kenji
+  - ja.lex.abst2.shimei2
+  - ja.lex.abst2.kagi
+  - ja.sent.evidence-evaluation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.751-evidence-evaluation-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.abst2.shoko
+  - ja.lex.abst2.chosa
+  - ja.lex.abst2.kenji
+  - ja.lex.abst2.shimei2
+  - ja.lex.abst2.kagi
+  - ja.sent.evidence-evaluation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.751-evidence-evaluation-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.abst2.shoko
+  - ja.lex.abst2.chosa
+  - ja.lex.abst2.kenji
+  - ja.lex.abst2.shimei2
+  - ja.lex.abst2.kagi
+  - ja.sent.evidence-evaluation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.751-evidence-evaluation-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.evidence-evaluation
+- id: ja.activity.751-evidence-evaluation-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
