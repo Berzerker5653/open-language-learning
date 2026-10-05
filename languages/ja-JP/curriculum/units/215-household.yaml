@@ -1,0 +1,82 @@
+# ai-assisted draft unit (Mode B A2 daily-admin); content refs are pack data; qualified review pending.
+id: ja.unit.admin-household
+goal_id: ja.goal.a2.daily-admin
+title: Household
+summary: Household ledger, receipt, help, live.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.admin.kakeibo
+  - ja.lex.admin.denpyou
+  - ja.lex.admin.tetsudai
+  - ja.lex.admin.kurasu
+  - ja.lex.admin.seikatsu-suru
+  - ja.sent.household-ledger
+  - ja.sent.keep-receipt
+  allowed_grammar:
+  - ja.grammar.particle.ni-destination
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.admin-household-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.admin.kakeibo
+  - ja.lex.admin.denpyou
+  - ja.lex.admin.tetsudai
+  - ja.lex.admin.kurasu
+  - ja.lex.admin.seikatsu-suru
+  - ja.sent.household-ledger
+  - ja.sent.keep-receipt
+  - ja.sent.household-ledger
+  - ja.sent.keep-receipt
+- id: ja.activity.admin-household-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.admin.kakeibo
+  - ja.lex.admin.denpyou
+  - ja.lex.admin.tetsudai
+  - ja.lex.admin.kurasu
+  - ja.lex.admin.seikatsu-suru
+  - ja.sent.household-ledger
+  - ja.sent.keep-receipt
+- id: ja.activity.admin-household-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.admin.kakeibo
+  - ja.lex.admin.denpyou
+  - ja.lex.admin.tetsudai
+  - ja.lex.admin.kurasu
+  - ja.lex.admin.seikatsu-suru
+  - ja.sent.household-ledger
+  - ja.sent.keep-receipt
+- id: ja.activity.admin-household-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.admin.kakeibo
+  - ja.lex.admin.denpyou
+  - ja.lex.admin.tetsudai
+  - ja.lex.admin.kurasu
+  - ja.lex.admin.seikatsu-suru
+  - ja.sent.household-ledger
+  - ja.sent.keep-receipt
+- id: ja.activity.admin-household-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.household-ledger
+- id: ja.activity.admin-household-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.keep-receipt

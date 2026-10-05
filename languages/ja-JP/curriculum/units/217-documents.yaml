@@ -1,0 +1,58 @@
+# ai-assisted draft unit (Mode B A2 daily-admin); content refs are pack data; qualified review pending.
+id: ja.unit.admin-documents
+goal_id: ja.goal.a2.daily-admin
+title: Documents
+summary: Identification, proof, certificate, certificate.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.admin.mibungou
+  - ja.lex.admin.shoumei
+  - ja.lex.admin.shoumei-sho
+  - ja.lex.admin.koseki
+  - ja.lex.admin.inkan-shou
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.admin-documents-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.admin.mibungou
+  - ja.lex.admin.shoumei
+  - ja.lex.admin.shoumei-sho
+  - ja.lex.admin.koseki
+  - ja.lex.admin.inkan-shou
+- id: ja.activity.admin-documents-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.admin.mibungou
+  - ja.lex.admin.shoumei
+  - ja.lex.admin.shoumei-sho
+  - ja.lex.admin.koseki
+  - ja.lex.admin.inkan-shou
+- id: ja.activity.admin-documents-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.admin.mibungou
+  - ja.lex.admin.shoumei
+  - ja.lex.admin.shoumei-sho
+  - ja.lex.admin.koseki
+  - ja.lex.admin.inkan-shou
+- id: ja.activity.admin-documents-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.admin.mibungou
+  - ja.lex.admin.shoumei
+  - ja.lex.admin.shoumei-sho
+  - ja.lex.admin.koseki
+  - ja.lex.admin.inkan-shou

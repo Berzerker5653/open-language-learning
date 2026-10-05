@@ -1,0 +1,82 @@
+# ai-assisted draft unit (Mode B A2 daily-admin); content refs are pack data; qualified review pending.
+id: ja.unit.admin-appointments
+goal_id: ja.goal.a2.daily-admin
+title: Appointments
+summary: Reservation, reservation time, schedule table.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.admin.yoyaku
+  - ja.lex.admin.yoyaku-jima
+  - ja.lex.admin.yotei-hyou
+  - ja.lex.admin.nittei
+  - ja.lex.admin.katei-nittei
+  - ja.sent.make-appointment
+  - ja.sent.daily-schedule
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.admin-appointments-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.admin.yoyaku
+  - ja.lex.admin.yoyaku-jima
+  - ja.lex.admin.yotei-hyou
+  - ja.lex.admin.nittei
+  - ja.lex.admin.katei-nittei
+  - ja.sent.make-appointment
+  - ja.sent.daily-schedule
+  - ja.sent.make-appointment
+  - ja.sent.daily-schedule
+- id: ja.activity.admin-appointments-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.admin.yoyaku
+  - ja.lex.admin.yoyaku-jima
+  - ja.lex.admin.yotei-hyou
+  - ja.lex.admin.nittei
+  - ja.lex.admin.katei-nittei
+  - ja.sent.make-appointment
+  - ja.sent.daily-schedule
+- id: ja.activity.admin-appointments-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.admin.yoyaku
+  - ja.lex.admin.yoyaku-jima
+  - ja.lex.admin.yotei-hyou
+  - ja.lex.admin.nittei
+  - ja.lex.admin.katei-nittei
+  - ja.sent.make-appointment
+  - ja.sent.daily-schedule
+- id: ja.activity.admin-appointments-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.admin.yoyaku
+  - ja.lex.admin.yoyaku-jima
+  - ja.lex.admin.yotei-hyou
+  - ja.lex.admin.nittei
+  - ja.lex.admin.katei-nittei
+  - ja.sent.make-appointment
+  - ja.sent.daily-schedule
+- id: ja.activity.admin-appointments-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.make-appointment
+- id: ja.activity.admin-appointments-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.daily-schedule

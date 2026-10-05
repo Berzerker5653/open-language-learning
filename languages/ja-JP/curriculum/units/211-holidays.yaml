@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 daily-admin); content refs are pack data; qualified review pending.
+id: ja.unit.admin-holidays
+goal_id: ja.goal.a2.daily-admin
+title: Holidays
+summary: Holiday, national holiday, market.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.admin.shukujitsu
+  - ja.lex.admin.kinen-bi
+  - ja.lex.admin.maichi
+  - ja.lex.admin.omawari
+  - ja.lex.admin.tetsudai
+  - ja.sent.holiday-plan
+  allowed_grammar:
+  - ja.grammar.particle.ni-destination
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.admin-holidays-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.admin.shukujitsu
+  - ja.lex.admin.kinen-bi
+  - ja.lex.admin.maichi
+  - ja.lex.admin.omawari
+  - ja.lex.admin.tetsudai
+  - ja.sent.holiday-plan
+  - ja.sent.holiday-plan
+- id: ja.activity.admin-holidays-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.admin.shukujitsu
+  - ja.lex.admin.kinen-bi
+  - ja.lex.admin.maichi
+  - ja.lex.admin.omawari
+  - ja.lex.admin.tetsudai
+  - ja.sent.holiday-plan
+- id: ja.activity.admin-holidays-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.admin.shukujitsu
+  - ja.lex.admin.kinen-bi
+  - ja.lex.admin.maichi
+  - ja.lex.admin.omawari
+  - ja.lex.admin.tetsudai
+  - ja.sent.holiday-plan
+- id: ja.activity.admin-holidays-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.admin.shukujitsu
+  - ja.lex.admin.kinen-bi
+  - ja.lex.admin.maichi
+  - ja.lex.admin.omawari
+  - ja.lex.admin.tetsudai
+  - ja.sent.holiday-plan
+- id: ja.activity.admin-holidays-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.holiday-plan

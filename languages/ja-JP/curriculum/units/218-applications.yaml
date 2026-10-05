@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 daily-admin); content refs are pack data; qualified review pending.
+id: ja.unit.admin-applications
+goal_id: ja.goal.a2.daily-admin
+title: Applications
+summary: Registration, notification, application, application form, apply.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.admin.todoke
+  - ja.lex.admin.todoke-sho
+  - ja.lex.admin.shinsei
+  - ja.lex.admin.shinsei-sho
+  - ja.lex.admin.shinsei-suru
+  - ja.sent.apply-form
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.admin-applications-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.admin.todoke
+  - ja.lex.admin.todoke-sho
+  - ja.lex.admin.shinsei
+  - ja.lex.admin.shinsei-sho
+  - ja.lex.admin.shinsei-suru
+  - ja.sent.apply-form
+  - ja.sent.apply-form
+- id: ja.activity.admin-applications-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.admin.todoke
+  - ja.lex.admin.todoke-sho
+  - ja.lex.admin.shinsei
+  - ja.lex.admin.shinsei-sho
+  - ja.lex.admin.shinsei-suru
+  - ja.sent.apply-form
+- id: ja.activity.admin-applications-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.admin.todoke
+  - ja.lex.admin.todoke-sho
+  - ja.lex.admin.shinsei
+  - ja.lex.admin.shinsei-sho
+  - ja.lex.admin.shinsei-suru
+  - ja.sent.apply-form
+- id: ja.activity.admin-applications-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.admin.todoke
+  - ja.lex.admin.todoke-sho
+  - ja.lex.admin.shinsei
+  - ja.lex.admin.shinsei-sho
+  - ja.lex.admin.shinsei-suru
+  - ja.sent.apply-form
+- id: ja.activity.admin-applications-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.apply-form

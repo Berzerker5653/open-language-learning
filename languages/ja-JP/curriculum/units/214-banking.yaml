@@ -1,0 +1,70 @@
+# ai-assisted draft unit (Mode B A2 daily-admin); content refs are pack data; qualified review pending.
+id: ja.unit.admin-banking
+goal_id: ja.goal.a2.daily-admin
+title: Banking
+summary: Transaction, bankbook, calculation, budget.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.admin.torihiki
+  - ja.lex.admin.tsuuka-chou
+  - ja.lex.admin.kaisan
+  - ja.lex.admin.yosan
+  - ja.lex.admin.seisan
+  - ja.sent.check-balance
+  allowed_grammar:
+  - ja.grammar.particle.de-means
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.admin-banking-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.admin.torihiki
+  - ja.lex.admin.tsuuka-chou
+  - ja.lex.admin.kaisan
+  - ja.lex.admin.yosan
+  - ja.lex.admin.seisan
+  - ja.sent.check-balance
+  - ja.sent.check-balance
+- id: ja.activity.admin-banking-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.admin.torihiki
+  - ja.lex.admin.tsuuka-chou
+  - ja.lex.admin.kaisan
+  - ja.lex.admin.yosan
+  - ja.lex.admin.seisan
+  - ja.sent.check-balance
+- id: ja.activity.admin-banking-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.admin.torihiki
+  - ja.lex.admin.tsuuka-chou
+  - ja.lex.admin.kaisan
+  - ja.lex.admin.yosan
+  - ja.lex.admin.seisan
+  - ja.sent.check-balance
+- id: ja.activity.admin-banking-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.admin.torihiki
+  - ja.lex.admin.tsuuka-chou
+  - ja.lex.admin.kaisan
+  - ja.lex.admin.yosan
+  - ja.lex.admin.seisan
+  - ja.sent.check-balance
+- id: ja.activity.admin-banking-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.check-balance

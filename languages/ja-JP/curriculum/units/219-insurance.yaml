@@ -1,0 +1,82 @@
+# ai-assisted draft unit (Mode B A2 daily-admin); content refs are pack data; qualified review pending.
+id: ja.unit.admin-insurance
+goal_id: ja.goal.a2.daily-admin
+title: Insurance
+summary: Health insurance, pension, insurance certificate, address registration.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.admin.kenkou-hoken
+  - ja.lex.admin.nenkin
+  - ja.lex.admin.hoken-jo
+  - ja.lex.admin.jushou-todoke
+  - ja.lex.admin.yaku-wari
+  - ja.sent.insurance-card
+  - ja.sent.address-registration
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.admin-insurance-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.admin.kenkou-hoken
+  - ja.lex.admin.nenkin
+  - ja.lex.admin.hoken-jo
+  - ja.lex.admin.jushou-todoke
+  - ja.lex.admin.yaku-wari
+  - ja.sent.insurance-card
+  - ja.sent.address-registration
+  - ja.sent.insurance-card
+  - ja.sent.address-registration
+- id: ja.activity.admin-insurance-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.admin.kenkou-hoken
+  - ja.lex.admin.nenkin
+  - ja.lex.admin.hoken-jo
+  - ja.lex.admin.jushou-todoke
+  - ja.lex.admin.yaku-wari
+  - ja.sent.insurance-card
+  - ja.sent.address-registration
+- id: ja.activity.admin-insurance-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.admin.kenkou-hoken
+  - ja.lex.admin.nenkin
+  - ja.lex.admin.hoken-jo
+  - ja.lex.admin.jushou-todoke
+  - ja.lex.admin.yaku-wari
+  - ja.sent.insurance-card
+  - ja.sent.address-registration
+- id: ja.activity.admin-insurance-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.admin.kenkou-hoken
+  - ja.lex.admin.nenkin
+  - ja.lex.admin.hoken-jo
+  - ja.lex.admin.jushou-todoke
+  - ja.lex.admin.yaku-wari
+  - ja.sent.insurance-card
+  - ja.sent.address-registration
+- id: ja.activity.admin-insurance-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.insurance-card
+- id: ja.activity.admin-insurance-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.address-registration

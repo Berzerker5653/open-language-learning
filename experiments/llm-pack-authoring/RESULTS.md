@@ -442,3 +442,11 @@ units, 50-word `lexicon/sports.jsonl`, 1 grammar
 Goal `ja.goal.a2.relationships` (prereq sports-fitness, mirrored), 10
 units, 50-word `lexicon/relationships.jsonl`, 1 grammar
 (`particle.youni-versus-to`), 9 sentences, 1 assessment. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 16: A2 units 210-219 (daily-admin) — A2 BAND COMPLETE
+
+Goal `ja.goal.a2.daily-admin` (prereq relationships, mirrored), 10
+units, 50-word `lexicon/admin.jsonl`, 10 sentences (A2 grammar quota
+consumed), 1 assessment. Score: **7/7**. A2 extension complete: 100
+units (120-219), 10 goals, 500 new words, 15 grammar, 80 sentences,
+10 assessments. Next: B1 220-414.

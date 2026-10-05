@@ -1079,3 +1079,35 @@ goals:
       tool: omp
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
+  - id: ja.goal.a2.daily-admin
+    description: 'Handle daily administration: appointments, schedules, payments,
+      applications, and certificates using confirmation and change words.'
+    band: A2
+    framework_refs: []
+    contexts:
+    - ja.situation.directions
+    modalities:
+    - listening
+    - speaking
+    - reading
+    - writing
+    prerequisites:
+    - target: ja.goal.a2.relationships
+      dimension: grammar-controlled
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.lex.admin.yoyaku
+    - ja.lex.admin.shinsei
+    assessment_ids:
+    - ja.assess.daily-admin
+    transfer_required: true
+    sources:
+    - jf-standard
+    - ai-drafted-extension
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next-iq3_s
+      date: '2026-10-04'
