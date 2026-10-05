@@ -36,3 +36,6 @@ local-data/
 .idea/
 .vscode/
 tests/performance/results/
+
+# Scratch / external review data (not for commit)
+tmp/
