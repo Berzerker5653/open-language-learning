@@ -1172,3 +1172,9 @@ Units 560-569 (findings, interpretations, and discussion), NEW goal `ru.goal.b2.
 Units 570-579 (professional requests and correspondence), NEW goal `ru.goal.b2.professional-writing`
 (+2 assessments), 50 words (`lexicon/prof.jsonl`), 2 grammar (`b2-proshu`, `b2-v-svyazi-s2`),
 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 56
+
+Units 580-589 (proposals, benefits, and constraints), goal `ru.goal.b2.professional-writing` (existing),
+50 words (`lexicon/prof2.jsonl`), 2 grammar (`b2-predlagaem`, `b2-pri-uslovii`), 10 sentences.
+Score: **7/7**.
