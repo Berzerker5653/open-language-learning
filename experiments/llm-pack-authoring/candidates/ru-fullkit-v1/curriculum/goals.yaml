@@ -997,3 +997,42 @@ goals:
       model: "strata/qwen3.8-flash-next-iq3_s"
       date: "2026-10-05"
       notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.b1.learning-work"
+    description: "Talk about learning methods, progress, and work decisions."
+    band: "B1"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - {
+          target: "ru.goal.b1.practical-problems",
+          dimension: "comprehension-reading",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.b1.narration",
+          dimension: "comprehension-reading",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.on-ramp.everyday",
+          dimension: "recall-meaning",
+          required_state: "independent",
+          strength: "hard",
+        }
+    required_concepts:
+      [
+        "ru.grammar.b1.chtoby-goals",
+        "ru.grammar.b1.reshit-vybrat",
+        "ru.grammar.on-ramp.zero-present-copula",
+      ]
+    assessment_ids: ["ru.assess.b1.learning-work-reading", "ru.assess.b1.learning-work-writing"]
+    transfer_required: false
+    sources: ["ru-original"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "omp"
+      model: "strata/qwen3.8-flash-next-iq3_s"
+      date: "2026-10-05"
+      notes: "ai-drafted; needs dictionary sourcing and human review"

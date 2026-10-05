@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
-       23452  804dd110b6f5  assessments/definitions.jsonl
-       33404  ae5ae8d906ee  curriculum/goals.yaml
+       24261  ec83e1dd67ae  assessments/definitions.jsonl
+       34487  31f8ae7eddb3  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -260,17 +260,27 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1476  6ed1728c83ef  curriculum/units/257-service-problems-08.yaml
         1479  6d37ed5749d9  curriculum/units/258-service-problems-09.yaml
         1542  d09bae9d33bc  curriculum/units/259-service-problems-10.yaml
-        1343  8fdc319a28d8  curriculum/units/260-housing-problems-01.yaml
-        1328  f0f0fe9fe8b9  curriculum/units/261-housing-problems-02.yaml
-        1333  6a21461cb960  curriculum/units/262-housing-problems-03.yaml
-        1321  363a64f9bfb7  curriculum/units/263-housing-problems-04.yaml
-        1339  e2104a560a70  curriculum/units/264-housing-problems-05.yaml
-        1336  06e3553181fc  curriculum/units/265-housing-problems-06.yaml
-        1323  ff3912289b27  curriculum/units/266-housing-problems-07.yaml
-        1340  381bb703192b  curriculum/units/267-housing-problems-08.yaml
-        1366  df5ac85c5a39  curriculum/units/268-housing-problems-09.yaml
-        1334  768fdd1f23f8  curriculum/units/269-housing-problems-10.yaml
-       32922  04480fd67fac  grammar/concepts.jsonl
+        1428  395d6ef61542  curriculum/units/260-housing-problems-01.yaml
+        1413  de9d91e395af  curriculum/units/261-housing-problems-02.yaml
+        1418  a34706ddeb3e  curriculum/units/262-housing-problems-03.yaml
+        1406  ad2283ae9dc6  curriculum/units/263-housing-problems-04.yaml
+        1424  d2f051d7e72a  curriculum/units/264-housing-problems-05.yaml
+        1421  aa567b314e8a  curriculum/units/265-housing-problems-06.yaml
+        1408  de536b554d28  curriculum/units/266-housing-problems-07.yaml
+        1425  37128fe2b2bb  curriculum/units/267-housing-problems-08.yaml
+        1451  47b1b7c93570  curriculum/units/268-housing-problems-09.yaml
+        1419  9f3ab430e3c0  curriculum/units/269-housing-problems-10.yaml
+        1404  d8d561f52abd  curriculum/units/270-learning-work-01.yaml
+        1359  49f071ff0747  curriculum/units/271-learning-work-02.yaml
+        1327  cef1b9d33043  curriculum/units/272-learning-work-03.yaml
+        1351  0c667ccb51d8  curriculum/units/273-learning-work-04.yaml
+        1345  8b6e7ca820be  curriculum/units/274-learning-work-05.yaml
+        1324  eb8d0a555bc2  curriculum/units/275-learning-work-06.yaml
+        1378  b1a53e75c476  curriculum/units/276-learning-work-07.yaml
+        1419  e95f70e03b2d  curriculum/units/277-learning-work-08.yaml
+        1388  8466e3a71a0f  curriculum/units/278-learning-work-09.yaml
+        1352  98b1796b2dfd  curriculum/units/279-learning-work-10.yaml
+       33923  15bb4d2900ef  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        21189  03a4503c7371  lexicon/city.jsonl
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
@@ -283,6 +293,7 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
        20917  300574a2724b  lexicon/home.jsonl
        19156  519760247f8a  lexicon/housing.jsonl
        21889  4721e0675b0c  lexicon/instructions.jsonl
+       19680  b1a6bd161e81  lexicon/learning.jsonl
        21605  e163676f7140  lexicon/messages.jsonl
        21843  8199231c9f6f  lexicon/messages2.jsonl
        21791  a189f555f672  lexicon/narration.jsonl
@@ -304,5 +315,5 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-       85067  31a004dfd568  sentences/entries.jsonl
+       88724  7d2b3132f5ae  sentences/entries.jsonl
          391  74babc055676  sources.jsonl

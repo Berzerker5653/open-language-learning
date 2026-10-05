@@ -973,3 +973,9 @@ Units 260-269 (housing and community problems), 50 words (`lexicon/housing.jsonl
 Units 770-779 (nuance-register tail, humor-wordplay start), 50 words
 (`lexicon/reg2.jsonl`, `lexicon/play1.jsonl`), 2 grammar (`b2-ni-shite-wa`, `b2-to-ieba`), 8 sentences,
 new goal `ja.goal.b2.humor-wordplay` + assessment + DEP edge. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 25
+
+Units 270-279 (learning methods, progress, decisions), 50 words (`lexicon/learning.jsonl`),
+2 grammar (`b1.chtoby-goals`, `b1.reshit-vybrat`), 10 sentences,
+new goal `ru.goal.b1.learning-work` + 2 assessments. Score: **7/7**.
