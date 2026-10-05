@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
-       30145  6977d3670c72  assessments/definitions.jsonl
-       43403  ed29475c0c2c  curriculum/goals.yaml
+       30963  e41c8f28acfb  assessments/definitions.jsonl
+       44689  3859bc52f653  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -380,17 +380,27 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1472  45aa13a7532e  curriculum/units/377-future-08.yaml
         1406  845cbbdaf595  curriculum/units/378-future-09.yaml
         1467  ef3da97c2f90  curriculum/units/379-future-10.yaml
-        1368  88141dfb1fb8  curriculum/units/380-future2-01.yaml
-        1388  ce5d803d1062  curriculum/units/381-future2-02.yaml
-        1368  d86bc05f5533  curriculum/units/382-future2-03.yaml
-        1393  d5eb3608676a  curriculum/units/383-future2-04.yaml
-        1392  f2c6cc50ac51  curriculum/units/384-future2-05.yaml
-        1304  552fd9aa52f8  curriculum/units/385-future2-06.yaml
-        1342  7e4922ce15b0  curriculum/units/386-future2-07.yaml
-        1337  8d2b07be2c83  curriculum/units/387-future2-08.yaml
-        1362  65a70cfb4cdc  curriculum/units/388-future2-09.yaml
-        1393  1add7257c409  curriculum/units/389-future2-10.yaml
-       44484  2a8d9caabf1b  grammar/concepts.jsonl
+        1453  55273a03cf99  curriculum/units/380-future2-01.yaml
+        1473  93834b2408b1  curriculum/units/381-future2-02.yaml
+        1453  26a40379596f  curriculum/units/382-future2-03.yaml
+        1478  55edc4d4f04b  curriculum/units/383-future2-04.yaml
+        1477  29acb283791e  curriculum/units/384-future2-05.yaml
+        1389  88db09927567  curriculum/units/385-future2-06.yaml
+        1427  22e84fb52165  curriculum/units/386-future2-07.yaml
+        1422  fd032175c614  curriculum/units/387-future2-08.yaml
+        1447  c388e5bf3675  curriculum/units/388-future2-09.yaml
+        1478  6e68d0d8e68b  curriculum/units/389-future2-10.yaml
+        1352  e19911eed09d  curriculum/units/390-writing-01.yaml
+        1316  c56b6425906f  curriculum/units/391-writing-02.yaml
+        1323  86b901daf8c7  curriculum/units/392-writing-03.yaml
+        1383  aa69fbe99f48  curriculum/units/393-writing-04.yaml
+        1388  652797d48fbc  curriculum/units/394-writing-05.yaml
+        1317  91a7a21f999c  curriculum/units/395-writing-06.yaml
+        1327  e4efadf1e6db  curriculum/units/396-writing-07.yaml
+        1346  266b606a8b81  curriculum/units/397-writing-08.yaml
+        1314  d05b119c98b7  curriculum/units/398-writing-09.yaml
+        1369  0eaec3560ed8  curriculum/units/399-writing-10.yaml
+       45443  1b95ac1c940f  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        21189  03a4503c7371  lexicon/city.jsonl
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
@@ -433,8 +443,9 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
        21644  4a1e18f9c4e9  lexicon/wellbeing.jsonl
        19445  344ad3d85e1e  lexicon/work.jsonl
        21787  663baa2b53d2  lexicon/workstudy.jsonl
+       19472  25e87b9024ae  lexicon/writing.jsonl
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-      128899  299017505c3b  sentences/entries.jsonl
+      132559  ec3422a4a358  sentences/entries.jsonl
          391  74babc055676  sources.jsonl

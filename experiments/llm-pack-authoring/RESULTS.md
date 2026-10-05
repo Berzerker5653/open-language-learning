@@ -1058,3 +1058,9 @@ Units 370-379 (plans, possibilities, consequences), NEW goal `ru.goal.b1.future-
 Units 380-389 (conditions and hypothetical choices), NEW goal `ru.goal.b1.future-conditions2`
 (+2 assessments), 50 words (`lexicon/future2.jsonl`), 2 grammar (`b1.esli-by`, `b1.luchshe-by`),
 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 37
+
+Units 390-399 (organized personal and practical letters), NEW goal `ru.goal.b1.extended-writing`
+(+2 assessments), 50 words (`lexicon/writing.jsonl`), 2 grammar (`b1.uvazhaemyy`, `b1.s-uvazheniem`),
+10 sentences. Score: **7/7**.

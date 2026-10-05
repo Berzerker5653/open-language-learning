@@ -1,0 +1,46 @@
+id: "ru.unit.b1.writing-07"
+goal_id: "ru.goal.b1.extended-writing"
+title: "Spacing"
+summary: "отступ, интервал, клавиша, экран and курсор."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u396-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.writing.otstup",
+        "ru.lex.writing.interval",
+        "ru.lex.writing.klavisha",
+        "ru.lex.writing.ekran",
+        "ru.lex.writing.kursore",
+        "ru.sent.b1.u396",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u396-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u396-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u396"]
+  - id: "ru.activity.b1.u396-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Spacing: letter with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse отступ (indent) with интервал (spacing)."]
+  target_proficiency: "B1"
+  validation_method: "choice"
