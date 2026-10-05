@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.769-connotation-awareness
+goal_id: ja.goal.b2.nuance-register
+title: connotation awareness
+summary: B2 language for connotation awareness.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.reg1.kotoba
+  - ja.lex.reg1.reigi
+  - ja.lex.reg1.jouretsu
+  - ja.lex.reg1.kudaranai
+  - ja.lex.reg1.chowa
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-to-itara
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.769-connotation-awareness-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.reg1.kotoba
+  - ja.lex.reg1.reigi
+  - ja.lex.reg1.jouretsu
+  - ja.lex.reg1.kudaranai
+  - ja.lex.reg1.chowa
+  - ja.grammar.b2-to-itara
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.769-connotation-awareness-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.reg1.kotoba
+  - ja.lex.reg1.reigi
+  - ja.lex.reg1.jouretsu
+  - ja.lex.reg1.kudaranai
+  - ja.lex.reg1.chowa
+  - ja.grammar.b2-to-itara
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.769-connotation-awareness-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.reg1.kotoba
+  - ja.lex.reg1.reigi
+  - ja.lex.reg1.jouretsu
+  - ja.lex.reg1.kudaranai
+  - ja.lex.reg1.chowa
+  - ja.grammar.b2-to-itara
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.769-connotation-awareness-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.reg1.kotoba
+  - ja.lex.reg1.reigi
+  - ja.lex.reg1.jouretsu
+  - ja.lex.reg1.kudaranai
+  - ja.lex.reg1.chowa
+  - ja.grammar.b2-to-itara
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.769-connotation-awareness-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.769-connotation-awareness-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

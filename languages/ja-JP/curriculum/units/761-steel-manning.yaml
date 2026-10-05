@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.761-steel-manning
+goal_id: ja.goal.b2.abstract-debate
+title: steel-manning
+summary: B2 language for steel-manning.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.abst3.koten
+  - ja.lex.abst3.yoten
+  - ja.lex.abst3.taisho
+  - ja.lex.abst3.hikaku2
+  - ja.lex.abst3.henyo
+  - ja.sent.steel-manning
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.761-steel-manning-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.abst3.koten
+  - ja.lex.abst3.yoten
+  - ja.lex.abst3.taisho
+  - ja.lex.abst3.hikaku2
+  - ja.lex.abst3.henyo
+  - ja.sent.steel-manning
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.761-steel-manning-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.abst3.koten
+  - ja.lex.abst3.yoten
+  - ja.lex.abst3.taisho
+  - ja.lex.abst3.hikaku2
+  - ja.lex.abst3.henyo
+  - ja.sent.steel-manning
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.761-steel-manning-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.abst3.koten
+  - ja.lex.abst3.yoten
+  - ja.lex.abst3.taisho
+  - ja.lex.abst3.hikaku2
+  - ja.lex.abst3.henyo
+  - ja.sent.steel-manning
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.761-steel-manning-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.abst3.koten
+  - ja.lex.abst3.yoten
+  - ja.lex.abst3.taisho
+  - ja.lex.abst3.hikaku2
+  - ja.lex.abst3.henyo
+  - ja.sent.steel-manning
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.761-steel-manning-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.steel-manning
+- id: ja.activity.761-steel-manning-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

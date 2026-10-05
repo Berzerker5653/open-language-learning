@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.764-written-style-variation
+goal_id: ja.goal.b2.nuance-register
+title: written style variation
+summary: B2 language for written style variation.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.reg1.katai
+  - ja.lex.reg1.yawarakai
+  - ja.lex.reg1.moyo
+  - ja.lex.reg1.yoshiki
+  - ja.lex.reg1.kion
+  - ja.sent.written-style-variation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.764-written-style-variation-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.reg1.katai
+  - ja.lex.reg1.yawarakai
+  - ja.lex.reg1.moyo
+  - ja.lex.reg1.yoshiki
+  - ja.lex.reg1.kion
+  - ja.sent.written-style-variation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.764-written-style-variation-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.reg1.katai
+  - ja.lex.reg1.yawarakai
+  - ja.lex.reg1.moyo
+  - ja.lex.reg1.yoshiki
+  - ja.lex.reg1.kion
+  - ja.sent.written-style-variation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.764-written-style-variation-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.reg1.katai
+  - ja.lex.reg1.yawarakai
+  - ja.lex.reg1.moyo
+  - ja.lex.reg1.yoshiki
+  - ja.lex.reg1.kion
+  - ja.sent.written-style-variation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.764-written-style-variation-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.reg1.katai
+  - ja.lex.reg1.yawarakai
+  - ja.lex.reg1.moyo
+  - ja.lex.reg1.yoshiki
+  - ja.lex.reg1.kion
+  - ja.sent.written-style-variation
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.764-written-style-variation-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.written-style-variation
+- id: ja.activity.764-written-style-variation-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

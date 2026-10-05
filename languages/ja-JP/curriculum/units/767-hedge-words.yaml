@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.767-hedge-words
+goal_id: ja.goal.b2.nuance-register
+title: hedge words
+summary: B2 language for hedge words.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.reg1.kougen
+  - ja.lex.reg1.yougen
+  - ja.lex.reg1.shucho
+  - ja.lex.reg1.kotei2
+  - ja.lex.reg1.ika
+  - ja.sent.hedge-words
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.767-hedge-words-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.reg1.kougen
+  - ja.lex.reg1.yougen
+  - ja.lex.reg1.shucho
+  - ja.lex.reg1.kotei2
+  - ja.lex.reg1.ika
+  - ja.sent.hedge-words
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.767-hedge-words-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.reg1.kougen
+  - ja.lex.reg1.yougen
+  - ja.lex.reg1.shucho
+  - ja.lex.reg1.kotei2
+  - ja.lex.reg1.ika
+  - ja.sent.hedge-words
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.767-hedge-words-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.reg1.kougen
+  - ja.lex.reg1.yougen
+  - ja.lex.reg1.shucho
+  - ja.lex.reg1.kotei2
+  - ja.lex.reg1.ika
+  - ja.sent.hedge-words
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.767-hedge-words-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.reg1.kougen
+  - ja.lex.reg1.yougen
+  - ja.lex.reg1.shucho
+  - ja.lex.reg1.kotei2
+  - ja.lex.reg1.ika
+  - ja.sent.hedge-words
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.767-hedge-words-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.hedge-words
+- id: ja.activity.767-hedge-words-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

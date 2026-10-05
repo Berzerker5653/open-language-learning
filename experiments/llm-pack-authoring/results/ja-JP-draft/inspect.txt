@@ -4,8 +4,8 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2420  2dda84132085  activities/scenarios/first-meeting.yaml
         1561  6b8655e2f7b6  activities/scenarios/ordering.yaml
         1486  b56884663696  activities/scenarios/shopping.yaml
-       22622  347437d33a3a  assessments/definitions.jsonl
-       57765  bfe8c210150b  curriculum/goals.yaml
+       22951  f3bfe0e22339  assessments/definitions.jsonl
+       58570  36b73d4f8a81  curriculum/goals.yaml
          919  ad3f5f62d1b3  curriculum/units/000-onramp-greeting.yaml
         1514  bd53db6f2cfe  curriculum/units/010-kana-hiragana-vowels-ko.yaml
         1957  c02be8a37693  curriculum/units/011-kana-hiragana-stn.yaml
@@ -729,8 +729,18 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2224  e6d5adfbb5ee  curriculum/units/757-abstraction-ladders.yaml
         2227  4cf48ebdd63a  curriculum/units/758-counterfactual-thinking.yaml
         2188  4d4b2739533f  curriculum/units/759-definition-debate.yaml
-       77906  e3094f2dbf3c  grammar/concepts.jsonl
-       10241  f755e80bc97e  grammar/dependencies.yaml
+        2169  affbfd472aac  curriculum/units/760-consistency-checks.yaml
+        2119  9d5ed3717eb5  curriculum/units/761-steel-manning.yaml
+        2145  de09e6a02429  curriculum/units/762-synthesis-essay.yaml
+        2209  3a158b9a3a91  curriculum/units/763-formal-versus-casual.yaml
+        2249  b1583f398d2a  curriculum/units/764-written-style-variation.yaml
+        2189  ea9e74daa98c  curriculum/units/765-politeness-scales.yaml
+        2204  6dc56fce6907  curriculum/units/766-indirect-expression.yaml
+        2059  b2df286b6069  curriculum/units/767-hedge-words.yaml
+        2154  770a7f5fda9f  curriculum/units/768-emphasis-devices.yaml
+        2194  97b9cb734c79  curriculum/units/769-connotation-awareness.yaml
+       78954  7b0ddc8dd682  grammar/concepts.jsonl
+       10393  153299a51197  grammar/dependencies.yaml
        30369  1401b6e0388e  kanji/entries.jsonl
          485  860cdf8185db  language/identity.yaml
          823  5d72613ab378  language/normalization.yaml
@@ -739,6 +749,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2575  479faeb409fe  language/pragmatics.yaml
         8010  7ee05eca3edf  lexicon/abst.jsonl
        39778  579da0901b3d  lexicon/abst2.jsonl
+       11950  5766ad4c3ef1  lexicon/abst3.jsonl
        24031  c120ccee4120  lexicon/academic.jsonl
        40245  a603743d054f  lexicon/academic2.jsonl
        16963  b18c24cb909d  lexicon/adjectives.jsonl
@@ -815,6 +826,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         7287  02009ef0d4fa  lexicon/pronouns.jsonl
        40169  a619d296d058  lexicon/psych.jsonl
         7967  bf7e5bb834c7  lexicon/questions.jsonl
+       27968  ec69faf32a59  lexicon/reg1.jsonl
        40483  2573737e5193  lexicon/relationships.jsonl
        39975  a20f7c6560b1  lexicon/science.jsonl
        16017  c03fe813cba9  lexicon/science2.jsonl
@@ -847,7 +859,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
-      388132  f514e79f0cb4  sentences/entries.jsonl
+      394103  2c401aef5389  sentences/entries.jsonl
         3915  e270f808c26e  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml
          539  842cce82e5d5  stories/first-day.yaml

@@ -956,3 +956,9 @@ new goal `ru.goal.b1.practical-problems` + 2 assessments. Score: **7/7**.
 
 Units 750-759 (abstract-debate reasoning), 50 words (`lexicon/abst2.jsonl`),
 2 grammar (`b2-ni-taishite`, `b2-to-areba`), 8 sentences. Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 72
+
+Units 760-769 (abstract-debate tail, nuance-register start), 50 words
+(`lexicon/abst3.jsonl`, `lexicon/reg1.jsonl`), 2 grammar (`b2-ni-kagiru`, `b2-to-itara`), 9 sentences,
+new goal `ja.goal.b2.nuance-register` + assessment + DEP edge. Score: **7/7**.

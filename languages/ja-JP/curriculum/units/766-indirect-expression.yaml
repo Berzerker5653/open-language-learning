@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.766-indirect-expression
+goal_id: ja.goal.b2.nuance-register
+title: indirect expression
+summary: B2 language for indirect expression.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.reg1.honne
+  - ja.lex.reg1.tatemae
+  - ja.lex.reg1.enryo
+  - ja.lex.reg1.chokusetsu
+  - ja.lex.reg1.hogen
+  - ja.sent.indirect-expression
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.766-indirect-expression-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.reg1.honne
+  - ja.lex.reg1.tatemae
+  - ja.lex.reg1.enryo
+  - ja.lex.reg1.chokusetsu
+  - ja.lex.reg1.hogen
+  - ja.sent.indirect-expression
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.766-indirect-expression-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.reg1.honne
+  - ja.lex.reg1.tatemae
+  - ja.lex.reg1.enryo
+  - ja.lex.reg1.chokusetsu
+  - ja.lex.reg1.hogen
+  - ja.sent.indirect-expression
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.766-indirect-expression-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.reg1.honne
+  - ja.lex.reg1.tatemae
+  - ja.lex.reg1.enryo
+  - ja.lex.reg1.chokusetsu
+  - ja.lex.reg1.hogen
+  - ja.sent.indirect-expression
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.766-indirect-expression-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.reg1.honne
+  - ja.lex.reg1.tatemae
+  - ja.lex.reg1.enryo
+  - ja.lex.reg1.chokusetsu
+  - ja.lex.reg1.hogen
+  - ja.sent.indirect-expression
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.766-indirect-expression-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.indirect-expression
+- id: ja.activity.766-indirect-expression-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

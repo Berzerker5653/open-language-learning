@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.763-formal-versus-casual
+goal_id: ja.goal.b2.nuance-register
+title: formal versus casual
+summary: B2 language for formal versus casual.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.reg1.keigo
+  - ja.lex.reg1.futsuu
+  - ja.lex.reg1.kougo
+  - ja.lex.reg1.koushiki
+  - ja.lex.reg1.zonzai
+  - ja.sent.formal-versus-casual
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.763-formal-versus-casual-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.reg1.keigo
+  - ja.lex.reg1.futsuu
+  - ja.lex.reg1.kougo
+  - ja.lex.reg1.koushiki
+  - ja.lex.reg1.zonzai
+  - ja.sent.formal-versus-casual
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.763-formal-versus-casual-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.reg1.keigo
+  - ja.lex.reg1.futsuu
+  - ja.lex.reg1.kougo
+  - ja.lex.reg1.koushiki
+  - ja.lex.reg1.zonzai
+  - ja.sent.formal-versus-casual
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.763-formal-versus-casual-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.reg1.keigo
+  - ja.lex.reg1.futsuu
+  - ja.lex.reg1.kougo
+  - ja.lex.reg1.koushiki
+  - ja.lex.reg1.zonzai
+  - ja.sent.formal-versus-casual
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.763-formal-versus-casual-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.reg1.keigo
+  - ja.lex.reg1.futsuu
+  - ja.lex.reg1.kougo
+  - ja.lex.reg1.koushiki
+  - ja.lex.reg1.zonzai
+  - ja.sent.formal-versus-casual
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.763-formal-versus-casual-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.formal-versus-casual
+- id: ja.activity.763-formal-versus-casual-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

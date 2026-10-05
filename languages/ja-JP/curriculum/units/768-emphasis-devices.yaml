@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.768-emphasis-devices
+goal_id: ja.goal.b2.nuance-register
+title: emphasis devices
+summary: B2 language for emphasis devices.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.reg1.omomuki
+  - ja.lex.reg1.kanji2
+  - ja.lex.reg1.nyuansu
+  - ja.lex.reg1.imi
+  - ja.lex.reg1.bunmyaku
+  - ja.sent.emphasis-devices
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.768-emphasis-devices-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.reg1.omomuki
+  - ja.lex.reg1.kanji2
+  - ja.lex.reg1.nyuansu
+  - ja.lex.reg1.imi
+  - ja.lex.reg1.bunmyaku
+  - ja.sent.emphasis-devices
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.768-emphasis-devices-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.reg1.omomuki
+  - ja.lex.reg1.kanji2
+  - ja.lex.reg1.nyuansu
+  - ja.lex.reg1.imi
+  - ja.lex.reg1.bunmyaku
+  - ja.sent.emphasis-devices
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.768-emphasis-devices-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.reg1.omomuki
+  - ja.lex.reg1.kanji2
+  - ja.lex.reg1.nyuansu
+  - ja.lex.reg1.imi
+  - ja.lex.reg1.bunmyaku
+  - ja.sent.emphasis-devices
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.768-emphasis-devices-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.reg1.omomuki
+  - ja.lex.reg1.kanji2
+  - ja.lex.reg1.nyuansu
+  - ja.lex.reg1.imi
+  - ja.lex.reg1.bunmyaku
+  - ja.sent.emphasis-devices
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.768-emphasis-devices-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.emphasis-devices
+- id: ja.activity.768-emphasis-devices-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
