@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.everyday-laws
+goal_id: ja.goal.b1.society-rules
+title: everyday laws
+summary: B1 language for everyday laws.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.society.horitsu
+  - ja.lex.society.horei
+  - ja.lex.society.kotsukisoku
+  - ja.lex.society.kinben
+  - ja.lex.society.keisatsu
+  - ja.sent.law-everyday
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.everyday-laws-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.society.horitsu
+  - ja.lex.society.horei
+  - ja.lex.society.kotsukisoku
+  - ja.lex.society.kinben
+  - ja.lex.society.keisatsu
+  - ja.sent.law-everyday
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.everyday-laws-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.society.horitsu
+  - ja.lex.society.horei
+  - ja.lex.society.kotsukisoku
+  - ja.lex.society.kinben
+  - ja.lex.society.keisatsu
+  - ja.sent.law-everyday
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.everyday-laws-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.society.horitsu
+  - ja.lex.society.horei
+  - ja.lex.society.kotsukisoku
+  - ja.lex.society.kinben
+  - ja.lex.society.keisatsu
+  - ja.sent.law-everyday
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.everyday-laws-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.society.horitsu
+  - ja.lex.society.horei
+  - ja.lex.society.kotsukisoku
+  - ja.lex.society.kinben
+  - ja.lex.society.keisatsu
+  - ja.sent.law-everyday
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.everyday-laws-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.law-everyday
+- id: ja.activity.everyday-laws-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.volunteering
+goal_id: ja.goal.b1.society-rules
+title: volunteering
+summary: B1 language for volunteering.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.society.boryuntia
+  - ja.lex.society.fukushi
+  - ja.lex.society.hatsuyaku
+  - ja.lex.society.katsuyaku
+  - ja.lex.society.shokumu
+  - ja.sent.volunteer-role
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.volunteering-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.society.boryuntia
+  - ja.lex.society.fukushi
+  - ja.lex.society.hatsuyaku
+  - ja.lex.society.katsuyaku
+  - ja.lex.society.shokumu
+  - ja.sent.volunteer-role
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.volunteering-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.society.boryuntia
+  - ja.lex.society.fukushi
+  - ja.lex.society.hatsuyaku
+  - ja.lex.society.katsuyaku
+  - ja.lex.society.shokumu
+  - ja.sent.volunteer-role
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.volunteering-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.society.boryuntia
+  - ja.lex.society.fukushi
+  - ja.lex.society.hatsuyaku
+  - ja.lex.society.katsuyaku
+  - ja.lex.society.shokumu
+  - ja.sent.volunteer-role
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.volunteering-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.society.boryuntia
+  - ja.lex.society.fukushi
+  - ja.lex.society.hatsuyaku
+  - ja.lex.society.katsuyaku
+  - ja.lex.society.shokumu
+  - ja.sent.volunteer-role
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.volunteering-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.volunteer-role
+- id: ja.activity.volunteering-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

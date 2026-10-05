@@ -499,3 +499,11 @@ Goal `ja.goal.b1.culture-tradition` (prereq technology, mirrored;
 spans 280-294), 10 units, 50-word `lexicon/culture.jsonl`, 2 grammar
 (`b1.maeni-ato-de`, `b1.ba-formal`), 8 sentences, 1 assessment.
 Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 24: B1 units 290-299 (culture-tradition complete + society-rules start)
+
+Goals `ja.goal.b1.culture-tradition` (complete, 280-294) and
+`ja.goal.b1.society-rules` (prereq culture-tradition, mirrored; spans
+295-309), 10 units, 25-word `lexicon/culture2.jsonl` + 25-word
+`lexicon/society.jsonl`, 2 grammar (`b1.ukemi-indirect`,
+`b1.dake-bakari-shika`), 9 sentences, 1 assessment. Score: **7/7**.

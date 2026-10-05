@@ -194,6 +194,11 @@ prerequisite_edges:
   dimension: grammar-controlled
   required_state: independent
   strength: hard
+- from: ja.goal.b1.society-rules
+  to: ja.goal.b1.culture-tradition
+  dimension: grammar-controlled
+  required_state: independent
+  strength: hard
 notes:
 - Mirror of goal prerequisite edges (PACK-002); generated from curriculum/goals.yaml
   during K-30 authoring.
