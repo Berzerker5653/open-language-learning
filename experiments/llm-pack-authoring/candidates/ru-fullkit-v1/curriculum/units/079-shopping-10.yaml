@@ -1,0 +1,48 @@
+id: "ru.unit.a1.shopping-10"
+goal_id: "ru.goal.a1.shopping"
+title: "Asking about prices"
+summary: "нормально, хорошо, плохо, упаковка and спрашивать with the quantity model."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u079-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.shopping.normalno",
+        "ru.lex.shopping.horosho",
+        "ru.lex.shopping.ploho",
+        "ru.lex.shopping.upakovka",
+        "ru.lex.shopping.sprashivat",
+        "ru.grammar.a1.genitive-quantity",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u079-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g [
+        "ru.grammar.a1.genitive-quantity",
+        "ru.grammar.on-ramp.eto-identification",
+        "ru.grammar.on-ramp.zero-present-copula",
+      ]
+  - id: "ru.activity.a1.u079-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Asking about prices: shopping with taught forms only."]
+  prohibited_ambiguity:
+    [
+      "Do not keep the counted noun in the nominative after сколько; it takes the supplied genitive form.",
+    ]
+  target_proficiency: "A1"
+  validation_method: "choice"

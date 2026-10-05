@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
-        9273  0199cdb2ba85  assessments/definitions.jsonl
-       11842  36db961619e2  curriculum/goals.yaml
+       10152  c50bf2a6517a  assessments/definitions.jsonl
+       13114  87870434dfcf  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -71,7 +71,17 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1384  5277265fdf00  curriculum/units/067-food-08.yaml
         1385  c00029943cf6  curriculum/units/068-food-09.yaml
         1368  51ff3ad6920e  curriculum/units/069-food-10.yaml
-       11923  001995800cf4  grammar/concepts.jsonl
+        1448  820d31a4477e  curriculum/units/070-shopping-01.yaml
+        1446  fb8ef016fbcf  curriculum/units/071-shopping-02.yaml
+        1384  d1935153d967  curriculum/units/072-shopping-03.yaml
+        1424  b2cda70f0983  curriculum/units/073-shopping-04.yaml
+        1446  c86b737435e8  curriculum/units/074-shopping-05.yaml
+        1394  d7ecb9ea4fcf  curriculum/units/075-shopping-06.yaml
+        1427  717ee69571ec  curriculum/units/076-shopping-07.yaml
+        1448  413f742c64f1  curriculum/units/077-shopping-08.yaml
+        1422  a2dfe901ae57  curriculum/units/078-shopping-09.yaml
+        1477  1c0c09428206  curriculum/units/079-shopping-10.yaml
+       13127  fb969c3ab1fc  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
         3655  dbb5543b101e  lexicon/everyday.jsonl
@@ -82,8 +92,9 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         3672  8e7e960a1252  lexicon/numbers-time.jsonl
        22380  8c501a5154bc  lexicon/personal.jsonl
        21337  77ca388bc863  lexicon/routines.jsonl
+       21290  daeb36ea4066  lexicon/shopping.jsonl
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-       14973  77095e3f09f3  sentences/entries.jsonl
+       17842  bc37edc66e60  sentences/entries.jsonl
          391  74babc055676  sources.jsonl

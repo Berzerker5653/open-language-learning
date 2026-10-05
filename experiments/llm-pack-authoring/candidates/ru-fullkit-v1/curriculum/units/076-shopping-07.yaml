@@ -1,0 +1,47 @@
+id: "ru.unit.a1.shopping-07"
+goal_id: "ru.goal.a1.shopping"
+title: "Colors"
+summary: "цвет, белый, чёрный, красный and зелёный."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u076-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.shopping.tsvet",
+        "ru.lex.shopping.belyy",
+        "ru.lex.shopping.chernyy",
+        "ru.lex.shopping.krasnyy",
+        "ru.lex.shopping.zelenyy",
+        "ru.sent.a1.u076",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u076-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a1.u076-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a1.u076"]
+  - id: "ru.activity.a1.u076-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Colors: shopping with taught forms only."]
+  prohibited_ambiguity:
+    ["Do not place the color word after the noun by English habit; taught phrases put it before."]
+  target_proficiency: "A1"
+  validation_method: "choice"
