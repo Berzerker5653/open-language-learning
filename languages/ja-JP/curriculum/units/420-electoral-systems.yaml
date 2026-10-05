@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.electoral-systems
+goal_id: ja.goal.b2.politics-governance
+title: electoral systems
+summary: B2 language for electoral systems.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.politics.giin
+  - ja.lex.politics.gikai
+  - ja.lex.politics.seitou
+  - ja.lex.politics.yushu
+  - ja.lex.politics.hosen
+  - ja.sent.electoral-system
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.electoral-systems-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.politics.giin
+  - ja.lex.politics.gikai
+  - ja.lex.politics.seitou
+  - ja.lex.politics.yushu
+  - ja.lex.politics.hosen
+  - ja.sent.electoral-system
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.electoral-systems-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.politics.giin
+  - ja.lex.politics.gikai
+  - ja.lex.politics.seitou
+  - ja.lex.politics.yushu
+  - ja.lex.politics.hosen
+  - ja.sent.electoral-system
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.electoral-systems-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.politics.giin
+  - ja.lex.politics.gikai
+  - ja.lex.politics.seitou
+  - ja.lex.politics.yushu
+  - ja.lex.politics.hosen
+  - ja.sent.electoral-system
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.electoral-systems-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.politics.giin
+  - ja.lex.politics.gikai
+  - ja.lex.politics.seitou
+  - ja.lex.politics.yushu
+  - ja.lex.politics.hosen
+  - ja.sent.electoral-system
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.electoral-systems-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.electoral-system
+- id: ja.activity.electoral-systems-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

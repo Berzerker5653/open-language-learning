@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.wellbeing-apps
+goal_id: ja.goal.b1.health-wellness
+title: wellbeing apps
+summary: B2 language for wellbeing apps.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.health3.byouin2
+  - ja.lex.health3.isya3
+  - ja.lex.health3.fukushi2
+  - ja.lex.health3.touhyou2
+  - ja.lex.health3.koukai2
+  - ja.sent.wellbeing-app
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.wellbeing-apps-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.health3.byouin2
+  - ja.lex.health3.isya3
+  - ja.lex.health3.fukushi2
+  - ja.lex.health3.touhyou2
+  - ja.lex.health3.koukai2
+  - ja.sent.wellbeing-app
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.wellbeing-apps-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.health3.byouin2
+  - ja.lex.health3.isya3
+  - ja.lex.health3.fukushi2
+  - ja.lex.health3.touhyou2
+  - ja.lex.health3.koukai2
+  - ja.sent.wellbeing-app
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.wellbeing-apps-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.health3.byouin2
+  - ja.lex.health3.isya3
+  - ja.lex.health3.fukushi2
+  - ja.lex.health3.touhyou2
+  - ja.lex.health3.koukai2
+  - ja.sent.wellbeing-app
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.wellbeing-apps-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.health3.byouin2
+  - ja.lex.health3.isya3
+  - ja.lex.health3.fukushi2
+  - ja.lex.health3.touhyou2
+  - ja.lex.health3.koukai2
+  - ja.sent.wellbeing-app
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.wellbeing-apps-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.wellbeing-app
+- id: ja.activity.wellbeing-apps-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

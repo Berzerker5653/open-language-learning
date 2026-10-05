@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.fitness-club-life
+goal_id: ja.goal.b1.health-wellness
+title: fitness club life
+summary: B2 language for fitness club life.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.health3.wakamono
+  - ja.lex.health3.kaiin
+  - ja.lex.health3.kyoubu
+  - ja.lex.health3.junren
+  - ja.lex.health3.taikyu2
+  - ja.sent.fitness-club
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.fitness-club-life-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.health3.wakamono
+  - ja.lex.health3.kaiin
+  - ja.lex.health3.kyoubu
+  - ja.lex.health3.junren
+  - ja.lex.health3.taikyu2
+  - ja.sent.fitness-club
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.fitness-club-life-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.health3.wakamono
+  - ja.lex.health3.kaiin
+  - ja.lex.health3.kyoubu
+  - ja.lex.health3.junren
+  - ja.lex.health3.taikyu2
+  - ja.sent.fitness-club
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.fitness-club-life-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.health3.wakamono
+  - ja.lex.health3.kaiin
+  - ja.lex.health3.kyoubu
+  - ja.lex.health3.junren
+  - ja.lex.health3.taikyu2
+  - ja.sent.fitness-club
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.fitness-club-life-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.health3.wakamono
+  - ja.lex.health3.kaiin
+  - ja.lex.health3.kyoubu
+  - ja.lex.health3.junren
+  - ja.lex.health3.taikyu2
+  - ja.sent.fitness-club
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.fitness-club-life-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.fitness-club
+- id: ja.activity.fitness-club-life-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.parliament-debate
+goal_id: ja.goal.b2.politics-governance
+title: parliament debate
+summary: B2 language for parliament debate.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.politics.touhyousha
+  - ja.lex.politics.kyohi
+  - ja.lex.politics.hankyou
+  - ja.lex.politics.toushou
+  - ja.lex.politics.hansou
+  - ja.sent.parliament-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.parliament-debate-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.politics.touhyousha
+  - ja.lex.politics.kyohi
+  - ja.lex.politics.hankyou
+  - ja.lex.politics.toushou
+  - ja.lex.politics.hansou
+  - ja.sent.parliament-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.parliament-debate-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.politics.touhyousha
+  - ja.lex.politics.kyohi
+  - ja.lex.politics.hankyou
+  - ja.lex.politics.toushou
+  - ja.lex.politics.hansou
+  - ja.sent.parliament-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.parliament-debate-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.politics.touhyousha
+  - ja.lex.politics.kyohi
+  - ja.lex.politics.hankyou
+  - ja.lex.politics.toushou
+  - ja.lex.politics.hansou
+  - ja.sent.parliament-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.parliament-debate-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.politics.touhyousha
+  - ja.lex.politics.kyohi
+  - ja.lex.politics.hankyou
+  - ja.lex.politics.toushou
+  - ja.lex.politics.hansou
+  - ja.sent.parliament-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.parliament-debate-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.parliament-debate
+- id: ja.activity.parliament-debate-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

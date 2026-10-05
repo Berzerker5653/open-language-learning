@@ -586,3 +586,12 @@ Goal `ja.goal.b1.health-wellness` (prereq storytelling, mirrored;
 spans 400-414) started, 10 units, 50-word `lexicon/health2.jsonl`,
 2 grammar (`b1.nagara`, `b1.mazu`), 8 sentences, 1 assessment.
 Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 36: B1 units 410-414 complete + B2 units 420-424 (politics start)
+
+B1 band complete (220-414). Goal `ja.goal.b1.health-wellness`
+complete (400-414). Goal `ja.goal.b2.politics-governance` (prereq
+health-wellness, mirrored; spans 420-434) started, 5 units. 10
+units, 50 words split across `lexicon/health3.jsonl` +
+`lexicon/politics.jsonl`, 2 grammar (`b1.ni-tsurete`,
+`b1.ka-ni-shitara`), 8 sentences, 1 assessment. Score: **7/7**.

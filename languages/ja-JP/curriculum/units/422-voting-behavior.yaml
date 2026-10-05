@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.voting-behavior
+goal_id: ja.goal.b2.politics-governance
+title: voting behavior
+summary: B2 language for voting behavior.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.politics.touhou
+  - ja.lex.politics.seikan
+  - ja.lex.politics.yosan3
+  - ja.lex.politics.kessan4
+  - ja.lex.politics.kokkai
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b1.ka-ni-shitara
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.voting-behavior-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.politics.touhou
+  - ja.lex.politics.seikan
+  - ja.lex.politics.yosan3
+  - ja.lex.politics.kessan4
+  - ja.lex.politics.kokkai
+  - ja.grammar.b1.ka-ni-shitara
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.voting-behavior-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.politics.touhou
+  - ja.lex.politics.seikan
+  - ja.lex.politics.yosan3
+  - ja.lex.politics.kessan4
+  - ja.lex.politics.kokkai
+  - ja.grammar.b1.ka-ni-shitara
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.voting-behavior-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.politics.touhou
+  - ja.lex.politics.seikan
+  - ja.lex.politics.yosan3
+  - ja.lex.politics.kessan4
+  - ja.lex.politics.kokkai
+  - ja.grammar.b1.ka-ni-shitara
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.voting-behavior-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.politics.touhou
+  - ja.lex.politics.seikan
+  - ja.lex.politics.yosan3
+  - ja.lex.politics.kessan4
+  - ja.lex.politics.kokkai
+  - ja.grammar.b1.ka-ni-shitara
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.voting-behavior-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.voting-behavior-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email
