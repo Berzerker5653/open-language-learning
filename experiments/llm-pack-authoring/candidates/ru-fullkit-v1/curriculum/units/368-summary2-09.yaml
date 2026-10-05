@@ -1,0 +1,46 @@
+id: "ru.unit.b1.summary2-09"
+goal_id: "ru.goal.b1.information-summary2"
+title: "Cover"
+summary: "обложка, переплёт, лист, строка and колонка."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u368-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.summary2.oblozhka",
+        "ru.lex.summary2.pereplet",
+        "ru.lex.summary2.list",
+        "ru.lex.summary2.stroka",
+        "ru.lex.summary2.kolonka",
+        "ru.sent.b1.u368",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u368-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u368-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u368"]
+  - id: "ru.activity.b1.u368-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Cover: summary with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse обложка (cover) with переплёт (binding)."]
+  target_proficiency: "B1"
+  validation_method: "choice"

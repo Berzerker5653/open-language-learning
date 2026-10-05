@@ -1,0 +1,46 @@
+id: "ru.unit.b1.summary2-10"
+goal_id: "ru.goal.b1.information-summary2"
+title: "Quote"
+summary: "цитата, кусок, отрывок, фрагмент and подзаголовок."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u369-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.summary2.citata",
+        "ru.lex.summary2.kusok",
+        "ru.lex.summary2.otryvok",
+        "ru.lex.summary2.fragment",
+        "ru.lex.summary2.podzagolovok",
+        "ru.sent.b1.u369",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u369-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u369-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u369"]
+  - id: "ru.activity.b1.u369-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Quote: summary with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse отрывок (excerpt) with фрагмент (fragment)."]
+  target_proficiency: "B1"
+  validation_method: "choice"

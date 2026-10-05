@@ -1,0 +1,46 @@
+id: "ru.unit.b1.summary2-03"
+goal_id: "ru.goal.b1.information-summary2"
+title: "Volume"
+summary: "объём, величина, длина, ширина and глубина."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u362-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.summary2.obem",
+        "ru.lex.summary2.velichina",
+        "ru.lex.summary2.dlina",
+        "ru.lex.summary2.shirina",
+        "ru.lex.summary2.glubina",
+        "ru.sent.b1.u362",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u362-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u362-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u362"]
+  - id: "ru.activity.b1.u362-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Volume: summary with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse длина (length) with ширина (width)."]
+  target_proficiency: "B1"
+  validation_method: "choice"
