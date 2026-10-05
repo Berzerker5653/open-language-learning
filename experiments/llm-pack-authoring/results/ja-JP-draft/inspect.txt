@@ -871,9 +871,9 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
        31716  480ed3a1e5bc  lexicon/reg2.jsonl
        27959  21a195b1964b  lexicon/rel1.jsonl
        39842  412e74fcf267  lexicon/rel2.jsonl
-       40483  2573737e5193  lexicon/relationships.jsonl
+       40499  b9fa4d475985  lexicon/relationships.jsonl
        39975  a20f7c6560b1  lexicon/science.jsonl
-       16017  c03fe813cba9  lexicon/science2.jsonl
+       16017  f9a7740e330f  lexicon/science2.jsonl
        39756  f58e5a59ec5b  lexicon/shopping.jsonl
        19922  f152b9ea6e8e  lexicon/society.jsonl
        39900  0362a2e4d76e  lexicon/society2.jsonl
@@ -882,11 +882,11 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
        40086  1b6444cabb81  lexicon/sports.jsonl
        19681  8a2dce3b3aa5  lexicon/story.jsonl
        39399  b652f45ddbd4  lexicon/story2.jsonl
-       20045  ca2f9e6ae2a7  lexicon/tech.jsonl
+       20045  10e68f39956b  lexicon/tech.jsonl
        39825  eaf6affaddd7  lexicon/tech2.jsonl
        15910  d3e03534b8e1  lexicon/time.jsonl
        42054  eefefcc4c69c  lexicon/transport.jsonl
-       19982  101c76704a6e  lexicon/travel.jsonl
+       19998  7d4ea1121e75  lexicon/travel.jsonl
        39787  98f5b32a7c7a  lexicon/travel2.jsonl
         7909  55f23ec753ed  lexicon/urban.jsonl
        39747  a4c4052da975  lexicon/urban2.jsonl
