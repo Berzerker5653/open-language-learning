@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.character-description
+goal_id: ja.goal.b1.storytelling
+title: character description
+summary: B1 language for character description.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.story.konna
+  - ja.lex.story.sonna
+  - ja.lex.story.anna
+  - ja.lex.story.gogo
+  - ja.lex.story.hoshi
+  - ja.sent.background-setting
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.character-description-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.story.konna
+  - ja.lex.story.sonna
+  - ja.lex.story.anna
+  - ja.lex.story.gogo
+  - ja.lex.story.hoshi
+  - ja.sent.background-setting
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.character-description-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.story.konna
+  - ja.lex.story.sonna
+  - ja.lex.story.anna
+  - ja.lex.story.gogo
+  - ja.lex.story.hoshi
+  - ja.sent.background-setting
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.character-description-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.story.konna
+  - ja.lex.story.sonna
+  - ja.lex.story.anna
+  - ja.lex.story.gogo
+  - ja.lex.story.hoshi
+  - ja.sent.background-setting
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.character-description-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.story.konna
+  - ja.lex.story.sonna
+  - ja.lex.story.anna
+  - ja.lex.story.gogo
+  - ja.lex.story.hoshi
+  - ja.sent.background-setting
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.character-description-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.background-setting
+- id: ja.activity.character-description-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

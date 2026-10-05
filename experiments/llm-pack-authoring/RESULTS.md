@@ -564,3 +564,12 @@ Goal `ja.goal.b1.comparison-debate` (prereq advice-opinion,
 mirrored; spans 370-384) started, 10 units, 50-word
 `lexicon/debate.jsonl`, 2 grammar (`b1.ni-yori`,
 `b1.shitsumon-ni-kotae`), 8 sentences, 1 assessment. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 33: B1 units 380-389 (comparison complete, storytelling start)
+
+Goal `ja.goal.b1.comparison-debate` complete (370-384). Goal
+`ja.goal.b1.storytelling` (prereq comparison-debate, mirrored;
+spans 385-399) started, 5 units. 10 units, 50 words split across
+`lexicon/debate2.jsonl` + `lexicon/story.jsonl`, 2 grammar
+(`b1.yori-mo`, `b1.to-toki`), 8 sentences, 1 assessment.
+Score: **7/7**.

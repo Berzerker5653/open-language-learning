@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.decision-essay
+goal_id: ja.goal.b1.comparison-debate
+title: decision essay
+summary: B1 language for decision essay.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.debate2.haiyu
+  - ja.lex.debate2.geinou
+  - ja.lex.debate2.dan
+  - ja.lex.debate2.danraku
+  - ja.lex.debate2.gou
+  - ja.sent.decision-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.decision-essay-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.debate2.haiyu
+  - ja.lex.debate2.geinou
+  - ja.lex.debate2.dan
+  - ja.lex.debate2.danraku
+  - ja.lex.debate2.gou
+  - ja.sent.decision-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.decision-essay-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.debate2.haiyu
+  - ja.lex.debate2.geinou
+  - ja.lex.debate2.dan
+  - ja.lex.debate2.danraku
+  - ja.lex.debate2.gou
+  - ja.sent.decision-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.decision-essay-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.debate2.haiyu
+  - ja.lex.debate2.geinou
+  - ja.lex.debate2.dan
+  - ja.lex.debate2.danraku
+  - ja.lex.debate2.gou
+  - ja.sent.decision-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.decision-essay-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.debate2.haiyu
+  - ja.lex.debate2.geinou
+  - ja.lex.debate2.dan
+  - ja.lex.debate2.danraku
+  - ja.lex.debate2.gou
+  - ja.sent.decision-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.decision-essay-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.decision-essay
+- id: ja.activity.decision-essay-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
