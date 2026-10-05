@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.protest-movements
+goal_id: ja.goal.b2.politics-governance
+title: protest movements
+summary: B2 language for protest movements.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.politics2.choushou
+  - ja.lex.politics2.chouka
+  - ja.lex.politics2.chouan
+  - ja.lex.politics2.hansen
+  - ja.lex.politics2.hoshu
+  - ja.sent.protest-movements
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.protest-movements-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.politics2.choushou
+  - ja.lex.politics2.chouka
+  - ja.lex.politics2.chouan
+  - ja.lex.politics2.hansen
+  - ja.lex.politics2.hoshu
+  - ja.sent.protest-movements
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.protest-movements-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.politics2.choushou
+  - ja.lex.politics2.chouka
+  - ja.lex.politics2.chouan
+  - ja.lex.politics2.hansen
+  - ja.lex.politics2.hoshu
+  - ja.sent.protest-movements
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.protest-movements-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.politics2.choushou
+  - ja.lex.politics2.chouka
+  - ja.lex.politics2.chouan
+  - ja.lex.politics2.hansen
+  - ja.lex.politics2.hoshu
+  - ja.sent.protest-movements
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.protest-movements-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.politics2.choushou
+  - ja.lex.politics2.chouka
+  - ja.lex.politics2.chouan
+  - ja.lex.politics2.hansen
+  - ja.lex.politics2.hoshu
+  - ja.sent.protest-movements
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.protest-movements-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.protest-movements
+- id: ja.activity.protest-movements-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

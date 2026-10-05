@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.constitutional-ideas
+goal_id: ja.goal.b2.politics-governance
+title: constitutional ideas
+summary: B2 language for constitutional ideas.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.politics2.hotei
+  - ja.lex.politics2.kyousei
+  - ja.lex.politics2.seigen
+  - ja.lex.politics2.genron
+  - ja.lex.politics2.june
+  - ja.sent.constitutional-ideas
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.constitutional-ideas-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.politics2.hotei
+  - ja.lex.politics2.kyousei
+  - ja.lex.politics2.seigen
+  - ja.lex.politics2.genron
+  - ja.lex.politics2.june
+  - ja.sent.constitutional-ideas
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.constitutional-ideas-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.politics2.hotei
+  - ja.lex.politics2.kyousei
+  - ja.lex.politics2.seigen
+  - ja.lex.politics2.genron
+  - ja.lex.politics2.june
+  - ja.sent.constitutional-ideas
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.constitutional-ideas-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.politics2.hotei
+  - ja.lex.politics2.kyousei
+  - ja.lex.politics2.seigen
+  - ja.lex.politics2.genron
+  - ja.lex.politics2.june
+  - ja.sent.constitutional-ideas
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.constitutional-ideas-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.politics2.hotei
+  - ja.lex.politics2.kyousei
+  - ja.lex.politics2.seigen
+  - ja.lex.politics2.genron
+  - ja.lex.politics2.june
+  - ja.sent.constitutional-ideas
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.constitutional-ideas-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.constitutional-ideas
+- id: ja.activity.constitutional-ideas-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

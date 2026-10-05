@@ -394,7 +394,17 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2231  7250bc13c566  curriculum/units/422-voting-behavior.yaml
         2197  14e4cff31e05  curriculum/units/423-party-systems.yaml
         2220  021917671d13  curriculum/units/424-policy-analysis.yaml
-       44722  ef3507cc2c7b  grammar/concepts.jsonl
+        2195  f9a61bb019ea  curriculum/units/425-public-debate.yaml
+        2250  e9a338408ff4  curriculum/units/426-campaign-critique.yaml
+        2300  a8a01c8d18e0  curriculum/units/427-constitutional-ideas.yaml
+        2240  f104f54b8830  curriculum/units/428-rights-discussion.yaml
+        2295  6c46504dfd99  curriculum/units/429-local-governance.yaml
+        2350  27d9dcc3c3b7  curriculum/units/430-international-relations.yaml
+        2280  346385d48e57  curriculum/units/431-diplomacy-language.yaml
+        2270  e1c5cd79ae3f  curriculum/units/432-protest-movements.yaml
+        2227  fef3461a3f88  curriculum/units/433-public-opinion.yaml
+        2244  452a03c40b75  curriculum/units/434-political-figures.yaml
+       45698  79101a7bd88d  grammar/concepts.jsonl
         6998  989b371f0cca  grammar/dependencies.yaml
        30369  1401b6e0388e  kanji/entries.jsonl
          485  860cdf8185db  language/identity.yaml
@@ -438,6 +448,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
        12015  bcc1ba68bc16  lexicon/people.jsonl
        14456  7f233fae36e4  lexicon/places.jsonl
        20016  5056b7029669  lexicon/politics.jsonl
+       39980  da7b14ef98ca  lexicon/politics2.jsonl
         7287  02009ef0d4fa  lexicon/pronouns.jsonl
         7967  bf7e5bb834c7  lexicon/questions.jsonl
        40483  2573737e5193  lexicon/relationships.jsonl
@@ -465,7 +476,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
-      212942  43f9a8026c16  sentences/entries.jsonl
+      218060  730c170032a3  sentences/entries.jsonl
         3915  e270f808c26e  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml
          539  842cce82e5d5  stories/first-day.yaml

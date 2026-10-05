@@ -595,3 +595,9 @@ health-wellness, mirrored; spans 420-434) started, 5 units. 10
 units, 50 words split across `lexicon/health3.jsonl` +
 `lexicon/politics.jsonl`, 2 grammar (`b1.ni-tsurete`,
 `b1.ka-ni-shitara`), 8 sentences, 1 assessment. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 37: B2 units 425-434 (politics-governance complete)
+
+Goal `ja.goal.b2.politics-governance` complete (420-434). 10
+units, 50-word `lexicon/politics2.jsonl`, 2 grammar
+(`b2.ni-yotte`, `b2.toiu-koto`), 8 sentences. Score: **7/7**.

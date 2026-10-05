@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.rights-discussion
+goal_id: ja.goal.b2.politics-governance
+title: rights discussion
+summary: B2 language for rights discussion.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.politics2.tokken
+  - ja.lex.politics2.juyou
+  - ja.lex.politics2.hoju
+  - ja.lex.politics2.chousen
+  - ja.lex.politics2.koi
+  - ja.sent.rights-discussion
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.rights-discussion-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.politics2.tokken
+  - ja.lex.politics2.juyou
+  - ja.lex.politics2.hoju
+  - ja.lex.politics2.chousen
+  - ja.lex.politics2.koi
+  - ja.sent.rights-discussion
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.rights-discussion-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.politics2.tokken
+  - ja.lex.politics2.juyou
+  - ja.lex.politics2.hoju
+  - ja.lex.politics2.chousen
+  - ja.lex.politics2.koi
+  - ja.sent.rights-discussion
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.rights-discussion-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.politics2.tokken
+  - ja.lex.politics2.juyou
+  - ja.lex.politics2.hoju
+  - ja.lex.politics2.chousen
+  - ja.lex.politics2.koi
+  - ja.sent.rights-discussion
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.rights-discussion-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.politics2.tokken
+  - ja.lex.politics2.juyou
+  - ja.lex.politics2.hoju
+  - ja.lex.politics2.chousen
+  - ja.lex.politics2.koi
+  - ja.sent.rights-discussion
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.rights-discussion-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.rights-discussion
+- id: ja.activity.rights-discussion-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

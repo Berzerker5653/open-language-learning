@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.public-opinion
+goal_id: ja.goal.b2.politics-governance
+title: public opinion
+summary: B2 language for public opinion.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.politics2.shuyuu
+  - ja.lex.politics2.horyuu
+  - ja.lex.politics2.shoukou
+  - ja.lex.politics2.shouba
+  - ja.lex.politics2.shoubai
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2.ni-yotte
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.public-opinion-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.politics2.shuyuu
+  - ja.lex.politics2.horyuu
+  - ja.lex.politics2.shoukou
+  - ja.lex.politics2.shouba
+  - ja.lex.politics2.shoubai
+  - ja.grammar.b2.ni-yotte
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.public-opinion-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.politics2.shuyuu
+  - ja.lex.politics2.horyuu
+  - ja.lex.politics2.shoukou
+  - ja.lex.politics2.shouba
+  - ja.lex.politics2.shoubai
+  - ja.grammar.b2.ni-yotte
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.public-opinion-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.politics2.shuyuu
+  - ja.lex.politics2.horyuu
+  - ja.lex.politics2.shoukou
+  - ja.lex.politics2.shouba
+  - ja.lex.politics2.shoubai
+  - ja.grammar.b2.ni-yotte
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.public-opinion-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.politics2.shuyuu
+  - ja.lex.politics2.horyuu
+  - ja.lex.politics2.shoukou
+  - ja.lex.politics2.shouba
+  - ja.lex.politics2.shoubai
+  - ja.grammar.b2.ni-yotte
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.public-opinion-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.public-opinion-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.international-relations
+goal_id: ja.goal.b2.politics-governance
+title: international relations
+summary: B2 language for international relations.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.politics2.gaikoku
+  - ja.lex.politics2.gaishi
+  - ja.lex.politics2.kikoku
+  - ja.lex.politics2.kokuho
+  - ja.lex.politics2.koku
+  - ja.sent.international-relations
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.international-relations-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.politics2.gaikoku
+  - ja.lex.politics2.gaishi
+  - ja.lex.politics2.kikoku
+  - ja.lex.politics2.kokuho
+  - ja.lex.politics2.koku
+  - ja.sent.international-relations
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.international-relations-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.politics2.gaikoku
+  - ja.lex.politics2.gaishi
+  - ja.lex.politics2.kikoku
+  - ja.lex.politics2.kokuho
+  - ja.lex.politics2.koku
+  - ja.sent.international-relations
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.international-relations-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.politics2.gaikoku
+  - ja.lex.politics2.gaishi
+  - ja.lex.politics2.kikoku
+  - ja.lex.politics2.kokuho
+  - ja.lex.politics2.koku
+  - ja.sent.international-relations
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.international-relations-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.politics2.gaikoku
+  - ja.lex.politics2.gaishi
+  - ja.lex.politics2.kikoku
+  - ja.lex.politics2.kokuho
+  - ja.lex.politics2.koku
+  - ja.sent.international-relations
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.international-relations-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.international-relations
+- id: ja.activity.international-relations-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
