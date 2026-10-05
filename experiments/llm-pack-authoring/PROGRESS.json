@@ -10,7 +10,7 @@
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
-    "units_next": "540",
-    "notes": "b47-b49 (510-539) 7/7; history-critical complete (516-531); society-change goal created (532-539 done); next batch 540+"
+    "units_next": "550",
+    "notes": "b47-b50 (510-549) 7/7; society-change complete (532-549); next goal per plans/ja-fullkit-v1.yaml from 550"
   }
 }

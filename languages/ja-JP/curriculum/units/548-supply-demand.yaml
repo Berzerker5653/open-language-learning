@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.supply-development
+goal_id: ja.goal.b2.society-change
+title: supply and development
+summary: B2 language for supply and development.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.society4.kakyu
+  - ja.lex.society4.juyou
+  - ja.lex.society4.kaihatsu
+  - ja.lex.society4.shinkou
+  - ja.lex.society4.senyuu
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2.ni-kagitte
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.supply-development-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.society4.kakyu
+  - ja.lex.society4.juyou
+  - ja.lex.society4.kaihatsu
+  - ja.lex.society4.shinkou
+  - ja.lex.society4.senyuu
+  - ja.grammar.b2.ni-kagitte
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.supply-development-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.society4.kakyu
+  - ja.lex.society4.juyou
+  - ja.lex.society4.kaihatsu
+  - ja.lex.society4.shinkou
+  - ja.lex.society4.senyuu
+  - ja.grammar.b2.ni-kagitte
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.supply-development-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.society4.kakyu
+  - ja.lex.society4.juyou
+  - ja.lex.society4.kaihatsu
+  - ja.lex.society4.shinkou
+  - ja.lex.society4.senyuu
+  - ja.grammar.b2.ni-kagitte
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.supply-development-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.society4.kakyu
+  - ja.lex.society4.juyou
+  - ja.lex.society4.kaihatsu
+  - ja.lex.society4.shinkou
+  - ja.lex.society4.senyuu
+  - ja.grammar.b2.ni-kagitte
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.supply-development-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.supply-development-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

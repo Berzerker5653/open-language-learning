@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.community-bonds
+goal_id: ja.goal.b2.society-change
+title: community bonds
+summary: B2 language for community bonds.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.society4.rentai
+  - ja.lex.society4.komyuniti
+  - ja.lex.society4.jogai
+  - ja.lex.society4.noutoku
+  - ja.lex.society4.jichikai
+  - ja.sent.community-bonds
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.community-bonds-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.society4.rentai
+  - ja.lex.society4.komyuniti
+  - ja.lex.society4.jogai
+  - ja.lex.society4.noutoku
+  - ja.lex.society4.jichikai
+  - ja.sent.community-bonds
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.community-bonds-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.society4.rentai
+  - ja.lex.society4.komyuniti
+  - ja.lex.society4.jogai
+  - ja.lex.society4.noutoku
+  - ja.lex.society4.jichikai
+  - ja.sent.community-bonds
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.community-bonds-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.society4.rentai
+  - ja.lex.society4.komyuniti
+  - ja.lex.society4.jogai
+  - ja.lex.society4.noutoku
+  - ja.lex.society4.jichikai
+  - ja.sent.community-bonds
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.community-bonds-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.society4.rentai
+  - ja.lex.society4.komyuniti
+  - ja.lex.society4.jogai
+  - ja.lex.society4.noutoku
+  - ja.lex.society4.jichikai
+  - ja.sent.community-bonds
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.community-bonds-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.community-bonds
+- id: ja.activity.community-bonds-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
