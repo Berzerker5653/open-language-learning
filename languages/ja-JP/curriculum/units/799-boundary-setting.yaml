@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.799-boundary-setting
+goal_id: ja.goal.b2.relationships-deep
+title: boundary setting
+summary: B2 language for boundary setting.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.rel1.takai
+  - ja.lex.rel1.kenkyo
+  - ja.lex.rel1.shinsetsu
+  - ja.lex.rel1.chokai
+  - ja.lex.rel1.kansha
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-ni-hansite
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.799-boundary-setting-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.rel1.takai
+  - ja.lex.rel1.kenkyo
+  - ja.lex.rel1.shinsetsu
+  - ja.lex.rel1.chokai
+  - ja.lex.rel1.kansha
+  - ja.grammar.b2-ni-hansite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.799-boundary-setting-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.rel1.takai
+  - ja.lex.rel1.kenkyo
+  - ja.lex.rel1.shinsetsu
+  - ja.lex.rel1.chokai
+  - ja.lex.rel1.kansha
+  - ja.grammar.b2-ni-hansite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.799-boundary-setting-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.rel1.takai
+  - ja.lex.rel1.kenkyo
+  - ja.lex.rel1.shinsetsu
+  - ja.lex.rel1.chokai
+  - ja.lex.rel1.kansha
+  - ja.grammar.b2-ni-hansite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.799-boundary-setting-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.rel1.takai
+  - ja.lex.rel1.kenkyo
+  - ja.lex.rel1.shinsetsu
+  - ja.lex.rel1.chokai
+  - ja.lex.rel1.kansha
+  - ja.grammar.b2-ni-hansite
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.799-boundary-setting-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.799-boundary-setting-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

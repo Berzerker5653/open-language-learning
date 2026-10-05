@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.793-long-term-commitment
+goal_id: ja.goal.b2.relationships-deep
+title: long-term commitment
+summary: B2 language for long-term commitment.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.rel1.kizuna
+  - ja.lex.rel1.shinko
+  - ja.lex.rel1.kaitaku
+  - ja.lex.rel1.yamaimadara
+  - ja.lex.rel1.kenkyo
+  - ja.sent.long-term-commitment
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.793-long-term-commitment-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.rel1.kizuna
+  - ja.lex.rel1.shinko
+  - ja.lex.rel1.kaitaku
+  - ja.lex.rel1.yamaimadara
+  - ja.lex.rel1.kenkyo
+  - ja.sent.long-term-commitment
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.793-long-term-commitment-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.rel1.kizuna
+  - ja.lex.rel1.shinko
+  - ja.lex.rel1.kaitaku
+  - ja.lex.rel1.yamaimadara
+  - ja.lex.rel1.kenkyo
+  - ja.sent.long-term-commitment
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.793-long-term-commitment-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.rel1.kizuna
+  - ja.lex.rel1.shinko
+  - ja.lex.rel1.kaitaku
+  - ja.lex.rel1.yamaimadara
+  - ja.lex.rel1.kenkyo
+  - ja.sent.long-term-commitment
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.793-long-term-commitment-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.rel1.kizuna
+  - ja.lex.rel1.shinko
+  - ja.lex.rel1.kaitaku
+  - ja.lex.rel1.yamaimadara
+  - ja.lex.rel1.kenkyo
+  - ja.sent.long-term-commitment
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.793-long-term-commitment-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.long-term-commitment
+- id: ja.activity.793-long-term-commitment-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

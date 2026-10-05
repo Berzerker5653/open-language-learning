@@ -989,3 +989,9 @@ Units 780-789 (humor-wordplay: comedy, satire, manga), 50 words (`lexicon/play2.
 
 Units 280-289 (work processes, experience, aims), 50 words (`lexicon/work.jsonl`),
 2 grammar (`b1.dlya-dostizheniya`, `b1.prioritetnyj-konstruktsii`), 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 75
+
+Units 790-799 (humor tail, relationships-deep start), 50 words (`lexicon/humor2.jsonl`,
+`lexicon/rel1.jsonl`), 2 grammar (`b2-ni-tsurete-ite`, `b2-ni-hansite`), 8 sentences,
+new goal `ja.goal.b2.relationships-deep` + assessment + DEP edge. Score: **7/7**.

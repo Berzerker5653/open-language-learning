@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.797-mentor-relationship
+goal_id: ja.goal.b2.relationships-deep
+title: mentor relationship
+summary: B2 language for mentor relationship.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.rel1.futsu
+  - ja.lex.rel1.ketsui
+  - ja.lex.rel1.kangeki
+  - ja.lex.rel1.kansha
+  - ja.lex.rel1.hangeki
+  - ja.sent.mentor-relationship
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.797-mentor-relationship-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.rel1.futsu
+  - ja.lex.rel1.ketsui
+  - ja.lex.rel1.kangeki
+  - ja.lex.rel1.kansha
+  - ja.lex.rel1.hangeki
+  - ja.sent.mentor-relationship
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.797-mentor-relationship-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.rel1.futsu
+  - ja.lex.rel1.ketsui
+  - ja.lex.rel1.kangeki
+  - ja.lex.rel1.kansha
+  - ja.lex.rel1.hangeki
+  - ja.sent.mentor-relationship
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.797-mentor-relationship-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.rel1.futsu
+  - ja.lex.rel1.ketsui
+  - ja.lex.rel1.kangeki
+  - ja.lex.rel1.kansha
+  - ja.lex.rel1.hangeki
+  - ja.sent.mentor-relationship
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.797-mentor-relationship-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.rel1.futsu
+  - ja.lex.rel1.ketsui
+  - ja.lex.rel1.kangeki
+  - ja.lex.rel1.kansha
+  - ja.lex.rel1.hangeki
+  - ja.sent.mentor-relationship
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.797-mentor-relationship-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.mentor-relationship
+- id: ja.activity.797-mentor-relationship-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.792-humor-essay
+goal_id: ja.goal.b2.humor-wordplay
+title: humor essay
+summary: B2 language for humor essay.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.humor2.onake
+  - ja.lex.humor2.atama
+  - ja.lex.humor2.me2
+  - ja.lex.humor2.mimi
+  - ja.lex.humor2.kuchi
+  - ja.sent.humor-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.792-humor-essay-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.humor2.onake
+  - ja.lex.humor2.atama
+  - ja.lex.humor2.me2
+  - ja.lex.humor2.mimi
+  - ja.lex.humor2.kuchi
+  - ja.sent.humor-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.792-humor-essay-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.humor2.onake
+  - ja.lex.humor2.atama
+  - ja.lex.humor2.me2
+  - ja.lex.humor2.mimi
+  - ja.lex.humor2.kuchi
+  - ja.sent.humor-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.792-humor-essay-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.humor2.onake
+  - ja.lex.humor2.atama
+  - ja.lex.humor2.me2
+  - ja.lex.humor2.mimi
+  - ja.lex.humor2.kuchi
+  - ja.sent.humor-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.792-humor-essay-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.humor2.onake
+  - ja.lex.humor2.atama
+  - ja.lex.humor2.me2
+  - ja.lex.humor2.mimi
+  - ja.lex.humor2.kuchi
+  - ja.sent.humor-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.792-humor-essay-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.humor-essay
+- id: ja.activity.792-humor-essay-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.796-friendship-maintenance
+goal_id: ja.goal.b2.relationships-deep
+title: friendship maintenance
+summary: B2 language for friendship maintenance.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.rel1.soncho
+  - ja.lex.rel1.aijo
+  - ja.lex.rel1.jooho2
+  - ja.lex.rel1.kokan
+  - ja.lex.rel1.kofuku
+  - ja.sent.friendship-maintenance
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.796-friendship-maintenance-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.rel1.soncho
+  - ja.lex.rel1.aijo
+  - ja.lex.rel1.jooho2
+  - ja.lex.rel1.kokan
+  - ja.lex.rel1.kofuku
+  - ja.sent.friendship-maintenance
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.796-friendship-maintenance-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.rel1.soncho
+  - ja.lex.rel1.aijo
+  - ja.lex.rel1.jooho2
+  - ja.lex.rel1.kokan
+  - ja.lex.rel1.kofuku
+  - ja.sent.friendship-maintenance
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.796-friendship-maintenance-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.rel1.soncho
+  - ja.lex.rel1.aijo
+  - ja.lex.rel1.jooho2
+  - ja.lex.rel1.kokan
+  - ja.lex.rel1.kofuku
+  - ja.sent.friendship-maintenance
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.796-friendship-maintenance-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.rel1.soncho
+  - ja.lex.rel1.aijo
+  - ja.lex.rel1.jooho2
+  - ja.lex.rel1.kokan
+  - ja.lex.rel1.kofuku
+  - ja.sent.friendship-maintenance
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.796-friendship-maintenance-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.friendship-maintenance
+- id: ja.activity.796-friendship-maintenance-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

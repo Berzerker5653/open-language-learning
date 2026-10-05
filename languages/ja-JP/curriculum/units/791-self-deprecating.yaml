@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.791-self-deprecating
+goal_id: ja.goal.b2.humor-wordplay
+title: self-deprecating
+summary: B2 language for self-deprecating.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.humor2.te2
+  - ja.lex.humor2.ashi
+  - ja.lex.humor2.kubi
+  - ja.lex.humor2.kao
+  - ja.lex.humor2.mune
+  - ja.sent.self-deprecating
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.791-self-deprecating-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.humor2.te2
+  - ja.lex.humor2.ashi
+  - ja.lex.humor2.kubi
+  - ja.lex.humor2.kao
+  - ja.lex.humor2.mune
+  - ja.sent.self-deprecating
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.791-self-deprecating-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.humor2.te2
+  - ja.lex.humor2.ashi
+  - ja.lex.humor2.kubi
+  - ja.lex.humor2.kao
+  - ja.lex.humor2.mune
+  - ja.sent.self-deprecating
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.791-self-deprecating-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.humor2.te2
+  - ja.lex.humor2.ashi
+  - ja.lex.humor2.kubi
+  - ja.lex.humor2.kao
+  - ja.lex.humor2.mune
+  - ja.sent.self-deprecating
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.791-self-deprecating-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.humor2.te2
+  - ja.lex.humor2.ashi
+  - ja.lex.humor2.kubi
+  - ja.lex.humor2.kao
+  - ja.lex.humor2.mune
+  - ja.sent.self-deprecating
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.791-self-deprecating-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.self-deprecating
+- id: ja.activity.791-self-deprecating-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
