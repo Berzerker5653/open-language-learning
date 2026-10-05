@@ -922,3 +922,9 @@ Score: **7/7**.
 
 Units 720-729 (language-linguistics), 50 words (`lexicon/ling2.jsonl`), 2 grammar
 (`b2-darou`, `b2-to-omo-u`), 8 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 21
+
+Goal `ru.goal.b1.experiences` created (+2 assessments). Units 230-239,
+50 words (`lexicon/experiences.jsonl`), 2 grammar (`b1.experience-negation`,
+`b1.reaction-predicatives`), 10 sentences. Score: **7/7**.

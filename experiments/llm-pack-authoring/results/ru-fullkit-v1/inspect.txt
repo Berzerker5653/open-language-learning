@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
-       21824  492cf2135fda  assessments/definitions.jsonl
-       30850  c92fe385a5f5  curriculum/goals.yaml
+       22646  5dd39df78be6  assessments/definitions.jsonl
+       31930  2bf25f86dc03  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -220,22 +220,33 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1445  956d6c9d653f  curriculum/units/217-narration-sequence-08.yaml
         1404  0aae8563dcd9  curriculum/units/218-narration-sequence-09.yaml
         1422  623a03d9fb4d  curriculum/units/219-narration-sequence-10.yaml
-        1386  c97ab614104a  curriculum/units/220-narration-background-01.yaml
-        1401  a5a4beed0651  curriculum/units/221-narration-background-02.yaml
-        1317  908c64e47841  curriculum/units/222-narration-background-03.yaml
-        1370  8b0640063b2d  curriculum/units/223-narration-background-04.yaml
-        1370  e91baedf1da9  curriculum/units/224-narration-background-05.yaml
-        1364  847883a13612  curriculum/units/225-narration-background-06.yaml
-        1319  2052e5087ea9  curriculum/units/226-narration-background-07.yaml
-        1344  df1218d4edb7  curriculum/units/227-narration-background-08.yaml
-        1392  c16b0c2dec65  curriculum/units/228-narration-background-09.yaml
-        1355  29c781787fdf  curriculum/units/229-narration-background-10.yaml
-       28976  1ecbb596c385  grammar/concepts.jsonl
+        1471  42d837d23221  curriculum/units/220-narration-background-01.yaml
+        1486  fa435d183391  curriculum/units/221-narration-background-02.yaml
+        1402  2352b187f927  curriculum/units/222-narration-background-03.yaml
+        1455  867a48193c08  curriculum/units/223-narration-background-04.yaml
+        1455  b134e519669d  curriculum/units/224-narration-background-05.yaml
+        1449  77f0fb75a4b5  curriculum/units/225-narration-background-06.yaml
+        1404  625168e99a87  curriculum/units/226-narration-background-07.yaml
+        1429  c38a2ab68d5e  curriculum/units/227-narration-background-08.yaml
+        1477  bc16a53adcd1  curriculum/units/228-narration-background-09.yaml
+        1440  174fb66c4a97  curriculum/units/229-narration-background-10.yaml
+        1404  9a1bbd41c6e4  curriculum/units/230-life-experiences-01.yaml
+        1372  9e320777a63b  curriculum/units/231-life-experiences-02.yaml
+        1373  f04786ab36bb  curriculum/units/232-life-experiences-03.yaml
+        1376  e2a79ffae559  curriculum/units/233-life-experiences-04.yaml
+        1423  dcdeb74c52bc  curriculum/units/234-life-experiences-05.yaml
+        1382  071b6cbc9708  curriculum/units/235-life-experiences-06.yaml
+        1379  f69486db917e  curriculum/units/236-life-experiences-07.yaml
+        1368  a92890cbe5b3  curriculum/units/237-life-experiences-08.yaml
+        1419  17cbedbc4d2f  curriculum/units/238-life-experiences-09.yaml
+        1399  384258710f34  curriculum/units/239-life-experiences-10.yaml
+       29981  df02f89718e0  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        21189  03a4503c7371  lexicon/city.jsonl
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
        21726  cc469700bc35  lexicon/comparisons.jsonl
         3655  dbb5543b101e  lexicon/everyday.jsonl
+       22280  a1be61684b79  lexicon/experiences.jsonl
        21072  e82dce96cc01  lexicon/family.jsonl
        20787  618656b3d458  lexicon/food.jsonl
         3882  2331dd495806  lexicon/greetings.jsonl
@@ -260,5 +271,5 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-       70536  3b278448c945  sentences/entries.jsonl
+       74202  1b44dc1ad974  sentences/entries.jsonl
          391  74babc055676  sources.jsonl
