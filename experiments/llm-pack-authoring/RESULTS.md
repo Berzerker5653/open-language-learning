@@ -1029,3 +1029,8 @@ Units 320-329 (media accounts, reviews, reactions), 50 words (`lexicon/media.jso
 Units 330-339 (opinions, reasons, examples), 50 words (`lexicon/opinions.jsonl`),
 2 grammar (`b1.po-mneniyu-gen`, `b1.naprimier`), 10 sentences,
 new goal `ru.goal.b1.opinions` + 2 assessments. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 32
+
+Units 340-349 (alternative views, respectful responses), 50 words (`lexicon/respect.jsonl`),
+2 grammar (`b1.sdrugoy-storony`, `b1.ya-vashego-mneniya`), 10 sentences. Score: **7/7**.

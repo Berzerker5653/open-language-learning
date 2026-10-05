@@ -1,0 +1,46 @@
+id: "ru.unit.b1.respect-02"
+goal_id: "ru.goal.b1.opinions"
+title: "Politeness"
+summary: "вежливость, учтивость, такт, тактичность and почтение."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u341-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.respect.vezhlivost",
+        "ru.lex.respect.utchtivost",
+        "ru.lex.respect.takt",
+        "ru.lex.respect.taktichnost",
+        "ru.lex.respect.pochtenie",
+        "ru.sent.b1.u341",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u341-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u341-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u341"]
+  - id: "ru.activity.b1.u341-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Politeness: respect with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse учтивость (courtesy) with вежливость (politeness)."]
+  target_proficiency: "B1"
+  validation_method: "choice"

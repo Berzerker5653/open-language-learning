@@ -1,0 +1,46 @@
+id: "ru.unit.b1.respect-09"
+goal_id: "ru.goal.b1.opinions"
+title: "Caution"
+summary: "осторожность, нерешительность, колебание, промедление and торопливость."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b1.u348-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.respect.ostorozhnost",
+        "ru.lex.respect.nereshitelnost",
+        "ru.lex.respect.kolebanie",
+        "ru.lex.respect.promedlenie",
+        "ru.lex.respect.toroplivost",
+        "ru.sent.b1.u348",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b1.u348-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b1.u348-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b1.u348"]
+  - id: "ru.activity.b1.u348-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Caution: respect with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse колебание (hesitation) with промедление (delay)."]
+  target_proficiency: "B1"
+  validation_method: "choice"
