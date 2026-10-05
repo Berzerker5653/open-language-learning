@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.667-behavior-change
+goal_id: ja.goal.b2.psychology-mind
+title: behavior change
+summary: B2 language for behavior change.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.psych.koudou
+  - ja.lex.psych.kaizen
+  - ja.lex.psych.mokuhyou
+  - ja.lex.psych.jissen
+  - ja.lex.psych.kizuna
+  - ja.sent.behavior-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.667-behavior-change-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.psych.koudou
+  - ja.lex.psych.kaizen
+  - ja.lex.psych.mokuhyou
+  - ja.lex.psych.jissen
+  - ja.lex.psych.kizuna
+  - ja.sent.behavior-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.667-behavior-change-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.psych.koudou
+  - ja.lex.psych.kaizen
+  - ja.lex.psych.mokuhyou
+  - ja.lex.psych.jissen
+  - ja.lex.psych.kizuna
+  - ja.sent.behavior-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.667-behavior-change-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.psych.koudou
+  - ja.lex.psych.kaizen
+  - ja.lex.psych.mokuhyou
+  - ja.lex.psych.jissen
+  - ja.lex.psych.kizuna
+  - ja.sent.behavior-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.667-behavior-change-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.psych.koudou
+  - ja.lex.psych.kaizen
+  - ja.lex.psych.mokuhyou
+  - ja.lex.psych.jissen
+  - ja.lex.psych.kizuna
+  - ja.sent.behavior-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.667-behavior-change-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.behavior-change
+- id: ja.activity.667-behavior-change-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

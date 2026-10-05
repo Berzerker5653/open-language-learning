@@ -847,3 +847,8 @@ Goal `ja.goal.b2.psychology-mind` created (+assess, +deps). Units 650-659,
 Goal `ru.goal.a2.social-plans` created (+2 assessments). Units 160-169,
 50 words (`lexicon/socialplans.jsonl`), 2 grammar (`a2.let-us-imperative`,
 `a2.invitation-accusative`), 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 62
+
+Units 660-669 (psychology-mind), 50 words (`lexicon/psych.jsonl`),
+2 grammar (`b2-ni-hikurabete`, `b2-ni-tsurezuru`), 8 sentences. Score: **7/7**.

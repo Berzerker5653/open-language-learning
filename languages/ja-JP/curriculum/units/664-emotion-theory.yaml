@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.664-emotion-theory
+goal_id: ja.goal.b2.psychology-mind
+title: emotion theory
+summary: B2 language for emotion theory.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.psych.kibun
+  - ja.lex.psych.fuan
+  - ja.lex.psych.wakuwaku
+  - ja.lex.psych.tanoshii
+  - ja.lex.psych.kanashii
+  - ja.sent.emotion-theory
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.664-emotion-theory-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.psych.kibun
+  - ja.lex.psych.fuan
+  - ja.lex.psych.wakuwaku
+  - ja.lex.psych.tanoshii
+  - ja.lex.psych.kanashii
+  - ja.sent.emotion-theory
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.664-emotion-theory-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.psych.kibun
+  - ja.lex.psych.fuan
+  - ja.lex.psych.wakuwaku
+  - ja.lex.psych.tanoshii
+  - ja.lex.psych.kanashii
+  - ja.sent.emotion-theory
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.664-emotion-theory-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.psych.kibun
+  - ja.lex.psych.fuan
+  - ja.lex.psych.wakuwaku
+  - ja.lex.psych.tanoshii
+  - ja.lex.psych.kanashii
+  - ja.sent.emotion-theory
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.664-emotion-theory-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.psych.kibun
+  - ja.lex.psych.fuan
+  - ja.lex.psych.wakuwaku
+  - ja.lex.psych.tanoshii
+  - ja.lex.psych.kanashii
+  - ja.sent.emotion-theory
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.664-emotion-theory-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.emotion-theory
+- id: ja.activity.664-emotion-theory-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.663-social-psychology
+goal_id: ja.goal.b2.psychology-mind
+title: social psychology
+summary: B2 language for social psychology.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.psych.shuudan
+  - ja.lex.psych.shuukou
+  - ja.lex.psych.enryo
+  - ja.lex.psych.shinrai
+  - ja.lex.psych.hiyou
+  - ja.sent.social-psychology
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.663-social-psychology-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.psych.shuudan
+  - ja.lex.psych.shuukou
+  - ja.lex.psych.enryo
+  - ja.lex.psych.shinrai
+  - ja.lex.psych.hiyou
+  - ja.sent.social-psychology
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.663-social-psychology-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.psych.shuudan
+  - ja.lex.psych.shuukou
+  - ja.lex.psych.enryo
+  - ja.lex.psych.shinrai
+  - ja.lex.psych.hiyou
+  - ja.sent.social-psychology
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.663-social-psychology-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.psych.shuudan
+  - ja.lex.psych.shuukou
+  - ja.lex.psych.enryo
+  - ja.lex.psych.shinrai
+  - ja.lex.psych.hiyou
+  - ja.sent.social-psychology
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.663-social-psychology-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.psych.shuudan
+  - ja.lex.psych.shuukou
+  - ja.lex.psych.enryo
+  - ja.lex.psych.shinrai
+  - ja.lex.psych.hiyou
+  - ja.sent.social-psychology
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.663-social-psychology-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.social-psychology
+- id: ja.activity.663-social-psychology-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

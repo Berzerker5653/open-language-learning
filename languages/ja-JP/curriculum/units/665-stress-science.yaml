@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.665-stress-science
+goal_id: ja.goal.b2.psychology-mind
+title: stress science
+summary: B2 language for stress science.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.psych.sutoresu
+  - ja.lex.psych.iradachi
+  - ja.lex.psych.nemuri
+  - ja.lex.psych.yuutsu
+  - ja.lex.psych.taisetsu
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-ni-hikurabete
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.665-stress-science-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.psych.sutoresu
+  - ja.lex.psych.iradachi
+  - ja.lex.psych.nemuri
+  - ja.lex.psych.yuutsu
+  - ja.lex.psych.taisetsu
+  - ja.grammar.b2-ni-hikurabete
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.665-stress-science-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.psych.sutoresu
+  - ja.lex.psych.iradachi
+  - ja.lex.psych.nemuri
+  - ja.lex.psych.yuutsu
+  - ja.lex.psych.taisetsu
+  - ja.grammar.b2-ni-hikurabete
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.665-stress-science-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.psych.sutoresu
+  - ja.lex.psych.iradachi
+  - ja.lex.psych.nemuri
+  - ja.lex.psych.yuutsu
+  - ja.lex.psych.taisetsu
+  - ja.grammar.b2-ni-hikurabete
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.665-stress-science-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.psych.sutoresu
+  - ja.lex.psych.iradachi
+  - ja.lex.psych.nemuri
+  - ja.lex.psych.yuutsu
+  - ja.lex.psych.taisetsu
+  - ja.grammar.b2-ni-hikurabete
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.665-stress-science-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.665-stress-science-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

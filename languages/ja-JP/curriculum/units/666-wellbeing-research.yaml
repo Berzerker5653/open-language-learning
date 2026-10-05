@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.666-wellbeing-research
+goal_id: ja.goal.b2.psychology-mind
+title: wellbeing research
+summary: B2 language for wellbeing research.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.psych.shiawase
+  - ja.lex.psych.genki
+  - ja.lex.psych.shinpai
+  - ja.lex.psych.hougoku2
+  - ja.lex.psych.danran
+  - ja.sent.wellbeing-research
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.666-wellbeing-research-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.psych.shiawase
+  - ja.lex.psych.genki
+  - ja.lex.psych.shinpai
+  - ja.lex.psych.hougoku2
+  - ja.lex.psych.danran
+  - ja.sent.wellbeing-research
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.666-wellbeing-research-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.psych.shiawase
+  - ja.lex.psych.genki
+  - ja.lex.psych.shinpai
+  - ja.lex.psych.hougoku2
+  - ja.lex.psych.danran
+  - ja.sent.wellbeing-research
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.666-wellbeing-research-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.psych.shiawase
+  - ja.lex.psych.genki
+  - ja.lex.psych.shinpai
+  - ja.lex.psych.hougoku2
+  - ja.lex.psych.danran
+  - ja.sent.wellbeing-research
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.666-wellbeing-research-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.psych.shiawase
+  - ja.lex.psych.genki
+  - ja.lex.psych.shinpai
+  - ja.lex.psych.hougoku2
+  - ja.lex.psych.danran
+  - ja.sent.wellbeing-research
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.666-wellbeing-research-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.wellbeing-research
+- id: ja.activity.666-wellbeing-research-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.668-perception-study
+goal_id: ja.goal.b2.psychology-mind
+title: perception study
+summary: B2 language for perception study.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.psych.kakunin
+  - ja.lex.psych.kankaku
+  - ja.lex.psych.shinjitsu
+  - ja.lex.psych.chiteki
+  - ja.lex.psych.ninchi
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-ni-tsurezuru
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.668-perception-study-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.psych.kakunin
+  - ja.lex.psych.kankaku
+  - ja.lex.psych.shinjitsu
+  - ja.lex.psych.chiteki
+  - ja.lex.psych.ninchi
+  - ja.grammar.b2-ni-tsurezuru
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.668-perception-study-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.psych.kakunin
+  - ja.lex.psych.kankaku
+  - ja.lex.psych.shinjitsu
+  - ja.lex.psych.chiteki
+  - ja.lex.psych.ninchi
+  - ja.grammar.b2-ni-tsurezuru
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.668-perception-study-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.psych.kakunin
+  - ja.lex.psych.kankaku
+  - ja.lex.psych.shinjitsu
+  - ja.lex.psych.chiteki
+  - ja.lex.psych.ninchi
+  - ja.grammar.b2-ni-tsurezuru
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.668-perception-study-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.psych.kakunin
+  - ja.lex.psych.kankaku
+  - ja.lex.psych.shinjitsu
+  - ja.lex.psych.chiteki
+  - ja.lex.psych.ninchi
+  - ja.grammar.b2-ni-tsurezuru
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.668-perception-study-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.668-perception-study-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email
