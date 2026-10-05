@@ -457,3 +457,11 @@ Goal `ja.goal.b1.work-professional` (prereq daily-admin, mirrored;
 spans 220-234), 10 units, 50-word `lexicon/work2.jsonl`, 2 grammar
 (`b1.ukemi-passive`, `b1.keigo-soncho-intro`), 8 sentences, 1
 assessment. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 18: B1 units 230-239 (work-professional part 2 + education-academic part 1)
+
+Goals `ja.goal.b1.work-professional` (complete, 220-234) and
+`ja.goal.b1.education-academic` (prereq work-professional, mirrored;
+spans 235-249), 10 units, 50-word `lexicon/edu.jsonl`, 3 grammar
+(`b1.susume-continuity`, `b1.to-iu-toka`, `b1.you-form-volitional`), 8
+sentences, 1 assessment. Score: **7/7**.

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.university-system
+goal_id: ja.goal.b1.education-academic
+title: university system
+summary: B1 language for university system.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.edu.shingaku
+  - ja.lex.edu.daigakuin
+  - ja.lex.edu.gakubu
+  - ja.lex.edu.kenkyuusei
+  - ja.lex.edu.kyouju
+  - ja.sent.network-message
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.university-system-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.edu.shingaku
+  - ja.lex.edu.daigakuin
+  - ja.lex.edu.gakubu
+  - ja.lex.edu.kenkyuusei
+  - ja.lex.edu.kyouju
+  - ja.sent.network-message
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.university-system-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.edu.shingaku
+  - ja.lex.edu.daigakuin
+  - ja.lex.edu.gakubu
+  - ja.lex.edu.kenkyuusei
+  - ja.lex.edu.kyouju
+  - ja.sent.network-message
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.university-system-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.edu.shingaku
+  - ja.lex.edu.daigakuin
+  - ja.lex.edu.gakubu
+  - ja.lex.edu.kenkyuusei
+  - ja.lex.edu.kyouju
+  - ja.sent.network-message
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.university-system-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.edu.shingaku
+  - ja.lex.edu.daigakuin
+  - ja.lex.edu.gakubu
+  - ja.lex.edu.kenkyuusei
+  - ja.lex.edu.kyouju
+  - ja.sent.network-message
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.university-system-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.network-message
+- id: ja.activity.university-system-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

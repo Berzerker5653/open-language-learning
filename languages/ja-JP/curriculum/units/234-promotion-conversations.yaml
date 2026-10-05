@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.promotion-conversations
+goal_id: ja.goal.b1.work-professional
+title: promotion conversations
+summary: B1 language for promotion conversations.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.edu.hyouka
+  - ja.lex.edu.kachou
+  - ja.lex.edu.kyoku
+  - ja.lex.edu.wakamatsu
+  - ja.lex.edu.kyouiku
+  - ja.sent.promotion-talk
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.promotion-conversations-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.edu.hyouka
+  - ja.lex.edu.kachou
+  - ja.lex.edu.kyoku
+  - ja.lex.edu.wakamatsu
+  - ja.lex.edu.kyouiku
+  - ja.sent.promotion-talk
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.promotion-conversations-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.edu.hyouka
+  - ja.lex.edu.kachou
+  - ja.lex.edu.kyoku
+  - ja.lex.edu.wakamatsu
+  - ja.lex.edu.kyouiku
+  - ja.sent.promotion-talk
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.promotion-conversations-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.edu.hyouka
+  - ja.lex.edu.kachou
+  - ja.lex.edu.kyoku
+  - ja.lex.edu.wakamatsu
+  - ja.lex.edu.kyouiku
+  - ja.sent.promotion-talk
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.promotion-conversations-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.edu.hyouka
+  - ja.lex.edu.kachou
+  - ja.lex.edu.kyoku
+  - ja.lex.edu.wakamatsu
+  - ja.lex.edu.kyouiku
+  - ja.sent.promotion-talk
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.promotion-conversations-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.promotion-talk
+- id: ja.activity.promotion-conversations-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

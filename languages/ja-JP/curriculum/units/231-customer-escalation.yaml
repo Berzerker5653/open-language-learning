@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.customer-escalation
+goal_id: ja.goal.b1.work-professional
+title: customer escalation
+summary: B1 language for customer escalation.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.edu.moushiwake
+  - ja.lex.edu.moushiage
+  - ja.lex.edu.manzoku
+  - ja.lex.edu.kaihen
+  - ja.lex.edu.denwa-ban
+  - ja.sent.escalation-apology
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.customer-escalation-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.edu.moushiwake
+  - ja.lex.edu.moushiage
+  - ja.lex.edu.manzoku
+  - ja.lex.edu.kaihen
+  - ja.lex.edu.denwa-ban
+  - ja.sent.escalation-apology
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.customer-escalation-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.edu.moushiwake
+  - ja.lex.edu.moushiage
+  - ja.lex.edu.manzoku
+  - ja.lex.edu.kaihen
+  - ja.lex.edu.denwa-ban
+  - ja.sent.escalation-apology
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.customer-escalation-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.edu.moushiwake
+  - ja.lex.edu.moushiage
+  - ja.lex.edu.manzoku
+  - ja.lex.edu.kaihen
+  - ja.lex.edu.denwa-ban
+  - ja.sent.escalation-apology
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.customer-escalation-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.edu.moushiwake
+  - ja.lex.edu.moushiage
+  - ja.lex.edu.manzoku
+  - ja.lex.edu.kaihen
+  - ja.lex.edu.denwa-ban
+  - ja.sent.escalation-apology
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.customer-escalation-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.escalation-apology
+- id: ja.activity.customer-escalation-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

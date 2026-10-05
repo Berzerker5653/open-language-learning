@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.application-essay
+goal_id: ja.goal.b1.education-academic
+title: application essay
+summary: B1 language for application essay.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.edu.inshou
+  - ja.lex.edu.inshou-ron
+  - ja.lex.edu.saku
+  - ja.lex.edu.ronbun
+  - ja.lex.edu.shishou
+  - ja.sent.essay-impression
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.application-essay-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.edu.inshou
+  - ja.lex.edu.inshou-ron
+  - ja.lex.edu.saku
+  - ja.lex.edu.ronbun
+  - ja.lex.edu.shishou
+  - ja.sent.essay-impression
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.application-essay-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.edu.inshou
+  - ja.lex.edu.inshou-ron
+  - ja.lex.edu.saku
+  - ja.lex.edu.ronbun
+  - ja.lex.edu.shishou
+  - ja.sent.essay-impression
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.application-essay-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.edu.inshou
+  - ja.lex.edu.inshou-ron
+  - ja.lex.edu.saku
+  - ja.lex.edu.ronbun
+  - ja.lex.edu.shishou
+  - ja.sent.essay-impression
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.application-essay-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.edu.inshou
+  - ja.lex.edu.inshou-ron
+  - ja.lex.edu.saku
+  - ja.lex.edu.ronbun
+  - ja.lex.edu.shishou
+  - ja.sent.essay-impression
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.application-essay-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.essay-impression
+- id: ja.activity.application-essay-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

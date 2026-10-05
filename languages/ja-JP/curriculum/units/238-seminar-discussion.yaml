@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.seminar-discussion
+goal_id: ja.goal.b1.education-academic
+title: seminar discussion
+summary: B1 language for seminar discussion.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.edu.kenkyuu
+  - ja.lex.edu.kenkyuu-sha
+  - ja.lex.edu.kenkyuu-hi
+  - ja.lex.edu.gijutsu
+  - ja.lex.edu.hakushi
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b1.you-form-volitional
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.seminar-discussion-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.edu.kenkyuu
+  - ja.lex.edu.kenkyuu-sha
+  - ja.lex.edu.kenkyuu-hi
+  - ja.lex.edu.gijutsu
+  - ja.lex.edu.hakushi
+  - ja.grammar.b1.you-form-volitional
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.seminar-discussion-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.edu.kenkyuu
+  - ja.lex.edu.kenkyuu-sha
+  - ja.lex.edu.kenkyuu-hi
+  - ja.lex.edu.gijutsu
+  - ja.lex.edu.hakushi
+  - ja.grammar.b1.you-form-volitional
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.seminar-discussion-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.edu.kenkyuu
+  - ja.lex.edu.kenkyuu-sha
+  - ja.lex.edu.kenkyuu-hi
+  - ja.lex.edu.gijutsu
+  - ja.lex.edu.hakushi
+  - ja.grammar.b1.you-form-volitional
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.seminar-discussion-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.edu.kenkyuu
+  - ja.lex.edu.kenkyuu-sha
+  - ja.lex.edu.kenkyuu-hi
+  - ja.lex.edu.gijutsu
+  - ja.lex.edu.hakushi
+  - ja.grammar.b1.you-form-volitional
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.seminar-discussion-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.seminar-discussion-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

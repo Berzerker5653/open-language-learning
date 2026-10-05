@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.citation-basics
+goal_id: ja.goal.b1.education-academic
+title: citation basics
+summary: B1 language for citation basics.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.edu.kyouiku-ken
+  - ja.lex.edu.tsuujou
+  - ja.lex.edu.nyuushi
+  - ja.lex.edu.gakuen
+  - ja.lex.edu.gakki
+  - ja.sent.university-system
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.citation-basics-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.edu.kyouiku-ken
+  - ja.lex.edu.tsuujou
+  - ja.lex.edu.nyuushi
+  - ja.lex.edu.gakuen
+  - ja.lex.edu.gakki
+  - ja.sent.university-system
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.citation-basics-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.edu.kyouiku-ken
+  - ja.lex.edu.tsuujou
+  - ja.lex.edu.nyuushi
+  - ja.lex.edu.gakuen
+  - ja.lex.edu.gakki
+  - ja.sent.university-system
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.citation-basics-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.edu.kyouiku-ken
+  - ja.lex.edu.tsuujou
+  - ja.lex.edu.nyuushi
+  - ja.lex.edu.gakuen
+  - ja.lex.edu.gakki
+  - ja.sent.university-system
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.citation-basics-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.edu.kyouiku-ken
+  - ja.lex.edu.tsuujou
+  - ja.lex.edu.nyuushi
+  - ja.lex.edu.gakuen
+  - ja.lex.edu.gakki
+  - ja.sent.university-system
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.citation-basics-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.university-system
+- id: ja.activity.citation-basics-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

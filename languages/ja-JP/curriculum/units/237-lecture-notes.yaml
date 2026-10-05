@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.lecture-notes
+goal_id: ja.goal.b1.education-academic
+title: lecture notes
+summary: B1 language for lecture notes.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.edu.jissen
+  - ja.lex.edu.test
+  - ja.lex.edu.shiken
+  - ja.lex.edu.seiseki
+  - ja.lex.edu.gakushi
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b1.to-iu-toka
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.lecture-notes-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.edu.jissen
+  - ja.lex.edu.test
+  - ja.lex.edu.shiken
+  - ja.lex.edu.seiseki
+  - ja.lex.edu.gakushi
+  - ja.grammar.b1.to-iu-toka
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.lecture-notes-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.edu.jissen
+  - ja.lex.edu.test
+  - ja.lex.edu.shiken
+  - ja.lex.edu.seiseki
+  - ja.lex.edu.gakushi
+  - ja.grammar.b1.to-iu-toka
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.lecture-notes-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.edu.jissen
+  - ja.lex.edu.test
+  - ja.lex.edu.shiken
+  - ja.lex.edu.seiseki
+  - ja.lex.edu.gakushi
+  - ja.grammar.b1.to-iu-toka
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.lecture-notes-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.edu.jissen
+  - ja.lex.edu.test
+  - ja.lex.edu.shiken
+  - ja.lex.edu.seiseki
+  - ja.lex.edu.gakushi
+  - ja.grammar.b1.to-iu-toka
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.lecture-notes-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.lecture-notes-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email
