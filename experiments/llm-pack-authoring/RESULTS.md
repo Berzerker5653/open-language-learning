@@ -1280,3 +1280,9 @@ Score: **7/7**.
 Units 750-759 (identity, belonging, and representation), goal `ru.goal.b2.culture-perspectives` (existing),
 50 words (`lexicon/cult3.jsonl`), 2 grammar (`b2-chuvstvuet-sebya`, `b2-dlya-nego-vazhno`), 10 sentences.
 Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 74
+
+Units 760-769 (intercultural comparison and perspective taking), goal `ru.goal.b2.culture-perspectives` (existing),
+50 words (`lexicon/cult4.jsonl`), 2 grammar (`b2-po-sravneniyu-s`, `b2-glazami-drugogo`), 10 sentences.
+Score: **7/7**.

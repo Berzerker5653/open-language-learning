@@ -1,0 +1,46 @@
+id: "ru.unit.b2.int-06"
+goal_id: "ru.goal.b2.culture-perspectives"
+title: "Empathy"
+summary: "эмпатия, жалость, радушный, гостеприимный and соотечественник."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u765-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.cult.empatiya",
+        "ru.lex.cult.zalost",
+        "ru.lex.cult.radushnyj",
+        "ru.lex.cult.gostepriimnyj",
+        "ru.lex.cult.sootechestvennik",
+        "ru.sent.b2.u765",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u765-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u765-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u765"]
+  - id: "ru.activity.b2.u765-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Empathy: literary response with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse эмпатия (empathy) with жалость (pity)."]
+  target_proficiency: "B2"
+  validation_method: "choice"

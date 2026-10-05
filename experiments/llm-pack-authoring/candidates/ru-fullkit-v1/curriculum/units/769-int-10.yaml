@@ -1,0 +1,47 @@
+id: "ru.unit.b2.int-10"
+goal_id: "ru.goal.b2.culture-perspectives"
+title: "Exchange"
+summary: "апроприация, маргинализация, справедливость, инкультурация and нравы."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u769-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.cult.apropriaciya",
+        "ru.lex.cult.marginalizaciya",
+        "ru.lex.cult.spravedlivost",
+        "ru.lex.cult.inkulturaciya",
+        "ru.lex.cult.nravy",
+        "ru.sent.b2.u769",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u769-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u769-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u769"]
+  - id: "ru.activity.b2.u769-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Exchange: literary response with taught forms only."]
+  prohibited_ambiguity:
+    ["Do not confuse апроприация (appropriation) with заимствование (borrowing)."]
+  target_proficiency: "B2"
+  validation_method: "choice"
