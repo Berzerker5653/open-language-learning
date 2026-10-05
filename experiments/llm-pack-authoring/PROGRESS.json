@@ -10,7 +10,7 @@
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
-    "units_next": "590",
-    "notes": "b47-b54 (510-589) 7/7; global-issues goal created (580-589 done); DATA FIX: b47-b54 lexicon forms/readings rewritten from English text to hiragana/katakana + pos normalized (fix_kana.py); future batches must author kana in WORDS"
+    "units_next": "600",
+    "notes": "b47-b55 (510-599) 7/7; academic-skills goal created (596-599); kana authored directly in WORDS since b55; next: units 600+ per plan"
   }
 }
