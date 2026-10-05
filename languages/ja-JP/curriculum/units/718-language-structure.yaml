@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.718-language-structure
+goal_id: ja.goal.b2.language-linguistics
+title: language structure
+summary: B2 language for language structure.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.ling.gengogaku
+  - ja.lex.ling.goin
+  - ja.lex.ling.bunpou2
+  - ja.lex.ling.goihon
+  - ja.lex.ling.hoki
+  - ja.sent.language-structure
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.718-language-structure-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.ling.gengogaku
+  - ja.lex.ling.goin
+  - ja.lex.ling.bunpou2
+  - ja.lex.ling.goihon
+  - ja.lex.ling.hoki
+  - ja.sent.language-structure
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.718-language-structure-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.ling.gengogaku
+  - ja.lex.ling.goin
+  - ja.lex.ling.bunpou2
+  - ja.lex.ling.goihon
+  - ja.lex.ling.hoki
+  - ja.sent.language-structure
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.718-language-structure-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.ling.gengogaku
+  - ja.lex.ling.goin
+  - ja.lex.ling.bunpou2
+  - ja.lex.ling.goihon
+  - ja.lex.ling.hoki
+  - ja.sent.language-structure
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.718-language-structure-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.ling.gengogaku
+  - ja.lex.ling.goin
+  - ja.lex.ling.bunpou2
+  - ja.lex.ling.goihon
+  - ja.lex.ling.hoki
+  - ja.sent.language-structure
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.718-language-structure-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.language-structure
+- id: ja.activity.718-language-structure-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

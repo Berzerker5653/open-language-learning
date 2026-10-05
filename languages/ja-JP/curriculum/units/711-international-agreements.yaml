@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.711-international-agreements
+goal_id: ja.goal.b2.environment-policy
+title: international agreements
+summary: B2 language for international agreements.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.env4.kokusai-kyoutei
+  - ja.lex.env4.kansa2
+  - ja.lex.env4.jissou
+  - ja.lex.env4.sonohoka
+  - ja.lex.env4.chiiki
+  - ja.sent.international-agreements
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.711-international-agreements-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.env4.kokusai-kyoutei
+  - ja.lex.env4.kansa2
+  - ja.lex.env4.jissou
+  - ja.lex.env4.sonohoka
+  - ja.lex.env4.chiiki
+  - ja.sent.international-agreements
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.711-international-agreements-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.env4.kokusai-kyoutei
+  - ja.lex.env4.kansa2
+  - ja.lex.env4.jissou
+  - ja.lex.env4.sonohoka
+  - ja.lex.env4.chiiki
+  - ja.sent.international-agreements
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.711-international-agreements-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.env4.kokusai-kyoutei
+  - ja.lex.env4.kansa2
+  - ja.lex.env4.jissou
+  - ja.lex.env4.sonohoka
+  - ja.lex.env4.chiiki
+  - ja.sent.international-agreements
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.711-international-agreements-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.env4.kokusai-kyoutei
+  - ja.lex.env4.kansa2
+  - ja.lex.env4.jissou
+  - ja.lex.env4.sonohoka
+  - ja.lex.env4.chiiki
+  - ja.sent.international-agreements
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.711-international-agreements-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.international-agreements
+- id: ja.activity.711-international-agreements-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

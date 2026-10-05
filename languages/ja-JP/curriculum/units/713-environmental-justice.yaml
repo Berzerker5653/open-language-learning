@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.713-environmental-justice
+goal_id: ja.goal.b2.environment-policy
+title: environmental justice
+summary: B2 language for environmental justice.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.env4.yoho
+  - ja.lex.env4.keikai
+  - ja.lex.env4.yoka
+  - ja.lex.env4.zeikin
+  - ja.lex.env4.hosei
+  - ja.sent.environmental-justice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.713-environmental-justice-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.env4.yoho
+  - ja.lex.env4.keikai
+  - ja.lex.env4.yoka
+  - ja.lex.env4.zeikin
+  - ja.lex.env4.hosei
+  - ja.sent.environmental-justice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.713-environmental-justice-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.env4.yoho
+  - ja.lex.env4.keikai
+  - ja.lex.env4.yoka
+  - ja.lex.env4.zeikin
+  - ja.lex.env4.hosei
+  - ja.sent.environmental-justice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.713-environmental-justice-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.env4.yoho
+  - ja.lex.env4.keikai
+  - ja.lex.env4.yoka
+  - ja.lex.env4.zeikin
+  - ja.lex.env4.hosei
+  - ja.sent.environmental-justice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.713-environmental-justice-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.env4.yoho
+  - ja.lex.env4.keikai
+  - ja.lex.env4.yoka
+  - ja.lex.env4.zeikin
+  - ja.lex.env4.hosei
+  - ja.sent.environmental-justice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.713-environmental-justice-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.environmental-justice
+- id: ja.activity.713-environmental-justice-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

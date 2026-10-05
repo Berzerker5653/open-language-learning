@@ -905,3 +905,9 @@ Goal `ja.goal.b2.environment-policy` created (+ASSESS +DEP). Units 700-709
 Goal `ru.goal.b1.narration` created (+2 assessments; B1 band starts). Units 210-219,
 50 words (`lexicon/narration.jsonl`), 2 grammar (`b1.narrative-past`,
 `b1.sequence-connectors`), 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 67
+
+Goal `ja.goal.b2.language-linguistics` created (+ASSESS +DEP). Units 710-719
+(environment tail + linguistics start), 50 words (`env4.jsonl`, `ling.jsonl`), 2 grammar
+(`b2-hazu-da`, `b2-to-naruto`), 8 sentences. Score: **7/7**.

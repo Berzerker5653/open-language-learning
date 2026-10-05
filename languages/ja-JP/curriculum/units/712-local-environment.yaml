@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.712-local-environment
+goal_id: ja.goal.b2.environment-policy
+title: local environment
+summary: B2 language for local environment.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.env4.kankyou-mondai
+  - ja.lex.env4.seikatsu-fushuu
+  - ja.lex.env4.kenso
+  - ja.lex.env4.heiki
+  - ja.lex.env4.ikou
+  - ja.sent.local-environment
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.712-local-environment-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.env4.kankyou-mondai
+  - ja.lex.env4.seikatsu-fushuu
+  - ja.lex.env4.kenso
+  - ja.lex.env4.heiki
+  - ja.lex.env4.ikou
+  - ja.sent.local-environment
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.712-local-environment-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.env4.kankyou-mondai
+  - ja.lex.env4.seikatsu-fushuu
+  - ja.lex.env4.kenso
+  - ja.lex.env4.heiki
+  - ja.lex.env4.ikou
+  - ja.sent.local-environment
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.712-local-environment-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.env4.kankyou-mondai
+  - ja.lex.env4.seikatsu-fushuu
+  - ja.lex.env4.kenso
+  - ja.lex.env4.heiki
+  - ja.lex.env4.ikou
+  - ja.sent.local-environment
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.712-local-environment-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.env4.kankyou-mondai
+  - ja.lex.env4.seikatsu-fushuu
+  - ja.lex.env4.kenso
+  - ja.lex.env4.heiki
+  - ja.lex.env4.ikou
+  - ja.sent.local-environment
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.712-local-environment-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.local-environment
+- id: ja.activity.712-local-environment-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

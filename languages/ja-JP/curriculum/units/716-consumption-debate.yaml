@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.716-consumption-debate
+goal_id: ja.goal.b2.environment-policy
+title: consumption debate
+summary: B2 language for consumption debate.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.env4.kison
+  - ja.lex.env4.gensoku
+  - ja.lex.env4.fuhou
+  - ja.lex.env4.seigi
+  - ja.lex.env4.gimu
+  - ja.sent.consumption-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.716-consumption-debate-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.env4.kison
+  - ja.lex.env4.gensoku
+  - ja.lex.env4.fuhou
+  - ja.lex.env4.seigi
+  - ja.lex.env4.gimu
+  - ja.sent.consumption-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.716-consumption-debate-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.env4.kison
+  - ja.lex.env4.gensoku
+  - ja.lex.env4.fuhou
+  - ja.lex.env4.seigi
+  - ja.lex.env4.gimu
+  - ja.sent.consumption-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.716-consumption-debate-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.env4.kison
+  - ja.lex.env4.gensoku
+  - ja.lex.env4.fuhou
+  - ja.lex.env4.seigi
+  - ja.lex.env4.gimu
+  - ja.sent.consumption-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.716-consumption-debate-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.env4.kison
+  - ja.lex.env4.gensoku
+  - ja.lex.env4.fuhou
+  - ja.lex.env4.seigi
+  - ja.lex.env4.gimu
+  - ja.sent.consumption-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.716-consumption-debate-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.consumption-debate
+- id: ja.activity.716-consumption-debate-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

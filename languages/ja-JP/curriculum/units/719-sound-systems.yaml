@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.719-sound-systems
+goal_id: ja.goal.b2.language-linguistics
+title: sound systems
+summary: B2 language for sound systems.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.ling.onin
+  - ja.lex.ling.shiteki
+  - ja.lex.ling.inron
+  - ja.lex.ling.hatsuon
+  - ja.lex.ling.akusento
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-to-naruto
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.719-sound-systems-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.ling.onin
+  - ja.lex.ling.shiteki
+  - ja.lex.ling.inron
+  - ja.lex.ling.hatsuon
+  - ja.lex.ling.akusento
+  - ja.grammar.b2-to-naruto
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.719-sound-systems-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.ling.onin
+  - ja.lex.ling.shiteki
+  - ja.lex.ling.inron
+  - ja.lex.ling.hatsuon
+  - ja.lex.ling.akusento
+  - ja.grammar.b2-to-naruto
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.719-sound-systems-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.ling.onin
+  - ja.lex.ling.shiteki
+  - ja.lex.ling.inron
+  - ja.lex.ling.hatsuon
+  - ja.lex.ling.akusento
+  - ja.grammar.b2-to-naruto
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.719-sound-systems-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.ling.onin
+  - ja.lex.ling.shiteki
+  - ja.lex.ling.inron
+  - ja.lex.ling.hatsuon
+  - ja.lex.ling.akusento
+  - ja.grammar.b2-to-naruto
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.719-sound-systems-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.719-sound-systems-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

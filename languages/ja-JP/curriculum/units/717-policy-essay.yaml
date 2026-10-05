@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.717-policy-essay
+goal_id: ja.goal.b2.environment-policy
+title: policy essay
+summary: B2 language for policy essay.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.env4.yosei
+  - ja.lex.env4.gijutsu2
+  - ja.lex.env4.kaken
+  - ja.lex.env4.sonae
+  - ja.lex.env4.zeikin
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-hazu-da
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.717-policy-essay-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.env4.yosei
+  - ja.lex.env4.gijutsu2
+  - ja.lex.env4.kaken
+  - ja.lex.env4.sonae
+  - ja.lex.env4.zeikin
+  - ja.grammar.b2-hazu-da
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.717-policy-essay-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.env4.yosei
+  - ja.lex.env4.gijutsu2
+  - ja.lex.env4.kaken
+  - ja.lex.env4.sonae
+  - ja.lex.env4.zeikin
+  - ja.grammar.b2-hazu-da
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.717-policy-essay-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.env4.yosei
+  - ja.lex.env4.gijutsu2
+  - ja.lex.env4.kaken
+  - ja.lex.env4.sonae
+  - ja.lex.env4.zeikin
+  - ja.grammar.b2-hazu-da
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.717-policy-essay-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.env4.yosei
+  - ja.lex.env4.gijutsu2
+  - ja.lex.env4.kaken
+  - ja.lex.env4.sonae
+  - ja.lex.env4.zeikin
+  - ja.grammar.b2-hazu-da
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.717-policy-essay-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.717-policy-essay-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

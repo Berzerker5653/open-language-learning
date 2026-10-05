@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.715-sustainable-business
+goal_id: ja.goal.b2.environment-policy
+title: sustainable business
+summary: B2 language for sustainable business.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.env4.kyougi
+  - ja.lex.env4.tadashii
+  - ja.lex.env4.kenpou
+  - ja.lex.env4.kyotsuu
+  - ja.lex.env4.shiji
+  - ja.sent.sustainable-business
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.715-sustainable-business-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.env4.kyougi
+  - ja.lex.env4.tadashii
+  - ja.lex.env4.kenpou
+  - ja.lex.env4.kyotsuu
+  - ja.lex.env4.shiji
+  - ja.sent.sustainable-business
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.715-sustainable-business-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.env4.kyougi
+  - ja.lex.env4.tadashii
+  - ja.lex.env4.kenpou
+  - ja.lex.env4.kyotsuu
+  - ja.lex.env4.shiji
+  - ja.sent.sustainable-business
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.715-sustainable-business-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.env4.kyougi
+  - ja.lex.env4.tadashii
+  - ja.lex.env4.kenpou
+  - ja.lex.env4.kyotsuu
+  - ja.lex.env4.shiji
+  - ja.sent.sustainable-business
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.715-sustainable-business-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.env4.kyougi
+  - ja.lex.env4.tadashii
+  - ja.lex.env4.kenpou
+  - ja.lex.env4.kyotsuu
+  - ja.lex.env4.shiji
+  - ja.sent.sustainable-business
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.715-sustainable-business-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.sustainable-business
+- id: ja.activity.715-sustainable-business-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
