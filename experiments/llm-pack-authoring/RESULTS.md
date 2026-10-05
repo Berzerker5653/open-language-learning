@@ -1160,3 +1160,9 @@ Units 540-549 (structured notes and conceptual relationships), NEW goal `ru.goal
 Units 550-559 (methods, procedures, and limitations), NEW goal `ru.goal.b2.academic-study3`
 (+2 assessments), 50 words (`lexicon/study3.jsonl`), 2 grammar (`b2-chem-bolshe`, `b2-nesmotrya-na`),
 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 54
+
+Units 560-569 (findings, interpretations, and discussion), NEW goal `ru.goal.b2.academic-study4`
+(+2 assessments), 50 words (`lexicon/study4.jsonl`), 2 grammar (`b2-soglasno-avtoram`, `b2-v-hod-obsuzhdeniya`),
+10 sentences. Score: **7/7**.
