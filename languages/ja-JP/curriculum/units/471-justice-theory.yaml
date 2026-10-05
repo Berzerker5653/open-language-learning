@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.justice-theory
+goal_id: ja.goal.b2.philosophy-ethics
+title: justice theory
+summary: B2 language for justice theory.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.philosophy2.zennyaku
+  - ja.lex.philosophy2.meiyo-kan
+  - ja.lex.philosophy2.sekinin-kan
+  - ja.lex.philosophy2.hantei
+  - ja.lex.philosophy2.chouwa
+  - ja.sent.justice-theory
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.justice-theory-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.philosophy2.zennyaku
+  - ja.lex.philosophy2.meiyo-kan
+  - ja.lex.philosophy2.sekinin-kan
+  - ja.lex.philosophy2.hantei
+  - ja.lex.philosophy2.chouwa
+  - ja.sent.justice-theory
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.justice-theory-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.philosophy2.zennyaku
+  - ja.lex.philosophy2.meiyo-kan
+  - ja.lex.philosophy2.sekinin-kan
+  - ja.lex.philosophy2.hantei
+  - ja.lex.philosophy2.chouwa
+  - ja.sent.justice-theory
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.justice-theory-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.philosophy2.zennyaku
+  - ja.lex.philosophy2.meiyo-kan
+  - ja.lex.philosophy2.sekinin-kan
+  - ja.lex.philosophy2.hantei
+  - ja.lex.philosophy2.chouwa
+  - ja.sent.justice-theory
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.justice-theory-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.philosophy2.zennyaku
+  - ja.lex.philosophy2.meiyo-kan
+  - ja.lex.philosophy2.sekinin-kan
+  - ja.lex.philosophy2.hantei
+  - ja.lex.philosophy2.chouwa
+  - ja.sent.justice-theory
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.justice-theory-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.justice-theory
+- id: ja.activity.justice-theory-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

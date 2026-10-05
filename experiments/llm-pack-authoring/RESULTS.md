@@ -628,3 +628,8 @@ Goal `ja.goal.b2.philosophy-ethics` created (468-482). 10 units,
 41-word `lexicon/law2.jsonl` + 9-word `lexicon/philosophy.jsonl`, 2 grammar
 (`b2.ni-kansuru`, `b2.ni-yoru`), 8 sentences, assessment
 `ja.assess.philosophy-ethics`. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 42: B2 units 470-479 (philosophy-ethics cont)
+
+10 units, 50-word `lexicon/philosophy2.jsonl`, 2 grammar
+(`b2.toiu-mono`, `b2.mono-ka`), 8 sentences. Score: **7/7**.

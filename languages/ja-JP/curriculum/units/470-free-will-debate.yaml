@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.free-will-debate
+goal_id: ja.goal.b2.philosophy-ethics
+title: free will debate
+summary: B2 language for free will debate.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.philosophy2.jikukettei
+  - ja.lex.philosophy2.jiyu-ishiki
+  - ja.lex.philosophy2.seigi
+  - ja.lex.philosophy2.kousei
+  - ja.lex.philosophy2.handan
+  - ja.sent.free-will-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.free-will-debate-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.philosophy2.jikukettei
+  - ja.lex.philosophy2.jiyu-ishiki
+  - ja.lex.philosophy2.seigi
+  - ja.lex.philosophy2.kousei
+  - ja.lex.philosophy2.handan
+  - ja.sent.free-will-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.free-will-debate-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.philosophy2.jikukettei
+  - ja.lex.philosophy2.jiyu-ishiki
+  - ja.lex.philosophy2.seigi
+  - ja.lex.philosophy2.kousei
+  - ja.lex.philosophy2.handan
+  - ja.sent.free-will-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.free-will-debate-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.philosophy2.jikukettei
+  - ja.lex.philosophy2.jiyu-ishiki
+  - ja.lex.philosophy2.seigi
+  - ja.lex.philosophy2.kousei
+  - ja.lex.philosophy2.handan
+  - ja.sent.free-will-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.free-will-debate-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.philosophy2.jikukettei
+  - ja.lex.philosophy2.jiyu-ishiki
+  - ja.lex.philosophy2.seigi
+  - ja.lex.philosophy2.kousei
+  - ja.lex.philosophy2.handan
+  - ja.sent.free-will-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.free-will-debate-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.free-will-debate
+- id: ja.activity.free-will-debate-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

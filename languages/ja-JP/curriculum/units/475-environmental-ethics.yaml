@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.environmental-ethics
+goal_id: ja.goal.b2.philosophy-ethics
+title: environmental ethics
+summary: B2 language for environmental ethics.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.philosophy2.izen
+  - ja.lex.philosophy2.nenrei
+  - ja.lex.philosophy2.dousei
+  - ja.lex.philosophy2.yuuai
+  - ja.lex.philosophy2.chie
+  - ja.sent.environmental-ethics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.environmental-ethics-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.philosophy2.izen
+  - ja.lex.philosophy2.nenrei
+  - ja.lex.philosophy2.dousei
+  - ja.lex.philosophy2.yuuai
+  - ja.lex.philosophy2.chie
+  - ja.sent.environmental-ethics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.environmental-ethics-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.philosophy2.izen
+  - ja.lex.philosophy2.nenrei
+  - ja.lex.philosophy2.dousei
+  - ja.lex.philosophy2.yuuai
+  - ja.lex.philosophy2.chie
+  - ja.sent.environmental-ethics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.environmental-ethics-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.philosophy2.izen
+  - ja.lex.philosophy2.nenrei
+  - ja.lex.philosophy2.dousei
+  - ja.lex.philosophy2.yuuai
+  - ja.lex.philosophy2.chie
+  - ja.sent.environmental-ethics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.environmental-ethics-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.philosophy2.izen
+  - ja.lex.philosophy2.nenrei
+  - ja.lex.philosophy2.dousei
+  - ja.lex.philosophy2.yuuai
+  - ja.lex.philosophy2.chie
+  - ja.sent.environmental-ethics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.environmental-ethics-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.environmental-ethics
+- id: ja.activity.environmental-ethics-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
