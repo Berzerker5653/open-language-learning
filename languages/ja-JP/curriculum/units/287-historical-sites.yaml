@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.historical-sites
+goal_id: ja.goal.b1.culture-tradition
+title: historical sites
+summary: B1 language for historical sites.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.culture.iseki
+  - ja.lex.culture.shiseki
+  - ja.lex.culture.shaji
+  - ja.lex.culture.jinja
+  - ja.lex.culture.tera
+  - ja.sent.shrine-visit
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.historical-sites-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.culture.iseki
+  - ja.lex.culture.shiseki
+  - ja.lex.culture.shaji
+  - ja.lex.culture.jinja
+  - ja.lex.culture.tera
+  - ja.sent.shrine-visit
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.historical-sites-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.culture.iseki
+  - ja.lex.culture.shiseki
+  - ja.lex.culture.shaji
+  - ja.lex.culture.jinja
+  - ja.lex.culture.tera
+  - ja.sent.shrine-visit
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.historical-sites-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.culture.iseki
+  - ja.lex.culture.shiseki
+  - ja.lex.culture.shaji
+  - ja.lex.culture.jinja
+  - ja.lex.culture.tera
+  - ja.sent.shrine-visit
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.historical-sites-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.culture.iseki
+  - ja.lex.culture.shiseki
+  - ja.lex.culture.shaji
+  - ja.lex.culture.jinja
+  - ja.lex.culture.tera
+  - ja.sent.shrine-visit
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.historical-sites-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.shrine-visit
+- id: ja.activity.historical-sites-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

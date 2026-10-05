@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.etiquette-rules
+goal_id: ja.goal.b1.culture-tradition
+title: etiquette rules
+summary: B1 language for etiquette rules.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.culture.kisoku
+  - ja.lex.culture.manner
+  - ja.lex.culture.teaji
+  - ja.lex.culture.omotenashi
+  - ja.lex.culture.saiho
+  - ja.sent.etiquette-rule
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.etiquette-rules-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.culture.kisoku
+  - ja.lex.culture.manner
+  - ja.lex.culture.teaji
+  - ja.lex.culture.omotenashi
+  - ja.lex.culture.saiho
+  - ja.sent.etiquette-rule
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.etiquette-rules-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.culture.kisoku
+  - ja.lex.culture.manner
+  - ja.lex.culture.teaji
+  - ja.lex.culture.omotenashi
+  - ja.lex.culture.saiho
+  - ja.sent.etiquette-rule
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.etiquette-rules-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.culture.kisoku
+  - ja.lex.culture.manner
+  - ja.lex.culture.teaji
+  - ja.lex.culture.omotenashi
+  - ja.lex.culture.saiho
+  - ja.sent.etiquette-rule
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.etiquette-rules-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.culture.kisoku
+  - ja.lex.culture.manner
+  - ja.lex.culture.teaji
+  - ja.lex.culture.omotenashi
+  - ja.lex.culture.saiho
+  - ja.sent.etiquette-rule
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.etiquette-rules-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.etiquette-rule
+- id: ja.activity.etiquette-rules-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

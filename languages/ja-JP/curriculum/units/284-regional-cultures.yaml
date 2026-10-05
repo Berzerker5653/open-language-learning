@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.regional-cultures
+goal_id: ja.goal.b1.culture-tradition
+title: regional cultures
+summary: B1 language for regional cultures.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.culture.minzoku
+  - ja.lex.culture.mukashibanashi
+  - ja.lex.culture.hogen
+  - ja.lex.culture.meisho
+  - ja.lex.culture.kanko
+  - ja.sent.region-dialect
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.regional-cultures-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.culture.minzoku
+  - ja.lex.culture.mukashibanashi
+  - ja.lex.culture.hogen
+  - ja.lex.culture.meisho
+  - ja.lex.culture.kanko
+  - ja.sent.region-dialect
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.regional-cultures-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.culture.minzoku
+  - ja.lex.culture.mukashibanashi
+  - ja.lex.culture.hogen
+  - ja.lex.culture.meisho
+  - ja.lex.culture.kanko
+  - ja.sent.region-dialect
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.regional-cultures-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.culture.minzoku
+  - ja.lex.culture.mukashibanashi
+  - ja.lex.culture.hogen
+  - ja.lex.culture.meisho
+  - ja.lex.culture.kanko
+  - ja.sent.region-dialect
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.regional-cultures-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.culture.minzoku
+  - ja.lex.culture.mukashibanashi
+  - ja.lex.culture.hogen
+  - ja.lex.culture.meisho
+  - ja.lex.culture.kanko
+  - ja.sent.region-dialect
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.regional-cultures-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.region-dialect
+- id: ja.activity.regional-cultures-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

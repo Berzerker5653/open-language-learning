@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.traditional-crafts
+goal_id: ja.goal.b1.culture-tradition
+title: traditional crafts
+summary: B1 language for traditional crafts.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.culture.koge
+  - ja.lex.culture.dentou
+  - ja.lex.culture.washi
+  - ja.lex.culture.kimono
+  - ja.lex.culture.chado
+  - ja.sent.craft-washi
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.traditional-crafts-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.culture.koge
+  - ja.lex.culture.dentou
+  - ja.lex.culture.washi
+  - ja.lex.culture.kimono
+  - ja.lex.culture.chado
+  - ja.sent.craft-washi
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.traditional-crafts-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.culture.koge
+  - ja.lex.culture.dentou
+  - ja.lex.culture.washi
+  - ja.lex.culture.kimono
+  - ja.lex.culture.chado
+  - ja.sent.craft-washi
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.traditional-crafts-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.culture.koge
+  - ja.lex.culture.dentou
+  - ja.lex.culture.washi
+  - ja.lex.culture.kimono
+  - ja.lex.culture.chado
+  - ja.sent.craft-washi
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.traditional-crafts-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.culture.koge
+  - ja.lex.culture.dentou
+  - ja.lex.culture.washi
+  - ja.lex.culture.kimono
+  - ja.lex.culture.chado
+  - ja.sent.craft-washi
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.traditional-crafts-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.craft-washi
+- id: ja.activity.traditional-crafts-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

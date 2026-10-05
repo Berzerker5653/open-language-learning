@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B1); content refs are pack data; qualified review pending.
+id: ja.unit.explaining-customs
+goal_id: ja.goal.b1.culture-tradition
+title: explaining customs
+summary: B1 language for explaining customs.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.culture.shuukan
+  - ja.lex.culture.reigi
+  - ja.lex.culture.girei
+  - ja.lex.culture.kansha
+  - ja.lex.culture.nenchuu
+  - ja.sent.custom-explain
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.explaining-customs-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.culture.shuukan
+  - ja.lex.culture.reigi
+  - ja.lex.culture.girei
+  - ja.lex.culture.kansha
+  - ja.lex.culture.nenchuu
+  - ja.sent.custom-explain
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.explaining-customs-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.culture.shuukan
+  - ja.lex.culture.reigi
+  - ja.lex.culture.girei
+  - ja.lex.culture.kansha
+  - ja.lex.culture.nenchuu
+  - ja.sent.custom-explain
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.explaining-customs-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.culture.shuukan
+  - ja.lex.culture.reigi
+  - ja.lex.culture.girei
+  - ja.lex.culture.kansha
+  - ja.lex.culture.nenchuu
+  - ja.sent.custom-explain
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.explaining-customs-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.culture.shuukan
+  - ja.lex.culture.reigi
+  - ja.lex.culture.girei
+  - ja.lex.culture.kansha
+  - ja.lex.culture.nenchuu
+  - ja.sent.custom-explain
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.explaining-customs-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.custom-explain
+- id: ja.activity.explaining-customs-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -492,3 +492,10 @@ sentences, 1 assessment. Score: **7/7**.
 Goal `ja.goal.b1.technology` complete (265-279), 10 units, 50-word
 `lexicon/tech2.jsonl`, 2 grammar (`b1.onaji-chigai`,
 `b1.te-iku-te-kuru`), 8 sentences. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 23: B1 units 280-289 (culture-tradition part 1)
+
+Goal `ja.goal.b1.culture-tradition` (prereq technology, mirrored;
+spans 280-294), 10 units, 50-word `lexicon/culture.jsonl`, 2 grammar
+(`b1.maeni-ato-de`, `b1.ba-formal`), 8 sentences, 1 assessment.
+Score: **7/7**.

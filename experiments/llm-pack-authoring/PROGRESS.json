@@ -11,8 +11,8 @@
     "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
     "bands_done": ["A1", "A2"],
-    "units_next": "280",
+    "units_next": "290",
     "last_score": "7/7 (2026-10-04, results/ja-JP-draft)",
-    "notes": "extension plan authored by agent, checker OK (54 goals, 740 units, 3789 new words); A1 complete (062-118); A2 complete (120-219); B1: 220-279 done (work-professional, education-academic, media-news, technology complete 265-279); next culture-tradition 280-294"
+    "notes": "extension plan authored by agent, checker OK (54 goals, 740 units, 3789 new words); A1 complete (062-118); A2 complete (120-219); B1: 220-289 done (work-professional, education-academic, media-news, technology complete; culture-tradition started 280-289, spans 280-294); next batch 290-299"
   }
 }
