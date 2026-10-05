@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.migration-debate
+goal_id: ja.goal.b2.society-change
+title: migration debate
+summary: B2 language for migration debate.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.society3.ikei
+  - ja.lex.society3.henkou
+  - ja.lex.society3.sanka
+  - ja.lex.society3.komei
+  - ja.lex.society3.zei
+  - ja.sent.migration-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.migration-debate-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.society3.ikei
+  - ja.lex.society3.henkou
+  - ja.lex.society3.sanka
+  - ja.lex.society3.komei
+  - ja.lex.society3.zei
+  - ja.sent.migration-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.migration-debate-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.society3.ikei
+  - ja.lex.society3.henkou
+  - ja.lex.society3.sanka
+  - ja.lex.society3.komei
+  - ja.lex.society3.zei
+  - ja.sent.migration-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.migration-debate-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.society3.ikei
+  - ja.lex.society3.henkou
+  - ja.lex.society3.sanka
+  - ja.lex.society3.komei
+  - ja.lex.society3.zei
+  - ja.sent.migration-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.migration-debate-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.society3.ikei
+  - ja.lex.society3.henkou
+  - ja.lex.society3.sanka
+  - ja.lex.society3.komei
+  - ja.lex.society3.zei
+  - ja.sent.migration-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.migration-debate-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.migration-debate
+- id: ja.activity.migration-debate-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.aging-society
+goal_id: ja.goal.b2.society-change
+title: aging society
+summary: B2 language for aging society.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.society3.noureka
+  - ja.lex.society3.roojin
+  - ja.lex.society3.kaigo
+  - ja.lex.society3.hoken
+  - ja.lex.society3.nenkin
+  - ja.sent.aging-society
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.aging-society-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.society3.noureka
+  - ja.lex.society3.roojin
+  - ja.lex.society3.kaigo
+  - ja.lex.society3.hoken
+  - ja.lex.society3.nenkin
+  - ja.sent.aging-society
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.aging-society-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.society3.noureka
+  - ja.lex.society3.roojin
+  - ja.lex.society3.kaigo
+  - ja.lex.society3.hoken
+  - ja.lex.society3.nenkin
+  - ja.sent.aging-society
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.aging-society-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.society3.noureka
+  - ja.lex.society3.roojin
+  - ja.lex.society3.kaigo
+  - ja.lex.society3.hoken
+  - ja.lex.society3.nenkin
+  - ja.sent.aging-society
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.aging-society-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.society3.noureka
+  - ja.lex.society3.roojin
+  - ja.lex.society3.kaigo
+  - ja.lex.society3.hoken
+  - ja.lex.society3.nenkin
+  - ja.sent.aging-society
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.aging-society-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.aging-society
+- id: ja.activity.aging-society-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

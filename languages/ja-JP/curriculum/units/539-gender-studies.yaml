@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.gender-studies
+goal_id: ja.goal.b2.society-change
+title: gender studies
+summary: B2 language for gender studies.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.society3.jitsugyou
+  - ja.lex.society3.yuukou
+  - ja.lex.society3.boushi
+  - ja.lex.society3.yobikou
+  - ja.lex.society3.fukushi
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2.dake-naraba
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.gender-studies-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.society3.jitsugyou
+  - ja.lex.society3.yuukou
+  - ja.lex.society3.boushi
+  - ja.lex.society3.yobikou
+  - ja.lex.society3.fukushi
+  - ja.grammar.b2.dake-naraba
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.gender-studies-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.society3.jitsugyou
+  - ja.lex.society3.yuukou
+  - ja.lex.society3.boushi
+  - ja.lex.society3.yobikou
+  - ja.lex.society3.fukushi
+  - ja.grammar.b2.dake-naraba
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.gender-studies-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.society3.jitsugyou
+  - ja.lex.society3.yuukou
+  - ja.lex.society3.boushi
+  - ja.lex.society3.yobikou
+  - ja.lex.society3.fukushi
+  - ja.grammar.b2.dake-naraba
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.gender-studies-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.society3.jitsugyou
+  - ja.lex.society3.yuukou
+  - ja.lex.society3.boushi
+  - ja.lex.society3.yobikou
+  - ja.lex.society3.fukushi
+  - ja.grammar.b2.dake-naraba
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.gender-studies-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.gender-studies-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

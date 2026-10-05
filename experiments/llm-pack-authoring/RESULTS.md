@@ -726,3 +726,9 @@ Goal `ja.goal.b2.history-critical` created (+deps edge, +assessment). 10 units,
 10 units, 50-word `lexicon/history2.jsonl`, 2 grammar (`b2.to-okeru`,
 `b2.ni-kagete`), 8 sentences. Unit 520 uid `economic-history-b` (446 collision).
 Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 49: B2 units 530-539 (history-critical tail + society-change start)
+
+Goal `ja.goal.b2.society-change` created (+deps edge, +assessment). 10 units,
+10-word `lexicon/history3.jsonl`, 40-word `lexicon/society3.jsonl`,
+2 grammar (`b2.ni-yosure`, `b2.dake-naraba`), 8 sentences. Score: **7/7**.

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.family-change
+goal_id: ja.goal.b2.society-change
+title: family change
+summary: B2 language for family change.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.society3.kodomo
+  - ja.lex.society3.hakushou
+  - ja.lex.society3.shoushou
+  - ja.lex.society3.fuyou
+  - ja.lex.society3.danjyo
+  - ja.sent.family-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.family-change-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.society3.kodomo
+  - ja.lex.society3.hakushou
+  - ja.lex.society3.shoushou
+  - ja.lex.society3.fuyou
+  - ja.lex.society3.danjyo
+  - ja.sent.family-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.family-change-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.society3.kodomo
+  - ja.lex.society3.hakushou
+  - ja.lex.society3.shoushou
+  - ja.lex.society3.fuyou
+  - ja.lex.society3.danjyo
+  - ja.sent.family-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.family-change-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.society3.kodomo
+  - ja.lex.society3.hakushou
+  - ja.lex.society3.shoushou
+  - ja.lex.society3.fuyou
+  - ja.lex.society3.danjyo
+  - ja.sent.family-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.family-change-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.society3.kodomo
+  - ja.lex.society3.hakushou
+  - ja.lex.society3.shoushou
+  - ja.lex.society3.fuyou
+  - ja.lex.society3.danjyo
+  - ja.sent.family-change
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.family-change-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.family-change
+- id: ja.activity.family-change-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

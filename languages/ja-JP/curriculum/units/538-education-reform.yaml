@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.education-reform
+goal_id: ja.goal.b2.society-change
+title: education reform
+summary: B2 language for education reform.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.society3.seido
+  - ja.lex.society3.kaikaku
+  - ja.lex.society3.nyuugaku
+  - ja.lex.society3.jugyou
+  - ja.lex.society3.senmon
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2.ni-yosure
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.education-reform-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.society3.seido
+  - ja.lex.society3.kaikaku
+  - ja.lex.society3.nyuugaku
+  - ja.lex.society3.jugyou
+  - ja.lex.society3.senmon
+  - ja.grammar.b2.ni-yosure
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.education-reform-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.society3.seido
+  - ja.lex.society3.kaikaku
+  - ja.lex.society3.nyuugaku
+  - ja.lex.society3.jugyou
+  - ja.lex.society3.senmon
+  - ja.grammar.b2.ni-yosure
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.education-reform-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.society3.seido
+  - ja.lex.society3.kaikaku
+  - ja.lex.society3.nyuugaku
+  - ja.lex.society3.jugyou
+  - ja.lex.society3.senmon
+  - ja.grammar.b2.ni-yosure
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.education-reform-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.society3.seido
+  - ja.lex.society3.kaikaku
+  - ja.lex.society3.nyuugaku
+  - ja.lex.society3.jugyou
+  - ja.lex.society3.senmon
+  - ja.grammar.b2.ni-yosure
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.education-reform-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.education-reform-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

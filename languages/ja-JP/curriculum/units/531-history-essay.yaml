@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.history-essay
+goal_id: ja.goal.b2.history-critical
+title: history essay
+summary: B2 language for history essay.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.history3.jikkou
+  - ja.lex.history3.shimei
+  - ja.lex.history3.kaisai
+  - ja.lex.history3.sekinin
+  - ja.lex.history3.mondai
+  - ja.sent.history-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.history-essay-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.history3.jikkou
+  - ja.lex.history3.shimei
+  - ja.lex.history3.kaisai
+  - ja.lex.history3.sekinin
+  - ja.lex.history3.mondai
+  - ja.sent.history-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.history-essay-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.history3.jikkou
+  - ja.lex.history3.shimei
+  - ja.lex.history3.kaisai
+  - ja.lex.history3.sekinin
+  - ja.lex.history3.mondai
+  - ja.sent.history-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.history-essay-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.history3.jikkou
+  - ja.lex.history3.shimei
+  - ja.lex.history3.kaisai
+  - ja.lex.history3.sekinin
+  - ja.lex.history3.mondai
+  - ja.sent.history-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.history-essay-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.history3.jikkou
+  - ja.lex.history3.shimei
+  - ja.lex.history3.kaisai
+  - ja.lex.history3.sekinin
+  - ja.lex.history3.mondai
+  - ja.sent.history-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.history-essay-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.history-essay
+- id: ja.activity.history-essay-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.history-comparison
+goal_id: ja.goal.b2.history-critical
+title: history comparison
+summary: B2 language for history comparison.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.history3.taiou
+  - ja.lex.history3.hyouka
+  - ja.lex.history3.rondai
+  - ja.lex.history3.bunkyou
+  - ja.lex.history3.denshou2
+  - ja.sent.history-comparison
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.history-comparison-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.history3.taiou
+  - ja.lex.history3.hyouka
+  - ja.lex.history3.rondai
+  - ja.lex.history3.bunkyou
+  - ja.lex.history3.denshou2
+  - ja.sent.history-comparison
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.history-comparison-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.history3.taiou
+  - ja.lex.history3.hyouka
+  - ja.lex.history3.rondai
+  - ja.lex.history3.bunkyou
+  - ja.lex.history3.denshou2
+  - ja.sent.history-comparison
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.history-comparison-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.history3.taiou
+  - ja.lex.history3.hyouka
+  - ja.lex.history3.rondai
+  - ja.lex.history3.bunkyou
+  - ja.lex.history3.denshou2
+  - ja.sent.history-comparison
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.history-comparison-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.history3.taiou
+  - ja.lex.history3.hyouka
+  - ja.lex.history3.rondai
+  - ja.lex.history3.bunkyou
+  - ja.lex.history3.denshou2
+  - ja.sent.history-comparison
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.history-comparison-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.history-comparison
+- id: ja.activity.history-comparison-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

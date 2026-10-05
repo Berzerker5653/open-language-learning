@@ -4,8 +4,8 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2420  2dda84132085  activities/scenarios/first-meeting.yaml
         1561  6b8655e2f7b6  activities/scenarios/ordering.yaml
         1486  b56884663696  activities/scenarios/shopping.yaml
-       17271  5b124c8ce498  assessments/definitions.jsonl
-       44901  618255f8cbf1  curriculum/goals.yaml
+       17605  00a9907b519a  assessments/definitions.jsonl
+       45709  227c3f9430a0  curriculum/goals.yaml
          919  ad3f5f62d1b3  curriculum/units/000-onramp-greeting.yaml
         1514  bd53db6f2cfe  curriculum/units/010-kana-hiragana-vowels-ko.yaml
         1957  c02be8a37693  curriculum/units/011-kana-hiragana-stn.yaml
@@ -499,8 +499,18 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2247  573294002edd  curriculum/units/527-revisionism-debate.yaml
         2192  ef17aeab1acf  curriculum/units/528-oral-history.yaml
         2222  9dec4001d680  curriculum/units/529-museums-memory.yaml
-       55086  176f5752c6cc  grammar/concepts.jsonl
-        7877  ed57c3c31abb  grammar/dependencies.yaml
+        2262  e9efd766bfd4  curriculum/units/530-history-comparison.yaml
+        2182  69603ca1c03c  curriculum/units/531-history-essay.yaml
+        2220  f60559cb161a  curriculum/units/532-demographic-shift.yaml
+        2170  79d87f94eb5f  curriculum/units/533-aging-society.yaml
+        2190  afebf4872dde  curriculum/units/534-family-change.yaml
+        2145  e03f5d8e5ac2  curriculum/units/535-urbanization.yaml
+        2185  99ecd5e09f59  curriculum/units/536-migration-debate.yaml
+        2275  ee881bb06dce  curriculum/units/537-work-culture-change.yaml
+        2220  bfd795c4856c  curriculum/units/538-education-reform.yaml
+        2227  781859bd7d72  curriculum/units/539-gender-studies.yaml
+       56065  4ae8017b71a1  grammar/concepts.jsonl
+        8024  c0e5f1e8fb9c  grammar/dependencies.yaml
        30369  1401b6e0388e  kanji/entries.jsonl
          485  860cdf8185db  language/identity.yaml
          823  5d72613ab378  language/normalization.yaml
@@ -540,6 +550,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
        19839  92bb930477c4  lexicon/health3.jsonl
        15783  3616e9979756  lexicon/history.jsonl
        39449  af49330148ec  lexicon/history2.jsonl
+        7953  6878a496c97f  lexicon/history3.jsonl
        35425  8a5dc79bc046  lexicon/home.jsonl
        31460  75cc2c582272  lexicon/law.jsonl
        32313  7ab1a7525155  lexicon/law2.jsonl
@@ -565,6 +576,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
        39756  f58e5a59ec5b  lexicon/shopping.jsonl
        19922  f152b9ea6e8e  lexicon/society.jsonl
        39900  0362a2e4d76e  lexicon/society2.jsonl
+       31467  e64932abf7d3  lexicon/society3.jsonl
        40086  1b6444cabb81  lexicon/sports.jsonl
        19681  8a2dce3b3aa5  lexicon/story.jsonl
        39399  b652f45ddbd4  lexicon/story2.jsonl
@@ -586,7 +598,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
-      267622  0b1f27a3e906  sentences/entries.jsonl
+      272726  96bed2f11ce9  sentences/entries.jsonl
         3915  e270f808c26e  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml
          539  842cce82e5d5  stories/first-day.yaml

@@ -1736,3 +1736,34 @@ goals:
       tool: omp
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
+  - id: ja.goal.b2.society-change
+    description: 'Discuss social change: demographics, work culture, family, and public systems.'
+    band: B2
+    framework_refs: []
+    contexts:
+    - ja.situation.classroom
+    modalities:
+    - listening
+    - speaking
+    - reading
+    - writing
+    prerequisites:
+    - target: ja.goal.b2.history-critical
+      dimension: grammar-controlled
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.lex.society3.jinkou
+    - ja.lex.society3.koyou
+    assessment_ids:
+    - ja.assess.society-change
+    transfer_required: true
+    sources:
+    - jf-standard
+    - ai-drafted-extension
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: omp
+      model: strata/qwen3.8-flash-next-iq3_s
+      date: '2026-10-04'
