@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.legal-news
+goal_id: ja.goal.b2.law-justice
+title: legal news
+summary: B2 language for legal news.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.law2.hokoku
+  - ja.lex.law2.joron
+  - ja.lex.law2.hihan
+  - ja.lex.law2.bunseki
+  - ja.lex.law2.touzoku
+  - ja.sent.legal-news
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.legal-news-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.law2.hokoku
+  - ja.lex.law2.joron
+  - ja.lex.law2.hihan
+  - ja.lex.law2.bunseki
+  - ja.lex.law2.touzoku
+  - ja.sent.legal-news
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.legal-news-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.law2.hokoku
+  - ja.lex.law2.joron
+  - ja.lex.law2.hihan
+  - ja.lex.law2.bunseki
+  - ja.lex.law2.touzoku
+  - ja.sent.legal-news
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.legal-news-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.law2.hokoku
+  - ja.lex.law2.joron
+  - ja.lex.law2.hihan
+  - ja.lex.law2.bunseki
+  - ja.lex.law2.touzoku
+  - ja.sent.legal-news
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.legal-news-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.law2.hokoku
+  - ja.lex.law2.joron
+  - ja.lex.law2.hihan
+  - ja.lex.law2.bunseki
+  - ja.lex.law2.touzoku
+  - ja.sent.legal-news
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.legal-news-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.legal-news
+- id: ja.activity.legal-news-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

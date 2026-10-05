@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.ethical-frameworks
+goal_id: ja.goal.b2.philosophy-ethics
+title: ethical frameworks
+summary: B2 language for ethical frameworks.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.philosophy.tetsugaku
+  - ja.lex.philosophy.shisou
+  - ja.lex.philosophy.rinen
+  - ja.lex.philosophy.gijiron
+  - ja.lex.philosophy.ronri-gaku
+  - ja.sent.ethics-of-law
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.ethical-frameworks-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.philosophy.tetsugaku
+  - ja.lex.philosophy.shisou
+  - ja.lex.philosophy.rinen
+  - ja.lex.philosophy.gijiron
+  - ja.lex.philosophy.ronri-gaku
+  - ja.sent.ethics-of-law
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.ethical-frameworks-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.philosophy.tetsugaku
+  - ja.lex.philosophy.shisou
+  - ja.lex.philosophy.rinen
+  - ja.lex.philosophy.gijiron
+  - ja.lex.philosophy.ronri-gaku
+  - ja.sent.ethics-of-law
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.ethical-frameworks-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.philosophy.tetsugaku
+  - ja.lex.philosophy.shisou
+  - ja.lex.philosophy.rinen
+  - ja.lex.philosophy.gijiron
+  - ja.lex.philosophy.ronri-gaku
+  - ja.sent.ethics-of-law
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.ethical-frameworks-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.philosophy.tetsugaku
+  - ja.lex.philosophy.shisou
+  - ja.lex.philosophy.rinen
+  - ja.lex.philosophy.gijiron
+  - ja.lex.philosophy.ronri-gaku
+  - ja.sent.ethics-of-law
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.ethical-frameworks-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.ethics-of-law
+- id: ja.activity.ethical-frameworks-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

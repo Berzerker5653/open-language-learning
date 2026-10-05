@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.moral-dilemmas
+goal_id: ja.goal.b2.philosophy-ethics
+title: moral dilemmas
+summary: B2 language for moral dilemmas.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.philosophy.hasei
+  - ja.lex.philosophy.hensen
+  - ja.lex.philosophy.kiso-gairon
+  - ja.lex.law2.teikei
+  - ja.lex.law2.haka
+  - ja.sent.justice-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.moral-dilemmas-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.philosophy.hasei
+  - ja.lex.philosophy.hensen
+  - ja.lex.philosophy.kiso-gairon
+  - ja.lex.law2.teikei
+  - ja.lex.law2.haka
+  - ja.sent.justice-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.moral-dilemmas-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.philosophy.hasei
+  - ja.lex.philosophy.hensen
+  - ja.lex.philosophy.kiso-gairon
+  - ja.lex.law2.teikei
+  - ja.lex.law2.haka
+  - ja.sent.justice-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.moral-dilemmas-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.philosophy.hasei
+  - ja.lex.philosophy.hensen
+  - ja.lex.philosophy.kiso-gairon
+  - ja.lex.law2.teikei
+  - ja.lex.law2.haka
+  - ja.sent.justice-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.moral-dilemmas-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.philosophy.hasei
+  - ja.lex.philosophy.hensen
+  - ja.lex.philosophy.kiso-gairon
+  - ja.lex.law2.teikei
+  - ja.lex.law2.haka
+  - ja.sent.justice-essay
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.moral-dilemmas-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.justice-essay
+- id: ja.activity.moral-dilemmas-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

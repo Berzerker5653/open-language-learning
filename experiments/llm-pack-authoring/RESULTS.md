@@ -621,3 +621,10 @@ Goal `ja.goal.b2.law-justice` created (452-467). 10 units, 10-word
 `lexicon/economy3.jsonl` + 40-word `lexicon/law.jsonl`, 2 grammar
 (`b2.wake-da`, `b2.ni-tsunete`), 8 sentences, assessment
 `ja.assess.law-justice`. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 41: B2 units 460-469 (law-justice complete, philosophy-ethics start)
+
+Goal `ja.goal.b2.philosophy-ethics` created (468-482). 10 units,
+41-word `lexicon/law2.jsonl` + 9-word `lexicon/philosophy.jsonl`, 2 grammar
+(`b2.ni-kansuru`, `b2.ni-yoru`), 8 sentences, assessment
+`ja.assess.philosophy-ethics`. Score: **7/7**.

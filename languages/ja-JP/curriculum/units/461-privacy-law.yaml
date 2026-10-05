@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.privacy-law
+goal_id: ja.goal.b2.law-justice
+title: privacy law
+summary: B2 language for privacy law.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.law2.johou
+  - ja.lex.law2.kyoka
+  - ja.lex.law2.kohoku
+  - ja.lex.law2.yojo
+  - ja.lex.law2.kigen
+  - ja.sent.privacy-law
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.privacy-law-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.law2.johou
+  - ja.lex.law2.kyoka
+  - ja.lex.law2.kohoku
+  - ja.lex.law2.yojo
+  - ja.lex.law2.kigen
+  - ja.sent.privacy-law
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.privacy-law-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.law2.johou
+  - ja.lex.law2.kyoka
+  - ja.lex.law2.kohoku
+  - ja.lex.law2.yojo
+  - ja.lex.law2.kigen
+  - ja.sent.privacy-law
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.privacy-law-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.law2.johou
+  - ja.lex.law2.kyoka
+  - ja.lex.law2.kohoku
+  - ja.lex.law2.yojo
+  - ja.lex.law2.kigen
+  - ja.sent.privacy-law
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.privacy-law-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.law2.johou
+  - ja.lex.law2.kyoka
+  - ja.lex.law2.kohoku
+  - ja.lex.law2.yojo
+  - ja.lex.law2.kigen
+  - ja.sent.privacy-law
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.privacy-law-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.privacy-law
+- id: ja.activity.privacy-law-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

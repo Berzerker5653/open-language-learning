@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.restorative-justice
+goal_id: ja.goal.b2.law-justice
+title: restorative justice
+summary: B2 language for restorative justice.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.law2.kosai
+  - ja.lex.law2.kufuku
+  - ja.lex.law2.hinka
+  - ja.lex.law2.giwa
+  - ja.lex.law2.seibi
+  - ja.sent.restorative-justice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.restorative-justice-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.law2.kosai
+  - ja.lex.law2.kufuku
+  - ja.lex.law2.hinka
+  - ja.lex.law2.giwa
+  - ja.lex.law2.seibi
+  - ja.sent.restorative-justice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.restorative-justice-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.law2.kosai
+  - ja.lex.law2.kufuku
+  - ja.lex.law2.hinka
+  - ja.lex.law2.giwa
+  - ja.lex.law2.seibi
+  - ja.sent.restorative-justice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.restorative-justice-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.law2.kosai
+  - ja.lex.law2.kufuku
+  - ja.lex.law2.hinka
+  - ja.lex.law2.giwa
+  - ja.lex.law2.seibi
+  - ja.sent.restorative-justice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.restorative-justice-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.law2.kosai
+  - ja.lex.law2.kufuku
+  - ja.lex.law2.hinka
+  - ja.lex.law2.giwa
+  - ja.lex.law2.seibi
+  - ja.sent.restorative-justice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.restorative-justice-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.restorative-justice
+- id: ja.activity.restorative-justice-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

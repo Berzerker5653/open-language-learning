@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.labor-law
+goal_id: ja.goal.b2.law-justice
+title: labor law
+summary: B2 language for labor law.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.law2.fukumu
+  - ja.lex.law2.yakujo
+  - ja.lex.law2.hifu
+  - ja.lex.law2.keihi
+  - ja.lex.law2.kansoku
+  - ja.sent.labor-law
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.labor-law-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.law2.fukumu
+  - ja.lex.law2.yakujo
+  - ja.lex.law2.hifu
+  - ja.lex.law2.keihi
+  - ja.lex.law2.kansoku
+  - ja.sent.labor-law
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.labor-law-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.law2.fukumu
+  - ja.lex.law2.yakujo
+  - ja.lex.law2.hifu
+  - ja.lex.law2.keihi
+  - ja.lex.law2.kansoku
+  - ja.sent.labor-law
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.labor-law-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.law2.fukumu
+  - ja.lex.law2.yakujo
+  - ja.lex.law2.hifu
+  - ja.lex.law2.keihi
+  - ja.lex.law2.kansoku
+  - ja.sent.labor-law
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.labor-law-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.law2.fukumu
+  - ja.lex.law2.yakujo
+  - ja.lex.law2.hifu
+  - ja.lex.law2.keihi
+  - ja.lex.law2.kansoku
+  - ja.sent.labor-law
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.labor-law-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.labor-law
+- id: ja.activity.labor-law-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

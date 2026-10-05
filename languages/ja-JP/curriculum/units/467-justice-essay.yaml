@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.justice-essay
+goal_id: ja.goal.b2.law-justice
+title: justice essay
+summary: B2 language for justice essay.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.law2.genshitsu
+  - ja.lex.law2.bunmyaku
+  - ja.lex.law2.keito
+  - ja.lex.law2.denrou
+  - ja.lex.philosophy.genri
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2.ni-yoru
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.justice-essay-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.law2.genshitsu
+  - ja.lex.law2.bunmyaku
+  - ja.lex.law2.keito
+  - ja.lex.law2.denrou
+  - ja.lex.philosophy.genri
+  - ja.grammar.b2.ni-yoru
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.justice-essay-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.law2.genshitsu
+  - ja.lex.law2.bunmyaku
+  - ja.lex.law2.keito
+  - ja.lex.law2.denrou
+  - ja.lex.philosophy.genri
+  - ja.grammar.b2.ni-yoru
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.justice-essay-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.law2.genshitsu
+  - ja.lex.law2.bunmyaku
+  - ja.lex.law2.keito
+  - ja.lex.law2.denrou
+  - ja.lex.philosophy.genri
+  - ja.grammar.b2.ni-yoru
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.justice-essay-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.law2.genshitsu
+  - ja.lex.law2.bunmyaku
+  - ja.lex.law2.keito
+  - ja.lex.law2.denrou
+  - ja.lex.philosophy.genri
+  - ja.grammar.b2.ni-yoru
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.justice-essay-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.justice-essay-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email
