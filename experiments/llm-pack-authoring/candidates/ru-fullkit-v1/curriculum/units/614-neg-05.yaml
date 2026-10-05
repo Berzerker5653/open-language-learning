@@ -1,0 +1,46 @@
+id: "ru.unit.b2.neg-05"
+goal_id: "ru.goal.b2.negotiation"
+title: "Concession"
+summary: "уступчивость, компромиссный, уговор, уговорить and уговаривать."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u614-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.neg.ustupchivost",
+        "ru.lex.neg.kompromissnyy",
+        "ru.lex.neg.ugovor",
+        "ru.lex.neg.ugovority",
+        "ru.lex.neg.ugovarivat",
+        "ru.sent.b2.u614",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u614-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u614-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u614"]
+  - id: "ru.activity.b2.u614-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Concession: negotiation exchange with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse уговорить (to persuade) with убеждать (to persuade)."]
+  target_proficiency: "B2"
+  validation_method: "choice"

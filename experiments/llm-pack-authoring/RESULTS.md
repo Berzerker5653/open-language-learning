@@ -1190,3 +1190,9 @@ Score: **7/7**.
 Units 600-609 (applications and professional self-presentation), goal `ru.goal.b2.professional-writing` (existing),
 50 words (`lexicon/prof4.jsonl`), 2 grammar (`b2-imeyu-opyt`, `b2-gotov-k`), 10 sentences.
 Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 59
+
+Units 610-619 (requests, boundaries, polite firmness), NEW goal `ru.goal.b2.negotiation`
+(+2 assessments), 50 words (`lexicon/neg.jsonl`), 2 grammar (`b2-ya-ne-mogu`, `b2-nastoyatelno-proshu`),
+10 sentences. Score: **7/7**.
