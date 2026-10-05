@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.733-identity-construction
+goal_id: ja.goal.b2.culture-identity
+title: identity construction
+summary: B2 language for identity construction.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.cult.identity
+  - ja.lex.cult.shinzoku
+  - ja.lex.cult.denkou
+  - ja.lex.cult.idai
+  - ja.lex.cult.shuusei
+  - ja.sent.identity-construction
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.733-identity-construction-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.cult.identity
+  - ja.lex.cult.shinzoku
+  - ja.lex.cult.denkou
+  - ja.lex.cult.idai
+  - ja.lex.cult.shuusei
+  - ja.sent.identity-construction
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.733-identity-construction-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.cult.identity
+  - ja.lex.cult.shinzoku
+  - ja.lex.cult.denkou
+  - ja.lex.cult.idai
+  - ja.lex.cult.shuusei
+  - ja.sent.identity-construction
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.733-identity-construction-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.cult.identity
+  - ja.lex.cult.shinzoku
+  - ja.lex.cult.denkou
+  - ja.lex.cult.idai
+  - ja.lex.cult.shuusei
+  - ja.sent.identity-construction
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.733-identity-construction-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.cult.identity
+  - ja.lex.cult.shinzoku
+  - ja.lex.cult.denkou
+  - ja.lex.cult.idai
+  - ja.lex.cult.shuusei
+  - ja.sent.identity-construction
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.733-identity-construction-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.identity-construction
+- id: ja.activity.733-identity-construction-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

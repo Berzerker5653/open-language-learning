@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.739-tradition-invention
+goal_id: ja.goal.b2.culture-identity
+title: tradition invention
+summary: B2 language for tradition invention.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.cult.hatsu
+  - ja.lex.cult.fuyu
+  - ja.lex.cult.kairyou
+  - ja.lex.cult.shinchou
+  - ja.lex.cult.jitsuri
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2-ni-mukete
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.739-tradition-invention-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.cult.hatsu
+  - ja.lex.cult.fuyu
+  - ja.lex.cult.kairyou
+  - ja.lex.cult.shinchou
+  - ja.lex.cult.jitsuri
+  - ja.grammar.b2-ni-mukete
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.739-tradition-invention-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.cult.hatsu
+  - ja.lex.cult.fuyu
+  - ja.lex.cult.kairyou
+  - ja.lex.cult.shinchou
+  - ja.lex.cult.jitsuri
+  - ja.grammar.b2-ni-mukete
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.739-tradition-invention-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.cult.hatsu
+  - ja.lex.cult.fuyu
+  - ja.lex.cult.kairyou
+  - ja.lex.cult.shinchou
+  - ja.lex.cult.jitsuri
+  - ja.grammar.b2-ni-mukete
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.739-tradition-invention-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.cult.hatsu
+  - ja.lex.cult.fuyu
+  - ja.lex.cult.kairyou
+  - ja.lex.cult.shinchou
+  - ja.lex.cult.jitsuri
+  - ja.grammar.b2-ni-mukete
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.739-tradition-invention-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.739-tradition-invention-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

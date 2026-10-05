@@ -4,8 +4,8 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2420  2dda84132085  activities/scenarios/first-meeting.yaml
         1561  6b8655e2f7b6  activities/scenarios/ordering.yaml
         1486  b56884663696  activities/scenarios/shopping.yaml
-       21963  d76b4bf7ec73  assessments/definitions.jsonl
-       56154  db84d769c07c  curriculum/goals.yaml
+       22301  da585f21f8ef  assessments/definitions.jsonl
+       56948  88228ab9b83b  curriculum/goals.yaml
          919  ad3f5f62d1b3  curriculum/units/000-onramp-greeting.yaml
         1514  bd53db6f2cfe  curriculum/units/010-kana-hiragana-vowels-ko.yaml
         1957  c02be8a37693  curriculum/units/011-kana-hiragana-stn.yaml
@@ -699,8 +699,18 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         2236  07e112323c4a  curriculum/units/727-language-acquisition.yaml
         2164  5887302d1481  curriculum/units/728-bilingualism.yaml
         2192  1e8fe78495bc  curriculum/units/729-translation-theory.yaml
-       74824  fa7aec791201  grammar/concepts.jsonl
-        9947  17ff39e5f79b  grammar/dependencies.yaml
+        2214  c84788054fe8  curriculum/units/730-corpus-linguistics.yaml
+        2194  7b16a597458f  curriculum/units/731-register-analysis.yaml
+        2218  b794a836bc4b  curriculum/units/732-linguistics-essay.yaml
+        2240  1362c8f2cfdb  curriculum/units/733-identity-construction.yaml
+        2170  81b3b659de52  curriculum/units/734-cultural-belonging.yaml
+        2145  8a62194a4b67  curriculum/units/735-heritage-debate.yaml
+        2150  7988d3af3aff  curriculum/units/736-multiculturalism.yaml
+        2135  38abe7be23ea  curriculum/units/737-subculture-study.yaml
+        2100  b9d37471ec06  curriculum/units/738-pop-culture.yaml
+        2172  3995324b181e  curriculum/units/739-tradition-invention.yaml
+       75793  c0939563b209  grammar/concepts.jsonl
+       10094  9a125298e477  grammar/dependencies.yaml
        30369  1401b6e0388e  kanji/entries.jsonl
          485  860cdf8185db  language/identity.yaml
          823  5d72613ab378  language/normalization.yaml
@@ -718,6 +728,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
        40213  03309a6ed83d  lexicon/city.jsonl
        40716  1a17a98795c2  lexicon/communication.jsonl
        40011  67eba8dbc258  lexicon/critique.jsonl
+       27932  e408d23d1c2b  lexicon/cult.jsonl
        39768  5d3e7d92a00c  lexicon/culture.jsonl
        19984  23bf749929f6  lexicon/culture2.jsonl
        39661  df5f277b6d63  lexicon/debate.jsonl
@@ -759,6 +770,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
        40024  c6b183bacb48  lexicon/leisure.jsonl
         7987  fed2b3d5aea1  lexicon/ling.jsonl
        39909  3bfe4ef28a5e  lexicon/ling2.jsonl
+       11995  a7f5df8da5dd  lexicon/ling3.jsonl
        24108  44f4a0329139  lexicon/lit.jsonl
        19833  18e956186411  lexicon/lit2.jsonl
        19813  693d01cdb444  lexicon/lit3.jsonl
@@ -812,7 +824,7 @@ lts-pack/1 org.openlanguage.ja-jp.reference v0.1.0 (schema 0.2)
         4663  88e1a759519d  phonology/contrasts.jsonl
         3546  f209ccdea8f3  review/REVIEWER_KIT.md
         8674  85e5e28558d7  review/REVIEW_POLICY.yaml
-      372110  b2991649b104  sentences/entries.jsonl
+      377299  13f4583d82e2  sentences/entries.jsonl
         3915  e270f808c26e  sources.jsonl
          509  6e34883babde  stories/at-the-shop.yaml
          539  842cce82e5d5  stories/first-day.yaml

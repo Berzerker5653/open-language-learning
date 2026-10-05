@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.730-corpus-linguistics
+goal_id: ja.goal.b2.language-linguistics
+title: corpus linguistics
+summary: B2 language for corpus linguistics.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.ling3.korpusu
+  - ja.lex.ling3.bunseki2
+  - ja.lex.ling3.hyouka
+  - ja.lex.ling3.keitai
+  - ja.lex.ling3.yaku
+  - ja.sent.corpus-linguistics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.730-corpus-linguistics-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.ling3.korpusu
+  - ja.lex.ling3.bunseki2
+  - ja.lex.ling3.hyouka
+  - ja.lex.ling3.keitai
+  - ja.lex.ling3.yaku
+  - ja.sent.corpus-linguistics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.730-corpus-linguistics-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.ling3.korpusu
+  - ja.lex.ling3.bunseki2
+  - ja.lex.ling3.hyouka
+  - ja.lex.ling3.keitai
+  - ja.lex.ling3.yaku
+  - ja.sent.corpus-linguistics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.730-corpus-linguistics-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.ling3.korpusu
+  - ja.lex.ling3.bunseki2
+  - ja.lex.ling3.hyouka
+  - ja.lex.ling3.keitai
+  - ja.lex.ling3.yaku
+  - ja.sent.corpus-linguistics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.730-corpus-linguistics-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.ling3.korpusu
+  - ja.lex.ling3.bunseki2
+  - ja.lex.ling3.hyouka
+  - ja.lex.ling3.keitai
+  - ja.lex.ling3.yaku
+  - ja.sent.corpus-linguistics
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.730-corpus-linguistics-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.corpus-linguistics
+- id: ja.activity.730-corpus-linguistics-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -928,3 +928,9 @@ Units 720-729 (language-linguistics), 50 words (`lexicon/ling2.jsonl`), 2 gramma
 Goal `ru.goal.b1.experiences` created (+2 assessments). Units 230-239,
 50 words (`lexicon/experiences.jsonl`), 2 grammar (`b1.experience-negation`,
 `b1.reaction-predicatives`), 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ja-JP batch 69
+
+Goal `ja.goal.b2.culture-identity` created (+ASSESS +DEP). Units 730-739
+(linguistics tail + culture start), 50 words (`ling3.jsonl`, `cult.jsonl`), 2 grammar
+(`b2-ni-anto-shite`, `b2-ni-mukete`), 8 sentences. Score: **7/7**.

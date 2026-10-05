@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.735-heritage-debate
+goal_id: ja.goal.b2.culture-identity
+title: heritage debate
+summary: B2 language for heritage debate.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.cult.juri2
+  - ja.lex.cult.shiminkai
+  - ja.lex.cult.kaiso
+  - ja.lex.cult.tokucho
+  - ja.lex.cult.kouchi
+  - ja.sent.heritage-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.735-heritage-debate-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.cult.juri2
+  - ja.lex.cult.shiminkai
+  - ja.lex.cult.kaiso
+  - ja.lex.cult.tokucho
+  - ja.lex.cult.kouchi
+  - ja.sent.heritage-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.735-heritage-debate-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.cult.juri2
+  - ja.lex.cult.shiminkai
+  - ja.lex.cult.kaiso
+  - ja.lex.cult.tokucho
+  - ja.lex.cult.kouchi
+  - ja.sent.heritage-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.735-heritage-debate-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.cult.juri2
+  - ja.lex.cult.shiminkai
+  - ja.lex.cult.kaiso
+  - ja.lex.cult.tokucho
+  - ja.lex.cult.kouchi
+  - ja.sent.heritage-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.735-heritage-debate-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.cult.juri2
+  - ja.lex.cult.shiminkai
+  - ja.lex.cult.kaiso
+  - ja.lex.cult.tokucho
+  - ja.lex.cult.kouchi
+  - ja.sent.heritage-debate
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.735-heritage-debate-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.heritage-debate
+- id: ja.activity.735-heritage-debate-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

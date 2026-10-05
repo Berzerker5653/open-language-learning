@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.731-register-analysis
+goal_id: ja.goal.b2.language-linguistics
+title: register analysis
+summary: B2 language for register analysis.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.ling3.bunsho
+  - ja.lex.ling3.tally
+  - ja.lex.ling3.pin
+  - ja.lex.ling3.shiryou2
+  - ja.lex.ling3.kouryuu3
+  - ja.sent.register-analysis
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.731-register-analysis-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.ling3.bunsho
+  - ja.lex.ling3.tally
+  - ja.lex.ling3.pin
+  - ja.lex.ling3.shiryou2
+  - ja.lex.ling3.kouryuu3
+  - ja.sent.register-analysis
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.731-register-analysis-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.ling3.bunsho
+  - ja.lex.ling3.tally
+  - ja.lex.ling3.pin
+  - ja.lex.ling3.shiryou2
+  - ja.lex.ling3.kouryuu3
+  - ja.sent.register-analysis
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.731-register-analysis-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.ling3.bunsho
+  - ja.lex.ling3.tally
+  - ja.lex.ling3.pin
+  - ja.lex.ling3.shiryou2
+  - ja.lex.ling3.kouryuu3
+  - ja.sent.register-analysis
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.731-register-analysis-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.ling3.bunsho
+  - ja.lex.ling3.tally
+  - ja.lex.ling3.pin
+  - ja.lex.ling3.shiryou2
+  - ja.lex.ling3.kouryuu3
+  - ja.sent.register-analysis
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.731-register-analysis-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.register-analysis
+- id: ja.activity.731-register-analysis-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
