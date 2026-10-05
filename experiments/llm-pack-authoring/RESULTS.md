@@ -1238,3 +1238,9 @@ Score: **7/7**.
 Units 680-689 (balanced discussion of public issues), goal `ru.goal.b2.society-policy` (existing),
 50 words (`lexicon/soc4.jsonl`), 2 grammar (`b2-sdrugoy-storony`, `b2-pravda-esli`), 10 sentences.
 Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 67
+
+Units 690-699 (scientific explanation from supplied information), NEW goal `ru.goal.b2.science-environment`
+(+2 assessments), 50 words (`lexicon/sci.jsonl`), 2 grammar (`b2-sledovatelno-vyvod`, `b2-zavisit-ot`),
+10 sentences. Score: **7/7**.
