@@ -1046,3 +1046,9 @@ Units 350-359 (main points and clear explanations), NEW goal `ru.goal.b1.informa
 Units 360-369 (selection, compression, summaries), NEW goal `ru.goal.b1.information-summary2`
 (+2 assessments), 50 words (`lexicon/summary2.jsonl`), 2 grammar (`b1.takim-obrazom`, `b1.korotche-govorya`),
 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 35
+
+Units 370-379 (plans, possibilities, consequences), NEW goal `ru.goal.b1.future-conditions`
+(+2 assessments), 50 words (`lexicon/future.jsonl`), 2 grammar (`b1.esli-togda`, `b1.mozhet-byt`),
+10 sentences. Score: **7/7**.
