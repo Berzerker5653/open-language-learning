@@ -666,3 +666,9 @@ External model response (`responses/phase2-personal-details.md`) parsed via
 supersede, 60 total), 6 grammar, 4 sentences, 2 assessments. Pack totals:
 30 units, 7 goals, 100 lex, 9 grammar, 11 sentences, 14 assessments.
 Score: **7/7**.
+
+## 2026-10-04 — ru-RU agent batch ru01: A1 units 030-039 (people-family)
+
+Goal `ru.goal.a1.people-family` created. 10 units, 50-word
+`lexicon/family.jsonl`, 2 grammar (`a1.u-possession`,
+`a1.possessive-pronouns`), 8 sentences, 2 assessments. Score: **7/7**.

@@ -1,0 +1,46 @@
+id: "ru.unit.a1.people-family-01"
+goal_id: "ru.goal.a1.people-family"
+title: "Family at home"
+summary: "семья, брат, сестра, сын, дочь introduced with identification models."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u030-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.family.sem-ya",
+        "ru.lex.family.brat",
+        "ru.lex.family.sestra",
+        "ru.lex.family.syn",
+        "ru.lex.family.doch",
+        "ru.sent.a1.u030",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u030-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a1.u030-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a1.u030"]
+  - id: "ru.activity.a1.u030-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Family at home: naming and simple possession with taught forms only."]
+  prohibited_ambiguity: ["Do not change это to agree with the following noun."]
+  target_proficiency: "A1"
+  validation_method: "choice"

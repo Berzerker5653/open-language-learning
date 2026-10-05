@@ -1,0 +1,47 @@
+id: "ru.unit.a1.people-family-03"
+goal_id: "ru.goal.a1.people-family"
+title: "Children"
+summary: "ребёнок, мальчик, девочка, дети, маленький introduced; ребёнок and дети are suppletive pair."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a1.u032-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.family.rebenok",
+        "ru.lex.family.malchik",
+        "ru.lex.family.devochka",
+        "ru.lex.family.deti",
+        "ru.lex.family.malenkiy",
+        "ru.sent.a1.u032",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.mama",
+      ]
+  - id: "ru.activity.a1.u032-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a1.u032-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a1.u032"]
+  - id: "ru.activity.a1.u032-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Children: naming and simple possession with taught forms only."]
+  prohibited_ambiguity:
+    ["Do not form the plural of ребёнок by adding a regular ending; the plural is дети."]
+  target_proficiency: "A1"
+  validation_method: "choice"
