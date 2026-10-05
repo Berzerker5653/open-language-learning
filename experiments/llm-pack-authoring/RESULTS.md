@@ -1244,3 +1244,9 @@ Score: **7/7**.
 Units 690-699 (scientific explanation from supplied information), NEW goal `ru.goal.b2.science-environment`
 (+2 assessments), 50 words (`lexicon/sci.jsonl`), 2 grammar (`b2-sledovatelno-vyvod`, `b2-zavisit-ot`),
 10 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 68
+
+Units 700-709 (technology, applications, and impacts), goal `ru.goal.b2.science-environment` (existing),
+50 words (`lexicon/sci2.jsonl`), 2 grammar (`b2-s-pomoshchyu`, `b2-privodit-k`), 10 sentences.
+Score: **7/7**.

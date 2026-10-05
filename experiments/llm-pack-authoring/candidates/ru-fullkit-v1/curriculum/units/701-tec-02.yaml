@@ -1,0 +1,46 @@
+id: "ru.unit.b2.tec-02"
+goal_id: "ru.goal.b2.science-environment"
+title: "Controls"
+summary: "аналоговый, сканировать, дисплей, переключатель and тумблер."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u701-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.sci.analogovyy",
+        "ru.lex.sci.skanirovat",
+        "ru.lex.sci.displey",
+        "ru.lex.sci.perekluchatel",
+        "ru.lex.sci.tumbler",
+        "ru.sent.b2.u701",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u701-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u701-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u701"]
+  - id: "ru.activity.b2.u701-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Controls: science report with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse переключатель (switch) with тумблер (toggle switch)."]
+  target_proficiency: "B2"
+  validation_method: "choice"

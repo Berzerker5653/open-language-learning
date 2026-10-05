@@ -1,0 +1,46 @@
+id: "ru.unit.b2.tec-09"
+goal_id: "ru.goal.b2.science-environment"
+title: "Wear"
+summary: "износ, смазка, подшипник, агрегат and сборочный."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u708-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.sci.iznos",
+        "ru.lex.sci.smazka",
+        "ru.lex.sci.podshipnik",
+        "ru.lex.sci.agregat",
+        "ru.lex.sci.sborochnyy",
+        "ru.sent.b2.u708",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u708-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u708-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u708"]
+  - id: "ru.activity.b2.u708-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Wear: science report with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse износ (wear) with поломка (breakdown)."]
+  target_proficiency: "B2"
+  validation_method: "choice"
