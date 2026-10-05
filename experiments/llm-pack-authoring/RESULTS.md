@@ -1232,3 +1232,9 @@ Score: **7/7**.
 Units 670-679 (institutions, participation, and responsibilities), goal `ru.goal.b2.society-policy` (existing),
 50 words (`lexicon/soc3.jsonl`), 2 grammar (`b2-otvechaet-pered`, `b2-uchastvuet-v`), 10 sentences.
 Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 66
+
+Units 680-689 (balanced discussion of public issues), goal `ru.goal.b2.society-policy` (existing),
+50 words (`lexicon/soc4.jsonl`), 2 grammar (`b2-sdrugoy-storony`, `b2-pravda-esli`), 10 sentences.
+Score: **7/7**.
