@@ -1250,3 +1250,9 @@ Units 690-699 (scientific explanation from supplied information), NEW goal `ru.g
 Units 700-709 (technology, applications, and impacts), goal `ru.goal.b2.science-environment` (existing),
 50 words (`lexicon/sci2.jsonl`), 2 grammar (`b2-s-pomoshchyu`, `b2-privodit-k`), 10 sentences.
 Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 69
+
+Units 710-719 (environmental choices and trade-offs), goal `ru.goal.b2.science-environment` (existing),
+50 words (`lexicon/sci3.jsonl`), 2 grammar (`b2-chem-vsyo`, `b2-vo-obmen`), 10 sentences.
+Score: **7/7**.

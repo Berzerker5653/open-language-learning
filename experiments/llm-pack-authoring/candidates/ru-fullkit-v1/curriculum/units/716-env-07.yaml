@@ -1,0 +1,47 @@
+id: "ru.unit.b2.env-07"
+goal_id: "ru.goal.b2.science-environment"
+title: "Energy"
+summary: "смог, туманный, ветряной, ветроэнергетика and гидроэнергетика."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u716-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.sci.smog",
+        "ru.lex.sci.tumannyy",
+        "ru.lex.sci.vetryanoy",
+        "ru.lex.sci.vetroenergetika",
+        "ru.lex.sci.gidroenergetika",
+        "ru.sent.b2.u716",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u716-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u716-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u716"]
+  - id: "ru.activity.b2.u716-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Energy: science report with taught forms only."]
+  prohibited_ambiguity:
+    ["Do not confuse ветроэнергетика (wind energy) with гидроэнергетика (hydro energy)."]
+  target_proficiency: "B2"
+  validation_method: "choice"

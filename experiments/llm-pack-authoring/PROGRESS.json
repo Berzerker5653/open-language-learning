@@ -3,9 +3,9 @@
     "plan": "plans/ru-fullkit-v1.yaml",
     "pack": "candidates/ru-fullkit-v1",
     "bands_done": ["on-ramp", "A1", "A2"],
-    "units_next": "710",
+    "units_next": "720",
     "last_score": "7/7 (2026-10-04, results/ru-fullkit-v1)",
-    "notes": "B2: ru68 (700-709) 7/7; science-environment goal; pack 710 units; next: block 710-719 per plan"
+    "notes": "B2: ru69 (710-719) 7/7; science-environment goal; pack 720 units; next: block 720-729 per plan"
   },
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",
