@@ -934,3 +934,8 @@ Goal `ru.goal.b1.experiences` created (+2 assessments). Units 230-239,
 Goal `ja.goal.b2.culture-identity` created (+ASSESS +DEP). Units 730-739
 (linguistics tail + culture start), 50 words (`ling3.jsonl`, `cult.jsonl`), 2 grammar
 (`b2-ni-anto-shite`, `b2-ni-mukete`), 8 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 22
+
+Units 240-249 (experiences: travel), 50 words (`lexicon/travel2.jsonl`),
+2 grammar (`b1.travel-reflexives`, `b1.lessons-perfective`), 10 sentences. Score: **7/7**.

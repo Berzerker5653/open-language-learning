@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
        22646  5dd39df78be6  assessments/definitions.jsonl
-       31930  2bf25f86dc03  curriculum/goals.yaml
+       32122  caa5db554318  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -230,17 +230,27 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1429  c38a2ab68d5e  curriculum/units/227-narration-background-08.yaml
         1477  bc16a53adcd1  curriculum/units/228-narration-background-09.yaml
         1440  174fb66c4a97  curriculum/units/229-narration-background-10.yaml
-        1404  9a1bbd41c6e4  curriculum/units/230-life-experiences-01.yaml
-        1372  9e320777a63b  curriculum/units/231-life-experiences-02.yaml
-        1373  f04786ab36bb  curriculum/units/232-life-experiences-03.yaml
-        1376  e2a79ffae559  curriculum/units/233-life-experiences-04.yaml
-        1423  dcdeb74c52bc  curriculum/units/234-life-experiences-05.yaml
-        1382  071b6cbc9708  curriculum/units/235-life-experiences-06.yaml
-        1379  f69486db917e  curriculum/units/236-life-experiences-07.yaml
-        1368  a92890cbe5b3  curriculum/units/237-life-experiences-08.yaml
-        1419  17cbedbc4d2f  curriculum/units/238-life-experiences-09.yaml
-        1399  384258710f34  curriculum/units/239-life-experiences-10.yaml
-       29981  df02f89718e0  grammar/concepts.jsonl
+        1489  27af6be58bb6  curriculum/units/230-life-experiences-01.yaml
+        1457  cbc3e87a4bcc  curriculum/units/231-life-experiences-02.yaml
+        1458  b37ac96dc4bc  curriculum/units/232-life-experiences-03.yaml
+        1461  bee72ad0bfe8  curriculum/units/233-life-experiences-04.yaml
+        1508  7d96a49bc1c5  curriculum/units/234-life-experiences-05.yaml
+        1467  51918787dc01  curriculum/units/235-life-experiences-06.yaml
+        1464  5eaae74b3926  curriculum/units/236-life-experiences-07.yaml
+        1453  5b365b61e0c6  curriculum/units/237-life-experiences-08.yaml
+        1504  9c9fa0eb573b  curriculum/units/238-life-experiences-09.yaml
+        1484  d85aeac94bdd  curriculum/units/239-life-experiences-10.yaml
+        1332  8c91ce1bff3d  curriculum/units/240-travel-experiences-01.yaml
+        1357  a2a2b6c64d71  curriculum/units/241-travel-experiences-02.yaml
+        1363  243e4fbb8ec6  curriculum/units/242-travel-experiences-03.yaml
+        1383  f7d79a3f57ed  curriculum/units/243-travel-experiences-04.yaml
+        1393  7c3475d6667a  curriculum/units/244-travel-experiences-05.yaml
+        1437  84ec055017c0  curriculum/units/245-travel-experiences-06.yaml
+        1366  d414f36db910  curriculum/units/246-travel-experiences-07.yaml
+        1387  5f2aa0e1f3c2  curriculum/units/247-travel-experiences-08.yaml
+        1369  5a05f945ae8d  curriculum/units/248-travel-experiences-09.yaml
+        1357  cb4cde38ba68  curriculum/units/249-travel-experiences-10.yaml
+       31006  c3b66fbd77a9  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        21189  03a4503c7371  lexicon/city.jsonl
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
@@ -266,10 +276,11 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
        21963  9ff3ee6d8572  lexicon/socialplans.jsonl
        21640  21f9a881afb5  lexicon/timeplans.jsonl
        21525  80458a7c1092  lexicon/travel.jsonl
+       22051  45db0f7ebd2a  lexicon/travel2.jsonl
        21644  4a1e18f9c4e9  lexicon/wellbeing.jsonl
        21787  663baa2b53d2  lexicon/workstudy.jsonl
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-       74202  1b44dc1ad974  sentences/entries.jsonl
+       77833  9ef5e93c2802  sentences/entries.jsonl
          391  74babc055676  sources.jsonl
