@@ -1,0 +1,46 @@
+id: "ru.unit.a2.work-study-03"
+goal_id: "ru.goal.a2.work-study"
+title: "Goals"
+summary: "цель, план, срок, возможность and шанс."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.a2.u152-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.workstudy.cel",
+        "ru.lex.workstudy.plan2",
+        "ru.lex.workstudy.srok",
+        "ru.lex.workstudy.vozmozhnost",
+        "ru.lex.workstudy.shans",
+        "ru.sent.a2.u152",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.a2.u152-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.a2.u152-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.a2.u152"]
+  - id: "ru.activity.a2.u152-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Goals: work and study with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse цель (goal) with план (plan)."]
+  target_proficiency: "A2"
+  validation_method: "choice"

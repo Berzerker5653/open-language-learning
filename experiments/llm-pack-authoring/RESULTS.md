@@ -829,3 +829,9 @@ Goal `ja.goal.b2.media-critique` created (+assess, +deps). Units 640-649,
 50 words (`lexicon/media3.jsonl`), 2 grammar (`b2-to-iu-koto`, `b2-wake-da`),
 8 sentences. (First run clobbered existing `media.jsonl`/`media2.jsonl`;
 restored, shard renamed media3.) Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 13
+
+Goal `ru.goal.a2.work-study` created (+2 assessments). Units 150-159,
+50 words (`lexicon/workstudy.jsonl`), 2 grammar (`a2.instrumental-role`,
+`a2.genitive-of-achievement`), 10 sentences. Score: **7/7**.
