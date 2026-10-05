@@ -1,0 +1,47 @@
+id: "ru.unit.b2.prof-05"
+goal_id: "ru.goal.b2.professional-writing"
+title: "Bureaucratese"
+summary: "канцелярит, канцеляризм, визирование, скрепа and скрепить."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u574-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.prof.kanceljarit",
+        "ru.lex.prof.kanceljarizm",
+        "ru.lex.prof.vizirovanie",
+        "ru.lex.prof.skrepa",
+        "ru.lex.prof.skrepit",
+        "ru.sent.b2.u574",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u574-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u574-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u574"]
+  - id: "ru.activity.b2.u574-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Bureaucratese: business letter with taught forms only."]
+  prohibited_ambiguity:
+    ["Do not confuse канцелярит (bureaucratese) with канцеляризм (bureaucratism)."]
+  target_proficiency: "B2"
+  validation_method: "choice"

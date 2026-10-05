@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
-       44997  51bc62c5421c  assessments/definitions.jsonl
-       66231  b4498519d4f2  curriculum/goals.yaml
+       45787  d18c8ef1279e  assessments/definitions.jsonl
+       67505  d901a3f6709f  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -560,17 +560,27 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1526  afd89bee7e11  curriculum/units/557-study3-08.yaml
         1433  e9433ad5fa5d  curriculum/units/558-study3-09.yaml
         1508  f016a89bd0eb  curriculum/units/559-study3-10.yaml
-        1346  3cff33afeef6  curriculum/units/560-study4-01.yaml
-        1388  8784bf9ae9a4  curriculum/units/561-study4-02.yaml
-        1392  b09c20824683  curriculum/units/562-study4-03.yaml
-        1331  d8c7fd7f289f  curriculum/units/563-study4-04.yaml
-        1326  3af3892e1df5  curriculum/units/564-study4-05.yaml
-        1277  e64d469833ea  curriculum/units/565-study4-06.yaml
-        1303  1769a2ad0a04  curriculum/units/566-study4-07.yaml
-        1381  d1abe3f34a52  curriculum/units/567-study4-08.yaml
-        1399  c970f73a90bc  curriculum/units/568-study4-09.yaml
-        1369  6d7694f17e5e  curriculum/units/569-study4-10.yaml
-       61640  3f8bf3fa7bd5  grammar/concepts.jsonl
+        1431  e01de274aa28  curriculum/units/560-study4-01.yaml
+        1473  26935ee0ddfd  curriculum/units/561-study4-02.yaml
+        1477  5a5e3b241ecd  curriculum/units/562-study4-03.yaml
+        1416  6ca2e1a874f4  curriculum/units/563-study4-04.yaml
+        1411  6cebb511deeb  curriculum/units/564-study4-05.yaml
+        1362  d6a86cd5f05e  curriculum/units/565-study4-06.yaml
+        1388  f2baaae8e8a9  curriculum/units/566-study4-07.yaml
+        1466  d9bb3d6e5693  curriculum/units/567-study4-08.yaml
+        1484  c1b0577763fb  curriculum/units/568-study4-09.yaml
+        1454  ff3163359252  curriculum/units/569-study4-10.yaml
+        1363  cbd5fb4aa2c0  curriculum/units/570-prof-01.yaml
+        1393  4a55f9816c7c  curriculum/units/571-prof-02.yaml
+        1395  aa41dc1a6106  curriculum/units/572-prof-03.yaml
+        1401  336802a1a816  curriculum/units/573-prof-04.yaml
+        1402  7fa05e68037b  curriculum/units/574-prof-05.yaml
+        1375  612b6ce06c1d  curriculum/units/575-prof-06.yaml
+        1397  347ffc0fd9ef  curriculum/units/576-prof-07.yaml
+        1387  567b1ea83177  curriculum/units/577-prof-08.yaml
+        1407  08ab29599ce2  curriculum/units/578-prof-09.yaml
+        1423  e3ec872103e8  curriculum/units/579-prof-10.yaml
+       62534  a3e2a9557ba2  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        19883  88e6a1307edd  lexicon/argue.jsonl
        19764  9c172a07e9a5  lexicon/argue2.jsonl
@@ -607,6 +617,7 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
        22380  8c501a5154bc  lexicon/personal.jsonl
        21982  3e3964bc7992  lexicon/problems.jsonl
        19907  763912bb4aac  lexicon/problems2.jsonl
+       20137  445d0ec7eb8b  lexicon/prof.jsonl
        19247  9b1a5ec5acee  lexicon/rel.jsonl
        20183  04e8fd43b3b6  lexicon/respect.jsonl
        21337  77ca388bc863  lexicon/routines.jsonl
@@ -634,5 +645,5 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-      194483  28005ecfc6d8  sentences/entries.jsonl
+      198215  53af11620e55  sentences/entries.jsonl
          391  74babc055676  sources.jsonl

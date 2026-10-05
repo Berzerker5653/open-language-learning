@@ -2011,3 +2011,43 @@ goals:
       model: "strata/qwen3.8-flash-next-iq3_s"
       date: "2026-10-05"
       notes: "ai-drafted; needs dictionary sourcing and human review"
+  - id: "ru.goal.b2.professional-writing"
+    description: "Write professional requests and correspondence."
+    band: "B2"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - {
+          target: "ru.goal.b1.extended-writing",
+          dimension: "comprehension-reading",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.a2.services",
+          dimension: "comprehension-reading",
+          required_state: "independent",
+          strength: "hard",
+        }
+      - {
+          target: "ru.goal.on-ramp.everyday",
+          dimension: "recall-meaning",
+          required_state: "independent",
+          strength: "hard",
+        }
+    required_concepts:
+      [
+        "ru.grammar.b2-proshu",
+        "ru.grammar.b2-v-svyazi-s2",
+        "ru.grammar.on-ramp.zero-present-copula",
+      ]
+    assessment_ids:
+      ["ru.assess.b2.professional-writing-reading", "ru.assess.b2.professional-writing-writing"]
+    transfer_required: false
+    sources: ["ru-original"]
+    review_status: "draft"
+    generation:
+      method: "ai-assisted"
+      tool: "omp"
+      model: "strata/qwen3.8-flash-next-iq3_s"
+      date: "2026-10-05"
+      notes: "ai-drafted; needs dictionary sourcing and human review"

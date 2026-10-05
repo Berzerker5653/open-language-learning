@@ -1,0 +1,46 @@
+id: "ru.unit.b2.prof-09"
+goal_id: "ru.goal.b2.professional-writing"
+title: "Contract"
+summary: "контракт, распоряжение, постановление, указ and делопроводитель."
+estimated_minutes: 8
+activities:
+  - id: "ru.activity.b2.u578-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &v [
+        "ru.lex.prof.kontrakt",
+        "ru.lex.prof.rasporyazhenie",
+        "ru.lex.prof.postanovlenie",
+        "ru.lex.prof.ukaz",
+        "ru.lex.prof.deloprovoditel",
+        "ru.sent.b2.u578",
+        "ru.lex.everyday.eto",
+        "ru.lex.everyday.dom",
+      ]
+  - id: "ru.activity.b2.u578-grammar"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs:
+      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
+  - id: "ru.activity.b2.u578-cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["ru.sent.b2.u578"]
+  - id: "ru.activity.b2.u578-write"
+    type: "recall"
+    modality: "writing"
+    support_level: 0
+    content_refs: *v
+generation_contract:
+  allowed_vocab: *v
+  allowed_grammar: *g
+  new_item_budget: 6
+  register: []
+  expected_interpretations: ["Contract: business letter with taught forms only."]
+  prohibited_ambiguity: ["Do not confuse распоряжение (order) with постановление (resolution)."]
+  target_proficiency: "B2"
+  validation_method: "choice"

@@ -1,2 +1,2 @@
-built experiments/llm-pack-authoring/results/ru-fullkit-v1/pack.lpk (604842 bytes)
-sha256 8e1130e62d80a206ac64543dd7f5c86f7bb43072e0f056833452cc06fc547154
+built experiments/llm-pack-authoring/results/ru-fullkit-v1/pack.lpk (615380 bytes)
+sha256 4135007c030f79c574293744ef8259504f7a134de2b68fa3150ccdc62c9ca750
