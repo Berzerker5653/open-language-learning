@@ -1,6 +1,6 @@
 lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
-       16856  dec80f598a44  assessments/definitions.jsonl
-       23001  2c8dc8f908aa  curriculum/goals.yaml
+       17661  408a355dd9f2  assessments/definitions.jsonl
+       24263  1fce36d866e3  curriculum/goals.yaml
         1978  f0f0a7d4745c  curriculum/units/000-greetings-01.yaml
         2450  99c0f1a9c740  curriculum/units/001-greetings-02.yaml
         1819  25145637f83f  curriculum/units/002-self-introduction-01.yaml
@@ -150,17 +150,27 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
         1446  1ddd85d7430e  curriculum/units/147-wellbeing-08.yaml
         1410  f2cc4ffedc2b  curriculum/units/148-wellbeing-09.yaml
         1452  2a0fc7ded81e  curriculum/units/149-wellbeing-10.yaml
-        1376  13f1f6ca5ddc  curriculum/units/150-work-study-01.yaml
-        1346  db5d68fa70ac  curriculum/units/151-work-study-02.yaml
-        1305  b470a2fa0d67  curriculum/units/152-work-study-03.yaml
-        1355  53c561bc37ff  curriculum/units/153-work-study-04.yaml
-        1343  17421ddd257b  curriculum/units/154-work-study-05.yaml
-        1393  f6bf6da8656e  curriculum/units/155-work-study-06.yaml
-        1429  61dfac354b8f  curriculum/units/156-work-study-07.yaml
-        1351  8ba315452232  curriculum/units/157-work-study-08.yaml
-        1359  cf4de45405a3  curriculum/units/158-work-study-09.yaml
-        1355  e24975459009  curriculum/units/159-work-study-10.yaml
-       21888  0b4e4715ec57  grammar/concepts.jsonl
+        1461  f27b95e08b0f  curriculum/units/150-work-study-01.yaml
+        1431  5dc9c96923e2  curriculum/units/151-work-study-02.yaml
+        1390  8ba352b39150  curriculum/units/152-work-study-03.yaml
+        1440  cbdcd1443b08  curriculum/units/153-work-study-04.yaml
+        1428  72393cbd37eb  curriculum/units/154-work-study-05.yaml
+        1478  a478b62e8050  curriculum/units/155-work-study-06.yaml
+        1514  f92e90a91b0d  curriculum/units/156-work-study-07.yaml
+        1436  9acd3a40dcb8  curriculum/units/157-work-study-08.yaml
+        1444  48fbe7d43dbe  curriculum/units/158-work-study-09.yaml
+        1440  2f6985e64583  curriculum/units/159-work-study-10.yaml
+        1430  972d2c7a0c05  curriculum/units/160-social-plans-01.yaml
+        1389  d4aed7f36b00  curriculum/units/161-social-plans-02.yaml
+        1340  aea92463c0a1  curriculum/units/162-social-plans-03.yaml
+        1352  9ad4c31e7928  curriculum/units/163-social-plans-04.yaml
+        1388  f97d159ed789  curriculum/units/164-social-plans-05.yaml
+        1395  755344f92b43  curriculum/units/165-social-plans-06.yaml
+        1374  fc92c9c1331d  curriculum/units/166-social-plans-07.yaml
+        1376  6c618650b34b  curriculum/units/167-social-plans-08.yaml
+        1334  9d196a048009  curriculum/units/168-social-plans-09.yaml
+        1386  755d96c01d15  curriculum/units/169-social-plans-10.yaml
+       22936  8e8e90a98460  grammar/concepts.jsonl
          237  b2b8e7c0884f  language/orthography.yaml
        21189  03a4503c7371  lexicon/city.jsonl
         3967  ac6ac9c5c10c  lexicon/classroom.jsonl
@@ -176,6 +186,7 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
        21337  77ca388bc863  lexicon/routines.jsonl
        21837  78c9c9a40760  lexicon/services.jsonl
        21290  daeb36ea4066  lexicon/shopping.jsonl
+       21963  9ff3ee6d8572  lexicon/socialplans.jsonl
        21640  21f9a881afb5  lexicon/timeplans.jsonl
        21525  80458a7c1092  lexicon/travel.jsonl
        21644  4a1e18f9c4e9  lexicon/wellbeing.jsonl
@@ -183,5 +194,5 @@ lts-pack/1 dev.example.ru v0.1.0 (schema 0.2)
          117  5548458a0de4  licenses.jsonl
          400  cac3fdb05444  manifest.yaml
        26026  05a86f2e790c  orthography/cyrillic.jsonl
-       44720  e20fde0ca965  sentences/entries.jsonl
+       48364  ee9cabc294f0  sentences/entries.jsonl
          391  74babc055676  sources.jsonl

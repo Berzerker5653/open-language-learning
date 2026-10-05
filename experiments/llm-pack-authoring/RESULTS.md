@@ -841,3 +841,9 @@ Goal `ru.goal.a2.work-study` created (+2 assessments). Units 150-159,
 Goal `ja.goal.b2.psychology-mind` created (+assess, +deps). Units 650-659,
 50 words (`lexicon/critique.jsonl`), 2 grammar (`b2-ni-yoru`, `b2-wake-dewa-nai`),
 8 sentences. Score: **7/7**.
+
+## 2026-10-05 — ru-RU batch 14
+
+Goal `ru.goal.a2.social-plans` created (+2 assessments). Units 160-169,
+50 words (`lexicon/socialplans.jsonl`), 2 grammar (`a2.let-us-imperative`,
+`a2.invitation-accusative`), 10 sentences. Score: **7/7**.
