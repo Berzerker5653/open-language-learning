@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.equity-in-schools
+goal_id: ja.goal.b2.education-pedagogy
+title: equity in schools
+summary: B2 language for equity in schools.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.edu4.byoudou
+  - ja.lex.edu4.kyousei2
+  - ja.lex.edu4.seikyu
+  - ja.lex.edu4.zentai
+  - ja.lex.edu4.kuni
+  - ja.sent.equity-in-schools
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.equity-in-schools-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.edu4.byoudou
+  - ja.lex.edu4.kyousei2
+  - ja.lex.edu4.seikyu
+  - ja.lex.edu4.zentai
+  - ja.lex.edu4.kuni
+  - ja.sent.equity-in-schools
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.equity-in-schools-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.edu4.byoudou
+  - ja.lex.edu4.kyousei2
+  - ja.lex.edu4.seikyu
+  - ja.lex.edu4.zentai
+  - ja.lex.edu4.kuni
+  - ja.sent.equity-in-schools
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.equity-in-schools-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.edu4.byoudou
+  - ja.lex.edu4.kyousei2
+  - ja.lex.edu4.seikyu
+  - ja.lex.edu4.zentai
+  - ja.lex.edu4.kuni
+  - ja.sent.equity-in-schools
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.equity-in-schools-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.edu4.byoudou
+  - ja.lex.edu4.kyousei2
+  - ja.lex.edu4.seikyu
+  - ja.lex.edu4.zentai
+  - ja.lex.edu4.kuni
+  - ja.sent.equity-in-schools
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.equity-in-schools-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.equity-in-schools
+- id: ja.activity.equity-in-schools-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

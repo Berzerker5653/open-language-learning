@@ -10,7 +10,7 @@
   "ja-JP": {
     "plan": "plans/ja-fullkit-v1.yaml",
     "pack": "languages/ja-JP",
-    "units_next": "570",
-    "notes": "b47-b52 (510-569) 7/7; science-tech-ethics complete (550-563); education-pedagogy goal created (564-569 done); next batch 570+"
+    "units_next": "580",
+    "notes": "b47-b53 (510-579) 7/7; education-pedagogy complete (564-579); next goal per plan from 580"
   }
 }

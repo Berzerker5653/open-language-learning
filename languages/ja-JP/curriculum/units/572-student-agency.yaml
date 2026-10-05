@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.student-agency
+goal_id: ja.goal.b2.education-pedagogy
+title: student agency
+summary: B2 language for student agency.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.edu4.jiritsu
+  - ja.lex.edu4.jikaku
+  - ja.lex.edu4.senkousei
+  - ja.lex.edu4.koudou
+  - ja.lex.edu4.kibou
+  - ja.sent.student-agency
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.student-agency-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.edu4.jiritsu
+  - ja.lex.edu4.jikaku
+  - ja.lex.edu4.senkousei
+  - ja.lex.edu4.koudou
+  - ja.lex.edu4.kibou
+  - ja.sent.student-agency
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.student-agency-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.edu4.jiritsu
+  - ja.lex.edu4.jikaku
+  - ja.lex.edu4.senkousei
+  - ja.lex.edu4.koudou
+  - ja.lex.edu4.kibou
+  - ja.sent.student-agency
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.student-agency-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.edu4.jiritsu
+  - ja.lex.edu4.jikaku
+  - ja.lex.edu4.senkousei
+  - ja.lex.edu4.koudou
+  - ja.lex.edu4.kibou
+  - ja.sent.student-agency
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.student-agency-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.edu4.jiritsu
+  - ja.lex.edu4.jikaku
+  - ja.lex.edu4.senkousei
+  - ja.lex.edu4.koudou
+  - ja.lex.edu4.kibou
+  - ja.sent.student-agency
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.student-agency-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.student-agency
+- id: ja.activity.student-agency-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

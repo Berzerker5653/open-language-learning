@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.technology-in-class
+goal_id: ja.goal.b2.education-pedagogy
+title: technology in class
+summary: B2 language for technology in class.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.edu4.gijutsu-kyouiku
+  - ja.lex.edu4.taburetto
+  - ja.lex.edu4.onrain
+  - ja.lex.edu4.digital
+  - ja.lex.edu4.anzen
+  - ja.sent.technology-in-class
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.technology-in-class-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.edu4.gijutsu-kyouiku
+  - ja.lex.edu4.taburetto
+  - ja.lex.edu4.onrain
+  - ja.lex.edu4.digital
+  - ja.lex.edu4.anzen
+  - ja.sent.technology-in-class
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.technology-in-class-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.edu4.gijutsu-kyouiku
+  - ja.lex.edu4.taburetto
+  - ja.lex.edu4.onrain
+  - ja.lex.edu4.digital
+  - ja.lex.edu4.anzen
+  - ja.sent.technology-in-class
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.technology-in-class-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.edu4.gijutsu-kyouiku
+  - ja.lex.edu4.taburetto
+  - ja.lex.edu4.onrain
+  - ja.lex.edu4.digital
+  - ja.lex.edu4.anzen
+  - ja.sent.technology-in-class
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.technology-in-class-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.edu4.gijutsu-kyouiku
+  - ja.lex.edu4.taburetto
+  - ja.lex.edu4.onrain
+  - ja.lex.edu4.digital
+  - ja.lex.edu4.anzen
+  - ja.sent.technology-in-class
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.technology-in-class-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.technology-in-class
+- id: ja.activity.technology-in-class-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

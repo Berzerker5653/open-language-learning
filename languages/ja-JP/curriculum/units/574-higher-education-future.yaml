@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.higher-education-future
+goal_id: ja.goal.b2.education-pedagogy
+title: higher education future
+summary: B2 language for higher education future.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.edu4.koutou-gakko
+  - ja.lex.edu4.kenkyusei
+  - ja.lex.edu4.shakaijin
+  - ja.lex.edu4.shuushoku
+  - ja.lex.edu4.saishin
+  - ja.sent.higher-education-future
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.higher-education-future-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.edu4.koutou-gakko
+  - ja.lex.edu4.kenkyusei
+  - ja.lex.edu4.shakaijin
+  - ja.lex.edu4.shuushoku
+  - ja.lex.edu4.saishin
+  - ja.sent.higher-education-future
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.higher-education-future-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.edu4.koutou-gakko
+  - ja.lex.edu4.kenkyusei
+  - ja.lex.edu4.shakaijin
+  - ja.lex.edu4.shuushoku
+  - ja.lex.edu4.saishin
+  - ja.sent.higher-education-future
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.higher-education-future-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.edu4.koutou-gakko
+  - ja.lex.edu4.kenkyusei
+  - ja.lex.edu4.shakaijin
+  - ja.lex.edu4.shuushoku
+  - ja.lex.edu4.saishin
+  - ja.sent.higher-education-future
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.higher-education-future-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.edu4.koutou-gakko
+  - ja.lex.edu4.kenkyusei
+  - ja.lex.edu4.shakaijin
+  - ja.lex.edu4.shuushoku
+  - ja.lex.edu4.saishin
+  - ja.sent.higher-education-future
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.higher-education-future-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.higher-education-future
+- id: ja.activity.higher-education-future-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

@@ -750,3 +750,8 @@ Goal `ja.goal.b2.science-tech-ethics` created (+deps edge, +assessment). 10 unit
 Goal `ja.goal.b2.education-pedagogy` created (+deps edge, +assessment). 10 units,
 20-word `lexicon/science2.jsonl`, 30-word `lexicon/edu3.jsonl`,
 2 grammar (`b2.ni-sotte`, `b2.bakari-da`), 8 sentences. Score: **7/7**.
+
+## 2026-10-04 — ja-JP batch 53: B2 units 570-579 (education-pedagogy tail)
+
+10 units, 50-word `lexicon/edu4.jsonl`, 2 grammar (`b2.ni-kanren-shite`,
+`b2.ni-kagiri`), 8 sentences. Score: **7/7**.
