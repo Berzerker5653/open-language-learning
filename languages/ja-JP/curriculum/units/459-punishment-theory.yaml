@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.punishment-theory
+goal_id: ja.goal.b2.law-justice
+title: punishment theory
+summary: B2 language for punishment theory.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.law.saishin
+  - ja.lex.law.kanpou
+  - ja.lex.law.shikkou
+  - ja.lex.law.zange
+  - ja.lex.law.kufu
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.b2.ni-tsunete
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.punishment-theory-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.law.saishin
+  - ja.lex.law.kanpou
+  - ja.lex.law.shikkou
+  - ja.lex.law.zange
+  - ja.lex.law.kufu
+  - ja.grammar.b2.ni-tsunete
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.punishment-theory-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.law.saishin
+  - ja.lex.law.kanpou
+  - ja.lex.law.shikkou
+  - ja.lex.law.zange
+  - ja.lex.law.kufu
+  - ja.grammar.b2.ni-tsunete
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.punishment-theory-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.law.saishin
+  - ja.lex.law.kanpou
+  - ja.lex.law.shikkou
+  - ja.lex.law.zange
+  - ja.lex.law.kufu
+  - ja.grammar.b2.ni-tsunete
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.punishment-theory-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.law.saishin
+  - ja.lex.law.kanpou
+  - ja.lex.law.shikkou
+  - ja.lex.law.zange
+  - ja.lex.law.kufu
+  - ja.grammar.b2.ni-tsunete
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.punishment-theory-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+- id: ja.activity.punishment-theory-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.reply-email

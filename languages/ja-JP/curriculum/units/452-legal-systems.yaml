@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.legal-systems
+goal_id: ja.goal.b2.law-justice
+title: legal systems
+summary: B2 language for legal systems.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.law.houritsu
+  - ja.lex.law.hourei
+  - ja.lex.law.houan
+  - ja.lex.law.houkou
+  - ja.lex.law.jourei
+  - ja.sent.legal-systems
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.legal-systems-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.law.houritsu
+  - ja.lex.law.hourei
+  - ja.lex.law.houan
+  - ja.lex.law.houkou
+  - ja.lex.law.jourei
+  - ja.sent.legal-systems
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.legal-systems-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.law.houritsu
+  - ja.lex.law.hourei
+  - ja.lex.law.houan
+  - ja.lex.law.houkou
+  - ja.lex.law.jourei
+  - ja.sent.legal-systems
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.legal-systems-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.law.houritsu
+  - ja.lex.law.hourei
+  - ja.lex.law.houan
+  - ja.lex.law.houkou
+  - ja.lex.law.jourei
+  - ja.sent.legal-systems
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.legal-systems-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.law.houritsu
+  - ja.lex.law.hourei
+  - ja.lex.law.houan
+  - ja.lex.law.houkou
+  - ja.lex.law.jourei
+  - ja.sent.legal-systems
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.legal-systems-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.legal-systems
+- id: ja.activity.legal-systems-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

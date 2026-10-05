@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.civil-rights
+goal_id: ja.goal.b2.law-justice
+title: civil rights
+summary: B2 language for civil rights.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.law.minji
+  - ja.lex.law.enzan
+  - ja.lex.law.higaisha
+  - ja.lex.law.batsu
+  - ja.lex.law.fusei
+  - ja.sent.civil-rights
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.civil-rights-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.law.minji
+  - ja.lex.law.enzan
+  - ja.lex.law.higaisha
+  - ja.lex.law.batsu
+  - ja.lex.law.fusei
+  - ja.sent.civil-rights
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.civil-rights-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.law.minji
+  - ja.lex.law.enzan
+  - ja.lex.law.higaisha
+  - ja.lex.law.batsu
+  - ja.lex.law.fusei
+  - ja.sent.civil-rights
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.civil-rights-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.law.minji
+  - ja.lex.law.enzan
+  - ja.lex.law.higaisha
+  - ja.lex.law.batsu
+  - ja.lex.law.fusei
+  - ja.sent.civil-rights
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.civil-rights-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.law.minji
+  - ja.lex.law.enzan
+  - ja.lex.law.higaisha
+  - ja.lex.law.batsu
+  - ja.lex.law.fusei
+  - ja.sent.civil-rights
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.civil-rights-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.civil-rights
+- id: ja.activity.civil-rights-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

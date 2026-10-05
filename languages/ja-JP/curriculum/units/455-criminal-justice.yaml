@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.criminal-justice
+goal_id: ja.goal.b2.law-justice
+title: criminal justice
+summary: B2 language for criminal justice.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.law.hanza
+  - ja.lex.law.hannin
+  - ja.lex.law.keiji
+  - ja.lex.law.hoiho
+  - ja.lex.law.sosa
+  - ja.sent.criminal-justice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.criminal-justice-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.law.hanza
+  - ja.lex.law.hannin
+  - ja.lex.law.keiji
+  - ja.lex.law.hoiho
+  - ja.lex.law.sosa
+  - ja.sent.criminal-justice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.criminal-justice-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.law.hanza
+  - ja.lex.law.hannin
+  - ja.lex.law.keiji
+  - ja.lex.law.hoiho
+  - ja.lex.law.sosa
+  - ja.sent.criminal-justice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.criminal-justice-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.law.hanza
+  - ja.lex.law.hannin
+  - ja.lex.law.keiji
+  - ja.lex.law.hoiho
+  - ja.lex.law.sosa
+  - ja.sent.criminal-justice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.criminal-justice-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.law.hanza
+  - ja.lex.law.hannin
+  - ja.lex.law.keiji
+  - ja.lex.law.hoiho
+  - ja.lex.law.sosa
+  - ja.sent.criminal-justice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.criminal-justice-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.criminal-justice
+- id: ja.activity.criminal-justice-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts

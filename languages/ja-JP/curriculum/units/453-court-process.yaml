@@ -1,0 +1,85 @@
+# ai-assisted draft unit (Mode B B2); content refs are pack data; qualified review pending.
+id: ja.unit.court-process
+goal_id: ja.goal.b2.law-justice
+title: court process
+summary: B2 language for court process.
+estimated_minutes: 6
+generation_contract:
+  allowed_vocab:
+  - ja.lex.law.saiban
+  - ja.lex.law.saibansho
+  - ja.lex.law.saibanin
+  - ja.lex.law.kensatsu
+  - ja.lex.law.shikoku
+  - ja.sent.court-process
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  allowed_grammar:
+  - ja.grammar.particle.object-wo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.court-process-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.law.saiban
+  - ja.lex.law.saibansho
+  - ja.lex.law.saibanin
+  - ja.lex.law.kensatsu
+  - ja.lex.law.shikoku
+  - ja.sent.court-process
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.court-process-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.law.saiban
+  - ja.lex.law.saibansho
+  - ja.lex.law.saibanin
+  - ja.lex.law.kensatsu
+  - ja.lex.law.shikoku
+  - ja.sent.court-process
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.court-process-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.law.saiban
+  - ja.lex.law.saibansho
+  - ja.lex.law.saibanin
+  - ja.lex.law.kensatsu
+  - ja.lex.law.shikoku
+  - ja.sent.court-process
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.court-process-speak
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.law.saiban
+  - ja.lex.law.saibansho
+  - ja.lex.law.saibanin
+  - ja.lex.law.kensatsu
+  - ja.lex.law.shikoku
+  - ja.sent.court-process
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.court-process-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.court-process
+- id: ja.activity.court-process-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
