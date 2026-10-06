@@ -301,6 +301,7 @@ impl Pack {
                     | "story"
                     | "concept"
                     | "lexical-entry"
+                    | "lexicon-entry"
                     | "unit"
                     | "scenario"
             );

@@ -183,6 +183,12 @@ fn bad_id_grammar_fails() {
 fn duplicate_ids_fail() {
     let diags = validate("invalid-duplicate-ids", Mode::Scaffold);
     assert!(codes(&diags).contains(&"duplicate_id"), "{diags:?}");
+    assert!(
+        diags
+            .iter()
+            .any(|d| d.code == "duplicate_id" && d.file.contains("lexicon/entries.jsonl")),
+        "v0.2 lexicon duplicates must be caught: {diags:?}"
+    );
     assert!(error_count(&diags) >= 1);
 }
 
