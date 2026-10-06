@@ -1,0 +1,1050 @@
+{"id": "ja.lex.abst.zenso", "action": "fix_reading", "before": "ぜんそう", "after": "ぜんてい", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.abst.hantai5", "action": "fix_reading", "before": "はんたい", "after": "はんろん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.abst.kosetsu", "action": "unresolved", "before": "こうせつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.abst.fuyu2", "action": "unresolved", "before": "ふゆう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.abst2.kenso", "action": "fix_reading", "before": "けんそう", "after": "けんとう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.abst2.juri", "action": "fix_reading", "before": "じゅり", "after": "じゅんり", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.abst2.gaisetsu", "action": "fix_reading", "before": "がいせつ", "after": "がいかつ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.abst2.shuuyou", "action": "unresolved", "before": "しゅうよう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.abst2.kenji", "action": "unresolved", "before": "けんじ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.abst2.shimei2", "action": "unresolved", "before": "しめい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.abst2.betsubetsu", "action": "fix_reading", "before": "べつべつ", "after": "べんべつ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.abst2.yuukyuu", "action": "unresolved", "before": "ゆうきゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.abst2.taisha", "action": "unresolved", "before": "たいしゃ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.abst2.shikaku", "action": "unresolved", "before": "しかく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.abst3.yoryo", "action": "fix_reading", "before": "ようりょう", "after": "こうりょう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.abst3.kyoten", "action": "unresolved", "before": "きょうてん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.abst3.kyoka", "action": "unresolved", "before": "きょうか", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.abst3.chujutsu", "action": "unresolved", "before": "ちゅうじゅつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.academic.ronsho", "action": "fix_reading", "before": "ろんしょ", "after": "ろんぶん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.academic.bunko", "action": "fix_reading", "before": "ぶんこ", "after": "ぶん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.academic.seika3", "action": "unresolved", "before": "せいか", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.academic.yougaki", "action": "unresolved", "before": "ようがき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.academic.sansa", "action": "unresolved", "before": "さんさ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.academic.shiji", "action": "unresolved", "before": "しじ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.academic.gouki", "action": "unresolved", "before": "ごうき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.academic.bunpatsu", "action": "fix_reading", "before": "ぶんぱつ", "after": "ぜんせつ", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.academic.shukyou", "action": "fix_reading", "before": "しゅうきょう", "after": "しゅちょう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.academic.sakuho", "action": "fix_reading", "before": "さくほう", "after": "しゅほう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.academic2.yohou", "action": "fix_reading", "before": "ようほう", "after": "よほう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.academic2.kentei", "action": "unresolved", "before": "けんてい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.academic2.rondatate", "action": "unresolved", "before": "ろんたて", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.academic2.happyou", "action": "unresolved", "before": "はっぴょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.academic2.juyou", "action": "unresolved", "before": "じゅうよう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.academic2.kairyou", "action": "unresolved", "before": "かいりょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.academic2.teki2", "action": "unresolved", "before": "てき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.academic2.seimei", "action": "fix_reading", "before": "せいめい", "after": "ちょめい", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.academic2.kyotsuu", "action": "unresolved", "before": "きょうつう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.academic2.seikaku", "action": "fix_reading", "before": "せいかく", "after": "せいかくど", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.academic2.taigen", "action": "unresolved", "before": "たいげん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.academic2.kyouyoku", "action": "fix_reading", "before": "きょうよく", "after": "きょうみ", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.academic2.kyozetsu", "action": "unresolved", "before": "きょぜつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.adjectives.kirai", "action": "unresolved", "before": "きらい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.adjectives.heta", "action": "unresolved", "before": "へた", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.kinen-bi", "action": "unresolved", "before": "きねんび", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.katei-nittei", "action": "unresolved", "before": "かていにってい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.yoyaku-jima", "action": "unresolved", "before": "よやくじま", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.torihiki", "action": "unresolved", "before": "とりひき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.kin-yuu", "action": "fix_reading", "before": "きんゆう", "after": "きんこう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.admin.hiharai", "action": "unresolved", "before": "ひはらい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.kessaku", "action": "unresolved", "before": "けっさく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.kaisan", "action": "unresolved", "before": "かいさん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.denpyou", "action": "unresolved", "before": "でんぴょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.nyuusatsu", "action": "unresolved", "before": "にゅうさつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.shutsu-harai", "action": "unresolved", "before": "しゅつはらい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.kyoufu-kin", "action": "unresolved", "before": "きょうふきん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.seikatsu-suru", "action": "unresolved", "before": "せいかつします", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.kanri-suru", "action": "unresolved", "before": "かんりします", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.yoyaku-suru", "action": "unresolved", "before": "よやくします", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.kakunin-suru", "action": "unresolved", "before": "かくにんします", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.mibungou", "action": "unresolved", "before": "みぶんごう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.shinsei-suru", "action": "unresolved", "before": "しんせいします", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.hoken-jo", "action": "unresolved", "before": "ほけんじょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.jushou-todoke", "action": "unresolved", "before": "じゅうしょとどけ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.inkan-shou", "action": "unresolved", "before": "いんかんしょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.taishu-kin", "action": "unresolved", "before": "たいしゅうきん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.maichi", "action": "unresolved", "before": "まいち", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.admin.yaku-wari", "action": "unresolved", "before": "やくわり", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.advice.sagen", "action": "fix_reading", "before": "さげん", "after": "くげん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.advice.ichibun", "action": "fix_reading", "before": "いちぶん", "after": "もちぶん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.advice.fumei", "action": "unresolved", "before": "ふめい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.advice.koutai", "action": "fix_reading", "before": "こうたい", "after": "だいたい", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.advice.hatsu", "action": "unresolved", "before": "はつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.advice.shouko", "action": "fix_reading", "before": "しょうこう", "after": "しょうさ", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.advice.koudan", "action": "unresolved", "before": "こうたん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.advice.ketai", "action": "unresolved", "before": "けたい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.advice2.suusei", "action": "unresolved", "before": "すうせい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.advice2.youchuu", "action": "unresolved", "before": "ようちょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.advice2.kokuhan", "action": "unresolved", "before": "こくはん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.advice2.sengaku", "action": "fix_reading", "before": "せんがく", "after": "せんこう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.advice2.kyoushou", "action": "unresolved", "before": "きょうしょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.advice2.inoko2", "action": "unresolved", "before": "いのこ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.advice2.tetsudo", "action": "unresolved", "before": "てつどう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.art2.kadou", "action": "unresolved", "before": "かどう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.art2.melodi", "action": "fix_reading", "before": "めるでぃ", "after": "めろでぃ", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.art2.minamo", "action": "fix_reading", "before": "みなも", "after": "みやび", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.art2.shitsunai", "action": "unresolved", "before": "しつない", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.art2.fukushoku", "action": "unresolved", "before": "ふくしょく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.art2.maketto", "action": "fix_reading", "before": "まけっと", "after": "まーけっと", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.art2.shiminkou", "action": "unresolved", "before": "しみんこう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.art2.kouchou", "action": "unresolved", "before": "こうちょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.body.shoumyou", "action": "fix_reading", "before": "しょうめい", "after": "しょうたい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.body.shoukouna", "action": "unresolved", "before": "しょうこうな", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.body.joushou", "action": "unresolved", "before": "じょうしょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.body.fukkyuu", "action": "fix_reading", "before": "ふっきゅう", "after": "ふっこう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.body.yochou", "action": "unresolved", "before": "ようちょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.body.taiku", "action": "unresolved", "before": "たいく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.body.junyou", "action": "unresolved", "before": "じゅんよう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.body.seikatsu-sukan", "action": "unresolved", "before": "せいかつすかん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.body.shoujiki", "action": "unresolved", "before": "しょうじき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.body.kounyuu", "action": "unresolved", "before": "こうにゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.body.shinryou-shin", "action": "fix_reading", "before": "しんりょうしん", "after": "しんりょうひ", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.body.touki", "action": "unresolved", "before": "とうき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.body.fukutai", "action": "fix_reading", "before": "ふくたい", "after": "ふくい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.body.kata-kori", "action": "unresolved", "before": "かたこり", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.body.kutsu-bure", "action": "unresolved", "before": "くつぶれ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.body.kaffa", "action": "unresolved", "before": "かふ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.body.shokukan", "action": "fix_reading", "before": "しょうかん", "after": "しょうか", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.body.yogen", "action": "fix_reading", "before": "よげん", "after": "よぼう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.body.fukatsu", "action": "fix_reading", "before": "ふかつ", "after": "ひけつ", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.body.shinryoujo", "action": "unresolved", "before": "しんりょうじょ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.body.seisatsu", "action": "unresolved", "before": "せいさつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.city.yubinkyoku", "action": "fix_reading", "before": "ゆびんきょく", "after": "ゆうびんきょく", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.city.yakuba", "action": "unresolved", "before": "やくば", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.city.kuyakusho", "action": "fix_reading", "before": "くやくしょ", "after": "しやくしょ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.city.mibai", "action": "unresolved", "before": "みばい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.city.tenin", "action": "fix_reading", "before": "てんにん", "after": "てんいん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.city.todokedemasu", "action": "fix_reading", "before": "とどけます", "after": "とどける", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.city.haraimasu", "action": "fix_reading", "before": "はらいます", "after": "はらいだす", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.city.oroshimasu", "action": "fix_reading", "before": "おろします", "after": "おろす", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.city.furikomasu", "action": "unresolved", "before": "ふりこみます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.city.kounyuu-shimasu", "action": "unresolved", "before": "こうにゅうします", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.city.tasukemasu", "action": "fix_reading", "before": "たすけます", "after": "たすけだす", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.city.ukeru", "action": "unresolved", "before": "うけます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.city.mawarimasu", "action": "unresolved", "before": "まわります", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.city.tomemasu", "action": "fix_reading", "before": "とめます", "after": "とめる", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.city.kanen", "action": "unresolved", "before": "かねん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.communication.messeji", "action": "fix_reading", "before": "めっせじ", "after": "めっせーじ", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.communication.app", "action": "unresolved", "before": "あっぷ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.communication.denwa-wo-kakeru", "action": "unresolved", "before": "でんわを かけます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.communication.denwa-wo-ukeru", "action": "unresolved", "before": "でんわを うけます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.communication.setsumei-suru", "action": "unresolved", "before": "せつめいします", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.communication.kiku", "action": "unresolved", "before": "ききます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.communication.renraku-suru", "action": "unresolved", "before": "れんらくします", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.communication.bappu", "action": "unresolved", "before": "ばっぷ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.communication.kuchi-komi", "action": "unresolved", "before": "くちこみ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.communication.yakushi", "action": "unresolved", "before": "やくし", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.communication.taigi", "action": "fix_reading", "before": "たいぎ", "after": "たいわ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.critique.puburisshu", "action": "unresolved", "before": "ぱぶりっしゅ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.critique.shieki", "action": "unresolved", "before": "しえき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.critique.platformu", "action": "fix_reading", "before": "ぷらっとむ", "after": "ぷらっとほーむ", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.critique.tsuugou", "action": "unresolved", "before": "つうごう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.critique.hatsuho", "action": "unresolved", "before": "はっぽう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.critique.binzuke", "action": "unresolved", "before": "びんづけ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.critique.shinrou", "action": "fix_reading", "before": "しんろう", "after": "ひろう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.critique.suiryoku", "action": "unresolved", "before": "すいりょく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.critique.mushiki", "action": "fix_reading", "before": "むしき", "after": "むいしき", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.critique.shinji", "action": "unresolved", "before": "しんじ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.critique.koui", "action": "unresolved", "before": "こうい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.critique.doushutsu", "action": "unresolved", "before": "どうしゅつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.critique.shukan", "action": "fix_reading", "before": "しゅかん", "after": "しゅうかん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.critique.senryou", "action": "unresolved", "before": "せんりょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.critique.hakuriki", "action": "unresolved", "before": "はくりき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.cult.denkou", "action": "fix_reading", "before": "でんこう", "after": "でんしょう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.cult.kaizoku", "action": "unresolved", "before": "かいぞく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.cult.juni", "action": "unresolved", "before": "じゅうに", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.cult.rikken", "action": "unresolved", "before": "りっけん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.cult.shiminkai", "action": "unresolved", "before": "しみんかい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.cult.kaiso", "action": "unresolved", "before": "かいそ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.cult.kouchi", "action": "unresolved", "before": "こうち", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.cult.senzoku", "action": "fix_reading", "before": "せんぞく", "after": "そんぞく", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.cult.kanko", "action": "fix_reading", "before": "かんこ", "after": "かんにん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.cult.tairi", "action": "unresolved", "before": "たいり", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.cult.fuyu", "action": "unresolved", "before": "ふゆう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.cult.shinchou", "action": "fix_reading", "before": "しんちょう", "after": "せいちょう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.cult2.hasshu", "action": "unresolved", "before": "はっしゅ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.cult2.danho", "action": "unresolved", "before": "だんほう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.cult2.tekisho", "action": "unresolved", "before": "てきしょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.cult2.konketsu", "action": "unresolved", "before": "こんけつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.cult2.furon", "action": "fix_reading", "before": "ふろん", "after": "しせん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.cult2.hyosho", "action": "unresolved", "before": "ひょうしょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.cult2.rikken2", "action": "unresolved", "before": "りっけん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.cult2.kizon2", "action": "fix_reading", "before": "きぞん", "after": "じそん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.cult2.himei", "action": "fix_reading", "before": "ひめい", "after": "ひみつ", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.cult2.shingakusha", "action": "unresolved", "before": "しんがくしゃ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.culture.girei", "action": "unresolved", "before": "ぎれい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.culture.nenchuu", "action": "unresolved", "before": "ねんちゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.culture.koge", "action": "unresolved", "before": "こうげ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.culture.teaji", "action": "unresolved", "before": "てあい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.culture.saiho", "action": "unresolved", "before": "さいほう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.culture.fuhaku", "action": "fix_reading", "before": "ふはく", "after": "はく", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.culture.tenji-butsu", "action": "fix_reading", "before": "てんじぶつ", "after": "てんじひん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.culture.shaji", "action": "unresolved", "before": "しゃじ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.culture.denkyou", "action": "unresolved", "before": "でんきょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.culture.tsuuke", "action": "unresolved", "before": "つうかく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.culture.shasei", "action": "unresolved", "before": "しゃせい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.culture.shinko-zai", "action": "unresolved", "before": "しんこうざい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.culture2.douhankai", "action": "unresolved", "before": "どうかんかい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.culture2.kansen", "action": "unresolved", "before": "かんせん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.culture2.tsutsumi", "action": "fix_reading", "before": "つつみ", "after": "つつみがみ", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.culture2.shitsurei", "action": "unresolved", "before": "しつれい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.culture2.shugo", "action": "unresolved", "before": "しゅごう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.culture2.engi", "action": "unresolved", "before": "えんぎ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.culture2.sosai", "action": "fix_reading", "before": "そうさい", "after": "そうれい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.culture2.hanamuko", "action": "fix_reading", "before": "はなむこ", "after": "むこ", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.culture2.bunkaron", "action": "unresolved", "before": "ぶんかろん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.culture2.hassou", "action": "unresolved", "before": "はっそう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.culture2.kousatsu", "action": "unresolved", "before": "こうさつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate.koryo", "action": "unresolved", "before": "こうりょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate.kansa", "action": "unresolved", "before": "かんさ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate.kento", "action": "unresolved", "before": "けんと", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate.jundo", "action": "unresolved", "before": "じゅんどう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate.jissai", "action": "unresolved", "before": "じつさい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate.shojitsu", "action": "unresolved", "before": "しょうじつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate.ronsou", "action": "fix_reading", "before": "そうさう", "after": "そうだん", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.debate.hifun", "action": "unresolved", "before": "ひふん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate.fusan", "action": "fix_reading", "before": "ふさん", "after": "ひにん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.debate.jiyu", "action": "unresolved", "before": "じゆう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate.kiso", "action": "unresolved", "before": "きそ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate.joretsu", "action": "unresolved", "before": "じょれつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate.kyotsu", "action": "unresolved", "before": "きょうつう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate.meiwaku", "action": "unresolved", "before": "めいわく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate.shutten", "action": "fix_reading", "before": "しゅってん", "after": "しょうてん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.debate.tokui", "action": "unresolved", "before": "とくい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate.kika", "action": "unresolved", "before": "きか", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate2.hyoten", "action": "unresolved", "before": "ひょうかひょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate2.ryakusuji", "action": "unresolved", "before": "りゃくすじ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate2.kaisou2", "action": "unresolved", "before": "かいそう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate2.jaramu", "action": "fix_reading", "before": "じょうめん", "after": "じょうけい", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.debate2.shutten2", "action": "fix_reading", "before": "しゅってん", "after": "しょうてん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.debate2.akari2", "action": "fix_reading", "before": "あかり", "after": "じあかり", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.debate2.rondan", "action": "unresolved", "before": "ろんたん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate2.danraku", "action": "unresolved", "before": "だんらく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.debate2.gou", "action": "fix_reading", "before": "ごう", "after": "かごう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.economy.shohi", "action": "unresolved", "before": "しょうもう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.economy.mugyou", "action": "unresolved", "before": "むよう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.economy.kabushiki", "action": "fix_reading", "before": "かぶしき", "after": "じこかぶしき", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.economy.uchinage", "action": "unresolved", "before": "うちなげ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.economy.shibora", "action": "unresolved", "before": "しぼら", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.economy.tekiseki", "action": "fix_reading", "before": "てきせき", "after": "てきせい", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.economy.tsutome", "action": "unresolved", "before": "つとめ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.economy.kyougyou", "action": "unresolved", "before": "きょうぎょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.economy.saiyou", "action": "fix_reading", "before": "さいよう", "after": "ひよう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.economy.senyou", "action": "fix_reading", "before": "せんよう", "after": "せんしゅう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.economy.jiken", "action": "unresolved", "before": "じけん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.economy.hensoku", "action": "fix_reading", "before": "げんそく", "after": "しっそく", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.economy2.akachin", "action": "fix_reading", "before": "あかちん", "after": "あかじ", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.economy2.boeki", "action": "fix_reading", "before": "ぼえき", "after": "ぼうえき", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.economy2.fuukyou", "action": "fix_reading", "before": "ふっきょう", "after": "ふきょう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.economy2.kaso", "action": "fix_reading", "before": "かさ", "after": "かくさ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.economy3.seiri", "action": "unresolved", "before": "せいり", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu.kenkai", "action": "unresolved", "before": "けんかい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu.iwakai", "action": "fix_reading", "before": "いわかい", "after": "えんかい", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.edu.fuman-ire", "action": "unresolved", "before": "ふまんいれ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu.fukyu", "action": "unresolved", "before": "ふくゆう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu.shuumei", "action": "fix_reading", "before": "しゅうめい", "after": "しゅうかい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.edu.shokuba-ryou", "action": "unresolved", "before": "しょくばりょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu.kaihen", "action": "unresolved", "before": "かいへん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu.moushiage", "action": "unresolved", "before": "もうしあげ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu.kachou", "action": "unresolved", "before": "かちょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu.kyouiku-ken", "action": "unresolved", "before": "きょういくけん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu.jugyou-ryaku", "action": "unresolved", "before": "じゅぎょうりゃく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu.shishou", "action": "unresolved", "before": "ししょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.sentai", "action": "unresolved", "before": "せんたい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.danshaku", "action": "fix_reading", "before": "だんしゃく", "after": "だんらく", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.edu2.ronshu", "action": "fix_reading", "before": "ろんしゅう", "after": "ろんぽう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.edu2.kenji", "action": "unresolved", "before": "けんじ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.kronji", "action": "unresolved", "before": "くろんじ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.ryugaku-seikatsu", "action": "unresolved", "before": "りゅうがくせいかつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.shukufuku", "action": "fix_reading", "before": "しゅくふく", "after": "しゅくはく", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.edu2.ryuji", "action": "unresolved", "before": "りゅうじ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.shinsei-hyou", "action": "unresolved", "before": "しんせいひょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.rissho", "action": "unresolved", "before": "りっしょ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.shoukaku-shinsei", "action": "unresolved", "before": "しょうがくしんせい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.denja", "action": "unresolved", "before": "でんじゃ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.mouhibiki", "action": "unresolved", "before": "もうひき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.sanko-bunken", "action": "unresolved", "before": "さんこうぶんけん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.kashu", "action": "fix_reading", "before": "かしゅ", "after": "かし", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.edu2.kashu-sho", "action": "unresolved", "before": "かしゅしょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.jikan-wari", "action": "unresolved", "before": "じかんわり", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.kenta", "action": "unresolved", "before": "けんた", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.houtei", "action": "unresolved", "before": "ほうてい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.senkyuu", "action": "unresolved", "before": "せんきゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.gengou", "action": "unresolved", "before": "げんごう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.yakku", "action": "unresolved", "before": "やっく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.yakuseki", "action": "unresolved", "before": "やくせき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.chukai", "action": "unresolved", "before": "ちゅうかい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.fuyuujunou", "action": "unresolved", "before": "ふゆうじゅんのう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu2.chushi", "action": "unresolved", "before": "ちゅうし", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu3.shikaku", "action": "unresolved", "before": "しかく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu3.happyou", "action": "unresolved", "before": "はっぴょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu3.togihou", "action": "unresolved", "before": "とうぎほう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu3.riki", "action": "fix_reading", "before": "りき", "after": "りかい", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.edu3.saidou", "action": "unresolved", "before": "せいた", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu3.koubun", "action": "unresolved", "before": "こうぶん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu3.choukai", "action": "unresolved", "before": "ちょうかい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu4.gijutsu-kyouiku", "action": "unresolved", "before": "きょういくぎじゅつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu4.shokubun", "action": "unresolved", "before": "しょくぶん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu4.shumoku", "action": "unresolved", "before": "しょくむ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu4.senkousei", "action": "unresolved", "before": "せんこう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu4.tokucho", "action": "fix_reading", "before": "とくちょう", "after": "せいちょう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.edu4.hoiku", "action": "unresolved", "before": "いく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu4.kunren", "action": "fix_reading", "before": "くんにん", "after": "くんれん", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.edu4.jitsugyo", "action": "unresolved", "before": "じつぎょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu4.byoudou", "action": "unresolved", "before": "びょうどう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu4.kyousei2", "action": "unresolved", "before": "ふうとう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu4.bunkachi", "action": "unresolved", "before": "ぶんかち", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu4.kuni", "action": "unresolved", "before": "くに", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu4.hiyou", "action": "unresolved", "before": "ひよう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu4.zentai", "action": "unresolved", "before": "ぜんたい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.edu4.kyouiku-houritsu", "action": "unresolved", "before": "きょういくほうりつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.majime", "action": "fix_reading", "before": "まじめ", "after": "まめ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.emotion.ousetsu", "action": "fix_reading", "before": "おうせつ", "after": "そうせい", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.emotion.kenmei", "action": "unresolved", "before": "けんめい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.ki-kokochi", "action": "unresolved", "before": "きごこち", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.wakuwaku", "action": "unresolved", "before": "わくわく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.iraira", "action": "fix_reading", "before": "いらいら", "after": "いらだち", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.emotion.dokidoki", "action": "unresolved", "before": "どきどき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.ki-gamae", "action": "unresolved", "before": "きまえ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.ki-oku", "action": "unresolved", "before": "きおく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.ki-magu", "action": "unresolved", "before": "きまぐれ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.yasashisa", "action": "unresolved", "before": "やさしさ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.kizukai", "action": "unresolved", "before": "きづかい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.akire", "action": "unresolved", "before": "あきれ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.genkotsu", "action": "unresolved", "before": "げんこつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.shougi", "action": "unresolved", "before": "しょうぎ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.mottai", "action": "unresolved", "before": "もったい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.yamashii", "action": "unresolved", "before": "やましい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.joutou", "action": "unresolved", "before": "じょうとう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.yui", "action": "unresolved", "before": "ゆい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.shouki", "action": "unresolved", "before": "しょうき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.shoujin", "action": "unresolved", "before": "しょうじん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.akui", "action": "fix_reading", "before": "あくい", "after": "たい", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.emotion.tenko", "action": "unresolved", "before": "てんこう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion.sara-ni", "action": "fix_reading", "before": "さらに", "after": "さらなる", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.emotion.sukunaku", "action": "fix_reading", "before": "すくなく", "after": "すくなくも", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.emotion2.kibune", "action": "unresolved", "before": "きぶね", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion2.waku", "action": "unresolved", "before": "わく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion2.seika", "action": "fix_reading", "before": "せいか", "after": "せいひ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.emotion2.setsunai", "action": "unresolved", "before": "せつない", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.emotion2.kirakira", "action": "unresolved", "before": "きらきら", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.ent.eiga-kan", "action": "fix_reading", "before": "えいかん", "after": "えいがかん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.ent.onsen-nyuujou", "action": "unresolved", "before": "おんせんにゅうじょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.ent.kangeki", "action": "unresolved", "before": "かんげき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.ent.supa", "action": "unresolved", "before": "すぱー", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.ent.hyouban", "action": "fix_reading", "before": "ひょうばん", "after": "ひょうてん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.ent.senkyou", "action": "fix_reading", "before": "せんきょう", "after": "ねっきょう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.ent.kanzen", "action": "unresolved", "before": "かんぜん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.ent.taimu", "action": "fix_reading", "before": "たいむ", "after": "たい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.ent.purii", "action": "unresolved", "before": "ぷりー", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.ent.joju", "action": "unresolved", "before": "じゅじゅ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.ent.getsumon", "action": "unresolved", "before": "げつもん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.expr.introduction.hajimemashite", "action": "unresolved", "before": "はじめまして", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env.kikaku", "action": "unresolved", "before": "きかく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env.puratsu", "action": "unresolved", "before": "ぷらつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env.gomi-bunkatsu", "action": "unresolved", "before": "ごみぶんかつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env.kiko-ene", "action": "fix_reading", "before": "きこえね", "after": "さいえね", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.env.ikubutsu", "action": "fix_reading", "before": "いくぶつ", "after": "せいぶつ", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.env.seita", "action": "unresolved", "before": "せいた", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env.tan-so-ka", "action": "fix_reading", "before": "たんそか", "after": "たんか", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.env.eco-kuruma", "action": "unresolved", "before": "えこくるま", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env.kiko", "action": "fix_reading", "before": "きこ", "after": "き", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.env.ene-ki", "action": "unresolved", "before": "えねき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env.koushou", "action": "unresolved", "before": "こうしょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env.seizou", "action": "unresolved", "before": "せいぞう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env.seisi", "action": "unresolved", "before": "せいし", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env2.bousai-houzu", "action": "unresolved", "before": "ぼうさいほうじ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env2.mizu-bubun", "action": "fix_reading", "before": "みずぶぶん", "after": "みずしげん", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.env2.resucha", "action": "unresolved", "before": "れすちゃ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env2.shizen-hozen", "action": "unresolved", "before": "しぜんほぜん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env2.shinan", "action": "fix_reading", "before": "しなん", "after": "しぼる", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.env2.yokei", "action": "fix_reading", "before": "よけい", "after": "よれい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.env2.bousui", "action": "unresolved", "before": "ぼうすい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env2.nouhin", "action": "unresolved", "before": "のうひん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env2.setsuyaku", "action": "fix_reading", "before": "せつやく", "after": "けんやく", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.env2.muda-zukai", "action": "unresolved", "before": "むだづかい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env3.cooling", "action": "fix_reading", "before": "くりーにんぐ", "after": "くーりんぐ", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.env3.shifuku", "action": "unresolved", "before": "しふく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env3.taniso2", "action": "unresolved", "before": "たんにょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env3.baishutsu", "action": "fix_reading", "before": "ばいしゅつ", "after": "はいしゅつ", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.env3.shakubutsu", "action": "fix_reading", "before": "しゃくぶつ", "after": "かくぶつ", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.env3.risshou", "action": "unresolved", "before": "りっしょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env3.teiki", "action": "fix_reading", "before": "てき", "after": "てきぎ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.env3.seikyou", "action": "unresolved", "before": "せいきょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env3.kisan", "action": "fix_reading", "before": "きさん", "after": "きばん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.env3.chiseki", "action": "fix_reading", "before": "ちせき", "after": "じせき", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.env4.shakai-kinou", "action": "unresolved", "before": "しゃかいきのう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env4.fuyou", "action": "fix_reading", "before": "ふよう", "after": "よう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.env4.kansa2", "action": "fix_reading", "before": "かんさ", "after": "かんし", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.env4.seikatsu-fushuu", "action": "unresolved", "before": "せいかつふしゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env4.kenso", "action": "fix_reading", "before": "けんそ", "after": "けんそん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.env4.ikou", "action": "unresolved", "before": "いこう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env4.yoka", "action": "unresolved", "before": "ようか", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env4.hosei", "action": "fix_reading", "before": "ほうせい", "after": "きせい", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.env4.yueki", "action": "unresolved", "before": "ゆうえき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.env4.kyougi", "action": "fix_reading", "before": "きょうぎ", "after": "しょう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.env4.kison", "action": "fix_reading", "before": "きそん", "after": "じそん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.env4.fuhou", "action": "fix_reading", "before": "ふほう", "after": "ふせい", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.env4.kaken", "action": "fix_reading", "before": "かけん", "after": "きけん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.film.joryu", "action": "unresolved", "before": "じょりゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.film.onsetsu", "action": "unresolved", "before": "おんせつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.film.setkei", "action": "unresolved", "before": "せつけい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.film.hyouban", "action": "unresolved", "before": "ひょうばん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.film.kanyuu", "action": "unresolved", "before": "かんにゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.film.kanyuu2", "action": "unresolved", "before": "かんにゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.film.seika", "action": "fix_reading", "before": "せいか", "after": "せいひ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.film.zum", "action": "fix_reading", "before": "ずむ", "after": "ずーむ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.film.satsueijou", "action": "unresolved", "before": "さつえいじょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.film.chokusatsu", "action": "unresolved", "before": "ちょくさつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.film.fukuzai", "action": "unresolved", "before": "ふくざい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.film.hakyuu", "action": "unresolved", "before": "はっきゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.film.katsuyaku", "action": "unresolved", "before": "かつやく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.film.kouchou", "action": "fix_reading", "before": "こうちょう", "after": "ぼうちょう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.film2.ketsui", "action": "unresolved", "before": "けつい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.film2.taifu", "action": "unresolved", "before": "たいふ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.film2.kagayaki", "action": "unresolved", "before": "かぎやき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.food.furukon", "action": "fix_reading", "before": "ふろーく", "after": "ふぉーく", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.food.houshi", "action": "unresolved", "before": "ほうし", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.food.tsukemono", "action": "fix_reading", "before": "つけもの", "after": "つけものいし", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.formal.kaihen", "action": "unresolved", "before": "かいへん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal.shikaku", "action": "unresolved", "before": "しかく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal.kokuho", "action": "unresolved", "before": "こうほ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal.teikou", "action": "fix_reading", "before": "ていこう", "after": "とうこう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.formal.koushou", "action": "unresolved", "before": "こうしょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal.torihiki", "action": "unresolved", "before": "とりひき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal.houshou", "action": "fix_reading", "before": "ほうしょう", "after": "ほしょう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.formal.guchou", "action": "unresolved", "before": "ぐちょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal.hatsuu", "action": "unresolved", "before": "はつゆう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal.gankou", "action": "unresolved", "before": "がんこう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal2.hotei", "action": "unresolved", "before": "ほうてい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal2.houmonsho", "action": "unresolved", "before": "ほうもんしょ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal2.shoukaijo", "action": "fix_reading", "before": "しょうかいじょ", "after": "しょうかいじょう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.formal2.ansho", "action": "fix_reading", "before": "あんしょ", "after": "へんしょ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.formal2.mimaijo", "action": "fix_reading", "before": "みまいじょ", "after": "みまいじょう", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.formal2.iansho", "action": "unresolved", "before": "いあんしょ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal2.gankajou", "action": "unresolved", "before": "がんかじょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal2.chuuomimai", "action": "unresolved", "before": "ちゅうおみまい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal2.keijou", "action": "unresolved", "before": "けいじょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal2.shougi", "action": "unresolved", "before": "しょうぎ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal2.gasaku", "action": "fix_reading", "before": "がさく", "after": "がさん", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.formal2.toukyou", "action": "unresolved", "before": "とうきょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal2.ryousen", "action": "unresolved", "before": "りょうせん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal2.hyoushiki", "action": "unresolved", "before": "ひょうしき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal2.bunkaten", "action": "fix_reading", "before": "ぶんかてん", "after": "ぶんかさい", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.formal2.denpou", "action": "fix_reading", "before": "でんぽう", "after": "でんせん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.formal2.kairan", "action": "fix_reading", "before": "かいらん", "after": "ないらん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.formal2.shizei", "action": "unresolved", "before": "しぜい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal2.motsuchi", "action": "unresolved", "before": "もつち", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.formal2.hennyu", "action": "unresolved", "before": "へんにゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.global.kuiki", "action": "unresolved", "before": "くいき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.global.kokuren", "action": "unresolved", "before": "こくれん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.global.kyouryoku", "action": "unresolved", "before": "きょうりょく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.global.choukai2", "action": "unresolved", "before": "こうしょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.global.kyousei3", "action": "unresolved", "before": "しゃくぜん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.global.kizon", "action": "fix_reading", "before": "きぞん", "after": "せいぞん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.global.denshin", "action": "unresolved", "before": "でんしん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.global.hatten3", "action": "fix_reading", "before": "はってん", "after": "はってんてき", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.global.fukkyuu2", "action": "fix_reading", "before": "ふっきゅう", "after": "ふっこう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.global.josei", "action": "unresolved", "before": "じょうせい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.global.aisou", "action": "fix_reading", "before": "そう", "after": "そご", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.global.kaitai", "action": "unresolved", "before": "かいたい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.global.ryuukou", "action": "unresolved", "before": "りゅうこう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.global.yusei", "action": "fix_reading", "before": "ゆうせい", "after": "ゆうせん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.global.kankaku", "action": "unresolved", "before": "かんかく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.global2.shigen2", "action": "unresolved", "before": "しげん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.global2.unyu", "action": "fix_reading", "before": "うんゆ", "after": "うんそう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.global2.kutsu2", "action": "unresolved", "before": "くう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.global2.kankakusha", "action": "unresolved", "before": "かんきゃくしゃ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.global2.shigai2", "action": "unresolved", "before": "しがい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.global2.kokusai3", "action": "unresolved", "before": "こくさい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.global2.hoitsu", "action": "fix_reading", "before": "ほういつ", "after": "ほうりつ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.global2.koso", "action": "fix_reading", "before": "こそう", "after": "こうぞう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.greetings.itadakimasu", "action": "unresolved", "before": "いただきます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.greetings.gochisousama", "action": "unresolved", "before": "ごちそうさま", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health.yasumasu", "action": "unresolved", "before": "やすみます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health.araimasu", "action": "unresolved", "before": "あらいます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health.naoshimasu", "action": "fix_reading", "before": "なおります", "after": "なおす", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.health.okuremasu", "action": "unresolved", "before": "おくれます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health.ugokimasu", "action": "unresolved", "before": "うごきます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health.tsukaremasu", "action": "fix_reading", "before": "つかれます", "after": "つかれる", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.health.kuukimasu", "action": "fix_reading", "before": "すいます", "after": "すいこむ", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.health.komaru", "action": "unresolved", "before": "こまります", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health.hashirimasu", "action": "fix_reading", "before": "はしります", "after": "はしりだす", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.health2.seikatsu2", "action": "fix_reading", "before": "せいかつ", "after": "せいかつし", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.health2.taikyuu", "action": "fix_reading", "before": "たいきゅう", "after": "ふきゅう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.health2.nebuki", "action": "unresolved", "before": "ねぶき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health2.koku2", "action": "unresolved", "before": "こく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health2.unsou", "action": "fix_reading", "before": "うんそう", "after": "うんどう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.health2.junou", "action": "unresolved", "before": "じゅのう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health2.kinyu", "action": "fix_reading", "before": "きんゆ", "after": "しんゆ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.health2.kessha", "action": "unresolved", "before": "けっしゃ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health2.fuka", "action": "unresolved", "before": "ふか", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health2.fuan2", "action": "unresolved", "before": "ふあん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health2.shoujou", "action": "unresolved", "before": "しょうじょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health2.shinryou2", "action": "unresolved", "before": "しんりょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health2.kessan3", "action": "fix_reading", "before": "けっさん", "after": "けっさんき", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.health2.gakkai", "action": "fix_reading", "before": "がっかい", "after": "がかい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.health2.yakubou", "action": "unresolved", "before": "やくぼう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health2.chouryou", "action": "unresolved", "before": "ちょうりょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health2.seka", "action": "unresolved", "before": "せか", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health2.ryouki", "action": "fix_reading", "before": "りょうき", "after": "びょうご", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.health2.tsuuka2", "action": "unresolved", "before": "つうか", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health3.rourei", "action": "unresolved", "before": "ろうれい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health3.taizen2", "action": "fix_reading", "before": "たいぜん", "after": "たんぜん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.health3.kyoubu", "action": "fix_reading", "before": "きょうぶ", "after": "きゅうぶ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.health3.junren", "action": "unresolved", "before": "じゅんれん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health3.taikyu2", "action": "unresolved", "before": "たいきゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health3.choushin", "action": "unresolved", "before": "ちょうしん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health3.uebi", "action": "unresolved", "before": "うえび", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health3.ureba", "action": "unresolved", "before": "うれば", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health3.kenkou3", "action": "unresolved", "before": "けんこう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.health3.hankou", "action": "unresolved", "before": "はんこう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history.hakukutsu", "action": "fix_reading", "before": "はくくつ", "after": "はっくつ", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.history.kakumei", "action": "fix_reading", "before": "かかくめい", "after": "かくめい", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.history2.shouzou", "action": "unresolved", "before": "ぞうしょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history2.hoko", "action": "unresolved", "before": "ほこう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history2.hyougeki", "action": "unresolved", "before": "ひょうげき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history2.sagitou", "action": "unresolved", "before": "ぎとう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history2.kousatsu", "action": "unresolved", "before": "こうさつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history2.teikyou", "action": "unresolved", "before": "ていきょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history2.hensen", "action": "unresolved", "before": "へんせん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history2.saikoutei", "action": "unresolved", "before": "さいこうてい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history2.denko", "action": "unresolved", "before": "でんこう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history2.senjo", "action": "unresolved", "before": "せんじょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history2.kinkyo", "action": "unresolved", "before": "きんきょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history2.seimen", "action": "fix_reading", "before": "せいめん", "after": "ぜんめん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.history2.fuhai", "action": "unresolved", "before": "ふはい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history2.ihan", "action": "unresolved", "before": "いはん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history2.soshi", "action": "unresolved", "before": "そし", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history2.mousho", "action": "unresolved", "before": "もうしょ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history2.kuchikami", "action": "fix_reading", "before": "くちかみ", "after": "くちづて", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.history3.taiou", "action": "unresolved", "before": "たいおう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history3.rondai", "action": "unresolved", "before": "ろんだい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history3.denshou2", "action": "unresolved", "before": "でんしょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history3.shimei", "action": "unresolved", "before": "しみめい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.history3.kaisai", "action": "fix_reading", "before": "かいさい", "after": "かいじ", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.home.apato", "action": "fix_reading", "before": "あぱと", "after": "あぱーと", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.home.katazukemasu", "action": "fix_reading", "before": "かたづけます", "after": "かたづける", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.home.fukimasu", "action": "fix_reading", "before": "ふきます", "after": "ふきけす", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.home.hirakemasu", "action": "unresolved", "before": "ひらけます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.home.tojimasu", "action": "unresolved", "before": "とじます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.home.kirimasu", "action": "unresolved", "before": "きります", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.home.mochimasu", "action": "unresolved", "before": "もちます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.home.kaemasu", "action": "fix_reading", "before": "かえます", "after": "かえる", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.home.shimaimasu", "action": "unresolved", "before": "しまいます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.home.dasimasu", "action": "fix_reading", "before": "だします", "after": "だす", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.home.kowaresu", "action": "unresolved", "before": "こわれます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.humor2.kyofu", "action": "unresolved", "before": "きょうふ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.humor2.baki", "action": "unresolved", "before": "ばか", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.law.hourei", "action": "unresolved", "before": "ほうれい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.law.houkou", "action": "fix_reading", "before": "ほうこう", "after": "ほうれい", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.law.shikoku", "action": "unresolved", "before": "しこく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.law.sonin", "action": "unresolved", "before": "そんにん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.law.chukan", "action": "unresolved", "before": "ちゅうかん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.law.hanza", "action": "unresolved", "before": "はんざ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.law.hoiho", "action": "fix_reading", "before": "ほいほ", "after": "たいほ", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.law.sosa", "action": "fix_reading", "before": "そさ", "after": "そうさ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.law.enzan", "action": "unresolved", "before": "えんざん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.law.siso", "action": "fix_reading", "before": "そそ", "after": "らんそ", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.law.soshou", "action": "fix_reading", "before": "そしょう", "after": "そじょう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.law.kokuso", "action": "fix_reading", "before": "こくそ", "after": "こうそ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.law.jyouso", "action": "fix_reading", "before": "じょうそう", "after": "じょうそ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.law.kufu", "action": "unresolved", "before": "くふ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.law2.chouyaku", "action": "fix_reading", "before": "ちょうやく", "after": "じょうやく", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.law2.fukumu", "action": "unresolved", "before": "ふくむ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.law2.yakujo", "action": "unresolved", "before": "やくじょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.law2.hifu", "action": "unresolved", "before": "ひふ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.law2.shuukyu", "action": "unresolved", "before": "しゅうきゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.law2.kansoku", "action": "fix_reading", "before": "かんそく", "after": "かんとく", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.law2.touzoku", "action": "unresolved", "before": "とうぞく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.law2.joron", "action": "unresolved", "before": "じょろん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.law2.kyoka", "action": "fix_reading", "before": "きょうか", "after": "きょか", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.law2.hinka", "action": "unresolved", "before": "ひんか", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.law2.touhi", "action": "fix_reading", "before": "とうひ", "after": "やとう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.law2.kufuku", "action": "fix_reading", "before": "くふく", "after": "こくふく", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.law2.zaimuko", "action": "fix_reading", "before": "ざいむこ", "after": "ざいこ", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.law2.unyu", "action": "unresolved", "before": "うんゆ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.law2.houitsu", "action": "fix_reading", "before": "ほういつ", "after": "とういつ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.law2.yojo", "action": "fix_reading", "before": "ようぞう", "after": "ふくぞう", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.law2.kizon", "action": "fix_reading", "before": "きぞん", "after": "ふぞん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.law2.genshitsu", "action": "unresolved", "before": "げんしつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.law2.denrou", "action": "fix_reading", "before": "でんろう", "after": "でんとう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.law2.haka", "action": "fix_reading", "before": "はか", "after": "はず", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.law2.giwa", "action": "unresolved", "before": "ぎわ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.leisure.saakaa", "action": "fix_reading", "before": "さーかー", "after": "さっかー", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.leisure.basuketta", "action": "fix_reading", "before": "ばすけった", "after": "ばすけっと", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.leisure.utai", "action": "fix_reading", "before": "うたい", "after": "うた", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.leisure.pikunikku", "action": "fix_reading", "before": "ぴくにくく", "after": "ぴくにっく", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.leisure.ryoushuu", "action": "unresolved", "before": "りょうしゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.leisure.tabehou", "action": "unresolved", "before": "たべほう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.leisure.asobimasu", "action": "unresolved", "before": "あそびます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.leisure.miimasu", "action": "fix_reading", "before": "みます", "after": "みす", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.leisure.kikiimasu", "action": "unresolved", "before": "ききます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.leisure.oboemasu", "action": "fix_reading", "before": "おぼえます", "after": "おぼえる", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.leisure.oyogimasu", "action": "unresolved", "before": "およぎます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.leisure.utaimasu", "action": "unresolved", "before": "うたいます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.leisure.odorimasu", "action": "fix_reading", "before": "おどります", "after": "おどりだす", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.leisure.tsukurimasu", "action": "unresolved", "before": "つくります", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.leisure.dekakemasu", "action": "unresolved", "before": "でかけます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.leisure.hanashimasu", "action": "fix_reading", "before": "はなします", "after": "はなす", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.leisure.tanoshimu", "action": "unresolved", "before": "たのしみます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.leisure.tsuzukeru", "action": "fix_reading", "before": "つづけます", "after": "つづける", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.ling.shiteki", "action": "unresolved", "before": "してき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.ling.inron", "action": "unresolved", "before": "いんろん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.ling.hoki", "action": "unresolved", "before": "ほうき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.ling2.boshi", "action": "fix_reading", "before": "ぼし", "after": "し", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.ling2.genin", "action": "unresolved", "before": "げんにん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.ling2.kansetsu", "action": "fix_reading", "before": "かんせつ", "after": "せつ", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.ling2.taishou", "action": "unresolved", "before": "たいしょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.ling2.iimawashi", "action": "unresolved", "before": "いいまわし", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.ling2.henyou", "action": "unresolved", "before": "へんよう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.ling2.gikou", "action": "unresolved", "before": "ぎこう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.ling2.fuyuukyo", "action": "unresolved", "before": "ふゆうきょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.ling2.nikokugo", "action": "fix_reading", "before": "にこくご", "after": "にかこくご", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.ling2.yakusha", "action": "fix_reading", "before": "やくしゃ", "after": "つうやくしゃ", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.ling2.taiou", "action": "unresolved", "before": "たいおう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.ling3.korpusu", "action": "fix_reading", "before": "こーぷす", "after": "こーぱす", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.ling3.tally", "action": "unresolved", "before": "たっりー", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.ling3.taigen2", "action": "fix_reading", "before": "たいげん", "after": "たいがい", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.lit.bungaku-ka", "action": "unresolved", "before": "ぶんがくか", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.lit.gendai", "action": "fix_reading", "before": "げんだい", "after": "げんだいご", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.lit.haikai", "action": "unresolved", "before": "かいかい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.lit.senryuu", "action": "unresolved", "before": "せんりゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.lit.setwa", "action": "fix_reading", "before": "せつわ", "after": "いつわ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.lit.engoki", "action": "unresolved", "before": "えんぎき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.lit.bungaku-hyou", "action": "unresolved", "before": "ぶんがくひょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.lit2.shiteisha", "action": "unresolved", "before": "していしゃ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.lit2.shitei", "action": "fix_reading", "before": "してい", "after": "してん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.lit2.shanru", "action": "fix_reading", "before": "しゃんる", "after": "じゃんる", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.lit2.shuppan", "action": "unresolved", "before": "しゅっぱん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.lit2.chiyaku", "action": "fix_reading", "before": "ちやく", "after": "わきやく", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.lit2.bunpatsu", "action": "fix_reading", "before": "ぶんぱつ", "after": "ぶんせつ", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.lit2.goju", "action": "unresolved", "before": "ごじゅ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.lit2.hen", "action": "fix_reading", "before": "へん", "after": "ほん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.lit3.yakimoku", "action": "unresolved", "before": "やくもく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.lit3.kyoumu", "action": "unresolved", "before": "きょうむ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.lit3.shinmi", "action": "fix_reading", "before": "しんみ", "after": "しんど", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.lit3.ronsetsu", "action": "unresolved", "before": "ろんせつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.lit3.henkan", "action": "fix_reading", "before": "へんかん", "after": "へんさん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.lit3.serifu", "action": "unresolved", "before": "せりふ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.med.koushou", "action": "unresolved", "before": "こうしょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.med.hoken", "action": "fix_reading", "before": "ほうけん", "after": "ほけん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.med.hassen", "action": "fix_reading", "before": "はっせん", "after": "はっせい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.med.denkan", "action": "unresolved", "before": "でんかん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.med.houkenryou", "action": "fix_reading", "before": "ほうけんりょう", "after": "ほけんりょう", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.med.shokujou", "action": "unresolved", "before": "しょくじょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.med.kouchou", "action": "unresolved", "before": "こうちょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.med2.fubyou", "action": "unresolved", "before": "ふびょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.med2.teigen", "action": "unresolved", "before": "ていげん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.med2.shian", "action": "fix_reading", "before": "しあん", "after": "ししん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.media.hassha", "action": "unresolved", "before": "はっしゃ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.media.toron", "action": "unresolved", "before": "とろん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.media.hadan", "action": "fix_reading", "before": "はだん", "after": "しべん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.media.gijou", "action": "unresolved", "before": "ぎじょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.media.kaga", "action": "unresolved", "before": "かか", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.media.fukkyuu-saigai", "action": "unresolved", "before": "ふっきゅうさいがい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.media.choui", "action": "fix_reading", "before": "ちょうい", "after": "ちゅうい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.media.ninoki", "action": "fix_reading", "before": "にのき", "after": "にんき", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.media.maruke", "action": "unresolved", "before": "まーけ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.media.media-habits", "action": "unresolved", "before": "めでぃあはびつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.media2.editorial", "action": "fix_reading", "before": "えでとりある", "after": "えでぃとりある", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.media2.ronsa", "action": "unresolved", "before": "ろんさ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.media2.ronsetsu", "action": "unresolved", "before": "ろんせつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.media2.kaiken", "action": "unresolved", "before": "かいけん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.media2.sesaku", "action": "unresolved", "before": "せさく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.media2.ronsuu", "action": "fix_reading", "before": "ろんすう", "after": "ろんそう", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.media2.taaron", "action": "unresolved", "before": "たあろん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.media2.kouchou", "action": "unresolved", "before": "こうちょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.media2.shino", "action": "fix_reading", "before": "しんのう", "after": "しんよう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.media3.media", "action": "fix_reading", "before": "めであ", "after": "めでぃあ", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.media3.shaka", "action": "unresolved", "before": "しゃか", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.media3.fureimu", "action": "unresolved", "before": "ふれいむ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.media3.dempatsu", "action": "fix_reading", "before": "でんぱつ", "after": "でんたん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.media3.tsuushin5", "action": "unresolved", "before": "つうしん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.media3.shuuryuu", "action": "unresolved", "before": "しゅうりゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.media3.kairyou2", "action": "unresolved", "before": "かいりょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.media3.ronbun2", "action": "fix_reading", "before": "ろんぶん", "after": "ろんせつ", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.narrative.omoimasu", "action": "unresolved", "before": "おもいます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.narrative.katarimasu", "action": "unresolved", "before": "かたります", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.narrative.tsutaemasu", "action": "fix_reading", "before": "つたえます", "after": "つたえる", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.narrative.shirimasu", "action": "unresolved", "before": "しります", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.narrative.omoidasu", "action": "fix_reading", "before": "おもいだします", "after": "おもいだす", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.narrative.wasuremasu", "action": "unresolved", "before": "わすれます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.narrative.mitsukemasu", "action": "fix_reading", "before": "みつけます", "after": "みつけだす", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.narrative.nakushimasu", "action": "unresolved", "before": "なくします", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.narrative.tanomimasu", "action": "unresolved", "before": "たのみます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.narrative.misemasu", "action": "unresolved", "before": "みせます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.narrative.noborimasu", "action": "unresolved", "before": "のぼります", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.narrative.watarimasu", "action": "fix_reading", "before": "わたります", "after": "わたりあう", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.narrative.totsuzen", "action": "unresolved", "before": "とつぜん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.philosophy.gijiron", "action": "unresolved", "before": "ぎじろん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.philosophy.hasei", "action": "unresolved", "before": "はせい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.philosophy.hensen", "action": "unresolved", "before": "へんせん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.philosophy.kiso-gairon", "action": "unresolved", "before": "きそがいろん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.philosophy2.shinjin", "action": "unresolved", "before": "しんじん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.philosophy2.izen", "action": "unresolved", "before": "いぜん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.philosophy2.dousei", "action": "unresolved", "before": "どうせい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.philosophy2.urei", "action": "unresolved", "before": "ゆうれい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.philosophy2.kyoi", "action": "unresolved", "before": "きょうい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.philosophy2.jiyu-ishiki", "action": "unresolved", "before": "じゆういしき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.philosophy2.nenrei", "action": "fix_reading", "before": "ねんれい", "after": "ねんだい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.philosophy2.sekai-kan", "action": "fix_reading", "before": "せいかいかん", "after": "せかいかん", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.philosophy2.meiyo-kan", "action": "unresolved", "before": "めいよかん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.philosophy2.jiko-kan", "action": "fix_reading", "before": "じこかん", "after": "かんかん", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.philosophy2.yuuai", "action": "unresolved", "before": "ゆうあい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.philosophy3.dotoku-kan", "action": "fix_reading", "before": "どうとくかん", "after": "どうとくしん", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.philosophy3.sekinin-ron", "action": "unresolved", "before": "せきにんろん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.philosophy3.seigi-ron", "action": "unresolved", "before": "せいぎろん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.philosophy3.ishiki-ron", "action": "unresolved", "before": "いしきろん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.philosophy3.jiyu-ron", "action": "unresolved", "before": "じゆうろん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.philosophy3.kyoiku-hou", "action": "unresolved", "before": "きょういくほう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.philosophy3.jikukettei-ron", "action": "unresolved", "before": "じこけっていろん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.places.bankou", "action": "fix_reading", "before": "ばんこう", "after": "ぎんこう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.play2.komi", "action": "unresolved", "before": "こみ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.play2.age", "action": "unresolved", "before": "あげ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.play2.akito", "action": "unresolved", "before": "あきと", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics.giin", "action": "fix_reading", "before": "ぎいん", "after": "ぎし", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.politics.kyohi", "action": "fix_reading", "before": "きょひ", "after": "きけん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.politics.yushu", "action": "unresolved", "before": "ゆうしゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics.hankyou", "action": "fix_reading", "before": "はんきょう", "after": "はんこう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.politics.toushou", "action": "unresolved", "before": "とうしょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics.hansou", "action": "fix_reading", "before": "はんそう", "after": "ろんそう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.politics.touhou", "action": "fix_reading", "before": "とうほう", "after": "とうそう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.politics.seikan", "action": "unresolved", "before": "せいかん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics.buon", "action": "unresolved", "before": "ぶのう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics.kentei2", "action": "unresolved", "before": "けんてい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics.houpatsu", "action": "fix_reading", "before": "ほうはつ", "after": "ほうあん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.politics.sangin", "action": "unresolved", "before": "さんぎん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics.shugiin", "action": "unresolved", "before": "しゅうぎん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics.rougo", "action": "unresolved", "before": "ろうごう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics.shounen", "action": "unresolved", "before": "しょうねん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics2.koku", "action": "unresolved", "before": "こく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics2.bunkou", "action": "unresolved", "before": "ぶんこう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics2.zeimu", "action": "fix_reading", "before": "ぜいむ", "after": "しょむ", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.politics2.kogen", "action": "fix_reading", "before": "こうげん", "after": "こうせん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.politics2.shimei", "action": "fix_reading", "before": "しめい", "after": "してい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.politics2.june", "action": "unresolved", "before": "じゅんれい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics2.hotei", "action": "unresolved", "before": "ほてい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics2.shoukou", "action": "fix_reading", "before": "しょうこう", "after": "しょうさ", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.politics2.shuyuu", "action": "fix_reading", "before": "しゅゆう", "after": "しゅりゅう", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.politics2.shuryuu", "action": "fix_reading", "before": "しゅうりゅう", "after": "ちょうりゅう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.politics2.shouba", "action": "unresolved", "before": "しょうば", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics2.shouzei", "action": "unresolved", "before": "しょうぜい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics2.shourei", "action": "unresolved", "before": "しょうれい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics2.senkyoku", "action": "unresolved", "before": "せんきょく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics2.giinkai", "action": "unresolved", "before": "ぎいんかい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics2.hoju", "action": "fix_reading", "before": "ほじゅ", "after": "ほじょ", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.politics2.hoshu", "action": "unresolved", "before": "ほしゅ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics2.choushou", "action": "unresolved", "before": "ちょうしょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics2.chouka", "action": "fix_reading", "before": "ちょうか", "after": "ふりょうか", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.politics2.chouan", "action": "unresolved", "before": "ちょうあん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics2.hansen", "action": "unresolved", "before": "はんせん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.politics2.koi", "action": "fix_reading", "before": "こい", "after": "がんい", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.pronouns.watashi", "action": "unresolved", "before": "わたし", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.pronouns.watashitachi", "action": "unresolved", "before": "わたしたち", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.pronouns.kare", "action": "unresolved", "before": "かれ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.psych.douki", "action": "fix_reading", "before": "どうき", "after": "しげき", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.psych.ansei", "action": "fix_reading", "before": "あんせい", "after": "れいせい", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.psych.hatsusei", "action": "unresolved", "before": "はっせい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.psych.hiyou", "action": "unresolved", "before": "ひよう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.psych.wakuwaku", "action": "unresolved", "before": "わくわく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.psych.yuutsu", "action": "unresolved", "before": "ゆううつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.psych.shiawase", "action": "unresolved", "before": "しあわせ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.psych.danran", "action": "unresolved", "before": "だんらん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.reg1.koushiki", "action": "unresolved", "before": "こうしき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.reg1.kudai", "action": "unresolved", "before": "くだい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.reg1.hogen", "action": "unresolved", "before": "ほうげん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.reg1.kotei2", "action": "unresolved", "before": "こうてい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.reg1.yougen", "action": "unresolved", "before": "ようげん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.reg1.kougen", "action": "fix_reading", "before": "こうげん", "after": "はつげん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.reg1.nyuansu", "action": "fix_reading", "before": "にゅうあんす", "after": "にゅあんす", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.reg1.moyo", "action": "unresolved", "before": "もうよう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.reg1.jouretsu", "action": "unresolved", "before": "じょうれつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.reg2.bunpo", "action": "unresolved", "before": "ぶんぽう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.reg2.kuchiguse", "action": "unresolved", "before": "くちぐせ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.reg2.koukyuu", "action": "unresolved", "before": "こうきゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.reg2.tsuuyou", "action": "fix_reading", "before": "つうよう", "after": "つうこう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.rel1.kaitaku", "action": "unresolved", "before": "かいたく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel1.yamaimadara", "action": "unresolved", "before": "やまいただら", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel1.omoide", "action": "unresolved", "before": "おもいで", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel1.kenzai", "action": "fix_reading", "before": "けんざい", "after": "けんてい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.rel1.chokai", "action": "fix_reading", "before": "ちょうかい", "after": "りょうかい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.rel1.hakai2", "action": "fix_reading", "before": "はかい", "after": "はい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.rel1.kofuku", "action": "unresolved", "before": "こうふく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel1.hangeki", "action": "unresolved", "before": "はんげき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel2.yuuutsu", "action": "unresolved", "before": "ゆううつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel2.hankan", "action": "unresolved", "before": "はんかん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel2.fukki", "action": "unresolved", "before": "ふっき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel2.tsuige", "action": "unresolved", "before": "つげ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel2.kaisi", "action": "fix_reading", "before": "かいし", "after": "せいし", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.rel2.hokai", "action": "unresolved", "before": "ほうかい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel2.omoide2", "action": "unresolved", "before": "おもいで", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel2.shinko2", "action": "fix_reading", "before": "しんこう", "after": "しんよう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.rel2.kaitaku2", "action": "unresolved", "before": "かいたく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel2.sogo", "action": "fix_reading", "before": "そうごう", "after": "そうご", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.rel2.chiiki", "action": "fix_reading", "before": "ちいき", "after": "ちいきか", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.rel2.shimpei", "action": "unresolved", "before": "しんぺい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel2.chieki", "action": "unresolved", "before": "ちえき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.senzoku", "action": "fix_reading", "before": "せんぞく", "after": "せんぞ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.rel.obaa-chan", "action": "fix_reading", "before": "おばあちゃん", "after": "おばあちゃんこ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.rel.ojii-chan", "action": "unresolved", "before": "おじいちゃん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.yori-modosu", "action": "unresolved", "before": "よりもどす", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.omoiden", "action": "fix_reading", "before": "おもいでん", "after": "おもいで", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.rel.tsuui", "action": "fix_reading", "before": "つい", "after": "あい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.rel.kokoro-bazuka", "action": "fix_reading", "before": "こころばずか", "after": "こころばえ", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.rel.shinrai-suru", "action": "unresolved", "before": "しんらいします", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.jijou", "action": "fix_reading", "before": "じじょう", "after": "じょう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.rel.kazoku-no-kizuna", "action": "unresolved", "before": "かぞくのきずな", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.kazoku-no-kata", "action": "unresolved", "before": "かぞくかた", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.kazoku-no-uni", "action": "unresolved", "before": "かぞくのうに", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.kazoku-no-ishi", "action": "unresolved", "before": "かぞくのいし", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.kyoudai-ue", "action": "fix_reading", "before": "きょうだいうえ", "after": "きょうだいあい", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.rel.kyoudai-shita", "action": "fix_reading", "before": "きょうだいした", "after": "きょうだいあい", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.rel.jijou-betsu", "action": "unresolved", "before": "じじょうべつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.aishi", "action": "unresolved", "before": "あいし", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.omoide", "action": "unresolved", "before": "おもいで", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.omoide-bako", "action": "unresolved", "before": "おもいでばこ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.omoide-no-kioku", "action": "unresolved", "before": "おもいで の きおく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.omoide-no-tabi", "action": "unresolved", "before": "おもいで の たび", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.omoide-no-uta", "action": "unresolved", "before": "おもいで の うた", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.omoide-no-hi", "action": "unresolved", "before": "おもいで の ひ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.omoide-no-machi", "action": "unresolved", "before": "おもいで の まち", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.omoide-no-hito", "action": "unresolved", "before": "おもいで の ひと", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.omoide-no-ki", "action": "unresolved", "before": "おもいで の き", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.rel.omoide-no-sora", "action": "unresolved", "before": "おもいで の そら", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.science.hyousou", "action": "fix_reading", "before": "ひょうそう", "after": "ひょう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.science.heikinkyou", "action": "fix_reading", "before": "へいきんちゅう", "after": "へいきんち", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.science.taiyou", "action": "unresolved", "before": "たいよう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.science.genshi", "action": "fix_reading", "before": "げんし", "after": "げんしろ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.science.denpo", "action": "fix_reading", "before": "でんぱつ", "after": "げんぱつ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.science.igen", "action": "fix_reading", "before": "いでん", "after": "いでんし", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.science.saikou", "action": "unresolved", "before": "さいこう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.science.gaisei", "action": "unresolved", "before": "かいせい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.science.getsuyou", "action": "unresolved", "before": "げつよう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.science.yakuhin", "action": "fix_reading", "before": "やくひん", "after": "いやくひん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.science.seika2", "action": "fix_reading", "before": "せいか", "after": "せいこう", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.science2.hoshou2", "action": "fix_reading", "before": "ほうしょう", "after": "ほしょう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.science2.shinko2", "action": "unresolved", "before": "しんしん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.science2.touka", "action": "unresolved", "before": "とーけんか", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.science2.kiso2", "action": "fix_reading", "before": "きそ", "after": "きそてき", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.shopping.shouhyou", "action": "unresolved", "before": "しょうひょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.shopping.tryon", "action": "unresolved", "before": "とらいおん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.shopping.seruku", "action": "fix_reading", "before": "せるく", "after": "せーる", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.shopping.fukuban", "action": "unresolved", "before": "ふくばん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.shopping.bag", "action": "fix_reading", "before": "ばぐ", "after": "ばっぐ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.shopping.seetaa", "action": "fix_reading", "before": "せてー", "after": "せーたー", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.shopping.muffu", "action": "fix_reading", "before": "まふ", "after": "まふらー", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.shopping.kutsu-ito", "action": "fix_reading", "before": "くついと", "after": "くつひも", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.shopping.urimasu", "action": "unresolved", "before": "うります", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.shopping.tatamu", "action": "unresolved", "before": "たたみます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.shopping.keshi", "action": "fix_reading", "before": "けし", "after": "じけし", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.shopping.mon", "action": "unresolved", "before": "もん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.shopping.man-en", "action": "unresolved", "before": "まんえん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.shopping.ni-sen", "action": "unresolved", "before": "にせん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society.kinben", "action": "unresolved", "before": "きんべん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society.yimu", "action": "unresolved", "before": "いむ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society.youmu", "action": "unresolved", "before": "ようむ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society.riso", "action": "unresolved", "before": "りぞ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society.yuwa", "action": "unresolved", "before": "ゆわ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society.boryuntia", "action": "fix_reading", "before": "ぼりゅんてぃあ", "after": "ぼらんてぃあ", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.society2.yuuutsu", "action": "fix_reading", "before": "ゆううつ", "after": "ゆうかん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.society2.chuga", "action": "unresolved", "before": "ちゅうが", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society2.kouon", "action": "fix_reading", "before": "こうおん", "after": "そうおん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.society2.seimen", "action": "fix_reading", "before": "せいめん", "after": "せいがん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.society2.shomei", "action": "fix_reading", "before": "しょうめい", "after": "しょめい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.society2.houchi", "action": "unresolved", "before": "ほうち", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society2.kensei", "action": "unresolved", "before": "けんせい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society2.kyuugyou", "action": "unresolved", "before": "きゅうぎょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society2.shizukasa", "action": "unresolved", "before": "しずけさ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society2.sedai", "action": "unresolved", "before": "せいだい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society2.ishiki", "action": "fix_reading", "before": "しき", "after": "いしき", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.society2.akusei", "action": "unresolved", "before": "あこう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society2.houfuku", "action": "unresolved", "before": "ほうふく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society3.noureka", "action": "unresolved", "before": "のうれか", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society3.hakushou", "action": "unresolved", "before": "しゅうしゅつりつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society3.shoushou", "action": "fix_reading", "before": "しょうしょう", "after": "きょうしょう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.society3.yobikou", "action": "fix_reading", "before": "よびこう", "after": "よび", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.society3.koyou", "action": "fix_reading", "before": "こうよう", "after": "こよう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.society3.jitsugyou", "action": "unresolved", "before": "じつぎょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society3.iju", "action": "unresolved", "before": "いきょ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society3.ikei", "action": "unresolved", "before": "いけい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society3.danjyo", "action": "fix_reading", "before": "だんじょ", "after": "だんじょひ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.society3.komei", "action": "unresolved", "before": "こうめい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society4.keieki", "action": "fix_reading", "before": "けいえき", "after": "けいえい", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.society4.hataraki", "action": "unresolved", "before": "はたらき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society4.jichitsu", "action": "fix_reading", "before": "じちつ", "after": "じりつ", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.society4.shigen", "action": "unresolved", "before": "しげん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society4.saishi", "action": "unresolved", "before": "さいし", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society4.aisan", "action": "unresolved", "before": "ざいし", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society4.kaihyou", "action": "unresolved", "before": "きょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society4.fukyu", "action": "unresolved", "before": "ふきゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society4.kyousei", "action": "unresolved", "before": "きょうせい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society4.hoshou", "action": "fix_reading", "before": "ほうしょう", "after": "ほしょう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.society4.suisin", "action": "fix_reading", "before": "すいしん", "after": "かいしん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.society4.totsunyuu", "action": "fix_reading", "before": "とうしゅう", "after": "とうにゅう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.society4.kakyu", "action": "unresolved", "before": "きゅう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society4.juyou", "action": "fix_reading", "before": "じゅうよう", "after": "じゅよう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.society4.tousei", "action": "fix_reading", "before": "とうせい", "after": "ぎょうせい", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.society4.jogai", "action": "fix_reading", "before": "ぎょうらい", "after": "ぎゆうへい", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.society4.noutoku", "action": "unresolved", "before": "のうとく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society4.senyuu", "action": "unresolved", "before": "せんゆう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.society4.yoiron", "action": "unresolved", "before": "ようろん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.sports.taiku-kai", "action": "fix_reading", "before": "たいくかい", "after": "きろくかい", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.sports.tanso-undo", "action": "unresolved", "before": "たんそううんどう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.sports.junbi-undo", "action": "unresolved", "before": "じゅんびうんどう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.sports.massaji", "action": "unresolved", "before": "ますーじ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.sports.onsen-tou", "action": "fix_reading", "before": "おんせんとう", "after": "おんとう", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.sports.taekwondo", "action": "fix_reading", "before": "てくわんど", "after": "てこんど", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.sports.bokushin", "action": "fix_reading", "before": "ぼくしん", "after": "ぼくしんぐ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.sports.sa-fingu", "action": "fix_reading", "before": "さーふぃんぐ", "after": "さーふぃん", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.sports.paten", "action": "unresolved", "before": "ぱてん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.sports.janpu-ro-pu", "action": "unresolved", "before": "じゃんぷろーぷ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.sports.danburu", "action": "fix_reading", "before": "だんぶる", "after": "だんべる", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.sports.joutairyoku", "action": "unresolved", "before": "じょうたいりょく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.sports.ryouiki", "action": "fix_reading", "before": "りょういき", "after": "きょういき", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.sports.sen-taku-sen", "action": "unresolved", "before": "せんたくせん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.sports.densetsu-senshu", "action": "unresolved", "before": "でんせつせんしゅ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.sports.kessan-bangumi", "action": "unresolved", "before": "けっさんばんぐみ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.sports.kessan-houritsu", "action": "unresolved", "before": "けっさんほうりつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.story.keimatsu", "action": "fix_reading", "before": "けいまつ", "after": "ほんまつ", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.story.shuyaku", "action": "unresolved", "before": "しゅやく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.story2.kikkai", "action": "unresolved", "before": "きっかい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.story2.tenkan2", "action": "fix_reading", "before": "てんかん", "after": "てんかい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.story2.fukkyaku", "action": "unresolved", "before": "ふっきゃく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.story2.dokugeki", "action": "unresolved", "before": "どくげき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.story2.shisen", "action": "fix_reading", "before": "しせん", "after": "してん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.story2.hairon", "action": "unresolved", "before": "はいろん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.story2.shuwei", "action": "fix_reading", "before": "しゅうい", "after": "しゅうせい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.story2.kaiso", "action": "fix_reading", "before": "かいそ", "after": "かいそう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.story2.yokai", "action": "fix_reading", "before": "ようかい", "after": "ゆうかい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.tech.debisu", "action": "unresolved", "before": "でびす", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.tech.purinto", "action": "fix_reading", "before": "ぷりんと", "after": "ぷりんた", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.tech.settings", "action": "unresolved", "before": "せっとぃんぐ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.tech.account", "action": "fix_reading", "before": "あくあんと", "after": "あかうんと", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.tech2.koi", "action": "unresolved", "before": "こい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.tech2.fuben", "action": "unresolved", "before": "ふべん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.tech2.ryuuri", "action": "unresolved", "before": "りゅうり", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.tech2.senzu", "action": "unresolved", "before": "せんず", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.tech2.kosei", "action": "unresolved", "before": "こうせい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.tech2.koui", "action": "unresolved", "before": "こうい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.tech2.kikan", "action": "fix_reading", "before": "きかん", "after": "きかい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.tech2.onkyou", "action": "unresolved", "before": "おんきょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.tech2.sensoru", "action": "fix_reading", "before": "せんさーる", "after": "せんさー", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.tech2.forumu", "action": "unresolved", "before": "ふぉーむ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.tech2.shinko", "action": "unresolved", "before": "しんこう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.tech2.saisei", "action": "fix_reading", "before": "さいせい", "after": "さいかふ", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.tech2.detokku", "action": "fix_reading", "before": "でとっく", "after": "でとっくす", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.tech2.hanare", "action": "fix_reading", "before": "はなれ", "after": "はがれ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.transport.machimasu", "action": "unresolved", "before": "まちます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.transport.norimasu", "action": "fix_reading", "before": "のります", "after": "のりこむ", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.transport.orimasu", "action": "unresolved", "before": "おります", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.transport.norikaemasu", "action": "unresolved", "before": "のりかえます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.transport.demasu", "action": "fix_reading", "before": "でます", "after": "でる", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.transport.tsukimasu", "action": "unresolved", "before": "つきます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.transport.hairimasu", "action": "fix_reading", "before": "はいります", "after": "はいりなおす", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.transport.chakubatsu", "action": "unresolved", "before": "ちゃくばつ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel.itinerari", "action": "unresolved", "before": "いてぃねらり", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel.henkyo", "action": "unresolved", "before": "へんきょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel.ryokou-ki", "action": "unresolved", "before": "りょこうき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel.shinkou", "action": "fix_reading", "before": "しんこう", "after": "しんよう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.travel.bunka-shock", "action": "unresolved", "before": "ぶんかしょっく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel.taihen", "action": "fix_reading", "before": "たいへん", "after": "せいかん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.travel.mendou", "action": "fix_reading", "before": "めんどう", "after": "めんどい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.travel.nyukan", "action": "fix_reading", "before": "にゅうかん", "after": "きゅうかん", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.travel.minshuku", "action": "unresolved", "before": "みんしゅく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel2.hikou-min", "action": "unresolved", "before": "ひこうみん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel2.kiki", "action": "unresolved", "before": "きき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel2.tenkan", "action": "unresolved", "before": "てんかん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel2.kyoka-sho", "action": "unresolved", "before": "きょうかしょ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel2.issho", "action": "unresolved", "before": "いっしょ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel2.gaido", "action": "unresolved", "before": "がいどう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel2.meguri", "action": "unresolved", "before": "めぐり", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel2.dekake", "action": "unresolved", "before": "でかけ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel2.sanin", "action": "unresolved", "before": "さにん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel2.keihaku", "action": "fix_reading", "before": "けいはく", "after": "らいはく", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.travel2.wasuremono", "action": "unresolved", "before": "わすれもの", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel2.ochimono", "action": "unresolved", "before": "おちもの", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel2.kakaku", "action": "fix_reading", "before": "かくかく", "after": "かかく", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.travel2.nyuuryoku", "action": "unresolved", "before": "にゅうりょく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel2.keikou", "action": "unresolved", "before": "けいこう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel2.engaki", "action": "unresolved", "before": "えんがき", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.travel2.shuhiki", "action": "fix_reading", "before": "しゅひき", "after": "しゅっきん", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.travel2.hatsuken", "action": "fix_reading", "before": "はつけん", "after": "はっけん", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.travel2.ryouga", "action": "fix_reading", "before": "りょうが", "after": "りょう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.urban.kouchiku", "action": "unresolved", "before": "こうちく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.urban2.kachiku", "action": "fix_reading", "before": "かちく", "after": "ちか", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.urban2.puratsu", "action": "fix_reading", "before": "ぷらつ", "after": "ぷらざ", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.urban2.kissa", "action": "fix_reading", "before": "きっさ", "after": "ねこきっさ", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.urban2.senso", "action": "fix_reading", "before": "せんそー", "after": "せんさー", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.urban2.ai", "action": "unresolved", "before": "えーあい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.urban2.kyousou", "action": "fix_reading", "before": "きょうそう", "after": "きょうどう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.urban2.genzai", "action": "fix_reading", "before": "げんざい", "after": "げんせい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.urban2.koukou2", "action": "unresolved", "before": "こうこう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.urban2.touban", "action": "unresolved", "before": "とうばん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.urban2.mimamori", "action": "unresolved", "before": "みまもり", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.urban3.hisshou", "action": "unresolved", "before": "ひっしょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.verbs.tabemasu", "action": "unresolved", "before": "たべます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.verbs.nomimasu", "action": "unresolved", "before": "のみます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.verbs.mimasu", "action": "fix_reading", "before": "みます", "after": "みす", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.verbs.kikimasu", "action": "unresolved", "before": "ききます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.verbs.yomimasu", "action": "unresolved", "before": "よみます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.verbs.kakimasu", "action": "unresolved", "before": "かきます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.verbs.ikimasu", "action": "unresolved", "before": "いきます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.verbs.kimasu", "action": "unresolved", "before": "きます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.verbs.kaerimasu", "action": "fix_reading", "before": "かえります", "after": "かえりざく", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.verbs.arukimasu", "action": "fix_reading", "before": "あるきます", "after": "あるきだす", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.verbs.kaimono-shimasu", "action": "unresolved", "before": "かいものします", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.verbs.benkyou-shimasu", "action": "unresolved", "before": "べんきょうします", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.verbs.shigoto-shimasu", "action": "fix_reading", "before": "しごとします", "after": "しごとをすます", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.verbs.arimasu", "action": "unresolved", "before": "あります", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.verbs.imasu", "action": "unresolved", "before": "います", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.verbs.wakarimasu", "action": "unresolved", "before": "わかります", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.verbs.iimasu", "action": "unresolved", "before": "いいます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.verbs.shimasu", "action": "unresolved", "before": "します", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.verbs.nemasu", "action": "fix_reading", "before": "ねます", "after": "ねかす", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.verbs.okimasu", "action": "fix_reading", "before": "おきます", "after": "おきる", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.verbs.hanashimasu", "action": "fix_reading", "before": "はなします", "after": "はなす", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.verbs.dekimasu", "action": "unresolved", "before": "できます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.verbs.aisatsu-shimasu", "action": "unresolved", "before": "あいさつします", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.verbs.shoukai-shimasu", "action": "unresolved", "before": "しょうかいします", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.verbs.desu", "action": "unresolved", "before": "です", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.weather.samusa", "action": "unresolved", "before": "さむさ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.weather2.kousui", "action": "fix_reading", "before": "こうすい", "after": "こうずい", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.weather2.kishou", "action": "unresolved", "before": "きしょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.weather2.kaze-no-tsuyosa", "action": "unresolved", "before": "かぜのつよさ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.weather2.teru-teru-bouzu", "action": "unresolved", "before": "てるてるぼうず", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.weather2.yukidoke", "action": "fix_reading", "before": "ゆきどけ", "after": "ゆきどけみず", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.weather2.amagasa", "action": "unresolved", "before": "あまがさ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.weather2.yuki-yinga", "action": "unresolved", "before": "ゆきいんが", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.weather2.tenki-amari", "action": "unresolved", "before": "てんきあまり", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.weather2.yamu", "action": "unresolved", "before": "やみます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.weather2.fukau", "action": "unresolved", "before": "ふかくなる", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.weather2.naga", "action": "unresolved", "before": "なが", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.weather2.samusa", "action": "unresolved", "before": "さむさ", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.weather2.naru", "action": "fix_reading", "before": "なります", "after": "なりすます", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.weather2.amu", "action": "fix_reading", "before": "あむ", "after": "あめ", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.work.nobun", "action": "unresolved", "before": "のぶん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work.shigyou", "action": "unresolved", "before": "しぎょう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work.hakkou", "action": "unresolved", "before": "はっこう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work.hatarakimasu", "action": "unresolved", "before": "はたらきます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work.oshiemasu", "action": "fix_reading", "before": "おしえます", "after": "おしえま", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.work.naraimasu", "action": "fix_reading", "before": "ならいます", "after": "ならわす", "why": "reading not in JMdict; intended word recovered within 2 kana edits"}
+{"id": "ja.lex.work.shoukai-shimasu", "action": "unresolved", "before": "しょうかいします", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work.kesshin-shimasu", "action": "unresolved", "before": "けっしんします", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work.chuumoku-shimasu", "action": "unresolved", "before": "ちゅうもくします", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work.kizukimasu", "action": "unresolved", "before": "きづきます", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work.kanryou-shimasu", "action": "unresolved", "before": "かんりょうします", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work.kanzen-ni", "action": "unresolved", "before": "かんぜんに", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work.taishita", "action": "unresolved", "before": "たした", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work2.shoubei", "action": "unresolved", "before": "しょうべい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work2.danmoku", "action": "fix_reading", "before": "だんもく", "after": "ちんもく", "why": "reading not in JMdict; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.work2.nyuuka", "action": "unresolved", "before": "にゅうか", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work2.tanpin", "action": "unresolved", "before": "たんぴん", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work2.keiri", "action": "unresolved", "before": "けいり", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work2.baibai", "action": "unresolved", "before": "ばいばい", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work2.aite", "action": "unresolved", "before": "あいて", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work2.shikaku", "action": "unresolved", "before": "しかく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work2.shouhou", "action": "fix_reading", "before": "しょうほう", "after": "しょうよう", "why": "gloss matched no sense of reading; intended word recovered within 1 kana edits"}
+{"id": "ja.lex.work2.kouchiku", "action": "unresolved", "before": "こうちく", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work2.yuutou", "action": "unresolved", "before": "ゆうとう", "after": "", "why": "no unique dictionary reading within 2 edits of gloss"}
+{"id": "ja.lex.work2.tenyaku", "action": "fix_reading", "before": "てんやく", "after": "てんきん", "why": "gloss matched no sense of reading; intended word recovered within 2 kana edits"}

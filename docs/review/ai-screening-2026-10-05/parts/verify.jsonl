@@ -1,0 +1,725 @@
+{"i": 0, "action": "keep", "why": "The gloss is clear and matches the sentence id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.this-is-book"}
+{"i": 1, "action": "keep", "why": "The gloss is grammatical and matches the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.walk-park"}
+{"i": 2, "action": "keep", "why": "The gloss is natural and matches the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.half-past"}
+{"i": 3, "action": "keep", "why": "The gloss is clear and matches the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.buy-bread"}
+{"i": 4, "action": "keep", "why": "The gloss is understandable and matches the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.family-four"}
+{"i": 5, "action": "keep", "why": "The gloss is clear and matches the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.three-books"}
+{"i": 6, "action": "keep", "why": "The gloss is grammatical and matches the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.sleep-night"}
+{"i": 7, "action": "keep", "why": "The gloss is natural and matches the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.want-sleep"}
+{"i": 8, "action": "keep", "why": "The gloss is clear and matches the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.play-soccer"}
+{"i": 9, "action": "keep", "why": "The gloss is natural and matches the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.listen-news"}
+{"i": 10, "action": "keep", "why": "The gloss is plausible for the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.put-away"}
+{"i": 11, "action": "keep", "why": "The gloss is clear and matches the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.learn-by-listening"}
+{"i": 12, "action": "keep", "why": "The gloss is understandable and matches the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.finish-work"}
+{"i": 13, "action": "keep", "why": "The gloss is natural and matches the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.remember-trip"}
+{"i": 14, "action": "keep", "why": "The gloss is clear and matches the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.send-letter"}
+{"i": 15, "action": "keep", "why": "The gloss is plausible for the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.report-address"}
+{"i": 16, "action": "keep", "why": "The gloss is grammatical, and without a kana reading the mismatch with the id is only a flag-level doubt, so keep.", "id": "ja.sent.call-police"}
+{"i": 17, "action": "keep", "why": "The gloss is grammatical, and without a kana reading the mismatch with the id is only a flag-level doubt, so keep.", "id": "ja.sent.city-hall"}
+{"i": 18, "action": "keep", "why": "The gloss is grammatical, and without a kana reading the mismatch with the id is only a flag-level doubt, so keep.", "id": "ja.sent.pay-bill"}
+{"i": 19, "action": "keep", "why": "The gloss is clear and compatible with the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.eat-fruit"}
+{"i": 20, "action": "keep", "why": "The gloss is grammatical, and without a kana reading the mismatch with the id is only a flag-level doubt, so keep.", "id": "ja.sent.breakfast-bento"}
+{"i": 21, "action": "keep", "why": "The gloss is clear and matches the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.check-price"}
+{"i": 22, "action": "keep", "why": "The gloss is natural and matches the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.on-sale"}
+{"i": 23, "action": "keep", "why": "The gloss is clear and matches the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.try-jacket"}
+{"i": 24, "action": "keep", "why": "The gloss is natural and matches the id; no kana reading is provided to indicate an error, so flag-level doubt resolves to keep.", "id": "ja.sent.describe-symptom"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.take-prevention"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.insomnia"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.explain-grammar"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.translate-sentence"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.winter-yuki"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.rainy-season"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.watch-dorama"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.team-match"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.senpai-kouhai"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.gym-training"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.jog-morning"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.yoga-relax"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.marathon-run"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.recovery-onsen"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.coach-said"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.quarrel-reconcile"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.make-appointment"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.pay-expense"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.check-balance"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.household-ledger"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.keep-receipt"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.address-registration"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.opinion-before-decision"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.profit-loss"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.grievance-box"}
+{"i": 0, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.escalation-apology"}
+{"i": 1, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.presentation-structure"}
+{"i": 2, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.university-system"}
+{"i": 3, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.topic-choice"}
+{"i": 4, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.paragraph-point"}
+{"i": 5, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.evidence-conclusion"}
+{"i": 6, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.article-summary"}
+{"i": 7, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.news-discuss"}
+{"i": 8, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.net-use"}
+{"i": 9, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.check-rumor"}
+{"i": 10, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.editorial-viewpoint"}
+{"i": 11, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.debate-point"}
+{"i": 12, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.device-daily"}
+{"i": 13, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.tech-problem-fix"}
+{"i": 14, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.support-reception"}
+{"i": 15, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.coding-process"}
+{"i": 16, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.remote-control"}
+{"i": 17, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.community-post"}
+{"i": 18, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.custom-explain"}
+{"i": 19, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.craft-washi"}
+{"i": 20, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.etiquette-rule"}
+{"i": 21, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.shrine-visit"}
+{"i": 22, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.pride-craft"}
+{"i": 23, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.gift-wrapping"}
+{"i": 24, "action": "keep", "why": "No kana form/reading is provided; no error can be confirmed, and doubts resolve to keep.", "id": "ja.sent.ceremony-congrats"}
+{"i": 0, "action": "keep", "why": "The gloss matches the civic/observation theme, and there is no kana reading evidence of an error; flag-level doubt resolves to keep.", "id": "ja.sent.essay-observation"}
+{"i": 1, "action": "keep", "why": "The volunteer-role gloss is coherent and beginner-plausible; no kana reading evidence of an error.", "id": "ja.sent.volunteer-role"}
+{"i": 2, "action": "keep", "why": "The petition/signature gloss is clear and matches the id; no kana reading evidence of an error.", "id": "ja.sent.petition-signature"}
+{"i": 3, "action": "keep", "why": "The community-center/duties gloss is plausible for a civic topic; no kana reading evidence of an error.", "id": "ja.sent.civic-hall-meeting"}
+{"i": 4, "action": "keep", "why": "The voting/candidate gloss is coherent and matches the id; no kana reading evidence of an error.", "id": "ja.sent.voting-candidate"}
+{"i": 5, "action": "keep", "why": "The equality/gap gloss is somewhat abstract but still plausible; flag-level doubt resolves to keep.", "id": "ja.sent.inequality-gap"}
+{"i": 6, "action": "keep", "why": "The civic-participation gloss is coherent and matches the id; no kana reading evidence of an error.", "id": "ja.sent.civic-participation"}
+{"i": 7, "action": "keep", "why": "The wind-energy/electricity gloss is clear and beginner-plausible; no kana reading evidence of an error.", "id": "ja.sent.energy-wind"}
+{"i": 8, "action": "keep", "why": "The wildlife-decrease gloss is coherent and matches the id; no kana reading evidence of an error.", "id": "ja.sent.wildlife-talk"}
+{"i": 9, "action": "keep", "why": "The pollution/problem gloss is clear and matches the id; no kana reading evidence of an error.", "id": "ja.sent.pollution-problem"}
+{"i": 10, "action": "keep", "why": "The disaster-preparedness gloss is plausible despite simple phrasing; flag-level doubt resolves to keep.", "id": "ja.sent.disaster-prep"}
+{"i": 11, "action": "keep", "why": "The food-waste gloss is understandable and matches the id; no kana reading evidence of an error.", "id": "ja.sent.food-waste"}
+{"i": 12, "action": "keep", "why": "The household footprint gloss is slightly awkward but plausible; flag-level doubt resolves to keep.", "id": "ja.sent.footprint-home"}
+{"i": 13, "action": "keep", "why": "The itinerary/lodging gloss is clear and matches the travel id; no kana reading evidence of an error.", "id": "ja.sent.itinerary-plan"}
+{"i": 14, "action": "keep", "why": "The culture-shock gloss is coherent and matches the id; no kana reading evidence of an error.", "id": "ja.sent.culture-shock"}
+{"i": 15, "action": "keep", "why": "The travel-safety/crime-prevention gloss is plausible; flag-level doubt resolves to keep.", "id": "ja.sent.travel-safety"}
+{"i": 16, "action": "keep", "why": "The border-documents gloss is understandable and matches the id; no kana reading evidence of an error.", "id": "ja.sent.border-docs"}
+{"i": 17, "action": "keep", "why": "The lost-wallet/inquiry-desk gloss is clear and matches the id; no kana reading evidence of an error.", "id": "ja.sent.lost-belongings"}
+{"i": 18, "action": "keep", "why": "The route-change/train-delay gloss is coherent and matches the id; no kana reading evidence of an error.", "id": "ja.sent.route-change"}
+{"i": 19, "action": "keep", "why": "The empathy/considerate-words gloss is clear and matches the id; no kana reading evidence of an error.", "id": "ja.sent.empathy"}
+{"i": 20, "action": "keep", "why": "The apology gloss is understandable and matches the id; no kana reading evidence of an error.", "id": "ja.sent.apology"}
+{"i": 21, "action": "keep", "why": "The gratitude/affection/bond gloss is plausible; flag-level doubt resolves to keep.", "id": "ja.sent.gratitude"}
+{"i": 22, "action": "keep", "why": "The encouragement gloss is coherent and matches the id; no kana reading evidence of an error.", "id": "ja.sent.encouragement"}
+{"i": 23, "action": "keep", "why": "The coping/patience gloss is understandable and matches the id; no kana reading evidence of an error.", "id": "ja.sent.coping"}
+{"i": 24, "action": "keep", "why": "The emotional-story/introduction gloss is plausible; flag-level doubt resolves to keep.", "id": "ja.sent.emotional-story"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.reconciliation"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.give-advice"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.soft-advice"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.partial-agree"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.polite-disagree"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.gentle-persuade"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.polite-warning"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.preference"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.compromise-write"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.pros-cons"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.debate-basics"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.use-evidence"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.counter-argue"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.review-post"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.rating-system"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.travel-compare"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.decision-essay"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.narrative-structure"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.suspense-build"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.write-ending"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.personal-essay"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.sleep-habit"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.exercise-plan"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.stress-manage"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.mental-health"}
+{"i": 0, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.fitness-club"}
+{"i": 1, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.diet-culture"}
+{"i": 2, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.health-debate"}
+{"i": 3, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.parliament-debate"}
+{"i": 4, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.policy-analysis"}
+{"i": 5, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.public-debate"}
+{"i": 6, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.campaign-critique"}
+{"i": 7, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.constitutional-ideas"}
+{"i": 8, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.rights-discussion"}
+{"i": 9, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.diplomacy-language"}
+{"i": 10, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.market-basics"}
+{"i": 11, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.wage-discussion"}
+{"i": 12, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.management-styles"}
+{"i": 13, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.financial-literacy"}
+{"i": 14, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.economic-debate"}
+{"i": 15, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.court-process"}
+{"i": 16, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.legal-vocabulary"}
+{"i": 17, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.restorative-justice"}
+{"i": 18, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.privacy-law"}
+{"i": 19, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.justice-essay"}
+{"i": 20, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.justice-theory"}
+{"i": 21, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.happiness-philosophy"}
+{"i": 22, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.environmental-ethics"}
+{"i": 23, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.logic-basics"}
+{"i": 24, "action": "keep", "why": "No kana form/reading is provided to evaluate; the gloss is plausible and no specific error can be confirmed, so keep under the doubt rule.", "id": "ja.sent.fallacy-hunting"}
+{"i": 0, "action": "keep", "why": "The gloss is grammatical and plausible for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.poetry-classical"}
+{"i": 1, "action": "keep", "why": "The gloss is grammatical and plausible for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.haiku-tradition"}
+{"i": 2, "action": "keep", "why": "The gloss is grammatical and plausible for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.narrator-analysis"}
+{"i": 3, "action": "keep", "why": "The gloss is grammatical and plausible for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.symbol-reading"}
+{"i": 4, "action": "keep", "why": "The gloss is grammatical and plausible for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.genre-comparison"}
+{"i": 5, "action": "keep", "why": "The gloss is grammatical and plausible for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.literary-vocabulary"}
+{"i": 6, "action": "keep", "why": "The gloss is grammatical and plausible for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.film-language"}
+{"i": 7, "action": "keep", "why": "The gloss is grammatical and plausible for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.genre-analysis"}
+{"i": 8, "action": "keep", "why": "The gloss is grammatical and plausible enough for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.sound-design"}
+{"i": 9, "action": "keep", "why": "The gloss is grammatical and plausible enough for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.festival-culture"}
+{"i": 10, "action": "keep", "why": "The gloss is grammatical and plausible enough for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.film-ethics"}
+{"i": 11, "action": "keep", "why": "The gloss is grammatical and plausible for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.economic-history-b"}
+{"i": 12, "action": "keep", "why": "The gloss is grammatical and plausible enough for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.history-and-identity"}
+{"i": 13, "action": "keep", "why": "The gloss is grammatical and plausible for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.monument-debate"}
+{"i": 14, "action": "keep", "why": "The gloss is grammatical and plausible for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.oral-history"}
+{"i": 15, "action": "keep", "why": "The gloss is grammatical and plausible for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.history-comparison"}
+{"i": 16, "action": "keep", "why": "The gloss is grammatical and plausible for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.history-essay"}
+{"i": 17, "action": "keep", "why": "The gloss is grammatical and plausible for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.demographic-shift"}
+{"i": 18, "action": "keep", "why": "The gloss is grammatical and plausible for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.urbanization"}
+{"i": 19, "action": "keep", "why": "The gloss is grammatical and plausible enough for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.migration-debate"}
+{"i": 20, "action": "keep", "why": "The gloss is grammatical and plausible for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.work-culture-change"}
+{"i": 21, "action": "keep", "why": "The gloss is grammatical and plausible enough for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.work-management"}
+{"i": 22, "action": "keep", "why": "The gloss is grammatical and plausible enough for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.social-innovation"}
+{"i": 23, "action": "keep", "why": "The gloss is grammatical and plausible for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.community-bonds"}
+{"i": 24, "action": "keep", "why": "The gloss is grammatical and plausible for a beginner; no kana reading/form is provided to show an error, so flag-level doubt resolves to keep.", "id": "ja.sent.public-budget"}
+{"i": 0, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.lifestyle-change"}
+{"i": 1, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.rights-freedom"}
+{"i": 2, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.statistics-literacy"}
+{"i": 3, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.data-ethics"}
+{"i": 4, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.medical-advance"}
+{"i": 5, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.climate-science"}
+{"i": 6, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.innovation-economics"}
+{"i": 7, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.science-communication"}
+{"i": 8, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.classroom-methods"}
+{"i": 9, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.assessment-debate"}
+{"i": 10, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.teacher-roles"}
+{"i": 11, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.student-agency"}
+{"i": 12, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.early-childhood"}
+{"i": 13, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.higher-education-future"}
+{"i": 14, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.parent-involvement"}
+{"i": 15, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.migration-global"}
+{"i": 16, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.global-health"}
+{"i": 17, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.resource-politics"}
+{"i": 18, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.global-cities"}
+{"i": 19, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.global-governance"}
+{"i": 20, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.literature-review"}
+{"i": 21, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.formal-style"}
+{"i": 22, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.paragraph-cohesion"}
+{"i": 23, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.abstract-writing"}
+{"i": 24, "action": "keep", "why": "No kana sentence or visible error is provided to verify; flag-level doubt resolves to keep.", "id": "ja.sent.peer-review-ideas"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.poster-writing"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.publication-basics"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.business-letters"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.invitation-formal"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.legal-correspondence"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.diplomatic-style"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.ceremony-speech"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.public-announcements"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.visual-analysis"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.traditional-arts"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.urban-design"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.craft-aesthetics"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.propaganda-history"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.news-production"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.audience-studies"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.journalism-standards"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.public-relations"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.motivation-theory"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.development-stages"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.social-psychology"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.emotion-theory"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.language-and-mind"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.decision-science"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.mental-health-policy"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.medical-research"}
+{"i": 0, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.mental-health-services"}
+{"i": 1, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.aging-medicine"}
+{"i": 2, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.health-inequality"}
+{"i": 3, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.ethics-debate"}
+{"i": 4, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.pandemic-lessons"}
+{"i": 5, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.city-planning"}
+{"i": 6, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.urban-economy"}
+{"i": 7, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.urban-community"}
+{"i": 8, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.urban-environment"}
+{"i": 9, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.rural-urban-link"}
+{"i": 10, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.climate-policy"}
+{"i": 11, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.energy-transition"}
+{"i": 12, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.biodiversity"}
+{"i": 13, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.environmental-law"}
+{"i": 14, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.corporate-responsibility"}
+{"i": 15, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.international-agreements"}
+{"i": 16, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.risk-and-precaution"}
+{"i": 17, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.sustainable-business"}
+{"i": 18, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.consumption-debate"}
+{"i": 19, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.word-formation"}
+{"i": 20, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.meaning-context"}
+{"i": 21, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.identity-construction"}
+{"i": 22, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.cultural-belonging"}
+{"i": 23, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.heritage-debate"}
+{"i": 24, "action": "keep", "why": "No kana reading was provided; the gloss is simple and topic-consistent, and flag-level doubts resolve to keep.", "id": "ja.sent.multiculturalism"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.generational-identity"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.cultural-appropriation"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.hybrid-cultures"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.concept-definition"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.value-conflict"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.scenario-reasoning"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.consistency-checks"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.formal-versus-casual"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.politeness-scales"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.literary-register"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.style-imitation"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.comedy-timing"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.wordplay-creation"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.joke-ethics"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.absurd-humor"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.humor-essay"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.forgiveness-process"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.relationship-transitions"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ja.sent.cross-cultural-friendship"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ja.assess.kana-katakana"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ja.assess.describe-qualities"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ja.assess.tell-time"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ja.assess.politics-governance"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ja.assess.economics-work"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ja.assess.law-justice"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ja.assess.philosophy-ethics"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ja.assess.academic-skills"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ja.assess.academic-writing"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ja.assess.formal-correspondence"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.argue2.neveroyatnyy"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.argue2.slichenie"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.argue2.slichat"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.argue3.ischerpyayushche"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.argue3.vjorstka"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.argue3.izdatelstvo"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.argue3.kavychki"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.argue3.dvoetochie"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.argue4.vveshennyy"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.argue4.produmannyy"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.argue4.pryamaya"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.comparisons.bolshe"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.comparisons.menshe"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.comparisons.lushche"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.comparisons.korotche"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.comparisons.tyazhelee"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.comparisons.pojetomu"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.critical.zalog"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.critical.rod"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.critical2.sderzhannyy"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.critical3.podozrevaemyy"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.critical3.obvinyaemyy"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.critical3.ustav"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.critical3.fond"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.critical4.naitie"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.cult.verovanie"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.cult.tyl"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.cult.opolchenie"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.cult.shlem"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.cult.mirosvospriyatie"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.cult.pricezhij"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.cult.bilingv"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.culture.roman"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.culture.publika"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.culture.zapominayushchijsya"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.culture.dekoracii"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.family.sestra"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.family.doch"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.family.mat"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.family.rodstvennitsa"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.family.yey"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.family.muzh"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.family.zhena"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.feelings.podderzhat"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.future.pozhe"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.future.inache"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.future.uluchshitsya"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.future.ukhudshitsya"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.future.sobiraetsya"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.future2.plyus"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.future2.minus"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.future2.strast"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.home.palto"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.home.botinki"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.home.teatr"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.housing.teplo"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.instructions.slomannyi"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.instructions.gotovo"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.media.auditoriya"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.media.svodka"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.messages.sms"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.messages2.vo-vtoryh"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.messages2.navernoe"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.messages2.po-moemu"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.messages2.navernyaka"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.messages2.verno"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.narration.dnyom"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.narration.ranjshe"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.narration.pomnitsya"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.narration2.neznakomy"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.narration2.zont"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.narration2.polnoch"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.narration2.vremena"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.neg.otkazyvat"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.neg.konkurentnyy"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.neg.razmenyat"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.neg.obyazyvayushchiy"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.neg.utochnyayushchiy"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.neg.obobshchayushchiy"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.neg.slazhennyy"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.neg.sygrannyy"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.neg.vzaimosvyazannyy"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.opinions.dannye"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.opinions.menshinstvo"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.opinions.bolshinstvo"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.pastevents.pered"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.pastevents.vyhodnye"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.personal.kak-vas-zovut"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.problems.obmenyat"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.prof.zaverenie"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.prof.zaverennyy"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.prof.apostil"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.prof.registracionnyy"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.prof.sluzhebka"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.prof.nakopleniya"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.prof.polis"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.prof.sbor"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.prof.polnomochiya"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.prof.utverzhdennyy"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.prof.soglasovannyy"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.prof.paraf"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.prof.decret"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.prof.trudoustroennyy"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.rel.supruga"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.respect.vyderzhka"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.routines.vykhodnye"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.routines.obed"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.sci.postoyannaya"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.sci.bioraznoobrazie"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.sci.vozobnovlyaemyy"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.sci.smog"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.sci.otliv"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.sci.vetroenergetika"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.sci.pikovyy"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.sci.garantirovannyy"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.sci.zakonomernyy"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.sci.nebezopasnyy"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.soc.nuzhdayushchiysya"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.soc.peni"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.soc.obespechennyy"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.soc.centralizovannyy"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.soc.obshchina"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.soc.aktiv"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.soc.zasekrechennyy"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.soc.primirimyy"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.soc.faktologiya"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.socialplans.dogovorit"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.socialplans.doma"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.socialplans.pomnit"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.study2.infografika"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.study2.hronologiya"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.study2.sostavlyayushchaya"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.study2.petlya"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.study2.proobraz"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.study3.chernovoy"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.study3.rabochiy"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.study3.vspomagatelnyy"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.style.lest"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.style.nepreryvnost"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.style.kupura"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.style.vychitchik"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.summary.sut2"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.summary2.titul"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.synthesis.obshchestvo"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.synthesis.tsitatnik"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.synthesis4.zamer"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.synthesis4.kollekciya"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.synthesis4.nakidka"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.timeplans.yanvar"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.timeplans.pozdravit"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.travel.bezopasnost"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.wellbeing.prostudit"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.work.brak"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.work.pererabotka"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.work.obyazannosti"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.work.kachestvo"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.work.syrjo"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.workstudy.meropriyatie"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.writing.registr"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.writing.indeks"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.writing.oblast"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.writing.nakladnaya"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.writing.komissiya"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ru.lex.writing2.trafaret"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.a2.u143"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.a2.u145"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.a2.u166"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.a2.u168"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.a2.u170"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b1.u217"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b1.u254"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b1.u267"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b1.u269"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b1.u283"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b1.u287"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b1.u297"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b1.u301"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b1.u392"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b1.u398"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b1.u400"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b2.u412"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b2.u459"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b2.u461"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b2.u462"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b2.u483"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b2.u500"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b2.u501"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b2.u503"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b2.u522"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b2.u528"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b2.u532"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b2.u574"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b2.u575"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b2.u591"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b2.u596"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ru.sent.b2.u611"}
+{"i": 0, "action": "keep", "why": "No clear grammar or meaning mismatch is evident from the available gloss.", "id": "ru.sent.b2.u613"}
+{"i": 1, "action": "keep", "why": "No clear grammar or meaning mismatch is evident from the available gloss.", "id": "ru.sent.b2.u617"}
+{"i": 2, "action": "keep", "why": "No clear grammar or meaning mismatch is evident from the available gloss.", "id": "ru.sent.b2.u621"}
+{"i": 3, "action": "keep", "why": "No clear grammar or meaning mismatch is evident from the available gloss.", "id": "ru.sent.b2.u622"}
+{"i": 4, "action": "keep", "why": "No clear grammar or meaning mismatch is evident from the available gloss.", "id": "ru.sent.b2.u669"}
+{"i": 5, "action": "keep", "why": "No clear grammar or meaning mismatch is evident from the available gloss.", "id": "ru.sent.b2.u672"}
+{"i": 6, "action": "keep", "why": "No clear grammar or meaning mismatch is evident from the available gloss.", "id": "ru.sent.b2.u685"}
+{"i": 7, "action": "keep", "why": "No clear grammar or meaning mismatch is evident from the available gloss.", "id": "ru.sent.b2.u688"}
+{"i": 8, "action": "keep", "why": "No clear grammar or meaning mismatch is evident from the available gloss.", "id": "ru.sent.b2.u716"}
+{"i": 9, "action": "keep", "why": "No clear grammar or meaning mismatch is evident from the available gloss.", "id": "ru.sent.b2.u752"}
+{"i": 10, "action": "keep", "why": "No clear grammar or meaning mismatch is evident from the available gloss.", "id": "ru.sent.b2.u758"}
+{"i": 11, "action": "keep", "why": "No clear grammar or meaning mismatch is evident from the available gloss.", "id": "ru.sent.b2.u759"}
+{"i": 12, "action": "keep", "why": "No clear grammar or meaning mismatch is evident from the available gloss.", "id": "ru.sent.b2.u783"}
+{"i": 13, "action": "keep", "why": "No clear grammar or meaning mismatch is evident from the available gloss.", "id": "ru.sent.b2.u790"}
+{"i": 14, "action": "keep", "why": "No clear grammar or meaning mismatch is evident from the available gloss.", "id": "ru.sent.b2.u796"}
+{"i": 15, "action": "keep", "why": "No clear grammar or meaning mismatch is evident from the available gloss.", "id": "ru.sent.b2.u804"}
+{"i": 16, "action": "keep", "why": "No clear grammar or meaning mismatch is evident from the available gloss.", "id": "ru.sent.b2.u805"}
+{"i": 17, "action": "keep", "why": "No Russian example or gloss is provided, so no clear grammar or meaning mismatch can be identified.", "id": "ru.assess.on-ramp.classroom-writing"}
+{"i": 18, "action": "keep", "why": "No Russian example or gloss is provided, so no clear grammar or meaning mismatch can be identified.", "id": "ru.assess.a2.connected-messages-writing"}
+{"i": 19, "action": "keep", "why": "No Russian example or gloss is provided, so no clear grammar or meaning mismatch can be identified.", "id": "ru.assess.b1.info-summary-writing2"}
+{"i": 20, "action": "keep", "why": "No Russian example or gloss is provided, so no clear grammar or meaning mismatch can be identified.", "id": "ru.assess.b1.future-conditions-reading"}
+{"i": 21, "action": "keep", "why": "No Russian example or gloss is provided, so no clear grammar or meaning mismatch can be identified.", "id": "ru.assess.b1.extended-writing-reading2"}
+{"i": 22, "action": "keep", "why": "No Russian example or gloss is provided, so no clear grammar or meaning mismatch can be identified.", "id": "ru.assess.b1.extended-writing-writing2"}
+{"i": 23, "action": "keep", "why": "No Russian example or gloss is provided, so no clear grammar or meaning mismatch can be identified.", "id": "ru.assess.b2.critical-reading-writing3"}
+{"i": 24, "action": "keep", "why": "No Russian example or gloss is provided, so no clear grammar or meaning mismatch can be identified.", "id": "ru.assess.b2.critical-reading-reading4"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ru.assess.b2.critical-reading-writing4"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ru.assess.b2.academic-study-writing4"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.abst.zenso"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.abst.hantai5"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.abst.kosetsu"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.abst.fuyu2"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.abst2.kenso"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.abst2.juri"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.abst2.gaisetsu"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.abst2.shuuyou"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.abst3.koten"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.abst3.kyoka"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.abst3.chujutsu"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.academic.sakuho"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.academic2.kairyou"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.academic2.kikaku"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.academic2.kyouyoku"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.academic2.kyozetsu"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.admin.taishu-kin"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.advice2.suusei"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.advice2.youchuu"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.advice2.kokuhan"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.advice2.sengaku"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.advice2.kyoushou"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.advice2.tetsudo"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.advice2.mijika"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.art2.kadou"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.art2.melodi"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.art2.minamo"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.art2.shitsunai"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.art2.fukushoku"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.art2.shiminkou"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.body.kaffa"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.body.shokukan"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.body.yogen"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.body.fukatsu"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.body.taisha"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.body.shinryoujo"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.city.kanen"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.communication.app"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.communication.bappu"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.communication.seion"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.communication.yakushi"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.communication.taigi"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.critique.puburisshu"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.critique.shieki"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.critique.tsuugou"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.critique.binzuke"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.critique.suiryoku"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.critique.doushutsu"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.critique.senryou"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.cult2.hyosho"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.cult2.rikken2"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.cult2.kizon2"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.cult2.shingakusha"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.culture.koge"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.culture.teaji"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.culture.saiho"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.culture.fuhaku"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.culture.shaji"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.culture.tsuuke"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.culture2.douhankai"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.culture2.kansen"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.culture2.shugo"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.culture2.engi"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.culture2.hassou"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.culture2.kousatsu"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.debate.shutten"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.economy.mugyou"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.economy.shijo"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.economy.baika"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.economy.uchinage"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.economy.shibora"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.economy.kyougyou"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.economy.jiken"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.admin.kinen-bi"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.admin.kin-yuu"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.admin.nyuusatsu"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.admin.kyoufu-kin"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.body.seisatsu"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.city.kuyakusho"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.city.mibai"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.debate.koryo"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.debate.kento"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.debate.jundo"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.debate.jissai"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.debate.shojitsu"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.debate.ronsou"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.debate.hifun"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.debate.fusan"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.debate.joretsu"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.debate2.kaisou2"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.debate2.shutten2"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.economy3.seiri"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu.kenkai"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu.jugyou-ryaku"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu.shishou"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.sentai"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.danshaku"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.ronshu"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.kenji"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.kronji"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.zensho"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.shukufuku"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.ryuji"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.rissho"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.denja"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.mouhibiki"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.shicho"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.kashu"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.kashu-sho"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu4.kyousei2"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu4.kokusai"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu4.bunkachi"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu4.zentai"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.emotion.ousetsu"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.emotion.kenmei"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.emotion.ki-oku"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.emotion.genkotsu"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.emotion2.seika"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.ent.onsen-nyuujou"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.ent.supa"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env.risaikuru"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env.puratsu"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env.ene"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env.kiko-ene"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env.ikubutsu"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env.seita"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env.kiko"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env.ene-ki"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env.koushou"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env3.cooling"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env3.shifuku"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env3.taniso2"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env3.shakubutsu"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env3.teiki"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env3.kisan"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env3.chiseki"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env4.shakai-kinou"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env4.kaken"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.film.joryu"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.film.onsetsu"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.film.kouchou"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.film2.taifu"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.film2.kagayaki"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.food.supun"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.food.furukon"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.food.houshi"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.kenta"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.houtei"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.senkyuu"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.gengou"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.yakku"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.yakuseki"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.chukai"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu2.fuyuujunou"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu3.saidou"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu3.choukai"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.edu3.bunkou"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env.seisi"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env2.bousai-houzu"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env2.mizu-bubun"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env2.resucha"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env2.shinan"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env2.yokei"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env4.seikatsu-fushuu"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env4.kenso"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env4.ikou"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env4.yoka"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env4.yueki"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env4.kyougi"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env4.kison"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.env4.fuhou"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.film.hyouban"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.film.kanyuu"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.film.kanyuu2"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.film.chokusatsu"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.film.fukuzai"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.film.hakyuu"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.formal.guchou"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.formal.hatsuu"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.formal.gankou"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.formal2.ansho"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.formal2.iansho"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.formal2.gankajou"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.formal2.chuuomimai"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.formal2.shougi"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.global.yusei"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.global2.kutsu2"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.global2.shigai2"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.global2.kokusai3"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.global2.hoitsu"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.global2.koso"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.health.byouki"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.health2.jousho"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.health2.koku2"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.health2.junou"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.health2.kessha"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.health2.fuka"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.health2.shinryou2"}
+{"i": 0, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.health3.junren"}
+{"i": 1, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.health3.taikyu2"}
+{"i": 2, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.health3.choushin"}
+{"i": 3, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.health3.uebi"}
+{"i": 4, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.health3.ureba"}
+{"i": 5, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.health3.hanko"}
+{"i": 6, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.history2.senjo"}
+{"i": 7, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.history2.kinkyo"}
+{"i": 8, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.history2.ihan"}
+{"i": 9, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.history2.soshi"}
+{"i": 10, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.history2.mousho"}
+{"i": 11, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.history2.kuchikami"}
+{"i": 12, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.history3.taiou"}
+{"i": 13, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.history3.bunkyou"}
+{"i": 14, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.history3.shimei"}
+{"i": 15, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.humor2.kyofu"}
+{"i": 16, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.law.houkou"}
+{"i": 17, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.law.shikoku"}
+{"i": 18, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.law.sonin"}
+{"i": 19, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.law.hoiho"}
+{"i": 20, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.law.siso"}
+{"i": 21, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.law.soshou"}
+{"i": 22, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.law.kokuso"}
+{"i": 23, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.law2.fukumu"}
+{"i": 24, "action": "keep", "why": "verify_failed_keep", "id": "ja.lex.law2.yakujo"}

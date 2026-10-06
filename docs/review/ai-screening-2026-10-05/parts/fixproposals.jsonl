@@ -1,0 +1,162 @@
+{"id": "ja.sent.oral-history", "i": 0, "action": "fix_reading", "value": "こうじょう を とりました。", "why": "The gloss calls for “oral tradition,” which is こうじょう (口承); くちかみ does not match that meaning."}
+{"id": "ja.sent.demographic-shift", "i": 1, "action": "fix_reading", "value": "じんこう の げんしょう について かきました。", "why": "“Population decline” requires げんしょう (減少), not げんこう."}
+{"id": "ja.sent.migration-debate", "i": 2, "action": "fix_reading", "value": "さんか の しゅし を かきました。", "why": "“Gist” is しゅし (趣旨); ちゅうし would mean something like cancellation/stoppage."}
+{"id": "ja.sent.work-culture-change", "i": 3, "action": "keep", "value": "", "why": "こうよう can correspond to 雇用, matching “employment information.”"}
+{"id": "ja.sent.social-innovation", "i": 4, "action": "keep", "value": "", "why": "かくしん can correspond to 革新, matching “innovation.”"}
+{"id": "ja.sent.community-bonds", "i": 5, "action": "keep", "value": "", "why": "きょうどう can correspond to 協同/共同, matching “cooperation.”"}
+{"id": "ja.sent.public-budget", "i": 6, "action": "keep", "value": "", "why": "よさん corresponds to 予算, matching “budget.”"}
+{"id": "ja.sent.data-ethics", "i": 7, "action": "keep", "value": "", "why": "こじん corresponds to 個人, matching “personal information.”"}
+{"id": "ja.sent.climate-science", "i": 8, "action": "keep", "value": "", "why": "きこう corresponds to 気候, matching “climate.”"}
+{"id": "ja.sent.assessment-debate", "i": 9, "action": "keep", "value": "", "why": "せいせき の てんじ can match “display of grades” (成績の展示)."}
+{"id": "ru.sent.b1.u287", "i": 0, "action": "keep", "value": "", "why": "The sentence is grammatical, and 'совещание' can reasonably be glossed as a work meeting."}
+{"id": "ru.sent.b1.u400", "i": 1, "action": "keep", "value": "", "why": "The sentence is grammatical; 'связка' can mean a link/connection in some contexts, though it also has other meanings."}
+{"id": "ru.sent.b2.u459", "i": 2, "action": "keep", "value": "", "why": "The sentence is grammatical, and 'род' can mean gender, especially in a linguistic context."}
+{"id": "ru.sent.b2.u461", "i": 3, "action": "keep", "value": "", "why": "The sentence is grammatical, and 'установка' can mean attitude/mindset."}
+{"id": "ru.sent.b2.u522", "i": 4, "action": "keep", "value": "", "why": "The sentence is grammatical, and 'замер' means a measurement or taking measurements."}
+{"id": "ru.sent.b2.u591", "i": 5, "action": "keep", "value": "", "why": "The sentence is grammatical; 'параф' is rare but can refer to initialing/initial signature."}
+{"id": "ru.sent.b2.u672", "i": 6, "action": "keep", "value": "", "why": "The sentence is grammatical; 'актив' can mean the active core or active part, depending on context."}
+{"id": "ru.sent.b2.u688", "i": 7, "action": "keep", "value": "", "why": "The sentence is grammatical, and 'фактология' can be glossed as the fact base or factual material."}
+{"id": "ru.sent.b2.u716", "i": 8, "action": "keep", "value": "", "why": "The sentence is grammatical, and 'смог' means smog."}
+{"id": "ru.sent.b2.u752", "i": 9, "action": "keep", "value": "", "why": "The sentence is grammatical, and 'подлинность' means authenticity."}
+{"id": "ja.lex.abst2.juri", "i": 0, "action": "fix_gloss", "value": "acceptance", "why": "じゅり is a real reading meaning acceptance; gloss logic is wrong."}
+{"id": "ja.lex.abst2.gaisetsu", "i": 1, "action": "fix_gloss", "value": "overview", "why": "がいせつ means overview/outline, not generalization."}
+{"id": "ja.lex.abst2.shuuyou", "i": 2, "action": "fix_gloss", "value": "accommodation", "why": "しゅうよう means accommodation, not generalization."}
+{"id": "ja.lex.abst3.koten", "i": 3, "action": "fix_gloss", "value": "point of intersection", "why": "こうてん means point of intersection, not key point."}
+{"id": "ja.lex.abst3.kyoka", "i": 4, "action": "fix_gloss", "value": "strengthening", "why": "きょうか means strengthening, not commonality."}
+{"id": "ja.lex.abst3.chujutsu", "i": 5, "action": "fix_reading", "value": "ちゅうしゅつ", "why": "ちゅうじゅつ is not real; 抽出 (ちゅうしゅつ) matches quotation/excerpt."}
+{"id": "ja.lex.academic.sakuho", "i": 6, "action": "fix_gloss", "value": "manners", "why": "さくほう means manners/etiquette, not method/technique."}
+{"id": "ja.lex.academic2.kairyou", "i": 7, "action": "fix_gloss", "value": "improvement", "why": "かいりょう means improvement, not understanding."}
+{"id": "ja.lex.academic2.kyouyoku", "i": 8, "action": "fix_reading", "value": "こうきしん", "why": "curiosity is 好奇心 (こうきしん); きょうよく is not a real reading."}
+{"id": "ja.lex.academic2.kyozetsu", "i": 9, "action": "fix_gloss", "value": "refusal", "why": "きょぜつ means refusal/rejection, not quotation/citation."}
+{"id": "ja.lex.admin.taishu-kin", "i": 0, "action": "fix_reading", "value": "ひきだしきん", "why": "The reading is not attested; the gloss suggests 引出金 (withdrawal money)."}
+{"id": "ja.lex.advice2.suusei", "i": 1, "action": "fix_gloss", "value": "tendency; trend", "why": "すうせい means tendency/trend, not persuasion."}
+{"id": "ja.lex.advice2.youchuu", "i": 2, "action": "fix_gloss", "value": "punishment (of an enemy); chastisement; winding; zigzag", "why": "ようちょう does not mean negotiation; its attested senses are punishment/chastisement/winding/zigzag."}
+{"id": "ja.lex.advice2.kokuhan", "i": 3, "action": "fix_gloss", "value": "black spot; black speck", "why": "こくはん means black spot/speck, not warning."}
+{"id": "ja.lex.advice2.sengaku", "i": 4, "action": "fix_gloss", "value": "shallow knowledge; superficial learning", "why": "せんがく means shallow knowledge/superficial learning, not preference."}
+{"id": "ja.lex.advice2.tetsudo", "i": 5, "action": "fix_gloss", "value": "railroad; railway; rail transport", "why": "てつどう means railroad/railway, not a verb meaning to help out."}
+{"id": "ja.lex.art2.kadou", "i": 6, "action": "fix_gloss", "value": "vortex; mobile; moveable; versification", "why": "かどう does not mean calligraphy; its attested senses are vortex/mobile/moveable/versification."}
+{"id": "ja.lex.art2.minamo", "i": 7, "action": "fix_gloss", "value": "water's surface", "why": "みなも means water's surface, not grace/elegance."}
+{"id": "ja.lex.art2.shitsunai", "i": 8, "action": "fix_gloss", "value": "indoor; inside the room", "why": "しつない means indoor/inside the room, not interior design."}
+{"id": "ja.lex.art2.fukushoku", "i": 9, "action": "fix_gloss", "value": "side dish; supplementary food; reinstatement; reappointment", "why": "ふくしょく means side dish/supplementary food or reinstatement/reappointment, not interior decoration."}
+{"id": "ja.lex.art2.shiminkou", "i": 0, "action": "delete", "value": "", "why": "No real Japanese word with reading しみんこう matches 'civic demand'."}
+{"id": "ja.lex.body.kaffa", "i": 1, "action": "fix_gloss", "value": "grant", "why": "かふ is a real reading; 'cough' is not a sense of かふ."}
+{"id": "ja.lex.body.shokukan", "i": 2, "action": "fix_gloss", "value": "repayment", "why": "しょうかん means repayment/redemption, not digestion."}
+{"id": "ja.lex.body.yogen", "i": 3, "action": "fix_gloss", "value": "prediction", "why": "よげん means prediction/prophecy, not prevention."}
+{"id": "ja.lex.body.fukatsu", "i": 4, "action": "fix_gloss", "value": "activation", "why": "ふかつ means activation/stimulation, not constipation."}
+{"id": "ja.lex.body.taisha", "i": 5, "action": "fix_gloss", "value": "resignation", "why": "たいしゃ means resignation/leaving work, not absence."}
+{"id": "ja.lex.body.shinryoujo", "i": 6, "action": "fix_gloss", "value": "clinic", "why": "しんりょうじょ means clinic, not waiting room."}
+{"id": "ja.lex.city.kanen", "i": 7, "action": "fix_gloss", "value": "adding years", "why": "かねん can mean adding years/flammable, not this year."}
+{"id": "ja.lex.communication.bappu", "i": 8, "action": "fix_gloss", "value": "penalty payment", "why": "ばっぷ means penalty payment, not map code."}
+{"id": "ja.lex.communication.seion", "i": 9, "action": "fix_gloss", "value": "correct pronunciation", "why": "せいおん means correct pronunciation or tranquility, not voice sound."}
+{"id": "ja.lex.admin.kin-yuu", "i": 0, "action": "fix_gloss", "value": "finance", "why": "きんゆう is a real word meaning finance/financing, not deposit."}
+{"id": "ja.lex.admin.nyuusatsu", "i": 1, "action": "fix_gloss", "value": "bid", "why": "にゅうさつ means bid/tender, not income."}
+{"id": "ja.lex.admin.kyoufu-kin", "i": 2, "action": "fix_reading", "value": "じゅぎょうりょう", "why": "きょうふきん is not a real word; tuition is じゅぎょうりょう."}
+{"id": "ja.lex.body.seisatsu", "i": 3, "action": "fix_gloss", "value": "reflection", "why": "せいさつ is attested as reflection/consideration, not sanitation."}
+{"id": "ja.lex.city.kuyakusho", "i": 4, "action": "fix_gloss", "value": "ward office", "why": "くやくしょ means ward office, not city hall."}
+{"id": "ja.lex.city.mibai", "i": 5, "action": "fix_reading", "value": "かんしカメラ", "why": "みばい is not a real word; surveillance camera is かんしカメラ."}
+{"id": "ja.lex.debate.koryo", "i": 6, "action": "fix_gloss", "value": "amount of light", "why": "こうりょう is attested as amount/quantity of light, not talented."}
+{"id": "ja.lex.debate.kento", "i": 7, "action": "fix_gloss", "value": "prefectural capital", "why": "けんと means prefectural capital, not hardship."}
+{"id": "ja.lex.debate.jundo", "i": 8, "action": "fix_gloss", "value": "pure copper", "why": "じゅんどう means pure copper, not order."}
+{"id": "ja.lex.debate.jissai", "i": 9, "action": "fix_reading", "value": "じじつ", "why": "じつさい is not a real word; facts is じじつ."}
+{"id": "ja.lex.film.joryu", "i": 0, "action": "fix_gloss", "value": "woman (writer, artist, aviator, etc.)", "why": "The reading じょりゅう is real, but the gloss 'genre' is wrong."}
+{"id": "ja.lex.film.onsetsu", "i": 1, "action": "fix_gloss", "value": "syllable", "why": "おんせつ means syllable, not 'sound setting'."}
+{"id": "ja.lex.film.kouchou", "i": 2, "action": "fix_gloss", "value": "migratory bird", "why": "こうちょう is a real reading for bird-related senses, not 'growth'."}
+{"id": "ja.lex.film2.taifu", "i": 3, "action": "fix_gloss", "value": "high steward", "why": "たいふ is a real reading with official/title senses, not 'richness, depth'."}
+{"id": "ja.lex.film2.kagayaki", "i": 4, "action": "fix_reading", "value": "かがやき", "why": "The gloss 'brightness, glow' matches 輝き (かがやき); かぎやき is not a real reading."}
+{"id": "ja.lex.food.supun", "i": 5, "action": "fix_reading", "value": "スプーン", "why": "The gloss 'spoon' matches スプーン; すぷん is not a real reading."}
+{"id": "ja.lex.food.furukon", "i": 6, "action": "fix_reading", "value": "フォーク", "why": "The gloss 'fork' matches フォーク; ふろーく is not a real reading."}
+{"id": "ja.lex.food.houshi", "i": 7, "action": "fix_gloss", "value": "service", "why": "ほうし means service/ministry, not 'simmering'."}
+{"id": "ja.lex.edu2.kenta", "i": 8, "action": "fix_reading", "value": "けんとう", "why": "The gloss 'consideration' matches 検討 (けんとう); けんた is not a real reading."}
+{"id": "ja.lex.edu2.houtei", "i": 9, "action": "fix_gloss", "value": "legal", "why": "ほうてい means legal/designated by law, not 'definition'."}
+{"id": "ja.lex.formal2.ansho", "i": 0, "action": "fix_gloss", "value": "dark place", "why": "The reading あんしょ is real and means dark place/unlit spot, not reply letter."}
+{"id": "ja.lex.formal2.iansho", "i": 1, "action": "fix_reading", "value": "みまいじょう", "why": "The gloss 'condolence letter' matches 見舞い状, read みまいじょう."}
+{"id": "ja.lex.formal2.gankajou", "i": 2, "action": "fix_reading", "value": "ねんがじょう", "why": "The gloss 'year-end greeting letter' matches 年賀状, read ねんがじょう."}
+{"id": "ja.lex.formal2.chuuomimai", "i": 3, "action": "fix_reading", "value": "しょちゅうみまい", "why": "The gloss 'midsummer greeting' matches 暑中見舞い, read しょちゅうみまい."}
+{"id": "ja.lex.formal2.shougi", "i": 4, "action": "fix_gloss", "value": "conference", "why": "The reading しょうぎ can mean conference/consultation, not argument or dispute."}
+{"id": "ja.lex.global2.kutsu2", "i": 5, "action": "fix_gloss", "value": "to eat", "why": "The reading くう is a verb meaning to eat, not housing shortage."}
+{"id": "ja.lex.global2.shigai2", "i": 6, "action": "fix_gloss", "value": "outside the city", "why": "The reading しがい means outside the city/suburbs, not over-tourism."}
+{"id": "ja.lex.global2.kokusai3", "i": 7, "action": "fix_gloss", "value": "government bonds", "why": "The reading こくさい means government bonds/national debt, not internationality."}
+{"id": "ja.lex.global2.hoitsu", "i": 8, "action": "fix_gloss", "value": "self-indulgence", "why": "The reading ほういつ means self-indulgence/dissoluteness, not law or legislation."}
+{"id": "ja.lex.global2.koso", "i": 9, "action": "fix_gloss", "value": "dry grass", "why": "The reading こそう can mean dry grass/drying up, not construction or organization."}
+{"id": "ja.lex.health.byouki", "i": 0, "action": "fix_gloss", "value": "illness; disease", "why": "びょうき is a noun meaning illness/disease, not an adjective meaning sick/ill."}
+{"id": "ja.lex.health2.jousho", "i": 1, "action": "fix_gloss", "value": "emotion; feeling; atmosphere", "why": "じょうしょ does not mean hot water; it can mean emotion/feeling/atmosphere."}
+{"id": "ja.lex.health2.koku2", "i": 2, "action": "fix_gloss", "value": "period of time", "why": "こく is not meal; it can mean a period of time."}
+{"id": "ja.lex.health2.junou", "i": 3, "action": "fix_gloss", "value": "acceptance; receiving", "why": "じゅのう means acceptance/receiving, not flexible."}
+{"id": "ja.lex.health2.kessha", "i": 4, "action": "fix_gloss", "value": "association; society", "why": "けっしゃ means association/society, not facility."}
+{"id": "ja.lex.health2.fuka", "i": 5, "action": "fix_gloss", "value": "wrong; bad; improper", "why": "ふか means wrong/bad/improper, not depth."}
+{"id": "ja.lex.health2.shinryou2", "i": 6, "action": "fix_gloss", "value": "diagnosis and treatment", "why": "しんりょう means diagnosis and treatment, not counseling."}
+{"id": "ja.lex.health3.junren", "i": 7, "action": "fix_reading", "value": "れんしゅう", "why": "じゅんれん is not a real word; practice is れんしゅう."}
+{"id": "ja.lex.health3.taikyu2", "i": 8, "action": "fix_gloss", "value": "endurance; persistence", "why": "たいきゅう does not mean absence; it can mean endurance/persistence."}
+{"id": "ja.lex.health3.choushin", "i": 9, "action": "fix_gloss", "value": "minute hand", "why": "ちょうしん does not mean dieting; it can mean minute hand."}
+{"id": "ja.lex.humor2.kyofu", "i": 0, "action": "fix_gloss", "value": "fear", "why": "Reading きょうふ is real and means fear/dread, not absurdity."}
+{"id": "ja.lex.law.houkou", "i": 1, "action": "fix_gloss", "value": "public service", "why": "Reading ほうこう is real and has senses like public service/live-in service, not regulation."}
+{"id": "ja.lex.law.shikoku", "i": 2, "action": "fix_gloss", "value": "Shikoku", "why": "Reading しこく is real and refers to Shikoku, not a prosecution office."}
+{"id": "ja.lex.law.sonin", "i": 3, "action": "fix_reading", "value": "そんがい", "why": "Reading そんにん is not real; gloss damage matches 損害 (そんがい)."}
+{"id": "ja.lex.law.hoiho", "i": 4, "action": "fix_reading", "value": "たいほ", "why": "Reading ほいほ is not real; gloss arrest matches 逮捕 (たいほ)."}
+{"id": "ja.lex.law.siso", "i": 5, "action": "fix_gloss", "value": "graceful", "why": "Reading そそ is real and means graceful/neat, not litigation."}
+{"id": "ja.lex.law2.fukumu", "i": 6, "action": "fix_gloss", "value": "to contain", "why": "Reading ふくむ is real and means to contain/comprise, not duties."}
+{"id": "ja.lex.law2.yakujo", "i": 7, "action": "fix_gloss", "value": "agreement", "why": "Reading やくじょう is real and means agreement/stipulation/contract, not role."}
+{"id": "ja.lex.law2.hifu", "i": 8, "action": "fix_gloss", "value": "skin", "why": "Reading ひふ is real and means skin, not expenses."}
+{"id": "ja.lex.law2.shuukyu", "i": 9, "action": "fix_gloss", "value": "football", "why": "Reading しゅうきゅう is real and can mean football, not levy."}
+{"id": "ja.lex.law2.kansoku", "i": 0, "action": "fix_gloss", "value": "observation", "why": "かんそく (観測) means observation/survey/measurement, not supervision."}
+{"id": "ja.lex.law2.kosai", "i": 1, "action": "fix_gloss", "value": "association", "why": "こうさい (交際) means association/socializing, not public interest."}
+{"id": "ja.lex.law2.touzoku", "i": 2, "action": "fix_gloss", "value": "thief", "why": "とうぞく (盗賊) means thief/robber, not theft."}
+{"id": "ja.lex.law2.kyoka", "i": 3, "action": "fix_reading", "value": "きょか", "why": "Permission is 許可 (きょか); きょうか is not the reading for permission."}
+{"id": "ja.lex.law2.touhi", "i": 4, "action": "fix_gloss", "value": "escape", "why": "とうひ (逃避) means escape/evasion, not opposition."}
+{"id": "ja.lex.law2.kufuku", "i": 5, "action": "fix_reading", "value": "かふく", "why": "Restoration/recovery is 回復 (かふく); くふく is not a real reading."}
+{"id": "ja.lex.law2.zaimuko", "i": 6, "action": "fix_reading", "value": "ざいこ", "why": "Inventory is 在庫 (ざいこ); ざいむこ is not a real reading."}
+{"id": "ja.lex.leisure.pikunikku", "i": 7, "action": "fix_reading", "value": "ぴくにっく", "why": "Picnic is ピクニック (ぴくにっく); ぴくにくく is malformed."}
+{"id": "ja.lex.leisure.ryoushuu", "i": 8, "action": "fix_gloss", "value": "receipt", "why": "りょうしゅう (領収) means receipt, not travel/sightseeing tour."}
+{"id": "ja.lex.leisure.tabehou", "i": 9, "action": "fix_reading", "value": "たべあるき", "why": "Gourmet eating/food tour is 食べ歩き (たべあるき); たべほう is not a real reading."}
+{"id": "ja.lex.ling.shiteki", "i": 0, "action": "fix_gloss", "value": "pointing out", "why": "してき is a real reading; its gloss should be pointing out/identification, not point/mark."}
+{"id": "ja.lex.ling2.fuyuukyo", "i": 1, "action": "fix_reading", "value": "がいこくごきょういく", "why": "The gloss matches 外国語教育, whose kana reading is がいこくごきょういく."}
+{"id": "ja.lex.ling2.yakusha", "i": 2, "action": "fix_gloss", "value": "actor", "why": "やくしゃ means actor, not interpreter."}
+{"id": "ja.lex.ling3.taigen2", "i": 3, "action": "fix_gloss", "value": "noun", "why": "たいげん (体言) is a noun/substantive, not body/main part."}
+{"id": "ja.lex.lit.engoki", "i": 4, "action": "fix_reading", "value": "えんげき", "why": "Drama is 演劇, read えんげき."}
+{"id": "ja.lex.lit2.shanru", "i": 5, "action": "fix_reading", "value": "じゃんる", "why": "Genre is ジャンル, read じゃんる."}
+{"id": "ja.lex.academic.bunko", "i": 6, "action": "fix_gloss", "value": "paperback book", "why": "ぶんこ (文庫) means paperback book/library, not literature."}
+{"id": "ja.lex.academic.yougaki", "i": 7, "action": "fix_reading", "value": "ようごしゅう", "why": "The gloss matches 用語集, read ようごしゅう."}
+{"id": "ja.lex.academic.sansa", "i": 8, "action": "fix_gloss", "value": "major", "why": "さんさ is a JGSDF rank term, not reference/consultation."}
+{"id": "ja.lex.advice.sagen", "i": 9, "action": "fix_gloss", "value": "port", "why": "さげん (左舷) means port, not advice."}
+{"id": "ja.lex.global.kyousei3", "i": 0, "action": "fix_gloss", "value": "fully satisfied", "why": "The reading しゃくぜん is real, but the gloss 'ceasefire' does not match it."}
+{"id": "ja.lex.global.josei", "i": 1, "action": "fix_gloss", "value": "state of affairs", "why": "The reading じょうせい is real, but the gloss 'financial support' does not match it."}
+{"id": "ja.lex.global.aisou", "i": 2, "action": "fix_gloss", "value": "seeming", "why": "The reading そう is real, but the gloss 'conflict' does not match it."}
+{"id": "ja.lex.health2.yakubou", "i": 3, "action": "fix_reading", "value": "やっきょく", "why": "The reading やくぼう is not a real word; the correct reading for 'pharmacy' is やっきょく."}
+{"id": "ja.lex.health2.chouryou", "i": 4, "action": "fix_gloss", "value": "domination", "why": "The reading ちょうりょう is real, but the gloss 'portion' does not match it."}
+{"id": "ja.lex.health2.ryouki", "i": 5, "action": "fix_gloss", "value": "cool air", "why": "The reading りょうき is real, but the gloss 'convalescence' does not match it."}
+{"id": "ja.lex.health3.kyoubu", "i": 6, "action": "fix_gloss", "value": "chest", "why": "The reading きょうぶ is real, but the gloss 'club' does not match it."}
+{"id": "ja.lex.history.kakumei", "i": 7, "action": "fix_reading", "value": "かくめい", "why": "The reading かかくめい is not a real word; the correct reading for 'revolution' is かくめい."}
+{"id": "ja.lex.history2.shouzou", "i": 8, "action": "fix_gloss", "value": "Minister of Finance", "why": "The reading ぞうしょう is real, but the gloss 'statue' does not match it."}
+{"id": "ja.lex.history2.hoko", "i": 9, "action": "fix_gloss", "value": "walking", "why": "The reading ほこう is real, but the gloss 'emblem, symbol' does not match it."}
+{"id": "ja.lex.rel2.hokai", "i": 0, "action": "fix_gloss", "value": "collapse", "why": "ほうかい means collapse/crumbling, not embrace."}
+{"id": "ja.lex.rel2.shinko2", "i": 1, "action": "fix_gloss", "value": "faith", "why": "しんこう means faith/belief, not trust."}
+{"id": "ja.lex.rel2.sogo", "i": 2, "action": "fix_gloss", "value": "synthesis", "why": "そうごう means synthesis/combination, not mutual."}
+{"id": "ja.lex.rel2.shimpei", "i": 3, "action": "fix_gloss", "value": "new recruit", "why": "しんぺい means new recruit/conscript, not fair/equitable."}
+{"id": "ja.lex.rel2.chieki", "i": 4, "action": "fix_reading", "value": "ちえ", "why": "Wisdom is ちえ; ちえき is not a real word."}
+{"id": "ja.lex.rel.senzoku", "i": 5, "action": "fix_gloss", "value": "exclusive", "why": "せんぞく means exclusive/attached to, not ancestor."}
+{"id": "ja.lex.rel.fushi", "i": 6, "action": "fix_gloss", "value": "joint", "why": "ふし means joint/knuckle, not father and child."}
+{"id": "ja.lex.rel.yori-modosu", "i": 7, "action": "fix_reading", "value": "よりをもどす", "why": "To reconcile is よりをもどす; よりもどす is not a real word."}
+{"id": "ja.lex.rel.omoiden", "i": 8, "action": "fix_reading", "value": "おもいで", "why": "Memories is おもいで; おもいでん is not a real word."}
+{"id": "ja.lex.rel.tsuui", "i": 9, "action": "fix_gloss", "value": "unintentionally", "why": "つい means unintentionally/just now, not grief."}
+{"id": "ja.lex.urban2.koukou2", "i": 0, "action": "fix_gloss", "value": "greenhorn", "why": "こうこう is attested with senses like greenhorn; 'walking' does not match the reading."}
+{"id": "ja.lex.urban3.hisshou", "i": 1, "action": "fix_gloss", "value": "certain victory", "why": "ひっしょう means certain victory, not necessity/must."}
+{"id": "ja.lex.verbs.yomimasu", "i": 2, "action": "fix_reading", "value": "よむ", "why": "The masu form is not a dictionary headword; the real verb reading for 'to read' is よむ."}
+{"id": "ja.lex.verbs.kakimasu", "i": 3, "action": "fix_reading", "value": "かく", "why": "The masu form is not a dictionary headword; the real verb reading for 'to write; to draw' is かく."}
+{"id": "ja.lex.verbs.kimasu", "i": 4, "action": "fix_reading", "value": "くる", "why": "The masu form is not a dictionary headword; the real verb reading for 'to come' is くる."}
+{"id": "ja.lex.verbs.kaerimasu", "i": 5, "action": "fix_reading", "value": "かえる", "why": "The masu form is not a dictionary headword; the real verb reading for 'to go back; to come back' is かえる."}
+{"id": "ja.lex.verbs.arukimasu", "i": 6, "action": "fix_reading", "value": "あるく", "why": "The masu form is not a dictionary headword; the real verb reading for 'to walk' is あるく."}
+{"id": "ja.lex.verbs.kaimono-shimasu", "i": 7, "action": "fix_reading", "value": "かいものする", "why": "The masu form is not a dictionary headword; the real verb reading for 'to go shopping' is かいものする."}
+{"id": "ja.lex.verbs.kaimasu", "i": 8, "action": "fix_gloss", "value": "to buy more", "why": "The reading かいます matches a sense like 'to buy more', not simply 'to buy'."}
+{"id": "ja.lex.verbs.iimasu", "i": 9, "action": "fix_reading", "value": "いう", "why": "The masu form is not a dictionary headword; the real verb reading for 'to say' is いう."}
+{"id": "ja.lex.work.shigyou", "i": 0, "action": "fix_gloss", "value": "start of work", "why": "しぎょう means commencement/start of work, not working hours."}
+{"id": "ja.lex.work.oshiemasu", "i": 1, "action": "fix_reading", "value": "おしえる", "why": "The dictionary-form reading for 'to teach' is おしえる."}
+{"id": "ja.lex.work.kanryou-shimasu", "i": 2, "action": "fix_reading", "value": "かんりょうする", "why": "The dictionary-form reading for 'to finish/complete' is かんりょうする."}
+{"id": "ja.lex.work.taishita", "i": 3, "action": "delete", "value": "", "why": "No plausible real Japanese word matching both the form and 'not much' is recoverable."}
+{"id": "ja.lex.work2.shoubei", "i": 4, "action": "fix_gloss", "value": "polished rice", "why": "しょうべい means polished rice, not negotiation."}
+{"id": "ja.lex.work2.kouryaku", "i": 5, "action": "fix_gloss", "value": "capture", "why": "こうりゃく means capture/conquest, not strategy."}
+{"id": "ja.lex.work2.tanpin", "i": 6, "action": "fix_gloss", "value": "single item", "why": "たんぴん means single item, not shortage."}
+{"id": "ja.lex.work2.keiri", "i": 7, "action": "fix_gloss", "value": "accounting", "why": "けいり means accounting, not profit."}
+{"id": "ja.lex.work2.baibai", "i": 8, "action": "fix_gloss", "value": "trade", "why": "ばいばい means trade/buying and selling, not simply sales."}
+{"id": "ja.lex.work2.roushi", "i": 9, "action": "fix_gloss", "value": "labor and management", "why": "ろうし means labor and management, not labor union."}
+{"id": "ja.lex.work2.shouhou", "i": 0, "action": "fix_gloss", "value": "commercial law", "why": "しょうほう is a real reading (e.g. 商法), but it does not mean 'praise'; a valid gloss is 'commercial law'."}
+{"id": "ja.lex.work2.tenyaku", "i": 1, "action": "fix_gloss", "value": "applying eye drops", "why": "てんやく is a real reading (e.g. 点薬), but it does not mean 'job transfer'; a valid gloss is 'applying eye drops'."}

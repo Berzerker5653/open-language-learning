@@ -193,6 +193,15 @@ M2 — Local data and learner model
   archives + `catalog/preview-entries.json` (no URLs invented),
   `state/PREVIEW_READINESS.md`, first-run journey test
   (evidence: `state/evidence/PREVIEW-2026-10-03/`).
+- AI screening + corrections 2026-10-05/06 (owner-directed, not a ROADMAP id):
+  full model-a screening pass over all 433 batches of both reference packs
+  (1,252 flags); deterministic dictionary-gated fixes: 347 ja reading
+  corrections + 2 duplicate ids removed (ja-JP 0.2.0), ru stress/pos/gender
+  corrections (ru-RU 0.2.0); validator `duplicate_id` gap for v0.2 lexicon
+  entries fixed with regression test; owner cloud-model packet
+  (`docs/review/screening-packet-2026-10-05.zip`) stays optional second
+  opinion (evidence: `docs/review/ai-screening-2026-10-05/` incl.
+  `CORRECTIONS.md` + `applied.jsonl`).
 
 ## Next task
 
@@ -209,6 +218,15 @@ call (provider stays out of distributable builds). Content licensing
 is now decided: MIT for app code, CC-BY-4.0 for original pack content,
 CC-BY-SA-4.0 preserved for dictionary-derived data. `active_task`
 stays null: no ROADMAP task is unblocked without owner input.
+
+
+## Owner decision from 2026-10-05 direction
+
+- Content posture for now: AI-generated content ships as-is (labeled draft);
+  qualified-human verification is a future path, not a current blocker. The
+  purpose of model screening passes is error-hunting only — do not build
+  human-review queues/worklists for it. The cloud-model screening packet
+  (second model family) is optional owner-side verification.
 
 ## Owner decisions already resolved
 

@@ -26,6 +26,7 @@ build_pack() {
 }
 
 build_pack languages/ja-JP ja-jp-reference
+build_pack languages/ru-RU ru-ru-reference
 build_pack tests/fixtures/packs/ja-demo ja-demo
 build_pack tests/fixtures/packs/eo-demo eo-demo
 
