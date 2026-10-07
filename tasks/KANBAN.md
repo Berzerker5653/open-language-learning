@@ -70,7 +70,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | O-02 | JA-A1-003: qualified human review of A1 content — owner 2026-10-04: owner is a learner and cannot perform the gate. DECIDED 2026-10-04: review delegated to GitHub contributors (REVIEWER_KIT + reviews.jsonl records; validator enforces record on status flip; community-reviewer → `validated`, qualified-human → `verified`); all content ships labeled AI-generated/draft until merged review PRs promote it |
 | O-03 | Screen-reader matrix (NVDA/VoiceOver/Orca) + IME composition audit |
 | O-04 | REL-001 release gates incl. pedagogical review + speech calibration |
-| O-05 | GitHub publishing authorization for catalog assets — PARTIAL 2026-10-04: owner authorized repo upload as PRIVATE (`Berzerker5653/open-language-learning`, 82 commits pushed); switch to public deferred until owner declares ready; catalog `packs.json` publication still gated |
+| O-05 | GitHub publishing authorization for catalog assets — PARTIAL 2026-10-04: owner authorized repo upload as PRIVATE (`Berzerker5653/open-language-learning`, 82 commits pushed); 2026-10-07 owner authorized publishing both reference packs as private release assets (`org.openlanguage.ja-jp.reference-0.2.0`, `org.openlanguage.ru-ru.reference-0.2.0`; live `catalog/packs.json` wired — in-app anonymous download activates when repo goes public); switch to public deferred until owner declares ready |
 
 ## Sequencing rationale
 

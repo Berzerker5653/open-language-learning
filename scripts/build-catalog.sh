@@ -4,15 +4,16 @@
 # marker) from the exact archives. Artifacts and the draft catalog land in
 # dist/preview/ (gitignored).
 #
-# The live catalog (catalog/packs.json) stays empty until the owner publishes
-# the archives as GitHub release assets and merges entries (owner gate O-05;
-# see catalog/preview-entries.json governance and docs/packs/CONTRIBUTING.md).
+# The live catalog (catalog/packs.json) carries published entries. Publishing
+# archives as GitHub release assets is owner gate O-05; the owner authorized
+# PRIVATE-repo publishing 2026-10-07 (tags = {pack_id}-{version}, one release
+# per pack version; see catalog/packs.json and state/evidence/PACKS-PUBLISH-2026-10-07/).
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-# Placeholder release URL; the app enforces https + GitHub release hosts at
-# install. Replace with the real release URL when the owner publishes.
-URL_TEMPLATE="${URL_TEMPLATE:-https://github.com/open-language-learning-platform/desktop/releases/download/packs-placeholder/{filename}}"
+# Canonical release URL template matching the publish tags; the app enforces
+# https + GitHub release hosts at install.
+URL_TEMPLATE="${URL_TEMPLATE:-https://github.com/Berzerker5653/open-language-learning/releases/download/{pack_id}-{version}/{filename}}"
 
 mkdir -p dist/preview
 archives=()

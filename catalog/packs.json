@@ -1,5 +1,33 @@
 {
   "catalog_version": "0.1.0",
   "note": "Maintained community language-pack catalog. Entries point at versioned GitHub release assets (.lpk archives built with `langpack build`). The app fetches this file from the URL configured in LTS_PACK_CATALOG_URL, verifies every entry (https + GitHub release hosts only, pinned SHA-256, pinned size), and installs through the same validation gate as bundled packs. Add an entry only after `langpack test <pack>` passes and licenses/provenance records are complete. review_status is the author's claim ('community' or 'reviewed'); the app never upgrades it to verified trust.",
-  "packs": []
+  "packs": [
+    {
+      "author": "Open Language Learning Platform contributors",
+      "display_name": "Japanese Reference Pack (Draft)",
+      "license": "CC-BY-4.0",
+      "locale": "ja-JP",
+      "min_sdk_version": "0.1.0",
+      "pack_id": "org.openlanguage.ja-jp.reference",
+      "review_status": "community",
+      "sha256": "0a6c467df5e840356fe028f7c72dfbfbafadf9db2c8c33c5fee602f50224a1dd",
+      "size_bytes": 850167,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.2.0/ja-jp-reference-0.2.0.lpk",
+      "version": "0.2.0"
+    },
+    {
+      "author": "Open Language Learning Platform contributors",
+      "display_name": "Russian Reference Pack (Draft)",
+      "license": "CC0-1.0",
+      "locale": "ru-RU",
+      "min_sdk_version": "0.1.0",
+      "pack_id": "org.openlanguage.ru-ru.reference",
+      "review_status": "community",
+      "sha256": "6209a9bd27efbaf6183d08c13374a253b82c957fe7ca6412a136d8a0c3606dc5",
+      "size_bytes": 890005,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.2.0/ru-ru-reference-0.2.0.lpk",
+      "version": "0.2.0"
+    }
+  ],
+  "tested_platforms": ["linux"]
 }

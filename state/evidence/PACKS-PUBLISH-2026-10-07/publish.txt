@@ -1,0 +1,43 @@
+Pack publishing to GitHub (private) — 2026-10-07
+Owner authorization: "get both language packs added to github as private for now" (O-05 extension).
+
+Repo: Berzerker5653/open-language-learning (visibility: PRIVATE, verified via gh).
+Source commit: 0a16274 (+ this commit for ru manifest authors field).
+
+Releases (tags = {pack_id}-{version}, one release per pack version):
+- org.openlanguage.ja-jp.reference-0.2.0
+  asset ja-jp-reference-0.2.0.lpk  sha256 0a6c467df5e840356fe028f7c72dfbfbafadf9db2c8c33c5fee602f50224a1dd  850167 bytes
+- org.openlanguage.ru-ru.reference-0.2.0
+  asset ru-ru-reference-0.2.0.lpk  sha256 6209a9bd27efbaf6183d08c13374a253b82c957fe7ca6412a136d8a0c3606dc5  890005 bytes
+  (rebuilt once: ru manifest gained authors field; validate/lint/test 0 errors before rebuild; asset replaced)
+
+Release notes carry honest labeling: draft review status, AI-screening history, license
+(ja CC-BY-4.0, ru CC0-1.0), build provenance (deterministic build from commit via
+scripts/build-catalog.sh), install-gate description.
+
+Catalog wiring:
+- scripts/build-catalog.sh URL_TEMPLATE now canonical:
+  https://github.com/Berzerker5653/open-language-learning/releases/download/{pack_id}-{version}/{filename}
+- catalog/packs.json (live): 2 entries merged via `langpack catalog` from the exact archives.
+- catalog/preview-entries.json: regenerated with real URLs; unpublished eo-demo/ja-demo
+  placeholder entries removed (no release assets exist for them).
+
+Verification:
+- Deterministic build: rebuilt hashes match committed preview-entries hashes (ja unchanged;
+  ru changed only by the authors-field edit).
+- Anonymous GET of asset URL: HTTP 404 (private-repo gate — expected).
+- Authenticated API download (`gh release download`): sha256 + size match catalog entries
+  exactly for both packs.
+- App-side gates: `cargo test -p lts-desktop --lib` 51 green incl.
+  redirect_hops_stay_on_allowlisted_hosts_for_downloads (github.com -> objects CDN hop
+  allowed, evil-host bounce + http downgrade rejected); entry hosts (github.com) are in
+  ALLOWED_HOSTS; catalog file URL itself is operator-configured (https-only).
+
+Known limitation (private visibility, by design until owner flips public):
+- The app fetches the catalog and assets WITHOUT credentials. Against the private repo both
+  the raw catalog URL and the release asset URLs return 404 anonymously, so the in-app
+  catalog flow shows honest offline/no-catalog status until the repo is public.
+- The download pipeline is fully verified server-side (hashes/sizes/URLs correct); the last
+  mile (anonymous in-app fetch) activates automatically when the repo goes public.
+- Interim local test path: Languages page -> local import of dist/preview/*.lpk exercises
+  the identical validation/install gate minus the network fetch.

@@ -386,6 +386,20 @@ M2 — Local data and learner model
   (REVIEW-001, SPEECH-007, ACC-001 screen readers) stay open and unlabeled.
   No ROADMAP task opened; `active_task` stays null.
 
+- Pack publishing to GitHub — private 2026-10-07 (owner: "get both language packs added
+  to github as private for now"; extends O-05). Published `org.openlanguage.ja-jp.reference`
+  0.2.0 + `org.openlanguage.ru-ru.reference` 0.2.0 as release assets on the private repo
+  (tags `{pack_id}-{version}`); `scripts/build-catalog.sh` URL template now canonical;
+  `catalog/packs.json` (live) carries both entries with real URLs; preview-entries
+  regenerated (demo placeholder entries dropped — no assets published for them); ru manifest
+  gained `authors` (archive rebuilt, asset replaced). Verification: deterministic rebuild
+  hashes match; authenticated API download sha256+size match catalog entries; anonymous
+  asset GET 404 (private gate — expected); desktop lib 51 green incl. redirect-allowlist
+  test. **Limitation:** the app fetches catalog+assets anonymously, so the in-app catalog
+  flow stays offline-status until the repo goes public; local import of `dist/preview/*.lpk`
+  exercises the same install gate meanwhile (evidence: `state/evidence/PACKS-PUBLISH-2026-10-07/`).
+  No ROADMAP task opened; `active_task` stays null.
+
 ## Next task
 
 **Preview is ready** (owner-authorized 2026-10-03): see
