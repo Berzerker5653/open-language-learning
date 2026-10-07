@@ -44,6 +44,16 @@ new = wk.encode() + b"\x00" * (len(old) - len(wk))
 assert len(old) == len(new), "home path too long for in-place patch"
 n = data.count(old)
 data[:] = data.replace(old, new)
+# The injected-bundle path is stored WITHOUT a NUL terminator, so the
+# NUL-anchored replacement above misses it; the webview then fails to
+# load its bundle. Patch that literal too (same byte length).
+old2 = b"/usr/lib/webkit2gtk-4.1/injected-bundle/"
+new2 = (wk + "/injected-bundle/").encode()
+new2 += b"\x00" * (len(old2) - len(new2))
+assert len(old2) == len(new2), "home path too long for bundle patch"
+n2 = data.count(old2)
+data[:] = data.replace(old2, new2)
+print(f"patched {n} helper-dir + {n2} bundle-dir occurrence(s) in {lib}")
 tmp = lib + ".tmp"
 open(tmp, "wb").write(data)
 os.replace(tmp, lib)

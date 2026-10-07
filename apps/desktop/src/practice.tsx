@@ -19,6 +19,9 @@ export interface PracticeTaskView {
   choices: string[];
   /// K-12: typed-answer runner (cloze/dictation); choices are empty.
   typed?: boolean;
+  /// K-42: review posture of the underlying pack record; display-only,
+  /// never affects grading or scheduling.
+  status?: string;
 }
 
 export interface PracticeRunnerProps {
@@ -50,6 +53,12 @@ export function PracticeRunner(p: PracticeRunnerProps) {
       {p.task.surface ? (
         <>
           <h2>{p.heading ?? "What does this mean?"}</h2>
+          {p.task.status && p.task.status !== "validated" && p.task.status !== "verified" ? (
+            <p className="meta">
+              <span className="badge">draft content</span> AI-drafted, awaiting human review —
+              practice works normally; nothing is penalized for it.
+            </p>
+          ) : null}
           {p.task.furigana && (
             <p aria-label="Reading" lang="ja">
               <small>{p.task.furigana}</small>
@@ -79,6 +88,12 @@ export function PracticeRunner(p: PracticeRunnerProps) {
       ) : (
         <>
           <h2>What did you hear?</h2>
+          {p.task.status && p.task.status !== "validated" && p.task.status !== "verified" ? (
+            <p className="meta">
+              <span className="badge">draft content</span> AI-drafted, awaiting human review —
+              practice works normally; nothing is penalized for it.
+            </p>
+          ) : null}
           {p.audioError ? (
             <p className="notice">{p.audioError}</p>
           ) : (

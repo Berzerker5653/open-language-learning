@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
-import { Home, ProgressView, type SessionPlan } from "./home";
+import { GoalMap, Home, ProgressView, type SessionPlan } from "./home";
 
 const plan: SessionPlan = {
   items: [
@@ -146,5 +146,64 @@ describe("progress", () => {
     expect(html).toContain("10%");
     expect(html).toContain("needs refresh");
     expect(html).toContain("reading does not imply speaking");
+  });
+});
+
+describe("goal map", () => {
+  it("renders pack-data goals with bands, prereqs, and per-modality states", () => {
+    const html = renderToStaticMarkup(
+      <GoalMap
+        goals={[
+          {
+            pack_id: "org.openlanguage.ja-jp.reference",
+            id: "ja.goal.onramp.kana-hiragana",
+            description: "Recognize hiragana chart symbols on sight.",
+            band: "on-ramp",
+            review_status: "draft",
+            modalities: ["reading"],
+            assessed: true,
+            locked: false,
+            prerequisites: [],
+            dimensions: [{ modality: "reading", state: "supported", exemplar: "ja.orth.hira.a" }],
+          },
+          {
+            pack_id: "org.openlanguage.ja-jp.reference",
+            id: "ja.goal.a1.ask-directions",
+            description: "Ask for and follow simple directions.",
+            band: "a1",
+            review_status: "draft",
+            modalities: ["listening", "interaction"],
+            assessed: true,
+            locked: true,
+            prerequisites: [
+              {
+                target: "ja.orth.hira.a",
+                dimension: "comprehension-reading",
+                required_state: "independent",
+                strength: "hard",
+                satisfied: false,
+              },
+            ],
+            dimensions: [
+              { modality: "listening", state: "unseen", exemplar: null },
+              { modality: "interaction", state: "unseen", exemplar: null },
+            ],
+          },
+        ]}
+      />,
+    );
+    expect(html).toContain("Recognize hiragana chart symbols");
+    expect(html).toContain("on-ramp");
+    expect(html).toContain("a1");
+    expect(html).toContain("supported");
+    expect(html).toContain("not started");
+    expect(html).toContain("locked");
+    expect(html).toContain("ja.orth.hira.a (comprehension-reading → independent)");
+    expect(html).toContain("draft content");
+  });
+
+  it("is honest when no pack goals exist", () => {
+    const html = renderToStaticMarkup(<GoalMap goals={[]} />);
+    expect(html).toContain("No goals are available yet");
   });
 });

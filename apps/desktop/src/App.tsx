@@ -13,6 +13,8 @@ import {
   ProgressView,
   type ProgressRow,
   type SessionPlan,
+  type GoalCard,
+  GoalMap,
   type WorldEnvironment,
 } from "./home";
 import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./pronunciation";
@@ -130,6 +132,7 @@ export function App() {
   const [recording, setRecording] = useState(false);
   const [attemptUrl, setAttemptUrl] = useState<string | null>(null);
   const [environments, setEnvironments] = useState<WorldEnvironment[]>([]);
+  const [goals, setGoals] = useState<GoalCard[]>([]);
   const [installed, setInstalled] = useState<InstalledPack[]>([]);
   const [activeIds, setActiveIds] = useState<string[]>([]);
   const [catalog, setCatalog] = useState<CatalogEntry[]>([]);
@@ -210,7 +213,13 @@ export function App() {
   >([]);
   const [shadowIdx, setShadowIdx] = useState(0);
   const [storyList, setStoryList] = useState<
-    { id: string; title: string; description: string | null; sentence_count: number }[]
+    {
+      id: string;
+      title: string;
+      description: string | null;
+      status: string;
+      sentence_count: number;
+    }[]
   >([]);
   const [storyActive, setStoryActive] = useState<{
     id: string;
@@ -222,14 +231,17 @@ export function App() {
       romaji: string | null;
       faded_by_mastery: boolean;
       gloss: string | null;
+      status: string;
       known: {
         id: string;
         surface: string;
         reading: string | null;
         romaji: string | null;
         gloss: string;
+        status: string;
       }[];
     }[];
+    status: string;
   } | null>(null);
   const [storyLookup, setStoryLookup] = useState<string | null>(null);
   const [storyError, setStoryError] = useState<string | null>(null);
@@ -299,6 +311,8 @@ export function App() {
           setDisplayName(home.display_name);
           setPlan(home.plan);
           setEnvironments((await inv("world_state", { profileId: p.id })) as WorldEnvironment[]);
+          const goalRows = (await inv("goal_map", { profileId: p.id })) as GoalCard[];
+          await inv("smoke_ack", { note: `goal-map:${goalRows.length}` });
           setStep("done");
           await painted(4);
           const buttons = Array.from(document.querySelectorAll('nav[aria-label="Routes"] button'));
@@ -534,6 +548,7 @@ export function App() {
     setRoute("progress");
     if (inv && profileId) {
       setProgress((await inv("progress_summary", { profileId })) as ProgressRow[]);
+      setGoals((await inv("goal_map", { profileId })) as GoalCard[]);
     }
   }
 
@@ -1676,6 +1691,14 @@ export function App() {
             Read along at your level. Tapping a sentence plays its audio and looks up the words from
             your pack that appear in it. Reading is formative: nothing is scored or saved.
           </p>
+          {storyActive &&
+          storyActive.status !== "validated" &&
+          storyActive.status !== "verified" ? (
+            <p className="meta">
+              <span className="badge">draft content</span> This story is AI-drafted and awaiting
+              human review.
+            </p>
+          ) : null}
           {storyError && (
             <p role="alert" className="alert">
               {storyError}
@@ -1694,6 +1717,7 @@ export function App() {
                     onClick={() => void openStory(s.id)}
                   >
                     {s.title} ({s.sentence_count})
+                    {s.status !== "validated" && s.status !== "verified" ? " (draft)" : ""}
                   </button>
                 ))}
               </div>
@@ -1970,6 +1994,9 @@ export function App() {
                       {(c.meaning_due ?? c.reading_due)
                         ? `due ${c.meaning_due ?? c.reading_due}`
                         : "new"}
+                      {c.status !== "validated" && c.status !== "verified" ? (
+                        <span className="badge">draft</span>
+                      ) : null}
                     </small>
                   </button>
                 </li>
@@ -1978,7 +2005,10 @@ export function App() {
           )}
         </section>
       ) : route === "progress" ? (
-        <ProgressView rows={progress} />
+        <>
+          <GoalMap goals={goals} />
+          <ProgressView rows={progress} />
+        </>
       ) : route === "writing" ? (
         <>
           {writingError && (

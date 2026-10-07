@@ -1,0 +1,50 @@
+K-40/K-42 verification — 2026-10-07, Linux reference machine
+
+Native (cargo test -p lts-desktop --lib): 53 passed, incl. new
+- tests::goal_map_surfaces_pack_goals_with_prereqs_and_mastery
+  (installed pack goals surfaced with band/prereqs/assessment flags;
+  evidence on one required concept moves only that modality row)
+- tests::goal_map_ignores_activity_volume
+  (50 events on unrelated content leave every goal row identical —
+  ADR-0002: no activity-count/streak semantics)
+
+UI (vitest, apps/desktop): 101 passed, incl. new
+- home.test "goal map" (bands, locked/open, prereq copy, draft badge,
+  honest empty state)
+- practice.test "labels draft content without changing grading
+  affordances (K-42)" (badge on choice + listening surfaces, absent
+  for validated content, choices/actions unchanged)
+
+Workspace: cargo test --workspace all green (54 result blocks, 0 failed).
+cargo clippy -p lts-desktop --all-targets -D warnings clean; cargo fmt
+clean; prettier + eslint clean; tsc --noEmit clean.
+
+Full-route smoke walkthrough (debug binary under Xvfb, dev server on
+1420, temp LTS_DATA_DIR):
+  smoke-ok home / home-rendered
+  smoke-ok goal-map:75  + goal-map-assert 75   (K-40: 75 goals from the
+      installed ja-JP reference pack reach the UI over real IPC)
+  smoke-ok route:Practice Progress Pronunciation Speaking Writing
+      Languages Scenarios Shadowing Reading "My Words" Placement Kanji
+  smoke-ok routes-complete:12
+  exit 0, no walkthrough-error.
+
+Environment repairs found during verification (pre-existing breakage,
+not caused by this change):
+1. scripts/setup-tauri-sysroot.sh patched only the NUL-terminated
+   "/usr/lib/webkit2gtk-4.1\0" string; the injected-bundle path
+   "/usr/lib/webkit2gtk-4.1/injected-bundle/" (no NUL) stayed
+   unpatched, so the webview never loaded. Re-patched in place
+   (same byte length) to ~/.wk41/injected-bundle/; setup script fix
+   still pending owner-side re-run of setup on fresh machines.
+2. The smoke walkthrough needs the frontend served on devUrl
+   :1420 (debug WebviewUrl::default()); run `vite --port 1420`
+   alongside the binary. scripts/smoke-desktop.sh now has a pnpm-less
+   fallback that starts the dev server and builds via cargo directly.
+3. WEBKIT_DISABLE_DMABUF_RENDERER=1 is required under Xvfb (no
+   DRI3); now exported inside scripts/smoke-desktop.sh.
+
+scripts/smoke-desktop.sh end-to-end run (pnpm-less fallback path, dev
+server on :1420, DMABUF disabled): "SMOKE OK (24 routes walked)",
+goal-map-assert 75 present, no walkthrough-error.
+

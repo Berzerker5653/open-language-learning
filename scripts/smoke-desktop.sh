@@ -9,8 +9,25 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 source scripts/tauri-env.sh
 
+# Xvfb has no DRI3; WebKitGTK's DMABUF renderer hangs the webview without
+# this (same workaround as scripts/launch-preview.sh).
+export WEBKIT_DISABLE_DMABUF_RENDERER=1
+
 echo "== build frontend + native binary (debug, no bundle) =="
-pnpm --filter @openlang/desktop exec tauri build --debug --no-bundle
+if command -v pnpm >/dev/null 2>&1; then
+  pnpm --filter @openlang/desktop exec tauri build --debug --no-bundle
+else
+  # pnpm missing (e.g. bare node installs): build the same artifacts
+  # directly. Debug WebviewUrl::default() loads the devUrl, so also
+  # serve the frontend on :1420 for the walkthrough.
+  (cd apps/desktop && ./node_modules/.bin/vite build)
+  apps/desktop/node_modules/.bin/vite --config apps/desktop/vite.config.ts --port 1420 --strictPort \
+    > /tmp/lts-smoke-vite.log 2>&1 &
+  VITE_PID=$!
+  trap 'kill "$VITE_PID" 2>/dev/null || true' EXIT
+  sleep 2
+  cargo build -p lts-desktop
+fi
 
 BIN="target/debug/lts-desktop"
 if [ ! -x "$BIN" ]; then
@@ -47,6 +64,10 @@ fi
 NROUTES=$(grep -c '^smoke-ok route:' "$MARKER")
 if [ "$NROUTES" -lt 11 ]; then
   echo "FAIL: only $NROUTES route acks; expected at least 11" >&2
+  exit 1
+fi
+if ! grep -q '^goal-map-assert [1-9]' "$MARKER"; then
+  echo "FAIL: goal map returned no goals (K-40)" >&2
   exit 1
 fi
 echo "SMOKE OK ($NROUTES routes walked)"

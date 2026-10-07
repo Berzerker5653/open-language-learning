@@ -47,6 +47,10 @@ fn smoke_ack(app: tauri::AppHandle, note: String) {
             .open(path)
         {
             let _ = writeln!(f, "smoke-ok {note}");
+            if note.starts_with("goal-map:") {
+                let count = note.split(':').nth(1).unwrap_or("?");
+                let _ = writeln!(f, "goal-map-assert {count}");
+            }
         }
         if note.starts_with("routes-complete") || note.starts_with("walkthrough-error") {
             app.exit(0);
@@ -402,6 +406,9 @@ struct LexEntry {
     reading: Option<String>,
     romaji: Option<String>,
     gloss: String,
+    /// K-42: review posture from the pack record (`status`), shown
+    /// wherever content is presented; never affects grading/scheduling.
+    status: String,
 }
 
 /// Read every `lexicon/*.jsonl` of an installed pack, sorted for
@@ -497,6 +504,11 @@ fn lexicon_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<LexE
             reading,
             romaji,
             gloss: gloss.to_string(),
+            status: entry
+                .get("status")
+                .and_then(|v| v.as_str())
+                .unwrap_or("draft")
+                .to_string(),
         });
     }
     Ok(out)
@@ -510,6 +522,7 @@ struct OrthEntry {
     id: String,
     symbol: String,
     reading: String,
+    status: String,
 }
 
 /// Parse an installed pack's `orthography/*.jsonl` units. A pack
@@ -557,6 +570,11 @@ fn orth_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<OrthEnt
                 id: id.to_string(),
                 symbol: symbol.to_string(),
                 reading: reading.to_string(),
+                status: entry
+                    .get("status")
+                    .and_then(|v| v.as_str())
+                    .unwrap_or("draft")
+                    .to_string(),
             });
         }
     }
@@ -655,6 +673,7 @@ struct ContrastEntry {
     /// Optional production-scoring target declared by the pack (language-
     /// neutral number; the engine never infers phonology).
     production: Option<ContrastProduction>,
+    status: String,
 }
 
 struct ContrastItem {
@@ -734,6 +753,11 @@ fn contrast_entries(
                 .to_string(),
             items,
             production,
+            status: entry
+                .get("status")
+                .and_then(|v| v.as_str())
+                .unwrap_or("draft")
+                .to_string(),
         });
     }
     Ok(out)
@@ -769,13 +793,19 @@ struct PackGoals {
 
 #[derive(serde::Deserialize)]
 struct PackGoal {
-    #[allow(dead_code)]
+    description: String,
+    #[serde(default)]
+    band: Option<String>,
+    #[serde(default)]
+    review_status: Option<String>,
     id: String,
     modalities: Vec<String>,
     #[serde(default)]
     prerequisites: Vec<PackPrereq>,
     #[serde(default)]
     required_concepts: Vec<String>,
+    #[serde(default)]
+    assessment_ids: Vec<String>,
 }
 
 #[derive(serde::Deserialize)]
@@ -1316,6 +1346,194 @@ fn progress_summary(profile_id: String) -> Result<Vec<ProgressRow>, String> {
             needs_refresh: d.needs_refresh,
         })
         .collect())
+}
+
+// ---------------------------------------------------------------------------
+// K-40: goal-level progress map. The view is built entirely from
+// installed pack data (curriculum/goals.yaml + curriculum/goals/*.yaml +
+// assessments/definitions.jsonl) and derived mastery / assessment
+// evidence only — never activity counts, dates, or streaks (ADR-0002).
+// No language-specific hardcoding: goal ids, bands, prereq records and
+// dimension names all come from the pack.
+// ---------------------------------------------------------------------------
+
+#[derive(Serialize, PartialEq, Debug)]
+struct GoalDimensionView {
+    modality: String,
+    /// Best derived state across the goal's required concepts for this
+    /// modality; "unseen" when no evidence exists yet.
+    state: &'static str,
+    /// The required concept furthest along, for honest labeling.
+    exemplar: Option<String>,
+}
+
+#[derive(Serialize, PartialEq, Debug)]
+struct GoalPrereqView {
+    target: String,
+    dimension: String,
+    required_state: String,
+    strength: String,
+    satisfied: bool,
+}
+
+#[derive(Serialize, PartialEq, Debug)]
+struct GoalMapView {
+    pack_id: String,
+    id: String,
+    description: String,
+    band: Option<String>,
+    review_status: Option<String>,
+    modalities: Vec<String>,
+    /// True when the goal has at least one assessment definition.
+    assessed: bool,
+    /// True when any hard prerequisite is unsatisfied.
+    locked: bool,
+    prerequisites: Vec<GoalPrereqView>,
+    dimensions: Vec<GoalDimensionView>,
+}
+
+/// Every goal file for an installed pack version (K-23 sharding:
+/// `curriculum/goals.yaml` plus `curriculum/goals/*.yaml`).
+fn pack_goal_files(root: &Path) -> Vec<PathBuf> {
+    let mut files = Vec::new();
+    for name in ["curriculum/goals.yaml", "curriculum/goals.yml"] {
+        let p = root.join(name);
+        if p.is_file() {
+            files.push(p);
+        }
+    }
+    let dir = root.join("curriculum/goals");
+    if let Ok(rd) = std::fs::read_dir(&dir) {
+        let mut entries: Vec<PathBuf> = rd
+            .flatten()
+            .map(|e| e.path())
+            .filter(|p| {
+                p.extension()
+                    .map(|x| x == "yaml" || x == "yml")
+                    .unwrap_or(false)
+            })
+            .collect();
+        entries.sort();
+        files.extend(entries);
+    }
+    files
+}
+
+/// Goal ids that have at least one assessment definition in the pack.
+fn pack_assessed_goal_ids(root: &Path) -> std::collections::HashSet<String> {
+    let mut ids = std::collections::HashSet::new();
+    let text = match std::fs::read_to_string(root.join("assessments/definitions.jsonl")) {
+        Ok(t) => t,
+        Err(_) => return ids,
+    };
+    for line in text.lines() {
+        let line = line.trim();
+        if line.is_empty() {
+            continue;
+        }
+        if let Ok(v) = serde_json::from_str::<serde_json::Value>(line) {
+            if let Some(g) = v.get("goal_id").and_then(|g| g.as_str()) {
+                ids.insert(g.to_string());
+            }
+        }
+    }
+    ids
+}
+
+fn goal_map_at(data: &Path, profile_id: &str) -> Result<Vec<GoalMapView>, String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let derived = derive_pairs(&store, profile_id, &rfc3339_utc(now_secs()))?;
+    let packs_root = data.join("packs");
+    let mut out = Vec::new();
+    for (pack_id, _) in store
+        .selected_packs(profile_id)
+        .map_err(|e| e.to_string())?
+    {
+        let version = match lts_langpack::archive::current_version(&pack_id, &packs_root) {
+            Some(v) => v,
+            None => continue,
+        };
+        let root = packs_root.join(&pack_id).join(&version);
+        let assessed = pack_assessed_goal_ids(&root);
+        for path in pack_goal_files(&root) {
+            let text = std::fs::read_to_string(&path).map_err(|e| e.to_string())?;
+            let goals: PackGoals = serde_yaml::from_str(&text).map_err(|e| e.to_string())?;
+            for goal in goals.goals {
+                let prerequisites: Vec<GoalPrereqView> = goal
+                    .prerequisites
+                    .iter()
+                    .map(|p| {
+                        let satisfied = match (
+                            parse_dimension(&p.dimension),
+                            parse_state(&p.required_state),
+                        ) {
+                            (Some(dim), Some(req)) => derived.iter().any(|d| {
+                                d.content_id == p.target && d.dimension == dim && d.state >= req
+                            }),
+                            _ => false,
+                        };
+                        GoalPrereqView {
+                            target: p.target.clone(),
+                            dimension: p.dimension.clone(),
+                            required_state: p.required_state.clone(),
+                            strength: p.strength.clone(),
+                            satisfied,
+                        }
+                    })
+                    .collect();
+                let locked = prerequisites
+                    .iter()
+                    .any(|p| p.strength == "hard" && !p.satisfied);
+                let assessed = !goal.assessment_ids.is_empty() || assessed.contains(&goal.id);
+                let dimensions = goal
+                    .modalities
+                    .iter()
+                    .filter_map(|m| {
+                        let dim = parse_goal_modality(m)?;
+                        let best = goal
+                            .required_concepts
+                            .iter()
+                            .filter_map(|c| {
+                                derived
+                                    .iter()
+                                    .find(|d| &d.content_id == c && d.dimension == dim)
+                            })
+                            .max_by_key(|d| d.state);
+                        Some(GoalDimensionView {
+                            modality: m.clone(),
+                            state: state_kebab(
+                                best.map(|d| d.state)
+                                    .unwrap_or(lts_domain::MasteryState::Unseen),
+                            ),
+                            exemplar: best.map(|d| d.content_id.clone()),
+                        })
+                    })
+                    .collect();
+                out.push(GoalMapView {
+                    pack_id: pack_id.clone(),
+                    id: goal.id,
+                    description: goal.description,
+                    band: goal.band,
+                    review_status: goal.review_status,
+                    modalities: goal.modalities,
+                    assessed,
+                    locked,
+                    prerequisites,
+                    dimensions,
+                });
+            }
+        }
+    }
+    out.sort_by(|a, b| {
+        (a.band.clone().unwrap_or_else(|| "zzz".into()), a.id.clone())
+            .cmp(&(b.band.clone().unwrap_or_else(|| "zzz".into()), b.id.clone()))
+    });
+    Ok(out)
+}
+
+#[tauri::command]
+fn goal_map(profile_id: String) -> Result<Vec<GoalMapView>, String> {
+    goal_map_at(&data_dir(), &profile_id)
 }
 
 // ---------------------------------------------------------------------------
@@ -2191,6 +2409,11 @@ struct PracticeTask {
     /// Grading compares the typed string server-side; the answer never
     /// crosses IPC before grading.
     typed: bool,
+    /// K-42: review posture of the underlying pack record, shown
+    /// wherever content is presented. Display-only: grading, evidence,
+    /// and scheduling never consult it (no penalty on unreviewed
+    /// content).
+    status: String,
 }
 #[derive(Serialize)]
 struct PracticeGrade {
@@ -2373,6 +2596,7 @@ fn practice_build(
         faded_by_mastery: display.as_ref().is_some_and(|d| d.faded_by_mastery),
         choices,
         typed: false,
+        status: entry.status.clone(),
     };
     let correct = entry.gloss.clone();
     Ok((task, correct, reveals))
@@ -2429,6 +2653,7 @@ fn orth_task_build(
         faded_by_mastery: false,
         choices,
         typed: false,
+        status: entry.status.clone(),
     };
     Ok((task, answer.clone(), Vec::new()))
 }
@@ -2486,6 +2711,7 @@ fn kanji_task_build(
         faded_by_mastery: false,
         choices,
         typed: false,
+        status: entry.status.clone(),
     };
     Ok((task, answer, Vec::new()))
 }
@@ -2571,6 +2797,7 @@ fn contrast_task_build(
         faded_by_mastery: false,
         choices,
         typed: false,
+        status: entry.status.clone(),
     };
     Ok((task, answer, Vec::new()))
 }
@@ -2663,6 +2890,7 @@ struct SentenceEntry {
     romaji: Option<String>,
     gloss: Option<String>,
     cloze_targets: Vec<String>,
+    status: String,
 }
 
 fn sentence_entries(
@@ -2716,6 +2944,11 @@ fn sentence_entries(
                         .collect()
                 })
                 .unwrap_or_default(),
+            status: entry
+                .get("status")
+                .and_then(|v| v.as_str())
+                .unwrap_or("draft")
+                .to_string(),
         });
     }
     Ok(out)
@@ -2751,6 +2984,7 @@ fn cloze_task_build(
         faded_by_mastery: false,
         choices: Vec::new(),
         typed: true,
+        status: entry.status.clone(),
     };
     Ok((task, target, Vec::new()))
 }
@@ -2777,6 +3011,7 @@ fn dictation_task_build(
         faded_by_mastery: false,
         choices: Vec::new(),
         typed: true,
+        status: entry.status,
     };
     Ok((task, entry.text, Vec::new()))
 }
@@ -2815,6 +3050,7 @@ struct StoryEntry {
     title: String,
     description: Option<String>,
     sentences: Vec<String>,
+    status: String,
 }
 
 fn story_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<StoryEntry>, String> {
@@ -2872,6 +3108,11 @@ fn story_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<StoryE
                 .and_then(|v| v.as_str())
                 .map(String::from),
             sentences,
+            status: doc
+                .get("status")
+                .and_then(|v| v.as_str())
+                .unwrap_or("draft")
+                .to_string(),
         });
     }
     Ok(out)
@@ -2882,6 +3123,7 @@ struct StorySummary {
     id: String,
     title: String,
     description: Option<String>,
+    status: String,
     sentence_count: usize,
 }
 
@@ -2902,6 +3144,7 @@ fn story_list_at(data: &Path, profile_id: &str) -> Result<Vec<StorySummary>, Str
             id: s.id,
             title: s.title,
             description: s.description,
+            status: s.status,
         })
         .collect())
 }
@@ -2915,6 +3158,8 @@ struct StorySentenceView {
     romaji: Option<String>,
     faded_by_mastery: bool,
     gloss: Option<String>,
+    /// K-42: review posture of the sentence record.
+    status: String,
     /// Lexicon entries whose surface occurs in the sentence — the
     /// tap-to-lookup panel. Substring matching is script-agnostic;
     /// lookup is an aid, never evidence.
@@ -2926,6 +3171,7 @@ struct StoryView {
     id: String,
     title: String,
     sentences: Vec<StorySentenceView>,
+    status: String,
 }
 
 #[tauri::command]
@@ -2959,6 +3205,7 @@ fn story_view_at(data: &Path, profile_id: &str, story_id: &str) -> Result<StoryV
             reading: entry.reading.clone(),
             romaji: entry.romaji.clone(),
             gloss: entry.gloss.clone().unwrap_or_default(),
+            status: entry.status.clone(),
         };
         let display = reader_display(data, profile_id, &proxy, false);
         let known: Vec<LexEntry> = lex
@@ -2974,12 +3221,14 @@ fn story_view_at(data: &Path, profile_id: &str, story_id: &str) -> Result<StoryV
             faded_by_mastery: display.as_ref().is_some_and(|d| d.faded_by_mastery),
             gloss: entry.gloss.clone(),
             known,
+            status: entry.status.clone(),
         });
     }
     Ok(StoryView {
         id: story.id,
         title: story.title,
         sentences: views,
+        status: story.status,
     })
 }
 
@@ -4006,6 +4255,7 @@ pub fn run() {
             speech_audio,
             tts_status,
             world_state,
+            goal_map,
             catalog_packs,
             install_catalog_pack,
             import_pack,
@@ -5002,6 +5252,96 @@ mod tests {
             store.append_evidence(&ev).unwrap();
         }
         assert_eq!(world_state_at(data, &p.id).unwrap(), envs);
+    }
+
+    /// K-40: the goal map surfaces installed-pack goals (not unit
+    /// counts) with prereq structure and per-dimension mastery derived
+    /// from evidence only.
+    #[test]
+    fn goal_map_surfaces_pack_goals_with_prereqs_and_mastery() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        let goals = goal_map_at(data, &p.id).unwrap();
+        assert!(!goals.is_empty(), "installed pack surfaces goals");
+        assert!(
+            goals
+                .iter()
+                .all(|g| g.pack_id == "org.openlanguage.ja-jp.reference"),
+            "view is pack-data-driven"
+        );
+        let kana = goals
+            .iter()
+            .find(|g| g.id == "ja.goal.onramp.kana-hiragana")
+            .expect("on-ramp kana goal present");
+        assert_eq!(kana.band.as_deref(), Some("on-ramp"));
+        assert!(kana.assessed, "goal declares assessment ids");
+        assert_eq!(kana.review_status.as_deref(), Some("draft"));
+        assert!(
+            kana.dimensions.iter().all(|d| d.state == "unseen"),
+            "no evidence yet: every dimension starts unseen"
+        );
+
+        // Evidence on one required concept moves that dimension only.
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let ev = attempt(
+            "ja.orth.hira.a",
+            lts_domain::ActivityModality::ComprehensionReading,
+            "ja.expr.goalmap.a-1",
+            0,
+            "2026-10-02T10:00:00Z",
+            "g1",
+            &p.id,
+        );
+        store.append_evidence(&ev).unwrap();
+        let goals = goal_map_at(data, &p.id).unwrap();
+        let kana = goals
+            .iter()
+            .find(|g| g.id == "ja.goal.onramp.kana-hiragana")
+            .unwrap();
+        let reading = kana
+            .dimensions
+            .iter()
+            .find(|d| d.modality == "reading")
+            .unwrap();
+        assert_ne!(reading.state, "unseen", "derived mastery moves the row");
+        assert_eq!(reading.exemplar.as_deref(), Some("ja.orth.hira.a"));
+    }
+
+    /// K-40 acceptance: goal state derives from derived mastery and
+    /// assessment evidence only — never activity counts, dates, or
+    /// streaks (ADR-0002). 50 events on unrelated content leave the
+    /// whole map byte-identical.
+    #[test]
+    fn goal_map_ignores_activity_volume() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        let before = goal_map_at(data, &p.id).unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        for i in 0..50 {
+            let ev = attempt(
+                "ja.lex.demo.watashi",
+                lts_domain::ActivityModality::RecallMeaning,
+                "ja.expr.demo.self-a",
+                0,
+                "2026-10-02T12:00:00Z",
+                &format!("v{i}"),
+                &p.id,
+            );
+            store.append_evidence(&ev).unwrap();
+        }
+        let after = goal_map_at(data, &p.id).unwrap();
+        assert_eq!(before.len(), after.len());
+        for (b, a) in before.iter().zip(&after) {
+            assert_eq!(b.id, a.id);
+            assert_eq!(b.locked, a.locked);
+            assert_eq!(b.dimensions, a.dimensions, "no drift from volume");
+        }
     }
 
     /// Community pack flow: a local .lpk import goes through the same

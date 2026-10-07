@@ -62,6 +62,27 @@ describe("practice runner", () => {
     expect(html).toContain("hello");
   });
 
+  it("labels draft content without changing grading affordances (K-42)", () => {
+    const draft = render({ task: { ...base.task, status: "draft" } });
+    expect(draft).toContain("draft content");
+    expect(draft).toContain("awaiting human review");
+    // Same choices and actions as the unlabeled render: posture is display-only.
+    expect(draft).toContain('aria-label="Choices"');
+    expect(draft).toContain("hello");
+    const listening = render({
+      task: {
+        item_id: "x#comprehension-listening",
+        surface: null,
+        choices: ["a", "b"],
+        status: "review-needed",
+      },
+      audioSource: "licensed-recording",
+    });
+    expect(listening).toContain("draft content");
+    const reviewed = render({ task: { ...base.task, status: "validated" } });
+    expect(reviewed).not.toContain("draft content");
+  });
+
   it("renders a typed answer field for cloze and hides choices", () => {
     const html = render({
       task: {

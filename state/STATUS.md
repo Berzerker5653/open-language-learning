@@ -400,6 +400,20 @@ M2 — Local data and learner model
   exercises the same install gate meanwhile (evidence: `state/evidence/PACKS-PUBLISH-2026-10-07/`).
   No ROADMAP task opened; `active_task` stays null.
 
+- `K-40` + `K-42` — goal-level progress map + draft-content honesty 2026-10-07:
+  native `goal_map` command reads installed pack goal files (K-23 sharding) +
+  assessment ids; per-goal band/prereqs/per-modality mastery derive from
+  derived mastery only (activity-volume test proves no count/streak semantics,
+  ADR-0002). Progress route renders `GoalMap` above the per-content table.
+  K-42: pack-record `status` flows through lexicon/orthography/kanji/contrast/
+  sentence/story readers into `PracticeTask.status` + story/kanji views; UI
+  shows "draft content" badges on practice, listening, reading, kanji surfaces
+  — display-only, grading/scheduling never consult it. Smoke walkthrough now
+  asserts `goal-map:75` over real IPC. Environment repairs: sysroot patch now
+  covers the non-NUL injected-bundle path (webview was silently dead);
+  smoke script exports WEBKIT_DISABLE_DMABUF_RENDERER=1 and works without
+  pnpm (evidence: `state/evidence/K-40-K-42/`).
+
 ## Next task
 
 **Packs published (private) + live catalog wired** (2026-10-07, entry above):
@@ -407,10 +421,10 @@ the in-app catalog download flow activates automatically when the repo goes
 public (owner gate O-05); local import of `dist/preview/*.lpk` exercises the
 same install gate meanwhile.
 
-**Next tranche (kanban `now`/`next`): sole-user learning experience** —
-K-40 goal-map progress UI, K-42 draft-content honesty in practice, then
+**Next tranche (kanban `now`): sole-user learning experience** —
 K-41 ru stress visibility, K-43 content-claims panel, K-44 phrase entries,
-K-45 kanji expansion, K-46 device-tier detection. All BUILD-bucket
+K-46 device-tier detection; then K-45 kanji expansion + A2 content into
+the now-visible goal-map structure. All BUILD-bucket
 (`docs/FEATURE_PLAN.md`): no gates, no new dependencies, no owner input needed.
 
 Stable-release gates stay open and visible: `SPEECH-007` (calibration

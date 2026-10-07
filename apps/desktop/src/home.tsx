@@ -189,3 +189,111 @@ export function ProgressView({ rows }: { rows: ProgressRow[] }) {
     </section>
   );
 }
+
+export interface GoalDimension {
+  modality: string;
+  state: string;
+  exemplar: string | null;
+}
+
+export interface GoalPrereq {
+  target: string;
+  dimension: string;
+  required_state: string;
+  strength: string;
+  satisfied: boolean;
+}
+
+export interface GoalCard {
+  pack_id: string;
+  id: string;
+  description: string;
+  band: string | null;
+  review_status: string | null;
+  modalities: string[];
+  assessed: boolean;
+  locked: boolean;
+  prerequisites: GoalPrereq[];
+  dimensions: GoalDimension[];
+}
+
+const STATE_LABELS: Record<string, string> = {
+  unseen: "not started",
+  introduced: "introduced",
+  supported: "supported",
+  independent: "independent",
+  flexible: "flexible",
+  retained: "retained",
+};
+
+/**
+ * K-40: goal-level progress map. Goals, bands, prerequisites and
+ * dimensions come from installed pack data only — never unit counts,
+ * activity counts, dates, or streaks (ADR-0002).
+ */
+export function GoalMap({ goals }: { goals: GoalCard[] }) {
+  const bands: string[] = [];
+  for (const g of goals) {
+    const b = g.band ?? "other";
+    if (!bands.includes(b)) bands.push(b);
+  }
+  return (
+    <section aria-label="Goal map">
+      <h1>Capabilities you are building</h1>
+      <p>
+        <small>
+          Each goal grows per modality from what you can actually do — reading does not imply
+          speaking. Goals open as their prerequisites are met.
+        </small>
+      </p>
+      {goals.length === 0 ? (
+        <p className="empty">
+          No goals are available yet. Install a language pack to see its goal map.
+        </p>
+      ) : (
+        bands.map((band) => (
+          <section key={band} aria-label={`Band ${band}`}>
+            <h2>{band}</h2>
+            <ul className="goal-list">
+              {goals
+                .filter((g) => (g.band ?? "other") === band)
+                .map((g) => (
+                  <li key={g.id} data-locked={g.locked ? "yes" : "no"}>
+                    <strong>{g.description}</strong>
+                    {g.locked ? (
+                      <span className="badge">locked</span>
+                    ) : (
+                      <span className="badge badge--open">open</span>
+                    )}
+                    {g.review_status === "draft" || g.review_status === "review-needed" ? (
+                      <span className="badge">draft content</span>
+                    ) : null}
+                    <ul className="goal-dims">
+                      {g.dimensions.map((d) => (
+                        <li key={d.modality}>
+                          <span className="meta">{d.modality}</span>{" "}
+                          <span data-state={d.state}>{STATE_LABELS[d.state] ?? d.state}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    {g.locked && (
+                      <p className="meta">
+                        Grows with:{" "}
+                        {g.prerequisites
+                          .filter((p) => p.strength === "hard" && !p.satisfied)
+                          .map((p) => `${p.target} (${p.dimension} → ${p.required_state})`)
+                          .join(", ")}
+                      </p>
+                    )}
+                    {!g.assessed && (
+                      <p className="meta">No assessment defined for this goal yet.</p>
+                    )}
+                  </li>
+                ))}
+            </ul>
+          </section>
+        ))
+      )}
+    </section>
+  );
+}

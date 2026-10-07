@@ -40,15 +40,9 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | POLISH-001 | pre-publication hardening: honest failure-path tests (no-partial-install, honest catalog status, TTS abstention, unknown-model rejection), latency baseline, full-route UI walkthrough (smoke drives onboarding + all 11 routes, script asserts marker) (`state/evidence/POLISH-001/`) | quality |
 | REVIEW-001 | review policy v1.0.0 (ai_screening acceleration-only layer, qualification categories, sampling rules, BLK-REVIEW-CAPACITY) + finite A1–B2 coverage map v1.0.0 (agreed by owner 2026-10-04) + reviewer kit; admits JA-A1-001/002 (`state/evidence/REVIEW-001/`) | REVIEW-001 |
 | SPEECH-007-infra | eligibility registry (version/hash-bound, fail-closed), pronunciation guided/automatic gating with honest UI labels, preregistration protocol skeleton; calibration DATA blocked on owner decision (`state/evidence/SPEECH-007/`) | SPEECH-007 |
+| K-40/K-42 | goal-level progress map (goal_map command + GoalMap UI: bands, prereq gating, per-modality mastery from derived evidence only) + draft-content honesty badges across practice/reading/kanji surfaces (display-only, no penalty semantics) — smoke asserts 75 goals over real IPC (`state/evidence/K-40-K-42/`) | K-40, K-42 |
 | AI-REVIEW-06 | AI code review + fixes (AI-reviewed, no human verification): ru-RU YAML-anchor CI failure fixed (789 files expanded, semantic-equality proven) + ru-RU added to CI conformance; engine hardcoded `ja.activity.demo.*` evidence ids removed (content-id attribution); per-hop redirect host re-validation in pack downloads; fmt/prettier gates + catalog hashes repaired (`docs/review/2026-10-06-ai-code-review.md`) | quality |
 | PACKS-PUBLISH-07 | Both reference packs published as private GitHub release assets (owner-authorized O-05 extension): tags `{pack_id}-{version}`, live `catalog/packs.json` wired with real URLs, canonical URL template in `build-catalog.sh`, authenticated download hash-verified; in-app anonymous download activates on public flip (`state/evidence/PACKS-PUBLISH-2026-10-07/`) | O-05 |
-
-## now — sole-user learning experience (owner direction 2026-10-07; BUILD bucket, no gates)
-
-| card | epic | what | maps to |
-| --- | --- | --- | --- |
-| K-40 | UX | Goal-level progress map: goals + prerequisites + per-dimension mastery in the app UI (replaces unit counts) — the capability-unlock engagement model | K-40 |
-| K-42 | UX | Draft-content honesty in the practice loop: review posture visible where content is presented; no penalty semantics on unreviewed content | K-42 |
 
 ## next — learning experience follow-ons
 
@@ -81,18 +75,19 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | O-04 | REL-001 release gates incl. pedagogical review + speech calibration |
 | O-05 | GitHub publishing authorization for catalog assets — PARTIAL 2026-10-04: owner authorized repo upload as PRIVATE (`Berzerker5653/open-language-learning`, 82 commits pushed); 2026-10-07 owner authorized publishing both reference packs as private release assets (`org.openlanguage.ja-jp.reference-0.2.0`, `org.openlanguage.ru-ru.reference-0.2.0`; live `catalog/packs.json` wired — in-app anonymous download activates when repo goes public); switch to public deferred until owner declares ready |
 
-## Sequencing rationale (updated 2026-10-07)
+## Sequencing rationale (updated 2026-10-07, post K-40/K-42)
 
 1. **Engine outruns the human gates**: every remaining ROADMAP-required task
    chains through SPEECH-007 (calibration data) or qualified review capacity
    (needs public repo, O-05). No required task is `ready`; the K-4x tranche is
    kanban/optional work that improves the sole user's daily experience without
    touching gates.
-2. **K-40 first**: the goal map is the engagement model the AGENTS.md quality
-   bar demands, and 1,580 authored draft units currently surface only as unit
-   counts.
-3. **K-42 with K-40**: honesty labeling rides the same surfaces.
-4. **Content depth (K-45, A2) after the map**: visible structure first, then
-   more content into it.
+2. **K-40/K-42 shipped 2026-10-07**: the goal map is live (75 pack goals
+   with prereq gating + per-modality mastery), and draft posture is
+   visible wherever content is presented.
+3. **Content depth (K-45, A2) after the map**: the map is live, so more
+   content can now go into visible structure.
+4. **Remaining K-4x polish**: K-41 stress marks, K-43 claims panel,
+   K-44 phrase entries, K-46 device-tier speech recommendation.
 5. **Owner-side unblocks stay ranked in `owner`**: public flip (O-05) then
    calibration data (O-04/SPEECH-007) are the only paths to REL-001.

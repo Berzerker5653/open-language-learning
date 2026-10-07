@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-10-04",
+  "updated": "2026-10-07",
   "active_task": null,
   "tasks": {
     "BOOT-001": {
@@ -808,6 +808,24 @@
         "state/evidence/SPEECH-007/infra-blocked-2026-10-04.txt",
         "state/evidence/SPEECH-007/prep-2026-10-06.txt",
         "state/evidence/SPEECH-007/probe-2026-10-06.txt"
+      ]
+    },
+    "K-40": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/evidence/K-40-K-42/smoke-2026-10-07.txt",
+        "state/notes/K-40-K-42.md"
+      ]
+    },
+    "K-42": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/evidence/K-40-K-42/smoke-2026-10-07.txt",
+        "state/notes/K-40-K-42.md"
       ]
     }
   },
