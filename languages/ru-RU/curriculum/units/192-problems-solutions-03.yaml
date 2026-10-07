@@ -1,46 +1,66 @@
-id: "ru.unit.a2.problems-solutions-03"
-goal_id: "ru.goal.a2.problems-solutions"
-title: "Ways to solve"
-summary: "способ, вариант, путь, метод and расчёт."
+id: ru.unit.a2.problems-solutions-03
+goal_id: ru.goal.a2.problems-solutions
+title: Ways to solve
+summary: способ, вариант, путь, метод and расчёт.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a2.u192-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.problems.sposob",
-        "ru.lex.problems.variant",
-        "ru.lex.problems.put",
-        "ru.lex.problems.metod",
-        "ru.lex.problems.rashchyot",
-        "ru.sent.a2.u192",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.a2.u192-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a2.u192-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a2.u192"]
-  - id: "ru.activity.a2.u192-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a2.u192-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.problems.sposob
+  - ru.lex.problems.variant
+  - ru.lex.problems.put
+  - ru.lex.problems.metod
+  - ru.lex.problems.rashchyot
+  - ru.sent.a2.u192
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.a2.u192-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a2.u192-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.u192
+- id: ru.activity.a2.u192-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.problems.sposob
+  - ru.lex.problems.variant
+  - ru.lex.problems.put
+  - ru.lex.problems.metod
+  - ru.lex.problems.rashchyot
+  - ru.sent.a2.u192
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.problems.sposob
+  - ru.lex.problems.variant
+  - ru.lex.problems.put
+  - ru.lex.problems.metod
+  - ru.lex.problems.rashchyot
+  - ru.sent.a2.u192
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Ways to solve: problems with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse способ (method) with вариант (option)."]
-  target_proficiency: "A2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Ways to solve: problems with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse способ (method) with вариант (option).
+  target_proficiency: A2
+  validation_method: choice

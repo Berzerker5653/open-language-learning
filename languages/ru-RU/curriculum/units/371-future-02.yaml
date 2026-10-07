@@ -1,46 +1,66 @@
-id: "ru.unit.b1.future-02"
-goal_id: "ru.goal.b1.future-conditions"
-title: "Later"
-summary: "послезавтра, немедленно, позже, иначе and станет."
+id: ru.unit.b1.future-02
+goal_id: ru.goal.b1.future-conditions
+title: Later
+summary: послезавтра, немедленно, позже, иначе and станет.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b1.u371-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.future.poslezavtra",
-        "ru.lex.future.nemedlenno",
-        "ru.lex.future.pozhe",
-        "ru.lex.future.inache",
-        "ru.lex.future.stanet",
-        "ru.sent.b1.u371",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b1.u371-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b1.u371-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b1.u371"]
-  - id: "ru.activity.b1.u371-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b1.u371-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.future.poslezavtra
+  - ru.lex.future.nemedlenno
+  - ru.lex.future.pozhe
+  - ru.lex.future.inache
+  - ru.lex.future.stanet
+  - ru.sent.b1.u371
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b1.u371-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b1.u371-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.u371
+- id: ru.activity.b1.u371-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.future.poslezavtra
+  - ru.lex.future.nemedlenno
+  - ru.lex.future.pozhe
+  - ru.lex.future.inache
+  - ru.lex.future.stanet
+  - ru.sent.b1.u371
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.future.poslezavtra
+  - ru.lex.future.nemedlenno
+  - ru.lex.future.pozhe
+  - ru.lex.future.inache
+  - ru.lex.future.stanet
+  - ru.sent.b1.u371
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Later: future/conditions with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse немедленно (immediately) with позже (later)."]
-  target_proficiency: "B1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Later: future/conditions with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse немедленно (immediately) with позже (later).
+  target_proficiency: B1
+  validation_method: choice

@@ -36,8 +36,8 @@
       "min_sdk_version": "0.1.0",
       "pack_id": "org.openlanguage.ja-jp.reference",
       "review_status": "community",
-      "sha256": "0e8c48511fc28286d917441e7e2997a9f5480a02768dcb7d48f6f1abdaa53bc4",
-      "size_bytes": 849978,
+      "sha256": "0a6c467df5e840356fe028f7c72dfbfbafadf9db2c8c33c5fee602f50224a1dd",
+      "size_bytes": 850167,
       "url": "https://github.com/open-language-learning-platform/desktop/releases/download/packs-placeholder/ja-jp-reference-0.2.0.lpk",
       "version": "0.2.0"
     },
@@ -49,13 +49,11 @@
       "min_sdk_version": "0.1.0",
       "pack_id": "org.openlanguage.ru-ru.reference",
       "review_status": "community",
-      "sha256": "c78b7975b8b201be9218959eca7932c72e4f850f7e50d8bd8ad2f5ad44241fbc",
-      "size_bytes": 912787,
+      "sha256": "95f966a16c73b150d95417e61aa2756ea5a75cabeadd004320ebc3743c907f2e",
+      "size_bytes": 889972,
       "url": "https://github.com/open-language-learning-platform/desktop/releases/download/packs-placeholder/ru-ru-reference-0.2.0.lpk",
       "version": "0.2.0"
     }
   ],
-  "tested_platforms": [
-    "linux"
-  ]
+  "tested_platforms": ["linux"]
 }

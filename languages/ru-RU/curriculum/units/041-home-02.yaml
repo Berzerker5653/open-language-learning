@@ -1,48 +1,66 @@
-id: "ru.unit.a1.home-02"
-goal_id: "ru.goal.a1.home"
-title: "Parts of the flat"
-summary: "окно, дверь, стена, пол, потолок named with это."
+id: ru.unit.a1.home-02
+goal_id: ru.goal.a1.home
+title: Parts of the flat
+summary: окно, дверь, стена, пол, потолок named with это.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a1.u041-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.home.okno",
-        "ru.lex.home.dver",
-        "ru.lex.home.stena",
-        "ru.lex.home.pol",
-        "ru.lex.home.potolok",
-        "ru.sent.a1.u041",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.mama",
-      ]
-  - id: "ru.activity.a1.u041-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a1.u041-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a1.u041"]
-  - id: "ru.activity.a1.u041-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a1.u041-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.home.okno
+  - ru.lex.home.dver
+  - ru.lex.home.stena
+  - ru.lex.home.pol
+  - ru.lex.home.potolok
+  - ru.sent.a1.u041
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+- id: ru.activity.a1.u041-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a1.u041-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a1.u041
+- id: ru.activity.a1.u041-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.home.okno
+  - ru.lex.home.dver
+  - ru.lex.home.stena
+  - ru.lex.home.pol
+  - ru.lex.home.potolok
+  - ru.sent.a1.u041
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.home.okno
+  - ru.lex.home.dver
+  - ru.lex.home.stena
+  - ru.lex.home.pol
+  - ru.lex.home.potolok
+  - ru.sent.a1.u041
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
   expected_interpretations:
-    ["Parts of the flat: naming and simple location with taught forms only."]
+  - 'Parts of the flat: naming and simple location with taught forms only.'
   prohibited_ambiguity:
-    ["Do not confuse дверь (one door) with двери (doors); only the singular is taught here."]
-  target_proficiency: "A1"
-  validation_method: "choice"
+  - Do not confuse дверь (one door) with двери (doors); only the singular is taught here.
+  target_proficiency: A1
+  validation_method: choice

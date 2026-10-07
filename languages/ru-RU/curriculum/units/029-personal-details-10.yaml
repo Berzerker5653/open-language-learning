@@ -1,74 +1,139 @@
-id: "ru.unit.a1.personal-details-10"
-goal_id: "ru.goal.a1.personal-details"
-title: "Completing a simple profile"
-summary: "Learn the remaining profile fields. Read the student-and-origin model, then assemble a fictional profile with a name, role, origin, age and labeled contact details."
+id: ru.unit.a1.personal-details-10
+goal_id: ru.goal.a1.personal-details
+title: Completing a simple profile
+summary: Learn the remaining profile fields. Read the student-and-origin model, then assemble a fictional
+  profile with a name, role, origin, age and labeled contact details.
 estimated_minutes: 12
 activities:
-  - id: "ru.activity.a1.u029-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.personal.elektronnaya-pochta",
-        "ru.lex.personal.grazhdanstvo",
-        "ru.lex.personal.data-rozhdeniya",
-        "ru.lex.personal.yazyk",
-        "ru.lex.personal.professiya",
-        "ru.lex.personal.ya",
-        "ru.lex.personal.studentka",
-        "ru.lex.personal.iz",
-        "ru.lex.personal.frantsiya",
-        "ru.sent.a1.u029",
-        "ru.lex.personal.mariya",
-        "ru.lex.personal.italiya",
-        "ru.sent.a1.u026",
-        "ru.lex.personal.dvadtsat",
-        "ru.lex.personal.god",
-        "ru.sent.a1.u027",
-        "ru.lex.everyday.eto",
-        "ru.lex.personal.adres",
-        "ru.lex.personal.shkola",
-        "ru.sent.a1.u028",
-        "ru.lex.personal.imya",
-        "ru.lex.personal.familiya",
-        "ru.lex.personal.otchestvo",
-        "ru.lex.personal.vozrast",
-        "ru.lex.personal.telefon",
-        "ru.lex.personal.ulitsa",
-        "ru.lex.personal.kvartira",
-        "ru.lex.personal.nomer",
-        "ru.lex.personal.anketa",
-        "ru.lex.personal.anna",
-        "ru.lex.personal.ivan",
-        "ru.lex.personal.kanada",
-        "ru.lex.personal.rossiya",
-      ]
-  - id: "ru.activity.a1.u029-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a1.u029"]
-  - id: "ru.activity.a1.u029-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a1.u029-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.personal.elektronnaya-pochta
+  - ru.lex.personal.grazhdanstvo
+  - ru.lex.personal.data-rozhdeniya
+  - ru.lex.personal.yazyk
+  - ru.lex.personal.professiya
+  - ru.lex.personal.ya
+  - ru.lex.personal.studentka
+  - ru.lex.personal.iz
+  - ru.lex.personal.frantsiya
+  - ru.sent.a1.u029
+  - ru.lex.personal.mariya
+  - ru.lex.personal.italiya
+  - ru.sent.a1.u026
+  - ru.lex.personal.dvadtsat
+  - ru.lex.personal.god
+  - ru.sent.a1.u027
+  - ru.lex.everyday.eto
+  - ru.lex.personal.adres
+  - ru.lex.personal.shkola
+  - ru.sent.a1.u028
+  - ru.lex.personal.imya
+  - ru.lex.personal.familiya
+  - ru.lex.personal.otchestvo
+  - ru.lex.personal.vozrast
+  - ru.lex.personal.telefon
+  - ru.lex.personal.ulitsa
+  - ru.lex.personal.kvartira
+  - ru.lex.personal.nomer
+  - ru.lex.personal.anketa
+  - ru.lex.personal.anna
+  - ru.lex.personal.ivan
+  - ru.lex.personal.kanada
+  - ru.lex.personal.rossiya
+- id: ru.activity.a1.u029-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a1.u029
+- id: ru.activity.a1.u029-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.personal.elektronnaya-pochta
+  - ru.lex.personal.grazhdanstvo
+  - ru.lex.personal.data-rozhdeniya
+  - ru.lex.personal.yazyk
+  - ru.lex.personal.professiya
+  - ru.lex.personal.ya
+  - ru.lex.personal.studentka
+  - ru.lex.personal.iz
+  - ru.lex.personal.frantsiya
+  - ru.sent.a1.u029
+  - ru.lex.personal.mariya
+  - ru.lex.personal.italiya
+  - ru.sent.a1.u026
+  - ru.lex.personal.dvadtsat
+  - ru.lex.personal.god
+  - ru.sent.a1.u027
+  - ru.lex.everyday.eto
+  - ru.lex.personal.adres
+  - ru.lex.personal.shkola
+  - ru.sent.a1.u028
+  - ru.lex.personal.imya
+  - ru.lex.personal.familiya
+  - ru.lex.personal.otchestvo
+  - ru.lex.personal.vozrast
+  - ru.lex.personal.telefon
+  - ru.lex.personal.ulitsa
+  - ru.lex.personal.kvartira
+  - ru.lex.personal.nomer
+  - ru.lex.personal.anketa
+  - ru.lex.personal.anna
+  - ru.lex.personal.ivan
+  - ru.lex.personal.kanada
+  - ru.lex.personal.rossiya
 generation_contract:
-  allowed_vocab: *v
+  allowed_vocab:
+  - ru.lex.personal.elektronnaya-pochta
+  - ru.lex.personal.grazhdanstvo
+  - ru.lex.personal.data-rozhdeniya
+  - ru.lex.personal.yazyk
+  - ru.lex.personal.professiya
+  - ru.lex.personal.ya
+  - ru.lex.personal.studentka
+  - ru.lex.personal.iz
+  - ru.lex.personal.frantsiya
+  - ru.sent.a1.u029
+  - ru.lex.personal.mariya
+  - ru.lex.personal.italiya
+  - ru.sent.a1.u026
+  - ru.lex.personal.dvadtsat
+  - ru.lex.personal.god
+  - ru.sent.a1.u027
+  - ru.lex.everyday.eto
+  - ru.lex.personal.adres
+  - ru.lex.personal.shkola
+  - ru.sent.a1.u028
+  - ru.lex.personal.imya
+  - ru.lex.personal.familiya
+  - ru.lex.personal.otchestvo
+  - ru.lex.personal.vozrast
+  - ru.lex.personal.telefon
+  - ru.lex.personal.ulitsa
+  - ru.lex.personal.kvartira
+  - ru.lex.personal.nomer
+  - ru.lex.personal.anketa
+  - ru.lex.personal.anna
+  - ru.lex.personal.ivan
+  - ru.lex.personal.kanada
+  - ru.lex.personal.rossiya
   allowed_grammar:
-    [
-      "ru.grammar.on-ramp.zero-present-copula",
-      "ru.grammar.a1.genitive-basic",
-      "ru.grammar.a1.subject-pronouns",
-      "ru.grammar.a1.dative-recipient-age",
-      "ru.grammar.a1.numerals-time",
-      "ru.grammar.on-ramp.eto-identification",
-    ]
+  - ru.grammar.on-ramp.zero-present-copula
+  - ru.grammar.a1.genitive-basic
+  - ru.grammar.a1.subject-pronouns
+  - ru.grammar.a1.dative-recipient-age
+  - ru.grammar.a1.numerals-time
+  - ru.grammar.on-ramp.eto-identification
   new_item_budget: 6
   register: []
-  expected_interpretations: ["A female university student identifies her role and origin."]
+  expected_interpretations:
+  - A female university student identifies her role and origin.
   prohibited_ambiguity:
-    ["Keep numeric birth dates in the explicitly supplied format; do not invent personal data."]
-  target_proficiency: "A1"
-  validation_method: "choice"
+  - Keep numeric birth dates in the explicitly supplied format; do not invent personal data.
+  target_proficiency: A1
+  validation_method: choice

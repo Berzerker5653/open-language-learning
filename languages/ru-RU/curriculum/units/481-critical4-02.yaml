@@ -1,46 +1,66 @@
-id: "ru.unit.b2.critical4-02"
-goal_id: "ru.goal.b2.critical-reading4"
-title: "Nonsense"
-summary: "нелепица, чушь, вздор, бред and заблуждение."
+id: ru.unit.b2.critical4-02
+goal_id: ru.goal.b2.critical-reading4
+title: Nonsense
+summary: нелепица, чушь, вздор, бред and заблуждение.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u481-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.critical4.nelepica",
-        "ru.lex.critical4.chush",
-        "ru.lex.critical4.vzdor",
-        "ru.lex.critical4.bred",
-        "ru.lex.critical4.zabluzhdenie",
-        "ru.sent.b2.u481",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u481-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u481-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u481"]
-  - id: "ru.activity.b2.u481-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u481-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.critical4.nelepica
+  - ru.lex.critical4.chush
+  - ru.lex.critical4.vzdor
+  - ru.lex.critical4.bred
+  - ru.lex.critical4.zabluzhdenie
+  - ru.sent.b2.u481
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u481-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u481-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u481
+- id: ru.activity.b2.u481-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.critical4.nelepica
+  - ru.lex.critical4.chush
+  - ru.lex.critical4.vzdor
+  - ru.lex.critical4.bred
+  - ru.lex.critical4.zabluzhdenie
+  - ru.sent.b2.u481
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.critical4.nelepica
+  - ru.lex.critical4.chush
+  - ru.lex.critical4.vzdor
+  - ru.lex.critical4.bred
+  - ru.lex.critical4.zabluzhdenie
+  - ru.sent.b2.u481
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Nonsense: inference with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse чушь (drivel) with заблуждение (misconception)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Nonsense: inference with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse чушь (drivel) with заблуждение (misconception).
+  target_proficiency: B2
+  validation_method: choice

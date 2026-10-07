@@ -1,46 +1,66 @@
-id: "ru.unit.b2.sci-03"
-goal_id: "ru.goal.b2.science-environment"
-title: "Reproducibility"
-summary: "воспроизводимость, эталонный, замерить, измеримый and неизмеримый."
+id: ru.unit.b2.sci-03
+goal_id: ru.goal.b2.science-environment
+title: Reproducibility
+summary: воспроизводимость, эталонный, замерить, измеримый and неизмеримый.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u692-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.sci.vosproizvodimost",
-        "ru.lex.sci.etalonnyy",
-        "ru.lex.sci.zamerit",
-        "ru.lex.sci.izmerimyy",
-        "ru.lex.sci.neizmerimyy",
-        "ru.sent.b2.u692",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u692-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u692-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u692"]
-  - id: "ru.activity.b2.u692-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u692-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.sci.vosproizvodimost
+  - ru.lex.sci.etalonnyy
+  - ru.lex.sci.zamerit
+  - ru.lex.sci.izmerimyy
+  - ru.lex.sci.neizmerimyy
+  - ru.sent.b2.u692
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u692-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u692-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u692
+- id: ru.activity.b2.u692-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.sci.vosproizvodimost
+  - ru.lex.sci.etalonnyy
+  - ru.lex.sci.zamerit
+  - ru.lex.sci.izmerimyy
+  - ru.lex.sci.neizmerimyy
+  - ru.sent.b2.u692
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.sci.vosproizvodimost
+  - ru.lex.sci.etalonnyy
+  - ru.lex.sci.zamerit
+  - ru.lex.sci.izmerimyy
+  - ru.lex.sci.neizmerimyy
+  - ru.sent.b2.u692
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Reproducibility: science report with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse измеримый (measurable) with неизмеримый (unmeasurable)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Reproducibility: science report with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse измеримый (measurable) with неизмеримый (unmeasurable).
+  target_proficiency: B2
+  validation_method: choice

@@ -1,46 +1,66 @@
-id: "ru.unit.b1.travel-experiences-09"
-goal_id: "ru.goal.b1.experiences"
-title: "Trips"
-summary: "командировка, каникулы, граница, банкомат and урок."
+id: ru.unit.b1.travel-experiences-09
+goal_id: ru.goal.b1.experiences
+title: Trips
+summary: командировка, каникулы, граница, банкомат and урок.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b1.u248-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.travel2.komandirovka",
-        "ru.lex.travel2.kanikuly",
-        "ru.lex.travel2.granitsa",
-        "ru.lex.travel2.bankomat",
-        "ru.lex.travel2.urok",
-        "ru.sent.b1.u248",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b1.u248-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b1.u248-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b1.u248"]
-  - id: "ru.activity.b1.u248-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b1.u248-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.travel2.komandirovka
+  - ru.lex.travel2.kanikuly
+  - ru.lex.travel2.granitsa
+  - ru.lex.travel2.bankomat
+  - ru.lex.travel2.urok
+  - ru.sent.b1.u248
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b1.u248-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b1.u248-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.u248
+- id: ru.activity.b1.u248-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.travel2.komandirovka
+  - ru.lex.travel2.kanikuly
+  - ru.lex.travel2.granitsa
+  - ru.lex.travel2.bankomat
+  - ru.lex.travel2.urok
+  - ru.sent.b1.u248
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.travel2.komandirovka
+  - ru.lex.travel2.kanikuly
+  - ru.lex.travel2.granitsa
+  - ru.lex.travel2.bankomat
+  - ru.lex.travel2.urok
+  - ru.sent.b1.u248
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Trips: travel with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse командировка (business trip) with каникулы (vacation)."]
-  target_proficiency: "B1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Trips: travel with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse командировка (business trip) with каникулы (vacation).
+  target_proficiency: B1
+  validation_method: choice

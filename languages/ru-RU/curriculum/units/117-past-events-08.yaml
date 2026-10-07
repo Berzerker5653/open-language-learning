@@ -1,46 +1,66 @@
-id: "ru.unit.a2.past-events-08"
-goal_id: "ru.goal.a2.past-events"
-title: "Always and never"
-summary: "всегда, никогда, делать and знал."
+id: ru.unit.a2.past-events-08
+goal_id: ru.goal.a2.past-events
+title: Always and never
+summary: всегда, никогда, делать and знал.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a2.u117-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.pastevents.vsegda",
-        "ru.lex.pastevents.nikogda",
-        "ru.lex.pastevents.delat",
-        "ru.lex.pastevents.zhit",
-        "ru.lex.pastevents.znal",
-        "ru.sent.a2.u117",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.a2.u117-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a2.u117-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a2.u117"]
-  - id: "ru.activity.a2.u117-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a2.u117-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.pastevents.vsegda
+  - ru.lex.pastevents.nikogda
+  - ru.lex.pastevents.delat
+  - ru.lex.pastevents.zhit
+  - ru.lex.pastevents.znal
+  - ru.sent.a2.u117
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.a2.u117-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a2.u117-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.u117
+- id: ru.activity.a2.u117-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.pastevents.vsegda
+  - ru.lex.pastevents.nikogda
+  - ru.lex.pastevents.delat
+  - ru.lex.pastevents.zhit
+  - ru.lex.pastevents.znal
+  - ru.sent.a2.u117
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.pastevents.vsegda
+  - ru.lex.pastevents.nikogda
+  - ru.lex.pastevents.delat
+  - ru.lex.pastevents.zhit
+  - ru.lex.pastevents.znal
+  - ru.sent.a2.u117
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Always and never: past events with taught forms only."]
-  prohibited_ambiguity: ["Do not place никогда after the verb; it comes before it."]
-  target_proficiency: "A2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Always and never: past events with taught forms only.'
+  prohibited_ambiguity:
+  - Do not place никогда after the verb; it comes before it.
+  target_proficiency: A2
+  validation_method: choice

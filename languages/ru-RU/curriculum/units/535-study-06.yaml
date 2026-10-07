@@ -1,46 +1,66 @@
-id: "ru.unit.b2.study-06"
-goal_id: "ru.goal.b2.academic-study"
-title: "Calendar"
-summary: "календарь, миг, мгновение, секунда and сутки."
+id: ru.unit.b2.study-06
+goal_id: ru.goal.b2.academic-study
+title: Calendar
+summary: календарь, миг, мгновение, секунда and сутки.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u535-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.study.kalendar",
-        "ru.lex.study.mig",
-        "ru.lex.study.mgnovenie",
-        "ru.lex.study.sekunda",
-        "ru.lex.study.sutki",
-        "ru.sent.b2.u535",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u535-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u535-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u535"]
-  - id: "ru.activity.b2.u535-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u535-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.study.kalendar
+  - ru.lex.study.mig
+  - ru.lex.study.mgnovenie
+  - ru.lex.study.sekunda
+  - ru.lex.study.sutki
+  - ru.sent.b2.u535
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u535-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u535-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u535
+- id: ru.activity.b2.u535-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.study.kalendar
+  - ru.lex.study.mig
+  - ru.lex.study.mgnovenie
+  - ru.lex.study.sekunda
+  - ru.lex.study.sutki
+  - ru.sent.b2.u535
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.study.kalendar
+  - ru.lex.study.mig
+  - ru.lex.study.mgnovenie
+  - ru.lex.study.sekunda
+  - ru.lex.study.sutki
+  - ru.sent.b2.u535
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Calendar: definition with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse миг (moment) with мгновение (instant)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Calendar: definition with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse миг (moment) with мгновение (instant).
+  target_proficiency: B2
+  validation_method: choice

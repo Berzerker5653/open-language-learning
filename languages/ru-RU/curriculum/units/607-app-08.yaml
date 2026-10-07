@@ -1,46 +1,66 @@
-id: "ru.unit.b2.app-08"
-goal_id: "ru.goal.b2.professional-writing"
-title: "Recruiting"
-summary: "подразделение, рекрутер, рекрутинг, хедхантер and отборочный."
+id: ru.unit.b2.app-08
+goal_id: ru.goal.b2.professional-writing
+title: Recruiting
+summary: подразделение, рекрутер, рекрутинг, хедхантер and отборочный.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u607-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.prof.podrazdelenie",
-        "ru.lex.prof.rekruter",
-        "ru.lex.prof.rekruting",
-        "ru.lex.prof.hedhanter",
-        "ru.lex.prof.otborochnyy",
-        "ru.sent.b2.u607",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u607-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u607-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u607"]
-  - id: "ru.activity.b2.u607-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u607-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.prof.podrazdelenie
+  - ru.lex.prof.rekruter
+  - ru.lex.prof.rekruting
+  - ru.lex.prof.hedhanter
+  - ru.lex.prof.otborochnyy
+  - ru.sent.b2.u607
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u607-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u607-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u607
+- id: ru.activity.b2.u607-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.prof.podrazdelenie
+  - ru.lex.prof.rekruter
+  - ru.lex.prof.rekruting
+  - ru.lex.prof.hedhanter
+  - ru.lex.prof.otborochnyy
+  - ru.sent.b2.u607
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.prof.podrazdelenie
+  - ru.lex.prof.rekruter
+  - ru.lex.prof.rekruting
+  - ru.lex.prof.hedhanter
+  - ru.lex.prof.otborochnyy
+  - ru.sent.b2.u607
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Recruiting: business letter with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse рекрутер (recruiter) with хедхантер (headhunter)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Recruiting: business letter with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse рекрутер (recruiter) with хедхантер (headhunter).
+  target_proficiency: B2
+  validation_method: choice

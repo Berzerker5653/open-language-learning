@@ -1,47 +1,62 @@
-id: "ru.unit.a1.people-family-07"
-goal_id: "ru.goal.a1.people-family"
-title: "Having and not having"
-summary: "у меня, есть, вещь, сумка, ключ introduced with the possession pattern."
+id: ru.unit.a1.people-family-07
+goal_id: ru.goal.a1.people-family
+title: Having and not having
+summary: у меня, есть, вещь, сумка, ключ introduced with the possession pattern.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a1.u036-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.family.u-menya",
-        "ru.lex.family.est",
-        "ru.lex.family.veshch",
-        "ru.lex.family.sumka",
-        "ru.lex.family.klyuch",
-        "ru.grammar.a1.u-possession",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.mama",
-      ]
-  - id: "ru.activity.a1.u036-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g [
-        "ru.grammar.a1.u-possession",
-        "ru.grammar.on-ramp.eto-identification",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-  - id: "ru.activity.a1.u036-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a1.u036-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.family.u-menya
+  - ru.lex.family.est
+  - ru.lex.family.veshch
+  - ru.lex.family.sumka
+  - ru.lex.family.klyuch
+  - ru.grammar.a1.u-possession
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+- id: ru.activity.a1.u036-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.a1.u-possession
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a1.u036-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.family.u-menya
+  - ru.lex.family.est
+  - ru.lex.family.veshch
+  - ru.lex.family.sumka
+  - ru.lex.family.klyuch
+  - ru.grammar.a1.u-possession
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.family.u-menya
+  - ru.lex.family.est
+  - ru.lex.family.veshch
+  - ru.lex.family.sumka
+  - ru.lex.family.klyuch
+  - ru.grammar.a1.u-possession
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+  allowed_grammar:
+  - ru.grammar.a1.u-possession
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
   expected_interpretations:
-    ["Having and not having: naming and simple possession with taught forms only."]
+  - 'Having and not having: naming and simple possession with taught forms only.'
   prohibited_ambiguity:
-    ["Do not put the possessed item in the genitive with есть; it stays nominative."]
-  target_proficiency: "A1"
-  validation_method: "choice"
+  - Do not put the possessed item in the genitive with есть; it stays nominative.
+  target_proficiency: A1
+  validation_method: choice

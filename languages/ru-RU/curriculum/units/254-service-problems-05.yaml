@@ -1,46 +1,66 @@
-id: "ru.unit.b1.service-problems-05"
-goal_id: "ru.goal.b1.practical-problems"
-title: "Applications"
-summary: "заявление, бланк, форма, заполнить and подать."
+id: ru.unit.b1.service-problems-05
+goal_id: ru.goal.b1.practical-problems
+title: Applications
+summary: заявление, бланк, форма, заполнить and подать.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b1.u254-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.problems2.zayavlenie",
-        "ru.lex.problems2.blank",
-        "ru.lex.problems2.forma",
-        "ru.lex.problems2.zapolnit",
-        "ru.lex.problems2.podat",
-        "ru.sent.b1.u254",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b1.u254-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b1.u254-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b1.u254"]
-  - id: "ru.activity.b1.u254-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b1.u254-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.problems2.zayavlenie
+  - ru.lex.problems2.blank
+  - ru.lex.problems2.forma
+  - ru.lex.problems2.zapolnit
+  - ru.lex.problems2.podat
+  - ru.sent.b1.u254
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b1.u254-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b1.u254-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.u254
+- id: ru.activity.b1.u254-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.problems2.zayavlenie
+  - ru.lex.problems2.blank
+  - ru.lex.problems2.forma
+  - ru.lex.problems2.zapolnit
+  - ru.lex.problems2.podat
+  - ru.sent.b1.u254
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.problems2.zayavlenie
+  - ru.lex.problems2.blank
+  - ru.lex.problems2.forma
+  - ru.lex.problems2.zapolnit
+  - ru.lex.problems2.podat
+  - ru.sent.b1.u254
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Applications: service problems with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse бланк (form) with образец (sample)."]
-  target_proficiency: "B1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Applications: service problems with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse бланк (form) with образец (sample).
+  target_proficiency: B1
+  validation_method: choice

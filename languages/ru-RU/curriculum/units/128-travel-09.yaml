@@ -1,46 +1,66 @@
-id: "ru.unit.a2.travel-09"
-goal_id: "ru.goal.a2.travel"
-title: "On the road"
-summary: "дорога, переезд, безопасность, проезжать and расстояние."
+id: ru.unit.a2.travel-09
+goal_id: ru.goal.a2.travel
+title: On the road
+summary: дорога, переезд, безопасность, проезжать and расстояние.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a2.u128-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.travel.doroga",
-        "ru.lex.travel.pereezd",
-        "ru.lex.travel.bezopasnost",
-        "ru.lex.travel.proizdat",
-        "ru.lex.travel.rasstoyanie",
-        "ru.sent.a2.u128",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.a2.u128-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a2.u128-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a2.u128"]
-  - id: "ru.activity.a2.u128-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a2.u128-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.travel.doroga
+  - ru.lex.travel.pereezd
+  - ru.lex.travel.bezopasnost
+  - ru.lex.travel.proizdat
+  - ru.lex.travel.rasstoyanie
+  - ru.sent.a2.u128
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.a2.u128-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a2.u128-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.u128
+- id: ru.activity.a2.u128-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.travel.doroga
+  - ru.lex.travel.pereezd
+  - ru.lex.travel.bezopasnost
+  - ru.lex.travel.proizdat
+  - ru.lex.travel.rasstoyanie
+  - ru.sent.a2.u128
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.travel.doroga
+  - ru.lex.travel.pereezd
+  - ru.lex.travel.bezopasnost
+  - ru.lex.travel.proizdat
+  - ru.lex.travel.rasstoyanie
+  - ru.sent.a2.u128
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["On the road: travel with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse переезд (railway crossing) with переход (passage)."]
-  target_proficiency: "A2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'On the road: travel with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse переезд (railway crossing) with переход (passage).
+  target_proficiency: A2
+  validation_method: choice

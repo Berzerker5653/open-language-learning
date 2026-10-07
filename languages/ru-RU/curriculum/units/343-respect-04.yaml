@@ -1,46 +1,66 @@
-id: "ru.unit.b1.respect-04"
-goal_id: "ru.goal.b1.opinions"
-title: "Rudeness"
-summary: "грубость, хамство, дерзость, наглость and враждебность."
+id: ru.unit.b1.respect-04
+goal_id: ru.goal.b1.opinions
+title: Rudeness
+summary: грубость, хамство, дерзость, наглость and враждебность.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b1.u343-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.respect.grubost",
-        "ru.lex.respect.hamstvo",
-        "ru.lex.respect.derzost",
-        "ru.lex.respect.naglost",
-        "ru.lex.respect.vrazhdebnost",
-        "ru.sent.b1.u343",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b1.u343-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b1.u343-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b1.u343"]
-  - id: "ru.activity.b1.u343-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b1.u343-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.respect.grubost
+  - ru.lex.respect.hamstvo
+  - ru.lex.respect.derzost
+  - ru.lex.respect.naglost
+  - ru.lex.respect.vrazhdebnost
+  - ru.sent.b1.u343
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b1.u343-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b1.u343-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.u343
+- id: ru.activity.b1.u343-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.respect.grubost
+  - ru.lex.respect.hamstvo
+  - ru.lex.respect.derzost
+  - ru.lex.respect.naglost
+  - ru.lex.respect.vrazhdebnost
+  - ru.sent.b1.u343
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.respect.grubost
+  - ru.lex.respect.hamstvo
+  - ru.lex.respect.derzost
+  - ru.lex.respect.naglost
+  - ru.lex.respect.vrazhdebnost
+  - ru.sent.b1.u343
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Rudeness: respect with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse хамство (gross rudeness) with дерзость (boldness)."]
-  target_proficiency: "B1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Rudeness: respect with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse хамство (gross rudeness) with дерзость (boldness).
+  target_proficiency: B1
+  validation_method: choice

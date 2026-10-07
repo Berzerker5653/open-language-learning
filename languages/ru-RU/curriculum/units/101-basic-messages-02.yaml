@@ -1,46 +1,66 @@
-id: "ru.unit.a1.basic-messages-02"
-goal_id: "ru.goal.a1.basic-messages"
-title: "Sending and receiving"
-summary: "отправлять, получать, набирать, записка and текст."
+id: ru.unit.a1.basic-messages-02
+goal_id: ru.goal.a1.basic-messages
+title: Sending and receiving
+summary: отправлять, получать, набирать, записка and текст.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a1.u101-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.messages.otpravit",
-        "ru.lex.messages.poluchat",
-        "ru.lex.messages.nabirat",
-        "ru.lex.messages.zapiska",
-        "ru.lex.messages.tekst",
-        "ru.sent.a1.u101",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.mama",
-      ]
-  - id: "ru.activity.a1.u101-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a1.u101-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a1.u101"]
-  - id: "ru.activity.a1.u101-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a1.u101-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.messages.otpravit
+  - ru.lex.messages.poluchat
+  - ru.lex.messages.nabirat
+  - ru.lex.messages.zapiska
+  - ru.lex.messages.tekst
+  - ru.sent.a1.u101
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+- id: ru.activity.a1.u101-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a1.u101-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a1.u101
+- id: ru.activity.a1.u101-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.messages.otpravit
+  - ru.lex.messages.poluchat
+  - ru.lex.messages.nabirat
+  - ru.lex.messages.zapiska
+  - ru.lex.messages.tekst
+  - ru.sent.a1.u101
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.messages.otpravit
+  - ru.lex.messages.poluchat
+  - ru.lex.messages.nabirat
+  - ru.lex.messages.zapiska
+  - ru.lex.messages.tekst
+  - ru.sent.a1.u101
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Sending and receiving: messages with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse отправлять (to send) with получать (to receive)."]
-  target_proficiency: "A1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Sending and receiving: messages with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse отправлять (to send) with получать (to receive).
+  target_proficiency: A1
+  validation_method: choice

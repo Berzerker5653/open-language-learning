@@ -1,46 +1,66 @@
-id: "ru.unit.b2.rev-05"
-goal_id: "ru.goal.b2.style-register"
-title: "Cuts"
-summary: "вымарывать, вымарка, изымать, изъятие and цензор."
+id: ru.unit.b2.rev-05
+goal_id: ru.goal.b2.style-register
+title: Cuts
+summary: вымарывать, вымарка, изымать, изъятие and цензор.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u804-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.style.vymaryvat",
-        "ru.lex.style.vymarka",
-        "ru.lex.style.izymat",
-        "ru.lex.style.izyatie",
-        "ru.lex.style.cenzor",
-        "ru.sent.b2.u804",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u804-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u804-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u804"]
-  - id: "ru.activity.b2.u804-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u804-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.style.vymaryvat
+  - ru.lex.style.vymarka
+  - ru.lex.style.izymat
+  - ru.lex.style.izyatie
+  - ru.lex.style.cenzor
+  - ru.sent.b2.u804
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u804-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u804-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u804
+- id: ru.activity.b2.u804-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.style.vymaryvat
+  - ru.lex.style.vymarka
+  - ru.lex.style.izymat
+  - ru.lex.style.izyatie
+  - ru.lex.style.cenzor
+  - ru.sent.b2.u804
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.style.vymaryvat
+  - ru.lex.style.vymarka
+  - ru.lex.style.izymat
+  - ru.lex.style.izyatie
+  - ru.lex.style.cenzor
+  - ru.sent.b2.u804
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Cuts: precision response with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse вымарка (erasure) with изъятие (removal)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Cuts: precision response with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse вымарка (erasure) with изъятие (removal).
+  target_proficiency: B2
+  validation_method: choice

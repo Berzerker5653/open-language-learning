@@ -1,46 +1,66 @@
-id: "ru.unit.b2.sci-05"
-goal_id: "ru.goal.b2.science-environment"
-title: "Lab"
-summary: "исследовательский, лабораторный, аппаратура, экспериментальный and экспериментировать."
+id: ru.unit.b2.sci-05
+goal_id: ru.goal.b2.science-environment
+title: Lab
+summary: исследовательский, лабораторный, аппаратура, экспериментальный and экспериментировать.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u694-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.sci.issledovatelskiy",
-        "ru.lex.sci.laboratornyy",
-        "ru.lex.sci.apparatura",
-        "ru.lex.sci.eksperimentalnyy",
-        "ru.lex.sci.eksperimentirovat",
-        "ru.sent.b2.u694",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u694-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u694-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u694"]
-  - id: "ru.activity.b2.u694-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u694-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.sci.issledovatelskiy
+  - ru.lex.sci.laboratornyy
+  - ru.lex.sci.apparatura
+  - ru.lex.sci.eksperimentalnyy
+  - ru.lex.sci.eksperimentirovat
+  - ru.sent.b2.u694
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u694-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u694-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u694
+- id: ru.activity.b2.u694-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.sci.issledovatelskiy
+  - ru.lex.sci.laboratornyy
+  - ru.lex.sci.apparatura
+  - ru.lex.sci.eksperimentalnyy
+  - ru.lex.sci.eksperimentirovat
+  - ru.sent.b2.u694
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.sci.issledovatelskiy
+  - ru.lex.sci.laboratornyy
+  - ru.lex.sci.apparatura
+  - ru.lex.sci.eksperimentalnyy
+  - ru.lex.sci.eksperimentirovat
+  - ru.sent.b2.u694
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Lab: science report with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse аппаратура (apparatus) with прибор (instrument)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Lab: science report with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse аппаратура (apparatus) with прибор (instrument).
+  target_proficiency: B2
+  validation_method: choice

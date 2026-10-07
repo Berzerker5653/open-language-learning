@@ -1,46 +1,66 @@
-id: "ru.unit.b2.prop-04"
-goal_id: "ru.goal.b2.professional-writing"
-title: "Shortages"
-summary: "нехватка, дефицит, избыток, кадровый and потенциал."
+id: ru.unit.b2.prop-04
+goal_id: ru.goal.b2.professional-writing
+title: Shortages
+summary: нехватка, дефицит, избыток, кадровый and потенциал.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u583-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.prof.nekhvatka",
-        "ru.lex.prof.deficit",
-        "ru.lex.prof.izbytok",
-        "ru.lex.prof.kadrovyy",
-        "ru.lex.prof.potencial",
-        "ru.sent.b2.u583",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u583-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u583-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u583"]
-  - id: "ru.activity.b2.u583-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u583-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.prof.nekhvatka
+  - ru.lex.prof.deficit
+  - ru.lex.prof.izbytok
+  - ru.lex.prof.kadrovyy
+  - ru.lex.prof.potencial
+  - ru.sent.b2.u583
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u583-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u583-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u583
+- id: ru.activity.b2.u583-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.prof.nekhvatka
+  - ru.lex.prof.deficit
+  - ru.lex.prof.izbytok
+  - ru.lex.prof.kadrovyy
+  - ru.lex.prof.potencial
+  - ru.sent.b2.u583
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.prof.nekhvatka
+  - ru.lex.prof.deficit
+  - ru.lex.prof.izbytok
+  - ru.lex.prof.kadrovyy
+  - ru.lex.prof.potencial
+  - ru.sent.b2.u583
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Shortages: business letter with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse нехватка (shortage) with избыток (excess)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Shortages: business letter with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse нехватка (shortage) with избыток (excess).
+  target_proficiency: B2
+  validation_method: choice

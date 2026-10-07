@@ -1,49 +1,72 @@
-id: "ru.unit.a1.personal-details-03"
-goal_id: "ru.goal.a1.personal-details"
-title: "Questions about a person"
-summary: "Read five question words. Match each to the missing information, then change a supplied identity statement into a written yes-no question without adding an auxiliary."
+id: ru.unit.a1.personal-details-03
+goal_id: ru.goal.a1.personal-details
+title: Questions about a person
+summary: Read five question words. Match each to the missing information, then change a supplied identity
+  statement into a written yes-no question without adding an auxiliary.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a1.u022-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.personal.kto",
-        "ru.lex.personal.chto",
-        "ru.lex.personal.gde",
-        "ru.lex.personal.kak",
-        "ru.lex.personal.otkuda",
-        "ru.lex.personal.ya",
-        "ru.lex.personal.anna",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.kniga",
-        "ru.sent.on-ramp.anna-introduction",
-        "ru.sent.on-ramp.this-is-book",
-      ]
-  - id: "ru.activity.a1.u022-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g [
-        "ru.grammar.a1.questions",
-        "ru.grammar.on-ramp.zero-present-copula",
-        "ru.grammar.on-ramp.eto-identification",
-      ]
-  - id: "ru.activity.a1.u022-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a1.u022-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.personal.kto
+  - ru.lex.personal.chto
+  - ru.lex.personal.gde
+  - ru.lex.personal.kak
+  - ru.lex.personal.otkuda
+  - ru.lex.personal.ya
+  - ru.lex.personal.anna
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.kniga
+  - ru.sent.on-ramp.anna-introduction
+  - ru.sent.on-ramp.this-is-book
+- id: ru.activity.a1.u022-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.a1.questions
+  - ru.grammar.on-ramp.zero-present-copula
+  - ru.grammar.on-ramp.eto-identification
+- id: ru.activity.a1.u022-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.personal.kto
+  - ru.lex.personal.chto
+  - ru.lex.personal.gde
+  - ru.lex.personal.kak
+  - ru.lex.personal.otkuda
+  - ru.lex.personal.ya
+  - ru.lex.personal.anna
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.kniga
+  - ru.sent.on-ramp.anna-introduction
+  - ru.sent.on-ramp.this-is-book
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.personal.kto
+  - ru.lex.personal.chto
+  - ru.lex.personal.gde
+  - ru.lex.personal.kak
+  - ru.lex.personal.otkuda
+  - ru.lex.personal.ya
+  - ru.lex.personal.anna
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.kniga
+  - ru.sent.on-ramp.anna-introduction
+  - ru.sent.on-ramp.this-is-book
+  allowed_grammar:
+  - ru.grammar.a1.questions
+  - ru.grammar.on-ramp.zero-present-copula
+  - ru.grammar.on-ramp.eto-identification
   new_item_budget: 6
   register: []
-  expected_interpretations: ["A question seeking identity, location, manner or origin."]
+  expected_interpretations:
+  - A question seeking identity, location, manner or origin.
   prohibited_ambiguity:
-    ["Do not supply an untaught answer pattern merely because a question word is known."]
-  target_proficiency: "A1"
-  validation_method: "choice"
+  - Do not supply an untaught answer pattern merely because a question word is known.
+  target_proficiency: A1
+  validation_method: choice

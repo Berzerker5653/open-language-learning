@@ -1,46 +1,66 @@
-id: "ru.unit.b1.opinions-05"
-goal_id: "ru.goal.b1.opinions"
-title: "Thesis"
-summary: "тезис, формулировка, положение, аргументация and убедить."
+id: ru.unit.b1.opinions-05
+goal_id: ru.goal.b1.opinions
+title: Thesis
+summary: тезис, формулировка, положение, аргументация and убедить.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b1.u334-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.opinions.tezis",
-        "ru.lex.opinions.formulirovka",
-        "ru.lex.opinions.polozhenie",
-        "ru.lex.opinions.argumentaciya",
-        "ru.lex.opinions.ubit",
-        "ru.sent.b1.u334",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b1.u334-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b1.u334-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b1.u334"]
-  - id: "ru.activity.b1.u334-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b1.u334-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.opinions.tezis
+  - ru.lex.opinions.formulirovka
+  - ru.lex.opinions.polozhenie
+  - ru.lex.opinions.argumentaciya
+  - ru.lex.opinions.ubit
+  - ru.sent.b1.u334
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b1.u334-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b1.u334-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.u334
+- id: ru.activity.b1.u334-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.opinions.tezis
+  - ru.lex.opinions.formulirovka
+  - ru.lex.opinions.polozhenie
+  - ru.lex.opinions.argumentaciya
+  - ru.lex.opinions.ubit
+  - ru.sent.b1.u334
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.opinions.tezis
+  - ru.lex.opinions.formulirovka
+  - ru.lex.opinions.polozhenie
+  - ru.lex.opinions.argumentaciya
+  - ru.lex.opinions.ubit
+  - ru.sent.b1.u334
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Thesis: opinions with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse формулировка (wording) with положение (statement)."]
-  target_proficiency: "B1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Thesis: opinions with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse формулировка (wording) with положение (statement).
+  target_proficiency: B1
+  validation_method: choice

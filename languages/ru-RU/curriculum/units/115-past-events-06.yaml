@@ -1,47 +1,66 @@
-id: "ru.unit.a2.past-events-06"
-goal_id: "ru.goal.a2.past-events"
-title: "Already done"
-summary: "уже, ещё, купить, сделать and пришли."
+id: ru.unit.a2.past-events-06
+goal_id: ru.goal.a2.past-events
+title: Already done
+summary: уже, ещё, купить, сделать and пришли.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a2.u115-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.pastevents.uz",
-        "ru.lex.pastevents.eshche",
-        "ru.lex.pastevents.kupit",
-        "ru.lex.pastevents.sdelat",
-        "ru.lex.pastevents.pozvonit",
-        "ru.sent.a2.u115",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.a2.u115-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a2.u115-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a2.u115"]
-  - id: "ru.activity.a2.u115-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a2.u115-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.pastevents.uz
+  - ru.lex.pastevents.eshche
+  - ru.lex.pastevents.kupit
+  - ru.lex.pastevents.sdelat
+  - ru.lex.pastevents.pozvonit
+  - ru.sent.a2.u115
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.a2.u115-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a2.u115-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.u115
+- id: ru.activity.a2.u115-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.pastevents.uz
+  - ru.lex.pastevents.eshche
+  - ru.lex.pastevents.kupit
+  - ru.lex.pastevents.sdelat
+  - ru.lex.pastevents.pozvonit
+  - ru.sent.a2.u115
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.pastevents.uz
+  - ru.lex.pastevents.eshche
+  - ru.lex.pastevents.kupit
+  - ru.lex.pastevents.sdelat
+  - ru.lex.pastevents.pozvonit
+  - ru.sent.a2.u115
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Already done: past events with taught forms only."]
+  expected_interpretations:
+  - 'Already done: past events with taught forms only.'
   prohibited_ambiguity:
-    ["Do not use уже with a present verb; pair it with a supplied perfective past form."]
-  target_proficiency: "A2"
-  validation_method: "choice"
+  - Do not use уже with a present verb; pair it with a supplied perfective past form.
+  target_proficiency: A2
+  validation_method: choice

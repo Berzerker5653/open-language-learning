@@ -1,46 +1,66 @@
-id: "ru.unit.b1.narration-background-09"
-goal_id: "ru.goal.b1.narration"
-title: "Thinking"
-summary: "мысль, думать, понимать, соображать and догадываться."
+id: ru.unit.b1.narration-background-09
+goal_id: ru.goal.b1.narration
+title: Thinking
+summary: мысль, думать, понимать, соображать and догадываться.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b1.u228-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.narration2.mysl",
-        "ru.lex.narration2.dumat",
-        "ru.lex.narration2.ponimat",
-        "ru.lex.narration2.soobrazhat",
-        "ru.lex.narration2.dogadyvatsya",
-        "ru.sent.b1.u228",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b1.u228-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b1.u228-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b1.u228"]
-  - id: "ru.activity.b1.u228-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b1.u228-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.narration2.mysl
+  - ru.lex.narration2.dumat
+  - ru.lex.narration2.ponimat
+  - ru.lex.narration2.soobrazhat
+  - ru.lex.narration2.dogadyvatsya
+  - ru.sent.b1.u228
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b1.u228-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b1.u228-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.u228
+- id: ru.activity.b1.u228-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.narration2.mysl
+  - ru.lex.narration2.dumat
+  - ru.lex.narration2.ponimat
+  - ru.lex.narration2.soobrazhat
+  - ru.lex.narration2.dogadyvatsya
+  - ru.sent.b1.u228
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.narration2.mysl
+  - ru.lex.narration2.dumat
+  - ru.lex.narration2.ponimat
+  - ru.lex.narration2.soobrazhat
+  - ru.lex.narration2.dogadyvatsya
+  - ru.sent.b1.u228
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Thinking: background with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse понимать (understand) with догадываться (suspect)."]
-  target_proficiency: "B1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Thinking: background with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse понимать (understand) with догадываться (suspect).
+  target_proficiency: B1
+  validation_method: choice

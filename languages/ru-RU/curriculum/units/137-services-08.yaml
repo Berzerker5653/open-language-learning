@@ -1,47 +1,66 @@
-id: "ru.unit.a2.services-08"
-goal_id: "ru.goal.a2.services"
-title: "Certificates"
-summary: "оригинал, справка, свидетельство, ответственность and порядок."
+id: ru.unit.a2.services-08
+goal_id: ru.goal.a2.services
+title: Certificates
+summary: оригинал, справка, свидетельство, ответственность and порядок.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a2.u137-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.services.original",
-        "ru.lex.services.spravka",
-        "ru.lex.services.svidetelstvo",
-        "ru.lex.services.otvetstvennost",
-        "ru.lex.services.poryadok",
-        "ru.sent.a2.u137",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.a2.u137-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a2.u137-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a2.u137"]
-  - id: "ru.activity.a2.u137-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a2.u137-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.services.original
+  - ru.lex.services.spravka
+  - ru.lex.services.svidetelstvo
+  - ru.lex.services.otvetstvennost
+  - ru.lex.services.poryadok
+  - ru.sent.a2.u137
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.a2.u137-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a2.u137-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.u137
+- id: ru.activity.a2.u137-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.services.original
+  - ru.lex.services.spravka
+  - ru.lex.services.svidetelstvo
+  - ru.lex.services.otvetstvennost
+  - ru.lex.services.poryadok
+  - ru.sent.a2.u137
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.services.original
+  - ru.lex.services.spravka
+  - ru.lex.services.svidetelstvo
+  - ru.lex.services.otvetstvennost
+  - ru.lex.services.poryadok
+  - ru.sent.a2.u137
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Certificates: services with taught forms only."]
+  expected_interpretations:
+  - 'Certificates: services with taught forms only.'
   prohibited_ambiguity:
-    ["Do not confuse справка with свидетельство; both are certificates of different kinds."]
-  target_proficiency: "A2"
-  validation_method: "choice"
+  - Do not confuse справка with свидетельство; both are certificates of different kinds.
+  target_proficiency: A2
+  validation_method: choice

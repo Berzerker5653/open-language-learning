@@ -1,46 +1,66 @@
-id: "ru.unit.b1.culture-media-08"
-goal_id: "ru.goal.b1.culture-media"
-title: "Contest"
-summary: "конкурс, приз, победитель, жюри and голосование."
+id: ru.unit.b1.culture-media-08
+goal_id: ru.goal.b1.culture-media
+title: Contest
+summary: конкурс, приз, победитель, жюри and голосование.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b1.u317-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.culture.konkurs",
-        "ru.lex.culture.priz",
-        "ru.lex.culture.pobeditel",
-        "ru.lex.culture.zhuri",
-        "ru.lex.culture.golosovanie",
-        "ru.sent.b1.u317",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b1.u317-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b1.u317-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b1.u317"]
-  - id: "ru.activity.b1.u317-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b1.u317-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.culture.konkurs
+  - ru.lex.culture.priz
+  - ru.lex.culture.pobeditel
+  - ru.lex.culture.zhuri
+  - ru.lex.culture.golosovanie
+  - ru.sent.b1.u317
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b1.u317-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b1.u317-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.u317
+- id: ru.activity.b1.u317-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.culture.konkurs
+  - ru.lex.culture.priz
+  - ru.lex.culture.pobeditel
+  - ru.lex.culture.zhuri
+  - ru.lex.culture.golosovanie
+  - ru.sent.b1.u317
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.culture.konkurs
+  - ru.lex.culture.priz
+  - ru.lex.culture.pobeditel
+  - ru.lex.culture.zhuri
+  - ru.lex.culture.golosovanie
+  - ru.sent.b1.u317
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Contest: culture with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse жюри (jury) with победитель (winner)."]
-  target_proficiency: "B1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Contest: culture with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse жюри (jury) with победитель (winner).
+  target_proficiency: B1
+  validation_method: choice

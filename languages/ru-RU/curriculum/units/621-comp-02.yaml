@@ -1,46 +1,66 @@
-id: "ru.unit.b2.comp-02"
-goal_id: "ru.goal.b2.negotiation"
-title: "Urgency"
-summary: "весомость, срочность, отсрочка, отсрочить and внеочередной."
+id: ru.unit.b2.comp-02
+goal_id: ru.goal.b2.negotiation
+title: Urgency
+summary: весомость, срочность, отсрочка, отсрочить and внеочередной.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u621-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.neg.vesomost",
-        "ru.lex.neg.srochnost",
-        "ru.lex.neg.otsrochka",
-        "ru.lex.neg.otsrochit",
-        "ru.lex.neg.vneocherednoy",
-        "ru.sent.b2.u621",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u621-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u621-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u621"]
-  - id: "ru.activity.b2.u621-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u621-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.neg.vesomost
+  - ru.lex.neg.srochnost
+  - ru.lex.neg.otsrochka
+  - ru.lex.neg.otsrochit
+  - ru.lex.neg.vneocherednoy
+  - ru.sent.b2.u621
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u621-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u621-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u621
+- id: ru.activity.b2.u621-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.neg.vesomost
+  - ru.lex.neg.srochnost
+  - ru.lex.neg.otsrochka
+  - ru.lex.neg.otsrochit
+  - ru.lex.neg.vneocherednoy
+  - ru.sent.b2.u621
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.neg.vesomost
+  - ru.lex.neg.srochnost
+  - ru.lex.neg.otsrochka
+  - ru.lex.neg.otsrochit
+  - ru.lex.neg.vneocherednoy
+  - ru.sent.b2.u621
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Urgency: negotiation exchange with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse срочность (urgency) with весомость (importance)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Urgency: negotiation exchange with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse срочность (urgency) with весомость (importance).
+  target_proficiency: B2
+  validation_method: choice

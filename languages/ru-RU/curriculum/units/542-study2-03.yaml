@@ -1,47 +1,66 @@
-id: "ru.unit.b2.study2-03"
-goal_id: "ru.goal.b2.academic-study2"
-title: "Purpose"
-summary: "назначение, местоположение, расположение, строение and компонент."
+id: ru.unit.b2.study2-03
+goal_id: ru.goal.b2.academic-study2
+title: Purpose
+summary: назначение, местоположение, расположение, строение and компонент.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u542-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.study2.naznachenie",
-        "ru.lex.study2.mestopolozhenie",
-        "ru.lex.study2.raspolozhenie",
-        "ru.lex.study2.stroenie",
-        "ru.lex.study2.komponent",
-        "ru.sent.b2.u542",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u542-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u542-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u542"]
-  - id: "ru.activity.b2.u542-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u542-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.study2.naznachenie
+  - ru.lex.study2.mestopolozhenie
+  - ru.lex.study2.raspolozhenie
+  - ru.lex.study2.stroenie
+  - ru.lex.study2.komponent
+  - ru.sent.b2.u542
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u542-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u542-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u542
+- id: ru.activity.b2.u542-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.study2.naznachenie
+  - ru.lex.study2.mestopolozhenie
+  - ru.lex.study2.raspolozhenie
+  - ru.lex.study2.stroenie
+  - ru.lex.study2.komponent
+  - ru.sent.b2.u542
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.study2.naznachenie
+  - ru.lex.study2.mestopolozhenie
+  - ru.lex.study2.raspolozhenie
+  - ru.lex.study2.stroenie
+  - ru.lex.study2.komponent
+  - ru.sent.b2.u542
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Purpose: notes with taught forms only."]
+  expected_interpretations:
+  - 'Purpose: notes with taught forms only.'
   prohibited_ambiguity:
-    ["Do not confuse местоположение (location) with расположение (arrangement)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  - Do not confuse местоположение (location) with расположение (arrangement).
+  target_proficiency: B2
+  validation_method: choice

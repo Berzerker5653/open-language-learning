@@ -1,46 +1,66 @@
-id: "ru.unit.b2.study4-01"
-goal_id: "ru.goal.b2.academic-study4"
-title: "Discovery"
-summary: "открытие, находка, обсуждение, звание and широта."
+id: ru.unit.b2.study4-01
+goal_id: ru.goal.b2.academic-study4
+title: Discovery
+summary: открытие, находка, обсуждение, звание and широта.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u560-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.study4.otkrytie",
-        "ru.lex.study4.nahodka",
-        "ru.lex.study4.obsuzhdenie",
-        "ru.lex.study4.zvanie",
-        "ru.lex.study4.shirota",
-        "ru.sent.b2.u560",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u560-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u560-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u560"]
-  - id: "ru.activity.b2.u560-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u560-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.study4.otkrytie
+  - ru.lex.study4.nahodka
+  - ru.lex.study4.obsuzhdenie
+  - ru.lex.study4.zvanie
+  - ru.lex.study4.shirota
+  - ru.sent.b2.u560
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u560-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u560-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u560
+- id: ru.activity.b2.u560-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.study4.otkrytie
+  - ru.lex.study4.nahodka
+  - ru.lex.study4.obsuzhdenie
+  - ru.lex.study4.zvanie
+  - ru.lex.study4.shirota
+  - ru.sent.b2.u560
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.study4.otkrytie
+  - ru.lex.study4.nahodka
+  - ru.lex.study4.obsuzhdenie
+  - ru.lex.study4.zvanie
+  - ru.lex.study4.shirota
+  - ru.sent.b2.u560
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Discovery: findings with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse открытие (discovery) with находка (finding)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Discovery: findings with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse открытие (discovery) with находка (finding).
+  target_proficiency: B2
+  validation_method: choice

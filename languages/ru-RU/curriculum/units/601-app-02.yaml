@@ -1,47 +1,66 @@
-id: "ru.unit.b2.app-02"
-goal_id: "ru.goal.b2.professional-writing"
-title: "Getting hired"
-summary: "трудоустройство, кадровик, сопроводительный, самопрезентация and самооценка."
+id: ru.unit.b2.app-02
+goal_id: ru.goal.b2.professional-writing
+title: Getting hired
+summary: трудоустройство, кадровик, сопроводительный, самопрезентация and самооценка.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u601-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.prof.trudoustroystvo",
-        "ru.lex.prof.kadrovik",
-        "ru.lex.prof.sprovoditelnyy",
-        "ru.lex.prof.samoprezentaciya",
-        "ru.lex.prof.samoocenka",
-        "ru.sent.b2.u601",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u601-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u601-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u601"]
-  - id: "ru.activity.b2.u601-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u601-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.prof.trudoustroystvo
+  - ru.lex.prof.kadrovik
+  - ru.lex.prof.sprovoditelnyy
+  - ru.lex.prof.samoprezentaciya
+  - ru.lex.prof.samoocenka
+  - ru.sent.b2.u601
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u601-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u601-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u601
+- id: ru.activity.b2.u601-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.prof.trudoustroystvo
+  - ru.lex.prof.kadrovik
+  - ru.lex.prof.sprovoditelnyy
+  - ru.lex.prof.samoprezentaciya
+  - ru.lex.prof.samoocenka
+  - ru.sent.b2.u601
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.prof.trudoustroystvo
+  - ru.lex.prof.kadrovik
+  - ru.lex.prof.sprovoditelnyy
+  - ru.lex.prof.samoprezentaciya
+  - ru.lex.prof.samoocenka
+  - ru.sent.b2.u601
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Getting hired: business letter with taught forms only."]
+  expected_interpretations:
+  - 'Getting hired: business letter with taught forms only.'
   prohibited_ambiguity:
-    ["Do not confuse трудоустройство (job placement) with рекрутинг (recruiting)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  - Do not confuse трудоустройство (job placement) with рекрутинг (recruiting).
+  target_proficiency: B2
+  validation_method: choice

@@ -1,46 +1,66 @@
-id: "ru.unit.a2.instructions-01"
-goal_id: "ru.goal.a2.instructions"
-title: "Steps"
-summary: "шаг, инструкция, правило, далее and затем."
+id: ru.unit.a2.instructions-01
+goal_id: ru.goal.a2.instructions
+title: Steps
+summary: шаг, инструкция, правило, далее and затем.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a2.u180-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.instructions.shag",
-        "ru.lex.instructions.instrukciya",
-        "ru.lex.instructions.pravilo",
-        "ru.lex.instructions.dalee",
-        "ru.lex.instructions.zatem",
-        "ru.sent.a2.u180",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.a2.u180-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a2.u180-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a2.u180"]
-  - id: "ru.activity.a2.u180-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a2.u180-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.instructions.shag
+  - ru.lex.instructions.instrukciya
+  - ru.lex.instructions.pravilo
+  - ru.lex.instructions.dalee
+  - ru.lex.instructions.zatem
+  - ru.sent.a2.u180
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.a2.u180-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a2.u180-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.u180
+- id: ru.activity.a2.u180-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.instructions.shag
+  - ru.lex.instructions.instrukciya
+  - ru.lex.instructions.pravilo
+  - ru.lex.instructions.dalee
+  - ru.lex.instructions.zatem
+  - ru.sent.a2.u180
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.instructions.shag
+  - ru.lex.instructions.instrukciya
+  - ru.lex.instructions.pravilo
+  - ru.lex.instructions.dalee
+  - ru.lex.instructions.zatem
+  - ru.sent.a2.u180
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Steps: instructions with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse правило (rule) with инструкция (manual)."]
-  target_proficiency: "A2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Steps: instructions with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse правило (rule) with инструкция (manual).
+  target_proficiency: A2
+  validation_method: choice

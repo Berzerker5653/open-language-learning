@@ -1,46 +1,66 @@
-id: "ru.unit.a2.problems-solutions-04"
-goal_id: "ru.goal.a2.problems-solutions"
-title: "At the repair shop"
-summary: "починка, мастер, запчасть, установить and настроить."
+id: ru.unit.a2.problems-solutions-04
+goal_id: ru.goal.a2.problems-solutions
+title: At the repair shop
+summary: починка, мастер, запчасть, установить and настроить.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a2.u193-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.problems.pochinka",
-        "ru.lex.problems.master",
-        "ru.lex.problems.zapchast",
-        "ru.lex.problems.ustanovit",
-        "ru.lex.problems.nastroit",
-        "ru.sent.a2.u193",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.a2.u193-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a2.u193-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a2.u193"]
-  - id: "ru.activity.a2.u193-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a2.u193-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.problems.pochinka
+  - ru.lex.problems.master
+  - ru.lex.problems.zapchast
+  - ru.lex.problems.ustanovit
+  - ru.lex.problems.nastroit
+  - ru.sent.a2.u193
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.a2.u193-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a2.u193-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.u193
+- id: ru.activity.a2.u193-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.problems.pochinka
+  - ru.lex.problems.master
+  - ru.lex.problems.zapchast
+  - ru.lex.problems.ustanovit
+  - ru.lex.problems.nastroit
+  - ru.sent.a2.u193
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.problems.pochinka
+  - ru.lex.problems.master
+  - ru.lex.problems.zapchast
+  - ru.lex.problems.ustanovit
+  - ru.lex.problems.nastroit
+  - ru.sent.a2.u193
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["At the repair shop: problems with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse установить (install) with настроить (adjust)."]
-  target_proficiency: "A2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'At the repair shop: problems with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse установить (install) with настроить (adjust).
+  target_proficiency: A2
+  validation_method: choice

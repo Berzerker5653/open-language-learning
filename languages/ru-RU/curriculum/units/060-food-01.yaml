@@ -1,47 +1,66 @@
-id: "ru.unit.a1.food-01"
-goal_id: "ru.goal.a1.food"
-title: "Table basics"
-summary: "хлеб, масло, сыр, соль and сахар."
+id: ru.unit.a1.food-01
+goal_id: ru.goal.a1.food
+title: Table basics
+summary: хлеб, масло, сыр, соль and сахар.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a1.u060-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.food.hleb",
-        "ru.lex.food.maslo",
-        "ru.lex.food.sir",
-        "ru.lex.food.sol",
-        "ru.lex.food.sahar",
-        "ru.sent.a1.u060",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.mama",
-      ]
-  - id: "ru.activity.a1.u060-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a1.u060-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a1.u060"]
-  - id: "ru.activity.a1.u060-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a1.u060-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.food.hleb
+  - ru.lex.food.maslo
+  - ru.lex.food.sir
+  - ru.lex.food.sol
+  - ru.lex.food.sahar
+  - ru.sent.a1.u060
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+- id: ru.activity.a1.u060-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a1.u060-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a1.u060
+- id: ru.activity.a1.u060-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.food.hleb
+  - ru.lex.food.maslo
+  - ru.lex.food.sir
+  - ru.lex.food.sol
+  - ru.lex.food.sahar
+  - ru.sent.a1.u060
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.food.hleb
+  - ru.lex.food.maslo
+  - ru.lex.food.sir
+  - ru.lex.food.sol
+  - ru.lex.food.sahar
+  - ru.sent.a1.u060
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Table basics: food and ordering with taught forms only."]
+  expected_interpretations:
+  - 'Table basics: food and ordering with taught forms only.'
   prohibited_ambiguity:
-    ["Do not guess genders here; хлеб is masculine and масло is neuter as taught."]
-  target_proficiency: "A1"
-  validation_method: "choice"
+  - Do not guess genders here; хлеб is masculine and масло is neuter as taught.
+  target_proficiency: A1
+  validation_method: choice

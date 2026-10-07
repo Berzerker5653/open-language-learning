@@ -1,46 +1,66 @@
-id: "ru.unit.a1.routines-07"
-goal_id: "ru.goal.a1.routines"
-title: "Today and tomorrow"
-summary: "сегодня, завтра, вчера, утром, вечером."
+id: ru.unit.a1.routines-07
+goal_id: ru.goal.a1.routines
+title: Today and tomorrow
+summary: сегодня, завтра, вчера, утром, вечером.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a1.u056-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.routines.segodnya",
-        "ru.lex.routines.zavtra",
-        "ru.lex.routines.vchera",
-        "ru.lex.routines.utrom",
-        "ru.lex.routines.vecherom",
-        "ru.sent.a1.u055",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.mama",
-      ]
-  - id: "ru.activity.a1.u056-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a1.u056-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a1.u055"]
-  - id: "ru.activity.a1.u056-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a1.u056-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.routines.segodnya
+  - ru.lex.routines.zavtra
+  - ru.lex.routines.vchera
+  - ru.lex.routines.utrom
+  - ru.lex.routines.vecherom
+  - ru.sent.a1.u055
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+- id: ru.activity.a1.u056-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a1.u056-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a1.u055
+- id: ru.activity.a1.u056-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.routines.segodnya
+  - ru.lex.routines.zavtra
+  - ru.lex.routines.vchera
+  - ru.lex.routines.utrom
+  - ru.lex.routines.vecherom
+  - ru.sent.a1.u055
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.routines.segodnya
+  - ru.lex.routines.zavtra
+  - ru.lex.routines.vchera
+  - ru.lex.routines.utrom
+  - ru.lex.routines.vecherom
+  - ru.sent.a1.u055
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Today and tomorrow: routines and time with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse вчера (yesterday) with завтра (tomorrow)."]
-  target_proficiency: "A1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Today and tomorrow: routines and time with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse вчера (yesterday) with завтра (tomorrow).
+  target_proficiency: A1
+  validation_method: choice

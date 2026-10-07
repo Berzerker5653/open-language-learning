@@ -1,47 +1,66 @@
-id: "ru.unit.b2.bal-09"
-goal_id: "ru.goal.b2.society-policy"
-title: "Analysis"
-summary: "самокритика, аналитический, разбор, контраргументация and фактология."
+id: ru.unit.b2.bal-09
+goal_id: ru.goal.b2.society-policy
+title: Analysis
+summary: самокритика, аналитический, разбор, контраргументация and фактология.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u688-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.soc.samokritika",
-        "ru.lex.soc.analiticheskiy",
-        "ru.lex.soc.razbor",
-        "ru.lex.soc.kontrargumentaciya",
-        "ru.lex.soc.faktologiya",
-        "ru.sent.b2.u688",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u688-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u688-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u688"]
-  - id: "ru.activity.b2.u688-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u688-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.soc.samokritika
+  - ru.lex.soc.analiticheskiy
+  - ru.lex.soc.razbor
+  - ru.lex.soc.kontrargumentaciya
+  - ru.lex.soc.faktologiya
+  - ru.sent.b2.u688
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u688-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u688-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u688
+- id: ru.activity.b2.u688-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.soc.samokritika
+  - ru.lex.soc.analiticheskiy
+  - ru.lex.soc.razbor
+  - ru.lex.soc.kontrargumentaciya
+  - ru.lex.soc.faktologiya
+  - ru.sent.b2.u688
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.soc.samokritika
+  - ru.lex.soc.analiticheskiy
+  - ru.lex.soc.razbor
+  - ru.lex.soc.kontrargumentaciya
+  - ru.lex.soc.faktologiya
+  - ru.sent.b2.u688
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Analysis: policy notice with taught forms only."]
+  expected_interpretations:
+  - 'Analysis: policy notice with taught forms only.'
   prohibited_ambiguity:
-    ["Do not confuse разбор (analysis) with контраргументация (counter-argumentation)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  - Do not confuse разбор (analysis) with контраргументация (counter-argumentation).
+  target_proficiency: B2
+  validation_method: choice

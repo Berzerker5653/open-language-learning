@@ -1,46 +1,66 @@
-id: "ru.unit.b2.lit-04"
-goal_id: "ru.goal.b2.culture-perspectives"
-title: "Tradition and modern"
-summary: "постмодерн, сюрреализм, антиутопия, эпопея and предание."
+id: ru.unit.b2.lit-04
+goal_id: ru.goal.b2.culture-perspectives
+title: Tradition and modern
+summary: постмодерн, сюрреализм, антиутопия, эпопея and предание.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u733-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.cult.postmodern",
-        "ru.lex.cult.siurrealizm",
-        "ru.lex.cult.antiutopiya",
-        "ru.lex.cult.epopeya",
-        "ru.lex.cult.predanie",
-        "ru.sent.b2.u733",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u733-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u733-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u733"]
-  - id: "ru.activity.b2.u733-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u733-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.cult.postmodern
+  - ru.lex.cult.siurrealizm
+  - ru.lex.cult.antiutopiya
+  - ru.lex.cult.epopeya
+  - ru.lex.cult.predanie
+  - ru.sent.b2.u733
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u733-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u733-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u733
+- id: ru.activity.b2.u733-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.cult.postmodern
+  - ru.lex.cult.siurrealizm
+  - ru.lex.cult.antiutopiya
+  - ru.lex.cult.epopeya
+  - ru.lex.cult.predanie
+  - ru.sent.b2.u733
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.cult.postmodern
+  - ru.lex.cult.siurrealizm
+  - ru.lex.cult.antiutopiya
+  - ru.lex.cult.epopeya
+  - ru.lex.cult.predanie
+  - ru.sent.b2.u733
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Tradition and modern: literary response with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse эпопея (epic) with предание (legend)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Tradition and modern: literary response with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse эпопея (epic) with предание (legend).
+  target_proficiency: B2
+  validation_method: choice

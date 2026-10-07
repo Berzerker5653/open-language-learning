@@ -1,46 +1,66 @@
-id: "ru.unit.b2.study3-09"
-goal_id: "ru.goal.b2.academic-study3"
-title: "Draft"
-summary: "черновой, чистовой, рабочий, служебный and основной."
+id: ru.unit.b2.study3-09
+goal_id: ru.goal.b2.academic-study3
+title: Draft
+summary: черновой, чистовой, рабочий, служебный and основной.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u558-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.study3.chernovoy",
-        "ru.lex.study3.chistovoy",
-        "ru.lex.study3.rabochiy",
-        "ru.lex.study3.sluzhebnyy",
-        "ru.lex.study3.osnovnoy",
-        "ru.sent.b2.u558",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u558-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u558-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u558"]
-  - id: "ru.activity.b2.u558-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u558-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.study3.chernovoy
+  - ru.lex.study3.chistovoy
+  - ru.lex.study3.rabochiy
+  - ru.lex.study3.sluzhebnyy
+  - ru.lex.study3.osnovnoy
+  - ru.sent.b2.u558
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u558-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u558-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u558
+- id: ru.activity.b2.u558-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.study3.chernovoy
+  - ru.lex.study3.chistovoy
+  - ru.lex.study3.rabochiy
+  - ru.lex.study3.sluzhebnyy
+  - ru.lex.study3.osnovnoy
+  - ru.sent.b2.u558
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.study3.chernovoy
+  - ru.lex.study3.chistovoy
+  - ru.lex.study3.rabochiy
+  - ru.lex.study3.sluzhebnyy
+  - ru.lex.study3.osnovnoy
+  - ru.sent.b2.u558
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Draft: method with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse черновой (draft) with чистовой (clean copy)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Draft: method with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse черновой (draft) with чистовой (clean copy).
+  target_proficiency: B2
+  validation_method: choice

@@ -1,46 +1,66 @@
-id: "ru.unit.b2.env-10"
-goal_id: "ru.goal.b2.science-environment"
-title: "Hazards"
-summary: "эрозия, оползень, засушливый, радиоактивный and радиоактивность."
+id: ru.unit.b2.env-10
+goal_id: ru.goal.b2.science-environment
+title: Hazards
+summary: эрозия, оползень, засушливый, радиоактивный and радиоактивность.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u719-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.sci.eroziya",
-        "ru.lex.sci.opolzen",
-        "ru.lex.sci.zashushlivyy",
-        "ru.lex.sci.radioaktivnyy",
-        "ru.lex.sci.radioaktivnost",
-        "ru.sent.b2.u719",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u719-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u719-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u719"]
-  - id: "ru.activity.b2.u719-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u719-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.sci.eroziya
+  - ru.lex.sci.opolzen
+  - ru.lex.sci.zashushlivyy
+  - ru.lex.sci.radioaktivnyy
+  - ru.lex.sci.radioaktivnost
+  - ru.sent.b2.u719
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u719-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u719-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u719
+- id: ru.activity.b2.u719-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.sci.eroziya
+  - ru.lex.sci.opolzen
+  - ru.lex.sci.zashushlivyy
+  - ru.lex.sci.radioaktivnyy
+  - ru.lex.sci.radioaktivnost
+  - ru.sent.b2.u719
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.sci.eroziya
+  - ru.lex.sci.opolzen
+  - ru.lex.sci.zashushlivyy
+  - ru.lex.sci.radioaktivnyy
+  - ru.lex.sci.radioaktivnost
+  - ru.sent.b2.u719
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Hazards: science report with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse эрозия (erosion) with оползень (landslide)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Hazards: science report with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse эрозия (erosion) with оползень (landslide).
+  target_proficiency: B2
+  validation_method: choice

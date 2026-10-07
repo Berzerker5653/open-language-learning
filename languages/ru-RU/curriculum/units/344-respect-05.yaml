@@ -1,46 +1,66 @@
-id: "ru.unit.b1.respect-05"
-goal_id: "ru.goal.b1.opinions"
-title: "Modesty"
-summary: "скромность, самообладание, хладнокровие, терпимость and толерантность."
+id: ru.unit.b1.respect-05
+goal_id: ru.goal.b1.opinions
+title: Modesty
+summary: скромность, самообладание, хладнокровие, терпимость and толерантность.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b1.u344-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.respect.skromnost",
-        "ru.lex.respect.samoobladanie",
-        "ru.lex.respect.hladnokrovie",
-        "ru.lex.respect.terpimost",
-        "ru.lex.respect.tolerantnost",
-        "ru.sent.b1.u344",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b1.u344-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b1.u344-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b1.u344"]
-  - id: "ru.activity.b1.u344-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b1.u344-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.respect.skromnost
+  - ru.lex.respect.samoobladanie
+  - ru.lex.respect.hladnokrovie
+  - ru.lex.respect.terpimost
+  - ru.lex.respect.tolerantnost
+  - ru.sent.b1.u344
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b1.u344-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b1.u344-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.u344
+- id: ru.activity.b1.u344-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.respect.skromnost
+  - ru.lex.respect.samoobladanie
+  - ru.lex.respect.hladnokrovie
+  - ru.lex.respect.terpimost
+  - ru.lex.respect.tolerantnost
+  - ru.sent.b1.u344
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.respect.skromnost
+  - ru.lex.respect.samoobladanie
+  - ru.lex.respect.hladnokrovie
+  - ru.lex.respect.terpimost
+  - ru.lex.respect.tolerantnost
+  - ru.sent.b1.u344
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Modesty: respect with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse терпимость (tolerance) with толерантность (tolerance)."]
-  target_proficiency: "B1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Modesty: respect with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse терпимость (tolerance) with толерантность (tolerance).
+  target_proficiency: B1
+  validation_method: choice

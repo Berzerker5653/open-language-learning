@@ -1,46 +1,66 @@
-id: "ru.unit.b1.writing-09"
-goal_id: "ru.goal.b1.extended-writing"
-title: "Style"
-summary: "стиль, манера, оборот, шаблон and экземпляр."
+id: ru.unit.b1.writing-09
+goal_id: ru.goal.b1.extended-writing
+title: Style
+summary: стиль, манера, оборот, шаблон and экземпляр.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b1.u398-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.writing.stil",
-        "ru.lex.writing.manera",
-        "ru.lex.writing.oborot",
-        "ru.lex.writing.shablon",
-        "ru.lex.writing.ekzemplyar",
-        "ru.sent.b1.u398",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b1.u398-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b1.u398-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b1.u398"]
-  - id: "ru.activity.b1.u398-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b1.u398-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.writing.stil
+  - ru.lex.writing.manera
+  - ru.lex.writing.oborot
+  - ru.lex.writing.shablon
+  - ru.lex.writing.ekzemplyar
+  - ru.sent.b1.u398
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b1.u398-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b1.u398-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.u398
+- id: ru.activity.b1.u398-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.writing.stil
+  - ru.lex.writing.manera
+  - ru.lex.writing.oborot
+  - ru.lex.writing.shablon
+  - ru.lex.writing.ekzemplyar
+  - ru.sent.b1.u398
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.writing.stil
+  - ru.lex.writing.manera
+  - ru.lex.writing.oborot
+  - ru.lex.writing.shablon
+  - ru.lex.writing.ekzemplyar
+  - ru.sent.b1.u398
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Style: letter with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse манера (manner) with стиль (style)."]
-  target_proficiency: "B1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Style: letter with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse манера (manner) with стиль (style).
+  target_proficiency: B1
+  validation_method: choice

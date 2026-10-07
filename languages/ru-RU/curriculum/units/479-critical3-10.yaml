@@ -1,46 +1,66 @@
-id: "ru.unit.b2.critical3-10"
-goal_id: "ru.goal.b2.critical-reading3"
-title: "Guidebook"
-summary: "методичка, пособие, учебник, справочник and энциклопедия."
+id: ru.unit.b2.critical3-10
+goal_id: ru.goal.b2.critical-reading3
+title: Guidebook
+summary: методичка, пособие, учебник, справочник and энциклопедия.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u479-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.critical3.metodichka",
-        "ru.lex.critical3.posobie",
-        "ru.lex.critical3.uchebnik",
-        "ru.lex.critical3.spravochnik",
-        "ru.lex.critical3.enciklopediya",
-        "ru.sent.b2.u479",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u479-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u479-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u479"]
-  - id: "ru.activity.b2.u479-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u479-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.critical3.metodichka
+  - ru.lex.critical3.posobie
+  - ru.lex.critical3.uchebnik
+  - ru.lex.critical3.spravochnik
+  - ru.lex.critical3.enciklopediya
+  - ru.sent.b2.u479
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u479-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u479-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u479
+- id: ru.activity.b2.u479-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.critical3.metodichka
+  - ru.lex.critical3.posobie
+  - ru.lex.critical3.uchebnik
+  - ru.lex.critical3.spravochnik
+  - ru.lex.critical3.enciklopediya
+  - ru.sent.b2.u479
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.critical3.metodichka
+  - ru.lex.critical3.posobie
+  - ru.lex.critical3.uchebnik
+  - ru.lex.critical3.spravochnik
+  - ru.lex.critical3.enciklopediya
+  - ru.sent.b2.u479
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Guidebook: source quality with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse учебник (textbook) with справочник (reference book)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Guidebook: source quality with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse учебник (textbook) with справочник (reference book).
+  target_proficiency: B2
+  validation_method: choice

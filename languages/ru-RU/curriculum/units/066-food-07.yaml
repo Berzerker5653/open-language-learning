@@ -1,46 +1,66 @@
-id: "ru.unit.a1.food-07"
-goal_id: "ru.goal.a1.food"
-title: "Pantry"
-summary: "мука, сметана, творог, бутылка and еда."
+id: ru.unit.a1.food-07
+goal_id: ru.goal.a1.food
+title: Pantry
+summary: мука, сметана, творог, бутылка and еда.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a1.u066-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.food.muka",
-        "ru.lex.food.smetana",
-        "ru.lex.food.tvarog",
-        "ru.lex.food.butylka",
-        "ru.lex.food.eda",
-        "ru.sent.a1.u066",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.mama",
-      ]
-  - id: "ru.activity.a1.u066-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a1.u066-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a1.u066"]
-  - id: "ru.activity.a1.u066-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a1.u066-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.food.muka
+  - ru.lex.food.smetana
+  - ru.lex.food.tvarog
+  - ru.lex.food.butylka
+  - ru.lex.food.eda
+  - ru.sent.a1.u066
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+- id: ru.activity.a1.u066-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a1.u066-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a1.u066
+- id: ru.activity.a1.u066-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.food.muka
+  - ru.lex.food.smetana
+  - ru.lex.food.tvarog
+  - ru.lex.food.butylka
+  - ru.lex.food.eda
+  - ru.sent.a1.u066
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.food.muka
+  - ru.lex.food.smetana
+  - ru.lex.food.tvarog
+  - ru.lex.food.butylka
+  - ru.lex.food.eda
+  - ru.sent.a1.u066
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Pantry: food and ordering with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse бутылка (bottle) with a jar; only бутылка is taught here."]
-  target_proficiency: "A1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Pantry: food and ordering with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse бутылка (bottle) with a jar; only бутылка is taught here.
+  target_proficiency: A1
+  validation_method: choice

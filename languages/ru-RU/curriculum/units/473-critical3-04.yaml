@@ -1,46 +1,66 @@
-id: "ru.unit.b2.critical3-04"
-goal_id: "ru.goal.b2.critical-reading3"
-title: "Hoax"
-summary: "утка, вброс, фейк, пропаганда and агитация."
+id: ru.unit.b2.critical3-04
+goal_id: ru.goal.b2.critical-reading3
+title: Hoax
+summary: утка, вброс, фейк, пропаганда and агитация.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u473-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.critical3.utka",
-        "ru.lex.critical3.vbros",
-        "ru.lex.critical3.fejk",
-        "ru.lex.critical3.propaganda",
-        "ru.lex.critical3.agitaciya",
-        "ru.sent.b2.u473",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u473-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u473-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u473"]
-  - id: "ru.activity.b2.u473-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u473-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.critical3.utka
+  - ru.lex.critical3.vbros
+  - ru.lex.critical3.fejk
+  - ru.lex.critical3.propaganda
+  - ru.lex.critical3.agitaciya
+  - ru.sent.b2.u473
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u473-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u473-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u473
+- id: ru.activity.b2.u473-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.critical3.utka
+  - ru.lex.critical3.vbros
+  - ru.lex.critical3.fejk
+  - ru.lex.critical3.propaganda
+  - ru.lex.critical3.agitaciya
+  - ru.sent.b2.u473
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.critical3.utka
+  - ru.lex.critical3.vbros
+  - ru.lex.critical3.fejk
+  - ru.lex.critical3.propaganda
+  - ru.lex.critical3.agitaciya
+  - ru.sent.b2.u473
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Hoax: source quality with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse утка (hoax) with вброс (plant)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Hoax: source quality with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse утка (hoax) with вброс (plant).
+  target_proficiency: B2
+  validation_method: choice

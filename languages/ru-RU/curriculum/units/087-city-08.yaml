@@ -1,45 +1,62 @@
-id: "ru.unit.a1.city-08"
-goal_id: "ru.goal.a1.city"
-title: "Near and far"
-summary: "недалеко, далеко, здесь, там and вперёд with the motion verbs."
+id: ru.unit.a1.city-08
+goal_id: ru.goal.a1.city
+title: Near and far
+summary: недалеко, далеко, здесь, там and вперёд with the motion verbs.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a1.u087-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.city.nedaleko",
-        "ru.lex.city.daleko",
-        "ru.lex.city.zdes",
-        "ru.lex.city.tam",
-        "ru.lex.city.vperyod",
-        "ru.grammar.a1.motion-idti-ehat",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.mama",
-      ]
-  - id: "ru.activity.a1.u087-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g [
-        "ru.grammar.a1.motion-idti-ehat",
-        "ru.grammar.on-ramp.eto-identification",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-  - id: "ru.activity.a1.u087-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a1.u087-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.city.nedaleko
+  - ru.lex.city.daleko
+  - ru.lex.city.zdes
+  - ru.lex.city.tam
+  - ru.lex.city.vperyod
+  - ru.grammar.a1.motion-idti-ehat
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+- id: ru.activity.a1.u087-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.a1.motion-idti-ehat
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a1.u087-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.city.nedaleko
+  - ru.lex.city.daleko
+  - ru.lex.city.zdes
+  - ru.lex.city.tam
+  - ru.lex.city.vperyod
+  - ru.grammar.a1.motion-idti-ehat
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.city.nedaleko
+  - ru.lex.city.daleko
+  - ru.lex.city.zdes
+  - ru.lex.city.tam
+  - ru.lex.city.vperyod
+  - ru.grammar.a1.motion-idti-ehat
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+  allowed_grammar:
+  - ru.grammar.a1.motion-idti-ehat
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Near and far: city and routes with taught forms only."]
-  prohibited_ambiguity: ["Do not use ехать for walking; идти is the walking verb."]
-  target_proficiency: "A1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Near and far: city and routes with taught forms only.'
+  prohibited_ambiguity:
+  - Do not use ехать for walking; идти is the walking verb.
+  target_proficiency: A1
+  validation_method: choice

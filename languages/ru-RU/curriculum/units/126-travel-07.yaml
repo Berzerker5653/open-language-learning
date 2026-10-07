@@ -1,47 +1,66 @@
-id: "ru.unit.a2.travel-07"
-goal_id: "ru.goal.a2.travel"
-title: "Documents"
-summary: "паспорт, виза, документ, таможня and контроль."
+id: ru.unit.a2.travel-07
+goal_id: ru.goal.a2.travel
+title: Documents
+summary: паспорт, виза, документ, таможня and контроль.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a2.u126-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.travel.passport",
-        "ru.lex.travel.viza",
-        "ru.lex.travel.dokument",
-        "ru.lex.travel.tamozhnya",
-        "ru.lex.travel.kontrol",
-        "ru.sent.a2.u126",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.a2.u126-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a2.u126-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a2.u126"]
-  - id: "ru.activity.a2.u126-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a2.u126-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.travel.passport
+  - ru.lex.travel.viza
+  - ru.lex.travel.dokument
+  - ru.lex.travel.tamozhnya
+  - ru.lex.travel.kontrol
+  - ru.sent.a2.u126
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.a2.u126-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a2.u126-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.u126
+- id: ru.activity.a2.u126-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.travel.passport
+  - ru.lex.travel.viza
+  - ru.lex.travel.dokument
+  - ru.lex.travel.tamozhnya
+  - ru.lex.travel.kontrol
+  - ru.sent.a2.u126
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.travel.passport
+  - ru.lex.travel.viza
+  - ru.lex.travel.dokument
+  - ru.lex.travel.tamozhnya
+  - ru.lex.travel.kontrol
+  - ru.sent.a2.u126
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Documents: travel with taught forms only."]
+  expected_interpretations:
+  - 'Documents: travel with taught forms only.'
   prohibited_ambiguity:
-    ["Do not confuse паспорт with документ generally; паспорт is the identity document."]
-  target_proficiency: "A2"
-  validation_method: "choice"
+  - Do not confuse паспорт with документ generally; паспорт is the identity document.
+  target_proficiency: A2
+  validation_method: choice

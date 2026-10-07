@@ -1,46 +1,62 @@
-id: "ru.unit.a1.home-10"
-goal_id: "ru.goal.a1.home"
-title: "In or on"
-summary: "машина, мост, река, лес, море with в versus на pairing."
+id: ru.unit.a1.home-10
+goal_id: ru.goal.a1.home
+title: In or on
+summary: машина, мост, река, лес, море with в versus на pairing.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a1.u049-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.home.mashina",
-        "ru.lex.home.most",
-        "ru.lex.home.reka",
-        "ru.lex.home.les",
-        "ru.lex.home.more",
-        "ru.grammar.a1.na-vs-v",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.mama",
-      ]
-  - id: "ru.activity.a1.u049-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g [
-        "ru.grammar.a1.na-vs-v",
-        "ru.grammar.on-ramp.eto-identification",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-  - id: "ru.activity.a1.u049-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a1.u049-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.home.mashina
+  - ru.lex.home.most
+  - ru.lex.home.reka
+  - ru.lex.home.les
+  - ru.lex.home.more
+  - ru.grammar.a1.na-vs-v
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+- id: ru.activity.a1.u049-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.a1.na-vs-v
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a1.u049-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.home.mashina
+  - ru.lex.home.most
+  - ru.lex.home.reka
+  - ru.lex.home.les
+  - ru.lex.home.more
+  - ru.grammar.a1.na-vs-v
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.home.mashina
+  - ru.lex.home.most
+  - ru.lex.home.reka
+  - ru.lex.home.les
+  - ru.lex.home.more
+  - ru.grammar.a1.na-vs-v
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+  allowed_grammar:
+  - ru.grammar.a1.na-vs-v
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["In or on: naming and simple location with taught forms only."]
+  expected_interpretations:
+  - 'In or on: naming and simple location with taught forms only.'
   prohibited_ambiguity:
-    ["Do not choose в or на by translating from English; use the taught pairing."]
-  target_proficiency: "A1"
-  validation_method: "choice"
+  - Do not choose в or на by translating from English; use the taught pairing.
+  target_proficiency: A1
+  validation_method: choice

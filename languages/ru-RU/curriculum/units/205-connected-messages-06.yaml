@@ -1,46 +1,66 @@
-id: "ru.unit.a2.connected-messages-06"
-goal_id: "ru.goal.a2.connected-messages"
-title: "Memory"
-summary: "вспомнить, запомнить, память, наизусть and момент."
+id: ru.unit.a2.connected-messages-06
+goal_id: ru.goal.a2.connected-messages
+title: Memory
+summary: вспомнить, запомнить, память, наизусть and момент.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a2.u205-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.messages2.vspomnit",
-        "ru.lex.messages2.zapomnit",
-        "ru.lex.messages2.pamyat",
-        "ru.lex.messages2.naizust",
-        "ru.lex.messages2.moment",
-        "ru.sent.a2.u205",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.a2.u205-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a2.u205-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a2.u205"]
-  - id: "ru.activity.a2.u205-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a2.u205-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.messages2.vspomnit
+  - ru.lex.messages2.zapomnit
+  - ru.lex.messages2.pamyat
+  - ru.lex.messages2.naizust
+  - ru.lex.messages2.moment
+  - ru.sent.a2.u205
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.a2.u205-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a2.u205-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.u205
+- id: ru.activity.a2.u205-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.messages2.vspomnit
+  - ru.lex.messages2.zapomnit
+  - ru.lex.messages2.pamyat
+  - ru.lex.messages2.naizust
+  - ru.lex.messages2.moment
+  - ru.sent.a2.u205
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.messages2.vspomnit
+  - ru.lex.messages2.zapomnit
+  - ru.lex.messages2.pamyat
+  - ru.lex.messages2.naizust
+  - ru.lex.messages2.moment
+  - ru.sent.a2.u205
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Memory: messages with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse вспомнить (recall) with запомнить (memorize)."]
-  target_proficiency: "A2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Memory: messages with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse вспомнить (recall) with запомнить (memorize).
+  target_proficiency: A2
+  validation_method: choice

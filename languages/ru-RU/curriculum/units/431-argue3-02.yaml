@@ -1,46 +1,66 @@
-id: "ru.unit.b2.argue3-02"
-goal_id: "ru.goal.b2.argumentation3"
-title: "Somewhat"
-summary: "несколько, довольно, вполне, отчасти and набор."
+id: ru.unit.b2.argue3-02
+goal_id: ru.goal.b2.argumentation3
+title: Somewhat
+summary: несколько, довольно, вполне, отчасти and набор.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u431-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.argue3.neskolko",
-        "ru.lex.argue3.dovolno",
-        "ru.lex.argue3.vpolne",
-        "ru.lex.argue3.otchasti",
-        "ru.lex.argue3.nabor",
-        "ru.sent.b2.u431",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u431-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u431-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u431"]
-  - id: "ru.activity.b2.u431-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u431-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.argue3.neskolko
+  - ru.lex.argue3.dovolno
+  - ru.lex.argue3.vpolne
+  - ru.lex.argue3.otchasti
+  - ru.lex.argue3.nabor
+  - ru.sent.b2.u431
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u431-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u431-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u431
+- id: ru.activity.b2.u431-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.argue3.neskolko
+  - ru.lex.argue3.dovolno
+  - ru.lex.argue3.vpolne
+  - ru.lex.argue3.otchasti
+  - ru.lex.argue3.nabor
+  - ru.sent.b2.u431
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.argue3.neskolko
+  - ru.lex.argue3.dovolno
+  - ru.lex.argue3.vpolne
+  - ru.lex.argue3.otchasti
+  - ru.lex.argue3.nabor
+  - ru.sent.b2.u431
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Somewhat: qualification with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse вполне (entirely) with отчасти (partly)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Somewhat: qualification with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse вполне (entirely) with отчасти (partly).
+  target_proficiency: B2
+  validation_method: choice

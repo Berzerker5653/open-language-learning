@@ -1,46 +1,62 @@
-id: "ru.unit.a1.home-09"
-goal_id: "ru.goal.a1.home"
-title: "Where things are"
-summary: "театр, музей, парк, станция, автобус with где + в/на location model."
+id: ru.unit.a1.home-09
+goal_id: ru.goal.a1.home
+title: Where things are
+summary: театр, музей, парк, станция, автобус with где + в/на location model.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a1.u048-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.home.teatr",
-        "ru.lex.home.muzey",
-        "ru.lex.home.park",
-        "ru.lex.home.stanciya",
-        "ru.lex.home.avtobus",
-        "ru.grammar.a1.location-v-na",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.mama",
-      ]
-  - id: "ru.activity.a1.u048-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g [
-        "ru.grammar.a1.location-v-na",
-        "ru.grammar.on-ramp.eto-identification",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-  - id: "ru.activity.a1.u048-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a1.u048-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.home.teatr
+  - ru.lex.home.muzey
+  - ru.lex.home.park
+  - ru.lex.home.stanciya
+  - ru.lex.home.avtobus
+  - ru.grammar.a1.location-v-na
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+- id: ru.activity.a1.u048-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.a1.location-v-na
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a1.u048-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.home.teatr
+  - ru.lex.home.muzey
+  - ru.lex.home.park
+  - ru.lex.home.stanciya
+  - ru.lex.home.avtobus
+  - ru.grammar.a1.location-v-na
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.home.teatr
+  - ru.lex.home.muzey
+  - ru.lex.home.park
+  - ru.lex.home.stanciya
+  - ru.lex.home.avtobus
+  - ru.grammar.a1.location-v-na
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+  allowed_grammar:
+  - ru.grammar.a1.location-v-na
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Where things are: naming and simple location with taught forms only."]
+  expected_interpretations:
+  - 'Where things are: naming and simple location with taught forms only.'
   prohibited_ambiguity:
-    ["Do not put the place noun in the genitive after в or на; it takes the prepositional case."]
-  target_proficiency: "A1"
-  validation_method: "choice"
+  - Do not put the place noun in the genitive after в or на; it takes the prepositional case.
+  target_proficiency: A1
+  validation_method: choice

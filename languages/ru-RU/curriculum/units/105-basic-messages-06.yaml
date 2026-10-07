@@ -1,46 +1,66 @@
-id: "ru.unit.a1.basic-messages-06"
-goal_id: "ru.goal.a1.basic-messages"
-title: "Yes and no"
-summary: "согласен, согласие, отказ, повод and правда."
+id: ru.unit.a1.basic-messages-06
+goal_id: ru.goal.a1.basic-messages
+title: Yes and no
+summary: согласен, согласие, отказ, повод and правда.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a1.u105-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.messages.soglasen",
-        "ru.lex.messages.soglasie",
-        "ru.lex.messages.otkaz",
-        "ru.lex.messages.povod",
-        "ru.lex.messages.pravda",
-        "ru.sent.a1.u105",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.mama",
-      ]
-  - id: "ru.activity.a1.u105-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a1.u105-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a1.u105"]
-  - id: "ru.activity.a1.u105-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a1.u105-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.messages.soglasen
+  - ru.lex.messages.soglasie
+  - ru.lex.messages.otkaz
+  - ru.lex.messages.povod
+  - ru.lex.messages.pravda
+  - ru.sent.a1.u105
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+- id: ru.activity.a1.u105-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a1.u105-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a1.u105
+- id: ru.activity.a1.u105-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.messages.soglasen
+  - ru.lex.messages.soglasie
+  - ru.lex.messages.otkaz
+  - ru.lex.messages.povod
+  - ru.lex.messages.pravda
+  - ru.sent.a1.u105
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.messages.soglasen
+  - ru.lex.messages.soglasie
+  - ru.lex.messages.otkaz
+  - ru.lex.messages.povod
+  - ru.lex.messages.pravda
+  - ru.sent.a1.u105
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Yes and no: messages with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse согласие (agreement) with отказ (refusal)."]
-  target_proficiency: "A1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Yes and no: messages with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse согласие (agreement) with отказ (refusal).
+  target_proficiency: A1
+  validation_method: choice

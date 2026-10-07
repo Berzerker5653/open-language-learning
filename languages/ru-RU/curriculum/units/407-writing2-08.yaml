@@ -1,46 +1,66 @@
-id: "ru.unit.b1.writing2-08"
-goal_id: "ru.goal.b1.extended-writing2"
-title: "Tendency"
-summary: "тенденция, закономерность, вводный, связка and союз."
+id: ru.unit.b1.writing2-08
+goal_id: ru.goal.b1.extended-writing2
+title: Tendency
+summary: тенденция, закономерность, вводный, связка and союз.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b1.u407-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.writing2.tendenciya",
-        "ru.lex.writing2.zakonomernost",
-        "ru.lex.writing2.vodnyy",
-        "ru.lex.writing2.svyazka",
-        "ru.lex.writing2.soyuz",
-        "ru.sent.b1.u407",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b1.u407-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b1.u407-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b1.u407"]
-  - id: "ru.activity.b1.u407-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b1.u407-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.writing2.tendenciya
+  - ru.lex.writing2.zakonomernost
+  - ru.lex.writing2.vodnyy
+  - ru.lex.writing2.svyazka
+  - ru.lex.writing2.soyuz
+  - ru.sent.b1.u407
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b1.u407-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b1.u407-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.u407
+- id: ru.activity.b1.u407-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.writing2.tendenciya
+  - ru.lex.writing2.zakonomernost
+  - ru.lex.writing2.vodnyy
+  - ru.lex.writing2.svyazka
+  - ru.lex.writing2.soyuz
+  - ru.sent.b1.u407
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.writing2.tendenciya
+  - ru.lex.writing2.zakonomernost
+  - ru.lex.writing2.vodnyy
+  - ru.lex.writing2.svyazka
+  - ru.lex.writing2.soyuz
+  - ru.sent.b1.u407
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Tendency: revision with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse тенденция (tendency) with закономерность (regularity)."]
-  target_proficiency: "B1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Tendency: revision with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse тенденция (tendency) with закономерность (regularity).
+  target_proficiency: B1
+  validation_method: choice

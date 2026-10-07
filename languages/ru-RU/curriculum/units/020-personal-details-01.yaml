@@ -1,42 +1,67 @@
-id: "ru.unit.a1.personal-details-01"
-goal_id: "ru.goal.a1.personal-details"
-title: "Subject pronouns and profile labels"
-summary: "Extend personal reference to we, they and neuter it. Read surname and patronymic labels, then match the eight subject pronouns to explicit people or noun cues."
+id: ru.unit.a1.personal-details-01
+goal_id: ru.goal.a1.personal-details
+title: Subject pronouns and profile labels
+summary: Extend personal reference to we, they and neuter it. Read surname and patronymic labels, then
+  match the eight subject pronouns to explicit people or noun cues.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a1.u020-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.personal.my",
-        "ru.lex.personal.oni",
-        "ru.lex.personal.ono",
-        "ru.lex.personal.familiya",
-        "ru.lex.personal.otchestvo",
-        "ru.lex.personal.ya",
-        "ru.lex.personal.ty",
-        "ru.lex.personal.vy",
-        "ru.lex.personal.on",
-        "ru.lex.personal.ona",
-      ]
-  - id: "ru.activity.a1.u020-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs: &g ["ru.grammar.a1.subject-pronouns", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a1.u020-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a1.u020-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.personal.my
+  - ru.lex.personal.oni
+  - ru.lex.personal.ono
+  - ru.lex.personal.familiya
+  - ru.lex.personal.otchestvo
+  - ru.lex.personal.ya
+  - ru.lex.personal.ty
+  - ru.lex.personal.vy
+  - ru.lex.personal.on
+  - ru.lex.personal.ona
+- id: ru.activity.a1.u020-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.a1.subject-pronouns
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a1.u020-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.personal.my
+  - ru.lex.personal.oni
+  - ru.lex.personal.ono
+  - ru.lex.personal.familiya
+  - ru.lex.personal.otchestvo
+  - ru.lex.personal.ya
+  - ru.lex.personal.ty
+  - ru.lex.personal.vy
+  - ru.lex.personal.on
+  - ru.lex.personal.ona
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.personal.my
+  - ru.lex.personal.oni
+  - ru.lex.personal.ono
+  - ru.lex.personal.familiya
+  - ru.lex.personal.otchestvo
+  - ru.lex.personal.ya
+  - ru.lex.personal.ty
+  - ru.lex.personal.vy
+  - ru.lex.personal.on
+  - ru.lex.personal.ona
+  allowed_grammar:
+  - ru.grammar.a1.subject-pronouns
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Subject reference and two personal-name fields."]
-  prohibited_ambiguity: ["Do not confuse polite singular you with a plural group."]
-  target_proficiency: "A1"
-  validation_method: "choice"
+  expected_interpretations:
+  - Subject reference and two personal-name fields.
+  prohibited_ambiguity:
+  - Do not confuse polite singular you with a plural group.
+  target_proficiency: A1
+  validation_method: choice

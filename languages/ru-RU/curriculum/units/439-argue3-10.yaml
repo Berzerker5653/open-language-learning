@@ -1,46 +1,66 @@
-id: "ru.unit.b2.argue3-10"
-goal_id: "ru.goal.b2.argumentation3"
-title: "Ellipsis"
-summary: "многоточие, скобка, дефис, перенос and сочетание."
+id: ru.unit.b2.argue3-10
+goal_id: ru.goal.b2.argumentation3
+title: Ellipsis
+summary: многоточие, скобка, дефис, перенос and сочетание.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u439-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.argue3.mnogotochie",
-        "ru.lex.argue3.skobka",
-        "ru.lex.argue3.defis",
-        "ru.lex.argue3.perenos",
-        "ru.lex.argue3.sochetanie",
-        "ru.sent.b2.u439",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u439-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u439-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u439"]
-  - id: "ru.activity.b2.u439-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u439-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.argue3.mnogotochie
+  - ru.lex.argue3.skobka
+  - ru.lex.argue3.defis
+  - ru.lex.argue3.perenos
+  - ru.lex.argue3.sochetanie
+  - ru.sent.b2.u439
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u439-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u439-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u439
+- id: ru.activity.b2.u439-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.argue3.mnogotochie
+  - ru.lex.argue3.skobka
+  - ru.lex.argue3.defis
+  - ru.lex.argue3.perenos
+  - ru.lex.argue3.sochetanie
+  - ru.sent.b2.u439
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.argue3.mnogotochie
+  - ru.lex.argue3.skobka
+  - ru.lex.argue3.defis
+  - ru.lex.argue3.perenos
+  - ru.lex.argue3.sochetanie
+  - ru.sent.b2.u439
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Ellipsis: qualification with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse скобка (bracket) with кавычки (quotation marks)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Ellipsis: qualification with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse скобка (bracket) with кавычки (quotation marks).
+  target_proficiency: B2
+  validation_method: choice

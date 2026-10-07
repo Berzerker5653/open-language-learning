@@ -1,46 +1,66 @@
-id: "ru.unit.a1.shopping-01"
-goal_id: "ru.goal.a1.shopping"
-title: "In the shop"
-summary: "продавец, покупатель, товар, продажа and скидка."
+id: ru.unit.a1.shopping-01
+goal_id: ru.goal.a1.shopping
+title: In the shop
+summary: продавец, покупатель, товар, продажа and скидка.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a1.u070-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.shopping.prodavec",
-        "ru.lex.shopping.pokupatel",
-        "ru.lex.shopping.tovar",
-        "ru.lex.shopping.prodazha",
-        "ru.lex.shopping.skidka",
-        "ru.sent.a1.u070",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.mama",
-      ]
-  - id: "ru.activity.a1.u070-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a1.u070-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a1.u070"]
-  - id: "ru.activity.a1.u070-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a1.u070-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.shopping.prodavec
+  - ru.lex.shopping.pokupatel
+  - ru.lex.shopping.tovar
+  - ru.lex.shopping.prodazha
+  - ru.lex.shopping.skidka
+  - ru.sent.a1.u070
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+- id: ru.activity.a1.u070-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a1.u070-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a1.u070
+- id: ru.activity.a1.u070-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.shopping.prodavec
+  - ru.lex.shopping.pokupatel
+  - ru.lex.shopping.tovar
+  - ru.lex.shopping.prodazha
+  - ru.lex.shopping.skidka
+  - ru.sent.a1.u070
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.shopping.prodavec
+  - ru.lex.shopping.pokupatel
+  - ru.lex.shopping.tovar
+  - ru.lex.shopping.prodazha
+  - ru.lex.shopping.skidka
+  - ru.sent.a1.u070
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["In the shop: shopping with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse продавец (shop assistant) with покупатель (customer)."]
-  target_proficiency: "A1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'In the shop: shopping with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse продавец (shop assistant) with покупатель (customer).
+  target_proficiency: A1
+  validation_method: choice

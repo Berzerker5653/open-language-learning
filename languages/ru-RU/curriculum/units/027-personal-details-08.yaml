@@ -1,42 +1,63 @@
-id: "ru.unit.a1.personal-details-08"
-goal_id: "ru.goal.a1.personal-details"
-title: "Age and contact fields"
-summary: "Read street, apartment, identifier, mail and form labels. Complete the age model and identify the fields used for supplied fictional contact details."
+id: ru.unit.a1.personal-details-08
+goal_id: ru.goal.a1.personal-details
+title: Age and contact fields
+summary: Read street, apartment, identifier, mail and form labels. Complete the age model and identify
+  the fields used for supplied fictional contact details.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a1.u027-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.personal.ulitsa",
-        "ru.lex.personal.kvartira",
-        "ru.lex.personal.nomer",
-        "ru.lex.personal.pochta",
-        "ru.lex.personal.anketa",
-        "ru.lex.personal.ya",
-        "ru.lex.personal.dvadtsat",
-        "ru.lex.personal.god",
-        "ru.sent.a1.u027",
-      ]
-  - id: "ru.activity.a1.u027-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a1.u027"]
-  - id: "ru.activity.a1.u027-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a1.u027-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.personal.ulitsa
+  - ru.lex.personal.kvartira
+  - ru.lex.personal.nomer
+  - ru.lex.personal.pochta
+  - ru.lex.personal.anketa
+  - ru.lex.personal.ya
+  - ru.lex.personal.dvadtsat
+  - ru.lex.personal.god
+  - ru.sent.a1.u027
+- id: ru.activity.a1.u027-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a1.u027
+- id: ru.activity.a1.u027-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.personal.ulitsa
+  - ru.lex.personal.kvartira
+  - ru.lex.personal.nomer
+  - ru.lex.personal.pochta
+  - ru.lex.personal.anketa
+  - ru.lex.personal.ya
+  - ru.lex.personal.dvadtsat
+  - ru.lex.personal.god
+  - ru.sent.a1.u027
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: ["ru.grammar.a1.dative-recipient-age", "ru.grammar.a1.numerals-time"]
+  allowed_vocab:
+  - ru.lex.personal.ulitsa
+  - ru.lex.personal.kvartira
+  - ru.lex.personal.nomer
+  - ru.lex.personal.pochta
+  - ru.lex.personal.anketa
+  - ru.lex.personal.ya
+  - ru.lex.personal.dvadtsat
+  - ru.lex.personal.god
+  - ru.sent.a1.u027
+  allowed_grammar:
+  - ru.grammar.a1.dative-recipient-age
+  - ru.grammar.a1.numerals-time
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Age in years and basic contact-field meanings."]
+  expected_interpretations:
+  - Age in years and basic contact-field meanings.
   prohibited_ambiguity:
-    ["Use supplied fictional details, not the learner's real contact information."]
-  target_proficiency: "A1"
-  validation_method: "choice"
+  - Use supplied fictional details, not the learner's real contact information.
+  target_proficiency: A1
+  validation_method: choice

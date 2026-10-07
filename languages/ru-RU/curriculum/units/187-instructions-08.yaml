@@ -1,46 +1,66 @@
-id: "ru.unit.a2.instructions-08"
-goal_id: "ru.goal.a2.instructions"
-title: "In the kitchen"
-summary: "нарезать, перемешать, посолить, поперчить and разогреть."
+id: ru.unit.a2.instructions-08
+goal_id: ru.goal.a2.instructions
+title: In the kitchen
+summary: нарезать, перемешать, посолить, поперчить and разогреть.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a2.u187-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.instructions.narezat",
-        "ru.lex.instructions.peremeshat",
-        "ru.lex.instructions.posolit",
-        "ru.lex.instructions.poperchit",
-        "ru.lex.instructions.razogret",
-        "ru.sent.a2.u187",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.a2.u187-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a2.u187-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a2.u187"]
-  - id: "ru.activity.a2.u187-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a2.u187-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.instructions.narezat
+  - ru.lex.instructions.peremeshat
+  - ru.lex.instructions.posolit
+  - ru.lex.instructions.poperchit
+  - ru.lex.instructions.razogret
+  - ru.sent.a2.u187
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.a2.u187-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a2.u187-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.u187
+- id: ru.activity.a2.u187-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.instructions.narezat
+  - ru.lex.instructions.peremeshat
+  - ru.lex.instructions.posolit
+  - ru.lex.instructions.poperchit
+  - ru.lex.instructions.razogret
+  - ru.sent.a2.u187
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.instructions.narezat
+  - ru.lex.instructions.peremeshat
+  - ru.lex.instructions.posolit
+  - ru.lex.instructions.poperchit
+  - ru.lex.instructions.razogret
+  - ru.sent.a2.u187
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["In the kitchen: instructions with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse нарезать (to slice) with перемешать (to stir)."]
-  target_proficiency: "A2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'In the kitchen: instructions with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse нарезать (to slice) with перемешать (to stir).
+  target_proficiency: A2
+  validation_method: choice

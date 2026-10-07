@@ -1,47 +1,66 @@
-id: "ru.unit.b2.int-01"
-goal_id: "ru.goal.b2.culture-perspectives"
-title: "Worldviews"
-summary: "менталитет, мировоззрение, мировосприятие, рефлексия and уклад."
+id: ru.unit.b2.int-01
+goal_id: ru.goal.b2.culture-perspectives
+title: Worldviews
+summary: менталитет, мировоззрение, мировосприятие, рефлексия and уклад.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u760-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.cult.mentalitet",
-        "ru.lex.cult.mirovozzrenie",
-        "ru.lex.cult.mirosvospriyatie",
-        "ru.lex.cult.refleksiya",
-        "ru.lex.cult.uklad",
-        "ru.sent.b2.u760",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u760-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u760-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u760"]
-  - id: "ru.activity.b2.u760-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u760-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.cult.mentalitet
+  - ru.lex.cult.mirovozzrenie
+  - ru.lex.cult.mirosvospriyatie
+  - ru.lex.cult.refleksiya
+  - ru.lex.cult.uklad
+  - ru.sent.b2.u760
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u760-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u760-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u760
+- id: ru.activity.b2.u760-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.cult.mentalitet
+  - ru.lex.cult.mirovozzrenie
+  - ru.lex.cult.mirosvospriyatie
+  - ru.lex.cult.refleksiya
+  - ru.lex.cult.uklad
+  - ru.sent.b2.u760
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.cult.mentalitet
+  - ru.lex.cult.mirovozzrenie
+  - ru.lex.cult.mirosvospriyatie
+  - ru.lex.cult.refleksiya
+  - ru.lex.cult.uklad
+  - ru.sent.b2.u760
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Worldviews: literary response with taught forms only."]
+  expected_interpretations:
+  - 'Worldviews: literary response with taught forms only.'
   prohibited_ambiguity:
-    ["Do not confuse мировоззрение (worldview) with мировосприятие (world-perception)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  - Do not confuse мировоззрение (worldview) with мировосприятие (world-perception).
+  target_proficiency: B2
+  validation_method: choice

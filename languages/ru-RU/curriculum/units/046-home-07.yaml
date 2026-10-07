@@ -1,48 +1,66 @@
-id: "ru.unit.a1.home-07"
-goal_id: "ru.goal.a1.home"
-title: "Entry and outdoors"
-summary: "вешалка, двор, балкон, сад, лестница named with это."
+id: ru.unit.a1.home-07
+goal_id: ru.goal.a1.home
+title: Entry and outdoors
+summary: вешалка, двор, балкон, сад, лестница named with это.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a1.u046-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.home.veshalka",
-        "ru.lex.home.dvor",
-        "ru.lex.home.balkon",
-        "ru.lex.home.sad",
-        "ru.lex.home.lestnica",
-        "ru.sent.a1.u046",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.mama",
-      ]
-  - id: "ru.activity.a1.u046-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a1.u046-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a1.u046"]
-  - id: "ru.activity.a1.u046-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a1.u046-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.home.veshalka
+  - ru.lex.home.dvor
+  - ru.lex.home.balkon
+  - ru.lex.home.sad
+  - ru.lex.home.lestnica
+  - ru.sent.a1.u046
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+- id: ru.activity.a1.u046-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a1.u046-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a1.u046
+- id: ru.activity.a1.u046-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.home.veshalka
+  - ru.lex.home.dvor
+  - ru.lex.home.balkon
+  - ru.lex.home.sad
+  - ru.lex.home.lestnica
+  - ru.sent.a1.u046
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.home.veshalka
+  - ru.lex.home.dvor
+  - ru.lex.home.balkon
+  - ru.lex.home.sad
+  - ru.lex.home.lestnica
+  - ru.sent.a1.u046
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
   expected_interpretations:
-    ["Entry and outdoors: naming and simple location with taught forms only."]
+  - 'Entry and outdoors: naming and simple location with taught forms only.'
   prohibited_ambiguity:
-    ["Do not confuse сад (garden) with парк (park); they name different places."]
-  target_proficiency: "A1"
-  validation_method: "choice"
+  - Do not confuse сад (garden) with парк (park); they name different places.
+  target_proficiency: A1
+  validation_method: choice

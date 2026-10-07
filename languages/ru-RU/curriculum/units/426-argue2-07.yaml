@@ -1,46 +1,66 @@
-id: "ru.unit.b2.argue2-07"
-goal_id: "ru.goal.b2.argumentation2"
-title: "Oversight"
-summary: "надзор, ревизия, аудит, учёт and отчётность."
+id: ru.unit.b2.argue2-07
+goal_id: ru.goal.b2.argumentation2
+title: Oversight
+summary: надзор, ревизия, аудит, учёт and отчётность.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u426-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.argue2.nadzor",
-        "ru.lex.argue2.reviziya",
-        "ru.lex.argue2.audit",
-        "ru.lex.argue2.uchyot",
-        "ru.lex.argue2.otchetnost",
-        "ru.sent.b2.u426",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u426-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u426-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u426"]
-  - id: "ru.activity.b2.u426-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u426-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.argue2.nadzor
+  - ru.lex.argue2.reviziya
+  - ru.lex.argue2.audit
+  - ru.lex.argue2.uchyot
+  - ru.lex.argue2.otchetnost
+  - ru.sent.b2.u426
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u426-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u426-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u426
+- id: ru.activity.b2.u426-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.argue2.nadzor
+  - ru.lex.argue2.reviziya
+  - ru.lex.argue2.audit
+  - ru.lex.argue2.uchyot
+  - ru.lex.argue2.otchetnost
+  - ru.sent.b2.u426
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.argue2.nadzor
+  - ru.lex.argue2.reviziya
+  - ru.lex.argue2.audit
+  - ru.lex.argue2.uchyot
+  - ru.lex.argue2.otchetnost
+  - ru.sent.b2.u426
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Oversight: evidence with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse надзор (oversight) with ревизия (audit)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Oversight: evidence with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse надзор (oversight) with ревизия (audit).
+  target_proficiency: B2
+  validation_method: choice

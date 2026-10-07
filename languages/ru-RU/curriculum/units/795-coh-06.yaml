@@ -1,46 +1,66 @@
-id: "ru.unit.b2.coh-06"
-goal_id: "ru.goal.b2.style-register"
-title: "Rhythm"
-summary: "ритмика, каденция, цезура, модуляция and интонирование."
+id: ru.unit.b2.coh-06
+goal_id: ru.goal.b2.style-register
+title: Rhythm
+summary: ритмика, каденция, цезура, модуляция and интонирование.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u795-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.style.ritmika",
-        "ru.lex.style.kadenciya",
-        "ru.lex.style.cezura",
-        "ru.lex.style.modulyaciya",
-        "ru.lex.style.intonirovanie",
-        "ru.sent.b2.u795",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u795-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u795-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u795"]
-  - id: "ru.activity.b2.u795-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u795-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.style.ritmika
+  - ru.lex.style.kadenciya
+  - ru.lex.style.cezura
+  - ru.lex.style.modulyaciya
+  - ru.lex.style.intonirovanie
+  - ru.sent.b2.u795
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u795-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u795-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u795
+- id: ru.activity.b2.u795-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.style.ritmika
+  - ru.lex.style.kadenciya
+  - ru.lex.style.cezura
+  - ru.lex.style.modulyaciya
+  - ru.lex.style.intonirovanie
+  - ru.sent.b2.u795
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.style.ritmika
+  - ru.lex.style.kadenciya
+  - ru.lex.style.cezura
+  - ru.lex.style.modulyaciya
+  - ru.lex.style.intonirovanie
+  - ru.sent.b2.u795
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Rhythm: precision response with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse каденция (cadence) with цезура (caesura)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Rhythm: precision response with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse каденция (cadence) with цезура (caesura).
+  target_proficiency: B2
+  validation_method: choice

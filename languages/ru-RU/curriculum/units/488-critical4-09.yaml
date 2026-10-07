@@ -1,46 +1,66 @@
-id: "ru.unit.b2.critical4-09"
-goal_id: "ru.goal.b2.critical-reading4"
-title: "Anomaly"
-summary: "аномалия, отклонение, смещение, перекос and эмпирика."
+id: ru.unit.b2.critical4-09
+goal_id: ru.goal.b2.critical-reading4
+title: Anomaly
+summary: аномалия, отклонение, смещение, перекос and эмпирика.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u488-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.critical4.anomaliya",
-        "ru.lex.critical4.otklonenie",
-        "ru.lex.critical4.smeshchenie",
-        "ru.lex.critical4.perekos",
-        "ru.lex.critical4.empirika",
-        "ru.sent.b2.u488",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u488-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u488-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u488"]
-  - id: "ru.activity.b2.u488-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u488-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.critical4.anomaliya
+  - ru.lex.critical4.otklonenie
+  - ru.lex.critical4.smeshchenie
+  - ru.lex.critical4.perekos
+  - ru.lex.critical4.empirika
+  - ru.sent.b2.u488
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u488-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u488-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u488
+- id: ru.activity.b2.u488-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.critical4.anomaliya
+  - ru.lex.critical4.otklonenie
+  - ru.lex.critical4.smeshchenie
+  - ru.lex.critical4.perekos
+  - ru.lex.critical4.empirika
+  - ru.sent.b2.u488
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.critical4.anomaliya
+  - ru.lex.critical4.otklonenie
+  - ru.lex.critical4.smeshchenie
+  - ru.lex.critical4.perekos
+  - ru.lex.critical4.empirika
+  - ru.sent.b2.u488
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Anomaly: inference with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse отклонение (deviation) with смещение (shift)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Anomaly: inference with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse отклонение (deviation) with смещение (shift).
+  target_proficiency: B2
+  validation_method: choice

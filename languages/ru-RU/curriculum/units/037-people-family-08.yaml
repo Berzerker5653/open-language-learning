@@ -1,47 +1,62 @@
-id: "ru.unit.a1.people-family-08"
-goal_id: "ru.goal.a1.people-family"
-title: "Money, time, and my things"
-summary: "деньги, время, дело, мой, твой introduced with possessive agreement models."
+id: ru.unit.a1.people-family-08
+goal_id: ru.goal.a1.people-family
+title: Money, time, and my things
+summary: деньги, время, дело, мой, твой introduced with possessive agreement models.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a1.u037-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.family.dengi",
-        "ru.lex.family.vremya",
-        "ru.lex.family.delo",
-        "ru.lex.family.moy",
-        "ru.lex.family.tvoy",
-        "ru.grammar.a1.possessive-pronouns",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.mama",
-      ]
-  - id: "ru.activity.a1.u037-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g [
-        "ru.grammar.a1.possessive-pronouns",
-        "ru.grammar.on-ramp.eto-identification",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-  - id: "ru.activity.a1.u037-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a1.u037-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.family.dengi
+  - ru.lex.family.vremya
+  - ru.lex.family.delo
+  - ru.lex.family.moy
+  - ru.lex.family.tvoy
+  - ru.grammar.a1.possessive-pronouns
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+- id: ru.activity.a1.u037-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.a1.possessive-pronouns
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a1.u037-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.family.dengi
+  - ru.lex.family.vremya
+  - ru.lex.family.delo
+  - ru.lex.family.moy
+  - ru.lex.family.tvoy
+  - ru.grammar.a1.possessive-pronouns
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.family.dengi
+  - ru.lex.family.vremya
+  - ru.lex.family.delo
+  - ru.lex.family.moy
+  - ru.lex.family.tvoy
+  - ru.grammar.a1.possessive-pronouns
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.mama
+  allowed_grammar:
+  - ru.grammar.a1.possessive-pronouns
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
   expected_interpretations:
-    ["Money, time, and my things: naming and simple possession with taught forms only."]
+  - 'Money, time, and my things: naming and simple possession with taught forms only.'
   prohibited_ambiguity:
-    ["Do not guess the genitive of время or the plural of дело; supplied forms only."]
-  target_proficiency: "A1"
-  validation_method: "choice"
+  - Do not guess the genitive of время or the plural of дело; supplied forms only.
+  target_proficiency: A1
+  validation_method: choice

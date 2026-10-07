@@ -1,46 +1,66 @@
-id: "ru.unit.a2.wellbeing-07"
-goal_id: "ru.goal.a2.wellbeing"
-title: "Advice"
-summary: "советовать, совет, нужно, нужен and помощь."
+id: ru.unit.a2.wellbeing-07
+goal_id: ru.goal.a2.wellbeing
+title: Advice
+summary: советовать, совет, нужно, нужен and помощь.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a2.u146-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.wellbeing.sovet",
-        "ru.lex.wellbeing.sovet2",
-        "ru.lex.wellbeing.nuzhno",
-        "ru.lex.wellbeing.nuzhen",
-        "ru.lex.wellbeing.pomosh",
-        "ru.sent.a2.u146",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.a2.u146-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a2.u146-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a2.u146"]
-  - id: "ru.activity.a2.u146-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a2.u146-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.wellbeing.sovet
+  - ru.lex.wellbeing.sovet2
+  - ru.lex.wellbeing.nuzhno
+  - ru.lex.wellbeing.nuzhen
+  - ru.lex.wellbeing.pomosh
+  - ru.sent.a2.u146
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.a2.u146-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a2.u146-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.u146
+- id: ru.activity.a2.u146-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.wellbeing.sovet
+  - ru.lex.wellbeing.sovet2
+  - ru.lex.wellbeing.nuzhno
+  - ru.lex.wellbeing.nuzhen
+  - ru.lex.wellbeing.pomosh
+  - ru.sent.a2.u146
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.wellbeing.sovet
+  - ru.lex.wellbeing.sovet2
+  - ru.lex.wellbeing.nuzhno
+  - ru.lex.wellbeing.nuzhen
+  - ru.lex.wellbeing.pomosh
+  - ru.sent.a2.u146
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Advice: wellbeing with taught forms only."]
-  prohibited_ambiguity: ["Do not decline нужно; it never changes form."]
-  target_proficiency: "A2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Advice: wellbeing with taught forms only.'
+  prohibited_ambiguity:
+  - Do not decline нужно; it never changes form.
+  target_proficiency: A2
+  validation_method: choice

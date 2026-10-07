@@ -1,46 +1,66 @@
-id: "ru.unit.b1.life-experiences-05"
-goal_id: "ru.goal.b1.experiences"
-title: "Worry"
-summary: "бояться, беспокоиться, волноваться, успокаиваться and нервничать."
+id: ru.unit.b1.life-experiences-05
+goal_id: ru.goal.b1.experiences
+title: Worry
+summary: бояться, беспокоиться, волноваться, успокаиваться and нервничать.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b1.u234-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.experiences.boyatsya",
-        "ru.lex.experiences.bespokoitsya",
-        "ru.lex.experiences.volnovatsya",
-        "ru.lex.experiences.uspokaivatsya",
-        "ru.lex.experiences.nervnichat",
-        "ru.sent.b1.u234",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b1.u234-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b1.u234-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b1.u234"]
-  - id: "ru.activity.b1.u234-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b1.u234-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.experiences.boyatsya
+  - ru.lex.experiences.bespokoitsya
+  - ru.lex.experiences.volnovatsya
+  - ru.lex.experiences.uspokaivatsya
+  - ru.lex.experiences.nervnichat
+  - ru.sent.b1.u234
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b1.u234-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b1.u234-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.u234
+- id: ru.activity.b1.u234-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.experiences.boyatsya
+  - ru.lex.experiences.bespokoitsya
+  - ru.lex.experiences.volnovatsya
+  - ru.lex.experiences.uspokaivatsya
+  - ru.lex.experiences.nervnichat
+  - ru.sent.b1.u234
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.experiences.boyatsya
+  - ru.lex.experiences.bespokoitsya
+  - ru.lex.experiences.volnovatsya
+  - ru.lex.experiences.uspokaivatsya
+  - ru.lex.experiences.nervnichat
+  - ru.sent.b1.u234
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Worry: experiences with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse бояться (fear) with волноваться (be nervous)."]
-  target_proficiency: "B1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Worry: experiences with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse бояться (fear) with волноваться (be nervous).
+  target_proficiency: B1
+  validation_method: choice

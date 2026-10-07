@@ -1,46 +1,66 @@
-id: "ru.unit.b1.narration-background-02"
-goal_id: "ru.goal.b1.narration"
-title: "Viewpoint"
-summary: "взгляд, точка зрения, судьба, позиция and впечатление."
+id: ru.unit.b1.narration-background-02
+goal_id: ru.goal.b1.narration
+title: Viewpoint
+summary: взгляд, точка зрения, судьба, позиция and впечатление.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b1.u221-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.narration2.vzglyad",
-        "ru.lex.narration2.tochka-zreniya",
-        "ru.lex.narration2.sudba",
-        "ru.lex.narration2.pozitsiya",
-        "ru.lex.narration2.vpechatlenie",
-        "ru.sent.b1.u221",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b1.u221-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b1.u221-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b1.u221"]
-  - id: "ru.activity.b1.u221-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b1.u221-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.narration2.vzglyad
+  - ru.lex.narration2.tochka-zreniya
+  - ru.lex.narration2.sudba
+  - ru.lex.narration2.pozitsiya
+  - ru.lex.narration2.vpechatlenie
+  - ru.sent.b1.u221
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b1.u221-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b1.u221-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.u221
+- id: ru.activity.b1.u221-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.narration2.vzglyad
+  - ru.lex.narration2.tochka-zreniya
+  - ru.lex.narration2.sudba
+  - ru.lex.narration2.pozitsiya
+  - ru.lex.narration2.vpechatlenie
+  - ru.sent.b1.u221
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.narration2.vzglyad
+  - ru.lex.narration2.tochka-zreniya
+  - ru.lex.narration2.sudba
+  - ru.lex.narration2.pozitsiya
+  - ru.lex.narration2.vpechatlenie
+  - ru.sent.b1.u221
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Viewpoint: background with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse взгляд (glance) with точка зрения (point of view)."]
-  target_proficiency: "B1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Viewpoint: background with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse взгляд (glance) with точка зрения (point of view).
+  target_proficiency: B1
+  validation_method: choice

@@ -1,47 +1,66 @@
-id: "ru.unit.b2.neg-06"
-goal_id: "ru.goal.b2.negotiation"
-title: "Persuading"
-summary: "убеждать, убедительно, аргументированно, обосновать and надуманный."
+id: ru.unit.b2.neg-06
+goal_id: ru.goal.b2.negotiation
+title: Persuading
+summary: убеждать, убедительно, аргументированно, обосновать and надуманный.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u615-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.neg.ubezhdat",
-        "ru.lex.neg.ubeditelno",
-        "ru.lex.neg.argumentirovanno",
-        "ru.lex.neg.obosnovat",
-        "ru.lex.neg.nadumannyy",
-        "ru.sent.b2.u615",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u615-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u615-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u615"]
-  - id: "ru.activity.b2.u615-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u615-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.neg.ubezhdat
+  - ru.lex.neg.ubeditelno
+  - ru.lex.neg.argumentirovanno
+  - ru.lex.neg.obosnovat
+  - ru.lex.neg.nadumannyy
+  - ru.sent.b2.u615
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u615-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u615-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u615
+- id: ru.activity.b2.u615-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.neg.ubezhdat
+  - ru.lex.neg.ubeditelno
+  - ru.lex.neg.argumentirovanno
+  - ru.lex.neg.obosnovat
+  - ru.lex.neg.nadumannyy
+  - ru.sent.b2.u615
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.neg.ubezhdat
+  - ru.lex.neg.ubeditelno
+  - ru.lex.neg.argumentirovanno
+  - ru.lex.neg.obosnovat
+  - ru.lex.neg.nadumannyy
+  - ru.sent.b2.u615
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Persuading: negotiation exchange with taught forms only."]
+  expected_interpretations:
+  - 'Persuading: negotiation exchange with taught forms only.'
   prohibited_ambiguity:
-    ["Do not confuse обосновать (to substantiate) with надуманный (far-fetched)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  - Do not confuse обосновать (to substantiate) with надуманный (far-fetched).
+  target_proficiency: B2
+  validation_method: choice

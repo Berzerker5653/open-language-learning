@@ -1,46 +1,66 @@
-id: "ru.unit.b2.app-09"
-goal_id: "ru.goal.b2.professional-writing"
-title: "Qualifications"
-summary: "финалист, лауреат, магистрант, бакалавр and тренинг."
+id: ru.unit.b2.app-09
+goal_id: ru.goal.b2.professional-writing
+title: Qualifications
+summary: финалист, лауреат, магистрант, бакалавр and тренинг.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u608-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.prof.finalist",
-        "ru.lex.prof.laureat",
-        "ru.lex.prof.magistrant",
-        "ru.lex.prof.bakalavr",
-        "ru.lex.prof.trening",
-        "ru.sent.b2.u608",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u608-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u608-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u608"]
-  - id: "ru.activity.b2.u608-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u608-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.prof.finalist
+  - ru.lex.prof.laureat
+  - ru.lex.prof.magistrant
+  - ru.lex.prof.bakalavr
+  - ru.lex.prof.trening
+  - ru.sent.b2.u608
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u608-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u608-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u608
+- id: ru.activity.b2.u608-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.prof.finalist
+  - ru.lex.prof.laureat
+  - ru.lex.prof.magistrant
+  - ru.lex.prof.bakalavr
+  - ru.lex.prof.trening
+  - ru.sent.b2.u608
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.prof.finalist
+  - ru.lex.prof.laureat
+  - ru.lex.prof.magistrant
+  - ru.lex.prof.bakalavr
+  - ru.lex.prof.trening
+  - ru.sent.b2.u608
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Qualifications: business letter with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse магистрант (master's student) with бакалавр (bachelor)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Qualifications: business letter with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse магистрант (master's student) with бакалавр (bachelor).
+  target_proficiency: B2
+  validation_method: choice

@@ -1,46 +1,66 @@
-id: "ru.unit.a2.services-04"
-goal_id: "ru.goal.a2.services"
-title: "Returns"
-summary: "возврат, возвращать, обмен, обменивать and гарантия."
+id: ru.unit.a2.services-04
+goal_id: ru.goal.a2.services
+title: Returns
+summary: возврат, возвращать, обмен, обменивать and гарантия.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a2.u133-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.services.vozvrat",
-        "ru.lex.services.vozvraschat",
-        "ru.lex.services.obmen",
-        "ru.lex.services.obmenyat",
-        "ru.lex.services.garantiya",
-        "ru.sent.a2.u133",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.a2.u133-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a2.u133-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a2.u133"]
-  - id: "ru.activity.a2.u133-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a2.u133-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.services.vozvrat
+  - ru.lex.services.vozvraschat
+  - ru.lex.services.obmen
+  - ru.lex.services.obmenyat
+  - ru.lex.services.garantiya
+  - ru.sent.a2.u133
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.a2.u133-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a2.u133-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.u133
+- id: ru.activity.a2.u133-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.services.vozvrat
+  - ru.lex.services.vozvraschat
+  - ru.lex.services.obmen
+  - ru.lex.services.obmenyat
+  - ru.lex.services.garantiya
+  - ru.sent.a2.u133
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.services.vozvrat
+  - ru.lex.services.vozvraschat
+  - ru.lex.services.obmen
+  - ru.lex.services.obmenyat
+  - ru.lex.services.garantiya
+  - ru.sent.a2.u133
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Returns: services with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse возврат (refund) with обмен (exchange)."]
-  target_proficiency: "A2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Returns: services with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse возврат (refund) with обмен (exchange).
+  target_proficiency: A2
+  validation_method: choice

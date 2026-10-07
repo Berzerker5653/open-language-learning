@@ -1,47 +1,66 @@
-id: "ru.unit.b2.comp-01"
-goal_id: "ru.goal.b2.negotiation"
-title: "Priorities"
-summary: "приоритетный, первоочередной, приоритизация, ранжирование and ранжировать."
+id: ru.unit.b2.comp-01
+goal_id: ru.goal.b2.negotiation
+title: Priorities
+summary: приоритетный, первоочередной, приоритизация, ранжирование and ранжировать.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u620-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.neg.prioritetnyy",
-        "ru.lex.neg.pervochederednoy",
-        "ru.lex.neg.prioritisaciya",
-        "ru.lex.neg.ranzhirovanie",
-        "ru.lex.neg.ranzhirovat",
-        "ru.sent.b2.u620",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u620-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u620-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u620"]
-  - id: "ru.activity.b2.u620-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u620-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.neg.prioritetnyy
+  - ru.lex.neg.pervochederednoy
+  - ru.lex.neg.prioritisaciya
+  - ru.lex.neg.ranzhirovanie
+  - ru.lex.neg.ranzhirovat
+  - ru.sent.b2.u620
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u620-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u620-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u620
+- id: ru.activity.b2.u620-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.neg.prioritetnyy
+  - ru.lex.neg.pervochederednoy
+  - ru.lex.neg.prioritisaciya
+  - ru.lex.neg.ranzhirovanie
+  - ru.lex.neg.ranzhirovat
+  - ru.sent.b2.u620
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.neg.prioritetnyy
+  - ru.lex.neg.pervochederednoy
+  - ru.lex.neg.prioritisaciya
+  - ru.lex.neg.ranzhirovanie
+  - ru.lex.neg.ranzhirovat
+  - ru.sent.b2.u620
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Priorities: negotiation exchange with taught forms only."]
+  expected_interpretations:
+  - 'Priorities: negotiation exchange with taught forms only.'
   prohibited_ambiguity:
-    ["Do not confuse приоритетный (priority) with первоочередной (top-priority)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  - Do not confuse приоритетный (priority) with первоочередной (top-priority).
+  target_proficiency: B2
+  validation_method: choice

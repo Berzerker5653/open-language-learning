@@ -1,46 +1,66 @@
-id: "ru.unit.b1.life-experiences-09"
-goal_id: "ru.goal.b1.experiences"
-title: "Feedback"
-summary: "подсказка, рекомендация, поддержка, одобрение and похвала."
+id: ru.unit.b1.life-experiences-09
+goal_id: ru.goal.b1.experiences
+title: Feedback
+summary: подсказка, рекомендация, поддержка, одобрение and похвала.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b1.u238-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.experiences.podskazka",
-        "ru.lex.experiences.rekomodatsiya",
-        "ru.lex.experiences.podderzhka",
-        "ru.lex.experiences.odobrenie",
-        "ru.lex.experiences.pokhvala",
-        "ru.sent.b1.u238",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b1.u238-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b1.u238-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b1.u238"]
-  - id: "ru.activity.b1.u238-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b1.u238-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.experiences.podskazka
+  - ru.lex.experiences.rekomodatsiya
+  - ru.lex.experiences.podderzhka
+  - ru.lex.experiences.odobrenie
+  - ru.lex.experiences.pokhvala
+  - ru.sent.b1.u238
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b1.u238-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b1.u238-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.u238
+- id: ru.activity.b1.u238-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.experiences.podskazka
+  - ru.lex.experiences.rekomodatsiya
+  - ru.lex.experiences.podderzhka
+  - ru.lex.experiences.odobrenie
+  - ru.lex.experiences.pokhvala
+  - ru.sent.b1.u238
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.experiences.podskazka
+  - ru.lex.experiences.rekomodatsiya
+  - ru.lex.experiences.podderzhka
+  - ru.lex.experiences.odobrenie
+  - ru.lex.experiences.pokhvala
+  - ru.sent.b1.u238
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Feedback: experiences with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse подсказка (tip) with рекомендация (recommendation)."]
-  target_proficiency: "B1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Feedback: experiences with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse подсказка (tip) with рекомендация (recommendation).
+  target_proficiency: B1
+  validation_method: choice

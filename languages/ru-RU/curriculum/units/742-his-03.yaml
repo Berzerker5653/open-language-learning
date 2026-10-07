@@ -1,46 +1,66 @@
-id: "ru.unit.b2.his-03"
-goal_id: "ru.goal.b2.culture-perspectives"
-title: "Beliefs"
-summary: "обряд, верование, суеверие, генеалогия and диаспора."
+id: ru.unit.b2.his-03
+goal_id: ru.goal.b2.culture-perspectives
+title: Beliefs
+summary: обряд, верование, суеверие, генеалогия and диаспора.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b2.u742-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.cult.obryad",
-        "ru.lex.cult.verovanie",
-        "ru.lex.cult.sueverie",
-        "ru.lex.cult.genealogiya",
-        "ru.lex.cult.diaspora",
-        "ru.sent.b2.u742",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b2.u742-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b2.u742-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b2.u742"]
-  - id: "ru.activity.b2.u742-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b2.u742-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.cult.obryad
+  - ru.lex.cult.verovanie
+  - ru.lex.cult.sueverie
+  - ru.lex.cult.genealogiya
+  - ru.lex.cult.diaspora
+  - ru.sent.b2.u742
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b2.u742-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b2.u742-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.u742
+- id: ru.activity.b2.u742-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.cult.obryad
+  - ru.lex.cult.verovanie
+  - ru.lex.cult.sueverie
+  - ru.lex.cult.genealogiya
+  - ru.lex.cult.diaspora
+  - ru.sent.b2.u742
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.cult.obryad
+  - ru.lex.cult.verovanie
+  - ru.lex.cult.sueverie
+  - ru.lex.cult.genealogiya
+  - ru.lex.cult.diaspora
+  - ru.sent.b2.u742
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Beliefs: literary response with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse верование (belief) with суеверие (superstition)."]
-  target_proficiency: "B2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Beliefs: literary response with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse верование (belief) with суеверие (superstition).
+  target_proficiency: B2
+  validation_method: choice

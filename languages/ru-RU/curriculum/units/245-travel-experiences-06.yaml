@@ -1,46 +1,66 @@
-id: "ru.unit.b1.travel-experiences-06"
-goal_id: "ru.goal.b1.experiences"
-title: "Reactions"
-summary: "удивиться, разочароваться, восхититься, расстроиться and запомниться."
+id: ru.unit.b1.travel-experiences-06
+goal_id: ru.goal.b1.experiences
+title: Reactions
+summary: удивиться, разочароваться, восхититься, расстроиться and запомниться.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.b1.u245-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.travel2.udivitsya",
-        "ru.lex.travel2.razocharovatsya",
-        "ru.lex.travel2.voshititsya",
-        "ru.lex.travel2.rasstroitsya",
-        "ru.lex.travel2.zapomnitsya",
-        "ru.sent.b1.u245",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.b1.u245-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.b1.u245-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.b1.u245"]
-  - id: "ru.activity.b1.u245-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.b1.u245-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.travel2.udivitsya
+  - ru.lex.travel2.razocharovatsya
+  - ru.lex.travel2.voshititsya
+  - ru.lex.travel2.rasstroitsya
+  - ru.lex.travel2.zapomnitsya
+  - ru.sent.b1.u245
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.b1.u245-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.b1.u245-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.u245
+- id: ru.activity.b1.u245-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.travel2.udivitsya
+  - ru.lex.travel2.razocharovatsya
+  - ru.lex.travel2.voshititsya
+  - ru.lex.travel2.rasstroitsya
+  - ru.lex.travel2.zapomnitsya
+  - ru.sent.b1.u245
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.travel2.udivitsya
+  - ru.lex.travel2.razocharovatsya
+  - ru.lex.travel2.voshititsya
+  - ru.lex.travel2.rasstroitsya
+  - ru.lex.travel2.zapomnitsya
+  - ru.sent.b1.u245
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Reactions: travel with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse восхититься (delight) with разочароваться (disappoint)."]
-  target_proficiency: "B1"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Reactions: travel with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse восхититься (delight) with разочароваться (disappoint).
+  target_proficiency: B1
+  validation_method: choice

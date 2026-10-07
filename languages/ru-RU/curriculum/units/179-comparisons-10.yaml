@@ -1,46 +1,66 @@
-id: "ru.unit.a2.comparisons-10"
-goal_id: "ru.goal.a2.comparisons"
-title: "Purpose"
-summary: "чтобы, если, благодаря, из-за and сравнить."
+id: ru.unit.a2.comparisons-10
+goal_id: ru.goal.a2.comparisons
+title: Purpose
+summary: чтобы, если, благодаря, из-за and сравнить.
 estimated_minutes: 8
 activities:
-  - id: "ru.activity.a2.u179-read"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &v [
-        "ru.lex.comparisons.chtoby",
-        "ru.lex.comparisons.yesli",
-        "ru.lex.comparisons.blagodarya",
-        "ru.lex.comparisons.iz-za",
-        "ru.lex.comparisons.sravnit",
-        "ru.sent.a2.u179",
-        "ru.lex.everyday.eto",
-        "ru.lex.everyday.dom",
-      ]
-  - id: "ru.activity.a2.u179-grammar"
-    type: "encounter-read"
-    modality: "reading"
-    support_level: 1
-    content_refs:
-      &g ["ru.grammar.on-ramp.eto-identification", "ru.grammar.on-ramp.zero-present-copula"]
-  - id: "ru.activity.a2.u179-cloze"
-    type: "cloze"
-    modality: "writing"
-    support_level: 1
-    content_refs: ["ru.sent.a2.u179"]
-  - id: "ru.activity.a2.u179-write"
-    type: "recall"
-    modality: "writing"
-    support_level: 0
-    content_refs: *v
+- id: ru.activity.a2.u179-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.comparisons.chtoby
+  - ru.lex.comparisons.yesli
+  - ru.lex.comparisons.blagodarya
+  - ru.lex.comparisons.iz-za
+  - ru.lex.comparisons.sravnit
+  - ru.sent.a2.u179
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+- id: ru.activity.a2.u179-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
+- id: ru.activity.a2.u179-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.u179
+- id: ru.activity.a2.u179-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.lex.comparisons.chtoby
+  - ru.lex.comparisons.yesli
+  - ru.lex.comparisons.blagodarya
+  - ru.lex.comparisons.iz-za
+  - ru.lex.comparisons.sravnit
+  - ru.sent.a2.u179
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
 generation_contract:
-  allowed_vocab: *v
-  allowed_grammar: *g
+  allowed_vocab:
+  - ru.lex.comparisons.chtoby
+  - ru.lex.comparisons.yesli
+  - ru.lex.comparisons.blagodarya
+  - ru.lex.comparisons.iz-za
+  - ru.lex.comparisons.sravnit
+  - ru.sent.a2.u179
+  - ru.lex.everyday.eto
+  - ru.lex.everyday.dom
+  allowed_grammar:
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.on-ramp.zero-present-copula
   new_item_budget: 6
   register: []
-  expected_interpretations: ["Purpose: comparisons with taught forms only."]
-  prohibited_ambiguity: ["Do not confuse чтобы (in order to) with если (if)."]
-  target_proficiency: "A2"
-  validation_method: "choice"
+  expected_interpretations:
+  - 'Purpose: comparisons with taught forms only.'
+  prohibited_ambiguity:
+  - Do not confuse чтобы (in order to) with если (if).
+  target_proficiency: A2
+  validation_method: choice
