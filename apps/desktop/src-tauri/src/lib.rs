@@ -5236,14 +5236,25 @@ mod tests {
             .iter()
             .find(|c| c.pack_id == "org.openlanguage.ja-jp.reference")
             .unwrap();
+        // The pack's own single-file counts plus the one shard record
+        // written above must each be exceeded — the shard is counted.
+        let base_kanji = kanji_entries(data, "org.openlanguage.ja-jp.reference", &version)
+            .unwrap()
+            .len()
+            - 1;
+        let base_sentences = jsonl_claims(&root, "sentences/entries.jsonl").0;
+        let base_contrasts = jsonl_claims(&root, "phonology/contrasts.jsonl").0;
         assert!(
-            ja.counts.kanji > 56
-                && ja.counts.sentences > 61
-                && ja.counts.phonological_contrasts > 7,
-            "claims must tally shard files: kanji={} sentences={} contrasts={}",
+            ja.counts.kanji == base_kanji + 1
+                && ja.counts.sentences == base_sentences + 1
+                && ja.counts.phonological_contrasts == base_contrasts + 1,
+            "claims must tally shard files: kanji={}/{} sentences={}/{} contrasts={}/{}",
             ja.counts.kanji,
+            base_kanji,
             ja.counts.sentences,
-            ja.counts.phonological_contrasts
+            base_sentences,
+            ja.counts.phonological_contrasts,
+            base_contrasts
         );
     }
 
