@@ -2,7 +2,7 @@
 
 This file inventories third-party material this project builds with,
 downloads, or distributes, and the scope of each license. The root `LICENSE`
-(MIT) covers only original project code; it never relabels anything below.
+(Apache-2.0, ADR-0010) covers only original project code; it never relabels anything below.
 Reproduce this file (or the referenced license texts) in distributed builds
 alongside the binaries.
 

@@ -83,8 +83,8 @@ python tools/validate_handoff.py
 python -m unittest discover -s tools -p 'test_validate_handoff.py'
 ```
 
-See `schemas/README.md` for the exact validation scope, draft-reference warning, and stricter pack-readiness command. The pack SDK CLI described in docs/04 does not exist yet.
+See `schemas/README.md` for the exact validation scope, draft-reference warning, and stricter pack-readiness command. The pack SDK CLI described in docs/04 exists (`crates/langpack`, `langpack` CLI: validate/lint/test/build/catalog/install).
 
 ## Intended handoff boundary
 
-The default implementation goal is the desktop Japanese B2-like **release candidate** defined by `REL-001`, including qualified review and all required gates. Earlier partial alpha/beta builds may be useful without changing that goal. Optional AI, mobile, web, and advanced content remain separate scope. Preparing a release candidate does not authorize public publication, external messages, paid services, or signing/store credentials. Public distribution also requires resolving the source-code and original-content license selections recorded in `LIC-001`.
+The default implementation goal is the desktop Japanese B2-like **release candidate** defined by `REL-001`, including qualified review and all required gates. Earlier partial alpha/beta builds may be useful without changing that goal. Optional AI, mobile, web, and advanced content remain separate scope. Preparing a release candidate does not authorize public publication, external messages, paid services, or signing/store credentials. Licensing is settled (`LIC-001` closed 2026-10-04): application code Apache-2.0 (ADR-0010), original pack content CC-BY-4.0, dictionary-derived data CC-BY-SA-4.0; public distribution still requires explicit owner publication authorization.

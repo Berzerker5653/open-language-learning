@@ -402,21 +402,26 @@ M2 — Local data and learner model
 
 ## Next task
 
-**Preview is ready** (owner-authorized 2026-10-03): see
-`state/PREVIEW_READINESS.md` — locally runnable preview with the
-original `eo-demo` + EDRDG-derived `ja-demo` packs, language
-selector/switching, local import, offline use, guided-only speech.
-Stable-release gates stay open and visible: `REVIEW-001` (qualified
-reviewer capacity),
-`SPEECH-007` (calibration recordings — prep complete 2026-10-06: frozen
-protocol + consent + rubric + sourcing plan; owner must supply data + labelers
-per `benchmarks/speech/datasets/SOURCING.md`), the unresolved authorship of
-`languages/ja-JP` draft prose (excluded from the preview; needs an
-authorship statement or replacement), and the TTS GPLv3 distribution
-call (provider stays out of distributable builds). Content licensing
-is now decided: MIT for app code, CC-BY-4.0 for original pack content,
-CC-BY-SA-4.0 preserved for dictionary-derived data. `active_task`
-stays null: no ROADMAP task is unblocked without owner input.
+**Packs published (private) + live catalog wired** (2026-10-07, entry above):
+the in-app catalog download flow activates automatically when the repo goes
+public (owner gate O-05); local import of `dist/preview/*.lpk` exercises the
+same install gate meanwhile.
+
+**Next tranche (kanban `now`/`next`): sole-user learning experience** —
+K-40 goal-map progress UI, K-42 draft-content honesty in practice, then
+K-41 ru stress visibility, K-43 content-claims panel, K-44 phrase entries,
+K-45 kanji expansion, K-46 device-tier detection. All BUILD-bucket
+(`docs/FEATURE_PLAN.md`): no gates, no new dependencies, no owner input needed.
+
+Stable-release gates stay open and visible: `SPEECH-007` (calibration
+recordings — prep complete 2026-10-06: frozen protocol + consent + rubric +
+sourcing plan; owner must supply data + labelers per
+`benchmarks/speech/datasets/SOURCING.md`) and qualified review capacity
+(O-02 community path needs the repo public). The TTS GPLv3 distribution call
+stays open (provider out of distributable builds). Licensing is settled: app
+code Apache-2.0 (ADR-0010, 2026-10-04), original pack content CC-BY-4.0,
+dictionary-derived data CC-BY-SA-4.0. `active_task` stays null until a
+kanban `now` card is picked up.
 
 
 ## Owner decision from 2026-10-05 direction
@@ -432,7 +437,8 @@ stays null: no ROADMAP task is unblocked without owner input.
 ## Owner decisions from 2026-10-03 direction
 
 - Application code: MIT, third-party licenses preserved and scoped
-  (`LICENSE`, `THIRD-PARTY-NOTICES.md`).
+  (`LICENSE`, `THIRD-PARTY-NOTICES.md`). *Superseded 2026-10-04 by ADR-0010:
+  Apache-2.0 (owner-delegated choice).*
 - ja-JP draft: keep (provenance supports distribution as
   project-original); document, don't replace. Review gates unchanged.
 - Community packs on GitHub releases are a supported path; they stay

@@ -12,6 +12,7 @@ export default tseslint.config(
       "apps/desktop/src-tauri/**",
       "tools/**",
       "audit/**",
+      "tmp/**",
     ],
   },
   js.configs.recommended,

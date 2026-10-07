@@ -10,8 +10,8 @@ gate and still fails (correctly) until review and calibration gates pass.
 | Requirement | Status |
 | --- | --- |
 | Clearly labeled draft/unreviewed content | OK — every pack labeled "unreviewed"; content items `status: draft`; UI shows community/unreviewed labeling |
-| Original or properly licensed content only in preview packs | OK — `eo-demo` fully original (CC-BY-4.0, ai-assisted, unreviewed); `ja-demo` EDRDG-derived (CC-BY-SA-4.0, attribution in pack) + Apache-2.0 model-output audio. Unresolved `languages/ja-JP` prose is EXCLUDED from the preview (not bundled; install gate blocks it) |
-| App code MIT, third-party licenses preserved | OK — `LICENSE`, `THIRD-PARTY-NOTICES.md` |
+| Original or properly licensed content only in preview packs | OK — `eo-demo` fully original (CC-BY-4.0, ai-assisted, unreviewed); `ja-demo` EDRDG-derived (CC-BY-SA-4.0, attribution in pack) + Apache-2.0 model-output audio; `languages/ja-JP` prose replaced with ai-assisted draft wording 2026-10-03 (`docs/provenance/ja-jp-draft-content.md`) and bundled as the default pack (K-32) |
+| App code Apache-2.0 (ADR-0010), third-party licenses preserved | OK — `LICENSE`, `NOTICE`, `THIRD-PARTY-NOTICES.md` |
 | Language selector usable | OK — first-run pack choice; Languages page: installed list, switch, empty-catalog "coming soon" + local import; interface language separate from learning language |
 | Offline after install | OK — journey test runs with no network; packs + models local |
 | Speech: guided/reference only, automatic scoring disabled | OK — speech profiles `calibration: null`, assessment capability flags false; interpreters abstain rather than grade |

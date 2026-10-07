@@ -1092,6 +1092,105 @@ tasks:
   acceptance:
   - "`langpack pack` produces installable .lpk artifacts for shipped packs and a catalog/packs.json listing them with hashes/versions; publishing to GitHub remains an owner gate (O-05)."
   required_for_desktop_1_0: false
+- id: K-40
+  milestone: M6
+  priority: P1
+  title: Goal-level progress map in the app UI
+  dependencies:
+  - UX-002
+  - LEARN-002
+  - K-30
+  read_first:
+  - docs/01_PRODUCT_AND_UX.md
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  acceptance:
+  - Home/progress surfaces the installed pack's goals (not unit counts) with prerequisite structure and per-dimension mastery state.
+  - Goal state derives from derived mastery and assessment evidence only; never activity counts, dates, or streaks.
+  - Rendering is pack-data-driven (curriculum/goals + assessments); no language-specific hardcoding.
+  required_for_desktop_1_0: false
+- id: K-41
+  milestone: M7
+  priority: P2
+  title: Stress-mark visibility in practice and writing UI
+  dependencies:
+  - UX-002
+  - WRITE-001
+  read_first:
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  - docs/11_ACCESSIBILITY_AND_LOCALIZATION.md
+  acceptance:
+  - Readings carrying U+0301 stress marks render with the stressed vowel visually highlighted; a user toggle exists.
+  - Highlighting is data-driven (any pack reading with combining stress), not language-specific code.
+  required_for_desktop_1_0: false
+- id: K-42
+  milestone: M6
+  priority: P1
+  title: Draft-content honesty in the practice loop
+  dependencies:
+  - UX-002
+  - K-30
+  read_first:
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  - docs/18_PUBLIC_CLAIMS_AND_SCOPE.md
+  acceptance:
+  - Practice surfaces show the pack/content review posture (draft) where content is presented.
+  - No mastery or scheduler semantics penalize learners for unreviewed content; no loss-aversion mechanics.
+  required_for_desktop_1_0: false
+- id: K-43
+  milestone: M6
+  priority: P2
+  title: Per-pack content claims panel
+  dependencies:
+  - UX-001
+  - K-35
+  read_first:
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - Languages page shows per-pack counts (units/goals/assessments/lexicon), review posture, and provenance sources from installed pack data.
+  - Counts and review posture are displayed as author claims; install trust_state is never upgraded.
+  required_for_desktop_1_0: false
+- id: K-44
+  milestone: M6
+  priority: P2
+  title: First-class phrase entries in lexicon schema and practice
+  dependencies:
+  - PACK-001
+  - K-12
+  read_first:
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  acceptance:
+  - Lexicon schema supports a phrase entry type with slot info; existing multi-word entries validate without noise.
+  - Cloze/recall activities can target the correct token of a phrase entry.
+  required_for_desktop_1_0: false
+- id: K-45
+  milestone: M7
+  priority: P2
+  title: ja-JP kanji layer expansion with furigana-gated forms
+  dependencies:
+  - K-16
+  - K-30
+  read_first:
+  - docs/06_JAPANESE_REFERENCE.md
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  acceptance:
+  - kanji/entries.jsonl expanded beyond the seed with sourced frequency grounding; later-band units introduce kanji forms with furigana readings.
+  - All added content labeled draft with provenance records.
+  required_for_desktop_1_0: false
+- id: K-46
+  milestone: M5
+  priority: P2
+  title: Runtime device-tier detection for speech model recommendation
+  dependencies:
+  - SPEECH-003
+  - PERF-001
+  read_first:
+  - docs/performance/BUDGETS.yaml
+  - docs/05_SPEECH_SYSTEM.md
+  acceptance:
+  - The app detects the hardware tier per PERF-001 named tiers and marks the recommended speech model accordingly; the static recommended marker is removed.
+  - Detection failure falls back to the cheapest model with honest copy; no silent behavior change.
+  required_for_desktop_1_0: false
 - id: GAME-001
   milestone: M7
   priority: P1
@@ -1428,4 +1527,11 @@ execution_scope:
   - K-33
   - K-34
   - K-35
+  - K-40
+  - K-41
+  - K-42
+  - K-43
+  - K-44
+  - K-45
+  - K-46
   public_publication_authorized: false
