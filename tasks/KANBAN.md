@@ -46,12 +46,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-41 | stress-mark visibility: U+0301 readings render with the stressed vowel highlighted (`StressText`), auto/on/off display setting persisted per profile (`display_settings`/`set_display_settings`, key `stress-mode`), toggle UI on Languages page; display-only — grading/evidence/scheduling never consult it; smoke walks all routes with the new IPC in load paths (`state/evidence/K-41/`) | K-41 |
 | K-43 | per-pack content claims panel on Languages page: `pack_claims` command tallies units/goals/assessments/lexicon/sentences/grammar/orthography/kanji/contrasts/stories from the installed pack's own files, reports the pack's own review-posture distribution and `sources.jsonl` provenance as claims; `trust_state` passes through untouched (never promoted); UI labels the numbers as the pack's claims, not verification (`state/evidence/K-43/`) | K-43 |
 | K-46 | runtime device-tier detection → dynamic recommended speech model: `recommended_speech_model` measures cores + RAM (`/proc/meminfo`), classifies low/typical/high per PERF-001 tier shape, recommends tiny/base/small by the BUDGETS.yaml memory budgets; detection failure abstains (null) with honest UI copy; static `RECOMMENDED_SPEECH_MODEL` constant deleted; badge reads "recommended for this device" (`state/evidence/K-46/`) | K-46 |
-
-## next — learning experience follow-ons
-
-| card | epic | what | maps to |
-| --- | --- | --- | --- |
-| K-44 | packs | First-class `phrase` lexicon entries with slot info; cloze/recall target the right token (~370 existing entries) | K-44 |
+| K-44 | first-class `phrase` lexicon entries: schema 0.2 gains optional `kind`/`slots` (verbatim-validated slot text, non-verbatim dropped); runner exposes `PhraseSlotView` with exactly one deterministic target (`fnv1a(item_id) % slots.len()`); "Phrase structure" block in the practice runner (target badge, label, alternatives) — display-only, grading untouched; ~370 existing multi-word entries await pack-side annotation (content work) (`state/evidence/K-44/`) | K-44 |
 
 ## next — AI authoring kit (the GitHub community-pack goal)
 
@@ -87,7 +82,11 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
    visible wherever content is presented.
 3. **Content depth (K-45, A2) after the map**: the map is live, so more
    content can now go into visible structure.
-4. **Remaining K-4x polish**: K-41 stress marks, K-43 claims panel,
-   K-44 phrase entries, K-46 device-tier speech recommendation.
-5. **Owner-side unblocks stay ranked in `owner`**: public flip (O-05) then
+4. **K-4x polish tranche complete 2026-10-07**: K-41 stress marks,
+   K-43 claims panel, K-44 phrase entries, K-46 device-tier speech
+   recommendation all shipped.
+5. **K-44 follow-on is content work**: annotating the ~370 existing
+   multi-word ja-JP entries with `kind: "phrase"` + slots rides with
+   K-45 pack expansion.
+6. **Owner-side unblocks stay ranked in `owner`**: public flip (O-05) then
    calibration data (O-04/SPEECH-007) are the only paths to REL-001.

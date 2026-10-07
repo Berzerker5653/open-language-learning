@@ -458,6 +458,23 @@ M2 — Local data and learner model
   UI test pins the badge to the detected model only (evidence:
   `state/evidence/K-46/`).
 
+
+- `K-44` — first-class `phrase` lexicon entries 2026-10-07: schema
+  0.2 lexicon records gain optional `kind` ("word"|"phrase", default
+  word — existing packs unaffected) and `slots`
+  (`{text, alternatives?, label?}`). Verbatim rule: a slot's text
+  must occur in the primary surface or it is dropped, never guessed
+  (same discipline as sentence `cloze_targets`). The runner exposes
+  `PhraseSlotView` with exactly one deterministic target per item
+  (`fnv1a(item_id) % slots.len()`, same FNV rule as choice
+  placement). The practice runner renders a "Phrase structure" block
+  (target badged "the part to change", label, alternatives) —
+  display-only; grading/evidence/scheduling never consult slots.
+  Native test covers parsing, verbatim drop, single deterministic
+  target, and word entries rendering none; UI test pins the render.
+  Pack-side annotation of the ~370 existing multi-word ja-JP entries
+  is content work riding with K-45 (evidence: `state/evidence/K-44/`).
+
 ## Next task
 
 **Packs published (private) + live catalog wired** (2026-10-07, entry above):
@@ -465,9 +482,10 @@ the in-app catalog download flow activates automatically when the repo goes
 public (owner gate O-05); local import of `dist/preview/*.lpk` exercises the
 same install gate meanwhile.
 
-**Next tranche (kanban `now`): sole-user learning experience** —
-K-44 phrase entries; then K-45 kanji expansion + A2 content into
-the now-visible goal-map structure. All BUILD-bucket
+**Next tranche (kanban `now`): content depth** —
+K-45 kanji expansion + A2 content into
+the now-visible goal-map structure (K-44 phrase entries shipped
+2026-10-07; pack-side slot annotation rides with it). All BUILD-bucket
 (`docs/FEATURE_PLAN.md`): no gates, no new dependencies, no owner input needed.
 
 Stable-release gates stay open and visible: `SPEECH-007` (calibration

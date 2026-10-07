@@ -93,6 +93,12 @@ Every `*` path in the layout table accepts many files; ids are global
 to the pack and duplicates across files fail (`duplicate_ids`). The
 conventions that keep large packs navigable:
 
+- **Phrases**: a lexicon record may declare `kind: "phrase"` with
+  `slots` (each slot: `text`, optional `alternatives`, optional
+  `label`). A slot's `text` must occur verbatim in the primary
+  surface form — the engine drops non-verbatim slots instead of
+  guessing. Slots are display-only: they never affect grading,
+  evidence, or scheduling. Absent `kind` means an ordinary word.
 - **Lexicon by topic**: `lexicon/<topic>.jsonl`, kebab-case topic
   (`lexicon/food.jsonl`, `lexicon/numbers.jsonl`). Never shard
   alphabetically — topic shards match how units cite vocabulary.

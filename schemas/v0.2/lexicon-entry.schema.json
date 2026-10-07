@@ -7,6 +7,27 @@
   "additionalProperties": false,
   "required": ["id", "status", "forms", "glosses", "sources"],
   "properties": {
+    "kind": {
+      "type": "string",
+      "enum": ["word", "phrase"],
+      "default": "word",
+      "description": "Expression kind. Absent means word. Phrase entries may declare slots for display-only slot highlighting."
+    },
+    "slots": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Display-only slot structure for phrase entries. Each slot's text must occur verbatim in the primary surface form; the engine drops non-verbatim slots rather than guessing.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text"],
+        "properties": {
+          "text": { "type": "string", "minLength": 1 },
+          "alternatives": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "label": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
     "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
     "status": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/reviewStatus" },
     "forms": {

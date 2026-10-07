@@ -854,6 +854,15 @@
         "state/evidence/K-46/smoke-2026-10-07.txt",
         "state/notes/K-46.md"
       ]
+    },
+    "K-44": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/evidence/K-44/smoke-2026-10-07.txt",
+        "state/notes/K-44.md"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence."

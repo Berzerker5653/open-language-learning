@@ -23,6 +23,14 @@ export interface PracticeTaskView {
   /// K-42: review posture of the underlying pack record; display-only,
   /// never affects grading or scheduling.
   status?: string;
+  /// K-44: phrase slot structure (display-only). Exactly one slot is
+  /// the target; never affects grading or scheduling.
+  slots?: {
+    text: string;
+    alternatives: string[];
+    label?: string | null;
+    target: boolean;
+  }[];
 }
 
 export interface PracticeRunnerProps {
@@ -70,6 +78,20 @@ export function PracticeRunner(p: PracticeRunnerProps) {
           <p className="prompt" lang="ja">
             {p.task.surface}
           </p>
+          {p.task.slots && p.task.slots.length > 0 ? (
+            <div className="meta" aria-label="Phrase structure">
+              {p.task.slots.map((slot, i) => (
+                <p key={i}>
+                  <span className={slot.target ? "badge" : undefined}>{slot.text}</span>
+                  {slot.target ? " — the part to change" : ""}
+                  {slot.label ? ` (${slot.label})` : ""}
+                  {slot.alternatives.length > 0 ? (
+                    <small> can also be: {slot.alternatives.join(", ")}</small>
+                  ) : null}
+                </p>
+              ))}
+            </div>
+          ) : null}
           {p.task.reading && (
             <p aria-label="Reading" lang="ja">
               <small>{p.stress ? <StressText text={p.task.reading} /> : p.task.reading}</small>

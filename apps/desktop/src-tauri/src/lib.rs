@@ -409,6 +409,24 @@ struct LexEntry {
     /// K-42: review posture from the pack record (`status`), shown
     /// wherever content is presented; never affects grading/scheduling.
     status: String,
+    /// K-44: first-class phrase records (`kind: "phrase"`) carry slot
+    /// info: the fixed frame plus the variable parts a learner can
+    /// swap. Data-driven — packs declare slots; the engine never
+    /// parses the language itself.
+    kind: String,
+    slots: Vec<PhraseSlot>,
+}
+
+/// K-44: one variable part of a phrase, as declared by the pack.
+#[derive(serde::Serialize, Clone)]
+struct PhraseSlot {
+    /// Exact substring of the surface form this slot occupies.
+    text: String,
+    /// What may replace it (pack-declared alternatives; may be empty
+    /// when the pack only marks the slot).
+    alternatives: Vec<String>,
+    /// Optional human label ("the verb", "the time of day").
+    label: Option<String>,
 }
 
 /// Read every `lexicon/*.jsonl` of an installed pack, sorted for
@@ -498,6 +516,42 @@ fn lexicon_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<LexE
                     .and_then(|r| r.get("text").and_then(|t| t.as_str()))
                     .map(String::from)
             });
+        // K-44: phrase records declare slots — variable parts of the
+        // surface form. A slot's `text` must occur verbatim in the
+        // surface (same verbatim rule as sentence cloze targets);
+        // malformed slots are skipped, never guessed at.
+        let kind = entry
+            .get("kind")
+            .and_then(|v| v.as_str())
+            .unwrap_or("word")
+            .to_string();
+        let slots: Vec<PhraseSlot> = entry
+            .get("slots")
+            .and_then(|v| v.as_array())
+            .map(|a| {
+                a.iter()
+                    .filter_map(|s| {
+                        let text = s.get("text").and_then(|t| t.as_str())?;
+                        if text.is_empty() || !surface.contains(text) {
+                            return None;
+                        }
+                        Some(PhraseSlot {
+                            text: text.to_string(),
+                            alternatives: s
+                                .get("alternatives")
+                                .and_then(|v| v.as_array())
+                                .map(|alts| {
+                                    alts.iter()
+                                        .filter_map(|x| x.as_str().map(String::from))
+                                        .collect()
+                                })
+                                .unwrap_or_default(),
+                            label: s.get("label").and_then(|l| l.as_str()).map(String::from),
+                        })
+                    })
+                    .collect()
+            })
+            .unwrap_or_default();
         out.push(LexEntry {
             id: id.to_string(),
             surface: surface.to_string(),
@@ -509,6 +563,8 @@ fn lexicon_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<LexE
                 .and_then(|v| v.as_str())
                 .unwrap_or("draft")
                 .to_string(),
+            kind,
+            slots,
         });
     }
     Ok(out)
@@ -2815,7 +2871,43 @@ struct PracticeTask {
     /// and scheduling never consult it (no penalty on unreviewed
     /// content).
     status: String,
+    /// K-44: phrase slot info for phrase entries (surface split into
+    /// fixed frame + variable parts). Display-only: grading, evidence,
+    /// and scheduling never consult it.
+    slots: Vec<PhraseSlotView>,
 }
+
+#[derive(Serialize, PartialEq, Debug)]
+struct PhraseSlotView {
+    text: String,
+    alternatives: Vec<String>,
+    label: Option<String>,
+    /// True when this slot is the recall target (deterministic per
+    /// item id, same FNV rule as choice placement).
+    target: bool,
+}
+/// K-44: render an entry's declared slots for the UI. The recall
+/// target slot is chosen deterministically per item id (same FNV rule
+/// as choice placement), so the same phrase always highlights the same
+/// slot without RNG. Non-phrase entries render no slots.
+fn phrase_slot_views(item_id: &str, entry: &LexEntry) -> Vec<PhraseSlotView> {
+    if entry.kind != "phrase" || entry.slots.is_empty() {
+        return Vec::new();
+    }
+    let target = (fnv1a(item_id) % entry.slots.len() as u64) as usize;
+    entry
+        .slots
+        .iter()
+        .enumerate()
+        .map(|(i, s)| PhraseSlotView {
+            text: s.text.clone(),
+            alternatives: s.alternatives.clone(),
+            label: s.label.clone(),
+            target: i == target,
+        })
+        .collect()
+}
+
 #[derive(Serialize)]
 struct PracticeGrade {
     correct: bool,
@@ -2981,6 +3073,7 @@ fn practice_build(
                 .collect()
         })
         .unwrap_or_default();
+    let slots = phrase_slot_views(&item_id, entry);
     let task = PracticeTask {
         item_id,
         surface: (dim == lts_domain::ActivityModality::RecallMeaning)
@@ -2996,6 +3089,7 @@ fn practice_build(
         romaji: display.as_ref().and_then(|d| d.romaji.clone()),
         faded_by_mastery: display.as_ref().is_some_and(|d| d.faded_by_mastery),
         choices,
+        slots,
         typed: false,
         status: entry.status.clone(),
     };
@@ -3055,6 +3149,7 @@ fn orth_task_build(
         choices,
         typed: false,
         status: entry.status.clone(),
+        slots: Vec::new(),
     };
     Ok((task, answer.clone(), Vec::new()))
 }
@@ -3113,6 +3208,7 @@ fn kanji_task_build(
         choices,
         typed: false,
         status: entry.status.clone(),
+        slots: Vec::new(),
     };
     Ok((task, answer, Vec::new()))
 }
@@ -3199,6 +3295,7 @@ fn contrast_task_build(
         choices,
         typed: false,
         status: entry.status.clone(),
+        slots: Vec::new(),
     };
     Ok((task, answer, Vec::new()))
 }
@@ -3386,6 +3483,7 @@ fn cloze_task_build(
         choices: Vec::new(),
         typed: true,
         status: entry.status.clone(),
+        slots: Vec::new(),
     };
     Ok((task, target, Vec::new()))
 }
@@ -3413,6 +3511,7 @@ fn dictation_task_build(
         choices: Vec::new(),
         typed: true,
         status: entry.status,
+        slots: Vec::new(),
     };
     Ok((task, entry.text, Vec::new()))
 }
@@ -3607,6 +3706,8 @@ fn story_view_at(data: &Path, profile_id: &str, story_id: &str) -> Result<StoryV
             romaji: entry.romaji.clone(),
             gloss: entry.gloss.clone().unwrap_or_default(),
             status: entry.status.clone(),
+            kind: "sentence".into(),
+            slots: Vec::new(),
         };
         let display = reader_display(data, profile_id, &proxy, false);
         let known: Vec<LexEntry> = lex
@@ -4947,6 +5048,91 @@ mod tests {
             elapsed.as_millis() < 1000,
             "plan generation regressed: {elapsed:?}"
         );
+    }
+
+    /// K-44: first-class phrase lexicon records carry slot info, and
+    /// the practice runner targets the right slot deterministically.
+    /// Slot text must occur verbatim in the surface (same rule as
+    /// sentence cloze targets); malformed slots are dropped, never
+    /// guessed at.
+    #[test]
+    fn phrase_entries_carry_slots_and_target_the_right_slot() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let version = lts_langpack::archive::current_version(
+            "org.openlanguage.ja-jp.reference",
+            &data.join("packs"),
+        )
+        .unwrap();
+        let lex = data
+            .join("packs/org.openlanguage.ja-jp.reference")
+            .join(&version)
+            .join("lexicon");
+        std::fs::write(
+            lex.join("phrases.jsonl"),
+            concat!(
+                "{\"id\":\"ja.lex.phrase.demo-time-greet\",\"status\":\"draft\",\"kind\":\"phrase\",\"forms\":[{\"text\":\"おはようございます\",\"is_primary\":true}],\"readings\":[{\"text\":\"おはようございます\",\"script\":\"hiragana\"}],\"glosses\":{\"en-US\":[\"a morning greeting\"]},\"sources\":[\"jf-standard\"],\"slots\":[{\"text\":\"おはよう\",\"alternatives\":[\"こんにちは\",\"こんばんは\"],\"label\":\"the time of day\"},{\"text\":\"ございます\",\"alternatives\":[\"ございます\",\"です\"]}]}\n",
+                "{\"id\":\"ja.lex.phrase.demo-bad-slot\",\"status\":\"draft\",\"kind\":\"phrase\",\"forms\":[{\"text\":\"さようなら\",\"is_primary\":true}],\"glosses\":{\"en-US\":[\"a farewell\"]},\"sources\":[\"jf-standard\"],\"slots\":[{\"text\":\"さよなら\",\"label\":\"does not occur in the surface\"}]}\n",
+            ),
+        )
+        .unwrap();
+
+        let entries = lexicon_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
+        let phrase = entries
+            .iter()
+            .find(|e| e.id == "ja.lex.phrase.demo-time-greet")
+            .expect("phrase record must parse");
+        assert_eq!(phrase.kind, "phrase");
+        assert_eq!(phrase.slots.len(), 2);
+        assert_eq!(phrase.slots[0].text, "おはよう");
+        assert_eq!(phrase.slots[0].alternatives.len(), 2);
+        assert_eq!(phrase.slots[0].label.as_deref(), Some("the time of day"));
+
+        // Verbatim rule: a slot that doesn't occur in the surface is
+        // dropped, not silently matched.
+        let bad = entries
+            .iter()
+            .find(|e| e.id == "ja.lex.phrase.demo-bad-slot")
+            .unwrap();
+        assert!(bad.slots.is_empty(), "non-verbatim slot must be dropped");
+
+        // The runner surfaces slot views with exactly one deterministic
+        // target; ordinary word entries carry none.
+        let profile = create_local_profile(data, "H").unwrap();
+        finish_onboarding(data, &profile.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        let t1 = practice_task_at(
+            data,
+            &profile.id,
+            "ja.lex.phrase.demo-time-greet",
+            "recall-meaning",
+            false,
+        )
+        .unwrap();
+        let t2 = practice_task_at(
+            data,
+            &profile.id,
+            "ja.lex.phrase.demo-time-greet",
+            "recall-meaning",
+            false,
+        )
+        .unwrap();
+        assert_eq!(t1.slots.len(), 2);
+        assert_eq!(
+            t1.slots.iter().filter(|s| s.target).count(),
+            1,
+            "exactly one target slot"
+        );
+        assert_eq!(t1.slots, t2.slots, "target is deterministic per item");
+        let word = practice_task_at(
+            data,
+            &profile.id,
+            "ja.lex.greeting.konnichiwa",
+            "recall-meaning",
+            false,
+        )
+        .unwrap();
+        assert!(word.slots.is_empty(), "word entries render no slots");
     }
 
     #[test]

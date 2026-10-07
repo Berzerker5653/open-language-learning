@@ -205,4 +205,31 @@ describe("practice runner", () => {
     // choice), but no reading scaffold is offered while listening.
     expect(html).not.toContain("Show reading");
   });
+
+  it("renders phrase slot structure with exactly one target marked", () => {
+    const html = render({
+      task: {
+        item_id: "ja.lex.phrase.demo-time-greet#recall-meaning",
+        surface: "おはようございます",
+        choices: ["a morning greeting", "a farewell"],
+        slots: [
+          {
+            text: "おはよう",
+            alternatives: ["こんにちは", "こんばんは"],
+            label: "the time of day",
+            target: true,
+          },
+          { text: "ございます", alternatives: ["ございます", "です"], target: false },
+        ],
+      },
+    });
+    expect(html).toContain('aria-label="Phrase structure"');
+    expect(html).toContain("おはよう");
+    expect(html).toContain("the part to change");
+    expect(html).toContain("the time of day");
+    expect(html).toContain("こんにちは");
+    // Word entries (no slots) render no structure block.
+    const plain = render({ task: { ...base.task, slots: [] } });
+    expect(plain).not.toContain("Phrase structure");
+  });
 });
