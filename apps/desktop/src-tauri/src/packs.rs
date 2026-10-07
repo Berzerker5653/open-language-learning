@@ -137,28 +137,8 @@ pub fn load_cache(data: &Path) -> Option<PackCatalog> {
 /// Fetch + validate the catalog. Ok(catalog) on success (cache updated);
 /// Err carries a human-readable status for the UI.
 pub fn fetch_catalog(url: &str) -> Result<PackCatalog, String> {
-    let parsed = url::Url::parse(url).map_err(|_| "catalog url invalid")?;
-    if parsed.scheme() != "https" {
-        return Err("catalog url must be https".into());
-    }
-    let resp = ureq::get(url)
-        .call()
+    let bytes = fetch_capped(url, MAX_CATALOG_BYTES, false)
         .map_err(|e| format!("catalog fetch failed: {e}"))?;
-    let mut bytes = Vec::new();
-    let mut reader = resp.into_reader();
-    let mut buf = [0u8; 1 << 14];
-    loop {
-        let n = reader
-            .read(&mut buf)
-            .map_err(|e| format!("catalog read: {e}"))?;
-        if n == 0 {
-            break;
-        }
-        bytes.extend_from_slice(&buf[..n]);
-        if bytes.len() as u64 > MAX_CATALOG_BYTES {
-            return Err("catalog exceeds size limit".into());
-        }
-    }
     let catalog: PackCatalog =
         serde_json::from_slice(&bytes).map_err(|e| format!("catalog invalid: {e}"))?;
     for e in &catalog.packs {
@@ -228,26 +208,72 @@ pub fn catalog_view_with(data: &Path, url: &str) -> (Vec<CatalogView>, String) {
     (views, status.to_string())
 }
 
-fn download(url: &str, max_bytes: u64) -> Result<Vec<u8>, String> {
-    let resp = ureq::get(url)
-        .call()
-        .map_err(|e| format!("download failed: {e}"))?;
-    let mut bytes = Vec::new();
-    let mut reader = resp.into_reader();
-    let mut buf = [0u8; 1 << 16];
-    loop {
-        let n = reader
-            .read(&mut buf)
-            .map_err(|e| format!("download read: {e}"))?;
-        if n == 0 {
-            break;
-        }
-        bytes.extend_from_slice(&buf[..n]);
-        if bytes.len() as u64 > max_bytes {
-            return Err("download exceeded pinned size".into());
+/// Resolve one redirect hop under the fetch policy: stay on https, and
+/// for pack downloads stay on the allowlisted GitHub release hosts.
+/// ureq 2.x follows redirects without re-validating the destination, so
+/// every hop passes through here (a compromised or misconfigured host
+/// cannot bounce the client to an arbitrary server).
+fn next_hop(
+    current: &url::Url,
+    location: &str,
+    require_allowlisted: bool,
+) -> Result<url::Url, String> {
+    let next = current
+        .join(location)
+        .map_err(|_| "bad redirect location")?;
+    if next.scheme() != "https" {
+        return Err("redirect left https".into());
+    }
+    if require_allowlisted {
+        let host = next.host_str().ok_or("redirect has no host")?;
+        if !ALLOWED_HOSTS.contains(&host) {
+            return Err(format!("redirect host {host} not allowlisted"));
         }
     }
-    Ok(bytes)
+    Ok(next)
+}
+
+/// GET with per-hop policy and a hard size cap. `require_allowlisted`
+/// enforces the GitHub host allowlist on every hop (pack downloads);
+/// the operator-configured catalog URL is only held to https.
+fn fetch_capped(start: &str, max_bytes: u64, require_allowlisted: bool) -> Result<Vec<u8>, String> {
+    let mut url = url::Url::parse(start).map_err(|_| "bad url")?;
+    for _ in 0..=5 {
+        if url.scheme() != "https" {
+            return Err("url must be https".into());
+        }
+        if require_allowlisted {
+            let host = url.host_str().ok_or("url has no host")?;
+            if !ALLOWED_HOSTS.contains(&host) {
+                return Err(format!("host {host} not allowlisted"));
+            }
+        }
+        let agent = ureq::AgentBuilder::new().redirects(0).build();
+        let resp = agent
+            .get(url.as_str())
+            .call()
+            .map_err(|e| format!("fetch failed: {e}"))?;
+        if (300..400).contains(&resp.status()) {
+            let loc = resp.header("location").ok_or("redirect without location")?;
+            url = next_hop(&url, loc, require_allowlisted)?;
+            continue;
+        }
+        let mut bytes = Vec::new();
+        let mut reader = resp.into_reader();
+        let mut buf = [0u8; 1 << 16];
+        loop {
+            let n = reader.read(&mut buf).map_err(|e| format!("read: {e}"))?;
+            if n == 0 {
+                break;
+            }
+            bytes.extend_from_slice(&buf[..n]);
+            if bytes.len() as u64 > max_bytes {
+                return Err("response exceeded size limit".into());
+            }
+        }
+        return Ok(bytes);
+    }
+    Err("too many redirects".into())
 }
 
 fn hex_sha256(bytes: &[u8]) -> String {
@@ -319,7 +345,7 @@ pub fn install_from_catalog(data: &Path, pack_id: &str) -> Result<InstalledPack,
             return Ok(display_for(data, pack_id, &v, "community"));
         }
     }
-    let bytes = download(&entry.url, entry.size_bytes)?;
+    let bytes = fetch_capped(&entry.url, entry.size_bytes, true)?;
     install_pack_bytes(data, &bytes, Some(entry))
 }
 
@@ -555,5 +581,26 @@ mod tests {
         assert_eq!(status, "cached");
         assert_eq!(views[0].pack_id, "org.openlanguage.ja-demo");
         assert_eq!(views[0].installed_version, None);
+    }
+
+    #[test]
+    fn redirect_hops_stay_on_allowlisted_hosts_for_downloads() {
+        let github = url::Url::parse("https://github.com/o/r/releases/download/v/p.lpk").unwrap();
+        // The documented GitHub page -> asset CDN hop is allowed.
+        let cdn = next_hop(&github, "https://objects.githubusercontent.com/x", true).unwrap();
+        assert_eq!(cdn.host_str().unwrap(), "objects.githubusercontent.com");
+        // A bounce to an arbitrary host is rejected (the loophole ureq 2.x
+        // would otherwise follow silently).
+        assert!(next_hop(&github, "https://evil.example/p.lpk", true).is_err());
+        // Downgrade to http is rejected.
+        assert!(next_hop(&github, "http://objects.githubusercontent.com/x", true).is_err());
+        // Relative Locations resolve against the current url.
+        let rel = next_hop(&github, "/redirect/x", true).unwrap();
+        assert_eq!(rel.host_str().unwrap(), "github.com");
+        // The operator-configured catalog URL is held to https only.
+        let cat = url::Url::parse("https://example.org/packs.json").unwrap();
+        let moved = next_hop(&cat, "https://cdn.example.org/packs.json", false).unwrap();
+        assert_eq!(moved.host_str().unwrap(), "cdn.example.org");
+        assert!(next_hop(&cat, "http://cdn.example.org/packs.json", false).is_err());
     }
 }
