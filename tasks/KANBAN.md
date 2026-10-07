@@ -40,6 +40,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | POLISH-001 | pre-publication hardening: honest failure-path tests (no-partial-install, honest catalog status, TTS abstention, unknown-model rejection), latency baseline, full-route UI walkthrough (smoke drives onboarding + all 11 routes, script asserts marker) (`state/evidence/POLISH-001/`) | quality |
 | REVIEW-001 | review policy v1.0.0 (ai_screening acceleration-only layer, qualification categories, sampling rules, BLK-REVIEW-CAPACITY) + finite A1–B2 coverage map v1.0.0 (agreed by owner 2026-10-04) + reviewer kit; admits JA-A1-001/002 (`state/evidence/REVIEW-001/`) | REVIEW-001 |
 | SPEECH-007-infra | eligibility registry (version/hash-bound, fail-closed), pronunciation guided/automatic gating with honest UI labels, preregistration protocol skeleton; calibration DATA blocked on owner decision (`state/evidence/SPEECH-007/`) | SPEECH-007 |
+| AI-REVIEW-06 | AI code review + fixes (AI-reviewed, no human verification): ru-RU YAML-anchor CI failure fixed (789 files expanded, semantic-equality proven) + ru-RU added to CI conformance; engine hardcoded `ja.activity.demo.*` evidence ids removed (content-id attribution); per-hop redirect host re-validation in pack downloads; fmt/prettier gates + catalog hashes repaired (`docs/review/2026-10-06-ai-code-review.md`) | quality |
 
 ## now — core loop closure (engine wiring, zero-knowledge on-ramp)
 

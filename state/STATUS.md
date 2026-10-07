@@ -366,6 +366,26 @@ M2 — Local data and learner model
   `cargo test --workspace` green (50 desktop lib, 244 total), frontend `vitest`
   98. No ROADMAP task opened; `active_task` stays null.
 
+- AI code review + fixes 2026-10-06 (owner: "review the project; add anything
+  that needs no owner input; label AI-made/AI-reviewed where human verification
+  is the gate"). Full report: `docs/review/2026-10-06-ai-code-review.md`.
+  **Fixed:** (1) CI red at HEAD — 789 ru-RU unit files used YAML anchors the
+  handoff validator rejects; expanded with per-file semantic-equality proof,
+  ru-RU added to the CI pack-conformance job (the gap that let it ship),
+  `catalog/preview-entries.json` regenerated; (2) engine-neutrality violation —
+  evidence for listening/recall/writing recorded hardcoded `ja.activity.demo.*`
+  activity ids; now the practiced content record is the activity id for every
+  modality (provenance-only field; no policy consumer); (3) redirect
+  allowlist gap in `packs.rs` — ureq 2.x followed redirects without re-checking
+  the host; `fetch_capped` now re-validates https + GitHub host allowlist on
+  every hop (test covers evil-host bounce); (4) carried WIP failed
+  `cargo fmt`/`prettier` gates — formatted. **Verified:** cargo test 244 green
+  (51 desktop lib incl. new redirect test), vitest 98, tsc/eslint/prettier/
+  rustfmt/clippy clean, handoff validator PASS (1842 files), ja-JP + ru-RU
+  validate/lint/test 0 errors. All review work is **AI-reviewed**; human gates
+  (REVIEW-001, SPEECH-007, ACC-001 screen readers) stay open and unlabeled.
+  No ROADMAP task opened; `active_task` stays null.
+
 ## Next task
 
 **Preview is ready** (owner-authorized 2026-10-03): see
