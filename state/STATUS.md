@@ -430,6 +430,19 @@ M2 — Local data and learner model
   (repo-root cwd served index.html 404 → webview hung) (evidence:
   `state/evidence/K-41/`).
 
+- `K-43` — per-pack content claims panel 2026-10-07: native
+  `pack_claims` tallies units/goals/assessments/lexicon/sentences/
+  grammar/orthography/kanji/phonological contrasts/stories from the
+  installed pack's own files (JSONL + sharded YAML readers; posture
+  tallies read `status`/`review_status`), reports the pack's own
+  review-posture distribution and `sources.jsonl` provenance as
+  claims. `trust_state` passes through from the install gate — claims
+  never promote it. Languages page renders "What this pack claims"
+  with explicit "the pack's claims, not our verification" copy.
+  Native test ties counts to the real ja-JP pack (goals == goal_map
+  length, postures tally to counts, zero verified lexicon rows); UI
+  test covers render + honesty copy + null-claims absence (evidence:
+  `state/evidence/K-43/`).
 ## Next task
 
 **Packs published (private) + live catalog wired** (2026-10-07, entry above):
@@ -438,8 +451,7 @@ public (owner gate O-05); local import of `dist/preview/*.lpk` exercises the
 same install gate meanwhile.
 
 **Next tranche (kanban `now`): sole-user learning experience** —
-K-43 content-claims panel, K-44 phrase entries,
-K-46 device-tier detection; then K-45 kanji expansion + A2 content into
+K-44 phrase entries, K-46 device-tier detection; then K-45 kanji expansion + A2 content into
 the now-visible goal-map structure. All BUILD-bucket
 (`docs/FEATURE_PLAN.md`): no gates, no new dependencies, no owner input needed.
 

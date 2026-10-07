@@ -53,6 +53,7 @@ function render(over: Partial<Parameters<typeof LanguagePanel>[0]> = {}) {
       onSelectSpeechModel={() => {}}
       display={{ stress_mode: "auto", pack_has_stress: false }}
       onSelectStressMode={() => {}}
+      claims={null}
       {...over}
     />,
   );
@@ -182,5 +183,52 @@ describe("language panel", () => {
     // lightest model is the recommended pick.
     expect(html).toContain("the model sizes give the same result");
     expect(html).toContain("recommended");
+  });
+
+  it("renders per-pack content claims without touching install posture (K-43)", () => {
+    const html = render({
+      claims: [
+        {
+          pack_id: "org.openlanguage.ja-demo",
+          version: "0.1.0",
+          trust_state: "community",
+          counts: {
+            units: 30,
+            goals: 75,
+            assessments: 12,
+            lexicon: 3920,
+            sentences: 40,
+            grammar: 18,
+            orthography: 46,
+            kanji: 12,
+            phonological_contrasts: 6,
+            stories: 3,
+          },
+          postures: [
+            { kind: "lexicon", posture: "draft", count: 3918 },
+            { kind: "lexicon", posture: "review-needed", count: 2 },
+          ],
+          provenance: [
+            {
+              id: "jf-standard",
+              title: "JF Standard for Japanese-Language Education (framework reference)",
+              url: "https://www.jpf.go.jp/e/jlpt/index.html",
+              license: "CC-BY-NC-ND-4.0",
+              access: "reference-only",
+            },
+          ],
+        },
+      ],
+    });
+    // Counts and posture distribution surface as the pack's own claims.
+    expect(html).toContain("What this pack claims");
+    expect(html).toContain("75 communicative goals");
+    expect(html).toContain("lexicon: 3918 draft");
+    expect(html).toContain("JF Standard");
+    // Honesty: claims never promote the install posture.
+    expect(html).toContain("not our verification");
+    expect(html).toContain("community");
+    // A pack with no claims data renders no panel.
+    expect(render({ claims: null })).not.toContain("What this pack claims");
   });
 });

@@ -54,6 +54,28 @@ export interface SpeechModel {
   size_bytes: number;
 }
 
+/// K-43: the pack's own content claims, read from its installed files.
+/// Display-only; `trust_state` passes through from the install gate and
+/// is never promoted by these numbers.
+export interface PackClaims {
+  pack_id: string;
+  version: string;
+  trust_state: string;
+  counts: {
+    units: number;
+    goals: number;
+    assessments: number;
+    lexicon: number;
+    sentences: number;
+    grammar: number;
+    orthography: number;
+    kanji: number;
+    phonological_contrasts: number;
+    stories: number;
+  };
+  postures: { kind: string; posture: string; count: number }[];
+  provenance: { id: string; title: string; url: string; license: string; access: string }[];
+}
 export interface LanguagePanelProps {
   installed: InstalledPack[];
   activeIds: string[];
@@ -72,6 +94,8 @@ export interface LanguagePanelProps {
   /// K-41: stress-mark visibility (display setting; null until loaded).
   display: DisplaySettingsView | null;
   onSelectStressMode(mode: "auto" | "on" | "off"): void;
+  /// K-43: per-pack content claims (null until loaded).
+  claims: PackClaims[] | null;
 }
 
 const STATUS_LABELS: Record<string, string> = {
@@ -157,6 +181,57 @@ export function LanguagePanel(p: LanguagePanelProps) {
           ))}
         </ul>
       )}
+
+      {p.claims?.map((c) => (
+        <div key={c.pack_id} className="claims" aria-label={`Content claims for ${c.pack_id}`}>
+          <h3>What this pack claims ({c.version})</h3>
+          <p>
+            <small>
+              These numbers are read from the pack&apos;s own files — they are the pack&apos;s
+              claims, not our verification. Install posture stays &ldquo;{c.trust_state}&rdquo;
+              regardless of these counts.
+            </small>
+          </p>
+          <ul className="meta-list">
+            <li>{c.counts.units} curriculum units</li>
+            <li>{c.counts.goals} communicative goals</li>
+            <li>{c.counts.assessments} assessment definitions</li>
+            <li>{c.counts.lexicon} lexicon entries</li>
+            <li>{c.counts.sentences} example sentences</li>
+            <li>{c.counts.grammar} grammar concepts</li>
+            <li>{c.counts.orthography} writing-system symbols</li>
+            <li>{c.counts.kanji} kanji entries</li>
+            <li>{c.counts.phonological_contrasts} sound contrasts</li>
+            <li>{c.counts.stories} reading stories</li>
+          </ul>
+          {c.postures.length > 0 && (
+            <>
+              <h4>Review posture (the pack&apos;s own labels)</h4>
+              <ul className="meta-list">
+                {c.postures.map((r) => (
+                  <li key={`${r.kind}:${r.posture}`}>
+                    {r.kind}: {r.count} {r.posture}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+          {c.provenance.length > 0 && (
+            <>
+              <h4>Stated sources</h4>
+              <ul className="meta-list">
+                {c.provenance.map((s) => (
+                  <li key={s.id}>
+                    {s.title}
+                    {s.license ? ` — ${s.license}` : ""}
+                    {s.access ? ` (${s.access})` : ""}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+      ))}
 
       <h2>Display settings</h2>
       <div role="group" aria-label="Stress-mark visibility">

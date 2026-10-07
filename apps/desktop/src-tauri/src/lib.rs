@@ -14,7 +14,7 @@ use lts_speech_api::{
     AcousticFeatureProvider, AlignmentProvider, PronunciationInterpreter, ProsodyProvider,
     SpeechSynthesisProvider,
 };
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use std::path::Path;
 use std::path::PathBuf;
 
@@ -1500,6 +1500,345 @@ fn pack_assessed_goal_ids(root: &Path) -> std::collections::HashSet<String> {
         }
     }
     ids
+}
+
+// ---------------------------------------------------------------------------
+// K-43: per-pack content claims. Everything here is a CLAIM read from the
+// installed pack's own files — counts, review-posture distribution, and
+// provenance entries. It never upgrades anything: `trust_state` stays
+// whatever the install gate recorded, and the UI labels these as the
+// pack's own claims. Display-only; grading/scheduling never consult it.
+
+/// Count JSONL records and tally their review posture (`status`, or
+/// `review_status` for goals/assessments). Missing files count as zero;
+/// malformed lines are skipped like every other reader does.
+fn jsonl_claims(root: &Path, rel: &str) -> (usize, std::collections::BTreeMap<String, usize>) {
+    let text = match std::fs::read_to_string(root.join(rel)) {
+        Ok(t) => t,
+        Err(_) => return (0, Default::default()),
+    };
+    let mut total = 0;
+    let mut postures = std::collections::BTreeMap::new();
+    for line in text.lines() {
+        let line = line.trim();
+        if line.is_empty() {
+            continue;
+        }
+        let Ok(v) = serde_json::from_str::<serde_json::Value>(line) else {
+            continue;
+        };
+        if v.get("id").and_then(|i| i.as_str()).is_none() {
+            continue;
+        }
+        total += 1;
+        let posture = v
+            .get("status")
+            .or_else(|| v.get("review_status"))
+            .and_then(|s| s.as_str())
+            .unwrap_or("unlabeled")
+            .to_string();
+        *postures.entry(posture).or_insert(0) += 1;
+    }
+    (total, postures)
+}
+
+/// Count YAML sequence items (goals) and their `review_status`.
+fn yaml_goal_claims(root: &Path) -> (usize, std::collections::BTreeMap<String, usize>) {
+    let mut total = 0;
+    let mut postures = std::collections::BTreeMap::new();
+    for path in pack_goal_files(root) {
+        let Ok(text) = std::fs::read_to_string(&path) else {
+            continue;
+        };
+        let Ok(doc) = serde_yaml::from_str::<serde_yaml::Value>(&text) else {
+            continue;
+        };
+        let Some(goals) = doc.get("goals").and_then(|g| g.as_sequence()) else {
+            continue;
+        };
+        for goal in goals {
+            if goal.get("id").and_then(|i| i.as_str()).is_none() {
+                continue;
+            }
+            total += 1;
+            let posture = goal
+                .get("review_status")
+                .and_then(|s| s.as_str())
+                .unwrap_or("unlabeled")
+                .to_string();
+            *postures.entry(posture).or_insert(0) += 1;
+        }
+    }
+    (total, postures)
+}
+
+/// Count YAML mapping documents (`---`-separated units) and their
+/// `review_status` when present.
+fn yaml_unit_claims(root: &Path) -> (usize, std::collections::BTreeMap<String, usize>) {
+    let dir = root.join("curriculum/units");
+    let Ok(rd) = std::fs::read_dir(&dir) else {
+        return (0, Default::default());
+    };
+    let mut files: Vec<PathBuf> = rd
+        .flatten()
+        .map(|e| e.path())
+        .filter(|p| {
+            p.extension()
+                .map(|x| x == "yaml" || x == "yml")
+                .unwrap_or(false)
+        })
+        .collect();
+    files.sort();
+    let mut total = 0;
+    let mut postures = std::collections::BTreeMap::new();
+    for path in files {
+        let Ok(text) = std::fs::read_to_string(&path) else {
+            continue;
+        };
+        for de in serde_yaml::Deserializer::from_str(&text) {
+            let Ok(doc) = serde_yaml::Value::deserialize(de) else {
+                continue;
+            };
+            if doc.get("id").and_then(|i| i.as_str()).is_none() {
+                continue;
+            }
+            total += 1;
+            let posture = doc
+                .get("review_status")
+                .and_then(|s| s.as_str())
+                .unwrap_or("unlabeled")
+                .to_string();
+            *postures.entry(posture).or_insert(0) += 1;
+        }
+    }
+    (total, postures)
+}
+
+#[derive(Serialize)]
+struct ClaimCounts {
+    units: usize,
+    goals: usize,
+    assessments: usize,
+    lexicon: usize,
+    sentences: usize,
+    grammar: usize,
+    orthography: usize,
+    kanji: usize,
+    phonological_contrasts: usize,
+    stories: usize,
+}
+
+#[derive(Serialize)]
+struct PostureRow {
+    kind: String,
+    posture: String,
+    count: usize,
+}
+
+#[derive(Serialize)]
+struct ProvenanceClaim {
+    id: String,
+    title: String,
+    url: String,
+    license: String,
+    access: String,
+}
+
+#[derive(Serialize)]
+struct PackClaims {
+    pack_id: String,
+    version: String,
+    /// The install gate's posture, passed through untouched. Claims
+    /// never promote it.
+    trust_state: String,
+    counts: ClaimCounts,
+    postures: Vec<PostureRow>,
+    provenance: Vec<ProvenanceClaim>,
+}
+
+fn pack_claims_at(data: &Path) -> Result<Vec<PackClaims>, String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let packs_root = data.join("packs");
+    let mut out = Vec::new();
+    for inst in store.installations().map_err(|e| e.to_string())? {
+        let version = match lts_langpack::archive::current_version(&inst.pack_id, &packs_root) {
+            Some(v) => v,
+            None => continue,
+        };
+        let root = packs_root.join(&inst.pack_id).join(&version);
+
+        // Lexicon may be sharded across any number of lexicon/*.jsonl.
+        let mut lex_total = 0;
+        let mut lex_postures = std::collections::BTreeMap::new();
+        let lexdir = root.join("lexicon");
+        if let Ok(rd) = std::fs::read_dir(&lexdir) {
+            let mut files: Vec<PathBuf> = rd
+                .flatten()
+                .map(|e| e.path())
+                .filter(|p| p.extension().and_then(|x| x.to_str()) == Some("jsonl"))
+                .collect();
+            files.sort();
+            for f in files {
+                let rel = format!("lexicon/{}", f.file_name().unwrap().to_string_lossy());
+                let (n, p) = jsonl_claims(&root, &rel);
+                lex_total += n;
+                for (k, v) in p {
+                    *lex_postures.entry(k).or_insert(0) += v;
+                }
+            }
+        }
+
+        // Stories are sharded YAML files, each a mapping with `status`.
+        let mut story_total = 0;
+        let mut story_postures = std::collections::BTreeMap::new();
+        let storydir = root.join("stories");
+        if let Ok(rd) = std::fs::read_dir(&storydir) {
+            let mut files: Vec<PathBuf> = rd
+                .flatten()
+                .map(|e| e.path())
+                .filter(|p| {
+                    p.extension()
+                        .map(|x| x == "yaml" || x == "yml")
+                        .unwrap_or(false)
+                })
+                .collect();
+            files.sort();
+            for f in files {
+                let Ok(text) = std::fs::read_to_string(&f) else {
+                    continue;
+                };
+                let Ok(doc) = serde_yaml::from_str::<serde_yaml::Value>(&text) else {
+                    continue;
+                };
+                if doc.get("id").and_then(|i| i.as_str()).is_none() {
+                    continue;
+                }
+                story_total += 1;
+                let posture = doc
+                    .get("status")
+                    .and_then(|s| s.as_str())
+                    .unwrap_or("unlabeled")
+                    .to_string();
+                *story_postures.entry(posture).or_insert(0) += 1;
+            }
+        }
+
+        let (units, unit_postures) = yaml_unit_claims(&root);
+        let (goals, goal_postures) = yaml_goal_claims(&root);
+        let (assessments, assessment_postures) =
+            jsonl_claims(&root, "assessments/definitions.jsonl");
+        let (sentences, sentence_postures) = jsonl_claims(&root, "sentences/entries.jsonl");
+        let (grammar, grammar_postures) = jsonl_claims(&root, "grammar/concepts.jsonl");
+        let (kanji, kanji_postures) = jsonl_claims(&root, "kanji/entries.jsonl");
+        let (contrasts, contrast_postures) = jsonl_claims(&root, "phonology/contrasts.jsonl");
+        let mut orth_total = 0;
+        let mut orth_postures = std::collections::BTreeMap::new();
+        let orthdir = root.join("orthography");
+        if let Ok(rd) = std::fs::read_dir(&orthdir) {
+            let mut files: Vec<PathBuf> = rd
+                .flatten()
+                .map(|e| e.path())
+                .filter(|p| p.extension().and_then(|x| x.to_str()) == Some("jsonl"))
+                .collect();
+            files.sort();
+            for f in files {
+                let rel = format!("orthography/{}", f.file_name().unwrap().to_string_lossy());
+                let (n, p) = jsonl_claims(&root, &rel);
+                orth_total += n;
+                for (k, v) in p {
+                    *orth_postures.entry(k).or_insert(0) += v;
+                }
+            }
+        }
+
+        let mut postures = Vec::new();
+        let mut push = |kind: &str, m: std::collections::BTreeMap<String, usize>| {
+            for (posture, count) in m {
+                postures.push(PostureRow {
+                    kind: kind.to_string(),
+                    posture,
+                    count,
+                });
+            }
+        };
+        push("units", unit_postures);
+        push("goals", goal_postures);
+        push("assessments", assessment_postures);
+        push("lexicon", lex_postures);
+        push("sentences", sentence_postures);
+        push("grammar", grammar_postures);
+        push("orthography", orth_postures);
+        push("kanji", kanji_postures);
+        push("phonological contrasts", contrast_postures);
+        push("stories", story_postures);
+
+        // Provenance: sources.jsonl entries are the pack's own claims
+        // about where its content came from.
+        let mut provenance = Vec::new();
+        if let Ok(text) = std::fs::read_to_string(root.join("sources.jsonl")) {
+            for line in text.lines() {
+                let line = line.trim();
+                if line.is_empty() {
+                    continue;
+                }
+                let Ok(v) = serde_json::from_str::<serde_json::Value>(line) else {
+                    continue;
+                };
+                let g = |k: &str| {
+                    v.get(k)
+                        .and_then(|x| x.as_str())
+                        .unwrap_or_default()
+                        .to_string()
+                };
+                if g("id").is_empty() {
+                    continue;
+                }
+                provenance.push(ProvenanceClaim {
+                    id: g("id"),
+                    title: g("title"),
+                    url: g("url"),
+                    license: v
+                        .get("license")
+                        .and_then(|l| l.get("spdx"))
+                        .and_then(|s| s.as_str())
+                        .unwrap_or_default()
+                        .to_string(),
+                    access: v
+                        .get("access")
+                        .and_then(|a| a.get("mode"))
+                        .and_then(|m| m.as_str())
+                        .unwrap_or_default()
+                        .to_string(),
+                });
+            }
+        }
+
+        out.push(PackClaims {
+            pack_id: inst.pack_id.clone(),
+            version,
+            trust_state: inst.trust_state.clone(),
+            counts: ClaimCounts {
+                units,
+                goals,
+                assessments,
+                lexicon: lex_total,
+                sentences,
+                grammar,
+                orthography: orth_total,
+                kanji,
+                phonological_contrasts: contrasts,
+                stories: story_total,
+            },
+            postures,
+            provenance,
+        });
+    }
+    Ok(out)
+}
+
+#[tauri::command]
+fn pack_claims() -> Result<Vec<PackClaims>, String> {
+    pack_claims_at(&data_dir())
 }
 
 fn goal_map_at(data: &Path, profile_id: &str) -> Result<Vec<GoalMapView>, String> {
@@ -4320,6 +4659,7 @@ pub fn run() {
             goal_map,
             display_settings,
             set_display_settings,
+            pack_claims,
             catalog_packs,
             install_catalog_pack,
             import_pack,
@@ -5406,6 +5746,68 @@ mod tests {
             assert_eq!(b.locked, a.locked);
             assert_eq!(b.dimensions, a.dimensions, "no drift from volume");
         }
+    }
+
+    /// K-43 acceptance: the claims panel derives entirely from the
+    /// installed pack's own files — counts match the real ja-JP pack,
+    /// review posture is reported as a distribution (never promoted),
+    /// trust_state passes through untouched, and provenance entries
+    /// surface as claims.
+    #[test]
+    fn pack_claims_report_installed_pack_data_without_upgrading_trust() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+
+        let claims = pack_claims_at(data).unwrap();
+        assert_eq!(claims.len(), 1);
+        let c = &claims[0];
+        assert_eq!(c.pack_id, "org.openlanguage.ja-jp.reference");
+        // The install gate recorded "community"; claims never promote it.
+        assert_eq!(c.trust_state, "community");
+
+        // Counts derive from the installed files: goals match the goal
+        // map, assessments match the assessment definitions, and every
+        // posture tally sums to its kind's count.
+        let goals = goal_map_at(data, &p.id).unwrap();
+        assert_eq!(c.counts.goals, goals.len());
+        assert!(c.counts.assessments > 0);
+        assert!(c.counts.lexicon > 0);
+        assert!(c.counts.units > 0);
+        for kind in ["goals", "assessments", "lexicon", "units"] {
+            let total: usize = c
+                .postures
+                .iter()
+                .filter(|r| r.kind == kind)
+                .map(|r| r.count)
+                .sum();
+            let claimed = match kind {
+                "goals" => c.counts.goals,
+                "assessments" => c.counts.assessments,
+                "lexicon" => c.counts.lexicon,
+                _ => c.counts.units,
+            };
+            assert_eq!(total, claimed, "{kind} postures tally to the count");
+        }
+        // Draft-heavy pack: the honest posture is draft, not verified.
+        let draft = c
+            .postures
+            .iter()
+            .find(|r| r.kind == "lexicon" && r.posture == "draft")
+            .unwrap();
+        assert!(draft.count > 0);
+        assert!(
+            !c.postures
+                .iter()
+                .any(|r| r.kind == "lexicon" && r.posture == "verified"),
+            "nothing in the reference pack is verified"
+        );
+
+        // Provenance surfaces as claims with license/access metadata.
+        assert!(!c.provenance.is_empty());
+        assert!(c.provenance.iter().any(|s| !s.title.is_empty()));
     }
 
     /// K-41: stress visibility is data-driven and user-toggleable.

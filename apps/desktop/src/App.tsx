@@ -23,6 +23,7 @@ import {
   LanguagePanel,
   type CatalogEntry,
   type InstalledPack,
+  type PackClaims,
   type TtsStatus,
   type SpeechModel,
 } from "./language";
@@ -135,6 +136,7 @@ export function App() {
   const [environments, setEnvironments] = useState<WorldEnvironment[]>([]);
   const [goals, setGoals] = useState<GoalCard[]>([]);
   const [installed, setInstalled] = useState<InstalledPack[]>([]);
+  const [claims, setClaims] = useState<PackClaims[] | null>(null);
   const [activeIds, setActiveIds] = useState<string[]>([]);
   const [catalog, setCatalog] = useState<CatalogEntry[]>([]);
   const [catalogStatus, setCatalogStatus] = useState("no-catalog-url");
@@ -357,6 +359,7 @@ export function App() {
   async function refreshLanguages() {
     if (!inv) return;
     setInstalled((await inv("installed_packs")) as InstalledPack[]);
+    setClaims((await inv("pack_claims")) as PackClaims[]);
     if (profileId) setActiveIds((await inv("active_pack", { profileId })) as string[]);
     const c = (await inv("catalog_packs")) as { entries: CatalogEntry[]; status: string };
     setCatalog(c.entries);
@@ -2071,6 +2074,7 @@ export function App() {
           onSelectSpeechModel={(id) => void selectSpeechModel(id)}
           display={display}
           onSelectStressMode={(m) => void setStressMode(m)}
+          claims={claims}
         />
       ) : route === "scenarios" ? (
         <ScenarioPanel

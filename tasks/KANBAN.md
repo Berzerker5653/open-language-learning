@@ -44,12 +44,12 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | AI-REVIEW-06 | AI code review + fixes (AI-reviewed, no human verification): ru-RU YAML-anchor CI failure fixed (789 files expanded, semantic-equality proven) + ru-RU added to CI conformance; engine hardcoded `ja.activity.demo.*` evidence ids removed (content-id attribution); per-hop redirect host re-validation in pack downloads; fmt/prettier gates + catalog hashes repaired (`docs/review/2026-10-06-ai-code-review.md`) | quality |
 | PACKS-PUBLISH-07 | Both reference packs published as private GitHub release assets (owner-authorized O-05 extension): tags `{pack_id}-{version}`, live `catalog/packs.json` wired with real URLs, canonical URL template in `build-catalog.sh`, authenticated download hash-verified; in-app anonymous download activates on public flip (`state/evidence/PACKS-PUBLISH-2026-10-07/`) | O-05 |
 | K-41 | stress-mark visibility: U+0301 readings render with the stressed vowel highlighted (`StressText`), auto/on/off display setting persisted per profile (`display_settings`/`set_display_settings`, key `stress-mode`), toggle UI on Languages page; display-only — grading/evidence/scheduling never consult it; smoke walks all routes with the new IPC in load paths (`state/evidence/K-41/`) | K-41 |
+| K-43 | per-pack content claims panel on Languages page: `pack_claims` command tallies units/goals/assessments/lexicon/sentences/grammar/orthography/kanji/contrasts/stories from the installed pack's own files, reports the pack's own review-posture distribution and `sources.jsonl` provenance as claims; `trust_state` passes through untouched (never promoted); UI labels the numbers as the pack's claims, not verification (`state/evidence/K-43/`) | K-43 |
 
 ## next — learning experience follow-ons
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
-| K-43 | UX | Per-pack content claims panel on Languages page (counts, review posture, provenance as claims) | K-43 |
 | K-44 | packs | First-class `phrase` lexicon entries with slot info; cloze/recall target the right token (~370 existing entries) | K-44 |
 | K-46 | speech | Runtime device-tier detection → dynamic recommended speech model (replaces static marker) | K-46 |
 
