@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-12",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.advice2.mijika",
+   "form": "みじか",
+   "reading": "みじか",
+   "gloss": "short",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.dentou",
+   "form": "でんとう",
+   "reading": "でんとう",
+   "gloss": "tradition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.denshou",
+   "form": "でんしょう",
+   "reading": "でんしょう",
+   "gloss": "transmission, heritage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.kogei",
+   "form": "こうげい",
+   "reading": "こうげい",
+   "gloss": "craft, handicraft",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.washi",
+   "form": "わし",
+   "reading": "わし",
+   "gloss": "Japanese paper",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.chado",
+   "form": "ちゃどう",
+   "reading": "ちゃどう",
+   "gloss": "tea ceremony",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.kadou",
+   "form": "かどう",
+   "reading": "かどう",
+   "gloss": "calligraphy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.ikebana",
+   "form": "いけばな",
+   "reading": "いけばな",
+   "gloss": "flower arrangement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.kabuki",
+   "form": "かぶき",
+   "reading": "かぶき",
+   "gloss": "kabuki theater",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.nou",
+   "form": "のう",
+   "reading": "のう",
+   "gloss": "noh theater",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.geino",
+   "form": "げいのう",
+   "reading": "げいのう",
+   "gloss": "performing arts",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.ongaku",
+   "form": "おんがく",
+   "reading": "おんがく",
+   "gloss": "music",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.melodi",
+   "form": "めるでぃ",
+   "reading": "めるでぃ",
+   "gloss": "melody",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.raito",
+   "form": "らいと",
+   "reading": "らいと",
+   "gloss": "light, lighting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.kuukan",
+   "form": "くうかん",
+   "reading": "くうかん",
+   "gloss": "space",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.kenchiku",
+   "form": "けんちく",
+   "reading": "けんちく",
+   "gloss": "architecture",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.tatemono",
+   "form": "たてもの",
+   "reading": "たてもの",
+   "gloss": "building",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.toshi",
+   "form": "とし",
+   "reading": "とし",
+   "gloss": "city",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.douro",
+   "form": "どうろ",
+   "reading": "どうろ",
+   "gloss": "street, road",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.koen",
+   "form": "こうえん",
+   "reading": "こうえん",
+   "gloss": "park",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.setubi",
+   "form": "せつび",
+   "reading": "せつび",
+   "gloss": "equipment, facilities",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.keikaku2",
+   "form": "けいかく",
+   "reading": "けいかく",
+   "gloss": "plan, planning",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.bi2",
+   "form": "び",
+   "reading": "び",
+   "gloss": "beauty",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.minamo",
+   "form": "みなも",
+   "reading": "みなも",
+   "gloss": "grace, elegance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.shitsunai",
+   "form": "しつない",
+   "reading": "しつない",
+   "gloss": "interior design",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

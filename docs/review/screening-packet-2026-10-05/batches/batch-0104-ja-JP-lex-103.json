@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-103",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.philosophy2.chie",
+   "form": "ちえ",
+   "reading": "ちえ",
+   "gloss": "wisdom",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.kensho",
+   "form": "けんしょう",
+   "reading": "けんしょう",
+   "gloss": "verification",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.hantei",
+   "form": "はんてい",
+   "reading": "はんてい",
+   "gloss": "verdict",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.hyomei",
+   "form": "ひょうめい",
+   "reading": "ひょうめい",
+   "gloss": "expression",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.meiyo-kan",
+   "form": "めいよかん",
+   "reading": "めいよかん",
+   "gloss": "sense of honor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.jiko-kan",
+   "form": "じこかん",
+   "reading": "じこかん",
+   "gloss": "sense of self",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.kanshou",
+   "form": "かんしょう",
+   "reading": "かんしょう",
+   "gloss": "sentiment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.kansyou",
+   "form": "かんしょう",
+   "reading": "かんしょう",
+   "gloss": "appreciation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.yuuai",
+   "form": "ゆうあい",
+   "reading": "ゆうあい",
+   "gloss": "benevolence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.mujun",
+   "form": "むじゅん",
+   "reading": "むじゅん",
+   "gloss": "contradiction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.kaiseki",
+   "form": "かいせき",
+   "reading": "かいせき",
+   "gloss": "analysis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.jitsugaku",
+   "form": "じつがく",
+   "reading": "じつがく",
+   "gloss": "practical learning",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.kouzou",
+   "form": "こうぞう",
+   "reading": "こうぞう",
+   "gloss": "structure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.gengi",
+   "form": "げんぎ",
+   "reading": "げんぎ",
+   "gloss": "original meaning",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.dotoku",
+   "form": "どうとく",
+   "reading": "どうとく",
+   "gloss": "morality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.dotoku-kan",
+   "form": "どうとくかん",
+   "reading": "どうとくかん",
+   "gloss": "moral sense",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.rinri-kan",
+   "form": "りんりかん",
+   "reading": "りんりかん",
+   "gloss": "ethical sense",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.shuchou",
+   "form": "しゅちょう",
+   "reading": "しゅちょう",
+   "gloss": "claim",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.sekinin-ron",
+   "form": "せきにんろん",
+   "reading": "せきにんろん",
+   "gloss": "theory of responsibility",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.jiyu-ison",
+   "form": "じゆういし",
+   "reading": "じゆういし",
+   "gloss": "free will",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.seigi-ron",
+   "form": "せいぎろん",
+   "reading": "せいぎろん",
+   "gloss": "theory of justice",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.sonzai-ron",
+   "form": "そんざいろん",
+   "reading": "そんざいろん",
+   "gloss": "ontology",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.ishiki-ron",
+   "form": "いしきろん",
+   "reading": "いしきろん",
+   "gloss": "theory of consciousness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.jiyu-ron",
+   "form": "じゆうろん",
+   "reading": "じゆうろん",
+   "gloss": "theory of freedom",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.kyoiku",
+   "form": "きょういく",
+   "reading": "きょういく",
+   "gloss": "education",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

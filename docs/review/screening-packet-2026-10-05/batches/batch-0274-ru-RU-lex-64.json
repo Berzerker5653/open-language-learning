@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-64",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.neg.slogan",
+   "form": "слоган",
+   "reading": "слога́н",
+   "gloss": "slogan",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.neg.prestizhnyy",
+   "form": "престижный",
+   "reading": "прести́жный",
+   "gloss": "prestigious",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.konkurirovat",
+   "form": "конкурировать",
+   "reading": "конкури́ровать",
+   "gloss": "to compete",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.vneocherednoy",
+   "form": "внеочередной",
+   "reading": "внеочередно́й",
+   "gloss": "out of turn, extraordinary",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.ocherednost",
+   "form": "очередность",
+   "reading": "очере́дность",
+   "gloss": "sequence, turn",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.nepasledovatelnyy",
+   "form": "непоследовательный",
+   "reading": "непосле́довательный",
+   "gloss": "inconsistent",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.vliyatelnyy",
+   "form": "влиятельный",
+   "reading": "влия́тельный",
+   "gloss": "influential",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.konkurentnyy",
+   "form": "конкурентный",
+   "reading": "конкуре́нтный",
+   "gloss": "competitive",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.sopernichestvo",
+   "form": "соперничество",
+   "reading": "сопе́рничество",
+   "gloss": "rivalry",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.koaliciya",
+   "form": "коалиция",
+   "reading": "коали́ция",
+   "gloss": "coalition",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.aljans",
+   "form": "альянс",
+   "reading": "алья́нс",
+   "gloss": "alliance",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.neg.lavirovanie",
+   "form": "лавирование",
+   "reading": "лави́рование",
+   "gloss": "maneuvering",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.uklonchivyy",
+   "form": "уклончивый",
+   "reading": "укло́нчивый",
+   "gloss": "evasive",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.uklonyatsya",
+   "form": "уклоняться",
+   "reading": "уклоня́ться",
+   "gloss": "to evade",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.izvorotlivyy",
+   "form": "изворотливый",
+   "reading": "изворо́тливый",
+   "gloss": "dodgy, resourceful",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.trebovatelnyy",
+   "form": "требовательный",
+   "reading": "тре́бовательный",
+   "gloss": "demanding",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.trebovatelnost",
+   "form": "требовательность",
+   "reading": "тре́бовательность",
+   "gloss": "demandingness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.prityazanie",
+   "form": "притязание",
+   "reading": "притяза́ние",
+   "gloss": "pretension",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.prityazatelnyy",
+   "form": "притязательный",
+   "reading": "притяза́тельный",
+   "gloss": "pretentious",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.appetity",
+   "form": "аппетиты",
+   "reading": "а́ппетиты",
+   "gloss": "appetites, ambitions",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.neg.prioritisaciya",
+   "form": "приоритизация",
+   "reading": "приоритиза́ция",
+   "gloss": "prioritization",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.ranzhirovanie",
+   "form": "ранжирование",
+   "reading": "ранжи́рование",
+   "gloss": "ranking",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.ranzhirovat",
+   "form": "ранжировать",
+   "reading": "ранжи́рова́ть",
+   "gloss": "to rank",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.dominirovanie",
+   "form": "доминирование",
+   "reading": "домини́рование",
+   "gloss": "domination",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.dominirovat",
+   "form": "доминировать",
+   "reading": "домини́ровать",
+   "gloss": "to dominate",
+   "pos": "verb",
+   "gender": ""
+  }
+ ]
+}

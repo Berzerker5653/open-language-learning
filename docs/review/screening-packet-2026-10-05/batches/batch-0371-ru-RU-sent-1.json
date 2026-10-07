@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-1",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.a1.u034",
+   "text": "Это человек.",
+   "gloss": "This is a person."
+  },
+  {
+   "id": "ru.sent.a1.u035",
+   "text": "Это кошка.",
+   "gloss": "This is a cat."
+  },
+  {
+   "id": "ru.sent.a1.u038",
+   "text": "Это наш друг.",
+   "gloss": "This is our friend."
+  },
+  {
+   "id": "ru.sent.a1.u039",
+   "text": "Это наш брат.",
+   "gloss": "This is our brother."
+  },
+  {
+   "id": "ru.sent.a1.u040",
+   "text": "Это комната.",
+   "gloss": "This is a room."
+  },
+  {
+   "id": "ru.sent.a1.u041",
+   "text": "Это окно.",
+   "gloss": "This is a window."
+  },
+  {
+   "id": "ru.sent.a1.u042",
+   "text": "Это кровать.",
+   "gloss": "This is a bed."
+  },
+  {
+   "id": "ru.sent.a1.u043",
+   "text": "Это чашка.",
+   "gloss": "This is a cup."
+  },
+  {
+   "id": "ru.sent.a1.u044",
+   "text": "Это телевизор.",
+   "gloss": "This is a television."
+  },
+  {
+   "id": "ru.sent.a1.u045",
+   "text": "Это пальто.",
+   "gloss": "This is a coat."
+  },
+  {
+   "id": "ru.sent.a1.u046",
+   "text": "Это сад.",
+   "gloss": "This is a garden."
+  },
+  {
+   "id": "ru.sent.a1.u047",
+   "text": "Это магазин.",
+   "gloss": "This is a shop."
+  },
+  {
+   "id": "ru.sent.a1.u050",
+   "text": "Я всегда читаю.",
+   "gloss": "I always read."
+  },
+  {
+   "id": "ru.sent.a1.u051",
+   "text": "Это утро.",
+   "gloss": "This is the morning."
+  },
+  {
+   "id": "ru.sent.a1.u052",
+   "text": "Это будильник.",
+   "gloss": "This is an alarm clock."
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-130",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.style.vychitka",
+   "form": "вычитка",
+   "reading": "вы́читка",
+   "gloss": "proofreading",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.vkraplenie",
+   "form": "вкрапление",
+   "reading": "вкрапле́ние",
+   "gloss": "insertion, intercalation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.ustranenie",
+   "form": "устранение",
+   "reading": "устране́ние",
+   "gloss": "elimination, removal",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.izyan",
+   "form": "изъян",
+   "reading": "изъя́н",
+   "gloss": "flaw, defect",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.sherohovatost",
+   "form": "шероховатость",
+   "reading": "шерохова́тость",
+   "gloss": "roughness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.shlifovka",
+   "form": "шлифовка",
+   "reading": "шлифо́вка",
+   "gloss": "polishing",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.ottachivanie",
+   "form": "оттачивание",
+   "reading": "отта́чивание",
+   "gloss": "honing",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.otdelka",
+   "form": "отделка",
+   "reading": "отде́лка",
+   "gloss": "finishing",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.uvyzyvat",
+   "form": "увязывать",
+   "reading": "увя́зывать",
+   "gloss": "to tie in, coordinate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.stykovat",
+   "form": "стыковать",
+   "reading": "стыкова́ть",
+   "gloss": "to fit, joint",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.skleivat",
+   "form": "склеивать",
+   "reading": "скле́ивать",
+   "gloss": "to glue",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.sshivat",
+   "form": "сшивать",
+   "reading": "сшива́ть",
+   "gloss": "to stitch together",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.vychityvat",
+   "form": "вычитывать",
+   "reading": "вычи́тывать",
+   "gloss": "to proofread",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.sveryat",
+   "form": "сверять",
+   "reading": "сверя́ть",
+   "gloss": "to check against, collate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.shlifovat",
+   "form": "шлифовать",
+   "reading": "шлифова́ть",
+   "gloss": "to polish",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.ottachivat",
+   "form": "оттачивать",
+   "reading": "отта́чивать",
+   "gloss": "to hone",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.varvarizm",
+   "form": "варваризм",
+   "reading": "варвари́зм",
+   "gloss": "barbarism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.purizm",
+   "form": "пуризм",
+   "reading": "пури́зм",
+   "gloss": "purism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.purist",
+   "form": "пурист",
+   "reading": "пури́ст",
+   "gloss": "purist",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.normativnost",
+   "form": "нормативность",
+   "reading": "нормати́вность",
+   "gloss": "normativity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.opiska",
+   "form": "описка",
+   "reading": "опи́ска",
+   "gloss": "slip of the pen",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.dovodka",
+   "form": "доводка",
+   "reading": "дово́дка",
+   "gloss": "finishing touches",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.dorabatyvat",
+   "form": "дорабатывать",
+   "reading": "дораба́тывать",
+   "gloss": "to refine, polish up",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.vychishchat",
+   "form": "вычищать",
+   "reading": "вычища́ть",
+   "gloss": "to clean out",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.vymaryvat",
+   "form": "вымарывать",
+   "reading": "выма́рывать",
+   "gloss": "to black out, censor",
+   "pos": "verb",
+   "gender": ""
+  }
+ ]
+}

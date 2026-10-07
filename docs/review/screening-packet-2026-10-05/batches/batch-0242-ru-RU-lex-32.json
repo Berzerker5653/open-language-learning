@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-32",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.experiences.novichok",
+   "form": "новичок",
+   "reading": "новичо́к",
+   "gloss": "newcomer, beginner",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.experiences.uchenik",
+   "form": "ученик",
+   "reading": "учени́к",
+   "gloss": "pupil, student",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.experiences.umenie",
+   "form": "умение",
+   "reading": "уме́ние",
+   "gloss": "skill, ability",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.experiences.masterstvo",
+   "form": "мастерство",
+   "reading": "мастерство́",
+   "gloss": "mastery, craftsmanship",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.experiences.iskusstvo",
+   "form": "искусство",
+   "reading": "иску́сство",
+   "gloss": "art",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.experiences.reshatsya",
+   "form": "решаться",
+   "reading": "реша́ться",
+   "gloss": "to venture, dare",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.otvaga",
+   "form": "отвага",
+   "reading": "отва́га",
+   "gloss": "boldness, daring",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.experiences.smelost",
+   "form": "смелость",
+   "reading": "сме́лость",
+   "gloss": "courage, bravery",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.experiences.volnenie",
+   "form": "волнение",
+   "reading": "волне́ние",
+   "gloss": "excitement, agitation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.experiences.robost",
+   "form": "робость",
+   "reading": "ро́бость",
+   "gloss": "shyness, timidity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.experiences.podskazka",
+   "form": "подсказка",
+   "reading": "подска́зка",
+   "gloss": "hint, tip",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.experiences.rekomodatsiya",
+   "form": "рекомендация",
+   "reading": "рекоменда́ция",
+   "gloss": "recommendation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.experiences.podderzhka",
+   "form": "поддержка",
+   "reading": "подде́ржка",
+   "gloss": "support",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.experiences.odobrenie",
+   "form": "одобрение",
+   "reading": "одобре́ние",
+   "gloss": "approval",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.experiences.pokhvala",
+   "form": "похвала",
+   "reading": "похвала́",
+   "gloss": "praise",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.experiences.sozhalenie",
+   "form": "сожаление",
+   "reading": "сожале́ние",
+   "gloss": "regret",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.experiences.gordost",
+   "form": "гордость",
+   "reading": "го́рдость",
+   "gloss": "pride",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.experiences.blagodarnyi",
+   "form": "благодарный",
+   "reading": "благода́рный",
+   "gloss": "grateful",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.gorditsya",
+   "form": "гордиться",
+   "reading": "горди́ться",
+   "gloss": "to be proud of",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.sovest",
+   "form": "совесть",
+   "reading": "со́весть",
+   "gloss": "conscience",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.family.sem-ya",
+   "form": "семья",
+   "reading": "семья́",
+   "gloss": "family",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.family.brat",
+   "form": "брат",
+   "reading": "брат",
+   "gloss": "brother",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.family.sestra",
+   "form": "сестра",
+   "reading": "сестра́",
+   "gloss": "sister",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.syn",
+   "form": "сын",
+   "reading": "сын",
+   "gloss": "son",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.family.doch",
+   "form": "дочь",
+   "reading": "дочь",
+   "gloss": "daughter",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-126",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.shopping.mai",
+   "form": "まい",
+   "reading": "まい",
+   "gloss": "flat item counter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.honya",
+   "form": "ほんや",
+   "reading": "ほんや",
+   "gloss": "bookstore",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.tsuu",
+   "form": "つう",
+   "reading": "つう",
+   "gloss": "small item counter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.kai",
+   "form": "かい",
+   "reading": "かい",
+   "gloss": "floor counter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.satsu",
+   "form": "さつ",
+   "reading": "さつ",
+   "gloss": "book counter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.kutsuya",
+   "form": "くつや",
+   "reading": "くつや",
+   "gloss": "shoe store",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.horitsu",
+   "form": "ほうりつ",
+   "reading": "ほうりつ",
+   "gloss": "law",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.horei",
+   "form": "ほうれい",
+   "reading": "ほうれい",
+   "gloss": "ordinance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.kotsukisoku",
+   "form": "こうつうきそく",
+   "reading": "こうつうきそく",
+   "gloss": "traffic rules",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.kinben",
+   "form": "きんべん",
+   "reading": "きんべん",
+   "gloss": "abstinence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.mafusa",
+   "form": "めいわく",
+   "reading": "めいわく",
+   "gloss": "nuisance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.kenri",
+   "form": "けんり",
+   "reading": "けんり",
+   "gloss": "right",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.gimu",
+   "form": "ぎむ",
+   "reading": "ぎむ",
+   "gloss": "duty",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.yimu",
+   "form": "いむ",
+   "reading": "いむ",
+   "gloss": "obligation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.youmu",
+   "form": "ようむ",
+   "reading": "ようむ",
+   "gloss": "duty; task",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.koeki",
+   "form": "こうえき",
+   "reading": "こうえき",
+   "gloss": "public interest",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.katsuyaku",
+   "form": "かつやく",
+   "reading": "かつやく",
+   "gloss": "activity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.shokumu",
+   "form": "しょくむ",
+   "reading": "しょくむ",
+   "gloss": "duties",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.keisatsu",
+   "form": "けいさつ",
+   "reading": "けいさつ",
+   "gloss": "police",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.chounakai",
+   "form": "ちょうないかい",
+   "reading": "ちょうないかい",
+   "gloss": "local association",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.kokyo",
+   "form": "こうきょう",
+   "reading": "こうきょう",
+   "gloss": "public",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.doutoku",
+   "form": "どうとく",
+   "reading": "どうとく",
+   "gloss": "morals",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.jichikai",
+   "form": "じちかい",
+   "reading": "じちかい",
+   "gloss": "neighborhood association",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.soji",
+   "form": "そうじ",
+   "reading": "そうじ",
+   "gloss": "cleaning",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.riso",
+   "form": "りぞ",
+   "reading": "りぞ",
+   "gloss": "neighbor",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

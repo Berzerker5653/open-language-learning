@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-28",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.viewer-response",
+   "text": "えいが の いろ を おぼえました。",
+   "gloss": "I learned the colors of the film."
+  },
+  {
+   "id": "ja.sent.film-ethics",
+   "text": "えいが の はんたい を よみました。",
+   "gloss": "I read the opposition to the film."
+  },
+  {
+   "id": "ja.sent.primary-sources",
+   "text": "しりょう を よみました。",
+   "gloss": "I read the source material."
+  },
+  {
+   "id": "ja.sent.historiography-basics",
+   "text": "がくしゃ の はなし を よみました。",
+   "gloss": "I read the scholar's account."
+  },
+  {
+   "id": "ja.sent.war-memory",
+   "text": "できごと の きじゅつ を よみました。",
+   "gloss": "I read the account of the event."
+  },
+  {
+   "id": "ja.sent.economic-history-b",
+   "text": "きんきょう の きじ を よみました。",
+   "gloss": "I read the article about the crisis."
+  },
+  {
+   "id": "ja.sent.social-history",
+   "text": "こせき を しらべました。",
+   "gloss": "I examined the family register."
+  },
+  {
+   "id": "ja.sent.regional-history",
+   "text": "いれずみ を みました。",
+   "gloss": "I saw the tattoo."
+  },
+  {
+   "id": "ja.sent.history-and-identity",
+   "text": "きおく の はなし を ききました。",
+   "gloss": "I heard the memory story."
+  },
+  {
+   "id": "ja.sent.monument-debate",
+   "text": "きねんび の ぎろん を べんきょう しました。",
+   "gloss": "I studied the memorial debate."
+  },
+  {
+   "id": "ja.sent.archives-research",
+   "text": "しりょうかん に いきました。",
+   "gloss": "I went to the archive."
+  },
+  {
+   "id": "ja.sent.revisionism-debate",
+   "text": "ぎろん の じっさい を しらべました。",
+   "gloss": "I examined the reality of the debate."
+  },
+  {
+   "id": "ja.sent.oral-history",
+   "text": "くちかみ を とりました。",
+   "gloss": "I recorded the oral tradition."
+  },
+  {
+   "id": "ja.sent.history-comparison",
+   "text": "たいおう の きじ を よみました。",
+   "gloss": "I read the comparison article."
+  },
+  {
+   "id": "ja.sent.history-essay",
+   "text": "れきし の せきにん について かきました。",
+   "gloss": "I wrote about historical responsibility."
+  }
+ ]
+}

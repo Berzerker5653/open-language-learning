@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-72",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.pastevents.chitat",
+   "form": "читать",
+   "reading": "чита́ть",
+   "gloss": "to read",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.pisat",
+   "form": "писать",
+   "reading": "писа́ть",
+   "gloss": "to write",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.smotret",
+   "form": "смотреть",
+   "reading": "смотре́ть",
+   "gloss": "to watch",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.gulyat",
+   "form": "гулять",
+   "reading": "гуля́ть",
+   "gloss": "to walk",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.priyti",
+   "form": "прийти",
+   "reading": "прийти́",
+   "gloss": "to come (pf)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.uiyti",
+   "form": "уйти",
+   "reading": "уйти́",
+   "gloss": "to leave (pf)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.kupit",
+   "form": "купить",
+   "reading": "купи́ть",
+   "gloss": "to buy (pf)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.sdelat",
+   "form": "сделать",
+   "reading": "сде́лать",
+   "gloss": "to do (pf)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.znat",
+   "form": "знать",
+   "reading": "знать",
+   "gloss": "to know",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.znal",
+   "form": "знал",
+   "reading": "зна́л",
+   "gloss": "knew",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.zhit",
+   "form": "жить",
+   "reading": "жить",
+   "gloss": "to live",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.rabotal",
+   "form": "работать",
+   "reading": "рабо́тать",
+   "gloss": "to work",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.vstrechal",
+   "form": "встречать",
+   "reading": "встреча́ть",
+   "gloss": "to meet",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.pozvonit",
+   "form": "позвонить",
+   "reading": "позвони́ть",
+   "gloss": "to call (pf)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.priletet",
+   "form": "прилететь",
+   "reading": "прилете́ть",
+   "gloss": "to fly in (pf)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.poehat",
+   "form": "поехать",
+   "reading": "пое́хать",
+   "gloss": "to go by vehicle (pf)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.snachala",
+   "form": "сначала",
+   "reading": "снача́ла",
+   "gloss": "first, at first",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.potom",
+   "form": "потом",
+   "reading": "пото́м",
+   "gloss": "then",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.posle",
+   "form": "после",
+   "reading": "по́сле",
+   "gloss": "after",
+   "pos": "preposition",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.pered",
+   "form": "перед",
+   "reading": "пе́ред",
+   "gloss": "before",
+   "pos": "preposition",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.kogda",
+   "form": "когда",
+   "reading": "когда́",
+   "gloss": "when",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.poka",
+   "form": "пока",
+   "reading": "пока́",
+   "gloss": "while",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.eshche",
+   "form": "ещё",
+   "reading": "еще́",
+   "gloss": "still, yet",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.uz",
+   "form": "уже",
+   "reading": "уже́",
+   "gloss": "already",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.nikogda",
+   "form": "никогда",
+   "reading": "никогда́",
+   "gloss": "never",
+   "pos": "adverb",
+   "gender": ""
+  }
+ ]
+}

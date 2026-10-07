@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-45",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.ent.eiga-kan",
+   "form": "えいかん",
+   "reading": "えいかん",
+   "gloss": "movie theater",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.gekijou",
+   "form": "げきじょう",
+   "reading": "げきじょう",
+   "gloss": "theater",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.hakubutsukan",
+   "form": "はくぶつかん",
+   "reading": "はくぶつかん",
+   "gloss": "museum",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.dobutsu-en",
+   "form": "どうぶつえん",
+   "reading": "どうぶつえん",
+   "gloss": "zoo",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.yuenchi",
+   "form": "ゆうえんち",
+   "reading": "ゆうえんち",
+   "gloss": "amusement park",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.onsen-nyuujou",
+   "form": "おんせんにゅうじょう",
+   "reading": "おんせんにゅうじょう",
+   "gloss": "hot spring bath",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.konsaato",
+   "form": "こんさーと",
+   "reading": "こんさーと",
+   "gloss": "concert",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.raibu",
+   "form": "らいぶ",
+   "reading": "らいぶ",
+   "gloss": "live show",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.geemu-senta",
+   "form": "げーむせんたー",
+   "reading": "げーむせんたー",
+   "gloss": "game center",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.pachinko",
+   "form": "ぱちんこ",
+   "reading": "ぱちんこ",
+   "gloss": "pachinko",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.karaoke",
+   "form": "からおけ",
+   "reading": "からおけ",
+   "gloss": "karaoke",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.ballet",
+   "form": "ばれえ",
+   "reading": "ばれえ",
+   "gloss": "ballet",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.engeki",
+   "form": "えんげき",
+   "reading": "えんげき",
+   "gloss": "play; drama",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.kangeki",
+   "form": "かんげき",
+   "reading": "かんげき",
+   "gloss": "performance viewing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.yakuwari",
+   "form": "やくわり",
+   "reading": "やくわり",
+   "gloss": "role",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.serifu",
+   "form": "せりふ",
+   "reading": "せりふ",
+   "gloss": "lines",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.bangumi",
+   "form": "ばんぐみ",
+   "reading": "ばんぐみ",
+   "gloss": "TV program",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.dorama",
+   "form": "どらま",
+   "reading": "どらま",
+   "gloss": "drama series",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.variety",
+   "form": "ばらえてぃー",
+   "reading": "ばらえてぃー",
+   "gloss": "variety show",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.nyuusu-bangumi",
+   "form": "にゅーすばんぐみ",
+   "reading": "にゅーすばんぐみ",
+   "gloss": "news program",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.supa",
+   "form": "すぱー",
+   "reading": "すぱー",
+   "gloss": "sports channel",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.channeru",
+   "form": "ちゃんねる",
+   "reading": "ちゃんねる",
+   "gloss": "channel",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.hyouban",
+   "form": "ひょうばん",
+   "reading": "ひょうばん",
+   "gloss": "rating",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.senshu",
+   "form": "せんしゅ",
+   "reading": "せんしゅ",
+   "gloss": "athlete",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.coach",
+   "form": "こーち",
+   "reading": "こーち",
+   "gloss": "coach",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

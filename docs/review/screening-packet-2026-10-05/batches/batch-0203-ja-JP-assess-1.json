@@ -1,0 +1,92 @@
+{
+ "batch_id": "ja-JP-assess-1",
+ "kind": "assess",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.assess.tell-time",
+   "kind": "recognition",
+   "modality": "listening",
+   "criteria": [
+    "time understood",
+    "day named correctly"
+   ]
+  },
+  {
+   "id": "ja.assess.shop-ask-price",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "price asked or stated",
+    "transaction completed"
+   ]
+  },
+  {
+   "id": "ja.assess.ask-location",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "location asked or answered"
+   ]
+  },
+  {
+   "id": "ja.assess.daily-routine",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "sequence understandable",
+    "time markers present"
+   ]
+  },
+  {
+   "id": "ja.assess.family-work",
+   "kind": "production",
+   "modality": "speaking",
+   "criteria": [
+    "own-family terms used",
+    "occupation stated"
+   ]
+  },
+  {
+   "id": "ja.assess.conversation-repair",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "repair phrase used at breakdown",
+    "conversation continues"
+   ]
+  },
+  {
+   "id": "ja.assess.kanji-core",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "meaning/reading recognized within SRS schedule"
+   ]
+  },
+  {
+   "id": "ja.assess.sound-contrasts",
+   "kind": "recognition",
+   "modality": "listening",
+   "criteria": [
+    "contrast identified above chance"
+   ]
+  },
+  {
+   "id": "ja.assess.weather-chat",
+   "kind": "production",
+   "modality": "speaking",
+   "criteria": [
+    "weather statement fits"
+   ]
+  },
+  {
+   "id": "ja.assess.numbers-counters",
+   "kind": "production",
+   "modality": "speaking",
+   "criteria": [
+    "number + counter correct"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-9",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.city.opozdat",
+   "form": "опаздывать",
+   "reading": "опа́здывать",
+   "gloss": "to be late",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.city.ehat",
+   "form": "ехать",
+   "reading": "е́хать",
+   "gloss": "to go (by vehicle)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.city.idti",
+   "form": "идти",
+   "reading": "идти́",
+   "gloss": "to walk, to go",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.city.perekhod",
+   "form": "переход",
+   "reading": "перехо́д",
+   "gloss": "crossing",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.marshrut",
+   "form": "маршрут",
+   "reading": "маршру́т",
+   "gloss": "route",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.voditel",
+   "form": "водитель",
+   "reading": "води́тель",
+   "gloss": "driver",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.passazhir",
+   "form": "пассажир",
+   "reading": "пассажи́р",
+   "gloss": "passenger",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.chemodan",
+   "form": "чемодан",
+   "reading": "чемода́н",
+   "gloss": "suitcase",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.dokument",
+   "form": "документ",
+   "reading": "докуме́нт",
+   "gloss": "document",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.biblioteka",
+   "form": "библиотека",
+   "reading": "библиоте́ка",
+   "gloss": "library",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.city.stadion",
+   "form": "стадион",
+   "reading": "стадио́н",
+   "gloss": "stadium",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.vystavka",
+   "form": "выставка",
+   "reading": "вы́ставка",
+   "gloss": "exhibition",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.city.koncert",
+   "form": "концерт",
+   "reading": "конце́рт",
+   "gloss": "concert",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.gostinitsa",
+   "form": "гостиница",
+   "reading": "гости́ница",
+   "gloss": "hotel",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.city.rayon",
+   "form": "район",
+   "reading": "райо́н",
+   "gloss": "district",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.centr",
+   "form": "центр",
+   "reading": "центр",
+   "gloss": "center",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.fontan",
+   "form": "фонтан",
+   "reading": "фонта́н",
+   "gloss": "fountain",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.skameyka",
+   "form": "скамейка",
+   "reading": "скаме́йка",
+   "gloss": "bench",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.city.derevo",
+   "form": "дерево",
+   "reading": "де́рево",
+   "gloss": "tree",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.city.kiosk",
+   "form": "киоск",
+   "reading": "кио́ск",
+   "gloss": "kiosk",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.probka",
+   "form": "пробка",
+   "reading": "про́бка",
+   "gloss": "traffic jam",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.city.pochti",
+   "form": "почти",
+   "reading": "почти́",
+   "gloss": "almost",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.city.konechno",
+   "form": "конечно",
+   "reading": "коне́чно",
+   "gloss": "of course",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.city.nazad",
+   "form": "назад",
+   "reading": "наза́д",
+   "gloss": "back",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.city.vperyod",
+   "form": "вперёд",
+   "reading": "впере́д",
+   "gloss": "ahead",
+   "pos": "adverb",
+   "gender": ""
+  }
+ ]
+}

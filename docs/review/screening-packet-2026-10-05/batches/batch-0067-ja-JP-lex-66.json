@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-66",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.global2.koryu2",
+   "form": "こうりゅう",
+   "reading": "こうりゅう",
+   "gloss": "exchange, flow",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.ryutsuu",
+   "form": "りゅうつう",
+   "reading": "りゅうつう",
+   "gloss": "circulation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.bunmyaku",
+   "form": "ぶんみゃく",
+   "reading": "ぶんみゃく",
+   "gloss": "context",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.shutai",
+   "form": "しゅたい",
+   "reading": "しゅたい",
+   "gloss": "subject, agent",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.greetings.ohayou-gozaimasu",
+   "form": "おはようございます",
+   "reading": "おはようございます",
+   "gloss": "good morning (polite)",
+   "pos": "expression",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.greetings.konbanwa",
+   "form": "こんばんは",
+   "reading": "こんばんは",
+   "gloss": "good evening (polite)",
+   "pos": "expression",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.greetings.sayounara",
+   "form": "さようなら",
+   "reading": "さようなら",
+   "gloss": "goodbye (formal; softer everyday forms exist)",
+   "pos": "expression",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.greetings.ja-ne",
+   "form": "じゃあね",
+   "reading": "じゃあね",
+   "gloss": "see you (casual)",
+   "pos": "expression",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.greetings.mata-ashita",
+   "form": "またあした",
+   "reading": "またあした",
+   "gloss": "see you tomorrow",
+   "pos": "expression",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.greetings.arigatou-gozaimasu",
+   "form": "ありがとうございます",
+   "reading": "ありがとうございます",
+   "gloss": "thank you (polite)",
+   "pos": "expression",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.greetings.arigatou",
+   "form": "ありがとう",
+   "reading": "ありがとう",
+   "gloss": "thanks (casual)",
+   "pos": "expression",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.greetings.sumimasen",
+   "form": "すみません",
+   "reading": "すみません",
+   "gloss": "excuse me / I'm sorry (polite)",
+   "pos": "expression",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.greetings.shitsurei-shimasu",
+   "form": "しつれいします",
+   "reading": "しつれいします",
+   "gloss": "excuse me (polite; leaving or intruding)",
+   "pos": "expression",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.greetings.itadakimasu",
+   "form": "いただきます",
+   "reading": "いただきます",
+   "gloss": "said before eating",
+   "pos": "expression",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.greetings.gochisousama",
+   "form": "ごちそうさま",
+   "reading": "ごちそうさま",
+   "gloss": "said after eating",
+   "pos": "expression",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.greetings.omedetou-gozaimasu",
+   "form": "おめでとうございます",
+   "reading": "おめでとうございます",
+   "gloss": "congratulations (polite)",
+   "pos": "expression",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.greetings.oyasumi-nasai",
+   "form": "おやすみなさい",
+   "reading": "おやすみなさい",
+   "gloss": "good night (polite)",
+   "pos": "expression",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.atama",
+   "form": "あたま",
+   "reading": "あたま",
+   "gloss": "head",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.me",
+   "form": "め",
+   "reading": "め",
+   "gloss": "eye",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.hana",
+   "form": "はな",
+   "reading": "はな",
+   "gloss": "nose",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.kuchi",
+   "form": "くち",
+   "reading": "くち",
+   "gloss": "mouth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.nodo",
+   "form": "のど",
+   "reading": "のど",
+   "gloss": "throat",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.kata",
+   "form": "かた",
+   "reading": "かた",
+   "gloss": "shoulder",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.hara",
+   "form": "はら",
+   "reading": "はら",
+   "gloss": "stomach; belly",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.ashi",
+   "form": "あし",
+   "reading": "あし",
+   "gloss": "leg",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

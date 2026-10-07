@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-40",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u635",
+   "text": "Это затишье.",
+   "gloss": "This is a lull."
+  },
+  {
+   "id": "ru.sent.b2.u636",
+   "text": "Это передышка.",
+   "gloss": "This is a breather."
+  },
+  {
+   "id": "ru.sent.b2.u637",
+   "text": "Это подписание.",
+   "gloss": "This is a signing."
+  },
+  {
+   "id": "ru.sent.b2.u638",
+   "text": "Это принуждение.",
+   "gloss": "This is coercion."
+  },
+  {
+   "id": "ru.sent.b2.u639",
+   "text": "Это шантаж.",
+   "gloss": "This is blackmail."
+  },
+  {
+   "id": "ru.sent.b2.u640",
+   "text": "Это разъяснение.",
+   "gloss": "This is a clarification."
+  },
+  {
+   "id": "ru.sent.b2.u641",
+   "text": "Это переспрос.",
+   "gloss": "This is a re-asking."
+  },
+  {
+   "id": "ru.sent.b2.u642",
+   "text": "Это парафраз.",
+   "gloss": "This is a paraphrase."
+  },
+  {
+   "id": "ru.sent.b2.u643",
+   "text": "Это детализация.",
+   "gloss": "This is detailing."
+  },
+  {
+   "id": "ru.sent.b2.u644",
+   "text": "Это эквивалент.",
+   "gloss": "This is an equivalent."
+  },
+  {
+   "id": "ru.sent.b2.u645",
+   "text": "Это соразмерность.",
+   "gloss": "This is commensurability."
+  },
+  {
+   "id": "ru.sent.b2.u646",
+   "text": "Это согласованность.",
+   "gloss": "This is consistency."
+  },
+  {
+   "id": "ru.sent.b2.u647",
+   "text": "Это солидарность.",
+   "gloss": "This is solidarity."
+  },
+  {
+   "id": "ru.sent.b2.u648",
+   "text": "Это взаимопонимание.",
+   "gloss": "This is mutual understanding."
+  },
+  {
+   "id": "ru.sent.b2.u649",
+   "text": "Это легитимация.",
+   "gloss": "This is legitimation."
+  }
+ ]
+}

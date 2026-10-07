@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-101",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.sci.predostorozhnost",
+   "form": "предосторожность",
+   "reading": "предосторо́жность",
+   "gloss": "precaution",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.garantirovannyy",
+   "form": "гарантированный",
+   "reading": "гаранти́рованный",
+   "gloss": "guaranteed",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.strahovoy",
+   "form": "страховой",
+   "reading": "страхово́й",
+   "gloss": "insurance (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.annuitet",
+   "form": "аннуитет",
+   "reading": "аннуите́т",
+   "gloss": "annuity",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.mery",
+   "form": "меры",
+   "reading": "ме́ры",
+   "gloss": "measures",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.veroyatnostnyy",
+   "form": "вероятностный",
+   "reading": "вероя́тностный",
+   "gloss": "probabilistic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.determinirovannyy",
+   "form": "детерминированный",
+   "reading": "детермини́рованный",
+   "gloss": "deterministic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.zakonomernyy",
+   "form": "закономерный",
+   "reading": "закономе́рный",
+   "gloss": "regular, law-governed",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.haotichnyy",
+   "form": "хаотичный",
+   "reading": "хаоти́чный",
+   "gloss": "chaotic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.stikhiynyy",
+   "form": "стихийный",
+   "reading": "стихи́йный",
+   "gloss": "spontaneous, elemental",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.nepredvidennyy",
+   "form": "непредвиденный",
+   "reading": "непредви́денный",
+   "gloss": "unforeseen",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.nechayannyy",
+   "form": "нечаянный",
+   "reading": "неча́янный",
+   "gloss": "accidental, unintentional",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.artefakt",
+   "form": "артефакт",
+   "reading": "артефа́кт",
+   "gloss": "artifact",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.razvilka",
+   "form": "развилка",
+   "reading": "разви́лка",
+   "gloss": "fork, crossroads",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.povorotnyy",
+   "form": "поворотный",
+   "reading": "поворо́тный",
+   "gloss": "turning (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.perelom",
+   "form": "перелом",
+   "reading": "перело́м",
+   "gloss": "turning point, fracture",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.perelomnyy",
+   "form": "переломный",
+   "reading": "перело́мный",
+   "gloss": "crucial, turning",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.krizisnyy",
+   "form": "кризисный",
+   "reading": "кри́зисный",
+   "gloss": "crisis (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.perehodnyy",
+   "form": "переходный",
+   "reading": "перехо́дный",
+   "gloss": "transitional",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.neprochnyy",
+   "form": "непрочный",
+   "reading": "непро́чный",
+   "gloss": "fragile, unsound",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.nebezopasnyy",
+   "form": "небезопасный",
+   "reading": "небезопа́сный",
+   "gloss": "unsafe",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.toksichnyy",
+   "form": "токсичный",
+   "reading": "токси́чный",
+   "gloss": "toxic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.toksichnost",
+   "form": "токсичность",
+   "reading": "токси́чность",
+   "gloss": "toxicity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.kancerogen",
+   "form": "канцероген",
+   "reading": "канцероге́н",
+   "gloss": "carcinogen",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.stohasticheskiy",
+   "form": "стохастический",
+   "reading": "стохасти́ческий",
+   "gloss": "stochastic",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

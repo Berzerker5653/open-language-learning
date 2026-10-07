@@ -1,0 +1,107 @@
+{
+ "batch_id": "ru-RU-assess-2",
+ "kind": "assess",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.assess.a1.food-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify food, drink and menu nouns in a supplied menu or shopping note.",
+    "Distinguish the ordered item in the Дайте + accusative model from the polite frame.",
+    "Match accusative forms to their nominative nouns for the supplied pairs."
+   ]
+  },
+  {
+   "id": "ru.assess.a1.food-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Write a food-identification statement with это and a taught nominative noun.",
+    "Complete a polite order with Дайте, пожалуйста and a supplied accusative item.",
+    "Ask the price with the taught Сколько стоит? chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.a1.shopping-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify shop, product, clothing and payment nouns in a supplied shopping note.",
+    "Distinguish the shop assistant from the customer in a supplied dialogue line.",
+    "Match an adjective or genitive quantity form to the noun it goes with."
+   ]
+  },
+  {
+   "id": "ru.assess.a1.shopping-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Write a product-identification statement with это and a taught nominative noun.",
+    "Complete a price question with the taught Сколько стоит? chunk.",
+    "Use a supplied adjective agreement or genitive quantity form without inventing endings."
+   ]
+  },
+  {
+   "id": "ru.assess.a1.city-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify city, transport and route nouns in a supplied route note or ticket.",
+    "Distinguish direction words (направо, налево, прямо) from distance words.",
+    "Match a direction phrase to its verb rather than the location form."
+   ]
+  },
+  {
+   "id": "ru.assess.a1.city-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Write a place-identification statement with это and a taught nominative noun.",
+    "Complete a route instruction with the supplied direction words.",
+    "Choose идти or ехать and the supplied phrase form without inventing endings."
+   ]
+  },
+  {
+   "id": "ru.assess.a1.time-plans-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify day, month, season and celebration words in a supplied calendar or invitation note.",
+    "Distinguish the time answer in the Когда model from the event itself.",
+    "Match a plan statement to the supplied собираться plus infinitive chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.a1.time-plans-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Write a date-identification statement with это and a taught nominative noun.",
+    "Answer a Когда question with the supplied в + prepositional time phrase.",
+    "State a plan with the supplied собираться chunk without inventing verb forms."
+   ]
+  },
+  {
+   "id": "ru.assess.a1.basic-messages-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify message, call and reply words in a supplied short note or chat line.",
+    "Distinguish a question word from a request word in a supplied exchange.",
+    "Match an impersonal modal (можно, нельзя, надо) to its supplied chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.a1.basic-messages-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Write a message-identification statement with это and a taught nominative noun.",
+    "Complete a permission or prohibition with the supplied impersonal modal.",
+    "Make a polite request with the supplied просить or Дайте chunk."
+   ]
+  }
+ ]
+}

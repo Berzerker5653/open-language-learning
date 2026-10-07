@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-30",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.debate.saigo2",
+   "form": "さいご",
+   "reading": "さいご",
+   "gloss": "last",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.hyoten",
+   "form": "ひょうかひょう",
+   "reading": "ひょうかひょう",
+   "gloss": "rating chart",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.seisu",
+   "form": "せいすう",
+   "reading": "せいすう",
+   "gloss": "positive number",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.yosan2",
+   "form": "よさん",
+   "reading": "よさん",
+   "gloss": "estimate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.ryakusuji",
+   "form": "りゃくすじ",
+   "reading": "りゃくすじ",
+   "gloss": "outline",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.kessan2",
+   "form": "けっさん",
+   "reading": "けっさん",
+   "gloss": "settlement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.koukai",
+   "form": "こうかい",
+   "reading": "こうかい",
+   "gloss": "public showing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.kaisou2",
+   "form": "かいそう",
+   "reading": "かいそう",
+   "gloss": "brainstorm",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.jaramu",
+   "form": "じょうめん",
+   "reading": "じょうめん",
+   "gloss": "scene",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.shutten2",
+   "form": "しゅってん",
+   "reading": "しゅってん",
+   "gloss": "issue",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.hikari2",
+   "form": "ひかり",
+   "reading": "ひかり",
+   "gloss": "light",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.kage2",
+   "form": "かげ",
+   "reading": "かげ",
+   "gloss": "shadow",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.yami2",
+   "form": "やみ",
+   "reading": "やみ",
+   "gloss": "darkness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.akari2",
+   "form": "あかり",
+   "reading": "あかり",
+   "gloss": "lighting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.danwa",
+   "form": "だんわ",
+   "reading": "だんわ",
+   "gloss": "dialogue",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.rondan",
+   "form": "ろんたん",
+   "reading": "ろんたん",
+   "gloss": "discussion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.kyara",
+   "form": "きゃら",
+   "reading": "きゃら",
+   "gloss": "character",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.bunshou",
+   "form": "ぶんしょう",
+   "reading": "ぶんしょう",
+   "gloss": "passage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.sakuhin",
+   "form": "さくひん",
+   "reading": "さくひん",
+   "gloss": "work (art)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.sakka",
+   "form": "さっか",
+   "reading": "さっか",
+   "gloss": "author",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.shinbun",
+   "form": "しんぶん",
+   "reading": "しんぶん",
+   "gloss": "newspaper",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.haiyu",
+   "form": "はいゆう",
+   "reading": "はいゆう",
+   "gloss": "actor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.geinou",
+   "form": "げいのう",
+   "reading": "げいのう",
+   "gloss": "entertainment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.dan",
+   "form": "だん",
+   "reading": "だん",
+   "gloss": "stair step",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate2.danraku",
+   "form": "だんらく",
+   "reading": "だんらく",
+   "gloss": "fall",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

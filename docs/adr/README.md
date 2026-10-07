@@ -23,5 +23,6 @@ Existing:
 - 0006 scenario recovery branches
 - 0007 initial speech provider selection
 - 0008 constrained alignment via embedded runtime
+- 0013 pack-declared production targets (language-neutral pronunciation scoring)
 
 Template: `template.md`.

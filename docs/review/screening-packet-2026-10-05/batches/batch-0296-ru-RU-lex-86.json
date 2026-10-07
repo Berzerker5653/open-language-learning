@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-86",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.prof.soiskatel",
+   "form": "соискатель",
+   "reading": "соиска́тель",
+   "gloss": "job seeker, applicant",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.pretendent",
+   "form": "претендент",
+   "reading": "претенде́нт",
+   "gloss": "candidate, claimant",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.gramota",
+   "form": "грамота",
+   "reading": "гра́мота",
+   "gloss": "certificate of merit",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.referens",
+   "form": "референс",
+   "reading": "ре́ференс",
+   "gloss": "reference",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.rabotodatel",
+   "form": "работодатель",
+   "reading": "работода́тель",
+   "gloss": "employer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.trudoustroystvo",
+   "form": "трудоустройство",
+   "reading": "трудоустро́йство",
+   "gloss": "employment, job placement",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.kadrovik",
+   "form": "кадровик",
+   "reading": "кадрови́к",
+   "gloss": "HR officer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.sprovoditelnyy",
+   "form": "сопроводительный",
+   "reading": "сопроводи́тельный",
+   "gloss": "accompanying (adj)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.samoprezentaciya",
+   "form": "самопрезентация",
+   "reading": "самопрезента́ция",
+   "gloss": "self-presentation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.samoocenka",
+   "form": "самооценка",
+   "reading": "самооце́нка",
+   "gloss": "self-assessment",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.stressoustoychivost",
+   "form": "стрессоустойчивость",
+   "reading": "стрессоусто́йчивость",
+   "gloss": "stress resistance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.kommunikabelnost",
+   "form": "коммуникабельность",
+   "reading": "коммуника́бельность",
+   "gloss": "communicability",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.punktualnost",
+   "form": "пунктуальность",
+   "reading": "пунктуа́льность",
+   "gloss": "punctuality",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.disciplinirovanost",
+   "form": "дисциплинированность",
+   "reading": "дисциплини́рованность",
+   "gloss": "disciplined (noun)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.iniciativnost",
+   "form": "инициативность",
+   "reading": "инициати́вность",
+   "gloss": "initiative (noun)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.kreativnost",
+   "form": "креативность",
+   "reading": "креати́вность",
+   "gloss": "creativity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.mnogozashechnost",
+   "form": "многозадачность",
+   "reading": "многоза́дачность",
+   "gloss": "multitasking",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.adaptivnost",
+   "form": "адаптивность",
+   "reading": "адапти́вность",
+   "gloss": "adaptability",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.mobilnost",
+   "form": "мобильность",
+   "reading": "моби́льность",
+   "gloss": "mobility",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.komandnyy",
+   "form": "командный",
+   "reading": "кома́ндный",
+   "gloss": "team (adj)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.nastavnichestvo",
+   "form": "наставничество",
+   "reading": "наста́вничество",
+   "gloss": "mentoring",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.stazhirovka",
+   "form": "стажировка",
+   "reading": "стажиро́вка",
+   "gloss": "internship, training",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.praktikant",
+   "form": "практикант",
+   "reading": "практика́нт",
+   "gloss": "intern, trainee",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.podrabotka",
+   "form": "подработка",
+   "reading": "подрабо́тка",
+   "gloss": "side job",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.sovmestitelstvo",
+   "form": "совместительство",
+   "reading": "совмести́тельство",
+   "gloss": "part-time work",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-1",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.abst2.haken",
+   "form": "はっけん",
+   "reading": "はっけん",
+   "gloss": "discovery",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.kenji",
+   "form": "けんじ",
+   "reading": "けんじ",
+   "gloss": "indication",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.shimei2",
+   "form": "しめい",
+   "reading": "しめい",
+   "gloss": "hint, indication",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.shoko",
+   "form": "しょうこ",
+   "reading": "しょうこ",
+   "gloss": "evidence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.kagi",
+   "form": "かぎ",
+   "reading": "かぎ",
+   "gloss": "key, clue",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.chosa",
+   "form": "ちょうさ",
+   "reading": "ちょうさ",
+   "gloss": "investigation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.bunseki3",
+   "form": "ぶんせき",
+   "reading": "ぶんせき",
+   "gloss": "analysis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.betsubetsu",
+   "form": "べつべつ",
+   "reading": "べつべつ",
+   "gloss": "distinction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.kurikaeshi",
+   "form": "くりかえし",
+   "reading": "くりかえし",
+   "gloss": "repetition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.yuukyuu",
+   "form": "ゆうきゅう",
+   "reading": "ゆうきゅう",
+   "gloss": "validity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.genkai",
+   "form": "げんかい",
+   "reading": "げんかい",
+   "gloss": "limit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.kosaten",
+   "form": "こうさてん",
+   "reading": "こうさてん",
+   "gloss": "intersection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.kachi6",
+   "form": "かち",
+   "reading": "かち",
+   "gloss": "value",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.taisha",
+   "form": "たいしゃ",
+   "reading": "たいしゃ",
+   "gloss": "conflict",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.keni",
+   "form": "けんい",
+   "reading": "けんい",
+   "gloss": "authority, power",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.shikaku",
+   "form": "しかく",
+   "reading": "しかく",
+   "gloss": "qualification",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.hohou",
+   "form": "ほうほう",
+   "reading": "ほうほう",
+   "gloss": "method",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.tekiyou",
+   "form": "てきよう",
+   "reading": "てきよう",
+   "gloss": "application",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.tenkan",
+   "form": "てんかん",
+   "reading": "てんかん",
+   "gloss": "conversion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.joukyou",
+   "form": "じょうきょう",
+   "reading": "じょうきょう",
+   "gloss": "situation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.youken",
+   "form": "ようけん",
+   "reading": "ようけん",
+   "gloss": "condition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.koutei",
+   "form": "こうてい",
+   "reading": "こうてい",
+   "gloss": "process",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.kekka2",
+   "form": "けっか",
+   "reading": "けっか",
+   "gloss": "result",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.risu3",
+   "form": "りくつ",
+   "reading": "りくつ",
+   "gloss": "theory, argument",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.setsuzoku",
+   "form": "せつぞく",
+   "reading": "せつぞく",
+   "gloss": "connection",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

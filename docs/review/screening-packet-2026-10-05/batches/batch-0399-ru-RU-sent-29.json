@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-29",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u470",
+   "text": "Это первоисточник.",
+   "gloss": "This is a primary source."
+  },
+  {
+   "id": "ru.sent.b2.u471",
+   "text": "Это архив.",
+   "gloss": "This is an archive."
+  },
+  {
+   "id": "ru.sent.b2.u472",
+   "text": "Это лицензия.",
+   "gloss": "This is a license."
+  },
+  {
+   "id": "ru.sent.b2.u473",
+   "text": "Это подделка.",
+   "gloss": "This is a forgery."
+  },
+  {
+   "id": "ru.sent.b2.u474",
+   "text": "Это фейк.",
+   "gloss": "This is a fake."
+  },
+  {
+   "id": "ru.sent.b2.u475",
+   "text": "Это пропаганда.",
+   "gloss": "This is propaganda."
+  },
+  {
+   "id": "ru.sent.b2.u476",
+   "text": "Это эфир.",
+   "gloss": "This is a broadcast."
+  },
+  {
+   "id": "ru.sent.b2.u477",
+   "text": "Это верификация.",
+   "gloss": "This is verification."
+  },
+  {
+   "id": "ru.sent.b2.u478",
+   "text": "Это мандат.",
+   "gloss": "This is a mandate."
+  },
+  {
+   "id": "ru.sent.b2.u479",
+   "text": "Это учебник.",
+   "gloss": "This is a textbook."
+  },
+  {
+   "id": "ru.sent.b2.u480",
+   "text": "Это умозаключение.",
+   "gloss": "This is an inference."
+  },
+  {
+   "id": "ru.sent.b2.u481",
+   "text": "Это индукция.",
+   "gloss": "This is induction."
+  },
+  {
+   "id": "ru.sent.b2.u482",
+   "text": "Это заблуждение.",
+   "gloss": "This is a misconception."
+  },
+  {
+   "id": "ru.sent.b2.u483",
+   "text": "Это ярлык.",
+   "gloss": "This is a label."
+  },
+  {
+   "id": "ru.sent.b2.u484",
+   "text": "Это трактовка.",
+   "gloss": "This is an interpretation."
+  }
+ ]
+}

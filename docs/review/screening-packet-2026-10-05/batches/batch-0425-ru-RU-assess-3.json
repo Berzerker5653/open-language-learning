@@ -1,0 +1,107 @@
+{
+ "batch_id": "ru-RU-assess-3",
+ "kind": "assess",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.assess.a2.past-events-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify past-time words (вчера, был, -л forms) in a supplied short narrative.",
+    "Order two or three supplied events using сначала and потом.",
+    "Match a past verb form to its supplied subject by gender."
+   ]
+  },
+  {
+   "id": "ru.assess.a2.past-events-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Write a past statement with a supplied -л form agreeing with the subject.",
+    "Sequence two events with сначала and потом.",
+    "Place a supplied time adverb (вчера, вечером) correctly."
+   ]
+  },
+  {
+   "id": "ru.assess.a2.travel-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify ticket, train, and schedule words on a supplied timetable or ticket.",
+    "Match a transport word to its на + prepositional chunk.",
+    "Read a supplied departure or arrival time correctly."
+   ]
+  },
+  {
+   "id": "ru.assess.a2.travel-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Write a travel-identification statement with это and a taught nominative noun.",
+    "Complete a travel phrase with the supplied на + prepositional chunk.",
+    "State a departure or arrival with the supplied time chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.a2.services-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify receipt, price, and discount words on a supplied bill or sign.",
+    "Match a service word to its хочу + accusative or нет + genitive chunk.",
+    "Distinguish a request word from a complaint word in a supplied exchange."
+   ]
+  },
+  {
+   "id": "ru.assess.a2.services-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Write a service-identification statement with это and a taught nominative noun.",
+    "Complete a want or negation with the supplied accusative or genitive chunk.",
+    "Fill a supplied questionnaire field with a taught form."
+   ]
+  },
+  {
+   "id": "ru.assess.a2.wellbeing-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify symptom words (боль, температура, кашель) in a supplied note.",
+    "Match a health word to its supplied dative chunk (у меня, мне).",
+    "Distinguish an appointment word from a medicine word."
+   ]
+  },
+  {
+   "id": "ru.assess.a2.wellbeing-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Write a symptom statement with the supplied dative chunk.",
+    "Give advice with a supplied imperative form.",
+    "State a need with нужно or нужен."
+   ]
+  },
+  {
+   "id": "ru.assess.a2.work-study-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify duty, task, and result words in a supplied work note.",
+    "Match a role word to its supplied instrumental chunk (работаю врачом).",
+    "Distinguish a goal word from a plan word."
+   ]
+  },
+  {
+   "id": "ru.assess.a2.work-study-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Write a work-identification statement with это and a taught nominative noun.",
+    "State a role with the supplied instrumental chunk.",
+    "State an achievement with the supplied достичь + genitive chunk."
+   ]
+  }
+ ]
+}

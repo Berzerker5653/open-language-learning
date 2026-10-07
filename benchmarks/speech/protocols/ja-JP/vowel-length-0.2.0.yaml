@@ -1,0 +1,133 @@
+# Preregistered calibration protocol — ja.phon.vowel-length (SPEECH-007).
+# Supersedes vowel-length-0.1.0.yaml for THRESHOLDS: 0.1.0 froze the METHOD;
+# this revision freezes the numeric release limits and sampling plan BEFORE any
+# held-out result exists (docs/17 §Protocol and permission gates). Freezing
+# numbers before unblinding is the preregistration act; it is NOT evidence of
+# calibration. Automatic scoring stays disabled until a Qualified
+# CalibrationRecord (crates/speech-api/src/calibration.rs) binds real metrics
+# to these frozen limits.
+#
+# Ratification: these proposed limits require sign-off by a named qualified
+# protocol reviewer (docs/09 §147, docs/16 §114) before held-out evaluation.
+# An AI cannot self-certify that ratification. Until it is recorded, treat the
+# numbers as PROPOSED and keep automatic scoring disabled.
+
+protocol_version: "0.2.0"
+supersedes: "vowel-length-0.1.0"
+status: preregistered-pending-ratification # numbers frozen; awaiting reviewer sign-off
+ratification:
+  required_by: "named qualified protocol reviewer (record name/qualification/date)"
+  recorded: null # null => not yet ratified => scoring disabled
+created: "2026-10-06"
+feature_id:
+  ja.phon.long-vowel # SCORED feature id (runtime/registry/desktop
+  # lookup, interpret.rs). Phonology inventory id
+  # is ja.phon.vowel-length (JA_PHONOLOGY.yaml).
+language: ja
+variety: standard-tokyo # reference variety; variants handled by policy below
+
+scope_declaration: >
+  Phrase-scoped contrastive long vowels (おばさん/おばあさん family and the
+  taught long-vowel minimal-pair set) inside taught lesson contexts. This
+  feature must NOT inherit broad Japanese pronunciation claims (docs/17 §23).
+  Passing evidence authorizes automatic feedback ONLY for the target_ids and
+  the declared coverage envelope below.
+
+features_measured:
+  - false_correction_rate # corrections issued on human-acceptable attempts
+  - incorrect_actionable_corrections # among all issued corrections
+  - missed_meaningful_errors # conditional on scored AND overall (incl. abstentions)
+  - false_acceptance_rate # misleading-praise risk (mastery-corrupting)
+  - abstention_retry_rate
+  - scoring_coverage # share of eligible attempts scored
+  - confidence_reliability_at_bands # calibration at the decision bands, not raw score
+
+# Frozen release limits. These MUST match the FeatureThresholds the eventual
+# CalibrationRecord carries (crates/speech-api/src/calibration.rs). A measured
+# value outside a limit => NotQualified. Unfilled (null) => never qualifies.
+frozen_limits:
+  # False feedback is a critical defect (docs/05 §225). Ceiling on corrections
+  # issued against human-acceptable attempts. Rationale: a learner who is
+  # actually correct must not be told they are wrong more than ~1 in 20 scored
+  # attempts; owner may tighten to 0.02 for a stricter launch posture.
+  max_false_correction_rate: 0.05
+  # Anti-abstention-abuse (docs/17 §95): passing by scoring almost nothing is
+  # not a useful automatic feature. The feature must actually score a majority
+  # of eligible attempts.
+  min_scoring_coverage: 0.60
+  # Inter-labeler reliability on the blinded critical subset. Primary statistic
+  # is Cohen's kappa on the binary acceptable-vs-needs-correction decision;
+  # 0.70 = "substantial" agreement (Landis & Koch 1977). Krippendorff's alpha
+  # on the ordinal intelligibility scale is reported alongside (see labeling).
+  min_label_agreement: 0.70
+
+# Precision rule (preregistration): a limit is met only when the 95% confidence
+# UPPER bound of the measured rate clears it, not the point estimate. Rates are
+# computed with a speaker-cluster bootstrap because attempts cluster within a
+# speaker and cannot be treated as independent.
+precision:
+  decision_rule: "95% cluster-bootstrap upper bound of false_correction_rate < max_false_correction_rate"
+  target_ci_halfwidth: 0.03
+  clustering_unit: speaker
+  bootstrap: "nonparametric resample of speakers, >=2000 replicates, fixed seed recorded in results"
+
+sampling_rationale: >
+  Targeted phrase-scoped contrast, so a modest consented learner panel suffices
+  if it is speaker-diverse and covers the error space. Minimum to reach the
+  precision target: >=40 distinct consented learners, <=6 scored target-phrase
+  attempts per learner counted toward the CI (extra attempts reported but not
+  double-weighted), >=8 target-phrase utterances per learner spanning the
+  long-vowel minimal-pair families. Denominators are explicit attempt/feature
+  opportunities (docs/17 §87). Sample size is justified against the CI target
+  above, not chosen post hoc. If the panel cannot reach >=40 speakers or the CI
+  half-width stays >0.03, the feature stays guided/reference (insufficient
+  precision => unsupported, docs/17 §95).
+
+data_plan:
+  dev_holdout_split: speaker-disjoint; repeated attempts grouped by speaker so
+    they cannot leak across splits (docs/17 §23)
+  word_family_holdout: true # claims cover unseen phrase families
+  learner_speech_required: true # read-speech corpora are ASR baselines only (docs/17 §25)
+  includes: # mirrors docs/05 §206-219 regression set
+    - acceptable-reference # native/reference + correct learner productions
+    - learner-errors # known vowel-length errors (short<->long)
+    - ambiguous # borderline/acceptable-variant
+    - wrong-utterance # different phrase spoken
+    - silence
+    - noise
+    - clipping
+    - multiple-microphones
+  variant_policy: >
+    A natural accepted variant (e.g. a dialectal or loanword length convention
+    that is acceptable in context) is NOT a negative merely because it differs
+    from the chosen reference (docs/17 §27). Labelers classify intelligibility,
+    task success, the specific contrast, and stylistic preference separately.
+  permissions: >
+    Dataset licenses/consents recorded in benchmarks/speech/datasets/<id>/manifest.yaml
+    BEFORE use; microphone permission != evaluation retention/training/publication/
+    redistribution (docs/05 §223, docs/08 §39-41). Raw audio stays outside source
+    control and distributed packs; only permitted aggregates/checksums ship
+    (docs/17 §125). Consent instrument: benchmarks/speech/consent/.
+
+labeling:
+  procedure: benchmarks/speech/labeling/rubric-ja-vowel-length.md
+  reviewers: 2 independent qualified labelers; labels frozen before model
+    outputs are revealed (blinding, docs/17 §27)
+  agreement_statistic:
+    primary: "Cohen's kappa on binary acceptable-vs-needs-correction decision"
+    secondary: "Krippendorff's alpha on ordinal intelligibility scale (reported)"
+  disagreements: adjudicated and recorded; unresolvable cases excluded from
+    automatic judgments but reported (docs/17 §27)
+
+hardware_tiers: [low-cpu-desktop, typical-desktop] # mobile deferred (PLAT-002)
+
+coverage_envelope: # mirrors CoverageEnvelope in the registry
+  varieties: [standard-tokyo] # widen only with evidence per variety
+  contexts: [taught-long-vowel-minimal-pairs]
+  hardware_tiers: [low-cpu-desktop, typical-desktop]
+
+configuration_binding: >
+  Passing records bind provider/model/interpreter/pack versions + model sha256
+  + protocol/dataset/result hashes (lts_speech_api::calibration). Any version or
+  hash drift, or a variety/context outside the envelope, => Guided (docs/17 §97).
+  Never carry trust forward on a capability-name match alone.

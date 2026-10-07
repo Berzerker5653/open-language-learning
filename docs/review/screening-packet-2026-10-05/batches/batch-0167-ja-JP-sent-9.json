@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-9",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.send-message",
+   "text": "メッセージを おくります。",
+   "gloss": "I send a message."
+  },
+  {
+   "id": "ja.sent.reply-email",
+   "text": "メールの へんじを かきます。",
+   "gloss": "I reply to the email."
+  },
+  {
+   "id": "ja.sent.ask-question",
+   "text": "せんせいに しつもんを します。",
+   "gloss": "I ask the teacher a question."
+  },
+  {
+   "id": "ja.sent.explain-grammar",
+   "text": "ぶんぽうを setsumeiします。",
+   "gloss": "I explain the grammar."
+  },
+  {
+   "id": "ja.sent.self-intro",
+   "text": "じこしょうかいを します。",
+   "gloss": "I introduce myself."
+  },
+  {
+   "id": "ja.sent.learn-pronunciation",
+   "text": "はつおんを れんしゅうします。",
+   "gloss": "I practice pronunciation."
+  },
+  {
+   "id": "ja.sent.translate-sentence",
+   "text": "この ぶんを ほんで ほんやくします。",
+   "gloss": "I translate this sentence into Japanese."
+  },
+  {
+   "id": "ja.sent.forecast-today",
+   "text": "きょうの てんきよほうを みます。",
+   "gloss": "I watch today's forecast."
+  },
+  {
+   "id": "ja.sent.spring-sakura",
+   "text": "はるに さくらが さきます。",
+   "gloss": "Cherry blossoms bloom in spring."
+  },
+  {
+   "id": "ja.sent.summer-hanabi",
+   "text": "なつに はなびを みます。",
+   "gloss": "I watch fireworks in summer."
+  },
+  {
+   "id": "ja.sent.autumn-momiji",
+   "text": "あきに もみじが きれいです。",
+   "gloss": "Autumn leaves are beautiful."
+  },
+  {
+   "id": "ja.sent.winter-yuki",
+   "text": "ふゆは ゆきが ふります。",
+   "gloss": "It snows in winter."
+  },
+  {
+   "id": "ja.sent.rainy-season",
+   "text": "つゆは つよい あめが ふります。",
+   "gloss": "Heavy rain falls in the rainy season."
+  },
+  {
+   "id": "ja.sent.typhoon-prep",
+   "text": "たいふうの じゅんびを します。",
+   "gloss": "I prepare for a typhoon."
+  },
+  {
+   "id": "ja.sent.temperature-drop",
+   "text": "おんどが ひくく なります。",
+   "gloss": "The temperature drops."
+  }
+ ]
+}

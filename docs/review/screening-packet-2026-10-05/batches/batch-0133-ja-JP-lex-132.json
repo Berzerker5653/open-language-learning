@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-132",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.society4.hoshou",
+   "form": "ほうしょう",
+   "reading": "ほうしょう",
+   "gloss": "guarantee",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.unyou",
+   "form": "うんえい",
+   "reading": "うんえい",
+   "gloss": "operation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.suisin",
+   "form": "すいしん",
+   "reading": "すいしん",
+   "gloss": "progress",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.totsunyuu",
+   "form": "とうしゅう",
+   "reading": "とうしゅう",
+   "gloss": "investment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.kakyu",
+   "form": "きゅう",
+   "reading": "きゅう",
+   "gloss": "supply",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.juyou",
+   "form": "じゅうよう",
+   "reading": "じゅうよう",
+   "gloss": "demand",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.shihai",
+   "form": "しはい",
+   "reading": "しはい",
+   "gloss": "domination",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.tousei",
+   "form": "とうせい",
+   "reading": "とうせい",
+   "gloss": "governance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.komyuniti",
+   "form": "コミュニティ",
+   "reading": "コミュニティ",
+   "gloss": "community",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.jogai",
+   "form": "ぎょうらい",
+   "reading": "ぎょうらい",
+   "gloss": "volunteer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.noutoku",
+   "form": "のうとく",
+   "reading": "のうとく",
+   "gloss": "acquisition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.jichikai",
+   "form": "じちかい",
+   "reading": "じちかい",
+   "gloss": "neighborhood association",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.kaihatsu",
+   "form": "かいはつ",
+   "reading": "かいはつ",
+   "gloss": "development",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.shinkou",
+   "form": "しんこう",
+   "reading": "しんこう",
+   "gloss": "promotion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.senyuu",
+   "form": "せんゆう",
+   "reading": "せんゆう",
+   "gloss": "leading, advance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.mirai",
+   "form": "みらい",
+   "reading": "みらい",
+   "gloss": "future",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.yoiron",
+   "form": "ようろん",
+   "reading": "ようろん",
+   "gloss": "public opinion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.touhyou",
+   "form": "とうひょう",
+   "reading": "とうひょう",
+   "gloss": "vote",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.hatsugen",
+   "form": "はつげん",
+   "reading": "はつげん",
+   "gloss": "statement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.kaikei",
+   "form": "かいけい",
+   "reading": "かいけい",
+   "gloss": "accounting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.kouritsu",
+   "form": "こうりつ",
+   "reading": "こうりつ",
+   "gloss": "efficiency",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.jimu",
+   "form": "じむ",
+   "reading": "じむ",
+   "gloss": "gym",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.taiku-kai",
+   "form": "たいくかい",
+   "reading": "たいくかい",
+   "gloss": "athletic meet",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.marason",
+   "form": "まらそん",
+   "reading": "まらそん",
+   "gloss": "marathon",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.tanso-undo",
+   "form": "たんそううんどう",
+   "reading": "たんそううんどう",
+   "gloss": "weight training",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

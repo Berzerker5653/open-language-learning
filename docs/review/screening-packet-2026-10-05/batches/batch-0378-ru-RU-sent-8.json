@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-8",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.a2.u155",
+   "text": "Это проект.",
+   "gloss": "This is the project."
+  },
+  {
+   "id": "ru.sent.a2.u156",
+   "text": "Это задача.",
+   "gloss": "This is the task."
+  },
+  {
+   "id": "ru.sent.a2.u157",
+   "text": "Это результат.",
+   "gloss": "This is the result."
+  },
+  {
+   "id": "ru.sent.a2.u158",
+   "text": "Это успех.",
+   "gloss": "This is success."
+  },
+  {
+   "id": "ru.sent.a2.u159",
+   "text": "Это диплом.",
+   "gloss": "This is the diploma."
+  },
+  {
+   "id": "ru.sent.a2.u160",
+   "text": "Это приглашение.",
+   "gloss": "This is an invitation."
+  },
+  {
+   "id": "ru.sent.a2.u161",
+   "text": "Это встреча.",
+   "gloss": "This is the meeting."
+  },
+  {
+   "id": "ru.sent.a2.u162",
+   "text": "Это вечеринка.",
+   "gloss": "This is the party."
+  },
+  {
+   "id": "ru.sent.a2.u163",
+   "text": "Это подарок.",
+   "gloss": "This is the gift."
+  },
+  {
+   "id": "ru.sent.a2.u164",
+   "text": "Это цветы.",
+   "gloss": "These are flowers."
+  },
+  {
+   "id": "ru.sent.a2.u165",
+   "text": "Это афиша.",
+   "gloss": "This is the poster."
+  },
+  {
+   "id": "ru.sent.a2.u166",
+   "text": "Это кино.",
+   "gloss": "This is the cinema."
+  },
+  {
+   "id": "ru.sent.a2.u167",
+   "text": "Это прогулка.",
+   "gloss": "This is the walk."
+  },
+  {
+   "id": "ru.sent.a2.u168",
+   "text": "Это выход.",
+   "gloss": "This is the day off."
+  },
+  {
+   "id": "ru.sent.a2.u169",
+   "text": "Это договор.",
+   "gloss": "This is the agreement."
+  }
+ ]
+}

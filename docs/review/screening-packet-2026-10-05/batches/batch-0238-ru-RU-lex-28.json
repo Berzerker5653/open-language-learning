@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-28",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.cult.poslovica",
+   "form": "пословица",
+   "reading": "посло́вица",
+   "gloss": "proverb",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.pogovorka",
+   "form": "поговорка",
+   "reading": "погово́рка",
+   "gloss": "saying, idiom",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.poverie",
+   "form": "поверье",
+   "reading": "пове́рье",
+   "gloss": "folk belief",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.radushnyj",
+   "form": "радушный",
+   "reading": "раду́шный",
+   "gloss": "cordial, warm-hearted",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.gostepriimnyj",
+   "form": "гостеприимный",
+   "reading": "гостеприи́мный",
+   "gloss": "hospitable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.chuzhestranec",
+   "form": "чужестранец",
+   "reading": "чужестра́нец",
+   "gloss": "foreigner, stranger",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.sootechestvennik",
+   "form": "соотечественник",
+   "reading": "сооте́чественник",
+   "gloss": "compatriot",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.nacionalnost",
+   "form": "национальность",
+   "reading": "национа́льность",
+   "gloss": "nationality",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.ritual",
+   "form": "ритуал",
+   "reading": "ритуа́л",
+   "gloss": "ritual",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.povsednevnost",
+   "form": "повседневность",
+   "reading": "повседне́вность",
+   "gloss": "everyday life, routine",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.culture.film",
+   "form": "фильм",
+   "reading": "фильм",
+   "gloss": "film",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.serial",
+   "form": "сериал",
+   "reading": "сериа́л",
+   "gloss": "series",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.postanovka",
+   "form": "постановка",
+   "reading": "постано́вка",
+   "gloss": "production (theatre)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.culture.vystuplenie",
+   "form": "выступление",
+   "reading": "выступле́ние",
+   "gloss": "performance",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.culture.opera",
+   "form": "опера",
+   "reading": "о́пера",
+   "gloss": "opera",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.culture.balet",
+   "form": "балет",
+   "reading": "бале́т",
+   "gloss": "ballet",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.eksponat",
+   "form": "экспонат",
+   "reading": "экспона́т",
+   "gloss": "exhibit",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.galereya",
+   "form": "галерея",
+   "reading": "галере́я",
+   "gloss": "gallery",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.culture.kartina",
+   "form": "картина",
+   "reading": "карти́на",
+   "gloss": "painting",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.culture.hudozhnik",
+   "form": "художник",
+   "reading": "худо́жник",
+   "gloss": "artist",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.pisatel",
+   "form": "писатель",
+   "reading": "писа́тель",
+   "gloss": "writer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.poet",
+   "form": "поэт",
+   "reading": "поэ́т",
+   "gloss": "poet",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.roman",
+   "form": "роман",
+   "reading": "рома́н",
+   "gloss": "novel",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.povest",
+   "form": "повесть",
+   "reading": "по́весть",
+   "gloss": "novella",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.culture.stihotvorenie",
+   "form": "стихотворение",
+   "reading": "стихотворе́ние",
+   "gloss": "poem",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

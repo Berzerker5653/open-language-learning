@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-71",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.opinions.ekspertiza",
+   "form": "экспертиза",
+   "reading": "эксперти́за",
+   "gloss": "expert review",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.suzhdenie",
+   "form": "суждение",
+   "reading": "сужде́ние",
+   "gloss": "judgment",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.opinions.tochnost",
+   "form": "точность",
+   "reading": "то́чность",
+   "gloss": "accuracy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.netochnost",
+   "form": "неточность",
+   "reading": "нето́чность",
+   "gloss": "inaccuracy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.obobshchenie",
+   "form": "обобщение",
+   "reading": "обобще́ние",
+   "gloss": "generalization",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.opinions.chastnost",
+   "form": "частность",
+   "reading": "ча́стность",
+   "gloss": "particular case",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.isklyuchenie",
+   "form": "исключение",
+   "reading": "исключе́ние",
+   "gloss": "exception",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.opinions.zakon",
+   "form": "закон",
+   "reading": "зако́н",
+   "gloss": "law",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.opinions.teoriya",
+   "form": "теория",
+   "reading": "тео́рия",
+   "gloss": "theory",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.praktika",
+   "form": "практика",
+   "reading": "пра́ктика",
+   "gloss": "practice",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.tochka",
+   "form": "точка",
+   "reading": "то́чка",
+   "gloss": "point",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.ulika",
+   "form": "улика",
+   "reading": "ули́ка",
+   "gloss": "clue, evidence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.verdict",
+   "form": "вердикт",
+   "reading": "верди́кт",
+   "gloss": "verdict",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.opinions.argumentaciya",
+   "form": "аргументация",
+   "reading": "аргумента́ция",
+   "gloss": "argumentation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.ubit",
+   "form": "убедить",
+   "reading": "убеди́ть",
+   "gloss": "to convince",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.vchera",
+   "form": "вчера",
+   "reading": "вчера́",
+   "gloss": "yesterday",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.segodnya",
+   "form": "сегодня",
+   "reading": "сего́дня",
+   "gloss": "today",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.zavtra",
+   "form": "завтра",
+   "reading": "за́втра",
+   "gloss": "tomorrow",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.proshlyy",
+   "form": "прошлый",
+   "reading": "про́шлый",
+   "gloss": "past, last",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.byl",
+   "form": "был",
+   "reading": "был",
+   "gloss": "was (m)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.byla",
+   "form": "была",
+   "reading": "была́",
+   "gloss": "was (f)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.bylo",
+   "form": "было",
+   "reading": "бы́ло",
+   "gloss": "was (n)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.byli",
+   "form": "были",
+   "reading": "бы́ли",
+   "gloss": "were",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.delat",
+   "form": "делать",
+   "reading": "де́лать",
+   "gloss": "to do",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.delal",
+   "form": "делал",
+   "reading": "де́лал",
+   "gloss": "did (m)",
+   "pos": "verb",
+   "gender": ""
+  }
+ ]
+}

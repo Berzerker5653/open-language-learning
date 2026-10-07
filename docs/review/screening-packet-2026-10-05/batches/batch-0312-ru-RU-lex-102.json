@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-102",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.services.usluga",
+   "form": "услуга",
+   "reading": "услу́га",
+   "gloss": "service",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.klient",
+   "form": "клиент",
+   "reading": "клие́нт",
+   "gloss": "client",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.services.prodavec",
+   "form": "продавец",
+   "reading": "продаве́ц",
+   "gloss": "seller, shop assistant",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.services.ofitsiant",
+   "form": "официант",
+   "reading": "официа́нт",
+   "gloss": "waiter",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.services.menedzher",
+   "form": "менеджер",
+   "reading": "ме́неджер",
+   "gloss": "manager",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.services.chek",
+   "form": "чек",
+   "reading": "чек",
+   "gloss": "receipt",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.services.obmen",
+   "form": "обмен",
+   "reading": "обме́н",
+   "gloss": "exchange",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.services.sdavat",
+   "form": "сдавать",
+   "reading": "сдава́ть",
+   "gloss": "to give change; to pass",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.services.sdacha",
+   "form": "сдача",
+   "reading": "сда́ча",
+   "gloss": "change (money)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.sdelka",
+   "form": "сделка",
+   "reading": "сде́лка",
+   "gloss": "deal",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.uslovie",
+   "form": "условие",
+   "reading": "усло́вие",
+   "gloss": "condition, term",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.services.tsena",
+   "form": "цена",
+   "reading": "цена́",
+   "gloss": "price",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.stoimost",
+   "form": "стоимость",
+   "reading": "сто́имость",
+   "gloss": "cost, value",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.skidka",
+   "form": "скидка",
+   "reading": "ски́дка",
+   "gloss": "discount",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.aktsiya",
+   "form": "акция",
+   "reading": "а́кция",
+   "gloss": "promotion",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.kredit",
+   "form": "кредит",
+   "reading": "креди́т",
+   "gloss": "credit, loan",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.services.platezh",
+   "form": "платёж",
+   "reading": "плате́ж",
+   "gloss": "payment",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.services.oplachivat",
+   "form": "оплачивать",
+   "reading": "опла́чивать",
+   "gloss": "to pay for",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.services.vozvrat",
+   "form": "возврат",
+   "reading": "возвра́т",
+   "gloss": "return, refund",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.services.vozvraschat",
+   "form": "возвращать",
+   "reading": "возвраща́ть",
+   "gloss": "to return",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.services.garantiya",
+   "form": "гарантия",
+   "reading": "гара́нтия",
+   "gloss": "guarantee, warranty",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.reklama",
+   "form": "реклама",
+   "reading": "рекла́ма",
+   "gloss": "advertisement",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.otzyv",
+   "form": "отзыв",
+   "reading": "отзы́в",
+   "gloss": "review",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.services.zhaloba",
+   "form": "жалоба",
+   "reading": "жа́лоба",
+   "gloss": "complaint",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.pretenziya",
+   "form": "претензия",
+   "reading": "прете́нзия",
+   "gloss": "claim",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

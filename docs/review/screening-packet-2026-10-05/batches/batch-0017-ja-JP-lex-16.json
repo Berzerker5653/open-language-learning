@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-16",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.body.seisatsu",
+   "form": "せいさつ",
+   "reading": "せいさつ",
+   "gloss": "sanitation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.yubinkyoku",
+   "form": "ゆびんきょく",
+   "reading": "ゆびんきょく",
+   "gloss": "post office",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.yuubin",
+   "form": "ゆうびん",
+   "reading": "ゆうびん",
+   "gloss": "mail; postal service",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.kitte",
+   "form": "きって",
+   "reading": "きって",
+   "gloss": "stamp",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.ginkou",
+   "form": "ぎんこう",
+   "reading": "ぎんこう",
+   "gloss": "bank",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.yakuba",
+   "form": "やくば",
+   "reading": "やくば",
+   "gloss": "neighborhood office",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.kouban",
+   "form": "こうばん",
+   "reading": "こうばん",
+   "gloss": "police box",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.shouboutai",
+   "form": "しょうぼうたい",
+   "reading": "しょうぼうたい",
+   "gloss": "fire brigade",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.annaijo",
+   "form": "あんないじょ",
+   "reading": "あんないじょ",
+   "gloss": "information desk",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.jusho",
+   "form": "じゅうしょ",
+   "reading": "じゅうしょ",
+   "gloss": "address",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.genkin",
+   "form": "げんきん",
+   "reading": "げんきん",
+   "gloss": "cash",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.menkyo",
+   "form": "めんきょ",
+   "reading": "めんきょ",
+   "gloss": "license; permit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.inkan",
+   "form": "いんかん",
+   "reading": "いんかん",
+   "gloss": "personal seal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.tsuuka",
+   "form": "つうか",
+   "reading": "つうか",
+   "gloss": "currency",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.chizu",
+   "form": "ちず",
+   "reading": "ちず",
+   "gloss": "map",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.kuyakusho",
+   "form": "くやくしょ",
+   "reading": "くやくしょ",
+   "gloss": "city hall",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.tenpo",
+   "form": "てんぽ",
+   "reading": "てんぽ",
+   "gloss": "shop",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.konbini",
+   "form": "こんびに",
+   "reading": "こんびに",
+   "gloss": "convenience store",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.shokuba",
+   "form": "しょくば",
+   "reading": "しょくば",
+   "gloss": "workplace",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.douro",
+   "form": "どうろ",
+   "reading": "どうろ",
+   "gloss": "road",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.koukoku",
+   "form": "こうこく",
+   "reading": "こうこく",
+   "gloss": "advertisement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.shina",
+   "form": "しな",
+   "reading": "しな",
+   "gloss": "goods; items",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.hyou",
+   "form": "ひょう",
+   "reading": "ひょう",
+   "gloss": "sign; label",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.mibai",
+   "form": "みばい",
+   "reading": "みばい",
+   "gloss": "surveillance camera",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.sousa",
+   "form": "そうさ",
+   "reading": "そうさ",
+   "gloss": "investigation",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

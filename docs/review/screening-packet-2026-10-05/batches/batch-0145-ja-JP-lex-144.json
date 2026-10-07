@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-144",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.travel.azukaru",
+   "form": "あずかる",
+   "reading": "あずかる",
+   "gloss": "to receive; to entrust",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.mochiiru",
+   "form": "もちいる",
+   "reading": "もちいる",
+   "gloss": "to use",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.nakama",
+   "form": "なかま",
+   "reading": "なかま",
+   "gloss": "companion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.joken",
+   "form": "じょうけん",
+   "reading": "じょうけん",
+   "gloss": "condition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.taihen",
+   "form": "たいへん",
+   "reading": "たいへん",
+   "gloss": "tough",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.kantan",
+   "form": "かんたん",
+   "reading": "かんたん",
+   "gloss": "easy",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.mendou",
+   "form": "めんどう",
+   "reading": "めんどう",
+   "gloss": "troublesome",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.pazuru",
+   "form": "パズル",
+   "reading": "パズル",
+   "gloss": "puzzle",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.kankei",
+   "form": "かんけい",
+   "reading": "かんけい",
+   "gloss": "relationship",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.yuujo",
+   "form": "ゆうじょう",
+   "reading": "ゆうじょう",
+   "gloss": "friendship",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.shin",
+   "form": "しん",
+   "reading": "しん",
+   "gloss": "close friend",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.pasupoto",
+   "form": "ぱすぽーと",
+   "reading": "ぱすぽーと",
+   "gloss": "passport",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.nyukan",
+   "form": "にゅうかん",
+   "reading": "にゅうかん",
+   "gloss": "customs",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.annai-zu",
+   "form": "あんないず",
+   "reading": "あんないず",
+   "gloss": "guide map",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.ryokan",
+   "form": "りょかん",
+   "reading": "りょかん",
+   "gloss": "Japanese inn",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.minshuku",
+   "form": "みんしゅく",
+   "reading": "みんしゅく",
+   "gloss": "guesthouse",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.hikou-min",
+   "form": "ひこうみん",
+   "reading": "ひこうみん",
+   "gloss": "evacuee",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.bouhan",
+   "form": "ぼうはん",
+   "reading": "ぼうはん",
+   "gloss": "crime prevention",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.chui",
+   "form": "ちゅうい",
+   "reading": "ちゅうい",
+   "gloss": "caution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.kiki",
+   "form": "きき",
+   "reading": "きき",
+   "gloss": "danger",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.tenkan",
+   "form": "てんかん",
+   "reading": "てんかん",
+   "gloss": "transfer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.nyuukoku",
+   "form": "にゅうこく",
+   "reading": "にゅうこく",
+   "gloss": "entry (country)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.shoumeisho",
+   "form": "しょうめいしょ",
+   "reading": "しょうめいしょ",
+   "gloss": "certificate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.kyoka-sho",
+   "form": "きょうかしょ",
+   "reading": "きょうかしょ",
+   "gloss": "permission slip",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.gengo",
+   "form": "げんご",
+   "reading": "げんご",
+   "gloss": "language",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-52",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.media.trend",
+   "form": "тренд",
+   "reading": "тренд",
+   "gloss": "trend",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.hashteg",
+   "form": "хештег",
+   "reading": "хеште́г",
+   "gloss": "hashtag",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.skandal",
+   "form": "скандал",
+   "reading": "сканда́л",
+   "gloss": "scandal",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.sluh",
+   "form": "слух",
+   "reading": "слух",
+   "gloss": "rumor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.spletnya",
+   "form": "сплетня",
+   "reading": "спле́тня",
+   "gloss": "gossip",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.media.lozh",
+   "form": "ложь",
+   "reading": "ложь",
+   "gloss": "lie",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.media.istochnik",
+   "form": "источник",
+   "reading": "исто́чник",
+   "gloss": "source",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.redaktor",
+   "form": "редактор",
+   "reading": "реда́ктор",
+   "gloss": "editor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.zhurnalists",
+   "form": "журналист",
+   "reading": "журнали́ст",
+   "gloss": "journalist",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.reporter",
+   "form": "репортёр",
+   "reading": "репорте́р",
+   "gloss": "reporter",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.blog",
+   "form": "блог",
+   "reading": "бло́г",
+   "gloss": "blog",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.bloger",
+   "form": "блогер",
+   "reading": "бло́гер",
+   "gloss": "blogger",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.strim",
+   "form": "стрим",
+   "reading": "стрим",
+   "gloss": "stream",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.podkast",
+   "form": "подкаст",
+   "reading": "подка́ст",
+   "gloss": "podcast",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.seriya",
+   "form": "серия",
+   "reading": "се́рия",
+   "gloss": "series",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.media.sezon",
+   "form": "сезон",
+   "reading": "сезо́н",
+   "gloss": "season",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.treyler",
+   "form": "трейлер",
+   "reading": "тре́йлер",
+   "gloss": "trailer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.tizer",
+   "form": "тизер",
+   "reading": "ти́зер",
+   "gloss": "teaser",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.print",
+   "form": "принт",
+   "reading": "принт",
+   "gloss": "print",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.gazeta",
+   "form": "газета",
+   "reading": "газе́та",
+   "gloss": "newspaper",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.media.zhurnal",
+   "form": "журнал",
+   "reading": "журна́л",
+   "gloss": "magazine",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.chitatel",
+   "form": "читатель",
+   "reading": "чита́тель",
+   "gloss": "reader",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.radio",
+   "form": "радио",
+   "reading": "ра́дио",
+   "gloss": "radio",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.media.televidenie",
+   "form": "телевидение",
+   "reading": "телеви́дение",
+   "gloss": "television",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.media.svodka",
+   "form": "сводка",
+   "reading": "сво́дка",
+   "gloss": "news digest",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

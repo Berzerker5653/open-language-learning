@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-78",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.problems2.servis",
+   "form": "сервис",
+   "reading": "се́рвис",
+   "gloss": "service",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems2.reklamacija",
+   "form": "рекламация",
+   "reading": "реклама́ция",
+   "gloss": "formal complaint",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems2.dostavka",
+   "form": "доставка",
+   "reading": "доста́вка",
+   "gloss": "delivery",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems2.akt",
+   "form": "акт",
+   "reading": "акт",
+   "gloss": "act, official record",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems2.zayavlenie",
+   "form": "заявление",
+   "reading": "заявле́ние",
+   "gloss": "formal statement, application",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.problems2.osnovanie",
+   "form": "основание",
+   "reading": "основа́ние",
+   "gloss": "grounds, basis",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.problems2.podtverzhdenie",
+   "form": "подтверждение",
+   "reading": "подтвержде́ние",
+   "gloss": "confirmation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.problems2.dokazatelstvo",
+   "form": "доказательство",
+   "reading": "доказа́тельство",
+   "gloss": "evidence, proof",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.problems2.svidetel",
+   "form": "свидетель",
+   "reading": "свиде́тель",
+   "gloss": "witness",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems2.shtraf",
+   "form": "штраф",
+   "reading": "штраф",
+   "gloss": "fine, penalty",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems2.narushenie",
+   "form": "нарушение",
+   "reading": "наруше́ние",
+   "gloss": "violation, breach",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.problems2.vinovnik",
+   "form": "виновник",
+   "reading": "вино́вник",
+   "gloss": "party at fault",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems2.sluzhba",
+   "form": "служба",
+   "reading": "слу́жба",
+   "gloss": "service (org)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems2.telefon",
+   "form": "телефон",
+   "reading": "телефо́н",
+   "gloss": "telephone",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems2.grafik",
+   "form": "график",
+   "reading": "гра́фик",
+   "gloss": "schedule",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems2.sayt",
+   "form": "сайт",
+   "reading": "сайт",
+   "gloss": "website",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems2.forma",
+   "form": "форма",
+   "reading": "фо́рма",
+   "gloss": "form (document)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems2.podat",
+   "form": "подать",
+   "reading": "пода́ть",
+   "gloss": "to submit, hand in",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems2.rassmotret",
+   "form": "рассмотреть",
+   "reading": "рассмотре́ть",
+   "gloss": "to consider (request)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems2.dovod",
+   "form": "довод",
+   "reading": "до́вод",
+   "gloss": "argument, reason",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems2.argument",
+   "form": "аргумент",
+   "reading": "аргуме́нт",
+   "gloss": "argument",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems2.punkt",
+   "form": "пункт",
+   "reading": "пункт",
+   "gloss": "clause, point",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems2.procedura",
+   "form": "процедура",
+   "reading": "процеду́ра",
+   "gloss": "procedure",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems2.perenesti",
+   "form": "перенести",
+   "reading": "перенести́",
+   "gloss": "to reschedule",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems2.ozhidanie",
+   "form": "ожидание",
+   "reading": "ожида́ние",
+   "gloss": "waiting",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

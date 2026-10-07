@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-82",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.prof.finansirovanie",
+   "form": "финансирование",
+   "reading": "финанси́рование",
+   "gloss": "financing",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.investiciya",
+   "form": "инвестиция",
+   "reading": "инвести́ция",
+   "gloss": "investment",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.investor",
+   "form": "инвестор",
+   "reading": "инве́стор",
+   "gloss": "investor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.investirovat",
+   "form": "инвестировать",
+   "reading": "инвести́ровать",
+   "gloss": "to invest",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.zatraty",
+   "form": "затраты",
+   "reading": "затра́ты",
+   "gloss": "costs",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.okupaemost",
+   "form": "окупаемость",
+   "reading": "окупа́емость",
+   "gloss": "payback",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.rentabelnost",
+   "form": "рентабельность",
+   "reading": "рента́бельность",
+   "gloss": "profitability",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.dokhodnost",
+   "form": "доходность",
+   "reading": "дохо́дность",
+   "gloss": "yield",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.marzha",
+   "form": "маржа",
+   "reading": "ма́ржа",
+   "gloss": "margin",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.sebestoimost",
+   "form": "себестоимость",
+   "reading": "себесто́имость",
+   "gloss": "cost price",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.rezultativnost",
+   "form": "результативность",
+   "reading": "результати́вность",
+   "gloss": "effectiveness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.pribylnyy",
+   "form": "прибыльный",
+   "reading": "при́быльный",
+   "gloss": "profitable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.ubytochnyy",
+   "form": "убыточный",
+   "reading": "убы́точный",
+   "gloss": "loss-making",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.bezubytochnyy",
+   "form": "безубыточный",
+   "reading": "безубы́точный",
+   "gloss": "break-even",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.ubytochnost",
+   "form": "убыточность",
+   "reading": "убы́точность",
+   "gloss": "loss-making (noun)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.nekhvatka",
+   "form": "нехватка",
+   "reading": "нехва́тка",
+   "gloss": "shortage",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.deficit",
+   "form": "дефицит",
+   "reading": "дефици́т",
+   "gloss": "deficit",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.izbytok",
+   "form": "избыток",
+   "reading": "избы́ток",
+   "gloss": "excess, surplus",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.kadrovyy",
+   "form": "кадровый",
+   "reading": "ка́дровый",
+   "gloss": "personnel (adj)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.potencial",
+   "form": "потенциал",
+   "reading": "потенциа́л",
+   "gloss": "potential",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.sryv",
+   "form": "срыв",
+   "reading": "срыв",
+   "gloss": "disruption, failure",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.prosrochka",
+   "form": "просрочка",
+   "reading": "просро́чка",
+   "gloss": "overdue, delinquency",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.spad",
+   "form": "спад",
+   "reading": "спад",
+   "gloss": "decline, downturn",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.krizis",
+   "form": "кризис",
+   "reading": "кри́зис",
+   "gloss": "crisis",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.inflyaciya",
+   "form": "инфляция",
+   "reading": "инфля́ция",
+   "gloss": "inflation",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

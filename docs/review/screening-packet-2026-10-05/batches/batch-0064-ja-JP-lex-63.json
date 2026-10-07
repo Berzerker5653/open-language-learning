@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-63",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.formal2.e2",
+   "form": "え",
+   "reading": "え",
+   "gloss": "picture, drawing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.tenjikan",
+   "form": "てんじかん",
+   "reading": "てんじかん",
+   "gloss": "exhibition hall",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.kairan",
+   "form": "かいらん",
+   "reading": "かいらん",
+   "gloss": "viewing, inspection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.bijin",
+   "form": "びじん",
+   "reading": "びじん",
+   "gloss": "beautiful person",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.shizei",
+   "form": "しぜい",
+   "reading": "しぜい",
+   "gloss": "natural form",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.motsuchi",
+   "form": "もつち",
+   "reading": "もつち",
+   "gloss": "material, medium",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.tenkyuu",
+   "form": "てんきゅう",
+   "reading": "てんきゅう",
+   "gloss": "celestial sphere",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.shiten",
+   "form": "してん",
+   "reading": "してん",
+   "gloss": "viewpoint",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.hennyu",
+   "form": "へんにゅう",
+   "reading": "へんにゅう",
+   "gloss": "insertion, amendment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.mushou",
+   "form": "むしょう",
+   "reading": "むしょう",
+   "gloss": "free trade",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.zei2",
+   "form": "かんぜい",
+   "reading": "かんぜい",
+   "gloss": "tariff",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.boeki",
+   "form": "ぼうえき",
+   "reading": "ぼうえき",
+   "gloss": "trade",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.kyoutei",
+   "form": "きょうてい",
+   "reading": "きょうてい",
+   "gloss": "agreement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.kuiki",
+   "form": "くいき",
+   "reading": "くいき",
+   "gloss": "region, bloc",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.kokuren",
+   "form": "こくれん",
+   "reading": "こくれん",
+   "gloss": "UN",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.kyouryoku",
+   "form": "きょうりょく",
+   "reading": "きょうりょく",
+   "gloss": "authority, power",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.choukai2",
+   "form": "こうしょう",
+   "reading": "こうしょう",
+   "gloss": "negotiation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.kyousei3",
+   "form": "しゃくぜん",
+   "reading": "しゃくぜん",
+   "gloss": "ceasefire",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.heiwa",
+   "form": "へいわ",
+   "reading": "へいわ",
+   "gloss": "peace",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.fukushi2",
+   "form": "ふくし",
+   "reading": "ふくし",
+   "gloss": "public welfare",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.kenkou2",
+   "form": "けんこう",
+   "reading": "けんこう",
+   "gloss": "health",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.byouki",
+   "form": "びょうき",
+   "reading": "びょうき",
+   "gloss": "disease",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.yobo",
+   "form": "よぼう",
+   "reading": "よぼう",
+   "gloss": "vaccination, prevention",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.pandemic",
+   "form": "パンデミック",
+   "reading": "パンデミック",
+   "gloss": "pandemic",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.hakken",
+   "form": "はっけん",
+   "reading": "はっけん",
+   "gloss": "discovery",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

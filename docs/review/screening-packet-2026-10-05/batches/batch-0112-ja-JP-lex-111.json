@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-111",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.psych.senmon",
+   "form": "せんもん",
+   "reading": "せんもん",
+   "gloss": "specialty, field",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.hatsusei",
+   "form": "はっせい",
+   "reading": "はっせい",
+   "gloss": "adolescence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.shounen",
+   "form": "しょうねん",
+   "reading": "しょうねん",
+   "gloss": "boy, youth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.seinen",
+   "form": "せいねん",
+   "reading": "せいねん",
+   "gloss": "young adult",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.otona",
+   "form": "おとな",
+   "reading": "おとな",
+   "gloss": "adult",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.rounen",
+   "form": "ろうねん",
+   "reading": "ろうねん",
+   "gloss": "old age",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.shuudan",
+   "form": "しゅうだん",
+   "reading": "しゅうだん",
+   "gloss": "group, crowd",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.shuukou",
+   "form": "しゅうこう",
+   "reading": "しゅうこう",
+   "gloss": "conformity, herd behavior",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.enryo",
+   "form": "えんりょ",
+   "reading": "えんりょ",
+   "gloss": "restraint, reserve",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.shinrai",
+   "form": "しんらい",
+   "reading": "しんらい",
+   "gloss": "trust, confidence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.hiyou",
+   "form": "ひよう",
+   "reading": "ひよう",
+   "gloss": "criticism, censure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.kibun",
+   "form": "きぶん",
+   "reading": "きぶん",
+   "gloss": "mood, feeling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.fuan",
+   "form": "ふあん",
+   "reading": "ふあん",
+   "gloss": "anxiety, unease",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.wakuwaku",
+   "form": "わくわく",
+   "reading": "わくわく",
+   "gloss": "excitement, anticipation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.tanoshii",
+   "form": "たのしい",
+   "reading": "たのしい",
+   "gloss": "enjoyable, fun",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.kanashii",
+   "form": "かなしい",
+   "reading": "かなしい",
+   "gloss": "sad",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.sutoresu",
+   "form": "すとれす",
+   "reading": "すとれす",
+   "gloss": "stress",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.iradachi",
+   "form": "いらだち",
+   "reading": "いらだち",
+   "gloss": "irritation, frustration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.nemuri",
+   "form": "ねむり",
+   "reading": "ねむり",
+   "gloss": "sleep",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.yuutsu",
+   "form": "ゆううつ",
+   "reading": "ゆううつ",
+   "gloss": "depressed, low",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.taisetsu",
+   "form": "たいせつ",
+   "reading": "たいせつ",
+   "gloss": "important, precious",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.shiawase",
+   "form": "しあわせ",
+   "reading": "しあわせ",
+   "gloss": "happy, fortunate",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.genki",
+   "form": "げんき",
+   "reading": "げんき",
+   "gloss": "energetic, healthy",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.shinpai",
+   "form": "しんぱい",
+   "reading": "しんぱい",
+   "gloss": "worry, concern",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.hougoku2",
+   "form": "ほうこく",
+   "reading": "ほうこく",
+   "gloss": "report",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

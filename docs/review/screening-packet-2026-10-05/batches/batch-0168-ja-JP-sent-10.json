@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-10",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.despite-rain",
+   "text": "あめが ふって いるのに、でかけます。",
+   "gloss": "I go out even though it rains."
+  },
+  {
+   "id": "ja.sent.movie-cinema",
+   "text": "えいかんで えいがを みます。",
+   "gloss": "I watch a movie at the cinema."
+  },
+  {
+   "id": "ja.sent.go-zoo",
+   "text": "どうぶつえんへ いきました。",
+   "gloss": "I went to the zoo."
+  },
+  {
+   "id": "ja.sent.concert-fun",
+   "text": "こんさーとが たのしかったです。",
+   "gloss": "The concert was fun."
+  },
+  {
+   "id": "ja.sent.karaoke-night",
+   "text": "カラオケで うたを うたいます。",
+   "gloss": "I sing songs at karaoke."
+  },
+  {
+   "id": "ja.sent.watch-dorama",
+   "text": "ドラマを みます。",
+   "gloss": "I watch the drama completely."
+  },
+  {
+   "id": "ja.sent.team-match",
+   "text": "たいむの まっちを みます。",
+   "gloss": "I watch the team's match."
+  },
+  {
+   "id": "ja.sent.senpai-kouhai",
+   "text": "せんぱいと こうはいが きます。",
+   "gloss": "The senior and junior come."
+  },
+  {
+   "id": "ja.sent.farewell-party",
+   "text": "そうべつかいを ひらきます。",
+   "gloss": "I hold a farewell party."
+  },
+  {
+   "id": "ja.sent.gym-training",
+   "text": "じむで とれーにんぐを します。",
+   "gloss": "I train at the gym."
+  },
+  {
+   "id": "ja.sent.jog-morning",
+   "text": "まいあさ じょぎんぐを します。",
+   "gloss": "I jog every morning."
+  },
+  {
+   "id": "ja.sent.yoga-relax",
+   "text": "よがで きを ちゅうしします。",
+   "gloss": "I focus my energy in yoga."
+  },
+  {
+   "id": "ja.sent.judo-practice",
+   "text": "じゅうどうの れんしゅうを します。",
+   "gloss": "I practice judo."
+  },
+  {
+   "id": "ja.sent.sumo-match",
+   "text": "すもうの たいかいを みます。",
+   "gloss": "I watch a sumo tournament."
+  },
+  {
+   "id": "ja.sent.marathon-run",
+   "text": "まらそんを はしります。",
+   "gloss": "I run a marathon."
+  }
+ ]
+}

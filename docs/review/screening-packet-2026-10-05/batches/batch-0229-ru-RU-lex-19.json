@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-19",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.critical4.allyuziya",
+   "form": "аллюзия",
+   "reading": "аллю́зия",
+   "gloss": "allusion",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.otsylka",
+   "form": "отсылка",
+   "reading": "отсы́лка",
+   "gloss": "reference, allusion",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.primeta",
+   "form": "примета",
+   "reading": "приме́та",
+   "gloss": "sign, omen",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.prevestnik",
+   "form": "предвестник",
+   "reading": "предве́стник",
+   "gloss": "harbinger",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical4.interpretaciya",
+   "form": "интерпретация",
+   "reading": "интерпрета́ция",
+   "gloss": "interpretation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.ponimanie",
+   "form": "понимание",
+   "reading": "понима́ние",
+   "gloss": "understanding",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical4.neponimanie",
+   "form": "непонимание",
+   "reading": "непонима́ние",
+   "gloss": "misunderstanding",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical4.ozarenie",
+   "form": "озарение",
+   "reading": "озаре́ние",
+   "gloss": "insight, revelation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical4.dogadka",
+   "form": "догадка",
+   "reading": "дога́дка",
+   "gloss": "guess",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.prozrenie",
+   "form": "прозрение",
+   "reading": "прозре́ние",
+   "gloss": "insight, enlightenment",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical4.naitie",
+   "form": "наитие",
+   "reading": "наи́тие",
+   "gloss": "intuition, hunch",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical4.intuiciya",
+   "form": "интуиция",
+   "reading": "интуи́ция",
+   "gloss": "intuition",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.predchuvstvie",
+   "form": "предчувствие",
+   "reading": "предчу́вствие",
+   "gloss": "premonition",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical4.teorema",
+   "form": "теорема",
+   "reading": "теоре́ма",
+   "gloss": "theorem",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.aksioma",
+   "form": "аксиома",
+   "reading": "аксио́ма",
+   "gloss": "axiom",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.postulat",
+   "form": "постулат",
+   "reading": "постула́т",
+   "gloss": "postulate",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical4.prichinnost",
+   "form": "причинность",
+   "reading": "причи́нность",
+   "gloss": "causality",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.sluchaynost",
+   "form": "случайность",
+   "reading": "случа́йность",
+   "gloss": "randomness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.anomaliya",
+   "form": "аномалия",
+   "reading": "анома́лия",
+   "gloss": "anomaly",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.otklonenie",
+   "form": "отклонение",
+   "reading": "отклоне́ние",
+   "gloss": "deviation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical4.smeshchenie",
+   "form": "смещение",
+   "reading": "смеще́ние",
+   "gloss": "shift, displacement",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical4.perekos",
+   "form": "перекос",
+   "reading": "переко́с",
+   "gloss": "skew, distortion",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical4.lozhnyy",
+   "form": "ложный",
+   "reading": "ло́жный",
+   "gloss": "false",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical4.istinnyy",
+   "form": "истинный",
+   "reading": "и́стинный",
+   "gloss": "true",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical4.spravedlivyy",
+   "form": "справедливый",
+   "reading": "справедли́вый",
+   "gloss": "fair",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

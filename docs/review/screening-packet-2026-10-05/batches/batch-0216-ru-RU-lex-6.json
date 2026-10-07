@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-6",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.argue4.recenzent",
+   "form": "рецензент",
+   "reading": "рецензе́нт",
+   "gloss": "reviewer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue4.motivirovka",
+   "form": "мотивировка",
+   "reading": "мотивиро́вка",
+   "gloss": "reasoning, motivation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue4.argumentirovannyy",
+   "form": "аргументированный",
+   "reading": "аргументи́рованный",
+   "gloss": "well-argued",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.obosnovannyy",
+   "form": "обоснованный",
+   "reading": "обосно́ванный",
+   "gloss": "well-founded",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.neobosnovannyy",
+   "form": "необоснованный",
+   "reading": "необосно́ванный",
+   "gloss": "unfounded",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.slabyy",
+   "form": "слабый",
+   "reading": "сла́бый",
+   "gloss": "weak",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.silnyy",
+   "form": "сильный",
+   "reading": "си́льный",
+   "gloss": "strong",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.krepkiy",
+   "form": "крепкий",
+   "reading": "кре́пкий",
+   "gloss": "sturdy",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.prochnyy",
+   "form": "прочный",
+   "reading": "про́чный",
+   "gloss": "durable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.shatkiy",
+   "form": "шаткий",
+   "reading": "ша́ткий",
+   "gloss": "shaky",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.neustoychivyy",
+   "form": "неустойчивый",
+   "reading": "неусто́йчивый",
+   "gloss": "unstable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.ustoychivyy",
+   "form": "устойчивый",
+   "reading": "усто́йчивый",
+   "gloss": "stable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.protivorechivyy",
+   "form": "противоречивый",
+   "reading": "противоречи́вый",
+   "gloss": "contradictory",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.racionalnyy",
+   "form": "рациональный",
+   "reading": "рациона́льный",
+   "gloss": "rational",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.emocionalnyy",
+   "form": "эмоциональный",
+   "reading": "эмоциона́льный",
+   "gloss": "emotional",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.obekktivnyy",
+   "form": "объективный",
+   "reading": "объекти́вный",
+   "gloss": "objective",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.subekktivnyy",
+   "form": "субъективный",
+   "reading": "субъекти́вный",
+   "gloss": "subjective",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.predvzyatyy",
+   "form": "предвзятый",
+   "reading": "предвзя́тый",
+   "gloss": "biased",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.nejtralnyy",
+   "form": "нейтральный",
+   "reading": "нейтра́льный",
+   "gloss": "neutral",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.bespristrastnyy",
+   "form": "беспристрастный",
+   "reading": "беспристра́стный",
+   "gloss": "impartial",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.demagogiya",
+   "form": "демагогия",
+   "reading": "демаго́гия",
+   "gloss": "demagogy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue4.populizm",
+   "form": "популизм",
+   "reading": "попули́зм",
+   "gloss": "populism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue4.tryuk",
+   "form": "трюк",
+   "reading": "трюк",
+   "gloss": "trick",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue4.ulovka",
+   "form": "уловка",
+   "reading": "уло́вка",
+   "gloss": "trick, artifice",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue4.hitrost",
+   "form": "хитрость",
+   "reading": "хи́трость",
+   "gloss": "cunning",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

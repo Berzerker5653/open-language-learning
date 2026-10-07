@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-117",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.study.sekunda",
+   "form": "секунда",
+   "reading": "секу́нда",
+   "gloss": "second",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study.sutki",
+   "form": "сутки",
+   "reading": "су́тки",
+   "gloss": "24 hours, day",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study.stoletie",
+   "form": "столетие",
+   "reading": "столе́тие",
+   "gloss": "century",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study.desatiletie",
+   "form": "десятилетие",
+   "reading": "десятиле́тие",
+   "gloss": "decade",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study.chetvert",
+   "form": "четверть",
+   "reading": "че́тверть",
+   "gloss": "quarter",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study.tret",
+   "form": "треть",
+   "reading": "треть",
+   "gloss": "third",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study.raznost",
+   "form": "разность",
+   "reading": "ра́зность",
+   "gloss": "difference",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study.proizvedenie",
+   "form": "произведение",
+   "reading": "произведе́ние",
+   "gloss": "product; work (art)",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study.uravnennie",
+   "form": "уравнение",
+   "reading": "уравне́ние",
+   "gloss": "equation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study.formula",
+   "form": "формула",
+   "reading": "фо́рмула",
+   "gloss": "formula",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study.vyrazhenie",
+   "form": "выражение",
+   "reading": "выраже́ние",
+   "gloss": "expression",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study.ravenstvo",
+   "form": "равенство",
+   "reading": "ра́венство",
+   "gloss": "equality",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study.neravenstvo",
+   "form": "неравенство",
+   "reading": "нера́венство",
+   "gloss": "inequality",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study.graf",
+   "form": "граф",
+   "reading": "граф",
+   "gloss": "graph",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study.rebro",
+   "form": "ребро",
+   "reading": "ребро́",
+   "gloss": "edge",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study.radius",
+   "form": "радиус",
+   "reading": "ра́диус",
+   "gloss": "radius",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study.diametr",
+   "form": "диаметр",
+   "reading": "диа́метр",
+   "gloss": "diameter",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study.okruzhnost",
+   "form": "окружность",
+   "reading": "окру́жность",
+   "gloss": "circle, circumference",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study.kvadrat",
+   "form": "квадрат",
+   "reading": "квадра́т",
+   "gloss": "square",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study.kub",
+   "form": "куб",
+   "reading": "куб",
+   "gloss": "cube",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study.shar",
+   "form": "шар",
+   "reading": "шар",
+   "gloss": "sphere, ball",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study.piramida",
+   "form": "пирамида",
+   "reading": "пирами́да",
+   "gloss": "pyramid",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study.mnozhestvo",
+   "form": "множество",
+   "reading": "мно́жество",
+   "gloss": "set, multitude",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study.element",
+   "form": "элемент",
+   "reading": "элеме́нт",
+   "gloss": "element",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study.beskonechnost",
+   "form": "бесконечность",
+   "reading": "бесконе́чность",
+   "gloss": "infinity",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

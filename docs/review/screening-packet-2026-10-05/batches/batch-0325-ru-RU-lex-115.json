@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-115",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.socialplans.mozhet",
+   "form": "может быть",
+   "reading": "мо́жет бы́ть",
+   "gloss": "maybe",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.nazad",
+   "form": "назад",
+   "reading": "наза́д",
+   "gloss": "back",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.perenesti",
+   "form": "переносить",
+   "reading": "переноси́ть",
+   "gloss": "to postpone, move",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.otmenit",
+   "form": "отменять",
+   "reading": "отменя́ть",
+   "gloss": "to cancel",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.podtverdit",
+   "form": "подтверждать",
+   "reading": "подтвержда́ть",
+   "gloss": "to confirm",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.izmenit",
+   "form": "изменять",
+   "reading": "изменя́ть",
+   "gloss": "to change",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.zapisat2",
+   "form": "записаться",
+   "reading": "записа́ться",
+   "gloss": "to sign up, book",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.soglasovat",
+   "form": "согласовывать",
+   "reading": "согласо́вывать",
+   "gloss": "to coordinate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.udobnyi",
+   "form": "удобный",
+   "reading": "удо́бный",
+   "gloss": "convenient",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.razvlekatsiya",
+   "form": "развлечение",
+   "reading": "развлече́ние",
+   "gloss": "entertainment",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.socialplans.pohod",
+   "form": "поход",
+   "reading": "похо́д",
+   "gloss": "hike, walk",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.socialplans.progulka",
+   "form": "прогулка",
+   "reading": "прогу́лка",
+   "gloss": "walk, stroll",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.socialplans.kino2",
+   "form": "кино",
+   "reading": "кино́",
+   "gloss": "cinema",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.socialplans.spektakl",
+   "form": "спектакль",
+   "reading": "спекта́кль",
+   "gloss": "play, performance",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.socialplans.bilety3",
+   "form": "билетик",
+   "reading": "биле́тик",
+   "gloss": "small ticket",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.socialplans.afisha",
+   "form": "афиша",
+   "reading": "афи́ша",
+   "gloss": "poster, billboard",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.socialplans.anons",
+   "form": "анонс",
+   "reading": "ано́нс",
+   "gloss": "announcement, preview",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.socialplans.vyhod",
+   "form": "выход",
+   "reading": "вы́ход",
+   "gloss": "exit, day off",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.socialplans.doma",
+   "form": "дома",
+   "reading": "до́ма",
+   "gloss": "at home",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.socialplans.soglasno",
+   "form": "согласно",
+   "reading": "согла́сно",
+   "gloss": "according to",
+   "pos": "preposition",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.zabyt",
+   "form": "забыть",
+   "reading": "забы́ть",
+   "gloss": "to forget",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.pomnit",
+   "form": "помнить",
+   "reading": "по́мнить",
+   "gloss": "to remember",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.povtorit",
+   "form": "повторять",
+   "reading": "повторя́ть",
+   "gloss": "to repeat",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.zhdem",
+   "form": "ждать",
+   "reading": "ждать",
+   "gloss": "to wait",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.gostya",
+   "form": "гостья",
+   "reading": "го́стья",
+   "gloss": "hostess (f)",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

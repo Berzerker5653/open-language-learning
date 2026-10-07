@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-4",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.argue3.ogovorka",
+   "form": "оговорка",
+   "reading": "огово́рка",
+   "gloss": "reservation (caveat)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue3.vozrazhat",
+   "form": "возражать",
+   "reading": "возража́ть",
+   "gloss": "to object",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.ogovarivat",
+   "form": "оговаривать",
+   "reading": "огова́ривать",
+   "gloss": "to stipulate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.ogovorit",
+   "form": "оговорить",
+   "reading": "оговори́ть",
+   "gloss": "to stipulate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.neskolko",
+   "form": "несколько",
+   "reading": "не́сколько",
+   "gloss": "somewhat, a few",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.dovolno",
+   "form": "довольно",
+   "reading": "дово́льно",
+   "gloss": "quite",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.vpolne",
+   "form": "вполне",
+   "reading": "вполне́",
+   "gloss": "quite, entirely",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.otchasti",
+   "form": "отчасти",
+   "reading": "отча́сти",
+   "gloss": "partly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.neredko",
+   "form": "нередко",
+   "reading": "нере́дко",
+   "gloss": "often",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.poroy",
+   "form": "порой",
+   "reading": "поро́й",
+   "gloss": "at times",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.inoy",
+   "form": "иной",
+   "reading": "ино́й",
+   "gloss": "other, different",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.otnud",
+   "form": "отнюдь",
+   "reading": "отню́дь",
+   "gloss": "not at all",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.vryad",
+   "form": "вряд",
+   "reading": "вряд",
+   "gloss": "hardly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.edva",
+   "form": "едва",
+   "reading": "едва́",
+   "gloss": "barely",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.primerno",
+   "form": "примерно",
+   "reading": "приме́рно",
+   "gloss": "approximately",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.okolo",
+   "form": "около",
+   "reading": "о́коло",
+   "gloss": "about",
+   "pos": "preposition",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.svershu",
+   "form": "свыше",
+   "reading": "свы́ше",
+   "gloss": "over, above",
+   "pos": "preposition",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.menee",
+   "form": "менее",
+   "reading": "ме́нее",
+   "gloss": "less",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.slishkom",
+   "form": "слишком",
+   "reading": "сли́шком",
+   "gloss": "too, excessively",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.chrezmerno",
+   "form": "чрезмерно",
+   "reading": "чрезме́рно",
+   "gloss": "excessively",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.izbytochno",
+   "form": "избыточно",
+   "reading": "избы́точно",
+   "gloss": "redundantly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.umerenno",
+   "form": "умеренно",
+   "reading": "у́меренно",
+   "gloss": "moderately",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.slegka",
+   "form": "слегка",
+   "reading": "слегка́",
+   "gloss": "slightly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.nemnogo",
+   "form": "немного",
+   "reading": "немно́го",
+   "gloss": "a little",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.chut",
+   "form": "чуть",
+   "reading": "чуть",
+   "gloss": "slightly",
+   "pos": "adverb",
+   "gender": ""
+  }
+ ]
+}

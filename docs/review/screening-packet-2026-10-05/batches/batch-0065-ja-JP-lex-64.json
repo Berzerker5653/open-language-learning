@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-64",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.global.kaihatsu3",
+   "form": "かいはつ",
+   "reading": "かいはつ",
+   "gloss": "development",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.fukyu4",
+   "form": "ひんこん",
+   "reading": "ひんこん",
+   "gloss": "poverty",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.kizon",
+   "form": "きぞん",
+   "reading": "きぞん",
+   "gloss": "survival, existence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.koho",
+   "form": "こうほう",
+   "reading": "こうほう",
+   "gloss": "information, publicity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.hodo",
+   "form": "ほうどう",
+   "reading": "ほうどう",
+   "gloss": "news reporting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.shuppan",
+   "form": "しゅっぱん",
+   "reading": "しゅっぱん",
+   "gloss": "publication",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.denshin",
+   "form": "でんしん",
+   "reading": "でんしん",
+   "gloss": "transmission, broadcasting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.hatten3",
+   "form": "はってん",
+   "reading": "はってん",
+   "gloss": "developing",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.fukkyuu2",
+   "form": "ふっきゅう",
+   "reading": "ふっきゅう",
+   "gloss": "recovery",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.mokuhyou",
+   "form": "もくひょう",
+   "reading": "もくひょう",
+   "gloss": "goal, target",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.sanka3",
+   "form": "さんか",
+   "reading": "さんか",
+   "gloss": "participation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.kyousai",
+   "form": "きょうさい",
+   "reading": "きょうさい",
+   "gloss": "cooperation, mutual aid",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.josei",
+   "form": "じょうせい",
+   "reading": "じょうせい",
+   "gloss": "financial support",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.bunkou2",
+   "form": "こうりゅう",
+   "reading": "こうりゅう",
+   "gloss": "cultural exchange",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.ryugaku",
+   "form": "りゅうがく",
+   "reading": "りゅうがく",
+   "gloss": "study abroad",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.kouryu",
+   "form": "こうりゅう",
+   "reading": "こうりゅう",
+   "gloss": "exchange",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.housou2",
+   "form": "ほうそう",
+   "reading": "ほうそう",
+   "gloss": "broadcast",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.tsuushin2",
+   "form": "つうしん",
+   "reading": "つうしん",
+   "gloss": "communication",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.chousei",
+   "form": "ちょうせい",
+   "reading": "ちょうせい",
+   "gloss": "adjustment, reconciliation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.aisou",
+   "form": "そう",
+   "reading": "そう",
+   "gloss": "conflict",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.kaitai",
+   "form": "かいたい",
+   "reading": "かいたい",
+   "gloss": "resolution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.nanmin",
+   "form": "なんみん",
+   "reading": "なんみん",
+   "gloss": "refugee",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.juutaku",
+   "form": "じゅうたく",
+   "reading": "じゅうたく",
+   "gloss": "residence, asylum",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.nyukan",
+   "form": "にゅうかん",
+   "reading": "にゅうかん",
+   "gloss": "entry, admission",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.ryuukou",
+   "form": "りゅうこう",
+   "reading": "りゅうこう",
+   "gloss": "travel",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

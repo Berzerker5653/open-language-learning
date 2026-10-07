@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-107",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.play2.koe",
+   "form": "こえ",
+   "reading": "こえ",
+   "gloss": "voice",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.uchi",
+   "form": "うち",
+   "reading": "うち",
+   "gloss": "inside, home",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.soto",
+   "form": "そと",
+   "reading": "そと",
+   "gloss": "outside",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.mae",
+   "form": "まえ",
+   "reading": "まえ",
+   "gloss": "front",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.ushiro",
+   "form": "うしろ",
+   "reading": "うしろ",
+   "gloss": "back",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.naka",
+   "form": "なか",
+   "reading": "なか",
+   "gloss": "inside",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.soba",
+   "form": "そば",
+   "reading": "そば",
+   "gloss": "nearby, soba",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.giin",
+   "form": "ぎいん",
+   "reading": "ぎいん",
+   "gloss": "legislator",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.gikai",
+   "form": "ぎかい",
+   "reading": "ぎかい",
+   "gloss": "assembly",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.kyohi",
+   "form": "きょひ",
+   "reading": "きょひ",
+   "gloss": "abstention",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.seitou",
+   "form": "せいとう",
+   "reading": "せいとう",
+   "gloss": "party",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.yushu",
+   "form": "ゆうしゅう",
+   "reading": "ゆうしゅう",
+   "gloss": "superiority",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.hosen",
+   "form": "ほせん",
+   "reading": "ほせん",
+   "gloss": "by-election",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.touhyousha",
+   "form": "とうひょうしゃ",
+   "reading": "とうひょうしゃ",
+   "gloss": "voter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.hankyou",
+   "form": "はんきょう",
+   "reading": "はんきょう",
+   "gloss": "opposition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.toushou",
+   "form": "とうしょう",
+   "reading": "とうしょう",
+   "gloss": "vote count",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.hansou",
+   "form": "はんそう",
+   "reading": "はんそう",
+   "gloss": "debate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.touhou",
+   "form": "とうほう",
+   "reading": "とうほう",
+   "gloss": "faction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.seikan",
+   "form": "せいかん",
+   "reading": "せいかん",
+   "gloss": "administration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.yosan3",
+   "form": "よさん",
+   "reading": "よさん",
+   "gloss": "budget estimate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.kessan4",
+   "form": "けっさん",
+   "reading": "けっさん",
+   "gloss": "settlement of accounts",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.kokkai",
+   "form": "こっかい",
+   "reading": "こっかい",
+   "gloss": "national diet",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.iinkai",
+   "form": "いいんかい",
+   "reading": "いいんかい",
+   "gloss": "committee",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.buon",
+   "form": "ぶのう",
+   "reading": "ぶのう",
+   "gloss": "field",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.kentei2",
+   "form": "けんてい",
+   "reading": "けんてい",
+   "gloss": "consideration",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

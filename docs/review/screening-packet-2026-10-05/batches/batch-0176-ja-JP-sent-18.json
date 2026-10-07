@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-18",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.food-waste",
+   "text": "フードロス を へらす ために ちょうりょう を します。",
+   "gloss": "To cut food waste I portion carefully."
+  },
+  {
+   "id": "ja.sent.green-city",
+   "text": "この まち は みどり の こうえん が おおいです。",
+   "gloss": "This town has many green parks."
+  },
+  {
+   "id": "ja.sent.footprint-home",
+   "text": "うち の ねんりょう の フットプリント を はかりました。",
+   "gloss": "I measured our household fuel footprint."
+  },
+  {
+   "id": "ja.sent.itinerary-plan",
+   "text": "イティネラリ を つくって しゅくはく を よやく しました。",
+   "gloss": "I made an itinerary and booked lodging."
+  },
+  {
+   "id": "ja.sent.booking-change",
+   "text": "よやく の へんきょう で とまどい が ありました。",
+   "gloss": "There was confusion with the booking change."
+  },
+  {
+   "id": "ja.sent.culture-shock",
+   "text": "ぶんかしょっく で うれしい ことも ありました。",
+   "gloss": "With culture shock there were also happy moments."
+  },
+  {
+   "id": "ja.sent.travel-safety",
+   "text": "ぼうはん の ため、まち の ちゅうい を ならいました。",
+   "gloss": "For crime prevention I learned town safety."
+  },
+  {
+   "id": "ja.sent.border-docs",
+   "text": "にゅうこく しょうめいしょ を しゅっしょく しました。",
+   "gloss": "I presented my entry certificate."
+  },
+  {
+   "id": "ja.sent.homestay-letter",
+   "text": "ホームステイ の かんがえ を てがみに かきました。",
+   "gloss": "I wrote my homestay thoughts in a letter."
+  },
+  {
+   "id": "ja.sent.guided-tour",
+   "text": "がいどう で ふうけい を たのしみました。",
+   "gloss": "On the guided tour I enjoyed the scenery."
+  },
+  {
+   "id": "ja.sent.lost-belongings",
+   "text": "さいふ の おちもの は おといあせ で みつかりました。",
+   "gloss": "The lost wallet was found via the inquiry desk."
+  },
+  {
+   "id": "ja.sent.travel-budget",
+   "text": "りょうがえ で りょうきん を はらいました。",
+   "gloss": "I paid the fare after currency exchange."
+  },
+  {
+   "id": "ja.sent.route-change",
+   "text": "でんしゃ の おくれ で きこう が かわりました。",
+   "gloss": "The route changed due to the train delay."
+  },
+  {
+   "id": "ja.sent.postcard",
+   "text": "はがき に え を かいて だしました。",
+   "gloss": "I drew on a postcard and sent it."
+  },
+  {
+   "id": "ja.sent.personality-desc",
+   "text": "かれ の せいかく は まじめ で すなお です。",
+   "gloss": "His personality is diligent and docile."
+  }
+ ]
+}

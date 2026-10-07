@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-111",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.soc.prozrachnost",
+   "form": "прозрачность",
+   "reading": "прозра́чность",
+   "gloss": "transparency",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.zasekrechennyy",
+   "form": "засекреченный",
+   "reading": "засе́креченный",
+   "gloss": "classified",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.sekretnost",
+   "form": "секретность",
+   "reading": "секре́тность",
+   "gloss": "secrecy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.tsennosti",
+   "form": "ценности",
+   "reading": "ценно́сти",
+   "gloss": "values",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.nravstvennost",
+   "form": "нравственность",
+   "reading": "нра́вственность",
+   "gloss": "morality",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.nravstvennyy",
+   "form": "нравственный",
+   "reading": "нра́вственный",
+   "gloss": "moral",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.etichnyy",
+   "form": "этичный",
+   "reading": "эти́чный",
+   "gloss": "ethical",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.neetichnyy",
+   "form": "неэтичный",
+   "reading": "неэ́тичный",
+   "gloss": "unethical",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.dobrosovestnost",
+   "form": "добросовестность",
+   "reading": "добросо́вестность",
+   "gloss": "conscientiousness, good faith",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.dobrosovestnyy",
+   "form": "добросовестный",
+   "reading": "добросо́вестный",
+   "gloss": "conscientious",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.nedobrosovestnyy",
+   "form": "недобросовестный",
+   "reading": "недобросо́вестный",
+   "gloss": "unscrupulous",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.zloupotreblenie",
+   "form": "злоупотребление",
+   "reading": "злоупотребле́ние",
+   "gloss": "abuse, misuse",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.zloupotreblyat",
+   "form": "злоупотреблять",
+   "reading": "злоупотребля́ть",
+   "gloss": "to abuse, misuse",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.prevyshenie",
+   "form": "превышение",
+   "reading": "превыше́ние",
+   "gloss": "exceeding",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.prevysit",
+   "form": "превысить",
+   "reading": "превы́сить",
+   "gloss": "to exceed",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.privilegiya",
+   "form": "привилегия",
+   "reading": "привиле́гия",
+   "gloss": "privilege",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.privilegirovannyy",
+   "form": "привилегированный",
+   "reading": "привилегиро́ванный",
+   "gloss": "privileged",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.ravnopravie",
+   "form": "равноправие",
+   "reading": "равнопра́вие",
+   "gloss": "equality of rights",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.ravnopravnyy",
+   "form": "равноправный",
+   "reading": "равнопра́вный",
+   "gloss": "equal in rights",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.nespravedlivost",
+   "form": "несправедливость",
+   "reading": "несправедли́вость",
+   "gloss": "injustice",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.proizvolnyy",
+   "form": "произвольный",
+   "reading": "произво́льный",
+   "gloss": "arbitrary",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.bezzakonie",
+   "form": "беззаконие",
+   "reading": "беззако́ние",
+   "gloss": "lawlessness",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.byurokratizm",
+   "form": "бюрократизм",
+   "reading": "бюрократи́зм",
+   "gloss": "bureaucratism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.predvybornyy",
+   "form": "предвыборный",
+   "reading": "предвы́борный",
+   "gloss": "pre-election",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.partiynyy",
+   "form": "партийный",
+   "reading": "парти́йный",
+   "gloss": "party (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

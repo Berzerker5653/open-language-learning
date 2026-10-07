@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-94",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.sci.peremennaya",
+   "form": "переменная",
+   "reading": "переме́нная",
+   "gloss": "variable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.postoyannaya",
+   "form": "постоянная",
+   "reading": "постоя́нная",
+   "gloss": "constant",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.prichinnyy",
+   "form": "причинный",
+   "reading": "причи́нный",
+   "gloss": "causal",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.korrelirovat",
+   "form": "коррелировать",
+   "reading": "коррели́ровать",
+   "gloss": "to correlate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.korrelyacionnyy",
+   "form": "корреляционный",
+   "reading": "корреляцио́нный",
+   "gloss": "correlational",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.ekosistema",
+   "form": "экосистема",
+   "reading": "экосисте́ма",
+   "gloss": "ecosystem",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.bioraznoobrazie",
+   "form": "биоразнообразие",
+   "reading": "биоразноо́бразие",
+   "gloss": "biodiversity",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.poteplenie",
+   "form": "потепление",
+   "reading": "потепле́ние",
+   "gloss": "warming",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.pohlodanie",
+   "form": "похолодание",
+   "reading": "похолода́ние",
+   "gloss": "cooling",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.vybrosy",
+   "form": "выбросы",
+   "reading": "выбро́сы",
+   "gloss": "emissions",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.vozobnovlyaemyy",
+   "form": "возобновляемый",
+   "reading": "возобновля́емый",
+   "gloss": "renewable",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.nevozobnovlyaemyy",
+   "form": "невозобновляемый",
+   "reading": "невозобновля́емый",
+   "gloss": "non-renewable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.generaciya",
+   "form": "генерация",
+   "reading": "генера́ция",
+   "gloss": "generation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.uglerodnyy",
+   "form": "углеродный",
+   "reading": "углеро́дный",
+   "gloss": "carbon (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.neytralizaciya",
+   "form": "нейтрализация",
+   "reading": "нейтрализа́ция",
+   "gloss": "neutralization",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.neytralizovat",
+   "form": "нейтрализовать",
+   "reading": "нейтрализова́ть",
+   "gloss": "to neutralize",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.adaptacionnyy",
+   "form": "адаптационный",
+   "reading": "адаптацио́нный",
+   "gloss": "adaptive",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.uyazvimost",
+   "form": "уязвимость",
+   "reading": "уязви́мость",
+   "gloss": "vulnerability",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.nablyudatelnyy",
+   "form": "наблюдательный",
+   "reading": "наблюда́тельный",
+   "gloss": "observant",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.verifitsirovat",
+   "form": "верифицировать",
+   "reading": "верифици́ровать",
+   "gloss": "to verify",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.falsifitsirovat",
+   "form": "фальсифицировать",
+   "reading": "фальсифици́ровать",
+   "gloss": "to falsify",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.validnost",
+   "form": "валидность",
+   "reading": "ва́лидность",
+   "gloss": "validity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.validnyy",
+   "form": "валидный",
+   "reading": "ва́лидный",
+   "gloss": "valid",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.povtoryaemost",
+   "form": "повторяемость",
+   "reading": "повторя́емость",
+   "gloss": "repeatability",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.vosproizvodimost",
+   "form": "воспроизводимость",
+   "reading": "воспроизводи́мость",
+   "gloss": "reproducibility",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

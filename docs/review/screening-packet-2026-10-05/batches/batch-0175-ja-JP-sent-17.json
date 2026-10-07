@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-17",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.voting-candidate",
+   "text": "こうほ の けんせい を きいて とうひょう しました。",
+   "gloss": "I listened to the candidate's policy and voted."
+  },
+  {
+   "id": "ja.sent.social-issue",
+   "text": "こどく は げんざい の しゃかい もんだい です。",
+   "gloss": "Loneliness is a current social problem."
+  },
+  {
+   "id": "ja.sent.inequality-gap",
+   "text": "しゃかい の びょうどう と かくさ を はなしました。",
+   "gloss": "We discussed social equality and gaps."
+  },
+  {
+   "id": "ja.sent.urban-rural",
+   "text": "とし と いなか の ちがいを べんきょう しました。",
+   "gloss": "We studied the difference between city and countryside."
+  },
+  {
+   "id": "ja.sent.civic-participation",
+   "text": "しみん さんか なくして きょうせい は ありません。",
+   "gloss": "Without citizen participation there is no coexistence."
+  },
+  {
+   "id": "ja.sent.climate-lowest",
+   "text": "きこう の へんか で さいてい きお が あがりました。",
+   "gloss": "With climate change the lowest temperature rose."
+  },
+  {
+   "id": "ja.sent.recycle-bottle",
+   "text": "びん と かんと ぷらすちっく を りさいくる しました。",
+   "gloss": "I recycled bottles, cans, and plastic."
+  },
+  {
+   "id": "ja.sent.energy-wind",
+   "text": "かざい の えね で でんき を つくります。",
+   "gloss": "We make electricity from wind energy."
+  },
+  {
+   "id": "ja.sent.waste-reduce",
+   "text": "ごみ を げんりょう して、エコバッグ を つかいます。",
+   "gloss": "We reduce waste and use eco bags."
+  },
+  {
+   "id": "ja.sent.eco-transport",
+   "text": "じてんしゃ で かいしゃ まで いきます。",
+   "gloss": "I go to work by bicycle."
+  },
+  {
+   "id": "ja.sent.nature-protect",
+   "text": "しぜんほご の かつどう に さんか しました。",
+   "gloss": "I joined nature-protection activities."
+  },
+  {
+   "id": "ja.sent.wildlife-talk",
+   "text": "この ちほう の どうぶつ が へって います。",
+   "gloss": "The animals in this region are decreasing."
+  },
+  {
+   "id": "ja.sent.pollution-problem",
+   "text": "こうじょう の こうしょう が もんだい です。",
+   "gloss": "Factory emissions are a problem."
+  },
+  {
+   "id": "ja.sent.disaster-prep",
+   "text": "ぼうさいほうじ の かい で じゅんび を ならいました。",
+   "gloss": "At the disaster-preparedness meeting I learned preparation."
+  },
+  {
+   "id": "ja.sent.water-issue",
+   "text": "この ちほう の みずぶぶん が じゅうよう です。",
+   "gloss": "This region's water resources are important."
+  }
+ ]
+}

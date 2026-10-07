@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-127",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.society.kyosei",
+   "form": "きょうせい",
+   "reading": "きょうせい",
+   "gloss": "coexistence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.yuwa",
+   "form": "ゆわ",
+   "reading": "ゆわ",
+   "gloss": "harmony",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.boryuntia",
+   "form": "ぼりゅんてぃあ",
+   "reading": "ぼりゅんてぃあ",
+   "gloss": "volunteer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.fukushi",
+   "form": "ふくし",
+   "reading": "ふくし",
+   "gloss": "welfare",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.kankyou",
+   "form": "かんきょう",
+   "reading": "かんきょう",
+   "gloss": "environment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society.hatsuyaku",
+   "form": "はつやく",
+   "reading": "はつやく",
+   "gloss": "role",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.yuuutsu",
+   "form": "ゆううつ",
+   "reading": "ゆううつ",
+   "gloss": "worry",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.soudan",
+   "form": "そうだん",
+   "reading": "そうだん",
+   "gloss": "consultation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.kotsuu",
+   "form": "こうつう",
+   "reading": "こうつう",
+   "gloss": "traffic",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.chuga",
+   "form": "ちゅうが",
+   "reading": "ちゅうが",
+   "gloss": "congestion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.kouon",
+   "form": "こうおん",
+   "reading": "こうおん",
+   "gloss": "noise",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.seimen",
+   "form": "せいめん",
+   "reading": "せいめん",
+   "gloss": "petition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.shomei",
+   "form": "しょうめい",
+   "reading": "しょうめい",
+   "gloss": "signature",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.kyoutei",
+   "form": "きょうてい",
+   "reading": "きょうてい",
+   "gloss": "agreement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.seikyuu",
+   "form": "せいきゅう",
+   "reading": "せいきゅう",
+   "gloss": "request",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.seido",
+   "form": "せいど",
+   "reading": "せいど",
+   "gloss": "system",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.gyousei",
+   "form": "ぎょうせい",
+   "reading": "ぎょうせい",
+   "gloss": "administration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.kinmu",
+   "form": "きんむ",
+   "reading": "きんむ",
+   "gloss": "labor service",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.houchi",
+   "form": "ほうち",
+   "reading": "ほうち",
+   "gloss": "public order",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.hosei",
+   "form": "ほうせい",
+   "reading": "ほうせい",
+   "gloss": "legislation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.yakuin",
+   "form": "やくいん",
+   "reading": "やくいん",
+   "gloss": "public official",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.minshu",
+   "form": "みんしゅ",
+   "reading": "みんしゅ",
+   "gloss": "democracy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.kouho",
+   "form": "こうほ",
+   "reading": "こうほ",
+   "gloss": "candidate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.kensei",
+   "form": "けんせい",
+   "reading": "けんせい",
+   "gloss": "policy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.jumin",
+   "form": "じゅうみん",
+   "reading": "じゅうみん",
+   "gloss": "resident",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

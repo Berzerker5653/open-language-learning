@@ -803,9 +803,11 @@
     "SPEECH-007": {
       "status": "blocked",
       "attempts": 1,
-      "last_error": "no permissioned learner-speech calibration data or human labelers (owner decision required); infrastructure complete and fail-closed",
+      "last_error": "blocked on owner-supplied permissioned learner-speech data + qualified human labelers; calibration prep complete (frozen protocol v0.2.0, consent instrument, labeler rubric, sourcing decision, dataset template, runbook) — see SOURCING.md for what the owner must supply. 2026-10-06: user-selectable local speech models shipped (off default, ADR-0011); probe across tiny/base/small shows model size is NOT the pronunciation fix (contrast feature scores at align_conf 0.9 even on tiny) — calibration data is still the gate.",
       "evidence": [
-        "state/evidence/SPEECH-007/infra-blocked-2026-10-04.txt"
+        "state/evidence/SPEECH-007/infra-blocked-2026-10-04.txt",
+        "state/evidence/SPEECH-007/prep-2026-10-06.txt",
+        "state/evidence/SPEECH-007/probe-2026-10-06.txt"
       ]
     }
   },

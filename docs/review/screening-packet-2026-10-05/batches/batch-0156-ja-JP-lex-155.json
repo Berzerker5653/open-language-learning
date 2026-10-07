@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-155",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.work2.shouhou",
+   "form": "しょうほう",
+   "reading": "しょうほう",
+   "gloss": "proposal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.danmoku",
+   "form": "だんもく",
+   "reading": "だんもく",
+   "gloss": "silence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.gijiroku",
+   "form": "ぎじろく",
+   "reading": "ぎじろく",
+   "gloss": "meeting minutes",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.chousei",
+   "form": "ちょうせい",
+   "reading": "ちょうせい",
+   "gloss": "mediation; adjustment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.taishou",
+   "form": "たいしょう",
+   "reading": "たいしょう",
+   "gloss": "target; subject",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.mokuhyou",
+   "form": "もくひょう",
+   "reading": "もくひょう",
+   "gloss": "goal; target",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.shikumi",
+   "form": "しくみ",
+   "reading": "しくみ",
+   "gloss": "system; mechanism",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.kouryaku",
+   "form": "こうりゃく",
+   "reading": "こうりゃく",
+   "gloss": "strategy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.tantou",
+   "form": "たんとう",
+   "reading": "たんとう",
+   "gloss": "person in charge",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.haitatsu",
+   "form": "はいたつ",
+   "reading": "はいたつ",
+   "gloss": "delivery",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.shukka",
+   "form": "しゅっか",
+   "reading": "しゅっか",
+   "gloss": "shipping",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.nyuuka",
+   "form": "にゅうか",
+   "reading": "にゅうか",
+   "gloss": "receiving; intake",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.zaiko",
+   "form": "ざいこ",
+   "reading": "ざいこ",
+   "gloss": "inventory; stock",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.tanpin",
+   "form": "たんぴん",
+   "reading": "たんぴん",
+   "gloss": "shortage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.keiri",
+   "form": "けいり",
+   "reading": "けいり",
+   "gloss": "profit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.sonshitsu",
+   "form": "そんしつ",
+   "reading": "そんしつ",
+   "gloss": "loss",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.baibai",
+   "form": "ばいばい",
+   "reading": "ばいばい",
+   "gloss": "sales",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.chingin",
+   "form": "ちんぎん",
+   "reading": "ちんぎん",
+   "gloss": "wages",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.kokyaku",
+   "form": "こきゃく",
+   "reading": "こきゃく",
+   "gloss": "customer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.aite",
+   "form": "あいて",
+   "reading": "あいて",
+   "gloss": "counterpart",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.renkei",
+   "form": "れんけい",
+   "reading": "れんけい",
+   "gloss": "coordination; linkage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.kyoudou",
+   "form": "きょうどう",
+   "reading": "きょうどう",
+   "gloss": "collaboration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.jirei",
+   "form": "じれい",
+   "reading": "じれい",
+   "gloss": "example",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.hanrei",
+   "form": "はんれい",
+   "reading": "はんれい",
+   "gloss": "counterexample",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.teian",
+   "form": "ていあん",
+   "reading": "ていあん",
+   "gloss": "suggestion; proposal",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-16",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.critical2.narrativ",
+   "form": "нарратив",
+   "reading": "наррати́в",
+   "gloss": "narrative",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.kod",
+   "form": "код",
+   "reading": "код",
+   "gloss": "code",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.shifr",
+   "form": "шифр",
+   "reading": "шифр",
+   "gloss": "cipher",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.rebus",
+   "form": "ребус",
+   "reading": "ре́бус",
+   "gloss": "rebus",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.zagadka",
+   "form": "загадка",
+   "reading": "зага́дка",
+   "gloss": "riddle",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical2.razgadka",
+   "form": "разгадка",
+   "reading": "разга́дка",
+   "gloss": "solution, key",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical2.poslanie",
+   "form": "послание",
+   "reading": "посла́ние",
+   "gloss": "message, epistle",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical2.manifest",
+   "form": "манифест",
+   "reading": "манифе́ст",
+   "gloss": "manifesto",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.vozzvanie",
+   "form": "воззвание",
+   "reading": "воззва́ние",
+   "gloss": "appeal",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical2.lozung",
+   "form": "лозунг",
+   "reading": "ло́зунг",
+   "gloss": "slogan",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.anonimnyy",
+   "form": "анонимный",
+   "reading": "анони́мный",
+   "gloss": "anonymous",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical3.pervoistochnik",
+   "form": "первоисточник",
+   "reading": "первоисто́чник",
+   "gloss": "primary source",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.arhiv",
+   "form": "архив",
+   "reading": "архи́в",
+   "gloss": "archive",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.attestat",
+   "form": "аттестат",
+   "reading": "аттеста́т",
+   "gloss": "certificate",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.licenziya",
+   "form": "лицензия",
+   "reading": "лице́нзия",
+   "gloss": "license",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical3.patent",
+   "form": "патент",
+   "reading": "пате́нт",
+   "gloss": "patent",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.poddelka",
+   "form": "подделка",
+   "reading": "подде́лка",
+   "gloss": "forgery",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical3.podlog",
+   "form": "подлог",
+   "reading": "подло́г",
+   "gloss": "falsification (act)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.falsifikaciya",
+   "form": "фальсификация",
+   "reading": "фальсифика́ция",
+   "gloss": "falsification",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical3.sfabrikovat",
+   "form": "сфабриковать",
+   "reading": "сфабрикова́ть",
+   "gloss": "to fabricate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical3.fabrikaciya",
+   "form": "фабрикация",
+   "reading": "фабрика́ция",
+   "gloss": "fabrication",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical3.utka",
+   "form": "утка",
+   "reading": "у́тка",
+   "gloss": "hoax (rumor)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical3.vbros",
+   "form": "вброс",
+   "reading": "вбро́с",
+   "gloss": "plant (disinfo)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.fejk",
+   "form": "фейк",
+   "reading": "фе́йк",
+   "gloss": "fake",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.propaganda",
+   "form": "пропаганда",
+   "reading": "пропага́нда",
+   "gloss": "propaganda",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

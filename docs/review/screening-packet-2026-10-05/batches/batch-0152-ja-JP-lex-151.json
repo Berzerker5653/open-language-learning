@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-151",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.weather2.fuyu",
+   "form": "ふゆ",
+   "reading": "ふゆ",
+   "gloss": "winter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.tsuyu",
+   "form": "つゆ",
+   "reading": "つゆ",
+   "gloss": "rainy season",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.shimo",
+   "form": "しも",
+   "reading": "しも",
+   "gloss": "frost",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.kouri",
+   "form": "こおり",
+   "reading": "こおり",
+   "gloss": "ice",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.taifuu",
+   "form": "たいふう",
+   "reading": "たいふう",
+   "gloss": "typhoon",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.jishin",
+   "form": "じしん",
+   "reading": "じしん",
+   "gloss": "earthquake",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.kousui",
+   "form": "こうすい",
+   "reading": "こうすい",
+   "gloss": "flood",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.kiri",
+   "form": "きり",
+   "reading": "きり",
+   "gloss": "fog",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.ondo",
+   "form": "おんど",
+   "reading": "おんど",
+   "gloss": "temperature",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.shitsudo",
+   "form": "しつど",
+   "reading": "しつど",
+   "gloss": "humidity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.kiatsu",
+   "form": "きあつ",
+   "reading": "きあつ",
+   "gloss": "air pressure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.tenki-yohou",
+   "form": "てんきよほう",
+   "reading": "てんきよほう",
+   "gloss": "weather forecast",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.yohou",
+   "form": "よほう",
+   "reading": "よほう",
+   "gloss": "forecast",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.kishou",
+   "form": "きしょう",
+   "reading": "きしょう",
+   "gloss": "climate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.kisetsu",
+   "form": "きせつ",
+   "reading": "きせつ",
+   "gloss": "season",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.kijitsu",
+   "form": "きじつ",
+   "reading": "きじつ",
+   "gloss": "fair day",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.kaze-no-tsuyosa",
+   "form": "かぜのつよさ",
+   "reading": "かぜのつよさ",
+   "gloss": "wind strength",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.yuki-michi",
+   "form": "ゆきみち",
+   "reading": "ゆきみち",
+   "gloss": "snowy road",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.kasa",
+   "form": "かさ",
+   "reading": "かさ",
+   "gloss": "umbrella",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.teru-teru-bouzu",
+   "form": "てるてるぼうず",
+   "reading": "てるてるぼうず",
+   "gloss": "teru-teru-bouzu charm",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.yukidoke",
+   "form": "ゆきどけ",
+   "reading": "ゆきどけ",
+   "gloss": "snowmelt",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.amagasa",
+   "form": "あまがさ",
+   "reading": "あまがさ",
+   "gloss": "raincoat",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.sakura",
+   "form": "さくら",
+   "reading": "さくら",
+   "gloss": "cherry blossom",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.momiji",
+   "form": "もみじ",
+   "reading": "もみじ",
+   "gloss": "autumn leaves",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.hanabi",
+   "form": "はなび",
+   "reading": "はなび",
+   "gloss": "fireworks",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

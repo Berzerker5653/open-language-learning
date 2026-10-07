@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-71",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.health3.junren",
+   "form": "じゅんれん",
+   "reading": "じゅんれん",
+   "gloss": "practice",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.taikyu2",
+   "form": "たいきゅう",
+   "reading": "たいきゅう",
+   "gloss": "absence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.choushin",
+   "form": "ちょうしん",
+   "reading": "ちょうしん",
+   "gloss": "dieting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.appu",
+   "form": "アプリ",
+   "reading": "アプリ",
+   "gloss": "app",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.uebi",
+   "form": "うえび",
+   "reading": "うえび",
+   "gloss": "upper",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.ureba",
+   "form": "うれば",
+   "reading": "うれば",
+   "gloss": "lower",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.kenkou3",
+   "form": "けんこう",
+   "reading": "けんこう",
+   "gloss": "wellness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.byouin2",
+   "form": "びょういん",
+   "reading": "びょういん",
+   "gloss": "hospital",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.isya3",
+   "form": "いしゃ",
+   "reading": "いしゃ",
+   "gloss": "doctor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.fukushi2",
+   "form": "ふくし",
+   "reading": "ふくし",
+   "gloss": "welfare",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.touhyou2",
+   "form": "とうひょう",
+   "reading": "とうひょう",
+   "gloss": "vote",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.koukai2",
+   "form": "こうかい",
+   "reading": "こうかい",
+   "gloss": "public session",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.senkyo2",
+   "form": "せんきょ",
+   "reading": "せんきょ",
+   "gloss": "election",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.seido2",
+   "form": "せいど",
+   "reading": "せいど",
+   "gloss": "system",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.hanko",
+   "form": "はんこう",
+   "reading": "はんこう",
+   "gloss": "stamp",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.hankou",
+   "form": "はんこう",
+   "reading": "はんこう",
+   "gloss": "countering",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.koureisha",
+   "form": "こうれいしゃ",
+   "reading": "こうれいしゃ",
+   "gloss": "senior citizen",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.shiryou",
+   "form": "しりょう",
+   "reading": "しりょう",
+   "gloss": "source material, document",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.genbun",
+   "form": "げんぶん",
+   "reading": "げんぶん",
+   "gloss": "original text",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.shoko",
+   "form": "しょうこ",
+   "reading": "しょうこ",
+   "gloss": "evidence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.shogen",
+   "form": "しょうげん",
+   "reading": "しょうげん",
+   "gloss": "testimony",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.hakukutsu",
+   "form": "はくくつ",
+   "reading": "はくくつ",
+   "gloss": "excavation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.shakusha",
+   "form": "がくしゃ",
+   "reading": "がくしゃ",
+   "gloss": "scholar",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.kijutsu",
+   "form": "きじゅつ",
+   "reading": "きじゅつ",
+   "gloss": "description, account",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.kaishaku",
+   "form": "かいしゃく",
+   "reading": "かいしゃく",
+   "gloss": "interpretation",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

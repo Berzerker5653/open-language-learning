@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-29",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.culture.melodiya",
+   "form": "мелодия",
+   "reading": "мело́дия",
+   "gloss": "melody",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.culture.pevec",
+   "form": "певец",
+   "reading": "певе́ц",
+   "gloss": "singer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.stena2",
+   "form": "сцена",
+   "reading": "сце́на",
+   "gloss": "stage",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.culture.aktyor",
+   "form": "актёр",
+   "reading": "акте́р",
+   "gloss": "actor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.rezhisyor",
+   "form": "режиссёр",
+   "reading": "режиссе́р",
+   "gloss": "director",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.stsenarij",
+   "form": "сценарий",
+   "reading": "сцена́рий",
+   "gloss": "screenplay",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.syuzhet",
+   "form": "сюжет",
+   "reading": "сюже́т",
+   "gloss": "plot",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.rol",
+   "form": "роль",
+   "reading": "роль",
+   "gloss": "role",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.culture.zritel",
+   "form": "зритель",
+   "reading": "зри́тель",
+   "gloss": "audience member",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.publika",
+   "form": "публика",
+   "reading": "пу́блика",
+   "gloss": "audience",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.culture.aplodismenty",
+   "form": "аплодисменты",
+   "reading": "аплодисме́нты",
+   "gloss": "applause",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.culture.anshlag",
+   "form": "аншлаг",
+   "reading": "аншла́г",
+   "gloss": "sold-out",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.premjera",
+   "form": "премьера",
+   "reading": "премье́ра",
+   "gloss": "premiere",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.culture.festival",
+   "form": "фестиваль",
+   "reading": "фестива́ль",
+   "gloss": "festival",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.konkurs",
+   "form": "конкурс",
+   "reading": "ко́нкурс",
+   "gloss": "contest",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.priz",
+   "form": "приз",
+   "reading": "приз",
+   "gloss": "prize",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.pobeditel",
+   "form": "победитель",
+   "reading": "победи́тель",
+   "gloss": "winner",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.zhuri",
+   "form": "жюри",
+   "reading": "жюри́",
+   "gloss": "jury",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.culture.golosovanie",
+   "form": "голосование",
+   "reading": "голосова́ние",
+   "gloss": "voting",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.culture.reakciya",
+   "form": "реакция",
+   "reading": "реа́кция",
+   "gloss": "reaction",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.culture.retsenziya",
+   "form": "рецензия",
+   "reading": "реце́нзия",
+   "gloss": "review",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.culture.kritik",
+   "form": "критик",
+   "reading": "кри́тик",
+   "gloss": "critic",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.trogatelnyj",
+   "form": "трогательный",
+   "reading": "тро́гательный",
+   "gloss": "touching",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.culture.zapominayushchijsya",
+   "form": "запоминающийся",
+   "reading": "запомина́ющийся",
+   "gloss": "memorable",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.culture.shedeavr",
+   "form": "шедевр",
+   "reading": "шеде́вр",
+   "gloss": "masterpiece",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

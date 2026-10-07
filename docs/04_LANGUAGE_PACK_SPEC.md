@@ -144,6 +144,21 @@ Declare features the teaching system may care about:
 
 Not every feature needs automated scoring. Each feature declares whether it is `teach`, `assess-automatic`, `assess-guided`, or `reference-only`.
 
+### Production scoring targets (language-neutral)
+
+A `phonology/contrasts.jsonl` entry may carry an optional `production` block
+declaring the target the engine compares a spoken attempt against (e.g. a
+`voiced-duration-ratio` with an `expected_ratio`). The engine reads the declared
+number and **never infers the phonology itself** — mora counting, syllable
+weight, tone contours, etc. are the pack author's derivation, not engine logic.
+This is how every language supplies its own target: a Japanese author derives
+`expected_ratio` from mora counts (obaasan 5 / obasan 4 = 1.25); a Finnish or
+German author derives it from their language's own length phonology; a tone
+language would declare a different `measure`. Absent a `production` block, the
+feature cannot score production and falls back to a reference recording (or
+abstains). Declared targets are **uncalibrated** until SPEECH-007; they are
+guided-only and must not carry a calibrated/certified label.
+
 ## Lexicon
 
 Each lexical entry should support:

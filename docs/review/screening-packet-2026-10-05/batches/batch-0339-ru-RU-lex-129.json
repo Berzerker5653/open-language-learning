@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-129",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.style.dinamika",
+   "form": "динамика",
+   "reading": "дина́мика",
+   "gloss": "dynamics",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.statika",
+   "form": "статика",
+   "reading": "ста́тика",
+   "gloss": "statics",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.razryadka",
+   "form": "разрядка",
+   "reading": "разря́дка",
+   "gloss": "resolution, discharge",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.peripetiya",
+   "form": "перипетия",
+   "reading": "перипети́я",
+   "gloss": "peripeteia",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.zaostrenie",
+   "form": "заострение",
+   "reading": "заостре́ние",
+   "gloss": "sharpening",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.sglazhivanie",
+   "form": "сглаживание",
+   "reading": "сгла́живание",
+   "gloss": "smoothing",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.gladkost",
+   "form": "гладкость",
+   "reading": "гла́дкость",
+   "gloss": "smoothness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.plavnost",
+   "form": "плавность",
+   "reading": "пла́вность",
+   "gloss": "fluidity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.monotonnost",
+   "form": "монотонность",
+   "reading": "моното́нность",
+   "gloss": "monotony",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.odnoobrazie",
+   "form": "однообразие",
+   "reading": "однообра́зие",
+   "gloss": "monotony, uniformity",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.raznoobrazie",
+   "form": "разнообразие",
+   "reading": "разнообра́зие",
+   "gloss": "variety, diversity",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.nystykovka",
+   "form": "нестыковка",
+   "reading": "несты́ковка",
+   "gloss": "inconsistency, mismatch",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.neuvyazka",
+   "form": "неувязка",
+   "reading": "неувя́зка",
+   "gloss": "inconsistency, discrepancy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.nasloenie",
+   "form": "наслоение",
+   "reading": "наслое́ние",
+   "gloss": "layering, superposition",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.spletenie",
+   "form": "сплетение",
+   "reading": "сплете́ние",
+   "gloss": "weaving, braid",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.perepletenie",
+   "form": "переплетение",
+   "reading": "переплете́ние",
+   "gloss": "interweaving",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.kolorit",
+   "form": "колорит",
+   "reading": "колори́т",
+   "gloss": "coloring, local color",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.akcentirovanie",
+   "form": "акцентирование",
+   "reading": "акценти́рование",
+   "gloss": "accenting",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.intonirovanie",
+   "form": "интонирование",
+   "reading": "интони́рование",
+   "gloss": "intoning",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.otrivistost",
+   "form": "отрывистость",
+   "reading": "отры́вистость",
+   "gloss": "choppiness, abruptness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.belletnistika",
+   "form": "беллетристика",
+   "reading": "беллетри́стика",
+   "gloss": "belles-lettres",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.kupura",
+   "form": "купюра",
+   "reading": "купю́ра",
+   "gloss": "censorship cut",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.narashivanie",
+   "form": "наращивание",
+   "reading": "нара́щивание",
+   "gloss": "increment, buildup",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.parodiya",
+   "form": "пародия",
+   "reading": "паро́дия",
+   "gloss": "parody",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.sceplenie",
+   "form": "сцепление",
+   "reading": "сцепле́ние",
+   "gloss": "coupling, cohesion",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

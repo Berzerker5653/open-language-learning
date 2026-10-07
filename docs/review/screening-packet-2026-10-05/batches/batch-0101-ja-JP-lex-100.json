@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-100",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.objects.densha",
+   "form": "でんしゃ",
+   "reading": "でんしゃ",
+   "gloss": "train",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.objects.basu",
+   "form": "バス",
+   "reading": "バス",
+   "gloss": "bus",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.objects.hikouki",
+   "form": "ひこうき",
+   "reading": "ひこうき",
+   "gloss": "airplane",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.objects.tsukue",
+   "form": "つくえ",
+   "reading": "つくえ",
+   "gloss": "desk",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.objects.isu",
+   "form": "いす",
+   "reading": "いす",
+   "gloss": "chair",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.objects.tegami",
+   "form": "てがみ",
+   "reading": "てがみ",
+   "gloss": "letter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.objects.kami",
+   "form": "かみ",
+   "reading": "かみ",
+   "gloss": "paper",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.objects.shashin",
+   "form": "しゃしん",
+   "reading": "しゃしん",
+   "gloss": "photograph",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.objects.utsuwa",
+   "form": "うつわ",
+   "reading": "うつわ",
+   "gloss": "bowl; dish",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.objects.futon",
+   "form": "ふとん",
+   "reading": "ふとん",
+   "gloss": "futon; bedding",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.people.kazoku",
+   "form": "かぞく",
+   "reading": "かぞく",
+   "gloss": "family",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.people.chichi",
+   "form": "ちち",
+   "reading": "ちち",
+   "gloss": "my father (own-family term)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.people.haha",
+   "form": "はは",
+   "reading": "はは",
+   "gloss": "my mother (own-family term)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.people.ani",
+   "form": "あに",
+   "reading": "あに",
+   "gloss": "my older brother",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.people.ane",
+   "form": "あね",
+   "reading": "あね",
+   "gloss": "my older sister",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.people.otouto",
+   "form": "おとうと",
+   "reading": "おとうと",
+   "gloss": "my younger brother",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.people.imouto",
+   "form": "いもうと",
+   "reading": "いもうと",
+   "gloss": "my younger sister",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.people.musuko",
+   "form": "むすこ",
+   "reading": "むすこ",
+   "gloss": "my son",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.people.musume",
+   "form": "むすめ",
+   "reading": "むすめ",
+   "gloss": "my daughter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.people.gakusei",
+   "form": "がくせい",
+   "reading": "がくせい",
+   "gloss": "student",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.people.isha",
+   "form": "いしゃ",
+   "reading": "いしゃ",
+   "gloss": "doctor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.people.kyoushi",
+   "form": "きょうし",
+   "reading": "きょうし",
+   "gloss": "teacher (general term)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.people.shain",
+   "form": "しゃいん",
+   "reading": "しゃいん",
+   "gloss": "company employee",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.people.hitori",
+   "form": "ひとり",
+   "reading": "ひとり",
+   "gloss": "one person; alone",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.people.futari",
+   "form": "ふたり",
+   "reading": "ふたり",
+   "gloss": "two people",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

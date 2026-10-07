@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-110",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.soc.institutsionalnyy",
+   "form": "институциональный",
+   "reading": "институциона́льный",
+   "gloss": "institutional",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.soucastie",
+   "form": "соучастие",
+   "reading": "соуча́стие",
+   "gloss": "complicity",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.soucastnik",
+   "form": "соучастник",
+   "reading": "соуча́стник",
+   "gloss": "accomplice",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.bezotvetstvennost",
+   "form": "безответственность",
+   "reading": "безотве́тственность",
+   "gloss": "irresponsibility",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.bezotvetstvennyy",
+   "form": "безответственный",
+   "reading": "безотве́тственный",
+   "gloss": "irresponsible",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.samoupravlenie",
+   "form": "самоуправление",
+   "reading": "самоуправле́ние",
+   "gloss": "self-government",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.obshchina",
+   "form": "община",
+   "reading": "о́бщи́на",
+   "gloss": "community",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.samoorganizaciya",
+   "form": "самоорганизация",
+   "reading": "самоорганиза́ция",
+   "gloss": "self-organization",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.dobrovolets",
+   "form": "доброволец",
+   "reading": "доброво́лец",
+   "gloss": "volunteer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.blagotvoritelnost",
+   "form": "благотворительность",
+   "reading": "благотвори́тельность",
+   "gloss": "charity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.blagotvoritel",
+   "form": "благотворитель",
+   "reading": "благотвори́тель",
+   "gloss": "philanthropist",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.pozherstvovanie",
+   "form": "пожертвование",
+   "reading": "поже́ртвование",
+   "gloss": "donation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.pozherstvovat",
+   "form": "пожертвовать",
+   "reading": "поже́ртвовать",
+   "gloss": "to donate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.vznos",
+   "form": "взнос",
+   "reading": "взнос",
+   "gloss": "membership fee, contribution",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.chlenstvo",
+   "form": "членство",
+   "reading": "чле́нство",
+   "gloss": "membership",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.ryady",
+   "form": "ряды",
+   "reading": "ря́ды",
+   "gloss": "ranks",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.aktiv",
+   "form": "актив",
+   "reading": "акти́в",
+   "gloss": "activists, active core",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.ravnodushie",
+   "form": "равнодушие",
+   "reading": "равноду́шие",
+   "gloss": "indifference",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.ravnodushnyy",
+   "form": "равнодушный",
+   "reading": "равноду́шный",
+   "gloss": "indifferent",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.bezrazlichie",
+   "form": "безразличие",
+   "reading": "безразли́чие",
+   "gloss": "indifference",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.bezrazlichnyy",
+   "form": "безразличный",
+   "reading": "безразли́чный",
+   "gloss": "indifferent",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.prichastnost",
+   "form": "причастность",
+   "reading": "прича́стность",
+   "gloss": "implication",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.prichastnyy",
+   "form": "причастный",
+   "reading": "прича́стный",
+   "gloss": "implicated",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.yurisdikciya",
+   "form": "юрисдикция",
+   "reading": "юрисди́кция",
+   "gloss": "jurisdiction",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.glasnost",
+   "form": "гласность",
+   "reading": "гла́сность",
+   "gloss": "publicity, openness",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

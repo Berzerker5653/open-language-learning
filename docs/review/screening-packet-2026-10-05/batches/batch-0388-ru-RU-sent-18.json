@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-18",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b1.u305",
+   "text": "Это молчание.",
+   "gloss": "This is silence."
+  },
+  {
+   "id": "ru.sent.b1.u306",
+   "text": "Это примирение.",
+   "gloss": "This is reconciliation."
+  },
+  {
+   "id": "ru.sent.b1.u307",
+   "text": "Это улыбка.",
+   "gloss": "This is a smile."
+  },
+  {
+   "id": "ru.sent.b1.u308",
+   "text": "Это шутка.",
+   "gloss": "This is a joke."
+  },
+  {
+   "id": "ru.sent.b1.u309",
+   "text": "Это восторг.",
+   "gloss": "This is delight."
+  },
+  {
+   "id": "ru.sent.b1.u310",
+   "text": "Это фильм.",
+   "gloss": "This is a film."
+  },
+  {
+   "id": "ru.sent.b1.u311",
+   "text": "Это экспонат.",
+   "gloss": "This is an exhibit."
+  },
+  {
+   "id": "ru.sent.b1.u312",
+   "text": "Это картина.",
+   "gloss": "This is a painting."
+  },
+  {
+   "id": "ru.sent.b1.u313",
+   "text": "Это роман.",
+   "gloss": "This is a novel."
+  },
+  {
+   "id": "ru.sent.b1.u314",
+   "text": "Это поэт.",
+   "gloss": "This is a poet."
+  },
+  {
+   "id": "ru.sent.b1.u315",
+   "text": "Это сцена.",
+   "gloss": "This is a stage."
+  },
+  {
+   "id": "ru.sent.b1.u316",
+   "text": "Это премьера.",
+   "gloss": "This is a premiere."
+  },
+  {
+   "id": "ru.sent.b1.u317",
+   "text": "Это приз.",
+   "gloss": "This is a prize."
+  },
+  {
+   "id": "ru.sent.b1.u318",
+   "text": "Это рецензия.",
+   "gloss": "This is a review."
+  },
+  {
+   "id": "ru.sent.b1.u319",
+   "text": "Это оркестр.",
+   "gloss": "This is an orchestra."
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-149",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.travel2.rasstroitsya",
+   "form": "расстроиться",
+   "reading": "расстро́иться",
+   "gloss": "to be upset",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.zapomnitsya",
+   "form": "запомниться",
+   "reading": "запо́мниться",
+   "gloss": "to be remembered",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.nasledie",
+   "form": "наследие",
+   "reading": "насле́дие",
+   "gloss": "heritage, legacy",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.travel2.traditsiya",
+   "form": "традиция",
+   "reading": "тради́ция",
+   "gloss": "tradition",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel2.obychai",
+   "form": "обычай",
+   "reading": "обы́чай",
+   "gloss": "custom",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel2.kultura",
+   "form": "культура",
+   "reading": "культу́ра",
+   "gloss": "culture",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel2.yazyk",
+   "form": "язык",
+   "reading": "язы́к",
+   "gloss": "language",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel2.perevod",
+   "form": "перевод",
+   "reading": "перево́д",
+   "gloss": "translation",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel2.inostranets",
+   "form": "иностранец",
+   "reading": "иностра́нец",
+   "gloss": "foreigner",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel2.kruiz",
+   "form": "круиз",
+   "reading": "круи́з",
+   "gloss": "cruise",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel2.puteshestvennik",
+   "form": "путешественник",
+   "reading": "путеше́ственник",
+   "gloss": "traveler",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel2.puteshestvovat",
+   "form": "путешествовать",
+   "reading": "путеше́ствовать",
+   "gloss": "to travel",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.komandirovka",
+   "form": "командировка",
+   "reading": "командиро́вка",
+   "gloss": "business trip",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel2.kanikuly",
+   "form": "каникулы",
+   "reading": "кани́кулы",
+   "gloss": "holidays, vacation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.granitsa",
+   "form": "граница",
+   "reading": "грани́ца",
+   "gloss": "border",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel2.valyuta",
+   "form": "валюта",
+   "reading": "валю́та",
+   "gloss": "currency",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel2.kurs",
+   "form": "курс",
+   "reading": "курс",
+   "gloss": "exchange rate, course",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel2.bankomat",
+   "form": "банкомат",
+   "reading": "банкома́т",
+   "gloss": "ATM",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel2.pochta2",
+   "form": "почта",
+   "reading": "по́чта",
+   "gloss": "post, mail",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel2.vpechatleniya",
+   "form": "впечатления",
+   "reading": "впеча́тления",
+   "gloss": "impressions (pl)",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.travel2.urok",
+   "form": "урок",
+   "reading": "уро́к",
+   "gloss": "lesson",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel2.ponravilos",
+   "form": "понравилось",
+   "reading": "понра́вилось",
+   "gloss": "liked it",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.zabylos",
+   "form": "забылось",
+   "reading": "забы́лось",
+   "gloss": "was forgotten",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.zhalko",
+   "form": "жалко",
+   "reading": "жа́лко",
+   "gloss": "a pity, sorry",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.spasibo2",
+   "form": "спасибо",
+   "reading": "спаси́бо",
+   "gloss": "thank you",
+   "pos": "interjection",
+   "gender": ""
+  }
+ ]
+}

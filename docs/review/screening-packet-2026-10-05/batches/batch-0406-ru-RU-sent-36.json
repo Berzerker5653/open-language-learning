@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-36",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u575",
+   "text": "Это исходящий.",
+   "gloss": "This is an outgoing document."
+  },
+  {
+   "id": "ru.sent.b2.u576",
+   "text": "Это регистрация.",
+   "gloss": "This is registration."
+  },
+  {
+   "id": "ru.sent.b2.u577",
+   "text": "Это апостиль.",
+   "gloss": "This is an apostille."
+  },
+  {
+   "id": "ru.sent.b2.u578",
+   "text": "Это нотариус.",
+   "gloss": "This is a notary."
+  },
+  {
+   "id": "ru.sent.b2.u579",
+   "text": "Это указ.",
+   "gloss": "This is a decree."
+  },
+  {
+   "id": "ru.sent.b2.u580",
+   "text": "Это инвестиция.",
+   "gloss": "This is an investment."
+  },
+  {
+   "id": "ru.sent.b2.u581",
+   "text": "Это маржа.",
+   "gloss": "This is a margin."
+  },
+  {
+   "id": "ru.sent.b2.u582",
+   "text": "Это себестоимость.",
+   "gloss": "This is the cost price."
+  },
+  {
+   "id": "ru.sent.b2.u583",
+   "text": "Это дефицит.",
+   "gloss": "This is a deficit."
+  },
+  {
+   "id": "ru.sent.b2.u584",
+   "text": "Это кризис.",
+   "gloss": "This is a crisis."
+  },
+  {
+   "id": "ru.sent.b2.u585",
+   "text": "Это инфляция.",
+   "gloss": "This is inflation."
+  },
+  {
+   "id": "ru.sent.b2.u586",
+   "text": "Это аванс.",
+   "gloss": "This is an advance payment."
+  },
+  {
+   "id": "ru.sent.b2.u587",
+   "text": "Это грант.",
+   "gloss": "This is a grant."
+  },
+  {
+   "id": "ru.sent.b2.u588",
+   "text": "Это лизинг.",
+   "gloss": "This is leasing."
+  },
+  {
+   "id": "ru.sent.b2.u589",
+   "text": "Это налог.",
+   "gloss": "This is a tax."
+  }
+ ]
+}

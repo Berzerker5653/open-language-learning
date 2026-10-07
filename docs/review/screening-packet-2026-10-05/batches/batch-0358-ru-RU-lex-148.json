@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-148",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.travel2.ekskursiya",
+   "form": "экскурсия",
+   "reading": "экску́рсия",
+   "gloss": "excursion, tour",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel2.gid",
+   "form": "гид",
+   "reading": "гид",
+   "gloss": "guide",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel2.pamyatnik",
+   "form": "памятник",
+   "reading": "па́мятник",
+   "gloss": "monument",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel2.turist",
+   "form": "турист",
+   "reading": "тури́ст",
+   "gloss": "tourist",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel2.fotoografiya",
+   "form": "фотография",
+   "reading": "фотогра́фия",
+   "gloss": "photograph",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel2.foto",
+   "form": "фото",
+   "reading": "фо́то",
+   "gloss": "photo",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.travel2.karta",
+   "form": "карта",
+   "reading": "ка́рта",
+   "gloss": "map",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel2.navigator",
+   "form": "навигатор",
+   "reading": "навига́тор",
+   "gloss": "navigator, GPS",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel2.ukazatel",
+   "form": "указатель",
+   "reading": "указа́тель",
+   "gloss": "signpost, index",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel2.zabludit",
+   "form": "заблудиться",
+   "reading": "заблуди́ться",
+   "gloss": "to get lost",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.poteryatsya",
+   "form": "потеряться",
+   "reading": "потеря́ться",
+   "gloss": "to get lost, disappear",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.nayti",
+   "form": "найти",
+   "reading": "найти́",
+   "gloss": "to find",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.napravlenie",
+   "form": "направление",
+   "reading": "направле́ние",
+   "gloss": "direction",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.travel2.orientir",
+   "form": "ориентир",
+   "reading": "ориенти́р",
+   "gloss": "landmark, bearing",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel2.predupredit",
+   "form": "предупредить",
+   "reading": "предупреди́ть",
+   "gloss": "to warn",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.rekomendovat",
+   "form": "рекомендовать",
+   "reading": "рекомендова́ть",
+   "gloss": "to recommend",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.zabota",
+   "form": "забота",
+   "reading": "забо́та",
+   "gloss": "care, concern",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel2.nauchitsya",
+   "form": "научиться",
+   "reading": "научи́ться",
+   "gloss": "to learn (a skill)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.privyknut",
+   "form": "привыкнуть",
+   "reading": "привы́кнуть",
+   "gloss": "to get used to",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.spravitsya",
+   "form": "справиться",
+   "reading": "спра́виться",
+   "gloss": "to cope, manage",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.osvoitsya",
+   "form": "освоиться",
+   "reading": "осво́иться",
+   "gloss": "to settle in, get the hang of",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.preodolet",
+   "form": "преодолеть",
+   "reading": "преодоле́ть",
+   "gloss": "to overcome",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.udivitsya",
+   "form": "удивиться",
+   "reading": "удиви́ться",
+   "gloss": "to be surprised",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.razocharovatsya",
+   "form": "разочароваться",
+   "reading": "разочарова́ться",
+   "gloss": "to be disappointed",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel2.voshititsya",
+   "form": "восхититься",
+   "reading": "восхити́ться",
+   "gloss": "to be delighted",
+   "pos": "verb",
+   "gender": ""
+  }
+ ]
+}

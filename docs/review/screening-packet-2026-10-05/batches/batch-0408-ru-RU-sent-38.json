@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-38",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u605",
+   "text": "Это фриланс.",
+   "gloss": "This is freelance work."
+  },
+  {
+   "id": "ru.sent.b2.u606",
+   "text": "Это занятость.",
+   "gloss": "This is employment."
+  },
+  {
+   "id": "ru.sent.b2.u607",
+   "text": "Это рекрутинг.",
+   "gloss": "This is recruiting."
+  },
+  {
+   "id": "ru.sent.b2.u608",
+   "text": "Это бакалавр.",
+   "gloss": "This is a bachelor."
+  },
+  {
+   "id": "ru.sent.b2.u609",
+   "text": "Это коворкинг.",
+   "gloss": "This is a coworking space."
+  },
+  {
+   "id": "ru.sent.b2.u610",
+   "text": "Это ультиматум.",
+   "gloss": "This is an ultimatum."
+  },
+  {
+   "id": "ru.sent.b2.u611",
+   "text": "Это уговор.",
+   "gloss": "This is a persuasion."
+  },
+  {
+   "id": "ru.sent.b2.u612",
+   "text": "Это мягкость.",
+   "gloss": "This is softness."
+  },
+  {
+   "id": "ru.sent.b2.u613",
+   "text": "Это отпор.",
+   "gloss": "This is active resistance."
+  },
+  {
+   "id": "ru.sent.b2.u614",
+   "text": "Это уступчивость.",
+   "gloss": "This is compliance."
+  },
+  {
+   "id": "ru.sent.b2.u615",
+   "text": "Это настойчивость.",
+   "gloss": "This is persistence."
+  },
+  {
+   "id": "ru.sent.b2.u616",
+   "text": "Это выговор.",
+   "gloss": "This is a reprimand."
+  },
+  {
+   "id": "ru.sent.b2.u617",
+   "text": "Это корректность.",
+   "gloss": "This is correctness."
+  },
+  {
+   "id": "ru.sent.b2.u618",
+   "text": "Это приличие.",
+   "gloss": "This is decency."
+  },
+  {
+   "id": "ru.sent.b2.u619",
+   "text": "Это противодействие.",
+   "gloss": "This is resistance."
+  }
+ ]
+}

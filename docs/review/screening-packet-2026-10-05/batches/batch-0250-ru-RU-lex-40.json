@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-40",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.future.predvidet",
+   "form": "предвидеть",
+   "reading": "предви́деть",
+   "gloss": "to foresee",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.predpolagat",
+   "form": "предполагать",
+   "reading": "предполага́ть",
+   "gloss": "to assume",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.dopuskat",
+   "form": "допускать",
+   "reading": "допуска́ть",
+   "gloss": "to admit",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.dobivatsya",
+   "form": "добиваться",
+   "reading": "добива́ться",
+   "gloss": "to achieve",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.prepyatstvovat",
+   "form": "препятствовать",
+   "reading": "препя́тствовать",
+   "gloss": "to hinder",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.pregrada",
+   "form": "преграда",
+   "reading": "прегра́да",
+   "gloss": "barrier",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future.zatrudnenie",
+   "form": "затруднение",
+   "reading": "затрудне́ние",
+   "gloss": "difficulty",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future.byudzhet",
+   "form": "бюджет",
+   "reading": "бюдже́т",
+   "gloss": "budget",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.future.smeta",
+   "form": "смета",
+   "reading": "сме́та",
+   "gloss": "estimate",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future.reshimost",
+   "form": "решимость",
+   "reading": "реши́мость",
+   "gloss": "determination",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future.neterpenie",
+   "form": "нетерпение",
+   "reading": "нетерпе́ние",
+   "gloss": "impatience",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future.opasenie",
+   "form": "опасение",
+   "reading": "опасе́ние",
+   "gloss": "apprehension",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future.opasnost",
+   "form": "опасность",
+   "reading": "опа́сность",
+   "gloss": "danger",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future.ugroza",
+   "form": "угроза",
+   "reading": "угро́за",
+   "gloss": "threat",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future.rasplata",
+   "form": "расплата",
+   "reading": "распла́та",
+   "gloss": "retribution",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future.dolya",
+   "form": "доля",
+   "reading": "до́ля",
+   "gloss": "share",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future.celoe",
+   "form": "целое",
+   "reading": "це́лое",
+   "gloss": "whole",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future.predskazanie",
+   "form": "предсказание",
+   "reading": "предсказа́ние",
+   "gloss": "prediction",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future.predvidenie",
+   "form": "предвидение",
+   "reading": "предви́дение",
+   "gloss": "foresight",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future.stanet",
+   "form": "станет",
+   "reading": "ста́нет",
+   "gloss": "will become",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future2.predstav",
+   "form": "представь",
+   "reading": "предста́вь",
+   "gloss": "imagine",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future2.voobraz",
+   "form": "вообрази",
+   "reading": "вообрази́",
+   "gloss": "imagine",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future2.fantaziya",
+   "form": "фантазия",
+   "reading": "фанта́зия",
+   "gloss": "fantasy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future2.vymysel",
+   "form": "вымысел",
+   "reading": "вы́мысел",
+   "gloss": "fiction",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.future2.illyuziya",
+   "form": "иллюзия",
+   "reading": "иллю́зия",
+   "gloss": "illusion",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

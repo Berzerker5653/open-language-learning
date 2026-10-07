@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-17",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.critical3.agitaciya",
+   "form": "агитация",
+   "reading": "агита́ция",
+   "gloss": "agitation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical3.kontent",
+   "form": "контент",
+   "reading": "конте́нт",
+   "gloss": "content",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.media",
+   "form": "медиа",
+   "reading": "ме́диа",
+   "gloss": "media",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical3.pressa",
+   "form": "пресса",
+   "reading": "пре́сса",
+   "gloss": "press",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical3.veshchanie",
+   "form": "вещание",
+   "reading": "веща́ние",
+   "gloss": "broadcasting",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical3.translyaciya",
+   "form": "трансляция",
+   "reading": "трансля́ция",
+   "gloss": "broadcast",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical3.efir",
+   "form": "эфир",
+   "reading": "эфи́р",
+   "gloss": "air, broadcast",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.redaktura",
+   "form": "редактура",
+   "reading": "редакту́ра",
+   "gloss": "editing (process)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical3.verifikaciya",
+   "form": "верификация",
+   "reading": "верифика́ция",
+   "gloss": "verification",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical3.validaciya",
+   "form": "валидация",
+   "reading": "валида́ция",
+   "gloss": "validation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical3.akkreditaciya",
+   "form": "аккредитация",
+   "reading": "аккредита́ция",
+   "gloss": "accreditation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical3.legitimnost",
+   "form": "легитимность",
+   "reading": "легити́мность",
+   "gloss": "legitimacy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical3.polnomochie",
+   "form": "полномочие",
+   "reading": "полномо́чие",
+   "gloss": "authority, power",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical3.mandat",
+   "form": "мандат",
+   "reading": "манда́т",
+   "gloss": "mandate",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.veshchdok",
+   "form": "вещдок",
+   "reading": "вещдо́к",
+   "gloss": "physical evidence",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.poterpevshiy",
+   "form": "потерпевший",
+   "reading": "потерпе́вший",
+   "gloss": "victim",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical3.podozrevaemyy",
+   "form": "подозреваемый",
+   "reading": "подозрева́емый",
+   "gloss": "suspect",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical3.obvinyaemyy",
+   "form": "обвиняемый",
+   "reading": "обвиня́емый",
+   "gloss": "defendant",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical3.istec",
+   "form": "истец",
+   "reading": "исте́ц",
+   "gloss": "plaintiff",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.otvetchik",
+   "form": "ответчик",
+   "reading": "отве́тчик",
+   "gloss": "defendant (civil)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.isk",
+   "form": "иск",
+   "reading": "иск",
+   "gloss": "lawsuit",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.arbitrazh",
+   "form": "арбитраж",
+   "reading": "арбитра́ж",
+   "gloss": "arbitration",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.tribunal",
+   "form": "трибунал",
+   "reading": "трибуна́л",
+   "gloss": "tribunal",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.konvenciya",
+   "form": "конвенция",
+   "reading": "конве́нция",
+   "gloss": "convention",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical3.ustav",
+   "form": "устав",
+   "reading": "уста́в",
+   "gloss": "charter, statute",
+   "pos": "adverb",
+   "gender": ""
+  }
+ ]
+}

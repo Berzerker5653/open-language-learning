@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-21",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.critique.seshon",
+   "form": "せしょん",
+   "reading": "せしょん",
+   "gloss": "session",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.shinrigaku",
+   "form": "しんりがく",
+   "reading": "しんりがく",
+   "gloss": "psychology",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.kokoro",
+   "form": "こころ",
+   "reading": "こころ",
+   "gloss": "heart, mind",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.nouryoku",
+   "form": "のうりょく",
+   "reading": "のうりょく",
+   "gloss": "ability, intellect",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.kioku",
+   "form": "きおく",
+   "reading": "きおく",
+   "gloss": "memory",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.shinrou",
+   "form": "しんろう",
+   "reading": "しんろう",
+   "gloss": "fatigue, tiredness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.suiryoku",
+   "form": "すいりょく",
+   "reading": "すいりょく",
+   "gloss": "sleep",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.yume",
+   "form": "ゆめ",
+   "reading": "ゆめ",
+   "gloss": "dream",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.kanjou",
+   "form": "かんじょう",
+   "reading": "かんじょう",
+   "gloss": "emotion, feeling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.mushiki",
+   "form": "むしき",
+   "reading": "むしき",
+   "gloss": "unconsciousness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.shinji",
+   "form": "しんじ",
+   "reading": "しんじ",
+   "gloss": "belief, faith",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.kakushin",
+   "form": "かくしん",
+   "reading": "かくしん",
+   "gloss": "revolution, reform",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.jiko",
+   "form": "じこ",
+   "reading": "じこ",
+   "gloss": "self, ego",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.kankei3",
+   "form": "かんけい",
+   "reading": "かんけい",
+   "gloss": "relationship",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.taido",
+   "form": "たいど",
+   "reading": "たいど",
+   "gloss": "attitude",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.seikaku2",
+   "form": "せいかく",
+   "reading": "せいかく",
+   "gloss": "personality, character",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.koui",
+   "form": "こうい",
+   "reading": "こうい",
+   "gloss": "behavior, action",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.doushutsu",
+   "form": "どうしゅつ",
+   "reading": "どうしゅつ",
+   "gloss": "impulse, emission",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.shukan",
+   "form": "しゅかん",
+   "reading": "しゅかん",
+   "gloss": "habit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.seichou",
+   "form": "せいちょう",
+   "reading": "せいちょう",
+   "gloss": "growth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.hatten4",
+   "form": "はってん",
+   "reading": "はってん",
+   "gloss": "development",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.kyouiku2",
+   "form": "きょういく",
+   "reading": "きょういく",
+   "gloss": "education",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.torainingu",
+   "form": "とれーにんぐ",
+   "reading": "とれーにんぐ",
+   "gloss": "training",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.senryou",
+   "form": "せんりょう",
+   "reading": "せんりょう",
+   "gloss": "measurement, test",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.chi",
+   "form": "ち",
+   "reading": "ち",
+   "gloss": "intelligence, wisdom",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-113",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.soc.demagog",
+   "form": "демагог",
+   "reading": "демаго́г",
+   "gloss": "demagogue",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.populistkiy",
+   "form": "популистский",
+   "reading": "попули́стский",
+   "gloss": "populist",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.ritoricheskiy",
+   "form": "риторический",
+   "reading": "ритори́ческий",
+   "gloss": "rhetorical",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.polemicheskiy",
+   "form": "полемический",
+   "reading": "полеми́ческий",
+   "gloss": "polemical",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.beskompromissnyy",
+   "form": "бескомпромиссный",
+   "reading": "бескомпроми́ссный",
+   "gloss": "uncompromising",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.primirimyy",
+   "form": "примиримый",
+   "reading": "прими́римый",
+   "gloss": "reconcilable",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.neprimirimosost",
+   "form": "непримиримость",
+   "reading": "непримири́мость",
+   "gloss": "intransigence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.polutona",
+   "form": "полутона",
+   "reading": "полуто́на",
+   "gloss": "half-tones, nuances",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.nepredzyatyy",
+   "form": "непредвзятый",
+   "reading": "непредвзя́тый",
+   "gloss": "unprejudiced, unbiased",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.pristrastnost",
+   "form": "пристрастность",
+   "reading": "пристра́стность",
+   "gloss": "partiality, bias",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.pristrastnyy",
+   "form": "пристрастный",
+   "reading": "пристра́стный",
+   "gloss": "partial, biased",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.vzveshennost",
+   "form": "взвешенность",
+   "reading": "взве́шенность",
+   "gloss": "balance, deliberateness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.samokritika",
+   "form": "самокритика",
+   "reading": "самокри́тика",
+   "gloss": "self-criticism",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.analiticheskiy",
+   "form": "аналитический",
+   "reading": "аналити́ческий",
+   "gloss": "analytical",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.razbor",
+   "form": "разбор",
+   "reading": "разбо́р",
+   "gloss": "analysis, review",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.kontrargumentaciya",
+   "form": "контраргументация",
+   "reading": "контраргумента́ция",
+   "gloss": "counter-argumentation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.faktologiya",
+   "form": "фактология",
+   "reading": "фактоло́гия",
+   "gloss": "fact base",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.podtasovka",
+   "form": "подтасовка",
+   "reading": "подтасо́вка",
+   "gloss": "falsification, rigging",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.podtasovat",
+   "form": "подтасовать",
+   "reading": "подтасова́ть",
+   "gloss": "to falsify, rig",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.manipulyativnyy",
+   "form": "манипулятивный",
+   "reading": "манипуля́тивный",
+   "gloss": "manipulative",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.navazyvanie",
+   "form": "навязывание",
+   "reading": "навя́зывание",
+   "gloss": "imposing, pushing",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.navazchivost",
+   "form": "навязчивость",
+   "reading": "навя́зчивость",
+   "gloss": "obsessiveness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.nasmeshlivyy",
+   "form": "насмешливый",
+   "reading": "насме́шливый",
+   "gloss": "mocking",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.yazvitelnyy",
+   "form": "язвительный",
+   "reading": "язви́тельный",
+   "gloss": "caustic, biting",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.yazvitelnost",
+   "form": "язвительность",
+   "reading": "язви́тельность",
+   "gloss": "causticity",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

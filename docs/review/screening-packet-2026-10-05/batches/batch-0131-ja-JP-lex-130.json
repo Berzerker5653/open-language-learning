@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-130",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.society3.nyuugaku",
+   "form": "にゅうがく",
+   "reading": "にゅうがく",
+   "gloss": "school admission",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.jugyou",
+   "form": "じゅぎょう",
+   "reading": "じゅぎょう",
+   "gloss": "class, lesson",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.senmon",
+   "form": "せんもん",
+   "reading": "せんもん",
+   "gloss": "expertise",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.jitsugyou",
+   "form": "じつぎょう",
+   "reading": "じつぎょう",
+   "gloss": "practical",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.toshi",
+   "form": "とし",
+   "reading": "とし",
+   "gloss": "city",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.inaka",
+   "form": "いなか",
+   "reading": "いなか",
+   "gloss": "countryside",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.kensetsu",
+   "form": "けんせつ",
+   "reading": "けんせつ",
+   "gloss": "construction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.iju",
+   "form": "いきょ",
+   "reading": "いきょ",
+   "gloss": "relocation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.ikei",
+   "form": "いけい",
+   "reading": "いけい",
+   "gloss": "shift",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.henkou",
+   "form": "へんこう",
+   "reading": "へんこう",
+   "gloss": "change",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.danjyo",
+   "form": "だんじょ",
+   "reading": "だんじょ",
+   "gloss": "gender",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.heikin",
+   "form": "へいきん",
+   "reading": "へいきん",
+   "gloss": "average",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.wari",
+   "form": "わり",
+   "reading": "わり",
+   "gloss": "ratio, percentage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.toukei",
+   "form": "とうけい",
+   "reading": "とうけい",
+   "gloss": "statistics",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.sanka",
+   "form": "さんか",
+   "reading": "さんか",
+   "gloss": "participation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.komei",
+   "form": "こうめい",
+   "reading": "こうめい",
+   "gloss": "public",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.hoken",
+   "form": "ほけん",
+   "reading": "ほけん",
+   "gloss": "insurance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.nenkin",
+   "form": "ねんきん",
+   "reading": "ねんきん",
+   "gloss": "pension",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.zei",
+   "form": "ぜい",
+   "reading": "ぜい",
+   "gloss": "tax",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.fukushi",
+   "form": "ふくし",
+   "reading": "ふくし",
+   "gloss": "welfare",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.boushi",
+   "form": "ぼうし",
+   "reading": "ぼうし",
+   "gloss": "prevention",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.keieki",
+   "form": "けいえき",
+   "reading": "けいえき",
+   "gloss": "management",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.kigyo",
+   "form": "きぎょう",
+   "reading": "きぎょう",
+   "gloss": "business, company",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.hataraki",
+   "form": "はたらき",
+   "reading": "はたらき",
+   "gloss": "way of working",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.taido",
+   "form": "たいど",
+   "reading": "たいど",
+   "gloss": "attitude",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

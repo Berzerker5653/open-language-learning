@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-50",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.learning.konspekt",
+   "form": "конспект",
+   "reading": "конспе́кт",
+   "gloss": "notes, outline",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.learning.povtorenie",
+   "form": "повторение",
+   "reading": "повторе́ние",
+   "gloss": "repetition",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.learning.slovar",
+   "form": "словарь",
+   "reading": "слова́рь",
+   "gloss": "dictionary",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.learning.grammatika",
+   "form": "грамматика",
+   "reading": "грамма́тика",
+   "gloss": "grammar",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.learning.proiznoshenie",
+   "form": "произношение",
+   "reading": "произноше́ние",
+   "gloss": "pronunciation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.learning.fraza",
+   "form": "фраза",
+   "reading": "фра́за",
+   "gloss": "phrase",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.learning.kniga",
+   "form": "книга",
+   "reading": "кни́га",
+   "gloss": "book",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.learning.tetrad",
+   "form": "тетрадь",
+   "reading": "тетра́дь",
+   "gloss": "notebook",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.learning.stranitsa",
+   "form": "страница",
+   "reading": "страни́ца",
+   "gloss": "page",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.learning.zanyatie",
+   "form": "занятие",
+   "reading": "заня́тие",
+   "gloss": "class, session",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.learning.ekzamen",
+   "form": "экзамен",
+   "reading": "экза́мен",
+   "gloss": "exam",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.learning.otsenka",
+   "form": "оценка",
+   "reading": "оце́нка",
+   "gloss": "grade, estimate",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.learning.ball",
+   "form": "балл",
+   "reading": "балл",
+   "gloss": "point, grade",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.learning.ponyatie",
+   "form": "понятие",
+   "reading": "поня́тие",
+   "gloss": "concept",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.learning.karera",
+   "form": "карьера",
+   "reading": "карье́ра",
+   "gloss": "career",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.learning.vakansiya",
+   "form": "вакансия",
+   "reading": "вака́нсия",
+   "gloss": "job opening",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.learning.sobesedovanie",
+   "form": "собеседование",
+   "reading": "собесе́дование",
+   "gloss": "interview",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.learning.rezume",
+   "form": "резюме",
+   "reading": "резюме́",
+   "gloss": "CV, resume",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.learning.motivatsiya",
+   "form": "мотивация",
+   "reading": "мотива́ция",
+   "gloss": "motivation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.learning.interes",
+   "form": "интерес",
+   "reading": "интере́с",
+   "gloss": "interest",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.learning.spokoystvie",
+   "form": "спокойствие",
+   "reading": "споко́йствие",
+   "gloss": "calm",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.learning.sila",
+   "form": "сила",
+   "reading": "си́ла",
+   "gloss": "strength",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.learning.usilie",
+   "form": "усилие",
+   "reading": "уси́лие",
+   "gloss": "effort",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.learning.nagrada",
+   "form": "награда",
+   "reading": "награ́да",
+   "gloss": "award",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.learning.vyigrysh",
+   "form": "выигрыш",
+   "reading": "вы́игрыш",
+   "gloss": "win",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

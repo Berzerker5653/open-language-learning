@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-36",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.motivation-theory",
+   "text": "どうき の じっけん を べんきょう しました。",
+   "gloss": "I studied the motivation experiment."
+  },
+  {
+   "id": "ja.sent.personality-psychology",
+   "text": "こせい の ちがい を ぎろん しました。",
+   "gloss": "We discussed differences in individuality."
+  },
+  {
+   "id": "ja.sent.development-stages",
+   "text": "はっせい の き の しんちょう を はなしました。",
+   "gloss": "We talked about growth in adolescence."
+  },
+  {
+   "id": "ja.sent.social-psychology",
+   "text": "しゅうこう の けんきゅう を よみました。",
+   "gloss": "I read a study on conformity."
+  },
+  {
+   "id": "ja.sent.emotion-theory",
+   "text": "きぶん と ふあん の かんけい を はなしました。",
+   "gloss": "We talked about the link between mood and anxiety."
+  },
+  {
+   "id": "ja.sent.wellbeing-research",
+   "text": "しあわせ の けんきゅう に きょうみ が あります。",
+   "gloss": "I am interested in happiness research."
+  },
+  {
+   "id": "ja.sent.behavior-change",
+   "text": "こうどう を かえる ほうほう を べんきょう しました。",
+   "gloss": "I studied ways to change behavior."
+  },
+  {
+   "id": "ja.sent.language-and-mind",
+   "text": "ことば と しこう の かんけい を べんきょう しました。",
+   "gloss": "I studied the relationship between language and thought."
+  },
+  {
+   "id": "ja.sent.decision-science",
+   "text": "けってい の じっけん を べんきょう しました。",
+   "gloss": "I studied the decision experiment."
+  },
+  {
+   "id": "ja.sent.mental-health-policy",
+   "text": "ほうけん の せいど を ぎろん しました。",
+   "gloss": "We discussed the insurance system."
+  },
+  {
+   "id": "ja.sent.public-health",
+   "text": "えいせい の かつどう を おこないました。",
+   "gloss": "We carried out a public-health activity."
+  },
+  {
+   "id": "ja.sent.epidemiology-basics",
+   "text": "かんせん の ちょうさ を おこないました。",
+   "gloss": "We conducted an infection survey."
+  },
+  {
+   "id": "ja.sent.healthcare-systems",
+   "text": "びょういん の かんり について はなしました。",
+   "gloss": "We talked about hospital management."
+  },
+  {
+   "id": "ja.sent.preventive-medicine",
+   "text": "けんこう の ために うんどう を しました。",
+   "gloss": "I exercised for health."
+  },
+  {
+   "id": "ja.sent.patient-communication",
+   "text": "しんりょう の せつめい を ききました。",
+   "gloss": "I listened to the consultation explanation."
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-128",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.style.dublirovanie",
+   "form": "дублирование",
+   "reading": "дубли́рование",
+   "gloss": "duplication",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.izbytochnost",
+   "form": "избыточность",
+   "reading": "избы́точность",
+   "gloss": "redundancy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.vstavka",
+   "form": "вставка",
+   "reading": "вста́вка",
+   "gloss": "insertion",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.otstuplenie",
+   "form": "отступление",
+   "reading": "отступле́ние",
+   "gloss": "digression",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.ekskurs",
+   "form": "экскурс",
+   "reading": "э́кскурс",
+   "gloss": "excursion",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.anafora",
+   "form": "анафора",
+   "reading": "ана́фора",
+   "gloss": "anaphora",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.katafora",
+   "form": "катафора",
+   "reading": "ката́фора",
+   "gloss": "cataphora",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.ellipsis",
+   "form": "эллипсис",
+   "reading": "э́ллипсис",
+   "gloss": "ellipsis",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.parallelizm",
+   "form": "параллелизм",
+   "reading": "параллели́зм",
+   "gloss": "parallelism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.antiteza",
+   "form": "антитеза",
+   "reading": "антите́за",
+   "gloss": "antithesis",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.sochlenenie",
+   "form": "сочленение",
+   "reading": "сочлене́ние",
+   "gloss": "articulation, joint",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.nepreryvnost",
+   "form": "непрерывность",
+   "reading": "непреры́вность",
+   "gloss": "continuity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.emfaza",
+   "form": "эмфаза",
+   "reading": "эмфа́за",
+   "gloss": "emphasis",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.relefmost",
+   "form": "рельефность",
+   "reading": "релье́фность",
+   "gloss": "relief, definition",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.vypuklost",
+   "form": "выпуклость",
+   "reading": "вы́пуклость",
+   "gloss": "prominence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.rema",
+   "form": "рема",
+   "reading": "ре́ма",
+   "gloss": "rheme",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.obosoblenie",
+   "form": "обособление",
+   "reading": "обособле́ние",
+   "gloss": "isolation, set-off",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.modulyaciya",
+   "form": "модуляция",
+   "reading": "модуля́ция",
+   "gloss": "modulation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.ritmika",
+   "form": "ритмика",
+   "reading": "ри́тмика",
+   "gloss": "rhythmics",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.kadenciya",
+   "form": "каденция",
+   "reading": "каде́нция",
+   "gloss": "cadence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.cezura",
+   "form": "цезура",
+   "reading": "цезу́ра",
+   "gloss": "caesura",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.scepka",
+   "form": "сцепка",
+   "reading": "сце́пка",
+   "gloss": "link, hitch",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.tkan",
+   "form": "ткань",
+   "reading": "ткань",
+   "gloss": "fabric, texture",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.uzor",
+   "form": "узор",
+   "reading": "узо́р",
+   "gloss": "pattern",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.ornament",
+   "form": "орнамент",
+   "reading": "орна́мент",
+   "gloss": "ornament",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

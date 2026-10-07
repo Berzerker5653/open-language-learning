@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-141",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.synthesis3.soratnik",
+   "form": "соратник",
+   "reading": "сора́тник",
+   "gloss": "comrade, ally",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.neprimirimyy",
+   "form": "непримиримый",
+   "reading": "непримири́мый",
+   "gloss": "intransigent",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis3.peremirie",
+   "form": "перемирие",
+   "reading": "переми́рие",
+   "gloss": "truce",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis3.posrednik",
+   "form": "посредник",
+   "reading": "посре́дник",
+   "gloss": "intermediary",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.sudya",
+   "form": "судья",
+   "reading": "судья́",
+   "gloss": "judge",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis3.arbitr",
+   "form": "арбитр",
+   "reading": "арби́тр",
+   "gloss": "arbiter",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.ekspert",
+   "form": "эксперт",
+   "reading": "экспе́рт",
+   "gloss": "expert",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.otsenchik",
+   "form": "оценщик",
+   "reading": "оце́нщик",
+   "gloss": "appraiser",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.auditor",
+   "form": "аудитор",
+   "reading": "ауди́тор",
+   "gloss": "auditor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.revizor",
+   "form": "ревизор",
+   "reading": "ревизо́р",
+   "gloss": "inspector",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.inspektor",
+   "form": "инспектор",
+   "reading": "инспе́ктор",
+   "gloss": "inspector",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.kontroljor",
+   "form": "контролёр",
+   "reading": "контроле́р",
+   "gloss": "controller",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.razgranichenie",
+   "form": "разграничение",
+   "reading": "разграниче́ние",
+   "gloss": "demarcation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis3.razdelenie",
+   "form": "разделение",
+   "reading": "разделе́ние",
+   "gloss": "separation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis3.razryv",
+   "form": "разрыв",
+   "reading": "разры́в",
+   "gloss": "break, gap",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.antagonist",
+   "form": "антагонист",
+   "reading": "антагони́ст",
+   "gloss": "antagonist",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.opoziciya",
+   "form": "оппозиция",
+   "reading": "оппози́ция",
+   "gloss": "opposition",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis3.opozicionnyy",
+   "form": "оппозиционный",
+   "reading": "оппозицио́нный",
+   "gloss": "oppositional",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis3.pollemist",
+   "form": "полемист",
+   "reading": "полеми́ст",
+   "gloss": "polemicist",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.kontrapunkt",
+   "form": "контрапункт",
+   "reading": "контрапу́нкт",
+   "gloss": "counterpoint",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.ednoborstvo",
+   "form": "единоборство",
+   "reading": "единобо́рство",
+   "gloss": "single combat",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis3.poedynok",
+   "form": "поединок",
+   "reading": "поеди́нок",
+   "gloss": "duel",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.skhvatka",
+   "form": "схватка",
+   "reading": "схва́тка",
+   "gloss": "skirmish",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis3.sostyazanie",
+   "form": "состязание",
+   "reading": "состяза́ние",
+   "gloss": "contest",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis3.turnir",
+   "form": "турнир",
+   "reading": "турни́р",
+   "gloss": "tournament",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

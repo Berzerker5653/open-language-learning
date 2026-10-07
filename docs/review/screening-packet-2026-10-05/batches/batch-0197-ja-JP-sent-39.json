@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-39",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.sustainable-business",
+   "text": "ぎじゅつ の ゆうえき を ぎろん しました。",
+   "gloss": "We discussed the benefits of technology."
+  },
+  {
+   "id": "ja.sent.consumption-debate",
+   "text": "しょうひ の もんだい を べんきょう しました。",
+   "gloss": "I studied the consumption problem."
+  },
+  {
+   "id": "ja.sent.language-structure",
+   "text": "ぶんぽう の べんきょう を しました。",
+   "gloss": "I studied grammar."
+  },
+  {
+   "id": "ja.sent.word-formation",
+   "text": "ご の せいぞう を べんきょう しました。",
+   "gloss": "I studied word formation."
+  },
+  {
+   "id": "ja.sent.sentence-variation",
+   "text": "ぶん の かんけい を べんきょう しました。",
+   "gloss": "I studied sentence relations."
+  },
+  {
+   "id": "ja.sent.meaning-context",
+   "text": "ぶんみゃく の だい について はなしました。",
+   "gloss": "We talked about the role of context."
+  },
+  {
+   "id": "ja.sent.pragmatics-politeness",
+   "text": "けいご の べんきょう を しました。",
+   "gloss": "I studied honorific language."
+  },
+  {
+   "id": "ja.sent.language-change",
+   "text": "ことば の へんか を べんきょう しました。",
+   "gloss": "I studied language change."
+  },
+  {
+   "id": "ja.sent.writing-systems",
+   "text": "もじ の かきかた を べんきょう しました。",
+   "gloss": "I studied ways of writing characters."
+  },
+  {
+   "id": "ja.sent.acquisition-study",
+   "text": "しゅとく の けんきゅう を よみました。",
+   "gloss": "I read a study on acquisition."
+  },
+  {
+   "id": "ja.sent.bilingualism",
+   "text": "ほんやく の ぎもん を ぎろん しました。",
+   "gloss": "We discussed questions about translation."
+  },
+  {
+   "id": "ja.sent.corpus-linguistics",
+   "text": "ぶんしょ の ぶんせき を しました。",
+   "gloss": "I did document analysis."
+  },
+  {
+   "id": "ja.sent.register-analysis",
+   "text": "しりょう の こうりゅう を べんきょう しました。",
+   "gloss": "I studied the flow of materials."
+  },
+  {
+   "id": "ja.sent.identity-construction",
+   "text": "でんこう の だい を ぎろん しました。",
+   "gloss": "We discussed the role of tradition."
+  },
+  {
+   "id": "ja.sent.cultural-belonging",
+   "text": "きおく の もんだい を はなしました。",
+   "gloss": "We talked about the problem of memory."
+  }
+ ]
+}

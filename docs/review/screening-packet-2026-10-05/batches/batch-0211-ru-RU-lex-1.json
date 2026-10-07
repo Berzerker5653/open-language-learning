@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-1",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.argue.spornyy",
+   "form": "спорный",
+   "reading": "спо́рный",
+   "gloss": "controversial",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue.sporit",
+   "form": "спорить",
+   "reading": "спо́рить",
+   "gloss": "to argue",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue.otsenivat",
+   "form": "оценивать",
+   "reading": "оце́нивать",
+   "gloss": "to evaluate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue.sudite",
+   "form": "судить",
+   "reading": "суди́ть",
+   "gloss": "to judge",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue.verit",
+   "form": "верить",
+   "reading": "ве́рить",
+   "gloss": "to believe",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue.oprovergat",
+   "form": "опровергать",
+   "reading": "опроверга́ть",
+   "gloss": "to refute",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue.ssylatsya",
+   "form": "ссылаться",
+   "reading": "ссыла́ться",
+   "gloss": "to cite, refer",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue.apellyaciya",
+   "form": "апелляция",
+   "reading": "апелля́ция",
+   "gloss": "appeal",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue.tsirovat",
+   "form": "цитировать",
+   "reading": "цити́ровать",
+   "gloss": "to quote",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue.iskazhenie",
+   "form": "искажение",
+   "reading": "искаже́ние",
+   "gloss": "distortion",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue.preuvelichenie",
+   "form": "преувеличение",
+   "reading": "преувеличе́ние",
+   "gloss": "exaggeration",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue.preumenshenie",
+   "form": "преуменьшение",
+   "reading": "преуменьше́ние",
+   "gloss": "understatement",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue.pokazanie",
+   "form": "показание",
+   "reading": "показа́ние",
+   "gloss": "testimony",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue.prigovor",
+   "form": "приговор",
+   "reading": "пригово́р",
+   "gloss": "verdict, sentence",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue.obvinenie",
+   "form": "обвинение",
+   "reading": "обвине́ние",
+   "gloss": "accusation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue.podozrevat",
+   "form": "подозревать",
+   "reading": "подозрева́ть",
+   "gloss": "to suspect",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue.podozrenie",
+   "form": "подозрение",
+   "reading": "подозре́ние",
+   "gloss": "suspicion",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue.dopros",
+   "form": "допрос",
+   "reading": "допро́с",
+   "gloss": "interrogation",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue.rassledovanie",
+   "form": "расследование",
+   "reading": "рассле́дование",
+   "gloss": "investigation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue.razbiratelstvo",
+   "form": "разбирательство",
+   "reading": "разбира́тельство",
+   "gloss": "hearing, inquiry",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue.sud",
+   "form": "суд",
+   "reading": "суд",
+   "gloss": "court",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue.zasedanie",
+   "form": "заседание",
+   "reading": "заседа́ние",
+   "gloss": "session, meeting",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue.advokat",
+   "form": "адвокат",
+   "reading": "адвока́т",
+   "gloss": "lawyer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue.prisyaga",
+   "form": "присяга",
+   "reading": "прися́га",
+   "gloss": "oath",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue.klyatva",
+   "form": "клятва",
+   "reading": "кля́тва",
+   "gloss": "oath, vow",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

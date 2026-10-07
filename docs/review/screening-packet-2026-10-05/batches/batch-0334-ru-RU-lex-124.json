@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-124",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.style.leksicheskij",
+   "form": "лексический",
+   "reading": "лекси́ческий",
+   "gloss": "lexical (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.sofistika",
+   "form": "софистика",
+   "reading": "софи́стика",
+   "gloss": "sophistry",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.uklonchivost",
+   "form": "уклончивость",
+   "reading": "укло́нчивость",
+   "gloss": "evasiveness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.oznachat",
+   "form": "означать",
+   "reading": "означа́ть",
+   "gloss": "to mean, to signify",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.podrazumevat",
+   "form": "подразумевать",
+   "reading": "подразумева́ть",
+   "gloss": "to imply",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.razgranichivat",
+   "form": "разграничивать",
+   "reading": "разграни́чивать",
+   "gloss": "to demarcate, distinguish",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.smeshivat",
+   "form": "смешивать",
+   "reading": "сме́шивать",
+   "gloss": "to mix up, blend",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.podmenyat",
+   "form": "подменять",
+   "reading": "подменя́ть",
+   "gloss": "to substitute",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.tolkovat",
+   "form": "толковать",
+   "reading": "толкова́ть",
+   "gloss": "to interpret, explain",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.formulirovat",
+   "form": "формулировать",
+   "reading": "формули́ровать",
+   "gloss": "to formulate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.odnoznachnyj",
+   "form": "однозначный",
+   "reading": "однозна́чный",
+   "gloss": "unambiguous",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.dvusmyslennyj",
+   "form": "двусмысленный",
+   "reading": "двусмы́сленный",
+   "gloss": "ambiguous",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.bukvalnyj",
+   "form": "буквальный",
+   "reading": "буква́льный",
+   "gloss": "literal",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.perenosnyj",
+   "form": "переносный",
+   "reading": "перено́сный",
+   "gloss": "figurative",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.prostorechie",
+   "form": "просторечие",
+   "reading": "просторе́чие",
+   "gloss": "vernacular",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.zhargon",
+   "form": "жаргон",
+   "reading": "жарго́н",
+   "gloss": "jargon",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.argo",
+   "form": "арго",
+   "reading": "арго́",
+   "gloss": "argot",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.dialektizm",
+   "form": "диалектизм",
+   "reading": "диалекти́зм",
+   "gloss": "dialectism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.istorizm",
+   "form": "историзм",
+   "reading": "истори́зм",
+   "gloss": "historicism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.oksymoron",
+   "form": "оксюморон",
+   "reading": "оксю́морон",
+   "gloss": "oxymoron",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.smyslovoj",
+   "form": "смысловой",
+   "reading": "смыслово́й",
+   "gloss": "semantic (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.leksika",
+   "form": "лексика",
+   "reading": "ле́ксика",
+   "gloss": "vocabulary, lexis",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.podmena",
+   "form": "подмена",
+   "reading": "подме́на",
+   "gloss": "substitution",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.omonimiya",
+   "form": "омонимия",
+   "reading": "омоними́я",
+   "gloss": "homonymy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.polisemiya",
+   "form": "полисемия",
+   "reading": "полисеми́я",
+   "gloss": "polysemy",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

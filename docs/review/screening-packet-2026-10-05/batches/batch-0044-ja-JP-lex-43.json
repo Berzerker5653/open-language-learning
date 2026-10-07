@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-43",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.emotion.shougi",
+   "form": "しょうぎ",
+   "reading": "しょうぎ",
+   "gloss": "apology",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.houbi",
+   "form": "ほうび",
+   "reading": "ほうび",
+   "gloss": "reward",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.mottai",
+   "form": "もったい",
+   "reading": "もったい",
+   "gloss": "cherishing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.yamashii",
+   "form": "やましい",
+   "reading": "やましい",
+   "gloss": "ashamed",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.joutou",
+   "form": "じょうとう",
+   "reading": "じょうとう",
+   "gloss": "running account",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.aijou",
+   "form": "あいじょう",
+   "reading": "あいじょう",
+   "gloss": "affection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.yui",
+   "form": "ゆい",
+   "reading": "ゆい",
+   "gloss": "bond",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.wa2",
+   "form": "わ",
+   "reading": "わ",
+   "gloss": "harmony",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.chikara",
+   "form": "ちから",
+   "reading": "ちから",
+   "gloss": "strength",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.shouki",
+   "form": "しょうき",
+   "reading": "しょうき",
+   "gloss": "encouragement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.shoujin",
+   "form": "しょうじん",
+   "reading": "しょうじん",
+   "gloss": "exhortation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.omoikiri",
+   "form": "おもいきり",
+   "reading": "おもいきり",
+   "gloss": "decisiveness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.jouzu",
+   "form": "じょうず",
+   "reading": "じょうず",
+   "gloss": "skilled",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.kawaii",
+   "form": "かわいい",
+   "reading": "かわいい",
+   "gloss": "cute",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.akui",
+   "form": "あくい",
+   "reading": "あくい",
+   "gloss": "ulterior motive",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.fukuzatsu",
+   "form": "ふくざつ",
+   "reading": "ふくざつ",
+   "gloss": "complex",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.tenko",
+   "form": "てんこう",
+   "reading": "てんこう",
+   "gloss": "turning point",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.takusan",
+   "form": "たくさん",
+   "reading": "たくさん",
+   "gloss": "many",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.nakanaka",
+   "form": "なかなか",
+   "reading": "なかなか",
+   "gloss": "quite",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.sara-ni",
+   "form": "さらに",
+   "reading": "さらに",
+   "gloss": "further",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.subete",
+   "form": "すべて",
+   "reading": "すべて",
+   "gloss": "everything",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.sukunaku",
+   "form": "すくなく",
+   "reading": "すくなく",
+   "gloss": "at least",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.ooku",
+   "form": "おおく",
+   "reading": "おおく",
+   "gloss": "much",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.kokuhaku",
+   "form": "こくはく",
+   "reading": "こくはく",
+   "gloss": "confession",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.gaman",
+   "form": "がまん",
+   "reading": "がまん",
+   "gloss": "patience",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

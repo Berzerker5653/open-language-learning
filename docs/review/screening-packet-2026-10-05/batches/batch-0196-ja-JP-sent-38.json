@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-38",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.urban-environment",
+   "text": "おせん の もんだい を べんきょう しました。",
+   "gloss": "I studied the pollution problem."
+  },
+  {
+   "id": "ja.sent.public-safety",
+   "text": "ぼうはん の かつどう を おこないました。",
+   "gloss": "We carried out a crime-prevention activity."
+  },
+  {
+   "id": "ja.sent.city-culture",
+   "text": "ぶんかさい の はなし を しました。",
+   "gloss": "We talked about the cultural festival."
+  },
+  {
+   "id": "ja.sent.rural-urban-link",
+   "text": "いなか と としの こうりゅう を はなしました。",
+   "gloss": "We talked about rural-urban exchange."
+  },
+  {
+   "id": "ja.sent.climate-policy",
+   "text": "きこう の せいさく を ぎろん しました。",
+   "gloss": "We discussed climate policy."
+  },
+  {
+   "id": "ja.sent.energy-transition",
+   "text": "えねるぎー の しふく を べんきょう しました。",
+   "gloss": "I studied the energy transition."
+  },
+  {
+   "id": "ja.sent.carbon-economics",
+   "text": "ばいしゅつ の もんだい を べんきょう しました。",
+   "gloss": "I studied the emissions problem."
+  },
+  {
+   "id": "ja.sent.biodiversity",
+   "text": "しゃくぶつ の ぜんめつ を はなしました。",
+   "gloss": "We talked about species extinction."
+  },
+  {
+   "id": "ja.sent.circular-economy",
+   "text": "じゅんかん がた の けいざい を べんきょう しました。",
+   "gloss": "I studied the circular economy."
+  },
+  {
+   "id": "ja.sent.environmental-law",
+   "text": "かんきょうほう の ぎろん を ききました。",
+   "gloss": "I listened to the environmental-law debate."
+  },
+  {
+   "id": "ja.sent.corporate-responsibility",
+   "text": "しゃかい きのう の ぎろん を しました。",
+   "gloss": "We discussed social responsibility."
+  },
+  {
+   "id": "ja.sent.international-agreements",
+   "text": "こくさい きょうてい の じっそう を はなしました。",
+   "gloss": "We talked about implementing the international agreement."
+  },
+  {
+   "id": "ja.sent.local-environment",
+   "text": "ちいき の かんきょう もんだい を ぎろん しました。",
+   "gloss": "We discussed a local environmental problem."
+  },
+  {
+   "id": "ja.sent.environmental-justice",
+   "text": "せいぎ の もんだい を べんきょう しました。",
+   "gloss": "I studied the problem of justice."
+  },
+  {
+   "id": "ja.sent.risk-and-precaution",
+   "text": "かけん の べんきょう を しました。",
+   "gloss": "I studied the risk."
+  }
+ ]
+}

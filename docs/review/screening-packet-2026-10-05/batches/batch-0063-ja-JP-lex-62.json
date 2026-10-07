@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-62",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.formal2.sakujo",
+   "form": "さくじょ",
+   "reading": "さくじょ",
+   "gloss": "removal, deletion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.koutei2",
+   "form": "こうてい",
+   "reading": "こうてい",
+   "gloss": "course, process",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.biijutsu",
+   "form": "びじゅつ",
+   "reading": "びじゅつ",
+   "gloss": "fine art",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.geijutsu",
+   "form": "げいじゅつ",
+   "reading": "げいじゅつ",
+   "gloss": "art, arts",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.bijutsukan",
+   "form": "びじゅつかん",
+   "reading": "びじゅつかん",
+   "gloss": "art museum",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.tenjikai",
+   "form": "てんじかい",
+   "reading": "てんじかい",
+   "gloss": "exhibition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.sakuhin",
+   "form": "さくひん",
+   "reading": "さくひん",
+   "gloss": "work, artwork",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.gasaku",
+   "form": "がさく",
+   "reading": "がさく",
+   "gloss": "painting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.toukyou",
+   "form": "とうきょう",
+   "reading": "とうきょう",
+   "gloss": "sculpture",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.bi",
+   "form": "び",
+   "reading": "び",
+   "gloss": "beauty",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.kanshou",
+   "form": "かんしょう",
+   "reading": "かんしょう",
+   "gloss": "appreciation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.shikisai",
+   "form": "しきさい",
+   "reading": "しきさい",
+   "gloss": "color, coloring",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.sen",
+   "form": "せん",
+   "reading": "せん",
+   "gloss": "line",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.katachi",
+   "form": "かたち",
+   "reading": "かたち",
+   "gloss": "shape, form",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.ryousen",
+   "form": "りょうせん",
+   "reading": "りょうせん",
+   "gloss": "perspective",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.kontrastu",
+   "form": "こんとらすと",
+   "reading": "こんとらすと",
+   "gloss": "contrast",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.baransu",
+   "form": "ばらんす",
+   "reading": "ばらんす",
+   "gloss": "balance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.kakuchou",
+   "form": "かくちょう",
+   "reading": "かくちょう",
+   "gloss": "extension, stretch",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.mokuhyou2",
+   "form": "もくひょう",
+   "reading": "もくひょう",
+   "gloss": "aim, aim-point",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.hyoushiki",
+   "form": "ひょうしき",
+   "reading": "ひょうしき",
+   "gloss": "expression form",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.ishiki",
+   "form": "いしき",
+   "reading": "いしき",
+   "gloss": "consciousness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.bunkaten",
+   "form": "ぶんかてん",
+   "reading": "ぶんかてん",
+   "gloss": "cultural event",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.denpou",
+   "form": "でんぽう",
+   "reading": "でんぽう",
+   "gloss": "telegraph, wire",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.fuukei",
+   "form": "ふうけい",
+   "reading": "ふうけい",
+   "gloss": "scenery, landscape",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.shashin",
+   "form": "しゃしん",
+   "reading": "しゃしん",
+   "gloss": "photograph",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

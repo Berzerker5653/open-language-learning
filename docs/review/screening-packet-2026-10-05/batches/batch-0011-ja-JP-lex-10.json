@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-10",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.advice.iikata",
+   "form": "いいかた",
+   "reading": "いいかた",
+   "gloss": "way of saying",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.suusei",
+   "form": "すうせい",
+   "reading": "すうせい",
+   "gloss": "persuasion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.ikou",
+   "form": "いこう",
+   "reading": "いこう",
+   "gloss": "intention",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.youchuu",
+   "form": "ようちょう",
+   "reading": "ようちょう",
+   "gloss": "negotiation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.kokuhan",
+   "form": "こくはん",
+   "reading": "こくはん",
+   "gloss": "warning",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.kibou",
+   "form": "きぼう",
+   "reading": "きぼう",
+   "gloss": "hope",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.sengaku",
+   "form": "せんがく",
+   "reading": "せんがく",
+   "gloss": "preference",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.yuusen",
+   "form": "ゆうせん",
+   "reading": "ゆうせん",
+   "gloss": "priority",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.kyoushou",
+   "form": "きょうしょう",
+   "reading": "きょうしょう",
+   "gloss": "compromise",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.hansei2",
+   "form": "はんせい",
+   "reading": "はんせい",
+   "gloss": "regret",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.mouichido",
+   "form": "もういちど",
+   "reading": "もういちど",
+   "gloss": "once more",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.dankai",
+   "form": "だんかい",
+   "reading": "だんかい",
+   "gloss": "stage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.iikae",
+   "form": "いいかえ",
+   "reading": "いいかえ",
+   "gloss": "rephrasing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.nagai2",
+   "form": "ながい",
+   "reading": "ながい",
+   "gloss": "long",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.hayai2",
+   "form": "はやい",
+   "reading": "はやい",
+   "gloss": "fast",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.osoi2",
+   "form": "おそい",
+   "reading": "おそい",
+   "gloss": "slow",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.kawa2",
+   "form": "かわ",
+   "reading": "かわ",
+   "gloss": "river",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.yama2",
+   "form": "やま",
+   "reading": "やま",
+   "gloss": "mountain",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.sora2",
+   "form": "そら",
+   "reading": "そら",
+   "gloss": "sky",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.tsuchi2",
+   "form": "つち",
+   "reading": "つち",
+   "gloss": "soil",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.kaze2",
+   "form": "かぜ",
+   "reading": "かぜ",
+   "gloss": "wind",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.hito2",
+   "form": "ひと",
+   "reading": "ひと",
+   "gloss": "person",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.mono2",
+   "form": "もの",
+   "reading": "もの",
+   "gloss": "thing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.koto2",
+   "form": "こと",
+   "reading": "こと",
+   "gloss": "matter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.basho2",
+   "form": "ばしょ",
+   "reading": "ばしょ",
+   "gloss": "place",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

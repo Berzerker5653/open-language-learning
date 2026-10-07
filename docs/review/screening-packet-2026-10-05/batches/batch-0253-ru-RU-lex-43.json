@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-43",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.greetings.do-svidaniya",
+   "form": "до свидания",
+   "reading": "до свида́ния",
+   "gloss": "goodbye",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.greetings.pozhaluysta",
+   "form": "пожалуйста",
+   "reading": "пожа́луйста",
+   "gloss": "please; you are welcome",
+   "pos": "particle",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.greetings.izvinite",
+   "form": "извините",
+   "reading": "извини́те",
+   "gloss": "excuse me; I am sorry (polite formula)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.greetings.da",
+   "form": "да",
+   "reading": "да",
+   "gloss": "yes",
+   "pos": "particle",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.greetings.net",
+   "form": "нет",
+   "reading": "нет",
+   "gloss": "no",
+   "pos": "predicative",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.home.komnata",
+   "form": "комната",
+   "reading": "ко́мната",
+   "gloss": "room",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.kuhnya",
+   "form": "кухня",
+   "reading": "ку́хня",
+   "gloss": "kitchen",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.vannaya",
+   "form": "ванная",
+   "reading": "ва́нная",
+   "gloss": "bathroom",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.spalnya",
+   "form": "спальня",
+   "reading": "спа́льня",
+   "gloss": "bedroom",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.peredaya",
+   "form": "прихожая",
+   "reading": "прихо́жая",
+   "gloss": "entrance hall",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.okno",
+   "form": "окно",
+   "reading": "окно́",
+   "gloss": "window",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.home.dver",
+   "form": "дверь",
+   "reading": "дверь",
+   "gloss": "door",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.stena",
+   "form": "стена",
+   "reading": "стена́",
+   "gloss": "wall",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.pol",
+   "form": "пол",
+   "reading": "пол",
+   "gloss": "floor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.potolok",
+   "form": "потолок",
+   "reading": "потоло́к",
+   "gloss": "ceiling",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.krovat",
+   "form": "кровать",
+   "reading": "крова́ть",
+   "gloss": "bed",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.shkaf",
+   "form": "шкаф",
+   "reading": "шкаф",
+   "gloss": "wardrobe",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.komod",
+   "form": "комод",
+   "reading": "комо́д",
+   "gloss": "dresser",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.zerkalo",
+   "form": "зеркало",
+   "reading": "зе́ркало",
+   "gloss": "mirror",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.home.lampa",
+   "form": "лампа",
+   "reading": "ла́мпа",
+   "gloss": "lamp",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.holodilnik",
+   "form": "холодильник",
+   "reading": "холоди́льник",
+   "gloss": "refrigerator",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.plita",
+   "form": "плита",
+   "reading": "плита́",
+   "gloss": "stove",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.chaynik",
+   "form": "чайник",
+   "reading": "ча́йник",
+   "gloss": "kettle",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.chashka",
+   "form": "чашка",
+   "reading": "ча́шка",
+   "gloss": "cup",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.tarelka",
+   "form": "тарелка",
+   "reading": "таре́лка",
+   "gloss": "plate",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

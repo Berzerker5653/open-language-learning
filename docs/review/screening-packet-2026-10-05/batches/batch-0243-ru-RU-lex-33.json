@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-33",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.family.otec",
+   "form": "отец",
+   "reading": "оте́ц",
+   "gloss": "father",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.family.mat",
+   "form": "мать",
+   "reading": "мать",
+   "gloss": "mother",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.roditeli",
+   "form": "родители",
+   "reading": "роди́тели",
+   "gloss": "parents",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.babushka",
+   "form": "бабушка",
+   "reading": "ба́бушка",
+   "gloss": "grandmother",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.dedushka",
+   "form": "дедушка",
+   "reading": "де́душка",
+   "gloss": "grandfather",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.family.rebenok",
+   "form": "ребёнок",
+   "reading": "ребе́нок",
+   "gloss": "child",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.family.malchik",
+   "form": "мальчик",
+   "reading": "ма́льчик",
+   "gloss": "boy",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.family.devochka",
+   "form": "девочка",
+   "reading": "де́вочка",
+   "gloss": "girl",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.deti",
+   "form": "дети",
+   "reading": "де́ти",
+   "gloss": "children",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.malenkiy",
+   "form": "маленький",
+   "reading": "ма́ленький",
+   "gloss": "small; little",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.vnuk",
+   "form": "внук",
+   "reading": "внук",
+   "gloss": "grandson",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.family.vnuchka",
+   "form": "внучка",
+   "reading": "вну́чка",
+   "gloss": "granddaughter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.rodstvennik",
+   "form": "родственник",
+   "reading": "ро́дственник",
+   "gloss": "relative",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.family.rodstvennitsa",
+   "form": "родственница",
+   "reading": "ро́дственница",
+   "gloss": "female relative",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.znakomyy",
+   "form": "знакомый",
+   "reading": "знако́мый",
+   "gloss": "acquaintance",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.muzhchina",
+   "form": "мужчина",
+   "reading": "мужчи́на",
+   "gloss": "man",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.family.zhenshchina",
+   "form": "женщина",
+   "reading": "же́нщина",
+   "gloss": "woman",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.chelovek",
+   "form": "человек",
+   "reading": "челове́к",
+   "gloss": "person",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.family.lyudi",
+   "form": "люди",
+   "reading": "лю́ди",
+   "gloss": "people",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.sosed",
+   "form": "сосед",
+   "reading": "сосе́д",
+   "gloss": "neighbour",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.family.koshka",
+   "form": "кошка",
+   "reading": "ко́шка",
+   "gloss": "cat",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.sobaka",
+   "form": "собака",
+   "reading": "соба́ка",
+   "gloss": "dog",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.zhivotnoe",
+   "form": "животное",
+   "reading": "живо́тное",
+   "gloss": "animal",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.family.domashniy",
+   "form": "домашний",
+   "reading": "дома́шний",
+   "gloss": "domestic; pet",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.lyubit",
+   "form": "любить",
+   "reading": "люби́ть",
+   "gloss": "to love",
+   "pos": "verb",
+   "gender": ""
+  }
+ ]
+}

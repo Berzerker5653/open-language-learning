@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-22",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.cult.pastoral",
+   "form": "пастораль",
+   "reading": "пастора́ль",
+   "gloss": "pastoral",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.lirizm",
+   "form": "лиризм",
+   "reading": "лири́зм",
+   "gloss": "lyricism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.nadyrv",
+   "form": "надрыв",
+   "reading": "надры́в",
+   "gloss": "torn anguish",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.epilog",
+   "form": "эпилог",
+   "reading": "эпило́г",
+   "gloss": "epilogue",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.prolog",
+   "form": "пролог",
+   "reading": "проло́г",
+   "gloss": "prologue",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.koda",
+   "form": "кода",
+   "reading": "ко́да",
+   "gloss": "coda",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.leitmotiv",
+   "form": "лейтмотив",
+   "reading": "лейтмоти́в",
+   "gloss": "leitmotif",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.refrain",
+   "form": "рефрен",
+   "reading": "рефре́н",
+   "gloss": "refrain",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.almanah",
+   "form": "альманах",
+   "reading": "альмана́х",
+   "gloss": "almanac",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.epopeya",
+   "form": "эпопея",
+   "reading": "эпопе́я",
+   "gloss": "epic",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.rubezh",
+   "form": "рубеж",
+   "reading": "рубе́ж",
+   "gloss": "boundary, turning point",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.zhizneopisanie",
+   "form": "жизнеописание",
+   "reading": "жизнеописа́ние",
+   "gloss": "biography, life account",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.samosoznanie",
+   "form": "самосознание",
+   "reading": "самосозна́ние",
+   "gloss": "self-consciousness, self-awareness",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.memuarist",
+   "form": "мемуарист",
+   "reading": "мемуари́ст",
+   "gloss": "memoirist",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.potomki",
+   "form": "потомки",
+   "reading": "пото́мки",
+   "gloss": "descendants",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.obryad",
+   "form": "обряд",
+   "reading": "обря́д",
+   "gloss": "ritual, rite",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.verovanie",
+   "form": "верование",
+   "reading": "ве́рование",
+   "gloss": "belief, creed",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.sueverie",
+   "form": "суеверие",
+   "reading": "суеве́рие",
+   "gloss": "superstition",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.drevnost",
+   "form": "древность",
+   "reading": "дре́вность",
+   "gloss": "antiquity, ancient times",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.antichnost",
+   "form": "античность",
+   "reading": "анти́чность",
+   "gloss": "classical antiquity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.srednevekovye",
+   "form": "средневековье",
+   "reading": "средневеко́вье",
+   "gloss": "Middle Ages",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.prosveschenie",
+   "form": "просвещение",
+   "reading": "просвеще́ние",
+   "gloss": "Enlightenment",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.emigraciya",
+   "form": "эмиграция",
+   "reading": "эмигра́ция",
+   "gloss": "emigration",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.diaspora",
+   "form": "диаспора",
+   "reading": "диа́спора",
+   "gloss": "diaspora",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.assimilyaciya",
+   "form": "ассимиляция",
+   "reading": "ассимиля́ция",
+   "gloss": "assimilation",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

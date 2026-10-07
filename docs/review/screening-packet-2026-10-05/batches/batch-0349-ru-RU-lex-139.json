@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-139",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.synthesis2.klassifikaciya",
+   "form": "классификация",
+   "reading": "классифика́ция",
+   "gloss": "classification",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis2.sortirovka",
+   "form": "сортировка",
+   "reading": "сортиро́вка",
+   "gloss": "sorting",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis2.gruppirovka",
+   "form": "группировка",
+   "reading": "группиро́вка",
+   "gloss": "grouping",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis2.kategoriya",
+   "form": "категория",
+   "reading": "катего́рия",
+   "gloss": "category",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis2.razryad",
+   "form": "разряд",
+   "reading": "разря́д",
+   "gloss": "category, class",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.tip",
+   "form": "тип",
+   "reading": "тип",
+   "gloss": "type",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.vid",
+   "form": "вид",
+   "reading": "вид",
+   "gloss": "kind, view",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.klass",
+   "form": "класс",
+   "reading": "класс",
+   "gloss": "class",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.semeystvo",
+   "form": "семейство",
+   "reading": "семе́йство",
+   "gloss": "family (biology)",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis2.gruppa",
+   "form": "группа",
+   "reading": "гру́ппа",
+   "gloss": "group",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis2.blok",
+   "form": "блок",
+   "reading": "блок",
+   "gloss": "block",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.modul",
+   "form": "модуль",
+   "reading": "мо́дуль",
+   "gloss": "module",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.uzel",
+   "form": "узел",
+   "reading": "у́зел",
+   "gloss": "node, knot",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.mazok",
+   "form": "мазок",
+   "reading": "мазо́к",
+   "gloss": "brushstroke",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.poluton",
+   "form": "полутон",
+   "reading": "полуто́н",
+   "gloss": "half-tone",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.svetoten",
+   "form": "светотень",
+   "reading": "светоте́нь",
+   "gloss": "chiaroscuro",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis2.kontrast",
+   "form": "контраст",
+   "reading": "контра́ст",
+   "gloss": "contrast",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.blik",
+   "form": "блик",
+   "reading": "блик",
+   "gloss": "glint",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.otblesk",
+   "form": "отблеск",
+   "reading": "о́тблеск",
+   "gloss": "gleam, reflection",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.siyanie",
+   "form": "сияние",
+   "reading": "сия́ние",
+   "gloss": "radiance",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis2.blesk",
+   "form": "блеск",
+   "reading": "блеск",
+   "gloss": "shine, brilliance",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.mrak",
+   "form": "мрак",
+   "reading": "мрак",
+   "gloss": "darkness",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.tma",
+   "form": "тьма",
+   "reading": "тьма",
+   "gloss": "darkness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis2.mgla",
+   "form": "мгла",
+   "reading": "мгла",
+   "gloss": "haze, gloom",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis2.tuman",
+   "form": "туман",
+   "reading": "тума́н",
+   "gloss": "fog",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

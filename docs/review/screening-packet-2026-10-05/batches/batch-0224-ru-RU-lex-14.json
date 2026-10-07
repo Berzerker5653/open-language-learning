@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-14",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.critical.okontanie",
+   "form": "окончание",
+   "reading": "оконча́ние",
+   "gloss": "ending",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical.chastica",
+   "form": "частица",
+   "reading": "части́ца",
+   "gloss": "particle",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical.mezhdometie",
+   "form": "междометие",
+   "reading": "междоме́тие",
+   "gloss": "interjection",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical.deeprichastie",
+   "form": "деепричастие",
+   "reading": "дееприча́стие",
+   "gloss": "gerund",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical.prichastie",
+   "form": "причастие",
+   "reading": "прича́стие",
+   "gloss": "participle",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical.infinitiv",
+   "form": "инфинитив",
+   "reading": "инфинити́в",
+   "gloss": "infinitive",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical.naklonenie",
+   "form": "наклонение",
+   "reading": "наклоне́ние",
+   "gloss": "mood (grammar)",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical.zalog",
+   "form": "залог",
+   "reading": "зало́г",
+   "gloss": "voice (grammar)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical.rod",
+   "form": "род",
+   "reading": "род",
+   "gloss": "gender",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical.frazeologizm",
+   "form": "фразеологизм",
+   "reading": "фразеологи́зм",
+   "gloss": "idiom",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.retorika",
+   "form": "риторика",
+   "reading": "рито́рика",
+   "gloss": "rhetoric",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical2.manjovr",
+   "form": "манёвр",
+   "reading": "мане́вр",
+   "gloss": "maneuver",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.nastoychivost",
+   "form": "настойчивость",
+   "reading": "насто́йчивость",
+   "gloss": "persistence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical2.napor",
+   "form": "напор",
+   "reading": "напо́р",
+   "gloss": "push, pressure",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.agressiya",
+   "form": "агрессия",
+   "reading": "агре́ссия",
+   "gloss": "aggression",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical2.passivnost",
+   "form": "пассивность",
+   "reading": "пасси́вность",
+   "gloss": "passivity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical2.ustanovka",
+   "form": "установка",
+   "reading": "устано́вка",
+   "gloss": "attitude, setup",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical2.imperativ",
+   "form": "императив",
+   "reading": "императи́в",
+   "gloss": "imperative",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.posyl",
+   "form": "посыл",
+   "reading": "посы́л",
+   "gloss": "message, premise",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.zaryad",
+   "form": "заряд",
+   "reading": "заря́д",
+   "gloss": "charge",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.nakal",
+   "form": "накал",
+   "reading": "нака́л",
+   "gloss": "intensity, heat",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.azart",
+   "form": "азарт",
+   "reading": "аза́рт",
+   "gloss": "ardor, excitement",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.derzkiy",
+   "form": "дерзкий",
+   "reading": "де́рзкий",
+   "gloss": "bold, audacious",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical2.robkiy",
+   "form": "робкий",
+   "reading": "ро́бкий",
+   "gloss": "timid",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical2.ostorozhnyy",
+   "form": "осторожный",
+   "reading": "осторо́жный",
+   "gloss": "cautious",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

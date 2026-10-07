@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-30",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u485",
+   "text": "Это аллюзия.",
+   "gloss": "This is an allusion."
+  },
+  {
+   "id": "ru.sent.b2.u486",
+   "text": "Это интуиция.",
+   "gloss": "This is intuition."
+  },
+  {
+   "id": "ru.sent.b2.u487",
+   "text": "Это аксиома.",
+   "gloss": "This is an axiom."
+  },
+  {
+   "id": "ru.sent.b2.u488",
+   "text": "Это аномалия.",
+   "gloss": "This is an anomaly."
+  },
+  {
+   "id": "ru.sent.b2.u489",
+   "text": "Это полуправда.",
+   "gloss": "This is a half-truth."
+  },
+  {
+   "id": "ru.sent.b2.u490",
+   "text": "Это атрибуция.",
+   "gloss": "This is attribution."
+  },
+  {
+   "id": "ru.sent.b2.u491",
+   "text": "Это цитирование.",
+   "gloss": "This is quoting."
+  },
+  {
+   "id": "ru.sent.b2.u492",
+   "text": "Это калька.",
+   "gloss": "This is a calque."
+  },
+  {
+   "id": "ru.sent.b2.u493",
+   "text": "Это адаптация.",
+   "gloss": "This is an adaptation."
+  },
+  {
+   "id": "ru.sent.b2.u494",
+   "text": "Это реферат.",
+   "gloss": "This is an abstract."
+  },
+  {
+   "id": "ru.sent.b2.u495",
+   "text": "Это эпиграф.",
+   "gloss": "This is an epigraph."
+  },
+  {
+   "id": "ru.sent.b2.u496",
+   "text": "Это диктор.",
+   "gloss": "This is an announcer."
+  },
+  {
+   "id": "ru.sent.b2.u497",
+   "text": "Это издатель.",
+   "gloss": "This is a publisher."
+  },
+  {
+   "id": "ru.sent.b2.u498",
+   "text": "Это автор.",
+   "gloss": "This is an author."
+  },
+  {
+   "id": "ru.sent.b2.u499",
+   "text": "Это сборник.",
+   "gloss": "This is a collection."
+  }
+ ]
+}

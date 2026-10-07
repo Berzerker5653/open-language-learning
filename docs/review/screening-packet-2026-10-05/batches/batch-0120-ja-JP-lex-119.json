@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-119",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.rel2.te3",
+   "form": "て",
+   "reading": "て",
+   "gloss": "hand",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.ashi2",
+   "form": "あし",
+   "reading": "あし",
+   "gloss": "leg",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.mune2",
+   "form": "むね",
+   "reading": "むね",
+   "gloss": "chest",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.inochi",
+   "form": "いのち",
+   "reading": "いのち",
+   "gloss": "life",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.sekai",
+   "form": "せかい",
+   "reading": "せかい",
+   "gloss": "world",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.chiiki",
+   "form": "ちいき",
+   "reading": "ちいき",
+   "gloss": "community",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.taiwa2",
+   "form": "たいわ",
+   "reading": "たいわ",
+   "gloss": "dialogue",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.rikai2",
+   "form": "りかい",
+   "reading": "りかい",
+   "gloss": "understanding",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.shimpei",
+   "form": "しんぺい",
+   "reading": "しんぺい",
+   "gloss": "fair, equitable",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.yujo2",
+   "form": "ゆうじょう",
+   "reading": "ゆうじょう",
+   "gloss": "friendship",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.chieki",
+   "form": "ちえき",
+   "reading": "ちえき",
+   "gloss": "wisdom",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.kazoku",
+   "form": "かぞく",
+   "reading": "かぞく",
+   "gloss": "family",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.kyoudai",
+   "form": "きょうだい",
+   "reading": "きょうだい",
+   "gloss": "siblings",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.shinrui",
+   "form": "しんるい",
+   "reading": "しんるい",
+   "gloss": "relative",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.senzoku",
+   "form": "せんぞく",
+   "reading": "せんぞく",
+   "gloss": "ancestor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.kekkon",
+   "form": "けっこん",
+   "reading": "けっこん",
+   "gloss": "marriage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.kon-yaku",
+   "form": "こんやく",
+   "reading": "こんやく",
+   "gloss": "engagement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.wakare",
+   "form": "わかれ",
+   "reading": "わかれ",
+   "gloss": "separation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.fufu",
+   "form": "ふうふ",
+   "reading": "ふうふ",
+   "gloss": "married couple",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.boshi",
+   "form": "ぼし",
+   "reading": "ぼし",
+   "gloss": "mother and child",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.fushi",
+   "form": "ふし",
+   "reading": "ふし",
+   "gloss": "father and child",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.obaa-chan",
+   "form": "おばあちゃん",
+   "reading": "おばあちゃん",
+   "gloss": "grandmother",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.ojii-chan",
+   "form": "おじいちゃん",
+   "reading": "おじいちゃん",
+   "gloss": "grandfather",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.oba",
+   "form": "おば",
+   "reading": "おば",
+   "gloss": "aunt",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.oji",
+   "form": "おじ",
+   "reading": "おじ",
+   "gloss": "uncle",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

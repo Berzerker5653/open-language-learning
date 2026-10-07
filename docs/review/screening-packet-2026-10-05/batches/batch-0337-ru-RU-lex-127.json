@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-127",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.style.telegramma",
+   "form": "телеграмма",
+   "reading": "телегра́мма",
+   "gloss": "telegram",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.lest",
+   "form": "лесть",
+   "reading": "лесть",
+   "gloss": "flattery",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.lstec",
+   "form": "льстец",
+   "reading": "льстец",
+   "gloss": "flatterer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.priznatelnost",
+   "form": "признательность",
+   "reading": "призна́тельность",
+   "gloss": "appreciation, gratitude",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.ukor",
+   "form": "укор",
+   "reading": "уко́р",
+   "gloss": "reproach",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.ukorizna",
+   "form": "укоризна",
+   "reading": "укори́зна",
+   "gloss": "reproach, blame",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.smyagchat",
+   "form": "смягчать",
+   "reading": "смягча́ть",
+   "gloss": "to soften, mitigate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.smyagchenie",
+   "form": "смягчение",
+   "reading": "смягче́ние",
+   "gloss": "softening, mitigation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.podshuchivat",
+   "form": "подшучивать",
+   "reading": "подшу́чивать",
+   "gloss": "to tease, joke about",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.reverans",
+   "form": "реверанс",
+   "reading": "ревера́нс",
+   "gloss": "curtsy, bow",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.obhoditelnost",
+   "form": "обходительность",
+   "reading": "обходи́тельность",
+   "gloss": "affability",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.predupreditelnost",
+   "form": "предупредительность",
+   "reading": "предупреди́тельность",
+   "gloss": "thoughtfulness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.zabotlivost",
+   "form": "заботливость",
+   "reading": "забо́тливость",
+   "gloss": "care, solicitousness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.cherstost",
+   "form": "черствость",
+   "reading": "че́рствость",
+   "gloss": "callousness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.cherstvyj",
+   "form": "черствый",
+   "reading": "че́рствый",
+   "gloss": "callous, hard",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.oficioz",
+   "form": "официоз",
+   "reading": "официо́з",
+   "gloss": "officialdom",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.protokolnyj",
+   "form": "протокольный",
+   "reading": "протоко́льный",
+   "gloss": "protocol (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.soboleznovanie",
+   "form": "соболезнование",
+   "reading": "соболе́знование",
+   "gloss": "condolence",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.pozvolenie",
+   "form": "позволение",
+   "reading": "позволе́ние",
+   "gloss": "permission",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.slushanie",
+   "form": "слушание",
+   "reading": "слу́шание",
+   "gloss": "hearing, session",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.poklon",
+   "form": "поклон",
+   "reading": "покло́н",
+   "gloss": "bow",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.ugodlivost",
+   "form": "угодливость",
+   "reading": "уго́дливость",
+   "gloss": "obsequiousness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.podobostrastie",
+   "form": "подобострастие",
+   "reading": "подобостра́стие",
+   "gloss": "servility",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.falsh",
+   "form": "фальшь",
+   "reading": "фальшь",
+   "gloss": "falsehood, falsity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.licemer",
+   "form": "лицемер",
+   "reading": "лицеме́р",
+   "gloss": "hypocrite",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

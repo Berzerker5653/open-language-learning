@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-44",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u695",
+   "text": "Это датчик.",
+   "gloss": "This is a sensor."
+  },
+  {
+   "id": "ru.sent.b2.u696",
+   "text": "Это экосистема.",
+   "gloss": "This is an ecosystem."
+  },
+  {
+   "id": "ru.sent.b2.u697",
+   "text": "Это потепление.",
+   "gloss": "This is warming."
+  },
+  {
+   "id": "ru.sent.b2.u698",
+   "text": "Это выбросы.",
+   "gloss": "These are emissions."
+  },
+  {
+   "id": "ru.sent.b2.u699",
+   "text": "Это фильтрация.",
+   "gloss": "This is filtration."
+  },
+  {
+   "id": "ru.sent.b2.u700",
+   "text": "Это внедрение.",
+   "gloss": "This is an implementation."
+  },
+  {
+   "id": "ru.sent.b2.u701",
+   "text": "Это тумблер.",
+   "gloss": "This is a toggle switch."
+  },
+  {
+   "id": "ru.sent.b2.u702",
+   "text": "Это процессор.",
+   "gloss": "This is a processor."
+  },
+  {
+   "id": "ru.sent.b2.u703",
+   "text": "Это турбина.",
+   "gloss": "This is a turbine."
+  },
+  {
+   "id": "ru.sent.b2.u704",
+   "text": "Это антенна.",
+   "gloss": "This is an antenna."
+  },
+  {
+   "id": "ru.sent.b2.u705",
+   "text": "Это маршрутизатор.",
+   "gloss": "This is a router."
+  },
+  {
+   "id": "ru.sent.b2.u706",
+   "text": "Это шифрование.",
+   "gloss": "This is encryption."
+  },
+  {
+   "id": "ru.sent.b2.u707",
+   "text": "Это биометрия.",
+   "gloss": "This is biometrics."
+  },
+  {
+   "id": "ru.sent.b2.u708",
+   "text": "Это износ.",
+   "gloss": "This is wear."
+  },
+  {
+   "id": "ru.sent.b2.u709",
+   "text": "Это монтаж.",
+   "gloss": "This is installation."
+  }
+ ]
+}

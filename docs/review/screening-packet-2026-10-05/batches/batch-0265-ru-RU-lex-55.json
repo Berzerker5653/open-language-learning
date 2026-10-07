@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-55",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.messages.pozdravlenie",
+   "form": "поздравление",
+   "reading": "поздравле́ние",
+   "gloss": "congratulations",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.messages.sozvon",
+   "form": "созвон",
+   "reading": "со́звон",
+   "gloss": "arranged phone call",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages.tekst",
+   "form": "текст",
+   "reading": "текст",
+   "gloss": "text",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages.poka",
+   "form": "пока",
+   "reading": "пока́",
+   "gloss": "bye (informal)",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.udachi",
+   "form": "удачи",
+   "reading": "уда́чи",
+   "gloss": "good luck",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.odnako",
+   "form": "однако",
+   "reading": "одна́ко",
+   "gloss": "however",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.krome-togo",
+   "form": "кроме того",
+   "reading": "кро́ме того́",
+   "gloss": "besides, moreover",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.vo-pervyh",
+   "form": "во-первых",
+   "reading": "во-пе́рвых",
+   "gloss": "firstly",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.vo-vtoryh",
+   "form": "во-вторых",
+   "reading": "во-вторы́х",
+   "gloss": "secondly",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.znachit",
+   "form": "значит",
+   "reading": "зна́чит",
+   "gloss": "that means, so",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.mnenie",
+   "form": "мнение",
+   "reading": "мне́ние",
+   "gloss": "opinion",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.messages2.navernoe",
+   "form": "наверное",
+   "reading": "наве́рное",
+   "gloss": "probably",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.po-moemu",
+   "form": "по-моему",
+   "reading": "по-мо́ему",
+   "gloss": "in my opinion",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.kazhetsya",
+   "form": "кажется",
+   "reading": "ка́жется",
+   "gloss": "it seems",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.navernyaka",
+   "form": "наверняка",
+   "reading": "наверняка́",
+   "gloss": "for sure",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.abzac",
+   "form": "абзац",
+   "reading": "абза́ц",
+   "gloss": "paragraph",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages2.nachalo",
+   "form": "начало",
+   "reading": "нача́ло",
+   "gloss": "beginning",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.messages2.zagolovok",
+   "form": "заголовок",
+   "reading": "заголо́вок",
+   "gloss": "headline, title",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages2.vyvod",
+   "form": "вывод",
+   "reading": "вы́вод",
+   "gloss": "conclusion",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages2.primer",
+   "form": "пример",
+   "reading": "приме́р",
+   "gloss": "example",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages2.otpravit",
+   "form": "отправить",
+   "reading": "отпра́вить",
+   "gloss": "to send",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.poluchit",
+   "form": "получить",
+   "reading": "получи́ть",
+   "gloss": "to receive, get",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.prochitat",
+   "form": "прочитать",
+   "reading": "прочита́ть",
+   "gloss": "to read (through)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.pereslat",
+   "form": "переслать",
+   "reading": "пересла́ть",
+   "gloss": "to forward",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.napisat",
+   "form": "написать",
+   "reading": "написа́ть",
+   "gloss": "to write",
+   "pos": "verb",
+   "gender": ""
+  }
+ ]
+}

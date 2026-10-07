@@ -3,6 +3,10 @@
 # METHOD now; numeric limits must be filled and frozen BEFORE any held-out
 # result is viewed, and unfilled limits keep automatic scoring disabled.
 # Nothing here is evidence of calibration.
+#
+# SUPERSEDED FOR THRESHOLDS by vowel-length-0.2.0.yaml (2026-10-06), which
+# freezes the numeric limits and sampling plan. This file is retained as the
+# method-frozen preregistration precursor (docs/17 preregistration discipline).
 
 protocol_version: "0.1.0"
 status: skeleton-limits-unfrozen

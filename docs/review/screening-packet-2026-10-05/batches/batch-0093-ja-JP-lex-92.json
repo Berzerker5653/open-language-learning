@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-92",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.med2.kankyou",
+   "form": "かんきょう",
+   "reading": "かんきょう",
+   "gloss": "environment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.jouhou",
+   "form": "じょうほう",
+   "reading": "じょうほう",
+   "gloss": "information",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.kyouryoku",
+   "form": "きょうりょく",
+   "reading": "きょうりょく",
+   "gloss": "cooperation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.seisaku",
+   "form": "せいさく",
+   "reading": "せいさく",
+   "gloss": "policy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.houan",
+   "form": "ほうあん",
+   "reading": "ほうあん",
+   "gloss": "bill, proposal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.bunseki",
+   "form": "ぶんせき",
+   "reading": "ぶんせき",
+   "gloss": "analysis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.kouron",
+   "form": "こうろん",
+   "reading": "こうろん",
+   "gloss": "public debate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.shian",
+   "form": "しあん",
+   "reading": "しあん",
+   "gloss": "guideline",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.news",
+   "form": "にゅーす",
+   "reading": "にゅーす",
+   "gloss": "news",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.shimbun",
+   "form": "しんぶん",
+   "reading": "しんぶん",
+   "gloss": "newspaper",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.shuppansha",
+   "form": "しゅっぱんしゃ",
+   "reading": "しゅっぱんしゃ",
+   "gloss": "publisher",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.houdou",
+   "form": "ほうどう",
+   "reading": "ほうどう",
+   "gloss": "news reporting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.head",
+   "form": "へッド",
+   "reading": "へッド",
+   "gloss": "headline",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.hassha",
+   "form": "はっしゃ",
+   "reading": "はっしゃ",
+   "gloss": "broadcasting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.kiji",
+   "form": "きじ",
+   "reading": "きじ",
+   "gloss": "article",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.kisha",
+   "form": "きしゃ",
+   "reading": "きしゃ",
+   "gloss": "reporter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.housou",
+   "form": "ほうそう",
+   "reading": "ほうそう",
+   "gloss": "broadcast",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.housou-kyoku",
+   "form": "ほうそうきょく",
+   "reading": "ほうそうきょく",
+   "gloss": "broadcasting station",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.rajio",
+   "form": "らじお",
+   "reading": "らじお",
+   "gloss": "radio",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.toron",
+   "form": "とろん",
+   "reading": "とろん",
+   "gloss": "debate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.gazou",
+   "form": "がぞう",
+   "reading": "がぞう",
+   "gloss": "image",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.caption",
+   "form": "きゃぷしょん",
+   "reading": "きゃぷしょん",
+   "gloss": "caption",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.denshi-media",
+   "form": "でんしめでぃあ",
+   "reading": "でんしめでぃあ",
+   "gloss": "digital media",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.netto",
+   "form": "ねっと",
+   "reading": "ねっと",
+   "gloss": "internet",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.post",
+   "form": "ぽすと",
+   "reading": "ぽすと",
+   "gloss": "post",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

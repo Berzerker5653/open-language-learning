@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-5",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.a2.u110",
+   "text": "Вчера я читал.",
+   "gloss": "Yesterday I read."
+  },
+  {
+   "id": "ru.sent.a2.u111",
+   "text": "Потом мы гуляли.",
+   "gloss": "Then we walked."
+  },
+  {
+   "id": "ru.sent.a2.u112",
+   "text": "Сначала работа, потом встреча.",
+   "gloss": "First work, then the meeting."
+  },
+  {
+   "id": "ru.sent.a2.u113",
+   "text": "Она писала письмо.",
+   "gloss": "She was writing a letter."
+  },
+  {
+   "id": "ru.sent.a2.u114",
+   "text": "Когда ты приехал?",
+   "gloss": "When did you arrive?"
+  },
+  {
+   "id": "ru.sent.a2.u115",
+   "text": "Мы уже пришли.",
+   "gloss": "We have already arrived."
+  },
+  {
+   "id": "ru.sent.a2.u116",
+   "text": "Вечером они смотрели.",
+   "gloss": "In the evening they watched."
+  },
+  {
+   "id": "ru.sent.a2.u117",
+   "text": "Она всегда работала.",
+   "gloss": "She always worked."
+  },
+  {
+   "id": "ru.sent.a2.u118",
+   "text": "Это было событие.",
+   "gloss": "That was an event."
+  },
+  {
+   "id": "ru.sent.a2.u119",
+   "text": "Сначала поездка, потом отпуск.",
+   "gloss": "First the trip, then the vacation."
+  },
+  {
+   "id": "ru.sent.a2.u120",
+   "text": "Это билет.",
+   "gloss": "This is a ticket."
+  },
+  {
+   "id": "ru.sent.a2.u121",
+   "text": "Это поезд.",
+   "gloss": "This is a train."
+  },
+  {
+   "id": "ru.sent.a2.u122",
+   "text": "Это аэропорт.",
+   "gloss": "This is the airport."
+  },
+  {
+   "id": "ru.sent.a2.u123",
+   "text": "Это расписание.",
+   "gloss": "This is the schedule."
+  },
+  {
+   "id": "ru.sent.a2.u124",
+   "text": "Это маршрут.",
+   "gloss": "This is the route."
+  }
+ ]
+}

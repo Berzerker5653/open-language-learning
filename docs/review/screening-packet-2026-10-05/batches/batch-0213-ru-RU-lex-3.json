@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-3",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.argue2.uchrezhdenie",
+   "form": "учреждение",
+   "reading": "учрежде́ние",
+   "gloss": "institution",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue2.vedomstvo",
+   "form": "ведомство",
+   "reading": "ве́домство",
+   "gloss": "agency",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue2.ministerstvo",
+   "form": "министерство",
+   "reading": "министе́рство",
+   "gloss": "ministry",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue2.upravlenie",
+   "form": "управление",
+   "reading": "управле́ние",
+   "gloss": "management",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue2.nadzor",
+   "form": "надзор",
+   "reading": "надзо́р",
+   "gloss": "oversight",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue2.reviziya",
+   "form": "ревизия",
+   "reading": "реви́зия",
+   "gloss": "audit, revision",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue2.audit",
+   "form": "аудит",
+   "reading": "ауди́т",
+   "gloss": "audit",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue2.uchyot",
+   "form": "учёт",
+   "reading": "уче́т",
+   "gloss": "accounting",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue2.otchetnost",
+   "form": "отчётность",
+   "reading": "отче́тность",
+   "gloss": "reporting",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue2.finansy",
+   "form": "финансы",
+   "reading": "фина́нсы",
+   "gloss": "finances",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue2.dokazuemyy",
+   "form": "доказуемый",
+   "reading": "доказу́емый",
+   "gloss": "provable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue2.veroyatnyy",
+   "form": "вероятный",
+   "reading": "вероя́тный",
+   "gloss": "probable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue2.neveroyatnyy",
+   "form": "невероятный",
+   "reading": "невероя́тный",
+   "gloss": "unbelievable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue2.dostovernyy",
+   "form": "достоверный",
+   "reading": "достове́рный",
+   "gloss": "reliable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue2.podlinnyy",
+   "form": "подлинный",
+   "reading": "по́длинный",
+   "gloss": "genuine",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue2.poddelat",
+   "form": "подделать",
+   "reading": "подде́лать",
+   "gloss": "to forge",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue2.falshivyy",
+   "form": "фальшивый",
+   "reading": "фальши́вый",
+   "gloss": "fake",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue2.autentichnyy",
+   "form": "аутентичный",
+   "reading": "аутенти́чный",
+   "gloss": "authentic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue2.proveryat",
+   "form": "проверять",
+   "reading": "проверя́ть",
+   "gloss": "to check",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue2.pereproveryat",
+   "form": "перепроверять",
+   "reading": "перепроверя́ть",
+   "gloss": "to double-check",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue2.slichenie",
+   "form": "сличение",
+   "reading": "сличе́ние",
+   "gloss": "comparison",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue2.slichat",
+   "form": "сличать",
+   "reading": "слича́ть",
+   "gloss": "to compare",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue2.sopostavlenie",
+   "form": "сопоставление",
+   "reading": "сопоставле́ние",
+   "gloss": "juxtaposition",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue2.sopostavlyat",
+   "form": "сопоставлять",
+   "reading": "сопоставля́ть",
+   "gloss": "to compare",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue2.korrelyaciya",
+   "form": "корреляция",
+   "reading": "корреля́ция",
+   "gloss": "correlation",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

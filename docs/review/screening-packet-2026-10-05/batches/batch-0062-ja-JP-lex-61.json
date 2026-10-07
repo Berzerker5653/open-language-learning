@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-61",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.formal.guchou",
+   "form": "ぐちょう",
+   "reading": "ぐちょう",
+   "gloss": "greeting words",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.aisatsu",
+   "form": "あいさつ",
+   "reading": "あいさつ",
+   "gloss": "greeting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.irei",
+   "form": "れい",
+   "reading": "れい",
+   "gloss": "etiquette, custom",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.kizukai",
+   "form": "きづかい",
+   "reading": "きづかい",
+   "gloss": "consideration, thoughtfulness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.hatsuu",
+   "form": "はつゆう",
+   "reading": "はつゆう",
+   "gloss": "mailing, sending mail",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.mimai",
+   "form": "みまい",
+   "reading": "みまい",
+   "gloss": "condolence, inquiry after health",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.gankou",
+   "form": "がんこう",
+   "reading": "がんこう",
+   "gloss": "year-end",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.chuu",
+   "form": "ちゅう",
+   "reading": "ちゅう",
+   "gloss": "middle, mid-year",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.kaiwa",
+   "form": "かいわ",
+   "reading": "かいわ",
+   "gloss": "conversation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.gijiroku",
+   "form": "ぎじろく",
+   "reading": "ぎじろく",
+   "gloss": "minutes, meeting record",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.joken",
+   "form": "じょうけん",
+   "reading": "じょうけん",
+   "gloss": "clause, term",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.hotei",
+   "form": "ほうてい",
+   "reading": "ほうてい",
+   "gloss": "provision, clause",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.kaigi2",
+   "form": "かいぎ",
+   "reading": "かいぎ",
+   "gloss": "meeting, council",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.houkokusho",
+   "form": "ほうこくしょ",
+   "reading": "ほうこくしょ",
+   "gloss": "written report",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.houmonsho",
+   "form": "ほうもんしょ",
+   "reading": "ほうもんしょ",
+   "gloss": "letter of visit request",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.shoukaijo",
+   "form": "しょうかいじょ",
+   "reading": "しょうかいじょ",
+   "gloss": "letter of introduction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.ansho",
+   "form": "あんしょ",
+   "reading": "あんしょ",
+   "gloss": "reply letter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.mimaijo",
+   "form": "みまいじょ",
+   "reading": "みまいじょ",
+   "gloss": "get-well letter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.iansho",
+   "form": "いあんしょ",
+   "reading": "いあんしょ",
+   "gloss": "condolence letter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.gankajou",
+   "form": "がんかじょう",
+   "reading": "がんかじょう",
+   "gloss": "year-end greeting letter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.chuuomimai",
+   "form": "ちゅうおみまい",
+   "reading": "ちゅうおみまい",
+   "gloss": "midsummer greeting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.keijou",
+   "form": "けいじょう",
+   "reading": "けいじょう",
+   "gloss": "celebratory letter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.zange",
+   "form": "ざんげ",
+   "reading": "ざんげ",
+   "gloss": "confession, repentance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.shougi",
+   "form": "しょうぎ",
+   "reading": "しょうぎ",
+   "gloss": "argument, dispute",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal2.satei",
+   "form": "さてい",
+   "reading": "さてい",
+   "gloss": "assessment, appraisal",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

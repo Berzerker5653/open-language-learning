@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-118",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.study2.pometka",
+   "form": "пометка",
+   "reading": "поме́тка",
+   "gloss": "note, annotation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.infografika",
+   "form": "инфографика",
+   "reading": "инфогра́фика",
+   "gloss": "infographics",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study2.hronologiya",
+   "form": "хронология",
+   "reading": "хроноло́гия",
+   "gloss": "chronology",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.vzaimodeystvie",
+   "form": "взаимодействие",
+   "reading": "взаимоде́йствие",
+   "gloss": "interaction",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study2.vozdeystvie",
+   "form": "воздействие",
+   "reading": "возде́йствие",
+   "gloss": "impact, effect",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study2.otdacha",
+   "form": "отдача",
+   "reading": "отда́ча",
+   "gloss": "feedback, return",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.potok",
+   "form": "поток",
+   "reading": "пото́к",
+   "gloss": "flow, stream",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study2.obekt",
+   "form": "объект",
+   "reading": "объе́кт",
+   "gloss": "object",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study2.subekt",
+   "form": "субъект",
+   "reading": "субъе́кт",
+   "gloss": "subject",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study2.funkciya",
+   "form": "функция",
+   "reading": "фу́нкция",
+   "gloss": "function",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.naznachenie",
+   "form": "назначение",
+   "reading": "назначе́ние",
+   "gloss": "purpose, assignment",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study2.mestopolozhenie",
+   "form": "местоположение",
+   "reading": "местоположе́ние",
+   "gloss": "location",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study2.raspolozhenie",
+   "form": "расположение",
+   "reading": "расположе́ние",
+   "gloss": "arrangement",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study2.stroenie",
+   "form": "строение",
+   "reading": "строе́ние",
+   "gloss": "structure, build",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study2.komponent",
+   "form": "компонент",
+   "reading": "компоне́нт",
+   "gloss": "component",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study2.sostavlyayushchaya",
+   "form": "составляющая",
+   "reading": "составля́ющая",
+   "gloss": "component, constituent",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study2.zveno",
+   "form": "звено",
+   "reading": "звено́",
+   "gloss": "link, member",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study2.cep",
+   "form": "цепь",
+   "reading": "цепь",
+   "gloss": "chain",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.cepochka",
+   "form": "цепочка",
+   "reading": "цепо́чка",
+   "gloss": "chain, sequence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.duga",
+   "form": "дуга",
+   "reading": "дуга́",
+   "gloss": "arc",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.petlya",
+   "form": "петля",
+   "reading": "пе́тля",
+   "gloss": "loop",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study2.kontur",
+   "form": "контур",
+   "reading": "ко́нтур",
+   "gloss": "contour, outline",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study2.zona",
+   "form": "зона",
+   "reading": "зо́на",
+   "gloss": "zone",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.sfera",
+   "form": "сфера",
+   "reading": "сфе́ра",
+   "gloss": "sphere",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.atribut",
+   "form": "атрибут",
+   "reading": "атрибу́т",
+   "gloss": "attribute",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

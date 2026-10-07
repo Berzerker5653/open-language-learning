@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-33",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.peer-review-ideas",
+   "text": "こうひょう の かい を もちました。",
+   "gloss": "We held the review meeting."
+  },
+  {
+   "id": "ja.sent.poster-writing",
+   "text": "せいさく の じゅんび を しました。",
+   "gloss": "I prepared the production."
+  },
+  {
+   "id": "ja.sent.thesis-defense",
+   "text": "ぼうえい の じゅんび を しました。",
+   "gloss": "I prepared the defense."
+  },
+  {
+   "id": "ja.sent.publication-basics",
+   "text": "こうほ の きじ を かきました。",
+   "gloss": "I wrote the announcement article."
+  },
+  {
+   "id": "ja.sent.business-letters",
+   "text": "しょかん を かきました。",
+   "gloss": "I wrote the letter."
+  },
+  {
+   "id": "ja.sent.official-notices",
+   "text": "つうち を よみました。",
+   "gloss": "I read the notice."
+  },
+  {
+   "id": "ja.sent.application-letters",
+   "text": "もうしこみ を だしました。",
+   "gloss": "I submitted the application."
+  },
+  {
+   "id": "ja.sent.apology-formal",
+   "text": "わび の しょかん を かきました。",
+   "gloss": "I wrote the apology letter."
+  },
+  {
+   "id": "ja.sent.complaint-formal",
+   "text": "ふまん を つたえました。",
+   "gloss": "I conveyed the dissatisfaction."
+  },
+  {
+   "id": "ja.sent.negotiation-writing",
+   "text": "こうしょう の じょうけん を かきました。",
+   "gloss": "I wrote the negotiation conditions."
+  },
+  {
+   "id": "ja.sent.invitation-formal",
+   "text": "ねんじ の みまい を しました。",
+   "gloss": "I made the seasonal greeting visit."
+  },
+  {
+   "id": "ja.sent.meeting-minutes",
+   "text": "ぎじろく を かきました。",
+   "gloss": "I wrote the minutes."
+  },
+  {
+   "id": "ja.sent.contract-terms",
+   "text": "じょうけん を かくにん しました。",
+   "gloss": "I confirmed the clause."
+  },
+  {
+   "id": "ja.sent.legal-correspondence",
+   "text": "あんしょ を だしました。",
+   "gloss": "I sent the reply letter."
+  },
+  {
+   "id": "ja.sent.diplomatic-style",
+   "text": "ほうもんしょ を おくりました。",
+   "gloss": "I sent the visit request."
+  }
+ ]
+}

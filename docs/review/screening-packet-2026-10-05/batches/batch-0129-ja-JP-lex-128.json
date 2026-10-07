@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-128",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.society2.kenpou",
+   "form": "けんぽう",
+   "reading": "けんぽう",
+   "gloss": "constitution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.kodoku",
+   "form": "こどく",
+   "reading": "こどく",
+   "gloss": "loneliness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.hikikomori",
+   "form": "ひきこもり",
+   "reading": "ひきこもり",
+   "gloss": "social withdrawal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.kyuugyou",
+   "form": "きゅうぎょう",
+   "reading": "きゅうぎょう",
+   "gloss": "unemployment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.kyoufu",
+   "form": "きょうふ",
+   "reading": "きょうふ",
+   "gloss": "fear",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.shisan",
+   "form": "しさん",
+   "reading": "しさん",
+   "gloss": "assets",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.byoudou",
+   "form": "びょうどう",
+   "reading": "びょうどう",
+   "gloss": "equality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.sa",
+   "form": "さ",
+   "reading": "さ",
+   "gloss": "difference",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.kaihatsu",
+   "form": "かいはつ",
+   "reading": "かいはつ",
+   "gloss": "development",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.fbyoudou",
+   "form": "ふびょうどう",
+   "reading": "ふびょうどう",
+   "gloss": "inequality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.kyousou",
+   "form": "きょうそう",
+   "reading": "きょうそう",
+   "gloss": "competition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.inaka",
+   "form": "いなか",
+   "reading": "いなか",
+   "gloss": "countryside",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.kandou",
+   "form": "かんどう",
+   "reading": "かんどう",
+   "gloss": "excitement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.shizukasa",
+   "form": "しずけさ",
+   "reading": "しずけさ",
+   "gloss": "quietness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.kominkan",
+   "form": "こうみんかん",
+   "reading": "こうみんかん",
+   "gloss": "community center",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.toshi",
+   "form": "とし",
+   "reading": "とし",
+   "gloss": "city",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.sedai",
+   "form": "せいだい",
+   "reading": "せいだい",
+   "gloss": "generation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.seinen",
+   "form": "せいねん",
+   "reading": "せいねん",
+   "gloss": "young adult",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.kakusa",
+   "form": "かくさ",
+   "reading": "かくさ",
+   "gloss": "gap",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.ishiki",
+   "form": "しき",
+   "reading": "しき",
+   "gloss": "awareness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.seishounen",
+   "form": "せいしょうねん",
+   "reading": "せいしょうねん",
+   "gloss": "youth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.seimei",
+   "form": "せいめい",
+   "reading": "せいめい",
+   "gloss": "statement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.akusei",
+   "form": "あこう",
+   "reading": "あこう",
+   "gloss": "accusation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.teigen",
+   "form": "ていげん",
+   "reading": "ていげん",
+   "gloss": "proposal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.houfuku",
+   "form": "ほうふく",
+   "reading": "ほうふく",
+   "gloss": "response",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

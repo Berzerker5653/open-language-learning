@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-27",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.culture.shinko-zai",
+   "form": "しんこうざい",
+   "reading": "しんこうざい",
+   "gloss": "article of faith",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.tsukiai",
+   "form": "つきあい",
+   "reading": "つきあい",
+   "gloss": "socializing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.homonsha",
+   "form": "ほうもんしゃ",
+   "reading": "ほうもんしゃ",
+   "gloss": "visitor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.zashiki",
+   "form": "ざしき",
+   "reading": "ざしき",
+   "gloss": "seat; room",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.omiyage",
+   "form": "おみやげ",
+   "reading": "おみやげ",
+   "gloss": "souvenir gift",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.douhankai",
+   "form": "どうかんかい",
+   "reading": "どうかんかい",
+   "gloss": "drinking party",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.okurimono",
+   "form": "おくりもの",
+   "reading": "おくりもの",
+   "gloss": "gift",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.kansen",
+   "form": "かんせん",
+   "reading": "かんせん",
+   "gloss": "greeting card",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.tsutsumi",
+   "form": "つつみ",
+   "reading": "つつみ",
+   "gloss": "wrapping",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.noshi",
+   "form": "のし",
+   "reading": "のし",
+   "gloss": "gift label",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.fukuro",
+   "form": "ふくろ",
+   "reading": "ふくろ",
+   "gloss": "bag",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.kinshi",
+   "form": "きんし",
+   "reading": "きんし",
+   "gloss": "prohibition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.taboo",
+   "form": "タブー",
+   "reading": "タブー",
+   "gloss": "taboo",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.haji",
+   "form": "はじ",
+   "reading": "はじ",
+   "gloss": "shame",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.shitsurei",
+   "form": "しつれい",
+   "reading": "しつれい",
+   "gloss": "rudeness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.hazukashii",
+   "form": "はずかしい",
+   "reading": "はずかしい",
+   "gloss": "embarrassing",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.shugo",
+   "form": "しゅごう",
+   "reading": "しゅごう",
+   "gloss": "congratulation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.engi",
+   "form": "えんぎ",
+   "reading": "えんぎ",
+   "gloss": "engagement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.sosai",
+   "form": "そうさい",
+   "reading": "そうさい",
+   "gloss": "funeral",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.hanayome",
+   "form": "はなよめ",
+   "reading": "はなよめ",
+   "gloss": "bride",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.hanamuko",
+   "form": "はなむこ",
+   "reading": "はなむこ",
+   "gloss": "groom",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.bunkaron",
+   "form": "ぶんかろん",
+   "reading": "ぶんかろん",
+   "gloss": "cultural theory",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.hassou",
+   "form": "はっそう",
+   "reading": "はっそう",
+   "gloss": "interpretation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.kousatsu",
+   "form": "こうさつ",
+   "reading": "こうさつ",
+   "gloss": "observation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture2.tsuyaku",
+   "form": "つうやく",
+   "reading": "つうやく",
+   "gloss": "interpretation (language)",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

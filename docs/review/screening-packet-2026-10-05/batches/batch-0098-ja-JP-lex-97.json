@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-97",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.media3.jouhou2",
+   "form": "じょうほう",
+   "reading": "じょうほう",
+   "gloss": "information",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.tsuushin5",
+   "form": "つうしん",
+   "reading": "つうしん",
+   "gloss": "communications",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.ryutsuu2",
+   "form": "りゅうつう",
+   "reading": "りゅうつう",
+   "gloss": "flow, circulation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.shuuryuu",
+   "form": "しゅうりゅう",
+   "reading": "しゅうりゅう",
+   "gloss": "trend, flow",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.kairyou2",
+   "form": "かいりょう",
+   "reading": "かいりょう",
+   "gloss": "understanding",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.seminaa",
+   "form": "せみなー",
+   "reading": "せみなー",
+   "gloss": "seminar",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.ronbun2",
+   "form": "ろんぶん",
+   "reading": "ろんぶん",
+   "gloss": "written argument",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.bessou",
+   "form": "べっそう",
+   "reading": "べっそう",
+   "gloss": "separate draft",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.mukashi",
+   "form": "むかし",
+   "reading": "むかし",
+   "gloss": "long ago; the old days",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.toki",
+   "form": "とき",
+   "reading": "とき",
+   "gloss": "time; moment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.hanashi",
+   "form": "はなし",
+   "reading": "はなし",
+   "gloss": "story; talk",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.densetsu",
+   "form": "でんせつ",
+   "reading": "でんせつ",
+   "gloss": "legend",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.mura",
+   "form": "むら",
+   "reading": "むら",
+   "gloss": "village",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.sora",
+   "form": "そら",
+   "reading": "そら",
+   "gloss": "sky",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.hoshi",
+   "form": "ほし",
+   "reading": "ほし",
+   "gloss": "star",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.tsuki",
+   "form": "つき",
+   "reading": "つき",
+   "gloss": "moon",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.kumo",
+   "form": "くも",
+   "reading": "くも",
+   "gloss": "cloud",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.yuki",
+   "form": "ゆき",
+   "reading": "ゆき",
+   "gloss": "snow",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.yama",
+   "form": "やま",
+   "reading": "やま",
+   "gloss": "mountain",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.kawa",
+   "form": "かわ",
+   "reading": "かわ",
+   "gloss": "river",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.mori",
+   "form": "もり",
+   "reading": "もり",
+   "gloss": "forest",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.umi",
+   "form": "うみ",
+   "reading": "うみ",
+   "gloss": "sea",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.ishi",
+   "form": "いし",
+   "reading": "いし",
+   "gloss": "stone",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.hito",
+   "form": "ひと",
+   "reading": "ひと",
+   "gloss": "person",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.kao",
+   "form": "かお",
+   "reading": "かお",
+   "gloss": "face",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

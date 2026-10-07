@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-10",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.a2.u185",
+   "text": "Это задание.",
+   "gloss": "This is the task."
+  },
+  {
+   "id": "ru.sent.a2.u186",
+   "text": "Это шаг.",
+   "gloss": "This is a step."
+  },
+  {
+   "id": "ru.sent.a2.u187",
+   "text": "Это средство.",
+   "gloss": "This is a product."
+  },
+  {
+   "id": "ru.sent.a2.u188",
+   "text": "Это готово.",
+   "gloss": "This is ready."
+  },
+  {
+   "id": "ru.sent.a2.u189",
+   "text": "Это итог.",
+   "gloss": "This is the result."
+  },
+  {
+   "id": "ru.sent.a2.u190",
+   "text": "Это проблема.",
+   "gloss": "This is a problem."
+  },
+  {
+   "id": "ru.sent.a2.u191",
+   "text": "Это просьба.",
+   "gloss": "This is a request."
+  },
+  {
+   "id": "ru.sent.a2.u192",
+   "text": "Это способ.",
+   "gloss": "This is a method."
+  },
+  {
+   "id": "ru.sent.a2.u193",
+   "text": "Это мастер.",
+   "gloss": "This is the repairman."
+  },
+  {
+   "id": "ru.sent.a2.u194",
+   "text": "Это сумма.",
+   "gloss": "This is the amount."
+  },
+  {
+   "id": "ru.sent.a2.u195",
+   "text": "Это ошибка.",
+   "gloss": "This is a mistake."
+  },
+  {
+   "id": "ru.sent.a2.u196",
+   "text": "Это запас.",
+   "gloss": "This is a reserve."
+  },
+  {
+   "id": "ru.sent.a2.u197",
+   "text": "Это половина.",
+   "gloss": "This is half."
+  },
+  {
+   "id": "ru.sent.a2.u198",
+   "text": "Это сигнал.",
+   "gloss": "This is a signal."
+  },
+  {
+   "id": "ru.sent.a2.u199",
+   "text": "Это решение.",
+   "gloss": "This is a solution."
+  }
+ ]
+}

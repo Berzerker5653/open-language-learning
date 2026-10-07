@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-79",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.law2.hokoku",
+   "form": "ほうこく",
+   "reading": "ほうこく",
+   "gloss": "report",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.fukumu",
+   "form": "ふくむ",
+   "reading": "ふくむ",
+   "gloss": "duties",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.yakujo",
+   "form": "やくじょう",
+   "reading": "やくじょう",
+   "gloss": "role",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.kigen",
+   "form": "きげん",
+   "reading": "きげん",
+   "gloss": "deadline",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.hifu",
+   "form": "ひふ",
+   "reading": "ひふ",
+   "gloss": "expenses",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.keihi",
+   "form": "けいひ",
+   "reading": "けいひ",
+   "gloss": "costs",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.shuushuu",
+   "form": "しゅうしゅう",
+   "reading": "しゅうしゅう",
+   "gloss": "collection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.shuukyu",
+   "form": "しゅうきゅう",
+   "reading": "しゅうきゅう",
+   "gloss": "levy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.kansoku",
+   "form": "かんそく",
+   "reading": "かんそく",
+   "gloss": "supervision",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.kosai",
+   "form": "こうさい",
+   "reading": "こうさい",
+   "gloss": "public interest",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.johou",
+   "form": "じょうほう",
+   "reading": "じょうほう",
+   "gloss": "information",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.touzoku",
+   "form": "とうぞく",
+   "reading": "とうぞく",
+   "gloss": "theft",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.joron",
+   "form": "じょろん",
+   "reading": "じょろん",
+   "gloss": "preliminary discussion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.hihan",
+   "form": "ひはん",
+   "reading": "ひはん",
+   "gloss": "criticism",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.bunseki",
+   "form": "ぶんせき",
+   "reading": "ぶんせき",
+   "gloss": "analysis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.kyoka",
+   "form": "きょうか",
+   "reading": "きょうか",
+   "gloss": "permission",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.hinka",
+   "form": "ひんか",
+   "reading": "ひんか",
+   "gloss": "dignity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.teishutsu",
+   "form": "ていしゅつ",
+   "reading": "ていしゅつ",
+   "gloss": "submission",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.touhi",
+   "form": "とうひ",
+   "reading": "とうひ",
+   "gloss": "opposition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.kufuku",
+   "form": "くふく",
+   "reading": "くふく",
+   "gloss": "restoration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.shouhisha",
+   "form": "しょうひしゃ",
+   "reading": "しょうひしゃ",
+   "gloss": "consumer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.shiire",
+   "form": "しいれ",
+   "reading": "しいれ",
+   "gloss": "purchasing stock",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.zaimuko",
+   "form": "ざいむこ",
+   "reading": "ざいむこ",
+   "gloss": "inventory",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.unyu",
+   "form": "うんゆ",
+   "reading": "うんゆ",
+   "gloss": "distribution of goods",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.butsuryuu",
+   "form": "ぶつりゅう",
+   "reading": "ぶつりゅう",
+   "gloss": "logistics",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

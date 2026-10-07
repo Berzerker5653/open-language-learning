@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-131",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.style.vymarka",
+   "form": "вымарка",
+   "reading": "вы́марка",
+   "gloss": "blacking out, erasure",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.izymat",
+   "form": "изымать",
+   "reading": "изыма́ть",
+   "gloss": "to remove, withdraw",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.izyatie",
+   "form": "изъятие",
+   "reading": "изъя́тие",
+   "gloss": "removal, withdrawal",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.szhimat",
+   "form": "сжимать",
+   "reading": "сжима́ть",
+   "gloss": "to compress",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.uplotnyat",
+   "form": "уплотнять",
+   "reading": "уплотня́ть",
+   "gloss": "to compact",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.uplotnenie",
+   "form": "уплотнение",
+   "reading": "уплотне́ние",
+   "gloss": "compaction",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.vstavlyat",
+   "form": "вставлять",
+   "reading": "вставля́ть",
+   "gloss": "to insert",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.vnosiat",
+   "form": "вносить",
+   "reading": "вноси́ть",
+   "gloss": "to introduce, add",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.pripiska",
+   "form": "приписка",
+   "reading": "припи́ска",
+   "gloss": "postscript, added note",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.dopiska",
+   "form": "дописка",
+   "reading": "допи́ска",
+   "gloss": "added note, supplement",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.nadpiska",
+   "form": "надписка",
+   "reading": "надпи́ска",
+   "gloss": "inscription, overwriting",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.pometa",
+   "form": "помета",
+   "reading": "поме́та",
+   "gloss": "annotation, marginal note",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.zarubka",
+   "form": "зарубка",
+   "reading": "зару́бка",
+   "gloss": "notch",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.rasechka",
+   "form": "засечка",
+   "reading": "засе́чка",
+   "gloss": "notch, hook",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.procherk",
+   "form": "прочерк",
+   "reading": "про́черк",
+   "gloss": "dash, blank",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.opechatka",
+   "form": "опечатка",
+   "reading": "опеча́тка",
+   "gloss": "typo",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.filolog",
+   "form": "филолог",
+   "reading": "фило́лог",
+   "gloss": "philologist",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.filologiya",
+   "form": "филология",
+   "reading": "филоло́гия",
+   "gloss": "philology",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.ortografiya",
+   "form": "орфография",
+   "reading": "орфогра́фия",
+   "gloss": "orthography",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.punktuaciya",
+   "form": "пунктуация",
+   "reading": "пунктуа́ция",
+   "gloss": "punctuation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.skobki",
+   "form": "скобки",
+   "reading": "ско́бки",
+   "gloss": "brackets",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.redakciya",
+   "form": "редакция",
+   "reading": "реда́кция",
+   "gloss": "edition, editorial office",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.vychitchik",
+   "form": "вычитчик",
+   "reading": "вы́читчик",
+   "gloss": "proofreader",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.cenzor",
+   "form": "цензор",
+   "reading": "це́нзор",
+   "gloss": "censor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.literatur",
+   "form": "литератор",
+   "reading": "литера́тор",
+   "gloss": "man of letters, writer",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

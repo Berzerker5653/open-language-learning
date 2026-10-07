@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-102",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.philosophy2.bigaku",
+   "form": "びがく",
+   "reading": "びがく",
+   "gloss": "aesthetics",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.biishiki",
+   "form": "びかん",
+   "reading": "びかん",
+   "gloss": "aesthetic sense",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.geijutsu",
+   "form": "げいじゅつ",
+   "reading": "げいじゅつ",
+   "gloss": "art",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.zense",
+   "form": "ぜんせい",
+   "reading": "ぜんせい",
+   "gloss": "goodness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.dousei",
+   "form": "どうせい",
+   "reading": "どうせい",
+   "gloss": "shared life",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.chouwa",
+   "form": "ちょうわ",
+   "reading": "ちょうわ",
+   "gloss": "harmony",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.bi",
+   "form": "び",
+   "reading": "び",
+   "gloss": "beauty",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.kokoro-bazashi",
+   "form": "こころづかい",
+   "reading": "こころづかい",
+   "gloss": "thoughtfulness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.kantei",
+   "form": "かんてい",
+   "reading": "かんてい",
+   "gloss": "appraisal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.handan",
+   "form": "はんだん",
+   "reading": "はんだん",
+   "gloss": "judgment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.urei",
+   "form": "ゆうれい",
+   "reading": "ゆうれい",
+   "gloss": "concern",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.tsuyosa",
+   "form": "つよさ",
+   "reading": "つよさ",
+   "gloss": "strength",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.yowasa",
+   "form": "よわさ",
+   "reading": "よわさ",
+   "gloss": "weakness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.omoi-yari",
+   "form": "おもいやり",
+   "reading": "おもいやり",
+   "gloss": "consideration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.shinro",
+   "form": "しんり",
+   "reading": "しんり",
+   "gloss": "psychology",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.kyoi",
+   "form": "きょうい",
+   "reading": "きょうい",
+   "gloss": "consensus",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.kyokou",
+   "form": "きょこう",
+   "reading": "きょこう",
+   "gloss": "holding of a ceremony",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.jiyu-ishiki",
+   "form": "じゆういしき",
+   "reading": "じゆういしき",
+   "gloss": "sense of free will",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.sekinin-kan",
+   "form": "せきにんかん",
+   "reading": "せきにんかん",
+   "gloss": "sense of responsibility",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.nenrei",
+   "form": "ねんれい",
+   "reading": "ねんれい",
+   "gloss": "era",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.jinsei",
+   "form": "じんせい",
+   "reading": "じんせい",
+   "gloss": "life",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.jinsei-kan",
+   "form": "じんせいかん",
+   "reading": "じんせいかん",
+   "gloss": "view of life",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.sekai-kan",
+   "form": "せいかいかん",
+   "reading": "せいかいかん",
+   "gloss": "worldview",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.kachi-kan",
+   "form": "かちかん",
+   "reading": "かちかん",
+   "gloss": "sense of values",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.kiso-chishiki",
+   "form": "きそちしき",
+   "reading": "きそちしき",
+   "gloss": "basic knowledge",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

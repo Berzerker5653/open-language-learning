@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-112",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.psych.danran",
+   "form": "だんらん",
+   "reading": "だんらん",
+   "gloss": "togetherness, family chat",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.koudou",
+   "form": "こうどう",
+   "reading": "こうどう",
+   "gloss": "conduct, behavior",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.kaizen",
+   "form": "かいぜん",
+   "reading": "かいぜん",
+   "gloss": "improvement, betterment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.mokuhyou",
+   "form": "もくひょう",
+   "reading": "もくひょう",
+   "gloss": "target, objective",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.jissen",
+   "form": "じっせん",
+   "reading": "じっせん",
+   "gloss": "practice, putting into practice",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.kizuna",
+   "form": "きずな",
+   "reading": "きずな",
+   "gloss": "bond, connection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.kakunin",
+   "form": "かくにん",
+   "reading": "かくにん",
+   "gloss": "confirmation, verification",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.kankaku",
+   "form": "かんかく",
+   "reading": "かんかく",
+   "gloss": "sensation, perception",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.shinjitsu",
+   "form": "しんじつ",
+   "reading": "しんじつ",
+   "gloss": "truth, reality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.chiteki",
+   "form": "ちてき",
+   "reading": "ちてき",
+   "gloss": "intellectual",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.ninchi",
+   "form": "にんち",
+   "reading": "にんち",
+   "gloss": "cognition, recognition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.kotoba",
+   "form": "ことば",
+   "reading": "ことば",
+   "gloss": "word, language",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.shikou",
+   "form": "しこう",
+   "reading": "しこう",
+   "gloss": "thought, thinking",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.omoi",
+   "form": "おもい",
+   "reading": "おもい",
+   "gloss": "feeling, thought",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.kaiwa2",
+   "form": "かいわ",
+   "reading": "かいわ",
+   "gloss": "conversation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.imi",
+   "form": "いみ",
+   "reading": "いみ",
+   "gloss": "meaning",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.questions.nani",
+   "form": "なに",
+   "reading": "なに",
+   "gloss": "what",
+   "pos": "question",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.questions.doko",
+   "form": "どこ",
+   "reading": "どこ",
+   "gloss": "where",
+   "pos": "question",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.questions.itsu",
+   "form": "いつ",
+   "reading": "いつ",
+   "gloss": "when",
+   "pos": "question",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.questions.dare",
+   "form": "だれ",
+   "reading": "だれ",
+   "gloss": "who",
+   "pos": "question",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.questions.dou",
+   "form": "どう",
+   "reading": "どう",
+   "gloss": "how",
+   "pos": "question",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.questions.ikura",
+   "form": "いくら",
+   "reading": "いくら",
+   "gloss": "how much",
+   "pos": "question",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.questions.naze",
+   "form": "なぜ",
+   "reading": "なぜ",
+   "gloss": "why",
+   "pos": "question",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.questions.donna",
+   "form": "どんな",
+   "reading": "どんな",
+   "gloss": "what kind of",
+   "pos": "question",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.questions.dore",
+   "form": "どれ",
+   "reading": "どれ",
+   "gloss": "which (of three or more)",
+   "pos": "question",
+   "gender": ""
+  }
+ ]
+}

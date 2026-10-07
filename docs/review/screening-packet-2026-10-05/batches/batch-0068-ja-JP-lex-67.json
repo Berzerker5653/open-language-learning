@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-67",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.health.te",
+   "form": "て",
+   "reading": "て",
+   "gloss": "hand",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.hiza",
+   "form": "ひざ",
+   "reading": "ひざ",
+   "gloss": "knee",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.netsu",
+   "form": "ねつ",
+   "reading": "ねつ",
+   "gloss": "fever; temperature",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.itami",
+   "form": "いたみ",
+   "reading": "いたみ",
+   "gloss": "pain",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.kensa",
+   "form": "けんさ",
+   "reading": "けんさ",
+   "gloss": "medical check-up; test",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.yakkyoku",
+   "form": "やっきょく",
+   "reading": "やっきょく",
+   "gloss": "pharmacy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.kenkou",
+   "form": "けんこう",
+   "reading": "けんこう",
+   "gloss": "health",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.undou",
+   "form": "うんどう",
+   "reading": "うんどう",
+   "gloss": "exercise",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.kega",
+   "form": "けが",
+   "reading": "けが",
+   "gloss": "injury; wound",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.shinpai",
+   "form": "しんぱい",
+   "reading": "しんぱい",
+   "gloss": "worry",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.tsukare",
+   "form": "つかれ",
+   "reading": "つかれ",
+   "gloss": "fatigue; tiredness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.nemuri",
+   "form": "ねむり",
+   "reading": "ねむり",
+   "gloss": "sleep",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.seikatsu",
+   "form": "せいかつ",
+   "reading": "せいかつ",
+   "gloss": "daily life; lifestyle",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.junbi",
+   "form": "じゅんび",
+   "reading": "じゅんび",
+   "gloss": "preparation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.kyuukei",
+   "form": "きゅうけい",
+   "reading": "きゅうけい",
+   "gloss": "rest break",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.kimochi",
+   "form": "きもち",
+   "reading": "きもち",
+   "gloss": "feeling; sensation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.kangofu",
+   "form": "かんごふ",
+   "reading": "かんごふ",
+   "gloss": "nurse",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.kusuri",
+   "form": "くすり",
+   "reading": "くすり",
+   "gloss": "medicine",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.byouki",
+   "form": "びょうき",
+   "reading": "びょうき",
+   "gloss": "sick; ill",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.daijoubu",
+   "form": "だいじょうぶ",
+   "reading": "だいじょうぶ",
+   "gloss": "all right; OK",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.itai",
+   "form": "いたい",
+   "reading": "いたい",
+   "gloss": "painful; hurt",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.tsurai",
+   "form": "つらい",
+   "reading": "つらい",
+   "gloss": "tough; hard to bear",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.kurushii",
+   "form": "くるしい",
+   "reading": "くるしい",
+   "gloss": "painful; suffocating",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.omoi",
+   "form": "おもい",
+   "reading": "おもい",
+   "gloss": "heavy",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.karui",
+   "form": "かるい",
+   "reading": "かるい",
+   "gloss": "light",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

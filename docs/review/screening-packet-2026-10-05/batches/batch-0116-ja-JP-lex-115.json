@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-115",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.reg2.jitsugyou",
+   "form": "じつぎょう",
+   "reading": "じつぎょう",
+   "gloss": "business",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.bunpo",
+   "form": "ぶんぽう",
+   "reading": "ぶんぽう",
+   "gloss": "writing style",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.bungaku",
+   "form": "ぶんがく",
+   "reading": "ぶんがく",
+   "gloss": "literature",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.shosetsu",
+   "form": "しょうせつ",
+   "reading": "しょうせつ",
+   "gloss": "novel",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.shi",
+   "form": "し",
+   "reading": "し",
+   "gloss": "poem",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.omoshiroi",
+   "form": "おもしろい",
+   "reading": "おもしろい",
+   "gloss": "funny, interesting",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.warai",
+   "form": "わらい",
+   "reading": "わらい",
+   "gloss": "laughter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.tsukkomi",
+   "form": "つっこみ",
+   "reading": "つっこみ",
+   "gloss": "straight-man retort",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.boke",
+   "form": "ぼけ",
+   "reading": "ぼけ",
+   "gloss": "funny role",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.dajare",
+   "form": "だじゃれ",
+   "reading": "だじゃれ",
+   "gloss": "pun",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.rakugo",
+   "form": "らくご",
+   "reading": "らくご",
+   "gloss": "rakugo storytelling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.koudan",
+   "form": "こうだん",
+   "reading": "こうだん",
+   "gloss": "storytelling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.hyogen",
+   "form": "ひょうげん",
+   "reading": "ひょうげん",
+   "gloss": "expression",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.kuchiguse",
+   "form": "くちぐせ",
+   "reading": "くちぐせ",
+   "gloss": "verbal habit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.jouhou",
+   "form": "じょうほう",
+   "reading": "じょうほう",
+   "gloss": "information",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.tsuushin",
+   "form": "つうしん",
+   "reading": "つうしん",
+   "gloss": "communication",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.koukyuu",
+   "form": "こうきゅう",
+   "reading": "こうきゅう",
+   "gloss": "public",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.koukoku",
+   "form": "こうこく",
+   "reading": "こうこく",
+   "gloss": "advertisement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.denwa",
+   "form": "でんわ",
+   "reading": "でんわ",
+   "gloss": "telephone",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.kangae",
+   "form": "かんがえ",
+   "reading": "かんがえ",
+   "gloss": "thought",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.kuuki",
+   "form": "くうき",
+   "reading": "くうき",
+   "gloss": "atmosphere",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.tsuuyou",
+   "form": "つうよう",
+   "reading": "つうよう",
+   "gloss": "usage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.ryukou",
+   "form": "りゅうこう",
+   "reading": "りゅうこう",
+   "gloss": "trend",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.hayari",
+   "form": "はやり",
+   "reading": "はやり",
+   "gloss": "fashion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.iro",
+   "form": "いろ",
+   "reading": "いろ",
+   "gloss": "color, nuance",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-41",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.edu4.menta",
+   "form": "メンター",
+   "reading": "メンター",
+   "gloss": "mentor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.byoudou",
+   "form": "びょうどう",
+   "reading": "びょうどう",
+   "gloss": "equity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.kyousei2",
+   "form": "ふうとう",
+   "reading": "ふうとう",
+   "gloss": "disadvantage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.hogosha",
+   "form": "ほごしゃ",
+   "reading": "ほごしゃ",
+   "gloss": "guardian",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.oya",
+   "form": "おや",
+   "reading": "おや",
+   "gloss": "parent",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.kokusai",
+   "form": "こくさい",
+   "reading": "こくさい",
+   "gloss": "international",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.bunkachi",
+   "form": "ぶんかち",
+   "reading": "ぶんかち",
+   "gloss": "cultural value",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.koutei",
+   "form": "かてい",
+   "reading": "かてい",
+   "gloss": "process, curriculum",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.kuni",
+   "form": "くに",
+   "reading": "くに",
+   "gloss": "nation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.seisaku",
+   "form": "せいさく",
+   "reading": "せいさく",
+   "gloss": "policy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.hiyou",
+   "form": "ひよう",
+   "reading": "ひよう",
+   "gloss": "expenditure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.zentai",
+   "form": "ぜんたい",
+   "reading": "ぜんたい",
+   "gloss": "overall",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.koudou",
+   "form": "こうどう",
+   "reading": "こうどう",
+   "gloss": "behavior",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.kokugo",
+   "form": "こくご",
+   "reading": "こくご",
+   "gloss": "national language",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.gaikokugo",
+   "form": "がいこくご",
+   "reading": "がいこくご",
+   "gloss": "foreign language",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.eigo",
+   "form": "えいご",
+   "reading": "えいご",
+   "gloss": "English",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.gakai",
+   "form": "がくがい",
+   "reading": "がくがい",
+   "gloss": "outside school",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.nai",
+   "form": "ない",
+   "reading": "ない",
+   "gloss": "inside",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.seikyu",
+   "form": "せいきゅう",
+   "reading": "せいきゅう",
+   "gloss": "demand, request",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.kibou",
+   "form": "きぼう",
+   "reading": "きぼう",
+   "gloss": "expectation, hope",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.yakuwari",
+   "form": "やくわり",
+   "reading": "やくわり",
+   "gloss": "role, part",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.tantousha",
+   "form": "たんとうしゃ",
+   "reading": "たんとうしゃ",
+   "gloss": "person in charge",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.kyouiku-houritsu",
+   "form": "きょういくほうりつ",
+   "reading": "きょういくほうりつ",
+   "gloss": "education law",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.kurabu",
+   "form": "クラブ",
+   "reading": "クラブ",
+   "gloss": "club",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.chugaku",
+   "form": "ちゅうがっこう",
+   "reading": "ちゅうがっこう",
+   "gloss": "middle school",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

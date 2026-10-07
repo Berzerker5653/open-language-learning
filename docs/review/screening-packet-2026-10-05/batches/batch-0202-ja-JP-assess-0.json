@@ -1,0 +1,94 @@
+{
+ "batch_id": "ja-JP-assess-0",
+ "kind": "assess",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.assess.onramp.greeting-transfer",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "communicative task completed",
+    "errors do not block meaning"
+   ]
+  },
+  {
+   "id": "ja.assess.kana-hiragana",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "symbol recognized within SRS schedule",
+    "accuracy above policy threshold"
+   ]
+  },
+  {
+   "id": "ja.assess.kana-katakana",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "symbol recognized within SRS schedule"
+   ]
+  },
+  {
+   "id": "ja.assess.politeness-basics",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "phrase fits the situation",
+    "errors do not block meaning"
+   ]
+  },
+  {
+   "id": "ja.assess.introduce-yourself",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "name stated",
+    "set phrase used",
+    "errors do not block meaning"
+   ]
+  },
+  {
+   "id": "ja.assess.identify-objects",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "demonstrative matched to distance"
+   ]
+  },
+  {
+   "id": "ja.assess.describe-qualities",
+   "kind": "production",
+   "modality": "speaking",
+   "criteria": [
+    "adjective agrees with target",
+    "meaning clear"
+   ]
+  },
+  {
+   "id": "ja.assess.talk-about-meals",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "food/drink communicated",
+    "polite form used"
+   ]
+  },
+  {
+   "id": "ja.assess.likes-dislikes",
+   "kind": "production",
+   "modality": "speaking",
+   "criteria": [
+    "suki/kirai construction correct"
+   ]
+  },
+  {
+   "id": "ja.assess.go-places",
+   "kind": "production",
+   "modality": "speaking",
+   "criteria": [
+    "destination + particle correct"
+   ]
+  }
+ ]
+}

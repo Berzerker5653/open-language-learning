@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-16",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b1.u275",
+   "text": "Это оценка.",
+   "gloss": "This is a grade."
+  },
+  {
+   "id": "ru.sent.b1.u276",
+   "text": "Это резюме.",
+   "gloss": "This is a CV."
+  },
+  {
+   "id": "ru.sent.b1.u277",
+   "text": "Это собеседование.",
+   "gloss": "This is an interview."
+  },
+  {
+   "id": "ru.sent.b1.u278",
+   "text": "Это мотивация.",
+   "gloss": "This is motivation."
+  },
+  {
+   "id": "ru.sent.b1.u279",
+   "text": "Это сила.",
+   "gloss": "This is strength."
+  },
+  {
+   "id": "ru.sent.b1.u280",
+   "text": "Это процесс.",
+   "gloss": "This is a process."
+  },
+  {
+   "id": "ru.sent.b1.u281",
+   "text": "Это этап.",
+   "gloss": "This is a stage."
+  },
+  {
+   "id": "ru.sent.b1.u282",
+   "text": "Это сборка.",
+   "gloss": "This is assembly."
+  },
+  {
+   "id": "ru.sent.b1.u283",
+   "text": "Это брак.",
+   "gloss": "This is defective goods."
+  },
+  {
+   "id": "ru.sent.b1.u284",
+   "text": "Это смена.",
+   "gloss": "This is a shift."
+  },
+  {
+   "id": "ru.sent.b1.u285",
+   "text": "Это зарплата.",
+   "gloss": "This is a salary."
+  },
+  {
+   "id": "ru.sent.b1.u286",
+   "text": "Это наставник.",
+   "gloss": "This is a mentor."
+  },
+  {
+   "id": "ru.sent.b1.u287",
+   "text": "Это совещание.",
+   "gloss": "This is a work meeting."
+  },
+  {
+   "id": "ru.sent.b1.u288",
+   "text": "Это качество.",
+   "gloss": "This is quality."
+  },
+  {
+   "id": "ru.sent.b1.u289",
+   "text": "Это склад.",
+   "gloss": "This is a warehouse."
+  }
+ ]
+}

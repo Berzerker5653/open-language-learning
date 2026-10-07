@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-42",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u665",
+   "text": "Это издержки.",
+   "gloss": "These are costs."
+  },
+  {
+   "id": "ru.sent.b2.u666",
+   "text": "Это профицит.",
+   "gloss": "This is a surplus."
+  },
+  {
+   "id": "ru.sent.b2.u667",
+   "text": "Это устойчивость.",
+   "gloss": "This is stability."
+  },
+  {
+   "id": "ru.sent.b2.u668",
+   "text": "Это достаток.",
+   "gloss": "This is prosperity."
+  },
+  {
+   "id": "ru.sent.b2.u669",
+   "text": "Это действенность.",
+   "gloss": "This is effectiveness."
+  },
+  {
+   "id": "ru.sent.b2.u670",
+   "text": "Это самоуправление.",
+   "gloss": "This is self-government."
+  },
+  {
+   "id": "ru.sent.b2.u671",
+   "text": "Это взнос.",
+   "gloss": "This is a membership fee."
+  },
+  {
+   "id": "ru.sent.b2.u672",
+   "text": "Это актив.",
+   "gloss": "This is the active core."
+  },
+  {
+   "id": "ru.sent.b2.u673",
+   "text": "Это равнодушие.",
+   "gloss": "This is indifference."
+  },
+  {
+   "id": "ru.sent.b2.u674",
+   "text": "Это юрисдикция.",
+   "gloss": "This is jurisdiction."
+  },
+  {
+   "id": "ru.sent.b2.u675",
+   "text": "Это привилегия.",
+   "gloss": "This is a privilege."
+  },
+  {
+   "id": "ru.sent.b2.u676",
+   "text": "Это нравственность.",
+   "gloss": "This is morality."
+  },
+  {
+   "id": "ru.sent.b2.u677",
+   "text": "Это добросовестность.",
+   "gloss": "This is conscientiousness."
+  },
+  {
+   "id": "ru.sent.b2.u678",
+   "text": "Это злоупотребление.",
+   "gloss": "This is abuse."
+  },
+  {
+   "id": "ru.sent.b2.u679",
+   "text": "Это равноправие.",
+   "gloss": "This is equality of rights."
+  }
+ ]
+}

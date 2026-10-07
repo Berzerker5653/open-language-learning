@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-89",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.rel.predatelstvo",
+   "form": "предательство",
+   "reading": "преда́тельство",
+   "gloss": "betrayal",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.rel.vernost",
+   "form": "верность",
+   "reading": "ве́рность",
+   "gloss": "loyalty",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.rel.izmena",
+   "form": "измена",
+   "reading": "изме́на",
+   "gloss": "betrayal (affair)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.rel.otnoshenie",
+   "form": "отношение",
+   "reading": "отноше́ние",
+   "gloss": "attitude, relation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.rel.znakomstvo",
+   "form": "знакомство",
+   "reading": "знако́мство",
+   "gloss": "acquaintance",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.rel.obshchenie",
+   "form": "общение",
+   "reading": "обще́ние",
+   "gloss": "communication",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.rel.beseda",
+   "form": "беседа",
+   "reading": "бесе́да",
+   "gloss": "conversation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.rel.razgovor",
+   "form": "разговор",
+   "reading": "разгово́р",
+   "gloss": "talk",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.rel.spor",
+   "form": "спор",
+   "reading": "спор",
+   "gloss": "dispute",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.rel.privychka",
+   "form": "привычка",
+   "reading": "привы́чка",
+   "gloss": "habit",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.rel.kharakter",
+   "form": "характер",
+   "reading": "хара́ктер",
+   "gloss": "character",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.rel.cherta",
+   "form": "черта",
+   "reading": "черта́",
+   "gloss": "trait",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.rel.dobryj",
+   "form": "добрый",
+   "reading": "до́брый",
+   "gloss": "kind",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.rel.otkrovennost",
+   "form": "откровенность",
+   "reading": "открове́нность",
+   "gloss": "candor",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.rel.poryadochnost",
+   "form": "порядочность",
+   "reading": "поря́дочность",
+   "gloss": "decency",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.rel.vzaimnost",
+   "form": "взаимность",
+   "reading": "взаи́мность",
+   "gloss": "reciprocity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.rel.rodnya",
+   "form": "родня",
+   "reading": "родня́",
+   "gloss": "relatives",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.rel.predki",
+   "form": "предки",
+   "reading": "пре́дки",
+   "gloss": "ancestors",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.rel.pokolenie",
+   "form": "поколение",
+   "reading": "поколе́ние",
+   "gloss": "generation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.rel.vospitanie",
+   "form": "воспитание",
+   "reading": "воспита́ние",
+   "gloss": "upbringing",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.rel.vliyanie",
+   "form": "влияние",
+   "reading": "влия́ние",
+   "gloss": "influence",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.rel.imeniny",
+   "form": "именины",
+   "reading": "имени́ны",
+   "gloss": "name-day",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.rel.tsvety",
+   "form": "цветы",
+   "reading": "цветы́",
+   "gloss": "flowers",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.rel.vkuse",
+   "form": "вкус",
+   "reading": "вкус",
+   "gloss": "taste",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.rel.pochita",
+   "form": "почитать",
+   "reading": "почита́ть",
+   "gloss": "to respect",
+   "pos": "verb",
+   "gender": ""
+  }
+ ]
+}

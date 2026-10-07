@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-7",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.a2.u140",
+   "text": "У меня болит голова.",
+   "gloss": "My head hurts."
+  },
+  {
+   "id": "ru.sent.a2.u141",
+   "text": "Это врач.",
+   "gloss": "This is a doctor."
+  },
+  {
+   "id": "ru.sent.a2.u142",
+   "text": "Это лекарство.",
+   "gloss": "This is medicine."
+  },
+  {
+   "id": "ru.sent.a2.u143",
+   "text": "Это приём.",
+   "gloss": "This is the appointment."
+  },
+  {
+   "id": "ru.sent.a2.u144",
+   "text": "Это клиника.",
+   "gloss": "This is the clinic."
+  },
+  {
+   "id": "ru.sent.a2.u145",
+   "text": "Это анализ.",
+   "gloss": "This is the test."
+  },
+  {
+   "id": "ru.sent.a2.u146",
+   "text": "Это совет.",
+   "gloss": "This is the advice."
+  },
+  {
+   "id": "ru.sent.a2.u147",
+   "text": "Это помощь.",
+   "gloss": "This is help."
+  },
+  {
+   "id": "ru.sent.a2.u148",
+   "text": "Это отдых.",
+   "gloss": "This is rest."
+  },
+  {
+   "id": "ru.sent.a2.u149",
+   "text": "Это сон.",
+   "gloss": "This is sleep."
+  },
+  {
+   "id": "ru.sent.a2.u150",
+   "text": "Это работа.",
+   "gloss": "This is work."
+  },
+  {
+   "id": "ru.sent.a2.u151",
+   "text": "Это обязанность.",
+   "gloss": "This is a duty."
+  },
+  {
+   "id": "ru.sent.a2.u152",
+   "text": "Это опыт.",
+   "gloss": "This is experience."
+  },
+  {
+   "id": "ru.sent.a2.u153",
+   "text": "Это цель.",
+   "gloss": "This is the goal."
+  },
+  {
+   "id": "ru.sent.a2.u154",
+   "text": "Это план.",
+   "gloss": "This is the plan."
+  }
+ ]
+}

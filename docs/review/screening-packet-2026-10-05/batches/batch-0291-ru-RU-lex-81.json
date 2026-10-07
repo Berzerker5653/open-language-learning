@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-81",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.prof.proshivka",
+   "form": "прошивка",
+   "reading": "проши́вка",
+   "gloss": "binding",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.numerator",
+   "form": "нумератор",
+   "reading": "нумера́тор",
+   "gloss": "numbering machine",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.pronumerovat",
+   "form": "пронумеровать",
+   "reading": "пронумерова́ть",
+   "gloss": "to number",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.shtampovat",
+   "form": "проштамповать",
+   "reading": "проштампова́ть",
+   "gloss": "to stamp",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.zaverit",
+   "form": "заверить",
+   "reading": "заве́рить",
+   "gloss": "to certify",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.zaverenie",
+   "form": "заверение",
+   "reading": "завере́ние",
+   "gloss": "certification",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.zaverennyy",
+   "form": "заверенный",
+   "reading": "заве́ренный",
+   "gloss": "certified",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.legalizaciya",
+   "form": "легализация",
+   "reading": "легализа́ция",
+   "gloss": "legalization",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.apostil",
+   "form": "апостиль",
+   "reading": "апости́ль",
+   "gloss": "apostille",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.legalizovat",
+   "form": "легализовать",
+   "reading": "легализова́ть",
+   "gloss": "to legalize",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.notarius",
+   "form": "нотариус",
+   "reading": "нота́риус",
+   "gloss": "notary",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.notarialnyy",
+   "form": "нотариальный",
+   "reading": "нотариа́льный",
+   "gloss": "notarial",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.veshchanie2",
+   "form": "завещание",
+   "reading": "завеща́ние",
+   "gloss": "will, testament",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.nasledstvo",
+   "form": "наследство",
+   "reading": "насле́дство",
+   "gloss": "inheritance",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.kontrakt",
+   "form": "контракт",
+   "reading": "контра́кт",
+   "gloss": "contract",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.rasporyazhenie",
+   "form": "распоряжение",
+   "reading": "распоряже́ние",
+   "gloss": "order, directive",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.postanovlenie",
+   "form": "постановление",
+   "reading": "постановле́ние",
+   "gloss": "resolution, decree",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.ukaz",
+   "form": "указ",
+   "reading": "ука́з",
+   "gloss": "decree, ukase",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.deloprovoditel",
+   "form": "делопроводитель",
+   "reading": "делопрово́дитель",
+   "gloss": "records manager",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.kanceljarist",
+   "form": "канцелярист",
+   "reading": "канцеляри́ст",
+   "gloss": "clerk",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.registracionnyy",
+   "form": "регистрационный",
+   "reading": "регистрацио́нный",
+   "gloss": "registration (adj)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.vedomstvennyy",
+   "form": "ведомственный",
+   "reading": "ве́домственный",
+   "gloss": "departmental",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.sluzhebnaya",
+   "form": "служебная",
+   "reading": "служе́бная",
+   "gloss": "official (fem.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.sluzhebnoe",
+   "form": "служебное",
+   "reading": "служе́бное",
+   "gloss": "official (neut.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.sluzhebka",
+   "form": "служебка",
+   "reading": "служе́бка",
+   "gloss": "office memo",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

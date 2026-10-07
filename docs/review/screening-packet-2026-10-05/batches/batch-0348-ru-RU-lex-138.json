@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-138",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.synthesis2.sverka",
+   "form": "сверка",
+   "reading": "све́рка",
+   "gloss": "cross-check",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis2.fokus",
+   "form": "фокус",
+   "reading": "фо́кус",
+   "gloss": "focus",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.sloy",
+   "form": "слой",
+   "reading": "слой",
+   "gloss": "layer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.plast",
+   "form": "пласт",
+   "reading": "пласт",
+   "gloss": "stratum",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.nitka",
+   "form": "нитка",
+   "reading": "ни́тка",
+   "gloss": "thread",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis2.kanva",
+   "form": "канва",
+   "reading": "канва́",
+   "gloss": "canvas, framework",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis2.karkas",
+   "form": "каркас",
+   "reading": "карка́с",
+   "gloss": "frame",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.skelet",
+   "form": "скелет",
+   "reading": "скеле́т",
+   "gloss": "skeleton",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.chertezh",
+   "form": "чертёж",
+   "reading": "черте́ж",
+   "gloss": "blueprint, drawing",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.eskiz",
+   "form": "эскиз",
+   "reading": "эски́з",
+   "gloss": "sketch",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.nabrosok",
+   "form": "набросок",
+   "reading": "набро́сок",
+   "gloss": "rough draft",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.sketch",
+   "form": "скетч",
+   "reading": "скетч",
+   "gloss": "sketch",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.zarisovka",
+   "form": "зарисовка",
+   "reading": "зарисо́вка",
+   "gloss": "vignette, sketch",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis2.etyud",
+   "form": "этюд",
+   "reading": "этю́д",
+   "gloss": "study, sketch",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.novella",
+   "form": "новелла",
+   "reading": "нове́лла",
+   "gloss": "novella",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis2.esse",
+   "form": "эссе",
+   "reading": "эссе́",
+   "gloss": "essay",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis2.feleton",
+   "form": "фельетон",
+   "reading": "фельето́н",
+   "gloss": "feuilleton",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.statya",
+   "form": "статья",
+   "reading": "статья́",
+   "gloss": "article",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis2.traktat",
+   "form": "трактат",
+   "reading": "тракта́т",
+   "gloss": "treatise",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.avtobiografiya",
+   "form": "автобиография",
+   "reading": "автобиогра́фия",
+   "gloss": "autobiography",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis2.letopis",
+   "form": "летопись",
+   "reading": "ле́топись",
+   "gloss": "chronicle",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis2.hronika",
+   "form": "хроника",
+   "reading": "хро́ника",
+   "gloss": "chronicle",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis2.alfavit",
+   "form": "алфавит",
+   "reading": "алфави́т",
+   "gloss": "alphabet",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis2.azbuka",
+   "form": "азбука",
+   "reading": "а́збука",
+   "gloss": "alphabet",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis2.sistematizaciya",
+   "form": "систематизация",
+   "reading": "систематиза́ция",
+   "gloss": "systematization",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

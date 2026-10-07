@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-58",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.narration.dolgo",
+   "form": "долго",
+   "reading": "до́лго",
+   "gloss": "for a long time",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.nedolgo",
+   "form": "недолго",
+   "reading": "недо́лго",
+   "gloss": "for a short time",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.togda",
+   "form": "тогда",
+   "reading": "тогда́",
+   "gloss": "then, at that time",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.razu",
+   "form": "сразу",
+   "reading": "сра́зу",
+   "gloss": "right away",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.dnyom",
+   "form": "днём",
+   "reading": "дне́м",
+   "gloss": "during the day",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration.vspomnilsya",
+   "form": "вспомнился",
+   "reading": "вспомни́лся",
+   "gloss": "came to mind",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.ranjshe",
+   "form": "раньше",
+   "reading": "ра́ньше",
+   "gloss": "earlier, before",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.pomnitsya",
+   "form": "помнится",
+   "reading": "по́мнится",
+   "gloss": "as I recall",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.detstvo",
+   "form": "детство",
+   "reading": "де́тство",
+   "gloss": "childhood",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.narration.yunost",
+   "form": "юность",
+   "reading": "ю́ность",
+   "gloss": "youth",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.narration.ispugaltsya",
+   "form": "испугался",
+   "reading": "испуга́лся",
+   "gloss": "got scared",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.obradovalsya",
+   "form": "обрадовался",
+   "reading": "обра́довался",
+   "gloss": "got glad",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.rasserdisya",
+   "form": "рассердился",
+   "reading": "рассерди́лся",
+   "gloss": "got angry",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.uspokoilsya",
+   "form": "успокоился",
+   "reading": "успоко́ился",
+   "gloss": "calmed down",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.udivilsya",
+   "form": "удивился",
+   "reading": "удиви́лся",
+   "gloss": "got surprised",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.rasskazal",
+   "form": "рассказал",
+   "reading": "рассказа́л",
+   "gloss": "he told",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.pokazal",
+   "form": "показал",
+   "reading": "показа́л",
+   "gloss": "he showed",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.poyasnil",
+   "form": "объяснил",
+   "reading": "объясни́л",
+   "gloss": "he explained",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.sprosil",
+   "form": "спросил",
+   "reading": "спроси́л",
+   "gloss": "he asked",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.otvetil",
+   "form": "ответил",
+   "reading": "ответи́л",
+   "gloss": "he answered",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.ulica",
+   "form": "улица",
+   "reading": "у́лица",
+   "gloss": "street",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.narration.porog",
+   "form": "порог",
+   "reading": "поро́г",
+   "gloss": "threshold, doorstep",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration.kryltso",
+   "form": "крыльцо",
+   "reading": "крыльцо́",
+   "gloss": "porch, entrance steps",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.narration.ugol",
+   "form": "угол",
+   "reading": "у́гол",
+   "gloss": "corner",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration.zabor",
+   "form": "забор",
+   "reading": "забо́р",
+   "gloss": "fence",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-51",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.learning.proigrysh",
+   "form": "проигрыш",
+   "reading": "про́игрыш",
+   "gloss": "loss",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.learning.fakt",
+   "form": "факт",
+   "reading": "факт",
+   "gloss": "fact",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.learning.pravo",
+   "form": "право",
+   "reading": "пра́во",
+   "gloss": "right",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.learning.perspektiva",
+   "form": "перспектива",
+   "reading": "перспекти́ва",
+   "gloss": "prospect",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.learning.uchenie",
+   "form": "учение",
+   "reading": "уче́ние",
+   "gloss": "learning",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.media.set2",
+   "form": "сеть",
+   "reading": "сеть",
+   "gloss": "network",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.media.akkaunt",
+   "form": "аккаунт",
+   "reading": "акка́унт",
+   "gloss": "account",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.profil",
+   "form": "профиль",
+   "reading": "про́филь",
+   "gloss": "profile",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.podpiska",
+   "form": "подписка",
+   "reading": "подпи́ска",
+   "gloss": "subscription",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.media.podchik",
+   "form": "подписчик",
+   "reading": "подпи́счик",
+   "gloss": "subscriber",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.layk",
+   "form": "лайк",
+   "reading": "лайк",
+   "gloss": "like",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.kommentarij",
+   "form": "комментарий",
+   "reading": "коммента́рий",
+   "gloss": "comment",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.post",
+   "form": "пост",
+   "reading": "пост",
+   "gloss": "post",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.novost",
+   "form": "новость",
+   "reading": "но́вость",
+   "gloss": "news item",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.media.kanal",
+   "form": "канал",
+   "reading": "кана́л",
+   "gloss": "channel",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.peredacha",
+   "form": "передача",
+   "reading": "переда́ча",
+   "gloss": "broadcast",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.media.repotazh",
+   "form": "репортаж",
+   "reading": "репорта́ж",
+   "gloss": "report",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.intervyu",
+   "form": "интервью",
+   "reading": "интервью́",
+   "gloss": "interview",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.media.opros",
+   "form": "опрос",
+   "reading": "опро́с",
+   "gloss": "poll",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.reyting",
+   "form": "рейтинг",
+   "reading": "ре́йтинг",
+   "gloss": "rating",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.banner",
+   "form": "баннер",
+   "reading": "ба́ннер",
+   "gloss": "banner ad",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.sponsor",
+   "form": "спонсор",
+   "reading": "спо́нсор",
+   "gloss": "sponsor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.brend",
+   "form": "бренд",
+   "reading": "бренд",
+   "gloss": "brand",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.auditoriya",
+   "form": "аудитория",
+   "reading": "аудито́рия",
+   "gloss": "audience",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.media.ohvat",
+   "form": "охват",
+   "reading": "охва́т",
+   "gloss": "reach",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

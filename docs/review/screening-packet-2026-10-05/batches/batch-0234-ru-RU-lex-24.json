@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-24",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.cult.opolchenie",
+   "form": "ополчение",
+   "reading": "ополче́ние",
+   "gloss": "militia, volunteer corps",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.dospeh",
+   "form": "доспех",
+   "reading": "доспе́х",
+   "gloss": "armor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.kolchuga",
+   "form": "кольчуга",
+   "reading": "кольчу́га",
+   "gloss": "chainmail",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.shlem",
+   "form": "шлем",
+   "reading": "шлем",
+   "gloss": "helmet",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.krepost",
+   "form": "крепость",
+   "reading": "кре́пость",
+   "gloss": "fortress",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.zamok",
+   "form": "замок",
+   "reading": "замо́к",
+   "gloss": "castle",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.citadel",
+   "form": "цитадель",
+   "reading": "цитаде́ль",
+   "gloss": "citadel",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.bastion",
+   "form": "бастион",
+   "reading": "бастио́н",
+   "gloss": "bastion",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.rodoslavnye",
+   "form": "родословная",
+   "reading": "родосло́вная",
+   "gloss": "genealogy",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.genealogiya",
+   "form": "генеалогия",
+   "reading": "генеало́гия",
+   "gloss": "genealogy, genealogy study",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.prinadlezhnost",
+   "form": "принадлежность",
+   "reading": "принадле́жность",
+   "gloss": "belonging",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.reprezentaciya",
+   "form": "репрезентация",
+   "reading": "репрезента́ция",
+   "gloss": "representation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.neterpimost",
+   "form": "нетерпимость",
+   "reading": "нетерпи́мость",
+   "gloss": "intolerance",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.ksenofobiya",
+   "form": "ксенофобия",
+   "reading": "ксенофо́бия",
+   "gloss": "xenophobia",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.rasizm",
+   "form": "расизм",
+   "reading": "раси́зм",
+   "gloss": "racism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.neuvazenie",
+   "form": "неуважение",
+   "reading": "неуваже́ние",
+   "gloss": "disrespect",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.prezrenie",
+   "form": "презрение",
+   "reading": "презре́ние",
+   "gloss": "contempt",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.nenavist",
+   "form": "ненависть",
+   "reading": "не́нависть",
+   "gloss": "hatred",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.tovarishchestvo",
+   "form": "товарищество",
+   "reading": "това́рищество",
+   "gloss": "comradeship, fellowship",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.obshchnost",
+   "form": "общность",
+   "reading": "о́бщность",
+   "gloss": "community, commonality",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.samobytnost",
+   "form": "самобытность",
+   "reading": "самобы́тность",
+   "gloss": "distinctiveness, originality",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.autentichnost",
+   "form": "аутентичность",
+   "reading": "аутенти́чность",
+   "gloss": "authenticity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.podlinnost",
+   "form": "подлинность",
+   "reading": "по́длинность",
+   "gloss": "authenticity, genuineness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.konformizm",
+   "form": "конформизм",
+   "reading": "конформи́зм",
+   "gloss": "conformism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.nonkonformist",
+   "form": "нонконформист",
+   "reading": "нонконформи́ст",
+   "gloss": "nonconformist",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

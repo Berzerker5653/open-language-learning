@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-149",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.urban2.youjin",
+   "form": "ようじん",
+   "reading": "ようじん",
+   "gloss": "caution, prudence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban3.bunkasai",
+   "form": "ぶんかさい",
+   "reading": "ぶんかさい",
+   "gloss": "cultural festival",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban3.geijutsu2",
+   "form": "げいじゅつ",
+   "reading": "げいじゅつ",
+   "gloss": "art, arts",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban3.isshiki",
+   "form": "いっしき",
+   "reading": "いっしき",
+   "gloss": "together, in one place",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban3.inaka",
+   "form": "いなか",
+   "reading": "いなか",
+   "gloss": "countryside",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban3.koryu2",
+   "form": "こうりゅう",
+   "reading": "こうりゅう",
+   "gloss": "exchange, interaction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban3.seisan",
+   "form": "せいさん",
+   "reading": "せいさん",
+   "gloss": "production",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban3.shiminkatsu",
+   "form": "しみんかつどう",
+   "reading": "しみんかつどう",
+   "gloss": "civic activity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban3.ronsetsu",
+   "form": "ろんせつ",
+   "reading": "ろんせつ",
+   "gloss": "argument, thesis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban3.kotsu",
+   "form": "こうつう",
+   "reading": "こうつう",
+   "gloss": "exchange, communication",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban3.shakaigaku",
+   "form": "しゃかいがく",
+   "reading": "しゃかいがく",
+   "gloss": "sociology",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban3.hisshou",
+   "form": "ひっしょう",
+   "reading": "ひっしょう",
+   "gloss": "necessity, must",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.tabemasu",
+   "form": "たべます",
+   "reading": "たべます",
+   "gloss": "to eat",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.nomimasu",
+   "form": "のみます",
+   "reading": "のみます",
+   "gloss": "to drink",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.mimasu",
+   "form": "みます",
+   "reading": "みます",
+   "gloss": "to see; to watch",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.kikimasu",
+   "form": "ききます",
+   "reading": "ききます",
+   "gloss": "to listen; to hear; to ask",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.yomimasu",
+   "form": "よみます",
+   "reading": "よみます",
+   "gloss": "to read",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.kakimasu",
+   "form": "かきます",
+   "reading": "かきます",
+   "gloss": "to write; to draw",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.ikimasu",
+   "form": "いきます",
+   "reading": "いきます",
+   "gloss": "to go",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.kimasu",
+   "form": "きます",
+   "reading": "きます",
+   "gloss": "to come",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.kaerimasu",
+   "form": "かえります",
+   "reading": "かえります",
+   "gloss": "to go back; to come back",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.arukimasu",
+   "form": "あるきます",
+   "reading": "あるきます",
+   "gloss": "to walk",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.kaimono-shimasu",
+   "form": "かいものします",
+   "reading": "かいものします",
+   "gloss": "to go shopping",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.kaimasu",
+   "form": "かいます",
+   "reading": "かいます",
+   "gloss": "to buy",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.benkyou-shimasu",
+   "form": "べんきょうします",
+   "reading": "べんきょうします",
+   "gloss": "to study",
+   "pos": "verb-masu",
+   "gender": ""
+  }
+ ]
+}

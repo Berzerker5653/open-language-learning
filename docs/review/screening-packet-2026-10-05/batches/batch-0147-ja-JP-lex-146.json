@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-146",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.travel2.shishutsu",
+   "form": "ししゅつ",
+   "reading": "ししゅつ",
+   "gloss": "expenditure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.okure",
+   "form": "おくれ",
+   "reading": "おくれ",
+   "gloss": "delay",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.keikou",
+   "form": "けいこう",
+   "reading": "けいこう",
+   "gloss": "route",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.teishi",
+   "form": "ていし",
+   "reading": "ていし",
+   "gloss": "stop",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.engaki",
+   "form": "えんがき",
+   "reading": "えんがき",
+   "gloss": "round-trip ticket",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.shuhiki",
+   "form": "しゅひき",
+   "reading": "しゅひき",
+   "gloss": "withdrawal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.kaisou",
+   "form": "かいそう",
+   "reading": "かいそう",
+   "gloss": "reflection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.yaruki",
+   "form": "やるき",
+   "reading": "やるき",
+   "gloss": "motivation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.seichou",
+   "form": "せいちょう",
+   "reading": "せいちょう",
+   "gloss": "growth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.kaizen",
+   "form": "かいぜん",
+   "reading": "かいぜん",
+   "gloss": "improvement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.hatsuken",
+   "form": "はつけん",
+   "reading": "はつけん",
+   "gloss": "discovery",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.hagaki",
+   "form": "はがき",
+   "reading": "はがき",
+   "gloss": "postcard",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.egaku",
+   "form": "えがく",
+   "reading": "えがく",
+   "gloss": "to draw",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.ryouga",
+   "form": "りょうが",
+   "reading": "りょうが",
+   "gloss": "currency",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.futsuu",
+   "form": "ふつう",
+   "reading": "ふつう",
+   "gloss": "normal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.shirabe",
+   "form": "しらべ",
+   "reading": "しらべ",
+   "gloss": "investigation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban.toshi",
+   "form": "とし",
+   "reading": "とし",
+   "gloss": "city, urban area",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban.kuukan",
+   "form": "くうかん",
+   "reading": "くうかん",
+   "gloss": "space",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban.kouchiku",
+   "form": "こうちく",
+   "reading": "こうちく",
+   "gloss": "public facility",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban.machi",
+   "form": "まち",
+   "reading": "まち",
+   "gloss": "town, street",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban.keikaku",
+   "form": "けいかく",
+   "reading": "けいかく",
+   "gloss": "plan, planning",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban.koutsuu",
+   "form": "こうつう",
+   "reading": "こうつう",
+   "gloss": "transport, traffic",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban.densha",
+   "form": "でんしゃ",
+   "reading": "でんしゃ",
+   "gloss": "train",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban.basu",
+   "form": "ばす",
+   "reading": "ばす",
+   "gloss": "bus",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban.unten",
+   "form": "うんてん",
+   "reading": "うんてん",
+   "gloss": "driving",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

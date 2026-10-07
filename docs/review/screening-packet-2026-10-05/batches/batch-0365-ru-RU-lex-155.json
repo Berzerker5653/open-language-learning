@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-155",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.workstudy.dostich",
+   "form": "достичь",
+   "reading": "дости́чь",
+   "gloss": "to achieve (pf)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.workstudy.dostigat",
+   "form": "достигать",
+   "reading": "достига́ть",
+   "gloss": "to achieve, reach",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.workstudy.uchastie",
+   "form": "участие",
+   "reading": "уча́стие",
+   "gloss": "participation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.workstudy.uchastvovat",
+   "form": "участвовать",
+   "reading": "уча́ствовать",
+   "gloss": "to participate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.workstudy.organizator",
+   "form": "организатор",
+   "reading": "организа́тор",
+   "gloss": "organizer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.workstudy.meropriyatie",
+   "form": "мероприятие",
+   "reading": "мероприя́тие",
+   "gloss": "event, activity",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.workstudy.initsiativa",
+   "form": "инициатива",
+   "reading": "инициати́ва",
+   "gloss": "initiative",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.workstudy.resurs",
+   "form": "ресурс",
+   "reading": "ресу́рс",
+   "gloss": "resource",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.workstudy.sredstva",
+   "form": "средства",
+   "reading": "сре́дства",
+   "gloss": "funds, means",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.workstudy.polza",
+   "form": "польза",
+   "reading": "по́льза",
+   "gloss": "use, benefit",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.workstudy.vred",
+   "form": "вред",
+   "reading": "вред",
+   "gloss": "harm",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.workstudy.risk2",
+   "form": "риск",
+   "reading": "риск",
+   "gloss": "risk",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.workstudy.doverie",
+   "form": "доверие",
+   "reading": "дове́рие",
+   "gloss": "trust",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.workstudy.iskrennost",
+   "form": "искренность",
+   "reading": "и́скренность",
+   "gloss": "sincerity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.workstudy.chestnost",
+   "form": "честность",
+   "reading": "че́стность",
+   "gloss": "honesty",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.workstudy.otvetstvennyi",
+   "form": "ответственный",
+   "reading": "отве́тственный",
+   "gloss": "responsible",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.workstudy.initsiativnyi",
+   "form": "инициативный",
+   "reading": "инициати́вный",
+   "gloss": "proactive",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.workstudy.opytnyi",
+   "form": "опытный",
+   "reading": "о́пытный",
+   "gloss": "experienced",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.workstudy.molodoi",
+   "form": "молодой",
+   "reading": "молодо́й",
+   "gloss": "young",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.workstudy.starshe",
+   "form": "старше",
+   "reading": "ста́рше",
+   "gloss": "older",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.workstudy.vozrast",
+   "form": "возраст",
+   "reading": "во́зраст",
+   "gloss": "age",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.workstudy.diplom",
+   "form": "диплом",
+   "reading": "дипло́м",
+   "gloss": "diploma",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.workstudy.kvalifikatsiya",
+   "form": "квалификация",
+   "reading": "квалифика́ция",
+   "gloss": "qualification",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.workstudy.obuchenie",
+   "form": "обучение",
+   "reading": "обуче́ние",
+   "gloss": "training",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.workstudy.kursy",
+   "form": "курсы",
+   "reading": "ку́рсы",
+   "gloss": "courses",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

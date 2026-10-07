@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-43",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u680",
+   "text": "Это опровержение.",
+   "gloss": "This is a refutation."
+  },
+  {
+   "id": "ru.sent.b2.u681",
+   "text": "Это скептицизм.",
+   "gloss": "This is skepticism."
+  },
+  {
+   "id": "ru.sent.b2.u682",
+   "text": "Это скептик.",
+   "gloss": "This is a skeptic."
+  },
+  {
+   "id": "ru.sent.b2.u683",
+   "text": "Это молва.",
+   "gloss": "This is a rumor."
+  },
+  {
+   "id": "ru.sent.b2.u684",
+   "text": "Это домысел.",
+   "gloss": "This is a surmise."
+  },
+  {
+   "id": "ru.sent.b2.u685",
+   "text": "Это правдоподобие.",
+   "gloss": "This is plausibility."
+  },
+  {
+   "id": "ru.sent.b2.u686",
+   "text": "Это демагог.",
+   "gloss": "This is a demagogue."
+  },
+  {
+   "id": "ru.sent.b2.u687",
+   "text": "Это разбор.",
+   "gloss": "This is an analysis."
+  },
+  {
+   "id": "ru.sent.b2.u688",
+   "text": "Это фактология.",
+   "gloss": "This is the fact base."
+  },
+  {
+   "id": "ru.sent.b2.u689",
+   "text": "Это подтасовка.",
+   "gloss": "This is rigging."
+  },
+  {
+   "id": "ru.sent.b2.u690",
+   "text": "Это переменная.",
+   "gloss": "This is a variable."
+  },
+  {
+   "id": "ru.sent.b2.u691",
+   "text": "Это валидность.",
+   "gloss": "This is validity."
+  },
+  {
+   "id": "ru.sent.b2.u692",
+   "text": "Это калибровка.",
+   "gloss": "This is calibration."
+  },
+  {
+   "id": "ru.sent.b2.u693",
+   "text": "Это медиана.",
+   "gloss": "This is a median."
+  },
+  {
+   "id": "ru.sent.b2.u694",
+   "text": "Это аппаратура.",
+   "gloss": "This is apparatus."
+  }
+ ]
+}

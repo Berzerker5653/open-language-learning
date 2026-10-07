@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-73",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.pastevents.vsegda",
+   "form": "всегда",
+   "reading": "всегда́",
+   "gloss": "always",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.chasto",
+   "form": "часто",
+   "reading": "ча́сто",
+   "gloss": "often",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.redko",
+   "form": "редко",
+   "reading": "ре́дко",
+   "gloss": "rarely",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.utrom",
+   "form": "утром",
+   "reading": "у́тром",
+   "gloss": "in the morning",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.vecherom",
+   "form": "вечером",
+   "reading": "ве́чером",
+   "gloss": "in the evening",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.nochyu",
+   "form": "ночью",
+   "reading": "но́чью",
+   "gloss": "at night",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.vstrecha",
+   "form": "встреча",
+   "reading": "встре́ча",
+   "gloss": "meeting",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.pastevents.proshloe",
+   "form": "прошлое",
+   "reading": "про́шлое",
+   "gloss": "the past",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.pastevents.istoriya",
+   "form": "история",
+   "reading": "исто́рия",
+   "gloss": "story, history",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.pastevents.sobytie",
+   "form": "событие",
+   "reading": "собы́тие",
+   "gloss": "event",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.pastevents.sluchilos",
+   "form": "случиться",
+   "reading": "случи́ться",
+   "gloss": "to happen",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.pastevents.data",
+   "form": "дата",
+   "reading": "да́та",
+   "gloss": "date",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.pastevents.vyhodnye",
+   "form": "выходные",
+   "reading": "выходны́е",
+   "gloss": "weekend",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.pastevents.otpusk",
+   "form": "отпуск",
+   "reading": "о́тпуск",
+   "gloss": "vacation",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.pastevents.poezdka",
+   "form": "поездка",
+   "reading": "пое́здка",
+   "gloss": "trip",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.personal.ya",
+   "form": "я",
+   "reading": "я",
+   "gloss": "I",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.ty",
+   "form": "ты",
+   "reading": "ты",
+   "gloss": "you (one familiar person)",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.vy",
+   "form": "вы",
+   "reading": "вы",
+   "gloss": "you (plural or polite singular)",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.on",
+   "form": "он",
+   "reading": "он",
+   "gloss": "he",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.ona",
+   "form": "она",
+   "reading": "она́",
+   "gloss": "she",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.anna",
+   "form": "Анна",
+   "reading": "А́нна",
+   "gloss": "Anna (given name)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.ivan",
+   "form": "Иван",
+   "reading": "Ива́н",
+   "gloss": "Ivan (given name)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.personal.imya",
+   "form": "имя",
+   "reading": "и́мя",
+   "gloss": "name (given name)",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.personal.menya-zovut",
+   "form": "меня зовут",
+   "reading": "меня́ зову́т",
+   "gloss": "my name is (fixed introduction before a name)",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.kak-vas-zovut",
+   "form": "как вас зовут",
+   "reading": "как вас зову́т",
+   "gloss": "what is your name? (fixed polite question)",
+   "pos": "phrase",
+   "gender": ""
+  }
+ ]
+}

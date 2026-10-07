@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-143",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.transport.hairimasu",
+   "form": "はいります",
+   "reading": "はいります",
+   "gloss": "to enter; to go in",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.jikokuhyou",
+   "form": "じこくひょう",
+   "reading": "じこくひょう",
+   "gloss": "timetable; schedule",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.jikan",
+   "form": "じかん",
+   "reading": "じかん",
+   "gloss": "time",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.hayai",
+   "form": "はやい",
+   "reading": "はやい",
+   "gloss": "fast; early",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.osoi",
+   "form": "おそい",
+   "reading": "おそい",
+   "gloss": "slow; late",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.mijikai",
+   "form": "みじかい",
+   "reading": "みじかい",
+   "gloss": "short (distance, time)",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.shuppatsu",
+   "form": "しゅっぱつ",
+   "reading": "しゅっぱつ",
+   "gloss": "departure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.chakubatsu",
+   "form": "ちゃくばつ",
+   "reading": "ちゃくばつ",
+   "gloss": "arrival",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.tabi",
+   "form": "たび",
+   "reading": "たび",
+   "gloss": "journey; trip",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.ryokou",
+   "form": "りょこう",
+   "reading": "りょこう",
+   "gloss": "travel; outing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.yasumi",
+   "form": "やすみ",
+   "reading": "やすみ",
+   "gloss": "rest day; day off; holiday",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.kankou",
+   "form": "かんこう",
+   "reading": "かんこう",
+   "gloss": "sightseeing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.annai",
+   "form": "あんない",
+   "reading": "あんない",
+   "gloss": "guidance; information; guide",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.kuukou",
+   "form": "くうこう",
+   "reading": "くうこう",
+   "gloss": "airport",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.tobu",
+   "form": "とぶ",
+   "reading": "とぶ",
+   "gloss": "to fly",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.nagai",
+   "form": "ながい",
+   "reading": "ながい",
+   "gloss": "long (distance, time)",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.itinerari",
+   "form": "イティネラリ",
+   "reading": "イティネラリ",
+   "gloss": "itinerary",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.henkyo",
+   "form": "へんきょう",
+   "reading": "へんきょう",
+   "gloss": "change (booking)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.shukuhaku",
+   "form": "しゅくはく",
+   "reading": "しゅくはく",
+   "gloss": "lodging",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.ryokou-ki",
+   "form": "りょこうき",
+   "reading": "りょこうき",
+   "gloss": "travel diary",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.taiken",
+   "form": "たいけん",
+   "reading": "たいけん",
+   "gloss": "experience",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.shinkou",
+   "form": "しんこう",
+   "reading": "しんこう",
+   "gloss": "trust",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.bunka-shock",
+   "form": "ぶんかしょっく",
+   "reading": "ぶんかしょっく",
+   "gloss": "culture shock",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.ureshii",
+   "form": "うれしい",
+   "reading": "うれしい",
+   "gloss": "happy",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel.tomadoi",
+   "form": "とまどい",
+   "reading": "とまどい",
+   "gloss": "confusion",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-68",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.neg.sopostavimyy",
+   "form": "сопоставимый",
+   "reading": "сопостави́мый",
+   "gloss": "comparable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.nesopostavimyy",
+   "form": "несопоставимый",
+   "reading": "несопостави́мый",
+   "gloss": "incomparable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.ekvivalentnost",
+   "form": "эквивалентность",
+   "reading": "эквивале́нтность",
+   "gloss": "equivalence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.ekvivalentnyy",
+   "form": "эквивалентный",
+   "reading": "эквивале́нтный",
+   "gloss": "equivalent",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.ekvivalent",
+   "form": "эквивалент",
+   "reading": "эквивале́нт",
+   "gloss": "equivalent",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.neg.ravnotsennyy",
+   "form": "равноценный",
+   "reading": "равноце́нный",
+   "gloss": "equivalent, equal in value",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.ravnotsennost",
+   "form": "равноценность",
+   "reading": "равноце́нность",
+   "gloss": "equivalence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.sorazmernyy",
+   "form": "соразмерный",
+   "reading": "соразме́рный",
+   "gloss": "commensurate, proportionate",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.sorazmernost",
+   "form": "соразмерность",
+   "reading": "соразме́рность",
+   "gloss": "commensurability",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.adekvatnost",
+   "form": "адекватность",
+   "reading": "адеква́тность",
+   "gloss": "adequacy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.neadekvatnyy",
+   "form": "неадекватный",
+   "reading": "неадеква́тный",
+   "gloss": "inadequate",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.soglasovannost",
+   "form": "согласованность",
+   "reading": "согласо́ванность",
+   "gloss": "consistency, coordination",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.nesoglasovannost",
+   "form": "несогласованность",
+   "reading": "несогласо́ванность",
+   "gloss": "inconsistency",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.slazhennost",
+   "form": "слаженность",
+   "reading": "сла́женность",
+   "gloss": "coordination, smoothness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.slazhennyy",
+   "form": "слаженный",
+   "reading": "сла́женный",
+   "gloss": "coordinated, smooth",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.sygrannost",
+   "form": "сыгранность",
+   "reading": "сы́гранность",
+   "gloss": "teamwork, cohesion",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.sygrannyy",
+   "form": "сыгранный",
+   "reading": "сы́гранный",
+   "gloss": "coordinated (team)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.edinodushnyy",
+   "form": "единодушный",
+   "reading": "единоду́шный",
+   "gloss": "unanimous",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.solidarnost",
+   "form": "солидарность",
+   "reading": "солида́рность",
+   "gloss": "solidarity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.solidarnyy",
+   "form": "солидарный",
+   "reading": "солида́рный",
+   "gloss": "solidary",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.vzaimoponimanie",
+   "form": "взаимопонимание",
+   "reading": "взаимопони́мание",
+   "gloss": "mutual understanding",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.vzaimosvyazannyy",
+   "form": "взаимосвязанный",
+   "reading": "взаимосвя́занный",
+   "gloss": "interconnected",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.sinkhronizaciya",
+   "form": "синхронизация",
+   "reading": "синхрониза́ция",
+   "gloss": "synchronization",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.sinkhronnyy",
+   "form": "синхронный",
+   "reading": "синхро́нный",
+   "gloss": "synchronous",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.skreplenie",
+   "form": "скрепление",
+   "reading": "скрепле́ние",
+   "gloss": "fastening, securing",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

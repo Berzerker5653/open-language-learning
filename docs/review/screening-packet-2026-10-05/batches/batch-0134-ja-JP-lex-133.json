@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-133",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.sports.yoga",
+   "form": "よが",
+   "reading": "よが",
+   "gloss": "yoga",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.jogging",
+   "form": "じょぎんぐ",
+   "reading": "じょぎんぐ",
+   "gloss": "jogging",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.stretching",
+   "form": "すとれっちんぐ",
+   "reading": "すとれっちんぐ",
+   "gloss": "stretching",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.junbi-undo",
+   "form": "じゅんびうんどう",
+   "reading": "じゅんびうんどう",
+   "gloss": "warm-up exercise",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.rikabari",
+   "form": "りかばりー",
+   "reading": "りかばりー",
+   "gloss": "recovery",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.massaji",
+   "form": "ますーじ",
+   "reading": "ますーじ",
+   "gloss": "massage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.onsen-tou",
+   "form": "おんせんとう",
+   "reading": "おんせんとう",
+   "gloss": "hot spring bath",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.training",
+   "form": "とれーにんぐ",
+   "reading": "とれーにんぐ",
+   "gloss": "training",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.dojo",
+   "form": "どうじょう",
+   "reading": "どうじょう",
+   "gloss": "dojo",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.judou",
+   "form": "じゅうどう",
+   "reading": "じゅうどう",
+   "gloss": "judo",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.kendo",
+   "form": "けんどう",
+   "reading": "けんどう",
+   "gloss": "kendo",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.aikido",
+   "form": "あいきどう",
+   "reading": "あいきどう",
+   "gloss": "aikido",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.sumo",
+   "form": "すもう",
+   "reading": "すもう",
+   "gloss": "sumo",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.taekwondo",
+   "form": "てくわんど",
+   "reading": "てくわんど",
+   "gloss": "taekwondo",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.bokushin",
+   "form": "ぼくしん",
+   "reading": "ぼくしん",
+   "gloss": "boxing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.resuring",
+   "form": "レスリング",
+   "reading": "レスリング",
+   "gloss": "wrestling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.golf",
+   "form": "ごるふ",
+   "reading": "ごるふ",
+   "gloss": "golf",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.sukii",
+   "form": "すきー",
+   "reading": "すきー",
+   "gloss": "skiing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.sunoobo-do",
+   "form": "すのーぼーど",
+   "reading": "すのーぼーど",
+   "gloss": "snowboard",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.sa-fingu",
+   "form": "さーふぃんぐ",
+   "reading": "さーふぃんぐ",
+   "gloss": "surfing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.daibingu",
+   "form": "だいびんぐ",
+   "reading": "だいびんぐ",
+   "gloss": "diving",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.suke-to",
+   "form": "すけーと",
+   "reading": "すけーと",
+   "gloss": "skating",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.paten",
+   "form": "ぱてん",
+   "reading": "ぱてん",
+   "gloss": "roller skates",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.janpu-ro-pu",
+   "form": "じゃんぷろーぷ",
+   "reading": "じゃんぷろーぷ",
+   "gloss": "jump rope",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.danburu",
+   "form": "だんぶる",
+   "reading": "だんぶる",
+   "gloss": "dumbbell",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

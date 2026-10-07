@@ -1,0 +1,107 @@
+{
+ "batch_id": "ru-RU-assess-4",
+ "kind": "assess",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.assess.a2.social-plans-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify invitation, meeting, and party words in a supplied message.",
+    "Match a suggestion to its давай(те) chunk.",
+    "Distinguish agreement from refusal in a supplied exchange."
+   ]
+  },
+  {
+   "id": "ru.assess.a2.social-plans-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Write a social-identification statement with это and a taught nominative noun.",
+    "Make a suggestion with the supplied давай(те) chunk.",
+    "Issue an invitation with the supplied пригласить chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.a2.comparisons-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify comparative words (больше, меньше, лучше, хуже) in a supplied sentence.",
+    "Match a reason clause to its потому что or так как chunk.",
+    "Distinguish чем (than) from поэтому (therefore)."
+   ]
+  },
+  {
+   "id": "ru.assess.a2.comparisons-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Write a comparison with a taught comparative and чем.",
+    "Give a reason with the supplied потому что chunk.",
+    "State a purpose with the supplied чтобы chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.a2.instructions-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify step-order words (сначала, затем, далее) in a supplied instruction.",
+    "Match a tool word to its picture or context.",
+    "Order two supplied steps correctly."
+   ]
+  },
+  {
+   "id": "ru.assess.a2.instructions-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Write a two-step instruction with сначала and затем using supplied infinitives.",
+    "State that something is готово with a taught noun.",
+    "Use a taught imperative chunk to give one command."
+   ]
+  },
+  {
+   "id": "ru.assess.a2.problems-solutions-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify problem words (проблема, ошибка, неполадка) in a supplied note.",
+    "Match a request chunk with пожалуйста to its meaning.",
+    "Distinguish вернуть (return) from обменять (exchange)."
+   ]
+  },
+  {
+   "id": "ru.assess.a2.problems-solutions-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Write a problem statement with это and a taught noun.",
+    "Make a polite request with the supplied пожалуйста chunk.",
+    "State a shortage with the supplied не хватает chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.a2.connected-messages-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify connectors (однако, значит, кроме того) in a supplied message.",
+    "Match an opinion marker (по-моему, кажется) to its meaning.",
+    "Order абзац and вывод in a supplied text."
+   ]
+  },
+  {
+   "id": "ru.assess.a2.connected-messages-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Link two clauses with the supplied значит chunk.",
+    "State an opinion with the supplied по-моему chunk.",
+    "Write a two-абзац message using taught nouns only."
+   ]
+  }
+ ]
+}

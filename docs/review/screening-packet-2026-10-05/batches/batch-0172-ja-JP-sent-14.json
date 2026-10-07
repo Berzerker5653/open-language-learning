@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-14",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.library-card",
+   "text": "かしゅしょう で 3ほん まで かりられます。",
+   "gloss": "With the library card you can borrow up to three books."
+  },
+  {
+   "id": "ja.sent.news-morning",
+   "text": "まいあさ しんぶん の へッド を よみます。",
+   "gloss": "Every morning I read the newspaper headlines."
+  },
+  {
+   "id": "ja.sent.fact-speculation",
+   "text": "じじつ と はだん を くべつ して かきます。",
+   "gloss": "I write distinguishing fact from speculation."
+  },
+  {
+   "id": "ja.sent.article-summary",
+   "text": "きじ を 3ぶん で まとめました。",
+   "gloss": "I summarized the article in three sentences."
+  },
+  {
+   "id": "ja.sent.news-discuss",
+   "text": "ニュース の ぎじょう について ともだち と はなしました。",
+   "gloss": "I talked with a friend about the news circumstances."
+  },
+  {
+   "id": "ja.sent.net-use",
+   "text": "ねっと に 1にち 2じかん つかっています。",
+   "gloss": "I use the internet two hours a day."
+  },
+  {
+   "id": "ja.sent.check-rumor",
+   "text": "うわさ かどうか ほんの ほうどう で かくにん します。",
+   "gloss": "I check whether a rumor is true with real reporting."
+  },
+  {
+   "id": "ja.sent.media-habits-night",
+   "text": "よる は rajio で おんがく を ききます。",
+   "gloss": "At night I listen to music on the radio."
+  },
+  {
+   "id": "ja.sent.photo-caption",
+   "text": "しゃしん の きゃぷしょん が ながすぎます。",
+   "gloss": "The photo caption is too long."
+  },
+  {
+   "id": "ja.sent.editorial-viewpoint",
+   "text": "えでとりある の してん が ふるい と ひひょう しました。",
+   "gloss": "I criticized the editorial's viewpoint as outdated."
+  },
+  {
+   "id": "ja.sent.news-response",
+   "text": "ニュース の ぎじょう へ の かいとう を かきました。",
+   "gloss": "I wrote a response to the news item."
+  },
+  {
+   "id": "ja.sent.debate-point",
+   "text": "ろんすう で たあろん を いう のが とくい です。",
+   "gloss": "I am good at making counter-arguments in debates."
+  },
+  {
+   "id": "ja.sent.device-daily",
+   "text": "すまほ と ぱそこん が まいひち の でびす です。",
+   "gloss": "The smartphone and PC are my daily devices."
+  },
+  {
+   "id": "ja.sent.safety-password",
+   "text": "ぱすわーど を 3かげつ に 1ど かえます。",
+   "gloss": "I change my password once every three months."
+  },
+  {
+   "id": "ja.sent.privacy-setting",
+   "text": "ぷらいばしー の せっとぃんぐ を かえました。",
+   "gloss": "I changed the privacy settings."
+  }
+ ]
+}

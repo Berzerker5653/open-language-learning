@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-94",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.media.senkyo",
+   "form": "せんきょ",
+   "reading": "せんきょ",
+   "gloss": "election",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.koumin",
+   "form": "こうみん",
+   "reading": "こうみん",
+   "gloss": "citizen",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.keitai",
+   "form": "けいたい",
+   "reading": "けいたい",
+   "gloss": "mobile phone",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.ninoki",
+   "form": "にのき",
+   "reading": "にのき",
+   "gloss": "popularity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.ryuukou",
+   "form": "りゅうこう",
+   "reading": "りゅうこう",
+   "gloss": "trend",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.burando",
+   "form": "ぶらんど",
+   "reading": "ぶらんど",
+   "gloss": "brand",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.maruke",
+   "form": "まーけ",
+   "reading": "まーけ",
+   "gloss": "market",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.media-habits",
+   "form": "めでぃあはびつ",
+   "reading": "めでぃあはびつ",
+   "gloss": "media habits",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.editorial",
+   "form": "えでとりある",
+   "reading": "えでとりある",
+   "gloss": "editorial",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.ronsa",
+   "form": "ろんさ",
+   "reading": "ろんさ",
+   "gloss": "discussion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.shiten",
+   "form": "してん",
+   "reading": "してん",
+   "gloss": "viewpoint",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.kaisetsu",
+   "form": "かいせつ",
+   "reading": "かいせつ",
+   "gloss": "commentary",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.ronsetsu",
+   "form": "ろんせつ",
+   "reading": "ろんせつ",
+   "gloss": "argumentative writing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.hanron",
+   "form": "はんろん",
+   "reading": "はんろん",
+   "gloss": "rebuttal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.hihyou",
+   "form": "ひひょう",
+   "reading": "ひひょう",
+   "gloss": "criticism",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.ketsui",
+   "form": "けつい",
+   "reading": "けつい",
+   "gloss": "resolution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.an",
+   "form": "あん",
+   "reading": "あん",
+   "gloss": "plan",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.kaiken",
+   "form": "かいけん",
+   "reading": "かいけん",
+   "gloss": "opinion; experience",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.sesaku",
+   "form": "せさく",
+   "reading": "せさく",
+   "gloss": "current affairs",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.kokunai",
+   "form": "こくない",
+   "reading": "こくない",
+   "gloss": "domestic",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.kokusai",
+   "form": "こくさい",
+   "reading": "こくさい",
+   "gloss": "international",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.chiiki",
+   "form": "ちいき",
+   "reading": "ちいき",
+   "gloss": "region",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.sekai",
+   "form": "せかい",
+   "reading": "せかい",
+   "gloss": "world",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.ronsuu",
+   "form": "ろんすう",
+   "reading": "ろんすう",
+   "gloss": "debate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.taaron",
+   "form": "たあろん",
+   "reading": "たあろん",
+   "gloss": "counter-argument",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

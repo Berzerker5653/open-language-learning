@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-4",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.academic.kensa",
+   "form": "けんさ",
+   "reading": "けんさ",
+   "gloss": "inspection, check",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.shukyou",
+   "form": "しゅうきょう",
+   "reading": "しゅうきょう",
+   "gloss": "emphasis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.seiri",
+   "form": "せいり",
+   "reading": "せいり",
+   "gloss": "organization, sorting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.sakuho",
+   "form": "さくほう",
+   "reading": "さくほう",
+   "gloss": "method, technique",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.junbi",
+   "form": "じゅんび",
+   "reading": "じゅんび",
+   "gloss": "preparation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.yohou",
+   "form": "ようほう",
+   "reading": "ようほう",
+   "gloss": "prediction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.kentei",
+   "form": "けんてい",
+   "reading": "けんてい",
+   "gloss": "proposal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.rondatate",
+   "form": "ろんたて",
+   "reading": "ろんたて",
+   "gloss": "argument structure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.kohyo",
+   "form": "こうひょう",
+   "reading": "こうひょう",
+   "gloss": "peer review, public evaluation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.renraku2",
+   "form": "れんらく",
+   "reading": "れんらく",
+   "gloss": "connection, linkage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.junjo",
+   "form": "じゅんじょ",
+   "reading": "じゅんじょ",
+   "gloss": "order, sequence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.setsuzoku",
+   "form": "せつぞく",
+   "reading": "せつぞく",
+   "gloss": "cohesion, connection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.hantai",
+   "form": "はんたい",
+   "reading": "はんたい",
+   "gloss": "opposition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.hanron",
+   "form": "はんろん",
+   "reading": "はんろん",
+   "gloss": "counterargument",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.youyaku",
+   "form": "ようやく",
+   "reading": "ようやく",
+   "gloss": "summary, abstract",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.kiban",
+   "form": "きばん",
+   "reading": "きばん",
+   "gloss": "base, foundation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.kijun",
+   "form": "きじゅん",
+   "reading": "きじゅん",
+   "gloss": "standard, criterion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.kijutsu",
+   "form": "きじゅつ",
+   "reading": "きじゅつ",
+   "gloss": "description, narration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.happyou",
+   "form": "はっぴょう",
+   "reading": "はっぴょう",
+   "gloss": "presentation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.sankou",
+   "form": "さんこう",
+   "reading": "さんこう",
+   "gloss": "reference",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.shuchou",
+   "form": "しゅちょう",
+   "reading": "しゅちょう",
+   "gloss": "claim, emphasis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.juyou",
+   "form": "じゅうよう",
+   "reading": "じゅうよう",
+   "gloss": "importance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.kairyou",
+   "form": "かいりょう",
+   "reading": "かいりょう",
+   "gloss": "understanding, comprehension",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.rikai",
+   "form": "りかい",
+   "reading": "りかい",
+   "gloss": "understanding",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.kikaku",
+   "form": "きかく",
+   "reading": "きかく",
+   "gloss": "plan, project",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

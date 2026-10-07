@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-105",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.shopping.polka",
+   "form": "полка",
+   "reading": "по́лка",
+   "gloss": "shelf",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.shopping.korzina",
+   "form": "корзина",
+   "reading": "корзи́на",
+   "gloss": "basket",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.shopping.paket",
+   "form": "пакет",
+   "reading": "паке́т",
+   "gloss": "bag",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.shopping.etiketka",
+   "form": "этикетка",
+   "reading": "этике́тка",
+   "gloss": "price tag",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.shopping.tovar",
+   "form": "товар",
+   "reading": "това́р",
+   "gloss": "goods",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.shopping.marka",
+   "form": "марка",
+   "reading": "ма́рка",
+   "gloss": "brand",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.shopping.rubashka",
+   "form": "рубашка",
+   "reading": "руба́шка",
+   "gloss": "shirt",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.shopping.bryuki",
+   "form": "брюки",
+   "reading": "брю́ки",
+   "gloss": "trousers",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.yubka",
+   "form": "юбка",
+   "reading": "ю́бка",
+   "gloss": "skirt",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.shopping.platye",
+   "form": "платье",
+   "reading": "пла́тье",
+   "gloss": "dress",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.shopping.krossovki",
+   "form": "кроссовки",
+   "reading": "кроссо́вки",
+   "gloss": "sneakers",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.perchatki",
+   "form": "перчатки",
+   "reading": "перча́тки",
+   "gloss": "gloves",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.shapka",
+   "form": "шапка",
+   "reading": "ша́пка",
+   "gloss": "hat",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.shopping.sharf",
+   "form": "шарф",
+   "reading": "шарф",
+   "gloss": "scarf",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.shopping.noski",
+   "form": "носки",
+   "reading": "носки́",
+   "gloss": "socks",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.remen",
+   "form": "ремень",
+   "reading": "реме́нь",
+   "gloss": "belt",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.shopping.stoit",
+   "form": "стоит",
+   "reading": "стои́т",
+   "gloss": "costs, is worth",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.pokupatel",
+   "form": "покупатель",
+   "reading": "покупа́тель",
+   "gloss": "customer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.shopping.prodazha",
+   "form": "продажа",
+   "reading": "прода́жа",
+   "gloss": "sale",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.shopping.normalno",
+   "form": "нормально",
+   "reading": "норма́льно",
+   "gloss": "fine, OK",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.horosho",
+   "form": "хорошо",
+   "reading": "хорошо́",
+   "gloss": "good, well",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.ploho",
+   "form": "плохо",
+   "reading": "пло́хо",
+   "gloss": "bad, badly",
+   "pos": "predicative",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.nichego",
+   "form": "ничего",
+   "reading": "ничего́",
+   "gloss": "nothing, it is fine",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.upakovka",
+   "form": "упаковка",
+   "reading": "упако́вка",
+   "gloss": "packaging",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.shopping.sprashivat",
+   "form": "спрашивать",
+   "reading": "спра́шивать",
+   "gloss": "to ask",
+   "pos": "verb",
+   "gender": ""
+  }
+ ]
+}

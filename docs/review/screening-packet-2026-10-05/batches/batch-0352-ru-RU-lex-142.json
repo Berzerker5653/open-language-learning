@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-142",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.synthesis4.analitika",
+   "form": "аналитика",
+   "reading": "анали́тика",
+   "gloss": "analytics",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.monitoring",
+   "form": "мониторинг",
+   "reading": "монито́ринг",
+   "gloss": "monitoring",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis4.diagnostika",
+   "form": "диагностика",
+   "reading": "диагно́стика",
+   "gloss": "diagnostics",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.obsledovanie",
+   "form": "обследование",
+   "reading": "обсле́дование",
+   "gloss": "survey, examination",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis4.zamer",
+   "form": "замер",
+   "reading": "заме́р",
+   "gloss": "measurement",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis4.perepis",
+   "form": "перепись",
+   "reading": "пе́репись",
+   "gloss": "census",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.sovokupnost",
+   "form": "совокупность",
+   "reading": "совоку́пность",
+   "gloss": "totality, aggregate",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.populyaciya",
+   "form": "популяция",
+   "reading": "популя́ция",
+   "gloss": "population",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.predstavitelnyy",
+   "form": "представительный",
+   "reading": "представи́тельный",
+   "gloss": "representative",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis4.plotnost",
+   "form": "плотность",
+   "reading": "пло́тность",
+   "gloss": "density",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.nasyschennost",
+   "form": "насыщенность",
+   "reading": "насы́щенность",
+   "gloss": "saturation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.nasyschenie",
+   "form": "насыщение",
+   "reading": "насыще́ние",
+   "gloss": "saturation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis4.vypiska",
+   "form": "выписка",
+   "reading": "вы́писка",
+   "gloss": "extract, statement",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.reestr",
+   "form": "реестр",
+   "reading": "рее́стр",
+   "gloss": "register",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis4.vedomost",
+   "form": "ведомость",
+   "reading": "ве́домость",
+   "gloss": "statement, schedule",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.stolbec",
+   "form": "столбец",
+   "reading": "столбе́ц",
+   "gloss": "column",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis4.hranilishche",
+   "form": "хранилище",
+   "reading": "храни́лище",
+   "gloss": "repository",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis4.kollekciya",
+   "form": "коллекция",
+   "reading": "колле́кция",
+   "gloss": "collection",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.vitrina",
+   "form": "витрина",
+   "reading": "витри́на",
+   "gloss": "showcase, window",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.stellazh",
+   "form": "стеллаж",
+   "reading": "стелла́ж",
+   "gloss": "shelving",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis4.papka",
+   "form": "папка",
+   "reading": "па́пка",
+   "gloss": "folder",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.fayl",
+   "form": "файл",
+   "reading": "файл",
+   "gloss": "file",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis4.metka",
+   "form": "метка",
+   "reading": "ме́тка",
+   "gloss": "tag, mark",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.marker",
+   "form": "маркер",
+   "reading": "марке́р",
+   "gloss": "marker",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis4.birka",
+   "form": "бирка",
+   "reading": "би́рка",
+   "gloss": "tag, ticket",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

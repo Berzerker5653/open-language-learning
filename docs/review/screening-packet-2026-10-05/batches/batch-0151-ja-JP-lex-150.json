@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-150",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.verbs.shigoto-shimasu",
+   "form": "しごとします",
+   "reading": "しごとします",
+   "gloss": "to work",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.arimasu",
+   "form": "あります",
+   "reading": "あります",
+   "gloss": "there is / are (things); to exist",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.imasu",
+   "form": "います",
+   "reading": "います",
+   "gloss": "there is / are (people, animals)",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.wakarimasu",
+   "form": "わかります",
+   "reading": "わかります",
+   "gloss": "to understand",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.iimasu",
+   "form": "いいます",
+   "reading": "いいます",
+   "gloss": "to say",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.shimasu",
+   "form": "します",
+   "reading": "します",
+   "gloss": "to do",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.nemasu",
+   "form": "ねます",
+   "reading": "ねます",
+   "gloss": "to sleep; to go to bed",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.okimasu",
+   "form": "おきます",
+   "reading": "おきます",
+   "gloss": "to get up; to wake up",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.hanashimasu",
+   "form": "はなします",
+   "reading": "はなします",
+   "gloss": "to speak; to talk",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.dekimasu",
+   "form": "できます",
+   "reading": "できます",
+   "gloss": "can; to be able (also: to be ready)",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.aisatsu-shimasu",
+   "form": "あいさつします",
+   "reading": "あいさつします",
+   "gloss": "to greet",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.shoukai-shimasu",
+   "form": "しょうかいします",
+   "reading": "しょうかいします",
+   "gloss": "to introduce",
+   "pos": "verb-masu",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.desu",
+   "form": "です",
+   "reading": "です",
+   "gloss": "polite linking word: is / am / are",
+   "pos": "auxiliary",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.verbs.masu",
+   "form": "ます",
+   "reading": "ます",
+   "gloss": "polite verb ending (carries tense and politeness)",
+   "pos": "auxiliary",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather.tenki",
+   "form": "てんき",
+   "reading": "てんき",
+   "gloss": "weather",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather.ame",
+   "form": "あめ",
+   "reading": "あめ",
+   "gloss": "rain",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather.yuki",
+   "form": "ゆき",
+   "reading": "ゆき",
+   "gloss": "snow",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather.hare",
+   "form": "はれ",
+   "reading": "はれ",
+   "gloss": "clear weather; sunny",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather.kumo",
+   "form": "くも",
+   "reading": "くも",
+   "gloss": "cloud",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather.kaze",
+   "form": "かぜ",
+   "reading": "かぜ",
+   "gloss": "wind",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather.atsusa",
+   "form": "あつさ",
+   "reading": "あつさ",
+   "gloss": "heat (noun)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather.samusa",
+   "form": "さむさ",
+   "reading": "さむさ",
+   "gloss": "cold (noun)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.haru",
+   "form": "はる",
+   "reading": "はる",
+   "gloss": "spring",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.natsu",
+   "form": "なつ",
+   "reading": "なつ",
+   "gloss": "summer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.aki",
+   "form": "あき",
+   "reading": "あき",
+   "gloss": "autumn",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-30",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.energy-technology",
+   "text": "でんきの はなし を べんきょう しました。",
+   "gloss": "I studied the electricity topic."
+  },
+  {
+   "id": "ja.sent.biotechnology",
+   "text": "いでん の じっけん を べんきょう しました。",
+   "gloss": "I studied the gene experiment."
+  },
+  {
+   "id": "ja.sent.ai-society",
+   "text": "じんこうちのう の はなし を ききました。",
+   "gloss": "I heard the AI talk."
+  },
+  {
+   "id": "ja.sent.data-ethics",
+   "text": "こじん の じょうほう を まもります。",
+   "gloss": "We protect personal information."
+  },
+  {
+   "id": "ja.sent.space-exploration",
+   "text": "うちゅう の ぼうけん を よみました。",
+   "gloss": "I read the space adventure."
+  },
+  {
+   "id": "ja.sent.medical-advance",
+   "text": "ちりょう の ぶんせき を かきました。",
+   "gloss": "I wrote an analysis of the treatment."
+  },
+  {
+   "id": "ja.sent.climate-science",
+   "text": "きこう の よそく を べんきょう しました。",
+   "gloss": "I studied the climate prediction."
+  },
+  {
+   "id": "ja.sent.tech-regulation",
+   "text": "きてい の きじ を よみました。",
+   "gloss": "I read the regulation article."
+  },
+  {
+   "id": "ja.sent.innovation-economics",
+   "text": "さんぎょう の はなし を ききました。",
+   "gloss": "I heard the industry talk."
+  },
+  {
+   "id": "ja.sent.science-communication",
+   "text": "しょうめい の ぶんぽう を べんきょう しました。",
+   "gloss": "I studied the proof structure."
+  },
+  {
+   "id": "ja.sent.learning-theory",
+   "text": "にんしき の じっけん を べんきょう しました。",
+   "gloss": "I studied the cognition experiment."
+  },
+  {
+   "id": "ja.sent.classroom-methods",
+   "text": "きょうしつの ほうほう を べんきょう しました。",
+   "gloss": "I studied the classroom method."
+  },
+  {
+   "id": "ja.sent.assessment-debate",
+   "text": "せいせき の てんじ を べんきょう しました。",
+   "gloss": "I studied the display of grades."
+  },
+  {
+   "id": "ja.sent.curriculum-design",
+   "text": "きょうざい を あつめました。",
+   "gloss": "I gathered teaching materials."
+  },
+  {
+   "id": "ja.sent.language-acquisition",
+   "text": "はつおん の れんしゅう を しました。",
+   "gloss": "I practiced pronunciation."
+  }
+ ]
+}

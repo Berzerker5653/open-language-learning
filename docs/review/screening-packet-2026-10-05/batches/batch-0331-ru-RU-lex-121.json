@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-121",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.study3.skrytyy",
+   "form": "скрытый",
+   "reading": "скры́тый",
+   "gloss": "hidden",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.ochevidnyy",
+   "form": "очевидный",
+   "reading": "очеви́дный",
+   "gloss": "obvious",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.neochevidnyy",
+   "form": "неочевидный",
+   "reading": "неоче́видный",
+   "gloss": "non-obvious",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.ponytnyy",
+   "form": "понятный",
+   "reading": "поня́тный",
+   "gloss": "understandable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.neponytnyy",
+   "form": "непонятный",
+   "reading": "непоня́тный",
+   "gloss": "incomprehensible",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.yasnyy",
+   "form": "ясный",
+   "reading": "я́сный",
+   "gloss": "clear",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.rasplyvchatyy",
+   "form": "расплывчатый",
+   "reading": "расплы́вчатый",
+   "gloss": "vague",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.chetkiy",
+   "form": "чёткий",
+   "reading": "че́ткий",
+   "gloss": "clear-cut",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.tochnyy",
+   "form": "точный",
+   "reading": "то́чный",
+   "gloss": "accurate",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.priblizitelnyy",
+   "form": "приблизительный",
+   "reading": "приблизи́тельный",
+   "gloss": "approximate",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.otsenochnyy",
+   "form": "оценочный",
+   "reading": "оце́ночный",
+   "gloss": "evaluative, rough",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.predvaritelnyy",
+   "form": "предварительный",
+   "reading": "предвари́тельный",
+   "gloss": "preliminary",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.okonchatelnyy",
+   "form": "окончательный",
+   "reading": "оконча́тельный",
+   "gloss": "final",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.itogovyy",
+   "form": "итоговый",
+   "reading": "ито́говый",
+   "gloss": "final, summary",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.chernovoy",
+   "form": "черновой",
+   "reading": "черново́й",
+   "gloss": "draft (adj)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.chistovoy",
+   "form": "чистовой",
+   "reading": "чистово́й",
+   "gloss": "final (clean copy)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.rabochiy",
+   "form": "рабочий",
+   "reading": "рабо́чий",
+   "gloss": "working (adj)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study3.sluzhebnyy",
+   "form": "служебный",
+   "reading": "служе́бный",
+   "gloss": "official, service (adj)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.osnovnoy",
+   "form": "основной",
+   "reading": "основно́й",
+   "gloss": "main, basic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.vspomagatelnyy",
+   "form": "вспомогательный",
+   "reading": "вспомога́тельный",
+   "gloss": "auxiliary",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.dopolnitelnyy",
+   "form": "дополнительный",
+   "reading": "дополни́тельный",
+   "gloss": "additional",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.glavnyy",
+   "form": "главный",
+   "reading": "гла́вный",
+   "gloss": "main, chief",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.rukovodstvo",
+   "form": "руководство",
+   "reading": "руково́дство",
+   "gloss": "guide, leadership",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study3.nastavlenie",
+   "form": "наставление",
+   "reading": "наставле́ние",
+   "gloss": "admonition, instruction",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study3.vektor",
+   "form": "вектор",
+   "reading": "ве́ктор",
+   "gloss": "vector",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

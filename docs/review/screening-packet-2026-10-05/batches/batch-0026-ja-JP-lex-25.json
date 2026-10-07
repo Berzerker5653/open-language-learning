@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-25",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.cult2.denki",
+   "form": "でんき",
+   "reading": "でんき",
+   "gloss": "electricity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.shuukan",
+   "form": "しゅうかん",
+   "reading": "しゅうかん",
+   "gloss": "custom",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.reigi",
+   "form": "れいぎ",
+   "reading": "れいぎ",
+   "gloss": "etiquette",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.girei",
+   "form": "ぎれい",
+   "reading": "ぎれい",
+   "gloss": "ceremony",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.kansha",
+   "form": "かんしゃ",
+   "reading": "かんしゃ",
+   "gloss": "gratitude",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.nenchuu",
+   "form": "ねんちゅう",
+   "reading": "ねんちゅう",
+   "gloss": "annual",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.matsuri",
+   "form": "まつり",
+   "reading": "まつり",
+   "gloss": "festival",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.mikoshi",
+   "form": "みこし",
+   "reading": "みこし",
+   "gloss": "portable shrine",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.yatai",
+   "form": "やたい",
+   "reading": "やたい",
+   "gloss": "festival stall",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.bon-odori",
+   "form": "ぼんおどり",
+   "reading": "ぼんおどり",
+   "gloss": "bon dance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.yukimi",
+   "form": "ゆきみ",
+   "reading": "ゆきみ",
+   "gloss": "snow-viewing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.koge",
+   "form": "こうげ",
+   "reading": "こうげ",
+   "gloss": "craft",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.dentou",
+   "form": "でんとう",
+   "reading": "でんとう",
+   "gloss": "tradition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.washi",
+   "form": "わし",
+   "reading": "わし",
+   "gloss": "Japanese paper",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.kimono",
+   "form": "きもの",
+   "reading": "きもの",
+   "gloss": "kimono",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.chado",
+   "form": "ちゃどう",
+   "reading": "ちゃどう",
+   "gloss": "tea ceremony",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.kisoku",
+   "form": "きそく",
+   "reading": "きそく",
+   "gloss": "rule",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.manner",
+   "form": "マナー",
+   "reading": "マナー",
+   "gloss": "manners",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.teaji",
+   "form": "てあい",
+   "reading": "てあい",
+   "gloss": "help",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.omotenashi",
+   "form": "おもてなし",
+   "reading": "おもてなし",
+   "gloss": "hospitality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.saiho",
+   "form": "さいほう",
+   "reading": "さいほう",
+   "gloss": "worship",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.minzoku",
+   "form": "みんぞく",
+   "reading": "みんぞく",
+   "gloss": "folk",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.mukashibanashi",
+   "form": "むかしばなし",
+   "reading": "むかしばなし",
+   "gloss": "old tale",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.hogen",
+   "form": "ほうげん",
+   "reading": "ほうげん",
+   "gloss": "dialect",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.meisho",
+   "form": "めいしょ",
+   "reading": "めいしょ",
+   "gloss": "famous place",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

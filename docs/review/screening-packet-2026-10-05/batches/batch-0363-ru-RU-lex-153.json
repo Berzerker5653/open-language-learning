@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-153",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.work.peremena",
+   "form": "перемена",
+   "reading": "переме́на",
+   "gloss": "break",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.work.pereryv",
+   "form": "перерыв",
+   "reading": "переры́в",
+   "gloss": "break, pause",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.instruktazh",
+   "form": "инструктаж",
+   "reading": "инструкта́ж",
+   "gloss": "briefing",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.kompetenciya",
+   "form": "компетенция",
+   "reading": "компете́нция",
+   "gloss": "competence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.work.portfolio",
+   "form": "портфолио",
+   "reading": "портфо́лио",
+   "gloss": "portfolio",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.work.sertifikat",
+   "form": "сертификат",
+   "reading": "сертифика́т",
+   "gloss": "certificate",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.attestaciya",
+   "form": "аттестация",
+   "reading": "аттеста́ция",
+   "gloss": "performance review",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.work.povyshenie",
+   "form": "повышение",
+   "reading": "повыше́ние",
+   "gloss": "promotion, increase",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.work.rost",
+   "form": "рост",
+   "reading": "рост",
+   "gloss": "growth",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.strategiya",
+   "form": "стратегия",
+   "reading": "страте́гия",
+   "gloss": "strategy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.work.taktika",
+   "form": "тактика",
+   "reading": "та́ктика",
+   "gloss": "tactics",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.work.rashod",
+   "form": "расход",
+   "reading": "расхо́д",
+   "gloss": "expense",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.pribyl",
+   "form": "прибыль",
+   "reading": "при́быль",
+   "gloss": "profit",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.work.ubytok",
+   "form": "убыток",
+   "reading": "убы́ток",
+   "gloss": "loss",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.ceh",
+   "form": "цех",
+   "reading": "цех",
+   "gloss": "workshop",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.konveyer",
+   "form": "конвейер",
+   "reading": "конве́йер",
+   "gloss": "conveyor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.defekt",
+   "form": "дефект",
+   "reading": "дефе́кт",
+   "gloss": "defect",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.naladka",
+   "form": "наладка",
+   "reading": "нала́дка",
+   "gloss": "tuning, setup",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.work.vypusk",
+   "form": "выпуск",
+   "reading": "вы́пуск",
+   "gloss": "output, release",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.partiya",
+   "form": "партия",
+   "reading": "па́ртия",
+   "gloss": "batch",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.work.sklad",
+   "form": "склад",
+   "reading": "склад",
+   "gloss": "warehouse",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.tovar",
+   "form": "товар",
+   "reading": "това́р",
+   "gloss": "goods",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.syrjo",
+   "form": "сырьё",
+   "reading": "сырье́",
+   "gloss": "raw material",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.work.obrabotka",
+   "form": "обработка",
+   "reading": "обрабо́тка",
+   "gloss": "processing",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.work.masterskaya",
+   "form": "мастерская",
+   "reading": "мастерска́я",
+   "gloss": "workshop (small)",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

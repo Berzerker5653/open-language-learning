@@ -1,0 +1,50 @@
+SPEECH-007 calibration PREP — 2026-10-06
+(owner direction 2026-10-06: unblock speech calibration; "plan it now, no data
+yet". This records the long-lead prep so recordings can be sourced turnkey.
+Eligibility stays BLOCKED: no permissioned data, no labels, no held-out metrics.
+No feature is Qualified; automatic pronunciation scoring stays disabled.)
+
+Prepared (all planning/contract artifacts; no data, no results):
+- benchmarks/speech/protocols/ja-JP/vowel-length-0.2.0.yaml — preregistration
+  with FROZEN numeric limits (max_false_correction_rate 0.05,
+  min_scoring_coverage 0.60, min_label_agreement 0.70 = Cohen's kappa), a
+  speaker-cluster-bootstrap precision rule (95% upper CI bound must clear the
+  limit), sampling rationale (>=40 speakers, <=6 attempts/speaker toward CI),
+  scored feature id ja.phon.long-vowel (matches runtime/registry/desktop lookup;
+  phonology inventory id is ja.phon.vowel-length), coverage envelope. status:
+  preregistered-pending-ratification (needs a named qualified reviewer sign-off;
+  AI cannot self-certify). 0.1.0 retained as the method-frozen precursor.
+- benchmarks/speech/consent/participant-consent.md — separate, independently
+  revocable consent purposes P1-P5 (participation / retain / train / publish /
+  share-metadata), plain-language text, withdrawal+deletion (docs/08 §139-141).
+- benchmarks/speech/consent/data-handling.md — storage outside repo/packs,
+  access control, retention, deletion, and a metadata-minimization schema
+  (coarse L1/proficiency/accent/device only; forbidden: name/contact/geo/
+  reversible identity).
+- benchmarks/speech/labeling/rubric-ja-vowel-length.md — reviewer qualification
+  (phonetics/assessment, not native-only; docs/09 §147), blinding (labels frozen
+  before model outputs), 4-dimension rubric, the binary acceptable-vs-
+  needs-correction decision, Cohen's kappa gate + Krippendorff secondary,
+  adjudication + excluded-but-reported.
+- benchmarks/speech/datasets/SOURCING.md — researched options + recommendation.
+  Finding: no open permissioned Japanese LEARNER-error corpus covers the
+  contrast. Recommended: consented targeted recording study (primary); JANON-
+  SPEECH supplementary (verify license); Common Voice CV27 / NII-SRC / JVPD are
+  native read-speech = ASR baseline only (docs/17 §25); NICT JLE / L2-ARCTIC /
+  LearnerVoice are wrong language.
+- benchmarks/speech/datasets/_learner-consented-template/manifest.yaml —
+  consented-dataset manifest contract (consent/license/privacy/coverage fields;
+  unfilled consent fields must block a CalibrationRecord).
+- benchmarks/speech/CALIBRATION_RUNBOOK.md — end-to-end steps binding to the
+  registry (CalibrationRecord field map; measured.false_correction_rate = upper
+  CI bound so the registry's point-estimate check enforces the CI rule; status()
+  / eligibility_for() gating; regression/invalidation; stable-1.0 minimum).
+
+Blocker unchanged (docs/17 §129): owner must supply (1) >=40 consented learner
+recordings of the long-vowel minimal-pair set + controls, (2) 2 qualified
+labelers + adjudicator, (3) protocol-threshold ratification, (4) study storage.
+See SOURCING.md "What the owner must supply".
+
+No code changed; the fail-closed registry + desktop gating from the 2026-10-04
+infra pass already consume these artifacts. task-state SPEECH-007 stays
+"blocked".

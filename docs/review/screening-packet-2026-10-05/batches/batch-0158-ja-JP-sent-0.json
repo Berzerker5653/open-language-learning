@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-0",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.greet-morning",
+   "text": "おはようございます。",
+   "gloss": "Good morning."
+  },
+  {
+   "id": "ja.sent.greet-day",
+   "text": "こんにちは。",
+   "gloss": "Hello (daytime)."
+  },
+  {
+   "id": "ja.sent.greet-evening",
+   "text": "こんばんは。",
+   "gloss": "Good evening."
+  },
+  {
+   "id": "ja.sent.greet-night",
+   "text": "おやすみなさい。",
+   "gloss": "Good night."
+  },
+  {
+   "id": "ja.sent.thanks-polite",
+   "text": "ありがとうございます。",
+   "gloss": "Thank you."
+  },
+  {
+   "id": "ja.sent.excuse-me",
+   "text": "すみません。",
+   "gloss": "Excuse me. / I'm sorry."
+  },
+  {
+   "id": "ja.sent.nice-meet",
+   "text": "はじめまして。",
+   "gloss": "Nice to meet you (first meeting)."
+  },
+  {
+   "id": "ja.sent.my-name-wa",
+   "text": "わたしの なまえは タナカです。",
+   "gloss": "My name is Tanaka."
+  },
+  {
+   "id": "ja.sent.name-desu",
+   "text": "タナカです。",
+   "gloss": "I'm Tanaka."
+  },
+  {
+   "id": "ja.sent.nice-to-meet",
+   "text": "どうぞ よろしく おねがいします。",
+   "gloss": "Pleased to meet you (set phrase)."
+  },
+  {
+   "id": "ja.sent.this-is-book",
+   "text": "これは ほんです。",
+   "gloss": "This is a book."
+  },
+  {
+   "id": "ja.sent.that-is-pen",
+   "text": "それは ペンです。",
+   "gloss": "That is a pen."
+  },
+  {
+   "id": "ja.sent.what-is-this",
+   "text": "これは なんですか。",
+   "gloss": "What is this?"
+  },
+  {
+   "id": "ja.sent.book-expensive",
+   "text": "この ほんは たかいです。",
+   "gloss": "This book is expensive."
+  },
+  {
+   "id": "ja.sent.umbrella-big",
+   "text": "その かさは おおきいです。",
+   "gloss": "That umbrella is big."
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-31",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.debate2.gou",
+   "form": "ごう",
+   "reading": "ごう",
+   "gloss": "combination",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.demonstratives.kore",
+   "form": "これ",
+   "reading": "これ",
+   "gloss": "this (thing near speaker)",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.demonstratives.sore",
+   "form": "それ",
+   "reading": "それ",
+   "gloss": "that (thing near listener)",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.demonstratives.are",
+   "form": "あれ",
+   "reading": "あれ",
+   "gloss": "that (thing away from both)",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.demonstratives.koko",
+   "form": "ここ",
+   "reading": "ここ",
+   "gloss": "this place; here",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.demonstratives.soko",
+   "form": "そこ",
+   "reading": "そこ",
+   "gloss": "that place; there",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.demonstratives.asoko",
+   "form": "あそこ",
+   "reading": "あそこ",
+   "gloss": "over there",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.demonstratives.kono",
+   "form": "この",
+   "reading": "この",
+   "gloss": "this (before a noun)",
+   "pos": "determiner",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.demonstratives.sono",
+   "form": "その",
+   "reading": "その",
+   "gloss": "that (before a noun)",
+   "pos": "determiner",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.demonstratives.ano",
+   "form": "あの",
+   "reading": "あの",
+   "gloss": "that (before a noun, distant)",
+   "pos": "determiner",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.jidosuka",
+   "form": "じどうか",
+   "reading": "じどうか",
+   "gloss": "automation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.shouhi",
+   "form": "しょうひ",
+   "reading": "しょうひ",
+   "gloss": "consumption",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.shohi",
+   "form": "しょうもう",
+   "reading": "しょうもう",
+   "gloss": "depletion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.shijou",
+   "form": "しじょう",
+   "reading": "しじょう",
+   "gloss": "market",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.kyuukyuu",
+   "form": "きょうきゅう",
+   "reading": "きょうきゅう",
+   "gloss": "supply",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.kinyuu",
+   "form": "きんゆう",
+   "reading": "きんゆう",
+   "gloss": "finance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.shikyuu",
+   "form": "じゅきゅう",
+   "reading": "じゅきゅう",
+   "gloss": "demand",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.mugyou",
+   "form": "むよう",
+   "reading": "むよう",
+   "gloss": "unemployment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.roudou",
+   "form": "ろうどう",
+   "reading": "ろうどう",
+   "gloss": "labor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.kabu",
+   "form": "かぶ",
+   "reading": "かぶ",
+   "gloss": "stock",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.kabushiki",
+   "form": "かぶしき",
+   "reading": "かぶしき",
+   "gloss": "shares",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.kabushikikaisha",
+   "form": "かぶしきがいしゃ",
+   "reading": "かぶしきがいしゃ",
+   "gloss": "joint-stock company",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.shijo",
+   "form": "りし",
+   "reading": "りし",
+   "gloss": "interest rate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.kabunushi",
+   "form": "かぶぬし",
+   "reading": "かぶぬし",
+   "gloss": "shareholder",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.kabuka",
+   "form": "かぶか",
+   "reading": "かぶか",
+   "gloss": "stock price",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-46",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u725",
+   "text": "Это эвакуация.",
+   "gloss": "This is an evacuation."
+  },
+  {
+   "id": "ru.sent.b2.u726",
+   "text": "Это предосторожность.",
+   "gloss": "This is a precaution."
+  },
+  {
+   "id": "ru.sent.b2.u727",
+   "text": "Это аннуитет.",
+   "gloss": "This is an annuity."
+  },
+  {
+   "id": "ru.sent.b2.u728",
+   "text": "Это артефакт.",
+   "gloss": "This is an artifact."
+  },
+  {
+   "id": "ru.sent.b2.u729",
+   "text": "Это канцероген.",
+   "gloss": "This is a carcinogen."
+  },
+  {
+   "id": "ru.sent.b2.u730",
+   "text": "Это протагонист.",
+   "gloss": "This is the protagonist."
+  },
+  {
+   "id": "ru.sent.b2.u731",
+   "text": "Это стилизация.",
+   "gloss": "This is a stylization."
+  },
+  {
+   "id": "ru.sent.b2.u732",
+   "text": "Это знаток.",
+   "gloss": "This is a connoisseur."
+  },
+  {
+   "id": "ru.sent.b2.u733",
+   "text": "Это антиутопия.",
+   "gloss": "This is a dystopia."
+  },
+  {
+   "id": "ru.sent.b2.u734",
+   "text": "Это памфлет.",
+   "gloss": "This is a pamphlet."
+  },
+  {
+   "id": "ru.sent.b2.u735",
+   "text": "Это трагизм.",
+   "gloss": "This is tragicness."
+  },
+  {
+   "id": "ru.sent.b2.u736",
+   "text": "Это идиллия.",
+   "gloss": "This is an idyll."
+  },
+  {
+   "id": "ru.sent.b2.u737",
+   "text": "Это эпилог.",
+   "gloss": "This is an epilogue."
+  },
+  {
+   "id": "ru.sent.b2.u738",
+   "text": "Это мизансцена.",
+   "gloss": "This is a mise-en-scène."
+  },
+  {
+   "id": "ru.sent.b2.u739",
+   "text": "Это лейтмотив.",
+   "gloss": "This is a leitmotif."
+  }
+ ]
+}

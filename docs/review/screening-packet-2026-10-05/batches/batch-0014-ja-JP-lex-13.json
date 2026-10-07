@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-13",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.art2.kagu",
+   "form": "かぐ",
+   "reading": "かぐ",
+   "gloss": "furniture",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.fukushoku",
+   "form": "ふくしょく",
+   "reading": "ふくしょく",
+   "gloss": "interior decoration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.purodakuto",
+   "form": "ぷろだくと",
+   "reading": "ぷろだくと",
+   "gloss": "product",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.dezain2",
+   "form": "でざいん",
+   "reading": "でざいん",
+   "gloss": "design",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.tsukurite",
+   "form": "つくりて",
+   "reading": "つくりて",
+   "gloss": "maker, craftsman",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.shouhin2",
+   "form": "しょうひん",
+   "reading": "しょうひん",
+   "gloss": "consumer goods",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.maketto",
+   "form": "まけっと",
+   "reading": "まけっと",
+   "gloss": "market",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.ne",
+   "form": "ね",
+   "reading": "ね",
+   "gloss": "price, cost",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.kyaku",
+   "form": "きゃく",
+   "reading": "きゃく",
+   "gloss": "customer, guest",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.ato",
+   "form": "あと",
+   "reading": "あと",
+   "gloss": "trace, remains",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.koukyou",
+   "form": "こうきょう",
+   "reading": "こうきょう",
+   "gloss": "public, community",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.shiminkou",
+   "form": "しみんこう",
+   "reading": "しみんこう",
+   "gloss": "civic demand",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.sekinin3",
+   "form": "せきにん",
+   "reading": "せきにん",
+   "gloss": "responsibility",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.rinen",
+   "form": "りねん",
+   "reading": "りねん",
+   "gloss": "principle, ideal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.hakai2",
+   "form": "はかい",
+   "reading": "はかい",
+   "gloss": "destruction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.hogo",
+   "form": "ほご",
+   "reading": "ほご",
+   "gloss": "protection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.mirai",
+   "form": "みらい",
+   "reading": "みらい",
+   "gloss": "future",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.shinkou",
+   "form": "しんこう",
+   "reading": "しんこう",
+   "gloss": "faith, trust",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.hatsugen",
+   "form": "はつげん",
+   "reading": "はつげん",
+   "gloss": "statement, utterance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.kouchou",
+   "form": "こうちょう",
+   "reading": "こうちょう",
+   "gloss": "extension, elongation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.chie",
+   "form": "ちえ",
+   "reading": "ちえ",
+   "gloss": "wisdom, cleverness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.kankei2",
+   "form": "かんけい",
+   "reading": "かんけい",
+   "gloss": "relation, connection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.mondai2",
+   "form": "もんだい",
+   "reading": "もんだい",
+   "gloss": "problem, question",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.kaitou",
+   "form": "かいとう",
+   "reading": "かいとう",
+   "gloss": "solution, answer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.art2.risou2",
+   "form": "りそう",
+   "reading": "りそう",
+   "gloss": "ideal",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

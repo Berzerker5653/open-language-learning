@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-21",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.cult.povestvovatelnyy",
+   "form": "повествовательный",
+   "reading": "повествова́тельный",
+   "gloss": "narrative (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.ironicheskiy",
+   "form": "иронический",
+   "reading": "ирони́ческий",
+   "gloss": "ironic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.pamflet",
+   "form": "памфлет",
+   "reading": "памфле́т",
+   "gloss": "pamphlet",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.predanie",
+   "form": "предание",
+   "reading": "преда́ние",
+   "gloss": "legend, lore",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.epigramma",
+   "form": "эпиграмма",
+   "reading": "эпигра́мма",
+   "gloss": "epigram",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.chitatelskiy",
+   "form": "читательский",
+   "reading": "чита́тельский",
+   "gloss": "reader (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.kinematograf",
+   "form": "кинематограф",
+   "reading": "кинемато́граф",
+   "gloss": "cinema",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.mzanscena",
+   "form": "мизансцена",
+   "reading": "мизансце́на",
+   "gloss": "mise-en-scène",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.pripev",
+   "form": "припев",
+   "reading": "припе́в",
+   "gloss": "chorus, refrain",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.antiutopiya",
+   "form": "антиутопия",
+   "reading": "антиутопи́я",
+   "gloss": "dystopia",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.virtuoz",
+   "form": "виртуоз",
+   "reading": "виртуо́з",
+   "gloss": "virtuoso",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.satiricheskiy",
+   "form": "сатирический",
+   "reading": "сатири́ческий",
+   "gloss": "satirical",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.jumoristicheskiy",
+   "form": "юмористический",
+   "reading": "юмористи́ческий",
+   "gloss": "humorous",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.komicheskiy",
+   "form": "комический",
+   "reading": "коми́ческий",
+   "gloss": "comic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.tragicheskiy",
+   "form": "трагический",
+   "reading": "траги́ческий",
+   "gloss": "tragic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.dramatizm",
+   "form": "драматизм",
+   "reading": "драмати́зм",
+   "gloss": "dramatism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.sarkasticheskiy",
+   "form": "саркастический",
+   "reading": "саркасти́ческий",
+   "gloss": "sarcastic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.sochuvestvie",
+   "form": "сочувствие",
+   "reading": "сочу́вствие",
+   "gloss": "sympathy",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.sostradanie",
+   "form": "сострадание",
+   "reading": "сострада́ние",
+   "gloss": "compassion",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.umilenie",
+   "form": "умиление",
+   "reading": "умиле́ние",
+   "gloss": "tender delight",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.komizm",
+   "form": "комизм",
+   "reading": "коми́зм",
+   "gloss": "comicality",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.tragizm",
+   "form": "трагизм",
+   "reading": "траги́зм",
+   "gloss": "tragicness",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.patos",
+   "form": "пафос",
+   "reading": "па́фос",
+   "gloss": "pathos",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.sentimentalnost",
+   "form": "сентиментальность",
+   "reading": "сентимента́льность",
+   "gloss": "sentimentality",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.idilliya",
+   "form": "идиллия",
+   "reading": "иди́ллия",
+   "gloss": "idyll",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

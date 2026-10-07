@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-12",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.pay-expense",
+   "text": "ひはらいを します。",
+   "gloss": "I pay expenses."
+  },
+  {
+   "id": "ja.sent.check-balance",
+   "text": "kessakuを かくにんします。",
+   "gloss": "I check the balance."
+  },
+  {
+   "id": "ja.sent.household-ledger",
+   "text": "かけいぼ に かきます。",
+   "gloss": "I write in the household ledger."
+  },
+  {
+   "id": "ja.sent.keep-receipt",
+   "text": "でんぴょう を つけます。",
+   "gloss": "I keep receipts."
+  },
+  {
+   "id": "ja.sent.apply-form",
+   "text": "しんせいしょ を かきます。",
+   "gloss": "I fill in the application form."
+  },
+  {
+   "id": "ja.sent.insurance-card",
+   "text": "ほけんじょう を みせます。",
+   "gloss": "I show the insurance certificate."
+  },
+  {
+   "id": "ja.sent.address-registration",
+   "text": "じゅうしょとどけ を します。",
+   "gloss": "I do address registration."
+  },
+  {
+   "id": "ja.sent.interview-qualification",
+   "text": "しょくばで しかくを とりたいです。",
+   "gloss": "I want to get a qualification at work."
+  },
+  {
+   "id": "ja.sent.resume-experience",
+   "text": "3ねん しょくむ けいけんが あります。",
+   "gloss": "I have three years of work experience."
+  },
+  {
+   "id": "ja.sent.minutes-written",
+   "text": "ぎじろくは たんとうが かきました。",
+   "gloss": "The person in charge wrote the minutes."
+  },
+  {
+   "id": "ja.sent.opinion-before-decision",
+   "text": "けっていの まえに いけんを います。",
+   "gloss": "I state my opinion before the decision."
+  },
+  {
+   "id": "ja.sent.profit-loss",
+   "text": "けいりが ふえて、そんしつも ふえました。",
+   "gloss": "Profits grew, and losses also grew."
+  },
+  {
+   "id": "ja.sent.praise-words",
+   "text": "ぶちょうに しょうほうの ことばを もらいました。",
+   "gloss": "I received words of praise from the section chief."
+  },
+  {
+   "id": "ja.sent.union-talks",
+   "text": "しゃちょうと ろうしが ろうどう じょうけんの はなしあいを します。",
+   "gloss": "The president and the union discuss working conditions."
+  },
+  {
+   "id": "ja.sent.contract-check",
+   "text": "けいやくしょを かくにんして ください。",
+   "gloss": "Please check the contract document."
+  }
+ ]
+}

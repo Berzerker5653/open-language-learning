@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-27",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.cult.sushchestvovanie",
+   "form": "сосуществование",
+   "reading": "сосуществова́ние",
+   "gloss": "coexistence",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.sushchestvovat",
+   "form": "сосуществовать",
+   "reading": "сосуществова́ть",
+   "gloss": "to coexist",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.dvuyazychie",
+   "form": "двуязычие",
+   "reading": "двуязы́чие",
+   "gloss": "bilingualism",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.mnogoyazychie",
+   "form": "многоязычие",
+   "reading": "многоязы́чие",
+   "gloss": "multilingualism",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.arhaizm",
+   "form": "архаизм",
+   "reading": "архаи́зм",
+   "gloss": "archaism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.dialekt",
+   "form": "диалект",
+   "reading": "диале́кт",
+   "gloss": "dialect",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.govor",
+   "form": "говор",
+   "reading": "го́вор",
+   "gloss": "local speech, dialect",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.bilingv",
+   "form": "билингв",
+   "reading": "билингв́",
+   "gloss": "bilingual person",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.inkulturaciya",
+   "form": "инкультурация",
+   "reading": "инкультура́ция",
+   "gloss": "enculturation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.refleksiya",
+   "form": "рефлексия",
+   "reading": "рефле́ксия",
+   "gloss": "reflection, self-examination",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.kosmopolitizm",
+   "form": "космополитизм",
+   "reading": "космополити́зм",
+   "gloss": "cosmopolitanism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.nacionalizm",
+   "form": "национализм",
+   "reading": "национали́зм",
+   "gloss": "nationalism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.internacionalizm",
+   "form": "интернационализм",
+   "reading": "интернационали́зм",
+   "gloss": "internationalism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.vesternizaciya",
+   "form": "вестернизация",
+   "reading": "вестерниза́ция",
+   "gloss": "Westernization",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.tradicionalizm",
+   "form": "традиционализм",
+   "reading": "традиционали́зм",
+   "gloss": "traditionalism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.zastoy",
+   "form": "застой",
+   "reading": "засто́й",
+   "gloss": "stagnation",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.smeshenie",
+   "form": "смешение",
+   "reading": "смеше́ние",
+   "gloss": "mixing, blending",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.simbioz",
+   "form": "симбиоз",
+   "reading": "симбио́з",
+   "gloss": "symbiosis",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.apropriaciya",
+   "form": "апроприация",
+   "reading": "апроприа́ция",
+   "gloss": "appropriation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.marginalizaciya",
+   "form": "маргинализация",
+   "reading": "маргинализа́ция",
+   "gloss": "marginalization",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.segregaciya",
+   "form": "сегрегация",
+   "reading": "сегрега́ция",
+   "gloss": "segregation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.diskriminaciya",
+   "form": "дискриминация",
+   "reading": "дискримина́ция",
+   "gloss": "discrimination",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.spravedlivost",
+   "form": "справедливость",
+   "reading": "справедли́вость",
+   "gloss": "fairness, justice",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.etiket",
+   "form": "этикет",
+   "reading": "этике́т",
+   "gloss": "etiquette",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.folklor",
+   "form": "фольклор",
+   "reading": "фолькло́р",
+   "gloss": "folklore",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

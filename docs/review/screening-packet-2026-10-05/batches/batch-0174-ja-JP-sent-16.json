@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-16",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.museum-exhibit",
+   "text": "びじゅつかん の てんじぶつ が きれい でした。",
+   "gloss": "The art museum's exhibit was beautiful."
+  },
+  {
+   "id": "ja.sent.shrine-visit",
+   "text": "じんじゃ で さいほう して、おみず を のみました。",
+   "gloss": "At the shrine I worshipped and drank the water."
+  },
+  {
+   "id": "ja.sent.pride-craft",
+   "text": "わし の こうげ に ほこり を かんじます。",
+   "gloss": "I feel pride in the washi craft."
+  },
+  {
+   "id": "ja.sent.guest-host",
+   "text": "ほうもんしゃ に ざしき を ゆずりました。",
+   "gloss": "I gave up my seat to the visitor."
+  },
+  {
+   "id": "ja.sent.gift-wrapping",
+   "text": "のし と つつみ で おくりもの を かざりました。",
+   "gloss": "I decorated the gift with noshi and wrapping."
+  },
+  {
+   "id": "ja.sent.taboo-rule",
+   "text": "その ばしょ では しゃしん を とる のが タブー です。",
+   "gloss": "Taking photos is taboo in that place."
+  },
+  {
+   "id": "ja.sent.ceremony-congrats",
+   "text": "しゅごう の かい で はなよめ に いろが ふえました。",
+   "gloss": "At the celebration the bride grew more colorful."
+  },
+  {
+   "id": "ja.sent.essay-observation",
+   "text": "こうさつ と きじゅつ で ぶんか を あらわします。",
+   "gloss": "We express culture through observation and description."
+  },
+  {
+   "id": "ja.sent.law-everyday",
+   "text": "ほうりつ と ほうれい で しゃかい が まもられます。",
+   "gloss": "Society is protected by laws and ordinances."
+  },
+  {
+   "id": "ja.sent.rights-duties",
+   "text": "けんり と ぎむ は いっしょ に あります。",
+   "gloss": "Rights and duties exist together."
+  },
+  {
+   "id": "ja.sent.neighbor-clean",
+   "text": "ちょうないかい の そうじ に さんか しました。",
+   "gloss": "I joined the local association's cleaning."
+  },
+  {
+   "id": "ja.sent.volunteer-role",
+   "text": "ぼりゅんてぃあ で かつやく を はたしました。",
+   "gloss": "I fulfilled my role as a volunteer."
+  },
+  {
+   "id": "ja.sent.community-worry",
+   "text": "この ちほう の こうつう の ゆううつ が ふえました。",
+   "gloss": "Traffic worries in this region have grown."
+  },
+  {
+   "id": "ja.sent.petition-signature",
+   "text": "せいめん に 1000めい の しょうめい が あつまりました。",
+   "gloss": "The petition gathered 1000 signatures."
+  },
+  {
+   "id": "ja.sent.civic-hall-meeting",
+   "text": "こうみんかん で ぎむ の はなしあいを しました。",
+   "gloss": "We discussed duties at the community center."
+  }
+ ]
+}

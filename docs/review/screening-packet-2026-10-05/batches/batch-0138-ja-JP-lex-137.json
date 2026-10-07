@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-137",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.story2.uma",
+   "form": "うま",
+   "reading": "うま",
+   "gloss": "horse",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.inu",
+   "form": "いぬ",
+   "reading": "いぬ",
+   "gloss": "dog",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.neko",
+   "form": "ねこ",
+   "reading": "ねこ",
+   "gloss": "cat",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.tori",
+   "form": "とり",
+   "reading": "とり",
+   "gloss": "bird",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.sakana2",
+   "form": "さかな",
+   "reading": "さかな",
+   "gloss": "fish",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.mazui",
+   "form": "まずい",
+   "reading": "まずい",
+   "gloss": "bad-tasting",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.shiroi",
+   "form": "しろい",
+   "reading": "しろい",
+   "gloss": "white",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.kuroi",
+   "form": "くろい",
+   "reading": "くろい",
+   "gloss": "black",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.akai",
+   "form": "あかい",
+   "reading": "あかい",
+   "gloss": "red",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.aoi",
+   "form": "あおい",
+   "reading": "あおい",
+   "gloss": "blue",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.kiiroi",
+   "form": "きいろい",
+   "reading": "きいろい",
+   "gloss": "yellow",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.murasaki",
+   "form": "むらさき",
+   "reading": "むらさき",
+   "gloss": "purple",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.kin",
+   "form": "きん",
+   "reading": "きん",
+   "gloss": "gold",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.gin",
+   "form": "ぎん",
+   "reading": "ぎん",
+   "gloss": "silver",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.ookii2",
+   "form": "おおきい",
+   "reading": "おおきい",
+   "gloss": "big",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.chiisai2",
+   "form": "ちいさい",
+   "reading": "ちいさい",
+   "gloss": "small",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.takai2",
+   "form": "たかい",
+   "reading": "たかい",
+   "gloss": "expensive",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.mijikai2",
+   "form": "みじかい",
+   "reading": "みじかい",
+   "gloss": "short",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.oishii2",
+   "form": "おいしい",
+   "reading": "おいしい",
+   "gloss": "delicious",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.ongaku2",
+   "form": "おんがく",
+   "reading": "おんがく",
+   "gloss": "music",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.odori2",
+   "form": "おどり",
+   "reading": "おどり",
+   "gloss": "dance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.debisu",
+   "form": "でびす",
+   "reading": "でびす",
+   "gloss": "device",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.sumaho",
+   "form": "すまほ",
+   "reading": "すまほ",
+   "gloss": "smartphone",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.pasokon",
+   "form": "ぱそこん",
+   "reading": "ぱそこん",
+   "gloss": "personal computer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.taburet",
+   "form": "たぶれっと",
+   "reading": "たぶれっと",
+   "gloss": "tablet",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

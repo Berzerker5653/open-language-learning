@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-87",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.lit2.bunken",
+   "form": "ぶんけん",
+   "reading": "ぶんけん",
+   "gloss": "literature",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.shoseki",
+   "form": "しょせき",
+   "reading": "しょせき",
+   "gloss": "book",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.shuppan",
+   "form": "しゅっぱん",
+   "reading": "しゅっぱん",
+   "gloss": "publishing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.sakubun",
+   "form": "さくぶん",
+   "reading": "さくぶん",
+   "gloss": "composition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.chiyaku",
+   "form": "ちやく",
+   "reading": "ちやく",
+   "gloss": "supporting role",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.bunpatsu",
+   "form": "ぶんぱつ",
+   "reading": "ぶんぱつ",
+   "gloss": "phrase",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.goju",
+   "form": "ごじゅ",
+   "reading": "ごじゅ",
+   "gloss": "phrase",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.shuppan-sha",
+   "form": "しゅっぱんしゃ",
+   "reading": "しゅっぱんしゃ",
+   "gloss": "publisher",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.ku",
+   "form": "く",
+   "reading": "く",
+   "gloss": "verse",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.maku",
+   "form": "まく",
+   "reading": "まく",
+   "gloss": "act",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.jo",
+   "form": "じょ",
+   "reading": "じょ",
+   "gloss": "preface",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.maki",
+   "form": "まき",
+   "reading": "まき",
+   "gloss": "volume",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.hen",
+   "form": "へん",
+   "reading": "へん",
+   "gloss": "chapter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.honyaku-ka",
+   "form": "ほんやくか",
+   "reading": "ほんやくか",
+   "gloss": "translator",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.yakubun",
+   "form": "やくぶん",
+   "reading": "やくぶん",
+   "gloss": "translated text",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.genbun",
+   "form": "げんぶん",
+   "reading": "げんぶん",
+   "gloss": "original text",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.jiten",
+   "form": "じてん",
+   "reading": "じてん",
+   "gloss": "dictionary",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.reibun",
+   "form": "れいぶん",
+   "reading": "れいぶん",
+   "gloss": "example sentence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.jou",
+   "form": "じょう",
+   "reading": "じょう",
+   "gloss": "upper volume",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.rei",
+   "form": "れい",
+   "reading": "れい",
+   "gloss": "example",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.yakimoku",
+   "form": "やくもく",
+   "reading": "やくもく",
+   "gloss": "assigned role",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.hanmoto",
+   "form": "はんもと",
+   "reading": "はんもと",
+   "gloss": "publisher",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.moji",
+   "form": "もじ",
+   "reading": "もじ",
+   "gloss": "character",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.kansatsu",
+   "form": "かんさつ",
+   "reading": "かんさつ",
+   "gloss": "observation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.kyoumu",
+   "form": "きょうむ",
+   "reading": "きょうむ",
+   "gloss": "interest",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

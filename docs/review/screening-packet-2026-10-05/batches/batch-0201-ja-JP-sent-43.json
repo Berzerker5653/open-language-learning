@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-43",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.witty-replies",
+   "text": "その こたえ の おもむき が すぐれて いました。",
+   "gloss": "The nuance of that reply was excellent."
+  },
+  {
+   "id": "ja.sent.absurd-humor",
+   "text": "きょうふ な はなし で わらいました。",
+   "gloss": "We laughed at an absurd story."
+  },
+  {
+   "id": "ja.sent.self-deprecating",
+   "text": "じぶん の ばか さ を わらいました。",
+   "gloss": "I laughed at my own foolishness."
+  },
+  {
+   "id": "ja.sent.humor-essay",
+   "text": "えっせー の なか に けいじ を いれました。",
+   "gloss": "I put humor into the essay."
+  },
+  {
+   "id": "ja.sent.long-term-commitment",
+   "text": "ながい ねんれい の ともだち と の きずな を だいじ に します。",
+   "gloss": "I value the bond with a friend of many years."
+  },
+  {
+   "id": "ja.sent.family-conflict",
+   "text": "かぞく の なか の もめごと を そうだん しました。",
+   "gloss": "I consulted about a family dispute."
+  },
+  {
+   "id": "ja.sent.caregiving-talk",
+   "text": "かいご の ことば を べんきょう しました。",
+   "gloss": "I studied the words of caregiving."
+  },
+  {
+   "id": "ja.sent.friendship-maintenance",
+   "text": "ともだち と まれ に れんらく を とります。",
+   "gloss": "I rarely contact friends."
+  },
+  {
+   "id": "ja.sent.mentor-relationship",
+   "text": "せんせい と の しんこう の かんけい を べんきょう しました。",
+   "gloss": "I studied the relationship of trust with a teacher."
+  },
+  {
+   "id": "ja.sent.vulnerability-trust",
+   "text": "しんこう は ちいさな きもち から はじまります。",
+   "gloss": "Trust begins with small feelings."
+  },
+  {
+   "id": "ja.sent.forgiveness-process",
+   "text": "はんかん を はなす のは くるしい です。",
+   "gloss": "Speaking of regret is painful."
+  },
+  {
+   "id": "ja.sent.relationship-transitions",
+   "text": "いのち の なか で かんけい が かわります。",
+   "gloss": "Relationships change within a life."
+  },
+  {
+   "id": "ja.sent.loss-and-grief",
+   "text": "なみだ が でる とき が あります。",
+   "gloss": "There are times when tears come."
+  },
+  {
+   "id": "ja.sent.community-belonging",
+   "text": "ちいき の なか で きもち が やすらぎます。",
+   "gloss": "Inside the community my heart settles."
+  },
+  {
+   "id": "ja.sent.cross-cultural-friendship",
+   "text": "こくさい の ともだち と こうりゅう を します。",
+   "gloss": "I exchange with international friends."
+  }
+ ]
+}

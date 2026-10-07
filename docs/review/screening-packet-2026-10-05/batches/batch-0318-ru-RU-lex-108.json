@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-108",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.soc.alternativnyy",
+   "form": "альтернативный",
+   "reading": "альтернати́вный",
+   "gloss": "alternative (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.izderzhki",
+   "form": "издержки",
+   "reading": "изде́ржки",
+   "gloss": "costs, outlays",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.ubytki",
+   "form": "убытки",
+   "reading": "убы́тки",
+   "gloss": "losses",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.kompensirovat",
+   "form": "компенсировать",
+   "reading": "компенси́ровать",
+   "gloss": "to compensate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.vozmostit",
+   "form": "возместить",
+   "reading": "возмести́ть",
+   "gloss": "to reimburse",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.profcit",
+   "form": "профицит",
+   "reading": "профици́т",
+   "gloss": "surplus",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.ravnovesnyy",
+   "form": "равновесный",
+   "reading": "равнове́сный",
+   "gloss": "equilibrium (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.ustoychivost",
+   "form": "устойчивость",
+   "reading": "усто́йчивость",
+   "gloss": "stability, sustainability",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.samostoyatelnost",
+   "form": "самостоятельность",
+   "reading": "самостоя́тельность",
+   "gloss": "independence, self-reliance",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.avtonomnyy",
+   "form": "автономный",
+   "reading": "автоно́мный",
+   "gloss": "autonomous",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.avtonomiya",
+   "form": "автономия",
+   "reading": "автоно́мия",
+   "gloss": "autonomy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.samodostatochnyy",
+   "form": "самодостаточный",
+   "reading": "самодоста́точный",
+   "gloss": "self-sufficient",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.dostatok",
+   "form": "достаток",
+   "reading": "доста́ток",
+   "gloss": "prosperity, means",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.zazhitochnyy",
+   "form": "зажиточный",
+   "reading": "зажи́точный",
+   "gloss": "prosperous, well-off",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.sostoyatelnyy",
+   "form": "состоятельный",
+   "reading": "состоя́тельный",
+   "gloss": "affluent",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.obespechennyy",
+   "form": "обеспеченный",
+   "reading": "обеспе́ченный",
+   "gloss": "well-off, provided for",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.neobespechennyy",
+   "form": "необеспеченный",
+   "reading": "необеспе́ченный",
+   "gloss": "underprivileged",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.neravnomernyy",
+   "form": "неравномерный",
+   "reading": "неравноме́рный",
+   "gloss": "uneven",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.variativnyy",
+   "form": "вариативный",
+   "reading": "вариати́вный",
+   "gloss": "variable, optional",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.optsionalnyy",
+   "form": "опциональный",
+   "reading": "опциона́льный",
+   "gloss": "optional",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.dobavochnyy",
+   "form": "добавочный",
+   "reading": "доба́вочный",
+   "gloss": "added, additional",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.proizvodnyy",
+   "form": "производный",
+   "reading": "произво́дный",
+   "gloss": "derivative",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.skvoznoy",
+   "form": "сквозной",
+   "reading": "сквозно́й",
+   "gloss": "end-to-end, through",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.tochechnyy",
+   "form": "точечный",
+   "reading": "то́чечный",
+   "gloss": "pointwise, targeted",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.adresnyy",
+   "form": "адресный",
+   "reading": "а́дресный",
+   "gloss": "targeted, addressed",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

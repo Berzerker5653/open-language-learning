@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-145",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.travel2.mimai",
+   "form": "みまい",
+   "reading": "みまい",
+   "gloss": "inquiry visit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.kangae",
+   "form": "かんがえ",
+   "reading": "かんがえ",
+   "gloss": "thought",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.yakusoku",
+   "form": "やくそく",
+   "reading": "やくそく",
+   "gloss": "promise",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.issho",
+   "form": "いっしょ",
+   "reading": "いっしょ",
+   "gloss": "togetherness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.deai",
+   "form": "であい",
+   "reading": "であい",
+   "gloss": "meeting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.jibun",
+   "form": "じぶん",
+   "reading": "じぶん",
+   "gloss": "oneself",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.gaido",
+   "form": "がいどう",
+   "reading": "がいどう",
+   "gloss": "guided tour",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.meguri",
+   "form": "めぐり",
+   "reading": "めぐり",
+   "gloss": "sightseeing circuit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.fuu-kei",
+   "form": "ふうけい",
+   "reading": "ふうけい",
+   "gloss": "scenery",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.kairou",
+   "form": "かいろう",
+   "reading": "かいろう",
+   "gloss": "corridor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.daihyou",
+   "form": "だいひょう",
+   "reading": "だいひょう",
+   "gloss": "representative",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.dekake",
+   "form": "でかけ",
+   "reading": "でかけ",
+   "gloss": "outing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.sanin",
+   "form": "さにん",
+   "reading": "さにん",
+   "gloss": "three people",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.chotto",
+   "form": "ちょっと",
+   "reading": "ちょっと",
+   "gloss": "a little",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.keihaku",
+   "form": "けいはく",
+   "reading": "けいはく",
+   "gloss": "stay",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.hansei",
+   "form": "はんせい",
+   "reading": "はんせい",
+   "gloss": "self-reflection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.wasuremono",
+   "form": "わすれもの",
+   "reading": "わすれもの",
+   "gloss": "forgotten item",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.otoiawase",
+   "form": "おといあわせ",
+   "reading": "おといあわせ",
+   "gloss": "inquiry",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.saifu",
+   "form": "さいふ",
+   "reading": "さいふ",
+   "gloss": "wallet",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.kagi",
+   "form": "かぎ",
+   "reading": "かぎ",
+   "gloss": "key",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.ochimono",
+   "form": "おちもの",
+   "reading": "おちもの",
+   "gloss": "lost item",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.ryougae",
+   "form": "りょうがえ",
+   "reading": "りょうがえ",
+   "gloss": "currency exchange",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.ryoukin",
+   "form": "りょうきん",
+   "reading": "りょうきん",
+   "gloss": "fare",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.kakaku",
+   "form": "かくかく",
+   "reading": "かくかく",
+   "gloss": "price",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.travel2.nyuuryoku",
+   "form": "にゅうりょく",
+   "reading": "にゅうりょく",
+   "gloss": "income",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

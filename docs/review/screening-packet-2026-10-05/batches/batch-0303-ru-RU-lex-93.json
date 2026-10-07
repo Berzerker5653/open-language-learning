@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-93",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.routines.chas",
+   "form": "час",
+   "reading": "час",
+   "gloss": "hour",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.routines.minut",
+   "form": "минута",
+   "reading": "мину́та",
+   "gloss": "minute",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.routines.segodnya",
+   "form": "сегодня",
+   "reading": "сего́дня",
+   "gloss": "today",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.zavtra",
+   "form": "завтра",
+   "reading": "за́втра",
+   "gloss": "tomorrow",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.vchera",
+   "form": "вчера",
+   "reading": "вчера́",
+   "gloss": "yesterday",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.vsegda",
+   "form": "всегда",
+   "reading": "всегда́",
+   "gloss": "always",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.chasto",
+   "form": "часто",
+   "reading": "ча́сто",
+   "gloss": "often",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.redko",
+   "form": "редко",
+   "reading": "ре́дко",
+   "gloss": "rarely",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.nikogda",
+   "form": "никогда",
+   "reading": "никогда́",
+   "gloss": "never",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.inogda",
+   "form": "иногда",
+   "reading": "иногда́",
+   "gloss": "sometimes",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.utrom",
+   "form": "утром",
+   "reading": "у́тром",
+   "gloss": "in the morning",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.vecherom",
+   "form": "вечером",
+   "reading": "ве́чером",
+   "gloss": "in the evening",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.nedelya",
+   "form": "неделя",
+   "reading": "неде́ля",
+   "gloss": "week",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.routines.mesyats",
+   "form": "месяц",
+   "reading": "ме́сяц",
+   "gloss": "month",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.routines.god",
+   "form": "год",
+   "reading": "год",
+   "gloss": "year",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.routines.vykhodnye",
+   "form": "выходные",
+   "reading": "выхо́дные",
+   "gloss": "weekend",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.routines.budilnik",
+   "form": "будильник",
+   "reading": "буди́льник",
+   "gloss": "alarm clock",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.routines.raspisanie",
+   "form": "расписание",
+   "reading": "расписа́ние",
+   "gloss": "schedule",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.routines.kofe",
+   "form": "кофе",
+   "reading": "ко́фе",
+   "gloss": "coffee",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.routines.chay",
+   "form": "чай",
+   "reading": "чай",
+   "gloss": "tea",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.routines.dus",
+   "form": "душ",
+   "reading": "душ",
+   "gloss": "shower",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.routines.domoy",
+   "form": "домой",
+   "reading": "домо́й",
+   "gloss": "homeward",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.otdykh",
+   "form": "отдых",
+   "reading": "о́тдых",
+   "gloss": "rest",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.routines.zavtrak",
+   "form": "завтрак",
+   "reading": "за́втрак",
+   "gloss": "breakfast",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.routines.obed",
+   "form": "обед",
+   "reading": "обе́д",
+   "gloss": "lunch",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

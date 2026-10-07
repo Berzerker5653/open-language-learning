@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-147",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.travel.kassir",
+   "form": "кассир",
+   "reading": "касси́р",
+   "gloss": "ticket clerk",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.pasazhir",
+   "form": "пассажир",
+   "reading": "пассажи́р",
+   "gloss": "passenger",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.provodnik",
+   "form": "проводник",
+   "reading": "проводни́к",
+   "gloss": "train attendant",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.voditel",
+   "form": "водитель",
+   "reading": "води́тель",
+   "gloss": "driver",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.sumka",
+   "form": "сумка",
+   "reading": "су́мка",
+   "gloss": "bag",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel.chemodan",
+   "form": "чемодан",
+   "reading": "чемода́н",
+   "gloss": "suitcase",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.ruchka2",
+   "form": "ручка",
+   "reading": "ру́чка",
+   "gloss": "handle; pen",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel.ves",
+   "form": "вес",
+   "reading": "вес",
+   "gloss": "weight",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.bagazh",
+   "form": "багаж",
+   "reading": "бага́ж",
+   "gloss": "luggage",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.dokument",
+   "form": "документ",
+   "reading": "докуме́нт",
+   "gloss": "document",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.passport",
+   "form": "паспорт",
+   "reading": "па́спорт",
+   "gloss": "passport",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.viza",
+   "form": "виза",
+   "reading": "ви́за",
+   "gloss": "visa",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel.tamozhnya",
+   "form": "таможня",
+   "reading": "тамо́жня",
+   "gloss": "customs",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel.kontrol",
+   "form": "контроль",
+   "reading": "контро́ль",
+   "gloss": "check, control",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.bezopasnost",
+   "form": "безопасность",
+   "reading": "безопа́сность",
+   "gloss": "safety",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel.svetofor",
+   "form": "светофор",
+   "reading": "светофо́р",
+   "gloss": "traffic light",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.doroga",
+   "form": "дорога",
+   "reading": "доро́га",
+   "gloss": "road, way",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel.proizdat",
+   "form": "проезжать",
+   "reading": "проезжа́ть",
+   "gloss": "to pass through",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel.ehat",
+   "form": "ехать",
+   "reading": "е́хать",
+   "gloss": "to go by vehicle",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel.letet",
+   "form": "лететь",
+   "reading": "лете́ть",
+   "gloss": "to fly",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel.idti",
+   "form": "идти",
+   "reading": "идти́",
+   "gloss": "to walk, go on foot",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel.perekhod",
+   "form": "переход",
+   "reading": "перехо́д",
+   "gloss": "crossing, passage",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.pereezd",
+   "form": "переезд",
+   "reading": "перее́зд",
+   "gloss": "railway crossing",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.skorost",
+   "form": "скорость",
+   "reading": "ско́рость",
+   "gloss": "speed",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel.rasstoyanie",
+   "form": "расстояние",
+   "reading": "расстоя́ние",
+   "gloss": "distance",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

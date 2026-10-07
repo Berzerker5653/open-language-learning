@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-22",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b1.u365",
+   "text": "Это сжатие.",
+   "gloss": "This is compression."
+  },
+  {
+   "id": "ru.sent.b1.u366",
+   "text": "Это оглавление.",
+   "gloss": "This is the table of contents."
+  },
+  {
+   "id": "ru.sent.b1.u367",
+   "text": "Это обложка.",
+   "gloss": "This is the cover."
+  },
+  {
+   "id": "ru.sent.b1.u368",
+   "text": "Это цитата.",
+   "gloss": "This is a quote."
+  },
+  {
+   "id": "ru.sent.b1.u369",
+   "text": "Это отрывок.",
+   "gloss": "This is an excerpt."
+  },
+  {
+   "id": "ru.sent.b1.u370",
+   "text": "Это обстоятельство.",
+   "gloss": "This is a circumstance."
+  },
+  {
+   "id": "ru.sent.b1.u371",
+   "text": "Это исход.",
+   "gloss": "This is the outcome."
+  },
+  {
+   "id": "ru.sent.b1.u372",
+   "text": "Это вероятность.",
+   "gloss": "This is a probability."
+  },
+  {
+   "id": "ru.sent.b1.u373",
+   "text": "Это прогноз.",
+   "gloss": "This is a forecast."
+  },
+  {
+   "id": "ru.sent.b1.u374",
+   "text": "Это запрет.",
+   "gloss": "This is a prohibition."
+  },
+  {
+   "id": "ru.sent.b1.u375",
+   "text": "Это потеря.",
+   "gloss": "This is a loss."
+  },
+  {
+   "id": "ru.sent.b1.u376",
+   "text": "Это следствие.",
+   "gloss": "This is a consequence."
+  },
+  {
+   "id": "ru.sent.b1.u377",
+   "text": "Это препятствие.",
+   "gloss": "This is an obstacle."
+  },
+  {
+   "id": "ru.sent.b1.u378",
+   "text": "Это угроза.",
+   "gloss": "This is a threat."
+  },
+  {
+   "id": "ru.sent.b1.u379",
+   "text": "Это доля.",
+   "gloss": "This is a share."
+  }
+ ]
+}

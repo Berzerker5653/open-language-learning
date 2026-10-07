@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-8",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.city.ploshchad",
+   "form": "площадь",
+   "reading": "пло́щадь",
+   "gloss": "square",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.city.etazh",
+   "form": "этаж",
+   "reading": "эта́ж",
+   "gloss": "floor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.podezd",
+   "form": "подъезд",
+   "reading": "подъе́зд",
+   "gloss": "building entrance",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.povorot",
+   "form": "поворот",
+   "reading": "поворо́т",
+   "gloss": "turn",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.napravo",
+   "form": "направо",
+   "reading": "напра́во",
+   "gloss": "to the right",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.city.nalevo",
+   "form": "налево",
+   "reading": "нале́во",
+   "gloss": "to the left",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.city.priyamo",
+   "form": "прямо",
+   "reading": "пря́мо",
+   "gloss": "straight",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.city.nedaleko",
+   "form": "недалеко",
+   "reading": "недалеко́",
+   "gloss": "not far",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.city.daleko",
+   "form": "далеко",
+   "reading": "далеко́",
+   "gloss": "far",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.city.zdes",
+   "form": "здесь",
+   "reading": "здесь",
+   "gloss": "here",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.city.tam",
+   "form": "там",
+   "reading": "там",
+   "gloss": "there",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.city.vkhod",
+   "form": "вход",
+   "reading": "вход",
+   "gloss": "entrance",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.vykhod",
+   "form": "выход",
+   "reading": "вы́ход",
+   "gloss": "exit",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.skver",
+   "form": "сквер",
+   "reading": "сквер",
+   "gloss": "small park",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.doroga",
+   "form": "дорога",
+   "reading": "доро́га",
+   "gloss": "road",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.city.svetofor",
+   "form": "светофор",
+   "reading": "светофо́р",
+   "gloss": "traffic light",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.ploshchadka",
+   "form": "площадка",
+   "reading": "площа́дка",
+   "gloss": "small square, platform",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.city.ostanovka",
+   "form": "остановка",
+   "reading": "остано́вка",
+   "gloss": "bus stop",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.city.tramvay",
+   "form": "трамвай",
+   "reading": "трамва́й",
+   "gloss": "tram",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.metro",
+   "form": "метро",
+   "reading": "метро́",
+   "gloss": "metro",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.city.taks",
+   "form": "такси",
+   "reading": "такси́",
+   "gloss": "taxi",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.city.samol",
+   "form": "самолёт",
+   "reading": "самоле́т",
+   "gloss": "plane",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.poezd",
+   "form": "поезд",
+   "reading": "по́езд",
+   "gloss": "train",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.velosiped",
+   "form": "велосипед",
+   "reading": "велосипе́д",
+   "gloss": "bicycle",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.city.biliet",
+   "form": "билет",
+   "reading": "биле́т",
+   "gloss": "ticket",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

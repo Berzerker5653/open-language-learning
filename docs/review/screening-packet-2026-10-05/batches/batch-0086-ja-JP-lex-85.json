@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-85",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.ling3.hyouka",
+   "form": "ひょうか",
+   "reading": "ひょうか",
+   "gloss": "evaluation, assessment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling3.keitai",
+   "form": "けいたい",
+   "reading": "けいたい",
+   "gloss": "form, morphology",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling3.yaku",
+   "form": "やく",
+   "reading": "やく",
+   "gloss": "meaning, function",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling3.bunsho",
+   "form": "ぶんしょ",
+   "reading": "ぶんしょ",
+   "gloss": "document, text",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling3.tally",
+   "form": "たっりー",
+   "reading": "たっりー",
+   "gloss": "tally, count",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling3.pin",
+   "form": "ぴん",
+   "reading": "ぴん",
+   "gloss": "pin, frequency point",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling3.shiryou2",
+   "form": "しりょう",
+   "reading": "しりょう",
+   "gloss": "material, data",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling3.kouryuu3",
+   "form": "こうりゅう",
+   "reading": "こうりゅう",
+   "gloss": "exchange, flow",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling3.seibun",
+   "form": "せいぶん",
+   "reading": "せいぶん",
+   "gloss": "composition, makeup",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling3.bunrui",
+   "form": "ぶんるい",
+   "reading": "ぶんるい",
+   "gloss": "classification",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling3.hatsuon2",
+   "form": "はつおん",
+   "reading": "はつおん",
+   "gloss": "pronunciation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling3.taigen2",
+   "form": "たいげん",
+   "reading": "たいげん",
+   "gloss": "body, main part",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling3.kouzou2",
+   "form": "こうぞう",
+   "reading": "こうぞう",
+   "gloss": "structure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.bungaku",
+   "form": "ぶんがく",
+   "reading": "ぶんがく",
+   "gloss": "literature",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.shousetsu",
+   "form": "しょうせつ",
+   "reading": "しょうせつ",
+   "gloss": "novel",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.shousetsu-ka",
+   "form": "しょうせつか",
+   "reading": "しょうせつか",
+   "gloss": "novelist",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.hyougen",
+   "form": "ひょうげん",
+   "reading": "ひょうげん",
+   "gloss": "expression",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.bungaku-ka",
+   "form": "ぶんがくか",
+   "reading": "ぶんがくか",
+   "gloss": "man of letters",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.kindai",
+   "form": "きんだい",
+   "reading": "きんだい",
+   "gloss": "modern period",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.kindai-bungaku",
+   "form": "きんだいぶんがく",
+   "reading": "きんだいぶんがく",
+   "gloss": "modern literature",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.kindai-ka",
+   "form": "きんだいか",
+   "reading": "きんだいか",
+   "gloss": "modernization",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.kindai-shi",
+   "form": "きんだいし",
+   "reading": "きんだいし",
+   "gloss": "modern history",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.bungaku-ron",
+   "form": "ぶんがくろん",
+   "reading": "ぶんがくろん",
+   "gloss": "theory of literature",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.shi",
+   "form": "し",
+   "reading": "し",
+   "gloss": "poem",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.shika",
+   "form": "しか",
+   "reading": "しか",
+   "gloss": "poetry",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

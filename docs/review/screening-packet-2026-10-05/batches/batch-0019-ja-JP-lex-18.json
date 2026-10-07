@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-18",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.city.hachiji",
+   "form": "はちじ",
+   "reading": "はちじ",
+   "gloss": "eight o'clock",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.denwaban-go",
+   "form": "でんわばんごう",
+   "reading": "でんわばんごう",
+   "gloss": "phone number",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.mail",
+   "form": "めーる",
+   "reading": "めーる",
+   "gloss": "email",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.messeji",
+   "form": "めっせじ",
+   "reading": "めっせじ",
+   "gloss": "message",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.app",
+   "form": "あっぷ",
+   "reading": "あっぷ",
+   "gloss": "app",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.sns",
+   "form": "えすえぬえす",
+   "reading": "えすえぬえす",
+   "gloss": "social media",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.pasuwa-do",
+   "form": "ぱすわーど",
+   "reading": "ぱすわーど",
+   "gloss": "password",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.tsuushin",
+   "form": "つうしん",
+   "reading": "つうしん",
+   "gloss": "communication",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.renraku",
+   "form": "れんらく",
+   "reading": "れんらく",
+   "gloss": "contact",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.renraku-saki",
+   "form": "れんらくさき",
+   "reading": "れんらくさき",
+   "gloss": "contact info",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.shitsumon",
+   "form": "しつもん",
+   "reading": "しつもん",
+   "gloss": "question",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.kaiwa",
+   "form": "かいわ",
+   "reading": "かいわ",
+   "gloss": "conversation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.setsumei",
+   "form": "せつめい",
+   "reading": "せつめい",
+   "gloss": "explanation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.jiko-shoukai",
+   "form": "じこしょうかい",
+   "reading": "じこしょうかい",
+   "gloss": "self-introduction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.aisatsu",
+   "form": "あいさつ",
+   "reading": "あいさつ",
+   "gloss": "greeting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.yotei",
+   "form": "よてい",
+   "reading": "よてい",
+   "gloss": "plan; schedule",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.henji",
+   "form": "へんじ",
+   "reading": "へんじ",
+   "gloss": "reply",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.denwa-wo-kakeru",
+   "form": "でんわを かけます",
+   "reading": "でんわを かけます",
+   "gloss": "to call",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.denwa-wo-ukeru",
+   "form": "でんわを うけます",
+   "reading": "でんわを うけます",
+   "gloss": "to answer the phone",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.tsutaeru",
+   "form": "つたえる",
+   "reading": "つたえる",
+   "gloss": "to convey",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.setsumei-suru",
+   "form": "せつめいします",
+   "reading": "せつめいします",
+   "gloss": "to explain",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.kiku",
+   "form": "ききます",
+   "reading": "ききます",
+   "gloss": "to ask; to listen",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.renraku-suru",
+   "form": "れんらくします",
+   "reading": "れんらくします",
+   "gloss": "to contact",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.okuru",
+   "form": "おくる",
+   "reading": "おくる",
+   "gloss": "to send",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.mokuji",
+   "form": "もくじ",
+   "reading": "もくじ",
+   "gloss": "table of contents",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

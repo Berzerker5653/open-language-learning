@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-15",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.critical2.sderzhannyy",
+   "form": "сдержанный",
+   "reading": "сде́ржанный",
+   "gloss": "restrained",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical2.krasnorechie",
+   "form": "красноречие",
+   "reading": "красноре́чие",
+   "gloss": "eloquence",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical2.orator",
+   "form": "оратор",
+   "reading": "ора́тор",
+   "gloss": "orator",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.tribuna",
+   "form": "трибуна",
+   "reading": "трибу́на",
+   "gloss": "platform, rostrum",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical2.kafedra",
+   "form": "кафедра",
+   "reading": "ка́федра",
+   "gloss": "lectern, chair",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical2.zal",
+   "form": "зал",
+   "reading": "зал",
+   "gloss": "hall, audience",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.kulisy",
+   "form": "кулисы",
+   "reading": "кули́сы",
+   "gloss": "wings (theater)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical2.estrada",
+   "form": "эстрада",
+   "reading": "эстра́да",
+   "gloss": "variety stage",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical2.maska",
+   "form": "маска",
+   "reading": "ма́ска",
+   "gloss": "mask",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical2.zhanr",
+   "form": "жанр",
+   "reading": "жанр",
+   "gloss": "genre",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.techenie",
+   "form": "течение",
+   "reading": "тече́ние",
+   "gloss": "movement, current",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical2.shkola",
+   "form": "школа",
+   "reading": "шко́ла",
+   "gloss": "school",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical2.novatorstvo",
+   "form": "новаторство",
+   "reading": "нова́торство",
+   "gloss": "innovativeness",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical2.avantgard",
+   "form": "авангард",
+   "reading": "аванга́рд",
+   "gloss": "avant-garde",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.konservatizm",
+   "form": "консерватизм",
+   "reading": "консервати́зм",
+   "gloss": "conservatism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.liberalizm",
+   "form": "либерализм",
+   "reading": "либерали́зм",
+   "gloss": "liberalism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.radikalizm",
+   "form": "радикализм",
+   "reading": "радикали́зм",
+   "gloss": "radicalism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.umerennost",
+   "form": "умеренность",
+   "reading": "уме́ренность",
+   "gloss": "moderation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical2.ekstremizm",
+   "form": "экстремизм",
+   "reading": "экстреми́зм",
+   "gloss": "extremism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.nasilie",
+   "form": "насилие",
+   "reading": "наси́лие",
+   "gloss": "violence",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical2.voyna",
+   "form": "война",
+   "reading": "война́",
+   "gloss": "war",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical2.konflikt",
+   "form": "конфликт",
+   "reading": "конфли́кт",
+   "gloss": "conflict",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical2.stolknovenie",
+   "form": "столкновение",
+   "reading": "столкнове́ние",
+   "gloss": "collision",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical2.protivostoyanie",
+   "form": "противостояние",
+   "reading": "противостоя́ние",
+   "gloss": "confrontation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical2.diskurs",
+   "form": "дискурс",
+   "reading": "ди́скурс",
+   "gloss": "discourse",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

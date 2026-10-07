@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-134",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.summary2.otbor",
+   "form": "отбор",
+   "reading": "отбо́р",
+   "gloss": "selection",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary2.kriteriy",
+   "form": "критерий",
+   "reading": "крите́рий",
+   "gloss": "criterion",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary2.priznak",
+   "form": "признак",
+   "reading": "при́знак",
+   "gloss": "sign, feature",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary2.filtr",
+   "form": "фильтр",
+   "reading": "фильтр",
+   "gloss": "filter",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary2.kandidat",
+   "form": "кандидат",
+   "reading": "кандида́т",
+   "gloss": "candidate",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary2.proba",
+   "form": "проба",
+   "reading": "про́ба",
+   "gloss": "trial, sample",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary2.test",
+   "form": "тест",
+   "reading": "тест",
+   "gloss": "test",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary2.obem",
+   "form": "объём",
+   "reading": "объе́м",
+   "gloss": "volume",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary2.velichina",
+   "form": "величина",
+   "reading": "величина́",
+   "gloss": "magnitude",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary2.dlina",
+   "form": "длина",
+   "reading": "длина́",
+   "gloss": "length",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary2.shirina",
+   "form": "ширина",
+   "reading": "ширина́",
+   "gloss": "width",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary2.glubina",
+   "form": "глубина",
+   "reading": "глубина́",
+   "gloss": "depth",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary2.vykota",
+   "form": "высота",
+   "reading": "высота́",
+   "gloss": "height",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary2.tyazhest",
+   "form": "тяжесть",
+   "reading": "тя́жесть",
+   "gloss": "weight, heaviness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary2.massa",
+   "form": "масса",
+   "reading": "ма́сса",
+   "gloss": "mass",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary2.kolichestvo",
+   "form": "количество",
+   "reading": "коли́чество",
+   "gloss": "quantity",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.summary2.chislo",
+   "form": "число",
+   "reading": "число́",
+   "gloss": "number",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.summary2.mera",
+   "form": "мера",
+   "reading": "ме́ра",
+   "gloss": "measure",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary2.stepen",
+   "form": "степень",
+   "reading": "сте́пень",
+   "gloss": "degree",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary2.uroven",
+   "form": "уровень",
+   "reading": "у́ровень",
+   "gloss": "level",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary2.masshtab",
+   "form": "масштаб",
+   "reading": "масшта́б",
+   "gloss": "scale",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary2.razmah",
+   "form": "размах",
+   "reading": "разма́х",
+   "gloss": "scope, range",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary2.szhatie",
+   "form": "сжатие",
+   "reading": "сжа́тие",
+   "gloss": "compression",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.summary2.sokrashchenie",
+   "form": "сокращение",
+   "reading": "сокраще́ние",
+   "gloss": "shortening",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.summary2.kratko",
+   "form": "кратко",
+   "reading": "кра́тко",
+   "gloss": "briefly",
+   "pos": "adverb",
+   "gender": ""
+  }
+ ]
+}

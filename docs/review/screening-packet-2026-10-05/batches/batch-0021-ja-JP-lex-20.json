@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-20",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.communication.taigi",
+   "form": "たいぎ",
+   "reading": "たいぎ",
+   "gloss": "dialogue",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.eizou",
+   "form": "えいぞう",
+   "reading": "えいぞう",
+   "gloss": "image, video",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.koukoku",
+   "form": "こうこく",
+   "reading": "こうこく",
+   "gloss": "advertisement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.puburisshu",
+   "form": "ぱぶりっしゅ",
+   "reading": "ぱぶりっしゅ",
+   "gloss": "public relations",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.keiei",
+   "form": "けいえい",
+   "reading": "けいえい",
+   "gloss": "management, business",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.shieki",
+   "form": "しえき",
+   "reading": "しえき",
+   "gloss": "share, equity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.toushi",
+   "form": "とうし",
+   "reading": "とうし",
+   "gloss": "investment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.shihai",
+   "form": "しはい",
+   "reading": "しはい",
+   "gloss": "domination, control",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.eigyou",
+   "form": "えいぎょう",
+   "reading": "えいぎょう",
+   "gloss": "sales, business",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.netto",
+   "form": "ねっと",
+   "reading": "ねっと",
+   "gloss": "net, internet",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.platformu",
+   "form": "ぷらっとむ",
+   "reading": "ぷらっとむ",
+   "gloss": "platform",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.tsuushin7",
+   "form": "つうしん",
+   "reading": "つうしん",
+   "gloss": "telecommunications",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.sns",
+   "form": "えすえぬえす",
+   "reading": "えすえぬえす",
+   "gloss": "social media",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.tsuugou",
+   "form": "つうごう",
+   "reading": "つうごう",
+   "gloss": "communication merger",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.hatsuho",
+   "form": "はっぽう",
+   "reading": "はっぽう",
+   "gloss": "publication, release",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.jiyuu2",
+   "form": "じゆう",
+   "reading": "じゆう",
+   "gloss": "freedom, liberty",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.jinken",
+   "form": "じんけん",
+   "reading": "じんけん",
+   "gloss": "human rights",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.ouken",
+   "form": "おうけん",
+   "reading": "おうけん",
+   "gloss": "royal power, prerogative",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.hitei",
+   "form": "ひてい",
+   "reading": "ひてい",
+   "gloss": "denial, negation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.boikotto",
+   "form": "ぼいこっと",
+   "reading": "ぼいこっと",
+   "gloss": "boycott",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.hifan",
+   "form": "ひはん",
+   "reading": "ひはん",
+   "gloss": "criticism, blame",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.sekinin5",
+   "form": "せきにん",
+   "reading": "せきにん",
+   "gloss": "responsibility",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.houbi",
+   "form": "ほうび",
+   "reading": "ほうび",
+   "gloss": "reward, praise",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.binzuke",
+   "form": "びんづけ",
+   "reading": "びんづけ",
+   "gloss": "branding, labeling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.critique.insaido",
+   "form": "いんさいど",
+   "reading": "いんさいど",
+   "gloss": "inside, insider",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

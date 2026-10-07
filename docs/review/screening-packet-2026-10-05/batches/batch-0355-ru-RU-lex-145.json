@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-145",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.timeplans.zavtrashniy",
+   "form": "завтрашний",
+   "reading": "за́втрашний",
+   "gloss": "tomorrow's",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.timeplans.proshlyy",
+   "form": "прошлый",
+   "reading": "про́шлый",
+   "gloss": "past, last",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.timeplans.sleduyushchiy",
+   "form": "следующий",
+   "reading": "сле́дующий",
+   "gloss": "next, following",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.timeplans.etot",
+   "form": "этот",
+   "reading": "э́тот",
+   "gloss": "this",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.timeplans.plan",
+   "form": "план",
+   "reading": "план",
+   "gloss": "plan",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.vstrecha",
+   "form": "встреча",
+   "reading": "встре́ча",
+   "gloss": "meeting",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.timeplans.den-rozhdeniya",
+   "form": "день рождения",
+   "reading": "день рожде́ния",
+   "gloss": "birthday",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.timeplans.prazdnik",
+   "form": "праздник",
+   "reading": "пра́здник",
+   "gloss": "holiday",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.godovshchina",
+   "form": "годовщина",
+   "reading": "годовщи́на",
+   "gloss": "anniversary",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.timeplans.svidanie",
+   "form": "свидание",
+   "reading": "свида́ние",
+   "gloss": "date, appointment",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.timeplans.zapisat",
+   "form": "записываться",
+   "reading": "запи́сываться",
+   "gloss": "to book, to sign up",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.timeplans.perenesti",
+   "form": "переносить",
+   "reading": "переноси́ть",
+   "gloss": "to postpone",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.timeplans.dogovorit",
+   "form": "договориться",
+   "reading": "договори́ться",
+   "gloss": "to agree",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.timeplans.pominut",
+   "form": "упоминать",
+   "reading": "упомина́ть",
+   "gloss": "to mention",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.timeplans.napomnit",
+   "form": "напомнить",
+   "reading": "напо́мнить",
+   "gloss": "to remind",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.timeplans.zhdat",
+   "form": "ждать",
+   "reading": "ждать",
+   "gloss": "to wait",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.timeplans.sobratsya",
+   "form": "собираться",
+   "reading": "собира́ться",
+   "gloss": "to gather, to plan to",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.timeplans.uvazhenie",
+   "form": "уважение",
+   "reading": "уваже́ние",
+   "gloss": "respect",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.timeplans.pozdravit",
+   "form": "поздравить",
+   "reading": "поздра́вить",
+   "gloss": "to congratulate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.timeplans.tost",
+   "form": "тост",
+   "reading": "тост",
+   "gloss": "toast",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.siurpriz",
+   "form": "сюрприз",
+   "reading": "сюрпри́з",
+   "gloss": "surprise",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.aromat",
+   "form": "аромат",
+   "reading": "арома́т",
+   "gloss": "aroma",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.svechi",
+   "form": "свечи",
+   "reading": "свечи́",
+   "gloss": "candles",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.timeplans.muzyka",
+   "form": "музыка",
+   "reading": "му́зыка",
+   "gloss": "music",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.timeplans.veselyy",
+   "form": "весёлый",
+   "reading": "весе́лый",
+   "gloss": "cheerful",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

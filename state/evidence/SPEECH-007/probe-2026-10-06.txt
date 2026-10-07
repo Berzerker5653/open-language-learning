@@ -1,0 +1,79 @@
+SPEECH-007 local pronunciation PROBE — 2026-10-06
+(owner direction: validate the pronunciation feature locally with the owner as
+a test subject + open-source audio; guided mode only, no automatic scoring.)
+
+Built a dev probe (not shipped, not a gate):
+- crates/speech-runtime/examples/vowel_length_probe.rs — runs the SAME
+  align -> measure -> interpret path as the desktop `pronunciation_check_at`
+  (WhisperConstrainedAligner + VoicedDurationFeature + VowelLengthInterpreter,
+  reference ratio from pack short/long media) over arbitrary WAV clips. Each
+  clip is `<name>.wav` + `<name>.meta` (two lines: expected short/long text).
+  Run: cargo run -p lts-speech-runtime --example vowel_length_probe --
+  --ref-short <short.wav> --ref-long <long.wav> --clips <dir>.
+
+Findings (ground truth, this environment, vendor whisper ggml-tiny):
+- Interpretation/measurement layer is CORRECT: `cargo test -p lts-speech-runtime`
+  = 15 green (incl. the vendor-backed alignment test). Bands shorter/longer/close
+  + abstention verified on controlled evidence.
+- End-to-end on the ja-demo obasan/obaasan media: the pinned **whisper ggml-tiny
+  mis-recognizes Japanese** — both pair clips transcribe to 「おはよう」, the
+  isolated word to nothing, and even "これは何ですか" -> "こういう針数か". The
+  constrained aligner therefore ABSTAINS (`mismatch:expected-text-not-matched`)
+  rather than scoring garbage.
+- => The feature is FAIL-CLOSED and SAFE (no false pronunciation feedback on
+  unrecognized speech — the docs/05 "false feedback is a critical defect" guard
+  holds). But with the tiny aligner it will mostly ABSTAIN (guided/no feedback)
+  instead of firing vowel-length feedback. The bottleneck is the aligner MODEL,
+  not the measurement/interpretation code.
+
+Actionable (owner decision, not done here): to make pronunciation feedback
+actually fire in the preview, wire a stronger aligner — ADR-0007 already selects
+sherpa-onnx as the DEFAULT ASR (whisper.cpp is the fallback), but the SPEECH-004
+aligner is whisper.cpp-based. Options: (a) larger whisper (base/small) with
+pinned checksum + license recorded via the model manager, or (b) sherpa-based
+alignment. Model acquisition is a SPEECH-001/002 model-manager decision (license
++ checksum), so it needs owner go-ahead; not downloaded unilaterally.
+
+Gate status UNCHANGED: SPEECH-007 stays blocked; automatic pronunciation scoring
+stays disabled; the feature ships GUIDED. The probe is a robustness/inspection
+tool for owner recordings + openly-licensed audio; it is not calibration
+evidence and cannot enable automatic scoring (docs/17 §127/§129).
+
+--- ADDENDUM 2026-10-06 (later run; supersedes the "tiny mis-recognizes" reading above) ---
+
+The lines 18-27 finding came from RAW whisper-cli free transcription, which is
+NOT the path the app uses. The app uses WhisperConstrainedAligner, which
+constrains recognition to the expected units and is far more robust. Re-ran the
+probe (same align->measure->interpret path as `pronunciation_check_at`) across
+three model sizes on clips built from the ja-demo media:
+  clips: obasan.wav (isolated short), obaasan.wav (isolated long),
+         pair.wav (obaasan + 0.2s silence + obasan, one continuous take).
+  ref:   pack short/long media (voiced 0.707s / 0.733s, ratio 1.038).
+
+Verbatim (identical for ggml-tiny, ggml-base, ggml-small):
+  obaasan   ABSTAIN (mismatch:expected-text-not-matched)
+  obasan    ABSTAIN (mismatch:expected-text-not-matched)
+  pair      Confident  speech.long-vowel.close  (align_conf=Some(0.9))
+  scored=1 abstained=2 clips=3
+
+Corrected conclusions:
+1. The feature DOES fire end-to-end: a continuous take containing BOTH minimal-
+   pair units scores `speech.long-vowel.close` at align_conf 0.9 — even on tiny.
+   The measurement/interpretation + constrained-alignment path is correct.
+2. Isolated single words abstain BY DESIGN: the feature scores the short<->long
+   contrast WITHIN one attempt; one word has no contrast to measure. This matches
+   the app's own test contract (record the minimal pair in one take). Not a bug.
+3. Model size is NOT the bottleneck: tiny == base == small on these clips. The
+   earlier "tiny mis-recognizes" note was free-transcription behavior, not the
+   constrained aligner. Bigger models only help on longer natural phrases.
+4. What actually unblocks feedback in the app: (a) a model must be SELECTED — the
+   new device preference defaults to "off", which abstains with
+   `speech-model-off` and was silently blocking the aligner; and (b) the attempt
+   must be a continuous clip with both units (the exercise format).
+
+Probe now supports `--model <ggml-*.bin>` to compare sizes. base/small added to
+the catalog (MIT, checksums pinned) so the owner can select them in-app.
+
+Gate status UNCHANGED: SPEECH-007 stays blocked; automatic scoring stays
+disabled; feature ships GUIDED. This is robustness/inspection evidence, not
+calibration, and cannot enable automatic scoring (docs/17 §127/§129).

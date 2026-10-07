@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-54",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.messages.zapiska",
+   "form": "записка",
+   "reading": "запи́ска",
+   "gloss": "note",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.messages.konvert",
+   "form": "конверт",
+   "reading": "конве́рт",
+   "gloss": "envelope",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages.otpravit",
+   "form": "отправлять",
+   "reading": "отправля́ть",
+   "gloss": "to send",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.poluchat",
+   "form": "получать",
+   "reading": "получа́ть",
+   "gloss": "to receive",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.nabirat",
+   "form": "набирать",
+   "reading": "набира́ть",
+   "gloss": "to dial",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.golos",
+   "form": "голос",
+   "reading": "го́лос",
+   "gloss": "voice",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages.slushat",
+   "form": "слушать",
+   "reading": "слу́шать",
+   "gloss": "to listen",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.govorit",
+   "form": "говорить",
+   "reading": "говори́ть",
+   "gloss": "to speak",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.skazat",
+   "form": "сказать",
+   "reading": "сказа́ть",
+   "gloss": "to say",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.obeshchat",
+   "form": "обещать",
+   "reading": "обеща́ть",
+   "gloss": "to promise",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.soglasen",
+   "form": "согласен",
+   "reading": "согла́сен",
+   "gloss": "agreed (he)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.pravda",
+   "form": "правда",
+   "reading": "пра́вда",
+   "gloss": "truth",
+   "pos": "particle",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.priglasit",
+   "form": "приглашать",
+   "reading": "приглаша́ть",
+   "gloss": "to invite",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.soglasie",
+   "form": "согласие",
+   "reading": "согла́сие",
+   "gloss": "agreement",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.messages.otkaz",
+   "form": "отказ",
+   "reading": "отка́з",
+   "gloss": "refusal",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages.zanyat",
+   "form": "занят",
+   "reading": "заня́т",
+   "gloss": "busy",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.svoboden",
+   "form": "свободен",
+   "reading": "свобо́ден",
+   "gloss": "free, available",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.udobno",
+   "form": "удобно",
+   "reading": "удо́бно",
+   "gloss": "convenient",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.neudobno",
+   "form": "неудобно",
+   "reading": "неудо́бно",
+   "gloss": "inconvenient",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.povod",
+   "form": "повод",
+   "reading": "по́вод",
+   "gloss": "occasion",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages.sluchay",
+   "form": "случай",
+   "reading": "слу́чай",
+   "gloss": "case, occasion",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages.ideya",
+   "form": "идея",
+   "reading": "иде́я",
+   "gloss": "idea",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.messages.predlozhenie",
+   "form": "предложение",
+   "reading": "предложе́ние",
+   "gloss": "suggestion, offer",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.messages.vopros",
+   "form": "вопрос",
+   "reading": "вопро́с",
+   "gloss": "question",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages.tema",
+   "form": "тема",
+   "reading": "те́ма",
+   "gloss": "topic",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-79",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.problems2.zaderzhka",
+   "form": "задержка",
+   "reading": "заде́ржка",
+   "gloss": "delay",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems2.obyasnenie",
+   "form": "объяснение",
+   "reading": "объясне́ние",
+   "gloss": "explanation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.problems2.objasnit",
+   "form": "объяснить",
+   "reading": "объясни́ть",
+   "gloss": "to explain",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems2.posylka",
+   "form": "посылка",
+   "reading": "посы́лка",
+   "gloss": "parcel",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems2.kurier",
+   "form": "курьер",
+   "reading": "курье́р",
+   "gloss": "courier",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems2.vlozhenie",
+   "form": "вложение",
+   "reading": "вложе́ние",
+   "gloss": "attachment",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.problems2.adres",
+   "form": "адрес",
+   "reading": "а́дрес",
+   "gloss": "address",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems2.povrezhdenie",
+   "form": "повреждение",
+   "reading": "поврежде́ние",
+   "gloss": "damage",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.problems2.vezhlivyj",
+   "form": "вежливый",
+   "reading": "ве́жливый",
+   "gloss": "polite",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems2.ton",
+   "form": "тон",
+   "reading": "тон",
+   "gloss": "tone",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems2.ofitsialno",
+   "form": "официально",
+   "reading": "официа́льно",
+   "gloss": "officially",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems2.razbityj",
+   "form": "разбитый",
+   "reading": "разби́тый",
+   "gloss": "broken (glass)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems2.zamena",
+   "form": "замена",
+   "reading": "заме́на",
+   "gloss": "replacement",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems2.obrazets",
+   "form": "образец",
+   "reading": "образе́ц",
+   "gloss": "sample, model",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems2.blank",
+   "form": "бланк",
+   "reading": "бланк",
+   "gloss": "form (paper)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems2.vozmeshchenie",
+   "form": "возмещение",
+   "reading": "возмеще́ние",
+   "gloss": "compensation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.problems2.zapolnit",
+   "form": "заполнить",
+   "reading": "запо́лнить",
+   "gloss": "to fill in",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems2.oplata",
+   "form": "оплата",
+   "reading": "опла́та",
+   "gloss": "payment",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems2.spisanie",
+   "form": "списание",
+   "reading": "списа́ние",
+   "gloss": "debit, write-off",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.problems2.povtornyj",
+   "form": "повторный",
+   "reading": "повто́рный",
+   "gloss": "repeat (adj)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems2.otmenit",
+   "form": "отменить",
+   "reading": "отмени́ть",
+   "gloss": "to cancel",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems2.poluchatel",
+   "form": "получатель",
+   "reading": "получа́тель",
+   "gloss": "recipient",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems2.otpravitel",
+   "form": "отправитель",
+   "reading": "отправи́тель",
+   "gloss": "sender",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems2.korrespondentsiya",
+   "form": "корреспонденция",
+   "reading": "корреспонде́нция",
+   "gloss": "correspondence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems2.poyasnenie",
+   "form": "пояснение",
+   "reading": "поясне́ние",
+   "gloss": "clarification",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

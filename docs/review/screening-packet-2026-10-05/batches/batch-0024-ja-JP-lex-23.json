@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-23",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.cult.kaikei",
+   "form": "かいけい",
+   "reading": "かいけい",
+   "gloss": "account, story",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.densetsu",
+   "form": "でんせつ",
+   "reading": "でんせつ",
+   "gloss": "legend, tradition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.matsuri",
+   "form": "まつり",
+   "reading": "まつり",
+   "gloss": "festival",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.fukuzatsu",
+   "form": "ふくざつ",
+   "reading": "ふくざつ",
+   "gloss": "complex",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.fuyu",
+   "form": "ふゆう",
+   "reading": "ふゆう",
+   "gloss": "immersion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.kairyou",
+   "form": "かいりょう",
+   "reading": "かいりょう",
+   "gloss": "improvement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.shinchou",
+   "form": "しんちょう",
+   "reading": "しんちょう",
+   "gloss": "growth, development",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.jitsuri",
+   "form": "じつり",
+   "reading": "じつり",
+   "gloss": "profit, gain",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.sonzai",
+   "form": "そんざい",
+   "reading": "そんざい",
+   "gloss": "existence, being",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.juyou",
+   "form": "じゅうよう",
+   "reading": "じゅうよう",
+   "gloss": "important",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.hatsu",
+   "form": "はつ",
+   "reading": "はつ",
+   "gloss": "departure, start",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.gengo2",
+   "form": "げんご",
+   "reading": "げんご",
+   "gloss": "language (identity)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.hasshu",
+   "form": "はっしゅ",
+   "reading": "はっしゅ",
+   "gloss": "ethnicity, descent",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.ikoku",
+   "form": "いこく",
+   "reading": "いこく",
+   "gloss": "foreign country",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.ishiki3",
+   "form": "いしき",
+   "reading": "いしき",
+   "gloss": "awareness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.sedai",
+   "form": "せだい",
+   "reading": "せだい",
+   "gloss": "generation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.danho",
+   "form": "だんほう",
+   "reading": "だんほう",
+   "gloss": "discrimination",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.kyosei2",
+   "form": "きょうせい",
+   "reading": "きょうせい",
+   "gloss": "coercion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.tekisho",
+   "form": "てきしょう",
+   "reading": "てきしょう",
+   "gloss": "appropriation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.bunka2",
+   "form": "ぶんか",
+   "reading": "ぶんか",
+   "gloss": "culture",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.kozou3",
+   "form": "こうぞう",
+   "reading": "こうぞう",
+   "gloss": "structure (social)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.konketsu",
+   "form": "こんけつ",
+   "reading": "こんけつ",
+   "gloss": "mixing, hybridity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.furon",
+   "form": "ふろん",
+   "reading": "ふろん",
+   "gloss": "borderline",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.kioku3",
+   "form": "きおく",
+   "reading": "きおく",
+   "gloss": "memory (collective)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.seiji2",
+   "form": "せいじ",
+   "reading": "せいじ",
+   "gloss": "politics",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

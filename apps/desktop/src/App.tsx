@@ -16,7 +16,14 @@ import {
   type WorldEnvironment,
 } from "./home";
 import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./pronunciation";
-import { LanguagePanel, type CatalogEntry, type InstalledPack, type TtsStatus } from "./language";
+import { DictationPractice, type DictationResult, type DictationSentence } from "./dictation";
+import {
+  LanguagePanel,
+  type CatalogEntry,
+  type InstalledPack,
+  type TtsStatus,
+  type SpeechModel,
+} from "./language";
 import { WritingPractice, type WritingTaskView } from "./writing";
 import { PracticeRunner, type PracticeTaskView } from "./practice";
 import {
@@ -88,6 +95,7 @@ export function App() {
     | "practice"
     | "progress"
     | "pronunciation"
+    | "dictation"
     | "writing"
     | "language"
     | "scenarios"
@@ -115,6 +123,10 @@ export function App() {
   const [plan, setPlan] = useState<SessionPlan>(EMPTY_PLAN);
   const [progress, setProgress] = useState<ProgressRow[]>([]);
   const [pronResult, setPronResult] = useState<PronunciationResult | null>(null);
+  const [dictTarget, setDictTarget] = useState("おばあさん");
+  const [dictResult, setDictResult] = useState<DictationResult | null>(null);
+  const [dictSentence, setDictSentence] = useState<DictationSentence | null>(null);
+  const [dictOffset, setDictOffset] = useState(0);
   const [recording, setRecording] = useState(false);
   const [attemptUrl, setAttemptUrl] = useState<string | null>(null);
   const [environments, setEnvironments] = useState<WorldEnvironment[]>([]);
@@ -125,6 +137,8 @@ export function App() {
   const [audioMsg, setAudioMsg] = useState<string | null>(null);
   const [langError, setLangError] = useState<string | null>(null);
   const [ttsStatus, setTtsStatus] = useState<TtsStatus | null>(null);
+  const [speechModels, setSpeechModels] = useState<SpeechModel[]>([]);
+  const [speechModel, setSpeechModel] = useState<string>("off");
   const [onboardError, setOnboardError] = useState<string | null>(null);
   const [writingTask, setWritingTask] = useState<WritingTaskView | null>(null);
   const [writingScaffold, setWritingScaffold] = useState<{
@@ -379,6 +393,7 @@ export function App() {
       setLangError(String(e));
     }
     await refreshTts();
+    await refreshSpeech();
   }
 
   async function deleteTtsModel(modelId: string) {
@@ -390,6 +405,42 @@ export function App() {
       setLangError(String(e));
     }
     await refreshTts();
+    await refreshSpeech();
+  }
+
+  async function refreshSpeech() {
+    if (!inv) return;
+    const models = (await inv("available_models")) as Array<{
+      id: string;
+      version: string;
+      runtime: string;
+      license_code: string;
+      installed: boolean;
+      size_bytes: number;
+    }>;
+    setSpeechModels(
+      models
+        .filter((m) => m.runtime === "whisper.cpp")
+        .map((m) => ({
+          id: m.id,
+          version: m.version,
+          license_code: m.license_code,
+          installed: m.installed,
+          size_bytes: m.size_bytes,
+        })),
+    );
+    setSpeechModel((await inv("get_speech_model")) as string);
+  }
+
+  async function selectSpeechModel(modelId: string) {
+    if (!inv) return;
+    setLangError(null);
+    try {
+      await inv("set_speech_model", { modelId });
+    } catch (e) {
+      setLangError(String(e));
+    }
+    await refreshSpeech();
   }
 
   async function createProfile() {
@@ -1227,6 +1278,66 @@ export function App() {
     }
   }
 
+  async function analyzeDictation(wav: Uint8Array) {
+    const inv = detectInvoke();
+    if (!inv) {
+      setDictResult({
+        matched: null,
+        heard: "",
+        target: dictTarget,
+        abstain_reason: "aligner-unavailable",
+        mode: "guided",
+      });
+      return;
+    }
+    try {
+      const r = (await inv("dictation_check", {
+        attempt: {
+          pack_id: selectedPack ?? "org.openlanguage.ja-jp.reference",
+          target_text: dictTarget,
+          wav_b64: toB64(wav),
+        },
+      })) as DictationResult;
+      setDictResult(r);
+    } catch {
+      setDictResult({
+        matched: null,
+        heard: "",
+        target: dictTarget,
+        abstain_reason: "aligner-unavailable",
+        mode: "guided",
+      });
+    }
+  }
+
+  async function fetchDictation(offset: number) {
+    const inv = detectInvoke();
+    if (!inv) return;
+    try {
+      const s = (await inv("dictation_target", {
+        packId: selectedPack ?? "org.openlanguage.ja-jp.reference",
+        offset,
+      })) as DictationSentence;
+      setDictSentence(s);
+      setDictTarget(s.reading);
+      setDictResult(null);
+    } catch {
+      setDictSentence(null);
+    }
+  }
+
+  function openDictation() {
+    setRoute("dictation");
+    setDictOffset(0);
+    void fetchDictation(0);
+  }
+
+  function newDictationSentence() {
+    const next = dictOffset + 1;
+    setDictOffset(next);
+    void fetchDictation(next);
+  }
+
   // WebKitGTK does not enable MediaRecorder, so capture PCM directly via
   // WebAudio (enabled by default) and build the WAV in JS. The attempt
   // lives in memory only (docs/08); nothing audio is ever persisted.
@@ -1238,6 +1349,7 @@ export function App() {
     bufs: Float32Array[];
   }
   const captureRef = useRef<Capture | null>(null);
+  const captureRouteRef = useRef<"pronunciation" | "dictation">("pronunciation");
 
   function recordAttempt() {
     void (async () => {
@@ -1291,7 +1403,11 @@ export function App() {
     const wav = toWav16(i16, rate);
     if (attemptUrl) URL.revokeObjectURL(attemptUrl);
     setAttemptUrl(URL.createObjectURL(new Blob([wav], { type: "audio/wav" })));
-    void analyzeWav(wav);
+    if (captureRouteRef.current === "dictation") {
+      void analyzeDictation(wav);
+    } else {
+      void analyzeWav(wav);
+    }
   }
 
   if (step !== "done") {
@@ -1356,6 +1472,14 @@ export function App() {
           <button
             type="button"
             className="tab"
+            aria-current={route === "dictation" ? "page" : undefined}
+            onClick={() => void openDictation()}
+          >
+            Speaking
+          </button>
+          <button
+            type="button"
+            className="tab"
             aria-current={route === "writing" ? "page" : undefined}
             onClick={() => void openWriting()}
           >
@@ -1369,6 +1493,7 @@ export function App() {
               setRoute("language");
               void refreshLanguages();
               void refreshTts();
+              void refreshSpeech();
             }}
           >
             Languages
@@ -1438,7 +1563,10 @@ export function App() {
               result={pronResult}
               recording={recording}
               hasAttempt={attemptUrl !== null}
-              onRecord={recordAttempt}
+              onRecord={() => {
+                captureRouteRef.current = "pronunciation";
+                recordAttempt();
+              }}
               onStop={stopAndCheck}
               onPlayReference={(w) => void playReference(w)}
               onPlayAttempt={() => attemptUrl && playBlobUrl(attemptUrl)}
@@ -1453,6 +1581,22 @@ export function App() {
             </section>
           )}
         </>
+      ) : route === "dictation" ? (
+        <DictationPractice
+          target={dictTarget}
+          onTargetChange={setDictTarget}
+          sentence={dictSentence}
+          onNewSentence={() => newDictationSentence()}
+          result={dictResult}
+          recording={recording}
+          hasAttempt={attemptUrl !== null}
+          onRecord={() => {
+            captureRouteRef.current = "dictation";
+            recordAttempt();
+          }}
+          onStop={stopAndCheck}
+          onPlayAttempt={() => attemptUrl && playBlobUrl(attemptUrl)}
+        />
       ) : route === "shadowing" ? (
         <section aria-label="Shadowing">
           <h2>Shadowing</h2>
@@ -1875,6 +2019,9 @@ export function App() {
           onInstallModel={(id) => void installTtsModel(id)}
           onDeleteModel={(id) => void deleteTtsModel(id)}
           onImport={(b64) => void importPack(b64)}
+          speechModels={speechModels}
+          speechModel={speechModel}
+          onSelectSpeechModel={(id) => void selectSpeechModel(id)}
         />
       ) : route === "scenarios" ? (
         <ScenarioPanel

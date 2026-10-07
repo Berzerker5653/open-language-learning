@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-143",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.synthesis4.plomba",
+   "form": "пломба",
+   "reading": "пло́мба",
+   "gloss": "seal, plug",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.rospis",
+   "form": "роспись",
+   "reading": "ро́спись",
+   "gloss": "signature; mural painting",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.propusk",
+   "form": "пропуск",
+   "reading": "про́пуск",
+   "gloss": "pass, permit",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis4.tarif",
+   "form": "тариф",
+   "reading": "тари́ф",
+   "gloss": "tariff, rate",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis4.stavka",
+   "form": "ставка",
+   "reading": "ста́вка",
+   "gloss": "rate, stake",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.nadbavka",
+   "form": "надбавка",
+   "reading": "надба́вка",
+   "gloss": "supplement, bonus",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.doplata",
+   "form": "доплата",
+   "reading": "допла́та",
+   "gloss": "surcharge, extra pay",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.nakidka",
+   "form": "накидка",
+   "reading": "наки́дка",
+   "gloss": "markup",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.nacenka",
+   "form": "наценка",
+   "reading": "наце́нка",
+   "gloss": "markup",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.zaem",
+   "form": "заём",
+   "reading": "зае́м",
+   "gloss": "loan",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis4.ssuda",
+   "form": "ссуда",
+   "reading": "ссу́да",
+   "gloss": "loan, credit",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.opis",
+   "form": "опись",
+   "reading": "о́пись",
+   "gloss": "inventory",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.byulleten",
+   "form": "бюллетень",
+   "reading": "бюллете́нь",
+   "gloss": "bulletin, ballot",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis4.mashinopis",
+   "form": "машинопись",
+   "reading": "маши́нопись",
+   "gloss": "typescript",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.avtograf",
+   "form": "автограф",
+   "reading": "авто́граф",
+   "gloss": "autograph",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis4.grafika",
+   "form": "графика",
+   "reading": "гра́фика",
+   "gloss": "graphics",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.plastika",
+   "form": "пластика",
+   "reading": "пла́стика",
+   "gloss": "sculpture, plasticity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.faktura",
+   "form": "фактура",
+   "reading": "факту́ра",
+   "gloss": "texture",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.siluet",
+   "form": "силуэт",
+   "reading": "силуэ́т",
+   "gloss": "silhouette",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis4.portret",
+   "form": "портрет",
+   "reading": "портре́т",
+   "gloss": "portrait",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis4.peyzazh",
+   "form": "пейзаж",
+   "reading": "пейза́ж",
+   "gloss": "landscape",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis4.kolllazh",
+   "form": "коллаж",
+   "reading": "колла́ж",
+   "gloss": "collage",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis4.mozaika",
+   "form": "мозаика",
+   "reading": "моза́ика",
+   "gloss": "mosaic",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.gravjura",
+   "form": "гравюра",
+   "reading": "гравю́ра",
+   "gloss": "engraving",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis4.dublikat",
+   "form": "дубликат",
+   "reading": "дублика́т",
+   "gloss": "duplicate",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-34",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.economy2.douryoku",
+   "form": "きょうりょく",
+   "reading": "きょうりょく",
+   "gloss": "cooperation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.kenshu",
+   "form": "けんしゅう",
+   "reading": "けんしゅう",
+   "gloss": "training",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.purojekuto",
+   "form": "ぷろじぇくと",
+   "reading": "ぷろじぇくと",
+   "gloss": "project",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.shinkoku",
+   "form": "しんしゅつ",
+   "reading": "しんしゅつ",
+   "gloss": "market entry",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.hanbai",
+   "form": "はんばい",
+   "reading": "はんばい",
+   "gloss": "sales",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.naiken",
+   "form": "ないてい",
+   "reading": "ないてい",
+   "gloss": "job offer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.taishoku",
+   "form": "たいしょく",
+   "reading": "たいしょく",
+   "gloss": "job resignation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.tenkin",
+   "form": "てんきん",
+   "reading": "てんきん",
+   "gloss": "job transfer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.nyuushoku",
+   "form": "しゅうしょく",
+   "reading": "しゅうしょく",
+   "gloss": "finding employment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.dokusen",
+   "form": "どくせん",
+   "reading": "どくせん",
+   "gloss": "monopoly",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy3.kanzei",
+   "form": "かんぜい",
+   "reading": "かんぜい",
+   "gloss": "tariff",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy3.seihin",
+   "form": "せいひん",
+   "reading": "せいひん",
+   "gloss": "manufactured product",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy3.shouhin",
+   "form": "しょうひん",
+   "reading": "しょうひん",
+   "gloss": "merchandise",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy3.daikin",
+   "form": "だいきん",
+   "reading": "だいきん",
+   "gloss": "price to pay",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy3.heikin",
+   "form": "へいきん",
+   "reading": "へいきん",
+   "gloss": "average",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy3.ronten",
+   "form": "ろんてん",
+   "reading": "ろんてん",
+   "gloss": "point at issue",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy3.shouchuu",
+   "form": "しゅちょう",
+   "reading": "しゅちょう",
+   "gloss": "assertion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy3.shihon",
+   "form": "しほん",
+   "reading": "しほん",
+   "gloss": "capital",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy3.seiri",
+   "form": "せいり",
+   "reading": "せいり",
+   "gloss": "profit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy3.rieki",
+   "form": "りえき",
+   "reading": "りえき",
+   "gloss": "benefit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.kenkai",
+   "form": "けんかい",
+   "reading": "けんかい",
+   "gloss": "luncheon meeting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.iwakai",
+   "form": "いわかい",
+   "reading": "いわかい",
+   "gloss": "banquet; party",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.fuman-ire",
+   "form": "ふまんいれ",
+   "reading": "ふまんいれ",
+   "gloss": "grievance box",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.fukyu",
+   "form": "ふくゆう",
+   "reading": "ふくゆう",
+   "gloss": "wealth; affluence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.aijo",
+   "form": "あいじょう",
+   "reading": "あいじょう",
+   "gloss": "affection; harmony",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

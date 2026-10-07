@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-69",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.health2.karada",
+   "form": "からだ",
+   "reading": "からだ",
+   "gloss": "body",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.nou",
+   "form": "のう",
+   "reading": "のう",
+   "gloss": "brain",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.tansu",
+   "form": "たんす",
+   "reading": "たんす",
+   "gloss": "chest of drawers",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.tanpaku",
+   "form": "たんぱく",
+   "reading": "たんぱく",
+   "gloss": "protein",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.eiyou",
+   "form": "えいよう",
+   "reading": "えいよう",
+   "gloss": "nutrition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.karori",
+   "form": "カロリー",
+   "reading": "カロリー",
+   "gloss": "calorie",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.shio2",
+   "form": "しお",
+   "reading": "しお",
+   "gloss": "salt",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.unsou",
+   "form": "うんそう",
+   "reading": "うんそう",
+   "gloss": "exercise",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.junou",
+   "form": "じゅのう",
+   "reading": "じゅのう",
+   "gloss": "flexible",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.kinyu",
+   "form": "きんゆ",
+   "reading": "きんゆ",
+   "gloss": "bath",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.kessha",
+   "form": "けっしゃ",
+   "reading": "けっしゃ",
+   "gloss": "facility",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.taiken3",
+   "form": "たいけん",
+   "reading": "たいけん",
+   "gloss": "experience",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.fuka",
+   "form": "ふか",
+   "reading": "ふか",
+   "gloss": "depth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.kankyou2",
+   "form": "かんきょう",
+   "reading": "かんきょう",
+   "gloss": "environment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.kokoro2",
+   "form": "こころ",
+   "reading": "こころ",
+   "gloss": "mind",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.shinryo",
+   "form": "しんりょう",
+   "reading": "しんりょう",
+   "gloss": "treatment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.fuan2",
+   "form": "ふあん",
+   "reading": "ふあん",
+   "gloss": "unease",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.zyouhou",
+   "form": "じょうほう",
+   "reading": "じょうほう",
+   "gloss": "information",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.joutai",
+   "form": "じょうたい",
+   "reading": "じょうたい",
+   "gloss": "state",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.shoujou",
+   "form": "しょうじょう",
+   "reading": "しょうじょう",
+   "gloss": "symptom",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.byouki2",
+   "form": "びょうき",
+   "reading": "びょうき",
+   "gloss": "illness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.shinryou2",
+   "form": "しんりょう",
+   "reading": "しんりょう",
+   "gloss": "counseling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.shuusei",
+   "form": "しゅうせい",
+   "reading": "しゅうせい",
+   "gloss": "correction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.kessan3",
+   "form": "けっさん",
+   "reading": "けっさん",
+   "gloss": "accounting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.kagaku",
+   "form": "かがく",
+   "reading": "かがく",
+   "gloss": "science",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

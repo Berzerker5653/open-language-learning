@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-11",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.advice2.toki2",
+   "form": "とき",
+   "reading": "とき",
+   "gloss": "time",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.michi2",
+   "form": "みち",
+   "reading": "みち",
+   "gloss": "street",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.ie2",
+   "form": "いえ",
+   "reading": "いえ",
+   "gloss": "house",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.mado2",
+   "form": "まど",
+   "reading": "まど",
+   "gloss": "window",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.tsukue2",
+   "form": "つくえ",
+   "reading": "つくえ",
+   "gloss": "desk",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.isu2",
+   "form": "いす",
+   "reading": "いす",
+   "gloss": "chair",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.tana2",
+   "form": "たな",
+   "reading": "たな",
+   "gloss": "shelf",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.yuka2",
+   "form": "ゆか",
+   "reading": "ゆか",
+   "gloss": "floor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.kabe2",
+   "form": "かべ",
+   "reading": "かべ",
+   "gloss": "wall",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.yane2",
+   "form": "やね",
+   "reading": "やね",
+   "gloss": "roof",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.hashi2",
+   "form": "はし",
+   "reading": "はし",
+   "gloss": "bridge",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.tsubo2",
+   "form": "つぼ",
+   "reading": "つぼ",
+   "gloss": "garden pot",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.niwa2",
+   "form": "にわ",
+   "reading": "にわ",
+   "gloss": "garden",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.mori2",
+   "form": "もり",
+   "reading": "もり",
+   "gloss": "forest",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.umi2",
+   "form": "うみ",
+   "reading": "うみ",
+   "gloss": "sea",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.suna2",
+   "form": "すな",
+   "reading": "すな",
+   "gloss": "sand",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.ishi2",
+   "form": "いし",
+   "reading": "いし",
+   "gloss": "stone",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.ki2",
+   "form": "き",
+   "reading": "き",
+   "gloss": "tree",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.hana2",
+   "form": "はな",
+   "reading": "はな",
+   "gloss": "flower",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.inoko2",
+   "form": "いのこ",
+   "reading": "いのこ",
+   "gloss": "child",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.otona2",
+   "form": "おとな",
+   "reading": "おとな",
+   "gloss": "adult",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.tomodachi2",
+   "form": "ともだち",
+   "reading": "ともだち",
+   "gloss": "friend",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.tetsudo",
+   "form": "てつどう",
+   "reading": "てつどう",
+   "gloss": "to help out",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.hikaku",
+   "form": "ひかく",
+   "reading": "ひかく",
+   "gloss": "comparison",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice2.take",
+   "form": "たけ",
+   "reading": "たけ",
+   "gloss": "height",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

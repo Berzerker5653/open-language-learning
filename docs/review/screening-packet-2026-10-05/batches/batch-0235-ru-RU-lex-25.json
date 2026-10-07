@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-25",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.cult.marginal",
+   "form": "маргинал",
+   "reading": "маргина́л",
+   "gloss": "marginal person",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.autsajder",
+   "form": "аутсайдер",
+   "reading": "аутса́йдер",
+   "gloss": "outsider",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.izgoy",
+   "form": "изгой",
+   "reading": "изго́й",
+   "gloss": "outcast",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.otshelnik",
+   "form": "отшельник",
+   "reading": "отше́льник",
+   "gloss": "hermit",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.odinochka",
+   "form": "одиночка",
+   "reading": "одино́чка",
+   "gloss": "loner",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.samoidentifikaciya",
+   "form": "самоидентификация",
+   "reading": "самоидентифика́ция",
+   "gloss": "self-identification",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.samoopredelenie",
+   "form": "самоопределение",
+   "reading": "самоопределе́ние",
+   "gloss": "self-determination",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.individualnost",
+   "form": "индивидуальность",
+   "reading": "индивидуа́льность",
+   "gloss": "individuality",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.samouvazenie",
+   "form": "самоуважение",
+   "reading": "самоуваже́ние",
+   "gloss": "self-respect",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.samouverennost",
+   "form": "самоуверенность",
+   "reading": "самоуве́ренность",
+   "gloss": "self-confidence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.zastenchivost",
+   "form": "застенчивость",
+   "reading": "засте́нчивость",
+   "gloss": "shyness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.tshcheslavie",
+   "form": "тщеславие",
+   "reading": "тщесла́вие",
+   "gloss": "vanity",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.vysokomerie",
+   "form": "высокомерие",
+   "reading": "высокоме́рие",
+   "gloss": "arrogance",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.spes",
+   "form": "спесь",
+   "reading": "спесь",
+   "gloss": "hubris, arrogance",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.gordynya",
+   "form": "гордыня",
+   "reading": "горды́ня",
+   "gloss": "hubris, pride",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.trusost",
+   "form": "трусость",
+   "reading": "тру́сость",
+   "gloss": "cowardice",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.hrabrost",
+   "form": "храбрость",
+   "reading": "хра́брость",
+   "gloss": "bravery",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.samoutverzhdenie",
+   "form": "самоутверждение",
+   "reading": "самоутвержде́ние",
+   "gloss": "self-assertion",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.unikalnost",
+   "form": "уникальность",
+   "reading": "уника́льность",
+   "gloss": "uniqueness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.chuzhoy",
+   "form": "чужой",
+   "reading": "чужо́й",
+   "gloss": "someone else's, foreign",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.svoy",
+   "form": "свой",
+   "reading": "свой",
+   "gloss": "one's own",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.chuzhdyj",
+   "form": "чуждый",
+   "reading": "чу́ждый",
+   "gloss": "alien, hostile to",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.lichnost",
+   "form": "личность",
+   "reading": "ли́чность",
+   "gloss": "person, personality",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.persona",
+   "form": "персона",
+   "reading": "персо́на",
+   "gloss": "person, persona",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.individ",
+   "form": "индивид",
+   "reading": "индиви́д",
+   "gloss": "individual",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

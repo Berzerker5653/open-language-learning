@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-47",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u740",
+   "text": "Это рубеж.",
+   "gloss": "This is a turning point."
+  },
+  {
+   "id": "ru.sent.b2.u741",
+   "text": "Это потомки.",
+   "gloss": "These are descendants."
+  },
+  {
+   "id": "ru.sent.b2.u742",
+   "text": "Это обряд.",
+   "gloss": "This is a ritual."
+  },
+  {
+   "id": "ru.sent.b2.u743",
+   "text": "Это сословие.",
+   "gloss": "This is an estate."
+  },
+  {
+   "id": "ru.sent.b2.u744",
+   "text": "Это купец.",
+   "gloss": "This is a merchant."
+  },
+  {
+   "id": "ru.sent.b2.u745",
+   "text": "Это осада.",
+   "gloss": "This is a siege."
+  },
+  {
+   "id": "ru.sent.b2.u746",
+   "text": "Это держава.",
+   "gloss": "This is a great power."
+  },
+  {
+   "id": "ru.sent.b2.u747",
+   "text": "Это корона.",
+   "gloss": "This is a crown."
+  },
+  {
+   "id": "ru.sent.b2.u748",
+   "text": "Это дружина.",
+   "gloss": "This is a retinue."
+  },
+  {
+   "id": "ru.sent.b2.u749",
+   "text": "Это крепость.",
+   "gloss": "This is a fortress."
+  },
+  {
+   "id": "ru.sent.b2.u750",
+   "text": "Это общность.",
+   "gloss": "This is a community."
+  },
+  {
+   "id": "ru.sent.b2.u751",
+   "text": "Это самоуважение.",
+   "gloss": "This is self-respect."
+  },
+  {
+   "id": "ru.sent.b2.u752",
+   "text": "Это подлинность.",
+   "gloss": "This is authenticity."
+  },
+  {
+   "id": "ru.sent.b2.u753",
+   "text": "Это изгой.",
+   "gloss": "This is an outcast."
+  },
+  {
+   "id": "ru.sent.b2.u754",
+   "text": "Это бунтарь.",
+   "gloss": "This is a rebel."
+  }
+ ]
+}

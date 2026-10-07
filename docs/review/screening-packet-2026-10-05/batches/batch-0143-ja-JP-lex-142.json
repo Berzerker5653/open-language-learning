@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-142",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.transport.kippuuriba",
+   "form": "きっぷうりば",
+   "reading": "きっぷうりば",
+   "gloss": "ticket counter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.norimasu",
+   "form": "のります",
+   "reading": "のります",
+   "gloss": "to get on; to board",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.orimasu",
+   "form": "おります",
+   "reading": "おります",
+   "gloss": "to get off (a vehicle)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.norikaemasu",
+   "form": "のりかえます",
+   "reading": "のりかえます",
+   "gloss": "to transfer (trains)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.demasu",
+   "form": "でます",
+   "reading": "でます",
+   "gloss": "to leave; to exit",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.tsukimasu",
+   "form": "つきます",
+   "reading": "つきます",
+   "gloss": "to arrive",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.jitensha",
+   "form": "じてんしゃ",
+   "reading": "じてんしゃ",
+   "gloss": "bicycle",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.takushii",
+   "form": "タクシー",
+   "reading": "タクシー",
+   "gloss": "taxi",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.fune",
+   "form": "ふね",
+   "reading": "ふね",
+   "gloss": "boat; ship",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.jidousha",
+   "form": "じどうしゃ",
+   "reading": "じどうしゃ",
+   "gloss": "car; automobile",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.norimono",
+   "form": "のりもの",
+   "reading": "のりもの",
+   "gloss": "vehicle; means of transport",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.michi",
+   "form": "みち",
+   "reading": "みち",
+   "gloss": "road; street",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.hashi",
+   "form": "はし",
+   "reading": "はし",
+   "gloss": "bridge",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.shingou",
+   "form": "しんごう",
+   "reading": "しんごう",
+   "gloss": "traffic light",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.oudanhodou",
+   "form": "おうだんほどう",
+   "reading": "おうだんほどう",
+   "gloss": "crosswalk; pedestrian crossing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.massugu",
+   "form": "まっすぐ",
+   "reading": "まっすぐ",
+   "gloss": "straight (direction)",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.migi",
+   "form": "みぎ",
+   "reading": "みぎ",
+   "gloss": "right (direction)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.hidari",
+   "form": "ひだり",
+   "reading": "ひだり",
+   "gloss": "left (direction)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.mae",
+   "form": "まえ",
+   "reading": "まえ",
+   "gloss": "front; in front of",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.ushiro",
+   "form": "うしろ",
+   "reading": "うしろ",
+   "gloss": "back; behind",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.tsugi",
+   "form": "つぎ",
+   "reading": "つぎ",
+   "gloss": "next",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.chikai",
+   "form": "ちかい",
+   "reading": "ちかい",
+   "gloss": "near; close",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.tooi",
+   "form": "とおい",
+   "reading": "とおい",
+   "gloss": "far; distant",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.ekimae",
+   "form": "えきまえ",
+   "reading": "えきまえ",
+   "gloss": "area in front of the (train) station",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.koutsuu",
+   "form": "こうつう",
+   "reading": "こうつう",
+   "gloss": "transport; traffic",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

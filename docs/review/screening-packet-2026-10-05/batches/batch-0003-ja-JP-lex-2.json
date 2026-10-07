@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-2",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.abst2.hatten",
+   "form": "はってん",
+   "reading": "はってん",
+   "gloss": "development",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.mondai2",
+   "form": "もんだい",
+   "reading": "もんだい",
+   "gloss": "problem",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.kaiketsu",
+   "form": "かいけつ",
+   "reading": "かいけつ",
+   "gloss": "solution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.hannou",
+   "form": "はんのう",
+   "reading": "はんのう",
+   "gloss": "reaction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.taiwa",
+   "form": "たいわ",
+   "reading": "たいわ",
+   "gloss": "dialogue",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.ronbun",
+   "form": "ろんぶん",
+   "reading": "ろんぶん",
+   "gloss": "essay, paper",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.bunken",
+   "form": "ぶんけん",
+   "reading": "ぶんけん",
+   "gloss": "literature (research)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.chishiki",
+   "form": "ちしき",
+   "reading": "ちしき",
+   "gloss": "knowledge",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.ninchi",
+   "form": "にんち",
+   "reading": "にんち",
+   "gloss": "cognition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.hikaku",
+   "form": "ひかく",
+   "reading": "ひかく",
+   "gloss": "comparison",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst3.itchi",
+   "form": "いっち",
+   "reading": "いっち",
+   "gloss": "consistency, agreement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst3.junjo",
+   "form": "じゅんじょ",
+   "reading": "じゅんじょ",
+   "gloss": "consistency, order",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst3.gosei",
+   "form": "ごうせい",
+   "reading": "ごうせい",
+   "gloss": "synthesis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst3.yoryo",
+   "form": "ようりょう",
+   "reading": "ようりょう",
+   "gloss": "summary",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst3.koten",
+   "form": "こうてん",
+   "reading": "こうてん",
+   "gloss": "key point",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst3.yoten",
+   "form": "ようてん",
+   "reading": "ようてん",
+   "gloss": "key point",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst3.henyo",
+   "form": "へんよう",
+   "reading": "へんよう",
+   "gloss": "change, variation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst3.taisho",
+   "form": "たいしょう",
+   "reading": "たいしょう",
+   "gloss": "contrast",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst3.hikaku2",
+   "form": "ひかく",
+   "reading": "ひかく",
+   "gloss": "comparison",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst3.kyoten",
+   "form": "きょうてん",
+   "reading": "きょうてん",
+   "gloss": "common point",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst3.sa",
+   "form": "さ",
+   "reading": "さ",
+   "gloss": "difference, gap",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst3.kyoka",
+   "form": "きょうか",
+   "reading": "きょうか",
+   "gloss": "commonality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst3.chujutsu",
+   "form": "ちゅうじゅつ",
+   "reading": "ちゅうじゅつ",
+   "gloss": "quotation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst3.inyou",
+   "form": "いんよう",
+   "reading": "いんよう",
+   "gloss": "quotation, citation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst3.youso",
+   "form": "ようそ",
+   "reading": "ようそ",
+   "gloss": "element",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

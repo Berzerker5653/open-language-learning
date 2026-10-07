@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-14",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b1.u245",
+   "text": "Это традиция.",
+   "gloss": "This is a tradition."
+  },
+  {
+   "id": "ru.sent.b1.u246",
+   "text": "Это наследие.",
+   "gloss": "This is heritage."
+  },
+  {
+   "id": "ru.sent.b1.u247",
+   "text": "Это язык.",
+   "gloss": "This is the language."
+  },
+  {
+   "id": "ru.sent.b1.u248",
+   "text": "Это граница.",
+   "gloss": "This is the border."
+  },
+  {
+   "id": "ru.sent.b1.u249",
+   "text": "Это валюта.",
+   "gloss": "This is the currency."
+  },
+  {
+   "id": "ru.sent.b1.u250",
+   "text": "Это жалоба.",
+   "gloss": "This is a complaint."
+  },
+  {
+   "id": "ru.sent.b1.u251",
+   "text": "Это доставка.",
+   "gloss": "This is delivery."
+  },
+  {
+   "id": "ru.sent.b1.u252",
+   "text": "Это задержка.",
+   "gloss": "This is a delay."
+  },
+  {
+   "id": "ru.sent.b1.u253",
+   "text": "Это объяснение.",
+   "gloss": "This is an explanation."
+  },
+  {
+   "id": "ru.sent.b1.u254",
+   "text": "Это заявление.",
+   "gloss": "This is a formal statement."
+  },
+  {
+   "id": "ru.sent.b1.u255",
+   "text": "Это бланк.",
+   "gloss": "This is a form."
+  },
+  {
+   "id": "ru.sent.b1.u256",
+   "text": "Это проверка.",
+   "gloss": "This is a check."
+  },
+  {
+   "id": "ru.sent.b1.u257",
+   "text": "Это штраф.",
+   "gloss": "This is a fine."
+  },
+  {
+   "id": "ru.sent.b1.u258",
+   "text": "Это график.",
+   "gloss": "This is the schedule."
+  },
+  {
+   "id": "ru.sent.b1.u259",
+   "text": "Это отказ.",
+   "gloss": "This is a refusal."
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-132",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.summary.sut2",
+   "form": "суть",
+   "reading": "суть",
+   "gloss": "essence",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.summary.smysl",
+   "form": "смысл",
+   "reading": "смысл",
+   "gloss": "meaning",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.soderzhanie",
+   "form": "содержание",
+   "reading": "содержа́ние",
+   "gloss": "content",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.summary.annotaciya",
+   "form": "аннотация",
+   "reading": "аннота́ция",
+   "gloss": "annotation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary.kratkost",
+   "form": "краткость",
+   "reading": "кра́ткость",
+   "gloss": "brevity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary.yasnost",
+   "form": "ясность",
+   "reading": "я́сность",
+   "gloss": "clarity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary.ponyatnost",
+   "form": "понятность",
+   "reading": "поня́тность",
+   "gloss": "intelligibility",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary.neyasnost",
+   "form": "неясность",
+   "reading": "нея́сность",
+   "gloss": "unclearness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary.struktura",
+   "form": "структура",
+   "reading": "структу́ра",
+   "gloss": "structure",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary.posledovatelnost",
+   "form": "последовательность",
+   "reading": "после́довательность",
+   "gloss": "sequence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary.vedenie",
+   "form": "введение",
+   "reading": "введе́ние",
+   "gloss": "introduction",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.summary.razdel",
+   "form": "раздел",
+   "reading": "разде́л",
+   "gloss": "section",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.glava",
+   "form": "глава",
+   "reading": "глава́",
+   "gloss": "chapter",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary.paragraf",
+   "form": "параграф",
+   "reading": "пара́граф",
+   "gloss": "paragraph",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.slovo",
+   "form": "слово",
+   "reading": "сло́во",
+   "gloss": "word",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.summary.termin",
+   "form": "термин",
+   "reading": "те́рмин",
+   "gloss": "term",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.opredelenie",
+   "form": "определение",
+   "reading": "определе́ние",
+   "gloss": "definition",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.summary.tolkovanie",
+   "form": "толкование",
+   "reading": "толкова́ние",
+   "gloss": "interpretation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.summary.pereskaz",
+   "form": "пересказ",
+   "reading": "переска́з",
+   "gloss": "retelling",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.izlozhenie",
+   "form": "изложение",
+   "reading": "изложе́ние",
+   "gloss": "exposition",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.summary.vyzhimka",
+   "form": "выжимка",
+   "reading": "вы́жимка",
+   "gloss": "digest",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary.obzor",
+   "form": "обзор",
+   "reading": "обзо́р",
+   "gloss": "overview",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.doklad",
+   "form": "доклад",
+   "reading": "докла́д",
+   "gloss": "report (talk)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.prezentaciya",
+   "form": "презентация",
+   "reading": "презента́ция",
+   "gloss": "presentation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary.rech2",
+   "form": "речь",
+   "reading": "речь",
+   "gloss": "speech",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

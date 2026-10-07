@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-3",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.a1.u072",
+   "text": "Это чек.",
+   "gloss": "This is a receipt."
+  },
+  {
+   "id": "ru.sent.a1.u073",
+   "text": "Это полка.",
+   "gloss": "This is a shelf."
+  },
+  {
+   "id": "ru.sent.a1.u074",
+   "text": "Это рубашка.",
+   "gloss": "This is a shirt."
+  },
+  {
+   "id": "ru.sent.a1.u075",
+   "text": "Это шапка.",
+   "gloss": "This is a hat."
+  },
+  {
+   "id": "ru.sent.a1.u076",
+   "text": "Это цвет.",
+   "gloss": "This is a color."
+  },
+  {
+   "id": "ru.sent.a1.u078",
+   "text": "Это подарок.",
+   "gloss": "This is a gift."
+  },
+  {
+   "id": "ru.sent.a1.u080",
+   "text": "Это площадь.",
+   "gloss": "This is a square."
+  },
+  {
+   "id": "ru.sent.a1.u081",
+   "text": "Это стадион.",
+   "gloss": "This is a stadium."
+  },
+  {
+   "id": "ru.sent.a1.u082",
+   "text": "Это билет.",
+   "gloss": "This is a ticket."
+  },
+  {
+   "id": "ru.sent.a1.u083",
+   "text": "Это такси.",
+   "gloss": "This is a taxi."
+  },
+  {
+   "id": "ru.sent.a1.u084",
+   "text": "Это вход.",
+   "gloss": "This is the entrance."
+  },
+  {
+   "id": "ru.sent.a1.u085",
+   "text": "Это этаж.",
+   "gloss": "This is a floor."
+  },
+  {
+   "id": "ru.sent.a1.u086",
+   "text": "Это поворот.",
+   "gloss": "This is a turn."
+  },
+  {
+   "id": "ru.sent.a1.u088",
+   "text": "Это пассажир.",
+   "gloss": "This is a passenger."
+  },
+  {
+   "id": "ru.sent.a1.u090",
+   "text": "Это понедельник.",
+   "gloss": "This is Monday."
+  }
+ ]
+}

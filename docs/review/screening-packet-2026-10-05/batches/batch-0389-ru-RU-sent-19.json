@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-19",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b1.u320",
+   "text": "Это аккаунт.",
+   "gloss": "This is an account."
+  },
+  {
+   "id": "ru.sent.b1.u321",
+   "text": "Это пост.",
+   "gloss": "This is a post."
+  },
+  {
+   "id": "ru.sent.b1.u322",
+   "text": "Это канал.",
+   "gloss": "This is a channel."
+  },
+  {
+   "id": "ru.sent.b1.u323",
+   "text": "Это интервью.",
+   "gloss": "This is an interview."
+  },
+  {
+   "id": "ru.sent.b1.u324",
+   "text": "Это опрос.",
+   "gloss": "This is a poll."
+  },
+  {
+   "id": "ru.sent.b1.u325",
+   "text": "Это слух.",
+   "gloss": "This is a rumor."
+  },
+  {
+   "id": "ru.sent.b1.u326",
+   "text": "Это источник.",
+   "gloss": "This is a source."
+  },
+  {
+   "id": "ru.sent.b1.u327",
+   "text": "Это блог.",
+   "gloss": "This is a blog."
+  },
+  {
+   "id": "ru.sent.b1.u328",
+   "text": "Это подкаст.",
+   "gloss": "This is a podcast."
+  },
+  {
+   "id": "ru.sent.b1.u329",
+   "text": "Это газета.",
+   "gloss": "This is a newspaper."
+  },
+  {
+   "id": "ru.sent.b1.u330",
+   "text": "Это убеждение.",
+   "gloss": "This is a conviction."
+  },
+  {
+   "id": "ru.sent.b1.u331",
+   "text": "Это сомнение.",
+   "gloss": "This is doubt."
+  },
+  {
+   "id": "ru.sent.b1.u332",
+   "text": "Это несогласие.",
+   "gloss": "This is disagreement."
+  },
+  {
+   "id": "ru.sent.b1.u333",
+   "text": "Это возражение.",
+   "gloss": "This is an objection."
+  },
+  {
+   "id": "ru.sent.b1.u334",
+   "text": "Это тезис.",
+   "gloss": "This is a thesis."
+  }
+ ]
+}

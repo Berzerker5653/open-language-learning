@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-92",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.routines.prosypatsya",
+   "form": "просыпаться",
+   "reading": "просы́паться",
+   "gloss": "to wake up",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.vstavat",
+   "form": "вставать",
+   "reading": "встава́ть",
+   "gloss": "to get up",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.umyvat-sya",
+   "form": "умываться",
+   "reading": "умыва́ться",
+   "gloss": "to wash up",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.chistit",
+   "form": "чистить",
+   "reading": "чи́стить",
+   "gloss": "to clean, to brush",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.zavtrakat",
+   "form": "завтракать",
+   "reading": "за́втракать",
+   "gloss": "to have breakfast",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.obedat",
+   "form": "обедать",
+   "reading": "обе́дать",
+   "gloss": "to have lunch",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.uzhinat",
+   "form": "ужинать",
+   "reading": "у́жинать",
+   "gloss": "to have dinner",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.rabotat",
+   "form": "работать",
+   "reading": "рабо́тать",
+   "gloss": "to work",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.uchitsya",
+   "form": "учиться",
+   "reading": "учи́ться",
+   "gloss": "to study",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.otdykhat",
+   "form": "отдыхать",
+   "reading": "отдыха́ть",
+   "gloss": "to rest",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.spat",
+   "form": "спать",
+   "reading": "спать",
+   "gloss": "to sleep",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.gulyat",
+   "form": "гулять",
+   "reading": "гуля́ть",
+   "gloss": "to walk, to stroll",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.chitat",
+   "form": "читать",
+   "reading": "чита́ть",
+   "gloss": "to read",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.pisat",
+   "form": "писать",
+   "reading": "писа́ть",
+   "gloss": "to write",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.smotret",
+   "form": "смотреть",
+   "reading": "смотре́ть",
+   "gloss": "to watch, to look",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.gotovit",
+   "form": "готовить",
+   "reading": "гото́вить",
+   "gloss": "to cook",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.ubirat",
+   "form": "убирать",
+   "reading": "убира́ть",
+   "gloss": "to tidy",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.myt",
+   "form": "мыть",
+   "reading": "мыть",
+   "gloss": "to wash",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.zvonit",
+   "form": "звонить",
+   "reading": "звони́ть",
+   "gloss": "to call",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.vstrechat",
+   "form": "встречать",
+   "reading": "встреча́ть",
+   "gloss": "to meet",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.zhit",
+   "form": "жить",
+   "reading": "жить",
+   "gloss": "to live",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.routines.utro",
+   "form": "утро",
+   "reading": "у́тро",
+   "gloss": "morning",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.routines.den",
+   "form": "день",
+   "reading": "день",
+   "gloss": "day",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.routines.vecher",
+   "form": "вечер",
+   "reading": "ве́чер",
+   "gloss": "evening",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.routines.noch",
+   "form": "ночь",
+   "reading": "ночь",
+   "gloss": "night",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

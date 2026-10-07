@@ -1,0 +1,183 @@
+{
+ "batch_id": "ja-JP-lex-156",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.work2.iken",
+   "form": "いけん",
+   "reading": "いけん",
+   "gloss": "opinion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.hantai",
+   "form": "はんたい",
+   "reading": "はんたい",
+   "gloss": "opposition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.kettei",
+   "form": "けってい",
+   "reading": "けってい",
+   "gloss": "decision",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.kettei-ken",
+   "form": "けっていけん",
+   "reading": "けっていけん",
+   "gloss": "decision-making authority",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.buchou",
+   "form": "ぶちょう",
+   "reading": "ぶちょう",
+   "gloss": "section chief",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.kacho",
+   "form": "かちょう",
+   "reading": "かちょう",
+   "gloss": "department chief",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.shacho",
+   "form": "しゃちょう",
+   "reading": "しゃちょう",
+   "gloss": "company president",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.jigyounushi",
+   "form": "じぎょうぬし",
+   "reading": "じぎょうぬし",
+   "gloss": "employer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.roushi",
+   "form": "ろうし",
+   "reading": "ろうし",
+   "gloss": "labor union",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.rodo",
+   "form": "ろうどう",
+   "reading": "ろうどう",
+   "gloss": "labor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.hoshou",
+   "form": "ほしょう",
+   "reading": "ほしょう",
+   "gloss": "compensation; guarantee",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.shikaku",
+   "form": "しかく",
+   "reading": "しかく",
+   "gloss": "qualification",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.shouhou",
+   "form": "しょうほう",
+   "reading": "しょうほう",
+   "gloss": "praise",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.genshou",
+   "form": "げんしょう",
+   "reading": "げんしょう",
+   "gloss": "phenomenon",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.kouchiku",
+   "form": "こうちく",
+   "reading": "こうちく",
+   "gloss": "accumulation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.kouka",
+   "form": "こうか",
+   "reading": "こうか",
+   "gloss": "effect",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.kouritsu",
+   "form": "こうりつ",
+   "reading": "こうりつ",
+   "gloss": "efficiency",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.seisansei",
+   "form": "せいさんせい",
+   "reading": "せいさんせい",
+   "gloss": "productivity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.yuuryou",
+   "form": "ゆうりょう",
+   "reading": "ゆうりょう",
+   "gloss": "excellent",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.yuutou",
+   "form": "ゆうとう",
+   "reading": "ゆうとう",
+   "gloss": "superior; outstanding",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.keiei",
+   "form": "けいえい",
+   "reading": "けいえい",
+   "gloss": "business management",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.tenyaku",
+   "form": "てんやく",
+   "reading": "てんやく",
+   "gloss": "job transfer",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

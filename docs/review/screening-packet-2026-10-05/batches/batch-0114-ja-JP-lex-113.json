@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-113",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.questions.nani-wo",
+   "form": "なにを",
+   "reading": "なにを",
+   "gloss": "what (object)",
+   "pos": "question",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.keigo",
+   "form": "けいご",
+   "reading": "けいご",
+   "gloss": "honorific language",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.teinei",
+   "form": "ていねい",
+   "reading": "ていねい",
+   "gloss": "polite",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.katai",
+   "form": "かたい",
+   "reading": "かたい",
+   "gloss": "stiff, formal",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.yawarakai",
+   "form": "やわらかい",
+   "reading": "やわらかい",
+   "gloss": "soft (expression)",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.futsuu",
+   "form": "ふつう",
+   "reading": "ふつう",
+   "gloss": "ordinary",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.koushiki",
+   "form": "こうしき",
+   "reading": "こうしき",
+   "gloss": "formality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.kougo",
+   "form": "こうご",
+   "reading": "こうご",
+   "gloss": "colloquial language",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.kudai",
+   "form": "くだい",
+   "reading": "くだい",
+   "gloss": "humility",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.sonkeigo",
+   "form": "そんけいご",
+   "reading": "そんけいご",
+   "gloss": "respectful language",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.kenjougo",
+   "form": "けんじょうご",
+   "reading": "けんじょうご",
+   "gloss": "humble language",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.teineigo",
+   "form": "ていねいご",
+   "reading": "ていねいご",
+   "gloss": "polite language",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.chokusetsu",
+   "form": "ちょくせつ",
+   "reading": "ちょくせつ",
+   "gloss": "direct",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.hogen",
+   "form": "ほうげん",
+   "reading": "ほうげん",
+   "gloss": "phrase, expression",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.kotei2",
+   "form": "こうてい",
+   "reading": "こうてい",
+   "gloss": "set phrase",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.yougen",
+   "form": "ようげん",
+   "reading": "ようげん",
+   "gloss": "assertion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.kougen",
+   "form": "こうげん",
+   "reading": "こうげん",
+   "gloss": "utterance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.shucho",
+   "form": "しゅちょう",
+   "reading": "しゅちょう",
+   "gloss": "claim",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.enryo",
+   "form": "えんりょ",
+   "reading": "えんりょ",
+   "gloss": "restraint, diffidence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.honne",
+   "form": "ほんね",
+   "reading": "ほんね",
+   "gloss": "true feeling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.tatemae",
+   "form": "たてまえ",
+   "reading": "たてまえ",
+   "gloss": "public stance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.omomuki",
+   "form": "おもむき",
+   "reading": "おもむき",
+   "gloss": "nuance, taste",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.kanji2",
+   "form": "かんじ",
+   "reading": "かんじ",
+   "gloss": "feeling, impression",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.nyuansu",
+   "form": "にゅうあんす",
+   "reading": "にゅうあんす",
+   "gloss": "nuance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.imi",
+   "form": "いみ",
+   "reading": "いみ",
+   "gloss": "meaning",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

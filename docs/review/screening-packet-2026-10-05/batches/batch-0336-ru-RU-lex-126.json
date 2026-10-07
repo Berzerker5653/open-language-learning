@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-126",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.style.lyubeznost",
+   "form": "любезность",
+   "reading": "любе́зность",
+   "gloss": "courtesy, kindness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.bestaktnost",
+   "form": "бестактность",
+   "reading": "беста́ктность",
+   "gloss": "tactlessness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.nahalstvo",
+   "form": "нахальство",
+   "reading": "наха́льство",
+   "gloss": "brazenness, impudence",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.uchtivyj",
+   "form": "учтивый",
+   "reading": "учти́вый",
+   "gloss": "courteous (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.lyubeznyj",
+   "form": "любезный",
+   "reading": "любе́зный",
+   "gloss": "amiable, courteous",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.taktichnyj",
+   "form": "тактичный",
+   "reading": "такти́чный",
+   "gloss": "tactful",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.bestaktnyj",
+   "form": "бестактный",
+   "reading": "беста́ктный",
+   "gloss": "tactless",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.privetlivyj",
+   "form": "приветливый",
+   "reading": "приве́тливый",
+   "gloss": "friendly, welcoming",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.obhoditelnyj",
+   "form": "обходительный",
+   "reading": "обходи́тельный",
+   "gloss": "affable (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.obhozhdenie",
+   "form": "обхождение",
+   "reading": "обхожде́ние",
+   "gloss": "conduct, manner of dealing",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.manery",
+   "form": "манеры",
+   "reading": "мане́ры",
+   "gloss": "manners",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.ceremonnost",
+   "form": "церемонность",
+   "reading": "церемо́нность",
+   "gloss": "ceremoniousness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.kanceljarskij",
+   "form": "канцелярский",
+   "reading": "канцеля́рский",
+   "gloss": "bureaucratic (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.neoficialnyj",
+   "form": "неофициальный",
+   "reading": "неофициа́льный",
+   "gloss": "unofficial",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.mnogoslovie",
+   "form": "многословие",
+   "reading": "многосло́вие",
+   "gloss": "verbosity",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.mnogoslovnyj",
+   "form": "многословный",
+   "reading": "многосло́вный",
+   "gloss": "verbose",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.lakonichnyj",
+   "form": "лаконичный",
+   "reading": "лакони́чный",
+   "gloss": "laconic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.lakonizm",
+   "form": "лаконизм",
+   "reading": "лакони́зм",
+   "gloss": "laconism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.szhatost",
+   "form": "сжатость",
+   "reading": "сжа́тость",
+   "gloss": "conciseness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.obstojatelnyj",
+   "form": "обстоятельный",
+   "reading": "обстоя́тельный",
+   "gloss": "thorough, detailed",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.poshlost",
+   "form": "пошлость",
+   "reading": "по́шлость",
+   "gloss": "vulgarity, banality",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.poshlyj",
+   "form": "пошлый",
+   "reading": "по́шлый",
+   "gloss": "vulgar, tacky",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.vulgarnej",
+   "form": "вульгарный",
+   "reading": "вульга́рный",
+   "gloss": "vulgar",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.expressiya",
+   "form": "экспрессия",
+   "reading": "экспре́ссия",
+   "gloss": "expression, expressiveness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.publicistika",
+   "form": "публицистика",
+   "reading": "публици́стика",
+   "gloss": "journalism, publicism",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

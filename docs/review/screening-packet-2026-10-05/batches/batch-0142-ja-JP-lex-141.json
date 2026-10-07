@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-141",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.time.asatte",
+   "form": "あさって",
+   "reading": "あさって",
+   "gloss": "the day after tomorrow",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.nanji",
+   "form": "なんじ",
+   "reading": "なんじ",
+   "gloss": "what time",
+   "pos": "question",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.han",
+   "form": "はん",
+   "reading": "はん",
+   "gloss": "half past",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.getsuyoubi",
+   "form": "げつようび",
+   "reading": "げつようび",
+   "gloss": "Monday",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.kayoubi",
+   "form": "かようび",
+   "reading": "かようび",
+   "gloss": "Tuesday",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.suiyoubi",
+   "form": "すいようび",
+   "reading": "すいようび",
+   "gloss": "Wednesday",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.mokuyoubi",
+   "form": "もくようび",
+   "reading": "もくようび",
+   "gloss": "Thursday",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.kinyoubi",
+   "form": "きんようび",
+   "reading": "きんようび",
+   "gloss": "Friday",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.doyoubi",
+   "form": "どようび",
+   "reading": "どようび",
+   "gloss": "Saturday",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.nichiyoubi",
+   "form": "にちようび",
+   "reading": "にちようび",
+   "gloss": "Sunday",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.shuu",
+   "form": "しゅう",
+   "reading": "しゅう",
+   "gloss": "week",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.mainichi",
+   "form": "まいにち",
+   "reading": "まいにち",
+   "gloss": "every day",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.asa",
+   "form": "あさ",
+   "reading": "あさ",
+   "gloss": "morning",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.hiru",
+   "form": "ひる",
+   "reading": "ひる",
+   "gloss": "daytime; noon",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.ban",
+   "form": "ばん",
+   "reading": "ばん",
+   "gloss": "evening",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.yoru",
+   "form": "よる",
+   "reading": "よる",
+   "gloss": "night",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.kippu",
+   "form": "きっぷ",
+   "reading": "きっぷ",
+   "gloss": "ticket (train)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.kaisatsu",
+   "form": "かいさつ",
+   "reading": "かいさつ",
+   "gloss": "ticket gate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.hoomu",
+   "form": "ホーム",
+   "reading": "ホーム",
+   "gloss": "platform (train)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.noriba",
+   "form": "のりば",
+   "reading": "のりば",
+   "gloss": "boarding area; platform",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.machimasu",
+   "form": "まちます",
+   "reading": "まちます",
+   "gloss": "to wait",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.shinkansen",
+   "form": "しんかんせん",
+   "reading": "しんかんせん",
+   "gloss": "bullet train",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.chikatetsu",
+   "form": "ちかてつ",
+   "reading": "ちかてつ",
+   "gloss": "subway; metro",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.tokkyu",
+   "form": "とっきゅう",
+   "reading": "とっきゅう",
+   "gloss": "limited express train",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.transport.kousoku",
+   "form": "こうそく",
+   "reading": "こうそく",
+   "gloss": "express (train)",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

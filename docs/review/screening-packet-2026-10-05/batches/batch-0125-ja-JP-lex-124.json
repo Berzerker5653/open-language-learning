@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-124",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.science2.hanrei",
+   "form": "はんれい",
+   "reading": "はんれい",
+   "gloss": "counterexample",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.kairyou",
+   "form": "かいりょう",
+   "reading": "かいりょう",
+   "gloss": "improvement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.rinen",
+   "form": "りねん",
+   "reading": "りねん",
+   "gloss": "principle, ideal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.mokuteki",
+   "form": "もくてき",
+   "reading": "もくてき",
+   "gloss": "purpose",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.hyoka",
+   "form": "ひょうか",
+   "reading": "ひょうか",
+   "gloss": "assessment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.koryaku",
+   "form": "こうりゃく",
+   "reading": "こうりゃく",
+   "gloss": "strategy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.kaimono",
+   "form": "かいもの",
+   "reading": "かいもの",
+   "gloss": "shopping",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.shouhyou",
+   "form": "しょうひょう",
+   "reading": "しょうひょう",
+   "gloss": "price tag",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.waribiki",
+   "form": "わりびき",
+   "reading": "わりびき",
+   "gloss": "discount",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.point",
+   "form": "ぽいんと",
+   "reading": "ぽいんと",
+   "gloss": "reward points",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.reshiito",
+   "form": "れしーと",
+   "reading": "れしーと",
+   "gloss": "receipt",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.tryon",
+   "form": "とらいおん",
+   "reading": "とらいおん",
+   "gloss": "fitting room",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.size",
+   "form": "さいず",
+   "reading": "さいず",
+   "gloss": "size",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.seruku",
+   "form": "せるく",
+   "reading": "せるく",
+   "gloss": "sale",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.fukuban",
+   "form": "ふくばん",
+   "reading": "ふくばん",
+   "gloss": "name tag",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.bag",
+   "form": "ばぐ",
+   "reading": "ばぐ",
+   "gloss": "bag",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.waishatsu",
+   "form": "わいしゃつ",
+   "reading": "わいしゃつ",
+   "gloss": "shirt",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.zuban",
+   "form": "ずぼん",
+   "reading": "ずぼん",
+   "gloss": "pants",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.seetaa",
+   "form": "せてー",
+   "reading": "せてー",
+   "gloss": "sweater",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.jacket",
+   "form": "じゃけっと",
+   "reading": "じゃけっと",
+   "gloss": "jacket",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.sukooto",
+   "form": "すこーと",
+   "reading": "すこーと",
+   "gloss": "skirt",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.kutsushita",
+   "form": "くつした",
+   "reading": "くつした",
+   "gloss": "socks",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.kabuto",
+   "form": "かぶと",
+   "reading": "かぶと",
+   "gloss": "helmet",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.muffu",
+   "form": "まふ",
+   "reading": "まふ",
+   "gloss": "muffler",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.handobaggu",
+   "form": "はんどばっぐ",
+   "reading": "はんどばっぐ",
+   "gloss": "handbag",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

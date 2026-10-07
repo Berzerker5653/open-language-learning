@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-150",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.wellbeing.bol",
+   "form": "боль",
+   "reading": "боль",
+   "gloss": "pain",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.wellbeing.bolit",
+   "form": "болеть",
+   "reading": "боле́ть",
+   "gloss": "to hurt, be ill",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.wellbeing.golova2",
+   "form": "голова",
+   "reading": "голова́",
+   "gloss": "head",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.wellbeing.gorlo",
+   "form": "горло",
+   "reading": "го́рло",
+   "gloss": "throat",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.wellbeing.zhivot",
+   "form": "живот",
+   "reading": "живо́т",
+   "gloss": "stomach",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.wellbeing.temperatura",
+   "form": "температура",
+   "reading": "температу́ра",
+   "gloss": "temperature, fever",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.wellbeing.kasel",
+   "form": "кашель",
+   "reading": "ка́шель",
+   "gloss": "cough",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.wellbeing.nasmork",
+   "form": "насморк",
+   "reading": "на́сморк",
+   "gloss": "runny nose",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.wellbeing.vrach",
+   "form": "врач",
+   "reading": "врач",
+   "gloss": "doctor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.wellbeing.vrach2",
+   "form": "врачиха",
+   "reading": "врачи́ха",
+   "gloss": "doctor (f)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.wellbeing.stomatolog",
+   "form": "стоматолог",
+   "reading": "стомато́лог",
+   "gloss": "dentist",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.wellbeing.klinik",
+   "form": "клиника",
+   "reading": "кли́ника",
+   "gloss": "clinic",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.wellbeing.vitaminy",
+   "form": "витамины",
+   "reading": "витами́ны",
+   "gloss": "vitamins",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.wellbeing.lekarstvo",
+   "form": "лекарство",
+   "reading": "ле́карство",
+   "gloss": "medicine",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.wellbeing.tabletki",
+   "form": "таблетки",
+   "reading": "табле́тки",
+   "gloss": "pills",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.wellbeing.priyom",
+   "form": "приём",
+   "reading": "прие́м",
+   "gloss": "appointment, reception",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.wellbeing.zapisat",
+   "form": "записывать",
+   "reading": "запи́сывать",
+   "gloss": "to book, record",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.wellbeing.prihod",
+   "form": "приход",
+   "reading": "прихо́д",
+   "gloss": "visit, coming",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.wellbeing.ukol",
+   "form": "укол",
+   "reading": "уко́л",
+   "gloss": "injection",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.wellbeing.bant",
+   "form": "бинт",
+   "reading": "бинт",
+   "gloss": "bandage",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.wellbeing.analiz",
+   "form": "анализ",
+   "reading": "ана́лиз",
+   "gloss": "test, analysis",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.wellbeing.sostoyanie",
+   "form": "состояние",
+   "reading": "состоя́ние",
+   "gloss": "condition, state",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.wellbeing.zdorovie",
+   "form": "здоровье",
+   "reading": "здоро́вье",
+   "gloss": "health",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.wellbeing.zdorovyi",
+   "form": "здоровый",
+   "reading": "здоро́вый",
+   "gloss": "healthy",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.wellbeing.travma",
+   "form": "травма",
+   "reading": "тра́вма",
+   "gloss": "injury",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-3",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.family-four",
+   "text": "かぞくは よにんいます。",
+   "gloss": "My family has four people."
+  },
+  {
+   "id": "ja.sent.my-father-teacher",
+   "text": "ちちは せんせい です。",
+   "gloss": "My father is a teacher."
+  },
+  {
+   "id": "ja.sent.friend-student",
+   "text": "ともだちは がくせいです。",
+   "gloss": "My friend is a student."
+  },
+  {
+   "id": "ja.sent.can-speak",
+   "text": "にほんごが すこし はなせます。",
+   "gloss": "I can speak a little Japanese."
+  },
+  {
+   "id": "ja.sent.understand",
+   "text": "わかります。",
+   "gloss": "I understand."
+  },
+  {
+   "id": "ja.sent.dont-understand",
+   "text": "すみません、わかりません。",
+   "gloss": "Sorry, I don't understand."
+  },
+  {
+   "id": "ja.sent.again-please",
+   "text": "もういちど おねがいします。",
+   "gloss": "One more time, please."
+  },
+  {
+   "id": "ja.sent.slowly-please",
+   "text": "ゆっくり はなしてください。",
+   "gloss": "Please speak slowly."
+  },
+  {
+   "id": "ja.sent.can-understand",
+   "text": "にほんごが すこし わかります。",
+   "gloss": "I understand a little Japanese."
+  },
+  {
+   "id": "ja.sent.two-people",
+   "text": "ふたり います。",
+   "gloss": "There are two (people)."
+  },
+  {
+   "id": "ja.sent.eat-before-words",
+   "text": "いただきます。",
+   "gloss": "Said before eating."
+  },
+  {
+   "id": "ja.sent.after-meal",
+   "text": "ごちそうさまでした。",
+   "gloss": "Said after eating."
+  },
+  {
+   "id": "ja.sent.three-books",
+   "text": "ほんを さんさつ かいます。",
+   "gloss": "I buy three books."
+  },
+  {
+   "id": "ja.sent.greet-teacher",
+   "text": "せんせい、こんにちは。",
+   "gloss": "Hello, teacher."
+  },
+  {
+   "id": "ja.sent.sleep-night",
+   "text": "よる、ねます。",
+   "gloss": "At night, I sleep."
+  }
+ ]
+}

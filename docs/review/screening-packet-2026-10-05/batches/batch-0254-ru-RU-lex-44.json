@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-44",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.home.lozhka",
+   "form": "ложка",
+   "reading": "ло́жка",
+   "gloss": "spoon",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.vilka",
+   "form": "вилка",
+   "reading": "ви́лка",
+   "gloss": "fork",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.kovyor",
+   "form": "ковёр",
+   "reading": "кове́р",
+   "gloss": "rug",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.zanaveski",
+   "form": "занавески",
+   "reading": "занаве́ски",
+   "gloss": "curtains",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.home.televizor",
+   "form": "телевизор",
+   "reading": "телеви́зор",
+   "gloss": "television",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.palto",
+   "form": "пальто",
+   "reading": "пальто́",
+   "gloss": "coat",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.home.kurtka",
+   "form": "куртка",
+   "reading": "ку́ртка",
+   "gloss": "jacket",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.obuv",
+   "form": "обувь",
+   "reading": "о́бувь",
+   "gloss": "footwear",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.botinki",
+   "form": "ботинки",
+   "reading": "боти́нки",
+   "gloss": "shoes",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.home.tapki",
+   "form": "тапки",
+   "reading": "та́пки",
+   "gloss": "slippers",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.home.veshalka",
+   "form": "вешалка",
+   "reading": "ве́шалка",
+   "gloss": "coat rack",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.dvor",
+   "form": "двор",
+   "reading": "двор",
+   "gloss": "yard",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.balkon",
+   "form": "балкон",
+   "reading": "балко́н",
+   "gloss": "balcony",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.sad",
+   "form": "сад",
+   "reading": "сад",
+   "gloss": "garden",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.lestnica",
+   "form": "лестница",
+   "reading": "ле́стница",
+   "gloss": "stairs",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.magazin",
+   "form": "магазин",
+   "reading": "магази́н",
+   "gloss": "shop",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.rynok",
+   "form": "рынок",
+   "reading": "ры́нок",
+   "gloss": "market",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.apteka",
+   "form": "аптека",
+   "reading": "апте́ка",
+   "gloss": "pharmacy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.bolnitsa",
+   "form": "больница",
+   "reading": "больни́ца",
+   "gloss": "hospital",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.bank",
+   "form": "банк",
+   "reading": "банк",
+   "gloss": "bank",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.teatr",
+   "form": "театр",
+   "reading": "теа́тр",
+   "gloss": "theatre",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.muzey",
+   "form": "музей",
+   "reading": "музе́й",
+   "gloss": "museum",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.park",
+   "form": "парк",
+   "reading": "парк",
+   "gloss": "park",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.stanciya",
+   "form": "станция",
+   "reading": "ста́нция",
+   "gloss": "station",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.avtobus",
+   "form": "автобус",
+   "reading": "авто́бус",
+   "gloss": "bus",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

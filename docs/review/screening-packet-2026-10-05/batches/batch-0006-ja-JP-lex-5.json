@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-5",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.academic2.dankai",
+   "form": "だんかい",
+   "reading": "だんかい",
+   "gloss": "stage, step",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.teki2",
+   "form": "てき",
+   "reading": "てき",
+   "gloss": "target, objective",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.bunya",
+   "form": "ぶんや",
+   "reading": "ぶんや",
+   "gloss": "field, domain",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.yakuwari",
+   "form": "やくわり",
+   "reading": "やくわり",
+   "gloss": "role",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.kenri",
+   "form": "けんり",
+   "reading": "けんり",
+   "gloss": "right",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.gimu",
+   "form": "ぎむ",
+   "reading": "ぎむ",
+   "gloss": "duty, obligation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.tassei",
+   "form": "たっせい",
+   "reading": "たっせい",
+   "gloss": "accomplishment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.katsuyo",
+   "form": "かつよう",
+   "reading": "かつよう",
+   "gloss": "application, use",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.tekiyou",
+   "form": "てきよう",
+   "reading": "てきよう",
+   "gloss": "application",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.kaisetsu",
+   "form": "かいせつ",
+   "reading": "かいせつ",
+   "gloss": "explanation, commentary",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.kaito",
+   "form": "かいとう",
+   "reading": "かいとう",
+   "gloss": "answer, response",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.shitsumon",
+   "form": "しつもん",
+   "reading": "しつもん",
+   "gloss": "question",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.houkoku",
+   "form": "ほうこく",
+   "reading": "ほうこく",
+   "gloss": "report",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.seimei",
+   "form": "せいめい",
+   "reading": "せいめい",
+   "gloss": "clarity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.kyotsuu",
+   "form": "きょうつう",
+   "reading": "きょうつう",
+   "gloss": "commonality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.kyouyuu",
+   "form": "きょうゆう",
+   "reading": "きょうゆう",
+   "gloss": "shared ownership",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.riyou",
+   "form": "りよう",
+   "reading": "りよう",
+   "gloss": "use, utilization",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.seido",
+   "form": "せいど",
+   "reading": "せいど",
+   "gloss": "system, institution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.seikaku",
+   "form": "せいかく",
+   "reading": "せいかく",
+   "gloss": "accuracy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.seisaku",
+   "form": "せいさく",
+   "reading": "せいさく",
+   "gloss": "production, creation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.taigen",
+   "form": "たいげん",
+   "reading": "たいげん",
+   "gloss": "representation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.taiou",
+   "form": "たいおう",
+   "reading": "たいおう",
+   "gloss": "correspondence, response",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.tansaku",
+   "form": "たんさく",
+   "reading": "たんさく",
+   "gloss": "exploration, inquiry",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.kouritsu",
+   "form": "こうりつ",
+   "reading": "こうりつ",
+   "gloss": "efficiency",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.koi2",
+   "form": "こい",
+   "reading": "こい",
+   "gloss": "request, petition",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -49,11 +49,13 @@ pub fn run_whisper_words(
     language: &str,
     audio: &AudioBuffer,
 ) -> Result<Vec<WordToken>, String> {
-    let stem = std::env::temp_dir().join(format!(
-        "lts-align-{}-{}",
-        std::process::id(),
-        audio.samples.len()
-    ));
+    // Unique per call: pid separates processes, an atomic counter separates
+    // concurrent calls in one process. Keying on audio length alone collided
+    // when two runs shared identical audio (parallel tests clobbered each
+    // other's temp wav/json).
+    static ALIGN_SEQ: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
+    let seq = ALIGN_SEQ.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+    let stem = std::env::temp_dir().join(format!("lts-align-{}-{}", std::process::id(), seq));
     let wav = {
         let mut p = stem.clone();
         p.set_extension("wav");

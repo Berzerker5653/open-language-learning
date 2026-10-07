@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-50",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.env2.rikai",
+   "form": "りかい",
+   "reading": "りかい",
+   "gloss": "understanding",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.muda-zukai",
+   "form": "むだづかい",
+   "reading": "むだづかい",
+   "gloss": "wasteful use",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.kikou",
+   "form": "きこう",
+   "reading": "きこう",
+   "gloss": "climate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.seisaku2",
+   "form": "せいさく",
+   "reading": "せいさく",
+   "gloss": "policy making",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.cooling",
+   "form": "くりーにんぐ",
+   "reading": "くりーにんぐ",
+   "gloss": "cooling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.ene2",
+   "form": "えねるぎー",
+   "reading": "えねるぎー",
+   "gloss": "energy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.shifuku",
+   "form": "しふく",
+   "reading": "しふく",
+   "gloss": "transition, shift",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.kennkyuu",
+   "form": "けんきゅう",
+   "reading": "けんきゅう",
+   "gloss": "study, investigation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.taniso2",
+   "form": "たんにょう",
+   "reading": "たんにょう",
+   "gloss": "carbon dioxide equivalent",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.baishutsu",
+   "form": "ばいしゅつ",
+   "reading": "ばいしゅつ",
+   "gloss": "emission",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.tax",
+   "form": "たっくす",
+   "reading": "たっくす",
+   "gloss": "tax",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.shijou",
+   "form": "しじょう",
+   "reading": "しじょう",
+   "gloss": "market",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.seibutsu",
+   "form": "せいぶつ",
+   "reading": "せいぶつ",
+   "gloss": "living thing, organism",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.shakubutsu",
+   "form": "しゃくぶつ",
+   "reading": "しゃくぶつ",
+   "gloss": "species",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.tansaku",
+   "form": "たんさく",
+   "reading": "たんさく",
+   "gloss": "exploration, search",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.hogo",
+   "form": "ほご",
+   "reading": "ほご",
+   "gloss": "protection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.kankyouho",
+   "form": "かんきょうほう",
+   "reading": "かんきょうほう",
+   "gloss": "environmental law",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.risshou",
+   "form": "りっしょう",
+   "reading": "りっしょう",
+   "gloss": "establishment, founding",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.moyoroshi",
+   "form": "もよおし",
+   "reading": "もよおし",
+   "gloss": "event, gathering",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.shiminundo",
+   "form": "しみんうんどう",
+   "reading": "しみんうんどう",
+   "gloss": "citizens' movement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.seimei",
+   "form": "せいめい",
+   "reading": "せいめい",
+   "gloss": "life, living things",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.junkan2",
+   "form": "じゅんかん",
+   "reading": "じゅんかん",
+   "gloss": "cycle, circulation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.mottainai",
+   "form": "もったいない",
+   "reading": "もったいない",
+   "gloss": "wasteful",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.saisei",
+   "form": "さいせい",
+   "reading": "さいせい",
+   "gloss": "recycling, regeneration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.teiki",
+   "form": "てき",
+   "reading": "てき",
+   "gloss": "appropriate, suitable",
+   "pos": "na-adjective",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-6",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.a2.u125",
+   "text": "Это чемодан.",
+   "gloss": "This is the suitcase."
+  },
+  {
+   "id": "ru.sent.a2.u126",
+   "text": "Это паспорт.",
+   "gloss": "This is the passport."
+  },
+  {
+   "id": "ru.sent.a2.u127",
+   "text": "Это дорога.",
+   "gloss": "This is the road."
+  },
+  {
+   "id": "ru.sent.a2.u128",
+   "text": "Это скорость.",
+   "gloss": "This is the speed."
+  },
+  {
+   "id": "ru.sent.a2.u129",
+   "text": "Это остановка.",
+   "gloss": "This is the stop."
+  },
+  {
+   "id": "ru.sent.a2.u130",
+   "text": "Это услуга.",
+   "gloss": "This is a service."
+  },
+  {
+   "id": "ru.sent.a2.u131",
+   "text": "Это клиент.",
+   "gloss": "This is a client."
+  },
+  {
+   "id": "ru.sent.a2.u132",
+   "text": "Это чек.",
+   "gloss": "This is a receipt."
+  },
+  {
+   "id": "ru.sent.a2.u133",
+   "text": "Это цена.",
+   "gloss": "This is the price."
+  },
+  {
+   "id": "ru.sent.a2.u134",
+   "text": "Это скидка.",
+   "gloss": "This is the discount."
+  },
+  {
+   "id": "ru.sent.a2.u135",
+   "text": "Это заявка.",
+   "gloss": "This is the request."
+  },
+  {
+   "id": "ru.sent.a2.u136",
+   "text": "Это анкета.",
+   "gloss": "This is the questionnaire."
+  },
+  {
+   "id": "ru.sent.a2.u137",
+   "text": "Это подпись.",
+   "gloss": "This is the signature."
+  },
+  {
+   "id": "ru.sent.a2.u138",
+   "text": "Это справка.",
+   "gloss": "This is the certificate."
+  },
+  {
+   "id": "ru.sent.a2.u139",
+   "text": "Это отдел.",
+   "gloss": "This is the department."
+  }
+ ]
+}

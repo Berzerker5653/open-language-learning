@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-120",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.rel.itoko",
+   "form": "いとこ",
+   "reading": "いとこ",
+   "gloss": "cousin",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.nakayoku",
+   "form": "なかよく",
+   "reading": "なかよく",
+   "gloss": "get along",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.kenka",
+   "form": "けんか",
+   "reading": "けんか",
+   "gloss": "quarrel",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.yori-modosu",
+   "form": "よりもどす",
+   "reading": "よりもどす",
+   "gloss": "to reconcile",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.negai",
+   "form": "ねがい",
+   "reading": "ねがい",
+   "gloss": "wish",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.omoiden",
+   "form": "おもいでん",
+   "reading": "おもいでん",
+   "gloss": "memories",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.tsuui",
+   "form": "つい",
+   "reading": "つい",
+   "gloss": "grief",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.sabishii",
+   "form": "さびしい",
+   "reading": "さびしい",
+   "gloss": "lonely",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.kokoro-gamae",
+   "form": "こころがまえ",
+   "reading": "こころがまえ",
+   "gloss": "mental preparation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.kokoro-bazuka",
+   "form": "こころばずか",
+   "reading": "こころばずか",
+   "gloss": "consideration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.omoiyari",
+   "form": "おもいやり",
+   "reading": "おもいやり",
+   "gloss": "kindness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.shinrai",
+   "form": "しんらい",
+   "reading": "しんらい",
+   "gloss": "trust",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.shinrai-suru",
+   "form": "しんらいします",
+   "reading": "しんらいします",
+   "gloss": "to trust",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.sekinin",
+   "form": "せきにん",
+   "reading": "せきにん",
+   "gloss": "responsibility",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.jiko-sekinin",
+   "form": "じこせきにん",
+   "reading": "じこせきにん",
+   "gloss": "self-responsibility",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.kizuna",
+   "form": "きずな",
+   "reading": "きずな",
+   "gloss": "bond",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.ai",
+   "form": "あい",
+   "reading": "あい",
+   "gloss": "love",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.jijou",
+   "form": "じじょう",
+   "reading": "じじょう",
+   "gloss": "affection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.kazoku-no-kizuna",
+   "form": "かぞくのきずな",
+   "reading": "かぞくのきずな",
+   "gloss": "family bond",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.kazoku-no-kata",
+   "form": "かぞくかた",
+   "reading": "かぞくかた",
+   "gloss": "family member",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.kazoku-no-uni",
+   "form": "かぞくのうに",
+   "reading": "かぞくのうに",
+   "gloss": "family unit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.kazoku-no-ishi",
+   "form": "かぞくのいし",
+   "reading": "かぞくのいし",
+   "gloss": "family will",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.kyoudai-ue",
+   "form": "きょうだいうえ",
+   "reading": "きょうだいうえ",
+   "gloss": "older sibling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.kyoudai-shita",
+   "form": "きょうだいした",
+   "reading": "きょうだいした",
+   "gloss": "younger sibling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.jijou-betsu",
+   "form": "じじょうべつ",
+   "reading": "じじょうべつ",
+   "gloss": "affection distinction",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

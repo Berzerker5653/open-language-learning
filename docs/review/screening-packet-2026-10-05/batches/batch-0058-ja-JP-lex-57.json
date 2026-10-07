@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-57",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.food-drink.banana",
+   "form": "バナナ",
+   "reading": "バナナ",
+   "gloss": "banana",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.mikan",
+   "form": "みかん",
+   "reading": "みかん",
+   "gloss": "mandarin orange",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.ryouri",
+   "form": "りょうり",
+   "reading": "りょうり",
+   "gloss": "cooking; a dish",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.asagohan",
+   "form": "あさごはん",
+   "reading": "あさごはん",
+   "gloss": "breakfast",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.hirugohan",
+   "form": "ひるごはん",
+   "reading": "ひるごはん",
+   "gloss": "lunch",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.bangohan",
+   "form": "ばんごはん",
+   "reading": "ばんごはん",
+   "gloss": "dinner",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.tabemono",
+   "form": "たべもの",
+   "reading": "たべもの",
+   "gloss": "food (things to eat)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.nomimono",
+   "form": "のみもの",
+   "reading": "のみもの",
+   "gloss": "drink (things to drink)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.obento",
+   "form": "おべんとう",
+   "reading": "おべんとう",
+   "gloss": "boxed lunch; bento",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.reshipi",
+   "form": "れしぴ",
+   "reading": "れしぴ",
+   "gloss": "recipe",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.naifu",
+   "form": "ないふ",
+   "reading": "ないふ",
+   "gloss": "knife",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.supun",
+   "form": "すぷん",
+   "reading": "すぷん",
+   "gloss": "spoon",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.furukon",
+   "form": "ふろーく",
+   "reading": "ふろーく",
+   "gloss": "fork",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.bowl",
+   "form": "ぼうる",
+   "reading": "ぼうる",
+   "gloss": "bowl",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.nabe",
+   "form": "なべ",
+   "reading": "なべ",
+   "gloss": "pot; pan",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.aji",
+   "form": "あじ",
+   "reading": "あじ",
+   "gloss": "taste; flavor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.shio",
+   "form": "しお",
+   "reading": "しお",
+   "gloss": "salt",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.satou",
+   "form": "さとう",
+   "reading": "さとう",
+   "gloss": "sugar",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.su",
+   "form": "す",
+   "reading": "す",
+   "gloss": "vinegar",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.dashi",
+   "form": "だし",
+   "reading": "だし",
+   "gloss": "broth; stock",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.shouyu",
+   "form": "しょうゆ",
+   "reading": "しょうゆ",
+   "gloss": "soy sauce",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.miso",
+   "form": "みそ",
+   "reading": "みそ",
+   "gloss": "miso paste",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.wasabi",
+   "form": "わさび",
+   "reading": "わさび",
+   "gloss": "wasabi",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.gyuunyuu",
+   "form": "ぎゅうにゅう",
+   "reading": "ぎゅうにゅう",
+   "gloss": "milk",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.chiizu",
+   "form": "ちーず",
+   "reading": "ちーず",
+   "gloss": "cheese",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

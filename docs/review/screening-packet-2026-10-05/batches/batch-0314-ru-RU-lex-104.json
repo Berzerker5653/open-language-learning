@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-104",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.shopping.prodavec",
+   "form": "продавец",
+   "reading": "продаве́ц",
+   "gloss": "shop assistant",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.shopping.pokupka",
+   "form": "покупка",
+   "reading": "поку́пка",
+   "gloss": "purchase",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.shopping.pokupat",
+   "form": "покупать",
+   "reading": "покупа́ть",
+   "gloss": "to buy",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.prodat",
+   "form": "продавать",
+   "reading": "продава́ть",
+   "gloss": "to sell",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.skidka",
+   "form": "скидка",
+   "reading": "ски́дка",
+   "gloss": "discount",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.shopping.tolko",
+   "form": "только",
+   "reading": "то́лько",
+   "gloss": "only",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.eshchyo",
+   "form": "ещё",
+   "reading": "еще́",
+   "gloss": "more, also",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.podarok",
+   "form": "подарок",
+   "reading": "пода́рок",
+   "gloss": "gift",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.shopping.dorogoy",
+   "form": "дорогой",
+   "reading": "дорого́й",
+   "gloss": "expensive",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.deshevy",
+   "form": "дешёвый",
+   "reading": "деше́вый",
+   "gloss": "cheap",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.bolshoy",
+   "form": "большой",
+   "reading": "большо́й",
+   "gloss": "big",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.novyy",
+   "form": "новый",
+   "reading": "но́вый",
+   "gloss": "new",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.staryy",
+   "form": "старый",
+   "reading": "ста́рый",
+   "gloss": "old",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.tsvet",
+   "form": "цвет",
+   "reading": "цвет",
+   "gloss": "color",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.shopping.belyy",
+   "form": "белый",
+   "reading": "бе́лый",
+   "gloss": "white",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.chernyy",
+   "form": "чёрный",
+   "reading": "че́рный",
+   "gloss": "black",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.krasnyy",
+   "form": "красный",
+   "reading": "кра́сный",
+   "gloss": "red",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.zelenyy",
+   "form": "зелёный",
+   "reading": "зеле́ный",
+   "gloss": "green",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.siniy",
+   "form": "синий",
+   "reading": "си́ний",
+   "gloss": "blue",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.razmer",
+   "form": "размер",
+   "reading": "разме́р",
+   "gloss": "size",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.shopping.kassa",
+   "form": "касса",
+   "reading": "ка́сса",
+   "gloss": "checkout",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.shopping.vybrat",
+   "form": "выбрать",
+   "reading": "вы́брать",
+   "gloss": "to choose",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.chek",
+   "form": "чек",
+   "reading": "чек",
+   "gloss": "receipt",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.shopping.nalichnye",
+   "form": "наличные",
+   "reading": "нали́чные",
+   "gloss": "cash",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.shopping.sdacha",
+   "form": "сдача",
+   "reading": "сда́ча",
+   "gloss": "change",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

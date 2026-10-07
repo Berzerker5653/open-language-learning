@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-22",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.polite-humor",
+   "text": "ねこ が おどり を おどりました。",
+   "gloss": "The cat performed a dance."
+  },
+  {
+   "id": "ja.sent.personal-essay",
+   "text": "おんがく の ことが で だいすき です。",
+   "gloss": "I love music."
+  },
+  {
+   "id": "ja.sent.wellness-routine",
+   "text": "せいかつ の しゅうかん を かえました。",
+   "gloss": "I changed my lifestyle habits."
+  },
+  {
+   "id": "ja.sent.sleep-habit",
+   "text": "ねぶき で からだ の ちょうし が わるかったです。",
+   "gloss": "Sleeplessness made my body condition bad."
+  },
+  {
+   "id": "ja.sent.nutrition",
+   "text": "たんぱく と えいよう を べんきょう しました。",
+   "gloss": "We studied protein and nutrition."
+  },
+  {
+   "id": "ja.sent.exercise-plan",
+   "text": "うんそう の じゅんじょ を かきました。",
+   "gloss": "I wrote the order of exercises."
+  },
+  {
+   "id": "ja.sent.stress-manage",
+   "text": "こころ の ふかみ を はなしました。",
+   "gloss": "I spoke about the depth of the mind."
+  },
+  {
+   "id": "ja.sent.mental-health",
+   "text": "しょうじょう を しんりょう で はなしました。",
+   "gloss": "I spoke of symptoms in counseling."
+  },
+  {
+   "id": "ja.sent.habit-change",
+   "text": "まず ねる じかん を かえました。",
+   "gloss": "First I changed my sleep time."
+  },
+  {
+   "id": "ja.sent.vaccination",
+   "text": "ワクチン の じょうほう を つたえました。",
+   "gloss": "I conveyed vaccine information."
+  },
+  {
+   "id": "ja.sent.care-aging",
+   "text": "かいご の べんきょう を しました。",
+   "gloss": "I studied care."
+  },
+  {
+   "id": "ja.sent.fitness-club",
+   "text": "きょうぶ の かいいん に なりました。",
+   "gloss": "I became a club member."
+  },
+  {
+   "id": "ja.sent.diet-culture",
+   "text": "ちょうしん の こと を はなしました。",
+   "gloss": "I talked about dieting."
+  },
+  {
+   "id": "ja.sent.wellbeing-app",
+   "text": "アプリ の じょうほう を しらべました。",
+   "gloss": "I researched app information."
+  },
+  {
+   "id": "ja.sent.health-debate",
+   "text": "こうかい で とうひょう しました。",
+   "gloss": "We voted in the public session."
+  }
+ ]
+}

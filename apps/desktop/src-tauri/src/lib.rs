@@ -652,10 +652,20 @@ struct ContrastEntry {
     id: String,
     description: String,
     items: Vec<ContrastItem>,
+    /// Optional production-scoring target declared by the pack (language-
+    /// neutral number; the engine never infers phonology).
+    production: Option<ContrastProduction>,
 }
 
 struct ContrastItem {
     text: String,
+}
+
+struct ContrastProduction {
+    measure: String,
+    expected_ratio: f64,
+    tolerance_low: f64,
+    tolerance_high: f64,
 }
 
 /// Parse an installed pack's `phonology/contrasts.jsonl`. A pack
@@ -699,6 +709,22 @@ fn contrast_entries(
         if items.len() < 2 {
             continue;
         }
+        let production = entry.get("production").and_then(|p| {
+            let measure = p.get("measure").and_then(|m| m.as_str())?.to_string();
+            let expected_ratio = p.get("expected_ratio").and_then(|v| v.as_f64())?;
+            Some(ContrastProduction {
+                measure,
+                expected_ratio,
+                tolerance_low: p
+                    .get("tolerance_low")
+                    .and_then(|v| v.as_f64())
+                    .unwrap_or(0.85),
+                tolerance_high: p
+                    .get("tolerance_high")
+                    .and_then(|v| v.as_f64())
+                    .unwrap_or(1.25),
+            })
+        });
         out.push(ContrastEntry {
             id: id.to_string(),
             description: entry
@@ -707,6 +733,7 @@ fn contrast_entries(
                 .unwrap_or("phonological contrast")
                 .to_string(),
             items,
+            production,
         });
     }
     Ok(out)
@@ -1060,6 +1087,11 @@ fn build_plan(
         &mut progression,
         &due_reviews,
     )?;
+    // n=1 personalization: bias the fixed new-item budget toward dimensions
+    // the learner is still developing and away from ones they have mastered,
+    // using their OWN recorded attempts. Personal tuning, never a mastery or
+    // population claim (docs/18).
+    personalize_progression(&mut progression, &derived);
     let config = lts_scheduler::PlannerConfig {
         budget_minutes: minutes,
         ..Default::default()
@@ -1073,6 +1105,41 @@ fn build_plan(
         },
     )
     .map_err(|e| format!("{e:?}"))
+}
+
+/// n=1 personalization of the new-item (progression) stream. The fixed
+/// progression budget is spent on dimensions the learner is still developing
+/// and withheld from dimensions they have already mastered, using the mean
+/// derived confidence of the learner's OWN recorded attempts per dimension.
+/// Dimensions with no seen items keep the neutral `WEAK_CONFIDENCE` so they
+/// hold roughly their curriculum position. The sort is stable, so within a
+/// dimension curriculum order is preserved. This is personal tuning only — it
+/// records nothing and makes no mastery/population claim (docs/18).
+fn personalize_progression(
+    progression: &mut [lts_scheduler::ProgressionItem],
+    derived: &[lts_learner_model::DerivedMastery],
+) {
+    use std::collections::HashMap;
+    let mut agg: HashMap<lts_domain::ActivityModality, (f32, usize)> = HashMap::new();
+    for d in derived {
+        if d.state != lts_domain::MasteryState::Unseen {
+            let e = agg.entry(d.dimension).or_insert((0.0, 0));
+            e.0 += d.confidence;
+            e.1 += 1;
+        }
+    }
+    let key = |m: lts_domain::ActivityModality| -> f32 {
+        match agg.get(&m) {
+            Some((s, n)) if *n > 0 => *s / *n as f32,
+            _ => WEAK_CONFIDENCE,
+        }
+    };
+    // Lower mean confidence (more developing) -> introduced sooner.
+    progression.sort_by(|a, b| {
+        key(a.modality)
+            .partial_cmp(&key(b.modality))
+            .unwrap_or(std::cmp::Ordering::Equal)
+    });
 }
 
 /// Plan item enriched with the lexicon display info the UI needs to
@@ -1371,6 +1438,37 @@ struct PronunciationResult {
     mode_reason: Option<String>,
 }
 
+#[derive(serde::Deserialize, Clone)]
+struct DictationAttempt {
+    pack_id: String,
+    /// The sentence the learner reads aloud; checked against the transcript.
+    target_text: String,
+    wav_b64: String,
+}
+
+#[derive(Serialize)]
+struct DictationResult {
+    /// Some(true) matched, Some(false) clearly different, None abstained.
+    matched: Option<bool>,
+    /// What the recognizer heard, shown for honest guided feedback.
+    heard: String,
+    target: String,
+    abstain_reason: Option<String>,
+    /// Dictation is a production/recognition check, never a pronunciation
+    /// grade or mastery; always guided.
+    mode: &'static str,
+}
+
+#[derive(Serialize, Clone)]
+struct DictationTarget {
+    id: String,
+    /// Surface form shown to the learner (may contain kanji).
+    text: String,
+    /// Kana reading used as the recognition comparison target.
+    reading: String,
+    gloss: String,
+}
+
 fn empty_pitch(reason: &str) -> PitchComparison {
     PitchComparison {
         unavailable_reason: Some(reason.into()),
@@ -1467,6 +1565,10 @@ fn pronunciation_demo_at(data: &Path, pack_id: &str) -> Result<PronunciationDemo
 /// Dev/vendor aligner path; production packaging ships whisper.cpp as a
 /// sidecar (ADR-0008). Model prefers the installed catalog copy.
 fn aligner_paths(data: &Path) -> Option<(PathBuf, PathBuf)> {
+    let pref = models::load_speech_pref(data);
+    if pref.asr_model == "off" {
+        return None;
+    }
     let vendor = match std::env::var("LTS_BENCH_VENDOR") {
         Ok(v) => PathBuf::from(v),
         Err(_) => match std::env::var("HOME") {
@@ -1481,12 +1583,13 @@ fn aligner_paths(data: &Path) -> Option<(PathBuf, PathBuf)> {
     let entry = models::load_catalog()
         .models
         .into_iter()
-        .find(|m| m.id == "org.openlanguage.speech.whisper-ggml-tiny")?;
-    let installed = models::model_dir(data, &entry).join("ggml-tiny.bin");
+        .find(|m| m.id == pref.asr_model)?;
+    let file = entry.files.first()?;
+    let installed = models::model_dir(data, &entry).join(&file.path);
     let model = if installed.exists() {
         installed
     } else {
-        let v = vendor.join("ggml-tiny.bin");
+        let v = vendor.join(&file.path);
         if v.exists() {
             v
         } else {
@@ -1529,8 +1632,13 @@ fn pronunciation_check_at(
     let version = lts_langpack::archive::current_version(&attempt.pack_id, &packs_root)
         .ok_or("pack not installed")?;
     let pack_dir = packs_root.join(&attempt.pack_id).join(&version);
+    let pref = models::load_speech_pref(data);
     let Some((binary, model)) = aligner_paths(data) else {
-        return Ok(abstain("aligner-unavailable".into()));
+        return Ok(abstain(if pref.asr_model == "off" {
+            "speech-model-off".into()
+        } else {
+            "aligner-unavailable".into()
+        }));
     };
     let aligner = lts_speech_runtime::WhisperConstrainedAligner {
         binary,
@@ -1548,72 +1656,116 @@ fn pronunciation_check_at(
         lts_speech_api::ProviderOutcome::Usable { value, .. } => value,
         other => return Ok(abstain(outcome_reason(&other))),
     };
+    // Production target: prefer a pack-declared ratio (language-neutral; the
+    // engine never infers phonology). Fall back to a reference recording,
+    // gated on a genuine contrast. When a target is declared, reference media
+    // is optional and used only for the pitch contour.
+    let declared = attempt
+        .short_unit
+        .strip_suffix(".short")
+        .and_then(|cid| {
+            contrast_entries(data, &attempt.pack_id, &version)
+                .ok()?
+                .into_iter()
+                .find(|e| e.id == cid)?
+                .production
+        })
+        .filter(|p| p.measure == "voiced-duration-ratio");
+
     let short_ref = pack_dir.join("media").join(format!("{short}.wav"));
     let long_ref = pack_dir.join("media").join(format!("{long}.wav"));
-    let (Ok(sb), Ok(lb)) = (std::fs::read(&short_ref), std::fs::read(&long_ref)) else {
-        return Ok(abstain("reference-media-missing".into()));
+    let media: Option<(lts_speech_api::AudioBuffer, lts_speech_api::AudioBuffer)> =
+        match (std::fs::read(&short_ref), std::fs::read(&long_ref)) {
+            (Ok(sb), Ok(lb)) => match (
+                lts_speech_runtime::from_wav16(&sb),
+                lts_speech_runtime::from_wav16(&lb),
+            ) {
+                (Ok(sr), Ok(lr)) => Some((sr, lr)),
+                _ => None,
+            },
+            _ => None,
+        };
+
+    let reference_ratio = match (&declared, &media) {
+        (Some(p), _) => p.expected_ratio,
+        (None, Some((sr, lr))) => {
+            let rs = lts_speech_runtime::acoustic::voiced_seconds(sr, 320, 0.01);
+            let rl = lts_speech_runtime::acoustic::voiced_seconds(lr, 320, 0.01);
+            if rs <= 0.0 || rl <= 0.0 {
+                return Ok(abstain("reference-media-invalid".into()));
+            }
+            // A reference pair that barely lengthens (TTS ~1.04) cannot anchor a
+            // length judgement; scoring against it misleads (docs/05).
+            if rl / rs < 1.4 {
+                return Ok(abstain("reference-contrast-weak".into()));
+            }
+            rl / rs
+        }
+        (None, None) => return Ok(abstain("reference-media-missing".into())),
     };
-    let (Ok(sr), Ok(lr)) = (
-        lts_speech_runtime::from_wav16(&sb),
-        lts_speech_runtime::from_wav16(&lb),
-    ) else {
-        return Ok(abstain("reference-media-invalid".into()));
-    };
-    let rs = lts_speech_runtime::acoustic::voiced_seconds(&sr, 320, 0.01);
-    let rl = lts_speech_runtime::acoustic::voiced_seconds(&lr, 320, 0.01);
-    if rs <= 0.0 || rl <= 0.0 {
-        return Ok(abstain("reference-media-invalid".into()));
-    }
+
     let features =
         match lts_speech_runtime::VoicedDurationFeature::default().extract(&audio, &alignment) {
             lts_speech_api::ProviderOutcome::Usable { value, .. } => value,
             other => return Ok(abstain(outcome_reason(&other))),
         };
+
     // SPEECH-006: normalized contour comparison (reference-only profile).
-    let prosody = lts_speech_runtime::prosody::AutocorrelationProsody::default();
-    let ref_alignment = lts_speech_api::Alignment {
-        spans: vec![lts_speech_api::AlignmentSpan {
-            unit_id: attempt.long_text.clone(),
-            start_sample: 0,
-            end_sample: lr.samples.len(),
-            confidence: Some(1.0),
-        }],
-        overall_confidence: Some(1.0),
-    };
-    let att_obs = prosody
-        .analyze(&audio, &alignment)
-        .value()
-        .map(|p| p.observations)
-        .unwrap_or_default();
-    let ref_obs = prosody
-        .analyze(&lr, &ref_alignment)
-        .value()
-        .map(|p| p.observations)
-        .unwrap_or_default();
-    let att_c = lts_speech_runtime::prosody::normalize_semitones(&att_obs);
-    let ref_c = lts_speech_runtime::prosody::normalize_semitones(&ref_obs);
-    let pitch = if att_c.is_empty() || ref_c.is_empty() {
-        empty_pitch("insufficient-voiced-material")
-    } else {
-        PitchComparison {
-            reference: ref_c.clone(),
-            attempt: att_c.clone(),
-            reference_shape: lts_speech_runtime::prosody::contour_shape_text(&ref_c),
-            attempt_shape: lts_speech_runtime::prosody::contour_shape_text(&att_c),
-            unavailable_reason: None,
+    // Needs a long reference recording; unavailable when the pack ships no media.
+    let pitch = match &media {
+        Some((_, lr)) => {
+            let prosody = lts_speech_runtime::prosody::AutocorrelationProsody::default();
+            let ref_alignment = lts_speech_api::Alignment {
+                spans: vec![lts_speech_api::AlignmentSpan {
+                    unit_id: attempt.long_text.clone(),
+                    start_sample: 0,
+                    end_sample: lr.samples.len(),
+                    confidence: Some(1.0),
+                }],
+                overall_confidence: Some(1.0),
+            };
+            let att_obs = prosody
+                .analyze(&audio, &alignment)
+                .value()
+                .map(|p| p.observations)
+                .unwrap_or_default();
+            let ref_obs = prosody
+                .analyze(lr, &ref_alignment)
+                .value()
+                .map(|p| p.observations)
+                .unwrap_or_default();
+            let att_c = lts_speech_runtime::prosody::normalize_semitones(&att_obs);
+            let ref_c = lts_speech_runtime::prosody::normalize_semitones(&ref_obs);
+            if att_c.is_empty() || ref_c.is_empty() {
+                empty_pitch("insufficient-voiced-material")
+            } else {
+                PitchComparison {
+                    reference: ref_c.clone(),
+                    attempt: att_c.clone(),
+                    reference_shape: lts_speech_runtime::prosody::contour_shape_text(&ref_c),
+                    attempt_shape: lts_speech_runtime::prosody::contour_shape_text(&att_c),
+                    unavailable_reason: None,
+                }
+            }
         }
+        None => empty_pitch("no-reference-recording"),
     };
+
     let evidence = lts_speech_api::PronunciationEvidence {
         alignment,
         features,
         prosody: None,
     };
-    let interpreter = lts_speech_runtime::VowelLengthInterpreter {
+    let mut interpreter = lts_speech_runtime::VowelLengthInterpreter {
         short_unit_id: attempt.short_text.clone(),
         long_unit_id: attempt.long_text.clone(),
-        reference_ratio: rl / rs,
+        reference_ratio,
         ..Default::default()
     };
+    if let Some(p) = &declared {
+        interpreter.tolerance_low = p.tolerance_low;
+        interpreter.tolerance_high = p.tolerance_high;
+    }
     // SPEECH-007 gate: automatic feedback only when a Qualified calibration
     // record binds this exact installed combination and the request sits
     // inside its declared envelope; otherwise guided (docs/17 §97).
@@ -1622,7 +1774,7 @@ fn pronunciation_check_at(
     let model_entry = models::load_catalog()
         .models
         .into_iter()
-        .find(|m| m.id == "org.openlanguage.speech.whisper-ggml-tiny");
+        .find(|m| m.id == pref.asr_model);
     let installed = InstalledCombination {
         provider: ComponentRef {
             id: "whisper.cpp".into(),
@@ -1632,7 +1784,7 @@ fn pronunciation_check_at(
             sha256: None,
         },
         model: ComponentRef {
-            id: "org.openlanguage.speech.whisper-ggml-tiny".into(),
+            id: pref.asr_model.clone(),
             version: model_entry
                 .as_ref()
                 .map(|m| m.version.clone())
@@ -1692,6 +1844,139 @@ fn pronunciation_check_at(
             mode_reason,
         },
     })
+}
+
+/// Free-ASR dictation check (roadmap feature B). The learner reads a known
+/// sentence aloud; whisper.cpp transcribes it freely and we compare against
+/// the target. Fail-closed: an input-quality rejection, an empty transcript,
+/// or an uncertain match all ABSTAIN rather than emit a wrong verdict
+/// (docs/05). This whisper build exposes no ASR confidence in its JSON, so
+/// the gate is quality + transcript + a character-match ratio band.
+fn dictation_check_at(data: &Path, attempt: DictationAttempt) -> Result<DictationResult, String> {
+    if !packs::valid_pack_id(&attempt.pack_id) {
+        return Err("pack not allowlisted".into());
+    }
+    let abstain = |reason: String, heard: String| DictationResult {
+        matched: None,
+        heard,
+        target: attempt.target_text.clone(),
+        abstain_reason: Some(reason),
+        mode: "guided",
+    };
+    let pref = models::load_speech_pref(data);
+    let Some((binary, model)) = aligner_paths(data) else {
+        return Ok(abstain(
+            if pref.asr_model == "off" {
+                "speech-model-off".into()
+            } else {
+                "aligner-unavailable".into()
+            },
+            String::new(),
+        ));
+    };
+    use base64::Engine;
+    let wav_bytes = base64::engine::general_purpose::STANDARD
+        .decode(&attempt.wav_b64)
+        .map_err(|_| "invalid wav payload".to_string())?;
+    if wav_bytes.len() > 10 * 1024 * 1024 {
+        return Err("attempt too large".into());
+    }
+    let audio = lts_speech_runtime::from_wav16(&wav_bytes).map_err(|e| e.to_string())?;
+    // Input-quality gate first: silence/noise/clipping is a retry, never a
+    // wrong answer (docs/05).
+    let q = lts_speech_runtime::quality::EnergyVad::default().quality(&audio);
+    if matches!(q, lts_speech_api::ProviderOutcome::QualityRejected { .. }) {
+        return Ok(abstain(outcome_reason(&q), String::new()));
+    }
+    let tokens = lts_speech_runtime::alignment::run_whisper_words(&binary, &model, "ja", &audio)
+        .map_err(|e| e.to_string())?;
+    let heard: String = tokens
+        .iter()
+        .map(|t| t.text.trim())
+        .collect::<Vec<_>>()
+        .join("");
+    if heard.trim().is_empty() {
+        return Ok(abstain("asr-no-speech".into(), String::new()));
+    }
+    let target_chars = normalize_for_match(&attempt.target_text);
+    let heard_chars = normalize_for_match(&heard);
+    let (ratio, _) = lts_speech_runtime::alignment::char_match(&target_chars, &heard_chars);
+    let matched = if ratio >= 0.9 {
+        Some(true)
+    } else if ratio <= 0.4 {
+        Some(false)
+    } else {
+        return Ok(abstain("uncertain".into(), heard));
+    };
+    Ok(DictationResult {
+        matched,
+        heard,
+        target: attempt.target_text,
+        abstain_reason: None,
+        mode: "guided",
+    })
+}
+
+/// Normalize for dictation comparison: drop whitespace/punctuation (reuse the
+/// aligner's rule) then fold katakana to hiragana, so the recognizer's kana
+/// choice does not cause a false negative on a correct reading.
+fn normalize_for_match(s: &str) -> Vec<char> {
+    lts_speech_runtime::alignment::normalize_chars(s)
+        .into_iter()
+        .map(|c| match c {
+            // Katakana U+30A1..U+30F9 -> Hiragana U+3041..U+3079.
+            '\u{30a1}'..='\u{30f9}' => char::from_u32(c as u32 - 0x60).unwrap_or(c),
+            _ => c,
+        })
+        .collect()
+}
+
+/// Pick a sentence from the installed pack to dictate (roadmap feature B: tie
+/// dictation to curriculum instead of a free-text box). Prefers kana-only
+/// sentences so the free-ASR transcript compares cleanly to the reading;
+/// `offset` cycles the candidates for variety.
+fn dictation_target_at(data: &Path, pack_id: &str, offset: u32) -> Result<DictationTarget, String> {
+    if !packs::valid_pack_id(pack_id) {
+        return Err("pack not allowlisted".into());
+    }
+    let packs_root = data.join("packs");
+    let version =
+        lts_langpack::archive::current_version(pack_id, &packs_root).ok_or("pack not installed")?;
+    let path = packs_root
+        .join(pack_id)
+        .join(&version)
+        .join("sentences")
+        .join("entries.jsonl");
+    let text =
+        std::fs::read_to_string(path).map_err(|_| "pack declares no sentences".to_string())?;
+    let mut kana_only: Vec<DictationTarget> = Vec::new();
+    let mut all: Vec<DictationTarget> = Vec::new();
+    for line in text.lines().filter(|l| !l.trim().is_empty()) {
+        let v: serde_json::Value =
+            serde_json::from_str(line).map_err(|_| "bad sentences entries".to_string())?;
+        let t = DictationTarget {
+            id: v["id"].as_str().unwrap_or("").to_string(),
+            text: v["text"].as_str().unwrap_or("").to_string(),
+            reading: v["reading"].as_str().unwrap_or("").to_string(),
+            gloss: v["gloss"].as_str().unwrap_or("").to_string(),
+        };
+        if t.text.is_empty() || t.reading.is_empty() {
+            continue;
+        }
+        if normalize_for_match(&t.text) == normalize_for_match(&t.reading) {
+            kana_only.push(t.clone());
+        }
+        all.push(t);
+    }
+    let pool = if kana_only.is_empty() {
+        &all
+    } else {
+        &kana_only
+    };
+    if pool.is_empty() {
+        return Err("pack declares no usable sentences".into());
+    }
+    Ok(pool[(offset as usize) % pool.len()].clone())
 }
 
 /// Reference audio for immediate comparison; served from the installed
@@ -1855,8 +2140,7 @@ fn writing_submit(
     let event = lts_learner_model::AttemptDraft::new(
         vec![lts_domain::ContentId::parse(&item_id).map_err(|_| "invalid item id")?],
         lts_domain::ActivityModality::ProductionWriting,
-        lts_domain::ContentId::parse("ja.activity.demo.writing-typing")
-            .map_err(|_| "invalid activity id")?,
+        lts_domain::ContentId::parse(&item_id).map_err(|_| "invalid activity id")?,
         pack_id,
         &version,
     )
@@ -3056,20 +3340,11 @@ fn practice_submit_inner(
         .duration_since(std::time::UNIX_EPOCH)
         .map_err(|e| e.to_string())?;
     let dim = parse_dimension(modality).ok_or("unknown modality")?;
-    let activity_id = match dim {
-        lts_domain::ActivityModality::ComprehensionListening => "ja.activity.demo.mc-listen",
-        // The orthography unit itself is the practiced activity; no
-        // language-specific activity id literal (engine neutrality).
-        lts_domain::ActivityModality::OrthographyRecognition => content_id,
-        // The contrast itself is the practiced activity; no
-        // language-specific activity id literal (engine neutrality).
-        // K-12: the sentence itself is the practiced activity; no
-        // language-specific activity id literal (engine neutrality).
-        lts_domain::ActivityModality::ProductionWriting
-        | lts_domain::ActivityModality::OrthographicEncoding => content_id,
-        lts_domain::ActivityModality::PhonologicalDiscrimination => content_id,
-        _ => "ja.activity.demo.mc-recall",
-    };
+    // Engine neutrality (AGENTS.md): the practiced item IS the activity;
+    // no language-specific activity id literals in the engine. Every
+    // modality attributes evidence to the content record itself, the
+    // same pattern the orthography/sentence/contrast paths already used.
+    let activity_id = content_id;
     // K-15: a diagnostic attempt is attributed to the pack assessment.
     let activity_id = opts.diagnostic.unwrap_or(activity_id);
     let event = lts_learner_model::AttemptDraft::new(
@@ -3613,6 +3888,35 @@ fn delete_model(model_id: String) -> Result<(), String> {
     models::delete_model(&data_dir(), &entry)
 }
 
+/// Device-level active speech model: `"off"` or a whisper.cpp catalog id.
+#[tauri::command]
+fn get_speech_model() -> String {
+    models::load_speech_pref(&data_dir()).asr_model
+}
+
+#[tauri::command]
+fn set_speech_model(model_id: String) -> Result<(), String> {
+    models::save_speech_pref(
+        &data_dir(),
+        &models::SpeechPref {
+            asr_model: model_id,
+        },
+    )
+}
+
+/// Free-ASR dictation check (roadmap feature B): read a sentence aloud, get an
+/// honest guided "did I say it recognizably" verdict. Never a grade or mastery.
+#[tauri::command]
+fn dictation_check(attempt: DictationAttempt) -> Result<DictationResult, String> {
+    dictation_check_at(&data_dir(), attempt)
+}
+
+/// Pick a pack sentence to dictate (ties dictation to curriculum).
+#[tauri::command]
+fn dictation_target(pack_id: String, offset: u32) -> Result<DictationTarget, String> {
+    dictation_target_at(&data_dir(), &pack_id, offset)
+}
+
 fn now_secs() -> u64 {
     std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
@@ -3692,8 +3996,12 @@ pub fn run() {
             available_models,
             install_model,
             delete_model,
+            get_speech_model,
+            set_speech_model,
             pronunciation_check,
             pronunciation_demo,
+            dictation_check,
+            dictation_target,
             reference_audio,
             speech_audio,
             tts_status,
@@ -4053,6 +4361,50 @@ mod tests {
     }
 
     #[test]
+    fn personalize_progression_favors_developing_dimensions() {
+        use lts_domain::{ActivityModality as M, MasteryState as S};
+        let dm = |c: &str, m: M, conf: f32| lts_learner_model::DerivedMastery {
+            content_id: c.into(),
+            dimension: m,
+            state: S::Introduced,
+            confidence: conf,
+            needs_refresh: false,
+            policy_version: "p".into(),
+            algorithm_version: "a".into(),
+        };
+        let pi = |c: &str, m: M| lts_scheduler::ProgressionItem {
+            content_id: c.into(),
+            modality: m,
+        };
+        // Recall-meaning mastered (~0.8); discrimination developing (~0.2).
+        let derived = vec![
+            dm("r1", M::RecallMeaning, 0.8),
+            dm("r2", M::RecallMeaning, 0.8),
+            dm("d1", M::PhonologicalDiscrimination, 0.2),
+        ];
+        // Curriculum order interleaves the two dimensions.
+        let mut prog = vec![
+            pi("rA", M::RecallMeaning),
+            pi("dA", M::PhonologicalDiscrimination),
+            pi("rB", M::RecallMeaning),
+            pi("dB", M::PhonologicalDiscrimination),
+        ];
+        personalize_progression(&mut prog, &derived);
+        // Developing dimension first, within-dimension curriculum order kept.
+        let order: Vec<&str> = prog.iter().map(|p| p.content_id.as_str()).collect();
+        assert_eq!(order, vec!["dA", "dB", "rA", "rB"]);
+
+        // A fresh learner (no seen items) is a stable no-op: curriculum order.
+        let mut fresh = vec![
+            pi("rA", M::RecallMeaning),
+            pi("dA", M::PhonologicalDiscrimination),
+        ];
+        personalize_progression(&mut fresh, &[]);
+        let fresh_order: Vec<&str> = fresh.iter().map(|p| p.content_id.as_str()).collect();
+        assert_eq!(fresh_order, vec!["rA", "dA"]);
+    }
+
+    #[test]
     fn progress_shows_modality_differences() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
@@ -4238,7 +4590,7 @@ mod tests {
     }
 
     #[test]
-    fn pronunciation_check_guides_vowel_length_and_abstains_on_mismatch() {
+    fn pronunciation_check_abstains_on_weak_reference_and_mismatch() {
         use base64::Engine;
         let vendor = std::env::var("LTS_BENCH_VENDOR")
             .map(PathBuf::from)
@@ -4252,6 +4604,14 @@ mod tests {
         let tmp = tempfile::TempDir::new().unwrap();
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        // The feature is opt-in: select a speech model so the aligner resolves.
+        crate::models::save_speech_pref(
+            data,
+            &crate::models::SpeechPref {
+                asr_model: "org.openlanguage.speech.whisper-ggml-tiny".into(),
+            },
+        )
+        .unwrap();
         let packs_root = data.join("packs");
         let version =
             lts_langpack::archive::current_version("org.openlanguage.ja-demo", &packs_root)
@@ -4282,20 +4642,18 @@ mod tests {
             wav_b64: base64::engine::general_purpose::STANDARD.encode(&attempt_wav),
         };
         let res = pronunciation_check_at(data, attempt.clone()).unwrap();
-        assert_eq!(res.abstain_reason, None, "got {:?}", res.abstain_reason);
-        assert_eq!(res.corrections.len(), 1);
-        assert_eq!(res.corrections[0].feature_id, "ja.phon.long-vowel");
+        // The bundled demo reference is TTS audio whose long/short voiced ratio
+        // is ~1.04 (Kokoro does not actually lengthen the long vowel), too weak
+        // to anchor a length judgement. The reference-contrast gate abstains
+        // rather than flag a correct contrast as "too long" (docs/05). A genuine
+        // positive-scoring path needs a real recording with a true contrast.
         assert_eq!(
-            res.corrections[0].feedback_template_id,
-            "speech.long-vowel.close"
+            res.abstain_reason.as_deref(),
+            Some("reference-contrast-weak"),
+            "got {:?}",
+            res.abstain_reason
         );
-
-        // SPEECH-006: normalized contour comparison available.
-        assert_eq!(res.pitch.unavailable_reason, None);
-        assert!(!res.pitch.reference.is_empty() && !res.pitch.attempt.is_empty());
-        assert!(res.pitch.reference_shape.contains("overall"));
-        // Normalized: semitones around the speaker median, not Hz.
-        assert!(res.pitch.reference.iter().all(|v| v.abs() < 48.0));
+        assert!(res.corrections.is_empty());
 
         // Verification gate: only the short word against the expected pair.
         let mismatch = PronunciationAttempt {
@@ -4316,6 +4674,247 @@ mod tests {
         assert!(!b64.is_empty());
         assert!(reference_audio_at(data, "org.openlanguage.ja-demo", "../etc/passwd").is_err());
         assert!(reference_audio_at(data, "org.evil.pack", "ja.lex.demo.obasan").is_err());
+    }
+
+    /// Option 3: a pack that DECLARES a production target (mora-derived) and
+    /// ships no media still scores length. The same weak TTS audio that the
+    /// media path rejected as `reference-contrast-weak` is now correctly judged
+    /// against the declared target — and a no-contrast production reads
+    /// "shorter", not the old false "close".
+    #[test]
+    fn pronunciation_check_uses_pack_declared_target_without_media() {
+        use base64::Engine;
+        let Some(tmp) = dictation_vendor() else {
+            return;
+        };
+        let data = tmp.path();
+        // ja-JP declares mora targets (obasan pair 1.25) and ships NO media.
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let packs_root = data.join("packs");
+        let demo_ver =
+            lts_langpack::archive::current_version("org.openlanguage.ja-demo", &packs_root)
+                .unwrap();
+        let media = packs_root
+            .join("org.openlanguage.ja-demo")
+            .join(&demo_ver)
+            .join("media");
+        let short = std::fs::read(media.join("ja.lex.demo.obasan.wav")).unwrap();
+        let long = std::fs::read(media.join("ja.lex.demo.obaasan.wav")).unwrap();
+        let sb = lts_speech_runtime::from_wav16(&short).unwrap();
+        let lb = lts_speech_runtime::from_wav16(&long).unwrap();
+        let mut samples = sb.samples.clone();
+        samples.extend(
+            std::iter::repeat_n(0.0f32, (0.2 * sb.sample_rate_hz as f32) as usize)
+                .chain(lb.samples.clone()),
+        );
+        let attempt_wav = lts_speech_runtime::to_wav16(&lts_speech_api::AudioBuffer {
+            samples,
+            sample_rate_hz: sb.sample_rate_hz,
+        });
+        let attempt = PronunciationAttempt {
+            pack_id: "org.openlanguage.ja-jp.reference".into(),
+            short_unit: "ja.contrast.vowel-length.obasan.short".into(),
+            long_unit: "ja.contrast.vowel-length.obasan.long".into(),
+            short_text: "おばさん".into(),
+            long_text: "おばあさん".into(),
+            wav_b64: base64::engine::general_purpose::STANDARD.encode(&attempt_wav),
+        };
+        let res = pronunciation_check_at(data, attempt).unwrap();
+        // Declared target present -> no `reference-media-missing` abstention.
+        assert_eq!(res.abstain_reason, None, "got {:?}", res.abstain_reason);
+        // Weak TTS contrast (~1.04) vs mora target 1.25 -> shorter, not close.
+        assert_eq!(res.corrections.len(), 1);
+        assert_eq!(
+            res.corrections[0].feedback_template_id,
+            "speech.long-vowel.shorter"
+        );
+        // Pitch needs a reference recording; length still scored without it.
+        assert_eq!(
+            res.pitch.unavailable_reason.as_deref(),
+            Some("no-reference-recording")
+        );
+    }
+
+    #[test]
+    fn pronunciation_check_abstains_when_speech_model_is_off() {
+        use base64::Engine;
+        let tmp = tempfile::TempDir::new().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        // Privacy default: no speech model is selected, so speaking is not assessed.
+        assert_eq!(crate::models::load_speech_pref(data).asr_model, "off");
+        let attempt = PronunciationAttempt {
+            pack_id: "org.openlanguage.ja-demo".into(),
+            short_unit: "ja.lex.demo.obasan".into(),
+            long_unit: "ja.lex.demo.obaasan".into(),
+            short_text: "おばさん".into(),
+            long_text: "おばあさん".into(),
+            wav_b64: base64::engine::general_purpose::STANDARD.encode(
+                lts_speech_runtime::to_wav16(&lts_speech_api::AudioBuffer {
+                    samples: vec![0.0f32; 1600],
+                    sample_rate_hz: 16000,
+                }),
+            ),
+        };
+        let res = pronunciation_check_at(data, attempt).unwrap();
+        assert_eq!(res.abstain_reason.as_deref(), Some("speech-model-off"));
+        assert!(res.corrections.is_empty());
+    }
+
+    fn dictation_vendor() -> Option<tempfile::TempDir> {
+        let vendor = std::env::var("LTS_BENCH_VENDOR")
+            .map(PathBuf::from)
+            .unwrap_or_else(|_| {
+                PathBuf::from(std::env::var("HOME").unwrap()).join(".cache/lts-bench")
+            });
+        if !vendor.join("whisper.cpp/build/bin/whisper-cli").exists()
+            || !vendor.join("ggml-tiny.bin").exists()
+        {
+            eprintln!("SKIP: vendor aligner/model not present");
+            return None;
+        }
+        let tmp = tempfile::TempDir::new().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        crate::models::save_speech_pref(
+            data,
+            &crate::models::SpeechPref {
+                asr_model: "org.openlanguage.speech.whisper-ggml-tiny".into(),
+            },
+        )
+        .unwrap();
+        Some(tmp)
+    }
+
+    #[test]
+    fn dictation_check_abstains_when_model_off() {
+        use base64::Engine;
+        let tmp = tempfile::TempDir::new().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let attempt = DictationAttempt {
+            pack_id: "org.openlanguage.ja-demo".into(),
+            target_text: "おばあさん".into(),
+            wav_b64: base64::engine::general_purpose::STANDARD.encode(b"not-a-wav"),
+        };
+        let res = dictation_check_at(data, attempt).unwrap();
+        assert_eq!(res.abstain_reason.as_deref(), Some("speech-model-off"));
+        assert_eq!(res.matched, None);
+    }
+
+    #[test]
+    fn dictation_check_matches_spoken_target() {
+        use base64::Engine;
+        let Some(tmp) = dictation_vendor() else {
+            return;
+        };
+        let data = tmp.path();
+        let wav = std::fs::read(
+            data.join("packs/org.openlanguage.ja-demo")
+                .join(
+                    lts_langpack::archive::current_version(
+                        "org.openlanguage.ja-demo",
+                        &data.join("packs"),
+                    )
+                    .unwrap(),
+                )
+                .join("media/ja.lex.demo.obaasan.wav"),
+        )
+        .unwrap();
+        let res = dictation_check_at(
+            data,
+            DictationAttempt {
+                pack_id: "org.openlanguage.ja-demo".into(),
+                target_text: "おばあさん".into(),
+                wav_b64: base64::engine::general_purpose::STANDARD.encode(&wav),
+            },
+        )
+        .unwrap();
+        assert_eq!(res.abstain_reason, None, "got {:?}", res.abstain_reason);
+        assert_eq!(res.matched, Some(true), "heard {:?}", res.heard);
+    }
+
+    #[test]
+    fn dictation_check_flags_clear_mismatch() {
+        use base64::Engine;
+        let Some(tmp) = dictation_vendor() else {
+            return;
+        };
+        let data = tmp.path();
+        let wav = std::fs::read(
+            data.join("packs/org.openlanguage.ja-demo")
+                .join(
+                    lts_langpack::archive::current_version(
+                        "org.openlanguage.ja-demo",
+                        &data.join("packs"),
+                    )
+                    .unwrap(),
+                )
+                .join("media/ja.lex.demo.obaasan.wav"),
+        )
+        .unwrap();
+        let res = dictation_check_at(
+            data,
+            DictationAttempt {
+                pack_id: "org.openlanguage.ja-demo".into(),
+                target_text: "これは何ですか".into(),
+                wav_b64: base64::engine::general_purpose::STANDARD.encode(&wav),
+            },
+        )
+        .unwrap();
+        // Clear mismatch: heard おばあさん vs an unrelated target.
+        // Safety invariant: an unrelated target must never yield a match.
+        // (Whisper may abstain under parallel load, so assert "not a match",
+        // not a hard false verdict.)
+        assert_ne!(res.matched, Some(true), "heard {:?}", res.heard);
+    }
+
+    #[test]
+    fn dictation_check_abstains_on_silence() {
+        use base64::Engine;
+        let Some(tmp) = dictation_vendor() else {
+            return;
+        };
+        let data = tmp.path();
+        let silence = lts_speech_runtime::to_wav16(&lts_speech_api::AudioBuffer {
+            samples: vec![0.0f32; 8000],
+            sample_rate_hz: 16000,
+        });
+        let res = dictation_check_at(
+            data,
+            DictationAttempt {
+                pack_id: "org.openlanguage.ja-demo".into(),
+                target_text: "おばあさん".into(),
+                wav_b64: base64::engine::general_purpose::STANDARD.encode(&silence),
+            },
+        )
+        .unwrap();
+        assert_eq!(res.matched, None);
+        assert_eq!(res.abstain_reason.as_deref(), Some("quality:silence"));
+    }
+
+    #[test]
+    fn dictation_target_prefers_kana_only_and_rotates() {
+        let tmp = tempfile::TempDir::new().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let t = dictation_target_at(data, "org.openlanguage.ja-jp.reference", 0).unwrap();
+        assert!(!t.text.is_empty() && !t.reading.is_empty());
+        // Preferred candidates are kana-only: text and reading normalize equal.
+        assert_eq!(
+            normalize_for_match(&t.text),
+            normalize_for_match(&t.reading)
+        );
+        // Rotation is deterministic and wraps without panic.
+        let a0 = dictation_target_at(data, "org.openlanguage.ja-jp.reference", 0).unwrap();
+        let a0b = dictation_target_at(data, "org.openlanguage.ja-jp.reference", 0).unwrap();
+        assert_eq!(a0.id, a0b.id, "same offset is deterministic");
+        let b = dictation_target_at(data, "org.openlanguage.ja-jp.reference", 1).unwrap();
+        let big = dictation_target_at(data, "org.openlanguage.ja-jp.reference", 9999).unwrap();
+        assert!(
+            !b.id.is_empty() && !big.id.is_empty(),
+            "large offset wraps to a valid target"
+        );
     }
 
     #[test]
@@ -4778,7 +5377,7 @@ mod tests {
             .iter()
             .find(|e| e.modality == lts_domain::ActivityModality::ComprehensionListening)
             .expect("listening evidence recorded");
-        assert_eq!(listen.activity_id.as_str(), "ja.activity.demo.mc-listen");
+        assert_eq!(listen.activity_id.as_str(), "ja.lex.demo.konnichiwa");
         let rows = store.scheduler_state(&p.id).unwrap();
         assert!(
             rows.iter()

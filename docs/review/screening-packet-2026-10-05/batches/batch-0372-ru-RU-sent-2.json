@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-2",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.a1.u053",
+   "text": "Это расписание.",
+   "gloss": "This is a schedule."
+  },
+  {
+   "id": "ru.sent.a1.u054",
+   "text": "Это кофе.",
+   "gloss": "This is coffee."
+  },
+  {
+   "id": "ru.sent.a1.u055",
+   "text": "Это чай.",
+   "gloss": "This is tea."
+  },
+  {
+   "id": "ru.sent.a1.u056",
+   "text": "Это неделя.",
+   "gloss": "This is a week."
+  },
+  {
+   "id": "ru.sent.a1.u057",
+   "text": "Это обед.",
+   "gloss": "This is lunch."
+  },
+  {
+   "id": "ru.sent.a1.u060",
+   "text": "Это хлеб.",
+   "gloss": "This is bread."
+  },
+  {
+   "id": "ru.sent.a1.u061",
+   "text": "Это сок.",
+   "gloss": "This is juice."
+  },
+  {
+   "id": "ru.sent.a1.u062",
+   "text": "Это рыба.",
+   "gloss": "This is fish."
+  },
+  {
+   "id": "ru.sent.a1.u063",
+   "text": "Это суп.",
+   "gloss": "This is soup."
+  },
+  {
+   "id": "ru.sent.a1.u064",
+   "text": "Это яблоко.",
+   "gloss": "This is an apple."
+  },
+  {
+   "id": "ru.sent.a1.u065",
+   "text": "Это торт.",
+   "gloss": "This is a cake."
+  },
+  {
+   "id": "ru.sent.a1.u066",
+   "text": "Это яйцо.",
+   "gloss": "This is an egg."
+  },
+  {
+   "id": "ru.sent.a1.u067",
+   "text": "Это каша.",
+   "gloss": "This is porridge."
+  },
+  {
+   "id": "ru.sent.a1.u070",
+   "text": "Это продавец.",
+   "gloss": "This is the shop assistant."
+  },
+  {
+   "id": "ru.sent.a1.u071",
+   "text": "Это покупка.",
+   "gloss": "This is a purchase."
+  }
+ ]
+}

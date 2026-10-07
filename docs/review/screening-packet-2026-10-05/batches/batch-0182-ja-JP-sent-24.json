@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-24",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.wage-discussion",
+   "text": "ちんぎん の はなし を しました。",
+   "gloss": "I talked about wages."
+  },
+  {
+   "id": "ja.sent.startup-culture",
+   "text": "さいよう の じょうほう を みました。",
+   "gloss": "I looked at hiring information."
+  },
+  {
+   "id": "ja.sent.management-styles",
+   "text": "ぶちょう と ぎむ を はなしました。",
+   "gloss": "I discussed duties with the department head."
+  },
+  {
+   "id": "ja.sent.labor-rights",
+   "text": "てんしょく の けいかく を たてました。",
+   "gloss": "I made a plan to change jobs."
+  },
+  {
+   "id": "ja.sent.financial-literacy",
+   "text": "よきん の ちえき を べんきょう しました。",
+   "gloss": "I studied the benefits of deposits."
+  },
+  {
+   "id": "ja.sent.economic-history",
+   "text": "ぼえき の れきし を べんきょう しました。",
+   "gloss": "I studied the history of trade."
+  },
+  {
+   "id": "ja.sent.inequality-data",
+   "text": "かさ の データ を ぶんせき しました。",
+   "gloss": "I analyzed disparity data."
+  },
+  {
+   "id": "ja.sent.workplace-motivation",
+   "text": "けんしゅう で あたらしい じょうむ を おぼえました。",
+   "gloss": "I learned new duties at training."
+  },
+  {
+   "id": "ja.sent.globalization",
+   "text": "かんぜい の げんしょう を べんきょう しました。",
+   "gloss": "I studied the phenomenon of tariffs."
+  },
+  {
+   "id": "ja.sent.economic-debate",
+   "text": "ろんてん の しゅちょう を たしかめました。",
+   "gloss": "I checked the assertion about the point at issue."
+  },
+  {
+   "id": "ja.sent.legal-systems",
+   "text": "ほうりつ の せいど を べんきょう しました。",
+   "gloss": "I studied systems of law."
+  },
+  {
+   "id": "ja.sent.court-process",
+   "text": "さいばんしょ で じっけん を みました。",
+   "gloss": "I witnessed an experiment at the court."
+  },
+  {
+   "id": "ja.sent.contract-law",
+   "text": "うったえ の ないよう を よみました。",
+   "gloss": "I read the contents of the lawsuit."
+  },
+  {
+   "id": "ja.sent.criminal-justice",
+   "text": "はんざ の とくちょう を べんきょう しました。",
+   "gloss": "I studied characteristics of crime."
+  },
+  {
+   "id": "ja.sent.civil-rights",
+   "text": "ひがいしゃ の こと を ききました。",
+   "gloss": "I heard about the victim."
+  }
+ ]
+}

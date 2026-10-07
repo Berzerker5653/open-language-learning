@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-91",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.respect.vyderzhka",
+   "form": "выдержка",
+   "reading": "вы́держка",
+   "gloss": "patience",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.hladnokrovie",
+   "form": "хладнокровие",
+   "reading": "хладнокро́вие",
+   "gloss": "composure",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.respect.samoobladanie",
+   "form": "самообладание",
+   "reading": "самооблада́ние",
+   "gloss": "self-control",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.respect.terpimost",
+   "form": "терпимость",
+   "reading": "терпи́мость",
+   "gloss": "tolerance",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.ustupka",
+   "form": "уступка",
+   "reading": "усту́пка",
+   "gloss": "concession",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.dobrozhelatelnost",
+   "form": "доброжелательность",
+   "reading": "доброжела́тельность",
+   "gloss": "goodwill",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.vrazhdebnost",
+   "form": "враждебность",
+   "reading": "вражде́бность",
+   "gloss": "hostility",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.vrazhda",
+   "form": "вражда",
+   "reading": "вражда́",
+   "gloss": "enmity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.druzhelyubie",
+   "form": "дружелюбие",
+   "reading": "дружелю́бие",
+   "gloss": "friendliness",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.respect.otkrytost",
+   "form": "открытость",
+   "reading": "откры́тость",
+   "gloss": "openness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.zakrytost",
+   "form": "закрытость",
+   "reading": "закры́тость",
+   "gloss": "closedness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.respect.doverchivost",
+   "form": "доверчивость",
+   "reading": "дове́рчивость",
+   "gloss": "gullibility",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.noverie",
+   "form": "недоверие",
+   "reading": "недове́рие",
+   "gloss": "distrust",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.respect.podozritelost",
+   "form": "подозрительность",
+   "reading": "подозри́тельность",
+   "gloss": "suspiciousness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.ostorozhnost",
+   "form": "осторожность",
+   "reading": "осторо́жность",
+   "gloss": "caution",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.reshitelnost",
+   "form": "решительность",
+   "reading": "реши́тельность",
+   "gloss": "decisiveness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.nereshitelnost",
+   "form": "нерешительность",
+   "reading": "нереши́тельность",
+   "gloss": "indecisiveness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.kolebanie",
+   "form": "колебание",
+   "reading": "колеба́ние",
+   "gloss": "hesitation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.respect.promedlenie",
+   "form": "промедление",
+   "reading": "промедле́ние",
+   "gloss": "delay",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.respect.toroplivost",
+   "form": "торопливость",
+   "reading": "торопли́вость",
+   "gloss": "rashness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.pospeshnost",
+   "form": "поспешность",
+   "reading": "поспе́шность",
+   "gloss": "haste",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.vyvod2",
+   "form": "вывод",
+   "reading": "вы́вод",
+   "gloss": "conclusion",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.respect.mnenie2",
+   "form": "мнение",
+   "reading": "мне́ние",
+   "gloss": "opinion",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.respect.glas2",
+   "form": "глас",
+   "reading": "глас",
+   "gloss": "voice (public)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.respect.golosa2",
+   "form": "голоса",
+   "reading": "голоса́",
+   "gloss": "voices (pl)",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-22",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.critique.hakuriki",
+   "form": "はくりき",
+   "reading": "はくりき",
+   "gloss": "memory power",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.identity",
+   "form": "あいでんてぃてぃ",
+   "reading": "あいでんてぃてぃ",
+   "gloss": "identity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.shinzoku",
+   "form": "しんぞく",
+   "reading": "しんぞく",
+   "gloss": "relatives, kin",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.denkou",
+   "form": "でんこう",
+   "reading": "でんこう",
+   "gloss": "tradition, transmission",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.idai",
+   "form": "いだい",
+   "reading": "いだい",
+   "gloss": "great, grand",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.shuusei",
+   "form": "しゅうせい",
+   "reading": "しゅうせい",
+   "gloss": "correction, reform",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.kaizoku",
+   "form": "かいぞく",
+   "reading": "かいぞく",
+   "gloss": "belonging",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.juni",
+   "form": "じゅうに",
+   "reading": "じゅうに",
+   "gloss": "residence, living",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.rikken",
+   "form": "りっけん",
+   "reading": "りっけん",
+   "gloss": "recognition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.tango",
+   "form": "たんご",
+   "reading": "たんご",
+   "gloss": "term, vocabulary",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.kioku2",
+   "form": "きおく",
+   "reading": "きおく",
+   "gloss": "memory, record",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.juri2",
+   "form": "じゅり",
+   "reading": "じゅり",
+   "gloss": "acceptance, adoption",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.shiminkai",
+   "form": "しみんかい",
+   "reading": "しみんかい",
+   "gloss": "citizens' group",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.kaiso",
+   "form": "かいそ",
+   "reading": "かいそ",
+   "gloss": "consideration, deliberation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.tokucho",
+   "form": "とくちょう",
+   "reading": "とくちょう",
+   "gloss": "feature, characteristic",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.kouchi",
+   "form": "こうち",
+   "reading": "こうち",
+   "gloss": "will, motivation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.housou",
+   "form": "ほうそう",
+   "reading": "ほうそう",
+   "gloss": "broadcast",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.zatsu",
+   "form": "ざつ",
+   "reading": "ざつ",
+   "gloss": "miscellaneous",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.senzoku",
+   "form": "せんぞく",
+   "reading": "せんぞく",
+   "gloss": "ancestors",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.denshi",
+   "form": "でんし",
+   "reading": "でんし",
+   "gloss": "electronic, digital",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.media2",
+   "form": "めでぃあ",
+   "reading": "めでぃあ",
+   "gloss": "media",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.kiban",
+   "form": "きばん",
+   "reading": "きばん",
+   "gloss": "base, ground",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.kanko",
+   "form": "かんこ",
+   "reading": "かんこ",
+   "gloss": "tolerance, endurance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.tairi",
+   "form": "たいり",
+   "reading": "たいり",
+   "gloss": "endurance, patience",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult.tassei",
+   "form": "たっせい",
+   "reading": "たっせい",
+   "gloss": "achievement",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

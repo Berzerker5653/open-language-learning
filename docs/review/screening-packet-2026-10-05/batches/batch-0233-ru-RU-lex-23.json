@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-23",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.cult.integraciya",
+   "form": "интеграция",
+   "reading": "интегра́ция",
+   "gloss": "integration",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.soslovie",
+   "form": "сословие",
+   "reading": "сосло́вие",
+   "gloss": "estate, social class",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.aristokratiya",
+   "form": "аристократия",
+   "reading": "аристокра́тия",
+   "gloss": "aristocracy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.dvoryanstvo",
+   "form": "дворянство",
+   "reading": "дворя́нство",
+   "gloss": "nobility",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.krestyanstvo",
+   "form": "крестьянство",
+   "reading": "крестья́нство",
+   "gloss": "peasantry",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.kupec",
+   "form": "купец",
+   "reading": "купе́ц",
+   "gloss": "merchant",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.remeslennik",
+   "form": "ремесленник",
+   "reading": "реме́сленник",
+   "gloss": "artisan, craftsman",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.krepostnoy",
+   "form": "крепостной",
+   "reading": "крепостно́й",
+   "gloss": "serf (adj./noun)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.vosstanie",
+   "form": "восстание",
+   "reading": "восста́ние",
+   "gloss": "uprising, revolt",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.bunt",
+   "form": "бунт",
+   "reading": "бунт",
+   "gloss": "riot, rebellion",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.osada",
+   "form": "осада",
+   "reading": "оса́да",
+   "gloss": "siege",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.kampaniya",
+   "form": "кампания",
+   "reading": "кампа́ния",
+   "gloss": "campaign",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.tyl",
+   "form": "тыл",
+   "reading": "тыл",
+   "gloss": "home front, rear",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.okkupaciya",
+   "form": "оккупация",
+   "reading": "оккупа́ция",
+   "gloss": "occupation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.osvobozhdenie",
+   "form": "освобождение",
+   "reading": "освобожде́ние",
+   "gloss": "liberation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.nezavisimost",
+   "form": "независимость",
+   "reading": "незави́симость",
+   "gloss": "independence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.derzhava",
+   "form": "держава",
+   "reading": "держа́ва",
+   "gloss": "great power, state",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.prestol",
+   "form": "престол",
+   "reading": "престо́л",
+   "gloss": "throne",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.korona",
+   "form": "корона",
+   "reading": "коро́на",
+   "gloss": "crown",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.dinastiya",
+   "form": "династия",
+   "reading": "дина́стия",
+   "gloss": "dynasty",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.pravitel",
+   "form": "правитель",
+   "reading": "прави́тель",
+   "gloss": "ruler",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.monarh",
+   "form": "монарх",
+   "reading": "мона́рх",
+   "gloss": "monarch",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.konstituciya",
+   "form": "конституция",
+   "reading": "конститу́ция",
+   "gloss": "constitution",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.volnosti",
+   "form": "вольности",
+   "reading": "во́льности",
+   "gloss": "liberties, franchises",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.druzhina",
+   "form": "дружина",
+   "reading": "дружи́на",
+   "gloss": "retinue, druzhina",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

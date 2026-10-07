@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-23",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b1.u380",
+   "text": "Это различие.",
+   "gloss": "This is a difference."
+  },
+  {
+   "id": "ru.sent.b1.u381",
+   "text": "Это сходство.",
+   "gloss": "This is a similarity."
+  },
+  {
+   "id": "ru.sent.b1.u382",
+   "text": "Это отличие.",
+   "gloss": "This is a distinction."
+  },
+  {
+   "id": "ru.sent.b1.u383",
+   "text": "Это баланс.",
+   "gloss": "This is a balance."
+  },
+  {
+   "id": "ru.sent.b1.u384",
+   "text": "Это преимущество.",
+   "gloss": "This is an advantage."
+  },
+  {
+   "id": "ru.sent.b1.u385",
+   "text": "Это недостаток.",
+   "gloss": "This is a shortcoming."
+  },
+  {
+   "id": "ru.sent.b1.u386",
+   "text": "Это выгода.",
+   "gloss": "This is a benefit."
+  },
+  {
+   "id": "ru.sent.b1.u387",
+   "text": "Это репутация.",
+   "gloss": "This is a reputation."
+  },
+  {
+   "id": "ru.sent.b1.u388",
+   "text": "Это противоречие.",
+   "gloss": "This is a contradiction."
+  },
+  {
+   "id": "ru.sent.b1.u389",
+   "text": "Это испытание.",
+   "gloss": "This is a trial."
+  },
+  {
+   "id": "ru.sent.b1.u390",
+   "text": "Это запрос.",
+   "gloss": "This is a request."
+  },
+  {
+   "id": "ru.sent.b1.u391",
+   "text": "Это черновик.",
+   "gloss": "This is a draft."
+  },
+  {
+   "id": "ru.sent.b1.u392",
+   "text": "Это приложение.",
+   "gloss": "This is an attachment."
+  },
+  {
+   "id": "ru.sent.b1.u393",
+   "text": "Это уведомление.",
+   "gloss": "This is a notification."
+  },
+  {
+   "id": "ru.sent.b1.u394",
+   "text": "Это открытка.",
+   "gloss": "This is a postcard."
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-110",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.politics2.chousen",
+   "form": "ちょうせん",
+   "reading": "ちょうせん",
+   "gloss": "challenge",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.choushou",
+   "form": "ちょうしょう",
+   "reading": "ちょうしょう",
+   "gloss": "petition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.chouka",
+   "form": "ちょうか",
+   "reading": "ちょうか",
+   "gloss": "degradation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.chouan",
+   "form": "ちょうあん",
+   "reading": "ちょうあん",
+   "gloss": "long-term plan",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.hansen",
+   "form": "はんせん",
+   "reading": "はんせん",
+   "gloss": "rebellion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.koi",
+   "form": "こい",
+   "reading": "こい",
+   "gloss": "petition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.seimei",
+   "form": "せいめい",
+   "reading": "せいめい",
+   "gloss": "life",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.pronouns.watashi",
+   "form": "わたし",
+   "reading": "わたし",
+   "gloss": "I (polite neutral)",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.pronouns.watashitachi",
+   "form": "わたしたち",
+   "reading": "わたしたち",
+   "gloss": "we",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.pronouns.anata",
+   "form": "あなた",
+   "reading": "あなた",
+   "gloss": "you (direct address can feel blunt; names preferred)",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.pronouns.kare",
+   "form": "かれ",
+   "reading": "かれ",
+   "gloss": "he",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.pronouns.kanojo",
+   "form": "かのじょ",
+   "reading": "かのじょ",
+   "gloss": "she",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.pronouns.hito",
+   "form": "ひと",
+   "reading": "ひと",
+   "gloss": "person; people",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.pronouns.minna",
+   "form": "みんな",
+   "reading": "みんな",
+   "gloss": "everyone",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.pronouns.tomodachi",
+   "form": "ともだち",
+   "reading": "ともだち",
+   "gloss": "friend",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.pronouns.sensei",
+   "form": "せんせい",
+   "reading": "せんせい",
+   "gloss": "teacher (also used to address teachers)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.douki",
+   "form": "どうき",
+   "reading": "どうき",
+   "gloss": "motivation, impulse",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.mokuteki",
+   "form": "もくてき",
+   "reading": "もくてき",
+   "gloss": "goal, aim",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.yuuki",
+   "form": "ゆうき",
+   "reading": "ゆうき",
+   "gloss": "courage, nerve",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.riyuu2",
+   "form": "りゆう",
+   "reading": "りゆう",
+   "gloss": "reason",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.chikara",
+   "form": "ちから",
+   "reading": "ちから",
+   "gloss": "power, strength",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.kosei",
+   "form": "こせい",
+   "reading": "こせい",
+   "gloss": "individuality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.ansei",
+   "form": "あんせい",
+   "reading": "あんせい",
+   "gloss": "calmness, composure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.shoujiki",
+   "form": "しょうじき",
+   "reading": "しょうじき",
+   "gloss": "honest, frank",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.psych.kyoumi",
+   "form": "きょうみ",
+   "reading": "きょうみ",
+   "gloss": "interest, curiosity",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

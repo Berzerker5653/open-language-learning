@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-159",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.writing2.poyasnit",
+   "form": "пояснить",
+   "reading": "поясни́ть",
+   "gloss": "to explain",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.writing2.etalon",
+   "form": "эталон",
+   "reading": "этало́н",
+   "gloss": "standard",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing2.zakonomernost",
+   "form": "закономерность",
+   "reading": "закономе́рность",
+   "gloss": "regularity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.tendenciya",
+   "form": "тенденция",
+   "reading": "тенде́нция",
+   "gloss": "tendency",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.ritm",
+   "form": "ритм",
+   "reading": "ритм",
+   "gloss": "rhythm",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing2.zvuchanie",
+   "form": "звучание",
+   "reading": "звуча́ние",
+   "gloss": "sound",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.writing2.povtor",
+   "form": "повтор",
+   "reading": "повто́р",
+   "gloss": "repetition",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing2.klishe",
+   "form": "клише",
+   "reading": "клише́",
+   "gloss": "cliché",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.writing2.trafaret",
+   "form": "трафарет",
+   "reading": "трафаре́т",
+   "gloss": "stereotype",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing2.vodnyy",
+   "form": "вводный",
+   "reading": "вво́дный",
+   "gloss": "introductory",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.writing2.kultminaciya",
+   "form": "кульминация",
+   "reading": "кульмина́ция",
+   "gloss": "climax",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.zavyazka",
+   "form": "завязка",
+   "reading": "завя́зка",
+   "gloss": "opening",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.intriga",
+   "form": "интрига",
+   "reading": "интри́га",
+   "gloss": "intrigue",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.fabula",
+   "form": "фабула",
+   "reading": "фа́була",
+   "gloss": "fable, plot",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.geroy",
+   "form": "герой",
+   "reading": "геро́й",
+   "gloss": "hero",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing2.personazh",
+   "form": "персонаж",
+   "reading": "персона́ж",
+   "gloss": "character",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing2.prototip",
+   "form": "прототип",
+   "reading": "прототи́п",
+   "gloss": "prototype",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing2.dialog",
+   "form": "диалог",
+   "reading": "диало́г",
+   "gloss": "dialogue",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing2.monolog",
+   "form": "монолог",
+   "reading": "моноло́г",
+   "gloss": "monologue",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing2.replika",
+   "form": "реплика",
+   "reading": "ре́плика",
+   "gloss": "line, reply",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.pauza",
+   "form": "пауза",
+   "reading": "па́уза",
+   "gloss": "pause",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.satira",
+   "form": "сатира",
+   "reading": "сати́ра",
+   "gloss": "satire",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.basnya",
+   "form": "басня",
+   "reading": "ба́сня",
+   "gloss": "fable",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.pritcha",
+   "form": "притча",
+   "reading": "при́тча",
+   "gloss": "parable",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.skazka",
+   "form": "сказка",
+   "reading": "ска́зка",
+   "gloss": "fairy tale",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

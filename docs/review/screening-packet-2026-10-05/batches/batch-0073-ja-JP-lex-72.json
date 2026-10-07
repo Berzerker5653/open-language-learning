@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-72",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.history.hikaku",
+   "form": "ひかく",
+   "reading": "ひかく",
+   "gloss": "comparison",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.shinwa",
+   "form": "しんわ",
+   "reading": "しんわ",
+   "gloss": "myth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.sensou",
+   "form": "せんそう",
+   "reading": "せんそう",
+   "gloss": "war",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.kakumei",
+   "form": "かかくめい",
+   "reading": "かかくめい",
+   "gloss": "revolution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.joyaku",
+   "form": "じょうやく",
+   "reading": "じょうやく",
+   "gloss": "treaty",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.kenpou",
+   "form": "けんぽう",
+   "reading": "けんぽう",
+   "gloss": "constitution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.dekigoto",
+   "form": "できごと",
+   "reading": "できごと",
+   "gloss": "event",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.genin",
+   "form": "げんいん",
+   "reading": "げんいん",
+   "gloss": "cause",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.eikyou",
+   "form": "えいきょう",
+   "reading": "えいきょう",
+   "gloss": "influence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.kodai",
+   "form": "こだい",
+   "reading": "こだい",
+   "gloss": "ancient era",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.kindai",
+   "form": "きんたい",
+   "reading": "きんたい",
+   "gloss": "modern era",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history.hakubutsukan",
+   "form": "はくぶつかん",
+   "reading": "はくぶつかん",
+   "gloss": "museum",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.monument",
+   "form": "モニュメント",
+   "reading": "モニュメント",
+   "gloss": "monument",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.kinenbi",
+   "form": "きねんび",
+   "reading": "きねんび",
+   "gloss": "memorial",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.shouzou",
+   "form": "ぞうしょう",
+   "reading": "ぞうしょう",
+   "gloss": "statue",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.hoko",
+   "form": "ほこう",
+   "reading": "ほこう",
+   "gloss": "emblem, symbol",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.hyougeki",
+   "form": "ひょうげき",
+   "reading": "ひょうげき",
+   "gloss": "controversy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.sagitou",
+   "form": "ぎとう",
+   "reading": "ぎとう",
+   "gloss": "debate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.shiryoukan",
+   "form": "しりょうかん",
+   "reading": "しりょうかん",
+   "gloss": "archive",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.kanren",
+   "form": "かんれん",
+   "reading": "かんれん",
+   "gloss": "relation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.kousatsu",
+   "form": "こうさつ",
+   "reading": "こうさつ",
+   "gloss": "verification",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.teikyou",
+   "form": "ていきょう",
+   "reading": "ていきょう",
+   "gloss": "submission",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.hensen",
+   "form": "へんせん",
+   "reading": "へんせん",
+   "gloss": "revision",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.saikoutei",
+   "form": "さいこうてい",
+   "reading": "さいこうてい",
+   "gloss": "reassessment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.intabyuu",
+   "form": "インタビュー",
+   "reading": "インタビュー",
+   "gloss": "interview",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-20",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.critical4.nepravda",
+   "form": "неправда",
+   "reading": "непра́вда",
+   "gloss": "untruth",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.polupravda",
+   "form": "полуправда",
+   "reading": "полупра́вда",
+   "gloss": "half-truth",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.poverxnostnyy",
+   "form": "поверхностный",
+   "reading": "пове́рхностный",
+   "gloss": "superficial",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical4.glubokiy",
+   "form": "глубокий",
+   "reading": "глубо́кий",
+   "gloss": "deep",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical4.umozrittelnyy",
+   "form": "умозрительный",
+   "reading": "умозри́тельный",
+   "gloss": "speculative",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical4.empirika",
+   "form": "эмпирика",
+   "reading": "эмпи́рика",
+   "gloss": "empirics",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.empiricheskiy",
+   "form": "эмпирический",
+   "reading": "эмпири́ческий",
+   "gloss": "empirical",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical4.neodnoznachnyy",
+   "form": "неоднозначный",
+   "reading": "неоднозна́чный",
+   "gloss": "ambiguous",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical4.mnogoznachnost",
+   "form": "многозначность",
+   "reading": "многозна́чность",
+   "gloss": "polysemy, ambiguity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.neopredelennost",
+   "form": "неопределенность",
+   "reading": "неопределе́нность",
+   "gloss": "uncertainty",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.mnogoznachnyy",
+   "form": "многозначный",
+   "reading": "многозна́чный",
+   "gloss": "polysemous, multifaceted",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.otkrovenie",
+   "form": "откровение",
+   "reading": "открове́ние",
+   "gloss": "revelation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.novatorskiy",
+   "form": "новаторский",
+   "reading": "нова́торский",
+   "gloss": "innovative",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.novator",
+   "form": "новатор",
+   "reading": "нова́тор",
+   "gloss": "innovator",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.otzvuk",
+   "form": "отзвук",
+   "reading": "о́тзвук",
+   "gloss": "echo, reverberation",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.stilizaciya",
+   "form": "стилизация",
+   "reading": "стилиза́ция",
+   "gloss": "stylization",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.obraznost",
+   "form": "образность",
+   "reading": "о́бразность",
+   "gloss": "imagery",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.poetika",
+   "form": "поэтика",
+   "reading": "поэ́тика",
+   "gloss": "poetics",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.cenitel",
+   "form": "ценитель",
+   "reading": "цени́тель",
+   "gloss": "connoisseur",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.znatok",
+   "form": "знаток",
+   "reading": "знато́к",
+   "gloss": "expert, connoisseur",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.postmodern",
+   "form": "постмодерн",
+   "reading": "постмо́дерн",
+   "gloss": "postmodernism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.siurrealizm",
+   "form": "сюрреализм",
+   "reading": "сюрреали́зм",
+   "gloss": "surrealism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.siuzhetnyy",
+   "form": "сюжетный",
+   "reading": "сюже́тный",
+   "gloss": "plot (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.protagonist",
+   "form": "протагонист",
+   "reading": "протагони́ст",
+   "gloss": "protagonist",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.antigeroy",
+   "form": "антигерой",
+   "reading": "антиге́рой",
+   "gloss": "antihero",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

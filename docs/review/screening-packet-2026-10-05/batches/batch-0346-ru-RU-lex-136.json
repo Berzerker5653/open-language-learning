@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-136",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.synthesis.atribuciya",
+   "form": "атрибуция",
+   "reading": "атрибу́ция",
+   "gloss": "attribution",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.tsitirovanie",
+   "form": "цитирование",
+   "reading": "цити́рование",
+   "gloss": "quoting",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis.zaimstvovanie",
+   "form": "заимствование",
+   "reading": "заи́мствование",
+   "gloss": "borrowing",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis.doslovno",
+   "form": "дословно",
+   "reading": "до́словно",
+   "gloss": "verbatim",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis.svobodno",
+   "form": "свободно",
+   "reading": "свобо́дно",
+   "gloss": "freely",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis.blizko",
+   "form": "близко",
+   "reading": "бли́зко",
+   "gloss": "closely",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis.kalka",
+   "form": "калька",
+   "reading": "ка́лька",
+   "gloss": "calque, loan translation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.adaptaciya",
+   "form": "адаптация",
+   "reading": "адапта́ция",
+   "gloss": "adaptation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.inscenirovka",
+   "form": "инсценировка",
+   "reading": "инсцениро́вка",
+   "gloss": "staging",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.ekranizaciya",
+   "form": "экранизация",
+   "reading": "экраниза́ция",
+   "gloss": "screen adaptation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.perelozenie",
+   "form": "переложение",
+   "reading": "переложе́ние",
+   "gloss": "paraphrase, arrangement",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis.kompilyaciya",
+   "form": "компиляция",
+   "reading": "компиля́ция",
+   "gloss": "compilation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.referat",
+   "form": "реферат",
+   "reading": "рефера́т",
+   "gloss": "abstract, report",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis.epigraf",
+   "form": "эпиграф",
+   "reading": "эпи́граф",
+   "gloss": "epigraph",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis.dedikaciya",
+   "form": "дедикация",
+   "reading": "дедика́ция",
+   "gloss": "dedication",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.posvyashchenie",
+   "form": "посвящение",
+   "reading": "посвяще́ние",
+   "gloss": "dedication",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis.rashifrovka",
+   "form": "расшифровка",
+   "reading": "расшифро́вка",
+   "gloss": "decoding, transcript",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.stenogramma",
+   "form": "стенограмма",
+   "reading": "стеногра́мма",
+   "gloss": "transcript",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.diktor",
+   "form": "диктор",
+   "reading": "ди́ктор",
+   "gloss": "announcer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis.intonaciya",
+   "form": "интонация",
+   "reading": "интона́ция",
+   "gloss": "intonation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.temp",
+   "form": "темп",
+   "reading": "темп",
+   "gloss": "tempo",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis.melodika",
+   "form": "мелодика",
+   "reading": "мело́дика",
+   "gloss": "melody of speech",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.vyrazitelnost",
+   "form": "выразительность",
+   "reading": "вырази́тельность",
+   "gloss": "expressiveness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.bukvalnost",
+   "form": "буквальность",
+   "reading": "буква́льность",
+   "gloss": "literality",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.doslovnost",
+   "form": "дословность",
+   "reading": "досло́вность",
+   "gloss": "verbatimness",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

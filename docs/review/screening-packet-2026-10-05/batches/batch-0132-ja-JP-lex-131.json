@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-131",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.society4.kizuna",
+   "form": "きずな",
+   "reading": "きずな",
+   "gloss": "bond",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.kakushin",
+   "form": "かくしん",
+   "reading": "かくしん",
+   "gloss": "innovation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.fukkyuu",
+   "form": "ふっきゅう",
+   "reading": "ふっきゅう",
+   "gloss": "restoration, recovery",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.jichitsu",
+   "form": "じちつ",
+   "reading": "じちつ",
+   "gloss": "self-reliance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.kyousou",
+   "form": "きょうそう",
+   "reading": "きょうそう",
+   "gloss": "competition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.kyouchou",
+   "form": "きょうちょう",
+   "reading": "きょうちょう",
+   "gloss": "cooperation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.rentai",
+   "form": "れんたい",
+   "reading": "れんたい",
+   "gloss": "solidarity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.shigen",
+   "form": "しげん",
+   "reading": "しげん",
+   "gloss": "resource",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.saishi",
+   "form": "さいし",
+   "reading": "さいし",
+   "gloss": "recycling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.ene",
+   "form": "エネルギー",
+   "reading": "エネルギー",
+   "gloss": "energy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.kiki",
+   "form": "きき",
+   "reading": "きき",
+   "gloss": "crisis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.taisho",
+   "form": "たいさく",
+   "reading": "たいさく",
+   "gloss": "measure, countermeasure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.yosan",
+   "form": "よさん",
+   "reading": "よさん",
+   "gloss": "budget",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.aisan",
+   "form": "ざいし",
+   "reading": "ざいし",
+   "gloss": "allocation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.kurashi",
+   "form": "くらし",
+   "reading": "くらし",
+   "gloss": "living, daily life",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.shuumatsu",
+   "form": "しゅうまつ",
+   "reading": "しゅうまつ",
+   "gloss": "weekend",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.kozou",
+   "form": "こうぞう",
+   "reading": "こうぞう",
+   "gloss": "structure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.kaihyou",
+   "form": "きょう",
+   "reading": "きょう",
+   "gloss": "disappearance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.soutou",
+   "form": "びょうどう",
+   "reading": "びょうどう",
+   "gloss": "equality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.fukyu",
+   "form": "ふきゅう",
+   "reading": "ふきゅう",
+   "gloss": "inequality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.saisu",
+   "form": "さい",
+   "reading": "さい",
+   "gloss": "gap",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.kyousei",
+   "form": "きょうせい",
+   "reading": "きょうせい",
+   "gloss": "compulsory",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.jiyuu",
+   "form": "じゆう",
+   "reading": "じゆう",
+   "gloss": "freedom",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.kenri",
+   "form": "けんり",
+   "reading": "けんり",
+   "gloss": "right",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society4.gimu",
+   "form": "ぎむ",
+   "reading": "ぎむ",
+   "gloss": "duty",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

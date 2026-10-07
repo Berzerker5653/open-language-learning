@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-2",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.what-time",
+   "text": "いま なんじですか。",
+   "gloss": "What time is it now?"
+  },
+  {
+   "id": "ja.sent.three-oclock",
+   "text": "いま さんじです。",
+   "gloss": "It's three o'clock."
+  },
+  {
+   "id": "ja.sent.half-past",
+   "text": "さんじはんです。",
+   "gloss": "It's half past three."
+  },
+  {
+   "id": "ja.sent.today-monday",
+   "text": "きょうは げつようびです。",
+   "gloss": "Today is Monday."
+  },
+  {
+   "id": "ja.sent.tomorrow-tuesday",
+   "text": "あしたは かようびです。",
+   "gloss": "Tomorrow is Tuesday."
+  },
+  {
+   "id": "ja.sent.how-much",
+   "text": "いくらですか。",
+   "gloss": "How much is it?"
+  },
+  {
+   "id": "ja.sent.buy-bread",
+   "text": "パンを かいます。",
+   "gloss": "I buy bread."
+  },
+  {
+   "id": "ja.sent.hundred-yen",
+   "text": "ひゃくえんです。",
+   "gloss": "It's one hundred yen."
+  },
+  {
+   "id": "ja.sent.where-station",
+   "text": "えきは どこですか。",
+   "gloss": "Where is the station?"
+  },
+  {
+   "id": "ja.sent.here-it-is",
+   "text": "ここです。",
+   "gloss": "It's here."
+  },
+  {
+   "id": "ja.sent.weather-good",
+   "text": "きょうは てんきが いいです。",
+   "gloss": "Today the weather is good."
+  },
+  {
+   "id": "ja.sent.cold-tomorrow",
+   "text": "あしたは さむいです。",
+   "gloss": "Tomorrow will be cold."
+  },
+  {
+   "id": "ja.sent.eat-breakfast",
+   "text": "あさ、ごはんを たべます。",
+   "gloss": "In the morning, I eat rice."
+  },
+  {
+   "id": "ja.sent.wake-up",
+   "text": "まいにち じゅうじにおきます。",
+   "gloss": "I get up at ten every day."
+  },
+  {
+   "id": "ja.sent.rain-today",
+   "text": "きょうは あめです。",
+   "gloss": "Today it's rainy."
+  }
+ ]
+}

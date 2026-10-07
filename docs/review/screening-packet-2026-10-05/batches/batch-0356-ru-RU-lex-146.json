@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-146",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.travel.bilety",
+   "form": "билет",
+   "reading": "биле́т",
+   "gloss": "ticket",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.poezd",
+   "form": "поезд",
+   "reading": "по́езд",
+   "gloss": "train",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.samolyot",
+   "form": "самолёт",
+   "reading": "самоле́т",
+   "gloss": "airplane",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.avtobus",
+   "form": "автобус",
+   "reading": "авто́бус",
+   "gloss": "bus",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.tramvay",
+   "form": "трамвай",
+   "reading": "трамва́й",
+   "gloss": "tram",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.metro",
+   "form": "метро",
+   "reading": "метро́",
+   "gloss": "metro",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.travel.taksy",
+   "form": "такси",
+   "reading": "такси́",
+   "gloss": "taxi",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.travel.vagon",
+   "form": "вагон",
+   "reading": "ваго́н",
+   "gloss": "carriage, wagon",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.platforma",
+   "form": "платформа",
+   "reading": "платфо́рма",
+   "gloss": "platform",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel.vakzal",
+   "form": "вокзал",
+   "reading": "вокза́л",
+   "gloss": "station",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.arest",
+   "form": "аэропорт",
+   "reading": "аэропо́рт",
+   "gloss": "airport",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.peron",
+   "form": "перрон",
+   "reading": "перро́н",
+   "gloss": "platform",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.raspisanie",
+   "form": "расписание",
+   "reading": "расписа́ние",
+   "gloss": "schedule",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.travel.otpravlenie",
+   "form": "отправление",
+   "reading": "отправле́ние",
+   "gloss": "departure",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.travel.pribytie",
+   "form": "прибытие",
+   "reading": "прибы́тие",
+   "gloss": "arrival",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.travel.opozdanie",
+   "form": "опоздание",
+   "reading": "опозда́ние",
+   "gloss": "delay, lateness",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.travel.peresadka",
+   "form": "пересадка",
+   "reading": "переса́дка",
+   "gloss": "transfer",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel.marshrut",
+   "form": "маршрут",
+   "reading": "маршру́т",
+   "gloss": "route",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.travel.ostanovka",
+   "form": "остановка",
+   "reading": "остано́вка",
+   "gloss": "stop",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel.poezdka",
+   "form": "поездка",
+   "reading": "пое́здка",
+   "gloss": "trip",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel.puteshestvie",
+   "form": "путешествие",
+   "reading": "путеше́ствие",
+   "gloss": "journey",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.travel.putevka",
+   "form": "путёвка",
+   "reading": "путе́вка",
+   "gloss": "travel voucher",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.travel.bron",
+   "form": "бронь",
+   "reading": "бро́нь",
+   "gloss": "reservation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel.bronirovat",
+   "form": "бронировать",
+   "reading": "бронирова́ть",
+   "gloss": "to book, reserve",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.travel.kassa",
+   "form": "касса",
+   "reading": "ка́сса",
+   "gloss": "ticket office",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

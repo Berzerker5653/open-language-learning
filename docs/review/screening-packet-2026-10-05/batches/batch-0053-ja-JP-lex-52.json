@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-52",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.env4.sonohoka",
+   "form": "そのほか",
+   "reading": "そのほか",
+   "gloss": "others, the rest",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.chiiki",
+   "form": "ちいき",
+   "reading": "ちいき",
+   "gloss": "region, district",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.kankyou-mondai",
+   "form": "かんきょうもんだい",
+   "reading": "かんきょうもんだい",
+   "gloss": "environmental problem",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.seikatsu-fushuu",
+   "form": "せいかつふしゅう",
+   "reading": "せいかつふしゅう",
+   "gloss": "living expenses",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.kenso",
+   "form": "けんそ",
+   "reading": "けんそ",
+   "gloss": "modesty, humility",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.heiki",
+   "form": "へいき",
+   "reading": "へいき",
+   "gloss": "indifferent, unconcerned",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.ikou",
+   "form": "いこう",
+   "reading": "いこう",
+   "gloss": "conduct, behavior",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.yoho",
+   "form": "ようほう",
+   "reading": "ようほう",
+   "gloss": "method, way of doing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.keikai",
+   "form": "けいかい",
+   "reading": "けいかい",
+   "gloss": "alarm, vigilance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.yoka",
+   "form": "ようか",
+   "reading": "ようか",
+   "gloss": "effect, influence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.muda",
+   "form": "むだ",
+   "reading": "むだ",
+   "gloss": "futility, waste",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.hosei",
+   "form": "ほうせい",
+   "reading": "ほうせい",
+   "gloss": "regulation, correction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.koyou",
+   "form": "こよう",
+   "reading": "こよう",
+   "gloss": "employment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.unnei",
+   "form": "うんえい",
+   "reading": "うんえい",
+   "gloss": "operation, running",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.moto",
+   "form": "もと",
+   "reading": "もと",
+   "gloss": "origin, source",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.yueki",
+   "form": "ゆうえき",
+   "reading": "ゆうえき",
+   "gloss": "profit, benefit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.shouhi",
+   "form": "しょうひ",
+   "reading": "しょうひ",
+   "gloss": "consumption",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.kyougi",
+   "form": "きょうぎ",
+   "reading": "きょうぎ",
+   "gloss": "opposition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.tadashii",
+   "form": "ただしい",
+   "reading": "ただしい",
+   "gloss": "correct, just",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.kenpou",
+   "form": "けんぽう",
+   "reading": "けんぽう",
+   "gloss": "constitution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.kyotsuu",
+   "form": "きょうつう",
+   "reading": "きょうつう",
+   "gloss": "common, shared",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.shiji",
+   "form": "しじ",
+   "reading": "しじ",
+   "gloss": "support",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.kison",
+   "form": "きそん",
+   "reading": "きそん",
+   "gloss": "respect",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.gensoku",
+   "form": "げんそく",
+   "reading": "げんそく",
+   "gloss": "principle, rule",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.fuhou",
+   "form": "ふほう",
+   "reading": "ふほう",
+   "gloss": "unfairness",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

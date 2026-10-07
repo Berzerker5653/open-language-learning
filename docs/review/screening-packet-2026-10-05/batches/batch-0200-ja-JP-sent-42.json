@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-42",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.age-register",
+   "text": "わかもの と おとな の ことば は ちがいます。",
+   "gloss": "Young people's and adults' words differ."
+  },
+  {
+   "id": "ja.sent.gendered-language",
+   "text": "おんな と おとこ の はなしかた を べんきょう しました。",
+   "gloss": "I studied women's and men's ways of speaking."
+  },
+  {
+   "id": "ja.sent.business-register",
+   "text": "かいしゃ で めいし を つかいました。",
+   "gloss": "I used a business card at the company."
+  },
+  {
+   "id": "ja.sent.literary-register",
+   "text": "しょうせつ と し を よみました。",
+   "gloss": "I read a novel and a poem."
+  },
+  {
+   "id": "ja.sent.humor-register",
+   "text": "だじゃれ で みんな が わらいました。",
+   "gloss": "Everyone laughed at the pun."
+  },
+  {
+   "id": "ja.sent.style-imitation",
+   "text": "ぶんぽう を まね しました。",
+   "gloss": "I imitated the writing style."
+  },
+  {
+   "id": "ja.sent.pun-mechanics",
+   "text": "ことわざ を つかって だじゃれ を しました。",
+   "gloss": "I made a pun using a proverb."
+  },
+  {
+   "id": "ja.sent.comedy-timing",
+   "text": "まんざい の ま が じょうず です。",
+   "gloss": "The manzai pause is skillful."
+  },
+  {
+   "id": "ja.sent.satire-reading",
+   "text": "いなか の はなし を よみました。",
+   "gloss": "I read the countryside story."
+  },
+  {
+   "id": "ja.sent.irony-detection",
+   "text": "ほんとう の いみ は ちがう と きづきました。",
+   "gloss": "I noticed the real meaning differs."
+  },
+  {
+   "id": "ja.sent.wordplay-creation",
+   "text": "はし と はし を かけた だじゃれ を しました。",
+   "gloss": "I made a pun playing on hashi."
+  },
+  {
+   "id": "ja.sent.joke-ethics",
+   "text": "その ことば で みんな の わらい が さめました。",
+   "gloss": "The laughter cooled with those words."
+  },
+  {
+   "id": "ja.sent.manga-humor",
+   "text": "まんが の なか の ことば を べんきょう しました。",
+   "gloss": "I studied the words inside the manga."
+  },
+  {
+   "id": "ja.sent.comic-reading",
+   "text": "よんこま を さんまい よみました。",
+   "gloss": "I read three four-panel comics."
+  },
+  {
+   "id": "ja.sent.humor-translation",
+   "text": "だじゃれ を えいご に する のは むずかしいです。",
+   "gloss": "Turning puns into English is hard."
+  }
+ ]
+}

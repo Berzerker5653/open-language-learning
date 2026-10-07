@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-8",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.check-price",
+   "text": "しょうひょうを みます。",
+   "gloss": "I check the price tag."
+  },
+  {
+   "id": "ja.sent.on-sale",
+   "text": "この ふくは さいです。",
+   "gloss": "These clothes are on sale."
+  },
+  {
+   "id": "ja.sent.try-jacket",
+   "text": "じゃけっとを きて みます。",
+   "gloss": "I try on the jacket."
+  },
+  {
+   "id": "ja.sent.pay-points",
+   "text": "ポイントで はらいます。",
+   "gloss": "I pay with points."
+  },
+  {
+   "id": "ja.sent.get-receipt",
+   "text": "レシートを ください。",
+   "gloss": "Please give me the receipt."
+  },
+  {
+   "id": "ja.sent.fold-shirt",
+   "text": "わいしゃつを たたみます。",
+   "gloss": "I fold the shirt."
+  },
+  {
+   "id": "ja.sent.check-temp",
+   "text": "たいおんを はかります。",
+   "gloss": "I take my temperature."
+  },
+  {
+   "id": "ja.sent.describe-symptom",
+   "text": "きょう、せなかか いたいです。",
+   "gloss": "Today my back hurts."
+  },
+  {
+   "id": "ja.sent.take-prevention",
+   "text": "よげんのために たikuを します。",
+   "gloss": "I exercise for prevention."
+  },
+  {
+   "id": "ja.sent.sleep-well",
+   "text": "よく ねむると げんきに なります。",
+   "gloss": "If you sleep well, you feel well."
+  },
+  {
+   "id": "ja.sent.health-check",
+   "text": "まいねん 1ど けんしんを します。",
+   "gloss": "I get a check-up once a year."
+  },
+  {
+   "id": "ja.sent.insomnia",
+   "text": "さいきん ふみんです。",
+   "gloss": "I have insomnia lately."
+  },
+  {
+   "id": "ja.sent.cured",
+   "text": "もう ぜんぜん だいじょうぶ、なおりました。",
+   "gloss": "I am all right now, cured."
+  },
+  {
+   "id": "ja.sent.manage-sleep",
+   "text": "すいみんを かんりします。",
+   "gloss": "I manage my sleep."
+  },
+  {
+   "id": "ja.sent.call-friend",
+   "text": "ともだちに でんわを かけます。",
+   "gloss": "I call a friend."
+  }
+ ]
+}

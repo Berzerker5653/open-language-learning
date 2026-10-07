@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-28",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.culture2.kijutsu",
+   "form": "きじゅつ",
+   "reading": "きじゅつ",
+   "gloss": "description",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.hyoka",
+   "form": "ひょうか",
+   "reading": "ひょうか",
+   "gloss": "evaluation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.hiyou",
+   "form": "ひよう",
+   "reading": "ひよう",
+   "gloss": "cost",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.yoto",
+   "form": "よとう",
+   "reading": "よとう",
+   "gloss": "party",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.yuryo",
+   "form": "ゆうりょう",
+   "reading": "ゆうりょう",
+   "gloss": "excellent",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.koryo",
+   "form": "こうりょう",
+   "reading": "こうりょう",
+   "gloss": "talented",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.kansa",
+   "form": "かんさ",
+   "reading": "かんさ",
+   "gloss": "observation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.kenko",
+   "form": "けんこう",
+   "reading": "けんこう",
+   "gloss": "healthy",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.kenkyu",
+   "form": "けんきゅう",
+   "reading": "けんきゅう",
+   "gloss": "study",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.kento",
+   "form": "けんと",
+   "reading": "けんと",
+   "gloss": "hardship",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.kaishaku",
+   "form": "かいしゃく",
+   "reading": "かいしゃく",
+   "gloss": "interpretation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.jundo",
+   "form": "じゅんどう",
+   "reading": "じゅんどう",
+   "gloss": "order",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.rankingu",
+   "form": "ランキング",
+   "reading": "ランキング",
+   "gloss": "ranking",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.jissai",
+   "form": "じつさい",
+   "reading": "じつさい",
+   "gloss": "facts",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.shojitsu",
+   "form": "しょうじつ",
+   "reading": "しょうじつ",
+   "gloss": "truth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.kenbutsu",
+   "form": "けんぶつ",
+   "reading": "けんぶつ",
+   "gloss": "sightseeing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.ronsou",
+   "form": "そうさう",
+   "reading": "そうさう",
+   "gloss": "discussion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.hifun",
+   "form": "ひふん",
+   "reading": "ひふん",
+   "gloss": "criticism",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.fusan",
+   "form": "ふさん",
+   "reading": "ふさん",
+   "gloss": "negation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.jiyu",
+   "form": "じゆう",
+   "reading": "じゆう",
+   "gloss": "free",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.kiso",
+   "form": "きそ",
+   "reading": "きそ",
+   "gloss": "base",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.yuui",
+   "form": "ゆうい",
+   "reading": "ゆうい",
+   "gloss": "superiority",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.retsu",
+   "form": "れつ",
+   "reading": "れつ",
+   "gloss": "row",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.joretsu",
+   "form": "じょれつ",
+   "reading": "じょれつ",
+   "gloss": "inferior",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.saikou",
+   "form": "さいこう",
+   "reading": "さいこう",
+   "gloss": "highest",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

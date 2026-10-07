@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-39",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.future.nemedlenno",
+   "form": "немедленно",
+   "reading": "неме́дленно",
+   "gloss": "immediately",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.pozhe",
+   "form": "позже",
+   "reading": "по́зже",
+   "gloss": "later",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.inache",
+   "form": "иначе",
+   "reading": "и́на́че",
+   "gloss": "otherwise",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.povliyaet",
+   "form": "повлияет",
+   "reading": "повли́яет",
+   "gloss": "will affect",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.zapret",
+   "form": "запрет",
+   "reading": "запре́т",
+   "gloss": "prohibition",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.future.nakazanie",
+   "form": "наказание",
+   "reading": "наказа́ние",
+   "gloss": "punishment",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future.poterya",
+   "form": "потеря",
+   "reading": "поте́ря",
+   "gloss": "loss",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future.sledstvie",
+   "form": "следствие",
+   "reading": "сле́дствие",
+   "gloss": "consequence",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future.deystvie",
+   "form": "действие",
+   "reading": "де́йствие",
+   "gloss": "action",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future.izmenitsya",
+   "form": "изменится",
+   "reading": "изме́нится",
+   "gloss": "will change",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.uluchshitsya",
+   "form": "улучшится",
+   "reading": "улу́чшится",
+   "gloss": "will improve",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.ukhudshitsya",
+   "form": "ухудшится",
+   "reading": "уху́дшится",
+   "gloss": "will worsen",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.udastsya",
+   "form": "удастся",
+   "reading": "уда́стся",
+   "gloss": "will succeed",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.poluchitsya",
+   "form": "получится",
+   "reading": "полу́чится",
+   "gloss": "will work out",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.sluchitsya",
+   "form": "случится",
+   "reading": "слу́чится",
+   "gloss": "will happen",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.zavisit",
+   "form": "зависит",
+   "reading": "за́висит",
+   "gloss": "depends",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.prepyatstvie",
+   "form": "препятствие",
+   "reading": "препя́тствие",
+   "gloss": "obstacle",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future.pomexa",
+   "form": "помеха",
+   "reading": "поме́ха",
+   "gloss": "interference",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future.pomozhet",
+   "form": "поможет",
+   "reading": "по́может",
+   "gloss": "will help",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.pomeshaet",
+   "form": "помешает",
+   "reading": "поме́шает",
+   "gloss": "will hinder",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.soglashenie",
+   "form": "соглашение",
+   "reading": "соглаше́ние",
+   "gloss": "agreement",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future.bespokoystvo",
+   "form": "беспокойство",
+   "reading": "беспоко́йство",
+   "gloss": "anxiety",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future.obman",
+   "form": "обман",
+   "reading": "обма́н",
+   "gloss": "deception",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.future.svedeniya",
+   "form": "сведения",
+   "reading": "све́дения",
+   "gloss": "information",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.sobiraetsya",
+   "form": "собирается",
+   "reading": "собира́ется",
+   "gloss": "intends to",
+   "pos": "verb",
+   "gender": ""
+  }
+ ]
+}

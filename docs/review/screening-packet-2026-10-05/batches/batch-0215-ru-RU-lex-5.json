@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-5",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.argue3.sovmestno2",
+   "form": "совсем",
+   "reading": "совсе́м",
+   "gloss": "completely",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.absolyutno",
+   "form": "абсолютно",
+   "reading": "абсолю́тно",
+   "gloss": "absolutely",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.ischerpyayushche",
+   "form": "исчерпывающе",
+   "reading": "исчерпыва́юще",
+   "gloss": "exhaustively",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.ischerpat",
+   "form": "исчерпать",
+   "reading": "исче́рпать",
+   "gloss": "to exhaust",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.remarka",
+   "form": "ремарка",
+   "reading": "рема́рка",
+   "gloss": "remark, stage direction",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue3.nedoskazannost",
+   "form": "недосказанность",
+   "reading": "недоска́занность",
+   "gloss": "understatement",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue3.nedomolvka",
+   "form": "недомолвка",
+   "reading": "недомо́лвка",
+   "gloss": "omission, hint",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue3.evfemizm",
+   "form": "эвфемизм",
+   "reading": "эвфеми́зм",
+   "gloss": "euphemism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue3.tabu",
+   "form": "табу",
+   "reading": "табу́",
+   "gloss": "taboo",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue3.cenzura",
+   "form": "цензура",
+   "reading": "цензу́ра",
+   "gloss": "censorship",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue3.korrektura",
+   "form": "корректура",
+   "reading": "корректу́ра",
+   "gloss": "proofreading",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue3.vjorstka",
+   "form": "вёрстка",
+   "reading": "ве́рстка",
+   "gloss": "layout",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue3.nabor",
+   "form": "набор",
+   "reading": "набо́р",
+   "gloss": "typesetting, set",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue3.tirazh",
+   "form": "тираж",
+   "reading": "тира́ж",
+   "gloss": "print run",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue3.izdanie",
+   "form": "издание",
+   "reading": "изда́ние",
+   "gloss": "edition, publication",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue3.izdatelstvo",
+   "form": "издательство",
+   "reading": "изда́тельство",
+   "gloss": "publisher",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue3.razmetka",
+   "form": "разметка",
+   "reading": "разме́тка",
+   "gloss": "markup",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue3.kavychki",
+   "form": "кавычки",
+   "reading": "кавы́чки",
+   "gloss": "quotation marks",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue3.tire",
+   "form": "тире",
+   "reading": "тире́",
+   "gloss": "dash",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue3.dvoetochie",
+   "form": "двоеточие",
+   "reading": "двоето́чие",
+   "gloss": "colon",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue3.mnogotochie",
+   "form": "многоточие",
+   "reading": "многото́чие",
+   "gloss": "ellipsis",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue3.skobka",
+   "form": "скобка",
+   "reading": "ско́бка",
+   "gloss": "bracket",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue3.defis",
+   "form": "дефис",
+   "reading": "дефи́с",
+   "gloss": "hyphen",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue3.perenos",
+   "form": "перенос",
+   "reading": "перено́с",
+   "gloss": "line break, transfer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue3.sochetanie",
+   "form": "сочетание",
+   "reading": "сочета́ние",
+   "gloss": "combination",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

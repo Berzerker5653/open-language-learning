@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-37",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.medical-research",
+   "text": "いやく の じっけん の けっか を よみました。",
+   "gloss": "I read the results of the drug trial."
+  },
+  {
+   "id": "ja.sent.mental-health-services",
+   "text": "いりょう の そうだん を しました。",
+   "gloss": "I had a medical consultation."
+  },
+  {
+   "id": "ja.sent.aging-medicine",
+   "text": "かいご の げんじょう を はなしました。",
+   "gloss": "We talked about the state of caregiving."
+  },
+  {
+   "id": "ja.sent.nutrition-science",
+   "text": "えいよう の べんきょう を しました。",
+   "gloss": "I studied nutrition."
+  },
+  {
+   "id": "ja.sent.health-inequality",
+   "text": "かくさ の もんだい を ぎろん しました。",
+   "gloss": "We discussed the disparity problem."
+  },
+  {
+   "id": "ja.sent.digital-medicine",
+   "text": "おんらいん の ちりょう を べんきょう しました。",
+   "gloss": "I studied online treatment."
+  },
+  {
+   "id": "ja.sent.ethics-debate",
+   "text": "りんり の ぎろん を べんきょう しました。",
+   "gloss": "I studied the ethics debate."
+  },
+  {
+   "id": "ja.sent.pandemic-lessons",
+   "text": "ぱんでみっく の きょうくん を はなしました。",
+   "gloss": "We talked about pandemic lessons."
+  },
+  {
+   "id": "ja.sent.city-planning",
+   "text": "とし けいかく について はなしました。",
+   "gloss": "We talked about city planning."
+  },
+  {
+   "id": "ja.sent.housing-policy",
+   "text": "じゅうみん の ぎろん を ききました。",
+   "gloss": "I listened to the residents' debate."
+  },
+  {
+   "id": "ja.sent.public-spaces",
+   "text": "ひろば の けいかく を べんきょう しました。",
+   "gloss": "I studied the plaza plan."
+  },
+  {
+   "id": "ja.sent.urban-economy",
+   "text": "しょうてん の げんじょう を はなしました。",
+   "gloss": "We talked about the state of shops."
+  },
+  {
+   "id": "ja.sent.green-urban",
+   "text": "みらい の みどり を ぎろん しました。",
+   "gloss": "We discussed future greenery."
+  },
+  {
+   "id": "ja.sent.urban-community",
+   "text": "じちかい の かいごう に いきました。",
+   "gloss": "I went to the neighborhood meeting."
+  },
+  {
+   "id": "ja.sent.city-history",
+   "text": "しりょう を みながら れきし を よみました。",
+   "gloss": "I read history while looking at materials."
+  }
+ ]
+}

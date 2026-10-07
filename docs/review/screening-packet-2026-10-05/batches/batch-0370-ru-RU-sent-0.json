@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-0",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.on-ramp.farewell",
+   "text": "До свидания!",
+   "gloss": "Goodbye!"
+  },
+  {
+   "id": "ru.sent.on-ramp.anna-introduction",
+   "text": "Я Анна.",
+   "gloss": "I am Anna."
+  },
+  {
+   "id": "ru.sent.on-ramp.read-please",
+   "text": "Читайте, пожалуйста.",
+   "gloss": "Please read."
+  },
+  {
+   "id": "ru.sent.on-ramp.repeat-please",
+   "text": "Повторите, пожалуйста.",
+   "gloss": "Please repeat."
+  },
+  {
+   "id": "ru.sent.on-ramp.this-is-book",
+   "text": "Это книга.",
+   "gloss": "This is a book."
+  },
+  {
+   "id": "ru.sent.on-ramp.this-is-zero",
+   "text": "Это ноль.",
+   "gloss": "This is zero."
+  },
+  {
+   "id": "ru.sent.on-ramp.this-is-five",
+   "text": "Это пять.",
+   "gloss": "This is five."
+  },
+  {
+   "id": "ru.sent.a1.u026",
+   "text": "Мария из Италии.",
+   "gloss": "Maria is from Italy."
+  },
+  {
+   "id": "ru.sent.a1.u027",
+   "text": "Мне двадцать лет.",
+   "gloss": "I am twenty years old."
+  },
+  {
+   "id": "ru.sent.a1.u028",
+   "text": "Это адрес школы.",
+   "gloss": "This is the school's address."
+  },
+  {
+   "id": "ru.sent.a1.u029",
+   "text": "Я студентка из Франции.",
+   "gloss": "I am a university student from France. (Female speaker.)"
+  },
+  {
+   "id": "ru.sent.a1.u030",
+   "text": "Это семья.",
+   "gloss": "This is a family."
+  },
+  {
+   "id": "ru.sent.a1.u031",
+   "text": "Это отец.",
+   "gloss": "This is father."
+  },
+  {
+   "id": "ru.sent.a1.u032",
+   "text": "Это ребёнок.",
+   "gloss": "This is a child."
+  },
+  {
+   "id": "ru.sent.a1.u033",
+   "text": "Это знакомый.",
+   "gloss": "This is an acquaintance."
+  }
+ ]
+}

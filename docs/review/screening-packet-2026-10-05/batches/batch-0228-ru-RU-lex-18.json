@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-18",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.critical3.reglament",
+   "form": "регламент",
+   "reading": "регла́мент",
+   "gloss": "regulations",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.metodichka",
+   "form": "методичка",
+   "reading": "методи́чка",
+   "gloss": "guidebook",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical3.posobie",
+   "form": "пособие",
+   "reading": "посо́бие",
+   "gloss": "manual, handbook",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical3.uchebnik",
+   "form": "учебник",
+   "reading": "уче́бник",
+   "gloss": "textbook",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.spravochnik",
+   "form": "справочник",
+   "reading": "спра́вочник",
+   "gloss": "reference book",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.atlas",
+   "form": "атлас",
+   "reading": "атла́с",
+   "gloss": "atlas",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.enciklopediya",
+   "form": "энциклопедия",
+   "reading": "энциклопе́дия",
+   "gloss": "encyclopedia",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical3.katalog",
+   "form": "каталог",
+   "reading": "катало́г",
+   "gloss": "catalog",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.fond",
+   "form": "фонд",
+   "reading": "фонд",
+   "gloss": "archive fund",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical3.protokol",
+   "form": "протокол",
+   "reading": "протоко́л",
+   "gloss": "protocol, minutes",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical4.umozakljuchenie",
+   "form": "умозаключение",
+   "reading": "умозаключе́ние",
+   "gloss": "inference, syllogism",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical4.indukciya",
+   "form": "индукция",
+   "reading": "инду́кция",
+   "gloss": "induction",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.dedukciya",
+   "form": "дедукция",
+   "reading": "деду́кция",
+   "gloss": "deduction",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.sillogizm",
+   "form": "силлогизм",
+   "reading": "силлоги́зм",
+   "gloss": "syllogism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical4.nelepica",
+   "form": "нелепица",
+   "reading": "неле́пица",
+   "gloss": "nonsense",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.chush",
+   "form": "чушь",
+   "reading": "чушь",
+   "gloss": "nonsense, drivel",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.vzdor",
+   "form": "вздор",
+   "reading": "вздор",
+   "gloss": "nonsense",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical4.bred",
+   "form": "бред",
+   "reading": "бред",
+   "gloss": "delusion, ravings",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical4.zabluzhdenie",
+   "form": "заблуждение",
+   "reading": "заблужде́ние",
+   "gloss": "misconception",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical4.samooobman",
+   "form": "самообман",
+   "reading": "самообма́н",
+   "gloss": "self-deception",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical4.yarklyk",
+   "form": "ярлык",
+   "reading": "ярлы́к",
+   "gloss": "label, tag",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical4.nakleyka",
+   "form": "наклейка",
+   "reading": "накле́йка",
+   "gloss": "sticker, label",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.kontrdovod",
+   "form": "контрдовод",
+   "reading": "контрдо́вод",
+   "gloss": "counter-reason",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical4.traktovka",
+   "form": "трактовка",
+   "reading": "тракто́вка",
+   "gloss": "interpretation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical4.prochtenie",
+   "form": "прочтение",
+   "reading": "прочте́ние",
+   "gloss": "reading, interpretation",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

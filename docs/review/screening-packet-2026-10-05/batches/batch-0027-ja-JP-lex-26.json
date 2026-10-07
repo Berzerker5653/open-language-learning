@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-26",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.culture.kanko",
+   "form": "かんこう",
+   "reading": "かんこう",
+   "gloss": "sightseeing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.koryu",
+   "form": "こうりゅう",
+   "reading": "こうりゅう",
+   "gloss": "exchange",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.fuhaku",
+   "form": "ふはく",
+   "reading": "ふはく",
+   "gloss": "exhibition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.bijutsukan",
+   "form": "びじゅつかん",
+   "reading": "びじゅつかん",
+   "gloss": "art museum",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.kankyaku",
+   "form": "かんきゃく",
+   "reading": "かんきゃく",
+   "gloss": "audience",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.chihou",
+   "form": "ちほう",
+   "reading": "ちほう",
+   "gloss": "region",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.tenjikai",
+   "form": "てんじかい",
+   "reading": "てんじかい",
+   "gloss": "exhibition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.tenji-butsu",
+   "form": "てんじぶつ",
+   "reading": "てんじぶつ",
+   "gloss": "exhibit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.guide",
+   "form": "ガイド",
+   "reading": "ガイド",
+   "gloss": "guide",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.nyujou",
+   "form": "にゅうじょう",
+   "reading": "にゅうじょう",
+   "gloss": "admission",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.rekishi",
+   "form": "れきし",
+   "reading": "れきし",
+   "gloss": "history",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.iseki",
+   "form": "いせき",
+   "reading": "いせき",
+   "gloss": "ruins",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.shiseki",
+   "form": "しせき",
+   "reading": "しせき",
+   "gloss": "historic site",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.shaji",
+   "form": "しゃじ",
+   "reading": "しゃじ",
+   "gloss": "castle",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.jinja",
+   "form": "じんじゃ",
+   "reading": "じんじゃ",
+   "gloss": "shrine",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.tera",
+   "form": "てら",
+   "reading": "てら",
+   "gloss": "temple",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.katei",
+   "form": "かてい",
+   "reading": "かてい",
+   "gloss": "family",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.sandai",
+   "form": "さんだい",
+   "reading": "さんだい",
+   "gloss": "three generations",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.denkyou",
+   "form": "でんきょう",
+   "reading": "でんきょう",
+   "gloss": "inheritance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.youraku",
+   "form": "ようやく",
+   "reading": "ようやく",
+   "gloss": "summary; synopsis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.hokori",
+   "form": "ほこり",
+   "reading": "ほこり",
+   "gloss": "pride",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.kachi",
+   "form": "かち",
+   "reading": "かち",
+   "gloss": "value",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.tsuuke",
+   "form": "つうかく",
+   "reading": "つうかく",
+   "gloss": "fluency",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.minyo",
+   "form": "みんよう",
+   "reading": "みんよう",
+   "gloss": "folk song",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.culture.shasei",
+   "form": "しゃせい",
+   "reading": "しゃせい",
+   "gloss": "sketch",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

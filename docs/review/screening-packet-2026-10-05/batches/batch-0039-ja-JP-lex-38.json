@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-38",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.edu2.jikan-wari",
+   "form": "じかんわり",
+   "reading": "じかんわり",
+   "gloss": "time allocation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.yosoku",
+   "form": "よそく",
+   "reading": "よそく",
+   "gloss": "prediction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.jouhou",
+   "form": "じょうほう",
+   "reading": "じょうほう",
+   "gloss": "information",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.kenta",
+   "form": "けんた",
+   "reading": "けんた",
+   "gloss": "consideration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.houtei",
+   "form": "ほうてい",
+   "reading": "ほうてい",
+   "gloss": "definition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.teigi",
+   "form": "ていぎ",
+   "reading": "ていぎ",
+   "gloss": "definition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.senkyuu",
+   "form": "せんきゅう",
+   "reading": "せんきゅう",
+   "gloss": "area; region",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.bunya",
+   "form": "ぶんや",
+   "reading": "ぶんや",
+   "gloss": "field of study",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.gengou",
+   "form": "げんごう",
+   "reading": "げんごう",
+   "gloss": "word combination",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.taiwa",
+   "form": "たいわ",
+   "reading": "たいわ",
+   "gloss": "dialogue",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.yakku",
+   "form": "やっく",
+   "reading": "やっく",
+   "gloss": "dictionary",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.yakuseki",
+   "form": "やくせき",
+   "reading": "やくせき",
+   "gloss": "translation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.chukai",
+   "form": "ちゅうかい",
+   "reading": "ちゅうかい",
+   "gloss": "interpretation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.hyouji",
+   "form": "ひょうじ",
+   "reading": "ひょうじ",
+   "gloss": "display; presentation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.fuyuujunou",
+   "form": "ふゆうじゅんのう",
+   "reading": "ふゆうじゅんのう",
+   "gloss": "popularization",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.koyou",
+   "form": "こよう",
+   "reading": "こよう",
+   "gloss": "employment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.jitsumu",
+   "form": "じつむ",
+   "reading": "じつむ",
+   "gloss": "practical work",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.jikken",
+   "form": "じっけん",
+   "reading": "じっけん",
+   "gloss": "experiment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.houkoku",
+   "form": "ほうこく",
+   "reading": "ほうこく",
+   "gloss": "report; presentation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.chushi",
+   "form": "ちゅうし",
+   "reading": "ちゅうし",
+   "gloss": "note; annotation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.kyoushi",
+   "form": "きょうし",
+   "reading": "きょうし",
+   "gloss": "teacher",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.gakusei",
+   "form": "がくせい",
+   "reading": "がくせい",
+   "gloss": "student",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.kyoshitsu",
+   "form": "きょうしつ",
+   "reading": "きょうしつ",
+   "gloss": "classroom",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.kyokugaku",
+   "form": "きょういくがく",
+   "reading": "きょういくがく",
+   "gloss": "pedagogy, education studies",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.seiseki",
+   "form": "せいせき",
+   "reading": "せいせき",
+   "gloss": "grades, results",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-117",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.rel1.ketsui",
+   "form": "けつい",
+   "reading": "けつい",
+   "gloss": "decision",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.kangeki",
+   "form": "かんげき",
+   "reading": "かんげき",
+   "gloss": "emotion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.kansha",
+   "form": "かんしゃ",
+   "reading": "かんしゃ",
+   "gloss": "gratitude",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.hangeki",
+   "form": "はんげき",
+   "reading": "はんげき",
+   "gloss": "revenge",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.fuman",
+   "form": "ふまん",
+   "reading": "ふまん",
+   "gloss": "discontent",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.shikin",
+   "form": "しきん",
+   "reading": "しきん",
+   "gloss": "funds",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.yuuai",
+   "form": "ゆうあい",
+   "reading": "ゆうあい",
+   "gloss": "friendship",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.yujo",
+   "form": "ゆうじょう",
+   "reading": "ゆうじょう",
+   "gloss": "friendship",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.rikai",
+   "form": "りかい",
+   "reading": "りかい",
+   "gloss": "understanding",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.takai",
+   "form": "たかい",
+   "reading": "たかい",
+   "gloss": "high, expensive",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.kankei3",
+   "form": "かんけい",
+   "reading": "かんけい",
+   "gloss": "relationship",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.yuuutsu",
+   "form": "ゆううつ",
+   "reading": "ゆううつ",
+   "gloss": "dejected",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.hankan",
+   "form": "はんかん",
+   "reading": "はんかん",
+   "gloss": "regret",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.fukki",
+   "form": "ふっき",
+   "reading": "ふっき",
+   "gloss": "resolution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.kesshin",
+   "form": "けっしん",
+   "reading": "けっしん",
+   "gloss": "determination",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.akirame",
+   "form": "あきらめ",
+   "reading": "あきらめ",
+   "gloss": "resignation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.tsuige",
+   "form": "つげ",
+   "reading": "つげ",
+   "gloss": "sorrow",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.namida",
+   "form": "なみだ",
+   "reading": "なみだ",
+   "gloss": "tears",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.kao2",
+   "form": "かお",
+   "reading": "かお",
+   "gloss": "face",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.kaisi",
+   "form": "かいし",
+   "reading": "かいし",
+   "gloss": "reflection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.hokai",
+   "form": "ほうかい",
+   "reading": "ほうかい",
+   "gloss": "embrace",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.iyashi",
+   "form": "いやし",
+   "reading": "いやし",
+   "gloss": "healing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.omoide2",
+   "form": "おもいで",
+   "reading": "おもいで",
+   "gloss": "memory",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.sabishii",
+   "form": "さびしい",
+   "reading": "さびしい",
+   "gloss": "lonely",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.yasashii",
+   "form": "やさしい",
+   "reading": "やさしい",
+   "gloss": "gentle",
+   "pos": "i-adjective",
+   "gender": ""
+  }
+ ]
+}

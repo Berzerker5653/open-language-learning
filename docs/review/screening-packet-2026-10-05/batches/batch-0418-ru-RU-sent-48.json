@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-48",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u755",
+   "text": "Это диссидент.",
+   "gloss": "This is a dissident."
+  },
+  {
+   "id": "ru.sent.b2.u756",
+   "text": "Это спесь.",
+   "gloss": "This is hubris."
+  },
+  {
+   "id": "ru.sent.b2.u757",
+   "text": "Это ненависть.",
+   "gloss": "This is hatred."
+  },
+  {
+   "id": "ru.sent.b2.u758",
+   "text": "Это репрезентация.",
+   "gloss": "This is a representation."
+  },
+  {
+   "id": "ru.sent.b2.u759",
+   "text": "Это персона.",
+   "gloss": "This is a persona."
+  },
+  {
+   "id": "ru.sent.b2.u760",
+   "text": "Это уклад.",
+   "gloss": "This is a way of life."
+  },
+  {
+   "id": "ru.sent.b2.u761",
+   "text": "Это этнос.",
+   "gloss": "This is an ethnic group."
+  },
+  {
+   "id": "ru.sent.b2.u762",
+   "text": "Это артель.",
+   "gloss": "This is an artel."
+  },
+  {
+   "id": "ru.sent.b2.u763",
+   "text": "Это смешение.",
+   "gloss": "This is a mixing."
+  },
+  {
+   "id": "ru.sent.b2.u764",
+   "text": "Это диалект.",
+   "gloss": "This is a dialect."
+  },
+  {
+   "id": "ru.sent.b2.u765",
+   "text": "Это эмпатия.",
+   "gloss": "This is empathy."
+  },
+  {
+   "id": "ru.sent.b2.u766",
+   "text": "Это ритуал.",
+   "gloss": "This is a ritual."
+  },
+  {
+   "id": "ru.sent.b2.u767",
+   "text": "Это фольклор.",
+   "gloss": "This is folklore."
+  },
+  {
+   "id": "ru.sent.b2.u768",
+   "text": "Это национализм.",
+   "gloss": "This is nationalism."
+  },
+  {
+   "id": "ru.sent.b2.u769",
+   "text": "Это нравы.",
+   "gloss": "These are mores."
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-54",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.film.anime",
+   "form": "あにめ",
+   "reading": "あにめ",
+   "gloss": "anime",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.hihyou",
+   "form": "ひひょう",
+   "reading": "ひひょう",
+   "gloss": "criticism",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.rekishi",
+   "form": "れきし",
+   "reading": "れきし",
+   "gloss": "history",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.geijutsu",
+   "form": "げいじゅつ",
+   "reading": "げいじゅつ",
+   "gloss": "art",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.hyouban",
+   "form": "ひょうばん",
+   "reading": "ひょうばん",
+   "gloss": "billboard",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.nyuusha",
+   "form": "にゅうしゃ",
+   "reading": "にゅうしゃ",
+   "gloss": "entering a company",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.kangei",
+   "form": "かんげい",
+   "reading": "かんげい",
+   "gloss": "welcome",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.kanyuu",
+   "form": "かんにゅう",
+   "reading": "かんにゅう",
+   "gloss": "screening admission",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.kanyuu2",
+   "form": "かんにゅう",
+   "reading": "かんにゅう",
+   "gloss": "admission",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.jouhou",
+   "form": "じょうほう",
+   "reading": "じょうほう",
+   "gloss": "information",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.seika",
+   "form": "せいか",
+   "reading": "せいか",
+   "gloss": "success",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.dokyuumentari",
+   "form": "どきゅめんたり",
+   "reading": "どきゅめんたり",
+   "gloss": "documentary",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.eizo2",
+   "form": "えいぞう",
+   "reading": "えいぞう",
+   "gloss": "image",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.katto",
+   "form": "かっと",
+   "reading": "かっと",
+   "gloss": "cut",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.shott",
+   "form": "しょっと",
+   "reading": "しょっと",
+   "gloss": "shot",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.zum",
+   "form": "ずむ",
+   "reading": "ずむ",
+   "gloss": "zoom",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.appu",
+   "form": "あっぷ",
+   "reading": "あっぷ",
+   "gloss": "close-up",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.satsueijou",
+   "form": "さつえいじょう",
+   "reading": "さつえいじょう",
+   "gloss": "filming stage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.shuen",
+   "form": "しゅえん",
+   "reading": "しゅえん",
+   "gloss": "starring",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.chokusatsu",
+   "form": "ちょくさつ",
+   "reading": "ちょくさつ",
+   "gloss": "directing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.kyaku",
+   "form": "きゃく",
+   "reading": "きゃく",
+   "gloss": "customer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.senryaku",
+   "form": "せんりゃく",
+   "reading": "せんりゃく",
+   "gloss": "strategy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.fukuzai",
+   "form": "ふくざい",
+   "reading": "ふくざい",
+   "gloss": "complexity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.kankyou",
+   "form": "かんきょう",
+   "reading": "かんきょう",
+   "gloss": "environment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.hakyuu",
+   "form": "はっきゅう",
+   "reading": "はっきゅう",
+   "gloss": "expansion",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

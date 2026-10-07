@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-34",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.family.nravitsya",
+   "form": "нравится",
+   "reading": "нра́вится",
+   "gloss": "(it) pleases",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.druzya",
+   "form": "друзья",
+   "reading": "друзья́",
+   "gloss": "friends",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.family.moy",
+   "form": "мой",
+   "reading": "мой",
+   "gloss": "my; mine",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.tvoy",
+   "form": "твой",
+   "reading": "твой",
+   "gloss": "your",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.nash",
+   "form": "наш",
+   "reading": "наш",
+   "gloss": "our",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.yego",
+   "form": "его",
+   "reading": "его́",
+   "gloss": "his; its",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.yey",
+   "form": "её",
+   "reading": "ее́",
+   "gloss": "her; its",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.menya",
+   "form": "меня",
+   "reading": "меня́",
+   "gloss": "me",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.tebya",
+   "form": "тебя",
+   "reading": "тебя́",
+   "gloss": "you",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.u-menya",
+   "form": "у меня",
+   "reading": "у меня́",
+   "gloss": "I have (at me)",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.est",
+   "form": "есть",
+   "reading": "есть",
+   "gloss": "there is; have",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.veshch",
+   "form": "вещь",
+   "reading": "вещь",
+   "gloss": "thing",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.family.sumka",
+   "form": "сумка",
+   "reading": "су́мка",
+   "gloss": "bag",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.family.klyuch",
+   "form": "ключ",
+   "reading": "ключ",
+   "gloss": "key",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.family.dengi",
+   "form": "деньги",
+   "reading": "де́ньги",
+   "gloss": "money",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.vremya",
+   "form": "время",
+   "reading": "вре́мя",
+   "gloss": "time",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.family.delo",
+   "form": "дело",
+   "reading": "де́ло",
+   "gloss": "matter; business",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.family.semeynyy",
+   "form": "семейный",
+   "reading": "семе́йный",
+   "gloss": "family (adjective)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.family.muzh",
+   "form": "муж",
+   "reading": "муж",
+   "gloss": "husband",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.family.zhena",
+   "form": "жена",
+   "reading": "жена́",
+   "gloss": "wife",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.feelings.emociya",
+   "form": "эмоция",
+   "reading": "эмо́ция",
+   "gloss": "emotion",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.feelings.toska",
+   "form": "тоска",
+   "reading": "тоска́",
+   "gloss": "melancholy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.feelings.pechal",
+   "form": "печаль",
+   "reading": "печа́ль",
+   "gloss": "sorrow",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.feelings.trevoga",
+   "form": "тревога",
+   "reading": "трево́га",
+   "gloss": "anxiety",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.feelings.revnost",
+   "form": "ревность",
+   "reading": "ре́вность",
+   "gloss": "jealousy",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

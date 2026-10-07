@@ -411,12 +411,8 @@ impl Pack {
                     let script = item.get("script").and_then(Value::as_str).unwrap_or("");
                     let pointer = format!("{}/{}/{}/text", inst.pointer, field, i);
                     let has_cyr = text.chars().any(|c| ('\u{0400}'..='\u{04ff}').contains(&c));
-                    let has_kana = text
-                        .chars()
-                        .any(|c| ('\u{3040}'..='\u{30ff}').contains(&c));
-                    let has_cjk = text
-                        .chars()
-                        .any(|c| ('\u{4e00}'..='\u{9fff}').contains(&c));
+                    let has_kana = text.chars().any(|c| ('\u{3040}'..='\u{30ff}').contains(&c));
+                    let has_cjk = text.chars().any(|c| ('\u{4e00}'..='\u{9fff}').contains(&c));
                     // Hangul is never a legitimate script in these packs.
                     if text.chars().any(|c| {
                         ('\u{1100}'..='\u{11ff}').contains(&c)
@@ -427,7 +423,9 @@ impl Pack {
                             &inst.file,
                             pointer.clone(),
                             "lexicon_script_contamination",
-                            format!("text {text:?} contains Hangul codepoints; wrong writing system"),
+                            format!(
+                                "text {text:?} contains Hangul codepoints; wrong writing system"
+                            ),
                             Severity::Error,
                         ));
                     }
@@ -483,9 +481,9 @@ impl Pack {
                     // or more vowels carries exactly one combining acute.
                     // Readings carry pronunciation; forms are orthography.
                     if has_cyr && script == "cyrillic" {
-                        for word in text
-                            .split(|c: char| !('\u{0400}'..='\u{04ff}').contains(&c) && c != '\u{0301}')
-                        {
+                        for word in text.split(|c: char| {
+                            !('\u{0400}'..='\u{04ff}').contains(&c) && c != '\u{0301}'
+                        }) {
                             let vowels = word
                                 .chars()
                                 .filter(|c| "аеёиоуыэюяАЕЁИОУЫЭЮЯ".contains(*c))

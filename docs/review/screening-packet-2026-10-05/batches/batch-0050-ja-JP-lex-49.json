@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-49",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.env.seizou",
+   "form": "せいぞう",
+   "reading": "せいぞう",
+   "gloss": "manufacturing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.seisi",
+   "form": "せいし",
+   "reading": "せいし",
+   "gloss": "cleanliness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.bousai-houzu",
+   "form": "ぼうさいほうじ",
+   "reading": "ぼうさいほうじ",
+   "gloss": "disaster preparedness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.mizu-bubun",
+   "form": "みずぶぶん",
+   "reading": "みずぶぶん",
+   "gloss": "water resources",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.food-loss",
+   "form": "フードロス",
+   "reading": "フードロス",
+   "gloss": "food waste",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.resucha",
+   "form": "れすちゃ",
+   "reading": "れすちゃ",
+   "gloss": "leftover tea",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.midori",
+   "form": "みどり",
+   "reading": "みどり",
+   "gloss": "greenery",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.shizen-hozen",
+   "form": "しぜんほぜん",
+   "reading": "しぜんほぜん",
+   "gloss": "nature preservation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.footprint",
+   "form": "フットプリント",
+   "reading": "フットプリント",
+   "gloss": "footprint",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.nenryou",
+   "form": "ねんりょう",
+   "reading": "ねんりょう",
+   "gloss": "fuel",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.taihi",
+   "form": "たいひ",
+   "reading": "たいひ",
+   "gloss": "evacuation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.shinan",
+   "form": "しなん",
+   "reading": "しなん",
+   "gloss": "drill",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.yokei",
+   "form": "よけい",
+   "reading": "よけい",
+   "gloss": "warning",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.bousui",
+   "form": "ぼうすい",
+   "reading": "ぼうすい",
+   "gloss": "flood prevention",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.suidou",
+   "form": "すいどう",
+   "reading": "すいどう",
+   "gloss": "water supply",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.jousui",
+   "form": "じょうすい",
+   "reading": "じょうすい",
+   "gloss": "water purification",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.compost",
+   "form": "コンポスト",
+   "reading": "コンポスト",
+   "gloss": "compost",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.kakei",
+   "form": "かけい",
+   "reading": "かけい",
+   "gloss": "household accounts",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.shokuhin",
+   "form": "しょくひん",
+   "reading": "しょくひん",
+   "gloss": "food product",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.nouhin",
+   "form": "のうひん",
+   "reading": "のうひん",
+   "gloss": "farm product",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.gas",
+   "form": "ガス",
+   "reading": "ガス",
+   "gloss": "gas",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.muda",
+   "form": "むだ",
+   "reading": "むだ",
+   "gloss": "waste",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.setsuyaku",
+   "form": "せつやく",
+   "reading": "せつやく",
+   "gloss": "thrift",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.kinchou",
+   "form": "きんちょう",
+   "reading": "きんちょう",
+   "gloss": "tension",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env2.kesshin",
+   "form": "けっしん",
+   "reading": "けっしん",
+   "gloss": "determination",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

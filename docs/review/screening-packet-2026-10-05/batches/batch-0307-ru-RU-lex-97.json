@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-97",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.sci.bresh",
+   "form": "брешь",
+   "reading": "брешь",
+   "gloss": "breach, gap",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.iznos",
+   "form": "износ",
+   "reading": "изно́с",
+   "gloss": "wear",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.smazka",
+   "form": "смазка",
+   "reading": "сма́зка",
+   "gloss": "lubrication",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.podshipnik",
+   "form": "подшипник",
+   "reading": "подши́пник",
+   "gloss": "bearing",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.agregat",
+   "form": "агрегат",
+   "reading": "агрега́т",
+   "gloss": "aggregate unit, assembly",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.sborochnyy",
+   "form": "сборочный",
+   "reading": "сбо́рочный",
+   "gloss": "assembly (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.montazh",
+   "form": "монтаж",
+   "reading": "монта́ж",
+   "gloss": "installation, assembly",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.demontazh",
+   "form": "демонтаж",
+   "reading": "демонта́ж",
+   "gloss": "dismantling",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.naladchik",
+   "form": "наладчик",
+   "reading": "нала́дчик",
+   "gloss": "commissioning engineer, fitter",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.pusk",
+   "form": "пуск",
+   "reading": "пуск",
+   "gloss": "start, startup",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.razgon",
+   "form": "разгон",
+   "reading": "разго́н",
+   "gloss": "acceleration, spin-up",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.konveyernyy",
+   "form": "конвейерный",
+   "reading": "конве́йерный",
+   "gloss": "conveyor (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.robototehnika",
+   "form": "робототехника",
+   "reading": "робототе́хника",
+   "gloss": "robotics",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.kibernetika",
+   "form": "кибернетика",
+   "reading": "киберне́тика",
+   "gloss": "cybernetics",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.algoritmicheskiy",
+   "form": "алгоритмический",
+   "reading": "алгоритми́ческий",
+   "gloss": "algorithmic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.vychislitelnyy",
+   "form": "вычислительный",
+   "reading": "вычисли́тельный",
+   "gloss": "computing (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.translirovat",
+   "form": "транслировать",
+   "reading": "трансли́ровать",
+   "gloss": "to broadcast, relay",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.sputnikovyy",
+   "form": "спутниковый",
+   "reading": "спу́тниковый",
+   "gloss": "satellite (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.navigacionnyy",
+   "form": "навигационный",
+   "reading": "навигацио́нный",
+   "gloss": "navigation (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.marshrutizaciya",
+   "form": "маршрутизация",
+   "reading": "маршрутиза́ция",
+   "gloss": "routing",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.marshrutizator",
+   "form": "маршрутизатор",
+   "reading": "маршрутиза́тор",
+   "gloss": "router",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.oblachnyy",
+   "form": "облачный",
+   "reading": "о́блачный",
+   "gloss": "cloud (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.raspoznavanie",
+   "form": "распознавание",
+   "reading": "распознава́ние",
+   "gloss": "recognition",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.autentifikaciya",
+   "form": "аутентификация",
+   "reading": "аутентифика́ция",
+   "gloss": "authentication",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.biometriya",
+   "form": "биометрия",
+   "reading": "биоме́трия",
+   "gloss": "biometrics",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

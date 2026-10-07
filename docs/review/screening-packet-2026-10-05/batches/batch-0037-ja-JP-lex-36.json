@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-36",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.edu.seminaa",
+   "form": "せみなー",
+   "reading": "せみなー",
+   "gloss": "seminar",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.gijutsu",
+   "form": "ぎじゅつ",
+   "reading": "ぎじゅつ",
+   "gloss": "technique; technology",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.kenkyuu",
+   "form": "けんきゅう",
+   "reading": "けんきゅう",
+   "gloss": "research",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.kenkyuu-sha",
+   "form": "けんきゅうしゃ",
+   "reading": "けんきゅうしゃ",
+   "gloss": "researcher",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.kenkyuu-hi",
+   "form": "けんきゅうひ",
+   "reading": "けんきゅうひ",
+   "gloss": "research expenses",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.nyuushi",
+   "form": "にゅうし",
+   "reading": "にゅうし",
+   "gloss": "entrance exam",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.jissen",
+   "form": "じっせん",
+   "reading": "じっせん",
+   "gloss": "practice; exercise",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.jugyou-ryaku",
+   "form": "じゅぎょうりゃく",
+   "reading": "じゅぎょうりゃく",
+   "gloss": "class summary",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.test",
+   "form": "テスト",
+   "reading": "テスト",
+   "gloss": "test",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.shiken",
+   "form": "しけん",
+   "reading": "しけん",
+   "gloss": "examination",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.gakushi",
+   "form": "がくし",
+   "reading": "がくし",
+   "gloss": "bachelor's degree",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.hakushi",
+   "form": "はくし",
+   "reading": "はくし",
+   "gloss": "doctorate; PhD",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.hyouka",
+   "form": "ひょうか",
+   "reading": "ひょうか",
+   "gloss": "assessment; evaluation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.seiseki",
+   "form": "せいせき",
+   "reading": "せいせき",
+   "gloss": "grades; academic record",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.shishou",
+   "form": "ししょう",
+   "reading": "ししょう",
+   "gloss": "supervisor; advisor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.ronbun",
+   "form": "ろんぶん",
+   "reading": "ろんぶん",
+   "gloss": "thesis; paper",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.saku",
+   "form": "さく",
+   "reading": "さく",
+   "gloss": "work (authored)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.inshou",
+   "form": "いんしょう",
+   "reading": "いんしょう",
+   "gloss": "impression",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.inshou-ron",
+   "form": "いんしょうろん",
+   "reading": "いんしょうろん",
+   "gloss": "subjective argument",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.gakki",
+   "form": "がっき",
+   "reading": "がっき",
+   "gloss": "semester",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.sentai",
+   "form": "せんたい",
+   "reading": "せんたい",
+   "gloss": "topic selection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.mondai",
+   "form": "もんだい",
+   "reading": "もんだい",
+   "gloss": "problem; question",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.ten",
+   "form": "てん",
+   "reading": "てん",
+   "gloss": "point",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.bunsho",
+   "form": "ぶんしょ",
+   "reading": "ぶんしょ",
+   "gloss": "document; passage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.danshaku",
+   "form": "だんしゃく",
+   "reading": "だんしゃく",
+   "gloss": "paragraph",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

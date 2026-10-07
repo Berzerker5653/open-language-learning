@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-48",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.env.norikae",
+   "form": "のりかえ",
+   "reading": "のりかえ",
+   "gloss": "transfer (transport)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.chikyuu",
+   "form": "ちきゅう",
+   "reading": "ちきゅう",
+   "gloss": "earth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.ozone",
+   "form": "オゾン",
+   "reading": "オゾン",
+   "gloss": "ozone",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.tan-so-ka",
+   "form": "たんそか",
+   "reading": "たんそか",
+   "gloss": "carbonization",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.kaisui",
+   "form": "かいすい",
+   "reading": "かいすい",
+   "gloss": "seawater",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.nouka",
+   "form": "のうか",
+   "reading": "のうか",
+   "gloss": "farmer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.michi",
+   "form": "みち",
+   "reading": "みち",
+   "gloss": "road",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.sora",
+   "form": "そら",
+   "reading": "そら",
+   "gloss": "sky",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.purastic",
+   "form": "ぷらすちっく",
+   "reading": "ぷらすちっく",
+   "gloss": "plastic",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.air",
+   "form": "エア",
+   "reading": "エア",
+   "gloss": "air",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.eco-bag",
+   "form": "エコバッグ",
+   "reading": "エコバッグ",
+   "gloss": "eco bag",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.eco-kuruma",
+   "form": "エコくるま",
+   "reading": "エコくるま",
+   "gloss": "eco car",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.aruki",
+   "form": "あるき",
+   "reading": "あるき",
+   "gloss": "walking",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.seibutsu",
+   "form": "せいぶつ",
+   "reading": "せいぶつ",
+   "gloss": "living thing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.happyou",
+   "form": "はっぴょう",
+   "reading": "はっぴょう",
+   "gloss": "announcement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.genki",
+   "form": "げんき",
+   "reading": "げんき",
+   "gloss": "energetic",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.sanpuru",
+   "form": "さんぷる",
+   "reading": "さんぷる",
+   "gloss": "sample",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.kiko",
+   "form": "きこ",
+   "reading": "きこ",
+   "gloss": "machine",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.ene-ki",
+   "form": "えねき",
+   "reading": "えねき",
+   "gloss": "power plant",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.denki",
+   "form": "でんき",
+   "reading": "でんき",
+   "gloss": "electricity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.shinpan",
+   "form": "しんぱん",
+   "reading": "しんぱん",
+   "gloss": "judgment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.kankyou-hozen",
+   "form": "かんきょうほぜん",
+   "reading": "かんきょうほぜん",
+   "gloss": "environmental conservation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.shizen-hogo",
+   "form": "しぜんほご",
+   "reading": "しぜんほご",
+   "gloss": "nature conservation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.koushou",
+   "form": "こうしょう",
+   "reading": "こうしょう",
+   "gloss": "emission",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.hoan",
+   "form": "ほうあん",
+   "reading": "ほうあん",
+   "gloss": "plan",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

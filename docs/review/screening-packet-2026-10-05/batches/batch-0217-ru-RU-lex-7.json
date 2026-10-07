@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-7",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.argue4.vveshennyy",
+   "form": "взвешенный",
+   "reading": "взве́шенный",
+   "gloss": "balanced, weighed",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.obdumannyy",
+   "form": "обдуманный",
+   "reading": "обду́манный",
+   "gloss": "considered",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.produmannyy",
+   "form": "продуманный",
+   "reading": "проду́манный",
+   "gloss": "well-thought-out",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.produmat",
+   "form": "продумать",
+   "reading": "проду́мать",
+   "gloss": "to think through",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.proschitat",
+   "form": "просчитать",
+   "reading": "просчита́ть",
+   "gloss": "to calculate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.proschyot",
+   "form": "просчёт",
+   "reading": "просче́т",
+   "gloss": "miscalculation",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue4.merilo",
+   "form": "мерило",
+   "reading": "мери́ло",
+   "gloss": "measure, yardstick",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue4.cennost",
+   "form": "ценность",
+   "reading": "це́нность",
+   "gloss": "value",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue4.tsenit",
+   "form": "ценить",
+   "reading": "цени́ть",
+   "gloss": "to value",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.prok",
+   "form": "прок",
+   "reading": "прок",
+   "gloss": "use, benefit",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue4.radi",
+   "form": "ради",
+   "reading": "ра́ди",
+   "gloss": "for the sake of",
+   "pos": "preposition",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.rychag",
+   "form": "рычаг",
+   "reading": "рыча́г",
+   "gloss": "lever",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue4.nazhim",
+   "form": "нажим",
+   "reading": "нажи́м",
+   "gloss": "pressure",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue4.vershina",
+   "form": "вершина",
+   "reading": "верши́на",
+   "gloss": "summit, peak",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue4.pik",
+   "form": "пик",
+   "reading": "пик",
+   "gloss": "peak",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue4.predel",
+   "form": "предел",
+   "reading": "преде́л",
+   "gloss": "limit, bound",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue4.bereg",
+   "form": "берег",
+   "reading": "бе́рег",
+   "gloss": "shore, bank",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue4.kray",
+   "form": "край",
+   "reading": "край",
+   "gloss": "edge, region",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue4.seredina",
+   "form": "середина",
+   "reading": "середи́на",
+   "gloss": "middle",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue4.poverhnost",
+   "form": "поверхность",
+   "reading": "пове́рхность",
+   "gloss": "surface",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue4.ploskost",
+   "form": "плоскость",
+   "reading": "пло́скость",
+   "gloss": "plane, flat",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue4.liniya",
+   "form": "линия",
+   "reading": "ли́ния",
+   "gloss": "line",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue4.krivaya",
+   "form": "кривая",
+   "reading": "крива́я",
+   "gloss": "curve",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue4.pryamaya",
+   "form": "прямая",
+   "reading": "пряма́я",
+   "gloss": "straight line",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue4.os",
+   "form": "ось",
+   "reading": "ось",
+   "gloss": "axis",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

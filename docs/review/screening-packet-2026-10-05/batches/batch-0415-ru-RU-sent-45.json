@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-45",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u710",
+   "text": "Это свалка.",
+   "gloss": "This is a dump."
+  },
+  {
+   "id": "ru.sent.b2.u711",
+   "text": "Это компост.",
+   "gloss": "This is compost."
+  },
+  {
+   "id": "ru.sent.b2.u712",
+   "text": "Это пестицид.",
+   "gloss": "This is a pesticide."
+  },
+  {
+   "id": "ru.sent.b2.u713",
+   "text": "Это заповедник.",
+   "gloss": "This is a nature reserve."
+  },
+  {
+   "id": "ru.sent.b2.u714",
+   "text": "Это инвазия.",
+   "gloss": "This is an invasion."
+  },
+  {
+   "id": "ru.sent.b2.u715",
+   "text": "Это эндемик.",
+   "gloss": "This is an endemic species."
+  },
+  {
+   "id": "ru.sent.b2.u716",
+   "text": "Это смог.",
+   "gloss": "This is smog."
+  },
+  {
+   "id": "ru.sent.b2.u717",
+   "text": "Это паводок.",
+   "gloss": "This is a spring flood."
+  },
+  {
+   "id": "ru.sent.b2.u718",
+   "text": "Это приток.",
+   "gloss": "This is a tributary."
+  },
+  {
+   "id": "ru.sent.b2.u719",
+   "text": "Это эрозия.",
+   "gloss": "This is erosion."
+  },
+  {
+   "id": "ru.sent.b2.u720",
+   "text": "Это дилемма.",
+   "gloss": "This is a dilemma."
+  },
+  {
+   "id": "ru.sent.b2.u721",
+   "text": "Это плато.",
+   "gloss": "This is a plateau."
+  },
+  {
+   "id": "ru.sent.b2.u722",
+   "text": "Это авантюра.",
+   "gloss": "This is a gamble."
+  },
+  {
+   "id": "ru.sent.b2.u723",
+   "text": "Это развилка.",
+   "gloss": "This is a fork."
+  },
+  {
+   "id": "ru.sent.b2.u724",
+   "text": "Это флуктуация.",
+   "gloss": "This is a fluctuation."
+  }
+ ]
+}

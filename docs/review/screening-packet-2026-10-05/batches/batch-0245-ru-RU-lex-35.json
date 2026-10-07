@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-35",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.feelings.styd",
+   "form": "стыд",
+   "reading": "стыд",
+   "gloss": "shame",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.feelings.dostoinstvo",
+   "form": "достоинство",
+   "reading": "досто́инство",
+   "gloss": "dignity",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.feelings.zavist",
+   "form": "зависть",
+   "reading": "за́висть",
+   "gloss": "envy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.feelings.nezhnost",
+   "form": "нежность",
+   "reading": "не́жность",
+   "gloss": "tenderness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.feelings.simpatiya",
+   "form": "симпатия",
+   "reading": "симпа́тия",
+   "gloss": "sympathy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.feelings.antipatiya",
+   "form": "антипатия",
+   "reading": "антипа́тия",
+   "gloss": "antipathy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.feelings.nedoponimanie",
+   "form": "недопонимание",
+   "reading": "недопонима́ние",
+   "gloss": "misunderstanding",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.feelings.putanica",
+   "form": "путаница",
+   "reading": "пу́таница",
+   "gloss": "mix-up",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.feelings.nedorazumenie",
+   "form": "недоразумение",
+   "reading": "недоразуме́ние",
+   "gloss": "misunderstanding",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.feelings.opravdanie",
+   "form": "оправдание",
+   "reading": "оправда́ние",
+   "gloss": "justification",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.feelings.uprek",
+   "form": "упрёк",
+   "reading": "упре́к",
+   "gloss": "reproach",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.feelings.molchanie",
+   "form": "молчание",
+   "reading": "молча́ние",
+   "gloss": "silence",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.feelings.primirenie",
+   "form": "примирение",
+   "reading": "примире́ние",
+   "gloss": "reconciliation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.feelings.obnyat",
+   "form": "обнять",
+   "reading": "обня́ть",
+   "gloss": "to hug",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.feelings.pceluy",
+   "form": "поцелуй",
+   "reading": "поцелу́й",
+   "gloss": "kiss",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.feelings.obyatie",
+   "form": "объятие",
+   "reading": "объя́тие",
+   "gloss": "embrace",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.feelings.zhest",
+   "form": "жест",
+   "reading": "жест",
+   "gloss": "gesture",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.feelings.mimika",
+   "form": "мимика",
+   "reading": "ми́мика",
+   "gloss": "facial expression",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.feelings.ulybka",
+   "form": "улыбка",
+   "reading": "улы́бка",
+   "gloss": "smile",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.feelings.hmuryj",
+   "form": "хмурый",
+   "reading": "хму́рый",
+   "gloss": "frowning",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.feelings.plakat",
+   "form": "плакать",
+   "reading": "пла́кать",
+   "gloss": "to cry",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.feelings.smeyatsya",
+   "form": "смеяться",
+   "reading": "смея́ться",
+   "gloss": "to laugh",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.feelings.shutka",
+   "form": "шутка",
+   "reading": "шу́тка",
+   "gloss": "joke",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.feelings.yumor",
+   "form": "юмор",
+   "reading": "ю́мор",
+   "gloss": "humor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.feelings.ironiya",
+   "form": "ирония",
+   "reading": "иро́ния",
+   "gloss": "irony",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

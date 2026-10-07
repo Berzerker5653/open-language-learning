@@ -1,0 +1,5 @@
+info[unused_source] sources.jsonl/1: source "edrdg-jmdict" is not referenced by any content record
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+lint: 0 error(s), 0 warning(s)

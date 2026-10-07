@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-7",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.adjectives.hikui",
+   "form": "ひくい",
+   "reading": "ひくい",
+   "gloss": "low (height); short",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.yoyaku",
+   "form": "よやく",
+   "reading": "よやく",
+   "gloss": "reservation; appointment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.yotei-hyou",
+   "form": "よていひょう",
+   "reading": "よていひょう",
+   "gloss": "schedule table",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.nittei",
+   "form": "にってい",
+   "reading": "にってい",
+   "gloss": "daily schedule",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.shukujitsu",
+   "form": "しゅくじつ",
+   "reading": "しゅくじつ",
+   "gloss": "holiday",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.kinen-bi",
+   "form": "きねんび",
+   "reading": "きねんび",
+   "gloss": "national holiday",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.zangyou2",
+   "form": "ざんぎょう",
+   "reading": "ざんぎょう",
+   "gloss": "overtime",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.katei-nittei",
+   "form": "かていにってい",
+   "reading": "かていにってい",
+   "gloss": "household schedule",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.yoyaku-jima",
+   "form": "よやくじま",
+   "reading": "よやくじま",
+   "gloss": "reservation time",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.torihiki",
+   "form": "とりひき",
+   "reading": "とりひき",
+   "gloss": "transaction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.tsuuka-chou",
+   "form": "つうちょう",
+   "reading": "つうちょう",
+   "gloss": "bankbook",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.kin-yuu",
+   "form": "きんゆう",
+   "reading": "きんゆう",
+   "gloss": "deposit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.hiharai",
+   "form": "ひはらい",
+   "reading": "ひはらい",
+   "gloss": "expense",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.kessaku",
+   "form": "けっさく",
+   "reading": "けっさく",
+   "gloss": "balance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.seisan",
+   "form": "せいさん",
+   "reading": "せいさん",
+   "gloss": "production",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.yosan",
+   "form": "よさん",
+   "reading": "よさん",
+   "gloss": "budget",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.kaisan",
+   "form": "かいさん",
+   "reading": "かいさん",
+   "gloss": "calculation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.kakeibo",
+   "form": "かけいぼ",
+   "reading": "かけいぼ",
+   "gloss": "household ledger",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.denpyou",
+   "form": "でんぴょう",
+   "reading": "でんぴょう",
+   "gloss": "receipt",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.nyuusatsu",
+   "form": "にゅうさつ",
+   "reading": "にゅうさつ",
+   "gloss": "income",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.shutsu-harai",
+   "form": "しゅつはらい",
+   "reading": "しゅつはらい",
+   "gloss": "expenditure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.zei",
+   "form": "ぜい",
+   "reading": "ぜい",
+   "gloss": "tax",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.hoken-ryou",
+   "form": "ほけんりょう",
+   "reading": "ほけんりょう",
+   "gloss": "insurance premium",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.kyoufu-kin",
+   "form": "きょうふきん",
+   "reading": "きょうふきん",
+   "gloss": "tuition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.tetsudai",
+   "form": "てつだい",
+   "reading": "てつだい",
+   "gloss": "help",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

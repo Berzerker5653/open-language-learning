@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-74",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.personal.my",
+   "form": "мы",
+   "reading": "мы",
+   "gloss": "we",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.oni",
+   "form": "они",
+   "reading": "они́",
+   "gloss": "they",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.ono",
+   "form": "оно",
+   "reading": "оно́",
+   "gloss": "it (neuter subject pronoun)",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.familiya",
+   "form": "фамилия",
+   "reading": "фами́лия",
+   "gloss": "surname; family name",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.personal.otchestvo",
+   "form": "отчество",
+   "reading": "о́тчество",
+   "gloss": "patronymic",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.personal.strana",
+   "form": "страна",
+   "reading": "страна́",
+   "gloss": "country",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.personal.gorod",
+   "form": "город",
+   "reading": "го́род",
+   "gloss": "city; town",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.personal.adres",
+   "form": "адрес",
+   "reading": "а́дрес",
+   "gloss": "address",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.personal.telefon",
+   "form": "телефон",
+   "reading": "телефо́н",
+   "gloss": "telephone; phone number",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.personal.pasport",
+   "form": "паспорт",
+   "reading": "па́спорт",
+   "gloss": "passport",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.personal.kto",
+   "form": "кто",
+   "reading": "кто",
+   "gloss": "who",
+   "pos": "pronoun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.chto",
+   "form": "что",
+   "reading": "что",
+   "gloss": "what",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.gde",
+   "form": "где",
+   "reading": "где",
+   "gloss": "where (location)",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.kak",
+   "form": "как",
+   "reading": "как",
+   "gloss": "how",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.otkuda",
+   "form": "откуда",
+   "reading": "отку́да",
+   "gloss": "where from",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.iz",
+   "form": "из",
+   "reading": "из",
+   "gloss": "from; out of (+ genitive)",
+   "pos": "preposition",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.rossiya",
+   "form": "Россия",
+   "reading": "Росси́я",
+   "gloss": "Russia",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.kanada",
+   "form": "Канада",
+   "reading": "Кана́да",
+   "gloss": "Canada",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.frantsiya",
+   "form": "Франция",
+   "reading": "Фра́нция",
+   "gloss": "France",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.germaniya",
+   "form": "Германия",
+   "reading": "Герма́ния",
+   "gloss": "Germany",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.god",
+   "form": "год",
+   "reading": "год",
+   "gloss": "year",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.personal.vozrast",
+   "form": "возраст",
+   "reading": "во́зраст",
+   "gloss": "age",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.personal.dvadtsat",
+   "form": "двадцать",
+   "reading": "два́дцать",
+   "gloss": "twenty (20)",
+   "pos": "numeral",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.tridtsat",
+   "form": "тридцать",
+   "reading": "три́дцать",
+   "gloss": "thirty (30)",
+   "pos": "numeral",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.skolko",
+   "form": "сколько",
+   "reading": "ско́лько",
+   "gloss": "how many; how much",
+   "pos": "adverb",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-60",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.formal.wabi",
+   "form": "わび",
+   "reading": "わび",
+   "gloss": "apology",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.fuman",
+   "form": "ふまん",
+   "reading": "ふまん",
+   "gloss": "dissatisfaction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.danwa",
+   "form": "だんわ",
+   "reading": "だんわ",
+   "gloss": "talk, statement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.koutei",
+   "form": "こうてい",
+   "reading": "こうてい",
+   "gloss": "process",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.ketsuron",
+   "form": "けつろん",
+   "reading": "けつろん",
+   "gloss": "conclusion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.iken",
+   "form": "いけん",
+   "reading": "いけん",
+   "gloss": "opinion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.koushou",
+   "form": "こうしょう",
+   "reading": "こうしょう",
+   "gloss": "negotiation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.jouken",
+   "form": "じょうけん",
+   "reading": "じょうけん",
+   "gloss": "condition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.kakaku",
+   "form": "かかく",
+   "reading": "かかく",
+   "gloss": "price",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.torihiki",
+   "form": "とりひき",
+   "reading": "とりひき",
+   "gloss": "transaction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.keiyaku",
+   "form": "けいやく",
+   "reading": "けいやく",
+   "gloss": "contract",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.houshou",
+   "form": "ほうしょう",
+   "reading": "ほうしょう",
+   "gloss": "guarantee",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.sonai",
+   "form": "そんがい",
+   "reading": "そんがい",
+   "gloss": "damage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.baishou",
+   "form": "ばいしょう",
+   "reading": "ばいしょう",
+   "gloss": "compensation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.seikyu",
+   "form": "せいきゅう",
+   "reading": "せいきゅう",
+   "gloss": "claim, billing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.hanbai",
+   "form": "はんばい",
+   "reading": "はんばい",
+   "gloss": "sale",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.kyoukyuu",
+   "form": "きょうきゅう",
+   "reading": "きょうきゅう",
+   "gloss": "supply",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.seihin",
+   "form": "せいひん",
+   "reading": "せいひん",
+   "gloss": "product",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.shouhin",
+   "form": "しょうひん",
+   "reading": "しょうひん",
+   "gloss": "goods",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.okure",
+   "form": "おくれ",
+   "reading": "おくれ",
+   "gloss": "delay",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.genin",
+   "form": "げんいん",
+   "reading": "げんいん",
+   "gloss": "cause",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.kekka",
+   "form": "けっか",
+   "reading": "けっか",
+   "gloss": "result",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.nouhin",
+   "form": "のうひん",
+   "reading": "のうひん",
+   "gloss": "delivery",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.shoukai2",
+   "form": "しょうかい",
+   "reading": "しょうかい",
+   "gloss": "introduction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.onrei",
+   "form": "おれい",
+   "reading": "おれい",
+   "gloss": "thanks",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

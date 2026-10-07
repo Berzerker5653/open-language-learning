@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-106",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.play2.akito",
+   "form": "あきと",
+   "reading": "あきと",
+   "gloss": "autumn fields",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.haru",
+   "form": "はる",
+   "reading": "はる",
+   "gloss": "spring",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.natsu",
+   "form": "なつ",
+   "reading": "なつ",
+   "gloss": "summer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.fuyu",
+   "form": "ふゆ",
+   "reading": "ふゆ",
+   "gloss": "winter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.ame",
+   "form": "あめ",
+   "reading": "あめ",
+   "gloss": "rain, candy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.hoshi",
+   "form": "ほし",
+   "reading": "ほし",
+   "gloss": "star",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.tsuki",
+   "form": "つき",
+   "reading": "つき",
+   "gloss": "moon, month",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.hi",
+   "form": "ひ",
+   "reading": "ひ",
+   "gloss": "sun, day, fire",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.kaze",
+   "form": "かぜ",
+   "reading": "かぜ",
+   "gloss": "wind, cold",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.yuki",
+   "form": "ゆき",
+   "reading": "ゆき",
+   "gloss": "snow",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.hana",
+   "form": "はな",
+   "reading": "はな",
+   "gloss": "flower, nose",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.ne",
+   "form": "ね",
+   "reading": "ね",
+   "gloss": "root, sleep",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.kusa",
+   "form": "くさ",
+   "reading": "くさ",
+   "gloss": "grass",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.ki",
+   "form": "き",
+   "reading": "き",
+   "gloss": "tree, spirit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.umi",
+   "form": "うみ",
+   "reading": "うみ",
+   "gloss": "sea",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.yama",
+   "form": "やま",
+   "reading": "やま",
+   "gloss": "mountain",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.kawa",
+   "form": "かわ",
+   "reading": "かわ",
+   "gloss": "river, skin",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.ishi",
+   "form": "いし",
+   "reading": "いし",
+   "gloss": "stone",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.suna",
+   "form": "すな",
+   "reading": "すな",
+   "gloss": "sand",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.mori",
+   "form": "もり",
+   "reading": "もり",
+   "gloss": "forest, heap",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.hara",
+   "form": "はら",
+   "reading": "はら",
+   "gloss": "field, belly",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.oka",
+   "form": "おか",
+   "reading": "おか",
+   "gloss": "hill",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.tani",
+   "form": "たに",
+   "reading": "たに",
+   "gloss": "valley",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.iro2",
+   "form": "いろ",
+   "reading": "いろ",
+   "gloss": "color",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.oto",
+   "form": "おと",
+   "reading": "おと",
+   "gloss": "sound",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

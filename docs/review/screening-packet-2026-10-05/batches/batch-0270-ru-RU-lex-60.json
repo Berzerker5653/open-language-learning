@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-60",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.narration2.priyatel",
+   "form": "приятель",
+   "reading": "прия́тель",
+   "gloss": "friend, buddy",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration2.neznakomy",
+   "form": "незнакомый",
+   "reading": "незнако́мый",
+   "gloss": "stranger, unfamiliar",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration2.krasivy",
+   "form": "красивый",
+   "reading": "краси́вый",
+   "gloss": "beautiful",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration2.vysokii",
+   "form": "высокий",
+   "reading": "высо́кий",
+   "gloss": "tall, high",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration2.tyomnyi",
+   "form": "тёмный",
+   "reading": "те́мный",
+   "gloss": "dark",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration2.svetly",
+   "form": "светлый",
+   "reading": "све́тлый",
+   "gloss": "light, bright",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration2.stroiny",
+   "form": "стройный",
+   "reading": "стро́йный",
+   "gloss": "slim, well-built",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration2.odezhda",
+   "form": "одежда",
+   "reading": "оде́жда",
+   "gloss": "clothing",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.narration2.shlyapa",
+   "form": "шляпа",
+   "reading": "шля́па",
+   "gloss": "hat",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.narration2.zont",
+   "form": "зонт",
+   "reading": "зонт",
+   "gloss": "umbrella",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration2.chuvstvo",
+   "form": "чувство",
+   "reading": "чу́вство",
+   "gloss": "feeling",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.narration2.radost",
+   "form": "радость",
+   "reading": "ра́дость",
+   "gloss": "joy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.narration2.grust",
+   "form": "грусть",
+   "reading": "грусть",
+   "gloss": "sadness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.narration2.strakh",
+   "form": "страх",
+   "reading": "страх",
+   "gloss": "fear",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration2.lyubov",
+   "form": "любовь",
+   "reading": "любо́вь",
+   "gloss": "love",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.narration2.mysl",
+   "form": "мысль",
+   "reading": "мысль",
+   "gloss": "thought",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.narration2.dumat",
+   "form": "думать",
+   "reading": "ду́мать",
+   "gloss": "to think",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration2.ponimat",
+   "form": "понимать",
+   "reading": "понима́ть",
+   "gloss": "to understand",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration2.soobrazhat",
+   "form": "соображать",
+   "reading": "сообража́ть",
+   "gloss": "to reason, figure out",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration2.dogadyvatsya",
+   "form": "догадываться",
+   "reading": "дога́дываться",
+   "gloss": "to guess, suspect",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration2.polden",
+   "form": "полдень",
+   "reading": "по́лдень",
+   "gloss": "noon",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration2.polnoch",
+   "form": "полночь",
+   "reading": "по́лночь",
+   "gloss": "midnight",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.narration2.rassvet",
+   "form": "рассвет",
+   "reading": "рассве́т",
+   "gloss": "dawn",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration2.zakat",
+   "form": "закат",
+   "reading": "зака́т",
+   "gloss": "sunset",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration2.vremena",
+   "form": "времена",
+   "reading": "времена́",
+   "gloss": "times, era",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-129",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.society2.koufuku",
+   "form": "こうふく",
+   "reading": "こうふく",
+   "gloss": "public welfare",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.sanka",
+   "form": "さんか",
+   "reading": "さんか",
+   "gloss": "participation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.shimin",
+   "form": "しみん",
+   "reading": "しみん",
+   "gloss": "citizen",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.jichi",
+   "form": "じち",
+   "reading": "じち",
+   "gloss": "self-governance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.hatsugen",
+   "form": "はつげん",
+   "reading": "はつげん",
+   "gloss": "statement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society2.koryoku",
+   "form": "きょうりょく",
+   "reading": "きょうりょく",
+   "gloss": "cooperation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.jinkou",
+   "form": "じんこう",
+   "reading": "じんこう",
+   "gloss": "population",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.genkou",
+   "form": "げんこう",
+   "reading": "げんこう",
+   "gloss": "decrease",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.zouka",
+   "form": "ぞうか",
+   "reading": "ぞうか",
+   "gloss": "increase",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.noureka",
+   "form": "のうれか",
+   "reading": "のうれか",
+   "gloss": "aging",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.kodomo",
+   "form": "こども",
+   "reading": "こども",
+   "gloss": "child",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.hakushou",
+   "form": "しゅうしゅつりつ",
+   "reading": "しゅうしゅつりつ",
+   "gloss": "birth rate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.shoushou",
+   "form": "しょうしょう",
+   "reading": "しょうしょう",
+   "gloss": "shrinking",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.roojin",
+   "form": "ろうじん",
+   "reading": "ろうじん",
+   "gloss": "elderly",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.yobikou",
+   "form": "よびこう",
+   "reading": "よびこう",
+   "gloss": "reserve, preparation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.fuyou",
+   "form": "ふよう",
+   "reading": "ふよう",
+   "gloss": "support",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.kaigo",
+   "form": "かいご",
+   "reading": "かいご",
+   "gloss": "nursing care",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.yaku",
+   "form": "やく",
+   "reading": "やく",
+   "gloss": "role",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.tanshuku",
+   "form": "つうきん",
+   "reading": "つうきん",
+   "gloss": "commute",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.koyou",
+   "form": "こうよう",
+   "reading": "こうよう",
+   "gloss": "employment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.shitsugyou",
+   "form": "しつぎょう",
+   "reading": "しつぎょう",
+   "gloss": "unemployment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.yuumu",
+   "form": "ざんぎょう",
+   "reading": "ざんぎょう",
+   "gloss": "overtime",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.yuukou",
+   "form": "ゆうこう",
+   "reading": "ゆうこう",
+   "gloss": "effective",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.seido",
+   "form": "せいど",
+   "reading": "せいど",
+   "gloss": "institution, system",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.society3.kaikaku",
+   "form": "かいかく",
+   "reading": "かいかく",
+   "gloss": "reform",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-33",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.economy.genka",
+   "form": "げんか",
+   "reading": "げんか",
+   "gloss": "cost",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.shuunyuu",
+   "form": "しゅうにゅう",
+   "reading": "しゅうにゅう",
+   "gloss": "income",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.kessai",
+   "form": "けっさい",
+   "reading": "けっさい",
+   "gloss": "payment settlement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.toushi",
+   "form": "とうし",
+   "reading": "とうし",
+   "gloss": "investment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.tenshoku",
+   "form": "てんしょく",
+   "reading": "てんしょく",
+   "gloss": "job change",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.rinkou",
+   "form": "ちんぎん",
+   "reading": "ちんぎん",
+   "gloss": "wages",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.haken",
+   "form": "はけん",
+   "reading": "はけん",
+   "gloss": "temporary dispatch",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.seishain",
+   "form": "せいしゃいん",
+   "reading": "せいしゃいん",
+   "gloss": "regular employee",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.shihonshugi",
+   "form": "しほんしゅぎ",
+   "reading": "しほんしゅぎ",
+   "gloss": "capitalism",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.kaikei",
+   "form": "かいけい",
+   "reading": "かいけい",
+   "gloss": "accounting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.yokin",
+   "form": "よきん",
+   "reading": "よきん",
+   "gloss": "bank deposit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.shiharai",
+   "form": "しはらい",
+   "reading": "しはらい",
+   "gloss": "payment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.akachin",
+   "form": "あかちん",
+   "reading": "あかちん",
+   "gloss": "deficit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.risoku",
+   "form": "りそく",
+   "reading": "りそく",
+   "gloss": "interest",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.yoyuu",
+   "form": "よゆう",
+   "reading": "よゆう",
+   "gloss": "leeway",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.boeki",
+   "form": "ぼえき",
+   "reading": "ぼえき",
+   "gloss": "trade",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.sangyou",
+   "form": "さんぎょう",
+   "reading": "さんぎょう",
+   "gloss": "industry",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.kumiai",
+   "form": "くみあい",
+   "reading": "くみあい",
+   "gloss": "union",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.fuukyou",
+   "form": "ふっきょう",
+   "reading": "ふっきょう",
+   "gloss": "recession",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.keiki",
+   "form": "けいき",
+   "reading": "けいき",
+   "gloss": "business conditions",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.kaso",
+   "form": "かさ",
+   "reading": "かさ",
+   "gloss": "disparity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.toukei",
+   "form": "とうけい",
+   "reading": "とうけい",
+   "gloss": "statistics",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.wariai",
+   "form": "わりあい",
+   "reading": "わりあい",
+   "gloss": "proportion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.gakureki",
+   "form": "がくれき",
+   "reading": "がくれき",
+   "gloss": "educational background",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy2.kokugai",
+   "form": "かいがい",
+   "reading": "かいがい",
+   "gloss": "overseas",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

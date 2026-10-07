@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-123",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.study4.styk",
+   "form": "стык",
+   "reading": "стык",
+   "gloss": "joint, seam",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study4.shov",
+   "form": "шов",
+   "reading": "шов",
+   "gloss": "seam",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study4.zazor",
+   "form": "зазор",
+   "reading": "зазо́р",
+   "gloss": "gap, clearance",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study4.shchel",
+   "form": "щель",
+   "reading": "щель",
+   "gloss": "crack, crevice",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study4.treshchina",
+   "form": "трещина",
+   "reading": "тре́щина",
+   "gloss": "crack",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study4.dyra",
+   "form": "дыра",
+   "reading": "дыра́",
+   "gloss": "hole",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study4.otverstie",
+   "form": "отверстие",
+   "reading": "отве́рстие",
+   "gloss": "opening, hole",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study4.izlom",
+   "form": "излом",
+   "reading": "изло́м",
+   "gloss": "bend, fracture",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study4.izgib",
+   "form": "изгиб",
+   "reading": "изги́б",
+   "gloss": "curve, bend",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study4.razvorot",
+   "form": "разворот",
+   "reading": "разворо́т",
+   "gloss": "turn, reversal",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study4.oblik",
+   "form": "облик",
+   "reading": "о́блик",
+   "gloss": "appearance, look",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study4.normativ",
+   "form": "норматив",
+   "reading": "нормати́в",
+   "gloss": "norm, standard",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study4.normativnyy",
+   "form": "нормативный",
+   "reading": "нормати́вный",
+   "gloss": "normative",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study4.tipologiya",
+   "form": "типология",
+   "reading": "типоло́гия",
+   "gloss": "typology",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study4.sistematika",
+   "form": "систематика",
+   "reading": "система́тика",
+   "gloss": "systematics",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study4.sistemnyy",
+   "form": "системный",
+   "reading": "систе́мный",
+   "gloss": "systemic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study4.kompleks",
+   "form": "комплекс",
+   "reading": "ко́мплекс",
+   "gloss": "complex",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study4.kompleksnyy",
+   "form": "комплексный",
+   "reading": "компле́ксный",
+   "gloss": "complex (adj)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study4.taksonomiya",
+   "form": "таксономия",
+   "reading": "таксоно́мия",
+   "gloss": "taxonomy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study4.preemstvennost",
+   "form": "преемственность",
+   "reading": "прее́мственность",
+   "gloss": "continuity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study4.preemnik",
+   "form": "преемник",
+   "reading": "прее́мник",
+   "gloss": "successor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study4.naslednik",
+   "form": "наследник",
+   "reading": "насле́дник",
+   "gloss": "heir",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study4.imitaciya",
+   "form": "имитация",
+   "reading": "имита́ция",
+   "gloss": "imitation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study4.karikatura",
+   "form": "карикатура",
+   "reading": "карикату́ра",
+   "gloss": "caricature",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study4.grotesk",
+   "form": "гротеск",
+   "reading": "гроте́ск",
+   "gloss": "grotesque",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

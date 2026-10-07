@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-49",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u770",
+   "text": "Это лексика.",
+   "gloss": "This is vocabulary."
+  },
+  {
+   "id": "ru.sent.b2.u771",
+   "text": "Это стилистика.",
+   "gloss": "This is stylistics."
+  },
+  {
+   "id": "ru.sent.b2.u772",
+   "text": "Это омонимия.",
+   "gloss": "This is homonymy."
+  },
+  {
+   "id": "ru.sent.b2.u773",
+   "text": "Это иносказание.",
+   "gloss": "This is an allegory."
+  },
+  {
+   "id": "ru.sent.b2.u774",
+   "text": "Это арго.",
+   "gloss": "This is argot."
+  },
+  {
+   "id": "ru.sent.b2.u775",
+   "text": "Это придирка.",
+   "gloss": "This is a cavil."
+  },
+  {
+   "id": "ru.sent.b2.u776",
+   "text": "Это директива.",
+   "gloss": "This is a directive."
+  },
+  {
+   "id": "ru.sent.b2.u777",
+   "text": "Это подмена.",
+   "gloss": "This is a substitution."
+  },
+  {
+   "id": "ru.sent.b2.u778",
+   "text": "Это насмешка.",
+   "gloss": "This is mockery."
+  },
+  {
+   "id": "ru.sent.b2.u779",
+   "text": "Это строфа.",
+   "gloss": "This is a stanza."
+  },
+  {
+   "id": "ru.sent.b2.u780",
+   "text": "Это любезность.",
+   "gloss": "This is courtesy."
+  },
+  {
+   "id": "ru.sent.b2.u781",
+   "text": "Это бестактность.",
+   "gloss": "This is tactlessness."
+  },
+  {
+   "id": "ru.sent.b2.u782",
+   "text": "Это манеры.",
+   "gloss": "These are manners."
+  },
+  {
+   "id": "ru.sent.b2.u783",
+   "text": "Это фальшь.",
+   "gloss": "This is falsehood."
+  },
+  {
+   "id": "ru.sent.b2.u784",
+   "text": "Это лаконизм.",
+   "gloss": "This is laconism."
+  }
+ ]
+}

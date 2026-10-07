@@ -1,0 +1,52 @@
+{
+ "batch_id": "ja-JP-assess-7",
+ "kind": "assess",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.assess.culture-identity",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "discuss identity, tradition, or belonging using taught culture vocabulary",
+    "argue about heritage or subculture without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.abstract-debate",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "define a concept and state assumptions before arguing",
+    "present a counterargument or hypothesis without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.nuance-register",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "shift between polite and casual wording appropriately for the situation",
+    "use honorific or humble forms without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.humor-wordplay",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "explain or produce a pun based on similar sounds",
+    "react to a short comedy exchange without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.relationships-deep",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "discuss a family or friendship matter using taught relationship vocabulary",
+    "express trust, gratitude, or a boundary without blocking errors"
+   ]
+  }
+ ]
+}

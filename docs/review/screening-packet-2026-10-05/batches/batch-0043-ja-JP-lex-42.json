@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-42",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.emotion.seikaku",
+   "form": "せいかく",
+   "reading": "せいかく",
+   "gloss": "personality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.majime",
+   "form": "まじめ",
+   "reading": "まじめ",
+   "gloss": "diligent",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.sunao",
+   "form": "すなお",
+   "reading": "すなお",
+   "gloss": "docile",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.ousetsu",
+   "form": "おうせつ",
+   "reading": "おうせつ",
+   "gloss": "gregarious",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.kenmei",
+   "form": "けんめい",
+   "reading": "けんめい",
+   "gloss": "conscientious",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.kanjou",
+   "form": "かんじょう",
+   "reading": "かんじょう",
+   "gloss": "emotion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.ki-bun",
+   "form": "きぶん",
+   "reading": "きぶん",
+   "gloss": "mood",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.ki-mochi",
+   "form": "きもち",
+   "reading": "きもち",
+   "gloss": "feeling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.ki-kokochi",
+   "form": "きごこち",
+   "reading": "きごこち",
+   "gloss": "sensation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.yorokobi",
+   "form": "よろこび",
+   "reading": "よろこび",
+   "gloss": "joy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.wakuwaku",
+   "form": "わくわく",
+   "reading": "わくわく",
+   "gloss": "excitement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.iraira",
+   "form": "いらいら",
+   "reading": "いらいら",
+   "gloss": "irritation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.dokidoki",
+   "form": "どきどき",
+   "reading": "どきどき",
+   "gloss": "palpitation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.ki-gamae",
+   "form": "きまえ",
+   "reading": "きまえ",
+   "gloss": "mental readiness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.ki-ryoku",
+   "form": "きりょく",
+   "reading": "きりょく",
+   "gloss": "willpower",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.ki-oku",
+   "form": "きおく",
+   "reading": "きおく",
+   "gloss": "consideration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.ki-magu",
+   "form": "きまぐれ",
+   "reading": "きまぐれ",
+   "gloss": "moodiness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.chikara-zuku",
+   "form": "ちからづよい",
+   "reading": "ちからづよい",
+   "gloss": "encouraging",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.yasashisa",
+   "form": "やさしさ",
+   "reading": "やさしさ",
+   "gloss": "kindness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.kizukai",
+   "form": "きづかい",
+   "reading": "きづかい",
+   "gloss": "thoughtfulness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.okoru",
+   "form": "おこる",
+   "reading": "おこる",
+   "gloss": "to get angry",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.akire",
+   "form": "あきれ",
+   "reading": "あきれ",
+   "gloss": "exasperation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.zannin",
+   "form": "ざんねん",
+   "reading": "ざんねん",
+   "gloss": "disappointing",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.akeppashi",
+   "form": "あけっぴろげ",
+   "reading": "あけっぴろげ",
+   "gloss": "candid",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion.genkotsu",
+   "form": "げんこつ",
+   "reading": "げんこつ",
+   "gloss": "scolding",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

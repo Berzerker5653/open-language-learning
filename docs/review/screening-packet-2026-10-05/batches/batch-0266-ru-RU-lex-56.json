@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-56",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.messages2.sejchas",
+   "form": "сейчас",
+   "reading": "сейча́с",
+   "gloss": "now",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.skoro",
+   "form": "скоро",
+   "reading": "ско́ро",
+   "gloss": "soon",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.pozdno",
+   "form": "поздно",
+   "reading": "по́здно",
+   "gloss": "late",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.rano",
+   "form": "рано",
+   "reading": "ра́но",
+   "gloss": "early",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.ves",
+   "form": "весь",
+   "reading": "весь",
+   "gloss": "all, whole",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.vspomnit",
+   "form": "вспомнить",
+   "reading": "вспо́мнить",
+   "gloss": "to recall",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.zapomnit",
+   "form": "запомнить",
+   "reading": "запо́мнить",
+   "gloss": "to memorize",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.pamyat",
+   "form": "память",
+   "reading": "па́мять",
+   "gloss": "memory",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.messages2.naizust",
+   "form": "наизусть",
+   "reading": "наизу́сть",
+   "gloss": "by heart",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.moment",
+   "form": "момент",
+   "reading": "моме́нт",
+   "gloss": "moment",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages2.obeshchanie",
+   "form": "обещание",
+   "reading": "обеща́ние",
+   "gloss": "promise",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.messages2.sderzhat",
+   "form": "сдержать",
+   "reading": "сдержа́ть",
+   "gloss": "to keep (a promise)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.verno",
+   "form": "верно",
+   "reading": "ве́рно",
+   "gloss": "correctly, true",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.tochno",
+   "form": "точно",
+   "reading": "то́чно",
+   "gloss": "exactly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.obyazatelno",
+   "form": "обязательно",
+   "reading": "обяза́тельно",
+   "gloss": "definitely, must",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.nadejatsya",
+   "form": "надеяться",
+   "reading": "наде́яться",
+   "gloss": "to hope",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.zhelat",
+   "form": "желать",
+   "reading": "жела́ть",
+   "gloss": "to wish",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.mechtat",
+   "form": "мечтать",
+   "reading": "мечта́ть",
+   "gloss": "to dream",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.radovatsya",
+   "form": "радоваться",
+   "reading": "ра́доваться",
+   "gloss": "to rejoice",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.udivlyatsya",
+   "form": "удивляться",
+   "reading": "удивля́ться",
+   "gloss": "to be surprised",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.utochit",
+   "form": "уточнить",
+   "reading": "уточни́ть",
+   "gloss": "to clarify",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.interesovatsya",
+   "form": "интересоваться",
+   "reading": "интересова́ться",
+   "gloss": "to take an interest",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.otvetit",
+   "form": "ответить",
+   "reading": "отве́тить",
+   "gloss": "to answer",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages2.spros",
+   "form": "спрос",
+   "reading": "спрос",
+   "gloss": "a question, ask",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages2.dogadatsya",
+   "form": "догадаться",
+   "reading": "догада́ться",
+   "gloss": "to guess, figure out",
+   "pos": "verb",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-0",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.abst.gainen",
+   "form": "がいねん",
+   "reading": "がいねん",
+   "gloss": "concept",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst.teigi",
+   "form": "ていぎ",
+   "reading": "ていぎ",
+   "gloss": "definition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst.zenso",
+   "form": "ぜんそう",
+   "reading": "ぜんそう",
+   "gloss": "assumption, premise",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst.risu2",
+   "form": "りくつ",
+   "reading": "りくつ",
+   "gloss": "theory, argument",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst.hantai5",
+   "form": "はんたい",
+   "reading": "はんたい",
+   "gloss": "counterargument",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst.kosetsu",
+   "form": "こうせつ",
+   "reading": "こうせつ",
+   "gloss": "hypothesis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst.kenkyusha2",
+   "form": "けんきゅうしゃ",
+   "reading": "けんきゅうしゃ",
+   "gloss": "researcher",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst.shomei",
+   "form": "しょうめい",
+   "reading": "しょうめい",
+   "gloss": "proof, clarification",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst.fuyu2",
+   "form": "ふゆう",
+   "reading": "ふゆう",
+   "gloss": "immersion (debate)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst.koryu4",
+   "form": "こうりゅう",
+   "reading": "こうりゅう",
+   "gloss": "exchange (of ideas)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.ronso2",
+   "form": "ろんそう",
+   "reading": "ろんそう",
+   "gloss": "debate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.teigen",
+   "form": "ていげん",
+   "reading": "ていげん",
+   "gloss": "proposal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.koka",
+   "form": "こうか",
+   "reading": "こうか",
+   "gloss": "effect",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.genin",
+   "form": "げんいん",
+   "reading": "げんいん",
+   "gloss": "cause",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.kankei2",
+   "form": "かんけい",
+   "reading": "かんけい",
+   "gloss": "relationship",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.juni2",
+   "form": "じゅんい",
+   "reading": "じゅんい",
+   "gloss": "order, rank",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.hyoka2",
+   "form": "ひょうか",
+   "reading": "ひょうか",
+   "gloss": "evaluation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.kenkyu2",
+   "form": "けんきゅう",
+   "reading": "けんきゅう",
+   "gloss": "research",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.shiryou3",
+   "form": "しりょう",
+   "reading": "しりょう",
+   "gloss": "data, materials",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.kenso",
+   "form": "けんそう",
+   "reading": "けんそう",
+   "gloss": "consideration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.kentou",
+   "form": "けんとう",
+   "reading": "けんとう",
+   "gloss": "examination",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.juri",
+   "form": "じゅり",
+   "reading": "じゅり",
+   "gloss": "logic",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.gaisetsu",
+   "form": "がいせつ",
+   "reading": "がいせつ",
+   "gloss": "generalization",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.shuuyou",
+   "form": "しゅうよう",
+   "reading": "しゅうよう",
+   "gloss": "generalization (usage)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.abst2.hantai6",
+   "form": "はんたい",
+   "reading": "はんたい",
+   "gloss": "opposition",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

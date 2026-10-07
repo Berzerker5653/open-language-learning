@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-89",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.med.byouin",
+   "form": "びょういん",
+   "reading": "びょういん",
+   "gloss": "hospital",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.kusuri",
+   "form": "くすり",
+   "reading": "くすり",
+   "gloss": "medicine, drug",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.kanja",
+   "form": "かんじゃ",
+   "reading": "かんじゃ",
+   "gloss": "patient",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.kenkyuu",
+   "form": "けんきゅう",
+   "reading": "けんきゅう",
+   "gloss": "research, study",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.data",
+   "form": "でーた",
+   "reading": "でーた",
+   "gloss": "data",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.shouko",
+   "form": "しょうこ",
+   "reading": "しょうこ",
+   "gloss": "evidence, proof",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.ronbun",
+   "form": "ろんぶん",
+   "reading": "ろんぶん",
+   "gloss": "essay, paper",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.teian",
+   "form": "ていあん",
+   "reading": "ていあん",
+   "gloss": "proposal, suggestion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.eisei",
+   "form": "えいせい",
+   "reading": "えいせい",
+   "gloss": "hygiene, public health",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.yobou",
+   "form": "よぼう",
+   "reading": "よぼう",
+   "gloss": "prevention",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.wakuchin",
+   "form": "わくちん",
+   "reading": "わくちん",
+   "gloss": "vaccine",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.kansen",
+   "form": "かんせん",
+   "reading": "かんせん",
+   "gloss": "infection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.hassen",
+   "form": "はっせん",
+   "reading": "はっせん",
+   "gloss": "outbreak",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.denkan",
+   "form": "でんかん",
+   "reading": "でんかん",
+   "gloss": "contagion, transmission",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.chousa",
+   "form": "ちょうさ",
+   "reading": "ちょうさ",
+   "gloss": "investigation, survey",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.kanren",
+   "form": "かんれん",
+   "reading": "かんれん",
+   "gloss": "relation, connection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.toukei",
+   "form": "とうけい",
+   "reading": "とうけい",
+   "gloss": "statistics",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.happyou",
+   "form": "はっぴょう",
+   "reading": "はっぴょう",
+   "gloss": "announcement, presentation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.seido",
+   "form": "せいど",
+   "reading": "せいど",
+   "gloss": "system, institution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.houkenryou",
+   "form": "ほうけんりょう",
+   "reading": "ほうけんりょう",
+   "gloss": "insurance premium",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.kyoukai",
+   "form": "きょうかい",
+   "reading": "きょうかい",
+   "gloss": "association, society",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.kanri",
+   "form": "かんり",
+   "reading": "かんり",
+   "gloss": "management, control",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.shien",
+   "form": "しえん",
+   "reading": "しえん",
+   "gloss": "support, assistance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.kenkou",
+   "form": "けんこう",
+   "reading": "けんこう",
+   "gloss": "health",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.undou",
+   "form": "うんどう",
+   "reading": "うんどう",
+   "gloss": "exercise",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

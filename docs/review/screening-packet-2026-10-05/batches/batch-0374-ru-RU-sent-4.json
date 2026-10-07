@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-4",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.a1.u091",
+   "text": "Это суббота.",
+   "gloss": "This is Saturday."
+  },
+  {
+   "id": "ru.sent.a1.u092",
+   "text": "Это январь.",
+   "gloss": "This is January."
+  },
+  {
+   "id": "ru.sent.a1.u093",
+   "text": "Это июнь.",
+   "gloss": "This is June."
+  },
+  {
+   "id": "ru.sent.a1.u094",
+   "text": "Это зима.",
+   "gloss": "This is winter."
+  },
+  {
+   "id": "ru.sent.a1.u095",
+   "text": "Это осень.",
+   "gloss": "This is autumn."
+  },
+  {
+   "id": "ru.sent.a1.u097",
+   "text": "Это праздник.",
+   "gloss": "This is a holiday."
+  },
+  {
+   "id": "ru.sent.a1.u098",
+   "text": "Это тост.",
+   "gloss": "This is a toast."
+  },
+  {
+   "id": "ru.sent.a1.u100",
+   "text": "Это письмо.",
+   "gloss": "This is a letter."
+  },
+  {
+   "id": "ru.sent.a1.u101",
+   "text": "Это сообщение.",
+   "gloss": "This is a message."
+  },
+  {
+   "id": "ru.sent.a1.u102",
+   "text": "Это ответ.",
+   "gloss": "This is an answer."
+  },
+  {
+   "id": "ru.sent.a1.u103",
+   "text": "Это голос.",
+   "gloss": "This is a voice."
+  },
+  {
+   "id": "ru.sent.a1.u104",
+   "text": "Это идея.",
+   "gloss": "This is an idea."
+  },
+  {
+   "id": "ru.sent.a1.u105",
+   "text": "Это правда.",
+   "gloss": "This is the truth."
+  },
+  {
+   "id": "ru.sent.a1.u106",
+   "text": "Это текст.",
+   "gloss": "This is a text."
+  },
+  {
+   "id": "ru.sent.a1.u108",
+   "text": "Это извинение.",
+   "gloss": "This is an apology."
+  }
+ ]
+}

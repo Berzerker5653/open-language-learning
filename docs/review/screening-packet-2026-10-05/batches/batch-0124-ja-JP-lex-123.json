@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-123",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.science.kankyou-hoju",
+   "form": "かんきょうほご",
+   "reading": "かんきょうほご",
+   "gloss": "environmental protection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.tenkan2",
+   "form": "きこう",
+   "reading": "きこう",
+   "gloss": "climate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.kisha2",
+   "form": "きしゃ",
+   "reading": "きしゃ",
+   "gloss": "journalist",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.kagaku",
+   "form": "かがく",
+   "reading": "かがく",
+   "gloss": "science",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.kentei",
+   "form": "けんてい",
+   "reading": "けんてい",
+   "gloss": "examination, test",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.jikken",
+   "form": "じっけん",
+   "reading": "じっけん",
+   "gloss": "experiment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.risshi",
+   "form": "せいこう",
+   "reading": "せいこう",
+   "gloss": "success",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.shippai2",
+   "form": "しっぱい",
+   "reading": "しっぱい",
+   "gloss": "failure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.seika2",
+   "form": "せいか",
+   "reading": "せいか",
+   "gloss": "achievement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.riron",
+   "form": "りろん",
+   "reading": "りろん",
+   "gloss": "theory",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.unmei",
+   "form": "うんめい",
+   "reading": "うんめい",
+   "gloss": "fate, destiny",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.kitei",
+   "form": "きてい",
+   "reading": "きてい",
+   "gloss": "regulation, rule",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.seinin",
+   "form": "おとな",
+   "reading": "おとな",
+   "gloss": "adult",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.hoshou2",
+   "form": "ほうしょう",
+   "reading": "ほうしょう",
+   "gloss": "assurance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.tousei2",
+   "form": "せいぎょ",
+   "reading": "せいぎょ",
+   "gloss": "control, regulation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.hantai3",
+   "form": "はんたい",
+   "reading": "はんたい",
+   "gloss": "resistance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.sangyou",
+   "form": "さんぎょう",
+   "reading": "さんぎょう",
+   "gloss": "industry",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.shinko2",
+   "form": "しんしん",
+   "reading": "しんしん",
+   "gloss": "emerging",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.fukumu2",
+   "form": "ふくむ",
+   "reading": "ふくむ",
+   "gloss": "to include",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.koura",
+   "form": "むだ",
+   "reading": "むだ",
+   "gloss": "waste, loss",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.touka",
+   "form": "とーけんか",
+   "reading": "とーけんか",
+   "gloss": "tokenization",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.tsuuyou",
+   "form": "つうよう",
+   "reading": "つうよう",
+   "gloss": "universal, common",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.kiso2",
+   "form": "きそ",
+   "reading": "きそ",
+   "gloss": "basic, fundamental",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.kentei2",
+   "form": "かせつ",
+   "reading": "かせつ",
+   "gloss": "hypothesis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science2.shoumei",
+   "form": "しょうめい",
+   "reading": "しょうめい",
+   "gloss": "proof, explanation",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

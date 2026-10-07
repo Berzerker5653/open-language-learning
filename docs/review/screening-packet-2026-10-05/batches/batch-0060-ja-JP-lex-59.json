@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-59",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.food.karee",
+   "form": "かれー",
+   "reading": "かれー",
+   "gloss": "curry",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.hamburger",
+   "form": "はんばーガー",
+   "reading": "はんばーガー",
+   "gloss": "hamburger",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.chawan",
+   "form": "ちゃわん",
+   "reading": "ちゃわん",
+   "gloss": "rice bowl",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.renge",
+   "form": "れんげ",
+   "reading": "れんげ",
+   "gloss": "rice spoon",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.koshou",
+   "form": "こしょう",
+   "reading": "こしょう",
+   "gloss": "pepper",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.onigiri",
+   "form": "おにぎり",
+   "reading": "おにぎり",
+   "gloss": "rice ball",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.mochi",
+   "form": "もち",
+   "reading": "もち",
+   "gloss": "rice cake",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.tsukemono",
+   "form": "つけもの",
+   "reading": "つけもの",
+   "gloss": "pickles",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.tofu",
+   "form": "とうふ",
+   "reading": "とうふ",
+   "gloss": "tofu",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.bouei",
+   "form": "ぼうえい",
+   "reading": "ぼうえい",
+   "gloss": "defense",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.kaihen",
+   "form": "かいへん",
+   "reading": "かいへん",
+   "gloss": "reply, response",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.shinpan",
+   "form": "しんぱん",
+   "reading": "しんぱん",
+   "gloss": "judgment, review",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.tsuuchou",
+   "form": "ふうとう",
+   "reading": "ふうとう",
+   "gloss": "envelope",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.shokan",
+   "form": "しょかん",
+   "reading": "しょかん",
+   "gloss": "letter, epistle",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.jimusho",
+   "form": "じむしょ",
+   "reading": "じむしょ",
+   "gloss": "office",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.juusho",
+   "form": "じゅうしょ",
+   "reading": "じゅうしょ",
+   "gloss": "address",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.moushikomi",
+   "form": "もうしこみ",
+   "reading": "もうしこみ",
+   "gloss": "application",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.rireki",
+   "form": "りれき",
+   "reading": "りれき",
+   "gloss": "résumé, history",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.shikaku",
+   "form": "しかく",
+   "reading": "しかく",
+   "gloss": "qualification",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.toujyou",
+   "form": "とうじょう",
+   "reading": "とうじょう",
+   "gloss": "attendance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.kisai",
+   "form": "きさい",
+   "reading": "きさい",
+   "gloss": "listing, entry",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.tsuuchi",
+   "form": "つうち",
+   "reading": "つうち",
+   "gloss": "notice",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.kokuho",
+   "form": "こうほ",
+   "reading": "こうほ",
+   "gloss": "public announcement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.kiji",
+   "form": "きじ",
+   "reading": "きじ",
+   "gloss": "article",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.formal.teikou",
+   "form": "ていこう",
+   "reading": "ていこう",
+   "gloss": "submission",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

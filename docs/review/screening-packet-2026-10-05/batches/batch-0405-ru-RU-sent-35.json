@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-35",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u560",
+   "text": "Это открытие.",
+   "gloss": "This is a discovery."
+  },
+  {
+   "id": "ru.sent.b2.u561",
+   "text": "Это находка.",
+   "gloss": "This is a finding."
+  },
+  {
+   "id": "ru.sent.b2.u562",
+   "text": "Это обсуждение.",
+   "gloss": "This is a discussion."
+  },
+  {
+   "id": "ru.sent.b2.u563",
+   "text": "Это полнота.",
+   "gloss": "This is completeness."
+  },
+  {
+   "id": "ru.sent.b2.u564",
+   "text": "Это смесь.",
+   "gloss": "This is a mixture."
+  },
+  {
+   "id": "ru.sent.b2.u565",
+   "text": "Это раствор.",
+   "gloss": "This is a solution."
+  },
+  {
+   "id": "ru.sent.b2.u566",
+   "text": "Это стык.",
+   "gloss": "This is a joint."
+  },
+  {
+   "id": "ru.sent.b2.u567",
+   "text": "Это изгиб.",
+   "gloss": "This is a curve."
+  },
+  {
+   "id": "ru.sent.b2.u568",
+   "text": "Это облик.",
+   "gloss": "This is an appearance."
+  },
+  {
+   "id": "ru.sent.b2.u569",
+   "text": "Это комплекс.",
+   "gloss": "This is a complex."
+  },
+  {
+   "id": "ru.sent.b2.u570",
+   "text": "Это отмена.",
+   "gloss": "This is a cancellation."
+  },
+  {
+   "id": "ru.sent.b2.u571",
+   "text": "Это изменение.",
+   "gloss": "This is a change."
+  },
+  {
+   "id": "ru.sent.b2.u572",
+   "text": "Это согласование.",
+   "gloss": "This is coordination."
+  },
+  {
+   "id": "ru.sent.b2.u573",
+   "text": "Это резолюция.",
+   "gloss": "This is a resolution."
+  },
+  {
+   "id": "ru.sent.b2.u574",
+   "text": "Это входящий.",
+   "gloss": "This is an incoming document."
+  }
+ ]
+}

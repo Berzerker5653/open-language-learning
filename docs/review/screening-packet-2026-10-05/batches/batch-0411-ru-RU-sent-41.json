@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-41",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u650",
+   "text": "Это госуслуга.",
+   "gloss": "This is a government service."
+  },
+  {
+   "id": "ru.sent.b2.u651",
+   "text": "Это петиция.",
+   "gloss": "This is a petition."
+  },
+  {
+   "id": "ru.sent.b2.u652",
+   "text": "Это муниципалитет.",
+   "gloss": "This is a municipality."
+  },
+  {
+   "id": "ru.sent.b2.u653",
+   "text": "Это госслужащий.",
+   "gloss": "This is a civil servant."
+  },
+  {
+   "id": "ru.sent.b2.u654",
+   "text": "Это лицензирование.",
+   "gloss": "This is licensing."
+  },
+  {
+   "id": "ru.sent.b2.u655",
+   "text": "Это налогообложение.",
+   "gloss": "This is taxation."
+  },
+  {
+   "id": "ru.sent.b2.u656",
+   "text": "Это квотирование.",
+   "gloss": "This is quota allocation."
+  },
+  {
+   "id": "ru.sent.b2.u657",
+   "text": "Это блокировка.",
+   "gloss": "This is blocking."
+  },
+  {
+   "id": "ru.sent.b2.u658",
+   "text": "Это оцифровка.",
+   "gloss": "This is digitization."
+  },
+  {
+   "id": "ru.sent.b2.u659",
+   "text": "Это реформа.",
+   "gloss": "This is a reform."
+  },
+  {
+   "id": "ru.sent.b2.u660",
+   "text": "Это вариант.",
+   "gloss": "This is an option."
+  },
+  {
+   "id": "ru.sent.b2.u661",
+   "text": "Это секвестр.",
+   "gloss": "This is sequestration."
+  },
+  {
+   "id": "ru.sent.b2.u662",
+   "text": "Это урезание.",
+   "gloss": "This is a cut."
+  },
+  {
+   "id": "ru.sent.b2.u663",
+   "text": "Это консолидация.",
+   "gloss": "This is consolidation."
+  },
+  {
+   "id": "ru.sent.b2.u664",
+   "text": "Это децентрализация.",
+   "gloss": "This is decentralization."
+  }
+ ]
+}

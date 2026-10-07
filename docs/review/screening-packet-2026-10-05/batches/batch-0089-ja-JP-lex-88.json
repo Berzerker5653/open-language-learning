@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-88",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.lit3.shinmi",
+   "form": "しんみ",
+   "reading": "しんみ",
+   "gloss": "depth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.omomi",
+   "form": "おもみ",
+   "reading": "おもみ",
+   "gloss": "weight",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.hakken",
+   "form": "はっけん",
+   "reading": "はっけん",
+   "gloss": "discovery",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.ronsetsu",
+   "form": "ろんせつ",
+   "reading": "ろんせつ",
+   "gloss": "essay",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.kijutsu",
+   "form": "きじゅつ",
+   "reading": "きじゅつ",
+   "gloss": "description",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.genpon",
+   "form": "げんぽん",
+   "reading": "げんぽん",
+   "gloss": "original book",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.henkan",
+   "form": "へんかん",
+   "reading": "へんかん",
+   "gloss": "editing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.sousaku",
+   "form": "そうさく",
+   "reading": "そうさく",
+   "gloss": "creation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.butai",
+   "form": "ぶたい",
+   "reading": "ぶたい",
+   "gloss": "stage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.serifu",
+   "form": "せりふ",
+   "reading": "せりふ",
+   "gloss": "dialogue",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.kyogen",
+   "form": "きょうげん",
+   "reading": "きょうげん",
+   "gloss": "kyogen play",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.kabuki",
+   "form": "かぶき",
+   "reading": "かぶき",
+   "gloss": "kabuki",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.engei",
+   "form": "えんぎ",
+   "reading": "えんぎ",
+   "gloss": "acting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.yohyaku",
+   "form": "ようやく",
+   "reading": "ようやく",
+   "gloss": "summary",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.gaiyou",
+   "form": "がいよう",
+   "reading": "がいよう",
+   "gloss": "outline",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.hihyou",
+   "form": "ひひょう",
+   "reading": "ひひょう",
+   "gloss": "criticism",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.shoukai",
+   "form": "しょうかい",
+   "reading": "しょうかい",
+   "gloss": "introduction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit3.saku",
+   "form": "さく",
+   "reading": "さく",
+   "gloss": "work",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.kettei",
+   "form": "けってい",
+   "reading": "けってい",
+   "gloss": "decision",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.sentaku",
+   "form": "せんたく",
+   "reading": "せんたく",
+   "gloss": "choice, selection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.risuku",
+   "form": "りすく",
+   "reading": "りすく",
+   "gloss": "risk",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.kouka",
+   "form": "こうか",
+   "reading": "こうか",
+   "gloss": "effect, result",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.koushou",
+   "form": "こうしょう",
+   "reading": "こうしょう",
+   "gloss": "trade-off, concession",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.seishin",
+   "form": "せいしん",
+   "reading": "せいしん",
+   "gloss": "mind, spirit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.hoken",
+   "form": "ほうけん",
+   "reading": "ほうけん",
+   "gloss": "health insurance",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

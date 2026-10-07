@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-33",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u530",
+   "text": "Это глоссарий.",
+   "gloss": "This is a glossary."
+  },
+  {
+   "id": "ru.sent.b2.u531",
+   "text": "Это дефиниция.",
+   "gloss": "This is a definition."
+  },
+  {
+   "id": "ru.sent.b2.u532",
+   "text": "Это значение.",
+   "gloss": "This is a meaning."
+  },
+  {
+   "id": "ru.sent.b2.u533",
+   "text": "Это перечень.",
+   "gloss": "This is a list."
+  },
+  {
+   "id": "ru.sent.b2.u534",
+   "text": "Это единица.",
+   "gloss": "This is a unit."
+  },
+  {
+   "id": "ru.sent.b2.u535",
+   "text": "Это шкала.",
+   "gloss": "This is a scale."
+  },
+  {
+   "id": "ru.sent.b2.u536",
+   "text": "Это фаза.",
+   "gloss": "This is a phase."
+  },
+  {
+   "id": "ru.sent.b2.u537",
+   "text": "Это формула.",
+   "gloss": "This is a formula."
+  },
+  {
+   "id": "ru.sent.b2.u538",
+   "text": "Это квадрат.",
+   "gloss": "This is a square."
+  },
+  {
+   "id": "ru.sent.b2.u539",
+   "text": "Это элемент.",
+   "gloss": "This is an element."
+  },
+  {
+   "id": "ru.sent.b2.u540",
+   "text": "Это пометка.",
+   "gloss": "This is a note."
+  },
+  {
+   "id": "ru.sent.b2.u541",
+   "text": "Это инфографика.",
+   "gloss": "This is infographics."
+  },
+  {
+   "id": "ru.sent.b2.u542",
+   "text": "Это хронология.",
+   "gloss": "This is chronology."
+  },
+  {
+   "id": "ru.sent.b2.u543",
+   "text": "Это поток.",
+   "gloss": "This is a flow."
+  },
+  {
+   "id": "ru.sent.b2.u544",
+   "text": "Это объект.",
+   "gloss": "This is an object."
+  }
+ ]
+}

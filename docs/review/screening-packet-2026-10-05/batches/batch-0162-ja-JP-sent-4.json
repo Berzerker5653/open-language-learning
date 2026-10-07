@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-4",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.see-you-tomorrow",
+   "text": "またあした。",
+   "gloss": "See you tomorrow."
+  },
+  {
+   "id": "ja.sent.buy-ticket",
+   "text": "きっぷ を かいます。",
+   "gloss": "I buy a ticket."
+  },
+  {
+   "id": "ja.sent.go-by-bike",
+   "text": "じてんしゃ で いきます。",
+   "gloss": "I go by bicycle."
+  },
+  {
+   "id": "ja.sent.next-left",
+   "text": "つぎ は ひだり です。",
+   "gloss": "The next turn is left."
+  },
+  {
+   "id": "ja.sent.station-near",
+   "text": "えき は ちかいです。",
+   "gloss": "The station is near."
+  },
+  {
+   "id": "ja.sent.train-fast",
+   "text": "この でんしゃ は はやいです。",
+   "gloss": "This train is fast."
+  },
+  {
+   "id": "ja.sent.trip-long",
+   "text": "この たび は ながいです。",
+   "gloss": "This trip is long."
+  },
+  {
+   "id": "ja.sent.plane-fly",
+   "text": "ひこうき が とびます。",
+   "gloss": "The airplane flies."
+  },
+  {
+   "id": "ja.sent.head-hurts",
+   "text": "あたま が いたいです。",
+   "gloss": "My head hurts."
+  },
+  {
+   "id": "ja.sent.take-medicine",
+   "text": "くすりを のみます。",
+   "gloss": "I take medicine."
+  },
+  {
+   "id": "ja.sent.see-doctor",
+   "text": "いしゃに あいます。",
+   "gloss": "I see the doctor."
+  },
+  {
+   "id": "ja.sent.rest-today",
+   "text": "きょうは やすみます。",
+   "gloss": "I am resting today."
+  },
+  {
+   "id": "ja.sent.want-sleep",
+   "text": "ねたいです。",
+   "gloss": "I want to sleep."
+  },
+  {
+   "id": "ja.sent.like-music",
+   "text": "おんがくが だいすきです。",
+   "gloss": "I love music."
+  },
+  {
+   "id": "ja.sent.play-soccer",
+   "text": "さっかーを あそびます。",
+   "gloss": "I play soccer."
+  }
+ ]
+}

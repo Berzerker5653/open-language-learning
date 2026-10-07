@@ -1,0 +1,107 @@
+{
+ "batch_id": "ru-RU-assess-6",
+ "kind": "assess",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.assess.b1.culture-media-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify the cultural word (фильм, картина) in a supplied note.",
+    "Match какое chunks to their exclamation.",
+    "Distinguish рецензия (review) from объявление (announcement)."
+   ]
+  },
+  {
+   "id": "ru.assess.b1.culture-media-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Say you liked something with the supplied мне понравилось chunk.",
+    "Give an evaluation with a supplied трогательный or запоминающийся chunk.",
+    "Name a reaction with a supplied реакция or аплодисменты chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.b1.opinions-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify the stance word (сомнение, уверенность) in a supplied note.",
+    "Match например chunks to their example.",
+    "Distinguish возражение (objection) from замечание (remark)."
+   ]
+  },
+  {
+   "id": "ru.assess.b1.opinions-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "State an opinion with the supplied по мнению chunk.",
+    "Give an example with the supplied например chunk.",
+    "Express doubt or confidence with a supplied сомнение or уверенность chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.b1.info-summary-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify the main-point word (суть, смысл) in a supplied note.",
+    "Match иными словами chunks to their reformulation.",
+    "Distinguish аннотация (annotation) from рецензия (review)."
+   ]
+  },
+  {
+   "id": "ru.assess.b1.info-summary-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "State the main point with the supplied главное chunk.",
+    "Reformulate with the supplied иными словами chunk.",
+    "Summarize with a supplied пересказ or выжимка chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.b1.info-summary-reading2",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify selection words (отбор, критерий) in a supplied note.",
+    "Match таким образом chunks to their conclusion.",
+    "Distinguish оглавление (table of contents) from предисловие (preface)."
+   ]
+  },
+  {
+   "id": "ru.assess.b1.info-summary-writing2",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Conclude with the supplied таким образом chunk.",
+    "Compress with the supplied короче говоря chunk.",
+    "Cite with a supplied цитата or отрывок chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.b1.future-conditions-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify consequence words (следствие, исход) in a supplied note.",
+    "Match если … тогда chunks to their sequence.",
+    "Distinguish запрет (prohibition) from разрешение (permission)."
+   ]
+  },
+  {
+   "id": "ru.assess.b1.future-conditions-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "State a condition with the supplied если … тогда chunk.",
+    "Express possibility with the supplied может быть chunk.",
+    "Predict with a supplied удастся or получится chunk."
+   ]
+  }
+ ]
+}

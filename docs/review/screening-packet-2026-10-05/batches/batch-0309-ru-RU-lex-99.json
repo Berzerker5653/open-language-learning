@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-99",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.sci.chuzherodnyy",
+   "form": "чужеродный",
+   "reading": "чужеро́дный",
+   "gloss": "alien, foreign",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.adaptirovatsya",
+   "form": "адаптироваться",
+   "reading": "адаптиро́ваться",
+   "gloss": "to adapt (refl.)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.parnik",
+   "form": "парник",
+   "reading": "па́рник",
+   "gloss": "greenhouse",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.parnikovyy",
+   "form": "парниковый",
+   "reading": "парнико́вый",
+   "gloss": "greenhouse (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.ozonovyy",
+   "form": "озоновый",
+   "reading": "озо́новый",
+   "gloss": "ozone (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.smog",
+   "form": "смог",
+   "reading": "смог",
+   "gloss": "smog",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.tumannyy",
+   "form": "туманный",
+   "reading": "тума́нный",
+   "gloss": "foggy",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.pavodok",
+   "form": "паводок",
+   "reading": "па́водок",
+   "gloss": "spring flood",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.podtoplenie",
+   "form": "подтопление",
+   "reading": "подтопле́ние",
+   "gloss": "partial flooding",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.eroziya",
+   "form": "эрозия",
+   "reading": "эро́зия",
+   "gloss": "erosion",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.opolzen",
+   "form": "оползень",
+   "reading": "о́ползень",
+   "gloss": "landslide",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.zashushlivyy",
+   "form": "засушливый",
+   "reading": "засу́шливый",
+   "gloss": "arid, dry",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.osushenie",
+   "form": "осушение",
+   "reading": "осуше́ние",
+   "gloss": "drainage",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.oroshenie",
+   "form": "орошение",
+   "reading": "ороше́ние",
+   "gloss": "irrigation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.irrigaciya",
+   "form": "ирригация",
+   "reading": "иррига́ция",
+   "gloss": "irrigation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.vodosnabzhenie",
+   "form": "водоснабжение",
+   "reading": "водоснабже́ние",
+   "gloss": "water supply",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.kanalizaciya",
+   "form": "канализация",
+   "reading": "канализа́ция",
+   "gloss": "sewerage",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.pritok",
+   "form": "приток",
+   "reading": "прито́к",
+   "gloss": "tributary, inflow",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.istok",
+   "form": "исток",
+   "reading": "исто́к",
+   "gloss": "source, headwater",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.otliv",
+   "form": "отлив",
+   "reading": "отли́в",
+   "gloss": "low tide",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.vetryanoy",
+   "form": "ветряной",
+   "reading": "ветряно́й",
+   "gloss": "wind (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.vetroenergetika",
+   "form": "ветроэнергетика",
+   "reading": "ветроэнерге́тика",
+   "gloss": "wind energy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.gidroenergetika",
+   "form": "гидроэнергетика",
+   "reading": "гидроэнерге́тика",
+   "gloss": "hydro energy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.radioaktivnyy",
+   "form": "радиоактивный",
+   "reading": "радиоакти́вный",
+   "gloss": "radioactive",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.radioaktivnost",
+   "form": "радиоактивность",
+   "reading": "радиоакти́вность",
+   "gloss": "radioactivity",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

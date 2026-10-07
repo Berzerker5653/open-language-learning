@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-83",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.prof.avans",
+   "form": "аванс",
+   "reading": "ава́нс",
+   "gloss": "advance payment",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.pereplata",
+   "form": "переплата",
+   "reading": "перепла́та",
+   "gloss": "overpayment",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.bonus",
+   "form": "бонус",
+   "reading": "бо́нус",
+   "gloss": "bonus",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.lgota",
+   "form": "льгота",
+   "reading": "льго́та",
+   "gloss": "benefit, privilege",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.subsidiya",
+   "form": "субсидия",
+   "reading": "субси́дия",
+   "gloss": "subsidy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.grant",
+   "form": "грант",
+   "reading": "грант",
+   "gloss": "grant",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.dotaciya",
+   "form": "дотация",
+   "reading": "дота́ция",
+   "gloss": "subsidy, grant",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.faktoring",
+   "form": "факторинг",
+   "reading": "фа́кторинг",
+   "gloss": "factoring",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.lizing",
+   "form": "лизинг",
+   "reading": "ли́зинг",
+   "gloss": "leasing",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.franshiza",
+   "form": "франшиза",
+   "reading": "франши́за",
+   "gloss": "franchise",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.finansist",
+   "form": "финансист",
+   "reading": "финанси́ст",
+   "gloss": "financier",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.ekonomist",
+   "form": "экономист",
+   "reading": "экономи́ст",
+   "gloss": "economist",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.bukhgalter",
+   "form": "бухгалтер",
+   "reading": "бухга́лтер",
+   "gloss": "accountant",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.bukhgaltariya",
+   "form": "бухгалтерия",
+   "reading": "бухгалте́рия",
+   "gloss": "accounting office",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.deklaraciya",
+   "form": "декларация",
+   "reading": "деклара́ция",
+   "gloss": "declaration",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.sberezheniya",
+   "form": "сбережения",
+   "reading": "сбереже́ния",
+   "gloss": "savings",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.nakopleniya",
+   "form": "накопления",
+   "reading": "накопле́ния",
+   "gloss": "accumulations, savings",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.dividend",
+   "form": "дивиденд",
+   "reading": "дивиде́нд",
+   "gloss": "dividend",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.obligaciya",
+   "form": "облигация",
+   "reading": "облига́ция",
+   "gloss": "bond",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.polis",
+   "form": "полис",
+   "reading": "по́лис",
+   "gloss": "insurance policy",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.nalog",
+   "form": "налог",
+   "reading": "нало́г",
+   "gloss": "tax",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.sbor",
+   "form": "сбор",
+   "reading": "сбор",
+   "gloss": "fee, levy",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.poshlina",
+   "form": "пошлина",
+   "reading": "по́шлина",
+   "gloss": "duty, fee",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.taksa",
+   "form": "такса",
+   "reading": "та́кса",
+   "gloss": "fee, tariff",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.optimizaciya",
+   "form": "оптимизация",
+   "reading": "оптимиза́ция",
+   "gloss": "optimization",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

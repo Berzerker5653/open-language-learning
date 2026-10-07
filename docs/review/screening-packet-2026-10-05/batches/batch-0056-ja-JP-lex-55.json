@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-55",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.film.teishou",
+   "form": "ていしょう",
+   "reading": "ていしょう",
+   "gloss": "proposal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.katsudo",
+   "form": "かつどう",
+   "reading": "かつどう",
+   "gloss": "activity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.katsuyaku",
+   "form": "かつやく",
+   "reading": "かつやく",
+   "gloss": "performance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.zokusei",
+   "form": "ぞくせい",
+   "reading": "ぞくせい",
+   "gloss": "attribute",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.kouchou",
+   "form": "こうちょう",
+   "reading": "こうちょう",
+   "gloss": "growth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.tekisuto",
+   "form": "てきすと",
+   "reading": "てきすと",
+   "gloss": "text",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.onsei",
+   "form": "おんせい",
+   "reading": "おんせい",
+   "gloss": "voice sound",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.joukei",
+   "form": "じょうけい",
+   "reading": "じょうけい",
+   "gloss": "scene",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.iro",
+   "form": "いろ",
+   "reading": "いろ",
+   "gloss": "color",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.hikari",
+   "form": "ひかり",
+   "reading": "ひかり",
+   "gloss": "light",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.on",
+   "form": "おん",
+   "reading": "おん",
+   "gloss": "sound",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.ongaku",
+   "form": "おんがく",
+   "reading": "おんがく",
+   "gloss": "music",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.fukushoku",
+   "form": "ふくしょく",
+   "reading": "ふくしょく",
+   "gloss": "clothing, costume",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.bakuhatsu",
+   "form": "ばくはつ",
+   "reading": "ばくはつ",
+   "gloss": "explosion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.tatakai",
+   "form": "たたかい",
+   "reading": "たたかい",
+   "gloss": "battle",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.shippai",
+   "form": "しっぱい",
+   "reading": "しっぱい",
+   "gloss": "failure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.ketsui",
+   "form": "けつい",
+   "reading": "けつい",
+   "gloss": "resolve",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.taifu",
+   "form": "たいふ",
+   "reading": "たいふ",
+   "gloss": "richness, depth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.shizuka",
+   "form": "しずか",
+   "reading": "しずか",
+   "gloss": "quiet",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.kaze",
+   "form": "かぜ",
+   "reading": "かぜ",
+   "gloss": "wind",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.ame",
+   "form": "あめ",
+   "reading": "あめ",
+   "gloss": "rain",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.yuki",
+   "form": "ゆき",
+   "reading": "ゆき",
+   "gloss": "snow",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.yoru",
+   "form": "よる",
+   "reading": "よる",
+   "gloss": "night",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.asa",
+   "form": "あさ",
+   "reading": "あさ",
+   "gloss": "morning",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.umi",
+   "form": "うみ",
+   "reading": "うみ",
+   "gloss": "sea",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

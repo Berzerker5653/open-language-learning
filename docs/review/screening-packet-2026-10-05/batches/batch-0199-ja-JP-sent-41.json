@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-41",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.generalization-limits",
+   "text": "げんかい を はっきり しめしました。",
+   "gloss": "I clearly showed the limits."
+  },
+  {
+   "id": "ja.sent.value-conflict",
+   "text": "かち の たいしゃ が おきました。",
+   "gloss": "A conflict of values occurred."
+  },
+  {
+   "id": "ja.sent.stakeholder-analysis",
+   "text": "じょうきょう の ぶんせき を しました。",
+   "gloss": "I did an analysis of the situation."
+  },
+  {
+   "id": "ja.sent.scenario-reasoning",
+   "text": "ようけん を かえて こうこ を かんがえました。",
+   "gloss": "I changed the condition and thought about the effect."
+  },
+  {
+   "id": "ja.sent.abstraction-ladders",
+   "text": "じゅんい の ちがい を べんきょう しました。",
+   "gloss": "I studied the difference in rank."
+  },
+  {
+   "id": "ja.sent.consistency-checks",
+   "text": "いっち を かくにん しました。",
+   "gloss": "I checked the consistency."
+  },
+  {
+   "id": "ja.sent.steel-manning",
+   "text": "しゅちょう を より よい かたち に しました。",
+   "gloss": "I put the claim in a better form."
+  },
+  {
+   "id": "ja.sent.synthesis-essay",
+   "text": "ようりょう を つくりました。",
+   "gloss": "I made a summary."
+  },
+  {
+   "id": "ja.sent.formal-versus-casual",
+   "text": "けいご と ふつう の ことば を つかいわけました。",
+   "gloss": "I divided honorific and ordinary words."
+  },
+  {
+   "id": "ja.sent.written-style-variation",
+   "text": "こうしき と こうご の ちがいを べんきょう しました。",
+   "gloss": "I studied the difference between formal and colloquial language."
+  },
+  {
+   "id": "ja.sent.politeness-scales",
+   "text": "そんけいご と けんじょうご を ならいました。",
+   "gloss": "I learned respectful and humble language."
+  },
+  {
+   "id": "ja.sent.indirect-expression",
+   "text": "ほんね を えんりょ の ある いいかた で しました。",
+   "gloss": "I stated the true feeling in a restrained way."
+  },
+  {
+   "id": "ja.sent.emphasis-devices",
+   "text": "おもむき の ちがい を べんきょう しました。",
+   "gloss": "I studied the difference in nuance."
+  },
+  {
+   "id": "ja.sent.hedge-words",
+   "text": "こうげん の かた を やわらかく しました。",
+   "gloss": "I softened the form of the utterance."
+  },
+  {
+   "id": "ja.sent.dialect-register",
+   "text": "ほうげん の ことば を べんきょう しました。",
+   "gloss": "I studied dialect words."
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-56",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.film2.sora",
+   "form": "そら",
+   "reading": "そら",
+   "gloss": "sky",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.tori",
+   "form": "とり",
+   "reading": "とり",
+   "gloss": "bird",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.sakana",
+   "form": "さかな",
+   "reading": "さかな",
+   "gloss": "fish",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.ki",
+   "form": "き",
+   "reading": "き",
+   "gloss": "tree",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.hana",
+   "form": "はな",
+   "reading": "はな",
+   "gloss": "flower",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.tsuki",
+   "form": "つき",
+   "reading": "つき",
+   "gloss": "moon",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.hoshi",
+   "form": "ほし",
+   "reading": "ほし",
+   "gloss": "star",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.yama",
+   "form": "やま",
+   "reading": "やま",
+   "gloss": "mountain",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.mado",
+   "form": "まど",
+   "reading": "まど",
+   "gloss": "window",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.kagayaki",
+   "form": "かぎやき",
+   "reading": "かぎやき",
+   "gloss": "brightness, glow",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.inbou",
+   "form": "いんぼう",
+   "reading": "いんぼう",
+   "gloss": "conspiracy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film2.hantai",
+   "form": "はんたい",
+   "reading": "はんたい",
+   "gloss": "opposition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.gohan",
+   "form": "ごはん",
+   "reading": "ごはん",
+   "gloss": "rice; meal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.pan",
+   "form": "パン",
+   "reading": "パン",
+   "gloss": "bread",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.niku",
+   "form": "にく",
+   "reading": "にく",
+   "gloss": "meat",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.sakana",
+   "form": "さかな",
+   "reading": "さかな",
+   "gloss": "fish",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.yasai",
+   "form": "やさい",
+   "reading": "やさい",
+   "gloss": "vegetable",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.tamago",
+   "form": "たまご",
+   "reading": "たまご",
+   "gloss": "egg",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.miruku",
+   "form": "ミルク",
+   "reading": "ミルク",
+   "gloss": "milk",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.mizu",
+   "form": "みず",
+   "reading": "みず",
+   "gloss": "water",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.ocha",
+   "form": "おちゃ",
+   "reading": "おちゃ",
+   "gloss": "tea",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.kohi",
+   "form": "コーヒー",
+   "reading": "コーヒー",
+   "gloss": "coffee",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.juusu",
+   "form": "ジュース",
+   "reading": "ジュース",
+   "gloss": "juice",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.biiru",
+   "form": "ビール",
+   "reading": "ビール",
+   "gloss": "beer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food-drink.ringo",
+   "form": "りんご",
+   "reading": "りんご",
+   "gloss": "apple",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

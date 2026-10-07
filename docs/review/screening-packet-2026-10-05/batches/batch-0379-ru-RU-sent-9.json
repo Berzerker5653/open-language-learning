@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-9",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.a2.u170",
+   "text": "Кофе больше, чем чай.",
+   "gloss": "Coffee is more than tea."
+  },
+  {
+   "id": "ru.sent.a2.u171",
+   "text": "Это лучше, чем раньше.",
+   "gloss": "This is better than before."
+  },
+  {
+   "id": "ru.sent.a2.u172",
+   "text": "Поезд быстрее, чем автобус.",
+   "gloss": "The train is faster than the bus."
+  },
+  {
+   "id": "ru.sent.a2.u173",
+   "text": "Эта дорога длиннее.",
+   "gloss": "This road is longer."
+  },
+  {
+   "id": "ru.sent.a2.u174",
+   "text": "Это проще, чем кажется.",
+   "gloss": "It is easier than it seems."
+  },
+  {
+   "id": "ru.sent.a2.u175",
+   "text": "Это дороже, чем билет.",
+   "gloss": "This is more expensive than the ticket."
+  },
+  {
+   "id": "ru.sent.a2.u176",
+   "text": "Яблоко слаще, чем лимон.",
+   "gloss": "The apple is sweeter than the lemon."
+  },
+  {
+   "id": "ru.sent.a2.u177",
+   "text": "Сегодня спокойнее, чем вчера.",
+   "gloss": "Today is calmer than yesterday."
+  },
+  {
+   "id": "ru.sent.a2.u178",
+   "text": "Я отдыхаю, потому что устал.",
+   "gloss": "I rest because I am tired."
+  },
+  {
+   "id": "ru.sent.a2.u179",
+   "text": "Я учусь, чтобы работать.",
+   "gloss": "I study in order to work."
+  },
+  {
+   "id": "ru.sent.a2.u180",
+   "text": "Это инструкция.",
+   "gloss": "This is the instruction."
+  },
+  {
+   "id": "ru.sent.a2.u181",
+   "text": "Это инструмент.",
+   "gloss": "This is a tool."
+  },
+  {
+   "id": "ru.sent.a2.u182",
+   "text": "Это ремонт.",
+   "gloss": "This is a repair."
+  },
+  {
+   "id": "ru.sent.a2.u183",
+   "text": "Это схема.",
+   "gloss": "This is a diagram."
+  },
+  {
+   "id": "ru.sent.a2.u184",
+   "text": "Это правило.",
+   "gloss": "This is the rule."
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-39",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u620",
+   "text": "Это отсрочка.",
+   "gloss": "This is a deferral."
+  },
+  {
+   "id": "ru.sent.b2.u621",
+   "text": "Это срочность.",
+   "gloss": "This is urgency."
+  },
+  {
+   "id": "ru.sent.b2.u622",
+   "text": "Это заморозка.",
+   "gloss": "This is a freeze."
+  },
+  {
+   "id": "ru.sent.b2.u623",
+   "text": "Это ускорение.",
+   "gloss": "This is acceleration."
+  },
+  {
+   "id": "ru.sent.b2.u624",
+   "text": "Это лоббист.",
+   "gloss": "This is a lobbyist."
+  },
+  {
+   "id": "ru.sent.b2.u625",
+   "text": "Это девиз.",
+   "gloss": "This is a motto."
+  },
+  {
+   "id": "ru.sent.b2.u626",
+   "text": "Это коалиция.",
+   "gloss": "This is a coalition."
+  },
+  {
+   "id": "ru.sent.b2.u627",
+   "text": "Это альянс.",
+   "gloss": "This is an alliance."
+  },
+  {
+   "id": "ru.sent.b2.u628",
+   "text": "Это притязание.",
+   "gloss": "This is a pretension."
+  },
+  {
+   "id": "ru.sent.b2.u629",
+   "text": "Это бойкот.",
+   "gloss": "This is a boycott."
+  },
+  {
+   "id": "ru.sent.b2.u630",
+   "text": "Это размен.",
+   "gloss": "This is a swap."
+  },
+  {
+   "id": "ru.sent.b2.u631",
+   "text": "Это бартер.",
+   "gloss": "This is barter."
+  },
+  {
+   "id": "ru.sent.b2.u632",
+   "text": "Это лояльность.",
+   "gloss": "This is loyalty."
+  },
+  {
+   "id": "ru.sent.b2.u633",
+   "text": "Это подлость.",
+   "gloss": "This is meanness."
+  },
+  {
+   "id": "ru.sent.b2.u634",
+   "text": "Это афера.",
+   "gloss": "This is a swindle."
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-75",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.personal.desyat",
+   "form": "десять",
+   "reading": "де́сять",
+   "gloss": "ten (10)",
+   "pos": "numeral",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.odinnadtsat",
+   "form": "одиннадцать",
+   "reading": "оди́ннадцать",
+   "gloss": "eleven (11)",
+   "pos": "numeral",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.dvenadtsat",
+   "form": "двенадцать",
+   "reading": "двена́дцать",
+   "gloss": "twelve (12)",
+   "pos": "numeral",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.trinadtsat",
+   "form": "тринадцать",
+   "reading": "трина́дцать",
+   "gloss": "thirteen (13)",
+   "pos": "numeral",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.sorok",
+   "form": "сорок",
+   "reading": "со́рок",
+   "gloss": "forty (40)",
+   "pos": "numeral",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.anton",
+   "form": "Антон",
+   "reading": "Анто́н",
+   "gloss": "Anton (given name)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.personal.mariya",
+   "form": "Мария",
+   "reading": "Мари́я",
+   "gloss": "Maria (given name)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.angliya",
+   "form": "Англия",
+   "reading": "А́нглия",
+   "gloss": "England",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.italiya",
+   "form": "Италия",
+   "reading": "Ита́лия",
+   "gloss": "Italy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.ispaniya",
+   "form": "Испания",
+   "reading": "Испа́ния",
+   "gloss": "Spain",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.ulitsa",
+   "form": "улица",
+   "reading": "у́лица",
+   "gloss": "street",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.personal.kvartira",
+   "form": "квартира",
+   "reading": "кварти́ра",
+   "gloss": "apartment",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.personal.nomer",
+   "form": "номер",
+   "reading": "но́мер",
+   "gloss": "number (identifier)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.personal.pochta",
+   "form": "почта",
+   "reading": "по́чта",
+   "gloss": "mail; postal service",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.personal.anketa",
+   "form": "анкета",
+   "reading": "анке́та",
+   "gloss": "form; questionnaire",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.personal.shkola",
+   "form": "школа",
+   "reading": "шко́ла",
+   "gloss": "school",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.personal.universitet",
+   "form": "университет",
+   "reading": "университе́т",
+   "gloss": "university",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.personal.rabota",
+   "form": "работа",
+   "reading": "рабо́та",
+   "gloss": "work; job",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.personal.student",
+   "form": "студент",
+   "reading": "студе́нт",
+   "gloss": "university student (male)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.personal.studentka",
+   "form": "студентка",
+   "reading": "студе́нтка",
+   "gloss": "university student (female)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.elektronnaya-pochta",
+   "form": "электронная почта",
+   "reading": "электро́нная по́чта",
+   "gloss": "email (mail service or contact field)",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.grazhdanstvo",
+   "form": "гражданство",
+   "reading": "гражда́нство",
+   "gloss": "citizenship",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.personal.data-rozhdeniya",
+   "form": "дата рождения",
+   "reading": "да́та рожде́ния",
+   "gloss": "date of birth",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.personal.yazyk",
+   "form": "язык",
+   "reading": "язы́к",
+   "gloss": "language",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.personal.professiya",
+   "form": "профессия",
+   "reading": "профе́ссия",
+   "gloss": "profession; occupation",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

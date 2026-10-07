@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-39",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.edu3.shikaku",
+   "form": "しかく",
+   "reading": "しかく",
+   "gloss": "qualification",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.kyouzai",
+   "form": "きょうざい",
+   "reading": "きょうざい",
+   "gloss": "teaching materials",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.shukudai",
+   "form": "しゅくだい",
+   "reading": "しゅくだい",
+   "gloss": "homework",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.taiwa",
+   "form": "たいわ",
+   "reading": "たいわ",
+   "gloss": "conversation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.happyou",
+   "form": "はっぴょう",
+   "reading": "はっぴょう",
+   "gloss": "presentation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.guruupu",
+   "form": "グループ",
+   "reading": "グループ",
+   "gloss": "group",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.togihou",
+   "form": "とうぎほう",
+   "reading": "とうぎほう",
+   "gloss": "discussion method",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.jiko",
+   "form": "じこ",
+   "reading": "じこ",
+   "gloss": "self",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.ninshiki",
+   "form": "にんしき",
+   "reading": "にんしき",
+   "gloss": "cognition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.riki",
+   "form": "りき",
+   "reading": "りき",
+   "gloss": "comprehension",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.oen",
+   "form": "おうよう",
+   "reading": "おうよう",
+   "gloss": "application",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.kihon",
+   "form": "きほん",
+   "reading": "きほん",
+   "gloss": "basics",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.jissen",
+   "form": "じっせん",
+   "reading": "じっせん",
+   "gloss": "practice",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.gakuryoku",
+   "form": "がくりょく",
+   "reading": "がくりょく",
+   "gloss": "academic ability",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.saidou",
+   "form": "せいた",
+   "reading": "せいた",
+   "gloss": "adaptation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.rengo",
+   "form": "れんごう",
+   "reading": "れんごう",
+   "gloss": "association",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.koubun",
+   "form": "こうぶん",
+   "reading": "こうぶん",
+   "gloss": "passage, text",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.yakugo",
+   "form": "やくご",
+   "reading": "やくご",
+   "gloss": "translation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.hatsuon",
+   "form": "はつおん",
+   "reading": "はつおん",
+   "gloss": "pronunciation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.choukai",
+   "form": "ちょうかい",
+   "reading": "ちょうかい",
+   "gloss": "dialogue",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.bunkai",
+   "form": "ぶんかい",
+   "reading": "ぶんかい",
+   "gloss": "analysis, breakdown",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.bunkou",
+   "form": "もくどく",
+   "reading": "もくどく",
+   "gloss": "reading aloud",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.fantei",
+   "form": "はんてい",
+   "reading": "はんてい",
+   "gloss": "judgment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.seminaa",
+   "form": "セミナー",
+   "reading": "セミナー",
+   "gloss": "seminar",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu3.hodai",
+   "form": "ほうほう",
+   "reading": "ほうほう",
+   "gloss": "method",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

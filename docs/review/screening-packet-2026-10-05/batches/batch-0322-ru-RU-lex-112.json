@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-112",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.soc.oprovergnut",
+   "form": "опровергнуть",
+   "reading": "опрове́ргнуть",
+   "gloss": "to refute",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.podtverdit",
+   "form": "подтвердить",
+   "reading": "подтверди́ть",
+   "gloss": "to confirm",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.dokazatelnyy",
+   "form": "доказательный",
+   "reading": "доказа́тельный",
+   "gloss": "evidential, conclusive",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.neubeditelnyy",
+   "form": "неубедительный",
+   "reading": "неубеди́тельный",
+   "gloss": "unconvincing",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.somnitelnyy",
+   "form": "сомнительный",
+   "reading": "сомни́тельный",
+   "gloss": "doubtful, dubious",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.usomnitsya",
+   "form": "усомниться",
+   "reading": "усомни́ться",
+   "gloss": "to doubt",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.doverchivyy",
+   "form": "доверчивый",
+   "reading": "дове́рчивый",
+   "gloss": "credulous",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.nedoverchivyy",
+   "form": "недоверчивый",
+   "reading": "недове́рчивый",
+   "gloss": "distrustful",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.skeptsitsizm",
+   "form": "скептицизм",
+   "reading": "скептици́зм",
+   "gloss": "skepticism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.skepticheskiy",
+   "form": "скептический",
+   "reading": "скепти́ческий",
+   "gloss": "skeptical",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.skeptik",
+   "form": "скептик",
+   "reading": "ске́птик",
+   "gloss": "skeptic",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.ironichnyy",
+   "form": "ироничный",
+   "reading": "ирони́чный",
+   "gloss": "ironic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.sarkastichnyy",
+   "form": "саркастичный",
+   "reading": "саркасти́чный",
+   "gloss": "sarcastic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.preuvelichivat",
+   "form": "преувеличивать",
+   "reading": "преувели́чивать",
+   "gloss": "to exaggerate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.preumenshat",
+   "form": "преуменьшать",
+   "reading": "преуменьша́ть",
+   "gloss": "to understate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.iskazit",
+   "form": "исказить",
+   "reading": "искази́ть",
+   "gloss": "to distort",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.mificheskiy",
+   "form": "мифический",
+   "reading": "мифи́ческий",
+   "gloss": "mythical",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.molva",
+   "form": "молва",
+   "reading": "молва́",
+   "gloss": "rumor, hearsay",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.domysel",
+   "form": "домысел",
+   "reading": "до́мысел",
+   "gloss": "speculation, surmise",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.maloveryatnyy",
+   "form": "маловероятный",
+   "reading": "маловеро́ятный",
+   "gloss": "unlikely",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.pravdopodobnyy",
+   "form": "правдоподобный",
+   "reading": "правдоподо́бный",
+   "gloss": "plausible",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.pravdopodobie",
+   "form": "правдоподобие",
+   "reading": "правдоподо́бие",
+   "gloss": "plausibility",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.nedostovernyy",
+   "form": "недостоверный",
+   "reading": "недостове́рный",
+   "gloss": "unreliable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.neargumentirovannyy",
+   "form": "неаргументированный",
+   "reading": "неаргументи́рованный",
+   "gloss": "unargued",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.nelogichnyy",
+   "form": "нелогичный",
+   "reading": "нелоги́чный",
+   "gloss": "illogical",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

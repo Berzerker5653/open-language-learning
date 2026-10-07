@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-15",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.body.senaka",
+   "form": "せなか",
+   "reading": "せなか",
+   "gloss": "back",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.kutsu-bure",
+   "form": "くつぶれ",
+   "reading": "くつぶれ",
+   "gloss": "blister from shoes",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.ibiki",
+   "form": "いびき",
+   "reading": "いびき",
+   "gloss": "snoring",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.kaffa",
+   "form": "かふ",
+   "reading": "かふ",
+   "gloss": "cough",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.megane",
+   "form": "めがね",
+   "reading": "めがね",
+   "gloss": "glasses",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.inmu",
+   "form": "しびれ",
+   "reading": "しびれ",
+   "gloss": "numbness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.ketsueki",
+   "form": "けつえき",
+   "reading": "けつえき",
+   "gloss": "blood",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.shokukan",
+   "form": "しょうかん",
+   "reading": "しょうかん",
+   "gloss": "digestion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.yogen",
+   "form": "よげん",
+   "reading": "よげん",
+   "gloss": "prevention",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.yoku-naru",
+   "form": "よくなる",
+   "reading": "よくなる",
+   "gloss": "to improve",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.naoru",
+   "form": "なおる",
+   "reading": "なおる",
+   "gloss": "to be cured",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.taisha",
+   "form": "たいしゃ",
+   "reading": "たいしゃ",
+   "gloss": "absence from work/school",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.shinryou",
+   "form": "しんりょう",
+   "reading": "しんりょう",
+   "gloss": "medical examination",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.suimin",
+   "form": "すいみん",
+   "reading": "すいみん",
+   "gloss": "sleep",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.rirakkusu",
+   "form": "りらっくす",
+   "reading": "りらっくす",
+   "gloss": "relaxation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.kenshin",
+   "form": "けんしん",
+   "reading": "けんしん",
+   "gloss": "health check-up",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.fukatsu",
+   "form": "ふかつ",
+   "reading": "ふかつ",
+   "gloss": "constipation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.kanri",
+   "form": "かんり",
+   "reading": "かんり",
+   "gloss": "management",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.taisha",
+   "form": "たいしゃ",
+   "reading": "たいしゃ",
+   "gloss": "absence from work/school",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.shinryoujo",
+   "form": "しんりょうじょ",
+   "reading": "しんりょうじょ",
+   "gloss": "waiting room",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.saikin",
+   "form": "さいきん",
+   "reading": "さいきん",
+   "gloss": "recently",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.kyuujitsu",
+   "form": "きゅうじつ",
+   "reading": "きゅうじつ",
+   "gloss": "holiday",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.mainichi",
+   "form": "まいにち",
+   "reading": "まいにち",
+   "gloss": "every day",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.vitamin",
+   "form": "びたみん",
+   "reading": "びたみん",
+   "gloss": "vitamin",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.choki",
+   "form": "ちょうき",
+   "reading": "ちょうき",
+   "gloss": "long period",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

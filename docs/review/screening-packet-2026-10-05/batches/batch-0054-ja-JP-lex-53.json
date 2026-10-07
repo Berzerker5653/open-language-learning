@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-53",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.env4.seigi",
+   "form": "せいぎ",
+   "reading": "せいぎ",
+   "gloss": "justice",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.gimu",
+   "form": "ぎむ",
+   "reading": "ぎむ",
+   "gloss": "duty, obligation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.yosei",
+   "form": "ようせい",
+   "reading": "ようせい",
+   "gloss": "request, petition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.gijutsu2",
+   "form": "ぎじゅつ",
+   "reading": "ぎじゅつ",
+   "gloss": "technology, technique",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.kaken",
+   "form": "かけん",
+   "reading": "かけん",
+   "gloss": "danger, risk",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.sonae",
+   "form": "そなえ",
+   "reading": "そなえ",
+   "gloss": "preparation, readiness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.zeikin",
+   "form": "ぜいきん",
+   "reading": "ぜいきん",
+   "gloss": "tax, duty",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.eiga",
+   "form": "えいが",
+   "reading": "えいが",
+   "gloss": "film",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.eigakan",
+   "form": "えいがかん",
+   "reading": "えいがかん",
+   "gloss": "cinema",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.kantoku",
+   "form": "かんとく",
+   "reading": "かんとく",
+   "gloss": "director",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.eizo",
+   "form": "えいぞう",
+   "reading": "えいぞう",
+   "gloss": "moving image",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.kamera",
+   "form": "かめら",
+   "reading": "かめら",
+   "gloss": "camera",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.satsuei",
+   "form": "さつえい",
+   "reading": "さつえい",
+   "gloss": "filming",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.sutajio",
+   "form": "すたじお",
+   "reading": "すたじお",
+   "gloss": "film studio",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.shashin",
+   "form": "しゃしん",
+   "reading": "しゃしん",
+   "gloss": "photograph",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.jo",
+   "form": "じょう",
+   "reading": "じょう",
+   "gloss": "emotion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.kaijo",
+   "form": "かいじょう",
+   "reading": "かいじょう",
+   "gloss": "venue",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.joryu",
+   "form": "じょりゅう",
+   "reading": "じょりゅう",
+   "gloss": "genre",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.onsetsu",
+   "form": "おんせつ",
+   "reading": "おんせつ",
+   "gloss": "sound setting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.gensaku",
+   "form": "げんさく",
+   "reading": "げんさく",
+   "gloss": "original work",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.kiroku",
+   "form": "きろく",
+   "reading": "きろく",
+   "gloss": "record",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.bunpou",
+   "form": "ぶんぽう",
+   "reading": "ぶんぽう",
+   "gloss": "grammar",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.ugoki",
+   "form": "うごき",
+   "reading": "うごき",
+   "gloss": "movement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.setkei",
+   "form": "せつけい",
+   "reading": "せつけい",
+   "gloss": "design",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.film.shutsuen",
+   "form": "しゅつえん",
+   "reading": "しゅつえん",
+   "gloss": "film appearance",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-77",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.problems.izvinitsya",
+   "form": "извиниться",
+   "reading": "извини́ться",
+   "gloss": "to apologize",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.oshibka",
+   "form": "ошибка",
+   "reading": "оши́бка",
+   "gloss": "mistake, error",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems.ispravit",
+   "form": "исправить",
+   "reading": "испра́вить",
+   "gloss": "to correct, fix",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.opozdat",
+   "form": "опоздать",
+   "reading": "опозда́ть",
+   "gloss": "to be late",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.vinovaty",
+   "form": "виноватый",
+   "reading": "винова́тый",
+   "gloss": "guilty, to blame",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.ne-hvatat",
+   "form": "не хватать",
+   "reading": "не хвата́ть",
+   "gloss": "to be lacking",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.nedostatochno",
+   "form": "недостаточно",
+   "reading": "недоста́точно",
+   "gloss": "not enough",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.konchitsya",
+   "form": "кончиться",
+   "reading": "ко́нчиться",
+   "gloss": "to run out, end",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.zapad2",
+   "form": "запас",
+   "reading": "запа́с",
+   "gloss": "supply, reserve",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems.izlishok",
+   "form": "излишек",
+   "reading": "изли́шек",
+   "gloss": "excess, surplus",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems.dostatochno",
+   "form": "достаточно",
+   "reading": "доста́точно",
+   "gloss": "enough",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.polnyi",
+   "form": "полный",
+   "reading": "по́лный",
+   "gloss": "full",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.pustoi",
+   "form": "пустой",
+   "reading": "пусто́й",
+   "gloss": "empty",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.tsely",
+   "form": "целый",
+   "reading": "це́лый",
+   "gloss": "whole, intact",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.polovina",
+   "form": "половина",
+   "reading": "полови́на",
+   "gloss": "half",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems.bezopasno",
+   "form": "безопасно",
+   "reading": "безопа́сно",
+   "gloss": "safely",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.opasno",
+   "form": "опасно",
+   "reading": "опа́сно",
+   "gloss": "dangerously",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.preduprezhdenie",
+   "form": "предупреждение",
+   "reading": "предупрежде́ние",
+   "gloss": "warning",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.problems.zashchita",
+   "form": "защита",
+   "reading": "защи́та",
+   "gloss": "protection",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems.signal",
+   "form": "сигнал",
+   "reading": "сигна́л",
+   "gloss": "signal, alert",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems.uladit",
+   "form": "уладить",
+   "reading": "ула́дить",
+   "gloss": "to settle, sort out",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.naladit",
+   "form": "наладить",
+   "reading": "нала́дить",
+   "gloss": "to fix, get going",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.popravit",
+   "form": "поправить",
+   "reading": "попра́вить",
+   "gloss": "to amend, fix up",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.lad",
+   "form": "лад",
+   "reading": "лад",
+   "gloss": "order, harmony (на лад)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems.uregulirovat",
+   "form": "урегулировать",
+   "reading": "урегули́ровать",
+   "gloss": "to regulate, resolve",
+   "pos": "verb",
+   "gender": ""
+  }
+ ]
+}

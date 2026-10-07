@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-76",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.home.kirimasu",
+   "form": "きります",
+   "reading": "きります",
+   "gloss": "to cut",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.mochimasu",
+   "form": "もちます",
+   "reading": "もちます",
+   "gloss": "to carry; to hold",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.kaemasu",
+   "form": "かえます",
+   "reading": "かえます",
+   "gloss": "to change; to return",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.shimaimasu",
+   "form": "しまいます",
+   "reading": "しまいます",
+   "gloss": "to put away; to store",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.dasimasu",
+   "form": "だします",
+   "reading": "だします",
+   "gloss": "to take out; to put out",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.kowaresu",
+   "form": "こわれます",
+   "reading": "こわれます",
+   "gloss": "to break",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.hiroi",
+   "form": "ひろい",
+   "reading": "ひろい",
+   "gloss": "spacious; wide",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.semai",
+   "form": "せまい",
+   "reading": "せまい",
+   "gloss": "narrow; cramped",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.shizuka",
+   "form": "しずか",
+   "reading": "しずか",
+   "gloss": "quiet",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.kitanai",
+   "form": "きたない",
+   "reading": "きたない",
+   "gloss": "dirty",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.kurai",
+   "form": "くらい",
+   "reading": "くらい",
+   "gloss": "dark",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.urusai",
+   "form": "うるさい",
+   "reading": "うるさい",
+   "gloss": "noisy",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.tokidoki",
+   "form": "ときどき",
+   "reading": "ときどき",
+   "gloss": "sometimes",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.mada",
+   "form": "まだ",
+   "reading": "まだ",
+   "gloss": "still; not yet",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.mata",
+   "form": "また",
+   "reading": "また",
+   "gloss": "again",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.motto",
+   "form": "もっと",
+   "reading": "もっと",
+   "gloss": "more",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.naze",
+   "form": "なぜ",
+   "reading": "なぜ",
+   "gloss": "why",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.humor2.kyofu",
+   "form": "きょうふ",
+   "reading": "きょうふ",
+   "gloss": "absurdity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.humor2.baki",
+   "form": "ばか",
+   "reading": "ばか",
+   "gloss": "foolishness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.humor2.jiko",
+   "form": "じこ",
+   "reading": "じこ",
+   "gloss": "self",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.humor2.kenjou",
+   "form": "けんじょう",
+   "reading": "けんじょう",
+   "gloss": "modesty",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.humor2.hiji",
+   "form": "ひじ",
+   "reading": "ひじ",
+   "gloss": "elbow (idiom)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.humor2.te2",
+   "form": "て",
+   "reading": "て",
+   "gloss": "hand",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.humor2.ashi",
+   "form": "あし",
+   "reading": "あし",
+   "gloss": "leg",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.humor2.kubi",
+   "form": "くび",
+   "reading": "くび",
+   "gloss": "neck",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

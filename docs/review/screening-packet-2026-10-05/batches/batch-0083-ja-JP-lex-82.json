@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-82",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.leisure.tsuzukeru",
+   "form": "つづけます",
+   "reading": "つづけます",
+   "gloss": "to continue",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.daisuki",
+   "form": "だいすき",
+   "reading": "だいすき",
+   "gloss": "to like very much",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.umai",
+   "form": "うまい",
+   "reading": "うまい",
+   "gloss": "good at; skillful",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.heta",
+   "form": "へた",
+   "reading": "へた",
+   "gloss": "bad at; unskillful",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.kibishii",
+   "form": "きびしい",
+   "reading": "きびしい",
+   "gloss": "strict; tough",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.hima",
+   "form": "ひま",
+   "reading": "ひま",
+   "gloss": "free (time); bored",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.isogashii",
+   "form": "いそがしい",
+   "reading": "いそがしい",
+   "gloss": "busy",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.omoshiroi",
+   "form": "おもしろい",
+   "reading": "おもしろい",
+   "gloss": "interesting; funny",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.totemo",
+   "form": "とても",
+   "reading": "とても",
+   "gloss": "very",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.zutto",
+   "form": "ずっと",
+   "reading": "ずっと",
+   "gloss": "all the time; far",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.shibaraku",
+   "form": "しばらく",
+   "reading": "しばらく",
+   "gloss": "for a while",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.mattaku",
+   "form": "まったく",
+   "reading": "まったく",
+   "gloss": "completely; not at all (with neg.)",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.amari",
+   "form": "あまり",
+   "reading": "あまり",
+   "gloss": "not very (with neg.)",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling.gengogaku",
+   "form": "げんごがく",
+   "reading": "げんごがく",
+   "gloss": "linguistics",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling.goin",
+   "form": "ごい",
+   "reading": "ごい",
+   "gloss": "vocabulary, words",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling.onin",
+   "form": "おんいん",
+   "reading": "おんいん",
+   "gloss": "sound, phoneme",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling.shiteki",
+   "form": "してき",
+   "reading": "してき",
+   "gloss": "point, mark",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling.inron",
+   "form": "いんろん",
+   "reading": "いんろん",
+   "gloss": "phonology, sound theory",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling.bunpou2",
+   "form": "ぶんぽう",
+   "reading": "ぶんぽう",
+   "gloss": "grammar",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling.goihon",
+   "form": "ごほん",
+   "reading": "ごほん",
+   "gloss": "dictionary, vocabulary book",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling.hatsuon",
+   "form": "はつおん",
+   "reading": "はつおん",
+   "gloss": "pronunciation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling.akusento",
+   "form": "あくせんと",
+   "reading": "あくせんと",
+   "gloss": "accent",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling.hoki",
+   "form": "ほうき",
+   "reading": "ほうき",
+   "gloss": "writing system, notation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.go",
+   "form": "ご",
+   "reading": "ご",
+   "gloss": "word",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.boshi",
+   "form": "ぼし",
+   "reading": "ぼし",
+   "gloss": "suffix",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

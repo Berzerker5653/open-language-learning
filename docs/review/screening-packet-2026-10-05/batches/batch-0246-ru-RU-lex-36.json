@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-36",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.feelings.sarkazm",
+   "form": "сарказм",
+   "reading": "сарка́зм",
+   "gloss": "sarcasm",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.feelings.vostorg",
+   "form": "восторг",
+   "reading": "восто́рг",
+   "gloss": "delight",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.feelings.vdokhnovenie",
+   "form": "вдохновение",
+   "reading": "вдохнове́ние",
+   "gloss": "inspiration",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.feelings.grustnyj",
+   "form": "грустный",
+   "reading": "гру́стный",
+   "gloss": "sad",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.feelings.odinochestvo",
+   "form": "одиночество",
+   "reading": "одино́чество",
+   "gloss": "loneliness",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.feelings.skuka",
+   "form": "скука",
+   "reading": "ску́ка",
+   "gloss": "boredom",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.feelings.bojazn",
+   "form": "боязнь",
+   "reading": "боя́знь",
+   "gloss": "fear",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.feelings.udivlenie",
+   "form": "удивление",
+   "reading": "удивле́ние",
+   "gloss": "surprise",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.feelings.napryazhenie",
+   "form": "напряжение",
+   "reading": "напряже́ние",
+   "gloss": "tension",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.feelings.razlad",
+   "form": "разлад",
+   "reading": "разла́д",
+   "gloss": "discord",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.feelings.doveryat",
+   "form": "доверять",
+   "reading": "доверя́ть",
+   "gloss": "to trust",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.feelings.razocharovat",
+   "form": "разочаровать",
+   "reading": "разочарова́ть",
+   "gloss": "to disappoint",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.feelings.opravat",
+   "form": "оправдать",
+   "reading": "оправда́ть",
+   "gloss": "to justify, acquit",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.feelings.obvinyat",
+   "form": "обвинять",
+   "reading": "обвиня́ть",
+   "gloss": "to accuse",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.feelings.protiv",
+   "form": "против",
+   "reading": "про́тив",
+   "gloss": "against",
+   "pos": "preposition",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.feelings.pohozhe",
+   "form": "похоже",
+   "reading": "похо́же",
+   "gloss": "it seems",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.feelings.vyglyadet",
+   "form": "выглядеть",
+   "reading": "вы́глядеть",
+   "gloss": "to look",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.feelings.oshchat",
+   "form": "ощущать",
+   "reading": "ощуща́ть",
+   "gloss": "to feel",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.feelings.perezhivat",
+   "form": "переживать",
+   "reading": "пережива́ть",
+   "gloss": "to worry, experience",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.feelings.podderzhat",
+   "form": "поддержать",
+   "reading": "поддержа́ть",
+   "gloss": "to support",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.food.hleb",
+   "form": "хлеб",
+   "reading": "хлеб",
+   "gloss": "bread",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.maslo",
+   "form": "масло",
+   "reading": "ма́сло",
+   "gloss": "butter",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.food.sir",
+   "form": "сыр",
+   "reading": "сыр",
+   "gloss": "cheese",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.moloko",
+   "form": "молоко",
+   "reading": "молоко́",
+   "gloss": "milk",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.food.voda",
+   "form": "вода",
+   "reading": "вода́",
+   "gloss": "water",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

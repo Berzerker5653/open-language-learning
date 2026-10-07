@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-96",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.media3.honne",
+   "form": "ほんね",
+   "reading": "ほんね",
+   "gloss": "true feeling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.tatemae",
+   "form": "たてまえ",
+   "reading": "たてまえ",
+   "gloss": "stance, pretense",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.seisaku2",
+   "form": "せいさく",
+   "reading": "せいさく",
+   "gloss": "production",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.puroguramu",
+   "form": "ぷろぐらむ",
+   "reading": "ぷろぐらむ",
+   "gloss": "program",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.nyuusu",
+   "form": "にゅーす",
+   "reading": "にゅーす",
+   "gloss": "news",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.shoukai3",
+   "form": "しょうかい",
+   "reading": "しょうかい",
+   "gloss": "introduction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.taimu",
+   "form": "たいむ",
+   "reading": "たいむ",
+   "gloss": "time, current affairs",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.intabyuu",
+   "form": "いんたびゅー",
+   "reading": "いんたびゅー",
+   "gloss": "interview",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.touhyo2",
+   "form": "とうひょう",
+   "reading": "とうひょう",
+   "gloss": "vote, poll",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.chousa2",
+   "form": "ちょうさ",
+   "reading": "ちょうさ",
+   "gloss": "survey, investigation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.data",
+   "form": "でーた",
+   "reading": "でーた",
+   "gloss": "data",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.shaka3",
+   "form": "しゃかい",
+   "reading": "しゃかい",
+   "gloss": "society",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.kouchiku3",
+   "form": "こうちく",
+   "reading": "こうちく",
+   "gloss": "construction of discourse",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.shikou",
+   "form": "しこう",
+   "reading": "しこう",
+   "gloss": "thought, thinking",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.hihan",
+   "form": "ひはん",
+   "reading": "ひはん",
+   "gloss": "criticism",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.hyougen2",
+   "form": "ひょうげん",
+   "reading": "ひょうげん",
+   "gloss": "expression",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.shiten2",
+   "form": "してん",
+   "reading": "してん",
+   "gloss": "viewpoint",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.kachi",
+   "form": "かち",
+   "reading": "かち",
+   "gloss": "value, worth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.risou3",
+   "form": "りそう",
+   "reading": "りそう",
+   "gloss": "ideal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.jissai",
+   "form": "じっさい",
+   "reading": "じっさい",
+   "gloss": "reality, fact",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.genjitsu",
+   "form": "げんじつ",
+   "reading": "げんじつ",
+   "gloss": "reality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.risuku",
+   "form": "りすく",
+   "reading": "りすく",
+   "gloss": "risk",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.byoudou",
+   "form": "びょうどう",
+   "reading": "びょうどう",
+   "gloss": "equality, fairness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.shinrai",
+   "form": "しんらい",
+   "reading": "しんらい",
+   "gloss": "trust",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.sekinin4",
+   "form": "せきにん",
+   "reading": "せきにん",
+   "gloss": "responsibility",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-69",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.neg.skreplyat",
+   "form": "скреплять",
+   "reading": "скрепля́ть",
+   "gloss": "to fasten, secure",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.legitimaciya",
+   "form": "легитимация",
+   "reading": "легитима́ция",
+   "gloss": "legitimation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.legitimnyy",
+   "form": "легитимный",
+   "reading": "легити́мный",
+   "gloss": "legitimate",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.pravomochost",
+   "form": "правомочность",
+   "reading": "правомо́чность",
+   "gloss": "competence, authority",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.pravomochnyy",
+   "form": "правомочный",
+   "reading": "правомо́чный",
+   "gloss": "competent, authorized",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.numbers-time.nol",
+   "form": "ноль",
+   "reading": "ноль",
+   "gloss": "zero (0)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.numbers-time.odin",
+   "form": "один",
+   "reading": "оди́н",
+   "gloss": "one (1; masculine citation form)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.numbers-time.dva",
+   "form": "два",
+   "reading": "два",
+   "gloss": "two (2; masculine or neuter form)",
+   "pos": "numeral",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.numbers-time.tri",
+   "form": "три",
+   "reading": "три",
+   "gloss": "three (3)",
+   "pos": "numeral",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.numbers-time.chetyre",
+   "form": "четыре",
+   "reading": "четы́ре",
+   "gloss": "four (4)",
+   "pos": "numeral",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.numbers-time.pyat",
+   "form": "пять",
+   "reading": "пять",
+   "gloss": "five (5)",
+   "pos": "numeral",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.numbers-time.shest",
+   "form": "шесть",
+   "reading": "шесть",
+   "gloss": "six (6)",
+   "pos": "numeral",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.numbers-time.sem",
+   "form": "семь",
+   "reading": "семь",
+   "gloss": "seven (7)",
+   "pos": "numeral",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.numbers-time.vosem",
+   "form": "восемь",
+   "reading": "во́семь",
+   "gloss": "eight (8)",
+   "pos": "numeral",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.numbers-time.devyat",
+   "form": "девять",
+   "reading": "де́вять",
+   "gloss": "nine (9)",
+   "pos": "numeral",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.opinions.ubezhdenie",
+   "form": "убеждение",
+   "reading": "убежде́ние",
+   "gloss": "conviction",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.opinions.illustraciya",
+   "form": "иллюстрация",
+   "reading": "иллюстра́ция",
+   "gloss": "illustration",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.oprazhdenie",
+   "form": "опровержение",
+   "reading": "опроверже́ние",
+   "gloss": "refutation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.opinions.somnenie",
+   "form": "сомнение",
+   "reading": "сомне́ние",
+   "gloss": "doubt",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.opinions.uverennost",
+   "form": "уверенность",
+   "reading": "уве́ренность",
+   "gloss": "confidence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.nesoglasie",
+   "form": "несогласие",
+   "reading": "несогла́сие",
+   "gloss": "disagreement",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.opinions.protest",
+   "form": "протест",
+   "reading": "проте́ст",
+   "gloss": "protest",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.opinions.vozrazhenie",
+   "form": "возражение",
+   "reading": "возраже́ние",
+   "gloss": "objection",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.opinions.zamechanie",
+   "form": "замечание",
+   "reading": "замеча́ние",
+   "gloss": "remark",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.opinions.popravka",
+   "form": "поправка",
+   "reading": "попра́вка",
+   "gloss": "amendment",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

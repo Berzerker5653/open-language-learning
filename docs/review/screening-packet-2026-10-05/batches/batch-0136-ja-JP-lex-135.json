@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-135",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.story.shuyaku",
+   "form": "しゅやく",
+   "reading": "しゅやく",
+   "gloss": "lead role",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.yuki2",
+   "form": "ゆき",
+   "reading": "ゆき",
+   "gloss": "snow",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.kaze3",
+   "form": "かぜ",
+   "reading": "かぜ",
+   "gloss": "breeze",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.ame2",
+   "form": "あめ",
+   "reading": "あめ",
+   "gloss": "rain",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.hare2",
+   "form": "はれ",
+   "reading": "はれ",
+   "gloss": "clear weather",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.kumo2",
+   "form": "くも",
+   "reading": "くも",
+   "gloss": "cloud",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.itsuka",
+   "form": "いつか",
+   "reading": "いつか",
+   "gloss": "sometime",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.itsumo",
+   "form": "いつも",
+   "reading": "いつも",
+   "gloss": "always",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.doushite",
+   "form": "どうして",
+   "reading": "どうして",
+   "gloss": "why",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.nanika",
+   "form": "なにか",
+   "reading": "なにか",
+   "gloss": "something",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.nanimo",
+   "form": "なにも",
+   "reading": "なにも",
+   "gloss": "nothing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.konna",
+   "form": "こんな",
+   "reading": "こんな",
+   "gloss": "like this",
+   "pos": "adnominal",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.sonna",
+   "form": "そんな",
+   "reading": "そんな",
+   "gloss": "like that",
+   "pos": "adnominal",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.anna",
+   "form": "あんな",
+   "reading": "あんな",
+   "gloss": "like that (over there)",
+   "pos": "adnominal",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.gogo",
+   "form": "ごご",
+   "reading": "ごご",
+   "gloss": "afternoon",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.hoshi",
+   "form": "ほし",
+   "reading": "ほし",
+   "gloss": "star",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.taiyou",
+   "form": "たいよう",
+   "reading": "たいよう",
+   "gloss": "sun",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.wakusei",
+   "form": "わくせい",
+   "reading": "わくせい",
+   "gloss": "planet",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.tsuyu2",
+   "form": "つゆ",
+   "reading": "つゆ",
+   "gloss": "rainy season",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.shimo2",
+   "form": "しも",
+   "reading": "しも",
+   "gloss": "frost",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.kiri2",
+   "form": "きり",
+   "reading": "きり",
+   "gloss": "fog",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.kyomu",
+   "form": "きょうみ",
+   "reading": "きょうみ",
+   "gloss": "interest",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.hara-hara",
+   "form": "はらはら",
+   "reading": "はらはら",
+   "gloss": "suspense",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.kikkai",
+   "form": "きっかい",
+   "reading": "きっかい",
+   "gloss": "opportunity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.tenkan2",
+   "form": "てんかん",
+   "reading": "てんかん",
+   "gloss": "turn",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

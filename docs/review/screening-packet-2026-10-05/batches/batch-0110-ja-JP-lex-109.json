@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-109",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.politics2.june",
+   "form": "じゅんれい",
+   "reading": "じゅんれい",
+   "gloss": "order",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.juyou",
+   "form": "じゅよう",
+   "reading": "じゅよう",
+   "gloss": "acceptance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.tokken",
+   "form": "とっけん",
+   "reading": "とっけん",
+   "gloss": "privilege",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.hotei",
+   "form": "ほてい",
+   "reading": "ほてい",
+   "gloss": "legal ruling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.yoron",
+   "form": "よろん",
+   "reading": "よろん",
+   "gloss": "public opinion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.kyousei",
+   "form": "きょうせい",
+   "reading": "きょうせい",
+   "gloss": "enforcement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.shoukou",
+   "form": "しょうこう",
+   "reading": "しょうこう",
+   "gloss": "reference",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.taishu",
+   "form": "たいしゅう",
+   "reading": "たいしゅう",
+   "gloss": "masses",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.shuyuu",
+   "form": "しゅゆう",
+   "reading": "しゅゆう",
+   "gloss": "mainstream",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.shuryuu",
+   "form": "しゅうりゅう",
+   "reading": "しゅうりゅう",
+   "gloss": "trend",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.horyuu",
+   "form": "ちょうりゅう",
+   "reading": "ちょうりゅう",
+   "gloss": "tide",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.fuhyou",
+   "form": "ふひょう",
+   "reading": "ふひょう",
+   "gloss": "poor reputation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.shouba",
+   "form": "しょうば",
+   "reading": "しょうば",
+   "gloss": "market",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.shoubai",
+   "form": "しょうばい",
+   "reading": "しょうばい",
+   "gloss": "trade",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.shouzei",
+   "form": "しょうぜい",
+   "reading": "しょうぜい",
+   "gloss": "commerce tax",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.shourei",
+   "form": "しょうれい",
+   "reading": "しょうれい",
+   "gloss": "reward",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.zeihou",
+   "form": "ぜいほう",
+   "reading": "ぜいほう",
+   "gloss": "tax law",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.zeiri",
+   "form": "ぜいり",
+   "reading": "ぜいり",
+   "gloss": "tax rate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.jichitai",
+   "form": "じちたい",
+   "reading": "じちたい",
+   "gloss": "local government",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.seijika",
+   "form": "せいじか",
+   "reading": "せいじか",
+   "gloss": "politician",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.seijigaku",
+   "form": "せいじがく",
+   "reading": "せいじがく",
+   "gloss": "political science",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.senkyoku",
+   "form": "せんきょく",
+   "reading": "せんきょく",
+   "gloss": "constituency",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.giinkai",
+   "form": "ぎいんかい",
+   "reading": "ぎいんかい",
+   "gloss": "legislative body",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.hoju",
+   "form": "ほじゅ",
+   "reading": "ほじゅ",
+   "gloss": "support",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.hoshu",
+   "form": "ほしゅ",
+   "reading": "ほしゅ",
+   "gloss": "demand",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

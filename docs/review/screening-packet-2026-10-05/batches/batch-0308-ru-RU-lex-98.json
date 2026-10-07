@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-98",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.sci.svalka",
+   "form": "свалка",
+   "reading": "сва́лка",
+   "gloss": "dump, landfill",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.poligon",
+   "form": "полигон",
+   "reading": "полиго́н",
+   "gloss": "landfill site",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.zahoronenie",
+   "form": "захоронение",
+   "reading": "захороне́ние",
+   "gloss": "burial, disposal",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.szhiganie",
+   "form": "сжигание",
+   "reading": "сжига́ние",
+   "gloss": "incineration",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.razdelnyy",
+   "form": "раздельный",
+   "reading": "разде́льный",
+   "gloss": "separate (collection)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.tara",
+   "form": "тара",
+   "reading": "та́ра",
+   "gloss": "container, packaging",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.organika",
+   "form": "органика",
+   "reading": "орга́ника",
+   "gloss": "organic matter",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.kompost",
+   "form": "компост",
+   "reading": "компо́ст",
+   "gloss": "compost",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.kompostirovanie",
+   "form": "компостирование",
+   "reading": "компости́рование",
+   "gloss": "composting",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.pestitsid",
+   "form": "пестицид",
+   "reading": "пестици́д",
+   "gloss": "pesticide",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.gerbitsid",
+   "form": "гербицид",
+   "reading": "гербици́д",
+   "gloss": "herbicide",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.insektitsid",
+   "form": "инсектицид",
+   "reading": "инсектици́д",
+   "gloss": "insecticide",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.transgennyy",
+   "form": "трансгенный",
+   "reading": "трансге́нный",
+   "gloss": "transgenic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.klonirovanie",
+   "form": "клонирование",
+   "reading": "клони́рование",
+   "gloss": "cloning",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.vymiranie",
+   "form": "вымирание",
+   "reading": "вымира́ние",
+   "gloss": "extinction",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.sokhranenie",
+   "form": "сохранение",
+   "reading": "сохране́ние",
+   "gloss": "preservation, conservation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.zapovednik",
+   "form": "заповедник",
+   "reading": "запове́дник",
+   "gloss": "nature reserve",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.zakaznik",
+   "form": "заказник",
+   "reading": "зака́зник",
+   "gloss": "wildlife sanctuary",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.areal",
+   "form": "ареал",
+   "reading": "ареа́л",
+   "gloss": "range, habitat area",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.pereselenie",
+   "form": "переселение",
+   "reading": "переселе́ние",
+   "gloss": "resettlement",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.rasselenie",
+   "form": "расселение",
+   "reading": "расселе́ние",
+   "gloss": "dispersal, settlement",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.invaziya",
+   "form": "инвазия",
+   "reading": "инва́зия",
+   "gloss": "invasion",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.invazivnyy",
+   "form": "инвазивный",
+   "reading": "инвази́вный",
+   "gloss": "invasive",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.aborigennyy",
+   "form": "аборигенный",
+   "reading": "абориге́нный",
+   "gloss": "indigenous",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.endemik",
+   "form": "эндемик",
+   "reading": "энде́мик",
+   "gloss": "endemic species",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

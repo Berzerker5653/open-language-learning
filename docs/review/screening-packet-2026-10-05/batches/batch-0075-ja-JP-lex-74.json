@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-74",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.history2.katsuyou",
+   "form": "かつよう",
+   "reading": "かつよう",
+   "gloss": "application",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.shiten2",
+   "form": "してん",
+   "reading": "してん",
+   "gloss": "viewpoint",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.tachiba",
+   "form": "たちば",
+   "reading": "たちば",
+   "gloss": "standpoint",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.irezumi",
+   "form": "いれずみ",
+   "reading": "いれずみ",
+   "gloss": "tattoo",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.kiji",
+   "form": "きじ",
+   "reading": "きじ",
+   "gloss": "article",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.koseki",
+   "form": "こせき",
+   "reading": "こせき",
+   "gloss": "family register",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.chosa",
+   "form": "ちょうさ",
+   "reading": "ちょうさ",
+   "gloss": "survey",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.mousho",
+   "form": "もうしょ",
+   "reading": "もうしょ",
+   "gloss": "written document",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.nikki",
+   "form": "にっき",
+   "reading": "にっき",
+   "gloss": "diary",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.tegami",
+   "form": "てがみ",
+   "reading": "てがみ",
+   "gloss": "letter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.kioku",
+   "form": "きおく",
+   "reading": "きおく",
+   "gloss": "memory",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.kuchikami",
+   "form": "くちかみ",
+   "reading": "くちかみ",
+   "gloss": "oral tradition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history3.taiou",
+   "form": "たいおう",
+   "reading": "たいおう",
+   "gloss": "comparison",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history3.jikkou",
+   "form": "じっこう",
+   "reading": "じっこう",
+   "gloss": "implementation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history3.hyouka",
+   "form": "ひょうか",
+   "reading": "ひょうか",
+   "gloss": "evaluation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history3.rondai",
+   "form": "ろんだい",
+   "reading": "ろんだい",
+   "gloss": "agenda, topic for debate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history3.bunkyou",
+   "form": "ぶんきょう",
+   "reading": "ぶんきょう",
+   "gloss": "local culture",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history3.denshou2",
+   "form": "でんしょう",
+   "reading": "でんしょう",
+   "gloss": "legacy, heritage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history3.shimei",
+   "form": "しみめい",
+   "reading": "しみめい",
+   "gloss": "clarification",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history3.kaisai",
+   "form": "かいさい",
+   "reading": "かいさい",
+   "gloss": "disclosure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history3.sekinin",
+   "form": "せきにん",
+   "reading": "せきにん",
+   "gloss": "responsibility",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history3.mondai",
+   "form": "もんだい",
+   "reading": "もんだい",
+   "gloss": "problem",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.daidokoro",
+   "form": "だいどころ",
+   "reading": "だいどころ",
+   "gloss": "kitchen",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.furo",
+   "form": "ふろ",
+   "reading": "ふろ",
+   "gloss": "bath",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.genkan",
+   "form": "げんかん",
+   "reading": "げんかん",
+   "gloss": "entryway",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

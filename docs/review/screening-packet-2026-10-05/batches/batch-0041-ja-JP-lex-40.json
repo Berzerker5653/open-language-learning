@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-40",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.edu4.gijutsu-kyouiku",
+   "form": "きょういくぎじゅつ",
+   "reading": "きょういくぎじゅつ",
+   "gloss": "educational technology",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.taburetto",
+   "form": "タブレット",
+   "reading": "タブレット",
+   "gloss": "tablet",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.onrain",
+   "form": "オンライン",
+   "reading": "オンライン",
+   "gloss": "online",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.digital",
+   "form": "デジタル",
+   "reading": "デジタル",
+   "gloss": "digital",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.anzen",
+   "form": "あんぜん",
+   "reading": "あんぜん",
+   "gloss": "safety",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.shokubun",
+   "form": "しょくぶん",
+   "reading": "しょくぶん",
+   "gloss": "professionalism",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.kyoushoku",
+   "form": "きょうしょく",
+   "reading": "きょうしょく",
+   "gloss": "teaching profession",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.shumoku",
+   "form": "しょくむ",
+   "reading": "しょくむ",
+   "gloss": "vocation, occupation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.jitsuryoku",
+   "form": "じつりょく",
+   "reading": "じつりょく",
+   "gloss": "practical ability",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.saishin",
+   "form": "さいしん",
+   "reading": "さいしん",
+   "gloss": "latest",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.jiritsu",
+   "form": "じりつ",
+   "reading": "じりつ",
+   "gloss": "autonomy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.jikaku",
+   "form": "じかく",
+   "reading": "じかく",
+   "gloss": "awareness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.senkousei",
+   "form": "せんこう",
+   "reading": "せんこう",
+   "gloss": "priorities",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.tokucho",
+   "form": "とくちょう",
+   "reading": "とくちょう",
+   "gloss": "characteristics",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.saisei",
+   "form": "さいせい",
+   "reading": "さいせい",
+   "gloss": "rebirth, renewal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.youji",
+   "form": "ようじ",
+   "reading": "ようじ",
+   "gloss": "infancy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.hoiku",
+   "form": "いく",
+   "reading": "いく",
+   "gloss": "childcare",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.enji",
+   "form": "ようちえん",
+   "reading": "ようちえん",
+   "gloss": "kindergarten",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.shogaigaku",
+   "form": "しょうがっこう",
+   "reading": "しょうがっこう",
+   "gloss": "elementary school",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.koutou-gakko",
+   "form": "こうとうがっこう",
+   "reading": "こうとうがっこう",
+   "gloss": "high school",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.kenkyusei",
+   "form": "けんきゅうせい",
+   "reading": "けんきゅうせい",
+   "gloss": "graduate student",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.shakaijin",
+   "form": "しゃかいじん",
+   "reading": "しゃかいじん",
+   "gloss": "working adult",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.shuushoku",
+   "form": "しゅうしょく",
+   "reading": "しゅうしょく",
+   "gloss": "employment, job hunting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.kunren",
+   "form": "くんにん",
+   "reading": "くんにん",
+   "gloss": "training",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu4.jitsugyo",
+   "form": "じつぎょう",
+   "reading": "じつぎょう",
+   "gloss": "practicum",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

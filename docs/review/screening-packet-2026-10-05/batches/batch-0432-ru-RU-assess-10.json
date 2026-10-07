@@ -1,0 +1,107 @@
+{
+ "batch_id": "ru-RU-assess-10",
+ "kind": "assess",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.assess.b2.academic-study-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify definition words (дефиниция, термин) in a supplied text.",
+    "Match называется chunks to their definition.",
+    "Distinguish значение (meaning) from денотация (denotation)."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.academic-study-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Define with the supplied называется chunk.",
+    "Stipulate with the supplied под которым понимаю chunk.",
+    "Classify with a supplied перечень or категория chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.academic-study-reading2",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify relation words (взаимодействие, зависимость) in supplied notes.",
+    "Match в связи с chunks to their relation.",
+    "Distinguish объект (object) from субъект (subject)."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.academic-study-writing2",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Frame with the supplied в рамках chunk.",
+    "Relate with the supplied в связи с chunk.",
+    "Map with a supplied цепь or иерархия chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.academic-study-reading3",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify method words (алгоритм, стадия) in a supplied procedure.",
+    "Match чем … тем chunks to their correlation.",
+    "Distinguish предварительный (preliminary) from окончательный (final)."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.academic-study-writing3",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Correlate with the supplied чем … тем chunk.",
+    "Concede with the supplied несмотря на chunk.",
+    "Qualify with a supplied ограничение or приблизительный chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.academic-study-reading4",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify finding words (открытие, находка) in a supplied paper.",
+    "Match по данным chunks to their attribution.",
+    "Distinguish теоретический (theoretical) from практический (practical)."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.academic-study-writing4",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Cite with the supplied по данных chunk.",
+    "Discuss with the supplied в ходе обсуждения chunk.",
+    "Interpret with a supplied обсуждение or версия chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.professional-writing-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify request words (запрос, прошу) in a supplied letter.",
+    "Match прошу chunks to their request.",
+    "Distinguish входящий (incoming) from исходящий (outgoing)."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.professional-writing-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Request with the supplied прошу chunk.",
+    "Give reason with the supplied в связи с chunk.",
+    "Close with a supplied с уважением chunk."
+   ]
+  }
+ ]
+}

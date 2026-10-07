@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-136",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.story2.fukkyaku",
+   "form": "ふっきゃく",
+   "reading": "ふっきゃく",
+   "gloss": "revival",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.dokugeki",
+   "form": "どくげき",
+   "reading": "どくげき",
+   "gloss": "monologue",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.mimi",
+   "form": "みみ",
+   "reading": "みみ",
+   "gloss": "ear",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.oto",
+   "form": "おと",
+   "reading": "おと",
+   "gloss": "sound",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.uta",
+   "form": "うた",
+   "reading": "うた",
+   "gloss": "song",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.kuchi2",
+   "form": "くち",
+   "reading": "くち",
+   "gloss": "mouth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.shisen",
+   "form": "しせん",
+   "reading": "しせん",
+   "gloss": "perspective",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.kao2",
+   "form": "かお",
+   "reading": "かお",
+   "gloss": "face",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.me2",
+   "form": "め",
+   "reading": "め",
+   "gloss": "eye",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.te2",
+   "form": "て",
+   "reading": "て",
+   "gloss": "hand",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.ashi2",
+   "form": "あし",
+   "reading": "あし",
+   "gloss": "foot",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.hairon",
+   "form": "はいろん",
+   "reading": "はいろん",
+   "gloss": "plagiarism",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.shuwei",
+   "form": "しゅうい",
+   "reading": "しゅうい",
+   "gloss": "habit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.kaiso",
+   "form": "かいそ",
+   "reading": "かいそ",
+   "gloss": "recollection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.atama2",
+   "form": "あたま",
+   "reading": "あたま",
+   "gloss": "head",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.mura2",
+   "form": "むら",
+   "reading": "むら",
+   "gloss": "village",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.sato",
+   "form": "さと",
+   "reading": "さと",
+   "gloss": "hometown",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.otogi",
+   "form": "おとぎ",
+   "reading": "おとぎ",
+   "gloss": "old tale",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.shinwa",
+   "form": "しんわ",
+   "reading": "しんわ",
+   "gloss": "myth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.yokai",
+   "form": "ようかい",
+   "reading": "ようかい",
+   "gloss": "spirit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.bakemono",
+   "form": "ばけもの",
+   "reading": "ばけもの",
+   "gloss": "monster",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.kitsune",
+   "form": "きつね",
+   "reading": "きつね",
+   "gloss": "fox",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.tanuki",
+   "form": "たぬき",
+   "reading": "たぬき",
+   "gloss": "raccoon dog",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.tsuru",
+   "form": "つる",
+   "reading": "つる",
+   "gloss": "crane",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story2.kari",
+   "form": "かり",
+   "reading": "かり",
+   "gloss": "hunt",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

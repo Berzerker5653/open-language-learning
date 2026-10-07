@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-21",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b1.u350",
+   "text": "Это суть.",
+   "gloss": "This is the essence."
+  },
+  {
+   "id": "ru.sent.b1.u351",
+   "text": "Это смысл.",
+   "gloss": "This is the meaning."
+  },
+  {
+   "id": "ru.sent.b1.u352",
+   "text": "Это структура.",
+   "gloss": "This is the structure."
+  },
+  {
+   "id": "ru.sent.b1.u353",
+   "text": "Это глава.",
+   "gloss": "This is a chapter."
+  },
+  {
+   "id": "ru.sent.b1.u354",
+   "text": "Это термин.",
+   "gloss": "This is a term."
+  },
+  {
+   "id": "ru.sent.b1.u355",
+   "text": "Это пересказ.",
+   "gloss": "This is a retelling."
+  },
+  {
+   "id": "ru.sent.b1.u356",
+   "text": "Это доклад.",
+   "gloss": "This is a report."
+  },
+  {
+   "id": "ru.sent.b1.u357",
+   "text": "Это контекст.",
+   "gloss": "This is context."
+  },
+  {
+   "id": "ru.sent.b1.u358",
+   "text": "Это образ.",
+   "gloss": "This is an image."
+  },
+  {
+   "id": "ru.sent.b1.u359",
+   "text": "Это дневник.",
+   "gloss": "This is a diary."
+  },
+  {
+   "id": "ru.sent.b1.u360",
+   "text": "Это отбор.",
+   "gloss": "This is selection."
+  },
+  {
+   "id": "ru.sent.b1.u361",
+   "text": "Это критерий.",
+   "gloss": "This is a criterion."
+  },
+  {
+   "id": "ru.sent.b1.u362",
+   "text": "Это объём.",
+   "gloss": "This is the volume."
+  },
+  {
+   "id": "ru.sent.b1.u363",
+   "text": "Это количество.",
+   "gloss": "This is the quantity."
+  },
+  {
+   "id": "ru.sent.b1.u364",
+   "text": "Это уровень.",
+   "gloss": "This is the level."
+  }
+ ]
+}

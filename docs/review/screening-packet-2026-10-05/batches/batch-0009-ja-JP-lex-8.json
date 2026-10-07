@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-8",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.admin.kurasu",
+   "form": "くらす",
+   "reading": "くらす",
+   "gloss": "to live",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.seikatsu-suru",
+   "form": "せいかつします",
+   "reading": "せいかつします",
+   "gloss": "to live",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.kanri-suru",
+   "form": "かんりします",
+   "reading": "かんりします",
+   "gloss": "to manage",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.yoyaku-suru",
+   "form": "よやくします",
+   "reading": "よやくします",
+   "gloss": "to reserve",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.torikae",
+   "form": "とりかえ",
+   "reading": "とりかえ",
+   "gloss": "exchange",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.henkou",
+   "form": "へんこう",
+   "reading": "へんこう",
+   "gloss": "change",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.kakunin",
+   "form": "かくにん",
+   "reading": "かくにん",
+   "gloss": "confirmation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.kakunin-suru",
+   "form": "かくにんします",
+   "reading": "かくにんします",
+   "gloss": "to confirm",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.mibungou",
+   "form": "みぶんごう",
+   "reading": "みぶんごう",
+   "gloss": "identification",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.shoumei",
+   "form": "しょうめい",
+   "reading": "しょうめい",
+   "gloss": "proof",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.shoumei-sho",
+   "form": "しょうめいしょ",
+   "reading": "しょうめいしょ",
+   "gloss": "certificate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.todoke",
+   "form": "とどけ",
+   "reading": "とどけ",
+   "gloss": "registration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.todoke-sho",
+   "form": "とどけしょ",
+   "reading": "とどけしょ",
+   "gloss": "notification",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.shinsei",
+   "form": "しんせい",
+   "reading": "しんせい",
+   "gloss": "application",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.shinsei-sho",
+   "form": "しんせいしょ",
+   "reading": "しんせいしょ",
+   "gloss": "application form",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.shinsei-suru",
+   "form": "しんせいします",
+   "reading": "しんせいします",
+   "gloss": "to apply",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.kenkou-hoken",
+   "form": "けんこうほけん",
+   "reading": "けんこうほけん",
+   "gloss": "health insurance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.nenkin",
+   "form": "ねんきん",
+   "reading": "ねんきん",
+   "gloss": "pension",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.hoken-jo",
+   "form": "ほけんじょう",
+   "reading": "ほけんじょう",
+   "gloss": "insurance certificate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.jushou-todoke",
+   "form": "じゅうしょとどけ",
+   "reading": "じゅうしょとどけ",
+   "gloss": "address registration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.koseki",
+   "form": "こせき",
+   "reading": "こせき",
+   "gloss": "family register",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.inkan-shou",
+   "form": "いんかんしょう",
+   "reading": "いんかんしょう",
+   "gloss": "seal certificate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.taishu-kin",
+   "form": "たいしゅうきん",
+   "reading": "たいしゅうきん",
+   "gloss": "withdrawal money",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.maichi",
+   "form": "まいち",
+   "reading": "まいち",
+   "gloss": "market",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.admin.omawari",
+   "form": "おまわり",
+   "reading": "おまわり",
+   "gloss": "police patrol",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

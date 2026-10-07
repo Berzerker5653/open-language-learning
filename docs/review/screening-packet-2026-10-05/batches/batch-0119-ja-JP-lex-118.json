@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-118",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.rel2.takai2",
+   "form": "たかい",
+   "reading": "たかい",
+   "gloss": "high",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.hikui",
+   "form": "ひくい",
+   "reading": "ひくい",
+   "gloss": "low",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.fukai2",
+   "form": "ふかい",
+   "reading": "ふかい",
+   "gloss": "deep",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.asai",
+   "form": "あさい",
+   "reading": "あさい",
+   "gloss": "shallow",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.mijikai",
+   "form": "みじかい",
+   "reading": "みじかい",
+   "gloss": "short",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.nagai",
+   "form": "ながい",
+   "reading": "ながい",
+   "gloss": "long",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.hayai",
+   "form": "はやい",
+   "reading": "はやい",
+   "gloss": "fast, early",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.osoi",
+   "form": "おそい",
+   "reading": "おそい",
+   "gloss": "slow, late",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.tsuyoi",
+   "form": "つよい",
+   "reading": "つよい",
+   "gloss": "strong",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.yowai",
+   "form": "よわい",
+   "reading": "よわい",
+   "gloss": "weak",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.omoshiroi2",
+   "form": "おもしろい",
+   "reading": "おもしろい",
+   "gloss": "funny",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.tsumaranai",
+   "form": "つまらない",
+   "reading": "つまらない",
+   "gloss": "boring",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.ureshii",
+   "form": "うれしい",
+   "reading": "うれしい",
+   "gloss": "glad",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.kanashii",
+   "form": "かなしい",
+   "reading": "かなしい",
+   "gloss": "sad",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.tanoshii",
+   "form": "たのしい",
+   "reading": "たのしい",
+   "gloss": "enjoyable",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.kurushii",
+   "form": "くるしい",
+   "reading": "くるしい",
+   "gloss": "painful",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.kokochiyoi",
+   "form": "ここちよい",
+   "reading": "ここちよい",
+   "gloss": "pleasant",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.kimochi",
+   "form": "きもち",
+   "reading": "きもち",
+   "gloss": "feeling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.kokoro",
+   "form": "こころ",
+   "reading": "こころ",
+   "gloss": "heart, mind",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.koryu6",
+   "form": "こうりゅう",
+   "reading": "こうりゅう",
+   "gloss": "exchange",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.shinko2",
+   "form": "しんこう",
+   "reading": "しんこう",
+   "gloss": "trust",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.kaitaku2",
+   "form": "かいたく",
+   "reading": "かいたく",
+   "gloss": "relief",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.sogo",
+   "form": "そうごう",
+   "reading": "そうごう",
+   "gloss": "mutual",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.egao",
+   "form": "えがお",
+   "reading": "えがお",
+   "gloss": "smile",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel2.kokan2",
+   "form": "こうかん",
+   "reading": "こうかん",
+   "gloss": "exchange",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

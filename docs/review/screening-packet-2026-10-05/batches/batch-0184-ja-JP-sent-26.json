@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-26",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.medical-ethics",
+   "text": "いけん の しゅうごう を おこないました。",
+   "gloss": "I carried out a collection of opinions."
+  },
+  {
+   "id": "ja.sent.truth-and-lies",
+   "text": "しんじつ の かくにん を しました。",
+   "gloss": "I confirmed the truth."
+  },
+  {
+   "id": "ja.sent.logic-basics",
+   "text": "むじゅん の けんきゅう を しました。",
+   "gloss": "I did research on contradiction."
+  },
+  {
+   "id": "ja.sent.fallacy-hunting",
+   "text": "どうとく の てんかん を べんきょう しました。",
+   "gloss": "I studied the shift in morality."
+  },
+  {
+   "id": "ja.sent.philosophy-reading",
+   "text": "じゆういし の ろんぶん を よみました。",
+   "gloss": "I read an essay on free will."
+  },
+  {
+   "id": "ja.sent.short-story-analysis",
+   "text": "ぶんがく の さくひん を ぶんせき しました。",
+   "gloss": "I analyzed a literary work."
+  },
+  {
+   "id": "ja.sent.novel-excerpts",
+   "text": "きんだい の ぶんがく を べんきょう しました。",
+   "gloss": "I studied modern literature."
+  },
+  {
+   "id": "ja.sent.poetry-modern",
+   "text": "げんだい の し を よみました。",
+   "gloss": "I read a contemporary poem."
+  },
+  {
+   "id": "ja.sent.poetry-classical",
+   "text": "こてん の か を べんきょう しました。",
+   "gloss": "I studied a classical poem."
+  },
+  {
+   "id": "ja.sent.haiku-tradition",
+   "text": "はいく の てきすと を ならべました。",
+   "gloss": "I lined up haiku texts."
+  },
+  {
+   "id": "ja.sent.narrator-analysis",
+   "text": "してい の ちがい を べんきょう しました。",
+   "gloss": "I studied the difference in viewpoint."
+  },
+  {
+   "id": "ja.sent.symbol-reading",
+   "text": "ぶんけん の けんきゅう を しました。",
+   "gloss": "I did research on literature."
+  },
+  {
+   "id": "ja.sent.genre-comparison",
+   "text": "しゃんる の ぶんるい を べんきょう しました。",
+   "gloss": "I studied the classification of genres."
+  },
+  {
+   "id": "ja.sent.translation-comparison",
+   "text": "ほんやく の げんぶん を よみました。",
+   "gloss": "I read the original text of a translation."
+  },
+  {
+   "id": "ja.sent.author-context",
+   "text": "じょ の ないよう を べんきょう しました。",
+   "gloss": "I studied the content of the preface."
+  }
+ ]
+}

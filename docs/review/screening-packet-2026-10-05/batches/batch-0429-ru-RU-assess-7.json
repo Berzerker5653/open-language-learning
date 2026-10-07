@@ -1,0 +1,107 @@
+{
+ "batch_id": "ru-RU-assess-7",
+ "kind": "assess",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.assess.b1.future-conditions-reading2",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify comparison words (различие, сходство) in a supplied note.",
+    "Match если бы chunks to their hypothetical.",
+    "Distinguish преимущество (advantage) from недостаток (shortcoming)."
+   ]
+  },
+  {
+   "id": "ru.assess.b1.future-conditions-writing2",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Weigh options with the supplied следует chunk.",
+    "Hypothesize with the supplied если бы chunk.",
+    "Prefer with a supplied лучше бы chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.b1.extended-writing-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify letter parts (обращение, подпись) in a supplied letter.",
+    "Match уважаемый chunks to their opening.",
+    "Distinguish черновик (draft) from чистовик (final copy)."
+   ]
+  },
+  {
+   "id": "ru.assess.b1.extended-writing-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Open a letter with the supplied уважаемый chunk.",
+    "Close with the supplied с уважением chunk.",
+    "Organize a letter with a supplied абзац or шаблон chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.b1.extended-writing-reading2",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify cohesion words (связка, союз) in a supplied paragraph.",
+    "Match кроме того chunks to their addition.",
+    "Distinguish черновик (draft) from подлинник (original)."
+   ]
+  },
+  {
+   "id": "ru.assess.b1.extended-writing-writing2",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Connect paragraphs with the supplied кроме того chunk.",
+    "Revise with the supplied другими словами chunk.",
+    "Rewrite with a supplied переписать or правка chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.argumentation-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify claim words (утверждение, тезис) in a supplied argument.",
+    "Match с другой стороны chunks to their counterpoint.",
+    "Distinguish довод (reason) from контраргумент (counterargument)."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.argumentation-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "State a claim with the supplied я считаю, что chunk.",
+    "Counter with the supplied с другой стороны chunk.",
+    "Support with a supplied обоснование or довод chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.argumentation-reading2",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify evidence words (выборка, показатель) in a supplied note.",
+    "Match например chunks to their illustration.",
+    "Distinguish подлинный (genuine) from фальшивый (fake)."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.argumentation-writing2",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Illustrate with the supplied например chunk.",
+    "Justify with the supplied это доказывает chunk.",
+    "Compare with a supplied сопоставление or сличение chunk."
+   ]
+  }
+ ]
+}

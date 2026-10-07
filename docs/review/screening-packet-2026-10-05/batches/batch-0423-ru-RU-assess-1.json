@@ -1,0 +1,105 @@
+{
+ "batch_id": "ru-RU-assess-1",
+ "kind": "assess",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.assess.on-ramp.numbers-recognition",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Match each of the ten printed digits 0 through 9 to the corresponding taught Russian number word.",
+    "Interpret the supplied identification models for the printed digits 0 and 5 without introducing counted nouns."
+   ]
+  },
+  {
+   "id": "ru.assess.on-ramp.numbers-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Write every taught number word from its digit cue and write every digit from its Russian word cue.",
+    "Use the taught citation forms; preserve the soft signs and spell four, eight and nine correctly."
+   ]
+  },
+  {
+   "id": "ru.assess.a1.personal-details-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify names, age, origin, study/work role and labeled contact details in a supplied fictional profile.",
+    "Distinguish name, citizenship and country-of-origin fields without inferring one from another.",
+    "Interpret the taught question words and the number-year age pattern."
+   ]
+  },
+  {
+   "id": "ru.assess.a1.personal-details-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Complete a fictional profile using the supplied name, role, origin, age and contact tokens.",
+    "Use the taught no-copula, genitive-origin and dative-age patterns with appropriate year forms.",
+    "Copy provided contact data into correctly labeled fields; do not require real personal information."
+   ]
+  },
+  {
+   "id": "ru.assess.a1.people-family-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify family-member, people, pet and possession nouns in a supplied family note or profile.",
+    "Distinguish the possessor in the у + genitive pattern from the possessed item.",
+    "Match possessive pronouns to the person and item they refer to."
+   ]
+  },
+  {
+   "id": "ru.assess.a1.people-family-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Write a family-identification statement with это and a taught nominative noun.",
+    "Complete an у + genitive possession model with a supplied item noun.",
+    "Use мой, твой or наш in the supplied gender form without inventing new endings."
+   ]
+  },
+  {
+   "id": "ru.assess.a1.home-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify room, household-object and place nouns in a supplied home note or list.",
+    "Distinguish the location phrase in the где + в/на model from the thing located.",
+    "Match в and на to the taught pairing for each place noun."
+   ]
+  },
+  {
+   "id": "ru.assess.a1.home-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Write a home-identification statement with это and a taught nominative noun.",
+    "Complete a location model with a supplied prepositional form.",
+    "Choose в or на for a taught place without inventing new endings."
+   ]
+  },
+  {
+   "id": "ru.assess.a1.routines-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify routine verbs and time words in a supplied daily-schedule note.",
+    "Distinguish the frequency adverb from the verb it modifies.",
+    "Match a time expression to the supplied час/часа/часов form."
+   ]
+  },
+  {
+   "id": "ru.assess.a1.routines-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Write a routine statement with a supplied verb form and a time word.",
+    "Place a frequency adverb before the verb as taught.",
+    "Complete a time model with the supplied hour form without inventing endings."
+   ]
+  }
+ ]
+}

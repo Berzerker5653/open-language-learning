@@ -1,0 +1,1 @@
+{"batch_id": "ja-JP-lex-0", "kind": "lex", "pack": "ja-JP", "model_id": "example/GPT-something", "model_version": "2026-10", "date": "2026-10-05", "prompt_version": "screen-v1", "status": "ok", "items": [{"id": "ja.lex.abst.gainen", "v": "ok", "why": ""}]}

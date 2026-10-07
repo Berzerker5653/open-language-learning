@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-58",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.food.bataa",
+   "form": "ばたー",
+   "reading": "ばたー",
+   "gloss": "butter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.yogurt",
+   "form": "よぐると",
+   "reading": "よぐると",
+   "gloss": "yogurt",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.cookie",
+   "form": "くっきー",
+   "reading": "くっきー",
+   "gloss": "cookie",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.keeki",
+   "form": "けーき",
+   "reading": "けーき",
+   "gloss": "cake",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.purin",
+   "form": "ぷりん",
+   "reading": "ぷりん",
+   "gloss": "pudding",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.ajiwai",
+   "form": "あじわい",
+   "reading": "あじわい",
+   "gloss": "flavor; taste",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.oishii",
+   "form": "おいしい",
+   "reading": "おいしい",
+   "gloss": "delicious",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.amai",
+   "form": "あまい",
+   "reading": "あまい",
+   "gloss": "sweet",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.shoppai",
+   "form": "しょっぱい",
+   "reading": "しょっぱい",
+   "gloss": "salty",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.suppai",
+   "form": "すっぱい",
+   "reading": "すっぱい",
+   "gloss": "sour",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.houshi",
+   "form": "ほうし",
+   "reading": "ほうし",
+   "gloss": "simmering",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.kudamono",
+   "form": "くだもの",
+   "reading": "くだもの",
+   "gloss": "fruit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.tabemono",
+   "form": "たべもの",
+   "reading": "たべもの",
+   "gloss": "food",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.nomimono",
+   "form": "のみもの",
+   "reading": "のみもの",
+   "gloss": "drink",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.shokuji",
+   "form": "しょくじ",
+   "reading": "しょくじ",
+   "gloss": "meal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.choushoku",
+   "form": "ちょうしょく",
+   "reading": "ちょうしょく",
+   "gloss": "breakfast",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.chuushoku",
+   "form": "ちゅうしょく",
+   "reading": "ちゅうしょく",
+   "gloss": "lunch",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.yuushoku",
+   "form": "ゆうしょく",
+   "reading": "ゆうしょく",
+   "gloss": "dinner",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.gozen",
+   "form": "ごぜん",
+   "reading": "ごぜん",
+   "gloss": "set meal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.bento",
+   "form": "べんとう",
+   "reading": "べんとう",
+   "gloss": "bento box",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.obanzai",
+   "form": "おばんざい",
+   "reading": "おばんざい",
+   "gloss": "home-style dish",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.tempura",
+   "form": "てんぷら",
+   "reading": "てんぷら",
+   "gloss": "tempura",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.soba",
+   "form": "そば",
+   "reading": "そば",
+   "gloss": "soba noodles",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.udon",
+   "form": "うどん",
+   "reading": "うどん",
+   "gloss": "udon noodles",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.food.ramen",
+   "form": "らーめん",
+   "reading": "らーめん",
+   "gloss": "ramen",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

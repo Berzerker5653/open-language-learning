@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-95",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.media2.kouchou",
+   "form": "こうちょう",
+   "reading": "こうちょう",
+   "gloss": "advantage; pros",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.hitei",
+   "form": "ひてい",
+   "reading": "ひてい",
+   "gloss": "negation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.kaitou",
+   "form": "かいとう",
+   "reading": "かいとう",
+   "gloss": "answer; response",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.rinri",
+   "form": "りんり",
+   "reading": "りんり",
+   "gloss": "ethics",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.kohei",
+   "form": "こうへい",
+   "reading": "こうへい",
+   "gloss": "fairness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.shino",
+   "form": "しんのう",
+   "reading": "しんのう",
+   "gloss": "trust",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.kenryoku",
+   "form": "けんりょく",
+   "reading": "けんりょく",
+   "gloss": "authority; power",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media2.tsushin",
+   "form": "つうしん",
+   "reading": "つうしん",
+   "gloss": "news; communications",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.bunka3",
+   "form": "ぶんか",
+   "reading": "ぶんか",
+   "gloss": "culture",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.geijutsu2",
+   "form": "げいじゅつ",
+   "reading": "げいじゅつ",
+   "gloss": "art",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.tenji2",
+   "form": "てんじ",
+   "reading": "てんじ",
+   "gloss": "exhibition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.media",
+   "form": "めであ",
+   "reading": "めであ",
+   "gloss": "media",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.denwa2",
+   "form": "でんわ",
+   "reading": "でんわ",
+   "gloss": "telephone",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.houdou",
+   "form": "ほうどう",
+   "reading": "ほうどう",
+   "gloss": "reporting, news report",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.kiji2",
+   "form": "きじ",
+   "reading": "きじ",
+   "gloss": "news article",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.kisha",
+   "form": "きしゃ",
+   "reading": "きしゃ",
+   "gloss": "reporter, journalist",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.housou3",
+   "form": "ほうそう",
+   "reading": "ほうそう",
+   "gloss": "broadcasting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.tsuushin3",
+   "form": "つうしん",
+   "reading": "つうしん",
+   "gloss": "news agency, correspondence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.shaka",
+   "form": "しゃか",
+   "reading": "しゃか",
+   "gloss": "society",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.yoron",
+   "form": "よろん",
+   "reading": "よろん",
+   "gloss": "public opinion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.seiron",
+   "form": "せいろん",
+   "reading": "せいろん",
+   "gloss": "argument, discourse",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.fureimu",
+   "form": "ふれいむ",
+   "reading": "ふれいむ",
+   "gloss": "framing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.kata",
+   "form": "かた",
+   "reading": "かた",
+   "gloss": "shape, form",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.kuchikomi",
+   "form": "くちこみ",
+   "reading": "くちこみ",
+   "gloss": "word of mouth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media3.dempatsu",
+   "form": "でんぱつ",
+   "reading": "でんぱつ",
+   "gloss": "propaganda",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

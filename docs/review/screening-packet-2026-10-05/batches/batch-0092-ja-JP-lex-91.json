@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-91",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.med2.kaigo",
+   "form": "かいご",
+   "reading": "かいご",
+   "gloss": "care, caregiving",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.katei",
+   "form": "かてい",
+   "reading": "かてい",
+   "gloss": "household, home",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.kofuku",
+   "form": "こうふく",
+   "reading": "こうふく",
+   "gloss": "wellbeing, welfare",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.eiyou",
+   "form": "えいよう",
+   "reading": "えいよう",
+   "gloss": "nutrition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.tanpakushitsu",
+   "form": "たんぱくしつ",
+   "reading": "たんぱくしつ",
+   "gloss": "protein",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.bitamin",
+   "form": "びたみん",
+   "reading": "びたみん",
+   "gloss": "vitamin",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.karorii",
+   "form": "かろりー",
+   "reading": "かろりー",
+   "gloss": "calorie",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.shokuzai",
+   "form": "しょくざい",
+   "reading": "しょくざい",
+   "gloss": "food, ingredient",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.fubyou",
+   "form": "ふびょう",
+   "reading": "ふびょう",
+   "gloss": "inequality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.kakusa",
+   "form": "かくさ",
+   "reading": "かくさ",
+   "gloss": "disparity, gap",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.binbou",
+   "form": "びんぼう",
+   "reading": "びんぼう",
+   "gloss": "poverty",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.koukyou",
+   "form": "こうきょう",
+   "reading": "こうきょう",
+   "gloss": "public, community",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.kenri",
+   "form": "けんり",
+   "reading": "けんり",
+   "gloss": "right, entitlement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.denwa",
+   "form": "でんわ",
+   "reading": "でんわ",
+   "gloss": "telephone",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.onrain",
+   "form": "おんらいん",
+   "reading": "おんらいん",
+   "gloss": "online",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.apuri",
+   "form": "あぷり",
+   "reading": "あぷり",
+   "gloss": "app, application",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.denki",
+   "form": "でんき",
+   "reading": "でんき",
+   "gloss": "electricity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.koukan",
+   "form": "こうかん",
+   "reading": "こうかん",
+   "gloss": "exchange, interchange",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.rinri",
+   "form": "りんり",
+   "reading": "りんり",
+   "gloss": "ethics, morals",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.gimon",
+   "form": "ぎもん",
+   "reading": "ぎもん",
+   "gloss": "doubt, question",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.teigen",
+   "form": "ていげん",
+   "reading": "ていげん",
+   "gloss": "objection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.houritsu",
+   "form": "ほうりつ",
+   "reading": "ほうりつ",
+   "gloss": "law",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.keni",
+   "form": "けんい",
+   "reading": "けんい",
+   "gloss": "authority, power",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.pandemu",
+   "form": "ぱんでみっく",
+   "reading": "ぱんでみっく",
+   "gloss": "pandemic",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.taishuu",
+   "form": "たいしゅう",
+   "reading": "たいしゅう",
+   "gloss": "the public, masses",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

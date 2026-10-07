@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-76",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.problems.problema",
+   "form": "проблема",
+   "reading": "пробле́ма",
+   "gloss": "problem",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems.beda",
+   "form": "беда",
+   "reading": "беда́",
+   "gloss": "trouble, misfortune",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems.trudnost",
+   "form": "трудность",
+   "reading": "тру́дность",
+   "gloss": "difficulty",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems.nepoladka",
+   "form": "неполадка",
+   "reading": "непола́дка",
+   "gloss": "malfunction, glitch",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems.avariya",
+   "form": "авария",
+   "reading": "ава́рия",
+   "gloss": "accident, breakdown",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems.prosba",
+   "form": "просьба",
+   "reading": "про́сьба",
+   "gloss": "request, favor",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems.poprosit",
+   "form": "попросить",
+   "reading": "попроси́ть",
+   "gloss": "to ask (a favor)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.obratitsya",
+   "form": "обратиться",
+   "reading": "обрати́ться",
+   "gloss": "to turn to, contact",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.obrashchenie",
+   "form": "обращение",
+   "reading": "обраще́ние",
+   "gloss": "address, appeal",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.problems.namyok",
+   "form": "намёк",
+   "reading": "наме́к",
+   "gloss": "hint",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems.sposob",
+   "form": "способ",
+   "reading": "спо́соб",
+   "gloss": "method, way",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems.variant",
+   "form": "вариант",
+   "reading": "вариа́нт",
+   "gloss": "option, variant",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems.put",
+   "form": "путь",
+   "reading": "путь",
+   "gloss": "way, path",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems.metod",
+   "form": "метод",
+   "reading": "ме́тод",
+   "gloss": "method",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems.rashchyot",
+   "form": "расчёт",
+   "reading": "расче́т",
+   "gloss": "calculation, plan",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems.pochinka",
+   "form": "починка",
+   "reading": "почи́нка",
+   "gloss": "mending, fix",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems.master",
+   "form": "мастер",
+   "reading": "ма́стер",
+   "gloss": "repairman, master",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.problems.zapchast",
+   "form": "запчасть",
+   "reading": "запча́сть",
+   "gloss": "spare part",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems.ustanovit",
+   "form": "установить",
+   "reading": "установи́ть",
+   "gloss": "to install, set",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.nastroit",
+   "form": "настроить",
+   "reading": "настро́ить",
+   "gloss": "to adjust, configure",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.vernut",
+   "form": "вернуть",
+   "reading": "верну́ть",
+   "gloss": "to return, give back",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.obmenyat",
+   "form": "обменять",
+   "reading": "обменя́ть",
+   "gloss": "to exchange",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.problems.summa",
+   "form": "сумма",
+   "reading": "су́мма",
+   "gloss": "sum, amount",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems.kvitantsiya",
+   "form": "квитанция",
+   "reading": "квита́нция",
+   "gloss": "receipt, slip",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.problems.kompensatsiya",
+   "form": "компенсация",
+   "reading": "компенса́ция",
+   "gloss": "compensation",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

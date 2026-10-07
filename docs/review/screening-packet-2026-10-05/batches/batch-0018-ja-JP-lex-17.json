@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-17",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.city.kyaku",
+   "form": "きゃく",
+   "reading": "きゃく",
+   "gloss": "customer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.tenin",
+   "form": "てんにん",
+   "reading": "てんにん",
+   "gloss": "shop clerk",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.zeikin",
+   "form": "ぜいきん",
+   "reading": "ぜいきん",
+   "gloss": "tax",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.shokugyou",
+   "form": "しょくぎょう",
+   "reading": "しょくぎょう",
+   "gloss": "occupation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.todokedemasu",
+   "form": "とどけます",
+   "reading": "とどけます",
+   "gloss": "to deliver; to register",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.haraimasu",
+   "form": "はらいます",
+   "reading": "はらいます",
+   "gloss": "to pay",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.oroshimasu",
+   "form": "おろします",
+   "reading": "おろします",
+   "gloss": "to withdraw (money)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.furikomasu",
+   "form": "ふりこみます",
+   "reading": "ふりこみます",
+   "gloss": "to transfer (money)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.kounyuu-shimasu",
+   "form": "こうにゅうします",
+   "reading": "こうにゅうします",
+   "gloss": "to purchase",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.tasukemasu",
+   "form": "たすけます",
+   "reading": "たすけます",
+   "gloss": "to help",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.ukeru",
+   "form": "うけます",
+   "reading": "うけます",
+   "gloss": "to receive",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.mawarimasu",
+   "form": "まわります",
+   "reading": "まわります",
+   "gloss": "to go around; to patrol",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.tomemasu",
+   "form": "とめます",
+   "reading": "とめます",
+   "gloss": "to stop (something)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.kanen",
+   "form": "かねん",
+   "reading": "かねん",
+   "gloss": "this year",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.kyonen",
+   "form": "きょねん",
+   "reading": "きょねん",
+   "gloss": "last year",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.rainen",
+   "form": "らいねん",
+   "reading": "らいねん",
+   "gloss": "next year",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.konshu",
+   "form": "こんしゅう",
+   "reading": "こんしゅう",
+   "gloss": "this week",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.raishu",
+   "form": "らいしゅう",
+   "reading": "らいしゅう",
+   "gloss": "next week",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.kongetsu",
+   "form": "こんげつ",
+   "reading": "こんげつ",
+   "gloss": "this month",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.raigetsu",
+   "form": "らいげつ",
+   "reading": "らいげつ",
+   "gloss": "next month",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.mainen",
+   "form": "まいねん",
+   "reading": "まいねん",
+   "gloss": "every year",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.maitsuki",
+   "form": "まいつき",
+   "reading": "まいつき",
+   "gloss": "every month",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.maishuu",
+   "form": "まいしゅう",
+   "reading": "まいしゅう",
+   "gloss": "every week",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.maiasa",
+   "form": "まいあさ",
+   "reading": "まいあさ",
+   "gloss": "every morning",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.city.shichiji",
+   "form": "しちじ",
+   "reading": "しちじ",
+   "gloss": "seven o'clock",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-53",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.media.zametka",
+   "form": "заметка",
+   "reading": "заме́тка",
+   "gloss": "short article",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.media.ocherk",
+   "form": "очерк",
+   "reading": "о́черк",
+   "gloss": "feature article",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.klik",
+   "form": "клик",
+   "reading": "клик",
+   "gloss": "click",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.media.diskussiya",
+   "form": "дискуссия",
+   "reading": "диску́ссия",
+   "gloss": "discussion",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.media.istina",
+   "form": "истина",
+   "reading": "и́стина",
+   "gloss": "truth",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.messages.pismo",
+   "form": "письмо",
+   "reading": "письмо́",
+   "gloss": "letter",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.messages.soobshchenie",
+   "form": "сообщение",
+   "reading": "сообще́ние",
+   "gloss": "message",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.messages.zvonok",
+   "form": "звонок",
+   "reading": "звоно́к",
+   "gloss": "phone call",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages.sms",
+   "form": "смс",
+   "reading": "смс",
+   "gloss": "text message",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages.otvet",
+   "form": "ответ",
+   "reading": "отве́т",
+   "gloss": "answer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages.otvechat",
+   "form": "отвечать",
+   "reading": "отвеча́ть",
+   "gloss": "to answer",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.sprosit",
+   "form": "спросить",
+   "reading": "спроси́ть",
+   "gloss": "to ask (a question)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.privet",
+   "form": "привет",
+   "reading": "приве́т",
+   "gloss": "hi",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages.kazhetsya",
+   "form": "казаться",
+   "reading": "каза́ться",
+   "gloss": "to seem",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.ozhidaet",
+   "form": "ожидать",
+   "reading": "ожида́ть",
+   "gloss": "to expect",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.razreshenie",
+   "form": "разрешение",
+   "reading": "разреше́ние",
+   "gloss": "permission",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.messages.mozhno",
+   "form": "можно",
+   "reading": "мо́жно",
+   "gloss": "it is allowed",
+   "pos": "predicative",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.nelzya",
+   "form": "нельзя",
+   "reading": "нельзя́",
+   "gloss": "it is forbidden",
+   "pos": "predicative",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.nado",
+   "form": "надо",
+   "reading": "на́до",
+   "gloss": "it is necessary",
+   "pos": "predicative",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.dolzhen",
+   "form": "должен",
+   "reading": "до́лжен",
+   "gloss": "must (he)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.hochu",
+   "form": "хотеть",
+   "reading": "хоте́ть",
+   "gloss": "to want",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.prosit",
+   "form": "просить",
+   "reading": "проси́ть",
+   "gloss": "to ask, to request",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.blagodarnost",
+   "form": "благодарность",
+   "reading": "благода́рность",
+   "gloss": "gratitude",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.messages.vinovat",
+   "form": "виноват",
+   "reading": "винова́т",
+   "gloss": "to blame, sorry",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.messages.izvinenie",
+   "form": "извинение",
+   "reading": "извине́ние",
+   "gloss": "apology",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

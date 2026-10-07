@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-31",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.technology-in-class",
+   "text": "おんらいんの べんきょう を しました。",
+   "gloss": "I studied online."
+  },
+  {
+   "id": "ja.sent.teacher-roles",
+   "text": "しょくぶんの はなし を ききました。",
+   "gloss": "I heard the professionalism talk."
+  },
+  {
+   "id": "ja.sent.student-agency",
+   "text": "じりつの たいど を べんきょう しました。",
+   "gloss": "I studied the autonomy attitude."
+  },
+  {
+   "id": "ja.sent.early-childhood",
+   "text": "ようじ の じょうほう を あつめました。",
+   "gloss": "I gathered information on infancy."
+  },
+  {
+   "id": "ja.sent.higher-education-future",
+   "text": "しゅうしょく の べんきょう を しました。",
+   "gloss": "I studied employment."
+  },
+  {
+   "id": "ja.sent.vocational-training",
+   "text": "くんれん の ほうほう を べんきょう しました。",
+   "gloss": "I studied the training method."
+  },
+  {
+   "id": "ja.sent.equity-in-schools",
+   "text": "びょうどう の もんだい を ぎろん しました。",
+   "gloss": "We debated the equity problem."
+  },
+  {
+   "id": "ja.sent.parent-involvement",
+   "text": "ほごしゃ の かいぎ に でました。",
+   "gloss": "I attended the guardians' meeting."
+  },
+  {
+   "id": "ja.sent.globalization-debate",
+   "text": "ぼうえき の きじ を よみました。",
+   "gloss": "I read the trade article."
+  },
+  {
+   "id": "ja.sent.trade-systems",
+   "text": "こうりゅう の きじ を よみました。",
+   "gloss": "I read the exchange article."
+  },
+  {
+   "id": "ja.sent.migration-global",
+   "text": "りゅうこう の じょうほう を あつめました。",
+   "gloss": "I gathered travel information."
+  },
+  {
+   "id": "ja.sent.climate-diplomacy",
+   "text": "へいわ の ぎろん を べんきょう しました。",
+   "gloss": "I studied the peace debate."
+  },
+  {
+   "id": "ja.sent.global-health",
+   "text": "けんこう の べんきょう を しました。",
+   "gloss": "I studied health."
+  },
+  {
+   "id": "ja.sent.development-goals",
+   "text": "もくひょう について かきました。",
+   "gloss": "I wrote about the goals."
+  },
+  {
+   "id": "ja.sent.cultural-exchange",
+   "text": "りゅうがく の はなし を ききました。",
+   "gloss": "I heard the study-abroad talk."
+  }
+ ]
+}

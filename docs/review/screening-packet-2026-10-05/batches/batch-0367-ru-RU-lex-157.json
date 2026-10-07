@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-157",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.writing.indeks",
+   "form": "индекс",
+   "reading": "и́ндекс",
+   "gloss": "postal code",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.oblast",
+   "form": "область",
+   "reading": "о́бласть",
+   "gloss": "region",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing.shtamp",
+   "form": "штамп",
+   "reading": "штамп",
+   "gloss": "stamp (mark)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.otkrytka",
+   "form": "открытка",
+   "reading": "откры́тка",
+   "gloss": "postcard",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing.ramka",
+   "form": "рамка",
+   "reading": "ра́мка",
+   "gloss": "frame, box",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing.otstup",
+   "form": "отступ",
+   "reading": "о́тступ",
+   "gloss": "indent",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.interval",
+   "form": "интервал",
+   "reading": "интерва́л",
+   "gloss": "interval, spacing",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.klavisha",
+   "form": "клавиша",
+   "reading": "кла́виша",
+   "gloss": "key",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing.ekran",
+   "form": "экран",
+   "reading": "экра́н",
+   "gloss": "screen",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.kursore",
+   "form": "курсор",
+   "reading": "курсо́р",
+   "gloss": "cursor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.kopirovat",
+   "form": "копировать",
+   "reading": "копи́ровать",
+   "gloss": "to copy",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.writing.nabrat",
+   "form": "набрать",
+   "reading": "набра́ть",
+   "gloss": "to type",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.writing.pechatat",
+   "form": "печатать",
+   "reading": "печа́тать",
+   "gloss": "to print, type",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.writing.rukopis",
+   "form": "рукопись",
+   "reading": "ру́копись",
+   "gloss": "manuscript",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing.pocherk",
+   "form": "почерк",
+   "reading": "по́черк",
+   "gloss": "handwriting",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.stil",
+   "form": "стиль",
+   "reading": "стиль",
+   "gloss": "style",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.manera",
+   "form": "манера",
+   "reading": "мане́ра",
+   "gloss": "manner",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing.oborot",
+   "form": "оборот",
+   "reading": "оборо́т",
+   "gloss": "expression",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.shablon",
+   "form": "шаблон",
+   "reading": "шабло́н",
+   "gloss": "template",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.doverennost",
+   "form": "доверенность",
+   "reading": "дове́ренность",
+   "gloss": "power of attorney",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing.raspiska",
+   "form": "расписка",
+   "reading": "распи́ска",
+   "gloss": "receipt (written)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing.nakladnaya",
+   "form": "накладная",
+   "reading": "накладна́я",
+   "gloss": "invoice, waybill",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.writing.komissiya",
+   "form": "комиссия",
+   "reading": "коми́ссия",
+   "gloss": "fee, commission",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing.ostatok",
+   "form": "остаток",
+   "reading": "оста́ток",
+   "gloss": "balance, remainder",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.talon",
+   "form": "талон",
+   "reading": "тало́н",
+   "gloss": "coupon, ticket",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

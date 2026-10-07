@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-6",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.academic2.kyouyoku",
+   "form": "きょうよく",
+   "reading": "きょうよく",
+   "gloss": "curiosity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.kyozetsu",
+   "form": "きょぜつ",
+   "reading": "きょぜつ",
+   "gloss": "quotation, citation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.kunren",
+   "form": "くんれん",
+   "reading": "くんれん",
+   "gloss": "practice, training",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.meishou",
+   "form": "めいしょう",
+   "reading": "めいしょう",
+   "gloss": "name, title",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic2.mokuteki",
+   "form": "もくてき",
+   "reading": "もくてき",
+   "gloss": "purpose",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.oishii",
+   "form": "おいしい",
+   "reading": "おいしい",
+   "gloss": "delicious",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.takai",
+   "form": "たかい",
+   "reading": "たかい",
+   "gloss": "expensive; tall",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.yasui",
+   "form": "やすい",
+   "reading": "やすい",
+   "gloss": "cheap",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.omoshiroi",
+   "form": "おもしろい",
+   "reading": "おもしろい",
+   "gloss": "interesting",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.tanoshii",
+   "form": "たのしい",
+   "reading": "たのしい",
+   "gloss": "fun; enjoyable",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.samui",
+   "form": "さむい",
+   "reading": "さむい",
+   "gloss": "cold (weather)",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.atsui",
+   "form": "あつい",
+   "reading": "あつい",
+   "gloss": "hot (weather)",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.kirei",
+   "form": "きれい",
+   "reading": "きれい",
+   "gloss": "pretty; clean",
+   "pos": "na-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.muzukashii",
+   "form": "むずかしい",
+   "reading": "むずかしい",
+   "gloss": "difficult",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.suki",
+   "form": "すき",
+   "reading": "すき",
+   "gloss": "like; liked (na-adjective; used with wa)",
+   "pos": "na-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.kirai",
+   "form": "きらい",
+   "reading": "きらい",
+   "gloss": "dislike; disliked (na-adjective)",
+   "pos": "na-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.jyouzu",
+   "form": "じょうず",
+   "reading": "じょうず",
+   "gloss": "good at (na-adjective)",
+   "pos": "na-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.heta",
+   "form": "へた",
+   "reading": "へた",
+   "gloss": "bad at (na-adjective)",
+   "pos": "na-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.ookii",
+   "form": "おおきい",
+   "reading": "おおきい",
+   "gloss": "big",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.chiisai",
+   "form": "ちいさい",
+   "reading": "ちいさい",
+   "gloss": "small",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.atarashii",
+   "form": "あたらしい",
+   "reading": "あたらしい",
+   "gloss": "new",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.furui",
+   "form": "ふるい",
+   "reading": "ふるい",
+   "gloss": "old (of things)",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.ii",
+   "form": "いい",
+   "reading": "いい",
+   "gloss": "good",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.warui",
+   "form": "わるい",
+   "reading": "わるい",
+   "gloss": "bad",
+   "pos": "i-adj",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.adjectives.isogashii",
+   "form": "いそがしい",
+   "reading": "いそがしい",
+   "gloss": "busy",
+   "pos": "i-adj",
+   "gender": ""
+  }
+ ]
+}

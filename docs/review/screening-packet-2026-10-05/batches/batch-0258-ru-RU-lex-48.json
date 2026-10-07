@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-48",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.instructions.otkryt",
+   "form": "открыть",
+   "reading": "откры́ть",
+   "gloss": "to open",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.zakryt",
+   "form": "закрыть",
+   "reading": "закры́ть",
+   "gloss": "to close",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.vklyuchit",
+   "form": "включить",
+   "reading": "включи́ть",
+   "gloss": "to turn on",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.vyklyuchit",
+   "form": "выключить",
+   "reading": "вы́ключить",
+   "gloss": "to turn off",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.nazhat",
+   "form": "нажать",
+   "reading": "нажа́ть",
+   "gloss": "to press",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.derzhat",
+   "form": "держать",
+   "reading": "держа́ть",
+   "gloss": "to hold",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.rezat",
+   "form": "резать",
+   "reading": "ре́зать",
+   "gloss": "to cut",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.nozhnicy",
+   "form": "ножницы",
+   "reading": "но́жницы",
+   "gloss": "scissors",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.bbumaga",
+   "form": "бумага",
+   "reading": "бума́га",
+   "gloss": "paper",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.instructions.skotch",
+   "form": "скотч",
+   "reading": "скотч",
+   "gloss": "tape",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.instructions.ostorozhno",
+   "form": "осторожно",
+   "reading": "осто́рожно",
+   "gloss": "carefully",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.vnimatelno",
+   "form": "внимательно",
+   "reading": "внима́тельно",
+   "gloss": "attentively",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.akkuratno",
+   "form": "аккуратно",
+   "reading": "а́ккуратно",
+   "gloss": "neatly, carefully",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.medlennyi",
+   "form": "медленный",
+   "reading": "ме́дленный",
+   "gloss": "slow (adj)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.silno",
+   "form": "сильно",
+   "reading": "си́льно",
+   "gloss": "strongly, hard",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.narezat",
+   "form": "нарезать",
+   "reading": "нареза́ть",
+   "gloss": "to cut up",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.peremeshat",
+   "form": "перемешать",
+   "reading": "перемеша́ть",
+   "gloss": "to mix up, stir",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.posolit",
+   "form": "посолить",
+   "reading": "посоли́ть",
+   "gloss": "to salt",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.poperchit",
+   "form": "поперчить",
+   "reading": "попе́рчить",
+   "gloss": "to pepper",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.razogret",
+   "form": "разогреть",
+   "reading": "разогре́ть",
+   "gloss": "to heat up",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.vyteret",
+   "form": "вытереть",
+   "reading": "вы́тереть",
+   "gloss": "to wipe",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.vymyt",
+   "form": "вымыть",
+   "reading": "вы́мыть",
+   "gloss": "to wash",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.pylesos",
+   "form": "пылесос",
+   "reading": "пылесо́с",
+   "gloss": "vacuum cleaner",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.instructions.gubka",
+   "form": "губка",
+   "reading": "гу́бка",
+   "gloss": "sponge",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.instructions.sredstvo",
+   "form": "средство",
+   "reading": "сре́дство",
+   "gloss": "means, product",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

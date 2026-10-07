@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-122",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.study4.otkrytie",
+   "form": "открытие",
+   "reading": "откры́тие",
+   "gloss": "discovery, opening",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study4.nahodka",
+   "form": "находка",
+   "reading": "нахо́дка",
+   "gloss": "finding",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study4.obsuzhdenie",
+   "form": "обсуждение",
+   "reading": "обсужде́ние",
+   "gloss": "discussion",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study4.zvanie",
+   "form": "звание",
+   "reading": "зва́ние",
+   "gloss": "title, rank",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study4.shirota",
+   "form": "широта",
+   "reading": "широта́",
+   "gloss": "breadth",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study4.polnota",
+   "form": "полнота",
+   "reading": "полнота́",
+   "gloss": "completeness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study4.logichnost",
+   "form": "логичность",
+   "reading": "логи́чность",
+   "gloss": "logicality",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study4.naglyadnost",
+   "form": "наглядность",
+   "reading": "нагля́дность",
+   "gloss": "visual clarity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study4.naglyadnyy",
+   "form": "наглядный",
+   "reading": "нагля́дный",
+   "gloss": "visual, illustrative",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study4.oshchutimyy",
+   "form": "ощутимый",
+   "reading": "ощути́мый",
+   "gloss": "tangible",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study4.realnyy",
+   "form": "реальный",
+   "reading": "реа́льный",
+   "gloss": "real",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study4.virtualnyy",
+   "form": "виртуальный",
+   "reading": "виртуа́льный",
+   "gloss": "virtual",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study4.fakticheskiy",
+   "form": "фактический",
+   "reading": "факти́ческий",
+   "gloss": "factual",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study4.teoreticheskiy",
+   "form": "теоретический",
+   "reading": "теорети́ческий",
+   "gloss": "theoretical",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study4.prakticheskiy",
+   "form": "практический",
+   "reading": "практи́ческий",
+   "gloss": "practical",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study4.prikladnoy",
+   "form": "прикладной",
+   "reading": "прикладно́й",
+   "gloss": "applied",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study4.chistyy",
+   "form": "чистый",
+   "reading": "чи́стый",
+   "gloss": "pure",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study4.primes",
+   "form": "примесь",
+   "reading": "при́месь",
+   "gloss": "impurity, admixture",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study4.dobavka",
+   "form": "добавка",
+   "reading": "доба́вка",
+   "gloss": "additive",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study4.smes",
+   "form": "смесь",
+   "reading": "смесь",
+   "gloss": "mixture",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study4.rastvor",
+   "form": "раствор",
+   "reading": "раство́р",
+   "gloss": "solution",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study4.splav",
+   "form": "сплав",
+   "reading": "сплав",
+   "gloss": "alloy",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study4.klej",
+   "form": "клей",
+   "reading": "клей",
+   "gloss": "glue",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study4.soedinit",
+   "form": "соединить",
+   "reading": "соедини́ть",
+   "gloss": "to join, connect",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study4.soedinenie",
+   "form": "соединение",
+   "reading": "соедине́ние",
+   "gloss": "connection, joint",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

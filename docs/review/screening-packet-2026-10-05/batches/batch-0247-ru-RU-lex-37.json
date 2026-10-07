@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-37",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.food.sok",
+   "form": "сок",
+   "reading": "сок",
+   "gloss": "juice",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.myaso",
+   "form": "мясо",
+   "reading": "мя́со",
+   "gloss": "meat",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.food.ryba",
+   "form": "рыба",
+   "reading": "ры́ба",
+   "gloss": "fish",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.food.jajco",
+   "form": "яйцо",
+   "reading": "яйцо́",
+   "gloss": "egg",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.food.kasha",
+   "form": "каша",
+   "reading": "ка́ша",
+   "gloss": "porridge",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.food.sup",
+   "form": "суп",
+   "reading": "суп",
+   "gloss": "soup",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.kholshch",
+   "form": "борщ",
+   "reading": "борщ",
+   "gloss": "beet soup",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.pelmeni",
+   "form": "пельмени",
+   "reading": "пельме́ни",
+   "gloss": "dumplings",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.food.bliny",
+   "form": "блины",
+   "reading": "блины́",
+   "gloss": "pancakes",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.food.salat",
+   "form": "салат",
+   "reading": "сала́т",
+   "gloss": "salad",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.karta",
+   "form": "картофель",
+   "reading": "карто́фель",
+   "gloss": "potato",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.ovoshchi",
+   "form": "овощи",
+   "reading": "о́вощи",
+   "gloss": "vegetables",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.food.frukty",
+   "form": "фрукты",
+   "reading": "фру́кты",
+   "gloss": "fruits",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.food.yabloko",
+   "form": "яблоко",
+   "reading": "я́блоко",
+   "gloss": "apple",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.food.banan",
+   "form": "банан",
+   "reading": "бана́н",
+   "gloss": "banana",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.kuritsa",
+   "form": "курица",
+   "reading": "ку́рица",
+   "gloss": "chicken",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.food.kolbasa",
+   "form": "колбаса",
+   "reading": "колбаса́",
+   "gloss": "sausage",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.food.tort",
+   "form": "торт",
+   "reading": "торт",
+   "gloss": "cake",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.konfeta",
+   "form": "конфета",
+   "reading": "конфе́та",
+   "gloss": "candy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.food.sahar",
+   "form": "сахар",
+   "reading": "са́хар",
+   "gloss": "sugar",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.sol",
+   "form": "соль",
+   "reading": "соль",
+   "gloss": "salt",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.food.muka",
+   "form": "мука",
+   "reading": "мука́",
+   "gloss": "flour",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.food.med",
+   "form": "мёд",
+   "reading": "ме́д",
+   "gloss": "honey",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.varene",
+   "form": "варенье",
+   "reading": "варе́нье",
+   "gloss": "jam",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.food.kefir",
+   "form": "кефир",
+   "reading": "кефи́р",
+   "gloss": "kefir",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

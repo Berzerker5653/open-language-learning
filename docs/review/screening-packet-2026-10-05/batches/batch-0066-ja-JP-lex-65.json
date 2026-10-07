@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-65",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.global.tsuuka",
+   "form": "つうか",
+   "reading": "つうか",
+   "gloss": "currency",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.kokumin",
+   "form": "こくみん",
+   "reading": "こくみん",
+   "gloss": "citizen",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.kyoudou",
+   "form": "きょうどう",
+   "reading": "きょうどう",
+   "gloss": "joint, common",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.gijutsu2",
+   "form": "ぎじゅつ",
+   "reading": "ぎじゅつ",
+   "gloss": "technology",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.yusei",
+   "form": "ゆうせい",
+   "reading": "ゆうせい",
+   "gloss": "priority",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.kangae",
+   "form": "かんがえ",
+   "reading": "かんがえ",
+   "gloss": "idea, thought",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.kankaku",
+   "form": "かんかく",
+   "reading": "かんかく",
+   "gloss": "sensitivity, awareness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.gaikoku",
+   "form": "がいこく",
+   "reading": "がいこく",
+   "gloss": "foreign country",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global.katei2",
+   "form": "かてい",
+   "reading": "かてい",
+   "gloss": "household",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.shigen2",
+   "form": "しげん",
+   "reading": "しげん",
+   "gloss": "resource",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.senryaku",
+   "form": "せんりゃく",
+   "reading": "せんりゃく",
+   "gloss": "strategy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.seisan",
+   "form": "せいさん",
+   "reading": "せいさん",
+   "gloss": "production",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.butsuryu",
+   "form": "ぶつりゅう",
+   "reading": "ぶつりゅう",
+   "gloss": "logistics, flow of goods",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.unyu",
+   "form": "うんゆ",
+   "reading": "うんゆ",
+   "gloss": "transport of goods",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.toshi2",
+   "form": "とし",
+   "reading": "とし",
+   "gloss": "city",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.jinko2",
+   "form": "じんこう",
+   "reading": "じんこう",
+   "gloss": "population",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.kutsu2",
+   "form": "くう",
+   "reading": "くう",
+   "gloss": "housing shortage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.kankakusha",
+   "form": "かんきゃくしゃ",
+   "reading": "かんきゃくしゃ",
+   "gloss": "tourist",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.shigai2",
+   "form": "しがい",
+   "reading": "しがい",
+   "gloss": "over-tourism",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.sekinin2",
+   "form": "せきにん",
+   "reading": "せきにん",
+   "gloss": "responsibility",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.kyousei4",
+   "form": "きょうせい",
+   "reading": "きょうせい",
+   "gloss": "coercion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.kokusai3",
+   "form": "こくさい",
+   "reading": "こくさい",
+   "gloss": "internationality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.hoitsu",
+   "form": "ほういつ",
+   "reading": "ほういつ",
+   "gloss": "law, legislation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.ken-i",
+   "form": "けんい",
+   "reading": "けんい",
+   "gloss": "authority, power",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.global2.koso",
+   "form": "こそう",
+   "reading": "こそう",
+   "gloss": "construction, organization",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

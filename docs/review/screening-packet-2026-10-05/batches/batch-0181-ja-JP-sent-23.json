@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-23",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.electoral-system",
+   "text": "ぎかい の はなし を ききました。",
+   "gloss": "I heard about the assembly."
+  },
+  {
+   "id": "ja.sent.parliament-debate",
+   "text": "ぎいん の はんそう を ききました。",
+   "gloss": "I heard the legislator's debate."
+  },
+  {
+   "id": "ja.sent.policy-analysis",
+   "text": "ほうあん の ぶんしょう を よみました。",
+   "gloss": "I read the bill's text."
+  },
+  {
+   "id": "ja.sent.public-debate",
+   "text": "よろん の ぶんこう を べんきょう しました。",
+   "gloss": "We studied the division of public opinion."
+  },
+  {
+   "id": "ja.sent.campaign-critique",
+   "text": "こうげん の ないよう を ひひょう しました。",
+   "gloss": "We criticized the statement's content."
+  },
+  {
+   "id": "ja.sent.constitutional-ideas",
+   "text": "ほてい の ぶんしょう を よみました。",
+   "gloss": "I read the legal ruling's text."
+  },
+  {
+   "id": "ja.sent.rights-discussion",
+   "text": "とっけん の こと を はなしました。",
+   "gloss": "I talked about privilege."
+  },
+  {
+   "id": "ja.sent.local-governance",
+   "text": "じちたい の しごと を しらべました。",
+   "gloss": "I researched local government work."
+  },
+  {
+   "id": "ja.sent.international-relations",
+   "text": "がいこく の こと を べんきょう しました。",
+   "gloss": "I studied about foreign countries."
+  },
+  {
+   "id": "ja.sent.diplomacy-language",
+   "text": "がいこう の はなし を ききました。",
+   "gloss": "I heard about foreign affairs."
+  },
+  {
+   "id": "ja.sent.protest-movements",
+   "text": "ちょうしょう を だしました。",
+   "gloss": "I submitted a petition."
+  },
+  {
+   "id": "ja.sent.governance-essay",
+   "text": "しじょう の ほうせい を べんきょう しました。",
+   "gloss": "I studied market regulation."
+  },
+  {
+   "id": "ja.sent.market-basics",
+   "text": "ばいか の げんいん を はなしました。",
+   "gloss": "I talked about the cause of the price rise."
+  },
+  {
+   "id": "ja.sent.supply-demand",
+   "text": "きょうきゅう と じゅきゅう の かんけい を べんきょう しました。",
+   "gloss": "I studied the relationship of supply and demand."
+  },
+  {
+   "id": "ja.sent.employment-trends",
+   "text": "ろうどう の じょうきょう が かわりました。",
+   "gloss": "Working conditions have changed."
+  }
+ ]
+}

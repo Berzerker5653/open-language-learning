@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-46",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.housing.protichka",
+   "form": "протечка",
+   "reading": "проте́чка",
+   "gloss": "leak",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.uborka",
+   "form": "уборка",
+   "reading": "убо́рка",
+   "gloss": "cleaning",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.pyl",
+   "form": "пыль",
+   "reading": "пыль",
+   "gloss": "dust",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.musor",
+   "form": "мусор",
+   "reading": "му́сор",
+   "gloss": "garbage",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.konteyner",
+   "form": "контейнер",
+   "reading": "конте́йнер",
+   "gloss": "bin, container",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.kust",
+   "form": "куст",
+   "reading": "куст",
+   "gloss": "bush",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.gaz",
+   "form": "газ",
+   "reading": "газ",
+   "gloss": "gas",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.schetchik",
+   "form": "счётчик",
+   "reading": "сче́тчик",
+   "gloss": "meter",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.snyat",
+   "form": "снять",
+   "reading": "снять",
+   "gloss": "to rent, take off",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.housing.koridor",
+   "form": "коридор",
+   "reading": "коридо́р",
+   "gloss": "corridor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.rakovina",
+   "form": "раковина",
+   "reading": "ра́ковина",
+   "gloss": "sink",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.dacha",
+   "form": "дача",
+   "reading": "да́ча",
+   "gloss": "country house",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.uchastok",
+   "form": "участок",
+   "reading": "уча́сток",
+   "gloss": "plot",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.vorota",
+   "form": "ворота",
+   "reading": "воро́та",
+   "gloss": "gate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.housing.besedka",
+   "form": "беседка",
+   "reading": "бесе́дка",
+   "gloss": "gazebo",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.klumba",
+   "form": "клумба",
+   "reading": "клу́мба",
+   "gloss": "flower bed",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.urozhay",
+   "form": "урожай",
+   "reading": "урожа́й",
+   "gloss": "harvest",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.ogorod",
+   "form": "огород",
+   "reading": "огоро́д",
+   "gloss": "vegetable garden",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.leika",
+   "form": "лейка",
+   "reading": "ле́йка",
+   "gloss": "watering can",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.lopata",
+   "form": "лопата",
+   "reading": "лопа́та",
+   "gloss": "shovel",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.shlang",
+   "form": "шланг",
+   "reading": "шланг",
+   "gloss": "hose",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.vedro",
+   "form": "ведро",
+   "reading": "ведро́",
+   "gloss": "bucket",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.housing.bochka",
+   "form": "бочка",
+   "reading": "бо́чка",
+   "gloss": "barrel",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.shvabra",
+   "form": "швабра",
+   "reading": "шва́бра",
+   "gloss": "mop",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.polotenze",
+   "form": "полотенце",
+   "reading": "полоте́нце",
+   "gloss": "towel",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

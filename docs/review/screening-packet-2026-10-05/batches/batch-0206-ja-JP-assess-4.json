@@ -1,0 +1,97 @@
+{
+ "batch_id": "ja-JP-assess-4",
+ "kind": "assess",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.assess.culture-tradition",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "explain a custom, festival, or craft using culture vocabulary",
+    "compare regional or historical features without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.society-rules",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "describe a law, rule, or right and its duty using society vocabulary",
+    "discuss volunteering or public manners without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.environment",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "describe recycling, energy, and waste choices using environment vocabulary",
+    "discuss a pollution or nature-protection issue without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.travel-extended",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "plan an itinerary, handle a booking change, and describe a travel experience",
+    "discuss hosting a visitor or culture shock without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.emotions-personality",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "describe personality and emotions, and express empathy or apology appropriately",
+    "discuss stress and coping habits without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.advice-opinion",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "give advice softly and structure an opinion with reasons",
+    "express partial agreement and polite disagreement without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.comparison-debate",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "compare options with reasons and rank them with justification",
+    "present an argument, use evidence, and answer counter-arguments without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.storytelling",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "tell a story with clear structure, background, and sequence",
+    "describe characters and settings without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.health-wellness",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "discuss wellness routines, nutrition, and exercise plans",
+    "talk about stress, mental health, and medical information without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.politics-governance",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "discuss electoral systems, parties, and policy analysis",
+    "participate in public debate about governance without blocking errors"
+   ]
+  }
+ ]
+}

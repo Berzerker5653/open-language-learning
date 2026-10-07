@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-25",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u410",
+   "text": "Это утверждение.",
+   "gloss": "This is a claim."
+  },
+  {
+   "id": "ru.sent.b2.u411",
+   "text": "Это оппонент.",
+   "gloss": "This is an opponent."
+  },
+  {
+   "id": "ru.sent.b2.u412",
+   "text": "Это дебаты.",
+   "gloss": "This is a debate."
+  },
+  {
+   "id": "ru.sent.b2.u413",
+   "text": "Это обоснование.",
+   "gloss": "This is a justification."
+  },
+  {
+   "id": "ru.sent.b2.u414",
+   "text": "Это давление.",
+   "gloss": "This is pressure."
+  },
+  {
+   "id": "ru.sent.b2.u415",
+   "text": "Это авторитет.",
+   "gloss": "This is authority."
+  },
+  {
+   "id": "ru.sent.b2.u416",
+   "text": "Это обвинение.",
+   "gloss": "This is an accusation."
+  },
+  {
+   "id": "ru.sent.b2.u417",
+   "text": "Это суд.",
+   "gloss": "This is a court."
+  },
+  {
+   "id": "ru.sent.b2.u418",
+   "text": "Это присяга.",
+   "gloss": "This is an oath."
+  },
+  {
+   "id": "ru.sent.b2.u419",
+   "text": "Это заседание.",
+   "gloss": "This is a session."
+  },
+  {
+   "id": "ru.sent.b2.u420",
+   "text": "Это выборка.",
+   "gloss": "This is a sample."
+  },
+  {
+   "id": "ru.sent.b2.u421",
+   "text": "Это показатель.",
+   "gloss": "This is an indicator."
+  },
+  {
+   "id": "ru.sent.b2.u422",
+   "text": "Это свойство.",
+   "gloss": "This is a property."
+  },
+  {
+   "id": "ru.sent.b2.u423",
+   "text": "Это материал.",
+   "gloss": "This is a material."
+  },
+  {
+   "id": "ru.sent.b2.u424",
+   "text": "Это мотив.",
+   "gloss": "This is a motive."
+  }
+ ]
+}

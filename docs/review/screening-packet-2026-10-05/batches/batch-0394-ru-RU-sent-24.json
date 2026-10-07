@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-24",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b1.u395",
+   "text": "Это шаблон.",
+   "gloss": "This is a template."
+  },
+  {
+   "id": "ru.sent.b1.u396",
+   "text": "Это стиль.",
+   "gloss": "This is a style."
+  },
+  {
+   "id": "ru.sent.b1.u397",
+   "text": "Это почерк.",
+   "gloss": "This is handwriting."
+  },
+  {
+   "id": "ru.sent.b1.u398",
+   "text": "Это расписка.",
+   "gloss": "This is a receipt."
+  },
+  {
+   "id": "ru.sent.b1.u399",
+   "text": "Это талон.",
+   "gloss": "This is a coupon."
+  },
+  {
+   "id": "ru.sent.b1.u400",
+   "text": "Это связка.",
+   "gloss": "This is a link."
+  },
+  {
+   "id": "ru.sent.b1.u401",
+   "text": "Это союз.",
+   "gloss": "This is a conjunction."
+  },
+  {
+   "id": "ru.sent.b1.u402",
+   "text": "Это правка.",
+   "gloss": "This is an edit."
+  },
+  {
+   "id": "ru.sent.b1.u403",
+   "text": "Это повтор.",
+   "gloss": "This is a repetition."
+  },
+  {
+   "id": "ru.sent.b1.u404",
+   "text": "Это ритм.",
+   "gloss": "This is a rhythm."
+  },
+  {
+   "id": "ru.sent.b1.u405",
+   "text": "Это композиция.",
+   "gloss": "This is a composition."
+  },
+  {
+   "id": "ru.sent.b1.u406",
+   "text": "Это герой.",
+   "gloss": "This is a hero."
+  },
+  {
+   "id": "ru.sent.b1.u407",
+   "text": "Это диалог.",
+   "gloss": "This is a dialogue."
+  },
+  {
+   "id": "ru.sent.b1.u408",
+   "text": "Это пауза.",
+   "gloss": "This is a pause."
+  },
+  {
+   "id": "ru.sent.b1.u409",
+   "text": "Это сказка.",
+   "gloss": "This is a fairy tale."
+  }
+ ]
+}

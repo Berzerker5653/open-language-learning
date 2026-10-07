@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-2",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.argue2.vyborka",
+   "form": "выборка",
+   "reading": "вы́борка",
+   "gloss": "sample",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue2.respondent",
+   "form": "респондент",
+   "reading": "респонде́нт",
+   "gloss": "respondent",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue2.razbros",
+   "form": "разброс",
+   "reading": "разбро́с",
+   "gloss": "dispersion",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue2.vybros",
+   "form": "выброс",
+   "reading": "вы́брос",
+   "gloss": "outlier",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue2.pogreshnost",
+   "form": "погрешность",
+   "reading": "погре́шность",
+   "gloss": "margin of error",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue2.pokazatel",
+   "form": "показатель",
+   "reading": "показа́тель",
+   "gloss": "indicator",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue2.indikator",
+   "form": "индикатор",
+   "reading": "индика́тор",
+   "gloss": "indicator",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue2.parametr",
+   "form": "параметр",
+   "reading": "пара́метр",
+   "gloss": "parameter",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue2.svoystvo",
+   "form": "свойство",
+   "reading": "сво́йство",
+   "gloss": "property",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue2.priroda",
+   "form": "природа",
+   "reading": "приро́да",
+   "gloss": "nature",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue2.material",
+   "form": "материал",
+   "reading": "материа́л",
+   "gloss": "material",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue2.veshchestvo",
+   "form": "вещество",
+   "reading": "вещество́",
+   "gloss": "substance",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue2.produkt",
+   "form": "продукт",
+   "reading": "проду́кт",
+   "gloss": "product",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue2.motiv",
+   "form": "мотив",
+   "reading": "моти́в",
+   "gloss": "motive",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue2.pobudka",
+   "form": "побудка",
+   "reading": "побу́дка",
+   "gloss": "motive, spur",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue2.stimul",
+   "form": "стимул",
+   "reading": "сти́мул",
+   "gloss": "stimulus",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue2.pobuzhdenie",
+   "form": "побуждение",
+   "reading": "побужде́ние",
+   "gloss": "urge, incentive",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue2.metodika",
+   "form": "методика",
+   "reading": "мето́дика",
+   "gloss": "methodology",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue2.prisooblenie",
+   "form": "приспособление",
+   "reading": "приспособле́ние",
+   "gloss": "device, tool",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue2.ustroystvo",
+   "form": "устройство",
+   "reading": "устро́йство",
+   "gloss": "device",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue2.apparat",
+   "form": "аппарат",
+   "reading": "аппара́т",
+   "gloss": "apparatus",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue2.mekhanizm",
+   "form": "механизм",
+   "reading": "механи́зм",
+   "gloss": "mechanism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue2.sistema",
+   "form": "система",
+   "reading": "систе́ма",
+   "gloss": "system",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue2.organizm",
+   "form": "организм",
+   "reading": "органи́зм",
+   "gloss": "organism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue2.organizaciya",
+   "form": "организация",
+   "reading": "организа́ция",
+   "gloss": "organization",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

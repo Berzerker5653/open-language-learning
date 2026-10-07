@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-70",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.health2.gakkai",
+   "form": "がっかい",
+   "reading": "がっかい",
+   "gloss": "association",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.igaku",
+   "form": "いがく",
+   "reading": "いがく",
+   "gloss": "medicine",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.yakubou",
+   "form": "やくぼう",
+   "reading": "やくぼう",
+   "gloss": "pharmacy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.abura",
+   "form": "あぶら",
+   "reading": "あぶら",
+   "gloss": "oil",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.amami",
+   "form": "あまみ",
+   "reading": "あまみ",
+   "gloss": "sweetness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.suupu",
+   "form": "スープ",
+   "reading": "スープ",
+   "gloss": "soup",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.chouryou",
+   "form": "ちょうりょう",
+   "reading": "ちょうりょう",
+   "gloss": "portion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.seka",
+   "form": "せか",
+   "reading": "せか",
+   "gloss": "world (prefix)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.seka2",
+   "form": "せかい",
+   "reading": "せかい",
+   "gloss": "world",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.chishiki",
+   "form": "ちしき",
+   "reading": "ちしき",
+   "gloss": "knowledge",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.chiryou",
+   "form": "ちりょう",
+   "reading": "ちりょう",
+   "gloss": "therapy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.ryouki",
+   "form": "りょうき",
+   "reading": "りょうき",
+   "gloss": "convalescence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.kenkou2",
+   "form": "けんこう",
+   "reading": "けんこう",
+   "gloss": "health",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.netsu2",
+   "form": "ねつ",
+   "reading": "ねつ",
+   "gloss": "fever",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.iyashi",
+   "form": "いやし",
+   "reading": "いやし",
+   "gloss": "healing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.tsuuka2",
+   "form": "つうか",
+   "reading": "つうか",
+   "gloss": "communication",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.wakuchin",
+   "form": "ワクチン",
+   "reading": "ワクチン",
+   "gloss": "vaccine",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.rourei",
+   "form": "ろうれい",
+   "reading": "ろうれい",
+   "gloss": "elderly",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.kaigo",
+   "form": "かいご",
+   "reading": "かいご",
+   "gloss": "care",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.hoken2",
+   "form": "ほけん",
+   "reading": "ほけん",
+   "gloss": "insurance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.taizen2",
+   "form": "たいぜん",
+   "reading": "たいぜん",
+   "gloss": "full",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.rojin",
+   "form": "ろうじん",
+   "reading": "ろうじん",
+   "gloss": "old person",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.wakamono",
+   "form": "わかもの",
+   "reading": "わかもの",
+   "gloss": "young person",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.kaiin",
+   "form": "かいいん",
+   "reading": "かいいん",
+   "gloss": "member",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health3.kyoubu",
+   "form": "きょうぶ",
+   "reading": "きょうぶ",
+   "gloss": "club",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-139",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.tech2.fuben",
+   "form": "ふべん",
+   "reading": "ふべん",
+   "gloss": "inconvenient",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.jinkou-chinou",
+   "form": "じんこうちのう",
+   "reading": "じんこうちのう",
+   "gloss": "artificial intelligence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.robotto",
+   "form": "ろぼっと",
+   "reading": "ろぼっと",
+   "gloss": "robot",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.genkai",
+   "form": "げんかい",
+   "reading": "げんかい",
+   "gloss": "limit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.kanou",
+   "form": "かのう",
+   "reading": "かのう",
+   "gloss": "possible",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.mirai",
+   "form": "みらい",
+   "reading": "みらい",
+   "gloss": "future",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.ryuuri",
+   "form": "りゅうり",
+   "reading": "りゅうり",
+   "gloss": "flow",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.senzu",
+   "form": "せんず",
+   "reading": "せんず",
+   "gloss": "anxiety",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.kankaku",
+   "form": "かんかく",
+   "reading": "かんかく",
+   "gloss": "sense; feeling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.kyoumi",
+   "form": "きょうみ",
+   "reading": "きょうみ",
+   "gloss": "interest",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.kuse",
+   "form": "くせ",
+   "reading": "くせ",
+   "gloss": "habit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.kaku",
+   "form": "かく",
+   "reading": "かく",
+   "gloss": "each",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.chigai",
+   "form": "ちがい",
+   "reading": "ちがい",
+   "gloss": "difference",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.kosei",
+   "form": "こうせい",
+   "reading": "こうせい",
+   "gloss": "cost-performance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.koui",
+   "form": "こうい",
+   "reading": "こうい",
+   "gloss": "performance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.kikan",
+   "form": "きかん",
+   "reading": "きかん",
+   "gloss": "mechanism",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.shien",
+   "form": "しえん",
+   "reading": "しえん",
+   "gloss": "support",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.juri",
+   "form": "じゅり",
+   "reading": "じゅり",
+   "gloss": "acceptance; reception",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.kirikae",
+   "form": "きりかえ",
+   "reading": "きりかえ",
+   "gloss": "switching",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.setsuzoku",
+   "form": "せつぞく",
+   "reading": "せつぞく",
+   "gloss": "connection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.onrain",
+   "form": "おんらいん",
+   "reading": "おんらいん",
+   "gloss": "online",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.koodo",
+   "form": "こーど",
+   "reading": "こーど",
+   "gloss": "code",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.programu",
+   "form": "ぷろぐらむ",
+   "reading": "ぷろぐらむ",
+   "gloss": "program",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.arugorizumu",
+   "form": "あるごりずむ",
+   "reading": "あるごりずむ",
+   "gloss": "algorithm",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.koutei",
+   "form": "こうてい",
+   "reading": "こうてい",
+   "gloss": "process",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

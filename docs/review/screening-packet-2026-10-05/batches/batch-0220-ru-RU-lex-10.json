@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-10",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.classroom.chitayte",
+   "form": "читайте",
+   "reading": "чита́йте",
+   "gloss": "read (polite or plural instruction)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.classroom.pishite",
+   "form": "пишите",
+   "reading": "пиши́те",
+   "gloss": "write (polite or plural instruction)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.classroom.vyberite",
+   "form": "выберите",
+   "reading": "вы́берите",
+   "gloss": "choose; select (polite or plural instruction)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.classroom.slovo",
+   "form": "слово",
+   "reading": "сло́во",
+   "gloss": "word",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.classroom.bukva",
+   "form": "буква",
+   "reading": "бу́ква",
+   "gloss": "letter (alphabet symbol)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.classroom.povtorite",
+   "form": "повторите",
+   "reading": "повтори́те",
+   "gloss": "repeat (polite or plural request)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.classroom.ne-ponimayu",
+   "form": "не понимаю",
+   "reading": "не понима́ю",
+   "gloss": "I do not understand (fixed expression)",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.classroom.obyasnite",
+   "form": "объясните",
+   "reading": "объясни́те",
+   "gloss": "explain (polite or plural request)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.classroom.pomogite",
+   "form": "помогите",
+   "reading": "помоги́те",
+   "gloss": "help (polite or plural request)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.classroom.eshchyo-raz",
+   "form": "ещё раз",
+   "reading": "ещё раз",
+   "gloss": "once more; again",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.bolshe",
+   "form": "больше",
+   "reading": "бо́льше",
+   "gloss": "more, bigger",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.menshe",
+   "form": "меньше",
+   "reading": "ме́ньше",
+   "gloss": "less, smaller",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.chem",
+   "form": "чем",
+   "reading": "чем",
+   "gloss": "than",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.sravnenie",
+   "form": "сравнение",
+   "reading": "сравне́ние",
+   "gloss": "comparison",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.comparisons.raznica",
+   "form": "разница",
+   "reading": "ра́зница",
+   "gloss": "difference",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.comparisons.lushche",
+   "form": "лучше",
+   "reading": "лу́чше",
+   "gloss": "better",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.huzhe",
+   "form": "хуже",
+   "reading": "ху́же",
+   "gloss": "worse",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.otlichnyi",
+   "form": "отличный",
+   "reading": "отли́чный",
+   "gloss": "excellent, great",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.plohoi",
+   "form": "плохой",
+   "reading": "плохо́й",
+   "gloss": "bad",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.klassnyi",
+   "form": "классный",
+   "reading": "кла́ссный",
+   "gloss": "cool, great",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.bystree",
+   "form": "быстрее",
+   "reading": "быстре́е",
+   "gloss": "faster",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.medlennee",
+   "form": "медленнее",
+   "reading": "медле́ннее",
+   "gloss": "slower",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.bystro",
+   "form": "быстро",
+   "reading": "бы́стро",
+   "gloss": "quickly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.medlenno",
+   "form": "медленно",
+   "reading": "медле́нно",
+   "gloss": "slowly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.gonki",
+   "form": "гонки",
+   "reading": "го́нки",
+   "gloss": "race, racing",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

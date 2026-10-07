@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-158",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.writing2.svyazka",
+   "form": "связка",
+   "reading": "свя́зка",
+   "gloss": "link",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.soyuz",
+   "form": "союз",
+   "reading": "сою́з",
+   "gloss": "conjunction",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing2.predlog",
+   "form": "предлог",
+   "reading": "предло́г",
+   "gloss": "preposition",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing2.narechie",
+   "form": "наречие",
+   "reading": "наре́чие",
+   "gloss": "adverb",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.writing2.mestoimenie",
+   "form": "местоимение",
+   "reading": "местоиме́ние",
+   "gloss": "pronoun",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.writing2.glagol",
+   "form": "глагол",
+   "reading": "глаго́л",
+   "gloss": "verb",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing2.sushchestvitelnoe",
+   "form": "существительное",
+   "reading": "существи́тельное",
+   "gloss": "noun",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.writing2.prilagatelnoe",
+   "form": "прилагательное",
+   "reading": "прилага́тельное",
+   "gloss": "adjective",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.writing2.sklonenie",
+   "form": "склонение",
+   "reading": "склоне́ние",
+   "gloss": "declension",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.writing2.pravka",
+   "form": "правка",
+   "reading": "пра́вка",
+   "gloss": "edit",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.redaktirovanie",
+   "form": "редактирование",
+   "reading": "редакти́рование",
+   "gloss": "editing",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.writing2.korrektor",
+   "form": "корректор",
+   "reading": "корре́ктор",
+   "gloss": "proofreader",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing2.dorabotka",
+   "form": "доработка",
+   "reading": "дорабо́тка",
+   "gloss": "polishing",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.ispravlenie",
+   "form": "исправление",
+   "reading": "исправле́ние",
+   "gloss": "correction",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.writing2.peredelka",
+   "form": "переделка",
+   "reading": "переде́лка",
+   "gloss": "remake",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.perepisat",
+   "form": "переписать",
+   "reading": "переписа́ть",
+   "gloss": "to rewrite",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.writing2.pereformulirovat",
+   "form": "переформулировать",
+   "reading": "переформули́ровать",
+   "gloss": "to rephrase",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.writing2.svaznost",
+   "form": "связность",
+   "reading": "свя́зность",
+   "gloss": "coherence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.celostnost",
+   "form": "целостность",
+   "reading": "це́лостность",
+   "gloss": "integrity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.garmoniya",
+   "form": "гармония",
+   "reading": "гармо́ния",
+   "gloss": "harmony",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.kompoziciya",
+   "form": "композиция",
+   "reading": "компози́ция",
+   "gloss": "composition",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing2.postroenie",
+   "form": "построение",
+   "reading": "построе́ние",
+   "gloss": "construction",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.writing2.plagiat",
+   "form": "плагиат",
+   "reading": "плагиа́т",
+   "gloss": "plagiarism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing2.avtorstvo",
+   "form": "авторство",
+   "reading": "а́вторство",
+   "gloss": "authorship",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.writing2.podlinnik",
+   "form": "подлинник",
+   "reading": "по́длинник",
+   "gloss": "original",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

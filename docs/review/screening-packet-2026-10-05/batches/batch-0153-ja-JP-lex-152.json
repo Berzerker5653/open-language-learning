@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-152",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.weather2.umi-biraki",
+   "form": "うみびらき",
+   "reading": "うみびらき",
+   "gloss": "sea opening",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.yuki-yinga",
+   "form": "ゆきいんが",
+   "reading": "ゆきいんが",
+   "gloss": "snowscape",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.tenki-amari",
+   "form": "てんきあまり",
+   "reading": "てんきあまり",
+   "gloss": "leftover weather",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.yamu",
+   "form": "やみます",
+   "reading": "やみます",
+   "gloss": "to stop (rain)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.fukau",
+   "form": "ふかくなる",
+   "reading": "ふかくなる",
+   "gloss": "deepening",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.hoshii",
+   "form": "ほしい",
+   "reading": "ほしい",
+   "gloss": "want",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.naga",
+   "form": "なが",
+   "reading": "なが",
+   "gloss": "length",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.atsusa",
+   "form": "あつさ",
+   "reading": "あつさ",
+   "gloss": "heat",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.samusa",
+   "form": "さむさ",
+   "reading": "さむさ",
+   "gloss": "cold",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.tsuyoi",
+   "form": "つよい",
+   "reading": "つよい",
+   "gloss": "strong",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.yowai",
+   "form": "よわい",
+   "reading": "よわい",
+   "gloss": "weak",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.hayai",
+   "form": "はやい",
+   "reading": "はやい",
+   "gloss": "fast",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.osoi",
+   "form": "おそい",
+   "reading": "おそい",
+   "gloss": "slow",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.ookii",
+   "form": "おおきい",
+   "reading": "おおきい",
+   "gloss": "big",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.chiisai",
+   "form": "ちいさい",
+   "reading": "ちいさい",
+   "gloss": "small",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.atarashii",
+   "form": "あたらしい",
+   "reading": "あたらしい",
+   "gloss": "new",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.furui",
+   "form": "ふるい",
+   "reading": "ふるい",
+   "gloss": "old",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.kirei",
+   "form": "きれい",
+   "reading": "きれい",
+   "gloss": "clean",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.kitanai",
+   "form": "きたない",
+   "reading": "きたない",
+   "gloss": "dirty",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.mijikai",
+   "form": "みじかい",
+   "reading": "みじかい",
+   "gloss": "short",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.naru",
+   "form": "なります",
+   "reading": "なります",
+   "gloss": "to become",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.weather2.amu",
+   "form": "あむ",
+   "reading": "あむ",
+   "gloss": "to rain",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.shigoto",
+   "form": "しごと",
+   "reading": "しごと",
+   "gloss": "work; job",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.kyoushi",
+   "form": "きょうし",
+   "reading": "きょうし",
+   "gloss": "teacher",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.seito",
+   "form": "せいと",
+   "reading": "せいと",
+   "gloss": "student (school)",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

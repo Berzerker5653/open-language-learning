@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-114",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.reg1.bunmyaku",
+   "form": "ぶんみゃく",
+   "reading": "ぶんみゃく",
+   "gloss": "context",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.chowa",
+   "form": "ちょうわ",
+   "reading": "ちょうわ",
+   "gloss": "harmony, tone",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.kion",
+   "form": "きおん",
+   "reading": "きおん",
+   "gloss": "tone (of voice)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.moyo",
+   "form": "もうよう",
+   "reading": "もうよう",
+   "gloss": "manner, style",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.yoshiki",
+   "form": "ようしき",
+   "reading": "ようしき",
+   "gloss": "style, form",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.kudaranai",
+   "form": "くだらない",
+   "reading": "くだらない",
+   "gloss": "trivial, vulgar",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.zonzai",
+   "form": "ぞんざい",
+   "reading": "ぞんざい",
+   "gloss": "rough, casual",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.reigi",
+   "form": "れいぎ",
+   "reading": "れいぎ",
+   "gloss": "manners",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.jouretsu",
+   "form": "じょうれつ",
+   "reading": "じょうれつ",
+   "gloss": "courteous",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.kotoba",
+   "form": "ことば",
+   "reading": "ことば",
+   "gloss": "word, language",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg1.ika",
+   "form": "いかが",
+   "reading": "いかが",
+   "gloss": "manner (how)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.hogen2",
+   "form": "ほうげん",
+   "reading": "ほうげん",
+   "gloss": "dialect",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.wakamono",
+   "form": "わかもの",
+   "reading": "わかもの",
+   "gloss": "young person",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.rojin",
+   "form": "ろうじん",
+   "reading": "ろうじん",
+   "gloss": "elderly person",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.seinen",
+   "form": "せいねん",
+   "reading": "せいねん",
+   "gloss": "young adult",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.otona",
+   "form": "おとな",
+   "reading": "おとな",
+   "gloss": "adult",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.kodomo",
+   "form": "こども",
+   "reading": "こども",
+   "gloss": "child",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.onna",
+   "form": "おんな",
+   "reading": "おんな",
+   "gloss": "woman",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.otoko",
+   "form": "おとこ",
+   "reading": "おとこ",
+   "gloss": "man",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.josei",
+   "form": "じょせい",
+   "reading": "じょせい",
+   "gloss": "feminine",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.dansei",
+   "form": "だんせい",
+   "reading": "だんせい",
+   "gloss": "masculine",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.shokuba",
+   "form": "しょくば",
+   "reading": "しょくば",
+   "gloss": "workplace",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.kaisha",
+   "form": "かいしゃ",
+   "reading": "かいしゃ",
+   "gloss": "company",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.meishi",
+   "form": "めいし",
+   "reading": "めいし",
+   "gloss": "business card",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.reg2.keiei",
+   "form": "けいえい",
+   "reading": "けいえい",
+   "gloss": "management",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

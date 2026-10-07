@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-40",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.heritage-debate",
+   "text": "せんぞく の ため を かんがえました。",
+   "gloss": "We thought about the ancestors' sake."
+  },
+  {
+   "id": "ja.sent.multiculturalism",
+   "text": "めでぃあ の げんざい を ぎろん しました。",
+   "gloss": "We discussed the state of media."
+  },
+  {
+   "id": "ja.sent.subculture-study",
+   "text": "まつり の とくちょう を べんきょう しました。",
+   "gloss": "I studied the features of festivals."
+  },
+  {
+   "id": "ja.sent.pop-culture",
+   "text": "ほうそう の ぶんか を べんきょう しました。",
+   "gloss": "I studied broadcast culture."
+  },
+  {
+   "id": "ja.sent.language-identity",
+   "text": "げんご と じぶん の かんけい を ろんそう しました。",
+   "gloss": "We debated the relationship between language and self."
+  },
+  {
+   "id": "ja.sent.migration-identity",
+   "text": "いこく から きた ひと の きおく を まち の かたから ききました。",
+   "gloss": "I heard the memories of people from foreign countries from locals."
+  },
+  {
+   "id": "ja.sent.generational-identity",
+   "text": "せだい が かわると かち も かわります。",
+   "gloss": "Values change as generations change."
+  },
+  {
+   "id": "ja.sent.national-narrative",
+   "text": "くに の れきし について ぎもん が でました。",
+   "gloss": "A question arose about the nation's history."
+  },
+  {
+   "id": "ja.sent.cultural-appropriation",
+   "text": "ぶんか の つかいかた について てきしょう の ろんそう が ありました。",
+   "gloss": "There was a debate about appropriation regarding how culture is used."
+  },
+  {
+   "id": "ja.sent.hybrid-cultures",
+   "text": "こんけつ で うまれた ぶんか が ふえています。",
+   "gloss": "Cultures born from mixing are increasing."
+  },
+  {
+   "id": "ja.sent.memory-politics",
+   "text": "きおく を めぐって せいじ の ろんそう が はじまりました。",
+   "gloss": "A political debate over memory began."
+  },
+  {
+   "id": "ja.sent.concept-definition",
+   "text": "がいねん の ていぎ を はっきり しました。",
+   "gloss": "I clarified the definition of the concept."
+  },
+  {
+   "id": "ja.sent.analogy-critique",
+   "text": "ひかく の かた を かんがえました。",
+   "gloss": "I thought about the way of comparing."
+  },
+  {
+   "id": "ja.sent.evidence-evaluation",
+   "text": "しょうこ を ちょうさ しました。",
+   "gloss": "I examined the evidence."
+  },
+  {
+   "id": "ja.sent.causation-correlation",
+   "text": "げんいん と かんけい を べんきょう しました。",
+   "gloss": "I studied cause and relationship."
+  }
+ ]
+}

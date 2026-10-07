@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-31",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.experiences.interesno",
+   "form": "интересно",
+   "reading": "интере́сно",
+   "gloss": "interesting",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.skuchno",
+   "form": "скучно",
+   "reading": "ску́чно",
+   "gloss": "boring",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.veselo",
+   "form": "весело",
+   "reading": "ве́село",
+   "gloss": "fun, cheerfully",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.strashno",
+   "form": "страшно",
+   "reading": "стра́шно",
+   "gloss": "scary, terribly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.trudno",
+   "form": "трудно",
+   "reading": "тру́дно",
+   "gloss": "difficult (predicative)",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.legko",
+   "form": "легко",
+   "reading": "легко́",
+   "gloss": "easy (predicative)",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.privychno",
+   "form": "привычно",
+   "reading": "при́вычно",
+   "gloss": "habitual, familiar",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.neprivychno",
+   "form": "непривычно",
+   "reading": "непри́вычно",
+   "gloss": "unfamiliar",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.prosto",
+   "form": "просто",
+   "reading": "про́сто",
+   "gloss": "simply, just",
+   "pos": "particle",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.slozhno",
+   "form": "сложно",
+   "reading": "сло́жно",
+   "gloss": "complicated (predicative)",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.probovat",
+   "form": "пробовать",
+   "reading": "про́бовать",
+   "gloss": "to try, attempt",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.pytatsya",
+   "form": "пытаться",
+   "reading": "пыта́ться",
+   "gloss": "to try hard, attempt",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.riskovat",
+   "form": "рисковать",
+   "reading": "рискова́ть",
+   "gloss": "to risk",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.smelyi",
+   "form": "смелый",
+   "reading": "сме́лый",
+   "gloss": "brave",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.truslivyi",
+   "form": "трусливый",
+   "reading": "трусли́вый",
+   "gloss": "timid, cowardly",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.boyatsya",
+   "form": "бояться",
+   "reading": "боя́ться",
+   "gloss": "to be afraid",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.bespokoitsya",
+   "form": "беспокоиться",
+   "reading": "беспоко́иться",
+   "gloss": "to worry",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.volnovatsya",
+   "form": "волноваться",
+   "reading": "волнова́ться",
+   "gloss": "to be nervous, stirred",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.uspokaivatsya",
+   "form": "успокаиваться",
+   "reading": "успока́иваться",
+   "gloss": "to calm down",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.nervnichat",
+   "form": "нервничать",
+   "reading": "не́рвничать",
+   "gloss": "to be nervous",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.neudacha",
+   "form": "неудача",
+   "reading": "неуда́ча",
+   "gloss": "failure, mishap",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.experiences.dostizhenie",
+   "form": "достижение",
+   "reading": "достиже́ние",
+   "gloss": "achievement",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.experiences.useshno",
+   "form": "успешно",
+   "reading": "успе́шно",
+   "gloss": "successfully",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.neudachnyi",
+   "form": "неудачный",
+   "reading": "неуда́чный",
+   "gloss": "unsuccessful",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.proryv",
+   "form": "прорыв",
+   "reading": "проры́в",
+   "gloss": "breakthrough",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

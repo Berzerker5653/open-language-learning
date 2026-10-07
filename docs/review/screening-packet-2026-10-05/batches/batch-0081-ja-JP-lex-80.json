@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-80",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.law2.houitsu",
+   "form": "ほういつ",
+   "reading": "ほういつ",
+   "gloss": "uniformity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.seibi",
+   "form": "せいび",
+   "reading": "せいび",
+   "gloss": "preparation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.yojo",
+   "form": "ようぞう",
+   "reading": "ようぞう",
+   "gloss": "reserve",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.kizon",
+   "form": "きぞん",
+   "reading": "きぞん",
+   "gloss": "existence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.sonzai",
+   "form": "そんざい",
+   "reading": "そんざい",
+   "gloss": "existence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.genshitsu",
+   "form": "げんしつ",
+   "reading": "げんしつ",
+   "gloss": "essence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.bunmyaku",
+   "form": "ぶんみゃく",
+   "reading": "ぶんみゃく",
+   "gloss": "context",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.keito",
+   "form": "けいとう",
+   "reading": "けいとう",
+   "gloss": "system",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.denrou",
+   "form": "でんろう",
+   "reading": "でんろう",
+   "gloss": "tradition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.teikei",
+   "form": "たいけい",
+   "reading": "たいけい",
+   "gloss": "systematic body",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.haka",
+   "form": "はか",
+   "reading": "はか",
+   "gloss": "frame",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.giwa",
+   "form": "ぎわ",
+   "reading": "ぎわ",
+   "gloss": "doubt",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.igen",
+   "form": "いげん",
+   "reading": "いげん",
+   "gloss": "will",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.ongaku",
+   "form": "おんがく",
+   "reading": "おんがく",
+   "gloss": "music",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.eiga",
+   "form": "えいが",
+   "reading": "えいが",
+   "gloss": "movie",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.manga",
+   "form": "まんが",
+   "reading": "まんが",
+   "gloss": "manga; comic",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.anime",
+   "form": "あにめ",
+   "reading": "あにめ",
+   "gloss": "anime",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.geemu",
+   "form": "げーむ",
+   "reading": "げーむ",
+   "gloss": "game (video game)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.shumi",
+   "form": "しゅみ",
+   "reading": "しゅみ",
+   "gloss": "hobby",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.supootsu",
+   "form": "すぽーつ",
+   "reading": "すぽーつ",
+   "gloss": "sports",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.shoppingu",
+   "form": "しょっぴんぐ",
+   "reading": "しょっぴんぐ",
+   "gloss": "shopping",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.sanpo",
+   "form": "さんぽ",
+   "reading": "さんぽ",
+   "gloss": "walk; stroll",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.onsen",
+   "form": "おんせん",
+   "reading": "おんせん",
+   "gloss": "hot spring",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.saakaa",
+   "form": "さーかー",
+   "reading": "さーかー",
+   "gloss": "soccer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.basuketta",
+   "form": "ばすけった",
+   "reading": "ばすけった",
+   "gloss": "basketball",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

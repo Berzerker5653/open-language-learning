@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-151",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.wellbeing.prostudit",
+   "form": "простудить",
+   "reading": "простуди́ть",
+   "gloss": "to catch a cold",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.wellbeing.prostuda",
+   "form": "простуда",
+   "reading": "просту́да",
+   "gloss": "cold",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.wellbeing.travmatolog",
+   "form": "травматолог",
+   "reading": "травмато́лог",
+   "gloss": "traumatologist",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.wellbeing.kabinet",
+   "form": "кабинет",
+   "reading": "кабине́т",
+   "gloss": "office, consulting room",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.wellbeing.kartochka",
+   "form": "карточка",
+   "reading": "ка́рточка",
+   "gloss": "card, chart",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.wellbeing.diagnoz",
+   "form": "диагноз",
+   "reading": "диа́гноз",
+   "gloss": "diagnosis",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.wellbeing.osmotr",
+   "form": "осмотр",
+   "reading": "осмо́тр",
+   "gloss": "examination",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.wellbeing.sovet",
+   "form": "советовать",
+   "reading": "сове́товать",
+   "gloss": "to advise",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.wellbeing.sovet2",
+   "form": "совет",
+   "reading": "сове́т",
+   "gloss": "advice",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.wellbeing.nuzhno",
+   "form": "нужно",
+   "reading": "ну́жно",
+   "gloss": "it is needed",
+   "pos": "predicative",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.wellbeing.nuzhen",
+   "form": "нужен",
+   "reading": "ну́жен",
+   "gloss": "needed (m)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.wellbeing.pomosh",
+   "form": "помощь",
+   "reading": "по́мощь",
+   "gloss": "help",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.wellbeing.pomogat",
+   "form": "помогать",
+   "reading": "помога́ть",
+   "gloss": "to help",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.wellbeing.chuvstvovat",
+   "form": "чувствовать",
+   "reading": "чу́вствовать",
+   "gloss": "to feel",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.wellbeing.ploho",
+   "form": "плохо",
+   "reading": "пло́хо",
+   "gloss": "bad, unwell",
+   "pos": "predicative",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.wellbeing.horosho2",
+   "form": "хорошо",
+   "reading": "хорошо́",
+   "gloss": "well, fine",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.wellbeing.otdyhat",
+   "form": "отдыхать",
+   "reading": "отдыха́ть",
+   "gloss": "to rest",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.wellbeing.son",
+   "form": "сон",
+   "reading": "сон",
+   "gloss": "sleep",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.wellbeing.spat",
+   "form": "спать",
+   "reading": "спать",
+   "gloss": "to sleep",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.wellbeing.bolnichny",
+   "form": "больничный",
+   "reading": "больни́чный",
+   "gloss": "sick leave",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.wellbeing.uvazhenie",
+   "form": "уважение",
+   "reading": "уваже́ние",
+   "gloss": "respect",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.wellbeing.terpenie",
+   "form": "терпение",
+   "reading": "терпе́ние",
+   "gloss": "patience",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.wellbeing.nervy",
+   "form": "нервы",
+   "reading": "не́рвы",
+   "gloss": "nerves",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.wellbeing.ustalost",
+   "form": "усталость",
+   "reading": "уста́лость",
+   "gloss": "fatigue",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.wellbeing.otdyh",
+   "form": "отдых",
+   "reading": "о́тдых",
+   "gloss": "rest, vacation",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

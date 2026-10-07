@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-75",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.home.yuka",
+   "form": "ゆか",
+   "reading": "ゆか",
+   "gloss": "floor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.niwa",
+   "form": "にわ",
+   "reading": "にわ",
+   "gloss": "garden; yard",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.mado",
+   "form": "まど",
+   "reading": "まど",
+   "gloss": "window",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.tobira",
+   "form": "とびら",
+   "reading": "とびら",
+   "gloss": "door",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.kabe",
+   "form": "かべ",
+   "reading": "かべ",
+   "gloss": "wall",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.yane",
+   "form": "やね",
+   "reading": "やね",
+   "gloss": "roof",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.hako",
+   "form": "はこ",
+   "reading": "はこ",
+   "gloss": "box",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.tana",
+   "form": "たな",
+   "reading": "たな",
+   "gloss": "shelf",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.beddo",
+   "form": "べっど",
+   "reading": "べっど",
+   "gloss": "bed",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.kagu",
+   "form": "かぐ",
+   "reading": "かぐ",
+   "gloss": "furniture",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.hikidashi",
+   "form": "ひきだし",
+   "reading": "ひきだし",
+   "gloss": "drawer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.apato",
+   "form": "あぱと",
+   "reading": "あぱと",
+   "gloss": "apartment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.kutsu",
+   "form": "くつ",
+   "reading": "くつ",
+   "gloss": "shoes",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.fuku",
+   "form": "ふく",
+   "reading": "ふく",
+   "gloss": "clothes",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.reizouko",
+   "form": "れいぞうこ",
+   "reading": "れいぞうこ",
+   "gloss": "refrigerator",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.sentakuki",
+   "form": "せんたくき",
+   "reading": "せんたくき",
+   "gloss": "washing machine",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.souji",
+   "form": "そうじ",
+   "reading": "そうじ",
+   "gloss": "cleaning",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.sentaku",
+   "form": "せんたく",
+   "reading": "せんたく",
+   "gloss": "laundry",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.gomi",
+   "form": "ごみ",
+   "reading": "ごみ",
+   "gloss": "trash; garbage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.katazuke",
+   "form": "かたづけ",
+   "reading": "かたづけ",
+   "gloss": "tidying up",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.ryouri",
+   "form": "りょうり",
+   "reading": "りょうり",
+   "gloss": "cooking; cuisine",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.katazukemasu",
+   "form": "かたづけます",
+   "reading": "かたづけます",
+   "gloss": "to tidy up; to put away",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.fukimasu",
+   "form": "ふきます",
+   "reading": "ふきます",
+   "gloss": "to wipe",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.hirakemasu",
+   "form": "ひらけます",
+   "reading": "ひらけます",
+   "gloss": "to open",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.home.tojimasu",
+   "form": "とじます",
+   "reading": "とじます",
+   "gloss": "to close",
+   "pos": "verb",
+   "gender": ""
+  }
+ ]
+}

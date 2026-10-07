@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-65",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.neg.gegemoniya",
+   "form": "гегемония",
+   "reading": "гегемо́ния",
+   "gloss": "hegemony",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.dumping",
+   "form": "демпинг",
+   "reading": "де́мпинг",
+   "gloss": "dumping",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.neg.sabotazh",
+   "form": "саботаж",
+   "reading": "сабота́ж",
+   "gloss": "sabotage",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.neg.sabotirovat",
+   "form": "саботировать",
+   "reading": "саботи́ровать",
+   "gloss": "to sabotage",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.boykot",
+   "form": "бойкот",
+   "reading": "бойко́т",
+   "gloss": "boycott",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.neg.vstrechnyy",
+   "form": "встречный",
+   "reading": "встре́чный",
+   "gloss": "counter- (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.tonkost",
+   "form": "тонкость",
+   "reading": "то́нкость",
+   "gloss": "subtlety",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.vzaimnyy",
+   "form": "взаимный",
+   "reading": "взаи́мный",
+   "gloss": "mutual",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.vzaimovygodnyy",
+   "form": "взаимовыгодный",
+   "reading": "взаимовыго́дный",
+   "gloss": "mutually beneficial",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.barter",
+   "form": "бартер",
+   "reading": "ба́ртер",
+   "gloss": "barter",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.neg.razmen",
+   "form": "размен",
+   "reading": "разме́н",
+   "gloss": "swap, exchange",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.neg.razmenivat",
+   "form": "разменивать",
+   "reading": "разме́нивать",
+   "gloss": "to exchange",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.razmenyat",
+   "form": "разменять",
+   "reading": "разменя́ть",
+   "gloss": "to exchange (pf.)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.postupitsya",
+   "form": "поступиться",
+   "reading": "поступи́ться",
+   "gloss": "to relinquish",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.zhertvovat",
+   "form": "жертвовать",
+   "reading": "же́ртвовать",
+   "gloss": "to sacrifice",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.snishoditelnost",
+   "form": "снисходительность",
+   "reading": "снисходи́тельность",
+   "gloss": "indulgence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.snishoditelnyy",
+   "form": "снисходительный",
+   "reading": "снисходи́тельный",
+   "gloss": "indulgent",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.lojalnost",
+   "form": "лояльность",
+   "reading": "лоя́льность",
+   "gloss": "loyalty",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.lojalnyy",
+   "form": "лояльный",
+   "reading": "лоя́льный",
+   "gloss": "loyal",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.nelojalnyy",
+   "form": "нелояльный",
+   "reading": "нелоя́льный",
+   "gloss": "disloyal",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.podlost",
+   "form": "подлость",
+   "reading": "по́длость",
+   "gloss": "meanness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.podlyy",
+   "form": "подлый",
+   "reading": "по́длый",
+   "gloss": "mean",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.nedostoynyy",
+   "form": "недостойный",
+   "reading": "недосто́йный",
+   "gloss": "unworthy",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.nechestnost",
+   "form": "нечестность",
+   "reading": "нече́стность",
+   "gloss": "dishonesty",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.nechestnyy",
+   "form": "нечестный",
+   "reading": "нече́стный",
+   "gloss": "dishonest",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

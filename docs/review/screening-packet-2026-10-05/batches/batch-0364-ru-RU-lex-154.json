@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-154",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.workstudy.obyazannost",
+   "form": "обязанность",
+   "reading": "обя́занность",
+   "gloss": "duty, obligation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.workstudy.rabota2",
+   "form": "работа",
+   "reading": "рабо́та",
+   "gloss": "work, job",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.workstudy.dolzhnost",
+   "form": "должность",
+   "reading": "до́лжность",
+   "gloss": "position, post",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.workstudy.opyt",
+   "form": "опыт",
+   "reading": "о́пыт",
+   "gloss": "experience",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.workstudy.navyk",
+   "form": "навык",
+   "reading": "на́вык",
+   "gloss": "skill",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.workstudy.cel",
+   "form": "цель",
+   "reading": "цель",
+   "gloss": "goal",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.workstudy.plan2",
+   "form": "план",
+   "reading": "план",
+   "gloss": "plan",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.workstudy.srok",
+   "form": "срок",
+   "reading": "срок",
+   "gloss": "deadline, term",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.workstudy.vozmozhnost",
+   "form": "возможность",
+   "reading": "возмо́жность",
+   "gloss": "possibility",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.workstudy.shans",
+   "form": "шанс",
+   "reading": "шанс",
+   "gloss": "chance",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.workstudy.uspeh",
+   "form": "успех",
+   "reading": "успе́х",
+   "gloss": "success",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.workstudy.pobeda",
+   "form": "победа",
+   "reading": "побе́да",
+   "gloss": "victory",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.workstudy.porazhenie",
+   "form": "поражение",
+   "reading": "пораже́ние",
+   "gloss": "defeat",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.workstudy.konkurent",
+   "form": "конкурент",
+   "reading": "конкуре́нт",
+   "gloss": "competitor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.workstudy.kollega",
+   "form": "коллега",
+   "reading": "колле́га",
+   "gloss": "colleague",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.workstudy.nachalnik",
+   "form": "начальник",
+   "reading": "нача́льник",
+   "gloss": "boss",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.workstudy.podchinenny",
+   "form": "подчинённый",
+   "reading": "подчине́нный",
+   "gloss": "subordinate",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.workstudy.sotrudnik",
+   "form": "сотрудник",
+   "reading": "сотру́дник",
+   "gloss": "coworker, staff",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.workstudy.proekt",
+   "form": "проект",
+   "reading": "прое́кт",
+   "gloss": "project",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.workstudy.zadacha",
+   "form": "задача",
+   "reading": "зада́ча",
+   "gloss": "task",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.workstudy.rezultat",
+   "form": "результат",
+   "reading": "результа́т",
+   "gloss": "result",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.workstudy.proverka",
+   "form": "проверка",
+   "reading": "прове́рка",
+   "gloss": "check",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.workstudy.otchet",
+   "form": "отчёт",
+   "reading": "отче́т",
+   "gloss": "report",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.workstudy.karierny",
+   "form": "карьерный",
+   "reading": "карье́рный",
+   "gloss": "career (adj)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.workstudy.znanie",
+   "form": "знание",
+   "reading": "зна́ние",
+   "gloss": "knowledge",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

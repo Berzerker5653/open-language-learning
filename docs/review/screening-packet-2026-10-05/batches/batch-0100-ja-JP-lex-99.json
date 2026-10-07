@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-99",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.numbers.san",
+   "form": "さん",
+   "reading": "さん",
+   "gloss": "three",
+   "pos": "number",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.numbers.yon",
+   "form": "よん",
+   "reading": "よん",
+   "gloss": "four",
+   "pos": "number",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.numbers.go",
+   "form": "ご",
+   "reading": "ご",
+   "gloss": "five",
+   "pos": "number",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.numbers.roku",
+   "form": "ろく",
+   "reading": "ろく",
+   "gloss": "six",
+   "pos": "number",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.numbers.nana",
+   "form": "なな",
+   "reading": "なな",
+   "gloss": "seven",
+   "pos": "number",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.numbers.kyuu",
+   "form": "きゅう",
+   "reading": "きゅう",
+   "gloss": "nine",
+   "pos": "number",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.numbers.juu",
+   "form": "じゅう",
+   "reading": "じゅう",
+   "gloss": "ten",
+   "pos": "number",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.numbers.hyaku",
+   "form": "ひゃく",
+   "reading": "ひゃく",
+   "gloss": "hundred",
+   "pos": "number",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.numbers.sen",
+   "form": "せん",
+   "reading": "せん",
+   "gloss": "thousand",
+   "pos": "number",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.numbers.man",
+   "form": "まん",
+   "reading": "まん",
+   "gloss": "ten thousand",
+   "pos": "number",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.numbers.mai-mai",
+   "form": "まい",
+   "reading": "まい",
+   "gloss": "counter for flat thin objects",
+   "pos": "counter",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.numbers.hon-counter",
+   "form": "ほん",
+   "reading": "ほん",
+   "gloss": "counter for long cylindrical objects (reading changes with numbers)",
+   "pos": "counter",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.numbers.satsu",
+   "form": "さつ",
+   "reading": "さつ",
+   "gloss": "counter for books",
+   "pos": "counter",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.numbers.nin",
+   "form": "にん",
+   "reading": "にん",
+   "gloss": "counter for people",
+   "pos": "counter",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.numbers.kai-counter",
+   "form": "かい",
+   "reading": "かい",
+   "gloss": "counter for times; floors",
+   "pos": "counter",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.numbers.en",
+   "form": "えん",
+   "reading": "えん",
+   "gloss": "yen (currency)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.numbers.hachi",
+   "form": "はち",
+   "reading": "はち",
+   "gloss": "eight",
+   "pos": "number",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.objects.hon",
+   "form": "ほん",
+   "reading": "ほん",
+   "gloss": "book",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.objects.pen",
+   "form": "ペン",
+   "reading": "ペン",
+   "gloss": "pen",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.objects.kasa",
+   "form": "かさ",
+   "reading": "かさ",
+   "gloss": "umbrella",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.objects.kaban",
+   "form": "かばん",
+   "reading": "かばん",
+   "gloss": "bag",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.objects.tokei",
+   "form": "とけい",
+   "reading": "とけい",
+   "gloss": "watch; clock",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.objects.denwa",
+   "form": "でんわ",
+   "reading": "でんわ",
+   "gloss": "telephone; phone call",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.objects.terebi",
+   "form": "テレビ",
+   "reading": "テレビ",
+   "gloss": "television",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.objects.kuruma",
+   "form": "くるま",
+   "reading": "くるま",
+   "gloss": "car",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-28",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u455",
+   "text": "Это антоним.",
+   "gloss": "This is an antonym."
+  },
+  {
+   "id": "ru.sent.b2.u456",
+   "text": "Это гипербола.",
+   "gloss": "This is a hyperbole."
+  },
+  {
+   "id": "ru.sent.b2.u457",
+   "text": "Это аллегория.",
+   "gloss": "This is an allegory."
+  },
+  {
+   "id": "ru.sent.b2.u458",
+   "text": "Это падеж.",
+   "gloss": "This is a case."
+  },
+  {
+   "id": "ru.sent.b2.u459",
+   "text": "Это род.",
+   "gloss": "This is a gender."
+  },
+  {
+   "id": "ru.sent.b2.u460",
+   "text": "Это риторика.",
+   "gloss": "This is rhetoric."
+  },
+  {
+   "id": "ru.sent.b2.u461",
+   "text": "Это установка.",
+   "gloss": "This is an attitude."
+  },
+  {
+   "id": "ru.sent.b2.u462",
+   "text": "Это посыл.",
+   "gloss": "This is a premise."
+  },
+  {
+   "id": "ru.sent.b2.u463",
+   "text": "Это накал.",
+   "gloss": "This is intensity."
+  },
+  {
+   "id": "ru.sent.b2.u464",
+   "text": "Это оратор.",
+   "gloss": "This is an orator."
+  },
+  {
+   "id": "ru.sent.b2.u465",
+   "text": "Это жанр.",
+   "gloss": "This is a genre."
+  },
+  {
+   "id": "ru.sent.b2.u466",
+   "text": "Это школа.",
+   "gloss": "This is a school."
+  },
+  {
+   "id": "ru.sent.b2.u467",
+   "text": "Это конфликт.",
+   "gloss": "This is a conflict."
+  },
+  {
+   "id": "ru.sent.b2.u468",
+   "text": "Это дискурс.",
+   "gloss": "This is a discourse."
+  },
+  {
+   "id": "ru.sent.b2.u469",
+   "text": "Это лозунг.",
+   "gloss": "This is a slogan."
+  }
+ ]
+}

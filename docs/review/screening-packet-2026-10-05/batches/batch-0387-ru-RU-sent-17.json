@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-17",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b1.u290",
+   "text": "Это дружба.",
+   "gloss": "This is friendship."
+  },
+  {
+   "id": "ru.sent.b1.u291",
+   "text": "Это друг.",
+   "gloss": "This is a friend."
+  },
+  {
+   "id": "ru.sent.b1.u292",
+   "text": "Это родня.",
+   "gloss": "These are relatives."
+  },
+  {
+   "id": "ru.sent.b1.u295",
+   "text": "Это спор.",
+   "gloss": "This is a dispute."
+  },
+  {
+   "id": "ru.sent.b1.u296",
+   "text": "Это компромисс.",
+   "gloss": "This is a compromise."
+  },
+  {
+   "id": "ru.sent.b1.u297",
+   "text": "Это вера.",
+   "gloss": "This is trust."
+  },
+  {
+   "id": "ru.sent.b1.u298",
+   "text": "Это привычка.",
+   "gloss": "This is a habit."
+  },
+  {
+   "id": "ru.sent.b1.u299",
+   "text": "Это цветы.",
+   "gloss": "These are flowers."
+  },
+  {
+   "id": "ru.sent.b1.u293",
+   "text": "Это посетитель.",
+   "gloss": "This is a visitor."
+  },
+  {
+   "id": "ru.sent.b1.u294",
+   "text": "Это сувенир.",
+   "gloss": "This is a souvenir."
+  },
+  {
+   "id": "ru.sent.b1.u300",
+   "text": "Это эмоция.",
+   "gloss": "This is an emotion."
+  },
+  {
+   "id": "ru.sent.b1.u301",
+   "text": "Это тревога.",
+   "gloss": "This is anxiety."
+  },
+  {
+   "id": "ru.sent.b1.u302",
+   "text": "Это путаница.",
+   "gloss": "This is a mix-up."
+  },
+  {
+   "id": "ru.sent.b1.u303",
+   "text": "Это недоразумение.",
+   "gloss": "This is a misunderstanding."
+  },
+  {
+   "id": "ru.sent.b1.u304",
+   "text": "Это упрёк.",
+   "gloss": "This is a reproach."
+  }
+ ]
+}

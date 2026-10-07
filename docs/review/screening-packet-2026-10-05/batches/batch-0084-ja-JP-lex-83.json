@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-83",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.ling2.hasei",
+   "form": "はせい",
+   "reading": "はせい",
+   "gloss": "derivation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.genin",
+   "form": "げんにん",
+   "reading": "げんにん",
+   "gloss": "origin, etymology",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.bunsetsu",
+   "form": "ぶんせつ",
+   "reading": "ぶんせつ",
+   "gloss": "word group, phrase",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.bun",
+   "form": "ぶん",
+   "reading": "ぶん",
+   "gloss": "sentence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.kansetsu",
+   "form": "かんせつ",
+   "reading": "かんせつ",
+   "gloss": "clause, passage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.shugo",
+   "form": "しゅご",
+   "reading": "しゅご",
+   "gloss": "subject (grammar)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.jutsugo",
+   "form": "じゅつご",
+   "reading": "じゅつご",
+   "gloss": "predicate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.keishiki",
+   "form": "けいしき",
+   "reading": "けいしき",
+   "gloss": "form, format",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.imi2",
+   "form": "いみ",
+   "reading": "いみ",
+   "gloss": "meaning",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.bunmyaku",
+   "form": "ぶんみゃく",
+   "reading": "ぶんみゃく",
+   "gloss": "context",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.hatsuwa",
+   "form": "はつわ",
+   "reading": "はつわ",
+   "gloss": "utterance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.taishou",
+   "form": "たいしょう",
+   "reading": "たいしょう",
+   "gloss": "choice, option",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.kotae2",
+   "form": "こたえ",
+   "reading": "こたえ",
+   "gloss": "answer, response",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.keigo",
+   "form": "けいご",
+   "reading": "けいご",
+   "gloss": "honorific language",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.reigi",
+   "form": "れいぎ",
+   "reading": "れいぎ",
+   "gloss": "manners, etiquette",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.kizukai",
+   "form": "きづかい",
+   "reading": "きづかい",
+   "gloss": "consideration, tact",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.hyougen",
+   "form": "ひょうげん",
+   "reading": "ひょうげん",
+   "gloss": "expression, wording",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.iimawashi",
+   "form": "いいまわし",
+   "reading": "いいまわし",
+   "gloss": "phrasing, way of saying",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.houden",
+   "form": "ほうげん",
+   "reading": "ほうげん",
+   "gloss": "dialect",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.namari",
+   "form": "なまり",
+   "reading": "なまり",
+   "gloss": "regional accent",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.gengo",
+   "form": "げんご",
+   "reading": "げんご",
+   "gloss": "language",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.kokugo",
+   "form": "こくご",
+   "reading": "こくご",
+   "gloss": "national language",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.kyoutsuugo",
+   "form": "きょうつうご",
+   "reading": "きょうつうご",
+   "gloss": "standard language",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.henka",
+   "form": "へんか",
+   "reading": "へんか",
+   "gloss": "change",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.henyou",
+   "form": "へんよう",
+   "reading": "へんよう",
+   "gloss": "usage shift",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

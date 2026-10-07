@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-59",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.narration.konets",
+   "form": "конец",
+   "reading": "коне́ц",
+   "gloss": "end",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration.schaste",
+   "form": "счастье",
+   "reading": "сча́стье",
+   "gloss": "happiness",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.narration.nadezhda",
+   "form": "надежда",
+   "reading": "наде́жда",
+   "gloss": "hope",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.narration.mechta",
+   "form": "мечта",
+   "reading": "мечта́",
+   "gloss": "dream",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.narration.budushchee",
+   "form": "будущее",
+   "reading": "бу́дущее",
+   "gloss": "future",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.narration2.vo-vremya",
+   "form": "во время",
+   "reading": "во вре́мя",
+   "gloss": "during",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration2.vokrug",
+   "form": "вокруг",
+   "reading": "вокру́г",
+   "gloss": "around",
+   "pos": "preposition",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration2.ryadom",
+   "form": "рядом",
+   "reading": "ря́дом",
+   "gloss": "nearby",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration2.v-to-vremya",
+   "form": "в то время",
+   "reading": "в то вре́мя",
+   "gloss": "at that time",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration2.ves-vecher",
+   "form": "весь вечер",
+   "reading": "весь ве́чер",
+   "gloss": "the whole evening",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration2.vzglyad",
+   "form": "взгляд",
+   "reading": "взгляд",
+   "gloss": "glance, viewpoint",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration2.tochka-zreniya",
+   "form": "точка зрения",
+   "reading": "то́чка зре́ния",
+   "gloss": "point of view",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration2.sudba",
+   "form": "судьба",
+   "reading": "судьба́",
+   "gloss": "fate, destiny",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.narration2.pozitsiya",
+   "form": "позиция",
+   "reading": "пози́ция",
+   "gloss": "position, stance",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.narration2.vpechatlenie",
+   "form": "впечатление",
+   "reading": "впечатле́ние",
+   "gloss": "impression",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.narration2.pogoda",
+   "form": "погода",
+   "reading": "пого́да",
+   "gloss": "weather",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.narration2.dozd",
+   "form": "дождь",
+   "reading": "дождь",
+   "gloss": "rain",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration2.sneg",
+   "form": "снег",
+   "reading": "снег",
+   "gloss": "snow",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration2.veter",
+   "form": "ветер",
+   "reading": "ве́тер",
+   "gloss": "wind",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration2.solntse",
+   "form": "солнце",
+   "reading": "со́лнце",
+   "gloss": "sun",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.narration2.otezd",
+   "form": "отъезд",
+   "reading": "отъе́зд",
+   "gloss": "departure",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration2.priezd",
+   "form": "приезд",
+   "reading": "прие́зд",
+   "gloss": "arrival",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration2.nomer",
+   "form": "номер",
+   "reading": "но́мер",
+   "gloss": "number, room",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration2.devushka",
+   "form": "девушка",
+   "reading": "де́вушка",
+   "gloss": "girl, young woman",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration2.paren",
+   "form": "парень",
+   "reading": "па́рень",
+   "gloss": "guy, fellow",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

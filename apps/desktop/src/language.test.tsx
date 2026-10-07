@@ -48,6 +48,9 @@ function render(over: Partial<Parameters<typeof LanguagePanel>[0]> = {}) {
       tts={null}
       onInstallModel={() => {}}
       onDeleteModel={() => {}}
+      speechModels={[]}
+      speechModel="off"
+      onSelectSpeechModel={() => {}}
       {...over}
     />,
   );
@@ -145,5 +148,37 @@ describe("language panel", () => {
     expect(html).toContain("Audio activities are disabled");
     expect(html).toContain("Download");
     expect(html).not.toContain("GPL-3.0");
+  });
+
+  it("offers a speech-model selector that defaults to off and lists whisper models", () => {
+    const html = render({
+      speechModels: [
+        {
+          id: "org.openlanguage.speech.whisper-ggml-tiny",
+          version: "1.0.0",
+          license_code: "MIT",
+          installed: false,
+          size_bytes: 77691713,
+        },
+        {
+          id: "org.openlanguage.speech.whisper-ggml-base",
+          version: "1.0.0",
+          license_code: "MIT",
+          installed: false,
+          size_bytes: 147951465,
+        },
+      ],
+      speechModel: "off",
+    });
+    // Off is the privacy default and is the checked option.
+    expect(html).toContain("Off — no speech model");
+    expect(html).toContain('checked="" value="off"');
+    // A selectable whisper model with its size and a download action.
+    expect(html).toContain("Whisper Base");
+    expect(html).toContain("Download");
+    // Honest framing: size does not change pronunciation accuracy; the
+    // lightest model is the recommended pick.
+    expect(html).toContain("the model sizes give the same result");
+    expect(html).toContain("recommended");
   });
 });

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-63",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.neg.predosterech",
+   "form": "предостеречь",
+   "reading": "предостере́чь",
+   "gloss": "to warn against",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.pregradit",
+   "form": "преградить",
+   "reading": "прегради́ть",
+   "gloss": "to block",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.protivodeystvie",
+   "form": "противодействие",
+   "reading": "противоде́йствие",
+   "gloss": "resistance, counteraction",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.soprotivlyatsya",
+   "form": "сопротивляться",
+   "reading": "сопротивля́ться",
+   "gloss": "to resist",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.neprilichno",
+   "form": "неприлично",
+   "reading": "неприли́чно",
+   "gloss": "indecently",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.prioritetnyy",
+   "form": "приоритетный",
+   "reading": "приорите́тный",
+   "gloss": "priority (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.pervochederednoy",
+   "form": "первоочередной",
+   "reading": "первоочередно́й",
+   "gloss": "top-priority",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.vesomost",
+   "form": "весомость",
+   "reading": "весо́мость",
+   "gloss": "weight, importance",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.srochnost",
+   "form": "срочность",
+   "reading": "сро́чность",
+   "gloss": "urgency",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.otsrochka",
+   "form": "отсрочка",
+   "reading": "отсро́чка",
+   "gloss": "deferral",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.otsrochit",
+   "form": "отсрочить",
+   "reading": "отсро́чить",
+   "gloss": "to defer",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.priostranovit",
+   "form": "приостановить",
+   "reading": "приостанови́ть",
+   "gloss": "to suspend",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.priostranovka",
+   "form": "приостановка",
+   "reading": "приостано́вка",
+   "gloss": "suspension",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.vozobnovit",
+   "form": "возобновить",
+   "reading": "возобнови́ть",
+   "gloss": "to resume",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.vozobnovlenie",
+   "form": "возобновление",
+   "reading": "возобновле́ние",
+   "gloss": "resumption",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.zamorozit",
+   "form": "заморозить",
+   "reading": "заморо́зить",
+   "gloss": "to freeze",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.zamorozka",
+   "form": "заморозка",
+   "reading": "заморо́зка",
+   "gloss": "freeze",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.uskorit",
+   "form": "ускорить",
+   "reading": "уско́рить",
+   "gloss": "to accelerate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.uskorenie",
+   "form": "ускорение",
+   "reading": "ускоре́ние",
+   "gloss": "acceleration",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.zamedlit",
+   "form": "замедлить",
+   "reading": "заме́длить",
+   "gloss": "to slow down",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.zamedlenie",
+   "form": "замедление",
+   "reading": "замедле́ние",
+   "gloss": "deceleration",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.tormozhenie",
+   "form": "торможение",
+   "reading": "торможе́ние",
+   "gloss": "braking, slowdown",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.lobbirovanie",
+   "form": "лоббирование",
+   "reading": "лобби́рование",
+   "gloss": "lobbying",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.lobhist",
+   "form": "лоббист",
+   "reading": "лобби́ст",
+   "gloss": "lobbyist",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.neg.deviz",
+   "form": "девиз",
+   "reading": "деви́з",
+   "gloss": "motto",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-13",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.critical.dialektika",
+   "form": "диалектика",
+   "reading": "диале́ктика",
+   "gloss": "dialectics",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical.paradoks",
+   "form": "парадокс",
+   "reading": "парадо́кс",
+   "gloss": "paradox",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical.tavtologiya",
+   "form": "тавтология",
+   "reading": "тавтоло́гия",
+   "gloss": "tautology",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical.pleonazm",
+   "form": "плеоназм",
+   "reading": "плеона́зм",
+   "gloss": "pleonasm",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical.kalambur",
+   "form": "каламбур",
+   "reading": "каламбу́р",
+   "gloss": "pun",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical.dvusmyslennost",
+   "form": "двусмысленность",
+   "reading": "двусмы́сленность",
+   "gloss": "ambiguity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical.omonim",
+   "form": "омоним",
+   "reading": "омо́ним",
+   "gloss": "homonym",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical.sinonim",
+   "form": "синоним",
+   "reading": "сино́ним",
+   "gloss": "synonym",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical.antonim",
+   "form": "антоним",
+   "reading": "анто́ним",
+   "gloss": "antonym",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical.paronim",
+   "form": "пароним",
+   "reading": "паро́ним",
+   "gloss": "paronym",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical.epitet",
+   "form": "эпитет",
+   "reading": "эпи́тет",
+   "gloss": "epithet",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical.giperbola",
+   "form": "гипербола",
+   "reading": "гипе́рбола",
+   "gloss": "hyperbole",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical.litota",
+   "form": "литота",
+   "reading": "лито́та",
+   "gloss": "litotes",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical.perifraz",
+   "form": "перифраз",
+   "reading": "перифра́з",
+   "gloss": "periphrasis",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical.metonimiya",
+   "form": "метонимия",
+   "reading": "метони́мия",
+   "gloss": "metonymy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical.allegoriya",
+   "form": "аллегория",
+   "reading": "аллего́рия",
+   "gloss": "allegory",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical.skazuemoe",
+   "form": "сказуемое",
+   "reading": "сказу́емое",
+   "gloss": "predicate",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical.podlezhashchee",
+   "form": "подлежащее",
+   "reading": "подлежа́щее",
+   "gloss": "subject (grammar)",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical.dopolnenie",
+   "form": "дополнение",
+   "reading": "дополне́ние",
+   "gloss": "object (grammar)",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical.sostav",
+   "form": "состав",
+   "reading": "соста́в",
+   "gloss": "composition, make-up",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical.padezh",
+   "form": "падеж",
+   "reading": "паде́ж",
+   "gloss": "case (grammar)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical.spryazhenie",
+   "form": "спряжение",
+   "reading": "спряже́ние",
+   "gloss": "conjugation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical.koren",
+   "form": "корень",
+   "reading": "ко́рень",
+   "gloss": "root",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical.pristavka",
+   "form": "приставка",
+   "reading": "приста́вка",
+   "gloss": "prefix",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical.suffiks",
+   "form": "суффикс",
+   "reading": "су́ффикс",
+   "gloss": "suffix",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

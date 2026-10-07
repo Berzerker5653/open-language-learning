@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-108",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.politics.houpatsu",
+   "form": "ほうはつ",
+   "reading": "ほうはつ",
+   "gloss": "bill",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.sangin",
+   "form": "さんぎん",
+   "reading": "さんぎん",
+   "gloss": "upper house member",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.shugiin",
+   "form": "しゅうぎん",
+   "reading": "しゅうぎん",
+   "gloss": "lower house member",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.zeisei",
+   "form": "ぜいせい",
+   "reading": "ぜいせい",
+   "gloss": "tax system",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.housian",
+   "form": "ほうあん",
+   "reading": "ほうあん",
+   "gloss": "bill (proposal)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.rougo",
+   "form": "ろうごう",
+   "reading": "ろうごう",
+   "gloss": "labor union",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics.shounen",
+   "form": "しょうねん",
+   "reading": "しょうねん",
+   "gloss": "youth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.gaikou",
+   "form": "がいこう",
+   "reading": "がいこう",
+   "gloss": "foreign affairs",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.gaikoku",
+   "form": "がいこく",
+   "reading": "がいこく",
+   "gloss": "foreign country",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.kokumin",
+   "form": "こくみん",
+   "reading": "こくみん",
+   "gloss": "citizen",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.zei2",
+   "form": "ぜい",
+   "reading": "ぜい",
+   "gloss": "tax",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.koku",
+   "form": "こく",
+   "reading": "こく",
+   "gloss": "nation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.kokka",
+   "form": "こっか",
+   "reading": "こっか",
+   "gloss": "state",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.kokkou",
+   "form": "こっこう",
+   "reading": "こっこう",
+   "gloss": "national polity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.bunkou",
+   "form": "ぶんこう",
+   "reading": "ぶんこう",
+   "gloss": "division",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.demo",
+   "form": "デモ",
+   "reading": "デモ",
+   "gloss": "demonstration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.gaishi",
+   "form": "がいし",
+   "reading": "がいし",
+   "gloss": "foreign post",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.zeimu",
+   "form": "ぜいむ",
+   "reading": "ぜいむ",
+   "gloss": "tax affairs",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.kikoku",
+   "form": "きこく",
+   "reading": "きこく",
+   "gloss": "return to country",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.kokuho",
+   "form": "こくほう",
+   "reading": "こくほう",
+   "gloss": "national report",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.kogen",
+   "form": "こうげん",
+   "reading": "こうげん",
+   "gloss": "statement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.seigen",
+   "form": "せいげん",
+   "reading": "せいげん",
+   "gloss": "restriction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.genron",
+   "form": "げんろん",
+   "reading": "げんろん",
+   "gloss": "free speech",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.shimei",
+   "form": "しめい",
+   "reading": "しめい",
+   "gloss": "designation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.politics2.meiyo",
+   "form": "めいよ",
+   "reading": "めいよ",
+   "gloss": "honor",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

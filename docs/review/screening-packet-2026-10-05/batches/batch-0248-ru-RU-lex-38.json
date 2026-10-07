@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-38",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.food.tvarog",
+   "form": "творог",
+   "reading": "творо́г",
+   "gloss": "cottage cheese",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.smetana",
+   "form": "сметана",
+   "reading": "смета́на",
+   "gloss": "sour cream",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.food.restoran",
+   "form": "ресторан",
+   "reading": "рестора́н",
+   "gloss": "restaurant",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.kafe",
+   "form": "кафе",
+   "reading": "кафе́",
+   "gloss": "café",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.food.menu",
+   "form": "меню",
+   "reading": "меню́",
+   "gloss": "menu",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.food.schet",
+   "form": "счёт",
+   "reading": "сче́т",
+   "gloss": "bill",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.zakaz",
+   "form": "заказ",
+   "reading": "зака́з",
+   "gloss": "order",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.porciya",
+   "form": "порция",
+   "reading": "по́рция",
+   "gloss": "portion",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.food.vkusno",
+   "form": "вкусно",
+   "reading": "вку́сно",
+   "gloss": "tasty",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.food.golodny",
+   "form": "голодный",
+   "reading": "голо́дный",
+   "gloss": "hungry",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.food.kushat",
+   "form": "кушать",
+   "reading": "ку́шать",
+   "gloss": "to eat",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.food.pit",
+   "form": "пить",
+   "reading": "пить",
+   "gloss": "to drink",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.food.stakan",
+   "form": "стакан",
+   "reading": "стака́н",
+   "gloss": "glass",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.butylka",
+   "form": "бутылка",
+   "reading": "буты́лка",
+   "gloss": "bottle",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.food.eda",
+   "form": "еда",
+   "reading": "еда́",
+   "gloss": "food",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.food.uzhin",
+   "form": "ужин",
+   "reading": "у́жин",
+   "gloss": "dinner",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.desert",
+   "form": "десерт",
+   "reading": "десе́рт",
+   "gloss": "dessert",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.povar",
+   "form": "повар",
+   "reading": "по́вар",
+   "gloss": "cook",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.food.cena",
+   "form": "цена",
+   "reading": "цена́",
+   "gloss": "price",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.food.skolko",
+   "form": "сколько",
+   "reading": "ско́лько",
+   "gloss": "how much, how many",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future.obstoyatelstvo",
+   "form": "обстоятельство",
+   "reading": "обстоя́тельство",
+   "gloss": "circumstance",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future.ishod",
+   "form": "исход",
+   "reading": "исхо́д",
+   "gloss": "outcome",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.future.veroyatnost",
+   "form": "вероятность",
+   "reading": "вероя́тность",
+   "gloss": "probability",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future.prognoz",
+   "form": "прогноз",
+   "reading": "прогно́з",
+   "gloss": "forecast",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.future.poslezavtra",
+   "form": "послезавтра",
+   "reading": "послеза́втра",
+   "gloss": "the day after tomorrow",
+   "pos": "adverb",
+   "gender": ""
+  }
+ ]
+}

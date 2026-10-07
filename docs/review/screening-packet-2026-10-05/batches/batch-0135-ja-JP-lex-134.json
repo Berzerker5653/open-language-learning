@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-134",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.sports.ba-beru",
+   "form": "ばーべる",
+   "reading": "ばーべる",
+   "gloss": "barbell",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.tatami",
+   "form": "たたみ",
+   "reading": "たたみ",
+   "gloss": "tatami mat",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.judougi",
+   "form": "じゅうどうぎ",
+   "reading": "じゅうどうぎ",
+   "gloss": "judo uniform",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.kendo-gi",
+   "form": "けんどうぎ",
+   "reading": "けんどうぎ",
+   "gloss": "kendo uniform",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.mawashi",
+   "form": "まわし",
+   "reading": "まわし",
+   "gloss": "sumo belt",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.koshi",
+   "form": "こし",
+   "reading": "こし",
+   "gloss": "hips; lower back",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.mune",
+   "form": "むね",
+   "reading": "むね",
+   "gloss": "chest",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.kokoro",
+   "form": "こころ",
+   "reading": "こころ",
+   "gloss": "heart; mind",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.ki",
+   "form": "き",
+   "reading": "き",
+   "gloss": "energy; spirit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.tairyoku",
+   "form": "たいりょく",
+   "reading": "たいりょく",
+   "gloss": "physical strength",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.joutairyoku",
+   "form": "じょうたいりょく",
+   "reading": "じょうたいりょく",
+   "gloss": "condition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.ryouiki",
+   "form": "りょういき",
+   "reading": "りょういき",
+   "gloss": "range",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.sui-ren",
+   "form": "すいれん",
+   "reading": "すいれん",
+   "gloss": "swimming practice",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.renshuu",
+   "form": "れんしゅう",
+   "reading": "れんしゅう",
+   "gloss": "practice",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.sen-taku",
+   "form": "せんたく",
+   "reading": "せんたく",
+   "gloss": "selection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.sen-taku-sen",
+   "form": "せんたくせん",
+   "reading": "せんたくせん",
+   "gloss": "selection match",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.taikai",
+   "form": "たいかい",
+   "reading": "たいかい",
+   "gloss": "tournament",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.densetsu-senshu",
+   "form": "でんせつせんしゅ",
+   "reading": "でんせつせんしゅ",
+   "gloss": "legendary athlete",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.kessan",
+   "form": "けっさん",
+   "reading": "けっさん",
+   "gloss": "results",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.kessan-bangumi",
+   "form": "けっさんばんぐみ",
+   "reading": "けっさんばんぐみ",
+   "gloss": "results show",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.sports.kessan-houritsu",
+   "form": "けっさんほうりつ",
+   "reading": "けっさんほうりつ",
+   "gloss": "result rate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.monogatari",
+   "form": "ものがたり",
+   "reading": "ものがたり",
+   "gloss": "story",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.keimatsu",
+   "form": "けいまつ",
+   "reading": "けいまつ",
+   "gloss": "ending",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.setsu",
+   "form": "せつ",
+   "reading": "せつ",
+   "gloss": "section",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.story.geki",
+   "form": "げき",
+   "reading": "げき",
+   "gloss": "drama",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

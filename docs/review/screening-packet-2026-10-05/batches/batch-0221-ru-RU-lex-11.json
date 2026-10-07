@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-11",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.comparisons.dlinnee",
+   "form": "длиннее",
+   "reading": "длинне́е",
+   "gloss": "longer",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.korotche",
+   "form": "короче",
+   "reading": "короче́",
+   "gloss": "shorter",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.shire",
+   "form": "шире",
+   "reading": "шире́",
+   "gloss": "wider",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.uzhe",
+   "form": "уже",
+   "reading": "уже́",
+   "gloss": "narrower; already",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.vyshe",
+   "form": "выше",
+   "reading": "вы́ше",
+   "gloss": "higher",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.trudnee",
+   "form": "труднее",
+   "reading": "трудне́е",
+   "gloss": "harder",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.proshche",
+   "form": "проще",
+   "reading": "про́ще",
+   "gloss": "easier",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.slozhnee",
+   "form": "сложнее",
+   "reading": "сложне́е",
+   "gloss": "more complicated",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.legche",
+   "form": "легче",
+   "reading": "ле́гче",
+   "gloss": "easier, lighter",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.tyazhelee",
+   "form": "тяжелее",
+   "reading": "тяжелее́",
+   "gloss": "heavier, harder",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.dorozhe",
+   "form": "дороже",
+   "reading": "доро́же",
+   "gloss": "more expensive",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.deshevle",
+   "form": "дешевле",
+   "reading": "деше́вле",
+   "gloss": "cheaper",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.vazhnee",
+   "form": "важнее",
+   "reading": "важне́е",
+   "gloss": "more important",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.poleznee",
+   "form": "полезнее",
+   "reading": "поле́знее",
+   "gloss": "healthier, more useful",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.interesnee",
+   "form": "интереснее",
+   "reading": "интересне́е",
+   "gloss": "more interesting",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.vkusnee",
+   "form": "вкуснее",
+   "reading": "вкусне́е",
+   "gloss": "tastier",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.zdorovee",
+   "form": "здоровее",
+   "reading": "здорове́е",
+   "gloss": "healthier",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.slashche",
+   "form": "слаще",
+   "reading": "слаще́",
+   "gloss": "sweeter",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.svezhee",
+   "form": "свежее",
+   "reading": "свеже́е",
+   "gloss": "fresher",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.myagche",
+   "form": "мягче",
+   "reading": "мя́гче",
+   "gloss": "softer",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.schastlivee",
+   "form": "счастливее",
+   "reading": "счастли́вее",
+   "gloss": "happier",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.spokoinee",
+   "form": "спокойнее",
+   "reading": "спокойне́е",
+   "gloss": "calmer",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.veselee",
+   "form": "веселее",
+   "reading": "веселе́е",
+   "gloss": "more fun",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.grustnee",
+   "form": "грустнее",
+   "reading": "грустне́е",
+   "gloss": "sadder",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.trevozhnee",
+   "form": "тревожнее",
+   "reading": "трево́жнее",
+   "gloss": "more anxious",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

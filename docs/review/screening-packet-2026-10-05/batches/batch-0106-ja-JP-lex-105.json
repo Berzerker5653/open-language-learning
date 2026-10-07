@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-105",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.play1.tsukkomi2",
+   "form": "つっこみ",
+   "reading": "つっこみ",
+   "gloss": "retort",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play1.boke2",
+   "form": "ぼけ",
+   "reading": "ぼけ",
+   "gloss": "funny role",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play1.manzai",
+   "form": "まんざい",
+   "reading": "まんざい",
+   "gloss": "manzai comedy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play1.warai2",
+   "form": "わらい",
+   "reading": "わらい",
+   "gloss": "laughter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play1.hyogen2",
+   "form": "ひょうげん",
+   "reading": "ひょうげん",
+   "gloss": "expression",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play1.kotowaza",
+   "form": "ことわざ",
+   "reading": "ことわざ",
+   "gloss": "proverb",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play1.zokugo",
+   "form": "ぞくご",
+   "reading": "ぞくご",
+   "gloss": "slang",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.taiming",
+   "form": "タイミング",
+   "reading": "タイミング",
+   "gloss": "timing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.ma",
+   "form": "ま",
+   "reading": "ま",
+   "gloss": "pause, beat",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.komi",
+   "form": "こみ",
+   "reading": "こみ",
+   "gloss": "buildup",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.age",
+   "form": "あげ",
+   "reading": "あげ",
+   "gloss": "punchline delivery",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.saji",
+   "form": "さじ",
+   "reading": "さじ",
+   "gloss": "spoon (idiom)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.furi",
+   "form": "ふり",
+   "reading": "ふり",
+   "gloss": "pretense",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.kabe",
+   "form": "かべ",
+   "reading": "かべ",
+   "gloss": "wall",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.ai",
+   "form": "あい",
+   "reading": "あい",
+   "gloss": "love",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.sachi",
+   "form": "さち",
+   "reading": "さち",
+   "gloss": "happiness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.kin",
+   "form": "きん",
+   "reading": "きん",
+   "gloss": "gold",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.gin",
+   "form": "ぎん",
+   "reading": "ぎん",
+   "gloss": "silver",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.tsubo",
+   "form": "つぼ",
+   "reading": "つぼ",
+   "gloss": "jar",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.yane",
+   "form": "やね",
+   "reading": "やね",
+   "gloss": "roof",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.hashi",
+   "form": "はし",
+   "reading": "はし",
+   "gloss": "chopstick, bridge, edge",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.sora",
+   "form": "そら",
+   "reading": "そら",
+   "gloss": "sky",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.tori",
+   "form": "とり",
+   "reading": "とり",
+   "gloss": "bird",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.inaka",
+   "form": "いなか",
+   "reading": "いなか",
+   "gloss": "countryside",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play2.mura",
+   "form": "むら",
+   "reading": "むら",
+   "gloss": "village",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

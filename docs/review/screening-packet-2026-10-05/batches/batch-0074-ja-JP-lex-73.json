@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-73",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.history2.denko",
+   "form": "でんこう",
+   "reading": "でんこう",
+   "gloss": "transmission, passing down",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.kaisou",
+   "form": "かいそう",
+   "reading": "かいそう",
+   "gloss": "recollection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.senjo",
+   "form": "せんじょう",
+   "reading": "せんじょう",
+   "gloss": "prewar",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.sengo2",
+   "form": "せんご",
+   "reading": "せんご",
+   "gloss": "postwar",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.fukko",
+   "form": "ふっこう",
+   "reading": "ふっこう",
+   "gloss": "reconstruction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.seicho",
+   "form": "せいちょう",
+   "reading": "せいちょう",
+   "gloss": "growth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.kinkyo",
+   "form": "きんきょう",
+   "reading": "きんきょう",
+   "gloss": "economic crisis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.senryaku2",
+   "form": "せんりゃく",
+   "reading": "せんりゃく",
+   "gloss": "strategy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.seimen",
+   "form": "せいめん",
+   "reading": "せいめん",
+   "gloss": "facade",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.jissai",
+   "form": "じっさい",
+   "reading": "じっさい",
+   "gloss": "reality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.honne2",
+   "form": "ほんね",
+   "reading": "ほんね",
+   "gloss": "true intention",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.gijinka",
+   "form": "ぎじんか",
+   "reading": "ぎじんか",
+   "gloss": "personification",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.fuhai",
+   "form": "ふはい",
+   "reading": "ふはい",
+   "gloss": "distribution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.hyoujun",
+   "form": "ひょうじゅん",
+   "reading": "ひょうじゅん",
+   "gloss": "standard",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.kijun",
+   "form": "きじゅん",
+   "reading": "きじゅん",
+   "gloss": "norm, criterion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.ihan",
+   "form": "いはん",
+   "reading": "いはん",
+   "gloss": "deviation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.toui",
+   "form": "とうぎ",
+   "reading": "とうぎ",
+   "gloss": "discussion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.ruiji",
+   "form": "るいじ",
+   "reading": "るいじ",
+   "gloss": "analogy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.konkyo",
+   "form": "こんきょ",
+   "reading": "こんきょ",
+   "gloss": "basis, grounds",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.risou",
+   "form": "りそう",
+   "reading": "りそう",
+   "gloss": "ideal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.genjitsu",
+   "form": "げんじつ",
+   "reading": "げんじつ",
+   "gloss": "actuality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.kachi",
+   "form": "かち",
+   "reading": "かち",
+   "gloss": "value",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.kiso",
+   "form": "きそ",
+   "reading": "きそ",
+   "gloss": "foundation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.soshi",
+   "form": "そし",
+   "reading": "そし",
+   "gloss": "clue, hint",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.history2.kento",
+   "form": "けんとう",
+   "reading": "けんとう",
+   "gloss": "examination",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

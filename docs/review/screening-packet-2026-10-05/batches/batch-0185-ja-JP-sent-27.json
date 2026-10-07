@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-27",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.literary-vocabulary",
+   "text": "じょう の ぶんしょう を よみました。",
+   "gloss": "I read the text of the upper volume."
+  },
+  {
+   "id": "ja.sent.close-reading",
+   "text": "かんさつ の ほうほう を べんきょう しました。",
+   "gloss": "I studied methods of observation."
+  },
+  {
+   "id": "ja.sent.essay-on-novel",
+   "text": "きじゅつ の てきすと を べんきょう しました。",
+   "gloss": "I studied a descriptive text."
+  },
+  {
+   "id": "ja.sent.theatre-text",
+   "text": "せりふ の ちょうし を かんがえました。",
+   "gloss": "I considered the rhythm of the dialogue."
+  },
+  {
+   "id": "ja.sent.film-language",
+   "text": "えいが の ぶんぽう を べんきょう しました。",
+   "gloss": "I studied the grammar of film."
+  },
+  {
+   "id": "ja.sent.genre-analysis",
+   "text": "じょりゅう の ぶんるい を べんきょう しました。",
+   "gloss": "I studied the classification of genres."
+  },
+  {
+   "id": "ja.sent.director-style",
+   "text": "かんとく の はなし を ききました。",
+   "gloss": "I heard the director's talk."
+  },
+  {
+   "id": "ja.sent.camera-meaning",
+   "text": "かめら の うごき を かんさつ しました。",
+   "gloss": "I observed the camera's movement."
+  },
+  {
+   "id": "ja.sent.sound-design",
+   "text": "せつけい の ねっしん を べんきょう しました。",
+   "gloss": "I studied enthusiasm for design."
+  },
+  {
+   "id": "ja.sent.adaptation-study",
+   "text": "げんさく の てきすと を べんきょう しました。",
+   "gloss": "I studied the source text."
+  },
+  {
+   "id": "ja.sent.documentary-critique",
+   "text": "きろく の ぶんせき を かきました。",
+   "gloss": "I wrote an analysis of the record."
+  },
+  {
+   "id": "ja.sent.film-history",
+   "text": "えいがかん の れきし を べんきょう しました。",
+   "gloss": "I studied the history of cinemas."
+  },
+  {
+   "id": "ja.sent.scene-analysis",
+   "text": "えいが の じょうけい を ぶんせき しました。",
+   "gloss": "I analyzed a film scene."
+  },
+  {
+   "id": "ja.sent.cultural-film",
+   "text": "にほん の ふくしょく を べんきょう しました。",
+   "gloss": "I studied Japanese clothing."
+  },
+  {
+   "id": "ja.sent.festival-culture",
+   "text": "まつり の うみ を べんきょう しました。",
+   "gloss": "I studied the festival sea."
+  }
+ ]
+}

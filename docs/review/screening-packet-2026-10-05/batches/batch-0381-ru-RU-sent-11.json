@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-11",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.a2.u200",
+   "text": "Это значит да.",
+   "gloss": "This means yes."
+  },
+  {
+   "id": "ru.sent.a2.u201",
+   "text": "Это мнение.",
+   "gloss": "This is an opinion."
+  },
+  {
+   "id": "ru.sent.a2.u202",
+   "text": "Это абзац.",
+   "gloss": "This is a paragraph."
+  },
+  {
+   "id": "ru.sent.a2.u203",
+   "text": "Это пример.",
+   "gloss": "This is an example."
+  },
+  {
+   "id": "ru.sent.a2.u204",
+   "text": "Это начало.",
+   "gloss": "This is the beginning."
+  },
+  {
+   "id": "ru.sent.a2.u205",
+   "text": "Это память.",
+   "gloss": "This is memory."
+  },
+  {
+   "id": "ru.sent.a2.u206",
+   "text": "Это обещание.",
+   "gloss": "This is a promise."
+  },
+  {
+   "id": "ru.sent.a2.u207",
+   "text": "Это рассказ.",
+   "gloss": "This is a story."
+  },
+  {
+   "id": "ru.sent.a2.u208",
+   "text": "Это момент.",
+   "gloss": "This is a moment."
+  },
+  {
+   "id": "ru.sent.a2.u209",
+   "text": "Это вывод.",
+   "gloss": "This is the conclusion."
+  },
+  {
+   "id": "ru.sent.b1.u210",
+   "text": "Всё случилось вдруг.",
+   "gloss": "Everything happened suddenly."
+  },
+  {
+   "id": "ru.sent.b1.u211",
+   "text": "Это случилось неожиданно.",
+   "gloss": "It happened unexpectedly."
+  },
+  {
+   "id": "ru.sent.b1.u212",
+   "text": "Всё получилось.",
+   "gloss": "Everything worked out."
+  },
+  {
+   "id": "ru.sent.b1.u213",
+   "text": "Это финал.",
+   "gloss": "This is the end."
+  },
+  {
+   "id": "ru.sent.b1.u214",
+   "text": "Это было долго.",
+   "gloss": "It was long."
+  }
+ ]
+}

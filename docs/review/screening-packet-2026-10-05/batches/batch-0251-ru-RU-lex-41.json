@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-41",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.future2.realnost",
+   "form": "реальность",
+   "reading": "реа́льность",
+   "gloss": "reality",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future2.dejstvitelnost",
+   "form": "действительность",
+   "reading": "действи́тельность",
+   "gloss": "actuality",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future2.ispytanie",
+   "form": "испытание",
+   "reading": "испыта́ние",
+   "gloss": "trial, ordeal",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future2.izmerenie",
+   "form": "измерение",
+   "reading": "измере́ние",
+   "gloss": "measurement",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future2.razlichie",
+   "form": "различие",
+   "reading": "разли́чие",
+   "gloss": "difference",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future2.shodstvo",
+   "form": "сходство",
+   "reading": "схо́дство",
+   "gloss": "similarity",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future2.otlichie",
+   "form": "отличие",
+   "reading": "отли́чие",
+   "gloss": "distinction",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future2.osobennost",
+   "form": "особенность",
+   "reading": "осо́бенность",
+   "gloss": "feature",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future2.specifika",
+   "form": "специфика",
+   "reading": "специ́фика",
+   "gloss": "specificity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future2.proporciya",
+   "form": "пропорция",
+   "reading": "пропо́рция",
+   "gloss": "proportion",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future2.sootnoshenie",
+   "form": "соотношение",
+   "reading": "соотноше́ние",
+   "gloss": "ratio",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future2.balans",
+   "form": "баланс",
+   "reading": "бала́нс",
+   "gloss": "balance",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.future2.ravnovesie",
+   "form": "равновесие",
+   "reading": "равнове́сие",
+   "gloss": "equilibrium",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future2.pereves",
+   "form": "перевес",
+   "reading": "переве́с",
+   "gloss": "preponderance",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.future2.preimushchestvo",
+   "form": "преимущество",
+   "reading": "преиму́щество",
+   "gloss": "advantage",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future2.nedostatok",
+   "form": "недостаток",
+   "reading": "недоста́ток",
+   "gloss": "shortcoming",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.future2.plyus",
+   "form": "плюс",
+   "reading": "плюс",
+   "gloss": "plus",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future2.minus",
+   "form": "минус",
+   "reading": "ми́нус",
+   "gloss": "minus",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future2.vygoda",
+   "form": "выгода",
+   "reading": "вы́года",
+   "gloss": "benefit",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future2.vklad",
+   "form": "вклад",
+   "reading": "вклад",
+   "gloss": "contribution",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.future2.trud",
+   "form": "труд",
+   "reading": "труд",
+   "gloss": "labor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.future2.hobbi",
+   "form": "хобби",
+   "reading": "хо́бби",
+   "gloss": "hobby",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future2.uvlechenie",
+   "form": "увлечение",
+   "reading": "увлече́ние",
+   "gloss": "hobby, passion",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future2.strast",
+   "form": "страсть",
+   "reading": "страсть",
+   "gloss": "passion",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future2.prizvanie",
+   "form": "призвание",
+   "reading": "призва́ние",
+   "gloss": "calling",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

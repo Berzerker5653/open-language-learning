@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-57",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.messages2.rasskaz",
+   "form": "рассказ",
+   "reading": "расска́з",
+   "gloss": "story, account",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages2.priklyuchenie",
+   "form": "приключение",
+   "reading": "приключе́ние",
+   "gloss": "adventure",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.messages2.podrobnost",
+   "form": "подробность",
+   "reading": "подро́бность",
+   "gloss": "detail",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.messages2.epizod",
+   "form": "эпизод",
+   "reading": "эпизо́д",
+   "gloss": "episode",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.messages2.smeshnoi",
+   "form": "смешной",
+   "reading": "смешно́й",
+   "gloss": "funny",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.sperva",
+   "form": "сперва",
+   "reading": "сперва́",
+   "gloss": "first of all",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.vdrug",
+   "form": "вдруг",
+   "reading": "вдруг",
+   "gloss": "suddenly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.vskore",
+   "form": "вскоре",
+   "reading": "вско́ре",
+   "gloss": "soon, shortly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.totchas",
+   "form": "тотчас",
+   "reading": "то́тчас",
+   "gloss": "at once, immediately",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.tem-vremenem",
+   "form": "тем временем",
+   "reading": "тем вре́менем",
+   "gloss": "meanwhile",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.neozhidanno",
+   "form": "неожиданно",
+   "reading": "неожи́данно",
+   "gloss": "unexpectedly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.okazalos",
+   "form": "оказалось",
+   "reading": "оказа́лось",
+   "gloss": "it turned out",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.vyyasnilos",
+   "form": "выяснилось",
+   "reading": "вы́яснилось",
+   "gloss": "it turned out that",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.sluchilos",
+   "form": "случилось",
+   "reading": "случи́лось",
+   "gloss": "it happened",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.proizoshlo",
+   "form": "произошло",
+   "reading": "произошло́",
+   "gloss": "it occurred",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.poluchilos",
+   "form": "получилось",
+   "reading": "получи́лось",
+   "gloss": "it worked out",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.udalos",
+   "form": "удалось",
+   "reading": "удало́сь",
+   "gloss": "managed to",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.vyshlo",
+   "form": "вышло",
+   "reading": "вы́шло",
+   "gloss": "it turned out",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.narration.udacha",
+   "form": "удача",
+   "reading": "уда́ча",
+   "gloss": "luck, success",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.narration.proval",
+   "form": "провал",
+   "reading": "прова́л",
+   "gloss": "failure, flop",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration.posledstvie",
+   "form": "последствие",
+   "reading": "после́дствие",
+   "gloss": "consequence",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.narration.final",
+   "form": "финал",
+   "reading": "фина́л",
+   "gloss": "finale, end",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration.razvyazka",
+   "form": "развязка",
+   "reading": "развя́зка",
+   "gloss": "denouement, outcome",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.narration.jeffekt",
+   "form": "эффект",
+   "reading": "эффе́кт",
+   "gloss": "effect",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration.hod",
+   "form": "ход",
+   "reading": "ход",
+   "gloss": "course, progress",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

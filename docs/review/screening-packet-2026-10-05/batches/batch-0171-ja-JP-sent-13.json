@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-13",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.grievance-box",
+   "text": "ふまんいれに けんかいで のんきな はなしが でました。",
+   "gloss": "A light topic came up at the luncheon about the grievance box."
+  },
+  {
+   "id": "ja.sent.senpai-help",
+   "text": "せんぱいに しょくば-りょうを おしえて もらいました。",
+   "gloss": "A senior taught me workplace etiquette."
+  },
+  {
+   "id": "ja.sent.escalation-apology",
+   "text": "もうしわけありません、すぐ しょうほうに かいとうします。",
+   "gloss": "I apologize; I will respond to the complaint right away."
+  },
+  {
+   "id": "ja.sent.presentation-structure",
+   "text": "こうぎの じゅぎょうりゃくを 3てん に まとめました。",
+   "gloss": "I summarized the lecture notes into three points."
+  },
+  {
+   "id": "ja.sent.network-message",
+   "text": "しゅめい の おり に せんせい と あいさつ しました。",
+   "gloss": "I greeted the professor at the assembly."
+  },
+  {
+   "id": "ja.sent.promotion-talk",
+   "text": "ひょうか の かい で しょうほう を もらいました。",
+   "gloss": "At the review meeting I received praise."
+  },
+  {
+   "id": "ja.sent.university-system",
+   "text": "だいがくいん の にゅうし を けんきゅう しています。",
+   "gloss": "I am researching graduate school entrance exams."
+  },
+  {
+   "id": "ja.sent.essay-impression",
+   "text": "ぶんしょう の いんしょう を せんせい に つたえました。",
+   "gloss": "I conveyed the impression of the writing to the teacher."
+  },
+  {
+   "id": "ja.sent.topic-choice",
+   "text": "せんたい を きめる のに 2しゅうかん かかりました。",
+   "gloss": "It took two weeks to choose the topic."
+  },
+  {
+   "id": "ja.sent.paragraph-point",
+   "text": "だんしゃく ごとに てん を ひとつ に します。",
+   "gloss": "One point per paragraph."
+  },
+  {
+   "id": "ja.sent.evidence-conclusion",
+   "text": "けんじ が あれば けつろん が つよいです。",
+   "gloss": "With evidence the conclusion is strong."
+  },
+  {
+   "id": "ja.sent.abroad-prep",
+   "text": "りゅうがく の じゅんび で しゅくふく を さがしています。",
+   "gloss": "I am looking for lodging while preparing to study abroad."
+  },
+  {
+   "id": "ja.sent.scholarship-form",
+   "text": "しょうがくきん の しんせいしょう を かきました。",
+   "gloss": "I filled out the scholarship application form."
+  },
+  {
+   "id": "ja.sent.degree-talk",
+   "text": "だいがく の せんもん について はなしました。",
+   "gloss": "We talked about university specialties."
+  },
+  {
+   "id": "ja.sent.exam-plan",
+   "text": "じかんわり を つくって しけんの せんりゃく を たてました。",
+   "gloss": "I made a time plan and set an exam strategy."
+  }
+ ]
+}

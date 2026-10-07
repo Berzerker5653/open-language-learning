@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-14",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.art2.yogen",
+   "form": "よげん",
+   "reading": "よげん",
+   "gloss": "prediction, prophecy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.taion",
+   "form": "たいおん",
+   "reading": "たいおん",
+   "gloss": "body temperature",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.shoumyou",
+   "form": "しょうめい",
+   "reading": "しょうめい",
+   "gloss": "symptom",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.byoutai",
+   "form": "びょうたい",
+   "reading": "びょうたい",
+   "gloss": "patient's condition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.nyuuyin",
+   "form": "にゅういん",
+   "reading": "にゅういん",
+   "gloss": "hospitalization",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.geka",
+   "form": "げか",
+   "reading": "げか",
+   "gloss": "surgery",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.naishou",
+   "form": "ないしょう",
+   "reading": "ないしょう",
+   "gloss": "internal medicine",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.shoukouna",
+   "form": "しょうこうな",
+   "reading": "しょうこうな",
+   "gloss": "minor; mild",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.joushou",
+   "form": "じょうしょう",
+   "reading": "じょうしょう",
+   "gloss": "improvement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.fukkyuu",
+   "form": "ふっきゅう",
+   "reading": "ふっきゅう",
+   "gloss": "recovery",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.yochou",
+   "form": "ようちょう",
+   "reading": "ようちょう",
+   "gloss": "health management",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.taiku",
+   "form": "たいく",
+   "reading": "たいく",
+   "gloss": "exercise",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.junyou",
+   "form": "じゅんよう",
+   "reading": "じゅんよう",
+   "gloss": "regularity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.seikatsu-sukan",
+   "form": "せいかつすかん",
+   "reading": "せいかつすかん",
+   "gloss": "lifestyle habit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.fumin",
+   "form": "ふみん",
+   "reading": "ふみん",
+   "gloss": "insomnia",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.shoujiki",
+   "form": "しょうじき",
+   "reading": "しょうじき",
+   "gloss": "honesty",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.kounyuu",
+   "form": "こうにゅう",
+   "reading": "こうにゅう",
+   "gloss": "admission",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.hoken",
+   "form": "ほけん",
+   "reading": "ほけん",
+   "gloss": "insurance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.hokenshou",
+   "form": "ほけんしょう",
+   "reading": "ほけんしょう",
+   "gloss": "insurance card",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.shinryou-shin",
+   "form": "しんりょうしん",
+   "reading": "しんりょうしん",
+   "gloss": "consultation fee",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.tetsuzuki",
+   "form": "てつづき",
+   "reading": "てつづき",
+   "gloss": "procedure; paperwork",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.touki",
+   "form": "とうき",
+   "reading": "とうき",
+   "gloss": "waiting time",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.mawari",
+   "form": "まわり",
+   "reading": "まわり",
+   "gloss": "surroundings",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.fukutai",
+   "form": "ふくたい",
+   "reading": "ふくたい",
+   "gloss": "abdomen",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.body.kata-kori",
+   "form": "かたこり",
+   "reading": "かたこり",
+   "gloss": "shoulder stiffness",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

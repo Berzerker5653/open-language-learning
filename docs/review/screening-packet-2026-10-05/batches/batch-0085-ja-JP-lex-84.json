@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-84",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.ling2.jidai",
+   "form": "じだい",
+   "reading": "じだい",
+   "gloss": "era, period",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.kindai",
+   "form": "きんだい",
+   "reading": "きんだい",
+   "gloss": "modern era",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.bogo",
+   "form": "ぼご",
+   "reading": "ぼご",
+   "gloss": "mother tongue",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.moji",
+   "form": "もじ",
+   "reading": "もじ",
+   "gloss": "character, letter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.shiyou",
+   "form": "しよう",
+   "reading": "しよう",
+   "gloss": "use, usage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.gakushuu",
+   "form": "がくしゅう",
+   "reading": "がくしゅう",
+   "gloss": "learning, study",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.kakikata",
+   "form": "かきかた",
+   "reading": "かきかた",
+   "gloss": "way of writing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.hyouki",
+   "form": "ひょうき",
+   "reading": "ひょうき",
+   "gloss": "notation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.shutoku",
+   "form": "しゅとく",
+   "reading": "しゅとく",
+   "gloss": "acquisition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.gikou",
+   "form": "ぎこう",
+   "reading": "ぎこう",
+   "gloss": "device, ingenuity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.fuyuukyo",
+   "form": "ふゆうきょう",
+   "reading": "ふゆうきょう",
+   "gloss": "foreign language education",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.kouzou",
+   "form": "こうぞう",
+   "reading": "こうぞう",
+   "gloss": "structure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.gendai",
+   "form": "げんだい",
+   "reading": "げんだい",
+   "gloss": "present day",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.bilingual",
+   "form": "ばいりんがる",
+   "reading": "ばいりんがる",
+   "gloss": "bilingual",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.nikokugo",
+   "form": "にこくご",
+   "reading": "にこくご",
+   "gloss": "two languages",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.tsuuyaku",
+   "form": "つうやく",
+   "reading": "つうやく",
+   "gloss": "interpretation, oral translation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.honyaku",
+   "form": "ほんやく",
+   "reading": "ほんやく",
+   "gloss": "translation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.yakusha",
+   "form": "やくしゃ",
+   "reading": "やくしゃ",
+   "gloss": "interpreter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.honyakusha",
+   "form": "ほんやくしゃ",
+   "reading": "ほんやくしゃ",
+   "gloss": "translator",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.kanji2",
+   "form": "かんじ",
+   "reading": "かんじ",
+   "gloss": "kanji character",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.taiou",
+   "form": "たいおう",
+   "reading": "たいおう",
+   "gloss": "corresponding",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.kana2",
+   "form": "かな",
+   "reading": "かな",
+   "gloss": "kana script",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling2.koutei",
+   "form": "こうてい",
+   "reading": "こうてい",
+   "gloss": "process, course",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling3.korpusu",
+   "form": "こーぷす",
+   "reading": "こーぷす",
+   "gloss": "corpus",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ling3.bunseki2",
+   "form": "ぶんせき",
+   "reading": "ぶんせき",
+   "gloss": "analysis",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-153",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.work.shukudai",
+   "form": "しゅくだい",
+   "reading": "しゅくだい",
+   "gloss": "homework",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.tesuto",
+   "form": "てすと",
+   "reading": "てすと",
+   "gloss": "test; exam",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.jugyou",
+   "form": "じゅぎょう",
+   "reading": "じゅぎょう",
+   "gloss": "class; lesson",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.kaigi",
+   "form": "かいぎ",
+   "reading": "かいぎ",
+   "gloss": "meeting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.benkyou",
+   "form": "べんきょう",
+   "reading": "べんきょう",
+   "gloss": "study",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.kyoukasho",
+   "form": "きょうかしょ",
+   "reading": "きょうかしょ",
+   "gloss": "textbook",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.nobun",
+   "form": "のぶん",
+   "reading": "のぶん",
+   "gloss": "notebook",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.pen",
+   "form": "ぺん",
+   "reading": "ぺん",
+   "gloss": "pen",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.kaban",
+   "form": "かばん",
+   "reading": "かばん",
+   "gloss": "bag; briefcase",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.meishi",
+   "form": "めいし",
+   "reading": "めいし",
+   "gloss": "business card",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.shigyou",
+   "form": "しぎょう",
+   "reading": "しぎょう",
+   "gloss": "working hours",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.yaku",
+   "form": "やく",
+   "reading": "やく",
+   "gloss": "role; duty",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.team",
+   "form": "ちーむ",
+   "reading": "ちーむ",
+   "gloss": "team",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.boshu",
+   "form": "ぼしゅう",
+   "reading": "ぼしゅう",
+   "gloss": "job opening; recruitment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.intabyuu",
+   "form": "いんたびゅー",
+   "reading": "いんたびゅー",
+   "gloss": "interview",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.katsudou",
+   "form": "かつどう",
+   "reading": "かつどう",
+   "gloss": "activity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.kanpai",
+   "form": "かんぱい",
+   "reading": "かんぱい",
+   "gloss": "drinking party",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.jissen",
+   "form": "じっけん",
+   "reading": "じっけん",
+   "gloss": "experiment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.kyuuka",
+   "form": "きゅうか",
+   "reading": "きゅうか",
+   "gloss": "day off; holiday from work/school",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.zangyou",
+   "form": "ざんぎょう",
+   "reading": "ざんぎょう",
+   "gloss": "overtime work",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.juku",
+   "form": "じゅく",
+   "reading": "じゅく",
+   "gloss": "cram school",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.semina",
+   "form": "せみなー",
+   "reading": "せみなー",
+   "gloss": "seminar",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.shiryou",
+   "form": "しりょう",
+   "reading": "しりょう",
+   "gloss": "materials; handouts",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.chousa",
+   "form": "ちょうさ",
+   "reading": "ちょうさ",
+   "gloss": "research; investigation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.hakkou",
+   "form": "はっこう",
+   "reading": "はっこう",
+   "gloss": "mailing; posting",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-95",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.sci.etalonnyy",
+   "form": "эталонный",
+   "reading": "этало́нный",
+   "gloss": "reference, standard (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.zamerit",
+   "form": "замерить",
+   "reading": "заме́рить",
+   "gloss": "to measure",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.izmerimyy",
+   "form": "измеримый",
+   "reading": "измери́мый",
+   "gloss": "measurable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.neizmerimyy",
+   "form": "неизмеримый",
+   "reading": "неизмери́мый",
+   "gloss": "unmeasurable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.statisticheskiy",
+   "form": "статистический",
+   "reading": "статисти́ческий",
+   "gloss": "statistical",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.vyborochnyy",
+   "form": "выборочный",
+   "reading": "вы́борочный",
+   "gloss": "sample-based",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.mediana",
+   "form": "медиана",
+   "reading": "медиа́на",
+   "gloss": "median",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.dispersiya",
+   "form": "дисперсия",
+   "reading": "диспе́рсия",
+   "gloss": "variance, dispersion",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.estestvoznanie",
+   "form": "естествознание",
+   "reading": "естествозна́ние",
+   "gloss": "natural science",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.issledovatelskiy",
+   "form": "исследовательский",
+   "reading": "иссле́довательский",
+   "gloss": "research (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.laboratornyy",
+   "form": "лабораторный",
+   "reading": "лаборато́рный",
+   "gloss": "laboratory (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.apparatura",
+   "form": "аппаратура",
+   "reading": "аппарату́ра",
+   "gloss": "apparatus, equipment",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.eksperimentalnyy",
+   "form": "экспериментальный",
+   "reading": "эксперимента́льный",
+   "gloss": "experimental",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.eksperimentirovat",
+   "form": "экспериментировать",
+   "reading": "эксперименти́ровать",
+   "gloss": "to experiment",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.datchik",
+   "form": "датчик",
+   "reading": "да́тчик",
+   "gloss": "sensor, detector",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.sensor",
+   "form": "сенсор",
+   "reading": "се́нсор",
+   "gloss": "sensor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.graduirovka",
+   "form": "градуировка",
+   "reading": "градуиро́вка",
+   "gloss": "graduation, scaling",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.kalibrovka",
+   "form": "калибровка",
+   "reading": "калибро́вка",
+   "gloss": "calibration",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.kalibrovat",
+   "form": "калибровать",
+   "reading": "калиброва́ть",
+   "gloss": "to calibrate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.udelnyy",
+   "form": "удельный",
+   "reading": "уде́льный",
+   "gloss": "specific (per unit)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.zagryznitel",
+   "form": "загрязнитель",
+   "reading": "загрязни́тель",
+   "gloss": "pollutant",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.stochnyy",
+   "form": "сточный",
+   "reading": "сто́чный",
+   "gloss": "sewage, effluent (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.filtraciya",
+   "form": "фильтрация",
+   "reading": "фильтра́ция",
+   "gloss": "filtration",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.ochistnoy",
+   "form": "очистной",
+   "reading": "очистно́й",
+   "gloss": "purification (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.sbros",
+   "form": "сброс",
+   "reading": "сброс",
+   "gloss": "discharge",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

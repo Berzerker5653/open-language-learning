@@ -1,0 +1,97 @@
+{
+ "batch_id": "ja-JP-assess-3",
+ "kind": "assess",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.assess.communication",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "make a simple phone/email contact and give a short reply using reason forms",
+    "ask and answer questions about language learning without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.weather-seasons",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "describe weather and seasons using forecast and temperature words",
+    "express a contrast with のに and a reason with ので without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.entertainment",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "talk about entertainment preferences and an event using past tense and effort forms",
+    "describe a team sport or performance without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.sports-fitness",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "describe a training or fitness routine using exercise vocabulary and effort forms",
+    "report what a coach or friend said using quotative forms without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.relationships",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "describe family and friends using relationship words and memory forms",
+    "express feelings and desires with ように and と without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.daily-admin",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "handle an appointment, application, or payment exchange using admin vocabulary",
+    "confirm and change plans using confirmation and change words without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.work-professional",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "exchange opinions, suggestions, and decisions in a meeting using work vocabulary",
+    "handle a report, feedback, or contract-document exchange without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.education-academic",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "describe university structure, classes, and assessment using academic vocabulary",
+    "summarize a lecture or essay point without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.media-news",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "summarize a news article and distinguish fact from speculation",
+    "discuss media habits or a broadcast item without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.technology",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "describe device, account, and privacy settings and ask for help with software",
+    "explain an online-service problem and its fix without blocking errors"
+   ]
+  }
+ ]
+}

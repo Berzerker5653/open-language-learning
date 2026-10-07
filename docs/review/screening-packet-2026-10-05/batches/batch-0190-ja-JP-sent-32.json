@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-32",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.conflict-resolution",
+   "text": "こうしょう の ほうほう を べんきょう しました。",
+   "gloss": "I studied the negotiation method."
+  },
+  {
+   "id": "ja.sent.resource-politics",
+   "text": "せいさん の きじ を よみました。",
+   "gloss": "I read the production article."
+  },
+  {
+   "id": "ja.sent.global-cities",
+   "text": "とし の じょうほう を あつめました。",
+   "gloss": "I gathered city information."
+  },
+  {
+   "id": "ja.sent.tourism-impact",
+   "text": "せきにん の ぎろん を べんきょう しました。",
+   "gloss": "I studied the responsibility debate."
+  },
+  {
+   "id": "ja.sent.supply-chains",
+   "text": "こうりゅう の ぶんみゃく を べんきょう しました。",
+   "gloss": "I studied the context of flows."
+  },
+  {
+   "id": "ja.sent.global-governance",
+   "text": "ほういつ の せいさく について かきました。",
+   "gloss": "I wrote about lawmaking."
+  },
+  {
+   "id": "ja.sent.thesis-construction",
+   "text": "ろんぶん を かきました。",
+   "gloss": "I wrote the essay."
+  },
+  {
+   "id": "ja.sent.literature-review",
+   "text": "ぶんこ を あつめました。",
+   "gloss": "I gathered the literature."
+  },
+  {
+   "id": "ja.sent.methodology-basics",
+   "text": "ぶんせき の さくほう を べんきょう しました。",
+   "gloss": "I studied the analysis method."
+  },
+  {
+   "id": "ja.sent.academic-hedging",
+   "text": "ようほう の ぶんしょう を べんきょう しました。",
+   "gloss": "I studied the prediction passage."
+  },
+  {
+   "id": "ja.sent.formal-style",
+   "text": "きじゅつ の ぶんしょう を よみました。",
+   "gloss": "I read the description passage."
+  },
+  {
+   "id": "ja.sent.paragraph-cohesion",
+   "text": "せつぞく の きほん を べんきょう しました。",
+   "gloss": "I studied the basics of cohesion."
+  },
+  {
+   "id": "ja.sent.counter-evidence",
+   "text": "はんろん を ひとつ かきました。",
+   "gloss": "I wrote one counterargument."
+  },
+  {
+   "id": "ja.sent.abstract-writing",
+   "text": "ようやく を かきました。",
+   "gloss": "I wrote the abstract."
+  },
+  {
+   "id": "ja.sent.conference-talk",
+   "text": "はっぴょう の じゅんび を しました。",
+   "gloss": "I prepared the presentation."
+  }
+ ]
+}

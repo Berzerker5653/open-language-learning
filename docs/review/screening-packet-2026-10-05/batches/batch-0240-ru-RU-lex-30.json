@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-30",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.culture.klassika",
+   "form": "классика",
+   "reading": "кла́ссика",
+   "gloss": "classics",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.culture.obyavlenie",
+   "form": "объявление",
+   "reading": "объявле́ние",
+   "gloss": "announcement",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.culture.priglashenie",
+   "form": "приглашение",
+   "reading": "приглаше́ние",
+   "gloss": "invitation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.culture.programmka",
+   "form": "программка",
+   "reading": "програ́ммка",
+   "gloss": "program (booklet)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.culture.ansambl",
+   "form": "ансамбль",
+   "reading": "анса́мбль",
+   "gloss": "ensemble",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.orkestr",
+   "form": "оркестр",
+   "reading": "орке́стр",
+   "gloss": "orchestra",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.dirizhyor",
+   "form": "дирижёр",
+   "reading": "дириже́р",
+   "gloss": "conductor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.tancor",
+   "form": "танцор",
+   "reading": "танцо́р",
+   "gloss": "dancer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.kostyum",
+   "form": "костюм",
+   "reading": "костю́м",
+   "gloss": "costume",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.culture.dekoracii",
+   "form": "декорации",
+   "reading": "декора́ции",
+   "gloss": "set design (pl)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.everyday.eto",
+   "form": "это",
+   "reading": "э́то",
+   "gloss": "this; that (unchanging identification word in this lesson)",
+   "pos": "particle",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.everyday.dom",
+   "form": "дом",
+   "reading": "дом",
+   "gloss": "house; home",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.everyday.stol",
+   "form": "стол",
+   "reading": "стол",
+   "gloss": "table",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.everyday.kniga",
+   "form": "книга",
+   "reading": "кни́га",
+   "gloss": "book",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.everyday.mama",
+   "form": "мама",
+   "reading": "ма́ма",
+   "gloss": "mother; mom",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.everyday.papa",
+   "form": "папа",
+   "reading": "па́па",
+   "gloss": "father; dad",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.everyday.drug",
+   "form": "друг",
+   "reading": "друг",
+   "gloss": "friend (male)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.everyday.podruga",
+   "form": "подруга",
+   "reading": "подру́га",
+   "gloss": "friend (female)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.everyday.ruchka",
+   "form": "ручка",
+   "reading": "ру́чка",
+   "gloss": "pen (writing instrument)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.everyday.stul",
+   "form": "стул",
+   "reading": "стул",
+   "gloss": "chair",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.experiences.perezivanie",
+   "form": "переживание",
+   "reading": "пережива́ние",
+   "gloss": "experience, ordeal",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.experiences.vospominanie",
+   "form": "воспоминание",
+   "reading": "воспомина́ние",
+   "gloss": "memory, recollection",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.experiences.prezhde",
+   "form": "прежде",
+   "reading": "пре́жде",
+   "gloss": "before, formerly",
+   "pos": "preposition",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.vpervye",
+   "form": "впервые",
+   "reading": "впервы́е",
+   "gloss": "for the first time",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.experiences.ni-razu",
+   "form": "ни разу",
+   "reading": "ни ра́зу",
+   "gloss": "not once, never",
+   "pos": "phrase",
+   "gender": ""
+  }
+ ]
+}

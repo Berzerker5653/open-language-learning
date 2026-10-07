@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-77",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.humor2.kao",
+   "form": "かお",
+   "reading": "かお",
+   "gloss": "face",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.humor2.mune",
+   "form": "むね",
+   "reading": "むね",
+   "gloss": "chest, heart",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.humor2.onake",
+   "form": "おなか",
+   "reading": "おなか",
+   "gloss": "stomach",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.humor2.atama",
+   "form": "あたま",
+   "reading": "あたま",
+   "gloss": "head",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.humor2.me2",
+   "form": "め",
+   "reading": "め",
+   "gloss": "eye",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.humor2.mimi",
+   "form": "みみ",
+   "reading": "みみ",
+   "gloss": "ear",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.humor2.kuchi",
+   "form": "くち",
+   "reading": "くち",
+   "gloss": "mouth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.houritsu",
+   "form": "ほうりつ",
+   "reading": "ほうりつ",
+   "gloss": "law",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.hourei",
+   "form": "ほうれい",
+   "reading": "ほうれい",
+   "gloss": "decree",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.houan",
+   "form": "ほうあん",
+   "reading": "ほうあん",
+   "gloss": "bill",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.houkou",
+   "form": "ほうこう",
+   "reading": "ほうこう",
+   "gloss": "regulation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.jourei",
+   "form": "じょうれい",
+   "reading": "じょうれい",
+   "gloss": "ordinance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.saiban",
+   "form": "さいばん",
+   "reading": "さいばん",
+   "gloss": "trial",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.saibansho",
+   "form": "さいばんしょ",
+   "reading": "さいばんしょ",
+   "gloss": "court",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.saibanin",
+   "form": "さいばんいん",
+   "reading": "さいばんいん",
+   "gloss": "lay judge",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.kensatsu",
+   "form": "けんさつ",
+   "reading": "けんさつ",
+   "gloss": "prosecution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.shikoku",
+   "form": "しこく",
+   "reading": "しこく",
+   "gloss": "prosecution office",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.saimu",
+   "form": "さいむ",
+   "reading": "さいむ",
+   "gloss": "debt",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.sonin",
+   "form": "そんにん",
+   "reading": "そんにん",
+   "gloss": "damage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.baisou",
+   "form": "ばいしょう",
+   "reading": "ばいしょう",
+   "gloss": "compensation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.chukan",
+   "form": "ちゅうかん",
+   "reading": "ちゅうかん",
+   "gloss": "mediation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.uttaa",
+   "form": "うったえ",
+   "reading": "うったえ",
+   "gloss": "lawsuit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.hanza",
+   "form": "はんざ",
+   "reading": "はんざ",
+   "gloss": "crime",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.hannin",
+   "form": "はんにん",
+   "reading": "はんにん",
+   "gloss": "criminal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.keiji",
+   "form": "けいじ",
+   "reading": "けいじ",
+   "gloss": "criminal case",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

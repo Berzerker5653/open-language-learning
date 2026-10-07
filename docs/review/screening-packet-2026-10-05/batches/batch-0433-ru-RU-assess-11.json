@@ -1,0 +1,107 @@
+{
+ "batch_id": "ru-RU-assess-11",
+ "kind": "assess",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.assess.b2.negotiation-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify refusal words (отказывать, наотрез) in a supplied exchange.",
+    "Match я не могу chunks to their refusal.",
+    "Distinguish firm (ультиматум) from soft (мягкость) tone."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.negotiation-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Refuse with the supplied я не могу chunk.",
+    "Make a firm request with the supplied настоятельно прошу chunk.",
+    "Keep the reply корректный using taught forms only."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.society-policy-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify public-service words (госуслуга, льготник) in a supplied notice.",
+    "Match государство обеспечивает chunks to what is provided.",
+    "Distinguish quantitative (количественный) from qualitative (качественный) claims."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.society-policy-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "State a need with the supplied в интересах chunk.",
+    "File a request with the supplied ходатайство chunk.",
+    "Justify with taught forms only."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.science-environment-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify method words (калибровка, выборочный) in a supplied report.",
+    "Match зависит от chunks to their dependence.",
+    "Distinguish renewable (возобновляемый) from non-renewable (невозобновляемый)."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.science-environment-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "State a conclusion with the supplied следовательно chunk.",
+    "Express dependence with the supplied зависит от chunk.",
+    "Use taught forms only."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.culture-perspectives-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify structure words (эпилог, пролог) in a supplied extract.",
+    "Match на мой взгляд chunks to their interpretation.",
+    "Distinguish ironic (иронический) from sarcastic (саркастический) tone."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.culture-perspectives-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Give a response with the supplied на мой взгляд chunk.",
+    "Frame reading with the supplied сквозь призму chunk.",
+    "Use taught forms only."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.style-register-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Distinguish literal (буквальный) from figurative (переносный) meaning in a supplied sentence.",
+    "Match имеет в виду chunks to their intended referent.",
+    "Identify the term (термин) among stylistically neutral words."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.style-register-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "State intended meaning with the supplied имеет в виду chunk.",
+    "Restate with the supplied иначе говоря chunk.",
+    "Use taught forms only."
+   ]
+  }
+ ]
+}

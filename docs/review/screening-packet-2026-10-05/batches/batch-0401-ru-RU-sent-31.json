@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-31",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u500",
+   "text": "Это сверка.",
+   "gloss": "This is a cross-check."
+  },
+  {
+   "id": "ru.sent.b2.u501",
+   "text": "Это фокус.",
+   "gloss": "This is a focus."
+  },
+  {
+   "id": "ru.sent.b2.u502",
+   "text": "Это слой.",
+   "gloss": "This is a layer."
+  },
+  {
+   "id": "ru.sent.b2.u503",
+   "text": "Это канва.",
+   "gloss": "This is a framework."
+  },
+  {
+   "id": "ru.sent.b2.u504",
+   "text": "Это эскиз.",
+   "gloss": "This is a sketch."
+  },
+  {
+   "id": "ru.sent.b2.u505",
+   "text": "Это эссе.",
+   "gloss": "This is an essay."
+  },
+  {
+   "id": "ru.sent.b2.u506",
+   "text": "Это хроника.",
+   "gloss": "This is a chronicle."
+  },
+  {
+   "id": "ru.sent.b2.u507",
+   "text": "Это категория.",
+   "gloss": "This is a category."
+  },
+  {
+   "id": "ru.sent.b2.u508",
+   "text": "Это контраст.",
+   "gloss": "This is a contrast."
+  },
+  {
+   "id": "ru.sent.b2.u509",
+   "text": "Это туман.",
+   "gloss": "This is fog."
+  },
+  {
+   "id": "ru.sent.b2.u510",
+   "text": "Это разногласие.",
+   "gloss": "This is a disagreement."
+  },
+  {
+   "id": "ru.sent.b2.u511",
+   "text": "Это консенсус.",
+   "gloss": "This is a consensus."
+  },
+  {
+   "id": "ru.sent.b2.u512",
+   "text": "Это резонанс.",
+   "gloss": "This is a resonance."
+  },
+  {
+   "id": "ru.sent.b2.u513",
+   "text": "Это отклик.",
+   "gloss": "This is a response."
+  },
+  {
+   "id": "ru.sent.b2.u514",
+   "text": "Это расхождение.",
+   "gloss": "This is a divergence."
+  }
+ ]
+}

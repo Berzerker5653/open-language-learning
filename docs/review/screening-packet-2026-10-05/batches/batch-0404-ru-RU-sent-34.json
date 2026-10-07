@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-34",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u545",
+   "text": "Это функция.",
+   "gloss": "This is a function."
+  },
+  {
+   "id": "ru.sent.b2.u546",
+   "text": "Это цепь.",
+   "gloss": "This is a chain."
+  },
+  {
+   "id": "ru.sent.b2.u547",
+   "text": "Это зона.",
+   "gloss": "This is a zone."
+  },
+  {
+   "id": "ru.sent.b2.u548",
+   "text": "Это макет.",
+   "gloss": "This is a mockup."
+  },
+  {
+   "id": "ru.sent.b2.u549",
+   "text": "Это миф.",
+   "gloss": "This is a myth."
+  },
+  {
+   "id": "ru.sent.b2.u550",
+   "text": "Это стадия.",
+   "gloss": "This is a stage."
+  },
+  {
+   "id": "ru.sent.b2.u551",
+   "text": "Это алгоритм.",
+   "gloss": "This is an algorithm."
+  },
+  {
+   "id": "ru.sent.b2.u552",
+   "text": "Это рецепт.",
+   "gloss": "This is a recipe."
+  },
+  {
+   "id": "ru.sent.b2.u553",
+   "text": "Это указание.",
+   "gloss": "This is an instruction."
+  },
+  {
+   "id": "ru.sent.b2.u554",
+   "text": "Это ограничение.",
+   "gloss": "This is a limitation."
+  },
+  {
+   "id": "ru.sent.b2.u555",
+   "text": "Это лимит.",
+   "gloss": "This is a limit."
+  },
+  {
+   "id": "ru.sent.b2.u556",
+   "text": "Это барьер.",
+   "gloss": "This is a barrier."
+  },
+  {
+   "id": "ru.sent.b2.u557",
+   "text": "Это доступ.",
+   "gloss": "This is access."
+  },
+  {
+   "id": "ru.sent.b2.u558",
+   "text": "Это тайна.",
+   "gloss": "This is a secret."
+  },
+  {
+   "id": "ru.sent.b2.u559",
+   "text": "Это вектор.",
+   "gloss": "This is a vector."
+  }
+ ]
+}

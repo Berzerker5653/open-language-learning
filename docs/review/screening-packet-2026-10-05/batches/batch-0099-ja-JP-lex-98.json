@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-98",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.narrative.koe",
+   "form": "こえ",
+   "reading": "こえ",
+   "gloss": "voice",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.yuuki",
+   "form": "ゆうき",
+   "reading": "ゆうき",
+   "gloss": "courage",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.kioku",
+   "form": "きおく",
+   "reading": "きおく",
+   "gloss": "memory",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.sugoi",
+   "form": "すごい",
+   "reading": "すごい",
+   "gloss": "amazing",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.fushigi",
+   "form": "ふしぎ",
+   "reading": "ふしぎ",
+   "gloss": "strange; mysterious",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.ureshii",
+   "form": "うれしい",
+   "reading": "うれしい",
+   "gloss": "happy; glad",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.kanashii",
+   "form": "かなしい",
+   "reading": "かなしい",
+   "gloss": "sad",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.natsukashii",
+   "form": "なつかしい",
+   "reading": "なつかしい",
+   "gloss": "nostalgic; dear",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.omoimasu",
+   "form": "おもいます",
+   "reading": "おもいます",
+   "gloss": "to think",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.katarimasu",
+   "form": "かたります",
+   "reading": "かたります",
+   "gloss": "to tell; to narrate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.tsutaemasu",
+   "form": "つたえます",
+   "reading": "つたえます",
+   "gloss": "to convey; to report",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.shirimasu",
+   "form": "しります",
+   "reading": "しります",
+   "gloss": "to know",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.omoidasu",
+   "form": "おもいだします",
+   "reading": "おもいだします",
+   "gloss": "to remember",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.wasuremasu",
+   "form": "わすれます",
+   "reading": "わすれます",
+   "gloss": "to forget",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.mitsukemasu",
+   "form": "みつけます",
+   "reading": "みつけます",
+   "gloss": "to find",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.nakushimasu",
+   "form": "なくします",
+   "reading": "なくします",
+   "gloss": "to lose",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.tanomimasu",
+   "form": "たのみます",
+   "reading": "たのみます",
+   "gloss": "to ask; to request",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.misemasu",
+   "form": "みせます",
+   "reading": "みせます",
+   "gloss": "to show",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.noborimasu",
+   "form": "のぼります",
+   "reading": "のぼります",
+   "gloss": "to climb; to go up",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.watarimasu",
+   "form": "わたります",
+   "reading": "わたります",
+   "gloss": "to cross",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.totsuzen",
+   "form": "とつぜん",
+   "reading": "とつぜん",
+   "gloss": "suddenly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.sorekara",
+   "form": "それから",
+   "reading": "それから",
+   "gloss": "and then; after that",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.narrative.kanarazu",
+   "form": "かならず",
+   "reading": "かならず",
+   "gloss": "without fail; surely",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.numbers.ichi",
+   "form": "いち",
+   "reading": "いち",
+   "gloss": "one",
+   "pos": "number",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.numbers.ni",
+   "form": "に",
+   "reading": "に",
+   "gloss": "two",
+   "pos": "number",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-47",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.greeting.konnichiwa",
+   "form": "こんにちは",
+   "reading": "こんにちは",
+   "gloss": "a daytime greeting; fits some hello uses but not every English 'hello' situation",
+   "pos": "",
+   "gender": ""
+  },
+  {
+   "id": "ja.expr.introduction.hajimemashite",
+   "form": "はじめまして",
+   "reading": "はじめまして",
+   "gloss": "said at a first introduction; roughly marks 'we have not met before'",
+   "pos": "",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.kikou",
+   "form": "きこう",
+   "reading": "きこう",
+   "gloss": "climate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.saitei",
+   "form": "さいてい",
+   "reading": "さいてい",
+   "gloss": "lowest",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.risaikuru",
+   "form": "りさいくる",
+   "reading": "りさいくる",
+   "gloss": "recycling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.kikaku",
+   "form": "きかく",
+   "reading": "きかく",
+   "gloss": "specification",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.puratsu",
+   "form": "ぷらつ",
+   "reading": "ぷらつ",
+   "gloss": "plate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.gomi-bunkatsu",
+   "form": "ごみぶんかつ",
+   "reading": "ごみぶんかつ",
+   "gloss": "waste sorting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.seisaku",
+   "form": "せいさく",
+   "reading": "せいさく",
+   "gloss": "creation; production",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.denryoku",
+   "form": "でんりょく",
+   "reading": "でんりょく",
+   "gloss": "electric power",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.ene",
+   "form": "えね",
+   "reading": "えね",
+   "gloss": "energy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.kiko-ene",
+   "form": "きこえね",
+   "reading": "きこえね",
+   "gloss": "renewable energy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.genryo",
+   "form": "げんりょう",
+   "reading": "げんりょう",
+   "gloss": "reduction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.mottainai",
+   "form": "もったいない",
+   "reading": "もったいない",
+   "gloss": "wasteful",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.eco",
+   "form": "エコ",
+   "reading": "エコ",
+   "gloss": "eco",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.jiten-sha",
+   "form": "じてんしゃ",
+   "reading": "じてんしゃ",
+   "gloss": "bicycle",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.hogo",
+   "form": "ほご",
+   "reading": "ほご",
+   "gloss": "protection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.ikubutsu",
+   "form": "いくぶつ",
+   "reading": "いくぶつ",
+   "gloss": "living thing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.doubutsu",
+   "form": "どうぶつ",
+   "reading": "どうぶつ",
+   "gloss": "animal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.tochi",
+   "form": "とち",
+   "reading": "とち",
+   "gloss": "land",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.seita",
+   "form": "せいた",
+   "reading": "せいた",
+   "gloss": "ecosystem",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.kan",
+   "form": "かん",
+   "reading": "かん",
+   "gloss": "can",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.bin",
+   "form": "びん",
+   "reading": "びん",
+   "gloss": "bottle",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.tane",
+   "form": "たね",
+   "reading": "たね",
+   "gloss": "seed",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env.shokubutsu",
+   "form": "しょくぶつ",
+   "reading": "しょくぶつ",
+   "gloss": "plant",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

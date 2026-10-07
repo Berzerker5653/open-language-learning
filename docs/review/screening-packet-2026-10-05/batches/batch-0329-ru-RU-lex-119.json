@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-119",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.study2.maket",
+   "form": "макет",
+   "reading": "маке́т",
+   "gloss": "mockup, model",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study2.originalnost",
+   "form": "оригинальность",
+   "reading": "оригина́льность",
+   "gloss": "originality",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.novizna",
+   "form": "новизна",
+   "reading": "новизна́",
+   "gloss": "novelty",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.aktualnost",
+   "form": "актуальность",
+   "reading": "актуа́льность",
+   "gloss": "relevance",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.znachimost",
+   "form": "значимость",
+   "reading": "зна́чимость",
+   "gloss": "significance",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.sushchestvennyy",
+   "form": "существенный",
+   "reading": "суще́ственный",
+   "gloss": "essential, substantial",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study2.neznachitelnyy",
+   "form": "незначительный",
+   "reading": "незначи́тельный",
+   "gloss": "insignificant",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study2.vtorostepennyy",
+   "form": "второстепенный",
+   "reading": "второстепе́нный",
+   "gloss": "secondary",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study2.dominanta",
+   "form": "доминанта",
+   "reading": "домина́нта",
+   "gloss": "dominant",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.preobladanie",
+   "form": "преобладание",
+   "reading": "преоблада́ние",
+   "gloss": "preponderance",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study2.slabost",
+   "form": "слабость",
+   "reading": "сла́бость",
+   "gloss": "weakness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.moschnost",
+   "form": "мощность",
+   "reading": "мо́щность",
+   "gloss": "power, capacity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.analog",
+   "form": "аналог",
+   "reading": "ана́лог",
+   "gloss": "analogue",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study2.proobraz",
+   "form": "прообраз",
+   "reading": "проо́браз",
+   "gloss": "prototype, archetype",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study2.arhetip",
+   "form": "архетип",
+   "reading": "архети́п",
+   "gloss": "archetype",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study2.mif",
+   "form": "миф",
+   "reading": "миф",
+   "gloss": "myth",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study2.legenda",
+   "form": "легенда",
+   "reading": "леге́нда",
+   "gloss": "legend",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.skazanie",
+   "form": "сказание",
+   "reading": "сказа́ние",
+   "gloss": "tale, legend",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study2.bylina",
+   "form": "былина",
+   "reading": "были́на",
+   "gloss": "epic tale",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.epos",
+   "form": "эпос",
+   "reading": "э́пос",
+   "gloss": "epic",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study2.lirika",
+   "form": "лирика",
+   "reading": "ли́рика",
+   "gloss": "lyrics, lyricism",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.dramaturgiya",
+   "form": "драматургия",
+   "reading": "драматурги́я",
+   "gloss": "dramaturgy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.libretto",
+   "form": "либретто",
+   "reading": "либре́тто",
+   "gloss": "libretto",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study2.partitura",
+   "form": "партитура",
+   "reading": "партиту́ра",
+   "gloss": "score (music)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study2.mitologiya",
+   "form": "мифология",
+   "reading": "мифоло́гия",
+   "gloss": "mythology",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

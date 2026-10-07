@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-125",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.shopping.kutsu-ito",
+   "form": "くついと",
+   "reading": "くついと",
+   "gloss": "shoelace",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.urimasu",
+   "form": "うります",
+   "reading": "うります",
+   "gloss": "to sell",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.chuumon",
+   "form": "ちゅうもん",
+   "reading": "ちゅうもん",
+   "gloss": "order",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.tatamu",
+   "form": "たたみます",
+   "reading": "たたみます",
+   "gloss": "to fold",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.keshi",
+   "form": "けし",
+   "reading": "けし",
+   "gloss": "eraser",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.mon",
+   "form": "もん",
+   "reading": "もん",
+   "gloss": "text",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.okane",
+   "form": "おかね",
+   "reading": "おかね",
+   "gloss": "money",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.en",
+   "form": "えん",
+   "reading": "えん",
+   "gloss": "yen",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.dollar",
+   "form": "どる",
+   "reading": "どる",
+   "gloss": "dollar",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.hyakuen",
+   "form": "ひゃくえん",
+   "reading": "ひゃくえん",
+   "gloss": "hundred yen",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.sen-en",
+   "form": "せんえん",
+   "reading": "せんえん",
+   "gloss": "thousand yen",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.man-en",
+   "form": "まんえん",
+   "reading": "まんえん",
+   "gloss": "ten thousand yen",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.go-hyaku",
+   "form": "ごひゃく",
+   "reading": "ごひゃく",
+   "gloss": "five hundred",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.san-byaku",
+   "form": "さんびゃく",
+   "reading": "さんびゃく",
+   "gloss": "three hundred",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.ni-sen",
+   "form": "にせん",
+   "reading": "にせん",
+   "gloss": "two thousand",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.ichiman",
+   "form": "いちまん",
+   "reading": "いちまん",
+   "gloss": "ten thousand",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.nimai",
+   "form": "にまい",
+   "reading": "にまい",
+   "gloss": "two flat items",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.sanmai",
+   "form": "さんまい",
+   "reading": "さんまい",
+   "gloss": "three flat items",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.hiki",
+   "form": "ひき",
+   "reading": "ひき",
+   "gloss": "counter for small animals",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.sanbon",
+   "form": "さんぼん",
+   "reading": "さんぼん",
+   "gloss": "three long items",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.futatsu",
+   "form": "ふたつ",
+   "reading": "ふたつ",
+   "gloss": "two things",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.mittsu",
+   "form": "みっつ",
+   "reading": "みっつ",
+   "gloss": "three things",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.ikutsu",
+   "form": "いくつ",
+   "reading": "いくつ",
+   "gloss": "how many",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.dai",
+   "form": "だい",
+   "reading": "だい",
+   "gloss": "machine counter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.shopping.sai",
+   "form": "さい",
+   "reading": "さい",
+   "gloss": "years old counter",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

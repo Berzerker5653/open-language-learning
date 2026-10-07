@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-116",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.reg2.aji",
+   "form": "あじ",
+   "reading": "あじ",
+   "gloss": "taste, flavor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.kizuna",
+   "form": "きずな",
+   "reading": "きずな",
+   "gloss": "bond",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.shinko",
+   "form": "しんこう",
+   "reading": "しんこう",
+   "gloss": "trust, faith",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.kaitaku",
+   "form": "かいたく",
+   "reading": "かいたく",
+   "gloss": "relief",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.yamaimadara",
+   "form": "やまいただら",
+   "reading": "やまいただら",
+   "gloss": "hopes and worries",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.omoide",
+   "form": "おもいで",
+   "reading": "おもいで",
+   "gloss": "memory",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.tsukai",
+   "form": "つかい",
+   "reading": "つかい",
+   "gloss": "errand",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.kaigi2",
+   "form": "かいぎ",
+   "reading": "かいぎ",
+   "gloss": "meeting",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.kenkyo",
+   "form": "けんきょ",
+   "reading": "けんきょ",
+   "gloss": "modest",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.shinsetsu",
+   "form": "しんせつ",
+   "reading": "しんせつ",
+   "gloss": "kind",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.shimatsu",
+   "form": "しまつ",
+   "reading": "しまつ",
+   "gloss": "management, end",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.yoji",
+   "form": "ようじ",
+   "reading": "ようじ",
+   "gloss": "business, errand",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.setsu",
+   "form": "せつ",
+   "reading": "せつ",
+   "gloss": "season, set",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.renraku",
+   "form": "れんらく",
+   "reading": "れんらく",
+   "gloss": "contact",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.hokoku",
+   "form": "ほうこく",
+   "reading": "ほうこく",
+   "gloss": "report",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.sodan",
+   "form": "そうだん",
+   "reading": "そうだん",
+   "gloss": "consultation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.kenzai",
+   "form": "けんざい",
+   "reading": "けんざい",
+   "gloss": "examination",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.chokai",
+   "form": "ちょうかい",
+   "reading": "ちょうかい",
+   "gloss": "understanding",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.hakai2",
+   "form": "はかい",
+   "reading": "はかい",
+   "gloss": "respect",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.soncho",
+   "form": "そんちょう",
+   "reading": "そんちょう",
+   "gloss": "respect",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.aijo",
+   "form": "あいじょう",
+   "reading": "あいじょう",
+   "gloss": "affection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.jooho2",
+   "form": "じょうほう",
+   "reading": "じょうほう",
+   "gloss": "information",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.kokan",
+   "form": "こうかん",
+   "reading": "こうかん",
+   "gloss": "exchange",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.kofuku",
+   "form": "こうふく",
+   "reading": "こうふく",
+   "gloss": "happy",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel1.futsu",
+   "form": "ふつう",
+   "reading": "ふつう",
+   "gloss": "normal",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

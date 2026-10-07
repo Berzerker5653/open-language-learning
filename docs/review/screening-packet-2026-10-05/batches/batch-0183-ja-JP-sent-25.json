@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-25",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.legal-vocabulary",
+   "text": "べんごし と はなしました。",
+   "gloss": "I talked with a lawyer."
+  },
+  {
+   "id": "ja.sent.restorative-justice",
+   "text": "こうさい の ため の ちてき を べんきょう しました。",
+   "gloss": "I studied wisdom for the public interest."
+  },
+  {
+   "id": "ja.sent.privacy-law",
+   "text": "じょうほう の ほご を はなしました。",
+   "gloss": "I talked about information protection."
+  },
+  {
+   "id": "ja.sent.consumer-protection",
+   "text": "しょうひしゃ の けんり を べんきょう しました。",
+   "gloss": "I studied consumer rights."
+  },
+  {
+   "id": "ja.sent.labor-law",
+   "text": "ろうどう の ほうりつ を べんきょう しました。",
+   "gloss": "I studied labor law."
+  },
+  {
+   "id": "ja.sent.international-law",
+   "text": "ちょうやく の ないよう を よみました。",
+   "gloss": "I read the treaty's contents."
+  },
+  {
+   "id": "ja.sent.legal-news",
+   "text": "ほうこく の ないよう を ぶんせき しました。",
+   "gloss": "I analyzed the report's contents."
+  },
+  {
+   "id": "ja.sent.ethics-of-law",
+   "text": "ほうりつ と げんり の こと を はなしました。",
+   "gloss": "I talked about law and principle."
+  },
+  {
+   "id": "ja.sent.justice-essay",
+   "text": "こうさい の ため の さく を かきました。",
+   "gloss": "I wrote a work for the public interest."
+  },
+  {
+   "id": "ja.sent.free-will-debate",
+   "text": "せいぎ の ろんぶん を べんきょう しました。",
+   "gloss": "I studied an essay on justice."
+  },
+  {
+   "id": "ja.sent.justice-theory",
+   "text": "ぜんあく の ちてき を はなしました。",
+   "gloss": "I talked about the wisdom of good and evil."
+  },
+  {
+   "id": "ja.sent.happiness-philosophy",
+   "text": "じんせいの きょり を かんがえました。",
+   "gloss": "I thought about the distance of life."
+  },
+  {
+   "id": "ja.sent.duty-versus-good",
+   "text": "おもいやり の たいど を しめしました。",
+   "gloss": "I showed an attitude of consideration."
+  },
+  {
+   "id": "ja.sent.technology-ethics",
+   "text": "きかい の のうりょく が あがりました。",
+   "gloss": "The capability of machines has increased."
+  },
+  {
+   "id": "ja.sent.environmental-ethics",
+   "text": "ちえ の ゆつう を べんきょう しました。",
+   "gloss": "I studied the transmission of wisdom."
+  }
+ ]
+}

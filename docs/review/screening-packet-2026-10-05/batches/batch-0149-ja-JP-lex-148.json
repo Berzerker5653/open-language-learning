@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-148",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.urban2.kuuki",
+   "form": "くうき",
+   "reading": "くうき",
+   "gloss": "air",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.jichikai",
+   "form": "じちかい",
+   "reading": "じちかい",
+   "gloss": "neighborhood association",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.kaigo3",
+   "form": "かいごう",
+   "reading": "かいごう",
+   "gloss": "meeting, assembly",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.renraku",
+   "form": "れんらく",
+   "reading": "れんらく",
+   "gloss": "contact, notice",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.kyousou",
+   "form": "きょうそう",
+   "reading": "きょうそう",
+   "gloss": "cooperation, collaboration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.aijou",
+   "form": "あいじょう",
+   "reading": "あいじょう",
+   "gloss": "affection, fondness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.shiryou",
+   "form": "しりょう",
+   "reading": "しりょう",
+   "gloss": "historical materials",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.kinen",
+   "form": "きねん",
+   "reading": "きねん",
+   "gloss": "commemoration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.yakan",
+   "form": "やかん",
+   "reading": "やかん",
+   "gloss": "night view",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.fuukei",
+   "form": "ふうけい",
+   "reading": "ふうけい",
+   "gloss": "scenery, landscape",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.kairou",
+   "form": "かいろう",
+   "reading": "かいろう",
+   "gloss": "arcade, corridor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.osen",
+   "form": "おせん",
+   "reading": "おせん",
+   "gloss": "pollution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.risou",
+   "form": "りそう",
+   "reading": "りそう",
+   "gloss": "ideal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.mirai",
+   "form": "みらい",
+   "reading": "みらい",
+   "gloss": "future",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.genzai",
+   "form": "げんざい",
+   "reading": "げんざい",
+   "gloss": "current state",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.tennen",
+   "form": "てんねん",
+   "reading": "てんねん",
+   "gloss": "nature",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.mobiriti",
+   "form": "もびりてぃ",
+   "reading": "もびりてぃ",
+   "gloss": "mobility",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.jidousha",
+   "form": "じどうしゃ",
+   "reading": "じどうしゃ",
+   "gloss": "automobile",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.koukou2",
+   "form": "こうこう",
+   "reading": "こうこう",
+   "gloss": "walking",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.shuppatsu",
+   "form": "しゅっぱつ",
+   "reading": "しゅっぱつ",
+   "gloss": "departure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.touchaku",
+   "form": "とうちゃく",
+   "reading": "とうちゃく",
+   "gloss": "arrival",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.bouhan",
+   "form": "ぼうはん",
+   "reading": "ぼうはん",
+   "gloss": "crime prevention",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.keibi",
+   "form": "けいび",
+   "reading": "けいび",
+   "gloss": "security, guard",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.touban",
+   "form": "とうばん",
+   "reading": "とうばん",
+   "gloss": "night watch",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.mimamori",
+   "form": "みまもり",
+   "reading": "みまもり",
+   "gloss": "watching over, lookout",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

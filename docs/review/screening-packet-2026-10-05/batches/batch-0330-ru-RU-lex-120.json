@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-120",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.study3.stadiya",
+   "form": "стадия",
+   "reading": "ста́дия",
+   "gloss": "stage",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study3.algoritm",
+   "form": "алгоритм",
+   "reading": "алгори́тм",
+   "gloss": "algorithm",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study3.retsept",
+   "form": "рецепт",
+   "reading": "реце́пт",
+   "gloss": "recipe",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study3.ukazanie",
+   "form": "указание",
+   "reading": "указа́ние",
+   "gloss": "instruction, directive",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study3.predpisanie",
+   "form": "предписание",
+   "reading": "предписа́ние",
+   "gloss": "order, prescription",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study3.ogranichenie",
+   "form": "ограничение",
+   "reading": "ограниче́ние",
+   "gloss": "limitation, restriction",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study3.limit",
+   "form": "лимит",
+   "reading": "лими́т",
+   "gloss": "limit",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study3.kvota",
+   "form": "квота",
+   "reading": "кво́та",
+   "gloss": "quota",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study3.barer",
+   "form": "барьер",
+   "reading": "барье́р",
+   "gloss": "barrier",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study3.slozhnost",
+   "form": "сложность",
+   "reading": "сло́жность",
+   "gloss": "complexity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study3.prostota",
+   "form": "простота",
+   "reading": "простота́",
+   "gloss": "simplicity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study3.elementarnyy",
+   "form": "элементарный",
+   "reading": "элемента́рный",
+   "gloss": "elementary",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.primativnyy",
+   "form": "примитивный",
+   "reading": "примити́вный",
+   "gloss": "primitive",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.slozhnyy",
+   "form": "сложный",
+   "reading": "сло́жный",
+   "gloss": "complex, difficult",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.prostoy",
+   "form": "простой",
+   "reading": "просто́й",
+   "gloss": "simple",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.dostupnyy",
+   "form": "доступный",
+   "reading": "досту́пный",
+   "gloss": "accessible",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.nedostupnyy",
+   "form": "недоступный",
+   "reading": "недосту́пный",
+   "gloss": "inaccessible",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.dostup",
+   "form": "доступ",
+   "reading": "до́ступ",
+   "gloss": "access",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study3.zakrytyy",
+   "form": "закрытый",
+   "reading": "закры́тый",
+   "gloss": "closed",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.otkrytyy",
+   "form": "открытый",
+   "reading": "откры́тый",
+   "gloss": "open",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.publichnyy",
+   "form": "публичный",
+   "reading": "публи́чный",
+   "gloss": "public",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.chastnyy",
+   "form": "частный",
+   "reading": "ча́стный",
+   "gloss": "private, particular",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.sekretntyy",
+   "form": "секретный",
+   "reading": "секре́тный",
+   "gloss": "secret",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study3.tayna",
+   "form": "тайна",
+   "reading": "та́йна",
+   "gloss": "secret, mystery",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study3.yavnyy",
+   "form": "явный",
+   "reading": "я́вный",
+   "gloss": "explicit, manifest",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

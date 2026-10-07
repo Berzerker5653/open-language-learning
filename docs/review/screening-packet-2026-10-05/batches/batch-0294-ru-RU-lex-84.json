@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-84",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.prof.polnomochiya",
+   "form": "полномочия",
+   "reading": "полномо́чия",
+   "gloss": "authority, powers",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.funkcional",
+   "form": "функционал",
+   "reading": "функциона́л",
+   "gloss": "functional scope",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.poruchenie",
+   "form": "поручение",
+   "reading": "поруче́ние",
+   "gloss": "task, assignment",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.podpisant",
+   "form": "подписант",
+   "reading": "подписа́нт",
+   "gloss": "signatory",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.utverdit",
+   "form": "утвердить",
+   "reading": "утверди́ть",
+   "gloss": "to approve",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.utverzhdennyy",
+   "form": "утверждённый",
+   "reading": "утверждённый",
+   "gloss": "approved",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.soglasovannyy",
+   "form": "согласованный",
+   "reading": "согласо́ванный",
+   "gloss": "agreed, approved",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.paraf",
+   "form": "параф",
+   "reading": "пара́ф",
+   "gloss": "initialing",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.ispolnitel",
+   "form": "исполнитель",
+   "reading": "исполни́тель",
+   "gloss": "executor, performer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.podryadchik",
+   "form": "подрядчик",
+   "reading": "подря́дчик",
+   "gloss": "contractor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.zakazchik",
+   "form": "заказчик",
+   "reading": "зака́зчик",
+   "gloss": "client, customer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.postavshchik",
+   "form": "поставщик",
+   "reading": "поставщи́к",
+   "gloss": "supplier",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.distributor",
+   "form": "дистрибьютор",
+   "reading": "дистрибью́тор",
+   "gloss": "distributor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.diler",
+   "form": "дилер",
+   "reading": "ди́лер",
+   "gloss": "dealer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.broker",
+   "form": "брокер",
+   "reading": "бро́кер",
+   "gloss": "broker",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.makler",
+   "form": "маклер",
+   "reading": "ма́клер",
+   "gloss": "broker",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.shtat",
+   "form": "штат",
+   "reading": "штат",
+   "gloss": "staff, payroll",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.uvolnenie",
+   "form": "увольнение",
+   "reading": "увольне́ние",
+   "gloss": "dismissal",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.uvolnyat",
+   "form": "увольнять",
+   "reading": "увольня́ть",
+   "gloss": "to dismiss",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.raspredelenie",
+   "form": "распределение",
+   "reading": "распределе́ние",
+   "gloss": "distribution",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.raspredelit",
+   "form": "распределить",
+   "reading": "распредели́ть",
+   "gloss": "to distribute",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.delegirovat",
+   "form": "делегировать",
+   "reading": "делеги́ровать",
+   "gloss": "to delegate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.delegirovanie",
+   "form": "делегирование",
+   "reading": "делеги́рование",
+   "gloss": "delegation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.eskalcia",
+   "form": "эскалация",
+   "reading": "эскала́ция",
+   "gloss": "escalation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.eskalirovat",
+   "form": "эскалировать",
+   "reading": "эска́лировать",
+   "gloss": "to escalate",
+   "pos": "verb",
+   "gender": ""
+  }
+ ]
+}

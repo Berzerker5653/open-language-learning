@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-11",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.warm-up",
+   "text": "うんどうまえに じゅんびうんどうを します。",
+   "gloss": "I warm up before exercise."
+  },
+  {
+   "id": "ja.sent.recovery-onsen",
+   "text": "りかばりーに おんせんへ いきます。",
+   "gloss": "I go to a hot spring to recover."
+  },
+  {
+   "id": "ja.sent.coach-said",
+   "text": "こーちが 「じょうずに なった」と 言いました。",
+   "gloss": "The coach said I improved."
+  },
+  {
+   "id": "ja.sent.family-photo",
+   "text": "かぞくしゃしんを とります。",
+   "gloss": "I take a family photo."
+  },
+  {
+   "id": "ja.sent.siblings-get-along",
+   "text": "きょうだいと なかよく します。",
+   "gloss": "I get along with my siblings."
+  },
+  {
+   "id": "ja.sent.marriage-day",
+   "text": "けっこんしきの ひを おぼえています。",
+   "gloss": "I remember the wedding day."
+  },
+  {
+   "id": "ja.sent.grandma-cook",
+   "text": "おばあちゃんの りょうりが すきです。",
+   "gloss": "I like grandma's cooking."
+  },
+  {
+   "id": "ja.sent.cousin-visit",
+   "text": "いとこが うちへ きます。",
+   "gloss": "My cousin comes to my house."
+  },
+  {
+   "id": "ja.sent.quarrel-reconcile",
+   "text": "けんかの あと、よりもどします。",
+   "gloss": "After a quarrel, we reconcile."
+  },
+  {
+   "id": "ja.sent.trust-friend",
+   "text": "ともだちを しんらいします。",
+   "gloss": "I trust my friend."
+  },
+  {
+   "id": "ja.sent.family-bond",
+   "text": "かぞくの きずなは だいじです。",
+   "gloss": "Family bonds are important."
+  },
+  {
+   "id": "ja.sent.memory-song",
+   "text": "おもいで の うたを うたいます。",
+   "gloss": "I sing a memory song."
+  },
+  {
+   "id": "ja.sent.make-appointment",
+   "text": "びょういんの よやくを します。",
+   "gloss": "I make a doctor's appointment."
+  },
+  {
+   "id": "ja.sent.daily-schedule",
+   "text": "毎日 にってい を かきます。",
+   "gloss": "I write my daily schedule."
+  },
+  {
+   "id": "ja.sent.holiday-plan",
+   "text": "しゅくじつの よていを たてます。",
+   "gloss": "I make holiday plans."
+  }
+ ]
+}

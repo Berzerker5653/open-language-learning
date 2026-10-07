@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-15",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.software-update",
+   "text": "そふとうぇあ の あっぷでーと が おくれました。",
+   "gloss": "The software update was late."
+  },
+  {
+   "id": "ja.sent.online-search",
+   "text": "でーたべーす を さーち して じょうほう を みつけました。",
+   "gloss": "I searched the database and found the information."
+  },
+  {
+   "id": "ja.sent.tech-problem-fix",
+   "text": "こい を しゅうり するのに 1じかん かかりました。",
+   "gloss": "It took an hour to repair the malfunction."
+  },
+  {
+   "id": "ja.sent.ai-limit-talk",
+   "text": "じんこうちのう の げんかい について はなしました。",
+   "gloss": "We talked about the limits of AI."
+  },
+  {
+   "id": "ja.sent.net-habit",
+   "text": "ねっと の くせ が ぬけません。",
+   "gloss": "I cannot break my internet habit."
+  },
+  {
+   "id": "ja.sent.support-reception",
+   "text": "でんわ で しえん の じゅり を たのみました。",
+   "gloss": "I asked for support acceptance by phone."
+  },
+  {
+   "id": "ja.sent.coding-process",
+   "text": "こーど を かく こうてい を ならいました。",
+   "gloss": "I learned the process of writing code."
+  },
+  {
+   "id": "ja.sent.remote-control",
+   "text": "おんきょう で でんき を けします。",
+   "gloss": "I turn off the light with the remote."
+  },
+  {
+   "id": "ja.sent.community-post",
+   "text": "こみゅにてぃ の ぐるーぷ に はっぴょう しました。",
+   "gloss": "I posted in the community group."
+  },
+  {
+   "id": "ja.sent.detox-nature",
+   "text": "しぜん の なか で ゆとり を もたせました。",
+   "gloss": "I made slack time in nature."
+  },
+  {
+   "id": "ja.sent.custom-explain",
+   "text": "この しゅうかん は ねんちゅう の ぎれい です。",
+   "gloss": "This custom is an annual ceremony."
+  },
+  {
+   "id": "ja.sent.festival-mikoshi",
+   "text": "まつり で みこし を かつぎました。",
+   "gloss": "At the festival we carried the portable shrine."
+  },
+  {
+   "id": "ja.sent.craft-washi",
+   "text": "わし を てで つくる こうげ です。",
+   "gloss": "It is a craft making Japanese paper by hand."
+  },
+  {
+   "id": "ja.sent.etiquette-rule",
+   "text": "マナー の きそく は かいしゃ ごとに ことなります。",
+   "gloss": "Manners rules differ by company."
+  },
+  {
+   "id": "ja.sent.region-dialect",
+   "text": "その ちほう の ほうげん が すき です。",
+   "gloss": "I like that region's dialect."
+  }
+ ]
+}

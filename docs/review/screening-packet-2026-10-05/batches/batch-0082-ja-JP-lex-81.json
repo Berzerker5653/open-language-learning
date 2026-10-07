@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-81",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.leisure.tenisu",
+   "form": "てにす",
+   "reading": "てにす",
+   "gloss": "tennis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.yakyuu",
+   "form": "やきゅう",
+   "reading": "やきゅう",
+   "gloss": "baseball",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.karate",
+   "form": "からて",
+   "reading": "からて",
+   "gloss": "karate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.suiei",
+   "form": "すいえい",
+   "reading": "すいえい",
+   "gloss": "swimming",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.utai",
+   "form": "うたい",
+   "reading": "うたい",
+   "gloss": "singing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.odori",
+   "form": "おどり",
+   "reading": "おどり",
+   "gloss": "dance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.zasshi",
+   "form": "ざっし",
+   "reading": "ざっし",
+   "gloss": "magazine",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.nyuusu",
+   "form": "にゅーす",
+   "reading": "にゅーす",
+   "gloss": "news",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.douga",
+   "form": "どうが",
+   "reading": "どうが",
+   "gloss": "video",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.e-hon",
+   "form": "えほん",
+   "reading": "えほん",
+   "gloss": "picture book",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.pikunikku",
+   "form": "ぴくにくく",
+   "reading": "ぴくにくく",
+   "gloss": "picnic",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.kampu",
+   "form": "きゃんぷ",
+   "reading": "きゃんぷ",
+   "gloss": "camping",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.ryoushuu",
+   "form": "りょうしゅう",
+   "reading": "りょうしゅう",
+   "gloss": "travel; sightseeing tour",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.tabehou",
+   "form": "たべほう",
+   "reading": "たべほう",
+   "gloss": "gourmet eating; food tour",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.asobimasu",
+   "form": "あそびます",
+   "reading": "あそびます",
+   "gloss": "to play",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.miimasu",
+   "form": "みます",
+   "reading": "みます",
+   "gloss": "to watch; to look at",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.kikiimasu",
+   "form": "ききます",
+   "reading": "ききます",
+   "gloss": "to listen; to ask",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.oboemasu",
+   "form": "おぼえます",
+   "reading": "おぼえます",
+   "gloss": "to memorize; to remember",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.oyogimasu",
+   "form": "およぎます",
+   "reading": "およぎます",
+   "gloss": "to swim",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.utaimasu",
+   "form": "うたいます",
+   "reading": "うたいます",
+   "gloss": "to sing",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.odorimasu",
+   "form": "おどります",
+   "reading": "おどります",
+   "gloss": "to dance",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.tsukurimasu",
+   "form": "つくります",
+   "reading": "つくります",
+   "gloss": "to make",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.dekakemasu",
+   "form": "でかけます",
+   "reading": "でかけます",
+   "gloss": "to go out",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.hanashimasu",
+   "form": "はなします",
+   "reading": "はなします",
+   "gloss": "to speak; to talk",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.leisure.tanoshimu",
+   "form": "たのしみます",
+   "reading": "たのしみます",
+   "gloss": "to enjoy",
+   "pos": "verb",
+   "gender": ""
+  }
+ ]
+}

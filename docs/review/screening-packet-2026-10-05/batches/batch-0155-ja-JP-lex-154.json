@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-154",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.work.kaiwan",
+   "form": "かいわ",
+   "reading": "かいわ",
+   "gloss": "conversation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.hatarakimasu",
+   "form": "はたらきます",
+   "reading": "はたらきます",
+   "gloss": "to work",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.oshiemasu",
+   "form": "おしえます",
+   "reading": "おしえます",
+   "gloss": "to teach",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.naraimasu",
+   "form": "ならいます",
+   "reading": "ならいます",
+   "gloss": "to learn",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.shoukai-shimasu",
+   "form": "しょうかいします",
+   "reading": "しょうかいします",
+   "gloss": "to introduce",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.kesshin-shimasu",
+   "form": "けっしんします",
+   "reading": "けっしんします",
+   "gloss": "to decide; to make up one's mind",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.chuumoku-shimasu",
+   "form": "ちゅうもくします",
+   "reading": "ちゅうもくします",
+   "gloss": "to pay attention",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.kizukimasu",
+   "form": "きづきます",
+   "reading": "きづきます",
+   "gloss": "to notice",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.kanryou-shimasu",
+   "form": "かんりょうします",
+   "reading": "かんりょうします",
+   "gloss": "to finish",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.yasashii",
+   "form": "やさしい",
+   "reading": "やさしい",
+   "gloss": "easy; kind",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.saisho",
+   "form": "さいしょ",
+   "reading": "さいしょ",
+   "gloss": "first",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.saigo",
+   "form": "さいご",
+   "reading": "さいご",
+   "gloss": "last; finally",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.ippai",
+   "form": "いっぱい",
+   "reading": "いっぱい",
+   "gloss": "a lot; full",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.sukoshi-zutsu",
+   "form": "すこしずつ",
+   "reading": "すこしずつ",
+   "gloss": "little by little",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.isshou",
+   "form": "いっしょう",
+   "reading": "いっしょう",
+   "gloss": "whole life",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.zenzen",
+   "form": "ぜんぜん",
+   "reading": "ぜんぜん",
+   "gloss": "not at all",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.kanzen-ni",
+   "form": "かんぜんに",
+   "reading": "かんぜんに",
+   "gloss": "completely",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.taishita",
+   "form": "たした",
+   "reading": "たした",
+   "gloss": "not much",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.sorezore",
+   "form": "それぞれ",
+   "reading": "それぞれ",
+   "gloss": "each",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.tokuni",
+   "form": "とくに",
+   "reading": "とくに",
+   "gloss": "especially",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.kitto",
+   "form": "きっと",
+   "reading": "きっと",
+   "gloss": "surely",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work.tabun",
+   "form": "たぶん",
+   "reading": "たぶん",
+   "gloss": "probably",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.keiyaku",
+   "form": "けいやく",
+   "reading": "けいやく",
+   "gloss": "contract",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.keiyaku-sho",
+   "form": "けいやくしょ",
+   "reading": "けいやくしょ",
+   "gloss": "contract document",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.work2.shoubei",
+   "form": "しょうべい",
+   "reading": "しょうべい",
+   "gloss": "negotiation",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-138",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.tech.purinto",
+   "form": "ぷりんと",
+   "reading": "ぷりんと",
+   "gloss": "printer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.sekiyuriti",
+   "form": "せきゅりてぃ",
+   "reading": "せきゅりてぃ",
+   "gloss": "security",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.pasuwado",
+   "form": "ぱすわーど",
+   "reading": "ぱすわーど",
+   "gloss": "password",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.uirusu",
+   "form": "ういるす",
+   "reading": "ういるす",
+   "gloss": "virus",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.spam",
+   "form": "すぱむ",
+   "reading": "すぱむ",
+   "gloss": "spam",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.hack",
+   "form": "ハック",
+   "reading": "ハック",
+   "gloss": "hack",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.privacy",
+   "form": "ぷらいばしー",
+   "reading": "ぷらいばしー",
+   "gloss": "privacy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.kojin-jouhou",
+   "form": "こじんじょうほう",
+   "reading": "こじんじょうほう",
+   "gloss": "personal information",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.settings",
+   "form": "せっとぃんぐ",
+   "reading": "せっとぃんぐ",
+   "gloss": "settings",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.account",
+   "form": "あくあんと",
+   "reading": "あくあんと",
+   "gloss": "account",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.login",
+   "form": "ろぐいん",
+   "reading": "ろぐいん",
+   "gloss": "login",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.apurikeeshon",
+   "form": "あぷりけーしょん",
+   "reading": "あぷりけーしょん",
+   "gloss": "application",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.software",
+   "form": "そふとうぇあ",
+   "reading": "そふとうぇあ",
+   "gloss": "software",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.update",
+   "form": "あっぷでーと",
+   "reading": "あっぷでーと",
+   "gloss": "update",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.download",
+   "form": "だうんろーど",
+   "reading": "だうんろーど",
+   "gloss": "download",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.bug",
+   "form": "ばぐ",
+   "reading": "ばぐ",
+   "gloss": "bug",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.web-site",
+   "form": "ウェブサイト",
+   "reading": "ウェブサイト",
+   "gloss": "website",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.search",
+   "form": "さーち",
+   "reading": "さーち",
+   "gloss": "search",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.database",
+   "form": "でーたべーす",
+   "reading": "でーたべーす",
+   "gloss": "database",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.cloud",
+   "form": "くらうど",
+   "reading": "くらうど",
+   "gloss": "cloud",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech.backup",
+   "form": "ばっくあっぷ",
+   "reading": "ばっくあっぷ",
+   "gloss": "backup",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.koi",
+   "form": "こい",
+   "reading": "こい",
+   "gloss": "malfunction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.shuuri",
+   "form": "しゅうり",
+   "reading": "しゅうり",
+   "gloss": "repair",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.kairyou",
+   "form": "かいりょう",
+   "reading": "かいりょう",
+   "gloss": "improvement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.benri",
+   "form": "べんり",
+   "reading": "べんり",
+   "gloss": "convenient",
+   "pos": "na-adjective",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-86",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.lit.shijin",
+   "form": "しじん",
+   "reading": "しじん",
+   "gloss": "poet",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.gendai",
+   "form": "げんだい",
+   "reading": "げんだい",
+   "gloss": "contemporary period",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.gendai-bungaku",
+   "form": "げんだいぶんがく",
+   "reading": "げんだいぶんがく",
+   "gloss": "contemporary literature",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.koten",
+   "form": "こてん",
+   "reading": "こてん",
+   "gloss": "classic",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.koten-bungaku",
+   "form": "こてんぶんがく",
+   "reading": "こてんぶんがく",
+   "gloss": "classical literature",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.waka",
+   "form": "わか",
+   "reading": "わか",
+   "gloss": "waka poem",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.renga",
+   "form": "れんが",
+   "reading": "れんが",
+   "gloss": "linked verse",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.haikai",
+   "form": "かいかい",
+   "reading": "かいかい",
+   "gloss": "comic linked verse",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.haiku",
+   "form": "はいく",
+   "reading": "はいく",
+   "gloss": "haiku",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.tanka",
+   "form": "たんか",
+   "reading": "たんか",
+   "gloss": "tanka poem",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.senryuu",
+   "form": "せんりゅう",
+   "reading": "せんりゅう",
+   "gloss": "senryu",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.douwa",
+   "form": "どうわ",
+   "reading": "どうわ",
+   "gloss": "children's story",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.setwa",
+   "form": "せつわ",
+   "reading": "せつわ",
+   "gloss": "anecdote",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.roman",
+   "form": "ろまん",
+   "reading": "ろまん",
+   "gloss": "romance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.roman-shugi",
+   "form": "ろまんしゅぎ",
+   "reading": "ろまんしゅぎ",
+   "gloss": "romanticism",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.engoki",
+   "form": "えんぎき",
+   "reading": "えんぎき",
+   "gloss": "drama",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.bungaku-shi",
+   "form": "ぶんがくし",
+   "reading": "ぶんがくし",
+   "gloss": "literary history",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit.bungaku-hyou",
+   "form": "ぶんがくひょう",
+   "reading": "ぶんがくひょう",
+   "gloss": "literary criticism",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.shiteisha",
+   "form": "していしゃ",
+   "reading": "していしゃ",
+   "gloss": "narrator",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.shitei",
+   "form": "してい",
+   "reading": "してい",
+   "gloss": "viewpoint",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.dokusha",
+   "form": "どくしゃ",
+   "reading": "どくしゃ",
+   "gloss": "reader",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.dokusho",
+   "form": "どくしょ",
+   "reading": "どくしょ",
+   "gloss": "reading",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.kotoba",
+   "form": "ことば",
+   "reading": "ことば",
+   "gloss": "word",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.shanru",
+   "form": "しゃんる",
+   "reading": "しゃんる",
+   "gloss": "genre",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.lit2.haikei",
+   "form": "はいけい",
+   "reading": "はいけい",
+   "gloss": "background",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

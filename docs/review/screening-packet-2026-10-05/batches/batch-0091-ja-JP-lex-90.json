@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-90",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.med.shokujou",
+   "form": "しょくじょう",
+   "reading": "しょくじょう",
+   "gloss": "diet, eating habits",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.seikatsu",
+   "form": "せいかつ",
+   "reading": "せいかつ",
+   "gloss": "daily life, lifestyle",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.yukou",
+   "form": "ゆうこう",
+   "reading": "ゆうこう",
+   "gloss": "effective",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.setsumei",
+   "form": "せつめい",
+   "reading": "せつめい",
+   "gloss": "explanation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.shitsumon",
+   "form": "しつもん",
+   "reading": "しつもん",
+   "gloss": "question",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.shinryou",
+   "form": "しんりょう",
+   "reading": "しんりょう",
+   "gloss": "medical consultation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.kizuki",
+   "form": "きづき",
+   "reading": "きづき",
+   "gloss": "awareness, noticing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.kotae",
+   "form": "こたえ",
+   "reading": "こたえ",
+   "gloss": "answer, reply",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.iyaku",
+   "form": "いやく",
+   "reading": "いやく",
+   "gloss": "medicine, pharmaceutical",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.jikken",
+   "form": "じっけん",
+   "reading": "じっけん",
+   "gloss": "experiment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.katsuyou",
+   "form": "かつよう",
+   "reading": "かつよう",
+   "gloss": "application, practical use",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.shinkou",
+   "form": "しんこう",
+   "reading": "しんこう",
+   "gloss": "progress, advance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.seika",
+   "form": "せいか",
+   "reading": "せいか",
+   "gloss": "result, achievement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.seiyaku",
+   "form": "せいやく",
+   "reading": "せいやく",
+   "gloss": "pharmaceutical medicine",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.fukusayou",
+   "form": "ふくさよう",
+   "reading": "ふくさよう",
+   "gloss": "side effect",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.kouchou",
+   "form": "こうちょう",
+   "reading": "こうちょう",
+   "gloss": "benefit, profit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.taisaku",
+   "form": "たいさく",
+   "reading": "たいさく",
+   "gloss": "measure, countermeasure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med.kachi",
+   "form": "かち",
+   "reading": "かち",
+   "gloss": "value, worth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.iryou",
+   "form": "いりょう",
+   "reading": "いりょう",
+   "gloss": "medical care",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.fukushi",
+   "form": "ふくし",
+   "reading": "ふくし",
+   "gloss": "welfare",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.soudan",
+   "form": "そうだん",
+   "reading": "そうだん",
+   "gloss": "consultation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.houmon",
+   "form": "ほうもん",
+   "reading": "ほうもん",
+   "gloss": "visit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.chiryou",
+   "form": "ちりょう",
+   "reading": "ちりょう",
+   "gloss": "treatment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.roujin",
+   "form": "ろうじん",
+   "reading": "ろうじん",
+   "gloss": "elderly person",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.med2.yogo",
+   "form": "ようご",
+   "reading": "ようご",
+   "gloss": "nursing care",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

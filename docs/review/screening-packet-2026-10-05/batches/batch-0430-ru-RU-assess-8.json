@@ -1,0 +1,107 @@
+{
+ "batch_id": "ru-RU-assess-8",
+ "kind": "assess",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.assess.b2.argumentation-reading3",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify qualification words (оговорка, ремарка) in a supplied note.",
+    "Match правда chunks to their qualification.",
+    "Distinguish эвфемизм (euphemism) from недомолвка (omission)."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.argumentation-writing3",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Qualify with the supplied правда chunk.",
+    "Concede with the supplied если и chunk.",
+    "Object with a supplied возражать or оговорка chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.argumentation-reading4",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify evaluation words (обоснованный, необоснованный) in a supplied note.",
+    "Match следовательно chunks to their conclusion.",
+    "Distinguish объективный (objective) from субъективный (subjective)."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.argumentation-writing4",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Conclude with the supplied следовательно chunk.",
+    "Evaluate with the supplied с точки зрения chunk.",
+    "Weigh with a supplied взвешенный or продуманный chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.critical-reading-reading",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify structure words (связь, иерархия) in a supplied argument map.",
+    "Match так как chunks to their reason.",
+    "Distinguish тезис (thesis) from антитезис (antithesis)."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.critical-reading-writing",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Link claims with the supplied так как chunk.",
+    "Pair claims with the supplied не только … но и chunk.",
+    "Map with a supplied связь or иерархия chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.critical-reading-reading2",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify stance words (установка, посыл) in a supplied text.",
+    "Match имея в виду chunks to their implication.",
+    "Distinguish лозунг (slogan) from воззвание (appeal)."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.critical-reading-writing2",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Signal implication with the supplied имея в виду chunk.",
+    "Mark stance with the supplied подчёркиваю chunk.",
+    "Frame with a supplied дискурс or нарратив chunk."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.critical-reading-reading3",
+   "kind": "recognition",
+   "modality": "reading",
+   "criteria": [
+    "Identify source words (первоисточник, архив) in a supplied note.",
+    "Match согласно chunks to their attribution.",
+    "Distinguish подделка (forgery) from фейк (fake)."
+   ]
+  },
+  {
+   "id": "ru.assess.b2.critical-reading-writing3",
+   "kind": "production",
+   "modality": "writing",
+   "criteria": [
+    "Attribute with the supplied согласно chunk.",
+    "Limit with the supplied при этом chunk.",
+    "Verify with a supplied верификация or проверка chunk."
+   ]
+  }
+ ]
+}

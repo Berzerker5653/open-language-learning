@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-87",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.prof.frilans",
+   "form": "фриланс",
+   "reading": "фри́ланс",
+   "gloss": "freelance",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.frilanser",
+   "form": "фрилансер",
+   "reading": "фри́лансер",
+   "gloss": "freelancer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.decret",
+   "form": "декрет",
+   "reading": "декре́т",
+   "gloss": "maternity leave",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.dekretnyy",
+   "form": "декретный",
+   "reading": "декре́тный",
+   "gloss": "maternity (adj)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.prizvan",
+   "form": "призван",
+   "reading": "при́зван",
+   "gloss": "called, destined",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.zanyatost",
+   "form": "занятость",
+   "reading": "за́нятость",
+   "gloss": "employment, busyness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.professionalizm",
+   "form": "профессионализм",
+   "reading": "профессионали́зм",
+   "gloss": "professionalism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.trudoustroennyy",
+   "form": "трудоустроенный",
+   "reading": "трудоустро́енный",
+   "gloss": "employed",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.shtatnyy",
+   "form": "штатный",
+   "reading": "шта́тный",
+   "gloss": "permanent staff (adj)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.vneshstatnyy",
+   "form": "внештатный",
+   "reading": "внешта́тный",
+   "gloss": "freelance, extra-staff",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.sovmestitel",
+   "form": "совместитель",
+   "reading": "совмести́тель",
+   "gloss": "part-time worker",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.podrazdelenie",
+   "form": "подразделение",
+   "reading": "подразделе́ние",
+   "gloss": "subdivision, unit",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.rekruter",
+   "form": "рекрутер",
+   "reading": "рекру́тер",
+   "gloss": "recruiter",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.rekruting",
+   "form": "рекрутинг",
+   "reading": "рекру́тинг",
+   "gloss": "recruiting",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.hedhanter",
+   "form": "хедхантер",
+   "reading": "хе́дхантер",
+   "gloss": "headhunter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.otborochnyy",
+   "form": "отборочный",
+   "reading": "отбо́рочный",
+   "gloss": "selection (adj)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.finalist",
+   "form": "финалист",
+   "reading": "финали́ст",
+   "gloss": "finalist",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.laureat",
+   "form": "лауреат",
+   "reading": "лауреа́т",
+   "gloss": "laureate",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.magistrant",
+   "form": "магистрант",
+   "reading": "магистра́нт",
+   "gloss": "master's student",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.bakalavr",
+   "form": "бакалавр",
+   "reading": "бакала́вр",
+   "gloss": "bachelor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.trening",
+   "form": "тренинг",
+   "reading": "тре́нинг",
+   "gloss": "training",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.vorkshop",
+   "form": "воркшоп",
+   "reading": "воркшо́п",
+   "gloss": "workshop",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.golovnoy",
+   "form": "головной",
+   "reading": "головно́й",
+   "gloss": "head, main",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.kovorking",
+   "form": "коворкинг",
+   "reading": "коворки́нг",
+   "gloss": "coworking",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.autsorsing",
+   "form": "аутсорсинг",
+   "reading": "аутсо́рсинг",
+   "gloss": "outsourcing",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-101",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.philosophy.tetsugaku",
+   "form": "てつがく",
+   "reading": "てつがく",
+   "gloss": "philosophy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy.shisou",
+   "form": "しそう",
+   "reading": "しそう",
+   "gloss": "thought",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy.rinen",
+   "form": "りねん",
+   "reading": "りねん",
+   "gloss": "ideal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy.genri",
+   "form": "げんり",
+   "reading": "げんり",
+   "gloss": "principle",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy.gijiron",
+   "form": "ぎじろん",
+   "reading": "ぎじろん",
+   "gloss": "epistemology",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy.ronri-gaku",
+   "form": "ろんりがく",
+   "reading": "ろんりがく",
+   "gloss": "logic",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy.hasei",
+   "form": "はせい",
+   "reading": "はせい",
+   "gloss": "genesis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy.hensen",
+   "form": "へんせん",
+   "reading": "へんせん",
+   "gloss": "evolution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy.kiso-gairon",
+   "form": "きそがいろん",
+   "reading": "きそがいろん",
+   "gloss": "elementary introduction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.kojin",
+   "form": "こじん",
+   "reading": "こじん",
+   "gloss": "individual",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.honshitsu",
+   "form": "ほんしつ",
+   "reading": "ほんしつ",
+   "gloss": "essence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.shinjitsu",
+   "form": "しんじつ",
+   "reading": "しんじつ",
+   "gloss": "truth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.uso",
+   "form": "うそ",
+   "reading": "うそ",
+   "gloss": "lie",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.shinjin",
+   "form": "しんじん",
+   "reading": "しんじん",
+   "gloss": "trust",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.seigi",
+   "form": "せいぎ",
+   "reading": "せいぎ",
+   "gloss": "justice",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.kousei",
+   "form": "こうせい",
+   "reading": "こうせい",
+   "gloss": "fairness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.zennyaku",
+   "form": "ぜんあく",
+   "reading": "ぜんあく",
+   "gloss": "good and evil",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.jikukettei",
+   "form": "じこけってい",
+   "reading": "じこけってい",
+   "gloss": "self-determination",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.shiawase",
+   "form": "しあわせ",
+   "reading": "しあわせ",
+   "gloss": "happiness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.jitsugen",
+   "form": "じつげん",
+   "reading": "じつげん",
+   "gloss": "realization",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.kikai",
+   "form": "きかい",
+   "reading": "きかい",
+   "gloss": "machine",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.izen",
+   "form": "いぜん",
+   "reading": "いぜん",
+   "gloss": "previous generation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.inou",
+   "form": "いけん",
+   "reading": "いけん",
+   "gloss": "opinion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.iryou",
+   "form": "いりょう",
+   "reading": "いりょう",
+   "gloss": "medical care",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy2.makoto",
+   "form": "まこと",
+   "reading": "まこと",
+   "gloss": "sincerity",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-24",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.cult2.hommon2",
+   "form": "ほうもん",
+   "reading": "ほうもん",
+   "gloss": "visit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.ronso",
+   "form": "ろんそう",
+   "reading": "ろんそう",
+   "gloss": "debate, controversy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.shiki",
+   "form": "しき",
+   "reading": "しき",
+   "gloss": "consciousness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.kachi5",
+   "form": "かち",
+   "reading": "かち",
+   "gloss": "value",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.hakai",
+   "form": "はかい",
+   "reading": "はかい",
+   "gloss": "destruction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.hogo2",
+   "form": "ほご",
+   "reading": "ほご",
+   "gloss": "protection",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.sanka3",
+   "form": "さんか",
+   "reading": "さんか",
+   "gloss": "participation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.hatsugen",
+   "form": "はつげん",
+   "reading": "はつげん",
+   "gloss": "statement, remark",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.hyosho",
+   "form": "ひょうしょう",
+   "reading": "ひょうしょう",
+   "gloss": "expression (of feeling)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.gimon2",
+   "form": "ぎもん",
+   "reading": "ぎもん",
+   "gloss": "question, doubt",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.kodo2",
+   "form": "こうどう",
+   "reading": "こうどう",
+   "gloss": "action",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.hantai4",
+   "form": "はんたい",
+   "reading": "はんたい",
+   "gloss": "opposition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.rikken2",
+   "form": "りっけん",
+   "reading": "りっけん",
+   "gloss": "recognition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.jiyu3",
+   "form": "じゆう",
+   "reading": "じゆう",
+   "gloss": "freedom",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.kizon2",
+   "form": "きぞん",
+   "reading": "きぞん",
+   "gloss": "respect, existence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.tokui",
+   "form": "とくい",
+   "reading": "とくい",
+   "gloss": "strong point, specialty",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.fumei",
+   "form": "ふめい",
+   "reading": "ふめい",
+   "gloss": "unknown, obscure",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.himei",
+   "form": "ひめい",
+   "reading": "ひめい",
+   "gloss": "confidentiality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.soshiki",
+   "form": "そしき",
+   "reading": "そしき",
+   "gloss": "organization",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.kikan2",
+   "form": "きかん",
+   "reading": "きかん",
+   "gloss": "period, institution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.renmei",
+   "form": "れんめい",
+   "reading": "れんめい",
+   "gloss": "joint name, coalition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.shingakusha",
+   "form": "しんがくしゃ",
+   "reading": "しんがくしゃ",
+   "gloss": "scholar",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.kenkyusha",
+   "form": "けんきゅうしゃ",
+   "reading": "けんきゅうしゃ",
+   "gloss": "researcher",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.shogen",
+   "form": "しょうげん",
+   "reading": "しょうげん",
+   "gloss": "testimony",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.cult2.kaiso2",
+   "form": "かいそう",
+   "reading": "かいそう",
+   "gloss": "reflection, retrospection",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

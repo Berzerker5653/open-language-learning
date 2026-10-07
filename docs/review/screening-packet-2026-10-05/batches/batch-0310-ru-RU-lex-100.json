@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-100",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.sci.doveritelnyy",
+   "form": "доверительный",
+   "reading": "довери́тельный",
+   "gloss": "confidence (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.shansy",
+   "form": "шансы",
+   "reading": "шансы́",
+   "gloss": "odds, chances",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.plato",
+   "form": "плато",
+   "reading": "плато́",
+   "gloss": "plateau",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.prognozirovat",
+   "form": "прогнозировать",
+   "reading": "прогнози́ровать",
+   "gloss": "to forecast",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.prognoznyy",
+   "form": "прогнозный",
+   "reading": "прогно́зный",
+   "gloss": "forecast (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.predskazuemyy",
+   "form": "предсказуемый",
+   "reading": "предсказу́емый",
+   "gloss": "predictable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.nepredskazuemyy",
+   "form": "непредсказуемый",
+   "reading": "непредсказу́емый",
+   "gloss": "unpredictable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.opaslivyy",
+   "form": "опасливый",
+   "reading": "опа́сливый",
+   "gloss": "cautious",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.riskovannyy",
+   "form": "рискованный",
+   "reading": "риско́ванный",
+   "gloss": "risky",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.avtyura",
+   "form": "авантюра",
+   "reading": "авантю́ра",
+   "gloss": "adventure, gamble",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.avtyurnyy",
+   "form": "авантюрный",
+   "reading": "авантю́рный",
+   "gloss": "adventurous",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.nereshitelnyy",
+   "form": "нерешительный",
+   "reading": "нереши́тельный",
+   "gloss": "irresolute",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.dilemma",
+   "form": "дилемма",
+   "reading": "диле́мма",
+   "gloss": "dilemma",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.redkost",
+   "form": "редкость",
+   "reading": "ре́дкость",
+   "gloss": "rarity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.ekstremum",
+   "form": "экстремум",
+   "reading": "экстре́мум",
+   "gloss": "extremum",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.pikovyy",
+   "form": "пиковый",
+   "reading": "пи́ковый",
+   "gloss": "peak (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.fluaktuaciya",
+   "form": "флуктуация",
+   "reading": "флуктуа́ция",
+   "gloss": "fluctuation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.nestabilnost",
+   "form": "нестабильность",
+   "reading": "нестаби́льность",
+   "gloss": "instability",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.avariynyy",
+   "form": "аварийный",
+   "reading": "авари́йный",
+   "gloss": "emergency (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.poteri",
+   "form": "потери",
+   "reading": "поте́ри",
+   "gloss": "losses",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.evakuaciya",
+   "form": "эвакуация",
+   "reading": "эвакуа́ция",
+   "gloss": "evacuation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.evakuirovat",
+   "form": "эвакуировать",
+   "reading": "эвакуи́ровать",
+   "gloss": "to evacuate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.predotvrashchenie",
+   "form": "предотвращение",
+   "reading": "предотвраще́ние",
+   "gloss": "prevention",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.profilakticheskiy",
+   "form": "профилактический",
+   "reading": "профилакти́ческий",
+   "gloss": "preventive",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.predupreditelnyy",
+   "form": "предупредительный",
+   "reading": "предупреди́тельный",
+   "gloss": "warning (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

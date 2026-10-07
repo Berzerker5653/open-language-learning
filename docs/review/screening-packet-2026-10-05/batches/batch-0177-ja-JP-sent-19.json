@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-19",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.emotion-vocab",
+   "text": "かんじょう を ことば で つたえます。",
+   "gloss": "I convey emotions in words."
+  },
+  {
+   "id": "ja.sent.mood-chat",
+   "text": "こんや は わくわく して、いらいら も しました。",
+   "gloss": "Tonight I was excited and also irritated."
+  },
+  {
+   "id": "ja.sent.empathy",
+   "text": "きおく を こころがけて ことば を えらびました。",
+   "gloss": "I chose words with consideration."
+  },
+  {
+   "id": "ja.sent.apology",
+   "text": "じこ の しょうぎ を まじめ に かきました。",
+   "gloss": "I wrote the apology for the accident earnestly."
+  },
+  {
+   "id": "ja.sent.gratitude",
+   "text": "あいじょう と ゆい を かんじました。",
+   "gloss": "I felt affection and bond."
+  },
+  {
+   "id": "ja.sent.encouragement",
+   "text": "しょうじん の ことば で ちから が でました。",
+   "gloss": "The words of exhortation gave me strength."
+  },
+  {
+   "id": "ja.sent.coping",
+   "text": "がまん する ために すこしずつ べんきょう します。",
+   "gloss": "I study little by little to build patience."
+  },
+  {
+   "id": "ja.sent.temperament-compare",
+   "text": "ふたりの タイプ は ちがって います。",
+   "gloss": "The two people's types differ."
+  },
+  {
+   "id": "ja.sent.emotional-story",
+   "text": "じこ の しょうかい で しっぱい を かきました。",
+   "gloss": "I wrote about a failure in my introduction."
+  },
+  {
+   "id": "ja.sent.reconciliation",
+   "text": "ゆっくり あやまって、つづき を まちました。",
+   "gloss": "I apologized slowly and waited for the continuation."
+  },
+  {
+   "id": "ja.sent.self-reflect",
+   "text": "みらい の りそう を かんがえました。",
+   "gloss": "I thought about my future ideal."
+  },
+  {
+   "id": "ja.sent.give-advice",
+   "text": "ともだち に さげん を はなしました。",
+   "gloss": "I spoke advice to my friend."
+  },
+  {
+   "id": "ja.sent.soft-advice",
+   "text": "やわらか こうりゅう が できました。",
+   "gloss": "We had a gentle exchange."
+  },
+  {
+   "id": "ja.sent.partial-agree",
+   "text": "はんぶん そうい しました。",
+   "gloss": "I agreed halfway."
+  },
+  {
+   "id": "ja.sent.polite-disagree",
+   "text": "こうたん する とき ことば を えらびます。",
+   "gloss": "When asserting, I choose words."
+  }
+ ]
+}

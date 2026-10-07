@@ -1,0 +1,97 @@
+{
+ "batch_id": "ja-JP-assess-5",
+ "kind": "assess",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.assess.economics-work",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "discuss markets, employment trends, wages, and management practices",
+    "analyze economic data and workplace issues without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.law-justice",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "discuss legal systems, court processes, rights, and punishment theory",
+    "analyze a legal case or controversy without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.philosophy-ethics",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "discuss ethical frameworks, moral dilemmas, and philosophical concepts",
+    "reason about a moral question without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.literature-study",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "discuss novels, poetry, and literary traditions with precise vocabulary",
+    "analyze a literary text or motif without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.film-analysis",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "discuss film language, genre, direction, and adaptation with precise vocabulary",
+    "analyze a film scene or review without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.history-critical",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "discuss sources, evidence, and interpretation with precise vocabulary",
+    "describe a historical event and its influence without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.society-change",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "discuss demographic, work, and family change with precise vocabulary",
+    "describe a social trend and its effects without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.science-tech-ethics",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "discuss science, technology, and ethics with precise vocabulary",
+    "describe a risk or benefit and its social effect without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.education-pedagogy",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "discuss teaching methods, assessment, and acquisition with precise vocabulary",
+    "describe a learning activity and its purpose without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.global-issues",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "discuss trade, diplomacy, health, and migration with precise vocabulary",
+    "describe a global issue and a proposed response without blocking errors"
+   ]
+  }
+ ]
+}

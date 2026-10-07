@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-133",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.summary.vstuplenie",
+   "form": "вступление",
+   "reading": "вступле́ние",
+   "gloss": "opening",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.summary.zavershenie",
+   "form": "завершение",
+   "reading": "заверше́ние",
+   "gloss": "completion",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.summary.akcent",
+   "form": "акцент",
+   "reading": "акце́нт",
+   "gloss": "accent, emphasis",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.udarenie",
+   "form": "ударение",
+   "reading": "ударе́ние",
+   "gloss": "stress, emphasis",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.summary.zamytsel",
+   "form": "замысел",
+   "reading": "за́мысел",
+   "gloss": "design, intent",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.osnova",
+   "form": "основа",
+   "reading": "осно́ва",
+   "gloss": "basis",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary.sterzhen2",
+   "form": "стержень",
+   "reading": "сте́ржень",
+   "gloss": "core",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.shtrih",
+   "form": "штрих",
+   "reading": "штрих",
+   "gloss": "stroke, nuance",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.kraska",
+   "form": "краска",
+   "reading": "кра́ска",
+   "gloss": "paint, color",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary.ottenok",
+   "form": "оттенок",
+   "reading": "отте́нок",
+   "gloss": "shade, nuance",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.nyuans",
+   "form": "нюанс",
+   "reading": "нюа́нс",
+   "gloss": "nuance",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.kontekst",
+   "form": "контекст",
+   "reading": "конте́кст",
+   "gloss": "context",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.podtekst",
+   "form": "подтекст",
+   "reading": "подте́кст",
+   "gloss": "subtext",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.znak",
+   "form": "знак",
+   "reading": "знак",
+   "gloss": "sign",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.simvol",
+   "form": "символ",
+   "reading": "си́мвол",
+   "gloss": "symbol",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.obraz",
+   "form": "образ",
+   "reading": "о́браз",
+   "gloss": "image",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.opisanie",
+   "form": "описание",
+   "reading": "описа́ние",
+   "gloss": "description",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.summary.harakteristika",
+   "form": "характеристика",
+   "reading": "характери́стика",
+   "gloss": "characteristic",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary.biografiya",
+   "form": "биография",
+   "reading": "биогра́фия",
+   "gloss": "biography",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary.memuary",
+   "form": "мемуары",
+   "reading": "мемуа́ры",
+   "gloss": "memoirs",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.summary.dnevnik",
+   "form": "дневник",
+   "reading": "дневни́к",
+   "gloss": "diary",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.zapis2",
+   "form": "запись",
+   "reading": "за́пись",
+   "gloss": "record, entry",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary.sushchnost2",
+   "form": "сущность",
+   "reading": "су́щность",
+   "gloss": "essence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary.predmet",
+   "form": "предмет",
+   "reading": "предме́т",
+   "gloss": "subject, object",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary.yavlenie",
+   "form": "явление",
+   "reading": "явле́ние",
+   "gloss": "phenomenon",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-45",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.home.mashina",
+   "form": "машина",
+   "reading": "маши́на",
+   "gloss": "car",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.most",
+   "form": "мост",
+   "reading": "мост",
+   "gloss": "bridge",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.reka",
+   "form": "река",
+   "reading": "река́",
+   "gloss": "river",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.home.les",
+   "form": "лес",
+   "reading": "лес",
+   "gloss": "forest",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.home.more",
+   "form": "море",
+   "reading": "мо́ре",
+   "gloss": "sea",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.housing.kvartira",
+   "form": "квартира",
+   "reading": "кварти́ра",
+   "gloss": "apartment",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.arenda",
+   "form": "аренда",
+   "reading": "аре́нда",
+   "gloss": "rent (noun)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.arendator",
+   "form": "арендатор",
+   "reading": "аренда́тор",
+   "gloss": "tenant",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.hozyain",
+   "form": "хозяин",
+   "reading": "хозя́ин",
+   "gloss": "owner, landlord",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.mebel",
+   "form": "мебель",
+   "reading": "ме́бель",
+   "gloss": "furniture",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.stul",
+   "form": "стул",
+   "reading": "стул",
+   "gloss": "chair",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.kran",
+   "form": "кран",
+   "reading": "кран",
+   "gloss": "tap, faucet",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.truba",
+   "form": "труба",
+   "reading": "труба́",
+   "gloss": "pipe",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.skvoznyak",
+   "form": "сквозняк",
+   "reading": "сквозня́к",
+   "gloss": "draught",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.teplo",
+   "form": "тепло",
+   "reading": "тепло́",
+   "gloss": "heat",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.housing.svet",
+   "form": "свет",
+   "reading": "свет",
+   "gloss": "light",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.otoplenie",
+   "form": "отопление",
+   "reading": "отопле́ние",
+   "gloss": "heating",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.housing.domofon",
+   "form": "домофон",
+   "reading": "домофо́н",
+   "gloss": "intercom",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.sobranie",
+   "form": "собрание",
+   "reading": "собра́ние",
+   "gloss": "meeting",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.housing.shum",
+   "form": "шум",
+   "reading": "шум",
+   "gloss": "noise",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.sosedstvo",
+   "form": "соседство",
+   "reading": "сосе́дство",
+   "gloss": "neighborhood",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.housing.ssora",
+   "form": "ссора",
+   "reading": "ссо́ра",
+   "gloss": "quarrel",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.korobka",
+   "form": "коробка",
+   "reading": "коро́бка",
+   "gloss": "box",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.zatopit",
+   "form": "затопить",
+   "reading": "затопи́ть",
+   "gloss": "to flood (below)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.housing.potop",
+   "form": "потоп",
+   "reading": "пото́п",
+   "gloss": "flood",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

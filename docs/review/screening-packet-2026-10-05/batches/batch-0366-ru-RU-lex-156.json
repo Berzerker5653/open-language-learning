@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-156",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.writing.adresat",
+   "form": "адресат",
+   "reading": "адреса́т",
+   "gloss": "addressee",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.zapros",
+   "form": "запрос",
+   "reading": "запро́с",
+   "gloss": "request (formal)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.ekzemplyar",
+   "form": "экземпляр",
+   "reading": "экземпля́р",
+   "gloss": "copy (of a document)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.chernovik",
+   "form": "черновик",
+   "reading": "чернови́к",
+   "gloss": "draft",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.chistovik",
+   "form": "чистовик",
+   "reading": "чистови́к",
+   "gloss": "final copy",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.zapyataya",
+   "form": "запятая",
+   "reading": "запята́я",
+   "gloss": "comma",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing.probel",
+   "form": "пробел",
+   "reading": "про́бел",
+   "gloss": "space",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.registr",
+   "form": "регистр",
+   "reading": "реги́стр",
+   "gloss": "case (letters)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.shrift",
+   "form": "шрифт",
+   "reading": "шрифт",
+   "gloss": "font",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.format",
+   "form": "формат",
+   "reading": "форма́т",
+   "gloss": "format",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.writing.pole",
+   "form": "поле",
+   "reading": "по́ле",
+   "gloss": "field",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.writing.grafa",
+   "form": "графа",
+   "reading": "графа́",
+   "gloss": "column (form)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing.knopka",
+   "form": "кнопка",
+   "reading": "кно́пка",
+   "gloss": "button",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.writing.sohranit",
+   "form": "сохранить",
+   "reading": "сохрани́ть",
+   "gloss": "to save",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.writing.udalit",
+   "form": "удалить",
+   "reading": "удали́ть",
+   "gloss": "to delete",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.writing.perechitat",
+   "form": "перечитать",
+   "reading": "перечита́ть",
+   "gloss": "to reread",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.writing.podcherknut",
+   "form": "подчеркнуть",
+   "reading": "подчеркну́ть",
+   "gloss": "to underline",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.writing.vydelit",
+   "form": "выделить",
+   "reading": "вы́делить",
+   "gloss": "to highlight",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.writing.sokratit",
+   "form": "сократить",
+   "reading": "сократи́ть",
+   "gloss": "to shorten",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.writing.dobavit",
+   "form": "добавить",
+   "reading": "доба́вить",
+   "gloss": "to add",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.writing.vstavit",
+   "form": "вставить",
+   "reading": "вста́вить",
+   "gloss": "to insert",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.writing.prilozhit",
+   "form": "приложить",
+   "reading": "приложи́ть",
+   "gloss": "to attach",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.writing.prilozhenie",
+   "form": "приложение",
+   "reading": "приложе́ние",
+   "gloss": "attachment",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.writing.uvedomlenie",
+   "form": "уведомление",
+   "reading": "уведомле́ние",
+   "gloss": "notification",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.writing.rassylka",
+   "form": "рассылка",
+   "reading": "рассы́лка",
+   "gloss": "mailing",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

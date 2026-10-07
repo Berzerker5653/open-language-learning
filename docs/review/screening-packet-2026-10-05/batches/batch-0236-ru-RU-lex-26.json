@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-26",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.cult.individuum",
+   "form": "индивидуум",
+   "reading": "индиви́дуум",
+   "gloss": "individual",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.konformnyj",
+   "form": "конформный",
+   "reading": "конфо́рмный",
+   "gloss": "conformist (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.buntar",
+   "form": "бунтарь",
+   "reading": "бунта́рь",
+   "gloss": "rebel",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.myatezhnik",
+   "form": "мятежник",
+   "reading": "мяте́жник",
+   "gloss": "mutineer, rebel",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.dissident",
+   "form": "диссидент",
+   "reading": "диссиде́нт",
+   "gloss": "dissident",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.uedinenie",
+   "form": "уединение",
+   "reading": "уедине́ние",
+   "gloss": "solitude, seclusion",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.prinadlezhat",
+   "form": "принадлежать",
+   "reading": "принадлежа́ть",
+   "gloss": "to belong to",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.otnositsya",
+   "form": "относиться",
+   "reading": "относи́ться",
+   "gloss": "to relate to; to regard",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.oshchushchenie",
+   "form": "ощущение",
+   "reading": "ощуще́ние",
+   "gloss": "sensation, feeling",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.vospriyatie",
+   "form": "восприятие",
+   "reading": "восприя́тие",
+   "gloss": "perception",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.mentalitet",
+   "form": "менталитет",
+   "reading": "менталите́т",
+   "gloss": "mentality",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.mirovozzrenie",
+   "form": "мировоззрение",
+   "reading": "мировоззре́ние",
+   "gloss": "worldview",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.nravy",
+   "form": "нравы",
+   "reading": "нра́вы",
+   "gloss": "mores, customs",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.uklad",
+   "form": "уклад",
+   "reading": "укла́д",
+   "gloss": "way of life, order",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.mirosvospriyatie",
+   "form": "мировосприятие",
+   "reading": "мировосприятие́",
+   "gloss": "world-perception",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.etnos",
+   "form": "этнос",
+   "reading": "э́тнос",
+   "gloss": "ethnic group",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.cult.etnicheskij",
+   "form": "этнический",
+   "reading": "этни́ческий",
+   "gloss": "ethnic (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.narodnost",
+   "form": "народность",
+   "reading": "наро́дность",
+   "gloss": "nationality, folk group",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.plemya",
+   "form": "племя",
+   "reading": "пле́мя",
+   "gloss": "tribe, clan",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.cult.artel",
+   "form": "артель",
+   "reading": "арте́ль",
+   "gloss": "artel, cooperative",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.empatiya",
+   "form": "эмпатия",
+   "reading": "эмпа́тия",
+   "gloss": "empathy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.zalost",
+   "form": "жалость",
+   "reading": "жа́лость",
+   "gloss": "pity, compassion",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.cult.pricezhij",
+   "form": "приезжий",
+   "reading": "прие́зжий",
+   "gloss": "newcomer, outsider",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.mestnyj",
+   "form": "местный",
+   "reading": "ме́стный",
+   "gloss": "local (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.cult.korennoy",
+   "form": "коренной",
+   "reading": "коренно́й",
+   "gloss": "native, indigenous",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

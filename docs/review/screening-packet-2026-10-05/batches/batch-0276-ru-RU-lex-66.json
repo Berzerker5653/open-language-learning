@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-66",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.neg.obmanshchik",
+   "form": "обманщик",
+   "reading": "обма́нщик",
+   "gloss": "deceiver, swindler",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.neg.naduvatelstvo",
+   "form": "надувательство",
+   "reading": "надува́тельство",
+   "gloss": "swindling",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.afera",
+   "form": "афера",
+   "reading": "афе́ра",
+   "gloss": "swindle, affair",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.makhinaciya",
+   "form": "махинация",
+   "reading": "махина́ция",
+   "gloss": "scheme, machination",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.manipulirovat",
+   "form": "манипулировать",
+   "reading": "манипули́ровать",
+   "gloss": "to manipulate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.dogovornoy",
+   "form": "договорной",
+   "reading": "договорно́й",
+   "gloss": "contractual",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.kontraktnyy",
+   "form": "контрактный",
+   "reading": "контра́ктный",
+   "gloss": "contract (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.soglasitelnyy",
+   "form": "согласительный",
+   "reading": "согласи́тельный",
+   "gloss": "conciliation (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.primirit",
+   "form": "примирить",
+   "reading": "примири́ть",
+   "gloss": "to reconcile",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.primiritelnyy",
+   "form": "примирительный",
+   "reading": "примири́тельный",
+   "gloss": "conciliatory",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.zatishye",
+   "form": "затишье",
+   "reading": "зати́шье",
+   "gloss": "lull",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.peredyshka",
+   "form": "передышка",
+   "reading": "переды́шка",
+   "gloss": "breather",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.posrednichestvo",
+   "form": "посредничество",
+   "reading": "посре́дничество",
+   "gloss": "mediation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.posrednicheskiy",
+   "form": "посреднический",
+   "reading": "посре́днический",
+   "gloss": "mediation (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.peregovornyy",
+   "form": "переговорный",
+   "reading": "перегово́рный",
+   "gloss": "negotiation (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.ratifikaciya",
+   "form": "ратификация",
+   "reading": "ратифика́ция",
+   "gloss": "ratification",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.ratificirovat",
+   "form": "ратифицировать",
+   "reading": "ратифици́ровать",
+   "gloss": "to ratify",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.podpisanie",
+   "form": "подписание",
+   "reading": "подписа́ние",
+   "gloss": "signing",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.parafirovanie",
+   "form": "парафирование",
+   "reading": "парафи́рование",
+   "gloss": "initialing",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.obyazyvayushchiy",
+   "form": "обязывающий",
+   "reading": "обязыва́ющий",
+   "gloss": "binding",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.neobyazyvayushchiy",
+   "form": "необязывающий",
+   "reading": "необязыва́ющий",
+   "gloss": "non-binding",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.dobrovolnost",
+   "form": "добровольность",
+   "reading": "доброво́льность",
+   "gloss": "voluntariness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.prinuditelnyy",
+   "form": "принудительный",
+   "reading": "принуди́тельный",
+   "gloss": "coercive",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.prinuzhdenie",
+   "form": "принуждение",
+   "reading": "принужде́ние",
+   "gloss": "coercion",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.shantazh",
+   "form": "шантаж",
+   "reading": "шанта́ж",
+   "gloss": "blackmail",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

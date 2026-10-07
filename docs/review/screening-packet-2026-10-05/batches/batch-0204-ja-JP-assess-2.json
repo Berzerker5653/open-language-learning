@@ -1,0 +1,97 @@
+{
+ "batch_id": "ja-JP-assess-2",
+ "kind": "assess",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.assess.transport",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "buy/ask about a ticket and board the right vehicle in a simulated exchange",
+    "give and follow a simple direction (left/right/straight) without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.health-basics",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "state a simple symptom and understand a basic health instruction (rest, take medicine)",
+    "use 〜たいです and に-destination in a simulated clinic exchange"
+   ]
+  },
+  {
+   "id": "ja.assess.free-time",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "describe hobbies and favorites with すき/だいすき and たい-desire forms",
+    "talk about a past experience using 〜たことがあります without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.home-life",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "describe rooms, furniture, and chores using open/close/put-away verbs",
+    "state simple housing descriptions (spacious, narrow, quiet) without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.work-school",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "describe a work or school task and schedule using で/を and time expressions",
+    "exchange simple workplace or classroom messages without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.past-stories",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "retell a simple past event or story using past forms and sequencing adverbs",
+    "express a memory or feeling about a past event without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.city-services",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "complete a simple city-service exchange (mail, bank, office) using で/に and polite requests",
+    "understand and follow a posted sign or instruction without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.food-cooking",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "describe a simple recipe or food preference using おいしい/すき and seasoning verbs",
+    "order or request food/drink in a simulated exchange without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.shopping-services",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "complete a shopping exchange (ask price, try on, pay) using counters and polite requests",
+    "describe clothing and sizes without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.health-body",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "describe symptoms and recovery at a clinic using condition words and conditionals",
+    "give simple health advice (sleep, exercise, prevention) without blocking errors"
+   ]
+  }
+ ]
+}

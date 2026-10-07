@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-47",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.housing.prostynya",
+   "form": "простыня",
+   "reading": "простыня́",
+   "gloss": "bedsheet",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.odeyalo",
+   "form": "одеяло",
+   "reading": "одея́ло",
+   "gloss": "blanket",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.housing.podushka",
+   "form": "подушка",
+   "reading": "поду́шка",
+   "gloss": "pillow",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.housing.kovrik",
+   "form": "коврик",
+   "reading": "ко́врик",
+   "gloss": "small rug",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.housing.polovik",
+   "form": "половик",
+   "reading": "полови́к",
+   "gloss": "rug",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.instructions.shag",
+   "form": "шаг",
+   "reading": "шаг",
+   "gloss": "step",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.instructions.instrukciya",
+   "form": "инструкция",
+   "reading": "инстру́кция",
+   "gloss": "instruction, manual",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.instructions.pravilo",
+   "form": "правило",
+   "reading": "пра́вило",
+   "gloss": "rule",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.instructions.dalee",
+   "form": "далее",
+   "reading": "да́лее",
+   "gloss": "further, next",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.zatem",
+   "form": "затем",
+   "reading": "зате́м",
+   "gloss": "then, thereafter",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.instrument",
+   "form": "инструмент",
+   "reading": "инструме́нт",
+   "gloss": "tool, instrument",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.instructions.otvyortka",
+   "form": "отвёртка",
+   "reading": "отве́ртка",
+   "gloss": "screwdriver",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.instructions.molotok",
+   "form": "молоток",
+   "reading": "молото́к",
+   "gloss": "hammer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.instructions.gvozd",
+   "form": "гвоздь",
+   "reading": "гвоздь",
+   "gloss": "nail",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.instructions.lineika",
+   "form": "линейка",
+   "reading": "лине́йка",
+   "gloss": "ruler",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.instructions.remont",
+   "form": "ремонт",
+   "reading": "ремо́нт",
+   "gloss": "repair",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.instructions.pochinit",
+   "form": "починить",
+   "reading": "почини́ть",
+   "gloss": "to fix, mend",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.slomannyi",
+   "form": "сломанный",
+   "reading": "сло́манный",
+   "gloss": "broken",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.zamenit",
+   "form": "заменить",
+   "reading": "замени́ть",
+   "gloss": "to replace",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.proverit",
+   "form": "проверить",
+   "reading": "прове́рить",
+   "gloss": "to check, verify",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.sobrat",
+   "form": "собрать",
+   "reading": "собра́ть",
+   "gloss": "to assemble, collect",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.detal",
+   "form": "деталь",
+   "reading": "дета́ль",
+   "gloss": "part, detail",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.instructions.vint",
+   "form": "винт",
+   "reading": "винт",
+   "gloss": "screw, bolt",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.instructions.shema",
+   "form": "схема",
+   "reading": "схе́ма",
+   "gloss": "diagram, scheme",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.instructions.chast",
+   "form": "часть",
+   "reading": "часть",
+   "gloss": "part, piece",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

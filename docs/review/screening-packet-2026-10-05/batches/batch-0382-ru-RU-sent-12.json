@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-12",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b1.u215",
+   "text": "Это было раньше.",
+   "gloss": "That was earlier."
+  },
+  {
+   "id": "ru.sent.b1.u216",
+   "text": "Он обрадовался.",
+   "gloss": "He got glad."
+  },
+  {
+   "id": "ru.sent.b1.u217",
+   "text": "Он рассказал.",
+   "gloss": "He told the story."
+  },
+  {
+   "id": "ru.sent.b1.u218",
+   "text": "Это улица.",
+   "gloss": "This is the street."
+  },
+  {
+   "id": "ru.sent.b1.u219",
+   "text": "Это конец.",
+   "gloss": "This is the end."
+  },
+  {
+   "id": "ru.sent.b1.u220",
+   "text": "Мы ждали весь вечер.",
+   "gloss": "We waited the whole evening."
+  },
+  {
+   "id": "ru.sent.b1.u221",
+   "text": "Это впечатление.",
+   "gloss": "This is an impression."
+  },
+  {
+   "id": "ru.sent.b1.u222",
+   "text": "Погода была плохая.",
+   "gloss": "The weather was bad."
+  },
+  {
+   "id": "ru.sent.b1.u223",
+   "text": "Это отъезд.",
+   "gloss": "This is the departure."
+  },
+  {
+   "id": "ru.sent.b1.u224",
+   "text": "Это девушка.",
+   "gloss": "This is the young woman."
+  },
+  {
+   "id": "ru.sent.b1.u225",
+   "text": "Он высокий.",
+   "gloss": "He is tall."
+  },
+  {
+   "id": "ru.sent.b1.u226",
+   "text": "Это одежда.",
+   "gloss": "This is clothing."
+  },
+  {
+   "id": "ru.sent.b1.u227",
+   "text": "Это радость.",
+   "gloss": "This is joy."
+  },
+  {
+   "id": "ru.sent.b1.u228",
+   "text": "Это мысль.",
+   "gloss": "This is a thought."
+  },
+  {
+   "id": "ru.sent.b1.u229",
+   "text": "Наступил полдень.",
+   "gloss": "Noon arrived."
+  }
+ ]
+}

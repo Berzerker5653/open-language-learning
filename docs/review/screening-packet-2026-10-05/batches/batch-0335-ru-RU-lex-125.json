@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-125",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.style.odnoznachnost",
+   "form": "однозначность",
+   "reading": "однозна́чность",
+   "gloss": "unambiguity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.sochetaemost",
+   "form": "сочетаемость",
+   "reading": "сочета́емость",
+   "gloss": "collocation, combinability",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.shchepetilnost",
+   "form": "щепетильность",
+   "reading": "щепети́льность",
+   "gloss": "scrupulousness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.pedantichnost",
+   "form": "педантичность",
+   "reading": "педанти́чность",
+   "gloss": "pedantry",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.dotoshnost",
+   "form": "дотошность",
+   "reading": "дото́шность",
+   "gloss": "meticulousness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.pridirchivost",
+   "form": "придирчивость",
+   "reading": "приди́рчивость",
+   "gloss": "nitpicking",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.pridirka",
+   "form": "придирка",
+   "reading": "приди́рка",
+   "gloss": "cavil, nitpick",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.strofa",
+   "form": "строфа",
+   "reading": "строфа́",
+   "gloss": "stanza",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.kuplet",
+   "form": "куплет",
+   "reading": "купле́т",
+   "gloss": "verse, couplet",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.alliteraciya",
+   "form": "аллитерация",
+   "reading": "аллитера́ция",
+   "gloss": "alliteration",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.stilistika",
+   "form": "стилистика",
+   "reading": "стили́стика",
+   "gloss": "stylistics",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.fonetika",
+   "form": "фонетика",
+   "reading": "фоне́тика",
+   "gloss": "phonetics",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.morfologiya",
+   "form": "морфология",
+   "reading": "морфоло́гия",
+   "gloss": "morphology",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.sintaksis",
+   "form": "синтаксис",
+   "reading": "си́нтаксис",
+   "gloss": "syntax",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.style.etimologiya",
+   "form": "этимология",
+   "reading": "этимоло́гия",
+   "gloss": "etymology",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.podrazumevatsya",
+   "form": "подразумеваться",
+   "reading": "подразумева́ться",
+   "gloss": "to be implied",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.style.direktiva",
+   "form": "директива",
+   "reading": "директи́ва",
+   "gloss": "directive",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.leksikografiya",
+   "form": "лексикография",
+   "reading": "лексикогра́фия",
+   "gloss": "lexicography",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.inoskazanie",
+   "form": "иносказание",
+   "reading": "иносказа́ние",
+   "gloss": "allegory, parable",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.style.byl",
+   "form": "быль",
+   "reading": "быль",
+   "gloss": "true story",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.nebylica",
+   "form": "небылица",
+   "reading": "небыли́ца",
+   "gloss": "tall tale",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.bayka",
+   "form": "байка",
+   "reading": "ба́йка",
+   "gloss": "tall story, anecdote",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.nasmeshka",
+   "form": "насмешка",
+   "reading": "насме́шка",
+   "gloss": "mockery, ridicule",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.sarkastichnost",
+   "form": "саркастичность",
+   "reading": "саркасти́чность",
+   "gloss": "sarcasticness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.style.neodnoznachnyj",
+   "form": "неоднозначный",
+   "reading": "неоднозна́чный",
+   "gloss": "ambiguous, ambivalent",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

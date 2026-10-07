@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-6",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.teacher-teaches",
+   "text": "せんせいが おしえます。",
+   "gloss": "The teacher teaches."
+  },
+  {
+   "id": "ja.sent.meeting-starts",
+   "text": "かいぎが はじまります。",
+   "gloss": "The meeting begins."
+  },
+  {
+   "id": "ja.sent.buy-textbook",
+   "text": "きょうかしょを かいます。",
+   "gloss": "I buy a textbook."
+  },
+  {
+   "id": "ja.sent.exchange-cards",
+   "text": "めいしを とりかえます。",
+   "gloss": "We exchange business cards."
+  },
+  {
+   "id": "ja.sent.learn-by-listening",
+   "text": "きいて ならいます。",
+   "gloss": "I learn by listening."
+  },
+  {
+   "id": "ja.sent.finish-work",
+   "text": "しぎょうが おわります。",
+   "gloss": "Work hours end."
+  },
+  {
+   "id": "ja.sent.interview-prep",
+   "text": "intabyuu の じゅんびを します。",
+   "gloss": "I prepare for the interview."
+  },
+  {
+   "id": "ja.sent.long-ago",
+   "text": "むかし、おおきな やまが ありました。",
+   "gloss": "Long ago, there was a big mountain."
+  },
+  {
+   "id": "ja.sent.stars-in-sky",
+   "text": "そらに ほしが あります。",
+   "gloss": "There are stars in the sky."
+  },
+  {
+   "id": "ja.sent.moon-over-mountain",
+   "text": "やまの 上に つきが でます。",
+   "gloss": "The moon rises over the mountain."
+  },
+  {
+   "id": "ja.sent.tell-story",
+   "text": "ともだちに はなしを かたります。",
+   "gloss": "I tell a story to a friend."
+  },
+  {
+   "id": "ja.sent.nostalgic-song",
+   "text": "この うたは なつかしいです。",
+   "gloss": "This song is nostalgic."
+  },
+  {
+   "id": "ja.sent.remember-trip",
+   "text": "りょこうの きおくを おもいだします。",
+   "gloss": "I remember the trip."
+  },
+  {
+   "id": "ja.sent.lost-bag",
+   "text": "かばんを なくしました。",
+   "gloss": "I lost my bag."
+  },
+  {
+   "id": "ja.sent.suddenly-rain",
+   "text": "とつぜん あめが ふりました。",
+   "gloss": "Suddenly it rained."
+  }
+ ]
+}

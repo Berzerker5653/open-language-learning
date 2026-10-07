@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-32",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.economy.baika",
+   "form": "ばいか",
+   "reading": "ばいか",
+   "gloss": "price rise",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.neage",
+   "form": "ねあげ",
+   "reading": "ねあげ",
+   "gloss": "price increase",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.uchinage",
+   "form": "うちなげ",
+   "reading": "うちなげ",
+   "gloss": "dumping",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.shibora",
+   "form": "しぼら",
+   "reading": "しぼら",
+   "gloss": "deflation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.yuyutu",
+   "form": "ゆうよ",
+   "reading": "ゆうよ",
+   "gloss": "surplus",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.tekiseki",
+   "form": "てきせき",
+   "reading": "てきせき",
+   "gloss": "suitability",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.tsutome",
+   "form": "つとめ",
+   "reading": "つとめ",
+   "gloss": "employment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.hataraki",
+   "form": "はたらき",
+   "reading": "はたらき",
+   "gloss": "work",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.kyougyou",
+   "form": "きょうぎょう",
+   "reading": "きょうぎょう",
+   "gloss": "industry",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.jigyousha",
+   "form": "じぎょうしゃ",
+   "reading": "じぎょうしゃ",
+   "gloss": "business operator",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.yakushoku",
+   "form": "やくしょく",
+   "reading": "やくしょく",
+   "gloss": "company position",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.bucho",
+   "form": "ぶちょう",
+   "reading": "ぶちょう",
+   "gloss": "department head",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.kigyou",
+   "form": "きぎょう",
+   "reading": "きぎょう",
+   "gloss": "enterprise",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.kigyouka",
+   "form": "きぎょうか",
+   "reading": "きぎょうか",
+   "gloss": "commercialization",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.toshin",
+   "form": "としん",
+   "reading": "としん",
+   "gloss": "urban area",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.boshuu",
+   "form": "ぼしゅう",
+   "reading": "ぼしゅう",
+   "gloss": "recruitment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.saiyou",
+   "form": "さいよう",
+   "reading": "さいよう",
+   "gloss": "hiring",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.senyou",
+   "form": "せんよう",
+   "reading": "せんよう",
+   "gloss": "specialization",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.jiken",
+   "form": "じけん",
+   "reading": "じけん",
+   "gloss": "experience",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.jitsuryoku",
+   "form": "じつりょく",
+   "reading": "じつりょく",
+   "gloss": "practical ability",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.senmonka",
+   "form": "せんもんか",
+   "reading": "せんもんか",
+   "gloss": "specialist",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.gijutsusha",
+   "form": "ぎじゅつしゃ",
+   "reading": "ぎじゅつしゃ",
+   "gloss": "engineer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.idou",
+   "form": "いどう",
+   "reading": "いどう",
+   "gloss": "personnel transfer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.hensoku",
+   "form": "げんそく",
+   "reading": "げんそく",
+   "gloss": "slowdown",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.economy.zouka",
+   "form": "ぞうか",
+   "reading": "ぞうか",
+   "gloss": "increase",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

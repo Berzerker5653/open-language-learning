@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-70",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.opinions.utochnenie",
+   "form": "уточнение",
+   "reading": "уточне́ние",
+   "gloss": "clarification",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.opinions.formulirovka",
+   "form": "формулировка",
+   "reading": "формулиро́вка",
+   "gloss": "wording",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.tezis",
+   "form": "тезис",
+   "reading": "те́зис",
+   "gloss": "thesis",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.opinions.polozhenie",
+   "form": "положение",
+   "reading": "положе́ние",
+   "gloss": "position, statement",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.opinions.predpolozhenie",
+   "form": "предположение",
+   "reading": "предположе́ние",
+   "gloss": "supposition",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.opinions.gipoteza",
+   "form": "гипотеза",
+   "reading": "гипо́теза",
+   "gloss": "hypothesis",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.versiya",
+   "form": "версия",
+   "reading": "ве́рсия",
+   "gloss": "version",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.dopushchenie",
+   "form": "допущение",
+   "reading": "допуще́ние",
+   "gloss": "assumption",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.opinions.predposylka",
+   "form": "предпосылка",
+   "reading": "предпосы́лка",
+   "gloss": "premise",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.statistika",
+   "form": "статистика",
+   "reading": "стати́стика",
+   "gloss": "statistics",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.cifra",
+   "form": "цифра",
+   "reading": "ци́фра",
+   "gloss": "digit, figure",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.dannye",
+   "form": "данные",
+   "reading": "да́нные",
+   "gloss": "data",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.opinions.issledovanie",
+   "form": "исследование",
+   "reading": "иссле́дование",
+   "gloss": "research",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.opinions.eksperiment",
+   "form": "эксперимент",
+   "reading": "экспериме́нт",
+   "gloss": "experiment",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.opinions.nablyudenie",
+   "form": "наблюдение",
+   "reading": "наблюде́ние",
+   "gloss": "observation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.opinions.analogiya",
+   "form": "аналогия",
+   "reading": "анало́гия",
+   "gloss": "analogy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.metafora",
+   "form": "метафора",
+   "reading": "мета́фора",
+   "gloss": "metaphor",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.logika",
+   "form": "логика",
+   "reading": "ло́гика",
+   "gloss": "logic",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.zaklyuchenie",
+   "form": "заключение",
+   "reading": "заключе́ние",
+   "gloss": "conclusion",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.opinions.fundament",
+   "form": "фундамент",
+   "reading": "фунда́мент",
+   "gloss": "foundation",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.opinions.tablitsa",
+   "form": "таблица",
+   "reading": "табли́ца",
+   "gloss": "table",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.diagramma",
+   "form": "диаграмма",
+   "reading": "диагра́мма",
+   "gloss": "chart",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.opinions.procent",
+   "form": "процент",
+   "reading": "проце́нт",
+   "gloss": "percent",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.opinions.menshinstvo",
+   "form": "меньшинство",
+   "reading": "меньшинство́",
+   "gloss": "minority",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.opinions.bolshinstvo",
+   "form": "большинство",
+   "reading": "большинство́",
+   "gloss": "majority",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

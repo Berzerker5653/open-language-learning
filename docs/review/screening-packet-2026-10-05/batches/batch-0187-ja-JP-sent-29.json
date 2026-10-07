@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-29",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.demographic-shift",
+   "text": "じんこう の げんこう について かきました。",
+   "gloss": "I wrote about population decline."
+  },
+  {
+   "id": "ja.sent.aging-society",
+   "text": "かいご の もんだい を べんきょう しました。",
+   "gloss": "I studied the nursing care problem."
+  },
+  {
+   "id": "ja.sent.family-change",
+   "text": "こどもの じょうほう を あつめました。",
+   "gloss": "I gathered information about children."
+  },
+  {
+   "id": "ja.sent.urbanization",
+   "text": "とし の とうけい を みました。",
+   "gloss": "I looked at city statistics."
+  },
+  {
+   "id": "ja.sent.migration-debate",
+   "text": "さんか の ちゅうし を かきました。",
+   "gloss": "I wrote the gist of participation."
+  },
+  {
+   "id": "ja.sent.work-culture-change",
+   "text": "こうよう の じょうほう を よみました。",
+   "gloss": "I read the employment information."
+  },
+  {
+   "id": "ja.sent.work-management",
+   "text": "はたらきかた の ちゅうし を かきました。",
+   "gloss": "I wrote the gist of the way of working."
+  },
+  {
+   "id": "ja.sent.social-innovation",
+   "text": "かくしん の はなし を ききました。",
+   "gloss": "I heard the innovation story."
+  },
+  {
+   "id": "ja.sent.community-bonds",
+   "text": "きょうどう の じょうほう を あつめました。",
+   "gloss": "I gathered information on cooperation."
+  },
+  {
+   "id": "ja.sent.energy-future",
+   "text": "きき の たいさく について かきました。",
+   "gloss": "I wrote about crisis measures."
+  },
+  {
+   "id": "ja.sent.public-budget",
+   "text": "よさん の きじ を よみました。",
+   "gloss": "I read the budget article."
+  },
+  {
+   "id": "ja.sent.lifestyle-change",
+   "text": "せいかつ の こうぞう が かわりました。",
+   "gloss": "The structure of life changed."
+  },
+  {
+   "id": "ja.sent.rights-freedom",
+   "text": "けんり の べんきょう を しました。",
+   "gloss": "I studied rights."
+  },
+  {
+   "id": "ja.sent.equality-gap",
+   "text": "びょうどう の もんだい を ぎろん しました。",
+   "gloss": "We debated the equality problem."
+  },
+  {
+   "id": "ja.sent.statistics-literacy",
+   "text": "ひょうそう の きじ を よみました。",
+   "gloss": "I read the chart article."
+  }
+ ]
+}

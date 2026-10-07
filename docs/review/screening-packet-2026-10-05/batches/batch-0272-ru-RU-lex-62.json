@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-62",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.neg.ustupchivost",
+   "form": "уступчивость",
+   "reading": "усту́пчивость",
+   "gloss": "compliance",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.kompromissnyy",
+   "form": "компромиссный",
+   "reading": "компроми́ссный",
+   "gloss": "compromising",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.ugovor",
+   "form": "уговор",
+   "reading": "угово́р",
+   "gloss": "persuasion",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.neg.ugovority",
+   "form": "уговорить",
+   "reading": "уговори́ть",
+   "gloss": "to persuade (pf.)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.ugovarivat",
+   "form": "уговаривать",
+   "reading": "угова́ривать",
+   "gloss": "to persuade",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.ubezhdat",
+   "form": "убеждать",
+   "reading": "убежда́ть",
+   "gloss": "to persuade",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.ubeditelno",
+   "form": "убедительно",
+   "reading": "убеди́тельно",
+   "gloss": "persuasively",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.argumentirovanno",
+   "form": "аргументированно",
+   "reading": "аргументи́рованно",
+   "gloss": "with argumentation",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.obosnovat",
+   "form": "обосновать",
+   "reading": "обоснова́ть",
+   "gloss": "to substantiate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.nadumannyy",
+   "form": "надуманный",
+   "reading": "наду́манный",
+   "gloss": "far-fetched",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.nedovolstvo",
+   "form": "недовольство",
+   "reading": "недово́льство",
+   "gloss": "dissatisfaction",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.nedovolnyy",
+   "form": "недовольный",
+   "reading": "недово́льный",
+   "gloss": "dissatisfied",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.vygovor",
+   "form": "выговор",
+   "reading": "вы́говор",
+   "gloss": "reprimand",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.neg.vyskazyvanie",
+   "form": "высказывание",
+   "reading": "выска́зывание",
+   "gloss": "utterance",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.predosterezhenie",
+   "form": "предостережение",
+   "reading": "предостереже́ние",
+   "gloss": "warning",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.nepriemlemyy",
+   "form": "неприемлемый",
+   "reading": "неприе́млемый",
+   "gloss": "unacceptable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.priemlemyy",
+   "form": "приемлемый",
+   "reading": "прие́млемый",
+   "gloss": "acceptable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.dopustimyy",
+   "form": "допустимый",
+   "reading": "допусти́мый",
+   "gloss": "permissible",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.nedopustimyy",
+   "form": "недопустимый",
+   "reading": "недопусти́мый",
+   "gloss": "impermissible",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.otkaznoy",
+   "form": "отказной",
+   "reading": "отказно́й",
+   "gloss": "refusal (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.korrektnyy",
+   "form": "корректный",
+   "reading": "корре́ктный",
+   "gloss": "correct, polite",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.nekorrektnyy",
+   "form": "некорректный",
+   "reading": "некорре́ктный",
+   "gloss": "incorrect, rude",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.korrektnost",
+   "form": "корректность",
+   "reading": "корре́ктность",
+   "gloss": "correctness, tact",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.prilichie",
+   "form": "приличие",
+   "reading": "прили́чие",
+   "gloss": "decency",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.prilichnyy",
+   "form": "приличный",
+   "reading": "прили́чный",
+   "gloss": "decent",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

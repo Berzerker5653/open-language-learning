@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-49",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.instructions.sledovat",
+   "form": "следовать",
+   "reading": "сле́довать",
+   "gloss": "to follow",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.vypolnit",
+   "form": "выполнить",
+   "reading": "вы́полнить",
+   "gloss": "to carry out, complete",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.instructions.zadanie",
+   "form": "задание",
+   "reading": "зада́ние",
+   "gloss": "task, assignment",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.instructions.itog",
+   "form": "итог",
+   "reading": "ито́г",
+   "gloss": "result, summary",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.instructions.gotovo",
+   "form": "готово",
+   "reading": "го́тово",
+   "gloss": "done, ready",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.learning.sposobnost",
+   "form": "способность",
+   "reading": "спосо́бность",
+   "gloss": "ability, aptitude",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.learning.talant",
+   "form": "талант",
+   "reading": "тала́нт",
+   "gloss": "talent",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.learning.namerenie",
+   "form": "намерение",
+   "reading": "наме́рение",
+   "gloss": "intention",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.learning.programma",
+   "form": "программа",
+   "reading": "програ́мма",
+   "gloss": "program, plan",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.learning.progress",
+   "form": "прогресс",
+   "reading": "прогре́сс",
+   "gloss": "progress",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.learning.printsip",
+   "form": "принцип",
+   "reading": "при́нцип",
+   "gloss": "principle",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.learning.podkhod",
+   "form": "подход",
+   "reading": "подхо́д",
+   "gloss": "approach",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.learning.dokhod",
+   "form": "доход",
+   "reading": "дохо́д",
+   "gloss": "income, benefit",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.learning.usherb",
+   "form": "ущерб",
+   "reading": "уще́рб",
+   "gloss": "damage, harm",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.learning.dobitsya",
+   "form": "добиться",
+   "reading": "доби́ться",
+   "gloss": "to achieve",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.learning.keys",
+   "form": "кейс",
+   "reading": "кейс",
+   "gloss": "case, problem",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.learning.vybor",
+   "form": "выбор",
+   "reading": "вы́бор",
+   "gloss": "choice",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.learning.reshit",
+   "form": "решить",
+   "reading": "реши́ть",
+   "gloss": "to decide, solve",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.learning.vybrat",
+   "form": "выбрать",
+   "reading": "вы́брать",
+   "gloss": "to choose",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.learning.obyazannost",
+   "form": "обязанность",
+   "reading": "обя́занность",
+   "gloss": "duty",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.learning.peregovory",
+   "form": "переговоры",
+   "reading": "перегово́ры",
+   "gloss": "negotiations",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.learning.obyazatelstvo",
+   "form": "обязательство",
+   "reading": "обяза́тельство",
+   "gloss": "obligation, commitment",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.learning.kvalifikatsiya",
+   "form": "квалификация",
+   "reading": "квалифика́ция",
+   "gloss": "qualification",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.learning.trenirovka",
+   "form": "тренировка",
+   "reading": "трениро́вка",
+   "gloss": "training",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.learning.uprazhnenie",
+   "form": "упражнение",
+   "reading": "упражне́ние",
+   "gloss": "exercise",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

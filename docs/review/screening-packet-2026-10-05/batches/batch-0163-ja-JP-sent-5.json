@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-5",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.japan-experience",
+   "text": "にほんに いった ことがあります。",
+   "gloss": "I have been to Japan."
+  },
+  {
+   "id": "ja.sent.watch-movie",
+   "text": "えいがを みます。",
+   "gloss": "I watch a movie."
+  },
+  {
+   "id": "ja.sent.listen-news",
+   "text": "にゅーすを ききます。",
+   "gloss": "I listen to the news."
+  },
+  {
+   "id": "ja.sent.clean-room",
+   "text": "へやを そうじします。",
+   "gloss": "I clean the room."
+  },
+  {
+   "id": "ja.sent.open-window",
+   "text": "まどを あけます。",
+   "gloss": "I open the window."
+  },
+  {
+   "id": "ja.sent.put-away",
+   "text": "ほんを たなに しまいます。",
+   "gloss": "I put the book on the shelf."
+  },
+  {
+   "id": "ja.sent.apartment-roomy",
+   "text": "あの アパートは ひろいです。",
+   "gloss": "That apartment is spacious."
+  },
+  {
+   "id": "ja.sent.do-laundry",
+   "text": "せんたくを します。",
+   "gloss": "I do the laundry."
+  },
+  {
+   "id": "ja.sent.tidy-up",
+   "text": "ほんを かたづけます。",
+   "gloss": "I tidy up the books."
+  },
+  {
+   "id": "ja.sent.take-out-trash",
+   "text": "ごみを だします。",
+   "gloss": "I take out the trash."
+  },
+  {
+   "id": "ja.sent.wash-hands",
+   "text": "てを あらいます。",
+   "gloss": "I wash my hands."
+  },
+  {
+   "id": "ja.sent.cook-dinner",
+   "text": "りょうりを つくります。",
+   "gloss": "I make dinner."
+  },
+  {
+   "id": "ja.sent.work-company",
+   "text": "かいしゃで はたらきます。",
+   "gloss": "I work at a company."
+  },
+  {
+   "id": "ja.sent.do-homework",
+   "text": "しゅくだいを します。",
+   "gloss": "I do homework."
+  },
+  {
+   "id": "ja.sent.study-everyday",
+   "text": "まいにち にほんごを べんきょうします。",
+   "gloss": "I study Japanese every day."
+  }
+ ]
+}

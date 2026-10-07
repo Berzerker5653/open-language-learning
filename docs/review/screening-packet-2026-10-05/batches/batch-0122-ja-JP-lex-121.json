@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-121",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.rel.aishi",
+   "form": "あいし",
+   "reading": "あいし",
+   "gloss": "love",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.omoide",
+   "form": "おもいで",
+   "reading": "おもいで",
+   "gloss": "memory",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.omoide-bako",
+   "form": "おもいでばこ",
+   "reading": "おもいでばこ",
+   "gloss": "memory box",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.omoide-no-kioku",
+   "form": "おもいで の きおく",
+   "reading": "おもいで の きおく",
+   "gloss": "memory",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.omoide-no-tabi",
+   "form": "おもいで の たび",
+   "reading": "おもいで の たび",
+   "gloss": "memory trip",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.omoide-no-uta",
+   "form": "おもいで の うた",
+   "reading": "おもいで の うた",
+   "gloss": "memory song",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.omoide-no-hi",
+   "form": "おもいで の ひ",
+   "reading": "おもいで の ひ",
+   "gloss": "memory day",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.omoide-no-machi",
+   "form": "おもいで の まち",
+   "reading": "おもいで の まち",
+   "gloss": "memory town",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.omoide-no-hito",
+   "form": "おもいで の ひと",
+   "reading": "おもいで の ひと",
+   "gloss": "memory person",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.omoide-no-ki",
+   "form": "おもいで の き",
+   "reading": "おもいで の き",
+   "gloss": "memory tree",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.rel.omoide-no-sora",
+   "form": "おもいで の そら",
+   "reading": "おもいで の そら",
+   "gloss": "memory sky",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.toukeigaku",
+   "form": "とうけいがく",
+   "reading": "とうけいがく",
+   "gloss": "statistics (discipline)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.hyousou",
+   "form": "ひょうそう",
+   "reading": "ひょうそう",
+   "gloss": "chart",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.heikinkyou",
+   "form": "へいきんちゅう",
+   "reading": "へいきんちゅう",
+   "gloss": "average value",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.henza",
+   "form": "へんさ",
+   "reading": "へんさ",
+   "gloss": "deviation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.samupuru",
+   "form": "サンプル",
+   "reading": "サンプル",
+   "gloss": "sample",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.denki",
+   "form": "でんき",
+   "reading": "でんき",
+   "gloss": "electricity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.taiyou",
+   "form": "たいよう",
+   "reading": "たいよう",
+   "gloss": "solar",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.kaze2",
+   "form": "かぜ",
+   "reading": "かぜ",
+   "gloss": "wind power",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.genshi",
+   "form": "げんし",
+   "reading": "げんし",
+   "gloss": "nuclear",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.denpo",
+   "form": "でんぱつ",
+   "reading": "でんぱつ",
+   "gloss": "power plant",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.seibutsu",
+   "form": "せいぶつ",
+   "reading": "せいぶつ",
+   "gloss": "organism",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.igen",
+   "form": "いでん",
+   "reading": "いでん",
+   "gloss": "gene",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.saikou",
+   "form": "さいこう",
+   "reading": "さいこう",
+   "gloss": "cultivation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.gaisei",
+   "form": "かいせい",
+   "reading": "かいせい",
+   "gloss": "modification",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

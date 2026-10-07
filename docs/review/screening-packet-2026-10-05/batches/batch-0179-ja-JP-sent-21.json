@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-21",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.counter-argue",
+   "text": "ぎもん を はなしました。",
+   "gloss": "I voiced the doubt."
+  },
+  {
+   "id": "ja.sent.review-post",
+   "text": "ひょうかひょう を かい ました。",
+   "gloss": "I wrote the rating chart."
+  },
+  {
+   "id": "ja.sent.rating-system",
+   "text": "こうかい の レッスン で かいそう しました。",
+   "gloss": "We brainstormed in the public-showing lesson."
+  },
+  {
+   "id": "ja.sent.budget-compare",
+   "text": "ひかり と かげ を べんきょう しました。",
+   "gloss": "We studied light and shadow."
+  },
+  {
+   "id": "ja.sent.travel-compare",
+   "text": "ぶんしょう の ちゅうい を べんきょう しました。",
+   "gloss": "We studied passage notes."
+  },
+  {
+   "id": "ja.sent.decision-essay",
+   "text": "さっかく の こと を かきました。",
+   "gloss": "I wrote about the author."
+  },
+  {
+   "id": "ja.sent.narrative-structure",
+   "text": "ものがたり の けいまつ を かきました。",
+   "gloss": "I wrote the story's ending."
+  },
+  {
+   "id": "ja.sent.background-setting",
+   "text": "ゆき と かぜ と あめ を かんさつ しました。",
+   "gloss": "I observed snow, wind, and rain."
+  },
+  {
+   "id": "ja.sent.plot-sequencing",
+   "text": "いつか きっと できる と おもいました。",
+   "gloss": "I thought I can do it someday."
+  },
+  {
+   "id": "ja.sent.suspense-build",
+   "text": "きょうみ の ある じょうめん で はらはら しました。",
+   "gloss": "I was suspenseful in an interesting scene."
+  },
+  {
+   "id": "ja.sent.write-dialogue",
+   "text": "だんわ の ことば を みみ で ききました。",
+   "gloss": "I heard the dialogue words with my ears."
+  },
+  {
+   "id": "ja.sent.perspective-shift",
+   "text": "かお の え を かきました。",
+   "gloss": "I drew a picture of a face."
+  },
+  {
+   "id": "ja.sent.write-ending",
+   "text": "けいまつ を かいそう で きめました。",
+   "gloss": "I decided the ending in a brainstorm."
+  },
+  {
+   "id": "ja.sent.story-revision",
+   "text": "おとぎ ばなし を なおしました。",
+   "gloss": "I revised the old tale."
+  },
+  {
+   "id": "ja.sent.anecdote",
+   "text": "きつね の こと を はなしました。",
+   "gloss": "I told about the fox."
+  }
+ ]
+}

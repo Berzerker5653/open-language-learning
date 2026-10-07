@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-93",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.media.comment",
+   "form": "こめんと",
+   "reading": "こめんと",
+   "gloss": "comment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.ii-ne",
+   "form": "いいね",
+   "reading": "いいね",
+   "gloss": "like (social media)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.share",
+   "form": "しぇあ",
+   "reading": "しぇあ",
+   "gloss": "share",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.follow",
+   "form": "ふぉろー",
+   "reading": "ふぉろー",
+   "gloss": "follow",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.honne",
+   "form": "ほんね",
+   "reading": "ほんね",
+   "gloss": "true feeling",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.tatemae",
+   "form": "たてまえ",
+   "reading": "たてまえ",
+   "gloss": "public stance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.jijitsu",
+   "form": "じじつ",
+   "reading": "じじつ",
+   "gloss": "fact",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.hadan",
+   "form": "はだん",
+   "reading": "はだん",
+   "gloss": "speculation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.uwasa",
+   "form": "うわさ",
+   "reading": "うわさ",
+   "gloss": "rumor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.gijou",
+   "form": "ぎじょう",
+   "reading": "ぎじょう",
+   "gloss": "circumstances",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.seimu",
+   "form": "せいむ",
+   "reading": "せいむ",
+   "gloss": "government affairs",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.seiji",
+   "form": "せいじ",
+   "reading": "せいじ",
+   "gloss": "politics",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.keizai",
+   "form": "けいざい",
+   "reading": "けいざい",
+   "gloss": "economy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.shakai",
+   "form": "しゃかい",
+   "reading": "しゃかい",
+   "gloss": "society",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.bunka",
+   "form": "ぶんか",
+   "reading": "ぶんか",
+   "gloss": "culture",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.kaga",
+   "form": "かか",
+   "reading": "かか",
+   "gloss": "fire",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.jiko",
+   "form": "じこ",
+   "reading": "じこ",
+   "gloss": "accident",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.saigai",
+   "form": "さいがい",
+   "reading": "さいがい",
+   "gloss": "disaster",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.fukkyuu-saigai",
+   "form": "ふっきゅうさいがい",
+   "reading": "ふっきゅうさいがい",
+   "gloss": "disaster recovery",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.anzen",
+   "form": "あんぜん",
+   "reading": "あんぜん",
+   "gloss": "safety",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.bousai",
+   "form": "ぼうさい",
+   "reading": "ぼうさい",
+   "gloss": "disaster prevention",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.yobou",
+   "form": "よぼう",
+   "reading": "よぼう",
+   "gloss": "prevention",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.choui",
+   "form": "ちょうい",
+   "reading": "ちょうい",
+   "gloss": "caution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.houmon",
+   "form": "ほうもん",
+   "reading": "ほうもん",
+   "gloss": "visit; interview",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.media.touhyou",
+   "form": "とうひょう",
+   "reading": "とうひょう",
+   "gloss": "vote",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-107",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.soc.fiskalnyy",
+   "form": "фискальный",
+   "reading": "фиска́льный",
+   "gloss": "fiscal",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.deklarirovanie",
+   "form": "декларирование",
+   "reading": "деклари́рование",
+   "gloss": "declaring",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.kvotirovanie",
+   "form": "квотирование",
+   "reading": "квоти́рование",
+   "gloss": "quota allocation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.limitirovanie",
+   "form": "лимитирование",
+   "reading": "лимити́рование",
+   "gloss": "limiting",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.normirovanie",
+   "form": "нормирование",
+   "reading": "нормирова́ние",
+   "gloss": "standardization, rationing",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.raspredelitelnyy",
+   "form": "распределительный",
+   "reading": "распредели́тельный",
+   "gloss": "distributive",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.prioritetnost",
+   "form": "приоритетность",
+   "reading": "приорите́тность",
+   "gloss": "priority (noun)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.kolichestvennyy",
+   "form": "количественный",
+   "reading": "коли́чественный",
+   "gloss": "quantitative",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.kachestvennyy",
+   "form": "качественный",
+   "reading": "ка́чественный",
+   "gloss": "qualitative",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.obshchestvennost",
+   "form": "общественность",
+   "reading": "обще́ственность",
+   "gloss": "the public, society",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.gosudarstvennost",
+   "form": "государственность",
+   "reading": "госуда́рственность",
+   "gloss": "statehood",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.byurokraticheskiy",
+   "form": "бюрократический",
+   "reading": "бюрократи́ческий",
+   "gloss": "bureaucratic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.reformirovanie",
+   "form": "реформирование",
+   "reading": "реформи́рование",
+   "gloss": "reforming",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.tsifrovizatsiya",
+   "form": "цифровизация",
+   "reading": "цифровиза́ция",
+   "gloss": "digitalization",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.otsifrovka",
+   "form": "оцифровка",
+   "reading": "оцифро́вка",
+   "gloss": "digitization",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.bezbumazhnyy",
+   "form": "безбумажный",
+   "reading": "безбу́мажный",
+   "gloss": "paperless",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.arkhivnyy",
+   "form": "архивный",
+   "reading": "архи́вный",
+   "gloss": "archival",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.reestrovyy",
+   "form": "реестровый",
+   "reading": "рее́стровый",
+   "gloss": "registry (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.peni",
+   "form": "пени",
+   "reading": "пе́ни",
+   "gloss": "penalty, late fees",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.blokirovka",
+   "form": "блокировка",
+   "reading": "блокиро́вка",
+   "gloss": "blocking",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.razblokirovka",
+   "form": "разблокировка",
+   "reading": "разблоки́ровка",
+   "gloss": "unblocking",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.upravlencheskiy",
+   "form": "управленческий",
+   "reading": "управле́нческий",
+   "gloss": "managerial",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.mezhvedomstvennyy",
+   "form": "межведомственный",
+   "reading": "межве́домственный",
+   "gloss": "interdepartmental",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.elektronnyy",
+   "form": "электронный",
+   "reading": "электро́нный",
+   "gloss": "electronic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.tsifrovoy",
+   "form": "цифровой",
+   "reading": "цифрово́й",
+   "gloss": "digital",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

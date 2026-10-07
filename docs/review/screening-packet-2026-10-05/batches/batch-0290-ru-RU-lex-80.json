@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-80",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.prof.otmena",
+   "form": "отмена",
+   "reading": "отме́на",
+   "gloss": "cancellation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.izmenenie",
+   "form": "изменение",
+   "reading": "измене́ние",
+   "gloss": "change",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.soglasovanie",
+   "form": "согласование",
+   "reading": "согласова́ние",
+   "gloss": "coordination, approval",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.rezoljuciya",
+   "form": "резолюция",
+   "reading": "резолю́ция",
+   "gloss": "resolution, minute",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.deloproizvodstvo",
+   "form": "делопроизводство",
+   "reading": "делопроизво́дство",
+   "gloss": "office work, records management",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.kanceljariya",
+   "form": "канцелярия",
+   "reading": "канцеля́рия",
+   "gloss": "chancellery",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.pomoshchnik",
+   "form": "помощник",
+   "reading": "помо́щник",
+   "gloss": "assistant",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.assistent",
+   "form": "ассистент",
+   "reading": "ассисте́нт",
+   "gloss": "assistant",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.referent",
+   "form": "референт",
+   "reading": "рефере́нт",
+   "gloss": "referent, aide",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.sekretariat",
+   "form": "секретариат",
+   "reading": "секретариа́т",
+   "gloss": "secretariat",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.vhodyashchiy",
+   "form": "входящий",
+   "reading": "входя́щий",
+   "gloss": "incoming",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.ishodyashchiy",
+   "form": "исходящий",
+   "reading": "исходя́щий",
+   "gloss": "outgoing",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.registraciya",
+   "form": "регистрация",
+   "reading": "регистра́ция",
+   "gloss": "registration",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.numeraciya",
+   "form": "нумерация",
+   "reading": "нумера́ция",
+   "gloss": "numbering",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.hranenie",
+   "form": "хранение",
+   "reading": "хране́ние",
+   "gloss": "storage, custody",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.unichtozhenie",
+   "form": "уничтожение",
+   "reading": "уничтоже́ние",
+   "gloss": "destruction",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.utilizaciya",
+   "form": "утилизация",
+   "reading": "утилиза́ция",
+   "gloss": "utilization",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.nomenklatura",
+   "form": "номенклатура",
+   "reading": "номенклату́ра",
+   "gloss": "nomenclature",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.proizvodstvo",
+   "form": "производство",
+   "reading": "произво́дство",
+   "gloss": "production, proceedings",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.kanceljarit",
+   "form": "канцелярит",
+   "reading": "канцеляри́т",
+   "gloss": "bureaucratese",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.kanceljarizm",
+   "form": "канцеляризм",
+   "reading": "канцеляри́зм",
+   "gloss": "bureaucratism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.vizirovanie",
+   "form": "визирование",
+   "reading": "визи́рование",
+   "gloss": "vising, initialing",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.skrepa",
+   "form": "скрепа",
+   "reading": "скре́па",
+   "gloss": "fastener, staple",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.skrepit",
+   "form": "скрепить",
+   "reading": "скрепи́ть",
+   "gloss": "to fasten",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.sshivka",
+   "form": "сшивка",
+   "reading": "сши́вка",
+   "gloss": "binding (sewn)",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

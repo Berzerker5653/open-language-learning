@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-26",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u425",
+   "text": "Это система.",
+   "gloss": "This is a system."
+  },
+  {
+   "id": "ru.sent.b2.u426",
+   "text": "Это аудит.",
+   "gloss": "This is an audit."
+  },
+  {
+   "id": "ru.sent.b2.u427",
+   "text": "Это учёт.",
+   "gloss": "This is accounting."
+  },
+  {
+   "id": "ru.sent.b2.u428",
+   "text": "Это корреляция.",
+   "gloss": "This is a correlation."
+  },
+  {
+   "id": "ru.sent.b2.u429",
+   "text": "Это параметр.",
+   "gloss": "This is a parameter."
+  },
+  {
+   "id": "ru.sent.b2.u430",
+   "text": "Это оговорка.",
+   "gloss": "This is a caveat."
+  },
+  {
+   "id": "ru.sent.b2.u431",
+   "text": "Это ремарка.",
+   "gloss": "This is a remark."
+  },
+  {
+   "id": "ru.sent.b2.u432",
+   "text": "Это эвфемизм.",
+   "gloss": "This is a euphemism."
+  },
+  {
+   "id": "ru.sent.b2.u433",
+   "text": "Это табу.",
+   "gloss": "This is a taboo."
+  },
+  {
+   "id": "ru.sent.b2.u434",
+   "text": "Это цензура.",
+   "gloss": "This is censorship."
+  },
+  {
+   "id": "ru.sent.b2.u435",
+   "text": "Это вёрстка.",
+   "gloss": "This is a layout."
+  },
+  {
+   "id": "ru.sent.b2.u436",
+   "text": "Это тираж.",
+   "gloss": "This is a print run."
+  },
+  {
+   "id": "ru.sent.b2.u437",
+   "text": "Это издание.",
+   "gloss": "This is an edition."
+  },
+  {
+   "id": "ru.sent.b2.u438",
+   "text": "Это тире.",
+   "gloss": "This is a dash."
+  },
+  {
+   "id": "ru.sent.b2.u439",
+   "text": "Это дефис.",
+   "gloss": "This is a hyphen."
+  }
+ ]
+}

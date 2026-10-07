@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-12",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.comparisons.potomu-cto",
+   "form": "потому что",
+   "reading": "потому́ что",
+   "gloss": "because",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.tak-kak",
+   "form": "так как",
+   "reading": "та́к как",
+   "gloss": "since, because",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.pojetomu",
+   "form": "поэтому",
+   "reading": "поэ́тому",
+   "gloss": "therefore, that's why",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.prichina",
+   "form": "причина",
+   "reading": "причи́на",
+   "gloss": "reason, cause",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.comparisons.zachem",
+   "form": "зачем",
+   "reading": "заче́м",
+   "gloss": "what for, why",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.chtoby",
+   "form": "чтобы",
+   "reading": "что́бы",
+   "gloss": "in order to, so that",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.yesli",
+   "form": "если",
+   "reading": "е́сли",
+   "gloss": "if",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.blagodarya",
+   "form": "благодаря",
+   "reading": "благодаря́",
+   "gloss": "thanks to",
+   "pos": "preposition",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.iz-za",
+   "form": "из-за",
+   "reading": "и́з-за",
+   "gloss": "because of, due to",
+   "pos": "preposition",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.comparisons.sravnit",
+   "form": "сравнить",
+   "reading": "сравни́ть",
+   "gloss": "to compare",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.critical.svyaz",
+   "form": "связь",
+   "reading": "связь",
+   "gloss": "connection",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical.vzaimosvyaz",
+   "form": "взаимосвязь",
+   "reading": "взаимосвя́зь",
+   "gloss": "interconnection",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical.zavisimost",
+   "form": "зависимость",
+   "reading": "зави́симость",
+   "gloss": "dependence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical.ierarhiya",
+   "form": "иерархия",
+   "reading": "иера́рхия",
+   "gloss": "hierarchy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical.podchinenie",
+   "form": "подчинение",
+   "reading": "подчине́ние",
+   "gloss": "subordination",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical.sopodchinenie",
+   "form": "соподчинение",
+   "reading": "соподчине́ние",
+   "gloss": "coordination",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical.koordinaciya",
+   "form": "координация",
+   "reading": "координа́ция",
+   "gloss": "coordination",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical.subordinaciya",
+   "form": "субординация",
+   "reading": "субордина́ция",
+   "gloss": "subordination (rank)",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical.sochinenie",
+   "form": "сочинение",
+   "reading": "сочине́ние",
+   "gloss": "composition (writing)",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.critical.konstrukciya",
+   "form": "конструкция",
+   "reading": "констру́кция",
+   "gloss": "construction",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical.model",
+   "form": "модель",
+   "reading": "моде́ль",
+   "gloss": "model",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical.nit",
+   "form": "нить",
+   "reading": "нить",
+   "gloss": "thread",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.critical.antitezis",
+   "form": "антитезис",
+   "reading": "антите́зис",
+   "gloss": "antithesis",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical.sintez",
+   "form": "синтез",
+   "reading": "си́нтез",
+   "gloss": "synthesis",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.critical.triada",
+   "form": "триада",
+   "reading": "триа́да",
+   "gloss": "triad",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

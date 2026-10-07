@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-67",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.neg.shantazhirovat",
+   "form": "шантажировать",
+   "reading": "шантажи́ровать",
+   "gloss": "to blackmail",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.vymogatelstvo",
+   "form": "вымогательство",
+   "reading": "вымога́тельство",
+   "gloss": "extortion",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.vymogat",
+   "form": "вымогать",
+   "reading": "вымога́ть",
+   "gloss": "to extort",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.vymogatel",
+   "form": "вымогатель",
+   "reading": "вымога́тель",
+   "gloss": "extortionist",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.neg.konsilium",
+   "form": "консилиум",
+   "reading": "конси́лиум",
+   "gloss": "consultation board",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.neg.utochnyat",
+   "form": "уточнять",
+   "reading": "уточня́ть",
+   "gloss": "to clarify",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.razyasnenie",
+   "form": "разъяснение",
+   "reading": "разъясне́ние",
+   "gloss": "explanation, clarification",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.razyasnit",
+   "form": "разъяснить",
+   "reading": "разъя́снить",
+   "gloss": "to explain, clarify",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.poyasnyat",
+   "form": "пояснять",
+   "reading": "поясня́ть",
+   "gloss": "to explain",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.utochnyayushchiy",
+   "form": "уточняющий",
+   "reading": "уточня́ющий",
+   "gloss": "clarifying",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.voprositelnyy",
+   "form": "вопросительный",
+   "reading": "вопроси́тельный",
+   "gloss": "interrogative",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.peresprosit",
+   "form": "переспросить",
+   "reading": "переспроси́ть",
+   "gloss": "to ask again",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.peresprashivat",
+   "form": "переспрашивать",
+   "reading": "переспра́шивать",
+   "gloss": "to ask again",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.perespros",
+   "form": "переспрос",
+   "reading": "переспро́с",
+   "gloss": "re-asking",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.neg.perefrazirovat",
+   "form": "перефразировать",
+   "reading": "перефрази́ровать",
+   "gloss": "to rephrase",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.perefraze",
+   "form": "перефраз",
+   "reading": "пере́фраз",
+   "gloss": "rephrasing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.parafraze",
+   "form": "парафраз",
+   "reading": "парафра́з",
+   "gloss": "paraphrase",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.neg.reziumirovat",
+   "form": "резюмировать",
+   "reading": "резюми́ровать",
+   "gloss": "to summarize",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.obobshchit",
+   "form": "обобщить",
+   "reading": "обобщи́ть",
+   "gloss": "to generalize",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.obobshchayushchiy",
+   "form": "обобщающий",
+   "reading": "обобща́ющий",
+   "gloss": "generalizing",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.detalizaciya",
+   "form": "детализация",
+   "reading": "детализа́ция",
+   "gloss": "detailing",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.detalizirovat",
+   "form": "детализировать",
+   "reading": "детализи́ровать",
+   "gloss": "to detail",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.konkretyzaciya",
+   "form": "конкретизация",
+   "reading": "конкретиза́ция",
+   "gloss": "concretization",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.konkretyzirovat",
+   "form": "конкретизировать",
+   "reading": "конкретизи́ровать",
+   "gloss": "to concretize",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.sopostavit",
+   "form": "сопоставить",
+   "reading": "сопоста́вить",
+   "gloss": "to compare",
+   "pos": "verb",
+   "gender": ""
+  }
+ ]
+}

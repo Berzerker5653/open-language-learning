@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-114",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.socialplans.priglashenie",
+   "form": "приглашение",
+   "reading": "приглаше́ние",
+   "gloss": "invitation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.socialplans.priglasit2",
+   "form": "пригласить",
+   "reading": "пригласи́ть",
+   "gloss": "to invite (pf)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.soglasitsya",
+   "form": "согласиться",
+   "reading": "согласи́ться",
+   "gloss": "to agree (pf)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.otkazatsya",
+   "form": "отказаться",
+   "reading": "отказа́ться",
+   "gloss": "to refuse (pf)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.dogovorit",
+   "form": "договорить",
+   "reading": "договори́ть",
+   "gloss": "to agree, arrange",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.dogovor",
+   "form": "договор",
+   "reading": "догово́р",
+   "gloss": "agreement, contract",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.socialplans.vstrecha2",
+   "form": "встреча",
+   "reading": "встре́ча",
+   "gloss": "meeting",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.socialplans.svidanie",
+   "form": "свидание",
+   "reading": "свида́ние",
+   "gloss": "date, rendezvous",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.socialplans.vecherinka",
+   "form": "вечеринка",
+   "reading": "вечери́нка",
+   "gloss": "party",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.socialplans.gost",
+   "form": "гость",
+   "reading": "гость",
+   "gloss": "guest",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.socialplans.gostepriimstvo",
+   "form": "гостеприимство",
+   "reading": "гостеприи́мство",
+   "gloss": "hospitality",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.socialplans.podarok",
+   "form": "подарок",
+   "reading": "пода́рок",
+   "gloss": "gift",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.socialplans.cvety",
+   "form": "цветы",
+   "reading": "цветы́",
+   "gloss": "flowers",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.tort",
+   "form": "торт",
+   "reading": "торт",
+   "gloss": "cake",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.socialplans.stol2",
+   "form": "стол",
+   "reading": "стол",
+   "gloss": "table",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.socialplans.posuda",
+   "form": "посуда",
+   "reading": "посу́да",
+   "gloss": "dishes",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.socialplans.napitok",
+   "form": "напиток",
+   "reading": "напи́ток",
+   "gloss": "drink",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.socialplans.zakuska",
+   "form": "закуска",
+   "reading": "заку́ска",
+   "gloss": "snack, appetizer",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.socialplans.muzyka2",
+   "form": "музыка",
+   "reading": "му́зыка",
+   "gloss": "music",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.socialplans.tancevat",
+   "form": "танцевать",
+   "reading": "танцева́ть",
+   "gloss": "to dance",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.pesnya",
+   "form": "песня",
+   "reading": "пе́сня",
+   "gloss": "song",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.socialplans.podskazat",
+   "form": "подсказать",
+   "reading": "подсказа́ть",
+   "gloss": "to suggest, prompt",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.naprimer",
+   "form": "например",
+   "reading": "наприме́р",
+   "gloss": "for example",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.davay",
+   "form": "давай",
+   "reading": "дава́й",
+   "gloss": "let's, come on",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.socialplans.davay2",
+   "form": "давайте",
+   "reading": "дава́йте",
+   "gloss": "let's (polite)",
+   "pos": "verb",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-103",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.services.reshenie",
+   "form": "решение",
+   "reading": "реше́ние",
+   "gloss": "decision, solution",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.services.otvetstvennost",
+   "form": "ответственность",
+   "reading": "отве́тственность",
+   "gloss": "responsibility",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.poryadok",
+   "form": "порядок",
+   "reading": "поря́док",
+   "gloss": "order, procedure",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.services.usloviya",
+   "form": "условия",
+   "reading": "усло́вия",
+   "gloss": "conditions",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.services.prikaz",
+   "form": "приказ",
+   "reading": "прика́з",
+   "gloss": "order, command",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.services.zayavka",
+   "form": "заявка",
+   "reading": "зая́вка",
+   "gloss": "request, application",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.zayavit",
+   "form": "заявлять",
+   "reading": "заявля́ть",
+   "gloss": "to declare, file",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.services.registratura",
+   "form": "регистратура",
+   "reading": "регистрату́ра",
+   "gloss": "registration desk",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.registrat",
+   "form": "регистрировать",
+   "reading": "регистри́ровать",
+   "gloss": "to register",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.services.anketa",
+   "form": "анкета",
+   "reading": "анке́та",
+   "gloss": "questionnaire",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.zapolsyat",
+   "form": "заполнять",
+   "reading": "заполня́ть",
+   "gloss": "to fill in",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.services.podpis",
+   "form": "подпись",
+   "reading": "по́дпись",
+   "gloss": "signature",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.podpisat",
+   "form": "подписывать",
+   "reading": "подпи́сывать",
+   "gloss": "to sign",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.services.pechat",
+   "form": "печать",
+   "reading": "печа́ть",
+   "gloss": "stamp, seal",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.kopiya",
+   "form": "копия",
+   "reading": "ко́пия",
+   "gloss": "copy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.original",
+   "form": "оригинал",
+   "reading": "оригина́л",
+   "gloss": "original",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.services.spravka",
+   "form": "справка",
+   "reading": "спра́вка",
+   "gloss": "certificate",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.svidetelstvo",
+   "form": "свидетельство",
+   "reading": "свиде́тельство",
+   "gloss": "certificate",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.services.schet",
+   "form": "счёт",
+   "reading": "сче́т",
+   "gloss": "bill, account",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.services.obmenyat",
+   "form": "обменивать",
+   "reading": "обме́нивать",
+   "gloss": "to exchange",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.services.otdel",
+   "form": "отдел",
+   "reading": "отде́л",
+   "gloss": "department",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.services.priyomnaya",
+   "form": "приёмная",
+   "reading": "прие́мная",
+   "gloss": "reception",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.services.sekretar",
+   "form": "секретарь",
+   "reading": "секрета́рь",
+   "gloss": "secretary",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.services.prikhoday",
+   "form": "приходить",
+   "reading": "приходи́ть",
+   "gloss": "to come, arrive",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.services.obsluzhivat",
+   "form": "обслуживать",
+   "reading": "обслу́живать",
+   "gloss": "to serve",
+   "pos": "verb",
+   "gender": ""
+  }
+ ]
+}

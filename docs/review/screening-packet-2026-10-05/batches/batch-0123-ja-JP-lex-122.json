@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-122",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.science.zouho",
+   "form": "じょうほう",
+   "reading": "じょうほう",
+   "gloss": "information, data",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.kojin",
+   "form": "こじん",
+   "reading": "こじん",
+   "gloss": "individual",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.jouhou2",
+   "form": "こじんじょうほう",
+   "reading": "こじんじょうほう",
+   "gloss": "personal information",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.shakunin",
+   "form": "ほうじん",
+   "reading": "ほうじん",
+   "gloss": "legal person, corporation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.poribaishikku",
+   "form": "プライバシー",
+   "reading": "プライバシー",
+   "gloss": "privacy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.uchuu",
+   "form": "うちゅう",
+   "reading": "うちゅう",
+   "gloss": "outer space",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.houshaki",
+   "form": "ロケット",
+   "reading": "ロケット",
+   "gloss": "rocket",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.chikyu",
+   "form": "ちきゅう",
+   "reading": "ちきゅう",
+   "gloss": "earth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.getsuyou",
+   "form": "げつよう",
+   "reading": "げつよう",
+   "gloss": "lunar surface",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.isshou",
+   "form": "えいせい",
+   "reading": "えいせい",
+   "gloss": "satellite",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.iryou",
+   "form": "いりょう",
+   "reading": "いりょう",
+   "gloss": "medical care",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.shutsunyu",
+   "form": "しゅつにゅう",
+   "reading": "しゅつにゅう",
+   "gloss": "entry and exit",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.sougou",
+   "form": "しんだん",
+   "reading": "しんだん",
+   "gloss": "diagnosis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.yakuhin",
+   "form": "やくひん",
+   "reading": "やくひん",
+   "gloss": "pharmaceuticals",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.chiryou",
+   "form": "ちりょう",
+   "reading": "ちりょう",
+   "gloss": "treatment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.kikou",
+   "form": "きこう",
+   "reading": "きこう",
+   "gloss": "mechanism",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.kikai",
+   "form": "きかい",
+   "reading": "きかい",
+   "gloss": "machine",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.jinkou-chou",
+   "form": "じんこうちのう",
+   "reading": "じんこうちのう",
+   "gloss": "artificial intelligence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.robo",
+   "form": "ロボット",
+   "reading": "ロボット",
+   "gloss": "robot",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.arugo",
+   "form": "アルゴリズム",
+   "reading": "アルゴリズム",
+   "gloss": "algorithm",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.bunseki",
+   "form": "ぶんせき",
+   "reading": "ぶんせき",
+   "gloss": "analysis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.kiki2",
+   "form": "リスク",
+   "reading": "リスク",
+   "gloss": "risk",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.hazard",
+   "form": "ハザード",
+   "reading": "ハザード",
+   "gloss": "hazard",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.yosoku",
+   "form": "よそく",
+   "reading": "よそく",
+   "gloss": "prediction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.science.houkoku",
+   "form": "ほうこく",
+   "reading": "ほうこく",
+   "gloss": "report",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

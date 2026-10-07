@@ -1,0 +1,39 @@
+SEC-001 — automated security/privacy/license audit (partial)
+Date: 2026-10-06
+Scope: the automated portion only. The human-assisted portion (penetration
+review, manual privacy review) remains out of reach under the sole-user
+constraint and is NOT claimed here.
+
+## 1. Dependency advisories — cargo-audit
+Command: `cargo audit` (RustSec advisory DB, 1290 advisories loaded).
+Result: 528 crate dependencies scanned. **0 vulnerabilities.** 2 warnings:
+- RUSTSEC-2024-0370 `proc-macro-error` 1.0.4 — *unmaintained* (build-time
+  proc-macro only; no runtime exposure). No fix released; upstream archived.
+- RUSTSEC-2024-0429 `glib` 0.18.5 — *unsoundness* in `VariantStrIter`
+  Iterator impls. Transitive via tauri/gtk on Linux; not a known exploit.
+  Track for a tauri/glib bump; not actionable in our code.
+
+## 2. Secret scan — targeted pattern grep
+Patterns: api_key/secret_key/access_token/private_key/BEGIN *_PRIVATE/
+password= /aws_secret/AKIA…/xox[baprs]-. Result: **no matches** in the tree.
+Note: gitleaks/trufflehog not installed; this is a heuristic scan, not a
+full-entropy secret scanner. Recommend adding gitleaks to CI for the full gate.
+
+## 3. License audit — manual (cargo-about not installed)
+- App code: Apache-2.0 (ADR-0010); original pack content CC-BY-4.0;
+  dictionary-derived data CC-BY-SA-4.0.
+- Rust dependency tree: permissive (MIT/Apache-2.0/BSD) by convention; no
+  copyleft crates flagged.
+- Native runtime chain (the real copyleft surface): espeak-ng-data is **GPLv3**
+  but is **dev-only** and absent from distributable builds (verified in
+  `docs/provenance/speech-distribution-audit.md`; catalog ships only MIT ASR
+  models; TTS binaries are config-injected paths). WebKitGTK is LGPL-2.0+ via
+  system package (dynamic system lib; no static-link obligation).
+- Conclusion: **no copyleft obligation in a distributable build today.** The
+  GPL question only arises if the Kokoro/espeak TTS chain is shipped — an open
+  owner licensing decision, already gated out.
+
+## Verdict
+Automated portion: PASS (0 vulns, 0 secrets, no copyleft in distributable
+builds). Gaps for a full SEC-001: gitleaks in CI, cargo-about license report in
+CI, and the human security/privacy review (not available under sole-user).

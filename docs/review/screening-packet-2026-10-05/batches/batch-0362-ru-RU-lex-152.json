@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-152",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.work.protsess",
+   "form": "процесс",
+   "reading": "проце́сс",
+   "gloss": "process",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.etap",
+   "form": "этап",
+   "reading": "эта́п",
+   "gloss": "stage",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.oborudovanie",
+   "form": "оборудование",
+   "reading": "обору́дование",
+   "gloss": "equipment",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.work.stanok",
+   "form": "станок",
+   "reading": "стано́к",
+   "gloss": "machine tool",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.sborka",
+   "form": "сборка",
+   "reading": "сбо́рка",
+   "gloss": "assembly",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.work.brak",
+   "form": "брак",
+   "reading": "брак",
+   "gloss": "defective goods",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.smena",
+   "form": "смена",
+   "reading": "сме́на",
+   "gloss": "shift",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.work.pererabotka",
+   "form": "переработка",
+   "reading": "перерабо́тка",
+   "gloss": "overtime, reprocessing",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.work.premiya",
+   "form": "премия",
+   "reading": "пре́мия",
+   "gloss": "bonus",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.work.zarplata",
+   "form": "зарплата",
+   "reading": "зарпла́та",
+   "gloss": "salary",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.work.oklad",
+   "form": "оклад",
+   "reading": "окла́д",
+   "gloss": "base salary",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.nastavnik",
+   "form": "наставник",
+   "reading": "наста́вник",
+   "gloss": "mentor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.stazh",
+   "form": "стаж",
+   "reading": "стаж",
+   "gloss": "length of service",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.obyazannosti",
+   "form": "обязанности",
+   "reading": "обяза́нности",
+   "gloss": "duties",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.work.kollektiv",
+   "form": "коллектив",
+   "reading": "коллекти́в",
+   "gloss": "team",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.soveshchanie",
+   "form": "совещание",
+   "reading": "совеща́ние",
+   "gloss": "work meeting",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.work.sroki",
+   "form": "сроки",
+   "reading": "сро́ки",
+   "gloss": "deadlines (pl)",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.dedlayn",
+   "form": "дедлайн",
+   "reading": "де́длайн",
+   "gloss": "deadline",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.prioritet",
+   "form": "приоритет",
+   "reading": "приорите́т",
+   "gloss": "priority",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.vnimanie",
+   "form": "внимание",
+   "reading": "внима́ние",
+   "gloss": "attention",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.work.koncentraciya",
+   "form": "концентрация",
+   "reading": "концентра́ция",
+   "gloss": "concentration",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.work.effektivnost",
+   "form": "эффективность",
+   "reading": "эффекти́вность",
+   "gloss": "efficiency",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.work.kachestvo",
+   "form": "качество",
+   "reading": "ка́чество",
+   "gloss": "quality",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.work.standart",
+   "form": "стандарт",
+   "reading": "станда́рт",
+   "gloss": "standard",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.work.norma",
+   "form": "норма",
+   "reading": "но́рма",
+   "gloss": "norm, quota",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

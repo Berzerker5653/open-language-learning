@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-116",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.study.glossariy",
+   "form": "глоссарий",
+   "reading": "глосса́рий",
+   "gloss": "glossary",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study.definiciya",
+   "form": "дефиниция",
+   "reading": "дефини́ция",
+   "gloss": "definition",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study.konnotaciya",
+   "form": "коннотация",
+   "reading": "коннота́ция",
+   "gloss": "connotation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study.denotaciya",
+   "form": "денотация",
+   "reading": "денота́ция",
+   "gloss": "denotation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.study.znachenie",
+   "form": "значение",
+   "reading": "значе́ние",
+   "gloss": "meaning, value",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study.upotreblenie",
+   "form": "употребление",
+   "reading": "употребле́ние",
+   "gloss": "usage",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study.potreblenie",
+   "form": "потребление",
+   "reading": "потребле́ние",
+   "gloss": "consumption",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study.paradigma",
+   "form": "парадигма",
+   "reading": "паради́гма",
+   "gloss": "paradigm",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study.inventar",
+   "form": "инвентарь",
+   "reading": "инвента́рь",
+   "gloss": "inventory",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study.perechen",
+   "form": "перечень",
+   "reading": "пе́речень",
+   "gloss": "list, enumeration",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study.spisok",
+   "form": "список",
+   "reading": "спи́сок",
+   "gloss": "list",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study.perechislenie",
+   "form": "перечисление",
+   "reading": "перечисле́ние",
+   "gloss": "enumeration",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study.vychislenie",
+   "form": "вычисление",
+   "reading": "вычисле́ние",
+   "gloss": "calculation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.study.podschjot",
+   "form": "подсчёт",
+   "reading": "подсче́т",
+   "gloss": "counting",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study.edinica",
+   "form": "единица",
+   "reading": "едини́ца",
+   "gloss": "unit",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study.shkala",
+   "form": "шкала",
+   "reading": "шкала́",
+   "gloss": "scale",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study.gradaciya",
+   "form": "градация",
+   "reading": "града́ция",
+   "gloss": "gradation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study.stupen",
+   "form": "ступень",
+   "reading": "ступе́нь",
+   "gloss": "step, rung",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study.faza",
+   "form": "фаза",
+   "reading": "фа́за",
+   "gloss": "phase",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study.period",
+   "form": "период",
+   "reading": "пери́од",
+   "gloss": "period",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study.epoha",
+   "form": "эпоха",
+   "reading": "эпо́ха",
+   "gloss": "epoch",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study.era",
+   "form": "эра",
+   "reading": "э́ра",
+   "gloss": "era",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.study.kalendar",
+   "form": "календарь",
+   "reading": "календа́рь",
+   "gloss": "calendar",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study.mig",
+   "form": "миг",
+   "reading": "миг",
+   "gloss": "moment",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.study.mgnovenie",
+   "form": "мгновение",
+   "reading": "мгнове́ние",
+   "gloss": "instant",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

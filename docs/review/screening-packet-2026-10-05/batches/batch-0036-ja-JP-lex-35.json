@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-35",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.edu.wakamatsu",
+   "form": "わかまつ",
+   "reading": "わかまつ",
+   "gloss": "young employee",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.shokunin",
+   "form": "しょくにん",
+   "reading": "しょくにん",
+   "gloss": "craftsman; occupation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.kohai",
+   "form": "こうはい",
+   "reading": "こうはい",
+   "gloss": "junior (colleague)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.shuumei",
+   "form": "しゅうめい",
+   "reading": "しゅうめい",
+   "gloss": "assembly; gathering",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.kaihou",
+   "form": "かいほう",
+   "reading": "かいほう",
+   "gloss": "report",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.kai-ken",
+   "form": "かいけん",
+   "reading": "かいけん",
+   "gloss": "meeting fee; membership dues",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.kyoku",
+   "form": "きょく",
+   "reading": "きょく",
+   "gloss": "bureau; department",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.kounai",
+   "form": "こうない",
+   "reading": "こうない",
+   "gloss": "within the company",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.shokuba-ryou",
+   "form": "しょくばりょう",
+   "reading": "しょくばりょう",
+   "gloss": "workplace etiquette",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.kaihen",
+   "form": "かいへん",
+   "reading": "かいへん",
+   "gloss": "reply",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.tsuujou",
+   "form": "つうじょう",
+   "reading": "つうじょう",
+   "gloss": "regular mail; correspondence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.denwa-ban",
+   "form": "でんわばん",
+   "reading": "でんわばん",
+   "gloss": "phone number",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.moushiwake",
+   "form": "もうしわけ",
+   "reading": "もうしわけ",
+   "gloss": "apology",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.moushiage",
+   "form": "もうしあげ",
+   "reading": "もうしあげ",
+   "gloss": "reporting (humble)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.kachou",
+   "form": "かちょう",
+   "reading": "かちょう",
+   "gloss": "satisfaction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.manzoku",
+   "form": "まんぞく",
+   "reading": "まんぞく",
+   "gloss": "satisfaction; contentment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.kyouiku",
+   "form": "きょういく",
+   "reading": "きょういく",
+   "gloss": "education",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.kyouiku-ken",
+   "form": "きょういくけん",
+   "reading": "きょういくけん",
+   "gloss": "right to education",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.shingaku",
+   "form": "しんがく",
+   "reading": "しんがく",
+   "gloss": "advancing to higher education",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.daigakuin",
+   "form": "だいがくいん",
+   "reading": "だいがくいん",
+   "gloss": "graduate school",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.gakubu",
+   "form": "がくぶ",
+   "reading": "がくぶ",
+   "gloss": "faculty; department",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.kenkyuusei",
+   "form": "けんきゅうせい",
+   "reading": "けんきゅうせい",
+   "gloss": "research student",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.kyouju",
+   "form": "きょうじゅ",
+   "reading": "きょうじゅ",
+   "gloss": "professor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.gakuen",
+   "form": "がくえん",
+   "reading": "がくえん",
+   "gloss": "campus; school",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu.kougi",
+   "form": "こうぎ",
+   "reading": "こうぎ",
+   "gloss": "lecture",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,97 @@
+{
+ "batch_id": "ja-JP-assess-6",
+ "kind": "assess",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.assess.academic-skills",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "construct an argument with sources, evidence, and clear structure",
+    "present data or a literature summary without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.academic-writing",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "defend or summarize a written argument answering supplied questions",
+    "describe publication or submission steps without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.formal-correspondence",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "write a formal letter (request, apology, or complaint) with taught set phrases",
+    "identify notice and application vocabulary in supplied documents"
+   ]
+  },
+  {
+   "id": "ja.assess.art-design",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "describe a visual work using taught form, color, and line vocabulary",
+    "state an opinion about design without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.media-critique",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "analyze a news item's framing using taught media vocabulary",
+    "distinguish fact from propaganda in supplied text without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.psychology-mind",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "describe a mental process using taught psychology vocabulary",
+    "discuss memory, emotion, or habit without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.medicine-society",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "discuss a public-health issue using taught medicine vocabulary",
+    "explain a health measure or risk without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.urban-life",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "describe city space and transport using taught urban vocabulary",
+    "discuss a planning proposal without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.environment-policy",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "discuss a climate or energy issue using taught environment vocabulary",
+    "argue for or against a policy measure without blocking errors"
+   ]
+  },
+  {
+   "id": "ja.assess.language-linguistics",
+   "kind": "transfer",
+   "modality": "interaction",
+   "criteria": [
+    "talk about language structure using taught linguistics vocabulary",
+    "discuss pronunciation or grammar without blocking errors"
+   ]
+  }
+ ]
+}

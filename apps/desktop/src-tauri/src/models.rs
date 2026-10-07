@@ -81,6 +81,7 @@ pub struct ModelStatus {
     pub license_code: String,
     pub license_model: String,
     pub installed: bool,
+    pub size_bytes: u64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -104,8 +105,10 @@ pub fn model_status(data: &Path) -> Vec<ModelStatus> {
             // Installed only if the record exists AND files still match
             // their pinned checksums (corruption reads as missing).
             let installed = verify_installed(data, &m).unwrap_or(false);
+            let size_bytes = m.files.iter().map(|f| f.size_bytes).sum();
             ModelStatus {
                 installed,
+                size_bytes,
                 id: m.id,
                 version: m.version,
                 runtime: m.runtime,
@@ -331,6 +334,55 @@ pub fn download(f: &ModelFile) -> Result<Vec<u8>, String> {
     Ok(bytes)
 }
 
+/// Device-level choice of which ASR/pronunciation model to use. Models are
+/// installed once per device, so this is device config, NOT per-profile learner
+/// data. `"off"` disables speech recognition/alignment entirely — the
+/// privacy-first default: the base app bundles zero models and speaking stays
+/// "not assessed" until the user opts in to a model (docs/08 minimization;
+/// user control, docs/01).
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct SpeechPref {
+    /// `"off"` or a catalog model id whose runtime is `whisper.cpp`.
+    pub asr_model: String,
+}
+
+impl Default for SpeechPref {
+    fn default() -> Self {
+        Self {
+            asr_model: "off".into(),
+        }
+    }
+}
+
+fn speech_pref_path(data: &Path) -> PathBuf {
+    data.join("speech.json")
+}
+
+pub fn load_speech_pref(data: &Path) -> SpeechPref {
+    fs::read_to_string(speech_pref_path(data))
+        .ok()
+        .and_then(|s| serde_json::from_str(&s).ok())
+        .unwrap_or_default()
+}
+
+/// Persist the choice, validating it is `"off"` or a whisper.cpp catalog model.
+pub fn save_speech_pref(data: &Path, pref: &SpeechPref) -> Result<(), String> {
+    if pref.asr_model != "off" {
+        let known = load_catalog()
+            .models
+            .iter()
+            .any(|m| m.id == pref.asr_model && m.runtime == "whisper.cpp");
+        if !known {
+            return Err(format!(
+                "unknown or non-whisper speech model: {}",
+                pref.asr_model
+            ));
+        }
+    }
+    let json = serde_json::to_string_pretty(pref).map_err(|e| e.to_string())?;
+    fs::write(speech_pref_path(data), json).map_err(|e| e.to_string())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -509,5 +561,53 @@ mod tests {
                 assert!(f.size_bytes > 0);
             }
         }
+    }
+
+    #[test]
+    fn speech_pref_defaults_off_and_validates_selection() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        // Privacy-first default: no speech model until the user opts in.
+        assert_eq!(load_speech_pref(data).asr_model, "off");
+        // A whisper.cpp catalog model is accepted and round-trips.
+        save_speech_pref(
+            data,
+            &SpeechPref {
+                asr_model: "org.openlanguage.speech.whisper-ggml-base".into(),
+            },
+        )
+        .unwrap();
+        assert_eq!(
+            load_speech_pref(data).asr_model,
+            "org.openlanguage.speech.whisper-ggml-base"
+        );
+        // Turning speech back off is always allowed.
+        save_speech_pref(
+            data,
+            &SpeechPref {
+                asr_model: "off".into(),
+            },
+        )
+        .unwrap();
+        assert_eq!(load_speech_pref(data).asr_model, "off");
+        // Unknown or non-whisper ids are rejected (no silent typo -> dead aligner).
+        assert!(
+            save_speech_pref(
+                data,
+                &SpeechPref {
+                    asr_model: "org.openlanguage.speech.nope".into()
+                }
+            )
+            .is_err()
+        );
+        assert!(
+            save_speech_pref(
+                data,
+                &SpeechPref {
+                    asr_model: "org.openlanguage.speech.kokoro-multi-lang".into()
+                }
+            )
+            .is_err()
+        );
     }
 }

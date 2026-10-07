@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-32",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u515",
+   "text": "Это совпадение.",
+   "gloss": "This is a coincidence."
+  },
+  {
+   "id": "ru.sent.b2.u516",
+   "text": "Это параллель.",
+   "gloss": "This is a parallel."
+  },
+  {
+   "id": "ru.sent.b2.u517",
+   "text": "Это посредник.",
+   "gloss": "This is an intermediary."
+  },
+  {
+   "id": "ru.sent.b2.u518",
+   "text": "Это эксперт.",
+   "gloss": "This is an expert."
+  },
+  {
+   "id": "ru.sent.b2.u519",
+   "text": "Это поединок.",
+   "gloss": "This is a duel."
+  },
+  {
+   "id": "ru.sent.b2.u520",
+   "text": "Это аналитика.",
+   "gloss": "This is analytics."
+  },
+  {
+   "id": "ru.sent.b2.u521",
+   "text": "Это мониторинг.",
+   "gloss": "This is monitoring."
+  },
+  {
+   "id": "ru.sent.b2.u522",
+   "text": "Это замер.",
+   "gloss": "This is a measurement."
+  },
+  {
+   "id": "ru.sent.b2.u523",
+   "text": "Это выписка.",
+   "gloss": "This is an extract."
+  },
+  {
+   "id": "ru.sent.b2.u524",
+   "text": "Это реестр.",
+   "gloss": "This is a register."
+  },
+  {
+   "id": "ru.sent.b2.u525",
+   "text": "Это папка.",
+   "gloss": "This is a folder."
+  },
+  {
+   "id": "ru.sent.b2.u526",
+   "text": "Это файл.",
+   "gloss": "This is a file."
+  },
+  {
+   "id": "ru.sent.b2.u527",
+   "text": "Это тариф.",
+   "gloss": "This is a tariff."
+  },
+  {
+   "id": "ru.sent.b2.u528",
+   "text": "Это опись.",
+   "gloss": "This is an inventory."
+  },
+  {
+   "id": "ru.sent.b2.u529",
+   "text": "Это портрет.",
+   "gloss": "This is a portrait."
+  }
+ ]
+}

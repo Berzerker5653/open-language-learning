@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-0",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.argue.utverzhdenie",
+   "form": "утверждение",
+   "reading": "утвержде́ние",
+   "gloss": "claim, statement",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue.otricanie",
+   "form": "отрицание",
+   "reading": "отрица́ние",
+   "gloss": "negation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue.kontrargument",
+   "form": "контраргумент",
+   "reading": "контра́ргумент",
+   "gloss": "counterargument",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue.opponent",
+   "form": "оппонент",
+   "reading": "оппоне́нт",
+   "gloss": "opponent",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue.zashchitnik",
+   "form": "защитник",
+   "reading": "защи́тник",
+   "gloss": "defender",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue.storonnik",
+   "form": "сторонник",
+   "reading": "сторо́нник",
+   "gloss": "supporter",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue.protivnik",
+   "form": "противник",
+   "reading": "проти́вник",
+   "gloss": "adversary",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue.priverezhenets",
+   "form": "приверженец",
+   "reading": "приве́рженец",
+   "gloss": "adherent",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue.kritika",
+   "form": "критика",
+   "reading": "кри́тика",
+   "gloss": "criticism",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue.polemika",
+   "form": "полемика",
+   "reading": "поле́мика",
+   "gloss": "polemics",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue.debaty",
+   "form": "дебаты",
+   "reading": "деба́ты",
+   "gloss": "debate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue.preniya",
+   "form": "прения",
+   "reading": "пре́ния",
+   "gloss": "debate (formal)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue.rassuzhdenie",
+   "form": "рассуждение",
+   "reading": "рассужде́ние",
+   "gloss": "reasoning",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue.obosnovanie",
+   "form": "обоснование",
+   "reading": "обоснова́ние",
+   "gloss": "justification",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue.sofizm",
+   "form": "софизм",
+   "reading": "софи́зм",
+   "gloss": "sophism",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue.manipulyaciya",
+   "form": "манипуляция",
+   "reading": "манипуля́ция",
+   "gloss": "manipulation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue.davlenie",
+   "form": "давление",
+   "reading": "давле́ние",
+   "gloss": "pressure",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue.vnushenie",
+   "form": "внушение",
+   "reading": "внуше́ние",
+   "gloss": "suggestion, influence",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.argue.ubeditelnost",
+   "form": "убедительность",
+   "reading": "убеди́тельность",
+   "gloss": "convincingness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue.dostovernost",
+   "form": "достоверность",
+   "reading": "достове́рность",
+   "gloss": "reliability",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue.nadezhnost",
+   "form": "надежность",
+   "reading": "наде́жность",
+   "gloss": "dependability",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue.avtoritet",
+   "form": "авторитет",
+   "reading": "авторите́т",
+   "gloss": "authority",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.argue.kompetentnost",
+   "form": "компетентность",
+   "reading": "компете́нтность",
+   "gloss": "competence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.argue.veskiy",
+   "form": "веский",
+   "reading": "ве́ский",
+   "gloss": "weighty",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.argue.ubeditelnyy",
+   "form": "убедительный",
+   "reading": "убеди́тельный",
+   "gloss": "convincing",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

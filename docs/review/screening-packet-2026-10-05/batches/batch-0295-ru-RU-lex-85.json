@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-85",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.prof.podotchetnost",
+   "form": "подотчётность",
+   "reading": "подотче́тность",
+   "gloss": "accountability",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.podotchetnyy",
+   "form": "подотчётный",
+   "reading": "подотче́тный",
+   "gloss": "accountable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.upolnomochit",
+   "form": "уполномочить",
+   "reading": "уполномо́чить",
+   "gloss": "to authorize",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.upolnomochennyy",
+   "form": "уполномоченный",
+   "reading": "уполномо́ченный",
+   "gloss": "authorized representative",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.predstavitelstvo",
+   "form": "представительство",
+   "reading": "представи́тельство",
+   "gloss": "representation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.kvorum",
+   "form": "кворум",
+   "reading": "кво́рум",
+   "gloss": "quorum",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.protokolirovanie",
+   "form": "протоколирование",
+   "reading": "протоколи́рование",
+   "gloss": "minute-taking",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.fikseciya",
+   "form": "фиксация",
+   "reading": "фикса́ция",
+   "gloss": "fixation, recording",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.samokontrol",
+   "form": "самоконтроль",
+   "reading": "самоконтро́ль",
+   "gloss": "self-control",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.proverochnyy",
+   "form": "проверочный",
+   "reading": "прове́рочный",
+   "gloss": "verification, inspection (adj)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.inventarizaciya",
+   "form": "инвентаризация",
+   "reading": "инвентариза́ция",
+   "gloss": "inventory",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.uchetnyy",
+   "form": "учётный",
+   "reading": "уче́тный",
+   "gloss": "accounting, registration (adj)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.uchreditel",
+   "form": "учредитель",
+   "reading": "учреди́тель",
+   "gloss": "founder",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.uchreditelnyy",
+   "form": "учредительный",
+   "reading": "учреди́тельный",
+   "gloss": "founding, constituent",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.reglamentirovat",
+   "form": "регламентировать",
+   "reading": "регламенти́ровать",
+   "gloss": "to regulate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.uregulirovanie",
+   "form": "урегулирование",
+   "reading": "урегули́рование",
+   "gloss": "settlement, regulation",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.vetirovat",
+   "form": "ветировать",
+   "reading": "ве́тировать",
+   "gloss": "to veto",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.veto",
+   "form": "вето",
+   "reading": "ве́то",
+   "gloss": "veto",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.nalozenie",
+   "form": "наложение",
+   "reading": "наложе́ние",
+   "gloss": "application, imposition",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.prof.peregovoshchik",
+   "form": "переговорщик",
+   "reading": "перегово́рщик",
+   "gloss": "negotiator",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.mediator",
+   "form": "медиатор",
+   "reading": "медиа́тор",
+   "gloss": "mediator",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.prof.mediaciya",
+   "form": "медиация",
+   "reading": "медиа́ция",
+   "gloss": "mediation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.prof.arbitrazhnyy",
+   "form": "арбитражный",
+   "reading": "арбитра́жный",
+   "gloss": "arbitration (adj)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.treteyskiy",
+   "form": "третейский",
+   "reading": "трете́йский",
+   "gloss": "third-party, arbitral",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.prof.pretenzionnyy",
+   "form": "претензионный",
+   "reading": "претензио́нный",
+   "gloss": "claims (adj)",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-34",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.ceremony-speech",
+   "text": "けいじょう の かき を かきました。",
+   "gloss": "I wrote the celebratory note."
+  },
+  {
+   "id": "ja.sent.public-announcements",
+   "text": "こうほ の ぶんしょ を よみました。",
+   "gloss": "I read the announcement document."
+  },
+  {
+   "id": "ja.sent.editorial-letters",
+   "text": "びじゅつ の てがみ を かきました。",
+   "gloss": "I wrote the art letter."
+  },
+  {
+   "id": "ja.sent.correspondence-portfolio",
+   "text": "しょうかいじょ を かきました。",
+   "gloss": "I wrote the introduction letter."
+  },
+  {
+   "id": "ja.sent.visual-analysis",
+   "text": "さくひん を かんしょう しました。",
+   "gloss": "I appreciated the artwork."
+  },
+  {
+   "id": "ja.sent.traditional-arts",
+   "text": "でんとう の げいのう を べんきょう しました。",
+   "gloss": "I studied traditional arts."
+  },
+  {
+   "id": "ja.sent.modern-art",
+   "text": "げいじゅつ の あたらしい かたち を みました。",
+   "gloss": "I saw a new art form."
+  },
+  {
+   "id": "ja.sent.architecture-talk",
+   "text": "けんちく の しゃしん を みました。",
+   "gloss": "I saw the architecture photos."
+  },
+  {
+   "id": "ja.sent.urban-design",
+   "text": "とし の けいかく を ぎろん しました。",
+   "gloss": "We discussed the city plan."
+  },
+  {
+   "id": "ja.sent.craft-aesthetics",
+   "text": "こうげい の さくひん を みました。",
+   "gloss": "I saw the craft work."
+  },
+  {
+   "id": "ja.sent.photography-art",
+   "text": "しゃしん の てんじ へ いきました。",
+   "gloss": "I went to the photo exhibition."
+  },
+  {
+   "id": "ja.sent.music-analysis",
+   "text": "おんがく の めるでぃ を ききました。",
+   "gloss": "I listened to the melody."
+  },
+  {
+   "id": "ja.sent.public-art",
+   "text": "こうきょう の げい について かきました。",
+   "gloss": "I wrote about public art."
+  },
+  {
+   "id": "ja.sent.art-and-culture",
+   "text": "ぶんか の げいじゅつ を べんきょう しました。",
+   "gloss": "I studied the culture's art."
+  },
+  {
+   "id": "ja.sent.exhibition-writing",
+   "text": "てんじ の ぶんしょう を かきました。",
+   "gloss": "I wrote the exhibition text."
+  }
+ ]
+}

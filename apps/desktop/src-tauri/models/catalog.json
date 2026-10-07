@@ -20,6 +20,40 @@
       "source": "https://github.com/ggml-org/whisper.cpp"
     },
     {
+      "id": "org.openlanguage.speech.whisper-ggml-base",
+      "version": "1.0.0",
+      "runtime": "whisper.cpp",
+      "tier": "development",
+      "files": [
+        {
+          "path": "ggml-base.bin",
+          "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.bin",
+          "sha256": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe",
+          "size_bytes": 147951465
+        }
+      ],
+      "license_code": "MIT",
+      "license_model": "MIT (OpenAI Whisper weights, upstream terms recorded)",
+      "source": "https://github.com/ggml-org/whisper.cpp"
+    },
+    {
+      "id": "org.openlanguage.speech.whisper-ggml-small",
+      "version": "1.0.0",
+      "runtime": "whisper.cpp",
+      "tier": "development",
+      "files": [
+        {
+          "path": "ggml-small.bin",
+          "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.bin",
+          "sha256": "1be3a9b2063867b937e64e2ec7483364a79917e157fa98c5d94b5c1fffea987b",
+          "size_bytes": 487601967
+        }
+      ],
+      "license_code": "MIT",
+      "license_model": "MIT (OpenAI Whisper weights, upstream terms recorded)",
+      "source": "https://github.com/ggml-org/whisper.cpp"
+    },
+    {
       "id": "org.openlanguage.speech.sherpa-whisper-tiny",
       "version": "1.0.0",
       "runtime": "sherpa-onnx",

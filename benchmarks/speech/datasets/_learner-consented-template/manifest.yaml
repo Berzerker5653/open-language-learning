@@ -1,0 +1,74 @@
+# TEMPLATE — consented learner-speech dataset manifest (SPEECH-007).
+# Copy to benchmarks/speech/datasets/<dataset-id>/manifest.yaml when a real
+# consented dataset is acquired. Fill every TODO; a manifest with unfilled
+# consent/license fields MUST NOT be referenced by a CalibrationRecord.
+# This template is NOT a dataset and carries no data.
+#
+# The registry binds the dataset by path + sha256 (ArtifactRef). This manifest
+# is the permission + provenance contract a reviewer checks before any held-out
+# result is trusted (docs/17 §29, docs/05 §223).
+
+dataset_id: "TODO-ja-vowel-length-learner-<version>"
+protocol: "vowel-length-0.2.0" # must match the frozen protocol
+task: "SPEECH-007"
+language: "ja-JP"
+feature_id: "ja.phon.long-vowel" # scored feature id; phonology inventory id is ja.phon.vowel-length
+
+# --- Provenance / acquisition -------------------------------------------
+acquisition:
+  method: "consented-recording-study" # or "licensed-dataset" (see SOURCING.md)
+  study_ref: "TODO-study/IRB/consent-batch id"
+  collected_on: "TODO-YYYY-MM-DD"
+  # For a licensed dataset instead:
+  # upstream_url: "TODO"
+  # fetched_from_upstream: true          # do NOT re-host raw audio (docs/17 §125)
+
+# --- Rights + consent (must be satisfied BEFORE use) --------------------
+license:
+  text_source: "TODO taught-phrase list provenance"
+  audio_terms: "TODO exact terms; a CC0 label does not waive release-page
+    no-re-host / no-speaker-ID conditions (SOURCES.md §82-84)"
+  redistribution_allowed_in_repo: false # raw audio stays outside source control
+privacy:
+  contains_personal_data: true # learner voice is personal data
+  consent_instrument: "benchmarks/speech/consent/participant-consent.md"
+  consent_purposes_granted: # per participant, recorded in study storage
+    retain_audio_for_evaluation: true # P2 — required for calibration
+    model_training: false # P3 — not required; keep false unless granted
+    publish_or_redistribute: false # P4 — required false for repo shipping
+    share_deidentified_metadata: "TODO" # P5
+  deidentifiable_only_in_repo: true # repo holds manifest/aggregates, not audio
+  metadata_minimization: "benchmarks/speech/consent/data-handling.md"
+
+# --- Coverage / sampling (must meet protocol sampling_rationale) --------
+composition:
+  n_speakers: TODO # >= 40 per protocol
+  n_attempts: TODO
+  attempts_per_speaker_max: TODO # <= 6 counted toward the CI
+  speakers_disjoint_dev_holdout: true # no speaker leaks across splits
+  word_family_holdout: true # unseen phrase families in holdout
+  categories: # mirrors docs/05 §206-219
+    acceptable_reference: TODO
+    learner_errors_shortened: TODO
+    learner_errors_lengthened: TODO
+    ambiguous: TODO
+    wrong_utterance: TODO
+    silence: TODO
+    noise: TODO
+    clipping: TODO
+  microphones: [TODO device classes] # multiple mics (docs/05 §219)
+  proficiency_bands: [TODO] # consented metadata (P5)
+  l1_groups: [TODO] # consented metadata (P5)
+
+# --- Target scope (phrase-scoped; do not inherit broad claims) ----------
+target_ids: # content ids this dataset covers
+  - "TODO ja-JP long-vowel minimal-pair content ids (bind to pack version)"
+
+# --- Integrity ----------------------------------------------------------
+# Raw audio lives in access-controlled study storage; only these hashes ship.
+audio_storage: "study-storage://TODO (outside repo, outside distributed packs)"
+content_sha256: "TODO manifest/content hash bound into the CalibrationRecord"
+notes: >
+  Synthetic read-speech (ja-onramp-synth) and native corpora are NOT valid here;
+  this manifest is for consented LEARNER speech with labeled vowel-length
+  errors (docs/17 §25).

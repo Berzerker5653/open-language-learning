@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-7",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.send-letter",
+   "text": "ゆびんきょくで てがみを だします。",
+   "gloss": "I send a letter at the post office."
+  },
+  {
+   "id": "ja.sent.withdraw-money",
+   "text": "ぎんこうで おろします。",
+   "gloss": "I withdraw money at the bank."
+  },
+  {
+   "id": "ja.sent.report-address",
+   "text": "やくばで じゅうしょを とどけます。",
+   "gloss": "I register my address at the office."
+  },
+  {
+   "id": "ja.sent.call-police",
+   "text": "こうばんに かいわを します。",
+   "gloss": "I talk at the police box."
+  },
+  {
+   "id": "ja.sent.fire-truck",
+   "text": "しょうぼうしゃが きました。",
+   "gloss": "The fire truck came."
+  },
+  {
+   "id": "ja.sent.read-map",
+   "text": "ちずを よみます。",
+   "gloss": "I read the map."
+  },
+  {
+   "id": "ja.sent.city-hall",
+   "text": "くやくしょで しょうかいします。",
+   "gloss": "I introduce myself at city hall."
+  },
+  {
+   "id": "ja.sent.pay-bill",
+   "text": "はらいこむ ひょうを みます。",
+   "gloss": "I look at the payment label."
+  },
+  {
+   "id": "ja.sent.follow-recipe",
+   "text": "れしぴを みながら つくります。",
+   "gloss": "I make it while looking at the recipe."
+  },
+  {
+   "id": "ja.sent.add-salt",
+   "text": "しおを すこし いれます。",
+   "gloss": "I add a little salt."
+  },
+  {
+   "id": "ja.sent.tasty-food",
+   "text": "この りょうりは おいしいです。",
+   "gloss": "This dish is delicious."
+  },
+  {
+   "id": "ja.sent.eat-fruit",
+   "text": "るす バナナを たべます。",
+   "gloss": "I eat a banana."
+  },
+  {
+   "id": "ja.sent.breakfast-bento",
+   "text": "あさは ちゃわん ごはんを たべます。",
+   "gloss": "In the morning I eat rice from a bowl."
+  },
+  {
+   "id": "ja.sent.dinner-together",
+   "text": "ゆうしょくを いっしょに たべます。",
+   "gloss": "We eat dinner together."
+  },
+  {
+   "id": "ja.sent.buy-shirt",
+   "text": "わいしゃつを かいます。",
+   "gloss": "I buy a shirt."
+  }
+ ]
+}

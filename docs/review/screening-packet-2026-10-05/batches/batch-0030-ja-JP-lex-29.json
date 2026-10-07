@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-29",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.debate.saiaku",
+   "form": "さいあく",
+   "reading": "さいあく",
+   "gloss": "worst",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.ichiban",
+   "form": "いちばん",
+   "reading": "いちばん",
+   "gloss": "number one",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.goukei",
+   "form": "ごうけい",
+   "reading": "ごうけい",
+   "gloss": "total",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.zenshou",
+   "form": "ぜんしょう",
+   "reading": "ぜんしょう",
+   "gloss": "previous chapter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.mottomo",
+   "form": "もっとも",
+   "reading": "もっとも",
+   "gloss": "most",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.ruiji",
+   "form": "るいじ",
+   "reading": "るいじ",
+   "gloss": "similarity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.hannou",
+   "form": "はんのう",
+   "reading": "はんのう",
+   "gloss": "reaction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.taiou",
+   "form": "たいおう",
+   "reading": "たいおう",
+   "gloss": "correspondence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.kentei",
+   "form": "けんてい",
+   "reading": "けんてい",
+   "gloss": "examination",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.kyotsu",
+   "form": "きょうつう",
+   "reading": "きょうつう",
+   "gloss": "commonality",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.tenkai",
+   "form": "てんかい",
+   "reading": "てんかい",
+   "gloss": "development",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.meiwaku",
+   "form": "めいわく",
+   "reading": "めいわく",
+   "gloss": "troublesome",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.ronzetsu",
+   "form": "ろんせつ",
+   "reading": "ろんせつ",
+   "gloss": "argument",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.shutten",
+   "form": "しゅってん",
+   "reading": "しゅってん",
+   "gloss": "point of discussion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.gimon",
+   "form": "ぎもん",
+   "reading": "ぎもん",
+   "gloss": "doubt",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.ippan",
+   "form": "いっぱん",
+   "reading": "いっぱん",
+   "gloss": "general",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.tokui",
+   "form": "とくい",
+   "reading": "とくい",
+   "gloss": "good at",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.unmei",
+   "form": "うんめい",
+   "reading": "うんめい",
+   "gloss": "fate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.kika",
+   "form": "きか",
+   "reading": "きか",
+   "gloss": "mechanism",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.riyuu",
+   "form": "りゆう",
+   "reading": "りゆう",
+   "gloss": "reason",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.koushin",
+   "form": "こうしん",
+   "reading": "こうしん",
+   "gloss": "update",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.koukan",
+   "form": "こうかん",
+   "reading": "こうかん",
+   "gloss": "exchange",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.kairyou2",
+   "form": "かいりょう",
+   "reading": "かいりょう",
+   "gloss": "improvement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.ketsuron2",
+   "form": "けつろん",
+   "reading": "けつろん",
+   "gloss": "conclusion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.debate.saisho2",
+   "form": "さいしょ",
+   "reading": "さいしょ",
+   "gloss": "first",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

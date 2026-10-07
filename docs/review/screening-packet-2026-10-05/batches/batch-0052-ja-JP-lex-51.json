@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-51",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.env3.katei2",
+   "form": "かてい",
+   "reading": "かてい",
+   "gloss": "assumption, premise",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.rinen",
+   "form": "りねん",
+   "reading": "りねん",
+   "gloss": "principle, ideal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.katsudou2",
+   "form": "かつどう",
+   "reading": "かつどう",
+   "gloss": "activity, movement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.hantai2",
+   "form": "はんたい",
+   "reading": "はんたい",
+   "gloss": "opposition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.seikyou",
+   "form": "せいきょう",
+   "reading": "せいきょう",
+   "gloss": "request, appeal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.kisan",
+   "form": "きさん",
+   "reading": "きさん",
+   "gloss": "base, foundation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.chiseki",
+   "form": "ちせき",
+   "reading": "ちせき",
+   "gloss": "trace, vestige",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.denryoku",
+   "form": "でんりょく",
+   "reading": "でんりょく",
+   "gloss": "electric power",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.kiki",
+   "form": "きき",
+   "reading": "きき",
+   "gloss": "crisis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.kokumin",
+   "form": "こくみん",
+   "reading": "こくみん",
+   "gloss": "citizens, people",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.seiji",
+   "form": "せいじ",
+   "reading": "せいじ",
+   "gloss": "politics",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.houkoku3",
+   "form": "ほうこく",
+   "reading": "ほうこく",
+   "gloss": "report",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.yakuwari",
+   "form": "やくわり",
+   "reading": "やくわり",
+   "gloss": "role",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.mirai2",
+   "form": "みらい",
+   "reading": "みらい",
+   "gloss": "future",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.kokusai2",
+   "form": "こくさい",
+   "reading": "こくさい",
+   "gloss": "international",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.kiso",
+   "form": "きそ",
+   "reading": "きそ",
+   "gloss": "foundation, base",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env3.kankaku2",
+   "form": "かんかく",
+   "reading": "かんかく",
+   "gloss": "awareness, sense",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.shakai-kinou",
+   "form": "しゃかいきのう",
+   "reading": "しゃかいきのう",
+   "gloss": "social responsibility",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.jigyounushi",
+   "form": "じぎょうぬし",
+   "reading": "じぎょうぬし",
+   "gloss": "business owner",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.kessan2",
+   "form": "けっさん",
+   "reading": "けっさん",
+   "gloss": "settlement, accounts",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.fuyou",
+   "form": "ふよう",
+   "reading": "ふよう",
+   "gloss": "need, necessity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.kyousei2",
+   "form": "きょうせい",
+   "reading": "きょうせい",
+   "gloss": "compulsion, obligation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.kokusai-kyoutei",
+   "form": "こくさいきょうてい",
+   "reading": "こくさいきょうてい",
+   "gloss": "international agreement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.kansa2",
+   "form": "かんさ",
+   "reading": "かんさ",
+   "gloss": "observation, monitoring",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.env4.jissou",
+   "form": "じっそう",
+   "reading": "じっそう",
+   "gloss": "implementation",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

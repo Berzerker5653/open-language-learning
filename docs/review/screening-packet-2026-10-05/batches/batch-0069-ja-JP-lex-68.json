@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-68",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.health.kowai",
+   "form": "こわい",
+   "reading": "こわい",
+   "gloss": "scary; frightening",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.atatakai",
+   "form": "あたたかい",
+   "reading": "あたたかい",
+   "gloss": "warm",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.tsumetai",
+   "form": "つめたい",
+   "reading": "つめたい",
+   "gloss": "cold (to the touch)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.yasumasu",
+   "form": "やすみます",
+   "reading": "やすみます",
+   "gloss": "to rest",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.araimasu",
+   "form": "あらいます",
+   "reading": "あらいます",
+   "gloss": "to wash",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.naoshimasu",
+   "form": "なおります",
+   "reading": "なおります",
+   "gloss": "to fix; to cure",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.okuremasu",
+   "form": "おくれます",
+   "reading": "おくれます",
+   "gloss": "to be late",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.ugokimasu",
+   "form": "うごきます",
+   "reading": "うごきます",
+   "gloss": "to move; to exercise",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.tsukaremasu",
+   "form": "つかれます",
+   "reading": "つかれます",
+   "gloss": "to get tired",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.kuukimasu",
+   "form": "すいます",
+   "reading": "すいます",
+   "gloss": "to breathe",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.komaru",
+   "form": "こまります",
+   "reading": "こまります",
+   "gloss": "to be troubled; to be in a fix",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.hashirimasu",
+   "form": "はしります",
+   "reading": "はしります",
+   "gloss": "to run",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.yoku",
+   "form": "よく",
+   "reading": "よく",
+   "gloss": "well; often",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.sukoshi",
+   "form": "すこし",
+   "reading": "すこし",
+   "gloss": "a little",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.mou",
+   "form": "もう",
+   "reading": "もう",
+   "gloss": "already",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.sugu",
+   "form": "すぐ",
+   "reading": "すぐ",
+   "gloss": "right away",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health.chanto",
+   "form": "ちゃんと",
+   "reading": "ちゃんと",
+   "gloss": "properly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.seikatsu2",
+   "form": "せいかつ",
+   "reading": "せいかつ",
+   "gloss": "lifestyle",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.jousho",
+   "form": "じょうしょ",
+   "reading": "じょうしょ",
+   "gloss": "hot water",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.biyou",
+   "form": "びよう",
+   "reading": "びよう",
+   "gloss": "beauty",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.kinen",
+   "form": "きねん",
+   "reading": "きねん",
+   "gloss": "commemoration",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.taikyuu",
+   "form": "たいきゅう",
+   "reading": "たいきゅう",
+   "gloss": "rest",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.nebuki",
+   "form": "ねぶき",
+   "reading": "ねぶき",
+   "gloss": "sleeplessness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.koku2",
+   "form": "こく",
+   "reading": "こく",
+   "gloss": "meal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.health2.choushi",
+   "form": "ちょうし",
+   "reading": "ちょうし",
+   "gloss": "condition",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

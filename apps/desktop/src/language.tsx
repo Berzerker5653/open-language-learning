@@ -45,6 +45,14 @@ export interface TtsStatus {
   models: TtsModel[];
 }
 
+export interface SpeechModel {
+  id: string;
+  version: string;
+  license_code: string;
+  installed: boolean;
+  size_bytes: number;
+}
+
 export interface LanguagePanelProps {
   installed: InstalledPack[];
   activeIds: string[];
@@ -57,6 +65,9 @@ export interface LanguagePanelProps {
   onInstallModel(modelId: string): void;
   onDeleteModel(modelId: string): void;
   onImport(dataB64: string): void;
+  speechModels: SpeechModel[];
+  speechModel: string;
+  onSelectSpeechModel(modelId: string): void;
 }
 
 const STATUS_LABELS: Record<string, string> = {
@@ -79,6 +90,17 @@ const TTS_MODEL_LABELS: Record<string, string> = {
   "org.openlanguage.speech.sherpa-onnx-runtime": "Speech runtime",
   "org.openlanguage.speech.kokoro-multi-lang": "Japanese voice model (Kokoro)",
 };
+
+const SPEECH_MODEL_LABELS: Record<string, string> = {
+  "org.openlanguage.speech.whisper-ggml-tiny": "Whisper Tiny — smallest, lightest",
+  "org.openlanguage.speech.whisper-ggml-base": "Whisper Base — larger download and memory",
+  "org.openlanguage.speech.whisper-ggml-small": "Whisper Small — largest download and memory",
+};
+
+// For the shipped pronunciation feature the sizes score identically, so the
+// recommended pick is the lightest one; larger models only help future
+// recognition-heavy features (ADR-0011).
+const RECOMMENDED_SPEECH_MODEL = "org.openlanguage.speech.whisper-ggml-tiny";
 
 function megabytes(bytes: number): string {
   return (bytes / (1024 * 1024)).toFixed(1);
@@ -235,6 +257,66 @@ export function LanguagePanel(p: LanguagePanelProps) {
       ) : (
         <p className="empty">Speech status unavailable.</p>
       )}
+
+      <h2>Speech recognition &amp; pronunciation</h2>
+      <p>
+        <small>
+          Optional. Choose a local speech model for pronunciation feedback, or turn it off. Models
+          run entirely on this device — nothing is uploaded. Pronunciation feedback is{" "}
+          <em>guided only</em> (no automatic scoring or mastery) until it has been calibrated. For
+          pronunciation feedback the model sizes give the same result — pick one your device can
+          comfortably run. Larger models mainly help future listening/recognition features, not
+          pronunciation accuracy.
+        </small>
+      </p>
+      <fieldset>
+        <legend>Speech model</legend>
+        <label className="speech-model">
+          <input
+            type="radio"
+            name="speech-model"
+            value="off"
+            checked={p.speechModel === "off"}
+            onChange={() => p.onSelectSpeechModel("off")}
+          />{" "}
+          Off — no speech model; speaking stays not assessed
+        </label>
+        {p.speechModels.map((m) => (
+          <div key={m.id} className="speech-model">
+            <label>
+              <input
+                type="radio"
+                name="speech-model"
+                value={m.id}
+                checked={p.speechModel === m.id}
+                onChange={() => p.onSelectSpeechModel(m.id)}
+              />{" "}
+              {SPEECH_MODEL_LABELS[m.id] ?? m.id} — {megabytes(m.size_bytes)} MB, {m.license_code}
+              {m.installed ? " (installed)" : ""}
+              {m.id === RECOMMENDED_SPEECH_MODEL ? (
+                <span className="badge">recommended</span>
+              ) : null}
+            </label>
+            {m.installed ? (
+              <button
+                type="button"
+                className="btn btn--quiet"
+                onClick={() => p.onDeleteModel(m.id)}
+              >
+                Remove
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="btn btn--primary"
+                onClick={() => p.onInstallModel(m.id)}
+              >
+                Download ~{megabytes(m.size_bytes)} MB
+              </button>
+            )}
+          </div>
+        ))}
+      </fieldset>
     </section>
   );
 }

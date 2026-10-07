@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-147",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.urban.norikae",
+   "form": "のりかえ",
+   "reading": "のりかえ",
+   "gloss": "transfer (transport)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.juumin",
+   "form": "じゅうみん",
+   "reading": "じゅうみん",
+   "gloss": "resident",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.koudan",
+   "form": "こうだん",
+   "reading": "こうだん",
+   "gloss": "public housing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.kachiku",
+   "form": "かちく",
+   "reading": "かちく",
+   "gloss": "land price",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.zei",
+   "form": "ぜい",
+   "reading": "ぜい",
+   "gloss": "tax",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.saabisu",
+   "form": "さーびす",
+   "reading": "さーびす",
+   "gloss": "service",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.hiroba",
+   "form": "ひろば",
+   "reading": "ひろば",
+   "gloss": "plaza, open space",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.puratsu",
+   "form": "ぷらつ",
+   "reading": "ぷらつ",
+   "gloss": "plaza",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.shotengai",
+   "form": "しょうてんがい",
+   "reading": "しょうてんがい",
+   "gloss": "shopping street",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.paaku",
+   "form": "ぱーく",
+   "reading": "ぱーく",
+   "gloss": "park",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.kissa",
+   "form": "きっさ",
+   "reading": "きっさ",
+   "gloss": "café",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.kogyo",
+   "form": "こうぎょう",
+   "reading": "こうぎょう",
+   "gloss": "industry",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.shoten",
+   "form": "しょうてん",
+   "reading": "しょうてん",
+   "gloss": "store, shop",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.sangyo",
+   "form": "さんぎょう",
+   "reading": "さんぎょう",
+   "gloss": "industry, business",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.kaihatsu",
+   "form": "かいはつ",
+   "reading": "かいはつ",
+   "gloss": "development",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.fukko",
+   "form": "ふっこう",
+   "reading": "ふっこう",
+   "gloss": "revival, reconstruction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.senso",
+   "form": "せんそー",
+   "reading": "せんそー",
+   "gloss": "sensor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.shisutemu",
+   "form": "しすてむ",
+   "reading": "しすてむ",
+   "gloss": "system",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.ai",
+   "form": "えーあい",
+   "reading": "えーあい",
+   "gloss": "AI",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.sosa",
+   "form": "そうさ",
+   "reading": "そうさ",
+   "gloss": "operation, control",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.kufuu",
+   "form": "くふう",
+   "reading": "くふう",
+   "gloss": "ingenuity, device",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.ryoiki",
+   "form": "りょういき",
+   "reading": "りょういき",
+   "gloss": "area, region",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.ki",
+   "form": "き",
+   "reading": "き",
+   "gloss": "tree",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.hana",
+   "form": "はな",
+   "reading": "はな",
+   "gloss": "flower",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.urban2.suiiki",
+   "form": "すいいき",
+   "reading": "すいいき",
+   "gloss": "waterside, water area",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

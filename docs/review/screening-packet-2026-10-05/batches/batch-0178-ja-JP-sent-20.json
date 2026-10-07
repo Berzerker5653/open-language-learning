@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-20",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.gentle-persuade",
+   "text": "すうせい は やさしく しました。",
+   "gloss": "I persuaded gently."
+  },
+  {
+   "id": "ja.sent.suggestion-form",
+   "text": "もういちど ぜんあん を だしました。",
+   "gloss": "I made the proposal once more."
+  },
+  {
+   "id": "ja.sent.polite-warning",
+   "text": "みち に ちゅうい して ください。",
+   "gloss": "Please be careful of the street."
+  },
+  {
+   "id": "ja.sent.regret",
+   "text": "はんせい の てがみ を かきました。",
+   "gloss": "I wrote a letter of regret."
+  },
+  {
+   "id": "ja.sent.hope",
+   "text": "きぼう の はなし を しました。",
+   "gloss": "I talked about hope."
+  },
+  {
+   "id": "ja.sent.preference",
+   "text": "せんがく は ながい もの です。",
+   "gloss": "My preference is the long one."
+  },
+  {
+   "id": "ja.sent.priorities",
+   "text": "ゆうせん の じゅんじょ を かきました。",
+   "gloss": "I wrote the order of priorities."
+  },
+  {
+   "id": "ja.sent.compromise-write",
+   "text": "きょうしょう の ぶんしょう を かきました。",
+   "gloss": "I wrote the compromise text."
+  },
+  {
+   "id": "ja.sent.product-review",
+   "text": "ひょうか を てがみに かきました。",
+   "gloss": "I wrote the evaluation in a letter."
+  },
+  {
+   "id": "ja.sent.service-compare",
+   "text": "ひよう を ひかく しました。",
+   "gloss": "I compared the costs."
+  },
+  {
+   "id": "ja.sent.pros-cons",
+   "text": "ゆうりょう な ところ と けんこう な ところ を かきました。",
+   "gloss": "I wrote the excellent and healthy points."
+  },
+  {
+   "id": "ja.sent.explain-choice",
+   "text": "じゆう に えらびました。",
+   "gloss": "I chose freely."
+  },
+  {
+   "id": "ja.sent.ranking-reasons",
+   "text": "ランキング の じゅんじょ を おしえました。",
+   "gloss": "I taught the order of the ranking."
+  },
+  {
+   "id": "ja.sent.debate-basics",
+   "text": "ろんせつ を はなしました。",
+   "gloss": "I spoke the argument."
+  },
+  {
+   "id": "ja.sent.use-evidence",
+   "text": "じつさい を しらべました。",
+   "gloss": "I investigated the facts."
+  }
+ ]
+}

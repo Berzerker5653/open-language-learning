@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-61",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.narration2.tishina",
+   "form": "тишина",
+   "reading": "тишина́",
+   "gloss": "silence, quiet",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.narration2.zvuk",
+   "form": "звук",
+   "reading": "звук",
+   "gloss": "sound",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration2.golos",
+   "form": "голос",
+   "reading": "го́лос",
+   "gloss": "voice",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration2.sled",
+   "form": "след",
+   "reading": "след",
+   "gloss": "trace, footstep",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.narration2.ten",
+   "form": "тень",
+   "reading": "тень",
+   "gloss": "shadow",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.otkazyvat",
+   "form": "отказывать",
+   "reading": "отка́зывать",
+   "gloss": "to refuse (impf.)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.otkazat",
+   "form": "отказать",
+   "reading": "отказа́ть",
+   "gloss": "to refuse (pf.)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.naotrez",
+   "form": "наотрез",
+   "reading": "наотре́з",
+   "gloss": "point-blank",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.kategoricheski",
+   "form": "категорически",
+   "reading": "категори́чески",
+   "gloss": "categorically",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.otkazyvatsya",
+   "form": "отказываться",
+   "reading": "отка́зываться",
+   "gloss": "to refuse (impf., refl.)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.naporistyy",
+   "form": "напористый",
+   "reading": "напо́ристый",
+   "gloss": "pushy",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.nastoychivyy",
+   "form": "настойчивый",
+   "reading": "насто́йчивый",
+   "gloss": "persistent",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.nastoychivo",
+   "form": "настойчиво",
+   "reading": "насто́йчиво",
+   "gloss": "persistently",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.naporisto",
+   "form": "напористо",
+   "reading": "напори́сто",
+   "gloss": "pushingly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.naporistost",
+   "form": "напористость",
+   "reading": "напо́ристость",
+   "gloss": "pushiness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.kategorichnyy",
+   "form": "категоричный",
+   "reading": "категори́чный",
+   "gloss": "categorical",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.kategorichnost",
+   "form": "категоричность",
+   "reading": "категори́чность",
+   "gloss": "categoricalness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.ultimatum",
+   "form": "ультиматум",
+   "reading": "ультима́тум",
+   "gloss": "ultimatum",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.neg.ultimativnyy",
+   "form": "ультимативный",
+   "reading": "ультимати́вный",
+   "gloss": "ultimatum-like",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.myagkost",
+   "form": "мягкость",
+   "reading": "мя́гкость",
+   "gloss": "softness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.neg.nastavat",
+   "form": "настаивать",
+   "reading": "наста́ивать",
+   "gloss": "to insist",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.otstaivat",
+   "form": "отстаивать",
+   "reading": "отста́ивать",
+   "gloss": "to defend, uphold",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.otstoyat",
+   "form": "отстоять",
+   "reading": "отстоя́ть",
+   "gloss": "to firmly defend",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.neg.otstaivanie",
+   "form": "отстаивание",
+   "reading": "отста́ивание",
+   "gloss": "defending, upholding",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.neg.otpor",
+   "form": "отпор",
+   "reading": "отпо́р",
+   "gloss": "active resistance",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

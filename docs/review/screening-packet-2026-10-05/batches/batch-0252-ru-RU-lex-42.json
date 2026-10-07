@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-42",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.future2.chest",
+   "form": "честь",
+   "reading": "честь",
+   "gloss": "honor",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future2.reputaciya",
+   "form": "репутация",
+   "reading": "репута́ция",
+   "gloss": "reputation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.future2.prestizh",
+   "form": "престиж",
+   "reading": "прести́ж",
+   "gloss": "prestige",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.future2.status",
+   "form": "статус",
+   "reading": "ста́тус",
+   "gloss": "status",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.future2.rang",
+   "form": "ранг",
+   "reading": "ранг",
+   "gloss": "rank",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.future2.mesto",
+   "form": "место",
+   "reading": "ме́сто",
+   "gloss": "place",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future2.rukovoditel",
+   "form": "руководитель",
+   "reading": "руководи́тель",
+   "gloss": "leader",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.future2.sleduet",
+   "form": "следует",
+   "reading": "сле́дует",
+   "gloss": "one should",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future2.vygodnyy",
+   "form": "выгодный",
+   "reading": "вы́годный",
+   "gloss": "profitable",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future2.obdumat",
+   "form": "обдумать",
+   "reading": "обду́мать",
+   "gloss": "to consider",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future2.vzvesit",
+   "form": "взвесить",
+   "reading": "взве́сить",
+   "gloss": "to weigh",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future2.somnevat",
+   "form": "сомневаться",
+   "reading": "сомнева́ться",
+   "gloss": "to doubt",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future2.rassudok",
+   "form": "рассудок",
+   "reading": "рассу́док",
+   "gloss": "reason",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.future2.logichnyy",
+   "form": "логичный",
+   "reading": "логи́чный",
+   "gloss": "logical",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future2.posledovatelnyy",
+   "form": "последовательный",
+   "reading": "после́довательный",
+   "gloss": "consistent",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future2.protivorechie",
+   "form": "противоречие",
+   "reading": "противоре́чие",
+   "gloss": "contradiction",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.future2.dokazyvat",
+   "form": "доказывать",
+   "reading": "дока́зывать",
+   "gloss": "to prove",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future2.opiratsya",
+   "form": "опираться",
+   "reading": "опира́ться",
+   "gloss": "to rely on",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future2.polagat",
+   "form": "полагать",
+   "reading": "полага́ть",
+   "gloss": "to suppose",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.future2.voobrazhenie",
+   "form": "воображение",
+   "reading": "воображе́ние",
+   "gloss": "imagination",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.greetings.zdravstvuyte",
+   "form": "здравствуйте",
+   "reading": "здра́вствуйте",
+   "gloss": "hello (polite greeting)",
+   "pos": "interjection",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.greetings.dobroe-utro",
+   "form": "доброе утро",
+   "reading": "до́брое у́тро",
+   "gloss": "good morning",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.greetings.dobryy-den",
+   "form": "добрый день",
+   "reading": "до́брый день",
+   "gloss": "good afternoon; good day",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.greetings.dobryy-vecher",
+   "form": "добрый вечер",
+   "reading": "до́брый ве́чер",
+   "gloss": "good evening",
+   "pos": "phrase",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.greetings.spasibo",
+   "form": "спасибо",
+   "reading": "спаси́бо",
+   "gloss": "thank you",
+   "pos": "interjection",
+   "gender": ""
+  }
+ ]
+}

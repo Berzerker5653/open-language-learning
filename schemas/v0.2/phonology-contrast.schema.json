@@ -33,6 +33,26 @@
     "sources": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
     "notes": { "type": "string" },
     "generation": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/generation" },
+    "production": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["measure", "expected_ratio"],
+      "description": "Optional target for PRODUCTION scoring (speaking back the contrast). Language-neutral: the engine reads a declared number and never infers the phonology. Absent means the feature cannot score production without a reference recording. The value is authored by the pack maintainer (e.g. derived from mora counts for Japanese, or from the language's own phonology) and is uncalibrated until SPEECH-007.",
+      "properties": {
+        "measure": {
+          "type": "string",
+          "enum": ["voiced-duration-ratio"],
+          "description": "Which production measurement the target anchors. The engine maps this selector to an interpreter; new contrasts/languages add measures without engine phonology."
+        },
+        "expected_ratio": {
+          "type": "number",
+          "exclusiveMinimum": 1.0,
+          "description": "Target long/short whole-word voiced-duration ratio for a correct production (e.g. mora-count ratio: obasan 4 morae vs obaasan 5 morae = 1.25)."
+        },
+        "tolerance_low": { "type": "number", "minimum": 0.0, "maximum": 1.0, "default": 0.85, "description": "Below expected_ratio*tolerance_low => 'shorter'. Must be high enough that a no-contrast production (ratio ~1.0) is not read as 'close'." },
+        "tolerance_high": { "type": "number", "minimum": 1.0, "default": 1.25, "description": "Above expected_ratio*tolerance_high => 'longer'." }
+      }
+    },
     "review_records": {
       "type": "array",
       "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/reviewRef" }

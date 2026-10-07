@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-3",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.academic.ronsho",
+   "form": "ろんしょ",
+   "reading": "ろんしょ",
+   "gloss": "thesis, paper",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.shiryo4",
+   "form": "しりょう",
+   "reading": "しりょう",
+   "gloss": "reference material",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.bunko",
+   "form": "ぶんこ",
+   "reading": "ぶんこ",
+   "gloss": "literature",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.kouchiku",
+   "form": "こうちく",
+   "reading": "こうちく",
+   "gloss": "construction, structuring",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.seika3",
+   "form": "せいか",
+   "reading": "せいか",
+   "gloss": "correctness, accuracy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.rongi",
+   "form": "ろんぎ",
+   "reading": "ろんぎ",
+   "gloss": "argument, logic",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.gensoku",
+   "form": "げんそく",
+   "reading": "げんそく",
+   "gloss": "principle, criterion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.hikaku2",
+   "form": "ひかく",
+   "reading": "ひかく",
+   "gloss": "comparison",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.bunseki2",
+   "form": "ぶんせき",
+   "reading": "ぶんせき",
+   "gloss": "analysis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.shouko2",
+   "form": "しょうこ",
+   "reading": "しょうこ",
+   "gloss": "evidence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.hyouji",
+   "form": "ひょうじ",
+   "reading": "ひょうじ",
+   "gloss": "display, indication",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.zu",
+   "form": "ず",
+   "reading": "ず",
+   "gloss": "diagram",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.hyou",
+   "form": "ひょう",
+   "reading": "ひょう",
+   "gloss": "table",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.yougaki",
+   "form": "ようがき",
+   "reading": "ようがき",
+   "gloss": "terminology, glossary",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.inyou",
+   "form": "いんよう",
+   "reading": "いんよう",
+   "gloss": "quotation, citation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.sansa",
+   "form": "さんさ",
+   "reading": "さんさ",
+   "gloss": "reference, consultation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.teigi",
+   "form": "ていぎ",
+   "reading": "ていぎ",
+   "gloss": "definition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.setsumei",
+   "form": "せつめい",
+   "reading": "せつめい",
+   "gloss": "explanation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.ronbun",
+   "form": "ろんぶん",
+   "reading": "ろんぶん",
+   "gloss": "essay, thesis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.hyougen",
+   "form": "ひょうげん",
+   "reading": "ひょうげん",
+   "gloss": "expression",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.shiji",
+   "form": "しじ",
+   "reading": "しじ",
+   "gloss": "instruction, direction",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.koubun2",
+   "form": "こうぶん",
+   "reading": "こうぶん",
+   "gloss": "writing, composition",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.gouki",
+   "form": "ごうき",
+   "reading": "ごうき",
+   "gloss": "combination",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.bunpatsu",
+   "form": "ぶんぱつ",
+   "reading": "ぶんぱつ",
+   "gloss": "paragraph",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.academic.mokuji",
+   "form": "もくじ",
+   "reading": "もくじ",
+   "gloss": "table of contents",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-1",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.rice-delicious",
+   "text": "ごはんは おいしいです。",
+   "gloss": "The rice is delicious."
+  },
+  {
+   "id": "ja.sent.i-eat-rice",
+   "text": "わたしは ごはんを たべます。",
+   "gloss": "I eat rice."
+  },
+  {
+   "id": "ja.sent.i-drink-water",
+   "text": "わたしは みずを のみます。",
+   "gloss": "I drink water."
+  },
+  {
+   "id": "ja.sent.drink-coffee",
+   "text": "コーヒーを のみます。",
+   "gloss": "I drink coffee."
+  },
+  {
+   "id": "ja.sent.read-book",
+   "text": "ほんを よみます。",
+   "gloss": "I read a book."
+  },
+  {
+   "id": "ja.sent.watch-tv",
+   "text": "テレビを みます。",
+   "gloss": "I watch television."
+  },
+  {
+   "id": "ja.sent.like-tea",
+   "text": "わたしは おちゃが すきです。",
+   "gloss": "I like tea."
+  },
+  {
+   "id": "ja.sent.dislike-coffee",
+   "text": "コーヒーが きらいです。",
+   "gloss": "I dislike coffee."
+  },
+  {
+   "id": "ja.sent.go-school",
+   "text": "がっこうへ いきます。",
+   "gloss": "I go to school."
+  },
+  {
+   "id": "ja.sent.go-station",
+   "text": "えきへ いきます。",
+   "gloss": "I go to the station."
+  },
+  {
+   "id": "ja.sent.come-home",
+   "text": "うちへ かえります。",
+   "gloss": "I go back home."
+  },
+  {
+   "id": "ja.sent.walk-park",
+   "text": "こうえんを あるきます。",
+   "gloss": "I walk in the park."
+  },
+  {
+   "id": "ja.sent.study-japanese",
+   "text": "にほんごを べんきょうします。",
+   "gloss": "I study Japanese."
+  },
+  {
+   "id": "ja.sent.there-is-cat",
+   "text": "ねこが います。",
+   "gloss": "There is a cat."
+  },
+  {
+   "id": "ja.sent.there-is-bag",
+   "text": "つくえの 上に かばんが あります。",
+   "gloss": "There is a bag on the desk."
+  }
+ ]
+}

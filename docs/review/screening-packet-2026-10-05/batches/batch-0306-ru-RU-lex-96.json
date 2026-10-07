@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-96",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.sci.texnologicheskiy",
+   "form": "технологический",
+   "reading": "технологи́ческий",
+   "gloss": "technological",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.vnedrenie",
+   "form": "внедрение",
+   "reading": "внедре́ние",
+   "gloss": "implementation, deployment",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.vnedrit",
+   "form": "внедрить",
+   "reading": "внедри́ть",
+   "gloss": "to implement (pf.)",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.vnedryat",
+   "form": "внедрять",
+   "reading": "внедря́ть",
+   "gloss": "to implement",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.analogovyy",
+   "form": "аналоговый",
+   "reading": "ана́логовый",
+   "gloss": "analog (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.skanirovat",
+   "form": "сканировать",
+   "reading": "скани́ровать",
+   "gloss": "to scan",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.perekluchatel",
+   "form": "переключатель",
+   "reading": "переключа́тель",
+   "gloss": "switch",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.tumbler",
+   "form": "тумблер",
+   "reading": "ту́мблер",
+   "gloss": "toggle switch",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.displey",
+   "form": "дисплей",
+   "reading": "диспле́й",
+   "gloss": "display",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.processor",
+   "form": "процессор",
+   "reading": "проце́ссор",
+   "gloss": "processor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.mikroschema",
+   "form": "микросхема",
+   "reading": "микросхе́ма",
+   "gloss": "microchip",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.poluprovodnik",
+   "form": "полупроводник",
+   "reading": "полупроводни́к",
+   "gloss": "semiconductor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.izolator",
+   "form": "изолятор",
+   "reading": "изоля́тор",
+   "gloss": "insulator",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.akkumulyator",
+   "form": "аккумулятор",
+   "reading": "аккумуля́тор",
+   "gloss": "rechargeable battery",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.razryazhat",
+   "form": "разряжать",
+   "reading": "разряжа́ть",
+   "gloss": "to discharge",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.turbina",
+   "form": "турбина",
+   "reading": "турби́на",
+   "gloss": "turbine",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.transformator",
+   "form": "трансформатор",
+   "reading": "трансформа́тор",
+   "gloss": "transformer",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.telekommunikacii",
+   "form": "телекоммуникации",
+   "reading": "телекоммуни́кации",
+   "gloss": "telecommunications",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.antena",
+   "form": "антенна",
+   "reading": "анте́нна",
+   "gloss": "antenna",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.sci.glushenie",
+   "form": "глушение",
+   "reading": "глуше́ние",
+   "gloss": "suppression, jamming",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.shifrovanie",
+   "form": "шифрование",
+   "reading": "шифро́вание",
+   "gloss": "encryption",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.sci.shifrovat",
+   "form": "шифровать",
+   "reading": "шифрова́ть",
+   "gloss": "to encrypt",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.vzlom",
+   "form": "взлом",
+   "reading": "взлом",
+   "gloss": "hacking, break-in",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.sci.vzlomat",
+   "form": "взломать",
+   "reading": "взлома́ть",
+   "gloss": "to hack",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.sci.hacker",
+   "form": "хакер",
+   "reading": "ха́кер",
+   "gloss": "hacker",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

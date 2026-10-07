@@ -1,0 +1,57 @@
+{
+ "batch_id": "ru-RU-sent-51",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u800",
+   "text": "Это вычитка.",
+   "gloss": "This is proofreading."
+  },
+  {
+   "id": "ru.sent.b2.u801",
+   "text": "Это опечатка.",
+   "gloss": "This is a typo."
+  },
+  {
+   "id": "ru.sent.b2.u802",
+   "text": "Это отделка.",
+   "gloss": "This is finishing."
+  },
+  {
+   "id": "ru.sent.b2.u803",
+   "text": "Это вкрапление.",
+   "gloss": "This is an insertion."
+  },
+  {
+   "id": "ru.sent.b2.u804",
+   "text": "Это вымарка.",
+   "gloss": "This is an erasure."
+  },
+  {
+   "id": "ru.sent.b2.u805",
+   "text": "Это уплотнение.",
+   "gloss": "This is compaction."
+  },
+  {
+   "id": "ru.sent.b2.u806",
+   "text": "Это редакция.",
+   "gloss": "This is an edition."
+  },
+  {
+   "id": "ru.sent.b2.u807",
+   "text": "Это скобки.",
+   "gloss": "These are brackets."
+  },
+  {
+   "id": "ru.sent.b2.u808",
+   "text": "Это филолог.",
+   "gloss": "This is a philologist."
+  },
+  {
+   "id": "ru.sent.b2.u809",
+   "text": "Это надписка.",
+   "gloss": "This is an inscription."
+  }
+ ]
+}

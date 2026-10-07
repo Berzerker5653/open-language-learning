@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-13",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b1.u230",
+   "text": "Это воспоминание.",
+   "gloss": "This is a memory."
+  },
+  {
+   "id": "ru.sent.b1.u231",
+   "text": "Это интересно.",
+   "gloss": "This is interesting."
+  },
+  {
+   "id": "ru.sent.b1.u232",
+   "text": "Это просто.",
+   "gloss": "This is simple."
+  },
+  {
+   "id": "ru.sent.b1.u233",
+   "text": "Он любит пробовать.",
+   "gloss": "He likes to try."
+  },
+  {
+   "id": "ru.sent.b1.u234",
+   "text": "Это страх.",
+   "gloss": "This is fear."
+  },
+  {
+   "id": "ru.sent.b1.u235",
+   "text": "Это неудача.",
+   "gloss": "This is a failure."
+  },
+  {
+   "id": "ru.sent.b1.u236",
+   "text": "Это новичок.",
+   "gloss": "This is a newcomer."
+  },
+  {
+   "id": "ru.sent.b1.u237",
+   "text": "Это отвага.",
+   "gloss": "This is boldness."
+  },
+  {
+   "id": "ru.sent.b1.u238",
+   "text": "Это поддержка.",
+   "gloss": "This is support."
+  },
+  {
+   "id": "ru.sent.b1.u239",
+   "text": "Это гордость.",
+   "gloss": "This is pride."
+  },
+  {
+   "id": "ru.sent.b1.u240",
+   "text": "Это экскурсия.",
+   "gloss": "This is a tour."
+  },
+  {
+   "id": "ru.sent.b1.u241",
+   "text": "Это карта.",
+   "gloss": "This is a map."
+  },
+  {
+   "id": "ru.sent.b1.u242",
+   "text": "Это направление.",
+   "gloss": "This is the direction."
+  },
+  {
+   "id": "ru.sent.b1.u243",
+   "text": "Это забота.",
+   "gloss": "This is care."
+  },
+  {
+   "id": "ru.sent.b1.u244",
+   "text": "Это урок.",
+   "gloss": "This is a lesson."
+  }
+ ]
+}

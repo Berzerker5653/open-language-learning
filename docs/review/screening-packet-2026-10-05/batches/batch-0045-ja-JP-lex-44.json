@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-44",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.emotion2.taipu",
+   "form": "タイプ",
+   "reading": "タイプ",
+   "gloss": "type",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.kibune",
+   "form": "きぶね",
+   "reading": "きぶね",
+   "gloss": "temperament",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.fuan",
+   "form": "ふあん",
+   "reading": "ふあん",
+   "gloss": "anxiety",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.anshin",
+   "form": "あんしん",
+   "reading": "あんしん",
+   "gloss": "relief",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.waku",
+   "form": "わく",
+   "reading": "わく",
+   "gloss": "excitement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.odoroki",
+   "form": "おどろき",
+   "reading": "おどろき",
+   "gloss": "surprise",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.uragiri",
+   "form": "うらぎり",
+   "reading": "うらぎり",
+   "gloss": "betrayal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.shippai",
+   "form": "しっぱい",
+   "reading": "しっぱい",
+   "gloss": "failure",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.seika",
+   "form": "せいか",
+   "reading": "せいか",
+   "gloss": "success",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.nukumori",
+   "form": "ぬくもり",
+   "reading": "ぬくもり",
+   "gloss": "warmth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.setsunai",
+   "form": "せつない",
+   "reading": "せつない",
+   "gloss": "bittersweet",
+   "pos": "i-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.koto",
+   "form": "こと",
+   "reading": "こと",
+   "gloss": "matter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.honto",
+   "form": "ほんとう",
+   "reading": "ほんとう",
+   "gloss": "truth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.tashika",
+   "form": "たしか",
+   "reading": "たしか",
+   "gloss": "certain",
+   "pos": "na-adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.hakkiri",
+   "form": "はっきり",
+   "reading": "はっきり",
+   "gloss": "clearly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.yukkuri",
+   "form": "ゆっくり",
+   "reading": "ゆっくり",
+   "gloss": "slowly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.jikkuri",
+   "form": "じっくり",
+   "reading": "じっくり",
+   "gloss": "closely",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.kirakira",
+   "form": "きらきら",
+   "reading": "きらきら",
+   "gloss": "sparkle",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.tsuzuki",
+   "form": "つづき",
+   "reading": "つづき",
+   "gloss": "continuation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.shoutai",
+   "form": "しょうたい",
+   "reading": "しょうたい",
+   "gloss": "invitation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.namida",
+   "form": "なみだ",
+   "reading": "なみだ",
+   "gloss": "tears",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.kagayaki",
+   "form": "かがやき",
+   "reading": "かがやき",
+   "gloss": "glitter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.risou",
+   "form": "りそう",
+   "reading": "りそう",
+   "gloss": "ideal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.mokuteki",
+   "form": "もくてき",
+   "reading": "もくてき",
+   "gloss": "purpose",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.emotion2.karami",
+   "form": "からみ",
+   "reading": "からみ",
+   "gloss": "entanglement",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

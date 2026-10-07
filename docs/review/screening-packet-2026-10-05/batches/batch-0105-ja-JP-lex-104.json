@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-104",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.philosophy3.kyoiku-gaku",
+   "form": "きょういくがく",
+   "reading": "きょういくがく",
+   "gloss": "pedagogy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.kyoiku-ka",
+   "form": "きょういくか",
+   "reading": "きょういくか",
+   "gloss": "educator",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.kyoiku-hou",
+   "form": "きょういくほう",
+   "reading": "きょういくほう",
+   "gloss": "education law",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.philosophy3.jikukettei-ron",
+   "form": "じこけっていろん",
+   "reading": "じこけっていろん",
+   "gloss": "theory of self-determination",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.places.gakkou",
+   "form": "がっこう",
+   "reading": "がっこう",
+   "gloss": "school",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.places.daigaku",
+   "form": "だいがく",
+   "reading": "だいがく",
+   "gloss": "university",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.places.kaisha",
+   "form": "かいしゃ",
+   "reading": "かいしゃ",
+   "gloss": "company; workplace",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.places.bankou",
+   "form": "ばんこう",
+   "reading": "ばんこう",
+   "gloss": "bank",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.places.eki",
+   "form": "えき",
+   "reading": "えき",
+   "gloss": "station (train)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.places.mise",
+   "form": "みせ",
+   "reading": "みせ",
+   "gloss": "shop; store",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.places.depaato",
+   "form": "デパート",
+   "reading": "デパート",
+   "gloss": "department store",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.places.resutoran",
+   "form": "レストラン",
+   "reading": "レストラン",
+   "gloss": "restaurant",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.places.byouin",
+   "form": "びょういん",
+   "reading": "びょういん",
+   "gloss": "hospital",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.places.toshokan",
+   "form": "としょかん",
+   "reading": "としょかん",
+   "gloss": "library",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.places.machi",
+   "form": "まち",
+   "reading": "まち",
+   "gloss": "town; city",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.places.kuni",
+   "form": "くに",
+   "reading": "くに",
+   "gloss": "country",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.places.uchi",
+   "form": "うち",
+   "reading": "うち",
+   "gloss": "home (one's own)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.places.toire",
+   "form": "トイレ",
+   "reading": "トイレ",
+   "gloss": "toilet; restroom",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.places.kouen",
+   "form": "こうえん",
+   "reading": "こうえん",
+   "gloss": "park",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.places.shokudou",
+   "form": "しょくどう",
+   "reading": "しょくどう",
+   "gloss": "cafeteria; canteen",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.places.heya",
+   "form": "へや",
+   "reading": "へや",
+   "gloss": "room",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.places.ie",
+   "form": "いえ",
+   "reading": "いえ",
+   "gloss": "house",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play1.dajare2",
+   "form": "だじゃれ",
+   "reading": "だじゃれ",
+   "gloss": "pun",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play1.gyagu",
+   "form": "ぎゃぐ",
+   "reading": "ぎゃぐ",
+   "gloss": "gag",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.play1.choshi",
+   "form": "ちょうし",
+   "reading": "ちょうし",
+   "gloss": "rhythm",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

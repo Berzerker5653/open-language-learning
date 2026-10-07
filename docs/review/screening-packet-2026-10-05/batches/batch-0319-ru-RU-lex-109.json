@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-109",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.soc.sekvestr",
+   "form": "секвестр",
+   "reading": "секве́стр",
+   "gloss": "sequestration",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.sekvestirovanie",
+   "form": "секвестирование",
+   "reading": "секвести́рование",
+   "gloss": "sequestration",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.urezanie",
+   "form": "урезание",
+   "reading": "уреза́ние",
+   "gloss": "cutting, curtailment",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.urezat",
+   "form": "урезать",
+   "reading": "уреза́ть",
+   "gloss": "to cut, curtail",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.restrukturizaciya",
+   "form": "реструктуризация",
+   "reading": "реструктуриза́ция",
+   "gloss": "restructuring",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.restrukturirovat",
+   "form": "реструктурировать",
+   "reading": "реструктури́ровать",
+   "gloss": "to restructure",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.konsolidaciya",
+   "form": "консолидация",
+   "reading": "консолида́ция",
+   "gloss": "consolidation",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.konsolidirovat",
+   "form": "консолидировать",
+   "reading": "консолиди́ровать",
+   "gloss": "to consolidate",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.diversifikaciya",
+   "form": "диверсификация",
+   "reading": "диверсифика́ция",
+   "gloss": "diversification",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.diversificirovat",
+   "form": "диверсифицировать",
+   "reading": "диверсифици́ровать",
+   "gloss": "to diversify",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.centralizaciya",
+   "form": "централизация",
+   "reading": "централиза́ция",
+   "gloss": "centralization",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.centralizovannyy",
+   "form": "централизованный",
+   "reading": "централизо́ванный",
+   "gloss": "centralized",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.decentralizaciya",
+   "form": "децентрализация",
+   "reading": "децентрализа́ция",
+   "gloss": "decentralization",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.decentralizovannyy",
+   "form": "децентрализованный",
+   "reading": "децентрализова́нный",
+   "gloss": "decentralized",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.optimizirovat",
+   "form": "оптимизировать",
+   "reading": "оптимизи́ровать",
+   "gloss": "to optimize",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.modernizirovat",
+   "form": "модернизировать",
+   "reading": "модернизи́ровать",
+   "gloss": "to modernize",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.reinvestirovat",
+   "form": "реинвестировать",
+   "reading": "реинвести́ровать",
+   "gloss": "to reinvest",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.ekonomnyy",
+   "form": "экономный",
+   "reading": "эконо́мный",
+   "gloss": "economical",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.berezhlivyy",
+   "form": "бережливый",
+   "reading": "бережли́вый",
+   "gloss": "thrifty",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.rastochitelnyy",
+   "form": "расточительный",
+   "reading": "расточи́тельный",
+   "gloss": "prodigal, wasteful",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.rastochitelnost",
+   "form": "расточительность",
+   "reading": "расточи́тельность",
+   "gloss": "prodigality",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.dejstvennyy",
+   "form": "действенный",
+   "reading": "де́йственный",
+   "gloss": "effective, forceful",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.rezultativnyy",
+   "form": "результативный",
+   "reading": "результати́вный",
+   "gloss": "productive, results-driven",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.dejstvennost",
+   "form": "действенность",
+   "reading": "де́йственность",
+   "gloss": "effectiveness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.berezhlivost",
+   "form": "бережливость",
+   "reading": "бережли́вость",
+   "gloss": "thriftiness",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

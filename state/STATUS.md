@@ -202,6 +202,169 @@ M2 — Local data and learner model
   (`docs/review/screening-packet-2026-10-05.zip`) stays optional second
   opinion (evidence: `docs/review/ai-screening-2026-10-05/` incl.
   `CORRECTIONS.md` + `applied.jsonl`).
+- Speech-calibration prep 2026-10-06 (owner direction: unblock calibration,
+  "plan it now, no data yet"; not a ROADMAP id): frozen preregistration protocol
+  `benchmarks/speech/protocols/ja-JP/vowel-length-0.2.0.yaml` (limits 0.05 /
+  0.60 / kappa 0.70, cluster-bootstrap CI rule, sampling plan), consent +
+  data-handling instrument (`benchmarks/speech/consent/`), labeler rubric +
+  qualification (`benchmarks/speech/labeling/`), dataset-sourcing decision
+  (`benchmarks/speech/datasets/SOURCING.md` — no open permissioned Japanese
+  learner-error corpus; recommend consented recording study), consented-dataset
+  manifest template, and end-to-end runbook binding to the registry
+  (`benchmarks/speech/CALIBRATION_RUNBOOK.md`). `SPEECH-007` stays **blocked**:
+  no data/labels/metrics; automatic scoring stays disabled (evidence:
+  `state/evidence/SPEECH-007/prep-2026-10-06.txt`).
+
+- Speech-model selection 2026-10-06 (owner direction: let users control their
+  speech models; privacy-first, opt-in, local). Added a **device-level** speech
+  preference (`data_dir/speech.json`, `SpeechPref { asr_model }`) defaulting to
+  **`off`**; the aligner resolves the selected `whisper.cpp` model (installed or
+  vendor fallback) and abstains with `speech-model-off` when off. New IPC
+  `get_speech_model`/`set_speech_model` + a radio-group selector in the
+  Languages page (size + license + install/remove, honest "guided only, nothing
+  uploaded"). `whisper-ggml-base`/`-small` added to the runtime catalog (MIT,
+  pinned sha256). `InstalledCombination.model.id` now tracks the selected model
+  (registry drift fails closed per model). ADR-0011.
+  **Corrected probe finding** (probe now takes `--model`): across tiny/base/small
+  the contrast feature scores a continuous minimal-pair take at `align_conf 0.9`
+  even on tiny; isolated words abstain by design. **Model size is not the
+  pronunciation fix** — what gates feedback is selecting a model (off was
+  silently blocking the aligner) + a both-units continuous take. Verification:
+  `cargo test --workspace` green (43 desktop lib incl. off-default + guide
+  tests), frontend `vitest` 91 green incl. selector test, `tsc` clean (evidence:
+  `state/evidence/SPEECH-007/probe-2026-10-06.txt` addendum). `SPEECH-007` stays
+  **blocked**; automatic scoring stays disabled; feature ships GUIDED.
+
+- Selector honesty refinement + feature plan 2026-10-06 (owner: "proceed
+  forward; then plan the larger-model features"). Reframed the selector copy +
+  labels so size is **not** sold as pronunciation accuracy (it is identical
+  across sizes for the shipped feature); the choice is framed as privacy +
+  device footprint, with a static **recommended** marker on tiny (cheapest
+  equivalent; no runtime device-tier detection exists yet — a noted follow-up).
+  Frontend `vitest` 91 green incl. updated selector test, `tsc` clean. Wrote a
+  forward plan for recognition-heavy features — real recordings/phrase drills
+  (no new model, highest ROI), dictation (free ASR, where base/small earn their
+  keep), forced-aligner mora feedback, open conversation — with a capability→model
+  matrix, tier policy, and sequencing: `docs/SPEECH_FEATURE_ROADMAP.md`
+  (**Proposal**, not scheduled; opens no ROADMAP task, `active_task` stays null).
+
+- Phase A start 2026-10-06 (owner: "proceed"). Wired the dev probe to honor the
+  in-app selected model: `vowel_length_probe --data-dir <dir>` reads the device
+  `speech.json` + runtime catalog and uses the selected ggml file (falls back to
+  tiny when `off`); verified base→`ggml-base.bin`, off→tiny. Confirmed the app
+  already captures a real mic attempt and the UI already prompts for both words
+  in one take (the feature's contract). **Found**: the real `languages/ja-JP`
+  pack declares two vowel-length pairs but ships **no** contrast reference media,
+  and `pronunciation_demo_at` uses only the first pair with media — so
+  broadening the drill is blocked on licensed/TTS reference audio (provenance
+  decision), not fabricated. No ROADMAP task opened; `active_task` stays null.
+
+- Feature B — dictation / speak-to-check 2026-10-06 (owner: "proceed with B").
+  Shipped a guided prototype: `dictation_check` (IPC) + `dictation_check_at`
+  transcribe the learner's spoken sentence with the **selected** whisper model
+  (free ASR, `run_whisper_words`), gate on `EnergyVad` quality + a kana-folded
+  `char_match` ratio with an uncertain abstain band (this whisper build exposes
+  no ASR confidence), and always return `mode: guided` — no grade, mastery, or
+  evidence (docs/05, SPEECH-007). UI: `DictationPractice` on a new **Speaking**
+  tab, reusing the shared WebAudio capture. ADR-0012. Verification:
+  `cargo test --workspace` green (47 desktop lib incl. 4 dictation tests —
+  match, never-a-false-match, off-abstain, silence-abstain), frontend `vitest`
+  97 green incl. `dictation.test.tsx`, `tsc` clean. This is the first feature
+  where larger models genuinely help (recognition accuracy). No ROADMAP task
+  opened; `active_task` stays null.
+
+- Feature plan 2026-10-06 (owner: "plan all the features we can; I'm the only
+  user, no one to check this"). Wrote `docs/FEATURE_PLAN.md`: a product-wide plan
+  splitting every feature into **BUILD** (guided/personal, usable now), **AUTHOR**
+  (content as labeled draft; verified label gated), and **GATED** (needs
+  calibration/qualified review a sole self-user + AI cannot supply). Key honest
+  conclusion: the guided feature set is largely shipped; what remains buildable is
+  content depth + guided speech polish (dictation-from-content, real recordings,
+  optional mora feedback) + optional platforms/AI. **SPEECH-007 (automatic speech
+  scoring) and REVIEW-001 (qualified review / B2 / certified labels) stay OFF** —
+  the owner's self-use is dogfooding + a consented n=1 corpus (personalization,
+  robustness), never population calibration. Recommended first tranche: guided
+  speech polish. No ROADMAP task opened; `active_task` stays null.
+
+- Guided speech polish tranche 2026-10-06 (owner: "guided speech polish").
+  **Slice 1 — dictation targets from pack content (shipped):** `dictation_target_at`
+  + IPC `dictation_target(pack_id, offset)` pick kana-only sentences from the
+  installed pack (where the ASR transcript matches the reading cleanly) and
+  rotate via `offset % pool.len()`; the Speaking tab now shows a pack sentence +
+  gloss with a "New sentence" control. Test `dictation_target_prefers_kana_only_and_rotates`.
+  **Slice 2 — TTS reference media: REJECTED by verification.** Synthesized Kokoro
+  references were measured with the feature's own `voiced_seconds`:
+  おばさん/おばあさん ratio **1.04**, とおい/問い ≈ **1.39** — Kokoro does not
+  reliably lengthen the long vowel (the bundled ja-demo clip is Kokoro, hence its
+  1.04). No failing media committed. Added a **correctness gate**: `pronunciation_check_at`
+  now abstains `reference-contrast-weak` when the reference pair's long/short
+  voiced ratio `< 1.4`, before any learner scoring — scoring against a ~1.0
+  reference would flag a correct ~1.8x contrast as "too long" (false feedback,
+  docs/05). The guide test was converted to a fail-closed proof (the old positive
+  path was tautological: attempt = concatenation of the same weak media).
+  **Also fixed a latent race** in `run_whisper_words`: the temp stem keyed on
+  audio length, so two parallel runs over identical audio clobbered each other's
+  wav/json (surfaced by the new test); now keyed on pid + an atomic per-call
+  counter. Verification: `cargo test --workspace` green (48 desktop lib, 15
+  speech-runtime), frontend `vitest` 98 green, `tsc` clean. **Conclusion for the
+  owner:** the vowel-length drill cannot be broadened with TTS; it needs
+  owner-recorded minimal pairs. No ROADMAP task opened; `active_task` stays null;
+  `SPEECH-007` stays blocked.
+
+- Pack-declared production targets 2026-10-06 (owner: "implement option 3,
+  verify with OpenJTalk, think of all languages"). **Verification finding:**
+  OpenJTalk (mora-timing HMM TTS) was measured with the feature's own
+  `voiced_seconds` — obasan/obaasan ratio **1.07** (and あ/ああ/あああ barely
+  differ) — so *neither* Kokoro *nor* OpenJTalk lengthens the long vowel; **no
+  available TTS can anchor or verify a length target.** The mora-derived target
+  rests on Japanese mora-timing phonology; empirical confirmation needs native
+  recordings (gated SPEECH-007). **Decision (ADR-0013):** make the target a
+  language-neutral **pack-declared number** — `phonology/contrasts.jsonl` gains
+  an optional `production { measure, expected_ratio, tolerance_low?,
+  tolerance_high? }`; the engine reads it and never infers phonology (mora
+  counting stays a pack-author derivation). `pronunciation_check_at` prefers the
+  declared target (reference media becomes optional, used only for pitch), else
+  falls back to the gated media path. ja-JP declares mora targets (obasan 1.25,
+  toi/tooi 1.5, `tolerance_low 0.85` so a no-contrast production reads `shorter`,
+  not the old false `close`). **The vowel-length drill now scores with zero
+  media/recording/TTS**, and the design generalizes to any language's length/
+  tone contrast. Schema is additive/optional (no version bump). Verification:
+  `cargo test --workspace` green (49 desktop lib incl.
+  `pronunciation_check_uses_pack_declared_target_without_media`, 15
+  speech-runtime), frontend `vitest` 98, `tsc` clean. Docs: ADR-0013, docs/04
+  production-target guidance, roadmap feature-A, FEATURE_PLAN. Known limitation:
+  whole-word voiced ratio is a weak discriminator for 4-vs-5 mora pairs (vowel
+  isolation = follow-up). No ROADMAP task opened; `active_task` stays null;
+  `SPEECH-007` stays blocked.
+
+- SEC-001 automated portion 2026-10-06 (owner: "no human confirmation available;
+  proceed onwards"). Ran the human-free release-hygiene checks: `cargo audit`
+  (528 deps) -> **0 vulnerabilities**, 2 low-risk warnings (`proc-macro-error`
+  unmaintained build-time; `glib` unsoundness via tauri/webkit). Targeted secret
+  grep -> **no matches**. License review -> app MIT, Rust deps permissive, the
+  only copyleft (espeak-ng GPLv3) is dev-only and absent from distributable
+  builds (per `docs/provenance/speech-distribution-audit.md`). Evidence:
+  `state/evidence/SEC-001/automated-2026-10-06.txt`. **Automated portion PASS.**
+  Full SEC-001 still needs gitleaks+cargo-about in CI and the human security/
+  privacy review (not available under the sole-user constraint). No ROADMAP task
+  opened; `active_task` stays null.
+
+- n=1 personalization 2026-10-06 (owner: "no human confirmation; proceed
+  onwards"; picked the one feature needing no dependency/licensing/authorship
+  decision). The session planner already balances due-reviews + weak-skill
+  practice + curriculum progression under fixed shares. Added
+  `personalize_progression` (`apps/desktop/src-tauri/src/lib.rs`): the fixed
+  new-item (progression) budget is spent on dimensions the learner is still
+  **developing** and withheld from dimensions they have **mastered**, ranked by
+  the mean derived confidence of the learner's OWN recorded attempts per
+  dimension. Stable sort preserves within-dimension curriculum order; unseen
+  dimensions keep the neutral `WEAK_CONFIDENCE` (fresh learner = no-op). The
+  scheduler stays pure (reorder happens at the caller). **Personal tuning only**
+  — records nothing, makes no mastery/population claim (docs/18), and does not
+  touch the speech-evidence gate. Test
+  `personalize_progression_favors_developing_dimensions`. Verification:
+  `cargo test --workspace` green (50 desktop lib, 244 total), frontend `vitest`
+  98. No ROADMAP task opened; `active_task` stays null.
 
 ## Next task
 
@@ -210,8 +373,10 @@ M2 — Local data and learner model
 original `eo-demo` + EDRDG-derived `ja-demo` packs, language
 selector/switching, local import, offline use, guided-only speech.
 Stable-release gates stay open and visible: `REVIEW-001` (qualified
-reviewer capacity), `SPEECH-007` (calibration recordings — deferred by
-owner until after the preview), the unresolved authorship of
+reviewer capacity),
+`SPEECH-007` (calibration recordings — prep complete 2026-10-06: frozen
+protocol + consent + rubric + sourcing plan; owner must supply data + labelers
+per `benchmarks/speech/datasets/SOURCING.md`), the unresolved authorship of
 `languages/ja-JP` draft prose (excluded from the preview; needs an
 authorship statement or replacement), and the TTS GPLv3 distribution
 call (provider stays out of distributable builds). Content licensing

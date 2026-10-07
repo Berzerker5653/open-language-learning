@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-37",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u590",
+   "text": "Это поручение.",
+   "gloss": "This is an assignment."
+  },
+  {
+   "id": "ru.sent.b2.u591",
+   "text": "Это параф.",
+   "gloss": "This is an initialing."
+  },
+  {
+   "id": "ru.sent.b2.u592",
+   "text": "Это заказчик.",
+   "gloss": "This is a client."
+  },
+  {
+   "id": "ru.sent.b2.u593",
+   "text": "Это штат.",
+   "gloss": "This is the staff."
+  },
+  {
+   "id": "ru.sent.b2.u594",
+   "text": "Это эскалация.",
+   "gloss": "This is an escalation."
+  },
+  {
+   "id": "ru.sent.b2.u595",
+   "text": "Это кворум.",
+   "gloss": "This is a quorum."
+  },
+  {
+   "id": "ru.sent.b2.u596",
+   "text": "Это фиксация.",
+   "gloss": "This is a recording."
+  },
+  {
+   "id": "ru.sent.b2.u597",
+   "text": "Это учредитель.",
+   "gloss": "This is a founder."
+  },
+  {
+   "id": "ru.sent.b2.u598",
+   "text": "Это вето.",
+   "gloss": "This is a veto."
+  },
+  {
+   "id": "ru.sent.b2.u599",
+   "text": "Это медиатор.",
+   "gloss": "This is a mediator."
+  },
+  {
+   "id": "ru.sent.b2.u600",
+   "text": "Это соискатель.",
+   "gloss": "This is a job seeker."
+  },
+  {
+   "id": "ru.sent.b2.u601",
+   "text": "Это кадровик.",
+   "gloss": "This is an HR officer."
+  },
+  {
+   "id": "ru.sent.b2.u602",
+   "text": "Это пунктуальность.",
+   "gloss": "This is punctuality."
+  },
+  {
+   "id": "ru.sent.b2.u603",
+   "text": "Это мобильность.",
+   "gloss": "This is mobility."
+  },
+  {
+   "id": "ru.sent.b2.u604",
+   "text": "Это стажировка.",
+   "gloss": "This is an internship."
+  }
+ ]
+}

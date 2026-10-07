@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-78",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.law.hoiho",
+   "form": "ほいほ",
+   "reading": "ほいほ",
+   "gloss": "arrest",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.sosa",
+   "form": "そさ",
+   "reading": "そさ",
+   "gloss": "investigation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.minji",
+   "form": "みんじ",
+   "reading": "みんじ",
+   "gloss": "civil matter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.enzan",
+   "form": "えんざん",
+   "reading": "えんざん",
+   "gloss": "wrongful prosecution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.higaisha",
+   "form": "ひがいしゃ",
+   "reading": "ひがいしゃ",
+   "gloss": "victim",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.batsu",
+   "form": "ばつ",
+   "reading": "ばつ",
+   "gloss": "punishment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.fusei",
+   "form": "ふせい",
+   "reading": "ふせい",
+   "gloss": "unfairness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.bengoshi",
+   "form": "べんごし",
+   "reading": "べんごし",
+   "gloss": "lawyer",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.benron",
+   "form": "べんろん",
+   "reading": "べんろん",
+   "gloss": "argument",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.bengo",
+   "form": "べんご",
+   "reading": "べんご",
+   "gloss": "defense",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.shonin",
+   "form": "しょうにん",
+   "reading": "しょうにん",
+   "gloss": "witness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.kijun",
+   "form": "きじゅん",
+   "reading": "きじゅん",
+   "gloss": "standard",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.hanketsu",
+   "form": "はんけつ",
+   "reading": "はんけつ",
+   "gloss": "judgment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.siso",
+   "form": "そそ",
+   "reading": "そそ",
+   "gloss": "litigation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.soshou",
+   "form": "そしょう",
+   "reading": "そしょう",
+   "gloss": "complaint",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.kokuso",
+   "form": "こくそ",
+   "reading": "こくそ",
+   "gloss": "appeal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.jyouso",
+   "form": "じょうそう",
+   "reading": "じょうそう",
+   "gloss": "appeal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.saishin",
+   "form": "さいしん",
+   "reading": "さいしん",
+   "gloss": "retrial",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.kanpou",
+   "form": "かんぽう",
+   "reading": "かんぽう",
+   "gloss": "official gazette",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.shikkou",
+   "form": "しっこう",
+   "reading": "しっこう",
+   "gloss": "enforcement",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.zange",
+   "form": "ざんげ",
+   "reading": "ざんげ",
+   "gloss": "repentance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law.kufu",
+   "form": "くふ",
+   "reading": "くふ",
+   "gloss": "distribution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.chouyaku",
+   "form": "ちょうやく",
+   "reading": "ちょうやく",
+   "gloss": "treaty",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.shiho",
+   "form": "しほう",
+   "reading": "しほう",
+   "gloss": "private law",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.law2.kohoku",
+   "form": "こうこく",
+   "reading": "こうこく",
+   "gloss": "public notice",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

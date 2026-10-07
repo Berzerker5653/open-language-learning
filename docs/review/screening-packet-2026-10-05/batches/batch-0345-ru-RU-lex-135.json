@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-135",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.summary2.podrobno",
+   "form": "подробно",
+   "reading": "подро́бно",
+   "gloss": "in detail",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.summary2.polnost2",
+   "form": "полностью",
+   "reading": "по́лностью",
+   "gloss": "completely",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.summary2.chastichno",
+   "form": "частично",
+   "reading": "ча́стично",
+   "gloss": "partially",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.summary2.vkratce",
+   "form": "вкратце",
+   "reading": "вкра́тце",
+   "gloss": "in short",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.summary2.vmesto",
+   "form": "вместо",
+   "reading": "вме́сто",
+   "gloss": "instead of",
+   "pos": "preposition",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.summary2.itak",
+   "form": "итак",
+   "reading": "ита́к",
+   "gloss": "so, in short",
+   "pos": "conjunction",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.summary2.szhato",
+   "form": "сжато",
+   "reading": "сжа́то",
+   "gloss": "concisely",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.summary2.koncovka",
+   "form": "концовка",
+   "reading": "концо́вка",
+   "gloss": "ending",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary2.predislovie",
+   "form": "предисловие",
+   "reading": "предисло́вие",
+   "gloss": "preface",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.summary2.posleslovie",
+   "form": "послесловие",
+   "reading": "послесло́вие",
+   "gloss": "afterword",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.summary2.oglavlenie",
+   "form": "оглавление",
+   "reading": "оглавле́ние",
+   "gloss": "table of contents",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.summary2.titul",
+   "form": "титул",
+   "reading": "ти́тул",
+   "gloss": "title page",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary2.oblozhka",
+   "form": "обложка",
+   "reading": "обло́жка",
+   "gloss": "cover",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary2.pereplet",
+   "form": "переплёт",
+   "reading": "перепле́т",
+   "gloss": "binding",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary2.list",
+   "form": "лист",
+   "reading": "лист",
+   "gloss": "sheet, leaf",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary2.stroka",
+   "form": "строка",
+   "reading": "строка́",
+   "gloss": "line",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary2.kolonka",
+   "form": "колонка",
+   "reading": "коло́нка",
+   "gloss": "column",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary2.podzagolovok",
+   "form": "подзаголовок",
+   "reading": "подзаголо́вок",
+   "gloss": "subtitle",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary2.snoska",
+   "form": "сноска",
+   "reading": "сно́ска",
+   "gloss": "footnote",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary2.primechanie",
+   "form": "примечание",
+   "reading": "примеча́ние",
+   "gloss": "note",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.summary2.ssylka",
+   "form": "ссылка",
+   "reading": "ссы́лка",
+   "gloss": "link, reference",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary2.citata",
+   "form": "цитата",
+   "reading": "цита́та",
+   "gloss": "quote",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.summary2.kusok",
+   "form": "кусок",
+   "reading": "кусо́к",
+   "gloss": "piece",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary2.otryvok",
+   "form": "отрывок",
+   "reading": "отры́вок",
+   "gloss": "excerpt",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.summary2.fragment",
+   "form": "фрагмент",
+   "reading": "фрагме́нт",
+   "gloss": "fragment",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-46",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.ent.referee",
+   "form": "れふりー",
+   "reading": "れふりー",
+   "gloss": "referee",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.hikiwake",
+   "form": "ひきわけ",
+   "reading": "ひきわけ",
+   "gloss": "tie",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.senkyou",
+   "form": "せんきょう",
+   "reading": "せんきょう",
+   "gloss": "enthusiasm",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.kanashimi",
+   "form": "かなしみ",
+   "reading": "かなしみ",
+   "gloss": "sadness",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.tsumaranai",
+   "form": "つまらない",
+   "reading": "つまらない",
+   "gloss": "boring",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.kanpeki",
+   "form": "かんぺき",
+   "reading": "かんぺき",
+   "gloss": "perfect",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.kanzen",
+   "form": "かんぜん",
+   "reading": "かんぜん",
+   "gloss": "perfectly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.shou",
+   "form": "しょう",
+   "reading": "しょう",
+   "gloss": "victory",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.make",
+   "form": "まけ",
+   "reading": "まけ",
+   "gloss": "defeat",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.supootsu-man",
+   "form": "すぽーつまん",
+   "reading": "すぽーつまん",
+   "gloss": "sportsman",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.geemu-soft",
+   "form": "げーむそふと",
+   "reading": "げーむそふと",
+   "gloss": "video game",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.taimu",
+   "form": "たいむ",
+   "reading": "たいむ",
+   "gloss": "team",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.matchi",
+   "form": "まっち",
+   "reading": "まっち",
+   "gloss": "match",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.debyuu",
+   "form": "でびゅう",
+   "reading": "でびゅう",
+   "gloss": "debut",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.senjou",
+   "form": "せんじょう",
+   "reading": "せんじょう",
+   "gloss": "battlefield",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.senpai",
+   "form": "せんぱい",
+   "reading": "せんぱい",
+   "gloss": "senior",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.kouhai",
+   "form": "こうはい",
+   "reading": "こうはい",
+   "gloss": "junior",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.kangei",
+   "form": "かんげい",
+   "reading": "かんげい",
+   "gloss": "welcome party",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.soubetsukai",
+   "form": "そうべつかい",
+   "reading": "そうべつかい",
+   "gloss": "farewell party",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.enkai",
+   "form": "えんかい",
+   "reading": "えんかい",
+   "gloss": "party",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.purii",
+   "form": "ぷりー",
+   "reading": "ぷりー",
+   "gloss": "premiere",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.joju",
+   "form": "じゅじゅ",
+   "reading": "じゅじゅ",
+   "gloss": "attendance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.manzai",
+   "form": "まんざい",
+   "reading": "まんざい",
+   "gloss": "manzai comedy",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.getsumon",
+   "form": "げつもん",
+   "reading": "げつもん",
+   "gloss": "monthly feature",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.ent.shuukaku",
+   "form": "しゅうかく",
+   "reading": "しゅうかく",
+   "gloss": "harvest",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

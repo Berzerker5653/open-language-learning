@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-144",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.timeplans.ponedelnik",
+   "form": "понедельник",
+   "reading": "понеде́льник",
+   "gloss": "Monday",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.vtornik",
+   "form": "вторник",
+   "reading": "вто́рник",
+   "gloss": "Tuesday",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.sreda",
+   "form": "среда",
+   "reading": "среда́",
+   "gloss": "Wednesday",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.timeplans.chetverg",
+   "form": "четверг",
+   "reading": "четве́рг",
+   "gloss": "Thursday",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.pyatnica",
+   "form": "пятница",
+   "reading": "пя́тница",
+   "gloss": "Friday",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.timeplans.subbota",
+   "form": "суббота",
+   "reading": "суббо́та",
+   "gloss": "Saturday",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.timeplans.voskresene",
+   "form": "воскресенье",
+   "reading": "воскресе́нье",
+   "gloss": "Sunday",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.timeplans.yanvar",
+   "form": "январь",
+   "reading": "янва́рь",
+   "gloss": "January",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.fevral",
+   "form": "февраль",
+   "reading": "февра́ль",
+   "gloss": "February",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.mart",
+   "form": "март",
+   "reading": "март",
+   "gloss": "March",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.aprel",
+   "form": "апрель",
+   "reading": "апре́ль",
+   "gloss": "April",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.may",
+   "form": "май",
+   "reading": "май",
+   "gloss": "May",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.iyun",
+   "form": "июнь",
+   "reading": "ию́нь",
+   "gloss": "June",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.iyul",
+   "form": "июль",
+   "reading": "ию́ль",
+   "gloss": "July",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.avgust",
+   "form": "август",
+   "reading": "а́вгуст",
+   "gloss": "August",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.sentyabr",
+   "form": "сентябрь",
+   "reading": "сентя́брь",
+   "gloss": "September",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.oktyabr",
+   "form": "октябрь",
+   "reading": "октя́брь",
+   "gloss": "October",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.noyabr",
+   "form": "ноябрь",
+   "reading": "ноя́брь",
+   "gloss": "November",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.dekabr",
+   "form": "декабрь",
+   "reading": "дека́брь",
+   "gloss": "December",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.timeplans.zima",
+   "form": "зима",
+   "reading": "зима́",
+   "gloss": "winter",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.timeplans.vesna",
+   "form": "весна",
+   "reading": "весна́",
+   "gloss": "spring",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.timeplans.leto",
+   "form": "лето",
+   "reading": "ле́то",
+   "gloss": "summer",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.timeplans.osen",
+   "form": "осень",
+   "reading": "о́сень",
+   "gloss": "autumn",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.timeplans.segodnyshniy",
+   "form": "сегодняшний",
+   "reading": "сего́дняшний",
+   "gloss": "today's",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.timeplans.vcheraishniy",
+   "form": "вчерашний",
+   "reading": "вчера́шний",
+   "gloss": "yesterday's",
+   "pos": "adjective",
+   "gender": ""
+  }
+ ]
+}

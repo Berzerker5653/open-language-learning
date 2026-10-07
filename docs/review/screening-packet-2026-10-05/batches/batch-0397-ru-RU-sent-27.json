@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-27",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u440",
+   "text": "Это рецензент.",
+   "gloss": "This is a reviewer."
+  },
+  {
+   "id": "ru.sent.b2.u441",
+   "text": "Это мотивировка.",
+   "gloss": "This is reasoning."
+  },
+  {
+   "id": "ru.sent.b2.u442",
+   "text": "Это трюк.",
+   "gloss": "This is a trick."
+  },
+  {
+   "id": "ru.sent.b2.u443",
+   "text": "Это уловка.",
+   "gloss": "This is an artifice."
+  },
+  {
+   "id": "ru.sent.b2.u444",
+   "text": "Это ценность.",
+   "gloss": "This is a value."
+  },
+  {
+   "id": "ru.sent.b2.u445",
+   "text": "Это рычаг.",
+   "gloss": "This is a lever."
+  },
+  {
+   "id": "ru.sent.b2.u446",
+   "text": "Это вершина.",
+   "gloss": "This is a summit."
+  },
+  {
+   "id": "ru.sent.b2.u447",
+   "text": "Это предел.",
+   "gloss": "This is a limit."
+  },
+  {
+   "id": "ru.sent.b2.u448",
+   "text": "Это середина.",
+   "gloss": "This is the middle."
+  },
+  {
+   "id": "ru.sent.b2.u449",
+   "text": "Это ось.",
+   "gloss": "This is an axis."
+  },
+  {
+   "id": "ru.sent.b2.u450",
+   "text": "Это связь.",
+   "gloss": "This is a connection."
+  },
+  {
+   "id": "ru.sent.b2.u451",
+   "text": "Это иерархия.",
+   "gloss": "This is a hierarchy."
+  },
+  {
+   "id": "ru.sent.b2.u452",
+   "text": "Это модель.",
+   "gloss": "This is a model."
+  },
+  {
+   "id": "ru.sent.b2.u453",
+   "text": "Это парадокс.",
+   "gloss": "This is a paradox."
+  },
+  {
+   "id": "ru.sent.b2.u454",
+   "text": "Это синоним.",
+   "gloss": "This is a synonym."
+  }
+ ]
+}

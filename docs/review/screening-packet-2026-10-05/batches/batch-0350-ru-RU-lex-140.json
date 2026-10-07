@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-140",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.synthesis3.raznoglasie",
+   "form": "разногласие",
+   "reading": "разногла́сие",
+   "gloss": "disagreement",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis3.konsensus",
+   "form": "консенсус",
+   "reading": "консе́нсус",
+   "gloss": "consensus",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.edinodushie",
+   "form": "единодушие",
+   "reading": "единоду́шие",
+   "gloss": "unanimity",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis3.edinoglasie",
+   "form": "единогласие",
+   "reading": "единогла́сие",
+   "gloss": "unanimity (voting)",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis3.rezonans",
+   "form": "резонанс",
+   "reading": "резона́нс",
+   "gloss": "resonance",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.dissonans",
+   "form": "диссонанс",
+   "reading": "диссона́нс",
+   "gloss": "dissonance",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.sozvuchie",
+   "form": "созвучие",
+   "reading": "созву́чие",
+   "gloss": "consonance",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis3.sozvuchnyy",
+   "form": "созвучный",
+   "reading": "созву́чный",
+   "gloss": "consonant, akin",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis3.pereklika",
+   "form": "перекликаться",
+   "reading": "переклика́ться",
+   "gloss": "to echo, rhyme",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis3.pereklitchka",
+   "form": "перекличка",
+   "reading": "перекли́чка",
+   "gloss": "call-and-response, echo",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis3.otklik",
+   "form": "отклик",
+   "reading": "о́тклик",
+   "gloss": "response",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.kivok",
+   "form": "кивок",
+   "reading": "киво́к",
+   "gloss": "nod",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.rashozhdenie",
+   "form": "расхождение",
+   "reading": "расхожде́ние",
+   "gloss": "divergence",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis3.sovpadenie",
+   "form": "совпадение",
+   "reading": "совпаде́ние",
+   "gloss": "coincidence",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis3.tozhestvo",
+   "form": "тождество",
+   "reading": "то́ждество",
+   "gloss": "identity",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis3.identichnost",
+   "form": "идентичность",
+   "reading": "иденти́чность",
+   "gloss": "identity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis3.parallel",
+   "form": "параллель",
+   "reading": "паралле́ль",
+   "gloss": "parallel",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis3.peresechenie",
+   "form": "пересечение",
+   "reading": "пересече́ние",
+   "gloss": "intersection",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis3.protivopostavlenie",
+   "form": "противопоставление",
+   "reading": "противопоставле́ние",
+   "gloss": "contrast, juxtaposition",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis3.kosvenno",
+   "form": "косвенно",
+   "reading": "ко́свенно",
+   "gloss": "indirectly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis3.kosvennyy",
+   "form": "косвенный",
+   "reading": "ко́свенный",
+   "gloss": "indirect",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis3.pryamoy",
+   "form": "прямой",
+   "reading": "прямо́й",
+   "gloss": "direct",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis3.napryamuyu",
+   "form": "напрямую",
+   "reading": "напряму́ю",
+   "gloss": "directly",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis3.edinomishlennik",
+   "form": "единомышленник",
+   "reading": "единомы́шленник",
+   "gloss": "like-minded person",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis3.soyuznik",
+   "form": "союзник",
+   "reading": "сою́зник",
+   "gloss": "ally",
+   "pos": "noun",
+   "gender": "masculine"
+  }
+ ]
+}

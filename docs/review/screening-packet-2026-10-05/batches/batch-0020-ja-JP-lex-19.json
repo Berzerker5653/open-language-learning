@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-19",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.communication.hyouki",
+   "form": "ひょうき",
+   "reading": "ひょうき",
+   "gloss": "notation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.bappu",
+   "form": "ばっぷ",
+   "reading": "ばっぷ",
+   "gloss": "map code",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.ji",
+   "form": "じ",
+   "reading": "じ",
+   "gloss": "character",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.kanji",
+   "form": "かんじ",
+   "reading": "かんじ",
+   "gloss": "kanji",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.hiragana",
+   "form": "ひらがな",
+   "reading": "ひらがな",
+   "gloss": "hiragana",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.katakana",
+   "form": "かたかな",
+   "reading": "かたかな",
+   "gloss": "katakana",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.romaji",
+   "form": "ろーまじ",
+   "reading": "ろーまじ",
+   "gloss": "romaji",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.hatsuon",
+   "form": "はつおん",
+   "reading": "はつおん",
+   "gloss": "pronunciation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.seion",
+   "form": "せいおん",
+   "reading": "せいおん",
+   "gloss": "voice sound",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.akusento",
+   "form": "あくせんと",
+   "reading": "あくせんと",
+   "gloss": "accent",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.intoneeshon",
+   "form": "いんとねーしょん",
+   "reading": "いんとねーしょん",
+   "gloss": "intonation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.kuchi",
+   "form": "くち",
+   "reading": "くち",
+   "gloss": "mouth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.kuchi-komi",
+   "form": "くちこみ",
+   "reading": "くちこみ",
+   "gloss": "rumor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.kuchikomi",
+   "form": "くちこみ",
+   "reading": "くちこみ",
+   "gloss": "word of mouth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.kikikata",
+   "form": "ききかた",
+   "reading": "ききかた",
+   "gloss": "way of listening",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.yomikata",
+   "form": "よみかた",
+   "reading": "よみかた",
+   "gloss": "way of reading",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.kakikata",
+   "form": "かきかた",
+   "reading": "かきかた",
+   "gloss": "way of writing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.hanashikata",
+   "form": "はなしかた",
+   "reading": "はなしかた",
+   "gloss": "way of speaking",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.tsuuyaku",
+   "form": "つうやく",
+   "reading": "つうやく",
+   "gloss": "interpretation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.honyaku",
+   "form": "ほんやく",
+   "reading": "ほんやく",
+   "gloss": "translation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.yakushi",
+   "form": "やくし",
+   "reading": "やくし",
+   "gloss": "interpreter",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.translator",
+   "form": "とらんすれーたー",
+   "reading": "とらんすれーたー",
+   "gloss": "translator",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.bunkai",
+   "form": "ぶんかい",
+   "reading": "ぶんかい",
+   "gloss": "sentence analysis",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.bunpou",
+   "form": "ぶんぽう",
+   "reading": "ぶんぽう",
+   "gloss": "grammar",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.communication.goi",
+   "form": "ごい",
+   "reading": "ごい",
+   "gloss": "vocabulary",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

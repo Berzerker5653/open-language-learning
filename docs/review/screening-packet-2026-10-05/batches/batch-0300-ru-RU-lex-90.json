@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-90",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.respect.alternativa",
+   "form": "альтернатива",
+   "reading": "альтернати́ва",
+   "gloss": "alternative",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.rakis",
+   "form": "ракурс",
+   "reading": "ра́курс",
+   "gloss": "angle",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.respect.aspekt",
+   "form": "аспект",
+   "reading": "аспе́кт",
+   "gloss": "aspect",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.respect.gran2",
+   "form": "грань",
+   "reading": "грань",
+   "gloss": "facet",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.storona",
+   "form": "сторона",
+   "reading": "сторона́",
+   "gloss": "side",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.vezhlivost",
+   "form": "вежливость",
+   "reading": "ве́жливость",
+   "gloss": "politeness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.takt",
+   "form": "такт",
+   "reading": "такт",
+   "gloss": "tact",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.respect.taktichnost",
+   "form": "тактичность",
+   "reading": "такти́чность",
+   "gloss": "tactfulness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.utchtivost",
+   "form": "учтивость",
+   "reading": "учти́вость",
+   "gloss": "courtesy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.grubost",
+   "form": "грубость",
+   "reading": "гру́бость",
+   "gloss": "rudeness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.hamstvo",
+   "form": "хамство",
+   "reading": "ха́мство",
+   "gloss": "gross rudeness",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.respect.derzost",
+   "form": "дерзость",
+   "reading": "де́рзость",
+   "gloss": "boldness",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.naglost",
+   "form": "наглость",
+   "reading": "на́глость",
+   "gloss": "impudence",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.skromnost",
+   "form": "скромность",
+   "reading": "скро́мность",
+   "gloss": "modesty",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.pochtenie",
+   "form": "почтение",
+   "reading": "почте́ние",
+   "gloss": "deference",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.respect.tolerantnost",
+   "form": "толерантность",
+   "reading": "толера́нтность",
+   "gloss": "tolerance",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.predubezhdenie",
+   "form": "предубеждение",
+   "reading": "предубежде́ние",
+   "gloss": "prejudice",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.respect.stereotip",
+   "form": "стереотип",
+   "reading": "стереоти́п",
+   "gloss": "stereotype",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.respect.predrassudok",
+   "form": "предрассудок",
+   "reading": "предрассу́док",
+   "gloss": "superstition, bias",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.respect.predvzyatost",
+   "form": "предвзятость",
+   "reading": "предвзя́тость",
+   "gloss": "bias",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.obektivnost",
+   "form": "объективность",
+   "reading": "объекти́вность",
+   "gloss": "objectivity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.subektivnost",
+   "form": "субъективность",
+   "reading": "субъекти́вность",
+   "gloss": "subjectivity",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.nejtralitet",
+   "form": "нейтралитет",
+   "reading": "нейтралите́т",
+   "gloss": "neutrality",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.respect.bespristrastnost",
+   "form": "беспристрастность",
+   "reading": "беспристра́стность",
+   "gloss": "impartiality",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.respect.sderzhannost",
+   "form": "сдержанность",
+   "reading": "сде́ржанность",
+   "gloss": "restraint",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

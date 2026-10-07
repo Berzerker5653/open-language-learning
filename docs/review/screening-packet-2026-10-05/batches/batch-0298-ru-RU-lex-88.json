@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-88",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.rel.druzhba",
+   "form": "дружба",
+   "reading": "дру́жба",
+   "gloss": "friendship",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.rel.drug",
+   "form": "друг",
+   "reading": "друг",
+   "gloss": "friend",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.rel.byt",
+   "form": "быт",
+   "reading": "быт",
+   "gloss": "everyday life",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.rel.tjota",
+   "form": "тётя",
+   "reading": "те́тя",
+   "gloss": "aunt",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.rel.kuzen",
+   "form": "кузен",
+   "reading": "кузе́н",
+   "gloss": "cousin",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.rel.djadya",
+   "form": "дядя",
+   "reading": "дя́дя",
+   "gloss": "uncle",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.rel.trebovanie",
+   "form": "требование",
+   "reading": "тре́бование",
+   "gloss": "requirement",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.rel.malysh",
+   "form": "малыш",
+   "reading": "малы́ш",
+   "gloss": "toddler",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.rel.podrostok",
+   "form": "подросток",
+   "reading": "подро́сток",
+   "gloss": "teenager",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.rel.potomok",
+   "form": "потомок",
+   "reading": "пото́мок",
+   "gloss": "descendant",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.rel.suprug",
+   "form": "супруг",
+   "reading": "супру́г",
+   "gloss": "spouse",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.rel.supruga",
+   "form": "супруга",
+   "reading": "супру́га",
+   "gloss": "spouse (f)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.rel.suvenir",
+   "form": "сувенир",
+   "reading": "сувени́р",
+   "gloss": "souvenir",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.rel.posetitel",
+   "form": "посетитель",
+   "reading": "посети́тель",
+   "gloss": "visitor",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.rel.radushie",
+   "form": "радушие",
+   "reading": "раду́шие",
+   "gloss": "cordiality",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.rel.torzhestvo",
+   "form": "торжество",
+   "reading": "торжество́",
+   "gloss": "celebration",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.rel.dolg",
+   "form": "долг",
+   "reading": "долг",
+   "gloss": "duty, debt",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.rel.vina",
+   "form": "вина",
+   "reading": "вина́",
+   "gloss": "guilt",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.rel.prostit",
+   "form": "простить",
+   "reading": "прости́ть",
+   "gloss": "to forgive",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.rel.proshchenie",
+   "form": "прощение",
+   "reading": "проще́ние",
+   "gloss": "forgiveness",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.rel.obida",
+   "form": "обида",
+   "reading": "оби́да",
+   "gloss": "resentment",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.rel.mir",
+   "form": "мир",
+   "reading": "мир",
+   "gloss": "peace, world",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.rel.ustupat",
+   "form": "уступать",
+   "reading": "уступа́ть",
+   "gloss": "to give in",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.rel.kompromiss",
+   "form": "компромисс",
+   "reading": "компроми́сс",
+   "gloss": "compromise",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.rel.vera",
+   "form": "вера",
+   "reading": "ве́ра",
+   "gloss": "faith, trust",
+   "pos": "noun",
+   "gender": "feminine"
+  }
+ ]
+}

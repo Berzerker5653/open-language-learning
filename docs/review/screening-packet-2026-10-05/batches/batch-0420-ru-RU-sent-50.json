@@ -1,0 +1,82 @@
+{
+ "batch_id": "ru-RU-sent-50",
+ "kind": "sent",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.sent.b2.u785",
+   "text": "Это публицистика.",
+   "gloss": "This is journalism."
+  },
+  {
+   "id": "ru.sent.b2.u786",
+   "text": "Это лесть.",
+   "gloss": "This is flattery."
+  },
+  {
+   "id": "ru.sent.b2.u787",
+   "text": "Это укор.",
+   "gloss": "This is a reproach."
+  },
+  {
+   "id": "ru.sent.b2.u788",
+   "text": "Это телеграмма.",
+   "gloss": "This is a telegram."
+  },
+  {
+   "id": "ru.sent.b2.u789",
+   "text": "Это пошлость.",
+   "gloss": "This is vulgarity."
+  },
+  {
+   "id": "ru.sent.b2.u790",
+   "text": "Это купюра.",
+   "gloss": "This is a cut."
+  },
+  {
+   "id": "ru.sent.b2.u791",
+   "text": "Это антитеза.",
+   "gloss": "This is an antithesis."
+  },
+  {
+   "id": "ru.sent.b2.u792",
+   "text": "Это экскурс.",
+   "gloss": "This is an excursion."
+  },
+  {
+   "id": "ru.sent.b2.u793",
+   "text": "Это ткань.",
+   "gloss": "This is a fabric."
+  },
+  {
+   "id": "ru.sent.b2.u794",
+   "text": "Это узор.",
+   "gloss": "This is a pattern."
+  },
+  {
+   "id": "ru.sent.b2.u795",
+   "text": "Это цезура.",
+   "gloss": "This is a caesura."
+  },
+  {
+   "id": "ru.sent.b2.u796",
+   "text": "Это эмфаза.",
+   "gloss": "This is emphasis."
+  },
+  {
+   "id": "ru.sent.b2.u797",
+   "text": "Это статика.",
+   "gloss": "This is statics."
+  },
+  {
+   "id": "ru.sent.b2.u798",
+   "text": "Это гладкость.",
+   "gloss": "This is smoothness."
+  },
+  {
+   "id": "ru.sent.b2.u799",
+   "text": "Это пародия.",
+   "gloss": "This is a parody."
+  }
+ ]
+}

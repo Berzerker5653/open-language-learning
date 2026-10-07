@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-9",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.admin.yaku-wari",
+   "form": "やくわり",
+   "reading": "やくわり",
+   "gloss": "duty",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.sagen",
+   "form": "さげん",
+   "reading": "さげん",
+   "gloss": "advice",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.sansei",
+   "form": "さんせい",
+   "reading": "さんせい",
+   "gloss": "approval",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.hanbun",
+   "form": "はんぶん",
+   "reading": "はんぶん",
+   "gloss": "half",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.ichibun",
+   "form": "いちぶん",
+   "reading": "いちぶん",
+   "gloss": "share",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.taido",
+   "form": "たいど",
+   "reading": "たいど",
+   "gloss": "attitude",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.kouryu",
+   "form": "こうりゅう",
+   "reading": "こうりゅう",
+   "gloss": "exchange",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.ronri",
+   "form": "ろんり",
+   "reading": "ろんり",
+   "gloss": "logic",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.risei",
+   "form": "りせい",
+   "reading": "りせい",
+   "gloss": "reason",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.junjo",
+   "form": "じゅんじょ",
+   "reading": "じゅんじょ",
+   "gloss": "order",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.ato",
+   "form": "あと",
+   "reading": "あと",
+   "gloss": "after",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.fumei",
+   "form": "ふめい",
+   "reading": "ふめい",
+   "gloss": "obscurity",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.fukami",
+   "form": "ふかみ",
+   "reading": "ふかみ",
+   "gloss": "depth",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.mei",
+   "form": "めい",
+   "reading": "めい",
+   "gloss": "name",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.touron",
+   "form": "とうろん",
+   "reading": "とうろん",
+   "gloss": "debate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.koutai",
+   "form": "こうたい",
+   "reading": "こうたい",
+   "gloss": "alternative",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.houhou",
+   "form": "ほうほう",
+   "reading": "ほうほう",
+   "gloss": "method",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.betsu",
+   "form": "べつ",
+   "reading": "べつ",
+   "gloss": "separate",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.dareka",
+   "form": "だれか",
+   "reading": "だれか",
+   "gloss": "someone",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.hatsu",
+   "form": "はつ",
+   "reading": "はつ",
+   "gloss": "utterance",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.shouko",
+   "form": "しょうこう",
+   "reading": "しょうこう",
+   "gloss": "reference",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.koudou",
+   "form": "こうどう",
+   "reading": "こうどう",
+   "gloss": "action",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.koudan",
+   "form": "こうたん",
+   "reading": "こうたん",
+   "gloss": "assertion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.soutou",
+   "form": "そうとう",
+   "reading": "そうとう",
+   "gloss": "quite",
+   "pos": "adverb",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.advice.ketai",
+   "form": "けたい",
+   "reading": "けたい",
+   "gloss": "undignified",
+   "pos": "na-adjective",
+   "gender": ""
+  }
+ ]
+}

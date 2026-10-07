@@ -1,0 +1,82 @@
+{
+ "batch_id": "ja-JP-sent-35",
+ "kind": "sent",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.sent.aesthetics-essay",
+   "text": "び の ろんぶん を かきました。",
+   "gloss": "I wrote the essay on beauty."
+  },
+  {
+   "id": "ja.sent.discourse-analysis",
+   "text": "せいろん の ぶんせき を しました。",
+   "gloss": "I did the discourse analysis."
+  },
+  {
+   "id": "ja.sent.propaganda-history",
+   "text": "でんぱつ の れきし を べんきょう しました。",
+   "gloss": "I studied propaganda history."
+  },
+  {
+   "id": "ja.sent.news-production",
+   "text": "にゅーす の せいさく を べんきょう しました。",
+   "gloss": "I studied news production."
+  },
+  {
+   "id": "ja.sent.audience-studies",
+   "text": "しゅうりゅう の ちょうさ を しました。",
+   "gloss": "I did the trend survey."
+  },
+  {
+   "id": "ja.sent.journalism-standards",
+   "text": "きしゃ の きじ を よみました。",
+   "gloss": "I read the reporter's article."
+  },
+  {
+   "id": "ja.sent.visual-rhetoric",
+   "text": "えいぞう の てきすと を ぶんせき しました。",
+   "gloss": "I analyzed the video text."
+  },
+  {
+   "id": "ja.sent.advertising-critique",
+   "text": "こうこく の ぶんしょう を かきました。",
+   "gloss": "I wrote the advertisement text."
+  },
+  {
+   "id": "ja.sent.public-relations",
+   "text": "ぱぶりっしゅ の かい を もちました。",
+   "gloss": "We held the PR meeting."
+  },
+  {
+   "id": "ja.sent.media-economics",
+   "text": "けいえい の もんだい を ぎろん しました。",
+   "gloss": "We discussed the management problem."
+  },
+  {
+   "id": "ja.sent.digital-discourse",
+   "text": "ねっと の せいろん を べんきょう しました。",
+   "gloss": "I studied internet discourse."
+  },
+  {
+   "id": "ja.sent.press-freedom",
+   "text": "じゆう の ぎろん を べんきょう しました。",
+   "gloss": "I studied the freedom debate."
+  },
+  {
+   "id": "ja.sent.cancel-culture",
+   "text": "ひはん の ぎろん を べんきょう しました。",
+   "gloss": "I studied the criticism debate."
+  },
+  {
+   "id": "ja.sent.cognition-basics",
+   "text": "しんりがく を べんきょう しました。",
+   "gloss": "I studied psychology."
+  },
+  {
+   "id": "ja.sent.memory-systems",
+   "text": "きおく の しくみ を べんきょう しました。",
+   "gloss": "I studied the memory system."
+  }
+ ]
+}

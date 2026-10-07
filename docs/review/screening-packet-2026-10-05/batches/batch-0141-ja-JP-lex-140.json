@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-140",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.tech2.data",
+   "form": "でーた",
+   "reading": "でーた",
+   "gloss": "data",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.sumaato-houmu",
+   "form": "すまーとほーむ",
+   "reading": "すまーとほーむ",
+   "gloss": "smart home",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.onkyou",
+   "form": "おんきょう",
+   "reading": "おんきょう",
+   "gloss": "remote control",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.sensoru",
+   "form": "せんさーる",
+   "reading": "せんさーる",
+   "gloss": "sensor",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.jidou",
+   "form": "じどう",
+   "reading": "じどう",
+   "gloss": "automatic",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.setsubi",
+   "form": "せつび",
+   "reading": "せつび",
+   "gloss": "equipment",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.komyuniti",
+   "form": "こみゅにてぃ",
+   "reading": "こみゅにてぃ",
+   "gloss": "community",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.forumu",
+   "form": "ふぉーむ",
+   "reading": "ふぉーむ",
+   "gloss": "forum",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.groupu",
+   "form": "ぐるーぷ",
+   "reading": "ぐるーぷ",
+   "gloss": "group",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.kodou",
+   "form": "こうどう",
+   "reading": "こうどう",
+   "gloss": "action; behavior",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.shinko",
+   "form": "しんこう",
+   "reading": "しんこう",
+   "gloss": "relationship",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.henka",
+   "form": "へんか",
+   "reading": "へんか",
+   "gloss": "change",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.shinka",
+   "form": "しんか",
+   "reading": "しんか",
+   "gloss": "evolution",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.jidai",
+   "form": "じだい",
+   "reading": "じだい",
+   "gloss": "era",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.kakushin",
+   "form": "かくしん",
+   "reading": "かくしん",
+   "gloss": "innovation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.saisei",
+   "form": "さいせい",
+   "reading": "さいせい",
+   "gloss": "renewal",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.detokku",
+   "form": "デトック",
+   "reading": "デトック",
+   "gloss": "detox",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.shizen",
+   "form": "しぜん",
+   "reading": "しぜん",
+   "gloss": "nature",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.yutori",
+   "form": "ゆとり",
+   "reading": "ゆとり",
+   "gloss": "slack; margin",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.seishin",
+   "form": "せいしん",
+   "reading": "せいしん",
+   "gloss": "spirit; mind",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.tech2.hanare",
+   "form": "はなれ",
+   "reading": "はなれ",
+   "gloss": "separation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.ima",
+   "form": "いま",
+   "reading": "いま",
+   "gloss": "now",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.kinou",
+   "form": "きのう",
+   "reading": "きのう",
+   "gloss": "yesterday",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.kyou",
+   "form": "きょう",
+   "reading": "きょう",
+   "gloss": "today",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.time.ashita",
+   "form": "あした",
+   "reading": "あした",
+   "gloss": "tomorrow",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-137",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.synthesis.volnost",
+   "form": "вольность",
+   "reading": "во́льность",
+   "gloss": "licence, freedom",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.svoboda",
+   "form": "свобода",
+   "reading": "свобо́да",
+   "gloss": "freedom",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.volya",
+   "form": "воля",
+   "reading": "во́ля",
+   "gloss": "will, freedom",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.proizvol",
+   "form": "произвол",
+   "reading": "произво́л",
+   "gloss": "arbitrariness",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis.samotsenzura",
+   "form": "самоцензура",
+   "reading": "самоцензу́ра",
+   "gloss": "self-censorship",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis.izdatel",
+   "form": "издатель",
+   "reading": "изда́тель",
+   "gloss": "publisher",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis.publikaciya",
+   "form": "публикация",
+   "reading": "публика́ция",
+   "gloss": "publication",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.opublikovat",
+   "form": "опубликовать",
+   "reading": "опубликова́ть",
+   "gloss": "to publish",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis.avtor",
+   "form": "автор",
+   "reading": "а́втор",
+   "gloss": "author",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis.soavtor",
+   "form": "соавтор",
+   "reading": "соа́втор",
+   "gloss": "co-author",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis.komanda",
+   "form": "команда",
+   "reading": "кома́нда",
+   "gloss": "team",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.brigada",
+   "form": "бригада",
+   "reading": "брига́да",
+   "gloss": "brigade, crew",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.kruzhok",
+   "form": "кружок",
+   "reading": "кружо́к",
+   "gloss": "club, circle",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis.sekciya",
+   "form": "секция",
+   "reading": "се́кция",
+   "gloss": "section",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.associaciya",
+   "form": "ассоциация",
+   "reading": "ассоциа́ция",
+   "gloss": "association",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.obshchestvo",
+   "form": "общество",
+   "reading": "о́бщество",
+   "gloss": "society",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.synthesis.hrestomatiya",
+   "form": "хрестоматия",
+   "reading": "хрестома́тия",
+   "gloss": "reader, chrestomathy",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.tsitatnik",
+   "form": "цитатник",
+   "reading": "цита́тник",
+   "gloss": "quotation book",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis.antologiya",
+   "form": "антология",
+   "reading": "антоло́гия",
+   "gloss": "anthology",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.synthesis.sbornik",
+   "form": "сборник",
+   "reading": "сбо́рник",
+   "gloss": "collection",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis.almanah",
+   "form": "альманах",
+   "reading": "альмана́х",
+   "gloss": "almanac",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis.samizdat",
+   "form": "самиздат",
+   "reading": "самизда́т",
+   "gloss": "samizdat",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.synthesis.zaimstvovat",
+   "form": "заимствовать",
+   "reading": "заи́мствовать",
+   "gloss": "to borrow",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis.kompilirovat",
+   "form": "компилировать",
+   "reading": "компили́ровать",
+   "gloss": "to compile",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.synthesis.adaptirovat",
+   "form": "адаптировать",
+   "reading": "адапти́ровать",
+   "gloss": "to adapt",
+   "pos": "verb",
+   "gender": ""
+  }
+ ]
+}

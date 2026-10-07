@@ -1,0 +1,207 @@
+{
+ "batch_id": "ru-RU-lex-106",
+ "kind": "lex",
+ "pack": "ru-RU",
+ "items": [
+  {
+   "id": "ru.lex.soc.gosusluga",
+   "form": "госуслуга",
+   "reading": "госуслу́га",
+   "gloss": "government service",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.ministerskiy",
+   "form": "министерский",
+   "reading": "министе́рский",
+   "gloss": "ministerial",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.pravitelstvennyy",
+   "form": "правительственный",
+   "reading": "прави́тельственный",
+   "gloss": "governmental",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.zakonodatelnyy",
+   "form": "законодательный",
+   "reading": "законода́тельный",
+   "gloss": "legislative",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.zakonoproekt",
+   "form": "законопроект",
+   "reading": "законопро́ект",
+   "gloss": "bill, draft law",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.lgotnik",
+   "form": "льготник",
+   "reading": "льго́тник",
+   "gloss": "beneficiary",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.proshenie",
+   "form": "прошение",
+   "reading": "проше́ние",
+   "gloss": "petition",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.khodataystvo",
+   "form": "ходатайство",
+   "reading": "хода́тайство",
+   "gloss": "motion, petition",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.petsiya",
+   "form": "петиция",
+   "reading": "пети́ция",
+   "gloss": "petition",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.munitsipalnyy",
+   "form": "муниципальный",
+   "reading": "муниципа́льный",
+   "gloss": "municipal",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.munitsipalitet",
+   "form": "муниципалитет",
+   "reading": "муниципалите́т",
+   "gloss": "municipality",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.rayonnyy",
+   "form": "районный",
+   "reading": "райо́нный",
+   "gloss": "district (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.oblastnoy",
+   "form": "областной",
+   "reading": "областно́й",
+   "gloss": "regional",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.nuzhdayushchiysya",
+   "form": "нуждающийся",
+   "reading": "нужда́ющийся",
+   "gloss": "needy, deserving",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.gossluzhashchiy",
+   "form": "госслужащий",
+   "reading": "госслужа́щий",
+   "gloss": "civil servant",
+   "pos": "noun",
+   "gender": "masculine"
+  },
+  {
+   "id": "ru.lex.soc.chinovnichiy",
+   "form": "чиновничий",
+   "reading": "чино́вничий",
+   "gloss": "bureaucratic",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.nadzornyy",
+   "form": "надзорный",
+   "reading": "надзо́рный",
+   "gloss": "supervisory",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.litsenzirovanie",
+   "form": "лицензирование",
+   "reading": "лицензи́рование",
+   "gloss": "licensing",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.litsenzionnyy",
+   "form": "лицензионный",
+   "reading": "лицензио́нный",
+   "gloss": "licensing (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.akkreditovat",
+   "form": "аккредитовать",
+   "reading": "аккредитова́ть",
+   "gloss": "to accredit",
+   "pos": "verb",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.tarifikatsiya",
+   "form": "тарификация",
+   "reading": "тарифика́ция",
+   "gloss": "tariffication",
+   "pos": "noun",
+   "gender": "feminine"
+  },
+  {
+   "id": "ru.lex.soc.tarifnyy",
+   "form": "тарифный",
+   "reading": "тари́фный",
+   "gloss": "tariff (adj.)",
+   "pos": "adjective",
+   "gender": ""
+  },
+  {
+   "id": "ru.lex.soc.subsidirovanie",
+   "form": "субсидирование",
+   "reading": "субсиди́рование",
+   "gloss": "subsidizing",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.dotirovanie",
+   "form": "дотирование",
+   "reading": "доти́рование",
+   "gloss": "subsidizing",
+   "pos": "noun",
+   "gender": "neuter"
+  },
+  {
+   "id": "ru.lex.soc.nalogooblozhenie",
+   "form": "налогообложение",
+   "reading": "налогообложе́ние",
+   "gloss": "taxation",
+   "pos": "noun",
+   "gender": "neuter"
+  }
+ ]
+}

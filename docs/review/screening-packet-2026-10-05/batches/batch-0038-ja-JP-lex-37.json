@@ -1,0 +1,207 @@
+{
+ "batch_id": "ja-JP-lex-37",
+ "kind": "lex",
+ "pack": "ja-JP",
+ "items": [
+  {
+   "id": "ja.lex.edu2.ronshu",
+   "form": "ろんしゅう",
+   "reading": "ろんしゅう",
+   "gloss": "argument; reasoning",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.kenji",
+   "form": "けんじ",
+   "reading": "けんじ",
+   "gloss": "evidence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.kronji",
+   "form": "くろんじ",
+   "reading": "くろんじ",
+   "gloss": "counter-evidence",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.ketsuron",
+   "form": "けつろん",
+   "reading": "けつろん",
+   "gloss": "conclusion",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.zensho",
+   "form": "ぜんしょ",
+   "reading": "ぜんしょ",
+   "gloss": "previous section",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.ryugaku",
+   "form": "りゅうがく",
+   "reading": "りゅうがく",
+   "gloss": "studying abroad",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.ryugaku-seikatsu",
+   "form": "りゅうがくせいかつ",
+   "reading": "りゅうがくせいかつ",
+   "gloss": "life abroad",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.shukufuku",
+   "form": "しゅくふく",
+   "reading": "しゅくふく",
+   "gloss": "lodging",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.homestay",
+   "form": "ほーむすてい",
+   "reading": "ほーむすてい",
+   "gloss": "homestay",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.ryuji",
+   "form": "りゅうじ",
+   "reading": "りゅうじ",
+   "gloss": "schedule",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.shogakukin",
+   "form": "しょうがくきん",
+   "reading": "しょうがくきん",
+   "gloss": "scholarship",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.shinsei-hyou",
+   "form": "しんせいひょう",
+   "reading": "しんせいひょう",
+   "gloss": "application form",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.rissho",
+   "form": "りっしょ",
+   "reading": "りっしょ",
+   "gloss": "document",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.senmon",
+   "form": "せんもん",
+   "reading": "せんもん",
+   "gloss": "specialty; field",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.shoukaku-shinsei",
+   "form": "しょうがくしんせい",
+   "reading": "しょうがくしんせい",
+   "gloss": "scholarship application",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.denja",
+   "form": "でんじゃ",
+   "reading": "でんじゃ",
+   "gloss": "email (formal)",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.mouhibiki",
+   "form": "もうひき",
+   "reading": "もうひき",
+   "gloss": "quotation",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.sanko-bunken",
+   "form": "さんこうぶんけん",
+   "reading": "さんこうぶんけん",
+   "gloss": "reference book",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.sakuin",
+   "form": "さくいん",
+   "reading": "さくいん",
+   "gloss": "index",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.shicho",
+   "form": "しちょう",
+   "reading": "しちょう",
+   "gloss": "library viewing",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.kashu",
+   "form": "かしゅ",
+   "reading": "かしゅ",
+   "gloss": "lending",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.kashu-sho",
+   "form": "かしゅしょう",
+   "reading": "かしゅしょう",
+   "gloss": "library card",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.fukushuu",
+   "form": "ふくしゅう",
+   "reading": "ふくしゅう",
+   "gloss": "review; revision",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.keikaku",
+   "form": "けいかく",
+   "reading": "けいかく",
+   "gloss": "plan",
+   "pos": "noun",
+   "gender": ""
+  },
+  {
+   "id": "ja.lex.edu2.senryaku",
+   "form": "せんりゃく",
+   "reading": "せんりゃく",
+   "gloss": "strategy",
+   "pos": "noun",
+   "gender": ""
+  }
+ ]
+}
