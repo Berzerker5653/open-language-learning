@@ -443,6 +443,21 @@ M2 — Local data and learner model
   length, postures tally to counts, zero verified lexicon rows); UI
   test covers render + honesty copy + null-claims absence (evidence:
   `state/evidence/K-43/`).
+
+- `K-46` — runtime device-tier detection 2026-10-07: the recommended
+  speech model is measured, not hardcoded (static
+  `RECOMMENDED_SPEECH_MODEL` deleted). `recommended_speech_model`
+  reads logical cores + `/proc/meminfo` MemTotal, classifies
+  low/typical/high per the PERF-001 tier shape in
+  `docs/performance/BUDGETS.yaml`, and recommends tiny/base/small per
+  the memory budgets (`total_with_compact_model_mb`). Detection
+  failure abstains (`recommended_model: null`) and the UI says so.
+  Badge reads "recommended for this device"; tier copy names the
+  measured cores/RAM. Native test covers all three tiers, RAM-poor
+  high-core machines, abstention, and the real-machine measurement;
+  UI test pins the badge to the detected model only (evidence:
+  `state/evidence/K-46/`).
+
 ## Next task
 
 **Packs published (private) + live catalog wired** (2026-10-07, entry above):
@@ -451,7 +466,7 @@ public (owner gate O-05); local import of `dist/preview/*.lpk` exercises the
 same install gate meanwhile.
 
 **Next tranche (kanban `now`): sole-user learning experience** —
-K-44 phrase entries, K-46 device-tier detection; then K-45 kanji expansion + A2 content into
+K-44 phrase entries; then K-45 kanji expansion + A2 content into
 the now-visible goal-map structure. All BUILD-bucket
 (`docs/FEATURE_PLAN.md`): no gates, no new dependencies, no owner input needed.
 

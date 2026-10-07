@@ -96,6 +96,8 @@ export interface LanguagePanelProps {
   onSelectStressMode(mode: "auto" | "on" | "off"): void;
   /// K-43: per-pack content claims (null until loaded).
   claims: PackClaims[] | null;
+  /// K-46: runtime device-tier detection for the recommended model.
+  deviceTier: DeviceTier | null;
 }
 
 const STATUS_LABELS: Record<string, string> = {
@@ -125,10 +127,19 @@ const SPEECH_MODEL_LABELS: Record<string, string> = {
   "org.openlanguage.speech.whisper-ggml-small": "Whisper Small — largest download and memory",
 };
 
-// For the shipped pronunciation feature the sizes score identically, so the
-// recommended pick is the lightest one; larger models only help future
-// recognition-heavy features (ADR-0011).
-const RECOMMENDED_SPEECH_MODEL = "org.openlanguage.speech.whisper-ggml-tiny";
+// K-46: the recommended speech model is detected at runtime from this
+// device (PERF-001 tiers in docs/performance/BUDGETS.yaml), never a
+// static constant. The shipped pronunciation feature scores the same
+// on every whisper size (ADR-0011), so the recommendation is the
+// largest model this device can comfortably run — and honest copy
+// says why. `recommended_speech_model` (native) measures cores and
+// RAM; null means detection failed and nothing is recommended.
+export interface DeviceTier {
+  cores: number;
+  total_ram_mb: number;
+  tier: "low" | "typical" | "high";
+  recommended_model: string | null;
+}
 
 function megabytes(bytes: number): string {
   return (bytes / (1024 * 1024)).toFixed(1);
@@ -369,6 +380,9 @@ export function LanguagePanel(p: LanguagePanelProps) {
           pronunciation feedback the model sizes give the same result — pick one your device can
           comfortably run. Larger models mainly help future listening/recognition features, not
           pronunciation accuracy.
+          {p.deviceTier
+            ? ` This device was detected as the ${p.deviceTier.tier} tier (${p.deviceTier.cores} cores, ${Math.round(p.deviceTier.total_ram_mb)} MB RAM).`
+            : " This device's tier could not be detected, so no model is recommended — pick one your device can comfortably run."}
         </small>
       </p>
       <fieldset>
@@ -395,8 +409,8 @@ export function LanguagePanel(p: LanguagePanelProps) {
               />{" "}
               {SPEECH_MODEL_LABELS[m.id] ?? m.id} — {megabytes(m.size_bytes)} MB, {m.license_code}
               {m.installed ? " (installed)" : ""}
-              {m.id === RECOMMENDED_SPEECH_MODEL ? (
-                <span className="badge">recommended</span>
+              {p.deviceTier?.recommended_model === m.id ? (
+                <span className="badge">recommended for this device</span>
               ) : null}
             </label>
             {m.installed ? (

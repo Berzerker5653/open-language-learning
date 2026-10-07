@@ -4538,6 +4538,94 @@ fn delete_model(model_id: String) -> Result<(), String> {
     models::delete_model(&data_dir(), &entry)
 }
 
+// ---------------------------------------------------------------------------
+// K-46: runtime device-tier detection. The recommended speech model is
+// chosen from what this device can actually run (PERF-001 tier shape in
+// docs/performance/BUDGETS.yaml: low = 4 cores/8 GB, typical = 8 cores/
+// 16 GB, high = 16+ cores/32 GB), never a static constant. Detection is
+// honest: if the machine's memory can't be read, nothing is recommended
+// and the UI says so. The shipped pronunciation feature scores the same
+// on every whisper size (ADR-0011), so the recommendation is the largest
+// model the tier can comfortably hold in RAM (whisper ggml sizes: tiny
+// ~74 MB, base ~141 MB, small ~465 MB; a model needs roughly 2x its
+// file size resident plus the app's ~400 MB base).
+
+#[derive(Serialize)]
+struct DeviceTier {
+    cores: usize,
+    total_ram_mb: f64,
+    tier: &'static str,
+    recommended_model: Option<String>,
+}
+
+/// Pure tier classification from measured facts; testable without a
+/// real machine. `total_ram_mb` of 0 means detection failed.
+fn classify_device_tier(cores: usize, total_ram_mb: f64) -> DeviceTier {
+    if cores == 0 || total_ram_mb <= 0.0 {
+        return DeviceTier {
+            cores,
+            total_ram_mb,
+            tier: "low",
+            recommended_model: None,
+        };
+    }
+    let tier = if cores >= 16 && total_ram_mb >= 32_000.0 {
+        "high"
+    } else if cores >= 8 && total_ram_mb >= 16_000.0 {
+        "typical"
+    } else {
+        "low"
+    };
+    // Largest whisper ggml model that fits comfortably. The PERF-001
+    // memory budgets (docs/performance/BUDGETS.yaml) are the contract:
+    // `total_with_compact_model_mb` caps low at 2000 MB and typical at
+    // 1500 MB, so a low device (8 GB) stays on the compact bundle
+    // (tiny); typical (16 GB) can hold base; only the high tier's
+    // headroom (32 GB+) justifies small.
+    let recommended = if tier == "high" {
+        "org.openlanguage.speech.whisper-ggml-small"
+    } else if tier == "typical" {
+        "org.openlanguage.speech.whisper-ggml-base"
+    } else {
+        "org.openlanguage.speech.whisper-ggml-tiny"
+    };
+    DeviceTier {
+        cores,
+        total_ram_mb,
+        tier,
+        recommended_model: Some(recommended.to_string()),
+    }
+}
+
+/// Measure this machine: logical cores + total RAM (MB). Linux reads
+/// /proc/meminfo; other platforms fall back to detection-failed (0),
+/// which the UI renders as an honest "could not detect".
+fn measure_device() -> (usize, f64) {
+    let cores = std::thread::available_parallelism()
+        .map(|n| n.get())
+        .unwrap_or(0);
+    let ram_mb = match std::fs::read_to_string("/proc/meminfo") {
+        Ok(text) => text
+            .lines()
+            .find(|l| l.starts_with("MemTotal:"))
+            .and_then(|l| {
+                l.split_whitespace()
+                    .nth(1)
+                    .and_then(|kb| kb.parse::<f64>().ok())
+            })
+            .map(|kb| kb / 1024.0)
+            .unwrap_or(0.0),
+        Err(_) => 0.0,
+    };
+    (cores, ram_mb)
+}
+
+#[tauri::command]
+fn recommended_speech_model() -> DeviceTier {
+    let (cores, ram_mb) = measure_device();
+    classify_device_tier(cores, ram_mb)
+}
+
 /// Device-level active speech model: `"off"` or a whisper.cpp catalog id.
 #[tauri::command]
 fn get_speech_model() -> String {
@@ -4648,6 +4736,7 @@ pub fn run() {
             delete_model,
             get_speech_model,
             set_speech_model,
+            recommended_speech_model,
             pronunciation_check,
             pronunciation_demo,
             dictation_check,
@@ -5808,6 +5897,47 @@ mod tests {
         // Provenance surfaces as claims with license/access metadata.
         assert!(!c.provenance.is_empty());
         assert!(c.provenance.iter().any(|s| !s.title.is_empty()));
+    }
+
+    /// K-46: device-tier classification follows the PERF-001 tier
+    /// shape and recommends the largest model that fits comfortably;
+    /// detection failure recommends nothing (honest abstention).
+    #[test]
+    fn device_tier_detection_recommends_by_measured_capacity() {
+        let low = classify_device_tier(4, 8_000.0);
+        assert_eq!(low.tier, "low");
+        assert_eq!(
+            low.recommended_model.as_deref(),
+            Some("org.openlanguage.speech.whisper-ggml-tiny"),
+            "8 GB cannot comfortably hold base"
+        );
+        let typical = classify_device_tier(8, 16_000.0);
+        assert_eq!(typical.tier, "typical");
+        assert_eq!(
+            typical.recommended_model.as_deref(),
+            Some("org.openlanguage.speech.whisper-ggml-base"),
+            "16 GB fits base but not small"
+        );
+        let high = classify_device_tier(16, 32_000.0);
+        assert_eq!(high.tier, "high");
+        assert_eq!(
+            high.recommended_model.as_deref(),
+            Some("org.openlanguage.speech.whisper-ggml-small")
+        );
+        // A high-core machine with little RAM stays low and honest.
+        let ram_poor = classify_device_tier(32, 8_000.0);
+        assert_eq!(ram_poor.tier, "low");
+        assert_eq!(
+            ram_poor.recommended_model.as_deref(),
+            Some("org.openlanguage.speech.whisper-ggml-tiny")
+        );
+        // Detection failure: abstain, never guess.
+        let failed = classify_device_tier(0, 0.0);
+        assert_eq!(failed.recommended_model, None);
+        // The real machine measures something plausible (Linux path).
+        let (cores, ram) = measure_device();
+        assert!(cores > 0);
+        assert!(ram > 0.0);
     }
 
     /// K-41: stress visibility is data-driven and user-toggleable.

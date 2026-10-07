@@ -54,6 +54,7 @@ function render(over: Partial<Parameters<typeof LanguagePanel>[0]> = {}) {
       display={{ stress_mode: "auto", pack_has_stress: false }}
       onSelectStressMode={() => {}}
       claims={null}
+      deviceTier={null}
       {...over}
     />,
   );
@@ -172,6 +173,12 @@ describe("language panel", () => {
         },
       ],
       speechModel: "off",
+      deviceTier: {
+        cores: 8,
+        total_ram_mb: 16000,
+        tier: "typical",
+        recommended_model: "org.openlanguage.speech.whisper-ggml-base",
+      },
     });
     // Off is the privacy default and is the checked option.
     expect(html).toContain("Off — no speech model");
@@ -180,9 +187,13 @@ describe("language panel", () => {
     expect(html).toContain("Whisper Base");
     expect(html).toContain("Download");
     // Honest framing: size does not change pronunciation accuracy; the
-    // lightest model is the recommended pick.
+    // recommendation comes from the detected device tier (K-46), not a
+    // static constant.
     expect(html).toContain("the model sizes give the same result");
-    expect(html).toContain("recommended");
+    expect(html).toContain("recommended for this device");
+    expect(html).toContain("detected as the typical tier (8 cores, 16000 MB RAM)");
+    // The badge lands on the detected model only.
+    expect((html.match(/recommended for this device/g) ?? []).length).toBe(1);
   });
 
   it("renders per-pack content claims without touching install posture (K-43)", () => {

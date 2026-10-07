@@ -24,8 +24,9 @@ import {
   type CatalogEntry,
   type InstalledPack,
   type PackClaims,
-  type TtsStatus,
   type SpeechModel,
+  type TtsStatus,
+  type DeviceTier,
 } from "./language";
 import { WritingPractice, type WritingTaskView } from "./writing";
 import { PracticeRunner, type PracticeTaskView } from "./practice";
@@ -145,6 +146,7 @@ export function App() {
   const [ttsStatus, setTtsStatus] = useState<TtsStatus | null>(null);
   const [speechModels, setSpeechModels] = useState<SpeechModel[]>([]);
   const [speechModel, setSpeechModel] = useState<string>("off");
+  const [deviceTier, setDeviceTier] = useState<DeviceTier | null>(null);
   const [onboardError, setOnboardError] = useState<string | null>(null);
   const [writingTask, setWritingTask] = useState<WritingTaskView | null>(null);
   const [writingScaffold, setWritingScaffold] = useState<{
@@ -450,6 +452,7 @@ export function App() {
         })),
     );
     setSpeechModel((await inv("get_speech_model")) as string);
+    setDeviceTier((await inv("recommended_speech_model")) as DeviceTier);
   }
 
   async function selectSpeechModel(modelId: string) {
@@ -2075,6 +2078,7 @@ export function App() {
           display={display}
           onSelectStressMode={(m) => void setStressMode(m)}
           claims={claims}
+          deviceTier={deviceTier}
         />
       ) : route === "scenarios" ? (
         <ScenarioPanel
