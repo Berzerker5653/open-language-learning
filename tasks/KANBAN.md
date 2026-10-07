@@ -47,6 +47,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-43 | per-pack content claims panel on Languages page: `pack_claims` command tallies units/goals/assessments/lexicon/sentences/grammar/orthography/kanji/contrasts/stories from the installed pack's own files, reports the pack's own review-posture distribution and `sources.jsonl` provenance as claims; `trust_state` passes through untouched (never promoted); UI labels the numbers as the pack's claims, not verification (`state/evidence/K-43/`) | K-43 |
 | K-46 | runtime device-tier detection → dynamic recommended speech model: `recommended_speech_model` measures cores + RAM (`/proc/meminfo`), classifies low/typical/high per PERF-001 tier shape, recommends tiny/base/small by the BUDGETS.yaml memory budgets; detection failure abstains (null) with honest UI copy; static `RECOMMENDED_SPEECH_MODEL` constant deleted; badge reads "recommended for this device" (`state/evidence/K-46/`) | K-46 |
 | K-44 | first-class `phrase` lexicon entries: schema 0.2 gains optional `kind`/`slots` (verbatim-validated slot text, non-verbatim dropped); runner exposes `PhraseSlotView` with exactly one deterministic target (`fnv1a(item_id) % slots.len()`); "Phrase structure" block in the practice runner (target badge, label, alternatives) — display-only, grading untouched; ~370 existing multi-word entries await pack-side annotation (content work) (`state/evidence/K-44/`) | K-44 |
+| K-45 | ja-JP content depth in five slices: engine readers honor chunking for kanji/sentences/phonology (`jsonl_dir_texts`/`jsonl_dir_claims`, dictation picker included); five greeting + ten verb set phrases annotated `kind: phrase` + verbatim slots; 28 draft kanji in `kanji/a2-topics.jsonl` across the A2 goal topics; 19 draft A2 sentences in `sentences/a2-daily.jsonl` (verbatim cloze targets); duplicate 七 kanji record removed (`state/evidence/K-45/`) | K-45 |
 
 ## next — AI authoring kit (the GitHub community-pack goal)
 
@@ -57,8 +58,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
-| K-45 | ja-JP | Kanji layer expansion beyond the seed; kanji forms gated into later bands with furigana readings (draft-labeled). Slice 1 done 2026-10-07: engine readers honor chunking for kanji/sentences/phonology (`jsonl_dir_texts`/`jsonl_dir_claims`) — shards now reach drills, cloze/dictation, contrast runner, claims panel (`state/evidence/K-45/`) | K-45 |
-| (queued) | ja-JP | A2-band coverage as labeled drafts riding the goal map (map makes depth visible) | JA-A2-001 posture |
+| (queued) | ja-JP | Deeper A2-band coverage as labeled drafts riding the goal map (first pass shipped with K-45: 28 kanji + 19 sentences + 15 phrase annotations; remaining depth is ongoing content production) | JA-A2-001 posture |
 
 ## owner — human/owner gates (never self-certifiable)
 
@@ -80,13 +80,13 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 2. **K-40/K-42 shipped 2026-10-07**: the goal map is live (75 pack goals
    with prereq gating + per-modality mastery), and draft posture is
    visible wherever content is presented.
-3. **Content depth (K-45, A2) after the map**: the map is live, so more
-   content can now go into visible structure.
+3. **K-45 content depth shipped 2026-10-07**: kanji/sentence/phonology
+   shards now reach every engine reader; 28 A2-topic kanji, 19 A2
+   sentences, and 15 phrase annotations (greetings + verbs) are live
+   draft content riding the goal map. Deeper A2 coverage stays queued
+   as ongoing content production.
 4. **K-4x polish tranche complete 2026-10-07**: K-41 stress marks,
    K-43 claims panel, K-44 phrase entries, K-46 device-tier speech
    recommendation all shipped.
-5. **K-44 follow-on is content work**: annotating the ~370 existing
-   multi-word ja-JP entries with `kind: "phrase"` + slots rides with
-   K-45 pack expansion.
-6. **Owner-side unblocks stay ranked in `owner`**: public flip (O-05) then
+5. **Owner-side unblocks stay ranked in `owner`**: public flip (O-05) then
    calibration data (O-04/SPEECH-007) are the only paths to REL-001.

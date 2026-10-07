@@ -475,6 +475,23 @@ M2 — Local data and learner model
   Pack-side annotation of the ~370 existing multi-word ja-JP entries
   is content work riding with K-45 (evidence: `state/evidence/K-44/`).
 
+
+- `K-45` — ja-JP kanji layer expansion + A2 content 2026-10-07, five
+  slices: (1) engine readers honor the chunking conventions for
+  kanji/sentences/phonology (`jsonl_dir_texts`/`jsonl_dir_claims`;
+  drills, cloze/dictation, contrast runner, claims panel all see
+  shards); (2) five greeting set phrases annotated `kind: phrase` +
+  verbatim slots; (3) 28 draft kanji in `kanji/a2-topics.jsonl`
+  across the A2 goal topics (draft-labeled, ai-assisted provenance,
+  jmdict-simplified pending verification); (4) 19 draft A2 sentences
+  in `sentences/a2-daily.jsonl` with verbatim cloze targets, plus
+  removal of the duplicate 七 kanji record; (5) ten verb set phrases
+  annotated (stem+ます / noun+します). Tests:
+  `sharded_pack_directories_reach_every_reader`,
+  `bundled_pack_phrase_entries_carry_valid_slots`; native 59 passed,
+  workspace green, langpack validate/lint/test clean (evidence:
+  `state/evidence/K-45/`).
+
 ## Next task
 
 **Packs published (private) + live catalog wired** (2026-10-07, entry above):
@@ -482,10 +499,10 @@ the in-app catalog download flow activates automatically when the repo goes
 public (owner gate O-05); local import of `dist/preview/*.lpk` exercises the
 same install gate meanwhile.
 
-**Next tranche (kanban `now`): content depth** —
-K-45 kanji expansion + A2 content into
-the now-visible goal-map structure (K-44 phrase entries shipped
-2026-10-07; pack-side slot annotation rides with it). All BUILD-bucket
+**Next tranche: deeper content depth (queued)** — K-45 shipped its
+first pass 2026-10-07 (28 kanji + 19 A2 sentences + 15 phrase
+annotations, shard plumbing included); further A2-band coverage is
+ongoing content production. All BUILD-bucket
 (`docs/FEATURE_PLAN.md`): no gates, no new dependencies, no owner input needed.
 
 Stable-release gates stay open and visible: `SPEECH-007` (calibration
