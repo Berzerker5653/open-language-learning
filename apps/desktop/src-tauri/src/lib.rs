@@ -2644,13 +2644,10 @@ fn dictation_target_at(data: &Path, pack_id: &str, offset: u32) -> Result<Dictat
     let packs_root = data.join("packs");
     let version =
         lts_langpack::archive::current_version(pack_id, &packs_root).ok_or("pack not installed")?;
-    let path = packs_root
-        .join(pack_id)
-        .join(&version)
-        .join("sentences")
-        .join("entries.jsonl");
-    let text =
-        std::fs::read_to_string(path).map_err(|_| "pack declares no sentences".to_string())?;
+    let text = match jsonl_dir_texts(data, pack_id, &version, "sentences") {
+        Ok(texts) => texts.join("\n"),
+        Err(_) => return Err("pack declares no sentences".to_string()),
+    };
     let mut kana_only: Vec<DictationTarget> = Vec::new();
     let mut all: Vec<DictationTarget> = Vec::new();
     for line in text.lines().filter(|l| !l.trim().is_empty()) {
@@ -5172,6 +5169,12 @@ mod tests {
         let root = data
             .join("packs/org.openlanguage.ja-jp.reference")
             .join(&version);
+        // Base counts BEFORE the shard files are written: the pack
+        // itself grows (K-45 content), so the assertion must be
+        // relative to this install, not hardcoded numbers.
+        let base_kanji = jsonl_dir_claims(&root, "kanji").0;
+        let base_sentences = jsonl_dir_claims(&root, "sentences").0;
+        let base_contrasts = jsonl_dir_claims(&root, "phonology").0;
         std::fs::write(
             root.join("kanji/n5-extra.jsonl"),
             concat!(
@@ -5236,14 +5239,6 @@ mod tests {
             .iter()
             .find(|c| c.pack_id == "org.openlanguage.ja-jp.reference")
             .unwrap();
-        // The pack's own single-file counts plus the one shard record
-        // written above must each be exceeded — the shard is counted.
-        let base_kanji = kanji_entries(data, "org.openlanguage.ja-jp.reference", &version)
-            .unwrap()
-            .len()
-            - 1;
-        let base_sentences = jsonl_claims(&root, "sentences/entries.jsonl").0;
-        let base_contrasts = jsonl_claims(&root, "phonology/contrasts.jsonl").0;
         assert!(
             ja.counts.kanji == base_kanji + 1
                 && ja.counts.sentences == base_sentences + 1
