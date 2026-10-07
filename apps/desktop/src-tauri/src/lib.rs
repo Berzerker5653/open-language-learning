@@ -5273,6 +5273,54 @@ mod tests {
     }
 
     #[test]
+    fn bundled_pack_phrase_entries_carry_valid_slots() {
+        // The ja-JP pack annotates set phrases with kind/slots; every
+        // declared slot must occur verbatim in the primary surface
+        // (the engine drops non-verbatim slots, so a slot that never
+        // renders is an authoring bug worth failing on).
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let version = lts_langpack::archive::current_version(
+            "org.openlanguage.ja-jp.reference",
+            &data.join("packs"),
+        )
+        .unwrap();
+        let entries = lexicon_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
+        let phrases: Vec<&LexEntry> = entries.iter().filter(|e| e.kind == "phrase").collect();
+        assert!(
+            phrases.len() >= 5,
+            "the pack must annotate its set phrases (got {})",
+            phrases.len()
+        );
+        for p in &phrases {
+            assert!(!p.slots.is_empty(), "phrase {} declares no slots", p.id);
+            for s in &p.slots {
+                assert!(
+                    p.surface.contains(&s.text),
+                    "slot {:?} not verbatim in {} ({})",
+                    s.text,
+                    p.surface,
+                    p.id
+                );
+            }
+        }
+        // The runner renders the annotated phrase with one target.
+        let profile = create_local_profile(data, "H").unwrap();
+        finish_onboarding(data, &profile.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        let task = practice_task_at(
+            data,
+            &profile.id,
+            "ja.lex.greetings.ohayou-gozaimasu",
+            "recall-meaning",
+            false,
+        )
+        .unwrap();
+        assert_eq!(task.slots.len(), 2);
+        assert_eq!(task.slots.iter().filter(|s| s.target).count(), 1);
+    }
+
+    #[test]
     fn situation_ids_resolve_to_human_labels() {
         // Scenario cards must show the pack-defined situation name,
         // never a raw `ja.situation.*` id, and must fall back to the
