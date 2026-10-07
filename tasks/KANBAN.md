@@ -57,8 +57,8 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
-| K-45 | ja-JP | Kanji layer expansion beyond the seed; kanji forms gated into later bands with furigana readings (draft-labeled) | K-45 |
-| (queued) | ja-JP | A2-band coverage as labeled drafts once K-40 goal map exists (map makes depth visible) | JA-A2-001 posture |
+| K-45 | ja-JP | Kanji layer expansion beyond the seed; kanji forms gated into later bands with furigana readings (draft-labeled). Slice 1 done 2026-10-07: engine readers honor chunking for kanji/sentences/phonology (`jsonl_dir_texts`/`jsonl_dir_claims`) — shards now reach drills, cloze/dictation, contrast runner, claims panel (`state/evidence/K-45/`) | K-45 |
+| (queued) | ja-JP | A2-band coverage as labeled drafts riding the goal map (map makes depth visible) | JA-A2-001 posture |
 
 ## owner — human/owner gates (never self-certifiable)
 

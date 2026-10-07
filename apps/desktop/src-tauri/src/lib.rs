@@ -434,23 +434,33 @@ struct PhraseSlot {
 /// (`langpack` layout accepts any `lexicon/*.jsonl`); reading only
 /// `entries.jsonl` would hide entries the scheduler still plans.
 fn lexicon_texts(data: &Path, pack_id: &str, version: &str) -> Result<Vec<String>, String> {
-    let dir = data
-        .join("packs")
-        .join(pack_id)
-        .join(version)
-        .join("lexicon");
+    jsonl_dir_texts(data, pack_id, version, "lexicon")
+}
+
+/// Read every `*.jsonl` under an installed pack directory, in
+/// file-name order. The pack format allows any directory to shard
+/// across multiple files (docs/PACK_AUTHORING_CONTRACT chunking);
+/// readers must see them all, not just `entries.jsonl`.
+fn jsonl_dir_texts(
+    data: &Path,
+    pack_id: &str,
+    version: &str,
+    dir: &str,
+) -> Result<Vec<String>, String> {
+    let dir = data.join("packs").join(pack_id).join(version).join(dir);
+    let label = dir.display().to_string();
     let mut files: Vec<PathBuf> = std::fs::read_dir(&dir)
-        .map_err(|_| "pack lexicon not found".to_string())?
+        .map_err(|_| format!("pack {label} not found"))?
         .filter_map(|e| e.ok().map(|e| e.path()))
         .filter(|p| p.extension().and_then(|x| x.to_str()) == Some("jsonl"))
         .collect();
     files.sort();
     if files.is_empty() {
-        return Err("pack lexicon not found".into());
+        return Err(format!("pack {label} not found"));
     }
     files
         .iter()
-        .map(|p| std::fs::read_to_string(p).map_err(|_| "pack lexicon not found".to_string()))
+        .map(|p| std::fs::read_to_string(p).map_err(|_| format!("pack {label} not found")))
         .collect()
 }
 
@@ -654,14 +664,10 @@ struct KanjiEntry {
 /// Parse an installed pack's `kanji/entries.jsonl`. A pack without
 /// character instruction is not an error: empty list.
 fn kanji_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<KanjiEntry>, String> {
-    let path = data
-        .join("packs")
-        .join(pack_id)
-        .join(version)
-        .join("kanji")
-        .join("entries.jsonl");
-    let Ok(text) = std::fs::read_to_string(&path) else {
-        return Ok(Vec::new());
+    let text = match jsonl_dir_texts(data, pack_id, version, "kanji") {
+        Ok(texts) => texts.join("\n"),
+        // A pack without character instruction is not an error.
+        Err(_) => return Ok(Vec::new()),
     };
     let mut out = Vec::new();
     for line in text.lines() {
@@ -750,14 +756,10 @@ fn contrast_entries(
     pack_id: &str,
     version: &str,
 ) -> Result<Vec<ContrastEntry>, String> {
-    let path = data
-        .join("packs")
-        .join(pack_id)
-        .join(version)
-        .join("phonology")
-        .join("contrasts.jsonl");
-    let Ok(text) = std::fs::read_to_string(&path) else {
-        return Ok(Vec::new());
+    let text = match jsonl_dir_texts(data, pack_id, version, "phonology") {
+        Ok(texts) => texts.join("\n"),
+        // A pack without perceptual training is not an error.
+        Err(_) => return Ok(Vec::new()),
     };
     let mut out = Vec::new();
     for line in text.lines() {
@@ -1598,6 +1600,31 @@ fn jsonl_claims(root: &Path, rel: &str) -> (usize, std::collections::BTreeMap<St
     (total, postures)
 }
 
+/// Tally a sharded JSONL directory (every `*.jsonl` under `dir`).
+fn jsonl_dir_claims(root: &Path, dir: &str) -> (usize, std::collections::BTreeMap<String, usize>) {
+    let mut total = 0;
+    let mut postures = std::collections::BTreeMap::new();
+    let dirpath = root.join(dir);
+    let Ok(rd) = std::fs::read_dir(&dirpath) else {
+        return (0, postures);
+    };
+    let mut files: Vec<PathBuf> = rd
+        .flatten()
+        .map(|e| e.path())
+        .filter(|p| p.extension().and_then(|x| x.to_str()) == Some("jsonl"))
+        .collect();
+    files.sort();
+    for f in files {
+        let rel = format!("{}/{}", dir, f.file_name().unwrap().to_string_lossy());
+        let (n, p) = jsonl_claims(root, &rel);
+        total += n;
+        for (k, v) in p {
+            *postures.entry(k).or_insert(0) += v;
+        }
+    }
+    (total, postures)
+}
+
 /// Count YAML sequence items (goals) and their `review_status`.
 fn yaml_goal_claims(root: &Path) -> (usize, std::collections::BTreeMap<String, usize>) {
     let mut total = 0;
@@ -1783,10 +1810,10 @@ fn pack_claims_at(data: &Path) -> Result<Vec<PackClaims>, String> {
         let (goals, goal_postures) = yaml_goal_claims(&root);
         let (assessments, assessment_postures) =
             jsonl_claims(&root, "assessments/definitions.jsonl");
-        let (sentences, sentence_postures) = jsonl_claims(&root, "sentences/entries.jsonl");
+        let (sentences, sentence_postures) = jsonl_dir_claims(&root, "sentences");
         let (grammar, grammar_postures) = jsonl_claims(&root, "grammar/concepts.jsonl");
-        let (kanji, kanji_postures) = jsonl_claims(&root, "kanji/entries.jsonl");
-        let (contrasts, contrast_postures) = jsonl_claims(&root, "phonology/contrasts.jsonl");
+        let (kanji, kanji_postures) = jsonl_dir_claims(&root, "kanji");
+        let (contrasts, contrast_postures) = jsonl_dir_claims(&root, "phonology");
         let mut orth_total = 0;
         let mut orth_postures = std::collections::BTreeMap::new();
         let orthdir = root.join("orthography");
@@ -3396,14 +3423,7 @@ fn sentence_entries(
     pack_id: &str,
     version: &str,
 ) -> Result<Vec<SentenceEntry>, String> {
-    let path = data
-        .join("packs")
-        .join(pack_id)
-        .join(version)
-        .join("sentences")
-        .join("entries.jsonl");
-    let text =
-        std::fs::read_to_string(&path).map_err(|_| "pack sentences not found".to_string())?;
+    let text = jsonl_dir_texts(data, pack_id, version, "sentences")?.join("\n");
     let mut out = Vec::new();
     for line in text.lines() {
         let Ok(entry) = serde_json::from_str::<serde_json::Value>(line) else {
@@ -5133,6 +5153,98 @@ mod tests {
         )
         .unwrap();
         assert!(word.slots.is_empty(), "word entries render no slots");
+    }
+
+    #[test]
+    fn sharded_pack_directories_reach_every_reader() {
+        // The pack format lets kanji/, sentences/, and phonology/
+        // shard across multiple *.jsonl files (chunking conventions).
+        // The kanji drill, cloze runner, contrast runner, and claims
+        // tally must see every shard, not just entries.jsonl.
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let version = lts_langpack::archive::current_version(
+            "org.openlanguage.ja-jp.reference",
+            &data.join("packs"),
+        )
+        .unwrap();
+        let root = data
+            .join("packs/org.openlanguage.ja-jp.reference")
+            .join(&version);
+        std::fs::write(
+            root.join("kanji/n5-extra.jsonl"),
+            concat!(
+                "{\"id\":\"ja.kanji.demo.shard\",\"status\":\"draft\",\"character\":\"分\",",
+                "\"meanings\":[\"part\"],\"readings\":[\"bu\"],\"radicals\":[\"刀\"],",
+                "\"sources\":[\"jf-standard\"]}\n"
+            ),
+        )
+        .unwrap();
+        std::fs::write(
+            root.join("sentences/shard.jsonl"),
+            concat!(
+                "{\"id\":\"ja.sent.demo.shard\",\"status\":\"draft\",",
+                "\"text\":\"ひこうきの きっぷ を かります\",\"reading\":\"ひこうきのきっぷをかります\",",
+                "\"gloss\":\"I borrow a plane ticket.\",\"cloze_targets\":[\"きっぷ\"],",
+                "\"sources\":[\"jf-standard\"]}\n"
+            ),
+        )
+        .unwrap();
+        std::fs::write(
+            root.join("phonology/contrasts-extra.jsonl"),
+            concat!(
+                "{\"id\":\"ja.contrast.demo.shard\",\"status\":\"draft\",",
+                "\"description\":\"demo shard contrast\",",
+                "\"items\":[{\"text\":\"たべもの\"},{\"text\":\"たべものー\"}],",
+                "\"sources\":[\"jf-standard\"]}\n"
+            ),
+        )
+        .unwrap();
+
+        let kanji = kanji_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
+        assert!(
+            kanji.iter().any(|e| e.id == "ja.kanji.demo.shard"),
+            "shard-file kanji must reach the drill"
+        );
+        let sentences =
+            sentence_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
+        assert!(
+            sentences.iter().any(|e| e.id == "ja.sent.demo.shard"),
+            "shard-file sentences must reach the cloze runner"
+        );
+        let contrasts =
+            contrast_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
+        assert!(
+            contrasts.iter().any(|e| e.id == "ja.contrast.demo.shard"),
+            "shard-file contrasts must reach the discrimination runner"
+        );
+
+        let profile = create_local_profile(data, "H").unwrap();
+        finish_onboarding(data, &profile.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        let cloze = practice_task_at(
+            data,
+            &profile.id,
+            "ja.sent.demo.shard",
+            "production-writing",
+            false,
+        )
+        .unwrap();
+        assert!(cloze.typed, "shard sentence builds a cloze task");
+        let claims = pack_claims_at(data).unwrap();
+        let ja = claims
+            .iter()
+            .find(|c| c.pack_id == "org.openlanguage.ja-jp.reference")
+            .unwrap();
+        assert!(
+            ja.counts.kanji > 56
+                && ja.counts.sentences > 61
+                && ja.counts.phonological_contrasts > 7,
+            "claims must tally shard files: kanji={} sentences={} contrasts={}",
+            ja.counts.kanji,
+            ja.counts.sentences,
+            ja.counts.phonological_contrasts
+        );
     }
 
     #[test]
