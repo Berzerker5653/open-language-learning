@@ -414,6 +414,22 @@ M2 — Local data and learner model
   smoke script exports WEBKIT_DISABLE_DMABUF_RENDERER=1 and works without
   pnpm (evidence: `state/evidence/K-40-K-42/`).
 
+
+- `K-41` — stress-mark visibility 2026-10-07: readings carrying U+0301
+  combining acute render with the stressed base+mark pair highlighted
+  (`StressText` + `.stress` style) in practice, placement/kanji practice,
+  and writing reading-hints. Entirely data-driven: packs without stress
+  data render unchanged (`pack_has_stress` scans installed lexicon text).
+  Per-profile auto/on/off toggle persisted under setting key
+  `stress-mode` (`display_settings`/`set_display_settings` native
+  commands; toggle UI in the Languages page "Display settings" section).
+  Display-only — grading, evidence, and scheduling never consult it
+  (native test proves persistence + data-driven flip; UI tests cover
+  split/render/override). Smoke walks all routes with the new IPC in the
+  load paths; smoke script fix: vite must start from `apps/desktop`
+  (repo-root cwd served index.html 404 → webview hung) (evidence:
+  `state/evidence/K-41/`).
+
 ## Next task
 
 **Packs published (private) + live catalog wired** (2026-10-07, entry above):
@@ -422,7 +438,7 @@ public (owner gate O-05); local import of `dist/preview/*.lpk` exercises the
 same install gate meanwhile.
 
 **Next tranche (kanban `now`): sole-user learning experience** —
-K-41 ru stress visibility, K-43 content-claims panel, K-44 phrase entries,
+K-43 content-claims panel, K-44 phrase entries,
 K-46 device-tier detection; then K-45 kanji expansion + A2 content into
 the now-visible goal-map structure. All BUILD-bucket
 (`docs/FEATURE_PLAN.md`): no gates, no new dependencies, no owner input needed.

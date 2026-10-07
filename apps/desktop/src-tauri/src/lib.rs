@@ -763,6 +763,68 @@ fn contrast_entries(
     Ok(out)
 }
 
+/// K-41: true when any reading in the pack carries a U+0301 combining
+/// stress mark. Data-driven: no language literals — any pack whose
+/// readings use combining stress gets stress-aware rendering.
+fn pack_has_stress_marks(data: &Path, pack_id: &str, version: &str) -> bool {
+    lexicon_texts(data, pack_id, version)
+        .map(|texts| texts.iter().any(|t| t.contains('\u{0301}')))
+        .unwrap_or(false)
+}
+
+/// K-41: per-profile display settings. `stress-mode`: "auto" (default,
+/// highlight when the pack's data carries stress marks) | "on" | "off".
+/// Display-only; never touches grading or scheduling.
+#[derive(Serialize)]
+struct DisplaySettings {
+    stress_mode: String,
+    pack_has_stress: bool,
+}
+
+#[tauri::command]
+fn display_settings(profile_id: String) -> Result<DisplaySettings, String> {
+    display_settings_at(&data_dir(), &profile_id)
+}
+
+fn display_settings_at(data: &Path, profile_id: &str) -> Result<DisplaySettings, String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let stress_mode = store
+        .get_setting(profile_id, "stress-mode")
+        .ok()
+        .flatten()
+        .and_then(|v| v.as_str().map(String::from))
+        .filter(|s| s == "on" || s == "off")
+        .unwrap_or_else(|| "auto".to_string());
+    let active = packs::active_pack(data, profile_id)?;
+    let packs_root = data.join("packs");
+    let pack_has_stress = active
+        .first()
+        .and_then(|p| lts_langpack::archive::current_version(p, &packs_root).map(|v| (p, v)))
+        .map(|(p, v)| pack_has_stress_marks(data, p, &v))
+        .unwrap_or(false);
+    Ok(DisplaySettings {
+        stress_mode,
+        pack_has_stress,
+    })
+}
+
+#[tauri::command]
+fn set_display_settings(
+    profile_id: String,
+    stress_mode: String,
+) -> Result<DisplaySettings, String> {
+    let mode = match stress_mode.as_str() {
+        "on" | "off" | "auto" => stress_mode,
+        _ => return Err("stress-mode must be auto, on, or off".to_string()),
+    };
+    let data = data_dir();
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    store
+        .set_setting(&profile_id, "stress-mode", &serde_json::json!(mode))
+        .map_err(|e| e.to_string())?;
+    display_settings_at(&data, &profile_id)
+}
+
 /// True when every character of `s` is Hiragana or Katakana. Script
 /// detection is Unicode-based, never locale-based (engine neutrality).
 fn is_kana_script(s: &str) -> bool {
@@ -4256,6 +4318,8 @@ pub fn run() {
             tts_status,
             world_state,
             goal_map,
+            display_settings,
+            set_display_settings,
             catalog_packs,
             install_catalog_pack,
             import_pack,
@@ -5342,6 +5406,52 @@ mod tests {
             assert_eq!(b.locked, a.locked);
             assert_eq!(b.dimensions, a.dimensions, "no drift from volume");
         }
+    }
+
+    /// K-41: stress visibility is data-driven and user-toggleable.
+    /// ja-JP data carries no U+0301 marks → auto stays off; ru-RU data
+    /// carries them → auto turns on; explicit off wins; invalid modes
+    /// fall back to auto.
+    #[test]
+    fn stress_display_settings_are_data_driven_and_persisted() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        {
+            let (bytes, _sha) = lts_langpack::archive::build(
+                &PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../languages/ru-RU"),
+            )
+            .unwrap();
+            lts_langpack::archive::install(&bytes, &data.join("packs")).unwrap();
+        }
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+
+        let s = display_settings_at(data, &p.id).unwrap();
+        assert_eq!(s.stress_mode, "auto");
+        assert!(!s.pack_has_stress, "ja-JP readings carry no stress marks");
+
+        packs::switch_pack(data, &p.id, "org.openlanguage.ru-ru.reference").unwrap();
+        let s = display_settings_at(data, &p.id).unwrap();
+        assert!(s.pack_has_stress, "ru-RU readings carry U+0301 stress");
+
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        store
+            .set_setting(&p.id, "stress-mode", &serde_json::json!("off"))
+            .unwrap();
+        assert_eq!(
+            display_settings_at(data, &p.id).unwrap().stress_mode,
+            "off",
+            "user toggle persists"
+        );
+        store
+            .set_setting(&p.id, "stress-mode", &serde_json::json!("bogus"))
+            .unwrap();
+        assert_eq!(
+            display_settings_at(data, &p.id).unwrap().stress_mode,
+            "auto",
+            "invalid stored values fall back to auto"
+        );
     }
 
     /// Community pack flow: a local .lpk import goes through the same

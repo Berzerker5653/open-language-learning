@@ -3,6 +3,7 @@
  * runner. The UI only sends the chosen index; grading, evidence, and
  * scheduling happen natively (the correct answer never crosses IPC).
  */
+import { StressText } from "./stress";
 
 export interface PracticeTaskView {
   item_id: string;
@@ -41,6 +42,8 @@ export interface PracticeRunnerProps {
   onNext(): void;
   onPlayAudio?(): void;
   onReveal?(): void;
+  /// K-41: highlight U+0301-stressed vowels in readings (display-only).
+  stress?: boolean;
   /// Typed runner only: the draft answer and grading trigger.
   draft?: string;
   onDraft?(value: string): void;
@@ -69,7 +72,7 @@ export function PracticeRunner(p: PracticeRunnerProps) {
           </p>
           {p.task.reading && (
             <p aria-label="Reading" lang="ja">
-              <small>{p.task.reading}</small>
+              <small>{p.stress ? <StressText text={p.task.reading} /> : p.task.reading}</small>
             </p>
           )}
           {p.task.romaji && (

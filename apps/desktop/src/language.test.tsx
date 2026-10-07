@@ -51,6 +51,8 @@ function render(over: Partial<Parameters<typeof LanguagePanel>[0]> = {}) {
       speechModels={[]}
       speechModel="off"
       onSelectSpeechModel={() => {}}
+      display={{ stress_mode: "auto", pack_has_stress: false }}
+      onSelectStressMode={() => {}}
       {...over}
     />,
   );

@@ -21,7 +21,9 @@ else
   # directly. Debug WebviewUrl::default() loads the devUrl, so also
   # serve the frontend on :1420 for the walkthrough.
   (cd apps/desktop && ./node_modules/.bin/vite build)
-  apps/desktop/node_modules/.bin/vite --config apps/desktop/vite.config.ts --port 1420 --strictPort \
+  # vite must run from apps/desktop: the config's root is the app dir,
+  # so a repo-root cwd serves index.html 404 and the webview hangs.
+  (cd apps/desktop && exec ../../apps/desktop/node_modules/.bin/vite --port 1420 --strictPort) \
     > /tmp/lts-smoke-vite.log 2>&1 &
   VITE_PID=$!
   trap 'kill "$VITE_PID" 2>/dev/null || true' EXIT

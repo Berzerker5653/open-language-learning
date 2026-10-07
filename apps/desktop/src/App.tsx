@@ -28,6 +28,7 @@ import {
 } from "./language";
 import { WritingPractice, type WritingTaskView } from "./writing";
 import { PracticeRunner, type PracticeTaskView } from "./practice";
+import { stressEnabled, type DisplaySettingsView } from "./stress";
 import {
   ScenarioPanel,
   type ScenarioOutcomeView,
@@ -158,6 +159,7 @@ export function App() {
     modality: string;
   } | null>(null);
   const [practiceTask, setPracticeTask] = useState<PracticeTaskView | null>(null);
+  const [display, setDisplay] = useState<DisplaySettingsView | null>(null);
   const [practiceGraded, setPracticeGraded] = useState(false);
   const [practiceCorrect, setPracticeCorrect] = useState(false);
   const [practiceCorrectChoice, setPracticeCorrectChoice] = useState("");
@@ -311,6 +313,7 @@ export function App() {
           setDisplayName(home.display_name);
           setPlan(home.plan);
           setEnvironments((await inv("world_state", { profileId: p.id })) as WorldEnvironment[]);
+          setDisplay((await inv("display_settings", { profileId: p.id })) as DisplaySettingsView);
           const goalRows = (await inv("goal_map", { profileId: p.id })) as GoalCard[];
           await inv("smoke_ack", { note: `goal-map:${goalRows.length}` });
           setStep("done");
@@ -506,6 +509,7 @@ export function App() {
         setPlan(home.plan);
         const envs = (await inv("world_state", { profileId })) as WorldEnvironment[];
         setEnvironments(envs);
+        setDisplay((await inv("display_settings", { profileId })) as DisplaySettingsView);
       } catch (e) {
         setOnboardError(`Setup could not be completed: ${String(e)}`);
         return;
@@ -531,6 +535,7 @@ export function App() {
       setPlan(home.plan);
       const envs = (await inv("world_state", { profileId: p.id })) as WorldEnvironment[];
       setEnvironments(envs);
+      setDisplay((await inv("display_settings", { profileId: p.id })) as DisplaySettingsView);
       setStep("done");
     } catch (e) {
       setOnboardError(`Could not resume this profile: ${String(e)}`);
@@ -541,6 +546,15 @@ export function App() {
     setBudget(minutes);
     if (inv && profileId) {
       setPlan((await inv("practice_plan", { profileId, minutes })) as SessionPlan);
+    }
+  }
+
+  // K-41: stress-mark visibility toggle (display setting only).
+  async function setStressMode(mode: "auto" | "on" | "off") {
+    if (inv && profileId) {
+      setDisplay(
+        (await inv("set_display_settings", { profileId, stressMode: mode })) as DisplaySettingsView,
+      );
     }
   }
 
@@ -1933,6 +1947,7 @@ export function App() {
               correctChoice={placementCorrectChoice}
               onChoose={(i) => void answerPlacement(i)}
               onNext={() => void nextPlacement()}
+              stress={stressEnabled(display)}
             />
           ) : (
             <div className="btn-row">
@@ -1981,6 +1996,7 @@ export function App() {
                 correctChoice={kanjiCorrectChoice}
                 heading={kanjiStage === "meaning" ? "What does it mean?" : "How do you read it?"}
                 onChoose={(i) => void chooseKanji(i)}
+                stress={stressEnabled(display)}
                 onNext={() => void nextKanji()}
               />
             </div>
@@ -2024,6 +2040,7 @@ export function App() {
               correct={writingCorrect}
               onDraft={setWritingDraft}
               onSubmit={() => void submitWriting()}
+              stress={stressEnabled(display)}
               onHint={showWritingHint}
             />
           ) : (
@@ -2052,6 +2069,8 @@ export function App() {
           speechModels={speechModels}
           speechModel={speechModel}
           onSelectSpeechModel={(id) => void selectSpeechModel(id)}
+          display={display}
+          onSelectStressMode={(m) => void setStressMode(m)}
         />
       ) : route === "scenarios" ? (
         <ScenarioPanel
@@ -2097,6 +2116,7 @@ export function App() {
             draft={practiceDraft}
             onDraft={setPracticeDraft}
             onCheck={() => void checkPractice()}
+            stress={stressEnabled(display)}
             revealed={practiceRevealed}
             onReveal={
               practiceTarget.modality === "orthography-recognition" ||

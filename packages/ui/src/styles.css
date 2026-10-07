@@ -471,6 +471,16 @@ legend {
   background: var(--accent-soft);
 }
 
+/* K-41: stressed-vowel highlight (data-driven; color supplementary,
+   the combining mark itself stays visible) */
+.stress {
+  color: var(--accent-ink);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
 /* ------------------------------------------------------------- stepper */
 .stepper {
   counter-reset: step;

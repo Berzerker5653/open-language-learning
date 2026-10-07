@@ -4,6 +4,7 @@
  * packs work fully offline; the community catalog points at versioned
  * GitHub releases and always labels packs as community content.
  */
+import type { DisplaySettingsView } from "./stress";
 
 export interface InstalledPack {
   pack_id: string;
@@ -68,6 +69,9 @@ export interface LanguagePanelProps {
   speechModels: SpeechModel[];
   speechModel: string;
   onSelectSpeechModel(modelId: string): void;
+  /// K-41: stress-mark visibility (display setting; null until loaded).
+  display: DisplaySettingsView | null;
+  onSelectStressMode(mode: "auto" | "on" | "off"): void;
 }
 
 const STATUS_LABELS: Record<string, string> = {
@@ -153,6 +157,29 @@ export function LanguagePanel(p: LanguagePanelProps) {
           ))}
         </ul>
       )}
+
+      <h2>Display settings</h2>
+      <div role="group" aria-label="Stress-mark visibility">
+        <p>
+          <small>
+            Some packs mark stressed vowels (e.g. сего́дня). Highlight them in readings and hints.
+            {p.display && !p.display.pack_has_stress
+              ? " The current pack's data carries no stress marks, so nothing changes until it does."
+              : ""}
+          </small>
+        </p>
+        {(["auto", "on", "off"] as const).map((m) => (
+          <button
+            key={m}
+            type="button"
+            className="btn btn--quiet"
+            aria-pressed={(p.display?.stress_mode ?? "auto") === m}
+            onClick={() => p.onSelectStressMode(m)}
+          >
+            {m === "auto" ? "Automatic" : m === "on" ? "Always highlight" : "Off"}
+          </button>
+        ))}
+      </div>
 
       <h2>Community catalog</h2>
       <p>{STATUS_LABELS[p.catalogStatus] ?? p.catalogStatus}</p>

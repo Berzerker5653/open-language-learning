@@ -3,6 +3,7 @@
  * Japanese answers. The platform IME handles kana conversion; the app
  * never requires handwriting and renders no stroke/canvas surface.
  */
+import { StressText } from "./stress";
 
 export interface WritingTaskView {
   item_id: string;
@@ -19,6 +20,9 @@ export interface WritingPracticeProps {
   onDraft(value: string): void;
   onSubmit(): void;
   onHint(kind: "reading" | "romaji"): void;
+  /// K-41: highlight U+0301-stressed vowels in the reading hint
+  /// (display-only).
+  stress?: boolean;
 }
 
 export function WritingPractice(p: WritingPracticeProps) {
@@ -28,7 +32,7 @@ export function WritingPractice(p: WritingPracticeProps) {
       <p className="prompt">{p.task.prompt_text}</p>
       {p.task.reading_hint && (
         <p aria-label="Reading hint" lang="ja">
-          {p.task.reading_hint}
+          {p.stress ? <StressText text={p.task.reading_hint} /> : p.task.reading_hint}
         </p>
       )}
       {p.task.romaji_hint && <p aria-label="Romaji hint">{p.task.romaji_hint}</p>}
