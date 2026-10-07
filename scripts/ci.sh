@@ -13,6 +13,15 @@ cargo clippy --workspace --all-targets -- -D warnings
 echo "== rust: test =="
 cargo test --workspace
 
+echo "== packs: conformance (ja-JP + ru-RU + example template) =="
+cargo run -q -p lts-langpack-cli -- validate languages/ja-JP
+cargo run -q -p lts-langpack-cli -- lint languages/ja-JP
+cargo run -q -p lts-langpack-cli -- test languages/ja-JP
+cargo run -q -p lts-langpack-cli -- validate languages/ru-RU
+cargo run -q -p lts-langpack-cli -- lint languages/ru-RU
+cargo run -q -p lts-langpack-cli -- test languages/ru-RU
+cargo run -q -p lts-langpack-cli -- lint tools/pack-templates/example-pack
+
 echo "== web: install =="
 pnpm install --frozen-lockfile
 
@@ -38,5 +47,17 @@ fi
 .venv/bin/python -m pip install -q -r tools/requirements.txt
 .venv/bin/python tools/validate_handoff.py
 .venv/bin/python -m unittest discover -s tools -p 'test_validate_handoff.py'
+
+echo "== security: advisory + secret scans (mirror of CI security job) =="
+if command -v cargo-audit >/dev/null 2>&1; then
+  cargo audit
+else
+  echo "SKIP cargo-audit (install: cargo install cargo-audit --locked)"
+fi
+if command -v gitleaks >/dev/null 2>&1; then
+  gitleaks detect --source . --redact
+else
+  echo "SKIP gitleaks (install from https://github.com/gitleaks/gitleaks)"
+fi
 
 echo "CI OK"
