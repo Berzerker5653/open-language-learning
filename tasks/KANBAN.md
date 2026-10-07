@@ -59,6 +59,10 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
 | (queued) | ja-JP | Deeper A2-band coverage as labeled drafts riding the goal map (first pass shipped with K-45: 28 kanji + 19 sentences + 15 phrase annotations; remaining depth is ongoing content production) | JA-A2-001 posture |
+| K-47 | pack | Pack-level consistency cutover: derive pack display name from manifest (or add manifest level/band-summary field) instead of the hardcoded "Japanese — A1 on-ramp (draft, unreviewed)" at lib.rs:107; gloss band tokens in the goal map with sourced CEFR copy (JLPT's official 2025 CEFR linking: N5 pass = A1, N4 = A2); fix `on-ramp` ASCII-sort-last ordering in the goal map; refresh stale docs: `docs/assessment/RELEASE_COVERAGE.yaml` status header (claims "A2/B1/B2 content is not authored", pack v0.1.0 — actual v0.2.0 with 49 A2/B1/B2 goals, 683 A2/B1/B2 units) and `languages/ja-JP/README.md` (claims `redistribution_allowed: false`; manifest:34 says true; unit/goal counts stale) | 2026-10-07 N5/claims audit |
+| K-48 | pack | Kanji-form vocabulary: add kanji `forms` + furigana readings to the ~800 N5-appropriate lexicon entries (all 3,920 entries are currently kana-only — 0 kanji forms, 0 kanji readings; N5 prints vocabulary in kanji); add a `level`/`framework_refs` band tag to lexicon records so band-appropriateness is data (schema change: `schemas/v0.2/lexicon-entry.schema.json` + docs) | 2026-10-07 N5 audit |
+| K-49 | pack | Grammar holes: add dedicated concepts + A1 units for subject particle が and quotation/companion と (9 of 11 benchmark particles covered; が is the most-tested N5 particle) and い-adjective negation/past (〜くない/〜かった entirely absent) | 2026-10-07 N5 audit |
+| K-50 | pack | Listening depth: audio-backed A1 sentence/dialogue corpus via the existing TTS pipeline (TTS-002 variants, K-02 listening runner) so the listening modality has trainable content (N5 listening = 60/180 pts; pack ships zero audio assets) | 2026-10-07 N5 audit |
 
 ## owner — human/owner gates (never self-certifiable)
 
@@ -88,5 +92,18 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 4. **K-4x polish tranche complete 2026-10-07**: K-41 stress marks,
    K-43 claims panel, K-44 phrase entries, K-46 device-tier speech
    recommendation all shipped.
-5. **Owner-side unblocks stay ranked in `owner`**: public flip (O-05) then
+5. **N5/level-consistency audit 2026-10-07 → K-47..K-50 queued**: the pack
+   would not pass JLPT N5 (official benchmarks: ~800 words, ~100 kanji,
+   60/180 listening pts) — decisive blockers are kana-only vocabulary
+   presentation (0 kanji forms across 3,920 entries), zero listening
+   content, and missing が/と/い-adjective grammar. No false JLPT claim
+   exists; the consistency defects are the hardcoded understating display
+   name, unglossed band tokens, and the diverged RELEASE_COVERAGE.yaml
+   denominator. K-47 (consistency cutover) is engine/docs; K-48/K-49/K-50
+   are pack content with disjoint file ownership. Any N5 word-list
+   crosswalk must route through verified provenance (jkindrix-jld CC
+   BY-SA or project-authored) — OpenJLPT/Waller lists are license-
+   unverified per `docs/provenance/JA_SOURCE_MATRIX.yaml`; label as
+   reference alignment only, never a pass guarantee (docs/14).
+6. **Owner-side unblocks stay ranked in `owner`**: public flip (O-05) then
    calibration data (O-04/SPEECH-007) are the only paths to REL-001.
