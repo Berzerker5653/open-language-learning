@@ -38,9 +38,9 @@ export interface DictationProps {
 
 const REASON_TEXT: Record<string, string> = {
   "speech-model-off":
-    "No speech model is selected. Choose one under Languages → Speech to use dictation.",
+    "No speech model is selected. Choose one under Languages → Speech. Recognition also needs a speech runtime on this device; without it this check abstains.",
   "aligner-unavailable":
-    "The selected speech model is not installed yet. Download it under Languages → Speech.",
+    "Recognition cannot run: this device lacks the speech runtime dictation needs, and downloading a model alone does not add one. This check abstains; text and listening activities are unaffected.",
   "asr-no-speech": "I did not catch any speech. Try again a little louder.",
   uncertain: "I am not confident I caught that. Try again.",
 };

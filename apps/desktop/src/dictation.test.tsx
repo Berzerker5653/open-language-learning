@@ -56,6 +56,21 @@ describe("dictation practice", () => {
     expect(html).toContain("No speech model is selected");
   });
 
+  it("is honest when the recognition runtime is absent", () => {
+    const html = withResult({
+      matched: null,
+      heard: "",
+      target: "おばあさん",
+      abstain_reason: "aligner-unavailable",
+      mode: "guided",
+    });
+    expect(html).toContain("lacks the speech runtime");
+    expect(html).toContain("downloading a model alone does not add one");
+    // A model download does not supply the runtime: the old copy implied
+    // it did.
+    expect(html).not.toContain("Download it under");
+  });
+
   it("treats a quality rejection as a neutral retry", () => {
     const html = withResult({
       matched: null,

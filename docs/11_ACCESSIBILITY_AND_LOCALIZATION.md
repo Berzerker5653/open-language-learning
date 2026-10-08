@@ -34,6 +34,15 @@ furigana/IME risks to test first, and a human-only sign-off block. Until a
 signed row exists, no release may claim accessibility conformance beyond the
 automated semantics checks in `apps/desktop/src/a11y.test.tsx`.
 
+As of the K-52 settings slice the route set walked by the automated smoke test
+(`scripts/smoke-desktop.sh`, 13 routes) includes the dedicated **Settings** route,
+which now carries the microphone permission toggle, romaji display, speech-model
+selection, profile export and profile delete. Those are critical-journey surfaces
+(permission flow, settings, export, deletion), so they belong in the O-03 audit:
+the automated route walk only proves they render without a panic, and the
+`a11y.test.tsx` semantics checks cannot substitute for a screen-reader pass on a
+destructive two-step confirm or a file-location disclosure.
+
 ## Speech accessibility
 
 Learners unable/unwilling to use a microphone can learn other modalities. Speaking mastery remains unearned rather than faked. The UI should say "speaking not assessed" rather than penalize the entire course.

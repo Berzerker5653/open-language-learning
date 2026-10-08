@@ -64,7 +64,7 @@ const TEMPLATE_TEXT: Record<string, string> = {
 
 const REASON_TEXT: Record<string, string> = {
   "aligner-unavailable":
-    "Speech recognition is not installed yet. Install a speech model in Settings to get feedback.",
+    "Feedback cannot run: this device has no speech alignment runtime, and installing a speech model does not add one. This attempt is not scored; other practice is unaffected.",
   "reference-media-missing": "The reference recording for this exercise is missing from the pack.",
   "reference-media-invalid": "The reference recording could not be read.",
 };

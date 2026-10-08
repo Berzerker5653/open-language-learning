@@ -89,6 +89,28 @@ Provide a documented portable export before cloud sync. Export supports:
 
 Import validates version/migrations and never overwrites a profile silently.
 
+### Implemented in the desktop app (K-52 slice, 2026-10-08)
+
+Settings → "Your data" carries the two controls the privacy notice promises:
+
+- **Export** writes one JSON document to `<data>/exports/<profile-id>-<timestamp>.json`
+  (`profile_export` → `crates/storage::Store::export_profile`, `ExportOptions::default()`).
+  **Recordings are not included in that default bundle**; the format version is
+  `storage::EXPORT_FORMAT_VERSION`, and a test pins the version, the on-disk file,
+  and the exclusion of recordings.
+- **Delete profile** (`profile_delete` → `Store::delete_profile`) is one-shot: the
+  second call for the same profile errors. The UI requires an explicit second
+  confirmation and states that deletion cannot be undone.
+
+**Import is not implemented.** The export document is a portability and backup
+artifact today, not a round-trip path; `Import validates version/migrations …`
+above remains a requirement, not a current capability. Exported copies leave app
+control at the moment they are written (see *Deletion and recovery contract*).
+
+The microphone permission toggle (`microphone-enabled`, default on) is enforced at
+capture: `recordAttempt` refuses `getUserMedia` and says why when the setting is
+off. A stored preference is not the only gate.
+
 ## Pack threat model
 
 Assume third-party packs may be malicious.

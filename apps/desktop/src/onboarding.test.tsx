@@ -96,4 +96,21 @@ describe("onboarding", () => {
     expect(html).not.toContain('aria-label="Progress"');
     expect(html).not.toContain("sign up");
   });
+
+  it("keeps an install failure from dead-ending the wizard", () => {
+    const html = render({
+      step: "packs",
+      selectedPack: "org.openlanguage.ja-demo",
+      installedPacks: [],
+      error: "Could not install that pack: disk full",
+    });
+    // Visible, actionable path: retry the install or pick another pack
+    // (the engine requires an installed pack, so "continue without" is
+    // not offered as a fake way out).
+    expect(html).toContain("Press Install again to retry");
+    expect(html).toContain("select a different pack");
+    expect(html).toContain('aria-describedby="packs-continue-note"');
+    // Continue stays disabled while unmet — but explained, never silent.
+    expect(html).toContain("disabled");
+  });
 });

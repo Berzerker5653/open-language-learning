@@ -906,6 +906,148 @@ fn set_display_settings(
     display_settings_at(&data, &profile_id)
 }
 
+// ---------------------------------------------------------------------------
+// SETTINGS-001: the Settings surface — microphone decision, romanisation
+// display, and the profile-data promises the privacy notice makes
+// (export/delete). Every command follows the `*_at(&data_dir(), …)`
+// testability pattern: the UI supplies only a profile id, validated
+// against the store; paths never cross the IPC boundary (docs/07).
+// ---------------------------------------------------------------------------
+
+/// The profile's microphone decision. Unset (profile created but
+/// onboarding not completed) reads as off: the microphone is opt-in and
+/// the UI must not request `getUserMedia` when this is false.
+fn microphone_enabled_at(data: &Path, profile_id: &str) -> Result<bool, String> {
+    resume_profile_at(data, profile_id)?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    Ok(store
+        .get_setting(profile_id, "microphone-enabled")
+        .ok()
+        .flatten()
+        .and_then(|v| v.as_bool())
+        .unwrap_or(false))
+}
+
+fn set_microphone_enabled_at(
+    data: &Path,
+    profile_id: &str,
+    enabled: bool,
+) -> Result<bool, String> {
+    resume_profile_at(data, profile_id)?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    store
+        .set_setting(profile_id, "microphone-enabled", &serde_json::json!(enabled))
+        .map_err(|e| e.to_string())?;
+    microphone_enabled_at(data, profile_id)
+}
+
+#[tauri::command]
+fn get_microphone_enabled(profile_id: String) -> Result<bool, String> {
+    microphone_enabled_at(&data_dir(), &profile_id)
+}
+
+#[tauri::command]
+fn set_microphone_enabled(profile_id: String, enabled: bool) -> Result<bool, String> {
+    set_microphone_enabled_at(&data_dir(), &profile_id, enabled)
+}
+
+/// Romaji display preference. The values are exactly what the READ-001
+/// reader (`reader_display`) consumes — "always" and "off" are
+/// special-cased there and anything else falls back to auto — matching
+/// `user_modes: [auto, always, off]` in the JA orthography policy.
+fn romaji_mode_at(data: &Path, profile_id: &str) -> Result<String, String> {
+    resume_profile_at(data, profile_id)?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    Ok(store
+        .get_setting(profile_id, "romaji-mode")
+        .ok()
+        .flatten()
+        .and_then(|v| v.as_str().map(String::from))
+        .filter(|s| s == "always" || s == "off")
+        .unwrap_or_else(|| "auto".to_string()))
+}
+
+fn set_romaji_mode_at(data: &Path, profile_id: &str, mode: &str) -> Result<String, String> {
+    let mode = match mode {
+        "auto" | "always" | "off" => mode,
+        _ => return Err("romaji-mode must be auto, always, or off".to_string()),
+    };
+    resume_profile_at(data, profile_id)?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    store
+        .set_setting(profile_id, "romaji-mode", &serde_json::json!(mode))
+        .map_err(|e| e.to_string())?;
+    romaji_mode_at(data, profile_id)
+}
+
+#[tauri::command]
+fn get_romaji_mode(profile_id: String) -> Result<String, String> {
+    romaji_mode_at(&data_dir(), &profile_id)
+}
+
+#[tauri::command]
+fn set_romaji_mode(profile_id: String, mode: String) -> Result<String, String> {
+    set_romaji_mode_at(&data_dir(), &profile_id, &mode)
+}
+
+/// The privacy notice promises "You can export … your local profile data
+/// at any time": write the versioned `ExportBundle` JSON under
+/// `<data>/exports/` and return the path. Recording *metadata* is
+/// excluded by default (`ExportOptions::default`), and recording files
+/// are never part of a bundle (crates/storage/src/export.rs).
+fn profile_export_at(data: &Path, profile_id: &str) -> Result<String, String> {
+    resume_profile_at(data, profile_id)?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let bundle = store
+        .export_profile(
+            profile_id,
+            &rfc3339_utc(now_secs()),
+            &lts_storage::ExportOptions::default(),
+        )
+        .map_err(|e| e.to_string())?;
+    let dir = data.join("exports");
+    std::fs::create_dir_all(&dir).map_err(|e| e.to_string())?;
+    // The id comes from the store, but keep the filename to safe chars.
+    let safe: String = profile_id
+        .chars()
+        .map(|c| {
+            if c.is_ascii_alphanumeric() || c == '-' || c == '_' {
+                c
+            } else {
+                '_'
+            }
+        })
+        .collect();
+    let stamp = rfc3339_utc(now_secs()).replace(':', "");
+    let path = dir.join(format!("{safe}-{stamp}.json"));
+    let json = serde_json::to_string_pretty(&bundle).map_err(|e| e.to_string())?;
+    std::fs::write(&path, json).map_err(|e| e.to_string())?;
+    Ok(path.to_string_lossy().into_owned())
+}
+
+#[tauri::command]
+fn profile_export(profile_id: String) -> Result<String, String> {
+    profile_export_at(&data_dir(), &profile_id)
+}
+
+/// The other half of that promise. `Store::delete_profile` is idempotent
+/// at the SQL level, so the profile is validated first: deleting an
+/// already-deleted or unknown profile errors instead of silently
+/// succeeding. Recording files are caller-owned; this build never
+/// persists captured audio (attempts live in memory only).
+fn profile_delete_at(data: &Path, profile_id: &str) -> Result<(), String> {
+    resume_profile_at(data, profile_id)?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    store
+        .delete_profile(profile_id)
+        .map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn profile_delete(profile_id: String) -> Result<(), String> {
+    profile_delete_at(&data_dir(), &profile_id)
+}
+
 /// True when every character of `s` is Hiragana or Katakana. Script
 /// detection is Unicode-based, never locale-based (engine neutrality).
 fn is_kana_script(s: &str) -> bool {
@@ -5112,6 +5254,12 @@ pub fn run() {
             goal_map,
             display_settings,
             set_display_settings,
+            get_microphone_enabled,
+            set_microphone_enabled,
+            get_romaji_mode,
+            set_romaji_mode,
+            profile_export,
+            profile_delete,
             pack_claims,
             catalog_packs,
             install_catalog_pack,
@@ -6694,6 +6842,72 @@ mod tests {
             "auto",
             "invalid stored values fall back to auto"
         );
+    }
+
+    /// SETTINGS-001: Settings-surface commands. The microphone decision
+    /// round-trips (off when unset — opt-in); romaji-mode accepts exactly
+    /// the reader's vocabulary (auto/always/off) and rejects anything
+    /// else without writing.
+    #[test]
+    fn settings_microphone_and_romaji_round_trip() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let p = create_local_profile(data, "Hunter").unwrap();
+
+        assert!(
+            !microphone_enabled_at(data, &p.id).unwrap(),
+            "microphone is opt-in when unset"
+        );
+        assert!(set_microphone_enabled_at(data, &p.id, true).unwrap());
+        assert!(
+            microphone_enabled_at(data, &p.id).unwrap(),
+            "microphone setting persists"
+        );
+
+        assert_eq!(romaji_mode_at(data, &p.id).unwrap(), "auto");
+        assert_eq!(set_romaji_mode_at(data, &p.id, "off").unwrap(), "off");
+        assert_eq!(romaji_mode_at(data, &p.id).unwrap(), "off");
+        assert_eq!(set_romaji_mode_at(data, &p.id, "always").unwrap(), "always");
+        assert!(set_romaji_mode_at(data, &p.id, "sometimes").is_err());
+        assert!(set_romaji_mode_at(data, &p.id, "").is_err());
+        assert_eq!(
+            romaji_mode_at(data, &p.id).unwrap(),
+            "always",
+            "a rejected value never overwrites the stored one"
+        );
+        assert!(microphone_enabled_at(data, "prof-does-not-exist").is_err());
+    }
+
+    /// SETTINGS-001: the privacy notice promises export and delete, so
+    /// both must exist. Export is versioned JSON naming the profile,
+    /// excluding recording metadata by default; delete removes the
+    /// profile, and a second delete errors rather than silently
+    /// succeeding.
+    #[test]
+    fn profile_export_writes_bundle_and_delete_is_one_shot() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", true).unwrap();
+
+        let path = profile_export_at(data, &p.id).unwrap();
+        let json = std::fs::read_to_string(&path).unwrap();
+        let bundle: serde_json::Value = serde_json::from_str(&json).unwrap();
+        assert_eq!(bundle["format_version"], lts_storage::EXPORT_FORMAT_VERSION);
+        assert_eq!(bundle["profile"]["id"], p.id);
+        assert!(
+            bundle.get("recordings").is_none(),
+            "recordings stay out of the export by default"
+        );
+
+        profile_delete_at(data, &p.id).unwrap();
+        assert!(list_profiles_at(data).unwrap().is_empty());
+        assert!(
+            profile_delete_at(data, &p.id).is_err(),
+            "a second delete errors"
+        );
+        assert!(profile_export_at(data, &p.id).is_err());
     }
 
     /// Community pack flow: a local .lpk import goes through the same

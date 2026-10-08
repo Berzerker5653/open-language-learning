@@ -40,6 +40,7 @@ import {
   type ScenarioSummaryView,
   type ScenarioView,
 } from "./scenario";
+import { Settings, type RomajiMode } from "./settings";
 
 type Invoke = (cmd: string, args?: Record<string, unknown>) => Promise<unknown>;
 
@@ -111,6 +112,7 @@ export function App() {
     | "words"
     | "placement"
     | "kanji"
+    | "settings"
   >("practice");
   const [notice, setNotice] = useState<PrivacyNotice>({
     title: "Your data stays on this device",
@@ -209,6 +211,14 @@ export function App() {
   const [kanjiCorrect, setKanjiCorrect] = useState(false);
   const [kanjiCorrectChoice, setKanjiCorrectChoice] = useState("");
   const [kanjiError, setKanjiError] = useState<string | null>(null);
+  // SETTINGS-001: engine-backed settings state. micEnabled mirrors the
+  // stored `microphone-enabled`; it gates getUserMedia at the capture
+  // site, so a wrong value here is a privacy bug, not a cosmetic one.
+  const [micEnabled, setMicEnabled] = useState(false);
+  const [romajiMode, setRomajiMode] = useState<RomajiMode>("auto");
+  const [settingsExportPath, setSettingsExportPath] = useState<string | null>(null);
+  const [settingsDeleteArmed, setSettingsDeleteArmed] = useState(false);
+  const [settingsError, setSettingsError] = useState<string | null>(null);
 
   const [practiceDraft, setPracticeDraft] = useState("");
   // The sticky header hides content when the page is scrolled; reset the
@@ -313,6 +323,9 @@ export function App() {
             packId,
             micEnabled: false,
           });
+          setMicEnabled(
+            (await inv("get_microphone_enabled", { profileId: p.id })) as boolean,
+          );
           const home = (await inv("home_state", {
             profileId: p.id,
           })) as { display_name: string; plan: SessionPlan };
@@ -522,6 +535,7 @@ export function App() {
         const envs = (await inv("world_state", { profileId })) as WorldEnvironment[];
         setEnvironments(envs);
         setDisplay((await inv("display_settings", { profileId })) as DisplaySettingsView);
+        await loadProfilePrefs(profileId);
         void refreshLanguages(profileId).catch(() => {});
       } catch (e) {
         setOnboardError(`Setup could not be completed: ${String(e)}`);
@@ -549,6 +563,7 @@ export function App() {
       const envs = (await inv("world_state", { profileId: p.id })) as WorldEnvironment[];
       setEnvironments(envs);
       setDisplay((await inv("display_settings", { profileId: p.id })) as DisplaySettingsView);
+      await loadProfilePrefs(p.id);
       void refreshLanguages(p.id).catch(() => {});
       setStep("done");
     } catch (e) {
@@ -570,6 +585,89 @@ export function App() {
         (await inv("set_display_settings", { profileId, stressMode: mode })) as DisplaySettingsView,
       );
     }
+  }
+
+  // SETTINGS-001: Settings controls are engine-backed; values come from
+  // and go back to the store via the new commands — no UI-only setting.
+  async function loadProfilePrefs(pid: string) {
+    if (!inv) return;
+    try {
+      setMicEnabled((await inv("get_microphone_enabled", { profileId: pid })) as boolean);
+      setRomajiMode((await inv("get_romaji_mode", { profileId: pid })) as RomajiMode);
+    } catch {
+      /* keep the conservative defaults; opening Settings re-reads them */
+    }
+  }
+
+  async function openSettings() {
+    setRoute("settings");
+    setSettingsError(null);
+    setSettingsExportPath(null);
+    setSettingsDeleteArmed(false);
+    if (!inv || !profileId) return;
+    try {
+      setMicEnabled((await inv("get_microphone_enabled", { profileId })) as boolean);
+      setRomajiMode((await inv("get_romaji_mode", { profileId })) as RomajiMode);
+      await refreshSpeech();
+    } catch (e) {
+      setSettingsError(String(e));
+    }
+  }
+
+  async function setMicSetting(enabled: boolean) {
+    if (!inv || !profileId) return;
+    setSettingsError(null);
+    try {
+      setMicEnabled((await inv("set_microphone_enabled", { profileId, enabled })) as boolean);
+    } catch (e) {
+      setSettingsError(String(e));
+    }
+  }
+
+  async function setRomajiSetting(mode: RomajiMode) {
+    if (!inv || !profileId) return;
+    setSettingsError(null);
+    try {
+      setRomajiMode((await inv("set_romaji_mode", { profileId, mode })) as RomajiMode);
+    } catch (e) {
+      setSettingsError(String(e));
+    }
+  }
+
+  async function exportProfileData() {
+    if (!inv || !profileId) return;
+    setSettingsError(null);
+    try {
+      setSettingsExportPath((await inv("profile_export", { profileId })) as string);
+    } catch (e) {
+      setSettingsError(String(e));
+    }
+  }
+
+  // Two-step delete: the first click only arms the confirmation; only
+  // the labelled confirm control fires `profile_delete` (never a
+  // native window.confirm).
+  async function confirmProfileDelete() {
+    if (!inv || !profileId) return;
+    setSettingsError(null);
+    try {
+      await inv("profile_delete", { profileId });
+    } catch (e) {
+      setSettingsError(String(e));
+      return;
+    }
+    // The profile no longer exists: back to the wizard, clean state.
+    setProfileId(null);
+    setDisplayName("");
+    setPlan(EMPTY_PLAN);
+    setEnvironments([]);
+    setGoals([]);
+    setProgress([]);
+    setMicEnabled(false);
+    setRomajiMode("auto");
+    setSettingsExportPath(null);
+    setSettingsDeleteArmed(false);
+    setStep("welcome");
   }
 
   async function openProgress() {
@@ -1397,6 +1495,15 @@ export function App() {
   function recordAttempt() {
     void (async () => {
       let stream: MediaStream;
+      // SETTINGS-001: the stored `microphone-enabled` setting is enforced
+      // at the capture site — while it is off, getUserMedia is never
+      // requested. (Without the native engine no setting exists.)
+      if (inv && !micEnabled) {
+        setAudioMsg(
+          "The microphone is turned off, so the app will not ask for microphone access. You can turn it on in Settings; everything else works without a microphone.",
+        );
+        return;
+      }
       try {
         stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       } catch (e) {
@@ -1601,6 +1708,14 @@ export function App() {
           >
             Kanji
           </button>
+          <button
+            type="button"
+            className="tab"
+            aria-current={route === "settings" ? "page" : undefined}
+            onClick={() => void openSettings()}
+          >
+            Settings
+          </button>
         </nav>
       }
     >
@@ -1637,21 +1752,28 @@ export function App() {
           )}
         </>
       ) : route === "dictation" ? (
-        <DictationPractice
-          target={dictTarget}
-          onTargetChange={setDictTarget}
-          sentence={dictSentence}
-          onNewSentence={() => newDictationSentence()}
-          result={dictResult}
-          recording={recording}
-          hasAttempt={attemptUrl !== null}
-          onRecord={() => {
-            captureRouteRef.current = "dictation";
-            recordAttempt();
-          }}
-          onStop={stopAndCheck}
-          onPlayAttempt={() => attemptUrl && playBlobUrl(attemptUrl)}
-        />
+        <>
+          {audioMsg && (
+            <p role="status" className="notice">
+              {audioMsg}
+            </p>
+          )}
+          <DictationPractice
+            target={dictTarget}
+            onTargetChange={setDictTarget}
+            sentence={dictSentence}
+            onNewSentence={() => newDictationSentence()}
+            result={dictResult}
+            recording={recording}
+            hasAttempt={attemptUrl !== null}
+            onRecord={() => {
+              captureRouteRef.current = "dictation";
+              recordAttempt();
+            }}
+            onStop={stopAndCheck}
+            onPlayAttempt={() => attemptUrl && playBlobUrl(attemptUrl)}
+          />
+        </>
       ) : route === "shadowing" ? (
         <section aria-label="Shadowing">
           <h2>Shadowing</h2>
@@ -2096,6 +2218,23 @@ export function App() {
           onTransfer={(id) => void transferScenario(id)}
           onFinish={() => void finishScenario()}
           onBack={() => void openScenarios()}
+        />
+      ) : route === "settings" ? (
+        <Settings
+          microphoneEnabled={micEnabled}
+          onSetMicrophone={(v) => void setMicSetting(v)}
+          romajiMode={romajiMode}
+          onSetRomajiMode={(m) => void setRomajiSetting(m)}
+          speechModel={speechModel}
+          speechModels={speechModels}
+          onSelectSpeechModel={(id) => void selectSpeechModel(id)}
+          exportPath={settingsExportPath}
+          onExport={() => void exportProfileData()}
+          deleteArmed={settingsDeleteArmed}
+          onArmDelete={() => setSettingsDeleteArmed(true)}
+          onCancelDelete={() => setSettingsDeleteArmed(false)}
+          onConfirmDelete={() => void confirmProfileDelete()}
+          error={settingsError}
         />
       ) : practiceTarget && practiceTask ? (
         <>

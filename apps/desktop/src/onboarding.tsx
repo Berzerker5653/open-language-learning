@@ -45,6 +45,13 @@ export interface OnboardingProps {
 }
 
 export function Onboarding(p: OnboardingProps) {
+  // The engine requires an installed active pack to finish setup
+  // (`complete_onboarding` rejects an uninstalled pack), so "continue
+  // without" is not an honest option in this build. After an install
+  // failure the actionable path is retry — the Install button stays
+  // enabled — or another pack; Continue is explained, never silently
+  // disabled.
+  const canContinue = p.selectedPack !== null && p.installedPacks.includes(p.selectedPack);
   return (
     <section aria-label="Onboarding">
       {p.step !== "resume" && (
@@ -147,11 +154,24 @@ export function Onboarding(p: OnboardingProps) {
               Languages page. This never changes the app&apos;s own interface language.
             </small>
           </p>
+          {!canContinue ? (
+            <p
+              className="notice"
+              id="packs-continue-note"
+              data-testid="packs-continue-note"
+              role="status"
+            >
+              {p.error
+                ? "The install did not complete, so nothing was changed. Press Install again to retry this pack, or select a different pack — Continue unlocks once a pack is installed."
+                : "Select a pack and install it to continue."}
+            </p>
+          ) : null}
           <button
             type="button"
             className="btn btn--primary"
             onClick={p.onContinue}
-            disabled={p.selectedPack === null || !p.installedPacks.includes(p.selectedPack)}
+            disabled={!canContinue}
+            aria-describedby={canContinue ? undefined : "packs-continue-note"}
           >
             Continue
           </button>

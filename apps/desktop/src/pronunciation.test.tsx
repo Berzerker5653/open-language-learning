@@ -72,6 +72,27 @@ describe("PronunciationPractice", () => {
     expect(html).not.toMatch(/holding the あ/);
   });
 
+  it("does not promise feedback the absent aligner runtime cannot give", () => {
+    const html = renderToStaticMarkup(
+      <PronunciationPractice
+        {...base}
+        result={{
+          corrections: [],
+          abstain_reason: "aligner-unavailable",
+          pitch: EMPTY_PITCH,
+          mode: "guided",
+          mode_reason: "not-scored",
+        }}
+      />,
+    );
+    expect(html).toContain("no speech alignment runtime");
+    expect(html).toContain("installing a speech model does not add one");
+    // The old copy sent users to a nonexistent Settings surface and
+    // implied a model download supplies the runtime; neither may return.
+    expect(html).not.toContain("Install a speech model in Settings");
+    expect(html).not.toContain("to get feedback");
+  });
+
   it("shows normalized pitch contours accessibly, never Hz or grades", () => {
     const html = renderToStaticMarkup(
       <PronunciationPractice
