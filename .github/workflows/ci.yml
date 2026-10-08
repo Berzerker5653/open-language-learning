@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   pull_request:
+  # Manual only: triggers the untested-platform bundle builds below.
+  workflow_dispatch:
 
 jobs:
   rust:
@@ -88,6 +90,47 @@ jobs:
       - name: Compile-check desktop app
         run: cargo check -p lts-desktop --all-targets
 
+  # PLAT-001 / ADR-0015 (owner decision 2026-10-07): builds for untested
+  # platforms may exist so people can try them and file runtime reports. This
+  # job produces Windows/macOS bundles and uploads them as workflow artifacts
+  # whose NAME carries the untested marker. A bundle proves only that it linked:
+  # a platform leaves `untested_platforms` only when a human runtime report
+  # lands in docs/platform/PLATFORM_REPORTS.yaml (docs/13). Nothing here
+  # publishes to a release — that stays owner gate O-05.
+  # Manual-only: three-OS bundle builds are too slow for every push.
+  # Trigger with `gh workflow run ci.yml`.
+  platform-bundles:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 26
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - uses: dtolnay/rust-toolchain@1.97.1
+      - uses: Swatinem/rust-cache@v2
+      - name: Build unsigned bundles (runtime untested)
+        working-directory: apps/desktop
+        run: pnpm tauri build
+      - name: Upload bundles
+        uses: actions/upload-artifact@v4
+        with:
+          name: open-language-learning-${{ matrix.os }}-UNTESTED-${{ github.sha }}
+          path: |
+            apps/desktop/src-tauri/target/release/bundle/**/*.msi
+            apps/desktop/src-tauri/target/release/bundle/**/*.exe
+            apps/desktop/src-tauri/target/release/bundle/**/*.dmg
+            apps/desktop/src-tauri/target/release/bundle/**/*.app/
+          if-no-files-found: error
+          retention-days: 14
+
   security:
     runs-on: ubuntu-24.04
     steps:
@@ -112,6 +155,15 @@ jobs:
         run: |
           cargo install cargo-audit --locked
           cargo audit
+      - name: SBOM (CycloneDX 1.5, Rust + npm)
+        run: |
+          python3 -m pip install --quiet PyYAML==6.0.3
+          python3 tools/sbom.py --output target/sbom/open-language-learning.cdx.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sbom-cyclonedx
+          path: target/sbom/
+          retention-days: 14
 
   schemas:
     runs-on: ubuntu-24.04
