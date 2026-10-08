@@ -173,6 +173,17 @@ Each lexical entry should support:
 - prerequisite orthography/phonology where relevant;
 - example references;
 - semantic tags;
+- optional `band` and `framework_refs` using the same band vocabulary as
+  curriculum goals (`on-ramp`, `A1`…`C2`) — reference alignment only, set only from
+  goal linkage in the pack's own curriculum, never a JLPT pass or certification
+  claim (docs/18). A dictionary "common word" marker is not a band: it says the
+  word is common in the language, not that a beginner meets it at that level.
+- `forms[].script` / `readings[].script` use the pack's bare script labels
+  (`hiragana`, `katakana`, `kanji`), which is what the engine's kana and ruby
+  checks compare against; the `ja.orth.*` ids declared in
+  `language/orthography.yaml` are what curriculum orthography references point
+  at. Two vocabularies for one idea is a known inconsistency pending a
+  reconciliation pass — do not add a third.
 - source/provenance IDs;
 - review/trust status.
 

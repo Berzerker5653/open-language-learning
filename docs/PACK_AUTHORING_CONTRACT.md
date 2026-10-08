@@ -39,7 +39,7 @@ and those disagree, they win — fix this document.
 | `assessments/definitions.jsonl` | assessment | one per line |
 | `grammar/concepts.jsonl` | concept | one per line |
 | `grammar/dependencies.yaml` | (prerequisite mirror; structural) | — |
-| `lexicon/*.jsonl` | lexical-entry | one per line |
+| `lexicon/*.jsonl` | lexical-entry | one per line; optional `band` (same band vocabulary as goals: `on-ramp`, `A1`…`C2`) and optional `framework_refs` — reference alignment only, never a certification claim (docs/18) |
 | `sources.jsonl` | source-entry | one per line |
 | `licenses.jsonl` | license-inventory | one per line |
 | `reviews.jsonl` | review-record | one per line |

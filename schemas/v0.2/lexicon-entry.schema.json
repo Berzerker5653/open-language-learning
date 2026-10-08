@@ -77,6 +77,16 @@
     },
     "registers": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
     "semantic_tags": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "band": {
+      "enum": ["on-ramp", "A1", "A2", "B1", "B2", "C1", "C2"],
+      "description": "Optional framework band this entry aligns to, using the same band vocabulary as curriculum goals (goal.schema.json). Reference alignment only: it is never a certification, JLPT pass, or completion claim (docs/18). Set only with evidence (goal linkage or corpus/common-word frequency evidence) and human review before verified status."
+    },
+    "framework_refs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true,
+      "description": "Optional framework alignment references (e.g. \"jf-standard:onramp\"), mirroring goal framework_refs. References a framework as alignment vocabulary only; never asserts certification."
+    },
     "prerequisite_orthography": {
       "type": "array",
       "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" }
