@@ -31,5 +31,6 @@ Existing:
 - 0014 ai-generated content posture (one pack-level disclosure, not per-item draft badges)
 - 0015 publishing other-OS builds with a community-confirmed platform ladder
 - 0016 pack-shipped model-output audio for the listening modality
+- 0017 unfunded posture: exclusively AI-created content, guided-only pronunciation feedback for desktop 1.0
 
 Template: `template.md`.

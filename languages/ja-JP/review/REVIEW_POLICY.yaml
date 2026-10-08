@@ -141,6 +141,29 @@ owner_scope_decisions:
       the ban on band-completeness claims (docs/18). AI still promotes only to
       screened; validated/verified still require human records.
     record: docs/adr/0014-ai-generated-content-posture.md
+  - path: ship_without_qualified_review_or_calibration_data
+    date: "2026-10-08"
+    owner_decision: >
+      No funding will be put into the project, so consented learner recordings,
+      qualified labelers and paid review are unavailable; all first-party
+      content is exclusively AI-created, and the project stays non-public until
+      the owner has completed a hands-on test pass.
+    implemented_as: >
+      Desktop 1.0 ships guided-only pronunciation feedback: no automatic
+      pronunciation score, no automatic pronunciation mastery, no learner-facing
+      accuracy claim. SPEECH-007 leaves the release-critical chain in
+      tasks/ROADMAP.yaml, and this pack's speech profile stays `assess-guided`
+      with calibration null. Qualified-human review is no longer a release
+      blocker: the pack ships at its honest posture (AI-generated,
+      review-needed) under the ADR-0014 pack-level disclosure.
+    unchanged: >
+      Promotion still requires a human review record the validator enforces on
+      the flip; `verified`/`reference` still require qualified human categories;
+      the ban on band-completeness and JLPT-pass claims (docs/18) still applies;
+      ADR-0013 reference-contrast abstention and pack-declared numeric
+      production targets stay in force.
+    record: docs/adr/0017-unfunded-ai-only-posture.md
+
 
 # ---------------------------------------------------------------------------
 # AI screening layer (owner-requested 2026-10-04; honest boundaries)

@@ -761,7 +761,9 @@ tasks:
   title: Qualified Japanese content review — A1
   dependencies:
   - JA-A1-002
-  - SPEECH-007
+  # SPEECH-007 removed from this dependency list 2026-10-08 by ADR-0017 (owner
+  # scope decision: guided-only pronunciation feedback for desktop 1.0). Review
+  # and calibration stay independent ongoing work.
   - REVIEW-001
   read_first:
   - docs/09_TESTING_AND_ACCEPTANCE.md
@@ -774,7 +776,13 @@ tasks:
   - Reference pack trust state advances only if review gate criteria are met.
   - The band coverage and qualified-human review gates defined by REVIEW-001 pass for the exact pack version;
     unresolved mandatory coverage or critical findings keep this task blocked.
-  required_for_desktop_1_0: true
+  # Not a desktop-1.0 blocker as of ADR-0017 §2 (owner scope decision 2026-10-08:
+  # unfunded project, exclusively AI-created content). The pack ships at its honest
+  # posture — AI-generated, review-needed — and promotion to validated/verified
+  # still requires human review records via O-02 community review, which the
+  # validator enforces on any status flip. Band coverage and provenance stay
+  # enforced by lint/audit-sources regardless.
+  required_for_desktop_1_0: false
 - id: SPEECH-007
   milestone: M6
   priority: P0
@@ -802,7 +810,12 @@ tasks:
     feedback within a declared useful coverage envelope. If none meets the frozen gates, stable RC remains
     blocked; guided alpha/beta practice may continue and changing this target requires an explicit owner scope
     decision.
-  required_for_desktop_1_0: true
+  # Owner scope decision 2026-10-08 (ADR-0017) — the explicit change this task's
+  # acceptance text requires: desktop 1.0 ships guided-only pronunciation feedback,
+  # so calibration data is no longer a release blocker. Re-enable by funding the
+  # consented panel in benchmarks/speech/datasets/SOURCING.md; the protocol,
+  # consent instrument and labeler rubric stay in the repo.
+  required_for_desktop_1_0: false
 - id: K-01
   milestone: M6
   priority: P1
