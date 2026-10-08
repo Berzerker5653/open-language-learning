@@ -14,6 +14,12 @@ Do not market pronunciation scoring as accent elimination or perfect native-equi
 
 State model/provider/feature versions, supported speech varieties and tested populations/devices, feature qualification limits and abstention behavior. Guided reference comparison is useful practice, but must not be labeled calibrated automatic scoring. Technical/quality failures and abstention produce no linguistic penalties.
 
+Speech-runtime availability is stated per platform and per CPU, never as a blanket availability claim in either direction: shipped Linux x86-64 desktop builds carry the pinned whisper.cpp alignment sidecar and its `ggml-tiny` weights (ADR-0019), so pronunciation feedback and dictation run there only when the host CPU meets the payload's compiled instruction floor, while payload-free bare/dev builds and today's Windows and macOS builds carry no runtime and abstain with the reason that is true (`speech-model-off`, `aligner-cpu-unsupported`, or `aligner-unavailable`).
+
+The instruction floor and the speedup are measured facts, quoted with their sample: the payload is compiled for x86-64-v3 (SSE4.2, F16C, FMA, BMI2, AVX, AVX2; no AVX-512) because at the pinned commit the same 2.2 s pack sample (`languages/ja-JP/media/ja.sent.drink-coffee.wav`, 2.2175 s of audio) took 3.6 s per utterance on a portable baseline build versus 370-397 ms on the x86-64-v3 build, roughly nine times faster (ADR-0019). Quote it as one sample on one machine class, not a performance guarantee, and state the 82,016,429-byte payload it buys (staging-machine figure) as part of the availability statement.
+
+None of that is a capability claim: pronunciation feedback stays guided and no pronunciation-accuracy claim is permitted (ADR-0017); the alignment number stays a text-match ratio, not pronunciation evidence (ADR-0008); a staged linux-x64 payload licenses no claim that Windows or macOS work, and platform status comes only from human runtime reports, never from a build script (ADR-0015).
+
 ## Privacy claims
 
 "Local/offline" means tested network-independent execution for that capability. If a cloud provider is enabled, the UI must make the changed privacy boundary clear.

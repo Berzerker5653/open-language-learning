@@ -67,7 +67,7 @@ refinements + optional platforms**, not new core systems.
 | Dictation / speak-to-check | shipped (guided) | ADR-0012; automatic = GATED |
 | Shadowing (K-11), discrimination (K-10), listening (K-02) | shipped (guided) | |
 | **Dictation targets from pack content** | shipped (guided) | `dictation_target_at` picks kana-only sentences, rotates; ties dictation to curriculum |
-| **Mora/segment pronunciation feedback** | BUILD (guided) | needs a forced aligner (new dep/licensing); guided only, automatic GATED |
+| **Mora/segment pronunciation feedback** | BUILD (guided) | the constrained aligner now ships as a bundled sidecar (ADR-0019), but its `whisper.cpp` word tokens are not mora timing; mora/segment feedback still needs a phoneme-level aligner, and MFA/wav2vec2 stay rejected per ADR-0008. Guided only, automatic GATED |
 | **Real learner recordings as exercise media** | AUTHOR | no longer required for length scoring (ADR-0013 declared target); still the only path to a *calibrated* target (SPEECH-007) |
 | **Automatic speech scoring / speech mastery** | **GATED** | SPEECH-007; sole user cannot satisfy |
 

@@ -715,3 +715,57 @@ What no automated gate can close: O-03's human AT pass (Settings is now inside i
 scope), the security/privacy review, qualified human content review (O-02, delegated
 to community PRs), and O-05 — shipping the audio-bearing pack is a version bump plus
 the owner's call on the repo going public.
+
+## 2026-10-08 (later) — the aligner runtime ships (D4, ADR-0019)
+
+Owner decision: bundle the whisper.cpp alignment runtime as a sidecar. A
+released desktop build used to contain the matcher and no ASR, so pronunciation
+feedback and dictation abstained on every machine except the one that had been
+used for benchmarking.
+
+- `scripts/stage-aligner-sidecar.sh` builds whisper.cpp at pinned ref
+  `60c0be6ac8fa71b1a2ae2dd938a31a34a508e774` (1.9.4, MIT) with explicit portable
+  cmake flags and fetches `ggml-tiny.bin` (77,691,713 B, sha256 `be07e048…`)
+  behind a size/hash gate, staging a gitignored payload: 82,016,429 B here
+  (runtime closure 4,323,144 B + weights + manifest). `verify` recomputes every
+  declared size and sha256 and rejects symlinks, path escapes and payload files
+  the manifest does not list — demonstrated against a truncated copy of the real
+  model, which it refused on both bytes and digest.
+- The payload carries an explicit x86-64-v3 floor because a portable build
+  measured 3.6 s against 370–397 ms on the same 2.2 s sample (≈9×; `objdump`:
+  14,833 `%ymm`, 0 `%zmm`). A CPU below the floor is refused as
+  `aligner-cpu-unsupported` instead of being handed a crawling aligner.
+- `crates/speech-runtime/src/sidecar.rs` gates the payload at load (schema,
+  component, platform, CPU, every declared file at its declared size and never a
+  symlink) and points the child process at the payload's own libraries. Worth
+  recording: the hand-rolled SHA-256 that arrived with this design clobbered its
+  own buffer length, so `finalize` spun forever and `verify_hashes` hung on any
+  non-empty file — replaced by the workspace `sha2` crate, with
+  `a_tampered_payload_byte_fails_the_deep_check_and_names_the_file` pinning the
+  behaviour the hang had hidden.
+- `overlay` writes `dist/variants/tauri.aligner.json` (each staged platform dir →
+  `aligner/<platform>`, MIT notice → `aligner/LICENSE.whisper-cpp.txt`) so the
+  base `tauri.conf.json` stays payload-free and bare/dev builds keep working and
+  abstain; `stage` refuses a payload root git could commit.
+  `scripts/test-stage-aligner-sidecar.sh` (12 hermetic checks) is now a CI step.
+- User-visible: Languages → Speech states which runtime this build carries —
+  bundled `whisper.cpp 1.9.4`, a development runtime path, an unmet CPU floor
+  naming x86-64-v3, or genuinely absent. That panel and Settings both asserted
+  "this build does not include" whisper.cpp, which stopped being true the moment
+  the payload shipped; both are build-neutral now, and the tests that pinned the
+  old wording were rewritten to pin the invariant instead of the sentence.
+
+Gates: workspace suite green with 0 failures (`lts-desktop --lib` 74,
+`lts-speech-runtime` 32 — the sidecar suite contributing 11); clippy
+`--workspace --all-targets -D warnings` clean **after repairing three lints that
+were already red at HEAD** (two `err().expect()` in `crates/langpack/tests/media.rs`
+from the D1 commit, one `useless_vec` in the desktop band-ordering test);
+`cargo fmt --all --check` clean; the seven pack gates 0 errors / 0 warnings; tsc,
+eslint and prettier clean with vitest 13 files / 135 tests; `SMOKE OK
+(26 routes walked)` and, for a fresh profile, `aligner runtime: no:speech-model-off`.
+Pointing the payload at the app by hardlinking it into the dev resource directory
+(`target/debug/aligner/linux-x64` — in dev that is the executable's own directory,
+not a `resources` subdirectory) turned the same walkthrough line into
+`aligner:yes:bundled`, and removing it while a `~/.cache/lts-bench` tree exists fell
+back to `aligner:yes:bench`. `cargo tauri dev` itself carries no payload, which is
+the point of keeping the base `tauri.conf.json` payload-free.

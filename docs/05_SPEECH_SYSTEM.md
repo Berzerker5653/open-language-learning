@@ -92,7 +92,11 @@ Use ASR/semantic interaction; pronunciation feedback should be sparse and confid
 
 ## Alignment
 
-Alignment output should support time spans for language-relevant units. Japanese ideally supports phoneme/phone and mora-like grouping. Alignment provider must emit confidence and abstain when mismatch is large.
+The shipped aligner (ADR-0008) constrained-matches whisper.cpp `-oj` word/segment output against the expected pack units (Needleman-Wunsch over normalized characters); its confidence number is a text-match ratio, never pronunciation evidence. Alignment output should support time spans for language-relevant units. Japanese ideally supports phoneme/phone and mora-like grouping. Alignment provider must emit confidence and abstain when mismatch is large.
+
+Shipped Linux desktop builds bundle the pinned whisper.cpp sidecar (ADR-0019): whisper.cpp ref 60c0be6ac8fa71b1a2ae2dd938a31a34a508e774 (reported version 1.9.4, ggml 0.25.1, MIT) plus the `ggml-tiny.bin` weights — 82,016,429 bytes staged in total on the machine that staged it, gitignored, hash-pinned in `SIDECAR.yaml` and mapped into the bundle by `dist/variants/tauri.aligner.json`. Before using the runtime the app checks payload integrity, host platform, and the payload's compiled CPU floor (x86-64-v3: SSE4.2, F16C, FMA, BMI2, AVX, AVX2; no AVX-512). The base `tauri.conf.json` stays payload-free, so bare and dev builds carry no aligner and must abstain honestly; only linux-x64 is staged today, and Windows/macOS builds carry no payload and abstain until a human runtime report (ADR-0015).
+
+When the aligner cannot run, the app reports one of three distinct abstention reasons and the UI copy says which one applies: `speech-model-off` (the user turned the speech model off in Settings), `aligner-cpu-unsupported` (the build carries the runtime but this CPU is below its compiled-for instruction floor), and `aligner-unavailable` (no runtime in this build, or the staged payload is incomplete). This changes nothing about what an alignment proves: alignment alone cannot by itself prove the expected text was spoken, and the mismatch/low-confidence abstention above is the mechanism that enforces that.
 
 ## Acoustic features
 
@@ -187,6 +191,8 @@ Do not bundle every model in the base app. Use signed/versioned downloadable mod
 - expected quality tier.
 
 The app supports `compact`, `recommended`, and optionally `high-quality` profiles where useful.
+
+The alignment sidecar is the one deliberate exception to the download-only rule: shipped Linux desktop builds bundle the pinned whisper.cpp runtime and its `ggml-tiny` weights in the app payload instead of waiting on a model-manager download (ADR-0019). It is a fixed hash-pinned payload with a declared CPU floor, not a selectable bundle; selectable larger models still arrive through the model-manager channel.
 
 ## Offline requirement
 

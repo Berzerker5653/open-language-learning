@@ -72,6 +72,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-49 | Grammar holes from the N5 audit closed: `ja.grammar.particle.subject-ga`, `companion-to`, `quotative-to` plus い-adjective negation/past concepts and A1 units riding the goal map (`501f198`). The wording/example flags it raised are queued as K-49-follow — they need a human linguist | 2026-10-07 N5 audit |
 | K-57 | Environments are pack data (ADR-0018, **Proposed**): optional `world/environments.jsonl`, four error gates (`duplicate_environment_id`, `environment_unknown_content`, `environment_listening_without_audio`, `world_collection_missing`), a `modality` enum restricted to the six dimensions a shipped runner can credit, `world_state_at` reads the active pack, `demo_world_config()` deleted, ja-JP ships five places gated on verified content ids **and declared audio**. Home's "Places you can go" no longer shows app-authored Japanese content; the first draft's `comprehension-reading` gate (no runner records it) became `cafe-price-check` | GAME-001, docs/00 neutrality |
 | honesty | Copy corrected in pronunciation/dictation/language panels: "you turned it off" vs "this build has no such runtime" are no longer conflated, and no panel claims a speech model is available in a build that ships none | docs/18 |
+| D4 | The aligner runtime now **ships**. `scripts/stage-aligner-sidecar.sh stage` builds whisper.cpp at a pinned ref (`60c0be6ac8fa71b1a2ae2dd938a31a34a508e774`, 1.9.4, MIT) behind a portable cmake flag set and a sha256-gated weights download, staging a gitignored payload (`bin/` real bytes + `model/ggml-tiny.bin` + `SIDECAR.yaml`; 82,016,429 B on the staging machine) that `verify` re-checks by size, sha256 and symlink/path rules, and `overlay` maps into the bundle via `dist/variants/tauri.aligner.json` — the base `tauri.conf.json` stays payload-free so bare/dev builds abstain instead of failing. `crates/speech-runtime/src/sidecar.rs` gates load on schema/component/platform/CPU/every declared file; the desktop resolves bundled-first (dev vendor tree as fallback) and reports three distinct tokens: `speech-model-off`, `aligner-cpu-unsupported`, `aligner-unavailable`. Floor is an explicit x86-64-v3 because the same 2.2 s sample measured 3.6 s portable vs 370–397 ms v3 (≈9×), proven by `objdump` (14,833 `%ymm`, 0 `%zmm`); a CPU below the floor is told so rather than handed a crawling aligner. Pinned by `scripts/test-stage-aligner-sidecar.sh` (12 hermetic checks, now a CI step); `lts-speech-runtime` 32 tests, `lts-desktop --lib` 74. Only `linux-x64` staged; no `tested_platforms` claim anywhere | ADR-0008 → ADR-0019 |
 
 ## next — queued after 2026-10-08
 
@@ -79,7 +80,6 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | --- | --- | --- | --- |
 | K-58 | pack | K-48 review queue: 1,265 entries left kana-only with competing kanji spellings named in `notes` need a human to pick; 76 matched with no kanji form and 456 unmatched are logged by the same script. Flagged, not guessed | K-48 follow-on |
 | K-49-follow | pack | Grammar review flags raised while shipping K-49: が/は information-structure wording, the relative-clause が prohibition, inline examples that lack pack-sentence/audio backing, and the polite past-negative form. Needs a human linguist, not more generation | docs/16 |
-| D4 | speech | The whisper.cpp aligner resolves only from `$LTS_BENCH_VENDOR/whisper.cpp/build/bin/whisper-cli` or `~/.cache/lts-bench/…`. The copy is now honest (the panel says the runtime is absent); shipping it as a sidecar per ADR-0008 is a packaging decision for the owner | ADR-0008 |
 | D5-rest | release | Staging the two real payloads (kokoro zip 345,065,270 B; sherpa runtime 30,454,382 B, `linux-x64` only) is publishing work needing owner authorization. Engine-side the placeholder is refused and the button is gone, so nothing user-visible waits on it except TTS itself | ADR-0009 |
 | P1 | ux | Profile switching after launch: the launch-time resume picker is the only entry, so changing profile mid-session means restarting the app. Not built speculatively — the owner's O-06 pass should say whether it is actually annoying | gap audit D9 |
 | H1 | pack | `display_name` still says "(Draft)"; rides the O-05 version bump rather than a separate pack release | O-05 |
@@ -163,7 +163,9 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
    itself invented (D6/K-57), drills aimed at a hardcoded pack (D7), and a privacy
    notice describing export/delete/microphone controls that did not exist (the
    settings slice). Each was fixed by making the software do the thing, or by
-   saying plainly what it cannot do — never by deleting the promise. Two things
-   deliberately remain owner work: staging the real TTS payloads (D5-rest) and
-   shipping the aligner as a sidecar (D4). `ADR-0018` is **Proposed** awaiting the
-   owner's acceptance.
+   saying plainly what it cannot do — never by deleting the promise. D4 (a
+   shipped build with an aligner and no aligner runtime) is closed by bundling
+   the whisper.cpp sidecar (ADR-0019). What deliberately remains owner work:
+   staging the real TTS payloads (D5-rest) and actually running the
+   overlay-based release build. `ADR-0018` is **Proposed** awaiting the owner's
+   acceptance.

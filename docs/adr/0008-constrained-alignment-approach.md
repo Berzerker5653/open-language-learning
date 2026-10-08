@@ -71,3 +71,16 @@ Rationale:
   timestamps for the tiny export in SPEECH-001).
 - Pure energy-based mora segmentation (rejected: no text constraint,
   cannot abstain on wrong phrase).
+
+## Amendment (2026-10-08)
+
+The embedded-runtime half of this decision was never *shipped*: the
+prototype resolved `whisper-cli` from a development bench cache
+(`$LTS_BENCH_VENDOR` / `~/.cache/lts-bench`), so a released desktop build
+contained the matcher and no ASR. ADR-0019 supersedes that delivery
+mechanism — the runtime now ships as a staged, hash-pinned, gitignored
+sidecar payload with an explicit x86-64-v3 instruction-set floor and a
+runtime CPU gate. Nothing else here changes: the `whisper.cpp -oj` +
+Needleman-Wunsch architecture, confidence as a text-match ratio that is
+never pronunciation evidence, and abstention on mismatch or low
+confidence all stand.

@@ -57,6 +57,11 @@ Build and run: `scripts/build-catalog.sh` (regenerates pack audio, then the pack
 archives) followed by `cargo tauri dev`. A quick automated sanity walk first:
 `./scripts/smoke-desktop.sh` → `SMOKE OK (26 routes walked)` across 13 routes.
 
+For a release build that carries the aligner instead of `tauri dev`:
+`scripts/stage-aligner-sidecar.sh stage` (cmake + network), then
+`scripts/stage-aligner-sidecar.sh overlay`, then
+`cargo tauri build --config dist/variants/tauri.aligner.json`.
+
 Surfaces that changed since the 2026-10-03 preview note, and what to check:
 
 - **Home** — a Start button for each of the six runnable modalities. "Places you
@@ -76,11 +81,15 @@ Surfaces that changed since the 2026-10-03 preview note, and what to check:
   the profile's active pack. With audio built, the six-sentence demo and the
   693 pack assets are audible; with no audio on disk the pack installs and
   listening says there is nothing to hear instead of offering a blank item.
-- **Honest boundaries in this build**: no whisper.cpp ASR/aligner runtime and no
-  TTS payload are shipped, so those panels say so; the two TTS payloads show
-  "not published in this build" and offer no download. Pronunciation feedback
-  stays guided-only — no accuracy score is produced or implied (ADR-0017,
-  docs/18).
+- **Honest boundaries in this build**: the aligner runtime now ships for
+  `linux-x64` (ADR-0019). Languages → Speech states which runtime this build
+  carries and on what terms — bundled `whisper.cpp 1.9.4`, a development runtime
+  path, the CPU floor being unmet (`aligner-cpu-unsupported`, naming
+  x86-64-v3), or genuinely absent. `cargo tauri dev` stages no payload: it
+  resolves the bench tree if you have one, otherwise it abstains. No TTS payload
+  is shipped, so those panels say so and the two TTS payloads show "not
+  published in this build" and offer no download. Pronunciation feedback stays
+  guided-only — no accuracy score is produced or implied (ADR-0017, docs/18).
 - **Pack bytes changed** (audio + environments), so the published `0.2.0` archives
   are stale: the audio-bearing archive builds deterministically at 76,867,477 B,
   sha256 `a3819b85c2e2cf4d4fa98d4d159e74feacb8d5b61321c1dababf2e69ca666577`. The
