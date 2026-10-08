@@ -1,0 +1,62 @@
+# ai-assisted draft unit (K-49 grammar-hole close); content refs are pack data; qualified review pending.
+id: ja.unit.to-together-and-quote
+goal_id: ja.goal.a1.past-stories
+title: 'Together with, and what people said: と'
+summary: と for companions and noun lists; と quoting what someone said or thought.
+estimated_minutes: 7
+generation_contract:
+  allowed_vocab:
+  - ja.lex.verbs.iimasu
+  - ja.lex.narrative.omoimasu
+  - ja.lex.narrative.katarimasu
+  - ja.lex.pronouns.tomodachi
+  - ja.lex.pronouns.sensei
+  - ja.lex.ent.coach
+  - ja.lex.ent.senpai
+  - ja.lex.ent.kouhai
+  - ja.sent.coach-said
+  - ja.sent.senpai-kouhai
+  - ja.sent.siblings-get-along
+  - ja.lex.rel.kyoudai
+  allowed_grammar:
+  - ja.grammar.particle.companion-to
+  - ja.grammar.particle.quotative-to
+  - ja.grammar.verb.to-omou
+  - ja.grammar.particle.object-wo
+  new_item_budget: 3
+  validation_method: choice
+activities:
+- id: ja.activity.to-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.sent.coach-said
+  - ja.sent.senpai-kouhai
+  - ja.sent.siblings-get-along
+- id: ja.activity.to-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.sent.coach-said
+  - ja.sent.senpai-kouhai
+- id: ja.activity.to-match
+  type: match
+  modality: reading
+  support_level: 3
+  content_refs:
+  - ja.lex.verbs.iimasu
+  - ja.lex.narrative.omoimasu
+  - ja.lex.pronouns.tomodachi
+  - ja.lex.ent.coach
+  - ja.sent.coach-said
+  - ja.sent.siblings-get-along
+- id: ja.activity.to-recall
+  type: recall-choice
+  modality: speaking
+  support_level: 1
+  content_refs:
+  - ja.sent.coach-said
+  - ja.sent.senpai-kouhai
+  - ja.sent.siblings-get-along

@@ -364,10 +364,47 @@ prerequisite_edges:
   dimension: grammar-controlled
   required_state: independent
   strength: hard
+- from: ja.grammar.particle.subject-ga
+  to: ja.grammar.particle.topic-wa
+  dimension: grammar-controlled
+  required_state: supported
+  strength: helpful
+- from: ja.grammar.particle.subject-ga
+  to: ja.grammar.particle.question-ka
+  dimension: grammar-controlled
+  required_state: supported
+  strength: helpful
+- from: ja.grammar.particle.companion-to
+  to: ja.grammar.copula.polite-desu
+  dimension: grammar-controlled
+  required_state: supported
+  strength: helpful
+- from: ja.grammar.particle.quotative-to
+  to: ja.grammar.particle.companion-to
+  dimension: grammar-controlled
+  required_state: supported
+  strength: helpful
+- from: ja.grammar.particle.quotative-to
+  to: ja.grammar.verb.to-omou
+  dimension: grammar-controlled
+  required_state: supported
+  strength: helpful
+- from: ja.grammar.adjectives.i-inflection
+  to: ja.grammar.copula.polite-desu
+  dimension: grammar-controlled
+  required_state: supported
+  strength: helpful
+- from: ja.grammar.adjectives.i-inflection
+  to: ja.grammar.adjectives.na-attributive
+  dimension: grammar-controlled
+  required_state: supported
+  strength: helpful
 notes:
 - Mirror of goal prerequisite edges (PACK-002); generated from curriculum/goals.yaml
   during K-30 authoring.
-
+- Concept→concept dependency edges for the K-49 grammar-hole concepts
+  (subject-ga, quotative-to, companion-to, i-inflection) added 2026-10-08; in
+  schema 0.2 these edges are authoritative here and need no goals.yaml twin.
 
 
 

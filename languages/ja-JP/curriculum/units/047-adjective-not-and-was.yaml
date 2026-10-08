@@ -1,0 +1,70 @@
+# ai-assisted draft unit (K-49 grammar-hole close); content refs are pack data; qualified review pending.
+id: ja.unit.adjective-not-and-was
+goal_id: ja.goal.a1.describe-qualities
+title: 'Not ... and ... was: い-adjective endings'
+summary: 〜くない, 〜くないです, 〜かった, 〜くなかった, and the いい→よかった exception.
+estimated_minutes: 8
+generation_contract:
+  allowed_vocab:
+  - ja.lex.adjectives.takai
+  - ja.lex.adjectives.yasui
+  - ja.lex.adjectives.samui
+  - ja.lex.adjectives.atsui
+  - ja.lex.adjectives.tanoshii
+  - ja.lex.adjectives.ii
+  - ja.lex.adjectives.ookii
+  - ja.lex.adjectives.chiisai
+  - ja.sent.book-expensive
+  - ja.sent.cold-tomorrow
+  - ja.sent.weather-good
+  - ja.sent.concert-fun
+  - ja.sent.umbrella-big
+  - ja.sent.station-near
+  allowed_grammar:
+  - ja.grammar.adjectives.i-inflection
+  - ja.grammar.particle.topic-wa
+  - ja.grammar.copula.polite-desu
+  - ja.grammar.adjectives.na-attributive
+  new_item_budget: 1
+  validation_method: choice
+activities:
+- id: ja.activity.iadj-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.sent.book-expensive
+  - ja.sent.cold-tomorrow
+  - ja.sent.weather-good
+  - ja.sent.concert-fun
+  - ja.sent.umbrella-big
+  - ja.sent.station-near
+- id: ja.activity.iadj-match
+  type: match
+  modality: reading
+  support_level: 3
+  content_refs:
+  - ja.lex.adjectives.takai
+  - ja.lex.adjectives.yasui
+  - ja.lex.adjectives.samui
+  - ja.lex.adjectives.atsui
+  - ja.lex.adjectives.tanoshii
+  - ja.lex.adjectives.ii
+  - ja.lex.adjectives.ookii
+  - ja.lex.adjectives.chiisai
+- id: ja.activity.iadj-speak
+  type: retrieval
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.sent.book-expensive
+  - ja.sent.cold-tomorrow
+  - ja.sent.weather-good
+  - ja.sent.concert-fun
+- id: ja.activity.iadj-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.concert-fun
+  - ja.sent.cold-tomorrow

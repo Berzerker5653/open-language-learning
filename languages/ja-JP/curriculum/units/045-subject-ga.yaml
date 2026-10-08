@@ -1,0 +1,79 @@
+# ai-assisted draft unit (K-49 grammar-hole close); content refs are pack data; qualified review pending.
+id: ja.unit.subject-ga
+goal_id: ja.goal.a1.identify-objects
+title: 'Who and what: the subject marker が'
+summary: が marks the subject; questions that ask who or what; stacking with the topic は.
+estimated_minutes: 8
+generation_contract:
+  allowed_vocab:
+  - ja.lex.demonstratives.kore
+  - ja.lex.questions.nani
+  - ja.lex.questions.dare
+  - ja.lex.verbs.arimasu
+  - ja.lex.verbs.imasu
+  - ja.lex.objects.hon
+  - ja.lex.objects.kaban
+  - ja.lex.objects.hikouki
+  - ja.lex.pronouns.sensei
+  - ja.lex.work.kaigi
+  - ja.sent.this-is-book
+  - ja.sent.what-is-this
+  - ja.sent.there-is-cat
+  - ja.sent.there-is-bag
+  - ja.sent.plane-fly
+  - ja.sent.teacher-teaches
+  - ja.sent.meeting-starts
+  - ja.lex.story2.neko
+  allowed_grammar:
+  - ja.grammar.particle.subject-ga
+  - ja.grammar.particle.topic-wa
+  - ja.grammar.particle.question-ka
+  - ja.grammar.copula.polite-desu
+  new_item_budget: 2
+  validation_method: exact-match
+activities:
+- id: ja.activity.ga-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.sent.this-is-book
+  - ja.sent.what-is-this
+  - ja.sent.there-is-cat
+  - ja.sent.there-is-bag
+  - ja.sent.plane-fly
+  - ja.sent.teacher-teaches
+  - ja.sent.meeting-starts
+- id: ja.activity.ga-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.sent.there-is-cat
+  - ja.sent.there-is-bag
+  - ja.sent.plane-fly
+  - ja.sent.teacher-teaches
+  - ja.sent.meeting-starts
+- id: ja.activity.ga-match
+  type: match
+  modality: reading
+  support_level: 3
+  content_refs:
+  - ja.lex.questions.nani
+  - ja.lex.questions.dare
+  - ja.lex.verbs.arimasu
+  - ja.lex.verbs.imasu
+  - ja.sent.what-is-this
+  - ja.sent.there-is-cat
+  - ja.sent.there-is-bag
+- id: ja.activity.ga-recall
+  type: recall-choice
+  modality: speaking
+  support_level: 1
+  content_refs:
+  - ja.sent.this-is-book
+  - ja.sent.what-is-this
+  - ja.sent.there-is-cat
+  - ja.sent.there-is-bag
+  - ja.sent.teacher-teaches
+  - ja.sent.meeting-starts
