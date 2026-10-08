@@ -345,9 +345,16 @@ M2 — Local data and learner model
   only copyleft (espeak-ng GPLv3) is dev-only and absent from distributable
   builds (per `docs/provenance/speech-distribution-audit.md`). Evidence:
   `state/evidence/SEC-001/automated-2026-10-06.txt`. **Automated portion PASS.**
-  Full SEC-001 still needs gitleaks+cargo-about in CI and the human security/
-  privacy review (not available under the sole-user constraint). No ROADMAP task
-  opened; `active_task` stays null.
+  SBOM automation landed 2026-10-07: `tools/sbom.py` emits one CycloneDX 1.5
+  document for both ecosystems (743 components — 528 cargo with crates.io
+  sha256 from `Cargo.lock`, 215 npm with lockfile integrity hashes, 19
+  first-party flagged `scope: internal`), byte-identical across runs so it is
+  diffable in review; the `security` CI job uploads it as `sbom-cyclonedx`.
+  (`cargo-cbom` does not exist in the registry and `cargo-cyclonedx` 0.5.9
+  silently writes nothing on this workspace — a 40-line generator we can read
+  beat a broken dependency.) Remaining for full SEC-001: the human
+  security/privacy review, not available under the sole-user constraint. No
+  ROADMAP task opened; `active_task` stays null.
 
 - n=1 personalization 2026-10-06 (owner: "no human confirmation; proceed
   onwards"; picked the one feature needing no dependency/licensing/authorship
@@ -565,3 +572,91 @@ Proposed corrections prepared 2026-10-02; original archive preserved. Handoff va
 are preserved. Implementation began 2026-10-02.
 
 Default goal: desktop Japanese B2-like release candidate (`REL-001`). Optional AI/mobile/web/advanced work and public publication require separate scope. Before public release, source-code and original-content licenses remain owner decisions (`LIC-001`); qualified review capacity, source rights and speech calibration are still future gates. See `REVIEW_REPORT.md` for findings and validation limits.
+
+## 2026-10-07 — owner decisions implemented, SPEECH-007 answered with measurement
+
+Four owner decisions were taken in-session and implemented, each behind an ADR:
+
+- **Posture labeling (ADR-0014).** Per-item "draft content" badges removed from
+  practice, listening, goal map, story and kanji surfaces; one pack-level
+  statement derived from the pack's own review tallies ("AI-generated content ·
+  not human-reviewed" / "not fully human-reviewed" / "every item carries a review
+  record") renders on Home and the Languages pack list; claim posture words
+  relabeled. Validator rules, the `reviews.jsonl` record requirement, the trust
+  ladder and the ban on band-completeness claims are untouched — AI still
+  promotes only to `screened`. Decision recorded under `owner_scope_decisions`
+  in both `languages/*/review/REVIEW_POLICY.yaml`.
+- **Platform status (ADR-0015).** Three-way ladder instead of a single tested
+  flag: `tested_platforms` (maintainer runtime evidence, Linux only),
+  `community_confirmed_platforms` (derived only from human runtime reports in
+  `docs/platform/PLATFORM_REPORTS.yaml`, each bound to `app_version` +
+  `app_commit` and `pack_version` + `pack_sha256`), `untested_platforms`
+  (everything else). `langpack catalog --platform-reports` refuses the build with
+  machine-readable codes on malformed records, hash/version drift, duplicate ids
+  or any attempt to populate `tested_platforms`, and writes nothing in that case.
+  `catalog/packs.json` and `docs/13` updated; CI gained a manual
+  `platform-bundles` job whose artifacts are named `-UNTESTED-<sha>` and are
+  never auto-published.
+- **Pack audio (ADR-0016).** `scripts/generate-pack-audio.py` synthesizes every
+  sentence and phonology-contrast item with the app's own chain and writes
+  `languages/<pack>/media/manifest.jsonl`; the new `media-asset` schema validates
+  each line and `crates/langpack` classifies it. `speech_audio_at` and
+  `contrast_audio_at` no longer label any file in `media/` as
+  `licensed-recording` — provenance is read from the manifest. `.wav` bytes are
+  gitignored; licenses/sources records name the synthesis chain.
+- **Repo stays private (O-05).** Consequence recorded: the app fetches catalog
+  and assets anonymously, so in-app download stays 404, and the community
+  promotion paths (review PRs, platform reports) have no outside traffic.
+
+**SPEECH-007 (the only `blocked` required task) was challenged by the owner**:
+"why can't we use a TTS model to make the sounds". The answer is measured in
+`benchmarks/speech/results/20261008T030000Z/` (tool:
+`benchmarks/speech/tools/synthetic-learner-proxy.py`): on synthetic takes with
+exact planted long-vowel ratios, scoring coverage is 0.00–0.53 against the frozen
+0.60 floor and moves with the ASR model rather than the planted condition; on the
+eight clips `ggml-small` scores under the obasan contrast, changing only the
+reference-ratio source inverts every verdict (8/8 `close`, catching 0 of the
+planted errors, versus 8/8 `shorter`, a false-correction rate of 1.0 against a
+0.05 ceiling); κ ≥ 0.70 is satisfied trivially because the labels come from the
+generator parameters. A second run on freshly synthesized audio reproduced the
+conclusion while the borderline clips moved: generation is not byte-reproducible
+(five runs of one utterance, five sha256, including `--num-threads=1`), while the
+measurement path is — re-measuring byte-identical clips reproduced every transcript
+exactly, so the jitter is the synthesizer's and recorded audio would be measured
+reproducibly.
+The gate remains `blocked`. What is needed is one owner decision: fund the
+specified panel (≥40 consented learners, 2 qualified labelers + adjudicator), or
+record a scope decision that stable 1.0 ships guided-only speech feedback, which
+removes SPEECH-007 from the required chain and unblocks JA-A1-003 → ACC-001 →
+PERF-002 → PLAT-001 → SEC-001 → REL-001.
+
+Verification for this change set: `cargo test --workspace` (every suite `ok`,
+zero failures), `cargo test -p lts-langpack-cli` (9 integration tests, including
+the new platform-report derivation test), `cargo test -p lts-desktop --lib` (62
+tests, including the new manifest-provenance and band-ordering tests),
+`cargo test -p lts-langpack`, frontend `vitest` (111 tests), `tsc --noEmit`,
+eslint and prettier clean, `langpack validate|lint|test languages/ja-JP` clean
+with generated media present, `scripts/build-catalog.sh` producing four archives
+plus a draft catalog carrying the three-way platform status, and
+`tools/validate_handoff.py` passing (1845 data files checked).
+
+Landed later the same day: K-47's remaining halves (goal-map band glosses with
+the sourced JLPT→CEFR crosswalk recorded in `docs/assessment/RELEASE_COVERAGE.yaml`,
+`band_sort_key` ladder ordering so `on-ramp` leads instead of ASCII-sorting after
+`B2`, and the stale coverage/README headers); the SEC-001 automated remainder
+(`tools/sbom.py` emits one deterministic CycloneDX 1.5 document uploaded by the
+CI `security` job — `cargo-cbom` is not in the registry, and `cargo-cyclonedx`
+0.5.9 has no workspace mode: run at the root it exits 0 and scatters one
+`<crate>.cdx.json` beside each member manifest); and the O-03 worksheet
+`docs/assessment/ACCESSIBILITY_AUDIT.md`.
+
+Not done: the human gates stay human — pedagogical review, security review,
+release sign-off, and the screen-reader matrix (the worksheet is ready; a human
+AT run is not). The goal-map change is verified by rendered-markup assertions,
+`tsc` and the Rust ordering tests; no screen-reader or Tauri-window run happened,
+so announcement behaviour stays unproven (that is exactly what O-03 covers).
+PERF-002 stays unmeasurable: `docs/performance/BUDGETS.yaml` is `frozen: false`
+and SPEECH-001 spiked only the `ref-dev` tier (K-55 records the tier gap, and no
+gate evaluator should run against provisional budgets). Furigana is still a
+sibling `<small>` line rather than ruby markup (K-54). Pack version bump +
+republish is required before the generated audio reaches distributed packs.

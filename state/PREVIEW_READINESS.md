@@ -25,14 +25,23 @@ gate and still fails (correctly) until review and calibration gates pass.
 - **REVIEW-001** — qualified human review capacity. Nothing in the
   preview claims reviewed status; `review_status: reviewed` in any
   future catalog entry is an author claim shown as such.
-- **SPEECH-007** — preregistered calibration recordings (deferred by
-  owner until after preview). Automatic pronunciation scoring stays off.
-- **LIC-001 remainder** — ja-JP draft prose with unproven authorship
-  was REPLACED with ai-assisted draft wording on 2026-10-03 (record:
-  `docs/provenance/ja-jp-draft-content.md`); the pack still needs a
-  content-license entry in `LICENSES.yaml` and qualified review. TTS
-  distribution licensing (GPLv3 espeak-ng) deferred; provider stays out
-  of distributable builds.
+- **SPEECH-007** — preregistered calibration recordings (deferred by owner until
+  after preview). Automatic pronunciation scoring stays off. 2026-10-07: the
+  "just synthesize the recordings" shortcut was tested and rejected with numbers
+  in `benchmarks/speech/results/20261008T030000Z/`; the gate needs the specified
+  learner panel or an explicit owner scope decision (kanban O-04).
+- **LIC-001 — CLOSED 2026-10-04** (kanban O-01): code Apache-2.0 per ADR-0010,
+  ja-JP pack content CC BY 4.0 recorded in `languages/ja-JP/licenses.jsonl` and
+  `manifest.yaml:32-33` (`redistribution_allowed: true`), ru-RU CC0-1.0. The
+  ai-assisted draft prose replacement (2026-10-03,
+  `docs/provenance/ja-jp-draft-content.md`) stays recorded. TTS licensing is no
+  longer "provider stays out of builds": per ADR-0009/TTS-002 the optional TTS
+  variant ships the sherpa-onnx + Kokoro payload with payload-scoped GPL-3.0
+  obligations (source offer, component texts, attribution UI), and the bare
+  variant ships none of it.
+- **Qualified review** remains open and is not a licensing item: nothing in the
+  preview claims reviewed status, and content now carries the derived pack-level
+  AI-generated posture statement (ADR-0014) instead of per-item draft badges.
 - **Stable release (`REL-001`)** — unchanged requirements;
   `--release-readiness` must keep failing until the above close.
 

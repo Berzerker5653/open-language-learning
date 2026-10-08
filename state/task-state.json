@@ -546,8 +546,7 @@
         "schemas/v0.2/phonology-contrast.schema.json",
         "apps/desktop/src-tauri/src/lib.rs"
       ]
-    }
-    ,
+    },
     "K-11": {
       "status": "done",
       "attempts": 1,
@@ -559,8 +558,7 @@
         "state/evidence/K-11/vitest-2026-10-03.txt",
         "state/evidence/K-11/smoke-desktop-2026-10-03.txt"
       ]
-    }
-    ,
+    },
     "K-12": {
       "status": "done",
       "attempts": 1,
@@ -572,8 +570,7 @@
         "state/evidence/K-12/vitest-2026-10-03.txt",
         "state/evidence/K-12/smoke-desktop-2026-10-03.txt"
       ]
-    }
-    ,
+    },
     "K-13": {
       "status": "done",
       "attempts": 1,
@@ -585,8 +582,7 @@
         "state/evidence/K-13/vitest-2026-10-03.txt",
         "state/evidence/K-13/smoke-desktop-2026-10-03.txt"
       ]
-    }
-    ,
+    },
     "K-14": {
       "status": "done",
       "attempts": 1,
@@ -598,8 +594,7 @@
         "state/evidence/K-14/vitest-2026-10-03.txt",
         "state/evidence/K-14/smoke-desktop-2026-10-03.txt"
       ]
-    }
-    ,
+    },
     "K-15": {
       "status": "done",
       "attempts": 1,
@@ -611,8 +606,7 @@
         "state/evidence/K-15/vitest-2026-10-03.txt",
         "state/evidence/K-15/smoke-desktop-2026-10-03.txt"
       ]
-    }
-    ,
+    },
     "K-16": {
       "status": "done",
       "attempts": 1,
@@ -624,8 +618,7 @@
         "state/evidence/K-16/vitest-2026-10-03.txt",
         "state/evidence/K-16/smoke-desktop-2026-10-03.txt"
       ]
-    }
-    ,
+    },
     "K-20": {
       "status": "done",
       "attempts": 1,
@@ -635,8 +628,7 @@
         "state/evidence/K-20/example-pack-gates-2026-10-03.txt",
         "state/evidence/K-20/cargo-test-2026-10-03.txt"
       ]
-    }
-    ,
+    },
     "K-21": {
       "status": "done",
       "attempts": 1,
@@ -646,8 +638,7 @@
         "state/evidence/K-21/cli-gates-2026-10-03.txt",
         "state/evidence/K-21/cargo-test-2026-10-03.txt"
       ]
-    }
-    ,
+    },
     "K-22": {
       "status": "done",
       "attempts": 1,
@@ -656,8 +647,7 @@
         "state/notes/K-22.md",
         "state/evidence/K-22/chunked-pack-validate-2026-10-03.txt"
       ]
-    }
-    ,
+    },
     "K-23": {
       "status": "done",
       "attempts": 1,
@@ -667,8 +657,7 @@
         "state/evidence/K-23/cli-gates-2026-10-03.txt",
         "state/evidence/K-23/cargo-test-2026-10-03.txt"
       ]
-    }
-    ,
+    },
     "K-24": {
       "status": "done",
       "attempts": 1,
@@ -678,8 +667,7 @@
         "state/evidence/K-24/cargo-test-2026-10-03.txt",
         "state/evidence/K-24/cli-scaffold-2026-10-03.txt"
       ]
-    }
-    ,
+    },
     "K-30": {
       "status": "done",
       "attempts": 1,
@@ -689,8 +677,7 @@
         "state/evidence/K-30/pack-gates-2026-10-03.txt",
         "state/evidence/K-30/cargo-test-2026-10-03.txt"
       ]
-    }
-    ,
+    },
     "K-31": {
       "status": "done",
       "attempts": 1,
@@ -699,8 +686,7 @@
         "state/notes/K-31.md",
         "state/evidence/K-31/coverage-2026-10-03.txt"
       ]
-    }
-    ,
+    },
     "K-33": {
       "status": "done",
       "attempts": 1,
@@ -709,8 +695,7 @@
         "state/notes/K-33.md",
         "state/evidence/K-33/audit-2026-10-03.txt"
       ]
-    }
-    ,
+    },
     "K-34": {
       "status": "done",
       "attempts": 1,
@@ -719,8 +704,7 @@
         "state/notes/K-34.md",
         "state/evidence/K-34/build-config-2026-10-03.txt"
       ]
-    }
-    ,
+    },
     "K-35": {
       "status": "done",
       "attempts": 1,
@@ -729,8 +713,7 @@
         "state/notes/K-35.md",
         "state/evidence/K-35/catalog-happy-path-2026-10-03.txt"
       ]
-    }
-    ,
+    },
     "K-32": {
       "status": "done",
       "attempts": 1,
@@ -739,8 +722,7 @@
         "state/notes/K-32.md",
         "state/evidence/K-32/cutover-2026-10-04.txt"
       ]
-    }
-    ,
+    },
     "TTS-002": {
       "status": "done",
       "attempts": 1,
@@ -749,8 +731,7 @@
         "state/notes/TTS-002.md",
         "state/evidence/TTS-002/implementation-2026-10-04.txt"
       ]
-    }
-    ,
+    },
     "LIC-001": {
       "status": "done",
       "attempts": 1,
@@ -803,11 +784,12 @@
     "SPEECH-007": {
       "status": "blocked",
       "attempts": 1,
-      "last_error": "blocked on owner-supplied permissioned learner-speech data + qualified human labelers; calibration prep complete (frozen protocol v0.2.0, consent instrument, labeler rubric, sourcing decision, dataset template, runbook) — see SOURCING.md for what the owner must supply. 2026-10-06: user-selectable local speech models shipped (off default, ADR-0011); probe across tiny/base/small shows model size is NOT the pronunciation fix (contrast feature scores at align_conf 0.9 even on tiny) — calibration data is still the gate.",
+      "last_error": "blocked on owner-supplied permissioned learner-speech data + qualified human labelers; calibration prep complete (frozen protocol v0.2.0, consent instrument, labeler rubric, sourcing decision, dataset template, runbook) — see SOURCING.md for what the owner must supply. 2026-10-06: user-selectable local speech models shipped (off default, ADR-0011); probe across tiny/base/small shows model size is NOT the pronunciation fix (contrast feature scores at align_conf 0.9 even on tiny) — calibration data is still the gate. 2026-10-07: owner challenged the premise (\"why can't an AI make the recordings\"). Answered by measurement, benchmarks/speech/results/20261008T030000Z/: synthetic takes with exact planted long-vowel ratios score at 0.00-0.53 coverage against the frozen 0.60 floor and coverage tracks the ASR model, not the planted condition; on 8 identical scored clips changing only the reference-ratio source inverts every verdict (8/8 close, catching 0 planted errors, vs 8/8 shorter = 1.0 false-correction rate vs the 0.05 ceiling); kappa>=0.70 is satisfied trivially because labels come from generator parameters. Generation is not byte-reproducible (5 runs -> 5 sha256, incl. --num-threads=1) while measurement on fixed audio is exact. Decision needed from the owner: (a) fund >=40 consented learners + 2 qualified labelers + adjudicator, or (b) an explicit scope decision that stable 1.0 ships guided-only speech feedback, removing this task from the required chain.",
       "evidence": [
         "state/evidence/SPEECH-007/infra-blocked-2026-10-04.txt",
         "state/evidence/SPEECH-007/prep-2026-10-06.txt",
-        "state/evidence/SPEECH-007/probe-2026-10-06.txt"
+        "state/evidence/SPEECH-007/probe-2026-10-06.txt",
+        "benchmarks/speech/results/20261008T030000Z/summary.json"
       ]
     },
     "K-40": {

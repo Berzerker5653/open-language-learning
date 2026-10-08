@@ -28,6 +28,12 @@ Test actual supported desktop accessibility stacks, at least one representative 
 
 Critical journeys include install/pack selection, onboarding, local/model permission or download flow, home/session planning, every shipped activity type and help/feedback state, later goal/scenario unlocks, interruption/recovery, settings, and export/import. Record pass/fail/not-applicable with evidence and rationale for each applicable criterion/journey; unresolved inaccessible critical paths fail the release gate.
 
+The fillable matrix lives in `docs/assessment/ACCESSIBILITY_AUDIT.md` (kanban
+O-03): a pinned-environment row per run, the journey checklist above, the
+furigana/IME risks to test first, and a human-only sign-off block. Until a
+signed row exists, no release may claim accessibility conformance beyond the
+automated semantics checks in `apps/desktop/src/a11y.test.tsx`.
+
 ## Speech accessibility
 
 Learners unable/unwilling to use a microphone can learn other modalities. Speaking mastery remains unearned rather than faked. The UI should say "speaking not assessed" rather than penalize the entire course.

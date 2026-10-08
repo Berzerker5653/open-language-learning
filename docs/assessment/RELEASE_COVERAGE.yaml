@@ -5,10 +5,15 @@
 # passes the machine-verifiable gates below. Narrowing the required set is an
 # owner scope decision requiring recorded rationale, never a silent edit.
 #
-# STATUS: on-ramp/A1 objectives are implemented (draft review state, pack
-# org.openlanguage.ja-jp.reference v0.1.0). A2/B1/B2 objectives are the frozen
-# target set; content is not authored. No band may be claimed complete until
-# gates pass; all bands are currently partial by review state.
+# STATUS (measured against pack source 2026-10-07): pack
+# org.openlanguage.ja-jp.reference is v0.2.0 with 75 goals (5 on-ramp, 21 A1,
+# 10 A2, 13 B1, 26 B2) and 771 units (on-ramp 12, A1 76, A2 100, B1 195, B2 388 —
+# 683 at A2/B1/B2). Objectives at every band therefore have authored content, all
+# of it in `draft`/`review-needed` review state with ai-assisted provenance.
+# That is NOT a completeness claim: the required-objective rows below are the
+# denominator, no band passes its gates, and band-completeness may never be
+# asserted from unit counts (docs/18). The required set stays frozen; narrowing
+# it is an owner scope decision.
 
 coverage_version: "1.0.0"
 schema_version: 1
@@ -34,6 +39,33 @@ frameworks:
     reviewers must approve breadth at promotion.
   prohibited_claims: [official certification, direct framework equivalence,
     proficiency from course completion alone]
+
+  # Published crosswalk, recorded because the goal map glosses band tokens
+  # for users (K-47). Direction matters: the JLPT maps its own total scores
+  # to CEFR bands for candidates who passed a level. It does NOT say
+  # "A1 = N5", and it covers Linguistic competence and Reception only.
+  jlpt_cefr_reference:
+    source_title: Indication of the CEFR Level for Reference
+    publisher: The Japan Foundation / Japan Educational Exchanges and Services
+    url: https://www.jlpt.jp/e/about/cefr_reference.html
+    accessed: "2026-10-07"
+    effective: CEFR reference indication begins with the December 2025 JLPT
+    mapping:
+      - {jlpt: N5, condition: "total 80 or higher", cefr: A1}
+      - {jlpt: N4, condition: "total 90 or higher", cefr: A2}
+      - {jlpt: N3, condition: "total 95-103", cefr: A2}
+      - {jlpt: N3, condition: "total 104 or higher", cefr: B1}
+      - {jlpt: N2, condition: "total 90-111", cefr: B1}
+      - {jlpt: N2, condition: "total 112 or higher", cefr: B2}
+      - {jlpt: N1, condition: "total 100-141", cefr: B2}
+      - {jlpt: N1, condition: "total 142 or higher", cefr: C1}
+    limits:
+      - indicated only for candidates who passed the level (a failed section
+        suppresses the CEFR line entirely)
+      - covers Linguistic competence and Reception; the JLPT tests no
+        Production (speaking/writing) or Interaction
+      - the product never renders this as JLPT preparation, alignment or
+        certification marketing (docs/14 "Are JLPT levels the main framework?")
 
 # ---------------------------------------------------------------------------
 # Required objective sets (finite)
