@@ -1,0 +1,207 @@
+{
+  "run_id": "20261008T145939Z",
+  "protocol": "asr-0.1.0",
+  "dataset": "ja-onramp-synth-0.1.0",
+  "machine": {
+    "cpu_count": 32,
+    "os": "Linux 7.2.5-3-omarchy",
+    "backend": "CPU",
+    "threads": 4
+  },
+  "automatic_scoring": "disabled (protocol asr-0.1.0)",
+  "results": [
+    {
+      "candidate": "whisper.cpp",
+      "model": "ggml-tiny",
+      "cold_load_ms": 376.5,
+      "warm_latency_p50_ms": 399.9,
+      "warm_latency_p95_ms": 415.9,
+      "real_time_factor_median": 0.307,
+      "peak_rss_delta_mb": 288.1,
+      "model_disk_mb": 148.0,
+      "model_sha256": {
+        "ggml-tiny.bin": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe"
+      },
+      "timestamps_available": true,
+      "license_code": "MIT",
+      "license_model": "MIT (OpenAI model weights)",
+      "platforms": [
+        "linux-x86_64"
+      ],
+      "offline_verified": true,
+      "invocation_failures": 0,
+      "cer_per_utterance": [
+        {
+          "id": "u01",
+          "ref": "こんにちは",
+          "hyp": "こんにちは",
+          "cer": 0.0
+        },
+        {
+          "id": "u02",
+          "ref": "はじめまして",
+          "hyp": "わりめまして",
+          "cer": 0.3333
+        },
+        {
+          "id": "u03",
+          "ref": "わたしは ハンター です",
+          "hyp": "私はハンターです。",
+          "cer": 0.3333
+        },
+        {
+          "id": "u04",
+          "ref": "お元気ですか",
+          "hyp": "ボディスウカー",
+          "cer": 1.0
+        },
+        {
+          "id": "u05",
+          "ref": "ありがとうございます",
+          "hyp": "ありがとうございます",
+          "cer": 0.0
+        },
+        {
+          "id": "u06",
+          "ref": "すみません",
+          "hyp": "すみません",
+          "cer": 0.0
+        },
+        {
+          "id": "u07",
+          "ref": "これは 何ですか",
+          "hyp": "こう言え派ですうか。",
+          "cer": 0.7143
+        },
+        {
+          "id": "u08",
+          "ref": "駅は どこですか",
+          "hyp": "ハードをこですうか",
+          "cer": 0.5714
+        },
+        {
+          "id": "u09",
+          "ref": "もう一度 言ってください",
+          "hyp": "もうレクウダサイ",
+          "cer": 0.8182
+        },
+        {
+          "id": "u10",
+          "ref": "ゆっくり 話してください",
+          "hyp": "領区をしてください。",
+          "cer": 0.4545
+        },
+        {
+          "id": "u11",
+          "ref": "わかりません",
+          "hyp": "わかじません。",
+          "cer": 0.1667
+        },
+        {
+          "id": "u12",
+          "ref": "では また明日",
+          "hyp": "デーハマーター",
+          "cer": 1.0
+        }
+      ],
+      "cer_mean": 0.4493
+    },
+    {
+      "candidate": "sherpa-onnx",
+      "model": "whisper-tiny-onnx",
+      "cold_load_ms": 390.0,
+      "warm_latency_p50_ms": 436.5,
+      "warm_latency_p95_ms": 474.9,
+      "real_time_factor_median": 0.325,
+      "peak_rss_delta_mb": 218.8,
+      "model_disk_mb": 291.6,
+      "model_sha256": {
+        "tiny-encoder.onnx": "5a6b87cb313993f6c9fefec9e7027556f6cb30becddf49655bee36c50ecc12d7",
+        "tiny-decoder.onnx": "8a12c3f6ad65bb5b86d7e6eccc302378f20f9fb2df6cb10747c62895da7ac194"
+      },
+      "timestamps_available": false,
+      "license_code": "Apache-2.0",
+      "license_model": "OpenAI Whisper weights (license terms recorded upstream)",
+      "platforms": [
+        "linux-x86_64"
+      ],
+      "offline_verified": true,
+      "invocation_failures": 0,
+      "cer_per_utterance": [
+        {
+          "id": "u01",
+          "ref": "こんにちは",
+          "hyp": "こんにちは",
+          "cer": 0.0
+        },
+        {
+          "id": "u02",
+          "ref": "はじめまして",
+          "hyp": "り目まして",
+          "cer": 0.5
+        },
+        {
+          "id": "u03",
+          "ref": "わたしは ハンター です",
+          "hyp": "私はハンターです",
+          "cer": 0.3333
+        },
+        {
+          "id": "u04",
+          "ref": "お元気ですか",
+          "hyp": "ボディスーか",
+          "cer": 0.8333
+        },
+        {
+          "id": "u05",
+          "ref": "ありがとうございます",
+          "hyp": "ありがとうございます",
+          "cer": 0.0
+        },
+        {
+          "id": "u06",
+          "ref": "すみません",
+          "hyp": "すみません。",
+          "cer": 0.0
+        },
+        {
+          "id": "u07",
+          "ref": "これは 何ですか",
+          "hyp": "こういうはですうか",
+          "cer": 0.7143
+        },
+        {
+          "id": "u08",
+          "ref": "駅は どこですか",
+          "hyp": "ハード起こりすう",
+          "cer": 0.7143
+        },
+        {
+          "id": "u09",
+          "ref": "もう一度 言ってください",
+          "hyp": "もう、レクーださい。",
+          "cer": 0.5455
+        },
+        {
+          "id": "u10",
+          "ref": "ゆっくり 話してください",
+          "hyp": "をしてください",
+          "cer": 0.4545
+        },
+        {
+          "id": "u11",
+          "ref": "わかりません",
+          "hyp": "わかじませ",
+          "cer": 0.3333
+        },
+        {
+          "id": "u12",
+          "ref": "では また明日",
+          "hyp": "デーハマータ",
+          "cer": 1.0
+        }
+      ],
+      "cer_mean": 0.4524
+    }
+  ]
+}
