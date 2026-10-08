@@ -11,7 +11,8 @@ use crate::diagnose::{Diagnostic, Severity};
 use crate::pack::Pack;
 use serde::Serialize;
 use serde_json::Value;
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
+use std::fs;
 
 #[derive(Serialize, Clone, Debug)]
 pub struct AttributionEntry {
@@ -519,6 +520,136 @@ impl Pack {
                             }
                         }
                     }
+                }
+            }
+        }
+        diags
+    }
+
+    /// Media integrity (ADR-0016, docs/10 security boundary "validate hashes
+    /// before install"): every `media/manifest.jsonl` row must describe the
+    /// bytes that are actually present. The manifest is a shipped pack's only
+    /// provenance statement about its audio, so a drifted hash or a vanished
+    /// asset would leave the app labelling audio from file presence — exactly
+    /// what the manifest exists to prevent.
+    ///
+    /// `require_present` is true for install and build. In scaffold mode the
+    /// `.wav` bytes are gitignored and regenerated, so a declared-but-absent
+    /// asset is reported as info; a present asset whose bytes disagree with the
+    /// manifest is an error in every mode.
+    pub fn audit_media(&self, require_present: bool) -> Vec<Diagnostic> {
+        let mut diags: Vec<Diagnostic> = Vec::new();
+        let rows: Vec<&crate::pack::Instance> = self
+            .instances
+            .iter()
+            .filter(|i| i.schema == "media-asset")
+            .collect();
+        if rows.is_empty() {
+            return diags;
+        }
+        let mut listed: HashSet<String> = HashSet::new();
+        for row in &rows {
+            let rel = match row.value.get("file").and_then(Value::as_str) {
+                Some(rel) if !rel.is_empty() => rel.to_string(),
+                _ => {
+                    diags.push(Diagnostic::new(
+                        &row.file,
+                        row.pointer.clone(),
+                        "media_row_unusable",
+                        "media manifest row declares no file path",
+                        Severity::Error,
+                    ));
+                    continue;
+                }
+            };
+            if !listed.insert(rel.clone()) {
+                diags.push(Diagnostic::new(
+                    &row.file,
+                    row.pointer.clone(),
+                    "media_duplicate",
+                    format!("{rel} is declared by more than one media manifest row"),
+                    Severity::Error,
+                ));
+                continue;
+            }
+            let path = self.root().join(&rel);
+            let bytes = match fs::read(&path) {
+                Ok(bytes) => bytes,
+                Err(_) => {
+                    diags.push(Diagnostic::new(
+                        &row.file,
+                        format!("{}/file", row.pointer),
+                        if require_present { "media_missing" } else { "media_absent" },
+                        format!(
+                            "{rel} is declared by the media manifest but {}{}",
+                            if require_present {
+                                "absent; an installed pack must carry every declared asset"
+                            } else {
+                                "not in this checkout"
+                            },
+                            if require_present {
+                                ""
+                            } else {
+                                " (.wav bytes are gitignored and regenerated at build time, ADR-0016)"
+                            }
+                        ),
+                        if require_present {
+                            Severity::Error
+                        } else {
+                            Severity::Info
+                        },
+                    ));
+                    continue;
+                }
+            };
+            if let Some(declared) = row.value.get("bytes").and_then(Value::as_u64) {
+                if declared != bytes.len() as u64 {
+                    diags.push(Diagnostic::new(
+                        &row.file,
+                        format!("{}/bytes", row.pointer),
+                        "media_size_mismatch",
+                        format!(
+                            "{rel} is {} bytes on disk, manifest declares {declared}",
+                            bytes.len()
+                        ),
+                        Severity::Error,
+                    ));
+                }
+            }
+            if let Some(declared) = row.value.get("sha256").and_then(Value::as_str) {
+                let got = crate::archive::hex_sha256(&bytes);
+                if !got.eq_ignore_ascii_case(declared) {
+                    diags.push(Diagnostic::new(
+                        &row.file,
+                        format!("{}/sha256", row.pointer),
+                        "media_hash_mismatch",
+                        format!(
+                            "{rel} hashes to {got}, the media manifest declares {declared}; \
+                             the shipped bytes are not the audited bytes"
+                        ),
+                        Severity::Error,
+                    ));
+                }
+            }
+        }
+        if let Ok(entries) = fs::read_dir(self.root().join("media")) {
+            for entry in entries.flatten() {
+                let name = entry.file_name().to_string_lossy().into_owned();
+                if name == "manifest.jsonl" {
+                    continue;
+                }
+                let rel = format!("media/{name}");
+                if !listed.contains(&rel) {
+                    diags.push(Diagnostic::new(
+                        "media/manifest.jsonl",
+                        "",
+                        "media_unlisted",
+                        format!(
+                            "{rel} exists in the pack but no manifest row declares it, so its \
+                             provenance would have to be inferred from file presence (ADR-0016)"
+                        ),
+                        Severity::Warning,
+                    ));
                 }
             }
         }

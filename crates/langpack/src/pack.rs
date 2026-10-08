@@ -100,7 +100,10 @@ impl Pack {
                 }
                 continue;
             };
-            if rel.starts_with("media/") {
+            // Everything under `media/` is an opaque binary asset *except* the
+            // manifest, which is validated data: the manifest is what carries
+            // audio provenance, so it must be parsed (ADR-0016).
+            if rel.starts_with("media/") && rel != "media/manifest.jsonl" {
                 let meta = fs::metadata(root.join(&rel))?;
                 if meta.len() == 0 {
                     pack.parse_errors.push((rel, "empty media asset".into()));
@@ -806,6 +809,12 @@ impl Pack {
                 }
             }
         }
+
+        // Media integrity (ADR-0016): the media manifest must describe the
+        // bytes that actually ship. Install requires every declared asset to
+        // be present; a source checkout may legitimately lack the gitignored
+        // .wav bytes, which is reported as info there.
+        diags.extend(self.audit_media(mode == Mode::Install));
 
         diags.sort_by(|a, b| {
             a.file

@@ -48,7 +48,8 @@ and those disagree, they win — fix this document.
 | `sentences/entries.jsonl` | sentence | one per line |
 | `kanji/entries.jsonl` | kanji | one per line |
 | `stories/*.yaml` | story | single doc |
-| `media/*` | (binary assets; `media/<content-id>.wav` is picked up automatically) | — |
+| `media/manifest.jsonl` | media-asset | one per line |
+| `media/*.wav` | (binary asset; must have exactly one manifest row) | — |
 
 Unknown paths fail validation (documentation files like `README.md`
 are allowed). Chunking is legal where the table shows `*` (e.g.
@@ -70,6 +71,14 @@ langpack build <pack> -o out.lpk  # deterministic archive; requires scaffold-cle
 `validate --mode install` additionally enforces promotion gates
 (non-empty licenses/sources, resolved references, license clearance);
 `TBD` content licensing blocks install, never drafting.
+
+`media/manifest.jsonl` is paired with the directory at install and at build:
+every declared asset must exist and hash to what the manifest says
+(`media_missing`, `media_hash_mismatch`, `media_size_mismatch`), while a file
+with no row is a warning (`media_unlisted`) rather than a silent asset — the app
+reads audio provenance from the manifest, never from file presence (ADR-0016).
+Generated `.wav` bytes are gitignored; run `scripts/generate-pack-audio.py`
+before `test`/`build`.
 
 ## Per-unit workflow
 

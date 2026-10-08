@@ -71,6 +71,24 @@ pub fn build(dir: &Path) -> Result<(Vec<u8>, String), String> {
             errors[0].message
         ));
     }
+    // Media integrity (ADR-0016): an archive must not ship a manifest that
+    // lies about its audio. Build is where the generated .wav bytes and the
+    // committed manifest meet, so every declared asset must be present and
+    // hash to what the manifest says.
+    let media = pack.audit_media(true);
+    if let Some(bad) = media.iter().find(|d| d.severity == crate::Severity::Error) {
+        return Err(format!(
+            "media manifest does not match the pack ({}): {}",
+            bad.code, bad.message
+        ));
+    }
+    if media.iter().any(|d| d.code == "media_unlisted") {
+        eprintln!(
+            "warning: files under media/ are not declared by media/manifest.jsonl \
+             ({} finding(s)); their provenance cannot be stated",
+            media.iter().filter(|d| d.code == "media_unlisted").count()
+        );
+    }
     let manifest = pack
         .manifest
         .as_ref()

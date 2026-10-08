@@ -73,6 +73,27 @@ provenance-labeled.
   manifest, and the synthesis chain is pinned to an exact model export. What is
   **not** verifiable across builds is byte equality of regenerated audio (the
   chain is not deterministic, see Decision 2).
+- Enforcement (same day as the first generation run): `media/manifest.jsonl` is
+  parsed as validated data rather than swept up as an opaque `media/` asset,
+  `Pack::audit_media` pairs manifest rows with the directory in both directions,
+  and both `validate(Mode::Install)` and `archive::build` refuse drift. Codes:
+  `media_row_unusable`, `media_duplicate`, `media_unlisted` (warning — that file
+  has no declared provenance, so the app must not label it), `media_hash_mismatch`
+  and `media_size_mismatch` (error in every mode), `media_missing` (error at
+  install/build) versus `media_absent` (info in a source checkout, where the
+  `.wav` bytes are gitignored by design). Verified on the real pack: flipping one
+  byte of `media/ja.contrast.vowel-length.obasan-0.wav` in a copy makes
+  `langpack build` exit 1 naming both digests.
+- Kokoro's Japanese path cannot voice bare kanji (measured 2026-10-07:
+  `Ignore OOV '金'` → `Failed to convert '金' to token IDs`, exit 2). Three of the
+  14 contrast items therefore had to gain kana `reading` values (金/木, 千/背,
+  百/白). That is a content requirement, not a script workaround: the same chain
+  voices contrast items inside the app, so an item without a reading is silent
+  there too.
+- Measured inventory: 693 assets (679 sentence records, 14 contrast items),
+  96,511,536 bytes of `.wav`, `ja-JP.lpk` 76,772,565 bytes
+  (sha256 `ad5e712c4490ea494fa2e2fd4ab8f4b23b9b661800efecca8fdff0ee39787d4e`)
+  against the 850,167-byte published `0.2.0` archive.
 - Honest ceiling: synthesis prosody is machine-grade. Any future claim about
   native-like reference audio needs consented human recordings, which is the
   same owner-gated data path SPEECH-007 already documents
