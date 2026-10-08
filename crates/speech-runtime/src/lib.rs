@@ -7,6 +7,7 @@ pub mod asr;
 pub mod interpret;
 pub mod prosody;
 pub mod quality;
+pub mod sidecar;
 pub mod tts;
 
 pub use acoustic::VoicedDurationFeature;
@@ -14,5 +15,6 @@ pub use alignment::WhisperConstrainedAligner;
 pub use asr::{SherpaSubprocessAsr, from_wav16, to_wav16};
 pub use interpret::VowelLengthInterpreter;
 pub use quality::EnergyVad;
+pub use sidecar::{Sidecar, SidecarProblem};
 
 pub const CRATE_NAME: &str = "lts-speech-runtime";

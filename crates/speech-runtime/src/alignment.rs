@@ -15,6 +15,7 @@ use std::path::{Path, PathBuf};
 use std::process::Command;
 
 use crate::asr::to_wav16;
+use crate::sidecar;
 
 /// A recognized word with millisecond offsets (whisper.cpp `-oj`).
 #[derive(Debug, Clone, PartialEq)]
@@ -66,7 +67,11 @@ pub fn run_whisper_words(
         f.write_all(&to_wav16(audio)).map_err(|e| e.to_string())?;
         f.flush().map_err(|e| e.to_string())?;
     }
-    let status = Command::new(binary)
+    let mut cmd = Command::new(binary);
+    // Staged payloads carry a build-machine RUNPATH; point the child at the
+    // payload's own lib dir (no-op layout-wise when the binary sits alone).
+    sidecar::apply_runtime_env(&mut cmd, binary);
+    let status = cmd
         .arg("-m")
         .arg(model)
         .arg("-l")
