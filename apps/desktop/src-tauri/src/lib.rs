@@ -6784,7 +6784,7 @@ mod tests {
     /// a goal with no band at all goes last. Case must not matter.
     #[test]
     fn band_sort_key_places_unknown_and_missing_bands_after_the_ladder() {
-        let mut keys = vec![
+        let mut keys = [
             band_sort_key(None),
             band_sort_key(Some("novice")),
             band_sort_key(Some("B2")),

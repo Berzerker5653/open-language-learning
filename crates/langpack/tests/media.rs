@@ -243,8 +243,7 @@ fn drifting_media_is_refused_by_build() {
             .any(|d| d.severity == Severity::Error)
     );
     let err = lts_langpack::archive::build(&pack_dir)
-        .err()
-        .expect("build must refuse a drifting media manifest");
+        .expect_err("build must refuse a drifting media manifest");
     assert!(err.contains("media"), "{err}");
 }
 
@@ -304,8 +303,7 @@ fn a_partially_built_pack_never_builds() {
         &[("ja.demo.kite-0.wav", body)],
     );
     let err = lts_langpack::archive::build(&pack_dir)
-        .err()
-        .expect("a half-built media directory cannot be shipped");
+        .expect_err("a half-built media directory cannot be shipped");
     assert!(
         err.contains("media") && err.contains("partial"),
         "the refusal must name the partial media build: {err}"
