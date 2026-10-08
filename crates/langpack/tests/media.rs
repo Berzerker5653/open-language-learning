@@ -131,33 +131,64 @@ fn tampered_audio_fails_whatever_the_mode() {
 }
 
 #[test]
-fn missing_audio_blocks_install_but_not_a_source_checkout() {
+fn unbuilt_media_blocks_install_and_speaks_once_in_a_checkout() {
     let tmp = tempfile::tempdir().unwrap();
     let declared = hex_sha256(&wav_bytes(b"hello"));
     let pack = pack_with(
         tmp.path(),
-        &[row(
-            "ja.demo.kite-0",
-            "media/ja.demo.kite-0.wav",
-            &declared,
-            17,
-        )],
+        &[
+            row("ja.demo.kite-0", "media/ja.demo.kite-0.wav", &declared, 17),
+            row("ja.demo.kite-1", "media/ja.demo.kite-1.wav", &declared, 17),
+        ],
         &[],
     );
     let install = pack.audit_media(true);
     assert!(
-        codes(&install, Severity::Error).contains(&"media_missing".to_string()),
-        "install must refuse: {install:?}"
+        codes(&install, Severity::Error).contains(&"media_unbuilt".to_string()),
+        "install must refuse audio the pack never built: {install:?}"
     );
     let scaffold = pack.audit_media(false);
-    assert!(
-        codes(&scaffold, Severity::Info).contains(&"media_absent".to_string()),
-        "a checkout without generated .wav bytes is expected: {scaffold:?}"
+    let infos: Vec<_> = scaffold
+        .iter()
+        .filter(|d| d.code == "media_unbuilt")
+        .collect();
+    assert_eq!(
+        infos.len(),
+        1,
+        "an unbuilt checkout is one fact, not one diagnostic per asset: {scaffold:?}"
     );
-    assert!(
-        !codes(&scaffold, Severity::Error).contains(&"media_absent".to_string()),
-        "absence must not fail a source build of the pack source itself: {scaffold:?}"
+    assert_eq!(infos[0].severity, Severity::Info);
+    assert_eq!(codes(&scaffold, Severity::Error).len(), 0, "{scaffold:?}");
+    assert!(infos[0].message.contains("2 asset"), "{}", infos[0].message);
+}
+
+#[test]
+fn partially_built_media_is_refused_in_every_mode() {
+    let tmp = tempfile::tempdir().unwrap();
+    let body = wav_bytes(b"hello");
+    let sha = hex_sha256(&body);
+    let len = body.len() as u64;
+    let missing = hex_sha256(&wav_bytes(b"other"));
+    let pack = pack_with(
+        tmp.path(),
+        &[
+            row("ja.demo.kite-0", "media/ja.demo.kite-0.wav", &sha, len),
+            row("ja.demo.kite-1", "media/ja.demo.kite-1.wav", &missing, 17),
+        ],
+        &[("ja.demo.kite-0.wav", body)],
     );
+    for require_present in [true, false] {
+        let diags = pack.audit_media(require_present);
+        assert!(
+            codes(&diags, Severity::Error).contains(&"media_missing".to_string()),
+            "require_present={require_present}: a half-built media directory cannot be \
+             trusted as provenance: {diags:?}"
+        );
+        assert!(
+            !codes(&diags, Severity::Error).contains(&"media_unbuilt".to_string()),
+            "some audio is present, so this is not an unbuilt checkout: {diags:?}"
+        );
+    }
 }
 
 #[test]

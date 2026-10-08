@@ -79,11 +79,23 @@ provenance-labeled.
   and both `validate(Mode::Install)` and `archive::build` refuse drift. Codes:
   `media_row_unusable`, `media_duplicate`, `media_unlisted` (warning — that file
   has no declared provenance, so the app must not label it), `media_hash_mismatch`
-  and `media_size_mismatch` (error in every mode), `media_missing` (error at
-  install/build) versus `media_absent` (info in a source checkout, where the
-  `.wav` bytes are gitignored by design). Verified on the real pack: flipping one
-  byte of `media/ja.contrast.vowel-length.obasan-0.wav` in a copy makes
-  `langpack build` exit 1 naming both digests.
+  and `media_size_mismatch` (error in every mode). Presence is judged by posture,
+  not per row: a pack with **none** of its declared assets on disk is an unbuilt
+  source checkout, reported once as `media_unbuilt` (info in scaffold, error at
+  install/build, never 693 lines); a pack with **some** of them is partially built
+  and every absent asset is a `media_missing` error in every mode, because a
+  manifest that describes part of the audio describes the pack falsely. Verified
+  on the real pack: flipping one byte of
+  `media/ja.contrast.vowel-length.obasan-0.wav` in a copy makes `langpack build`
+  exit 1 naming both digests; deleting all 693 `.wav` bytes from a copy turns
+  `validate` into one info line, `test` into exactly one error, and `build` into a
+  refusal.
+- Consequence for CI: a git checkout carries no audio, so install-mode `test`
+  cannot run on ja-JP there. CI runs `validate`/`lint` plus the audits for ja-JP
+  and keeps install-mode `test` for packs without audio (ru-RU); the full
+  install/build gate for ja-JP runs in `scripts/build-catalog.sh`, which
+  regenerates the audio first. The pairing logic itself is pinned by
+  `crates/langpack/tests/media.rs` inside `cargo test --workspace`.
 - Kokoro's Japanese path cannot voice bare kanji (measured 2026-10-07:
   `Ignore OOV '金'` → `Failed to convert '金' to token IDs`, exit 2). Three of the
   14 contrast items therefore had to gain kana `reading` values (金/木, 千/背,

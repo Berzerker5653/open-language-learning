@@ -74,11 +74,17 @@ fn japanese_seed_is_install_eligible() {
     let diags = pack.validate(Mode::Install, None);
     // K-32: owner decision 2026-10-04 (LIC-001, pack content) licensed the
     // on-ramp pack CC BY 4.0; install-mode validation must now be clean.
+    // Media presence is a build/release concern, not a licensing one
+    // (ADR-0016): a CI checkout has no generated .wav bytes, and install-mode
+    // validation reports that as a single `media_unbuilt` error. This test pins
+    // the licensing/promotion gates; the media gate itself lives in
+    // tests/media.rs and runs for real in scripts/build-catalog.sh.
+    let errors = diags
+        .iter()
+        .filter(|d| d.severity == Severity::Error && d.code != "media_unbuilt")
+        .count();
     assert_eq!(
-        diags
-            .iter()
-            .filter(|d| d.severity == Severity::Error)
-            .count(),
+        errors,
         0,
         "licensed seed must pass install validation: {diags:?}"
     );

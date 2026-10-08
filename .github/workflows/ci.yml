@@ -27,7 +27,15 @@ jobs:
         run: |
           cargo run -q -p lts-langpack-cli -- validate languages/ja-JP
           cargo run -q -p lts-langpack-cli -- lint languages/ja-JP
-          cargo run -q -p lts-langpack-cli -- test languages/ja-JP
+          # install-mode `test` is deliberately NOT run for ja-JP: its generated
+          # .wav bytes are gitignored (ADR-0016) and the install gate refuses audio
+          # a pack never built. The release path (scripts/build-catalog.sh)
+          # regenerates the audio and then runs build, which enforces the manifest
+          # pairing; that pairing logic is covered by crates/langpack/tests/media.rs
+          # through `cargo test --workspace` above.
+          cargo run -q -p lts-langpack-cli -- audit-curriculum languages/ja-JP
+          cargo run -q -p lts-langpack-cli -- audit-lexicon languages/ja-JP
+          cargo run -q -p lts-langpack-cli -- audit-licenses languages/ja-JP
           cargo run -q -p lts-langpack-cli -- validate languages/ru-RU
           cargo run -q -p lts-langpack-cli -- lint languages/ru-RU
           cargo run -q -p lts-langpack-cli -- test languages/ru-RU

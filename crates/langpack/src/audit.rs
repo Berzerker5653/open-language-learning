@@ -533,10 +533,14 @@ impl Pack {
     /// asset would leave the app labelling audio from file presence — exactly
     /// what the manifest exists to prevent.
     ///
-    /// `require_present` is true for install and build. In scaffold mode the
-    /// `.wav` bytes are gitignored and regenerated, so a declared-but-absent
-    /// asset is reported as info; a present asset whose bytes disagree with the
-    /// manifest is an error in every mode.
+    /// Posture is decided first, per pack: **unbuilt** (no declared asset
+    /// present at all — a source checkout, where the `.wav` bytes are gitignored
+    /// and regenerated) yields one aggregated `media_unbuilt` diagnostic instead
+    /// of one per asset; **partially built** is an error in every mode, because a
+    /// manifest that describes some but not all of the audio describes the pack
+    /// falsely. `require_present` only decides the severity of the unbuilt case:
+    /// install and build refuse it, scaffold reports it as info. A present asset
+    /// whose bytes disagree with the manifest is an error in every mode.
     pub fn audit_media(&self, require_present: bool) -> Vec<Diagnostic> {
         let mut diags: Vec<Diagnostic> = Vec::new();
         let rows: Vec<&crate::pack::Instance> = self
@@ -548,6 +552,9 @@ impl Pack {
             return diags;
         }
         let mut listed: HashSet<String> = HashSet::new();
+        // Decide the posture before reporting anything: an unbuilt checkout is
+        // expected, a half-built media directory is not.
+        let mut planned: Vec<(&crate::pack::Instance, String)> = Vec::new();
         for row in &rows {
             let rel = match row.value.get("file").and_then(Value::as_str) {
                 Some(rel) if !rel.is_empty() => rel.to_string(),
@@ -572,32 +579,55 @@ impl Pack {
                 ));
                 continue;
             }
+            planned.push((row, rel));
+        }
+        let present = planned
+            .iter()
+            .filter(|(_, rel)| self.root().join(rel).is_file())
+            .count();
+        let unbuilt = present == 0;
+        if unbuilt {
+            diags.push(Diagnostic::new(
+                "media/manifest.jsonl",
+                String::new(),
+                "media_unbuilt",
+                format!(
+                    "the media manifest declares {} asset(s) and none of them are present; {}",
+                    planned.len(),
+                    if require_present {
+                        "install and build must not proceed on audio this pack never built \
+                         (run scripts/generate-pack-audio.py first, ADR-0016)"
+                    } else {
+                        "expected in a source checkout: the .wav bytes are gitignored and \
+                         regenerated before install-mode gates and build (ADR-0016)"
+                    }
+                ),
+                if require_present {
+                    Severity::Error
+                } else {
+                    Severity::Info
+                },
+            ));
+        }
+        for (row, rel) in planned {
             let path = self.root().join(&rel);
             let bytes = match fs::read(&path) {
                 Ok(bytes) => bytes,
                 Err(_) => {
+                    if unbuilt {
+                        continue;
+                    }
                     diags.push(Diagnostic::new(
                         &row.file,
                         format!("{}/file", row.pointer),
-                        if require_present { "media_missing" } else { "media_absent" },
+                        "media_missing",
                         format!(
-                            "{rel} is declared by the media manifest but {}{}",
-                            if require_present {
-                                "absent; an installed pack must carry every declared asset"
-                            } else {
-                                "not in this checkout"
-                            },
-                            if require_present {
-                                ""
-                            } else {
-                                " (.wav bytes are gitignored and regenerated at build time, ADR-0016)"
-                            }
+                            "{rel} is declared by the media manifest and absent while other \
+                             declared assets are present: the media build is partial, so the \
+                             manifest does not describe this pack (regenerate with \
+                             scripts/generate-pack-audio.py, ADR-0016)"
                         ),
-                        if require_present {
-                            Severity::Error
-                        } else {
-                            Severity::Info
-                        },
+                        Severity::Error,
                     ));
                     continue;
                 }

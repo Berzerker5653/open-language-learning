@@ -72,7 +72,17 @@ fn test_gate_passes_licensed_seed_and_blocks_bad_packs() {
         .unwrap()
         .to_string();
     let (out, _err, ok) = run(&["test", &seed]);
-    assert!(ok, "licensed seed must pass the full gate: {out}");
+    if ok {
+        // Generated audio is present in this checkout: install mode must be clean.
+    } else {
+        // A checkout without the gitignored .wav bytes (CI, fresh clone) may fail
+        // the install gate for exactly one reason and one line only: the manifest
+        // promises audio that was never built here (ADR-0016). Any other error
+        // means the licensed seed lost install eligibility.
+        let errs: Vec<&str> = out.lines().filter(|l| l.trim_start().starts_with("error[")).collect();
+        assert_eq!(errs.len(), 1, "licensed seed: {out}");
+        assert!(errs[0].contains("media_unbuilt"), "licensed seed: {}", errs[0]);
+    }
 
     let (out, _err, ok) = run(&["test", &fixture("invalid-license-unknown")]);
     assert!(!ok, "unknown license must fail the gate: {out}");
