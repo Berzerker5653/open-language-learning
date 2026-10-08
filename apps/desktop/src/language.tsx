@@ -49,6 +49,18 @@ export interface TtsStatus {
   models: TtsModel[];
 }
 
+/// D4 (ADR-0019): the constrained-alignment runtime this build carries, as the
+/// engine reports it. `source` is `"bundled"` (release sidecar payload) or
+/// `"bench"` (development vendor tree); `reason` is the abstention token the
+/// panel turns into copy, never a linguistic judgement.
+export interface AlignerStatus {
+  available: boolean;
+  source: string | null;
+  runtime_version: string | null;
+  requires_cpu: string | null;
+  reason: string | null;
+}
+
 export interface SpeechModel {
   id: string;
   version: string;
@@ -102,6 +114,8 @@ export interface LanguagePanelProps {
   claims: PackClaims[] | null;
   /// K-46: runtime device-tier detection for the recommended model.
   deviceTier: DeviceTier | null;
+  /// D4 (ADR-0019): aligner runtime this build carries (null until loaded).
+  aligner: AlignerStatus | null;
 }
 
 const STATUS_LABELS: Record<string, string> = {
@@ -172,6 +186,26 @@ export interface DeviceTier {
 
 function megabytes(bytes: number): string {
   return (bytes / (1024 * 1024)).toFixed(1);
+}
+
+/// One honest sentence about the speech runtime, distinguishing the three ways
+/// it can be missing. Never claims a runtime this build does not ship, and
+/// never calls a CPU-floor abstention an absence.
+function alignerLine(a: AlignerStatus | null): string {
+  if (!a) return "Speech runtime: status could not be read.";
+  if (a.available) {
+    const from =
+      a.source === "bundled" ? "bundled in this build" : "resolved from a development runtime path";
+    return `Speech runtime: whisper.cpp ${a.runtime_version ?? "version unknown"}, ${from}.`;
+  }
+  switch (a.reason) {
+    case "speech-model-off":
+      return "Speech runtime: available, but the speech model is switched off below, so speaking checks abstain until you pick one.";
+    case "aligner-cpu-unsupported":
+      return `Speech runtime: this build carries it, but this CPU is below the instruction set it was compiled for (${a.requires_cpu ?? "x86-64-v3"}). Speaking checks abstain; every other activity works.`;
+    default:
+      return "Speech runtime: this build does not include whisper.cpp, so pronunciation feedback and dictation abstain. Downloading a model here does not change that.";
+  }
 }
 
 async function readFileB64(file: File): Promise<string> {
@@ -415,16 +449,19 @@ export function LanguagePanel(p: LanguagePanelProps) {
         <small>
           Optional. These local models feed the speech-based checks — pronunciation alignment and
           dictation recognition — or you can turn them off. They run entirely on this device;
-          nothing is uploaded. Honest limit: both checks also need a speech runtime (whisper.cpp)
-          that this build does not include, so while it is absent they abstain, and downloading a
-          model here does not change that. Pronunciation feedback is <em>guided only</em> (no
-          automatic scoring or mastery) until it has been calibrated. For pronunciation feedback the
-          model sizes give the same result — pick one your device can comfortably run. Larger models
-          mainly help future listening/recognition features, not pronunciation accuracy.
+          nothing is uploaded. Honest limit: both checks also need a speech runtime (whisper.cpp);
+          what this build carries, and on what terms, is stated right below. Pronunciation feedback
+          is <em>guided only</em> (no automatic scoring or mastery) until it has been calibrated.
+          For pronunciation feedback the model sizes give the same result — pick one your device can
+          comfortably run. Larger models mainly help future listening/recognition features, not
+          pronunciation accuracy.
           {p.deviceTier
             ? ` This device was detected as the ${p.deviceTier.tier} tier (${p.deviceTier.cores} cores, ${Math.round(p.deviceTier.total_ram_mb)} MB RAM).`
             : " This device's tier could not be detected, so no model is recommended — pick one your device can comfortably run."}
         </small>
+      </p>
+      <p className="meta pack-posture" data-aligner={p.aligner?.available ? "yes" : "no"}>
+        {alignerLine(p.aligner)}
       </p>
       <fieldset>
         <legend>Speech model</legend>

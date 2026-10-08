@@ -28,6 +28,7 @@ import {
   type SpeechModel,
   type TtsStatus,
   type DeviceTier,
+  type AlignerStatus,
 } from "./language";
 import { WritingPractice, type WritingTaskView } from "./writing";
 import { PracticeRunner, type PracticeTaskView } from "./practice";
@@ -220,6 +221,7 @@ export function App() {
   const [audioMsg, setAudioMsg] = useState<string | null>(null);
   const [langError, setLangError] = useState<string | null>(null);
   const [ttsStatus, setTtsStatus] = useState<TtsStatus | null>(null);
+  const [alignerStatus, setAlignerStatus] = useState<AlignerStatus | null>(null);
   const [speechModels, setSpeechModels] = useState<SpeechModel[]>([]);
   const [speechModel, setSpeechModel] = useState<string>("off");
   const [deviceTier, setDeviceTier] = useState<DeviceTier | null>(null);
@@ -421,6 +423,13 @@ export function App() {
               note: `route:${(b.textContent ?? "").trim()}`,
             });
           }
+          // D4 (ADR-0019): the app must be able to state, over real IPC, which
+          // aligner runtime this build carries. The value is build-dependent;
+          // the requirement is that the answer exists.
+          const al = (await inv("aligner_status")) as AlignerStatus;
+          await inv("smoke_ack", {
+            note: `aligner:${al.available ? "yes" : "no"}:${al.available ? (al.source ?? "?") : (al.reason ?? "?")}`,
+          });
           await inv("smoke_ack", {
             note: `routes-complete:${buttons.length}`,
           });
@@ -508,6 +517,11 @@ export function App() {
   async function refreshTts() {
     if (!inv) return;
     setTtsStatus((await inv("tts_status")) as TtsStatus);
+  }
+
+  async function refreshAligner() {
+    if (!inv) return;
+    setAlignerStatus((await inv("aligner_status")) as AlignerStatus);
   }
 
   async function installTtsModel(modelId: string) {
@@ -1786,6 +1800,7 @@ export function App() {
               setRoute("language");
               void refreshLanguages();
               void refreshTts();
+              void refreshAligner();
               void refreshSpeech();
             }}
           >
@@ -2339,6 +2354,7 @@ export function App() {
           onSelectStressMode={(m) => void setStressMode(m)}
           claims={claims}
           deviceTier={deviceTier}
+          aligner={alignerStatus}
         />
       ) : route === "scenarios" ? (
         <ScenarioPanel

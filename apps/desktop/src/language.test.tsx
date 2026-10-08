@@ -90,6 +90,7 @@ function render(over: Partial<Parameters<typeof LanguagePanel>[0]> = {}) {
       onSelectStressMode={() => {}}
       claims={null}
       deviceTier={null}
+      aligner={null}
       {...over}
     />,
   );
@@ -332,11 +333,46 @@ describe("language panel", () => {
     expect(html).toContain("pronunciation alignment and");
     expect(html).toContain("dictation recognition");
     expect(html).toContain("speech runtime (whisper.cpp)");
-    expect(html).toContain("this build does not include");
-    expect(html).toContain("they abstain");
+    // Choosing a model never alone enables the speaking checks: before the
+    // runtime status is read the panel says it could not read it rather than
+    // promising a runtime this build may not carry.
+    expect(html).toContain("status could not be read");
     // The old copy ("Choose a local speech model for pronunciation
     // feedback") implied selecting a model makes feedback work; that
     // claim may not return while the runtime is absent.
     expect(html).not.toMatch(/speech model for pronunciation feedback, or turn it off/i);
+  });
+
+  it("states the bundled aligner runtime instead of claiming absence (ADR-0019)", () => {
+    const html = render({
+      aligner: {
+        available: true,
+        source: "bundled",
+        runtime_version: "1.9.4",
+        requires_cpu: "x86-64-v3 (SSE4.2, F16C, FMA, BMI2, AVX, AVX2; no AVX-512)",
+        reason: null,
+      },
+    });
+    expect(html).toContain("whisper.cpp 1.9.4, bundled in this build");
+    // The blanket absence claim must not survive a build that ships the
+    // payload: it would tell the owner a runtime is missing when it is there.
+    expect(html).not.toContain("this build does not include whisper.cpp");
+  });
+
+  it("names the instruction floor when the payload cannot run on this CPU", () => {
+    const html = render({
+      aligner: {
+        available: false,
+        source: null,
+        runtime_version: null,
+        requires_cpu: "x86-64-v3 (SSE4.2, F16C, FMA, BMI2, AVX, AVX2; no AVX-512)",
+        reason: "aligner-cpu-unsupported",
+      },
+    });
+    expect(html).toContain("below the instruction set it was compiled for");
+    expect(html).toContain("x86-64-v3");
+    // A CPU-floor abstention is not an absence: the payload exists here.
+    expect(html).not.toContain("does not include whisper.cpp");
+    expect(html).toContain('data-aligner="no"');
   });
 });

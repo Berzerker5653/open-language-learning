@@ -128,9 +128,9 @@ export function Settings(p: SettingsProps) {
           <small>
             This is the same preference as Languages → Speech; downloads and removals are managed
             there. Honest limit: the speech-based checks (pronunciation feedback and dictation
-            recognition) also need a speech runtime that this build does not include. While that
-            runtime is absent those checks abstain, and choosing or downloading a model here does
-            not change that — nothing else is affected.
+            recognition) also need a speech runtime; Languages → Speech states whether this build
+            carries one and on what terms. Where the runtime is absent those checks abstain, and
+            choosing or downloading a model here does not change that — nothing else is affected.
           </small>
         </p>
       </div>

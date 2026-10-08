@@ -72,4 +72,12 @@ if ! grep -q '^goal-map-assert [1-9]' "$MARKER"; then
   echo "FAIL: goal map returned no goals (K-40)" >&2
   exit 1
 fi
+# D4 (ADR-0019): the app must state, over real IPC, which aligner runtime this
+# build carries. The value depends on how the binary was built; the failure is
+# never answering at all.
+if ! grep -q '^smoke-ok aligner:' "$MARKER"; then
+  echo "FAIL: the app never reported its aligner runtime status (D4/ADR-0019)" >&2
+  exit 1
+fi
+echo "aligner runtime: $(grep '^smoke-ok aligner:' "$MARKER" | head -1 | sed 's/^smoke-ok aligner://')"
 echo "SMOKE OK ($NROUTES routes walked)"

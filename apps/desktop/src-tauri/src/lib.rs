@@ -2570,29 +2570,110 @@ fn pronunciation_demo_at(data: &Path, pack_id: &str) -> Result<PronunciationDemo
     fallback.ok_or_else(|| "pack declares no phonology contrasts".into())
 }
 
-/// Dev/vendor aligner path; production packaging ships whisper.cpp as a
-/// sidecar (ADR-0008). Model prefers the installed catalog copy.
-fn aligner_paths(data: &Path) -> Option<(PathBuf, PathBuf)> {
+/// Where a bundled build's aligner payload lives (`<resource_dir>/aligner`).
+/// Set once at startup from the resource dir, exactly like `BUNDLED_TTS`
+/// (runtime input, so `OnceLock` not `LazyLock`); unset for bare/dev builds,
+/// which degrade to the dev vendor tree or to honest abstention
+/// (ADR-0019, following the ADR-0009 variant pattern).
+static BUNDLED_SIDECAR: std::sync::OnceLock<PathBuf> = std::sync::OnceLock::new();
+
+/// Which aligner a call actually got, so both feedback and status can name the
+/// source instead of only reporting that one was missing.
+#[derive(Debug, Clone, PartialEq)]
+struct AlignerSource {
+    source: &'static str,
+    binary: PathBuf,
+    model: PathBuf,
+    runtime_version: Option<String>,
+}
+
+/// Why there is no aligner. `Cpu` is deliberately distinct from `Absent`: the
+/// payload is on the disk and the host CPU is below its instruction-set floor,
+/// which is a different thing to tell a person than "this build has no runtime".
+#[derive(Debug, Clone, PartialEq)]
+enum AlignerMiss {
+    ModelOff,
+    Cpu { requires_cpu: String },
+    Absent,
+}
+
+/// Single probe for every aligner caller, so "is there an aligner, and where
+/// from" is answered one way everywhere.
+///
+/// Priority (ADR-0019, mirroring `resolve_tts`):
+/// 1. `bundled` — the release overlay's staged sidecar under
+///    `<resource_dir>/aligner/<platform>`, gated by the payload manifest:
+///    schema, component, build platform, file sizes, and the CPU check;
+/// 2. `bench` — the development vendor tree (`LTS_BENCH_VENDOR` /
+///    `~/.cache/lts-bench`), never shipped, taking the model from the installed
+///    catalog entry when the user installed one.
+fn aligner_probe(data: &Path) -> Result<AlignerSource, AlignerMiss> {
     let pref = models::load_speech_pref(data);
     if pref.asr_model == "off" {
-        return None;
+        return Err(AlignerMiss::ModelOff);
     }
+    let bundled = BUNDLED_SIDECAR.get().cloned();
     let vendor = match std::env::var("LTS_BENCH_VENDOR") {
-        Ok(v) => PathBuf::from(v),
-        Err(_) => match std::env::var("HOME") {
-            Ok(h) => PathBuf::from(h).join(".cache/lts-bench"),
-            Err(_) => return None,
-        },
+        Ok(v) => Some(PathBuf::from(v)),
+        Err(_) => std::env::var("HOME")
+            .ok()
+            .map(|h| PathBuf::from(h).join(".cache/lts-bench")),
     };
+    aligner_probe_with(data, &pref.asr_model, bundled.as_deref(), vendor.as_deref())
+}
+
+/// Environment-independent core: `bundled`/`vendor` are passed in so priority,
+/// abstention and the CPU gate are testable without touching process state.
+fn aligner_probe_with(
+    data: &Path,
+    asr_model: &str,
+    bundled: Option<&Path>,
+    vendor: Option<&Path>,
+) -> Result<AlignerSource, AlignerMiss> {
+    use lts_speech_runtime::sidecar::{Sidecar, SidecarProblem, host_platform};
+    let mut cpu_floor: Option<String> = None;
+    if let Some(root) = bundled {
+        let dir = root.join(host_platform());
+        if dir.exists() {
+            match Sidecar::load(&dir) {
+                Ok(sc) => {
+                    return Ok(AlignerSource {
+                        source: "bundled",
+                        binary: sc.binary(),
+                        model: sc.model_path(),
+                        runtime_version: Some(sc.manifest.runtime.version.clone()),
+                    });
+                }
+                Err(SidecarProblem::CpuUnsupported { requires_cpu }) => {
+                    cpu_floor = Some(requires_cpu)
+                }
+                // A half-staged or malformed payload must never be executed; it
+                // reads as absent, and aligner_status says so.
+                Err(_) => {}
+            }
+        }
+    }
+    let miss = || match cpu_floor.clone() {
+        Some(requires_cpu) => AlignerMiss::Cpu { requires_cpu },
+        None => AlignerMiss::Absent,
+    };
+    let vendor = vendor.ok_or_else(miss)?;
     let binary = vendor.join("whisper.cpp/build/bin/whisper-cli");
     if !binary.exists() {
-        return None;
+        return Err(miss());
     }
+    // The dev path keeps the model from the model manager when installed, and
+    // from the vendor tree otherwise (the bench harness layout).
     let entry = models::load_catalog()
         .models
         .into_iter()
-        .find(|m| m.id == pref.asr_model)?;
-    let file = entry.files.first()?;
+        .find(|m| m.id == asr_model);
+    let Some(entry) = entry else {
+        return Err(miss());
+    };
+    let Some(file) = entry.files.first() else {
+        return Err(miss());
+    };
     let installed = models::model_dir(data, &entry).join(&file.path);
     let model = if installed.exists() {
         installed
@@ -2601,10 +2682,81 @@ fn aligner_paths(data: &Path) -> Option<(PathBuf, PathBuf)> {
         if v.exists() {
             v
         } else {
-            return None;
+            return Err(miss());
         }
     };
-    Some((binary, model))
+    Ok(AlignerSource {
+        source: "bench",
+        binary,
+        model,
+        runtime_version: None,
+    })
+}
+
+/// The abstention token the frontend maps to honest copy. `aligner-cpu-unsupported`
+/// is new with the bundled sidecar: the runtime is present but the host CPU is
+/// below the payload's stated floor, so the sentence is different.
+fn aligner_miss_reason(miss: &AlignerMiss) -> String {
+    match miss {
+        AlignerMiss::ModelOff => "speech-model-off".into(),
+        AlignerMiss::Cpu { .. } => "aligner-cpu-unsupported".into(),
+        AlignerMiss::Absent => "aligner-unavailable".into(),
+    }
+}
+
+/// What this build can honestly say about the alignment runtime, so a panel can
+/// name what is present (and what a CPU requirement means) instead of only
+/// reacting to a failed attempt (docs/18).
+#[derive(Debug, Clone, serde::Serialize)]
+struct AlignerStatus {
+    available: bool,
+    /// `"bundled"` (release sidecar) | `"bench"` (development vendor tree) | none.
+    source: Option<String>,
+    runtime_version: Option<String>,
+    /// The payload's stated instruction-set floor, when a payload exists.
+    requires_cpu: Option<String>,
+    /// The abstention token the frontend maps to copy, when unavailable.
+    reason: Option<String>,
+}
+
+fn aligner_status_at(data: &Path) -> AlignerStatus {
+    let floor = bundled_cpu_floor();
+    match aligner_probe(data) {
+        Ok(src) => AlignerStatus {
+            available: true,
+            source: Some(src.source.into()),
+            runtime_version: src.runtime_version,
+            requires_cpu: floor,
+            reason: None,
+        },
+        Err(miss) => AlignerStatus {
+            available: false,
+            source: None,
+            runtime_version: None,
+            requires_cpu: match &miss {
+                AlignerMiss::Cpu { requires_cpu } => Some(requires_cpu.clone()),
+                _ => floor,
+            },
+            reason: Some(aligner_miss_reason(&miss)),
+        },
+    }
+}
+
+/// Reads only the staged payload's manifest, with no gates, so a panel can state
+/// the requirement even when the payload is unusable or incomplete.
+fn bundled_cpu_floor() -> Option<String> {
+    let root = BUNDLED_SIDECAR.get()?;
+    let dir = root.join(lts_speech_runtime::sidecar::host_platform());
+    let raw = std::fs::read_to_string(dir.join(lts_speech_runtime::sidecar::MANIFEST_FILE)).ok()?;
+    serde_yaml::from_str::<lts_speech_runtime::sidecar::SidecarManifest>(&raw)
+        .ok()
+        .map(|m| m.runtime.requires_cpu)
+        .filter(|s| !s.trim().is_empty())
+}
+
+#[tauri::command]
+fn aligner_status() -> AlignerStatus {
+    aligner_status_at(&data_dir())
 }
 
 #[tauri::command]
@@ -2641,18 +2793,14 @@ fn pronunciation_check_at(
         .ok_or("pack not installed")?;
     let pack_dir = packs_root.join(&attempt.pack_id).join(&version);
     let pref = models::load_speech_pref(data);
-    let Some((binary, model)) = aligner_paths(data) else {
-        return Ok(abstain(if pref.asr_model == "off" {
-            "speech-model-off".into()
-        } else {
-            "aligner-unavailable".into()
-        }));
-    };
-    let aligner = lts_speech_runtime::WhisperConstrainedAligner {
-        binary,
-        model,
-        language: "ja".into(),
-        threshold: 0.6,
+    let aligner = match aligner_probe(data) {
+        Ok(src) => lts_speech_runtime::WhisperConstrainedAligner {
+            binary: src.binary,
+            model: src.model,
+            language: "ja".into(),
+            threshold: 0.6,
+        },
+        Err(miss) => return Ok(abstain(aligner_miss_reason(&miss))),
     };
     let expected = lts_speech_api::ExpectedUtterance {
         content_id: long.clone(),
@@ -2873,16 +3021,12 @@ fn dictation_check_at(data: &Path, attempt: DictationAttempt) -> Result<Dictatio
         abstain_reason: Some(reason),
         mode: "guided",
     };
-    let pref = models::load_speech_pref(data);
-    let Some((binary, model)) = aligner_paths(data) else {
-        return Ok(abstain(
-            if pref.asr_model == "off" {
-                "speech-model-off".into()
-            } else {
-                "aligner-unavailable".into()
-            },
-            String::new(),
-        ));
+    // Dictation needs the recognizer output rather than the aligner object, so it
+    // keeps the resolved paths (ADR-0019: one probe, one priority, one vocabulary
+    // of reasons).
+    let src = match aligner_probe(data) {
+        Ok(src) => src,
+        Err(miss) => return Ok(abstain(aligner_miss_reason(&miss), String::new())),
     };
     use base64::Engine;
     let wav_bytes = base64::engine::general_purpose::STANDARD
@@ -2898,8 +3042,9 @@ fn dictation_check_at(data: &Path, attempt: DictationAttempt) -> Result<Dictatio
     if matches!(q, lts_speech_api::ProviderOutcome::QualityRejected { .. }) {
         return Ok(abstain(outcome_reason(&q), String::new()));
     }
-    let tokens = lts_speech_runtime::alignment::run_whisper_words(&binary, &model, "ja", &audio)
-        .map_err(|e| e.to_string())?;
+    let tokens =
+        lts_speech_runtime::alignment::run_whisper_words(&src.binary, &src.model, "ja", &audio)
+            .map_err(|e| e.to_string())?;
     let heard: String = tokens
         .iter()
         .map(|t| t.text.trim())
@@ -5249,6 +5394,10 @@ pub fn run() {
             use tauri::Manager;
             if let Ok(rd) = app.path().resource_dir() {
                 let _ = BUNDLED_TTS.set(rd.join("tts"));
+                // ADR-0019: the aligner-bundled variant stages its payload under
+                // `<resource_dir>/aligner`; a bare build has no such directory and
+                // abstains honestly rather than pretending an ASR exists.
+                let _ = BUNDLED_SIDECAR.set(rd.join("aligner"));
             }
             Ok(())
         })
@@ -5267,6 +5416,7 @@ pub fn run() {
             progress_summary,
             available_models,
             install_model,
+            aligner_status,
             delete_model,
             get_speech_model,
             set_speech_model,
@@ -6109,6 +6259,178 @@ mod tests {
         let json = serde_json::to_string(&plan).unwrap();
         assert!(!json.contains("streak"));
         assert!(!json.contains("heart"));
+    }
+
+    /// ADR-0019: a staged sidecar payload outranks the development vendor tree,
+    /// so a released build never depends on a developer's cache directory.
+    #[test]
+    fn the_bundled_sidecar_outranks_the_dev_vendor_tree() {
+        let tmp = tempfile::TempDir::new().unwrap();
+        let data = tmp.path();
+        let payload = data.join("resources/aligner");
+        write_fake_sidecar(&payload, "");
+        // A vendor tree that could also answer must lose.
+        let vendor = write_fake_vendor(data);
+
+        let got = aligner_probe_with(
+            data,
+            "org.openlanguage.speech.whisper-ggml-tiny",
+            Some(&payload),
+            Some(&vendor),
+        )
+        .unwrap();
+        assert_eq!(got.source, "bundled");
+        assert!(
+            got.binary.starts_with(&payload),
+            "the bundled payload must be the one used: {:?}",
+            got.binary
+        );
+        assert_eq!(got.runtime_version.as_deref(), Some("1.9.4"));
+    }
+
+    /// The two failures are different sentences. A CPU below the payload's
+    /// stated floor must not be reported as "this build has no runtime"
+    /// (docs/18: say the thing that is actually true).
+    #[test]
+    fn a_payload_the_cpu_cannot_run_says_so_instead_of_claiming_absence() {
+        let tmp = tempfile::TempDir::new().unwrap();
+        let payload = tmp.path().join("aligner");
+        write_fake_sidecar(&payload, "avx1024");
+        let miss = aligner_probe_with(
+            tmp.path(),
+            "org.openlanguage.speech.whisper-ggml-tiny",
+            Some(&payload),
+            None,
+        )
+        .expect_err("an impossible instruction-set floor cannot resolve");
+        assert!(matches!(miss, AlignerMiss::Cpu { .. }), "{:?}", miss);
+        assert_eq!(aligner_miss_reason(&miss), "aligner-cpu-unsupported");
+    }
+
+    /// A half-staged payload must never be executed, and must not take the
+    /// development path down with it.
+    #[test]
+    fn an_incomplete_payload_never_runs_and_does_not_shadow_the_dev_path() {
+        let tmp = tempfile::TempDir::new().unwrap();
+        let payload = tmp.path().join("aligner");
+        write_fake_sidecar(&payload, "");
+        std::fs::remove_file(
+            payload
+                .join(lts_speech_runtime::sidecar::host_platform())
+                .join("model/ggml-tiny.bin"),
+        )
+        .unwrap();
+        let vendor = write_fake_vendor(tmp.path());
+
+        let got = aligner_probe_with(
+            tmp.path(),
+            "org.openlanguage.speech.whisper-ggml-tiny",
+            Some(&payload),
+            Some(&vendor),
+        )
+        .unwrap();
+        assert_eq!(
+            got.source, "bench",
+            "an unusable payload must not hide a working dev path"
+        );
+
+        let miss = aligner_probe_with(
+            tmp.path(),
+            "org.openlanguage.speech.whisper-ggml-tiny",
+            Some(&payload),
+            None,
+        )
+        .expect_err("nothing usable");
+        assert_eq!(
+            aligner_miss_reason(&miss),
+            "aligner-unavailable",
+            "a broken payload is an absence, not a CPU claim"
+        );
+    }
+
+    /// Choosing no speech model is the user opting out, which is a different
+    /// answer from a build that has no runtime.
+    #[test]
+    fn a_disabled_speech_model_is_reported_as_opted_out() {
+        let tmp = tempfile::TempDir::new().unwrap();
+        let miss = aligner_probe(tmp.path()).expect_err("the default preference is off");
+        assert_eq!(aligner_miss_reason(&miss), "speech-model-off");
+    }
+
+    /// A payload that satisfies the resolver's gates without a real whisper.cpp
+    /// build: declared sizes match the files on disk, and `requires_cpu` is the
+    /// caller's so the CPU gate can be driven both ways.
+    fn write_fake_sidecar(root: &Path, requires_cpu: &str) {
+        use lts_speech_runtime::sidecar::{MANIFEST_FILE, host_platform};
+        let dir = root.join(host_platform());
+        std::fs::create_dir_all(dir.join("bin")).unwrap();
+        std::fs::create_dir_all(dir.join("model")).unwrap();
+        let files = [
+            "bin/whisper-cli",
+            "bin/libwhisper.so.1",
+            "bin/libggml.so.0",
+            "bin/libggml-cpu.so.0",
+            "bin/libggml-base.so.0",
+            "bin/libgomp.so.1",
+        ];
+        for f in files {
+            std::fs::write(dir.join(f), format!("fake-{f}")).unwrap();
+        }
+        std::fs::write(dir.join("model/ggml-tiny.bin"), "fake-model").unwrap();
+        let entries = files
+            .iter()
+            .map(|f| {
+                let bytes = std::fs::metadata(dir.join(f)).unwrap().len();
+                format!(
+                    "    - path: {f}\n      bytes: {bytes}\n      sha256: {}",
+                    "0".repeat(64)
+                )
+            })
+            .collect::<Vec<_>>()
+            .join("\n");
+        std::fs::write(
+            dir.join(MANIFEST_FILE),
+            [
+                "schema_version: 1",
+                "component: whisper.cpp-aligner",
+                &format!("built_for: {}", host_platform()),
+                "runtime:",
+                "  upstream: https://github.com/ggml-org/whisper.cpp",
+                &format!("  ref: {}", "0".repeat(40)),
+                "  version: 1.9.4",
+                "  license: MIT",
+                "  build_flags: -DGGML_NATIVE=OFF",
+                &format!("  requires_cpu: \"{requires_cpu}\""),
+                "  files:",
+                &entries,
+                "model:",
+                "  id: ggml-tiny",
+                "  upstream: https://huggingface.co/ggerganov/whisper.cpp",
+                "  license: MIT",
+                "  bytes: 10",
+                &format!("  sha256: {}", "0".repeat(64)),
+                "staged:",
+                "  date: \"2026-10-08T00:00:00Z\"",
+                "  by: test",
+                "  host: test",
+            ]
+            .join("\n"),
+        )
+        .unwrap();
+    }
+
+    /// A development vendor tree that the resolver would accept, so priority is
+    /// proven against a real alternative rather than an empty directory.
+    fn write_fake_vendor(root: &Path) -> PathBuf {
+        let vendor = root.join("vendor");
+        std::fs::create_dir_all(vendor.join("whisper.cpp/build/bin")).unwrap();
+        std::fs::write(
+            vendor.join("whisper.cpp/build/bin/whisper-cli"),
+            "#!/bin/sh\n",
+        )
+        .unwrap();
+        std::fs::write(vendor.join("ggml-tiny.bin"), "vendor model").unwrap();
+        vendor
     }
 
     #[test]

@@ -1,8 +1,8 @@
 // SETTINGS-001 UI contract: the mic control mirrors the stored setting,
 // Delete is a two-step confirmation (never fires from the first control),
 // Export reports the written path, and no copy claims a capability this
-// build lacks (the speech runtime is absent; a model download does not
-// supply it).
+// build lacks (the speech-runtime limit is stated and pointed at the page
+// that reports it; choosing a model never supplies a missing runtime).
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 import { Settings, type SettingsProps } from "./settings";
@@ -79,8 +79,10 @@ describe("settings", () => {
       microphoneEnabled: true,
       speechModel: "org.openlanguage.speech.whisper-ggml-tiny",
     });
-    // The runtime-absent limit is stated, not glossed over.
-    expect(html).toContain("speech runtime that this build does not include");
+    // The runtime limit is stated, not glossed over — and Settings states it
+    // as a limit, not as a build-wide claim about which runtimes exist.
+    expect(html).toContain("need a speech runtime");
+    expect(html).toContain("states whether this build carries one");
     expect(html).toContain("does not change that");
     // No "install a model in Settings to get feedback" promise.
     expect(html).not.toMatch(/install a speech model in Settings/i);

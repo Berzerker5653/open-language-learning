@@ -41,6 +41,8 @@ const REASON_TEXT: Record<string, string> = {
     "No speech model is selected. Choose one under Languages → Speech. Recognition also needs a speech runtime on this device; without it this check abstains.",
   "aligner-unavailable":
     "Recognition cannot run: this device lacks the speech runtime dictation needs, and downloading a model alone does not add one. This check abstains; text and listening activities are unaffected.",
+  "aligner-cpu-unsupported":
+    "Recognition cannot run: this build carries the speech runtime, but this CPU is below the instruction set it was compiled for. This check abstains; text and listening activities are unaffected.",
   "asr-no-speech": "I did not catch any speech. Try again a little louder.",
   uncertain: "I am not confident I caught that. Try again.",
 };

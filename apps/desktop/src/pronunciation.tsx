@@ -65,6 +65,8 @@ const TEMPLATE_TEXT: Record<string, string> = {
 const REASON_TEXT: Record<string, string> = {
   "aligner-unavailable":
     "Feedback cannot run: this device has no speech alignment runtime, and installing a speech model does not add one. This attempt is not scored; other practice is unaffected.",
+  "aligner-cpu-unsupported":
+    "Feedback cannot run: this build carries a speech alignment runtime, but this CPU is below the instruction set it was compiled for. This attempt is not scored; other practice is unaffected.",
   "reference-media-missing": "The reference recording for this exercise is missing from the pack.",
   "reference-media-invalid": "The reference recording could not be read.",
 };
