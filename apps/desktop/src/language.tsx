@@ -38,6 +38,9 @@ export interface TtsModel {
   version: string;
   license_code: string;
   installed: boolean;
+  /// False when the catalog lists a payload this build cannot deliver; the
+  /// panel must not offer a download for it.
+  installable: boolean;
 }
 
 export interface TtsStatus {
@@ -51,6 +54,7 @@ export interface SpeechModel {
   version: string;
   license_code: string;
   installed: boolean;
+  installable: boolean;
   size_bytes: number;
 }
 
@@ -385,7 +389,7 @@ export function LanguagePanel(p: LanguagePanelProps) {
                   >
                     Remove
                   </button>
-                ) : (
+                ) : m.installable ? (
                   <button
                     type="button"
                     className="btn btn--primary"
@@ -393,6 +397,10 @@ export function LanguagePanel(p: LanguagePanelProps) {
                   >
                     Download
                   </button>
+                ) : (
+                  // A payload this build has not staged: no button, and the
+                  // reason stated instead of a download that would fail.
+                  <span className="meta">not published in this build</span>
                 )}
               </li>
             ))}
@@ -405,12 +413,14 @@ export function LanguagePanel(p: LanguagePanelProps) {
       <h2>Speech recognition &amp; pronunciation</h2>
       <p>
         <small>
-          Optional. Choose a local speech model for pronunciation feedback, or turn it off. Models
-          run entirely on this device — nothing is uploaded. Pronunciation feedback is{" "}
-          <em>guided only</em> (no automatic scoring or mastery) until it has been calibrated. For
-          pronunciation feedback the model sizes give the same result — pick one your device can
-          comfortably run. Larger models mainly help future listening/recognition features, not
-          pronunciation accuracy.
+          Optional. These local models feed the speech-based checks — pronunciation alignment and
+          dictation recognition — or you can turn them off. They run entirely on this device;
+          nothing is uploaded. Honest limit: both checks also need a speech runtime (whisper.cpp)
+          that this build does not include, so while it is absent they abstain, and downloading a
+          model here does not change that. Pronunciation feedback is <em>guided only</em> (no
+          automatic scoring or mastery) until it has been calibrated. For pronunciation feedback
+          the model sizes give the same result — pick one your device can comfortably run. Larger
+          models mainly help future listening/recognition features, not pronunciation accuracy.
           {p.deviceTier
             ? ` This device was detected as the ${p.deviceTier.tier} tier (${p.deviceTier.cores} cores, ${Math.round(p.deviceTier.total_ram_mb)} MB RAM).`
             : " This device's tier could not be detected, so no model is recommended — pick one your device can comfortably run."}
@@ -452,7 +462,7 @@ export function LanguagePanel(p: LanguagePanelProps) {
               >
                 Remove
               </button>
-            ) : (
+            ) : m.installable ? (
               <button
                 type="button"
                 className="btn btn--primary"
@@ -460,6 +470,8 @@ export function LanguagePanel(p: LanguagePanelProps) {
               >
                 Download ~{megabytes(m.size_bytes)} MB
               </button>
+            ) : (
+              <span className="meta">not published in this build</span>
             )}
           </div>
         ))}

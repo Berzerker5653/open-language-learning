@@ -457,6 +457,7 @@ export function App() {
       runtime: string;
       license_code: string;
       installed: boolean;
+      installable: boolean;
       size_bytes: number;
     }>;
     setSpeechModels(
@@ -467,6 +468,7 @@ export function App() {
           version: m.version,
           license_code: m.license_code,
           installed: m.installed,
+          installable: m.installable,
           size_bytes: m.size_bytes,
         })),
     );

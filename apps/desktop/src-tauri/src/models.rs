@@ -49,6 +49,11 @@ pub struct ModelEntry {
     pub license_code: String,
     pub license_model: String,
     pub source: String,
+    /// `"unpublished"` when this build lists a payload it cannot deliver
+    /// because the release asset has not been staged (ADR-0009). Absent means
+    /// the payload is offered for download.
+    #[serde(default)]
+    pub availability: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -82,6 +87,9 @@ pub struct ModelStatus {
     pub license_model: String,
     pub installed: bool,
     pub size_bytes: u64,
+    /// False when the catalog lists a payload this build cannot deliver; the
+    /// UI must not offer a download button for it.
+    pub installable: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -106,6 +114,9 @@ pub fn model_status(data: &Path) -> Vec<ModelStatus> {
             // their pinned checksums (corruption reads as missing).
             let installed = verify_installed(data, &m).unwrap_or(false);
             let size_bytes = m.files.iter().map(|f| f.size_bytes).sum();
+            // Computed before the move below: the entry is consumed field by
+            // field while building the status.
+            let can_install = installable(&m);
             ModelStatus {
                 installed,
                 size_bytes,
@@ -115,9 +126,23 @@ pub fn model_status(data: &Path) -> Vec<ModelStatus> {
                 tier: m.tier,
                 license_code: m.license_code,
                 license_model: m.license_model,
+                installable: can_install,
             }
         })
         .collect()
+}
+
+/// Can this payload actually be fetched? A catalog entry that is explicitly
+/// unpublished, or whose URL is still the staging placeholder, must never be
+/// offered: the user would spend a download slot on a DNS failure.
+pub fn installable(entry: &ModelEntry) -> bool {
+    if entry.availability.as_deref() == Some("unpublished") {
+        return false;
+    }
+    entry
+        .files
+        .iter()
+        .all(|f| !f.url.contains("PENDING-RELEASE-URL") && !f.url.is_empty())
 }
 
 /// Install one model from bytes produced by `fetch(file)`. Files are
@@ -130,6 +155,12 @@ pub fn install_model_files(
     now_rfc: &str,
     fetch: impl Fn(&ModelFile) -> Result<Vec<u8>, String>,
 ) -> Result<InstalledRecord, String> {
+    if !installable(entry) {
+        return Err(format!(
+            "{} {} is not published in this build; nothing was downloaded",
+            entry.id, entry.version
+        ));
+    }
     let dest = model_dir(data, entry);
     let staging = dest.with_extension("staging");
     let _ = fs::remove_dir_all(&staging);
@@ -404,6 +435,7 @@ mod tests {
             license_code: "MIT".into(),
             license_model: "test".into(),
             source: "test".into(),
+            availability: None,
         }
     }
 
@@ -481,6 +513,7 @@ mod tests {
             license_code: "Apache-2.0".into(),
             license_model: "test".into(),
             source: "test".into(),
+            availability: None,
         }
     }
 
@@ -609,5 +642,92 @@ mod tests {
             )
             .is_err()
         );
+    }
+
+    /// D5: the catalog ships two TTS payloads whose release assets have never
+    /// been staged (ADR-0009). They must read as not installable, every other
+    /// entry must carry a real URL, and the installer must refuse the
+    /// unpublished ones before opening a connection.
+    #[test]
+    fn unpublished_payloads_are_never_offered_or_fetched() {
+        let catalog = load_catalog();
+        let blocked: Vec<&str> = catalog
+            .models
+            .iter()
+            .filter(|m| !installable(m))
+            .map(|m| m.id.as_str())
+            .collect();
+        assert_eq!(
+            blocked,
+            vec![
+                "org.openlanguage.speech.kokoro-multi-lang",
+                "org.openlanguage.speech.sherpa-onnx-runtime"
+            ],
+            "exactly the two unstaged payloads may be blocked"
+        );
+        for m in catalog.models.iter().filter(|m| installable(m)) {
+            for f in &m.files {
+                assert!(
+                    f.url.starts_with("https://huggingface.co/"),
+                    "{} points at {}",
+                    m.id,
+                    f.url
+                );
+            }
+        }
+        let entry = catalog
+            .models
+            .iter()
+            .find(|m| m.id == "org.openlanguage.speech.kokoro-multi-lang")
+            .unwrap();
+        let tmp = tempfile::tempdir().unwrap();
+        let fetched = std::sync::atomic::AtomicUsize::new(0);
+        let err = install_model_files(
+            tmp.path(),
+            entry,
+            "2026-10-08T00:00:00Z",
+            |_| {
+                fetched.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
+                Ok(Vec::new())
+            },
+        )
+        .unwrap_err();
+        assert!(
+            err.contains("not published"),
+            "refusal must name the reason: {err}"
+        );
+        assert!(
+            !model_dir(tmp.path(), entry).exists(),
+            "a refused install must leave nothing behind"
+        );
+    }
+
+    /// The staging placeholder URL is refused even without the availability
+    /// marker, so a catalog edit that drops the marker cannot resurrect it.
+    #[test]
+    fn a_placeholder_url_is_refused_whatever_the_marker_says() {
+        let mut e = test_entry();
+        e.files[0].url = "https://PENDING-RELEASE-URL.example.invalid/f.bin".into();
+        assert!(!installable(&e));
+        e.availability = Some("published".into());
+        assert!(
+            !installable(&e),
+            "the sentinel URL check must not depend on the marker"
+        );
+        let tmp = tempfile::tempdir().unwrap();
+        let fetched = std::sync::atomic::AtomicUsize::new(0);
+        assert!(
+            install_model_files(
+                tmp.path(),
+                &e,
+                "2026-10-08T00:00:00Z",
+                |_| {
+                    fetched.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
+                    Ok(Vec::new())
+                }
+            )
+            .is_err()
+        );
+        assert_eq!(fetched.load(std::sync::atomic::Ordering::SeqCst), 0);
     }
 }

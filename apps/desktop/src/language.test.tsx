@@ -156,6 +156,7 @@ describe("language panel", () => {
             version: "1.0.0",
             license_code: "Apache-2.0",
             installed: true,
+            installable: true,
           },
         ],
       },
@@ -179,6 +180,7 @@ describe("language panel", () => {
             version: "1.13.8",
             license_code: "Apache-2.0",
             installed: false,
+            installable: true,
           },
         ],
       },
@@ -189,6 +191,29 @@ describe("language panel", () => {
     expect(html).not.toContain("GPL-3.0");
   });
 
+  // D5: the catalog lists two TTS payloads whose release assets have never
+  // been staged. The panel must say so instead of offering a button that
+  // would spend the user's time on a placeholder URL.
+  it("offers no download for a payload this build has not published", () => {
+    const html = render({
+      tts: {
+        source: "none",
+        components: [],
+        models: [
+          {
+            id: "org.openlanguage.speech.kokoro-multi-lang",
+            version: "1.0.0",
+            license_code: "Apache-2.0",
+            installed: false,
+            installable: false,
+          },
+        ],
+      },
+    });
+    expect(html).toContain("not published in this build");
+    expect(html).not.toContain("Download");
+  });
+
   it("offers a speech-model selector that defaults to off and lists whisper models", () => {
     const html = render({
       speechModels: [
@@ -197,6 +222,7 @@ describe("language panel", () => {
           version: "1.0.0",
           license_code: "MIT",
           installed: false,
+          installable: true,
           size_bytes: 77691713,
         },
         {
@@ -204,6 +230,7 @@ describe("language panel", () => {
           version: "1.0.0",
           license_code: "MIT",
           installed: false,
+          installable: true,
           size_bytes: 147951465,
         },
       ],
@@ -297,5 +324,19 @@ describe("language panel", () => {
     expect(region).not.toMatch(/\b(validated|verified)\b/);
     // The only permitted review mention is the negated posture statement.
     expect(region).not.toMatch(/(?<!not )human-reviewed/);
+  });
+
+  it("describes the speech models honestly: runtime-gated, never a false capability claim", () => {
+    const html = render();
+    // What the models actually feed, and the runtime they still need.
+    expect(html).toContain("pronunciation alignment and");
+    expect(html).toContain("dictation recognition");
+    expect(html).toContain("speech runtime (whisper.cpp)");
+    expect(html).toContain("this build does not include");
+    expect(html).toContain("they abstain");
+    // The old copy ("Choose a local speech model for pronunciation
+    // feedback") implied selecting a model makes feedback work; that
+    // claim may not return while the runtime is absent.
+    expect(html).not.toMatch(/speech model for pronunciation feedback, or turn it off/i);
   });
 });
