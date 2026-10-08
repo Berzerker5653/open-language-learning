@@ -113,6 +113,17 @@ packaged binary walked its 13 routes reporting `aligner:yes:bundled`. Per
 ADR-0015 that is an agent run, not the human runtime report a platform
 "tested" claim needs.
 
+One limit that packaging did not remove: a release bundle is still not
+self-contained for **content**. `bundled_packs()` resolves pack candidates
+through the compile-time `CARGO_MANIFEST_DIR`, and the verification binary
+embeds `/home/hunter/game-dev/LTS/apps/desktop/src-tauri` next to
+`languages/ja-JP` — so the deb carries the aligner payload but can only find a
+language pack on the machine whose tree built it. The base config carries no
+pack resources on purpose, and the published-catalog path stays inert until
+O-05. Until either a merged pack+aligner overlay exists or the catalog is
+published, an installed bundle is testable on the build machine and nowhere
+else; say so rather than calling it installable anywhere. Kanban `K-59`.
+
 The payload is `apps/desktop/sidecar/<platform>/`: `bin/`
 (whisper-cli plus libwhisper.so.1, libggml.so.0, libggml-cpu.so.0,
 libggml-base.so.0, libgomp.so.1 as real bytes, never symlinks),

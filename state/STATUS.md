@@ -788,3 +788,11 @@ back gave `bundled` again. This was an agent run, so per ADR-0015 it is not the
 human runtime report O-06 owes — it does mean the owner can install a `.deb`
 rather than build one. `cargo tauri dev` carries no payload on purpose, which is
 the point of keeping the base `tauri.conf.json` payload-free.
+
+One caveat the packaging exposed (pre-existing, not introduced here): that deb
+has content only because it was built here. `bundled_packs()` resolves pack
+candidates from `env!("CARGO_MANIFEST_DIR")`, and the packaged binary embeds
+`/home/hunter/game-dev/LTS/apps/desktop/src-tauri` plus `languages/ja-JP`, so on a
+machine without this checkout an installed bundle would carry the aligner and no
+language at all. Recorded in docs/13 and as kanban `K-59`; not yet demonstrated on
+a clean machine, because there is no second Linux box to try it on.

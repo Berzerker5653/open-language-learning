@@ -65,7 +65,9 @@ dist/variants/tauri.aligner.json`. That build has already been made here on
 (78.80 MiB) and `…_0.1.0_amd64.AppImage` (180.56 MiB), both carrying the payload,
 and the packaged binary reported `aligner:yes:bundled`. Installing one of those is
 faster than building; a machine without pnpm needs the `beforeBuildCommand`
-override noted in docs/13.
+override noted in docs/13. Install it **on this machine**: pack lookup still
+resolves through the build tree, so an installed bundle has no content anywhere
+else until a pack overlay or the published catalog exists (kanban `K-59`).
 
 Surfaces that changed since the 2026-10-03 preview note, and what to check:
 

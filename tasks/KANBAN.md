@@ -83,6 +83,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | D5-rest | release | Staging the two real payloads (kokoro zip 345,065,270 B; sherpa runtime 30,454,382 B, `linux-x64` only) is publishing work needing owner authorization. Engine-side the placeholder is refused and the button is gone, so nothing user-visible waits on it except TTS itself | ADR-0009 |
 | P1 | ux | Profile switching after launch: the launch-time resume picker is the only entry, so changing profile mid-session means restarting the app. Not built speculatively — the owner's O-06 pass should say whether it is actually annoying | gap audit D9 |
 | H1 | pack | `display_name` still says "(Draft)"; rides the O-05 version bump rather than a separate pack release | O-05 |
+| K-59 | release | A release bundle is not self-contained for **content**: `bundled_packs()` resolves pack candidates through the compile-time `CARGO_MANIFEST_DIR`, and the 2026-10-08 packaged binary demonstrably embeds `/home/hunter/game-dev/LTS/apps/desktop/src-tauri` + `languages/ja-JP` — so the deb carries the aligner but finds a pack only on the machine whose tree built it. The base config carries no pack resources on purpose and the catalog path is inert until O-05. Fix is a merged pack+aligner resources overlay (the open question already in docs/13) or publishing the catalog first. Found while packaging D4; it blocks O-06 on a second machine, not on this one | docs/13, ADR-0016, D7/D8 |
 
 ## next — AI authoring kit (the GitHub community-pack goal)
 
