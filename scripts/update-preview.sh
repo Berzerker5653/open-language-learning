@@ -6,8 +6,9 @@
 # Without a remote: rebuild-only mode (tracks local `main`).
 #
 # Safe by design: never pulls over uncommitted changes, never rewrites
-# history, never merges a non-fast-forward move (warns instead), and does
-# nothing when the built commit already matches HEAD.
+# history, never merges a non-fast-forward move (warns instead), does nothing
+# when the built commit already matches HEAD, and restarts only the preview
+# binary it owns — a release/packaged `lts-desktop` is never touched.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 source scripts/tauri-env.sh
@@ -55,11 +56,24 @@ pnpm install --frozen-lockfile
 pnpm --filter @openlang/desktop exec tauri build --debug --no-bundle
 echo "$HEAD" >"$STAMP"
 
-if pgrep -x lts-desktop >/dev/null; then
-  pkill -x lts-desktop
+# Match the preview by path, not by process name: a packaged release build is
+# also called `lts-desktop`, and killing someone's release test mid-run is not
+# this script's business (it did exactly that once).
+if pgrep -f 'target/debug/lts-desktop' >/dev/null; then
+  pkill -f 'target/debug/lts-desktop'
   sleep 1
-  setsid ./scripts/launch-preview.sh >/tmp/lts-launch.log 2>&1 </dev/null &
+  # A transient oneshot service kills its whole cgroup when it exits, so a
+  # `setsid … &` child never survives the updater that started it — the
+  # relaunched preview died with the service and the preview simply vanished.
+  # Hand it to systemd as its own transient unit instead.
+  if command -v systemd-run >/dev/null 2>&1; then
+    systemd-run --user --quiet --unit=lts-preview --collect \
+      --property=Type=simple --property=Environment=DISPLAY=:0 \
+      ./scripts/launch-preview.sh
+  else
+    setsid ./scripts/launch-preview.sh >/tmp/lts-launch.log 2>&1 </dev/null &
+  fi
   echo "update-preview: rebuilt and restarted preview at $(git rev-parse --short "$HEAD")"
 else
-  echo "update-preview: rebuilt at $(git rev-parse --short "$HEAD") (no running instance)"
+  echo "update-preview: rebuilt at $(git rev-parse --short "$HEAD") (no running preview instance)"
 fi

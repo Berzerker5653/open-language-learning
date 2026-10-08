@@ -6,6 +6,11 @@ export default defineConfig({
   plugins: [react()],
   clearScreen: false,
   server: {
+    // Pinned to IPv4 loopback so it matches build.devUrl exactly: left
+    // implicit, vite binds ::1 only, and a debug build pointed at
+    // http://localhost:1420 then works or goes blank depending on how
+    // localhost resolves.
+    host: "127.0.0.1",
     port: 1420,
     strictPort: true,
   },
