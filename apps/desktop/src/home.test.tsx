@@ -113,6 +113,48 @@ describe("home", () => {
     expect(html).toContain("hello");
   });
 
+  it("makes every runner-backed modality startable and labels what it does (D2)", () => {
+    const row = (modality: string) => ({
+      item_id: `ja.lex.demo.watashi#${modality}`,
+      content_id: "ja.lex.demo.watashi",
+      modality,
+      reason: "due-review" as const,
+      est_seconds: 20,
+      surface: "私",
+      gloss: "me",
+    });
+    const render = (modality: string, withHandler = true) =>
+      renderToStaticMarkup(
+        <Home
+          displayName="Hunter"
+          plan={{ ...plan, items: [row(modality)] }}
+          activeBudget={5}
+          onBudget={() => {}}
+          {...(withHandler ? { onStart: () => {} } : {})}
+        />,
+      );
+    // Mirrors the `matches!` guard in practice_build: each of these has a typed
+    // runner, so a plan row for it must be actionable, not decorative.
+    for (const modality of [
+      "recall-meaning",
+      "comprehension-listening",
+      "phonological-discrimination",
+      "orthography-recognition",
+      "production-writing",
+      "orthographic-encoding",
+    ]) {
+      const html = render(modality);
+      expect(html).toContain('class="plan-item"');
+      expect(html).not.toContain("no practice runner");
+    }
+    // A modality with no runner says so instead of offering a dead button.
+    const inert = render("comprehension-reading");
+    expect(inert).not.toContain('class="plan-item"');
+    expect(inert).toContain("no practice runner");
+    // And no handler means no button at all.
+    expect(render("recall-meaning", false)).not.toContain('class="plan-item"');
+  });
+
   it("shows capability-gated environments with unlock state", () => {
     const html = renderToStaticMarkup(
       <Home

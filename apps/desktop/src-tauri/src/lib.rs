@@ -1077,13 +1077,15 @@ fn add_new_item_candidates(
             let version = lts_langpack::archive::current_version(&pack_id, &data.join("packs"))
                 .ok_or_else(|| format!("pack {pack_id} not installed"))?;
             for entry in lexicon_entries(data, &pack_id, &version)? {
-                // Introduce unseen items in both runner modalities;
-                // dedupe is per (content, modality) so a word practiced
-                // for recall can still surface for listening.
-                for m in [
-                    lts_domain::ActivityModality::RecallMeaning,
-                    lts_domain::ActivityModality::ComprehensionListening,
-                ] {
+                // Introduce unseen words for typed recall. Not for
+                // comprehension-listening: a lexicon entry has no declared
+                // audio (ADR-0016 puts every asset the pack ships in
+                // media/manifest.jsonl, and for ja-JP that is sentences and
+                // contrast items, never words), so scheduling a word as
+                // listening practice guaranteed a TTS dependency and an
+                // abstain on an offline install. Sentences carry the audio
+                // and are scheduled below.
+                for m in [lts_domain::ActivityModality::RecallMeaning] {
                     if derived
                         .iter()
                         .any(|d| d.content_id == entry.id && d.dimension == m)
@@ -1146,11 +1148,23 @@ fn add_new_item_candidates(
             // K-12: sentences join the new-item stream for both typed
             // recall modes — cloze (production-writing) and dictation
             // (orthographic-encoding) — wherever a pack declares them.
+            // Listening joins the same stream, but only for sentences the
+            // pack actually ships audio for, so the media the pack funds is
+            // what the learner is asked to hear.
+            let audio_ids = media_ids(&data.join("packs").join(&pack_id).join(&version));
             for entry in sentence_entries(data, &pack_id, &version)? {
                 let modes = [
                     lts_domain::ActivityModality::ProductionWriting,
                     lts_domain::ActivityModality::OrthographicEncoding,
+                    lts_domain::ActivityModality::ComprehensionListening,
                 ];
+                let modes: Vec<_> = modes
+                    .into_iter()
+                    .filter(|m| {
+                        *m != lts_domain::ActivityModality::ComprehensionListening
+                            || audio_ids.contains(&entry.id)
+                    })
+                    .collect();
                 for m in modes {
                     if m == lts_domain::ActivityModality::ProductionWriting
                         && entry.cloze_targets.is_empty()
@@ -2251,6 +2265,86 @@ fn checked_unit(raw: &str) -> Result<String, String> {
         .map_err(|_| "invalid unit id".to_string())
 }
 
+/// Resolve a media id to a file inside an installed pack. A pack that ships
+/// audio declares one `media/manifest.jsonl` row per media id (ADR-0016), and
+/// that row's `file` field is authoritative — filenames are pack data, not a
+/// convention the engine may assume. Packs with no manifest (the bundled demo
+/// pack) keep the older `{id}.wav` layout.
+fn media_file(pack_dir: &Path, unit: &str) -> PathBuf {
+    let dir = pack_dir.join("media");
+    if let Ok(text) = std::fs::read_to_string(dir.join("manifest.jsonl")) {
+        for line in text.lines().filter(|l| !l.trim().is_empty()) {
+            let Ok(row) = serde_json::from_str::<serde_json::Value>(line) else {
+                continue;
+            };
+            if row["id"].as_str() != Some(unit) {
+                continue;
+            }
+            if let Some(file) = row["file"].as_str() {
+                // Rows are pack-root-relative (`media/<name>`, enforced by the
+                // media-asset schema). A pack is untrusted data, so re-check
+                // that no row can climb out of the pack's media directory.
+                let rel = match file.strip_prefix("media/") {
+                    Some(rest) if !rest.is_empty() => rest,
+                    _ => continue,
+                };
+                if rel.split('/').any(|seg| seg == ".." || seg.is_empty()) {
+                    continue;
+                }
+                return dir.join(rel);
+            }
+        }
+    }
+    dir.join(format!("{unit}.wav"))
+}
+
+/// Media ids for a phonology contrast item are `{contrast-id}-{index}`; the
+/// demo pair used to spell the same thing `{contrast-id}.short`/`.long`. Both
+/// forms map back to the contrast record that declares production targets.
+fn contrast_id_for_unit(unit: &str) -> Option<&str> {
+    if let Some(cid) = unit.strip_suffix(".short").or_else(|| unit.strip_suffix(".long")) {
+        return Some(cid);
+    }
+    match unit.rsplit_once('-') {
+        Some((head, tail)) if !tail.is_empty() && tail.bytes().all(|b| b.is_ascii_digit()) => {
+            Some(head)
+        }
+        _ => None,
+    }
+}
+
+/// The media ids an installed pack actually carries. A pack built under
+/// ADR-0016 declares each one in `media/manifest.jsonl`, and that manifest is
+/// authoritative — presence of files in a *source checkout* proves nothing,
+/// because generated audio is gitignored. A pack with no manifest (the
+/// pre-ADR-0016 bundled demo pack) is read by the only convention it itself
+/// uses: `{id}.wav` inside its installed media directory. Empty when the pack
+/// ships no audio, which is what installing an audio-less archive yields.
+fn media_ids(pack_dir: &Path) -> std::collections::HashSet<String> {
+    let mut out = std::collections::HashSet::new();
+    let dir = pack_dir.join("media");
+    if let Ok(text) = std::fs::read_to_string(dir.join("manifest.jsonl")) {
+        for line in text.lines().filter(|l| !l.trim().is_empty()) {
+            if let Ok(row) = serde_json::from_str::<serde_json::Value>(line) {
+                if let Some(id) = row["id"].as_str() {
+                    out.insert(id.to_string());
+                }
+            }
+        }
+        return out;
+    }
+    if let Ok(entries) = std::fs::read_dir(&dir) {
+        for entry in entries.flatten() {
+            if entry.path().extension().and_then(|e| e.to_str()) == Some("wav") {
+                if let Some(stem) = entry.path().file_stem().and_then(|s| s.to_str()) {
+                    out.insert(stem.to_string());
+                }
+            }
+        }
+    }
+    out
+}
+
 /// Pack-driven pronunciation demo pair: the first vowel-length contrast in
 /// the installed pack's phonology data (fallback: first contrast). Keeps
 /// language content in the pack, not the app (docs/07).
@@ -2292,8 +2386,12 @@ fn pronunciation_demo_at(data: &Path, pack_id: &str) -> Result<PronunciationDemo
             _ => continue,
         };
         let demo = PronunciationDemo {
-            short_unit: format!("{id}.short"),
-            long_unit: format!("{id}.long"),
+            // Item media ids are `{contrast-id}-{index}` in this pack's
+            // media/manifest.jsonl, the same convention the discrimination
+            // runner already uses; `.short`/`.long` named files that never
+            // existed, so "Hear reference" could never resolve.
+            short_unit: format!("{id}-0"),
+            long_unit: format!("{id}-1"),
             short_text: items[0]["text"].as_str().unwrap_or("").to_string(),
             long_text: items[1]["text"].as_str().unwrap_or("").to_string(),
         };
@@ -2408,9 +2506,11 @@ fn pronunciation_check_at(
     // engine never infers phonology). Fall back to a reference recording,
     // gated on a genuine contrast. When a target is declared, reference media
     // is optional and used only for the pitch contour.
-    let declared = attempt
-        .short_unit
-        .strip_suffix(".short")
+    // Media ids for contrast items are `{contrast-id}-{index}` (what
+    // scripts/generate-pack-audio.py writes into media/manifest.jsonl); the
+    // older demo ids spelled them `.short`/`.long`. Both map back to the
+    // contrast record that declares the production target.
+    let declared = contrast_id_for_unit(&attempt.short_unit)
         .and_then(|cid| {
             contrast_entries(data, &attempt.pack_id, &version)
                 .ok()?
@@ -2420,8 +2520,8 @@ fn pronunciation_check_at(
         })
         .filter(|p| p.measure == "voiced-duration-ratio");
 
-    let short_ref = pack_dir.join("media").join(format!("{short}.wav"));
-    let long_ref = pack_dir.join("media").join(format!("{long}.wav"));
+    let short_ref = media_file(&pack_dir, &short);
+    let long_ref = media_file(&pack_dir, &long);
     let media: Option<(lts_speech_api::AudioBuffer, lts_speech_api::AudioBuffer)> =
         match (std::fs::read(&short_ref), std::fs::read(&long_ref)) {
             (Ok(sb), Ok(lb)) => match (
@@ -2738,12 +2838,7 @@ fn reference_audio_at(data: &Path, pack_id: &str, unit_id: &str) -> Result<Strin
     let unit = checked_unit(unit_id)?;
     let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
         .ok_or("pack not installed")?;
-    let path = data
-        .join("packs")
-        .join(pack_id)
-        .join(&version)
-        .join("media")
-        .join(format!("{unit}.wav"));
+    let path = media_file(&data.join("packs").join(pack_id).join(&version), &unit);
     let bytes = std::fs::read(&path).map_err(|_| "reference not found".to_string())?;
     use base64::Engine;
     Ok(base64::engine::general_purpose::STANDARD.encode(&bytes))
@@ -3111,6 +3206,16 @@ fn practice_build(
     if dim == lts_domain::ActivityModality::PhonologicalDiscrimination {
         return contrast_task_build(data, pack_id, &version, content_id);
     }
+    // Sentence ids practise comprehension-listening against the audio the
+    // pack declares for them; word ids keep the gloss-choice path below,
+    // where synthesis covers the absence of a recording.
+    if dim == lts_domain::ActivityModality::ComprehensionListening
+        && sentence_entries(data, pack_id, &version)?
+            .iter()
+            .any(|e| e.id == content_id)
+    {
+        return listening_sentence_task_build(data, pack_id, &version, content_id);
+    }
     let entries = lexicon_entries(data, pack_id, &version)?;
     let entry = entries
         .iter()
@@ -3165,6 +3270,64 @@ fn practice_build(
     };
     let correct = entry.gloss.clone();
     Ok((task, correct, reveals))
+}
+
+/// Comprehension-listening over a pack sentence: the learner hears the audio
+/// the pack declares for that sentence and chooses its meaning. The transcript
+/// never crosses IPC (`surface` stays None — a visible transcript is listed as
+/// disqualifying support for this dimension in MASTERY_POLICY). Distractors
+/// are other same-pack sentence glosses in file order; the correct position is
+/// hashed from the item id, so the task is stable without RNG. Requires
+/// declared audio: offering a listening item with nothing to hear would be a
+/// dead activity.
+fn listening_sentence_task_build(
+    data: &Path,
+    pack_id: &str,
+    version: &str,
+    content_id: &str,
+) -> Result<(PracticeTask, String, Vec<String>), String> {
+    let entries = sentence_entries(data, pack_id, version)?;
+    let entry = entries
+        .iter()
+        .find(|e| e.id == content_id)
+        .ok_or("unknown practice target")?;
+    let gloss = entry
+        .gloss
+        .clone()
+        .filter(|g| !g.trim().is_empty())
+        .ok_or("sentence declares no meaning to test")?;
+    if !media_ids(&data.join("packs").join(pack_id).join(version)).contains(content_id) {
+        return Err("pack declares no audio for this sentence".to_string());
+    }
+    let mut seen = std::collections::HashSet::from([gloss.clone()]);
+    let mut choices: Vec<String> = entries
+        .iter()
+        .filter_map(|e| e.gloss.clone())
+        .filter(|g| seen.insert(g.clone()))
+        .take(3)
+        .collect();
+    if choices.is_empty() {
+        return Err("pack sentences are too few for a listening choice task".to_string());
+    }
+    let item_id = format!(
+        "{content_id}#{}",
+        dimension_kebab(lts_domain::ActivityModality::ComprehensionListening)
+    );
+    let pos = (fnv1a(&item_id) % (choices.len() as u64 + 1)) as usize;
+    choices.insert(pos, gloss.clone());
+    let task = PracticeTask {
+        item_id,
+        surface: None,
+        reading: None,
+        furigana: None,
+        romaji: None,
+        faded_by_mastery: false,
+        choices,
+        slots: Vec::new(),
+        typed: false,
+        status: entry.status.clone(),
+    };
+    Ok((task, gloss, Vec::new()))
 }
 
 /// K-04 script-instruction runner: symbol<->reading choice task from
@@ -4686,12 +4849,21 @@ fn listening_audio_at(
     let pack_id = active.first().ok_or("no active language pack")?;
     let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
         .ok_or("pack not installed")?;
-    let entries = lexicon_entries(data, pack_id, &version)?;
-    let entry = entries
-        .iter()
+    // Both words and sentences are listenable. Media lookup is by content id
+    // (manifest first, ADR-0016); the record's text is only the synthesis
+    // fallback when the pack ships no recording for it.
+    let mut text = lexicon_entries(data, pack_id, &version)?
+        .into_iter()
         .find(|e| e.id == content_id)
-        .ok_or("unknown item")?;
-    speech_audio_at(data, pack_id, content_id, &entry.surface)
+        .map(|e| e.surface);
+    if text.is_none() {
+        text = sentence_entries(data, pack_id, &version)?
+            .into_iter()
+            .find(|e| e.id == content_id)
+            .map(|e| e.text);
+    }
+    let text = text.ok_or("unknown item")?;
+    speech_audio_at(data, pack_id, content_id, &text)
 }
 
 // ---------------------------------------------------------------------------
@@ -5063,7 +5235,12 @@ mod tests {
         // The pack's first vowel-length contrast is obasan/obaasan.
         assert_eq!(demo.short_text, "おばさん");
         assert_eq!(demo.long_text, "おばあさん");
-        assert!(demo.short_unit.starts_with("ja.contrast.vowel-length."));
+        // D3: the ids address the pack's per-item media rows, which are
+        // `{contrast-id}-{index}` (scripts/generate-pack-audio.py). The old
+        // `.short`/`.long` spelling named files no pack ever wrote, so
+        // "Hear reference" and the pitch contour could never resolve.
+        assert_eq!(demo.short_unit, "ja.contrast.vowel-length.obasan-0");
+        assert_eq!(demo.long_unit, "ja.contrast.vowel-length.obasan-1");
         // Packs without phonology data abstain rather than invent content.
         install_bundled_pack(data, "org.openlanguage.eo-demo").unwrap();
         assert!(pronunciation_demo_at(data, "org.openlanguage.eo-demo").is_err());
@@ -6922,6 +7099,129 @@ mod tests {
             )
             .is_err(),
         );
+    }
+
+    /// D2: the media a pack funds has to be practicable. A sentence with
+    /// declared audio becomes a listening task — transcript hidden, meaning
+    /// chosen against other sentence glosses — and the audio resolves
+    /// natively. Without the audio the runner refuses rather than offering an
+    /// activity that cannot be heard.
+    #[test]
+    fn sentence_listening_practises_declared_audio_without_the_transcript() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+
+        let task = practice_task_at(
+            data,
+            &p.id,
+            "ja.sent.demo.obasan-aunt",
+            "comprehension-listening",
+            false,
+        )
+        .unwrap();
+        assert_eq!(task.item_id, "ja.sent.demo.obasan-aunt#comprehension-listening");
+        // A visible transcript disqualifies evidence for this dimension.
+        assert!(task.surface.is_none());
+        assert!(task.reading.is_none());
+        assert!(task.choices.iter().any(|c| c == "She is an aunt."));
+        assert!(
+            task.choices.iter().filter(|c| *c != "She is an aunt.").count() >= 2,
+            "distractors come from other pack sentences"
+        );
+
+        let audio = listening_audio_at(data, &p.id, "ja.sent.demo.obasan-aunt").unwrap();
+        assert_eq!(audio.source, "licensed-recording");
+
+        let version =
+            lts_langpack::archive::current_version("org.openlanguage.ja-demo", &data.join("packs"))
+                .unwrap();
+        std::fs::remove_file(
+            data.join("packs")
+                .join("org.openlanguage.ja-demo")
+                .join(&version)
+                .join("media")
+                .join("ja.sent.demo.obasan-aunt.wav"),
+        )
+        .unwrap();
+        assert_eq!(
+            practice_task_at(
+                data,
+                &p.id,
+                "ja.sent.demo.obasan-aunt",
+                "comprehension-listening",
+                false,
+            )
+            .err(),
+            Some("pack declares no audio for this sentence".to_string())
+        );
+    }
+
+    /// D2: proposed new items put listening where the pack can actually play
+    /// something, and never on a word that has no recording.
+    #[test]
+    fn proposed_listening_items_point_at_audio_the_pack_declares() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+
+        let mut progression = Vec::new();
+        add_new_item_candidates(data, &store, &p.id, &[], &mut progression, &[]).unwrap();
+        let listening: Vec<String> = progression
+            .iter()
+            .filter(|i| i.modality == lts_domain::ActivityModality::ComprehensionListening)
+            .map(|i| i.content_id.clone())
+            .collect();
+        assert!(
+            listening.iter().any(|c| c == "ja.sent.demo.obasan-aunt"),
+            "audio-bearing sentences become listening items: {listening:?}"
+        );
+        assert!(
+            listening.iter().all(|c| !c.starts_with("ja.lex.")),
+            "words without declared audio are never proposed for listening: {listening:?}"
+        );
+    }
+
+    /// D3: media ids resolve through the installed pack's manifest, so the
+    /// filenames are pack data rather than an engine convention — and a
+    /// manifest row can never point outside the pack's media directory.
+    #[test]
+    fn reference_audio_follows_the_manifest_and_refuses_traversal() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let version =
+            lts_langpack::archive::current_version("org.openlanguage.ja-demo", &data.join("packs"))
+                .unwrap();
+        let media = data
+            .join("packs")
+            .join("org.openlanguage.ja-demo")
+            .join(&version)
+            .join("media");
+        std::fs::rename(
+            media.join("ja.contrast.demo.vowel-length-0.wav"),
+            media.join("renamed-short.wav"),
+        )
+        .unwrap();
+        std::fs::write(
+            media.join("manifest.jsonl"),
+            [
+                "{\"id\":\"ja.contrast.demo.vowel-length-0\",\"file\":\"media/renamed-short.wav\"}",
+                "{\"id\":\"ja.lex.demo.obasan\",\"file\":\"media/../../escaped.wav\"}",
+            ]
+            .join("\n"),
+        )
+        .unwrap();
+
+        assert!(!reference_audio_at(data, "org.openlanguage.ja-demo", "ja.contrast.demo.vowel-length-0").unwrap().is_empty());
+        // The hostile row is ignored; the id convention still answers for it.
+        assert!(!reference_audio_at(data, "org.openlanguage.ja-demo", "ja.lex.demo.obasan").unwrap().is_empty());
+        assert!(!data.join("escaped.wav").exists());
     }
     #[test]
     fn discrimination_runner_records_phonological_dimension_evidence() {

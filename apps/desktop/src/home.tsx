@@ -31,6 +31,22 @@ const REASON_LABELS: Record<PlannedItem["reason"], string> = {
   progression: "New material",
 };
 
+/**
+ * D2: every modality the engine has a typed practice runner for must be
+ * startable from the plan list, or the training the plan schedules is
+ * unreachable. Keep in step with the `matches!` guard in `practice_build`
+ * (apps/desktop/src-tauri/src/lib.rs); the verb is what the learner will
+ * actually do, so the button says so instead of a generic "Start".
+ */
+const RUNNABLE_MODALITIES: Record<string, string> = {
+  "recall-meaning": "Recall",
+  "comprehension-listening": "Listen",
+  "phonological-discrimination": "Hear the difference",
+  "orthography-recognition": "Recognise the script",
+  "production-writing": "Write it",
+  "orthographic-encoding": "Type what you hear",
+};
+
 export interface WorldEnvironment {
   id: string;
   display_name: string;
@@ -84,37 +100,42 @@ export function Home(p: HomeProps) {
         </p>
       ) : (
         <ul className="plan-list">
-          {p.plan.items.map((item) => (
-            <li key={item.item_id}>
-              {p.onStart && item.modality === "recall-meaning" && item.surface ? (
-                <button type="button" className="plan-item" onClick={() => p.onStart!(item)}>
-                  <span className="plan-reason">{REASON_LABELS[item.reason]}</span>
+          {p.plan.items.map((item) => {
+            const verb = RUNNABLE_MODALITIES[item.modality];
+            const label = (
+              <>
+                <span className="plan-reason">{REASON_LABELS[item.reason]}</span>
+                {item.surface ? (
                   <strong className="plan-surface" lang="ja">
                     {item.surface}
                   </strong>
-                  {item.gloss && <span className="plan-gloss">{item.gloss}</span>}
-                  <span className="meta">~{item.est_seconds}s</span>
-                </button>
-              ) : (
-                <>
-                  <span className="plan-reason">{REASON_LABELS[item.reason]}</span>
-                  {item.surface ? (
-                    <>
-                      <strong className="plan-surface" lang="ja">
-                        {item.surface}
-                      </strong>
-                      {item.gloss && <span className="plan-gloss">{item.gloss}</span>}
-                    </>
-                  ) : (
-                    <code>{item.content_id}</code>
-                  )}
-                  <span className="meta">
-                    {item.modality}, ~{item.est_seconds}s
-                  </span>
-                </>
-              )}
-            </li>
-          ))}
+                ) : (
+                  <code>{item.content_id}</code>
+                )}
+                {item.gloss && <span className="plan-gloss">{item.gloss}</span>}
+              </>
+            );
+            return (
+              <li key={item.item_id}>
+                {p.onStart && verb ? (
+                  <button type="button" className="plan-item" onClick={() => p.onStart!(item)}>
+                    {label}
+                    <span className="meta">
+                      {verb} · ~{item.est_seconds}s
+                    </span>
+                  </button>
+                ) : (
+                  <>
+                    {label}
+                    <span className="meta">
+                      {item.modality}, ~{item.est_seconds}s
+                      {p.onStart ? " — no practice runner for this yet" : ""}
+                    </span>
+                  </>
+                )}
+              </li>
+            );
+          })}
         </ul>
       )}
       {p.environments && p.environments.length > 0 && (
