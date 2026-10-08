@@ -64,8 +64,15 @@ pattern rather than adding payload paths to the base Tauri config.
 4. **Runtime gate**: `crates/speech-runtime/src/sidecar.rs` refuses a payload
    whose schema, component, `built_for` platform, CPU requirement, or declared
    files (missing / wrong size / symlink / path-escaping) do not check out.
-   Hash re-verification is opt-in because the model is 77 MB. A rejected
-   payload never runs; the aligner falls back or abstains.
+   The desktop takes one further deep pass — recomputing every declared sha256,
+   the model included — once per payload per process (measured 0.05 s warm over
+   the whole 82,016,429 B payload, so it is paid once rather than per probe).
+   Declared sizes cannot see same-size corruption, and a weights file with a
+   flipped byte still loads and returns confident nonsense, which is the worst
+   failure mode a learning product has. That pass is integrity against damage,
+   not a security boundary: the manifest sits beside the files it attests, so
+   package signing is what carries authenticity. A rejected payload never runs;
+   the aligner falls back or abstains.
 5. **Honest abstention**: a CPU below the compiled-for floor is reported as
    `aligner-cpu-unsupported`, distinct from `aligner-unavailable` (no payload)
    and `speech-model-off` (user opted out), and the UI copy says the build

@@ -165,7 +165,11 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
    settings slice). Each was fixed by making the software do the thing, or by
    saying plainly what it cannot do — never by deleting the promise. D4 (a
    shipped build with an aligner and no aligner runtime) is closed by bundling
-   the whisper.cpp sidecar (ADR-0019, commits `4df9a97`..`ad9f0d6`). What deliberately remains owner work:
-   staging the real TTS payloads (D5-rest) and actually running the
-   overlay-based release build. `ADR-0018` is **Proposed** awaiting the owner's
+   the whisper.cpp sidecar (ADR-0019, commits `4df9a97`..`ad9f0d6`). The
+   overlay-based release build has since been run here: a 78.80 MiB deb and a
+   180.56 MiB AppImage, the packaged app reporting `aligner:yes:bundled` and
+   refusing the same payload after one byte of the bundled model was flipped.
+   What deliberately remains owner work: staging the real TTS payloads
+   (D5-rest), installing and accepting that build, and the human gates.
+   `ADR-0018` is **Proposed** awaiting the owner's
    acceptance.

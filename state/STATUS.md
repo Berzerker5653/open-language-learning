@@ -743,6 +743,13 @@ used for benchmarking.
   non-empty file — replaced by the workspace `sha2` crate, with
   `a_tampered_payload_byte_fails_the_deep_check_and_names_the_file` pinning the
   behaviour the hang had hidden.
+
+- The desktop adds one deep digest pass per payload per process on top of that
+  load gate. Declared sizes cannot see same-size corruption, and weights with a
+  flipped byte still load and return confident nonsense; the pass costs 0.05 s
+  warm over the whole payload, so it is paid once. It is integrity against
+  damage, not a security boundary — the manifest sits beside the files it
+  attests, so package signing carries authenticity.
 - `overlay` writes `dist/variants/tauri.aligner.json` (each staged platform dir →
   `aligner/<platform>`, MIT notice → `aligner/LICENSE.whisper-cpp.txt`) so the
   base `tauri.conf.json` stays payload-free and bare/dev builds keep working and
@@ -755,7 +762,8 @@ used for benchmarking.
   the payload shipped; both are build-neutral now, and the tests that pinned the
   old wording were rewritten to pin the invariant instead of the sentence.
 
-Gates: workspace suite green — 57 test targets, 296 tests, 0 failures, exit 0 (`lts-desktop --lib` 74,
+Gates after this change: workspace suite green — 57 test targets, 297 tests, 0
+failures, exit 0 (`lts-desktop --lib` 75,
 `lts-speech-runtime` 32 — the sidecar suite contributing 11); clippy
 `--workspace --all-targets -D warnings` clean **after repairing three lints that
 were already red at HEAD** (two `err().expect()` in `crates/langpack/tests/media.rs`
@@ -763,9 +771,20 @@ from the D1 commit, one `useless_vec` in the desktop band-ordering test);
 `cargo fmt --all --check` clean; the seven pack gates 0 errors / 0 warnings; tsc,
 eslint and prettier clean with vitest 13 files / 135 tests; `SMOKE OK
 (26 routes walked)` and, for a fresh profile, `aligner runtime: no:speech-model-off`.
-Pointing the payload at the app by hardlinking it into the dev resource directory
-(`target/debug/aligner/linux-x64` — in dev that is the executable's own directory,
-not a `resources` subdirectory) turned the same walkthrough line into
-`aligner:yes:bundled`, and removing it while a `~/.cache/lts-bench` tree exists fell
-back to `aligner:yes:bench`. `cargo tauri dev` itself carries no payload, which is
+The overlay release build has been run here (owner-approved, same day):
+`npx tauri build -c dist/variants/tauri.aligner.json` produced
+`target/release/bundle/deb/open-language-learning-platform_0.1.0_amd64.deb`
+(78.80 MiB) and `…_0.1.0_amd64.AppImage` (180.56 MiB). Every payload file came out
+of the deb at its exact staged byte count with the model digest still
+`be07e048…`, and the packaged binary walked all 13 routes reporting
+`aligner:yes:bundled` — so `resource_dir()` really does find
+`aligner/linux-x64` in the installed layout, which the dev-tree hardlink had only
+suggested. Flipping one byte at offset 4,000,000 of the *bundled* model — still
+77,691,713 B, digest `be07e048…` → `2240d23d…` — made that same binary refuse it:
+`aligner:yes:bench` with a `~/.cache/lts-bench` tree around, and
+`aligner:no:aligner-unavailable` with `LTS_BENCH_VENDOR` pointed at an empty
+directory, the app still completing its route walk either way; putting the file
+back gave `bundled` again. This was an agent run, so per ADR-0015 it is not the
+human runtime report O-06 owes — it does mean the owner can install a `.deb`
+rather than build one. `cargo tauri dev` carries no payload on purpose, which is
 the point of keeping the base `tauri.conf.json` payload-free.

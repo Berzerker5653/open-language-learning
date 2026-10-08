@@ -57,10 +57,15 @@ Build and run: `scripts/build-catalog.sh` (regenerates pack audio, then the pack
 archives) followed by `cargo tauri dev`. A quick automated sanity walk first:
 `./scripts/smoke-desktop.sh` → `SMOKE OK (26 routes walked)` across 13 routes.
 
-For a release build that carries the aligner instead of `tauri dev`:
-`scripts/stage-aligner-sidecar.sh stage` (cmake + network), then
-`scripts/stage-aligner-sidecar.sh overlay`, then
-`cargo tauri build --config dist/variants/tauri.aligner.json`.
+For pronunciation feedback and dictation you need a build that **carries** the
+aligner, not `tauri dev`: `scripts/stage-aligner-sidecar.sh stage` (cmake +
+network), then `… overlay`, then `cargo tauri build --config
+dist/variants/tauri.aligner.json`. That build has already been made here on
+2026-10-08: `target/release/bundle/deb/open-language-learning-platform_0.1.0_amd64.deb`
+(78.80 MiB) and `…_0.1.0_amd64.AppImage` (180.56 MiB), both carrying the payload,
+and the packaged binary reported `aligner:yes:bundled`. Installing one of those is
+faster than building; a machine without pnpm needs the `beforeBuildCommand`
+override noted in docs/13.
 
 Surfaces that changed since the 2026-10-03 preview note, and what to check:
 

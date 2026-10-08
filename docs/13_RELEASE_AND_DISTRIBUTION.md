@@ -102,6 +102,17 @@ scripts/stage-aligner-sidecar.sh overlay  # verify every staged payload,
 cargo tauri build --config dist/variants/tauri.aligner.json
 ```
 
+`tauri build` also runs `build.beforeBuildCommand`, which is `pnpm build` —
+so the machine doing a release build needs pnpm, or must override the hook
+with `-c '{"build":{"beforeBuildCommand":"npx vite build"}}'`. That override
+is how the 2026-10-08 verification build was made here (same vite, different
+package manager), and CI uses pnpm directly. That run produced a 78.80 MiB
+deb and a 180.56 MiB AppImage, payload present inside both at
+`usr/lib/open-language-learning-platform/aligner/linux-x64/`, and the
+packaged binary walked its 13 routes reporting `aligner:yes:bundled`. Per
+ADR-0015 that is an agent run, not the human runtime report a platform
+"tested" claim needs.
+
 The payload is `apps/desktop/sidecar/<platform>/`: `bin/`
 (whisper-cli plus libwhisper.so.1, libggml.so.0, libggml-cpu.so.0,
 libggml-base.so.0, libgomp.so.1 as real bytes, never symlinks),
@@ -119,6 +130,19 @@ dir to bundle resource `aligner/<platform>` plus
 `third-party/notices/whisper-cpp-MIT.txt` to
 `aligner/LICENSE.whisper-cpp.txt`; the app resolves
 `<resource_dir>/aligner/<host platform>/SIDECAR.yaml`.
+
+At runtime the app gates a bundled payload on schema, component,
+`built_for`, the declared CPU floor, and every declared file at its
+declared size — and then takes one deep pass over the declared sha256
+values, the model included, the first time a process touches that
+payload (measured 0.05 s warm across the whole 82 MB, so it is paid
+once rather than per probe). Declared sizes cannot see same-size
+corruption, and weights with a flipped byte still load and return
+confident nonsense, which is the worst thing a learning product can
+do. That pass is integrity against damage, not a security boundary:
+the manifest lives beside the files it attests, so package signing is
+what carries authenticity. A payload failing any of these gates reads
+as absent — `aligner-unavailable` — rather than running.
 
 Cost: **+82 MB** of install size. Measured on the machine where the
 payload was staged, the linux-x64 payload is 82,016,429 bytes — a
