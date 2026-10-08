@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlanguage.invalid/schemas/v0.2/environment.schema.json",
+  "title": "Environment",
+  "description": "An unlockable environment in a world map (world/environments.jsonl, ADR-0018). Packs supply all environment text and content ids; the engine ships none. Unlock state derives entirely from the learner's mastery of pack content.",
+  "type": "object",
+  "required": ["schema_version", "id", "display_name", "requires"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "description": "Pack-unique environment id. Not a content id: environments are scenes, not learnable items."
+    },
+    "display_name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "UI label for the environment. Describes the activity the place affords; makes no learning-outcome or proficiency claim."
+    },
+    "requires": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["content_id", "modality", "min_state"],
+        "additionalProperties": false,
+        "properties": {
+          "content_id": {
+            "type": "string",
+            "minLength": 3,
+            "description": "A content id declared by this pack (lexicon entry, sentence, or grammar concept). Checked against the pack's id collection at validation; an unknown id fails the pack (environment_unknown_content)."
+          },
+          "modality": {
+            "enum": [
+              "recall-meaning",
+              "comprehension-listening",
+              "comprehension-reading",
+              "orthography-recognition",
+              "phonological-discrimination",
+              "production-writing",
+              "orthographic-encoding"
+            ]
+          },
+          "min_state": { "enum": ["unseen", "introduced", "supported", "independent", "flexible", "retained"] }
+        }
+      }
+    }
+  }
+}

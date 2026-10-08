@@ -50,10 +50,22 @@ and those disagree, they win — fix this document.
 | `stories/*.yaml` | story | single doc |
 | `media/manifest.jsonl` | media-asset | one per line |
 | `media/*.wav` | (binary asset; must have exactly one manifest row) | — |
+| `world/environments.jsonl` | environment | one per line; optional (ADR-0018) |
 
 Unknown paths fail validation (documentation files like `README.md`
 are allowed). Chunking is legal where the table shows `*` (e.g.
 `lexicon/food.jsonl`, `curriculum/units/003-market.yaml`).
+
+`world/environments.jsonl` is optional and must be declared in `manifest.yaml`
+as `world: environments.jsonl` if shipped. Each row names a place and the
+capabilities that open it (`{content_id, modality, min_state}`). Three gates are
+errors rather than warnings, because none is a legitimate draft state:
+`duplicate_environment_id`, `environment_unknown_content` (the requirement names
+a content id this pack does not declare, so the place can never open), and
+`world_collection_missing` (manifest declares the collection, no rows shipped).
+Also check the modality is one an activity in your pack can actually record —
+the engine will not tell you, and an unopenable place is a content bug. See
+docs/04 §World environments.
 
 ## Gates (run them in this order, as you go)
 

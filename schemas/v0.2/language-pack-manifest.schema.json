@@ -51,6 +51,11 @@
       "uniqueItems": true,
       "description": "Script IDs declared in orthography/scripts.yaml; checked semantically against the orthography file."
     },
+    "world": {
+      "type": "string",
+      "enum": ["environments.jsonl"],
+      "description": "Optional world collection: world/environments.jsonl (ADR-0018). Declaring it requires the pack to ship at least one environment row."
+    },
     "capabilities": {
       "type": "object",
       "additionalProperties": false,

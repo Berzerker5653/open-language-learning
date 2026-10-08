@@ -32,5 +32,6 @@ Existing:
 - 0015 publishing other-OS builds with a community-confirmed platform ladder
 - 0016 pack-shipped model-output audio for the listening modality
 - 0017 unfunded posture: exclusively AI-created content, guided-only pronunciation feedback for desktop 1.0
+- 0018 environments are pack data (`world/environments.jsonl`; the engine ships none) — **Proposed**
 
 Template: `template.md`.

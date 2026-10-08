@@ -2229,30 +2229,47 @@ fn goal_map(profile_id: String) -> Result<Vec<GoalMapView>, String> {
 // engine is unaffected.
 // ---------------------------------------------------------------------------
 
-fn demo_world_config() -> lts_world::WorldConfig {
-    use lts_domain::{ActivityModality as M, MasteryState as S};
+/// The world layer for the learner's active pack (ADR-0018). Packs author
+/// every environment; the engine ships none. Any resolution failure — no
+/// active pack, no collection, unloadable pack — yields an empty world:
+/// having no places to go is a normal state, not an error.
+fn world_config_at(data: &Path, profile_id: &str) -> lts_world::WorldConfig {
+    let empty = || lts_world::WorldConfig {
+        environments: vec![],
+        version: String::new(),
+    };
+    let Ok(active) = packs::active_pack(data, profile_id) else {
+        return empty();
+    };
+    let Some(pack_id) = active.first() else {
+        return empty();
+    };
+    let packs_root = data.join("packs");
+    let Some(version) = lts_langpack::archive::current_version(pack_id, &packs_root) else {
+        return empty();
+    };
+    let Ok(pack) = lts_langpack::Pack::load_dir(&packs_root.join(pack_id).join(&version)) else {
+        return empty();
+    };
     lts_world::WorldConfig {
-        environments: vec![
-            lts_world::Environment {
-                id: "cafe".into(),
-                display_name: "Café corner — read the menu".into(),
-                requires: vec![lts_world::CapabilityRequirement {
-                    content_id: "ja.lex.greeting.konnichiwa".into(),
-                    modality: M::ComprehensionReading,
-                    min_state: S::Independent,
-                }],
-            },
-            lts_world::Environment {
-                id: "greeting-desk".into(),
-                display_name: "Greeting desk — say it yourself".into(),
-                requires: vec![lts_world::CapabilityRequirement {
-                    content_id: "ja.lex.greeting.konnichiwa".into(),
-                    modality: M::RecallMeaning,
-                    min_state: S::Independent,
-                }],
-            },
-        ],
-        version: "world-demo-0.1.0".into(),
+        environments: pack
+            .environments()
+            .into_iter()
+            .map(|e| lts_world::Environment {
+                id: e.id,
+                display_name: e.display_name,
+                requires: e
+                    .requires
+                    .into_iter()
+                    .map(|r| lts_world::CapabilityRequirement {
+                        content_id: r.content_id,
+                        modality: r.modality,
+                        min_state: r.min_state,
+                    })
+                    .collect(),
+            })
+            .collect(),
+        version,
     }
 }
 
@@ -2278,7 +2295,7 @@ fn world_state_at(data: &Path, profile_id: &str) -> Result<Vec<WorldEnvironment>
             .map(|d| ((d.content_id.clone(), d.dimension), d.state))
             .collect(),
     };
-    Ok(lts_world::evaluate(&demo_world_config(), &snapshot)
+    Ok(lts_world::evaluate(&world_config_at(data, profile_id), &snapshot)
         .into_iter()
         .map(|e| WorldEnvironment {
             id: e.id,
@@ -6495,20 +6512,69 @@ mod tests {
         assert_eq!(undeclared.source, "licensed-recording");
     }
 
+    /// ADR-0018: the environments come from the active pack, and unlock
+    /// state follows derived capability — never activity volume (ADR-0002).
+    /// The bundled reference pack declares `cafe-read-menu` (recall-meaning
+    /// `introduced` for two drink words plus comprehension-reading
+    /// `introduced` for one sentence) and `cafe-order-drink` (a listening and
+    /// a writing requirement at `supported`), so the first is reachable from
+    /// a handful of events and the second is not.
     #[test]
-    fn world_unlocks_follow_capabilities_not_activity_volume() {
+    fn world_unlocks_follow_pack_declared_capabilities() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
-        // Two independent recalls (distinct prompt families, no support).
-        for (family, id, at) in [
-            ("ja.expr.demo.greet-p1", "r1", "2026-10-02T10:00:00Z"),
-            ("ja.expr.demo.greet-p2", "r2", "2026-10-02T11:00:00Z"),
+        let version = lts_langpack::archive::current_version(
+            "org.openlanguage.ja-jp.reference",
+            &data.join("packs"),
+        )
+        .unwrap();
+        store
+            .set_active_pack(&p.id, "org.openlanguage.ja-jp.reference", &version)
+            .unwrap();
+        let menu = || {
+            world_state_at(data, &p.id)
+                .unwrap()
+                .into_iter()
+                .find(|e| e.id == "cafe-read-menu")
+        };
+
+        // The pack's own ids and labels are what the app shows; the
+        // app-authored demo environments are gone.
+        let envs = world_state_at(data, &p.id).unwrap();
+        assert!(!envs.is_empty(), "the reference pack declares environments");
+        assert!(
+            envs.iter().all(|e| e.id != "cafe" && e.id != "greeting-desk"),
+            "the engine must contribute no environment of its own: {:?}",
+            envs.iter().map(|e| &e.id).collect::<Vec<_>>()
+        );
+        let fresh = menu().expect("cafe-read-menu comes from the pack");
+        assert!(!fresh.unlocked, "a new profile has earned nothing");
+        assert_eq!(
+            fresh.missing.len(),
+            3,
+            "every declared requirement is unmet: {:?}",
+            fresh.missing
+        );
+
+        for (target, family, at, id) in [
+            (
+                "ja.lex.food-drink.kohi",
+                "ja.expr.demo.food-a",
+                "2026-10-02T10:00:00Z",
+                "r1",
+            ),
+            (
+                "ja.lex.food-drink.ocha",
+                "ja.expr.demo.food-b",
+                "2026-10-02T10:05:00Z",
+                "r2",
+            ),
         ] {
             let ev = attempt(
-                "ja.lex.greeting.konnichiwa",
+                target,
                 lts_domain::ActivityModality::RecallMeaning,
                 family,
                 0,
@@ -6518,18 +6584,56 @@ mod tests {
             );
             store.append_evidence(&ev).unwrap();
         }
-        let envs = world_state_at(data, &p.id).unwrap();
-        let desk = envs.iter().find(|e| e.id == "greeting-desk").unwrap();
-        let cafe = envs.iter().find(|e| e.id == "cafe").unwrap();
-        assert!(desk.unlocked, "recall capability opens the desk");
-        assert!(!cafe.unlocked, "reading capability is still missing");
-        assert!(!cafe.missing.is_empty());
+        let half = menu().unwrap();
+        assert!(
+            !half.unlocked,
+            "the reading requirement is still unmet, so the place stays shut"
+        );
+        assert_eq!(
+            half.missing.len(),
+            1,
+            "the two recall requirements are met: {:?}",
+            half.missing
+        );
+        assert!(
+            half.missing[0].starts_with("ja.sent.check-price"),
+            "the hint must name the missing content: {:?}",
+            half.missing
+        );
+
+        let ev = attempt(
+            "ja.sent.check-price",
+            lts_domain::ActivityModality::ComprehensionReading,
+            "ja.expr.demo.read-a",
+            0,
+            "2026-10-02T10:10:00Z",
+            "rd1",
+            &p.id,
+        );
+        store.append_evidence(&ev).unwrap();
+        let unlocked = world_state_at(data, &p.id).unwrap();
+        assert!(
+            unlocked
+                .iter()
+                .find(|e| e.id == "cafe-read-menu")
+                .unwrap()
+                .unlocked,
+            "meeting the pack's requirements opens the place"
+        );
+        assert!(
+            !unlocked
+                .iter()
+                .find(|e| e.id == "cafe-order-drink")
+                .unwrap()
+                .unlocked,
+            "a different pack-declared place is not opened by this evidence"
+        );
 
         // Activity volume changes nothing: 50 more events on other
         // content leave the unlock set identical (no streaks, ADR-0002).
         for i in 0..50 {
             let ev = attempt(
-                "ja.lex.demo.watashi",
+                "ja.lex.transport.kippu",
                 lts_domain::ActivityModality::RecallMeaning,
                 "ja.expr.demo.self-a",
                 0,
@@ -6539,7 +6643,29 @@ mod tests {
             );
             store.append_evidence(&ev).unwrap();
         }
-        assert_eq!(world_state_at(data, &p.id).unwrap(), envs);
+        assert_eq!(world_state_at(data, &p.id).unwrap(), unlocked);
+    }
+
+    /// ADR-0018: a pack that declares no world collection gives the learner
+    /// no places to go. That is a normal state, not an error, and the app
+    /// must not fall back to anything.
+    #[test]
+    fn a_pack_without_environments_gives_an_empty_world() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Test").unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let version =
+            lts_langpack::archive::current_version("org.openlanguage.ja-demo", &data.join("packs"))
+                .unwrap();
+        store
+            .set_active_pack(&p.id, "org.openlanguage.ja-demo", &version)
+            .unwrap();
+        assert_eq!(world_state_at(data, &p.id).unwrap(), vec![]);
+        // And a profile with no active pack at all resolves to nothing.
+        let other = create_local_profile(data, "Nobody").unwrap();
+        assert_eq!(world_state_at(data, &other.id).unwrap(), vec![]);
     }
 
     /// K-40: the goal map surfaces installed-pack goals (not unit

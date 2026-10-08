@@ -24,8 +24,9 @@
 //! speech/profiles.jsonl            speech-profile           (one per line)
 //! phonology/contrasts.jsonl        phonology-contrast       (one per line)
 //! sentences/entries.jsonl         sentence                 (one per line)
-//! kanji/entries.jsonl            kanji                    (one per line)
-//! stories/*.yaml                  story                  (single document)
+//! kanji/entries.jsonl             kanji                    (one per line)
+//! stories/*.yaml                  story                    (single document)
+//! world/environments.jsonl        environment              (one per line)
 //! ```
 //!
 //! Schema 0.1 (frozen legacy; the ja-JP draft pack) — only the seven seed
@@ -137,6 +138,9 @@ pub fn classify(rel: &str) -> Option<Classified> {
             }
             if rel.starts_with("kanji/") && rel.ends_with(".jsonl") {
                 return Some(jsonl("kanji"));
+            }
+            if rel == "world/environments.jsonl" {
+                return Some(jsonl("environment"));
             }
             if rel.starts_with("stories/") && yaml(rel) {
                 return Some(single("story"));

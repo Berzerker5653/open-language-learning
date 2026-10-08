@@ -64,6 +64,8 @@ Canonical source layout:
   activities/
     templates/*.yaml
     scenarios/*.yaml
+  world/
+    environments.jsonl
   assets/
     audio/
     images/
@@ -83,6 +85,7 @@ The manifest declares:
 - display name;
 - BCP-47 target locale;
 - learner/interface source language(s);
+- optional world collection (`world: environments.jsonl`, ADR-0018);
 - pack version;
 - schema version;
 - compatible engine range;
@@ -260,6 +263,39 @@ Scenario definitions should be data-driven where possible:
 - failure/recovery paths;
 - assessment targets;
 - difficulty variants.
+
+## World environments (`world/environments.jsonl`, ADR-0018)
+
+Unlockable places are pack data; the engine ships none. The manifest key
+`world: environments.jsonl` is optional — a pack without it simply offers no
+places, which is a valid state, not an error.
+
+One JSON object per line:
+
+- `schema_version`: `1`;
+- `id`: pack-unique, `^[a-z0-9][a-z0-9._-]*$` (a scene id, not a content id);
+- `display_name`: what the place affords. It must not assert a learning outcome
+  or a proficiency level — progression claims belong to the requirements;
+- `requires`: one or more `{content_id, modality, min_state}` rules. `modality`
+  uses the engine's kebab vocabulary (`recall-meaning`,
+  `comprehension-listening`, `comprehension-reading`,
+  `orthography-recognition`, `phonological-discrimination`,
+  `production-writing`, `orthographic-encoding`); `min_state` uses the
+  `MasteryState` vocabulary (`unseen` … `retained`).
+
+Validation errors, never warnings, because none is a legitimate draft state:
+`duplicate_environment_id`, `environment_unknown_content` (a requirement naming
+a content id this pack does not declare could never be met), and
+`world_collection_missing` (manifest names the collection, pack ships no rows).
+
+Authoring constraint: a requirement may only name a modality an activity in the
+pack can actually record, or the place is unopenable. `crates/world` derives
+unlock state from derived mastery alone — no activity counts or streaks feed it
+(ADR-0002).
+
+Pinned by `crates/langpack/tests/world.rs` (schema, both error gates, accessor
+typing) and `world_unlocks_follow_pack_declared_capabilities` /
+`a_pack_without_environments_gives_an_empty_world` in `lts-desktop`.
 
 ## Sources and licenses
 

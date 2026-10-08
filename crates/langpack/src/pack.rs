@@ -4,7 +4,7 @@ use crate::diagnose::{Diagnostic, Severity};
 use crate::layout::{self, DocShape};
 use crate::schema::SchemaSet;
 use jsonschema::Validator;
-use lts_domain::{ContentId, EngineCompat};
+use lts_domain::{ActivityModality, ContentId, EngineCompat, MasteryState};
 use serde_json::Value;
 use std::collections::{HashMap, HashSet};
 use std::fs;
@@ -43,6 +43,25 @@ pub struct Pack {
     pub(crate) manifest: Option<Value>,
 }
 
+/// One mastery requirement inside an environment unlock rule
+/// (`world/environments.jsonl`, ADR-0018).
+#[derive(Debug, Clone, PartialEq, serde::Deserialize)]
+pub struct EnvironmentRequirement {
+    pub content_id: String,
+    pub modality: ActivityModality,
+    pub min_state: MasteryState,
+}
+
+/// One `world/environments.jsonl` row (ADR-0018). Deserialization assumes a
+/// schema-validated pack: `schema_version` is the validator's business and is
+/// ignored here.
+#[derive(Debug, Clone, PartialEq, serde::Deserialize)]
+pub struct Environment {
+    pub id: String,
+    pub display_name: String,
+    pub requires: Vec<EnvironmentRequirement>,
+}
+
 impl Pack {
     /// Loaded schema-validated instances (audit/analysis consumers).
     pub fn instances(&self) -> &[Instance] {
@@ -57,6 +76,18 @@ impl Pack {
     /// Relative paths of binary media assets.
     pub fn media_files(&self) -> &[String] {
         &self.media
+    }
+
+    /// Typed rows of the optional `world/environments.jsonl` collection
+    /// (ADR-0018); packs without the collection yield no rows. `validate`
+    /// owns the contract — including that every `requires.content_id` names a
+    /// content id this pack declares (`environment_unknown_content`).
+    pub fn environments(&self) -> Vec<Environment> {
+        self.instances
+            .iter()
+            .filter(|i| i.schema == "environment")
+            .filter_map(|i| serde_json::from_value(i.value.clone()).ok())
+            .collect()
     }
 
     /// Load every classified document under `root`. Parse failures are
@@ -571,6 +602,40 @@ impl Pack {
             }
         }
 
+        // --- environment unlock rules (ADR-0018): every content_id must be
+        // a content id this pack declares. Unlike ordinary references, a
+        // dangling unlock target is never a warning: the environment could
+        // never unlock, and no draft workflow needs forward references here.
+        let mut env_ids: HashSet<&str> = HashSet::new();
+        for inst in self.instances.iter().filter(|i| i.schema == "environment") {
+            if let Some(id) = inst.value.get("id").and_then(Value::as_str) {
+                if !env_ids.insert(id) {
+                    diags.push(Diagnostic::new(
+                        &inst.file,
+                        format!("{}/id", inst.pointer),
+                        "duplicate_environment_id",
+                        format!("environment id {id:?} is defined more than once in this pack"),
+                        Severity::Error,
+                    ));
+                }
+            }
+            for (i, req) in array(&inst.value, "requires") {
+                let Some(target) = req.get("content_id").and_then(Value::as_str) else {
+                    continue;
+                };
+                if checked.contains_key(target) {
+                    continue;
+                }
+                diags.push(Diagnostic::new(
+                    &inst.file,
+                    format!("{}/requires/{i}/content_id", inst.pointer),
+                    "environment_unknown_content",
+                    format!("environment requires content id {target:?}, which is not a content id declared by this pack"),
+                    Severity::Error,
+                ));
+            }
+        }
+
         // --- cross-file curriculum graph (PACK-002) ---
         let graph = crate::graph::build(&self.instances, &self.structural, v2);
         diags.extend(crate::graph::check(&graph));
@@ -660,6 +725,22 @@ impl Pack {
                         ));
                     }
                 }
+            }
+
+            // --- world declaration vs collection (ADR-0018): a manifest may
+            // opt into the world collection by naming it; naming it without
+            // shipping parsable rows is a pack bug, never a draft state.
+            if v2
+                && manifest.get("world").and_then(Value::as_str).is_some()
+                && !self.instances.iter().any(|i| i.schema == "environment")
+            {
+                diags.push(Diagnostic::new(
+                    "manifest.yaml",
+                    "/world",
+                    "world_collection_missing",
+                    "manifest declares a world collection but the pack ships no environment rows",
+                    Severity::Error,
+                ));
             }
         }
 

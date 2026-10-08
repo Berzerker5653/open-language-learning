@@ -54,6 +54,10 @@ const V2_TEXTS: &[(&str, &str)] = &[
         include_str!("../../../schemas/v0.2/story.schema.json"),
     ),
     (
+        "environment",
+        include_str!("../../../schemas/v0.2/environment.schema.json"),
+    ),
+    (
         "pragmatics",
         include_str!("../../../schemas/v0.2/pragmatics.schema.json"),
     ),
