@@ -247,3 +247,62 @@ fn drifting_media_is_refused_by_build() {
         .expect("build must refuse a drifting media manifest");
     assert!(err.contains("media"), "{err}");
 }
+
+#[test]
+fn an_unbuilt_pack_builds_an_honest_audio_less_archive() {
+    // Every fresh checkout is in this state: the .wav bytes are gitignored
+    // (ADR-0016). Refusing to build would make the pack uninstallable anywhere,
+    // so build drops the manifest rather than shipping a promise it cannot keep.
+    let tmp = tempfile::tempdir().unwrap();
+    let declared = hex_sha256(&wav_bytes(b"hello"));
+    let pack_dir = tmp.path().to_path_buf();
+    pack_with(
+        &pack_dir,
+        &[row("ja.demo.kite-0", "media/ja.demo.kite-0.wav", &declared, 17)],
+        &[],
+    );
+    let (bytes, _) =
+        lts_langpack::archive::build(&pack_dir).expect("an audio-less build must succeed");
+    let am = lts_langpack::archive::inspect(&bytes).expect("inspect the built archive");
+    assert!(
+        !am.files.iter().any(|f| f.path == "media/manifest.jsonl"),
+        "an archive that ships no audio must not carry a media manifest: {:?}",
+        am.files
+            .iter()
+            .map(|f| f.path.clone())
+            .collect::<Vec<String>>()
+    );
+    let store = tempfile::tempdir().unwrap();
+    let outcome =
+        lts_langpack::archive::install(&bytes, store.path()).expect("install must accept it");
+    assert!(
+        !outcome.directory.join("media/manifest.jsonl").exists(),
+        "installed copy must match the archive: {:?}",
+        outcome.directory
+    );
+}
+
+#[test]
+fn a_partially_built_pack_never_builds() {
+    let tmp = tempfile::tempdir().unwrap();
+    let body = wav_bytes(b"hello");
+    let sha = hex_sha256(&body);
+    let len = body.len() as u64;
+    let missing = hex_sha256(&wav_bytes(b"other"));
+    let pack_dir = tmp.path().to_path_buf();
+    pack_with(
+        &pack_dir,
+        &[
+            row("ja.demo.kite-0", "media/ja.demo.kite-0.wav", &sha, len),
+            row("ja.demo.kite-1", "media/ja.demo.kite-1.wav", &missing, 17),
+        ],
+        &[("ja.demo.kite-0.wav", body)],
+    );
+    let err = lts_langpack::archive::build(&pack_dir)
+        .err()
+        .expect("a half-built media directory cannot be shipped");
+    assert!(
+        err.contains("media") && err.contains("partial"),
+        "the refusal must name the partial media build: {err}"
+    );
+}

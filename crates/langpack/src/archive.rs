@@ -71,16 +71,28 @@ pub fn build(dir: &Path) -> Result<(Vec<u8>, String), String> {
             errors[0].message
         ));
     }
-    // Media integrity (ADR-0016): an archive must not ship a manifest that
-    // lies about its audio. Build is where the generated .wav bytes and the
-    // committed manifest meet, so every declared asset must be present and
-    // hash to what the manifest says.
-    let media = pack.audit_media(true);
+    // Media integrity (ADR-0016): an archive must not ship a manifest that lies
+    // about its audio. Build is where the generated .wav bytes and the committed
+    // manifest meet, so drift and a half-built media directory stop the archive.
+    // An *unbuilt* pack (no audio generated yet — the state of every fresh git
+    // checkout, since the bytes are gitignored) is a different fact: build an
+    // honest audio-less archive and leave the manifest out, so the archive makes
+    // a promise it can keep and the app falls back to on-demand synthesis.
+    let media = pack.audit_media(false);
+    let unbuilt = media.iter().any(|d| d.code == "media_unbuilt");
     if let Some(bad) = media.iter().find(|d| d.severity == crate::Severity::Error) {
         return Err(format!(
             "media manifest does not match the pack ({}): {}",
             bad.code, bad.message
         ));
+    }
+    if unbuilt {
+        eprintln!(
+            "warning: no generated audio is present, so media/manifest.jsonl is left out of \
+             this archive: the pack ships without listening audio and audio-dependent features \
+             fall back to on-demand synthesis (run scripts/generate-pack-audio.py first to \
+             ship audio) - ADR-0016"
+        );
     }
     if media.iter().any(|d| d.code == "media_unlisted") {
         eprintln!(
@@ -112,6 +124,11 @@ pub fn build(dir: &Path) -> Result<(Vec<u8>, String), String> {
     let mut files = Vec::new();
     crate::pack::collect_files(dir, dir, &mut files).map_err(|e| e.to_string())?;
     files.sort();
+    if unbuilt {
+        // Keep the invariant "the manifest describes the shipped bytes" by not
+        // shipping a manifest that describes bytes that are not there.
+        files.retain(|f| f != "media/manifest.jsonl");
+    }
     let mut entries = Vec::new();
     for rel in &files {
         let bytes = fs::read(dir.join(rel)).map_err(|e| format!("read {rel}: {e}"))?;
