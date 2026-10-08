@@ -50,3 +50,37 @@ Journey test `preview_journey_select_activity_restart_switch_retain`
 switch to ja-demo → switch back → both listed offline), plus CI,
 desktop smoke, and validator runs recorded in
 `state/evidence/PREVIEW-2026-10-03/`.
+
+## For the owner's hands-on pass (O-06, 2026-10-08)
+
+Build and run: `scripts/build-catalog.sh` (regenerates pack audio, then the pack
+archives) followed by `cargo tauri dev`. A quick automated sanity walk first:
+`./scripts/smoke-desktop.sh` → `SMOKE OK (26 routes walked)` across 13 routes.
+
+Surfaces that changed since the 2026-10-03 preview note, and what to check:
+
+- **Home** — a Start button for each of the six runnable modalities; "Places you
+  can go" now comes from the pack (`world/environments.jsonl`) and unlocks from
+  mastery, not activity counts.
+- **Settings** (new tab) — microphone permission (turn it off and try a speaking
+  activity: capture must refuse and say why), romaji display, speech model, and
+  under "Your data" the **export** file it writes to `<data>/exports/` (recordings
+  are deliberately excluded) and the two-step **delete profile**.
+- **Listening / pronunciation / dictation / shadowing / reading** — these now use
+  the profile's active pack. With audio built, the six-sentence demo and the
+  693 pack assets are audible; with no audio on disk the pack installs and
+  listening says there is nothing to hear instead of offering a blank item.
+- **Honest boundaries in this build**: no whisper.cpp ASR/aligner runtime and no
+  TTS payload are shipped, so those panels say so; the two TTS payloads show
+  "not published in this build" and offer no download. Pronunciation feedback
+  stays guided-only — no accuracy score is produced or implied (ADR-0017,
+  docs/18).
+- **Pack bytes changed** (audio + environments), so the published `0.2.0` archives
+  are stale: audio-bearing archive is 76,867,333 B, sha256
+  `d25315aa0b32b750e1d97b5dae974bf9e478f4dc10573ddce63ee14589595d84`. The version
+  bump and republish are owner actions under O-05.
+
+Things a human still has to decide or perform, and that no AI run can sign:
+the AT/screen-reader audit (O-03), the security/privacy review, qualified content
+review (REVIEW-001), the pack version bump/republish and public flip (O-05), and
+this pass itself (O-06).
