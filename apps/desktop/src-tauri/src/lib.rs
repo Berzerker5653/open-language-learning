@@ -96,30 +96,53 @@ struct PackCandidate {
     maturity: String,
 }
 
+/// Pack display names come from the pack manifest's own `display_name`
+/// field — any posture suffix travels with the pack metadata, never a
+/// hardcoded app-side string (K-47). Falls back to the pack id when no
+/// manifest is present.
+fn manifest_display_name(pack_path: &Path, pack_id: &str) -> String {
+    std::fs::read_to_string(pack_path.join("manifest.yaml"))
+        .ok()
+        .and_then(|s| serde_yaml::from_str::<serde_yaml::Value>(&s).ok())
+        .and_then(|v| {
+            v.get("display_name")
+                .and_then(|d| d.as_str())
+                .map(String::from)
+        })
+        .unwrap_or_else(|| pack_id.to_string())
+}
+
 /// Bundled pack candidates. The UI selects by id; paths never cross the
 /// IPC boundary (docs/07).
 fn bundled_packs() -> Vec<(PackCandidate, PathBuf)> {
     let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../..");
-    vec![
+    let mut packs = Vec::new();
+    for (pack_id, locale, maturity, rel) in [
         (
-            PackCandidate {
-                pack_id: "org.openlanguage.ja-jp.reference".into(),
-                display_name: "Japanese — A1 on-ramp (draft, unreviewed)".into(),
-                locale: "ja-JP".into(),
-                maturity: "experimental".into(),
-            },
-            root.join("languages/ja-JP"),
+            "org.openlanguage.ja-jp.reference",
+            "ja-JP",
+            "experimental",
+            "languages/ja-JP",
         ),
         (
-            PackCandidate {
-                pack_id: "org.openlanguage.eo-demo".into(),
-                display_name: "Esperanto — original demo (unreviewed)".into(),
-                locale: "eo".into(),
-                maturity: "community".into(),
-            },
-            root.join("tests/fixtures/packs/eo-demo"),
+            "org.openlanguage.eo-demo",
+            "eo",
+            "community",
+            "tests/fixtures/packs/eo-demo",
         ),
-    ]
+    ] {
+        let path = root.join(rel);
+        packs.push((
+            PackCandidate {
+                pack_id: pack_id.into(),
+                display_name: manifest_display_name(&path, pack_id),
+                locale: locale.into(),
+                maturity: maturity.into(),
+            },
+            path,
+        ));
+    }
+    packs
 }
 
 #[tauri::command]
@@ -1924,6 +1947,28 @@ fn pack_claims() -> Result<Vec<PackClaims>, String> {
     pack_claims_at(&data_dir())
 }
 
+/// Ordering key for goal-map bands. Packs author CEFR-style tokens with mixed
+/// case (`A1`, `on-ramp`), and a plain string sort files `on-ramp` after
+/// `B2`, which reads as if the warm-up band were the advanced one. Known bands
+/// follow the proficiency ladder; a band the engine does not know keeps its
+/// name and sorts after the ladder; an unlabelled goal sorts last. Labels and
+/// glosses are UI copy — the engine only orders.
+fn band_sort_key(band: Option<&str>) -> (u8, String) {
+    let normalised = band.map(|b| b.trim().to_ascii_lowercase());
+    let rank = match normalised.as_deref() {
+        None => 255,
+        Some("on-ramp") => 0,
+        Some("a1") => 1,
+        Some("a2") => 2,
+        Some("b1") => 3,
+        Some("b2") => 4,
+        Some("c1") => 5,
+        Some("c2") => 6,
+        Some(_) => 128,
+    };
+    (rank, normalised.unwrap_or_default())
+}
+
 fn goal_map_at(data: &Path, profile_id: &str) -> Result<Vec<GoalMapView>, String> {
     let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
     let derived = derive_pairs(&store, profile_id, &rfc3339_utc(now_secs()))?;
@@ -2009,8 +2054,9 @@ fn goal_map_at(data: &Path, profile_id: &str) -> Result<Vec<GoalMapView>, String
         }
     }
     out.sort_by(|a, b| {
-        (a.band.clone().unwrap_or_else(|| "zzz".into()), a.id.clone())
-            .cmp(&(b.band.clone().unwrap_or_else(|| "zzz".into()), b.id.clone()))
+        band_sort_key(a.band.as_deref())
+            .cmp(&band_sort_key(b.band.as_deref()))
+            .then_with(|| a.id.cmp(&b.id))
     });
     Ok(out)
 }
@@ -3359,9 +3405,12 @@ fn contrast_audio_at(
         .join("media")
         .join(format!("{media_id}.wav"));
     if let Ok(bytes) = std::fs::read(&media) {
+        let source =
+            declared_media_provenance(&data.join("packs").join(pack_id).join(&version), &media_id)
+                .unwrap_or("licensed-recording");
         return Ok(SpeechAudio {
             wav_b64: base64::engine::general_purpose::STANDARD.encode(bytes),
-            source: "licensed-recording",
+            source,
         });
     }
     speech_audio_at(data, pack_id, &media_id, &entry.items[target].text)
@@ -4410,6 +4459,28 @@ fn speech_audio(pack_id: String, unit_id: String, text: String) -> Result<Speech
     speech_audio_at(&data_dir(), &pack_id, &unit_id, &text)
 }
 
+/// ADR-0016: audio provenance is DECLARED by the pack, never inferred from a
+/// file's presence. `media/manifest.jsonl` names each asset's provenance, so
+/// synthesized listening content surfaces as `model-output` instead of being
+/// silently labeled a licensed recording. No record keeps the pre-manifest
+/// convention (a curated recording, as in `ja-demo`).
+fn declared_media_provenance(pack_dir: &Path, unit: &str) -> Option<&'static str> {
+    let text = std::fs::read_to_string(pack_dir.join("media/manifest.jsonl")).ok()?;
+    for line in text.lines() {
+        let Ok(value) = serde_json::from_str::<serde_json::Value>(line) else {
+            continue;
+        };
+        if value["id"].as_str() == Some(unit) {
+            return match value["provenance"].as_str() {
+                Some("model-output") => Some("model-output"),
+                Some("licensed-recording") => Some("licensed-recording"),
+                _ => None,
+            };
+        }
+    }
+    None
+}
+
 fn speech_audio_at(
     data: &Path,
     pack_id: &str,
@@ -4433,9 +4504,12 @@ fn speech_audio_at(
         .join("media")
         .join(format!("{unit}.wav"));
     if let Ok(bytes) = std::fs::read(&media) {
+        let source =
+            declared_media_provenance(&data_packs.join(pack_id).join(&version), unit.as_str())
+                .unwrap_or("licensed-recording");
         return Ok(SpeechAudio {
             wav_b64: base64::engine::general_purpose::STANDARD.encode(bytes),
-            source: "licensed-recording",
+            source,
         });
     }
     let (_, tts) = resolve_tts(data).ok_or("tts-runtime-unavailable")?;
@@ -6053,6 +6127,45 @@ mod tests {
     }
 
     #[test]
+    fn media_provenance_comes_from_the_pack_manifest_not_file_presence() {
+        // ADR-0016: shipped audio must never surface as a licensed recording just
+        // because a file sits in media/. The pack's manifest decides.
+        let tmp = tempfile::TempDir::new().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let version =
+            lts_langpack::archive::current_version("org.openlanguage.ja-demo", &data.join("packs"))
+                .expect("installed pack version");
+        let pack_dir = data
+            .join("packs")
+            .join("org.openlanguage.ja-demo")
+            .join(&version);
+        let media = pack_dir.join("media");
+        std::fs::create_dir_all(&media).unwrap();
+        // RIFF headers are enough here: this path copies bytes, it never decodes.
+        for unit in ["ja.lex.demo.obasan", "ja.lex.demo.konnichiwa"] {
+            std::fs::write(media.join(format!("{unit}.wav")), b"RIFF0000WAVEfmt ").unwrap();
+        }
+        std::fs::write(
+            pack_dir.join("media/manifest.jsonl"),
+            "{\"id\":\"ja.lex.demo.obasan\",\"file\":\"media/ja.lex.demo.obasan.wav\",\"sha256\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"bytes\":16,\"sample_rate\":22050,\"channels\":1,\"provenance\":\"model-output\",\"synthesizer\":{\"runtime\":\"sherpa-onnx-v1.13.8\",\"model\":\"kokoro-multi-lang-v1_1\",\"voice\":\"37\"},\"text\":\"おばさん\",\"generated\":\"2026-10-07\"}\n",
+        )
+        .unwrap();
+        let declared = speech_audio_at(data, "org.openlanguage.ja-demo", "ja.lex.demo.obasan", "おばさん")
+            .expect("declared generated asset");
+        assert_eq!(declared.source, "model-output");
+        // An asset the manifest never mentions keeps the pre-manifest convention.
+        let undeclared = speech_audio_at(
+            data,
+            "org.openlanguage.ja-demo",
+            "ja.lex.demo.konnichiwa",
+            "こんにちは",
+        )
+        .expect("curated asset");
+        assert_eq!(undeclared.source, "licensed-recording");
+    }
+
+    #[test]
     fn world_unlocks_follow_capabilities_not_activity_volume() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
@@ -6153,6 +6266,69 @@ mod tests {
             .unwrap();
         assert_ne!(reading.state, "unseen", "derived mastery moves the row");
         assert_eq!(reading.exemplar.as_deref(), Some("ja.orth.hira.a"));
+    }
+
+    /// K-47: goal-map bands follow the proficiency ladder, not ASCII order.
+    /// A plain string sort filed the pack's `on-ramp` band after `B2`
+    /// (lowercase `o` sorts above uppercase `B`), putting the warm-up band at
+    /// the bottom of the map.
+    #[test]
+    fn goal_map_orders_bands_by_ladder_not_ascii() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        let goals = goal_map_at(data, &p.id).unwrap();
+        let mut seen: Vec<Option<String>> = Vec::new();
+        for g in &goals {
+            if !seen.iter().any(|b| b == &g.band) {
+                seen.push(g.band.clone());
+            }
+        }
+        assert!(
+            seen.len() >= 5,
+            "the pack spans the ladder, so ordering is exercised: {seen:?}"
+        );
+        assert_eq!(
+            seen.first().and_then(|b| b.as_deref()),
+            Some("on-ramp"),
+            "the warm-up band leads the map: {seen:?}"
+        );
+        for (a, b) in seen.iter().zip(seen.iter().skip(1)) {
+            assert!(
+                band_sort_key(a.as_deref()) <= band_sort_key(b.as_deref()),
+                "bands must be non-decreasing by ladder rank: {seen:?}"
+            );
+        }
+        let idx = |name: &str| {
+            seen.iter()
+                .position(|b| b.as_deref().is_some_and(|x| x.eq_ignore_ascii_case(name)))
+                .unwrap_or_else(|| panic!("{name} band missing from {seen:?}"))
+        };
+        assert!(idx("on-ramp") < idx("A1"));
+        assert!(idx("A1") < idx("A2"));
+        assert!(idx("A2") < idx("B1"));
+        assert!(idx("B1") < idx("B2"));
+    }
+
+    /// Bands outside the known ladder must still appear, just after it;
+    /// a goal with no band at all goes last. Case must not matter.
+    #[test]
+    fn band_sort_key_places_unknown_and_missing_bands_after_the_ladder() {
+        let mut keys = vec![
+            band_sort_key(None),
+            band_sort_key(Some("novice")),
+            band_sort_key(Some("B2")),
+            band_sort_key(Some("on-ramp")),
+            band_sort_key(Some("a1")),
+        ];
+        keys.sort();
+        let idx = |k| keys.iter().position(|x| *x == k).unwrap();
+        assert!(idx(band_sort_key(Some("on-ramp"))) < idx(band_sort_key(Some("a1"))));
+        assert!(idx(band_sort_key(Some("b2"))) < idx(band_sort_key(Some("novice"))));
+        assert_eq!(idx(band_sort_key(None)), keys.len() - 1);
+        assert_eq!(band_sort_key(Some("A1")), band_sort_key(Some("a1")));
     }
 
     /// K-40 acceptance: goal state derives from derived mastery and
