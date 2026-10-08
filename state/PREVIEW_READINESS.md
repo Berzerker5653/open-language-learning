@@ -56,6 +56,9 @@ desktop smoke, and validator runs recorded in
 Build and run: `scripts/build-catalog.sh` (regenerates pack audio, then the pack
 archives) followed by `cargo tauri dev`. A quick automated sanity walk first:
 `./scripts/smoke-desktop.sh` → `SMOKE OK (26 routes walked)` across 13 routes.
+Shell note: the helper scripts are bash, and `source scripts/tauri-env.sh` fails
+outright in fish — `scripts/tauri-env.fish` is the equivalent (running a script
+as a program is fine from any shell; only `source` is the problem).
 
 For pronunciation feedback and dictation you need a build that **carries** the
 aligner, not `tauri dev`: `scripts/stage-aligner-sidecar.sh stage` (cmake +
