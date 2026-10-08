@@ -4255,8 +4255,16 @@ fn mine_remove(profile_id: String, item_id: String) -> Result<bool, String> {
 
 #[tauri::command]
 fn mine_due(profile_id: String) -> Result<Vec<MinedItemView>, String> {
-    let data = data_dir();
-    let all = mine_list_at(&data, &profile_id)?;
+    mine_due_at(&data_dir(), &profile_id)
+}
+
+/// D8: the app asks the engine which mined words are due instead of
+/// comparing `due_at` against its own clock, so "due" means one thing
+/// (the schedule the scheduler wrote, read on the machine that wrote it).
+/// An item that has never been graded has no schedule and is therefore
+/// never due — the UI must not offer an unscheduled word as review.
+fn mine_due_at(data: &Path, profile_id: &str) -> Result<Vec<MinedItemView>, String> {
+    let all = mine_list_at(data, profile_id)?;
     let now = rfc3339_utc(now_secs());
     Ok(all
         .into_iter()
@@ -7819,11 +7827,18 @@ mod tests {
         assert!(item.id.starts_with("mine-"));
         assert_eq!(item.source_citation, "ja.story.demo.first-meeting");
 
+        // An unscheduled word is not "due": the review path must not offer it.
+        assert!(
+            mine_due_at(data, &p.id).unwrap().is_empty(),
+            "a mined word with no schedule is not review-due"
+        );
+
         // Self-graded review schedules the mined item only.
-        mine_grade_at(data, &p.id, &item.id, false).unwrap();
+        let due_at = mine_grade_at(data, &p.id, &item.id, false).unwrap();
         let listed = mine_list_at(data, &p.id).unwrap();
         assert_eq!(listed.len(), 1);
         assert!(listed[0].due_at.is_some());
+        assert_eq!(listed[0].due_at.as_deref(), Some(due_at.as_str()));
 
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
         // NEVER mastery evidence, and no pack-content scheduler rows.
@@ -7831,6 +7846,28 @@ mod tests {
         let rows = store.scheduler_state(&p.id).unwrap();
         assert_eq!(rows.len(), 1);
         assert!(rows[0].item_id.starts_with("mine-"));
+        assert!(
+            mine_due_at(data, &p.id).unwrap().is_empty(),
+            "a freshly graded word is scheduled ahead, not due now"
+        );
+
+        // Back-dating the schedule is what makes it due: the engine is the one
+        // that decides, which is why the app calls `mine_due` instead of
+        // comparing timestamps itself.
+        store
+            .save_scheduler_state(
+                &p.id,
+                &lts_storage::SchedulerRecord {
+                    item_id: item.id.clone(),
+                    scheduler: lts_scheduler::SPIKE_VERSION.to_string(),
+                    params_json: rows[0].params_json.clone(),
+                    due_at: "2026-10-01T00:00:00Z".to_string(),
+                },
+            )
+            .unwrap();
+        let due = mine_due_at(data, &p.id).unwrap();
+        assert_eq!(due.len(), 1, "the back-dated word is now due");
+        assert_eq!(due[0].id, item.id);
     }
 
     #[test]

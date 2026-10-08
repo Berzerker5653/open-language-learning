@@ -351,6 +351,7 @@ export function App() {
   const [mineGloss, setMineGloss] = useState("");
   const [mineSource, setMineSource] = useState("");
   const [mineError, setMineError] = useState<string | null>(null);
+  const [mineNotice, setMineNotice] = useState<string | null>(null);
   const [mineReview, setMineReview] = useState<{
     item: (typeof mineItems)[number];
     revealed: boolean;
@@ -1295,10 +1296,25 @@ export function App() {
     }
   }
 
-  function startMineReview() {
-    const now = new Date().toISOString();
-    const due = mineItems.find((m) => m.due_at !== null && m.due_at <= now);
-    if (due) setMineReview({ item: due, revealed: false });
+  async function startMineReview() {
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    try {
+      // D8: the engine owns what "due" means (`mine_due` compares the stored
+      // schedule against the same clock the scheduler wrote). Comparing
+      // `due_at` to a client-side clock here could disagree with it, so the
+      // duplicated local filter is gone.
+      const due = (await inv("mine_due", { profileId })) as typeof mineItems;
+      const [first] = due;
+      if (!first) {
+        setMineNotice("Nothing is due for review right now.");
+        return;
+      }
+      setMineNotice(null);
+      setMineReview({ item: first, revealed: false });
+    } catch (e) {
+      setMineError(String(e));
+    }
   }
 
   // READ-001: revealing a faded scaffold refetches the task with the
@@ -2057,6 +2073,11 @@ export function App() {
           {mineError && (
             <p role="alert" className="alert">
               {mineError}
+            </p>
+          )}
+          {mineNotice && (
+            <p role="status" className="notice">
+              {mineNotice}
             </p>
           )}
           {mineReview ? (
