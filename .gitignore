@@ -12,6 +12,11 @@ private-recordings/
 *.wav.private
 *.mp3.private
 
+# Pack listening audio is regenerated at build time (ADR-0016). The committed
+# artifact is languages/*/media/manifest.jsonl (hash + synthesizer identity per
+# asset); the .wav bytes themselves never enter history.
+languages/*/media/*.wav
+
 # JS/Rust/Python build artifacts
 node_modules/
 target/

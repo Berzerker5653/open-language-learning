@@ -97,6 +97,10 @@ const V2_TEXTS: &[(&str, &str)] = &[
         "speech-profile",
         include_str!("../../../schemas/v0.2/speech-profile.schema.json"),
     ),
+    (
+        "media-asset",
+        include_str!("../../../schemas/v0.2/media-asset.schema.json"),
+    ),
 ];
 
 const V1_TEXTS: &[(&str, &str)] = &[

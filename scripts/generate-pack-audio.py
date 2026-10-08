@@ -1,0 +1,172 @@
+#!/usr/bin/env python3
+"""Generate pack audio with the pinned TTS payload (ADR-0016).
+
+Media-first is already how the engine resolves listening audio:
+`media/<sentence-id>.wav` and `media/<contrast-id>-<item-index>.wav`. The pack
+ships zero audio, so every one of those lookups falls through to on-demand
+synthesis. This script bakes that synthesis into the pack at build time and
+records what produced each file.
+
+Rules this script enforces:
+  * Audio binaries are NOT committed. The committed artifact is
+    `media/manifest.jsonl`: one schema-valid `media-asset` line per file with
+    sha256/size/format plus the synthesizer identity, so any release build can
+    regenerate byte-identical media and verify what it shipped.
+  * Provenance is declared (`model-output`), never inferred by the app from a
+    file's presence — see `declared_media_provenance` in the desktop crate.
+  * Synthesis input is the pack's own kana `reading` when it has one, because
+    Kokoro's kanji handling is not verified; the written `text` is still what
+    the manifest records for traceability.
+
+Usage:
+  scripts/generate-pack-audio.py --pack languages/ja-JP
+  scripts/generate-pack-audio.py --pack languages/ja-JP --force   # regenerate
+"""
+
+from __future__ import annotations
+
+import argparse
+import datetime
+import hashlib
+import json
+import subprocess
+import sys
+import wave
+from pathlib import Path
+
+DEFAULT_VENDOR = Path.home() / ".cache" / "lts-bench"
+RUNTIME = "sherpa-onnx-v1.13.8-linux-x64-shared"
+
+
+def sha256_file(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 16), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def load_jsonl(path: Path) -> list[dict]:
+    if not path.exists():
+        return []
+    return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+
+
+def targets(pack: Path) -> list[dict]:
+    """Every audio slot the engine will look for, in stable order."""
+    out: list[dict] = []
+    for shard in sorted((pack / "sentences").glob("*.jsonl")):
+        for row in load_jsonl(shard):
+            out.append(
+                {
+                    "id": row["id"],
+                    "file": f"media/{row['id']}.wav",
+                    "text": row["text"],
+                    "speak": row.get("reading") or row["text"],
+                }
+            )
+    for row in load_jsonl(pack / "phonology" / "contrasts.jsonl"):
+        for index, item in enumerate(row.get("items", [])):
+            asset_id = f"{row['id']}-{index}"
+            out.append(
+                {
+                    "id": asset_id,
+                    "file": f"media/{asset_id}.wav",
+                    "text": item["text"],
+                    "speak": item.get("reading") or item["text"],
+                }
+            )
+    return out
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--pack", required=True, type=Path)
+    ap.add_argument("--vendor", type=Path, default=DEFAULT_VENDOR)
+    ap.add_argument("--payload", default="kokoro-multi-lang-v1_1")
+    ap.add_argument("--voice", default="37", help="numeric Kokoro speaker id")
+    ap.add_argument("--speed", type=float, default=1.0)
+    ap.add_argument("--force", action="store_true", help="regenerate existing audio")
+    args = ap.parse_args()
+
+    pack = args.pack
+    runtime = args.vendor / RUNTIME / "bin" / "sherpa-onnx-offline-tts"
+    model_dir = args.vendor / args.payload
+    for required in (runtime, model_dir / "model.onnx", model_dir / "voices.bin"):
+        if not required.exists():
+            print(f"missing synthesis asset: {required}", file=sys.stderr)
+            return 2
+
+    media = pack / "media"
+    media.mkdir(exist_ok=True)
+    manifest_path = media / "manifest.jsonl"
+    previous = {r["id"]: r for r in load_jsonl(manifest_path)}
+    model_sha = sha256_file(model_dir / "model.onnx")
+    today = datetime.date.today().isoformat()
+
+    rows: list[dict] = []
+    generated = reused = 0
+    failures: list[str] = []
+    for want in targets(pack):
+        out = pack / want["file"]
+        prior = previous.get(want["id"])
+        if out.exists() and prior and not args.force:
+            if prior.get("sha256") == sha256_file(out):
+                rows.append(prior)
+                reused += 1
+                continue
+        cmd = [
+            str(runtime),
+            f"--kokoro-model={model_dir / 'model.onnx'}",
+            f"--kokoro-voices={model_dir / 'voices.bin'}",
+            f"--kokoro-tokens={model_dir / 'tokens.txt'}",
+            f"--kokoro-data-dir={model_dir / 'espeak-ng-data'}",
+            "--kokoro-lang=ja",
+            f"--sid={args.voice}",
+            f"--speed={args.speed:g}",
+            f"--output-filename={out}",
+            want["speak"],
+        ]
+        done = subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
+        if done.returncode != 0 or not out.exists():
+            failures.append(f"{want['id']}: {done.stderr.strip()[:160] or 'no output file'}")
+            if out.exists():
+                out.unlink()
+            continue
+        with wave.open(str(out)) as wav:
+            sample_rate, channels, frames = wav.getframerate(), wav.getnchannels(), wav.getnframes()
+        rows.append(
+            {
+                "id": want["id"],
+                "file": want["file"],
+                "sha256": sha256_file(out),
+                "bytes": out.stat().st_size,
+                "sample_rate": sample_rate,
+                "channels": channels,
+                "seconds": round(frames / sample_rate, 3),
+                "provenance": "model-output",
+                "synthesizer": {
+                    "runtime": RUNTIME,
+                    "model": args.payload,
+                    "model_sha256": model_sha,
+                    "voice": args.voice,
+                    "speed": args.speed,
+                },
+                "text": want["text"],
+                "generated": today,
+                "notes": "generated by scripts/generate-pack-audio.py; AI output, not a human recording and not human-reviewed",
+            }
+        )
+        generated += 1
+
+    rows.sort(key=lambda r: r["id"])
+    manifest_path.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows))
+    total = sum(r["bytes"] for r in rows)
+    print(f"pack={pack} assets={len(rows)} generated={generated} reused={reused} bytes={total}")
+    for failure in failures:
+        print(f"FAILED {failure}", file=sys.stderr)
+    return 1 if failures else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

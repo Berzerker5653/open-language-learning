@@ -105,6 +105,12 @@ pub fn classify(rel: &str) -> Option<Classified> {
         "reviews.jsonl" => Some(jsonl("review-record")),
         "speech/profiles.jsonl" => Some(jsonl("speech-profile")),
         _ => {
+            // The media manifest is validated data, not an opaque asset:
+            // audio provenance is declared per file, never inferred from the
+            // file's presence in `media/` (ADR-0016).
+            if rel == "media/manifest.jsonl" {
+                return Some(jsonl("media-asset"));
+            }
             if rel.starts_with("media/") {
                 return Some(Classified {
                     schema: None,
