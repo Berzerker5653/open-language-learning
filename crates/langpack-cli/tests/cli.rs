@@ -337,11 +337,21 @@ fn community_platform_reports_confirm_but_never_promote() {
     assert!(ok, "valid report: {out}{err}");
     let v: serde_json::Value =
         serde_json::from_str(&std::fs::read_to_string(&catalog).unwrap()).unwrap();
-    assert_eq!(v["tested_platforms"], serde_json::json!(["linux"]), "reports never populate tested_platforms");
-    assert_eq!(v["community_confirmed_platforms"], serde_json::json!(["windows"]));
+    assert_eq!(
+        v["tested_platforms"],
+        serde_json::json!(["linux"]),
+        "reports never populate tested_platforms"
+    );
+    assert_eq!(
+        v["community_confirmed_platforms"],
+        serde_json::json!(["windows"])
+    );
     assert_eq!(v["untested_platforms"], serde_json::json!(["macos"]));
     let entry = &v["packs"].as_array().unwrap()[0];
-    assert_eq!(entry["community_confirmed_platforms"], serde_json::json!(["windows"]));
+    assert_eq!(
+        entry["community_confirmed_platforms"],
+        serde_json::json!(["windows"])
+    );
     assert_eq!(entry["tested_platforms"], serde_json::json!(["linux"]));
 
     // The newest record for a (pack, platform) pair decides: a later `fails`
@@ -359,7 +369,10 @@ fn community_platform_reports_confirm_but_never_promote() {
     let v: serde_json::Value =
         serde_json::from_str(&std::fs::read_to_string(&catalog).unwrap()).unwrap();
     assert_eq!(v["community_confirmed_platforms"], serde_json::json!([]));
-    assert_eq!(v["untested_platforms"], serde_json::json!(["windows", "macos"]));
+    assert_eq!(
+        v["untested_platforms"],
+        serde_json::json!(["windows", "macos"])
+    );
 
     // A report bound to a different archive proves nothing about this one.
     let stale = "a".repeat(64);
@@ -372,10 +385,17 @@ fn community_platform_reports_confirm_but_never_promote() {
     );
     let (_out, err, ok) = with_reports(&r);
     assert!(!ok, "stale hash binding must fail the build");
-    assert!(err.contains("stale-pack-binding"), "machine-readable code: {err}");
+    assert!(
+        err.contains("stale-pack-binding"),
+        "machine-readable code: {err}"
+    );
     let v: serde_json::Value =
         serde_json::from_str(&std::fs::read_to_string(&catalog).unwrap()).unwrap();
-    assert_eq!(v["untested_platforms"], serde_json::json!(["windows", "macos"]), "nothing is written on failure");
+    assert_eq!(
+        v["untested_platforms"],
+        serde_json::json!(["windows", "macos"]),
+        "nothing is written on failure"
+    );
 
     // Report files may not declare maintainer evidence.
     let r = reports_file(
@@ -384,5 +404,8 @@ fn community_platform_reports_confirm_but_never_promote() {
     );
     let (_out, err, ok) = with_reports(&r);
     assert!(!ok, "report file cannot declare tested_platforms");
-    assert!(err.contains("tested-promotion-denied"), "machine-readable code: {err}");
+    assert!(
+        err.contains("tested-promotion-denied"),
+        "machine-readable code: {err}"
+    );
 }

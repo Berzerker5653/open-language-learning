@@ -632,7 +632,9 @@ fn short_hash(s: &str) -> String {
 
 /// Non-empty string value of `field`, if present.
 fn report_field<'a>(rec: &'a serde_json::Value, field: &str) -> Option<&'a str> {
-    rec.get(field).and_then(|v| v.as_str()).filter(|s| !s.is_empty())
+    rec.get(field)
+        .and_then(|v| v.as_str())
+        .filter(|s| !s.is_empty())
 }
 
 /// Missing-record fields get codes that name the binding they break, so a
@@ -720,7 +722,11 @@ fn load_platform_reports(path: &str) -> Result<Vec<serde_json::Value>, Vec<Repor
         let fallback = format!("reports[{i}]");
         let label = rec.get("id").and_then(|v| v.as_str()).unwrap_or(&fallback);
         let Some(obj) = rec.as_object() else {
-            failures.push(issue("report-file-malformed", label, "record must be a mapping"));
+            failures.push(issue(
+                "report-file-malformed",
+                label,
+                "record must be a mapping",
+            ));
             continue;
         };
         for key in obj.keys() {
@@ -742,7 +748,11 @@ fn load_platform_reports(path: &str) -> Result<Vec<serde_json::Value>, Vec<Repor
             }
         }
         if rec.get("issues").is_some_and(|v| !v.is_array()) {
-            failures.push(issue("bad-field", label, "issues must be an array of strings"));
+            failures.push(issue(
+                "bad-field",
+                label,
+                "issues must be an array of strings",
+            ));
         }
         if let Some(items) = rec.get("issues").and_then(|v| v.as_array()) {
             for item in items {
@@ -798,12 +808,20 @@ fn load_platform_reports(path: &str) -> Result<Vec<serde_json::Value>, Vec<Repor
         }
         if let Some(v) = report_field(rec, "date") {
             if !is_date(v) {
-                failures.push(issue("bad-field", label, format!("date {v:?} must be YYYY-MM-DD")));
+                failures.push(issue(
+                    "bad-field",
+                    label,
+                    format!("date {v:?} must be YYYY-MM-DD"),
+                ));
             }
         }
         if let Some(id) = report_field(rec, "id") {
             if !seen.insert(id.to_string()) {
-                failures.push(issue("duplicate-id", label, format!("duplicate record id {id}")));
+                failures.push(issue(
+                    "duplicate-id",
+                    label,
+                    format!("duplicate record id {id}"),
+                ));
             }
         }
     }
@@ -838,9 +856,10 @@ fn stamp_platform_status(
         let label = rec["id"].as_str().unwrap_or("(unnamed)").to_string();
         let pack_id = rec["pack_id"].as_str().unwrap_or("").to_string();
         let platform = rec["platform"].as_str().unwrap_or("").to_string();
-        let entry = catalog["packs"]
-            .as_array()
-            .and_then(|ps| ps.iter().find(|p| p["pack_id"].as_str() == Some(pack_id.as_str())));
+        let entry = catalog["packs"].as_array().and_then(|ps| {
+            ps.iter()
+                .find(|p| p["pack_id"].as_str() == Some(pack_id.as_str()))
+        });
         let Some(entry) = entry else {
             failures.push(issue(
                 "unknown-pack",
@@ -893,10 +912,7 @@ fn stamp_platform_status(
             let community: Vec<String> = known_platforms()
                 .into_iter()
                 .filter(|p| {
-                    !tested.contains(p)
-                        && confirmed
-                            .get(&pack_id)
-                            .is_some_and(|c| c.contains(p))
+                    !tested.contains(p) && confirmed.get(&pack_id).is_some_and(|c| c.contains(p))
                 })
                 .collect();
             let untested: Vec<String> = known_platforms()

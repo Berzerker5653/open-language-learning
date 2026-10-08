@@ -6151,8 +6151,13 @@ mod tests {
             "{\"id\":\"ja.lex.demo.obasan\",\"file\":\"media/ja.lex.demo.obasan.wav\",\"sha256\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"bytes\":16,\"sample_rate\":22050,\"channels\":1,\"provenance\":\"model-output\",\"synthesizer\":{\"runtime\":\"sherpa-onnx-v1.13.8\",\"model\":\"kokoro-multi-lang-v1_1\",\"voice\":\"37\"},\"text\":\"おばさん\",\"generated\":\"2026-10-07\"}\n",
         )
         .unwrap();
-        let declared = speech_audio_at(data, "org.openlanguage.ja-demo", "ja.lex.demo.obasan", "おばさん")
-            .expect("declared generated asset");
+        let declared = speech_audio_at(
+            data,
+            "org.openlanguage.ja-demo",
+            "ja.lex.demo.obasan",
+            "おばさん",
+        )
+        .expect("declared generated asset");
         assert_eq!(declared.source, "model-output");
         // An asset the manifest never mentions keeps the pre-manifest convention.
         let undeclared = speech_audio_at(
