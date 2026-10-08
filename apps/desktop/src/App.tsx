@@ -42,7 +42,7 @@ import {
 } from "./scenario";
 import { Settings, type RomajiMode } from "./settings";
 
-type Invoke = (cmd: string, args?: Record<string, unknown>) => Promise<unknown>;
+export type Invoke = (cmd: string, args?: Record<string, unknown>) => Promise<unknown>;
 
 /** Tauri IPC when running inside the native shell; null in plain
  * browser/vitest runs, where the flow stays purely local. */
@@ -51,6 +51,74 @@ function detectInvoke(): Invoke | null {
     return (cmd, args) => import("@tauri-apps/api/core").then((m) => m.invoke(cmd, args));
   }
   return null;
+}
+
+/**
+ * D7: honest refusal copy for a profile with no active pack. Nothing is
+ * ever built against a guessed pack id, so the message names the fix
+ * (the Languages page is where a pack becomes active).
+ */
+export const NO_ACTIVE_PACK = "No pack is active for this profile. Choose one under Languages.";
+
+/**
+ * The pack a session practises with, resolved from the profile itself.
+ * `active_pack` returns the ids the profile selected at onboarding: the
+ * first is the active one, an empty list means none is active, and more
+ * than one distinct id is a conflict the app surfaces instead of picking
+ * through silently. Never falls back to a default pack id.
+ */
+export type SessionPack = {
+  packId: string | null;
+  ids: string[];
+  note: string | null;
+};
+
+export async function loadSessionPack(inv: Invoke, profileId: string): Promise<SessionPack> {
+  const ids = (await inv("active_pack", { profileId })) as string[];
+  return { packId: ids[0] ?? null, ids, note: activePackNote(ids) };
+}
+
+/**
+ * A note for the ambiguous case: the profile reports more than one
+ * *different* active pack. The first one is used, and the conflict is
+ * surfaced instead of guessed away. Repeats of one id are not a conflict.
+ */
+export function activePackNote(ids: string[]): string | null {
+  const others = ids.slice(1).filter((id) => id !== ids[0]);
+  return others.length > 0
+    ? `This profile has more than one active pack (${ids.join(", ")}). Using ${ids[0]}; choose a single pack under Languages.`
+    : null;
+}
+
+/**
+ * Outcome of a pack-scoped native call. `ok: false` is the refusal path:
+ * no pack is active, so the command was never invoked.
+ */
+export type PackRequest<T> = { ok: true; packId: string; value: T } | { ok: false; error: string };
+
+/** A pack-scoped command with the pack id at the top level of the payload
+ * (the IPC spelling of the engine's `pack_id` argument). */
+export async function packRequest<T>(
+  inv: Invoke,
+  packId: string | null,
+  cmd: string,
+  args: Record<string, unknown>,
+): Promise<PackRequest<T>> {
+  if (!packId) return { ok: false, error: NO_ACTIVE_PACK };
+  return { ok: true, packId, value: (await inv(cmd, { packId, ...args })) as T };
+}
+
+/** The same guard for the speech attempts, which carry the pack id as
+ * `pack_id` inside the nested `attempt` payload. */
+export async function packAttemptRequest<T>(
+  inv: Invoke,
+  packId: string | null,
+  cmd: string,
+  attempt: Record<string, unknown>,
+): Promise<PackRequest<T>> {
+  if (!packId) return { ok: false, error: NO_ACTIVE_PACK };
+  const payload = { attempt: { pack_id: packId, ...attempt } };
+  return { ok: true, packId, value: (await inv(cmd, payload)) as T };
 }
 
 const EMPTY_PLAN: SessionPlan = {
@@ -122,6 +190,10 @@ export function App() {
     ],
   });
   const [packs, setPacks] = useState<PackCandidate[]>([]);
+  /** D7: the pack the wizard chose this session. It is also seeded from
+   * the profile's `active_pack` on profile load and on a pack switch, so
+   * a returning session (no wizard) has the profile's own pack and every
+   * pack-scoped call uses it. Null means no pack is active. */
   const [selectedPack, setSelectedPack] = useState<string | null>(null);
   const [installedPacks, setInstalledPacks] = useState<string[]>([]);
   const [profileName, setProfileName] = useState("");
@@ -315,7 +387,12 @@ export function App() {
               })) as ProfileSummary);
           setProfileId(p.id);
           setDisplayName(p.display_name);
-          const packId = "org.openlanguage.ja-jp.reference";
+          // D7: the smoke walkthrough installs the first bundled
+          // candidate — the same list the wizard is shown — instead of
+          // naming a pack id here.
+          const bundled = (await inv("available_packs")) as PackCandidate[];
+          const packId = bundled[0]?.pack_id;
+          if (!packId) throw new Error("no bundled pack is available to install");
           setSelectedPack(packId);
           await inv("install_pack", { packId });
           await inv("complete_onboarding", {
@@ -381,7 +458,16 @@ export function App() {
     setInstalled((await inv("installed_packs")) as InstalledPack[]);
     setClaims((await inv("pack_claims")) as PackClaims[]);
     const active = pid ?? profileId;
-    if (active) setActiveIds((await inv("active_pack", { profileId: active })) as string[]);
+    if (active) {
+      const session = await loadSessionPack(inv, active);
+      setActiveIds(session.ids);
+      // D7: the profile's own active pack seeds every pack-scoped call,
+      // so a returning session (no wizard this run) and a Languages pack
+      // switch both aim at the right pack. No pack here means no pack:
+      // the panels refuse instead of guessing one.
+      setSelectedPack(session.packId);
+      if (session.note) setLangError(session.note);
+    }
     const c = (await inv("catalog_packs")) as { entries: CatalogEntry[]; status: string };
     setCatalog(c.entries);
     setCatalogStatus(c.status);
@@ -665,6 +751,10 @@ export function App() {
     setEnvironments([]);
     setGoals([]);
     setProgress([]);
+    // D7: a deleted profile's active pack must not be carried into the
+    // next session — there is no active pack until one is chosen.
+    setSelectedPack(null);
+    setActiveIds([]);
     setMicEnabled(false);
     setRomajiMode("auto");
     setSettingsExportPath(null);
@@ -1061,11 +1151,17 @@ export function App() {
     const item = shadowItems[shadowIdx];
     if (!inv || !item) return;
     try {
-      const a = (await inv("speech_audio", {
-        packId: selectedPack ?? "org.openlanguage.ja-jp.reference",
-        unitId: item.content_id,
-        text: item.surface,
-      })) as { wav_b64: string; source: string };
+      const req = await packRequest<{ wav_b64: string; source: string }>(
+        inv,
+        selectedPack,
+        "speech_audio",
+        { unitId: item.content_id, text: item.surface },
+      );
+      if (!req.ok) {
+        setAudioMsg(req.error);
+        return;
+      }
+      const a = req.value;
       setAudioMsg(null);
       const bytes = Uint8Array.from(atob(a.wav_b64), (c) => c.charCodeAt(0));
       playBlobUrl(URL.createObjectURL(new Blob([bytes], { type: "audio/wav" })));
@@ -1351,10 +1447,20 @@ export function App() {
     const inv = detectInvoke();
     if (!inv) return;
     let live = true;
-    void inv("pronunciation_demo", {
-      packId: selectedPack ?? "org.openlanguage.ja-jp.reference",
-    })
-      .then((d) => live && setPronDemo(d as PronDemo))
+    // D7: with no active pack there is no phonology to read; the guard
+    // refuses and the panel says why, instead of asking the engine for a
+    // default pack.
+    void packRequest<PronDemo>(inv, selectedPack, "pronunciation_demo", {})
+      .then((r) => {
+        if (!live) return;
+        if (!r.ok) {
+          setPronDemo(null);
+          setAudioMsg(r.error);
+          return;
+        }
+        setPronDemo(r.value);
+        setAudioMsg((m) => (m === NO_ACTIVE_PACK ? null : m));
+      })
       .catch(() => live && setPronDemo(null));
     return () => {
       live = false;
@@ -1372,11 +1478,12 @@ export function App() {
     if (!pronDemo) return;
     const unitId = which === "short" ? pronDemo.short_unit : pronDemo.long_unit;
     try {
-      const b64 = (await inv("reference_audio", {
-        packId: selectedPack ?? "org.openlanguage.ja-jp.reference",
-        unitId,
-      })) as string;
-      const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+      const req = await packRequest<string>(inv, selectedPack, "reference_audio", { unitId });
+      if (!req.ok) {
+        setAudioMsg(req.error);
+        return;
+      }
+      const bytes = Uint8Array.from(atob(req.value), (c) => c.charCodeAt(0));
       setAudioMsg(null);
       playBlobUrl(URL.createObjectURL(new Blob([bytes], { type: "audio/wav" })));
     } catch {
@@ -1402,14 +1509,17 @@ export function App() {
       return;
     }
     try {
-      const result = (await inv("pronunciation_check", {
-        attempt: {
-          pack_id: selectedPack ?? "org.openlanguage.ja-jp.reference",
-          ...pronDemo,
-          wav_b64: toB64(wav),
-        },
-      })) as PronunciationResult;
-      setPronResult(result);
+      const req = await packAttemptRequest<PronunciationResult>(
+        inv,
+        selectedPack,
+        "pronunciation_check",
+        { ...pronDemo, wav_b64: toB64(wav) },
+      );
+      if (!req.ok) {
+        setAudioMsg(req.error);
+        return;
+      }
+      setPronResult(req.value);
     } catch {
       setPronResult({
         corrections: [],
@@ -1434,14 +1544,15 @@ export function App() {
       return;
     }
     try {
-      const r = (await inv("dictation_check", {
-        attempt: {
-          pack_id: selectedPack ?? "org.openlanguage.ja-jp.reference",
-          target_text: dictTarget,
-          wav_b64: toB64(wav),
-        },
-      })) as DictationResult;
-      setDictResult(r);
+      const req = await packAttemptRequest<DictationResult>(inv, selectedPack, "dictation_check", {
+        target_text: dictTarget,
+        wav_b64: toB64(wav),
+      });
+      if (!req.ok) {
+        setAudioMsg(req.error);
+        return;
+      }
+      setDictResult(req.value);
     } catch {
       setDictResult({
         matched: null,
@@ -1457,12 +1568,16 @@ export function App() {
     const inv = detectInvoke();
     if (!inv) return;
     try {
-      const s = (await inv("dictation_target", {
-        packId: selectedPack ?? "org.openlanguage.ja-jp.reference",
+      const req = await packRequest<DictationSentence>(inv, selectedPack, "dictation_target", {
         offset,
-      })) as DictationSentence;
-      setDictSentence(s);
-      setDictTarget(s.reading);
+      });
+      if (!req.ok) {
+        setAudioMsg(req.error);
+        setDictSentence(null);
+        return;
+      }
+      setDictSentence(req.value);
+      setDictTarget(req.value.reading);
       setDictResult(null);
     } catch {
       setDictSentence(null);
