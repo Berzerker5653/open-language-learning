@@ -755,7 +755,7 @@ used for benchmarking.
   the payload shipped; both are build-neutral now, and the tests that pinned the
   old wording were rewritten to pin the invariant instead of the sentence.
 
-Gates: workspace suite green with 0 failures (`lts-desktop --lib` 74,
+Gates: workspace suite green — 57 test targets, 296 tests, 0 failures, exit 0 (`lts-desktop --lib` 74,
 `lts-speech-runtime` 32 — the sidecar suite contributing 11); clippy
 `--workspace --all-targets -D warnings` clean **after repairing three lints that
 were already red at HEAD** (two `err().expect()` in `crates/langpack/tests/media.rs`
