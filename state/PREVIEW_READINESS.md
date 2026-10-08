@@ -59,9 +59,15 @@ archives) followed by `cargo tauri dev`. A quick automated sanity walk first:
 
 Surfaces that changed since the 2026-10-03 preview note, and what to check:
 
-- **Home** — a Start button for each of the six runnable modalities; "Places you
-  can go" now comes from the pack (`world/environments.jsonl`) and unlocks from
-  mastery, not activity counts.
+- **Home** — a Start button for each of the six runnable modalities. "Places you
+  can go" is pack data now: `cafe-price-check`, `cafe-order-drink`,
+  `station-navigation`, `buy-a-ticket`, `self-introduction`, all locked on a fresh
+  profile. Fastest proof that unlocking works: do recall practice on コーヒー and
+  お茶 (goal *Order a drink and ask for the price*) plus one listening item, then
+  reload Home — *Checking the price at the café* opens and the others stay shut.
+  Unlocking follows derived mastery, never activity counts, and a place gated on a
+  dimension no runner records is now rejected by the pack validator instead of
+  shipping permanently locked.
 - **Settings** (new tab) — microphone permission (turn it off and try a speaking
   activity: capture must refuse and say why), romaji display, speech model, and
   under "Your data" the **export** file it writes to `<data>/exports/` (recordings
@@ -76,9 +82,9 @@ Surfaces that changed since the 2026-10-03 preview note, and what to check:
   stays guided-only — no accuracy score is produced or implied (ADR-0017,
   docs/18).
 - **Pack bytes changed** (audio + environments), so the published `0.2.0` archives
-  are stale: audio-bearing archive is 76,867,333 B, sha256
-  `d25315aa0b32b750e1d97b5dae974bf9e478f4dc10573ddce63ee14589595d84`. The version
-  bump and republish are owner actions under O-05.
+  are stale: the audio-bearing archive builds deterministically at 76,867,477 B,
+  sha256 `a3819b85c2e2cf4d4fa98d4d159e74feacb8d5b61321c1dababf2e69ca666577`. The
+  version bump and republish are owner actions under O-05.
 
 Things a human still has to decide or perform, and that no AI run can sign:
 the AT/screen-reader audit (O-03), the security/privacy review, qualified content

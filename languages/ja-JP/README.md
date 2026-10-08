@@ -15,7 +15,7 @@ Install is **not** license-blocked: LIC-001 closed 2026-10-04, `manifest.yaml` s
 Listening audio is generated, never hand-collected or committed (ADR-0016): `scripts/generate-pack-audio.py` synthesizes every sentence and contrast item with the app's own Kokoro/sherpa-onnx chain and writes `media/manifest.jsonl`, which is the committed artifact — one schema-validated line per asset with sha256, format, provenance `model-output` and the synthesizer identity. The engine reads audio provenance from that manifest, so generated audio can never present itself as a licensed recording. This audio is comprehension input only: it is not a pronunciation reference, and production scoring still relies on pack-declared targets (ADR-0013).
 
 Unlockable places are pack data too (ADR-0018): `world/environments.jsonl` is
-AI-authored for this pack — five places (asking the price in a café, ordering a
+AI-authored for this pack — five places (checking the price at the café, ordering a
 drink, station navigation, buying a ticket, self-introduction), each gated on
 three content ids this pack actually declares, using modalities the shipped
 runners can record (recall, listening, writing recognition). The ids were checked
@@ -23,7 +23,8 @@ against `lexicon/`, `sentences/`, `grammar/` and `media/manifest.jsonl`, and the
 validator enforces it (`environment_unknown_content`,
 `environment_listening_without_audio`). The first draft gated the café on
 `comprehension-reading`, which no runner credits — that is now a schema error, and
-the place became *asking the price* (recall + listening) instead. The
+the place became *checking the price* (recall of two drinks, plus listening on a
+price-tag sentence the pack has audio for). The
 `display_name` values describe what the place affords and assert no learning
 outcome or proficiency level; the thresholds are deliberately reachable at
 `introduced`/`supported` through activities this pack can record. These places are

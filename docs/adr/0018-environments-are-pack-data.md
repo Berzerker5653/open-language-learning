@@ -61,7 +61,7 @@ Environments move into the pack as an optional collection.
   yields an **empty** list. `demo_world_config` is deleted; the engine contributes
   no environment text or content id.
 - **Reference pack**: `languages/ja-JP/world/environments.jsonl` ships five
-  environments (`cafe-ask-price`, `cafe-order-drink`, `station-navigation`,
+  environments (`cafe-price-check`, `cafe-order-drink`, `station-navigation`,
   `buy-a-ticket`, `self-introduction`), each requiring three real pack content ids
   across two or three earnable modalities.
 
@@ -81,7 +81,7 @@ Environments move into the pack as an optional collection.
   a dimension the app reads formatively but never records, producing exactly the
   kind of entry no runner can unlock that the audit criticised. The validator
   accepted it; the enum now rejects it, and the place was rebuilt around listening
-  and recall (`cafe-ask-price`) with audio the manifest already declares.
+  and recall (`cafe-price-check`) with audio the manifest already declares.
 - The app-side surface is unchanged (`world_state` payload shape, Home rendering),
   so no frontend work was needed and the smoke route count is unaffected.
 - Removing the hardcoded config deletes the last language-specific presentation

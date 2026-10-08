@@ -682,3 +682,36 @@ naming both digests; the clean build is 76,772,565 B
 (sha256 `ad5e712c4490ea494fa2e2fd4ab8f4b23b9b661800efecca8fdff0ee39787d4e`)
 against the 850,167 B published `0.2.0` archive — so O-05's version bump is now
 also a 90 MB payload decision, not a metadata one.
+
+## 2026-10-08 — owner-loop tranche (D1–D8, settings slice, environments as pack data)
+
+The feature-gap audit (`state/notes/FEATURE-GAP-AUDIT-2026-10-08.md`) turned its
+findings into fixes, aimed at the owner's hands-on pass (O-06) rather than at a
+gate: honest audio-less pack builds (D1), a Start button for every runner the app
+actually has (D2), listening drills built from sentences with declared audio (D3),
+unpublishable payloads no longer offered for download (D5), Home's Places section
+fed by pack data (D6/K-57), activities resolving the profile's active pack instead
+of a hardcoded ja-JP id (D7), and My Words asking the engine which words are due
+(D8). A Settings route (13th smoke route) made the privacy notice's promises true:
+capture refused while the microphone is off, profile export with recordings
+excluded, one-shot profile delete behind a two-step confirm.
+
+`ADR-0018` (environments are pack data) stays **Proposed** pending the owner. Its
+first cut repeated the audit's own D6 defect — a café gated on
+`comprehension-reading`, which no runner credits — so reachability is now
+mechanical rather than reviewed: the row schema's `modality` enum holds only the
+six dimensions a shipped runner records, and
+`environment_listening_without_audio` rejects a listening unlock on content the
+pack declares no audio for.
+
+Gates at this point: `cargo test --workspace` ok (56 targets), `lts-desktop --lib`
+70, the `lts-langpack` world suite 8, all seven pack gates 0 errors / 0 warnings,
+tsc + eslint clean with vitest 13 files / 133 tests, `SMOKE OK (26 routes walked)`
+over 13 routes. The audio-bearing reference archive builds deterministically at
+76,867,477 B, sha256 `a3819b85c2e2cf4d4fa98d4d159e74feacb8d5b61321c1dababf2e69ca666577`, against the
+850,167 B published `0.2.0`.
+
+What no automated gate can close: O-03's human AT pass (Settings is now inside its
+scope), the security/privacy review, qualified human content review (O-02, delegated
+to community PRs), and O-05 — shipping the audio-bearing pack is a version bump plus
+the owner's call on the repo going public.

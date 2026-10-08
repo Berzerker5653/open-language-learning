@@ -6525,7 +6525,7 @@ mod tests {
 
     /// ADR-0018: the environments come from the active pack, and unlock
     /// state follows derived capability — never activity volume (ADR-0002).
-    /// The bundled reference pack declares `cafe-ask-price` (recall-meaning
+    /// The bundled reference pack declares `cafe-price-check` (recall-meaning
     /// `introduced` for two drink words plus comprehension-listening
     /// `introduced` for one sentence) and `cafe-order-drink` (a listening and
     /// a writing requirement at `supported`), so the first is reachable from
@@ -6549,7 +6549,7 @@ mod tests {
             world_state_at(data, &p.id)
                 .unwrap()
                 .into_iter()
-                .find(|e| e.id == "cafe-ask-price")
+                .find(|e| e.id == "cafe-price-check")
         };
 
         // The pack's own ids and labels are what the app shows; the
@@ -6562,7 +6562,7 @@ mod tests {
             "the engine must contribute no environment of its own: {:?}",
             envs.iter().map(|e| &e.id).collect::<Vec<_>>()
         );
-        let fresh = menu().expect("cafe-ask-price comes from the pack");
+        let fresh = menu().expect("cafe-price-check comes from the pack");
         assert!(!fresh.unlocked, "a new profile has earned nothing");
         assert_eq!(
             fresh.missing.len(),
@@ -6627,7 +6627,7 @@ mod tests {
         assert!(
             unlocked
                 .iter()
-                .find(|e| e.id == "cafe-ask-price")
+                .find(|e| e.id == "cafe-price-check")
                 .unwrap()
                 .unlocked,
             "meeting the pack's requirements opens the place"
