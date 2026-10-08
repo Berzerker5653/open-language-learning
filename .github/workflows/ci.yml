@@ -20,6 +20,10 @@ jobs:
         with:
           components: rustfmt, clippy
       - uses: Swatinem/rust-cache@v2
+      # Fast bash gate for the shipped aligner payload (ADR-0019): synthetic
+      # payload only, no network/cmake/cargo, seconds to run.
+      - name: Aligner sidecar staging script regression test
+        run: ./scripts/test-stage-aligner-sidecar.sh
       - run: cargo fmt --all --check
       - run: cargo clippy --workspace --all-targets -- -D warnings
       - run: cargo test --workspace

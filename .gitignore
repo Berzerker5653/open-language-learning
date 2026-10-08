@@ -7,6 +7,14 @@ models/
 *.bin
 *.safetensors
 
+# Bundled sidecar payloads (whisper.cpp aligner runtime + ggml-tiny weights)
+# are staged by scripts/stage-aligner-sidecar.sh: generated, hash-pinned in
+# SIDECAR.yaml, never committed (repo rule: no model binaries in git).
+apps/desktop/sidecar/
+# Throwaway payloads written by scripts/test-stage-aligner-sidecar.sh: the
+# staging script refuses a payload root that git could commit.
+apps/desktop/sidecar-test/
+
 # Private audio / research fixtures unless explicitly permissioned
 private-recordings/
 *.wav.private
