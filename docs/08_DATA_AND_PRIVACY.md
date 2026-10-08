@@ -89,7 +89,7 @@ Provide a documented portable export before cloud sync. Export supports:
 
 Import validates version/migrations and never overwrites a profile silently.
 
-### Implemented in the desktop app (K-52 slice, 2026-10-08)
+### Implemented in the desktop app (2026-10-08 settings slice)
 
 Settings → "Your data" carries the two controls the privacy notice promises:
 

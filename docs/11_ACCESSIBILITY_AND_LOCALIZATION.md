@@ -34,7 +34,7 @@ furigana/IME risks to test first, and a human-only sign-off block. Until a
 signed row exists, no release may claim accessibility conformance beyond the
 automated semantics checks in `apps/desktop/src/a11y.test.tsx`.
 
-As of the K-52 settings slice the route set walked by the automated smoke test
+As of the 2026-10-08 settings slice the route set walked by the automated smoke test
 (`scripts/smoke-desktop.sh`, 13 routes) includes the dedicated **Settings** route,
 which now carries the microphone permission toggle, romaji display, speech-model
 selection, profile export and profile delete. Those are critical-journey surfaces

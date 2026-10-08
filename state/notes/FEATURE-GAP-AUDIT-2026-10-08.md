@@ -154,6 +154,29 @@ permanently the "coming soon" notice (`language.tsx:106-107`) — the honest-but
 **D9. Minor — profile data promises without the feature** (see Honesty H3/H4): no export, no delete,
 no post-onboarding mic toggle; no profile switch after launch (resume picker is the only entry).
 
+## Resolution status (same day, verified by the gates below)
+
+| finding | status | what changed |
+| --- | --- | --- |
+| D1 | **closed** | `archive::build` audits media and refuses only a *partially* built pack; an unbuilt pack ships an honest audio-less archive (manifest dropped + warning). `build-catalog.sh` ordering fixed. `crates/langpack/tests/media.rs` (8). `3296cf3`, docs in `6a4a534` |
+| D2 | **closed** | `home.tsx::RUNNABLE_MODALITIES` gives a Start button for all six runner-backed modalities and names the one with no runner; contract test in `home.test.tsx`. `99093f7` |
+| D3 | **closed** | Listening practice is sentence-scoped against audio the pack declares (`listening_sentence_task_build`), ids resolve through the manifest `file` field, and a sentence with no audio is refused rather than offered. Same commit; three Rust tests |
+| D4 | **open (owner decision)** | Copy is now honest (the panel says the whisper.cpp runtime is absent in this build). Shipping the aligner as a sidecar per ADR-0008 is a packaging decision — kanban `D4` |
+| D5 | **closed engine-side (payload staging is owner work)** | Catalog marks both TTS payloads `availability: unpublished`; `installable()` + `install_model_files` refuse before any fetch; the UI says "not published in this build". `f8d7969`. Staging the real assets stays kanban `D5-rest` |
+| D6 | **closed** | The app-side stub is gone: environments are pack data (`world/environments.jsonl`, ADR-0018 **Proposed**), `demo_world_config()` deleted, unknown unlock targets fail the pack. `fb124d1`, kanban `K-57` |
+| D7 | **closed** | Pack comes from `active_pack`; the seven hardcoded fallback ids are gone and no pack means a refusal naming Languages. `0c79e96` + `App.test.tsx` |
+| D8 | **closed for `mine_due`** | My Words asks `mine_due`; due semantics live in one place (`mine_due_at`) and are tested (unscheduled ≠ due, freshly graded ≠ due, back-dated = due). `bc9c76a`. The `LTS_PACK_CATALOG_URL` half stays as the honest-but-inert O-05 surface — it is a published-catalog dependency, not a defect to fix in code |
+| D9 | **closed except profile switching** | Export, one-shot delete, and the microphone toggle now exist and are enforced (Settings route; `2ffc1ca`). A profile switch after launch is still the launch-time resume picker only — recorded as remaining minor, not built speculatively |
+
+Verification for the tranche: `cargo test --workspace` green (lts-desktop 70,
+langpack incl. 6 new `tests/world.rs`, media 8, validate 32, CLI 9); pack
+validate/lint/audit-* all 0 errors 0 warnings; `npx tsc --noEmit` clean, 133
+vitest tests, `npx eslint .` clean; `./scripts/smoke-desktop.sh` → `SMOKE OK
+(26 routes walked)` across 13 routes with `goal-map-assert 75`. Audio-bearing
+archive rebuilt at 76,867,333 B, sha256
+`d25315aa0b32b750e1d97b5dae974bf9e478f4dc10573ddce63ee14589595d84` — the pack
+bytes changed, which re-opens the O-05 version bump.
+
 ---
 
 ## First-run walkthrough the owner can actually follow

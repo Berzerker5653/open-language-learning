@@ -56,6 +56,34 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | SPEECH-007 evidence | synthetic learner-proxy study `benchmarks/speech/results/20261008T030000Z/` answers "why can't an AI make the recordings" with numbers: scoring coverage 0.00–0.53 against the frozen 0.60 floor and it tracks the ASR model, not the planted condition; on 8 identical scored clips the verdict inverts 8/8 `close` → 8/8 `shorter` when only the reference-ratio source changes (0 planted errors caught vs a 1.0 false-correction rate); κ ≥ 0.70 is vacuous on synthetic ground truth; and the chain is not byte-reproducible (5 runs → 5 sha256), so calibration needs a stated measurement tolerance as well as recordings. The gate stays `blocked`; the owner decision is now the only remaining input | SPEECH-007 |
 | K-56 | K-50 executed + gated (2026-10-07): generated the audio — 693 assets (679 sentence records incl. the 19 A2 ones, 14 contrast items), 96,511,536 B of `.wav` on disk, committed manifest of 693 rows; found Kokoro's ja path is OOV on bare kanji (`Ignore OOV '金'` → exit 2) so the three kin/sen/hyaku contrast items now declare kana readings and the generator synthesizes from the reading (86/693 assets speak a reading, not the written text; the manifest's `text` is what was fed to the model, kanji named in `notes`); fixed `Pack::load_dir` swallowing `media/manifest.jsonl` as a binary asset (it is now validated `media-asset` data); added the pairing gate — `Pack::audit_media` (missing/hash/size/unlisted/duplicate/unusable), enforced by `validate(Mode::Install)`, `langpack test` and `archive::build`, five tests in `crates/langpack/tests/media.rs`; verified on the real pack: one flipped byte makes `build` exit 1 naming both digests, clean build = 76,772,565 B / sha256 `ad5e712c…` | ADR-0016, JA-A1-003 |
 
+
+## done — owner-loop readiness (2026-10-08, findings in `state/notes/FEATURE-GAP-AUDIT-2026-10-08.md`)
+
+| card | what | maps to |
+| --- | --- | --- |
+| D1 | A pack with none of its declared assets on disk now builds an **honest audio-less archive** (manifest dropped + warning) instead of an uninstallable one; a partially built pack is still refused. Also fixed `scripts/build-catalog.sh` generating audio **after** `build_pack`. 8 tests in `crates/langpack/tests/media.rs`; docs/13, PACK_AUTHORING_CONTRACT, ADR-0016 and README corrected (the `media_absent` code the docs named never existed) | ADR-0016 follow-on |
+| D2 + D3 | Home offers a Start button for every runner-backed modality (six, `RUNNABLE_MODALITIES`, contract-pinned in `home.test.tsx`) and says plainly where there is no runner yet. Listening practice moved from lexicon words to **pack sentences with declared audio**: `listening_sentence_task_build` never sends the transcript over IPC, distractors come from other sentence glosses, and a sentence with no audio is refused rather than offered; media ids resolve through the manifest `file` field (pack-root-relative, traversal rows skipped, `{id}.wav` fallback for pre-ADR-0016 packs) | UX, ADR-0016 |
+| K-48 | Kanji forms for the reference pack: 2,123 of 3,920 lexicon entries gained a kanji form derived from jmdict-simplified 3.6.2 (`scripts/derive-kanji-forms.py`, idempotent). 3,121 auto-tagged `band: A1` rows were **reverted** — a dictionary `common` marker is a statement about the language, not the level a learner meets it at; only goal-linked bands survive, so 1 row keeps a band. 1,265 kana-only entries have their competing spellings named in `notes` for human review | 2026-10-07 N5 audit |
+| K-54 | Ruby semantics: `<ruby>/<rt>/<rp>` via `apps/desktop/src/ruby.tsx` (`Ruby`, `isKanaOnly`) behind the existing furigana toggle, replacing the sibling `<small>` line; 6 component tests + call-site repoint. Conformance is still O-03's to decide | docs/11:55-59 |
+| K-55 | `state/evidence/PERF-001/tier-omarchy-2026-10-08.md`: `typical` tier measured (AMD Ryzen AI Max+ 395, no CUDA) — whisper tiny p50 201.3 / p95 214.7 ms (RTF 0.155), sherpa tiny 254.2/284.0, base 399.9/415.9 and 436.5/474.9; kokoro TTS wall p50 0.902 s (RTF 0.718). ASR clears the typical latency/cold/RTF lines; cold-process TTS misses the warm-phrase line, and the harness never measures warm resident TTS — said so in the record. `BUDGETS.yaml` left `provisional`: freezing needs a separate ADR, and `high`/GPU plus a real `low` device are still unmeasured | PERF-001 freeze |
+| D5 | Unpublishable payloads stopped being offered: the catalog marks `kokoro-multi-lang` and `sherpa-onnx-runtime` `"availability": "unpublished"`, `models::installable()` treats unpublished / empty / `PENDING-RELEASE-URL` as unfetchable, `install_model_files` refuses **before** opening a connection, and the panel says "not published in this build" instead of rendering a Download button. Tests assert exactly those two entries are blocked, every installable entry has a real HTTPS URL, and a refused install fetches nothing | ADR-0009 staging |
+| Settings | New `Settings` route (13 routes walked): microphone permission **enforced at capture** (`recordAttempt` refuses `getUserMedia` and names Settings), romaji display, speech-model choice, profile **export** (`<data>/exports/<profile>-<ts>.json`, recordings excluded) and one-shot profile **delete** with a two-step confirm — the privacy notice's promises made true. Honest copy where the app previously implied a runtime it does not ship; wizard explains what unlocks Continue. docs/08 records what exists and that import does **not**; docs/11 puts the route in O-03's scope | docs/08, docs/11 |
+| D7 | Activities resolve the pack from the profile's `active_pack` instead of seven hardcoded `"org.openlanguage.ja-jp.reference"` fallbacks; no active pack means a refusal naming Languages, never a guessed pack. New `App.test.tsx` drives the resolution/request seam (mounting `<App/>` is not drivable in this repo's node-only vitest) | gap audit |
+| K-49 | Grammar holes from the N5 audit closed: `ja.grammar.particle.subject-ga`, `companion-to`, `quotative-to` plus い-adjective negation/past concepts and A1 units riding the goal map (`501f198`). The wording/example flags it raised are queued as K-49-follow — they need a human linguist | 2026-10-07 N5 audit |
+| K-57 | Environments are pack data (ADR-0018, **Proposed**): optional `world/environments.jsonl`, three error gates (`duplicate_environment_id`, `environment_unknown_content`, `world_collection_missing`), `world_state_at` reads the active pack, `demo_world_config()` deleted, ja-JP ships five places gated on verified content ids. Home's "Places you can go" no longer shows app-authored Japanese content and no longer contains an entry no runner could open | GAME-001, docs/00 neutrality |
+| honesty | Copy corrected in pronunciation/dictation/language panels: "you turned it off" vs "this build has no such runtime" are no longer conflated, and no panel claims a speech model is available in a build that ships none | docs/18 |
+
+## next — queued after 2026-10-08
+
+| card | epic | what | maps to |
+| --- | --- | --- | --- |
+| K-58 | pack | K-48 review queue: 1,265 entries left kana-only with competing kanji spellings named in `notes` need a human to pick; 76 matched with no kanji form and 456 unmatched are logged by the same script. Flagged, not guessed | K-48 follow-on |
+| K-49-follow | pack | Grammar review flags raised while shipping K-49: が/は information-structure wording, the relative-clause が prohibition, inline examples that lack pack-sentence/audio backing, and the polite past-negative form. Needs a human linguist, not more generation | docs/16 |
+| D4 | speech | The whisper.cpp aligner resolves only from `$LTS_BENCH_VENDOR/whisper.cpp/build/bin/whisper-cli` or `~/.cache/lts-bench/…`. The copy is now honest (the panel says the runtime is absent); shipping it as a sidecar per ADR-0008 is a packaging decision for the owner | ADR-0008 |
+| D5-rest | release | Staging the two real payloads (kokoro zip 345,065,270 B; sherpa runtime 30,454,382 B, `linux-x64` only) is publishing work needing owner authorization. Engine-side the placeholder is refused and the button is gone, so nothing user-visible waits on it except TTS itself | ADR-0009 |
+| P1 | ux | Profile switching after launch: the launch-time resume picker is the only entry, so changing profile mid-session means restarting the app. Not built speculatively — the owner's O-06 pass should say whether it is actually annoying | gap audit D9 |
+| H1 | pack | `display_name` still says "(Draft)"; rides the O-05 version bump rather than a separate pack release | O-05 |
+
 ## next — AI authoring kit (the GitHub community-pack goal)
 
 | card | epic | what | maps to |
@@ -66,10 +94,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
 | (queued) | ja-JP | Deeper A2-band coverage as labeled drafts riding the goal map (first pass shipped with K-45: 28 kanji + 19 sentences + 15 phrase annotations; remaining depth is ongoing content production) | JA-A2-001 posture |
-| K-48 | pack | Kanji-form vocabulary: add kanji `forms` + furigana readings to the ~800 N5-appropriate lexicon entries (all 3,920 entries are currently kana-only — 0 kanji forms, 0 kanji readings; N5 prints vocabulary in kanji); add a `level`/`framework_refs` band tag to lexicon records so band-appropriateness is data (schema change: `schemas/v0.2/lexicon-entry.schema.json` + docs) | 2026-10-07 N5 audit |
-| K-49 | pack | Grammar holes: add dedicated concepts + A1 units for subject particle が and quotation/companion と (9 of 11 benchmark particles covered; が is the most-tested N5 particle) and い-adjective negation/past (〜くない/〜かった entirely absent) | 2026-10-07 N5 audit |
-| K-54 | a11y | Furigana semantics: readings render as a sibling `<small>` line (`apps/desktop/src/practice.tsx:67-69`, `App.tsx:1772-1774`) instead of ruby markup, so a screen reader announces headword-then-reading by DOM order with no relation, and may read the reading as unrelated text. `docs/11` Japanese-rendering requires ruby/furigana semantics and a screen-reader check for duplicate/nonsensical announcements. Implement `<ruby>`/`<rt>`/`<rp>` for whole-word readings behind the existing furigana toggle, then let the O-03 audit row confirm what Orca actually says — the audit, not this card, decides conformance | docs/11:55-59 |
-| K-55 | perf | PERF-001's freeze condition is unmet: `docs/performance/BUDGETS.yaml` is `status: provisional, frozen: false`, and the SPEECH-001 spikes measured only the `ref-dev` tier (`state/notes/SPEECH-001.md`: GPU tier and the low-tier device explicitly not measured). Budgets cannot be frozen on one tier, and PERF-002 measures against frozen values — so no harness evaluator should be written against provisional numbers. Work: run the pinned bench protocol on the other named tiers (the lab machines can cover `typical`, a real low-tier device is still missing; record commit, model hashes, governor, network-disabled per `tests/performance/README.md`), then an ADR freezes the budgets. Only after that does PERF-002 become measurable | PERF-001 freeze |
+| K-55 | perf | Remaining tiers for the PERF-001 freeze: `high`/GPU is unmeasurable on the current lab machines (no CUDA device), a real `low`-tier device is still missing, and `small`/`large` model tiers are unmeasured. `typical` was measured 2026-10-08 (done row above). Budgets stay `status: provisional, frozen: false` until a separate ADR freezes them, and only then does PERF-002 become measurable | PERF-001 freeze |
 
 ## owner — human/owner gates (never self-certifiable)
 
@@ -128,3 +153,17 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
    work plus the owner's own human passes (O-03 AT audit, security review, O-06
    hands-on test), not on an unobtainable dataset. Nothing may claim
    pronunciation accuracy (docs/18) or human review (ADR-0014).
+
+8. **2026-10-08: the tranche was aimed at the owner's hands-on pass (O-06), not at
+   gates.** A feature-gap audit (`state/notes/FEATURE-GAP-AUDIT-2026-10-08.md`)
+   produced seven defects D1–D7; all seven are closed. The pattern they share is a
+   promise the software did not keep: an uninstallable pack build (D1), activities
+   that could not be started (D2), listening items with nothing to hear (D3),
+   download buttons for payloads that were never staged (D5), Home content the app
+   itself invented (D6/K-57), drills aimed at a hardcoded pack (D7), and a privacy
+   notice describing export/delete/microphone controls that did not exist (the
+   settings slice). Each was fixed by making the software do the thing, or by
+   saying plainly what it cannot do — never by deleting the promise. Two things
+   deliberately remain owner work: staging the real TTS payloads (D5-rest) and
+   shipping the aligner as a sidecar (D4). `ADR-0018` is **Proposed** awaiting the
+   owner's acceptance.
