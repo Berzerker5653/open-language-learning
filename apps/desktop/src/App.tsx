@@ -32,6 +32,7 @@ import {
 import { WritingPractice, type WritingTaskView } from "./writing";
 import { PracticeRunner, type PracticeTaskView } from "./practice";
 import { stressEnabled, type DisplaySettingsView } from "./stress";
+import { Ruby } from "./ruby";
 import {
   ScenarioPanel,
   type ScenarioOutcomeView,
@@ -1769,13 +1770,7 @@ export function App() {
                       void playStoryAudio(s.content_id);
                     }}
                   >
-                    {s.furigana && (
-                      <small>
-                        {s.furigana}
-                        <br />
-                      </small>
-                    )}
-                    {s.text}
+                    <Ruby surface={s.text} furigana={s.furigana} />
                   </button>
                   {s.romaji && (
                     <p aria-label="Romaji">

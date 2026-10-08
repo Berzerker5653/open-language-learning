@@ -134,7 +134,7 @@ describe("practice runner", () => {
     expect(err).not.toContain("Play the audio");
   });
 
-  it("renders furigana above the surface and romaji below", () => {
+  it("annotates the surface with ruby furigana and renders romaji separately", () => {
     const html = render({
       task: {
         item_id: "ja.lex.demo.watashi#recall-meaning",
@@ -144,10 +144,12 @@ describe("practice runner", () => {
         choices: ["I (neutral polite first person)", "hello", "aunt", "how do you do"],
       },
     });
-    expect(html).toContain("わたし");
-    expect(html).toContain("watashi");
-    // Furigana renders before the kanji surface (ruby-style order).
-    expect(html.indexOf("わたし")).toBeLessThan(html.indexOf(">私<"));
+    // K-54: the reading is ruby markup bound to the word, not a
+    // sibling <small> line.
+    expect(html).toContain("<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>");
+    // Romaji is auxiliary: rendered separately, never inside <rt>.
+    expect(html).not.toContain("<rt>watashi</rt>");
+    expect(html.indexOf("watashi")).toBeGreaterThan(html.indexOf("</ruby>"));
   });
 
   it("offers a reveal only when scaffolds are faded and not yet revealed", () => {

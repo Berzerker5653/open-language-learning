@@ -4,6 +4,7 @@
  * scheduling happen natively (the correct answer never crosses IPC).
  */
 import { StressText } from "./stress";
+import { Ruby } from "./ruby";
 
 export interface PracticeTaskView {
   item_id: string;
@@ -64,13 +65,8 @@ export function PracticeRunner(p: PracticeRunnerProps) {
       {p.task.surface ? (
         <>
           <h2>{p.heading ?? "What does this mean?"}</h2>
-          {p.task.furigana && (
-            <p aria-label="Reading" lang="ja">
-              <small>{p.task.furigana}</small>
-            </p>
-          )}
           <p className="prompt" lang="ja">
-            {p.task.surface}
+            <Ruby surface={p.task.surface} furigana={p.task.furigana} />
           </p>
           {p.task.slots && p.task.slots.length > 0 ? (
             <div className="meta" aria-label="Phrase structure">
