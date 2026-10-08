@@ -660,3 +660,25 @@ and SPEECH-001 spiked only the `ref-dev` tier (K-55 records the tier gap, and no
 gate evaluator should run against provisional budgets). Furigana is still a
 sibling `<small>` line rather than ruby markup (K-54). Pack version bump +
 republish is required before the generated audio reaches distributed packs.
+
+K-56 executed the audio and closed its integrity loop the same day
+(`83cee21`): 693 assets generated (679 sentence records — the 660 plus the 19
+A2 — and 14 contrast items), 96,511,536 B of `.wav` gitignored behind a
+committed 693-row `media/manifest.jsonl`. Two defects found by running the
+pipeline, not by reading it: Kokoro's Japanese path is OOV on bare kanji
+(`Ignore OOV '金'` → `Failed to convert '金' to token IDs`, exit 2), so the
+three kin/sen/hyaku contrast items had to gain kana readings — the same chain
+voices those items inside the app, so without a reading they are silent for a
+learner too; and `Pack::load_dir` had been sweeping `media/manifest.jsonl` into
+the opaque binary-asset branch, so the manifest was never parsed or validated.
+Pairing is now enforced: `Pack::audit_media` checks manifest↔directory in both
+directions (`media_missing` errors at install/build, `media_absent` is only
+informational in a checkout where the bytes are gitignored by design, hash/size
+drift errors in every mode, an undeclared file is a warning because its
+provenance cannot be stated), and `archive::build` refuses to ship a manifest
+that lies. Verified against the real pack: flipping one byte of
+`media/ja.contrast.vowel-length.obasan-0.wav` in a copy makes `build` exit 1
+naming both digests; the clean build is 76,772,565 B
+(sha256 `ad5e712c4490ea494fa2e2fd4ab8f4b23b9b661800efecca8fdff0ee39787d4e`)
+against the 850,167 B published `0.2.0` archive — so O-05's version bump is now
+also a 90 MB payload decision, not a metadata one.
