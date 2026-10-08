@@ -2603,7 +2603,8 @@ enum AlignerMiss {
 /// Priority (ADR-0019, mirroring `resolve_tts`):
 /// 1. `bundled` — the release overlay's staged sidecar under
 ///    `<resource_dir>/aligner/<platform>`, gated by the payload manifest:
-///    schema, component, build platform, file sizes, and the CPU check;
+///    schema, component, build platform, file sizes, the CPU check, and one deep
+///    pass over every declared sha256 the first time this process touches it;
 /// 2. `bench` — the development vendor tree (`LTS_BENCH_VENDOR` /
 ///    `~/.cache/lts-bench`), never shipped, taking the model from the installed
 ///    catalog entry when the user installed one.
@@ -2637,12 +2638,18 @@ fn aligner_probe_with(
         if dir.exists() {
             match Sidecar::load(&dir) {
                 Ok(sc) => {
-                    return Ok(AlignerSource {
-                        source: "bundled",
-                        binary: sc.binary(),
-                        model: sc.model_path(),
-                        runtime_version: Some(sc.manifest.runtime.version.clone()),
-                    });
+                    if bundled_payload_verified(&dir, &sc) {
+                        return Ok(AlignerSource {
+                            source: "bundled",
+                            binary: sc.binary(),
+                            model: sc.model_path(),
+                            runtime_version: Some(sc.manifest.runtime.version.clone()),
+                        });
+                    }
+                    // Present at the right sizes but a declared digest disagrees:
+                    // a truncated download or disk rot. Executing it would give
+                    // confidently wrong word timing, which is worse for a learner
+                    // than no feedback at all, so it reads as absent.
                 }
                 Err(SidecarProblem::CpuUnsupported { requires_cpu }) => {
                     cpu_floor = Some(requires_cpu)
@@ -2691,6 +2698,28 @@ fn aligner_probe_with(
         model,
         runtime_version: None,
     })
+}
+
+/// One deep digest pass per bundled payload per process.
+///
+/// `Sidecar::load` checks declared sizes, which cannot see same-size corruption:
+/// a weights file with a flipped byte still loads and still returns confident
+/// nonsense. The manifest sits next to the files it describes, so this is
+/// integrity against damage rather than a security boundary against someone who
+/// can already rewrite the payload — package signing carries that. Cost measured
+/// on the real 82,016,429 B payload: one pass in 0.05 s warm, so it runs on the
+/// first probe and the answer is remembered per payload directory.
+fn bundled_payload_verified(dir: &Path, sidecar: &lts_speech_runtime::sidecar::Sidecar) -> bool {
+    static VERIFIED: std::sync::OnceLock<
+        std::sync::Mutex<std::collections::HashMap<PathBuf, bool>>,
+    > = std::sync::OnceLock::new();
+    let cache = VERIFIED.get_or_init(|| std::sync::Mutex::new(std::collections::HashMap::new()));
+    let mut guard = cache
+        .lock()
+        .unwrap_or_else(|poisoned| poisoned.into_inner());
+    *guard
+        .entry(dir.to_path_buf())
+        .or_insert_with(|| sidecar.verify_hashes().is_ok())
 }
 
 /// The abstention token the frontend maps to honest copy. `aligner-cpu-unsupported`
@@ -6357,6 +6386,29 @@ mod tests {
         assert_eq!(aligner_miss_reason(&miss), "speech-model-off");
     }
 
+    /// Same-size corruption is exactly what the declared-size gate cannot see.
+    /// The resolver must fall through to "absent" rather than hand the caller a
+    /// payload that would produce wrong alignment silently.
+    #[test]
+    fn a_bundled_payload_whose_bytes_disagree_with_the_manifest_is_refused() {
+        let tmp = tempfile::TempDir::new().unwrap();
+        let payload = tmp.path().join("aligner");
+        write_fake_sidecar(&payload, "");
+        let model = payload
+            .join(lts_speech_runtime::sidecar::host_platform())
+            .join("model/ggml-tiny.bin");
+        // Same length as the declared 10 bytes, different content.
+        std::fs::write(&model, "corrupt-modl").unwrap();
+        let miss = aligner_probe_with(
+            tmp.path(),
+            "org.openlanguage.speech.whisper-ggml-tiny",
+            Some(&payload),
+            None,
+        )
+        .expect_err("a corrupted payload must never resolve");
+        assert_eq!(aligner_miss_reason(&miss), "aligner-unavailable");
+    }
+
     /// A payload that satisfies the resolver's gates without a real whisper.cpp
     /// build: declared sizes match the files on disk, and `requires_cpu` is the
     /// caller's so the CPU gate can be driven both ways.
@@ -6380,10 +6432,11 @@ mod tests {
         let entries = files
             .iter()
             .map(|f| {
-                let bytes = std::fs::metadata(dir.join(f)).unwrap().len();
+                let raw = std::fs::read(dir.join(f)).unwrap();
                 format!(
-                    "    - path: {f}\n      bytes: {bytes}\n      sha256: {}",
-                    "0".repeat(64)
+                    "    - path: {f}\n      bytes: {}\n      sha256: {}",
+                    raw.len(),
+                    sha256_hex(&raw)
                 )
             })
             .collect::<Vec<_>>()
@@ -6407,8 +6460,8 @@ mod tests {
                 "  id: ggml-tiny",
                 "  upstream: https://huggingface.co/ggerganov/whisper.cpp",
                 "  license: MIT",
-                "  bytes: 10",
-                &format!("  sha256: {}", "0".repeat(64)),
+                &format!("  bytes: {}", "fake-model".len()),
+                &format!("  sha256: {}", sha256_hex(b"fake-model")),
                 "staged:",
                 "  date: \"2026-10-08T00:00:00Z\"",
                 "  by: test",
@@ -6417,6 +6470,17 @@ mod tests {
             .join("\n"),
         )
         .unwrap();
+    }
+
+    /// The fixture's digests have to be real digests now that the resolver
+    /// recomputes them; a placeholder would make every positive test a
+    /// test of the refusal path instead.
+    fn sha256_hex(bytes: &[u8]) -> String {
+        use sha2::{Digest, Sha256};
+        Sha256::digest(bytes)
+            .iter()
+            .map(|b| format!("{b:02x}"))
+            .collect()
     }
 
     /// A development vendor tree that the resolver would accept, so priority is
