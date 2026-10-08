@@ -928,15 +928,15 @@ fn microphone_enabled_at(data: &Path, profile_id: &str) -> Result<bool, String> 
         .unwrap_or(false))
 }
 
-fn set_microphone_enabled_at(
-    data: &Path,
-    profile_id: &str,
-    enabled: bool,
-) -> Result<bool, String> {
+fn set_microphone_enabled_at(data: &Path, profile_id: &str, enabled: bool) -> Result<bool, String> {
     resume_profile_at(data, profile_id)?;
     let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
     store
-        .set_setting(profile_id, "microphone-enabled", &serde_json::json!(enabled))
+        .set_setting(
+            profile_id,
+            "microphone-enabled",
+            &serde_json::json!(enabled),
+        )
         .map_err(|e| e.to_string())?;
     microphone_enabled_at(data, profile_id)
 }
@@ -1038,9 +1038,7 @@ fn profile_export(profile_id: String) -> Result<String, String> {
 fn profile_delete_at(data: &Path, profile_id: &str) -> Result<(), String> {
     resume_profile_at(data, profile_id)?;
     let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
-    store
-        .delete_profile(profile_id)
-        .map_err(|e| e.to_string())
+    store.delete_profile(profile_id).map_err(|e| e.to_string())
 }
 
 #[tauri::command]
@@ -2295,19 +2293,21 @@ fn world_state_at(data: &Path, profile_id: &str) -> Result<Vec<WorldEnvironment>
             .map(|d| ((d.content_id.clone(), d.dimension), d.state))
             .collect(),
     };
-    Ok(lts_world::evaluate(&world_config_at(data, profile_id), &snapshot)
-        .into_iter()
-        .map(|e| WorldEnvironment {
-            id: e.id,
-            display_name: e.display_name,
-            unlocked: e.unlocked,
-            missing: e
-                .missing
-                .iter()
-                .map(|r| format!("{} ({:?})", r.content_id, r.modality))
-                .collect(),
-        })
-        .collect())
+    Ok(
+        lts_world::evaluate(&world_config_at(data, profile_id), &snapshot)
+            .into_iter()
+            .map(|e| WorldEnvironment {
+                id: e.id,
+                display_name: e.display_name,
+                unlocked: e.unlocked,
+                missing: e
+                    .missing
+                    .iter()
+                    .map(|r| format!("{} ({:?})", r.content_id, r.modality))
+                    .collect(),
+            })
+            .collect(),
+    )
 }
 
 // ---------------------------------------------------------------------------
@@ -2461,7 +2461,10 @@ fn media_file(pack_dir: &Path, unit: &str) -> PathBuf {
 /// demo pair used to spell the same thing `{contrast-id}.short`/`.long`. Both
 /// forms map back to the contrast record that declares production targets.
 fn contrast_id_for_unit(unit: &str) -> Option<&str> {
-    if let Some(cid) = unit.strip_suffix(".short").or_else(|| unit.strip_suffix(".long")) {
+    if let Some(cid) = unit
+        .strip_suffix(".short")
+        .or_else(|| unit.strip_suffix(".long"))
+    {
         return Some(cid);
     }
     match unit.rsplit_once('-') {
@@ -6522,8 +6525,8 @@ mod tests {
 
     /// ADR-0018: the environments come from the active pack, and unlock
     /// state follows derived capability — never activity volume (ADR-0002).
-    /// The bundled reference pack declares `cafe-read-menu` (recall-meaning
-    /// `introduced` for two drink words plus comprehension-reading
+    /// The bundled reference pack declares `cafe-ask-price` (recall-meaning
+    /// `introduced` for two drink words plus comprehension-listening
     /// `introduced` for one sentence) and `cafe-order-drink` (a listening and
     /// a writing requirement at `supported`), so the first is reachable from
     /// a handful of events and the second is not.
@@ -6546,7 +6549,7 @@ mod tests {
             world_state_at(data, &p.id)
                 .unwrap()
                 .into_iter()
-                .find(|e| e.id == "cafe-read-menu")
+                .find(|e| e.id == "cafe-ask-price")
         };
 
         // The pack's own ids and labels are what the app shows; the
@@ -6554,11 +6557,12 @@ mod tests {
         let envs = world_state_at(data, &p.id).unwrap();
         assert!(!envs.is_empty(), "the reference pack declares environments");
         assert!(
-            envs.iter().all(|e| e.id != "cafe" && e.id != "greeting-desk"),
+            envs.iter()
+                .all(|e| e.id != "cafe" && e.id != "greeting-desk"),
             "the engine must contribute no environment of its own: {:?}",
             envs.iter().map(|e| &e.id).collect::<Vec<_>>()
         );
-        let fresh = menu().expect("cafe-read-menu comes from the pack");
+        let fresh = menu().expect("cafe-ask-price comes from the pack");
         assert!(!fresh.unlocked, "a new profile has earned nothing");
         assert_eq!(
             fresh.missing.len(),
@@ -6595,7 +6599,7 @@ mod tests {
         let half = menu().unwrap();
         assert!(
             !half.unlocked,
-            "the reading requirement is still unmet, so the place stays shut"
+            "the listening requirement is still unmet, so the place stays shut"
         );
         assert_eq!(
             half.missing.len(),
@@ -6611,7 +6615,7 @@ mod tests {
 
         let ev = attempt(
             "ja.sent.check-price",
-            lts_domain::ActivityModality::ComprehensionReading,
+            lts_domain::ActivityModality::ComprehensionListening,
             "ja.expr.demo.read-a",
             0,
             "2026-10-02T10:10:00Z",
@@ -6623,7 +6627,7 @@ mod tests {
         assert!(
             unlocked
                 .iter()
-                .find(|e| e.id == "cafe-read-menu")
+                .find(|e| e.id == "cafe-ask-price")
                 .unwrap()
                 .unlocked,
             "meeting the pack's requirements opens the place"
@@ -7470,13 +7474,20 @@ mod tests {
             false,
         )
         .unwrap();
-        assert_eq!(task.item_id, "ja.sent.demo.obasan-aunt#comprehension-listening");
+        assert_eq!(
+            task.item_id,
+            "ja.sent.demo.obasan-aunt#comprehension-listening"
+        );
         // A visible transcript disqualifies evidence for this dimension.
         assert!(task.surface.is_none());
         assert!(task.reading.is_none());
         assert!(task.choices.iter().any(|c| c == "She is an aunt."));
         assert!(
-            task.choices.iter().filter(|c| *c != "She is an aunt.").count() >= 2,
+            task.choices
+                .iter()
+                .filter(|c| *c != "She is an aunt.")
+                .count()
+                >= 2,
             "distractors come from other pack sentences"
         );
 
@@ -7566,9 +7577,21 @@ mod tests {
         )
         .unwrap();
 
-        assert!(!reference_audio_at(data, "org.openlanguage.ja-demo", "ja.contrast.demo.vowel-length-0").unwrap().is_empty());
+        assert!(
+            !reference_audio_at(
+                data,
+                "org.openlanguage.ja-demo",
+                "ja.contrast.demo.vowel-length-0"
+            )
+            .unwrap()
+            .is_empty()
+        );
         // The hostile row is ignored; the id convention still answers for it.
-        assert!(!reference_audio_at(data, "org.openlanguage.ja-demo", "ja.lex.demo.obasan").unwrap().is_empty());
+        assert!(
+            !reference_audio_at(data, "org.openlanguage.ja-demo", "ja.lex.demo.obasan")
+                .unwrap()
+                .is_empty()
+        );
         assert!(!data.join("escaped.wav").exists());
     }
     #[test]

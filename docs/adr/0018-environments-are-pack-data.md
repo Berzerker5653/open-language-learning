@@ -33,17 +33,27 @@ Environments move into the pack as an optional collection.
   false`): `schema_version` (const 1), `id` (`^[a-z0-9][a-z0-9._-]*$`, pack-unique),
   `display_name` (non-empty; describes what the place affords and asserts no
   learning outcome or proficiency level), `requires` (1..n of
-  `{content_id, modality, min_state}`). `modality` is the engine's kebab modality
-  vocabulary — the same set `parse_dimension` accepts — and `min_state` is the
-  `MasteryState` vocabulary. Neither list is invented here; a pack cannot name a
-  capability the engine does not track.
-- **Validation**: absent collection is legal and clean. When present, three
+  `{content_id, modality, min_state}`). `modality` is restricted to the six
+  dimensions a shipped activity can record (`recall-meaning`,
+  `comprehension-listening`, `orthography-recognition`,
+  `phonological-discrimination`, `production-writing`,
+  `orthographic-encoding`); `min_state` is the `MasteryState` vocabulary. Neither
+  list is invented here, and the modality list is narrower than
+  `parse_dimension` accepts on purpose: an unlock gated on a dimension no runner
+  credits (today `comprehension-reading`, `production-speaking`,
+  `phonological-reproduction`) can never open. Widen the enum when a runner that
+  records one ships.
+- **Validation**: absent collection is legal and clean. When present, four
   semantic gates apply, all **errors**, never warnings, because none of them can
   be a legitimate draft state:
   - `duplicate_environment_id` — two rows with one id cannot both unlock;
   - `environment_unknown_content` — a requirement naming a content id the pack
     does not declare can never be satisfied, so the place would be permanently
     locked with a hint pointing at nothing;
+  - `environment_listening_without_audio` — a `comprehension-listening` unlock on
+    content this pack declares no audio for. Skipped while the pack declares no
+    audio at all, since an unbuilt media set is a legal draft state under
+    ADR-0016;
   - `world_collection_missing` — the manifest named the collection but the pack
     ships no parsable rows.
 - **App**: `world_state_at` resolves the profile's active pack, loads that pack's
@@ -51,9 +61,9 @@ Environments move into the pack as an optional collection.
   yields an **empty** list. `demo_world_config` is deleted; the engine contributes
   no environment text or content id.
 - **Reference pack**: `languages/ja-JP/world/environments.jsonl` ships five
-  environments (café menu reading, café ordering, station navigation, ticket
-  purchase, self-introduction), each requiring three real pack content ids across
-  two or three modalities.
+  environments (`cafe-ask-price`, `cafe-order-drink`, `station-navigation`,
+  `buy-a-ticket`, `self-introduction`), each requiring three real pack content ids
+  across two or three earnable modalities.
 
 ## Consequences
 
@@ -64,10 +74,14 @@ Environments move into the pack as an optional collection.
   content id belongs: the app can no longer present an unopenable place.
 - Requirement thresholds became pack-visible, so they are reviewable: the
   reference pack deliberately places its reachable environments at
-  `introduced`/`supported` thresholds that current runners can actually credit,
-  and no environment may depend on a modality no activity records. That constraint
-  is now enforced by review rather than by code, and an environment that no runner
-  can open is a pack bug to fix in the pack.
+  `introduced`/`supported` thresholds that current runners can actually credit.
+  Reachability itself is enforced mechanically — the modality enum plus
+  `environment_listening_without_audio` — rather than left to review. That mattered:
+  the first draft of the reference pack gated its café on `comprehension-reading`,
+  a dimension the app reads formatively but never records, producing exactly the
+  kind of entry no runner can unlock that the audit criticised. The validator
+  accepted it; the enum now rejects it, and the place was rebuilt around listening
+  and recall (`cafe-ask-price`) with audio the manifest already declares.
 - The app-side surface is unchanged (`world_state` payload shape, Home rendering),
   so no frontend work was needed and the smoke route count is unaffected.
 - Removing the hardcoded config deletes the last language-specific presentation

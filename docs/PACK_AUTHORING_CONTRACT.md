@@ -58,14 +58,16 @@ are allowed). Chunking is legal where the table shows `*` (e.g.
 
 `world/environments.jsonl` is optional and must be declared in `manifest.yaml`
 as `world: environments.jsonl` if shipped. Each row names a place and the
-capabilities that open it (`{content_id, modality, min_state}`). Three gates are
+capabilities that open it (`{content_id, modality, min_state}`). Four gates are
 errors rather than warnings, because none is a legitimate draft state:
 `duplicate_environment_id`, `environment_unknown_content` (the requirement names
-a content id this pack does not declare, so the place can never open), and
+a content id this pack does not declare, so the place can never open),
+`environment_listening_without_audio` (a listening unlock on content your pack
+declares no audio for — checked only once you declare audio for anything), and
 `world_collection_missing` (manifest declares the collection, no rows shipped).
-Also check the modality is one an activity in your pack can actually record —
-the engine will not tell you, and an unopenable place is a content bug. See
-docs/04 §World environments.
+`modality` is an enum of the dimensions a shipped activity records, so you cannot
+gate a place on something no runner can credit; the thresholds are yours to get
+right. See docs/04 §World environments.
 
 ## Gates (run them in this order, as you go)
 

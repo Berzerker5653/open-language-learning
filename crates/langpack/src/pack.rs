@@ -606,6 +606,16 @@ impl Pack {
         // a content id this pack declares. Unlike ordinary references, a
         // dangling unlock target is never a warning: the environment could
         // never unlock, and no draft workflow needs forward references here.
+        // A `comprehension-listening` rule additionally needs the pack to
+        // declare audio for that content when it declares any audio at all —
+        // otherwise the requirement asks for a capability no activity in this
+        // pack can ever record (ADR-0016).
+        let declared_media: HashSet<&str> = self
+            .instances
+            .iter()
+            .filter(|i| i.schema == "media-asset")
+            .filter_map(|i| i.value.get("id").and_then(Value::as_str))
+            .collect();
         let mut env_ids: HashSet<&str> = HashSet::new();
         for inst in self.instances.iter().filter(|i| i.schema == "environment") {
             if let Some(id) = inst.value.get("id").and_then(Value::as_str) {
@@ -624,6 +634,13 @@ impl Pack {
                     continue;
                 };
                 if checked.contains_key(target) {
+                    diags.extend(environment_requirement_check(
+                        inst,
+                        i,
+                        target,
+                        req,
+                        &declared_media,
+                    ));
                     continue;
                 }
                 diags.push(Diagnostic::new(
@@ -1229,4 +1246,38 @@ pub(crate) fn collect_files(
         }
     }
     Ok(())
+}
+
+/// One environment requirement checked against the pack's own declarations
+/// (ADR-0018). A listening requirement is only satisfiable if the pack
+/// declares audio for that content — checked only when the pack declares
+/// audio at all, because an unbuilt media set is a legitimate draft state
+/// (ADR-0016), while a pack that ships audio for hundreds of sentences and
+/// points a listening rule at one without audio has a place that can never
+/// open.
+fn environment_requirement_check(
+    inst: &Instance,
+    index: usize,
+    target: &str,
+    req: &Value,
+    declared_media: &HashSet<&str>,
+) -> Vec<Diagnostic> {
+    if declared_media.is_empty() {
+        return Vec::new();
+    }
+    if req.get("modality").and_then(Value::as_str) != Some("comprehension-listening") {
+        return Vec::new();
+    }
+    if declared_media.contains(target) {
+        return Vec::new();
+    }
+    vec![Diagnostic::new(
+        &inst.file,
+        format!("{}/requires/{index}/content_id", inst.pointer),
+        "environment_listening_without_audio",
+        format!(
+            "environment requires comprehension-listening on {target:?}, but this pack declares no audio for it, so the requirement can never be met"
+        ),
+        Severity::Error,
+    )]
 }

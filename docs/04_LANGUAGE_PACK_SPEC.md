@@ -276,25 +276,38 @@ One JSON object per line:
 - `id`: pack-unique, `^[a-z0-9][a-z0-9._-]*$` (a scene id, not a content id);
 - `display_name`: what the place affords. It must not assert a learning outcome
   or a proficiency level — progression claims belong to the requirements;
-- `requires`: one or more `{content_id, modality, min_state}` rules. `modality`
-  uses the engine's kebab vocabulary (`recall-meaning`,
-  `comprehension-listening`, `comprehension-reading`,
-  `orthography-recognition`, `phonological-discrimination`,
-  `production-writing`, `orthographic-encoding`); `min_state` uses the
-  `MasteryState` vocabulary (`unseen` … `retained`).
+- `requires`: one or more `{content_id, modality, min_state}` rules. `modality` is
+  restricted to the dimensions a shipped activity can actually record
+  (`recall-meaning`, `comprehension-listening`, `orthography-recognition`,
+  `phonological-discrimination`, `production-writing`, `orthographic-encoding`);
+  `min_state` uses the `MasteryState` vocabulary (`unseen` … `retained`). An
+  unlock has to be earnable: gating a place on a dimension nothing in the app
+  records (today `comprehension-reading`, where the reader is formative, and
+  `production-speaking`, which abstains) would leave a place that can never
+  open, so the vocabulary is a schema enum, not a review note. Widen it when a
+  runner that records the dimension ships.
 
 Validation errors, never warnings, because none is a legitimate draft state:
-`duplicate_environment_id`, `environment_unknown_content` (a requirement naming
-a content id this pack does not declare could never be met), and
-`world_collection_missing` (manifest names the collection, pack ships no rows).
 
-Authoring constraint: a requirement may only name a modality an activity in the
-pack can actually record, or the place is unopenable. `crates/world` derives
-unlock state from derived mastery alone — no activity counts or streaks feed it
-(ADR-0002).
+- `duplicate_environment_id`;
+- `environment_unknown_content` — a requirement naming a content id this pack
+  does not declare can never be met;
+- `environment_listening_without_audio` — a `comprehension-listening` rule on
+  content this pack declares no audio for. Checked only once the pack declares
+  audio for anything, so an unbuilt media set stays a legal draft state
+  (ADR-0016);
+- `world_collection_missing` — the manifest names the collection but the pack
+  ships no rows.
 
-Pinned by `crates/langpack/tests/world.rs` (schema, both error gates, accessor
-typing) and `world_unlocks_follow_pack_declared_capabilities` /
+Thresholds remain a judgement call: `crates/world` derives unlock state from
+derived mastery alone — no activity counts or streaks feed it (ADR-0002) — and a
+place asking for `independent` on half a dozen items is one most learners will
+never reach.
+
+Pinned by `crates/langpack/tests/world.rs` (absent collection, typed accessor,
+unknown content id, duplicate id, declared-but-empty, schema-owned state
+vocabulary, unrecordable modality, missing declared audio) and
+`world_unlocks_follow_pack_declared_capabilities` /
 `a_pack_without_environments_gives_an_empty_world` in `lts-desktop`.
 
 ## Sources and licenses

@@ -35,12 +35,12 @@
             "enum": [
               "recall-meaning",
               "comprehension-listening",
-              "comprehension-reading",
               "orthography-recognition",
               "phonological-discrimination",
               "production-writing",
               "orthographic-encoding"
-            ]
+            ],
+            "description": "Only dimensions a shipped activity can actually record. An environment unlock must be earnable: comprehension-reading and production-speaking are real mastery dimensions (goals may name them; the reader is formative and speaking abstains), but no activity in this app records evidence on them, so an environment gated on them could never open. Widen this list when a runner that records the dimension ships."
           },
           "min_state": { "enum": ["unseen", "introduced", "supported", "independent", "flexible", "retained"] }
         }
