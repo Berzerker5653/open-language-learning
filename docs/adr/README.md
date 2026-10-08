@@ -23,6 +23,13 @@ Existing:
 - 0006 scenario recovery branches
 - 0007 initial speech provider selection
 - 0008 constrained alignment via embedded runtime
+- 0009 tts distribution variants (payload-scoped GPL obligations)
+- 0010 code license Apache-2.0 (owner delegation)
+- 0011 user-selectable speech models
+- 0012 dictation via free ASR
 - 0013 pack-declared production targets (language-neutral pronunciation scoring)
+- 0014 ai-generated content posture (one pack-level disclosure, not per-item draft badges)
+- 0015 publishing other-OS builds with a community-confirmed platform ladder
+- 0016 pack-shipped model-output audio for the listening modality
 
 Template: `template.md`.

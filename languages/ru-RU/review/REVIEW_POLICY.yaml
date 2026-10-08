@@ -123,6 +123,23 @@ owner_scope_paths:
       band completeness claims forbidden (docs/18 §Course-completeness)
   - change_required_objective_set: requires recorded rationale + renewed
       claim assessment (docs/09); narrowing to pass gates is a scope decision
+owner_scope_decisions:
+  # Recorded owner scope actions (AGENTS.md: never silent).
+  - path: accept_draft_labeling_at_release
+    date: "2026-10-07"
+    owner_decision: >
+      State content as AI-generated rather than labeling each item "draft".
+    implemented_as: >
+      One pack-level posture statement ("AI-generated content · not
+      human-reviewed") derived from the pack's own review-posture tallies;
+      per-item draft badges removed from learner-facing practice surfaces;
+      claims-panel posture words relabeled (draft -> "AI-generated, unreviewed",
+      review-needed -> "awaiting review").
+    unchanged: >
+      trust ladder, reviews.jsonl record requirement, promotion authority, and
+      the ban on band-completeness claims (docs/18). AI still promotes only to
+      screened; validated/verified still require human records.
+    record: docs/adr/0014-ai-generated-content-posture.md
 
 # ---------------------------------------------------------------------------
 # AI screening layer (owner-requested 2026-10-04; honest boundaries)
