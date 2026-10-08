@@ -13,19 +13,33 @@ Version separately:
 
 Target signed/packaged releases for Linux, Windows, and macOS after platform gates pass. Linux is the primary development reference but not the only 1.0 target.
 
-### Platform test status (PLAT-001, owner decision 2026-10-03)
+### Platform status ladder (PLAT-001, owner decisions 2026-10-03 and 2026-10-07, ADR-0015)
 
-- **Linux**: the only tested platform. CI runs the full test suite plus the
-  xvfb desktop smoke (`desktop-smoke` job).
-- **Windows / macOS**: build configurations exist (Tauri bundle targets
-  `nsis`/`msi` and `app`/`dmg`) and CI compile-checks the desktop crate on
-  `windows-latest`/`macos-latest` (`platform-compile` job), but runtime
-  behavior is **untested**. Any published Windows/macOS artifacts must be
-  labeled untested in release notes and in the pack/app catalog
-  (`tested_platforms: ["linux"]`) so public users know these are
-  best-effort builds and can report issues.
-- Promoting a platform to "tested" requires a human-run runtime pass
-  (owner gate); compile checks alone never establish it.
+Platform status is three-way and is **never inferred from a successful build**:
+
+- **`tested_platforms` — maintainer/owner runtime evidence.** Linux only: CI runs
+  the full test suite plus the xvfb desktop smoke (`desktop-smoke` job). This
+  field is maintainer-owned; nothing a reporter writes can populate it.
+- **`community_confirmed_platforms` — human runtime reports.** A platform is
+  confirmed for a specific pack entry when a human who actually ran that build
+  files a report in `docs/platform/PLATFORM_REPORTS.yaml` with outcome
+  `works`/`works-with-issues`. `langpack catalog --platform-reports …` derives
+  the field and refuses the build on any record that is malformed, duplicated,
+  or not bound to the exact app build (`app_version` + `app_commit`) and the
+  exact archive (`pack_version` + `pack_sha256`). A later `fails` record clears
+  the confirmation. Confirmed is **not** tested: the UI and release notes keep
+  saying "not tested by us, confirmed by N reporters".
+- **`untested_platforms` — everything else.** Windows and macOS today. Per the
+  owner's 2026-10-07 decision, builds for those systems **may** be published,
+  but they ship labeled untested; CI compile-checks them (`platform-compile`)
+  and bundle artifacts are produced so they can be tried, never promoted.
+
+Invalidation: any change to the app build or the pack archive changes the
+binding hashes, so prior confirmations stop matching and the platform falls
+back to untested. Reporters re-run and re-report.
+
+Promotion of a platform to `tested` requires a maintainer/owner-run runtime pass
+(owner gate). Compile checks and reporter traffic never establish it.
 
 ### TTS distribution variants (ADR-0009, owner decision 2026-10-04)
 

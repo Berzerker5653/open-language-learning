@@ -210,6 +210,20 @@ fn catalog_upsert_from_built_archive() {
         serde_json::from_str(&std::fs::read_to_string(&catalog).unwrap()).unwrap();
     // PLAT-001 marker: only Linux runtime is tested (docs/13).
     assert_eq!(v["tested_platforms"], serde_json::json!(["linux"]));
+    // With no report records nothing is confirmed, so windows/macos stay
+    // explicitly untested instead of silently assumed (docs/13 PLAT-001).
+    assert_eq!(v["community_confirmed_platforms"], serde_json::json!([]));
+    assert_eq!(
+        v["untested_platforms"],
+        serde_json::json!(["windows", "macos"])
+    );
+    let e0 = &v["packs"].as_array().unwrap()[0];
+    assert_eq!(e0["tested_platforms"], serde_json::json!(["linux"]));
+    assert_eq!(e0["community_confirmed_platforms"], serde_json::json!([]));
+    assert_eq!(
+        e0["untested_platforms"],
+        serde_json::json!(["windows", "macos"])
+    );
     let packs = v["packs"].as_array().unwrap();
     assert_eq!(packs.len(), 1);
     let e = &packs[0];
@@ -249,4 +263,126 @@ fn catalog_upsert_from_built_archive() {
         "http://evil.example/{filename}",
     ]);
     assert!(!ok && err.contains("https"), "must reject http: {err}");
+}
+
+/// PLAT-001 / ADR-0015: community runtime reports may confirm a platform but
+/// never make it "tested", never survive a rebuilt archive, and never be
+/// smuggled in as maintainer evidence.
+fn reports_file(dir: &Path, body: &str) -> String {
+    let p = dir.join("PLATFORM_REPORTS.yaml");
+    std::fs::write(&p, body).unwrap();
+    p.to_str().unwrap().to_string()
+}
+
+fn record(id: &str, platform: &str, date: &str, outcome: &str, sha: &str) -> String {
+    format!(
+        "  - id: {id}\n    platform: {platform}\n    os_version: \"Test OS 1.0\"\n    \
+         app_version: \"0.1.0\"\n    app_commit: 567624b\n    \
+         pack_id: dev.example.catalog\n    pack_version: 0.0.1\n    pack_sha256: {sha}\n    \
+         date: {date}\n    reporter: tester\n    reporter_category: community-reporter\n    \
+         outcome: {outcome}\n    issues: []\n"
+    )
+}
+
+#[test]
+fn community_platform_reports_confirm_but_never_promote() {
+    let dir = tempfile::tempdir().unwrap();
+    let pack = dir.path().join("plat-pack");
+    let pack_s = pack.to_str().unwrap();
+    let (_out, _err, ok) = run(&[
+        "init",
+        pack_s,
+        "--pack-id",
+        "dev.example.catalog",
+        "--name",
+        "Catalog Demo",
+    ]);
+    assert!(ok);
+    let archive = dir.path().join("plat.lpk");
+    let archive_s = archive.to_str().unwrap();
+    let (out, _err, ok) = run(&["build", pack_s, "-o", archive_s]);
+    assert!(ok);
+    let sha = out
+        .lines()
+        .find_map(|l| l.strip_prefix("sha256 "))
+        .expect("build prints sha256")
+        .trim()
+        .to_string();
+
+    let catalog = dir.path().join("packs.json");
+    let catalog_s = catalog.to_str().unwrap();
+    let url = "https://example.invalid/{filename}";
+    let with_reports = |reports: &str| {
+        run(&[
+            "catalog",
+            archive_s,
+            "--file",
+            catalog_s,
+            "--url-template",
+            url,
+            "--platform-reports",
+            reports,
+        ])
+    };
+
+    // One human "works" run on windows confirms windows for this archive only.
+    let r = reports_file(
+        dir.path(),
+        &format!(
+            "schema_version: 1\nreports:\n{}",
+            record("pr-0001", "windows", "2026-10-01", "works", &sha)
+        ),
+    );
+    let (out, err, ok) = with_reports(&r);
+    assert!(ok, "valid report: {out}{err}");
+    let v: serde_json::Value =
+        serde_json::from_str(&std::fs::read_to_string(&catalog).unwrap()).unwrap();
+    assert_eq!(v["tested_platforms"], serde_json::json!(["linux"]), "reports never populate tested_platforms");
+    assert_eq!(v["community_confirmed_platforms"], serde_json::json!(["windows"]));
+    assert_eq!(v["untested_platforms"], serde_json::json!(["macos"]));
+    let entry = &v["packs"].as_array().unwrap()[0];
+    assert_eq!(entry["community_confirmed_platforms"], serde_json::json!(["windows"]));
+    assert_eq!(entry["tested_platforms"], serde_json::json!(["linux"]));
+
+    // The newest record for a (pack, platform) pair decides: a later `fails`
+    // run clears the confirmation.
+    let r = reports_file(
+        dir.path(),
+        &format!(
+            "schema_version: 1\nreports:\n{}{}",
+            record("pr-0001", "windows", "2026-10-01", "works", &sha),
+            record("pr-0002", "windows", "2026-10-05", "fails", &sha)
+        ),
+    );
+    let (out, err, ok) = with_reports(&r);
+    assert!(ok, "fails report is valid evidence: {out}{err}");
+    let v: serde_json::Value =
+        serde_json::from_str(&std::fs::read_to_string(&catalog).unwrap()).unwrap();
+    assert_eq!(v["community_confirmed_platforms"], serde_json::json!([]));
+    assert_eq!(v["untested_platforms"], serde_json::json!(["windows", "macos"]));
+
+    // A report bound to a different archive proves nothing about this one.
+    let stale = "a".repeat(64);
+    let r = reports_file(
+        dir.path(),
+        &format!(
+            "schema_version: 1\nreports:\n{}",
+            record("pr-0003", "macos", "2026-10-06", "works", &stale)
+        ),
+    );
+    let (_out, err, ok) = with_reports(&r);
+    assert!(!ok, "stale hash binding must fail the build");
+    assert!(err.contains("stale-pack-binding"), "machine-readable code: {err}");
+    let v: serde_json::Value =
+        serde_json::from_str(&std::fs::read_to_string(&catalog).unwrap()).unwrap();
+    assert_eq!(v["untested_platforms"], serde_json::json!(["windows", "macos"]), "nothing is written on failure");
+
+    // Report files may not declare maintainer evidence.
+    let r = reports_file(
+        dir.path(),
+        "schema_version: 1\ntested_platforms: [windows, macos]\nreports: []\n",
+    );
+    let (_out, err, ok) = with_reports(&r);
+    assert!(!ok, "report file cannot declare tested_platforms");
+    assert!(err.contains("tested-promotion-denied"), "machine-readable code: {err}");
 }

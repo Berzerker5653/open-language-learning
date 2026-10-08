@@ -4,6 +4,7 @@
 use clap::{Parser, Subcommand, ValueEnum};
 use lts_langpack::archive;
 use lts_langpack::{Mode, Pack, Severity, graph};
+use std::collections::{BTreeMap, BTreeSet};
 use std::fs;
 use std::io::Write;
 use std::path::Path;
@@ -148,8 +149,11 @@ enum Command {
     },
     /// Build/refresh a community catalog (catalog/packs.json) from built
     /// .lpk archives: entries carry version, sha256, size, and the
-    /// tested-platform marker (docs/13 PLAT-001). Entries are upserted by
-    /// pack_id. Publishing archives + catalog remains owner gate O-05.
+    /// three-way platform status marker (docs/13 PLAT-001):
+    /// `tested_platforms` (maintainer/owner runtime evidence),
+    /// `community_confirmed_platforms` (derived only from human report
+    /// records) and `untested_platforms` (the rest). Entries are upserted
+    /// by pack_id. Publishing archives + catalog remains owner gate O-05.
     Catalog {
         /// Built .lpk archive paths to include.
         archives: Vec<String>,
@@ -161,6 +165,14 @@ enum Command {
         /// install; see docs/packs/CONTRIBUTING.md).
         #[arg(long)]
         url_template: String,
+        /// Human-run platform report records
+        /// (docs/platform/PLATFORM_REPORTS.yaml). Each record must bind the
+        /// exact app build and the exact pack archive; the CLI fails with
+        /// machine-readable errors on malformed records, missing or stale
+        /// hash bindings, and any attempt to populate `tested_platforms`
+        /// from a report.
+        #[arg(long)]
+        platform_reports: Option<String>,
     },
     /// Print an archive's manifest without extracting.
     Inspect {
@@ -517,6 +529,403 @@ fn cmd_new_lexicon(path: &str, id: &str) -> ExitCode {
     ExitCode::SUCCESS
 }
 
+// --- PLAT-001 three-way platform status (docs/13_RELEASE_AND_DISTRIBUTION) --
+//
+// `tested_platforms` is maintainer/owner-run runtime evidence and is never
+// derived from report records. `community_confirmed_platforms` comes only from
+// human-run report records merged into docs/platform/PLATFORM_REPORTS.yaml,
+// each binding the exact app build (app_version + app_commit) and the exact
+// pack archive (pack_version + pack_sha256). Every platform in the universe
+// that is neither is `untested_platforms`.
+
+/// Platform universe the catalog reports on; widening it here is the only
+/// place the tri-state is defined.
+const ALL_PLATFORMS: [&str; 3] = ["linux", "windows", "macos"];
+const REPORT_FIELDS: [&str; 13] = [
+    "id",
+    "platform",
+    "os_version",
+    "app_version",
+    "app_commit",
+    "pack_id",
+    "pack_version",
+    "pack_sha256",
+    "date",
+    "reporter",
+    "reporter_category",
+    "outcome",
+    "issues",
+];
+const REPORTER_CATEGORIES: [&str; 2] = ["community-reporter", "maintainer"];
+const OUTCOMES: [&str; 3] = ["works", "works-with-issues", "fails"];
+/// Outcomes that justify calling a platform community-confirmed. `fails`
+/// records are valid evidence but clear a confirmation instead.
+const CONFIRMING_OUTCOMES: [&str; 2] = ["works", "works-with-issues"];
+
+#[derive(Debug)]
+struct ReportIssue {
+    code: &'static str,
+    record: String,
+    message: String,
+}
+
+fn issue(code: &'static str, record: &str, message: impl Into<String>) -> ReportIssue {
+    ReportIssue {
+        code,
+        record: record.to_string(),
+        message: message.into(),
+    }
+}
+
+/// Platform-report failures are emitted as one machine-readable JSON line so
+/// CI and report-triage tooling can act on the codes (docs/13).
+fn report_failures(file: &str, failures: &[ReportIssue]) {
+    let items: Vec<serde_json::Value> = failures
+        .iter()
+        .map(|f| {
+            serde_json::json!({
+                "code": f.code,
+                "record": f.record,
+                "message": f.message,
+            })
+        })
+        .collect();
+    eprintln!(
+        "{}",
+        serde_json::json!({
+            "error": "platform-report-invalid",
+            "file": file,
+            "failures": items,
+        })
+    );
+}
+
+fn known_platforms() -> [String; 3] {
+    ALL_PLATFORMS.map(String::from)
+}
+
+fn is_hex(s: &str, exact: Option<usize>) -> bool {
+    if !s.bytes().all(|b| b.is_ascii_hexdigit()) {
+        return false;
+    }
+    match exact {
+        Some(n) => s.len() == n,
+        None => (7..=40).contains(&s.len()),
+    }
+}
+
+fn is_date(s: &str) -> bool {
+    let b = s.as_bytes();
+    b.len() == 10
+        && b[4] == b'-'
+        && b[7] == b'-'
+        && b[..4].iter().all(u8::is_ascii_digit)
+        && b[5..7].iter().all(u8::is_ascii_digit)
+        && b[8..].iter().all(u8::is_ascii_digit)
+        && s[5..7].parse::<u8>().is_ok_and(|m| (1..=12).contains(&m))
+        && s[8..].parse::<u8>().is_ok_and(|d| (1..=31).contains(&d))
+}
+
+fn short_hash(s: &str) -> String {
+    s.chars().take(12).collect()
+}
+
+/// Non-empty string value of `field`, if present.
+fn report_field<'a>(rec: &'a serde_json::Value, field: &str) -> Option<&'a str> {
+    rec.get(field).and_then(|v| v.as_str()).filter(|s| !s.is_empty())
+}
+
+/// Missing-record fields get codes that name the binding they break, so a
+/// reporter can tell "you did not pin the archive" from "you typo'ed".
+fn missing_code(field: &str) -> &'static str {
+    match field {
+        "pack_sha256" => "missing-hash-binding",
+        "app_version" | "app_commit" => "missing-build-binding",
+        _ => "missing-field",
+    }
+}
+
+/// Parse and schema-check the human-run platform report file. Zero records is
+/// the current valid state: it simply confirms nothing.
+fn load_platform_reports(path: &str) -> Result<Vec<serde_json::Value>, Vec<ReportIssue>> {
+    let text = fs::read_to_string(path).map_err(|e| {
+        vec![issue(
+            "report-file-unreadable",
+            path,
+            format!("cannot read {path}: {e}"),
+        )]
+    })?;
+    let yaml = match serde_yaml::from_str::<serde_yaml::Value>(&text) {
+        Ok(v) => v,
+        Err(e) => {
+            return Err(vec![issue(
+                "report-file-malformed",
+                path,
+                format!("invalid YAML: {e}"),
+            )]);
+        }
+    };
+    let root = serde_json::to_value(&yaml).map_err(|e| {
+        vec![issue(
+            "report-file-malformed",
+            path,
+            format!("cannot read records: {e}"),
+        )]
+    })?;
+    let Some(map) = root.as_object() else {
+        return Err(vec![issue(
+            "report-file-malformed",
+            path,
+            "top level must be a mapping with a \"reports\" array",
+        )]);
+    };
+    let mut failures = Vec::new();
+    if let Some(v) = map.get("schema_version") {
+        if v.as_str() != Some("1") && v.as_i64() != Some(1) {
+            failures.push(issue(
+                "unsupported-schema-version",
+                path,
+                format!("schema_version {v} is not understood (expected 1)"),
+            ));
+        }
+    }
+    for key in map.keys() {
+        if key == "tested_platforms" || key == "tested" {
+            failures.push(issue(
+                "tested-promotion-denied",
+                path,
+                "tested_platforms is maintainer/owner runtime evidence; report records can never populate it (docs/13)",
+            ));
+        } else if key != "reports" && key != "schema_version" {
+            failures.push(issue(
+                "unknown-field",
+                path,
+                format!("unknown top-level field {key}"),
+            ));
+        }
+    }
+    let records: Vec<serde_json::Value> = match map.get("reports").and_then(|v| v.as_array()) {
+        Some(a) => a.clone(),
+        None => {
+            failures.push(issue(
+                "report-file-malformed",
+                path,
+                "missing \"reports\" array",
+            ));
+            return Err(failures);
+        }
+    };
+    let mut seen: BTreeSet<String> = BTreeSet::new();
+    for (i, rec) in records.iter().enumerate() {
+        let fallback = format!("reports[{i}]");
+        let label = rec.get("id").and_then(|v| v.as_str()).unwrap_or(&fallback);
+        let Some(obj) = rec.as_object() else {
+            failures.push(issue("report-file-malformed", label, "record must be a mapping"));
+            continue;
+        };
+        for key in obj.keys() {
+            if !REPORT_FIELDS.contains(&key.as_str()) {
+                failures.push(issue(
+                    "unknown-field",
+                    label,
+                    format!("unknown field {key} (schema: {REPORT_FIELDS:?})"),
+                ));
+            }
+        }
+        for field in REPORT_FIELDS {
+            if field != "issues" && report_field(rec, field).is_none() {
+                failures.push(issue(
+                    missing_code(field),
+                    label,
+                    format!("missing required field {field}"),
+                ));
+            }
+        }
+        if rec.get("issues").is_some_and(|v| !v.is_array()) {
+            failures.push(issue("bad-field", label, "issues must be an array of strings"));
+        }
+        if let Some(items) = rec.get("issues").and_then(|v| v.as_array()) {
+            for item in items {
+                if !item.is_string() {
+                    failures.push(issue("bad-field", label, "issues entries must be strings"));
+                }
+            }
+        }
+        if let Some(v) = report_field(rec, "platform") {
+            if !ALL_PLATFORMS.contains(&v) {
+                failures.push(issue(
+                    "unknown-platform",
+                    label,
+                    format!("platform {v:?} is not one of {ALL_PLATFORMS:?}"),
+                ));
+            }
+        }
+        if let Some(v) = report_field(rec, "reporter_category") {
+            if !REPORTER_CATEGORIES.contains(&v) {
+                failures.push(issue(
+                    "bad-field",
+                    label,
+                    format!("reporter_category {v:?} must be one of {REPORTER_CATEGORIES:?}"),
+                ));
+            }
+        }
+        if let Some(v) = report_field(rec, "outcome") {
+            if !OUTCOMES.contains(&v) {
+                failures.push(issue(
+                    "bad-field",
+                    label,
+                    format!("outcome {v:?} must be one of {OUTCOMES:?}"),
+                ));
+            }
+        }
+        if let Some(v) = report_field(rec, "app_commit") {
+            if !is_hex(v, None) {
+                failures.push(issue(
+                    "bad-build-binding",
+                    label,
+                    "app_commit must be a 7-40 character hex git commit",
+                ));
+            }
+        }
+        if let Some(v) = report_field(rec, "pack_sha256") {
+            if !is_hex(v, Some(64)) {
+                failures.push(issue(
+                    "bad-hash-binding",
+                    label,
+                    "pack_sha256 must be 64 hex characters of the exact archive",
+                ));
+            }
+        }
+        if let Some(v) = report_field(rec, "date") {
+            if !is_date(v) {
+                failures.push(issue("bad-field", label, format!("date {v:?} must be YYYY-MM-DD")));
+            }
+        }
+        if let Some(id) = report_field(rec, "id") {
+            if !seen.insert(id.to_string()) {
+                failures.push(issue("duplicate-id", label, format!("duplicate record id {id}")));
+            }
+        }
+    }
+    if failures.is_empty() {
+        Ok(records)
+    } else {
+        Err(failures)
+    }
+}
+
+/// Stamp the three-way platform status onto every catalog entry and onto the
+/// catalog root. `tested_platforms` is carried through untouched; the root
+/// `community_confirmed_platforms` is the intersection over entries (a
+/// per-platform claim for the whole catalog needs every entry confirmed).
+fn stamp_platform_status(
+    catalog: &mut serde_json::Value,
+    reports: &[serde_json::Value],
+) -> Result<(), Vec<ReportIssue>> {
+    let tested: Vec<String> = catalog["tested_platforms"]
+        .as_array()
+        .map(|a| {
+            a.iter()
+                .filter_map(|v| v.as_str().map(String::from))
+                .collect()
+        })
+        .unwrap_or_default();
+    let mut failures = Vec::new();
+    // Newest record per (pack_id, platform) decides the current status; ties
+    // break on id so the derivation stays deterministic.
+    let mut newest: BTreeMap<(String, String), (String, String, bool)> = BTreeMap::new();
+    for rec in reports {
+        let label = rec["id"].as_str().unwrap_or("(unnamed)").to_string();
+        let pack_id = rec["pack_id"].as_str().unwrap_or("").to_string();
+        let platform = rec["platform"].as_str().unwrap_or("").to_string();
+        let entry = catalog["packs"]
+            .as_array()
+            .and_then(|ps| ps.iter().find(|p| p["pack_id"].as_str() == Some(pack_id.as_str())));
+        let Some(entry) = entry else {
+            failures.push(issue(
+                "unknown-pack",
+                &label,
+                format!("{pack_id} is not in this catalog, so the record binds no published entry"),
+            ));
+            continue;
+        };
+        let entry_sha = entry["sha256"].as_str().unwrap_or("");
+        let entry_version = entry["version"].as_str().unwrap_or("");
+        let rec_sha = rec["pack_sha256"].as_str().unwrap_or("");
+        let rec_version = rec["pack_version"].as_str().unwrap_or("");
+        if rec_sha != entry_sha || rec_version != entry_version {
+            failures.push(issue(
+                "stale-pack-binding",
+                &label,
+                format!(
+                    "{pack_id} v{rec_version} sha {} no longer matches the catalog entry \
+                     v{entry_version} sha {}; a rebuilt or bumped pack invalidates prior \
+                     runtime evidence",
+                    short_hash(rec_sha),
+                    short_hash(entry_sha)
+                ),
+            ));
+            continue;
+        }
+        let confirming = CONFIRMING_OUTCOMES.contains(&rec["outcome"].as_str().unwrap_or(""));
+        let date = rec["date"].as_str().unwrap_or("").to_string();
+        let key = (pack_id, platform);
+        let stale = newest
+            .get(&key)
+            .is_some_and(|(d, id, _)| (d.as_str(), id.as_str()) >= (date.as_str(), label.as_str()));
+        if !stale {
+            newest.insert(key, (date, label, confirming));
+        }
+    }
+    let mut confirmed: BTreeMap<String, Vec<String>> = BTreeMap::new();
+    for ((pack_id, platform), (_, _, confirming)) in &newest {
+        if *confirming {
+            confirmed
+                .entry(pack_id.clone())
+                .or_default()
+                .push(platform.clone());
+        }
+    }
+    let mut root_confirmed: Option<Vec<String>> = None;
+    if let Some(packs) = catalog["packs"].as_array_mut() {
+        for entry in packs.iter_mut() {
+            let pack_id = entry["pack_id"].as_str().unwrap_or("").to_string();
+            let community: Vec<String> = known_platforms()
+                .into_iter()
+                .filter(|p| {
+                    !tested.contains(p)
+                        && confirmed
+                            .get(&pack_id)
+                            .is_some_and(|c| c.contains(p))
+                })
+                .collect();
+            let untested: Vec<String> = known_platforms()
+                .into_iter()
+                .filter(|p| !tested.contains(p) && !community.contains(p))
+                .collect();
+            entry["tested_platforms"] = serde_json::json!(tested);
+            entry["community_confirmed_platforms"] = serde_json::json!(community);
+            entry["untested_platforms"] = serde_json::json!(untested);
+            root_confirmed = Some(match root_confirmed {
+                None => community,
+                Some(prev) => prev.into_iter().filter(|p| community.contains(p)).collect(),
+            });
+        }
+    }
+    let root_community = root_confirmed.unwrap_or_default();
+    let root_untested: Vec<String> = known_platforms()
+        .into_iter()
+        .filter(|p| !tested.contains(p) && !root_community.contains(p))
+        .collect();
+    catalog["community_confirmed_platforms"] = serde_json::json!(root_community);
+    catalog["untested_platforms"] = serde_json::json!(root_untested);
+    if failures.is_empty() {
+        Ok(())
+    } else {
+        Err(failures)
+    }
+}
+
 fn main() -> ExitCode {
     let cli = Cli::parse();
     match cli.command {
@@ -715,6 +1124,7 @@ fn main() -> ExitCode {
             archives,
             file,
             url_template,
+            platform_reports,
         } => {
             if !url_template.starts_with("https://") {
                 eprintln!(
@@ -722,6 +1132,24 @@ fn main() -> ExitCode {
                 );
                 return ExitCode::from(1);
             }
+            // Community confirmation is human-run evidence only: with no report
+            // file nothing is confirmed, and every non-tested platform stays
+            // explicitly untested (docs/13 PLAT-001).
+            let reports_path = platform_reports.unwrap_or_default();
+            let reports = if reports_path.is_empty() {
+                eprintln!(
+                    "note: no --platform-reports file given; community_confirmed_platforms stays empty"
+                );
+                Vec::new()
+            } else {
+                match load_platform_reports(&reports_path) {
+                    Ok(r) => r,
+                    Err(failures) => {
+                        report_failures(&reports_path, &failures);
+                        return ExitCode::from(1);
+                    }
+                }
+            };
             let mut catalog = fs::read_to_string(&file)
                 .ok()
                 .and_then(|s| serde_json::from_str::<serde_json::Value>(&s).ok())
@@ -730,11 +1158,14 @@ fn main() -> ExitCode {
                         "catalog_version": "1",
                         "note": "Generated by `langpack catalog`; publishing archives and this file is owner gate O-05.",
                         "tested_platforms": ["linux"],
+                        "community_confirmed_platforms": [],
+                        "untested_platforms": ["windows", "macos"],
                         "packs": [],
                     })
                 });
             if catalog.get("tested_platforms").is_none() {
-                // PLAT-001: only Linux runtime is tested; keep the marker honest.
+                // PLAT-001: only Linux has maintainer-run runtime evidence.
+                // This field is maintainer-owned; report records never feed it.
                 catalog["tested_platforms"] = serde_json::json!(["linux"]);
             }
             let packs = match catalog["packs"].as_array_mut() {
@@ -808,6 +1239,12 @@ fn main() -> ExitCode {
             }
             packs.sort_by_key(|p| p["pack_id"].as_str().unwrap_or("").to_string());
             let count = packs.len();
+            if let Err(failures) = stamp_platform_status(&mut catalog, &reports) {
+                // Nothing is written: unvalidatable evidence must never reach
+                // a published catalog (docs/13).
+                report_failures(&reports_path, &failures);
+                return ExitCode::from(1);
+            }
             let out = serde_json::to_string_pretty(&catalog).expect("serialize catalog");
             if let Err(e) = fs::write(&file, format!("{out}\n")) {
                 eprintln!("error: cannot write {file}: {e}");

@@ -31,9 +31,23 @@ build_pack languages/ru-RU ru-ru-reference
 build_pack tests/fixtures/packs/ja-demo ja-demo
 build_pack tests/fixtures/packs/eo-demo eo-demo
 
+# ADR-0016: pack listening audio is generated at build time and never stored in
+# git; the committed artifact is languages/<pack>/media/manifest.jsonl. Opt-in
+# because synthesis needs the pinned sherpa-onnx runtime + Kokoro payload
+# (TTS-002 staging); release builds set WITH_PACK_AUDIO=1 after staging them.
+if [[ "${WITH_PACK_AUDIO:-0}" == "1" ]]; then
+  for pack in languages/ja-JP; do
+    python3 scripts/generate-pack-audio.py --pack "$pack"
+  done
+fi
+
+# ADR-0015: three-way platform status is derived from human runtime reports.
+# Empty report file = nothing confirmed, every non-tested platform untested.
 cargo run -q -p lts-langpack-cli -- catalog "${archives[@]}" \
   --file dist/preview/packs.json \
-  --url-template "$URL_TEMPLATE"
+  --url-template "$URL_TEMPLATE" \
+  --platform-reports docs/platform/PLATFORM_REPORTS.yaml
 
 echo "artifacts + draft catalog in dist/preview/"
 echo "publishing release assets and merging entries into catalog/packs.json is owner gate O-05."
+echo "community_confirmed_platforms is derived only from docs/platform/PLATFORM_REPORTS.yaml."

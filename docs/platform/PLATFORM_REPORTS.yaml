@@ -1,0 +1,51 @@
+# Human-run platform runtime reports (docs/13_RELEASE_AND_DISTRIBUTION.md,
+# PLAT-001; owner decision 2026-10-07: downloads may exist for other OS's, but
+# they ship labeled untested until a human on that OS says it works).
+#
+# These records are EVIDENCE, not claims:
+#   - every record comes from a human who actually ran the desktop build on
+#     that operating system, and
+#   - every record is merged into this file by the owner/maintainer after
+#     review. CI never writes here, and no automated check may add one.
+#
+# What this file drives:
+#   langpack catalog --platform-reports docs/platform/PLATFORM_REPORTS.yaml
+#   derives `community_confirmed_platforms` per catalog entry from these
+#   records. It NEVER populates `tested_platforms`: that field stays
+#   maintainer/owner-run runtime evidence, which today is Linux only. A record
+#   with `reporter_category: maintainer` does not promote a platform either.
+#   The CLI fails with machine-readable errors (one JSON line on stderr) on
+#   malformed records, missing hash/build bindings, hash or version drift
+#   against the catalog entry, duplicate ids, and any file-level attempt to
+#   declare `tested_platforms`.
+#
+# Schema (schema_version: 1). Every field is required on every record:
+#   id:                unique stable id, e.g. pr-0001
+#   platform:          linux | windows | macos
+#   os_version:        the exact OS build that ran, e.g.
+#                      "Windows 11 23H2 (22631.4460)"
+#   app_version:       application version that was run
+#   app_commit:        git commit the app binary was built from (7-40 hex)
+#   pack_id:           catalog pack id the report covers
+#   pack_version:      pack version the reporter actually installed
+#   pack_sha256:       SHA-256 (64 hex) of the exact .lpk archive. Required:
+#                      an unbound report proves nothing, and a hash that no
+#                      longer matches the catalog entry is stale evidence
+#                      (rebuilt/bumped pack => re-run and re-report).
+#   date:              YYYY-MM-DD the run happened
+#   reporter:          human reporter (handle or name; nothing more)
+#   reporter_category: community-reporter | maintainer
+#   outcome:           works | works-with-issues | fails
+#   issues:            [] array of plain strings (symptoms, workarounds)
+#
+# Derivation rules (see docs/13 for the authoritative wording):
+#   - the newest record for a (pack_id, platform) pair decides the current
+#     status, newest by `date` with ties broken on `id`;
+#   - outcome `works` or `works-with-issues` confirms the platform for that
+#     pack; `fails` clears the confirmation;
+#   - `untested_platforms` is every platform in the catalog universe that is
+#     neither maintainer-tested nor currently community-confirmed;
+#   - community-confirmed is NOT tested, and any app or pack change invalidates
+#     it because the binding fields must match the current build and entry.
+schema_version: 1
+reports: []
