@@ -88,14 +88,28 @@ provenance-labeled.
   on the real pack: flipping one byte of
   `media/ja.contrast.vowel-length.obasan-0.wav` in a copy makes `langpack build`
   exit 1 naming both digests; deleting all 693 `.wav` bytes from a copy turns
-  `validate` into one info line, `test` into exactly one error, and `build` into a
-  refusal.
+  `validate` into one info line and `test` into exactly one error. That last case
+  is the one place `build` decides differently: it does **not** refuse. A pack
+  with none of its declared assets drops `media/manifest.jsonl` from the archive
+  (warning on stderr) and ships an honest **audio-less** archive, because
+  refusing would leave the pack uninstallable from every clean checkout — the
+  desktop app builds and installs the bundled pack during onboarding. The
+  invariant preserved is "the manifest never lies about the bytes in the
+  archive", not "every archive must carry audio"; audio-dependent features then
+  fall back to on-demand synthesis.
 - Consequence for CI: a git checkout carries no audio, so install-mode `test`
   cannot run on ja-JP there. CI runs `validate`/`lint` plus the audits for ja-JP
   and keeps install-mode `test` for packs without audio (ru-RU); the full
   install/build gate for ja-JP runs in `scripts/build-catalog.sh`, which
   regenerates the audio first. The pairing logic itself is pinned by
   `crates/langpack/tests/media.rs` inside `cargo test --workspace`.
+- Consequence for the app: a media id is resolved through the installed pack's
+  manifest `file` field, so filenames stay pack data rather than an engine
+  convention, and the set of declared media decides where listening practice can
+  be scheduled — a sentence with no declared audio is never offered as a
+  comprehension-listening item, and a word (which packs do not record) is not
+  either. The old app behaviour named media ids no pack ever wrote, which made
+  "Hear reference" and the pitch contour permanently unresolvable.
 - Kokoro's Japanese path cannot voice bare kanji (measured 2026-10-07:
   `Ignore OOV '金'` → `Failed to convert '金' to token IDs`, exit 2). Three of the
   14 contrast items therefore had to gain kana `reading` values (金/木, 千/背,

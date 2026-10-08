@@ -72,13 +72,26 @@ langpack build <pack> -o out.lpk  # deterministic archive; requires scaffold-cle
 (non-empty licenses/sources, resolved references, license clearance);
 `TBD` content licensing blocks install, never drafting.
 
-`media/manifest.jsonl` is paired with the directory at install and at build:
-every declared asset must exist and hash to what the manifest says
-(`media_missing`, `media_hash_mismatch`, `media_size_mismatch`), while a file
-with no row is a warning (`media_unlisted`) rather than a silent asset — the app
-reads audio provenance from the manifest, never from file presence (ADR-0016).
-Generated `.wav` bytes are gitignored; run `scripts/generate-pack-audio.py`
-before `test`/`build`.
+`media/manifest.jsonl` states what audio the pack carries, and the manifest is
+the only thing the app reads audio provenance from — never file presence
+(ADR-0016). How it is enforced:
+
+- Nothing generated yet (a fresh checkout): one aggregated `media_unbuilt`
+  diagnostic, Info while drafting, Error at `--mode install`.
+- Partially generated: every declared row that is absent is `media_missing`
+  (Error in every mode), and `build` refuses the pack outright rather than
+  shipping a manifest that would misrepresent the archive.
+- Present but not matching its row: `media_size_mismatch` / `media_hash_mismatch`
+  (Error in every mode). A media file with no row is `media_unlisted` (Warning),
+  never a silent asset.
+- A pack with nothing generated still builds: `build` drops
+  `media/manifest.jsonl` from the archive after warning, so an audio-less
+  archive is honest and installable and the app falls back to on-demand
+  synthesis. There is no archive that declares audio it does not carry.
+
+Generated `.wav` bytes are gitignored; `scripts/generate-pack-audio.py` must run
+before `test`/`build` (`scripts/build-catalog.sh` already does so, and CI runs
+install-mode gates only for packs that ship no manifest).
 
 ## Per-unit workflow
 
