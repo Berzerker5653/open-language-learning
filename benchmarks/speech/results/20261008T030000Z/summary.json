@@ -1,0 +1,108 @@
+{
+  "study": "synthetic-learner-proxy",
+  "run": "20261008T030000Z",
+  "question": "Can TTS-generated audio satisfy the SPEECH-007 calibration gate instead of a consented learner panel?",
+  "protocol": "benchmarks/speech/protocols/ja-JP/vowel-length-0.2.0.yaml",
+  "frozen_thresholds": {
+    "max_false_correction_rate": 0.05,
+    "min_scoring_coverage": 0.6,
+    "min_label_agreement_kappa": 0.7
+  },
+  "eligibility": "not_valid_synthetic_data",
+  "consumption_rule": "The calibration registry MUST NOT consume any number in this file. This run measures the measurement pipeline, not learners.",
+  "hypothesis": "If scoring accuracy were a property of the audio pipeline, synthetic takes with known planted vowel-length ratios would pass the gate without human learners or human labelers.",
+  "method": {
+    "tool": "benchmarks/speech/tools/synthetic-learner-proxy.py",
+    "probe": "crates/speech-runtime/examples/vowel_length_probe.rs (guided probe; interpret.rs bands speech.long-vowel.{shorter,close,longer})",
+    "pairs": [
+      {"id": "obasan", "short": "おばさん", "long": "おばあさん", "pack_declared_ratio": 1.25},
+      {"id": "toi", "short": "とおい", "long": "問い", "pack_declared_ratio": 1.5}
+    ],
+    "synthesizer": {
+      "runtime": "sherpa-onnx-v1.13.8-linux-x64-shared",
+      "payload": "kokoro-multi-lang-v1_1",
+      "model_sha256": "acc4adc175b9d9986106cd20060329673ad5a2e12ef3c557d2d3745b694f8b38",
+      "voice_id": "37",
+      "note": "same runtime, payload and voice the desktop app uses for on-demand synthesis"
+    },
+    "strata": {
+      "stretch": [0.85, 1.0, 1.25, 1.45, 1.7],
+      "modifiers": ["clean", "noise(amplitude 0.02)", "pitch+3%"],
+      "take_shape": "short word + 350 ms silence + stretched long word",
+      "clips_per_config": 15
+    },
+    "asr": {
+      "binary": "whisper.cpp/build/bin/whisper-cli",
+      "models": {
+        "ggml-base.bin": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe",
+        "ggml-small.bin": "1be3a9b2063867b937e64e2ec7483364a79917e157fa98c5d94b5c1fffea987b"
+      }
+    },
+    "audio_tools": "ffmpeg n9.0.2",
+    "reference_sources": {
+      "declared": "reference ratio taken from the pack's expected_ratio (the app's current ADR-0013 path)",
+      "tts": "reference ratio taken from the TTS output itself (the pre-ADR-0013 path)"
+    }
+  },
+  "coverage": [
+    {"asr": "ggml-base", "pair": "obasan", "reference": "declared(1.25)", "ref_measured_ratio": 1.33, "scored": 3, "clips": 15, "coverage": 0.2, "meets_min_scoring_coverage": false, "abstain_reasons": {"mismatch:expected-text-not-matched": 12}},
+    {"asr": "ggml-base", "pair": "obasan", "reference": "tts", "ref_measured_ratio": 1.048, "scored": 3, "clips": 15, "coverage": 0.2, "meets_min_scoring_coverage": false, "abstain_reasons": {"mismatch:expected-text-not-matched": 12}},
+    {"asr": "ggml-base", "pair": "toi", "reference": "declared(1.5)", "ref_measured_ratio": 0.93, "scored": 0, "clips": 15, "coverage": 0.0, "meets_min_scoring_coverage": false, "abstain_reasons": {"mismatch:expected-text-not-matched": 15}},
+    {"asr": "ggml-base", "pair": "toi", "reference": "tts", "ref_measured_ratio": 0.618, "scored": 0, "clips": 15, "coverage": 0.0, "meets_min_scoring_coverage": false, "abstain_reasons": {"mismatch:expected-text-not-matched": 15}},
+    {"asr": "ggml-small", "pair": "obasan", "reference": "declared(1.25)", "ref_measured_ratio": 1.33, "scored": 8, "clips": 15, "coverage": 0.533, "meets_min_scoring_coverage": false, "abstain_reasons": {"mismatch:expected-text-not-matched": 7}},
+    {"asr": "ggml-small", "pair": "obasan", "reference": "tts", "ref_measured_ratio": 1.048, "scored": 8, "clips": 15, "coverage": 0.533, "meets_min_scoring_coverage": false, "abstain_reasons": {"mismatch:expected-text-not-matched": 7}},
+    {"asr": "ggml-small", "pair": "toi", "reference": "declared(1.5)", "ref_measured_ratio": 0.93, "scored": 1, "clips": 15, "coverage": 0.067, "meets_min_scoring_coverage": false, "abstain_reasons": {"mismatch:expected-text-not-matched": 14}},
+    {"asr": "ggml-small", "pair": "toi", "reference": "tts", "ref_measured_ratio": 0.618, "scored": 1, "clips": 15, "coverage": 0.067, "meets_min_scoring_coverage": false, "abstain_reasons": {"mismatch:expected-text-not-matched": 14}}
+  ],
+  "reference_parameter_flip": {
+    "setting": "ggml-small, obasan pair; 8 identical scored clips; the ONLY change is which source supplies the reference ratio",
+    "clips": [
+      {"planted_stretch": 0.85, "meaning": "shortened (over-correction error)", "modifier": "clean", "tts_ref_band": "close", "declared_ref_band": "shorter"},
+      {"planted_stretch": 0.85, "meaning": "shortened (over-correction error)", "modifier": "pitch+3%", "tts_ref_band": "close", "declared_ref_band": "shorter"},
+      {"planted_stretch": 1.25, "meaning": "target ratio as declared by the pack", "modifier": "clean", "tts_ref_band": "close", "declared_ref_band": "shorter"},
+      {"planted_stretch": 1.25, "meaning": "target ratio as declared by the pack", "modifier": "pitch+3%", "tts_ref_band": "close", "declared_ref_band": "shorter"},
+      {"planted_stretch": 1.45, "meaning": "mora-correct production", "modifier": "clean", "tts_ref_band": "close", "declared_ref_band": "shorter"},
+      {"planted_stretch": 1.45, "meaning": "mora-correct production", "modifier": "pitch+3%", "tts_ref_band": "close", "declared_ref_band": "shorter"},
+      {"planted_stretch": 1.7, "meaning": "over-lengthened (hypercorrection error)", "modifier": "clean", "tts_ref_band": "close", "declared_ref_band": "shorter"},
+      {"planted_stretch": 1.7, "meaning": "over-lengthened (hypercorrection error)", "modifier": "pitch+3%", "tts_ref_band": "close", "declared_ref_band": "shorter"}
+    ],
+    "observed": "Verdicts are constant across planted conditions inside each setting and invert between settings: 8/8 close under the TTS reference (measured 1.048), 8/8 shorter under the declared reference (measured 1.330)."
+  },
+  "findings": [
+    "Scoring coverage on synthetic takes is 0.00-0.53, far below the frozen 0.60 floor, and it moves with the ASR model (base -> small doubles it) rather than with anything about the speaker. The dominant abstention is mismatch:expected-text-not-matched, i.e. the transcriber could not land the expected text.",
+    "On the identical 8 scored clips, changing only the reference-ratio source flips every verdict. Under the TTS reference the metric calls a flattened production (1.00), a mora-correct production (1.45) and an over-lengthened error (1.70) all 'close': zero of the planted errors are caught. Under the declared reference it calls every clip 'shorter', including mora-correct and over-lengthened ones: a false-correction rate of 1.0 against a 0.05 ceiling.",
+    "The metric therefore tracks the synthesis/reference parameter we chose, not any speaker property. With synthetic data the label and the measurement are produced by the same knob, so the gate is circular.",
+    "min_label_agreement (kappa >= 0.70) is uninformative on synthetic data: the 'label' would be derived from the generator parameters that produced the audio, so agreement is 1.0 by construction.",
+    "Secondary confirmation of ADR-0013: Kokoro's own long/short ratio is 1.048 for the obasan pair and 0.618 for the toi pair, i.e. it flattens and inverts the contrast the pack declares (1.25, 1.5). Generated audio cannot serve as a pronunciation reference.",
+    "The synthesis stage is not byte-stable: five runs of the pinned chain on one utterance produced five different sha256 values (including --num-threads=1), and re-synthesized clips moved measured reference ratios by 1-4%, flipping borderline clips between scored and abstained. The measurement stage is stable: re-measuring the identical clips (--reuse) reproduced all four probe transcripts byte-for-byte. Calibration on recorded audio therefore does not inherit synthesis jitter, but a study that regenerates its own inputs cannot assume comparability across runs."
+  ],
+  "does_not_show": [
+    "That real learners score well or badly; no human speech was measured. Real learner audio may align far better than TTS output.",
+    "That the feature is useless; it shows only that its accuracy cannot be established from model output.",
+    "That the thresholds are wrong; they are frozen and this run does not vote on them."
+  ],
+  "what_the_gate_needs": ">=40 consented learners plus two qualified labelers and an adjudicator (benchmarks/speech/datasets/SOURCING.md, benchmarks/speech/CALIBRATION_RUNBOOK.md), or an explicit owner scope decision recorded against tasks/ROADMAP.yaml.",
+  "reproduce": "python3 benchmarks/speech/tools/synthetic-learner-proxy.py --out /tmp/lts-synthetic builds the clips and writes one probe transcript per (model, pair, reference) into runs/. Add --reuse to re-measure the SAME audio, because TTS output is not byte-reproducible.",
+  "reproduction_check": {
+    "run": "20261008T031200Z",
+    "command": "python3 benchmarks/speech/tools/synthetic-learner-proxy.py --out /tmp/lts-synthetic-verify",
+    "coverage": [
+      {"asr": "ggml-base", "pair": "obasan", "reference": "declared(1.25)", "ref_measured_ratio": 1.313, "scored": 5, "clips": 15, "coverage": 0.333},
+      {"asr": "ggml-base", "pair": "obasan", "reference": "tts", "ref_measured_ratio": 1.048, "scored": 5, "clips": 15, "coverage": 0.333},
+      {"asr": "ggml-base", "pair": "toi", "reference": "declared(1.5)", "ref_measured_ratio": 0.965, "scored": 0, "clips": 15, "coverage": 0.0},
+      {"asr": "ggml-base", "pair": "toi", "reference": "tts", "ref_measured_ratio": 0.642, "scored": 0, "clips": 15, "coverage": 0.0},
+      {"asr": "ggml-small", "pair": "obasan", "reference": "declared(1.25)", "ref_measured_ratio": 1.313, "scored": 8, "clips": 15, "coverage": 0.533},
+      {"asr": "ggml-small", "pair": "obasan", "reference": "tts", "ref_measured_ratio": 1.048, "scored": 8, "clips": 15, "coverage": 0.533},
+      {"asr": "ggml-small", "pair": "toi", "reference": "declared(1.5)", "ref_measured_ratio": 0.965, "scored": 0, "clips": 15, "coverage": 0.0},
+      {"asr": "ggml-small", "pair": "toi", "reference": "tts", "ref_measured_ratio": 0.642, "scored": 0, "clips": 15, "coverage": 0.0}
+    ],
+    "finding_reproduced": "Same conclusion on fresh audio: coverage stays 0.00-0.53 (gate 0.60), and on the 8 clips ggml-small scores under the obasan contrast the verdicts are 8/8 `close` with the TTS reference and 8/8 `shorter` with the declared reference. The clip set differs from the recorded run, the flip does not.",
+    "differences": "Measured reference ratios moved (1.330 -> 1.313, 0.618 -> 0.642) and borderline clips flipped, because the TTS chain is not byte-reproducible: five syntheses of the same utterance with the pinned runtime produced five distinct sha256 values, including with --num-threads=1."
+  },
+  "pipeline_nondeterminism": {
+    "synthesis": "sherpa-onnx v1.13.8 + kokoro-multi-lang-v1_1, sid 37, text 問い: sha256 28d31505…, 73b2571f…, 137707d1… (default threads) and b34883a3…, 208e055f… (--num-threads=1). Five runs, five hashes.",
+    "measurement": "Control run with --reuse (byte-identical input wavs): all four ggml-small probe transcripts reproduced byte-for-byte, including align_conf values. The align/measure/interpret path is deterministic on fixed audio.",
+    "consequence": "Jitter belongs to generation, not measurement. A study that regenerates its own audio cannot compare across runs; recorded learner audio, once stored, is measured reproducibly. That is one more reason the accuracy gate belongs on recordings rather than regenerated audio.",
+    "adr_0016_impact": "Generated pack audio can never be re-hashed to identical bytes across builds, so ADR-0016 records the hash of the bytes that actually shipped rather than promising reproducible synthesis."
+  }
+}

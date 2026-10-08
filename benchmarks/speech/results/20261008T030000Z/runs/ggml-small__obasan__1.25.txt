@@ -1,0 +1,20 @@
+reference voiced seconds: short=0.840s long=1.117s ratio=1.330
+(this is GUIDED probe output; it does not enable automatic scoring)
+
+obasan__kokoro-multi-lang-v1_1__f0.85__clean PossibleIssue  speech.long-vowel.shorter  (align_conf=Some(0.6))
+obasan__kokoro-multi-lang-v1_1__f0.85__noise ABSTAIN (mismatch:expected-text-not-matched)
+obasan__kokoro-multi-lang-v1_1__f0.85__pitch+3 PossibleIssue  speech.long-vowel.shorter  (align_conf=Some(0.6666667))
+obasan__kokoro-multi-lang-v1_1__f1.00__clean ABSTAIN (mismatch:expected-text-not-matched)
+obasan__kokoro-multi-lang-v1_1__f1.00__noise ABSTAIN (mismatch:expected-text-not-matched)
+obasan__kokoro-multi-lang-v1_1__f1.00__pitch+3 ABSTAIN (mismatch:expected-text-not-matched)
+obasan__kokoro-multi-lang-v1_1__f1.25__clean PossibleIssue  speech.long-vowel.shorter  (align_conf=Some(0.8888889))
+obasan__kokoro-multi-lang-v1_1__f1.25__noise ABSTAIN (mismatch:expected-text-not-matched)
+obasan__kokoro-multi-lang-v1_1__f1.25__pitch+3 PossibleIssue  speech.long-vowel.shorter  (align_conf=Some(0.8))
+obasan__kokoro-multi-lang-v1_1__f1.45__clean PossibleIssue  speech.long-vowel.shorter  (align_conf=Some(0.8888889))
+obasan__kokoro-multi-lang-v1_1__f1.45__noise ABSTAIN (mismatch:expected-text-not-matched)
+obasan__kokoro-multi-lang-v1_1__f1.45__pitch+3 PossibleIssue  speech.long-vowel.shorter  (align_conf=Some(0.8888889))
+obasan__kokoro-multi-lang-v1_1__f1.70__clean PossibleIssue  speech.long-vowel.shorter  (align_conf=Some(0.8888889))
+obasan__kokoro-multi-lang-v1_1__f1.70__noise ABSTAIN (mismatch:expected-text-not-matched)
+obasan__kokoro-multi-lang-v1_1__f1.70__pitch+3 PossibleIssue  speech.long-vowel.shorter  (align_conf=Some(0.8888889))
+
+scored=8 abstained=7 clips=15

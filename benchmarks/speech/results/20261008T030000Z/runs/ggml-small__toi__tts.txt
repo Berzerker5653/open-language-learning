@@ -1,0 +1,20 @@
+reference voiced seconds: short=0.733s long=0.453s ratio=0.618
+(this is GUIDED probe output; it does not enable automatic scoring)
+
+toi__kokoro-multi-lang-v1_1__f0.85__clean ABSTAIN (mismatch:expected-text-not-matched)
+toi__kokoro-multi-lang-v1_1__f0.85__noise ABSTAIN (mismatch:expected-text-not-matched)
+toi__kokoro-multi-lang-v1_1__f0.85__pitch+3 PossibleIssue  speech.long-vowel.longer  (align_conf=Some(0.6))
+toi__kokoro-multi-lang-v1_1__f1.00__clean ABSTAIN (mismatch:expected-text-not-matched)
+toi__kokoro-multi-lang-v1_1__f1.00__noise ABSTAIN (mismatch:expected-text-not-matched)
+toi__kokoro-multi-lang-v1_1__f1.00__pitch+3 ABSTAIN (mismatch:expected-text-not-matched)
+toi__kokoro-multi-lang-v1_1__f1.25__clean ABSTAIN (mismatch:expected-text-not-matched)
+toi__kokoro-multi-lang-v1_1__f1.25__noise ABSTAIN (mismatch:expected-text-not-matched)
+toi__kokoro-multi-lang-v1_1__f1.25__pitch+3 ABSTAIN (mismatch:expected-text-not-matched)
+toi__kokoro-multi-lang-v1_1__f1.45__clean ABSTAIN (mismatch:expected-text-not-matched)
+toi__kokoro-multi-lang-v1_1__f1.45__noise ABSTAIN (mismatch:expected-text-not-matched)
+toi__kokoro-multi-lang-v1_1__f1.45__pitch+3 ABSTAIN (mismatch:expected-text-not-matched)
+toi__kokoro-multi-lang-v1_1__f1.70__clean ABSTAIN (mismatch:expected-text-not-matched)
+toi__kokoro-multi-lang-v1_1__f1.70__noise ABSTAIN (mismatch:expected-text-not-matched)
+toi__kokoro-multi-lang-v1_1__f1.70__pitch+3 ABSTAIN (mismatch:expected-text-not-matched)
+
+scored=1 abstained=14 clips=15

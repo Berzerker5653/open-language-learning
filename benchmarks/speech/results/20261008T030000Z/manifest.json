@@ -1,0 +1,272 @@
+[
+  {
+    "clip": "obasan__kokoro-multi-lang-v1_1__f0.85__clean.wav",
+    "pair": "obasan",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 0.85,
+    "modifier": "clean",
+    "meaning": "shortened (over-correction error)",
+    "intended_long_ratio": 0.85
+  },
+  {
+    "clip": "obasan__kokoro-multi-lang-v1_1__f0.85__noise.wav",
+    "pair": "obasan",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 0.85,
+    "modifier": "noise",
+    "meaning": "shortened (over-correction error)",
+    "intended_long_ratio": 0.85
+  },
+  {
+    "clip": "obasan__kokoro-multi-lang-v1_1__f0.85__pitch+3.wav",
+    "pair": "obasan",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 0.85,
+    "modifier": "pitch+3",
+    "meaning": "shortened (over-correction error)",
+    "intended_long_ratio": 0.85
+  },
+  {
+    "clip": "obasan__kokoro-multi-lang-v1_1__f1.00__clean.wav",
+    "pair": "obasan",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.0,
+    "modifier": "clean",
+    "meaning": "flattened (the error to catch; Kokoro's own posture)",
+    "intended_long_ratio": 1.0
+  },
+  {
+    "clip": "obasan__kokoro-multi-lang-v1_1__f1.00__noise.wav",
+    "pair": "obasan",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.0,
+    "modifier": "noise",
+    "meaning": "flattened (the error to catch; Kokoro's own posture)",
+    "intended_long_ratio": 1.0
+  },
+  {
+    "clip": "obasan__kokoro-multi-lang-v1_1__f1.00__pitch+3.wav",
+    "pair": "obasan",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.0,
+    "modifier": "pitch+3",
+    "meaning": "flattened (the error to catch; Kokoro's own posture)",
+    "intended_long_ratio": 1.0
+  },
+  {
+    "clip": "obasan__kokoro-multi-lang-v1_1__f1.25__clean.wav",
+    "pair": "obasan",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.25,
+    "modifier": "clean",
+    "meaning": "target ratio as declared by the pack",
+    "intended_long_ratio": 1.25
+  },
+  {
+    "clip": "obasan__kokoro-multi-lang-v1_1__f1.25__noise.wav",
+    "pair": "obasan",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.25,
+    "modifier": "noise",
+    "meaning": "target ratio as declared by the pack",
+    "intended_long_ratio": 1.25
+  },
+  {
+    "clip": "obasan__kokoro-multi-lang-v1_1__f1.25__pitch+3.wav",
+    "pair": "obasan",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.25,
+    "modifier": "pitch+3",
+    "meaning": "target ratio as declared by the pack",
+    "intended_long_ratio": 1.25
+  },
+  {
+    "clip": "obasan__kokoro-multi-lang-v1_1__f1.45__clean.wav",
+    "pair": "obasan",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.45,
+    "modifier": "clean",
+    "meaning": "mora-correct production",
+    "intended_long_ratio": 1.45
+  },
+  {
+    "clip": "obasan__kokoro-multi-lang-v1_1__f1.45__noise.wav",
+    "pair": "obasan",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.45,
+    "modifier": "noise",
+    "meaning": "mora-correct production",
+    "intended_long_ratio": 1.45
+  },
+  {
+    "clip": "obasan__kokoro-multi-lang-v1_1__f1.45__pitch+3.wav",
+    "pair": "obasan",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.45,
+    "modifier": "pitch+3",
+    "meaning": "mora-correct production",
+    "intended_long_ratio": 1.45
+  },
+  {
+    "clip": "obasan__kokoro-multi-lang-v1_1__f1.70__clean.wav",
+    "pair": "obasan",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.7,
+    "modifier": "clean",
+    "meaning": "over-lengthened (hypercorrection error)",
+    "intended_long_ratio": 1.7
+  },
+  {
+    "clip": "obasan__kokoro-multi-lang-v1_1__f1.70__noise.wav",
+    "pair": "obasan",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.7,
+    "modifier": "noise",
+    "meaning": "over-lengthened (hypercorrection error)",
+    "intended_long_ratio": 1.7
+  },
+  {
+    "clip": "obasan__kokoro-multi-lang-v1_1__f1.70__pitch+3.wav",
+    "pair": "obasan",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.7,
+    "modifier": "pitch+3",
+    "meaning": "over-lengthened (hypercorrection error)",
+    "intended_long_ratio": 1.7
+  },
+  {
+    "clip": "toi__kokoro-multi-lang-v1_1__f0.85__clean.wav",
+    "pair": "toi",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 0.85,
+    "modifier": "clean",
+    "meaning": "shortened (over-correction error)",
+    "intended_long_ratio": 0.85
+  },
+  {
+    "clip": "toi__kokoro-multi-lang-v1_1__f0.85__noise.wav",
+    "pair": "toi",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 0.85,
+    "modifier": "noise",
+    "meaning": "shortened (over-correction error)",
+    "intended_long_ratio": 0.85
+  },
+  {
+    "clip": "toi__kokoro-multi-lang-v1_1__f0.85__pitch+3.wav",
+    "pair": "toi",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 0.85,
+    "modifier": "pitch+3",
+    "meaning": "shortened (over-correction error)",
+    "intended_long_ratio": 0.85
+  },
+  {
+    "clip": "toi__kokoro-multi-lang-v1_1__f1.00__clean.wav",
+    "pair": "toi",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.0,
+    "modifier": "clean",
+    "meaning": "flattened (the error to catch; Kokoro's own posture)",
+    "intended_long_ratio": 1.0
+  },
+  {
+    "clip": "toi__kokoro-multi-lang-v1_1__f1.00__noise.wav",
+    "pair": "toi",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.0,
+    "modifier": "noise",
+    "meaning": "flattened (the error to catch; Kokoro's own posture)",
+    "intended_long_ratio": 1.0
+  },
+  {
+    "clip": "toi__kokoro-multi-lang-v1_1__f1.00__pitch+3.wav",
+    "pair": "toi",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.0,
+    "modifier": "pitch+3",
+    "meaning": "flattened (the error to catch; Kokoro's own posture)",
+    "intended_long_ratio": 1.0
+  },
+  {
+    "clip": "toi__kokoro-multi-lang-v1_1__f1.25__clean.wav",
+    "pair": "toi",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.25,
+    "modifier": "clean",
+    "meaning": "target ratio as declared by the pack",
+    "intended_long_ratio": 1.25
+  },
+  {
+    "clip": "toi__kokoro-multi-lang-v1_1__f1.25__noise.wav",
+    "pair": "toi",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.25,
+    "modifier": "noise",
+    "meaning": "target ratio as declared by the pack",
+    "intended_long_ratio": 1.25
+  },
+  {
+    "clip": "toi__kokoro-multi-lang-v1_1__f1.25__pitch+3.wav",
+    "pair": "toi",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.25,
+    "modifier": "pitch+3",
+    "meaning": "target ratio as declared by the pack",
+    "intended_long_ratio": 1.25
+  },
+  {
+    "clip": "toi__kokoro-multi-lang-v1_1__f1.45__clean.wav",
+    "pair": "toi",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.45,
+    "modifier": "clean",
+    "meaning": "mora-correct production",
+    "intended_long_ratio": 1.45
+  },
+  {
+    "clip": "toi__kokoro-multi-lang-v1_1__f1.45__noise.wav",
+    "pair": "toi",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.45,
+    "modifier": "noise",
+    "meaning": "mora-correct production",
+    "intended_long_ratio": 1.45
+  },
+  {
+    "clip": "toi__kokoro-multi-lang-v1_1__f1.45__pitch+3.wav",
+    "pair": "toi",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.45,
+    "modifier": "pitch+3",
+    "meaning": "mora-correct production",
+    "intended_long_ratio": 1.45
+  },
+  {
+    "clip": "toi__kokoro-multi-lang-v1_1__f1.70__clean.wav",
+    "pair": "toi",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.7,
+    "modifier": "clean",
+    "meaning": "over-lengthened (hypercorrection error)",
+    "intended_long_ratio": 1.7
+  },
+  {
+    "clip": "toi__kokoro-multi-lang-v1_1__f1.70__noise.wav",
+    "pair": "toi",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.7,
+    "modifier": "noise",
+    "meaning": "over-lengthened (hypercorrection error)",
+    "intended_long_ratio": 1.7
+  },
+  {
+    "clip": "toi__kokoro-multi-lang-v1_1__f1.70__pitch+3.wav",
+    "pair": "toi",
+    "payload": "kokoro-multi-lang-v1_1",
+    "stretch": 1.7,
+    "modifier": "pitch+3",
+    "meaning": "over-lengthened (hypercorrection error)",
+    "intended_long_ratio": 1.7
+  }
+]
