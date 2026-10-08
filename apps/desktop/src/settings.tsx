@@ -139,8 +139,8 @@ export function Settings(p: SettingsProps) {
         <h3>Profile data</h3>
         <p>
           <small>
-            The privacy notice promises you can export or delete your local profile data at any
-            time — both are here. The export is a readable JSON file with your profile, settings,
+            The privacy notice promises you can export or delete your local profile data at any time
+            — both are here. The export is a readable JSON file with your profile, settings,
             learning evidence, and schedule. Recording metadata is not included, and no audio is
             ever part of an export.
           </small>
@@ -173,8 +173,8 @@ export function Settings(p: SettingsProps) {
         )}
         <p>
           <small data-testid="settings-delete-note">
-            Deleting removes this profile and all of its learning data on this device, and cannot
-            be undone. The app asks for one explicit confirmation before anything is deleted.
+            Deleting removes this profile and all of its learning data on this device, and cannot be
+            undone. The app asks for one explicit confirmation before anything is deleted.
           </small>
         </p>
       </div>

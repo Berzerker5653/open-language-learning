@@ -84,8 +84,7 @@ fn japanese_seed_is_install_eligible() {
         .filter(|d| d.severity == Severity::Error && d.code != "media_unbuilt")
         .count();
     assert_eq!(
-        errors,
-        0,
+        errors, 0,
         "licensed seed must pass install validation: {diags:?}"
     );
 }

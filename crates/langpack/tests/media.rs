@@ -258,7 +258,12 @@ fn an_unbuilt_pack_builds_an_honest_audio_less_archive() {
     let pack_dir = tmp.path().to_path_buf();
     pack_with(
         &pack_dir,
-        &[row("ja.demo.kite-0", "media/ja.demo.kite-0.wav", &declared, 17)],
+        &[row(
+            "ja.demo.kite-0",
+            "media/ja.demo.kite-0.wav",
+            &declared,
+            17,
+        )],
         &[],
     );
     let (bytes, _) =

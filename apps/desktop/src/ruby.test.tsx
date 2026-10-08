@@ -5,14 +5,11 @@ import { Ruby, isKanaOnly } from "./ruby";
 const render = (surface: string, furigana?: string | null) =>
   renderToStaticMarkup(<Ruby surface={surface} furigana={furigana} />);
 
-const count = (haystack: string, needle: string) =>
-  haystack.split(needle).length - 1;
+const count = (haystack: string, needle: string) => haystack.split(needle).length - 1;
 
 describe("ruby annotation (K-54)", () => {
   it("annotates the whole word with ruby markup and rp fallback parens", () => {
-    expect(render("私", "わたし")).toBe(
-      "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>",
-    );
+    expect(render("私", "わたし")).toBe("<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>");
   });
 
   it("uses exactly one ruby per phrase, never a sibling small", () => {
@@ -48,7 +45,7 @@ describe("ruby annotation (K-54)", () => {
     expect(html).not.toContain("<rt>");
     expect(html).not.toContain("<ruby");
     expect(html).toContain("watashi");
-    expect(html).toContain("<small class=\"romaji\">watashi</small>");
+    expect(html).toContain('<small class="romaji">watashi</small>');
     // Mixed kana+latin readings are transliterations too: kept out of <rt>.
     expect(render("私", "watashi (わたし)")).not.toContain("<rt>");
     // A kana reading is unaffected: it is the rt annotation.

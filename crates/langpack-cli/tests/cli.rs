@@ -79,9 +79,16 @@ fn test_gate_passes_licensed_seed_and_blocks_bad_packs() {
         // the install gate for exactly one reason and one line only: the manifest
         // promises audio that was never built here (ADR-0016). Any other error
         // means the licensed seed lost install eligibility.
-        let errs: Vec<&str> = out.lines().filter(|l| l.trim_start().starts_with("error[")).collect();
+        let errs: Vec<&str> = out
+            .lines()
+            .filter(|l| l.trim_start().starts_with("error["))
+            .collect();
         assert_eq!(errs.len(), 1, "licensed seed: {out}");
-        assert!(errs[0].contains("media_unbuilt"), "licensed seed: {}", errs[0]);
+        assert!(
+            errs[0].contains("media_unbuilt"),
+            "licensed seed: {}",
+            errs[0]
+        );
     }
 
     let (out, _err, ok) = run(&["test", &fixture("invalid-license-unknown")]);

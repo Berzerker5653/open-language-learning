@@ -401,9 +401,7 @@ export function App() {
             packId,
             micEnabled: false,
           });
-          setMicEnabled(
-            (await inv("get_microphone_enabled", { profileId: p.id })) as boolean,
-          );
+          setMicEnabled((await inv("get_microphone_enabled", { profileId: p.id })) as boolean);
           const home = (await inv("home_state", {
             profileId: p.id,
           })) as { display_name: string; plan: SessionPlan };

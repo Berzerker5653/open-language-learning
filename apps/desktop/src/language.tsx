@@ -418,9 +418,9 @@ export function LanguagePanel(p: LanguagePanelProps) {
           nothing is uploaded. Honest limit: both checks also need a speech runtime (whisper.cpp)
           that this build does not include, so while it is absent they abstain, and downloading a
           model here does not change that. Pronunciation feedback is <em>guided only</em> (no
-          automatic scoring or mastery) until it has been calibrated. For pronunciation feedback
-          the model sizes give the same result — pick one your device can comfortably run. Larger
-          models mainly help future listening/recognition features, not pronunciation accuracy.
+          automatic scoring or mastery) until it has been calibrated. For pronunciation feedback the
+          model sizes give the same result — pick one your device can comfortably run. Larger models
+          mainly help future listening/recognition features, not pronunciation accuracy.
           {p.deviceTier
             ? ` This device was detected as the ${p.deviceTier.tier} tier (${p.deviceTier.cores} cores, ${Math.round(p.deviceTier.total_ram_mb)} MB RAM).`
             : " This device's tier could not be detected, so no model is recommended — pick one your device can comfortably run."}

@@ -682,15 +682,10 @@ mod tests {
             .unwrap();
         let tmp = tempfile::tempdir().unwrap();
         let fetched = std::sync::atomic::AtomicUsize::new(0);
-        let err = install_model_files(
-            tmp.path(),
-            entry,
-            "2026-10-08T00:00:00Z",
-            |_| {
-                fetched.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
-                Ok(Vec::new())
-            },
-        )
+        let err = install_model_files(tmp.path(), entry, "2026-10-08T00:00:00Z", |_| {
+            fetched.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
+            Ok(Vec::new())
+        })
         .unwrap_err();
         assert!(
             err.contains("not published"),
@@ -717,15 +712,10 @@ mod tests {
         let tmp = tempfile::tempdir().unwrap();
         let fetched = std::sync::atomic::AtomicUsize::new(0);
         assert!(
-            install_model_files(
-                tmp.path(),
-                &e,
-                "2026-10-08T00:00:00Z",
-                |_| {
-                    fetched.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
-                    Ok(Vec::new())
-                }
-            )
+            install_model_files(tmp.path(), &e, "2026-10-08T00:00:00Z", |_| {
+                fetched.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
+                Ok(Vec::new())
+            })
             .is_err()
         );
         assert_eq!(fetched.load(std::sync::atomic::Ordering::SeqCst), 0);

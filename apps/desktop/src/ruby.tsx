@@ -39,10 +39,7 @@ export function isKanaOnly(text: string): boolean {
   const letters = [...text].filter(
     (c) => HIRAGANA.test(c) || KATAKANA.test(c) || KANJI.test(c) || LATIN.test(c),
   );
-  return (
-    letters.length > 0 &&
-    letters.every((c) => HIRAGANA.test(c) || KATAKANA.test(c))
-  );
+  return letters.length > 0 && letters.every((c) => HIRAGANA.test(c) || KATAKANA.test(c));
 }
 
 /**
