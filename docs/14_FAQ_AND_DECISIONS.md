@@ -72,6 +72,14 @@ Not for the core MVP. An LLM is optional for conversation/explanations/content a
 
 Yes, this is a major goal. It generates a candidate pack using schemas and sources, then automated validation and human/qualified linguistic review determine trust level.
 
+## Can an AI make the pack's audio?
+
+Yes, and it does: shipped pack audio is model output from the same pinned synthesis chain the app runs offline, recorded in `media/manifest.jsonl` with `provenance: model-output` and gated by hash against the manifest at install and build (ADR-0016). It is comprehension input only. It is never a pronunciation or production reference — a generated voice has no authority over what a learner's timing should be, and numeric production targets stay pack-declared (ADR-0013).
+
+## Then why can't AI supply the speech-calibration recordings?
+
+Because calibration measures our accuracy about people, and synthetic clips measure the synthesizer instead. The SPEECH-007 study (`benchmarks/speech/results/20261008T030000Z/`) planted known duration errors in generated clips: scoring coverage came out 0.00–0.53 against the frozen 0.60 floor, tracking which ASR model was used rather than which condition was planted, and none of the planted errors were caught. The same eight clips scored `close` 8/8 against a synthesized reference and `shorter` 8/8 — a 1.0 false-correction rate — when only the reference-ratio source changed. Agreement scoring is vacuous against synthetic labels: a program agrees with itself perfectly. Consented learner recordings are therefore the only route to a stable accuracy claim; until they exist the pack profile declares `assess-guided` and no learner-facing accuracy claim is permitted.
+
 ## Can language packs run code?
 
 No, not by default. They are untrusted declarative data. Missing language capabilities should improve the engine/spec rather than introduce arbitrary scripts.
