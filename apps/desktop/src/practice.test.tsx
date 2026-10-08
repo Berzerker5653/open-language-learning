@@ -62,13 +62,14 @@ describe("practice runner", () => {
     expect(html).toContain("hello");
   });
 
-  it("labels draft content without changing grading affordances (K-42)", () => {
-    const draft = render({ task: { ...base.task, status: "draft" } });
-    expect(draft).toContain("draft content");
-    expect(draft).toContain("awaiting human review");
-    // Same choices and actions as the unlabeled render: posture is display-only.
-    expect(draft).toContain('aria-label="Choices"');
-    expect(draft).toContain("hello");
+  it("shows no per-item draft badges; posture is stated at pack level (K-42, owner 2026-10-07)", () => {
+    const unreviewed = render({ task: { ...base.task, status: "draft" } });
+    // The per-item draft badge is retired; its text must not return.
+    expect(unreviewed).not.toContain("draft content");
+    expect(unreviewed).not.toContain("awaiting human review");
+    // Affordances are identical: status stays wired but display-only.
+    expect(unreviewed).toContain('aria-label="Choices"');
+    expect(unreviewed).toContain("hello");
     const listening = render({
       task: {
         item_id: "x#comprehension-listening",
@@ -78,9 +79,9 @@ describe("practice runner", () => {
       },
       audioSource: "licensed-recording",
     });
-    expect(listening).toContain("draft content");
-    const reviewed = render({ task: { ...base.task, status: "validated" } });
-    expect(reviewed).not.toContain("draft content");
+    expect(listening).not.toContain("draft");
+    const validated = render({ task: { ...base.task, status: "validated" } });
+    expect(validated).not.toContain("draft");
   });
 
   it("renders a typed answer field for cloze and hides choices", () => {

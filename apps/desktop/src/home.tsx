@@ -45,6 +45,11 @@ export interface HomeProps {
   onBudget(minutes: number): void;
   environments?: WorldEnvironment[];
   onStart?(item: PlannedItem): void;
+  /// Owner 2026-10-07: the active pack is named once on Home with its
+  /// pack-level posture statement (derived from the pack's own review
+  /// tallies by `packPosture` in language.tsx). Null when no pack is
+  /// active or claims have not loaded; nothing is claimed then.
+  activePack?: { name: string; posture: string } | null;
 }
 
 export function Home(p: HomeProps) {
@@ -52,6 +57,11 @@ export function Home(p: HomeProps) {
     <section aria-label="Practice">
       <h1>Hi {p.displayName}</h1>
       <p className="prompt">what to practice now</p>
+      {p.activePack ? (
+        <p className="meta pack-posture">
+          <strong>{p.activePack.name}</strong> — {p.activePack.posture}
+        </p>
+      ) : null}
       <div role="group" aria-label="Time budget" className="seg">
         {BUDGET_PRESETS.map((m) => (
           <button
@@ -227,6 +237,37 @@ const STATE_LABELS: Record<string, string> = {
 };
 
 /**
+ * K-47: packs band goals with CEFR-style tokens (`A1`, `on-ramp`) because the
+ * engine is data-driven (ADR-0002); the tokens themselves are framework
+ * vocabulary, so the UI glosses them. The wording paraphrases the CEFR
+ * Companion Volume (2020) global scale and reproduces no restricted descriptor
+ * text. `on-ramp` is this project's pre-CEFR band and has no CEFR equivalent.
+ * An unknown token renders verbatim with its own gloss: a pack must not be
+ * able to hide a goal by using a band we have not met.
+ *
+ * No JLPT equivalence is claimed here — docs/14 forbids implying official JLPT
+ * preparation. The JLPT links its own scores to CEFR bands (pass N5 -> A1,
+ * pass N4 -> A2) for linguistic/reception skills only; that crosswalk and its
+ * source live in docs/assessment/RELEASE_COVERAGE.yaml.
+ */
+const BAND_HEADERS: Record<string, { label: string; gloss: string }> = {
+  "on-ramp": { label: "Getting started", gloss: "first words and routines, with support" },
+  a1: { label: "A1", gloss: "familiar everyday expressions, very simple exchanges" },
+  a2: { label: "A2", gloss: "familiar routines, everyday exchanges, simple past" },
+  b1: { label: "B1", gloss: "most everyday situations, opinions, plans, experiences" },
+  b2: { label: "B2", gloss: "complex text, argument, fluent interaction" },
+  c1: { label: "C1", gloss: "flexible, well-structured use of the language" },
+  c2: { label: "C2", gloss: "precise, nuanced, near-native use" },
+  other: { label: "Unlabelled", gloss: "this pack does not band these goals" },
+};
+
+function bandHeader(band: string): { label: string; gloss: string } {
+  return (
+    BAND_HEADERS[band.trim().toLowerCase()] ?? { label: band, gloss: `banded ${band} by the pack` }
+  );
+}
+
+/**
  * K-40: goal-level progress map. Goals, bands, prerequisites and
  * dimensions come from installed pack data only — never unit counts,
  * activity counts, dates, or streaks (ADR-0002).
@@ -243,7 +284,8 @@ export function GoalMap({ goals }: { goals: GoalCard[] }) {
       <p>
         <small>
           Each goal grows per modality from what you can actually do — reading does not imply
-          speaking. Goals open as their prerequisites are met.
+          speaking. Goals open as their prerequisites are met. Band names are reference levels, not
+          certificates or exam claims.
         </small>
       </p>
       {goals.length === 0 ? (
@@ -251,48 +293,49 @@ export function GoalMap({ goals }: { goals: GoalCard[] }) {
           No goals are available yet. Install a language pack to see its goal map.
         </p>
       ) : (
-        bands.map((band) => (
-          <section key={band} aria-label={`Band ${band}`}>
-            <h2>{band}</h2>
-            <ul className="goal-list">
-              {goals
-                .filter((g) => (g.band ?? "other") === band)
-                .map((g) => (
-                  <li key={g.id} data-locked={g.locked ? "yes" : "no"}>
-                    <strong>{g.description}</strong>
-                    {g.locked ? (
-                      <span className="badge">locked</span>
-                    ) : (
-                      <span className="badge badge--open">open</span>
-                    )}
-                    {g.review_status === "draft" || g.review_status === "review-needed" ? (
-                      <span className="badge">draft content</span>
-                    ) : null}
-                    <ul className="goal-dims">
-                      {g.dimensions.map((d) => (
-                        <li key={d.modality}>
-                          <span className="meta">{d.modality}</span>{" "}
-                          <span data-state={d.state}>{STATE_LABELS[d.state] ?? d.state}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    {g.locked && (
-                      <p className="meta">
-                        Grows with:{" "}
-                        {g.prerequisites
-                          .filter((p) => p.strength === "hard" && !p.satisfied)
-                          .map((p) => `${p.target} (${p.dimension} → ${p.required_state})`)
-                          .join(", ")}
-                      </p>
-                    )}
-                    {!g.assessed && (
-                      <p className="meta">No assessment defined for this goal yet.</p>
-                    )}
-                  </li>
-                ))}
-            </ul>
-          </section>
-        ))
+        bands.map((band) => {
+          const header = bandHeader(band);
+          return (
+            <section key={band} data-band={band} aria-label={`Band ${header.label}`}>
+              <h2>{header.label}</h2>
+              <p className="meta band-gloss">{header.gloss}</p>
+              <ul className="goal-list">
+                {goals
+                  .filter((g) => (g.band ?? "other") === band)
+                  .map((g) => (
+                    <li key={g.id} data-locked={g.locked ? "yes" : "no"}>
+                      <strong>{g.description}</strong>
+                      {g.locked ? (
+                        <span className="badge">locked</span>
+                      ) : (
+                        <span className="badge badge--open">open</span>
+                      )}
+                      <ul className="goal-dims">
+                        {g.dimensions.map((d) => (
+                          <li key={d.modality}>
+                            <span className="meta">{d.modality}</span>{" "}
+                            <span data-state={d.state}>{STATE_LABELS[d.state] ?? d.state}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      {g.locked && (
+                        <p className="meta">
+                          Grows with:{" "}
+                          {g.prerequisites
+                            .filter((p) => p.strength === "hard" && !p.satisfied)
+                            .map((p) => `${p.target} (${p.dimension} → ${p.required_state})`)
+                            .join(", ")}
+                        </p>
+                      )}
+                      {!g.assessed && (
+                        <p className="meta">No assessment defined for this goal yet.</p>
+                      )}
+                    </li>
+                  ))}
+              </ul>
+            </section>
+          );
+        })
       )}
     </section>
   );

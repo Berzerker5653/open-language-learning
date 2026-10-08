@@ -46,6 +46,28 @@ describe("home", () => {
     expect(html).toContain("about 2 minutes");
   });
 
+  it("names the active pack once with its posture statement", () => {
+    const html = renderToStaticMarkup(
+      <Home
+        displayName="Hunter"
+        plan={plan}
+        activeBudget={5}
+        onBudget={() => {}}
+        activePack={{
+          name: "Japanese Reference Pack (Draft)",
+          posture: "AI-generated content · not human-reviewed",
+        }}
+      />,
+    );
+    expect(html).toContain("Japanese Reference Pack (Draft)");
+    expect(html).toContain("AI-generated content · not human-reviewed");
+    // Without loaded pack data the header is absent: nothing is claimed.
+    const bare = renderToStaticMarkup(
+      <Home displayName="Hunter" plan={plan} activeBudget={5} onBudget={() => {}} />,
+    );
+    expect(bare).not.toContain("AI-generated content");
+  });
+
   it("contains no streak or attendance mechanics", () => {
     const html = renderToStaticMarkup(
       <Home displayName="Hunter" plan={plan} activeBudget={5} onBudget={() => {}} />,
@@ -193,13 +215,45 @@ describe("goal map", () => {
       />,
     );
     expect(html).toContain("Recognize hiragana chart symbols");
-    expect(html).toContain("on-ramp");
-    expect(html).toContain("a1");
+    // K-47: the pack's band token stays on the DOM as data, while the
+    // heading and gloss are human copy.
+    expect(html).toContain('data-band="on-ramp"');
+    expect(html).toContain("Getting started");
+    expect(html).toContain('data-band="a1"');
+    expect(html).toContain("familiar everyday expressions");
+    expect(html).toContain("Band names are reference levels, not certificates");
     expect(html).toContain("supported");
     expect(html).toContain("not started");
     expect(html).toContain("locked");
     expect(html).toContain("ja.orth.hira.a (comprehension-reading → independent)");
-    expect(html).toContain("draft content");
+    // Owner 2026-10-07: per-item draft badges are retired; posture is
+    // stated once at pack level, never per goal.
+    expect(html).not.toContain("draft content");
+  });
+
+  it("never drops a goal over an unrecognised band", () => {
+    const goal = (band: string | null) => ({
+      pack_id: "org.openlanguage.ja-jp.reference",
+      id: `ja.goal.demo.${band ?? "none"}`,
+      description: `Goal for band ${band ?? "none"}.`,
+      band,
+      review_status: "draft",
+      modalities: ["reading"],
+      assessed: true,
+      locked: false,
+      prerequisites: [],
+      dimensions: [{ modality: "reading", state: "unseen", exemplar: null }],
+    });
+    const html = renderToStaticMarkup(<GoalMap goals={[goal("novice"), goal(null), goal("A2")]} />);
+    // Unknown tokens are the pack's vocabulary: shown verbatim, not hidden.
+    expect(html).toContain('data-band="novice"');
+    expect(html).toContain("banded novice by the pack");
+    expect(html).toContain("Goal for band novice.");
+    // Case-insensitive ladder lookup, and bandless goals still render.
+    expect(html).toContain('data-band="A2"');
+    expect(html).toContain("familiar routines");
+    expect(html).toContain('data-band="other"');
+    expect(html).toContain("Unlabelled");
   });
 
   it("is honest when no pack goals exist", () => {

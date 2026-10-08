@@ -127,6 +127,31 @@ const SPEECH_MODEL_LABELS: Record<string, string> = {
   "org.openlanguage.speech.whisper-ggml-small": "Whisper Small — largest download and memory",
 };
 
+/// Owner 2026-10-07: per-item draft badges are retired; every pack is
+/// stated AI-generated, once, at pack level. Derived from the pack's
+/// own review-posture tallies so the statement stays truthful if items
+/// later carry `validated`/`verified` records — and it never claims a
+/// review those records do not show.
+export function packPosture(postures: { posture: string; count: number }[]): string {
+  const REVIEWED = new Set(["validated", "verified"]);
+  let reviewed = 0;
+  let total = 0;
+  for (const r of postures) {
+    total += r.count;
+    if (REVIEWED.has(r.posture)) reviewed += r.count;
+  }
+  if (total === 0 || reviewed === 0) return "AI-generated content · not human-reviewed";
+  if (reviewed < total) return "AI-generated content · not fully human-reviewed";
+  return "AI-generated content · every item carries a review record";
+}
+
+/// Relabel the posture words in the claim tallies: `draft` is now the
+/// pack's honest self-description, `review-needed` its queue state.
+const POSTURE_LABELS: Record<string, string> = {
+  draft: "AI-generated, unreviewed",
+  "review-needed": "awaiting review",
+};
+
 // K-46: the recommended speech model is detected at runtime from this
 // device (PERF-001 tiers in docs/performance/BUDGETS.yaml), never a
 // static constant. The shipped pronunciation feature scores the same
@@ -174,22 +199,28 @@ export function LanguagePanel(p: LanguagePanelProps) {
         <p className="empty">No packs installed yet.</p>
       ) : (
         <ul className="pack-list">
-          {p.installed.map((i) => (
-            <li key={i.pack_id} data-active={p.activeIds.includes(i.pack_id) ? "yes" : "no"}>
-              {i.display_name} ({i.locale}) — v{i.version}, {i.trust_state}
-              {p.activeIds.includes(i.pack_id) ? (
-                <span className="badge badge--active">learning this language</span>
-              ) : (
-                <button
-                  type="button"
-                  className="btn btn--quiet"
-                  onClick={() => p.onSwitch(i.pack_id)}
-                >
-                  Learn this
-                </button>
-              )}
-            </li>
-          ))}
+          {p.installed.map((i) => {
+            const claims = p.claims?.find((x) => x.pack_id === i.pack_id);
+            return (
+              <li key={i.pack_id} data-active={p.activeIds.includes(i.pack_id) ? "yes" : "no"}>
+                {i.display_name} ({i.locale}) — v{i.version}, {i.trust_state}
+                {p.activeIds.includes(i.pack_id) ? (
+                  <span className="badge badge--active">learning this language</span>
+                ) : (
+                  <button
+                    type="button"
+                    className="btn btn--quiet"
+                    onClick={() => p.onSwitch(i.pack_id)}
+                  >
+                    Learn this
+                  </button>
+                )}
+                {claims ? (
+                  <p className="meta pack-posture">{packPosture(claims.postures)}</p>
+                ) : null}
+              </li>
+            );
+          })}
         </ul>
       )}
 
@@ -221,7 +252,7 @@ export function LanguagePanel(p: LanguagePanelProps) {
               <ul className="meta-list">
                 {c.postures.map((r) => (
                   <li key={`${r.kind}:${r.posture}`}>
-                    {r.kind}: {r.count} {r.posture}
+                    {r.kind}: {r.count} {POSTURE_LABELS[r.posture] ?? r.posture}
                   </li>
                 ))}
               </ul>

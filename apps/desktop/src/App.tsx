@@ -21,6 +21,7 @@ import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./
 import { DictationPractice, type DictationResult, type DictationSentence } from "./dictation";
 import {
   LanguagePanel,
+  packPosture,
   type CatalogEntry,
   type InstalledPack,
   type PackClaims,
@@ -358,11 +359,15 @@ export function App() {
 
   const inv = detectInvoke();
 
-  async function refreshLanguages() {
+  // `pid` lets the resume/finish flows prime the Home active-pack
+  // header before the Languages route has been opened (the state
+  // profileId is not yet visible to this closure there).
+  async function refreshLanguages(pid?: string) {
     if (!inv) return;
     setInstalled((await inv("installed_packs")) as InstalledPack[]);
     setClaims((await inv("pack_claims")) as PackClaims[]);
-    if (profileId) setActiveIds((await inv("active_pack", { profileId })) as string[]);
+    const active = pid ?? profileId;
+    if (active) setActiveIds((await inv("active_pack", { profileId: active })) as string[]);
     const c = (await inv("catalog_packs")) as { entries: CatalogEntry[]; status: string };
     setCatalog(c.entries);
     setCatalogStatus(c.status);
@@ -516,6 +521,7 @@ export function App() {
         const envs = (await inv("world_state", { profileId })) as WorldEnvironment[];
         setEnvironments(envs);
         setDisplay((await inv("display_settings", { profileId })) as DisplaySettingsView);
+        void refreshLanguages(profileId).catch(() => {});
       } catch (e) {
         setOnboardError(`Setup could not be completed: ${String(e)}`);
         return;
@@ -542,6 +548,7 @@ export function App() {
       const envs = (await inv("world_state", { profileId: p.id })) as WorldEnvironment[];
       setEnvironments(envs);
       setDisplay((await inv("display_settings", { profileId: p.id })) as DisplaySettingsView);
+      void refreshLanguages(p.id).catch(() => {});
       setStep("done");
     } catch (e) {
       setOnboardError(`Could not resume this profile: ${String(e)}`);
@@ -1474,6 +1481,18 @@ export function App() {
     );
   }
 
+  // Owner 2026-10-07: one pack-level posture statement, derived from
+  // the active pack's own review-posture tallies, shown wherever the
+  // pack is named. Null (no claim) until installed/claims data loads.
+  const activeClaims = claims?.find((c) => c.pack_id === activeIds[0]);
+  const activePack =
+    activeIds[0] && activeClaims
+      ? {
+          name: installed.find((i) => i.pack_id === activeIds[0])?.display_name ?? activeIds[0],
+          posture: packPosture(activeClaims.postures),
+        }
+      : null;
+
   return (
     <AppShell
       productName="Open Language Learning Platform"
@@ -1711,14 +1730,6 @@ export function App() {
             Read along at your level. Tapping a sentence plays its audio and looks up the words from
             your pack that appear in it. Reading is formative: nothing is scored or saved.
           </p>
-          {storyActive &&
-          storyActive.status !== "validated" &&
-          storyActive.status !== "verified" ? (
-            <p className="meta">
-              <span className="badge">draft content</span> This story is AI-drafted and awaiting
-              human review.
-            </p>
-          ) : null}
           {storyError && (
             <p role="alert" className="alert">
               {storyError}
@@ -1737,7 +1748,6 @@ export function App() {
                     onClick={() => void openStory(s.id)}
                   >
                     {s.title} ({s.sentence_count})
-                    {s.status !== "validated" && s.status !== "verified" ? " (draft)" : ""}
                   </button>
                 ))}
               </div>
@@ -1990,7 +2000,7 @@ export function App() {
                   {kanjiActive.mnemonic ? (
                     <>
                       {" — "}
-                      <em>{kanjiActive.mnemonic}</em> (story status: {kanjiActive.status})
+                      <em>{kanjiActive.mnemonic}</em>
                     </>
                   ) : null}
                 </small>
@@ -2016,9 +2026,6 @@ export function App() {
                       {(c.meaning_due ?? c.reading_due)
                         ? `due ${c.meaning_due ?? c.reading_due}`
                         : "new"}
-                      {c.status !== "validated" && c.status !== "verified" ? (
-                        <span className="badge">draft</span>
-                      ) : null}
                     </small>
                   </button>
                 </li>
@@ -2155,6 +2162,7 @@ export function App() {
       ) : (
         <Home
           displayName={displayName}
+          activePack={activePack}
           plan={plan}
           activeBudget={budget}
           onBudget={(m) => void changeBudget(m)}
