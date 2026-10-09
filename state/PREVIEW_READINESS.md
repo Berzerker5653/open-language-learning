@@ -54,16 +54,41 @@ desktop smoke, and validator runs recorded in
 ## For the owner's hands-on pass (O-06, 2026-10-08)
 
 Build and run: `scripts/build-catalog.sh` (regenerates pack audio, then the pack
-archives) followed by `cargo tauri dev`. A quick automated sanity walk first:
-`./scripts/smoke-desktop.sh` → `SMOKE OK (26 routes walked)` across 13 routes.
+archives) followed by `npx tauri dev` from `apps/desktop` (or
+`./scripts/launch-preview.sh`, which also starts the vite dev server it needs).
+A quick automated sanity walk first: `./scripts/smoke-desktop.sh` →
+`SMOKE OK (25 routes walked)` across 13 routes.
 Shell note: the helper scripts are bash, and `source scripts/tauri-env.sh` fails
 outright in fish — `scripts/tauri-env.fish` is the equivalent (running a script
 as a program is fine from any shell; only `source` is the problem).
 
+CLI note: `cargo tauri …` does not work on the reference machine — no
+`tauri-cli` is installed into `~/.cargo/bin`, and `pnpm` (12.8.1) lives in
+`~/.npm-global/bin`, which the interactive fish PATH does not carry. Use the
+workspace CLI (`npx tauri`, 2.12.1) and `set -gx PATH $HOME/.npm-global/bin
+$PATH` in fish when a command shells out to `pnpm`.
+
+Rendering note: `tauri dev` and the bare binary now render on X11 +
+NVIDIA, because the desktop shell sets WebKitGTK's fallback renderer itself —
+the blank-window GBM failure is fixed (2026-10-08). `WEBKIT_DISABLE_DMABUF_RENDERER=0`
+puts the accelerated path back if someone wants to try it.
+
+One measured note on that fallback: it does paint in software, and the obvious
+suspicion — that this is why the biggest panel felt slow — was tested and
+refuted. Running the automated walkthrough with `WEBKIT_DISABLE_DMABUF_RENDERER=0`
+exported measured that tab at 484 ms instead of 465 ms. The lag was a cold
+process parsing the installed pack once; that parse is now memoized per pack
+version and primed at install and at startup, and the same tab first visit
+measured 63 ms, then 46 ms in the newest run. The last full walkthrough has no tab
+above 93 ms and no warm command above 60 ms, against a leave-and-return (no engine
+call) of ~80 ms, which is the harness's own floor. The fallback stays
+unconditional.
+
 For pronunciation feedback and dictation you need a build that **carries** the
 aligner, not `tauri dev`: `scripts/stage-aligner-sidecar.sh stage` (cmake +
-network), then `… overlay`, then `cargo tauri build --config
-dist/variants/tauri.aligner.json`. That build has already been made here on
+network), then `… overlay`, then `pnpm --filter @openlang/desktop exec tauri
+build --config dist/variants/tauri.aligner.json` from the repo root. That build
+has already been made here on
 2026-10-08: `target/release/bundle/deb/open-language-learning-platform_0.1.0_amd64.deb`
 (78.80 MiB) and `…_0.1.0_amd64.AppImage` (180.56 MiB), both carrying the payload,
 and the packaged binary reported `aligner:yes:bundled`. Installing one of those is
@@ -105,7 +130,53 @@ Surfaces that changed since the 2026-10-03 preview note, and what to check:
   sha256 `a3819b85c2e2cf4d4fa98d4d159e74feacb8d5b61321c1dababf2e69ca666577`. The
   version bump and republish are owner actions under O-05.
 
+### What changed after that pass (same day)
+
+Your report is filed at `state/evidence/O-06-2026-10-08/owner-report.md`. These
+are the fixes that came out of it, each with the thing to look at.
+
+- **Blank window** — fixed inside the app: the renderer fallback is set in code,
+  so launching from any shell (fish included, without sourcing anything) shows
+  the UI. The launch script no longer has to export it.
+- **Languages error (`missing required key scenarioId`)** — the scenario views
+  were renamed at the IPC boundary. The wire shape is pinned by a test, and the
+  headless walkthrough now clicks a real scenario (station directions); the
+  smoke run fails if that click does not come back.
+- **Mining the same word twice** — the second Mine keeps the original entry, so
+  its review history survives, and says so: "… is already in My words — kept the
+  original entry."
+- **Install feedback** — pack and model installs report the phase they have
+  entered: "Building the language pack from its source files — this can take a
+  minute", "Checking the download against what the catalog promised",
+  "Unpacking and checking the content…". Model downloads show a percentage
+  derived from completed bytes; pack installs show no number, because there is
+  no honest one to show. The line is announced to screen readers.
+- **Microphone choice** — Settings carries a microphone picker and stores the
+  device. If the webview answers with an empty list you are told so and can ask
+  again; if your chosen device cannot be used, recording falls back to the
+  system microphone and says that it did.
+- **Route switching is now measured** — every tab switch in the walkthrough is
+  timed and printed (`route timings:` in the smoke output). The two slowest on
+  this machine were Languages (≈480 ms) and Scenarios (≈575 ms), both from
+  re-parsing the installed pack on every command; both are now cached per
+  installed pack version.
+- **The greeting audio** — the shipped word asset was regenerated from the kana
+  the pack declares (`docs/provenance/ja-jp-greeting-audio-k65.md`), and the
+  validator now rejects a synthesized audio asset whose text does not match the
+  reading its row declares. Listening and shadowing speak the declared reading
+  rather than the written form.
+
 Things a human still has to decide or perform, and that no AI run can sign:
 the AT/screen-reader audit (O-03), the security/privacy review, qualified content
 review (REVIEW-001), the pack version bump/republish and public flip (O-05), and
-this pass itself (O-06).
+this pass itself (O-06). Two more are blocking work that is otherwise ready:
+
+- **ADR-0020 (derived guidance)** is still `Proposed`. Until it is accepted or
+  rejected, the guided first run and a language-neutral Home "Today" surface
+  (kanban K-66) cannot ship: the app would be choosing what a learner should do
+  next from rules the project has not agreed to.
+- **Whether to bake word audio into the pack.** There are ~3,920 lexicon entries
+  and the build is not reproducible byte-for-byte, so shipping their audio means
+  the pack grows from ~77 MB to several hundred MB and every asset needs a
+  manifest row tied to the reading it speaks. Current state: 693 built assets.
+  The size is the owner's call, not the build's.

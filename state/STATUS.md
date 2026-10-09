@@ -418,8 +418,8 @@ M2 — Local data and learner model
   — display-only, grading/scheduling never consult it. Smoke walkthrough now
   asserts `goal-map:75` over real IPC. Environment repairs: sysroot patch now
   covers the non-NUL injected-bundle path (webview was silently dead);
-  smoke script exports WEBKIT_DISABLE_DMABUF_RENDERER=1 and works without
-  pnpm (evidence: `state/evidence/K-40-K-42/`).
+  the smoke run relies on the same fallback renderer, which the binary now
+  forces itself, and works without pnpm (evidence: `state/evidence/K-40-K-42/`).
 
 
 - `K-41` — stress-mark visibility 2026-10-07: readings carrying U+0301
@@ -716,7 +716,7 @@ scope), the security/privacy review, qualified human content review (O-02, deleg
 to community PRs), and O-05 — shipping the audio-bearing pack is a version bump plus
 the owner's call on the repo going public.
 
-## 2026-10-08 (later) — the aligner runtime ships (D4, ADR-0019)
+## 2026-10-08 — the aligner runtime ships (D4, ADR-0019)
 
 Owner decision: bundle the whisper.cpp alignment runtime as a sidecar. A
 released desktop build used to contain the matcher and no ASR, so pronunciation
@@ -796,3 +796,176 @@ candidates from `env!("CARGO_MANIFEST_DIR")`, and the packaged binary embeds
 machine without this checkout an installed bundle would carry the aligner and no
 language at all. Recorded in docs/13 and as kanban `K-59`; not yet demonstrated on
 a clean machine, because there is no second Linux box to try it on.
+
+## 2026-10-08 — the blank desktop window is fixed inside the binary
+
+- Symptom: the bare `target/debug/lts-desktop` on the Gaming PC (X11 + NVIDIA
+  RTX 5090, driver 615.71.09, WebKitGTK 2.52.6 from
+  `~/.local/opt/tauri-sysroot`) printed
+  `Failed to create GBM buffer of size 1100x720: Invalid argument` twice on
+  stderr and the window stayed blank; screenshots before/after the fix (solid
+  white → onboarding UI).
+- Root cause: WebKitGTK 2.44+ paints through a DMABUF/GBM accelerated path; on
+  the proprietary NVIDIA driver, and on software/virtual GPUs (Xvfb has no
+  DRI3), GBM buffer allocation fails, WebKit logs that error and never draws.
+- Fix: `force_webkit_fallback_renderer()` runs as the first statement of
+  `run()` in `apps/desktop/src-tauri/src/lib.rs` and sets
+  `WEBKIT_DISABLE_DMABUF_RENDERER=1` unless the operator already set that
+  variable — `=0` is WebKitGTK's own re-enable switch back to the accelerated
+  path, measured, not assumed (`=0` leaves the accelerated path active, an
+  empty value disables it).
+- Coverage: the now-redundant `export WEBKIT_DISABLE_DMABUF_RENDERER=1` lines
+  in `scripts/launch-preview.sh`, `scripts/update-preview.sh` and
+  `scripts/smoke-desktop.sh` were removed, so an operator's own setting is
+  honoured instead of overridden.
+- Verification: unit test
+  `the_blank_window_workaround_forces_the_fallback_renderer_only_when_unset`;
+  the rebuilt debug binary run with the variable absent printed nothing and
+  `import -window` on it showed the onboarding UI (before: two GBM errors,
+  solid white); `./scripts/smoke-desktop.sh` → `SMOKE OK (25 routes walked)`
+  with no script-level export left, which is the Xvfb path the CI
+  `desktop-smoke` job depends on; and the escape hatch was checked on the fixed
+  binary — `WEBKIT_DISABLE_DMABUF_RENDERER=0` brings the two GBM errors back,
+  so the operator override really does reach WebKitGTK.
+- Not in the bundle built earlier the same day:
+  `target/release/bundle/deb/open-language-learning-platform_0.1.0_amd64/` came
+  from the 12:47 build, so an installed `.deb`/AppImage of that build still
+  needs the variable exported by hand — a re-run of
+  `npx tauri build -c dist/variants/tauri.aligner.json` is what carries the
+  fix into a package.
+
+## 2026-10-08 (latest) — the owner's hands-on pass (O-06): six fixes, and latency finally measured
+
+The owner ran the preview themselves and filed what broke and what felt wrong
+(`state/evidence/O-06-2026-10-08/owner-report.md`). Six cards came out of it;
+verification for all of them is in `state/evidence/O-06-2026-10-08/verification.md`.
+
+- **K-60 (hard error)** — the Languages route died with
+  `missing required key scenarioId`: eight `#[serde(rename_all = "kebab-case")]`
+  attributes on the scenario views renamed keys the frontend reads as
+  `scenario_id`. The attributes are gone (every other view in `lib.rs` is
+  snake_case; no consumer used the kebab keys) and a wire-shape test in
+  `scenarios.rs` pins it, because the failure was silent in CI and loud only in
+  a real window. The walkthrough now clicks a scenario row and presses Start,
+  and `scripts/smoke-desktop.sh` refuses a run without a `scenario-*` marker.
+- **K-61 (data integrity)** — mining a word twice created a second row and
+  orphaned the first one's SRS history. `add_mined` now returns
+  `{id, was_new}` via `INSERT … ON CONFLICT DO NOTHING` plus a change-count
+  discriminator (a pre-check would let two simultaneous Mine clicks race), the
+  original row id survives, and the UI says the word is already there.
+- **K-64** — Settings gained a microphone picker backed by the
+  `microphone-device` setting; device enumeration is bounded at 2 s and also
+  user-triggered (`#mic-detect`), because a WebKitGTK that never answers a
+  device query must not freeze a settings page. If the chosen device cannot be
+  opened, capture falls back to the system default **and says so** — only
+  `OverconstrainedError` triggers the fallback. Proven live by the
+  `mic-picker:present` marker.
+- **K-65 / K-65b (wrong pronunciation)** — the owner heard a wrong word for
+  こんにちは. The cause was the pack's own manifest row, not the app: the asset
+  was regenerated from the declared kana (`5893507c…`, 72,722 B, 1.514 s) and
+  `crates/langpack/src/audit.rs` now fails any `model-output` asset whose
+  manifest text does not tie to the declared reading. `speech_audio` lost its
+  caller-supplied `text` parameter entirely: the app resolves what to speak
+  from the content id, so no caller can hand the engine an unreadable string.
+  Retracted premise, measured the same day: all 3,920 ja-JP lexicon entries
+  have kana primary forms and none is kanji-primary, so the earlier "~419
+  entries without readings" figure was fabricated; the real gap is 8 contrast
+  items with no declared reading, logged for human review.
+- **K-67 (pack side)** — "teach me the script" is pack data: optional
+  `capabilities: [script-introduction]` on units, enforced by
+  `unit_capability_items_missing`, declared once by
+  `ja.unit.kana-hiragana-vowels-ko`; the engine's `"hiragana"` string literal is
+  gone. ADR-0021 is `Proposed`; the app surface that keys on it waits on
+  ADR-0020, which is the owner's call.
+- **K-62 (silence read as a hang)** — installs now report the stage they have
+  entered on one event channel (`engine-progress`), with `percent` sent only for
+  model files whose sizes the catalog pins. The silent wrappers were deleted
+  rather than left as shims, and the walkthrough asserts the renderer really
+  heard `prepare`, `install` and `record`.
+- **K-63 (latency)** — instrumented before being touched. Warm command costs
+  `pack_claims 431 ms` and `scenario_list 550 ms` fell to **1 ms** and **11 ms**
+  once the parsed pack and activity runtime were cached per immutable version
+  directory (`packcache.rs`) and the claim tallies were memoised per pack root
+  with `trust_state` deliberately excluded; the Scenarios tab went 575 ms →
+  43 ms. The Languages tab did not move (480 → 465 ms), which is the useful
+  part: with the commands at ~1 ms and a single batched state commit, the rest
+  is renderer work, and that is now K-63-follow with a number attached rather
+  than a feeling. Instrumentation also caught that StrictMode was running the
+  entire walkthrough twice — the 77 MB pack was being installed twice per smoke
+  run — halving the run from 103 s to 44 s.
+- **K-63b (the lag chased to the end)** — the same markers then separated the
+  last slow tab. The wrong guess first, measured instead of argued: the blanket
+  `WEBKIT_DISABLE_DMABUF_RENDERER=1` from the blank-window fix was blamed for the
+  Languages tab's ~465 ms, and re-running the walkthrough with that variable
+  exported to `0` gave **484 ms** — the fallback stays as it is. Leaving the tab
+  and coming back gave **81 ms against 460 ms**: a cold process paying for one
+  parse, not painting. So the lexicon parse is memoized per immutable version
+  root (`LEXICON_CACHE`), and installing a pack — or starting the app with packs
+  already installed, on a background thread while the window comes up — primes
+  the parsed pack, activity runtime, lexicon and claim tallies. Result: Languages
+  first visit **460 → 63 ms**, `home_state` **249 → 62 ms**, every warm command
+  1-12 ms. That work also retired two tests that wrote rows into an
+  already-installed pack and read them back: an installed version is immutable by
+  contract, the caches now depend on it, and building the pack with the content
+  joined beforehand immediately rejected a demo contrast row that was missing
+  `feature_id`. The same method then removed the two remaining parse-per-call
+  costs: curriculum units and assessments — ja-JP declares 774 unit YAML files —
+  are parsed once per version root, taking `placement_plan` **421 → 1 ms** and the
+  Placement tab **447 → 45 ms**; and the pack-derived writing target list is built
+  once per root, taking `writing_task` **99 → 1 ms** and the Writing tab
+  **126 → 46 ms**. One attempt paid nothing and was reverted rather than kept: a
+  memo of each pack directory's raw text moved no measured number at all, which is
+  the proof that the cost was JSON parsing per call and not file reading.
+
+Not closed by this tranche: `home_state` and `practice_plan` still cost ~60 ms
+each, which is store reads plus plan assembly rather than pack parsing, and every
+tab now sits at or below the walkthrough's own navigation floor — a
+leave-and-return with no engine call measures ~80 ms. Settings
+scroll and the record-stop delay remain unmeasured because no headless driver
+can produce them; the model-install progress line is pinned by test only, since
+this environment has no downloadable payload; and whether ~3,920 word audio
+assets get baked into the pack (pack ~77 MB → several hundred MB) is an owner
+decision, as is ADR-0020, which is what K-66 waits on. Nothing was committed in
+this session: the working tree is HEAD `49197b1` plus all of the above.
+
+---
+
+## 2026-10-08 (latest) — K-59/K-66/K-68: the bundle carries content, the first run is guided, every word has audio
+
+Three cards the owner unblocked with the 2026-10-08 decisions (ADR-0018/0020/0021
+acceptances, the merged resources-overlay route, bake-all-audio). Full rows with
+evidence are in `tasks/KANBAN.md`; the parts worth remembering:
+
+- **K-68** baked all 4,613 pack audio assets (3,919 new, 352,027,402 B; manifest
+  committed, wavs gitignored). The pack now legitimately exceeds the old
+  256 MiB archive ceiling — `MAX_TOTAL_BYTES` went to 1 GiB with the reasoning
+  in the code comment — and the smoke walkthrough's 90 s watchdog was raised to
+  240 s after measuring a healthy run at ~135 s. The bake also exposed a real
+  regression the pack-size change had caused silently: the plan path re-parsed
+  the media manifest per compose (`practice_plan` ~60→141 ms); media ids are now
+  memoized per immutable version root and warmed at install (markers back to
+  73/83 ms).
+- **K-59** ships the reference pack inside the bundle via
+  `scripts/stage-pack-bundle.sh` (validate-install gate, `BUNDLED.yaml`
+  sidecar, resources overlay). Extracting the first deb caught the overlay
+  mapping pack dirs but **not** the sidecar — the fail-closed loader would have
+  seen no packs on any other machine. Fixed and pinned (test 5c, 15 checks);
+  the rebuilt deb (337.55 MiB) verifiably contains the sidecar and all 4,613
+  wavs. Installing it on a second machine is an owner step.
+- **K-66** built the guided first run from pack data alone: plan `kind`,
+  goal-map ordering (band → unit → content, content-id keyed, locked goals
+  skipped), `next_goal`, and `first_run_steps` (≤3: the declared
+  `script-introduction` unit's first content in its own `teaching_order`, then
+  plan introductions, then the first review). Home renders the groupings and
+  abstains honestly when the pack declares nothing. Smoke asserts
+  `fresh-plan:5`/`first-run:3`; docs/03 §8 states that a proposed item is not
+  evidence.
+
+Verification: `cargo test --workspace` green; `lts-desktop` lib 101/101 (with
+the baked pack through the production install path); vitest 150, `tsc --noEmit`
+clean, `test-stage-pack-bundle.sh` 15 checks, `smoke-desktop.sh` SMOKE OK over
+13 routes. One existing test deleted a wav from an installed version directory
+to prove abstention — rewritten to the never-declared-sentence case, since an
+installed version is immutable by contract and the new caches rest on that.
+Everything above lands as task-scoped commits on `main` (2026-10-08); no
+remote push — the owner keeps distribution private until they say otherwise.

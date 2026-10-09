@@ -12,7 +12,6 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 source scripts/tauri-env.sh
-export WEBKIT_DISABLE_DMABUF_RENDERER=1
 export DISPLAY="${DISPLAY:-:0}"
 
 BRANCH="${LTS_PREVIEW_BRANCH:-main}"
