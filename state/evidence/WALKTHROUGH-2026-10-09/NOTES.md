@@ -51,17 +51,22 @@ Template per item:
 - Did: started the suggested activities
 - Expected: only the letters introduced so far, one alphabet at a time;
   words should only use letters already taught
-- Saw: `a`, `e`, `o`… then `a` AGAIN but in katakana (same sound, second
-  alphabet, same day), then a word containing kana the learner has never
-  been shown
+- Saw: `a`, `i`, `u` (hiragana) — note it stopped at three, not even
+  e/o yet — then `a` AGAIN but in katakana: the same sound in the
+  second alphabet on the same day — then `パン` ("pan / bread"), a
+  word whose every kana is unlearned (`パ` = ha+handakuten, never
+  taught; `ン` never taught)
 - Owner suggestion: teach all of hiragana first and confirm the person
   can use/know it, then all of katakana the same way, and sprinkle in
   words that use only the letters learned so far, along the way
-- Candidate severity: pedagogy correctness — the first five minutes of
-  the product teach in an order that confuses alphabets; the pack's
-  unit order is hiragana-then-katakana (ADR-0018) and the vocabulary
-  selection does not filter by learned kana, so this is a selection/
-  gating bug, not a content-ordering bug
+- Evidence: owner screenshot archived here as `W-02-home-today.png`
+- Candidate severity: pedagogy correctness — the first five minutes
+  mix alphabets and show a word the learner cannot read. Mechanism
+  found while logging: the first-look word set seeds `パン` from the
+  lexicon immediately (`languages/ja-JP/lexicon/food-drink.jsonl`,
+  also in `global.jsonl`); katakana units are present in the day's
+  selection alongside hiragana; ADR-0018 unit order is
+  hiragana-then-katakana but no learned-set gate exists in selection
 - KANBAN card: K-70
 
 ### W-03 — Research how other language programs do "today's work" and onboarding  [suggestion]
