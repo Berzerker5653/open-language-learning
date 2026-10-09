@@ -139,8 +139,15 @@ local `~/.wk41` build, whose helper-process paths are baked in — with
 those two libs removed in favor of the system WebKit the app rendered
 and the preload-trace proof fired: the packaged binary opened
 `packs/BUNDLED.yaml` from its own resources (fd 33, no abstain path).
-That AppImage defect is card K-59-follow. ADR-0015 platform status for
-the variant still awaits a human runtime report.
+That AppImage defect (card K-59-follow) is now fixed by a finalize step:
+`scripts/finalize-appimage.sh` drops those two libraries from the AppDir
+and repacks via linuxdeploy with `--exclude-library`, so the AppImage
+uses the target's system webkit2gtk-4.1 — the same runtime dependency
+the deb has always declared. Re-run on 2026-10-09: 403,438,072 B
+AppImage, zero bundled WebKit files, sidecar and 356 MB pack payload
+intact; regression pinned by `scripts/test-finalize-appimage.sh`.
+ADR-0015 platform status for the variant still awaits a human runtime
+report.
 
 The payload is `apps/desktop/sidecar/<platform>/`: `bin/`
 (whisper-cli plus libwhisper.so.1, libggml.so.0, libggml-cpu.so.0,

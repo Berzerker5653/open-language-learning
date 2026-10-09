@@ -57,3 +57,16 @@ WebKit 2.52.6.
 Test directory `~/lts-bundle-test` (AppImage, extraction, shim, data
 dirs, screenshots) was removed from the host afterwards; nothing of the
 repo was modified there and nothing was pushed anywhere.
+
+## Resolution (same day): K-59-follow closed
+
+`scripts/finalize-appimage.sh` removes the two WebKit libs from the
+AppDir and repacks with `linuxdeploy --exclude-library` (tauri-cli
+2.12.1 exposes no exclusion knob). Repacked image: 403,438,072 B, zero
+WebKit files, sidecar + 356 MB pack payload intact. Reran it on
+Omarchy unmodified (no lib surgery this time): the app started, and the
+same open-shim caught `packs/BUNDLED.yaml -> 33` with no spawn errors —
+the AppImage now resolves WebKit from the system, like the deb does.
+Regression: `scripts/test-finalize-appimage.sh` (fixture binary links
+the real sysroot WebKit; asserts the repack removes it and cannot
+re-add it; skips cleanly without linuxdeploy/gcc).

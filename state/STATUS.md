@@ -989,3 +989,17 @@ and the install leg were not exercised remotely (no pointer injection
 without root); ADR-0015 platform status still awaits a human run. Full
 write-up with screenshots: `state/evidence/K59-omarchy-2026-10-09/`.
 The test directory on Omarchy was removed afterwards.
+
+K-59-follow closed the same day: `scripts/finalize-appimage.sh` drops
+`libwebkit2gtk-4.1`/`libjavascriptcoregtk-4.1` from the AppDir and
+repacks via linuxdeploy `--exclude-library` (tauri-cli 2.12.1 exposes no
+exclusion knob; the AppDir survives the build, so the recipe is
+scripted). The repacked image (403,438,072 B, zero WebKit files, sidecar
+and 356 MB pack payload intact) ran on Omarchy unmodified — renders,
+and the open-trace again caught `packs/BUNDLED.yaml` → fd 33. So the
+AppImage now carries every payload but WebKit, exactly like the deb:
+the target's system webkit2gtk-4.1 is the documented runtime dependency.
+Regression pinned by `scripts/test-finalize-appimage.sh` (fixture links
+the real sysroot WebKit, asserts the repack cannot re-add it). The
+wizard click-through/install leg and ADR-0015 platform status remain
+human-run work.
