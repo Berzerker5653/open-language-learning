@@ -311,6 +311,9 @@ impl Pack {
         // `defined`: every id seen anywhere, for reference resolution.
         let mut checked: HashMap<String, (String, String)> = HashMap::new();
         let mut defined: HashSet<String> = HashSet::new();
+        // K-70/ADR-0022: ids of declared units — the targets a `requires_unit`
+        // phase gate may name.
+        let mut unit_ids: HashSet<String> = HashSet::new();
         let target_locale = self
             .manifest
             .as_ref()
@@ -347,6 +350,9 @@ impl Pack {
             }
             match inst.schema {
                 "unit" => {
+                    if let Some(id) = inst.value.get("id").and_then(Value::as_str) {
+                        unit_ids.insert(id.to_string());
+                    }
                     for (i, act) in array(&inst.value, "activities") {
                         if let Some(id) = act.get("id").and_then(Value::as_str) {
                             defined.insert(id.to_string());
@@ -682,6 +688,76 @@ impl Pack {
             }
         }
 
+        // --- unit phase gates (K-70/ADR-0022) ---
+        // `requires_unit: [{unit, state}]` defers NEW selection of a unit's
+        // items until every content item the named unit schedules has reached
+        // at least `state`. An entry naming something that is not a declared
+        // unit, naming the unit itself, or closing a cycle of gates locks the
+        // gated content forever, so those are Errors in every mode — the same
+        // posture as ADR-0018's unlock rules: no draft workflow needs them,
+        // and a permanently-locked gate can never pass. Dangling ids still
+        // travel the ordinary unresolved_reference path.
+        let mut gate_edges: HashMap<&str, Vec<&str>> = HashMap::new();
+        for inst in self.instances.iter().filter(|i| i.schema == "unit") {
+            let Some(id) = inst.value.get("id").and_then(Value::as_str) else {
+                continue;
+            };
+            for (i, gate) in array(&inst.value, "requires_unit") {
+                let Some(target) = gate.get("unit").and_then(Value::as_str) else {
+                    continue;
+                };
+                if !defined.contains(target) {
+                    continue; // already reported by reference resolution
+                }
+                if target == id {
+                    diags.push(Diagnostic::new(
+                        &inst.file,
+                        format!("{}/requires_unit/{i}/unit", inst.pointer),
+                        "unit_gate_self_reference",
+                        format!(
+                            "unit {id:?} gates its NEW material on itself: its content could never be introduced"
+                        ),
+                        Severity::Error,
+                    ));
+                    continue;
+                }
+                if !unit_ids.contains(target) {
+                    diags.push(Diagnostic::new(
+                        &inst.file,
+                        format!("{}/requires_unit/{i}/unit", inst.pointer),
+                        "unit_gate_not_a_unit",
+                        format!(
+                            "unit {id:?} gates its NEW material on {target:?}, which this pack declares but which is not a unit"
+                        ),
+                        Severity::Error,
+                    ));
+                    continue;
+                }
+                gate_edges.entry(id).or_default().push(target);
+            }
+        }
+        // A gate cycle locks every unit on it forever: each waits on content
+        // that can never be introduced, so none of them can ever seed.
+        for inst in self.instances.iter().filter(|i| i.schema == "unit") {
+            let Some(id) = inst.value.get("id").and_then(Value::as_str) else {
+                continue;
+            };
+            let part_of_cycle = gate_edges
+                .get(id)
+                .is_some_and(|targets| targets.iter().any(|t| gate_reaches(&gate_edges, t, id)));
+            if part_of_cycle {
+                diags.push(Diagnostic::new(
+                    &inst.file,
+                    format!("{}/requires_unit", inst.pointer),
+                    "unit_gate_cycle",
+                    format!(
+                        "unit {id:?} takes part in a requires_unit gate cycle: the units in a cycle wait on each other forever and can never introduce NEW material"
+                    ),
+                    Severity::Error,
+                ));
+            }
+        }
+
         // --- cross-file curriculum graph (PACK-002) ---
         let graph = crate::graph::build(&self.instances, &self.structural, v2);
         diags.extend(crate::graph::check(&graph));
@@ -989,6 +1065,25 @@ fn array<'a>(value: &'a Value, field: &str) -> Vec<(usize, &'a Value)> {
         .unwrap_or_default()
 }
 
+/// K-70/ADR-0022: reachability along `requires_unit` gate edges, for the
+/// cycle check. Edges only exist from gated units, so every unit in a cycle
+/// is a key in `edges`.
+fn gate_reaches(edges: &HashMap<&str, Vec<&str>>, from: &str, target: &str) -> bool {
+    let mut stack = vec![from];
+    let mut seen: HashSet<&str> = HashSet::new();
+    while let Some(node) = stack.pop() {
+        if node == target {
+            return true;
+        }
+        if seen.insert(node) {
+            if let Some(next) = edges.get(node) {
+                stack.extend(next.iter().copied());
+            }
+        }
+    }
+    false
+}
+
 /// Walk a JSON document collecting every string `id` field with its path.
 fn collect_ids(doc: &Value, path: &mut Vec<String>, visit: &mut dyn FnMut(&str, &str)) {
     match doc {
@@ -1115,6 +1210,16 @@ impl RefCollector<'_> {
                         "/goal_ids".into(),
                         value.get("goal_ids").and_then(Value::as_array),
                         "goal_ids",
+                    );
+                }
+                // K-70/ADR-0022: phase-gate targets are references like any
+                // other unit pointer, so a dangling id reports through the
+                // ordinary unresolved_reference path.
+                for (i, gate) in array(value, "requires_unit") {
+                    self.push(
+                        format!("/requires_unit/{i}/unit"),
+                        gate.get("unit"),
+                        "requires_unit",
                     );
                 }
                 for (i, act) in array(value, "activities") {

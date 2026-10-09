@@ -4,6 +4,21 @@ goal_id: ja.goal.onramp.kana-katakana
 title: 'Katakana: the full basic set'
 summary: Katakana chart; loanword spellings appear in later units.
 estimated_minutes: 12
+# K-70 (ADR-0022): phase gate declared as pack data — every content item of
+# every hiragana chart unit must be at least `introduced` before any katakana
+# item may be selected as NEW material. The engine enforces the gate; it
+# names no script.
+requires_unit:
+- unit: ja.unit.kana-hiragana-vowels-ko
+  state: introduced
+- unit: ja.unit.kana-hiragana-stn
+  state: introduced
+- unit: ja.unit.kana-hiragana-hmyrw
+  state: introduced
+- unit: ja.unit.kana-hiragana-dakuten
+  state: introduced
+- unit: ja.unit.kana-hiragana-youon
+  state: introduced
 generation_contract:
   allowed_vocab:
   - ja.orth.kata.a

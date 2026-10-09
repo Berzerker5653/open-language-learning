@@ -249,6 +249,23 @@ typo cannot silently disable the feature. A pack that declares no capabilities
 keeps its existing behavior: the app offers no script instruction for it,
 which is a supported state, not an error.
 
+A unit may also declare an optional `requires_unit` array (ADR-0022):
+`{unit: <unit id>, state: <masteryState>}` entries, at least one, all
+required (AND semantics). The unit's content becomes NEW material only when
+every content item the named unit references has derived state ≥ the named
+state — the pack-declared form of "advanced content requires prior units'
+items at Introduced or better" (`docs/03`). ja-JP gates the katakana chart
+behind all five hiragana chart units at `introduced`, so a learner meets the
+hiragana chart once, in the pack's order, before katakana-riding material
+appears; because a word's letters must each have been introduced (see the
+learned-kana rule in ADR-0022), the same unit order bounds which words can
+appear and when. The gate filters the NEW pool only; due reviews and
+already-introduced items keep scheduling normally. A gate that can never be
+satisfied — self-reference (`unit_gate_self_reference`), a target that is not
+a declared unit (`unit_gate_not_a_unit`), or a unit in a gate cycle
+(`unit_gate_cycle`) — is an error in every mode; a gate on an undeclared id
+follows the unresolved-reference rule.
+
 ## Speech profile
 
 The pack declares:

@@ -69,6 +69,21 @@
       "uniqueItems": true,
       "description": "K-67/ADR-0021: feature names this unit declares itself able to serve, from a closed list (not script names or file layout). A capability is a claim the app MAY surface for this unit, not an instruction to run: naming one causes nothing in the engine to execute. `script-introduction` claims the unit's items are the writing-system set a new learner is introduced to first. A claim without content is meaningless, so a unit declaring capabilities must reference at least one content item (`unit_capability_items_missing`). A pack that omits this field keeps existing behavior.",
       "items": { "enum": ["script-introduction"] }
+    },
+    "requires_unit": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "K-70/ADR-0022: unit-level phase gate. Every entry must hold before this unit's content items may be selected as NEW material: every content item scheduled by the named unit must have derived mastery at least `state` (in any dimension). Gates combine with AND; an entry naming a unit that is not declared by this pack, naming itself, or closing a gate cycle makes the unit permanently unreachable, so those are validation errors. This is selection order as pack data — the engine matches no script or subject names — and reviews of already-introduced items are never affected. Absence of the field keeps existing behavior.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["unit", "state"],
+        "properties": {
+          "unit": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+          "state": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/masteryState" }
+        }
+      }
     }
   }
 }

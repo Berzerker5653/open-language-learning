@@ -122,6 +122,13 @@ Author one lesson at a time:
 5. For AI-drafted lessons, declare the unit's `generation_contract`
    (allowed vocab/grammar, new-item budget, register, validation
    method); the validator then enforces the envelope the unit promised.
+6. When a lesson opens a new layer the learner has not met yet (a script
+   chart, a marked-letter series), declare its phase with `requires_unit`
+   (ADR-0022): `{unit: <unit id>, state: <masteryState>}` entries gate the
+   unit's content behind every content item of the named units reaching that
+   state. The engine applies it to the NEW pool only — due reviews keep
+   scheduling — and gates that can never pass (self-reference, a
+   non-unit target, a gate cycle) are validation errors in every mode.
 
 ## Chunking conventions (packs past A1)
 

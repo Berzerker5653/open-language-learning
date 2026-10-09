@@ -1512,11 +1512,262 @@ fn progression_items(
     Ok(items)
 }
 
+/// K-70 (ADR-0022): does one pack-declared phase gate currently hold? The
+/// gate names a unit and a minimum mastery state; it holds when that unit
+/// is declared and every content item it schedules has derived state at
+/// least the required one in some dimension. Fail-closed: an unknown target
+/// unit or an unparseable state locks the gated content — the pack validator
+/// refuses such packs at install, so this is the runtime defense against a
+/// hand-corrupted version directory, not a convenience.
+fn unit_gate_holds(
+    gate: &PackUnitGate,
+    units: &[PackUnit],
+    derived: &[lts_learner_model::DerivedMastery],
+) -> bool {
+    let Some(req) = parse_state(&gate.state) else {
+        return false;
+    };
+    let Some(target) = units.iter().find(|u| u.id == gate.unit) else {
+        return false;
+    };
+    target
+        .activities
+        .iter()
+        .flat_map(|a| a.content_refs.iter())
+        .all(|c| derived.iter().any(|d| &d.content_id == c && d.state >= req))
+}
+
+/// K-70 (ADR-0022): the content ids whose NEW selection this learner is
+/// currently locked out of: every item of every unit that declares
+/// `requires_unit` gates the learner has not yet passed. This filters only
+/// the NEW-material pool — reviews of already-introduced items are never
+/// touched here (a locked phase never hides what the learner already met).
+fn locked_new_content(
+    units: &[PackUnit],
+    derived: &[lts_learner_model::DerivedMastery],
+) -> std::collections::HashSet<String> {
+    let mut locked = std::collections::HashSet::new();
+    for unit in units {
+        if unit.requires_unit.is_empty()
+            || unit
+                .requires_unit
+                .iter()
+                .all(|g| unit_gate_holds(g, units, derived))
+        {
+            continue;
+        }
+        for act in &unit.activities {
+            locked.extend(act.content_refs.iter().cloned());
+        }
+    }
+    locked
+}
+
+/// K-70 (ADR-0022 §2): normalize one kana character for the learned-kana
+/// check. Dakuten/handakuten fold to the base kana (は learned ⇒ ぱ and パ
+/// both count); small kana fold to their full-size base (っ⇒つ, ゃ⇒や,
+/// ゅ⇒ゆ, ょ⇒よ); a katakana letter is otherwise the hiragana it
+/// transliterates (kanainic identity, the same equality the charts teach
+/// side by side). Two deliberate non-folds: the katakana moraic nasal ン
+/// does not fold to hiragana ん, and the long-vowel mark ー does not fold
+/// to anything — both must be declared by the pack and learned as
+/// themselves (a pack that never declares ー never seeds words
+/// containing it; that is honest, not a bug). The katakana middle dot is a
+/// word separator, never checked. Half-width forms are outside the rule —
+/// the reference pack never ships them. Returns None for characters this
+/// rule never constrains (kanji, latin, cyrillic, …): the filter only ever
+/// speaks about kana, which keeps it language-neutral.
+fn learned_kana_norm(c: char) -> Option<char> {
+    // Precomposed dakuten/handakuten → base kana (Unicode's own
+    // decompositions; the tables are the closed kana inventory, so no
+    // normalization crate is needed).
+    let base = match c {
+        'が' => 'か',
+        'ぎ' => 'き',
+        'ぐ' => 'く',
+        'げ' => 'け',
+        'ご' => 'こ',
+        'ざ' => 'さ',
+        'じ' => 'し',
+        'ず' => 'す',
+        'ぜ' => 'せ',
+        'ぞ' => 'そ',
+        'だ' => 'た',
+        'ぢ' => 'ち',
+        'づ' => 'つ',
+        'で' => 'て',
+        'ど' => 'と',
+        'ば' => 'は',
+        'ぱ' => 'は',
+        'び' => 'ひ',
+        'ぴ' => 'ひ',
+        'ぶ' => 'ふ',
+        'ぷ' => 'ふ',
+        'べ' => 'へ',
+        'ぺ' => 'へ',
+        'ぼ' => 'ほ',
+        'ぽ' => 'ほ',
+        'ゔ' => 'う',
+        'ガ' => 'カ',
+        'ギ' => 'キ',
+        'グ' => 'ク',
+        'ゲ' => 'ケ',
+        'ゴ' => 'コ',
+        'ザ' => 'サ',
+        'ジ' => 'シ',
+        'ズ' => 'ス',
+        'ゼ' => 'セ',
+        'ゾ' => 'ソ',
+        'ダ' => 'タ',
+        'ヂ' => 'チ',
+        'ヅ' => 'ツ',
+        'デ' => 'テ',
+        'ド' => 'ト',
+        'バ' => 'ハ',
+        'パ' => 'ハ',
+        'ビ' => 'ヒ',
+        'ピ' => 'ヒ',
+        'ブ' => 'フ',
+        'プ' => 'フ',
+        'ベ' => 'ヘ',
+        'ペ' => 'ヘ',
+        'ボ' => 'ホ',
+        'ポ' => 'ホ',
+        'ヴ' => 'ウ',
+        'ヷ' => 'ワ',
+        'ヸ' => 'ヰ',
+        'ヹ' => 'ヱ',
+        'ヺ' => 'ヲ',
+        _ => c,
+    };
+    // Small kana → full-size base, both blocks.
+    let full = match base {
+        'ぁ' => 'あ',
+        'ぃ' => 'い',
+        'ぅ' => 'う',
+        'ぇ' => 'え',
+        'ぉ' => 'お',
+        'っ' => 'つ',
+        'ゃ' => 'や',
+        'ゅ' => 'ゆ',
+        'ょ' => 'よ',
+        'ゕ' => 'か',
+        'ゖ' => 'け',
+        'ァ' => 'ア',
+        'ィ' => 'イ',
+        'ゥ' => 'ウ',
+        'ェ' => 'エ',
+        'ォ' => 'オ',
+        'ッ' => 'ツ',
+        'ャ' => 'ヤ',
+        'ュ' => 'ユ',
+        'ョ' => 'ヨ',
+        'ヵ' => 'カ',
+        'ヶ' => 'ケ',
+        'ヮ' => 'ワ',
+        _ => base,
+    };
+    // Kanainic identity: katakana letters ARE the hiragana they
+    // transliterate (U+30A1..=U+30F2 → −0x60). U+30F3 (ン) is excluded by
+    // design: it must be learned as itself.
+    let out = if ('\u{30A1}'..='\u{30F2}').contains(&full) {
+        char::from_u32(full as u32 - 0x60).unwrap_or(full)
+    } else {
+        full
+    };
+    // Checked set: hiragana letters, the katakana moraic nasal, and the
+    // long-vowel mark (declared and learned as themselves). Everything
+    // else — separators, iteration marks, other scripts — is unconstrained.
+    if ('\u{3041}'..='\u{3096}').contains(&out) || out == '\u{30F3}' || out == '\u{30FC}' {
+        Some(out)
+    } else {
+        None
+    }
+}
+
+/// K-70 (ADR-0022): the kana this learner has learned — the symbols of
+/// this pack's orthography content items that (a) sit in at least one
+/// currently-passable unit (all its phase gates held), and (b) have derived
+/// state at least Introduced in some dimension. Multi-character symbols
+/// (contracted kana like きゃ) contribute every character. Each character
+/// is normalized with `learned_kana_norm`, so a learned は also counts for
+/// ぱ and パ.
+fn learned_kana_set(
+    units: &[PackUnit],
+    orth: &[OrthEntry],
+    derived: &[lts_learner_model::DerivedMastery],
+) -> std::collections::HashSet<char> {
+    let mut passable: std::collections::HashSet<&str> = std::collections::HashSet::new();
+    for unit in units {
+        if !unit
+            .requires_unit
+            .iter()
+            .all(|g| unit_gate_holds(g, units, derived))
+        {
+            continue;
+        }
+        for act in &unit.activities {
+            passable.extend(act.content_refs.iter().map(|s| s.as_str()));
+        }
+    }
+    let mut learned = std::collections::HashSet::new();
+    for entry in orth {
+        if !passable.contains(entry.id.as_str()) {
+            continue;
+        }
+        if derived
+            .iter()
+            .any(|d| d.content_id == entry.id && d.state >= lts_domain::MasteryState::Introduced)
+        {
+            for ch in entry.symbol.chars() {
+                if let Some(n) = learned_kana_norm(ch) {
+                    learned.insert(n);
+                }
+            }
+        }
+    }
+    learned
+}
+
+/// K-70 (ADR-0022): may this word be seeded as NEW material yet? Every
+/// kana character of its declared kana form — the primary written form
+/// when that form is kana, else the declared reading — must be learned.
+/// A word whose declared forms carry no kana at all is unconstrained:
+/// the engine never fabricates a kana form (least of all from a
+/// romanization), and other scripts pass untouched, which keeps this
+/// rule language-neutral. Unresolvable kana forms fail closed: nothing
+/// is invented, nothing is assumed known.
+fn word_kana_eligible(
+    surface: &str,
+    reading: Option<&str>,
+    learned: &std::collections::HashSet<char>,
+) -> bool {
+    let has_kana = |s: &str| s.chars().any(|c| learned_kana_norm(c).is_some());
+    let form = if has_kana(surface) {
+        surface
+    } else if reading.is_some_and(has_kana) {
+        reading.unwrap()
+    } else {
+        return true;
+    };
+    form.chars().all(|c| match learned_kana_norm(c) {
+        None => true,
+        Some(n) => learned.contains(&n),
+    })
+}
+
 /// New-item stream: every selected pack's unseen lexicon, script,
 /// contrast, sentence, and character items are introduction
 /// candidates. The goal graph alone can gate an entire pack behind
 /// prerequisites, which leaves a brand-new profile with an empty
 /// session (docs/01: sessions must always offer learning).
+///
+/// K-70 (ADR-0022) adds the two pack-declared selection gates to this
+/// stream: items of units whose `requires_unit` phase gates have not
+/// passed never enter the NEW pool (the goal-path progression items are
+/// filtered by the same rules before joining it), and a lexicon word
+/// is NEW-eligible only once every kana of its declared kana form is
+/// learned. Reviews of already-introduced items are untouched.
 fn add_new_item_candidates(
     data: &Path,
     store: &lts_storage::Store,
@@ -1526,6 +1777,42 @@ fn add_new_item_candidates(
     due_reviews: &[lts_scheduler::DueReviewItem],
 ) -> Result<(), String> {
     {
+        // K-70 (ADR-0022): the phase gate covers every route into the
+        // NEW pool, including the goal-path progression stream — a
+        // locked unit's items are removed wherever they were queued.
+        for (pack_id, _v) in store
+            .selected_packs(profile_id)
+            .map_err(|e| e.to_string())?
+        {
+            let Some(version) =
+                lts_langpack::archive::current_version(&pack_id, &data.join("packs"))
+            else {
+                continue;
+            };
+            let pack_root = data.join("packs").join(&pack_id).join(&version);
+            let units = pack_units(&pack_root);
+            let locked = locked_new_content(&units, derived);
+            // K-70 (ADR-0022): goal-path words face the learned-kana
+            // filter exactly like lexicon-seeded ones.
+            let learned_kana =
+                learned_kana_set(&units, &orth_entries(data, &pack_id, &version)?, derived);
+            let words: std::collections::HashMap<String, (String, Option<String>)> =
+                lexicon_entries(data, &pack_id, &version)?
+                    .iter()
+                    .map(|e| (e.id.clone(), (e.surface.clone(), e.reading.clone())))
+                    .collect();
+            progression.retain(|p| {
+                if locked.contains(&p.content_id) {
+                    return false;
+                }
+                match words.get(&p.content_id) {
+                    Some((surface, reading)) => {
+                        word_kana_eligible(surface, reading.as_deref(), &learned_kana)
+                    }
+                    None => true,
+                }
+            });
+        }
         let mut planned: std::collections::HashSet<String> = progression
             .iter()
             .map(|p| format!("{}#{}", p.content_id, dimension_kebab(p.modality)))
@@ -1541,7 +1828,23 @@ fn add_new_item_candidates(
         {
             let version = lts_langpack::archive::current_version(&pack_id, &data.join("packs"))
                 .ok_or_else(|| format!("pack {pack_id} not installed"))?;
+            // K-70 (ADR-0022): this pack's phase gate and learned-kana set,
+            // evaluated once per pack (`pack_units`/`lexicon_entries` are
+            // cached per immutable version root).
+            let units = pack_units(&data.join("packs").join(&pack_id).join(&version));
+            let locked = locked_new_content(&units, derived);
+            let orth = orth_entries(data, &pack_id, &version)?;
+            let learned_kana = learned_kana_set(&units, &orth, derived);
             for entry in lexicon_entries(data, &pack_id, &version)? {
+                if locked.contains(&entry.id) {
+                    continue;
+                }
+                // K-70: a word joins the NEW pool only when every kana of
+                // its declared kana form is learned (パン waits for ン;
+                // さかな arrives with the hiragana that already covers it).
+                if !word_kana_eligible(&entry.surface, entry.reading.as_deref(), &learned_kana) {
+                    continue;
+                }
                 // Introduce unseen words for typed recall. Not for
                 // comprehension-listening: a lexicon entry has no declared
                 // audio (ADR-0016 puts every asset the pack ships in
@@ -1571,7 +1874,10 @@ fn add_new_item_candidates(
             // K-04: script-instruction units join the new-item stream
             // so a brand-new profile can start learning the alphabet
             // immediately (the zero-knowledge on-ramp).
-            for entry in orth_entries(data, &pack_id, &version)? {
+            for entry in &orth {
+                if locked.contains(&entry.id) {
+                    continue;
+                }
                 let m = lts_domain::ActivityModality::OrthographyRecognition;
                 if derived
                     .iter()
@@ -1593,6 +1899,9 @@ fn add_new_item_candidates(
             // pronunciation-adjacent listening practice is available
             // from day one wherever a pack declares contrasts.
             for entry in contrast_entries(data, &pack_id, &version)? {
+                if locked.contains(&entry.id) {
+                    continue;
+                }
                 let m = lts_domain::ActivityModality::PhonologicalDiscrimination;
                 if derived
                     .iter()
@@ -1618,6 +1927,9 @@ fn add_new_item_candidates(
             // what the learner is asked to hear.
             let audio_ids = media_ids(&data.join("packs").join(&pack_id).join(&version));
             for entry in sentence_entries(data, &pack_id, &version)? {
+                if locked.contains(&entry.id) {
+                    continue;
+                }
                 let modes = [
                     lts_domain::ActivityModality::ProductionWriting,
                     lts_domain::ActivityModality::OrthographicEncoding,
@@ -1658,6 +1970,9 @@ fn add_new_item_candidates(
             // orthography-recognition); SRS due reviews then resurface
             // drilled characters through the existing scheduler path.
             for entry in kanji_entries(data, &pack_id, &version)? {
+                if locked.contains(&entry.id) {
+                    continue;
+                }
                 let modes = [
                     lts_domain::ActivityModality::RecallMeaning,
                     lts_domain::ActivityModality::OrthographyRecognition,
@@ -5557,6 +5872,11 @@ struct PackAssessment {
 
 #[derive(serde::Deserialize)]
 struct PackUnit {
+    /// K-70 (ADR-0022): the unit's own id, so other units' phase gates can
+    /// name it. `#[serde(default)]` keeps hand-written test fixtures without
+    /// an id parseable (they declare no gates and are never gate targets).
+    #[serde(default)]
+    id: String,
     goal_id: String,
     /// K-66/ADR-0021: the features this pack offers, declared by the
     /// pack, never inferred from content. The engine acts on the
@@ -5565,8 +5885,24 @@ struct PackUnit {
     /// content for it".
     #[serde(default)]
     capabilities: Vec<String>,
+    /// K-70 (ADR-0022): the pack-declared phase gate. Every entry must
+    /// hold before this unit's items may be selected as NEW material;
+    /// the engine enforces the declaration and matches no script or
+    /// subject names itself.
+    #[serde(default)]
+    requires_unit: Vec<PackUnitGate>,
     #[serde(default)]
     activities: Vec<PackUnitActivity>,
+}
+
+/// K-70 (ADR-0022): one `requires_unit` entry — every content item the
+/// named unit schedules must have derived mastery at least `state` (in any
+/// dimension) before the gating unit's items are NEW-eligible.
+#[derive(serde::Deserialize)]
+struct PackUnitGate {
+    unit: String,
+    #[serde(default)]
+    state: String,
 }
 
 #[derive(serde::Deserialize)]
@@ -8939,6 +9275,241 @@ mod tests {
             refs.contains(&view.items[0].content_id.as_str()),
             "the plan leads with the first unlocked goal's unit content"
         );
+    }
+
+    /// K-70 (W-02): the fresh-profile, 5-minute Home Today taught hiragana
+    /// a/i/u, then the SAME sounds in katakana the same day, then パン whose
+    /// kana (パ handakuten, ン) had never been taught. On the production
+    /// planner path the pack's phase gate and learned-kana filter must make
+    /// all three of those impossible on day 1.
+    #[test]
+    fn day_one_never_seeds_katakana_or_words_with_unlearned_kana() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+
+        let derived = derive_pairs(&store, &p.id, &rfc3339_utc(1_762_128_000)).unwrap();
+        let mut prog = progression_items(data, &store, &p.id, &derived).unwrap();
+        add_new_item_candidates(data, &store, &p.id, &derived, &mut prog, &[]).unwrap();
+
+        // The hiragana chart still seeds on day 1 — the gate locks the next
+        // phase, not learning itself (docs/01: sessions must offer learning).
+        assert!(
+            prog.iter().any(|i| i.content_id == "ja.orth.hira.a"
+                && i.modality == lts_domain::ActivityModality::OrthographyRecognition),
+            "the hiragana chart seeds on day 1"
+        );
+        // No katakana chart content — through the orthography stream OR the
+        // goal-path progression stream (the katakana goal has only a
+        // `helpful` prerequisite, so the goal map alone never locked it).
+        assert!(
+            prog.iter()
+                .all(|i| !i.content_id.starts_with("ja.orth.kata.")),
+            "the katakana phase is locked on a fresh profile: {:?}",
+            prog.iter().map(|i| &i.content_id).collect::<Vec<_>>()
+        );
+        // パン — the W-02 bug itself — is never NEW material on day 1.
+        assert!(
+            prog.iter().all(|i| i.content_id != "ja.lex.food-drink.pan"),
+            "パン seeds before its kana are taught"
+        );
+        // Nothing learned ⇒ no kana-bearing word is NEW material at all.
+        let lex = lexicon_entries(data, "org.openlanguage.ja-jp.reference", &{
+            lts_langpack::archive::current_version(
+                "org.openlanguage.ja-jp.reference",
+                &data.join("packs"),
+            )
+            .unwrap()
+        })
+        .unwrap();
+        for item in prog.iter().filter(|i| i.content_id.starts_with("ja.lex.")) {
+            let entry = lex.iter().find(|e| e.id == item.content_id).unwrap();
+            assert!(
+                !entry
+                    .surface
+                    .chars()
+                    .any(|c| learned_kana_norm(c).is_some()),
+                "kana word {} seeded with an empty learned set",
+                entry.surface
+            );
+        }
+
+        // The shipped Home Today view (5-minute budget) agrees.
+        let view = build_plan_view(data, &p.id, 5, 1_762_128_000).unwrap();
+        assert!(!view.items.is_empty(), "a fresh profile still gets a plan");
+        assert!(
+            view.items
+                .iter()
+                .all(|i| !i.content_id.starts_with("ja.orth.kata.")),
+            "day-1 Home Today shows katakana: {:?}",
+            view.items.iter().map(|i| &i.content_id).collect::<Vec<_>>()
+        );
+        assert!(
+            view.items
+                .iter()
+                .all(|i| i.content_id != "ja.lex.food-drink.pan"),
+            "day-1 Home Today shows パン"
+        );
+    }
+
+    /// K-70: the phase gate opens when the hiragana chart is introduced, and
+    /// words then follow the letters the learner actually knows — パン waits
+    /// for ン, while a pure-hiragana word and handakuten folding work as
+    /// soon as the hiragana chart is learned.
+    #[test]
+    fn katakana_and_kana_words_unlock_with_the_letters_they_need() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let version = lts_langpack::archive::current_version(
+            "org.openlanguage.ja-jp.reference",
+            &data.join("packs"),
+        )
+        .unwrap();
+        let root = data
+            .join("packs")
+            .join("org.openlanguage.ja-jp.reference")
+            .join(&version);
+
+        // Introduce every content item of the hiragana chart units.
+        let units = pack_units(&root);
+        let mut hira: Vec<String> = units
+            .iter()
+            .filter(|u| u.goal_id == "ja.goal.onramp.kana-hiragana")
+            .flat_map(|u| u.activities.iter())
+            .flat_map(|a| a.content_refs.clone())
+            .collect();
+        hira.sort();
+        hira.dedup();
+        assert!(
+            hira.len() >= 100,
+            "the hiragana units teach the whole chart, not a day-1 sample: {}",
+            hira.len()
+        );
+        for (i, id) in hira.iter().enumerate() {
+            store
+                .append_evidence(&attempt(
+                    id,
+                    lts_domain::ActivityModality::OrthographyRecognition,
+                    "ja.expr.demo.kana-p1",
+                    0,
+                    &format!("2026-10-01T00:{:02}:{:02}Z", i % 60, (i / 60) % 60),
+                    &format!("ev-k70-hira-{i}"),
+                    &p.id,
+                ))
+                .unwrap();
+        }
+        let derived = derive_pairs(&store, &p.id, &rfc3339_utc(1_762_128_000)).unwrap();
+        for id in &hira {
+            assert!(
+                derived.iter().any(|d| &d.content_id == id
+                    && d.state >= lts_domain::MasteryState::Introduced),
+                "{id} reached Introduced"
+            );
+        }
+
+        let mut prog = progression_items(data, &store, &p.id, &derived).unwrap();
+        add_new_item_candidates(data, &store, &p.id, &derived, &mut prog, &[]).unwrap();
+
+        // Phase gate open: katakana chart content is NEW material now.
+        assert!(
+            prog.iter().any(|i| i.content_id == "ja.orth.kata.a"
+                && i.modality == lts_domain::ActivityModality::OrthographyRecognition),
+            "katakana unlocks once the hiragana chart is introduced"
+        );
+        // さかな is pure hiragana — every kana learned — eligible now.
+        assert!(
+            prog.iter()
+                .any(|i| i.content_id == "ja.lex.food-drink.sakana"),
+            "a word of learned kana becomes NEW material"
+        );
+        // パン is still excluded: パ folds to a learned は, but the katakana
+        // moraic ン does not fold and has not been learned (the katakana
+        // chart just UNLOCKED; nothing in it is learned yet).
+        assert!(
+            prog.iter().all(|i| i.content_id != "ja.lex.food-drink.pan"),
+            "パン waits for its ン, not just for the phase"
+        );
+
+        // Introduce the katakana chart: now ン is learned and パン is eligible.
+        let kata: Vec<String> = units
+            .iter()
+            .filter(|u| u.id == "ja.unit.kana-katakana")
+            .flat_map(|u| u.activities.iter())
+            .flat_map(|a| a.content_refs.clone())
+            .collect();
+        for (i, id) in kata.iter().enumerate() {
+            store
+                .append_evidence(&attempt(
+                    id,
+                    lts_domain::ActivityModality::OrthographyRecognition,
+                    "ja.expr.demo.kana-p1",
+                    0,
+                    &format!("2026-10-02T00:{:02}:{:02}Z", i % 60, (i / 60) % 60),
+                    &format!("ev-k70-kata-{i}"),
+                    &p.id,
+                ))
+                .unwrap();
+        }
+        let derived = derive_pairs(&store, &p.id, &rfc3339_utc(1_762_128_000)).unwrap();
+        let mut prog = progression_items(data, &store, &p.id, &derived).unwrap();
+        add_new_item_candidates(data, &store, &p.id, &derived, &mut prog, &[]).unwrap();
+        assert!(
+            prog.iter().any(|i| i.content_id == "ja.lex.food-drink.pan"),
+            "パン joins the NEW pool once its own kana (ハ-fold パ and ン) are learned"
+        );
+    }
+
+    /// K-70 §2: the exact normalization contract the learned-kana filter
+    /// promises — marks and kana size fold, the katakana moraic nasal and
+    /// the long-vowel mark deliberately do not, other scripts are never
+    /// constrained.
+    #[test]
+    fn learned_kana_folding_folds_marks_and_size_but_not_the_moraic_nasal() {
+        assert_eq!(learned_kana_norm('あ'), Some('あ'));
+        assert_eq!(learned_kana_norm('ぱ'), Some('は'));
+        assert_eq!(learned_kana_norm('パ'), Some('は'));
+        assert_eq!(learned_kana_norm('が'), Some('か'));
+        assert_eq!(learned_kana_norm('ザ'), Some('さ'));
+        assert_eq!(learned_kana_norm('っ'), Some('つ'));
+        assert_eq!(learned_kana_norm('ャ'), Some('や'));
+        assert_eq!(learned_kana_norm('ょ'), Some('よ'));
+        // Non-folds, by design:
+        assert_eq!(learned_kana_norm('ン'), Some('ン'));
+        assert_eq!(learned_kana_norm('ん'), Some('ん'));
+        assert_ne!(learned_kana_norm('ン'), learned_kana_norm('ん'));
+        assert_eq!(learned_kana_norm('ー'), Some('ー'));
+        // Never checked:
+        assert_eq!(learned_kana_norm('・'), None);
+        assert_eq!(learned_kana_norm('水'), None);
+        assert_eq!(learned_kana_norm('п'), None);
+    }
+
+    /// K-70 §2: word eligibility resolves the declared kana form and fails
+    /// closed on unlearned kana while leaving non-kana scripts untouched.
+    #[test]
+    fn the_word_filter_checks_only_declared_kana_forms() {
+        let learned: std::collections::HashSet<char> = ['さ', 'か', 'な', 'は', 'つ', 'ふ', 'こ']
+            .into_iter()
+            .collect();
+        assert!(word_kana_eligible("さかな", None, &learned));
+        // パ folds to a learned は; ン does not fold and is unlearned.
+        assert!(!word_kana_eligible("パン", None, &learned));
+        // Katakana words ride on learned hiragana via kanainic identity:
+        // コップ = こ/っ→つ/プ→ふ are all learned.
+        assert!(word_kana_eligible("コップ", None, &learned));
+        // ー must be declared and learned as itself: コーヒー is not eligible.
+        assert!(!word_kana_eligible("コーヒー", None, &learned));
+        // Kanji primary form, declared kana reading: the reading is checked.
+        assert!(!word_kana_eligible("水", Some("みず"), &learned));
+        // No kana anywhere in the declared forms: unconstrained.
+        assert!(word_kana_eligible("привет", None, &learned));
     }
 
     #[test]
