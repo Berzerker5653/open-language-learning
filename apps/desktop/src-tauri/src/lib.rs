@@ -400,7 +400,10 @@ async fn install_catalog_pack(
 /// Import a locally supplied .lpk archive (contents cross IPC as base64;
 /// filesystem paths never do).
 #[tauri::command]
-async fn import_pack(data_b64: String, app: tauri::AppHandle) -> Result<packs::InstalledPack, String> {
+async fn import_pack(
+    data_b64: String,
+    app: tauri::AppHandle,
+) -> Result<packs::InstalledPack, String> {
     tauri::async_runtime::spawn_blocking(move || {
         packs::import_pack_b64_report(&data_dir(), &data_b64, progress::reporter(&app))
     })
@@ -1934,7 +1937,7 @@ fn goal_rank_map(
 /// stable, and personalization (which runs before this) still decides
 /// among the unranked tail.
 fn order_progression_by_goal_map(
-    progression: &mut Vec<lts_scheduler::ProgressionItem>,
+    progression: &mut [lts_scheduler::ProgressionItem],
     ranks: &std::collections::HashMap<String, GoalRank>,
 ) {
     if ranks.is_empty() {
@@ -2515,16 +2518,15 @@ struct PackClaims {
 /// version instead of on every call. `trust_state` is deliberately NOT in
 /// here: it comes from the local store and is re-read every call, so a trust
 /// change is never served from a stale entry.
+type ContentClaims = (ClaimCounts, Vec<PostureRow>, Vec<ProvenanceClaim>);
 static CLAIM_CACHE: std::sync::LazyLock<
-    std::sync::Mutex<
-        std::collections::HashMap<PathBuf, (ClaimCounts, Vec<PostureRow>, Vec<ProvenanceClaim>)>,
-    >,
+    std::sync::Mutex<std::collections::HashMap<PathBuf, ContentClaims>>,
 > = std::sync::LazyLock::new(|| std::sync::Mutex::new(Default::default()));
 
 /// The memoized form of that computation: one scan per immutable version root,
 /// so the install (or the startup prime) pays for it rather than every
 /// Languages visit. Store-backed fields stay outside the memo — see above.
-fn claims_for(root: &Path) -> (ClaimCounts, Vec<PostureRow>, Vec<ProvenanceClaim>) {
+fn claims_for(root: &Path) -> ContentClaims {
     let mut cache = CLAIM_CACHE.lock().unwrap_or_else(|e| e.into_inner());
     if let Some(hit) = cache.get(root) {
         return hit.clone();
@@ -2536,7 +2538,7 @@ fn claims_for(root: &Path) -> (ClaimCounts, Vec<PostureRow>, Vec<ProvenanceClaim
 
 /// The content-derived half of a pack's claim report: every count, posture
 /// tally and provenance entry read from the pack's own files under `root`.
-fn content_claims(root: &Path) -> (ClaimCounts, Vec<PostureRow>, Vec<ProvenanceClaim>) {
+fn content_claims(root: &Path) -> ContentClaims {
     // Lexicon may be sharded across any number of lexicon/*.jsonl.
     let mut lex_total = 0;
     let mut lex_postures = std::collections::BTreeMap::new();
@@ -2550,7 +2552,7 @@ fn content_claims(root: &Path) -> (ClaimCounts, Vec<PostureRow>, Vec<ProvenanceC
         files.sort();
         for f in files {
             let rel = format!("lexicon/{}", f.file_name().unwrap().to_string_lossy());
-            let (n, p) = jsonl_claims(&root, &rel);
+            let (n, p) = jsonl_claims(root, &rel);
             lex_total += n;
             for (k, v) in p {
                 *lex_postures.entry(k).or_insert(0) += v;
@@ -2593,13 +2595,13 @@ fn content_claims(root: &Path) -> (ClaimCounts, Vec<PostureRow>, Vec<ProvenanceC
         }
     }
 
-    let (units, unit_postures) = yaml_unit_claims(&root);
-    let (goals, goal_postures) = yaml_goal_claims(&root);
-    let (assessments, assessment_postures) = jsonl_claims(&root, "assessments/definitions.jsonl");
-    let (sentences, sentence_postures) = jsonl_dir_claims(&root, "sentences");
-    let (grammar, grammar_postures) = jsonl_claims(&root, "grammar/concepts.jsonl");
-    let (kanji, kanji_postures) = jsonl_dir_claims(&root, "kanji");
-    let (contrasts, contrast_postures) = jsonl_dir_claims(&root, "phonology");
+    let (units, unit_postures) = yaml_unit_claims(root);
+    let (goals, goal_postures) = yaml_goal_claims(root);
+    let (assessments, assessment_postures) = jsonl_claims(root, "assessments/definitions.jsonl");
+    let (sentences, sentence_postures) = jsonl_dir_claims(root, "sentences");
+    let (grammar, grammar_postures) = jsonl_claims(root, "grammar/concepts.jsonl");
+    let (kanji, kanji_postures) = jsonl_dir_claims(root, "kanji");
+    let (contrasts, contrast_postures) = jsonl_dir_claims(root, "phonology");
     let mut orth_total = 0;
     let mut orth_postures = std::collections::BTreeMap::new();
     let orthdir = root.join("orthography");
@@ -2612,7 +2614,7 @@ fn content_claims(root: &Path) -> (ClaimCounts, Vec<PostureRow>, Vec<ProvenanceC
         files.sort();
         for f in files {
             let rel = format!("orthography/{}", f.file_name().unwrap().to_string_lossy());
-            let (n, p) = jsonl_claims(&root, &rel);
+            let (n, p) = jsonl_claims(root, &rel);
             orth_total += n;
             for (k, v) in p {
                 *orth_postures.entry(k).or_insert(0) += v;
@@ -4956,11 +4958,9 @@ struct StoryView {
 
 #[tauri::command]
 async fn story_view(profile_id: String, story_id: String) -> Result<StoryView, String> {
-    tauri::async_runtime::spawn_blocking(move || {
-        story_view_at(&data_dir(), &profile_id, &story_id)
-    })
-    .await
-    .map_err(|e| format!("story-view failed: {e}"))?
+    tauri::async_runtime::spawn_blocking(move || story_view_at(&data_dir(), &profile_id, &story_id))
+        .await
+        .map_err(|e| format!("story-view failed: {e}"))?
 }
 
 /// K-80: the words "in" a sentence are token SPANS, not substring hits.
@@ -5031,8 +5031,10 @@ fn story_view_at(data: &Path, profile_id: &str, story_id: &str) -> Result<StoryV
         let display = reader_display(data, profile_id, &proxy, false);
         // Tap-to-lookup: one entry per covered token span, in sentence
         // order (K-80) — never every surface that appears as a substring.
-        let known: Vec<LexEntry> =
-            sentence_word_spans(&entry.text, &lex).into_iter().cloned().collect();
+        let known: Vec<LexEntry> = sentence_word_spans(&entry.text, &lex)
+            .into_iter()
+            .cloned()
+            .collect();
         views.push(StorySentenceView {
             content_id: entry.id.clone(),
             text: entry.text.clone(),
@@ -9630,7 +9632,10 @@ mod tests {
         // Particles are listed only as their own spans, in sentence order;
         // the observed phantom lookups can no longer occur, because every
         // listed surface is a span the segmentation actually consumed.
-        assert_eq!(ids("これは何ですか。"), vec!["lex.kore", "lex.ha", "lex.nandesu"]);
+        assert_eq!(
+            ids("これは何ですか。"),
+            vec!["lex.kore", "lex.ha", "lex.nandesu"]
+        );
         // What the rule does when the PACK declares a longer,
         // morpheme-crossing surface: the longer surface wins its span by
         // construction (the engine keeps no language analysis to prefer

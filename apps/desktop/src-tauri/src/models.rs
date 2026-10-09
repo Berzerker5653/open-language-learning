@@ -139,7 +139,8 @@ fn probe_now(dir: &Path) -> Result<Vec<ProbeEntry>, String> {
         .map(|f| f.path.as_str())
         .chain(record.extracted.iter().map(|h| h.path.as_str()))
     {
-        let md = fs::metadata(dir.join(path)).map_err(|_| format!("recorded file {path} is gone"))?;
+        let md =
+            fs::metadata(dir.join(path)).map_err(|_| format!("recorded file {path} is gone"))?;
         let mtime = md
             .modified()
             .map_err(|e| format!("recorded file {path} has no mtime: {e}"))?;
@@ -306,8 +307,7 @@ pub fn install_model_files_report(
                     last_percent = Some(p);
                 }
             })?;
-            let meta = fs::metadata(&part)
-                .map_err(|e| format!("{} after fetch: {e}", f.path))?;
+            let meta = fs::metadata(&part).map_err(|e| format!("{} after fetch: {e}", f.path))?;
             if meta.len() != f.size_bytes {
                 return Err(format!(
                     "size mismatch for {}: expected {} got {}",
@@ -622,7 +622,9 @@ mod tests {
 
     /// Test fetch that writes a fixed payload to the part path and reports
     /// the whole length in one chunk (the K-62 test covers chunk stepping).
-    fn put_bytes(payload: &'static [u8]) -> impl Fn(&ModelFile, &Path, &mut dyn FnMut(u64)) -> Result<(), String> {
+    fn put_bytes(
+        payload: &'static [u8],
+    ) -> impl Fn(&ModelFile, &Path, &mut dyn FnMut(u64)) -> Result<(), String> {
         move |_, dest, on_chunk| {
             fs::write(dest, payload).map_err(|e| e.to_string())?;
             on_chunk(payload.len() as u64);
@@ -630,7 +632,9 @@ mod tests {
         }
     }
 
-    fn put_vec(payload: Vec<u8>) -> impl Fn(&ModelFile, &Path, &mut dyn FnMut(u64)) -> Result<(), String> {
+    fn put_vec(
+        payload: Vec<u8>,
+    ) -> impl Fn(&ModelFile, &Path, &mut dyn FnMut(u64)) -> Result<(), String> {
         move |_, dest, on_chunk| {
             fs::write(dest, &payload).map_err(|e| e.to_string())?;
             on_chunk(payload.len() as u64);
@@ -991,8 +995,11 @@ mod tests {
             &e,
             "2026-10-08T00:00:00Z",
             |f, dest, on_chunk| {
-                let payload: &[u8] =
-                    if f.path == "f.bin" { b"hello" } else { b"world" };
+                let payload: &[u8] = if f.path == "f.bin" {
+                    b"hello"
+                } else {
+                    b"world"
+                };
                 let mut out = fs::File::create(dest).map_err(|e| e.to_string())?;
                 // Two chunks per file so in-flight movement is observable.
                 out.write_all(&payload[..3]).map_err(|e| e.to_string())?;
