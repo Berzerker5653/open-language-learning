@@ -107,14 +107,111 @@ pub struct InstalledRecord {
     pub installed_at: String,
 }
 
+/// What the last full verification observed about the installed files
+/// (K-74). Stored next to `installed.json` as `verified.json`.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+struct ProbeEntry {
+    path: String,
+    size_bytes: u64,
+    mtime_secs: u64,
+    mtime_nanos: u32,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+struct VerifyProbe {
+    checked_at_unix: u64,
+    entries: Vec<ProbeEntry>,
+}
+
+/// Probe the filesystem reports right now for every file the install
+/// record lists (payload files plus zip members, which the extract step
+/// recorded because the catalog cannot pin them).
+fn probe_now(dir: &Path) -> Result<Vec<ProbeEntry>, String> {
+    let raw = fs::read_to_string(dir.join("installed.json"))
+        .map_err(|e| format!("installed model record unreadable: {e}"))?;
+    let record: InstalledRecord =
+        serde_json::from_str(&raw).map_err(|e| format!("installed model record invalid: {e}"))?;
+    let mut out = Vec::new();
+    for path in record
+        .files
+        .iter()
+        .filter(|f| !f.dir)
+        .map(|f| f.path.as_str())
+        .chain(record.extracted.iter().map(|h| h.path.as_str()))
+    {
+        let md = fs::metadata(dir.join(path)).map_err(|_| format!("recorded file {path} is gone"))?;
+        let mtime = md
+            .modified()
+            .map_err(|e| format!("recorded file {path} has no mtime: {e}"))?;
+        let since = mtime
+            .duration_since(std::time::UNIX_EPOCH)
+            .map_err(|e| format!("recorded file {path} has a pre-epoch mtime: {e}"))?;
+        out.push(ProbeEntry {
+            path: path.to_string(),
+            size_bytes: md.len(),
+            mtime_secs: since.as_secs(),
+            mtime_nanos: since.subsec_nanos(),
+        });
+    }
+    Ok(out)
+}
+
+fn write_probe(dir: &Path) {
+    if let Ok(entries) = probe_now(dir) {
+        let probe = VerifyProbe {
+            checked_at_unix: std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .map(|d| d.as_secs())
+                .unwrap_or(0),
+            entries,
+        };
+        if let Ok(raw) = serde_json::to_string(&probe) {
+            let _ = fs::write(dir.join("verified.json"), raw);
+        }
+    }
+}
+
+/// Is this model installed and intact — without re-hashing every byte on
+/// every read (K-74, found when opening the Languages tab next to the
+/// 466 MB whisper model froze the UI). The previous full verification is
+/// trusted only while its probe still matches the filesystem: every
+/// recorded path exists with the same size and mtime. Any drift re-runs
+/// the full checksum verification, which refreshes the probe on success.
+/// Corruption that preserves size AND mtime exactly is outside this
+/// fast path; `verify_installed` remains the explicit full check and runs
+/// after every install.
+fn verify_cached(data: &Path, entry: &ModelEntry) -> bool {
+    let dir = model_dir(data, entry);
+    if !dir.join("installed.json").exists() {
+        return false;
+    }
+    let now = match probe_now(&dir) {
+        Ok(entries) if !entries.is_empty() => entries,
+        _ => return false,
+    };
+    if let Ok(raw) = fs::read_to_string(dir.join("verified.json")) {
+        if let Ok(probe) = serde_json::from_str::<VerifyProbe>(&raw) {
+            if probe.entries == now {
+                return true;
+            }
+        }
+    }
+    if verify_installed(data, entry).unwrap_or(false) {
+        write_probe(&dir);
+        return true;
+    }
+    false
+}
+
 pub fn model_status(data: &Path) -> Vec<ModelStatus> {
     load_catalog()
         .models
         .into_iter()
         .map(|m| {
-            // Installed only if the record exists AND files still match
-            // their pinned checksums (corruption reads as missing).
-            let installed = verify_installed(data, &m).unwrap_or(false);
+            // Installed only if the record exists and the cached
+            // verification is still trusted (K-74); drift re-hashes and
+            // corruption reads as missing (K-52 intent preserved).
+            let installed = verify_cached(data, &m);
             let size_bytes = m.files.iter().map(|f| f.size_bytes).sum();
             // Computed before the move below: the entry is consumed field by
             // field while building the status.
@@ -256,6 +353,9 @@ pub fn install_model_files_report(
         fs::create_dir_all(dest.parent().ok_or("model path has no parent")?)
             .map_err(|e| e.to_string())?;
         fs::rename(&staging, &dest).map_err(|e| e.to_string())?;
+        // Every byte was checksummed on the way in — record that fact so
+        // the next status read does not hash the payload again (K-74).
+        write_probe(&dest);
         Ok(record)
     })();
 
@@ -916,5 +1016,38 @@ mod tests {
             ]
         );
         assert!(model_dir(tmp.path(), &e).join("g.bin").exists());
+    }
+
+    /// K-74: status reads trust the last full verification only while a
+    /// persisted probe (path + size + mtime for every recorded file) still
+    /// matches the filesystem. Content drift — even same-size corruption —
+    /// re-runs the full checksum pass, which is how the K-52 guarantee
+    /// survives caching.
+    #[test]
+    fn model_status_stops_rehashing_until_files_actually_change() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let e = test_entry();
+        install_model_files_report(
+            data,
+            &e,
+            "2026-10-05T00:00:00Z",
+            put_bytes(b"hello"),
+            silent(),
+        )
+        .expect("install");
+        assert!(verify_cached(data, &e), "a fresh install verifies");
+        // Same bytes rewritten: mtime drifts, the probe goes stale, the
+        // full checksum pass re-runs, passes, and refreshes the probe.
+        fs::write(model_dir(data, &e).join("f.bin"), b"hello").expect("rewrite");
+        assert!(
+            verify_cached(data, &e),
+            "unchanged content re-verifies after a cosmetic touch"
+        );
+        fs::write(model_dir(data, &e).join("f.bin"), b"whyz").expect("corrupt");
+        assert!(
+            !verify_cached(data, &e),
+            "same-size corruption defeats the probe and reads as missing"
+        );
     }
 }
