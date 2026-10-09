@@ -585,13 +585,15 @@ export function App() {
           if (scenarios.length === 0) {
             await inv("smoke_ack", { note: "scenario-started:none-locked" });
           } else {
-            const scen = scenarios[0];
+            // K-75: the native list leads with the playable scenario and
+            // marks it as the recommendation, so the walkthrough follows
+            // that row instead of whatever the pack files sort to first.
+            const scen = scenarios.find((s) => s.recommended) ?? scenarios[0];
             if (!scen) throw new Error("scenario list row vanished");
             const navBtn = Array.from(
               document.querySelectorAll('nav[aria-label="Routes"] button'),
             ).find((b) => (b.textContent ?? "").trim() === "Scenarios") as
-              | HTMLButtonElement
-              | undefined;
+              HTMLButtonElement | undefined;
             if (!navBtn) throw new Error("Scenarios nav button missing");
             navBtn.click();
             await painted(4);

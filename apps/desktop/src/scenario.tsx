@@ -5,13 +5,30 @@
  * never branches on language content.
  */
 
+/** K-75 readiness tier, derived natively from the pack goal map plus
+ * derived mastery. The list arrives already ordered by it: playable, then
+ * near, then later. */
+export type ScenarioReadiness = "playable" | "near" | "later";
+
+/** Why a locked scenario is locked: a capability to practice, a later
+ * curriculum stage, or a goal the pack never defines. */
+export type ScenarioLockKind = "capability" | "stage" | "undefined_goal";
+
 export interface ScenarioSummaryView {
   scenario_id: string;
   title: string;
   situation?: string | null;
   goal_id: string;
+  /** Goal band as the pack's goal map labels it ("on-ramp", "A1", …). */
+  goal_band?: string | null;
+  readiness: ScenarioReadiness;
   unlocked: boolean;
   locked_reason?: string | null;
+  lock_kind?: ScenarioLockKind | null;
+  /** What unlocks a locked scenario, one entry per unmet prerequisite. */
+  unlocks?: string[];
+  /** Set on exactly one row: the scenario to do next. */
+  recommended?: boolean;
 }
 
 export interface ScenarioNodeView {
@@ -57,6 +74,25 @@ export interface ScenarioPanelProps {
   onTransfer(id: string): void;
   onFinish(): void;
   onBack(): void;
+}
+
+/** Gate label for a locked scenario, chosen from the structural lock kind
+ * the native side derived from the goal map — never from language content. */
+function LockBadge({ kind, band }: { kind?: ScenarioLockKind | null; band?: string | null }) {
+  const label =
+    kind === "capability"
+      ? "practice first"
+      : kind === "stage"
+        ? "later curriculum stage"
+        : kind === "undefined_goal"
+          ? "not in this pack yet"
+          : null;
+  return (
+    <>
+      {label ? <span className="badge">{label}</span> : null}
+      {band ? <span className="badge">stage {band}</span> : null}
+    </>
+  );
 }
 
 export function ScenarioPanel(p: ScenarioPanelProps) {
@@ -181,6 +217,10 @@ export function ScenarioPanel(p: ScenarioPanelProps) {
     );
   }
 
+  // K-75: the native list arrives already ordered by readiness (playable,
+  // then near, then later) with the pointer flag on the first playable row.
+  // The UI never re-sorts — it labels what the pack data says.
+  const recommended = p.scenarios.find((s) => s.recommended);
   return (
     <section aria-label="Scenarios">
       <h2>Scenarios</h2>
@@ -195,10 +235,18 @@ export function ScenarioPanel(p: ScenarioPanelProps) {
           practice end to end.
         </p>
       )}
+      {recommended ? (
+        <p className="notice" data-recommended-pointer="true">
+          Recommended next: {recommended.title}
+        </p>
+      ) : null}
       <ul className="scenario-list">
         {p.scenarios.map((s) => (
           <li key={s.scenario_id}>
-            <h3>{s.title}</h3>
+            <h3>
+              {s.title}
+              {s.recommended ? <span className="badge badge--active">recommended next</span> : null}
+            </h3>
             {s.situation && <p className="notice">{s.situation}</p>}
             {s.unlocked ? (
               <div className="btn-row">
@@ -211,7 +259,14 @@ export function ScenarioPanel(p: ScenarioPanelProps) {
                 </button>
               </div>
             ) : (
-              <p className="empty">{s.locked_reason ?? "Locked."}</p>
+              <>
+                <p className="empty">
+                  <LockBadge kind={s.lock_kind} band={s.goal_band} /> {s.locked_reason ?? "Locked."}
+                </p>
+                {s.unlocks && s.unlocks.length > 0 ? (
+                  <p className="meta">Unlocks when: {s.unlocks.join("; ")}</p>
+                ) : null}
+              </>
             )}
           </li>
         ))}
