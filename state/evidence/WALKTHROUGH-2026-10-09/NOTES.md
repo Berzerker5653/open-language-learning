@@ -78,3 +78,29 @@ Template per item:
 - Candidate severity: process — feeds the K-70 pedagogy decision and
   future plan-shaping cards
 - KANBAN card: K-71
+
+### W-04 — Mic consent in setup doesn't lead into speech setup  [issue]
+- Screen/step: onboarding → microphone question; later: Languages tab →
+  bottom → speech recognition/pronunciation model downloads
+- Did: went through setup; answered the microphone question; later
+  clicked through the app and discovered some activities need the
+  speech models, which live at the very bottom of the Languages tab
+- Expected: the question is fine, but answering "yes, use the
+  microphone" should flow straight into the speech-related setup —
+  recognition/pronunciation model downloads — as part of onboarding
+- Saw: the mic step records the decision and that's it; the downloads
+  are a separate, buried surface the learner finds only after clicking
+  through the app (possibly after already hitting activities that need
+  them)
+- Owner suggestion: if the learner opts into the microphone during
+  setup, go straight into speech recognition + pronunciation downloads
+  from there; don't strand setup before a dependency the app later
+  demands
+- Candidate severity: annoying → churn risk (setup feels complete, then
+  mid-activity the learner is sent scavenging for a download)
+- Facts found while logging: onboarding's mic step only logs the
+  `microphone-enabled` decision (lib.rs ~467/484); speech models are a
+  separate catalog subsystem (`src-tauri/src/models/`, catalog +
+  `model_dir` + speech pref) whose download UI sits at the bottom of
+  the Languages tab — the two paths never meet during setup
+- KANBAN card: K-72
