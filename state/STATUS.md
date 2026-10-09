@@ -970,7 +970,7 @@ installed version is immutable by contract and the new caches rest on that.
 Everything above lands as task-scoped commits on `main` (2026-10-08); no
 remote push — the owner keeps distribution private until they say otherwise.
 
-## 2026-10-09 (latest) — the tranche is committed, and the bundle proves itself on a second machine
+## 2026-10-09 — walkthrough tranche committed; bundle proves itself on a second machine
 
 Owner authorized committing and testing on Omarchy, with no public
 remote. The K-60…K-68 tranche landed as seven task-scoped commits on
@@ -1003,3 +1003,63 @@ Regression pinned by `scripts/test-finalize-appimage.sh` (fixture links
 the real sysroot WebKit, asserts the repack cannot re-add it). The
 wizard click-through/install leg and ADR-0015 platform status remain
 human-run work.
+
+## 2026-10-09 (latest) — owner-walkthrough fix tranche: gates, ordering, honest audio, one Settings
+
+The approved 2026-10-09 walkthrough cards K-69..K-80 are all implemented
+(K-73 `ccee3f0`, K-74 `435eee1`, K-69 `06edc6b`, K-79 `4330106`, K-71
+`340a251`, K-80 `5da1076`, K-72 `1efdd6b` landed earlier; K-70, K-75,
+K-76, K-78, K-77 landed in this session — commits below).
+
+**K-70 (ADR-0022)** — day-1 plans no longer interleave alphabets or
+untaught words. Packs declare unit gates (`requires_unit: [{unit,
+state}]`; ja-JP gates katakana on the five hiragana units at
+`introduced`), the validator rejects self-reference, unknown units, and
+cycles (`crates/langpack/tests/unit_gates.rs`), and the engine locks
+NEW-content seeding only — reviews are never locked. The learned-kana
+filter admits a word only when every kana of its declared reading is
+learned, folding handakuten/dakuon and small-mora marks to their
+learned base but never the moraic ン or the ー elongation, which must
+be learned as themselves; unresolvable kana forms fail closed.
+
+**K-75** — scenarios order by readiness (playable → near → later) with
+exactly one recommendation and lock reasons from goal/prereq data.
+
+**K-76/K-78** — the audio rule: every speech-audio surface resolves the
+engine's block token (`tts-runtime-unavailable`, `tts-voice-unavailable`,
+`tts-chain-unavailable`) into a sentence naming what is missing, with a
+"Set up speech" jump only where an install can fix it. Root causes
+pinned while implementing: W-08 was never media-gating — the target
+*read* failed during the half-finished install and the generic
+"no targets" empty text hid the Record control; the UI now distinguishes
+loading/error/empty/ready and offers Retry + setup on error. W-10 was
+the published `reference-0.2.0` archives predating K-68's baked media
+(republish = owner-authorized version bump, O-05). Contrast references
+get **no** synthesized fallback: the measured Kokoro length ratio
+(~1.04 for おばさん/おばあさん) would teach the wrong contrast — the
+message names the pack version's missing recording instead.
+`speech_readiness()` reports the persisted probe (K-74), never re-hashes.
+
+**K-77** — the Languages tab is gone: pack management is the first
+section of the Settings route, and the speech-model picker exists
+exactly once (Settings also carries recognition models with
+sizes/licenses/tier recommendation, TTS payloads, and the
+runtime-availability line). Nav floor in `scripts/smoke-desktop.sh`
+11→10.
+
+Housekeeping: the pre-outage `models.rs` code had skipped `cargo fmt`
+(K-73/K-74 landed before the gate ran); `cargo fmt --all` normalizes it
+in its own commit. Lab note: Omarchy's endpoint has been down since the
+power outage (sshd refuses the tunnel target), so native `task`
+subagents (model role `lab-omarchy`) were unusable; remote slices ran
+as `lab_task` jobs on Hermes worker with GamingPC inference
+(model `main`), verified locally after `git apply` every time.
+
+Verification: `cargo test --workspace` green (125 desktop-lib incl. the
+new K-70/K-75/K-76 tests; 7 `unit_gates`); frontend vitest green and
+`tsc --noEmit` clean; `validate --mode install` 0/0 on both packs;
+smoke walkthrough re-run after the merge. Gaps stated honestly: the
+shadowing *capture* failure path (mic in WebKitGTK) is not headless-
+testable — its gating is pinned at unit level only; K-70 day-1 behavior
+is proven at selection/engine level, not by a fresh-profile UI run;
+re-publishing the published packs with baked media stays owner work.
