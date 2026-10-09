@@ -4,7 +4,11 @@ import { listMicrophones, openMicrophone } from "./capture";
 const stream = { getTracks: () => [] } as unknown as MediaStream;
 
 function fakeMediaDevices(
-  opts: { exactFailsWith?: unknown; defaultFailsWith?: unknown; devices?: { kind: string; deviceId: string; label: string }[] },
+  opts: {
+    exactFailsWith?: unknown;
+    defaultFailsWith?: unknown;
+    devices?: { kind: string; deviceId: string; label: string }[];
+  },
   calls: unknown[],
 ) {
   return {
@@ -41,7 +45,10 @@ describe("microphone selection (K-64)", () => {
   it("falls back to the default and reports it when the remembered device is gone", async () => {
     const calls: unknown[] = [];
     const gone = { name: "OverconstrainedError" };
-    const result = await openMicrophone(fakeMediaDevices({ exactFailsWith: gone }, calls), "mic-headset");
+    const result = await openMicrophone(
+      fakeMediaDevices({ exactFailsWith: gone }, calls),
+      "mic-headset",
+    );
     expect(calls).toEqual([{ deviceId: { exact: "mic-headset" } }, true]);
     expect(result.used).toBe("default");
     expect(result.fellBack).toBe(true);
@@ -50,7 +57,9 @@ describe("microphone selection (K-64)", () => {
   it("does not switch microphones over a failure the switch cannot fix", async () => {
     const calls: unknown[] = [];
     const busy = { name: "NotReadableError" };
-    await expect(openMicrophone(fakeMediaDevices({ exactFailsWith: busy }, calls), "mic-headset")).rejects.toMatchObject({
+    await expect(
+      openMicrophone(fakeMediaDevices({ exactFailsWith: busy }, calls), "mic-headset"),
+    ).rejects.toMatchObject({
       name: "NotReadableError",
     });
     expect(calls).toEqual([{ deviceId: { exact: "mic-headset" } }]);

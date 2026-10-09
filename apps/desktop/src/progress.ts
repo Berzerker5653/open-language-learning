@@ -30,7 +30,6 @@ const COPY: Record<string, string> = {
  */
 export function progressLine(p: EngineProgress): string {
   const base = COPY[`${p.operation}.${p.stage}`] ?? "Working";
-  const percent =
-    typeof p.percent === "number" && p.percent > 0 ? ` — ${p.percent}% done` : "";
+  const percent = typeof p.percent === "number" && p.percent > 0 ? ` — ${p.percent}% done` : "";
   return `${base}${percent}`;
 }

@@ -23,8 +23,9 @@ describe("progress line", () => {
   });
 
   it("shows the percentage when the engine computed one", () => {
-    expect(progressLine(stage({ stage: "fetch", operation: "install-model", percent: 40 })))
-      .toContain("40%");
+    expect(
+      progressLine(stage({ stage: "fetch", operation: "install-model", percent: 40 })),
+    ).toContain("40%");
   });
 
   it("names the phase for each stage of a pack install", () => {

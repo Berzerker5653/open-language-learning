@@ -47,10 +47,18 @@ export async function openMicrophone(
       // Only "that device is not available" justifies a second attempt; a
       // busy or refused device must surface unchanged.
       if ((e as { name?: string } | null)?.name !== "OverconstrainedError") throw e;
-      return { stream: await mediaDevices.getUserMedia({ audio: true }), used: "default", fellBack: true };
+      return {
+        stream: await mediaDevices.getUserMedia({ audio: true }),
+        used: "default",
+        fellBack: true,
+      };
     }
   }
-  return { stream: await mediaDevices.getUserMedia({ audio: true }), used: "default", fellBack: false };
+  return {
+    stream: await mediaDevices.getUserMedia({ audio: true }),
+    used: "default",
+    fellBack: false,
+  };
 }
 
 /**

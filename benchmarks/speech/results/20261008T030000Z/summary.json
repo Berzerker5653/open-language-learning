@@ -15,8 +15,8 @@
     "tool": "benchmarks/speech/tools/synthetic-learner-proxy.py",
     "probe": "crates/speech-runtime/examples/vowel_length_probe.rs (guided probe; interpret.rs bands speech.long-vowel.{shorter,close,longer})",
     "pairs": [
-      {"id": "obasan", "short": "おばさん", "long": "おばあさん", "pack_declared_ratio": 1.25},
-      {"id": "toi", "short": "とおい", "long": "問い", "pack_declared_ratio": 1.5}
+      { "id": "obasan", "short": "おばさん", "long": "おばあさん", "pack_declared_ratio": 1.25 },
+      { "id": "toi", "short": "とおい", "long": "問い", "pack_declared_ratio": 1.5 }
     ],
     "synthesizer": {
       "runtime": "sherpa-onnx-v1.13.8-linux-x64-shared",
@@ -45,26 +45,154 @@
     }
   },
   "coverage": [
-    {"asr": "ggml-base", "pair": "obasan", "reference": "declared(1.25)", "ref_measured_ratio": 1.33, "scored": 3, "clips": 15, "coverage": 0.2, "meets_min_scoring_coverage": false, "abstain_reasons": {"mismatch:expected-text-not-matched": 12}},
-    {"asr": "ggml-base", "pair": "obasan", "reference": "tts", "ref_measured_ratio": 1.048, "scored": 3, "clips": 15, "coverage": 0.2, "meets_min_scoring_coverage": false, "abstain_reasons": {"mismatch:expected-text-not-matched": 12}},
-    {"asr": "ggml-base", "pair": "toi", "reference": "declared(1.5)", "ref_measured_ratio": 0.93, "scored": 0, "clips": 15, "coverage": 0.0, "meets_min_scoring_coverage": false, "abstain_reasons": {"mismatch:expected-text-not-matched": 15}},
-    {"asr": "ggml-base", "pair": "toi", "reference": "tts", "ref_measured_ratio": 0.618, "scored": 0, "clips": 15, "coverage": 0.0, "meets_min_scoring_coverage": false, "abstain_reasons": {"mismatch:expected-text-not-matched": 15}},
-    {"asr": "ggml-small", "pair": "obasan", "reference": "declared(1.25)", "ref_measured_ratio": 1.33, "scored": 8, "clips": 15, "coverage": 0.533, "meets_min_scoring_coverage": false, "abstain_reasons": {"mismatch:expected-text-not-matched": 7}},
-    {"asr": "ggml-small", "pair": "obasan", "reference": "tts", "ref_measured_ratio": 1.048, "scored": 8, "clips": 15, "coverage": 0.533, "meets_min_scoring_coverage": false, "abstain_reasons": {"mismatch:expected-text-not-matched": 7}},
-    {"asr": "ggml-small", "pair": "toi", "reference": "declared(1.5)", "ref_measured_ratio": 0.93, "scored": 1, "clips": 15, "coverage": 0.067, "meets_min_scoring_coverage": false, "abstain_reasons": {"mismatch:expected-text-not-matched": 14}},
-    {"asr": "ggml-small", "pair": "toi", "reference": "tts", "ref_measured_ratio": 0.618, "scored": 1, "clips": 15, "coverage": 0.067, "meets_min_scoring_coverage": false, "abstain_reasons": {"mismatch:expected-text-not-matched": 14}}
+    {
+      "asr": "ggml-base",
+      "pair": "obasan",
+      "reference": "declared(1.25)",
+      "ref_measured_ratio": 1.33,
+      "scored": 3,
+      "clips": 15,
+      "coverage": 0.2,
+      "meets_min_scoring_coverage": false,
+      "abstain_reasons": { "mismatch:expected-text-not-matched": 12 }
+    },
+    {
+      "asr": "ggml-base",
+      "pair": "obasan",
+      "reference": "tts",
+      "ref_measured_ratio": 1.048,
+      "scored": 3,
+      "clips": 15,
+      "coverage": 0.2,
+      "meets_min_scoring_coverage": false,
+      "abstain_reasons": { "mismatch:expected-text-not-matched": 12 }
+    },
+    {
+      "asr": "ggml-base",
+      "pair": "toi",
+      "reference": "declared(1.5)",
+      "ref_measured_ratio": 0.93,
+      "scored": 0,
+      "clips": 15,
+      "coverage": 0.0,
+      "meets_min_scoring_coverage": false,
+      "abstain_reasons": { "mismatch:expected-text-not-matched": 15 }
+    },
+    {
+      "asr": "ggml-base",
+      "pair": "toi",
+      "reference": "tts",
+      "ref_measured_ratio": 0.618,
+      "scored": 0,
+      "clips": 15,
+      "coverage": 0.0,
+      "meets_min_scoring_coverage": false,
+      "abstain_reasons": { "mismatch:expected-text-not-matched": 15 }
+    },
+    {
+      "asr": "ggml-small",
+      "pair": "obasan",
+      "reference": "declared(1.25)",
+      "ref_measured_ratio": 1.33,
+      "scored": 8,
+      "clips": 15,
+      "coverage": 0.533,
+      "meets_min_scoring_coverage": false,
+      "abstain_reasons": { "mismatch:expected-text-not-matched": 7 }
+    },
+    {
+      "asr": "ggml-small",
+      "pair": "obasan",
+      "reference": "tts",
+      "ref_measured_ratio": 1.048,
+      "scored": 8,
+      "clips": 15,
+      "coverage": 0.533,
+      "meets_min_scoring_coverage": false,
+      "abstain_reasons": { "mismatch:expected-text-not-matched": 7 }
+    },
+    {
+      "asr": "ggml-small",
+      "pair": "toi",
+      "reference": "declared(1.5)",
+      "ref_measured_ratio": 0.93,
+      "scored": 1,
+      "clips": 15,
+      "coverage": 0.067,
+      "meets_min_scoring_coverage": false,
+      "abstain_reasons": { "mismatch:expected-text-not-matched": 14 }
+    },
+    {
+      "asr": "ggml-small",
+      "pair": "toi",
+      "reference": "tts",
+      "ref_measured_ratio": 0.618,
+      "scored": 1,
+      "clips": 15,
+      "coverage": 0.067,
+      "meets_min_scoring_coverage": false,
+      "abstain_reasons": { "mismatch:expected-text-not-matched": 14 }
+    }
   ],
   "reference_parameter_flip": {
     "setting": "ggml-small, obasan pair; 8 identical scored clips; the ONLY change is which source supplies the reference ratio",
     "clips": [
-      {"planted_stretch": 0.85, "meaning": "shortened (over-correction error)", "modifier": "clean", "tts_ref_band": "close", "declared_ref_band": "shorter"},
-      {"planted_stretch": 0.85, "meaning": "shortened (over-correction error)", "modifier": "pitch+3%", "tts_ref_band": "close", "declared_ref_band": "shorter"},
-      {"planted_stretch": 1.25, "meaning": "target ratio as declared by the pack", "modifier": "clean", "tts_ref_band": "close", "declared_ref_band": "shorter"},
-      {"planted_stretch": 1.25, "meaning": "target ratio as declared by the pack", "modifier": "pitch+3%", "tts_ref_band": "close", "declared_ref_band": "shorter"},
-      {"planted_stretch": 1.45, "meaning": "mora-correct production", "modifier": "clean", "tts_ref_band": "close", "declared_ref_band": "shorter"},
-      {"planted_stretch": 1.45, "meaning": "mora-correct production", "modifier": "pitch+3%", "tts_ref_band": "close", "declared_ref_band": "shorter"},
-      {"planted_stretch": 1.7, "meaning": "over-lengthened (hypercorrection error)", "modifier": "clean", "tts_ref_band": "close", "declared_ref_band": "shorter"},
-      {"planted_stretch": 1.7, "meaning": "over-lengthened (hypercorrection error)", "modifier": "pitch+3%", "tts_ref_band": "close", "declared_ref_band": "shorter"}
+      {
+        "planted_stretch": 0.85,
+        "meaning": "shortened (over-correction error)",
+        "modifier": "clean",
+        "tts_ref_band": "close",
+        "declared_ref_band": "shorter"
+      },
+      {
+        "planted_stretch": 0.85,
+        "meaning": "shortened (over-correction error)",
+        "modifier": "pitch+3%",
+        "tts_ref_band": "close",
+        "declared_ref_band": "shorter"
+      },
+      {
+        "planted_stretch": 1.25,
+        "meaning": "target ratio as declared by the pack",
+        "modifier": "clean",
+        "tts_ref_band": "close",
+        "declared_ref_band": "shorter"
+      },
+      {
+        "planted_stretch": 1.25,
+        "meaning": "target ratio as declared by the pack",
+        "modifier": "pitch+3%",
+        "tts_ref_band": "close",
+        "declared_ref_band": "shorter"
+      },
+      {
+        "planted_stretch": 1.45,
+        "meaning": "mora-correct production",
+        "modifier": "clean",
+        "tts_ref_band": "close",
+        "declared_ref_band": "shorter"
+      },
+      {
+        "planted_stretch": 1.45,
+        "meaning": "mora-correct production",
+        "modifier": "pitch+3%",
+        "tts_ref_band": "close",
+        "declared_ref_band": "shorter"
+      },
+      {
+        "planted_stretch": 1.7,
+        "meaning": "over-lengthened (hypercorrection error)",
+        "modifier": "clean",
+        "tts_ref_band": "close",
+        "declared_ref_band": "shorter"
+      },
+      {
+        "planted_stretch": 1.7,
+        "meaning": "over-lengthened (hypercorrection error)",
+        "modifier": "pitch+3%",
+        "tts_ref_band": "close",
+        "declared_ref_band": "shorter"
+      }
     ],
     "observed": "Verdicts are constant across planted conditions inside each setting and invert between settings: 8/8 close under the TTS reference (measured 1.048), 8/8 shorter under the declared reference (measured 1.330)."
   },
@@ -87,14 +215,78 @@
     "run": "20261008T031200Z",
     "command": "python3 benchmarks/speech/tools/synthetic-learner-proxy.py --out /tmp/lts-synthetic-verify",
     "coverage": [
-      {"asr": "ggml-base", "pair": "obasan", "reference": "declared(1.25)", "ref_measured_ratio": 1.313, "scored": 5, "clips": 15, "coverage": 0.333},
-      {"asr": "ggml-base", "pair": "obasan", "reference": "tts", "ref_measured_ratio": 1.048, "scored": 5, "clips": 15, "coverage": 0.333},
-      {"asr": "ggml-base", "pair": "toi", "reference": "declared(1.5)", "ref_measured_ratio": 0.965, "scored": 0, "clips": 15, "coverage": 0.0},
-      {"asr": "ggml-base", "pair": "toi", "reference": "tts", "ref_measured_ratio": 0.642, "scored": 0, "clips": 15, "coverage": 0.0},
-      {"asr": "ggml-small", "pair": "obasan", "reference": "declared(1.25)", "ref_measured_ratio": 1.313, "scored": 8, "clips": 15, "coverage": 0.533},
-      {"asr": "ggml-small", "pair": "obasan", "reference": "tts", "ref_measured_ratio": 1.048, "scored": 8, "clips": 15, "coverage": 0.533},
-      {"asr": "ggml-small", "pair": "toi", "reference": "declared(1.5)", "ref_measured_ratio": 0.965, "scored": 0, "clips": 15, "coverage": 0.0},
-      {"asr": "ggml-small", "pair": "toi", "reference": "tts", "ref_measured_ratio": 0.642, "scored": 0, "clips": 15, "coverage": 0.0}
+      {
+        "asr": "ggml-base",
+        "pair": "obasan",
+        "reference": "declared(1.25)",
+        "ref_measured_ratio": 1.313,
+        "scored": 5,
+        "clips": 15,
+        "coverage": 0.333
+      },
+      {
+        "asr": "ggml-base",
+        "pair": "obasan",
+        "reference": "tts",
+        "ref_measured_ratio": 1.048,
+        "scored": 5,
+        "clips": 15,
+        "coverage": 0.333
+      },
+      {
+        "asr": "ggml-base",
+        "pair": "toi",
+        "reference": "declared(1.5)",
+        "ref_measured_ratio": 0.965,
+        "scored": 0,
+        "clips": 15,
+        "coverage": 0.0
+      },
+      {
+        "asr": "ggml-base",
+        "pair": "toi",
+        "reference": "tts",
+        "ref_measured_ratio": 0.642,
+        "scored": 0,
+        "clips": 15,
+        "coverage": 0.0
+      },
+      {
+        "asr": "ggml-small",
+        "pair": "obasan",
+        "reference": "declared(1.25)",
+        "ref_measured_ratio": 1.313,
+        "scored": 8,
+        "clips": 15,
+        "coverage": 0.533
+      },
+      {
+        "asr": "ggml-small",
+        "pair": "obasan",
+        "reference": "tts",
+        "ref_measured_ratio": 1.048,
+        "scored": 8,
+        "clips": 15,
+        "coverage": 0.533
+      },
+      {
+        "asr": "ggml-small",
+        "pair": "toi",
+        "reference": "declared(1.5)",
+        "ref_measured_ratio": 0.965,
+        "scored": 0,
+        "clips": 15,
+        "coverage": 0.0
+      },
+      {
+        "asr": "ggml-small",
+        "pair": "toi",
+        "reference": "tts",
+        "ref_measured_ratio": 0.642,
+        "scored": 0,
+        "clips": 15,
+        "coverage": 0.0
+      }
     ],
     "finding_reproduced": "Same conclusion on fresh audio: coverage stays 0.00-0.53 (gate 0.60), and on the 8 clips ggml-small scores under the obasan contrast the verdicts are 8/8 `close` with the TTS reference and 8/8 `shorter` with the declared reference. The clip set differs from the recorded run, the flip does not.",
     "differences": "Measured reference ratios moved (1.330 -> 1.313, 0.618 -> 0.642) and borderline clips flipped, because the TTS chain is not byte-reproducible: five syntheses of the same utterance with the pinned runtime produced five distinct sha256 values, including with --num-threads=1."

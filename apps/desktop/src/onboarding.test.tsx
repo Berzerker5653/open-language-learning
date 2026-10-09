@@ -140,9 +140,27 @@ describe("onboarding", () => {
   // K-72: saying "yes" to the microphone must lead into the speech
   // setup, never leave the learner to discover the downloads later.
   const missing = [
-    { id: "rt", name: "Speaking engine (runtime)", installed: false, installable: true, size_bytes: 30_454_382 },
-    { id: "voice", name: "Japanese voice", installed: false, installable: true, size_bytes: 345_065_270 },
-    { id: "asr", name: "Listening (speech recognition)", installed: true, installable: true, size_bytes: 466_000_000 },
+    {
+      id: "rt",
+      name: "Speaking engine (runtime)",
+      installed: false,
+      installable: true,
+      size_bytes: 30_454_382,
+    },
+    {
+      id: "voice",
+      name: "Japanese voice",
+      installed: false,
+      installable: true,
+      size_bytes: 345_065_270,
+    },
+    {
+      id: "asr",
+      name: "Listening (speech recognition)",
+      installed: true,
+      installable: true,
+      size_bytes: 466_000_000,
+    },
   ];
 
   it("lists the speech components with honest pinned sizes when chaining from the mic", () => {
