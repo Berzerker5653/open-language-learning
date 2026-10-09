@@ -834,7 +834,7 @@ a clean machine, because there is no second Linux box to try it on.
   `npx tauri build -c dist/variants/tauri.aligner.json` is what carries the
   fix into a package.
 
-## 2026-10-08 (latest) — the owner's hands-on pass (O-06): six fixes, and latency finally measured
+## 2026-10-08 — the owner's hands-on pass (O-06): six fixes, and latency finally measured
 
 The owner ran the preview themselves and filed what broke and what felt wrong
 (`state/evidence/O-06-2026-10-08/owner-report.md`). Six cards came out of it;
@@ -930,7 +930,7 @@ this session: the working tree is HEAD `49197b1` plus all of the above.
 
 ---
 
-## 2026-10-08 (latest) — K-59/K-66/K-68: the bundle carries content, the first run is guided, every word has audio
+## 2026-10-08 — K-59/K-66/K-68: the bundle carries content, the first run is guided, every word has audio
 
 Three cards the owner unblocked with the 2026-10-08 decisions (ADR-0018/0020/0021
 acceptances, the merged resources-overlay route, bake-all-audio). Full rows with
@@ -969,3 +969,23 @@ to prove abstention — rewritten to the never-declared-sentence case, since an
 installed version is immutable by contract and the new caches rest on that.
 Everything above lands as task-scoped commits on `main` (2026-10-08); no
 remote push — the owner keeps distribution private until they say otherwise.
+
+## 2026-10-09 (latest) — the tranche is committed, and the bundle proves itself on a second machine
+
+Owner authorized committing and testing on Omarchy, with no public
+remote. The K-60…K-68 tranche landed as seven task-scoped commits on
+`main` off `49197b1` (langpack audio; storage capture fix; the engine
+tranche incl. ADR-0020/0021; the desktop UI; K-59 packaging;
+state/preview; smoke assertions). Tree clean; `origin` untouched.
+
+Second-machine test (Omarchy, Arch, no repo tree): the AppImage first
+SIGABRTs because linuxdeploy bundled the machine-local `~/.wk41` WebKit
+libs with baked helper paths — a real AppImage-only defect, carded as
+**K-59-follow**. With system WebKit the app rendered the onboarding
+wizard, and an `LD_PRELOAD` open-trace caught the packaged binary
+opening `packs/BUNDLED.yaml` from its own resources (fd 33, no abstain
+path) — the K-59 loader works on a clean machine. The wizard click-through
+and the install leg were not exercised remotely (no pointer injection
+without root); ADR-0015 platform status still awaits a human run. Full
+write-up with screenshots: `state/evidence/K59-omarchy-2026-10-09/`.
+The test directory on Omarchy was removed afterwards.

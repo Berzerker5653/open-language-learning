@@ -130,10 +130,17 @@ find a language pack on the machine whose tree built it. The base config
 carries no pack resources on purpose, and the published-catalog path stays
 inert until O-05. The owner's 2026-10-08 decision is the merged
 resources-overlay route: the pack-bundled content variant below. The
-merged bundle build has not been run here as of writing and no human has
-reported it (ADR-0015), so until that build is made and reported, an
-installed bundle is testable on the build machine and nowhere else; say
-so rather than calling it installable anywhere.
+The merged bundle build has since been run (2026-10-08): deb
+337.55 MiB, AppImage 428.91 MiB, and the deb's extraction was inspected
+byte-for-byte for the sidecar mapping. A second-machine run followed on
+2026-10-09 (Omarchy, no repo tree): the AppImage initially died because
+it bundles `libwebkit2gtk`/`libjavascriptcoregtk` from this machine's
+local `~/.wk41` build, whose helper-process paths are baked in — with
+those two libs removed in favor of the system WebKit the app rendered
+and the preload-trace proof fired: the packaged binary opened
+`packs/BUNDLED.yaml` from its own resources (fd 33, no abstain path).
+That AppImage defect is card K-59-follow. ADR-0015 platform status for
+the variant still awaits a human runtime report.
 
 The payload is `apps/desktop/sidecar/<platform>/`: `bin/`
 (whisper-cli plus libwhisper.so.1, libggml.so.0, libggml-cpu.so.0,
@@ -242,10 +249,13 @@ Evidence state, stated honestly: the staging/overlay scripts are pinned
 by `scripts/test-stage-pack-bundle.sh` (hermetic: broken pack refused,
 valid fixture staged, overlay JSON gate, idempotent re-stage, refusal
 with nothing staged), run as the "Pack bundle staging script regression
-test" step of the CI rust job. The
-merged bundle build itself has not been run here, so no claim about the
-shipped artifact beyond that test exists, and per ADR-0015 platform
-status for it comes only from human runtime reports. Interacts with
+The merged bundle build has been run here (deb 337.55 MiB, AppImage
+428.91 MiB) and the packaged binary was proven on a second machine
+(Omarchy, no repo tree): it opened `packs/BUNDLED.yaml` from its own
+resources — full write-up in `state/evidence/K59-omarchy-2026-10-09/`.
+The AppImage carries an unrelated webkit-bundling defect (K-59-follow).
+Per ADR-0015 platform status still comes only from human runtime reports.
+It interacts with
 K-68: baking lexicon audio into the pack grows the embedded payload;
 the size consequences belong to that card, measured rather than guessed.
 
