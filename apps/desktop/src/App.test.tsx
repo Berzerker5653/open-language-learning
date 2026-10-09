@@ -89,7 +89,7 @@ describe("session pack (D7)", () => {
     // guessed pack.
     expect(calls.map((c) => c.cmd)).toEqual(["active_pack"]);
     expect(req.error).toContain("No pack is active for this profile");
-    expect(req.error).toContain("Languages");
+    expect(req.error).toContain("Language packs");
     expect(req.error).toBe(NO_ACTIVE_PACK);
     expect(NO_ACTIVE_PACK).not.toContain(REFERENCE);
   });

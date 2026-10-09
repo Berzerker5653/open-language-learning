@@ -75,8 +75,10 @@ if ! grep -q 'routes-complete' "$MARKER"; then
   exit 1
 fi
 NROUTES=$(grep -c '^smoke-ok route:' "$MARKER")
-if [ "$NROUTES" -lt 11 ]; then
-  echo "FAIL: only $NROUTES route acks; expected at least 11" >&2
+# K-77 (owner 2026-10-09) folded Languages into Settings, so the nav has
+# twelve tabs; the floor is one below the tab count, as before.
+if [ "$NROUTES" -lt 10 ]; then
+  echo "FAIL: only $NROUTES route acks; expected at least 10" >&2
   exit 1
 fi
 # K-63: the owner reported route switches that felt dead, and an impression is

@@ -80,17 +80,9 @@ function render(over: Partial<Parameters<typeof LanguagePanel>[0]> = {}) {
       onSwitch={() => {}}
       onInstallCatalog={() => {}}
       onImport={() => {}}
-      tts={null}
-      onInstallModel={() => {}}
-      onDeleteModel={() => {}}
-      speechModels={[]}
-      speechModel="off"
-      onSelectSpeechModel={() => {}}
       display={{ stress_mode: "auto", pack_has_stress: false }}
       onSelectStressMode={() => {}}
       claims={null}
-      deviceTier={null}
-      aligner={null}
       {...over}
     />,
   );
@@ -103,6 +95,10 @@ describe("language panel", () => {
     expect(html).toContain("Learn this");
     expect(html).toContain("Esperanto Community Pack");
     expect(html).toContain("language you are");
+    // K-77: the panel is now the "Language packs" section inside Settings;
+    // its landmark must be named, and there is no Languages route to pin.
+    expect(html).toContain('aria-label="Language packs"');
+    expect(html).not.toMatch(/Speech model|Speech &amp; attribution/);
   });
 
   it("shows full catalog metadata and labels packs as community content", () => {
@@ -139,124 +135,6 @@ describe("language panel", () => {
   it("surfaces install errors", () => {
     const html = render({ error: "install rejected: bad archive" });
     expect(html).toContain("install rejected");
-  });
-
-  it("shows required attribution whenever a TTS payload is active", () => {
-    const html = render({
-      tts: {
-        source: "bundled",
-        components: [
-          { name: "espeak-ng", license: "GPL-3.0", role: "pronunciation data for synthesis" },
-          { name: "sherpa-onnx", license: "Apache-2.0", role: "speech runtime" },
-          { name: "ONNX Runtime", license: "MIT", role: "model inference engine" },
-          { name: "Kokoro", license: "Apache-2.0", role: "Japanese voice model" },
-        ],
-        models: [
-          {
-            id: "org.openlanguage.speech.kokoro-multi-lang",
-            version: "1.0.0",
-            license_code: "Apache-2.0",
-            installed: true,
-            installable: true,
-          },
-        ],
-      },
-    });
-    expect(html).toContain("included in this download");
-    expect(html).toContain("espeak-ng");
-    expect(html).toContain("GPL-3.0");
-    expect(html).toContain("ONNX Runtime");
-    expect(html).toContain("Japanese voice model (Kokoro)");
-    expect(html).toContain("Remove");
-  });
-
-  it("degrades honestly when no TTS payload is present", () => {
-    const html = render({
-      tts: {
-        source: "none",
-        components: [],
-        models: [
-          {
-            id: "org.openlanguage.speech.sherpa-onnx-runtime",
-            version: "1.13.8",
-            license_code: "Apache-2.0",
-            installed: false,
-            installable: true,
-          },
-        ],
-      },
-    });
-    expect(html).toContain("No speech synthesis is installed");
-    expect(html).toContain("Audio activities are disabled");
-    expect(html).toContain("Download");
-    expect(html).not.toContain("GPL-3.0");
-  });
-
-  // D5: the catalog lists two TTS payloads whose release assets have never
-  // been staged. The panel must say so instead of offering a button that
-  // would spend the user's time on a placeholder URL.
-  it("offers no download for a payload this build has not published", () => {
-    const html = render({
-      tts: {
-        source: "none",
-        components: [],
-        models: [
-          {
-            id: "org.openlanguage.speech.kokoro-multi-lang",
-            version: "1.0.0",
-            license_code: "Apache-2.0",
-            installed: false,
-            installable: false,
-          },
-        ],
-      },
-    });
-    expect(html).toContain("not published in this build");
-    expect(html).not.toContain("Download");
-  });
-
-  it("offers a speech-model selector that defaults to off and lists whisper models", () => {
-    const html = render({
-      speechModels: [
-        {
-          id: "org.openlanguage.speech.whisper-ggml-tiny",
-          version: "1.0.0",
-          license_code: "MIT",
-          installed: false,
-          installable: true,
-          size_bytes: 77691713,
-        },
-        {
-          id: "org.openlanguage.speech.whisper-ggml-base",
-          version: "1.0.0",
-          license_code: "MIT",
-          installed: false,
-          installable: true,
-          size_bytes: 147951465,
-        },
-      ],
-      speechModel: "off",
-      deviceTier: {
-        cores: 8,
-        total_ram_mb: 16000,
-        tier: "typical",
-        recommended_model: "org.openlanguage.speech.whisper-ggml-base",
-      },
-    });
-    // Off is the privacy default and is the checked option.
-    expect(html).toContain("Off — no speech model");
-    expect(html).toContain('checked="" value="off"');
-    // A selectable whisper model with its size and a download action.
-    expect(html).toContain("Whisper Base");
-    expect(html).toContain("Download");
-    // Honest framing: size does not change pronunciation accuracy; the
-    // recommendation comes from the detected device tier (K-46), not a
-    // static constant.
-    expect(html).toContain("the model sizes give the same result");
-    expect(html).toContain("recommended for this device");
-    expect(html).toContain("detected as the typical tier (8 cores, 16000 MB RAM)");
-    // The badge lands on the detected model only.
-    expect((html.match(/recommended for this device/g) ?? []).length).toBe(1);
   });
 
   it("renders per-pack content claims without touching install posture (K-43)", () => {
@@ -325,55 +203,6 @@ describe("language panel", () => {
     expect(region).not.toMatch(/\b(validated|verified)\b/);
     // The only permitted review mention is the negated posture statement.
     expect(region).not.toMatch(/(?<!not )human-reviewed/);
-  });
-
-  it("describes the speech models honestly: runtime-gated, never a false capability claim", () => {
-    const html = render();
-    // What the models actually feed, and the runtime they still need.
-    expect(html).toContain("pronunciation alignment and");
-    expect(html).toContain("dictation recognition");
-    expect(html).toContain("speech runtime (whisper.cpp)");
-    // Choosing a model never alone enables the speaking checks: before the
-    // runtime status is read the panel says it could not read it rather than
-    // promising a runtime this build may not carry.
-    expect(html).toContain("status could not be read");
-    // The old copy ("Choose a local speech model for pronunciation
-    // feedback") implied selecting a model makes feedback work; that
-    // claim may not return while the runtime is absent.
-    expect(html).not.toMatch(/speech model for pronunciation feedback, or turn it off/i);
-  });
-
-  it("states the bundled aligner runtime instead of claiming absence (ADR-0019)", () => {
-    const html = render({
-      aligner: {
-        available: true,
-        source: "bundled",
-        runtime_version: "1.9.4",
-        requires_cpu: "x86-64-v3 (SSE4.2, F16C, FMA, BMI2, AVX, AVX2; no AVX-512)",
-        reason: null,
-      },
-    });
-    expect(html).toContain("whisper.cpp 1.9.4, bundled in this build");
-    // The blanket absence claim must not survive a build that ships the
-    // payload: it would tell the owner a runtime is missing when it is there.
-    expect(html).not.toContain("this build does not include whisper.cpp");
-  });
-
-  it("names the instruction floor when the payload cannot run on this CPU", () => {
-    const html = render({
-      aligner: {
-        available: false,
-        source: null,
-        runtime_version: null,
-        requires_cpu: "x86-64-v3 (SSE4.2, F16C, FMA, BMI2, AVX, AVX2; no AVX-512)",
-        reason: "aligner-cpu-unsupported",
-      },
-    });
-    expect(html).toContain("below the instruction set it was compiled for");
-    expect(html).toContain("x86-64-v3");
-    // A CPU-floor abstention is not an absence: the payload exists here.
-    expect(html).not.toContain("does not include whisper.cpp");
-    expect(html).toContain('data-aligner="no"');
   });
 
   it("reports the stage a catalog install is in", () => {

@@ -1,8 +1,11 @@
 /**
- * Language management: the language being learned (a pack) is separate
- * from the app's own display language, which stays fixed. Installed
- * packs work fully offline; the community catalog points at versioned
- * GitHub releases and always labels packs as community content.
+ * Language-pack management (the "Language packs" section of Settings,
+ * K-77): the language being learned (a pack) is separate from the app's
+ * own display language, which stays fixed. Installed packs work fully
+ * offline; the community catalog points at versioned GitHub releases and
+ * always labels packs as community content. All speech UI — model picker,
+ * TTS payloads, runtime availability — lives in the single Settings →
+ * Speech card; nothing here duplicates it.
  */
 import { progressLine, type EngineProgress } from "./progress";
 
@@ -102,22 +105,12 @@ export interface LanguagePanelProps {
   error: string | null;
   onSwitch(packId: string): void;
   onInstallCatalog(packId: string): void;
-  tts: TtsStatus | null;
-  onInstallModel(modelId: string): void;
-  onDeleteModel(modelId: string): void;
   onImport(dataB64: string): void;
-  speechModels: SpeechModel[];
-  speechModel: string;
-  onSelectSpeechModel(modelId: string): void;
   /// K-41: stress-mark visibility (display setting; null until loaded).
   display: DisplaySettingsView | null;
   onSelectStressMode(mode: "auto" | "on" | "off"): void;
   /// K-43: per-pack content claims (null until loaded).
   claims: PackClaims[] | null;
-  /// K-46: runtime device-tier detection for the recommended model.
-  deviceTier: DeviceTier | null;
-  /// D4 (ADR-0019): aligner runtime this build carries (null until loaded).
-  aligner: AlignerStatus | null;
   /// K-62: the stage a long install reported, or null when nothing is running.
   progress?: EngineProgress | null;
 }
@@ -128,25 +121,6 @@ const STATUS_LABELS: Record<string, string> = {
   "no-catalog-url":
     "Community packs are coming soon — this build has no catalog configured yet. Meanwhile you can import a pack file you received from someone below.",
   "offline-no-cache": "Offline, and no catalog has been fetched on this device yet.",
-};
-
-const TTS_SOURCE_LABELS: Record<string, string> = {
-  bundled: "Speech synthesis is included in this download.",
-  model: "Speech synthesis is installed as a model download.",
-  env: "Speech synthesis uses the local runtime you configured (LTS_TTS_DIR).",
-  bench: "Speech synthesis uses a development runtime (not a shipped configuration).",
-  none: "No speech synthesis is installed. Audio activities are disabled; everything else works offline.",
-};
-
-const TTS_MODEL_LABELS: Record<string, string> = {
-  "org.openlanguage.speech.sherpa-onnx-runtime": "Speech runtime",
-  "org.openlanguage.speech.kokoro-multi-lang": "Japanese voice model (Kokoro)",
-};
-
-const SPEECH_MODEL_LABELS: Record<string, string> = {
-  "org.openlanguage.speech.whisper-ggml-tiny": "Whisper Tiny — smallest, lightest",
-  "org.openlanguage.speech.whisper-ggml-base": "Whisper Base — larger download and memory",
-  "org.openlanguage.speech.whisper-ggml-small": "Whisper Small — largest download and memory",
 };
 
 /// Owner 2026-10-07: per-item draft badges are retired; every pack is
@@ -188,28 +162,8 @@ export interface DeviceTier {
   recommended_model: string | null;
 }
 
-function megabytes(bytes: number): string {
+export function megabytes(bytes: number): string {
   return (bytes / (1024 * 1024)).toFixed(1);
-}
-
-/// One honest sentence about the speech runtime, distinguishing the three ways
-/// it can be missing. Never claims a runtime this build does not ship, and
-/// never calls a CPU-floor abstention an absence.
-function alignerLine(a: AlignerStatus | null): string {
-  if (!a) return "Speech runtime: status could not be read.";
-  if (a.available) {
-    const from =
-      a.source === "bundled" ? "bundled in this build" : "resolved from a development runtime path";
-    return `Speech runtime: whisper.cpp ${a.runtime_version ?? "version unknown"}, ${from}.`;
-  }
-  switch (a.reason) {
-    case "speech-model-off":
-      return "Speech runtime: available, but the speech model is switched off below, so speaking checks abstain until you pick one.";
-    case "aligner-cpu-unsupported":
-      return `Speech runtime: this build carries it, but this CPU is below the instruction set it was compiled for (${a.requires_cpu ?? "x86-64-v3"}). Speaking checks abstain; every other activity works.`;
-    default:
-      return "Speech runtime: this build does not include whisper.cpp, so pronunciation feedback and dictation abstain. Downloading a model here does not change that.";
-  }
 }
 
 async function readFileB64(file: File): Promise<string> {
@@ -222,8 +176,8 @@ async function readFileB64(file: File): Promise<string> {
 
 export function LanguagePanel(p: LanguagePanelProps) {
   return (
-    <section aria-label="Languages">
-      <h1>Languages</h1>
+    <section aria-label="Language packs">
+      <h1>Language packs</h1>
       <p>
         <small>
           This page changes the language you are <em>learning</em>. The app&apos;s own interface
@@ -402,128 +356,6 @@ export function LanguagePanel(p: LanguagePanelProps) {
           if (f) void readFileB64(f).then(p.onImport);
         }}
       />
-
-      <h2>Speech &amp; attribution</h2>
-      <p>
-        <small>
-          Speech synthesis is optional and separate from packs. Some downloads include it; you can
-          also install it here or point the app at your own runtime.
-        </small>
-      </p>
-      {p.tts ? (
-        <>
-          <p>{TTS_SOURCE_LABELS[p.tts.source] ?? p.tts.source}</p>
-          {p.tts.components.length > 0 && (
-            <ul className="meta-list">
-              {p.tts.components.map((c) => (
-                <li key={c.name}>
-                  {c.name} — {c.license} ({c.role})
-                </li>
-              ))}
-            </ul>
-          )}
-          <ul className="pack-list">
-            {p.tts.models.map((m) => (
-              <li key={m.id}>
-                {TTS_MODEL_LABELS[m.id] ?? m.id} — v{m.version}, {m.license_code}
-                {m.installed ? (
-                  <button
-                    type="button"
-                    className="btn btn--quiet"
-                    onClick={() => p.onDeleteModel(m.id)}
-                  >
-                    Remove
-                  </button>
-                ) : m.installable ? (
-                  <button
-                    type="button"
-                    className="btn btn--primary"
-                    onClick={() => p.onInstallModel(m.id)}
-                  >
-                    Download
-                  </button>
-                ) : (
-                  // A payload this build has not staged: no button, and the
-                  // reason stated instead of a download that would fail.
-                  <span className="meta">not published in this build</span>
-                )}
-              </li>
-            ))}
-          </ul>
-        </>
-      ) : (
-        <p className="empty">Speech status unavailable.</p>
-      )}
-
-      <h2>Speech recognition &amp; pronunciation</h2>
-      <p>
-        <small>
-          Optional. These local models feed the speech-based checks — pronunciation alignment and
-          dictation recognition — or you can turn them off. They run entirely on this device;
-          nothing is uploaded. Honest limit: both checks also need a speech runtime (whisper.cpp);
-          what this build carries, and on what terms, is stated right below. Pronunciation feedback
-          is <em>guided only</em> (no automatic scoring or mastery) until it has been calibrated.
-          For pronunciation feedback the model sizes give the same result — pick one your device can
-          comfortably run. Larger models mainly help future listening/recognition features, not
-          pronunciation accuracy.
-          {p.deviceTier
-            ? ` This device was detected as the ${p.deviceTier.tier} tier (${p.deviceTier.cores} cores, ${Math.round(p.deviceTier.total_ram_mb)} MB RAM).`
-            : " This device's tier could not be detected, so no model is recommended — pick one your device can comfortably run."}
-        </small>
-      </p>
-      <p className="meta pack-posture" data-aligner={p.aligner?.available ? "yes" : "no"}>
-        {alignerLine(p.aligner)}
-      </p>
-      <fieldset>
-        <legend>Speech model</legend>
-        <label className="speech-model">
-          <input
-            type="radio"
-            name="speech-model"
-            value="off"
-            checked={p.speechModel === "off"}
-            onChange={() => p.onSelectSpeechModel("off")}
-          />{" "}
-          Off — no speech model; speaking stays not assessed
-        </label>
-        {p.speechModels.map((m) => (
-          <div key={m.id} className="speech-model">
-            <label>
-              <input
-                type="radio"
-                name="speech-model"
-                value={m.id}
-                checked={p.speechModel === m.id}
-                onChange={() => p.onSelectSpeechModel(m.id)}
-              />{" "}
-              {SPEECH_MODEL_LABELS[m.id] ?? m.id} — {megabytes(m.size_bytes)} MB, {m.license_code}
-              {m.installed ? " (installed)" : ""}
-              {p.deviceTier?.recommended_model === m.id ? (
-                <span className="badge">recommended for this device</span>
-              ) : null}
-            </label>
-            {m.installed ? (
-              <button
-                type="button"
-                className="btn btn--quiet"
-                onClick={() => p.onDeleteModel(m.id)}
-              >
-                Remove
-              </button>
-            ) : m.installable ? (
-              <button
-                type="button"
-                className="btn btn--primary"
-                onClick={() => p.onInstallModel(m.id)}
-              >
-                Download ~{megabytes(m.size_bytes)} MB
-              </button>
-            ) : (
-              <span className="meta">not published in this build</span>
-            )}
-          </div>
-        ))}
-      </fieldset>
     </section>
   );
 }

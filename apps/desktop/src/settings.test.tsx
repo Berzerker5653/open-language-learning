@@ -1,8 +1,9 @@
-// SETTINGS-001 UI contract: the mic control mirrors the stored setting,
-// Delete is a two-step confirmation (never fires from the first control),
-// Export reports the written path, and no copy claims a capability this
-// build lacks (the speech-runtime limit is stated and pointed at the page
-// that reports it; choosing a model never supplies a missing runtime).
+// SETTINGS-001 + K-77 UI contract: the mic control mirrors the stored
+// setting, Delete is a two-step confirmation (never fires from the first
+// control), and Export reports the written path. K-77: the Speech card is
+// the ONLY place for speech models — exactly one picker, plus the TTS
+// payload list and the runtime-availability statement folded in from the
+// removed Languages tab. No copy claims a capability this build lacks.
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 import { Settings, type SettingsProps } from "./settings";
@@ -23,10 +24,16 @@ const base: SettingsProps = {
       version: "1.0.0",
       license_code: "MIT",
       installed: false,
+      installable: true,
       size_bytes: 77691713,
     },
   ],
   onSelectSpeechModel: () => {},
+  tts: { source: "none", components: [], models: [] },
+  onInstallModel: () => {},
+  onDeleteModel: () => {},
+  aligner: null,
+  deviceTier: null,
   exportPath: null,
   onExport: () => {},
   deleteArmed: false,
@@ -67,7 +74,9 @@ describe("settings", () => {
     expect(defaultOptions.some((t) => t.includes("selected") && t.includes('value=""'))).toBe(true);
     // No grant yet: honest copy instead of an empty picker.
     expect(render({ microphoneDevices: [] })).toContain("allow microphone access once");
-    expect(render({ microphoneDevices: [{ deviceId: "a", label: "A" }] })).toContain("instead of switching silently");
+    expect(render({ microphoneDevices: [{ deviceId: "a", label: "A" }] })).toContain(
+      "instead of switching silently",
+    );
     // K-64: the picker always offers a way to ask again — a webview that never
     // answered the first device query must not leave the setting stuck.
     expect(render()).toContain('id="mic-detect"');
@@ -118,5 +127,176 @@ describe("settings", () => {
     expect(html).not.toMatch(/install a speech model in Settings/i);
     expect(html).not.toMatch(/to get feedback/i);
     expect(html).not.toMatch(/fluent/i);
+  });
+
+  it("K-77: exactly one speech-model picker — the duplicate is gone", () => {
+    const html = render();
+    expect((html.match(/id="speech-model"/g) ?? []).length).toBe(1);
+    // The old Languages → Speech picker was a fieldset of radios sharing
+    // the name "speech-model"; a second picker is the duplication K-77
+    // removes, and old copy pointing at that page must not survive.
+    expect(html).not.toMatch(/name="speech-model"/);
+    expect(html).not.toMatch(/<legend>Speech model<\/legend>/);
+    expect(html).not.toMatch(/Languages\s*→\s*Speech/);
+  });
+
+  it("the single Speech card lists TTS payloads with install and remove controls", () => {
+    const bundled = render({
+      tts: {
+        source: "bundled",
+        components: [
+          { name: "espeak-ng", license: "GPL-3.0", role: "pronunciation data for synthesis" },
+          { name: "sherpa-onnx", license: "Apache-2.0", role: "speech runtime" },
+          { name: "ONNX Runtime", license: "MIT", role: "model inference engine" },
+          { name: "Kokoro", license: "Apache-2.0", role: "Japanese voice model" },
+        ],
+        models: [
+          {
+            id: "org.openlanguage.speech.kokoro-multi-lang",
+            version: "1.0.0",
+            license_code: "Apache-2.0",
+            installed: true,
+            installable: true,
+          },
+        ],
+      },
+    });
+    expect(bundled).toContain("included in this download");
+    expect(bundled).toContain("espeak-ng");
+    expect(bundled).toContain("GPL-3.0");
+    expect(bundled).toContain("ONNX Runtime");
+    expect(bundled).toContain("Japanese voice model (Kokoro)");
+    expect(bundled).toContain("Remove");
+    const missing = render({
+      tts: {
+        source: "none",
+        components: [],
+        models: [
+          {
+            id: "org.openlanguage.speech.sherpa-onnx-runtime",
+            version: "1.13.8",
+            license_code: "Apache-2.0",
+            installed: false,
+            installable: true,
+          },
+        ],
+      },
+    });
+    expect(missing).toContain("No speech synthesis is installed");
+    expect(missing).toContain("Audio activities are disabled");
+    expect(missing).not.toContain("GPL-3.0");
+    // D5: a payload this build has not staged gets the honest label, no button.
+    const unpublished = render({
+      speechModels: [],
+      tts: {
+        source: "none",
+        components: [],
+        models: [
+          {
+            id: "org.openlanguage.speech.kokoro-multi-lang",
+            version: "1.0.0",
+            license_code: "Apache-2.0",
+            installed: false,
+            installable: false,
+          },
+        ],
+      },
+    });
+    expect(unpublished).toContain("not published in this build");
+    expect(unpublished).not.toContain("Download");
+  });
+
+  it("the single Speech card states runtime availability honestly (D4/ADR-0019)", () => {
+    // Before the status is read the card admits it, rather than promising
+    // a runtime this build may not carry.
+    expect(render()).toContain("status could not be read");
+    const bundled = render({
+      aligner: {
+        available: true,
+        source: "bundled",
+        runtime_version: "1.9.4",
+        requires_cpu: "x86-64-v3 (SSE4.2, F16C, FMA, BMI2, AVX, AVX2; no AVX-512)",
+        reason: null,
+      },
+    });
+    expect(bundled).toContain("whisper.cpp 1.9.4, bundled in this build");
+    // The blanket absence claim must not survive a build that ships the
+    // payload: it would tell the owner a runtime is missing when it is there.
+    expect(bundled).not.toContain("this build does not include whisper.cpp");
+    const cpu = render({
+      aligner: {
+        available: false,
+        source: null,
+        runtime_version: null,
+        requires_cpu: "x86-64-v3 (SSE4.2, F16C, FMA, BMI2, AVX, AVX2; no AVX-512)",
+        reason: "aligner-cpu-unsupported",
+      },
+    });
+    expect(cpu).toContain("below the instruction set it was compiled for");
+    expect(cpu).toContain("x86-64-v3");
+    // A CPU-floor abstention is not an absence: the payload exists here.
+    expect(cpu).not.toContain("does not include whisper.cpp");
+    expect(cpu).toContain('data-aligner="no"');
+  });
+
+  it("the model list carries sizes, licenses, and the detected recommendation", () => {
+    const html = render({
+      speechModels: [
+        {
+          id: "org.openlanguage.speech.whisper-ggml-tiny",
+          version: "1.0.0",
+          license_code: "MIT",
+          installed: false,
+          installable: true,
+          size_bytes: 77691713,
+        },
+        {
+          id: "org.openlanguage.speech.whisper-ggml-base",
+          version: "1.0.0",
+          license_code: "MIT",
+          installed: false,
+          installable: true,
+          size_bytes: 147951465,
+        },
+        {
+          id: "org.openlanguage.speech.whisper-ggml-small",
+          version: "1.0.0",
+          license_code: "MIT",
+          installed: true,
+          installable: true,
+          size_bytes: 592997257,
+        },
+      ],
+      deviceTier: {
+        cores: 8,
+        total_ram_mb: 16000,
+        tier: "typical",
+        recommended_model: "org.openlanguage.speech.whisper-ggml-base",
+      },
+    });
+    // Friendly labels with size and license; an installed model offers Remove.
+    expect(html).toContain("Whisper Base");
+    expect(html).toContain("Download ~141.1 MB");
+    expect(html).toContain("Remove");
+    // Honest framing: size does not change pronunciation accuracy; the
+    // recommendation comes from the detected device tier (K-46), never a
+    // static constant — and it lands on exactly one row.
+    expect(html).toContain("the model sizes give the same result");
+    expect(html).toContain("recommended for this device");
+    expect(html).toContain("detected as the typical tier (8 cores, 16000 MB RAM)");
+    expect((html.match(/recommended for this device/g) ?? []).length).toBe(1);
+  });
+
+  it("describes the speech models honestly: runtime-gated, never a false capability claim", () => {
+    const html = render();
+    // What the models actually feed, and the runtime they still need.
+    expect(html).toContain("pronunciation alignment and");
+    expect(html).toContain("dictation recognition");
+    expect(html).toContain("need a speech runtime");
+    expect(html).toContain("Speech runtime:");
+    // The old copy ("Choose a local speech model for pronunciation
+    // feedback") implied selecting a model makes feedback work; that
+    // claim may not return while the runtime is absent.
+    expect(html).not.toMatch(/speech model for pronunciation feedback, or turn it off/i);
   });
 });

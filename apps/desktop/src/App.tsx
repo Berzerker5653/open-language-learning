@@ -46,6 +46,12 @@ import {
 } from "./scenario";
 import { Settings, type RomajiMode } from "./settings";
 import { listMicrophones, openMicrophone, type Microphone } from "./capture";
+import {
+  audioFailureMessage,
+  fixableBySpeechSetup,
+  shadowTargetsState,
+  SpeechSetupNotice,
+} from "./speech-readiness";
 import type { EngineProgress } from "./progress";
 
 export type Invoke = (cmd: string, args?: Record<string, unknown>) => Promise<unknown>;
@@ -80,9 +86,10 @@ function detectInvoke(): Invoke | null {
 /**
  * D7: honest refusal copy for a profile with no active pack. Nothing is
  * ever built against a guessed pack id, so the message names the fix
- * (the Languages page is where a pack becomes active).
+ * (the Settings → Language packs section is where a pack becomes active).
  */
-export const NO_ACTIVE_PACK = "No pack is active for this profile. Choose one under Languages.";
+export const NO_ACTIVE_PACK =
+  "No pack is active for this profile. Choose one under Settings → Language packs.";
 
 /**
  * The pack a session practises with, resolved from the profile itself.
@@ -110,7 +117,7 @@ export async function loadSessionPack(inv: Invoke, profileId: string): Promise<S
 export function activePackNote(ids: string[]): string | null {
   const others = ids.slice(1).filter((id) => id !== ids[0]);
   return others.length > 0
-    ? `This profile has more than one active pack (${ids.join(", ")}). Using ${ids[0]}; choose a single pack under Languages.`
+    ? `This profile has more than one active pack (${ids.join(", ")}). Using ${ids[0]}; choose a single pack under Settings → Language packs.`
     : null;
 }
 
@@ -197,7 +204,6 @@ export function App() {
     | "pronunciation"
     | "dictation"
     | "writing"
-    | "language"
     | "scenarios"
     | "shadowing"
     | "reading"
@@ -337,9 +343,11 @@ export function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [step, route]);
+  // K-76: null until the first real load answers, so the surface can tell
+  // "still loading" apart from "this pack has no targets".
   const [shadowItems, setShadowItems] = useState<
-    { content_id: string; surface: string; reading: string | null; romaji: string | null }[]
-  >([]);
+    { content_id: string; surface: string; reading: string | null; romaji: string | null }[] | null
+  >(null);
   const [shadowIdx, setShadowIdx] = useState(0);
   const [storyList, setStoryList] = useState<
     {
@@ -423,8 +431,7 @@ export function App() {
         const waitUntil = async (pred: () => boolean, frames = 60) => {
           const { promise, resolve } = Promise.withResolvers<void>();
           let left = frames;
-          const tick = () =>
-            pred() || left-- <= 0 ? resolve() : requestAnimationFrame(tick);
+          const tick = () => (pred() || left-- <= 0 ? resolve() : requestAnimationFrame(tick));
           requestAnimationFrame(tick);
           await promise;
         };
@@ -432,10 +439,7 @@ export function App() {
         // not a harness timeout: exit 124 says nothing about where the webview
         // stopped painting.
         const paintedOrStall = async (label: string) => {
-          const stalled = await Promise.race([
-            painted(4).then(() => false),
-            after(3000, true),
-          ]);
+          const stalled = await Promise.race([painted(4).then(() => false), after(3000, true)]);
           if (stalled) await inv("smoke_ack", { note: `paint-stall:${label}` });
         };
         try {
@@ -468,9 +472,7 @@ export function App() {
           for (const stage of ["prepare", "install", "record"]) {
             await inv("smoke_ack", {
               note: `progress:${stage}:${
-                progressStages.some(
-                  (p2) => p2.operation === "install-pack" && p2.stage === stage,
-                )
+                progressStages.some((p2) => p2.operation === "install-pack" && p2.stage === stage)
                   ? "heard"
                   : "SILENT"
               }`,
@@ -524,24 +526,25 @@ export function App() {
             }
           }
           // K-63-follow: one tab costs six times what every other tab costs, and
+          // (K-77) the heavy tab is now Settings, which carries the folded
+          // Language-packs panel.
           // the two halves need different fixes. Leave the tab, come back, and
           // time the return: by now the panel's commands are warm and its data
           // is memoized, so whatever is left is the remount's fetch chain plus
           // painting the panel. If the number survives, it is paint.
           const navTo = (label: string) =>
             buttons.find((b) => (b.textContent ?? "").trim() === label) as
-              | HTMLButtonElement
-              | undefined;
+              HTMLButtonElement | undefined;
           const away = navTo("Reading");
-          const back = navTo("Languages");
+          const back = navTo("Settings");
           if (away && back) {
             away.click();
             await paintedOrStall("Reading");
             const again = performance.now();
             back.click();
-            await paintedOrStall("Languages");
+            await paintedOrStall("Settings");
             await inv("smoke_ack", {
-              note: `route-2ms:Languages:${Math.round(performance.now() - again)}`,
+              note: `route-2ms:Settings:${Math.round(performance.now() - again)}`,
             });
           }
           // K-63: route switching was reported as feeling dead. Split the cost
@@ -710,7 +713,7 @@ export function App() {
   }, []);
 
   // `pid` lets the resume/finish flows prime the Home active-pack
-  // header before the Languages route has been opened (the state
+  // header before the Settings route has been opened (the state
   // profileId is not yet visible to this closure there).
   //
   // K-63: these reads used to be awaited one after another, each landing its
@@ -730,8 +733,8 @@ export function App() {
     if (session) {
       setActiveIds(session.ids);
       // D7: the profile's own active pack seeds every pack-scoped call,
-      // so a returning session (no wizard this run) and a Languages pack
-      // switch both aim at the right pack. No pack here means no pack:
+      // so a returning session (no wizard this run) and a pack switch
+      // from Settings both aim at the right pack. No pack here means no pack:
       // the panels refuse instead of guessing one.
       setSelectedPack(session.packId);
       if (session.note) setLangError(session.note);
@@ -899,8 +902,7 @@ export function App() {
    * ids the learner cannot act on. */
   function speechLabel(m: { id: string; runtime: string }): string {
     if (m.runtime === "whisper.cpp") return "Listening (speech recognition)";
-    if (m.id === "org.openlanguage.speech.sherpa-onnx-runtime")
-      return "Speaking engine (runtime)";
+    if (m.id === "org.openlanguage.speech.sherpa-onnx-runtime") return "Speaking engine (runtime)";
     if (m.id === "org.openlanguage.speech.kokoro-multi-lang") return "Japanese voice";
     return m.id;
   }
@@ -1053,6 +1055,12 @@ export function App() {
       setMicDevice((await inv("get_microphone_device", { profileId })) as string | null);
       setRomajiMode((await inv("get_romaji_mode", { profileId })) as RomajiMode);
       await refreshSpeech();
+      // K-77: Settings now hosts language-pack management and the TTS /
+      // runtime status too, so opening it primes the reads the old
+      // Languages tab did.
+      await refreshLanguages();
+      await refreshTts();
+      await refreshAligner();
       await refreshMicrophones();
     } catch (e) {
       setSettingsError(String(e));
@@ -1260,8 +1268,13 @@ export function App() {
             )) as { wav_b64: string; source: string };
             setPracticeAudio({ wavB64: a.wav_b64, source: a.source });
           } catch (e) {
+            // K-78: name the cause the engine reported instead of a generic
+            // "install a speech model" — an install cannot fix a pack that
+            // ships no recording for this item.
             setPracticeAudioError(
-              `No audio is available for this item yet (${String(e)}). Try again after installing a speech model, or practice other activities.`,
+              fixableBySpeechSetup(String(e))
+                ? `${audioFailureMessage(String(e))} Text practice still works.`
+                : `This pack ships no recording for this item. Text practice still works.`,
             );
           }
         }
@@ -1533,7 +1546,7 @@ export function App() {
 
   async function playShadowModel() {
     const inv = detectInvoke();
-    const item = shadowItems[shadowIdx];
+    const item = shadowItems?.[shadowIdx];
     if (!inv || !item) return;
     try {
       const req = await packRequest<{ wav_b64: string; source: string }>(
@@ -1546,7 +1559,7 @@ export function App() {
         { contentId: item.content_id },
       );
       if (!req.ok) {
-        setAudioMsg(req.error);
+        setAudioMsg(audioFailureMessage(req.error));
         return;
       }
       const a = req.value;
@@ -1554,11 +1567,11 @@ export function App() {
       const bytes = Uint8Array.from(atob(a.wav_b64), (c) => c.charCodeAt(0));
       playBlobUrl(URL.createObjectURL(new Blob([bytes], { type: "audio/wav" })));
     } catch (e) {
-      setAudioMsg(`No model audio is available for this item yet (${String(e)}).`);
+      setAudioMsg(audioFailureMessage(String(e)));
     }
   }
 
-  const shadowCurrent = shadowItems[shadowIdx] ?? null;
+  const shadowCurrent = shadowItems?.[shadowIdx] ?? null;
 
   // K-13: graded reading — formative input practice. No scoring, no
   // evidence; scaffolds fade by mastery natively, audio is media-first.
@@ -1599,7 +1612,7 @@ export function App() {
       const bytes = Uint8Array.from(atob(a.wav_b64), (c) => c.charCodeAt(0));
       playBlobUrl(URL.createObjectURL(new Blob([bytes], { type: "audio/wav" })));
     } catch (e) {
-      setStoryError(`No audio is available for this sentence yet (${String(e)}).`);
+      setStoryError(audioFailureMessage(String(e)));
     }
   }
 
@@ -1895,16 +1908,17 @@ export function App() {
     try {
       const req = await packRequest<string>(inv, selectedPack, "reference_audio", { unitId });
       if (!req.ok) {
-        setAudioMsg(req.error);
+        setAudioMsg(audioFailureMessage(req.error));
         return;
       }
       const bytes = Uint8Array.from(atob(req.value), (c) => c.charCodeAt(0));
       setAudioMsg(null);
       playBlobUrl(URL.createObjectURL(new Blob([bytes], { type: "audio/wav" })));
-    } catch {
-      setAudioMsg(
-        "No licensed audio is available for this item yet, and this build does not include speech synthesis. Text practice still works.",
-      );
+    } catch (e) {
+      // K-78: no invented cause. The engine's sentence already names whose
+      // media is missing (the installed pack version, O-05 republish rides
+      // that gap) — repeat it verbatim, do not dress it in a second copy.
+      setAudioMsg(`${audioFailureMessage(String(e))} Text practice still works.`);
     }
   }
 
@@ -2027,7 +2041,7 @@ export function App() {
   function recordAttempt() {
     void (async () => {
       let stream: MediaStream;
-      let fallbackNote: string | null = null;
+      let fallbackNote: string | null;
       // SETTINGS-001: the stored `microphone-enabled` setting is enforced
       // at the capture site — while it is off, getUserMedia is never
       // requested. (Without the native engine no setting exists.)
@@ -2199,20 +2213,6 @@ export function App() {
           <button
             type="button"
             className="tab"
-            aria-current={route === "language" ? "page" : undefined}
-            onClick={() => {
-              setRoute("language");
-              void refreshLanguages();
-              void refreshTts();
-              void refreshAligner();
-              void refreshSpeech();
-            }}
-          >
-            Languages
-          </button>
-          <button
-            type="button"
-            className="tab"
             aria-current={route === "scenarios" ? "page" : undefined}
             onClick={() => void openScenarios()}
           >
@@ -2271,11 +2271,14 @@ export function App() {
     >
       {route === "pronunciation" ? (
         <>
-          {audioMsg && (
-            <p role="status" className="notice">
-              {audioMsg}
-            </p>
-          )}
+          {audioMsg &&
+            (fixableBySpeechSetup(audioMsg) ? (
+              <SpeechSetupNotice message={audioMsg} onOpenSetup={() => void openSettings()} />
+            ) : (
+              <p role="status" className="notice">
+                {audioMsg}
+              </p>
+            ))}
           {pronDemo ? (
             <PronunciationPractice
               shortText={pronDemo.short_text}
@@ -2336,13 +2339,45 @@ export function App() {
               {shadowError}
             </p>
           )}
-          {audioMsg && (
-            <p role="status" className="notice">
-              {audioMsg}
-            </p>
-          )}
+          {audioMsg &&
+            (fixableBySpeechSetup(audioMsg) ? (
+              <SpeechSetupNotice message={audioMsg} onOpenSetup={() => void openSettings()} />
+            ) : (
+              <p role="status" className="notice">
+                {audioMsg}
+              </p>
+            ))}
           {!shadowCurrent ? (
-            <p className="empty">No shadowing targets are available in this pack yet.</p>
+            shadowTargetsState(shadowItems, shadowError) === "error" ? (
+              // K-76/W-08: a failed target read must never read as "this
+              // pack has no targets" — the pack and the mic may be fine
+              // while the read (or a half-finished install) failed. Name
+              // the failure, offer the retry, offer setup when relevant.
+              <div>
+                <p className="empty">
+                  The shadowing targets could not be loaded, so the practice controls are not shown.
+                  This is a load failure, not an empty pack.
+                </p>
+                <div className="btn-row">
+                  <button type="button" className="btn" onClick={openShadowing}>
+                    Retry
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn--quiet"
+                    onClick={() => void openSettings()}
+                  >
+                    Check language and speech setup
+                  </button>
+                </div>
+              </div>
+            ) : shadowTargetsState(shadowItems, shadowError) === "loading" ? (
+              <p className="empty" role="status">
+                Loading shadowing targets from the installed pack…
+              </p>
+            ) : (
+              <p className="empty">No shadowing targets are available in this pack yet.</p>
+            )
           ) : (
             <>
               <p className="surface">{shadowCurrent.surface}</p>
@@ -2382,13 +2417,15 @@ export function App() {
                   Previous
                 </button>
                 <span>
-                  {shadowIdx + 1} / {shadowItems.length}
+                  {shadowIdx + 1} / {shadowItems?.length ?? 0}
                 </span>
                 <button
                   type="button"
                   className="btn btn--quiet"
-                  disabled={shadowIdx >= shadowItems.length - 1}
-                  onClick={() => setShadowIdx((i) => Math.min(shadowItems.length - 1, i + 1))}
+                  disabled={shadowIdx >= (shadowItems?.length ?? 0) - 1}
+                  onClick={() =>
+                    setShadowIdx((i) => Math.min((shadowItems?.length ?? 0) - 1, i + 1))
+                  }
                 >
                   Next
                 </button>
@@ -2738,29 +2775,6 @@ export function App() {
             </section>
           )}
         </>
-      ) : route === "language" ? (
-        <LanguagePanel
-          installed={installed}
-          activeIds={activeIds}
-          catalog={catalog}
-          catalogStatus={catalogStatus}
-          error={langError}
-          onSwitch={(id) => void switchLearning(id)}
-          onInstallCatalog={(id) => void installCatalogPack(id)}
-          tts={ttsStatus}
-          onInstallModel={(id) => void installTtsModel(id)}
-          onDeleteModel={(id) => void deleteTtsModel(id)}
-          onImport={(b64) => void importPack(b64)}
-          speechModels={speechModels}
-          speechModel={speechModel}
-          onSelectSpeechModel={(id) => void selectSpeechModel(id)}
-          display={display}
-          onSelectStressMode={(m) => void setStressMode(m)}
-          claims={claims}
-          deviceTier={deviceTier}
-          aligner={alignerStatus}
-          progress={engineProgress}
-        />
       ) : route === "scenarios" ? (
         <ScenarioPanel
           scenarios={scenarioList}
@@ -2777,26 +2791,47 @@ export function App() {
           onBack={() => void openScenarios()}
         />
       ) : route === "settings" ? (
-        <Settings
-          microphoneEnabled={micEnabled}
-          onSetMicrophone={(v) => void setMicSetting(v)}
-          microphoneDevice={micDevice}
-          microphoneDevices={micDevices}
-          onPickMicrophone={(id) => void pickMicrophoneSetting(id)}
-          onDetectMicrophones={() => void refreshMicrophones()}
-          romajiMode={romajiMode}
-          onSetRomajiMode={(m) => void setRomajiSetting(m)}
-          speechModel={speechModel}
-          speechModels={speechModels}
-          onSelectSpeechModel={(id) => void selectSpeechModel(id)}
-          exportPath={settingsExportPath}
-          onExport={() => void exportProfileData()}
-          deleteArmed={settingsDeleteArmed}
-          onArmDelete={() => setSettingsDeleteArmed(true)}
-          onCancelDelete={() => setSettingsDeleteArmed(false)}
-          onConfirmDelete={() => void confirmProfileDelete()}
-          error={settingsError}
-        />
+        <>
+          <LanguagePanel
+            installed={installed}
+            activeIds={activeIds}
+            catalog={catalog}
+            catalogStatus={catalogStatus}
+            error={langError}
+            onSwitch={(id) => void switchLearning(id)}
+            onInstallCatalog={(id) => void installCatalogPack(id)}
+            onImport={(b64) => void importPack(b64)}
+            display={display}
+            onSelectStressMode={(m) => void setStressMode(m)}
+            claims={claims}
+            progress={engineProgress}
+          />
+          <Settings
+            microphoneEnabled={micEnabled}
+            onSetMicrophone={(v) => void setMicSetting(v)}
+            microphoneDevice={micDevice}
+            microphoneDevices={micDevices}
+            onPickMicrophone={(id) => void pickMicrophoneSetting(id)}
+            onDetectMicrophones={() => void refreshMicrophones()}
+            romajiMode={romajiMode}
+            onSetRomajiMode={(m) => void setRomajiSetting(m)}
+            speechModel={speechModel}
+            speechModels={speechModels}
+            onSelectSpeechModel={(id) => void selectSpeechModel(id)}
+            tts={ttsStatus}
+            onInstallModel={(id) => void installTtsModel(id)}
+            onDeleteModel={(id) => void deleteTtsModel(id)}
+            aligner={alignerStatus}
+            deviceTier={deviceTier}
+            exportPath={settingsExportPath}
+            onExport={() => void exportProfileData()}
+            deleteArmed={settingsDeleteArmed}
+            onArmDelete={() => setSettingsDeleteArmed(true)}
+            onCancelDelete={() => setSettingsDeleteArmed(false)}
+            onConfirmDelete={() => void confirmProfileDelete()}
+            error={settingsError}
+          />
+        </>
       ) : practiceTarget && practiceTask ? (
         <>
           {practiceError && (

@@ -215,7 +215,11 @@ export function Home(p: HomeProps) {
                   return (
                     <li key={item.item_id}>
                       {p.onStart && verb ? (
-                        <button type="button" className="plan-item" onClick={() => p.onStart!(item)}>
+                        <button
+                          type="button"
+                          className="plan-item"
+                          onClick={() => p.onStart!(item)}
+                        >
                           {label}
                           <span className="meta">
                             {verb} · ~{item.est_seconds}s
@@ -238,11 +242,9 @@ export function Home(p: HomeProps) {
           );
         })
       )}
-      {p.nextGoal === undefined ? (
-        null
-      ) : p.nextGoal === null ? (
+      {p.nextGoal === undefined ? null : p.nextGoal === null ? (
         <p className="empty next-goal-none">
-          This pack declares no learning path yet. Choose one under Languages.
+          This pack declares no learning path yet. Choose one under Settings → Language packs.
         </p>
       ) : (
         <p className="meta next-goal" data-goal={p.nextGoal.goal_id}>

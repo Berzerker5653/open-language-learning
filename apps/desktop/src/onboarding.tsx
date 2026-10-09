@@ -20,12 +20,7 @@ export interface PackCandidate {
 }
 
 export type OnboardingStep =
-  | "resume"
-  | "welcome"
-  | "packs"
-  | "microphone"
-  | "speech-setup"
-  | "done";
+  "resume" | "welcome" | "packs" | "microphone" | "speech-setup" | "done";
 
 /**
  * One part of the speech stack (K-72): the sherpa runtime, the Japanese
@@ -201,7 +196,8 @@ export function Onboarding(p: OnboardingProps) {
           <p>
             <small>
               You can import community packs or change the language you are learning later from the
-              Languages page. This never changes the app&apos;s own interface language.
+              Language packs section of Settings. This never changes the app&apos;s own interface
+              language.
             </small>
           </p>
           {!canContinue ? (
@@ -233,8 +229,8 @@ export function Onboarding(p: OnboardingProps) {
           <h1>Microphone (optional)</h1>
           <p>
             Speaking activities need a microphone, but it is never required. You can skip this and
-            enable it later in Settings; skipping never blocks progress. Enabling it continues to
-            a speech setup step — saying "yes" to the microphone never leaves you to find the
+            enable it later in Settings; skipping never blocks progress. Enabling it continues to a
+            speech setup step — saying "yes" to the microphone never leaves you to find the
             downloads on your own (K-72).
           </p>
           <div className="btn-row">
@@ -251,10 +247,10 @@ export function Onboarding(p: OnboardingProps) {
         <div className="card">
           <h1>Speech setup</h1>
           <p>
-            Speaking and listening activities use three components downloaded once to this
-            computer. Installing them now is optional — skipping is a clean choice and the app
-            will offer the download wherever an activity needs it — but without them those
-            activities stay text-only.
+            Speaking and listening activities use three components downloaded once to this computer.
+            Installing them now is optional — skipping is a clean choice and the app will offer the
+            download wherever an activity needs it — but without them those activities stay
+            text-only.
           </p>
           <ul className="speech-components">
             {p.speechComponents.map((c) => (
@@ -298,7 +294,6 @@ export function Onboarding(p: OnboardingProps) {
           </div>
         </div>
       )}
-
 
       {p.step === "done" && (
         <div className="card">
