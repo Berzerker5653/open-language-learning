@@ -192,6 +192,40 @@ Template per item:
 - Candidate severity: polish / information architecture
 - KANBAN card: K-77
 
+### W-10 — Pronunciation "reference" plays nothing; no clue what to repeat  [issue]
+- Screen/step: Pronunciation tab → clicked reference audio
+- Expected: hear the model so you know what to repeat — or be told
+  audio is unavailable and how to enable it
+- Saw: silent; no audio, no explanation (screenshot at 09:09)
+- Candidate severity: blocker (the activity's whole premise fails
+  silently — same missing voice chain as W-08, different surface)
+- Facts found while logging: identical root as W-08(a): reference audio
+  = `speech_audio` TTS chain (sherpa-onnx runtime + Kokoro voice),
+  neither installed; the click just fails quietly. The app never says
+  "reference audio needs the speech setup — install it" anywhere on
+  this surface
+- KANBAN card: K-78
+
+### W-11 — Progress goal map reads as a broken hierarchy  [issue]
+- Screen/step: Progress window (screenshot archived as
+  `W-11-progress.png`)
+- Did: looked at the goal map
+- Expected: a structure that explains itself — if four items sit under
+  a locked one, do they belong to it? Must they be done to unlock it?
+- Saw: a LOCKED top item with four OPEN items below it — the four
+  "shouldn't be open" if they are children of a locked parent; nothing
+  says which reading is true
+- Candidate severity: confusing — undermines the whole motivation model
+- Facts found while logging: it is NOT a hierarchy. `GoalMap`
+  (home.tsx:412) groups goals into FLAT bands (onramp, A1, …); within
+  a band it's one undifferentiated list, each goal independently
+  open/locked by its prerequisites ("Goals open as their prerequisites
+  are met" is only in the small-print intro). So a locked goal sitting
+  above open ones is just list order — but every reader will parse it
+  as parent/child. Nothing per-goal shows WHY it is locked or WHAT
+  unlocks it
+- KANBAN card: K-79
+
 ## Ops notes
 
 - ~08:55 the supervised preview wrapper was SIGTERMed (exit 143) right
