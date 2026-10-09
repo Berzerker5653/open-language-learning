@@ -292,7 +292,7 @@ fn mined_items_crud_and_cascade() {
     let store = lts_storage::Store::open(&db).unwrap();
     let p = store.create_profile("Ana", "2026-10-03T09:00:00Z").unwrap();
 
-    store
+    let first = store
         .add_mined(
             &p.id,
             lts_storage::NewMinedItem {
@@ -305,7 +305,14 @@ fn mined_items_crud_and_cascade() {
             },
         )
         .unwrap();
-    store
+    assert_eq!(
+        first,
+        lts_storage::AddMinedOutcome {
+            id: "mine-1".into(),
+            was_new: true
+        }
+    );
+    let second = store
         .add_mined(
             &p.id,
             lts_storage::NewMinedItem {
@@ -318,6 +325,13 @@ fn mined_items_crud_and_cascade() {
             },
         )
         .unwrap();
+    assert_eq!(
+        second,
+        lts_storage::AddMinedOutcome {
+            id: "mine-2".into(),
+            was_new: true
+        }
+    );
     let items = store.mined_items(&p.id).unwrap();
     assert_eq!(items.len(), 2);
     assert_eq!(items[0].source_citation, "ja.story.demo.first-meeting");
@@ -344,4 +358,119 @@ fn mined_items_crud_and_cascade() {
             .all(|r| r.item_id != "mine-1")
     );
     assert!(!store.remove_mined(&p.id, "mine-1").unwrap());
+}
+
+#[test]
+fn duplicate_mined_surface_keeps_the_original_row_and_srs_history() {
+    // K-61: mining the same surface twice used to die on the
+    // UNIQUE(profile_id, surface) constraint and surface raw sqlite text
+    // to the learner. It must instead keep the ORIGINAL row — id,
+    // created_at, and the scheduler_state row anchored to that id — and
+    // only fold in new annotations.
+    let dir = tempfile::tempdir().unwrap();
+    let db = dir.path().join("learner.db");
+    let store = lts_storage::Store::open(&db).unwrap();
+    let p = store.create_profile("Ana", "2026-10-03T09:00:00Z").unwrap();
+
+    store
+        .add_mined(
+            &p.id,
+            lts_storage::NewMinedItem {
+                id: "mine-1",
+                surface: "ねこ",
+                reading: None,
+                gloss: Some("cat"),
+                source_citation: "ja.story.demo.first-meeting",
+                created_at: "2026-10-03T09:00:00Z",
+            },
+        )
+        .unwrap();
+    store
+        .save_scheduler_state(
+            &p.id,
+            &lts_storage::SchedulerRecord {
+                item_id: "mine-1".into(),
+                scheduler: "fsrs-spike-0.1.0".into(),
+                params_json: "{\"s\":1}".into(),
+                due_at: "2026-10-04T09:00:00Z".into(),
+            },
+        )
+        .unwrap();
+
+    let dup = store
+        .add_mined(
+            &p.id,
+            lts_storage::NewMinedItem {
+                id: "mine-dup",
+                surface: "ねこ",
+                reading: Some("ねこ"),
+                gloss: Some("CAT"),
+                source_citation: "manual",
+                created_at: "2026-10-05T09:00:00Z",
+            },
+        )
+        .unwrap();
+    assert_eq!(
+        dup,
+        lts_storage::AddMinedOutcome {
+            id: "mine-1".into(),
+            was_new: false
+        }
+    );
+
+    let items = store.mined_items(&p.id).unwrap();
+    assert_eq!(items.len(), 1);
+    assert_eq!(items[0].id, "mine-1");
+    // created_at is untouched: the learner's ordering/history survives.
+    assert_eq!(items[0].created_at, "2026-10-03T09:00:00Z");
+    // COALESCE folds in the new reading...
+    assert_eq!(items[0].reading.as_deref(), Some("ねこ"));
+    // ...but a new non-null gloss overwrites, while a None never erases.
+    assert_eq!(items[0].gloss.as_deref(), Some("CAT"));
+    store
+        .add_mined(
+            &p.id,
+            lts_storage::NewMinedItem {
+                id: "mine-dup-2",
+                surface: "ねこ",
+                reading: None,
+                gloss: None,
+                source_citation: "manual",
+                created_at: "2026-10-05T09:30:00Z",
+            },
+        )
+        .unwrap();
+    let items = store.mined_items(&p.id).unwrap();
+    assert_eq!(items.len(), 1);
+    assert_eq!(items[0].reading.as_deref(), Some("ねこ"));
+    assert_eq!(items[0].gloss.as_deref(), Some("CAT"));
+
+    // The SRS row still points at the surviving id, unchanged.
+    assert_eq!(
+        store.scheduler_state(&p.id).unwrap(),
+        vec![lts_storage::SchedulerRecord {
+            item_id: "mine-1".into(),
+            scheduler: "fsrs-spike-0.1.0".into(),
+            params_json: "{\"s\":1}".into(),
+            due_at: "2026-10-04T09:00:00Z".into(),
+        }]
+    );
+
+    // Another profile mining the same surface gets its own row.
+    let q = store.create_profile("Bo", "2026-10-03T10:00:00Z").unwrap();
+    let other = store
+        .add_mined(
+            &q.id,
+            lts_storage::NewMinedItem {
+                id: "mine-q1",
+                surface: "ねこ",
+                reading: None,
+                gloss: Some("cat"),
+                source_citation: "manual",
+                created_at: "2026-10-03T10:00:00Z",
+            },
+        )
+        .unwrap();
+    assert!(other.was_new);
+    assert_eq!(store.mined_items(&q.id).unwrap().len(), 1);
 }

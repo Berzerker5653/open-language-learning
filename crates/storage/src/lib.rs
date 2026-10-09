@@ -23,7 +23,7 @@ pub use evidence::{NewRecording, Recording};
 pub use export::{EXPORT_FORMAT_VERSION, ExportBundle, ExportOptions, ImportError, ImportMode};
 pub use mastery::MasterySnapshot;
 pub use migrations::SCHEMA_VERSION;
-pub use mined::{MinedItem, NewMinedItem};
+pub use mined::{AddMinedOutcome, MinedItem, NewMinedItem};
 pub use packs::{ContentVersion, PackInstallation};
 pub use profile::{GoalStatus, LearnerGoal, Profile, Setting};
 pub use scheduler::SchedulerRecord;

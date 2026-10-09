@@ -6,7 +6,7 @@
 
 use crate::Store;
 use crate::error::Error;
-use rusqlite::params;
+use rusqlite::{OptionalExtension, params};
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct MinedItem {
@@ -29,14 +29,62 @@ pub struct NewMinedItem<'a> {
     pub created_at: &'a str,
 }
 
+/// Result of `add_mined`: the id of the row that survived, and whether
+/// this call created it. Mining a surface twice keeps the ORIGINAL row
+/// (id, created_at, and its `scheduler_state` row are anchored to that
+/// id), so a repeat mine can never silently reset the learner's SRS
+/// history for that word.
+#[derive(Debug, Clone, PartialEq)]
+pub struct AddMinedOutcome {
+    pub id: String,
+    pub was_new: bool,
+}
+
 impl Store {
-    pub fn add_mined(&self, profile_id: &str, item: NewMinedItem<'_>) -> Result<(), Error> {
-        self.conn.execute(
+    pub fn add_mined(
+        &self,
+        profile_id: &str,
+        item: NewMinedItem<'_>,
+    ) -> Result<AddMinedOutcome, Error> {
+        // (profile_id, surface) is UNIQUE (migration 4). A repeat mine must
+        // not fail and must not replace the learner's row: the original id
+        // stays (its `scheduler_state` row is anchored to that id, so the
+        // word's SRS history survives), and only the annotations the caller
+        // actually supplied are folded in with COALESCE — a None never erases
+        // what the learner already recorded.
+        //
+        // `ON CONFLICT DO NOTHING` plus the change count is the race-free
+        // discriminator. A read-then-insert pre-check would let two
+        // simultaneous Mine clicks both try to insert, and the loser would
+        // surface exactly the raw UNIQUE error this change removes.
+        let inserted = self.conn.execute(
             "INSERT INTO mined_items(id, profile_id, surface, reading, gloss, source_citation, created_at)
-             VALUES (?1,?2,?3,?4,?5,?6,?7)",
+             VALUES (?1,?2,?3,?4,?5,?6,?7)
+             ON CONFLICT(profile_id, surface) DO NOTHING",
             params![item.id, profile_id, item.surface, item.reading, item.gloss, item.source_citation, item.created_at],
         )?;
-        Ok(())
+        if inserted > 0 {
+            return Ok(AddMinedOutcome {
+                id: item.id.to_string(),
+                was_new: true,
+            });
+        }
+        self.conn.execute(
+            "UPDATE mined_items
+             SET reading = COALESCE(?3, reading), gloss = COALESCE(?4, gloss)
+             WHERE profile_id = ?1 AND surface = ?2",
+            params![profile_id, item.surface, item.reading, item.gloss],
+        )?;
+        let id = self
+            .conn
+            .query_row(
+                "SELECT id FROM mined_items WHERE profile_id = ?1 AND surface = ?2",
+                params![profile_id, item.surface],
+                |r| r.get(0),
+            )
+            .optional()?
+            .ok_or_else(|| Error::NotFound(format!("mined surface {:?}", item.surface)))?;
+        Ok(AddMinedOutcome { id, was_new: false })
     }
 
     pub fn mined_items(&self, profile_id: &str) -> Result<Vec<MinedItem>, Error> {
