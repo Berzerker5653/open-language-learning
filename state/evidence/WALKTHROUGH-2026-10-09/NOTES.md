@@ -161,6 +161,37 @@ Template per item:
 - Candidate severity: confusing polish with real drop-off risk
 - KANBAN card: K-75
 
+### W-08 — Shadowing offers no model audio or record despite Whisper installed  [issue]
+- Screen/step: Shadowing tab, after installing the whisper model
+- Did: opened Shadowing expecting the speak-along loop (play model,
+  record, play back)
+- Expected: playable model audio + a record control, or at least a
+  clear statement of what's still missing and a way to get it
+- Saw: neither play nor record offered; no explanation
+- Candidate severity: blocker-class (a headline activity silently
+  absent after the learner did the download work)
+- Facts found while logging: model audio goes through `speech_audio` →
+  TTS chain — that needs the sherpa-onnx RUNTIME plus the Kokoro
+  Japanese VOICE model; whisper is recognition only. In this test data
+  dir (`/tmp/lts-walkthrough-data/models/`) only whisper-ggml-small is
+  installed, so the play path genuinely has no voice; but the UI
+  neither says so nor offers the missing pieces inline — it just
+  withholds the activity. The three-piece speech stack (runtime /
+  voice / recognition) being presented as separate raw model entries
+  is exactly why a learner who "installed the Whisper model" reasonably
+  expects speech to work.
+- KANBAN card: K-76
+
+### W-09 — Settings and Languages tabs overlap; consider merging  [suggestion]
+- Screen/step: Settings tab vs Languages tab, side by side in use
+- Owner suggestion: the two tabs feel near-identical; move Languages
+  under Settings (or rearrange) so the app feels cleaner
+- Saw: duplicated concepts — e.g. a speech-model picker exists in BOTH
+  tabs (settings.tsx documents it as "Same preference as
+  Languages → Speech (get/set_speech_model)")
+- Candidate severity: polish / information architecture
+- KANBAN card: K-77
+
 ## Ops notes
 
 - ~08:55 the supervised preview wrapper was SIGTERMed (exit 143) right
