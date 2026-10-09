@@ -1063,3 +1063,26 @@ shadowing *capture* failure path (mic in WebKitGTK) is not headless-
 testable — its gating is pinned at unit level only; K-70 day-1 behavior
 is proven at selection/engine level, not by a fresh-profile UI run;
 re-publishing the published packs with baked media stays owner work.
+
+**Follow-on same day — UI/IA field research (no code).** The owner asked
+whether we had researched how other teaching applications handle UI design
+and structure. We had not: the only prior note
+(`docs/research/2026-10-09-todays-work-and-onboarding.md`) covered
+daily-work mechanics, not information architecture. Three parallel research
+slices produced `docs/research/2026-10-09-ui-structure-and-navigation-patterns.md`
+(46 sources: Duolingo/Busuu/Babbel/Mondly/Memrise; Bunpro/WaniKani/LingoDeer;
+NN/g, WCAG 4.1.3 and 2.2.1, ARIA APG range widgets, and the streak/gamification
+literature including one randomized field experiment, a classroom counter-study,
+and a meta-analysis). What it settles for us: settings-under-profile is the field
+norm, so today's K-77 fold is the conventional choice; the empty/loading/error
+discipline the K-76/K-78 work implemented is exactly what NN/g prescribes; the
+indeterminate-progress and `aria-valuenow`-omission rules match the honesty
+contract already in `progress.rs`; and our streak-free posture is the
+evidence-consistent one. What it opens (owner decisions, nothing implemented):
+12 top-level nav tabs against a 4–6 field norm, the unlabeled new-vs-review mix
+on Today, missing mark-known/drill-now overrides, and a Progress dashboard whose
+opportunity is real but whose measured effect sizes are modest. Every claim is
+tagged FACT / `[INFERENCE]` / `[UNCERTAIN]`, with a dead-ends section naming
+what could not be read (Duolingo help is a JS shell; Mondly returns 403; Bunpro
+article bodies are JS-rendered; LingoDeer is marketing-only; end-of-session
+summary screens need a human with the apps installed).
