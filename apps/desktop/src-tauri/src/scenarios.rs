@@ -22,7 +22,6 @@ use std::sync::Mutex;
 pub type SessionStore = Mutex<HashMap<String, ScenarioSession>>;
 
 #[derive(Serialize)]
-#[serde(rename_all = "kebab-case")]
 pub struct ScenarioSummary {
     pub scenario_id: String,
     pub title: String,
@@ -34,14 +33,12 @@ pub struct ScenarioSummary {
 }
 
 #[derive(Serialize)]
-#[serde(rename_all = "kebab-case")]
 pub struct RecoveryView {
     pub id: String,
     pub prompt: String,
 }
 
 #[derive(Serialize)]
-#[serde(rename_all = "kebab-case")]
 pub struct NodeView {
     pub id: String,
     pub prompt: String,
@@ -52,14 +49,12 @@ pub struct NodeView {
 }
 
 #[derive(Serialize)]
-#[serde(rename_all = "kebab-case")]
 pub struct LadderView {
     pub support_level: u8,
     pub description: String,
 }
 
 #[derive(Serialize)]
-#[serde(rename_all = "kebab-case")]
 pub struct TransferView {
     pub id: String,
     pub description: String,
@@ -67,7 +62,6 @@ pub struct TransferView {
 }
 
 #[derive(Serialize)]
-#[serde(rename_all = "kebab-case")]
 pub struct ScenarioView {
     pub scenario_id: String,
     pub title: String,
@@ -80,7 +74,6 @@ pub struct ScenarioView {
 }
 
 #[derive(Serialize)]
-#[serde(rename_all = "kebab-case")]
 pub struct StepView {
     /// "advanced" | "completed" | "not-satisfied"
     pub result: String,
@@ -91,7 +84,6 @@ pub struct StepView {
 }
 
 #[derive(Serialize)]
-#[serde(rename_all = "kebab-case")]
 pub struct OutcomeView {
     pub nodes_completed: u32,
     pub transfers_completed: u32,
@@ -102,16 +94,22 @@ fn session_key(profile_id: &str, scenario_id: &str) -> String {
     format!("{profile_id}:{scenario_id}")
 }
 
-/// Load the activity runtime (units/scenarios/lexicon) for an installed
-/// pack. Paths are built only from validated pack ids and versions.
-fn runtime_for(data: &Path, pack_id: &str) -> Result<(ActivityRuntime, String), String> {
+/// Load the activity runtime (units/scenarios/lexicon) for an installed pack.
+/// Paths are built only from validated pack ids and versions.
+///
+/// K-63: the runtime is shared per installed version rather than rebuilt per
+/// command. An installed version directory is immutable, and the Scenarios
+/// route was paying a full pack parse (~550 ms on the reference machine) each
+/// time it listed the same activities.
+fn runtime_for(
+    data: &Path,
+    pack_id: &str,
+) -> Result<(std::sync::Arc<ActivityRuntime>, String), String> {
     let packs_root = data.join("packs");
     let version = lts_langpack::archive::current_version(pack_id, &packs_root)
         .ok_or_else(|| format!("pack {pack_id} not installed"))?;
     let root = packs_root.join(pack_id).join(&version);
-    let pack = lts_langpack::Pack::load_dir(&root).map_err(|e| format!("pack load: {e}"))?;
-    let runtime = ActivityRuntime::from_pack(&pack).map_err(|e| format!("activity load: {e}"))?;
-    Ok((runtime, version))
+    Ok((crate::packcache::runtime(&root)?, version))
 }
 
 /// Hard-prerequisite gate shared with curriculum progression: every
@@ -518,4 +516,92 @@ pub fn finish_at(
         transfers_completed: outcome.transfers_completed.len() as u32,
         transfer_requirement_met: outcome.transfer_requirement_met,
     })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // Wire contract: apps/desktop/src/scenario.tsx and the scenario call
+    // sites in App.tsx read these fields by snake_case name. A
+    // `#[serde(rename_all = "kebab-case")]` creeping back onto any view
+    // struct makes `scenarioId` undefined at the invoke boundary and every
+    // scenario action dies with "missing required key scenarioId" (K-60).
+    #[test]
+    fn scenario_views_serialize_snake_case_keys() {
+        let summary = ScenarioSummary {
+            scenario_id: "ja.scenario.first-meeting".into(),
+            title: "First meeting".into(),
+            situation: Some("An acquaintance waves at you.".into()),
+            goal_id: "ja.goal.onramp.respond-to-greeting".into(),
+            unlocked: true,
+            locked_reason: None,
+        };
+        let mut keys: Vec<String> = serde_json::to_value(&summary)
+            .expect("summary serializes")
+            .as_object()
+            .expect("summary is an object")
+            .keys()
+            .cloned()
+            .collect();
+        keys.sort();
+        assert_eq!(
+            keys,
+            [
+                "goal_id",
+                "locked_reason",
+                "scenario_id",
+                "situation",
+                "title",
+                "unlocked"
+            ]
+        );
+
+        let view = ScenarioView {
+            scenario_id: summary.scenario_id.clone(),
+            title: summary.title.clone(),
+            situation: summary.situation.clone(),
+            node: NodeView {
+                id: "node-1".into(),
+                prompt: "How do you answer?".into(),
+                actions: vec!["greeting".into()],
+                recovery: vec![RecoveryView {
+                    id: "recovery-1".into(),
+                    prompt: "Try a smaller move".into(),
+                }],
+            },
+            ladder: vec![LadderView {
+                support_level: 1,
+                description: "First ladder rung".into(),
+            }],
+            transfers: vec![TransferView {
+                id: "transfer-1".into(),
+                description: "Say it to a friend".into(),
+                done: false,
+            }],
+            transfers_required: 1,
+            support_used: vec![1],
+        };
+        let mut keys: Vec<String> = serde_json::to_value(&view)
+            .expect("view serializes")
+            .as_object()
+            .expect("view is an object")
+            .keys()
+            .cloned()
+            .collect();
+        keys.sort();
+        assert_eq!(
+            keys,
+            [
+                "ladder",
+                "node",
+                "scenario_id",
+                "situation",
+                "support_used",
+                "title",
+                "transfers",
+                "transfers_required"
+            ]
+        );
+    }
 }

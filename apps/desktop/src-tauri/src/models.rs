@@ -11,6 +11,7 @@
 //!   `installed.json` so trust never travels across versions
 //!   (docs/17 "never carry trust forward").
 
+use crate::progress::Progress;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::fs;
@@ -145,15 +146,20 @@ pub fn installable(entry: &ModelEntry) -> bool {
         .all(|f| !f.url.contains("PENDING-RELEASE-URL") && !f.url.is_empty())
 }
 
-/// Install one model from bytes produced by `fetch(file)`. Files are
-/// written to a staging directory, every checksum verified, then the
-/// directory is moved into place atomically. Any failure removes the
-/// staging directory, leaving the model `missing` (retry-safe).
-pub fn install_model_files(
+/// Install one model from bytes produced by `fetch(file)`, reporting the stage
+/// it is in (K-62). Files go to a staging directory, every checksum is
+/// verified, then the directory is moved into place atomically; any failure
+/// removes the staging directory, leaving the model `missing` (retry-safe).
+/// The percentage is
+/// one the app can actually know: the catalog pins every file's size, so the
+/// fraction of bytes already fetched and verified is exact. It does not move
+/// inside one large file, because that would be an estimate of work in flight.
+pub fn install_model_files_report(
     data: &Path,
     entry: &ModelEntry,
     now_rfc: &str,
     fetch: impl Fn(&ModelFile) -> Result<Vec<u8>, String>,
+    mut report: impl FnMut(&Progress),
 ) -> Result<InstalledRecord, String> {
     if !installable(entry) {
         return Err(format!(
@@ -161,6 +167,8 @@ pub fn install_model_files(
             entry.id, entry.version
         ));
     }
+    let total_bytes: u64 = entry.files.iter().map(|f| f.size_bytes).sum();
+    let mut fetched_bytes: u64 = 0;
     let dest = model_dir(data, entry);
     let staging = dest.with_extension("staging");
     let _ = fs::remove_dir_all(&staging);
@@ -169,6 +177,12 @@ pub fn install_model_files(
     let result = (|| -> Result<InstalledRecord, String> {
         let mut extracted: Vec<HashedFile> = Vec::new();
         for f in &entry.files {
+            report(&Progress::with_percent(
+                "install-model",
+                &entry.id,
+                "fetch",
+                percent_done(fetched_bytes, total_bytes),
+            ));
             let bytes = fetch(f)?;
             let mut hasher = Sha256::new();
             hasher.update(&bytes);
@@ -196,7 +210,9 @@ pub fn install_model_files(
                 }
                 fs::write(&out, &bytes).map_err(|e| e.to_string())?;
             }
+            fetched_bytes += f.size_bytes;
         }
+        report(&Progress::stage("install-model", &entry.id, "record"));
         let record = InstalledRecord {
             id: entry.id.clone(),
             version: entry.version.clone(),
@@ -225,6 +241,15 @@ pub fn install_model_files(
         let _ = fs::remove_dir_all(&staging);
     }
     result
+}
+
+/// Completed fraction of the install, 0-100. Empty manifests report 0 rather
+/// than dividing by zero.
+fn percent_done(done: u64, total: u64) -> u8 {
+    if total == 0 {
+        return 0;
+    }
+    ((done.min(total) * 100) / total).min(100) as u8
 }
 
 /// Extract a directory entry's zip archive into `staging/<path>`.
@@ -418,6 +443,13 @@ pub fn save_speech_pref(data: &Path, pref: &SpeechPref) -> Result<(), String> {
 mod tests {
     use super::*;
 
+    /// Progress is not what most of these tests are about, but the reporter
+    /// parameter is how every production install runs: one entry point, no
+    /// silent second path.
+    fn silent() -> impl FnMut(&Progress) {
+        |_| {}
+    }
+
     fn test_entry() -> ModelEntry {
         ModelEntry {
             id: "test.model".into(),
@@ -446,13 +478,25 @@ mod tests {
         let e = test_entry();
 
         // Bad bytes: checksum error, and NO partial install (recoverable).
-        let err = install_model_files(data, &e, "2026-10-03T00:00:00Z", |_| Ok(b"wrong!".to_vec()));
+        let err = install_model_files_report(
+            data,
+            &e,
+            "2026-10-03T00:00:00Z",
+            |_| Ok(b"wrong!".to_vec()),
+            silent(),
+        );
         assert!(err.is_err());
         assert!(!model_dir(data, &e).exists());
 
         // Retry with correct bytes succeeds; record carries version+license.
-        let rec = install_model_files(data, &e, "2026-10-03T00:00:00Z", |_| Ok(b"hello".to_vec()))
-            .unwrap();
+        let rec = install_model_files_report(
+            data,
+            &e,
+            "2026-10-03T00:00:00Z",
+            |_| Ok(b"hello".to_vec()),
+            silent(),
+        )
+        .unwrap();
         assert_eq!(rec.license_code, "MIT");
         assert_eq!(rec.version, "1.0.0");
         assert!(verify_installed(data, &e).unwrap());
@@ -471,9 +515,13 @@ mod tests {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
         let e = test_entry();
-        let err = install_model_files(data, &e, "2026-10-04T00:00:00Z", |_| {
-            Err("network down".into())
-        })
+        let err = install_model_files_report(
+            data,
+            &e,
+            "2026-10-04T00:00:00Z",
+            |_| Err("network down".into()),
+            silent(),
+        )
         .unwrap_err();
         assert!(err.contains("network down"));
         assert!(!model_dir(data, &e).exists());
@@ -528,8 +576,14 @@ mod tests {
         ]);
         let e = dir_entry(&archive);
 
-        let rec =
-            install_model_files(data, &e, "2026-10-04T00:00:00Z", |_| Ok(archive.clone())).unwrap();
+        let rec = install_model_files_report(
+            data,
+            &e,
+            "2026-10-04T00:00:00Z",
+            |_| Ok(archive.clone()),
+            silent(),
+        )
+        .unwrap();
         assert_eq!(rec.extracted.len(), 3);
         let dir = model_dir(data, &e);
         assert!(dir.join("payload/espeak-ng-data/index").exists());
@@ -555,7 +609,14 @@ mod tests {
         let evil = zip_bytes(vec![("../evil", b"x".as_slice(), 0o644)]);
         let e2 = dir_entry(&evil);
         assert!(
-            install_model_files(data, &e2, "2026-10-04T00:00:00Z", |_| Ok(evil.clone())).is_err()
+            install_model_files_report(
+                data,
+                &e2,
+                "2026-10-04T00:00:00Z",
+                |_| Ok(evil.clone()),
+                silent(),
+            )
+            .is_err()
         );
         assert!(!data.join("evil").exists());
         assert!(!model_dir(data, &e).with_extension("staging").exists());
@@ -575,7 +636,14 @@ mod tests {
         let link = lbuf.into_inner();
         let e3 = dir_entry(&link);
         assert!(
-            install_model_files(data, &e3, "2026-10-04T00:00:00Z", |_| Ok(link.clone())).is_err()
+            install_model_files_report(
+                data,
+                &e3,
+                "2026-10-04T00:00:00Z",
+                |_| Ok(link.clone()),
+                silent(),
+            )
+            .is_err()
         );
         assert!(!model_dir(data, &e).join("payload/sneaky").exists());
         assert!(!model_dir(data, &e).with_extension("staging").exists());
@@ -682,10 +750,16 @@ mod tests {
             .unwrap();
         let tmp = tempfile::tempdir().unwrap();
         let fetched = std::sync::atomic::AtomicUsize::new(0);
-        let err = install_model_files(tmp.path(), entry, "2026-10-08T00:00:00Z", |_| {
-            fetched.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
-            Ok(Vec::new())
-        })
+        let err = install_model_files_report(
+            tmp.path(),
+            entry,
+            "2026-10-08T00:00:00Z",
+            |_| {
+                fetched.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
+                Ok(Vec::new())
+            },
+            silent(),
+        )
         .unwrap_err();
         assert!(
             err.contains("not published"),
@@ -712,12 +786,57 @@ mod tests {
         let tmp = tempfile::tempdir().unwrap();
         let fetched = std::sync::atomic::AtomicUsize::new(0);
         assert!(
-            install_model_files(tmp.path(), &e, "2026-10-08T00:00:00Z", |_| {
-                fetched.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
-                Ok(Vec::new())
-            })
+            install_model_files_report(
+                tmp.path(),
+                &e,
+                "2026-10-08T00:00:00Z",
+                |_| {
+                    fetched.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
+                    Ok(Vec::new())
+                },
+                silent(),
+            )
             .is_err()
         );
         assert_eq!(fetched.load(std::sync::atomic::Ordering::SeqCst), 0);
+    }
+
+    /// K-62: a model install is the longest wait in the app, and the catalog
+    /// pins every file's size, so a percentage is knowable here. It is only
+    /// allowed to move when whole pinned files have actually landed — never as
+    /// a guess about the file still in flight.
+    #[test]
+    fn a_model_install_reports_completed_bytes_and_nothing_invented() {
+        let tmp = tempfile::tempdir().unwrap();
+        let mut e = test_entry();
+        let mut h = Sha256::new();
+        h.update(b"world");
+        e.files.push(ModelFile {
+            path: "g.bin".into(),
+            url: "unused".into(),
+            sha256: format!("{:x}", h.finalize()),
+            size_bytes: 5,
+            dir: false,
+        });
+        let mut seen: Vec<(&'static str, Option<u8>)> = Vec::new();
+        install_model_files_report(
+            tmp.path(),
+            &e,
+            "2026-10-08T00:00:00Z",
+            |f| {
+                Ok(if f.path == "f.bin" {
+                    b"hello".to_vec()
+                } else {
+                    b"world".to_vec()
+                })
+            },
+            &mut |p: &Progress| seen.push((p.stage, p.percent)),
+        )
+        .unwrap();
+        assert_eq!(
+            seen,
+            vec![("fetch", Some(0)), ("fetch", Some(50)), ("record", None)]
+        );
+        assert!(model_dir(tmp.path(), &e).join("g.bin").exists());
     }
 }

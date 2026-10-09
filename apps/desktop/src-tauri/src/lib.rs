@@ -8,7 +8,9 @@
 //! supplies paths), and an honest privacy notice (docs/08).
 
 mod models;
+mod packcache;
 mod packs;
+mod progress;
 mod scenarios;
 use lts_speech_api::{
     AcousticFeatureProvider, AlignmentProvider, PronunciationInterpreter, ProsodyProvider,
@@ -111,38 +113,132 @@ fn manifest_display_name(pack_path: &Path, pack_id: &str) -> String {
         })
         .unwrap_or_else(|| pack_id.to_string())
 }
+/// K-59 (ADR-0019 variant pattern): where a pack-bundled build's staged
+/// pack sources live (`<resource_dir>/packs`). Set once at startup from
+/// the resource dir, exactly like `BUNDLED_TTS`/`BUNDLED_SIDECAR`; unset
+/// for bare/dev builds, which resolve from the repo tree as always.
+static BUNDLED_PACKS: std::sync::OnceLock<PathBuf> = std::sync::OnceLock::new();
+
+/// The dev-tree candidate table, named for reuse: production
+/// `bundled_packs()` and the K-59 dev-precedence test read the same
+/// table — one source of truth for the dev candidates.
+const DEV_PACK_CANDIDATES: [(&str, &str, &str, &str); 2] = [
+    (
+        "org.openlanguage.ja-jp.reference",
+        "ja-JP",
+        "experimental",
+        "languages/ja-JP",
+    ),
+    (
+        "org.openlanguage.eo-demo",
+        "eo",
+        "community",
+        "tests/fixtures/packs/eo-demo",
+    ),
+];
+
+/// The pack-bundled variant's per-root sidecar, written by
+/// `scripts/stage-pack-bundle.sh stage`. Fail-closed like the aligner
+/// payload manifest: wrong schema version, unparsable shape, or an entry
+/// whose pack directory is absent is an error that empties the candidate
+/// list; a bundle never installs a pack it cannot name honestly.
+#[derive(serde::Deserialize)]
+struct BundledPacksSidecar {
+    schema_version: u32,
+    packs: Vec<BundledPackEntry>,
+}
+
+#[derive(serde::Deserialize)]
+struct BundledPackEntry {
+    pack_id: String,
+    locale: String,
+    maturity: String,
+}
+
+fn bundled_packs_at(
+    repo_root: &Path,
+    resource_root: Option<&Path>,
+) -> Vec<(PackCandidate, PathBuf)> {
+    // Dev first, exactly as before K-59: a repo tree is the fastest and
+    // most current answer, and a shipped machine has none.
+    if DEV_PACK_CANDIDATES
+        .iter()
+        .any(|(_, _, _, rel)| repo_root.join(rel).is_dir())
+    {
+        return DEV_PACK_CANDIDATES
+            .iter()
+            .map(|(pack_id, locale, maturity, rel)| {
+                let path = repo_root.join(rel);
+                (
+                    PackCandidate {
+                        pack_id: (*pack_id).into(),
+                        display_name: manifest_display_name(&path, pack_id),
+                        locale: (*locale).into(),
+                        maturity: (*maturity).into(),
+                    },
+                    path,
+                )
+            })
+            .collect();
+    }
+    let Some(root) = resource_root.filter(|r| r.is_dir()) else {
+        return Vec::new();
+    };
+    let sidecar = match std::fs::read_to_string(root.join("BUNDLED.yaml")) {
+        Ok(text) => match serde_yaml::from_str::<BundledPacksSidecar>(&text) {
+            Ok(s) => s,
+            Err(e) => {
+                eprintln!("bundled packs: BUNDLED.yaml unreadable ({e}); abstaining");
+                return Vec::new();
+            }
+        },
+        Err(_) => {
+            eprintln!(
+                "bundled packs: no BUNDLED.yaml under {}; abstaining",
+                root.display()
+            );
+            return Vec::new();
+        }
+    };
+    if sidecar.schema_version != 1 {
+        eprintln!(
+            "bundled packs: unsupported BUNDLED.yaml schema_version {}; abstaining",
+            sidecar.schema_version
+        );
+        return Vec::new();
+    }
+    sidecar
+        .packs
+        .iter()
+        .filter_map(|entry| {
+            let path = root.join(&entry.pack_id);
+            if path.join("manifest.yaml").is_file() {
+                Some((
+                    PackCandidate {
+                        pack_id: entry.pack_id.clone(),
+                        display_name: manifest_display_name(&path, &entry.pack_id),
+                        locale: entry.locale.clone(),
+                        maturity: entry.maturity.clone(),
+                    },
+                    path,
+                ))
+            } else {
+                eprintln!(
+                    "bundled packs: {} named in BUNDLED.yaml but no manifest at {}; skipping",
+                    entry.pack_id,
+                    path.display()
+                );
+                None
+            }
+        })
+        .collect()
+}
 
 /// Bundled pack candidates. The UI selects by id; paths never cross the
 /// IPC boundary (docs/07).
 fn bundled_packs() -> Vec<(PackCandidate, PathBuf)> {
-    let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../..");
-    let mut packs = Vec::new();
-    for (pack_id, locale, maturity, rel) in [
-        (
-            "org.openlanguage.ja-jp.reference",
-            "ja-JP",
-            "experimental",
-            "languages/ja-JP",
-        ),
-        (
-            "org.openlanguage.eo-demo",
-            "eo",
-            "community",
-            "tests/fixtures/packs/eo-demo",
-        ),
-    ] {
-        let path = root.join(rel);
-        packs.push((
-            PackCandidate {
-                pack_id: pack_id.into(),
-                display_name: manifest_display_name(&path, pack_id),
-                locale: locale.into(),
-                maturity: maturity.into(),
-            },
-            path,
-        ));
-    }
-    packs
+    let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../..");
+    bundled_packs_at(&repo_root, BUNDLED_PACKS.get().map(PathBuf::as_path))
 }
 
 #[tauri::command]
@@ -166,16 +262,49 @@ fn data_dir() -> PathBuf {
     dir
 }
 
-/// Build + install a bundled pack into the local pack store and record
-/// the installation. Allowlisted ids only.
-fn install_bundled_pack(data: &Path, pack_id: &str) -> Result<PackCandidate, String> {
-    let (candidate, dir) = bundled_packs()
-        .into_iter()
-        .find(|(c, _)| c.pack_id == pack_id)
-        .ok_or_else(|| "unknown pack id".to_string())?;
+/// The same install, reporting every stage as it is entered (K-62). Building
+/// the archive from the pack source is the slow part for a pack this size, so
+/// the learner hears about it before it starts, not after.
+fn install_bundled_pack_report(
+    data: &Path,
+    pack_id: &str,
+    pack_source_root: Option<&Path>,
+    mut report: impl FnMut(&packs::Progress),
+) -> Result<PackCandidate, String> {
+    // K-59: production passes None — resolution then goes through
+    // `BUNDLED_PACKS`, which only a pack-bundled build sets, with the dev
+    // repo tree preferred whenever it exists. An explicitly supplied
+    // staged root (tests; no production caller) skips the dev preference
+    // instead of sharing process state a parallel test could race.
+    let repo_root = pack_source_root.map_or_else(
+        || PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../.."),
+        |_| PathBuf::from("/no-dev-tree"),
+    );
+    let (candidate, dir) = bundled_packs_at(
+        &repo_root,
+        pack_source_root.or(BUNDLED_PACKS.get().map(PathBuf::as_path)),
+    )
+    .into_iter()
+    .find(|(c, _)| c.pack_id == pack_id)
+    .ok_or_else(|| "unknown pack id".to_string())?;
+    report(&progress::Progress::stage(
+        "install-pack",
+        pack_id,
+        "prepare",
+    ));
     let (bytes, _sha) = lts_langpack::archive::build(&dir).map_err(|e| e.to_string())?;
+    report(&progress::Progress::stage(
+        "install-pack",
+        pack_id,
+        "install",
+    ));
     let outcome =
         lts_langpack::archive::install(&bytes, &data.join("packs")).map_err(|e| e.to_string())?;
+    report(&progress::Progress::stage(
+        "install-pack",
+        pack_id,
+        "record",
+    ));
     let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
     store
         .record_installation(&lts_storage::PackInstallation {
@@ -185,12 +314,42 @@ fn install_bundled_pack(data: &Path, pack_id: &str) -> Result<PackCandidate, Str
             trust_state: "community".into(),
         })
         .map_err(|e| e.to_string())?;
+    // K-63-follow: the install is already a wait the learner is told about, so
+    // parse the pack here instead of making their first click pay for it.
+    warm_pack(data, &outcome.pack_id, &outcome.version);
     Ok(candidate)
 }
 
+/// K-63-follow: warm every content cache for one installed pack version — the
+/// parsed pack, its activity runtime, its lexicon, its claim tallies, and the
+/// units and assessments a placement plan needs.
+/// Best-effort by design: a pack that will not load stays uncached so the
+/// command that actually needs it reports the real error rather than a priming
+/// failure. Nothing here changes what any command returns.
+fn warm_pack(data: &Path, pack_id: &str, version: &str) {
+    let root = data.join("packs").join(pack_id).join(version);
+    packcache::warm(&root);
+    let _ = lexicon_index(data, pack_id, version);
+    claims_for(&root);
+    let _ = pack_assessments(&root);
+    let _ = writing_tasks(data, pack_id, version);
+    pack_units(&root);
+    let _ = media_ids(&root);
+}
+
+/// Warm every pack this installation already has, off the main thread, while
+/// the window is coming up. Measured rather than assumed: the Languages tab
+/// cost 460 ms on a cold process and 81 ms on the same process with the
+/// commands warm — the whole difference was one parse of content that cannot
+/// change under a running app.
+fn warm_installed(data: &Path) {
+    for i in packs::installed_packs(data) {
+        warm_pack(data, &i.pack_id, &i.version);
+    }
+}
 #[tauri::command]
-fn install_pack(pack_id: String) -> Result<PackCandidate, String> {
-    install_bundled_pack(&data_dir(), &pack_id)
+fn install_pack(pack_id: String, app: tauri::AppHandle) -> Result<PackCandidate, String> {
+    install_bundled_pack_report(&data_dir(), &pack_id, None, progress::reporter(&app))
 }
 
 // ---------------------------------------------------------------------------
@@ -212,15 +371,18 @@ fn catalog_packs() -> CatalogResponse {
 }
 
 #[tauri::command]
-fn install_catalog_pack(pack_id: String) -> Result<packs::InstalledPack, String> {
-    packs::install_from_catalog(&data_dir(), &pack_id)
+fn install_catalog_pack(
+    pack_id: String,
+    app: tauri::AppHandle,
+) -> Result<packs::InstalledPack, String> {
+    packs::install_from_catalog_report(&data_dir(), &pack_id, progress::reporter(&app))
 }
 
 /// Import a locally supplied .lpk archive (contents cross IPC as base64;
 /// filesystem paths never do).
 #[tauri::command]
-fn import_pack(data_b64: String) -> Result<packs::InstalledPack, String> {
-    packs::import_pack_b64(&data_dir(), &data_b64)
+fn import_pack(data_b64: String, app: tauri::AppHandle) -> Result<packs::InstalledPack, String> {
+    packs::import_pack_b64_report(&data_dir(), &data_b64, progress::reporter(&app))
 }
 
 #[tauri::command]
@@ -440,6 +602,19 @@ struct LexEntry {
     slots: Vec<PhraseSlot>,
 }
 
+impl LexEntry {
+    /// What this entry should be *spoken* as. The declared reading comes
+    /// first: it is the form the pack says the word sounds like, and the only
+    /// form the pinned engine reliably reads — measured, bare kanji is
+    /// out-of-vocabulary (`Ignore OOV`, 0.44 s of noise for `今日は`) while the
+    /// kana reading round-trips through ASR as `こんにちは` (K-56, K-65). The
+    /// written form is the last resort; a romanization is never used, because
+    /// the engine spells it out letter by letter.
+    fn speakable(&self) -> &str {
+        self.reading.as_deref().unwrap_or(&self.surface)
+    }
+}
+
 /// K-44: one variable part of a phrase, as declared by the pack.
 #[derive(serde::Serialize, Clone)]
 struct PhraseSlot {
@@ -487,10 +662,83 @@ fn jsonl_dir_texts(
         .collect()
 }
 
+/// Pack-declared readings, ranked for the two jobs the app has: showing a
+/// pronunciation hint, and choosing the string to hand the speech engine.
+///
+/// A reading carrying `transliteration_system` is a romanization, not a
+/// pronunciation, so it is never returned. Otherwise the reading written in
+/// a *different* script from the primary form is the one that explains a
+/// logographic surface — and it is also the only form the pinned engine can
+/// read (see `LexEntry::speakable`).
+///
+/// Which scripts exist is the pack's business: nothing here names a script
+/// (the reading-selection `"hiragana"` literal this replaced was itself a
+/// language rule living in the engine — K-67 moves that kind of choice into
+/// pack data).
+fn pick_reading(
+    readings: Option<&Vec<serde_json::Value>>,
+    primary_script: Option<&str>,
+) -> Option<String> {
+    let usable: Vec<&serde_json::Value> = readings?
+        .iter()
+        .filter(|r| r.get("transliteration_system").is_none())
+        .collect();
+    let chosen = usable
+        .iter()
+        .find(|r| {
+            primary_script.is_some_and(|s| r.get("script").and_then(|v| v.as_str()) != Some(s))
+        })
+        .or(usable.first())?;
+    chosen
+        .get("text")
+        .and_then(|v| v.as_str())
+        .filter(|t| !t.is_empty())
+        .map(String::from)
+}
+
+/// K-63-follow: the lexicon of an installed pack lives in an immutable version
+/// directory, so parsing it is shared for the life of the process — the same
+/// invariant `packcache` uses. Measured on the reference machine: reading and
+/// parsing the 3,920 reference rows costs ~250 ms, and `home_state` was paying
+/// it on every Home visit purely to attach display names that cannot change
+/// under a running app.
+static LEXICON_CACHE: std::sync::LazyLock<
+    std::sync::Mutex<std::collections::HashMap<PathBuf, std::sync::Arc<Vec<LexEntry>>>>,
+> = std::sync::LazyLock::new(|| std::sync::Mutex::new(Default::default()));
+
 /// Parse an installed pack's lexicon into display/practice entries.
 /// Malformed lines are skipped; ids are validated as content ids so
 /// they can never become path components.
 fn lexicon_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<LexEntry>, String> {
+    Ok(lexicon_index(data, pack_id, version)?.as_ref().clone())
+}
+
+/// The shared parse for one pack version, keyed by its version root. Load
+/// failures are never cached: a half-installed pack is something a later call
+/// can still see repaired, and a cached empty answer would hide that.
+fn lexicon_index(
+    data: &Path,
+    pack_id: &str,
+    version: &str,
+) -> Result<std::sync::Arc<Vec<LexEntry>>, String> {
+    let root = data.join("packs").join(pack_id).join(version);
+    // Poison tolerance as in `packcache`: a panic in one parse must not take
+    // every later lexicon read down with it.
+    let mut cache = LEXICON_CACHE.lock().unwrap_or_else(|e| e.into_inner());
+    if let Some(hit) = cache.get(&root) {
+        return Ok(std::sync::Arc::clone(hit));
+    }
+    let entries = std::sync::Arc::new(parse_lexicon_entries(data, pack_id, version)?);
+    cache.insert(root, std::sync::Arc::clone(&entries));
+    Ok(entries)
+}
+
+/// One read of `lexicon/*.jsonl`, in file-name order.
+fn parse_lexicon_entries(
+    data: &Path,
+    pack_id: &str,
+    version: &str,
+) -> Result<Vec<LexEntry>, String> {
     let text = lexicon_texts(data, pack_id, version)?.join("\n");
     let mut out = Vec::new();
     for line in text.lines() {
@@ -506,29 +754,26 @@ fn lexicon_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<LexE
         let Some(forms) = entry.get("forms").and_then(|v| v.as_array()) else {
             continue;
         };
-        let Some(surface) = forms
+        let primary = forms
             .iter()
             .find(|f| {
                 f.get("is_primary")
                     .and_then(|b| b.as_bool())
                     .unwrap_or(false)
             })
-            .or(forms.first())
+            .or(forms.first());
+        let Some(surface) = primary
             .and_then(|f| f.get("text").and_then(|t| t.as_str()))
             .filter(|t| !t.is_empty())
         else {
             continue;
         };
-        let reading = entry
-            .get("readings")
-            .and_then(|v| v.as_array())
-            .and_then(|a| {
-                a.iter()
-                    .find(|r| r.get("script").and_then(|s| s.as_str()) == Some("hiragana"))
-                    .or(a.first())
-                    .and_then(|r| r.get("text").and_then(|t| t.as_str()))
-                    .map(String::from)
-            });
+        let reading = pick_reading(
+            entry.get("readings").and_then(|v| v.as_array()),
+            primary
+                .and_then(|f| f.get("script"))
+                .and_then(|s| s.as_str()),
+        );
         let Some(gloss) = entry
             .get("glosses")
             .and_then(|g| g.as_object())
@@ -607,11 +852,16 @@ fn lexicon_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<LexE
 /// needs. Packs for any writing system can supply these; the engine
 /// never interprets `script` beyond Unicode-script detection for the
 /// kana-literacy roll-up (language neutrality, docs/00).
+#[derive(Clone)]
 struct OrthEntry {
     id: String,
     symbol: String,
     reading: String,
     status: String,
+    /// K-66: the pack's own instruction sequence for this symbol
+    /// (`orthography/*.jsonl` `teaching_order`). None when the pack
+    /// does not sequence it; the pack's order, never an app-side one.
+    teaching_order: Option<i64>,
 }
 
 /// Parse an installed pack's `orthography/*.jsonl` units. A pack
@@ -664,6 +914,7 @@ fn orth_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<OrthEnt
                     .and_then(|v| v.as_str())
                     .unwrap_or("draft")
                     .to_string(),
+                teaching_order: entry.get("teaching_order").and_then(|v| v.as_i64()),
             });
         }
     }
@@ -949,6 +1200,54 @@ fn get_microphone_enabled(profile_id: String) -> Result<bool, String> {
 #[tauri::command]
 fn set_microphone_enabled(profile_id: String, enabled: bool) -> Result<bool, String> {
     set_microphone_enabled_at(&data_dir(), &profile_id, enabled)
+}
+
+/// K-64: the capture device this profile chose. `None` means "system
+/// default" — the honest absence, not a guess. The id is only meaningful to
+/// the webview that enumerated it, so the engine remembers it and validates
+/// nothing beyond the profile existing; whether the device is still plugged
+/// in is answered at capture time, in the learner's own language.
+fn microphone_device_at(data: &Path, profile_id: &str) -> Result<Option<String>, String> {
+    resume_profile_at(data, profile_id)?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    Ok(store
+        .get_setting(profile_id, "microphone-device")
+        .ok()
+        .flatten()
+        .and_then(|v| v.as_str().map(String::from)))
+}
+
+fn set_microphone_device_at(
+    data: &Path,
+    profile_id: &str,
+    device_id: Option<String>,
+) -> Result<Option<String>, String> {
+    resume_profile_at(data, profile_id)?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    // Clearing stores an explicit null rather than deleting the row: "use the
+    // system default" is a decision the learner made, and it must survive a
+    // restart the same way choosing a device does.
+    let value = match device_id {
+        Some(id) if !id.trim().is_empty() => serde_json::json!(id.trim()),
+        _ => serde_json::Value::Null,
+    };
+    store
+        .set_setting(profile_id, "microphone-device", &value)
+        .map_err(|e| e.to_string())?;
+    microphone_device_at(data, profile_id)
+}
+
+#[tauri::command]
+fn get_microphone_device(profile_id: String) -> Result<Option<String>, String> {
+    microphone_device_at(&data_dir(), &profile_id)
+}
+
+#[tauri::command]
+fn set_microphone_device(
+    profile_id: String,
+    device_id: Option<String>,
+) -> Result<Option<String>, String> {
+    set_microphone_device_at(&data_dir(), &profile_id, device_id)
 }
 
 /// Romaji display preference. The values are exactly what the READ-001
@@ -1419,6 +1718,22 @@ fn build_plan(
     // using their OWN recorded attempts. Personal tuning, never a mastery or
     // population claim (docs/18).
     personalize_progression(&mut progression, &derived);
+    // K-66 (ADR-0020 §1): the pack's own goal map orders the introduction
+    // half of the plan — band ladder, then unit order, then content
+    // order. Personalization stays authoritative for the tail the pack
+    // does not rank. Reordering only: the due-driven half above is
+    // untouched, and no candidate is added or dropped here.
+    for (pack_id, _v) in store
+        .selected_packs(profile_id)
+        .map_err(|e| e.to_string())?
+    {
+        if let Some(version) = lts_langpack::archive::current_version(&pack_id, &data.join("packs"))
+        {
+            let ranks = goal_rank_map(&data.join("packs").join(&pack_id).join(&version), &derived);
+            order_progression_by_goal_map(&mut progression, &ranks);
+        }
+    }
+
     let config = lts_scheduler::PlannerConfig {
         budget_minutes: minutes,
         ..Default::default()
@@ -1477,6 +1792,11 @@ struct PlanItemView {
     content_id: String,
     modality: &'static str,
     reason: &'static str,
+    /// K-66 (ADR-0020 §1): what kind of promise this item is —
+    /// `introduction` is material the learner has never met, `review`
+    /// keeps something alive. Derived from the scheduler's own reason,
+    /// never guessed by the UI.
+    kind: &'static str,
     est_seconds: u32,
     surface: Option<String>,
     gloss: Option<String>,
@@ -1497,6 +1817,115 @@ fn reason_kebab(r: lts_scheduler::PlanReason) -> &'static str {
         lts_scheduler::PlanReason::WeakSkill => "weak-skill",
         lts_scheduler::PlanReason::Progression => "progression",
     }
+}
+
+/// K-66: the plan's two halves (ADR-0020 §1). The due-driven half
+/// maintains; the progression half introduces. One rule, no third kind.
+fn kind_kebab(r: lts_scheduler::PlanReason) -> &'static str {
+    match r {
+        lts_scheduler::PlanReason::Progression => "introduction",
+        _ => "review",
+    }
+}
+
+/// K-66: where a new item sits in the pack's own learning path —
+/// goal rank (band ladder, then goal id), unit file order, activity
+/// order, content-ref order. Smaller is sooner.
+type GoalRank = (u32, u32, u32, u32);
+
+/// The rank map for one installed pack version: every content id the
+/// pack's *unlocked* goals schedule, in the pack's own order. A goal
+/// with an unsatisfied hard prerequisite is skipped exactly as the goal
+/// map marks it locked — introducing content through a goal the learner
+/// has not unlocked would contradict every other gate. Rank keys are
+/// content ids, not (content, modality) pairs: ADR-0020 §1 orders the
+/// plan by band, unit, then *content*, and the pack's activity modality
+/// vocabulary ("reading", "listening") is goal vocabulary, not the
+/// plan's runnable dimensions — keying on it would rank nothing.
+/// A pack that declares no goal map yields an empty map, and the plan
+/// then keeps today's order entirely (ADR-0020 §5).
+fn goal_rank_map(
+    root: &Path,
+    derived: &[lts_learner_model::DerivedMastery],
+) -> std::collections::HashMap<String, GoalRank> {
+    let mut ranks: std::collections::HashMap<String, GoalRank> = Default::default();
+    let mut goals: Vec<PackGoal> = Vec::new();
+    for path in pack_goal_files(root) {
+        let Ok(text) = std::fs::read_to_string(&path) else {
+            continue;
+        };
+        if let Ok(doc) = serde_yaml::from_str::<PackGoals>(&text) {
+            goals.extend(doc.goals);
+        }
+    }
+    if goals.is_empty() {
+        return ranks;
+    }
+    goals.sort_by(|a, b| {
+        band_sort_key(a.band.as_deref())
+            .cmp(&band_sort_key(b.band.as_deref()))
+            .then_with(|| a.id.cmp(&b.id))
+    });
+    let units = pack_units(root);
+    for (goal_rank, goal) in goals.iter().enumerate() {
+        let locked = goal.prerequisites.iter().any(|p| {
+            p.strength == "hard"
+                && !match (
+                    parse_dimension(&p.dimension),
+                    parse_state(&p.required_state),
+                ) {
+                    (Some(dim), Some(req)) => derived
+                        .iter()
+                        .any(|d| d.content_id == p.target && d.dimension == dim && d.state >= req),
+                    _ => false,
+                }
+        });
+        if locked {
+            continue;
+        }
+        for (unit_idx, unit) in units.iter().enumerate() {
+            if unit.goal_id != goal.id {
+                continue;
+            }
+            for (act_idx, act) in unit.activities.iter().enumerate() {
+                for (ref_idx, content) in act.content_refs.iter().enumerate() {
+                    ranks.entry(content.clone()).or_insert((
+                        goal_rank as u32,
+                        unit_idx as u32,
+                        act_idx as u32,
+                        ref_idx as u32,
+                    ));
+                }
+            }
+        }
+    }
+    ranks
+}
+
+/// K-66: order the introduction half of the plan along the pack's goal
+/// map — band ladder, then goal id, then unit order, then content order
+/// (ADR-0020 §1). Items the map does not rank (packs without goal maps,
+/// or content outside any unlocked goal) keep their existing relative
+/// order after the ranked ones, so nothing is ever dropped: this
+/// reorders the candidate stream, it never filters it. The sort is
+/// stable, and personalization (which runs before this) still decides
+/// among the unranked tail.
+fn order_progression_by_goal_map(
+    progression: &mut Vec<lts_scheduler::ProgressionItem>,
+    ranks: &std::collections::HashMap<String, GoalRank>,
+) {
+    if ranks.is_empty() {
+        return;
+    }
+    progression.sort_by(|a, b| {
+        let key = |i: &lts_scheduler::ProgressionItem| {
+            ranks
+                .get(&i.content_id)
+                .map(|r| (0u8, *r))
+                .unwrap_or((1u8, GoalRank::default()))
+        };
+        key(a).cmp(&key(b))
+    });
 }
 
 /// Attach surface/gloss from the selected packs' lexicons to plan
@@ -1563,6 +1992,7 @@ fn build_plan_view(
                     content_id: i.content_id,
                     modality: dimension_kebab(i.modality),
                     reason: reason_kebab(i.reason),
+                    kind: kind_kebab(i.reason),
                     est_seconds: i.est_seconds,
                     surface,
                     gloss,
@@ -1580,6 +2010,18 @@ fn build_plan_view(
 struct HomeState {
     display_name: String,
     plan: PlanView,
+    /// K-66 (ADR-0020 §3): the lowest-band goal the pack's own goal map
+    /// says is reachable. None when the active pack declares no goal
+    /// map — Home then says so plainly; the app never invents a goal.
+    next_goal: Option<NextGoalView>,
+}
+
+#[derive(Serialize)]
+struct NextGoalView {
+    pack_id: String,
+    goal_id: String,
+    description: String,
+    band: Option<String>,
 }
 
 /// Home: next actions under the default 5-minute budget. No streak,
@@ -1593,10 +2035,139 @@ fn home_state(profile_id: String) -> Result<HomeState, String> {
         .map_err(|e| e.to_string())?
         .ok_or("unknown profile")?;
     let plan = build_plan_view(&data, &profile_id, 5, now_secs())?;
+    let next_goal = goal_map_at(&data, &profile_id)?
+        .into_iter()
+        .find(|g| !g.locked)
+        .map(|g| NextGoalView {
+            pack_id: g.pack_id,
+            goal_id: g.id,
+            description: g.description,
+            band: g.band,
+        });
     Ok(HomeState {
         display_name: profile.display_name,
         plan,
+        next_goal,
     })
+}
+
+/// The content refs of the pack's `script-introduction` unit, in the
+/// pack's own `teaching_order` (unsequenced ones last, refs in declared
+/// order before that). The declaration is the ONLY cue (ADR-0021 rule
+/// 4): a pack that declares the capability gets an introduction step,
+/// a pack that does not gets silence. No unit, no resolvable orthography
+/// entries, or a capability string on a unit whose content does not
+/// parse as script items — all abstain empty, never guess.
+fn script_intro_refs(
+    data: &Path,
+    pack_id: &str,
+    version: &str,
+    root: &Path,
+) -> Result<Vec<(OrthEntry, String)>, String> {
+    let units = pack_units(root);
+    let Some(unit) = units
+        .iter()
+        .find(|u| u.capabilities.iter().any(|c| c == "script-introduction"))
+    else {
+        return Ok(Vec::new());
+    };
+    let orth_map = orth_entries(data, pack_id, version)?;
+    let orth: std::collections::HashMap<&str, &OrthEntry> =
+        orth_map.iter().map(|e| (e.id.as_str(), e)).collect();
+    let mut seen: std::collections::HashSet<&str> = Default::default();
+    let mut refs: Vec<&OrthEntry> = Vec::new();
+    for act in &unit.activities {
+        for content in &act.content_refs {
+            if !seen.insert(content.as_str()) {
+                continue;
+            }
+            if let Some(e) = orth.get(content.as_str()) {
+                refs.push(*e);
+            }
+        }
+    }
+    // The pack's teaching_order decides; unit/declared order breaks ties
+    // (stable sort over the deduped declared sequence).
+    refs.sort_by_key(|e| e.teaching_order.unwrap_or(i64::MAX));
+    Ok(refs
+        .into_iter()
+        .map(|e| (e.clone(), unit.goal_id.clone()))
+        .collect())
+}
+
+#[derive(Serialize)]
+struct FirstRunStep {
+    kind: &'static str,
+    label: String,
+    content_id: Option<String>,
+    goal_id: Option<String>,
+}
+
+/// K-66 (ADR-0020 §4): first-run guidance is derived, never scripted —
+/// the first three steps of the same derivations Home already shows:
+/// what the pack declares it teaches first, then the first two unseen
+/// items of the goal-ordered plan, then the first review if anything is
+/// due. Labels are the pack's own display strings. A pack with nothing
+/// to introduce yields an empty list; the UI then renders nothing.
+#[tauri::command]
+fn first_run_steps(profile_id: String) -> Result<Vec<FirstRunStep>, String> {
+    first_run_steps_at(&data_dir(), &profile_id)
+}
+
+fn first_run_steps_at(data: &Path, profile_id: &str) -> Result<Vec<FirstRunStep>, String> {
+    let active = packs::active_pack(data, profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    let root = data.join("packs").join(pack_id).join(&version);
+    let view = build_plan_view(data, profile_id, 5, now_secs())?;
+    let mut steps: Vec<FirstRunStep> = Vec::new();
+    let mut introduced: std::collections::HashSet<String> = Default::default();
+    if let Some((entry, goal_id)) = script_intro_refs(data, pack_id, &version, &root)?
+        .into_iter()
+        .next()
+    {
+        introduced.insert(entry.id.clone());
+        steps.push(FirstRunStep {
+            kind: "introduction",
+            label: format!("{} ({})", entry.symbol, entry.reading),
+            content_id: Some(entry.id),
+            goal_id: Some(goal_id),
+        });
+    }
+    for item in view
+        .items
+        .iter()
+        .filter(|i| i.kind == "introduction" && !introduced.contains(&i.content_id))
+        .take(2)
+    {
+        let label = item
+            .surface
+            .clone()
+            .or_else(|| item.gloss.clone())
+            .unwrap_or_else(|| item.content_id.clone());
+        steps.push(FirstRunStep {
+            kind: "introduction",
+            label,
+            content_id: Some(item.content_id.clone()),
+            goal_id: None,
+        });
+    }
+    if let Some(item) = view.items.iter().find(|i| i.kind == "review") {
+        let label = item
+            .surface
+            .clone()
+            .or_else(|| item.gloss.clone())
+            .unwrap_or_else(|| item.content_id.clone());
+        steps.push(FirstRunStep {
+            kind: "review",
+            label,
+            content_id: Some(item.content_id.clone()),
+            goal_id: None,
+        });
+    }
+    steps.truncate(3);
+    Ok(steps)
 }
 
 #[tauri::command]
@@ -1874,7 +2445,7 @@ fn yaml_unit_claims(root: &Path) -> (usize, std::collections::BTreeMap<String, u
     (total, postures)
 }
 
-#[derive(Serialize)]
+#[derive(Clone, Serialize)]
 struct ClaimCounts {
     units: usize,
     goals: usize,
@@ -1888,14 +2459,14 @@ struct ClaimCounts {
     stories: usize,
 }
 
-#[derive(Serialize)]
+#[derive(Clone, Serialize)]
 struct PostureRow {
     kind: String,
     posture: String,
     count: usize,
 }
 
-#[derive(Serialize)]
+#[derive(Clone, Serialize)]
 struct ProvenanceClaim {
     id: String,
     title: String,
@@ -1916,6 +2487,196 @@ struct PackClaims {
     provenance: Vec<ProvenanceClaim>,
 }
 
+/// K-63: installed pack content is content-addressed and immutable, so the
+/// content-derived half of the claim report is computed once per pack
+/// version instead of on every call. `trust_state` is deliberately NOT in
+/// here: it comes from the local store and is re-read every call, so a trust
+/// change is never served from a stale entry.
+static CLAIM_CACHE: std::sync::LazyLock<
+    std::sync::Mutex<
+        std::collections::HashMap<PathBuf, (ClaimCounts, Vec<PostureRow>, Vec<ProvenanceClaim>)>,
+    >,
+> = std::sync::LazyLock::new(|| std::sync::Mutex::new(Default::default()));
+
+/// The memoized form of that computation: one scan per immutable version root,
+/// so the install (or the startup prime) pays for it rather than every
+/// Languages visit. Store-backed fields stay outside the memo — see above.
+fn claims_for(root: &Path) -> (ClaimCounts, Vec<PostureRow>, Vec<ProvenanceClaim>) {
+    let mut cache = CLAIM_CACHE.lock().unwrap_or_else(|e| e.into_inner());
+    if let Some(hit) = cache.get(root) {
+        return hit.clone();
+    }
+    let claims = content_claims(root);
+    cache.insert(root.to_path_buf(), claims.clone());
+    claims
+}
+
+/// The content-derived half of a pack's claim report: every count, posture
+/// tally and provenance entry read from the pack's own files under `root`.
+fn content_claims(root: &Path) -> (ClaimCounts, Vec<PostureRow>, Vec<ProvenanceClaim>) {
+    // Lexicon may be sharded across any number of lexicon/*.jsonl.
+    let mut lex_total = 0;
+    let mut lex_postures = std::collections::BTreeMap::new();
+    let lexdir = root.join("lexicon");
+    if let Ok(rd) = std::fs::read_dir(&lexdir) {
+        let mut files: Vec<PathBuf> = rd
+            .flatten()
+            .map(|e| e.path())
+            .filter(|p| p.extension().and_then(|x| x.to_str()) == Some("jsonl"))
+            .collect();
+        files.sort();
+        for f in files {
+            let rel = format!("lexicon/{}", f.file_name().unwrap().to_string_lossy());
+            let (n, p) = jsonl_claims(&root, &rel);
+            lex_total += n;
+            for (k, v) in p {
+                *lex_postures.entry(k).or_insert(0) += v;
+            }
+        }
+    }
+
+    // Stories are sharded YAML files, each a mapping with `status`.
+    let mut story_total = 0;
+    let mut story_postures = std::collections::BTreeMap::new();
+    let storydir = root.join("stories");
+    if let Ok(rd) = std::fs::read_dir(&storydir) {
+        let mut files: Vec<PathBuf> = rd
+            .flatten()
+            .map(|e| e.path())
+            .filter(|p| {
+                p.extension()
+                    .map(|x| x == "yaml" || x == "yml")
+                    .unwrap_or(false)
+            })
+            .collect();
+        files.sort();
+        for f in files {
+            let Ok(text) = std::fs::read_to_string(&f) else {
+                continue;
+            };
+            let Ok(doc) = serde_yaml::from_str::<serde_yaml::Value>(&text) else {
+                continue;
+            };
+            if doc.get("id").and_then(|i| i.as_str()).is_none() {
+                continue;
+            }
+            story_total += 1;
+            let posture = doc
+                .get("status")
+                .and_then(|s| s.as_str())
+                .unwrap_or("unlabeled")
+                .to_string();
+            *story_postures.entry(posture).or_insert(0) += 1;
+        }
+    }
+
+    let (units, unit_postures) = yaml_unit_claims(&root);
+    let (goals, goal_postures) = yaml_goal_claims(&root);
+    let (assessments, assessment_postures) = jsonl_claims(&root, "assessments/definitions.jsonl");
+    let (sentences, sentence_postures) = jsonl_dir_claims(&root, "sentences");
+    let (grammar, grammar_postures) = jsonl_claims(&root, "grammar/concepts.jsonl");
+    let (kanji, kanji_postures) = jsonl_dir_claims(&root, "kanji");
+    let (contrasts, contrast_postures) = jsonl_dir_claims(&root, "phonology");
+    let mut orth_total = 0;
+    let mut orth_postures = std::collections::BTreeMap::new();
+    let orthdir = root.join("orthography");
+    if let Ok(rd) = std::fs::read_dir(&orthdir) {
+        let mut files: Vec<PathBuf> = rd
+            .flatten()
+            .map(|e| e.path())
+            .filter(|p| p.extension().and_then(|x| x.to_str()) == Some("jsonl"))
+            .collect();
+        files.sort();
+        for f in files {
+            let rel = format!("orthography/{}", f.file_name().unwrap().to_string_lossy());
+            let (n, p) = jsonl_claims(&root, &rel);
+            orth_total += n;
+            for (k, v) in p {
+                *orth_postures.entry(k).or_insert(0) += v;
+            }
+        }
+    }
+
+    let mut postures = Vec::new();
+    let mut push = |kind: &str, m: std::collections::BTreeMap<String, usize>| {
+        for (posture, count) in m {
+            postures.push(PostureRow {
+                kind: kind.to_string(),
+                posture,
+                count,
+            });
+        }
+    };
+    push("units", unit_postures);
+    push("goals", goal_postures);
+    push("assessments", assessment_postures);
+    push("lexicon", lex_postures);
+    push("sentences", sentence_postures);
+    push("grammar", grammar_postures);
+    push("orthography", orth_postures);
+    push("kanji", kanji_postures);
+    push("phonological contrasts", contrast_postures);
+    push("stories", story_postures);
+
+    // Provenance: sources.jsonl entries are the pack's own claims
+    // about where its content came from.
+    let mut provenance = Vec::new();
+    if let Ok(text) = std::fs::read_to_string(root.join("sources.jsonl")) {
+        for line in text.lines() {
+            let line = line.trim();
+            if line.is_empty() {
+                continue;
+            }
+            let Ok(v) = serde_json::from_str::<serde_json::Value>(line) else {
+                continue;
+            };
+            let g = |k: &str| {
+                v.get(k)
+                    .and_then(|x| x.as_str())
+                    .unwrap_or_default()
+                    .to_string()
+            };
+            if g("id").is_empty() {
+                continue;
+            }
+            provenance.push(ProvenanceClaim {
+                id: g("id"),
+                title: g("title"),
+                url: g("url"),
+                license: v
+                    .get("license")
+                    .and_then(|l| l.get("spdx"))
+                    .and_then(|s| s.as_str())
+                    .unwrap_or_default()
+                    .to_string(),
+                access: v
+                    .get("access")
+                    .and_then(|a| a.get("mode"))
+                    .and_then(|m| m.as_str())
+                    .unwrap_or_default()
+                    .to_string(),
+            });
+        }
+    }
+
+    (
+        ClaimCounts {
+            units,
+            goals,
+            assessments,
+            lexicon: lex_total,
+            sentences,
+            grammar,
+            orthography: orth_total,
+            kanji,
+            phonological_contrasts: contrasts,
+            stories: story_total,
+        },
+        postures,
+        provenance,
+    )
+}
+
 fn pack_claims_at(data: &Path) -> Result<Vec<PackClaims>, String> {
     let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
     let packs_root = data.join("packs");
@@ -1927,168 +2688,16 @@ fn pack_claims_at(data: &Path) -> Result<Vec<PackClaims>, String> {
         };
         let root = packs_root.join(&inst.pack_id).join(&version);
 
-        // Lexicon may be sharded across any number of lexicon/*.jsonl.
-        let mut lex_total = 0;
-        let mut lex_postures = std::collections::BTreeMap::new();
-        let lexdir = root.join("lexicon");
-        if let Ok(rd) = std::fs::read_dir(&lexdir) {
-            let mut files: Vec<PathBuf> = rd
-                .flatten()
-                .map(|e| e.path())
-                .filter(|p| p.extension().and_then(|x| x.to_str()) == Some("jsonl"))
-                .collect();
-            files.sort();
-            for f in files {
-                let rel = format!("lexicon/{}", f.file_name().unwrap().to_string_lossy());
-                let (n, p) = jsonl_claims(&root, &rel);
-                lex_total += n;
-                for (k, v) in p {
-                    *lex_postures.entry(k).or_insert(0) += v;
-                }
-            }
-        }
-
-        // Stories are sharded YAML files, each a mapping with `status`.
-        let mut story_total = 0;
-        let mut story_postures = std::collections::BTreeMap::new();
-        let storydir = root.join("stories");
-        if let Ok(rd) = std::fs::read_dir(&storydir) {
-            let mut files: Vec<PathBuf> = rd
-                .flatten()
-                .map(|e| e.path())
-                .filter(|p| {
-                    p.extension()
-                        .map(|x| x == "yaml" || x == "yml")
-                        .unwrap_or(false)
-                })
-                .collect();
-            files.sort();
-            for f in files {
-                let Ok(text) = std::fs::read_to_string(&f) else {
-                    continue;
-                };
-                let Ok(doc) = serde_yaml::from_str::<serde_yaml::Value>(&text) else {
-                    continue;
-                };
-                if doc.get("id").and_then(|i| i.as_str()).is_none() {
-                    continue;
-                }
-                story_total += 1;
-                let posture = doc
-                    .get("status")
-                    .and_then(|s| s.as_str())
-                    .unwrap_or("unlabeled")
-                    .to_string();
-                *story_postures.entry(posture).or_insert(0) += 1;
-            }
-        }
-
-        let (units, unit_postures) = yaml_unit_claims(&root);
-        let (goals, goal_postures) = yaml_goal_claims(&root);
-        let (assessments, assessment_postures) =
-            jsonl_claims(&root, "assessments/definitions.jsonl");
-        let (sentences, sentence_postures) = jsonl_dir_claims(&root, "sentences");
-        let (grammar, grammar_postures) = jsonl_claims(&root, "grammar/concepts.jsonl");
-        let (kanji, kanji_postures) = jsonl_dir_claims(&root, "kanji");
-        let (contrasts, contrast_postures) = jsonl_dir_claims(&root, "phonology");
-        let mut orth_total = 0;
-        let mut orth_postures = std::collections::BTreeMap::new();
-        let orthdir = root.join("orthography");
-        if let Ok(rd) = std::fs::read_dir(&orthdir) {
-            let mut files: Vec<PathBuf> = rd
-                .flatten()
-                .map(|e| e.path())
-                .filter(|p| p.extension().and_then(|x| x.to_str()) == Some("jsonl"))
-                .collect();
-            files.sort();
-            for f in files {
-                let rel = format!("orthography/{}", f.file_name().unwrap().to_string_lossy());
-                let (n, p) = jsonl_claims(&root, &rel);
-                orth_total += n;
-                for (k, v) in p {
-                    *orth_postures.entry(k).or_insert(0) += v;
-                }
-            }
-        }
-
-        let mut postures = Vec::new();
-        let mut push = |kind: &str, m: std::collections::BTreeMap<String, usize>| {
-            for (posture, count) in m {
-                postures.push(PostureRow {
-                    kind: kind.to_string(),
-                    posture,
-                    count,
-                });
-            }
-        };
-        push("units", unit_postures);
-        push("goals", goal_postures);
-        push("assessments", assessment_postures);
-        push("lexicon", lex_postures);
-        push("sentences", sentence_postures);
-        push("grammar", grammar_postures);
-        push("orthography", orth_postures);
-        push("kanji", kanji_postures);
-        push("phonological contrasts", contrast_postures);
-        push("stories", story_postures);
-
-        // Provenance: sources.jsonl entries are the pack's own claims
-        // about where its content came from.
-        let mut provenance = Vec::new();
-        if let Ok(text) = std::fs::read_to_string(root.join("sources.jsonl")) {
-            for line in text.lines() {
-                let line = line.trim();
-                if line.is_empty() {
-                    continue;
-                }
-                let Ok(v) = serde_json::from_str::<serde_json::Value>(line) else {
-                    continue;
-                };
-                let g = |k: &str| {
-                    v.get(k)
-                        .and_then(|x| x.as_str())
-                        .unwrap_or_default()
-                        .to_string()
-                };
-                if g("id").is_empty() {
-                    continue;
-                }
-                provenance.push(ProvenanceClaim {
-                    id: g("id"),
-                    title: g("title"),
-                    url: g("url"),
-                    license: v
-                        .get("license")
-                        .and_then(|l| l.get("spdx"))
-                        .and_then(|s| s.as_str())
-                        .unwrap_or_default()
-                        .to_string(),
-                    access: v
-                        .get("access")
-                        .and_then(|a| a.get("mode"))
-                        .and_then(|m| m.as_str())
-                        .unwrap_or_default()
-                        .to_string(),
-                });
-            }
-        }
+        // K-63: the content half comes from the per-root memo; `pack_id`,
+        // `version` and `trust_state` are assembled from the store on every
+        // call, so a trust change is never served from a stale entry.
+        let (counts, postures, provenance) = claims_for(&root);
 
         out.push(PackClaims {
             pack_id: inst.pack_id.clone(),
             version,
             trust_state: inst.trust_state.clone(),
-            counts: ClaimCounts {
-                units,
-                goals,
-                assessments,
-                lexicon: lex_total,
-                sentences,
-                grammar,
-                orthography: orth_total,
-                kanji,
-                phonological_contrasts: contrasts,
-                stories: story_total,
-            },
+            counts,
             postures,
             provenance,
         });
@@ -2246,7 +2855,9 @@ fn world_config_at(data: &Path, profile_id: &str) -> lts_world::WorldConfig {
     let Some(version) = lts_langpack::archive::current_version(pack_id, &packs_root) else {
         return empty();
     };
-    let Ok(pack) = lts_langpack::Pack::load_dir(&packs_root.join(pack_id).join(&version)) else {
+    // K-63: one parse per installed version; the Home world strip asks for the
+    // same pack on every visit and the version directory never changes.
+    let Ok(pack) = packcache::pack(&packs_root.join(pack_id).join(&version)) else {
         return empty();
     };
     lts_world::WorldConfig {
@@ -2482,7 +3093,28 @@ fn contrast_id_for_unit(unit: &str) -> Option<&str> {
 /// pre-ADR-0016 bundled demo pack) is read by the only convention it itself
 /// uses: `{id}.wav` inside its installed media directory. Empty when the pack
 /// ships no audio, which is what installing an audio-less archive yields.
-fn media_ids(pack_dir: &Path) -> std::collections::HashSet<String> {
+/// Audio ids the pack actually ships, memoized per immutable version root
+/// (the same contract every other pack cache relies on). K-68 pushed the
+/// manifest from 694 rows to 4,613, and the plan path asks `media_ids` on
+/// every compose — parsing that manifest per click is what moved the
+/// walkthrough's `practice_plan` marker from ~60 ms to ~140 ms.
+static MEDIA_IDS_CACHE: std::sync::LazyLock<
+    std::sync::Mutex<
+        std::collections::HashMap<PathBuf, std::sync::Arc<std::collections::HashSet<String>>>,
+    >,
+> = std::sync::LazyLock::new(|| std::sync::Mutex::new(Default::default()));
+
+fn media_ids(pack_dir: &Path) -> std::sync::Arc<std::collections::HashSet<String>> {
+    let mut cache = MEDIA_IDS_CACHE.lock().unwrap_or_else(|e| e.into_inner());
+    if let Some(hit) = cache.get(pack_dir) {
+        return std::sync::Arc::clone(hit);
+    }
+    let ids = std::sync::Arc::new(media_ids_uncached(pack_dir));
+    cache.insert(pack_dir.to_path_buf(), std::sync::Arc::clone(&ids));
+    ids
+}
+
+fn media_ids_uncached(pack_dir: &Path) -> std::collections::HashSet<String> {
     let mut out = std::collections::HashSet::new();
     let dir = pack_dir.join("media");
     if let Ok(text) = std::fs::read_to_string(dir.join("manifest.jsonl")) {
@@ -3185,17 +3817,55 @@ fn reference_audio_at(data: &Path, pack_id: &str, unit_id: &str) -> Result<Strin
 // IME; no handwriting surface exists or is required).
 // ---------------------------------------------------------------------------
 
-/// Writing targets come from the active pack's lexicon. Entry ids are
-/// validated as content ids; no filesystem path is derived from them.
+/// Writing targets are derived entirely from the pack, so they are parsed once
+/// per immutable version root (K-63-follow). Opening the Writing tab and every
+/// answer submit used to re-read *and* re-parse all 3,920 lexicon rows: that
+/// measured 99 ms per `writing_task` call and 126 ms for the tab. Caching the
+/// raw file text instead measured no win at all, which is why this cache holds
+/// the parsed rows and not the bytes.
+static WRITING_CACHE: std::sync::LazyLock<
+    std::sync::Mutex<
+        std::collections::HashMap<PathBuf, std::sync::Arc<Vec<lts_activity::writing::WritingTask>>>,
+    >,
+> = std::sync::LazyLock::new(|| std::sync::Mutex::new(Default::default()));
+
+/// The shared target list for one version root. A pack that will not parse is
+/// never cached, so a later call still reports the real error.
 fn writing_tasks(
     data: &Path,
+    pack_id: &str,
+    version: &str,
+) -> Result<std::sync::Arc<Vec<lts_activity::writing::WritingTask>>, String> {
+    let root = data.join("packs").join(pack_id).join(version);
+    let mut cache = WRITING_CACHE.lock().unwrap_or_else(|e| e.into_inner());
+    if let Some(hit) = cache.get(&root) {
+        return Ok(std::sync::Arc::clone(hit));
+    }
+    let tasks = std::sync::Arc::new(build_writing_tasks(data, pack_id, version)?);
+    cache.insert(root, std::sync::Arc::clone(&tasks));
+    Ok(tasks)
+}
+
+/// Resolve the profile's active pack, then take the shared target list for it.
+fn writing_tasks_for_profile(
+    data: &Path,
     profile_id: &str,
-) -> Result<Vec<lts_activity::writing::WritingTask>, String> {
+) -> Result<std::sync::Arc<Vec<lts_activity::writing::WritingTask>>, String> {
     let active = packs::active_pack(data, profile_id)?;
     let pack_id = active.first().ok_or("no active language pack")?;
     let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
         .ok_or("pack not installed")?;
-    let text = lexicon_texts(data, pack_id, &version)?.join("\n");
+    writing_tasks(data, pack_id, &version)
+}
+
+/// Writing targets come from the active pack's lexicon. Entry ids are
+/// validated as content ids; no filesystem path is derived from them.
+fn build_writing_tasks(
+    data: &Path,
+    pack_id: &str,
+    version: &str,
+) -> Result<Vec<lts_activity::writing::WritingTask>, String> {
+    let text = lexicon_texts(data, pack_id, version)?.join("\n");
     fn field<'a>(v: &'a serde_json::Value, key: &str) -> Option<&'a str> {
         v.get(key).and_then(|x| x.as_str())
     }
@@ -3245,13 +3915,10 @@ fn writing_tasks(
             continue;
         };
         let readings = entry.get("readings").and_then(|v| v.as_array());
-        let answer_reading = readings.as_ref().and_then(|a| {
-            a.iter()
-                .find(|r| field(r, "script") == Some("hiragana"))
-                .or(a.first())
-                .and_then(|r| field(r, "text"))
-                .map(String::from)
-        });
+        let answer_reading = pick_reading(
+            entry.get("readings").and_then(|v| v.as_array()),
+            primary.and_then(|f| field(f, "script")),
+        );
         let answer_romaji = readings.as_ref().and_then(|a| {
             a.iter()
                 .find(|r| r.get("transliteration_system").is_some())
@@ -3275,7 +3942,7 @@ fn writing_tasks(
 #[tauri::command]
 fn writing_task(profile_id: String) -> Result<Option<lts_activity::writing::WritingTask>, String> {
     let data = data_dir();
-    let tasks = writing_tasks(&data, &profile_id)?;
+    let tasks = writing_tasks_for_profile(&data, &profile_id)?;
     let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
     let attempted: std::collections::HashSet<String> = store
         .evidence_for_profile(&profile_id)
@@ -3284,7 +3951,10 @@ fn writing_task(profile_id: String) -> Result<Option<lts_activity::writing::Writ
         .filter(|e| e.modality == lts_domain::ActivityModality::ProductionWriting)
         .flat_map(|e| e.targets.iter().map(|c| c.as_str().to_string()))
         .collect();
-    Ok(tasks.into_iter().find(|t| !attempted.contains(&t.item_id)))
+    Ok(tasks
+        .iter()
+        .find(|t| !attempted.contains(&t.item_id))
+        .cloned())
 }
 
 /// Grade a typed answer and record production-writing evidence. Hint use
@@ -3298,7 +3968,7 @@ fn writing_submit(
 ) -> Result<lts_activity::writing::WritingGrade, String> {
     let data = data_dir();
     checked_unit(&item_id)?;
-    let tasks = writing_tasks(&data, &profile_id)?;
+    let tasks = writing_tasks_for_profile(&data, &profile_id)?;
     let task = tasks
         .iter()
         .find(|t| t.item_id == item_id)
@@ -4320,6 +4990,10 @@ struct MinedItemView {
     source_citation: String,
     created_at: String,
     due_at: Option<String>,
+    /// False when this surface was already in My words: the response
+    /// then describes the ORIGINAL stored row, and App.tsx tells the
+    /// learner instead of failing on the UNIQUE constraint (K-61).
+    was_new: bool,
 }
 
 fn is_mined_item(item_id: &str) -> bool {
@@ -4363,8 +5037,9 @@ fn mine_add_at(
     let now = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
         .map_err(|e| e.to_string())?;
+    let created_at = rfc3339_utc(now.as_secs());
     let id = format!("mine-{}-{}", now.as_secs(), now.subsec_nanos());
-    store
+    let outcome = store
         .add_mined(
             profile_id,
             lts_storage::NewMinedItem {
@@ -4373,18 +5048,54 @@ fn mine_add_at(
                 reading: reading.as_deref(),
                 gloss: gloss.as_deref(),
                 source_citation: source_citation.trim(),
-                created_at: &rfc3339_utc(now.as_secs()),
+                created_at: &created_at,
             },
         )
         .map_err(|e| e.to_string())?;
+    if outcome.was_new {
+        return Ok(MinedItemView {
+            id: outcome.id,
+            surface,
+            reading,
+            gloss,
+            source_citation: source_citation.trim().to_string(),
+            created_at,
+            due_at: None,
+            was_new: true,
+        });
+    }
+    // Repeat mine: report what is actually stored (the add folded the
+    // caller's annotations into the existing row) so the UI copy is
+    // honest and no raw database text reaches the learner.
+    let stored = store
+        .mined_items(profile_id)
+        .map_err(|e| e.to_string())?
+        .into_iter()
+        .find(|m| m.id == outcome.id);
+    let (reading, gloss, source_citation, row_created_at) = match stored {
+        Some(m) => (m.reading, m.gloss, m.source_citation, m.created_at),
+        None => (
+            reading,
+            gloss,
+            source_citation.trim().to_string(),
+            created_at,
+        ),
+    };
+    let due_at = store
+        .scheduler_state(profile_id)
+        .map_err(|e| e.to_string())?
+        .into_iter()
+        .find(|r| r.item_id == outcome.id && r.scheduler == lts_scheduler::SPIKE_VERSION)
+        .map(|r| r.due_at);
     Ok(MinedItemView {
-        id,
+        id: outcome.id,
         surface,
         reading,
         gloss,
-        source_citation: source_citation.trim().to_string(),
-        created_at: rfc3339_utc(now.as_secs()),
-        due_at: None,
+        source_citation,
+        created_at: row_created_at,
+        due_at,
+        was_new: false,
     })
 }
 
@@ -4414,6 +5125,7 @@ fn mine_list_at(data: &Path, profile_id: &str) -> Result<Vec<MinedItemView>, Str
             gloss: m.gloss,
             source_citation: m.source_citation,
             created_at: m.created_at,
+            was_new: true,
         })
         .collect())
 }
@@ -4757,6 +5469,13 @@ struct PackAssessment {
 #[derive(serde::Deserialize)]
 struct PackUnit {
     goal_id: String,
+    /// K-66/ADR-0021: the features this pack offers, declared by the
+    /// pack, never inferred from content. The engine acts on the
+    /// declaration alone; it does not know what any of the names mean
+    /// beyond "a unit claimed it and the validator proved the unit has
+    /// content for it".
+    #[serde(default)]
+    capabilities: Vec<String>,
     #[serde(default)]
     activities: Vec<PackUnitActivity>,
 }
@@ -4778,20 +5497,25 @@ struct PlacementItem {
     modality: String,
 }
 
-fn placement_plan_at(data: &Path, profile_id: &str) -> Result<Vec<PlacementItem>, String> {
-    let active = packs::active_pack(data, profile_id)?;
-    let pack_id = active.first().ok_or("no active language pack")?;
-    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
-        .ok_or("pack not installed")?;
-    let root = data.join("packs").join(pack_id).join(&version);
-    let text =
-        std::fs::read_to_string(root.join("assessments/definitions.jsonl")).unwrap_or_default();
-    let mut assessments: Vec<PackAssessment> = Vec::new();
-    for line in text.lines() {
-        if line.trim().is_empty() {
-            continue;
-        }
-        assessments.push(serde_json::from_str(line).map_err(|e| format!("assessment: {e}"))?);
+/// K-63-follow: a placement plan needs every declared unit, and the reference
+/// pack declares 774 of them across 774 separate YAML files. Parsing them on
+/// each click cost ~420 ms to open the Placement tab — on content that cannot
+/// change under a running app — so the parse is shared per immutable version
+/// root, exactly like the lexicon (`LEXICON_CACHE`).
+static UNIT_CACHE: std::sync::LazyLock<
+    std::sync::Mutex<std::collections::HashMap<PathBuf, std::sync::Arc<Vec<PackUnit>>>>,
+> = std::sync::LazyLock::new(|| std::sync::Mutex::new(Default::default()));
+
+static ASSESSMENT_CACHE: std::sync::LazyLock<
+    std::sync::Mutex<std::collections::HashMap<PathBuf, std::sync::Arc<Vec<PackAssessment>>>>,
+> = std::sync::LazyLock::new(|| std::sync::Mutex::new(Default::default()));
+
+/// Every unit the pack declares, in file-name order. A malformed unit is
+/// skipped rather than failing the whole plan, as it always was.
+fn pack_units(root: &Path) -> std::sync::Arc<Vec<PackUnit>> {
+    let mut cache = UNIT_CACHE.lock().unwrap_or_else(|e| e.into_inner());
+    if let Some(hit) = cache.get(root) {
+        return std::sync::Arc::clone(hit);
     }
     let mut units: Vec<PackUnit> = Vec::new();
     let units_dir = root.join("curriculum/units");
@@ -4810,8 +5534,43 @@ fn placement_plan_at(data: &Path, profile_id: &str) -> Result<Vec<PlacementItem>
             }
         }
     }
+    let units = std::sync::Arc::new(units);
+    cache.insert(root.to_path_buf(), std::sync::Arc::clone(&units));
+    units
+}
+
+/// The pack's declared assessments. A malformed definition is still an error
+/// for the caller — and is never cached, so a repaired pack is readable next
+/// time.
+fn pack_assessments(root: &Path) -> Result<std::sync::Arc<Vec<PackAssessment>>, String> {
+    let mut cache = ASSESSMENT_CACHE.lock().unwrap_or_else(|e| e.into_inner());
+    if let Some(hit) = cache.get(root) {
+        return Ok(std::sync::Arc::clone(hit));
+    }
+    let text =
+        std::fs::read_to_string(root.join("assessments/definitions.jsonl")).unwrap_or_default();
+    let mut assessments: Vec<PackAssessment> = Vec::new();
+    for line in text.lines() {
+        if line.trim().is_empty() {
+            continue;
+        }
+        assessments.push(serde_json::from_str(line).map_err(|e| format!("assessment: {e}"))?);
+    }
+    let assessments = std::sync::Arc::new(assessments);
+    cache.insert(root.to_path_buf(), std::sync::Arc::clone(&assessments));
+    Ok(assessments)
+}
+
+fn placement_plan_at(data: &Path, profile_id: &str) -> Result<Vec<PlacementItem>, String> {
+    let active = packs::active_pack(data, profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    let root = data.join("packs").join(pack_id).join(&version);
+    let assessments = pack_assessments(&root)?;
+    let units = pack_units(&root);
     let mut items = Vec::new();
-    for a in assessments {
+    for a in assessments.iter() {
         let runner = match a.modality.as_str() {
             "reading" => "recall-meaning",
             "listening" => "comprehension-listening",
@@ -4835,8 +5594,8 @@ fn placement_plan_at(data: &Path, profile_id: &str) -> Result<Vec<PlacementItem>
             continue;
         };
         items.push(PlacementItem {
-            assessment_id: a.id,
-            goal_id: a.goal_id,
+            assessment_id: a.id.clone(),
+            goal_id: a.goal_id.clone(),
             content_id: content.clone(),
             modality: runner.to_string(),
         });
@@ -4961,9 +5720,43 @@ struct SpeechAudio {
     source: &'static str,
 }
 
+/// K-65b: the learner never sends the string the engine will speak. The
+/// command takes a content id and resolves the speakable string from the pack
+/// record (media first, then the declared reading). Shadowing used to pass the
+/// written form down from the frontend, so nothing native ever checked that
+/// the string was one the engine can read, and any caller could hand it a
+/// romanization.
 #[tauri::command]
-fn speech_audio(pack_id: String, unit_id: String, text: String) -> Result<SpeechAudio, String> {
-    speech_audio_at(&data_dir(), &pack_id, &unit_id, &text)
+fn speech_audio(pack_id: String, content_id: String) -> Result<SpeechAudio, String> {
+    let version = lts_langpack::archive::current_version(&pack_id, &data_dir().join("packs"))
+        .ok_or("pack not installed")?;
+    let text = speakable_text(&data_dir(), &pack_id, &version, &content_id)?;
+    speech_audio_at(&data_dir(), &pack_id, &content_id, &text)
+}
+
+/// The pack-declared string to synthesize for one content id: media is
+/// preferred upstream (`speech_audio_at` checks the manifest), so this is
+/// only the fallback. Words use `LexEntry::speakable`; sentences use their
+/// declared text. No record means no audio, never a guess.
+fn speakable_text(
+    data: &Path,
+    pack_id: &str,
+    version: &str,
+    content_id: &str,
+) -> Result<String, String> {
+    if let Some(entry) = lexicon_entries(data, pack_id, version)?
+        .into_iter()
+        .find(|e| e.id == content_id)
+    {
+        return Ok(entry.speakable().to_string());
+    }
+    if let Some(entry) = sentence_entries(data, pack_id, version)?
+        .into_iter()
+        .find(|e| e.id == content_id)
+    {
+        return Ok(entry.text);
+    }
+    Err("unknown item".to_string())
 }
 
 /// ADR-0016: audio provenance is DECLARED by the pack, never inferred from a
@@ -5196,17 +5989,7 @@ fn listening_audio_at(
     // Both words and sentences are listenable. Media lookup is by content id
     // (manifest first, ADR-0016); the record's text is only the synthesis
     // fallback when the pack ships no recording for it.
-    let mut text = lexicon_entries(data, pack_id, &version)?
-        .into_iter()
-        .find(|e| e.id == content_id)
-        .map(|e| e.surface);
-    if text.is_none() {
-        text = sentence_entries(data, pack_id, &version)?
-            .into_iter()
-            .find(|e| e.id == content_id)
-            .map(|e| e.text);
-    }
-    let text = text.ok_or("unknown item")?;
+    let text = speakable_text(data, pack_id, &version, content_id)?;
     speech_audio_at(data, pack_id, content_id, &text)
 }
 
@@ -5221,19 +6004,33 @@ fn available_models() -> Vec<models::ModelStatus> {
     models::model_status(&data_dir())
 }
 
-#[tauri::command]
-fn install_model(model_id: String) -> Result<models::InstalledRecord, String> {
+/// Resolve a catalog id and install it, reporting each stage. Split from the
+/// command so the rejection path is testable without a webview.
+fn install_model_at(
+    data: &Path,
+    model_id: &str,
+    report: impl FnMut(&progress::Progress),
+) -> Result<models::InstalledRecord, String> {
     let entry = models::load_catalog()
         .models
         .into_iter()
         .find(|m| m.id == model_id)
         .ok_or("unknown model id")?;
-    models::install_model_files(
-        &data_dir(),
+    models::install_model_files_report(
+        data,
         &entry,
         &rfc3339_utc(now_secs()),
         models::download,
+        report,
     )
+}
+
+#[tauri::command]
+fn install_model(
+    model_id: String,
+    app: tauri::AppHandle,
+) -> Result<models::InstalledRecord, String> {
+    install_model_at(&data_dir(), &model_id, progress::reporter(&app))
 }
 
 #[tauri::command]
@@ -5395,8 +6192,32 @@ fn rfc3339_utc(secs: u64) -> String {
     )
 }
 
+/// The value to force into `WEBKIT_DISABLE_DMABUF_RENDERER`, or `None` to
+/// leave the environment alone.
+///
+/// WebKitGTK 2.44+ paints through a DMABUF/GBM path that fails on the
+/// proprietary NVIDIA driver and on software/virtual GPUs (Xvfb): it logs
+/// `Failed to create GBM buffer of size WxH: Invalid argument` and then never
+/// draws anything, so the window opens blank (observed on X11 + NVIDIA with
+/// WebKitGTK 2.52.6, 2026-10-08). An operator-set value is never overwritten:
+/// `WEBKIT_DISABLE_DMABUF_RENDERER=0` is WebKitGTK's own switch for asking for
+/// the accelerated path back, and any other value is its own opt-out.
+fn webkit_dmabuf_fallback(current: Option<&std::ffi::OsStr>) -> Option<&'static str> {
+    current.is_none().then_some("1")
+}
+
+/// Applied before the builder exists so no other thread is reading the
+/// environment yet; the renderer is only consulted when the webview starts.
+fn force_webkit_fallback_renderer() {
+    const KEY: &str = "WEBKIT_DISABLE_DMABUF_RENDERER";
+    if let Some(value) = webkit_dmabuf_fallback(std::env::var_os(KEY).as_deref()) {
+        unsafe { std::env::set_var(KEY, value) };
+    }
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    force_webkit_fallback_renderer();
     tauri::Builder::default()
         .manage(scenarios::SessionStore::default())
         // The window is built here (not via tauri.conf.json) so the
@@ -5427,7 +6248,17 @@ pub fn run() {
                 // `<resource_dir>/aligner`; a bare build has no such directory and
                 // abstains honestly rather than pretending an ASR exists.
                 let _ = BUNDLED_SIDECAR.set(rd.join("aligner"));
+                // K-59: the pack-bundled variant stages pack sources under
+                // `<resource_dir>/packs` beside the other payloads; a bare
+                // build has no such directory and resolves from the repo
+                // tree (dev) or abstains, honestly.
+                let _ = BUNDLED_PACKS.set(rd.join("packs"));
             }
+            // K-63-follow: prime the content caches for already-installed packs
+            // so the first thing a learner does after opening the app is not the
+            // slowest thing they do.
+            let warm_dir = data_dir();
+            std::thread::spawn(move || warm_installed(&warm_dir));
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -5442,6 +6273,7 @@ pub fn run() {
             complete_onboarding,
             home_state,
             practice_plan,
+            first_run_steps,
             progress_summary,
             available_models,
             install_model,
@@ -5463,6 +6295,8 @@ pub fn run() {
             set_display_settings,
             get_microphone_enabled,
             set_microphone_enabled,
+            get_microphone_device,
+            set_microphone_device,
             get_romaji_mode,
             set_romaji_mode,
             profile_export,
@@ -5514,7 +6348,7 @@ mod tests {
     /// tests/fixtures/packs so engine tests keep their stable content ids.
     fn install_bundled_pack(data: &Path, pack_id: &str) -> Result<PackCandidate, String> {
         if bundled_packs().iter().any(|(c, _)| c.pack_id == pack_id) {
-            return crate::install_bundled_pack(data, pack_id);
+            return crate::install_bundled_pack_report(data, pack_id, None, |_| {});
         }
         let name = pack_id
             .strip_prefix("org.openlanguage.")
@@ -5542,6 +6376,113 @@ mod tests {
             locale: "ja-JP".into(),
             maturity: "community".into(),
         })
+    }
+
+    /// K-59: the pack-bundled variant resolves candidates from staged
+    /// resources plus the `BUNDLED.yaml` sidecar the staging script writes,
+    /// and nothing else: fail-closed on every malformed state, and dev's
+    /// repo tree still wins when both exist.
+    #[test]
+    fn a_pack_bundled_build_resolves_candidates_from_staged_resources() {
+        let tmp = tempfile::tempdir().unwrap();
+        let root = tmp.path().join("packs");
+        std::fs::create_dir_all(&root).unwrap();
+        let fixture =
+            Path::new(env!("CARGO_MANIFEST_DIR")).join("../../../tests/fixtures/packs/ja-demo");
+        copy_tree(&fixture, &root.join("org.openlanguage.ja-demo"));
+        std::fs::write(
+            root.join("BUNDLED.yaml"),
+            "schema_version: 1\npacks:\n  - pack_id: org.openlanguage.ja-demo\n    locale: ja-JP\n    maturity: community\n",
+        )
+        .unwrap();
+
+        let packs = bundled_packs_at(Path::new("/nonexistent-repo"), Some(&root));
+        assert_eq!(packs.len(), 1, "the sidecar names exactly one staged pack");
+        assert_eq!(packs[0].0.pack_id, "org.openlanguage.ja-demo");
+        // Display names travel with the pack (K-47), not with the app.
+        assert_ne!(packs[0].0.display_name, "");
+        assert_ne!(packs[0].0.display_name, "org.openlanguage.ja-demo");
+
+        // The candidate is installable through the production path — this
+        // is what the learner's first Languages click actually runs.
+        let data = tmp.path().join("data");
+        let mut stages: Vec<&'static str> = Vec::new();
+        let candidate =
+            install_bundled_pack_report(&data, "org.openlanguage.ja-demo", Some(&root), |p| {
+                stages.push(p.stage)
+            })
+            .expect("a staged, sidecar-named pack installs");
+        assert_eq!(candidate.pack_id, "org.openlanguage.ja-demo");
+        assert_eq!(stages.first().copied(), Some("prepare"));
+    }
+
+    #[test]
+    fn a_bundled_packs_sidecar_that_fails_closed_yields_no_candidates() {
+        let tmp = tempfile::tempdir().unwrap();
+        let fixture =
+            Path::new(env!("CARGO_MANIFEST_DIR")).join("../../../tests/fixtures/packs/ja-demo");
+        let missing_repo = Path::new("/nonexistent-repo");
+
+        // No packs directory at all (a bare build): abstain, as today.
+        assert!(bundled_packs_at(missing_repo, None).is_empty());
+
+        // Directory present but no sidecar: a bundle may not guess.
+        let root = tmp.path().join("bare");
+        std::fs::create_dir_all(root.join("org.openlanguage.ja-demo")).unwrap();
+        assert!(bundled_packs_at(missing_repo, Some(&root)).is_empty());
+
+        // Wrong schema version: refuse, never reinterpret.
+        let root = tmp.path().join("wrong-schema");
+        std::fs::create_dir_all(&root).unwrap();
+        std::fs::write(root.join("BUNDLED.yaml"), "schema_version: 2\npacks: []\n").unwrap();
+        assert!(bundled_packs_at(missing_repo, Some(&root)).is_empty());
+
+        // Unparsable shape: refuse.
+        let root = tmp.path().join("malformed");
+        std::fs::create_dir_all(&root).unwrap();
+        std::fs::write(root.join("BUNDLED.yaml"), "schema_version: not-a-number\n").unwrap();
+        assert!(bundled_packs_at(missing_repo, Some(&root)).is_empty());
+
+        // A named pack whose directory is absent is skipped, and the
+        // honest one still resolves.
+        let root = tmp.path().join("dangling");
+        std::fs::create_dir_all(root.join("org.openlanguage.ja-demo")).unwrap();
+        copy_tree(&fixture, &root.join("org.openlanguage.ja-demo"));
+        std::fs::write(
+            root.join("BUNDLED.yaml"),
+            "schema_version: 1\npacks:\n  - pack_id: org.openlanguage.gone\n    locale: xx-XX\n    maturity: community\n  - pack_id: org.openlanguage.ja-demo\n    locale: ja-JP\n    maturity: community\n",
+        )
+        .unwrap();
+        let packs = bundled_packs_at(missing_repo, Some(&root));
+        assert_eq!(packs.len(), 1);
+        assert_eq!(packs[0].0.pack_id, "org.openlanguage.ja-demo");
+    }
+
+    #[test]
+    fn the_dev_repo_tree_beats_staged_resources_when_both_exist() {
+        let tmp = tempfile::tempdir().unwrap();
+        let repo = tmp.path().join("repo");
+        std::fs::create_dir_all(repo.join("languages/ja-JP")).unwrap();
+        let root = tmp.path().join("resources/packs");
+        std::fs::create_dir_all(&root).unwrap();
+        std::fs::write(
+            root.join("BUNDLED.yaml"),
+            "schema_version: 1\npacks:\n  - pack_id: org.openlanguage.ja-demo\n    locale: ja-JP\n    maturity: community\n",
+        )
+        .unwrap();
+
+        let packs = bundled_packs_at(&repo, Some(&root));
+        assert_eq!(
+            packs
+                .iter()
+                .map(|(c, _)| c.pack_id.as_str())
+                .collect::<Vec<_>>(),
+            DEV_PACK_CANDIDATES
+                .iter()
+                .map(|(id, ..)| *id)
+                .collect::<Vec<_>>(),
+            "a dev checkout keeps today's candidates; the staged root never shadows it"
+        );
     }
 
     #[test]
@@ -5647,8 +6588,9 @@ mod tests {
 
     #[test]
     fn unknown_model_id_is_rejected_before_any_download() {
+        let tmp = tempfile::tempdir().unwrap();
         assert_eq!(
-            install_model("org.evil.model".into()).unwrap_err(),
+            install_model_at(tmp.path(), "org.evil.model", |_| {}).unwrap_err(),
             "unknown model id"
         );
     }
@@ -5680,26 +6622,23 @@ mod tests {
     /// guessed at.
     #[test]
     fn phrase_entries_carry_slots_and_target_the_right_slot() {
+        // K-63-follow: the phrase rows are added to the pack *before* it is
+        // installed, which is how real pack content arrives. Patching them into
+        // an installed version directory was the old shortcut, and it asserted a
+        // thing the product cannot do: an installed version is immutable by
+        // contract (docs/07), and every content cache keys on that.
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
-        let version = lts_langpack::archive::current_version(
-            "org.openlanguage.ja-jp.reference",
-            &data.join("packs"),
-        )
-        .unwrap();
-        let lex = data
-            .join("packs/org.openlanguage.ja-jp.reference")
-            .join(&version)
-            .join("lexicon");
-        std::fs::write(
-            lex.join("phrases.jsonl"),
-            concat!(
-                "{\"id\":\"ja.lex.phrase.demo-time-greet\",\"status\":\"draft\",\"kind\":\"phrase\",\"forms\":[{\"text\":\"おはようございます\",\"is_primary\":true}],\"readings\":[{\"text\":\"おはようございます\",\"script\":\"hiragana\"}],\"glosses\":{\"en-US\":[\"a morning greeting\"]},\"sources\":[\"jf-standard\"],\"slots\":[{\"text\":\"おはよう\",\"alternatives\":[\"こんにちは\",\"こんばんは\"],\"label\":\"the time of day\"},{\"text\":\"ございます\",\"alternatives\":[\"ございます\",\"です\"]}]}\n",
-                "{\"id\":\"ja.lex.phrase.demo-bad-slot\",\"status\":\"draft\",\"kind\":\"phrase\",\"forms\":[{\"text\":\"さようなら\",\"is_primary\":true}],\"glosses\":{\"en-US\":[\"a farewell\"]},\"sources\":[\"jf-standard\"],\"slots\":[{\"text\":\"さよなら\",\"label\":\"does not occur in the surface\"}]}\n",
-            ),
-        )
-        .unwrap();
+        let version = install_reference_pack_with(
+            data,
+            &[(
+                "lexicon/phrases.jsonl",
+                concat!(
+                    "{\"id\":\"ja.lex.phrase.demo-time-greet\",\"status\":\"draft\",\"kind\":\"phrase\",\"forms\":[{\"text\":\"おはようございます\",\"is_primary\":true}],\"readings\":[{\"text\":\"おはようございます\",\"script\":\"hiragana\"}],\"glosses\":{\"en-US\":[\"a morning greeting\"]},\"sources\":[\"jf-standard\"],\"slots\":[{\"text\":\"おはよう\",\"alternatives\":[\"こんにちは\",\"こんばんは\"],\"label\":\"the time of day\"},{\"text\":\"ございます\",\"alternatives\":[\"ございます\",\"です\"]}]}\n",
+                    "{\"id\":\"ja.lex.phrase.demo-bad-slot\",\"status\":\"draft\",\"kind\":\"phrase\",\"forms\":[{\"text\":\"さようなら\",\"is_primary\":true}],\"glosses\":{\"en-US\":[\"a farewell\"]},\"sources\":[\"jf-standard\"],\"slots\":[{\"text\":\"さよなら\",\"label\":\"does not occur in the surface\"}]}\n",
+                ),
+            )],
+        );
 
         let entries = lexicon_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
         let phrase = entries
@@ -5760,56 +6699,58 @@ mod tests {
 
     #[test]
     fn sharded_pack_directories_reach_every_reader() {
-        // The pack format lets kanji/, sentences/, and phonology/
-        // shard across multiple *.jsonl files (chunking conventions).
-        // The kanji drill, cloze runner, contrast runner, and claims
-        // tally must see every shard, not just entries.jsonl.
+        // The pack format lets kanji/, sentences/, and phonology/ shard across
+        // multiple *.jsonl files (chunking conventions). The kanji drill, cloze
+        // runner, contrast runner, and claims tally must see every shard, not
+        // just `entries.jsonl`.
+        //
+        // K-63-follow: the extra shards join the pack *before* the install, the
+        // only way pack content can really arrive — an installed version is
+        // immutable by contract (docs/07) and every content cache keys on that.
+        // Patching an installed directory also silently outranked the memo, so
+        // the old shape of this test was asserting something no install does.
+        let source = reference_source();
+        // Base counts BEFORE the shard files are written: the pack itself grows
+        // (K-45 content), so the assertion must be relative to this source, not
+        // hardcoded numbers.
+        let base_kanji = jsonl_dir_claims(&source, "kanji").0;
+        let base_sentences = jsonl_dir_claims(&source, "sentences").0;
+        let base_contrasts = jsonl_dir_claims(&source, "phonology").0;
+
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
-        let version = lts_langpack::archive::current_version(
-            "org.openlanguage.ja-jp.reference",
-            &data.join("packs"),
-        )
-        .unwrap();
-        let root = data
-            .join("packs/org.openlanguage.ja-jp.reference")
-            .join(&version);
-        // Base counts BEFORE the shard files are written: the pack
-        // itself grows (K-45 content), so the assertion must be
-        // relative to this install, not hardcoded numbers.
-        let base_kanji = jsonl_dir_claims(&root, "kanji").0;
-        let base_sentences = jsonl_dir_claims(&root, "sentences").0;
-        let base_contrasts = jsonl_dir_claims(&root, "phonology").0;
-        std::fs::write(
-            root.join("kanji/n5-extra.jsonl"),
-            concat!(
-                "{\"id\":\"ja.kanji.demo.shard\",\"status\":\"draft\",\"character\":\"分\",",
-                "\"meanings\":[\"part\"],\"readings\":[\"bu\"],\"radicals\":[\"刀\"],",
-                "\"sources\":[\"jf-standard\"]}\n"
-            ),
-        )
-        .unwrap();
-        std::fs::write(
-            root.join("sentences/shard.jsonl"),
-            concat!(
-                "{\"id\":\"ja.sent.demo.shard\",\"status\":\"draft\",",
-                "\"text\":\"ひこうきの きっぷ を かります\",\"reading\":\"ひこうきのきっぷをかります\",",
-                "\"gloss\":\"I borrow a plane ticket.\",\"cloze_targets\":[\"きっぷ\"],",
-                "\"sources\":[\"jf-standard\"]}\n"
-            ),
-        )
-        .unwrap();
-        std::fs::write(
-            root.join("phonology/contrasts-extra.jsonl"),
-            concat!(
-                "{\"id\":\"ja.contrast.demo.shard\",\"status\":\"draft\",",
-                "\"description\":\"demo shard contrast\",",
-                "\"items\":[{\"text\":\"たべもの\"},{\"text\":\"たべものー\"}],",
-                "\"sources\":[\"jf-standard\"]}\n"
-            ),
-        )
-        .unwrap();
+        let version = install_reference_pack_with(
+            data,
+            &[
+                (
+                    "kanji/n5-extra.jsonl",
+                    concat!(
+                        "{\"id\":\"ja.kanji.demo.shard\",\"status\":\"draft\",\"character\":\"分\",",
+                        "\"meanings\":[\"part\"],\"readings\":[\"bu\"],\"radicals\":[\"刀\"],",
+                        "\"sources\":[\"jf-standard\"]}\n"
+                    ),
+                ),
+                (
+                    "sentences/shard.jsonl",
+                    concat!(
+                        "{\"id\":\"ja.sent.demo.shard\",\"status\":\"draft\",",
+                        "\"text\":\"ひこうきの きっぷ を かります\",\"reading\":\"ひこうきのきっぷをかります\",",
+                        "\"gloss\":\"I borrow a plane ticket.\",\"cloze_targets\":[\"きっぷ\"],",
+                        "\"sources\":[\"jf-standard\"]}\n"
+                    ),
+                ),
+                (
+                    "phonology/contrasts-extra.jsonl",
+                    concat!(
+                        "{\"id\":\"ja.contrast.demo.shard\",\"status\":\"draft\",",
+                        "\"feature_id\":\"ja.phon.vowel-length\",",
+                        "\"description\":\"demo shard contrast\",",
+                        "\"items\":[{\"text\":\"たべもの\"},{\"text\":\"たべものー\"}],",
+                        "\"sources\":[\"jf-standard\"]}\n"
+                    ),
+                ),
+            ],
+        );
 
         let kanji = kanji_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
         assert!(
@@ -5828,7 +6769,6 @@ mod tests {
             contrasts.iter().any(|e| e.id == "ja.contrast.demo.shard"),
             "shard-file contrasts must reach the discrimination runner"
         );
-
         let profile = create_local_profile(data, "H").unwrap();
         finish_onboarding(data, &profile.id, "org.openlanguage.ja-jp.reference", false).unwrap();
         let cloze = practice_task_at(
@@ -5840,6 +6780,8 @@ mod tests {
         )
         .unwrap();
         assert!(cloze.typed, "shard sentence builds a cloze task");
+        // The install warmed this pack's tallies, so the report a learner sees is
+        // the memo the install computed — shards included.
         let claims = pack_claims_at(data).unwrap();
         let ja = claims
             .iter()
@@ -6865,6 +7807,97 @@ mod tests {
         assert!(!b.wav_b64.is_empty());
     }
 
+    /// K-65/K-65b: the pinned synthesis engine spells a romanization out
+    /// letter by letter and cannot read a logographic surface at all. The
+    /// reading rule must therefore rank by structure only — this fixture uses
+    /// invented script names on purpose, because naming a real script here
+    /// would mean the engine knew about it.
+    #[test]
+    fn pick_reading_ranks_by_structure_and_never_returns_a_transliteration() {
+        let readings = vec![
+            serde_json::json!({"text": "roman", "transliteration_system": "system-x"}),
+            serde_json::json!({"text": "same-script", "script": "logographic"}),
+            serde_json::json!({"text": "phonetic", "script": "syllabic"}),
+        ];
+        assert_eq!(
+            pick_reading(Some(&readings), Some("logographic")).as_deref(),
+            Some("phonetic"),
+            "the reading in another script explains the written form"
+        );
+        let only_same = vec![
+            serde_json::json!({"text": "same", "script": "logographic"}),
+            serde_json::json!({"text": "roman", "transliteration_system": "system-x"}),
+        ];
+        assert_eq!(
+            pick_reading(Some(&only_same), Some("logographic")).as_deref(),
+            Some("same")
+        );
+        let only_romanization =
+            vec![serde_json::json!({"text": "roman", "transliteration_system": "system-x"})];
+        assert_eq!(
+            pick_reading(Some(&only_romanization), Some("logographic")),
+            None,
+            "a romanization is never a reading"
+        );
+        assert_eq!(pick_reading(None, Some("logographic")), None);
+    }
+
+    #[test]
+    fn speakable_text_prefers_the_declared_reading_over_the_written_form() {
+        let tmp = tempfile::TempDir::new().unwrap();
+        let data = tmp.path();
+        // The demo fixture's logographic entry: written form `私`, declared
+        // reading `わたし`, and a romanization the engine must never be handed
+        // (measured: Kokoro spells romaji out letter by letter — K-65).
+        let demo = "org.openlanguage.ja-demo";
+        install_bundled_pack(data, demo).unwrap();
+        let version =
+            lts_langpack::archive::current_version(demo, &data.join("packs")).expect("version");
+        let text = speakable_text(data, demo, &version, "ja.lex.demo.watashi").unwrap();
+        assert_eq!(text, "わたし", "synthesis speaks the declared reading");
+        assert_ne!(text, "私", "never the written form the engine cannot read");
+        assert_ne!(text, "watashi", "never the romanization");
+        // Sentences synthesize their own declared text.
+        let pack = "org.openlanguage.ja-jp.reference";
+        install_bundled_pack(data, pack).unwrap();
+        let version =
+            lts_langpack::archive::current_version(pack, &data.join("packs")).expect("version");
+        let sentence = sentence_entries(data, pack, &version)
+            .unwrap()
+            .into_iter()
+            .next()
+            .expect("the reference pack declares sentences");
+        assert_eq!(
+            speakable_text(data, pack, &version, &sentence.id).unwrap(),
+            sentence.text
+        );
+        // No record: abstain, never guess.
+        assert_eq!(
+            speakable_text(data, pack, &version, "ja.lex.no.such.entry").unwrap_err(),
+            "unknown item"
+        );
+    }
+
+    #[test]
+    fn an_entry_with_no_declared_reading_falls_back_to_its_written_form() {
+        let entry = LexEntry {
+            id: "ja.lex.test.entry".into(),
+            surface: "logograph".into(),
+            reading: None,
+            romaji: Some("roman".into()),
+            gloss: "gloss".into(),
+            status: "draft".into(),
+            kind: "word".into(),
+            slots: Vec::new(),
+        };
+        assert_eq!(entry.speakable(), "logograph");
+        let entry = LexEntry {
+            reading: Some("phonetic".into()),
+            ..entry
+        };
+        assert_eq!(entry.speakable(), "phonetic");
+    }
+
     #[test]
     fn media_provenance_comes_from_the_pack_manifest_not_file_presence() {
         // ADR-0016: shipped audio must never surface as a licensed recording just
@@ -7281,6 +8314,55 @@ mod tests {
         assert!(c.provenance.iter().any(|s| !s.title.is_empty()));
     }
 
+    /// K-63: the claim report memoizes the content-derived tallies per pack
+    /// root, but the store's `trust_state` is re-read every call. Flipping
+    /// the installation record's trust state must surface immediately (the
+    /// memo never freezes it), while the content tallies stay identical.
+    #[test]
+    fn the_claim_report_survives_a_trust_change_without_lying_about_it() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+
+        let first = pack_claims_at(data).unwrap();
+        assert_eq!(first.len(), 1);
+        assert_eq!(first[0].trust_state, "community");
+        let counts = first[0].counts.clone();
+        let postures = serde_json::to_string(&first[0].postures).unwrap();
+        assert!(counts.units > 0 && counts.lexicon > 0);
+
+        // Rewrite the installation record's trust state in the store
+        // (`record_installation` upserts on (pack_id, version)).
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let version = lts_langpack::archive::current_version(
+            "org.openlanguage.ja-jp.reference",
+            &data.join("packs"),
+        )
+        .unwrap();
+        store
+            .record_installation(&lts_storage::PackInstallation {
+                pack_id: "org.openlanguage.ja-jp.reference".into(),
+                version,
+                installed_at: rfc3339_utc(now_secs()),
+                trust_state: "verified".into(),
+            })
+            .unwrap();
+
+        // The second call hits the memo: the content tallies are unchanged...
+        let second = pack_claims_at(data).unwrap();
+        assert_eq!(second.len(), 1);
+        assert_eq!(second[0].counts.units, counts.units);
+        assert_eq!(second[0].counts.goals, counts.goals);
+        assert_eq!(second[0].counts.lexicon, counts.lexicon);
+        assert_eq!(
+            serde_json::to_string(&second[0].postures).unwrap(),
+            postures,
+            "the memo returns the same posture tallies"
+        );
+        // ...and the store's NEW trust state is reported, never the cached one.
+        assert_eq!(second[0].trust_state, "verified");
+    }
+
     /// K-46: device-tier classification follows the PERF-001 tier
     /// shape and recommends the largest model that fits comfortably;
     /// detection failure recommends nothing (honest abstention).
@@ -7399,6 +8481,24 @@ mod tests {
             "always",
             "a rejected value never overwrites the stored one"
         );
+        // K-64: the chosen microphone is a profile setting like the others.
+        // No stored device means the system default, which is a decision, not
+        // a missing value — clearing must survive the same way choosing does.
+        assert_eq!(microphone_device_at(data, &p.id).unwrap(), None);
+        assert_eq!(
+            set_microphone_device_at(data, &p.id, Some("mic-headset".into()))
+                .unwrap()
+                .as_deref(),
+            Some("mic-headset")
+        );
+        assert_eq!(
+            microphone_device_at(data, &p.id).unwrap().as_deref(),
+            Some("mic-headset"),
+            "the chosen microphone persists across restarts"
+        );
+        assert_eq!(set_microphone_device_at(data, &p.id, None).unwrap(), None);
+        assert_eq!(microphone_device_at(data, &p.id).unwrap(), None);
+        assert!(microphone_device_at(data, "prof-does-not-exist").is_err());
         assert!(microphone_enabled_at(data, "prof-does-not-exist").is_err());
     }
 
@@ -7434,6 +8534,10 @@ mod tests {
         assert!(profile_export_at(data, &p.id).is_err());
     }
 
+    /// Every install reports its stages; this test is about the install gate,
+    /// so it drops them.
+    fn drop_stage(_: &crate::progress::Progress) {}
+
     /// Community pack flow: a local .lpk import goes through the same
     /// install gate, is recorded as community trust, and the learning
     /// language can be switched to it; everything works offline.
@@ -7446,7 +8550,7 @@ mod tests {
         let (bytes, _sha) = lts_langpack::archive::build(&dir).unwrap();
         use base64::Engine;
         let b64 = base64::engine::general_purpose::STANDARD.encode(&bytes);
-        let inst = packs::import_pack_b64(data, &b64).unwrap();
+        let inst = packs::import_pack_b64_report(data, &b64, &mut drop_stage).unwrap();
         assert_eq!(inst.trust_state, "community");
         assert_eq!(inst.pack_id, "org.openlanguage.ja-demo");
 
@@ -7648,6 +8752,203 @@ mod tests {
             )
             .is_err(),
         );
+    }
+
+    // K-66 (ADR-0020/0021): the guided first run. Everything below is
+    // derived from pack data the pack itself declares — goal map band
+    // order, unit file order, orthography teaching_order. Nothing pins
+    // an app-side ordering of Japanese.
+    #[test]
+    fn a_fresh_ja_jp_plan_is_all_introductions_in_the_packs_goal_order() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        let version = lts_langpack::archive::current_version(
+            "org.openlanguage.ja-jp.reference",
+            &data.join("packs"),
+        )
+        .unwrap();
+        let root = data
+            .join("packs")
+            .join("org.openlanguage.ja-jp.reference")
+            .join(&version);
+
+        let view = build_plan_view(data, &p.id, 5, 1_762_128_000).unwrap();
+        assert!(!view.items.is_empty(), "a fresh profile gets a first run");
+        // Introduction items are not evidence (ADR-0020 consequences):
+        // with nothing recorded, every plan item is one.
+        assert!(view.items.iter().all(|i| i.kind == "introduction"));
+
+        // ADR-0020 §1: the pack's goal map ranks the introduction half —
+        // band ladder, then unit order, then content order. Ranked items
+        // lead and stay in rank order; unranked items only ever tail.
+        let ranks = goal_rank_map(&root, &[]);
+        assert!(
+            !ranks.is_empty(),
+            "the reference pack ranks its early content"
+        );
+        let seen: Vec<Option<GoalRank>> = view
+            .items
+            .iter()
+            .map(|i| ranks.get(&i.content_id).copied())
+            .collect();
+        if let Some(pos) = seen.iter().position(Option::is_none) {
+            assert!(
+                seen[pos..].iter().all(Option::is_none),
+                "unranked items must tail the ranked ones, never interleave"
+            );
+        }
+        let ranked: Vec<&GoalRank> = seen.iter().flatten().collect();
+        assert!(
+            ranked.windows(2).all(|w| w[0] <= w[1]),
+            "ranked items stay in goal-map order"
+        );
+
+        // The first thing a learner sees belongs to the first unlocked
+        // goal's own unit — the pack's file, read as data.
+        let unit: serde_yaml::Value = serde_yaml::from_str(
+            &std::fs::read_to_string(
+                root.join("curriculum/units/010-kana-hiragana-vowels-ko.yaml"),
+            )
+            .unwrap(),
+        )
+        .unwrap();
+        let refs: Vec<&str> = unit["activities"]
+            .as_sequence()
+            .unwrap()
+            .iter()
+            .flat_map(|a| a["content_refs"].as_sequence().unwrap().iter())
+            .map(|v| v.as_str().unwrap())
+            .collect();
+        assert!(
+            refs.contains(&view.items[0].content_id.as_str()),
+            "the plan leads with the first unlocked goal's unit content"
+        );
+    }
+
+    #[test]
+    fn first_run_steps_lead_with_the_declared_script_in_its_teaching_order() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+
+        let steps = first_run_steps_at(data, &p.id).unwrap();
+        // ADR-0020 §4: at most three steps, and ja-JP declares enough to fill them.
+        assert!(!steps.is_empty() && steps.len() <= 3);
+        let first = steps.first().unwrap();
+        assert_eq!(first.kind, "introduction");
+        // The declaration, not the engine: the unit that claims
+        // `script-introduction` names its goal; the engine only follows.
+        assert_eq!(
+            first.goal_id.as_deref(),
+            Some("ja.goal.onramp.kana-hiragana")
+        );
+        // And the pack's own teaching_order decides what is taught first.
+        assert_eq!(first.content_id.as_deref(), Some("ja.orth.hira.a"));
+        // Labels are pack display strings, never bare ids (ADR-0021 rule 4).
+        assert!(!first.label.is_empty());
+        assert_ne!(first.label.as_str(), first.content_id.as_deref().unwrap());
+        // No content id repeats across the steps.
+        let ids: Vec<&str> = steps
+            .iter()
+            .filter_map(|s| s.content_id.as_deref())
+            .collect();
+        let uniq: std::collections::HashSet<&str> = ids.iter().copied().collect();
+        assert_eq!(ids.len(), uniq.len());
+    }
+
+    #[test]
+    fn first_run_steps_make_no_script_claim_for_a_pack_without_the_declaration() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        let steps = first_run_steps_at(data, &p.id).unwrap();
+        // ja-demo declares no capability and no goal map: no step may
+        // name a goal or claim an introduction order (ADR-0021 rule 4).
+        for s in &steps {
+            assert_eq!(s.goal_id, None);
+        }
+    }
+
+    #[test]
+    fn goal_rank_map_follows_the_band_ladder_and_asks_nothing_of_locked_or_unrunnable_content() {
+        let tmp = tempfile::tempdir().unwrap();
+        let root = tmp.path();
+        std::fs::create_dir_all(root.join("curriculum/units")).unwrap();
+        std::fs::write(
+            root.join("curriculum/goals.yaml"),
+            "goals:\n\
+             - id: zz.goal.banded\n  band: a1\n  description: Later.\n  modalities: [reading]\n\
+             - id: aa.goal.locked\n  band: on-ramp\n  description: Gated.\n  modalities: [reading]\n  prerequisites:\n  - target: ja.orth.hira.n\n    dimension: comprehension-reading\n    required_state: independent\n    strength: hard\n\
+             - id: mm.goal.first\n  band: on-ramp\n  description: First.\n  modalities: [reading, speaking]\n",
+        )
+        .unwrap();
+        std::fs::write(
+            root.join("curriculum/units/001-locked.yaml"),
+            "goal_id: aa.goal.locked\nactivities:\n- modality: reading\n  content_refs: [w1]\n",
+        )
+        .unwrap();
+        std::fs::write(
+            root.join("curriculum/units/002-first.yaml"),
+            "goal_id: mm.goal.first\nactivities:\n- modality: reading\n  content_refs: [w2]\n- modality: speaking\n  content_refs: [w4]\n",
+        )
+        .unwrap();
+        std::fs::write(
+            root.join("curriculum/units/003-banded.yaml"),
+            "goal_id: zz.goal.banded\nactivities:\n- modality: reading\n  content_refs: [w3]\n",
+        )
+        .unwrap();
+
+        let ranks = goal_rank_map(root, &[]);
+        // Band ladder first: the on-ramp goal (its lower-id sibling is
+        // locked and contributes nothing) ranks before the a1 goal.
+        let w2 = ranks.get("w2");
+        let w3 = ranks.get("w3");
+        assert!(
+            w2.is_some() && w3.is_some(),
+            "unlocked goals rank their content"
+        );
+        // Band ladder first: on-ramp content (whose lower-id sibling goal
+        // is hard-locked and contributes nothing) outranks the a1 goal's.
+        assert!(w2.unwrap() < w3.unwrap());
+        // Content of a hard-locked goal is never ranked ahead.
+        assert!(!ranks.contains_key("w1"));
+        // Ranking is order, not runnability: content the pack schedules
+        // only under a goal-vocabulary modality ("speaking") still holds
+        // its place in the pack's content order.
+        assert!(ranks.contains_key("w4"));
+
+        // The reorder keeps every candidate and never invents one:
+        // ranked first in rank order, unranked tail in old relative order.
+        let mut prog = vec![
+            lts_scheduler::ProgressionItem {
+                content_id: "w9".into(),
+                modality: lts_domain::ActivityModality::RecallMeaning,
+            },
+            lts_scheduler::ProgressionItem {
+                content_id: "w3".into(),
+                modality: lts_domain::ActivityModality::OrthographyRecognition,
+            },
+            lts_scheduler::ProgressionItem {
+                content_id: "w8".into(),
+                modality: lts_domain::ActivityModality::RecallMeaning,
+            },
+            lts_scheduler::ProgressionItem {
+                content_id: "w2".into(),
+                modality: lts_domain::ActivityModality::OrthographyRecognition,
+            },
+        ];
+        order_progression_by_goal_map(&mut prog, &ranks);
+        // Ranked first in rank order, unranked tail in its old relative
+        // order, nothing dropped.
+        let order: Vec<&str> = prog.iter().map(|i| i.content_id.as_str()).collect();
+        assert_eq!(order, ["w2", "w3", "w9", "w8"]);
     }
 
     #[test]
@@ -7880,22 +9181,17 @@ mod tests {
         let audio = listening_audio_at(data, &p.id, "ja.sent.demo.obasan-aunt").unwrap();
         assert_eq!(audio.source, "licensed-recording");
 
-        let version =
-            lts_langpack::archive::current_version("org.openlanguage.ja-demo", &data.join("packs"))
-                .unwrap();
-        std::fs::remove_file(
-            data.join("packs")
-                .join("org.openlanguage.ja-demo")
-                .join(&version)
-                .join("media")
-                .join("ja.sent.demo.obasan-aunt.wav"),
-        )
-        .unwrap();
+        // And a sentence the pack never recorded at all abstains. That is
+        // the only shape "no audio" can take in a shipped product: an
+        // installed version directory is immutable by contract (docs/07 —
+        // the same contract every content cache keys on), so the old
+        // delete-the-wav variant asserted a state the product cannot
+        // reach. The never-declared sentence is the reachable one.
         assert_eq!(
             practice_task_at(
                 data,
                 &p.id,
-                "ja.sent.demo.obasan-aunt",
+                "ja.sent.demo.konnichiwa",
                 "comprehension-listening",
                 false,
             )
@@ -8234,6 +9530,7 @@ mod tests {
         )
         .unwrap();
         assert!(item.id.starts_with("mine-"));
+        assert!(item.was_new);
         assert_eq!(item.source_citation, "ja.story.demo.first-meeting");
 
         // An unscheduled word is not "due": the review path must not offer it.
@@ -8279,6 +9576,56 @@ mod tests {
         assert_eq!(due[0].id, item.id);
     }
 
+    #[test]
+    fn duplicate_mine_returns_the_original_id_instead_of_an_error() {
+        // K-61: mining a surface that is already in My words used to hit
+        // "UNIQUE constraint failed: mined_items.profile_id,
+        // mined_items.surface" and show that raw sqlite text in the UI.
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+
+        let first = mine_add_at(
+            data,
+            &p.id,
+            "ねこ".to_string(),
+            None,
+            Some("cat".to_string()),
+            "ja.story.demo.first-meeting".to_string(),
+        )
+        .unwrap();
+        assert!(first.was_new);
+
+        // Grade it so the item has SRS history anchored to its id.
+        let due_at = mine_grade_at(data, &p.id, &first.id, false).unwrap();
+
+        let dup = mine_add_at(
+            data,
+            &p.id,
+            "ねこ".to_string(),
+            Some("ねこ".to_string()),
+            Some("CAT".to_string()),
+            "manual".to_string(),
+        )
+        .unwrap();
+        assert!(!dup.was_new, "the learner is told, not silently re-created");
+        assert_eq!(dup.id, first.id, "the original row survives");
+        // The response describes what is stored, not what was sent.
+        assert_eq!(dup.created_at, first.created_at);
+        assert_eq!(dup.reading.as_deref(), Some("ねこ"));
+        assert_eq!(dup.due_at.as_deref(), Some(due_at.as_str()));
+
+        // Exactly one word, and its schedule still hangs off the original id.
+        let listed = mine_list_at(data, &p.id).unwrap();
+        assert_eq!(listed.len(), 1);
+        assert_eq!(listed[0].id, first.id);
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let rows = store.scheduler_state(&p.id).unwrap();
+        assert_eq!(rows.len(), 1);
+        assert_eq!(rows[0].item_id, first.id);
+    }
     #[test]
     fn reader_fades_scaffolds_and_reveals_record_support() {
         let tmp = tempfile::tempdir().unwrap();
@@ -8730,5 +10077,205 @@ mod tests {
         );
         assert_eq!(yasu.status, "review-needed");
         assert!(yasu.mnemonic.is_some(), "mnemonic surfaces for the UI");
+    }
+
+    #[test]
+    fn the_blank_window_workaround_forces_the_fallback_renderer_only_when_unset() {
+        // The failure is launch-path-dependent unless the binary opts out
+        // itself: the helper scripts exported the switch, `cargo tauri dev`
+        // and the bare binary did not, and those opened a blank window.
+        assert_eq!(webkit_dmabuf_fallback(None), Some("1"));
+        assert_eq!(
+            webkit_dmabuf_fallback(Some(std::ffi::OsStr::new("0"))),
+            None,
+            "an explicit operator value is never clobbered"
+        );
+        assert_eq!(
+            webkit_dmabuf_fallback(Some(std::ffi::OsStr::new("1"))),
+            None,
+            "an already-exported opt-out stays as the operator set it"
+        );
+    }
+
+    /// K-63-follow: the lexicon parse is shared per version *root*, so a second
+    /// version of the same pack must never be answered with the rows memorised
+    /// for the first. That key is the whole safety of the cache, and a
+    /// single-version test cannot see it being wrong.
+    #[test]
+    fn a_new_lexicon_version_is_never_answered_with_the_old_versions_rows() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let fixture =
+            PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../tests/fixtures/packs/ja-demo");
+        let id = "org.openlanguage.ja-demo";
+        let v1 = data.join("packs").join(id).join("0.1.0");
+        let v2 = data.join("packs").join(id).join("0.2.0");
+        copy_tree(&fixture, &v1);
+        copy_tree(&fixture, &v2);
+        // Same pack id, different bytes: this version's lexicon has twice the
+        // rows, so an answer carried over from the other version is visible.
+        let rows = v2.join("lexicon/entries.jsonl");
+        let original = std::fs::read_to_string(&rows).unwrap();
+        std::fs::write(&rows, format!("{original}{original}")).unwrap();
+
+        let first = lexicon_entries(data, id, "0.1.0").expect("first version parses");
+        let second = lexicon_entries(data, id, "0.2.0").expect("second version parses");
+        assert!(
+            !first.is_empty() && second.len() > first.len(),
+            "a different version directory must be parsed on its own: {} vs {}",
+            first.len(),
+            second.len()
+        );
+        let ids = |rows: &Vec<LexEntry>| {
+            rows.iter()
+                .map(|e| e.id.clone())
+                .collect::<Vec<std::string::String>>()
+        };
+        assert_eq!(
+            ids(&first),
+            ids(&lexicon_entries(data, id, "0.1.0").unwrap()),
+            "the same version must keep answering with its own rows"
+        );
+    }
+
+    /// K-63-follow: installing a pack through the production path also warms
+    /// its content caches, so the first click after an install is not the
+    /// slowest thing the learner does — measured as 460 ms cold against 81 ms
+    /// warm for the Languages tab, the whole difference being one parse.
+    #[test]
+    fn installing_a_pack_warms_its_content_for_the_first_visit() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference")
+            .expect("reference pack installs");
+        let id = "org.openlanguage.ja-jp.reference";
+        let version = lts_langpack::archive::current_version(id, &data.join("packs"))
+            .expect("the install records a current version");
+        let root = data.join("packs").join(id).join(&version);
+        assert!(
+            LEXICON_CACHE
+                .lock()
+                .unwrap_or_else(|e| e.into_inner())
+                .contains_key(&root),
+            "an install must leave the lexicon parsed, not re-read on first use"
+        );
+        assert!(
+            CLAIM_CACHE
+                .lock()
+                .unwrap_or_else(|e| e.into_inner())
+                .contains_key(&root),
+            "an install must leave the claim tallies computed, not recomputed \
+             on the first Languages visit"
+        );
+    }
+
+    fn copy_tree(from: &Path, to: &Path) {
+        std::fs::create_dir_all(to).unwrap();
+        let mut stack = vec![from.to_path_buf()];
+        while let Some(dir) = stack.pop() {
+            for e in std::fs::read_dir(&dir).unwrap().flatten() {
+                let p = e.path();
+                let dest = to.join(p.strip_prefix(from).unwrap());
+                if p.is_dir() {
+                    std::fs::create_dir_all(&dest).unwrap();
+                    stack.push(p);
+                } else {
+                    std::fs::copy(&p, &dest).unwrap();
+                }
+            }
+        }
+    }
+
+    /// Install the reference pack with extra pack files joined **before** the
+    /// install — the only way pack content can really arrive, since an installed
+    /// version directory is immutable by contract (docs/07) and every content
+    /// cache in the app keys on that fact. Returns the installed version.
+    fn install_reference_pack_with(data: &Path, extra: &[(&str, &str)]) -> String {
+        fn drop_stage(_: &crate::progress::Progress) {}
+        let src = tempfile::tempdir().unwrap();
+        copy_tree(&reference_source(), src.path());
+        for (rel, body) in extra {
+            let path = src.path().join(rel);
+            if let Some(parent) = path.parent() {
+                std::fs::create_dir_all(parent).unwrap();
+            }
+            std::fs::write(&path, body).unwrap();
+        }
+        let (bytes, _sha) =
+            lts_langpack::archive::build(src.path()).expect("the extended source packs");
+        packs::install_pack_bytes_report(data, &bytes, None, drop_stage)
+            .expect("the extended pack installs through the production path");
+        lts_langpack::archive::current_version(
+            "org.openlanguage.ja-jp.reference",
+            &data.join("packs"),
+        )
+        .expect("the install records a current version")
+    }
+
+    /// The reference pack's source tree, for reading base counts out of.
+    fn reference_source() -> PathBuf {
+        PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../languages/ja-JP")
+    }
+
+    /// The caches are only ever correct while a version directory is immutable,
+    /// and only safe while a different version is a different key. That is the
+    /// invariant every content cache here rests on, so it is checked.
+    #[test]
+    fn a_unit_parse_is_shared_per_version_root_and_never_across_roots() {
+        let tmp = tempfile::tempdir().unwrap();
+        let fixture =
+            Path::new(env!("CARGO_MANIFEST_DIR")).join("../../../tests/fixtures/packs/ja-demo");
+        let v1 = tmp.path().join("org.openlanguage.ja-demo/0.1.0");
+        let v2 = tmp.path().join("org.openlanguage.ja-demo/0.2.0");
+        copy_tree(&fixture, &v1);
+        copy_tree(&fixture, &v2);
+
+        let units = pack_units(&v1);
+        assert!(!units.is_empty(), "the fixture declares units to parse");
+        assert!(
+            std::sync::Arc::ptr_eq(&units, &pack_units(&v1)),
+            "the same immutable root must share one parse"
+        );
+        assert!(
+            !std::sync::Arc::ptr_eq(&units, &pack_units(&v2)),
+            "a different version root must never reuse another version's parse"
+        );
+    }
+
+    /// Writing targets depend only on the pack, so the parse is shared per
+    /// immutable version root and never reused across roots; a pack that will
+    /// not parse is never cached.
+    #[test]
+    fn writing_targets_are_parsed_once_per_version_root() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let version = install_reference_pack_with(data, &[]);
+        let id = "org.openlanguage.ja-jp.reference";
+        let first = writing_tasks(data, id, &version).expect("reference pack writing targets");
+        assert!(!first.is_empty(), "the pack declares writing targets");
+        assert!(
+            std::sync::Arc::ptr_eq(
+                &first,
+                &writing_tasks(data, id, &version).expect("targets again")
+            ),
+            "a second call must reuse the parse instead of repeating it"
+        );
+        let fixture =
+            Path::new(env!("CARGO_MANIFEST_DIR")).join("../../../tests/fixtures/packs/ja-demo");
+        copy_tree(&fixture, &data.join("packs/org.openlanguage.ja-demo/0.1.0"));
+        let demo = writing_tasks(data, "org.openlanguage.ja-demo", "0.1.0")
+            .expect("the other pack's targets parse");
+        assert!(
+            !std::sync::Arc::ptr_eq(&first, &demo),
+            "a different version root must never reuse another root's targets"
+        );
+        assert!(
+            writing_tasks(data, id, "9.9.9").is_err(),
+            "an absent version errors"
+        );
+        assert!(
+            writing_tasks(data, id, "9.9.9").is_err(),
+            "a failed parse caches nothing"
+        );
     }
 }

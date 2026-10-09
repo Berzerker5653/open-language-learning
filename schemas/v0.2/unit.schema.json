@@ -63,6 +63,12 @@
         "target_proficiency": { "enum": ["on-ramp", "A1", "A2", "B1", "B2", "C1", "C2"] },
         "validation_method": { "enum": ["exact-match", "choice", "human-review", "model-validated"] }
       }
+    },
+    "capabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "K-67/ADR-0021: feature names this unit declares itself able to serve, from a closed list (not script names or file layout). A capability is a claim the app MAY surface for this unit, not an instruction to run: naming one causes nothing in the engine to execute. `script-introduction` claims the unit's items are the writing-system set a new learner is introduced to first. A claim without content is meaningless, so a unit declaring capabilities must reference at least one content item (`unit_capability_items_missing`). A pack that omits this field keeps existing behavior.",
+      "items": { "enum": ["script-introduction"] }
     }
   }
 }

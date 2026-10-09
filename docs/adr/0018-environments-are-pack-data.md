@@ -1,6 +1,7 @@
 # ADR 0018: Environments are pack data, not app data
 
-Status: Proposed (awaiting owner acceptance)
+Status: Accepted 2026-10-08 by the owner (recorded on the owner's word when
+K-66 started; never self-certified by an agent)
 Date: 2026-10-08
 
 ## Context
@@ -103,8 +104,9 @@ Environments move into the pack as an optional collection.
 
 ## Status note
 
-Implementation and tests landed with this ADR as **Proposed**. It needs the
-owner's acceptance (AGENTS.md: significant architectural decisions carry an ADR,
-and human gates are not self-certifiable). If the owner rejects pack-owned
-environments, the honest fallback is removing the Home section and the
-`world_state` command rather than restoring hardcoded content.
+Implementation and tests landed while this ADR was still **Proposed**. The
+owner accepted it on 2026-10-08, which retires the fallback path: pack-owned
+environments (`world/environments.jsonl`) stay, and `world_state` keeps reading
+the active pack. Had the owner rejected it, the honest fallback would have been
+removing the Home section and the `world_state` command rather than restoring
+hardcoded content.

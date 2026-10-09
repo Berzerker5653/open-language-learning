@@ -4,6 +4,8 @@ goal_id: ja.goal.onramp.kana-hiragana
 title: 'Hiragana: vowels and K-row'
 summary: First ten hiragana with symbol/reading drills.
 estimated_minutes: 8
+capabilities:
+- script-introduction
 generation_contract:
   allowed_vocab:
   - ja.orth.hira.a

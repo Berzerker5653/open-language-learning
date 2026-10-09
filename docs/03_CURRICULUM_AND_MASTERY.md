@@ -217,6 +217,19 @@ Maximize expected learning value subject to:
 
 It is acceptable to explain: "You have five minutes; here's one listening review and a short speaking retry that are worth doing."
 
+The introduction half of a plan follows the active pack's own goal map
+(ADR-0020 §1): band ladder first, then the pack's unit order, then content
+order. The pack owns that sequence; where no goal map exists the planner's
+own ordering stands. Reordering is reordering only — the planner never
+gains or drops candidates because a goal map exists. First-run guidance
+derives from the same pack data: at most three steps, every label a pack
+display string (ADR-0020 §4, ADR-0021 rule 4).
+
+A proposed item is a promise, not a record. Introduction items surfaced by
+Home or first-run guidance produce no evidence until the learner actually
+does them; only completed activities enter the evidence log (§3). Nothing
+may count suggested content as progress anywhere.
+
 ## 9. Guessing resistance
 
 To prevent choice-pattern gaming:

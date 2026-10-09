@@ -282,18 +282,31 @@ fn hex_sha256(bytes: &[u8]) -> String {
     h.finalize().iter().map(|b| format!("{b:02x}")).collect()
 }
 
-/// Core install path shared by catalog installs and local imports. When
-/// `expected` is given, checksum and manifest identity must match.
-pub fn install_pack_bytes(
+// K-62: the progress type lives in its own module so pack installs and model
+// installs report on one channel; re-exported here because installs are its
+// main caller.
+pub use crate::progress::Progress;
+
+/// Install a pack archive — the shared path for catalog installs and local
+/// imports. With `expected`, checksum and identity must match. Reports
+/// happen *before* the work they name, which is the whole point: a stage
+/// announced after it finished would still leave the learner watching a
+/// frozen button.
+pub fn install_pack_bytes_report(
     data: &Path,
     bytes: &[u8],
     expected: Option<&PackEntry>,
+    mut report: impl FnMut(&Progress),
 ) -> Result<InstalledPack, String> {
+    let subject = expected
+        .map(|e| e.pack_id.clone())
+        .unwrap_or_else(|| "imported pack".to_string());
     if let Some(e) = expected {
         validate_entry(e)?;
         if bytes.len() as u64 > e.size_bytes {
             return Err("archive exceeds pinned size".into());
         }
+        report(&Progress::stage("install-pack", &subject, "verify"));
         if hex_sha256(bytes) != e.sha256 {
             return Err("archive checksum does not match catalog entry".into());
         }
@@ -304,11 +317,13 @@ pub fn install_pack_bytes(
             return Err("archive identity does not match catalog entry".into());
         }
     }
+    report(&Progress::stage("install-pack", &am.pack_id, "install"));
     let outcome = lts_langpack::archive::install(bytes, &data.join("packs"))
         .map_err(|e| format!("install rejected: {e}"))?;
     let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
     // Community installs NEVER self-upgrade trust: the catalog's claimed
     // review status is metadata, not a review record (docs/16).
+    report(&Progress::stage("install-pack", &outcome.pack_id, "record"));
     store
         .record_installation(&lts_storage::PackInstallation {
             pack_id: outcome.pack_id.clone(),
@@ -317,6 +332,9 @@ pub fn install_pack_bytes(
             trust_state: "community".into(),
         })
         .map_err(|e| e.to_string())?;
+    // K-63-follow: parse the pack now, while the install is on screen, rather
+    // than making the learner's first visit to it pay for the read.
+    crate::warm_pack(data, &outcome.pack_id, &outcome.version);
     Ok(display_for(
         data,
         &outcome.pack_id,
@@ -326,9 +344,13 @@ pub fn install_pack_bytes(
 }
 
 /// Install the catalog-cached entry for `pack_id` (download -> verify ->
-/// install). Offline reinstall of an already-installed pack is a no-op
-/// success.
-pub fn install_from_catalog(data: &Path, pack_id: &str) -> Result<InstalledPack, String> {
+/// install), reporting the stage it is in (K-62). Offline reinstall of an
+/// already-installed pack is a no-op success.
+pub fn install_from_catalog_report(
+    data: &Path,
+    pack_id: &str,
+    mut report: impl FnMut(&Progress),
+) -> Result<InstalledPack, String> {
     if !valid_pack_id(pack_id) {
         return Err("bad pack id".into());
     }
@@ -345,20 +367,28 @@ pub fn install_from_catalog(data: &Path, pack_id: &str) -> Result<InstalledPack,
             return Ok(display_for(data, pack_id, &v, "community"));
         }
     }
+    // A catalog entry knows the archive size, but the fetch is one blocking
+    // call: a percentage claimed mid-flight would be invented, so the stage is
+    // named and left honestly indeterminate.
+    report(&Progress::stage("install-pack", pack_id, "fetch"));
     let bytes = fetch_capped(&entry.url, entry.size_bytes, true)?;
-    install_pack_bytes(data, &bytes, Some(entry))
+    install_pack_bytes_report(data, &bytes, Some(entry), &mut report)
 }
 
-/// Import a locally supplied archive (bytes never carry paths through
-/// IPC; the UI reads the file and sends contents).
-pub fn import_pack_b64(data: &Path, data_b64: &str) -> Result<InstalledPack, String> {
+/// Import a locally supplied archive (bytes never carry paths through IPC;
+/// the UI reads the file and sends contents), reporting each stage (K-62).
+pub fn import_pack_b64_report(
+    data: &Path,
+    data_b64: &str,
+    report: impl FnMut(&Progress),
+) -> Result<InstalledPack, String> {
     let bytes = base64::engine::general_purpose::STANDARD
         .decode(data_b64)
         .map_err(|_| "invalid archive data".to_string())?;
     if bytes.len() as u64 > lts_langpack::archive::MAX_TOTAL_BYTES {
         return Err("archive exceeds size limit".into());
     }
-    install_pack_bytes(data, &bytes, None)
+    install_pack_bytes_report(data, &bytes, None, report)
 }
 
 fn display_for(data: &Path, pack_id: &str, version: &str, trust: &str) -> InstalledPack {
@@ -501,15 +531,19 @@ mod tests {
         assert_eq!(status, "cached");
     }
 
+    /// These tests are not about progress, but every install path reports, so
+    /// they hand the install a reporter that drops the stages.
+    fn no_progress(_: &Progress) {}
+
     #[test]
     fn import_rejects_garbage_honestly() {
         let tmp = tempfile::tempdir().unwrap();
         // Not base64 at all.
-        assert!(import_pack_b64(tmp.path(), "not base64!!").is_err());
+        assert!(import_pack_b64_report(tmp.path(), "not base64!!", &mut no_progress).is_err());
         // Valid base64, not an archive.
         use base64::Engine;
         let b64 = base64::engine::general_purpose::STANDARD.encode(b"definitely not an lpk");
-        assert!(import_pack_b64(tmp.path(), &b64).is_err());
+        assert!(import_pack_b64_report(tmp.path(), &b64, &mut no_progress).is_err());
         // Nothing was installed by the failed attempts.
         assert!(installed_packs(tmp.path()).is_empty());
     }
@@ -526,7 +560,7 @@ mod tests {
         let data = tmp.path();
         let bytes = ja_demo_archive();
         let b64 = base64::engine::general_purpose::STANDARD.encode(&bytes);
-        let inst = import_pack_b64(data, &b64).unwrap();
+        let inst = import_pack_b64_report(data, &b64, &mut no_progress).unwrap();
         assert_eq!(inst.pack_id, "org.openlanguage.ja-demo");
         assert_eq!(inst.trust_state, "community");
         assert!(!inst.display_name.is_empty());
@@ -551,7 +585,7 @@ mod tests {
         e.version = "0.1.0".into();
         e.size_bytes = bytes.len() as u64;
         e.sha256 = "b".repeat(64);
-        assert!(install_pack_bytes(data, &bytes, Some(&e)).is_err());
+        assert!(install_pack_bytes_report(data, &bytes, Some(&e), &mut no_progress).is_err());
         assert!(
             lts_langpack::archive::current_version("org.openlanguage.ja-demo", &data.join("packs"))
                 .is_none()
@@ -560,7 +594,7 @@ mod tests {
         let mut e2 = e.clone();
         e2.sha256 = hex_sha256(&bytes);
         e2.version = "9.9.9".into();
-        assert!(install_pack_bytes(data, &bytes, Some(&e2)).is_err());
+        assert!(install_pack_bytes_report(data, &bytes, Some(&e2), &mut no_progress).is_err());
     }
 
     #[test]
@@ -602,5 +636,65 @@ mod tests {
         let moved = next_hop(&cat, "https://cdn.example.org/packs.json", false).unwrap();
         assert_eq!(moved.host_str().unwrap(), "cdn.example.org");
         assert!(next_hop(&cat, "http://cdn.example.org/packs.json", false).is_err());
+    }
+
+    /// K-62: the owner's complaint was an install that gave no sign of life.
+    /// The stage sequence is the contract the renderer draws its line from, so
+    /// it is pinned here: every stage is named before the work it describes,
+    /// and a path that cannot verify never claims to have verified.
+    #[test]
+    fn a_catalog_install_reports_each_stage_before_doing_it() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let bytes = ja_demo_archive();
+        let mut e = entry("https://github.com/o/r/releases/download/v1/ja-demo.lpk");
+        e.pack_id = "org.openlanguage.ja-demo".into();
+        e.version = "0.1.0".into();
+        e.size_bytes = bytes.len() as u64;
+        e.sha256 = hex_sha256(&bytes);
+        let mut seen: Vec<(&'static str, Option<u8>)> = Vec::new();
+        install_pack_bytes_report(data, &bytes, Some(&e), &mut |p: &Progress| {
+            seen.push((p.stage, p.percent));
+        })
+        .unwrap();
+        assert_eq!(
+            seen.iter().map(|(s, _)| *s).collect::<Vec<_>>(),
+            vec!["verify", "install", "record"]
+        );
+        // None of these stages has a real fraction to report, and inventing one
+        // is exactly the failure this card exists to prevent.
+        assert!(seen.iter().all(|(_, pct)| pct.is_none()));
+    }
+
+    /// A local import has no catalog promise to check, so it must not announce
+    /// a check it did not perform.
+    #[test]
+    fn an_import_reports_only_the_stages_it_can_perform() {
+        let tmp = tempfile::tempdir().unwrap();
+        let bytes = ja_demo_archive();
+        let b64 = base64::engine::general_purpose::STANDARD.encode(&bytes);
+        let mut stages: Vec<&str> = Vec::new();
+        import_pack_b64_report(tmp.path(), &b64, &mut |p: &Progress| stages.push(p.stage)).unwrap();
+        assert_eq!(stages, vec!["install", "record"]);
+    }
+
+    /// A failed check ends the sequence: the learner is never told the archive
+    /// is being unpacked when the checksum already rejected it.
+    #[test]
+    fn a_rejected_checksum_stops_after_the_stage_that_failed() {
+        let tmp = tempfile::tempdir().unwrap();
+        let bytes = ja_demo_archive();
+        let mut e = entry("https://github.com/o/r/releases/download/v1/ja-demo.lpk");
+        e.pack_id = "org.openlanguage.ja-demo".into();
+        e.version = "0.1.0".into();
+        e.size_bytes = bytes.len() as u64;
+        e.sha256 = "b".repeat(64);
+        let mut stages: Vec<&str> = Vec::new();
+        let err = install_pack_bytes_report(tmp.path(), &bytes, Some(&e), &mut |p: &Progress| {
+            stages.push(p.stage)
+        })
+        .unwrap_err();
+        assert!(err.contains("checksum"), "{err}");
+        assert_eq!(stages, vec!["verify"]);
     }
 }

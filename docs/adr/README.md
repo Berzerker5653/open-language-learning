@@ -32,7 +32,9 @@ Existing:
 - 0015 publishing other-OS builds with a community-confirmed platform ladder
 - 0016 pack-shipped model-output audio for the listening modality
 - 0017 unfunded posture: exclusively AI-created content, guided-only pronunciation feedback for desktop 1.0
-- 0018 environments are pack data (`world/environments.jsonl`; the engine ships none) — **Proposed**
+- 0018 environments are pack data (`world/environments.jsonl`; the engine ships none) — **Accepted 2026-10-08**
 - 0019 bundling the whisper.cpp aligner as a staged sidecar payload (owner decision)
+- 0020 derived guidance instead of an authored "start here" — **Accepted 2026-10-08**
+- 0021 script instruction is offered only where a pack declares it (unit `capabilities`; no hardcoded script names in app code) — **Accepted 2026-10-08**
 
 Template: `template.md`.

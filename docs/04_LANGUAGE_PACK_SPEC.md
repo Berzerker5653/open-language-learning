@@ -235,6 +235,20 @@ A goal is a real-world capability. Required fields include:
 
 Units are delivery groupings, not the truth source for prerequisite order. Units reference graph nodes and scenario activities. Reordering a unit must not destroy mastery history.
 
+A unit may declare an optional `capabilities` array (ADR-0021): a closed list
+of feature names, currently only `script-introduction`. Each entry is a claim
+the app MAY surface for the unit — not an instruction to run; naming a
+capability makes nothing in the engine execute, and the engine never matches
+script names or file layout. `script-introduction` declares that the unit's
+items are the writing-system set a new learner is introduced to first, which
+is how the app can teach a script without knowing what it is called. A claim
+without content is meaningless, so a unit that declares capabilities must
+reference at least one content item (`unit_capability_items_missing`
+validation error), and an unknown feature name fails schema validation so a
+typo cannot silently disable the feature. A pack that declares no capabilities
+keeps its existing behavior: the app offers no script instruction for it,
+which is a supported state, not an error.
+
 ## Speech profile
 
 The pack declares:
