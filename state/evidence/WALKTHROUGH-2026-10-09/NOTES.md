@@ -234,3 +234,10 @@ Template per item:
  (kill strays, relaunch `launch-preview.sh` with the SAME
   `/tmp/lts-walkthrough-data` — profile + installed pack preserved).
   No findings lost; no code changed.
+- ~09:13 SECOND wrapper death (exit 143 — app binary got SIGTERM after
+  15m15s), same pattern: a fresh unsupervised app+vite pair had been
+  started at 09:13 (desktop entry / manual relaunch). Killed strays,
+  relaunched supervised as `lts-walkthrough2`, same data dir. If the
+  09:13 pair came from the owner force-killing a frozen window, both
+  deaths are field evidence for K-73 (main-thread blocking reads as a
+  crash); awaiting owner's account.
