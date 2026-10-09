@@ -41,6 +41,11 @@ back to untested. Reporters re-run and re-report.
 Promotion of a platform to `tested` requires a maintainer/owner-run runtime pass
 (owner gate). Compile checks and reporter traffic never establish it.
 
+Linux desktop renders through WebKitGTK's DMABUF/GBM path: on the proprietary NVIDIA
+driver and under Xvfb it fails (`Failed to create GBM buffer of size WxH: Invalid argument`,
+blank window). The binary forces `WEBKIT_DISABLE_DMABUF_RENDERER=1` itself unless the operator
+already set it (`=0` asks for the accelerated path back); the xvfb `desktop-smoke` job rides it.
+
 ### TTS distribution variants (ADR-0009, owner decision 2026-10-04)
 
 Downloads come in two variants, same binary, different staged resources:
@@ -99,12 +104,15 @@ scripts/stage-aligner-sidecar.sh stage    # cmake + network required:
 scripts/stage-aligner-sidecar.sh overlay  # verify every staged payload,
                                           # emit dist/variants/
                                           # tauri.aligner.json
-cargo tauri build --config dist/variants/tauri.aligner.json
+pnpm --filter @openlang/desktop exec tauri build \
+  --config dist/variants/tauri.aligner.json
 ```
 
 `tauri build` also runs `build.beforeBuildCommand`, which is `pnpm build` —
 so the machine doing a release build needs pnpm, or must override the hook
-with `-c '{"build":{"beforeBuildCommand":"npx vite build"}}'`. That override
+with `-c '{"build":{"beforeBuildCommand":"npx vite build"}}'`. `npx tauri`
+only resolves inside `apps/desktop`, and from there the config path becomes
+`../../dist/variants/tauri.aligner.json`. That override
 is how the 2026-10-08 verification build was made here (same vite, different
 package manager), and CI uses pnpm directly. That run produced a 78.80 MiB
 deb and a 180.56 MiB AppImage, payload present inside both at
@@ -113,16 +121,19 @@ packaged binary walked its 13 routes reporting `aligner:yes:bundled`. Per
 ADR-0015 that is an agent run, not the human runtime report a platform
 "tested" claim needs.
 
-One limit that packaging did not remove: a release bundle is still not
-self-contained for **content**. `bundled_packs()` resolves pack candidates
-through the compile-time `CARGO_MANIFEST_DIR`, and the verification binary
-embeds `/home/hunter/game-dev/LTS/apps/desktop/src-tauri` next to
-`languages/ja-JP` — so the deb carries the aligner payload but can only find a
-language pack on the machine whose tree built it. The base config carries no
-pack resources on purpose, and the published-catalog path stays inert until
-O-05. Until either a merged pack+aligner overlay exists or the catalog is
-published, an installed bundle is testable on the build machine and nowhere
-else; say so rather than calling it installable anywhere. Kanban `K-59`.
+The same packaging pass surfaced the **content** half of the defect
+(K-59): `bundled_packs()` resolved pack candidates through the
+compile-time `CARGO_MANIFEST_DIR`, and the verification binary embeds
+`/home/hunter/game-dev/LTS/apps/desktop/src-tauri` next to
+`languages/ja-JP` — so the deb carried the aligner payload but could only
+find a language pack on the machine whose tree built it. The base config
+carries no pack resources on purpose, and the published-catalog path stays
+inert until O-05. The owner's 2026-10-08 decision is the merged
+resources-overlay route: the pack-bundled content variant below. The
+merged bundle build has not been run here as of writing and no human has
+reported it (ADR-0015), so until that build is made and reported, an
+installed bundle is testable on the build machine and nowhere else; say
+so rather than calling it installable anywhere.
 
 The payload is `apps/desktop/sidecar/<platform>/`: `bin/`
 (whisper-cli plus libwhisper.so.1, libggml.so.0, libggml-cpu.so.0,
@@ -180,12 +191,69 @@ The staging script is pinned by `scripts/test-stage-aligner-sidecar.sh`
 the "Aligner sidecar staging script regression test" step of the
 rust job.
 
-**Open packaging question, not a decision:** Tauri takes a single
-`--config` overlay. A build that wants both the TTS payload
-(`dist/variants/tauri.tts.json`) and the aligner payload
-(`dist/variants/tauri.aligner.json`) needs a merged overlay; neither
-staging script emits one, and that combination has not been built
-here, so no single-command variant with both payloads may be
+### Pack-bundled content variant (K-59, owner decision 2026-10-08)
+
+The third variant makes a release bundle self-contained for **content**:
+it embeds the reference pack AND the whisper sidecar in one artifact, so
+the artifact is testable on a machine with no repo tree. Building it is
+stage, then overlay, then build with BOTH overlays — Tauri
+JSON-merge-patches each `--config` over the base config and over the
+other overlays, so the two `bundle.resources` maps compose:
+
+```
+scripts/generate-pack-audio.py            # languages/ja-JP only: a fresh
+                                          # checkout refuses install-mode
+                                          # validation with media_unbuilt
+                                          # (committed manifest, gitignored
+                                          # .wav bytes — ADR-0016)
+scripts/stage-pack-bundle.sh stage        # validate --mode install, refuse
+                                          # on any error, then copy the pack
+                                          # source dir into dist/variants/
+                                          # packs/resources/packs/<pack-id>
+scripts/stage-pack-bundle.sh overlay      # re-validate every staged pack,
+                                          # emit dist/variants/
+                                          # tauri.pack.json
+scripts/stage-aligner-sidecar.sh stage && scripts/stage-aligner-sidecar.sh overlay
+cargo tauri build --config dist/variants/tauri.pack.json \
+  --config dist/variants/tauri.aligner.json
+```
+
+Pack resources exist **only** in builds that pass the pack overlay: the
+base `tauri.conf.json` stays payload-free on purpose and bare/dev builds
+keep abstaining honestly. `stage` refuses to stage anything its
+`validate --mode install` gate rejects (installable gate, incl. the
+ADR-0016 media pairing gate); it is idempotent — a re-run verifies and
+keeps. `overlay` re-runs the same gate over the staged copies, refuses
+when nothing is staged, and writes atomically (temp + mv), so a failed
+run leaves no partial overlay a build could pick up. The staged root is
+under `dist/` (gitignored); `stage` refuses roots git cannot prove
+ignored.
+
+Runtime resolution contract (implemented by the companion K-59 change in
+`apps/desktop/src-tauri/src/lib.rs`, not by the staging script; this row
+is the contract both sides quote):
+
+| Build variant | bundle pack resources | runtime pack resolution |
+| --- | --- | --- |
+| bare / dev (base config, default) | none | today's behavior unchanged |
+| pack-bundled (tauri.pack.json overlay) | `packs/<pack-id>/` under the resource dir, named by `packs/BUNDLED.yaml` (`schema_version: 1`; pack_id/locale/maturity per entry, written by `stage`) | at startup `BUNDLED_PACKS: OnceLock<PathBuf>` is set from `app.path().resource_dir().join("packs")` (same pattern as `BUNDLED_TTS`/`BUNDLED_SIDECAR`); `bundled_packs()` prefers the repo tree when present (dev), else reads the sidecar and its `<pack-id>/` directories and fails closed — a missing, unparsable, wrong-version, or dangling sidecar yields no candidates and the app never guesses a locale or maturity; a bare build without the resource dir keeps today's behavior |
+
+Evidence state, stated honestly: the staging/overlay scripts are pinned
+by `scripts/test-stage-pack-bundle.sh` (hermetic: broken pack refused,
+valid fixture staged, overlay JSON gate, idempotent re-stage, refusal
+with nothing staged), run as the "Pack bundle staging script regression
+test" step of the CI rust job. The
+merged bundle build itself has not been run here, so no claim about the
+shipped artifact beyond that test exists, and per ADR-0015 platform
+status for it comes only from human runtime reports. Interacts with
+K-68: baking lexicon audio into the pack grows the embedded payload;
+the size consequences belong to that card, measured rather than guessed.
+
+**Open packaging question, not a decision:** multiple `--config` overlays
+merge, which is what the pack+aligner route above relies on. A build that
+also wants the TTS payload (`dist/variants/tauri.tts.json`) has never had
+all three overlays passed together, and that combination has not been
+built here, so no single-command variant carrying TTS as well may be
 documented as working today.
 
 ## Mobile
