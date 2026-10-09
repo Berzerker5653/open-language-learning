@@ -1,4 +1,4 @@
-# Owner walkthrough — 2026-10-09 (in progress)
+# Owner walkthrough — 2026-10-09 (run closed by owner ~09:35)
 
 Ground rules agreed: the owner drives the app and calls out issues and
 suggestions as they go; the agent **only takes notes** here and turns
@@ -26,7 +26,20 @@ Template per item:
 
 ## Log
 
-(none yet)
+**Summary: 13 findings, W-01…W-13 → cards K-69…K-80** (12 fixes + K-71
+research). Recurring themes: (1) main-thread blocking makes the app
+"look crashed" — 4 observed freeze episodes, zero actual crashes
+(K-73/K-74 underlie K-69's missing progress bar); (2) the speech stack
+(runtime / voice / recognition) is sold as three raw model ids and
+every audio surface fails silently when the voice chain is missing
+(K-72/K-76/K-78); (3) readouts that misrepresent their own data —
+substring word lookup (K-80), flat goal map parsed as a tree (K-79),
+filename-ordered scenarios (K-75), day-1 plans without a learned-kana
+gate (K-70); (4) IA duplication (K-77). Open item: K-76(b) — the exact
+state the Shadowing tab showed — still needs the owner's screenshot.
+
+No app code was changed during the run; every finding is a note + a
+card + a docs-only commit.
 ### W-01 — Pack install gives zero feedback  [issue]
 - Screen/step: onboarding → pack selection → Install button
 - Did: clicked Install on the ja-JP pack
