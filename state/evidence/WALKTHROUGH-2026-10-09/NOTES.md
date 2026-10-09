@@ -226,6 +226,48 @@ Template per item:
   unlocks it
 - KANBAN card: K-79
 
+### W-12 — Reading lookup shows bogus letter breakdowns and wrong words  [issue]
+- Screen/step: Reading (graded reader) → tap sentence → word lookup
+- Did: clicked "Konnichiwa"; then clicked the second word/sentence
+  "kore wa nan desuka"
+- Expected: definitions of the actual words in what was clicked;
+  breakdown only makes sense for a full sentence, and then into real
+  parts — "100% locked in" correctness
+- Saw: for Konnichiwa: three entries — definitions for `chi` (ち), the
+  word konnichiwa, AND `ni` (に) — letter-level entries broken out of
+  a single word, in nonsense order (file order). For "kore wa nan
+  desuka": entries about things that are not visibly in the sentence
+- Candidate severity: blocker-class content correctness (trust in the
+   dictionary collapses; a learner cannot tell right answers from
+   junk)
+- Facts found while logging (ROOT CAUSE, code-level): `story_view_at`
+  (lib.rs:4948–4951) selects "known words" with raw substring
+  containment — `entry.text.contains(&e.surface)` over every lexicon
+  entry. Single-kana/short entries therefore match INSIDE longer words
+  (こんにちは ⊃ ち, に), cross-morpheme substrings produce phantom
+  matches in sentences, and the list keeps lexicon-file order. Fix
+  direction: token-level matching — longest-match segmentation over
+  lexicon surfaces (a covered span yields ONE entry; the word
+  こんにちは yields こんにちは only), or use the pack's DECLARED
+  sentence slots (`LexEntry.slots`, the cloze mechanism) for parts of
+  sentences; sort results by position in sentence; expected-token sets
+  for the two observed cases need linguist review per repo research
+  discipline before being pinned as fixtures
+- KANBAN card: K-80
+
+### W-13 — Third apparent crash; process verified ALIVE = freeze again  [issue]
+- Screen/step: Reading tab use, ~09:2x
+- Did: clicked around reading; window went dead-looking ("app crashed
+  again")
+- Saw (from this side at the time of report): supervised service
+  `lts-walkthrough2` READY, `lts-desktop` pid alive with low CPU — the
+  app did NOT die; another main-thread freeze episode
+- Candidate severity: blocker — third occurrence; owner now believes
+  the app is unstable
+- KANBAN card: appended to K-73 (audit list now includes `story_view`
+  — first call parses the full lexicon + per-sentence reader work on
+  the main thread — plus `shadowing_items`, `goal_map`)
+
 ## Ops notes
 
 - ~08:55 the supervised preview wrapper was SIGTERMed (exit 143) right
@@ -241,3 +283,4 @@ Template per item:
   09:13 pair came from the owner force-killing a frozen window, both
   deaths are field evidence for K-73 (main-thread blocking reads as a
   crash); awaiting owner's account.
+
