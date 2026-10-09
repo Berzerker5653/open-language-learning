@@ -16,6 +16,7 @@ use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::fs;
 use std::io::Read;
+use std::io::Write;
 use std::path::{Path, PathBuf};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -146,19 +147,21 @@ pub fn installable(entry: &ModelEntry) -> bool {
         .all(|f| !f.url.contains("PENDING-RELEASE-URL") && !f.url.is_empty())
 }
 
-/// Install one model from bytes produced by `fetch(file)`, reporting the stage
-/// it is in (K-62). Files go to a staging directory, every checksum is
-/// verified, then the directory is moved into place atomically; any failure
-/// removes the staging directory, leaving the model `missing` (retry-safe).
-/// The percentage is
-/// one the app can actually know: the catalog pins every file's size, so the
-/// fraction of bytes already fetched and verified is exact. It does not move
-/// inside one large file, because that would be an estimate of work in flight.
+/// Install one model streamed to disk by `fetch(file, part_path, on_chunk)`,
+/// reporting the stage it is in (K-62) and, during a fetch, the fraction of
+/// bytes actually received (K-73). Files stream to a `*.part` file in a
+/// staging directory, every checksum is verified from the streamed file
+/// (never from a whole-file memory buffer), then the directory is moved into
+/// place atomically; any failure removes the staging directory, leaving the
+/// model `missing` (retry-safe). The percentage is one the app can actually
+/// know: the catalog pins every file's size, and `on_chunk` fires with the
+/// cumulative bytes the transport has delivered, so the fraction is measured,
+/// not estimated.
 pub fn install_model_files_report(
     data: &Path,
     entry: &ModelEntry,
     now_rfc: &str,
-    fetch: impl Fn(&ModelFile) -> Result<Vec<u8>, String>,
+    fetch: impl Fn(&ModelFile, &Path, &mut dyn FnMut(u64)) -> Result<(), String>,
     mut report: impl FnMut(&Progress),
 ) -> Result<InstalledRecord, String> {
     if !installable(entry) {
@@ -169,6 +172,7 @@ pub fn install_model_files_report(
     }
     let total_bytes: u64 = entry.files.iter().map(|f| f.size_bytes).sum();
     let mut fetched_bytes: u64 = 0;
+    let mut last_percent: Option<u8> = None;
     let dest = model_dir(data, entry);
     let staging = dest.with_extension("staging");
     let _ = fs::remove_dir_all(&staging);
@@ -177,38 +181,56 @@ pub fn install_model_files_report(
     let result = (|| -> Result<InstalledRecord, String> {
         let mut extracted: Vec<HashedFile> = Vec::new();
         for f in &entry.files {
-            report(&Progress::with_percent(
-                "install-model",
-                &entry.id,
-                "fetch",
-                percent_done(fetched_bytes, total_bytes),
-            ));
-            let bytes = fetch(f)?;
-            let mut hasher = Sha256::new();
-            hasher.update(&bytes);
-            let got = format!("{:x}", hasher.finalize());
+            // One event per stage-entry, plus one whenever the received
+            // fraction actually moves — never a duplicate, never a guess.
+            let start = percent_done(fetched_bytes, total_bytes);
+            if last_percent != Some(start) {
+                report(&Progress::with_percent(
+                    "install-model",
+                    &entry.id,
+                    "fetch",
+                    start,
+                ));
+                last_percent = Some(start);
+            }
+            let part = staging.join(format!("{}.part", f.path));
+            if let Some(parent) = part.parent() {
+                fs::create_dir_all(parent).map_err(|e| e.to_string())?;
+            }
+            fetch(f, &part, &mut |got| {
+                let p = percent_done(fetched_bytes.saturating_add(got), total_bytes);
+                if last_percent != Some(p) {
+                    report(&Progress::with_percent(
+                        "install-model",
+                        &entry.id,
+                        "fetch",
+                        p,
+                    ));
+                    last_percent = Some(p);
+                }
+            })?;
+            let meta = fs::metadata(&part)
+                .map_err(|e| format!("{} after fetch: {e}", f.path))?;
+            if meta.len() != f.size_bytes {
+                return Err(format!(
+                    "size mismatch for {}: expected {} got {}",
+                    f.path,
+                    f.size_bytes,
+                    meta.len()
+                ));
+            }
+            let got = stream_sha256(&part)?;
             if got != f.sha256 {
                 return Err(format!(
                     "checksum mismatch for {}: expected {} got {}",
                     f.path, f.sha256, got
                 ));
             }
-            if bytes.len() as u64 != f.size_bytes {
-                return Err(format!(
-                    "size mismatch for {}: expected {} got {}",
-                    f.path,
-                    f.size_bytes,
-                    bytes.len()
-                ));
-            }
             if f.dir {
-                extracted.extend(extract_dir_entry(&staging, f, &bytes)?);
+                extracted.extend(extract_dir_entry(&staging, f, &part)?);
+                fs::remove_file(&part).map_err(|e| e.to_string())?;
             } else {
-                let out = staging.join(&f.path);
-                if let Some(parent) = out.parent() {
-                    fs::create_dir_all(parent).map_err(|e| e.to_string())?;
-                }
-                fs::write(&out, &bytes).map_err(|e| e.to_string())?;
+                fs::rename(&part, staging.join(&f.path)).map_err(|e| e.to_string())?;
             }
             fetched_bytes += f.size_bytes;
         }
@@ -263,11 +285,11 @@ fn percent_done(done: u64, total: u64) -> u8 {
 fn extract_dir_entry(
     staging: &Path,
     f: &ModelFile,
-    bytes: &[u8],
+    archive: &Path,
 ) -> Result<Vec<HashedFile>, String> {
-    let cursor = std::io::Cursor::new(bytes);
+    let file = fs::File::open(archive).map_err(|e| format!("{}: {e}", f.path))?;
     let mut archive =
-        zip::ZipArchive::new(cursor).map_err(|e| format!("{}: invalid zip: {e}", f.path))?;
+        zip::ZipArchive::new(file).map_err(|e| format!("{}: invalid zip: {e}", f.path))?;
     let dest = staging.join(&f.path);
     let cap = f.size_bytes.saturating_mul(10);
     let mut total = 0u64;
@@ -293,23 +315,33 @@ fn extract_dir_entry(
         if let Some(parent) = out.parent() {
             fs::create_dir_all(parent).map_err(|e| e.to_string())?;
         }
-        let mut data = Vec::new();
-        member.read_to_end(&mut data).map_err(|e| e.to_string())?;
-        total += data.len() as u64;
-        if total > cap {
-            return Err(format!(
-                "{}: extracted size exceeds 10x pinned archive size",
-                f.path
-            ));
-        }
+        // Members stream to disk and hash chunk-wise: a hundreds-of-MB
+        // member never lands as one in-memory Vec (K-73).
+        let mut out_file = fs::File::create(&out).map_err(|e| e.to_string())?;
         let mut hasher = Sha256::new();
-        hasher.update(&data);
+        let mut buf = [0u8; 1 << 16];
+        let mut written = 0u64;
+        loop {
+            let n = member.read(&mut buf).map_err(|e| e.to_string())?;
+            if n == 0 {
+                break;
+            }
+            written += n as u64;
+            total += n as u64;
+            if total > cap {
+                return Err(format!(
+                    "{}: extracted size exceeds 10x pinned archive size",
+                    f.path
+                ));
+            }
+            hasher.update(&buf[..n]);
+            out_file.write_all(&buf[..n]).map_err(|e| e.to_string())?;
+        }
         manifest.push(HashedFile {
             path: format!("{}/{}", f.path, name.to_string_lossy()),
             sha256: format!("{:x}", hasher.finalize()),
-            size_bytes: data.len() as u64,
+            size_bytes: written,
         });
-        fs::write(&out, &data).map_err(|e| e.to_string())?;
         #[cfg(unix)]
         if let Some(mode) = member.unix_mode() {
             use std::os::unix::fs::PermissionsExt;
@@ -320,7 +352,8 @@ fn extract_dir_entry(
     Ok(manifest)
 }
 
-fn hash_matches(path: &Path, want: &str) -> Result<bool, String> {
+/// SHA-256 of a file, read in chunks — never a whole-file buffer.
+fn stream_sha256(path: &Path) -> Result<String, String> {
     let mut file = fs::File::open(path).map_err(|e| e.to_string())?;
     let mut hasher = Sha256::new();
     let mut buf = [0u8; 1 << 16];
@@ -331,7 +364,11 @@ fn hash_matches(path: &Path, want: &str) -> Result<bool, String> {
         }
         hasher.update(&buf[..n]);
     }
-    Ok(format!("{:x}", hasher.finalize()) == want)
+    Ok(format!("{:x}", hasher.finalize()))
+}
+
+fn hash_matches(path: &Path, want: &str) -> Result<bool, String> {
+    Ok(stream_sha256(path)? == want)
 }
 
 /// Verify an installed model still matches its recorded checksums
@@ -368,12 +405,21 @@ pub fn delete_model(data: &Path, entry: &ModelEntry) -> Result<(), String> {
     Ok(())
 }
 
-pub fn download(f: &ModelFile) -> Result<Vec<u8>, String> {
+/// The production fetch: stream the payload into `dest` while reporting
+/// cumulative received bytes through `on_progress` (K-73). The pinned size
+/// caps the stream, and nothing about the fraction is guessed: every percent
+/// comes from bytes the transport actually delivered.
+pub fn stream_download(
+    f: &ModelFile,
+    dest: &Path,
+    on_progress: &mut dyn FnMut(u64),
+) -> Result<(), String> {
     let resp = ureq::get(&f.url)
         .call()
         .map_err(|e| format!("download {}: {e}", f.url))?;
-    let mut bytes = Vec::new();
+    let mut out = fs::File::create(dest).map_err(|e| format!("{}: {e}", f.path))?;
     let mut reader = resp.into_reader();
+    let mut got = 0u64;
     let mut buf = [0u8; 1 << 16];
     loop {
         let n = reader
@@ -382,12 +428,15 @@ pub fn download(f: &ModelFile) -> Result<Vec<u8>, String> {
         if n == 0 {
             break;
         }
-        bytes.extend_from_slice(&buf[..n]);
-        if bytes.len() as u64 > f.size_bytes {
+        got += n as u64;
+        if got > f.size_bytes {
             return Err(format!("download exceeded pinned size for {}", f.path));
         }
+        out.write_all(&buf[..n])
+            .map_err(|e| format!("{}: {e}", f.path))?;
+        on_progress(got);
     }
-    Ok(bytes)
+    Ok(())
 }
 
 /// Device-level choice of which ASR/pronunciation model to use. Models are
@@ -471,6 +520,24 @@ mod tests {
         }
     }
 
+    /// Test fetch that writes a fixed payload to the part path and reports
+    /// the whole length in one chunk (the K-62 test covers chunk stepping).
+    fn put_bytes(payload: &'static [u8]) -> impl Fn(&ModelFile, &Path, &mut dyn FnMut(u64)) -> Result<(), String> {
+        move |_, dest, on_chunk| {
+            fs::write(dest, payload).map_err(|e| e.to_string())?;
+            on_chunk(payload.len() as u64);
+            Ok(())
+        }
+    }
+
+    fn put_vec(payload: Vec<u8>) -> impl Fn(&ModelFile, &Path, &mut dyn FnMut(u64)) -> Result<(), String> {
+        move |_, dest, on_chunk| {
+            fs::write(dest, &payload).map_err(|e| e.to_string())?;
+            on_chunk(payload.len() as u64);
+            Ok(())
+        }
+    }
+
     #[test]
     fn install_is_checksummed_atomic_and_removable() {
         let tmp = tempfile::tempdir().unwrap();
@@ -482,7 +549,7 @@ mod tests {
             data,
             &e,
             "2026-10-03T00:00:00Z",
-            |_| Ok(b"wrong!".to_vec()),
+            put_bytes(b"wrong!"),
             silent(),
         );
         assert!(err.is_err());
@@ -493,7 +560,7 @@ mod tests {
             data,
             &e,
             "2026-10-03T00:00:00Z",
-            |_| Ok(b"hello".to_vec()),
+            put_bytes(b"hello"),
             silent(),
         )
         .unwrap();
@@ -519,7 +586,7 @@ mod tests {
             data,
             &e,
             "2026-10-04T00:00:00Z",
-            |_| Err("network down".into()),
+            |_, _dest, _on| Err("network down".into()),
             silent(),
         )
         .unwrap_err();
@@ -580,7 +647,7 @@ mod tests {
             data,
             &e,
             "2026-10-04T00:00:00Z",
-            |_| Ok(archive.clone()),
+            put_vec(archive.clone()),
             silent(),
         )
         .unwrap();
@@ -613,7 +680,7 @@ mod tests {
                 data,
                 &e2,
                 "2026-10-04T00:00:00Z",
-                |_| Ok(evil.clone()),
+                put_vec(evil.clone()),
                 silent(),
             )
             .is_err()
@@ -640,7 +707,7 @@ mod tests {
                 data,
                 &e3,
                 "2026-10-04T00:00:00Z",
-                |_| Ok(link.clone()),
+                put_vec(link.clone()),
                 silent(),
             )
             .is_err()
@@ -754,9 +821,9 @@ mod tests {
             tmp.path(),
             entry,
             "2026-10-08T00:00:00Z",
-            |_| {
+            |_, _dest, _on| {
                 fetched.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
-                Ok(Vec::new())
+                Ok(())
             },
             silent(),
         )
@@ -790,9 +857,9 @@ mod tests {
                 tmp.path(),
                 &e,
                 "2026-10-08T00:00:00Z",
-                |_| {
+                |_, _dest, _on| {
                     fetched.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
-                    Ok(Vec::new())
+                    Ok(())
                 },
                 silent(),
             )
@@ -801,12 +868,12 @@ mod tests {
         assert_eq!(fetched.load(std::sync::atomic::Ordering::SeqCst), 0);
     }
 
-    /// K-62: a model install is the longest wait in the app, and the catalog
-    /// pins every file's size, so a percentage is knowable here. It is only
-    /// allowed to move when whole pinned files have actually landed — never as
-    /// a guess about the file still in flight.
+    /// K-62/K-73: a model install is the longest wait in the app, and the
+    /// catalog pins every file's size, so a percentage is knowable here. It
+    /// moves on bytes the transport has ACTUALLY delivered (received), never
+    /// on guesses about work in flight, and never twice for the same value.
     #[test]
-    fn a_model_install_reports_completed_bytes_and_nothing_invented() {
+    fn a_model_install_reports_received_bytes_and_nothing_invented() {
         let tmp = tempfile::tempdir().unwrap();
         let mut e = test_entry();
         let mut h = Sha256::new();
@@ -823,19 +890,30 @@ mod tests {
             tmp.path(),
             &e,
             "2026-10-08T00:00:00Z",
-            |f| {
-                Ok(if f.path == "f.bin" {
-                    b"hello".to_vec()
-                } else {
-                    b"world".to_vec()
-                })
+            |f, dest, on_chunk| {
+                let payload: &[u8] =
+                    if f.path == "f.bin" { b"hello" } else { b"world" };
+                let mut out = fs::File::create(dest).map_err(|e| e.to_string())?;
+                // Two chunks per file so in-flight movement is observable.
+                out.write_all(&payload[..3]).map_err(|e| e.to_string())?;
+                on_chunk(3);
+                out.write_all(&payload[3..]).map_err(|e| e.to_string())?;
+                on_chunk(payload.len() as u64);
+                Ok(())
             },
             &mut |p: &Progress| seen.push((p.stage, p.percent)),
         )
         .unwrap();
         assert_eq!(
             seen,
-            vec![("fetch", Some(0)), ("fetch", Some(50)), ("record", None)]
+            vec![
+                ("fetch", Some(0)),
+                ("fetch", Some(30)),
+                ("fetch", Some(50)),
+                ("fetch", Some(80)),
+                ("fetch", Some(100)),
+                ("record", None),
+            ]
         );
         assert!(model_dir(tmp.path(), &e).join("g.bin").exists());
     }

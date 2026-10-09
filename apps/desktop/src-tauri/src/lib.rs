@@ -348,8 +348,15 @@ fn warm_installed(data: &Path) {
     }
 }
 #[tauri::command]
-fn install_pack(pack_id: String, app: tauri::AppHandle) -> Result<PackCandidate, String> {
-    install_bundled_pack_report(&data_dir(), &pack_id, None, progress::reporter(&app))
+async fn install_pack(pack_id: String, app: tauri::AppHandle) -> Result<PackCandidate, String> {
+    // K-73: sync commands run on the main thread in Tauri 2, which freezes
+    // the webview AND blocks `engine-progress` delivery. Every heavy command
+    // runs on the blocking pool so events flow while work runs.
+    tauri::async_runtime::spawn_blocking(move || {
+        install_bundled_pack_report(&data_dir(), &pack_id, None, progress::reporter(&app))
+    })
+    .await
+    .map_err(|e| format!("install-pack failed: {e}"))?
 }
 
 // ---------------------------------------------------------------------------
@@ -365,24 +372,40 @@ struct CatalogResponse {
 /// Browse the maintained community catalog (GitHub release assets).
 /// Falls back to the last good cached copy when offline.
 #[tauri::command]
-fn catalog_packs() -> CatalogResponse {
-    let (entries, status) = packs::catalog_view(&data_dir());
-    CatalogResponse { entries, status }
+async fn catalog_packs() -> CatalogResponse {
+    match tauri::async_runtime::spawn_blocking(|| packs::catalog_view(&data_dir())).await {
+        Ok((entries, status)) => CatalogResponse { entries, status },
+        Err(e) => {
+            eprintln!("catalog_packs failed: {e}");
+            CatalogResponse {
+                entries: Vec::new(),
+                status: "failed".to_string(),
+            }
+        }
+    }
 }
 
 #[tauri::command]
-fn install_catalog_pack(
+async fn install_catalog_pack(
     pack_id: String,
     app: tauri::AppHandle,
 ) -> Result<packs::InstalledPack, String> {
-    packs::install_from_catalog_report(&data_dir(), &pack_id, progress::reporter(&app))
+    tauri::async_runtime::spawn_blocking(move || {
+        packs::install_from_catalog_report(&data_dir(), &pack_id, progress::reporter(&app))
+    })
+    .await
+    .map_err(|e| format!("install-catalog-pack failed: {e}"))?
 }
 
 /// Import a locally supplied .lpk archive (contents cross IPC as base64;
 /// filesystem paths never do).
 #[tauri::command]
-fn import_pack(data_b64: String, app: tauri::AppHandle) -> Result<packs::InstalledPack, String> {
-    packs::import_pack_b64_report(&data_dir(), &data_b64, progress::reporter(&app))
+async fn import_pack(data_b64: String, app: tauri::AppHandle) -> Result<packs::InstalledPack, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        packs::import_pack_b64_report(&data_dir(), &data_b64, progress::reporter(&app))
+    })
+    .await
+    .map_err(|e| format!("import-pack failed: {e}"))?
 }
 
 #[tauri::command]
@@ -2825,8 +2848,10 @@ fn goal_map_at(data: &Path, profile_id: &str) -> Result<Vec<GoalMapView>, String
 }
 
 #[tauri::command]
-fn goal_map(profile_id: String) -> Result<Vec<GoalMapView>, String> {
-    goal_map_at(&data_dir(), &profile_id)
+async fn goal_map(profile_id: String) -> Result<Vec<GoalMapView>, String> {
+    tauri::async_runtime::spawn_blocking(move || goal_map_at(&data_dir(), &profile_id))
+        .await
+        .map_err(|e| format!("goal-map failed: {e}"))?
 }
 
 // ---------------------------------------------------------------------------
@@ -3416,8 +3441,20 @@ fn bundled_cpu_floor() -> Option<String> {
 }
 
 #[tauri::command]
-fn aligner_status() -> AlignerStatus {
-    aligner_status_at(&data_dir())
+async fn aligner_status() -> AlignerStatus {
+    match tauri::async_runtime::spawn_blocking(|| aligner_status_at(&data_dir())).await {
+        Ok(s) => s,
+        Err(e) => {
+            eprintln!("aligner_status failed: {e}");
+            AlignerStatus {
+                available: false,
+                source: None,
+                runtime_version: None,
+                requires_cpu: None,
+                reason: None,
+            }
+        }
+    }
 }
 
 #[tauri::command]
@@ -4599,8 +4636,10 @@ struct ShadowItem {
 }
 
 #[tauri::command]
-fn shadowing_items(profile_id: String) -> Result<Vec<ShadowItem>, String> {
-    shadowing_items_at(&data_dir(), &profile_id)
+async fn shadowing_items(profile_id: String) -> Result<Vec<ShadowItem>, String> {
+    tauri::async_runtime::spawn_blocking(move || shadowing_items_at(&data_dir(), &profile_id))
+        .await
+        .map_err(|e| format!("shadowing-items failed: {e}"))?
 }
 
 fn shadowing_items_at(data: &Path, profile_id: &str) -> Result<Vec<ShadowItem>, String> {
@@ -4754,8 +4793,12 @@ fn dictation_task_build(
 /// K-12: dictation audio. Media-first (`media/<sentence-id>.wav`), TTS
 /// fallback; the transcript is chosen server-side and never crosses IPC.
 #[tauri::command]
-fn dictation_audio(profile_id: String, content_id: String) -> Result<SpeechAudio, String> {
-    dictation_audio_at(&data_dir(), &profile_id, &content_id)
+async fn dictation_audio(profile_id: String, content_id: String) -> Result<SpeechAudio, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        dictation_audio_at(&data_dir(), &profile_id, &content_id)
+    })
+    .await
+    .map_err(|e| format!("dictation-audio failed: {e}"))?
 }
 
 fn dictation_audio_at(
@@ -4863,8 +4906,10 @@ struct StorySummary {
 }
 
 #[tauri::command]
-fn story_list(profile_id: String) -> Result<Vec<StorySummary>, String> {
-    story_list_at(&data_dir(), &profile_id)
+async fn story_list(profile_id: String) -> Result<Vec<StorySummary>, String> {
+    tauri::async_runtime::spawn_blocking(move || story_list_at(&data_dir(), &profile_id))
+        .await
+        .map_err(|e| format!("story-list failed: {e}"))?
 }
 
 fn story_list_at(data: &Path, profile_id: &str) -> Result<Vec<StorySummary>, String> {
@@ -4910,8 +4955,12 @@ struct StoryView {
 }
 
 #[tauri::command]
-fn story_view(profile_id: String, story_id: String) -> Result<StoryView, String> {
-    story_view_at(&data_dir(), &profile_id, &story_id)
+async fn story_view(profile_id: String, story_id: String) -> Result<StoryView, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        story_view_at(&data_dir(), &profile_id, &story_id)
+    })
+    .await
+    .map_err(|e| format!("story-view failed: {e}"))?
 }
 
 fn story_view_at(data: &Path, profile_id: &str, story_id: &str) -> Result<StoryView, String> {
@@ -4973,8 +5022,12 @@ fn story_view_at(data: &Path, profile_id: &str, story_id: &str) -> Result<StoryV
 /// (same path as dictation; the written form is already visible in the
 /// reader, so no IPC secrecy constraint applies to the text here).
 #[tauri::command]
-fn story_audio(profile_id: String, sentence_id: String) -> Result<SpeechAudio, String> {
-    dictation_audio_at(&data_dir(), &profile_id, &sentence_id)
+async fn story_audio(profile_id: String, sentence_id: String) -> Result<SpeechAudio, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        dictation_audio_at(&data_dir(), &profile_id, &sentence_id)
+    })
+    .await
+    .map_err(|e| format!("story-audio failed: {e}"))?
 }
 
 /// K-14: sentence mining — the learner's own lexicon with source
@@ -5727,11 +5780,18 @@ struct SpeechAudio {
 /// the string was one the engine can read, and any caller could hand it a
 /// romanization.
 #[tauri::command]
-fn speech_audio(pack_id: String, content_id: String) -> Result<SpeechAudio, String> {
-    let version = lts_langpack::archive::current_version(&pack_id, &data_dir().join("packs"))
-        .ok_or("pack not installed")?;
-    let text = speakable_text(&data_dir(), &pack_id, &version, &content_id)?;
-    speech_audio_at(&data_dir(), &pack_id, &content_id, &text)
+async fn speech_audio(pack_id: String, content_id: String) -> Result<SpeechAudio, String> {
+    // Synthesis spawns a runtime subprocess: seconds of work that must
+    // never own the main thread (K-73).
+    tauri::async_runtime::spawn_blocking(move || {
+        let version =
+            lts_langpack::archive::current_version(&pack_id, &data_dir().join("packs"))
+                .ok_or("pack not installed")?;
+        let text = speakable_text(&data_dir(), &pack_id, &version, &content_id)?;
+        speech_audio_at(&data_dir(), &pack_id, &content_id, &text)
+    })
+    .await
+    .map_err(|e| format!("speech-audio failed: {e}"))?
 }
 
 /// The pack-declared string to synthesize for one content id: media is
@@ -6000,8 +6060,14 @@ fn listening_audio_at(
 /// Catalog + install status. The base app ships zero models; speech
 /// features report `missing` and stay recoverable (docs/05).
 #[tauri::command]
-fn available_models() -> Vec<models::ModelStatus> {
-    models::model_status(&data_dir())
+async fn available_models() -> Vec<models::ModelStatus> {
+    match tauri::async_runtime::spawn_blocking(|| models::model_status(&data_dir())).await {
+        Ok(v) => v,
+        Err(e) => {
+            eprintln!("available_models failed: {e}");
+            Vec::new()
+        }
+    }
 }
 
 /// Resolve a catalog id and install it, reporting each stage. Split from the
@@ -6020,27 +6086,35 @@ fn install_model_at(
         data,
         &entry,
         &rfc3339_utc(now_secs()),
-        models::download,
+        models::stream_download,
         report,
     )
 }
 
 #[tauri::command]
-fn install_model(
+async fn install_model(
     model_id: String,
     app: tauri::AppHandle,
 ) -> Result<models::InstalledRecord, String> {
-    install_model_at(&data_dir(), &model_id, progress::reporter(&app))
+    tauri::async_runtime::spawn_blocking(move || {
+        install_model_at(&data_dir(), &model_id, progress::reporter(&app))
+    })
+    .await
+    .map_err(|e| format!("install-model failed: {e}"))?
 }
 
 #[tauri::command]
-fn delete_model(model_id: String) -> Result<(), String> {
-    let entry = models::load_catalog()
-        .models
-        .into_iter()
-        .find(|m| m.id == model_id)
-        .ok_or("unknown model id")?;
-    models::delete_model(&data_dir(), &entry)
+async fn delete_model(model_id: String) -> Result<(), String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        let entry = models::load_catalog()
+            .models
+            .into_iter()
+            .find(|m| m.id == model_id)
+            .ok_or("unknown model id")?;
+        models::delete_model(&data_dir(), &entry)
+    })
+    .await
+    .map_err(|e| format!("delete-model failed: {e}"))?
 }
 
 // ---------------------------------------------------------------------------
@@ -6150,8 +6224,11 @@ fn set_speech_model(model_id: String) -> Result<(), String> {
 /// Free-ASR dictation check (roadmap feature B): read a sentence aloud, get an
 /// honest guided "did I say it recognizably" verdict. Never a grade or mastery.
 #[tauri::command]
-fn dictation_check(attempt: DictationAttempt) -> Result<DictationResult, String> {
-    dictation_check_at(&data_dir(), attempt)
+async fn dictation_check(attempt: DictationAttempt) -> Result<DictationResult, String> {
+    // Recognition runs a whisper subprocess: multi-second work (K-73).
+    tauri::async_runtime::spawn_blocking(move || dictation_check_at(&data_dir(), attempt))
+        .await
+        .map_err(|e| format!("dictation-check failed: {e}"))?
 }
 
 /// Pick a pack sentence to dictate (ties dictation to curriculum).
