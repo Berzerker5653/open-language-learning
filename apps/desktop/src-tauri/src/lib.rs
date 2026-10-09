@@ -4963,6 +4963,41 @@ async fn story_view(profile_id: String, story_id: String) -> Result<StoryView, S
     .map_err(|e| format!("story-view failed: {e}"))?
 }
 
+/// K-80: the words "in" a sentence are token SPANS, not substring hits.
+/// Greedy left-to-right longest match over the pack's lexicon surfaces:
+/// each covered span yields exactly ONE entry — こんにちは yields just
+/// こんにちは, never the ち or に that sit inside it — an uncovered gap
+/// yields nothing, and the result reads in sentence order. Raw
+/// containment fabricated a breakdown for every word that merely
+/// contains another surface (the ち/intelligence entry inside
+/// こんにちは), and a wrong dictionary lookup is what destroys pack
+/// trust. Ties (same start, same length) break on entry id.
+fn sentence_word_spans<'a>(text: &str, lex: &'a [LexEntry]) -> Vec<&'a LexEntry> {
+    let chars: Vec<char> = text.chars().collect();
+    let mut surfaces: Vec<(Vec<char>, &LexEntry)> = lex
+        .iter()
+        .filter(|e| !e.surface.is_empty())
+        .map(|e| (e.surface.chars().collect(), e))
+        .collect();
+    surfaces.sort_by(|a, b| b.0.len().cmp(&a.0.len()).then_with(|| a.1.id.cmp(&b.1.id)));
+    let mut out: Vec<&LexEntry> = Vec::new();
+    let mut i = 0usize;
+    while i < chars.len() {
+        if let Some((span, entry)) = surfaces
+            .iter()
+            .find(|(s, _)| s.len() <= chars.len() - i && chars[i..i + s.len()] == s[..])
+        {
+            if !out.iter().any(|e| e.id == entry.id) {
+                out.push(entry);
+            }
+            i += span.len();
+        } else {
+            i += 1;
+        }
+    }
+    out
+}
+
 fn story_view_at(data: &Path, profile_id: &str, story_id: &str) -> Result<StoryView, String> {
     checked_unit(story_id)?;
     let active = packs::active_pack(data, profile_id)?;
@@ -4994,11 +5029,10 @@ fn story_view_at(data: &Path, profile_id: &str, story_id: &str) -> Result<StoryV
             slots: Vec::new(),
         };
         let display = reader_display(data, profile_id, &proxy, false);
-        let known: Vec<LexEntry> = lex
-            .iter()
-            .filter(|e| !e.surface.is_empty() && entry.text.contains(&e.surface))
-            .cloned()
-            .collect();
+        // Tap-to-lookup: one entry per covered token span, in sentence
+        // order (K-80) — never every surface that appears as a substring.
+        let known: Vec<LexEntry> =
+            sentence_word_spans(&entry.text, &lex).into_iter().cloned().collect();
         views.push(StorySentenceView {
             content_id: entry.id.clone(),
             text: entry.text.clone(),
@@ -9554,6 +9588,63 @@ mod tests {
                     .iter()
                     .any(|t| t.as_str() == "ja.sent.demo.obasan-aunt")
         }));
+    }
+
+    /// K-80 (W-12): the reader lookup used raw substring containment, so
+    /// tapping こんにちは listed the ち ("intelligence") and に lexicon
+    /// entries that merely sit inside it, and short surfaces matched at
+    /// arbitrary offsets inside longer words. Span segmentation yields one
+    /// entry per covered span, in sentence order, and NEVER lists an entry
+    /// whose surface only lives inside a consumed span. Synthetic entries
+    /// on purpose: behaviour fixtures, not linguistic claims about the
+    /// shipped pack.
+    #[test]
+    fn story_lookup_returns_spans_not_substrings() {
+        fn entry(id: &str, surface: &str) -> LexEntry {
+            LexEntry {
+                id: id.into(),
+                surface: surface.into(),
+                reading: None,
+                romaji: None,
+                gloss: id.into(),
+                status: "draft".into(),
+                kind: "word".into(),
+                slots: Vec::new(),
+            }
+        }
+        let lex = vec![
+            entry("lex.hello", "こんにちは"),
+            entry("lex.chi", "ち"),
+            entry("lex.ni", "に"),
+            entry("lex.kore", "これ"),
+            entry("lex.ha", "は"),
+            entry("lex.nandesu", "何です"),
+        ];
+        let ids = |text: &str| -> Vec<String> {
+            sentence_word_spans(text, &lex)
+                .into_iter()
+                .map(|e| e.id.clone())
+                .collect()
+        };
+        assert_eq!(ids("こんにちは。"), vec!["lex.hello"]);
+        // Particles are listed only as their own spans, in sentence order;
+        // the observed phantom lookups can no longer occur, because every
+        // listed surface is a span the segmentation actually consumed.
+        assert_eq!(ids("これは何ですか。"), vec!["lex.kore", "lex.ha", "lex.nandesu"]);
+        // What the rule does when the PACK declares a longer,
+        // morpheme-crossing surface: the longer surface wins its span by
+        // construction (the engine keeps no language analysis to prefer
+        // anything else), still exactly one entry per span. A junk surface
+        // like this is pack-data lint — what segmentation guarantees is
+        // that it appears at its real position once, and the smaller
+        // surfaces inside it stop piling on.
+        let mut phantom_lex = lex.clone();
+        phantom_lex.push(entry("lex.phantom", "は何"));
+        let got: Vec<String> = sentence_word_spans("これは何ですか。", &phantom_lex)
+            .into_iter()
+            .map(|e| e.id.clone())
+            .collect();
+        assert_eq!(got, vec!["lex.kore", "lex.phantom"]);
     }
 
     #[test]
