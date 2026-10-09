@@ -394,6 +394,35 @@ impl Pack {
                             }
                         }
                     }
+                    // K-67/ADR-0021: a capability is a claim the app may
+                    // surface, and it is meaningless unless the unit carries
+                    // content items to surface. Unknown capability names
+                    // never reach here: the 0.2 unit schema's enum rejects
+                    // them as a `schema` Error, so a typo cannot silently
+                    // disable the feature.
+                    if let Some(caps) = inst.value.get("capabilities").and_then(Value::as_array) {
+                        let has_content =
+                            array(&inst.value, "activities").iter().any(|(_, act)| {
+                                act.get("content_refs")
+                                    .and_then(Value::as_array)
+                                    .is_some_and(|refs| !refs.is_empty())
+                            });
+                        if !has_content {
+                            let id = inst.value.get("id").and_then(Value::as_str).unwrap_or("");
+                            for (j, cap) in caps.iter().enumerate() {
+                                diags.push(Diagnostic::new(
+                                    &inst.file,
+                                    format!("{}/capabilities/{j}", inst.pointer),
+                                    "unit_capability_items_missing",
+                                    format!(
+                                        "unit {id:?} declares capability {:?} but references no content items for it to introduce",
+                                        cap.as_str().unwrap_or(&cap.to_string())
+                                    ),
+                                    Severity::Error,
+                                ));
+                            }
+                        }
+                    }
                 }
                 "scenario" => {
                     for (i, node) in array(&inst.value, "nodes") {

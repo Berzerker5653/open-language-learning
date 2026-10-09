@@ -19,7 +19,13 @@ use std::path::{Component, Path, PathBuf};
 pub const MANIFEST_ENTRY: &str = "MANIFEST.json";
 pub const FORMAT: &str = "lts-pack/1";
 pub const MAX_FILE_BYTES: u64 = 32 * 1024 * 1024;
-pub const MAX_TOTAL_BYTES: u64 = 256 * 1024 * 1024;
+/// Total unpacked-pack ceiling. 256 MiB was set when packs carried text
+/// plus a handful of audio contrasts; K-68 bakes shipped audio for all
+/// 3,920 reference-lexicon words (ADR-0016/0018: media is pack data),
+/// which lands in the high hundreds of MiB. 1 GiB keeps real headroom
+/// while still refusing zip-bomb-scale declarations. The per-file cap
+/// and extraction cap at declared size stay unchanged.
+pub const MAX_TOTAL_BYTES: u64 = 1024 * 1024 * 1024;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct FileEntry {

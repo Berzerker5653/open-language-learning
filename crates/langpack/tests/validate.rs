@@ -90,6 +90,33 @@ fn japanese_seed_is_install_eligible() {
 }
 
 #[test]
+fn japanese_declares_exactly_one_script_introduction_unit() {
+    // K-67/ADR-0021: `script-introduction` is the app's only cue for
+    // "teach this writing system first". Zero declarations is a valid
+    // (feature-off) pack; two would give a fresh learner contradictory
+    // starting sets, so the pack pins exactly one.
+    let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../languages/ja-JP");
+    let pack = Pack::load_dir(&root).unwrap();
+    let declared: Vec<&str> = pack
+        .instances()
+        .iter()
+        .filter(|i| i.schema == "unit")
+        .filter(|i| {
+            i.value
+                .get("capabilities")
+                .and_then(|c| c.as_array())
+                .is_some_and(|caps| caps.iter().any(|c| c == "script-introduction"))
+        })
+        .map(|i| i.value["id"].as_str().unwrap_or("?"))
+        .collect();
+    assert_eq!(
+        declared,
+        ["ja.unit.kana-hiragana-vowels-ko"],
+        "ja-JP must declare exactly one script-introduction unit: {declared:?}"
+    );
+}
+
+#[test]
 fn valid_full_covers_every_content_type() {
     for mode in [Mode::Scaffold, Mode::Install] {
         let diags = validate("valid-full", mode);
@@ -493,4 +520,123 @@ fn lexicon_script_contamination_and_stress_defects_are_caught() {
         "eo-demo must pass audit-lexicon: {:?}",
         clean.audit_lexicon()
     );
+}
+
+// --- K-67/ADR-0021: unit capability declarations ---
+// A unit may declare `capabilities` (currently only `script-introduction`).
+// A claim needs content; an unknown name must fail loudly; the absence of
+// the key must change nothing. Each case drops one unit onto a temp copy
+// of `valid-minimal` so the checks are pinned without freezing a whole
+// fixture tree per case.
+
+fn copy_dir(from: &std::path::Path, to: &std::path::Path) {
+    std::fs::create_dir_all(to).expect("create dir");
+    for entry in std::fs::read_dir(from).expect("read dir").flatten() {
+        let dest = to.join(entry.file_name());
+        if entry.file_type().map(|t| t.is_dir()).unwrap_or(false) {
+            copy_dir(&entry.path(), &dest);
+        } else {
+            std::fs::copy(entry.path(), &dest).expect("copy file");
+        }
+    }
+}
+
+fn pack_with_unit(unit_yaml: &str) -> (tempfile::TempDir, Pack) {
+    let tmp = tempfile::tempdir().expect("tempdir");
+    let seed =
+        PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/packs/valid-minimal");
+    copy_dir(&seed, tmp.path());
+    let units = tmp.path().join("curriculum/units");
+    std::fs::create_dir_all(&units).expect("units dir");
+    std::fs::write(units.join("000-capability.yaml"), unit_yaml).expect("write unit");
+    let pack = Pack::load_dir(tmp.path()).expect("load pack");
+    (tmp, pack)
+}
+
+const CAP_UNIT_HEAD: &str = "\
+id: es.unit.cap.intro
+goal_id: es.goal.intro.greet
+title: The letters to learn first
+activities:
+- id: es.activity.cap.encounter
+  type: encounter-read
+  modality: reading
+  support_level: 5
+";
+const CAP_WITH_ITEMS: &str = "  content_refs: [es.lex.greet.hola]\n";
+const CAP_DECLARE: &str = "capabilities:\n- script-introduction\n";
+
+#[test]
+fn capability_declaration_with_items_validates_clean() {
+    let (_tmp, pack) = pack_with_unit(&format!("{CAP_UNIT_HEAD}{CAP_WITH_ITEMS}{CAP_DECLARE}"));
+    for mode in [Mode::Scaffold, Mode::Install] {
+        let diags = pack.validate(mode, None);
+        assert_eq!(
+            error_count(&diags),
+            0,
+            "capability + items must be clean ({mode:?}): {diags:?}"
+        );
+    }
+}
+
+#[test]
+fn capability_without_items_is_exactly_one_error() {
+    for mode in [Mode::Scaffold, Mode::Install] {
+        let (_tmp, pack) = pack_with_unit(&format!("{CAP_UNIT_HEAD}{CAP_DECLARE}"));
+        let diags = pack.validate(mode, None);
+        let hits: Vec<&lts_langpack::Diagnostic> = diags
+            .iter()
+            .filter(|d| d.code == "unit_capability_items_missing")
+            .collect();
+        assert_eq!(
+            hits.len(),
+            1,
+            "one capability, no items -> exactly one error ({mode:?}): {diags:?}"
+        );
+        assert_eq!(hits[0].severity, Severity::Error);
+        assert!(
+            hits[0].message.contains("es.unit.cap.intro")
+                && hits[0].message.contains("script-introduction"),
+            "diagnostic must name the unit and the capability: {}",
+            hits[0].message
+        );
+        assert_eq!(error_count(&diags), 1, "no collateral errors: {diags:?}");
+    }
+}
+
+#[test]
+fn unknown_capability_string_fails_validation() {
+    // A typo must not silently disable the feature. This reuses the
+    // existing enum-violation path: the closed enum in the 0.2 unit
+    // schema turns the unknown name into a `schema` Error on the
+    // capability index (same path as out_of_range_support_level_fails).
+    let yaml = format!("{CAP_UNIT_HEAD}{CAP_WITH_ITEMS}capabilities:\n- script-introdusion\n");
+    let (_tmp, pack) = pack_with_unit(&yaml);
+    let diags = pack.validate(Mode::Scaffold, None);
+    let hits: Vec<&lts_langpack::Diagnostic> = diags
+        .iter()
+        .filter(|d| d.code == "schema" && d.path.ends_with("/capabilities/0"))
+        .collect();
+    assert_eq!(hits.len(), 1, "typo must be a schema error: {diags:?}");
+    assert_eq!(hits[0].severity, Severity::Error);
+    assert_eq!(error_count(&diags), 1, "{diags:?}");
+}
+
+#[test]
+fn unit_without_capabilities_key_validates_as_before() {
+    for mode in [Mode::Scaffold, Mode::Install] {
+        let (_tmp, pack) = pack_with_unit(&format!("{CAP_UNIT_HEAD}{CAP_WITH_ITEMS}"));
+        let diags = pack.validate(mode, None);
+        assert_eq!(
+            error_count(&diags),
+            0,
+            "no capabilities key must stay clean ({mode:?}): {diags:?}"
+        );
+        assert!(
+            !diags
+                .iter()
+                .any(|d| d.code == "unit_capability_items_missing"),
+            "the rule must not fire without the key: {diags:?}"
+        );
+    }
 }

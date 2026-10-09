@@ -1,7 +1,11 @@
 //! Media manifest integrity (ADR-0016): `media/manifest.jsonl` must describe
 //! the bytes that actually ship, in both directions. A manifest that drifts
 //! from the audio is worse than no manifest, because the app reads provenance
-//! from it instead of guessing from file presence.
+//! from it instead of guessing from file presence. The manifest is also tied
+//! to the pack's content items: `model-output` audio must record the exact
+//! string fed to the engine, and that string must be the reading the item
+//! declares — audio is synthesized FROM the declared reading when one exists
+//! (K-65: the learner heard "konichi ha" because the tie was absent).
 
 use lts_langpack::{Mode, Pack, Severity, archive::hex_sha256};
 use std::fs;
@@ -16,6 +20,10 @@ fn wav_bytes(payload: &[u8]) -> Vec<u8> {
 }
 
 fn row(id: &str, file: &str, sha: &str, len: u64) -> String {
+    row_text(id, file, sha, len, "きて")
+}
+
+fn row_text(id: &str, file: &str, sha: &str, len: u64, text: &str) -> String {
     serde_json::json!({
         "id": id,
         "file": file,
@@ -32,7 +40,7 @@ fn row(id: &str, file: &str, sha: &str, len: u64) -> String {
             "voice": "37",
             "speed": 1.0
         },
-        "text": "きて",
+        "text": text,
         "generated": "2026-10-07",
         "notes": "test fixture"
     })
@@ -307,5 +315,304 @@ fn a_partially_built_pack_never_builds() {
     assert!(
         err.contains("media") && err.contains("partial"),
         "the refusal must name the partial media build: {err}"
+    );
+}
+
+/// Same seed, but with content instances added first so media rows resolve
+/// to declared readings. The other tests' `ja.demo.*` row ids deliberately
+/// resolve to nothing; the reading-tie rule must not invent a verdict there.
+fn pack_with_content(
+    dir: &Path,
+    content: &[(&str, &str)],
+    rows: &[String],
+    files: &[(&str, Vec<u8>)],
+) -> Pack {
+    let seed =
+        PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/packs/valid-minimal");
+    copy_dir(&seed, dir);
+    for (rel, line) in content {
+        let path = dir.join(rel);
+        fs::create_dir_all(path.parent().unwrap()).expect("create content dir");
+        fs::write(&path, format!("{line}\n")).expect("write content shard");
+    }
+    let media = dir.join("media");
+    fs::create_dir_all(&media).expect("create media dir");
+    let joined: String = rows.iter().map(|r| format!("{r}\n")).collect();
+    fs::write(media.join("manifest.jsonl"), joined).expect("write media manifest");
+    for (name, bytes) in files {
+        fs::write(media.join(name), bytes).expect("write media file");
+    }
+    Pack::load_dir(dir).expect("load pack")
+}
+
+#[test]
+fn synthesized_audio_must_record_the_declared_reading_not_the_surface_or_romaji() {
+    let tmp = tempfile::tempdir().unwrap();
+    let sentence = r#"{"id":"es.demo.greet","status":"draft","text":"今日は","reading":"こんにちは","sources":["test-source"]}"#;
+    let body = wav_bytes(b"konichiha");
+    let sha = hex_sha256(&body);
+    let len = body.len() as u64;
+    // The shipped failure mode verbatim: the item declares the kana reading
+    // while the audio row records something else (a transliteration, or the
+    // kanji surface). That audio cannot be trusted to speak the word.
+    let pack = pack_with_content(
+        tmp.path(),
+        &[("sentences/greetings.jsonl", sentence)],
+        &[row_text(
+            "es.demo.greet",
+            "media/es.demo.greet.wav",
+            &sha,
+            len,
+            "konnichiwa",
+        )],
+        &[("es.demo.greet.wav", body.clone())],
+    );
+    for mode in [Mode::Scaffold, Mode::Install] {
+        let diags = pack.validate(mode, None);
+        assert!(
+            codes(&diags, Severity::Error).contains(&"media_text_not_declared_reading".to_string()),
+            "validate({mode:?}): {diags:?}"
+        );
+    }
+    // The identical asset whose row records the declared reading passes the
+    // tie: audio is allowed exactly when it is synthesized from the reading.
+    let clean = pack_with_content(
+        tmp.path(),
+        &[("sentences/greetings.jsonl", sentence)],
+        &[row_text(
+            "es.demo.greet",
+            "media/es.demo.greet.wav",
+            &sha,
+            len,
+            "こんにちは",
+        )],
+        &[("es.demo.greet.wav", body)],
+    );
+    let diags = clean.validate(Mode::Scaffold, None);
+    assert!(
+        !codes(&diags, Severity::Error)
+            .iter()
+            .any(|c| c.starts_with("media_")),
+        "reading-fed audio must stay clean: {diags:?}"
+    );
+}
+
+#[test]
+fn lexicon_audio_must_speak_a_scripted_reading_never_a_transliteration() {
+    let tmp = tempfile::tempdir().unwrap();
+    let entry = r#"{"id":"es.lex.demo.greet","status":"draft","forms":[{"text":"今日は","script":"kanji","is_primary":true}],"readings":[{"text":"こんにちは","script":"hiragana"},{"text":"konnichiwa","transliteration_system":"modified-hepburn"}],"glosses":{"en-US":["hello (scaffold)"]},"sources":["test-source"]}"#;
+    let body = wav_bytes(b"spell-letters");
+    let sha = hex_sha256(&body);
+    let len = body.len() as u64;
+    let romaji = pack_with_content(
+        tmp.path(),
+        &[("lexicon/demo.jsonl", entry)],
+        &[row_text(
+            "es.lex.demo.greet",
+            "media/es.lex.demo.greet.wav",
+            &sha,
+            len,
+            "konnichiwa",
+        )],
+        &[("es.lex.demo.greet.wav", body.clone())],
+    );
+    let diags = romaji.audit_media(false);
+    assert!(
+        codes(&diags, Severity::Error).contains(&"media_text_not_declared_reading".to_string()),
+        "a transliteration is a scaffold, not speakable audio input: {diags:?}"
+    );
+    let kana = pack_with_content(
+        tmp.path(),
+        &[("lexicon/demo.jsonl", entry)],
+        &[row_text(
+            "es.lex.demo.greet",
+            "media/es.lex.demo.greet.wav",
+            &sha,
+            len,
+            "こんにちは",
+        )],
+        &[("es.lex.demo.greet.wav", body)],
+    );
+    assert!(
+        kana.audit_media(false).is_empty(),
+        "{:?}",
+        kana.audit_media(false)
+    );
+}
+
+#[test]
+fn contrast_item_audio_ties_to_the_item_reading_and_counts_reading_gaps() {
+    let tmp = tempfile::tempdir().unwrap();
+    let contrast = r#"{"id":"es.demo.kin","status":"draft","feature_id":"es.phon.demo.nasal","items":[{"text":"金","reading":"きん"},{"text":"ぎん"}],"sources":["test-source"]}"#;
+    let body0 = wav_bytes(b"kin");
+    let body1 = wav_bytes(b"gin");
+    let (sha0, sha1) = (hex_sha256(&body0), hex_sha256(&body1));
+    let (len0, len1) = (body0.len() as u64, body1.len() as u64);
+    let pack = pack_with_content(
+        tmp.path(),
+        &[("phonology/contrasts.jsonl", contrast)],
+        &[
+            row_text(
+                "es.demo.kin-0",
+                "media/es.demo.kin-0.wav",
+                &sha0,
+                len0,
+                "きん",
+            ),
+            row_text(
+                "es.demo.kin-1",
+                "media/es.demo.kin-1.wav",
+                &sha1,
+                len1,
+                "ぎん",
+            ),
+        ],
+        &[("es.demo.kin-0.wav", body0), ("es.demo.kin-1.wav", body1)],
+    );
+    let diags = pack.audit_media(true);
+    assert!(
+        !codes(&diags, Severity::Error)
+            .iter()
+            .any(|c| c.starts_with("media_")),
+        "reading-fed item 0 must pass: {diags:?}"
+    );
+    let infos = codes(&diags, Severity::Info);
+    assert!(
+        infos.contains(&"media_item_without_reading".to_string()),
+        "item 1 carries audio with no declared reading anywhere: {diags:?}"
+    );
+    let gap = diags
+        .iter()
+        .find(|d| d.code == "media_item_without_reading")
+        .unwrap();
+    assert!(gap.message.contains("1 model-output asset"), "{gap:?}");
+    assert!(gap.message.contains("es.demo.kin-1"), "{gap:?}");
+    // Now break item 0's tie and confirm only the tie fails.
+    let broken = pack_with_content(
+        tmp.path(),
+        &[("phonology/contrasts.jsonl", contrast)],
+        &[
+            row_text(
+                "es.demo.kin-0",
+                "media/es.demo.kin-0.wav",
+                &sha0,
+                len0,
+                "金",
+            ),
+            row_text(
+                "es.demo.kin-1",
+                "media/es.demo.kin-1.wav",
+                &sha1,
+                len1,
+                "ぎん",
+            ),
+        ],
+        &[
+            ("es.demo.kin-0.wav", wav_bytes(b"kin")),
+            ("es.demo.kin-1.wav", wav_bytes(b"gin")),
+        ],
+    );
+    let diags = broken.audit_media(true);
+    let errs = codes(&diags, Severity::Error);
+    assert_eq!(
+        errs.iter()
+            .filter(|c| *c == "media_text_not_declared_reading")
+            .count(),
+        1,
+        "exactly the item-0 row lies about its input: {diags:?}"
+    );
+}
+
+#[test]
+fn lexicon_row_fed_the_kanji_surface_fails_tie_and_names_the_reading() {
+    let tmp = tempfile::tempdir().unwrap();
+    // The shipped failure verbatim: the entry is kanji-primary and declares
+    // a kana reading; the manifest row recorded the kanji surface.
+    let entry = r#"{"id":"es.lex.demo.konnichiwa","status":"draft","forms":[{"text":"今日は","script":"kanji","is_primary":true}],"readings":[{"text":"こんにちは","script":"hiragana"}],"glosses":{"en-US":["hello (scaffold)"]},"sources":["test-source"]}"#;
+    let body = wav_bytes(b"garble");
+    let sha = hex_sha256(&body);
+    let len = body.len() as u64;
+    let pack = pack_with_content(
+        tmp.path(),
+        &[("lexicon/demo.jsonl", entry)],
+        &[row_text(
+            "es.lex.demo.konnichiwa",
+            "media/es.lex.demo.konnichiwa.wav",
+            &sha,
+            len,
+            "今日は",
+        )],
+        &[("es.lex.demo.konnichiwa.wav", body.clone())],
+    );
+    let diags = pack.audit_media(false);
+    let errs: Vec<_> = diags
+        .iter()
+        .filter(|d| d.code == "media_text_not_declared_reading")
+        .collect();
+    assert_eq!(errs.len(), 1, "exactly the surface-fed row lies: {diags:?}");
+    // The finding must name the item and the declared reading(s) so the
+    // pack worklist knows exactly which string to feed the engine.
+    assert!(
+        errs[0].message.contains("es.lex.demo.konnichiwa"),
+        "{errs:?}"
+    );
+    assert!(errs[0].message.contains("こんにちは"), "{errs:?}");
+    // The same row fed the declared kana reading is clean (the fix).
+    let clean = pack_with_content(
+        tmp.path(),
+        &[("lexicon/demo.jsonl", entry)],
+        &[row_text(
+            "es.lex.demo.konnichiwa",
+            "media/es.lex.demo.konnichiwa.wav",
+            &sha,
+            len,
+            "こんにちは",
+        )],
+        &[("es.lex.demo.konnichiwa.wav", body)],
+    );
+    assert!(
+        clean.audit_media(false).is_empty(),
+        "reading-fed lexicon audio must stay clean: {:?}",
+        clean.audit_media(false)
+    );
+}
+
+#[test]
+fn non_synthesized_audio_is_never_judged_against_declared_readings() {
+    let tmp = tempfile::tempdir().unwrap();
+    let entry = r#"{"id":"es.lex.demo.konnichiwa","status":"draft","forms":[{"text":"今日は","script":"kanji","is_primary":true}],"readings":[{"text":"こんにちは","script":"hiragana"}],"glosses":{"en-US":["hello (scaffold)"]},"sources":["test-source"]}"#;
+    let body = wav_bytes(b"a-human-recording");
+    let sha = hex_sha256(&body);
+    let len = body.len() as u64;
+    // The only non-model-output provenance the 0.2 schema allows
+    // (`licensed-recording`): a recording is judged by its license, not by
+    // a reading tie — its audio may legitimately say something the written
+    // form does not.
+    let row = serde_json::json!({
+        "id": "es.lex.demo.konnichiwa",
+        "file": "media/es.lex.demo.konnichiwa.wav",
+        "sha256": sha,
+        "bytes": len,
+        "sample_rate": 24000,
+        "channels": 1,
+        "provenance": "licensed-recording",
+        "notes": "licensed human recording"
+    })
+    .to_string();
+    let pack = pack_with_content(
+        tmp.path(),
+        &[("lexicon/demo.jsonl", entry)],
+        &[row],
+        &[("es.lex.demo.konnichiwa.wav", body)],
+    );
+    let diags = pack.audit_media(false);
+    assert!(
+        diags.is_empty(),
+        "licensed audio is not subject to the reading tie: {diags:?}"
+    );
+    // And validate() must not turn it into an error either.
+    assert!(
+        !codes(&pack.validate(Mode::Install, None), Severity::Error)
+            .contains(&"media_text_not_declared_reading".to_string())
     );
 }

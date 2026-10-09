@@ -541,6 +541,17 @@ impl Pack {
     /// falsely. `require_present` only decides the severity of the unbuilt case:
     /// install and build refuse it, scaffold reports it as info. A present asset
     /// whose bytes disagree with the manifest is an error in every mode.
+    ///
+    /// The manifest is also tied to the pack's own content items (K-65): when
+    /// an item declares a speakable reading, its `model-output` audio row must
+    /// record exactly that reading as `text` — audio has to be synthesized
+    /// FROM the declared reading, never from the written form or a romaji
+    /// transliteration. A row whose text is not the declared reading is the
+    /// error `media_text_not_declared_reading` in every mode, because the
+    /// manifest would otherwise promise the listener pronunciation the pack
+    /// has no evidence for. Items that declare no reading at all are counted
+    /// in an aggregated `media_item_without_reading` info: their audio can
+    /// only be the written form, and authoring readings is human work.
     pub fn audit_media(&self, require_present: bool) -> Vec<Diagnostic> {
         let mut diags: Vec<Diagnostic> = Vec::new();
         let rows: Vec<&crate::pack::Instance> = self
@@ -682,6 +693,119 @@ impl Pack {
                     ));
                 }
             }
+        }
+        // Audio↔reading tie (K-65): the learner heard the greeting as
+        // "konichi ha" because the generator fed the engine an input form the
+        // pinned Kokoro cannot speak as Japanese (romaji input is spelled out
+        // letter by letter — measured 2026-10-08, see
+        // docs/provenance/ja-jp-greeting-audio-k65.md). The rule that keeps
+        // that from shipping: if the item declares a speakable reading, the
+        // synthesized row's recorded `text` must be that reading.
+        // Speakable readings are script-tagged (`reading` fields; lexicon
+        // `readings[]` entries with `script`); `transliteration_system`
+        // entries are romanization scaffolds, never TTS input.
+        let mut spoken: HashMap<String, Vec<String>> = HashMap::new();
+        for inst in &self.instances {
+            match inst.schema {
+                "sentence" => {
+                    if let Some(id) = inst.value.get("id").and_then(Value::as_str) {
+                        let reading = inst.value.get("reading").and_then(Value::as_str);
+                        spoken.insert(
+                            id.to_string(),
+                            reading.map(str::to_string).into_iter().collect(),
+                        );
+                    }
+                }
+                "phonology-contrast" => {
+                    if let Some(cid) = inst.value.get("id").and_then(Value::as_str) {
+                        if let Some(items) = inst.value.get("items").and_then(Value::as_array) {
+                            for (i, item) in items.iter().enumerate() {
+                                let reading = item.get("reading").and_then(Value::as_str);
+                                spoken.insert(
+                                    format!("{cid}-{i}"),
+                                    reading.map(str::to_string).into_iter().collect(),
+                                );
+                            }
+                        }
+                    }
+                }
+                "lexicon-entry" => {
+                    if let Some(id) = inst.value.get("id").and_then(Value::as_str) {
+                        let readings: Vec<String> = inst
+                            .value
+                            .get("readings")
+                            .and_then(Value::as_array)
+                            .map(|a| {
+                                a.iter()
+                                    .filter(|r| r.get("script").is_some())
+                                    .filter_map(|r| r.get("text").and_then(Value::as_str))
+                                    .map(str::to_string)
+                                    .collect()
+                            })
+                            .unwrap_or_default();
+                        spoken.insert(id.to_string(), readings);
+                    }
+                }
+                _ => {}
+            }
+        }
+        let mut without_reading: Vec<String> = Vec::new();
+        for row in &rows {
+            if row.value.get("provenance").and_then(Value::as_str) != Some("model-output") {
+                continue;
+            }
+            let Some(id) = row.value.get("id").and_then(Value::as_str) else {
+                continue;
+            };
+            let readings = match spoken.get(id) {
+                Some(r) if r.is_empty() => {
+                    without_reading.push(id.to_string());
+                    continue;
+                }
+                Some(r) => r,
+                None => continue, // row ids with no content item cannot be judged
+            };
+            let fed = row.value.get("text").and_then(Value::as_str);
+            if !fed.is_some_and(|t| readings.iter().any(|r| r == t)) {
+                diags.push(Diagnostic::new(
+                    &row.file,
+                    format!("{}/text", row.pointer),
+                    "media_text_not_declared_reading",
+                    format!(
+                        "{id} ships synthesized audio whose recorded text is {fed:?}, but the \
+                         item declares reading(s) {readings:?}: the generator must feed the \
+                         declared reading and the manifest must record exactly what was fed \
+                         (regenerate with scripts/generate-pack-audio.py, K-65)"
+                    ),
+                    Severity::Error,
+                ));
+            }
+        }
+        if !without_reading.is_empty() {
+            let shown = without_reading
+                .iter()
+                .take(8)
+                .cloned()
+                .collect::<Vec<_>>()
+                .join(", ");
+            diags.push(Diagnostic::new(
+                "media/manifest.jsonl",
+                String::new(),
+                "media_item_without_reading",
+                format!(
+                    "{} model-output asset(s) belong to items that declare no reading, so their \
+                     audio can only be the written form and cannot be checked against a declared \
+                     reading: {shown}{}; authoring readings is human linguistic work and stays a \
+                     review-pending record (K-65)",
+                    without_reading.len(),
+                    if without_reading.len() > 8 {
+                        " (first 8 shown)"
+                    } else {
+                        ""
+                    }
+                ),
+                Severity::Info,
+            ));
         }
         diags
     }
