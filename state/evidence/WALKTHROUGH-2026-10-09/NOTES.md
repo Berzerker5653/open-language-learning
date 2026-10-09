@@ -105,6 +105,62 @@ Template per item:
   the Languages tab — the two paths never meet during setup
 - KANBAN card: K-72
 
+
+### W-05 — Whisper-small download froze the window ("looked like a crash")  [issue]
+- Screen/step: Languages tab → download whisper-small model
+- Did: clicked the whisper-small model download
+- Expected: download proceeds with visible progress; app responsive
+- Saw: whole window went unresponsive — looked like a crash (the app
+  process survived; the UI was dead weight for the duration)
+- Candidate severity: blocker (first big download the learner triggers
+  reads as the app dying)
+- Facts found while logging: this is the SAME root cause as W-01. All
+  72 `#[tauri::command]`s are plain sync `fn` (grep: zero `async`);
+  Tauri 2 executes sync commands ON THE MAIN THREAD, so `install_model`
+  blocks the event loop for the entire download. Worse,
+  `models::download` (models.rs:371) buffers the whole ~466 MB payload
+  into a `Vec<u8>` in memory, then SHA256-hashes that buffer — all
+  synchronous. And because the event loop is blocked, the
+  `engine-progress` stage events the install paths DO emit can never
+  reach the webview mid-operation — which retroactively explains why
+  W-01's pack install showed nothing even though events fire.
+- KANBAN card: K-73 (and it amends K-69: progress UI is impossible
+  until long commands run off the main thread)
+
+### W-06 — Languages tab takes an exceedingly long time to load  [issue]
+- Screen/step: Languages tab, every visit
+- Did: opened the Languages tab (after installing models, and also
+  noticing slowness before)
+- Expected: fast tab load; owner believed slowness had been fixed
+- Saw: long load every time
+- Candidate severity: annoying→blocker for a core tab
+- Facts found while logging: the earlier fix (K-63, committed — the
+  25 s pack-parse path) is still in; this is a DIFFERENT slow path:
+  `available_models` (sync, main thread) → `models::model_status`
+  re-verifies every installed model by re-HASHING the full installed
+  payload on EVERY tab open ("corruption reads as missing" design) —
+  hundreds of MB of SHA256 per visit, on the main thread, growing with
+  every model installed (whisper-small alone is ~466 MB)
+- KANBAN card: K-74
+
+### W-07 — Scenarios tab ordering reads wrong: unsupported first  [issue]
+- Screen/step: Scenarios tab
+- Did: looked at the scenario list
+- Expected: the sensible first scenario first, clearly
+- Saw: "Finding the station" listed FIRST but marked not-yet-supported;
+  "First meeting" has a Start button but sits below — why is the
+  unplayable one at the top, and which one IS the first scenario?
+- Owner question: is Finding-the-station the intended first scenario,
+  or First meeting?
+- Answer from the data while logging: First meeting. Its goal is
+  `ja.goal.onramp.respond-to-greeting` (onramp = day-one goal);
+  Finding-the-station targets `ja.goal.a1.ask-location` (A1 stage,
+  later). The list order looks like a filename artifact
+  (directions.yaml sorts before first-meeting.yaml alphabetically) —
+  no readiness or recommendation logic in the ordering.
+- Candidate severity: confusing polish with real drop-off risk
+- KANBAN card: K-75
+
 ## Ops notes
 
 - ~08:55 the supervised preview wrapper was SIGTERMed (exit 143) right
