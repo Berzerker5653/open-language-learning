@@ -253,6 +253,7 @@ export function App() {
   const [speechModel, setSpeechModel] = useState<string>("off");
   const [deviceTier, setDeviceTier] = useState<DeviceTier | null>(null);
   const [onboardError, setOnboardError] = useState<string | null>(null);
+  const [installingPack, setInstallingPack] = useState<string | null>(null);
   const [writingTask, setWritingTask] = useState<WritingTaskView | null>(null);
   const [writingScaffold, setWritingScaffold] = useState<{
     reading?: string;
@@ -870,12 +871,17 @@ export function App() {
   async function install(id: string) {
     setOnboardError(null);
     if (inv) {
+      setInstallingPack(id);
       try {
+        // K-73 made this command async, so `engine-progress` events now
+        // actually reach the webview while it runs; the stage line above
+        // the pack list is what makes the minute-long wait visible (K-69).
         await inv("install_pack", { packId: id });
       } catch (e) {
         setOnboardError(`Could not install that pack: ${String(e)}`);
         return;
       } finally {
+        setInstallingPack(null);
         setEngineProgress(null);
       }
     }
@@ -2051,6 +2057,7 @@ export function App() {
           onCreateNew={() => setStep("welcome")}
           error={onboardError}
           progress={engineProgress}
+          installing={installingPack}
         />
       </AppShell>
     );

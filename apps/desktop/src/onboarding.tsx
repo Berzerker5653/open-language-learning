@@ -44,6 +44,7 @@ export interface OnboardingProps {
   onCreateNew(): void;
   error?: string | null;
   progress?: EngineProgress | null;
+  installing?: string | null;
 }
 
 export function Onboarding(p: OnboardingProps) {
@@ -151,9 +152,17 @@ export function Onboarding(p: OnboardingProps) {
                   type="button"
                   className="btn btn--quiet"
                   onClick={() => p.onInstall(pack.pack_id)}
-                  disabled={p.installedPacks.includes(pack.pack_id)}
+                  disabled={
+                    p.installedPacks.includes(pack.pack_id) ||
+                    (p.installing !== null && p.installing !== undefined)
+                  }
+                  aria-busy={p.installing === pack.pack_id}
                 >
-                  {p.installedPacks.includes(pack.pack_id) ? "Installed" : "Install"}
+                  {p.installedPacks.includes(pack.pack_id)
+                    ? "Installed"
+                    : p.installing === pack.pack_id
+                      ? "Installing…"
+                      : "Install"}
                 </button>
               </div>
             ))}
