@@ -51,14 +51,14 @@ describe("session pack (D7)", () => {
     const { inv, calls } = fakeInv([ACTIVE]);
     const { packId } = await loadSessionPack(inv, "profile-1");
     const target = await packRequest(inv, packId, "dictation_target", { offset: 2 });
-    const model = await packRequest(inv, packId, "speech_audio", { unitId: "eo.1", text: "sa" });
+    const model = await packRequest(inv, packId, "speech_audio", { contentId: "eo.1" });
     const demo = await packRequest(inv, packId, "pronunciation_demo", {});
     for (const req of [target, model, demo]) {
       if (!req.ok) throw new Error(`request was refused: ${req.error}`);
       expect(req.packId).toBe(ACTIVE);
     }
     expect(argsFor(calls, "dictation_target")).toEqual({ packId: ACTIVE, offset: 2 });
-    expect(argsFor(calls, "speech_audio")).toEqual({ packId: ACTIVE, unitId: "eo.1", text: "sa" });
+    expect(argsFor(calls, "speech_audio")).toEqual({ packId: ACTIVE, contentId: "eo.1" });
     expect(argsFor(calls, "pronunciation_demo")).toEqual({ packId: ACTIVE });
     for (const c of calls) {
       expect(JSON.stringify(c.args ?? {})).not.toContain(REFERENCE);

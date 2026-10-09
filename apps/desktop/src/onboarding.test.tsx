@@ -113,4 +113,23 @@ describe("onboarding", () => {
     // Continue stays disabled while unmet — but explained, never silent.
     expect(html).toContain("disabled");
   });
+
+  it("names the stage an install reported instead of leaving a silent window", () => {
+    // K-62: the owner clicked the language install and the window said nothing
+    // for the whole operation. The line must appear, be announced to assistive
+    // technology, and never show a percentage the engine withheld.
+    const running = render({
+      step: "packs",
+      progress: {
+        operation: "install-pack",
+        subject: "org.openlanguage.ja-demo",
+        stage: "prepare",
+        percent: null,
+      },
+    });
+    expect(running).toContain('aria-live="polite"');
+    expect(running).not.toMatch(/\d+\s*%/);
+    // Nothing running: no element pretending an operation is underway.
+    expect(render({ step: "packs" })).not.toContain('aria-live="polite"');
+  });
 });

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
-import { GoalMap, Home, ProgressView, type SessionPlan } from "./home";
+import { GoalMap, Home, ProgressView, type PlannedItem, type SessionPlan } from "./home";
 
 const plan: SessionPlan = {
   items: [
@@ -9,6 +9,7 @@ const plan: SessionPlan = {
       content_id: "ja.lex.demo.hajimemashite",
       modality: "recall-meaning",
       reason: "due-review",
+      kind: "review",
       est_seconds: 20,
     },
     {
@@ -16,6 +17,7 @@ const plan: SessionPlan = {
       content_id: "ja.lex.demo.watashi",
       modality: "comprehension-reading",
       reason: "weak-skill",
+      kind: "review",
       est_seconds: 40,
     },
     {
@@ -23,6 +25,7 @@ const plan: SessionPlan = {
       content_id: "ja.grammar.demo.greetings",
       modality: "comprehension-reading",
       reason: "progression",
+      kind: "introduction",
       est_seconds: 60,
     },
   ],
@@ -38,6 +41,11 @@ describe("home", () => {
       <Home displayName="Hunter" plan={plan} activeBudget={5} onBudget={() => {}} />,
     );
     expect(html).toContain("Hi Hunter");
+    // K-66 (ADR-0020 §1): items carry the engine's own kind, and Home
+    // groups under it; the per-item reason stays as the why.
+    expect(html).toContain("First look");
+    expect(html).toContain("Keep it sticking");
+    expect(html).toContain("Nothing is recorded until you do one of these.");
     expect(html).toContain("Due for review");
     expect(html).toContain("Strengthen a weak spot");
     expect(html).toContain("New material");
@@ -97,6 +105,7 @@ describe("home", () => {
               content_id: "ja.lex.demo.konnichiwa",
               modality: "recall-meaning",
               reason: "progression",
+              kind: "introduction",
               est_seconds: 60,
               surface: "こんにちは",
               gloss: "hello",
@@ -119,6 +128,7 @@ describe("home", () => {
       content_id: "ja.lex.demo.watashi",
       modality,
       reason: "due-review" as const,
+      kind: "review" as const,
       est_seconds: 20,
       surface: "私",
       gloss: "me",
@@ -178,6 +188,87 @@ describe("home", () => {
     expect(html).toContain('data-unlocked="yes"');
     expect(html).toContain('data-unlocked="no"');
     expect(html).toContain("not from activity counts");
+  });
+
+  it("groups the plan by the engine's kind regardless of item order", () => {
+    const shuffled: SessionPlan = {
+      ...plan,
+      items: [0, 2, 1].map((i) => plan.items[i] as PlannedItem),
+    };
+    const html = renderToStaticMarkup(
+      <Home displayName="Hunter" plan={shuffled} activeBudget={5} onBudget={() => {}} />,
+    );
+    // Introduction (the unseen half) always leads the page, even when
+    // the scheduler interleaves kinds in its own ordering.
+    expect(html.indexOf('aria-label="First look"')).toBeLessThan(
+      html.indexOf('aria-label="Keep it sticking"'),
+    );
+  });
+
+  it("shows the pack's next declared goal, and abstains honestly without one", () => {
+    const withGoal = renderToStaticMarkup(
+      <Home
+        displayName="Hunter"
+        plan={plan}
+        activeBudget={5}
+        onBudget={() => {}}
+        nextGoal={{
+          pack_id: "org.openlanguage.ja-jp.reference",
+          goal_id: "ja.goal.onramp.kana-hiragana",
+          description: "Recognize hiragana chart symbols on sight.",
+          band: "on-ramp",
+        }}
+      />,
+    );
+    expect(withGoal).toContain("Next up:");
+    expect(withGoal).toContain("Recognize hiragana chart symbols");
+    expect(withGoal).toContain('data-goal="ja.goal.onramp.kana-hiragana"');
+    // K-47 band gloss reused: the pack's token stays behind human copy.
+    expect(withGoal).toContain("Getting started");
+    // null is the engine saying "this pack declares no goal map".
+    const noGoal = renderToStaticMarkup(
+      <Home
+        displayName="Hunter"
+        plan={plan}
+        activeBudget={5}
+        onBudget={() => {}}
+        nextGoal={null}
+      />,
+    );
+    expect(noGoal).toContain("This pack declares no learning path yet.");
+    // undefined is home_state not having answered yet: claim nothing.
+    const unknown = renderToStaticMarkup(
+      <Home displayName="Hunter" plan={plan} activeBudget={5} onBudget={() => {}} />,
+    );
+    expect(unknown).not.toContain("Next up:");
+    expect(unknown).not.toContain("declares no learning path");
+  });
+
+  it("renders at most three first-run steps, and nothing when the pack offers none", () => {
+    const steps = [1, 2, 3, 4, 5].map((n) => ({
+      kind: "introduction" as const,
+      label: `step ${n}`,
+      content_id: `ja.orth.hira.${n}`,
+      goal_id: null,
+    }));
+    const html = renderToStaticMarkup(
+      <Home
+        displayName="Hunter"
+        plan={plan}
+        activeBudget={5}
+        onBudget={() => {}}
+        firstRunSteps={steps}
+      />,
+    );
+    expect(html).toContain("Where to begin");
+    for (const n of [1, 2, 3]) expect(html).toContain(`step ${n}`);
+    // ADR-0020 §4 caps first-run guidance at three steps.
+    expect(html).not.toContain("step 4");
+    expect(html).not.toContain("step 5");
+    const none = renderToStaticMarkup(
+      <Home displayName="Hunter" plan={plan} activeBudget={5} onBudget={() => {}} />,
+    );
+    expect(none).not.toContain("Where to begin");
   });
 });
 

@@ -1,8 +1,10 @@
 /**
  * UX-002 home + progress views. Presentational: the plan comes from the
- * scheduler-backed planner (due reviews, weak skills, progression) —
- * never a trivial queue, and no streak/attendance surface anywhere
- * (ADR-0002).
+ * scheduler-backed planner (due reviews, weak skills, progression), and
+ * every item carries the engine's own `kind` so Home can introduce new
+ * material before maintenance without deriving anything itself
+ * (docs/adr/0020-derived-guidance.md). Never a trivial queue, and no
+ * streak/attendance surface anywhere (ADR-0002).
  */
 
 export interface PlannedItem {
@@ -10,6 +12,11 @@ export interface PlannedItem {
   content_id: string;
   modality: string;
   reason: "due-review" | "weak-skill" | "progression";
+  /** K-66: the engine's own classification of why this item is here —
+   * `review` keeps something alive, `introduction` is material the
+   * learner has never met. Derived from `reason` on the Rust side
+   * (ADR-0020 §1); the UI never re-derives it. */
+  kind: "review" | "introduction";
   est_seconds: number;
   surface?: string | null;
   gloss?: string | null;
@@ -23,6 +30,32 @@ export interface SessionPlan {
   planner_version: string;
 }
 
+/**
+ * K-66: the next reachable goal of the active pack's own goal map — the
+ * lowest-band entry that is not `locked` (ADR-0020 §1). Null when the
+ * active pack declares no goal map: Home then abstains instead of
+ * inventing a goal. Every string here is the pack's own display text.
+ */
+export interface NextGoalView {
+  pack_id: string;
+  goal_id: string;
+  description: string;
+  band: string | null;
+}
+
+/**
+ * K-66: one step of the first-run guidance, from the `first_run_steps`
+ * command. Labels are pack display strings only — the engine never
+ * names a script or writes an example (ADR-0021 rule 4). The engine
+ * returns at most three; the section shows at most three.
+ */
+export interface FirstRunStep {
+  kind: "introduction" | "review" | "practice";
+  label: string;
+  content_id: string | null;
+  goal_id: string | null;
+}
+
 export const BUDGET_PRESETS = [5, 10, 20, 30];
 
 const REASON_LABELS: Record<PlannedItem["reason"], string> = {
@@ -30,6 +63,24 @@ const REASON_LABELS: Record<PlannedItem["reason"], string> = {
   "weak-skill": "Strengthen a weak spot",
   progression: "New material",
 };
+
+/**
+ * K-66: one plan, two different promises, so it is read in the order
+ * ADR-0020 §2 describes — meet something new, then keep what you have.
+ * The grouping comes from the engine's own `kind` field, never from a
+ * guess made off the reason text.
+ */
+const KIND_LABELS: Record<FirstRunStep["kind"], string> = {
+  introduction: "First look",
+  review: "Keep it sticking",
+  practice: "Practise it",
+};
+
+/** ADR-0020 §2: introduce, then maintain. */
+const PLAN_KIND_ORDER: PlannedItem["kind"][] = ["introduction", "review"];
+
+/** ADR-0020 §4: first-run guidance is the first three steps, no more. */
+const FIRST_RUN_MAX = 3;
 
 /**
  * D2: every modality the engine has a typed practice runner for must be
@@ -66,9 +117,26 @@ export interface HomeProps {
   /// tallies by `packPosture` in language.tsx). Null when no pack is
   /// active or claims have not loaded; nothing is claimed then.
   activePack?: { name: string; posture: string } | null;
+  /// K-66: the next reachable goal from the active pack's goal map, as
+  /// `home_state` reports it. `undefined` while that call has not
+  /// answered; `null` when the pack declares no goal map — Home then
+  /// says so plainly rather than inventing a goal (ADR-0020 §4).
+  nextGoal?: NextGoalView | null;
+  /// K-66: the first-run steps from `first_run_steps`: pack-declared
+  /// labels only. Empty, or not loaded yet, renders no section.
+  firstRunSteps?: FirstRunStep[];
 }
 
 export function Home(p: HomeProps) {
+  // The engine returns at most three steps; the section caps them again
+  // so the promise ADR-0020 §4 makes — the first three steps — is a
+  // rendering guarantee, not a hope about the API.
+  const firstRun = (p.firstRunSteps ?? []).slice(0, FIRST_RUN_MAX);
+  // `undefined` means home_state has not answered yet, and nothing is
+  // claimed; `null` is the engine stating that the active pack declares
+  // no goal map at all.
+  const declaredGoal = p.nextGoal ?? null;
+  const goalBand = declaredGoal?.band ? bandHeader(declaredGoal.band) : null;
   return (
     <section aria-label="Practice">
       <h1>Hi {p.displayName}</h1>
@@ -77,6 +145,24 @@ export function Home(p: HomeProps) {
         <p className="meta pack-posture">
           <strong>{p.activePack.name}</strong> — {p.activePack.posture}
         </p>
+      ) : null}
+      {firstRun.length > 0 ? (
+        <section aria-label="First steps" className="first-run">
+          <h2>Where to begin</h2>
+          <p>
+            <small>
+              From the pack you are learning, in its order — the plan below carries the buttons.
+            </small>
+          </p>
+          <ol className="first-run-list">
+            {firstRun.map((step) => (
+              <li key={step.goal_id ?? step.content_id ?? step.label}>
+                <span className="plan-reason">{KIND_LABELS[step.kind]}</span>
+                <span className="first-run-label">{step.label}</span>
+              </li>
+            ))}
+          </ol>
+        </section>
       ) : null}
       <div role="group" aria-label="Time budget" className="seg">
         {BUDGET_PRESETS.map((m) => (
@@ -99,44 +185,74 @@ export function Home(p: HomeProps) {
           Nothing is due right now. Come back when reviews are due, or explore new material.
         </p>
       ) : (
-        <ul className="plan-list">
-          {p.plan.items.map((item) => {
-            const verb = RUNNABLE_MODALITIES[item.modality];
-            const label = (
-              <>
-                <span className="plan-reason">{REASON_LABELS[item.reason]}</span>
-                {item.surface ? (
-                  <strong className="plan-surface" lang="ja">
-                    {item.surface}
-                  </strong>
-                ) : (
-                  <code>{item.content_id}</code>
-                )}
-                {item.gloss && <span className="plan-gloss">{item.gloss}</span>}
-              </>
-            );
-            return (
-              <li key={item.item_id}>
-                {p.onStart && verb ? (
-                  <button type="button" className="plan-item" onClick={() => p.onStart!(item)}>
-                    {label}
-                    <span className="meta">
-                      {verb} · ~{item.est_seconds}s
-                    </span>
-                  </button>
-                ) : (
-                  <>
-                    {label}
-                    <span className="meta">
-                      {item.modality}, ~{item.est_seconds}s
-                      {p.onStart ? " — no practice runner for this yet" : ""}
-                    </span>
-                  </>
-                )}
-              </li>
-            );
-          })}
-        </ul>
+        PLAN_KIND_ORDER.map((kind) => {
+          const items = p.plan.items.filter((item) => item.kind === kind);
+          if (items.length === 0) return null;
+          return (
+            <section key={kind} className="plan-group" aria-label={KIND_LABELS[kind]}>
+              <h2>{KIND_LABELS[kind]}</h2>
+              {kind === "introduction" ? (
+                <p>
+                  <small>Nothing is recorded until you do one of these.</small>
+                </p>
+              ) : null}
+              <ul className="plan-list">
+                {items.map((item) => {
+                  const verb = RUNNABLE_MODALITIES[item.modality];
+                  const label = (
+                    <>
+                      <span className="plan-reason">{REASON_LABELS[item.reason]}</span>
+                      {item.surface ? (
+                        <strong className="plan-surface" lang="ja">
+                          {item.surface}
+                        </strong>
+                      ) : (
+                        <code>{item.content_id}</code>
+                      )}
+                      {item.gloss && <span className="plan-gloss">{item.gloss}</span>}
+                    </>
+                  );
+                  return (
+                    <li key={item.item_id}>
+                      {p.onStart && verb ? (
+                        <button type="button" className="plan-item" onClick={() => p.onStart!(item)}>
+                          {label}
+                          <span className="meta">
+                            {verb} · ~{item.est_seconds}s
+                          </span>
+                        </button>
+                      ) : (
+                        <>
+                          {label}
+                          <span className="meta">
+                            {item.modality}, ~{item.est_seconds}s
+                            {p.onStart ? " — no practice runner for this yet" : ""}
+                          </span>
+                        </>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
+          );
+        })
+      )}
+      {p.nextGoal === undefined ? (
+        null
+      ) : p.nextGoal === null ? (
+        <p className="empty next-goal-none">
+          This pack declares no learning path yet. Choose one under Languages.
+        </p>
+      ) : (
+        <p className="meta next-goal" data-goal={p.nextGoal.goal_id}>
+          Next up: <strong>{p.nextGoal.description}</strong>
+          {goalBand ? (
+            <span className="meta band-gloss">
+              {goalBand.label} — {goalBand.gloss}
+            </span>
+          ) : null}
+        </p>
       )}
       {p.environments && p.environments.length > 0 && (
         <section aria-label="Environments">

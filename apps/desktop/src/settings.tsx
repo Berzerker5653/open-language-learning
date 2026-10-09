@@ -11,6 +11,7 @@
  * every control is renderable in tests.
  */
 
+import type { Microphone } from "./capture";
 export type RomajiMode = "auto" | "always" | "off";
 
 export interface SpeechModelPref {
@@ -25,6 +26,13 @@ export interface SettingsProps {
   /** Stored `microphone-enabled` for this profile (false when unset). */
   microphoneEnabled: boolean;
   onSetMicrophone(enabled: boolean): void;
+  /** K-64: stored capture device for this profile (null = system default). */
+  microphoneDevice: string | null;
+  /** Named audio inputs; empty until the browser has granted access once. */
+  microphoneDevices: Microphone[];
+  onPickMicrophone(deviceId: string | null): void;
+  /** Re-ask the browser for named inputs. */
+  onDetectMicrophones(): void;
   /** Stored `romaji-mode` (exactly the reader's vocabulary). */
   romajiMode: RomajiMode;
   onSetRomajiMode(mode: RomajiMode): void;
@@ -77,6 +85,33 @@ export function Settings(p: SettingsProps) {
             abstain; reading, writing, listening, and every other activity work without a
             microphone, and turning this off never blocks progress.
           </small>
+        </p>
+        <label htmlFor="mic-device">
+          Microphone to record from
+          <select
+            id="mic-device"
+            value={p.microphoneDevice ?? ""}
+            onChange={(e) => p.onPickMicrophone(e.target.value || null)}
+          >
+            <option value="">System default</option>
+            {p.microphoneDevices.map((d) => (
+              <option key={d.deviceId} value={d.deviceId}>
+                {d.label}
+              </option>
+            ))}
+          </select>
+        </label>
+        <p>
+          <small>
+            {p.microphoneDevices.length === 0
+              ? "There is nothing to list yet: the browser only reveals microphone names after you allow microphone access once. Recording from the system default works until then."
+              : "The choice is stored for this profile. If the chosen microphone is unplugged, the app says so and records from the system default for that one recording instead of switching silently."}
+          </small>
+        </p>
+        <p>
+          <button id="mic-detect" type="button" onClick={p.onDetectMicrophones}>
+            Detect microphones
+          </button>
         </p>
       </div>
 

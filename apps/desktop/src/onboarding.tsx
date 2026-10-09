@@ -4,6 +4,7 @@
  * setup. Presentational component: state and IPC live in the container
  * so every step is renderable in tests.
  */
+import { progressLine, type EngineProgress } from "./progress";
 
 export interface PrivacyNotice {
   title: string;
@@ -42,6 +43,7 @@ export interface OnboardingProps {
   onResume(id: string): void;
   onCreateNew(): void;
   error?: string | null;
+  progress?: EngineProgress | null;
 }
 
 export function Onboarding(p: OnboardingProps) {
@@ -65,6 +67,14 @@ export function Onboarding(p: OnboardingProps) {
       {p.error && (
         <p role="alert" className="alert">
           {p.error}
+        </p>
+      )}
+      {p.progress && (
+        // K-62: installing a full language pack is not instant. This line names
+        // the stage the engine reported; it never implies a percentage the
+        // engine did not send.
+        <p role="status" aria-live="polite" className="notice">
+          {progressLine(p.progress)}
         </p>
       )}
 

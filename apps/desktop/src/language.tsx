@@ -4,6 +4,8 @@
  * packs work fully offline; the community catalog points at versioned
  * GitHub releases and always labels packs as community content.
  */
+import { progressLine, type EngineProgress } from "./progress";
+
 import type { DisplaySettingsView } from "./stress";
 
 export interface InstalledPack {
@@ -116,6 +118,8 @@ export interface LanguagePanelProps {
   deviceTier: DeviceTier | null;
   /// D4 (ADR-0019): aligner runtime this build carries (null until loaded).
   aligner: AlignerStatus | null;
+  /// K-62: the stage a long install reported, or null when nothing is running.
+  progress?: EngineProgress | null;
 }
 
 const STATUS_LABELS: Record<string, string> = {
@@ -229,6 +233,13 @@ export function LanguagePanel(p: LanguagePanelProps) {
       {p.error && (
         <p role="alert" className="alert">
           {p.error}
+        </p>
+      )}
+      {p.progress && (
+        // K-62: the learner watches the operation instead of wondering whether
+        // the button did anything. Only a stage the engine entered is named.
+        <p role="status" aria-live="polite" className="notice">
+          {progressLine(p.progress)}
         </p>
       )}
 

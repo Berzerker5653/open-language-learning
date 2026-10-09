@@ -375,4 +375,31 @@ describe("language panel", () => {
     expect(html).not.toContain("does not include whisper.cpp");
     expect(html).toContain('data-aligner="no"');
   });
+
+  it("reports the stage a catalog install is in", () => {
+    // K-62: downloading and unpacking a pack takes long enough that silence
+    // reads as a dead button. The panel shows the reported stage, and shows
+    // nothing when no operation is running.
+    const running = render({
+      progress: {
+        operation: "install-pack",
+        subject: "community.example.japanese",
+        stage: "fetch",
+        percent: null,
+      },
+    });
+    expect(running).toContain('aria-live="polite"');
+    expect(running).not.toMatch(/\d+\s*%/);
+    expect(render()).not.toContain('aria-live="polite"');
+    // A real percentage (model files report completed bytes) is shown as-is.
+    const withPercent = render({
+      progress: {
+        operation: "install-model",
+        subject: "org.openlanguage.speech.whisper-ggml-tiny",
+        stage: "fetch",
+        percent: 40,
+      },
+    });
+    expect(withPercent).toContain("40%");
+  });
 });

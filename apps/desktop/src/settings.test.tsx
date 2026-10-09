@@ -10,6 +10,10 @@ import { Settings, type SettingsProps } from "./settings";
 const base: SettingsProps = {
   microphoneEnabled: false,
   onSetMicrophone: () => {},
+  microphoneDevice: null,
+  microphoneDevices: [],
+  onPickMicrophone: () => {},
+  onDetectMicrophones: () => {},
   romajiMode: "auto",
   onSetRomajiMode: () => {},
   speechModel: "off",
@@ -41,6 +45,32 @@ describe("settings", () => {
     expect(render({ microphoneEnabled: true })).toMatch(/id="mic-enabled"[^>]*checked=""/);
     expect(render({ microphoneEnabled: false })).not.toMatch(/id="mic-enabled"[^>]*checked/);
     expect(render()).toContain("never blocks progress");
+  });
+
+  it("the microphone picker reflects the stored device and admits when names are unavailable", () => {
+    // K-64: the picker shows the stored device as selected, offers "System
+    // default" as a real choice, and never invents device names.
+    const withDevice = render({
+      microphoneDevice: "mic-headset",
+      microphoneDevices: [{ deviceId: "mic-headset", label: "Headset Microphone" }],
+    });
+    const options = withDevice.match(/<option[^>]*>/g) ?? [];
+    expect(options.some((t) => t.includes("selected") && t.includes('value="mic-headset"'))).toBe(
+      true,
+    );
+    expect(withDevice).toContain("Headset Microphone");
+    const onDefault = render({
+      microphoneDevice: null,
+      microphoneDevices: [{ deviceId: "mic-headset", label: "Headset Microphone" }],
+    });
+    const defaultOptions = onDefault.match(/<option[^>]*>/g) ?? [];
+    expect(defaultOptions.some((t) => t.includes("selected") && t.includes('value=""'))).toBe(true);
+    // No grant yet: honest copy instead of an empty picker.
+    expect(render({ microphoneDevices: [] })).toContain("allow microphone access once");
+    expect(render({ microphoneDevices: [{ deviceId: "a", label: "A" }] })).toContain("instead of switching silently");
+    // K-64: the picker always offers a way to ask again — a webview that never
+    // answered the first device query must not leave the setting stuck.
+    expect(render()).toContain('id="mic-detect"');
   });
 
   it("the romaji control reflects the stored mode", () => {

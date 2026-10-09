@@ -16,6 +16,8 @@ import {
   type GoalCard,
   GoalMap,
   type WorldEnvironment,
+  type NextGoalView,
+  type FirstRunStep,
 } from "./home";
 import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./pronunciation";
 import { DictationPractice, type DictationResult, type DictationSentence } from "./dictation";
@@ -42,8 +44,28 @@ import {
   type ScenarioView,
 } from "./scenario";
 import { Settings, type RomajiMode } from "./settings";
+import { listMicrophones, openMicrophone, type Microphone } from "./capture";
+import type { EngineProgress } from "./progress";
 
 export type Invoke = (cmd: string, args?: Record<string, unknown>) => Promise<unknown>;
+/**
+ * K-62 witness: every stage the engine reports is recorded as it arrives, so
+ * the headless walkthrough can prove the renderer heard the progress channel
+ * rather than trusting that a listener was wired up.
+ */
+const progressStages: EngineProgress[] = [];
+
+// StrictMode invokes mount effects twice in a development build. The launch
+// handshake is idempotent, but this walkthrough drives a real pack install and
+// a full click tour, so it runs once per process instead of twice per mount.
+let walkthroughRan = false;
+
+/** Resolves with `value` after `ms`: a bounded wait, never an open-ended one. */
+function after<T>(ms: number, value: T): Promise<T> {
+  const { promise, resolve } = Promise.withResolvers<T>();
+  setTimeout(() => resolve(value), ms);
+  return promise;
+}
 
 /** Tauri IPC when running inside the native shell; null in plain
  * browser/vitest runs, where the flow stays purely local. */
@@ -203,6 +225,11 @@ export function App() {
   const [displayName, setDisplayName] = useState("");
   const [budget, setBudget] = useState(5);
   const [plan, setPlan] = useState<SessionPlan>(EMPTY_PLAN);
+  // K-66: derived guidance from the engine. `undefined` = home_state has
+  // not answered; `null` = the pack declares no goal map. The app never
+  // composes these strings itself (ADR-0020).
+  const [nextGoal, setNextGoal] = useState<NextGoalView | null | undefined>(undefined);
+  const [firstRunSteps, setFirstRunSteps] = useState<FirstRunStep[]>([]);
   const [progress, setProgress] = useState<ProgressRow[]>([]);
   const [pronResult, setPronResult] = useState<PronunciationResult | null>(null);
   const [dictTarget, setDictTarget] = useState("おばあさん");
@@ -289,6 +316,11 @@ export function App() {
   // stored `microphone-enabled`; it gates getUserMedia at the capture
   // site, so a wrong value here is a privacy bug, not a cosmetic one.
   const [micEnabled, setMicEnabled] = useState(false);
+  // K-64: the stored capture device (null = system default) plus the list the
+  // browser will name. Labels only exist once access has been granted, so an
+  // empty list is expected on a fresh profile and the copy says so.
+  const [micDevice, setMicDevice] = useState<string | null>(null);
+  const [micDevices, setMicDevices] = useState<Microphone[]>([]);
   const [romajiMode, setRomajiMode] = useState<RomajiMode>("auto");
   const [settingsExportPath, setSettingsExportPath] = useState<string | null>(null);
   const [settingsDeleteArmed, setSettingsDeleteArmed] = useState(false);
@@ -363,6 +395,8 @@ export function App() {
   useEffect(() => {
     const inv = detectInvoke();
     if (!inv) return;
+    if (walkthroughRan) return;
+    walkthroughRan = true;
     void (async () => {
       const mode = (await inv("app_mode")) as { smoke: boolean };
       if (mode.smoke) {
@@ -377,6 +411,27 @@ export function App() {
           const tick = () => (left-- > 0 ? requestAnimationFrame(tick) : resolve());
           requestAnimationFrame(tick);
           await promise;
+        };
+        // Poll until a predicate holds (up to `frames` animation
+        // frames) — needed when the next step depends on React state
+        // landing, not just on a fixed paint budget.
+        const waitUntil = async (pred: () => boolean, frames = 60) => {
+          const { promise, resolve } = Promise.withResolvers<void>();
+          let left = frames;
+          const tick = () =>
+            pred() || left-- <= 0 ? resolve() : requestAnimationFrame(tick);
+          requestAnimationFrame(tick);
+          await promise;
+        };
+        // A frame budget that never completes must produce a readable marker,
+        // not a harness timeout: exit 124 says nothing about where the webview
+        // stopped painting.
+        const paintedOrStall = async (label: string) => {
+          const stalled = await Promise.race([
+            painted(4).then(() => false),
+            after(3000, true),
+          ]);
+          if (stalled) await inv("smoke_ack", { note: `paint-stall:${label}` });
         };
         try {
           const existing = (await inv("list_profiles")) as ProfileSummary[];
@@ -398,6 +453,24 @@ export function App() {
           if (!packId) throw new Error("no bundled pack is available to install");
           setSelectedPack(packId);
           await inv("install_pack", { packId });
+          // K-62: the owner's complaint was an install that gives back no
+          // sign of life. The stages are only worth asserting if the renderer
+          // really heard them, so the smoke run reports each stage by name as
+          // it arrived over the event channel.
+          for (let i = 0; i < 20 && progressStages.length < 3; i++) {
+            await after(50, undefined);
+          }
+          for (const stage of ["prepare", "install", "record"]) {
+            await inv("smoke_ack", {
+              note: `progress:${stage}:${
+                progressStages.some(
+                  (p2) => p2.operation === "install-pack" && p2.stage === stage,
+                )
+                  ? "heard"
+                  : "SILENT"
+              }`,
+            });
+          }
           await inv("complete_onboarding", {
             profileId: p.id,
             packId,
@@ -406,9 +479,17 @@ export function App() {
           setMicEnabled((await inv("get_microphone_enabled", { profileId: p.id })) as boolean);
           const home = (await inv("home_state", {
             profileId: p.id,
-          })) as { display_name: string; plan: SessionPlan };
+          })) as { display_name: string; plan: SessionPlan; next_goal: NextGoalView | null };
           setDisplayName(home.display_name);
           setPlan(home.plan);
+          setNextGoal(home.next_goal);
+          // K-66: on a fresh profile every planned item is an
+          // introduction, and first-run guidance must be non-empty for
+          // the ja-JP pack. The script asserts both markers.
+          const freshSteps = (await inv("first_run_steps", { profileId: p.id })) as FirstRunStep[];
+          setFirstRunSteps(freshSteps);
+          await inv("smoke_ack", { note: `fresh-plan:${home.plan.items.length}` });
+          await inv("smoke_ack", { note: `first-run:${freshSteps.length}` });
           setEnvironments((await inv("world_state", { profileId: p.id })) as WorldEnvironment[]);
           setDisplay((await inv("display_settings", { profileId: p.id })) as DisplaySettingsView);
           const goalRows = (await inv("goal_map", { profileId: p.id })) as GoalCard[];
@@ -417,11 +498,143 @@ export function App() {
           await painted(4);
           const buttons = Array.from(document.querySelectorAll('nav[aria-label="Routes"] button'));
           for (const b of buttons) {
+            const label = (b.textContent ?? "").trim();
+            // K-63: "switching routes feels slow" is an impression; this is the
+            // measurement. Timed from the click to the paint a learner would
+            // actually see, inside the real webview over real IPC.
+            const started = performance.now();
             (b as HTMLButtonElement).click();
-            await painted(4);
+            await paintedOrStall(label);
             await inv("smoke_ack", {
-              note: `route:${(b.textContent ?? "").trim()}`,
+              note: `route-ms:${label}:${Math.round(performance.now() - started)}`,
             });
+            await inv("smoke_ack", { note: `route:${label}` });
+            // K-64: the microphone picker is a Settings control backed by a
+            // stored setting. Walking the route proves it is really rendered,
+            // not just present in the component source.
+            if (label === "Settings") {
+              await inv("smoke_ack", {
+                note: `mic-picker:${document.querySelector("#mic-device") ? "present" : "ABSENT"}`,
+              });
+            }
+          }
+          // K-63-follow: one tab costs six times what every other tab costs, and
+          // the two halves need different fixes. Leave the tab, come back, and
+          // time the return: by now the panel's commands are warm and its data
+          // is memoized, so whatever is left is the remount's fetch chain plus
+          // painting the panel. If the number survives, it is paint.
+          const navTo = (label: string) =>
+            buttons.find((b) => (b.textContent ?? "").trim() === label) as
+              | HTMLButtonElement
+              | undefined;
+          const away = navTo("Reading");
+          const back = navTo("Languages");
+          if (away && back) {
+            away.click();
+            await paintedOrStall("Reading");
+            const again = performance.now();
+            back.click();
+            await paintedOrStall("Languages");
+            await inv("smoke_ack", {
+              note: `route-2ms:Languages:${Math.round(performance.now() - again)}`,
+            });
+          }
+          // K-63: route switching was reported as feeling dead. Split the cost
+          // into the commands a route runs and the paint that follows, because
+          // the fix differs by half. These are warm calls: the state a learner
+          // is already in when they click the tab.
+          const timed = async (cmd: string, args?: Record<string, unknown>) => {
+            const t = performance.now();
+            await inv(cmd, args);
+            await inv("smoke_ack", {
+              note: `call-ms:${cmd}:${Math.round(performance.now() - t)}`,
+            });
+          };
+          const warm: Array<[string, Record<string, unknown> | undefined]> = [
+            ["installed_packs", undefined],
+            ["pack_claims", undefined],
+            ["catalog_packs", undefined],
+            ["available_models", undefined],
+            ["tts_status", undefined],
+            ["aligner_status", undefined],
+            ["scenario_list", { profileId: p.id }],
+            ["home_state", { profileId: p.id }],
+            ["active_pack", { profileId: p.id }],
+            ["placement_plan", { profileId: p.id }],
+            ["kanji_list", { profileId: p.id }],
+            ["goal_map", { profileId: p.id }],
+            ["practice_plan", { profileId: p.id, minutes: 10 }],
+            ["writing_task", { profileId: p.id }],
+          ];
+          for (const [cmd, args] of warm) {
+            await timed(cmd, args);
+          }
+          // K-60: scenario actions died at the IPC boundary because the
+          // native view structs renamed their keys to kebab-case. Walk
+          // the real click path (nav button -> list row -> Start) so the
+          // regression is caught by the headless walkthrough, not only
+          // by unit tests.
+          const scenarios = (await inv("scenario_list", {
+            profileId: p.id,
+          })) as ScenarioSummaryView[];
+          if (scenarios.length === 0) {
+            await inv("smoke_ack", { note: "scenario-started:none-locked" });
+          } else {
+            const scen = scenarios[0];
+            if (!scen) throw new Error("scenario list row vanished");
+            const navBtn = Array.from(
+              document.querySelectorAll('nav[aria-label="Routes"] button'),
+            ).find((b) => (b.textContent ?? "").trim() === "Scenarios") as
+              | HTMLButtonElement
+              | undefined;
+            if (!navBtn) throw new Error("Scenarios nav button missing");
+            navBtn.click();
+            await painted(4);
+            const row = Array.from(document.querySelectorAll("li")).find((li) =>
+              (li.textContent ?? "").includes(scen.title),
+            );
+            if (!row) throw new Error(`scenario row for "${scen.title}" missing`);
+            const start = Array.from(row.querySelectorAll("button")).find(
+              (b) => (b.textContent ?? "").trim() === "Start",
+            ) as HTMLButtonElement | undefined;
+            if (scen.unlocked) {
+              if (!start) throw new Error("Start button missing on unlocked scenario");
+              start.click();
+              await waitUntil(() => !!document.querySelector('[aria-label="Scenario"]'));
+              if (!document.querySelector('[aria-label="Scenario"]'))
+                throw new Error("scenario session did not open");
+              if (document.querySelector('[aria-label="Scenario"] [role="alert"]'))
+                throw new Error("scenario start surfaced an error to the learner");
+              await inv("smoke_ack", { note: `scenario-started:${scen.scenario_id}` });
+              const action = document.querySelector(
+                '[aria-label="Ways to respond"] button',
+              ) as HTMLButtonElement | null;
+              const intent = (action?.textContent ?? "").trim();
+              try {
+                if (intent) {
+                  const step = (await inv("scenario_attempt", {
+                    profileId: p.id,
+                    scenarioId: scen.scenario_id,
+                    intent,
+                  })) as ScenarioStepResult;
+                  await inv("smoke_ack", {
+                    note: `scenario-step:${scen.scenario_id}:${step.result}`,
+                  });
+                } else {
+                  await inv("smoke_ack", {
+                    note: `scenario-step:${scen.scenario_id}:abstained`,
+                  });
+                }
+              } catch (e) {
+                await inv("smoke_ack", {
+                  note: `scenario-step:${scen.scenario_id}:error:${String(e)}`,
+                });
+              }
+            } else {
+              await inv("smoke_ack", {
+                note: `scenario-locked:${scen.scenario_id}:${scen.locked_reason ?? "?"}`,
+              });
+            }
           }
           // D4 (ADR-0019): the app must be able to state, over real IPC, which
           // aligner runtime this build carries. The value is build-dependent;
@@ -457,17 +670,57 @@ export function App() {
   }, []);
 
   const inv = detectInvoke();
+  // K-62: one status line driven by what the engine reports, never by a timer
+  // the UI invents. Stages are pushed to a module-level witness as well so the
+  // headless walkthrough can prove the channel actually delivered them.
+  const [engineProgress, setEngineProgress] = useState<EngineProgress | null>(null);
+
+  useEffect(() => {
+    // No bridge (plain browser tab, test DOM) means no event source: importing
+    // the Tauri event API there would fail, so the listener is not registered.
+    if (typeof window === "undefined" || !("__TAURI_INTERNALS__" in window)) return;
+    let unlisten: (() => void) | undefined;
+    let cancelled = false;
+    import("@tauri-apps/api/event")
+      .then(({ listen }) =>
+        listen<EngineProgress>("engine-progress", (e) => {
+          progressStages.push(e.payload);
+          setEngineProgress(e.payload);
+        }),
+      )
+      .then((un) => {
+        if (cancelled) un();
+        else unlisten = un;
+      })
+      .catch(() => {
+        // Progress is a nicety: losing it must never turn into an error the
+        // learner sees, and the operation itself still reports its own failure.
+      });
+    return () => {
+      cancelled = true;
+      unlisten?.();
+    };
+  }, []);
 
   // `pid` lets the resume/finish flows prime the Home active-pack
   // header before the Languages route has been opened (the state
   // profileId is not yet visible to this closure there).
+  //
+  // K-63: these reads used to be awaited one after another, each landing its
+  // own state update, so opening the tab re-rendered the app several times for
+  // ~4 ms of actual reading. They run together now and commit in one block.
   async function refreshLanguages(pid?: string) {
     if (!inv) return;
-    setInstalled((await inv("installed_packs")) as InstalledPack[]);
-    setClaims((await inv("pack_claims")) as PackClaims[]);
     const active = pid ?? profileId;
-    if (active) {
-      const session = await loadSessionPack(inv, active);
+    const [installed, claims, session, catalog] = await Promise.all([
+      inv("installed_packs") as Promise<InstalledPack[]>,
+      inv("pack_claims") as Promise<PackClaims[]>,
+      active ? loadSessionPack(inv, active) : Promise.resolve(null),
+      inv("catalog_packs") as Promise<{ entries: CatalogEntry[]; status: string }>,
+    ]);
+    setInstalled(installed);
+    setClaims(claims);
+    if (session) {
       setActiveIds(session.ids);
       // D7: the profile's own active pack seeds every pack-scoped call,
       // so a returning session (no wizard this run) and a Languages pack
@@ -476,9 +729,8 @@ export function App() {
       setSelectedPack(session.packId);
       if (session.note) setLangError(session.note);
     }
-    const c = (await inv("catalog_packs")) as { entries: CatalogEntry[]; status: string };
-    setCatalog(c.entries);
-    setCatalogStatus(c.status);
+    setCatalog(catalog.entries);
+    setCatalogStatus(catalog.status);
   }
 
   async function switchLearning(packId: string) {
@@ -499,6 +751,8 @@ export function App() {
       setLangError(null);
     } catch (e) {
       setLangError(String(e));
+    } finally {
+      setEngineProgress(null);
     }
     await refreshLanguages();
   }
@@ -510,6 +764,8 @@ export function App() {
       setLangError(null);
     } catch (e) {
       setLangError(String(e));
+    } finally {
+      setEngineProgress(null);
     }
     await refreshLanguages();
   }
@@ -531,6 +787,8 @@ export function App() {
       setLangError(null);
     } catch (e) {
       setLangError(String(e));
+    } finally {
+      setEngineProgress(null);
     }
     await refreshTts();
     await refreshSpeech();
@@ -617,6 +875,8 @@ export function App() {
       } catch (e) {
         setOnboardError(`Could not install that pack: ${String(e)}`);
         return;
+      } finally {
+        setEngineProgress(null);
       }
     }
     setInstalledPacks((prev) => (prev.includes(id) ? prev : [...prev, id]));
@@ -630,9 +890,12 @@ export function App() {
         const home = (await inv("home_state", { profileId })) as {
           display_name: string;
           plan: SessionPlan;
+          next_goal: NextGoalView | null;
         };
         setDisplayName(home.display_name);
         setPlan(home.plan);
+        setNextGoal(home.next_goal);
+        setFirstRunSteps((await inv("first_run_steps", { profileId })) as FirstRunStep[]);
         const envs = (await inv("world_state", { profileId })) as WorldEnvironment[];
         setEnvironments(envs);
         setDisplay((await inv("display_settings", { profileId })) as DisplaySettingsView);
@@ -658,9 +921,12 @@ export function App() {
       const home = (await inv("home_state", { profileId: p.id })) as {
         display_name: string;
         plan: SessionPlan;
+        next_goal: NextGoalView | null;
       };
       setDisplayName(home.display_name);
       setPlan(home.plan);
+      setNextGoal(home.next_goal);
+      setFirstRunSteps((await inv("first_run_steps", { profileId: p.id })) as FirstRunStep[]);
       const envs = (await inv("world_state", { profileId: p.id })) as WorldEnvironment[];
       setEnvironments(envs);
       setDisplay((await inv("display_settings", { profileId: p.id })) as DisplaySettingsView);
@@ -694,6 +960,7 @@ export function App() {
     if (!inv) return;
     try {
       setMicEnabled((await inv("get_microphone_enabled", { profileId: pid })) as boolean);
+      setMicDevice((await inv("get_microphone_device", { profileId: pid })) as string | null);
       setRomajiMode((await inv("get_romaji_mode", { profileId: pid })) as RomajiMode);
     } catch {
       /* keep the conservative defaults; opening Settings re-reads them */
@@ -708,10 +975,30 @@ export function App() {
     if (!inv || !profileId) return;
     try {
       setMicEnabled((await inv("get_microphone_enabled", { profileId })) as boolean);
+      setMicDevice((await inv("get_microphone_device", { profileId })) as string | null);
       setRomajiMode((await inv("get_romaji_mode", { profileId })) as RomajiMode);
       await refreshSpeech();
+      await refreshMicrophones();
     } catch (e) {
       setSettingsError(String(e));
+    }
+  }
+
+  // K-64: names exist only after the browser has granted microphone access
+  // once, and a session with no microphone (or no permission handler) can
+  // refuse the query outright. That must leave Settings intact: the picker
+  // stays empty and the copy explains why. The timeout is not politeness —
+  // WebKitGTK is entitled to sit on a device query it can never answer, and a
+  // settings nicety is not allowed to freeze the app.
+  async function refreshMicrophones() {
+    try {
+      const listed = await Promise.race([
+        listMicrophones(navigator.mediaDevices),
+        after<Microphone[]>(2000, []),
+      ]);
+      setMicDevices(listed);
+    } catch {
+      setMicDevices([]);
     }
   }
 
@@ -720,6 +1007,16 @@ export function App() {
     setSettingsError(null);
     try {
       setMicEnabled((await inv("set_microphone_enabled", { profileId, enabled })) as boolean);
+    } catch (e) {
+      setSettingsError(String(e));
+    }
+  }
+
+  async function pickMicrophoneSetting(deviceId: string | null) {
+    if (!inv || !profileId) return;
+    setSettingsError(null);
+    try {
+      setMicDevice((await inv("set_microphone_device", { profileId, deviceId })) as string | null);
     } catch (e) {
       setSettingsError(String(e));
     }
@@ -1168,7 +1465,10 @@ export function App() {
         inv,
         selectedPack,
         "speech_audio",
-        { unitId: item.content_id, text: item.surface },
+        // K-65b: the native side resolves the speakable string from the pack
+        // record. Sending the written form here is what played noise for
+        // kanji-primary entries.
+        { contentId: item.content_id },
       );
       if (!req.ok) {
         setAudioMsg(req.error);
@@ -1251,13 +1551,19 @@ export function App() {
     const inv = detectInvoke();
     if (!inv || !profileId) return;
     try {
-      await inv("mine_add", {
+      const res = (await inv("mine_add", {
         profileId,
         surface: mineSurface,
         reading: mineReading || null,
         gloss: mineGloss || null,
         sourceCitation: (sourceCitation ?? mineSource) || "manual",
-      });
+      })) as { id: string; was_new: boolean };
+      // K-61: a repeat mine keeps the original entry (and its review
+      // history). Say so in the learner's own words instead of letting a
+      // database constraint surface as an error.
+      if (!res.was_new) {
+        setMineNotice(`"${mineSurface.trim()}" is already in My words — kept the original entry.`);
+      }
       setMineSurface("");
       setMineReading("");
       setMineGloss("");
@@ -1272,13 +1578,19 @@ export function App() {
     const inv = detectInvoke();
     if (!inv || !profileId || !storyActive) return;
     try {
-      await inv("mine_add", {
+      const res = (await inv("mine_add", {
         profileId,
         surface,
         reading,
         gloss,
         sourceCitation: storyActive.id,
-      });
+      })) as { id: string; was_new: boolean };
+      // K-61: mining a word already kept is not an error; the original
+      // entry (and its review history) stays. Note it for when the
+      // learner opens My words — never as a story error.
+      if (!res.was_new) {
+        setMineNotice(`"${surface}" is already in My words — kept the original entry.`);
+      }
       await refreshMine();
     } catch (e) {
       setStoryError(String(e));
@@ -1640,6 +1952,7 @@ export function App() {
   function recordAttempt() {
     void (async () => {
       let stream: MediaStream;
+      let fallbackNote: string | null = null;
       // SETTINGS-001: the stored `microphone-enabled` setting is enforced
       // at the capture site — while it is off, getUserMedia is never
       // requested. (Without the native engine no setting exists.)
@@ -1650,7 +1963,15 @@ export function App() {
         return;
       }
       try {
-        stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        // K-64: record from the device this profile chose, when it chose one.
+        const opened = await openMicrophone(navigator.mediaDevices, micDevice);
+        stream = opened.stream;
+        fallbackNote = opened.fellBack
+          ? "Your saved microphone was not available, so this recording used the system default. Pick it again in Settings."
+          : null;
+        // A successful grant is also when the browser starts naming devices,
+        // so the Settings picker fills up without a restart.
+        await refreshMicrophones();
       } catch (e) {
         setAudioMsg(`Microphone unavailable: ${String(e)}`);
         return;
@@ -1664,7 +1985,7 @@ export function App() {
         src.connect(proc);
         proc.connect(ctx.destination);
         captureRef.current = { ctx, src, proc, stream, bufs };
-        setAudioMsg(null);
+        setAudioMsg(fallbackNote);
         setRecording(true);
       } catch (e) {
         stream.getTracks().forEach((t) => t.stop());
@@ -1729,6 +2050,7 @@ export function App() {
           onResume={(id) => void resumeProfile(id)}
           onCreateNew={() => setStep("welcome")}
           error={onboardError}
+          progress={engineProgress}
         />
       </AppShell>
     );
@@ -2355,6 +2677,7 @@ export function App() {
           claims={claims}
           deviceTier={deviceTier}
           aligner={alignerStatus}
+          progress={engineProgress}
         />
       ) : route === "scenarios" ? (
         <ScenarioPanel
@@ -2375,6 +2698,10 @@ export function App() {
         <Settings
           microphoneEnabled={micEnabled}
           onSetMicrophone={(v) => void setMicSetting(v)}
+          microphoneDevice={micDevice}
+          microphoneDevices={micDevices}
+          onPickMicrophone={(id) => void pickMicrophoneSetting(id)}
+          onDetectMicrophones={() => void refreshMicrophones()}
           romajiMode={romajiMode}
           onSetRomajiMode={(m) => void setRomajiSetting(m)}
           speechModel={speechModel}
@@ -2453,6 +2780,8 @@ export function App() {
           activeBudget={budget}
           onBudget={(m) => void changeBudget(m)}
           environments={environments}
+          nextGoal={nextGoal}
+          firstRunSteps={firstRunSteps}
           onStart={(item) => void openPractice(item)}
         />
       )}

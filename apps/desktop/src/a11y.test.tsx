@@ -22,6 +22,7 @@ const plan: SessionPlan = {
       content_id: "ja.lex.demo.a",
       modality: "recall-meaning",
       reason: "due-review",
+      kind: "review",
       est_seconds: 20,
     },
   ],
