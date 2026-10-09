@@ -28,6 +28,10 @@ const base: OnboardingProps = {
   onInstall: () => {},
   onEnableMic: () => {},
   onSkipMic: () => {},
+  onInstallSpeech: () => {},
+  onSkipSpeech: () => {},
+  onStartSpeech: () => {},
+  speechComponents: [],
   onContinue: () => {},
   onResume: () => {},
   onCreateNew: () => {},
@@ -131,5 +135,50 @@ describe("onboarding", () => {
     expect(running).not.toMatch(/\d+\s*%/);
     // Nothing running: no element pretending an operation is underway.
     expect(render({ step: "packs" })).not.toContain('aria-live="polite"');
+  });
+
+  // K-72: saying "yes" to the microphone must lead into the speech
+  // setup, never leave the learner to discover the downloads later.
+  const missing = [
+    { id: "rt", name: "Speaking engine (runtime)", installed: false, installable: true, size_bytes: 30_454_382 },
+    { id: "voice", name: "Japanese voice", installed: false, installable: true, size_bytes: 345_065_270 },
+    { id: "asr", name: "Listening (speech recognition)", installed: true, installable: true, size_bytes: 466_000_000 },
+  ];
+
+  it("lists the speech components with honest pinned sizes when chaining from the mic", () => {
+    const html = render({ step: "speech-setup", micChosen: true, speechComponents: missing });
+    expect(html).toContain("Speech setup");
+    expect(html).toContain("Speaking engine (runtime)");
+    expect(html).toContain("not installed (30 MB");
+    expect(html).toContain("not installed (345 MB");
+    // The already-installed component says so; no fake pending state.
+    expect(html).toContain("Listening (speech recognition): <span>installed</span>");
+    // The stepper gained the Speech step only because the mic was chosen.
+    expect(html).toContain(">Speech<");
+  });
+
+  it("does not offer a ready start while opted-in components are missing, but keeps skip clean", () => {
+    const html = render({ step: "speech-setup", micChosen: true, speechComponents: missing });
+    expect(html).toMatch(/disabled=""[^>]*>\s*Start with speech/);
+    expect(html).toContain("Skip for now");
+  });
+
+  it("locks and labels the install button while speech components download", () => {
+    const html = render({
+      step: "speech-setup",
+      micChosen: true,
+      speechInstalling: true,
+      speechComponents: missing,
+    });
+    expect(html).toContain("Installing…");
+    expect(html).toContain("aria-busy");
+  });
+
+  it("offers Start with speech once every component is installed", () => {
+    const all = missing.map((c) => ({ ...c, installed: true }));
+    const html = render({ step: "speech-setup", micChosen: true, speechComponents: all });
+    expect(html).not.toMatch(/disabled=""[^>]*>\s*Start with speech/);
+    // Nothing left to install: the install button is honestly disabled.
+    expect(html).toMatch(/disabled=""[^>]*>\s*Install speech components/);
   });
 });

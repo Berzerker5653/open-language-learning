@@ -1,8 +1,9 @@
 /**
  * UX-001 onboarding flow: privacy-first explanation, local profile
  * (no account), Japanese pack selection/install, skippable microphone
- * setup. Presentational component: state and IPC live in the container
- * so every step is renderable in tests.
+ * setup, and — when the mic is enabled — a speech-setup step for the
+ * speech components (K-72). Presentational component: state and IPC
+ * live in the container so every step is renderable in tests.
  */
 import { progressLine, type EngineProgress } from "./progress";
 
@@ -18,7 +19,26 @@ export interface PackCandidate {
   maturity: string;
 }
 
-export type OnboardingStep = "resume" | "welcome" | "packs" | "microphone" | "done";
+export type OnboardingStep =
+  | "resume"
+  | "welcome"
+  | "packs"
+  | "microphone"
+  | "speech-setup"
+  | "done";
+
+/**
+ * One part of the speech stack (K-72): the sherpa runtime, the Japanese
+ * voice, and recognition. Names are container-chosen; sizes are the
+ * catalog's pinned bytes, so the download cost is honest up front.
+ */
+export interface SpeechComponent {
+  id: string;
+  name: string;
+  installed: boolean;
+  installable: boolean;
+  size_bytes: number;
+}
 
 export interface ProfileSummary {
   id: string;
@@ -38,6 +58,14 @@ export interface OnboardingProps {
   onInstall(id: string): void;
   onEnableMic(): void;
   onSkipMic(): void;
+  onInstallSpeech(): void;
+  onSkipSpeech(): void;
+  onStartSpeech(): void;
+  speechComponents: SpeechComponent[];
+  speechInstalling?: boolean;
+  /** True once the learner answered "yes" to the microphone; adds the
+   * Speech step to the progress stepper (K-72). */
+  micChosen?: boolean;
   onContinue(): void;
   profiles?: ProfileSummary[];
   onResume(id: string): void;
@@ -62,6 +90,9 @@ export function Onboarding(p: OnboardingProps) {
           <li aria-current={p.step === "welcome" ? "step" : undefined}>Welcome</li>
           <li aria-current={p.step === "packs" ? "step" : undefined}>Language</li>
           <li aria-current={p.step === "microphone" ? "step" : undefined}>Microphone</li>
+          {p.micChosen && (
+            <li aria-current={p.step === "speech-setup" ? "step" : undefined}>Speech</li>
+          )}
           <li aria-current={p.step === "done" ? "step" : undefined}>Start</li>
         </ol>
       )}
@@ -202,7 +233,9 @@ export function Onboarding(p: OnboardingProps) {
           <h1>Microphone (optional)</h1>
           <p>
             Speaking activities need a microphone, but it is never required. You can skip this and
-            enable it later in Settings; skipping never blocks progress.
+            enable it later in Settings; skipping never blocks progress. Enabling it continues to
+            a speech setup step — saying "yes" to the microphone never leaves you to find the
+            downloads on your own (K-72).
           </p>
           <div className="btn-row">
             <button type="button" className="btn btn--primary" onClick={p.onEnableMic}>
@@ -214,6 +247,58 @@ export function Onboarding(p: OnboardingProps) {
           </div>
         </div>
       )}
+      {p.step === "speech-setup" && (
+        <div className="card">
+          <h1>Speech setup</h1>
+          <p>
+            Speaking and listening activities use three components downloaded once to this
+            computer. Installing them now is optional — skipping is a clean choice and the app
+            will offer the download wherever an activity needs it — but without them those
+            activities stay text-only.
+          </p>
+          <ul className="speech-components">
+            {p.speechComponents.map((c) => (
+              <li key={c.id}>
+                {c.name}:{" "}
+                {c.installed ? (
+                  <span>installed</span>
+                ) : (
+                  <span>
+                    not installed ({Math.round(c.size_bytes / 1e6)} MB
+                    {c.installable ? "" : ", not downloadable in this build"})
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+          <div className="btn-row">
+            <button
+              type="button"
+              className="btn btn--primary"
+              onClick={p.onInstallSpeech}
+              disabled={
+                p.speechInstalling === true ||
+                p.speechComponents.every((c) => c.installed || !c.installable)
+              }
+              aria-busy={p.speechInstalling === true || undefined}
+            >
+              {p.speechInstalling === true ? "Installing…" : "Install speech components"}
+            </button>
+            <button
+              type="button"
+              className="btn"
+              onClick={p.onStartSpeech}
+              disabled={!p.speechComponents.every((c) => c.installed)}
+            >
+              Start with speech
+            </button>
+            <button type="button" className="btn btn--quiet" onClick={p.onSkipSpeech}>
+              Skip for now
+            </button>
+          </div>
+        </div>
+      )}
+
 
       {p.step === "done" && (
         <div className="card">

@@ -3,6 +3,7 @@ import { AppShell } from "@openlang/ui";
 import {
   Onboarding,
   type OnboardingStep,
+  type SpeechComponent,
   type PackCandidate,
   type PrivacyNotice,
   type ProfileSummary,
@@ -254,6 +255,9 @@ export function App() {
   const [deviceTier, setDeviceTier] = useState<DeviceTier | null>(null);
   const [onboardError, setOnboardError] = useState<string | null>(null);
   const [installingPack, setInstallingPack] = useState<string | null>(null);
+  const [micChosen, setMicChosen] = useState(false);
+  const [speechComponents, setSpeechComponents] = useState<SpeechComponent[]>([]);
+  const [speechInstalling, setSpeechInstalling] = useState(false);
   const [writingTask, setWritingTask] = useState<WritingTaskView | null>(null);
   const [writingScaffold, setWritingScaffold] = useState<{
     reading?: string;
@@ -886,6 +890,69 @@ export function App() {
       }
     }
     setInstalledPacks((prev) => (prev.includes(id) ? prev : [...prev, id]));
+  }
+
+  /** K-72: plain names for the three speech stack components, so the
+   * onboarding step reads as capabilities ("Listening"), not raw catalog
+   * ids the learner cannot act on. */
+  function speechLabel(m: { id: string; runtime: string }): string {
+    if (m.runtime === "whisper.cpp") return "Listening (speech recognition)";
+    if (m.id === "org.openlanguage.speech.sherpa-onnx-runtime")
+      return "Speaking engine (runtime)";
+    if (m.id === "org.openlanguage.speech.kokoro-multi-lang") return "Japanese voice";
+    return m.id;
+  }
+
+  async function loadSpeechComponents() {
+    if (!inv) return;
+    try {
+      const all = (await inv("available_models")) as Array<{
+        id: string;
+        runtime: string;
+        installed: boolean;
+        installable: boolean;
+        size_bytes: number;
+      }>;
+      setSpeechComponents(
+        all.map((m) => ({
+          id: m.id,
+          name: speechLabel(m),
+          installed: m.installed,
+          installable: m.installable,
+          size_bytes: m.size_bytes,
+        })),
+      );
+    } catch {
+      // A failed catalog read leaves the list empty; the step then offers
+      // nothing to install rather than pretending components exist.
+      setSpeechComponents([]);
+    }
+  }
+
+  // K-72: "yes" to the microphone does not end setup — it chains into
+  // the speech setup step, so the downloads are handled (or consciously
+  // skipped) the moment the learner opts into speaking.
+  function chooseMicrophone() {
+    setMicChosen(true);
+    setStep("speech-setup");
+    void loadSpeechComponents();
+  }
+
+  async function installSpeechComponents() {
+    if (!inv) return;
+    setOnboardError(null);
+    setSpeechInstalling(true);
+    try {
+      for (const c of speechComponents.filter((x) => !x.installed && x.installable)) {
+        await inv("install_model", { modelId: c.id });
+      }
+    } catch (e) {
+      setOnboardError(`Speech download failed: ${String(e)}`);
+    } finally {
+      setSpeechInstalling(false);
+      setEngineProgress(null);
+    }
+    await loadSpeechComponents();
   }
 
   async function finishOnboarding(micEnabled: boolean) {
@@ -2049,8 +2116,14 @@ export function App() {
           onCreateProfile={() => void createProfile()}
           onSelectPack={setSelectedPack}
           onInstall={(id) => void install(id)}
-          onEnableMic={() => void finishOnboarding(true)}
+          onEnableMic={chooseMicrophone}
           onSkipMic={() => void finishOnboarding(false)}
+          onInstallSpeech={() => void installSpeechComponents()}
+          onSkipSpeech={() => void finishOnboarding(true)}
+          onStartSpeech={() => void finishOnboarding(true)}
+          speechComponents={speechComponents}
+          speechInstalling={speechInstalling}
+          micChosen={micChosen}
           onContinue={() => setStep("microphone")}
           profiles={profiles}
           onResume={(id) => void resumeProfile(id)}

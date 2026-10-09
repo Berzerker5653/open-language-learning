@@ -105,6 +105,14 @@ const onboarding: OnboardingProps = {
   onInstall: () => {},
   onEnableMic: () => {},
   onSkipMic: () => {},
+  onInstallSpeech: () => {},
+  onSkipSpeech: () => {},
+  onStartSpeech: () => {},
+  speechComponents: [
+    { id: "rt", name: "Speaking engine (runtime)", installed: false, installable: true, size_bytes: 30_454_382 },
+    { id: "voice", name: "Japanese voice", installed: false, installable: true, size_bytes: 345_065_270 },
+    { id: "asr", name: "Listening (speech recognition)", installed: true, installable: true, size_bytes: 466_000_000 },
+  ],
   onContinue: () => {},
   onResume: () => {},
   onCreateNew: () => {},
@@ -197,6 +205,9 @@ const surfaces: Record<string, string> = {
     />,
   ),
   onboarding: renderToStaticMarkup(<Onboarding {...onboarding} />),
+  "onboarding-speech": renderToStaticMarkup(
+    <Onboarding {...onboarding} step="speech-setup" micChosen />,
+  ),
 };
 
 function buttons(html: string): { tag: string; body: string }[] {
