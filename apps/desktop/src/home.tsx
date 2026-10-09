@@ -439,6 +439,11 @@ export function GoalMap({ goals }: { goals: GoalCard[] }) {
               <ul className="goal-list">
                 {goals
                   .filter((g) => (g.band ?? "other") === band)
+                  // K-79: open-before-locked within a band (stable, so the
+                  // pack's own order otherwise stands). Adjacency must never
+                  // imply a parent/child relation the pack data does not
+                  // declare — every viewer reads a flat list as a tree.
+                  .sort((a, b) => Number(a.locked) - Number(b.locked))
                   .map((g) => (
                     <li key={g.id} data-locked={g.locked ? "yes" : "no"}>
                       <strong>{g.description}</strong>
@@ -457,11 +462,19 @@ export function GoalMap({ goals }: { goals: GoalCard[] }) {
                       </ul>
                       {g.locked && (
                         <p className="meta">
-                          Grows with:{" "}
-                          {g.prerequisites
-                            .filter((p) => p.strength === "hard" && !p.satisfied)
-                            .map((p) => `${p.target} (${p.dimension} → ${p.required_state})`)
-                            .join(", ")}
+                          {(() => {
+                            const hard = g.prerequisites.filter((p) => p.strength === "hard");
+                            const missing = hard.filter((p) => !p.satisfied);
+                            const done = hard.length - missing.length;
+                            return (
+                              <>
+                                Grows with ({done} of {hard.length} met):{" "}
+                                {missing
+                                  .map((p) => `${p.target} (${p.dimension} → ${p.required_state})`)
+                                  .join(", ")}
+                              </>
+                            );
+                          })()}
                         </p>
                       )}
                       {!g.assessed && (
