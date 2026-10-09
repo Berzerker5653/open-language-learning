@@ -104,3 +104,12 @@ Template per item:
   `model_dir` + speech pref) whose download UI sits at the bottom of
   the Languages tab — the two paths never meet during setup
 - KANBAN card: K-72
+
+## Ops notes
+
+- ~08:55 the supervised preview wrapper was SIGTERMed (exit 143) right
+  after the W-02 screenshot; a stray app + a stale yesterday-22:43
+  vite kept serving fine. Owner chose a clean supervised restart
+ (kill strays, relaunch `launch-preview.sh` with the SAME
+  `/tmp/lts-walkthrough-data` — profile + installed pack preserved).
+  No findings lost; no code changed.
