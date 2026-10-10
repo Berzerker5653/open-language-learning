@@ -1004,7 +1004,7 @@ the real sysroot WebKit, asserts the repack cannot re-add it). The
 wizard click-through/install leg and ADR-0015 platform status remain
 human-run work.
 
-## 2026-10-09 (latest) — owner-walkthrough fix tranche: gates, ordering, honest audio, one Settings
+## 2026-10-09 — owner-walkthrough fix tranche: gates, ordering, honest audio, one Settings
 
 The approved 2026-10-09 walkthrough cards K-69..K-80 are all implemented
 (K-73 `ccee3f0`, K-74 `435eee1`, K-69 `06edc6b`, K-79 `4330106`, K-71
@@ -1086,3 +1086,94 @@ tagged FACT / `[INFERENCE]` / `[UNCERTAIN]`, with a dead-ends section naming
 what could not be read (Duolingo help is a JS shell; Mondly returns 403; Bunpro
 article bodies are JS-rendered; LingoDeer is marketing-only; end-of-session
 summary screens need a human with the apps installed).
+
+---
+
+## 2026-10-10 (latest) — project-sweep implementation tranche: PS-01..PS-09
+
+The owner approved implementing the 2026-10-09 deep-sweep cards ("Proceed
+with next steps"). Full audit evidence and the per-card gate log live in
+`.project-sweep/runs/2026-10-09-deep/` (untracked; disposition is an owner
+call — the board references it).
+
+**PS-01 + PS-09 — the CI `schemas` job was red twice over at afbe550.**
+`execution_scope.optional_tasks` had never picked up the ADR-0017 flips of
+JA-A1-003/SPEECH-007; and separately the validator's undocumented 2 MB
+data-file cap rejected the committed 3.23 MB ja-JP `media/manifest.jsonl`
+(4,613 entries — first-class per docs/13 "Packs with generated audio";
+next-largest scanned file is 752 KB). The board card listed only the first
+failure because the audit's validator output was truncated. Fix: two ids
+into the scope list; `MAX_DATA_BYTES` 2→8 MB with a docs/13 comment (the
+runaway-file guard stands — the 118 MB jmdict scratch file is gitignored).
+Validator exit 0; `unittest discover -s tools` 37/37 green (669 s).
+
+**PS-02 — honest states on the last three unprotected handlers.**
+`openProgress` got a real try/catch: alert + Retry + a loading line, and
+the summary view is hidden while the read failed — a failed read never
+renders as "no progress yet". `changeBudget` reverts to the previous
+minutes and says so (engine-backed values are only real once
+`practice_plan` returns). `finishPractice`'s plan refresh reports into
+`practiceError`. The Writing route's mutually exclusive error/loaded-empty/
+loading sections enforce the K-76/K-78 rule: "No new writing targets in
+this pack" now requires a successful empty read (`writingLoaded`).
+
+**PS-03 — WCAG 4.1.3 timing, three sites.** The practice verdict region
+now pre-exists grading (empty polite paragraph outside the `graded`
+guard). Implementing it exposed that the audit had mis-recorded Writing
+and Pronunciation as "already persistent": their own a11y pin rendered
+the graded state — a tautology. Both mount-at-mutation bugs fixed
+(permanent polite wrapper) and the pin replaced with one that renders
+the UNGRADED / result-null state.
+
+**PS-04 — one h1 per route.** Promoted at every card-named site:
+Pronunciation, Shadowing, Graded reading, My words, Placement, Kanji,
+Writing (all three states), inline Practice via a new `routeHeading` prop
+(embedded runners deliberately get none — their route section owns the
+h1), and the Writing/Pronunciation route components. The card's settings
+claim was wrong — that route already carries `<h1>Language packs</h1>`
+(language.tsx:180); no second h1 added. The a11y h1 loop now covers
+practice/pronunciation/pronunciation-feedback/writing surfaces; the
+promoted inline App sections are covered by typecheck + review, not the
+static harness (App remains unmountable — rides K-81/decomposition).
+
+**PS-05 — one profile file, honest concurrency.** `busy_timeout(5 s)` is
+now explicit in `from_conn`, with a discovery recorded in the code
+comments: rusqlite 0.37 already defaults connections to 5 s, so the line
+pins the contract rather than fixing a live bug (proved by stash-run:
+the new test passes with and without the line). The permanent test
+`crates/storage/tests/concurrency.rs` pins the contract regardless:
+two Stores on one file interleave writes, a `BEGIN IMMEDIATE`-held lock
+with a blocked writer thread lands its write, four concurrent
+opener-writers all land, and a third connection reads back every row.
+Second launch is now refused politely: `tauri-plugin-single-instance`
+focuses/unminimizes the existing window (Rust-side plugin — no
+capability change).
+
+**PS-06/07/08.** `playBlobUrl` revokes on ended/error/play-rejection (the
+only other revoke, dictation's `attemptUrl`, is a safe no-op now);
+role-less `aria-label`s got real `role="group"` semantics or were removed
+(practice meta panel, word lookup, reading/romaji `<p>`s); the onboarding
+shell's dead `#onboarding` Setup anchor is gone (`nav={[]}`, matching
+the runtime shell).
+
+Backlog trio: unused deps removed (`thiserror` ×2, `lts-domain`) —
+`cargo machete` exit 0; SEC-001 input note written
+(`state/notes/SEC-001-dependency-disposition.md`: 0 vulnerabilities; glib
+RUSTSEC-2024-0429 unreachable from our code and unpatchable inside
+tauri 2.12's gtk 0.18 stack — `cargo update -p glib` locks 0 packages;
+proc-macro-error is build-time only — owner gate stays open, the note is
+input, not self-certification); App.tsx decomposition NOT started, it
+rides the K-81 nav decision.
+
+Verification (all post-change): `cargo fmt --check` / `clippy -D
+warnings` / `test --workspace --locked` / `machete` all exit 0;
+`./scripts/smoke-desktop.sh` `SMOKE OK (12 routes walked)` with max route
+95 ms; apps/desktop `tsc --noEmit` clean and vitest 168/168 incl. every
+new pin; `eslint` clean; prettier clean on source. Delegation note: the
+two fix subagents both hit the 30-min cap mid-flight — their surviving
+diffs were reviewed line-by-line, two compile errors in the new Rust test
+were fixed in-session, and the entire App.tsx batch was done in the main
+session. Gaps stated honestly: handler-level DOM tests are still absent
+by design (node-only vitest, frozen lockfile — no jsdom without an
+owner-approved dependency change); the single-instance behavior itself is
+proven by build + code review, not a headless double-launch.
