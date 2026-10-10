@@ -581,6 +581,18 @@ export function App() {
               note: `route-ms:${mode}:${Math.round(performance.now() - started)}`,
             });
             await inv("smoke_ack", { note: `route:${mode}` });
+            if (mode === "Shadowing") {
+              // Owner finding 8: the pass reported Play/Record as grey and
+              // unclickable. Nothing in the code ever disables them, so the
+              // walk records what the live card actually rendered.
+              const sec = document.querySelector('[aria-label="Shadowing"]');
+              const bs = sec
+                ? Array.from(sec.querySelectorAll("button")).map((b) => b as HTMLButtonElement)
+                : [];
+              await inv("smoke_ack", {
+                note: `shadow-buttons:${bs.length}:${bs.filter((b) => b.disabled).length}`,
+              });
+            }
           }
           // K-63: route switching was reported as feeling dead. Split the cost
           // into the commands a route runs and the paint that follows, because
