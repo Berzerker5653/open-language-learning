@@ -7688,6 +7688,37 @@ mod tests {
     }
 
     #[test]
+    fn reading_lookup_of_the_self_intro_sentence_names_the_word_not_its_interior() {
+        // O-06 2026-10-10: tapping わたしの なまえは タナカです。 surfaced
+        // まえ ("front") — the greedy matcher restarts at every uncovered
+        // character (by K-80 design: the engine keeps no language
+        // analysis), and the lexicon declared no covering form for the
+        // very word this sentence cloze-targets. The fix is content-side:
+        // the pack declares なまえ/名前, and longest-first sorting then
+        // consumes the real word. Pinned against the bundled pack so a
+        // future lexicon prune cannot silently regress it.
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let version = lts_langpack::archive::current_version(
+            "org.openlanguage.ja-jp.reference",
+            &data.join("packs"),
+        )
+        .unwrap();
+        let entries = lexicon_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
+        let spans = sentence_word_spans("わたしの なまえは タナカです。", &entries);
+        let ids: Vec<&str> = spans.iter().map(|e| e.id.as_str()).collect();
+        assert!(
+            ids.contains(&"ja.lex.greetings.namae"),
+            "the word the sentence teaches must be the one shown: {ids:?}"
+        );
+        assert!(
+            !ids.contains(&"ja.lex.play2.mae") && !ids.contains(&"ja.lex.transport.mae"),
+            "the interior of なまえ must never surface as its own word: {ids:?}"
+        );
+    }
+
+    #[test]
     fn bundled_pack_phrase_entries_carry_valid_slots() {
         // The ja-JP pack annotates set phrases with kind/slots; every
         // declared slot must occur verbatim in the primary surface
