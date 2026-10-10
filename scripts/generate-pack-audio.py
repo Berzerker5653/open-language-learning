@@ -48,10 +48,12 @@ import datetime
 import hashlib
 import json
 import math
+import os
 import struct
 import subprocess
 import sys
 import wave
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 DEFAULT_VENDOR = Path.home() / ".cache" / "lts-bench"
@@ -248,6 +250,16 @@ def main() -> int:
         help="skip the loudness normalization applied to every freshly "
         "synthesized file (reuse/hash-match semantics are unchanged)",
     )
+    ap.add_argument(
+        "--jobs",
+        type=int,
+        default=1,
+        help="parallel synthesis workers. Reuse checks stay serial and the "
+        "manifest is still written exactly once at the end; only the TTS "
+        "processes run concurrently, one per asset (2026-10-10: 4,613 assets "
+        "took ~3.5 s each in series — a full regeneration would not fit one "
+        "job otherwise).",
+    )
     args = ap.parse_args()
 
     pack = args.pack
@@ -283,6 +295,7 @@ def main() -> int:
         "voice": args.voice,
         "speed": args.speed,
     }
+    pending: list[dict] = []
     for want in wants:
         out = pack / want["file"]
         prior = previous.get(want["id"])
@@ -298,6 +311,10 @@ def main() -> int:
             rows.append(build_row(want, out, synth, today, args.note))
             reused += 1
             continue
+        pending.append(want)
+
+    def synthesize(want: dict) -> dict | str:
+        out = pack / want["file"]
         cmd = [
             str(runtime),
             f"--kokoro-model={model_dir / 'model.onnx'}",
@@ -310,18 +327,32 @@ def main() -> int:
             f"--output-filename={out}",
             want["speak"],
         ]
-        done = subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
+        # Each worker carries its own onnx process; pinning its thread count
+        # keeps N workers from oversubscribing the machine into a crawl.
+        env = {**os.environ, "OMP_NUM_THREADS": "2", "OMP_THREAD_LIMIT": "2"}
+        done = subprocess.run(
+            cmd, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True, env=env
+        )
         if done.returncode != 0 or not out.exists():
-            failures.append(f"{want['id']}: {done.stderr.strip()[:160] or 'no output file'}")
             if out.exists():
                 out.unlink()
-            continue
+            return f"{want['id']}: {done.stderr.strip()[:160] or 'no output file'}"
         extras = [args.note]
         if not args.no_normalize:
             extras.append(normalize_wav(out) or "normalization skipped (format or silence)")
-        extra = "; ".join(e for e in extras if e) or None
-        rows.append(build_row(want, out, synth, today, extra))
-        generated += 1
+        return build_row(want, out, synth, today, "; ".join(e for e in extras if e) or None)
+
+    if args.jobs > 1:
+        with ThreadPoolExecutor(max_workers=args.jobs) as pool:
+            results = list(pool.map(synthesize, pending))
+    else:
+        results = [synthesize(w) for w in pending]
+    for res in results:
+        if isinstance(res, str):
+            failures.append(res)
+        else:
+            rows.append(res)
+            generated += 1
 
     if args.only:
         # A limited run must not erase the rows it did not touch: a full
