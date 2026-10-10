@@ -22,8 +22,8 @@
 # The base apps/desktop/src-tauri/tauri.conf.json stays payload-free on
 # purpose (bare/dev builds must abstain honestly), so bundle resources for
 # packs exist ONLY in builds that pass this overlay — the same opt-in
-# pattern as scripts/stage-aligner-sidecar.sh and
-# scripts/build-tts-variants.sh.
+# pattern as scripts/stage-aligner-sidecar.sh — the TTS variant it also
+# pointed at was removed with runtime TTS (K-90, ADR-0024).
 set -euo pipefail
 
 cd "$(dirname "$0")/.."

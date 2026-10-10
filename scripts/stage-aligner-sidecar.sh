@@ -103,8 +103,9 @@ usage: scripts/stage-aligner-sidecar.sh <stage|verify|overlay> [options]
            apps/desktop/src-tauri/tauri.conf.json stays payload-free on
            purpose: bare and dev builds never require the payload, and a
            release build opts in with `cargo tauri build --config <overlay>`
-           (the scripts/build-tts-variants.sh pattern). If nothing is staged
-           or any payload fails, overlay exits non-zero: run `stage` first.
+           (ADR-0019; this is the only staged-payload variant since K-90).
+           If nothing is staged or any payload fails, overlay exits
+           non-zero: run `stage` first.
 
 options:
   --platform PLATFORM   Target platform dir. Default: from `uname -m`
@@ -421,8 +422,8 @@ do_verify() {
 
 # do_overlay: emit the tauri config overlay that maps staged payload(s) into
 # bundle resources. The base tauri.conf.json stays payload-free on purpose
-# (bare/dev builds must not require the payload), so this mirrors
-# scripts/build-tts-variants.sh: absolute host paths in the resources map,
+# (bare/dev builds must not require the payload), following the opt-in
+# overlay pattern: absolute host paths in the resources map,
 # and the build command echoed at the end. Only staged platforms get an
 # aligner; unstaged platforms ship without one, they do not claim support.
 do_overlay() {

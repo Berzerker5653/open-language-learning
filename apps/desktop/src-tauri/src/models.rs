@@ -884,21 +884,14 @@ mod tests {
             )
             .is_err()
         );
-        assert!(
-            save_speech_pref(
-                data,
-                &SpeechPref {
-                    asr_model: "org.openlanguage.speech.kokoro-multi-lang".into()
-                }
-            )
-            .is_err()
-        );
     }
 
-    /// D5: the catalog ships two TTS payloads whose release assets have never
-    /// been staged (ADR-0009). They must read as not installable, every other
-    /// entry must carry a real URL, and the installer must refuse the
-    /// unpublished ones before opening a connection.
+    /// D5: an entry whose release assets were never staged must read as not
+    /// installable and the installer must refuse it before opening a
+    /// connection. Since K-90 (ADR-0024) deleted the TTS payloads, the
+    /// shipping catalog holds no unpublished entries at all — the guard is
+    /// still pinned, on a synthetic entry instead of a payload that no
+    /// longer exists.
     #[test]
     fn unpublished_payloads_are_never_offered_or_fetched() {
         let catalog = load_catalog();
@@ -908,13 +901,9 @@ mod tests {
             .filter(|m| !installable(m))
             .map(|m| m.id.as_str())
             .collect();
-        assert_eq!(
-            blocked,
-            vec![
-                "org.openlanguage.speech.kokoro-multi-lang",
-                "org.openlanguage.speech.sherpa-onnx-runtime"
-            ],
-            "exactly the two unstaged payloads may be blocked"
+        assert!(
+            blocked.is_empty(),
+            "the shipped catalog must offer only real, installable models: {blocked:?}"
         );
         for m in catalog.models.iter().filter(|m| installable(m)) {
             for f in &m.files {
@@ -926,16 +915,13 @@ mod tests {
                 );
             }
         }
-        let entry = catalog
-            .models
-            .iter()
-            .find(|m| m.id == "org.openlanguage.speech.kokoro-multi-lang")
-            .unwrap();
+        let mut e = test_entry();
+        e.availability = Some("unpublished".into());
         let tmp = tempfile::tempdir().unwrap();
         let fetched = std::sync::atomic::AtomicUsize::new(0);
         let err = install_model_files_report(
             tmp.path(),
-            entry,
+            &e,
             "2026-10-08T00:00:00Z",
             |_, _dest, _on| {
                 fetched.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
@@ -948,8 +934,13 @@ mod tests {
             err.contains("not published"),
             "refusal must name the reason: {err}"
         );
+        assert_eq!(
+            fetched.load(std::sync::atomic::Ordering::SeqCst),
+            0,
+            "the refusal must come before any connection"
+        );
         assert!(
-            !model_dir(tmp.path(), entry).exists(),
+            !model_dir(tmp.path(), &e).exists(),
             "a refused install must leave nothing behind"
         );
     }

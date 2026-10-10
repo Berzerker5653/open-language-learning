@@ -552,6 +552,14 @@ impl Pack {
     /// has no evidence for. Items that declare no reading at all are counted
     /// in an aggregated `media_item_without_reading` info: their audio can
     /// only be the written form, and authoring readings is human work.
+    ///
+    /// Coverage (K-90, ADR-0024): once the media directory is built, every
+    /// addressable content item needs a row — with runtime synthesis removed
+    /// from the app a missing row is permanent silence, so a built/partially
+    /// built manifest that fails to cover an item is the aggregated error
+    /// `media_asset_missing` in every mode, and a pack with addressable items
+    /// but no media manifest at all is `media_manifest_absent` (an error in
+    /// install mode, info in a source checkout).
     pub fn audit_media(&self, require_present: bool) -> Vec<Diagnostic> {
         let mut diags: Vec<Diagnostic> = Vec::new();
         let rows: Vec<&crate::pack::Instance> = self
@@ -559,7 +567,80 @@ impl Pack {
             .iter()
             .filter(|i| i.schema == "media-asset")
             .collect();
+        // Content items the desktop resolver can address for audio — the SAME
+        // enumeration scripts/generate-pack-audio.py targets() bakes (every
+        // sentence, every contrast item as `{contrast-id}-{index}`, every
+        // lexicon entry). Keep the two in lockstep: a divergence means the
+        // coverage guard below stops matching what learners can actually play.
+        // Speakable readings are script-tagged (`reading` fields; lexicon
+        // `readings[]` entries with `script`); `transliteration_system`
+        // entries are romanization scaffolds, never TTS input.
+        let mut spoken: HashMap<String, Vec<String>> = HashMap::new();
+        for inst in &self.instances {
+            match inst.schema {
+                "sentence" => {
+                    if let Some(id) = inst.value.get("id").and_then(Value::as_str) {
+                        let reading = inst.value.get("reading").and_then(Value::as_str);
+                        spoken.insert(
+                            id.to_string(),
+                            reading.map(str::to_string).into_iter().collect(),
+                        );
+                    }
+                }
+                "phonology-contrast" => {
+                    if let Some(cid) = inst.value.get("id").and_then(Value::as_str) {
+                        if let Some(items) = inst.value.get("items").and_then(Value::as_array) {
+                            for (i, item) in items.iter().enumerate() {
+                                let reading = item.get("reading").and_then(Value::as_str);
+                                spoken.insert(
+                                    format!("{cid}-{i}"),
+                                    reading.map(str::to_string).into_iter().collect(),
+                                );
+                            }
+                        }
+                    }
+                }
+                "lexicon-entry" => {
+                    if let Some(id) = inst.value.get("id").and_then(Value::as_str) {
+                        let readings: Vec<String> = inst
+                            .value
+                            .get("readings")
+                            .and_then(Value::as_array)
+                            .map(|a| {
+                                a.iter()
+                                    .filter(|r| r.get("script").is_some())
+                                    .filter_map(|r| r.get("text").and_then(Value::as_str))
+                                    .map(str::to_string)
+                                    .collect()
+                            })
+                            .unwrap_or_default();
+                        spoken.insert(id.to_string(), readings);
+                    }
+                }
+                _ => {}
+            }
+        }
         if rows.is_empty() {
+            if !spoken.is_empty() {
+                diags.push(Diagnostic::new(
+                    "media/manifest.jsonl",
+                    String::new(),
+                    "media_manifest_absent",
+                    format!(
+                        "the pack declares {} audio-addressable item(s) (sentences, contrast \
+                         items, lexicon entries) but has no media/manifest.jsonl: nothing \
+                         synthesizes at read time anymore (ADR-0024), so every listening \
+                         feature on this pack would be silent; bake audio with \
+                         scripts/generate-pack-audio.py (ADR-0016, ADR-0023)",
+                        spoken.len()
+                    ),
+                    if require_present {
+                        Severity::Error
+                    } else {
+                        Severity::Info
+                    },
+                ));
+            }
             return diags;
         }
         let mut listed: HashSet<String> = HashSet::new();
@@ -619,6 +700,46 @@ impl Pack {
                     Severity::Info
                 },
             ));
+        }
+        // Coverage (K-90/ADR-0024): with runtime synthesis deleted from the
+        // app, a missing manifest row is no longer papered over at read time —
+        // it is permanent silence. A built or partially built media directory
+        // must cover EVERY addressable content item; the unbuilt posture above
+        // already speaks for a checkout where nothing is generated yet.
+        if !unbuilt {
+            let covered: HashSet<String> = rows
+                .iter()
+                .filter_map(|r| r.value.get("id").and_then(Value::as_str))
+                .map(str::to_string)
+                .collect();
+            let mut missing: Vec<&String> =
+                spoken.keys().filter(|id| !covered.contains(*id)).collect();
+            missing.sort();
+            if !missing.is_empty() {
+                let shown = missing
+                    .iter()
+                    .take(8)
+                    .map(|s: &&String| s.as_str())
+                    .collect::<Vec<_>>()
+                    .join(", ");
+                diags.push(Diagnostic::new(
+                    "media/manifest.jsonl",
+                    String::new(),
+                    "media_asset_missing",
+                    format!(
+                        "{} audio-addressable item(s) have no media manifest row, so the app \
+                         has no audio to play for them and nothing synthesizes at read time \
+                         (ADR-0024): {shown}{}; regenerate with scripts/generate-pack-audio.py",
+                        missing.len(),
+                        if missing.len() > 8 {
+                            " (first 8 shown)"
+                        } else {
+                            ""
+                        }
+                    ),
+                    Severity::Error,
+                ));
+            }
         }
         for (row, rel) in planned {
             let path = self.root().join(&rel);
@@ -704,51 +825,6 @@ impl Pack {
         // Speakable readings are script-tagged (`reading` fields; lexicon
         // `readings[]` entries with `script`); `transliteration_system`
         // entries are romanization scaffolds, never TTS input.
-        let mut spoken: HashMap<String, Vec<String>> = HashMap::new();
-        for inst in &self.instances {
-            match inst.schema {
-                "sentence" => {
-                    if let Some(id) = inst.value.get("id").and_then(Value::as_str) {
-                        let reading = inst.value.get("reading").and_then(Value::as_str);
-                        spoken.insert(
-                            id.to_string(),
-                            reading.map(str::to_string).into_iter().collect(),
-                        );
-                    }
-                }
-                "phonology-contrast" => {
-                    if let Some(cid) = inst.value.get("id").and_then(Value::as_str) {
-                        if let Some(items) = inst.value.get("items").and_then(Value::as_array) {
-                            for (i, item) in items.iter().enumerate() {
-                                let reading = item.get("reading").and_then(Value::as_str);
-                                spoken.insert(
-                                    format!("{cid}-{i}"),
-                                    reading.map(str::to_string).into_iter().collect(),
-                                );
-                            }
-                        }
-                    }
-                }
-                "lexicon-entry" => {
-                    if let Some(id) = inst.value.get("id").and_then(Value::as_str) {
-                        let readings: Vec<String> = inst
-                            .value
-                            .get("readings")
-                            .and_then(Value::as_array)
-                            .map(|a| {
-                                a.iter()
-                                    .filter(|r| r.get("script").is_some())
-                                    .filter_map(|r| r.get("text").and_then(Value::as_str))
-                                    .map(str::to_string)
-                                    .collect()
-                            })
-                            .unwrap_or_default();
-                        spoken.insert(id.to_string(), readings);
-                    }
-                }
-                _ => {}
-            }
-        }
         let mut without_reading: Vec<String> = Vec::new();
         for row in &rows {
             if row.value.get("provenance").and_then(Value::as_str) != Some("model-output") {

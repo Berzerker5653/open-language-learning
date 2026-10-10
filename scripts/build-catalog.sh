@@ -26,13 +26,14 @@ build_pack() {
   archives+=("$archive")
 }
 
-# ADR-0016: pack listening audio is generated at build time and never stored in
-# git; the committed artifact is languages/<pack>/media/manifest.jsonl. Opt-in
-# because synthesis needs the pinned sherpa-onnx runtime + Kokoro payload
-# (TTS-002 staging); release builds set WITH_PACK_AUDIO=1 after staging them.
-# Order matters: `langpack build` verifies the manifest against the bytes it is
-# shipping, so generation must precede the archive. Without it the archive is
-# built audio-less and the media manifest is left out (ADR-0016).
+# ADR-0016: pack listening audio is generated at build time and never stored
+# in git; the committed artifact is languages/<pack>/media/manifest.jsonl.
+# For a pack that ships a manifest, generation is now REQUIRED: the archive
+# build refuses an audio-less pack, because ADR-0024 removed the on-demand
+# synthesis that used to make one survivable. The bake runs Qwen3-TTS
+# CustomVoice (ADR-0023) through ~/.venvs/qwen-tts; release builds set
+# WITH_PACK_AUDIO=1 with that venv staged. A pack with no media at all (the
+# ru-RU draft) still archives but fails the install gate until it is baked.
 if [[ "${WITH_PACK_AUDIO:-0}" == "1" ]]; then
   for pack in languages/ja-JP; do
     python3 scripts/generate-pack-audio.py --pack "$pack"

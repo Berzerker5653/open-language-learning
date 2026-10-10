@@ -686,7 +686,7 @@ tasks:
 - id: TTS-002
   milestone: M6
   priority: P1
-  title: "TTS distribution variants: bundled, bare, bring-your-own (ADR-0009)"
+  title: "TTS distribution variants: bundled, bare, bring-your-own (ADR-0009) — SUPERSEDED by ADR-0024 (K-90): the app ships no runtime TTS, so no TTS variants exist"
   dependencies:
   - TTS-001
   read_first:
@@ -716,6 +716,25 @@ tasks:
   - "Whisper round-trip spot check on the namae/gemination probes shows the declared reading, and the owner has listened to a sample of re-baked audio."
   - "Pack version bumped and locally installed for owner verification; publishing stays gated by O-05."
   required_for_desktop_1_0: false
+
+- id: TTS-004
+  milestone: M6
+  priority: P1
+  title: "Remove runtime TTS from the app; packs are the only audio source (owner-approved 2026-10-10, K-90)"
+  dependencies:
+  - TTS-001
+  read_first:
+  - docs/05_SPEECH_SYSTEM.md
+  - docs/adr/0009-offline-model-distribution.md
+  - docs/adr/0016-build-time-pack-audio.md
+  - docs/adr/0023-pack-audio-bake-engine-qwen3-tts.md
+  acceptance:
+  - "Install-mode coverage guard in crates/langpack: every audio-addressable item (the same enumeration scripts/generate-pack-audio.py targets() produces) requires a manifest row plus a present wav, else install fails with media_asset_missing; fixture-pack test proves it."
+  - "No runtime synthesis code, payload (catalog.json Kokoro/espeak entries, ~375 MB), or TTS status UI remains in the app; the honest 'no audio is available for this item yet' path is the only no-media behavior."
+  - "Recognition (whisper) is untouched. ADR-0009 distribution-variant language superseded by ADR-0024; THIRD-PARTY-NOTICES drops app-bundled TTS attributions; docs/05 and docs/13 updated."
+  - "Full gate stays green: cargo test/clippy/fmt, vitest, langpack test 0/0, smoke-desktop."
+  required_for_desktop_1_0: false
+
 - id: POLISH-001
   milestone: M6
   priority: P1
@@ -1531,6 +1550,8 @@ execution_scope:
   - PLAT-002
   - WEB-001
   - TTS-002
+  - TTS-003
+  - TTS-004
   - POLISH-001
   - JA-A1-003
   - SPEECH-007

@@ -14,7 +14,6 @@ mod progress;
 mod scenarios;
 use lts_speech_api::{
     AcousticFeatureProvider, AlignmentProvider, PronunciationInterpreter, ProsodyProvider,
-    SpeechSynthesisProvider,
 };
 use serde::{Deserialize, Serialize};
 use std::path::Path;
@@ -115,8 +114,8 @@ fn manifest_display_name(pack_path: &Path, pack_id: &str) -> String {
 }
 /// K-59 (ADR-0019 variant pattern): where a pack-bundled build's staged
 /// pack sources live (`<resource_dir>/packs`). Set once at startup from
-/// the resource dir, exactly like `BUNDLED_TTS`/`BUNDLED_SIDECAR`; unset
-/// for bare/dev builds, which resolve from the repo tree as always.
+/// the resource dir, exactly like `BUNDLED_SIDECAR`; unset for bare/dev
+/// builds, which resolve from the repo tree as always.
 static BUNDLED_PACKS: std::sync::OnceLock<PathBuf> = std::sync::OnceLock::new();
 
 /// The dev-tree candidate table, named for reuse: production
@@ -628,19 +627,6 @@ struct LexEntry {
     slots: Vec<PhraseSlot>,
 }
 
-impl LexEntry {
-    /// What this entry should be *spoken* as. The declared reading comes
-    /// first: it is the form the pack says the word sounds like, and the only
-    /// form the pinned engine reliably reads — measured, bare kanji is
-    /// out-of-vocabulary (`Ignore OOV`, 0.44 s of noise for `今日は`) while the
-    /// kana reading round-trips through ASR as `こんにちは` (K-56, K-65). The
-    /// written form is the last resort; a romanization is never used, because
-    /// the engine spells it out letter by letter.
-    fn speakable(&self) -> &str {
-        self.reading.as_deref().unwrap_or(&self.surface)
-    }
-}
-
 /// K-44: one variable part of a phrase, as declared by the pack.
 #[derive(serde::Serialize, Clone)]
 struct PhraseSlot {
@@ -694,8 +680,8 @@ fn jsonl_dir_texts(
 /// A reading carrying `transliteration_system` is a romanization, not a
 /// pronunciation, so it is never returned. Otherwise the reading written in
 /// a *different* script from the primary form is the one that explains a
-/// logographic surface — and it is also the only form the pinned engine can
-/// read (see `LexEntry::speakable`).
+/// logographic surface — and it is also the only form the bake engine is
+/// ever fed (K-65: the declared reading, never the surface or a romaji).
 ///
 /// Which scripts exist is the pack's business: nothing here names a script
 /// (the reading-selection `"hiragana"` literal this replaced was itself a
@@ -1896,11 +1882,11 @@ fn add_new_item_candidates(
                 // Introduce unseen words for typed recall. Not for
                 // comprehension-listening: a lexicon entry has no declared
                 // audio (ADR-0016 puts every asset the pack ships in
-                // media/manifest.jsonl, and for ja-JP that is sentences and
-                // contrast items, never words), so scheduling a word as
-                // listening practice guaranteed a TTS dependency and an
-                // abstain on an offline install. Sentences carry the audio
-                // and are scheduled below.
+                // media/manifest.jsonl), and comprehension-listening has
+                // always been scheduled from sentences: before K-89 words
+                // shipped no baked audio at all, so a word scheduled for
+                // listening meant dependence on the (now deleted) runtime
+                // synthesis. Sentences carry the audio and are scheduled below.
                 for m in [lts_domain::ActivityModality::RecallMeaning] {
                     if derived
                         .iter()
@@ -3593,10 +3579,10 @@ fn pronunciation_demo_at(data: &Path, pack_id: &str) -> Result<PronunciationDemo
 }
 
 /// Where a bundled build's aligner payload lives (`<resource_dir>/aligner`).
-/// Set once at startup from the resource dir, exactly like `BUNDLED_TTS`
-/// (runtime input, so `OnceLock` not `LazyLock`); unset for bare/dev builds,
-/// which degrade to the dev vendor tree or to honest abstention
-/// (ADR-0019, following the ADR-0009 variant pattern).
+/// Set once at startup from the resource dir (runtime input, so `OnceLock`
+/// not `LazyLock`); unset for bare/dev builds, which degrade to the dev
+/// vendor tree or to honest abstention (ADR-0019, following the ADR-0009
+/// variant pattern for staged payloads).
 static BUNDLED_SIDECAR: std::sync::OnceLock<PathBuf> = std::sync::OnceLock::new();
 
 /// Which aligner a call actually got, so both feedback and status can name the
@@ -3622,7 +3608,7 @@ enum AlignerMiss {
 /// Single probe for every aligner caller, so "is there an aligner, and where
 /// from" is answered one way everywhere.
 ///
-/// Priority (ADR-0019, mirroring `resolve_tts`):
+/// Priority (ADR-0019 variant pattern):
 /// 1. `bundled` — the release overlay's staged sidecar under
 ///    `<resource_dir>/aligner/<platform>`, gated by the payload manifest:
 ///    schema, component, build platform, file sizes, the CPU check, and one deep
@@ -4950,9 +4936,9 @@ fn contrast_task_build(
 
 /// K-10: audio for the discrimination runner. The played member is
 /// resolved natively with the same deterministic target index the
-/// grader uses, so the transcript never crosses IPC. Media-first:
-/// `media/<contrast-id>-<item-index>.wav` (licensed recordings win),
-/// otherwise local synthesis labeled as model output (TTS-001).
+/// grader uses, so the transcript never crosses IPC. The pack recording
+/// `media/<contrast-id>-<item-index>.wav` is the only audio source
+/// (ADR-0016, ADR-0024): no recording, no audio.
 #[tauri::command]
 fn contrast_audio(profile_id: String, content_id: String) -> Result<SpeechAudio, String> {
     contrast_audio_at(&data_dir(), &profile_id, &content_id)
@@ -4975,23 +4961,10 @@ fn contrast_audio_at(
         .ok_or("unknown contrast")?;
     let target = (fnv1a(content_id) % entry.items.len() as u64) as usize;
     let media_id = format!("{content_id}-{target}");
-    use base64::Engine;
-    let media = data
-        .join("packs")
-        .join(pack_id)
-        .join(&version)
-        .join("media")
-        .join(format!("{media_id}.wav"));
-    if let Ok(bytes) = std::fs::read(&media) {
-        let source =
-            declared_media_provenance(&data.join("packs").join(pack_id).join(&version), &media_id)
-                .unwrap_or("licensed-recording");
-        return Ok(SpeechAudio {
-            wav_b64: base64::engine::general_purpose::STANDARD.encode(bytes),
-            source,
-        });
-    }
-    speech_audio_at(data, pack_id, &media_id, &entry.items[target].text)
+    // One resolver for every audio surface (ADR-0016/ADR-0024): the pack
+    // recording addressed by `{contrast-id}-{item-index}`, or an honest
+    // `media-asset-missing` — never a synthesized stand-in.
+    speech_audio_at(data, pack_id, &media_id)
 }
 
 /// K-11: shadowing (speak-along) targets. FORMATIVE ONLY: this path
@@ -5162,8 +5135,8 @@ fn dictation_task_build(
     Ok((task, entry.text, Vec::new()))
 }
 
-/// K-12: dictation audio. Media-first (`media/<sentence-id>.wav`), TTS
-/// fallback; the transcript is chosen server-side and never crosses IPC.
+/// K-12: dictation audio — the pack recording `media/<sentence-id>.wav`
+/// and nothing else (ADR-0016, ADR-0024); the transcript never crosses IPC.
 #[tauri::command]
 async fn dictation_audio(profile_id: String, content_id: String) -> Result<SpeechAudio, String> {
     tauri::async_runtime::spawn_blocking(move || {
@@ -5183,11 +5156,15 @@ fn dictation_audio_at(
     let pack_id = active.first().ok_or("no active language pack")?;
     let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
         .ok_or("pack not installed")?;
-    let entry = sentence_entries(data, pack_id, &version)?
+    // The item must exist — an unknown id stays an honest "unknown", not a
+    // guess; the audio itself comes from the single media resolver.
+    if !sentence_entries(data, pack_id, &version)?
         .into_iter()
-        .find(|e| e.id == content_id)
-        .ok_or("unknown sentence target")?;
-    speech_audio_at(data, pack_id, content_id, &entry.text)
+        .any(|e| e.id == content_id)
+    {
+        return Err("unknown sentence target".into());
+    }
+    speech_audio_at(data, pack_id, content_id)
 }
 
 /// K-13: graded reading. Stories are pack-declared ordered sentence
@@ -6191,58 +6168,27 @@ fn scenario_finish(
     scenarios::finish_at(&data_dir(), &profile_id, &scenario_id, &sessions)
 }
 
-/// TTS-001 acceptance 3: curated licensed recordings (pack media)
-/// always override synthesis; otherwise synthesize locally and label
-/// the result as model output (docs/10).
+/// ADR-0016/ADR-0024: every audio the app plays is declared by the pack's
+/// media manifest — the manifest's provenance labels it, and there is no
+/// synthesized fallback that could need labeling.
 #[derive(Debug, Serialize)]
 struct SpeechAudio {
     wav_b64: String,
     source: &'static str,
 }
 
-/// K-65b: the learner never sends the string the engine will speak. The
-/// command takes a content id and resolves the speakable string from the pack
-/// record (media first, then the declared reading). Shadowing used to pass the
-/// written form down from the frontend, so nothing native ever checked that
-/// the string was one the engine can read, and any caller could hand it a
-/// romanization.
+/// K-65b in its final form: the learner never sends the string the engine
+/// would speak — there is no engine. Commands take a content id and the
+/// resolver addresses the pack recording by that id alone.
 #[tauri::command]
 async fn speech_audio(pack_id: String, content_id: String) -> Result<SpeechAudio, String> {
-    // Synthesis spawns a runtime subprocess: seconds of work that must
-    // never own the main thread (K-73).
+    // Disk I/O stays off the main thread (K-73), the same shape the
+    // synthesis subprocess needed.
     tauri::async_runtime::spawn_blocking(move || {
-        let version = lts_langpack::archive::current_version(&pack_id, &data_dir().join("packs"))
-            .ok_or("pack not installed")?;
-        let text = speakable_text(&data_dir(), &pack_id, &version, &content_id)?;
-        speech_audio_at(&data_dir(), &pack_id, &content_id, &text)
+        speech_audio_at(&data_dir(), &pack_id, &content_id)
     })
     .await
     .map_err(|e| format!("speech-audio failed: {e}"))?
-}
-
-/// The pack-declared string to synthesize for one content id: media is
-/// preferred upstream (`speech_audio_at` checks the manifest), so this is
-/// only the fallback. Words use `LexEntry::speakable`; sentences use their
-/// declared text. No record means no audio, never a guess.
-fn speakable_text(
-    data: &Path,
-    pack_id: &str,
-    version: &str,
-    content_id: &str,
-) -> Result<String, String> {
-    if let Some(entry) = lexicon_entries(data, pack_id, version)?
-        .into_iter()
-        .find(|e| e.id == content_id)
-    {
-        return Ok(entry.speakable().to_string());
-    }
-    if let Some(entry) = sentence_entries(data, pack_id, version)?
-        .into_iter()
-        .find(|e| e.id == content_id)
-    {
-        return Ok(entry.text);
-    }
-    Err("unknown item".to_string())
 }
 
 /// ADR-0016: audio provenance is DECLARED by the pack, never inferred from a
@@ -6267,108 +6213,28 @@ fn declared_media_provenance(pack_dir: &Path, unit: &str) -> Option<&'static str
     None
 }
 
-/// K-78: the components the model-audio chain needs beyond anything a pack
-/// ships — the sherpa-onnx runtime and the Kokoro Japanese voice payload.
-/// These two kebab tokens are the stable machine-readable answer to "which
-/// component is missing?"; they are the only values `missing` carries. A
-/// failure that cannot be attributed to one of them is a runtime fault and
-/// stays in the `tts:<outcome reason>` vocabulary instead.
-const TTS_MISSING_RUNTIME: &str = "tts-runtime";
-const TTS_MISSING_VOICE: &str = "tts-voice";
+/// K-90/ADR-0024: the app never synthesizes at read time. The only reason
+/// model audio can be missing is that the pack never shipped it. This token
+/// is the stable machine-readable answer the frontend branches on; the
+/// sentence is honest copy, safe to render verbatim.
+const MEDIA_MISSING_CODE: &str = "media-asset-missing";
 
-/// Why model audio cannot be produced, shaped so the frontend can branch on
-/// `missing` and render `message` verbatim. Honesty contract (progress.rs):
-/// the sentence names the absent component — never a bare "unavailable", and
-/// no promise about a download this build may not offer (payload
-/// installability travels in `SpeechReadiness::models`).
-#[derive(Debug, Clone, Serialize)]
-struct AudioBlock {
-    /// Stable component tokens, install order (runtime first). Empty only in
-    /// the split-chain case `audio_block` describes.
-    missing: Vec<&'static str>,
-    /// Stable primary token: the component to fix first.
-    code: &'static str,
-    /// Plain sentence, safe to show exactly as written.
-    message: String,
-}
-
-/// Classify an incomplete chain into tokens plus copy. The sentence names the
-/// components by the names the Speech setup screen uses, so the learner can
-/// match the failure to the thing they are being asked to install.
-fn audio_block(missing: &[&'static str]) -> AudioBlock {
-    let runtime = missing.contains(&TTS_MISSING_RUNTIME);
-    let voice = missing.contains(&TTS_MISSING_VOICE);
-    let (code, message) = match (runtime, voice) {
-        (true, true) => (
-            "tts-runtime-unavailable",
-            "Neither the sherpa-onnx speech runtime nor the Kokoro Japanese voice is installed, so there is no model audio for this item. Install both under Speech setup to hear pronunciation, shadowing, story and dictation audio.",
-        ),
-        (true, false) => (
-            "tts-runtime-unavailable",
-            "The sherpa-onnx speech runtime is not installed, so there is no model audio for this item. Install it under Speech setup to hear pronunciation, shadowing, story and dictation audio.",
-        ),
-        (false, true) => (
-            "tts-voice-unavailable",
-            "The Kokoro Japanese voice is not installed, so there is no model audio for this item. Install it under Speech setup to hear pronunciation, shadowing, story and dictation audio.",
-        ),
-        // Both components exist but no candidate root stages them as one
-        // payload: say that, rather than inventing an absence.
-        (false, false) => (
-            "tts-chain-unavailable",
-            "The sherpa-onnx speech runtime and the Kokoro Japanese voice are present, but no single speech payload stages them together, so there is no model audio. Reinstall both under Speech setup.",
-        ),
-    };
-    AudioBlock {
-        missing: missing.to_vec(),
-        code,
-        message: message.to_string(),
-    }
-}
-
-/// IPC encoding of a blocked audio surface. The stable token comes first,
-/// spelled exactly as before K-78 (`tts-runtime-unavailable`), so existing
-/// copy still matches; the human sentence follows the first `": "`, so the
-/// frontend can show it verbatim or split the token off. The full token list
-/// for the same state comes from `speech_readiness`.
-fn audio_block_error(block: &AudioBlock) -> String {
-    format!("{}: {}", block.code, block.message)
-}
-
-fn speech_audio_at(
-    data: &Path,
-    pack_id: &str,
-    unit_id: &str,
-    text: &str,
-) -> Result<SpeechAudio, String> {
-    let (byo, vendor) = tts_env();
-    speech_audio_at_with(
-        data,
-        byo.as_deref(),
-        vendor.as_deref(),
-        pack_id,
-        unit_id,
-        text,
+fn media_missing_error() -> String {
+    format!(
+        "{MEDIA_MISSING_CODE}: This pack does not ship audio for this item, and the app never \
+         synthesizes speech, so there is nothing to play."
     )
 }
 
-/// Environment-independent core: the resolver roots arrive explicitly, so
-/// every K-78 missing-component reason is reachable from a test without
-/// mutating process state (the same seam style as `resolve_tts_with`).
-fn speech_audio_at_with(
-    data: &Path,
-    byo: Option<&Path>,
-    vendor: Option<&Path>,
-    pack_id: &str,
-    unit_id: &str,
-    text: &str,
-) -> Result<SpeechAudio, String> {
+/// The pack's manifest + wav is the only audio source (ADR-0016, ADR-0024):
+/// media is addressed by content id, provenance is read from the manifest,
+/// and a missing asset is an honest `media-asset-missing` — never a guess,
+/// never a synthesized stand-in.
+fn speech_audio_at(data: &Path, pack_id: &str, unit_id: &str) -> Result<SpeechAudio, String> {
     if !packs::valid_pack_id(pack_id) {
         return Err("pack not allowlisted".into());
     }
     let unit = checked_unit(unit_id)?;
-    if text.is_empty() || text.chars().count() > 400 {
-        return Err("text out of range".into());
-    }
     let data_packs = data.join("packs");
     let version =
         lts_langpack::archive::current_version(pack_id, &data_packs).ok_or("pack not installed")?;
@@ -6378,303 +6244,13 @@ fn speech_audio_at_with(
         .join(&version)
         .join("media")
         .join(format!("{unit}.wav"));
-    if let Ok(bytes) = std::fs::read(&media) {
-        let source =
-            declared_media_provenance(&data_packs.join(pack_id).join(&version), unit.as_str())
-                .unwrap_or("licensed-recording");
-        return Ok(SpeechAudio {
-            wav_b64: base64::engine::general_purpose::STANDARD.encode(bytes),
-            source,
-        });
-    }
-    // K-78: an unavailable chain names the component that is absent. Every
-    // model-audio surface (reference, shadowing, practice, story, dictation
-    // prompt) reaches this line, so the fix is stated once.
-    let Some((_, tts)) = resolve_tts_with(data, byo, vendor) else {
-        return Err(audio_block_error(&audio_block(&tts_chain_missing_with(
-            data, byo, vendor,
-        ))));
-    };
-    let audio = tts.synthesize(
-        text,
-        &lts_speech_api::VoiceRef {
-            model_id: "org.openlanguage.tts.kokoro-multi-lang".into(),
-            voice_id: "37".into(),
-        },
-    );
-    match audio {
-        lts_speech_api::ProviderOutcome::Usable { value, .. } => Ok(SpeechAudio {
-            wav_b64: base64::engine::general_purpose::STANDARD
-                .encode(lts_speech_runtime::to_wav16(&value)),
-            source: "model-output",
-        }),
-        other => Err(format!("tts:{}", outcome_reason(&other))),
-    }
-}
-
-/// Where the TTS-bundled variant's payload lives (`<resource_dir>/tts`).
-/// Set once at startup; unset for bare/dev builds (ADR-0009).
-static BUNDLED_TTS: std::sync::OnceLock<PathBuf> = std::sync::OnceLock::new();
-
-/// The bring-your-own / development-bench roots for this process. Read in one
-/// place so every `*_with` core stays an environment-free test seam.
-fn tts_env() -> (Option<PathBuf>, Option<PathBuf>) {
-    let byo = std::env::var("LTS_TTS_DIR").map(PathBuf::from).ok();
-    let vendor = match std::env::var("LTS_BENCH_VENDOR") {
-        Ok(v) => Some(PathBuf::from(v)),
-        Err(_) => std::env::var("HOME")
-            .ok()
-            .map(|h| PathBuf::from(h).join(".cache/lts-bench")),
-    };
-    (byo, vendor)
-}
-
-/// TTS-002 (ADR-0009): resolve the offline TTS runtime + model from,
-/// in priority order:
-/// 1. `bundled` — the TTS-bundled variant's staged payload
-///    (`<resource_dir>/tts/{sherpa,kokoro}`);
-/// 2. `model` — model-manager installs (bare variant + optional in-app
-///    download of the same payload);
-/// 3. `env` — bring-your-own: `LTS_TTS_DIR` containing `sherpa/` (with
-///    `bin/sherpa-onnx-offline-tts`) and `kokoro/` (the export);
-/// 4. `bench` — development bench vendor (`LTS_BENCH_VENDOR` /
-///    `~/.cache/lts-bench`; never shipped, kept for local benchmarking).
-///
-/// `None` => honest degradation, and K-78 says which component is missing
-/// (`tts-runtime-unavailable` / `tts-voice-unavailable`); absence of TTS
-/// never blocks non-audio practice.
-fn resolve_tts(
-    data: &Path,
-) -> Option<(&'static str, lts_speech_runtime::tts::SherpaSubprocessTts)> {
-    let (byo, vendor) = tts_env();
-    resolve_tts_with(data, byo.as_deref(), vendor.as_deref())
-}
-
-/// Env-independent core: `byo`/`vendor` arrive explicitly so priority
-/// and abstention are testable without mutating process environment.
-fn resolve_tts_with(
-    data: &Path,
-    byo: Option<&Path>,
-    vendor: Option<&Path>,
-) -> Option<(&'static str, lts_speech_runtime::tts::SherpaSubprocessTts)> {
-    for (source, runtime, model) in tts_roots(data, byo, vendor) {
-        let tts = lts_speech_runtime::tts::SherpaSubprocessTts {
-            binary: sherpa_binary(&runtime),
-            model: voice_model(&model),
-            voices: model.join("voices.bin"),
-            tokens: model.join("tokens.txt"),
-            data_dir: model.join("espeak-ng-data"),
-            lang: "ja".into(),
-        };
-        if tts.binary.exists() && tts.model.exists() {
-            return Some((source, tts));
-        }
-    }
-    None
-}
-
-/// The candidate payload roots in the ADR-0009 priority order, enumerated in
-/// one place so "what synthesis would use" and "what the UI says is
-/// installed" cannot drift apart.
-fn tts_roots(
-    data: &Path,
-    byo: Option<&Path>,
-    vendor: Option<&Path>,
-) -> Vec<(&'static str, PathBuf, PathBuf)> {
-    let mut roots: Vec<(&'static str, PathBuf, PathBuf)> = Vec::new();
-    if let Some(b) = BUNDLED_TTS.get() {
-        roots.push(("bundled", b.join("sherpa"), b.join("kokoro")));
-    }
-    let payload = |id: &str| -> Option<PathBuf> {
-        let entry = models::load_catalog()
-            .models
-            .into_iter()
-            .find(|m| m.id == id)?;
-        let p = models::model_dir(data, &entry).join("payload");
-        p.exists().then_some(p)
-    };
-    if let (Some(rt), Some(model)) = (payload(TTS_RUNTIME_ID), payload(TTS_MODEL_ID)) {
-        roots.push(("model", rt, model));
-    }
-    if let Some(dir) = byo {
-        roots.push(("env", dir.join("sherpa"), dir.join("kokoro")));
-    }
-    if let Some(v) = vendor {
-        roots.push((
-            "bench",
-            v.join("sherpa-onnx-v1.13.8-linux-x64-shared"),
-            v.join("kokoro-multi-lang-v1_0"),
-        ));
-    }
-    roots
-}
-
-/// The runtime binary inside a candidate runtime root — the gate that decides
-/// "the sherpa-onnx runtime is installed".
-fn sherpa_binary(runtime: &Path) -> PathBuf {
-    runtime.join("bin/sherpa-onnx-offline-tts")
-}
-
-/// The voice payload inside a candidate model root — the gate that decides
-/// "the Japanese voice is installed". Deliberately the same two gates the
-/// resolver applies, so readiness never promises audio synthesis cannot give.
-fn voice_model(model: &Path) -> PathBuf {
-    model.join("model.onnx")
-}
-
-/// K-78: which chain components are absent, component-level across every
-/// candidate root — that is the answer the learner can act on (install the
-/// runtime, or install the voice). Path checks only: no hashing, no synthesis.
-fn tts_chain_missing_with(
-    data: &Path,
-    byo: Option<&Path>,
-    vendor: Option<&Path>,
-) -> Vec<&'static str> {
-    let roots = tts_roots(data, byo, vendor);
-    let runtime = roots.iter().any(|(_, r, _)| sherpa_binary(r).exists());
-    let voice = roots.iter().any(|(_, _, m)| voice_model(m).exists());
-    let mut missing = Vec::new();
-    if !runtime {
-        missing.push(TTS_MISSING_RUNTIME);
-    }
-    if !voice {
-        missing.push(TTS_MISSING_VOICE);
-    }
-    missing
-}
-
-/// Component attribution the TTS payload requires (ADR-0009): the
-/// espeak-ng GPL-3.0 obligations are carried for the payload, and the
-/// UI must show them whenever a payload is active.
-#[derive(Serialize)]
-struct TtsAttribution {
-    name: &'static str,
-    license: &'static str,
-    role: &'static str,
-}
-
-fn tts_attribution() -> Vec<TtsAttribution> {
-    [
-        ("espeak-ng", "GPL-3.0", "pronunciation data for synthesis"),
-        ("sherpa-onnx", "Apache-2.0", "speech runtime"),
-        ("ONNX Runtime", "MIT", "model inference engine"),
-        ("Kokoro", "Apache-2.0", "Japanese voice model"),
-    ]
-    .into_iter()
-    .map(|(name, license, role)| TtsAttribution {
-        name,
-        license,
-        role,
+    let bytes = std::fs::read(&media).map_err(|_| media_missing_error())?;
+    let source = declared_media_provenance(&data_packs.join(pack_id).join(&version), unit.as_str())
+        .unwrap_or("licensed-recording");
+    Ok(SpeechAudio {
+        wav_b64: base64::engine::general_purpose::STANDARD.encode(bytes),
+        source,
     })
-    .collect()
-}
-
-/// The two directory catalog entries that make up the downloadable TTS
-/// payload (ADR-0009).
-const TTS_RUNTIME_ID: &str = "org.openlanguage.speech.sherpa-onnx-runtime";
-const TTS_MODEL_ID: &str = "org.openlanguage.speech.kokoro-multi-lang";
-
-/// Which TTS payload is active (if any), the install state of the
-/// in-app payload models, and the required attribution.
-#[derive(Serialize)]
-struct TtsStatus {
-    source: &'static str,
-    components: Vec<TtsAttribution>,
-    models: Vec<models::ModelStatus>,
-}
-
-#[tauri::command]
-fn tts_status() -> TtsStatus {
-    let data = data_dir();
-    let source = resolve_tts(&data).map(|(s, _)| s).unwrap_or("none");
-    let models = models::model_status(&data)
-        .into_iter()
-        .filter(|m| m.id == TTS_RUNTIME_ID || m.id == TTS_MODEL_ID)
-        .collect();
-    TtsStatus {
-        components: if source == "none" {
-            Vec::new()
-        } else {
-            tts_attribution()
-        },
-        models,
-        source,
-    }
-}
-
-/// K-78: the state of the model-audio chain in one cheap read, for every
-/// surface that plays model sound (pronunciation reference, shadowing model
-/// play, practice play, story audio, dictation prompt). The rule this exists
-/// to enforce: an unconfigured install must name WHICH component is missing
-/// so the UI can offer a speech-setup affordance — never silence. K-76:
-/// recording is mic-only and never consults this chain, so nothing here
-/// gates it.
-#[derive(Serialize)]
-struct SpeechReadiness {
-    /// A runtime + voice pair resolves: model audio can actually play.
-    available: bool,
-    /// Which root supplies it — `bundled` | `model` | `env` | `bench` — or
-    /// null when the chain is incomplete.
-    source: Option<&'static str>,
-    /// Stable component tokens (empty when available), the same vocabulary
-    /// the audio error tokens report.
-    missing: Vec<&'static str>,
-    /// Plain sentence naming the components, safe to render verbatim.
-    message: String,
-    /// Install state of the two downloadable payloads. Reuses
-    /// `models::model_status`, whose persisted K-74 probe decides trust, so
-    /// this read never re-hashes a payload.
-    models: Vec<models::ModelStatus>,
-}
-
-#[tauri::command]
-fn speech_readiness() -> SpeechReadiness {
-    speech_readiness_at(&data_dir())
-}
-
-fn speech_readiness_at(data: &Path) -> SpeechReadiness {
-    let (byo, vendor) = tts_env();
-    speech_readiness_with(data, byo.as_deref(), vendor.as_deref())
-}
-
-/// Environment-independent core (the same seam style as `resolve_tts_with`):
-/// presence answers come from the resolver roots by path check, payload
-/// install state from the model catalog's K-74 probe.
-fn speech_readiness_with(
-    data: &Path,
-    byo: Option<&Path>,
-    vendor: Option<&Path>,
-) -> SpeechReadiness {
-    let source = resolve_tts_with(data, byo, vendor).map(|(s, _)| s);
-    let block = audio_block(&tts_chain_missing_with(data, byo, vendor));
-    let models = models::model_status(data)
-        .into_iter()
-        .filter(|m| m.id == TTS_RUNTIME_ID || m.id == TTS_MODEL_ID)
-        .collect();
-    let message = match source {
-        Some(s) => format!(
-            "Model audio is ready: the sherpa-onnx speech runtime and the Kokoro Japanese voice are installed ({}).",
-            source_label(s)
-        ),
-        None => block.message,
-    };
-    SpeechReadiness {
-        available: source.is_some(),
-        source,
-        missing: block.missing,
-        message,
-        models,
-    }
-}
-
-/// Where the active payload came from, in words a learner can read.
-fn source_label(source: &'static str) -> &'static str {
-    match source {
-        "bundled" => "this build's bundled speech payload",
-        "model" => "the in-app speech install",
-        "env" => "the speech directory LTS_TTS_DIR points at",
-        _ => "the development bench",
-    }
 }
 
 /// K-02: audio for the listening runner. The active pack and the item's
@@ -6694,13 +6270,10 @@ fn listening_audio_at(
     checked_unit(content_id)?;
     let active = packs::active_pack(data, profile_id)?;
     let pack_id = active.first().ok_or("no active language pack")?;
-    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
-        .ok_or("pack not installed")?;
-    // Both words and sentences are listenable. Media lookup is by content id
-    // (manifest first, ADR-0016); the record's text is only the synthesis
-    // fallback when the pack ships no recording for it.
-    let text = speakable_text(data, pack_id, &version, content_id)?;
-    speech_audio_at(data, pack_id, content_id, &text)
+    // Both words and sentences are listenable. Audio is the pack recording
+    // addressed by content id (manifest + wav, ADR-0016); with no synthesis
+    // fallback (ADR-0024) a missing recording is an honest miss.
+    speech_audio_at(data, pack_id, content_id)
 }
 
 // ---------------------------------------------------------------------------
@@ -6978,12 +6551,8 @@ pub fn run() {
                     _ => PermissionResponse::Deny,
                 })
                 .build()?;
-            // TTS-002 (ADR-0009): the TTS-bundled variant stages its
-            // payload under `<resource_dir>/tts`; bare builds have no
-            // such directory and degrade honestly.
             use tauri::Manager;
             if let Ok(rd) = app.path().resource_dir() {
-                let _ = BUNDLED_TTS.set(rd.join("tts"));
                 // ADR-0019: the aligner-bundled variant stages its payload under
                 // `<resource_dir>/aligner`; a bare build has no such directory and
                 // abstains honestly rather than pretending an ASR exists.
@@ -7028,8 +6597,6 @@ pub fn run() {
             dictation_target,
             reference_audio,
             speech_audio,
-            tts_status,
-            speech_readiness,
             world_state,
             goal_map,
             display_settings,
@@ -7285,215 +6852,25 @@ mod tests {
         assert!(pronunciation_demo_at(data, "org.openlanguage.eo-demo").is_err());
     }
 
+    /// K-90/ADR-0024: with the synthesis chain deleted, "the pack ships no
+    /// recording" is the only missing-audio state, and its answer is an
+    /// honest `media-asset-missing` — it promises no synthesis and suggests
+    /// no payload install.
     #[test]
-    fn resolve_tts_prefers_model_manager_installs() {
-        // ADR-0009: an in-app model install must win over the dev bench
-        // vendor (which may exist on developer machines).
-        let tmp = tempfile::tempdir().unwrap();
-        let data = tmp.path();
-        let rt = data.join("models/org.openlanguage.speech.sherpa-onnx-runtime/1.13.8/payload/bin");
-        std::fs::create_dir_all(&rt).unwrap();
-        std::fs::write(rt.join("sherpa-onnx-offline-tts"), b"fake").unwrap();
-        let model = data.join("models/org.openlanguage.speech.kokoro-multi-lang/1.0.0/payload");
-        std::fs::create_dir_all(&model).unwrap();
-        std::fs::write(model.join("model.onnx"), b"fake").unwrap();
-        let (source, _tts) =
-            resolve_tts_with(data, None, None).expect("model payload must resolve");
-        assert_eq!(source, "model");
-    }
-
-    #[test]
-    fn resolve_tts_abstains_when_no_payload_exists() {
-        // Honest degradation: with no payload anywhere, the resolver
-        // returns None (speech_audio_at maps that to
-        // `tts-runtime-unavailable`) rather than half-configuring.
-        let tmp = tempfile::tempdir().unwrap();
-        assert!(resolve_tts_with(tmp.path(), None, None).is_none());
-    }
-
-    #[test]
-    fn resolve_tts_accepts_bring_your_own_payload() {
-        // ADR-0009: a user-supplied runtime directory resolves without
-        // any model-manager install.
-        let tmp = tempfile::tempdir().unwrap();
-        let data = tmp.path();
-        let byo = tmp.path().join("byo");
-        let rt = byo.join("sherpa/bin");
-        std::fs::create_dir_all(&rt).unwrap();
-        std::fs::write(rt.join("sherpa-onnx-offline-tts"), b"fake").unwrap();
-        let model = byo.join("kokoro");
-        std::fs::create_dir_all(&model).unwrap();
-        std::fs::write(model.join("model.onnx"), b"fake").unwrap();
-        let (source, _tts) =
-            resolve_tts_with(data, Some(&byo), None).expect("byo payload must resolve");
-        assert_eq!(source, "env");
-    }
-
-    /// K-78: an unconfigured chain must name the components. The pre-K-78
-    /// answer was the bare token `tts-runtime-unavailable`, which is why the
-    /// learner heard nothing and learned nothing.
-    #[test]
-    fn speech_audio_names_every_missing_component() {
+    fn speech_audio_reports_an_honest_media_miss_when_the_pack_ships_no_recording() {
         let tmp = tempfile::TempDir::new().unwrap();
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
-        // `ja.lex.demo.konnichiwa` ships no recording, so the synthesis path
-        // is the one taken (media always wins when a pack ships it).
-        let err = speech_audio_at_with(
-            data,
-            None,
-            None,
-            "org.openlanguage.ja-demo",
-            "ja.lex.demo.konnichiwa",
-            "こんにちは",
-        )
-        .expect_err("no payload staged anywhere: no audio");
+        let err = speech_audio_at(data, "org.openlanguage.ja-demo", "ja.lex.demo.never-baked")
+            .expect_err("no manifest row and no wav for this id: no audio");
         let (token, message) = err
             .split_once(": ")
             .expect("stable token, then the sentence");
-        assert_eq!(token, "tts-runtime-unavailable");
+        assert_eq!(token, MEDIA_MISSING_CODE);
+        assert!(message.contains("never synthesizes"), "{message}");
         assert!(
-            message.contains("sherpa-onnx speech runtime")
-                && message.contains("Kokoro Japanese voice"),
-            "the sentence names both absent components: {message}"
-        );
-        assert_eq!(
-            speech_readiness_with(data, None, None).missing,
-            vec![TTS_MISSING_RUNTIME, TTS_MISSING_VOICE]
-        );
-    }
-
-    /// K-78: a staged runtime with no Kokoro payload is a missing VOICE, not
-    /// a generic "no TTS" — the token, the sentence and the readiness list
-    /// must all point at the one component the learner has to install.
-    #[test]
-    fn speech_audio_names_the_missing_japanese_voice() {
-        let tmp = tempfile::TempDir::new().unwrap();
-        let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
-        let byo = data.join("byo");
-        let bin = byo.join("sherpa/bin");
-        std::fs::create_dir_all(&bin).unwrap();
-        std::fs::write(bin.join("sherpa-onnx-offline-tts"), b"fake").unwrap();
-        std::fs::create_dir_all(byo.join("kokoro")).unwrap();
-        let err = speech_audio_at_with(
-            data,
-            Some(&byo),
-            None,
-            "org.openlanguage.ja-demo",
-            "ja.lex.demo.konnichiwa",
-            "こんにちは",
-        )
-        .expect_err("the runtime is staged, the voice is not");
-        let (token, message) = err
-            .split_once(": ")
-            .expect("stable token, then the sentence");
-        assert_eq!(token, "tts-voice-unavailable");
-        assert!(message.contains("Kokoro Japanese voice"), "{message}");
-        assert!(
-            !message.contains("sherpa-onnx speech runtime"),
-            "the installed runtime must not be blamed: {message}"
-        );
-        assert_eq!(
-            speech_readiness_with(data, Some(&byo), None).missing,
-            vec![TTS_MISSING_VOICE]
-        );
-    }
-
-    /// K-78 honesty edge: both components are present, but no single payload
-    /// stages them together. Nothing may be reported as absent; the copy says
-    /// the pair is not staged.
-    #[test]
-    fn speech_audio_names_a_split_chain_instead_of_inventing_an_absence() {
-        let tmp = tempfile::TempDir::new().unwrap();
-        let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
-        let byo = data.join("byo");
-        std::fs::create_dir_all(byo.join("kokoro")).unwrap();
-        std::fs::write(byo.join("kokoro/model.onnx"), b"fake").unwrap();
-        let bench = data.join("bench");
-        let bin = bench.join("sherpa-onnx-v1.13.8-linux-x64-shared/bin");
-        std::fs::create_dir_all(&bin).unwrap();
-        std::fs::write(bin.join("sherpa-onnx-offline-tts"), b"fake").unwrap();
-        let err = speech_audio_at_with(
-            data,
-            Some(&byo),
-            Some(&bench),
-            "org.openlanguage.ja-demo",
-            "ja.lex.demo.konnichiwa",
-            "こんにちは",
-        )
-        .expect_err("no root stages runtime and voice together");
-        let (token, message) = err
-            .split_once(": ")
-            .expect("stable token, then the sentence");
-        assert_eq!(token, "tts-chain-unavailable");
-        assert!(message.contains("stages them together"), "{message}");
-        assert!(
-            speech_readiness_with(data, Some(&byo), Some(&bench))
-                .missing
-                .is_empty(),
-            "neither component is absent"
-        );
-    }
-
-    /// K-78 + K-74: the readiness read names every missing component and
-    /// never starts a verification pass — with no install record there is
-    /// nothing to hash and nothing written beside the payload directory.
-    #[test]
-    fn speech_readiness_names_the_missing_components_without_hashing() {
-        let tmp = tempfile::tempdir().unwrap();
-        let data = tmp.path();
-        let r = speech_readiness_with(data, None, None);
-        assert!(!r.available, "an empty data dir has no chain");
-        assert_eq!(r.source, None);
-        assert_eq!(r.missing, vec![TTS_MISSING_RUNTIME, TTS_MISSING_VOICE]);
-        assert!(
-            r.message.contains("sherpa-onnx speech runtime"),
-            "{}",
-            r.message
-        );
-        assert!(r.message.contains("Kokoro Japanese voice"), "{}", r.message);
-        assert_eq!(
-            r.models.iter().map(|m| m.id.as_str()).collect::<Vec<_>>(),
-            vec![TTS_MODEL_ID, TTS_RUNTIME_ID],
-            "the two payloads, in catalog order"
-        );
-        assert!(r.models.iter().all(|m| !m.installed));
-        assert!(
-            !data
-                .join("models")
-                .join(TTS_RUNTIME_ID)
-                .join("1.13.8")
-                .join("verified.json")
-                .exists()
-        );
-    }
-
-    /// A staged payload pair makes the chain ready. Install state stays the
-    /// catalog's answer (no install record here), which is the design: the
-    /// availability answer comes from the resolver's paths, the verified
-    /// install answer from the K-74 probe — no hashing either way.
-    #[test]
-    fn speech_readiness_reports_a_staged_chain_as_ready() {
-        let tmp = tempfile::tempdir().unwrap();
-        let data = tmp.path();
-        let bin =
-            data.join("models/org.openlanguage.speech.sherpa-onnx-runtime/1.13.8/payload/bin");
-        std::fs::create_dir_all(&bin).unwrap();
-        std::fs::write(bin.join("sherpa-onnx-offline-tts"), b"fake").unwrap();
-        let voice = data.join("models/org.openlanguage.speech.kokoro-multi-lang/1.0.0/payload");
-        std::fs::create_dir_all(&voice).unwrap();
-        std::fs::write(voice.join("model.onnx"), b"fake").unwrap();
-        std::fs::write(voice.join("voices.bin"), b"fake").unwrap();
-        let r = speech_readiness_with(data, None, None);
-        assert!(r.available, "the staged pair resolves");
-        assert_eq!(r.source, Some("model"));
-        assert!(r.missing.is_empty());
-        assert!(r.message.contains("ready"), "{}", r.message);
-        assert!(
-            r.models.iter().all(|m| !m.installed),
-            "presence on disk is not a verified install"
+            !message.contains("Install"),
+            "no payload install is suggested anymore: {message}"
         );
     }
 
@@ -8710,50 +8087,24 @@ mod tests {
     }
 
     #[test]
-    fn speech_audio_prefers_licensed_media_then_synthesizes() {
+    fn speech_audio_serves_pack_media_and_rejects_bad_ids() {
         let tmp = tempfile::TempDir::new().unwrap();
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
-        // Curated licensed recording wins (TTS runtime not needed).
-        let a = speech_audio_at(
-            data,
-            "org.openlanguage.ja-demo",
-            "ja.lex.demo.obasan",
-            "おばさん",
-        )
-        .unwrap();
-        assert_eq!(a.source, "licensed-recording");
+        // The fixture manifest declares these assets model-output (K-90
+        // made demo packs fully covered so they can install at all): the
+        // resolver serves the pack bytes labeled by the manifest, no engine.
+        let a = speech_audio_at(data, "org.openlanguage.ja-demo", "ja.lex.demo.obasan").unwrap();
+        assert_eq!(a.source, "model-output");
         assert!(!a.wav_b64.is_empty());
         // Path safety + allowlist.
-        assert!(speech_audio_at(data, "org.openlanguage.ja-demo", "../etc/passwd", "x").is_err());
-        assert!(speech_audio_at(data, "org.evil.pack", "ja.lex.demo.obasan", "x").is_err());
-
-        // Fallback: no media for konnichiwa -> local synthesis, labeled.
-        let vendor = std::env::var("LTS_BENCH_VENDOR")
-            .map(PathBuf::from)
-            .unwrap_or_else(|_| {
-                PathBuf::from(std::env::var("HOME").unwrap()).join(".cache/lts-bench")
-            });
-        if !vendor.join("kokoro-multi-lang-v1_0/model.onnx").exists() {
-            eprintln!("SKIP: vendor TTS not present");
-            return;
-        }
-        let b = speech_audio_at(
-            data,
-            "org.openlanguage.ja-demo",
-            "ja.lex.demo.konnichiwa",
-            "こんにちは",
-        )
-        .unwrap();
-        assert_eq!(b.source, "model-output");
-        assert!(!b.wav_b64.is_empty());
+        assert!(speech_audio_at(data, "org.openlanguage.ja-demo", "../etc/passwd").is_err());
+        assert!(speech_audio_at(data, "org.evil.pack", "ja.lex.demo.obasan").is_err());
+        // The old third leg — "no media -> synthesize and label" — left with
+        // the synthesis runtime itself (K-90, ADR-0024); the honest-miss
+        // copy is pinned by `speech_audio_reports_an_honest_media_miss...`.
     }
 
-    /// K-65/K-65b: the pinned synthesis engine spells a romanization out
-    /// letter by letter and cannot read a logographic surface at all. The
-    /// reading rule must therefore rank by structure only — this fixture uses
-    /// invented script names on purpose, because naming a real script here
-    /// would mean the engine knew about it.
     #[test]
     fn pick_reading_ranks_by_structure_and_never_returns_a_transliteration() {
         let readings = vec![
@@ -8785,62 +8136,6 @@ mod tests {
     }
 
     #[test]
-    fn speakable_text_prefers_the_declared_reading_over_the_written_form() {
-        let tmp = tempfile::TempDir::new().unwrap();
-        let data = tmp.path();
-        // The demo fixture's logographic entry: written form `私`, declared
-        // reading `わたし`, and a romanization the engine must never be handed
-        // (measured: Kokoro spells romaji out letter by letter — K-65).
-        let demo = "org.openlanguage.ja-demo";
-        install_bundled_pack(data, demo).unwrap();
-        let version =
-            lts_langpack::archive::current_version(demo, &data.join("packs")).expect("version");
-        let text = speakable_text(data, demo, &version, "ja.lex.demo.watashi").unwrap();
-        assert_eq!(text, "わたし", "synthesis speaks the declared reading");
-        assert_ne!(text, "私", "never the written form the engine cannot read");
-        assert_ne!(text, "watashi", "never the romanization");
-        // Sentences synthesize their own declared text.
-        let pack = "org.openlanguage.ja-jp.reference";
-        install_bundled_pack(data, pack).unwrap();
-        let version =
-            lts_langpack::archive::current_version(pack, &data.join("packs")).expect("version");
-        let sentence = sentence_entries(data, pack, &version)
-            .unwrap()
-            .into_iter()
-            .next()
-            .expect("the reference pack declares sentences");
-        assert_eq!(
-            speakable_text(data, pack, &version, &sentence.id).unwrap(),
-            sentence.text
-        );
-        // No record: abstain, never guess.
-        assert_eq!(
-            speakable_text(data, pack, &version, "ja.lex.no.such.entry").unwrap_err(),
-            "unknown item"
-        );
-    }
-
-    #[test]
-    fn an_entry_with_no_declared_reading_falls_back_to_its_written_form() {
-        let entry = LexEntry {
-            id: "ja.lex.test.entry".into(),
-            surface: "logograph".into(),
-            reading: None,
-            romaji: Some("roman".into()),
-            gloss: "gloss".into(),
-            status: "draft".into(),
-            kind: "word".into(),
-            slots: Vec::new(),
-        };
-        assert_eq!(entry.speakable(), "logograph");
-        let entry = LexEntry {
-            reading: Some("phonetic".into()),
-            ..entry
-        };
-        assert_eq!(entry.speakable(), "phonetic");
-    }
-
-    #[test]
     fn media_provenance_comes_from_the_pack_manifest_not_file_presence() {
         // ADR-0016: shipped audio must never surface as a licensed recording just
         // because a file sits in media/. The pack's manifest decides.
@@ -8865,22 +8160,13 @@ mod tests {
             "{\"id\":\"ja.lex.demo.obasan\",\"file\":\"media/ja.lex.demo.obasan.wav\",\"sha256\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"bytes\":16,\"sample_rate\":22050,\"channels\":1,\"provenance\":\"model-output\",\"synthesizer\":{\"runtime\":\"sherpa-onnx-v1.13.8\",\"model\":\"kokoro-multi-lang-v1_1\",\"voice\":\"37\"},\"text\":\"おばさん\",\"generated\":\"2026-10-07\"}\n",
         )
         .unwrap();
-        let declared = speech_audio_at(
-            data,
-            "org.openlanguage.ja-demo",
-            "ja.lex.demo.obasan",
-            "おばさん",
-        )
-        .expect("declared generated asset");
+        let declared = speech_audio_at(data, "org.openlanguage.ja-demo", "ja.lex.demo.obasan")
+            .expect("declared generated asset");
         assert_eq!(declared.source, "model-output");
         // An asset the manifest never mentions keeps the pre-manifest convention.
-        let undeclared = speech_audio_at(
-            data,
-            "org.openlanguage.ja-demo",
-            "ja.lex.demo.konnichiwa",
-            "こんにちは",
-        )
-        .expect("curated asset");
+        let undeclared =
+            speech_audio_at(data, "org.openlanguage.ja-demo", "ja.lex.demo.konnichiwa")
+                .expect("curated asset");
         assert_eq!(undeclared.source, "licensed-recording");
     }
 

@@ -44,7 +44,11 @@ jobs:
           cargo run -q -p lts-langpack-cli -- audit-licenses languages/ja-JP
           cargo run -q -p lts-langpack-cli -- validate languages/ru-RU
           cargo run -q -p lts-langpack-cli -- lint languages/ru-RU
-          cargo run -q -p lts-langpack-cli -- test languages/ru-RU
+          # install-mode `test` is NOT run for ru-RU either (K-90/ADR-0024):
+          # the ru pack has no baked audio yet, and with runtime synthesis
+          # removed from the app an audio-less pack cannot pass the install
+          # gate (media_manifest_absent). Re-enable this line once
+          # scripts/generate-pack-audio.py has produced ru-RU media.
           cargo run -q -p lts-langpack-cli -- lint tools/pack-templates/example-pack
 
   web:

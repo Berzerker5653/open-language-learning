@@ -66,6 +66,15 @@ fn pack_with(dir: &Path, rows: &[String], files: &[(&str, Vec<u8>)]) -> Pack {
     let seed =
         PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/packs/valid-minimal");
     copy_dir(&seed, dir);
+    // Tests here author their own rows over files that deliberately resolve to
+    // nothing, so drop the fixture's own content and media: its covered `hola`
+    // entry would otherwise show up as uncovered-addressable noise (K-90).
+    for d in ["lexicon", "sentences", "phonology", "media"] {
+        let p = dir.join(d);
+        if p.exists() {
+            fs::remove_dir_all(&p).expect("clear seed dir");
+        }
+    }
     let media = dir.join("media");
     fs::create_dir_all(&media).expect("create media dir");
     let joined: String = rows.iter().map(|r| format!("{r}\n")).collect();
@@ -256,10 +265,10 @@ fn drifting_media_is_refused_by_build() {
 }
 
 #[test]
-fn an_unbuilt_pack_builds_an_honest_audio_less_archive() {
-    // Every fresh checkout is in this state: the .wav bytes are gitignored
-    // (ADR-0016). Refusing to build would make the pack uninstallable anywhere,
-    // so build drops the manifest rather than shipping a promise it cannot keep.
+fn an_unbuilt_pack_never_builds_since_nothing_falls_back_anymore() {
+    // The old policy shipped an audio-less archive because the app could
+    // synthesize on demand. ADR-0024 removed runtime synthesis: such an
+    // archive is a silent pack, so build refuses it outright (K-90).
     let tmp = tempfile::tempdir().unwrap();
     let declared = hex_sha256(&wav_bytes(b"hello"));
     let pack_dir = tmp.path().to_path_buf();
@@ -273,24 +282,107 @@ fn an_unbuilt_pack_builds_an_honest_audio_less_archive() {
         )],
         &[],
     );
-    let (bytes, _) =
-        lts_langpack::archive::build(&pack_dir).expect("an audio-less build must succeed");
-    let am = lts_langpack::archive::inspect(&bytes).expect("inspect the built archive");
+    let err = lts_langpack::archive::build(&pack_dir)
+        .expect_err("build must refuse an archive that could only ship silence");
     assert!(
-        !am.files.iter().any(|f| f.path == "media/manifest.jsonl"),
-        "an archive that ships no audio must not carry a media manifest: {:?}",
-        am.files
-            .iter()
-            .map(|f| f.path.clone())
-            .collect::<Vec<String>>()
+        err.contains("generate-pack-audio") && err.contains("ADR-0024"),
+        "the refusal must point at the bake step: {err}"
     );
-    let store = tempfile::tempdir().unwrap();
-    let outcome =
-        lts_langpack::archive::install(&bytes, store.path()).expect("install must accept it");
+}
+
+#[test]
+fn a_built_manifest_that_misses_an_addressable_item_fails_the_install_gate() {
+    // K-90: with runtime synthesis gone, one uncovered sentence is permanent
+    // silence — the install gate must refuse the pack, naming the item.
+    let tmp = tempfile::tempdir().unwrap();
+    let covered = r#"{"id":"es.demo.one","status":"draft","text":"uno","reading":"uno","sources":["test-source"]}"#;
+    let uncovered = r#"{"id":"es.demo.two","status":"draft","text":"dos","reading":"dos","sources":["test-source"]}"#;
+    let body = wav_bytes(b"uno");
+    let sha = hex_sha256(&body);
+    let len = body.len() as u64;
+    let pack = pack_with_content(
+        tmp.path(),
+        &[
+            ("sentences/a.jsonl", covered),
+            ("sentences/b.jsonl", uncovered),
+        ],
+        &[row_text(
+            "es.demo.one",
+            "media/es.demo.one.wav",
+            &sha,
+            len,
+            "uno",
+        )],
+        &[("es.demo.one.wav", body)],
+    );
+    let diags = pack.audit_media(true);
+    let miss: Vec<_> = diags
+        .iter()
+        .filter(|d| d.code == "media_asset_missing")
+        .collect();
+    assert_eq!(miss.len(), 1, "one aggregated coverage error: {diags:?}");
+    assert_eq!(miss[0].severity, Severity::Error);
+    assert!(miss[0].message.contains("es.demo.two"), "{miss:?}");
     assert!(
-        !outcome.directory.join("media/manifest.jsonl").exists(),
-        "installed copy must match the archive: {:?}",
-        outcome.directory
+        !miss[0].message.contains("es.demo.one"),
+        "covered item must not be named: {miss:?}"
+    );
+    // The refusal is not install-mode-only: a built manifest that describes
+    // only part of the pack's audio describes it falsely in every posture.
+    assert!(
+        pack.audit_media(false)
+            .iter()
+            .any(|d| d.code == "media_asset_missing" && d.severity == Severity::Error),
+        "coverage also fails non-install audits"
+    );
+    // An unbuilt checkout stays a single aggregated posture statement, not a
+    // per-item storm (media_unbuilt already speaks for it).
+    let unbuilt = pack_with_content(
+        tmp.path().join("unbuilt").as_path(),
+        &[
+            ("sentences/a.jsonl", covered),
+            ("sentences/b.jsonl", uncovered),
+        ],
+        &[row_text(
+            "es.demo.one",
+            "media/es.demo.one.wav",
+            &sha,
+            len,
+            "uno",
+        )],
+        &[],
+    );
+    assert!(
+        unbuilt
+            .audit_media(true)
+            .iter()
+            .filter(|d| d.severity == Severity::Error)
+            .all(|d| d.code == "media_unbuilt"),
+        "unbuilt posture, no coverage storm: {:?}",
+        unbuilt.audit_media(true)
+    );
+}
+
+#[test]
+fn a_pack_with_audio_addressable_items_and_no_media_manifest_fails_install() {
+    // K-90: before ADR-0024 such a pack "worked" via runtime synthesis; now it
+    // would silently ship nothing playable.
+    let tmp = tempfile::tempdir().unwrap();
+    let sentence = r#"{"id":"es.demo.greet","status":"draft","text":"hola","reading":"hola","sources":["test-source"]}"#;
+    let pack = pack_with_content(tmp.path(), &[("sentences/a.jsonl", sentence)], &[], &[]);
+    let install = pack.audit_media(true);
+    assert!(
+        install
+            .iter()
+            .any(|d| d.code == "media_manifest_absent" && d.severity == Severity::Error),
+        "install must refuse: {install:?}"
+    );
+    let scaffold = pack.audit_media(false);
+    assert!(
+        scaffold
+            .iter()
+            .any(|d| d.code == "media_manifest_absent" && d.severity == Severity::Info),
+        "a checkout may state it as info: {scaffold:?}"
     );
 }
 
@@ -330,6 +422,16 @@ fn pack_with_content(
     let seed =
         PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/packs/valid-minimal");
     copy_dir(&seed, dir);
+    // The seed fixture is fully covered for media (K-90 install gate); these
+    // tests author their OWN content and rows, so drop the fixture's content
+    // shards and media directory — otherwise the fixture's items appear as
+    // uncovered addressable noise in every assertion here.
+    for d in ["lexicon", "sentences", "phonology", "media"] {
+        let p = dir.join(d);
+        if p.exists() {
+            fs::remove_dir_all(&p).expect("clear seed dir");
+        }
+    }
     for (rel, line) in content {
         let path = dir.join(rel);
         fs::create_dir_all(path.parent().unwrap()).expect("create content dir");

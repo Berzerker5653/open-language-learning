@@ -85,46 +85,6 @@
       "license_code": "Apache-2.0",
       "license_model": "OpenAI Whisper weights (upstream terms recorded)",
       "source": "https://github.com/k2-fsa/sherpa-onnx"
-    },
-    {
-      "id": "org.openlanguage.speech.kokoro-multi-lang",
-      "version": "1.0.0",
-      "runtime": "sherpa-onnx",
-      "role": "synthesis",
-      "tier": "development",
-      "files": [
-        {
-          "path": "payload",
-          "url": "https://PENDING-RELEASE-URL/tts/kokoro-multi-lang-v1_0.zip",
-          "sha256": "99b5c311306e674c502b0dd390dde81f6cee4a2f9b71329129c671548f4e2b7d",
-          "size_bytes": 345065270,
-          "dir": true
-        }
-      ],
-      "license_code": "Apache-2.0",
-      "license_model": "Kokoro weights Apache-2.0; embedded espeak-ng-data is GPL-3.0 (payload carries the notices and source offer)",
-      "source": "https://github.com/k2-fsa/sherpa-onnx",
-      "availability": "unpublished"
-    },
-    {
-      "id": "org.openlanguage.speech.sherpa-onnx-runtime",
-      "version": "1.13.8",
-      "runtime": "sherpa-onnx",
-      "role": "synthesis",
-      "tier": "development",
-      "files": [
-        {
-          "path": "payload",
-          "url": "https://PENDING-RELEASE-URL/tts/sherpa-onnx-v1.13.8-linux-x64-shared.zip",
-          "sha256": "8157f4a2c689314f44f80cf2fc4e9054cc18d5127dd6d11d9a9eb354f06ce713",
-          "size_bytes": 30454382,
-          "dir": true
-        }
-      ],
-      "license_code": "Apache-2.0",
-      "license_model": "sherpa-onnx Apache-2.0; bundles ONNX Runtime (MIT), links espeak-ng (GPL-3.0). linux-x64 only.",
-      "source": "https://github.com/k2-fsa/sherpa-onnx",
-      "availability": "unpublished"
     }
   ]
 }
