@@ -34,9 +34,10 @@ Define stable provider contracts for:
 - `AcousticFeatureProvider`
 - `ProsodyProvider`
 - `PronunciationInterpreter`
-- `SpeechSynthesisProvider`
 
 Implementations may be native libraries, ONNX models, WASM, or optional cloud adapters.
+
+There is no in-app speech-synthesis provider: the app performs no speech synthesis at read time (ADR-0024). Synthesis happens at pack build time and reaches the app only as baked language-pack media.
 
 Provider results must distinguish `usable`, `quality-rejected`, `utterance-mismatch`, `unsupported`, `provider-error`, and `abstained` outcomes. Preserve per-stage reliability and reason codes instead of treating every failure as a learner error. A raw provider score is not automatically a calibrated probability and cannot be compared with another provider's score without validation.
 
@@ -166,11 +167,14 @@ Calibration evidence must identify the exact provider/model/feature, their versi
 
 ## Reference audio
 
-Preferred hierarchy:
+The audio a learner hears is baked language-pack media, and that is the whole of it: the app performs no speech synthesis at read time (ADR-0024). The former resolution layers — bundled TTS payload, model-manager synthesis download, bring-your-own `LTS_TTS_DIR`, development bench — and the on-demand synthesis fallback are removed.
 
-1. appropriately licensed human recording for core curriculum;
-2. validated high-quality local TTS for scalable variations;
-3. system TTS fallback where quality is acceptable.
+Audio is made at pack build time: `scripts/generate-pack-audio.py` synthesizes every audio-addressable item with the ADR-0023 engine (Qwen3-TTS CustomVoice), the pack's `media/manifest.jsonl` records each asset (content id, file, hash, sample rate, provenance), and a pack whose media leaves an addressable item uncovered fails the install/build coverage gate (docs/13). At read time the resolver looks the content id up in its manifest row and plays the row's `file` (`{id}.wav` fallback for pre-ADR-0016 packs). On a miss it reports the honest answer — `media-asset-missing: This pack does not ship audio for this item, and the app never synthesizes speech, so there is nothing to play.` — and the scheduler refuses to plan a silent item as a listening activity. The message must never promise synthesis; a media miss is the normal state of hand-authored dev packs and of any checkout that has not run the generator.
+
+Preferred sources for core-curriculum audio:
+
+1. appropriately licensed human recording for core curriculum (ADR-0016's honest ceiling, unchanged);
+2. baked model-output media that cleared the ADR-0023 ASR round-trip QA gate, with the engine, text and identity recorded in the manifest.
 
 Synthetic audio must be tagged so it can be audited. TTS provider and voice licenses are separate concerns.
 
@@ -191,6 +195,8 @@ Do not bundle every model in the base app. Use signed/versioned downloadable mod
 - expected quality tier.
 
 The app supports `compact`, `recommended`, and optionally `high-quality` profiles where useful.
+
+The download channel carries recognition payloads only (`whisper-ggml` tiny/base/small, `sherpa-whisper-tiny`); ADR-0024 removed the synthesis entries from the catalog, and pack media — not a downloadable synthesizer — is the audio source.
 
 The alignment sidecar is the one deliberate exception to the download-only rule: shipped Linux desktop builds bundle the pinned whisper.cpp runtime and its `ggml-tiny` weights in the app payload instead of waiting on a model-manager download (ADR-0019). It is a fixed hash-pinned payload with a declared CPU floor, not a selectable bundle; selectable larger models still arrive through the model-manager channel.
 

@@ -1,6 +1,10 @@
 # ADR 0016: Pack-shipped model-output audio for the listening modality
 
-Status: Accepted (owner decision 2026-10-07)
+Status: Accepted (owner decision 2026-10-07); amended by ADR-0024
+(2026-10-10): pack media is now the app's only speech audio — the
+on-demand runtime-synthesis fallback this ADR kept for uncovered items is
+deleted, and the media-coverage audit gate enforces that every addressable
+item is baked.
 Date: 2026-10-07
 
 ## Context

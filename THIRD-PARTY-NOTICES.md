@@ -23,31 +23,49 @@ Apache-2.0 licensed (see each crate's `Cargo.toml` / each package's
 ## Speech models and runtimes (downloaded on demand, never bundled)
 
 The base app ships zero model bytes. The pinned catalog
-(`apps/desktop/src-tauri/src/models/catalog.json`) offers:
+(`apps/desktop/src-tauri/models/catalog.json`) offers:
 
 - `whisper.cpp` (MIT) and its `ggml-tiny.bin` model (MIT) — fallback ASR
 - `sherpa-onnx` (Apache-2.0) and the `sherpa-onnx-whisper-tiny` model
   (MIT) — default ASR
 - ONNX Runtime (MIT), pulled in by sherpa-onnx builds
 
-### Kokoro TTS chain — NOT in distributable builds (GPLv3 component)
+The catalog names recognition payloads only: ADR-0024 removed the synthesis
+entries, and every clip the app plays is baked language-pack media under the
+pack's own content licenses (see Language content below).
 
-The dev-only TTS provider uses `kokoro-multi-lang-v1_0` (Apache-2.0 model,
-verified from its shipped LICENSE) run by a sherpa-onnx binary that bundles
-**espeak-ng-data (GPLv3)**. Distribution of that binary/data combination
-carries GPLv3 obligations that are not cleared. Decision (owner direction
-2026-10-03): the TTS provider stays out of distributable builds until
-licensing is cleared or a compatible provider replaces it; the rest of the
-app is unaffected. Full audit and alternatives:
-`docs/provenance/speech-distribution-audit.md`.
+## Build-time tooling / historical components (not distributed)
+
+Nothing below ships in the app or in model downloads; these entries record
+what past builds carried and what runs only on build machines (ADR-0024).
+
+- **Qwen3-TTS CustomVoice (Apache-2.0)** — the pack-audio bake engine
+  (ADR-0023). `scripts/generate-pack-audio.py` runs it on build machines;
+  its **output** ships as language-pack media, labeled `model-output` with
+  engine, text and identity recorded in `media/manifest.jsonl`. The model
+  itself is never distributed and never runs on a user's machine.
+- **Kokoro TTS chain (historical)** — past dev and TTS-variant builds used
+  `kokoro-multi-lang-v1_0` (Apache-2.0 model, verified from its shipped
+  LICENSE) run by a sherpa-onnx binary that bundles **espeak-ng-data
+  (GPLv3)**. ADR-0024 removed runtime synthesis: neither the Kokoro runtime
+  closure nor espeak-ng-data is distributed, the model catalog names no
+  synthesis payload, and the GPLv3 payload-scoped obligations ADR-0009
+  carried for the TTS-bundled variant — the source offer in the staged
+  `NOTICE.md`, component license texts, attribution UI entries — retired
+  with the variant axis. No GPL source-offer obligation attaches to the
+  shipped app. Full audit and alternatives:
+  `docs/provenance/speech-distribution-audit.md`.
+- **espeak-ng-data (GPLv3)** — appeared only inside the retired Kokoro
+  runtime closure above; the single app package ships no GPL-licensed
+  component.
 
 ## Language content
 
 - `tests/fixtures/packs/ja-demo`: glosses derived from JMdict/EDRDG
   (CC-BY-SA-4.0, attribution: Electronic Dictionary Research and
   Development Group; share-alike applies to the derived lexicon data).
-  Pack media files are synthesized with Kokoro (Apache-2.0 model) and are
-  labeled `model-output` in the pack's license records.
+  Pack media files are test-fixture placeholder audio (`fixture-silence`
+  manifest rows) labeled `model-output` in `media/manifest.jsonl`.
 - `languages/ja-JP` (draft reference pack): project-original seed content;
   provenance analysis in `docs/provenance/ja-jp-draft-content.md`. Its
   content license is tracked in `languages/ja-JP/LICENSES.yaml` and is

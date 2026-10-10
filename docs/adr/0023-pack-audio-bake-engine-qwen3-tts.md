@@ -5,6 +5,9 @@
 Accepted (owner decision 2026-10-10: "Lets lock in Qwen as the main TTS").
 Supersedes only the *engine* choice of ADR-0016 (which still governs the
 build-time-bake mechanism, manifest provenance, and non-committed binaries).
+Amended by ADR-0024 (2026-10-10): the runtime fallback this ADR inherited
+from ADR-0016 is deleted — the bake engine now speaks for 100% of the app's
+audio, with the install-time coverage gate in place of the fallback.
 
 ## Context
 

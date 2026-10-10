@@ -1,6 +1,10 @@
 # ADR 0009: TTS distribution variants (bundled, bare, bring-your-own)
 
-Status: Accepted
+Status: Superseded in part — ADR-0024 (2026-10-10) deleted runtime TTS from the
+app, so the variant axis, the TTS payload entries, the bring-your-own TTS
+directory, and the payload-scoped GPL surface no longer exist; the
+directory-capable model catalog machinery this ADR built remains, now serving
+recognition models only.
 Date: 2026-10-04
 
 ## Context

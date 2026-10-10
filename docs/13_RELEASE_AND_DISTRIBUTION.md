@@ -46,51 +46,44 @@ driver and under Xvfb it fails (`Failed to create GBM buffer of size WxH: Invali
 blank window). The binary forces `WEBKIT_DISABLE_DMABUF_RENDERER=1` itself unless the operator
 already set it (`=0` asks for the accelerated path back); the xvfb `desktop-smoke` job rides it.
 
-### TTS distribution variants (ADR-0009, owner decision 2026-10-04)
+### Single app package (ADR-0024, owner decision 2026-10-10)
 
-Downloads come in two variants, same binary, different staged resources:
+There is one app package. The TTS-bundled versus bare variant axis of
+ADR-0009 is retired: no staged TTS payload, no
+`scripts/build-tts-variants.sh`, no `dist/variants/tauri.tts.json`
+overlay, no bring-your-own `LTS_TTS_DIR`, and no optional in-app
+synthesis-model download. The app performs no speech synthesis at read
+time; every clip a learner hears is baked language-pack media
+(ADR-0016/ADR-0023, docs/05).
 
-- **TTS variant**: ships the offline synthesis payload (sherpa-onnx
-  runtime, Kokoro model/voices, espeak-ng-data). The espeak-ng GPL-3.0
-  obligations (source offer, component license texts, attribution UI
-  entries) are carried for this variant's payload only.
-- **Bare variant**: no TTS payload; audio-dependent features degrade
-  honestly and never block non-audio practice. Users who reject GPL
-  components or want their own synthesis use this variant, optionally
-  pointing at a user-supplied local TTS runtime (documented config), or
-  installing the TTS payload later as an optional in-app model download
-  (TTS-002).
+The shipped payload no longer carries the sherpa-onnx TTS runtime, the
+Kokoro model/voices, or espeak-ng-data, and the model catalog's two
+synthesis entries (`org.openlanguage.speech.kokoro-multi-lang`,
+`org.openlanguage.speech.sherpa-onnx-runtime`) are gone; the catalog
+keeps recognition entries only (`whisper-ggml` tiny/base/small and
+`sherpa-whisper-tiny`). That takes roughly 400 MB off the app download;
+language packs are unchanged in size. Because the app ships no GPL
+payload, the espeak-ng GPL-3.0 obligations ADR-0009 carried
+payload-scoped for the TTS variant — source offer, component license
+texts, attribution UI entries — retire, and no GPL source offer ships
+with the app; `THIRD-PARTY-NOTICES.md` keeps the Kokoro/espeak-ng
+entries as build-time/historical notes. The application's own license
+remains independent.
 
-Build mechanics: `scripts/build-tts-variants.sh` stages the payload
-(runtime + model + license texts + `NOTICE.md` source offer) and emits
-the Tauri config overlay; the bare variant is the default config. The
-app resolves TTS in priority order: bundled payload → model-manager
-installs (in-app download of the same payload, pinned as directory
-catalog entries) → bring-your-own `LTS_TTS_DIR` → development bench
-vendor (never shipped). Bring-your-own layout:
-
-```
-$LTS_TTS_DIR/sherpa/bin/sherpa-onnx-offline-tts   # any local TTS runtime build
-$LTS_TTS_DIR/kokoro/model.onnx                    # + voices.bin, tokens.txt,
-                                                  #   espeak-ng-data/ (or your own)
-```
-
-When no source resolves, audio features report
-`tts-runtime-unavailable` and non-audio practice is unaffected.
-
-Variant builds and their notices are release-gated (REL-001/O-04); the
-application's own license remains independent of optional payloads.
+A user who installed the old synthesis payloads keeps them as dead
+bytes: the catalog no longer names them, so they are never read,
+updated, or removed automatically.
 
 ### Aligner sidecar payload (ADR-0019, owner decision 2026-10-08)
 
-Speech output has two variants; speech input (constrained alignment
-for pronunciation feedback and dictation) is an independent payload
-axis on the same binary: **aligner-bundled** or bare. Bare and dev
-builds — the default config — carry no aligner runtime and abstain
-honestly with `aligner-unavailable`, so the base
+Speech input (constrained alignment for pronunciation feedback and
+dictation) is a payload axis on the one binary (ADR-0024):
+**aligner-bundled** or bare. Bare and dev builds — the default config —
+carry no aligner runtime and abstain honestly with
+`aligner-unavailable`, so the base
 `apps/desktop/src-tauri/tauri.conf.json` must stay payload-free on
-purpose; a release build opts in through an overlay, the
-`scripts/build-tts-variants.sh` pattern.
+purpose; a release build opts in through the overlay emitted by
+`scripts/stage-aligner-sidecar.sh overlay`.
 
 The release sequence is stage, then overlay, then build with that
 overlay:
@@ -236,7 +229,7 @@ Pack resources exist **only** in builds that pass the pack overlay: the
 base `tauri.conf.json` stays payload-free on purpose and bare/dev builds
 keep abstaining honestly. `stage` refuses to stage anything its
 `validate --mode install` gate rejects (installable gate, incl. the
-ADR-0016 media pairing gate); it is idempotent — a re-run verifies and
+ADR-0016 media pairing and ADR-0024 media coverage gates); it is idempotent — a re-run verifies and
 keeps. `overlay` re-runs the same gate over the staged copies, refuses
 when nothing is staged, and writes atomically (temp + mv), so a failed
 run leaves no partial overlay a build could pick up. The staged root is
@@ -250,7 +243,7 @@ is the contract both sides quote):
 | Build variant | bundle pack resources | runtime pack resolution |
 | --- | --- | --- |
 | bare / dev (base config, default) | none | today's behavior unchanged |
-| pack-bundled (tauri.pack.json overlay) | `packs/<pack-id>/` under the resource dir, named by `packs/BUNDLED.yaml` (`schema_version: 1`; pack_id/locale/maturity per entry, written by `stage`) | at startup `BUNDLED_PACKS: OnceLock<PathBuf>` is set from `app.path().resource_dir().join("packs")` (same pattern as `BUNDLED_TTS`/`BUNDLED_SIDECAR`); `bundled_packs()` prefers the repo tree when present (dev), else reads the sidecar and its `<pack-id>/` directories and fails closed — a missing, unparsable, wrong-version, or dangling sidecar yields no candidates and the app never guesses a locale or maturity; a bare build without the resource dir keeps today's behavior |
+| pack-bundled (tauri.pack.json overlay) | `packs/<pack-id>/` under the resource dir, named by `packs/BUNDLED.yaml` (`schema_version: 1`; pack_id/locale/maturity per entry, written by `stage`) | at startup `BUNDLED_PACKS: OnceLock<PathBuf>` is set from `app.path().resource_dir().join("packs")` (same pattern as `BUNDLED_SIDECAR`); `bundled_packs()` prefers the repo tree when present (dev), else reads the sidecar and its `<pack-id>/` directories and fails closed — a missing, unparsable, wrong-version, or dangling sidecar yields no candidates and the app never guesses a locale or maturity; a bare build without the resource dir keeps today's behavior |
 
 Evidence state, stated honestly: the staging/overlay scripts are pinned
 by `scripts/test-stage-pack-bundle.sh` (hermetic: broken pack refused,
@@ -266,12 +259,12 @@ It interacts with
 K-68: baking lexicon audio into the pack grows the embedded payload;
 the size consequences belong to that card, measured rather than guessed.
 
-**Open packaging question, not a decision:** multiple `--config` overlays
-merge, which is what the pack+aligner route above relies on. A build that
-also wants the TTS payload (`dist/variants/tauri.tts.json`) has never had
-all three overlays passed together, and that combination has not been
-built here, so no single-command variant carrying TTS as well may be
-documented as working today.
+**Packaging question, resolved:** multiple `--config` overlays merge,
+which is what the pack+aligner route above relies on, and the merged
+bundle builds (2026-10-08/09) ran with exactly those two overlays.
+ADR-0024 retired the synthesis overlay (`dist/variants/tauri.tts.json`
+no longer exists), so pack+aligner is the complete overlay set and no
+TTS-carrying combination remains to verify.
 
 ## Mobile
 
@@ -295,7 +288,7 @@ Maintain a signed/verified metadata registry or static catalog describing compat
 
 ## First-run downloads
 
-Base app should remain reasonably small. Prompt for optional speech/TTS model download only when the user selects capabilities needing them. Display size, privacy/local status, and hardware recommendation.
+Base app should remain reasonably small. Prompt for optional speech-recognition model downloads only when the user selects capabilities needing them (ADR-0024 removed synthesis from the catalog). Display size, privacy/local status, and hardware recommendation.
 
 ## Reproducibility
 
@@ -308,28 +301,40 @@ identity of that audio — hash, size, sample rate, synthesis chain, provenance 
 while the `.wav` bytes stay out of git and are regenerated by
 `scripts/generate-pack-audio.py` before the archive is built — `scripts/build-catalog.sh`
 generates audio ahead of its `langpack build` calls, since an archive built
-before synthesis could never carry audio however the media rule is written.
+before synthesis could never carry audio.
 
-Two distinct cases, deliberately different:
+Content coverage is a hard release gate (ADR-0024): every published pack
+must pass install-mode `audit_media` media coverage, whose enumeration
+of audio-addressable items (sentences, contrast items, script-tagged
+lexicon entries) mirrors `scripts/generate-pack-audio.py` `targets()`.
+Every item needs a manifest row **and** its wav, or install and
+`langpack build` both refuse the pack:
 
-- **Partially built pack:** the manifest contradicts what is present, so
-  install-mode validation and `langpack build` both refuse it. An archive can
-  never ship a manifest that lies about the bytes inside it.
-- **Nothing generated (a fresh checkout):** `build` drops
-  `media/manifest.jsonl` from the archive after a loud warning, producing an
-  honest **audio-less** archive. Refusing instead would make the pack
-  uninstallable from every clean clone and CI machine, which is the path
-  onboarding takes; the app simply falls back to on-demand synthesis and no
-  feature claims media it was not given. CI therefore runs install-mode pack
-  gates only for packs that ship no manifest, and the media integrity rules are
-  pinned by `crates/langpack/tests/media.rs` plus the release script.
+- `media_asset_missing` — aggregated Error in every mode (first 8 ids
+  named): a built or partially built manifest leaves addressable items
+  uncovered, and nothing synthesizes at read time to cover them.
+- `media_missing` — Error per item: a row is declared, its wav is
+  absent while others are present (partial media build).
+- `media_manifest_absent` / `media_unbuilt` — Error when media is
+  expected (install/build), Info in a source checkout, where the `.wav`
+  bytes stay gitignored.
+
+The audio-less archive that `build` once emitted after a loud warning
+is gone: with no runtime synthesis an uncovered item is permanent
+silence, so failing the gate loudly at build/install is the honest
+shape. Consequence: `languages/ru-RU` cannot publish until
+`scripts/generate-pack-audio.py` bakes its media — it ships no media at
+all today and fails the install gate with `media_manifest_absent` — and
+CI accordingly suspends that pack's install-mode gate with a comment
+(K-90/ADR-0024), to be re-enabled once the ru pack is baked. The media
+rules are pinned by `crates/langpack/tests/media.rs`.
 
 The app reads audio provenance from the manifest rather than assuming a file in
 `media/` is a licensed recording, and resolves a media id through the manifest's
 `file` field, so filenames stay pack data. Synthesis is not byte-reproducible: a
 regeneration is a pack change (version bump, fresh catalog hashes, and any
 platform report bound to the old `pack_sha256` stops confirming), never a no-op.
-See `ADR-0016`.
+See `ADR-0016` and `ADR-0024`.
 
 ## Release candidate and publication
 
