@@ -40,6 +40,10 @@ const base: SettingsProps = {
   onArmDelete: () => {},
   onCancelDelete: () => {},
   onConfirmDelete: () => {},
+  switchArmed: false,
+  onArmSwitch: () => {},
+  onCancelSwitch: () => {},
+  onConfirmSwitch: () => {},
   error: null,
 };
 
@@ -102,6 +106,18 @@ describe("settings", () => {
     expect(armed).toContain("Cancel");
   });
 
+  it("offers leaving the profile without deleting anything, with a confirmation step", () => {
+    // O-06 2026-10-10 (P1): switching must read as non-destructive and be
+    // one accidental click away from nothing.
+    const disarmed = render({ switchArmed: false });
+    expect(disarmed).toContain("Switch profile…");
+    expect(disarmed).not.toContain("Yes, switch profile");
+    expect(disarmed).toContain("Switching deletes nothing");
+    const armed = render({ switchArmed: true });
+    expect(armed).toContain('aria-label="Switch profile confirmation"');
+    expect(armed).toContain("Yes, switch profile");
+  });
+
   it("export reports where the file went", () => {
     expect(render()).not.toContain("Export written to");
     const html = render({
@@ -119,9 +135,10 @@ describe("settings", () => {
       speechModel: "org.openlanguage.speech.whisper-ggml-tiny",
     });
     // The runtime limit is stated, not glossed over — and Settings states it
-    // as a limit, not as a build-wide claim about which runtimes exist.
-    expect(html).toContain("need a speech runtime");
-    expect(html).toContain("states whether this build carries one");
+    // as a limit on a dedicated status card, not as a build-wide claim
+    // tangled into the model picker.
+    expect(html).toContain("need a recognition runtime");
+    expect(html).toContain("honest status, not a choice");
     expect(html).toContain("does not change that");
     // No "install a model in Settings to get feedback" promise.
     expect(html).not.toMatch(/install a speech model in Settings/i);
@@ -140,7 +157,7 @@ describe("settings", () => {
     expect(html).not.toMatch(/Languages\s*→\s*Speech/);
   });
 
-  it("the single Speech card lists TTS payloads with install and remove controls", () => {
+  it("the Speech runtimes card lists TTS payloads with install and remove controls", () => {
     const bundled = render({
       tts: {
         source: "bundled",
@@ -292,7 +309,7 @@ describe("settings", () => {
     // What the models actually feed, and the runtime they still need.
     expect(html).toContain("pronunciation alignment and");
     expect(html).toContain("dictation recognition");
-    expect(html).toContain("need a speech runtime");
+    expect(html).toContain("need a recognition runtime");
     expect(html).toContain("Speech runtime:");
     // The old copy ("Choose a local speech model for pronunciation
     // feedback") implied selecting a model makes feedback work; that

@@ -338,6 +338,7 @@ export function App() {
   const [romajiMode, setRomajiMode] = useState<RomajiMode>("auto");
   const [settingsExportPath, setSettingsExportPath] = useState<string | null>(null);
   const [settingsDeleteArmed, setSettingsDeleteArmed] = useState(false);
+  const [settingsSwitchArmed, setSettingsSwitchArmed] = useState(false);
   const [settingsError, setSettingsError] = useState<string | null>(null);
 
   const [practiceDraft, setPracticeDraft] = useState("");
@@ -1170,6 +1171,38 @@ export function App() {
     setStep("welcome");
   }
 
+  // O-06 2026-10-10 (P1): leave the current profile without deleting it.
+  // Same clean-state discipline as profile deletion — no surface from the
+  // old profile may carry into the next session — but the picker shows the
+  // resume list, not the new-profile wizard. Progress is untouched.
+  async function switchProfile() {
+    if (!inv || !profileId) return;
+    setSettingsError(null);
+    setProfileId(null);
+    setDisplayName("");
+    setPlan(EMPTY_PLAN);
+    setEnvironments([]);
+    setGoals([]);
+    setProgress([]);
+    // D7 discipline: no active pack until the next profile chooses one.
+    setSelectedPack(null);
+    setActiveIds([]);
+    setMicEnabled(false);
+    setRomajiMode("auto");
+    setSettingsExportPath(null);
+    setSettingsDeleteArmed(false);
+    setSettingsSwitchArmed(false);
+    try {
+      setProfiles((await inv("list_profiles")) as ProfileSummary[]);
+      setStep("resume");
+      // Land where a launch-time resume lands, not in Settings.
+      setRoute("practice");
+    } catch (e) {
+      // Honest failure: stay where we are with an error, never strand the
+      // learner on an empty picker.
+      setSettingsError(`The profile list could not be loaded: ${String(e)}`);
+    }
+  }
   async function openProgress() {
     setRoute("progress");
     setProgressError(null);
@@ -2893,6 +2926,10 @@ export function App() {
             onArmDelete={() => setSettingsDeleteArmed(true)}
             onCancelDelete={() => setSettingsDeleteArmed(false)}
             onConfirmDelete={() => void confirmProfileDelete()}
+            switchArmed={settingsSwitchArmed}
+            onArmSwitch={() => setSettingsSwitchArmed(true)}
+            onCancelSwitch={() => setSettingsSwitchArmed(false)}
+            onConfirmSwitch={() => void switchProfile()}
             error={settingsError}
           />
         </>

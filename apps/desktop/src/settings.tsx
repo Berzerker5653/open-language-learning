@@ -64,6 +64,11 @@ export interface SettingsProps {
   onArmDelete(): void;
   onCancelDelete(): void;
   onConfirmDelete(): void;
+  /** O-06 2026-10-10: two-step "leave this profile" — nothing is deleted. */
+  switchArmed: boolean;
+  onArmSwitch(): void;
+  onCancelSwitch(): void;
+  onConfirmSwitch(): void;
   error: string | null;
 }
 
@@ -201,9 +206,10 @@ export function Settings(p: SettingsProps) {
         <p>
           <small>
             The privacy notice promises you can export or delete your local profile data at any time
-            — both are here. The export is a readable JSON file with your profile, settings,
-            learning evidence, and schedule. Recording metadata is not included, and no audio is
-            ever part of an export.
+            — both are here, and switching profiles starts here too. Switching only leaves the
+            current profile; it deletes nothing. The export is a readable JSON file with your
+            profile, settings, learning evidence, and schedule. Recording metadata is not included,
+            and no audio is ever part of an export.
           </small>
         </p>
         <div className="btn-row">
@@ -216,6 +222,28 @@ export function Settings(p: SettingsProps) {
             Export written to: {p.exportPath}
           </p>
         )}
+        {p.switchArmed ? (
+          <div role="group" aria-label="Switch profile confirmation" className="btn-row">
+            <button type="button" className="btn btn--primary" onClick={p.onConfirmSwitch}>
+              Yes, switch profile
+            </button>
+            <button type="button" className="btn btn--quiet" onClick={p.onCancelSwitch}>
+              Cancel
+            </button>
+          </div>
+        ) : (
+          <div className="btn-row">
+            <button type="button" className="btn btn--quiet" onClick={p.onArmSwitch}>
+              Switch profile…
+            </button>
+          </div>
+        )}
+        <p>
+          <small data-testid="settings-switch-note">
+            Switching deletes nothing: each profile keeps its own progress, saved words, and
+            settings, and waits for you in the picker.
+          </small>
+        </p>
         {p.deleteArmed ? (
           <div role="group" aria-label="Delete confirmation" className="btn-row">
             <button type="button" className="btn btn--primary" onClick={p.onConfirmDelete}>
@@ -261,11 +289,7 @@ export function Settings(p: SettingsProps) {
         <p>
           <small>
             This is the app&apos;s one speech-model preference; the models themselves are listed
-            below with their sizes, licenses, and downloads. Honest limit: the speech-based checks
-            (pronunciation feedback and dictation recognition) also need a speech runtime; this card
-            states whether this build carries one and on what terms. Where the runtime is absent
-            those checks abstain, and choosing or downloading a model here does not change that —
-            nothing else is affected.
+            below with their sizes, licenses, and downloads.
           </small>
         </p>
 
@@ -283,9 +307,7 @@ export function Settings(p: SettingsProps) {
               : " This device's tier could not be detected, so no model is recommended — pick one your device can comfortably run."}
           </small>
         </p>
-        <p className="meta pack-posture" data-aligner={p.aligner?.available ? "yes" : "no"}>
-          {alignerLine(p.aligner)}
-        </p>
+
         {p.speechModels.length > 0 && (
           <ul className="pack-list">
             {p.speechModels.map((m) => (
@@ -318,14 +340,22 @@ export function Settings(p: SettingsProps) {
             ))}
           </ul>
         )}
+      </div>
 
-        <h4>Speech synthesis</h4>
+      <div className="card">
+        <h3>Speech runtimes</h3>
         <p>
           <small>
-            Speech synthesis is optional and separate from packs. Some downloads include it; you can
-            also install it here or point the app at your own runtime.
+            The engines this build ships and can load — honest status, not a choice. Pronunciation
+            feedback and dictation recognition also need a recognition runtime: where it is absent,
+            those checks abstain, and choosing or downloading a model does not change that. Speech
+            synthesis is optional and separate from packs.
           </small>
         </p>
+        <p className="meta pack-posture" data-aligner={p.aligner?.available ? "yes" : "no"}>
+          {alignerLine(p.aligner)}
+        </p>
+        <h4>Speech synthesis</h4>
         {p.tts ? (
           <>
             <p>{TTS_SOURCE_LABELS[p.tts.source] ?? p.tts.source}</p>
