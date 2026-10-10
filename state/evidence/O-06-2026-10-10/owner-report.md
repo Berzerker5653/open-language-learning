@@ -50,12 +50,27 @@ This pass continues from the 2026-10-08 report; the sweep tranche
 | 1 | single-instance | **PASS** | Gate item 1 of the pass recorded. |
 | 2 | tab latency | **PASS** | Owner-perceived fix of K-63b; `route-ms` markers remain the machine check. |
 | 4 | downloads with progress | **PASS** | K-62 stage events observed; verification completed for all four entries (`~/.local/share/openlang/models/verified.json`). |
-| 11 | reference audio sounds "echoey, metallic, tinny" | **Content/model limitation, not a defect** | Measured on the shipped clips: 24 kHz mono, zero clipped runs, no post-speech tail (residual rms 70 ≈ silence), zero-cross centroid ~500–700 Hz — the files carry no echo or digital damage; the character is the pinned Kokoro ja voice (same model K-56 recorded as fragile on ja). Level is low (RMS ≈ −24 dBFS), which reads as "thin"; loudness normalization at generation would help slightly but not the metallic quality. A genuinely better ja voice is a model-selection decision (owner), not an app fix. |
+| 11 | reference audio sounds "echoey, metallic, tinny" | **Content/model limitation, not a defect — level now fixed, character accepted** | Measured on the shipped clips: 24 kHz mono, zero clipped runs, no post-speech tail (residual rms 70 ≈ silence), zero-cross centroid ~500–700 Hz — the files carry no echo or digital damage; the character is the pinned Kokoro ja voice (same model K-56 recorded as fragile on ja). Level was low (RMS ≈ −24 dBFS, reads as "thin") — fixed at generation by the normalization pass (`128f77e`); the metallic character stays until a voice-model decision "down the road" (owner, uncarded). |
 
-## Known content factor (affects 7/8 until republish)
+## Known content factor (affects 7/8 until republish) — RESOLVED locally 2026-10-10
 
-The installed `org.openlanguage.ja-jp.reference` 0.2.0 archive carries only
-the 694-file contrast-era media set, not the repo manifest's full audio
-(K-78-follow republish gap, owner-authorized O-05 required). Surfaces gated
-on missing media must show honest reasons; investigation will separate
-"content gap" from "dead control" per finding.
+The installed `org.openlanguage.ja-jp.reference` 0.2.0 archive carried only the 694-file
+contrast-era media set, not the repo manifest's full audio (K-78-follow republish gap).
+Resolved at owner request: the pack was regenerated (all 4,614 assets, loudness-normalized,
+manifest `128f77e`), bumped to **0.2.1** with the H1 display-name cleanup (`4d2e458`), built
+deterministically (`dist/ja-jp-reference-0.2.1.lpk`, 282,806,245 B,
+sha256 `464f51520d8c78899ce8c7531ae1589b5697dfcdbda7b119f68af19595c8e644`) and installed into
+the owner's store — `…/openlang/packs/org.openlanguage.ja-jp.reference/0.2.1`, previous 0.2.0
+kept (rollback available). Publishing the archive + catalog remains the O-05 gate. The profile's
+*active* pack still points at 0.2.0 until switched in Settings ▸ Language packs.
+
+## Machine leg, 2026-10-10 afternoon (after the findings were triaged)
+
+- Regeneration: `bg_23` (serial) died at its 50-min job deadline ~870/4,613 assets; `generate-pack-audio.py --jobs 12` added (`e2b3524`, unittests green + live probe), full regeneration completed (`128f77e`), scaffold validation 0/0, conformance `test` 0/0.
+- Cargo suite: **126 passed** (incl. the なまえ span regression and media pairing against the new bytes).
+- Smoke on the rebuilt binary: **`SMOKE OK (13 routes walked)`** — five tabs + eight hub modes, all ≤ 96 ms; scenario leg acked `scenario-support:…:consumed` and `scenario-transfer:…:done` (finding 7 works live); Shadowing leg acked `shadow-buttons:4:1` (finding 8: Play/Record enabled live).
+- K-88 playback picker built (`ff4efc2`); routing on the real webview decided by its capability probe at first Settings-open (owner run will show picker vs. honest system copy).
+
+## Owner re-verification checklist (the human half of the pass, pending)
+
+Relaunch `scripts/launch-preview.sh`, then: (1) five-tab nav + hub drill; (2) Settings ▸ Profile data → Switch profile; (3) Speech cards split + Playback output section (picker or honest fallback sentence — either is the correct outcome, tell us which you see); (4) Settings ▸ Language packs → switch active pack to v0.2.1, listen: louder audio, lookup in "私の名まえは何ですか" names なまえ; (5) re-test Shadowing controls and the scenario ladder/transfer in the rebuilt app (findings 7/8 close on this); (6) K-81 nav sign-off.
