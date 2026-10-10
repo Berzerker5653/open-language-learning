@@ -98,7 +98,7 @@ export function PronunciationPractice(props: PronunciationProps) {
   const { shortText, longText, result, recording, hasAttempt } = props;
   return (
     <section aria-label="Pronunciation practice">
-      <h2>Pronunciation: long vs short vowels</h2>
+      <h1>Pronunciation: long vs short vowels</h1>
       <p className="prompt">
         Say both words, one after the other:{" "}
         <strong lang="ja" className="target-word">
@@ -145,74 +145,78 @@ export function PronunciationPractice(props: PronunciationProps) {
           </button>
         )}
       </div>
-      {result && (
-        <div aria-live="polite" className="card">
-          {result.abstain_reason ? (
-            <p data-testid="abstain-reason" className="notice">
-              {reasonLabel(result.abstain_reason)}
-            </p>
-          ) : (
-            <ul className="feedback">
-              {result.corrections.map((c) => (
-                <li key={c.feature_id} data-band={c.band}>
-                  {TEMPLATE_TEXT[c.feedback_template_id] ??
-                    "No specific feedback is available for that attempt."}
-                </li>
-              ))}
-            </ul>
-          )}
-          <p>
-            <small data-testid="feedback-mode">
-              {result.mode === "automatic"
-                ? "Calibrated automatic feedback: validated for this exact model and configuration."
-                : "Guided feedback only: this comparison is a reference, not a grade. Your recording" +
-                  " stays on this device and is never saved."}
-            </small>
-          </p>
-          <div aria-label="Pitch contour comparison">
-            <h3>Pitch shape (reference vs your attempt)</h3>
-            {result.pitch.unavailable_reason ? (
-              <p>
-                Not enough clear voiced audio to compare pitch shapes this time. This is a reference
-                view, so nothing is scored either way.
+      {/* WCAG 4.1.3: the polite wrapper pre-exists the result card (PS-03). */}
+      <div aria-live="polite">
+        {result && (
+          <div className="card">
+            {result.abstain_reason ? (
+              <p data-testid="abstain-reason" className="notice">
+                {reasonLabel(result.abstain_reason)}
               </p>
             ) : (
-              <>
-                <svg
-                  width="240"
-                  height="60"
-                  role="img"
-                  aria-label={`Reference contour: ${result.pitch.reference_shape}. Your attempt: ${result.pitch.attempt_shape}.`}
-                  className="contour"
-                >
-                  <polyline
-                    className="contour--reference"
-                    fill="none"
-                    strokeWidth="2"
-                    points={contourPoints(result.pitch.reference)}
-                  />
-                  <polyline
-                    className="contour--attempt"
-                    fill="none"
-                    strokeWidth="2"
-                    points={contourPoints(result.pitch.attempt)}
-                  />
-                </svg>
-                <p>
-                  Reference: {result.pitch.reference_shape}. Your attempt:{" "}
-                  {result.pitch.attempt_shape}.
-                </p>
-                <p>
-                  <small>
-                    Pitch is shown relative to each speaker's own range — never in absolute Hz, and
-                    never graded. This feature is reference-only until calibration evidence exists.
-                  </small>
-                </p>
-              </>
+              <ul className="feedback">
+                {result.corrections.map((c) => (
+                  <li key={c.feature_id} data-band={c.band}>
+                    {TEMPLATE_TEXT[c.feedback_template_id] ??
+                      "No specific feedback is available for that attempt."}
+                  </li>
+                ))}
+              </ul>
             )}
+            <p>
+              <small data-testid="feedback-mode">
+                {result.mode === "automatic"
+                  ? "Calibrated automatic feedback: validated for this exact model and configuration."
+                  : "Guided feedback only: this comparison is a reference, not a grade. Your recording" +
+                    " stays on this device and is never saved."}
+              </small>
+            </p>
+            <div aria-label="Pitch contour comparison">
+              <h3>Pitch shape (reference vs your attempt)</h3>
+              {result.pitch.unavailable_reason ? (
+                <p>
+                  Not enough clear voiced audio to compare pitch shapes this time. This is a
+                  reference view, so nothing is scored either way.
+                </p>
+              ) : (
+                <>
+                  <svg
+                    width="240"
+                    height="60"
+                    role="img"
+                    aria-label={`Reference contour: ${result.pitch.reference_shape}. Your attempt: ${result.pitch.attempt_shape}.`}
+                    className="contour"
+                  >
+                    <polyline
+                      className="contour--reference"
+                      fill="none"
+                      strokeWidth="2"
+                      points={contourPoints(result.pitch.reference)}
+                    />
+                    <polyline
+                      className="contour--attempt"
+                      fill="none"
+                      strokeWidth="2"
+                      points={contourPoints(result.pitch.attempt)}
+                    />
+                  </svg>
+                  <p>
+                    Reference: {result.pitch.reference_shape}. Your attempt:{" "}
+                    {result.pitch.attempt_shape}.
+                  </p>
+                  <p>
+                    <small>
+                      Pitch is shown relative to each speaker's own range — never in absolute Hz,
+                      and never graded. This feature is reference-only until calibration evidence
+                      exists.
+                    </small>
+                  </p>
+                </>
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 }

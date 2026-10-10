@@ -28,7 +28,7 @@ export interface WritingPracticeProps {
 export function WritingPractice(p: WritingPracticeProps) {
   return (
     <section aria-label="Writing practice">
-      <h2>Writing practice</h2>
+      <h1>Writing practice</h1>
       <p className="prompt">{p.task.prompt_text}</p>
       {p.task.reading_hint && (
         <p aria-label="Reading hint" lang="ja">
@@ -62,14 +62,16 @@ export function WritingPractice(p: WritingPracticeProps) {
           Check
         </button>
       </div>
-      {p.graded && (
-        <p
-          aria-live="polite"
-          className={p.correct ? "verdict verdict--correct" : "verdict verdict--retry"}
-        >
-          {p.correct ? "Correct" : "Try again"}
-        </p>
-      )}
+      {/* WCAG 4.1.3: the polite region must exist before the verdict mutates
+          it — same discipline as the practice runner (PS-03). */}
+      <p
+        aria-live="polite"
+        className={
+          p.graded ? (p.correct ? "verdict verdict--correct" : "verdict verdict--retry") : undefined
+        }
+      >
+        {p.graded ? (p.correct ? "Correct" : "Try again") : ""}
+      </p>
     </section>
   );
 }

@@ -36,6 +36,10 @@ export interface PracticeTaskView {
 
 export interface PracticeRunnerProps {
   task: PracticeTaskView;
+  /// When the runner IS the whole route (inline practice), this names
+  /// the route as its single h1. Embedded runners (placement, kanji)
+  /// omit it — their route section already carries the h1.
+  routeHeading?: string;
   graded: boolean;
   correct: boolean;
   correctChoice: string;
@@ -62,6 +66,7 @@ export interface PracticeRunnerProps {
 export function PracticeRunner(p: PracticeRunnerProps) {
   return (
     <section aria-label="Practice">
+      {p.routeHeading ? <h1>{p.routeHeading}</h1> : null}
       {p.task.surface ? (
         <>
           <h2>{p.heading ?? "What does this mean?"}</h2>
@@ -69,7 +74,7 @@ export function PracticeRunner(p: PracticeRunnerProps) {
             <Ruby surface={p.task.surface} furigana={p.task.furigana} />
           </p>
           {p.task.slots && p.task.slots.length > 0 ? (
-            <div className="meta" aria-label="Phrase structure">
+            <div className="meta" role="group" aria-label="Phrase structure">
               {p.task.slots.map((slot, i) => (
                 <p key={i}>
                   <span className={slot.target ? "badge" : undefined}>{slot.text}</span>
@@ -83,12 +88,12 @@ export function PracticeRunner(p: PracticeRunnerProps) {
             </div>
           ) : null}
           {p.task.reading && (
-            <p aria-label="Reading" lang="ja">
+            <p lang="ja">
               <small>{p.stress ? <StressText text={p.task.reading} /> : p.task.reading}</small>
             </p>
           )}
           {p.task.romaji && (
-            <p aria-label="Romaji">
+            <p>
               <small>{p.task.romaji}</small>
             </p>
           )}
@@ -158,20 +163,20 @@ export function PracticeRunner(p: PracticeRunnerProps) {
           ))}
         </div>
       )}
+      <p
+        aria-live="polite"
+        className={
+          p.graded ? (p.correct ? "verdict verdict--correct" : "verdict verdict--retry") : undefined
+        }
+      >
+        {p.graded ? (p.correct ? "Correct" : `Not quite — the answer is "${p.correctChoice}"`) : ""}
+      </p>
       {p.graded && (
-        <>
-          <p
-            aria-live="polite"
-            className={p.correct ? "verdict verdict--correct" : "verdict verdict--retry"}
-          >
-            {p.correct ? "Correct" : `Not quite — the answer is "${p.correctChoice}"`}
-          </p>
-          <div className="btn-row">
-            <button type="button" className="btn btn--primary" onClick={p.onNext}>
-              Back to plan
-            </button>
-          </div>
-        </>
+        <div className="btn-row">
+          <button type="button" className="btn btn--primary" onClick={p.onNext}>
+            Back to plan
+          </button>
+        </div>
       )}
     </section>
   );

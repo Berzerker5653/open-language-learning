@@ -235,4 +235,19 @@ describe("practice runner", () => {
     const plain = render({ task: { ...base.task, slots: [] } });
     expect(plain).not.toContain("Phrase structure");
   });
+
+  it("keeps the verdict live region mounted before anything is graded (WCAG 4.1.3, PS-03)", () => {
+    const before = render({});
+    expect(before).toContain('aria-live="polite"');
+    expect(before).not.toContain("Correct");
+    expect(before).not.toContain("Not quite");
+    const after = render({ graded: true, correct: false, correctChoice: "hello" });
+    expect(after).toContain('aria-live="polite"');
+  });
+
+  it("carries one route h1 only when the runner is the whole route", () => {
+    const standalone = render({ routeHeading: "Practice" });
+    expect((standalone.match(/<h1\b/g) ?? []).length).toBe(1);
+    expect(render({})).not.toContain("<h1");
+  });
 });

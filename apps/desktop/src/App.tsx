@@ -238,6 +238,9 @@ export function App() {
   const [nextGoal, setNextGoal] = useState<NextGoalView | null | undefined>(undefined);
   const [firstRunSteps, setFirstRunSteps] = useState<FirstRunStep[]>([]);
   const [progress, setProgress] = useState<ProgressRow[]>([]);
+  const [progressError, setProgressError] = useState<string | null>(null);
+  const [progressLoading, setProgressLoading] = useState(false);
+  const [writingLoaded, setWritingLoaded] = useState(false);
   const [pronResult, setPronResult] = useState<PronunciationResult | null>(null);
   const [dictTarget, setDictTarget] = useState("おばあさん");
   const [dictResult, setDictResult] = useState<DictationResult | null>(null);
@@ -1016,9 +1019,19 @@ export function App() {
   }
 
   async function changeBudget(minutes: number) {
+    const previous = budget;
     setBudget(minutes);
     if (inv && profileId) {
-      setPlan((await inv("practice_plan", { profileId, minutes })) as SessionPlan);
+      try {
+        setPlan((await inv("practice_plan", { profileId, minutes })) as SessionPlan);
+      } catch (e) {
+        // The optimistic value is only real once the engine has rebuilt the
+        // plan around it; otherwise the learner keeps the old budget.
+        setBudget(previous);
+        setSettingsError(
+          `The study budget could not be saved: ${String(e)}. Reverted to ${previous} minutes.`,
+        );
+      }
     }
   }
 
@@ -1157,9 +1170,19 @@ export function App() {
 
   async function openProgress() {
     setRoute("progress");
+    setProgressError(null);
     if (inv && profileId) {
-      setProgress((await inv("progress_summary", { profileId })) as ProgressRow[]);
-      setGoals((await inv("goal_map", { profileId })) as GoalCard[]);
+      setProgressLoading(true);
+      try {
+        setProgress((await inv("progress_summary", { profileId })) as ProgressRow[]);
+        setGoals((await inv("goal_map", { profileId })) as GoalCard[]);
+      } catch (e) {
+        // An honest alert, never an empty "no progress yet" claim: the data
+        // may exist; the read is what failed.
+        setProgressError(`Progress could not be loaded: ${String(e)}`);
+      } finally {
+        setProgressLoading(false);
+      }
     }
   }
 
@@ -1168,6 +1191,7 @@ export function App() {
   async function openWriting() {
     setRoute("writing");
     setWritingError(null);
+    setWritingLoaded(false);
     setWritingDraft("");
     setWritingGraded(false);
     setWritingScaffold({});
@@ -1189,6 +1213,7 @@ export function App() {
         } else {
           setWritingTask(null);
         }
+        setWritingLoaded(true);
       } catch (e) {
         setWritingTask(null);
         setWritingError(String(e));
@@ -1334,7 +1359,11 @@ export function App() {
     setPracticeDraft("");
     setPracticeRevealed(false);
     if (inv && profileId) {
-      setPlan((await inv("practice_plan", { profileId, minutes: budget })) as SessionPlan);
+      try {
+        setPlan((await inv("practice_plan", { profileId, minutes: budget })) as SessionPlan);
+      } catch (e) {
+        setPracticeError(`The plan could not be refreshed: ${String(e)}`);
+      }
     }
   }
 
@@ -1897,7 +1926,13 @@ export function App() {
 
   function playBlobUrl(url: string) {
     const audio = new Audio(url);
-    void audio.play();
+    // Playbacks are one-shot blobs: once the webview is done with the decoded
+    // sample (or it fails outright) the URL must go, or every played clip
+    // pins its audio for the rest of the session.
+    const release = () => URL.revokeObjectURL(url);
+    audio.addEventListener("ended", release);
+    audio.addEventListener("error", release);
+    void audio.play().catch(() => release());
   }
 
   async function playReference(which: "short" | "long") {
@@ -2117,10 +2152,7 @@ export function App() {
 
   if (step !== "done") {
     return (
-      <AppShell
-        productName="Open Language Learning Platform"
-        nav={[{ id: "onboarding", label: "Setup" }]}
-      >
+      <AppShell productName="Open Language Learning Platform" nav={[]}>
         <Onboarding
           step={step}
           notice={notice}
@@ -2296,7 +2328,7 @@ export function App() {
             />
           ) : (
             <section aria-label="Pronunciation">
-              <h2>Pronunciation</h2>
+              <h1>Pronunciation</h1>
               <p className="empty">
                 The selected pack declares no pronunciation contrasts yet, so there is nothing to
                 practice here.
@@ -2329,7 +2361,7 @@ export function App() {
         </>
       ) : route === "shadowing" ? (
         <section aria-label="Shadowing">
-          <h2>Shadowing</h2>
+          <h1>Shadowing</h1>
           <p className="empty">
             Play the model audio, speak along with it, then play your recording back. Shadowing is
             formative practice: nothing is scored or saved.
@@ -2435,7 +2467,7 @@ export function App() {
         </section>
       ) : route === "reading" ? (
         <section aria-label="Graded reading">
-          <h2>{storyActive ? storyActive.title : "Graded reading"}</h2>
+          <h1>{storyActive ? storyActive.title : "Graded reading"}</h1>
           <p className="empty">
             Read along at your level. Tapping a sentence plays its audio and looks up the words from
             your pack that appear in it. Reading is formative: nothing is scored or saved.
@@ -2482,12 +2514,12 @@ export function App() {
                     <Ruby surface={s.text} furigana={s.furigana} />
                   </button>
                   {s.romaji && (
-                    <p aria-label="Romaji">
+                    <p>
                       <small>{s.romaji}</small>
                     </p>
                   )}
                   {storyLookup === s.content_id && (
-                    <div aria-label="Word lookup">
+                    <div role="group" aria-label="Word lookup">
                       {s.gloss && <p className="notice">{s.gloss}</p>}
                       {s.known.length === 0 ? (
                         <p className="empty">No pack words match this sentence yet.</p>
@@ -2519,7 +2551,7 @@ export function App() {
         </section>
       ) : route === "words" ? (
         <section aria-label="My words">
-          <h2>My words</h2>
+          <h1>My words</h1>
           <p className="empty">
             Words you chose to keep, with where you met them. Reviews are self-graded and stay on
             this device; they never count as mastery evidence.
@@ -2638,7 +2670,7 @@ export function App() {
         </section>
       ) : route === "placement" ? (
         <section aria-label="Placement">
-          <h2>Placement</h2>
+          <h1>Placement</h1>
           <p className="empty">
             Low-stakes checks on what you may already know — two quick questions per goal. Correct
             answers mark known foundations, and practice skips ahead automatically.
@@ -2688,7 +2720,7 @@ export function App() {
         </section>
       ) : route === "kanji" ? (
         <section aria-label="Kanji">
-          <h2>Kanji</h2>
+          <h1>Kanji</h1>
           <p className="empty">
             Characters your pack teaches, with their decomposition. Drill the meaning, then the
             reading; the scheduler brings each one back when it is due.
@@ -2744,12 +2776,25 @@ export function App() {
         </section>
       ) : route === "progress" ? (
         <>
-          <GoalMap goals={goals} />
-          <ProgressView rows={progress} />
+          {progressError && (
+            <p role="alert" className="alert">
+              {progressError}
+              <button type="button" className="btn" onClick={() => void openProgress()}>
+                Retry
+              </button>
+            </p>
+          )}
+          {progressLoading && <p className="empty">Loading progress…</p>}
+          {!progressError && (
+            <>
+              <GoalMap goals={goals} />
+              <ProgressView rows={progress} />
+            </>
+          )}
         </>
       ) : route === "writing" ? (
         <>
-          {writingError && (
+          {writingTask && writingError && (
             <p role="alert" className="alert">
               {writingError}
             </p>
@@ -2765,13 +2810,30 @@ export function App() {
               stress={stressEnabled(display)}
               onHint={showWritingHint}
             />
-          ) : (
+          ) : writingError ? (
+            // A failed read is an error, never the empty-state story: the
+            // pack may well have targets. (K-76/K-78 discipline.)
             <section aria-label="Writing practice">
-              <h2>Writing practice</h2>
+              <h1>Writing practice</h1>
+              <p role="alert" className="alert">
+                {writingError}
+                <button type="button" className="btn" onClick={() => void openWriting()}>
+                  Retry
+                </button>
+              </p>
+            </section>
+          ) : writingLoaded ? (
+            <section aria-label="Writing practice">
+              <h1>Writing practice</h1>
               <p className="empty">
                 No new writing targets in this pack right now. Practice other activities to unlock
                 more, or install a larger language pack.
               </p>
+            </section>
+          ) : (
+            <section aria-label="Writing practice">
+              <h1>Writing practice</h1>
+              <p className="empty">Loading…</p>
             </section>
           )}
         </>
@@ -2840,6 +2902,7 @@ export function App() {
             </p>
           )}
           <PracticeRunner
+            routeHeading="Practice"
             task={practiceTask}
             graded={practiceGraded}
             correct={practiceCorrect}

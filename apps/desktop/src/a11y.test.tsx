@@ -42,6 +42,7 @@ const practice: PracticeRunnerProps = {
   graded: true,
   correct: true,
   correctChoice: "a",
+  routeHeading: "Practice",
   onChoose: () => {},
   onNext: () => {},
 };
@@ -281,7 +282,21 @@ describe("automated accessibility audit (ACC-001 auto portion)", () => {
   });
 
   it("top-level routes carry exactly one h1", () => {
-    for (const name of ["home", "progress", "onboarding"]) {
+    // Route surfaces the static harness can build: home/progress/onboarding
+    // plus the standalone runner (route usage carries routeHeading) and the
+    // task-bearing route components. The inline App sections promoted in the
+    // same change (Shadowing, Graded reading, My words, Placement, Kanji,
+    // Writing empty/error states) are guarded by typecheck + review, not
+    // this harness, until App is mountable.
+    for (const name of [
+      "home",
+      "progress",
+      "onboarding",
+      "practice",
+      "pronunciation",
+      "pronunciation-feedback",
+      "writing",
+    ]) {
       const count = (surfaces[name]?.match(/<h1\b/g) ?? []).length;
       expect(count, `${name} h1 count`).toBe(1);
     }
@@ -293,6 +308,38 @@ describe("automated accessibility audit (ACC-001 auto portion)", () => {
     expect(surfaces.scenario).toMatch(/aria-live="polite"/);
     expect(surfaces["pronunciation-feedback"]).toMatch(/aria-live="polite"/);
     expect(surfaces.writing).toMatch(/aria-live="polite"/);
+  });
+
+  it("live regions pre-exist their content (WCAG 4.1.3 timing rule)", () => {
+    // The mutation must land inside an element that was already in the tree;
+    // regions that mount together with the verdict are never announced.
+    const ungradedWriting = renderToStaticMarkup(
+      <WritingPractice
+        task={{ item_id: "ja.lex.demo.a", prompt_text: "I" }}
+        draft=""
+        graded={false}
+        correct={false}
+        onDraft={() => {}}
+        onSubmit={() => {}}
+        onHint={() => {}}
+      />,
+    );
+    expect(ungradedWriting).toMatch(/aria-live="polite"/);
+    expect(ungradedWriting).not.toContain("Correct");
+    const noResult = renderToStaticMarkup(
+      <PronunciationPractice
+        shortText="おばさん"
+        longText="おばあさん"
+        recording={false}
+        hasAttempt={false}
+        result={null}
+        onRecord={() => {}}
+        onStop={() => {}}
+        onPlayReference={() => {}}
+        onPlayAttempt={() => {}}
+      />,
+    );
+    expect(noResult).toMatch(/aria-live="polite"/);
   });
 
   it("audio controls carry accessible names", () => {
