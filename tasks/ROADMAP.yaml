@@ -1516,6 +1516,8 @@ execution_scope:
   - WEB-001
   - TTS-002
   - POLISH-001
+  - JA-A1-003
+  - SPEECH-007
   - K-01
   - K-02
   - K-03
