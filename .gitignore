@@ -52,3 +52,8 @@ tests/performance/results/
 
 # Scratch / external review data (not for commit)
 tmp/
+
+# Agent audit workspace (project-sweep runs: findings, board snapshots, gate
+# logs). Working aid for the agents, not product content — the shipped
+# record lives in tasks/KANBAN.md done rows and state/ evidence.
+.project-sweep/
