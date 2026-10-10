@@ -156,6 +156,19 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 Backlog items executed inline: unused deps removed (`thiserror` ×2, `lts-domain`) — `cargo machete` exit 0 (`5eb0e97`); cargo-audit dispositions recorded as SEC-001 input (`state/notes/SEC-001-dependency-disposition.md` — owner gate stays open). Still backlog: machete CI gating (owner decision); App.tsx decomposition (2907→~3000 lines, rides K-81's nav decision — untouched).
 
+## done — 2026-10-10 O-06 in-pass fixes (report `state/evidence/O-06-2026-10-10/owner-report.md`)
+
+| card | epic | what | maps to |
+| --- | --- | --- | --- |
+| speech-gate | desktop | Onboarding's "Start with speech" was **permanently impossible**: the gate required every speech component installed, but the synthesis payloads are `installable: false` in this build (ADR-0009/D5-rest), so the step could only be escaped via Skip. The model catalog gained a durable `role` field (`recognition`/`synthesis`, carried through `ModelEntry`/`ModelStatus`/the frontend payload — id-string sniffing rejected as durable design); the gate now requires an installed *recognition* component and the card plainly states the app cannot talk back without a synthesis engine. Tests: enabled with ASR-only, notice text pinned, disabled without ASR (vitest 168, cargo test 125) | O-06 #3, `ef58f03` |
+
+## next — 2026-10-10 O-06 hands-on findings (pass in progress)
+
+| card | epic | what | maps to |
+| --- | --- | --- | --- |
+| audio-polish | pack | Owner decision 2026-10-10: polish the pinned voice now, revisit the voice model "down the road" (nothing carded for a swap). `scripts/generate-pack-audio.py` gained a loudness-normalization stage — every freshly synthesized 16-bit file is gain-matched to active-speech RMS ≈ −16.5 dBFS under a −3 dBFS peak ceiling (measured Kokoro output is clean but ~8 dB quiet: RMS −24 dBFS, which learners hear as "tinny"); `--no-normalize` escapes, reused/hash-matched files are never touched, and each row's notes record the applied gain. 5 stdlib tests in `scripts/test_generate_pack_audio.py`. Full regeneration (693 assets) + manifest rewrite in flight; shipping is the pack version bump + O-05 republish the pack already owes (K-78-follow, H1). The metallic *character* is the pinned Kokoro voice — files measured free of echo/clipping/damage; this card does not claim to fix it | O-06 #11, ADR-0016, K-50 |
+| pending | triage | Findings 6–9 (lookup matching 前 inside 名前, scenario support/transfer buttons, shadowing controls, profile leave/switch) under read-only investigation; cards after the mechanism reports are verified against the tree | O-06 #6–9 |
+
 ## next — queued after 2026-10-08
 
 | card | epic | what | maps to |

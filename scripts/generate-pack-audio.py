@@ -25,6 +25,13 @@ Rules this script enforces:
     name the field that string came from, so the lts-langpack guard
     `media_text_not_declared_reading` can tie every asset back to the item's
     declared reading.
+  * Loudness normalization is part of synthesis (owner decision 2026-10-10,
+    O-06): the pinned Kokoro output is clean but quiet (measured RMS ≈ −24
+    dBFS), which learners hear as "tinny". Every freshly synthesized file is
+    gain-matched to a target active-speech level under a peak ceiling; the
+    row's notes record what was applied. Reused (hash-matched) files are
+    never touched, so the manifest and the bytes on disk can never drift.
+    Disable with `--no-normalize`.
 
 Usage:
   scripts/generate-pack-audio.py --pack languages/ja-JP
@@ -40,6 +47,8 @@ import argparse
 import datetime
 import hashlib
 import json
+import math
+import struct
 import subprocess
 import sys
 import wave
@@ -47,6 +56,14 @@ from pathlib import Path
 
 DEFAULT_VENDOR = Path.home() / ".cache" / "lts-bench"
 RUNTIME = "sherpa-onnx-v1.13.8-linux-x64-shared"
+
+# Loudness targets (owner decision 2026-10-10 after the owner measured the
+# shipped clips as quiet/thin): active-speech RMS ≈ −16.5 dBFS with a peak
+# ceiling ≈ −3 dBFS as a guard. Silence at the edges of a clip does not
+# count toward the level, so a short breath gap cannot inflate the gain.
+TARGET_ACTIVE_RMS = 0.15
+PEAK_CEILING = 0.70
+ACTIVE_GATE = 0.02
 
 
 def sha256_file(path: Path) -> str:
@@ -61,6 +78,43 @@ def load_jsonl(path: Path) -> list[dict]:
     if not path.exists():
         return []
     return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+
+
+
+def normalize_wav(path: Path) -> str | None:
+    """Gain-match one freshly synthesized 16-bit PCM file in place.
+
+    The applied gain is chosen so the RMS over *active* (speech) frames
+    reaches `TARGET_ACTIVE_RMS`, capped by `PEAK_CEILING` of full scale —
+    quiet files get louder, hot files get pulled down, and nothing can clip.
+    Returns a human description for the manifest notes; `None` means the
+    file was left untouched (unsupported format or pure silence).
+    """
+    with wave.open(str(path)) as wav:
+        rate, channels, width = wav.getframerate(), wav.getnchannels(), wav.getsampwidth()
+        frames = wav.readframes(wav.getnframes())
+    if width != 2 or not frames:
+        return None
+    samples = list(struct.unpack("<%dh" % (len(frames) // 2), frames))
+    frame_len = max(1, rate // 100)
+    rms = [
+        math.sqrt(sum(s * s for s in samples[i : i + frame_len * channels]) / (frame_len * channels))
+        for i in range(0, len(samples), frame_len * channels)
+    ]
+    loudest = max(rms)
+    if loudest == 0:
+        return None
+    active = [v for v in rms if v > ACTIVE_GATE * loudest]
+    active_rms = math.sqrt(sum(v * v for v in active) / len(active))
+    peak = max(abs(s) for s in samples)
+    gain = min(TARGET_ACTIVE_RMS * 32767.0 / active_rms, PEAK_CEILING * 32767.0 / peak)
+    samples = [max(-32768, min(32767, round(s * gain))) for s in samples]
+    with wave.open(str(path), "wb") as wav:
+        wav.setnchannels(channels)
+        wav.setsampwidth(2)
+        wav.setframerate(rate)
+        wav.writeframes(struct.pack("<%dh" % len(samples), *samples))
+    return f"loudness normalized, gain {gain:.2f}x to active rms {TARGET_ACTIVE_RMS:.2f}, peak ceiling {PEAK_CEILING:.2f}"
 
 
 def speak_choice(declared: str | None, written: str) -> tuple[str, str]:
@@ -188,6 +242,12 @@ def main() -> int:
         default=None,
         help="extra sentence appended to the notes of every row this run writes",
     )
+    ap.add_argument(
+        "--no-normalize",
+        action="store_true",
+        help="skip the loudness normalization applied to every freshly "
+        "synthesized file (reuse/hash-match semantics are unchanged)",
+    )
     args = ap.parse_args()
 
     pack = args.pack
@@ -256,7 +316,11 @@ def main() -> int:
             if out.exists():
                 out.unlink()
             continue
-        rows.append(build_row(want, out, synth, today, args.note))
+        extras = [args.note]
+        if not args.no_normalize:
+            extras.append(normalize_wav(out) or "normalization skipped (format or silence)")
+        extra = "; ".join(e for e in extras if e) or None
+        rows.append(build_row(want, out, synth, today, extra))
         generated += 1
 
     if args.only:
