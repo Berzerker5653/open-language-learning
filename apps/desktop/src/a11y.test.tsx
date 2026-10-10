@@ -12,6 +12,7 @@ import { ScenarioPanel, type ScenarioPanelProps, type ScenarioView } from "./sce
 import { PronunciationPractice, EMPTY_PITCH } from "./pronunciation";
 import { WritingPractice } from "./writing";
 import { Onboarding, type OnboardingProps } from "./onboarding";
+import { PracticeHub } from "./hub";
 
 import CSS from "../../../packages/ui/src/styles.css?raw";
 
@@ -179,6 +180,7 @@ const surfaces: Record<string, string> = {
     />,
   ),
   practice: renderToStaticMarkup(<PracticeRunner {...practice} />),
+  hub: renderToStaticMarkup(<PracticeHub onOpen={() => {}} />),
   scenario: renderToStaticMarkup(<ScenarioPanel {...scenario} />),
   pronunciation: renderToStaticMarkup(
     <PronunciationPractice

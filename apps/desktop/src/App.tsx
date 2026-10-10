@@ -8,6 +8,7 @@ import {
   type PrivacyNotice,
   type ProfileSummary,
 } from "./onboarding";
+import { PracticeHub, type HubMode } from "./hub";
 import {
   Home,
   type PlannedItem,
@@ -211,6 +212,7 @@ export function App() {
     | "placement"
     | "kanji"
     | "settings"
+    | "hub"
   >("practice");
   const [notice, setNotice] = useState<PrivacyNotice>({
     title: "Your data stays on this device",
@@ -539,17 +541,46 @@ export function App() {
           const navTo = (label: string) =>
             buttons.find((b) => (b.textContent ?? "").trim() === label) as
               HTMLButtonElement | undefined;
-          const away = navTo("Reading");
+          const away = navTo("Today");
           const back = navTo("Settings");
           if (away && back) {
             away.click();
-            await paintedOrStall("Reading");
+            await paintedOrStall("Today");
             const again = performance.now();
             back.click();
             await paintedOrStall("Settings");
             await inv("smoke_ack", {
               note: `route-2ms:Settings:${Math.round(performance.now() - again)}`,
             });
+          }
+          // K-81: the nav is five destinations now; the practice modes hide
+          // behind the hub, so the walk drills the hub the way a learner
+          // does — the route floor counts modes, not just tabs.
+          const practiceTab = navTo("Practice");
+          if (!practiceTab) throw new Error("Practice hub tab missing");
+          for (const mode of [
+            "Pronunciation",
+            "Speaking",
+            "Writing",
+            "Scenarios",
+            "Shadowing",
+            "Reading",
+            "Kanji",
+            "Placement",
+          ]) {
+            practiceTab.click();
+            await painted(3);
+            const card = Array.from(
+              document.querySelectorAll('[aria-label="Practice modes"] button'),
+            ).find((b) => (b.textContent ?? "").trim() === mode) as HTMLButtonElement | undefined;
+            if (!card) throw new Error(`hub card "${mode}" missing`);
+            const started = performance.now();
+            card.click();
+            await paintedOrStall(mode);
+            await inv("smoke_ack", {
+              note: `route-ms:${mode}:${Math.round(performance.now() - started)}`,
+            });
+            await inv("smoke_ack", { note: `route:${mode}` });
           }
           // K-63: route switching was reported as feeling dead. Split the cost
           // into the commands a route runs and the paint that follows, because
@@ -597,12 +628,16 @@ export function App() {
             // that row instead of whatever the pack files sort to first.
             const scen = scenarios.find((s) => s.recommended) ?? scenarios[0];
             if (!scen) throw new Error("scenario list row vanished");
-            const navBtn = Array.from(
-              document.querySelectorAll('nav[aria-label="Routes"] button'),
+            const practiceTab = navTo("Practice");
+            if (!practiceTab) throw new Error("Practice tab missing");
+            practiceTab.click();
+            await painted(4);
+            const scenCard = Array.from(
+              document.querySelectorAll('[aria-label="Practice modes"] button'),
             ).find((b) => (b.textContent ?? "").trim() === "Scenarios") as
               HTMLButtonElement | undefined;
-            if (!navBtn) throw new Error("Scenarios nav button missing");
-            navBtn.click();
+            if (!scenCard) throw new Error("Scenarios hub card missing");
+            scenCard.click();
             await painted(4);
             const row = Array.from(document.querySelectorAll("li")).find((li) =>
               (li.textContent ?? "").includes(scen.title),
@@ -642,6 +677,35 @@ export function App() {
               } catch (e) {
                 await inv("smoke_ack", {
                   note: `scenario-step:${scen.scenario_id}:error:${String(e)}`,
+                });
+              }
+              // O-06 2026-10-10: the owner reported the Support box and the
+              // Transfer variants "do nothing". Click them the way a learner
+              // does and report what visibly changes.
+              const support = document.querySelector(
+                '[aria-label="Scenario"] fieldset.ladder button',
+              ) as HTMLButtonElement | null;
+              if (support) {
+                support.click();
+                await waitUntil(() => support.disabled, 2000);
+                await inv("smoke_ack", {
+                  note: `scenario-support:${scen.scenario_id}:${support.disabled ? "consumed" : "no-visible-change"}`,
+                });
+              } else {
+                await inv("smoke_ack", { note: `scenario-support:${scen.scenario_id}:no-ladder` });
+              }
+              const transfer = document.querySelector(
+                '[aria-label="Scenario"] fieldset.transfers button',
+              ) as HTMLButtonElement | null;
+              if (transfer) {
+                transfer.click();
+                await waitUntil(() => (transfer.textContent ?? "").includes("✓"), 2000);
+                await inv("smoke_ack", {
+                  note: `scenario-transfer:${scen.scenario_id}:${(transfer.textContent ?? "").includes("✓") ? "done" : "no-visible-change"}`,
+                });
+              } else {
+                await inv("smoke_ack", {
+                  note: `scenario-transfer:${scen.scenario_id}:none-offered`,
                 });
               }
             } else {
@@ -1586,6 +1650,38 @@ export function App() {
     playBlobUrl(URL.createObjectURL(new Blob([bytes], { type: "audio/wav" })));
   }
 
+  // K-81: the hub's entry points. Each card reuses the exact open* handler
+  // its former tab used, so behavior cannot depend on how the learner got
+  // there.
+  function openMode(mode: HubMode) {
+    switch (mode) {
+      case "pronunciation":
+        setRoute("pronunciation");
+        break;
+      case "dictation":
+        void openDictation();
+        break;
+      case "writing":
+        void openWriting();
+        break;
+      case "scenarios":
+        void openScenarios();
+        break;
+      case "shadowing":
+        void openShadowing();
+        break;
+      case "reading":
+        void openReading();
+        break;
+      case "kanji":
+        void openKanji();
+        break;
+      case "placement":
+        void openPlacement();
+        break;
+    }
+  }
+
   // K-11: shadowing is a formative speak-along loop — play the model,
   // speak, play your own recording back. No analysis, no evidence.
   async function openShadowing() {
@@ -2237,69 +2333,38 @@ export function App() {
       nav={[]}
       routeNav={
         <nav aria-label="Routes" className="routes">
+          {/* K-81 option A (owner 2026-10-10): five destinations. The modes
+              behind Practice are unchanged routes; the hub replaced tabs. */}
           <button
             type="button"
             className="tab"
             aria-current={route === "practice" ? "page" : undefined}
-            onClick={() => setRoute("practice")}
+            onClick={() => {
+              setPracticeTarget(null);
+              setRoute("practice");
+            }}
+          >
+            Today
+          </button>
+          <button
+            type="button"
+            className="tab"
+            aria-current={
+              route === "hub" ||
+              route === "pronunciation" ||
+              route === "dictation" ||
+              route === "writing" ||
+              route === "scenarios" ||
+              route === "shadowing" ||
+              route === "reading" ||
+              route === "kanji" ||
+              route === "placement"
+                ? "page"
+                : undefined
+            }
+            onClick={() => setRoute("hub")}
           >
             Practice
-          </button>
-          <button
-            type="button"
-            className="tab"
-            aria-current={route === "progress" ? "page" : undefined}
-            onClick={() => void openProgress()}
-          >
-            Progress
-          </button>
-          <button
-            type="button"
-            className="tab"
-            aria-current={route === "pronunciation" ? "page" : undefined}
-            onClick={() => setRoute("pronunciation")}
-          >
-            Pronunciation
-          </button>
-          <button
-            type="button"
-            className="tab"
-            aria-current={route === "dictation" ? "page" : undefined}
-            onClick={() => void openDictation()}
-          >
-            Speaking
-          </button>
-          <button
-            type="button"
-            className="tab"
-            aria-current={route === "writing" ? "page" : undefined}
-            onClick={() => void openWriting()}
-          >
-            Writing
-          </button>
-          <button
-            type="button"
-            className="tab"
-            aria-current={route === "scenarios" ? "page" : undefined}
-            onClick={() => void openScenarios()}
-          >
-            Scenarios
-          </button>
-          <button
-            type="button"
-            className="tab"
-            aria-current={route === "shadowing" ? "page" : undefined}
-            onClick={() => void openShadowing()}
-          >
-            Shadowing
-          </button>
-          <button
-            type="button"
-            className="tab"
-            aria-current={route === "reading" ? "page" : undefined}
-            onClick={() => void openReading()}
-          >
-            Reading
           </button>
           <button
             type="button"
@@ -2312,18 +2377,10 @@ export function App() {
           <button
             type="button"
             className="tab"
-            aria-current={route === "placement" ? "page" : undefined}
-            onClick={() => void openPlacement()}
+            aria-current={route === "progress" ? "page" : undefined}
+            onClick={() => void openProgress()}
           >
-            Placement
-          </button>
-          <button
-            type="button"
-            className="tab"
-            aria-current={route === "kanji" ? "page" : undefined}
-            onClick={() => void openKanji()}
-          >
-            Kanji
+            Progress
           </button>
           <button
             type="button"
@@ -2336,7 +2393,9 @@ export function App() {
         </nav>
       }
     >
-      {route === "pronunciation" ? (
+      {route === "hub" ? (
+        <PracticeHub onOpen={openMode} />
+      ) : route === "pronunciation" ? (
         <>
           {audioMsg &&
             (fixableBySpeechSetup(audioMsg) ? (
