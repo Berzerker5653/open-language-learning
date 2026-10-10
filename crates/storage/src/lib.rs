@@ -51,6 +51,15 @@ impl Store {
     }
 
     fn from_conn(conn: Connection) -> Result<Self, Error> {
+        // PS-05a: WAL lets readers run beside a writer, but two writers
+        // still collide, and a colliding write must wait and land rather
+        // than surface as a lost save. rusqlite 0.37 happens to default
+        // every connection to a 5 s busy timeout (inner_connection.rs),
+        // but that is an upstream convenience, not our contract: the
+        // desktop shell, the CLI tools, and warm-up threads all hold
+        // connections to one profile file, so the wait is stated
+        // explicitly here and pinned by tests/concurrency.rs.
+        conn.busy_timeout(std::time::Duration::from_secs(5))?;
         conn.pragma_update(None, "journal_mode", "WAL")?;
         conn.pragma_update(None, "foreign_keys", "ON")?;
         migrations::migrate(&conn)?;

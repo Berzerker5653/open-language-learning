@@ -9,7 +9,6 @@ publish.workspace = true
 [dependencies]
 lts-domain.workspace = true
 serde.workspace = true
-thiserror.workspace = true
 
 [dev-dependencies]
 lts-learner-model.workspace = true

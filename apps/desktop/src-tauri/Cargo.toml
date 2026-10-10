@@ -37,6 +37,7 @@ sha2 = "0.10"
 ureq = "2.10"
 url = "2.5"
 zip.workspace = true
+tauri-plugin-single-instance = "2.4.5"
 
 [dev-dependencies]
 tempfile.workspace = true

@@ -6899,6 +6899,19 @@ pub fn run() {
     force_webkit_fallback_renderer();
     tauri::Builder::default()
         .manage(scenarios::SessionStore::default())
+        // PS-05b: a second launch must not open a second window over the same
+        // profile. Two windows mean two sessions and two writers on one
+        // SQLite file, and the learner would see one window silently
+        // competing with an invisible one. The plugin routes the second
+        // launch to the running instance, which surfaces its own window.
+        // Rust-side plugin only: no webview command, so no capability change.
+        .plugin(tauri_plugin_single_instance::init(|app, _argv, _cwd| {
+            use tauri::Manager;
+            if let Some(window) = app.get_webview_window("main") {
+                let _ = window.unminimize();
+                let _ = window.set_focus();
+            }
+        }))
         // The window is built here (not via tauri.conf.json) so the
         // webview permission handler can be attached: the pronunciation
         // feature calls getUserMedia, and WebKitGTK denies permission
