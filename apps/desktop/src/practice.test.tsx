@@ -128,9 +128,11 @@ describe("practice runner", () => {
     expect(ok).toContain("synthesized voice (model output)");
     const err = render({
       task: { item_id: "x#comprehension-listening", surface: null, choices: ["hello", "aunt"] },
-      audioError: "No audio is available for this item yet (tts-runtime-unavailable).",
+      // The engine's media-miss sentence, token stripped by App (K-90).
+      audioError:
+        "This pack does not ship audio for this item, and the app never synthesizes speech, so there is nothing to play.",
     });
-    expect(err).toContain("tts-runtime-unavailable");
+    expect(err).toContain("does not ship audio");
     expect(err).not.toContain("Play the audio");
   });
 

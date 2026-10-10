@@ -5,18 +5,18 @@
  * export/delete) — nothing is stored only in the UI. K-77 (owner
  * 2026-10-09): the Languages tab is gone; this route also renders the
  * Language-packs panel, and the speech model picker exists exactly once,
- * here, together with the TTS payloads and the runtime-availability
- * statement. Copy follows docs/18: it never claims a capability this
- * build lacks. In particular the speech-based checks (pronunciation
- * feedback, dictation recognition) also need a speech runtime that this
- * build may not ship, so a model download here does not make them work —
+ * here, together with the runtime-availability statement. Copy follows
+ * docs/18: it never claims a capability this build lacks. K-90 deleted the
+ * synthesis payloads, so the remaining downloads are recognition models;
+ * the speech-based checks (pronunciation feedback, dictation recognition)
+ * also need a recognition runtime this build may not ship, so a model download here does not make them work —
  * the copy says so instead of implying otherwise. Presentational
  * component: state and IPC live in the App container so every control is
  * renderable in tests.
  */
 
 import type { Microphone, SpeakerOutput } from "./capture";
-import { megabytes, type AlignerStatus, type DeviceTier, type TtsStatus } from "./language";
+import { megabytes, type AlignerStatus, type DeviceTier } from "./language";
 export type RomajiMode = "auto" | "always" | "off";
 
 export interface SpeechModelPref {
@@ -55,8 +55,6 @@ export interface SettingsProps {
   speechModel: string;
   speechModels: SpeechModelPref[];
   onSelectSpeechModel(modelId: string): void;
-  /** K-77: the speech-synthesis payloads (runtime/voice), null until read. */
-  tts: TtsStatus | null;
   onInstallModel(modelId: string): void;
   onDeleteModel(modelId: string): void;
   /** D4 (ADR-0019): the speech runtime this build carries, null until read. */
@@ -84,19 +82,6 @@ const ROMAJI_MODES: { value: RomajiMode; label: string }[] = [
   { value: "always", label: "Always show romaji" },
   { value: "off", label: "Off — Japanese script only" },
 ];
-
-const TTS_SOURCE_LABELS: Record<string, string> = {
-  bundled: "Speech synthesis is included in this download.",
-  model: "Speech synthesis is installed as a model download.",
-  env: "Speech synthesis uses the local runtime you configured (LTS_TTS_DIR).",
-  bench: "Speech synthesis uses a development runtime (not a shipped configuration).",
-  none: "No speech synthesis is installed. Audio activities are disabled; everything else works offline.",
-};
-
-const TTS_MODEL_LABELS: Record<string, string> = {
-  "org.openlanguage.speech.sherpa-onnx-runtime": "Speech runtime",
-  "org.openlanguage.speech.kokoro-multi-lang": "Japanese voice model (Kokoro)",
-};
 
 const SPEECH_MODEL_LABELS: Record<string, string> = {
   "org.openlanguage.speech.whisper-ggml-tiny": "Whisper Tiny — smallest, lightest",
@@ -390,58 +375,12 @@ export function Settings(p: SettingsProps) {
           <small>
             The engines this build ships and can load — honest status, not a choice. Pronunciation
             feedback and dictation recognition also need a recognition runtime: where it is absent,
-            those checks abstain, and choosing or downloading a model does not change that. Speech
-            synthesis is optional and separate from packs.
+            those checks abstain, and choosing or downloading a model does not change that.
           </small>
         </p>
         <p className="meta pack-posture" data-aligner={p.aligner?.available ? "yes" : "no"}>
           {alignerLine(p.aligner)}
         </p>
-        <h4>Speech synthesis</h4>
-        {p.tts ? (
-          <>
-            <p>{TTS_SOURCE_LABELS[p.tts.source] ?? p.tts.source}</p>
-            {p.tts.components.length > 0 && (
-              <ul className="meta-list">
-                {p.tts.components.map((c) => (
-                  <li key={c.name}>
-                    {c.name} — {c.license} ({c.role})
-                  </li>
-                ))}
-              </ul>
-            )}
-            <ul className="pack-list">
-              {p.tts.models.map((m) => (
-                <li key={m.id}>
-                  {TTS_MODEL_LABELS[m.id] ?? m.id} — v{m.version}, {m.license_code}
-                  {m.installed ? (
-                    <button
-                      type="button"
-                      className="btn btn--quiet"
-                      onClick={() => p.onDeleteModel(m.id)}
-                    >
-                      Remove
-                    </button>
-                  ) : m.installable ? (
-                    <button
-                      type="button"
-                      className="btn btn--primary"
-                      onClick={() => p.onInstallModel(m.id)}
-                    >
-                      Download
-                    </button>
-                  ) : (
-                    // A payload this build has not staged: no button, and the
-                    // reason stated instead of a download that would fail.
-                    <span className="meta">not published in this build</span>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </>
-        ) : (
-          <p className="empty">Speech status unavailable.</p>
-        )}
       </div>
     </section>
   );

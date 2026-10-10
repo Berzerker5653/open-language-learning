@@ -139,29 +139,31 @@ describe("onboarding", () => {
 
   // K-72: saying "yes" to the microphone must lead into the speech
   // setup, never leave the learner to discover the downloads later.
+  // K-90: the catalog ships recognition models only — spoken audio comes
+  // from pack media, never from an installed synthesis payload.
   const missing = [
     {
-      id: "rt",
-      name: "Speaking engine (runtime)",
+      id: "tiny",
+      name: "Listening (speech recognition, tiny)",
       installed: false,
       installable: true,
-      size_bytes: 30_454_382,
-      role: "synthesis" as const,
+      size_bytes: 77_691_713,
+      role: "recognition" as const,
     },
     {
-      id: "voice",
-      name: "Japanese voice",
+      id: "base",
+      name: "Listening (speech recognition, base)",
       installed: false,
       installable: true,
-      size_bytes: 345_065_270,
-      role: "synthesis" as const,
+      size_bytes: 147_951_465,
+      role: "recognition" as const,
     },
     {
       id: "asr",
-      name: "Listening (speech recognition)",
+      name: "Listening (speech recognition, sherpa)",
       installed: true,
       installable: true,
-      size_bytes: 466_000_000,
+      size_bytes: 43_000_000,
       role: "recognition" as const,
     },
   ];
@@ -169,25 +171,23 @@ describe("onboarding", () => {
   it("lists the speech components with honest pinned sizes when chaining from the mic", () => {
     const html = render({ step: "speech-setup", micChosen: true, speechComponents: missing });
     expect(html).toContain("Speech setup");
-    expect(html).toContain("Speaking engine (runtime)");
-    expect(html).toContain("not installed (30 MB");
-    expect(html).toContain("not installed (345 MB");
+    expect(html).toContain("Listening (speech recognition, tiny)");
+    expect(html).toContain("not installed (78 MB");
+    expect(html).toContain("not installed (148 MB");
     // The already-installed component says so; no fake pending state.
-    expect(html).toContain("Listening (speech recognition): <span>installed</span>");
+    expect(html).toContain("installed</span>");
     // The stepper gained the Speech step only because the mic was chosen.
     expect(html).toContain(">Speech<");
   });
 
-  it("start-with-speech needs a recognition model, not the synthesis payloads", () => {
-    // The build cannot deliver TTS payloads (ADR-0009/D5-rest); that must
-    // never make the ready-start impossible when recognition is installed.
+  it("start-with-speech is gated on a recognition model only (K-90)", () => {
+    // Recognition installed means speaking works; pack media covers spoken
+    // responses on top and its absence never locks the start.
     const html = render({ step: "speech-setup", micChosen: true, speechComponents: missing });
     expect(html).not.toMatch(/disabled=""[^>]*>\s*Start with speech/);
     expect(html).toContain("Skip for now");
-    // And it says plainly what the missing synthesis means.
-    expect(html).toContain("the app will not talk back");
     // Without a recognition model the start is honestly locked.
-    const noAsr = missing.map((c) => (c.role === "recognition" ? { ...c, installed: false } : c));
+    const noAsr = missing.map((c) => ({ ...c, installed: false }));
     const locked = render({ step: "speech-setup", micChosen: true, speechComponents: noAsr });
     expect(locked).toMatch(/disabled=""[^>]*>\s*Start with speech/);
   });
@@ -209,7 +209,5 @@ describe("onboarding", () => {
     expect(html).not.toMatch(/disabled=""[^>]*>\s*Start with speech/);
     // Nothing left to install: the install button is honestly disabled.
     expect(html).toMatch(/disabled=""[^>]*>\s*Install speech components/);
-    // Synthesis present: the "will not talk back" notice is not shown.
-    expect(html).not.toContain("will not talk back");
   });
 });

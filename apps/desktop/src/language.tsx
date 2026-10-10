@@ -3,9 +3,9 @@
  * K-77): the language being learned (a pack) is separate from the app's
  * own display language, which stays fixed. Installed packs work fully
  * offline; the community catalog points at versioned GitHub releases and
- * always labels packs as community content. All speech UI — model picker,
- * TTS payloads, runtime availability — lives in the single Settings →
- * Speech card; nothing here duplicates it.
+ * always labels packs as community content. All speech UI — model picker
+ * and runtime availability — lives in the single Settings → Speech card;
+ * nothing here duplicates it.
  */
 import { progressLine, type EngineProgress } from "./progress";
 
@@ -30,28 +30,6 @@ export interface CatalogEntry {
   min_sdk_version: string;
   size_bytes: number;
   installed_version: string | null;
-}
-
-export interface TtsComponent {
-  name: string;
-  license: string;
-  role: string;
-}
-
-export interface TtsModel {
-  id: string;
-  version: string;
-  license_code: string;
-  installed: boolean;
-  /// False when the catalog lists a payload this build cannot deliver; the
-  /// panel must not offer a download for it.
-  installable: boolean;
-}
-
-export interface TtsStatus {
-  source: string;
-  components: TtsComponent[];
-  models: TtsModel[];
 }
 
 /// D4 (ADR-0019): the constrained-alignment runtime this build carries, as the

@@ -1,9 +1,9 @@
 // SETTINGS-001 + K-77 UI contract: the mic control mirrors the stored
 // setting, Delete is a two-step confirmation (never fires from the first
 // control), and Export reports the written path. K-77: the Speech card is
-// the ONLY place for speech models — exactly one picker, plus the TTS
-// payload list and the runtime-availability statement folded in from the
-// removed Languages tab. No copy claims a capability this build lacks.
+// the ONLY place for speech models — exactly one picker. K-90 deleted the
+// TTS payloads: the card lists recognition models only, and no copy claims
+// a capability this build lacks.
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 import { Settings, type SettingsProps } from "./settings";
@@ -33,7 +33,6 @@ const base: SettingsProps = {
     },
   ],
   onSelectSpeechModel: () => {},
-  tts: { source: "none", components: [], models: [] },
   onInstallModel: () => {},
   onDeleteModel: () => {},
   aligner: null,
@@ -161,70 +160,21 @@ describe("settings", () => {
     expect(html).not.toMatch(/Languages\s*→\s*Speech/);
   });
 
-  it("the Speech runtimes card lists TTS payloads with install and remove controls", () => {
-    const bundled = render({
-      tts: {
-        source: "bundled",
-        components: [
-          { name: "espeak-ng", license: "GPL-3.0", role: "pronunciation data for synthesis" },
-          { name: "sherpa-onnx", license: "Apache-2.0", role: "speech runtime" },
-          { name: "ONNX Runtime", license: "MIT", role: "model inference engine" },
-          { name: "Kokoro", license: "Apache-2.0", role: "Japanese voice model" },
-        ],
-        models: [
-          {
-            id: "org.openlanguage.speech.kokoro-multi-lang",
-            version: "1.0.0",
-            license_code: "Apache-2.0",
-            installed: true,
-            installable: true,
-          },
-        ],
-      },
+  it("labels an unpublished model honestly instead of offering a button (D5)", () => {
+    const html = render({
+      speechModels: [
+        {
+          id: "org.openlanguage.speech.whisper-ggml-small",
+          version: "1.0.0",
+          license_code: "MIT",
+          installed: false,
+          installable: false,
+          size_bytes: 592997257,
+        },
+      ],
     });
-    expect(bundled).toContain("included in this download");
-    expect(bundled).toContain("espeak-ng");
-    expect(bundled).toContain("GPL-3.0");
-    expect(bundled).toContain("ONNX Runtime");
-    expect(bundled).toContain("Japanese voice model (Kokoro)");
-    expect(bundled).toContain("Remove");
-    const missing = render({
-      tts: {
-        source: "none",
-        components: [],
-        models: [
-          {
-            id: "org.openlanguage.speech.sherpa-onnx-runtime",
-            version: "1.13.8",
-            license_code: "Apache-2.0",
-            installed: false,
-            installable: true,
-          },
-        ],
-      },
-    });
-    expect(missing).toContain("No speech synthesis is installed");
-    expect(missing).toContain("Audio activities are disabled");
-    expect(missing).not.toContain("GPL-3.0");
-    // D5: a payload this build has not staged gets the honest label, no button.
-    const unpublished = render({
-      speechModels: [],
-      tts: {
-        source: "none",
-        components: [],
-        models: [
-          {
-            id: "org.openlanguage.speech.kokoro-multi-lang",
-            version: "1.0.0",
-            license_code: "Apache-2.0",
-            installed: false,
-            installable: false,
-          },
-        ],
-      },
-    });
-    expect(unpublished).toContain("not published in this build");
-    expect(unpublished).not.toContain("Download");
+    expect(html).toContain("not published in this build");
+    expect(html).not.toContain("Download");
   });
 
   it("the single Speech card states runtime availability honestly (D4/ADR-0019)", () => {

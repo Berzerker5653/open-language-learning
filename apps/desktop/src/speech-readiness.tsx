@@ -1,23 +1,19 @@
 /**
- * K-78: one readiness rule for every surface that plays model audio
+ * K-78/K-90: one readiness rule for every surface that plays pack audio
  * (pronunciation reference, shadowing model play, practice play, story
- * audio, dictation-adjacent listening). The rule the engine enforces
- * server-side — an unavailable chain names WHICH component is missing —
- * has one frontend half here: the block tokens `speech_audio`/
- * `reference_audio` emit are parsed once, never re-invented per tab, and
- * surfaces that can proceed text-first say the audio is unavailable
- * rather than pretending the click worked.
+ * audio, dictation-adjacent listening). K-90 (ADR-0024) deleted runtime
+ * synthesis, so exactly one audio-block token remains — the pack ships no
+ * recording for this item — and no in-app setup can fix it: surfaces say
+ * so plainly, and surfaces that can proceed text-first never pretend the
+ * click worked.
  *
  * K-76 boundary this module must never cross: recording is mic-only.
- * Nothing in here gates a Record control on the TTS chain.
+ * Nothing in here gates a Record control on audio availability.
  */
 
-/** Stable tokens the native audio block emits before ": " (lib.rs audio_block). */
-export const AUDIO_BLOCK_TOKENS = [
-  "tts-runtime-unavailable",
-  "tts-voice-unavailable",
-  "tts-chain-unavailable",
-] as const;
+/** The stable token the native audio miss emits before ": " (lib.rs
+ * MEDIA_MISSING_CODE). Parsed once here, never re-invented per tab. */
+export const AUDIO_BLOCK_TOKENS = ["media-asset-missing"] as const;
 
 /** The human sentence out of a blocked-audio error, verbatim from the engine.
  * Un-tokenized errors pass through unchanged — the engine's honesty contract
@@ -30,17 +26,17 @@ export function audioFailureMessage(error: string): string {
   return error;
 }
 
-/** Whether the named failure is fixable through the in-app speech setup
- * (runtime/voice install) — as opposed to, say, a pack that ships no
- * licensed recording for this item, where setup cannot help. */
-export function fixableBySpeechSetup(error: string): boolean {
+/** Whether the named failure is exactly the honest media miss (a pack that
+ * ships no recording), as opposed to an unexpected transport error whose
+ * raw text should surface instead. */
+export function isMediaMissing(error: string): boolean {
   const at = error.indexOf(": ");
   return at > 0 && (AUDIO_BLOCK_TOKENS as readonly string[]).includes(error.slice(0, at));
 }
 
 /** What the shadowing surface's target area can honestly say (K-76/W-08):
  * a failed load must never read as "this pack has no targets" — the pack
- * may be fine while the read (or the install) failed. */
+ * may be fine while the read failed. */
 export function shadowTargetsState(
   items: { length: number } | null,
   error: string | null,

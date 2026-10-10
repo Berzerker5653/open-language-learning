@@ -271,12 +271,6 @@ export function Onboarding(p: OnboardingProps) {
               </li>
             ))}
           </ul>
-          {p.speechComponents.some((c) => c.role === "synthesis" && !c.installed) && (
-            <p className="notice">
-              Speech synthesis is not installed in this build, so the app will not talk back;
-              speaking activities still record you and give written feedback.
-            </p>
-          )}
           <div className="btn-row">
             <button
               type="button"
@@ -294,10 +288,9 @@ export function Onboarding(p: OnboardingProps) {
               type="button"
               className="btn"
               onClick={p.onStartSpeech}
-              // Speaking needs a recognition model; a build that cannot ship
-              // the synthesis payloads must not make "Start with speech"
-              // impossible — those activities honestly run without spoken
-              // responses, and the notice below says so.
+              // Speaking needs a recognition model; K-90 made pack media the
+              // only spoken audio, and it rides on top of these activities —
+              // a pack with no recording still runs them honestly.
               disabled={!p.speechComponents.some((c) => c.installed && c.role === "recognition")}
             >
               Start with speech

@@ -30,7 +30,6 @@ import {
   type InstalledPack,
   type PackClaims,
   type SpeechModel,
-  type TtsStatus,
   type DeviceTier,
   type AlignerStatus,
 } from "./language";
@@ -53,12 +52,7 @@ import {
   type Microphone,
   type SpeakerOutput,
 } from "./capture";
-import {
-  audioFailureMessage,
-  fixableBySpeechSetup,
-  shadowTargetsState,
-  SpeechSetupNotice,
-} from "./speech-readiness";
+import { audioFailureMessage, isMediaMissing, shadowTargetsState } from "./speech-readiness";
 import type { EngineProgress } from "./progress";
 
 export type Invoke = (cmd: string, args?: Record<string, unknown>) => Promise<unknown>;
@@ -265,7 +259,6 @@ export function App() {
   const [catalogStatus, setCatalogStatus] = useState("no-catalog-url");
   const [audioMsg, setAudioMsg] = useState<string | null>(null);
   const [langError, setLangError] = useState<string | null>(null);
-  const [ttsStatus, setTtsStatus] = useState<TtsStatus | null>(null);
   const [alignerStatus, setAlignerStatus] = useState<AlignerStatus | null>(null);
   const [speechModels, setSpeechModels] = useState<SpeechModel[]>([]);
   const [speechModel, setSpeechModel] = useState<string>("off");
@@ -620,7 +613,6 @@ export function App() {
             ["pack_claims", undefined],
             ["catalog_packs", undefined],
             ["available_models", undefined],
-            ["tts_status", undefined],
             ["aligner_status", undefined],
             ["scenario_list", { profileId: p.id }],
             ["home_state", { profileId: p.id }],
@@ -870,17 +862,12 @@ export function App() {
     await refreshLanguages();
   }
 
-  async function refreshTts() {
-    if (!inv) return;
-    setTtsStatus((await inv("tts_status")) as TtsStatus);
-  }
-
   async function refreshAligner() {
     if (!inv) return;
     setAlignerStatus((await inv("aligner_status")) as AlignerStatus);
   }
 
-  async function installTtsModel(modelId: string) {
+  async function installSpeechModel(modelId: string) {
     if (!inv) return;
     try {
       await inv("install_model", { modelId });
@@ -890,11 +877,10 @@ export function App() {
     } finally {
       setEngineProgress(null);
     }
-    await refreshTts();
     await refreshSpeech();
   }
 
-  async function deleteTtsModel(modelId: string) {
+  async function deleteSpeechModel(modelId: string) {
     if (!inv) return;
     try {
       await inv("delete_model", { modelId });
@@ -902,7 +888,6 @@ export function App() {
     } catch (e) {
       setLangError(String(e));
     }
-    await refreshTts();
     await refreshSpeech();
   }
 
@@ -1159,11 +1144,10 @@ export function App() {
       setPlaybackDevice((await inv("get_playback_device", { profileId })) as string | null);
       setRomajiMode((await inv("get_romaji_mode", { profileId })) as RomajiMode);
       await refreshSpeech();
-      // K-77: Settings now hosts language-pack management and the TTS /
+      // K-77: Settings now hosts language-pack management and the speech
       // runtime status too, so opening it primes the reads the old
-      // Languages tab did.
+      // Languages tab did. K-90 deleted the synthesis status read.
       await refreshLanguages();
-      await refreshTts();
       await refreshAligner();
       await refreshMicrophones();
       await refreshOutputs();
@@ -1449,13 +1433,13 @@ export function App() {
             )) as { wav_b64: string; source: string };
             setPracticeAudio({ wavB64: a.wav_b64, source: a.source });
           } catch (e) {
-            // K-78: name the cause the engine reported instead of a generic
-            // "install a speech model" — an install cannot fix a pack that
-            // ships no recording for this item.
+            // K-78/K-90: the only audio failure left is the pack shipping
+            // no recording; the engine's own sentence says so, and anything
+            // unexpected surfaces its raw text rather than a canned claim.
             setPracticeAudioError(
-              fixableBySpeechSetup(String(e))
+              isMediaMissing(String(e))
                 ? `${audioFailureMessage(String(e))} Text practice still works.`
-                : `This pack ships no recording for this item. Text practice still works.`,
+                : `Audio failed: ${String(e)}. Text practice still works.`,
             );
           }
         }
@@ -2468,14 +2452,11 @@ export function App() {
         <PracticeHub onOpen={openMode} />
       ) : route === "pronunciation" ? (
         <>
-          {audioMsg &&
-            (fixableBySpeechSetup(audioMsg) ? (
-              <SpeechSetupNotice message={audioMsg} onOpenSetup={() => void openSettings()} />
-            ) : (
-              <p role="status" className="notice">
-                {audioMsg}
-              </p>
-            ))}
+          {audioMsg && (
+            <p role="status" className="notice">
+              {audioMsg}
+            </p>
+          )}
           {pronDemo ? (
             <PronunciationPractice
               shortText={pronDemo.short_text}
@@ -2536,14 +2517,11 @@ export function App() {
               {shadowError}
             </p>
           )}
-          {audioMsg &&
-            (fixableBySpeechSetup(audioMsg) ? (
-              <SpeechSetupNotice message={audioMsg} onOpenSetup={() => void openSettings()} />
-            ) : (
-              <p role="status" className="notice">
-                {audioMsg}
-              </p>
-            ))}
+          {audioMsg && (
+            <p role="status" className="notice">
+              {audioMsg}
+            </p>
+          )}
           {!shadowCurrent ? (
             shadowTargetsState(shadowItems, shadowError) === "error" ? (
               // K-76/W-08: a failed target read must never read as "this
@@ -3045,9 +3023,8 @@ export function App() {
             speechModel={speechModel}
             speechModels={speechModels}
             onSelectSpeechModel={(id) => void selectSpeechModel(id)}
-            tts={ttsStatus}
-            onInstallModel={(id) => void installTtsModel(id)}
-            onDeleteModel={(id) => void deleteTtsModel(id)}
+            onInstallModel={(id) => void installSpeechModel(id)}
+            onDeleteModel={(id) => void deleteSpeechModel(id)}
             aligner={alignerStatus}
             deviceTier={deviceTier}
             exportPath={settingsExportPath}
