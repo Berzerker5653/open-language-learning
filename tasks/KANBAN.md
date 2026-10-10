@@ -140,7 +140,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | K-86 | progress-ux | Progress tab informational widgets, bounded: WaniKani's documented catalogue (recent mistakes, correct %, days studied, heat map, level progress) is a ready menu, but LAK'24's systematic review found dashboards move participation, NOT achievement — so informational only, no streaks/XP/leaderboards (product bar + Hanus & Fox + Sailer & Homner evidence), no vanity metrics, every number honestly sourced from the engine | research finding 7 / §3 divergence table |
 | K-87 | a11y | Accessibility conformance pass: WCAG 4.1.3 status-message coverage on state changes (already partial from K-69/K-76), ARIA APG rule that indeterminate progressbars OMIT aria-valuenow (matches the honesty contract — verify in markup), and WCAG 2.2.1 off/extend paths as a precondition for any future timed activity (none ships today — pin as a design rule before one is ever added) | research finding 8 |
 
-## done — 2026-10-10 project-sweep implementation tranche (owner approved 2026-10-10 — "Proceed with next steps"; per-card gate log: `.project-sweep/runs/2026-10-09-deep/evidence/fix-implementations.md`; audit findings stay in `.project-sweep/` — owner call whether to track it)
+## done — 2026-10-10 project-sweep implementation tranche (owner approved 2026-10-10 — "Proceed with next steps"; per-card gate log: `.project-sweep/runs/2026-10-09-deep/evidence/fix-implementations.md`; audit workspace gitignored by owner call — working aid, the durable record is these rows + `state/`)
 
 | card | epic | what shipped | maps to |
 | --- | --- | --- | --- |

@@ -1093,8 +1093,9 @@ summary screens need a human with the apps installed).
 
 The owner approved implementing the 2026-10-09 deep-sweep cards ("Proceed
 with next steps"). Full audit evidence and the per-card gate log live in
-`.project-sweep/runs/2026-10-09-deep/` (untracked; disposition is an owner
-call — the board references it).
+`.project-sweep/runs/2026-10-09-deep/`, gitignored by owner call ("not needed
+for the end user… only for us to make sure we have everything done
+correctly") — the durable record is the KANBAN done rows and `state/`.
 
 **PS-01 + PS-09 — the CI `schemas` job was red twice over at afbe550.**
 `execution_scope.optional_tasks` had never picked up the ADR-0017 flips of
