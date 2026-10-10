@@ -19,7 +19,10 @@ except ImportError as exc:
     raise SystemExit(2)
 
 ROOT = Path(__file__).resolve().parents[1]
-MAX_DATA_BYTES = 2_000_000
+# Headroom over the committed pack media manifests (docs/13 §"Packs with
+# generated audio"): ja-JP media/manifest.jsonl is 3.2 MB and every entry is
+# schema-validated; the cap guards against runaway/accidental data files.
+MAX_DATA_BYTES = 8_000_000
 TRUSTED = {"validated", "verified", "reference"}
 
 
