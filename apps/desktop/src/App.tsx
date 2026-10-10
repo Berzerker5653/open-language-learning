@@ -919,6 +919,7 @@ export function App() {
         installed: boolean;
         installable: boolean;
         size_bytes: number;
+        role: "recognition" | "synthesis";
       }>;
       setSpeechComponents(
         all.map((m) => ({
@@ -927,6 +928,7 @@ export function App() {
           installed: m.installed,
           installable: m.installable,
           size_bytes: m.size_bytes,
+          role: m.role,
         })),
       );
     } catch {

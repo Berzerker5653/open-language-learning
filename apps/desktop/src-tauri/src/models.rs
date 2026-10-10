@@ -56,6 +56,13 @@ pub struct ModelEntry {
     /// the payload is offered for download.
     #[serde(default)]
     pub availability: Option<String>,
+    /// What the payload is FOR: `"recognition"` (learner's speech -> text)
+    /// or `"synthesis"` (text -> spoken voice). The onboarding start gate
+    /// needs only recognition present; a missing synthesis payload degrades
+    /// speech activities to honest text-only feedback, it must never block
+    /// a learner who can already speak to the app.
+    #[serde(default)]
+    pub role: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -92,6 +99,8 @@ pub struct ModelStatus {
     /// False when the catalog lists a payload this build cannot deliver; the
     /// UI must not offer a download button for it.
     pub installable: bool,
+    /// Carried through from the catalog: see `ModelEntry::role`.
+    pub role: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -223,6 +232,7 @@ pub fn model_status(data: &Path) -> Vec<ModelStatus> {
                 id: m.id,
                 version: m.version,
                 runtime: m.runtime,
+                role: m.role,
                 tier: m.tier,
                 license_code: m.license_code,
                 license_model: m.license_model,
@@ -617,6 +627,7 @@ mod tests {
             license_model: "test".into(),
             source: "test".into(),
             availability: None,
+            role: Some("recognition".into()),
         }
     }
 
@@ -733,6 +744,7 @@ mod tests {
             license_model: "test".into(),
             source: "test".into(),
             availability: None,
+            role: Some("recognition".into()),
         }
     }
 

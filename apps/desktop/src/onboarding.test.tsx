@@ -146,6 +146,7 @@ describe("onboarding", () => {
       installed: false,
       installable: true,
       size_bytes: 30_454_382,
+      role: "synthesis" as const,
     },
     {
       id: "voice",
@@ -153,6 +154,7 @@ describe("onboarding", () => {
       installed: false,
       installable: true,
       size_bytes: 345_065_270,
+      role: "synthesis" as const,
     },
     {
       id: "asr",
@@ -160,6 +162,7 @@ describe("onboarding", () => {
       installed: true,
       installable: true,
       size_bytes: 466_000_000,
+      role: "recognition" as const,
     },
   ];
 
@@ -175,10 +178,18 @@ describe("onboarding", () => {
     expect(html).toContain(">Speech<");
   });
 
-  it("does not offer a ready start while opted-in components are missing, but keeps skip clean", () => {
+  it("start-with-speech needs a recognition model, not the synthesis payloads", () => {
+    // The build cannot deliver TTS payloads (ADR-0009/D5-rest); that must
+    // never make the ready-start impossible when recognition is installed.
     const html = render({ step: "speech-setup", micChosen: true, speechComponents: missing });
-    expect(html).toMatch(/disabled=""[^>]*>\s*Start with speech/);
+    expect(html).not.toMatch(/disabled=""[^>]*>\s*Start with speech/);
     expect(html).toContain("Skip for now");
+    // And it says plainly what the missing synthesis means.
+    expect(html).toContain("the app will not talk back");
+    // Without a recognition model the start is honestly locked.
+    const noAsr = missing.map((c) => (c.role === "recognition" ? { ...c, installed: false } : c));
+    const locked = render({ step: "speech-setup", micChosen: true, speechComponents: noAsr });
+    expect(locked).toMatch(/disabled=""[^>]*>\s*Start with speech/);
   });
 
   it("locks and labels the install button while speech components download", () => {
@@ -192,11 +203,13 @@ describe("onboarding", () => {
     expect(html).toContain("aria-busy");
   });
 
-  it("offers Start with speech once every component is installed", () => {
+  it("offers Start with speech once a recognition model is installed", () => {
     const all = missing.map((c) => ({ ...c, installed: true }));
     const html = render({ step: "speech-setup", micChosen: true, speechComponents: all });
     expect(html).not.toMatch(/disabled=""[^>]*>\s*Start with speech/);
     // Nothing left to install: the install button is honestly disabled.
     expect(html).toMatch(/disabled=""[^>]*>\s*Install speech components/);
+    // Synthesis present: the "will not talk back" notice is not shown.
+    expect(html).not.toContain("will not talk back");
   });
 });

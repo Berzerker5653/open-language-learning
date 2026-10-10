@@ -119,6 +119,7 @@ const onboarding: OnboardingProps = {
       installed: false,
       installable: true,
       size_bytes: 30_454_382,
+      role: "synthesis",
     },
     {
       id: "voice",
@@ -126,6 +127,7 @@ const onboarding: OnboardingProps = {
       installed: false,
       installable: true,
       size_bytes: 345_065_270,
+      role: "synthesis",
     },
     {
       id: "asr",
@@ -133,6 +135,7 @@ const onboarding: OnboardingProps = {
       installed: true,
       installable: true,
       size_bytes: 466_000_000,
+      role: "recognition",
     },
   ],
   onContinue: () => {},

@@ -33,6 +33,10 @@ export interface SpeechComponent {
   installed: boolean;
   installable: boolean;
   size_bytes: number;
+  /// "recognition" (learner's speech -> text) or "synthesis" (text -> voice).
+  /// The start gate is about recognition; synthesis absence only changes what
+  /// feedback the activities can give.
+  role: "recognition" | "synthesis";
 }
 
 export interface ProfileSummary {
@@ -267,6 +271,12 @@ export function Onboarding(p: OnboardingProps) {
               </li>
             ))}
           </ul>
+          {p.speechComponents.some((c) => c.role === "synthesis" && !c.installed) && (
+            <p className="notice">
+              Speech synthesis is not installed in this build, so the app will not talk back;
+              speaking activities still record you and give written feedback.
+            </p>
+          )}
           <div className="btn-row">
             <button
               type="button"
@@ -284,7 +294,11 @@ export function Onboarding(p: OnboardingProps) {
               type="button"
               className="btn"
               onClick={p.onStartSpeech}
-              disabled={!p.speechComponents.every((c) => c.installed)}
+              // Speaking needs a recognition model; a build that cannot ship
+              // the synthesis payloads must not make "Start with speech"
+              // impossible — those activities honestly run without spoken
+              // responses, and the notice below says so.
+              disabled={!p.speechComponents.some((c) => c.installed && c.role === "recognition")}
             >
               Start with speech
             </button>
