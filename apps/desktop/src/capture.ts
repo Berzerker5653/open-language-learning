@@ -72,3 +72,19 @@ export async function listMicrophones(mediaDevices: MediaDevicesLike): Promise<M
     .filter((d) => d.kind === "audioinput" && d.deviceId && d.label)
     .map((d) => ({ deviceId: d.deviceId, label: d.label }));
 }
+
+export interface SpeakerOutput {
+  deviceId: string;
+  label: string;
+}
+
+/**
+ * K-88: audio outputs the profile can pick, under the same label rule as
+ * microphones — no blank rows, no invented names.
+ */
+export async function listOutputs(mediaDevices: MediaDevicesLike): Promise<SpeakerOutput[]> {
+  const devices = (await mediaDevices.enumerateDevices?.()) ?? [];
+  return devices
+    .filter((d) => d.kind === "audiooutput" && d.deviceId && d.label)
+    .map((d) => ({ deviceId: d.deviceId, label: d.label }));
+}

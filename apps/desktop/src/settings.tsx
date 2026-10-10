@@ -15,7 +15,7 @@
  * renderable in tests.
  */
 
-import type { Microphone } from "./capture";
+import type { Microphone, SpeakerOutput } from "./capture";
 import { megabytes, type AlignerStatus, type DeviceTier, type TtsStatus } from "./language";
 export type RomajiMode = "auto" | "always" | "off";
 
@@ -41,6 +41,13 @@ export interface SettingsProps {
   onPickMicrophone(deviceId: string | null): void;
   /** Re-ask the browser for named inputs. */
   onDetectMicrophones(): void;
+  /** K-88: stored output device for this profile (null = system default). */
+  playbackDevice: string | null;
+  /** Named audio outputs; empty when the system reveals none. */
+  playbackOutputs: SpeakerOutput[];
+  /** Whether this webview can route one element to one output at all. */
+  canRouteOutput: boolean;
+  onPickPlaybackDevice(deviceId: string | null): void;
   /** Stored `romaji-mode` (exactly the reader's vocabulary). */
   romajiMode: RomajiMode;
   onSetRomajiMode(mode: RomajiMode): void;
@@ -339,6 +346,41 @@ export function Settings(p: SettingsProps) {
               </li>
             ))}
           </ul>
+        )}
+
+        <h4>Playback output</h4>
+        {p.canRouteOutput ? (
+          <div data-playback-route="picker">
+            <label htmlFor="playback-device">
+              Device to play audio on
+              <select
+                id="playback-device"
+                value={p.playbackDevice ?? ""}
+                onChange={(e) => p.onPickPlaybackDevice(e.target.value || null)}
+              >
+                <option value="">System default</option>
+                {p.playbackOutputs.map((d) => (
+                  <option key={d.deviceId} value={d.deviceId}>
+                    {d.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <p>
+              <small>
+                {p.playbackOutputs.length === 0
+                  ? "There is nothing to list yet: the system has not revealed any output names. Playback follows the system sound settings until it does."
+                  : "The choice is stored for this profile: model audio and your own recordings play on it. If the device disappears, that one clip plays on the system default instead of failing."}
+              </small>
+            </p>
+          </div>
+        ) : (
+          <p data-playback-route="system">
+            <small>
+              This runtime cannot direct playback to a chosen device, so there is no picker here —
+              the system sound settings decide where audio plays.
+            </small>
+          </p>
         )}
       </div>
 

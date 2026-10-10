@@ -15,6 +15,10 @@ const base: SettingsProps = {
   microphoneDevices: [],
   onPickMicrophone: () => {},
   onDetectMicrophones: () => {},
+  playbackDevice: null,
+  playbackOutputs: [],
+  canRouteOutput: false,
+  onPickPlaybackDevice: () => {},
   romajiMode: "auto",
   onSetRomajiMode: () => {},
   speechModel: "off",
@@ -315,5 +319,27 @@ describe("settings", () => {
     // feedback") implied selecting a model makes feedback work; that
     // claim may not return while the runtime is absent.
     expect(html).not.toMatch(/speech model for pronunciation feedback, or turn it off/i);
+  });
+
+  it("offers an output picker only when the runtime can actually route, and never an empty one", () => {
+    // The base render (canRouteOutput=false) must not show a dead control.
+    const blocked = render();
+    expect(blocked).toContain('data-playback-route="system"');
+    expect(blocked).toContain("cannot direct playback to a chosen device");
+    expect(blocked).not.toContain('id="playback-device"');
+    // A capable runtime with named outputs: the stored device is the
+    // selected row, and System default stays reachable.
+    const routed = render({
+      canRouteOutput: true,
+      playbackOutputs: [{ deviceId: "out-1", label: "Focusrite Line" }],
+      playbackDevice: "out-1",
+    });
+    expect(routed).toContain('data-playback-route="picker"');
+    expect(routed).toContain("Focusrite Line");
+    expect(routed).toContain("System default");
+    expect(routed).toMatch(/<option value="out-1"[^>]*selected|selected[^>]*value="out-1"/);
+    // Capable but unnamed outputs: a sentence, not a dropdown of blanks.
+    const empty = render({ canRouteOutput: true, playbackOutputs: [] });
+    expect(empty).toContain("has not revealed any output names");
   });
 });

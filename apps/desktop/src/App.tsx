@@ -46,7 +46,13 @@ import {
   type ScenarioView,
 } from "./scenario";
 import { Settings, type RomajiMode } from "./settings";
-import { listMicrophones, openMicrophone, type Microphone } from "./capture";
+import {
+  listMicrophones,
+  listOutputs,
+  openMicrophone,
+  type Microphone,
+  type SpeakerOutput,
+} from "./capture";
 import {
   audioFailureMessage,
   fixableBySpeechSetup,
@@ -337,6 +343,10 @@ export function App() {
   // empty list is expected on a fresh profile and the copy says so.
   const [micDevice, setMicDevice] = useState<string | null>(null);
   const [micDevices, setMicDevices] = useState<Microphone[]>([]);
+  // K-88: the output device this profile plays on (null = system default).
+  const [playbackDevice, setPlaybackDevice] = useState<string | null>(null);
+  const [playbackOutputs, setPlaybackOutputs] = useState<SpeakerOutput[]>([]);
+  const [canRouteOutput, setCanRouteOutput] = useState(false);
   const [romajiMode, setRomajiMode] = useState<RomajiMode>("auto");
   const [settingsExportPath, setSettingsExportPath] = useState<string | null>(null);
   const [settingsDeleteArmed, setSettingsDeleteArmed] = useState(false);
@@ -1130,6 +1140,7 @@ export function App() {
     try {
       setMicEnabled((await inv("get_microphone_enabled", { profileId: pid })) as boolean);
       setMicDevice((await inv("get_microphone_device", { profileId: pid })) as string | null);
+      setPlaybackDevice((await inv("get_playback_device", { profileId: pid })) as string | null);
       setRomajiMode((await inv("get_romaji_mode", { profileId: pid })) as RomajiMode);
     } catch {
       /* keep the conservative defaults; opening Settings re-reads them */
@@ -1145,6 +1156,7 @@ export function App() {
     try {
       setMicEnabled((await inv("get_microphone_enabled", { profileId })) as boolean);
       setMicDevice((await inv("get_microphone_device", { profileId })) as string | null);
+      setPlaybackDevice((await inv("get_playback_device", { profileId })) as string | null);
       setRomajiMode((await inv("get_romaji_mode", { profileId })) as RomajiMode);
       await refreshSpeech();
       // K-77: Settings now hosts language-pack management and the TTS /
@@ -1154,6 +1166,7 @@ export function App() {
       await refreshTts();
       await refreshAligner();
       await refreshMicrophones();
+      await refreshOutputs();
     } catch (e) {
       setSettingsError(String(e));
     }
@@ -1177,6 +1190,26 @@ export function App() {
     }
   }
 
+  // K-88: outputs, same discipline as microphones — WebKitGTK is entitled
+  // to sit on a device query it can never answer, so the race and the empty
+  // list are legal answers. The capability probe is what the Settings copy
+  // branches on: we never show a picker this runtime cannot honour.
+  async function refreshOutputs() {
+    const probe = new Audio();
+    setCanRouteOutput(
+      typeof (probe as HTMLMediaElement & { setSinkId?: unknown }).setSinkId === "function",
+    );
+    try {
+      const listed = await Promise.race([
+        listOutputs(navigator.mediaDevices),
+        after<SpeakerOutput[]>(2000, []),
+      ]);
+      setPlaybackOutputs(listed);
+    } catch {
+      setPlaybackOutputs([]);
+    }
+  }
+
   async function setMicSetting(enabled: boolean) {
     if (!inv || !profileId) return;
     setSettingsError(null);
@@ -1192,6 +1225,18 @@ export function App() {
     setSettingsError(null);
     try {
       setMicDevice((await inv("set_microphone_device", { profileId, deviceId })) as string | null);
+    } catch (e) {
+      setSettingsError(String(e));
+    }
+  }
+
+  async function pickPlaybackSetting(deviceId: string | null) {
+    if (!inv || !profileId) return;
+    setSettingsError(null);
+    try {
+      setPlaybackDevice(
+        (await inv("set_playback_device", { profileId, deviceId })) as string | null,
+      );
     } catch (e) {
       setSettingsError(String(e));
     }
@@ -2069,6 +2114,20 @@ export function App() {
 
   function playBlobUrl(url: string) {
     const audio = new Audio(url);
+    // K-88: honour this profile's output device. If the chosen device has
+    // vanished or this webview refuses to route, the system default answers
+    // and the clip still plays — one clip on the wrong speaker beats a
+    // silent failure.
+    if (playbackDevice) {
+      const route = audio as HTMLMediaElement & {
+        setSinkId?: (id: string) => Promise<void>;
+      };
+      if (typeof route.setSinkId === "function") {
+        void route.setSinkId(playbackDevice).catch(() => {
+          /* the system default answers for this clip */
+        });
+      }
+    }
     // Playbacks are one-shot blobs: once the webview is done with the decoded
     // sample (or it fails outright) the URL must go, or every played clip
     // pins its audio for the rest of the session.
@@ -2996,6 +3055,10 @@ export function App() {
             deleteArmed={settingsDeleteArmed}
             onArmDelete={() => setSettingsDeleteArmed(true)}
             onCancelDelete={() => setSettingsDeleteArmed(false)}
+            playbackDevice={playbackDevice}
+            playbackOutputs={playbackOutputs}
+            canRouteOutput={canRouteOutput}
+            onPickPlaybackDevice={(id) => void pickPlaybackSetting(id)}
             onConfirmDelete={() => void confirmProfileDelete()}
             switchArmed={settingsSwitchArmed}
             onArmSwitch={() => setSettingsSwitchArmed(true)}

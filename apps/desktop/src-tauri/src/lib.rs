@@ -1276,6 +1276,54 @@ fn set_microphone_device(
     set_microphone_device_at(&data_dir(), &profile_id, device_id)
 }
 
+/// K-88: the output device this profile chose, mirroring the microphone
+/// pair. `None` means "system default" — the honest absence. The id comes
+/// from the webview's own enumerateDevices and is only meaningful there;
+/// the engine remembers it and validates nothing beyond the profile
+/// existing. Whether the device is still present is answered at playback
+/// time, in the learner's own language.
+fn playback_device_at(data: &Path, profile_id: &str) -> Result<Option<String>, String> {
+    resume_profile_at(data, profile_id)?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    Ok(store
+        .get_setting(profile_id, "playback-device")
+        .ok()
+        .flatten()
+        .and_then(|v| v.as_str().map(String::from)))
+}
+
+fn set_playback_device_at(
+    data: &Path,
+    profile_id: &str,
+    device_id: Option<String>,
+) -> Result<Option<String>, String> {
+    resume_profile_at(data, profile_id)?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    // Same discipline as the microphone: clearing stores an explicit null,
+    // because "use the system default" is a decision, not an oversight.
+    let value = match device_id {
+        Some(id) if !id.trim().is_empty() => serde_json::json!(id.trim()),
+        _ => serde_json::Value::Null,
+    };
+    store
+        .set_setting(profile_id, "playback-device", &value)
+        .map_err(|e| e.to_string())?;
+    playback_device_at(data, profile_id)
+}
+
+#[tauri::command]
+fn get_playback_device(profile_id: String) -> Result<Option<String>, String> {
+    playback_device_at(&data_dir(), &profile_id)
+}
+
+#[tauri::command]
+fn set_playback_device(
+    profile_id: String,
+    device_id: Option<String>,
+) -> Result<Option<String>, String> {
+    set_playback_device_at(&data_dir(), &profile_id, device_id)
+}
+
 /// Romaji display preference. The values are exactly what the READ-001
 /// reader (`reader_display`) consumes — "always" and "off" are
 /// special-cased there and anything else falls back to auto — matching
@@ -6990,6 +7038,8 @@ pub fn run() {
             set_microphone_enabled,
             get_microphone_device,
             set_microphone_device,
+            get_playback_device,
+            set_playback_device,
             get_romaji_mode,
             set_romaji_mode,
             profile_export,
@@ -9390,7 +9440,24 @@ mod tests {
         );
         assert_eq!(set_microphone_device_at(data, &p.id, None).unwrap(), None);
         assert_eq!(microphone_device_at(data, &p.id).unwrap(), None);
+        // K-88: the output choice is the same kind of decision, stored the
+        // same way — and an unknown profile is refused, not guessed at.
+        assert_eq!(playback_device_at(data, &p.id).unwrap(), None);
+        assert_eq!(
+            set_playback_device_at(data, &p.id, Some("out-focusrite".into()))
+                .unwrap()
+                .as_deref(),
+            Some("out-focusrite")
+        );
+        assert_eq!(
+            playback_device_at(data, &p.id).unwrap().as_deref(),
+            Some("out-focusrite"),
+            "the chosen output device persists across restarts"
+        );
+        assert_eq!(set_playback_device_at(data, &p.id, None).unwrap(), None);
+        assert_eq!(playback_device_at(data, &p.id).unwrap(), None);
         assert!(microphone_device_at(data, "prof-does-not-exist").is_err());
+        assert!(playback_device_at(data, "prof-does-not-exist").is_err());
         assert!(microphone_enabled_at(data, "prof-does-not-exist").is_err());
     }
 
