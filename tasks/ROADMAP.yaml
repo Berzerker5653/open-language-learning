@@ -700,6 +700,22 @@ tasks:
   - "The TTS payload is installable into the bare variant as an optional in-app download: directory-capable model catalog entries (multi-file pin, hash verify, atomic activation) with the kokoro export as the first entry."
   - "Bring-your-own: the bare variant accepts a user-supplied local TTS runtime via documented configuration; absence never blocks non-audio practice."
   required_for_desktop_1_0: false
+- id: TTS-003
+  milestone: M6
+  priority: P1
+  title: "Qwen3-TTS bake-engine adoption and full ja-JP audio re-bake (owner decision 2026-10-10)"
+  dependencies:
+  - TTS-001
+  read_first:
+  - docs/provenance/qwen3-tts-adoption.md
+  - docs/05_SPEECH_SYSTEM.md
+  - docs/adr/0016-build-time-pack-audio.md
+  acceptance:
+  - "generate-pack-audio.py defaults to the qwen3 backend with CustomVoice speaker ono_anna; kokoro stays selectable for provenance reproduction."
+  - "Every media/manifest.jsonl row for the pack credits runtime qwen3-tts with the model fingerprint and speaker; schema validation reports 0 errors 0 warnings."
+  - "Whisper round-trip spot check on the namae/gemination probes shows the declared reading, and the owner has listened to a sample of re-baked audio."
+  - "Pack version bumped and locally installed for owner verification; publishing stays gated by O-05."
+  required_for_desktop_1_0: false
 - id: POLISH-001
   milestone: M6
   priority: P1

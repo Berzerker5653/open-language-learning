@@ -36,5 +36,7 @@ Existing:
 - 0019 bundling the whisper.cpp aligner as a staged sidecar payload (owner decision)
 - 0020 derived guidance instead of an authored "start here" — **Accepted 2026-10-08**
 - 0021 script instruction is offered only where a pack declares it (unit `capabilities`; no hardcoded script names in app code) — **Accepted 2026-10-08**
+- 0022 unit-level phase gates and the learned-kana word filter — **Accepted 2026-10-08**
+- 0023 Qwen3-TTS CustomVoice replaces Kokoro as the pack-audio BAKE engine (Kokoro stays the runtime fallback; ADR-0016 mechanism unchanged) — **Accepted 2026-10-10**
 
 Template: `template.md`.

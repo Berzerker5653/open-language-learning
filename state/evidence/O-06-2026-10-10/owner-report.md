@@ -74,3 +74,23 @@ kept (rollback available). Publishing the archive + catalog remains the O-05 gat
 ## Owner re-verification checklist (the human half of the pass, pending)
 
 Relaunch `scripts/launch-preview.sh`, then: (1) five-tab nav + hub drill; (2) Settings ▸ Profile data → Switch profile; (3) Speech cards split + Playback output section (picker or honest fallback sentence — either is the correct outcome, tell us which you see); (4) Settings ▸ Language packs → switch active pack to v0.2.1, listen: louder audio, lookup in "私の名まえは何ですか" names なまえ; (5) re-test Shadowing controls and the scenario ladder/transfer in the rebuilt app (findings 7/8 close on this); (6) K-81 nav sign-off.
+
+## Finding 12 — Kokoro-ja mispronounces taught kana (machine-confirmed), engine replaced
+
+Owner reported all five Japanese Kokoro voices render `私の名まえは何ですか`
+as "nomae", not "namae" — on content where the kana reading is DECLARED and
+fed verbatim to the engine. Machine-confirmed by whisper-small round-trip:
+the shipping voice (sid 37) transcribes 「ノマエアですか?」. This is a
+correctness failure on taught audio, not tone, and it disqualifies Kokoro-ja
+(author-graded C-range) for baked learning content.
+
+Resolution: owner ran a four-engine bake-off (19 sentences × ja/es/ko, all
+loudness-normalized, review tree `/tmp/tts-bakeoff/review/`) and chose
+Qwen3-TTS (Apache-2.0). All four bake-off engines transcribe the same probe
+as 「私の名前は何ですか」. Decision recorded ADR-0023 +
+`docs/provenance/qwen3-tts-adoption.md`; board card K-89 / roadmap TTS-003;
+full 4,614-asset re-bake underway (`/tmp/rebake-qwen-2026-10-10.log`).
+Runtime in-app Kokoro fallback is unchanged (K-90 tracks its removal
+separately); users never hear baked-Qwen vs runtime-Kokoro on the SAME item,
+so the mismatch is bounded to items lacking baked media — which the re-bake
+closes for the ja pack.

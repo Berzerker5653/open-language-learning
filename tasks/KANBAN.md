@@ -7,6 +7,12 @@ roadmap entry before `in_progress`.
 Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 `owner` (blocked on owner/human gate).
 
+## now — in progress
+
+| card | epic | what | maps to |
+| --- | --- | --- | --- |
+| K-89 | tts | Bake-engine adoption (owner locked Qwen 2026-10-10: four-engine owner-reviewed bake-off, review tree `/tmp/tts-bakeoff/review/`, engine evidence `docs/provenance/qwen3-tts-adoption.md`, decision ADR-0023): `generate-pack-audio.py` defaults to Qwen3-TTS CustomVoice speaker `ono_anna` via resident workers (`scripts/qwen3-tts-worker.py`); kokoro stays selectable; reuse now requires synthesizer match (engine switch can never leave Kokoro bytes under Qwen rows); failed assets keep their prior manifest rows; edge-silence trim + runaway-duration retry added after smoke showed a 2-char contrast word becoming 14 s of babble. Full 4,614-asset re-bake RUNNING (log `/tmp/rebake-qwen-2026-10-10.log`); then langpack test 0/0, pack bump+install for owner listening, ASR probe spot-checks. Publish stays O-05 | TTS-003 |
+
 
 ## done — loop closure (2026-10-03, evidence in `state/notes/K-0*.md`)
 

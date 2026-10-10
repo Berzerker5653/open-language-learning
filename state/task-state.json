@@ -1,8 +1,17 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-10-07",
-  "active_task": null,
+  "updated": "2026-10-10",
+  "active_task": "TTS-003",
   "tasks": {
+    "TTS-003": {
+      "status": "in_progress",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "docs/provenance/qwen3-tts-adoption.md",
+        "docs/adr/0023-pack-audio-bake-engine-qwen3-tts.md"
+      ]
+    },
     "BOOT-001": {
       "status": "done",
       "attempts": 1,

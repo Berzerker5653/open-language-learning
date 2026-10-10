@@ -33,6 +33,9 @@ Rules this script enforces:
     never touched, so the manifest and the bytes on disk can never drift.
     Disable with `--no-normalize`.
 
+Engine: the default backend is Qwen3-TTS CustomVoice (owner locked it in
+2026-10-10 after the four-engine bake-off; see docs/provenance/qwen3-tts-adoption.md).
+`--tts kokoro` still reproduces the pre-switch payload for provenance work.
 Usage:
   scripts/generate-pack-audio.py --pack languages/ja-JP
   scripts/generate-pack-audio.py --pack languages/ja-JP --force   # regenerate
@@ -49,6 +52,7 @@ import hashlib
 import json
 import math
 import os
+import queue
 import struct
 import subprocess
 import sys
@@ -66,6 +70,15 @@ RUNTIME = "sherpa-onnx-v1.13.8-linux-x64-shared"
 TARGET_ACTIVE_RMS = 0.15
 PEAK_CEILING = 0.70
 ACTIVE_GATE = 0.02
+
+def weights_listing_sha256(model_dir: Path) -> str:
+    """Cheap content fingerprint for a sharded HF snapshot: sha256 over the
+    sorted (filename, size) pairs of the weight files. Identifying without
+    hashing 4.5 GB per run."""
+    h = hashlib.sha256()
+    for f in sorted(model_dir.glob("*.safetensors")):
+        h.update(f"{f.name}:{f.stat().st_size}\n".encode())
+    return h.hexdigest()
 
 
 def sha256_file(path: Path) -> str:
@@ -117,6 +130,41 @@ def normalize_wav(path: Path) -> str | None:
         wav.setframerate(rate)
         wav.writeframes(struct.pack("<%dh" % len(samples), *samples))
     return f"loudness normalized, gain {gain:.2f}x to active rms {TARGET_ACTIVE_RMS:.2f}, peak ceiling {PEAK_CEILING:.2f}"
+
+def trim_edges(path: Path, margin_ms: int = 150) -> str | None:
+    """Trim leading/trailing silence from a fresh 16-bit PCM file, keeping a
+    short margin. LLM TTS routinely pads multi-second silence around short
+    items; without this, contrast clips feel spaced out in playback. Returns
+    a note for the manifest row, or None when nothing was cut."""
+    with wave.open(str(path)) as wav:
+        rate, channels, width = wav.getframerate(), wav.getnchannels(), wav.getsampwidth()
+        frames = wav.readframes(wav.getnframes())
+    if width != 2 or not frames:
+        return None
+    samples = list(struct.unpack("<%dh" % (len(frames) // 2), frames))
+    frame_len = max(1, rate // 100)
+    rms = [
+        math.sqrt(sum(s * s for s in samples[i : i + frame_len * channels]) / (frame_len * channels))
+        for i in range(0, len(samples), frame_len * channels)
+    ]
+    loudest = max(rms)
+    if loudest == 0:
+        return None
+    gate = ACTIVE_GATE * loudest
+    loud = [i for i, v in enumerate(rms) if v > gate]
+    head = max(0, loud[0] - margin_ms // 10)
+    tail = min(len(rms), loud[-1] + 1 + margin_ms // 10)
+    if head == 0 and tail == len(rms):
+        return None
+    start, stop = head * frame_len * channels, tail * frame_len * channels
+    with wave.open(str(path), "wb") as wav:
+        wav.setnchannels(channels)
+        wav.setsampwidth(2)
+        wav.setframerate(rate)
+        wav.writeframes(struct.pack(
+            "<%dh" % (stop - start), *samples[start:stop]))
+    cut_ms = int((head + (len(rms) - tail)) * 10)
+    return f"trimmed {cut_ms} ms head/tail silence"
 
 
 def speak_choice(declared: str | None, written: str) -> tuple[str, str]:
@@ -225,6 +273,31 @@ def main() -> int:
     ap.add_argument("--payload", default="kokoro-multi-lang-v1_1")
     ap.add_argument("--voice", default="37", help="numeric Kokoro speaker id")
     ap.add_argument("--speed", type=float, default=1.0)
+    ap.add_argument(
+        "--tts",
+        choices=["qwen3", "kokoro"],
+        default="qwen3",
+        help="synthesis backend; qwen3 (default since the 2026-10-10 owner "
+        "lock-in) bakes through scripts/qwen3-tts-worker.py, kokoro "
+        "reproduces the pre-switch payload provenance",
+    )
+    ap.add_argument(
+        "--qwen-model",
+        type=Path,
+        default=Path.home() / ".cache/lts-bench/tts/qwen3-tts-customvoice-1.7b",
+    )
+    ap.add_argument(
+        "--speaker",
+        default="ono_anna",
+        help="Qwen3-TTS CustomVoice speaker (Ono_Anna is native Japanese)",
+    )
+    ap.add_argument("--language", default="japanese")
+    ap.add_argument(
+        "--worker-python",
+        type=Path,
+        default=Path.home() / ".venvs/qwen-tts/bin/python",
+        help="interpreter of a venv that can import qwen_tts",
+    )
     ap.add_argument("--force", action="store_true", help="regenerate existing audio")
     ap.add_argument(
         "--only",
@@ -288,56 +361,151 @@ def main() -> int:
     rows: list[dict] = []
     generated = reused = 0
     failures: list[str] = []
-    synth = {
-        "runtime": RUNTIME,
-        "model": args.payload,
-        "model_sha256": model_sha,
-        "voice": args.voice,
-        "speed": args.speed,
-    }
+    if args.tts == "qwen3":
+        # The public media-asset schema (additionalProperties:false) pins
+        # runtime/model/model_sha256/voice — so the Qwen CustomVoice
+        # speaker id rides `voice`, and model_sha256 is the weight-listing
+        # fingerprint (see weights_listing_sha256). Language rides notes.
+        synth = {
+            "runtime": "qwen3-tts",
+            "model": args.qwen_model.name,
+            "model_sha256": weights_listing_sha256(args.qwen_model),
+            "voice": args.speaker,
+        }
+    else:
+        synth = {
+            "runtime": RUNTIME,
+            "model": args.payload,
+            "model_sha256": model_sha,
+            "voice": args.voice,
+            "speed": args.speed,
+        }
     pending: list[dict] = []
     for want in wants:
         out = pack / want["file"]
         prior = previous.get(want["id"])
-        # Reuse means the bytes on disk still match the committed hash. The
-        # line itself is rebuilt either way, so a documentation fix here never
-        # leaves a stale row behind while the audio stays byte-identical.
+        # Reuse means the bytes on disk still match the committed hash AND
+        # the previous row credits the same synthesizer this run would
+        # record — an engine switch must never leave Kokoro bytes sitting
+        # under Qwen provenance rows. The line itself is rebuilt either
+        # way, so a documentation fix never leaves a stale row behind.
         if (
             out.exists()
             and prior
             and not args.force
             and prior.get("sha256") == sha256_file(out)
+            and prior.get("synthesizer") == synth
         ):
             rows.append(build_row(want, out, synth, today, args.note))
             reused += 1
             continue
         pending.append(want)
 
+    # Qwen3 keeps the model resident in a worker process per job slot:
+    # loading a 1.7 B model 4,614 times would dwarf the synthesis itself.
+    worker_procs: list[subprocess.Popen] = []
+    free: queue.Queue | None = None
+    if args.tts == "qwen3" and pending:
+        worker_script = Path(__file__).resolve().parent / "qwen3-tts-worker.py"
+        wenv = {**os.environ, "OMP_NUM_THREADS": "8", "OMP_THREAD_LIMIT": "8"}
+        for _ in range(max(1, args.jobs)):
+            proc = subprocess.Popen(
+                [str(args.worker_python), str(worker_script),
+                 "--model", str(args.qwen_model)],
+                stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                text=True, env=wenv,
+            )
+            # qwen_tts prints a SoX-missing banner on stdout at import, so
+            # the handshake waits for the first line carrying "ready".
+            ready = ""
+            for _ in range(50):
+                ready = proc.stdout.readline()
+                if not ready or '"ready"' in ready:
+                    break
+            if '"ready"' not in ready:
+                print(f"qwen3 worker failed to start: {ready[:200]}",
+                      file=sys.stderr)
+                for p in worker_procs:
+                    p.kill()
+                return 1
+            worker_procs.append(proc)
+        free = queue.Queue()
+        for proc in worker_procs:
+            free.put(proc)
+
+    def qwen_request(want: dict, out: Path) -> dict:
+        assert free is not None
+        proc = free.get()
+        try:
+            proc.stdin.write(json.dumps(
+                {"id": want["id"], "text": want["speak"], "out": str(out),
+                 "language": args.language, "speaker": args.speaker},
+                ensure_ascii=False) + "\n")
+            proc.stdin.flush()
+            line = ""
+            for _ in range(20):  # any stray library stdout before JSON
+                line = proc.stdout.readline()
+                if not line or line.startswith("{"):
+                    break
+            return (json.loads(line) if line.startswith("{")
+                    else {"ok": False, "error": f"worker noise: {line[:120]}"})
+        finally:
+            free.put(proc)
+
     def synthesize(want: dict) -> dict | str:
         out = pack / want["file"]
-        cmd = [
-            str(runtime),
-            f"--kokoro-model={model_dir / 'model.onnx'}",
-            f"--kokoro-voices={model_dir / 'voices.bin'}",
-            f"--kokoro-tokens={model_dir / 'tokens.txt'}",
-            f"--kokoro-data-dir={model_dir / 'espeak-ng-data'}",
-            "--kokoro-lang=ja",
-            f"--sid={args.voice}",
-            f"--speed={args.speed:g}",
-            f"--output-filename={out}",
-            want["speak"],
-        ]
-        # Each worker carries its own onnx process; pinning its thread count
-        # keeps N workers from oversubscribing the machine into a crawl.
-        env = {**os.environ, "OMP_NUM_THREADS": "2", "OMP_THREAD_LIMIT": "2"}
-        done = subprocess.run(
-            cmd, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True, env=env
-        )
-        if done.returncode != 0 or not out.exists():
-            if out.exists():
-                out.unlink()
-            return f"{want['id']}: {done.stderr.strip()[:160] or 'no output file'}"
-        extras = [args.note]
+        if args.tts == "qwen3":
+            answer = qwen_request(want, out)
+            if not answer.get("ok"):
+                if out.exists():
+                    out.unlink()
+                return f"{want['id']}: {answer.get('error', 'worker failure')}"
+            # LLM TTS occasionally runs away on very short items (observed
+            # 2026-10-10: a two-char contrast word became a 14 s babble).
+            # Re-sample while the TRIMMED duration exceeds ~3x a comfortable
+            # speaking rate for the text length.
+            limit = max(3.0, 1.2 + 0.35 * len(want["speak"]))
+            trimmed_note = None
+            for attempt in range(3):
+                trimmed_note = trim_edges(out)
+                with wave.open(str(out)) as wav:
+                    secs = wav.getnframes() / wav.getframerate()
+                if secs <= limit or attempt == 2:
+                    break
+                answer = qwen_request(want, out)
+                if not answer.get("ok"):
+                    return f"{want['id']}: resample failed"
+            if secs > limit:
+                return (f"{want['id']}: {secs:.1f} s still exceeds "
+                        f"{limit:.1f} s cap after retries (runaway output)")
+            extras = [args.note, f"speech language {args.language}"]
+            if trimmed_note:
+                extras.append(trimmed_note)
+        else:
+            cmd = [
+                str(runtime),
+                f"--kokoro-model={model_dir / 'model.onnx'}",
+                f"--kokoro-voices={model_dir / 'voices.bin'}",
+                f"--kokoro-tokens={model_dir / 'tokens.txt'}",
+                f"--kokoro-data-dir={model_dir / 'espeak-ng-data'}",
+                "--kokoro-lang=ja",
+                f"--sid={args.voice}",
+                f"--speed={args.speed:g}",
+                f"--output-filename={out}",
+                want["speak"],
+            ]
+            # Each worker carries its own onnx process; pinning its thread
+            # count keeps N workers from oversubscribing the machine.
+            env = {**os.environ, "OMP_NUM_THREADS": "2", "OMP_THREAD_LIMIT": "2"}
+            done = subprocess.run(
+                cmd, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE,
+                text=True, env=env,
+            )
+            if done.returncode != 0 or not out.exists():
+                if out.exists():
+                    out.unlink()
+                return f"{want['id']}: {done.stderr.strip()[:160] or 'no output file'}"
+            extras = [args.note]
         if not args.no_normalize:
             extras.append(normalize_wav(out) or "normalization skipped (format or silence)")
         return build_row(want, out, synth, today, "; ".join(e for e in extras if e) or None)
@@ -350,10 +518,19 @@ def main() -> int:
     for res in results:
         if isinstance(res, str):
             failures.append(res)
+            # A failed asset must not silently lose coverage: the prior row
+            # still describes the wav on disk, so keep it and let the run
+            # exit non-zero with the failure listed.
+            failed_id = res.split(":", 1)[0]
+            if failed_id in previous:
+                rows.append(previous[failed_id])
         else:
             rows.append(res)
             generated += 1
 
+    for proc in worker_procs:
+        proc.stdin.close()
+        proc.wait(timeout=30)
     if args.only:
         # A limited run must not erase the rows it did not touch: a full
         # rebuild is the only operation that rewrites the whole manifest.
