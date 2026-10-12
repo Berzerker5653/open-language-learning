@@ -32,6 +32,15 @@ _(none active — the 2026-10-10 audio pivot closed out 2026-10-12, below)_
 | K-90-follow | eng | Pre-existing CI red on `main` from `06d44e8` (install-mode media coverage gate added without reconciling every conformance fixture) closed (`e91a09d`): `valid-full`/`valid-deferred-modality`/`valid-reviewed-item` fixtures now carry covering `media/manifest.jsonl` (fixture-silence wavs, sha/bytes pinned), matching ja-demo/eo-demo; `world::a_listening_unlock_needs_audio_the_pack_declares` was masked once `valid-minimal` itself shipped media — `pack_with()`'s `copy_dir` re-copied valid-minimal's hola manifest over the test's adios-only manifest, so hola already had audio and the rule never fired; the test now seeds the manifest after `pack_with` and reloads. No production source changed; `cargo test` 241 passed / 0 failed (the webkit-only `lts-desktop` member builds only under CI's `apt` install). | K-90 follow-on |
 
 
+## done — 2026-10-12 language-level model: ru parity + tier-scoping standard
+
+| card | epic | what | maps to |
+| --- | --- | --- | --- |
+| ru-level-parity | pack | ru-RU finite coverage denominator (`docs/assessment/RELEASE_COVERAGE_RU.yaml`) rebuilt to ja-JP rigor: grounded in ТРКИ/ТБУ component model + CEFR CV reference (official CEFR mapping, no certification claim, no test-text reproduction), per-objective modalities/prerequisites/assessment_plan, gates parity, per-objective unit-count removed as a completeness basis (docs/18). Honest gap recorded: ru goals/assessments are reading+writing only — no listening/speaking assessments yet (audio+scenarios exist), recorded as the next gated content batch. | REVIEW-001, ADR-0025, docs/18 |
+| level-standard | pack | Made CEFR-band coverage the documented pack standard and tier-scoped (single-band) packs first-class (ADR-0025): band every goal; a band-scoped pack ships a framework-grounded `RELEASE_COVERAGE_<lang>.yaml`; covered bands = goal bands + coverage-map bands, unclaimed bands simply absent (no new manifest field; home.tsx already glosses any band). Authoring contract/quickstart/AI-prompt updated. | ADR-0025, PACK-AI-001 |
+
+**Owner gates still open:** ru coverage-map owner approval (proposed-pending-owner-approval) and O-05 (republish 0.3.0 archives).
+
 ## done — loop closure (2026-10-03, evidence in `state/notes/K-0*.md`)
 
 | card | what | maps to |
