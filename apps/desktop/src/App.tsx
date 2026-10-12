@@ -638,6 +638,10 @@ export function App() {
             ["goal_map", { profileId: p.id }],
             ["practice_plan", { profileId: p.id, minutes: 10 }],
             ["writing_task", { profileId: p.id }],
+            // Not content: this proves the command is actually registered in the
+            // native handler list. The web layer calling a command the Rust side
+            // never registered fails silently outside a typed call site.
+            ["build_identity", undefined],
           ];
           for (const [cmd, args] of warm) {
             await timed(cmd, args);
