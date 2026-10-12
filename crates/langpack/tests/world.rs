@@ -251,13 +251,18 @@ fn a_listening_unlock_needs_audio_the_pack_declares() {
         )
     );
     let tmp = tempfile::tempdir().unwrap();
-    fs::create_dir_all(tmp.path().join("media")).expect("media dir");
+    pack_with(tmp.path(), Some(&rows), Some("world: environments.jsonl"));
+    // Seed the media manifest AFTER pack_with: its copy_dir re-copies
+    // valid-minimal's own manifest (which ships hola audio), so writing before
+    // it would be clobbered and mask the rule under test. Overwriting the media
+    // manifest and reloading leaves the pack declaring audio for adios but not
+    // hola, so the hola listening unlock can never be earned.
     fs::write(
         tmp.path().join("media/manifest.jsonl"),
         format!("{media_row}\n"),
     )
     .expect("write manifest");
-    let pack = pack_with(tmp.path(), Some(&rows), Some("world: environments.jsonl"));
+    let pack = Pack::load_dir(tmp.path()).expect("reload pack");
     let diags = pack.validate(Mode::Scaffold, None);
     assert!(
         codes(&diags, Severity::Error).contains(&"environment_listening_without_audio".to_string()),
@@ -274,13 +279,15 @@ fn a_listening_unlock_needs_audio_the_pack_declares() {
         )
     );
     let tmp2 = tempfile::tempdir().unwrap();
-    fs::create_dir_all(tmp2.path().join("media")).expect("media dir");
+    pack_with(tmp2.path(), Some(&ok), Some("world: environments.jsonl"));
+    // Same post-copy media seed as above: the pack declares audio for adios, so
+    // an adios listening unlock IS earnable and must not error.
     fs::write(
         tmp2.path().join("media/manifest.jsonl"),
         format!("{media_row}\n"),
     )
     .expect("write manifest");
-    let pack2 = pack_with(tmp2.path(), Some(&ok), Some("world: environments.jsonl"));
+    let pack2 = Pack::load_dir(tmp2.path()).expect("reload pack");
     assert!(
         !codes(&pack2.validate(Mode::Scaffold, None), Severity::Error)
             .contains(&"environment_listening_without_audio".to_string()),
