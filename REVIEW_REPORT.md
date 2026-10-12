@@ -2,6 +2,8 @@
 
 Reviewed on October 2, 2026. This report concerns the supplied `language-learning-platform-handoff.zip` and a separate package of proposed corrections. The original ZIP has not been changed.
 
+> **Historical document.** This is the 2026-10-02 review of the handoff package, not a review of the application as it exists now. Read it for the specification decisions; read `README.md`, `docs/adr/` and `state/STATUS.md` for what has been built and decided since.
+
 ## Recommendation
 
 **Use the proposed corrected package for an implementation handoff after reviewing its changes. I would not hand off the original unchanged.** The product direction is coherent, but the original checker and roadmap allow several important requirements to be missed or interpreted inconsistently.

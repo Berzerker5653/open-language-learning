@@ -7,6 +7,15 @@ on:
   # Manual only: triggers the untested-platform bundle builds below.
   workflow_dispatch:
 
+# A rapid push batch queues instead of stacking full runs. On 2026-10-05 an
+# authoring batch of ~150 one-commit pushes burned the entire private-repo
+# Actions allowance (~33 allowance-minutes per run, macOS billed at 10x), which
+# blocked CI for the rest of the cycle. Cancelling superseded runs is deliberate:
+# the commit that matters on `main` is the newest one.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   rust:
     runs-on: ubuntu-24.04

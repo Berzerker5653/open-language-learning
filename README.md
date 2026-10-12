@@ -4,6 +4,16 @@ Working title only. Rename the product before public release after a naming/trad
 
 This repository package is a **development specification and autonomous-build handoff** for a local-first, open-source language-acquisition platform. The first reference language is Japanese (`ja-JP`), but the core product is intentionally language-independent.
 
+## Current state — public alpha (2026-10-12)
+
+The desktop application runs today on **Linux**. Two reference language packs (`ja-JP`, `ru-RU`) are at **0.3.0** and install from the in-app catalog or by importing a `.lpk` file. Windows and macOS builds are produced but **untested**: a platform moves to *community-confirmed* only when a human who ran that build files a runtime report (`docs/platform/PLATFORM_REPORTS.yaml`, ADR-0015).
+
+What the content actually covers: on-ramp and **A1** are authored, **A2 is partial**, and **B1/B2 exist only as goal-graph skeletons** — this is not yet the B2-like product the spec targets. All first-party pack content is **AI-drafted and not human-reviewed** (ADR-0014), which is why pack display names keep their "(Draft)" marker. Pronunciation feedback is **guided-only and makes no accuracy claim to the learner** (ADR-0013, docs/18), and packs are the only source of spoken audio (ADR-0024) — the app never synthesizes speech.
+
+`REL-001` (the desktop release candidate) still needs **12 of the 54 release-required tasks** (ledger: `state/task-state.json`): assistive-technology audit (ACC-001), performance tiers (PERF-002), platform parity (PLAT-001), the security/privacy audit (SEC-001), qualified human content review for each band (JA-A2-002 / JA-B1-002 / JA-B2-002) and the remaining coverage authoring. No agent may mark any of those passed.
+
+Useful first contributions: a **platform runtime report** or a **content review**, both through the issue templates — each feeds an evidence file that the release gates actually read.
+
 ## Product in one sentence
 
 Build a game-like learning environment in which progress means **what the learner can understand and do in the target language**, not how many lessons, points, or streak-days they have accumulated.

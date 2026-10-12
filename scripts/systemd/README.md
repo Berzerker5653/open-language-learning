@@ -13,3 +13,9 @@ Install the timer (per user):
 
 Runs every 15 minutes; `Persistent=true` catches up after boot gaps.
 Override the tracked branch with `LTS_PREVIEW_BRANCH` in the unit.
+
+The unit assumes the checkout lives at `~/game-dev/LTS` (`%h` specifier). For
+any other path, override rather than editing the copy: `systemctl --user edit
+lts-preview-update.service`, then set `WorkingDirectory` and `ExecStart`.
+`update-preview.sh` pulls from the first configured remote, so a fork of a
+public repo needs `LTS_PREVIEW_BRANCH` (or its own remote) to be meaningful.

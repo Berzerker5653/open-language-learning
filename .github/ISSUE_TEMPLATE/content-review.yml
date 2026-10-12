@@ -1,0 +1,120 @@
+name: Content review report
+description: A qualified human review of language-pack content. Review records are the human gates the release path requires (JA-A2-002 / JA-B1-002 / JA-B2-002); no agent may satisfy them.
+title: "[content review] <ja-JP | ru-RU> — <area or worklist range>"
+labels:
+  - content-review
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Read the kit first: `languages/ja-JP/review/REVIEWER_KIT.md` or `languages/ru-RU/review/REVIEWER_KIT.md`, and the policy in `REVIEW_POLICY.yaml` beside it. Open work ranges are in the `WORKLIST-*.md` files in the same directory.
+
+        Two rules that decide whether a report is usable:
+
+        - **A human gate cannot be satisfied by AI** (docs/16, docs/09). AI screening flags defects early; it never promotes content and never counts toward coverage.
+        - **Being a native speaker is not, by itself, a qualification** for linguistic review (docs/06 §Content-review). Say which qualification you are reporting under.
+
+        Accepted reports are converted by the maintainer into version-bound records under `languages/<locale>/review/records/` referencing `policy_version: 1.0.0`.
+  - type: markdown
+    attributes:
+      value: |
+        ## What you reviewed
+  - type: dropdown
+    id: pack
+    attributes:
+      label: Pack
+      options:
+        - ja-JP
+        - ru-RU
+    validations:
+      required: true
+  - type: dropdown
+    id: review_type
+    attributes:
+      label: Review type
+      description: '`structural` and `ai_screening` are excluded on purpose — they do not count toward human gates.'
+      options:
+        - linguistic — naturalness, meaning, grammar, readings, register, translation adequacy, distractor plausibility
+        - pedagogical — difficulty, prerequisite load, task validity, scaffolding, transfer value
+        - technical — rendering, audio linkage, speech targets, determinism, platform behavior (includes listening to the actual lesson audio)
+    validations:
+      required: true
+  - type: input
+    id: range
+    attributes:
+      label: Worklist range or file
+      description: 'e.g. `WORKLIST-2026-10-12.md units 250-259`, or the pack file you worked through.'
+    validations:
+      required: true
+  - type: textarea
+    id: items
+    attributes:
+      label: Item ids covered
+      description: One per line, with approximate counts if you reviewed a whole file. Coverage is claimed only for what you list here.
+      placeholder: |
+        ja.lex.cp.nature.river
+        ja.sent.cp.train-delay-0
+        (all 40 entries in sentences/content-parity.jsonl)
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        ## What you found
+  - type: dropdown
+    id: verdict
+    attributes:
+      label: Verdict for the range you listed
+      options:
+        - accept
+        - accept_with_corrections
+        - reject
+        - cannot_assess_without_more_context
+    validations:
+      required: true
+  - type: textarea
+    id: findings
+    attributes:
+      label: Findings
+      description: 'For each problem: the item id, what is wrong, and the correction you propose (or the question you need answered). Wrong instruction is treated as a critical defect, so specifics matter more than impressions.'
+    validations:
+      required: true
+  - type: textarea
+    id: audio
+    attributes:
+      label: Audio you listened to
+      description: 'For linguistic or technical review: name the items whose reference audio you actually played, and whether the recording matches the declared reading. Leave blank if not applicable.'
+  - type: markdown
+    attributes:
+      value: |
+        ## Who you are
+  - type: checkboxes
+    id: qualifications
+    attributes:
+      label: Qualification you are reporting under
+      description: Pick every one that applies. Linguistic review needs a language/linguistics qualification **in addition to** native or near-native status; pedagogical review needs teaching or curriculum experience plus target-language proficiency.
+      options:
+        - label: native (target language)
+        - label: near-native (with documented evidence, not self-claim)
+        - label: linguistics training (including phonetics)
+        - label: language-teaching credential or documented teaching experience
+        - label: curriculum / assessment design experience
+        - label: maintainer-authorized project technical reviewer
+    validations:
+      required: true
+  - type: checkboxes
+    id: honesty
+    attributes:
+      label: Provenance of this report
+      options:
+        - label: I am a human and I wrote this report myself; no AI agent authored or completed it.
+          required: true
+        - label: I reviewed the listed items directly, not a summary of them.
+          required: true
+  - type: input
+    id: date
+    attributes:
+      label: Date of review
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true

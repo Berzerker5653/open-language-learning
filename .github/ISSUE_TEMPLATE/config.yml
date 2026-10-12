@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: How to review ja-JP content
+    url: https://github.com/Berzerker5653/open-language-learning/blob/main/languages/ja-JP/review/REVIEWER_KIT.md
+    about: What a reviewer checks, and which qualifications count.
+  - name: How to review ru-RU content
+    url: https://github.com/Berzerker5653/open-language-learning/blob/main/languages/ru-RU/review/REVIEWER_KIT.md
+    about: What a reviewer checks, and which qualifications count.
+  - name: What is already decided (ADRs)
+    url: https://github.com/Berzerker5653/open-language-learning/tree/main/docs/adr
+    about: Architecture and product decisions, including why content ships unreviewed and why the app never synthesizes speech.

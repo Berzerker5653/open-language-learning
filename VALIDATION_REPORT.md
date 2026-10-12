@@ -2,6 +2,8 @@
 
 Reviewed: October 2, 2026.
 
+> **Status records here are superseded.** This page reports the specification scaffold as checked on 2026-10-02 (60 roadmap tasks, next build task `BOOT-001`). The roadmap now carries 95 tasks with 54 release-required, and current product state lives in `README.md` §Current state, `state/STATUS.md` and `state/task-state.json`. Nothing on this page certifies a built application.
+
 This reports checks on the proposed corrected specification scaffold. It does not certify an application, course, speech model, source rights, or human linguistic review.
 
 - Handoff structural/semantic check: **PASS**, 31 structured data files, no errors.

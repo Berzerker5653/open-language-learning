@@ -3,7 +3,10 @@ Description=Update the Open Language Learning desktop preview to the main branch
 
 [Service]
 Type=oneshot
-WorkingDirectory=/home/hunter/game-dev/LTS
-ExecStart=/home/hunter/game-dev/LTS/scripts/update-preview.sh
+# %h is the installing user's home, so the unit works for anyone whose checkout
+# sits at ~/game-dev/LTS. Anywhere else: `systemctl --user edit
+# lts-preview-update.service` and override WorkingDirectory/ExecStart.
+WorkingDirectory=%h/game-dev/LTS
+ExecStart=%h/game-dev/LTS/scripts/update-preview.sh
 # GUI restart needs the desktop session's X display.
 Environment=DISPLAY=:0

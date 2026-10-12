@@ -1,0 +1,99 @@
+name: Platform runtime report
+description: You ran the desktop build on your machine. A merged record in docs/platform/PLATFORM_REPORTS.yaml is the only thing that moves a platform from "untested" to "community-confirmed" (ADR-0015, PLAT-001).
+title: "[platform report] <windows | macos | linux> — <OS build>"
+labels:
+  - platform-report
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is **evidence, not a claim**. Only a human who actually ran the build may file this, and the record is merged into `docs/platform/PLATFORM_REPORTS.yaml` by the maintainer after review. CI never writes there and no automated check may add a record.
+
+        A report only counts when it is bound to the exact bytes you ran: the app commit and the SHA-256 of the `.lpk` archive you installed. `community_confirmed` is not the same as `tested`, and any app or pack change invalidates a previous report.
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - windows
+        - macos
+        - linux
+    validations:
+      required: true
+  - type: input
+    id: os_version
+    attributes:
+      label: Exact OS build
+      description: 'e.g. "Windows 11 23H2 (22631.4460)" or "macOS 15.1 (24B83)"'
+    validations:
+      required: true
+  - type: input
+    id: app_version
+    attributes:
+      label: Application version
+      description: The app version you ran, e.g. 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: app_commit
+    attributes:
+      label: Application commit
+      description: 7-40 hex characters. For a released build this is the commit the tag points at (shown on the release page).
+    validations:
+      required: true
+  - type: input
+    id: pack_id
+    attributes:
+      label: Pack id you installed
+      description: e.g. org.openlanguage.ru-ru.reference
+    validations:
+      required: true
+  - type: input
+    id: pack_version
+    attributes:
+      label: Pack version
+      description: The version you actually installed, not the newest one you saw.
+    validations:
+      required: true
+  - type: input
+    id: pack_sha256
+    attributes:
+      label: Pack archive SHA-256
+      description: 64 hex characters of the `.lpk` you installed. The release page lists it; `sha256sum <file>` reproduces it.
+    validations:
+      required: true
+  - type: input
+    id: date
+    attributes:
+      label: Date you ran it
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true
+  - type: input
+    id: reporter
+    attributes:
+      label: Reporter
+      description: Handle or name — nothing more. Do not include contact details.
+    validations:
+      required: true
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: Outcome
+      description: '`works-with-issues` still confirms the platform; `fails` clears a previous confirmation.'
+      options:
+        - works
+        - works-with-issues
+        - fails
+    validations:
+      required: true
+  - type: textarea
+    id: issues
+    attributes:
+      label: Symptoms and workarounds
+      description: One per line, plain language. What broke, what you did about it, and which journey you were on (onboarding, listening, dictation, settings…). Write "none" if the run was clean.
+      placeholder: |
+        installing the ru pack stalled at 60% and completed on retry
+        ruby/furigana rendering blank in the story reader until resize
+    validations:
+      required: true
