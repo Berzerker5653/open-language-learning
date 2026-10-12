@@ -146,3 +146,11 @@ Proposed. Owner acceptance retires the "reference-only CEFR" framing and makes
 ТРКИ/ТБУ the ru band denominator; owner *approval of the ru coverage map itself*
 is a separate, still-open decision. The modality content batch and the 0.3.0
 republish (O-05) remain open regardless.
+
+**Follow-up (same date, 2026-10-12):** the gated modality batch was subsequently
+executed as its own content change — 60 listening (`recognition`) + 60 speaking
+(`production`) assessments authored, one per goal across all five bands, all
+`review_status: draft` with no `speech_profile_id` (guided/unscored until docs/17
+qualification). This closes the modality gap at the *authored* level only: the
+`review_core` and docs/17 speech-qualification gates are still unmet, so every
+band stays `partial (review pending)` and this ADR stays Proposed.
