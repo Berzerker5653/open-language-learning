@@ -31,14 +31,14 @@ body:
     id: app_version
     attributes:
       label: Application version
-      description: The app version you ran, e.g. 0.1.0
+      description: 'Settings → "About this build" states it, e.g. 0.4.0-alpha.1'
     validations:
       required: true
   - type: input
     id: app_commit
     attributes:
       label: Application commit
-      description: 7-40 hex characters. For a released build this is the commit the tag points at (shown on the release page).
+      description: 7-40 hex characters, also shown under Settings → "About this build". For a released build this is the commit the tag points at (shown on the release page). A report that cannot name both cannot be matched to a build.
     validations:
       required: true
   - type: input

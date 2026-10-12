@@ -12,7 +12,7 @@ What the content actually covers — measured, not asserted: both packs carry un
 
 `REL-001` (the desktop release candidate) still needs **12 of the 54 release-required tasks** (ledger: `state/task-state.json`): the assistive-technology audit (ACC-001), performance tiers (PERF-002), platform parity (PLAT-001), the security/privacy audit (SEC-001), qualified human content review for each band (JA-A2-002 / JA-B1-002 / JA-B2-002), and coverage depth in the thin bands (JA-A2-001 / JA-B1-001 / JA-B2-001 carry unit scaffolding across bands but have no acceptance record in the ledger). No agent may mark any of those passed.
 
-Useful first contributions: a **platform runtime report** or a **content review**, both through the issue templates — each feeds an evidence file that the release gates actually read.
+Useful first contributions: a **platform runtime report** or a **content review**, both through the issue templates — each feeds an evidence file that the release gates actually read. The app states the version and commit you need for a report under **Settings → About this build**.
 
 ## Product in one sentence
 
