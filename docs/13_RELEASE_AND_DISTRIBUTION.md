@@ -322,12 +322,14 @@ Every item needs a manifest row **and** its wav, or install and
 The audio-less archive that `build` once emitted after a loud warning
 is gone: with no runtime synthesis an uncovered item is permanent
 silence, so failing the gate loudly at build/install is the honest
-shape. Consequence: `languages/ru-RU` cannot publish until
-`scripts/generate-pack-audio.py` bakes its media — it ships no media at
-all today and fails the install gate with `media_manifest_absent` — and
-CI accordingly suspends that pack's install-mode gate with a comment
-(K-90/ADR-0024), to be re-enabled once the ru pack is baked. The media
-rules are pinned by `crates/langpack/tests/media.rs`.
+shape. Consequence: a pack can only publish after its bake has run. Both
+reference packs are baked in the working tree (ja-JP 4,614 manifest rows,
+ru-RU 4,846, 2026-10-12), which is why their 0.3.0 archives carry audio.
+CI still skips install-mode `test` for both, because a fresh checkout has
+the manifests without the gitignored `.wav` bytes and the install gate would
+correctly refuse them; the pairing is enforced on the release path
+(`scripts/build-catalog.sh` bakes, then builds) and pinned by
+`crates/langpack/tests/media.rs`.
 
 The app reads audio provenance from the manifest rather than assuming a file in
 `media/` is a licensed recording, and resolves a media id through the manifest's
@@ -335,6 +337,18 @@ The app reads audio provenance from the manifest rather than assuming a file in
 regeneration is a pack change (version bump, fresh catalog hashes, and any
 platform report bound to the old `pack_sha256` stops confirming), never a no-op.
 See `ADR-0016` and `ADR-0024`.
+
+Two ways a learner gets a pack, at very different cost. **Catalog install**
+fetches the archive in the Rust layer and holds one buffer (~300 MB for the
+reference packs). **File import** goes through the web layer: the browser hands
+over the file, the UI base64s it and the Rust layer decodes it, so the same
+pack costs three buffers at once — measured 2026-10-12 on the 302 MB ru-RU
+archive, process RSS went 780 MiB → 1,787 MiB (+1,007 MiB: 302 file + 403
+base64 + 302 decoded) before Rust's own IPC copy and decode. Import is kept
+because the web layer deliberately has no filesystem capability
+(`src-tauri/capabilities/default.json`), so a path-based import needs an
+owner-approved capability change; until then alpha users are pointed at the
+catalog, and the cost is a PERF-tier input rather than a surprise.
 
 ## Release candidate and publication
 

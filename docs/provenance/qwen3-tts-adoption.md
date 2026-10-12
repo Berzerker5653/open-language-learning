@@ -37,6 +37,14 @@ engines transcribe the same probe as 「私の名前は何ですか」.
   (`~/.venvs/qwen-tts`: torch 2.14 CPU + qwen-tts). Output 24 kHz mono,
   then the standard loudness normalization (active-speech RMS −16.5 dBFS,
   peak ≤ 0.70) — unchanged from the O-06 owner decision.
+- Worker environment, pinned and re-verified 2026-10-12: `qwen-tts==0.1.1` **from PyPI,
+  non-editable**, into `~/.venvs/qwen-tts` (torch 2.14.1+cpu, torchaudio 2.11.0+cpu,
+  transformers 4.57.3, onnxruntime 1.31.0). The original install was editable against
+  `/tmp/tts-bakeoff/repos/qwen3-tts`, so when `/tmp` was cleared the venv could no longer
+  import `qwen_tts` and a bake died at worker start with `ModuleNotFoundError` — the
+  documented "any release can regenerate the media" claim was false until this line was
+  true. `flash-attn` and `sox` warnings the package prints at import are cosmetic: the
+  worker drives PyTorch and `soundfile` only.
 - Provenance rows keep the public `media-asset` synthesizer shape:
   `runtime: "qwen3-tts"`, `model` = model directory name, `model_sha256` =
   sha256 over the sorted (filename,size) listing of the `.safetensors`
