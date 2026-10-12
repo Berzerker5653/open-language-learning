@@ -1,0 +1,19 @@
+id: ru.story.cp.walk-in-the-forest
+status: draft
+title: "Прогу́лка в ле́су"
+description: "A quiet forest walk: birds at dawn, the wide river, and a small bird on a branch."
+sentences:
+  - ru.sent.cp.p26
+  - ru.sent.cp.p21
+  - ru.sent.cp.p27
+  - ru.sent.cp.p28
+  - ru.sent.cp.p29
+sources:
+  - ru-original
+notes: "ai-drafted content-parity story (2026-10-12); graded reader, sentences reuse the content-parity sentence shard; human review required"
+generation:
+  method: ai-assisted
+  tool: omp
+  model: lab-omarchy/qwen3.8-flash-next-iq3_s
+  date: 2026-10-12
+  notes: "ai-drafted; human review required"

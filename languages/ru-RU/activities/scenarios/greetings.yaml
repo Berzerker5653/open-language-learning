@@ -1,0 +1,38 @@
+# ai-assisted draft scenario (ru parity 2026-10-12); wording pending qualified review.
+id: ru.scenario.greetings.meeting
+goal_id: ru.goal.on-ramp.greetings
+title: Greeting someone
+nodes:
+- id: ru.scenario.greetings.meeting.open
+  prompt: Greet the person and ask how they are.
+  expected_actions:
+  - greet
+  - ask-wellbeing
+  next:
+  - ru.scenario.greetings.meeting.respond
+  recovery:
+  - id: ru.scenario.greetings.meeting.repair-repeat
+    prompt: You did not catch the reply. Politely ask them to repeat.
+    expected_actions:
+    - ask-repeat
+    to: ru.scenario.greetings.meeting.open
+- id: ru.scenario.greetings.meeting.respond
+  prompt: Answer how you are and ask them back.
+  expected_actions:
+  - answer-wellbeing
+  - ask-back
+  next:
+  - ru.scenario.greetings.meeting.close
+- id: ru.scenario.greetings.meeting.close
+  prompt: End the exchange courteously.
+  expected_actions:
+  - say-goodbye
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Model response in Cyrillic with a stress-marked reading
+- support_level: 5
+  description: Full suggested wording including a first-language gloss
+transfer_variants_required: 0

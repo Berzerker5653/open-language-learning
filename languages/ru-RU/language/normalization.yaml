@@ -1,0 +1,17 @@
+# Transcript-comparison policy for ru-RU. Normalization must never erase
+# contrasts that are learning targets (stress, vowel reduction, hard/soft).
+schema_version: "0.2"
+unicode_normalization: "NFKC"
+rules:
+  - id: "ignore-optional-terminal-punctuation"
+    description: "Optional terminal punctuation is ignored when comparing learner transcripts"
+    scope: "matching"
+  - id: "normalize-whitespace"
+    description: "Whitespace runs are collapsed for transcript comparison; spaces are genuine word boundaries"
+    scope: "matching"
+  - id: "preserve-stress-mark"
+    description: "The combining acute stress mark (U+0301) is never stripped; stress is a learning target and drives vowel reduction"
+    scope: "matching"
+  - id: "preserve-yo-contrast"
+    description: "ё is never folded into е; the distinction is a learning target, not a typographic nicety"
+    scope: "matching"

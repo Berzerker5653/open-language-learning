@@ -1,19 +1,31 @@
 schema_version: "0.2"
 pack_id: "org.openlanguage.ru-ru.reference"
 display_name: "Russian Reference Pack (Draft)"
-version: "0.2.0"
+version: "0.3.0"
 target_locale: "ru-RU"
 source_locales: ["en-US"]
 engine:
   min_version: "0.1.0"
-  max_version_exclusive: null
+  max_version_exclusive: "2.0.0"
 maturity: "experimental"
 authors: ["Open Language Learning Platform contributors"]
+scripts:
+  - "ru.orth.cyrillic"
+world: "environments.jsonl"
 capabilities:
-  listening: false
-  speaking: false
+  listening: true
+  speaking: true
   reading: true
   writing: true
+  pronunciation_assessment: false
+  prosody_assessment: false
+  handwriting: false
+  rtl: false
+requested_model_capabilities:
+  - "asr.ru"
+  - "vad"
+  - "alignment.ru"
+  - "f0"
 license:
   content_license: "CC0-1.0"
   redistribution_allowed: true

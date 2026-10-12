@@ -1,0 +1,20 @@
+id: ru.story.cp.at-the-market
+status: draft
+title: "На ры́нке"
+description: "Buying groceries at the open-air market: asking the price, paying, and choosing bread and milk."
+sentences:
+  - ru.sent.cp.p36
+  - ru.sent.cp.p34
+  - ru.sent.cp.p17
+  - ru.sent.cp.p39
+  - ru.sent.cp.p35
+  - ru.sent.cp.p37
+sources:
+  - ru-original
+notes: "ai-drafted content-parity story (2026-10-12); graded reader, sentences reuse the content-parity sentence shard; human review required"
+generation:
+  method: ai-assisted
+  tool: omp
+  model: lab-omarchy/qwen3.8-flash-next-iq3_s
+  date: 2026-10-12
+  notes: "ai-drafted; human review required"

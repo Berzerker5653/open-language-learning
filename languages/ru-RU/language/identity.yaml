@@ -1,0 +1,19 @@
+schema_version: "0.2"
+target_locale: "ru-RU"
+language_name_english: "Russian"
+language_name_native: "русский язык"
+source_locales: ["en-US"]
+external_ids:
+  iso639-3: "rus"
+notes: >
+  Standard modern Russian teaching reference (Moscow-oriented norm;
+  reference variant "standard-russian"). Orthography: Cyrillic; word
+  stress is marked with a combining acute accent (U+0301) in teaching
+  material and ё is always written dotted — neither is optional in a
+  learner-facing reading. Unlike Japanese, spaces are genuine word
+  boundaries, so engine tokenization is straightforward; morphology is
+  the hard part (case/aspect), not segmentation. Stress is free and
+  lexically unpredictable, so it must be stored per word rather than
+  inferred. Regional and natural variants (e.g. southern akanye,
+  available fricative /ɣ/ in some speech) must not be automatically
+  treated as errors.

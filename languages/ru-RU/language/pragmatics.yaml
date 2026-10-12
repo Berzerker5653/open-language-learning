@@ -1,0 +1,52 @@
+# Register labels for ru-RU (working labels; no formality numbers are
+# claimed until research validates them). Russian has a genuine T–V
+# distinction (ты informal vs Вы formal/plural); the choice tracks
+# relationship, setting, and relative formality, and is NOT a binary
+# switch — the same speaker can shift mid-conversation. Do not reduce
+# Russian register to polite/plain the way an English model might.
+schema_version: "0.2"
+
+registers:
+  - id: ru.register.neutral-common
+    name: "Neutral-common (working label)"
+    description: >
+      Working label for everyday greeting and introduction routines where
+      neither ты nor Вы is marked; fit depends on situation and
+      relationship rather than a single polite/plain toggle.
+  - id: ru.register.formal-vy
+    name: "Formal (Вы) (working label)"
+    description: >
+      Starting label for address showing respect/distance (Вы, capitalized
+      in writing to a single person); default with strangers, elders, and
+      services. A full Russian register model is built during research.
+  - id: ru.register.informal-ty
+    name: "Informal (ты) (planned label)"
+    description: >
+      Planned label for address among friends, family, and peers; usage is
+      situation-bound and switching to it uninvited can be presumptuous.
+
+situations:
+  - id: ru.situation.greetings
+    name: "Meeting and greeting someone"
+    description: >
+      Hello/greeting exchanges; formality of address is shaped by whether
+      the people know each other.
+    typical_registers:
+      - ru.register.formal-vy
+      - ru.register.neutral-common
+  - id: ru.situation.self-introduction
+    name: "Introducing yourself"
+    description: >
+      Giving name and basic facts about yourself; neutral-to-formal with
+      new acquaintances.
+    typical_registers:
+      - ru.register.formal-vy
+      - ru.register.neutral-common
+  - id: ru.situation.everyday
+    name: "Everyday needs and routines"
+    description: >
+      Asking for common things and talking about a day; register depends
+      on who is present.
+    typical_registers:
+      - ru.register.neutral-common
+      - ru.register.informal-ty

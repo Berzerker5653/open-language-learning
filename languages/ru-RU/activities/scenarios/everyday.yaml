@@ -1,0 +1,36 @@
+# ai-assisted draft scenario (ru parity 2026-10-12); wording pending qualified review.
+id: ru.scenario.everyday.needs
+goal_id: ru.goal.on-ramp.everyday
+title: Asking for an everyday thing
+nodes:
+- id: ru.scenario.everyday.needs.ask
+  prompt: Ask for something you need in a simple, polite way.
+  expected_actions:
+  - request-item
+  next:
+  - ru.scenario.everyday.needs.clarify
+  recovery:
+  - id: ru.scenario.everyday.needs.repair-repeat
+    prompt: The other person did not understand. Rephrase or point and repeat.
+    expected_actions:
+    - rephrase-request
+    to: ru.scenario.everyday.needs.ask
+- id: ru.scenario.everyday.needs.clarify
+  prompt: Answer a simple follow-up question about what you want.
+  expected_actions:
+  - answer-request-detail
+  next:
+  - ru.scenario.everyday.needs.thanks
+- id: ru.scenario.everyday.needs.thanks
+  prompt: Thank the person.
+  expected_actions:
+  - say-thanks
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Model response in Cyrillic with a stress-marked reading
+- support_level: 5
+  description: Full suggested wording including a first-language gloss
+transfer_variants_required: 0

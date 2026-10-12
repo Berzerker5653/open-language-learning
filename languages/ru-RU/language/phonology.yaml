@@ -1,0 +1,154 @@
+# RU phonology/prosody inventory (schema 0.2), conservative and textbook-level.
+# Modes per schemas/v0.2 featureMode: teach | assess-automatic |
+# assess-guided | reference-only. NO assess-automatic claims: automatic
+# pronunciation scoring requires a bound calibrated speech profile
+# (docs/05, SPEECH-007 calibration data is owner-gated). Segment symbols
+# are phonemic. Facts drawn from standard reference descriptions; nuanced
+# naturalness still requires REVIEW-001 qualified review (docs/16).
+schema_version: "0.2"
+
+segments:
+  # Vowels (phonemic; the letter vs. reduced realization is a phonotactics note).
+  - symbol: a
+    type: vowel
+    mode: teach
+    examples: ["ма́ма", "папа"]
+  - symbol: ɛ
+    type: vowel
+    mode: teach
+    examples: ["нет", "десна́"]
+    l1_contrast_notes:
+      en: "open e /e/ before soft consonants; spell е/я/ё/и in that context"
+  - symbol: i
+    type: vowel
+    mode: teach
+    examples: ["ты", "сыр"]
+    l1_contrast_notes:
+      en: "ы /ɨ/ (сыр) vs и /i/ (сыт) is a real minimal contrast for learners"
+  - symbol: ɨ
+    type: vowel
+    mode: teach
+    examples: ["сыр", "был"]
+    l1_contrast_notes:
+      en: "close central ы; no English equivalent, distinct from и"
+  - symbol: ɔ
+    type: vowel
+    mode: teach
+    examples: ["она́", "дом"]
+  - symbol: u
+    type: vowel
+    mode: teach
+    examples: ["ту́т", "муха"]
+
+  # Consonants relevant to learner feedback (hard member of each pair).
+  - symbol: p
+    type: consonant
+    mode: teach
+    examples: ["папа"]
+  - symbol: b
+    type: consonant
+    mode: teach
+    examples: ["баба"]
+    l1_contrast_notes:
+      en: "final/voiceless-adjacent devoicing: баба → [bapə]"
+  - symbol: t
+    type: consonant
+    mode: teach
+    examples: ["тот"]
+  - symbol: d
+    type: consonant
+    mode: teach
+    examples: ["да"]
+  - symbol: k
+    type: consonant
+    mode: teach
+    examples: ["кот"]
+  - symbol: ɡ
+    type: consonant
+    mode: teach
+    examples: ["год"]
+    l1_contrast_notes:
+      en: "word-final devoicing: год → [got]"
+  - symbol: s
+    type: consonant
+    mode: teach
+    examples: ["сок"]
+  - symbol: ʂ
+    type: consonant
+    mode: teach
+    examples: ["шаг"]
+    l1_contrast_notes:
+      en: "ж/ш are postalveolar [ʐ ʂ]; ж devoices word-finally"
+  - symbol: m
+    type: consonant
+    mode: teach
+    examples: ["мама"]
+  - symbol: n
+    type: consonant
+    mode: teach
+    examples: ["нос"]
+  - symbol: l
+    type: consonant
+    mode: teach
+    examples: ["лом"]
+  - symbol: ɾ
+    type: consonant
+    mode: teach
+    examples: ["рыба"]
+    l1_contrast_notes:
+      en: "tapped р [ɾ], not English [ɹ]"
+  - symbol: v
+    type: consonant
+    mode: teach
+    examples: ["ватка"]
+
+phonotactics:
+  - id: ru.phon.vowel-reduction
+    description: >
+      Unstressed vowels reduce (аканье: unstressed о → [ə]/[a]-like, e.g.
+      моло́ко [məˈlokə]); reduction is conditioned by stress, not optional.
+      Teach explicitly with the stress mark.
+    mode: teach
+  - id: ru.phon.final-devoicing
+    description: >
+      Voiced obstruents devoice word-finally and before voiceless
+      obstruents (год → [got], сказка [ˈskaskə]); a spelling-vs-pronunciation
+      contrast learners must hear.
+    mode: teach
+  - id: ru.phon.obstruent-voicing
+    description: >
+      Obstruents contrast voicing (дом/том, год/кот, бить/пить, жить/шить);
+      the distinction is neutralized word-finally and before a voiceless
+      obstruent (see ru.phon.final-devoicing). Teach as a perception +
+      production minimal-pair contrast.
+    mode: teach
+  - id: ru.phon.palatalization
+    description: >
+      Consonants come in hard/soft (palatalized) pairs written with a soft
+      sign ь or a iotized vowel; the soft/hard contrast is phonemic
+      (бьёт/бьёт-type and минa/мeнa-type distinctions). Not all pairs occur.
+    mode: teach
+  - id: ru.phon.consonant-clusters
+    description: >
+      Russian allows complex onset/coda clusters (встреча, взгляд); no
+      epenthetic-vowel habit like some L1s. Descriptive, not a production rule.
+    mode: reference-only
+
+prosody:
+  - id: ru.phon.lexical-stress
+    description: >
+      Lexical word stress is free and mobile (moves in declension: го́род →
+      города́) and largely unpredictable, so it is stored per word and marked
+      with the combining acute in teaching material. Assess-guided only
+      (comparison with labeled stress), never a numeric grade; automatic
+      scoring requires SPEECH-007 calibration data (owner-gated, not established).
+    mode: assess-guided
+    orthographic_cues:
+      - "combining-acute-stress-mark"
+      - "dotted-e-jo"
+  - id: ru.phon.intonation-phrase
+    description: >
+      Sentence intonation (RIK intonation constructions) depends on sentence
+      type and focus; isolated-word stress must not be scored against a
+      natural phrase contour. Reviewed utterance context required.
+    mode: reference-only

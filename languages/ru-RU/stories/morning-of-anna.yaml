@@ -1,0 +1,19 @@
+id: ru.story.cp.morning-of-anna
+status: draft
+title: "Утро А́нны"
+description: "Anna's morning routine: getting up, breakfast, getting dressed, and the school day beginning."
+sentences:
+  - ru.sent.cp.p06
+  - ru.sent.cp.p09
+  - ru.sent.cp.p20
+  - ru.sent.cp.p10
+  - ru.sent.cp.p11
+sources:
+  - ru-original
+notes: "ai-drafted content-parity story (2026-10-12); graded reader, sentences reuse the content-parity sentence shard; human review required"
+generation:
+  method: ai-assisted
+  tool: omp
+  model: lab-omarchy/qwen3.8-flash-next-iq3_s
+  date: 2026-10-12
+  notes: "ai-drafted; human review required"

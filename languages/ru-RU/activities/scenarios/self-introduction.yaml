@@ -1,0 +1,30 @@
+# ai-assisted draft scenario (ru parity 2026-10-12); wording pending qualified review.
+id: ru.scenario.self-intro.first-meeting
+goal_id: ru.goal.on-ramp.self-introduction
+title: Introducing yourself
+nodes:
+- id: ru.scenario.self-intro.first-meeting.name
+  prompt: Say your name to someone you have just met.
+  expected_actions:
+  - state-name
+  next:
+  - ru.scenario.self-intro.first-meeting.detail
+- id: ru.scenario.self-intro.first-meeting.detail
+  prompt: Add one simple fact about yourself (where you are from or what you do).
+  expected_actions:
+  - state-origin-or-role
+  next:
+  - ru.scenario.self-intro.first-meeting.close
+- id: ru.scenario.self-intro.first-meeting.close
+  prompt: Express that you are glad to meet them.
+  expected_actions:
+  - express-pleasure-to-meet
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Model response in Cyrillic with a stress-marked reading
+- support_level: 5
+  description: Full suggested wording including a first-language gloss
+transfer_variants_required: 0
