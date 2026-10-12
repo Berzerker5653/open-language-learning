@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-10-10",
+  "updated": "2026-10-12",
   "active_task": "TTS-003",
   "tasks": {
     "TTS-003": {
@@ -9,7 +9,10 @@
       "last_error": null,
       "evidence": [
         "docs/provenance/qwen3-tts-adoption.md",
-        "docs/adr/0023-pack-audio-bake-engine-qwen3-tts.md"
+        "docs/adr/0023-pack-audio-bake-engine-qwen3-tts.md",
+        "languages/ja-JP/media/manifest.jsonl (reconciled, 4585e6a; 'test' 0/0)",
+        "languages/ru-RU/media/manifest.jsonl (baked+committed, d33745c; validate --mode install 0/0)",
+        "tasks/KANBAN.md (2026-10-12 audio-bake closure)"
       ]
     },
     "BOOT-001": {
