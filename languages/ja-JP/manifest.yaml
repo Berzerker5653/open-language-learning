@@ -1,7 +1,7 @@
 schema_version: "0.2"
 pack_id: "org.openlanguage.ja-jp.reference"
 display_name: "Japanese Reference Pack"
-version: "0.2.1"
+version: "0.3.0"
 target_locale: "ja-JP"
 source_locales: ["en-US"]
 engine:
@@ -27,7 +27,6 @@ capabilities:
 requested_model_capabilities:
   - "asr.ja"
   - "vad"
-  - "tts.ja"
   - "alignment.ja"
   - "f0"
 license:
