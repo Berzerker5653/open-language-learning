@@ -1,6 +1,7 @@
 /**
  * UX-001 onboarding flow: privacy-first explanation, local profile
- * (no account), Japanese pack selection/install, skippable microphone
+ * (no account), language-pack choice (install, locate a local pack file, or
+ * skip and decide later), skippable microphone
  * setup, and — when the mic is enabled — a speech-setup step for the
  * speech components (K-72). Presentational component: state and IPC
  * live in the container so every step is renderable in tests.
@@ -55,6 +56,12 @@ export interface OnboardingProps {
   onCreateProfile(): void;
   onSelectPack(id: string): void;
   onInstall(id: string): void;
+  /** Choose a `.lpk` file that is already on this device (owner 2026-10-12:
+   * locating a downloaded pack belongs on the same page as choosing one). */
+  onLocatePack(file: File): void;
+  /** Finish setup with no active pack; the language is picked later in
+   * Settings. The profile exists either way. */
+  onSkipPack(): void;
   onEnableMic(): void;
   onSkipMic(): void;
   onInstallSpeech(): void;
@@ -75,12 +82,13 @@ export interface OnboardingProps {
 }
 
 export function Onboarding(p: OnboardingProps) {
-  // The engine requires an installed active pack to finish setup
-  // (`complete_onboarding` rejects an uninstalled pack), so "continue
-  // without" is not an honest option in this build. After an install
-  // failure the actionable path is retry — the Install button stays
-  // enabled — or another pack; Continue is explained, never silently
-  // disabled.
+  // Continue needs a pack the engine can actually read: a selected pack that
+  // is already on the device (bundled, catalog-installed, or located from a
+  // file) unlocks it with no install click. Choosing a pack is not mandatory —
+  // "Skip for now" finishes setup with no active pack, which the store and
+  // every pack-scoped read already resolve to "nothing yet". After a failed
+  // install the actionable paths are retry, another pack, or a local file;
+  // Continue is explained, never silently disabled.
   const canContinue = p.selectedPack !== null && p.installedPacks.includes(p.selectedPack);
   return (
     <section aria-label="Onboarding">
@@ -199,11 +207,22 @@ export function Onboarding(p: OnboardingProps) {
           </fieldset>
           <p>
             <small>
-              You can import community packs or change the language you are learning later from the
-              Language packs section of Settings. This never changes the app&apos;s own interface
-              language.
+              A pack you already downloaded can be located here: it goes through the same validation
+              as a catalog install, and once it is on this device you can select it without
+              installing anything else. You can also import packs or change the language you are
+              learning later from the Language packs section of Settings. This never changes the
+              app&apos;s own interface language.
             </small>
           </p>
+          <input
+            type="file"
+            accept=".lpk"
+            aria-label="Locate a language pack file"
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) p.onLocatePack(f);
+            }}
+          />
           {!canContinue ? (
             <p
               className="notice"
@@ -212,8 +231,8 @@ export function Onboarding(p: OnboardingProps) {
               role="status"
             >
               {p.error
-                ? "The install did not complete, so nothing was changed. Press Install again to retry this pack, or select a different pack — Continue unlocks once a pack is installed."
-                : "Select a pack and install it to continue."}
+                ? "The install did not complete, so nothing was changed. Press Install again to retry this pack, select a different pack, or locate a pack file from this device — Continue unlocks once a pack is installed."
+                : "Select an installed pack to continue, or skip this and choose the language later in Settings."}
             </p>
           ) : null}
           <button
@@ -224,6 +243,9 @@ export function Onboarding(p: OnboardingProps) {
             aria-describedby={canContinue ? undefined : "packs-continue-note"}
           >
             Continue
+          </button>
+          <button type="button" className="btn btn--quiet" onClick={p.onSkipPack}>
+            Skip for now
           </button>
         </div>
       )}
@@ -251,11 +273,23 @@ export function Onboarding(p: OnboardingProps) {
         <div className="card">
           <h1>Speech setup</h1>
           <p>
-            Speaking and listening activities use three components downloaded once to this computer.
+            Speech components are downloaded once to this computer and shared by every language.
             Installing them now is optional — skipping is a clean choice and the app will offer the
             download wherever an activity needs it — but without them those activities stay
             text-only.
           </p>
+          {p.selectedPack === null ? (
+            // The components install independently of any pack, but the
+            // activities they serve read content from the profile's language.
+            // Saying so here is the difference between a deferral and a dead
+            // end (owner 2026-10-12: skipping the pack left this step looking
+            // like it had nothing to switch on).
+            <p className="notice" role="status">
+              This profile has no language chosen yet, so speaking activities stay unavailable until
+              one is set under Settings → Language packs. Installing these components does not
+              change that, and skipping here never blocks setup.
+            </p>
+          ) : null}
           <ul className="speech-components">
             {p.speechComponents.map((c) => (
               <li key={c.id}>
@@ -271,6 +305,15 @@ export function Onboarding(p: OnboardingProps) {
               </li>
             ))}
           </ul>
+          {p.speechComponents.length === 0 ? (
+            // An empty list must never read as two dead buttons: name the
+            // state and the clean way out.
+            <p className="notice" role="status">
+              No speech components could be listed in this build, so there is nothing to install
+              from here. Speaking and listening stay text-only for now; skip this step and Settings
+              retries the listing later.
+            </p>
+          ) : null}
           <div className="btn-row">
             <button
               type="button"
@@ -306,7 +349,9 @@ export function Onboarding(p: OnboardingProps) {
         <div className="card">
           <h1>Ready</h1>
           <p>
-            Profile created locally. Language pack installed. Microphone can be enabled anytime.
+            {p.selectedPack
+              ? "Profile created locally, with the language pack installed. Microphone and speech can be enabled anytime."
+              : "Profile created locally with no language chosen yet, so there is nothing to practise from until you set one under Settings → Language packs."}
           </p>
           <button type="button" className="btn btn--primary" onClick={p.onContinue}>
             Start learning

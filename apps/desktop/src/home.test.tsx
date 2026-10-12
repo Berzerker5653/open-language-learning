@@ -93,6 +93,29 @@ describe("home", () => {
     expect(html).toContain("Nothing is due right now");
   });
 
+  // Owner 2026-10-12: a profile whose language step was skipped must not sit
+  // under a heading promising work that cannot exist. The state names itself
+  // and offers the one control that resolves it.
+  it("states the missing language and offers the way out, withholding the plan promise", () => {
+    const html = renderToStaticMarkup(
+      <Home
+        displayName="Skipper"
+        plan={{ ...plan, items: [], total_seconds: 0 }}
+        activeBudget={5}
+        onBudget={() => {}}
+        noPack
+        onChooseLanguage={() => {}}
+      />,
+    );
+    expect(html).toContain("No language is set for this profile yet");
+    expect(html).toContain("Choose a language");
+    expect(html).not.toContain("what to practice now");
+    // No posture statement, no goal, no first steps: with no pack nothing is
+    // claimed about a language this profile is not studying.
+    expect(html).not.toContain("pack-posture");
+    expect(html).not.toContain("Where to begin");
+  });
+
   it("makes recall-meaning plan items runnable with the actual word", () => {
     const html = renderToStaticMarkup(
       <Home

@@ -233,16 +233,44 @@ fn bundled_packs_at(
         .collect()
 }
 
-/// Bundled pack candidates. The UI selects by id; paths never cross the
-/// IPC boundary (docs/07).
-fn bundled_packs() -> Vec<(PackCandidate, PathBuf)> {
-    let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../..");
-    bundled_packs_at(&repo_root, BUNDLED_PACKS.get().map(PathBuf::as_path))
+/// Pack candidates the wizard can offer: the compiled-in reference packs
+/// plus every pack this device already holds (imported `.lpk` files,
+/// catalog installs). Owner 2026-10-12: a pack that is already on the
+/// device has to be selectable without installing anything again, so the
+/// wizard list cannot be bundled-only. The bundled entry wins when a pack
+/// is both compiled in and installed, because it carries the pinned
+/// version the release was built against.
+fn available_packs_at(repo_root: &Path, data: &Path) -> Vec<PackCandidate> {
+    let mut out: Vec<PackCandidate> =
+        bundled_packs_at(repo_root, BUNDLED_PACKS.get().map(PathBuf::as_path))
+            .into_iter()
+            .map(|(c, _)| c)
+            .collect();
+    let packs_dir = data.join("packs");
+    for installed in packs::installed_packs(data) {
+        // A store record whose archive was deleted off disk would otherwise be
+        // offered as Installed and then fail when the profile is created.
+        // Offer only what the engine can read — the same check
+        // `finish_onboarding` applies.
+        if out.iter().any(|c| c.pack_id == installed.pack_id)
+            || lts_langpack::archive::current_version(&installed.pack_id, &packs_dir).is_none()
+        {
+            continue;
+        }
+        out.push(PackCandidate {
+            pack_id: installed.pack_id,
+            display_name: installed.display_name,
+            locale: installed.locale,
+            maturity: installed.trust_state,
+        });
+    }
+    out
 }
 
 #[tauri::command]
 fn available_packs() -> Vec<PackCandidate> {
-    bundled_packs().into_iter().map(|(c, _)| c).collect()
+    let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../..");
+    available_packs_at(&repo_root, &data_dir())
 }
 
 fn data_dir() -> PathBuf {
@@ -489,20 +517,27 @@ fn list_profiles() -> Result<Vec<ProfileInfo>, String> {
 fn resume_profile(profile_id: String) -> Result<ProfileInfo, String> {
     resume_profile_at(&data_dir(), &profile_id)
 }
-/// Record which pack the profile studies plus the microphone decision
-/// (skippable; never gates progress).
+/// Record which pack the profile studies plus the microphone decision.
+/// Both are optional: `None` (owner 2026-10-12, "skip for now") finishes
+/// setup with no active pack, which is a state the store and every
+/// pack-scoped read already resolve to "nothing yet" — the learner picks
+/// the language later from Settings. A pack that is named here must still
+/// be installed, because an active pack the engine cannot read would
+/// promise content that is not on the device.
 fn finish_onboarding(
     data: &Path,
     profile_id: &str,
-    pack_id: &str,
+    pack_id: Option<&str>,
     mic_enabled: bool,
 ) -> Result<(), String> {
     let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
-    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
-        .ok_or_else(|| "pack not installed".to_string())?;
-    store
-        .set_active_pack(profile_id, pack_id, &version)
-        .map_err(|e| e.to_string())?;
+    if let Some(pack_id) = pack_id {
+        let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+            .ok_or_else(|| "pack not installed".to_string())?;
+        store
+            .set_active_pack(profile_id, pack_id, &version)
+            .map_err(|e| e.to_string())?;
+    }
     store
         .set_setting(
             profile_id,
@@ -515,10 +550,10 @@ fn finish_onboarding(
 #[tauri::command]
 fn complete_onboarding(
     profile_id: String,
-    pack_id: String,
+    pack_id: Option<String>,
     mic_enabled: bool,
 ) -> Result<(), String> {
-    finish_onboarding(&data_dir(), &profile_id, &pack_id, mic_enabled)
+    finish_onboarding(&data_dir(), &profile_id, pack_id.as_deref(), mic_enabled)
 }
 
 // ---------------------------------------------------------------------------
@@ -2491,9 +2526,19 @@ fn first_run_steps(profile_id: String) -> Result<Vec<FirstRunStep>, String> {
 
 fn first_run_steps_at(data: &Path, profile_id: &str) -> Result<Vec<FirstRunStep>, String> {
     let active = packs::active_pack(data, profile_id)?;
-    let pack_id = active.first().ok_or("no active language pack")?;
-    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
-        .ok_or("pack not installed")?;
+    // "No language chosen yet" is a real profile state since the wizard's
+    // "Skip for now", and this command runs on the profile-entry path:
+    // refusing here stranded a learner at the resume screen with no way in
+    // (owner 2026-10-12). Empty is the honest answer — there is no pack to
+    // declare steps from. The same applies if the active pack's archive is
+    // gone: entry stays open, and the pack-scoped routes report that miss
+    // where the learner can act on it.
+    let Some(pack_id) = active.first() else {
+        return Ok(Vec::new());
+    };
+    let Some(version) = lts_langpack::archive::current_version(pack_id, &data.join("packs")) else {
+        return Ok(Vec::new());
+    };
     let root = data.join("packs").join(pack_id).join(&version);
     let view = build_plan_view(data, profile_id, 5, now_secs())?;
     let mut steps: Vec<FirstRunStep> = Vec::new();
@@ -6657,7 +6702,11 @@ mod tests {
     /// install path; the retired ja-demo fixture installs directly from
     /// tests/fixtures/packs so engine tests keep their stable content ids.
     fn install_bundled_pack(data: &Path, pack_id: &str) -> Result<PackCandidate, String> {
-        if bundled_packs().iter().any(|(c, _)| c.pack_id == pack_id) {
+        let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../..");
+        if bundled_packs_at(&repo_root, BUNDLED_PACKS.get().map(PathBuf::as_path))
+            .iter()
+            .any(|(c, _)| c.pack_id == pack_id)
+        {
             return crate::install_bundled_pack_report(data, pack_id, None, |_| {});
         }
         let name = pack_id
@@ -6823,12 +6872,111 @@ mod tests {
 
         // Profile + selection + skippable mic setting round-trip.
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), false).unwrap();
         let selected = store.selected_packs(&p.id).unwrap();
         assert_eq!(selected[0].0, "org.openlanguage.ja-jp.reference");
         assert_eq!(
             store.get_setting(&p.id, "microphone-enabled").unwrap(),
             Some(serde_json::json!(false))
+        );
+    }
+
+    /// Owner defect 2026-10-12: the wizard's pack list was bundled-only,
+    /// so an imported .lpk was invisible and the learner had to install
+    /// a pack they already owned all over again.
+    #[test]
+    fn an_installed_pack_that_is_not_bundled_appears_in_the_wizard_list() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        // A real install: archive on disk under data/packs plus the
+        // community store record. ja-demo is not a compiled-in
+        // candidate, so it can only surface if installed packs count.
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+
+        let packs = available_packs_at(Path::new("/nonexistent-repo"), data);
+        let offered = packs
+            .iter()
+            .find(|c| c.pack_id == "org.openlanguage.ja-demo")
+            .expect("a pack already on the device is offered as-is");
+        assert_eq!(
+            offered.maturity, "community",
+            "the install's trust travels with it"
+        );
+        assert_eq!(offered.locale, "ja-JP");
+    }
+
+    #[test]
+    fn an_installed_pack_that_is_also_bundled_is_listed_exactly_once() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        // A dev-shaped repo tree makes ja-jp.reference a bundled
+        // candidate ("experimental"); installing it adds a store record
+        // for the same pack ("community"). The list must not double up.
+        let repo = tmp.path().join("repo");
+        std::fs::create_dir_all(repo.join("languages/ja-JP")).unwrap();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+
+        let candidates = available_packs_at(&repo, data);
+        let listed = candidates
+            .iter()
+            .filter(|c| c.pack_id == "org.openlanguage.ja-jp.reference")
+            .collect::<Vec<_>>();
+        assert_eq!(listed.len(), 1, "the wizard renders one row per pack");
+        // The bundled entry wins: it carries the version the release
+        // was built against, so its posture is the honest one.
+        assert_eq!(listed[0].maturity, "experimental");
+    }
+
+    /// Owner 2026-10-12, "skip for now": finishing setup without naming
+    /// a pack is a supported path. It leaves no active pack, every
+    /// pack-scoped read still resolves to "nothing yet", and the
+    /// microphone decision is kept.
+    #[test]
+    fn onboarding_can_finish_with_no_pack_and_still_saves_the_mic_choice() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let p = create_local_profile(data, "Skipper").unwrap();
+        finish_onboarding(data, &p.id, None, false).unwrap();
+
+        let active = packs::active_pack(data, &p.id).unwrap();
+        assert!(active.is_empty(), "a skipped wizard records no active pack");
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        assert_eq!(
+            store.get_setting(&p.id, "microphone-enabled").unwrap(),
+            Some(serde_json::json!(false)),
+            "setup completed and kept the decision the learner made"
+        );
+        // The Home read resolves normally: an empty plan, not an error.
+        let view = build_plan_view(data, &p.id, 5, 1_762_128_000).unwrap();
+        assert!(view.items.is_empty(), "no pack means no plan items");
+    }
+
+    /// The resume path enters profiles that have no language: since the
+    /// wizard's "Skip for now", "no active pack" is a real stored state,
+    /// and the entry screen must show an empty first run rather than
+    /// trap the learner behind an error.
+    #[test]
+    fn a_profile_with_no_language_can_still_be_entered() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let p = create_local_profile(data, "Returning").unwrap();
+        finish_onboarding(data, &p.id, None, false).unwrap();
+
+        let steps = first_run_steps_at(data, &p.id).unwrap();
+        assert!(
+            steps.is_empty(),
+            "entering a profile without a language shows an empty first run, not an error"
+        );
+    }
+
+    #[test]
+    fn finishing_onboarding_rejects_a_pack_that_is_not_installed() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let p = create_local_profile(data, "Eager").unwrap();
+        assert!(
+            finish_onboarding(data, &p.id, Some("org.openlanguage.nope"), false).is_err(),
+            "an active pack the engine cannot read would promise content not on the device"
         );
     }
 
@@ -6917,7 +7065,7 @@ mod tests {
         // contract (docs/07), and every content cache keys on that.
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        let version = install_reference_pack_with(
+        let version = install_reference_pack_with_audio(
             data,
             &[(
                 "lexicon/phrases.jsonl",
@@ -6926,6 +7074,12 @@ mod tests {
                     "{\"id\":\"ja.lex.phrase.demo-bad-slot\",\"status\":\"draft\",\"kind\":\"phrase\",\"forms\":[{\"text\":\"さようなら\",\"is_primary\":true}],\"glosses\":{\"en-US\":[\"a farewell\"]},\"sources\":[\"jf-standard\"],\"slots\":[{\"text\":\"さよなら\",\"label\":\"does not occur in the surface\"}]}\n",
                 ),
             )],
+            // ADR-0024: the demo phrases are audio-addressable, so they need
+            // manifest rows; the row text quotes the declared reading.
+            &[
+                ("ja.lex.phrase.demo-time-greet", "おはようございます"),
+                ("ja.lex.phrase.demo-bad-slot", "さようなら"),
+            ],
         );
 
         let entries = lexicon_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
@@ -6950,7 +7104,13 @@ mod tests {
         // The runner surfaces slot views with exactly one deterministic
         // target; ordinary word entries carry none.
         let profile = create_local_profile(data, "H").unwrap();
-        finish_onboarding(data, &profile.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        finish_onboarding(
+            data,
+            &profile.id,
+            Some("org.openlanguage.ja-jp.reference"),
+            false,
+        )
+        .unwrap();
         let t1 = practice_task_at(
             data,
             &profile.id,
@@ -7007,7 +7167,7 @@ mod tests {
 
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        let version = install_reference_pack_with(
+        let version = install_reference_pack_with_audio(
             data,
             &[
                 (
@@ -7038,6 +7198,14 @@ mod tests {
                     ),
                 ),
             ],
+            // ADR-0024: the contrast items are addressed as
+            // `<id>-<item-index>`, and the sentence row text quotes its
+            // declared reading; the shard kanji is not audio-addressable.
+            &[
+                ("ja.contrast.demo.shard-0", "たべもの"),
+                ("ja.contrast.demo.shard-1", "たべものー"),
+                ("ja.sent.demo.shard", "ひこうきのきっぷをかります"),
+            ],
         );
 
         let kanji = kanji_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
@@ -7058,7 +7226,13 @@ mod tests {
             "shard-file contrasts must reach the discrimination runner"
         );
         let profile = create_local_profile(data, "H").unwrap();
-        finish_onboarding(data, &profile.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        finish_onboarding(
+            data,
+            &profile.id,
+            Some("org.openlanguage.ja-jp.reference"),
+            false,
+        )
+        .unwrap();
         let cloze = practice_task_at(
             data,
             &profile.id,
@@ -7180,7 +7354,13 @@ mod tests {
         }
         // The runner renders the annotated phrase with one target.
         let profile = create_local_profile(data, "H").unwrap();
-        finish_onboarding(data, &profile.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        finish_onboarding(
+            data,
+            &profile.id,
+            Some("org.openlanguage.ja-jp.reference"),
+            false,
+        )
+        .unwrap();
         let task = practice_task_at(
             data,
             &profile.id,
@@ -7244,7 +7424,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
 
         // 2025-11-03T00:00:00Z; one overdue FSRS item.
@@ -7412,7 +7592,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "New").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
 
         // Load the installed pack into the activity runtime.
         let packs_root = data.join("packs");
@@ -8336,7 +8516,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), false).unwrap();
         let goals = goal_map_at(data, &p.id).unwrap();
         assert!(!goals.is_empty(), "installed pack surfaces goals");
         assert!(
@@ -8393,7 +8573,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), false).unwrap();
         let goals = goal_map_at(data, &p.id).unwrap();
         let mut seen: Vec<Option<String>> = Vec::new();
         for g in &goals {
@@ -8456,7 +8636,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), false).unwrap();
         let before = goal_map_at(data, &p.id).unwrap();
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
         for i in 0..50 {
@@ -8491,7 +8671,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), false).unwrap();
 
         let claims = pack_claims_at(data).unwrap();
         assert_eq!(claims.len(), 1);
@@ -8649,7 +8829,7 @@ mod tests {
             lts_langpack::archive::install(&bytes, &data.join("packs")).unwrap();
         }
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), false).unwrap();
 
         let s = display_settings_at(data, &p.id).unwrap();
         assert_eq!(s.stress_mode, "auto");
@@ -8758,7 +8938,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", true).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), true).unwrap();
 
         let path = profile_export_at(data, &p.id).unwrap();
         let json = std::fs::read_to_string(&path).unwrap();
@@ -8821,7 +9001,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.eo-demo").unwrap();
         let p = create_local_profile(data, "Preview").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.eo-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.eo-demo"), false).unwrap();
         assert_eq!(
             packs::active_pack(data, &p.id).unwrap(),
             vec!["org.openlanguage.eo-demo"]
@@ -8900,7 +9080,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
 
         // A brand-new profile must have something to learn: the
         // unseen-lexicon stream fills the session even though every
@@ -9009,7 +9189,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), false).unwrap();
         let version = lts_langpack::archive::current_version(
             "org.openlanguage.ja-jp.reference",
             &data.join("packs"),
@@ -9084,7 +9264,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), false).unwrap();
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
 
         let derived = derive_pairs(&store, &p.id, &rfc3339_utc(1_762_128_000)).unwrap();
@@ -9161,7 +9341,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), false).unwrap();
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
         let version = lts_langpack::archive::current_version(
             "org.openlanguage.ja-jp.reference",
@@ -9314,7 +9494,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-jp.reference", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), false).unwrap();
 
         let steps = first_run_steps_at(data, &p.id).unwrap();
         // ADR-0020 §4: at most three steps, and ja-JP declares enough to fill them.
@@ -9347,7 +9527,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
         let steps = first_run_steps_at(data, &p.id).unwrap();
         // ja-demo declares no capability and no goal map: no step may
         // name a goal or claim an introduction order (ADR-0021 rule 4).
@@ -9437,7 +9617,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
         let sessions = scenarios::SessionStore::default();
         let sid = "ja.scenario.demo.first-meeting";
 
@@ -9552,7 +9732,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
 
         // A listening task never carries the transcript: a visible
         // surface would disqualify the evidence (MASTERY_POLICY).
@@ -9595,16 +9775,19 @@ mod tests {
                 .any(|r| r.item_id == "ja.lex.demo.konnichiwa#comprehension-listening")
         );
 
-        // Audio resolves natively: licensed pack media wins; otherwise
-        // local synthesis or an honest error — never a transcript.
+        // Audio resolves natively from the pack media its manifest
+        // addresses, and the source is the provenance that manifest row
+        // declares — the fixture rows are model-output placeholders —
+        // never a transcript.
         let a = listening_audio_at(data, &p.id, "ja.lex.demo.obasan").unwrap();
-        assert_eq!(a.source, "licensed-recording");
-        // Unknown items never reach the audio path. (Synthesis itself is
-        // covered by speech_audio_prefers_licensed_media_then_synthesizes;
-        // running two sherpa subprocesses concurrently flaps the box.)
+        assert_eq!(a.source, "model-output");
+        // Content the pack ships no media for honestly reports an
+        // unplayable item: the audio path is manifest+wav only, and with
+        // synthesis deleted (ADR-0024) there is no stand-in to label.
         assert_eq!(
             listening_audio_at(data, &p.id, "ja.lex.demo.nonexistent").unwrap_err(),
-            "unknown item"
+            "media-asset-missing: This pack does not ship audio for this item, and the app \
+             never synthesizes speech, so there is nothing to play."
         );
 
         // Modalities without a runner still abstain honestly.
@@ -9631,7 +9814,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
 
         let task = practice_task_at(
             data,
@@ -9659,15 +9842,16 @@ mod tests {
         );
 
         let audio = listening_audio_at(data, &p.id, "ja.sent.demo.obasan-aunt").unwrap();
-        assert_eq!(audio.source, "licensed-recording");
+        assert_eq!(audio.source, "model-output");
 
-        // And a sentence the pack never recorded at all abstains. That is
-        // the only shape "no audio" can take in a shipped product: an
-        // installed version directory is immutable by contract (docs/07 —
-        // the same contract every content cache keys on), so the old
-        // delete-the-wav variant asserted a state the product cannot
-        // reach. The never-declared sentence is the reachable one.
-        assert_eq!(
+        // K-90/ADR-0024: the install gate refuses to build a pack whose
+        // media manifest misses any audio-addressable item, so every
+        // sentence in an installed pack has declared audio — the old
+        // never-recorded sentence now gets its listening task too. The
+        // honest abstention that remains is content the pack does not
+        // declare at all: the runner refuses rather than offering a
+        // listening item for an id that is not a pack sentence.
+        assert!(
             practice_task_at(
                 data,
                 &p.id,
@@ -9675,8 +9859,19 @@ mod tests {
                 "comprehension-listening",
                 false,
             )
+            .is_ok(),
+            "the install gate gives every sentence declared audio"
+        );
+        assert_eq!(
+            practice_task_at(
+                data,
+                &p.id,
+                "ja.sent.demo.nonexistent",
+                "comprehension-listening",
+                false,
+            )
             .err(),
-            Some("pack declares no audio for this sentence".to_string())
+            Some("unknown practice target".to_string())
         );
     }
 
@@ -9688,7 +9883,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
 
         let mut progression = Vec::new();
@@ -9762,7 +9957,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
 
         // The contrast set IS the answer space; the written target is
         // never visible while listening (surface hidden like listening).
@@ -9790,11 +9985,12 @@ mod tests {
                     && i.content_id == "ja.contrast.demo.vowel-length")
         );
 
-        // Audio: licensed media named `<id>-<item-index>.wav` wins, and
-        // the played member is the same deterministic target the grader
-        // uses (transcript never crosses IPC).
+        // Audio: the manifest rows named `<id>-<item-index>` address the
+        // played member with their declared provenance, and the played
+        // member is the same deterministic target the grader uses
+        // (transcript never crosses IPC).
         let a = contrast_audio_at(data, &p.id, "ja.contrast.demo.vowel-length").unwrap();
-        assert_eq!(a.source, "licensed-recording");
+        assert_eq!(a.source, "model-output");
         let target = (fnv1a("ja.contrast.demo.vowel-length") % 2) as usize;
 
         let g = practice_submit_at(
@@ -9829,7 +10025,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
 
         // Shadowing targets are the pack lexicon — pack-data-driven,
         // no language literals in the engine.
@@ -9853,7 +10049,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
 
         // Cloze: the declared target is blanked in the sentence and the
         // target string never appears in the task payload.
@@ -9886,7 +10082,7 @@ mod tests {
 
         // Dictation audio: media-first, transcript never crosses IPC.
         let a = dictation_audio_at(data, &p.id, "ja.sent.demo.obasan-aunt").unwrap();
-        assert_eq!(a.source, "licensed-recording");
+        assert_eq!(a.source, "model-output");
 
         // Both join the new-item stream for a fresh profile.
         let plan = build_plan_view(data, &p.id, 60, 1_760_000_000).unwrap();
@@ -10025,7 +10221,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
 
         let list = story_list_at(data, &p.id).unwrap();
         assert!(
@@ -10045,7 +10241,7 @@ mod tests {
 
         // Per-sentence audio is media-first where a recording exists.
         let a = dictation_audio_at(data, &p.id, "ja.sent.demo.obasan-aunt").unwrap();
-        assert_eq!(a.source, "licensed-recording");
+        assert_eq!(a.source, "model-output");
 
         // FORMATIVE ONLY: reading records no evidence at all.
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
@@ -10058,7 +10254,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
 
         let item = mine_add_at(
             data,
@@ -10125,7 +10321,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
 
         let first = mine_add_at(
             data,
@@ -10172,7 +10368,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
 
         // Kanji item, no reading history: furigana and romaji visible
         // as on-ramp scaffolds (READ-001 auto rules).
@@ -10286,7 +10482,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
 
         // New profiles see script-instruction items in the plan.
         let view = build_plan_view(data, &p.id, 10, 1_760_000_000).unwrap();
@@ -10428,7 +10624,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
 
         // One low-stakes task per pack assessment, built from the
         // assessment's goal unit content.
@@ -10522,7 +10718,7 @@ mod tests {
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
-        finish_onboarding(data, &p.id, "org.openlanguage.ja-demo", false).unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
 
         // Pack-declared characters join the new-item stream for both
         // drills (meaning + reading).
@@ -10731,6 +10927,21 @@ mod tests {
     /// version directory is immutable by contract (docs/07) and every content
     /// cache in the app keys on that fact. Returns the installed version.
     fn install_reference_pack_with(data: &Path, extra: &[(&str, &str)]) -> String {
+        install_reference_pack_with_audio(data, extra, &[])
+    }
+
+    /// As [`install_reference_pack_with`], plus `audio`: `(content id, spoken
+    /// text)` pairs for demo items the `extra` files introduce. The install-time
+    /// media-coverage gate (ADR-0024) refuses any pack whose audio-addressable
+    /// items have no media manifest row, so each pair gets placeholder audio and
+    /// an appended manifest row before the build. RIFF headers are enough here:
+    /// this path copies bytes, it never decodes.
+    fn install_reference_pack_with_audio(
+        data: &Path,
+        extra: &[(&str, &str)],
+        audio: &[(&str, &str)],
+    ) -> String {
+        use std::io::Write;
         fn drop_stage(_: &crate::progress::Progress) {}
         let src = tempfile::tempdir().unwrap();
         copy_tree(&reference_source(), src.path());
@@ -10740,6 +10951,35 @@ mod tests {
                 std::fs::create_dir_all(parent).unwrap();
             }
             std::fs::write(&path, body).unwrap();
+        }
+        for (id, text) in audio {
+            let wav: &[u8] = b"RIFF0000WAVEfmt ";
+            let asset = format!("media/{id}.wav");
+            std::fs::write(src.path().join(&asset), wav).unwrap();
+            // The audit verifies sha256/bytes against the bytes on disk, and a
+            // model-output row must quote a reading the item itself declares —
+            // so callers pass the declared reading as `text`.
+            let row = format!(
+                concat!(
+                    "{{\"id\": \"{id}\", \"file\": \"{asset}\", \"sha256\": \"{sha}\",",
+                    " \"bytes\": {bytes}, \"sample_rate\": 24000, \"channels\": 1,",
+                    " \"seconds\": 0.2, \"provenance\": \"model-output\",",
+                    " \"synthesizer\": {{\"runtime\": \"fixture\", \"model\": \"fixture-silence\",",
+                    " \"model_sha256\": \"0000000000000000000000000000000000000000000000000000000000000000\",",
+                    " \"voice\": \"fixture\"}}, \"text\": \"{text}\", \"generated\": \"2026-10-12\",",
+                    " \"notes\": \"test-fixture placeholder audio; real content is in the manifest rows\"}}",
+                ),
+                id = id,
+                asset = asset,
+                text = text,
+                sha = sha256_hex(wav),
+                bytes = wav.len(),
+            );
+            let mut manifest = std::fs::OpenOptions::new()
+                .append(true)
+                .open(src.path().join("media/manifest.jsonl"))
+                .unwrap();
+            writeln!(manifest, "{row}").unwrap();
         }
         let (bytes, _sha) =
             lts_langpack::archive::build(src.path()).expect("the extended source packs");

@@ -144,7 +144,9 @@ export function megabytes(bytes: number): string {
   return (bytes / (1024 * 1024)).toFixed(1);
 }
 
-async function readFileB64(file: File): Promise<string> {
+/** Read a pack archive as base64 for `import_pack`; shared by Settings and
+ * the wizard, so both paths hand the command the same bytes. */
+export async function readFileB64(file: File): Promise<string> {
   const buf = await file.arrayBuffer();
   let bin = "";
   const bytes = new Uint8Array(buf);

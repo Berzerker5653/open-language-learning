@@ -11,6 +11,7 @@ import { describe, expect, it } from "vitest";
 import {
   NO_ACTIVE_PACK,
   activePackNote,
+  explainPackAbsence,
   loadSessionPack,
   packAttemptRequest,
   packRequest,
@@ -92,6 +93,19 @@ describe("session pack (D7)", () => {
     expect(req.error).toContain("Language packs");
     expect(req.error).toBe(NO_ACTIVE_PACK);
     expect(NO_ACTIVE_PACK).not.toContain(REFERENCE);
+  });
+
+  // The same state reaches routes that build their payloads without the D7
+  // guards. The engine's token must arrive as the sentence that names the fix,
+  // and every other payload must survive untouched — the engine's own error
+  // text is already learner-readable, so rewriting it would be inventing copy.
+  it("translates the pack-absence token at the IPC boundary, and nothing else", () => {
+    expect(explainPackAbsence("no active language pack")).toBe(NO_ACTIVE_PACK);
+    expect(explainPackAbsence(new Error("no active language pack"))).toBe(NO_ACTIVE_PACK);
+    expect(explainPackAbsence("media-asset-missing: no recording ships here")).toBe(
+      "media-asset-missing: no recording ships here",
+    );
+    expect(explainPackAbsence("pack not installed")).toBe("pack not installed");
   });
 
   it("uses the first id and surfaces a multi-pack profile instead of guessing", async () => {

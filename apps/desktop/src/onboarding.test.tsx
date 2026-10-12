@@ -1,4 +1,5 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import { isValidElement as isElement, type ReactElement, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { Onboarding, type OnboardingProps } from "./onboarding";
 
@@ -26,6 +27,8 @@ const base: OnboardingProps = {
   onCreateProfile: () => {},
   onSelectPack: () => {},
   onInstall: () => {},
+  onLocatePack: () => {},
+  onSkipPack: () => {},
   onEnableMic: () => {},
   onSkipMic: () => {},
   onInstallSpeech: () => {},
@@ -39,6 +42,51 @@ const base: OnboardingProps = {
 
 function render(overrides: Partial<OnboardingProps>) {
   return renderToStaticMarkup(<Onboarding {...base} {...overrides} />);
+}
+
+// vitest runs in node here — this suite has no DOM (see the App.test.tsx
+// header). So a "click" is the onClick prop on the element tree the
+// component produced, which is exactly what a browser click would invoke.
+// The other assertions keep inspecting the rendered markup as before.
+function tree(overrides: Partial<OnboardingProps>): ReactElement {
+  // `Onboarding` is presentational and hook-free, so calling it returns the
+  // element tree a render would produce — which is what the walk below needs.
+  // Rendering `<Onboarding …/>` instead would yield one opaque element whose
+  // props carry no children, and the walk would see nothing.
+  return Onboarding({ ...base, ...overrides });
+}
+
+function childNodes(el: ReactElement): ReactNode[] {
+  const props: unknown = el.props;
+  if (props && typeof props === "object" && "children" in props) {
+    const kids: unknown = props.children;
+    return Array.isArray(kids) ? (kids as ReactNode[]) : [kids as ReactNode];
+  }
+  return [];
+}
+
+function collectButtons(node: ReactNode, out: ReactElement[] = []): ReactElement[] {
+  if (Array.isArray(node)) {
+    for (const child of node) collectButtons(child, out);
+    return out;
+  }
+  if (!isElement(node)) return out;
+  if (node.type === "button") out.push(node);
+  collectButtons(childNodes(node), out);
+  return out;
+}
+
+function buttonLabeled(
+  root: ReactElement,
+  label: string,
+): ReactElement<{ disabled?: boolean; onClick?: () => void }> {
+  const found = collectButtons(root).find((el) =>
+    childNodes(el).some((k) => typeof k === "string" && k.includes(label)),
+  );
+  if (!found) throw new Error(`no button labeled "${label}"`);
+  // The walk finds elements by tag name alone, so the button props this file
+  // reads (`disabled`, `onClick`) are asserted here once.
+  return found as ReactElement<{ disabled?: boolean; onClick?: () => void }>;
 }
 
 describe("onboarding", () => {
@@ -209,5 +257,60 @@ describe("onboarding", () => {
     expect(html).not.toMatch(/disabled=""[^>]*>\s*Start with speech/);
     // Nothing left to install: the install button is honestly disabled.
     expect(html).toMatch(/disabled=""[^>]*>\s*Install speech components/);
+  });
+
+  // Owner regression (2026-10-12): the wizard list now includes imported
+  // and catalog-installed packs, and the container populates installedPacks
+  // — so a pack already on this device is selectable straight to Continue,
+  // with no redundant Install click.
+  it("unlocks Continue when a listed pack is already installed and selected", () => {
+    const html = render({
+      step: "packs",
+      packs: [
+        {
+          pack_id: "org.openlanguage.imported-ja",
+          display_name: "Imported Japanese pack",
+          locale: "ja-JP",
+          maturity: "community",
+        },
+      ],
+      selectedPack: "org.openlanguage.imported-ja",
+      installedPacks: ["org.openlanguage.imported-ja"],
+    });
+    expect(html).toContain("Imported Japanese pack");
+    expect(html).toContain("(ja-JP, community)");
+    // The install control becomes an honest done-state: labeled, locked.
+    expect(html).toMatch(/disabled=""[^>]*>\s*Installed</);
+    // No install click needed: Continue is live and the explanatory note is gone.
+    expect(html).toContain(">Continue</button>");
+    expect(html).not.toMatch(/disabled=""[^>]*>\s*Continue/);
+    expect(html).not.toContain('data-testid="packs-continue-note"');
+  });
+
+  it("offers the locate-a-file path on the same step as the pack choice", () => {
+    const html = render({ step: "packs" });
+    expect(html).toContain('type="file"');
+    expect(html).toContain('accept=".lpk"');
+    expect(html).toContain('aria-label="Locate a language pack file"');
+  });
+
+  it("keeps Skip for now available with nothing installed and wires it to the container", () => {
+    const skipPack = vi.fn();
+    const html = render({ step: "packs", installedPacks: [] });
+    expect(html).toContain("Skip for now");
+    const skip = buttonLabeled(tree({ step: "packs", onSkipPack: skipPack }), "Skip for now");
+    // A learner with no installed pack is never trapped: the skip control
+    // is present and enabled, whatever else the step looks like.
+    expect(skip.props.disabled).toBeFalsy();
+    skip.props.onClick?.();
+    expect(skipPack).toHaveBeenCalledTimes(1);
+  });
+
+  it("still explains a locked Continue when nothing is selected or installed", () => {
+    const html = render({ step: "packs" });
+    expect(html).toContain('data-testid="packs-continue-note"');
+    expect(html).toContain("Select an installed pack to continue");
+    expect(html).toContain('aria-describedby="packs-continue-note"');
+    expect(html).toMatch(/disabled=""[^>]*>\s*Continue/);
   });
 });

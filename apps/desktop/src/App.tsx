@@ -26,6 +26,7 @@ import { DictationPractice, type DictationResult, type DictationSentence } from 
 import {
   LanguagePanel,
   packPosture,
+  readFileB64,
   type CatalogEntry,
   type InstalledPack,
   type PackClaims,
@@ -79,7 +80,10 @@ function after<T>(ms: number, value: T): Promise<T> {
  * browser/vitest runs, where the flow stays purely local. */
 function detectInvoke(): Invoke | null {
   if (typeof window !== "undefined" && "__TAURI_INTERNALS__" in window) {
-    return (cmd, args) => import("@tauri-apps/api/core").then((m) => m.invoke(cmd, args));
+    return (cmd, args) =>
+      import("@tauri-apps/api/core").then((m) =>
+        m.invoke(cmd, args).catch((e: unknown) => Promise.reject(explainPackAbsence(e))),
+      );
   }
   return null;
 }
@@ -91,6 +95,17 @@ function detectInvoke(): Invoke | null {
  */
 export const NO_ACTIVE_PACK =
   "No pack is active for this profile. Choose one under Settings → Language packs.";
+
+/** The engine's fixed tokens for "this profile has no language chosen yet".
+ * Every route renders its failure through `String(e)`, so translating once at
+ * the IPC boundary turns a bare token into the sentence that names the fix —
+ * a dead end with a way out is not a dead end (owner 2026-10-12). */
+const PACK_ABSENCE_TOKENS = ["no active language pack"] as const;
+
+export function explainPackAbsence(e: unknown): string {
+  const message = e instanceof Error ? e.message : String(e);
+  return (PACK_ABSENCE_TOKENS as readonly string[]).includes(message) ? NO_ACTIVE_PACK : message;
+}
 
 /**
  * The pack a session practises with, resolved from the profile itself.
@@ -754,7 +769,15 @@ export function App() {
       }
       try {
         setNotice((await inv("privacy_notice")) as PrivacyNotice);
-        setPacks((await inv("available_packs")) as PackCandidate[]);
+        // The wizard offers both bundled references and anything already on
+        // the device, and it has to know which of those are installed: an
+        // installed pack is selectable with no install click.
+        const [candidates, installed] = await Promise.all([
+          inv("available_packs") as Promise<PackCandidate[]>,
+          inv("installed_packs") as Promise<InstalledPack[]>,
+        ]);
+        setPacks(candidates);
+        setInstalledPacks(installed.map((i) => i.pack_id));
       } catch {
         /* defaults render; onboarding install step will surface errors */
       }
@@ -972,13 +995,48 @@ export function App() {
     setInstalledPacks((prev) => (prev.includes(id) ? prev : [...prev, id]));
   }
 
-  /** K-72: plain names for the three speech stack components, so the
-   * onboarding step reads as capabilities ("Listening"), not raw catalog
-   * ids the learner cannot act on. */
+  // Owner 2026-10-12: a pack downloaded outside the app has to be usable the
+  // moment the wizard asks for a language. Same command and validation as
+  // Settings -> import; the record it returns marks the row Installed and
+  // selects it, so no second install is asked for.
+  async function locatePackOnboarding(file: File) {
+    setOnboardError(null);
+    if (!inv) return;
+    setInstallingPack("__locate__");
+    try {
+      const imported = (await inv("import_pack", {
+        dataB64: await readFileB64(file),
+      })) as InstalledPack;
+      setInstalledPacks((prev) =>
+        prev.includes(imported.pack_id) ? prev : [...prev, imported.pack_id],
+      );
+      setPacks((await inv("available_packs")) as PackCandidate[]);
+      setSelectedPack(imported.pack_id);
+    } catch (e) {
+      setOnboardError(`That pack file could not be installed: ${String(e)}`);
+    } finally {
+      setInstallingPack(null);
+      setEngineProgress(null);
+    }
+  }
+
+  // Choosing a learning language is not a gate: skipping leaves the profile
+  // with no active pack, and Settings sets it later.
+  function skipPackChoice() {
+    setOnboardError(null);
+    setSelectedPack(null);
+    setStep("microphone");
+  }
+
+  /** K-72: plain names for the speech components, so the onboarding step
+   * reads as capabilities, not raw catalog ids the learner cannot act on.
+   * Since ADR-0024 deleted runtime synthesis the catalog carries recognition
+   * models only, so the model size is what distinguishes the rows. */
   function speechLabel(m: { id: string; runtime: string }): string {
-    if (m.runtime === "whisper.cpp") return "Listening (speech recognition)";
-    if (m.id === "org.openlanguage.speech.sherpa-onnx-runtime") return "Speaking engine (runtime)";
-    if (m.id === "org.openlanguage.speech.kokoro-multi-lang") return "Japanese voice";
+    const tail = m.id.slice(m.id.lastIndexOf(".") + 1);
+    if (m.runtime === "whisper.cpp")
+      return `Speech recognition (Whisper ${tail.charAt(0).toUpperCase()}${tail.slice(1)})`;
+    if (m.runtime === "sherpa-onnx") return "Speech recognition (sherpa-onnx Whisper)";
     return m.id;
   }
 
@@ -1038,9 +1096,18 @@ export function App() {
 
   async function finishOnboarding(micEnabled: boolean) {
     setOnboardError(null);
-    if (inv && profileId && selectedPack) {
+    if (inv && profileId) {
       try {
-        await inv("complete_onboarding", { profileId, packId: selectedPack, micEnabled });
+        await inv("complete_onboarding", { profileId, packId: selectedPack ?? null, micEnabled });
+      } catch (e) {
+        // Worth stopping for: nothing was recorded, so the same button is the
+        // retry.
+        setOnboardError(`Setup could not be completed: ${String(e)}`);
+        return;
+      }
+      // Same entry invariant as resume — the profile exists from here on, so a
+      // failed fill-in read must not hold the learner inside the wizard.
+      try {
         const home = (await inv("home_state", { profileId })) as {
           display_name: string;
           plan: SessionPlan;
@@ -1054,11 +1121,10 @@ export function App() {
         setEnvironments(envs);
         setDisplay((await inv("display_settings", { profileId })) as DisplaySettingsView);
         await loadProfilePrefs(profileId);
-        void refreshLanguages(profileId).catch(() => {});
       } catch (e) {
-        setOnboardError(`Setup could not be completed: ${String(e)}`);
-        return;
+        console.error("setup fill-in reads failed", e);
       }
+      void refreshLanguages(profileId).catch(() => {});
     }
     setStep("done");
   }
@@ -1068,10 +1134,22 @@ export function App() {
   async function resumeProfile(id: string) {
     setOnboardError(null);
     if (!inv) return;
+    let p: ProfileSummary;
     try {
-      const p = (await inv("resume_profile", { profileId: id })) as ProfileSummary;
-      setProfileId(p.id);
-      setDisplayName(p.display_name);
+      p = (await inv("resume_profile", { profileId: id })) as ProfileSummary;
+    } catch (e) {
+      setOnboardError(`Could not resume this profile: ${String(e)}`);
+      return;
+    }
+    setProfileId(p.id);
+    setDisplayName(p.display_name);
+    // Owner 2026-10-12: opening your own profile must never depend on a
+    // content read. The step flips here, so every read below only fills the
+    // screens in — if one fails the learner is still inside the app, where
+    // Home says plainly that no language is set, instead of being held at
+    // the resume gate by an error they cannot act on.
+    setStep("done");
+    try {
       const home = (await inv("home_state", { profileId: p.id })) as {
         display_name: string;
         plan: SessionPlan;
@@ -1085,11 +1163,10 @@ export function App() {
       setEnvironments(envs);
       setDisplay((await inv("display_settings", { profileId: p.id })) as DisplaySettingsView);
       await loadProfilePrefs(p.id);
-      void refreshLanguages(p.id).catch(() => {});
-      setStep("done");
     } catch (e) {
-      setOnboardError(`Could not resume this profile: ${String(e)}`);
+      console.error("profile entry reads failed", e);
     }
+    void refreshLanguages(p.id).catch(() => {});
   }
 
   async function changeBudget(minutes: number) {
@@ -2350,6 +2427,8 @@ export function App() {
           onCreateProfile={() => void createProfile()}
           onSelectPack={setSelectedPack}
           onInstall={(id) => void install(id)}
+          onLocatePack={(f) => void locatePackOnboarding(f)}
+          onSkipPack={skipPackChoice}
           onEnableMic={chooseMicrophone}
           onSkipMic={() => void finishOnboarding(false)}
           onInstallSpeech={() => void installSpeechComponents()}
@@ -3106,6 +3185,8 @@ export function App() {
         <Home
           displayName={displayName}
           activePack={activePack}
+          noPack={activeIds.length === 0}
+          onChooseLanguage={() => setRoute("settings")}
           plan={plan}
           activeBudget={budget}
           onBudget={(m) => void changeBudget(m)}

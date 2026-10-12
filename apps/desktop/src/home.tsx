@@ -117,6 +117,12 @@ export interface HomeProps {
   /// tallies by `packPosture` in language.tsx). Null when no pack is
   /// active or claims have not loaded; nothing is claimed then.
   activePack?: { name: string; posture: string } | null;
+  /// Owner 2026-10-12: the profile genuinely has no language chosen yet —
+  /// the wizard's "Skip for now" path. Home then names the gap and points at
+  /// the one control that fixes it, instead of showing an empty plan under a
+  /// "what to practice now" heading that promises nothing.
+  noPack?: boolean;
+  onChooseLanguage?(): void;
   /// K-66: the next reachable goal from the active pack's goal map, as
   /// `home_state` reports it. `undefined` while that call has not
   /// answered; `null` when the pack declares no goal map — Home then
@@ -140,10 +146,20 @@ export function Home(p: HomeProps) {
   return (
     <section aria-label="Practice">
       <h1>Hi {p.displayName}</h1>
-      <p className="prompt">what to practice now</p>
+      {p.noPack ? null : <p className="prompt">what to practice now</p>}
       {p.activePack ? (
         <p className="meta pack-posture">
           <strong>{p.activePack.name}</strong> — {p.activePack.posture}
+        </p>
+      ) : p.noPack ? (
+        <p className="notice" role="status">
+          No language is set for this profile yet, so there is nothing to practise from. Choose a
+          language pack first.{" "}
+          {p.onChooseLanguage ? (
+            <button type="button" className="btn btn--quiet" onClick={p.onChooseLanguage}>
+              Choose a language
+            </button>
+          ) : null}
         </p>
       ) : null}
       {firstRun.length > 0 ? (
