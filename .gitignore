@@ -25,6 +25,14 @@ private-recordings/
 # asset); the .wav bytes themselves never enter history.
 languages/*/media/*.wav
 
+# ASR round-trip QA + bake-repair convergence scratch (scripts/qa-asr.py,
+# scripts/bake-repair-loop.sh): per-run logs/JSONL, never history.
+qa-r*.log
+qa-r*.jsonl
+qa-*.log
+qa-*.jsonl
+repair-r*.log
+
 # JS/Rust/Python build artifacts
 node_modules/
 target/

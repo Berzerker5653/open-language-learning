@@ -1,0 +1,109 @@
+#!/usr/bin/env python3
+"""ASR round-trip QA for a pack's baked media (ADR-0023's gate, automated).
+
+Every manifest row is transcribed with whisper.cpp and compared to the exact
+string that was fed to the synthesizer (`text`). This catches short runaways
+that the duration cap waves through ("акт" -> "Буууу..."): a babbling asset
+fails here even when its length is plausible.
+
+Pass rules (deliberately simple and debuggable):
+  * normalized equality, or
+  * difflib ratio >= 0.75, or
+  * the spoken text appears as a word substring of the transcript
+    (whisper pads short words with punctuation or case artifacts).
+
+Usage: qa_asr.py --pack languages/ru-RU --model ~/models/ggml-small.bin
+                  --lang ru [--workers 8] [--ids FILE] [--out FILE]
+Exit code 0 = every checked row passed.
+"""
+from __future__ import annotations
+
+import argparse
+import concurrent.futures as cf
+import difflib
+import json
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+
+_KAKASI = None
+
+
+def kana(s: str) -> str:
+    # whisper writes Japanese with kanji orthography (笑いました) while pack
+    # text is kana-only (わらいました): a correct clip fails a raw string
+    # compare. Fold both sides to hiragana so the gate checks SOUND, not
+    # spelling. pykakasi is this script's only extra dep (pip install pykakasi).
+    global _KAKASI
+    if _KAKASI is None:
+        import pykakasi
+        _KAKASI = pykakasi.kakasi()
+    return "".join(x["hira"] for x in _KAKASI.convert(s))
+
+
+def norm(s: str, ja: bool = False) -> str:
+    # Cyrillic-aware: strip everything that is not a letter/digit, casefold.
+    # For ja, also fold kanji to kana and drop spaces (word segmentation in
+    # whisper output is not part of what we verified).
+    if ja:
+        s = kana(s)
+    out = re.sub(r"[^\w\d]+", " ", s.lower()).strip()
+    return out.replace(" ", "") if ja else out
+
+
+def check(pack: Path, model: str, lang: str, whisper: str, row: dict) -> dict:
+    wav = pack / row["file"]
+    if not wav.exists():
+        return {"id": row["id"], "status": "wav-missing", "text": row["text"]}
+    p = subprocess.run(
+        [whisper, "-m", model, "-l", lang, "-np", "-nt", str(wav)],
+        capture_output=True, text=True, timeout=180,
+    )
+    heard = p.stdout.strip()
+    ja = lang == "ja"
+    a, b = norm(row["text"], ja), norm(heard, ja)
+    ratio = difflib.SequenceMatcher(None, a, b).ratio()
+    # No substring rule: the 2026-10-11 probe showed real babble clips pass
+    # it ("Мы с датата делаете…" for мы). An asset must round-trip whole.
+    ok = a == b or ratio >= 0.75
+    return {"id": row["id"], "status": "ok" if ok else "MISMATCH",
+            "ratio": round(ratio, 2), "text": row["text"], "heard": heard}
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--pack", type=Path, required=True)
+    ap.add_argument("--model", required=True)
+    ap.add_argument("--lang", default="ru")
+    ap.add_argument("--whisper", default=str(Path.home() / "whisper.cpp/build/bin/whisper-cli"))
+    ap.add_argument("--workers", type=int, default=8)
+    ap.add_argument("--ids", type=Path, help="only check these asset ids (one per line)")
+    ap.add_argument("--out", type=Path, help="write all results as jsonl")
+    args = ap.parse_args()
+
+    rows = [json.loads(l) for l in (args.pack / "media/manifest.jsonl").read_text().splitlines() if l.strip()]
+    if args.ids:
+        keep = {l.strip() for l in args.ids.read_text().splitlines() if l.strip()}
+        rows = [r for r in rows if r["id"] in keep]
+
+    results = []
+    with cf.ThreadPoolExecutor(max_workers=args.workers) as ex:
+        futs = [ex.submit(check, args.pack, args.model, args.lang, args.whisper, r) for r in rows]
+        for i, f in enumerate(cf.as_completed(futs), 1):
+            results.append(f.result())
+            if i % 250 == 0:
+                print(f"... {i}/{len(rows)} checked", file=sys.stderr)
+
+    fails = [r for r in results if r["status"] != "ok"]
+    if args.out:
+        args.out.write_text("\n".join(json.dumps(r, ensure_ascii=False) for r in results) + "\n")
+    print(f"checked={len(results)} passed={len(results) - len(fails)} FAILED={len(fails)}")
+    for r in sorted(fails, key=lambda r: r["ratio"]):
+        print(f"FAIL {r['id']} ratio={r.get('ratio')} said={r['text']!r} heard={r.get('heard')!r}")
+    return 1 if fails else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
