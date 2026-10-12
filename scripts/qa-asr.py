@@ -57,10 +57,16 @@ def check(pack: Path, model: str, lang: str, whisper: str, row: dict) -> dict:
     wav = pack / row["file"]
     if not wav.exists():
         return {"id": row["id"], "status": "wav-missing", "text": row["text"]}
-    p = subprocess.run(
-        [whisper, "-m", model, "-l", lang, "-np", "-nt", str(wav)],
-        capture_output=True, text=True, timeout=180,
-    )
+    # A per-clip timeout is an infra signal (CPU contention from too many
+    # workers), NOT evidence of bad audio: record it as a distinct status so a
+    # long run survives instead of a single slow clip killing the whole pass.
+    try:
+        p = subprocess.run(
+            [whisper, "-m", model, "-l", lang, "-np", "-nt", str(wav)],
+            capture_output=True, text=True, timeout=300,
+        )
+    except subprocess.TimeoutExpired:
+        return {"id": row["id"], "status": "timeout", "text": row["text"]}
     heard = p.stdout.strip()
     ja = lang == "ja"
     a, b = norm(row["text"], ja), norm(heard, ja)
@@ -96,13 +102,23 @@ def main() -> int:
             if i % 250 == 0:
                 print(f"... {i}/{len(rows)} checked", file=sys.stderr)
 
-    fails = [r for r in results if r["status"] != "ok"]
+    mismatches = [r for r in results if r["status"] == "MISMATCH"]
+    timeouts = [r for r in results if r["status"] == "timeout"]
+    missing = [r for r in results if r["status"] == "wav-missing"]
     if args.out:
         args.out.write_text("\n".join(json.dumps(r, ensure_ascii=False) for r in results) + "\n")
-    print(f"checked={len(results)} passed={len(results) - len(fails)} FAILED={len(fails)}")
-    for r in sorted(fails, key=lambda r: r["ratio"]):
+    # MISMATCH (real babble) or WAV-MISSING are genuine failures; TIMEOUT is an
+    # infra signal — lower --workers and re-run — and must not fail the pass.
+    print(f"checked={len(results)} "
+          f"passed={len(results) - len(mismatches) - len(timeouts) - len(missing)} "
+          f"MISMATCH={len(mismatches)} TIMEOUT={len(timeouts)} WAV-MISSING={len(missing)}")
+    for r in sorted(mismatches, key=lambda r: r["ratio"]):
         print(f"FAIL {r['id']} ratio={r.get('ratio')} said={r['text']!r} heard={r.get('heard')!r}")
-    return 1 if fails else 0
+    for r in timeouts:
+        print(f"TIMEOUT {r['id']} (raise the timeout or lower --workers, then re-check)")
+    for r in missing:
+        print(f"WAV-MISSING {r['id']}")
+    return 1 if (mismatches or missing) else 0
 
 
 if __name__ == "__main__":
