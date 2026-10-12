@@ -1,2250 +1,2348 @@
 goals:
-  - id: "ru.goal.on-ramp.cyrillic"
-    description: "Recognize and copy all printed Cyrillic letter case forms and interpret the teaching stress mark."
-    band: "on-ramp"
-    modalities: ["reading", "writing"]
-    prerequisites: []
-    required_concepts: []
-    assessment_ids: ["ru.assess.on-ramp.cyrillic-recognition", "ru.assess.on-ramp.cyrillic-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "GPT-6 Astra Pro"
-      date: "2026-10-04"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.on-ramp.greetings"
-    description: "Read and write taught greetings, farewells, and polite responses in short text exchanges."
-    band: "on-ramp"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - target: "ru.goal.on-ramp.cyrillic"
-        dimension: "orthography-recognition"
-        required_state: "independent"
-        strength: "hard"
-    required_concepts: ["ru.grammar.on-ramp.formulaic-politeness"]
-    assessment_ids:
-      ["ru.assess.on-ramp.greetings-recognition", "ru.assess.on-ramp.greetings-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "GPT-6 Astra Pro"
-      date: "2026-10-04"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.on-ramp.self-introduction"
-    description: "Read and write a name and a minimal self-introduction using taught patterns."
-    band: "on-ramp"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - target: "ru.goal.on-ramp.cyrillic"
-        dimension: "orthography-recognition"
-        required_state: "independent"
-        strength: "hard"
-    required_concepts:
-      ["ru.grammar.on-ramp.formulaic-politeness", "ru.grammar.on-ramp.zero-present-copula"]
-    assessment_ids:
-      [
-        "ru.assess.on-ramp.self-introduction-recognition",
-        "ru.assess.on-ramp.self-introduction-writing",
-      ]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "GPT-6 Astra Pro"
-      date: "2026-10-04"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.on-ramp.classroom"
-    description: "Recognize essential written learning instructions and use taught clarification requests."
-    band: "on-ramp"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - target: "ru.goal.on-ramp.cyrillic"
-        dimension: "orthography-recognition"
-        required_state: "independent"
-        strength: "hard"
-    required_concepts: ["ru.grammar.on-ramp.formulaic-politeness"]
-    assessment_ids:
-      ["ru.assess.on-ramp.classroom-recognition", "ru.assess.on-ramp.classroom-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "GPT-6 Astra Pro"
-      date: "2026-10-04"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.on-ramp.everyday"
-    description: "Identify familiar people and objects in short written identification statements."
-    band: "on-ramp"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - target: "ru.goal.on-ramp.cyrillic"
-        dimension: "orthography-recognition"
-        required_state: "independent"
-        strength: "hard"
-    required_concepts:
-      ["ru.grammar.on-ramp.zero-present-copula", "ru.grammar.on-ramp.eto-identification"]
-    assessment_ids: ["ru.assess.on-ramp.everyday-recognition", "ru.assess.on-ramp.everyday-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "GPT-6 Astra Pro"
-      date: "2026-10-04"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.on-ramp.numbers"
-    description: "Match and write the number words zero through nine and their digits."
-    band: "on-ramp"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - target: "ru.goal.on-ramp.cyrillic"
-        dimension: "orthography-recognition"
-        required_state: "independent"
-        strength: "hard"
-    required_concepts: ["ru.grammar.on-ramp.eto-identification"]
-    assessment_ids: ["ru.assess.on-ramp.numbers-recognition", "ru.assess.on-ramp.numbers-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "GPT-6 Astra Pro"
-      date: "2026-10-04"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a1.personal-details"
-    description: "Read and complete simple personal profiles with names, origin, age, and contact details."
-    band: "A1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.on-ramp.cyrillic",
-          dimension: "orthography-recognition",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.self-introduction",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.greetings",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.classroom",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.numbers",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.a1.subject-pronouns",
-        "ru.grammar.on-ramp.zero-present-copula",
-        "ru.grammar.a1.noun-gender",
-        "ru.grammar.a1.questions",
-        "ru.grammar.on-ramp.eto-identification",
-        "ru.grammar.a1.genitive-basic",
-        "ru.grammar.a1.dative-recipient-age",
-        "ru.grammar.a1.numerals-time",
-      ]
-    assessment_ids:
-      ["ru.assess.a1.personal-details-reading", "ru.assess.a1.personal-details-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "GPT-6 Astra Pro"
-      date: "2026-10-04"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a1.people-family"
-    description: "Read and write simple statements about family members, people, pets, and possessions."
-    band: "A1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a1.personal-details",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.numbers",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.a1.u-possession",
-        "ru.grammar.a1.possessive-pronouns",
-        "ru.grammar.on-ramp.eto-identification",
-      ]
-    assessment_ids: ["ru.assess.a1.people-family-reading", "ru.assess.a1.people-family-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-04"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a1.home"
-    description: "Read and write simple statements about rooms, household objects, and familiar places."
-    band: "A1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a1.personal-details",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a1.people-family",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.a1.location-v-na",
-        "ru.grammar.a1.na-vs-v",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.a1.home-reading", "ru.assess.a1.home-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-04"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a1.routines"
-    description: "Read and write simple statements about daily routines and basic time reference."
-    band: "A1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a1.personal-details",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a1.home",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.numbers",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.a1.telling-time",
-        "ru.grammar.a1.frequency-adverbs",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.a1.routines-reading", "ru.assess.a1.routines-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-04"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a1.food"
-    description: "Read and write simple statements about food, menus, and polite orders."
-    band: "A1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a1.routines",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a1.home",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.numbers",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.a1.accusative-food",
-        "ru.grammar.a1.polite-order",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.a1.food-reading", "ru.assess.a1.food-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-04"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a1.shopping"
-    description: "Read and write simple statements about prices, products, and purchase requests."
-    band: "A1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a1.food",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a1.home",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.numbers",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.a1.adjective-agreement",
-        "ru.grammar.a1.genitive-quantity",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.a1.shopping-reading", "ru.assess.a1.shopping-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-04"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a1.city"
-    description: "Read and write simple statements about places, locations, and simple routes."
-    band: "A1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a1.shopping",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a1.home",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.a1.motion-idti-ehat",
-        "ru.grammar.a1.direction-prepositions",
-        "ru.grammar.a1.location-v-na",
-      ]
-    assessment_ids: ["ru.assess.a1.city-reading", "ru.assess.a1.city-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-04"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a1.time-plans"
-    description: "Read and write simple statements about times, dates, schedules, and plans."
-    band: "A1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a1.routines",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a1.city",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.numbers",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      ["ru.grammar.a1.plan-construction", "ru.grammar.a1.time-when", "ru.grammar.a1.location-v-na"]
-    assessment_ids: ["ru.assess.a1.time-plans-reading", "ru.assess.a1.time-plans-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-04"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a1.basic-messages"
-    description: "Read and write simple invitations, arrangements, and brief messages."
-    band: "A1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a1.time-plans",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a1.people-family",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.a1.modal-impersonal",
-        "ru.grammar.a1.polite-requests",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.a1.basic-messages-reading", "ru.assess.a1.basic-messages-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-04"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a2.past-events"
-    description: "Narrate simple past events and sequence them in time."
-    band: "A2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a1.basic-messages",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a1.time-plans",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.a2.past-tense",
-        "ru.grammar.a2.time-connectors",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.a2.past-events-reading", "ru.assess.a2.past-events-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a2.travel"
-    description: "Book travel, read itineraries, and describe transport."
-    band: "A2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a2.past-events",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a1.city",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.a2.prepositional-transport",
-        "ru.grammar.a2.time-of-departure",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.a2.travel-reading", "ru.assess.a2.travel-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a2.services"
-    description: "Handle routine service transactions: payments, requests, paperwork."
-    band: "A2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a2.travel",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a1.shopping",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.a2.want-accusative",
-        "ru.grammar.a2.genitive-negation",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.a2.services-reading", "ru.assess.a2.services-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a2.wellbeing"
-    description: "Describe symptoms, needs, and medical appointments."
-    band: "A2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a2.services",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a1.routines",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.a2.dative-health",
-        "ru.grammar.a2.imperative-advice",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.a2.wellbeing-reading", "ru.assess.a2.wellbeing-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a2.work-study"
-    description: "Describe duties, experience, and immediate goals at work and study."
-    band: "A2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a2.wellbeing",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.classroom",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.a2.instrumental-role",
-        "ru.grammar.a2.genitive-of-achievement",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.a2.work-study-reading", "ru.assess.a2.work-study-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a2.social-plans"
-    description: "Invite, suggest, and arrange social plans."
-    band: "A2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a2.work-study",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a1.time-plans",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.a2.let-us-imperative",
-        "ru.grammar.a2.invitation-accusative",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.a2.social-plans-reading", "ru.assess.a2.social-plans-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a2.comparisons"
-    description: "Compare things and give simple reasons."
-    band: "A2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a2.social-plans",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a1.time-plans",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.a2.comparative-short",
-        "ru.grammar.a2.potomu-chto",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.a2.comparisons-reading", "ru.assess.a2.comparisons-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a2.instructions"
-    description: "Follow and give practical instructions and procedures."
-    band: "A2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a2.comparisons",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a1.time-plans",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.a2.imperative-instructions",
-        "ru.grammar.a2.infinitive-steps",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.a2.instructions-reading", "ru.assess.a2.instructions-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a2.problems-solutions"
-    description: "Describe problems, make requests, and agree on remedies."
-    band: "A2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a2.instructions",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a1.time-plans",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.a2.prosba-requests",
-        "ru.grammar.a2.genitive-shortage",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids:
-      ["ru.assess.a2.problems-solutions-reading", "ru.assess.a2.problems-solutions-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.a2.connected-messages"
-    description: "Write connected personal messages with connectors and opinions."
-    band: "A2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a2.problems-solutions",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a1.basic-messages",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.a2.connectors",
-        "ru.grammar.a2.reflexive-feelings",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids:
-      ["ru.assess.a2.connected-messages-reading", "ru.assess.a2.connected-messages-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b1.narration"
-    description: "Tell past events in sequence and state outcomes."
-    band: "B1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a2.connected-messages",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a1.basic-messages",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b1.narrative-past",
-        "ru.grammar.b1.sequence-connectors",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b1.narration-reading", "ru.assess.b1.narration-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b1.experiences"
-    description: "Talk about life experiences and react to them."
-    band: "B1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.narration",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a2.connected-messages",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b1.experience-negation",
-        "ru.grammar.b1.reaction-predicatives",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b1.experiences-reading", "ru.assess.b1.experiences-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b1.practical-problems"
-    description: "Report a service failure and explain it in writing."
-    band: "B1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.experiences",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b1.narration",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b1.proshu-requests",
-        "ru.grammar.b1.v-svyazi-s",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids:
-      ["ru.assess.b1.practical-problems-reading", "ru.assess.b1.practical-problems-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b1.learning-work"
-    description: "Talk about learning methods, progress, and work decisions."
-    band: "B1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.practical-problems",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b1.narration",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b1.chtoby-goals",
-        "ru.grammar.b1.reshit-vybrat",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b1.learning-work-reading", "ru.assess.b1.learning-work-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b1.relationships"
-    description: "Talk about relationships and social expectations."
-    band: "B1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.learning-work",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b1.practical-problems",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b1.dativum-feelings",
-        "ru.grammar.b1.ustupit-kompromiss",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b1.relationships-reading", "ru.assess.b1.relationships-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b1.culture-media"
-    description: "Describe cultural experiences and personal responses to media."
-    band: "B1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.relationships",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b1.experiences",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b1.mne-ponravilos",
-        "ru.grammar.b1.kakoj-kakoe",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b1.culture-media-reading", "ru.assess.b1.culture-media-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b1.opinions"
-    description: "State opinions with reasons and examples."
-    band: "B1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.culture-media",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b1.relationships",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b1.po-mneniyu-gen",
-        "ru.grammar.b1.naprimier",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b1.opinions-reading", "ru.assess.b1.opinions-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b1.information-summary"
-    description: "Give main points and clear explanations in summary form."
-    band: "B1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.opinions",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b1.culture-media",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b1.glavnoe-chto",
-        "ru.grammar.b1.inymi-slovami",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b1.info-summary-reading", "ru.assess.b1.info-summary-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b1.information-summary2"
-    description: "Select, compress, and summarize information with conclusion chunks."
-    band: "B1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.information-summary",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b1.opinions",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b1.takim-obrazom",
-        "ru.grammar.b1.korotche-govorya",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b1.info-summary-reading2", "ru.assess.b1.info-summary-writing2"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b1.future-conditions"
-    description: "Talk about plans, possibilities, and consequences."
-    band: "B1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.information-summary2",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a2.problems-solutions",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b1.esli-togda",
-        "ru.grammar.b1.mozhet-byt",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids:
-      ["ru.assess.b1.future-conditions-reading", "ru.assess.b1.future-conditions-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b1.future-conditions2"
-    description: "Weigh conditions and hypothetical choices."
-    band: "B1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.future-conditions",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b1.opinions",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b1.esli-by",
-        "ru.grammar.b1.luchshe-by",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids:
-      ["ru.assess.b1.future-conditions-reading2", "ru.assess.b1.future-conditions-writing2"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b1.extended-writing"
-    description: "Write organized personal and practical letters."
-    band: "B1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.a2.connected-messages",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b1.information-summary",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b1.uvazhaemyy",
-        "ru.grammar.b1.s-uvazheniem",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids:
-      ["ru.assess.b1.extended-writing-reading", "ru.assess.b1.extended-writing-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b1.extended-writing2"
-    description: "Paragraph, connect, and revise extended writing."
-    band: "B1"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.extended-writing",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b1.information-summary2",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b1.krome-togo2",
-        "ru.grammar.b1.drugimi-slovami",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids:
-      ["ru.assess.b1.extended-writing-reading2", "ru.assess.b1.extended-writing-writing2"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.argumentation"
-    description: "Build positions, claims, and argument structure."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.opinions",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b1.future-conditions2",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2.ya-schitayu-chto",
-        "ru.grammar.b2.s-drugoy-storony",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b2.argumentation-reading", "ru.assess.b2.argumentation-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.argumentation2"
-    description: "Support claims with evidence, examples, and justification."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b2.argumentation",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b1.opinions",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2.naprimer-tak",
-        "ru.grammar.b2-etogo-dokazyvaet",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b2.argumentation-reading2", "ru.assess.b2.argumentation-writing2"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.argumentation3"
-    description: "Raise counterarguments and qualify claims."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b2.argumentation2",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b1.opinions",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      ["ru.grammar.b2.esli-i", "ru.grammar.b2-pravda", "ru.grammar.on-ramp.zero-present-copula"]
-    assessment_ids: ["ru.assess.b2.argumentation-reading3", "ru.assess.b2.argumentation-writing3"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.argumentation4"
-    description: "Draw evaluation and reasoned conclusions."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b2.argumentation3",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b1.opinions",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2-sledovatelno",
-        "ru.grammar.b2-s-tochki-zreniya",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b2.argumentation-reading4", "ru.assess.b2.argumentation-writing4"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.critical-reading"
-    description: "Analyze structure and relationships between claims."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b2.argumentation4",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b2.argumentation",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2-tak-kak",
-        "ru.grammar.b2-ne-tolko-no",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids:
-      ["ru.assess.b2.critical-reading-reading", "ru.assess.b2.critical-reading-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.critical-reading2"
-    description: "Read stance, implication, and rhetorical choices."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b2.critical-reading",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b2.argumentation4",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2-imeya-v-vydu",
-        "ru.grammar.b2-podchjorkivayu",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids:
-      ["ru.assess.b2.critical-reading-reading2", "ru.assess.b2.critical-reading-writing2"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.critical-reading3"
-    description: "Judge evidence quality and source limitations."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b2.critical-reading2",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b2.argumentation2",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      ["ru.grammar.b2-soglasno", "ru.grammar.b2-pri-etom", "ru.grammar.on-ramp.zero-present-copula"]
-    assessment_ids:
-      ["ru.assess.b2.critical-reading-reading3", "ru.assess.b2.critical-reading-writing3"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.critical-reading4"
-    description: "Weigh competing interpretations and inferences."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b2.critical-reading3",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b2.argumentation3",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2-iz-etogo-sleduet",
-        "ru.grammar.b2-mozhno-tolkovat",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids:
-      ["ru.assess.b2.critical-reading-reading4", "ru.assess.b2.critical-reading-writing4"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.synthesis"
-    description: "Paraphrase accurately and attribute sources."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.extended-writing2",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b2.critical-reading",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2-po-mneniyu",
-        "ru.grammar.b2-drugimi-slovami2",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b2.synthesis-reading", "ru.assess.b2.synthesis-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.synthesis2"
-    description: "Write selective summaries across supplied texts."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b2.synthesis",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b1.information-summary2",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2-kasatelsno",
-        "ru.grammar.b2-esli-govorit",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b2.synthesis-reading2", "ru.assess.b2.synthesis-writing2"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.synthesis3"
-    description: "Express agreement, disagreement, and compare sources."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b2.synthesis2",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b2.argumentation3",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2-v-otlicie-ot",
-        "ru.grammar.b2-vmeste-s-tim",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b2.synthesis-reading3", "ru.assess.b2.synthesis-writing3"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.synthesis4"
-    description: "Write integrated reports with clear attribution."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b2.synthesis3",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b1.extended-writing",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2-soglasno-dannym",
-        "ru.grammar.b2-kak-otmechaet",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b2.synthesis-reading4", "ru.assess.b2.synthesis-writing4"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.academic-study"
-    description: "Read for study and write precise definitions."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b2.critical-reading4",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b1.learning-work",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2-nazyvaetsya",
-        "ru.grammar.b2-pod-kotorym-ponimayu",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b2.academic-study-reading", "ru.assess.b2.academic-study-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.academic-study2"
-    description: "Take structured notes and map conceptual relationships."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b2.academic-study",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b2.critical-reading",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2-v-ramkah",
-        "ru.grammar.b2-v-svyazi-s",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b2.academic-study-reading2", "ru.assess.b2.academic-study-writing2"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.academic-study3"
-    description: "Describe methods, procedures, and limitations."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b2.academic-study2",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a2.instructions",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2-chem-bolshe",
-        "ru.grammar.b2-nesmotrya-na",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b2.academic-study-reading3", "ru.assess.b2.academic-study-writing3"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.academic-study4"
-    description: "Present findings, interpretations, and discussion."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b2.academic-study3",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.b2.critical-reading4",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2-soglasno-avtoram",
-        "ru.grammar.b2-v-hod-obsuzhdeniya",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b2.academic-study-reading4", "ru.assess.b2.academic-study-writing4"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.professional-writing"
-    description: "Write professional requests and correspondence."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.extended-writing",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a2.services",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2-proshu",
-        "ru.grammar.b2-v-svyazi-s2",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids:
-      ["ru.assess.b2.professional-writing-reading", "ru.assess.b2.professional-writing-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.negotiation"
-    description: "Make requests, set boundaries, and refuse politely but firmly."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.opinions",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a2.services",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2-ya-ne-mogu",
-        "ru.grammar.b2-nastoyatelno-proshu",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b2.negotiation-reading", "ru.assess.b2.negotiation-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.society-policy"
-    description: "Discuss public services and competing needs in society."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.culture-media",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a2.services",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2-gosudarstvo-obespechivaet",
-        "ru.grammar.b2-v-interesakh",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b2.society-policy-reading", "ru.assess.b2.society-policy-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.science-environment"
-    description: "Explain scientific and environmental matters from supplied information."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.learning-work",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a2.services",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2-sledovatelno-vyvod",
-        "ru.grammar.b2-zavisit-ot",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids:
-      ["ru.assess.b2.science-environment-reading", "ru.assess.b2.science-environment-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.culture-perspectives"
-    description: "Respond interpretively to literary extracts from different perspectives."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.culture-media",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a2.services",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2-na-moy-vzglyad",
-        "ru.grammar.b2-skvoz",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids:
-      ["ru.assess.b2.culture-perspectives-reading", "ru.assess.b2.culture-perspectives-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
-  - id: "ru.goal.b2.style-register"
-    description: "Choose precise words and reduce ambiguity in writing."
-    band: "B2"
-    modalities: ["reading", "writing"]
-    prerequisites:
-      - {
-          target: "ru.goal.b1.extended-writing",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.a2.services",
-          dimension: "comprehension-reading",
-          required_state: "independent",
-          strength: "hard",
-        }
-      - {
-          target: "ru.goal.on-ramp.everyday",
-          dimension: "recall-meaning",
-          required_state: "independent",
-          strength: "hard",
-        }
-    required_concepts:
-      [
-        "ru.grammar.b2-imeet-vidu",
-        "ru.grammar.b2-inache-govorya",
-        "ru.grammar.on-ramp.zero-present-copula",
-      ]
-    assessment_ids: ["ru.assess.b2.style-register-reading", "ru.assess.b2.style-register-writing"]
-    transfer_required: false
-    sources: ["ru-original"]
-    review_status: "draft"
-    generation:
-      method: "ai-assisted"
-      tool: "omp"
-      model: "strata/qwen3.8-flash-next-iq3_s"
-      date: "2026-10-05"
-      notes: "ai-drafted; needs dictionary sourcing and human review"
+- id: ru.goal.on-ramp.cyrillic
+  description: Recognize and copy all printed Cyrillic letter case forms and interpret the teaching stress mark.
+  band: on-ramp
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites: []
+  required_concepts: []
+  assessment_ids:
+  - ru.assess.on-ramp.cyrillic-recognition
+  - ru.assess.on-ramp.cyrillic-writing
+  - ru.assess.on-ramp.cyrillic-listening
+  - ru.assess.on-ramp.cyrillic-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: GPT-6 Astra Pro
+    date: '2026-10-04'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.on-ramp.greetings
+  description: Read and write taught greetings, farewells, and polite responses in short text exchanges.
+  band: on-ramp
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.on-ramp.cyrillic
+    dimension: orthography-recognition
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.on-ramp.formulaic-politeness
+  assessment_ids:
+  - ru.assess.on-ramp.greetings-recognition
+  - ru.assess.on-ramp.greetings-writing
+  - ru.assess.on-ramp.greetings-listening
+  - ru.assess.on-ramp.greetings-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: GPT-6 Astra Pro
+    date: '2026-10-04'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.on-ramp.self-introduction
+  description: Read and write a name and a minimal self-introduction using taught patterns.
+  band: on-ramp
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.on-ramp.cyrillic
+    dimension: orthography-recognition
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.on-ramp.formulaic-politeness
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.on-ramp.self-introduction-recognition
+  - ru.assess.on-ramp.self-introduction-writing
+  - ru.assess.on-ramp.self-introduction-listening
+  - ru.assess.on-ramp.self-introduction-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: GPT-6 Astra Pro
+    date: '2026-10-04'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.on-ramp.classroom
+  description: Recognize essential written learning instructions and use taught clarification requests.
+  band: on-ramp
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.on-ramp.cyrillic
+    dimension: orthography-recognition
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.on-ramp.formulaic-politeness
+  assessment_ids:
+  - ru.assess.on-ramp.classroom-recognition
+  - ru.assess.on-ramp.classroom-writing
+  - ru.assess.on-ramp.classroom-listening
+  - ru.assess.on-ramp.classroom-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: GPT-6 Astra Pro
+    date: '2026-10-04'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.on-ramp.everyday
+  description: Identify familiar people and objects in short written identification statements.
+  band: on-ramp
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.on-ramp.cyrillic
+    dimension: orthography-recognition
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.on-ramp.zero-present-copula
+  - ru.grammar.on-ramp.eto-identification
+  assessment_ids:
+  - ru.assess.on-ramp.everyday-recognition
+  - ru.assess.on-ramp.everyday-writing
+  - ru.assess.on-ramp.everyday-listening
+  - ru.assess.on-ramp.everyday-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: GPT-6 Astra Pro
+    date: '2026-10-04'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.on-ramp.numbers
+  description: Match and write the number words zero through nine and their digits.
+  band: on-ramp
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.on-ramp.cyrillic
+    dimension: orthography-recognition
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.on-ramp.eto-identification
+  assessment_ids:
+  - ru.assess.on-ramp.numbers-recognition
+  - ru.assess.on-ramp.numbers-writing
+  - ru.assess.on-ramp.numbers-listening
+  - ru.assess.on-ramp.numbers-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: GPT-6 Astra Pro
+    date: '2026-10-04'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a1.personal-details
+  description: Read and complete simple personal profiles with names, origin, age, and contact details.
+  band: A1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.on-ramp.cyrillic
+    dimension: orthography-recognition
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.self-introduction
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.greetings
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.classroom
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.numbers
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a1.subject-pronouns
+  - ru.grammar.on-ramp.zero-present-copula
+  - ru.grammar.a1.noun-gender
+  - ru.grammar.a1.questions
+  - ru.grammar.on-ramp.eto-identification
+  - ru.grammar.a1.genitive-basic
+  - ru.grammar.a1.dative-recipient-age
+  - ru.grammar.a1.numerals-time
+  assessment_ids:
+  - ru.assess.a1.personal-details-reading
+  - ru.assess.a1.personal-details-writing
+  - ru.assess.a1.personal-details-listening
+  - ru.assess.a1.personal-details-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: GPT-6 Astra Pro
+    date: '2026-10-04'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a1.people-family
+  description: Read and write simple statements about family members, people, pets, and possessions.
+  band: A1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a1.personal-details
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.numbers
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a1.u-possession
+  - ru.grammar.a1.possessive-pronouns
+  - ru.grammar.on-ramp.eto-identification
+  assessment_ids:
+  - ru.assess.a1.people-family-reading
+  - ru.assess.a1.people-family-writing
+  - ru.assess.a1.people-family-listening
+  - ru.assess.a1.people-family-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-04'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a1.home
+  description: Read and write simple statements about rooms, household objects, and familiar places.
+  band: A1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a1.personal-details
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a1.people-family
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a1.location-v-na
+  - ru.grammar.a1.na-vs-v
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.a1.home-reading
+  - ru.assess.a1.home-writing
+  - ru.assess.a1.home-listening
+  - ru.assess.a1.home-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-04'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a1.routines
+  description: Read and write simple statements about daily routines and basic time reference.
+  band: A1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a1.personal-details
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a1.home
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.numbers
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a1.telling-time
+  - ru.grammar.a1.frequency-adverbs
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.a1.routines-reading
+  - ru.assess.a1.routines-writing
+  - ru.assess.a1.routines-listening
+  - ru.assess.a1.routines-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-04'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a1.food
+  description: Read and write simple statements about food, menus, and polite orders.
+  band: A1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a1.routines
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a1.home
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.numbers
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a1.accusative-food
+  - ru.grammar.a1.polite-order
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.a1.food-reading
+  - ru.assess.a1.food-writing
+  - ru.assess.a1.food-listening
+  - ru.assess.a1.food-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-04'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a1.shopping
+  description: Read and write simple statements about prices, products, and purchase requests.
+  band: A1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a1.food
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a1.home
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.numbers
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a1.adjective-agreement
+  - ru.grammar.a1.genitive-quantity
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.a1.shopping-reading
+  - ru.assess.a1.shopping-writing
+  - ru.assess.a1.shopping-listening
+  - ru.assess.a1.shopping-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-04'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a1.city
+  description: Read and write simple statements about places, locations, and simple routes.
+  band: A1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a1.shopping
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a1.home
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a1.motion-idti-ehat
+  - ru.grammar.a1.direction-prepositions
+  - ru.grammar.a1.location-v-na
+  assessment_ids:
+  - ru.assess.a1.city-reading
+  - ru.assess.a1.city-writing
+  - ru.assess.a1.city-listening
+  - ru.assess.a1.city-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-04'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a1.time-plans
+  description: Read and write simple statements about times, dates, schedules, and plans.
+  band: A1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a1.routines
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a1.city
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.numbers
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a1.plan-construction
+  - ru.grammar.a1.time-when
+  - ru.grammar.a1.location-v-na
+  assessment_ids:
+  - ru.assess.a1.time-plans-reading
+  - ru.assess.a1.time-plans-writing
+  - ru.assess.a1.time-plans-listening
+  - ru.assess.a1.time-plans-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-04'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a1.basic-messages
+  description: Read and write simple invitations, arrangements, and brief messages.
+  band: A1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a1.time-plans
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a1.people-family
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a1.modal-impersonal
+  - ru.grammar.a1.polite-requests
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.a1.basic-messages-reading
+  - ru.assess.a1.basic-messages-writing
+  - ru.assess.a1.basic-messages-listening
+  - ru.assess.a1.basic-messages-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-04'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a2.past-events
+  description: Narrate simple past events and sequence them in time.
+  band: A2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a1.basic-messages
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a1.time-plans
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a2.past-tense
+  - ru.grammar.a2.time-connectors
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.a2.past-events-reading
+  - ru.assess.a2.past-events-writing
+  - ru.assess.a2.past-events-listening
+  - ru.assess.a2.past-events-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a2.travel
+  description: Book travel, read itineraries, and describe transport.
+  band: A2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a2.past-events
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a1.city
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a2.prepositional-transport
+  - ru.grammar.a2.time-of-departure
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.a2.travel-reading
+  - ru.assess.a2.travel-writing
+  - ru.assess.a2.travel-listening
+  - ru.assess.a2.travel-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a2.services
+  description: 'Handle routine service transactions: payments, requests, paperwork.'
+  band: A2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a2.travel
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a1.shopping
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a2.want-accusative
+  - ru.grammar.a2.genitive-negation
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.a2.services-reading
+  - ru.assess.a2.services-writing
+  - ru.assess.a2.services-listening
+  - ru.assess.a2.services-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a2.wellbeing
+  description: Describe symptoms, needs, and medical appointments.
+  band: A2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a2.services
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a1.routines
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a2.dative-health
+  - ru.grammar.a2.imperative-advice
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.a2.wellbeing-reading
+  - ru.assess.a2.wellbeing-writing
+  - ru.assess.a2.wellbeing-listening
+  - ru.assess.a2.wellbeing-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a2.work-study
+  description: Describe duties, experience, and immediate goals at work and study.
+  band: A2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a2.wellbeing
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.classroom
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a2.instrumental-role
+  - ru.grammar.a2.genitive-of-achievement
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.a2.work-study-reading
+  - ru.assess.a2.work-study-writing
+  - ru.assess.a2.work-study-listening
+  - ru.assess.a2.work-study-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a2.social-plans
+  description: Invite, suggest, and arrange social plans.
+  band: A2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a2.work-study
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a1.time-plans
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a2.let-us-imperative
+  - ru.grammar.a2.invitation-accusative
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.a2.social-plans-reading
+  - ru.assess.a2.social-plans-writing
+  - ru.assess.a2.social-plans-listening
+  - ru.assess.a2.social-plans-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a2.comparisons
+  description: Compare things and give simple reasons.
+  band: A2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a2.social-plans
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a1.time-plans
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a2.comparative-short
+  - ru.grammar.a2.potomu-chto
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.a2.comparisons-reading
+  - ru.assess.a2.comparisons-writing
+  - ru.assess.a2.comparisons-listening
+  - ru.assess.a2.comparisons-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a2.instructions
+  description: Follow and give practical instructions and procedures.
+  band: A2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a2.comparisons
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a1.time-plans
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a2.imperative-instructions
+  - ru.grammar.a2.infinitive-steps
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.a2.instructions-reading
+  - ru.assess.a2.instructions-writing
+  - ru.assess.a2.instructions-listening
+  - ru.assess.a2.instructions-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a2.problems-solutions
+  description: Describe problems, make requests, and agree on remedies.
+  band: A2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a2.instructions
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a1.time-plans
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a2.prosba-requests
+  - ru.grammar.a2.genitive-shortage
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.a2.problems-solutions-reading
+  - ru.assess.a2.problems-solutions-writing
+  - ru.assess.a2.problems-solutions-listening
+  - ru.assess.a2.problems-solutions-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.a2.connected-messages
+  description: Write connected personal messages with connectors and opinions.
+  band: A2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a2.problems-solutions
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a1.basic-messages
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.a2.connectors
+  - ru.grammar.a2.reflexive-feelings
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.a2.connected-messages-reading
+  - ru.assess.a2.connected-messages-writing
+  - ru.assess.a2.connected-messages-listening
+  - ru.assess.a2.connected-messages-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b1.narration
+  description: Tell past events in sequence and state outcomes.
+  band: B1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a2.connected-messages
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a1.basic-messages
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b1.narrative-past
+  - ru.grammar.b1.sequence-connectors
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b1.narration-reading
+  - ru.assess.b1.narration-writing
+  - ru.assess.b1.narration-listening
+  - ru.assess.b1.narration-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b1.experiences
+  description: Talk about life experiences and react to them.
+  band: B1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.narration
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a2.connected-messages
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b1.experience-negation
+  - ru.grammar.b1.reaction-predicatives
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b1.experiences-reading
+  - ru.assess.b1.experiences-writing
+  - ru.assess.b1.experiences-listening
+  - ru.assess.b1.experiences-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b1.practical-problems
+  description: Report a service failure and explain it in writing.
+  band: B1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.experiences
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b1.narration
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b1.proshu-requests
+  - ru.grammar.b1.v-svyazi-s
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b1.practical-problems-reading
+  - ru.assess.b1.practical-problems-writing
+  - ru.assess.b1.practical-problems-listening
+  - ru.assess.b1.practical-problems-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b1.learning-work
+  description: Talk about learning methods, progress, and work decisions.
+  band: B1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.practical-problems
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b1.narration
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b1.chtoby-goals
+  - ru.grammar.b1.reshit-vybrat
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b1.learning-work-reading
+  - ru.assess.b1.learning-work-writing
+  - ru.assess.b1.learning-work-listening
+  - ru.assess.b1.learning-work-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b1.relationships
+  description: Talk about relationships and social expectations.
+  band: B1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.learning-work
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b1.practical-problems
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b1.dativum-feelings
+  - ru.grammar.b1.ustupit-kompromiss
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b1.relationships-reading
+  - ru.assess.b1.relationships-writing
+  - ru.assess.b1.relationships-listening
+  - ru.assess.b1.relationships-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b1.culture-media
+  description: Describe cultural experiences and personal responses to media.
+  band: B1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.relationships
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b1.experiences
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b1.mne-ponravilos
+  - ru.grammar.b1.kakoj-kakoe
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b1.culture-media-reading
+  - ru.assess.b1.culture-media-writing
+  - ru.assess.b1.culture-media-listening
+  - ru.assess.b1.culture-media-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b1.opinions
+  description: State opinions with reasons and examples.
+  band: B1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.culture-media
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b1.relationships
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b1.po-mneniyu-gen
+  - ru.grammar.b1.naprimier
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b1.opinions-reading
+  - ru.assess.b1.opinions-writing
+  - ru.assess.b1.opinions-listening
+  - ru.assess.b1.opinions-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b1.information-summary
+  description: Give main points and clear explanations in summary form.
+  band: B1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.opinions
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b1.culture-media
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b1.glavnoe-chto
+  - ru.grammar.b1.inymi-slovami
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b1.info-summary-reading
+  - ru.assess.b1.info-summary-writing
+  - ru.assess.b1.info-summary-listening
+  - ru.assess.b1.info-summary-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b1.information-summary2
+  description: Select, compress, and summarize information with conclusion chunks.
+  band: B1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.information-summary
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b1.opinions
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b1.takim-obrazom
+  - ru.grammar.b1.korotche-govorya
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b1.info-summary-reading2
+  - ru.assess.b1.info-summary-writing2
+  - ru.assess.b1.information-summary2-listening
+  - ru.assess.b1.information-summary2-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b1.future-conditions
+  description: Talk about plans, possibilities, and consequences.
+  band: B1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.information-summary2
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a2.problems-solutions
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b1.esli-togda
+  - ru.grammar.b1.mozhet-byt
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b1.future-conditions-reading
+  - ru.assess.b1.future-conditions-writing
+  - ru.assess.b1.future-conditions-listening
+  - ru.assess.b1.future-conditions-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b1.future-conditions2
+  description: Weigh conditions and hypothetical choices.
+  band: B1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.future-conditions
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b1.opinions
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b1.esli-by
+  - ru.grammar.b1.luchshe-by
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b1.future-conditions-reading2
+  - ru.assess.b1.future-conditions-writing2
+  - ru.assess.b1.future-conditions2-listening
+  - ru.assess.b1.future-conditions2-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b1.extended-writing
+  description: Write organized personal and practical letters.
+  band: B1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.a2.connected-messages
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b1.information-summary
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b1.uvazhaemyy
+  - ru.grammar.b1.s-uvazheniem
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b1.extended-writing-reading
+  - ru.assess.b1.extended-writing-writing
+  - ru.assess.b1.extended-writing-listening
+  - ru.assess.b1.extended-writing-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b1.extended-writing2
+  description: Paragraph, connect, and revise extended writing.
+  band: B1
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.extended-writing
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b1.information-summary2
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b1.krome-togo2
+  - ru.grammar.b1.drugimi-slovami
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b1.extended-writing-reading2
+  - ru.assess.b1.extended-writing-writing2
+  - ru.assess.b1.extended-writing2-listening
+  - ru.assess.b1.extended-writing2-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.argumentation
+  description: Build positions, claims, and argument structure.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.opinions
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b1.future-conditions2
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2.ya-schitayu-chto
+  - ru.grammar.b2.s-drugoy-storony
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.argumentation-reading
+  - ru.assess.b2.argumentation-writing
+  - ru.assess.b2.argumentation-listening
+  - ru.assess.b2.argumentation-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.argumentation2
+  description: Support claims with evidence, examples, and justification.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b2.argumentation
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b1.opinions
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2.naprimer-tak
+  - ru.grammar.b2-etogo-dokazyvaet
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.argumentation-reading2
+  - ru.assess.b2.argumentation-writing2
+  - ru.assess.b2.argumentation2-listening
+  - ru.assess.b2.argumentation2-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.argumentation3
+  description: Raise counterarguments and qualify claims.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b2.argumentation2
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b1.opinions
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2.esli-i
+  - ru.grammar.b2-pravda
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.argumentation-reading3
+  - ru.assess.b2.argumentation-writing3
+  - ru.assess.b2.argumentation3-listening
+  - ru.assess.b2.argumentation3-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.argumentation4
+  description: Draw evaluation and reasoned conclusions.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b2.argumentation3
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b1.opinions
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-sledovatelno
+  - ru.grammar.b2-s-tochki-zreniya
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.argumentation-reading4
+  - ru.assess.b2.argumentation-writing4
+  - ru.assess.b2.argumentation4-listening
+  - ru.assess.b2.argumentation4-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.critical-reading
+  description: Analyze structure and relationships between claims.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b2.argumentation4
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b2.argumentation
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-tak-kak
+  - ru.grammar.b2-ne-tolko-no
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.critical-reading-reading
+  - ru.assess.b2.critical-reading-writing
+  - ru.assess.b2.critical-reading-listening
+  - ru.assess.b2.critical-reading-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.critical-reading2
+  description: Read stance, implication, and rhetorical choices.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b2.critical-reading
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b2.argumentation4
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-imeya-v-vydu
+  - ru.grammar.b2-podchjorkivayu
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.critical-reading-reading2
+  - ru.assess.b2.critical-reading-writing2
+  - ru.assess.b2.critical-reading2-listening
+  - ru.assess.b2.critical-reading2-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.critical-reading3
+  description: Judge evidence quality and source limitations.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b2.critical-reading2
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b2.argumentation2
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-soglasno
+  - ru.grammar.b2-pri-etom
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.critical-reading-reading3
+  - ru.assess.b2.critical-reading-writing3
+  - ru.assess.b2.critical-reading3-listening
+  - ru.assess.b2.critical-reading3-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.critical-reading4
+  description: Weigh competing interpretations and inferences.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b2.critical-reading3
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b2.argumentation3
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-iz-etogo-sleduet
+  - ru.grammar.b2-mozhno-tolkovat
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.critical-reading-reading4
+  - ru.assess.b2.critical-reading-writing4
+  - ru.assess.b2.critical-reading4-listening
+  - ru.assess.b2.critical-reading4-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.synthesis
+  description: Paraphrase accurately and attribute sources.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.extended-writing2
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b2.critical-reading
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-po-mneniyu
+  - ru.grammar.b2-drugimi-slovami2
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.synthesis-reading
+  - ru.assess.b2.synthesis-writing
+  - ru.assess.b2.synthesis-listening
+  - ru.assess.b2.synthesis-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.synthesis2
+  description: Write selective summaries across supplied texts.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b2.synthesis
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b1.information-summary2
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-kasatelsno
+  - ru.grammar.b2-esli-govorit
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.synthesis-reading2
+  - ru.assess.b2.synthesis-writing2
+  - ru.assess.b2.synthesis2-listening
+  - ru.assess.b2.synthesis2-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.synthesis3
+  description: Express agreement, disagreement, and compare sources.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b2.synthesis2
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b2.argumentation3
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-v-otlicie-ot
+  - ru.grammar.b2-vmeste-s-tim
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.synthesis-reading3
+  - ru.assess.b2.synthesis-writing3
+  - ru.assess.b2.synthesis3-listening
+  - ru.assess.b2.synthesis3-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.synthesis4
+  description: Write integrated reports with clear attribution.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b2.synthesis3
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b1.extended-writing
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-soglasno-dannym
+  - ru.grammar.b2-kak-otmechaet
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.synthesis-reading4
+  - ru.assess.b2.synthesis-writing4
+  - ru.assess.b2.synthesis4-listening
+  - ru.assess.b2.synthesis4-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.academic-study
+  description: Read for study and write precise definitions.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b2.critical-reading4
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b1.learning-work
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-nazyvaetsya
+  - ru.grammar.b2-pod-kotorym-ponimayu
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.academic-study-reading
+  - ru.assess.b2.academic-study-writing
+  - ru.assess.b2.academic-study-listening
+  - ru.assess.b2.academic-study-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.academic-study2
+  description: Take structured notes and map conceptual relationships.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b2.academic-study
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b2.critical-reading
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-v-ramkah
+  - ru.grammar.b2-v-svyazi-s
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.academic-study-reading2
+  - ru.assess.b2.academic-study-writing2
+  - ru.assess.b2.academic-study2-listening
+  - ru.assess.b2.academic-study2-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.academic-study3
+  description: Describe methods, procedures, and limitations.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b2.academic-study2
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a2.instructions
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-chem-bolshe
+  - ru.grammar.b2-nesmotrya-na
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.academic-study-reading3
+  - ru.assess.b2.academic-study-writing3
+  - ru.assess.b2.academic-study3-listening
+  - ru.assess.b2.academic-study3-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.academic-study4
+  description: Present findings, interpretations, and discussion.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b2.academic-study3
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.b2.critical-reading4
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-soglasno-avtoram
+  - ru.grammar.b2-v-hod-obsuzhdeniya
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.academic-study-reading4
+  - ru.assess.b2.academic-study-writing4
+  - ru.assess.b2.academic-study4-listening
+  - ru.assess.b2.academic-study4-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.professional-writing
+  description: Write professional requests and correspondence.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.extended-writing
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a2.services
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-proshu
+  - ru.grammar.b2-v-svyazi-s2
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.professional-writing-reading
+  - ru.assess.b2.professional-writing-writing
+  - ru.assess.b2.professional-writing-listening
+  - ru.assess.b2.professional-writing-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.negotiation
+  description: Make requests, set boundaries, and refuse politely but firmly.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.opinions
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a2.services
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-ya-ne-mogu
+  - ru.grammar.b2-nastoyatelno-proshu
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.negotiation-reading
+  - ru.assess.b2.negotiation-writing
+  - ru.assess.b2.negotiation-listening
+  - ru.assess.b2.negotiation-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.society-policy
+  description: Discuss public services and competing needs in society.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.culture-media
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a2.services
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-gosudarstvo-obespechivaet
+  - ru.grammar.b2-v-interesakh
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.society-policy-reading
+  - ru.assess.b2.society-policy-writing
+  - ru.assess.b2.society-policy-listening
+  - ru.assess.b2.society-policy-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.science-environment
+  description: Explain scientific and environmental matters from supplied information.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.learning-work
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a2.services
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-sledovatelno-vyvod
+  - ru.grammar.b2-zavisit-ot
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.science-environment-reading
+  - ru.assess.b2.science-environment-writing
+  - ru.assess.b2.science-environment-listening
+  - ru.assess.b2.science-environment-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.culture-perspectives
+  description: Respond interpretively to literary extracts from different perspectives.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.culture-media
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a2.services
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-na-moy-vzglyad
+  - ru.grammar.b2-skvoz
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.culture-perspectives-reading
+  - ru.assess.b2.culture-perspectives-writing
+  - ru.assess.b2.culture-perspectives-listening
+  - ru.assess.b2.culture-perspectives-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
+- id: ru.goal.b2.style-register
+  description: Choose precise words and reduce ambiguity in writing.
+  band: B2
+  modalities:
+  - reading
+  - writing
+  - listening
+  - speaking
+  prerequisites:
+  - target: ru.goal.b1.extended-writing
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.a2.services
+    dimension: comprehension-reading
+    required_state: independent
+    strength: hard
+  - target: ru.goal.on-ramp.everyday
+    dimension: recall-meaning
+    required_state: independent
+    strength: hard
+  required_concepts:
+  - ru.grammar.b2-imeet-vidu
+  - ru.grammar.b2-inache-govorya
+  - ru.grammar.on-ramp.zero-present-copula
+  assessment_ids:
+  - ru.assess.b2.style-register-reading
+  - ru.assess.b2.style-register-writing
+  - ru.assess.b2.style-register-listening
+  - ru.assess.b2.style-register-speaking
+  transfer_required: false
+  sources:
+  - ru-original
+  review_status: draft
+  generation:
+    method: ai-assisted
+    tool: omp
+    model: strata/qwen3.8-flash-next-iq3_s
+    date: '2026-10-05'
+    notes: ai-drafted; needs dictionary sourcing and human review
