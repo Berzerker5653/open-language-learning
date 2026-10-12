@@ -22,6 +22,12 @@ and those disagree, they win — fix this document.
    (`goal`, `lex`, `grammar`, `sent`, `story`, `kanji`, `assess`,
    `unit`, `scenario`, `activity`, …). The first segment must match the
    manifest's `target_locale` primary subtag.
+5. **The pack carries 100% of its audio.** The app performs no speech
+   synthesis at read time (ADR-0024): every clip a learner hears was baked
+   into the pack at build time (ADR-0016/0023). An audio-addressable item
+   with no `media/manifest.jsonl` row is a `media_asset_missing` block in
+   every gate that matters — there is no fallback that can paper over it.
+   See §Media below.
 
 ## Layout contract (schema 0.2)
 
@@ -49,7 +55,7 @@ and those disagree, they win — fix this document.
 | `kanji/entries.jsonl` | kanji | one per line |
 | `stories/*.yaml` | story | single doc |
 | `media/manifest.jsonl` | media-asset | one per line |
-| `media/*.wav` | (binary asset; must have exactly one manifest row) | — |
+| `media/*.wav` | (binary asset; exactly one manifest row; **gitignored** — produced by `scripts/generate-pack-audio.py`, never hand-placed) | — |
 | `world/environments.jsonl` | environment | one per line; optional (ADR-0018) |
 
 Unknown paths fail validation (documentation files like `README.md`
@@ -78,34 +84,101 @@ langpack audit-curriculum <pack>  # prereq cycles, mirror agreement, dead goals
 langpack audit-sources <pack>     # provenance completeness
 langpack audit-lexicon <pack>    # script purity + Cyrillic stress self-consistency
 langpack audit-licenses <pack>    # redistribution gates + attribution report
-langpack test <pack>              # install-mode validation + all audits (release gate)
-langpack build <pack> -o out.lpk  # deterministic archive; requires scaffold-clean
+langpack test <pack>              # install-mode validation + all audits (release gate; audio must be baked first)
+langpack build <pack> -o out.lpk  # deterministic archive; requires scaffold-clean AND baked audio
 ```
 
 `validate --mode install` additionally enforces promotion gates
 (non-empty licenses/sources, resolved references, license clearance);
 `TBD` content licensing blocks install, never drafting.
 
+## Media: the pack carries 100% of its audio (ADR-0016/0023/0024)
+
+Runtime speech synthesis was removed from the app (ADR-0024): there is no
+read-time fallback, no downloadable synthesizer, no silent-pack posture.
+`media_asset_missing` — an audio-addressable item with no manifest row — is
+the only audio block in the product.
+
 `media/manifest.jsonl` states what audio the pack carries, and the manifest is
 the only thing the app reads audio provenance from — never file presence
-(ADR-0016). How it is enforced:
+(ADR-0016). The coverage gate enumerates audio-addressable items exactly as
+`scripts/generate-pack-audio.py` `targets()` does: every sentence, every
+phonology contrast item (`{row.id}-{index}`), and every script-tagged lexicon
+entry. Each needs a manifest row AND its `.wav`, or install-mode `validate`
+and `langpack build` refuse the pack. How it is enforced:
 
+- An addressable item with no manifest row: aggregated `media_asset_missing`
+  (Error in every mode). A pack with addressable items and no manifest at all
+  is `media_manifest_absent` (Error at install, Info in a source checkout).
 - Nothing generated yet (a fresh checkout): one aggregated `media_unbuilt`
-  diagnostic, Info while drafting, Error at `--mode install`.
+  diagnostic, Info while drafting, Error at `--mode install` — and `build`
+  refuses outright: an audio-less archive is no longer a legal artifact,
+  because nothing would synthesize the gaps at read time.
 - Partially generated: every declared row that is absent is `media_missing`
-  (Error in every mode), and `build` refuses the pack outright rather than
-  shipping a manifest that would misrepresent the archive.
+  (Error in every mode).
 - Present but not matching its row: `media_size_mismatch` / `media_hash_mismatch`
   (Error in every mode). A media file with no row is `media_unlisted` (Warning),
   never a silent asset.
-- A pack with nothing generated still builds: `build` drops
-  `media/manifest.jsonl` from the archive after warning, so an audio-less
-  archive is honest and installable and the app falls back to on-demand
-  synthesis. There is no archive that declares audio it does not carry.
 
-Generated `.wav` bytes are gitignored; `scripts/generate-pack-audio.py` must run
-before `test`/`build` (`scripts/build-catalog.sh` already does so, and CI runs
-install-mode gates only for packs that ship no manifest).
+### Baking the audio
+
+Never hand-write `media/manifest.jsonl` rows and never hand-edit their
+hashes: the rows record the bytes the bake actually produced. The bake script
+writes them:
+
+```sh
+scripts/generate-pack-audio.py --pack my-pack --language <lang>
+```
+
+The default engine is the ADR-0023 locked-in bake engine, Qwen3-TTS
+CustomVoice with the `ono_anna` speaker (`--tts kokoro` reproduces the
+legacy payload for provenance work). An existing file is reused only when
+its bytes still match the row's sha256 AND the previous row credits the
+same synthesizer this run would record — an engine switch can never leave
+stale bytes under a new provenance row. `--force` regenerates; `--dry-run`
+prints each asset's synthesis input; `--only <id>` restricts the run.
+
+Generated `.wav` bytes are gitignored; only `media/manifest.jsonl` is
+committed. `scripts/build-catalog.sh` regenerates the audio before
+`langpack build`, so the release path always bakes first.
+
+### CI vs the release path
+
+The engine's pack-conformance CI runs `validate`, `lint`,
+`audit-curriculum`, `audit-lexicon`, and `audit-licenses` in draft mode.
+Install-mode `test` is deliberately NOT in CI: the `.wav` bytes are
+gitignored, so a fresh checkout would fail `media_unbuilt`/`media_missing`
+for reasons that say nothing about the pack. Install-mode gates run only in
+the release path (bake, then `langpack test` / `build-catalog.sh` →
+`langpack build`); the manifest/byte pairing logic itself is pinned by
+`crates/langpack/tests/media.rs` under `cargo test --workspace`.
+
+## Complete-pack checklist (reference-grade inventory)
+
+`languages/ja-JP` is the reference inventory. A complete pack ships:
+
+- `manifest.yaml` — every required field (schema_version, pack_id, version,
+  target_locale, source_locales, engine, maturity, capabilities{listening,
+  speaking, reading, writing}, license), honestly-set optional capabilities
+  (`pronunciation_assessment`, `prosody_assessment`, `handwriting`, `rtl`),
+  plus `scripts`, `world`, and `requested_model_capabilities`;
+- `language/{identity,normalization,orthography,phonology,pragmatics}.yaml`;
+- `orthography/*.jsonl` — one shard per taught script;
+- `phonology/contrasts.jsonl`;
+- `curriculum/` — goals shards, units, and the dependency mirrors that
+  agree with them;
+- `grammar/{concepts.jsonl,dependencies.yaml}`;
+- `lexicon/*.jsonl` (topic shards) and `sentences/`;
+- `activities/scenarios/*.yaml`;
+- `stories/*.yaml`;
+- `world/environments.jsonl` (declared as `world:` in the manifest);
+- `assessments/definitions.jsonl`;
+- `review/` — reviewer kit, machine-readable review policy, and dated
+  `WORKLIST-<date>.md` files for every review-pending item;
+- `sources.jsonl`, `licenses.jsonl`;
+- `media/manifest.jsonl` — one baked row per audio-addressable item (the
+  `.wav` bytes stay gitignored);
+- `tests/README.md` — the pack's test plan.
 
 ## Per-unit workflow
 

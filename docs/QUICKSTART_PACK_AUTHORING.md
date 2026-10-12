@@ -34,6 +34,35 @@ IDs follow the content-ID grammar (`domain.kind.topic...`, ≥2 segments;
 see `schemas/v0.2/README.md`). File-local record ids (source/license
 names) are separate and pack-scoped.
 
+## 2b. Bake the audio (mandatory — the pack carries 100% of it)
+
+Runtime TTS was removed (ADR-0024): there is no read-time fallback, so every
+clip a learner hears must be baked into the pack. `scripts/generate-pack-audio.py`
+enumerates the audio-addressable items exactly as the install gate does — every
+sentence, every phonology contrast item, every script-tagged lexicon entry —
+synthesizes each (default engine Qwen3-TTS CustomVoice, ADR-0023), and writes
+`media/manifest.jsonl`:
+
+```sh
+scripts/generate-pack-audio.py --pack my-pack --language <lang>
+```
+
+Never hand-write manifest rows or edit their hashes. The `.wav` bytes are
+gitignored; only `media/manifest.jsonl` is committed. Until every addressable
+item has a row **and** its baked `.wav`, install-mode `validate`, `test`, and
+`langpack build` all refuse the pack (`media_asset_missing`) — an audio-less
+archive is not a legal artifact.
+
+A **complete** pack ships the full reference-grade inventory, not just the
+files `init` scaffolds: `language/{identity,normalization,orthography,phonology,pragmatics}.yaml`,
+`orthography/*.jsonl`, `phonology/contrasts.jsonl`, `curriculum/` (goals + units +
+agreeing dependency mirrors), `grammar/{concepts.jsonl,dependencies.yaml}`,
+`lexicon/` + `sentences/`, `activities/scenarios/`, `stories/`,
+`world/environments.jsonl` (declared as `world:`), `assessments/`, `review/`
+(kit + policy + dated worklists), `sources.jsonl`, `licenses.jsonl`,
+`media/manifest.jsonl`, `tests/README.md`. Full list: "Complete-pack checklist"
+in `docs/PACK_AUTHORING_CONTRACT.md`.
+
 ## 3. Check as you go
 
 ```sh
@@ -54,13 +83,17 @@ langpack audit-licenses my-pack    # redistribution gates + attribution report
 langpack test my-pack
 ```
 
-Runs install-mode validation plus all three audits in one pass; exits
-non-zero on any error. This is what CI should run for a pack release.
+Runs install-mode validation plus all audits in one pass; exits non-zero on any
+error and **requires baked audio**. The release path runs it (`build-catalog.sh`
+bakes, then `test` / `build`). CI itself runs only the draft gates (`validate`,
+`lint`, `audit-*`) — never install-mode `test` — because the gitignored `.wav`
+bytes would trip `media_unbuilt`/`media_missing` in a fresh checkout for reasons
+that say nothing about the pack.
 
 ## 5. Package, ship, roll back
 
 ```sh
-langpack build my-pack -o my-pack.lpk   # deterministic; requires scaffold-clean
+langpack build my-pack -o my-pack.lpk   # deterministic; scaffold-clean AND baked audio
 langpack inspect my-pack.lpk            # manifest without extracting
 langpack install my-pack.lpk --store ~/.lts/packs
 langpack rollback dev.example.my-lang --store ~/.lts/packs [--to 0.0.1]
