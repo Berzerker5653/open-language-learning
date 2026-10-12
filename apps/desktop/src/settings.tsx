@@ -30,6 +30,13 @@ export interface SpeechModelPref {
   size_bytes: number;
 }
 
+/** What `build_identity` answers: the release this binary was built from. */
+export interface BuildIdentity {
+  version: string;
+  commit: string;
+  dirty: boolean;
+}
+
 export interface SettingsProps {
   /** Stored `microphone-enabled` for this profile (false when unset). */
   microphoneEnabled: boolean;
@@ -74,6 +81,8 @@ export interface SettingsProps {
   onArmSwitch(): void;
   onCancelSwitch(): void;
   onConfirmSwitch(): void;
+  /** Release identity this binary reports; null until the read resolves. */
+  buildIdentity: BuildIdentity | null;
   error: string | null;
 }
 
@@ -381,6 +390,21 @@ export function Settings(p: SettingsProps) {
         <p className="meta pack-posture" data-aligner={p.aligner?.available ? "yes" : "no"}>
           {alignerLine(p.aligner)}
         </p>
+      </div>
+
+      <div className="card">
+        <h3>About this build</h3>
+        {p.buildIdentity ? (
+          <p className="meta" data-build-commit={p.buildIdentity.commit}>
+            Version <strong>{p.buildIdentity.version}</strong>, commit{" "}
+            <strong>{p.buildIdentity.commit}</strong>
+            {p.buildIdentity.dirty ? " (built from a modified working tree)" : ""}. Please quote
+            both lines when you report a platform problem — a report that names only "the latest
+            version" cannot be matched to a build.
+          </p>
+        ) : (
+          <p className="meta">Loading build information…</p>
+        )}
       </div>
     </section>
   );

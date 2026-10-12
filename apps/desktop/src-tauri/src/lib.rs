@@ -33,6 +33,27 @@ fn app_mode() -> AppMode {
     }
 }
 
+/// ADR-0015 counts a platform runtime report only for a specific build, and
+/// `docs/13` binds every audit artefact to an app commit. A report that says
+/// "the current version" cannot be bound to bytes, so the running binary states
+/// its own version and the commit it was compiled from.
+#[derive(Serialize)]
+struct BuildIdentity {
+    version: &'static str,
+    commit: &'static str,
+    /// The tree that produced this binary had uncommitted changes.
+    dirty: bool,
+}
+
+#[tauri::command]
+fn build_identity() -> BuildIdentity {
+    BuildIdentity {
+        version: env!("CARGO_PKG_VERSION"),
+        commit: option_env!("LTS_GIT_SHA").unwrap_or("unknown"),
+        dirty: matches!(option_env!("LTS_GIT_DIRTY"), Some("1")),
+    }
+}
+
 /// Called by the UI in smoke mode. Each ack appends one line to the
 /// marker (launch handshake, then one per route in the POLISH-001
 /// full-route walkthrough). The shell exits 0 only on the terminal
@@ -6617,6 +6638,7 @@ pub fn run() {
         })
         .invoke_handler(tauri::generate_handler![
             app_mode,
+            build_identity,
             smoke_ack,
             privacy_notice,
             available_packs,
@@ -6697,6 +6719,28 @@ pub fn run() {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// ADR-0015 only counts a runtime report for a named build, so the identity
+    /// the app prints has to be a real version and a real sha — never a
+    /// placeholder. Building from a source tarball (no git) is allowed to say
+    /// `unknown`, which is honest rather than wrong.
+    #[test]
+    fn build_identity_reports_a_version_and_a_quotable_commit() {
+        let id = build_identity();
+        assert_eq!(id.version, env!("CARGO_PKG_VERSION"));
+        assert!(
+            id.commit == "unknown" || id.commit.chars().all(|c| c.is_ascii_hexdigit()),
+            "commit must be a hex sha or the honest unknown token, got {:?}",
+            id.commit
+        );
+        if id.commit != "unknown" {
+            assert!(
+                id.commit.len() >= 7,
+                "short sha is not quotable: {:?}",
+                id.commit
+            );
+        }
+    }
 
     /// Test shim (K-32 cutover): bundled ids go through the production
     /// install path; the retired ja-demo fixture installs directly from

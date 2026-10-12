@@ -48,6 +48,7 @@ const base: SettingsProps = {
   onCancelSwitch: () => {},
   onConfirmSwitch: () => {},
   error: null,
+  buildIdentity: { version: "0.4.0-alpha.1", commit: "172d2a2", dirty: false },
 };
 
 function render(over: Partial<SettingsProps> = {}): string {
@@ -59,6 +60,21 @@ describe("settings", () => {
     expect(render({ microphoneEnabled: true })).toMatch(/id="mic-enabled"[^>]*checked=""/);
     expect(render({ microphoneEnabled: false })).not.toMatch(/id="mic-enabled"[^>]*checked/);
     expect(render()).toContain("never blocks progress");
+  });
+
+  // ADR-0015 / docs/13: a platform runtime report is only evidence if it names
+  // the version and commit of the build a human actually ran.
+  it("states the exact build identity a runtime report has to quote", () => {
+    const html = render();
+    expect(html).toContain("About this build");
+    expect(html).toContain("<strong>0.4.0-alpha.1</strong>");
+    expect(html).toContain('data-build-commit="172d2a2"');
+    // A dirty tree matches no published tag, so the copy has to say so.
+    expect(
+      render({ buildIdentity: { version: "0.4.0-alpha.1", commit: "172d2a2", dirty: true } }),
+    ).toContain("modified working tree");
+    // A failed read states no version rather than inventing one.
+    expect(render({ buildIdentity: null })).toContain("Loading build information");
   });
 
   it("the microphone picker reflects the stored device and admits when names are unavailable", () => {

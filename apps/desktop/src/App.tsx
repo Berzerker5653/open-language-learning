@@ -45,7 +45,7 @@ import {
   type ScenarioSummaryView,
   type ScenarioView,
 } from "./scenario";
-import { Settings, type RomajiMode } from "./settings";
+import { Settings, type BuildIdentity, type RomajiMode } from "./settings";
 import {
   listMicrophones,
   listOutputs,
@@ -275,6 +275,7 @@ export function App() {
   const [audioMsg, setAudioMsg] = useState<string | null>(null);
   const [langError, setLangError] = useState<string | null>(null);
   const [alignerStatus, setAlignerStatus] = useState<AlignerStatus | null>(null);
+  const [buildIdentity, setBuildIdentity] = useState<BuildIdentity | null>(null);
   const [speechModels, setSpeechModels] = useState<SpeechModel[]>([]);
   const [speechModel, setSpeechModel] = useState<string>("off");
   const [deviceTier, setDeviceTier] = useState<DeviceTier | null>(null);
@@ -889,6 +890,16 @@ export function App() {
     if (!inv) return;
     setAlignerStatus((await inv("aligner_status")) as AlignerStatus);
   }
+
+  // The release identity is app-wide, not per-profile, and ADR-0015 makes a
+  // runtime report worthless without it. Read it as soon as the bridge exists;
+  // a failed read says "unknown" rather than pretending to still be loading.
+  useEffect(() => {
+    if (!inv) return;
+    void inv("build_identity")
+      .then((v) => setBuildIdentity(v as BuildIdentity))
+      .catch(() => setBuildIdentity({ version: "unknown", commit: "unknown", dirty: false }));
+  }, [inv]);
 
   async function installSpeechModel(modelId: string) {
     if (!inv) return;
@@ -3106,6 +3117,7 @@ export function App() {
             onDeleteModel={(id) => void deleteSpeechModel(id)}
             aligner={alignerStatus}
             deviceTier={deviceTier}
+            buildIdentity={buildIdentity}
             exportPath={settingsExportPath}
             onExport={() => void exportProfileData()}
             deleteArmed={settingsDeleteArmed}
