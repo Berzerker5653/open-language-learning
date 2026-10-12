@@ -16,5 +16,5 @@ generation:
   method: ai-assisted
   tool: omp
   model: lab-omarchy/qwen3.8-flash-next-iq3_s
-  date: 2026-10-12
+  date: '2026-10-12'
   notes: "ai-drafted; human review required"

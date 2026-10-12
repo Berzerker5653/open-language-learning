@@ -709,7 +709,7 @@ tasks:
   read_first:
   - docs/provenance/qwen3-tts-adoption.md
   - docs/05_SPEECH_SYSTEM.md
-  - docs/adr/0016-build-time-pack-audio.md
+  - docs/adr/0016-pack-shipped-model-output-audio.md
   acceptance:
   - "generate-pack-audio.py defaults to the qwen3 backend with CustomVoice speaker ono_anna; kokoro stays selectable for provenance reproduction."
   - "Every media/manifest.jsonl row for the pack credits runtime qwen3-tts with the model fingerprint and speaker; schema validation reports 0 errors 0 warnings."
@@ -725,8 +725,9 @@ tasks:
   - TTS-001
   read_first:
   - docs/05_SPEECH_SYSTEM.md
-  - docs/adr/0009-offline-model-distribution.md
-  - docs/adr/0016-build-time-pack-audio.md
+  - docs/adr/0009-tts-distribution-variants.md
+  - docs/adr/0016-pack-shipped-model-output-audio.md
+  - docs/adr/0024-runtime-tts-removal.md
   - docs/adr/0023-pack-audio-bake-engine-qwen3-tts.md
   acceptance:
   - "Install-mode coverage guard in crates/langpack: every audio-addressable item (the same enumeration scripts/generate-pack-audio.py targets() produces) requires a manifest row plus a present wav, else install fails with media_asset_missing; fixture-pack test proves it."

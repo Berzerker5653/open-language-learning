@@ -442,8 +442,8 @@
         "state/evidence/TTS-001/ci-2026-10-03.txt",
         "state/notes/TTS-001.md",
         "docs/provenance/tts-candidates.md",
-        "crates/speech-runtime/src/tts.rs",
-        "crates/speech-runtime/tests/tts.rs",
+        "docs/adr/0024-runtime-tts-removal.md",
+        "crates/langpack/tests/media.rs",
         "benchmarks/speech/results/20261003T075830Z/summary.json"
       ]
     },

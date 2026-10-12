@@ -116,8 +116,8 @@ ADR-0015 that is an agent run, not the human runtime report a platform
 
 The same packaging pass surfaced the **content** half of the defect
 (K-59): `bundled_packs()` resolved pack candidates through the
-compile-time `CARGO_MANIFEST_DIR`, and the verification binary embeds
-`/home/hunter/game-dev/LTS/apps/desktop/src-tauri` next to
+compile-time `CARGO_MANIFEST_DIR`, and the verification binary embeds the
+absolute build directory of whatever machine compiled it (`…/apps/desktop/src-tauri`) next to
 `languages/ja-JP` — so the deb carried the aligner payload but could only
 find a language pack on the machine whose tree built it. The base config
 carries no pack resources on purpose, and the published-catalog path stays
