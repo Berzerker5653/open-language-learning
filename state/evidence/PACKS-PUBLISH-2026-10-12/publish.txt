@@ -1,0 +1,57 @@
+Pack publishing to GitHub (private) — 2026-10-12 (O-05 republish 0.2.0 -> 0.3.0)
+
+Owner authorization: explicit GO 2026-10-12 "GO — publish both 0.3.0" (private, keep
+0.2.0). Prior O-05 extension (private publishing) authorized 2026-10-07.
+
+Repo: Berzerker5653/open-language-learning (visibility: PRIVATE; no public flip —
+that is O-06, gated on the owner's hands-on testing).
+Pack source commit: c24f0a974405e6eaa9d9de5c61aab3cd7b7c4550
+Build: scripts/build-catalog.sh at that commit; baked WAVs present on the build host
+(4,614 ja + 4,846 ru on disk, hash-matched to the committed media manifests), so no
+re-synthesis — the archive embeds exactly the shipped bytes.
+
+Releases (tags = {pack_id}-{version}, one release per pack version; 0.2.0 retained):
+- org.openlanguage.ja-jp.reference-0.3.0
+  asset ja-jp-reference-0.3.0.lpk  sha256 abbb04710fe0e965afcaab07081d8fa0835fe4957bb65ee3dfe39d80c73281f5  295730551 bytes
+- org.openlanguage.ru-ru.reference-0.3.0
+  asset ru-ru-reference-0.3.0.lpk  sha256 83efcaa81baf3c3768fa8ff333a76d29cb0960fd11c1b599fae7c84b18f5e84c  316616338 bytes
+
+These 0.3.0 archives carry the baked listening audio (the 0.2.0 archives predate
+generated media — this republish closes the "installed pack declares contrasts with
+no recordings" gap, K-78-follow). Sizes are ~300 MB each for that reason.
+
+Release notes carry honest labeling: draft/community review status, AI-only content
+posture (no qualified human review — not certified), license (ja CC-BY-4.0, ru
+CC0-1.0), build provenance (model-output Qwen3-TTS audio), install-gate description,
+and for ru the TRKI/TBU band denominator + modality parity.
+
+Catalog wiring:
+- catalog/packs.json (live): both reference entries bumped to v0.3.0 with the new
+  url/sha256/size_bytes. Unchanged by design: review_status stays "community"
+  (author claim; the app never upgrades it), display_name stays "(Draft)",
+  tested_platforms stays [linux], community_confirmed_platforms stays [].
+- catalog/preview-entries.json: same two entries bumped to v0.3.0.
+
+Verification:
+- Asset upload completeness: gh release view shows each asset at the exact local
+  byte size (ja 295730551, ru 316616338).
+- Last-mile integrity: authenticated `gh release download` of both assets re-hashed
+  to the pinned catalog sha256 exactly (ja abbb0471..., ru 83efcaa8...).
+- Pack gates at the source commit: validate --mode install / lint / audit-curriculum
+  / audit-sources / audit-licenses / test all 0 errors / 0 warnings for ru-RU.
+- No community_confirmed_platforms rebind needed: docs/platform/PLATFORM_REPORTS.yaml
+  has zero runtime records, so nothing was bound to the old 0.2.0 pack_sha256.
+
+Known limitation (private visibility, unchanged by design until the owner flips public):
+- The app fetches the catalog and assets WITHOUT credentials. Against the private repo
+  both the raw catalog URL and the release asset URLs return 404 anonymously, so the
+  in-app catalog flow stays offline/no-catalog until the repo is public (O-06). The
+  download pipeline itself is verified server-side; the anonymous last mile activates
+  automatically on the public flip.
+- Interim local test path: Languages page -> local import of dist/preview/*.lpk
+  exercises the identical validation/install gate minus the network fetch.
+
+Note on determinism: .lpk archives are not byte-stable across rebuilds (embedded file
+mtimes), so the catalog pins the sha256 of the archive that was actually uploaded and
+round-trip verified above — not a recomputed rebuild hash. This matches how 0.2.0 was
+pinned.
