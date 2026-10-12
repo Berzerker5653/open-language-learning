@@ -153,6 +153,36 @@ the release path (bake, then `langpack test` / `build-catalog.sh` →
 `langpack build`); the manifest/byte pairing logic itself is pinned by
 `crates/langpack/tests/media.rs` under `cargo test --workspace`.
 
+## Language-level (band) coverage
+
+Band every goal: the goal schema carries a `band:` token (enum:
+`on-ramp`, `A1`, `A2`, `B1`, `B2`, `C1`, `C2`). Bands are framework
+vocabulary, not certifications — the UI glosses them generically and
+renders any band subset (`apps/desktop/src/home.tsx`).
+
+A band-scoped pack must ALSO ship a finite coverage denominator at
+`docs/assessment/RELEASE_COVERAGE_<lang>.yaml`, grounded in a NAMED real
+framework (ja-JP: Japan Foundation Standard; ru-RU: ТРКИ/ТБУ component
+model). Per required objective it lists modalities, prerequisites, an
+`assessment_plan`, and an honest `content_status`; plus
+machine-verifiable gates: `coverage_linkage` (via `audit-curriculum`),
+`review_core`, `sampling_disclosed`, `speech_features`,
+`sources_licenses`. The gates are run by hand
+(`audit-curriculum` / `audit-licenses`): the denominator is a
+hand-authored review artifact, NOT parsed by CI.
+
+Honesty: a band is labeled at most **"partial (review pending)"** until
+every gate passes; completeness may NEVER be inferred from unit or
+activity counts (docs/18).
+
+### Tier-scoped / single-band packs
+
+First-class, and they need no new manifest field: a pack's covered
+bands = the bands its goals use + the bands its coverage map lists.
+Bands the pack does not claim are simply absent — never marked
+"incomplete". Example: an A1-only starter pack uses only `band: A1`
+goals and a coverage map listing only A1.
+
 ## Complete-pack checklist (reference-grade inventory)
 
 `languages/ja-JP` is the reference inventory. A complete pack ships:
@@ -178,7 +208,9 @@ the release path (bake, then `langpack test` / `build-catalog.sh` →
 - `sources.jsonl`, `licenses.jsonl`;
 - `media/manifest.jsonl` — one baked row per audio-addressable item (the
   `.wav` bytes stay gitignored);
-- `tests/README.md` — the pack's test plan.
+- `tests/README.md` — the pack's test plan;
+- If you band goals, you ship a coverage denominator and label bands
+  partial until gates pass (see §Language-level (band) coverage above).
 
 ## Per-unit workflow
 

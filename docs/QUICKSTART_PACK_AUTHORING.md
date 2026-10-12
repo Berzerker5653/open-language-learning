@@ -19,6 +19,18 @@ Creates a minimal 0.2 pack that validates clean immediately:
 `licenses.jsonl`, `grammar/concepts.jsonl`. Set the real
 `target_locale` and `pack_id` before going further.
 
+## 1b. Choose levels (bands) and set your scope
+
+Band every goal (`band:` enum: `on-ramp`, `A1`…`C2`). Decide which
+bands you cover: a small pack may target a single tier (an A1-only
+starter is fully supported — just use only those bands). If you band,
+add the finite coverage denominator
+`docs/assessment/RELEASE_COVERAGE_<lang>.yaml`, grounded in a NAMED
+framework; bands stay "partial (review pending)" until the gates pass.
+Standard: "Language-level (band) coverage" in
+`docs/PACK_AUTHORING_CONTRACT.md`; author rules in
+`tools/AI_LANGUAGE_PACK_AUTHOR_PROMPT.md`.
+
 ## 2. Author content
 
 - Goals: `curriculum/goals.yaml` (`goals:` array, one schema per entry).
