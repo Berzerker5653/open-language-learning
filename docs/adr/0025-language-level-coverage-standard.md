@@ -1,7 +1,7 @@
 # ADR 0025: CEFR-band coverage is the pack level model; tier-scoped packs are first-class
 
-Status: Proposed — owner approval required (an agent cannot accept an ADR, per
-`AGENTS.md` / `docs/15`). Recorded 2026-10-12.
+Status: Accepted — accepted by the owner in-chat 2026-10-12. (Acceptance is an
+owner act; an agent cannot accept an ADR, per `AGENTS.md` / `docs/15`.)
 
 Date: 2026-10-12
 
@@ -142,10 +142,13 @@ every entry there must be referenced by a content record (`audit-sources` flags
 
 ## Status note
 
-Proposed. Owner acceptance retires the "reference-only CEFR" framing and makes
-ТРКИ/ТБУ the ru band denominator; owner *approval of the ru coverage map itself*
-is a separate, still-open decision. The modality content batch and the 0.3.0
-republish (O-05) remain open regardless.
+Accepted 2026-10-12 (owner in-chat). This retires the "reference-only CEFR"
+framing and makes ТРКИ/ТБУ the ru band denominator. The owner also approved the
+ru coverage denominator itself (`docs/assessment/RELEASE_COVERAGE_RU.yaml` →
+`agreed-owner-2026-10-12`). Approving the denominator fixes the required-
+objective SCOPE; it does NOT certify content quality — band completeness still
+requires the review gates (review_core, docs/17 speech qualification). The 0.3.0
+republish (O-05) and qualified human review remain open regardless.
 
 **Follow-up (same date, 2026-10-12):** the gated modality batch was subsequently
 executed as its own content change — 60 listening (`recognition`) + 60 speaking
@@ -153,4 +156,4 @@ executed as its own content change — 60 listening (`recognition`) + 60 speakin
 `review_status: draft` with no `speech_profile_id` (guided/unscored until docs/17
 qualification). This closes the modality gap at the *authored* level only: the
 `review_core` and docs/17 speech-qualification gates are still unmet, so every
-band stays `partial (review pending)` and this ADR stays Proposed.
+band stays `partial (review pending)`.

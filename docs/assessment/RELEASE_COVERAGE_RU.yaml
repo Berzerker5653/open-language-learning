@@ -18,9 +18,9 @@
 # `partial (review pending)` until the review_core gate passes. Speaking/listening
 # assessments render guided/unscored until docs/17 speech qualification (ADR-0017).
 
-coverage_version: "0.3.0-draft"
+coverage_version: "1.0.0"
 schema_version: 1
-status: proposed-pending-owner-approval   # do not treat as agreed (see ADR-0025)
+status: agreed-owner-2026-10-12   # denominator approved by owner in-chat (ADR-0025 Accepted); scopes the required set — does NOT certify content: bands stay partial until the review gates pass
 variant: standard-russian
 
 frameworks:
