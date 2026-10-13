@@ -1,6 +1,13 @@
 # Japanese Reference Pack — Draft Scaffold
 
-As of 2026-10-07 this folder is an **in-progress kana-first curriculum draft**: 771 units, 75 goals each with an assessment, 3,920 topic-sharded lexicon entries, 679 sentences, 147 hiragana/katakana chart entries, 84 kanji entries, 7 phonological contrasts, 160 grammar concepts, 4 scenario graphs, and 3 graded stories. Every item is `draft`/`review-needed` with `generation` provenance; it is not yet a validated curriculum. Learner-facing surfaces state that once, at pack level (ADR-0014), rather than badging each card.
+As of 2026-10-13 this folder is an **in-progress kana-first curriculum draft**:
+786 units, 75 goals each with an assessment, 4,057 topic-sharded lexicon
+entries, 823 sentences, 147 hiragana/katakana chart entries, 84 kanji entries,
+7 phonological contrasts, 164 grammar concepts, 16 scenario graphs, 4,563
+activities, 3 graded stories and 4,894 baked listening clips indexed in
+`media/manifest.jsonl`. Every item is `draft`/`review-needed` with `generation`
+provenance; it is not yet a validated curriculum. Learner-facing surfaces state
+that once, at pack level (ADR-0014), rather than badging each card.
 
 Migrated in place from schema 0.1 to **0.2** (2026-10-03, K-06): the pack now authors its on-ramp goal graph, unit, a populated first-meeting scenario (`activities/scenarios/first-meeting.yaml`), and the transfer assessment `ja.assess.onramp.greeting-transfer` that the 0.1 manifest previously declared unresolved. 0.1-only files (`SOURCES.yaml`, `LICENSES.yaml`, `orthography/`, `phonology/`, `pragmatics/`, `speech/`) were replaced by the 0.2 layout (`sources.jsonl`, `licenses.jsonl`, `language/orthography.yaml`, `language/phonology.yaml`, `language/pragmatics.yaml`); romanization-scaffold, register, and speech feedback policy narratives live in `docs/assessment/`.
 
@@ -10,9 +17,40 @@ The sample unit exists to exercise the format. Treat linguistic examples as cont
 
 The phonology inventory (`language/phonology.yaml`) was ported from the JA-RES-002 fixture during K-30: teach/reference-only modes plus one `assess-guided` pitch-accent feature — no `assess-automatic` claims, because automatic scoring requires a bound calibrated speech profile. Speech profiles remain empty: no provider, model, human-reviewed targets, or calibration evidence exists for this pack. Requested model capabilities are research targets, not availability promises.
 
-Install is **not** license-blocked: LIC-001 closed 2026-10-04, `manifest.yaml` sets `content_license: CC-BY-4.0` with `redistribution_allowed: true`, and `licenses.jsonl` carries the content, dictionary-data and synthesis-chain records. What remains unfinished is qualified human content review (REVIEW-001) and, for distributed packs, a version bump when regenerated media changes pack bytes.
+Install is **not** license-blocked: LIC-001 closed 2026-10-04, `manifest.yaml`
+sets `content_license: CC-BY-4.0` with `redistribution_allowed: true`, and
+`licenses.jsonl` carries five records — original drafts, model output, baked
+audio, and two `derived-from-source` records for the dictionary-sourced lexicon
+and kanji layers. (Corrected 2026-10-13: this README previously asserted a
+dictionary-data record that `licenses.jsonl` did not in fact contain, and the
+baked-audio record still named the pre-ADR-0023 bake chain.) What remains
+unfinished is qualified human content review (REVIEW-001) and, for distributed
+packs, a version bump when regenerated media or these records change pack bytes.
 
-Listening audio is generated, never hand-collected or committed (ADR-0016): `scripts/generate-pack-audio.py` synthesizes every sentence and contrast item with the app's own Kokoro/sherpa-onnx chain and writes `media/manifest.jsonl`, which is the committed artifact — one schema-validated line per asset with sha256, format, provenance `model-output` and the synthesizer identity. The engine reads audio provenance from that manifest, so generated audio can never present itself as a licensed recording. This audio is comprehension input only: it is not a pronunciation reference, and production scoring still relies on pack-declared targets (ADR-0013).
+**Dictionary attribution.** Lexicon and kanji records cite `jmdict-simplified`
+3.6.2 for form/reading/meaning sourcing. That data is JMdict/JMnedict ©
+Electronic Dictionary Research and Development Group, licensed CC BY-SA 4.0
+(<https://www.edrdg.org/edrdg/licence.html>). Gloss wording is this project's own
+AI-drafted text and no dictionary definition text is reproduced; the 2026-10-05
+external review record states the dataset is not mirrored in this repo. The
+ShareAlike obligation attaches to the dictionary-derived layer, which is why
+those two inventory records declare `CC-BY-SA-4.0` while the pack-level
+`content_license` for original material stays CC-BY-4.0. `sources.jsonl` lists
+`edrdg-jmdict` and `jmdict-simplified` as consulted references. Whether the
+**pack-level** license should itself become CC-BY-SA-4.0 is an owner licensing
+decision, open as of 2026-10-13 — not something an agent may settle.
+
+Listening audio is generated, never hand-collected or committed (ADR-0016):
+`scripts/generate-pack-audio.py` synthesizes every audio-addressable item with
+the Qwen3-TTS CustomVoice bake engine (ADR-0023; the kokoro/sherpa-onnx chain
+was the pre-ADR-0023 bake engine) and writes `media/manifest.jsonl`, which is the
+committed artifact — one schema-validated line per asset with sha256, format,
+provenance `model-output` and the synthesizer identity. The engine reads audio
+provenance from that manifest, so generated audio can never present itself as a
+licensed recording, and a pack whose addressable items lack audio fails install
+with `media_asset_missing` (ADR-0024). This audio is comprehension input only: it
+is not a pronunciation reference, and production scoring still relies on
+pack-declared targets (ADR-0013).
 
 Unlockable places are pack data too (ADR-0018): `world/environments.jsonl` is
 AI-authored for this pack — five places (checking the price at the café, ordering a

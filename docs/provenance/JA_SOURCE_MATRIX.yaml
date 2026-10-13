@@ -157,8 +157,16 @@ categories:
         "JMdict/JMnedict © Electronic Dictionary Research and
         Development Group, CC BY-SA 4.0" plus modification notice
       notes: >
-        Primary lexicon. Share-alike applies to dictionary
-        adaptations; keep in isolated generated data layer (docs/10).
+        Dictionary sourcing layer, not a mirror. Lexicon and kanji records cite
+        this data via jmdict-simplified 3.6.2 for forms/readings/meanings; gloss
+        wording is ai-drafted and no dictionary definition text is reproduced
+        (docs/review/2026-10-05-external-pack-review.md). Share-alike attaches to
+        the derived layer: `languages/ja-JP/licenses.jsonl` now carries
+        `lic-lexicon-dictionary` and `lic-kanji-dictionary` at CC-BY-SA-4.0 with
+        the EDRDG attribution (added 2026-10-13, when the pack README's claim of a
+        dictionary-data record was found to be untrue). Whether the pack-level
+        content_license (CC-BY-4.0) should become CC-BY-SA-4.0 is an open owner
+        licensing decision.
     - id: kanjidic2
       title: KANJIDIC2 (kanji dictionary)
       org: EDRDG
@@ -169,8 +177,13 @@ categories:
       type: dictionary
       redistribution: derived
       attribution: KANJIDIC2 © EDRDG, CC BY-SA 4.0
-      notes: meanings, readings, stroke counts, radicals for 13,108
-        kanji.
+      notes: >
+        Listed as a research source; **not cited by any pack record** as of
+        2026-10-13. Open provenance gap flagged for human review, not asserted
+        here: the 84 `kanji/*.jsonl` entries carry `radicals`, `meanings` and
+        `readings` whose per-record sources name only `jf-standard` and
+        `jmdict-simplified`. If those fields were in fact taken from KANJIDIC2,
+        the pack needs a matching `derived-from-source` record and attribution.
     - id: kradfile
       title: KRADFILE (kanji radical/decomposition data)
       org: EDRDG
@@ -181,7 +194,10 @@ categories:
       type: dictionary
       redistribution: derived
       attribution: KRADFILE © EDRDG, CC BY-SA 4.0
-      notes: radical decomposition for kanji lookup UX.
+      notes: >
+        Research source only; not cited by any pack record as of 2026-10-13. See
+        the kanjidic2 note on the unrecorded provenance of the kanji `radicals`
+        field.
     - id: unidic
       title: UniDic (morphological dictionary, NINJAL)
       org: NINJAL
