@@ -80,7 +80,7 @@ body:
     id: outcome
     attributes:
       label: Outcome
-      description: '`works-with-issues` still confirms the platform; `fails` clears a previous confirmation.'
+      description: "`works-with-issues` still confirms the platform; `fails` clears a previous confirmation."
       options:
         - works
         - works-with-issues
