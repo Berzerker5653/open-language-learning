@@ -224,9 +224,8 @@ marker was `home`. Marker lines are logged at `cat` time, so the log cannot say
 when `home` was reached; the run simply never got past it inside 240 s.
 
 Locally at the same tree the script completes in **182 s** end to end
-(`SMOKE OK (13 routes walked)`) and in **207 s** pinned to 2 CPUs
-(`taskset -c 0,1`), and with `LTS_SMOKE_TIMEOUT=5` it reaches
-`smoke-ok home` in about 4 s. So the budget, not the tree, is what failed.
+(`SMOKE OK (13 routes walked)`) and in **207 s** pinned to two CPUs
+(`taskset -c 0,1`). So the budget, not the tree, is what failed.
 
 Fix: `LTS_SMOKE_TIMEOUT` env override (default still 240) and CI sets 900.
 If a 900 s CI run still fails, the script's own `paint-stall` reporting should
@@ -238,9 +237,11 @@ name the route it froze on instead of dying anonymous at the watchdog.
 whole pushed tree, and it is the first time it completed after the watchdog fix, so
 both halves of the earlier diagnosis hold: the audio restore works and the 240 s
 budget was too tight for a 2-core runner (the job now runs with `LTS_SMOKE_TIMEOUT: 900`).
-Also green in that run: `web`, `security`, `platform-compile (windows-latest)`,
-`platform-compile (macos-latest)`; `platform-bundles` skipped (dependency-gated);
-`rust` and `schemas` still running when this was written.
+Also green in that run: `web` (37 s), `security` (3m35s),
+`platform-compile (windows-latest)` (1m45s), `platform-compile (macos-latest)`
+(1m12s), `schemas` (8m55s); `platform-bundles` skipped (dependency-gated).
+`rust` was still running when this was written; it is the long pole (a cold
+`cargo test --workspace` build, 20+ min).
 
 Local gate evidence for the same acceptance set: `cargo test --workspace` (lts-desktop
 124/0), `cargo fmt --all --check`, `cargo clippy --workspace --all-targets -- -D warnings`,

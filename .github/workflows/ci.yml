@@ -117,9 +117,10 @@ jobs:
         run: |
           ./scripts/fetch-pack-audio.sh --pack-dir languages/ja-JP --work-dir tmp/pack-audio
           ./scripts/fetch-pack-audio.sh --pack-dir languages/ru-RU --work-dir tmp/pack-audio
-      # 900 s rather than the script's 240 s default: run 38457024075 showed a
-      # healthy app reaching only its first marker (`smoke-ok home-rendered`)
-      # after 237 s on a 2-core runner, so the watchdog killed a passing run.
+      # 900 s rather than the script's 240 s default: run 38457024075 ran the
+      # same walkthrough on a 2-core runner and `timeout 240` killed it (exit
+      # 124) before it finished. With 900 s the job passes in about 6 1/2 min
+      # (run 38463751108), so the margin is for slow CI hardware, not a slow app.
       - run: ./scripts/smoke-desktop.sh
         env:
           LTS_SMOKE_TIMEOUT: 900

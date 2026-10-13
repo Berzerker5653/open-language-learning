@@ -54,9 +54,9 @@ echo "== launch under Xvfb =="
 # The budget is env-tunable because the same healthy walkthrough needs very
 # different wall time per machine: 240 s is generous on a 32-core desktop (the
 # whole script, build included, finishes in 182 s, and 207 s pinned to 2 CPUs)
-# but on a 2-core GitHub runner the app only reached its first marker
-# (`smoke-ok home-rendered`) at 237 s in run 38457024075 and the watchdog
-# killed it there. CI sets LTS_SMOKE_TIMEOUT above that margin.
+# but in run 38457024075 a 2-core runner was still walking when 240 s expired
+# and `timeout` killed it with exit 124. CI raises the budget to 900 s, where
+# the same job passes in about 6 1/2 minutes.
 STATUS=0
 LTS_DATA_DIR="$DATA" LTS_SMOKE_FILE="$MARKER" timeout "${LTS_SMOKE_TIMEOUT:-240}" xvfb-run -a -s "-screen 0 1280x800x24" "./$BIN" || STATUS=$?
 
