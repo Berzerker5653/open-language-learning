@@ -32,7 +32,7 @@ body:
     id: review_type
     attributes:
       label: Review type
-      description: '`structural` and `ai_screening` are excluded on purpose — they do not count toward human gates.'
+      description: "`structural` and `ai_screening` are excluded on purpose — they do not count toward human gates."
       options:
         - linguistic — naturalness, meaning, grammar, readings, register, translation adequacy, distractor plausibility
         - pedagogical — difficulty, prerequisite load, task validity, scaffolding, transfer value
@@ -43,7 +43,7 @@ body:
     id: range
     attributes:
       label: Worklist range or file
-      description: 'e.g. `WORKLIST-2026-10-12.md units 250-259`, or the pack file you worked through.'
+      description: "e.g. `WORKLIST-2026-10-12.md units 250-259`, or the pack file you worked through."
     validations:
       required: true
   - type: textarea
@@ -76,14 +76,14 @@ body:
     id: findings
     attributes:
       label: Findings
-      description: 'For each problem: the item id, what is wrong, and the correction you propose (or the question you need answered). Wrong instruction is treated as a critical defect, so specifics matter more than impressions.'
+      description: "For each problem: the item id, what is wrong, and the correction you propose (or the question you need answered). Wrong instruction is treated as a critical defect, so specifics matter more than impressions."
     validations:
       required: true
   - type: textarea
     id: audio
     attributes:
       label: Audio you listened to
-      description: 'For linguistic or technical review: name the items whose reference audio you actually played, and whether the recording matches the declared reading. Leave blank if not applicable.'
+      description: "For linguistic or technical review: name the items whose reference audio you actually played, and whether the recording matches the declared reading. Leave blank if not applicable."
   - type: markdown
     attributes:
       value: |

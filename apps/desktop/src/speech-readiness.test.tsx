@@ -3,11 +3,7 @@
 // setup can fix it), and a shadowing target-load failure is never displayed
 // as an empty pack.
 import { describe, expect, it } from "vitest";
-import {
-  audioFailureMessage,
-  isMediaMissing,
-  shadowTargetsState,
-} from "./speech-readiness";
+import { audioFailureMessage, isMediaMissing, shadowTargetsState } from "./speech-readiness";
 
 const MEDIA_ERR =
   "media-asset-missing: This pack does not ship audio for this item, and the app never synthesizes speech, so there is nothing to play.";
