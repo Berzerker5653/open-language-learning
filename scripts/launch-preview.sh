@@ -11,7 +11,15 @@ source scripts/tauri-env.sh
 BIN="target/debug/lts-desktop"
 if [ ! -x "$BIN" ]; then
   echo "First run: building the preview (a few minutes)... press Ctrl+C to cancel."
-  pnpm --filter @openlang/desktop exec tauri build --debug --no-bundle
+  if command -v pnpm >/dev/null 2>&1; then
+    pnpm --filter @openlang/desktop exec tauri build --debug --no-bundle
+  else
+    # pnpm missing (a bare Node install — Node 26 no longer ships corepack).
+    # The native binary is enough here: this script serves the frontend on
+    # build.devUrl itself, which is what the debug build loads. Same fallback
+    # scripts/smoke-desktop.sh uses.
+    cargo build -p lts-desktop
+  fi
 fi
 
 # The debug build loads build.devUrl, so something has to be serving it or the

@@ -47,6 +47,44 @@ For an autonomous coding agent, read files in this order:
 
 Do **not** load every document into context for every task.
 
+## Run it and check it yourself (Linux)
+
+The toolchain is pinned, so a fresh clone needs exactly three things: **Rust**
+(`rust-toolchain.toml` pins 1.97.1 with rustfmt and clippy, which `rustup`
+installs automatically), **Node ≥ 26**, and the pinned package manager —
+`packageManager` says `pnpm@12.8.1`, and Node 26 no longer ships corepack, so:
+
+```sh
+npm install --global pnpm@12.8.1
+pnpm install --frozen-lockfile
+```
+
+Desktop system packages (Debian/Ubuntu):
+`libwebkit2gtk-4.1-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev`.
+On Arch without sudo, `scripts/setup-tauri-sysroot.sh` builds a user-local
+webkit2gtk sysroot instead.
+
+Open the app you are reading about — it builds a debug binary if one is missing
+and serves the UI itself:
+
+```sh
+scripts/launch-preview.sh
+```
+
+The gates a change has to pass:
+
+```sh
+pnpm fmt:check && pnpm lint && pnpm typecheck && pnpm test   # web layer
+cargo test --workspace                                       # engine, storage, shell
+cargo run -q -p lts-langpack-cli -- test languages/ja-JP      # pack conformance
+```
+
+Reference-pack audio is deliberately not in git (ADR-0016): the committed
+`media/manifest.jsonl` records what every asset is, and
+`scripts/generate-pack-audio.py` regenerates the `.wav` bytes before an archive
+is built — a pack whose audio is incomplete is refused at build and install
+(ADR-0024), never silently shipped silent.
+
 ## Major documentation
 
 - `docs/00_MASTER_SPEC.md` — authoritative product contract
