@@ -39,5 +39,8 @@ Existing:
 - 0022 unit-level phase gates and the learned-kana word filter — **Accepted 2026-10-08**
 - 0023 Qwen3-TTS CustomVoice replaces Kokoro as the pack-audio BAKE engine (ADR-0016 mechanism unchanged; its "runtime fallback" clause later retired by 0024) — **Accepted 2026-10-10**
 - 0024 no runtime TTS — language packs are the only speech audio; supersedes ADR-0009's variant axis and the runtime-fallback role in ADR-0016/0023 (K-90/TTS-004) — **Accepted 2026-10-10**
+- 0025 CEFR-band coverage is the pack level model; tier-scoped packs are first-class — **Accepted by the owner 2026-10-12**
+- 0026 a profile may exist without an active language pack; the wizard offers every pack the device already has — **Proposed (owner-directed, 2026-10-12)**
+- 0027 default catalog URL for released builds (`LTS_PACK_CATALOG_URL` still overrides; empty value disables) — **Accepted 2026-10-13**
 
 Template: `template.md`.

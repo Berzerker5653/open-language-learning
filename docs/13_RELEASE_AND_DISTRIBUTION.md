@@ -120,8 +120,11 @@ compile-time `CARGO_MANIFEST_DIR`, and the verification binary embeds the
 absolute build directory of whatever machine compiled it (`…/apps/desktop/src-tauri`) next to
 `languages/ja-JP` — so the deb carried the aligner payload but could only
 find a language pack on the machine whose tree built it. The base config
-carries no pack resources on purpose, and the published-catalog path stays
-inert until O-05. The owner's 2026-10-08 decision is the merged
+carries no pack resources on purpose; the published-catalog path is the live
+content route instead (ADR-0027): a build with no `LTS_PACK_CATALOG_URL` falls
+back to this repository's `catalog/packs.json` on `raw.githubusercontent.com`,
+and an explicit value — including an empty one — still overrides it. The
+owner's 2026-10-08 decision is the merged
 resources-overlay route: the pack-bundled content variant below. The
 The merged bundle build has since been run (2026-10-08): deb
 337.55 MiB, AppImage 428.91 MiB, and the deb's extraction was inspected

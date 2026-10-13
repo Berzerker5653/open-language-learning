@@ -147,10 +147,22 @@ pub fn fetch_catalog(url: &str) -> Result<PackCatalog, String> {
     Ok(catalog)
 }
 
+/// The published catalog for this project's reference packs. It lives in this
+/// repository, so a build with no `LTS_PACK_CATALOG_URL` still has a content
+/// path: without it the Languages screen is a dead end and no pack can be
+/// installed at all (ADR-0027).
+pub const DEFAULT_CATALOG_URL: &str = "https://raw.githubusercontent.com/Berzerker5653/open-language-learning/main/catalog/packs.json";
+
+/// Explicit configuration wins, including an explicit empty value ("no
+/// catalog"), so an offline or kiosk build can still opt out or repoint.
+fn catalog_url_from(env_value: Option<String>) -> String {
+    env_value.unwrap_or_else(|| DEFAULT_CATALOG_URL.to_string())
+}
+
 /// Catalog entries for the UI plus installed-version info and an honest
 /// status string ("live", "cached", "no-catalog-url", "offline-no-cache").
 pub fn catalog_view(data: &Path) -> (Vec<CatalogView>, String) {
-    let url = std::env::var("LTS_PACK_CATALOG_URL").unwrap_or_default();
+    let url = catalog_url_from(std::env::var("LTS_PACK_CATALOG_URL").ok());
     catalog_view_with(data, &url)
 }
 
@@ -507,7 +519,7 @@ mod tests {
     fn catalog_status_is_honest_when_unset_offline_or_cached() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        // No url configured, no cache: honest empty state, never "live".
+        // Explicitly empty url, no cache: honest empty state, never "live".
         let (views, status) = catalog_view_with(data, "");
         assert_eq!(status, "no-catalog-url");
         assert!(views.is_empty());
@@ -529,6 +541,18 @@ mod tests {
         assert_eq!(views.len(), 1);
         let (_, status) = catalog_view_with(data, "");
         assert_eq!(status, "cached");
+    }
+
+    #[test]
+    fn the_published_catalog_is_the_default_and_explicit_config_overrides_it() {
+        // A fresh public-alpha install has a content path without configuration
+        // (ADR-0027); an explicit value, including the empty string, still wins.
+        assert_eq!(catalog_url_from(None), DEFAULT_CATALOG_URL);
+        assert_eq!(catalog_url_from(Some(String::new())), "");
+        assert_eq!(
+            catalog_url_from(Some("https://example.test/catalog.json".into())),
+            "https://example.test/catalog.json"
+        );
     }
 
     /// These tests are not about progress, but every install path reports, so
@@ -610,8 +634,8 @@ mod tests {
         write_cache(data, &c);
         let loaded = load_cache(data).unwrap();
         assert_eq!(loaded.packs.len(), 1);
-        // no LTS_PACK_CATALOG_URL in tests -> cached status, entry visible
-        let (views, status) = catalog_view(data);
+        // Explicitly no catalog configured -> the cached copy is what shows.
+        let (views, status) = catalog_view_with(data, "");
         assert_eq!(status, "cached");
         assert_eq!(views[0].pack_id, "org.openlanguage.ja-demo");
         assert_eq!(views[0].installed_version, None);
