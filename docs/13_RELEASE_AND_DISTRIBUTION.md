@@ -356,6 +356,32 @@ catalog, and the cost is a PERF-tier input rather than a surprise.
 
 All final audit reports bind to the exact application commit/build configuration, dependency lockfiles, pack hashes, model/provider hashes, review range, platform and hardware tiers. An affected update invalidates its previous evidence and reruns the relevant gates. Publish aggregate benchmark/review evidence without private recordings or reviewer identities.
 
+### Alpha 0.4.0-alpha.1 — local build evidence (2026-10-12, not yet published)
+
+Built from commit `44a42c6` with the pinned toolchain (Rust 1.97.1 from
+`rust-toolchain.toml`, Node 26 + npm; the build runs
+`npm run tauri -- build` with a `beforeBuildCommand` override because no pnpm is
+installed on this host). Artifacts live in `dist/artifacts/alpha.1/`:
+
+| artifact | bytes | sha256 |
+| --- | --- | --- |
+| base deb | 12,294,142 | `1d4bff7098ff7714e7509ae6b5e6a3206053758c0dd2e1fbb21da837e7b4055d` |
+| base AppImage | 122,001,912 | `7092baab8f37355dacc157b4a200a333f3b3277a2d6e654aa77a483365a1a784` |
+| aligner deb | 83,766,694 | `f62212b59c41f524d80858b5bc1a2a42c8c62e016dbda519d6d85bdf0b98942a` |
+| aligner AppImage | 193,931,768 | `8434a9476eda9f13561a3205734454ed7a186003ae23ed1228f4c7ac4022ebe8` |
+
+Verified in the shipped payload, not just on disk: the binary inside the base deb
+carries the stamped identity (`0.4.0-alpha.1` and commit `44a42c6`) that
+`build_identity` reports, which is what lets a runtime report bind to a build
+(ADR-0015). The aligner deb unpacks the sidecar under
+`usr/lib/open-language-learning-platform/aligner/linux-x64/` (`bin/whisper-cli`,
+`libwhisper.so.1`, three `libggml*` libraries, `model/ggml-tiny.bin`,
+`SIDECAR.yaml`) plus `aligner/LICENSE.whisper-cpp.txt`.
+
+Nothing here is signed, and tagging/uploading is an owner action. The hashes above
+are the values to publish; a superseded build invalidates them per the paragraph
+above.
+
 ## Authentic updates and interrupted downloads
 
 Application updates use authenticated signed metadata/artifacts when that update channel exists; checksum-only metadata obtained from the same untrusted location is not publisher authentication. Trusted pack/model catalogs bind source URL, version, license/terms, size and digest to an authenticated catalog record. Third-party unsigned packs remain explicitly lower trust. Signature indicates publisher/integrity, not linguistic correctness.
