@@ -86,6 +86,15 @@ AI must not invent citations. If a requested fact cannot be supported, output `R
 
 Automated: schema, IDs, graph, allowed-content scope, license/source presence.
 
+### AI screening
+
+Automated (`executor: ai` in `languages/*/review/REVIEW_POLICY.yaml`): screening
+that flags likely linguistic/pedagogical defects before human review time is
+spent, and gates bulk generation — a batch must pass structural **and** AI
+screening before the next batch is generated. `counts_toward_human_gates: false`,
+so it is recorded but never closes a gate; the content-review issue template
+excludes it and structural on purpose.
+
 ### Linguistic review
 
 Naturalness, meaning, pronunciation/readings, grammar, variants, register.
