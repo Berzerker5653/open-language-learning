@@ -178,3 +178,17 @@ remaining cost is not copying: each case re-runs the full audit, and one standal
 `python tools/validate_handoff.py` over 1,905 data files is 18.5 s single-threaded on
 this machine, so 31 cases are inherently minutes. CI is unaffected either way (a runner
 checkout has no audio, no tmp/, no dist/).
+
+## Desktop test suite in the audio-restored checkout (green)
+
+    cd /tmp/ci-sim && CARGO_TARGET_DIR=/tmp/ci-sim-target cargo test -p lts-desktop
+    test result: ok. 124 passed; 0 failed; 0 ignored; finished in 415.95s
+
+The 8 cases that failed in CI run 38432671203 are named in that pass, among them
+a_fresh_ja_jp_plan_is_all_introductions_in_the_packs_goal_order,
+bundled_japanese_pack_installs_and_records,
+bundled_pack_phrase_entries_carry_valid_slots,
+goal_map_orders_bands_by_ladder_not_ascii and
+first_run_steps_lead_with_the_declared_script_in_its_teaching_order.
+Nothing in lts-desktop needed changing: the tests were correct, the checkout was
+incomplete. That is the whole point of the restore step.
