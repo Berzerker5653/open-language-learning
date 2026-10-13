@@ -203,3 +203,31 @@ incomplete. That is the whole point of the restore step.
 Green, and no longer I/O bound: 11.8 s per case is the audit itself (user time far
 exceeds real time, so the audit is using the cores). Before the fix the same cases did
 not finish inside 600 s with ~3.4 GB of copying per case.
+
+## Run 38457024075 conclusions (head 4908174), observed 2026-10-13 20:40
+
+rust **success** (first time that job has ever completed), desktop-smoke **failure**,
+schemas/security/web/platform-compile(windows)/platform-compile(macos) **success**,
+platform-bundles **skipped** (dependency-gated).
+
+Failure mechanism read from the step log, not guessed:
+
+```
+19:49:01 == launch under Xvfb ==
+19:53:01 smoke-ok home-rendered
+19:53:01 smoke-ok home
+19:53:01 FAIL: walkthrough never completed (exit 124)
+```
+
+exit 124 is the script's own `timeout 240` killing a live app whose furthest
+marker was `home`. Marker lines are logged at `cat` time, so the log cannot say
+when `home` was reached; the run simply never got past it inside 240 s.
+
+Locally at the same tree the script completes in **182 s** end to end
+(`SMOKE OK (13 routes walked)`) and in **207 s** pinned to 2 CPUs
+(`taskset -c 0,1`), and with `LTS_SMOKE_TIMEOUT=5` it reaches
+`smoke-ok home` in about 4 s. So the budget, not the tree, is what failed.
+
+Fix: `LTS_SMOKE_TIMEOUT` env override (default still 240) and CI sets 900.
+If a 900 s CI run still fails, the script's own `paint-stall` reporting should
+name the route it froze on instead of dying anonymous at the watchdog.
