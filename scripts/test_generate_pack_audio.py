@@ -111,5 +111,61 @@ class NormalizeWavTest(unittest.TestCase):
         self.assertEqual(len(after), len(self.speech(1200)))
 
 
+class ReusableTest(unittest.TestCase):
+    """`--force`-free runs may reuse bytes, but never relabel them."""
+
+    SYNTH = {"engine": "qwen3-tts", "model": "CustomVoice", "speaker": "ono_anna"}
+
+    def setUp(self) -> None:
+        fd, self.path = tempfile.mkstemp(suffix=".wav")
+        os.close(fd)
+        self.addCleanup(os.unlink, self.path)
+        write_wav(self.path, [int(9000 * math.sin(2 * math.pi * 220 * t / 24000)) for t in range(12000)])
+
+    def want(self, speak: str) -> dict:
+        return {
+            "id": "ja.sent.a2.post.wrap-in-cardboard",
+            "file": "media/ja.sent.a2.post.wrap-in-cardboard.wav",
+            "text": "段ボールに包みます。",
+            "speak": speak,
+            "speak_from": "reading",
+        }
+
+    def test_matching_row_is_reused(self) -> None:
+        want = self.want("だんボールにつつみます。")
+        prior = gpa.build_row(want, Path(self.path), self.SYNTH, "2026-10-12", None)
+        self.assertTrue(gpa.reusable(prior, Path(self.path), self.SYNTH, want, False))
+
+    def test_corrected_reading_is_not_reused(self) -> None:
+        # The bytes were synthesized from the old kana; the pack now declares
+        # corrected kana. Reusing would record the new text over old audio.
+        old = self.want("だんぽボールにつつみます。")
+        prior = gpa.build_row(old, Path(self.path), self.SYNTH, "2026-10-12", None)
+        self.assertFalse(gpa.reusable(prior, Path(self.path), self.SYNTH, self.want("だんボールにつつみます。"), False))
+
+    def test_engine_switch_is_not_reused(self) -> None:
+        want = self.want("だんボールにつつみます。")
+        prior = gpa.build_row(want, Path(self.path), self.SYNTH, "2026-10-12", None)
+        other = dict(self.SYNTH, engine="kokoro")
+        self.assertFalse(gpa.reusable(prior, Path(self.path), other, want, False))
+
+    def test_tampered_bytes_are_not_reused(self) -> None:
+        want = self.want("だんボールにつつみます。")
+        prior = gpa.build_row(want, Path(self.path), self.SYNTH, "2026-10-12", None)
+        write_wav(self.path, [int(9000 * math.sin(2 * math.pi * 440 * t / 24000)) for t in range(12000)])
+        self.assertFalse(gpa.reusable(prior, Path(self.path), self.SYNTH, want, False))
+
+    def test_force_regenerates(self) -> None:
+        want = self.want("だんボールにつつみます。")
+        prior = gpa.build_row(want, Path(self.path), self.SYNTH, "2026-10-12", None)
+        self.assertFalse(gpa.reusable(prior, Path(self.path), self.SYNTH, want, True))
+
+    def test_missing_file_and_missing_row_are_not_reused(self) -> None:
+        want = self.want("だんボールにつつみます。")
+        prior = gpa.build_row(want, Path(self.path), self.SYNTH, "2026-10-12", None)
+        self.assertFalse(gpa.reusable(prior, Path(self.path).with_name("absent.wav"), self.SYNTH, want, False))
+        self.assertFalse(gpa.reusable(None, Path(self.path), self.SYNTH, want, False))
+
+
 if __name__ == "__main__":
     unittest.main()

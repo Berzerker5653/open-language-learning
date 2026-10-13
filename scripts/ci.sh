@@ -47,6 +47,7 @@ fi
 .venv/bin/python -m pip install -q -r tools/requirements.txt
 .venv/bin/python tools/validate_handoff.py
 .venv/bin/python -m unittest discover -s tools -p 'test_validate_handoff.py'
+.venv/bin/python scripts/test_generate_pack_audio.py
 
 echo "== security: advisory + secret scans (mirror of CI security job) =="
 if command -v cargo-audit >/dev/null 2>&1; then

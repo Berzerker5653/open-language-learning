@@ -51,6 +51,21 @@ engines transcribe the same probe as 「私の名前は何ですか」.
   shards (a fingerprint, not a re-hashable byte hash), `voice` = speaker
   id; the speech language and normalization note ride `notes`.
 
+## Incremental runs must never relabel existing audio (2026-10-12)
+
+The baker rebuilds every manifest line it touches, so an incremental run after a
+content edit used to write the *new* declared reading into the row while keeping
+the wav synthesized from the *old* one. Measured on five A2 sentences whose kana
+was corrected: `--only` reported `generated=0 reused=5`, and `validate` then saw
+row text and declared reading in perfect agreement — `media_text_not_declared_reading`
+can only compare those two, so the stale bytes were invisible to every gate.
+`reusable()` now refuses reuse unless the on-disk bytes match the recorded
+`sha256`, the previous row credits the same `synthesizer`, AND the previous row's
+`text` equals what this run would feed. A corrected reading therefore
+re-synthesizes instead of relabelling. Covered by `ReusableTest` in
+`scripts/test_generate_pack_audio.py`, now run by `scripts/ci.sh` and the
+`schemas` CI job.
+
 ## Known caveats (deliberately accepted with owner sign-off)
 
 - Qwen3-TTS training data is not disclosed. Mitigations: we bake only our

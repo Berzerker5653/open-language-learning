@@ -266,6 +266,28 @@ def build_row(want: dict, path: Path, synth: dict, today: str, extra: str | None
         "notes": notes,
     }
 
+def reusable(prior: dict | None, out: Path, synth: dict, want: dict, force: bool) -> bool:
+    """May the existing bytes be kept for `want`?
+
+    Three things must still match what this run would record: the bytes on
+    disk equal the committed hash, the previous row credits the same
+    synthesizer (an engine switch must never leave Kokoro bytes sitting under
+    Qwen provenance rows), and the previous row records the same spoken text
+    this run would feed. The third condition is what stops a content edit from
+    relabelling old audio: the manifest line is rebuilt from current pack data
+    either way, so without it a corrected reading would sit over a wav of the
+    old wording and validate would find row text and declared reading in
+    perfect agreement (measured 2026-10-12 on five corrected A2 sentences).
+    """
+    return bool(
+        out.exists()
+        and prior
+        and not force
+        and prior.get("sha256") == sha256_file(out)
+        and prior.get("synthesizer") == synth
+        and prior.get("text") == want["speak"]
+    )
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--pack", required=True, type=Path)
@@ -384,18 +406,9 @@ def main() -> int:
     for want in wants:
         out = pack / want["file"]
         prior = previous.get(want["id"])
-        # Reuse means the bytes on disk still match the committed hash AND
-        # the previous row credits the same synthesizer this run would
-        # record — an engine switch must never leave Kokoro bytes sitting
-        # under Qwen provenance rows. The line itself is rebuilt either
-        # way, so a documentation fix never leaves a stale row behind.
-        if (
-            out.exists()
-            and prior
-            and not args.force
-            and prior.get("sha256") == sha256_file(out)
-            and prior.get("synthesizer") == synth
-        ):
+        # Bytes, synthesizer AND the recorded spoken text must all still match
+        # what this run would record; see reusable().
+        if reusable(prior, out, synth, want, args.force):
             rows.append(build_row(want, out, synth, today, args.note))
             reused += 1
             continue
