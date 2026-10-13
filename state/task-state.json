@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-13",
-  "active_task": "TTS-004",
+  "active_task": "PACK-AI-001",
   "tasks": {
     "TTS-003": {
       "status": "blocked",
@@ -16,20 +16,21 @@
       ]
     },
     "TTS-004": {
-      "status": "in_progress",
+      "status": "done",
       "attempts": 1,
       "last_error": null,
       "evidence": [
         "docs/adr/0024-runtime-tts-removal.md",
-        "crates/langpack/src/audit.rs (install-mode media_asset_missing guard, line 854)",
-        "crates/langpack/tests/media.rs (fixture-pack coverage test)",
-        "third-party/notices/NOTICE.md (rewritten: build-time-tooling section, ADR-0023 bake engine)",
-        "crates/speech-api/src/lib.rs (dead SpeechSynthesisProvider/VoiceRef deleted; docs/05 line 40 already stated no in-app synthesis provider)",
-        "docs/13_RELEASE_AND_DISTRIBUTION.md (notices path corrected)",
-        "docs/13_RELEASE_AND_DISTRIBUTION.md (measured: cargo test --workspace 8 desktop tests + scripts/smoke-desktop.sh fail on a fresh clone because pack wavs are gitignored and archive::build refuses a silent pack)",
-        "state/evidence/TTS-004/gates-2026-10-13.txt (fmt/clippy/workspace/python/prettier)",
-        "scripts/fetch-pack-audio.sh + scripts/test_fetch_pack_audio.py + .github/workflows/ci.yml (pack audio restored from the published archives in the rust and desktop-smoke jobs; install-mode test enabled for both packs)",
-        "state/evidence/CI-AUDIO-2026-10-13/NOTES.md (tracked-files-only checkout: 9,740 wavs restored, rows failing=0, then cargo test -p lts-desktop 124/0; GitHub desktop-smoke green in run 38453750282)"
+        "crates/langpack/src/audit.rs",
+        "crates/langpack/tests/media.rs",
+        "third-party/notices/NOTICE.md",
+        "crates/speech-api/src/lib.rs",
+        "docs/13_RELEASE_AND_DISTRIBUTION.md",
+        "state/evidence/TTS-004/gates-2026-10-13.txt",
+        "scripts/fetch-pack-audio.sh",
+        "scripts/test_fetch_pack_audio.py",
+        ".github/workflows/ci.yml",
+        "state/evidence/CI-AUDIO-2026-10-13/NOTES.md"
       ]
     },
     "BOOT-001": {
@@ -883,6 +884,12 @@
         "state/evidence/K-45/smoke-2026-10-07.txt",
         "state/notes/K-45.md"
       ]
+    },
+    "PACK-AI-001": {
+      "status": "in_progress",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": []
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence."

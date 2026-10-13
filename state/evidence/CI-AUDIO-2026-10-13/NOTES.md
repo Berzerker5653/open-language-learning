@@ -231,3 +231,19 @@ Locally at the same tree the script completes in **182 s** end to end
 Fix: `LTS_SMOKE_TIMEOUT` env override (default still 240) and CI sets 900.
 If a 900 s CI run still fails, the script's own `paint-stall` reporting should
 name the route it froze on instead of dying anonymous at the watchdog.
+
+## desktop-smoke green — run 38463751108 (head 92291b0), observed 2026-10-13 20:52
+
+`desktop-smoke` **success**. That is the first time the job has completed with the
+whole pushed tree, and it is the first time it completed after the watchdog fix, so
+both halves of the earlier diagnosis hold: the audio restore works and the 240 s
+budget was too tight for a 2-core runner (the job now runs with `LTS_SMOKE_TIMEOUT: 900`).
+Also green in that run: `web`, `security`, `platform-compile (windows-latest)`,
+`platform-compile (macos-latest)`; `platform-bundles` skipped (dependency-gated);
+`rust` and `schemas` still running when this was written.
+
+Local gate evidence for the same acceptance set: `cargo test --workspace` (lts-desktop
+124/0), `cargo fmt --all --check`, `cargo clippy --workspace --all-targets -- -D warnings`,
+`cargo run -q -p lts-langpack-cli -- test` 0 errors / 0 warnings for `languages/ja-JP`
+and `languages/ru-RU`, and `scripts/smoke-desktop.sh` → `SMOKE OK (13 routes walked)`
+in 182 s (and 207 s pinned to 2 CPUs).
