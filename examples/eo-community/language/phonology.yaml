@@ -1,0 +1,20 @@
+schema_version: "0.2"
+segments:
+  - symbol: "a"
+    type: vowel
+    mode: teach
+    examples: ["placeholder"]
+  - symbol: "k"
+    type: consonant
+    mode: teach
+    examples: ["placeholder"]
+  - symbol: "s"
+    type: consonant
+    mode: teach
+    examples: ["placeholder"]
+phonotactics: []
+prosody:
+  - id: "eo.phon.placeholder"
+    description: "Scaffold placeholder: no prosody model has been researched yet. Reference comparison only; never graded."
+    mode: reference-only
+    orthographic_cues: ["none recorded"]

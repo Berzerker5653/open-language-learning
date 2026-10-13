@@ -1,0 +1,1 @@
+{"id":"eo.grammar.scaffold","name":"Scaffold concept","category":"pragmatics","status":"draft","definition":"Scaffold placeholder concept: replace with a researched rule and its source.","sources":["eo.src.ai-drafted-scaffold"],"generation":{"method":"ai-assisted","tool":"scripts/new-pack.py","date":"2026-10-13","notes":"scaffold concept"}}

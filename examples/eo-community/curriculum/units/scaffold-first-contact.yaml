@@ -1,0 +1,20 @@
+id: "eo.unit.scaffold-first-contact"
+goal_id: "eo.goal.scaffold-greet"
+title: "First contact"
+estimated_minutes: 5
+activities:
+  - id: "eo.activity.sc-encounter"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["eo.lex.scaffold-00"]
+  - id: "eo.activity.sc-recall"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["eo.lex.scaffold-00"]
+  - id: "eo.activity.sc-produce"
+    type: "produce"
+    modality: "writing"
+    support_level: 1
+    content_refs: ["eo.lex.scaffold-00"]

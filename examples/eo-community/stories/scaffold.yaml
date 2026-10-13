@@ -1,0 +1,13 @@
+id: "eo.story.scaffold"
+status: "review-needed"
+title: "Scaffold story"
+description: "The scaffold sentences, read in order."
+sentences:
+  - "eo.sent.scaffold-00"
+  - "eo.sent.scaffold-01"
+  - "eo.sent.scaffold-02"
+sources: ["eo.src.ai-drafted-scaffold"]
+generation:
+  method: ai-assisted
+  tool: scripts/new-pack.py
+  date: "2026-10-13"

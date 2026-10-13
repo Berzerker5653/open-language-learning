@@ -151,6 +151,29 @@ audio is not published commits its fixture bytes instead (see the conformance
 packs under `examples/`). The release path bakes first (`build-catalog.sh`,
 then `test` / `build`).
 
+## 4a. Two generated packs are already in the tree
+
+`examples/eo-community/` (Esperanto, Latin, on-ramp) and `examples/ar-ma/`
+(Arabic for the `ar-MA` locale, Arabic **and** Latin scripts, `rtl: true`, A1)
+are this kit's conformance proofs: both were produced by the two commands in
+§1a. All seven gates report 0 errors / 0 warnings for both, including
+install-mode `test`, and CI runs those fourteen gate invocations in the `rust`
+job. Their placeholder `.wav` bytes are committed deliberately — only
+`languages/*/media/*.wav` is gitignored — so a fresh checkout gates install mode
+with no download and no TTS, and both packs regenerate byte-for-byte from the
+committed generator.
+
+What they prove: a second, non-Japanese language and an RTL/multi-script pack
+reach full pack conformance with **zero engine edits** (`crates/`, `apps/` and
+`schemas/` were untouched during authoring). What they do not prove: teaching
+quality. Both stay `maturity: experimental`; the audio is labelled placeholder
+silence; the Arabic forms are standard-Arabic flavoured and unverified as
+Darija, which is recorded in `examples/ar-ma/review/UNRESOLVED.md`; and
+declaring RTL surfaced a real engine gap — nothing in `apps/desktop` reads
+`capabilities.rtl`, so the pack installs and then renders left-to-right. That
+gap is tracked as `RTL-001`; the measurements are in
+`state/evidence/PACK-AI-001/`.
+
 ## 5. Package, ship, roll back
 
 ```sh

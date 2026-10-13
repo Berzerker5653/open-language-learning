@@ -1,0 +1,13 @@
+id: "ar.story.scaffold"
+status: "review-needed"
+title: "Scaffold story"
+description: "The scaffold sentences, read in order."
+sentences:
+  - "ar.sent.scaffold-00"
+  - "ar.sent.scaffold-01"
+  - "ar.sent.scaffold-02"
+sources: ["ar.src.ai-drafted-scaffold"]
+generation:
+  method: ai-assisted
+  tool: scripts/new-pack.py
+  date: "2026-10-13"

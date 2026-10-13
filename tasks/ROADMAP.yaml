@@ -1517,6 +1517,27 @@ tasks:
   - REL-001 completes a reviewable release candidate; public publishing, signing credentials, store enrollment,
     payments, and external contacts require separate owner authorization.
   required_for_desktop_1_0: true
+- id: RTL-001
+  milestone: M10
+  priority: P2
+  title: Render right-to-left packs with a direction-aware desktop UI
+  dependencies:
+  # Found while satisfying PACK-AI-001's RTL/multi-script acceptance item: the
+  # manifest declares capabilities.rtl and the schema validates it, but no
+  # consumer in apps/desktop reads it, so an RTL pack installs and renders
+  # left-to-right. See state/evidence/PACK-AI-001/NOTES.md.
+  - PACK-AI-001
+  read_first:
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  - docs/11_ACCESSIBILITY_AND_LOCALIZATION.md
+  - docs/07_TECHNICAL_ARCHITECTURE.md
+  - docs/adr/README.md
+  acceptance:
+  - An ADR records the direction model (mirrored shell, per-container direction, or bilingual layout) before any UI change.
+  - apps/desktop reads manifest capabilities.rtl so an RTL pack renders right-to-left instead of inheriting left-to-right layout.
+  - Mixed-script packs keep per-block direction, so Arabic content renders right-to-left while romanization and Latin glosses stay left-to-right.
+  - Direction behaviour is asserted by a desktop fixture/component test over a non-Japanese RTL pack, recorded as evidence.
+  required_for_desktop_1_0: false
 - id: SEC-001
   milestone: M10
   priority: P0
@@ -1614,4 +1635,5 @@ execution_scope:
   - K-44
   - K-45
   - K-46
+  - RTL-001
   public_publication_authorized: false

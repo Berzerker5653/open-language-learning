@@ -1,0 +1,15 @@
+goals:
+  - id: "eo.goal.scaffold-greet"
+    description: "Use the scaffold greetings in a first contact"
+    band: "on-ramp"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - target: "eo.lex.scaffold-00"
+        dimension: "recall-meaning"
+        required_state: "independent"
+        strength: "hard"
+    required_concepts: ["eo.grammar.scaffold"]
+    assessment_ids: ["eo.assess.scaffold-greet"]
+    transfer_required: true
+    sources: ["eo.src.ai-drafted-scaffold"]
+    review_status: "draft"

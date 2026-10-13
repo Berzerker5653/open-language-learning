@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-13",
-  "active_task": "PACK-AI-001",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "blocked",
@@ -886,8 +886,24 @@
       ]
     },
     "PACK-AI-001": {
-      "status": "in_progress",
+      "status": "done",
       "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "docs/QUICKSTART_PACK_AUTHORING.md",
+        "docs/PACK_AUTHORING_CONTRACT.md",
+        "tools/AI_LANGUAGE_PACK_AUTHOR_PROMPT.md",
+        "scripts/new-pack.py",
+        "scripts/test_new_pack.py",
+        "examples/eo-community/manifest.yaml",
+        "examples/ar-ma/manifest.yaml",
+        "state/evidence/PACK-AI-001/gates-2026-10-13.txt",
+        "state/evidence/PACK-AI-001/NOTES.md"
+      ]
+    },
+    "RTL-001": {
+      "status": "ready",
+      "attempts": 0,
       "last_error": null,
       "evidence": []
     }

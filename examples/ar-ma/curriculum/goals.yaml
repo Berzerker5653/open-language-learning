@@ -1,0 +1,15 @@
+goals:
+  - id: "ar.goal.scaffold-greet"
+    description: "Use the scaffold greetings in a first contact"
+    band: "A1"
+    modalities: ["reading", "writing"]
+    prerequisites:
+      - target: "ar.lex.scaffold-00"
+        dimension: "recall-meaning"
+        required_state: "independent"
+        strength: "hard"
+    required_concepts: ["ar.grammar.scaffold"]
+    assessment_ids: ["ar.assess.scaffold-greet"]
+    transfer_required: true
+    sources: ["ar.src.ai-drafted-scaffold"]
+    review_status: "draft"

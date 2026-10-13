@@ -1,0 +1,66 @@
+PACK-AI-001 conformance proof — captured 2026-10-13 on head 17dbfb2 + working tree
+
+$ python3 scripts/new-pack.py --out examples/eo-community --language eo --locale eo-001 \
+    --title 'Esperanto Community Starter' --scripts Latin --band on-ramp --source-url <tree-url>
+$ python3 scripts/new-pack.py --out examples/ar-ma --language ar --locale ar-MA \
+    --title 'Arabic (Morocco) Starter' --scripts Arabic,Latin --rtl --band A1 --source-url <tree-url>
+
+cargo run -q -p lts-langpack-cli -- validate         examples/eo-community  -> validate(scaffold): 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- lint             examples/eo-community  -> lint: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- audit-curriculum examples/eo-community  -> audit-curriculum: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- audit-lexicon    examples/eo-community  -> audit-lexicon: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- audit-licenses   examples/eo-community  -> audit-licenses: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- audit-sources    examples/eo-community  -> audit-sources: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- test             examples/eo-community  -> test: 0 error(s), 0 warning(s)
+
+cargo run -q -p lts-langpack-cli -- validate         examples/ar-ma         -> validate(scaffold): 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- lint             examples/ar-ma         -> lint: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- audit-curriculum examples/ar-ma         -> audit-curriculum: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- audit-lexicon    examples/ar-ma         -> audit-lexicon: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- audit-licenses   examples/ar-ma         -> audit-licenses: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- audit-sources    examples/ar-ma         -> audit-sources: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- test             examples/ar-ma         -> test: 0 error(s), 0 warning(s)
+
+== engine untouched by the authoring run:
+  (empty above = no engine edits)
+
+== generator invariant tests (no cargo, no network, no TTS):
+----------------------------------------------------------------------
+Ran 11 tests in 0.651s
+
+OK
+
+== addendum, same day: maturity demoted community -> experimental (validate_handoff refused the tier), packs regenerated and re-gated ==
+
+$ python3 scripts/new-pack.py --out /tmp/npg5/{eo,ar} ... (same flags as above)
+$ rm -rf examples/eo-community examples/ar-ma && cp -r /tmp/npg5/{eo,ar} examples/
+$ diff -r /tmp/npg4/eo examples/eo-community   # only the maturity line differs
+cargo run -q -p lts-langpack-cli -- validate         examples/eo-community  -> validate(scaffold): 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- lint             examples/eo-community  -> lint: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- audit-curriculum examples/eo-community  -> audit-curriculum: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- audit-lexicon    examples/eo-community  -> audit-lexicon: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- audit-licenses   examples/eo-community  -> audit-licenses: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- audit-sources    examples/eo-community  -> audit-sources: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- test             examples/eo-community  -> test: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- validate         examples/ar-ma         -> validate(scaffold): 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- lint             examples/ar-ma         -> lint: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- audit-curriculum examples/ar-ma         -> audit-curriculum: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- audit-lexicon    examples/ar-ma         -> audit-lexicon: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- audit-licenses   examples/ar-ma         -> audit-licenses: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- audit-sources    examples/ar-ma         -> audit-sources: 0 error(s), 0 warning(s)
+cargo run -q -p lts-langpack-cli -- test             examples/ar-ma         -> test: 0 error(s), 0 warning(s)
+
+== generator invariants ==
+Ran 11 tests in 0.686s
+
+OK
+
+== handoff ledger + roadmap ==
+WARN examples/minimal-language-pack: manifest-only onboarding fixture; no instructional content or full pack conformance
+WARN scope: handoff structure checked; SDK completeness, linguistic correctness, source rights, calibration quality, build/install/runtime/UX/privacy/security remain unverified
+HANDOFF VALIDATION PASSED (1940 data files checked)
+
+== release-readiness (count 3 -> 5; the two additions are the proof packs being unreviewed, same class as the reference packs) ==
+5
+examples/ar-ma/manifest.yaml:maturity: "experimental"
+examples/eo-community/manifest.yaml:maturity: "experimental"

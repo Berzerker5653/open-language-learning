@@ -1,0 +1,19 @@
+schema_version: "0.2"
+pack_id: "org.openlanguage.eo.scaffold"
+display_name: "Esperanto Community Starter"
+version: "0.1.0"
+target_locale: "eo-001"
+source_locales: ["en-US"]
+scripts: ["eo.orth.latin"]
+engine:
+  min_version: "0.1.0"
+  max_version_exclusive: null
+maturity: "experimental"
+capabilities:
+  listening: true
+  speaking: true
+  reading: true
+  writing: true
+license:
+  content_license: "CC-BY-SA-4.0"
+  redistribution_allowed: true

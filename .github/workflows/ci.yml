@@ -72,6 +72,23 @@ jobs:
           # install gate is exercised end to end rather than assumed.
           cargo run -q -p lts-langpack-cli -- test languages/ru-RU
           cargo run -q -p lts-langpack-cli -- lint tools/pack-templates/example-pack
+      # PACK-AI-001 conformance proofs: a second, non-Japanese language and an
+      # RTL/multi-script pack, both scaffolded by scripts/new-pack.py with
+      # committed placeholder audio (examples/*/media is NOT gitignored, unlike
+      # languages/*/media), so install mode is gated on a fresh checkout with no
+      # download and no TTS. They prove authoring needs no engine edits; they
+      # prove nothing about teaching quality.
+      - name: Pack conformance for the generated proofs (eo-community, ar-ma)
+        run: |
+          for pack in examples/eo-community examples/ar-ma; do
+            cargo run -q -p lts-langpack-cli -- validate          "$pack"
+            cargo run -q -p lts-langpack-cli -- lint              "$pack"
+            cargo run -q -p lts-langpack-cli -- audit-curriculum  "$pack"
+            cargo run -q -p lts-langpack-cli -- audit-lexicon     "$pack"
+            cargo run -q -p lts-langpack-cli -- audit-licenses    "$pack"
+            cargo run -q -p lts-langpack-cli -- audit-sources     "$pack"
+            cargo run -q -p lts-langpack-cli -- test              "$pack"
+          done
 
   web:
     runs-on: ubuntu-24.04
@@ -240,3 +257,6 @@ jobs:
       # desktop-smoke jobs depend on (synthetic pack + local archive, no
       # network/cargo).
       - run: python scripts/test_fetch_pack_audio.py
+      # PACK-AI-001: the scaffold's own invariants (media coverage/hash, script
+      # declaration, placeholder-audio honesty) without cargo, network or TTS.
+      - run: python -m unittest discover -s scripts -p 'test_new_pack.py'

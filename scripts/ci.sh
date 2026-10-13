@@ -22,6 +22,20 @@ cargo run -q -p lts-langpack-cli -- lint languages/ru-RU
 cargo run -q -p lts-langpack-cli -- test languages/ru-RU
 cargo run -q -p lts-langpack-cli -- lint tools/pack-templates/example-pack
 
+# PACK-AI-001 conformance proofs: scaffolded packs whose placeholder audio is
+# committed (examples/*/media is not gitignored), so install mode runs here
+# with no download. Conformance only: they prove a new language can be authored
+# with no engine edits, nothing about teaching quality.
+for pack in examples/eo-community examples/ar-ma; do
+  cargo run -q -p lts-langpack-cli -- validate         "$pack"
+  cargo run -q -p lts-langpack-cli -- lint             "$pack"
+  cargo run -q -p lts-langpack-cli -- audit-curriculum "$pack"
+  cargo run -q -p lts-langpack-cli -- audit-lexicon    "$pack"
+  cargo run -q -p lts-langpack-cli -- audit-licenses   "$pack"
+  cargo run -q -p lts-langpack-cli -- audit-sources    "$pack"
+  cargo run -q -p lts-langpack-cli -- test             "$pack"
+done
+
 echo "== web: install =="
 pnpm install --frozen-lockfile
 
@@ -48,6 +62,7 @@ fi
 .venv/bin/python tools/validate_handoff.py
 .venv/bin/python -m unittest discover -s tools -p 'test_validate_handoff.py'
 .venv/bin/python scripts/test_generate_pack_audio.py
+.venv/bin/python -m unittest discover -s scripts -p 'test_new_pack.py'
 
 echo "== security: advisory + secret scans (mirror of CI security job) =="
 if command -v cargo-audit >/dev/null 2>&1; then

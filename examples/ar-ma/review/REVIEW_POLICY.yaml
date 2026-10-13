@@ -1,0 +1,11 @@
+schema_version: "0.2"
+policy:
+  - kind: lexicon
+    required_reviewer: "native speaker of the target variety"
+    blocks: ["install"]
+  - kind: sentences
+    required_reviewer: "native speaker of the target variety"
+    blocks: ["install"]
+  - kind: phonology
+    required_reviewer: "phonologist or citable reference grammar"
+    blocks: ["band-claim"]

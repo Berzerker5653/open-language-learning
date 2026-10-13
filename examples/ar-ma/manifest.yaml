@@ -1,0 +1,20 @@
+schema_version: "0.2"
+pack_id: "org.openlanguage.ar.scaffold"
+display_name: "Arabic (Morocco) Starter"
+version: "0.1.0"
+target_locale: "ar-MA"
+source_locales: ["en-US"]
+scripts: ["ar.orth.arabic", "ar.orth.latin"]
+engine:
+  min_version: "0.1.0"
+  max_version_exclusive: null
+maturity: "experimental"
+capabilities:
+  listening: true
+  speaking: true
+  reading: true
+  writing: true
+  rtl: true
+license:
+  content_license: "CC-BY-SA-4.0"
+  redistribution_allowed: true

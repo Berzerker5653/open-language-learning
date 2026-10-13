@@ -1,0 +1,24 @@
+id: "ar.scenario.scaffold-first-contact"
+goal_id: "ar.goal.scaffold-greet"
+title: "First contact"
+situation: "Meeting someone for the first time"
+register: "neutral"
+nodes:
+  - id: "ar.activity.scn.open"
+    prompt: "Greet the other person."
+    expected_actions: ["greeting"]
+    next: ["ar.activity.scn.ask"]
+  - id: "ar.activity.scn.ask"
+    prompt: "Say what you are doing: learning this language."
+    expected_actions: ["self-description"]
+    next: []
+support_ladder:
+  - support_level: 0
+    description: "No supports"
+  - support_level: 3
+    description: "Word bank"
+transfer_variants_required: 1
+transfer_variants:
+  - id: "ar.scenario.scaffold-first-contact.formal"
+    description: "Same contact in a formal setting"
+    changed_variable: "register"

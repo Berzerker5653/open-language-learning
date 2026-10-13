@@ -222,7 +222,13 @@ class Audit:
         for field in ["license_file", "attribution_file"]:
             if field in manifest["license"]:
                 self.relative_file(base, manifest["license"][field], label + "/license")
-        if base.parent.name == "examples":
+        # The examples/ shortcut existed because every example was a manifest-only
+        # stub. It is now a content test: a stub still short-circuits (and fails a
+        # release check), but a complete pack under examples/ falls through to the
+        # full record/schema path, so generated conformance packs are checked by
+        # these schemas rather than excused. Trust promotion stays out of reach:
+        # the maturity check above and the TRUSTED release check below still apply.
+        if base.parent.name == "examples" and not (base / "curriculum").is_dir():
             self.warn(label, "manifest-only onboarding fixture; no instructional content or full pack conformance")
             if self.release:
                 self.fail(label, "manifest-only example is not a releasable language pack")
