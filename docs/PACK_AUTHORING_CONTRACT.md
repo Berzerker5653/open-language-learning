@@ -250,6 +250,26 @@ goals and a coverage map listing only A1.
 - If you band goals, you ship a coverage denominator and label bands
   partial until gates pass (see §Language-level (band) coverage above).
 
+### `maturity` is a claim about review, not about completeness
+
+The manifest enum is `experimental`, `community`, `validated`, `verified`,
+`reference`. The tier names **who has examined the content**, not how much of
+it exists — a fully populated pack nobody has reviewed is still
+`experimental` — and the tier is learner-visible: the pack picker renders it
+verbatim (`apps/desktop/src/onboarding.tsx:187` prints
+`(locale, maturity)`).
+
+- Start at `experimental`. Scaffolds — including `scripts/new-pack.py`
+  output — and AI-drafted packs stay there until a human review happens.
+- No check in this repo authorizes promotion. `tools/validate_handoff.py`
+  fails a scanned pack that claims a tier above `experimental`, because the
+  checker has no evidence with which to certify it; `--release-readiness`
+  separately requires a trusted tier, which is why both reference packs still
+  report `pack is experimental/unreviewed`.
+- Promotion is a qualified-human decision (REVIEW-001), evidenced in the
+  pack's `review/` files. An author, a generator or an agent editing the field
+  is a false claim, not a version bump.
+
 ## Per-unit workflow
 
 Author one lesson at a time:
