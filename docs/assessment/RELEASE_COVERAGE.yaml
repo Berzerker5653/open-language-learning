@@ -5,10 +5,12 @@
 # passes the machine-verifiable gates below. Narrowing the required set is an
 # owner scope decision requiring recorded rationale, never a silent edit.
 #
-# STATUS (measured against pack source 2026-10-07): pack
-# org.openlanguage.ja-jp.reference is v0.2.0 with 75 goals (5 on-ramp, 21 A1,
-# 10 A2, 13 B1, 26 B2) and 771 units (on-ramp 12, A1 76, A2 100, B1 195, B2 388 —
-# 683 at A2/B1/B2). Objectives at every band therefore have authored content, all
+# STATUS (re-measured against pack source 2026-10-13; first measured 2026-10-07
+# against v0.2.0): pack org.openlanguage.ja-jp.reference is v0.4.0 with 75 goals
+# (5 on-ramp, 21 A1, 10 A2, 13 B1, 26 B2) and 786 units (on-ramp 12, A1 79,
+# A2 112, B1 195, B2 388 — 695 at A2/B1/B2), plus 75 assessment definitions. The
+# goal band split is unchanged; 15 more units exist than at the first reading.
+# Objectives at every band therefore have authored content, all
 # of it in `draft`/`review-needed` review state with ai-assisted provenance.
 # That is NOT a completeness claim: the required-objective rows below are the
 # denominator, no band passes its gates, and band-completeness may never be

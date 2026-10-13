@@ -6,9 +6,11 @@
 # passes the machine-verifiable gates below. Narrowing the required set is an
 # owner scope decision requiring recorded rationale, never a silent edit.
 #
-# STATUS (measured against pack source 2026-10-12): pack
-# org.openlanguage.ru-ru.reference is v0.3.0 with 60 goals (6 on-ramp, 9 A1,
-# 10 A2, 13 B1, 22 B2) and 810 units. That is NOT a completeness claim: unit
+# STATUS (re-measured against pack source 2026-10-13; measured 2026-10-12 at
+# v0.3.0): pack org.openlanguage.ru-ru.reference is v0.4.0 with 60 goals
+# (6 on-ramp, 9 A1, 10 A2, 13 B1, 22 B2) and 809 units, plus 240 assessment
+# definitions (the 2026-10-12 note said 810 units; the tree held 809 that day
+# too, so that figure was a miscount). That is NOT a completeness claim: unit
 # counts are context only and may never establish band completeness (docs/18).
 # All 60 objectives are now ASSESSED across all four modalities — reading,
 # writing, listening and speaking (240 assessments, 60 per modality): the earlier
