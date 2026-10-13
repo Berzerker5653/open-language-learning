@@ -13,10 +13,10 @@
       "tested_platforms": ["linux"],
       "community_confirmed_platforms": [],
       "untested_platforms": ["windows", "macos"],
-      "sha256": "abbb04710fe0e965afcaab07081d8fa0835fe4957bb65ee3dfe39d80c73281f5",
-      "size_bytes": 295730551,
-      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.3.0/ja-jp-reference-0.3.0.lpk",
-      "version": "0.3.0"
+      "sha256": "f0aa971f30ec88c0f09ca86085d04133616944d9fff6a75345bf31931b713a5f",
+      "size_bytes": 317429131,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.4.0/ja-jp-reference-0.4.0.lpk",
+      "version": "0.4.0"
     },
     {
       "author": "Open Language Learning Platform contributors",
@@ -29,10 +29,10 @@
       "tested_platforms": ["linux"],
       "community_confirmed_platforms": [],
       "untested_platforms": ["windows", "macos"],
-      "sha256": "83efcaa81baf3c3768fa8ff333a76d29cb0960fd11c1b599fae7c84b18f5e84c",
-      "size_bytes": 316616338,
-      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.3.0/ru-ru-reference-0.3.0.lpk",
-      "version": "0.3.0"
+      "sha256": "899e0c67a71d165a706afd216817c53b9ee9a56d34a99f1197aeec29a8ea3e14",
+      "size_bytes": 316616342,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.0/ru-ru-reference-0.4.0.lpk",
+      "version": "0.4.0"
     }
   ],
   "tested_platforms": ["linux"],
