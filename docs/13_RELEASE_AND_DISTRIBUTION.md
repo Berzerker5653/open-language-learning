@@ -359,27 +359,48 @@ catalog, and the cost is a PERF-tier input rather than a surprise.
 
 All final audit reports bind to the exact application commit/build configuration, dependency lockfiles, pack hashes, model/provider hashes, review range, platform and hardware tiers. An affected update invalidates its previous evidence and reruns the relevant gates. Publish aggregate benchmark/review evidence without private recordings or reviewer identities.
 
-### Alpha 0.4.0-alpha.1 — local build evidence (2026-10-12, not yet published)
+### Alpha 0.4.0-alpha.1 — local build evidence (2026-10-13, not yet published)
 
-Built from commit `44a42c6` with the pinned toolchain (Rust 1.97.1 from
+Built from commit `70ec683` with the pinned toolchain (Rust 1.97.1 from
 `rust-toolchain.toml`, Node 26 + npm; the build runs
 `npm run tauri -- build` with a `beforeBuildCommand` override because no pnpm is
-installed on this host). Artifacts live in `dist/artifacts/alpha.1/`:
+installed on this host), then `scripts/finalize-appimage.sh` over both AppImages
+so they use the target system's webkit2gtk-4.1 the way the deb does. Artifacts
+live in `dist/artifacts/alpha.13/`:
 
 | artifact | bytes | sha256 |
 | --- | --- | --- |
-| base deb | 12,294,142 | `1d4bff7098ff7714e7509ae6b5e6a3206053758c0dd2e1fbb21da837e7b4055d` |
-| base AppImage | 122,001,912 | `7092baab8f37355dacc157b4a200a333f3b3277a2d6e654aa77a483365a1a784` |
-| aligner deb | 83,766,694 | `f62212b59c41f524d80858b5bc1a2a42c8c62e016dbda519d6d85bdf0b98942a` |
-| aligner AppImage | 193,931,768 | `8434a9476eda9f13561a3205734454ed7a186003ae23ed1228f4c7ac4022ebe8` |
+| base deb | 12,309,544 | `f25dfd6de8cf98d220bb332004a3a40287e70890b3592097c3a6448d8dc586ec` |
+| base AppImage | 72,739,320 | `8ec280f83715b6021121bd539700536449dd02d7356242e182e22b492c466457` |
+| aligner deb | 83,781,498 | `158c079b80546fc956805dfcba6483d5d2b963a4fd2e79efcf5a8ef7d96465af` |
+| aligner AppImage | 144,669,176 | `95581a7aa6c409cba8a9de7ec74c34658e5eaa25154afb20ce0604d56d600e56` |
+
+The AppImages are ~49 MiB / ~40 MiB smaller than the 2026-10-12 builds because
+those were **not** finalized: they bundled this machine's
+`libwebkit2gtk-4.1`/`libjavascriptcoregtk-4.1`, whose helper-process paths are
+baked in, which is exactly the K-59-follow defect that SIGABRTs a borrowed
+AppImage on another machine. They are superseded, and nothing built from before
+the lexicon repair should be handed out: the published `ja-jp-reference-0.3.0`
+archive is now refused by the install gate (561 lexicon errors), so the alpha's
+packs ship as 0.4.0.
 
 Verified in the shipped payload, not just on disk: the binary inside the base deb
-carries the stamped identity (`0.4.0-alpha.1` and commit `44a42c6`) that
+carries the stamped identity (`0.4.0-alpha.1` and commit `70ec683`) that
 `build_identity` reports, which is what lets a runtime report bind to a build
 (ADR-0015). The aligner deb unpacks the sidecar under
 `usr/lib/open-language-learning-platform/aligner/linux-x64/` (`bin/whisper-cli`,
-`libwhisper.so.1`, three `libggml*` libraries, `model/ggml-tiny.bin`,
-`SIDECAR.yaml`) plus `aligner/LICENSE.whisper-cpp.txt`.
+`libwhisper.so.1`, four `libggml*`/`libgomp` libraries, `model/ggml-tiny.bin`,
+`SIDECAR.yaml`) plus `aligner/LICENSE.whisper-cpp.txt`, and the base deb unpacks
+no aligner path at all.
+
+Gates on the exact built tree: `cargo test --workspace --exclude lts-desktop`
+249/0, `cargo test -p lts-desktop` 124/0, clippy `--workspace --all-targets
+and eslint/prettier clean, `validate`/`lint`/`test`/`audit-curriculum`/
+`audit-lexicon`/`audit-licenses` all 0 errors 0 warnings for both packs, python
+tool suites 37 + 20 OK, `tools/validate_handoff.py` PASSED (1,905 data files),
+gitleaks clean over the full history. `--release-readiness` still fails honestly
+and on purpose: both packs are `experimental/unreviewed` and
+`examples/minimal-language-pack` is a manifest-only fixture.
 
 Nothing here is signed, and tagging/uploading is an owner action. The hashes above
 are the values to publish; a superseded build invalidates them per the paragraph
