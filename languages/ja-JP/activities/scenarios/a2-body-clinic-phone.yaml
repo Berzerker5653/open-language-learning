@@ -1,0 +1,47 @@
+# ai-assisted draft scenario (JA-A2-001); wording pending qualified review.
+id: ja.scenario.a2.body.clinic-phone
+goal_id: ja.goal.a2.health-body
+title: "Calling to make a doctor appointment"
+situation: ja.situation.clinic
+register: ja.register.polite-neutral
+nodes:
+- id: ja.scenario.a2.body.clinic-phone.open
+  prompt: "You feel sick. Call the clinic and say you want an appointment."
+  expected_actions:
+  - state-appoint-request
+  next:
+  - ja.scenario.a2.body.clinic-phone.symptom
+  recovery:
+  - id: ja.scenario.a2.body.clinic-phone.repair-repeat
+    prompt: "The receptionist asked something you missed. Ask them to repeat."
+    expected_actions:
+    - ask-repeat
+    to: ja.scenario.a2.body.clinic-phone.open
+- id: ja.scenario.a2.body.clinic-phone.symptom
+  prompt: "Answer briefly about your fever and cough, and ask for a morning slot."
+  expected_actions:
+  - state-symptom
+  - ask-slot
+  next:
+  - ja.scenario.a2.body.clinic-phone.close
+- id: ja.scenario.a2.body.clinic-phone.close
+  prompt: "Confirm the time and ask them to note any change you need."
+  expected_actions:
+  - confirm-time
+  - request-change
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Model response in Japanese script with romaji scaffold
+- support_level: 5
+  description: Full suggested wording including a first-language gloss
+transfer_variants_required: 2
+transfer_variants:
+- id: ja.scenario.a2.body.clinic-phone.dental-emergency
+  description: "Calling a dentist about a toothache today instead"
+  changed_variable: "symptom and urgency"
+- id: ja.scenario.a2.body.clinic-phone.friend-calls
+  description: "Your friend makes the call for you"
+  changed_variable: "support speaker"

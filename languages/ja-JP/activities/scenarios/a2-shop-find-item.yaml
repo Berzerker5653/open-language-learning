@@ -1,0 +1,47 @@
+# ai-assisted draft scenario (JA-A2-001); wording pending qualified review.
+id: ja.scenario.a2.shop.find-item
+goal_id: ja.goal.a2.shopping-services
+title: "Finding something in a department store"
+situation: ja.situation.shopping
+register: ja.register.polite-neutral
+nodes:
+- id: ja.scenario.a2.shop.find-item.open
+  prompt: "You want a birthday gift but cannot find it. Politely get a clerk's attention and ask where the CD corner is."
+  expected_actions:
+  - get-attention
+  - ask-location
+  next:
+  - ja.scenario.a2.shop.find-item.confirm
+  recovery:
+  - id: ja.scenario.a2.shop.find-item.repair-repeat
+    prompt: "You did not catch the answer. Politely ask the clerk to repeat it."
+    expected_actions:
+    - ask-repeat
+    to: ja.scenario.a2.shop.find-item.open
+- id: ja.scenario.a2.shop.find-item.confirm
+  prompt: "The clerk mentions the basement and the escalator. Confirm where the escalator is."
+  expected_actions:
+  - ask-location
+  - confirm-location
+  next:
+  - ja.scenario.a2.shop.find-item.choose
+- id: ja.scenario.a2.shop.find-item.choose
+  prompt: "At the corner you must decide. Say what kind of gift you want and pick one."
+  expected_actions:
+  - state-choice
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Model response in Japanese script with romaji scaffold
+- support_level: 5
+  description: Full suggested wording including a first-language gloss
+transfer_variants_required: 2
+transfer_variants:
+- id: ja.scenario.a2.shop.find-item.bookstore
+  description: "Looking for a specific book in a bookstore"
+  changed_variable: "goods and shop"
+- id: ja.scenario.a2.shop.find-item.gift-for-teacher
+  description: "Buying a thank-you gift for a teacher, with a classmate"
+  changed_variable: "gift target and companion"

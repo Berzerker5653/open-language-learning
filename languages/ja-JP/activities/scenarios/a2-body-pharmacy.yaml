@@ -1,0 +1,48 @@
+# ai-assisted draft scenario (JA-A2-001); wording pending qualified review.
+id: ja.scenario.a2.body.pharmacy
+goal_id: ja.goal.a2.health-body
+title: "At the pharmacy counter"
+situation: ja.situation.pharmacy
+register: ja.register.polite-neutral
+nodes:
+- id: ja.scenario.a2.body.pharmacy.open
+  prompt: "You have a cold. At the pharmacy, say you are looking for cold medicine."
+  expected_actions:
+  - state-need
+  next:
+  - ja.scenario.a2.body.pharmacy.symptom
+  recovery:
+  - id: ja.scenario.a2.body.pharmacy.repair-repeat
+    prompt: "The pharmacist's question was hard. Politely ask them to repeat it."
+    expected_actions:
+    - ask-repeat
+    to: ja.scenario.a2.body.pharmacy.open
+- id: ja.scenario.a2.body.pharmacy.symptom
+  prompt: "Describe your fever and cough, and ask how to take it."
+  expected_actions:
+  - state-symptom
+  - ask-dose
+  next:
+  - ja.scenario.a2.body.pharmacy.question
+- id: ja.scenario.a2.body.pharmacy.question
+  prompt: "Ask about side effects and price, then buy and close."
+  expected_actions:
+  - ask-safety
+  - ask-price
+  - say-thanks
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Model response in Japanese script with romaji scaffold
+- support_level: 5
+  description: Full suggested wording including a first-language gloss
+transfer_variants_required: 2
+transfer_variants:
+- id: ja.scenario.a2.body.pharmacy.child-dose
+  description: "Buying medicine for your young sister"
+  changed_variable: "patient changed"
+- id: ja.scenario.a2.body.pharmacy.stomach
+  description: "Asking for stomach medicine after eating out"
+  changed_variable: "symptom set"

@@ -1,0 +1,251 @@
+# ai-assisted draft unit (JA-A2-001 A2 food-reserve-phone); content refs are pack data; qualified review pending.
+id: ja.unit.food-reserve-phone
+goal_id: ja.goal.a2.food-cooking
+title: "Reserving a table by phone"
+summary: "Calling a restaurant: party size, time, name, confirmation."
+estimated_minutes: 8
+generation_contract:
+  allowed_vocab:
+  - ja.lex.food2.ninzuu
+  - ja.lex.food2.nanmei
+  - ja.lex.food2.seki
+  - ja.lex.food2.aku
+  - ja.lex.food2.tenmei
+  - ja.lex.food2.ekimae
+  - ja.lex.food2.yoru
+  - ja.lex.food2.izakaya
+  - ja.lex.admin.yoyaku
+  - ja.lex.admin2.henkou
+  - ja.lex.communication.denwaban-go
+  - ja.lex.admin.kakunin
+  - ja.sent.a2.reserve.phone-reserve
+  - ja.sent.a2.reserve.clerk-store-name
+  - ja.sent.a2.reserve.how-many-people
+  - ja.sent.a2.reserve.four-at-seven
+  - ja.sent.a2.reserve.clerk-name-please
+  - ja.sent.a2.reserve.name-yamada
+  - ja.sent.a2.reserve.is-it-open-tonight
+  - ja.sent.a2.reserve.seki-available
+  - ja.sent.a2.reserve.change-reservation
+  - ja.sent.a2.reserve.to-six-tomorrow
+  - ja.sent.a2.reserve.friend-plain-booked
+  - ja.sent.a2.reserve.friend-plain-see-you
+  allowed_grammar:
+  - ja.grammar.verb.polite-masu
+  - ja.grammar.verb.tai-desu
+  - ja.grammar.verb.te-form-connect
+  - ja.grammar.particle.time-ni
+  - ja.grammar.counters.general
+  - ja.grammar.time.expressions
+  - ja.grammar.particle.object-wo
+  - ja.grammar.particle.topic-wa
+  - ja.grammar.copula.polite-desu
+  - ja.grammar.politeness.register
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.food-reserve-phone-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.food2.ninzuu
+  - ja.lex.food2.nanmei
+  - ja.lex.food2.seki
+  - ja.lex.food2.aku
+  - ja.lex.food2.tenmei
+  - ja.lex.food2.ekimae
+  - ja.lex.food2.yoru
+  - ja.lex.food2.izakaya
+  - ja.lex.admin.yoyaku
+  - ja.lex.admin2.henkou
+  - ja.lex.communication.denwaban-go
+  - ja.lex.admin.kakunin
+  - ja.sent.a2.reserve.phone-reserve
+  - ja.sent.a2.reserve.phone-reserve
+  - ja.sent.a2.reserve.clerk-store-name
+  - ja.sent.a2.reserve.clerk-store-name
+  - ja.sent.a2.reserve.how-many-people
+  - ja.sent.a2.reserve.how-many-people
+  - ja.sent.a2.reserve.four-at-seven
+  - ja.sent.a2.reserve.four-at-seven
+  - ja.sent.a2.reserve.clerk-name-please
+  - ja.sent.a2.reserve.clerk-name-please
+  - ja.sent.a2.reserve.name-yamada
+  - ja.sent.a2.reserve.name-yamada
+  - ja.sent.a2.reserve.is-it-open-tonight
+  - ja.sent.a2.reserve.is-it-open-tonight
+  - ja.sent.a2.reserve.seki-available
+  - ja.sent.a2.reserve.seki-available
+  - ja.sent.a2.reserve.change-reservation
+  - ja.sent.a2.reserve.change-reservation
+  - ja.sent.a2.reserve.to-six-tomorrow
+  - ja.sent.a2.reserve.to-six-tomorrow
+  - ja.sent.a2.reserve.friend-plain-booked
+  - ja.sent.a2.reserve.friend-plain-booked
+  - ja.sent.a2.reserve.friend-plain-see-you
+  - ja.sent.a2.reserve.friend-plain-see-you
+- id: ja.activity.food-reserve-phone-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.food2.ninzuu
+  - ja.lex.food2.nanmei
+  - ja.lex.food2.seki
+  - ja.lex.food2.aku
+  - ja.lex.food2.tenmei
+  - ja.lex.food2.ekimae
+  - ja.lex.food2.yoru
+  - ja.lex.food2.izakaya
+  - ja.lex.admin.yoyaku
+  - ja.lex.admin2.henkou
+  - ja.lex.communication.denwaban-go
+  - ja.lex.admin.kakunin
+  - ja.sent.a2.reserve.phone-reserve
+  - ja.sent.a2.reserve.clerk-store-name
+  - ja.sent.a2.reserve.how-many-people
+  - ja.sent.a2.reserve.four-at-seven
+  - ja.sent.a2.reserve.clerk-name-please
+  - ja.sent.a2.reserve.name-yamada
+  - ja.sent.a2.reserve.is-it-open-tonight
+  - ja.sent.a2.reserve.seki-available
+  - ja.sent.a2.reserve.change-reservation
+  - ja.sent.a2.reserve.to-six-tomorrow
+  - ja.sent.a2.reserve.friend-plain-booked
+  - ja.sent.a2.reserve.friend-plain-see-you
+- id: ja.activity.food-reserve-phone-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.food2.ninzuu
+  - ja.lex.food2.nanmei
+  - ja.lex.food2.seki
+  - ja.lex.food2.aku
+  - ja.lex.food2.tenmei
+  - ja.lex.food2.ekimae
+  - ja.lex.food2.yoru
+  - ja.lex.food2.izakaya
+  - ja.lex.admin.yoyaku
+  - ja.lex.admin2.henkou
+  - ja.lex.communication.denwaban-go
+  - ja.lex.admin.kakunin
+  - ja.sent.a2.reserve.phone-reserve
+  - ja.sent.a2.reserve.clerk-store-name
+  - ja.sent.a2.reserve.how-many-people
+  - ja.sent.a2.reserve.four-at-seven
+  - ja.sent.a2.reserve.clerk-name-please
+  - ja.sent.a2.reserve.name-yamada
+  - ja.sent.a2.reserve.is-it-open-tonight
+  - ja.sent.a2.reserve.seki-available
+  - ja.sent.a2.reserve.change-reservation
+  - ja.sent.a2.reserve.to-six-tomorrow
+  - ja.sent.a2.reserve.friend-plain-booked
+  - ja.sent.a2.reserve.friend-plain-see-you
+- id: ja.activity.food-reserve-phone-recall
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.food2.ninzuu
+  - ja.lex.food2.nanmei
+  - ja.lex.food2.seki
+  - ja.lex.food2.aku
+  - ja.lex.food2.tenmei
+  - ja.lex.food2.ekimae
+  - ja.lex.food2.yoru
+  - ja.lex.food2.izakaya
+  - ja.lex.admin.yoyaku
+  - ja.lex.admin2.henkou
+  - ja.lex.communication.denwaban-go
+  - ja.lex.admin.kakunin
+  - ja.sent.a2.reserve.phone-reserve
+  - ja.sent.a2.reserve.clerk-store-name
+  - ja.sent.a2.reserve.how-many-people
+  - ja.sent.a2.reserve.four-at-seven
+  - ja.sent.a2.reserve.clerk-name-please
+  - ja.sent.a2.reserve.name-yamada
+  - ja.sent.a2.reserve.is-it-open-tonight
+  - ja.sent.a2.reserve.seki-available
+  - ja.sent.a2.reserve.change-reservation
+  - ja.sent.a2.reserve.to-six-tomorrow
+  - ja.sent.a2.reserve.friend-plain-booked
+  - ja.sent.a2.reserve.friend-plain-see-you
+- id: ja.activity.food-reserve-phone-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.reserve.phone-reserve
+- id: ja.activity.food-reserve-phone-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.reserve.clerk-store-name
+- id: ja.activity.food-reserve-phone-cloze2
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.reserve.how-many-people
+- id: ja.activity.food-reserve-phone-cloze3
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.reserve.four-at-seven
+- id: ja.activity.food-reserve-phone-cloze4
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.reserve.clerk-name-please
+- id: ja.activity.food-reserve-phone-cloze5
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.reserve.name-yamada
+- id: ja.activity.food-reserve-phone-cloze6
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.reserve.is-it-open-tonight
+- id: ja.activity.food-reserve-phone-cloze7
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.reserve.seki-available
+- id: ja.activity.food-reserve-phone-cloze8
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.reserve.change-reservation
+- id: ja.activity.food-reserve-phone-cloze9
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.reserve.to-six-tomorrow
+- id: ja.activity.food-reserve-phone-cloze10
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.reserve.friend-plain-booked
+- id: ja.activity.food-reserve-phone-cloze11
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.reserve.friend-plain-see-you
+- id: ja.activity.food-reserve-phone-scenario
+  type: scenario
+  modality: interaction
+  support_level: 2
+  scenario_id: ja.scenario.a2.food.reserve-phone

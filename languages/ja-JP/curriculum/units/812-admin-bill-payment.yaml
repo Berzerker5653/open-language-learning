@@ -1,0 +1,271 @@
+# ai-assisted draft unit (JA-A2-001 A2 admin-bill-payment); content refs are pack data; qualified review pending.
+id: ja.unit.admin-bill-payment
+goal_id: ja.goal.a2.daily-admin
+title: "Paying a bill"
+summary: "Paying a public-fee slip at the store counter."
+estimated_minutes: 8
+generation_contract:
+  allowed_vocab:
+  - ja.lex.admin2.tesuuryou
+  - ja.lex.admin2.shimekiri
+  - ja.lex.admin2.kingaku
+  - ja.lex.admin2.seikyuusho
+  - ja.lex.admin2.nauhousho
+  - ja.lex.admin2.kouhouryoukin
+  - ja.lex.admin2.genkin
+  - ja.lex.admin2.kurejito
+  - ja.lex.admin2.harau
+  - ja.lex.admin2.harai-komi
+  - ja.lex.admin2.denki
+  - ja.lex.admin2.hatsuka
+  - ja.lex.shopping2.ryoushuusho
+  - ja.lex.admin.kakunin
+  - ja.lex.questions2.mou
+  - ja.lex.questions.itsu
+  - ja.sent.a2.pay.pay-here-possible
+  - ja.sent.a2.pay.clerk-cash-or-card
+  - ja.sent.a2.pay.want-to-pay-fee
+  - ja.sent.a2.pay.clerk-fee-applies
+  - ja.sent.a2.pay.clerk-check-amount
+  - ja.sent.a2.pay.card-possible
+  - ja.sent.a2.pay.want-receipt
+  - ja.sent.a2.pay.clerk-here-receipt
+  - ja.sent.a2.pay.when-deadline
+  - ja.sent.a2.pay.must-by-20th
+  - ja.sent.a2.pay.friend-paid-yet
+  - ja.sent.a2.pay.friend-pay-now
+  allowed_grammar:
+  - ja.grammar.verb.polite-masu
+  - ja.grammar.verb.tai-desu
+  - ja.grammar.verb.kanoukei-intro
+  - ja.grammar.verb.nakereba-naranai
+  - ja.grammar.verb.te-form-connect
+  - ja.grammar.particle.object-wo
+  - ja.grammar.particle.de-means
+  - ja.grammar.particle.topic-wa
+  - ja.grammar.time.expressions
+  - ja.grammar.copula.polite-desu
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.admin-bill-payment-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.admin2.tesuuryou
+  - ja.lex.admin2.shimekiri
+  - ja.lex.admin2.kingaku
+  - ja.lex.admin2.seikyuusho
+  - ja.lex.admin2.nauhousho
+  - ja.lex.admin2.kouhouryoukin
+  - ja.lex.admin2.genkin
+  - ja.lex.admin2.kurejito
+  - ja.lex.admin2.harau
+  - ja.lex.admin2.harai-komi
+  - ja.lex.admin2.denki
+  - ja.lex.admin2.hatsuka
+  - ja.lex.shopping2.ryoushuusho
+  - ja.lex.admin.kakunin
+  - ja.lex.questions2.mou
+  - ja.lex.questions.itsu
+  - ja.sent.a2.pay.pay-here-possible
+  - ja.sent.a2.pay.pay-here-possible
+  - ja.sent.a2.pay.clerk-cash-or-card
+  - ja.sent.a2.pay.clerk-cash-or-card
+  - ja.sent.a2.pay.want-to-pay-fee
+  - ja.sent.a2.pay.want-to-pay-fee
+  - ja.sent.a2.pay.clerk-fee-applies
+  - ja.sent.a2.pay.clerk-fee-applies
+  - ja.sent.a2.pay.clerk-check-amount
+  - ja.sent.a2.pay.clerk-check-amount
+  - ja.sent.a2.pay.card-possible
+  - ja.sent.a2.pay.card-possible
+  - ja.sent.a2.pay.want-receipt
+  - ja.sent.a2.pay.want-receipt
+  - ja.sent.a2.pay.clerk-here-receipt
+  - ja.sent.a2.pay.clerk-here-receipt
+  - ja.sent.a2.pay.when-deadline
+  - ja.sent.a2.pay.when-deadline
+  - ja.sent.a2.pay.must-by-20th
+  - ja.sent.a2.pay.must-by-20th
+  - ja.sent.a2.pay.friend-paid-yet
+  - ja.sent.a2.pay.friend-paid-yet
+  - ja.sent.a2.pay.friend-pay-now
+  - ja.sent.a2.pay.friend-pay-now
+- id: ja.activity.admin-bill-payment-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.admin2.tesuuryou
+  - ja.lex.admin2.shimekiri
+  - ja.lex.admin2.kingaku
+  - ja.lex.admin2.seikyuusho
+  - ja.lex.admin2.nauhousho
+  - ja.lex.admin2.kouhouryoukin
+  - ja.lex.admin2.genkin
+  - ja.lex.admin2.kurejito
+  - ja.lex.admin2.harau
+  - ja.lex.admin2.harai-komi
+  - ja.lex.admin2.denki
+  - ja.lex.admin2.hatsuka
+  - ja.lex.shopping2.ryoushuusho
+  - ja.lex.admin.kakunin
+  - ja.lex.questions2.mou
+  - ja.lex.questions.itsu
+  - ja.sent.a2.pay.pay-here-possible
+  - ja.sent.a2.pay.clerk-cash-or-card
+  - ja.sent.a2.pay.want-to-pay-fee
+  - ja.sent.a2.pay.clerk-fee-applies
+  - ja.sent.a2.pay.clerk-check-amount
+  - ja.sent.a2.pay.card-possible
+  - ja.sent.a2.pay.want-receipt
+  - ja.sent.a2.pay.clerk-here-receipt
+  - ja.sent.a2.pay.when-deadline
+  - ja.sent.a2.pay.must-by-20th
+  - ja.sent.a2.pay.friend-paid-yet
+  - ja.sent.a2.pay.friend-pay-now
+- id: ja.activity.admin-bill-payment-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.admin2.tesuuryou
+  - ja.lex.admin2.shimekiri
+  - ja.lex.admin2.kingaku
+  - ja.lex.admin2.seikyuusho
+  - ja.lex.admin2.nauhousho
+  - ja.lex.admin2.kouhouryoukin
+  - ja.lex.admin2.genkin
+  - ja.lex.admin2.kurejito
+  - ja.lex.admin2.harau
+  - ja.lex.admin2.harai-komi
+  - ja.lex.admin2.denki
+  - ja.lex.admin2.hatsuka
+  - ja.lex.shopping2.ryoushuusho
+  - ja.lex.admin.kakunin
+  - ja.lex.questions2.mou
+  - ja.lex.questions.itsu
+  - ja.sent.a2.pay.pay-here-possible
+  - ja.sent.a2.pay.clerk-cash-or-card
+  - ja.sent.a2.pay.want-to-pay-fee
+  - ja.sent.a2.pay.clerk-fee-applies
+  - ja.sent.a2.pay.clerk-check-amount
+  - ja.sent.a2.pay.card-possible
+  - ja.sent.a2.pay.want-receipt
+  - ja.sent.a2.pay.clerk-here-receipt
+  - ja.sent.a2.pay.when-deadline
+  - ja.sent.a2.pay.must-by-20th
+  - ja.sent.a2.pay.friend-paid-yet
+  - ja.sent.a2.pay.friend-pay-now
+- id: ja.activity.admin-bill-payment-recall
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.admin2.tesuuryou
+  - ja.lex.admin2.shimekiri
+  - ja.lex.admin2.kingaku
+  - ja.lex.admin2.seikyuusho
+  - ja.lex.admin2.nauhousho
+  - ja.lex.admin2.kouhouryoukin
+  - ja.lex.admin2.genkin
+  - ja.lex.admin2.kurejito
+  - ja.lex.admin2.harau
+  - ja.lex.admin2.harai-komi
+  - ja.lex.admin2.denki
+  - ja.lex.admin2.hatsuka
+  - ja.lex.shopping2.ryoushuusho
+  - ja.lex.admin.kakunin
+  - ja.lex.questions2.mou
+  - ja.lex.questions.itsu
+  - ja.sent.a2.pay.pay-here-possible
+  - ja.sent.a2.pay.clerk-cash-or-card
+  - ja.sent.a2.pay.want-to-pay-fee
+  - ja.sent.a2.pay.clerk-fee-applies
+  - ja.sent.a2.pay.clerk-check-amount
+  - ja.sent.a2.pay.card-possible
+  - ja.sent.a2.pay.want-receipt
+  - ja.sent.a2.pay.clerk-here-receipt
+  - ja.sent.a2.pay.when-deadline
+  - ja.sent.a2.pay.must-by-20th
+  - ja.sent.a2.pay.friend-paid-yet
+  - ja.sent.a2.pay.friend-pay-now
+- id: ja.activity.admin-bill-payment-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pay.pay-here-possible
+- id: ja.activity.admin-bill-payment-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pay.clerk-cash-or-card
+- id: ja.activity.admin-bill-payment-cloze2
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pay.want-to-pay-fee
+- id: ja.activity.admin-bill-payment-cloze3
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pay.clerk-fee-applies
+- id: ja.activity.admin-bill-payment-cloze4
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pay.clerk-check-amount
+- id: ja.activity.admin-bill-payment-cloze5
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pay.card-possible
+- id: ja.activity.admin-bill-payment-cloze6
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pay.want-receipt
+- id: ja.activity.admin-bill-payment-cloze7
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pay.clerk-here-receipt
+- id: ja.activity.admin-bill-payment-cloze8
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pay.when-deadline
+- id: ja.activity.admin-bill-payment-cloze9
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pay.must-by-20th
+- id: ja.activity.admin-bill-payment-cloze10
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pay.friend-paid-yet
+- id: ja.activity.admin-bill-payment-cloze11
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pay.friend-pay-now
+- id: ja.activity.admin-bill-payment-scenario
+  type: scenario
+  modality: interaction
+  support_level: 2
+  scenario_id: ja.scenario.a2.admin.bill-payment

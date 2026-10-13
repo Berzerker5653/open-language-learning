@@ -1,0 +1,48 @@
+# ai-assisted draft scenario (JA-A2-001); wording pending qualified review.
+id: ja.scenario.a2.comm.answer-phone
+goal_id: ja.goal.a2.communication
+title: "Answering and taking a message"
+situation: ja.situation.phone-call
+register: ja.register.polite-neutral
+nodes:
+- id: ja.scenario.a2.comm.answer-phone.open
+  prompt: "The phone rings. Answer and give your name."
+  expected_actions:
+  - answer-phone
+  - identify-self
+  next:
+  - ja.scenario.a2.comm.answer-phone.caller
+  recovery:
+  - id: ja.scenario.a2.comm.answer-phone.repair-repeat
+    prompt: "The caller is unclear. Politely ask them to repeat their name."
+    expected_actions:
+    - ask-repeat
+    to: ja.scenario.a2.comm.answer-phone.open
+- id: ja.scenario.a2.comm.answer-phone.caller
+  prompt: "The caller asks if your roommate is there. Say yes or no and offer help."
+  expected_actions:
+  - confirm-presence
+  - offer-help
+  next:
+  - ja.scenario.a2.comm.answer-phone.message
+- id: ja.scenario.a2.comm.answer-phone.message
+  prompt: "Take the message and say you will pass it on."
+  expected_actions:
+  - take-message
+  - promise-pass
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Model response in Japanese script with romaji scaffold
+- support_level: 5
+  description: Full suggested wording including a first-language gloss
+transfer_variants_required: 2
+transfer_variants:
+- id: ja.scenario.a2.comm.answer-phone.voicemail-call
+  description: "Hearing a voicemail greeting and leaving a message"
+  changed_variable: "channel"
+- id: ja.scenario.a2.comm.answer-phone.doctor-calls
+  description: "Your clinic calls you back about an appointment"
+  changed_variable: "caller identity"

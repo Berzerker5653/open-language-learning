@@ -1,0 +1,255 @@
+# ai-assisted draft unit (JA-A2-001 A2 comm-answer-phone); content refs are pack data; qualified review pending.
+id: ja.unit.comm-answer-phone
+goal_id: ja.goal.a2.communication
+title: "Answering the phone"
+summary: "Answering, identifying the caller, taking a message, calling back."
+estimated_minutes: 8
+generation_contract:
+  allowed_vocab:
+  - ja.lex.communication2.moshi-moshi
+  - ja.lex.communication2.dengon
+  - ja.lex.communication2.orikaesu
+  - ja.lex.communication2.machigai-denwa
+  - ja.lex.communication2.rusuban-denwa
+  - ja.lex.communication2.mou-ichido
+  - ja.lex.communication2.tsutaeru
+  - ja.lex.communication2.wakarimashita
+  - ja.lex.objects.denwa
+  - ja.lex.communication.denwaban-go
+  - ja.lex.communication.renraku
+  - ja.lex.health4.deru
+  - ja.lex.questions2.mou
+  - ja.sent.a2.phone.answer-self
+  - ja.sent.a2.phone.caller-is-there
+  - ja.sent.a2.phone.one-moment
+  - ja.sent.a2.phone.not-home-now
+  - ja.sent.a2.phone.call-was-from
+  - ja.sent.a2.phone.message-please
+  - ja.sent.a2.phone.will-call-back
+  - ja.sent.a2.phone.calling-back
+  - ja.sent.a2.phone.wrong-number
+  - ja.sent.a2.phone.voicemail-gone
+  - ja.sent.a2.phone.friend-plain-call
+  - ja.sent.a2.phone.friend-plain-again
+  allowed_grammar:
+  - ja.grammar.verb.polite-masu
+  - ja.grammar.copula.polite-desu
+  - ja.grammar.particle.question-ka
+  - ja.grammar.range.kara-made
+  - ja.grammar.particle.object-wo
+  - ja.grammar.verb.te-form-connect
+  - ja.grammar.particle.time-ni
+  - ja.grammar.politeness.register
+  - ja.grammar.particle.addition-mo
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.comm-answer-phone-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.communication2.moshi-moshi
+  - ja.lex.communication2.dengon
+  - ja.lex.communication2.orikaesu
+  - ja.lex.communication2.machigai-denwa
+  - ja.lex.communication2.rusuban-denwa
+  - ja.lex.communication2.mou-ichido
+  - ja.lex.communication2.tsutaeru
+  - ja.lex.communication2.wakarimashita
+  - ja.lex.objects.denwa
+  - ja.lex.communication.denwaban-go
+  - ja.lex.communication.renraku
+  - ja.lex.health4.deru
+  - ja.lex.questions2.mou
+  - ja.sent.a2.phone.answer-self
+  - ja.sent.a2.phone.answer-self
+  - ja.sent.a2.phone.caller-is-there
+  - ja.sent.a2.phone.caller-is-there
+  - ja.sent.a2.phone.one-moment
+  - ja.sent.a2.phone.one-moment
+  - ja.sent.a2.phone.not-home-now
+  - ja.sent.a2.phone.not-home-now
+  - ja.sent.a2.phone.call-was-from
+  - ja.sent.a2.phone.call-was-from
+  - ja.sent.a2.phone.message-please
+  - ja.sent.a2.phone.message-please
+  - ja.sent.a2.phone.will-call-back
+  - ja.sent.a2.phone.will-call-back
+  - ja.sent.a2.phone.calling-back
+  - ja.sent.a2.phone.calling-back
+  - ja.sent.a2.phone.wrong-number
+  - ja.sent.a2.phone.wrong-number
+  - ja.sent.a2.phone.voicemail-gone
+  - ja.sent.a2.phone.voicemail-gone
+  - ja.sent.a2.phone.friend-plain-call
+  - ja.sent.a2.phone.friend-plain-call
+  - ja.sent.a2.phone.friend-plain-again
+  - ja.sent.a2.phone.friend-plain-again
+- id: ja.activity.comm-answer-phone-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.communication2.moshi-moshi
+  - ja.lex.communication2.dengon
+  - ja.lex.communication2.orikaesu
+  - ja.lex.communication2.machigai-denwa
+  - ja.lex.communication2.rusuban-denwa
+  - ja.lex.communication2.mou-ichido
+  - ja.lex.communication2.tsutaeru
+  - ja.lex.communication2.wakarimashita
+  - ja.lex.objects.denwa
+  - ja.lex.communication.denwaban-go
+  - ja.lex.communication.renraku
+  - ja.lex.health4.deru
+  - ja.lex.questions2.mou
+  - ja.sent.a2.phone.answer-self
+  - ja.sent.a2.phone.caller-is-there
+  - ja.sent.a2.phone.one-moment
+  - ja.sent.a2.phone.not-home-now
+  - ja.sent.a2.phone.call-was-from
+  - ja.sent.a2.phone.message-please
+  - ja.sent.a2.phone.will-call-back
+  - ja.sent.a2.phone.calling-back
+  - ja.sent.a2.phone.wrong-number
+  - ja.sent.a2.phone.voicemail-gone
+  - ja.sent.a2.phone.friend-plain-call
+  - ja.sent.a2.phone.friend-plain-again
+- id: ja.activity.comm-answer-phone-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.communication2.moshi-moshi
+  - ja.lex.communication2.dengon
+  - ja.lex.communication2.orikaesu
+  - ja.lex.communication2.machigai-denwa
+  - ja.lex.communication2.rusuban-denwa
+  - ja.lex.communication2.mou-ichido
+  - ja.lex.communication2.tsutaeru
+  - ja.lex.communication2.wakarimashita
+  - ja.lex.objects.denwa
+  - ja.lex.communication.denwaban-go
+  - ja.lex.communication.renraku
+  - ja.lex.health4.deru
+  - ja.lex.questions2.mou
+  - ja.sent.a2.phone.answer-self
+  - ja.sent.a2.phone.caller-is-there
+  - ja.sent.a2.phone.one-moment
+  - ja.sent.a2.phone.not-home-now
+  - ja.sent.a2.phone.call-was-from
+  - ja.sent.a2.phone.message-please
+  - ja.sent.a2.phone.will-call-back
+  - ja.sent.a2.phone.calling-back
+  - ja.sent.a2.phone.wrong-number
+  - ja.sent.a2.phone.voicemail-gone
+  - ja.sent.a2.phone.friend-plain-call
+  - ja.sent.a2.phone.friend-plain-again
+- id: ja.activity.comm-answer-phone-recall
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.communication2.moshi-moshi
+  - ja.lex.communication2.dengon
+  - ja.lex.communication2.orikaesu
+  - ja.lex.communication2.machigai-denwa
+  - ja.lex.communication2.rusuban-denwa
+  - ja.lex.communication2.mou-ichido
+  - ja.lex.communication2.tsutaeru
+  - ja.lex.communication2.wakarimashita
+  - ja.lex.objects.denwa
+  - ja.lex.communication.denwaban-go
+  - ja.lex.communication.renraku
+  - ja.lex.health4.deru
+  - ja.lex.questions2.mou
+  - ja.sent.a2.phone.answer-self
+  - ja.sent.a2.phone.caller-is-there
+  - ja.sent.a2.phone.one-moment
+  - ja.sent.a2.phone.not-home-now
+  - ja.sent.a2.phone.call-was-from
+  - ja.sent.a2.phone.message-please
+  - ja.sent.a2.phone.will-call-back
+  - ja.sent.a2.phone.calling-back
+  - ja.sent.a2.phone.wrong-number
+  - ja.sent.a2.phone.voicemail-gone
+  - ja.sent.a2.phone.friend-plain-call
+  - ja.sent.a2.phone.friend-plain-again
+- id: ja.activity.comm-answer-phone-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.phone.answer-self
+- id: ja.activity.comm-answer-phone-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.phone.caller-is-there
+- id: ja.activity.comm-answer-phone-cloze2
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.phone.one-moment
+- id: ja.activity.comm-answer-phone-cloze3
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.phone.not-home-now
+- id: ja.activity.comm-answer-phone-cloze4
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.phone.call-was-from
+- id: ja.activity.comm-answer-phone-cloze5
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.phone.message-please
+- id: ja.activity.comm-answer-phone-cloze6
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.phone.will-call-back
+- id: ja.activity.comm-answer-phone-cloze7
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.phone.calling-back
+- id: ja.activity.comm-answer-phone-cloze8
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.phone.wrong-number
+- id: ja.activity.comm-answer-phone-cloze9
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.phone.voicemail-gone
+- id: ja.activity.comm-answer-phone-cloze10
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.phone.friend-plain-call
+- id: ja.activity.comm-answer-phone-cloze11
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.phone.friend-plain-again
+- id: ja.activity.comm-answer-phone-scenario
+  type: scenario
+  modality: interaction
+  support_level: 2
+  scenario_id: ja.scenario.a2.comm.answer-phone

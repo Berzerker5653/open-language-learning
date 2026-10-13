@@ -1,0 +1,48 @@
+# ai-assisted draft scenario (JA-A2-001); wording pending qualified review.
+id: ja.scenario.a2.food.cafe-counter
+goal_id: ja.goal.a2.food-cooking
+title: "Ordering at the cafe counter"
+situation: ja.situation.restaurant
+register: ja.register.polite-neutral
+nodes:
+- id: ja.scenario.a2.food.cafe-counter.open
+  prompt: "At the counter, greet the order and say what you want."
+  expected_actions:
+  - state-order
+  next:
+  - ja.scenario.a2.food.cafe-counter.detail
+  recovery:
+  - id: ja.scenario.a2.food.cafe-counter.repair-slower
+    prompt: "The clerk speaks quickly. Politely ask them to speak slowly."
+    expected_actions:
+    - ask-slowly
+    to: ja.scenario.a2.food.cafe-counter.open
+- id: ja.scenario.a2.food.cafe-counter.detail
+  prompt: "The clerk asks hot or iced and about strength. Choose, and change if needed."
+  expected_actions:
+  - choose-style
+  - modify-order
+  next:
+  - ja.scenario.a2.food.cafe-counter.pay
+- id: ja.scenario.a2.food.cafe-counter.pay
+  prompt: "Ask for the bill, pay with points, and close."
+  expected_actions:
+  - ask-bill
+  - pay
+  - say-thanks
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Model response in Japanese script with romaji scaffold
+- support_level: 5
+  description: Full suggested wording including a first-language gloss
+transfer_variants_required: 2
+transfer_variants:
+- id: ja.scenario.a2.food.cafe-counter.takeout-bento
+  description: "Ordering takeout at a busy bento counter"
+  changed_variable: "food and setting"
+- id: ja.scenario.a2.food.cafe-counter.with-friend
+  description: "Ordering while a friend pays first"
+  changed_variable: "who pays"

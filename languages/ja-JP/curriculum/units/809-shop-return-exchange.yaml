@@ -1,0 +1,266 @@
+# ai-assisted draft unit (JA-A2-001 A2 shop-return-exchange); content refs are pack data; qualified review pending.
+id: ja.unit.shop-return-exchange
+goal_id: ja.goal.a2.shopping-services
+title: "Returning and exchanging"
+summary: "Explaining a problem with a purchase and asking for an exchange."
+estimated_minutes: 8
+generation_contract:
+  allowed_vocab:
+  - ja.lex.shopping2.henpin
+  - ja.lex.shopping2.koukan
+  - ja.lex.shopping2.ryoushuusho
+  - ja.lex.shopping2.kizu
+  - ja.lex.shopping2.shinpin
+  - ja.lex.shopping2.torikaeru
+  - ja.lex.shopping2.moshiwake
+  - ja.lex.shopping2.modosu
+  - ja.lex.shopping2.hoshousho
+  - ja.lex.shopping2.komaru
+  - ja.lex.shopping2.kowaru
+  - ja.lex.shopping2.matsu
+  - ja.lex.shopping2.tsuika
+  - ja.lex.shopping2.haitatsu
+  - ja.lex.shopping.size
+  - ja.sent.a2.shop.want-to-return
+  - ja.sent.a2.shop.ask-exchange
+  - ja.sent.a2.shop.have-receipt
+  - ja.sent.a2.shop.clerk-problem
+  - ja.sent.a2.shop.clerk-one-moment
+  - ja.sent.a2.shop.broken-after-two-days
+  - ja.sent.a2.shop.exchange-size
+  - ja.sent.a2.shop.still-new
+  - ja.sent.a2.shop.ask-refund
+  - ja.sent.a2.shop.clerk-apology
+  - ja.sent.a2.shop.friend-casual-broke
+  - ja.sent.a2.shop.friend-exchanged-for-me
+  allowed_grammar:
+  - ja.grammar.verb.polite-masu
+  - ja.grammar.verb.tai-desu
+  - ja.grammar.verb.ageru-kureru-morau
+  - ja.grammar.verb.te-form-connect
+  - ja.grammar.particle.object-wo
+  - ja.grammar.particle.topic-wa
+  - ja.grammar.particle.question-ka
+  - ja.grammar.verb.te-ichidan
+  - ja.grammar.time.expressions
+  - ja.grammar.syntax.relative-clauses
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.shop-return-exchange-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.shopping2.henpin
+  - ja.lex.shopping2.koukan
+  - ja.lex.shopping2.ryoushuusho
+  - ja.lex.shopping2.kizu
+  - ja.lex.shopping2.shinpin
+  - ja.lex.shopping2.torikaeru
+  - ja.lex.shopping2.moshiwake
+  - ja.lex.shopping2.modosu
+  - ja.lex.shopping2.hoshousho
+  - ja.lex.shopping2.komaru
+  - ja.lex.shopping2.kowaru
+  - ja.lex.shopping2.matsu
+  - ja.lex.shopping2.tsuika
+  - ja.lex.shopping2.haitatsu
+  - ja.lex.shopping.size
+  - ja.sent.a2.shop.want-to-return
+  - ja.sent.a2.shop.want-to-return
+  - ja.sent.a2.shop.ask-exchange
+  - ja.sent.a2.shop.ask-exchange
+  - ja.sent.a2.shop.have-receipt
+  - ja.sent.a2.shop.have-receipt
+  - ja.sent.a2.shop.clerk-problem
+  - ja.sent.a2.shop.clerk-problem
+  - ja.sent.a2.shop.clerk-one-moment
+  - ja.sent.a2.shop.clerk-one-moment
+  - ja.sent.a2.shop.broken-after-two-days
+  - ja.sent.a2.shop.broken-after-two-days
+  - ja.sent.a2.shop.exchange-size
+  - ja.sent.a2.shop.exchange-size
+  - ja.sent.a2.shop.still-new
+  - ja.sent.a2.shop.still-new
+  - ja.sent.a2.shop.ask-refund
+  - ja.sent.a2.shop.ask-refund
+  - ja.sent.a2.shop.clerk-apology
+  - ja.sent.a2.shop.clerk-apology
+  - ja.sent.a2.shop.friend-casual-broke
+  - ja.sent.a2.shop.friend-casual-broke
+  - ja.sent.a2.shop.friend-exchanged-for-me
+  - ja.sent.a2.shop.friend-exchanged-for-me
+- id: ja.activity.shop-return-exchange-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.shopping2.henpin
+  - ja.lex.shopping2.koukan
+  - ja.lex.shopping2.ryoushuusho
+  - ja.lex.shopping2.kizu
+  - ja.lex.shopping2.shinpin
+  - ja.lex.shopping2.torikaeru
+  - ja.lex.shopping2.moshiwake
+  - ja.lex.shopping2.modosu
+  - ja.lex.shopping2.hoshousho
+  - ja.lex.shopping2.komaru
+  - ja.lex.shopping2.kowaru
+  - ja.lex.shopping2.matsu
+  - ja.lex.shopping2.tsuika
+  - ja.lex.shopping2.haitatsu
+  - ja.lex.shopping.size
+  - ja.sent.a2.shop.want-to-return
+  - ja.sent.a2.shop.ask-exchange
+  - ja.sent.a2.shop.have-receipt
+  - ja.sent.a2.shop.clerk-problem
+  - ja.sent.a2.shop.clerk-one-moment
+  - ja.sent.a2.shop.broken-after-two-days
+  - ja.sent.a2.shop.exchange-size
+  - ja.sent.a2.shop.still-new
+  - ja.sent.a2.shop.ask-refund
+  - ja.sent.a2.shop.clerk-apology
+  - ja.sent.a2.shop.friend-casual-broke
+  - ja.sent.a2.shop.friend-exchanged-for-me
+- id: ja.activity.shop-return-exchange-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping2.henpin
+  - ja.lex.shopping2.koukan
+  - ja.lex.shopping2.ryoushuusho
+  - ja.lex.shopping2.kizu
+  - ja.lex.shopping2.shinpin
+  - ja.lex.shopping2.torikaeru
+  - ja.lex.shopping2.moshiwake
+  - ja.lex.shopping2.modosu
+  - ja.lex.shopping2.hoshousho
+  - ja.lex.shopping2.komaru
+  - ja.lex.shopping2.kowaru
+  - ja.lex.shopping2.matsu
+  - ja.lex.shopping2.tsuika
+  - ja.lex.shopping2.haitatsu
+  - ja.lex.shopping.size
+  - ja.sent.a2.shop.want-to-return
+  - ja.sent.a2.shop.ask-exchange
+  - ja.sent.a2.shop.have-receipt
+  - ja.sent.a2.shop.clerk-problem
+  - ja.sent.a2.shop.clerk-one-moment
+  - ja.sent.a2.shop.broken-after-two-days
+  - ja.sent.a2.shop.exchange-size
+  - ja.sent.a2.shop.still-new
+  - ja.sent.a2.shop.ask-refund
+  - ja.sent.a2.shop.clerk-apology
+  - ja.sent.a2.shop.friend-casual-broke
+  - ja.sent.a2.shop.friend-exchanged-for-me
+- id: ja.activity.shop-return-exchange-recall
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.shopping2.henpin
+  - ja.lex.shopping2.koukan
+  - ja.lex.shopping2.ryoushuusho
+  - ja.lex.shopping2.kizu
+  - ja.lex.shopping2.shinpin
+  - ja.lex.shopping2.torikaeru
+  - ja.lex.shopping2.moshiwake
+  - ja.lex.shopping2.modosu
+  - ja.lex.shopping2.hoshousho
+  - ja.lex.shopping2.komaru
+  - ja.lex.shopping2.kowaru
+  - ja.lex.shopping2.matsu
+  - ja.lex.shopping2.tsuika
+  - ja.lex.shopping2.haitatsu
+  - ja.lex.shopping.size
+  - ja.sent.a2.shop.want-to-return
+  - ja.sent.a2.shop.ask-exchange
+  - ja.sent.a2.shop.have-receipt
+  - ja.sent.a2.shop.clerk-problem
+  - ja.sent.a2.shop.clerk-one-moment
+  - ja.sent.a2.shop.broken-after-two-days
+  - ja.sent.a2.shop.exchange-size
+  - ja.sent.a2.shop.still-new
+  - ja.sent.a2.shop.ask-refund
+  - ja.sent.a2.shop.clerk-apology
+  - ja.sent.a2.shop.friend-casual-broke
+  - ja.sent.a2.shop.friend-exchanged-for-me
+- id: ja.activity.shop-return-exchange-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.shop.want-to-return
+- id: ja.activity.shop-return-exchange-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.shop.ask-exchange
+- id: ja.activity.shop-return-exchange-cloze2
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.shop.have-receipt
+- id: ja.activity.shop-return-exchange-cloze3
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.shop.clerk-problem
+- id: ja.activity.shop-return-exchange-cloze4
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.shop.clerk-one-moment
+- id: ja.activity.shop-return-exchange-cloze5
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.shop.broken-after-two-days
+- id: ja.activity.shop-return-exchange-cloze6
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.shop.exchange-size
+- id: ja.activity.shop-return-exchange-cloze7
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.shop.still-new
+- id: ja.activity.shop-return-exchange-cloze8
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.shop.ask-refund
+- id: ja.activity.shop-return-exchange-cloze9
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.shop.clerk-apology
+- id: ja.activity.shop-return-exchange-cloze10
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.shop.friend-casual-broke
+- id: ja.activity.shop-return-exchange-cloze11
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.shop.friend-exchanged-for-me
+- id: ja.activity.shop-return-exchange-scenario
+  type: scenario
+  modality: interaction
+  support_level: 2
+  scenario_id: ja.scenario.a2.shop.return-exchange

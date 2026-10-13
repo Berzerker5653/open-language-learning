@@ -1,0 +1,47 @@
+# ai-assisted draft scenario (JA-A2-001); wording pending qualified review.
+id: ja.scenario.a2.admin.move-notification
+goal_id: ja.goal.a2.daily-admin
+title: "At the ward office window"
+situation: ja.situation.civic-office
+register: ja.register.polite-neutral
+nodes:
+- id: ja.scenario.a2.admin.move-notification.open
+  prompt: "You moved recently. At the window, say you want to file a moving notification."
+  expected_actions:
+  - state-purpose
+  next:
+  - ja.scenario.a2.admin.move-notification.docs
+  recovery:
+  - id: ja.scenario.a2.admin.move-notification.repair-repeat
+    prompt: "You do not know which documents. Politely ask which ones are needed."
+    expected_actions:
+    - ask-list
+    to: ja.scenario.a2.admin.move-notification.open
+- id: ja.scenario.a2.admin.move-notification.docs
+  prompt: "The clerk lists what you need. Say what you have and ask about the rest."
+  expected_actions:
+  - confirm-docs
+  - ask-requirements
+  next:
+  - ja.scenario.a2.admin.move-notification.sign
+- id: ja.scenario.a2.admin.move-notification.sign
+  prompt: "The clerk asks you to sign. Sign and ask whether a certificate is also needed."
+  expected_actions:
+  - sign-form
+  - ask-certificate
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Model response in Japanese script with romaji scaffold
+- support_level: 5
+  description: Full suggested wording including a first-language gloss
+transfer_variants_required: 2
+transfer_variants:
+- id: ja.scenario.a2.admin.move-notification.certificate-order
+  description: "Ordering three resident certificates for a new job"
+  changed_variable: "purpose and count"
+- id: ja.scenario.a2.admin.move-notification.friend-translates
+  description: "A friend helps you file the notification"
+  changed_variable: "support speaker"

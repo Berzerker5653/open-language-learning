@@ -1,0 +1,47 @@
+# ai-assisted draft scenario (JA-A2-001); wording pending qualified review.
+id: ja.scenario.a2.food.reserve-phone
+goal_id: ja.goal.a2.food-cooking
+title: "Reserving by telephone"
+situation: ja.situation.phone-call
+register: ja.register.polite-neutral
+nodes:
+- id: ja.scenario.a2.food.reserve-phone.open
+  prompt: "Call the restaurant. Say you want to make a reservation."
+  expected_actions:
+  - state-reserve-request
+  next:
+  - ja.scenario.a2.food.reserve-phone.details
+  recovery:
+  - id: ja.scenario.a2.food.reserve-phone.repair-repeat
+    prompt: "You missed the clerk's question. Politely ask them to repeat."
+    expected_actions:
+    - ask-repeat
+    to: ja.scenario.a2.food.reserve-phone.open
+- id: ja.scenario.a2.food.reserve-phone.details
+  prompt: "Give the party size and the time."
+  expected_actions:
+  - state-size
+  - state-time
+  next:
+  - ja.scenario.a2.food.reserve-phone.name
+- id: ja.scenario.a2.food.reserve-phone.name
+  prompt: "Give your name and ask for confirmation."
+  expected_actions:
+  - state-name
+  - confirm-booking
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Model response in Japanese script with romaji scaffold
+- support_level: 5
+  description: Full suggested wording including a first-language gloss
+transfer_variants_required: 2
+transfer_variants:
+- id: ja.scenario.a2.food.reserve-phone.izakaya-later
+  description: "Reserving for six people on a busy Saturday"
+  changed_variable: "size and day"
+- id: ja.scenario.a2.food.reserve-phone.cancel-call
+  description: "Calling to cancel yesterday's reservation instead"
+  changed_variable: "intent changed"

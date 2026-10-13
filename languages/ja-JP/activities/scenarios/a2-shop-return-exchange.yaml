@@ -1,0 +1,47 @@
+# ai-assisted draft scenario (JA-A2-001); wording pending qualified review.
+id: ja.scenario.a2.shop.return-exchange
+goal_id: ja.goal.a2.shopping-services
+title: "Exchanging something at the counter"
+situation: ja.situation.shopping
+register: ja.register.polite-neutral
+nodes:
+- id: ja.scenario.a2.shop.return-exchange.open
+  prompt: "You bought something but it has a scratch. Tell the clerk you want to exchange it."
+  expected_actions:
+  - state-problem
+  - ask-exchange
+  next:
+  - ja.scenario.a2.shop.return-exchange.receipt
+  recovery:
+  - id: ja.scenario.a2.shop.return-exchange.repair-repeat
+    prompt: "You cannot explain the problem well. Politely ask the clerk to repeat the question first."
+    expected_actions:
+    - ask-repeat
+    to: ja.scenario.a2.shop.return-exchange.open
+- id: ja.scenario.a2.shop.return-exchange.receipt
+  prompt: "The clerk asks for the receipt. Say you have it and hand it over."
+  expected_actions:
+  - present-receipt
+  next:
+  - ja.scenario.a2.shop.return-exchange.wait
+- id: ja.scenario.a2.shop.return-exchange.wait
+  prompt: "The clerk offers a new one. Thank the clerk and close."
+  expected_actions:
+  - say-thanks
+  - say-closing
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Model response in Japanese script with romaji scaffold
+- support_level: 5
+  description: Full suggested wording including a first-language gloss
+transfer_variants_required: 2
+transfer_variants:
+- id: ja.scenario.a2.shop.return-exchange.online-order
+  description: "Exchanging the wrong size delivered to a shop"
+  changed_variable: "delivery channel"
+- id: ja.scenario.a2.shop.return-exchange.late-defect
+  description: "Returning a broken item bought last week, no box"
+  changed_variable: "time and packaging"

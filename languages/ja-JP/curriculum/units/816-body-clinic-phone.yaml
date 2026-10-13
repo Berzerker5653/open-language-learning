@@ -1,0 +1,271 @@
+# ai-assisted draft unit (JA-A2-001 A2 body-clinic-phone); content refs are pack data; qualified review pending.
+id: ja.unit.body-clinic-phone
+goal_id: ja.goal.a2.health-body
+title: "Calling the clinic"
+summary: "Phone appointments: symptoms briefly, morning slots, first visits."
+estimated_minutes: 8
+generation_contract:
+  allowed_vocab:
+  - ja.lex.health4.kaze
+  - ja.lex.health4.gozen
+  - ja.lex.health4.gogo
+  - ja.lex.health4.jushin
+  - ja.lex.health4.hajimete
+  - ja.lex.health4.deru
+  - ja.lex.health4.kite-kudasai
+  - ja.lex.health4.kinou
+  - ja.lex.health4.ha
+  - ja.lex.health.netsu
+  - ja.lex.body.kaffa
+  - ja.lex.places.byouin
+  - ja.lex.admin2.henkou
+  - ja.lex.admin.yoyaku
+  - ja.lex.time.kayoubi
+  - ja.lex.time.ashita
+  - ja.sent.a2.clinic.phone-appointment
+  - ja.sent.a2.clinic.clerk-symptom
+  - ja.sent.a2.clinic.fever-since-yesterday
+  - ja.sent.a2.clinic.cough-too
+  - ja.sent.a2.clinic.morning-slot
+  - ja.sent.a2.clinic.first-visit
+  - ja.sent.a2.clinic.bring-insurance
+  - ja.sent.a2.clinic.can-change-tuesday
+  - ja.sent.a2.clinic.three-please
+  - ja.sent.a2.clinic.cannot-come-so-change
+  - ja.sent.a2.clinic.friend-plain-went
+  - ja.sent.a2.clinic.friend-plain-ok
+  allowed_grammar:
+  - ja.grammar.verb.polite-masu
+  - ja.grammar.copula.polite-desu
+  - ja.grammar.range.kara-made
+  - ja.grammar.particle.addition-mo
+  - ja.grammar.verb.te-form-connect
+  - ja.grammar.conjunction.node-reason
+  - ja.grammar.verb.kanoukei-intro
+  - ja.grammar.particle.time-ni
+  - ja.grammar.time.expressions
+  - ja.grammar.particle.question-ka
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.body-clinic-phone-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.health4.kaze
+  - ja.lex.health4.gozen
+  - ja.lex.health4.gogo
+  - ja.lex.health4.jushin
+  - ja.lex.health4.hajimete
+  - ja.lex.health4.deru
+  - ja.lex.health4.kite-kudasai
+  - ja.lex.health4.kinou
+  - ja.lex.health4.ha
+  - ja.lex.health.netsu
+  - ja.lex.body.kaffa
+  - ja.lex.places.byouin
+  - ja.lex.admin2.henkou
+  - ja.lex.admin.yoyaku
+  - ja.lex.time.kayoubi
+  - ja.lex.time.ashita
+  - ja.sent.a2.clinic.phone-appointment
+  - ja.sent.a2.clinic.phone-appointment
+  - ja.sent.a2.clinic.clerk-symptom
+  - ja.sent.a2.clinic.clerk-symptom
+  - ja.sent.a2.clinic.fever-since-yesterday
+  - ja.sent.a2.clinic.fever-since-yesterday
+  - ja.sent.a2.clinic.cough-too
+  - ja.sent.a2.clinic.cough-too
+  - ja.sent.a2.clinic.morning-slot
+  - ja.sent.a2.clinic.morning-slot
+  - ja.sent.a2.clinic.first-visit
+  - ja.sent.a2.clinic.first-visit
+  - ja.sent.a2.clinic.bring-insurance
+  - ja.sent.a2.clinic.bring-insurance
+  - ja.sent.a2.clinic.can-change-tuesday
+  - ja.sent.a2.clinic.can-change-tuesday
+  - ja.sent.a2.clinic.three-please
+  - ja.sent.a2.clinic.three-please
+  - ja.sent.a2.clinic.cannot-come-so-change
+  - ja.sent.a2.clinic.cannot-come-so-change
+  - ja.sent.a2.clinic.friend-plain-went
+  - ja.sent.a2.clinic.friend-plain-went
+  - ja.sent.a2.clinic.friend-plain-ok
+  - ja.sent.a2.clinic.friend-plain-ok
+- id: ja.activity.body-clinic-phone-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.health4.kaze
+  - ja.lex.health4.gozen
+  - ja.lex.health4.gogo
+  - ja.lex.health4.jushin
+  - ja.lex.health4.hajimete
+  - ja.lex.health4.deru
+  - ja.lex.health4.kite-kudasai
+  - ja.lex.health4.kinou
+  - ja.lex.health4.ha
+  - ja.lex.health.netsu
+  - ja.lex.body.kaffa
+  - ja.lex.places.byouin
+  - ja.lex.admin2.henkou
+  - ja.lex.admin.yoyaku
+  - ja.lex.time.kayoubi
+  - ja.lex.time.ashita
+  - ja.sent.a2.clinic.phone-appointment
+  - ja.sent.a2.clinic.clerk-symptom
+  - ja.sent.a2.clinic.fever-since-yesterday
+  - ja.sent.a2.clinic.cough-too
+  - ja.sent.a2.clinic.morning-slot
+  - ja.sent.a2.clinic.first-visit
+  - ja.sent.a2.clinic.bring-insurance
+  - ja.sent.a2.clinic.can-change-tuesday
+  - ja.sent.a2.clinic.three-please
+  - ja.sent.a2.clinic.cannot-come-so-change
+  - ja.sent.a2.clinic.friend-plain-went
+  - ja.sent.a2.clinic.friend-plain-ok
+- id: ja.activity.body-clinic-phone-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.health4.kaze
+  - ja.lex.health4.gozen
+  - ja.lex.health4.gogo
+  - ja.lex.health4.jushin
+  - ja.lex.health4.hajimete
+  - ja.lex.health4.deru
+  - ja.lex.health4.kite-kudasai
+  - ja.lex.health4.kinou
+  - ja.lex.health4.ha
+  - ja.lex.health.netsu
+  - ja.lex.body.kaffa
+  - ja.lex.places.byouin
+  - ja.lex.admin2.henkou
+  - ja.lex.admin.yoyaku
+  - ja.lex.time.kayoubi
+  - ja.lex.time.ashita
+  - ja.sent.a2.clinic.phone-appointment
+  - ja.sent.a2.clinic.clerk-symptom
+  - ja.sent.a2.clinic.fever-since-yesterday
+  - ja.sent.a2.clinic.cough-too
+  - ja.sent.a2.clinic.morning-slot
+  - ja.sent.a2.clinic.first-visit
+  - ja.sent.a2.clinic.bring-insurance
+  - ja.sent.a2.clinic.can-change-tuesday
+  - ja.sent.a2.clinic.three-please
+  - ja.sent.a2.clinic.cannot-come-so-change
+  - ja.sent.a2.clinic.friend-plain-went
+  - ja.sent.a2.clinic.friend-plain-ok
+- id: ja.activity.body-clinic-phone-recall
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.health4.kaze
+  - ja.lex.health4.gozen
+  - ja.lex.health4.gogo
+  - ja.lex.health4.jushin
+  - ja.lex.health4.hajimete
+  - ja.lex.health4.deru
+  - ja.lex.health4.kite-kudasai
+  - ja.lex.health4.kinou
+  - ja.lex.health4.ha
+  - ja.lex.health.netsu
+  - ja.lex.body.kaffa
+  - ja.lex.places.byouin
+  - ja.lex.admin2.henkou
+  - ja.lex.admin.yoyaku
+  - ja.lex.time.kayoubi
+  - ja.lex.time.ashita
+  - ja.sent.a2.clinic.phone-appointment
+  - ja.sent.a2.clinic.clerk-symptom
+  - ja.sent.a2.clinic.fever-since-yesterday
+  - ja.sent.a2.clinic.cough-too
+  - ja.sent.a2.clinic.morning-slot
+  - ja.sent.a2.clinic.first-visit
+  - ja.sent.a2.clinic.bring-insurance
+  - ja.sent.a2.clinic.can-change-tuesday
+  - ja.sent.a2.clinic.three-please
+  - ja.sent.a2.clinic.cannot-come-so-change
+  - ja.sent.a2.clinic.friend-plain-went
+  - ja.sent.a2.clinic.friend-plain-ok
+- id: ja.activity.body-clinic-phone-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.clinic.phone-appointment
+- id: ja.activity.body-clinic-phone-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.clinic.clerk-symptom
+- id: ja.activity.body-clinic-phone-cloze2
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.clinic.fever-since-yesterday
+- id: ja.activity.body-clinic-phone-cloze3
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.clinic.cough-too
+- id: ja.activity.body-clinic-phone-cloze4
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.clinic.morning-slot
+- id: ja.activity.body-clinic-phone-cloze5
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.clinic.first-visit
+- id: ja.activity.body-clinic-phone-cloze6
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.clinic.bring-insurance
+- id: ja.activity.body-clinic-phone-cloze7
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.clinic.can-change-tuesday
+- id: ja.activity.body-clinic-phone-cloze8
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.clinic.three-please
+- id: ja.activity.body-clinic-phone-cloze9
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.clinic.cannot-come-so-change
+- id: ja.activity.body-clinic-phone-cloze10
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.clinic.friend-plain-went
+- id: ja.activity.body-clinic-phone-cloze11
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.clinic.friend-plain-ok
+- id: ja.activity.body-clinic-phone-scenario
+  type: scenario
+  modality: interaction
+  support_level: 2
+  scenario_id: ja.scenario.a2.body.clinic-phone

@@ -1,0 +1,46 @@
+# ai-assisted draft scenario (JA-A2-001); wording pending qualified review.
+id: ja.scenario.a2.comm.text-reschedule
+goal_id: ja.goal.a2.communication
+title: "Changing plans by text"
+situation: ja.situation.plans
+register: ja.register.polite-neutral
+nodes:
+- id: ja.scenario.a2.comm.text-reschedule.open
+  prompt: "You will be late for a meeting. Send a text that you are running late."
+  expected_actions:
+  - state-delay
+  next:
+  - ja.scenario.a2.comm.text-reschedule.time
+  recovery:
+  - id: ja.scenario.a2.comm.text-reschedule.repair-clarify
+    prompt: "Your friend asks where you are. Say where you are now."
+    expected_actions:
+    - state-location
+    to: ja.scenario.a2.comm.text-reschedule.open
+- id: ja.scenario.a2.comm.text-reschedule.time
+  prompt: "Your friend asks what time you will arrive. Give a time."
+  expected_actions:
+  - state-time
+  next:
+  - ja.scenario.a2.comm.text-reschedule.meet
+- id: ja.scenario.a2.comm.text-reschedule.meet
+  prompt: "Agree where to meet (station exit) and send a short confirmation."
+  expected_actions:
+  - agree-meeting-point
+  - confirm-short
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Model response in Japanese script with romaji scaffold
+- support_level: 5
+  description: Full suggested wording including a first-language gloss
+transfer_variants_required: 2
+transfer_variants:
+- id: ja.scenario.a2.comm.text-reschedule.rain-cancel
+  description: "Canceling today and proposing next weekend instead"
+  changed_variable: "weather and time"
+- id: ja.scenario.a2.comm.text-reschedule.late-arrival
+  description: "You arrive but the friend is late instead"
+  changed_variable: "roles swapped"

@@ -1,0 +1,266 @@
+# ai-assisted draft unit (JA-A2-001 A2 city-lost-found); content refs are pack data; qualified review pending.
+id: ja.unit.city-lost-found
+goal_id: ja.goal.a2.city-services
+title: "Lost and found"
+summary: "Reporting a lost item at the police box and describing it."
+estimated_minutes: 8
+generation_contract:
+  allowed_vocab:
+  - ja.lex.city2.otoshimono
+  - ja.lex.city2.hirosu
+  - ja.lex.city2.kaban
+  - ja.lex.city2.mawari
+  - ja.lex.city2.nakusu
+  - ja.lex.city2.mitsukeru
+  - ja.lex.city2.todokede
+  - ja.lex.city2.kasa
+  - ja.lex.city2.kuroi
+  - ja.lex.city2.dareka
+  - ja.lex.city.kouban
+  - ja.lex.city.jusho
+  - ja.lex.city.todokedemasu
+  - ja.lex.travel2.wasuremono
+  - ja.lex.communication.renraku
+  - ja.sent.a2.lostfound.lost-something
+  - ja.sent.a2.lostfound.what-was-it
+  - ja.sent.a2.lostfound.lost-bag
+  - ja.sent.a2.lostfound.where-lost
+  - ja.sent.a2.lostfound.lost-at-station
+  - ja.sent.a2.lostfound.fill-report
+  - ja.sent.a2.lostfound.did-you-find
+  - ja.sent.a2.lostfound.report-again
+  - ja.sent.a2.lostfound.found-someones
+  - ja.sent.a2.lostfound.officer-identity
+  - ja.sent.a2.lostfound.friend-plain-lost
+  - ja.sent.a2.lostfound.friend-found-plain
+  allowed_grammar:
+  - ja.grammar.copula.polite-desu
+  - ja.grammar.verb.polite-masu
+  - ja.grammar.particle.object-wo
+  - ja.grammar.particle.goal-e
+  - ja.grammar.particle.de-means
+  - ja.grammar.particle.possessive-no
+  - ja.grammar.demonstratives.kore-sore-are
+  - ja.grammar.syntax.relative-clauses
+  - ja.grammar.verb.te-form-connect
+  - ja.grammar.particle.question-ka
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.city-lost-found-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.city2.otoshimono
+  - ja.lex.city2.hirosu
+  - ja.lex.city2.kaban
+  - ja.lex.city2.mawari
+  - ja.lex.city2.nakusu
+  - ja.lex.city2.mitsukeru
+  - ja.lex.city2.todokede
+  - ja.lex.city2.kasa
+  - ja.lex.city2.kuroi
+  - ja.lex.city2.dareka
+  - ja.lex.city.kouban
+  - ja.lex.city.jusho
+  - ja.lex.city.todokedemasu
+  - ja.lex.travel2.wasuremono
+  - ja.lex.communication.renraku
+  - ja.sent.a2.lostfound.lost-something
+  - ja.sent.a2.lostfound.lost-something
+  - ja.sent.a2.lostfound.what-was-it
+  - ja.sent.a2.lostfound.what-was-it
+  - ja.sent.a2.lostfound.lost-bag
+  - ja.sent.a2.lostfound.lost-bag
+  - ja.sent.a2.lostfound.where-lost
+  - ja.sent.a2.lostfound.where-lost
+  - ja.sent.a2.lostfound.lost-at-station
+  - ja.sent.a2.lostfound.lost-at-station
+  - ja.sent.a2.lostfound.fill-report
+  - ja.sent.a2.lostfound.fill-report
+  - ja.sent.a2.lostfound.did-you-find
+  - ja.sent.a2.lostfound.did-you-find
+  - ja.sent.a2.lostfound.report-again
+  - ja.sent.a2.lostfound.report-again
+  - ja.sent.a2.lostfound.found-someones
+  - ja.sent.a2.lostfound.found-someones
+  - ja.sent.a2.lostfound.officer-identity
+  - ja.sent.a2.lostfound.officer-identity
+  - ja.sent.a2.lostfound.friend-plain-lost
+  - ja.sent.a2.lostfound.friend-plain-lost
+  - ja.sent.a2.lostfound.friend-found-plain
+  - ja.sent.a2.lostfound.friend-found-plain
+- id: ja.activity.city-lost-found-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.city2.otoshimono
+  - ja.lex.city2.hirosu
+  - ja.lex.city2.kaban
+  - ja.lex.city2.mawari
+  - ja.lex.city2.nakusu
+  - ja.lex.city2.mitsukeru
+  - ja.lex.city2.todokede
+  - ja.lex.city2.kasa
+  - ja.lex.city2.kuroi
+  - ja.lex.city2.dareka
+  - ja.lex.city.kouban
+  - ja.lex.city.jusho
+  - ja.lex.city.todokedemasu
+  - ja.lex.travel2.wasuremono
+  - ja.lex.communication.renraku
+  - ja.sent.a2.lostfound.lost-something
+  - ja.sent.a2.lostfound.what-was-it
+  - ja.sent.a2.lostfound.lost-bag
+  - ja.sent.a2.lostfound.where-lost
+  - ja.sent.a2.lostfound.lost-at-station
+  - ja.sent.a2.lostfound.fill-report
+  - ja.sent.a2.lostfound.did-you-find
+  - ja.sent.a2.lostfound.report-again
+  - ja.sent.a2.lostfound.found-someones
+  - ja.sent.a2.lostfound.officer-identity
+  - ja.sent.a2.lostfound.friend-plain-lost
+  - ja.sent.a2.lostfound.friend-found-plain
+- id: ja.activity.city-lost-found-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.city2.otoshimono
+  - ja.lex.city2.hirosu
+  - ja.lex.city2.kaban
+  - ja.lex.city2.mawari
+  - ja.lex.city2.nakusu
+  - ja.lex.city2.mitsukeru
+  - ja.lex.city2.todokede
+  - ja.lex.city2.kasa
+  - ja.lex.city2.kuroi
+  - ja.lex.city2.dareka
+  - ja.lex.city.kouban
+  - ja.lex.city.jusho
+  - ja.lex.city.todokedemasu
+  - ja.lex.travel2.wasuremono
+  - ja.lex.communication.renraku
+  - ja.sent.a2.lostfound.lost-something
+  - ja.sent.a2.lostfound.what-was-it
+  - ja.sent.a2.lostfound.lost-bag
+  - ja.sent.a2.lostfound.where-lost
+  - ja.sent.a2.lostfound.lost-at-station
+  - ja.sent.a2.lostfound.fill-report
+  - ja.sent.a2.lostfound.did-you-find
+  - ja.sent.a2.lostfound.report-again
+  - ja.sent.a2.lostfound.found-someones
+  - ja.sent.a2.lostfound.officer-identity
+  - ja.sent.a2.lostfound.friend-plain-lost
+  - ja.sent.a2.lostfound.friend-found-plain
+- id: ja.activity.city-lost-found-recall
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.city2.otoshimono
+  - ja.lex.city2.hirosu
+  - ja.lex.city2.kaban
+  - ja.lex.city2.mawari
+  - ja.lex.city2.nakusu
+  - ja.lex.city2.mitsukeru
+  - ja.lex.city2.todokede
+  - ja.lex.city2.kasa
+  - ja.lex.city2.kuroi
+  - ja.lex.city2.dareka
+  - ja.lex.city.kouban
+  - ja.lex.city.jusho
+  - ja.lex.city.todokedemasu
+  - ja.lex.travel2.wasuremono
+  - ja.lex.communication.renraku
+  - ja.sent.a2.lostfound.lost-something
+  - ja.sent.a2.lostfound.what-was-it
+  - ja.sent.a2.lostfound.lost-bag
+  - ja.sent.a2.lostfound.where-lost
+  - ja.sent.a2.lostfound.lost-at-station
+  - ja.sent.a2.lostfound.fill-report
+  - ja.sent.a2.lostfound.did-you-find
+  - ja.sent.a2.lostfound.report-again
+  - ja.sent.a2.lostfound.found-someones
+  - ja.sent.a2.lostfound.officer-identity
+  - ja.sent.a2.lostfound.friend-plain-lost
+  - ja.sent.a2.lostfound.friend-found-plain
+- id: ja.activity.city-lost-found-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.lostfound.lost-something
+- id: ja.activity.city-lost-found-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.lostfound.what-was-it
+- id: ja.activity.city-lost-found-cloze2
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.lostfound.lost-bag
+- id: ja.activity.city-lost-found-cloze3
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.lostfound.where-lost
+- id: ja.activity.city-lost-found-cloze4
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.lostfound.lost-at-station
+- id: ja.activity.city-lost-found-cloze5
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.lostfound.fill-report
+- id: ja.activity.city-lost-found-cloze6
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.lostfound.did-you-find
+- id: ja.activity.city-lost-found-cloze7
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.lostfound.report-again
+- id: ja.activity.city-lost-found-cloze8
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.lostfound.found-someones
+- id: ja.activity.city-lost-found-cloze9
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.lostfound.officer-identity
+- id: ja.activity.city-lost-found-cloze10
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.lostfound.friend-plain-lost
+- id: ja.activity.city-lost-found-cloze11
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.lostfound.friend-found-plain
+- id: ja.activity.city-lost-found-scenario
+  type: scenario
+  modality: interaction
+  support_level: 2
+  scenario_id: ja.scenario.a2.city.lost-found

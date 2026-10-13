@@ -1,0 +1,266 @@
+# ai-assisted draft unit (JA-A2-001 A2 comm-text-reschedule); content refs are pack data; qualified review pending.
+id: ja.unit.comm-text-reschedule
+goal_id: ja.goal.a2.communication
+title: "Reshuffling plans by text"
+summary: "Messaging a friend: late, change, cancel, meet where."
+estimated_minutes: 8
+generation_contract:
+  allowed_vocab:
+  - ja.lex.communication2.okureru
+  - ja.lex.communication2.kondo
+  - ja.lex.communication2.deguchi
+  - ja.lex.communication2.henji
+  - ja.lex.communication2.chikaku
+  - ja.lex.communication2.ryousai
+  - ja.lex.communication2.torikeshi
+  - ja.lex.communication2.kyuu-you
+  - ja.lex.communication.messeji
+  - ja.lex.communication.yotei
+  - ja.lex.health.daijoubu
+  - ja.lex.health.sugu
+  - ja.lex.time.ashita
+  - ja.lex.places.eki
+  - ja.lex.questions2.mada
+  - ja.sent.a2.text.will-be-late
+  - ja.sent.a2.text.late-casual
+  - ja.sent.a2.text.what-time-arrive
+  - ja.sent.a2.text.still-not-arrived
+  - ja.sent.a2.text.another-time
+  - ja.sent.a2.text.cannot-go-casual
+  - ja.sent.a2.text.thats-okay
+  - ja.sent.a2.text.change-plan
+  - ja.sent.a2.text.wait-at-exit
+  - ja.sent.a2.text.near-station
+  - ja.sent.a2.text.got-it-text
+  - ja.sent.a2.text.reply-please
+  allowed_grammar:
+  - ja.grammar.copula.polite-desu
+  - ja.grammar.verb.polite-masu
+  - ja.grammar.verb.kanoukei-intro
+  - ja.grammar.verb.tai-desu
+  - ja.grammar.particle.de-means
+  - ja.grammar.particle.topic-wa
+  - ja.grammar.particle.addition-mo
+  - ja.grammar.time.expressions
+  - ja.grammar.conjunction.node-reason
+  - ja.grammar.politeness.register
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.comm-text-reschedule-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.communication2.okureru
+  - ja.lex.communication2.kondo
+  - ja.lex.communication2.deguchi
+  - ja.lex.communication2.henji
+  - ja.lex.communication2.chikaku
+  - ja.lex.communication2.ryousai
+  - ja.lex.communication2.torikeshi
+  - ja.lex.communication2.kyuu-you
+  - ja.lex.communication.messeji
+  - ja.lex.communication.yotei
+  - ja.lex.health.daijoubu
+  - ja.lex.health.sugu
+  - ja.lex.time.ashita
+  - ja.lex.places.eki
+  - ja.lex.questions2.mada
+  - ja.sent.a2.text.will-be-late
+  - ja.sent.a2.text.will-be-late
+  - ja.sent.a2.text.late-casual
+  - ja.sent.a2.text.late-casual
+  - ja.sent.a2.text.what-time-arrive
+  - ja.sent.a2.text.what-time-arrive
+  - ja.sent.a2.text.still-not-arrived
+  - ja.sent.a2.text.still-not-arrived
+  - ja.sent.a2.text.another-time
+  - ja.sent.a2.text.another-time
+  - ja.sent.a2.text.cannot-go-casual
+  - ja.sent.a2.text.cannot-go-casual
+  - ja.sent.a2.text.thats-okay
+  - ja.sent.a2.text.thats-okay
+  - ja.sent.a2.text.change-plan
+  - ja.sent.a2.text.change-plan
+  - ja.sent.a2.text.wait-at-exit
+  - ja.sent.a2.text.wait-at-exit
+  - ja.sent.a2.text.near-station
+  - ja.sent.a2.text.near-station
+  - ja.sent.a2.text.got-it-text
+  - ja.sent.a2.text.got-it-text
+  - ja.sent.a2.text.reply-please
+  - ja.sent.a2.text.reply-please
+- id: ja.activity.comm-text-reschedule-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.communication2.okureru
+  - ja.lex.communication2.kondo
+  - ja.lex.communication2.deguchi
+  - ja.lex.communication2.henji
+  - ja.lex.communication2.chikaku
+  - ja.lex.communication2.ryousai
+  - ja.lex.communication2.torikeshi
+  - ja.lex.communication2.kyuu-you
+  - ja.lex.communication.messeji
+  - ja.lex.communication.yotei
+  - ja.lex.health.daijoubu
+  - ja.lex.health.sugu
+  - ja.lex.time.ashita
+  - ja.lex.places.eki
+  - ja.lex.questions2.mada
+  - ja.sent.a2.text.will-be-late
+  - ja.sent.a2.text.late-casual
+  - ja.sent.a2.text.what-time-arrive
+  - ja.sent.a2.text.still-not-arrived
+  - ja.sent.a2.text.another-time
+  - ja.sent.a2.text.cannot-go-casual
+  - ja.sent.a2.text.thats-okay
+  - ja.sent.a2.text.change-plan
+  - ja.sent.a2.text.wait-at-exit
+  - ja.sent.a2.text.near-station
+  - ja.sent.a2.text.got-it-text
+  - ja.sent.a2.text.reply-please
+- id: ja.activity.comm-text-reschedule-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.communication2.okureru
+  - ja.lex.communication2.kondo
+  - ja.lex.communication2.deguchi
+  - ja.lex.communication2.henji
+  - ja.lex.communication2.chikaku
+  - ja.lex.communication2.ryousai
+  - ja.lex.communication2.torikeshi
+  - ja.lex.communication2.kyuu-you
+  - ja.lex.communication.messeji
+  - ja.lex.communication.yotei
+  - ja.lex.health.daijoubu
+  - ja.lex.health.sugu
+  - ja.lex.time.ashita
+  - ja.lex.places.eki
+  - ja.lex.questions2.mada
+  - ja.sent.a2.text.will-be-late
+  - ja.sent.a2.text.late-casual
+  - ja.sent.a2.text.what-time-arrive
+  - ja.sent.a2.text.still-not-arrived
+  - ja.sent.a2.text.another-time
+  - ja.sent.a2.text.cannot-go-casual
+  - ja.sent.a2.text.thats-okay
+  - ja.sent.a2.text.change-plan
+  - ja.sent.a2.text.wait-at-exit
+  - ja.sent.a2.text.near-station
+  - ja.sent.a2.text.got-it-text
+  - ja.sent.a2.text.reply-please
+- id: ja.activity.comm-text-reschedule-recall
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.communication2.okureru
+  - ja.lex.communication2.kondo
+  - ja.lex.communication2.deguchi
+  - ja.lex.communication2.henji
+  - ja.lex.communication2.chikaku
+  - ja.lex.communication2.ryousai
+  - ja.lex.communication2.torikeshi
+  - ja.lex.communication2.kyuu-you
+  - ja.lex.communication.messeji
+  - ja.lex.communication.yotei
+  - ja.lex.health.daijoubu
+  - ja.lex.health.sugu
+  - ja.lex.time.ashita
+  - ja.lex.places.eki
+  - ja.lex.questions2.mada
+  - ja.sent.a2.text.will-be-late
+  - ja.sent.a2.text.late-casual
+  - ja.sent.a2.text.what-time-arrive
+  - ja.sent.a2.text.still-not-arrived
+  - ja.sent.a2.text.another-time
+  - ja.sent.a2.text.cannot-go-casual
+  - ja.sent.a2.text.thats-okay
+  - ja.sent.a2.text.change-plan
+  - ja.sent.a2.text.wait-at-exit
+  - ja.sent.a2.text.near-station
+  - ja.sent.a2.text.got-it-text
+  - ja.sent.a2.text.reply-please
+- id: ja.activity.comm-text-reschedule-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.text.will-be-late
+- id: ja.activity.comm-text-reschedule-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.text.late-casual
+- id: ja.activity.comm-text-reschedule-cloze2
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.text.what-time-arrive
+- id: ja.activity.comm-text-reschedule-cloze3
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.text.still-not-arrived
+- id: ja.activity.comm-text-reschedule-cloze4
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.text.another-time
+- id: ja.activity.comm-text-reschedule-cloze5
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.text.cannot-go-casual
+- id: ja.activity.comm-text-reschedule-cloze6
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.text.thats-okay
+- id: ja.activity.comm-text-reschedule-cloze7
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.text.change-plan
+- id: ja.activity.comm-text-reschedule-cloze8
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.text.wait-at-exit
+- id: ja.activity.comm-text-reschedule-cloze9
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.text.near-station
+- id: ja.activity.comm-text-reschedule-cloze10
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.text.got-it-text
+- id: ja.activity.comm-text-reschedule-cloze11
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.text.reply-please
+- id: ja.activity.comm-text-reschedule-scenario
+  type: scenario
+  modality: interaction
+  support_level: 2
+  scenario_id: ja.scenario.a2.comm.text-reschedule

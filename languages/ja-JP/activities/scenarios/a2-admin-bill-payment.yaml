@@ -1,0 +1,47 @@
+# ai-assisted draft scenario (JA-A2-001); wording pending qualified review.
+id: ja.scenario.a2.admin.bill-payment
+goal_id: ja.goal.a2.daily-admin
+title: "Paying a bill at the counter"
+situation: ja.situation.payments
+register: ja.register.polite-neutral
+nodes:
+- id: ja.scenario.a2.admin.bill-payment.open
+  prompt: "You have a payment slip. At the counter, ask whether you can pay it there."
+  expected_actions:
+  - ask-pay-possible
+  next:
+  - ja.scenario.a2.admin.bill-payment.method
+  recovery:
+  - id: ja.scenario.a2.admin.bill-payment.repair-repeat
+    prompt: "You did not understand the fee question. Politely ask again."
+    expected_actions:
+    - ask-repeat
+    to: ja.scenario.a2.admin.bill-payment.open
+- id: ja.scenario.a2.admin.bill-payment.method
+  prompt: "The clerk asks cash or card. Choose and confirm the fee and amount."
+  expected_actions:
+  - choose-method
+  - confirm-amount
+  next:
+  - ja.scenario.a2.admin.bill-payment.receipt
+- id: ja.scenario.a2.admin.bill-payment.receipt
+  prompt: "Ask for a receipt and close with thanks."
+  expected_actions:
+  - ask-receipt
+  - say-thanks
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Model response in Japanese script with romaji scaffold
+- support_level: 5
+  description: Full suggested wording including a first-language gloss
+transfer_variants_required: 2
+transfer_variants:
+- id: ja.scenario.a2.admin.bill-payment.bank-transfer
+  description: "Paying the same bill by bank transfer instead"
+  changed_variable: "payment channel"
+- id: ja.scenario.a2.admin.bill-payment.phone-plan
+  description: "Paying a phone bill at the shop counter"
+  changed_variable: "bill kind and place"

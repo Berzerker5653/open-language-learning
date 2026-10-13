@@ -1,0 +1,256 @@
+# ai-assisted draft unit (JA-A2-001 A2 body-pharmacy); content refs are pack data; qualified review pending.
+id: ja.unit.body-pharmacy
+goal_id: ja.goal.a2.health-body
+title: "At the pharmacy"
+summary: "Buying cold medicine: describing symptoms, dose, side effects."
+estimated_minutes: 8
+generation_contract:
+  allowed_vocab:
+  - ja.lex.health4.kaze-gusuri
+  - ja.lex.health4.megusuri
+  - ja.lex.health4.ukuu
+  - ja.lex.health4.shokugo
+  - ja.lex.health4.shokumae
+  - ja.lex.health4.ichinichi
+  - ja.lex.health4.naru
+  - ja.lex.health4.motomeru
+  - ja.lex.health.yakkyoku
+  - ja.lex.health.kusuri
+  - ja.lex.med.fukusayou
+  - ja.lex.health.netsu
+  - ja.lex.body.kaffa
+  - ja.sent.a2.pharmacy.looking-for-cold-med
+  - ja.sent.a2.pharmacy.clerk-how-feeling
+  - ja.sent.a2.pharmacy.fever-and-cough
+  - ja.sent.a2.pharmacy.works-fast
+  - ja.sent.a2.pharmacy.dose-instructions
+  - ja.sent.a2.pharmacy.side-effects
+  - ja.sent.a2.pharmacy.also-eyedrops
+  - ja.sent.a2.pharmacy.before-meal
+  - ja.sent.a2.pharmacy.price-how-much
+  - ja.sent.a2.pharmacy.pharmacist-later
+  - ja.sent.a2.pharmacy.friend-plain-drank
+  - ja.sent.a2.pharmacy.friend-get-better
+  allowed_grammar:
+  - ja.grammar.verb.polite-masu
+  - ja.grammar.copula.polite-desu
+  - ja.grammar.verb.te-form-connect
+  - ja.grammar.particle.object-wo
+  - ja.grammar.particle.addition-mo
+  - ja.grammar.counters.general
+  - ja.grammar.time.expressions
+  - ja.grammar.particle.question-ka
+  - ja.grammar.verb.kanoukei-intro
+  - ja.grammar.particle.de-means
+  new_item_budget: 6
+  validation_method: choice
+activities:
+- id: ja.activity.body-pharmacy-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.lex.health4.kaze-gusuri
+  - ja.lex.health4.megusuri
+  - ja.lex.health4.ukuu
+  - ja.lex.health4.shokugo
+  - ja.lex.health4.shokumae
+  - ja.lex.health4.ichinichi
+  - ja.lex.health4.naru
+  - ja.lex.health4.motomeru
+  - ja.lex.health.yakkyoku
+  - ja.lex.health.kusuri
+  - ja.lex.med.fukusayou
+  - ja.lex.health.netsu
+  - ja.lex.body.kaffa
+  - ja.sent.a2.pharmacy.looking-for-cold-med
+  - ja.sent.a2.pharmacy.looking-for-cold-med
+  - ja.sent.a2.pharmacy.clerk-how-feeling
+  - ja.sent.a2.pharmacy.clerk-how-feeling
+  - ja.sent.a2.pharmacy.fever-and-cough
+  - ja.sent.a2.pharmacy.fever-and-cough
+  - ja.sent.a2.pharmacy.works-fast
+  - ja.sent.a2.pharmacy.works-fast
+  - ja.sent.a2.pharmacy.dose-instructions
+  - ja.sent.a2.pharmacy.dose-instructions
+  - ja.sent.a2.pharmacy.side-effects
+  - ja.sent.a2.pharmacy.side-effects
+  - ja.sent.a2.pharmacy.also-eyedrops
+  - ja.sent.a2.pharmacy.also-eyedrops
+  - ja.sent.a2.pharmacy.before-meal
+  - ja.sent.a2.pharmacy.before-meal
+  - ja.sent.a2.pharmacy.price-how-much
+  - ja.sent.a2.pharmacy.price-how-much
+  - ja.sent.a2.pharmacy.pharmacist-later
+  - ja.sent.a2.pharmacy.pharmacist-later
+  - ja.sent.a2.pharmacy.friend-plain-drank
+  - ja.sent.a2.pharmacy.friend-plain-drank
+  - ja.sent.a2.pharmacy.friend-get-better
+  - ja.sent.a2.pharmacy.friend-get-better
+- id: ja.activity.body-pharmacy-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 3
+  content_refs:
+  - ja.lex.health4.kaze-gusuri
+  - ja.lex.health4.megusuri
+  - ja.lex.health4.ukuu
+  - ja.lex.health4.shokugo
+  - ja.lex.health4.shokumae
+  - ja.lex.health4.ichinichi
+  - ja.lex.health4.naru
+  - ja.lex.health4.motomeru
+  - ja.lex.health.yakkyoku
+  - ja.lex.health.kusuri
+  - ja.lex.med.fukusayou
+  - ja.lex.health.netsu
+  - ja.lex.body.kaffa
+  - ja.sent.a2.pharmacy.looking-for-cold-med
+  - ja.sent.a2.pharmacy.clerk-how-feeling
+  - ja.sent.a2.pharmacy.fever-and-cough
+  - ja.sent.a2.pharmacy.works-fast
+  - ja.sent.a2.pharmacy.dose-instructions
+  - ja.sent.a2.pharmacy.side-effects
+  - ja.sent.a2.pharmacy.also-eyedrops
+  - ja.sent.a2.pharmacy.before-meal
+  - ja.sent.a2.pharmacy.price-how-much
+  - ja.sent.a2.pharmacy.pharmacist-later
+  - ja.sent.a2.pharmacy.friend-plain-drank
+  - ja.sent.a2.pharmacy.friend-get-better
+- id: ja.activity.body-pharmacy-match
+  type: match
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.lex.health4.kaze-gusuri
+  - ja.lex.health4.megusuri
+  - ja.lex.health4.ukuu
+  - ja.lex.health4.shokugo
+  - ja.lex.health4.shokumae
+  - ja.lex.health4.ichinichi
+  - ja.lex.health4.naru
+  - ja.lex.health4.motomeru
+  - ja.lex.health.yakkyoku
+  - ja.lex.health.kusuri
+  - ja.lex.med.fukusayou
+  - ja.lex.health.netsu
+  - ja.lex.body.kaffa
+  - ja.sent.a2.pharmacy.looking-for-cold-med
+  - ja.sent.a2.pharmacy.clerk-how-feeling
+  - ja.sent.a2.pharmacy.fever-and-cough
+  - ja.sent.a2.pharmacy.works-fast
+  - ja.sent.a2.pharmacy.dose-instructions
+  - ja.sent.a2.pharmacy.side-effects
+  - ja.sent.a2.pharmacy.also-eyedrops
+  - ja.sent.a2.pharmacy.before-meal
+  - ja.sent.a2.pharmacy.price-how-much
+  - ja.sent.a2.pharmacy.pharmacist-later
+  - ja.sent.a2.pharmacy.friend-plain-drank
+  - ja.sent.a2.pharmacy.friend-get-better
+- id: ja.activity.body-pharmacy-recall
+  type: recall-choice
+  modality: speaking
+  support_level: 2
+  content_refs:
+  - ja.lex.health4.kaze-gusuri
+  - ja.lex.health4.megusuri
+  - ja.lex.health4.ukuu
+  - ja.lex.health4.shokugo
+  - ja.lex.health4.shokumae
+  - ja.lex.health4.ichinichi
+  - ja.lex.health4.naru
+  - ja.lex.health4.motomeru
+  - ja.lex.health.yakkyoku
+  - ja.lex.health.kusuri
+  - ja.lex.med.fukusayou
+  - ja.lex.health.netsu
+  - ja.lex.body.kaffa
+  - ja.sent.a2.pharmacy.looking-for-cold-med
+  - ja.sent.a2.pharmacy.clerk-how-feeling
+  - ja.sent.a2.pharmacy.fever-and-cough
+  - ja.sent.a2.pharmacy.works-fast
+  - ja.sent.a2.pharmacy.dose-instructions
+  - ja.sent.a2.pharmacy.side-effects
+  - ja.sent.a2.pharmacy.also-eyedrops
+  - ja.sent.a2.pharmacy.before-meal
+  - ja.sent.a2.pharmacy.price-how-much
+  - ja.sent.a2.pharmacy.pharmacist-later
+  - ja.sent.a2.pharmacy.friend-plain-drank
+  - ja.sent.a2.pharmacy.friend-get-better
+- id: ja.activity.body-pharmacy-cloze0
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pharmacy.looking-for-cold-med
+- id: ja.activity.body-pharmacy-cloze1
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pharmacy.clerk-how-feeling
+- id: ja.activity.body-pharmacy-cloze2
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pharmacy.fever-and-cough
+- id: ja.activity.body-pharmacy-cloze3
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pharmacy.works-fast
+- id: ja.activity.body-pharmacy-cloze4
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pharmacy.dose-instructions
+- id: ja.activity.body-pharmacy-cloze5
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pharmacy.side-effects
+- id: ja.activity.body-pharmacy-cloze6
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pharmacy.also-eyedrops
+- id: ja.activity.body-pharmacy-cloze7
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pharmacy.before-meal
+- id: ja.activity.body-pharmacy-cloze8
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pharmacy.price-how-much
+- id: ja.activity.body-pharmacy-cloze9
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pharmacy.pharmacist-later
+- id: ja.activity.body-pharmacy-cloze10
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pharmacy.friend-plain-drank
+- id: ja.activity.body-pharmacy-cloze11
+  type: cloze
+  modality: writing
+  support_level: 2
+  content_refs:
+  - ja.sent.a2.pharmacy.friend-get-better
+- id: ja.activity.body-pharmacy-scenario
+  type: scenario
+  modality: interaction
+  support_level: 2
+  scenario_id: ja.scenario.a2.body.pharmacy

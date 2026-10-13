@@ -1,0 +1,46 @@
+# ai-assisted draft scenario (JA-A2-001); wording pending qualified review.
+id: ja.scenario.a2.city.send-parcel
+goal_id: ja.goal.a2.city-services
+title: "At the post office counter"
+situation: ja.situation.post-office
+register: ja.register.polite-neutral
+nodes:
+- id: ja.scenario.a2.city.send-parcel.open
+  prompt: "You have a box to send. Tell the clerk you want to send a parcel."
+  expected_actions:
+  - state-send-request
+  next:
+  - ja.scenario.a2.city.send-parcel.contents
+  recovery:
+  - id: ja.scenario.a2.city.send-parcel.repair-repeat
+    prompt: "The clerk asked something you missed. Politely ask them to repeat."
+    expected_actions:
+    - ask-repeat
+    to: ja.scenario.a2.city.send-parcel.open
+- id: ja.scenario.a2.city.send-parcel.contents
+  prompt: "The clerk asks what is inside. Say what the contents are."
+  expected_actions:
+  - state-contents
+  next:
+  - ja.scenario.a2.city.send-parcel.price
+- id: ja.scenario.a2.city.send-parcel.price
+  prompt: "Ask how much shipping costs and whether it arrives in three days."
+  expected_actions:
+  - ask-price
+  - confirm-arrival
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Model response in Japanese script with romaji scaffold
+- support_level: 5
+  description: Full suggested wording including a first-language gloss
+transfer_variants_required: 2
+transfer_variants:
+- id: ja.scenario.a2.city.send-parcel.express-urgent
+  description: "Sending an urgent express envelope for a friend's birthday"
+  changed_variable: "speed and reason"
+- id: ja.scenario.a2.city.send-parcel.return-parcel
+  description: "Sending a parcel back to a shop after a refund"
+  changed_variable: "direction and purpose"

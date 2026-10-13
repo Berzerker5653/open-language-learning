@@ -65,3 +65,53 @@ situations:
     typical_registers:
       - ja.register.neutral-common
       - ja.register.plain-casual
+  - id: ja.situation.post-office
+    name: "Sending mail or a parcel at the post office counter"
+    description: >
+      Handing over a parcel, answering about contents and speed, paying.
+    typical_registers:
+      - ja.register.polite-neutral
+  - id: ja.situation.lost-found
+    name: "Reporting or claiming a lost item"
+    description: >
+      Describing an item to an official and filing a report; polite wording
+      throughout.
+    typical_registers:
+      - ja.register.polite-neutral
+  - id: ja.situation.payments
+    name: "Paying a bill or fee at a counter"
+    description: >
+      Presenting a slip, choosing a payment method, asking about fees.
+    typical_registers:
+      - ja.register.polite-neutral
+  - id: ja.situation.civic-office
+    name: "Handling paperwork at the ward or city office"
+    description: >
+      Notifications, certificates, forms, and signatures at a public window.
+    typical_registers:
+      - ja.register.polite-neutral
+  - id: ja.situation.phone-call
+    name: "Making or answering a phone call"
+    description: >
+      Phone set phrases, messages, and call-backs; the caller is unseen.
+    typical_registers:
+      - ja.register.polite-neutral
+  - id: ja.situation.clinic
+    name: "Booking or attending a clinic visit"
+    description: >
+      Symptoms, appointments, insurance cards; polite with reception.
+    typical_registers:
+      - ja.register.polite-neutral
+  - id: ja.situation.pharmacy
+    name: "Buying medicine at the pharmacy"
+    description: >
+      Describing symptoms briefly and following dosing instructions.
+    typical_registers:
+      - ja.register.polite-neutral
+  - id: ja.situation.plans
+    name: "Making or changing plans with a friend"
+    description: >
+      Meeting times and places; casual wording common between friends.
+    typical_registers:
+      - ja.register.polite-neutral
+      - ja.register.plain-casual
