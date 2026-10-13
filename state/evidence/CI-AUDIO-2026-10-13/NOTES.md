@@ -192,3 +192,14 @@ goal_map_orders_bands_by_ladder_not_ascii and
 first_run_steps_lead_with_the_declared_script_in_its_teaching_order.
 Nothing in lts-desktop needed changing: the tests were correct, the checkout was
 incomplete. That is the whole point of the restore step.
+
+## Mutation suite after the fixture fix (green)
+
+    time python -m unittest discover -s tools -p 'test_*.py'
+    Ran 37 tests in 436.337s
+    OK
+    real 7m16.589s   user 118m23.433s   sys 4m5.599s
+
+Green, and no longer I/O bound: 11.8 s per case is the audit itself (user time far
+exceeds real time, so the audit is using the cores). Before the fix the same cases did
+not finish inside 600 s with ~3.4 GB of copying per case.
