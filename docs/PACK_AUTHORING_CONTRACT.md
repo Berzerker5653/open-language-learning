@@ -7,6 +7,9 @@ machine-checkable sources of truth are `crates/langpack/src/layout.rs`
 (every rule below is enforced by one of its commands). If this document
 and those disagree, they win — fix this document.
 
+For the ordered route — what to run, in what order, and what an honest finished
+state looks like — start at `docs/QUICKSTART_PACK_AUTHORING.md`.
+
 ## Non-negotiables
 
 1. **Packs are data.** No executable code, ever. Declarative references
@@ -170,14 +173,23 @@ committed. `scripts/build-catalog.sh` regenerates the audio before
 
 ### CI vs the release path
 
-The engine's pack-conformance CI runs `validate`, `lint`,
-`audit-curriculum`, `audit-lexicon`, and `audit-licenses` in draft mode.
-Install-mode `test` is deliberately NOT in CI: the `.wav` bytes are
-gitignored, so a fresh checkout would fail `media_unbuilt`/`media_missing`
-for reasons that say nothing about the pack. Install-mode gates run only in
-the release path (bake, then `langpack test` / `build-catalog.sh` →
-`langpack build`); the manifest/byte pairing logic itself is pinned by
-`crates/langpack/tests/media.rs` under `cargo test --workspace`.
+CI restores the published pack archives and then runs install-mode `test`,
+because the `.wav` bytes are gitignored and a fresh checkout would otherwise
+fail `media_unbuilt`/`media_missing` for reasons that say nothing about the
+pack. The order is: `scripts/fetch-pack-audio.sh --pack-dir languages/<pack>
+--work-dir tmp/pack-audio` for both reference packs (downloads the `.lpk`
+pinned by `pack_id`+`version` in `catalog/packs.json`, refuses a size/sha256
+mismatch, copies only manifest-named files), then `validate`, `lint`, `test`,
+`audit-curriculum`, `audit-lexicon` and `audit-licenses` for
+`languages/ja-JP`, `validate`/`lint`/`test` for `languages/ru-RU`, and `lint`
+for `tools/pack-templates/example-pack` (`.github/workflows/ci.yml`). A pack
+whose audio has no published archive cannot take that path: a new pack ships
+either baked audio (release) or committed placeholder fixture bytes, which is
+exactly why the conformance packs under `examples/` commit their WAV bytes so
+install mode can gate them in CI. The release path stays bake-then-build
+(`scripts/build-catalog.sh` → `langpack build`); the manifest/byte pairing
+logic itself is pinned by `crates/langpack/tests/media.rs` under
+`cargo test --workspace`.
 
 ## Language-level (band) coverage
 

@@ -8,6 +8,23 @@ this document is the workflow around it. All commands are the
 The single agent-facing contract — requirements digest, templates,
 worked example, CI — is `docs/PACK_AUTHORING_CONTRACT.md`.
 
+## 0. Decide scope before generating anything
+
+Decide these as manifest fields, not as prose:
+
+- **Bands.** Goals carry `band:`; a single-band pack is first-class and bands
+  you do not claim are simply absent (never "incomplete").
+- **Scripts.** `manifest.scripts` entries must each be declared in
+  `language/orthography.yaml` (an undeclared id is `script_unknown`). There is
+  no engine script allowlist: Arabic, Cyrillic, Hangul, Georgian work because
+  your pack declares them. Adding a script is authoring, not an engine change.
+- **Direction.** `capabilities.rtl` is honest to declare when the content is
+  right-to-left, but know what it buys today: nothing in `apps/desktop` reads
+  it, so an RTL pack installs and validates while the UI still lays out
+  left-to-right. Say so in the pack's notes rather than implying rendered RTL.
+- **World.** Declaring `world:` requires parsable `world/environments.jsonl`
+  rows (`world_collection_missing` otherwise).
+
 ## 1. Start a pack
 
 ```sh
@@ -17,7 +34,29 @@ langpack init my-pack --pack-id dev.example.my-lang --locale xx-XX --name "My La
 Creates a minimal 0.2 pack that validates clean immediately:
 `manifest.yaml`, `curriculum/goals.yaml`, empty `sources.jsonl`,
 `licenses.jsonl`, `grammar/concepts.jsonl`. Set the real
-`target_locale` and `pack_id` before going further.
+`target_locale` and `pack_id` before going further. It is a draft skeleton:
+no orthography, no media, so it cannot install.
+
+## 1a. The AI route: scaffold a gate-complete candidate
+
+```sh
+python3 scripts/new-pack.py --out examples/eo-community --language eo --locale eo-001 \
+    --title "Esperanto Community Starter" --scripts Latin --band on-ramp
+python3 scripts/new-pack.py --out examples/ar-ma --language ar --locale ar-MA \
+    --title "Arabic (Morocco) Starter" --scripts Arabic,Latin --rtl --band A1
+```
+
+`scripts/new-pack.py` is the conformance scaffold: unlike `langpack init` it
+emits the whole inventory an install-mode pack needs (language layers,
+orthography shards for each declared script, phonology contrasts, scenarios,
+stories, assessments, non-empty `sources.jsonl`/`licenses.jsonl`, a review kit
+and `tests/README.md`) plus **placeholder audio** in the
+`tests/fixtures/packs/ja-demo` shape, so `langpack test` passes on a fresh
+checkout with no TTS and no network. Every row it could not ground is
+`status: draft`, and it prints the questions it could not answer — record them
+in `review/UNRESOLVED.md` (markdown inside a pack is documentation, not a
+layout violation). Treat its content as a shape to rewrite: the scaffold proves
+structure, never linguistic correctness.
 
 ## 1b. Choose levels (bands) and set your scope
 
@@ -65,6 +104,14 @@ item has a row **and** its baked `.wav`, install-mode `validate`, `test`, and
 `langpack build` all refuse the pack (`media_asset_missing`) — an audio-less
 archive is not a legal artifact.
 
+Audio has exactly three honest states, and a pack is always in one of them:
+
+| state | how | what it may claim |
+| --- | --- | --- |
+| drafting | no `media/manifest.jsonl` | `media_unbuilt`/`media_manifest_absent` are Info in draft mode; install and `build` refuse the pack |
+| placeholder | fixture rows (`synthesizer.runtime: "fixture"`, `model: "fixture-silence"`) over real silent WAV bytes whose `sha256`/`bytes` match what is on disk | installs; for scaffolds, fixtures and conformance proofs; NEVER presentable as speech |
+| baked | `scripts/generate-pack-audio.py` (ADR-0023 engine, weights pinned by sha256) | the release posture; only this state is what a learner hears |
+
 A **complete** pack ships the full reference-grade inventory, not just the
 files `init` scaffolds: `language/{identity,normalization,orthography,phonology,pragmatics}.yaml`,
 `orthography/*.jsonl`, `phonology/contrasts.jsonl`, `curriculum/` (goals + units +
@@ -96,11 +143,13 @@ langpack test my-pack
 ```
 
 Runs install-mode validation plus all audits in one pass; exits non-zero on any
-error and **requires baked audio**. The release path runs it (`build-catalog.sh`
-bakes, then `test` / `build`). CI itself runs only the draft gates (`validate`,
-`lint`, `audit-*`) — never install-mode `test` — because the gitignored `.wav`
-bytes would trip `media_unbuilt`/`media_missing` in a fresh checkout for reasons
-that say nothing about the pack.
+error and **requires audio** (baked or placeholder — what matters is that every
+addressable item has a row whose bytes match). CI does run install-mode `test`:
+`scripts/fetch-pack-audio.sh` restores the published reference-pack archives
+(sha-pinned via `catalog/packs.json`) before the gates run, and a pack whose
+audio is not published commits its fixture bytes instead (see the conformance
+packs under `examples/`). The release path bakes first (`build-catalog.sh`,
+then `test` / `build`).
 
 ## 5. Package, ship, roll back
 
@@ -124,3 +173,29 @@ committing it to the store.
 - Prerequisite graphs must be acyclic and every goal must be reachable
   from a delivered unit/scenario.
 - Packs are data: no executable code is ever part of a pack.
+
+## Review is a different job, and the author cannot do it
+
+A pack ships the reviewer's kit, not a review: `review/REVIEW_POLICY.yaml` (the
+governed file), `review/REVIEWER_KIT.md`, and dated `review/WORKLIST-<date>.md`
+files for each pending item, with the manifest at `review_status: draft`.
+Promoting a row to `validated`/`verified` requires an approved `reviews.jsonl`
+record from a named qualified human (REVIEW-001) — an agent writing its own
+content may prepare that worklist but may never sign it. The app renders the
+"AI-generated · not human-reviewed" banner *because* the manifest says draft;
+the banner is the control working, not a defect.
+
+## What an AI author hands back
+
+1. the pack, with the seven gate outputs pasted as reported (errors and
+   warnings included, not as expected);
+2. the source/licence matrix — each source's licence as its holder writes it,
+   and the pack licence no more permissive than the most restrictive source it
+   derives from (`audit-licenses` proves the other direction only; this is how
+   0.4.0 shipped `CC-BY-4.0` over a BY-SA mirror);
+3. `review/UNRESOLVED.md`: every unverified claim, dialect/variant question and
+   register judgement that needs a native speaker;
+4. an explicit list of everything left at 0, stubbed or placeholder, audio
+   state included;
+5. any engine gap found, stated as a gap (what you tried, what the engine did)
+   — reported, not patched around inside the authoring task.
