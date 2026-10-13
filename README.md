@@ -20,7 +20,12 @@ Download the package for your distro from the [latest release](https://github.co
 
 Start the app, then **Settings → Language packs → install** and pick Japanese or Russian. That fetches the published pack (~320 MB each, audio included) from the in-app catalog — no configuration, no account, nothing to compile (ADR-0027). You can instead import a `.lpk` file you were given. Once a pack and, if you want speech, the aligner build are installed, the core loop runs fully offline; disconnect and it keeps working.
 
-The first launch walks you through choosing a pack and setting a goal. If you want to know which exact build you are running — needed for any bug report — it is under **Settings → About this build**.
+The first launch walks you through a name, the pack, and a microphone choice. Installing a reference pack is not instant — it unpacks about 336 MB of audio, and on a slow disk or a small machine the two "this can take a minute" notices can run into a couple of minutes. They name the stage the engine is actually on, so a waiting screen is not a stuck one.
+
+
+![The Today view after installing the Japanese reference pack: a greeting, what to practise now, a time-budget choice, and a pack banner stating the content is not human-reviewed](docs/images/app-today.png)
+
+That banner is deliberate. It is the app's own statement of the language pack's review posture, and it appears wherever content has not had a qualified human review — the app never implies review that did not happen.
 
 ## What is in the app
 
