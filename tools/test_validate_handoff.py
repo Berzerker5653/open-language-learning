@@ -24,7 +24,26 @@ class HandoffMutationTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name) / "handoff"
-        shutil.copytree(ROOT, self.root, ignore=shutil.ignore_patterns("__pycache__", ".venv", "target", "node_modules"))
+        # A working checkout carries generated bulk the validator never reads:
+        # pack .wav bytes (gitignored; ADR-0016, restorable with
+        # scripts/fetch-pack-audio.sh), the pack-audio work dir, build output
+        # and .git. Copying ~3.4 GB per case turned this 31-test suite into a
+        # multi-minute crawl on any machine that has generated pack audio.
+        shutil.copytree(
+            ROOT,
+            self.root,
+            ignore=shutil.ignore_patterns(
+                "__pycache__",
+                ".venv",
+                "target",
+                "node_modules",
+                ".git",
+                "tmp",
+                "dist",
+                "build",
+                "*.wav",
+            ),
+        )
         self.pack = self.root / "languages/ja-JP"
 
     def audit(self, release=False):

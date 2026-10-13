@@ -18,6 +18,22 @@ pnpm fmt:check          # prettier check (pnpm fmt to fix)
 ./scripts/ci.sh         # full local CI mirror (rust fmt/clippy/test, web checks, schema checks)
 ```
 
+Pack audio is generated, never committed (ADR-0016), so a fresh clone has
+`media/manifest.jsonl` without the `.wav` bytes, and the engine refuses to build
+an audio-less archive (ADR-0024). Restore the published archives before anything
+that installs a reference pack (`cargo test --workspace`, `./scripts/smoke-desktop.sh`,
+`langpack test`):
+
+```sh
+./scripts/fetch-pack-audio.sh --pack-dir languages/ja-JP
+./scripts/fetch-pack-audio.sh --pack-dir languages/ru-RU
+./scripts/fetch-pack-audio.sh --pack-dir languages/ja-JP --verify-only  # offline manifest audit only
+```
+
+Each run verifies the archive against the `sha256`/`size_bytes` pins in
+`catalog/packs.json` and then verifies every restored file against its manifest
+row. Use `--work-dir tmp/pack-audio` to keep the download for reuse.
+
 CI (`.github/workflows/ci.yml`) enforces the same gates plus a `desktop-smoke` job (launches the
 built app under Xvfb) and a `security` job (gitleaks secret scan, `pnpm audit --audit-level=high`,
 `cargo audit`). Test fixture conventions: `tests/README.md`. ADR conventions: `docs/adr/README.md`.
@@ -28,7 +44,7 @@ Do not submit copyrighted textbook/course content without compatible rights. Do 
 
 Major architecture changes require an ADR. Public language-pack schema changes require versioning/migration consideration.
 
-Validate this scaffold with the setup and commands in `README.md`. The future `langpack` CLI is a roadmap deliverable, not included in this archive. Report draft unresolved references explicitly and keep them out of build/promotion eligibility. Reviewer/participant contact, private audio distribution, and final license decisions require owner authorization.
+The `langpack` CLI is in the tree: `cargo run -q -p lts-langpack-cli -- {validate, lint, test, audit-curriculum, audit-lexicon, audit-licenses, build, inspect, install, catalog, rollback}`. Run at least `validate`, `lint` and `test` on any pack change before opening a PR. Report draft unresolved references explicitly and keep them out of build/promotion eligibility. Reviewer/participant contact, private audio distribution, and final license decisions require owner authorization.
 
 ## Reviewing language-pack content
 

@@ -66,8 +66,9 @@ language packs are unchanged in size. Because the app ships no GPL
 payload, the espeak-ng GPL-3.0 obligations ADR-0009 carried
 payload-scoped for the TTS variant — source offer, component license
 texts, attribution UI entries — retire, and no GPL source offer ships
-with the app; `THIRD-PARTY-NOTICES.md` keeps the Kokoro/espeak-ng
-entries as build-time/historical notes. The application's own license
+with the app; `third-party/notices/NOTICE.md` keeps the Kokoro/espeak-ng
+history in a clearly-labeled build-time-tooling section and credits the
+ADR-0023 bake engine. The application's own license
 remains independent.
 
 A user who installed the old synthesis payloads keeps them as dead
@@ -326,12 +327,33 @@ The audio-less archive that `build` once emitted after a loud warning
 is gone: with no runtime synthesis an uncovered item is permanent
 silence, so failing the gate loudly at build/install is the honest
 shape. Consequence: a pack can only publish after its bake has run. Both
-reference packs are baked in the working tree (ja-JP 4,614 manifest rows,
-ru-RU 4,846, 2026-10-12), which is why their 0.3.0 archives carry audio.
-CI still skips install-mode `test` for both, because a fresh checkout has
-the manifests without the gitignored `.wav` bytes and the install gate would
-correctly refuse them; the pairing is enforced on the release path
-(`scripts/build-catalog.sh` bakes, then builds) and pinned by
+reference packs are baked in the working tree (ja-JP 4,894 manifest rows,
+ru-RU 4,846, 2026-10-13), which is why their 0.4.0 archives carry audio.
+A fresh checkout has the manifests **without** the gitignored `.wav` bytes, and
+that is not a cosmetic gap: measured on the public repo 2026-10-13 (run
+`38432671203`), `cargo test --workspace` fails 8 desktop tests that install the
+reference pack and `scripts/smoke-desktop.sh` fails outright, because
+`lts_langpack::archive::build` refuses to emit a silent archive
+(`crates/langpack/src/archive.rs:97`).
+Those tests pass locally only because untracked baked audio sits in the working
+tree. `scripts/fetch-pack-audio.sh` closes the gap without putting 634 MB into
+git: it reads `pack_id`+`version` from the pack's own `manifest.yaml`, resolves
+that entry in `catalog/packs.json`, downloads the published `.lpk`, refuses any
+archive whose size or sha256 differs from the pin (including a cached one),
+unpacks it **through the langpack install gate** into a throwaway store, copies
+only the files the tracked manifest names, then verifies every row — file
+present, sha256 equal, byte length equal — naming offending ids and exiting
+non-zero. `--verify-only` runs just that audit, offline and without cargo. A pack
+version that has not been published yet fails with a message saying its archive
+must be published first, which is the honest ordering: bake → publish → restore.
+CI (`rust`, `desktop-smoke`) now restores both reference packs before the steps
+that need them, caching the archives by `hashFiles('catalog/packs.json')` and
+re-verifying on every cache hit, and because the audio is now present CI also
+runs install-mode `test` for both packs instead of skipping it. Measured on this
+tree: `--verify-only` reports `rows checked=4894 … rows failing=0` for ja-JP and
+`rows checked=4846 … rows failing=0` for ru-RU. A contributor needs one command
+per pack before `cargo test --workspace`. The pairing itself stays enforced on the
+release path (`scripts/build-catalog.sh` bakes, then builds) and pinned by
 `crates/langpack/tests/media.rs`.
 
 The app reads audio provenance from the manifest rather than assuming a file in
@@ -359,7 +381,7 @@ catalog, and the cost is a PERF-tier input rather than a surprise.
 
 All final audit reports bind to the exact application commit/build configuration, dependency lockfiles, pack hashes, model/provider hashes, review range, platform and hardware tiers. An affected update invalidates its previous evidence and reruns the relevant gates. Publish aggregate benchmark/review evidence without private recordings or reviewer identities.
 
-### Alpha 0.4.0-alpha.1 — local build evidence (2026-10-13, not yet published)
+### Alpha 0.4.0-alpha.1 — published build evidence (2026-10-13)
 
 Built from commit `70ec683` with the pinned toolchain (Rust 1.97.1 from
 `rust-toolchain.toml`, Node 26 + npm; the build runs
@@ -405,6 +427,31 @@ and on purpose: both packs are `experimental/unreviewed` and
 Nothing here is signed, and tagging/uploading is an owner action. The hashes above
 are the values to publish; a superseded build invalidates them per the paragraph
 above.
+
+**Publication state (2026-10-13).** The repository is public and the four
+artifacts above are attached to the pre-release
+`open-language-learning-platform-0.4.0-alpha.1`; both reference packs are
+attached to normal releases under their pack tags, and `catalog/packs.json`
+points at those asset URLs. The public path was proven from outside the build
+machine: unauthenticated `GET` of the raw catalog returns 200,
+`ja-jp-reference-0.4.0.lpk` downloaded over its public release URL hashes to
+`f0aa971f…b713a5f` — identical to the catalog pin — and
+`langpack install --store <empty-store>` accepted it
+(`installed org.openlanguage.ja-jp.reference v0.4.0`). GitHub computes the same
+`sha256:` digests for every uploaded asset.
+
+**Licensing paper corrected after publication.** The published ja-JP 0.4.0
+archive carries three `licenses.jsonl` records. The tree now carries five: the
+baked-audio record was corrected to name the Qwen3-TTS bake engine (ADR-0023; the
+record still said kokoro/sherpa-onnx), and two `derived-from-source` records at
+**CC-BY-SA-4.0** were added for the dictionary-sourced lexicon and kanji layers
+with the EDRDG attribution — the pack README had asserted a dictionary-data record
+that did not exist. So the downloadable 0.4.0 archive predates that correction and
+understates a ShareAlike obligation; it should be republished as 0.4.1 alongside
+the owner's still-open decision on whether the **pack-level** `content_license`
+(currently CC-BY-4.0) should itself become CC-BY-SA-4.0. `audit-licenses` does not
+currently flag a pack whose declared content license is more permissive than a
+source it derives from — a gate gap worth closing, not a claim to paper over.
 
 ## Authentic updates and interrupted downloads
 

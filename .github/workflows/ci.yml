@@ -29,6 +29,23 @@ jobs:
         with:
           components: rustfmt, clippy
       - uses: Swatinem/rust-cache@v2
+      # CI-AUDIO 2026-10-13: the .wav bytes under languages/*/media/ are
+      # gitignored (ADR-0016), so a fresh checkout has the manifests without
+      # the audio and every test that installs a reference pack fails.
+      # Restore the archives published for the versions pinned in
+      # catalog/packs.json before cargo test consumes the packs. The cache
+      # key changes whenever either pack's pinned version/sha256 changes;
+      # the script re-verifies size+sha256 against the catalog before
+      # unpacking, so a stale cache hit is refused, never trusted.
+      - name: Cache published pack archives
+        uses: actions/cache@v4
+        with:
+          path: tmp/pack-audio
+          key: pack-audio-${{ hashFiles('catalog/packs.json') }}
+      - name: Restore reference-pack audio (published archives)
+        run: |
+          ./scripts/fetch-pack-audio.sh --pack-dir languages/ja-JP --work-dir tmp/pack-audio
+          ./scripts/fetch-pack-audio.sh --pack-dir languages/ru-RU --work-dir tmp/pack-audio
       # Fast bash gate for the shipped aligner payload (ADR-0019): synthetic
       # payload only, no network/cmake/cargo, seconds to run.
       - name: Aligner sidecar staging script regression test
@@ -42,25 +59,18 @@ jobs:
         run: |
           cargo run -q -p lts-langpack-cli -- validate languages/ja-JP
           cargo run -q -p lts-langpack-cli -- lint languages/ja-JP
-          # install-mode `test` is deliberately NOT run for ja-JP: its generated
-          # .wav bytes are gitignored (ADR-0016) and the install gate refuses audio
-          # a pack never built. The release path (scripts/build-catalog.sh)
-          # regenerates the audio and then runs build, which enforces the manifest
-          # pairing; that pairing logic is covered by crates/langpack/tests/media.rs
-          # through `cargo test --workspace` above.
+          # install-mode `test` now runs: the restore step put the gitignored
+          # .wav bytes in place, so this exercises the same install gate a user
+          # hits (ADR-0024 media coverage) on a fresh checkout.
+          cargo run -q -p lts-langpack-cli -- test languages/ja-JP
           cargo run -q -p lts-langpack-cli -- audit-curriculum languages/ja-JP
           cargo run -q -p lts-langpack-cli -- audit-lexicon languages/ja-JP
           cargo run -q -p lts-langpack-cli -- audit-licenses languages/ja-JP
           cargo run -q -p lts-langpack-cli -- validate languages/ru-RU
           cargo run -q -p lts-langpack-cli -- lint languages/ru-RU
-          # install-mode `test` is NOT run for ru-RU either: the .wav bytes
-          # the manifest references are gitignored (ADR-0016), so a fresh CI
-          # checkout has the manifest without audio and the install gate would
-          # refuse it (media_missing). The ru pack IS now baked (K-91) and
-          # passes install-mode validation with the wavs present; the manifest/
-          # wav pairing is enforced by the release path (build-catalog.sh
-          # regenerates audio, then builds) and pinned by
-          # crates/langpack/tests/media.rs via `cargo test --workspace`.
+          # same for ru-RU: audio restored from the published archive, so the
+          # install gate is exercised end to end rather than assumed.
+          cargo run -q -p lts-langpack-cli -- test languages/ru-RU
           cargo run -q -p lts-langpack-cli -- lint tools/pack-templates/example-pack
 
   web:
@@ -94,6 +104,19 @@ jobs:
           cache: pnpm
       - uses: dtolnay/rust-toolchain@1.97.1
       - uses: Swatinem/rust-cache@v2
+      # CI-AUDIO 2026-10-13: the .wav bytes under languages/*/media/ are
+      # gitignored (ADR-0016); smoke-desktop.sh builds pack archives and the
+      # silent-archive guard (crates/langpack/src/archive.rs) refuses an
+      # audio-less pack (ADR-0024). Restore the published archives first.
+      - name: Cache published pack archives
+        uses: actions/cache@v4
+        with:
+          path: tmp/pack-audio
+          key: pack-audio-${{ hashFiles('catalog/packs.json') }}
+      - name: Restore reference-pack audio (published archives)
+        run: |
+          ./scripts/fetch-pack-audio.sh --pack-dir languages/ja-JP --work-dir tmp/pack-audio
+          ./scripts/fetch-pack-audio.sh --pack-dir languages/ru-RU --work-dir tmp/pack-audio
       - run: ./scripts/smoke-desktop.sh
 
   # PLAT-001 (K-34): Windows/macOS parity is compile-only. Runtime behavior
@@ -207,3 +230,7 @@ jobs:
       - run: python tools/validate_handoff.py
       - run: python -m unittest discover -s tools -p 'test_validate_handoff.py'
       - run: python scripts/test_generate_pack_audio.py
+      # CI-AUDIO: hermetic regression test for the restore path the rust and
+      # desktop-smoke jobs depend on (synthetic pack + local archive, no
+      # network/cargo).
+      - run: python scripts/test_fetch_pack_audio.py
