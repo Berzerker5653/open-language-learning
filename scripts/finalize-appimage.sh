@@ -4,8 +4,8 @@
 # Why: linuxdeploy collects every NEEDED library the binary links, which
 # includes the tauri-sysroot libwebkit2gtk/libjavascriptcoregtk. WebKitGTK
 # bakes its helper-process dir (WebKitWebProcess, WebKitNetworkProcess,
-# injected-bundle) into the .so at compile time — on this machine that is
-# /home/hunter/.wk41 — so a bundled copy cannot find its helpers on any
+# injected-bundle) into the .so at compile time — on the build machine
+# that is a $HOME path (e.g. ~/.wk41) — so a bundled copy cannot find its
 # other machine and the app SIGABRTs at webview spawn. AppImages mount at
 # / but can never provide a private /home path. The deb does not have
 # this problem: it declares system libraries as package dependencies.

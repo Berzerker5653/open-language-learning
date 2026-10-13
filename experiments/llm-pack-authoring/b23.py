@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Batch 23: ja-JP B1 units 280-289 (culture-tradition part 1)."""
 import json, os
+from pathlib import Path
 
-R = "/home/hunter/game-dev/LTS/languages/ja-JP"
+R = str(Path(__file__).resolve().parents[2] / "languages/ja-JP")
 GEN = {"method": "ai-assisted", "tool": "omp", "model": "strata/qwen3.8-flash-next-iq3_s",
        "date": "2026-10-04", "notes": "ai-assisted draft wording; qualified review pending."}
 SRC = ["jf-standard", "ai-drafted-extension"]
