@@ -2447,10 +2447,6 @@ dependencies = [
 [[package]]
 name = "lts-audio"
 version = "0.1.0"
-dependencies = [
- "lts-domain",
- "thiserror 2.0.21",
-]
 
 [[package]]
 name = "lts-desktop"
@@ -2543,10 +2539,6 @@ dependencies = [
 [[package]]
 name = "lts-security"
 version = "0.1.0"
-dependencies = [
- "lts-domain",
- "thiserror 2.0.21",
-]
 
 [[package]]
 name = "lts-speech-api"
@@ -2561,14 +2553,12 @@ dependencies = [
 name = "lts-speech-runtime"
 version = "0.1.0"
 dependencies = [
- "lts-domain",
  "lts-speech-api",
  "serde",
  "serde_json",
  "serde_yaml",
  "sha2 0.11.0",
  "tempfile",
- "thiserror 2.0.21",
 ]
 
 [[package]]
