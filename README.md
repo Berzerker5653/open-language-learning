@@ -1,91 +1,77 @@
-# Open Language Learning Platform — Development Handoff
+# Open Language Learning Platform
 
-Working title only. Rename the product before public release after a naming/trademark check.
+A local-first, open-source language-learning application. Progress is measured as **what you can understand and do in the target language** — situations you can handle, words you can use — rather than lessons completed, points earned, or days in a row logged. The first reference languages are **Japanese** and **Russian**; the engine is language-independent and driven by installable language packs.
 
-This repository package is a **development specification and autonomous-build handoff** for a local-first, open-source language-acquisition platform. The first reference language is Japanese (`ja-JP`), but the core product is intentionally language-independent.
+Working title. The product will be renamed after a naming/trademark check.
 
-## Current state — public alpha (2026-10-13)
+**Status: public alpha, 2026-10-13.** The desktop app runs on **Linux**, which is the only platform we have tested. Windows and macOS installers are built by CI but untested: a platform becomes *community-confirmed* only when a human who actually ran that build files a runtime report (`docs/platform/PLATFORM_REPORTS.yaml`, ADR-0015). Mobile and web are not built.
 
-The desktop application runs today on **Linux**. Two reference language packs (`ja-JP`, `ru-RU`) are published at **0.4.0** and install from the in-app catalog (no configuration needed; ADR-0027) or by importing a `.lpk` file. Windows and macOS builds are produced but **untested**: a platform moves to *community-confirmed* only when a human who ran that build files a runtime report (`docs/platform/PLATFORM_REPORTS.yaml`, ADR-0015).
+---
 
-What the content actually covers — measured on this tree, not asserted: both packs carry units across **every band from on-ramp through B2**. `ja-JP` has 75 goals and 786 units (12 on-ramp, 79 A1, 112 A2, 195 B1, 388 B2) driving 4,563 activities; `ru-RU` has 60 goals and 809 units (20 on-ramp, 90 A1, 99 A2, 200 B1, 400 B2) driving 3,197 activities. Every unit's `goal_id`, every `allowed_vocab`/`allowed_grammar`/`allowed_readings` entry, every activity `content_ref` and `scenario_id`, and every goal `assessment_id` resolves — 0 dangling across 786+809 units and 26,819+15,555 content references. The limit is not the unit graph: **every goal in both packs is `review_status: draft`** (75/75, 60/60) and no content record anywhere is `validated` or `verified`, while the pools under the activity graph are thinner than the graph itself (ja-JP: 4,057 lexicon entries, 823 sentences, 84 kanji, one assessment definition per goal). All first-party content is **AI-drafted** (ADR-0014), which is why pack display names keep their "(Draft)" marker. Pronunciation feedback is **guided-only and makes no accuracy claim to the learner** (ADR-0013, docs/18), and packs are the only source of spoken audio (ADR-0024) — the app never synthesizes speech.
+## Try it (Linux, no build required)
 
-`REL-001` (the desktop release candidate) still needs **9 of the 51
-release-required tasks** (ledger: `state/task-state.json`): the
-assistive-technology audit (ACC-001), performance tiers (PERF-002), platform
-parity (PLAT-001), the security/privacy audit (SEC-001), the AI-oriented
-pack-authoring kit (PACK-AI-001), and coverage depth in the thin bands
-(JA-A2-001 / JA-B1-001 / JA-B2-001 carry unit scaffolding across bands but have
-no acceptance record in the ledger). Qualified human content review
-(JA-A2-002 / JA-B1-002 / JA-B2-002) is **not** a 1.0 gate: ADR-0017 §2 (owner
-scope decision 2026-10-08, unfunded project) rules that no release gate depends
-on human review, and `tasks/ROADMAP.yaml` now reflects that consistently for all
-three bands — `JA-A1-003` was already annotated, the others were missed. Review
-remains the only route to a `validated`/`verified` trust state, band coverage and
-public framework-alignment claims stay enforced by REVIEW-001, lint/audit-sources
-and `docs/18_PUBLIC_CLAIMS_AND_SCOPE.md`, and no surface may imply review that
-did not happen. No agent may mark any of those passed.
+Download the package for your distro from the [latest release](https://github.com/Berzerker5653/open-language-learning/releases/tag/open-language-learning-platform-0.4.0-alpha.1):
 
-Useful first contributions: a **platform runtime report** or a **content review**, both through the issue templates — each feeds an evidence file that the release gates actually read. The app states the version and commit you need for a report under **Settings → About this build**. A content review starts at `CONTRIBUTING.md` ("Reviewing language-pack content"); reviewer kits and worklists live under `languages/ja-JP/review/` and `languages/ru-RU/review/`.
+| file | size | what it is |
+| --- | --- | --- |
+| `open-language-learning-platform_0.4.0-alpha.1_amd64.deb` | 12 MB | Debian/Ubuntu package, base app |
+| `open-language-learning-platform_0.4.0-alpha.1_amd64.AppImage` | 73 MB | single executable for any x86-64 distro, base app (run `chmod +x`, then launch) |
+| same names with `_amd64-aligner` | 84 MB / 145 MB | the same app plus the built-in speech aligner (whisper.cpp + its tiny model), so pronunciation feedback works with no model download |
 
-## Product in one sentence
+Start the app, then **Settings → Language packs → install** and pick Japanese or Russian. That fetches the published pack (~320 MB each, audio included) from the in-app catalog — no configuration, no account, nothing to compile (ADR-0027). You can instead import a `.lpk` file you were given. Once a pack and, if you want speech, the aligner build are installed, the core loop runs fully offline; disconnect and it keeps working.
 
-Build a game-like learning environment in which progress means **what the learner can understand and do in the target language**, not how many lessons, points, or streak-days they have accumulated.
+The first launch walks you through choosing a pack and setting a goal. If you want to know which exact build you are running — needed for any bug report — it is under **Settings → About this build**.
 
-## Non-negotiable decisions
+## What is in the app
 
-1. **No streak mechanics.** The product must never reward meaningless activity just to preserve a number.
-2. **Speech, listening, reading, and writing are independent competencies.** Reading a word does not prove the learner can understand or pronounce it.
-3. **Language packs are a first-class public interface.** A competent human or AI should be able to construct a candidate language pack from the published specification without editing core application code.
-4. **AI-generated content is never trusted merely because it is syntactically valid.** Provenance, tests, quality gates, and review states are mandatory.
-5. **Local-first and privacy-first.** Microphone recordings remain local by default; online services are optional providers, never hard dependencies.
-6. **The language is the gameplay mechanic.** Progress unlocks situations and capabilities rather than merely XP.
-7. **No single vendor/model lock-in.** ASR, TTS, alignment, pronunciation analysis, storage, and AI tutoring are provider interfaces.
-8. **Offline core path.** A learner must be able to study the installed curriculum and use downloaded speech capabilities without an account or continuous internet connection.
-9. **Accuracy over content velocity.** Wrong instruction is a critical defect.
-10. **The repository is durable memory.** OMP/LLMs must not depend on chat history for project state.
+Thirteen areas, all reachable from the sidebar: **Today** (what to practise now), **Practice**, **My Words**, **Progress**, **Pronunciation**, **Speaking**, **Scenarios**, **Shadowing**, **Reading**, **Writing**, **Kanji** (Japanese), **Placement** (finding your starting level), **Settings**. Speaking and listening are treated as separate skills from reading: recognising a word never marks you as able to say or understand it.
 
-## Review status
+Reference-pack coverage, measured on this tree: `ja-JP` 75 goals / 786 units / 4,563 activities, `ru-RU` 60 goals / 809 units / 3,197 activities, spanning on-ramp through B2 in both languages. Every reference in the unit graph resolves — 0 dangling links across 786+809 units and 26,819+15,555 content references.
 
-This is a proposed corrected handoff copy prepared on 2026-10-02. Read `REVIEW_REPORT.md` for findings, changes, and remaining implementation/review work. No application, B2 curriculum, benchmark calibration, or qualified human content review has been completed by this audit. The original archive is preserved separately.
+## What it deliberately does not do
 
-## Start here
+- **No streaks, no XP-as-progress.** Nothing in the product rewards activity for its own sake. If an engagement metric can be maximised without learning, that is treated as a defect to fix.
+- **No account, no required service.** The core path is offline. Microphone audio stays on your machine; anything that could upload is an optional provider that must show a privacy notice before first use.
+- **No accuracy claims it cannot support.** There is no human speech-calibration dataset for this project, so pronunciation feedback is *guided only* and never presents itself as a measured score (ADR-0017).
+- **No speech synthesis in-app** (ADR-0024): pack audio is authored into the language pack, not generated on your machine.
 
-For an autonomous coding agent, read files in this order:
+## Honest limits right now
 
-1. `START_HERE_OMP.md`
-2. `AGENTS.md`
-3. `docs/00_MASTER_SPEC.md`
-4. `tasks/ROADMAP.yaml`
-5. Only the documents listed by the selected task's `read_first` field.
+Read this before recommending it to someone still learning.
 
-Do **not** load every document into context for every task.
+- **Every piece of pack content is AI-drafted and has never had a qualified human review.** All 75/75 Japanese and 60/60 Russian goals are `review_status: draft`; no content record anywhere is `validated` or `verified`. The app never claims otherwise, and `docs/18_PUBLIC_CLAIMS_AND_SCOPE.md` forbids surfaces that imply review which did not happen.
+- **Speech feedback is uncalibrated** — useful for practice, not a measurement.
+- **Open release gates** (`state/task-state.json`, 9 of 51 still required for `REL-001`): assistive-technology audit (ACC-001), performance tiers (PERF-002), platform parity (PLAT-001), security and privacy audit (SEC-001), the AI pack-authoring kit (PACK-AI-001), and depth in the thin CEFR bands (JA-A2/B1/B2 coverage tasks have scaffolding but no acceptance record). These are tracked in `tasks/KANBAN.md`.
+- **Windows and macOS are untested**, and the app is Linux-only in practice today.
 
-## Run it and check it yourself (Linux)
+## Contributing
 
-The toolchain is pinned, so a fresh clone needs exactly three things: **Rust**
-(`rust-toolchain.toml` pins 1.97.1 with rustfmt and clippy, which `rustup`
-installs automatically), **Node ≥ 26**, and the pinned package manager —
-`packageManager` says `pnpm@12.8.1`, and Node 26 no longer ships corepack, so:
+Three ways that actually move the release gates:
+
+1. **File a platform runtime report** — run the app on Windows, macOS, or a Linux distro you know and use the *Platform runtime report* issue template. Each report feeds `docs/platform/PLATFORM_REPORTS.yaml`, which PLAT-001 reads.
+2. **Review language-pack content** — start at `CONTRIBUTING.md` ("Reviewing language-pack content"); reviewer kits and worklists are in `languages/ja-JP/review/` and `languages/ru-RU/review/`. Human review is the only route to a `validated`/`verified` trust state, and no agent may perform it.
+3. **Fix code** — `CONTRIBUTING.md` covers the setup and the gates a change must pass.
+
+Report security issues privately through GitHub's *Report a vulnerability* on the Security tab, per [`SECURITY.md`](SECURITY.md) — not through a public issue.
+
+### Build from source
+
+The toolchain is pinned, so a fresh clone needs exactly three things: **Rust** (`rust-toolchain.toml` pins 1.97.1 with rustfmt and clippy, which `rustup` installs automatically), **Node ≥ 26**, and the pinned package manager — `packageManager` says `pnpm@12.8.1`, and Node 26 no longer ships corepack, so:
 
 ```sh
 npm install --global pnpm@12.8.1
 pnpm install --frozen-lockfile
 ```
 
-Desktop system packages (Debian/Ubuntu):
-`libwebkit2gtk-4.1-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev`.
-On Arch without sudo, `scripts/setup-tauri-sysroot.sh` builds a user-local
-webkit2gtk sysroot instead.
+Desktop system packages (Debian/Ubuntu): `libwebkit2gtk-4.1-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev`. On Arch without sudo, `scripts/setup-tauri-sysroot.sh` builds a user-local webkit2gtk sysroot instead.
 
-Open the app you are reading about — it builds a debug binary if one is missing
-and serves the UI itself:
+Launch the app you are reading about — it builds a debug binary if one is missing and serves the UI itself:
 
 ```sh
 scripts/launch-preview.sh
 ```
 
-The gates a change has to pass:
+The gates every change has to pass:
 
 ```sh
 pnpm fmt:check && pnpm lint && pnpm typecheck && pnpm test   # web layer
@@ -93,60 +79,71 @@ cargo test --workspace                                       # engine, storage, 
 cargo run -q -p lts-langpack-cli -- test languages/ja-JP      # pack conformance
 ```
 
-Reference-pack audio is deliberately not in git (ADR-0016): the committed
-`media/manifest.jsonl` records what every asset is, and
-`scripts/generate-pack-audio.py` regenerates the `.wav` bytes before an archive
-is built — a pack whose audio is incomplete is refused at build and install
-(ADR-0024), never silently shipped silent.
+Reference-pack audio is deliberately not in git (ADR-0016). The committed `media/manifest.jsonl` records what every asset is; `scripts/fetch-pack-audio.sh` restores the published `.wav` bytes from the release archives (what CI does), and `scripts/generate-pack-audio.py` can regenerate them from scratch. A pack whose audio is incomplete is refused at build and at install (ADR-0024), never silently shipped silent.
 
-## Major documentation
+The specification itself has a validator, useful when you change docs or schemas:
 
-- `docs/00_MASTER_SPEC.md` — authoritative product contract
-- `docs/01_PRODUCT_AND_UX.md` — user experience, game structure, anti-streak rules
-- `docs/02_LEARNING_SCIENCE.md` — pedagogical model and evidence boundaries
-- `docs/03_CURRICULUM_AND_MASTERY.md` — typed curriculum graph, learner model, mastery and scheduling
-- `docs/04_LANGUAGE_PACK_SPEC.md` — public language-pack architecture
-- `docs/05_SPEECH_SYSTEM.md` — local ASR, alignment, pronunciation/prosody feedback
-- `docs/06_JAPANESE_REFERENCE.md` — Japanese-specific reference requirements
-- `docs/07_TECHNICAL_ARCHITECTURE.md` — recommended software architecture
-- `docs/08_DATA_AND_PRIVACY.md` — storage, privacy, sync boundaries, threat model
-- `docs/09_TESTING_AND_ACCEPTANCE.md` — quality gates and definition of done
-- `docs/10_LICENSING_AND_PROVENANCE.md` — licenses, source tracking, dataset rules
-- `docs/11_ACCESSIBILITY_AND_LOCALIZATION.md` — accessibility and UI localization
-- `docs/12_OBSERVABILITY_AND_RESEARCH.md` — privacy-safe metrics and efficacy evaluation
-- `docs/13_RELEASE_AND_DISTRIBUTION.md` — builds, models, packs, release channels
-- `docs/14_FAQ_AND_DECISIONS.md` — anticipated product/engineering questions
-- `docs/15_AUTONOMOUS_DEVELOPMENT.md` — how OMP should execute unattended
-- `docs/16_CONTENT_AUTHORING_AND_REVIEW.md` — review and trust-promotion protocol
-- `docs/17_SPEECH_BENCHMARK_PLAN.md` — provider and calibration protocol
-- `docs/18_PUBLIC_CLAIMS_AND_SCOPE.md` — claim and completeness gates
-- `docs/19_PROJECT_FILE_ARCHITECTURE.md` — file ownership boundaries
-- `docs/SOURCES.md` — research/source registry
-
-## Scope target
-
-The architecture must support CEFR A1–C2-like capability ranges. The **first public-quality Japanese release should be complete and validated through at least independent-user/B2-level communicative coverage**, with the architecture and content pipeline capable of continuing through C1/C2. Advanced content must not be faked to claim completeness.
-
-## Repository status
-
-This handoff package is a specification scaffold, not a finished application. `tasks/ROADMAP.yaml` is designed so an autonomous agent can bootstrap the implementation and continue through the milestones while persisting status in `state/`.
-
-## Validate this handoff
-
-Use Python 3.10 or newer in a virtual environment. This validates the specification scaffold; it does not build an application or certify educational quality.
-
-```bash
-python3 -m venv .venv
-# POSIX shells
-. .venv/bin/activate
-# Windows PowerShell instead: .venv\Scripts\Activate.ps1
+```sh
+python3 -m venv .venv && . .venv/bin/activate
 python -m pip install -r tools/requirements.txt
 python tools/validate_handoff.py
-python -m unittest discover -s tools -p 'test_validate_handoff.py'
 ```
 
-See `schemas/README.md` for the exact validation scope, draft-reference warning, and stricter pack-readiness command. The pack SDK CLI described in docs/04 exists (`crates/langpack`, `langpack` CLI: validate/lint/test/build/catalog/install).
+## Product principles
 
-## Intended handoff boundary
+These are non-negotiable project decisions, recorded as ADRs and enforced by the release gates:
 
-The default implementation goal is the desktop Japanese B2-like **release candidate** defined by `REL-001`, with the gate set ADR-0017 records: nothing in this project is funded, all content is AI-created, and the human gates that remain (security review, privacy review, assistive-technology audit, hands-on test pass) belong to the owner and cannot be self-certified by an agent. There is no human speech-calibration dataset, so pronunciation feedback stays guided-only and makes no accuracy claim to the learner. Earlier partial alpha/beta builds may be useful without changing that goal. Optional AI, mobile, web, and advanced content remain separate scope. Preparing a release candidate does not authorize public publication, external messages, paid services, or signing/store credentials. Licensing is settled (`LIC-001` closed 2026-10-04): application code Apache-2.0 (ADR-0010), original pack content CC-BY-4.0, dictionary-derived data CC-BY-SA-4.0; note that a license is a permission grant, not proof of authorship, and third-party obligations (JMdict/EDRDG CC BY-SA 4.0, fonts, whisper terms, the GPL-3.0 `espeak-ng-data` payload per ADR-0009) are unchanged by AI-only authorship. Public distribution still requires explicit owner publication authorization.
+1. No streak mechanics; meaningless activity must never be rewarded.
+2. Speech, listening, reading and writing are independent competencies.
+3. Language packs are a first-class public interface: a competent human or AI can build a candidate pack from the published spec without editing application code (`docs/04_LANGUAGE_PACK_SPEC.md`).
+4. AI-generated content is never trusted merely because it parses. Provenance, tests, quality gates and review states are mandatory.
+5. Local-first and privacy-first; online services are optional providers, never dependencies.
+6. The language is the gameplay mechanic — progress unlocks situations and capabilities, not XP.
+7. No vendor or model lock-in: ASR, alignment, pronunciation analysis, storage and tutoring are provider interfaces.
+8. An offline core path: installed curriculum and downloaded speech capability work with no account and no connection.
+9. Accuracy over content velocity — wrong instruction is a critical defect.
+10. The repository is the durable memory: no project state lives in chat history.
+
+## Where to read more
+
+| document | contents |
+| --- | --- |
+| `docs/00_MASTER_SPEC.md` | authoritative product contract |
+| `docs/01_PRODUCT_AND_UX.md` | user experience, game structure, anti-streak rules |
+| `docs/02_LEARNING_SCIENCE.md` | pedagogical model and evidence boundaries |
+| `docs/03_CURRICULUM_AND_MASTERY.md` | typed curriculum graph, learner model, mastery and scheduling |
+| `docs/04_LANGUAGE_PACK_SPEC.md` | public language-pack architecture |
+| `docs/05_SPEECH_SYSTEM.md` | local ASR, alignment, pronunciation/prosody feedback |
+| `docs/06_JAPANESE_REFERENCE.md` | Japanese-specific reference requirements |
+| `docs/07_TECHNICAL_ARCHITECTURE.md` | software architecture |
+| `docs/08_DATA_AND_PRIVACY.md` | storage, privacy, sync boundaries, threat model |
+| `docs/09_TESTING_AND_ACCEPTANCE.md` | quality gates and definition of done |
+| `docs/10_LICENSING_AND_PROVENANCE.md` | licences, source tracking, dataset rules |
+| `docs/11_ACCESSIBILITY_AND_LOCALIZATION.md` | accessibility and UI localisation |
+| `docs/12_OBSERVABILITY_AND_RESEARCH.md` | privacy-safe metrics and efficacy evaluation |
+| `docs/13_RELEASE_AND_DISTRIBUTION.md` | builds, models, packs, release channels |
+| `docs/14_FAQ_AND_DECISIONS.md` | anticipated product and engineering questions |
+| `docs/15_AUTONOMOUS_DEVELOPMENT.md` | how the coding agents execute unattended |
+| `docs/16_CONTENT_AUTHORING_AND_REVIEW.md` | review and trust-promotion protocol |
+| `docs/17_SPEECH_BENCHMARK_PLAN.md` | provider and calibration protocol |
+| `docs/18_PUBLIC_CLAIMS_AND_SCOPE.md` | claim and completeness gates |
+| `docs/19_PROJECT_FILE_ARCHITECTURE.md` | file ownership boundaries |
+| `docs/SOURCES.md` | research and source registry |
+
+Living state: `tasks/KANBAN.md` (what is being worked on and what is blocked), `state/task-state.json` (the release ledger), `docs/adr/` (every architectural decision and its status).
+
+### For a coding agent
+
+Read in this order, and do not load every document per task:
+
+1. `START_HERE_OMP.md`
+2. `AGENTS.md`
+3. `docs/00_MASTER_SPEC.md`
+4. `tasks/ROADMAP.yaml`
+5. only the documents listed by the selected task's `read_first` field
+
+## Scope and licence
+
+The architecture targets CEFR A1–C2-like capability ranges; the first public-quality Japanese release is meant to be complete through independent-user/B2 communicative coverage, with the pipeline able to continue into C1/C2. Advanced content must never be faked to imply completeness. The default implementation target is the desktop release candidate `REL-001`; the remaining human gates (security review, privacy review, assistive-technology audit, hands-on test pass) belong to the project owner and cannot be self-certified by an agent.
+
+Language-pack content is licensed per pack, and the declaration lives in the pack itself: `ja-JP` declares `CC-BY-4.0` and `ru-RU` declares `CC0-1.0` (see the `license:` block in `languages/*/manifest.yaml`), with per-asset provenance and source licences in `languages/*/licenses.jsonl` and the rules those records must satisfy in `docs/10_LICENSING_AND_PROVENANCE.md`. Third-party binaries actually bundled inside an installer are inventoried in `third-party/notices/NOTICE.md`.
