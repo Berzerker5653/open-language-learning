@@ -29,3 +29,30 @@ Do not submit copyrighted textbook/course content without compatible rights. Do 
 Major architecture changes require an ADR. Public language-pack schema changes require versioning/migration consideration.
 
 Validate this scaffold with the setup and commands in `README.md`. The future `langpack` CLI is a roadmap deliverable, not included in this archive. Report draft unresolved references explicitly and keep them out of build/promotion eligibility. Reviewer/participant contact, private audio distribution, and final license decisions require owner authorization.
+
+## Reviewing language-pack content
+
+All language content is AI-generated and unreviewed: 5,132 ja-JP rows sit at `draft`, 153 at `review-needed`, 5,073 ru-RU rows at `draft`, and nothing is at `validated` or `verified`. Closing that gap needs human reviewers; one honest pass over a handful of items is a real contribution.
+
+A review in 15 minutes:
+
+1. Open `languages/ja-JP/review/REVIEWER_KIT.md` and `languages/ja-JP/review/WORKLIST-2026-10-12.md` (the same pair lives in `languages/ru-RU/review/`).
+2. Check each item against the kit's severity scale. If something is wrong, record `changes-requested` or `rejected` with notes instead of flipping the status.
+3. For each approved item, change exactly two things in one PR: the item's `status` field (`draft` → `validated`) in the file that holds it — a YAML document for curriculum files under `curriculum/units/`, one JSONL row for shard files such as `lexicon/entries.jsonl` — and one line appended to `languages/ja-JP/reviews.jsonl` at the pack root, which you create if it is still absent (no review has been recorded in this pack yet). Each record is validated against `schemas/v0.2/review-record.schema.json` and the shape `languages/ja-JP/review/REVIEW_POLICY.yaml` describes; in the file it is one line, shown expanded here:
+
+```json
+{
+  "id": "rev-2026-10-05-ana-1",
+  "target_id": "ja.lex.food-drink.sushi",
+  "reviewer": "yuki-p",
+  "reviewer_category": "community-reviewer",
+  "scope": "gloss, form, register",
+  "date": "2026-10-05",
+  "outcome": "approved",
+  "notes": "natural as written"
+}
+```
+
+`community-reviewer` — any honest, engaged volunteer, credited under the pseudonym you choose — can promote items to `validated`. `verified` stays out of reach unless you genuinely meet the `qualified-human-expert` or `qualified-human-native-speaker` definitions in the pack's `review/REVIEW_POLICY.yaml`. The gate is machine-enforced: `crates/langpack/src/pack.rs` refuses any `validated`/`verified` status flip without a qualifying approved record in `reviews.jsonl` (`review_promotion_unsupported`), so a PR that flips status without one fails CI and cannot merge.
+
+Content problems you cannot fix yourself land in `.github/ISSUE_TEMPLATE/content-review.yml`; app-behaviour problems in `.github/ISSUE_TEMPLATE/platform-runtime-report.yml`.

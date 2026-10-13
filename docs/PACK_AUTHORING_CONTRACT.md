@@ -92,6 +92,32 @@ langpack build <pack> -o out.lpk  # deterministic archive; requires scaffold-cle
 (non-empty licenses/sources, resolved references, license clearance);
 `TBD` content licensing blocks install, never drafting.
 
+### Learner-visible romaji and script labels
+
+`validate` adopts three lexicon-audit codes as hard gates: learner-visible
+romaji that contradicts an entry's own kana is misleading on screen. The
+rest of `audit-lexicon` (`lexicon_script_contamination`, Cyrillic stress
+marks) stays audit-only so the install gate does not widen by accident.
+
+- A `transliteration_system` reading carrying kana (U+3040–U+30FF) or an
+  ASCII digit (`kentoう`, `ronso2`, `jiゅnり`): `reading_transliteration_not_latin`
+  (Error in every mode).
+- Kana inside a sentence's `romaji` field — digits stay legal there, because
+  sentence texts legitimately contain Arabic numerals
+  (`3-nen shokumu keiken ga arimasu.`): `romaji_contains_kana`
+  (Error in every mode).
+- A `script` label of `hiragana`/`katakana` on text that carries kana of the
+  *other* block and none of the labelled one (マナー labelled hiragana):
+  `form_script_mismatch` (Error in every mode). Text with no kana at all, or
+  with kana of both blocks (エコくるま, はんばーガー), is left alone — no single
+  label describes it, so the rule fires only when the label is outright wrong.
+  U+30FC, U+30FB and space are script-neutral, so まーけっと stays clean.
+
+Repair tooling: `scripts/fix-pack-transliterations.py --pack <pack-dir>`
+regenerates romaji from the entry's own kana reading and never copies a
+sibling row's spelling (`--check` is the default, `--write` rewrites the
+shards, `--report <csv>` lists every repair).
+
 ## Media: the pack carries 100% of its audio (ADR-0016/0023/0024)
 
 Runtime speech synthesis was removed from the app (ADR-0024): there is no
