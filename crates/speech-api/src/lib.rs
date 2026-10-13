@@ -201,14 +201,6 @@ pub struct Correction {
     pub feedback_template_id: String,
 }
 
-/// Voice/model reference for synthesis; model metadata lives in the model
-/// manager, not in packs.
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct VoiceRef {
-    pub model_id: String,
-    pub voice_id: String,
-}
-
 /// Provider capability descriptor used by the resolver.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ProviderInfo {
@@ -280,11 +272,6 @@ pub trait PronunciationInterpreter: Send + Sync {
     /// an empty list or abstain. Automatic feedback requires calibration
     /// (docs/17); guided paths never emit numeric grades.
     fn interpret(&self, evidence: &PronunciationEvidence) -> ProviderOutcome<Vec<Correction>>;
-}
-
-pub trait SpeechSynthesisProvider: Send + Sync {
-    fn info(&self) -> ProviderInfo;
-    fn synthesize(&self, text: &str, voice: &VoiceRef) -> ProviderOutcome<AudioBuffer>;
 }
 
 #[cfg(test)]
