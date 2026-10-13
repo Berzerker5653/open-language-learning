@@ -64,3 +64,35 @@ HANDOFF VALIDATION PASSED (1940 data files checked)
 5
 examples/ar-ma/manifest.yaml:maturity: "experimental"
 examples/eo-community/manifest.yaml:maturity: "experimental"
+
+== CI conclusion, run 38471445568 (head 50d7c34, pushed 2026-10-13T21:3xZ) ==
+
+run conclusion: success
+  schemas            11m35s  (validate_handoff.py + its 37-case suite + test_generate_pack_audio.py
+                             + test_fetch_pack_audio.py + the new test_new_pack.py, Python 3.12)
+  rust               42m30s
+  desktop-smoke      10m27s
+  security            2m23s
+  web                   32s
+  platform-compile  1m17s (macos) / 1m46s (windows); platform-bundles skipped
+
+The new step ran inside the rust job. Its own gate summaries, verbatim from
+the job log (the CLI prints a fixed label, not the pack path):
+rust Pack conformance for the generated proofs (eo-community, ar-ma) 2026-10-13T22:15:54.1953583Z validate(scaffold): 0 error(s), 0 warning(s)
+rust Pack conformance for the generated proofs (eo-community, ar-ma) 2026-10-13T22:15:54.4874539Z lint: 0 error(s), 0 warning(s)
+rust Pack conformance for the generated proofs (eo-community, ar-ma) 2026-10-13T22:15:54.7092237Z audit-curriculum: 0 error(s), 0 warning(s)
+rust Pack conformance for the generated proofs (eo-community, ar-ma) 2026-10-13T22:15:54.9298482Z audit-lexicon: 0 error(s), 0 warning(s)
+rust Pack conformance for the generated proofs (eo-community, ar-ma) 2026-10-13T22:15:55.1516669Z audit-licenses: 0 error(s), 0 warning(s)
+rust Pack conformance for the generated proofs (eo-community, ar-ma) 2026-10-13T22:15:55.3705231Z audit-sources: 0 error(s), 0 warning(s)
+rust Pack conformance for the generated proofs (eo-community, ar-ma) 2026-10-13T22:15:55.6469208Z test: 0 error(s), 0 warning(s)
+rust Pack conformance for the generated proofs (eo-community, ar-ma) 2026-10-13T22:15:55.9285301Z validate(scaffold): 0 error(s), 0 warning(s)
+rust Pack conformance for the generated proofs (eo-community, ar-ma) 2026-10-13T22:15:56.2084353Z lint: 0 error(s), 0 warning(s)
+rust Pack conformance for the generated proofs (eo-community, ar-ma) 2026-10-13T22:15:56.4356869Z audit-curriculum: 0 error(s), 0 warning(s)
+rust Pack conformance for the generated proofs (eo-community, ar-ma) 2026-10-13T22:15:56.6616902Z audit-lexicon: 0 error(s), 0 warning(s)
+rust Pack conformance for the generated proofs (eo-community, ar-ma) 2026-10-13T22:15:56.8944307Z audit-licenses: 0 error(s), 0 warning(s)
+rust Pack conformance for the generated proofs (eo-community, ar-ma) 2026-10-13T22:15:57.1139315Z audit-sources: 0 error(s), 0 warning(s)
+rust Pack conformance for the generated proofs (eo-community, ar-ma) 2026-10-13T22:15:57.3916084Z test: 0 error(s), 0 warning(s)
+
+Step wall cost: 22:15:54.2 -> 22:15:57.4, about 3 s, because the rust job has
+already built lts-langpack-cli; the 42m30s job time is cargo test --workspace
+plus the archive restore, not the proof gates.

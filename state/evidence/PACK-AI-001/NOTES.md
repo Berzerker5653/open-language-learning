@@ -1,6 +1,13 @@
 # PACK-AI-001 — AI pack-authoring kit, notes
 
-Head: `17dbfb2` plus the working tree described below. Captured 2026-10-13.
+Heads: work started from `17dbfb2`; the landing is `7902d0f` and the final head
+is `50d7c34`. Captured 2026-10-13.
+
+CI conclusion on `50d7c34`: run `38471445568` **success** — `rust` 42m30s
+(including the 14 proof-gate invocations, which cost ≈3 s of it), `schemas`
+11m35s (its 37-case validator suite, the two audio tool tests and the new
+`test_new_pack.py`, on Python 3.12), `desktop-smoke` 10m27s, `security` 2m23s,
+`web` 32s, `platform-compile` 1m17s/1m46s, `platform-bundles` skipped.
 
 ## What the kit is now
 
