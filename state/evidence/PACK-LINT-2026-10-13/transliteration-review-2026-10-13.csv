@@ -1,0 +1,99 @@
+id,class,kana,romaji,generated,gloss
+ja.lex.abst2.hohou,divergent,ほうほう,hohou,houhou,method
+ja.lex.body.inmu,divergent,しびれ,inmu,shibire,numbness
+ja.lex.body.vitamin,english-word,びたみん,vitamin,bitamin,vitamin
+ja.lex.communication.mail,divergent,めーる,mail,meeru,email
+ja.lex.communication.app,english-word,あっぷ,app,appu,app
+ja.lex.communication.sns,divergent,えすえぬえす,sns,esuenuesu,social media
+ja.lex.communication.translator,english-word,とらんすれーたー,translator,toransureetaa,translator
+ja.lex.critique.sns,divergent,えすえぬえす,sns,esuenuesu,social media
+ja.lex.critique.hatsuho,divergent,はっぽう,hatsuho,happou,"publication, release"
+ja.lex.cult.identity,english-word,あいでんてぃてぃ,identity,aidentiti,identity
+ja.lex.culture.manner,divergent,マナー,manner,manaa,manners
+ja.lex.culture.guide,english-word,ガイド,guide,gaido,guide
+ja.lex.culture2.taboo,english-word,タブー,taboo,tabuu,taboo
+ja.lex.debate2.hyoten,divergent,ひょうかひょう,hyoten,hyoukahyou,rating chart
+ja.lex.economy.shohi,divergent,しょうもう,shohi,shoumou,depletion
+ja.lex.economy.yuyutu,divergent,ゆうよ,yuyutu,yuuyo,surplus
+ja.lex.economy.rinkou,divergent,ちんぎん,rinkou,chingin,wages
+ja.lex.edu.test,english-word,テスト,test,tesuto,test
+ja.lex.edu2.homestay,english-word,ほーむすてい,homestay,hoomusutei,homestay
+ja.lex.edu3.oen,divergent,おうよう,oen,ouyou,application
+ja.lex.edu3.saidou,divergent,せいた,saidou,seita,adaptation
+ja.lex.edu3.bunkou,divergent,もくどく,bunkou,mokudoku,reading aloud
+ja.lex.edu3.hodai,divergent,ほうほう,hodai,houhou,method
+ja.lex.edu4.gijutsu-kyouiku,divergent,きょういくぎじゅつ,gijutsu-kyouiku,kyouikugijutsu,educational technology
+ja.lex.edu4.digital,english-word,デジタル,digital,dejitaru,digital
+ja.lex.edu4.enji,divergent,ようちえん,enji,youchien,kindergarten
+ja.lex.ent.ballet,english-word,ばれえ,ballet,baree,ballet
+ja.lex.ent.variety,divergent,ばらえてぃー,variety,baraetii,variety show
+ja.lex.ent.coach,english-word,こーち,coach,koochi,coach
+ja.lex.ent.referee,english-word,れふりー,referee,refurii,referee
+ja.lex.ent.joju,divergent,じゅじゅ,joju,juju,attendance
+ja.lex.env.eco,english-word,エコ,eco,eko,eco
+ja.lex.env.ozone,english-word,オゾン,ozone,ozon,ozone
+ja.lex.env.air,english-word,エア,air,ea,air
+ja.lex.env.eco-bag,english-word,エコバッグ,eco-bag,ekobaggu,eco bag
+ja.lex.env2.food-loss,divergent,フードロス,food-loss,fuudorosu,food waste
+ja.lex.env2.footprint,english-word,フットプリント,footprint,futtopurinto,footprint
+ja.lex.env2.compost,english-word,コンポスト,compost,konposuto,compost
+ja.lex.env2.gas,english-word,ガス,gas,gasu,gas
+ja.lex.env3.tax,english-word,たっくす,tax,takkusu,tax
+ja.lex.food.bowl,english-word,ぼうる,bowl,bouru,bowl
+ja.lex.food.yogurt,english-word,よぐると,yogurt,yoguruto,yogurt
+ja.lex.food.cookie,english-word,くっきー,cookie,kukkii,cookie
+ja.lex.food.tempura,english-word,てんぷら,tempura,tenpura,tempura
+ja.lex.food.hamburger,english-word,はんばーガー,hamburger,hanbaagaa,hamburger
+ja.lex.global.pandemic,english-word,パンデミック,pandemic,pandemikku,pandemic
+ja.lex.health4.ukuu,divergent,きく,ukuu,kiku,to be effective (medicine)
+ja.lex.history2.monument,english-word,モニュメント,monument,monyumento,monument
+ja.lex.ling2.bilingual,english-word,ばいりんがる,bilingual,bairingaru,bilingual
+ja.lex.ling3.tally,divergent,たっりー,tally,tarrii,"tally, count"
+ja.lex.med.data,english-word,でーた,data,deeta,data
+ja.lex.media.news,english-word,にゅーす,news,nyuusu,news
+ja.lex.media.caption,english-word,きゃぷしょん,caption,kyapushon,caption
+ja.lex.media.post,english-word,ぽすと,post,posuto,post
+ja.lex.media.comment,english-word,こめんと,comment,komento,comment
+ja.lex.media.share,english-word,しぇあ,share,shea,share
+ja.lex.media.follow,english-word,ふぉろー,follow,foroo,follow
+ja.lex.media.media-habits,english-word,めでぃあはびつ,media-habits,mediahabitsu,media habits
+ja.lex.media3.data,english-word,でーた,data,deeta,data
+ja.lex.philosophy2.inou,divergent,いけん,inou,iken,opinion
+ja.lex.philosophy2.biishiki,divergent,びかん,biishiki,bikan,aesthetic sense
+ja.lex.science.houshaki,divergent,ロケット,houshaki,roketto,rocket
+ja.lex.science.isshou,divergent,えいせい,isshou,eisei,satellite
+ja.lex.science.sougou,divergent,しんだん,sougou,shindan,diagnosis
+ja.lex.science.hazard,english-word,ハザード,hazard,hazaado,hazard
+ja.lex.science.risshi,divergent,せいこう,risshi,seikou,success
+ja.lex.science2.seinin,divergent,おとな,seinin,otona,adult
+ja.lex.science2.koura,divergent,むだ,koura,muda,"waste, loss"
+ja.lex.shopping.size,english-word,さいず,size,saizu,size
+ja.lex.shopping.jacket,english-word,じゃけっと,jacket,jaketto,jacket
+ja.lex.shopping.dollar,english-word,どる,dollar,doru,dollar
+ja.lex.society.mafusa,divergent,めいわく,mafusa,meiwaku,nuisance
+ja.lex.society3.hakushou,divergent,しゅうしゅつりつ,hakushou,shuushutsuritsu,birth rate
+ja.lex.society3.tanshuku,divergent,つうきん,tanshuku,tsuukin,commute
+ja.lex.society3.yuumu,divergent,ざんぎょう,yuumu,zangyou,overtime
+ja.lex.society3.iju,divergent,いきょ,iju,ikyo,relocation
+ja.lex.society4.ene,divergent,エネルギー,ene,enerugii,energy
+ja.lex.society4.aisan,divergent,ざいし,aisan,zaishi,allocation
+ja.lex.society4.unyou,divergent,うんえい,unyou,unei,operation
+ja.lex.sports.jogging,english-word,じょぎんぐ,jogging,jogingu,jogging
+ja.lex.sports.stretching,english-word,すとれっちんぐ,stretching,sutoretchingu,stretching
+ja.lex.sports.training,english-word,とれーにんぐ,training,toreeningu,training
+ja.lex.sports.golf,english-word,ごるふ,golf,gorufu,golf
+ja.lex.tech.spam,english-word,すぱむ,spam,supamu,spam
+ja.lex.tech.hack,english-word,ハック,hack,hakku,hack
+ja.lex.tech.privacy,english-word,ぷらいばしー,privacy,puraibashii,privacy
+ja.lex.tech.settings,english-word,せっとぃんぐ,settings,settingu,settings
+ja.lex.tech.login,english-word,ろぐいん,login,roguin,login
+ja.lex.tech.update,english-word,あっぷでーと,update,appudeeto,update
+ja.lex.tech.download,english-word,だうんろーど,download,daunroodo,download
+ja.lex.tech.bug,english-word,ばぐ,bug,bagu,bug
+ja.lex.tech.search,english-word,さーち,search,saachi,search
+ja.lex.tech.database,english-word,でーたべーす,database,deetabeesu,database
+ja.lex.tech.cloud,english-word,くらうど,cloud,kuraudo,cloud
+ja.lex.tech.backup,english-word,ばっくあっぷ,backup,bakkuappu,backup
+ja.lex.tech2.data,english-word,でーた,data,deeta,data
+ja.lex.urban2.ai,english-word,えーあい,ai,eeai,AI
+ja.lex.work.team,english-word,ちーむ,team,chiimu,team
