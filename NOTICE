@@ -7,17 +7,25 @@ The application source code is licensed under the Apache License,
 Version 2.0 (see `LICENSE`). This product bundles or optionally
 distributes third-party components whose notices must be preserved:
 
-- This application depends on Apache-2.0, MIT, and BSD-licensed
-  libraries (see `Cargo.lock` and `pnpm-lock.yaml` for the exact set).
-- The optional TTS payload (TTS-bundled download variant and in-app
-  model download) includes espeak-ng (GPL-3.0), sherpa-onnx
-  (Apache-2.0), ONNX Runtime (MIT), and Kokoro model weights
-  (Apache-2.0). Its obligations are payload-scoped; see
-  `third-party/notices/NOTICE.md` and the license texts staged beside
-  the payload.
+- The aligner desktop variant bundles whisper.cpp / ggml (MIT) and the
+  ggml-tiny.bin model (MIT). The bare variant ships no third-party
+  binary of its own.
+- This product has no runtime speech synthesis (ADR-0024). The retired
+  TTS payload (espeak-ng GPL-3.0, sherpa-onnx, ONNX Runtime, Kokoro
+  model weights) is not built, distributed or downloaded, so its
+  obligations attach to nothing shipped here; the history is recorded
+  in `third-party/notices/NOTICE.md`.
+- Anything the user downloads themselves (alignment or speech models)
+  carries its own license. `third-party/notices/NOTICE.md` is the
+  authoritative component list; the license texts kept in that directory
+  are staged for the components named there.
 - Language-pack content is licensed separately per pack
-  (e.g. `languages/ja-JP/licenses.jsonl`: CC BY 4.0). Packs are data,
-  not code, and never inherit the code license.
+  (e.g. `languages/ja-JP/licenses.jsonl`): this project's original
+  material and its baked pack audio are CC BY 4.0, the ja-JP
+  dictionary-derived layer is CC BY-SA 4.0 (JMdict/JMnedict ©
+  Electronic Dictionary Research and Development Group), and ru-RU
+  content is CC0 1.0. Packs are data, not code, and never inherit the
+  code license.
 
 This product includes code and models developed by third parties;
 copyrights are held by their respective owners.
