@@ -1,10 +1,19 @@
 # Third-Party Licenses and Notices
 
-This file inventories third-party material this project builds with,
-downloads, or distributes, and the scope of each license. The root `LICENSE`
-(Apache-2.0, ADR-0010) covers only original project code; it never relabels anything below.
-Reproduce this file (or the referenced license texts) in distributed builds
-alongside the binaries.
+This file inventories third-party material this project builds with, downloads
+or distributes, and the scope of each license. Three files cover adjacent
+questions; keep them from drifting into each other:
+
+- `NOTICE` — the Apache-2.0 copyright/notices stub for the application code
+  (ADR-0010). The root `LICENSE` covers original project code only; it never
+  relabels anything described below.
+- this file — the source-level inventory: build dependencies, model downloads,
+  build-time tooling and language content.
+- `third-party/notices/NOTICE.md` — what is staged **inside distributed
+  artifacts** (the aligner variant's bundled runtime and model), plus the
+  license texts kept in that directory and the pack content licenses.
+- Reproduce this file, or the referenced license texts, in distributed builds
+  alongside the binaries.
 
 ## Build/runtime dependencies (source-level)
 
@@ -20,15 +29,22 @@ Apache-2.0 licensed (see each crate's `Cargo.toml` / each package's
 - On Linux the webview uses WebKitGTK (LGPL-2.0+); system packages are
   installed by the user's distro, not bundled by us.
 
-## Speech models and runtimes (downloaded on demand, never bundled)
+## Speech runtimes and models (two channels)
 
-The base app ships zero model bytes. The pinned catalog
-(`apps/desktop/src-tauri/models/catalog.json`) offers:
-
-- `whisper.cpp` (MIT) and its `ggml-tiny.bin` model (MIT) — fallback ASR
-- `sherpa-onnx` (Apache-2.0) and the `sherpa-onnx-whisper-tiny` model
-  (MIT) — default ASR
-- ONNX Runtime (MIT), pulled in by sherpa-onnx builds
+- **Bundled — aligner variant only (ADR-0019).** whisper.cpp (MIT) and the
+  `ggml-tiny.bin` model (MIT) ship inside the package.
+  `scripts/stage-aligner-sidecar.sh` refuses to build that payload without
+  `third-party/notices/whisper-cpp-MIT.txt` and stages it into the bundle as
+  `aligner/LICENSE.whisper-cpp.txt`.
+- **Bundled — bare variant: nothing.** No third-party binary, no model bytes.
+- **Downloaded on demand.** `apps/desktop/src-tauri/models/catalog.json` pins
+  recognition models by url, sha256 and `size_bytes`: whisper.cpp `ggml-tiny`,
+  `ggml-base` and `ggml-small` (MIT), plus a sherpa-onnx whisper-tiny set
+  (sherpa-onnx is Apache-2.0 and pulls in ONNX Runtime, MIT; the weights are
+  OpenAI Whisper weights with upstream terms recorded). Every entry is
+  `tier: development` — production tiers wait on the SPEECH-002 re-benchmark
+  (ADR-0007). Anything the user downloads carries its own license; that path
+  bundles nothing.
 
 The catalog names recognition payloads only: ADR-0024 removed the synthesis
 entries, and every clip the app plays is baked language-pack media under the
@@ -66,10 +82,16 @@ what past builds carried and what runs only on build machines (ADR-0024).
   Development Group; share-alike applies to the derived lexicon data).
   Pack media files are test-fixture placeholder audio (`fixture-silence`
   manifest rows) labeled `model-output` in `media/manifest.jsonl`.
-- `languages/ja-JP` (draft reference pack): project-original seed content;
-  provenance analysis in `docs/provenance/ja-jp-draft-content.md`. Its
-  content license is tracked in `languages/ja-JP/LICENSES.yaml` and is
-  selected separately from application code.
+- `languages/ja-JP` (reference pack, unreviewed): project-original material and
+  baked pack audio under CC BY 4.0, plus a CC BY-SA 4.0 layer over the
+  dictionary-derived lexicon and kanji data (JMdict/JMnedict © the Electronic
+  Dictionary Research and Development Group). Per-record licensing lives in
+  `languages/ja-JP/licenses.jsonl`, sourcing in `languages/ja-JP/sources.jsonl`
+  (the pack spec also accepts the older `LICENSES.yaml` / `SOURCES.yaml`
+  spellings); provenance analysis is in `docs/provenance/ja-jp-draft-content.md`.
+  Content licensing is chosen separately from the application code license.
+- `languages/ru-RU` (reference pack, unreviewed): CC0 1.0, recorded in
+  `languages/ru-RU/licenses.jsonl`.
 - The JF Standard (The Japan Foundation) is cited as a reference-only
   framework; no text from it is copied into this repository.
 - Mozilla Common Voice Japanese: candidate evaluation corpus only; not

@@ -1,6 +1,6 @@
 {
   "catalog_version": "0.1.0",
-  "note": "Development-tier speech models pinned for SPEECH-002/003 work. Production tiers are added after the SPEECH-002 re-benchmark (ADR-0007). Models are downloaded on demand; the base app never bundles them. Entries marked \"availability\": \"unpublished\" have no staged release asset (ADR-0009 staging is unfinished), so the app refuses to download them and says so instead of failing on a placeholder URL.",
+  "note": "Development-tier speech models pinned for SPEECH-002/003 work. Production tiers are added after the SPEECH-002 re-benchmark (ADR-0007). These models are downloaded on demand; the one model this project bundles is ggml-tiny.bin inside the aligner desktop variant (ADR-0019), which is why the aligner artifact is far larger than the bare one. Entries marked \"availability\": \"unpublished\" have no staged release asset (ADR-0009 staging is unfinished), so the app refuses to download them and says so instead of failing on a placeholder URL.",
   "models": [
     {
       "id": "org.openlanguage.speech.whisper-ggml-tiny",
