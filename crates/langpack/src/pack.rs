@@ -1019,6 +1019,23 @@ impl Pack {
         // .wav bytes, which is reported as info there.
         diags.extend(self.audit_media(mode == Mode::Install));
 
+        // Learner-visible romaji has to be romaji (ADR-0024 posture: shipped
+        // content may not contradict its own data). These three rules live in
+        // `audit_lexicon`; validate() adopts exactly the codes that make an
+        // entry misleading on screen — a transliteration that is not Latin,
+        // kana inside a sentence's romaji, a script label its own text
+        // contradicts. The rest of the lexicon audit (script contamination,
+        // Cyrillic stress marks) stays audit-only so the install gate does not
+        // widen by accident.
+        diags.extend(self.audit_lexicon().into_iter().filter(|d| {
+            matches!(
+                d.code.as_str(),
+                "reading_transliteration_not_latin"
+                    | "romaji_contains_kana"
+                    | "form_script_mismatch"
+            )
+        }));
+
         diags.sort_by(|a, b| {
             a.file
                 .cmp(&b.file)

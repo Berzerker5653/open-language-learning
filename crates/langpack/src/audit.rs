@@ -378,6 +378,18 @@ impl Pack {
     /// stress defects (missing/multiple combining marks). Dictionary
     /// cross-checks (JMdict, Zalizniak) stay offline review tooling —
     /// this gate asserts only self-consistency, no third-party data.
+    ///
+    /// Learner-visible transliteration content is part of this gate:
+    /// `reading_transliteration_not_latin` rejects a `transliteration_system`
+    /// reading whose text carries kana or an ASCII digit (measured ja-JP
+    /// defect class: "kentoう", "ronso2", "jiゅnり"); `romaji_contains_kana`
+    /// rejects kana inside a sentence's `romaji` field (digits stay legal
+    /// there — sentence texts legitimately contain Arabic numerals); and
+    /// `form_script_mismatch` tightens the hiragana/katakana label check —
+    /// the union-block check below cannot tell マナー from まなぶ, while
+    /// U+30FC (prolonged sound mark) and U+30FB (middot) stay neutral and a
+    /// genuinely mixed word (エコくるま) keeps its label, because no single
+    /// script label describes it.
     pub fn audit_lexicon(&self) -> Vec<Diagnostic> {
         let mut diags = Vec::new();
         for inst in self
@@ -385,19 +397,27 @@ impl Pack {
             .iter()
             .filter(|i| i.schema == "lexicon-entry")
         {
-            let target_reading = inst
+            let id = inst.value.get("id").and_then(Value::as_str).unwrap_or("?");
+            // The script-tagged readings are the pack's declared
+            // pronunciations: they anchor the form check below and name,
+            // in the messages, what a transliteration is supposed to spell.
+            let declared_reading: Vec<&str> = inst
                 .value
                 .get("readings")
                 .and_then(Value::as_array)
                 .map(|a| {
-                    a.iter().any(|r| {
-                        matches!(
-                            r.get("script").and_then(Value::as_str),
-                            Some("cyrillic") | Some("hiragana") | Some("katakana")
-                        )
-                    })
+                    a.iter()
+                        .filter(|r| {
+                            matches!(
+                                r.get("script").and_then(Value::as_str),
+                                Some("cyrillic") | Some("hiragana") | Some("katakana")
+                            )
+                        })
+                        .filter_map(|r| r.get("text").and_then(Value::as_str))
+                        .collect()
                 })
-                .unwrap_or(false);
+                .unwrap_or_default();
+            let target_reading = !declared_reading.is_empty();
             for field in ["forms", "readings"] {
                 let arr = inst
                     .value
@@ -469,6 +489,82 @@ impl Pack {
                             }
                         }
                     }
+                    // A hiragana/katakana label has to be outright wrong, not
+                    // merely incomplete: the union-block check above lets a
+                    // katakana word pass under "hiragana", so flag a label only
+                    // when its text carries no kana of the labelled script at
+                    // all. Mixed-script words (エコくるま, はんばーガー) contain
+                    // both blocks and have no single correct label, so they are
+                    // left alone rather than flagged unfixably. U+30FC, U+30FB
+                    // and space are script-neutral, so まーけっと stays clean.
+                    let has_hira = text.chars().any(|c| ('\u{3041}'..='\u{309f}').contains(&c));
+                    let has_kata = text.chars().any(|c| {
+                        ('\u{30a1}'..='\u{30fa}').contains(&c)
+                            || ('\u{30fd}'..='\u{30fe}').contains(&c)
+                    });
+                    if script == "hiragana" && !has_hira {
+                        if let Some(ch) = text.chars().find(|c| {
+                            ('\u{30a1}'..='\u{30fa}').contains(c)
+                                || ('\u{30fd}'..='\u{30fe}').contains(c)
+                        }) {
+                            diags.push(Diagnostic::new(
+                                &inst.file,
+                                pointer.clone(),
+                                "form_script_mismatch",
+                                format!(
+                                    "entry {text:?} of item {id:?} is labelled \
+                                     \"hiragana\" but contains katakana {ch:?} \
+                                     (U+{:04X}); label it katakana",
+                                    ch as u32
+                                ),
+                                Severity::Error,
+                            ));
+                        }
+                    }
+                    if script == "katakana" && !has_kata {
+                        if let Some(ch) =
+                            text.chars().find(|c| ('\u{3041}'..='\u{309f}').contains(c))
+                        {
+                            diags.push(Diagnostic::new(
+                                &inst.file,
+                                pointer.clone(),
+                                "form_script_mismatch",
+                                format!(
+                                    "entry {text:?} of item {id:?} is labelled \
+                                     \"katakana\" but contains hiragana {ch:?} \
+                                     (U+{:04X}); label it hiragana",
+                                    ch as u32
+                                ),
+                                Severity::Error,
+                            ));
+                        }
+                    }
+                    // A transliteration reading is learner-visible romaji
+                    // scaffold, not a pronunciation: it may not carry kana
+                    // or digits ("kentoう", "ronso2"). Letters, space,
+                    // hyphen, apostrophe, period and non-kana punctuation
+                    // are allowed; the declared kana reading is quoted so
+                    // a human sees what the romaji was supposed to spell.
+                    if field == "readings" && item.get("transliteration_system").is_some() {
+                        if let Some(ch) = text
+                            .chars()
+                            .find(|c| ('\u{3040}'..='\u{30ff}').contains(c) || c.is_ascii_digit())
+                        {
+                            diags.push(Diagnostic::new(
+                                &inst.file,
+                                pointer.clone(),
+                                "reading_transliteration_not_latin",
+                                format!(
+                                    "transliteration {text:?} of item {id:?} contains \
+                                     {ch:?} (U+{:04X}); the declared kana reading is \
+                                     {declared_reading:?} — write the romaji in Latin \
+                                     letters, no kana and no digits",
+                                    ch as u32
+                                ),
+                                Severity::Error,
+                            ));
+                        }
+                    }
                     if field == "forms" && target_reading && !has_cyr && !has_kana && !has_cjk {
                         diags.push(Diagnostic::new(
                             &inst.file,
@@ -521,6 +617,36 @@ impl Pack {
                         }
                     }
                 }
+            }
+        }
+        // Sentence `romaji` is learner-visible too, and carries the same
+        // kana contamination. Digits stay legal: some sentence texts
+        // legitimately contain Arabic numerals ("3-nen shokumu keiken ga
+        // arimasu." is correct romaji).
+        for inst in self
+            .instances
+            .iter()
+            .filter(|i| i.schema == "sentence" && i.value.get("romaji").is_some())
+        {
+            let Some(romaji) = inst.value.get("romaji").and_then(Value::as_str) else {
+                continue;
+            };
+            let id = inst.value.get("id").and_then(Value::as_str).unwrap_or("?");
+            if let Some(ch) = romaji
+                .chars()
+                .find(|c| ('\u{3040}'..='\u{30ff}').contains(c))
+            {
+                diags.push(Diagnostic::new(
+                    &inst.file,
+                    format!("{}/romaji", inst.pointer),
+                    "romaji_contains_kana",
+                    format!(
+                        "romaji {romaji:?} of sentence {id:?} contains {ch:?} \
+                         (U+{:04X}); romaji must contain no kana (digits are allowed)",
+                        ch as u32
+                    ),
+                    Severity::Error,
+                ));
             }
         }
         diags
