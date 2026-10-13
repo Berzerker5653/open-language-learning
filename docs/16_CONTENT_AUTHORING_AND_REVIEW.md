@@ -3,6 +3,7 @@
 ## Why this exists
 
 The project expects large amounts of content and explicitly wants AI-assisted language-pack generation. Scale is useful only if quality controls are stronger than generation speed.
+The runnable form of this protocol lives in one place: `docs/QUICKSTART_PACK_AUTHORING.md` (scaffold command, the seven gate commands, the audio rules, the review handoff), with the copy-paste brief for an AI author at `tools/AI_LANGUAGE_PACK_AUTHOR_PROMPT.md`.
 
 ## Authoring order
 

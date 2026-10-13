@@ -131,3 +131,32 @@ Delegation lesson, revised: the cap is not the only failure mode. A sub-agent
 writing into the same tree as the main session can produce **late, unmeasured
 damage**; give it a scratch directory or a file it owns, never the file you are
 editing.
+
+## Third process record: the same agent class recreated the entry point I deleted
+
+`PackKitDocs` (19m19s, still inside the cap) landed **after** the landing commit:
+it created `docs/PACK_AUTHORING_KIT.md` (194 lines, self-described as "the entry
+point") and added cross-links in `docs/04_LANGUAGE_PACK_SPEC.md`,
+`docs/16_CONTENT_AUTHORING_AND_REVIEW.md` and `docs/PACK_AUTHORING_CONTRACT.md`.
+That decision had already been taken and reversed once in this task: the
+contract now said "start at `docs/QUICKSTART_PACK_AUTHORING.md`" on one line and
+"the entry point … is `docs/PACK_AUTHORING_KIT.md`" on the next. Two documents
+both claiming to be the door is the failure mode, so the file was deleted and the
+links retargeted to the single route. Its damage was contained (one new file,
+three one-line additions) because it was given docs only, never the generator or
+the packs — the lesson from the previous section applied.
+
+Its findings were checked rather than trusted, and two were real and are now
+fixed in the docs. Measurements at this head, run in the main session:
+
+| target | `validate` | `lint` | install-mode `test` |
+| --- | --- | --- | --- |
+| `tools/pack-templates/example-pack/` | 0 / 0 | 0 / 0 | **1 error** — `media_manifest_absent`, 4 audio-addressable items, no manifest |
+| `examples/minimal-language-pack/` | **1 error** — `script_unknown` | (not run) | **4 errors** |
+
+Consequently: `docs/PACK_AUTHORING_CONTRACT.md` §Worked example no longer calls
+the template "a complete, minimal, lint-clean pack" (it is a reading example and
+a `lint` starting point; CI runs only `lint` there), and
+`docs/04_LANGUAGE_PACK_SPEC.md` §Purpose no longer tells an author to start from
+the manifest stub — it names the scaffold, the one route and the two conformance
+packs, and states the stub's measured failures.

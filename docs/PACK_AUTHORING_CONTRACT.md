@@ -325,12 +325,17 @@ file set the table allows; the CI template enforces the gates.
 
 ## Worked example
 
-`tools/pack-templates/example-pack/` is a complete, minimal,
-lint-clean pack: manifest, one goal with an assessment, one grammar
-concept, three lexicon entries, one sentence with a cloze target, and
-one unit exercising encounter/recall/cloze/dictation. Copy it, replace
-the placeholder content and the `xx` locale, and it must still pass
-`langpack lint`. CI validates it on every change.
+`tools/pack-templates/example-pack/` is a **reading example and a `lint`
+starting point, not an installable pack**: manifest, one goal with an
+assessment, one grammar concept, three lexicon entries, one sentence with a
+cloze target, and one unit exercising encounter/recall/cloze/dictation.
+Measured at this head: `validate` 0 errors / 0 warnings, `lint` 0 / 0, and
+install-mode `test` fails with `media_manifest_absent` — it has four
+audio-addressable items and no `media/manifest.jsonl`. CI runs `lint` over it,
+not the install gate. To start a pack that actually installs, use
+`scripts/new-pack.py` (`docs/QUICKSTART_PACK_AUTHORING.md` §1a) and read a
+pack that clears all seven gates: `examples/eo-community/` or
+`examples/ar-ma/`.
 
 ## CI for community pack repos
 

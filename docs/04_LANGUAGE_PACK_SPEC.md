@@ -4,7 +4,8 @@
 
 A language pack is a versioned, declarative package that teaches the engine how to represent and teach a target language without embedding that language's curriculum into core application code.
 
-A human or AI author should be able to start from `examples/minimal-language-pack/`, follow the schemas, run the CLI, and produce a structurally valid candidate pack.
+A human or AI author should be able to start from a scaffold, follow the schemas, run the CLI, and produce a structurally valid candidate pack. The scaffold is `scripts/new-pack.py` and the ordered route, including the seven gate commands, is `docs/QUICKSTART_PACK_AUTHORING.md`; two generated packs that pass every gate are checked in as conformance proofs (`examples/eo-community/`, `examples/ar-ma/`).
+`examples/minimal-language-pack/` is a manifest illustration of the smallest legal manifest — measured at this head it fails `validate` with 1 error (`script_unknown`) and install-mode `test` with 4 errors, so it is not a starting point for a candidate pack.
 
 ## Design principles
 
