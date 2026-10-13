@@ -21,8 +21,8 @@ version and the commit. Please quote both in any report — a report that says
 | --- | --- | --- |
 | base `open-language-learning-platform_0.4.0-alpha.1_amd64.deb` | 12,309,544 B (11.74 MiB) | `f25dfd6de8cf98d220bb332004a3a40287e70890b3592097c3a6448d8dc586ec` |
 | base `open-language-learning-platform_0.4.0-alpha.1_amd64.AppImage` | 72,739,320 B (69.36 MiB) | `8ec280f83715b6021121bd539700536449dd02d7356242e182e22b492c466457` |
-| aligner deb | 83,781,498 B (79.90 MiB) | `158c079b80546fc956805dfcba6483d5d2b963a4fd2e79efcf5a8ef7d96465af` |
-| aligner AppImage | 144,669,176 B (137.97 MiB) | `95581a7aa6c409cba8a9de7ec74c34658e5eaa25154afb20ce0604d56d600e56` |
+| aligner `open-language-learning-platform_0.4.0-alpha.1_amd64-aligner.deb` | 83,781,498 B (79.90 MiB) | `158c079b80546fc956805dfcba6483d5d2b963a4fd2e79efcf5a8ef7d96465af` |
+| aligner `open-language-learning-platform_0.4.0-alpha.1_amd64-aligner.AppImage` | 144,669,176 B (137.97 MiB) | `95581a7aa6c409cba8a9de7ec74c34658e5eaa25154afb20ce0604d56d600e56` |
 
 ## Install notes
 
