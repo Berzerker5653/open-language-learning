@@ -4,13 +4,27 @@ Working title only. Rename the product before public release after a naming/trad
 
 This repository package is a **development specification and autonomous-build handoff** for a local-first, open-source language-acquisition platform. The first reference language is Japanese (`ja-JP`), but the core product is intentionally language-independent.
 
-## Current state — public alpha (2026-10-12)
+## Current state — public alpha (2026-10-13)
 
 The desktop application runs today on **Linux**. Two reference language packs (`ja-JP`, `ru-RU`) are published at **0.4.0** and install from the in-app catalog (no configuration needed; ADR-0027) or by importing a `.lpk` file. Windows and macOS builds are produced but **untested**: a platform moves to *community-confirmed* only when a human who ran that build files a runtime report (`docs/platform/PLATFORM_REPORTS.yaml`, ADR-0015).
 
 What the content actually covers — measured on this tree, not asserted: both packs carry units across **every band from on-ramp through B2**. `ja-JP` has 75 goals and 786 units (12 on-ramp, 79 A1, 112 A2, 195 B1, 388 B2) driving 4,563 activities; `ru-RU` has 60 goals and 809 units (20 on-ramp, 90 A1, 99 A2, 200 B1, 400 B2) driving 3,197 activities. Every unit's `goal_id`, every `allowed_vocab`/`allowed_grammar`/`allowed_readings` entry, every activity `content_ref` and `scenario_id`, and every goal `assessment_id` resolves — 0 dangling across 786+809 units and 26,819+15,555 content references. The limit is not the unit graph: **every goal in both packs is `review_status: draft`** (75/75, 60/60) and no content record anywhere is `validated` or `verified`, while the pools under the activity graph are thinner than the graph itself (ja-JP: 4,057 lexicon entries, 823 sentences, 84 kanji, one assessment definition per goal). All first-party content is **AI-drafted** (ADR-0014), which is why pack display names keep their "(Draft)" marker. Pronunciation feedback is **guided-only and makes no accuracy claim to the learner** (ADR-0013, docs/18), and packs are the only source of spoken audio (ADR-0024) — the app never synthesizes speech.
 
-`REL-001` (the desktop release candidate) still needs **12 of the 54 release-required tasks** (ledger: `state/task-state.json`): the assistive-technology audit (ACC-001), performance tiers (PERF-002), platform parity (PLAT-001), the security/privacy audit (SEC-001), qualified human content review for each band (JA-A2-002 / JA-B1-002 / JA-B2-002), and coverage depth in the thin bands (JA-A2-001 / JA-B1-001 / JA-B2-001 carry unit scaffolding across bands but have no acceptance record in the ledger). No agent may mark any of those passed.
+`REL-001` (the desktop release candidate) still needs **9 of the 51
+release-required tasks** (ledger: `state/task-state.json`): the
+assistive-technology audit (ACC-001), performance tiers (PERF-002), platform
+parity (PLAT-001), the security/privacy audit (SEC-001), the AI-oriented
+pack-authoring kit (PACK-AI-001), and coverage depth in the thin bands
+(JA-A2-001 / JA-B1-001 / JA-B2-001 carry unit scaffolding across bands but have
+no acceptance record in the ledger). Qualified human content review
+(JA-A2-002 / JA-B1-002 / JA-B2-002) is **not** a 1.0 gate: ADR-0017 §2 (owner
+scope decision 2026-10-08, unfunded project) rules that no release gate depends
+on human review, and `tasks/ROADMAP.yaml` now reflects that consistently for all
+three bands — `JA-A1-003` was already annotated, the others were missed. Review
+remains the only route to a `validated`/`verified` trust state, band coverage and
+public framework-alignment claims stay enforced by REVIEW-001, lint/audit-sources
+and `docs/18_PUBLIC_CLAIMS_AND_SCOPE.md`, and no surface may imply review that
+did not happen. No agent may mark any of those passed.
 
 Useful first contributions: a **platform runtime report** or a **content review**, both through the issue templates — each feeds an evidence file that the release gates actually read. The app states the version and commit you need for a report under **Settings → About this build**. A content review starts at `CONTRIBUTING.md` ("Reviewing language-pack content"); reviewer kits and worklists live under `languages/ja-JP/review/` and `languages/ru-RU/review/`.
 

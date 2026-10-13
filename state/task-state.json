@@ -1,18 +1,33 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-10-12",
-  "active_task": "TTS-003",
+  "updated": "2026-10-13",
+  "active_task": "TTS-004",
   "tasks": {
     "TTS-003": {
-      "status": "in_progress",
+      "status": "blocked",
       "attempts": 1,
-      "last_error": null,
+      "last_error": "remaining acceptance item is the owner-gated listening pass over re-baked pack audio (packs republished at 0.4.0, see docs/13); the runtime-TTS half moved to TTS-004 under ADR-0024",
       "evidence": [
         "docs/provenance/qwen3-tts-adoption.md",
         "docs/adr/0023-pack-audio-bake-engine-qwen3-tts.md",
         "languages/ja-JP/media/manifest.jsonl (reconciled, 4585e6a; 'test' 0/0)",
         "languages/ru-RU/media/manifest.jsonl (baked+committed, d33745c; validate --mode install 0/0)",
         "tasks/KANBAN.md (2026-10-12 audio-bake closure)"
+      ]
+    },
+    "TTS-004": {
+      "status": "in_progress",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "docs/adr/0024-runtime-tts-removal.md",
+        "crates/langpack/src/audit.rs (install-mode media_asset_missing guard, line 854)",
+        "crates/langpack/tests/media.rs (fixture-pack coverage test)",
+        "third-party/notices/NOTICE.md (rewritten: build-time-tooling section, ADR-0023 bake engine)",
+        "crates/speech-api/src/lib.rs (dead SpeechSynthesisProvider/VoiceRef deleted; docs/05 line 40 already stated no in-app synthesis provider)",
+        "docs/13_RELEASE_AND_DISTRIBUTION.md (notices path corrected)",
+        "docs/13_RELEASE_AND_DISTRIBUTION.md (measured: cargo test --workspace 8 desktop tests + scripts/smoke-desktop.sh fail on a fresh clone because pack wavs are gitignored and archive::build refuses a silent pack)",
+        "state/evidence/TTS-004/gates-2026-10-13.txt (fmt/clippy/workspace/python/prettier)"
       ]
     },
     "BOOT-001": {

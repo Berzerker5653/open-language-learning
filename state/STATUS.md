@@ -1,6 +1,10 @@
 # Project Status
 
-Generated handoff state: 2026-10-02
+Snapshot generated 2026-10-02 and not maintained since; the text below
+describes the M1/M2 tree. For the current state read `tasks/KANBAN.md` (board),
+`docs/13_RELEASE_AND_DISTRIBUTION.md` (what is shipped and proven) and
+`state/task-state.json` (machine-readable task statuses). The entries below are
+kept as the historical record of the early milestones.
 
 ## Overall
 

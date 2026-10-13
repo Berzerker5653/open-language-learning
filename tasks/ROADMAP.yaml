@@ -1283,7 +1283,15 @@ tasks:
   - Review coverage/evidence meets defined A2 gate and critical issues resolved.
   - The band coverage and qualified-human review gates defined by REVIEW-001 pass for the exact pack version;
     unresolved mandatory coverage or critical findings keep this task blocked.
-  required_for_desktop_1_0: true
+  # Not a desktop-1.0 blocker as of ADR-0017 §2 (owner scope decision 2026-10-08:
+  # unfunded project, exclusively AI-created content) — the same ruling already
+  # applied to JA-A1-003. The pack ships at its honest posture (AI-generated,
+  # review-needed) and no surface may imply human review that did not happen;
+  # promotion to validated/verified still requires human review records via O-02,
+  # which the validator enforces on any status flip. Band coverage and public
+  # framework-alignment claims stay enforced by REVIEW-001, lint/audit-sources
+  # and docs/18 regardless of this flag.
+  required_for_desktop_1_0: false
 - id: AI-001
   milestone: M8
   priority: P1
@@ -1332,7 +1340,11 @@ tasks:
   - Review gate passes with tracked resolutions.
   - The band coverage and qualified-human review gates defined by REVIEW-001 pass for the exact pack version;
     unresolved mandatory coverage or critical findings keep this task blocked.
-  required_for_desktop_1_0: true
+  # Not a desktop-1.0 blocker as of ADR-0017 §2 — see the JA-A1-003 / JA-A2-002
+  # notes. Qualified review remains the only route to validated/verified trust
+  # state, and band coverage and public claims stay gated by REVIEW-001,
+  # lint/audit-sources and docs/18.
+  required_for_desktop_1_0: false
 - id: JA-B2-001
   milestone: M9
   priority: P0
@@ -1365,7 +1377,12 @@ tasks:
     the stable target.
   - The band coverage and qualified-human review gates defined by REVIEW-001 pass for the exact pack version;
     unresolved mandatory coverage or critical findings keep this task blocked.
-  required_for_desktop_1_0: true
+  # Not a desktop-1.0 blocker as of ADR-0017 §2 — see the JA-A1-003 / JA-A2-002 /
+  # JA-B1-002 notes. The honest-claims half of this task's acceptance still binds:
+  # if B2 evidence is insufficient, a 1.0 build must label its coverage partial
+  # rather than claim B2 (docs/18). Band coverage stays gated by REVIEW-001 and
+  # lint/audit-sources.
+  required_for_desktop_1_0: false
 - id: ACC-001
   milestone: M10
   priority: P0
@@ -1388,8 +1405,15 @@ tasks:
   priority: P1
   title: AI-oriented language pack authoring kit
   dependencies:
+  # JA-B2-002 (qualified B2 review) dropped as a prerequisite on 2026-10-13: that
+  # task is no longer a desktop-1.0 blocker (ADR-0017 §2) and is unfunded, so
+  # keeping it here left a required-for-1.0 task permanently unreachable. Same
+  # class of edit as ADR-0017 dropping SPEECH-007 from JA-A1-003's dependencies.
+  # The kit documents the authoring and review-record workflow; it does not
+  # require a completed human review to exist, and its own acceptance still
+  # demands a generated conformance pack plus a non-Japanese RTL/multi-script
+  # fixture.
   - PACK-005
-  - JA-B2-002
   read_first:
   - docs/04_LANGUAGE_PACK_SPEC.md
   - docs/10_LICENSING_AND_PROVENANCE.md
@@ -1555,6 +1579,9 @@ execution_scope:
   - TTS-004
   - POLISH-001
   - JA-A1-003
+  - JA-A2-002
+  - JA-B1-002
+  - JA-B2-002
   - SPEECH-007
   - K-01
   - K-02
