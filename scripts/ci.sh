@@ -62,6 +62,7 @@ fi
 .venv/bin/python tools/validate_handoff.py
 .venv/bin/python -m unittest discover -s tools -p 'test_validate_handoff.py'
 .venv/bin/python scripts/test_generate_pack_audio.py
+.venv/bin/python scripts/test_fetch_pack_audio.py
 .venv/bin/python -m unittest discover -s scripts -p 'test_new_pack.py'
 
 echo "== security: advisory + secret scans (mirror of CI security job) =="

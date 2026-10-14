@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-13",
-  "active_task": null,
+  "active_task": "LIC-002",
   "tasks": {
     "TTS-003": {
       "status": "blocked",
@@ -904,6 +904,12 @@
     "RTL-001": {
       "status": "ready",
       "attempts": 0,
+      "last_error": null,
+      "evidence": []
+    },
+    "LIC-002": {
+      "status": "in_progress",
+      "attempts": 1,
       "last_error": null,
       "evidence": []
     }

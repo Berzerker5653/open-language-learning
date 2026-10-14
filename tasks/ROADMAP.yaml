@@ -141,6 +141,28 @@ tasks:
   - Local implementation and alternative-source research may continue while any owner-only licensing choice
     is pending; release remains blocked.
   required_for_desktop_1_0: true
+- id: LIC-002
+  milestone: M10
+  priority: P1
+  title: Detect pack licences more permissive than their sources
+  dependencies:
+  # LIC-001 established the rights records. Measured at this head,
+  # `audit_licenses` performs no licence comparison in either direction: it
+  # checks `unknown_license`, redistribution flags and reference-only claims.
+  # `content_license` is only carried (crates/domain/src/pack.rs) and echoed
+  # into CLI JSON — which is how 0.4.0 published CC-BY-4.0 ja-JP content
+  # derived from CC BY-SA dictionary data. This task adds the first comparison.
+  - LIC-001
+  read_first:
+  - docs/10_LICENSING_AND_PROVENANCE.md
+  - docs/PACK_AUTHORING_CONTRACT.md
+  - crates/langpack/src/audit.rs
+  acceptance:
+  - audit-licenses emits a named finding when a declared content licence grants fewer obligations than a cited source licence imposes, naming record, source id, both licences and the obligation lost.
+  - A synthetic BY-over-BY-SA pack emits the finding; the same pack declaring BY-SA emits none; unknown licence ids are never judged.
+  - Reference packs still clear every gate while the finding is reported, because the terms decision is owner-gated (O-01(a)); promotion of the finding to a blocking severity is a separate owner-gated step.
+  - An ADR records the obligation model, the severity choice and the promotion path.
+  required_for_desktop_1_0: false
 - id: PACK-001
   milestone: M1
   priority: P0
@@ -1636,4 +1658,5 @@ execution_scope:
   - K-45
   - K-46
   - RTL-001
+  - LIC-002
   public_publication_authorized: false
