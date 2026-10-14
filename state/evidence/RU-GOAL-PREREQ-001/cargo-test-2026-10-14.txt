@@ -1,0 +1,10 @@
+# R08 russian on-ramp gate opens on evidence
+# date: 2026-10-14T11:50:07-06:00  host: GamingPC
+$ cargo test -q -p lts-desktop --lib -- russian_cyrillic_practice_unlocks_the_greetings_gate
+
+running 1 test
+test tests::russian_cyrillic_practice_unlocks_the_greetings_gate has been running for over 60 seconds
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 139 filtered out; finished in 127.54s
+
+exit=0

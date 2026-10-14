@@ -1,0 +1,32 @@
+# pack conformance for both reference packs
+# date: 2026-10-14T12:00:32-06:00  host: GamingPC
+$ bash -c for p in languages/ja-JP languages/ru-RU; do for g in validate lint test audit-curriculum audit-lexicon audit-licenses audit-sources; do echo "--- $g $p"; cargo run -q -p lts-langpack-cli -- "$g" "$p" 2>&1 | tail -1; done; done
+--- validate languages/ja-JP
+validate(scaffold): 0 error(s), 0 warning(s)
+--- lint languages/ja-JP
+lint: 0 error(s), 0 warning(s)
+--- test languages/ja-JP
+test: 0 error(s), 0 warning(s)
+--- audit-curriculum languages/ja-JP
+audit-curriculum: 0 error(s), 0 warning(s)
+--- audit-lexicon languages/ja-JP
+audit-lexicon: 0 error(s), 0 warning(s)
+--- audit-licenses languages/ja-JP
+audit-licenses: 0 error(s), 0 warning(s)
+--- audit-sources languages/ja-JP
+audit-sources: 0 error(s), 0 warning(s)
+--- validate languages/ru-RU
+validate(scaffold): 0 error(s), 0 warning(s)
+--- lint languages/ru-RU
+lint: 0 error(s), 0 warning(s)
+--- test languages/ru-RU
+test: 0 error(s), 0 warning(s)
+--- audit-curriculum languages/ru-RU
+audit-curriculum: 0 error(s), 0 warning(s)
+--- audit-lexicon languages/ru-RU
+audit-lexicon: 0 error(s), 0 warning(s)
+--- audit-licenses languages/ru-RU
+audit-licenses: 0 error(s), 0 warning(s)
+--- audit-sources languages/ru-RU
+audit-sources: 0 error(s), 0 warning(s)
+exit=0

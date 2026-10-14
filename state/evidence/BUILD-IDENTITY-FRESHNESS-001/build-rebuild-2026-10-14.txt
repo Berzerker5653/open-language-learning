@@ -1,0 +1,17 @@
+# R15 a source change re-runs the identity build script
+# date: 2026-10-14T11:59:02-06:00  host: GamingPC
+$ bash -c 
+    set -e
+    cargo build -q -p lts-desktop
+    out=$(ls -t target/debug/build/lts-desktop-*/output | head -1)
+    before=$(stat -c %Y "$out"); echo "build script output: $out mtime=$before"
+    touch apps/desktop/src-tauri/src/lib.rs
+    cargo build -q -p lts-desktop
+    out=$(ls -t target/debug/build/lts-desktop-*/output | head -1)
+    after=$(stat -c %Y "$out"); echo "after touching src/lib.rs: $out mtime=$after"
+    test "$after" -gt "$before" && echo "REBUILT: identity metadata re-stamped" || echo "STALE: build script did not re-run"
+  
+build script output: target/debug/build/lts-desktop-c3ed0a67b7a457b2/output mtime=1792000742
+after touching src/lib.rs: target/debug/build/lts-desktop-c3ed0a67b7a457b2/output mtime=1792000746
+REBUILT: identity metadata re-stamped
+exit=0

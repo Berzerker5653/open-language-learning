@@ -1,0 +1,7 @@
+# handoff ledger validation
+# date: 2026-10-14T12:11:12-06:00  host: GamingPC
+$ .venv/bin/python tools/validate_handoff.py
+WARN examples/minimal-language-pack: manifest-only onboarding fixture; no instructional content or full pack conformance
+WARN scope: handoff structure checked; SDK completeness, linguistic correctness, source rights, calibration quality, build/install/runtime/UX/privacy/security remain unverified
+HANDOFF VALIDATION PASSED (1959 data files checked)
+exit=0

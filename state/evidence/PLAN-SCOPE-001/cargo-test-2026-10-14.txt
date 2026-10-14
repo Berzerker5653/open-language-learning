@@ -1,0 +1,11 @@
+# R07 pack-scoped plan and mastery
+# date: 2026-10-14T11:45:29-06:00  host: GamingPC
+$ cargo test -q -p lts-desktop --lib -- switching_the_studied_pack plan_generation_stays_fast
+
+running 2 tests
+test tests::plan_generation_stays_fast_on_the_reference_pack has been running for over 60 seconds
+test tests::switching_the_studied_pack_changes_what_the_plan_and_mastery_see has been running for over 60 seconds
+..
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 138 filtered out; finished in 135.08s
+
+exit=0

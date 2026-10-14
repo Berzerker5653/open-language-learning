@@ -1,0 +1,14 @@
+# web format + lint + typecheck (pnpm scripts, run with npx)
+# date: 2026-10-14T12:11:06-06:00  host: GamingPC
+$ bash -c npx prettier --check . && npx eslint . && (cd apps/desktop && npx tsc --noEmit) && (cd packages/ui && npx tsc --noEmit)
+npm notice run open-language-learning-platform@0.1.0 npx
+npm notice run 'prettier' --check .
+Checking formatting...
+All matched files use Prettier code style!
+npm notice run open-language-learning-platform@0.1.0 npx
+npm notice run 'eslint' .
+npm notice run @openlang/desktop@0.4.0-alpha.1 npx
+npm notice run 'tsc' --noEmit
+npm notice run @openlang/ui@0.1.0 npx
+npm notice run 'tsc' --noEmit
+exit=0

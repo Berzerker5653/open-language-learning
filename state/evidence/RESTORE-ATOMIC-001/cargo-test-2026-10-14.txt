@@ -1,0 +1,11 @@
+# R06 restore is one transaction
+# date: 2026-10-14T11:56:42-06:00  host: GamingPC
+$ cargo test -q -p lts-desktop --lib -- restores_saved_words profile_export_writes_bundle
+
+running 2 tests
+test tests::a_supported_backup_restores_saved_words_and_history has been running for over 60 seconds
+test tests::profile_export_writes_bundle_and_delete_is_one_shot has been running for over 60 seconds
+..
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 138 filtered out; finished in 135.16s
+
+exit=0

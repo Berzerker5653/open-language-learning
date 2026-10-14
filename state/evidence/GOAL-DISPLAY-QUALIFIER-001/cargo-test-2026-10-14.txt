@@ -1,0 +1,12 @@
+# R09 goal display coverage qualifier
+# date: 2026-10-14T11:47:48-06:00  host: GamingPC
+$ cargo test -q -p lts-desktop --lib -- goal_map
+
+running 3 tests
+test tests::goal_map_ignores_activity_volume has been running for over 60 seconds
+test tests::goal_map_orders_bands_by_ladder_not_ascii has been running for over 60 seconds
+test tests::goal_map_surfaces_pack_goals_with_prereqs_and_mastery has been running for over 60 seconds
+...
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 137 filtered out; finished in 136.90s
+
+exit=0

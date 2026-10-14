@@ -1,0 +1,19 @@
+# audio pipeline and pack-scaffold script tests
+# date: 2026-10-14T11:59:12-06:00  host: GamingPC
+$ bash -c .venv/bin/python scripts/test_generate_pack_audio.py && .venv/bin/python scripts/test_fetch_pack_audio.py && .venv/bin/python -m unittest discover -s scripts -p test_new_pack.py
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.029s
+
+OK
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.294s
+
+OK
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.606s
+
+OK
+exit=0

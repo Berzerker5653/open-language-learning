@@ -1,0 +1,14 @@
+# R10 speech measure dispatch
+# date: 2026-10-14T11:52:16-06:00  host: GamingPC
+$ cargo test -q -p lts-desktop --lib -- pronunciation russian_contrast a_contrast_the_app the_aligner_language
+
+running 7 tests
+..test tests::a_contrast_the_app_cannot_measure_stays_listening_practice has been running for over 60 seconds
+test tests::pronunciation_check_uses_pack_declared_target_without_media has been running for over 60 seconds
+test tests::pronunciation_demo_comes_from_pack_contrasts has been running for over 60 seconds
+test tests::russian_contrast_arrives_as_the_packs_own_pair has been running for over 60 seconds
+test tests::the_aligner_language_comes_from_the_pack_manifest has been running for over 60 seconds
+.....
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 133 filtered out; finished in 264.33s
+
+exit=0

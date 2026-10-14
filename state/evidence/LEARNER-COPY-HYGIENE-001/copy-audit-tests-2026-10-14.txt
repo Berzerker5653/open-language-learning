@@ -1,0 +1,9 @@
+# I04 copy auditor tests
+# date: 2026-10-14T11:59:01-06:00  host: GamingPC
+$ .venv/bin/python -m unittest discover -s tools -p test_audit_learner_copy.py
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+OK
+exit=0

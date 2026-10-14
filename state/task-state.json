@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-10-13",
+  "updated": "2026-10-14",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -814,7 +814,7 @@
     "SPEECH-007": {
       "status": "blocked",
       "attempts": 1,
-      "last_error": "blocked on owner-supplied permissioned learner-speech data + qualified human labelers; calibration prep complete (frozen protocol v0.2.0, consent instrument, labeler rubric, sourcing decision, dataset template, runbook) — see SOURCING.md for what the owner must supply. 2026-10-06: user-selectable local speech models shipped (off default, ADR-0011); probe across tiny/base/small shows model size is NOT the pronunciation fix (contrast feature scores at align_conf 0.9 even on tiny) — calibration data is still the gate. 2026-10-07: owner challenged the premise (\"why can't an AI make the recordings\"). Answered by measurement, benchmarks/speech/results/20261008T030000Z/: synthetic takes with exact planted long-vowel ratios score at 0.00-0.53 coverage against the frozen 0.60 floor and coverage tracks the ASR model, not the planted condition; on 8 identical scored clips changing only the reference-ratio source inverts every verdict (8/8 close, catching 0 planted errors, vs 8/8 shorter = 1.0 false-correction rate vs the 0.05 ceiling); kappa>=0.70 is satisfied trivially because labels come from generator parameters. Generation is not byte-reproducible (5 runs -> 5 sha256, incl. --num-threads=1) while measurement on fixed audio is exact. Decision needed from the owner: (a) fund >=40 consented learners + 2 qualified labelers + adjudicator, or (b) an explicit scope decision that stable 1.0 ships guided-only speech feedback, removing this task from the required chain. 2026-10-07 (pack audio): ADR-0016 generated 693 ja-JP audio assets with the app's own Kokoro/sherpa chain and committed media/manifest.jsonl; that fills the listening modality but is NOT calibration input (the synthetic study is marked eligibility:not_valid_synthetic_data, registry must not consume it). Remaining input is the owner's choice in KANBAN O-04: fund the panel per SOURCING.md, or scope 1.0 to guided-only pronunciation feedback and drop SPEECH-007 from the required chain. 2026-10-08 owner scope decision (docs/adr/0017-unfunded-ai-only-posture.md): no project funding, exclusively AI-created content, desktop 1.0 ships guided-only pronunciation feedback. SPEECH-007 is removed from required_for_desktop_1_0 in tasks/ROADMAP.yaml and dropped from JA-A1-003's dependency list; the calibration protocol, consent instrument and labeler rubric stay in the repo in case the panel is ever funded. This task stays blocked rather than done: its acceptance still needs consented learner recordings and qualified labelers, which the owner declined to fund.",
+      "last_error": "blocked on owner-supplied permissioned learner-speech data + qualified human labelers; calibration prep complete (frozen protocol v0.2.0, consent instrument, labeler rubric, sourcing decision, dataset template, runbook) \u2014 see SOURCING.md for what the owner must supply. 2026-10-06: user-selectable local speech models shipped (off default, ADR-0011); probe across tiny/base/small shows model size is NOT the pronunciation fix (contrast feature scores at align_conf 0.9 even on tiny) \u2014 calibration data is still the gate. 2026-10-07: owner challenged the premise (\"why can't an AI make the recordings\"). Answered by measurement, benchmarks/speech/results/20261008T030000Z/: synthetic takes with exact planted long-vowel ratios score at 0.00-0.53 coverage against the frozen 0.60 floor and coverage tracks the ASR model, not the planted condition; on 8 identical scored clips changing only the reference-ratio source inverts every verdict (8/8 close, catching 0 planted errors, vs 8/8 shorter = 1.0 false-correction rate vs the 0.05 ceiling); kappa>=0.70 is satisfied trivially because labels come from generator parameters. Generation is not byte-reproducible (5 runs -> 5 sha256, incl. --num-threads=1) while measurement on fixed audio is exact. Decision needed from the owner: (a) fund >=40 consented learners + 2 qualified labelers + adjudicator, or (b) an explicit scope decision that stable 1.0 ships guided-only speech feedback, removing this task from the required chain. 2026-10-07 (pack audio): ADR-0016 generated 693 ja-JP audio assets with the app's own Kokoro/sherpa chain and committed media/manifest.jsonl; that fills the listening modality but is NOT calibration input (the synthetic study is marked eligibility:not_valid_synthetic_data, registry must not consume it). Remaining input is the owner's choice in KANBAN O-04: fund the panel per SOURCING.md, or scope 1.0 to guided-only pronunciation feedback and drop SPEECH-007 from the required chain. 2026-10-08 owner scope decision (docs/adr/0017-unfunded-ai-only-posture.md): no project funding, exclusively AI-created content, desktop 1.0 ships guided-only pronunciation feedback. SPEECH-007 is removed from required_for_desktop_1_0 in tasks/ROADMAP.yaml and dropped from JA-A1-003's dependency list; the calibration protocol, consent instrument and labeler rubric stay in the repo in case the panel is ever funded. This task stays blocked rather than done: its acceptance still needs consented learner recordings and qualified labelers, which the owner declined to fund.",
       "evidence": [
         "state/evidence/SPEECH-007/infra-blocked-2026-10-04.txt",
         "state/evidence/SPEECH-007/prep-2026-10-06.txt",
@@ -935,7 +935,356 @@
         "state/evidence/LIC-002/owner-decision-O-01a-2026-10-13.md",
         "languages/ja-JP/manifest.yaml"
       ]
+    },
+    "PACK-DL-ALLOWLIST-001": {
+      "task_id": "PACK-DL-ALLOWLIST-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Pack downloads are host-allowlisted, bounded in size, and count redirects instead of looping",
+      "activity": "idle",
+      "summary": "Pack downloads are pinned to the reviewed catalog origin: one http client, host allow-list, scheme+host policy, capped redirects, size-capped streaming, and a live proof that both pinned catalog entries install through the native transport.",
+      "notes": "The live proof is `#[ignore]`d so the ordinary suite stays offline; the recorded artifact runs it explicitly (`-- --ignored both_pinned`). Redirects are capped at MAX_REDIRECT_HOPS (5) and are re-checked against the allow-list on every hop; the fetch is capped at the pinned size, and a mid-stream overrun fails with an explicit error. The catalog itself still mislabels both packs' licence, which is the owner's O-01b republish decision, not a transport fix.",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/PACK-DL-ALLOWLIST-001/live-install-2026-10-14.txt",
+        "state/evidence/GATE-2026-10-14/cargo-test-2026-10-14.txt"
+      ],
+      "updated": "2026-10-14"
+    },
+    "MINE-PLAN-001": {
+      "task_id": "MINE-PLAN-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Mined items get their own scheduler partition so the plan cannot starve",
+      "activity": "idle",
+      "summary": "Mined content is separated from authored content by a scheduler partition tag, so the mined FSRS spike cannot contaminate the authored path or its coverage claims.",
+      "notes": "Verified in the build path: the partition tag is a function of the *emitted item*, never of the request (apps/desktop/src-tauri/src/lib.rs plans content with `fsrs-spike-0.1.0+mined`).",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/MINE-PLAN-001/cargo-test-2026-10-14.txt"
+      ],
+      "updated": "2026-10-14"
+    },
+    "PLAN-SCOPE-001": {
+      "task_id": "PLAN-SCOPE-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Plan and mastery lookups are scoped to the active pack or to global items",
+      "activity": "idle",
+      "summary": "Planning is bounded by the studied pack; switching packs keeps plan generation fast instead of deriving mastery across every installed pack.",
+      "notes": "Measured: the two-pack scenario returns one saved-review item (`PlanReason::SavedReview`) and stays bounded.",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/PLAN-SCOPE-001/cargo-test-2026-10-14.txt"
+      ],
+      "updated": "2026-10-14"
+    },
+    "SUPPORT-ACCOUNTING-001": {
+      "task_id": "SUPPORT-ACCOUNTING-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Support actions are recorded with one shared vocabulary and never credited",
+      "activity": "idle",
+      "summary": "Support moves (first_error, hint, example, reformulation, choice_support, native_support, translation_support, chunking, slower_audio) are recorded on every attempt and disqualify credit instead of being hidden or credited.",
+      "notes": "Policy 0.2.0 declares the disqualification sets; scenario sessions carry the support actions a lesson revealed and still abstain rather than credit. The policy document is a proposed artifact awaiting owner acceptance.",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/SUPPORT-ACCOUNTING-001/cargo-test-2026-10-14.txt"
+      ],
+      "updated": "2026-10-14"
+    },
+    "EVIDENCE-IDENTITY-001": {
+      "task_id": "EVIDENCE-IDENTITY-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Evidence identity is a prompt family with an app-issued session id, never an event id",
+      "activity": "idle",
+      "summary": "One learner action yields one evidence event: attempt groups collapse transcript/word/choice evidence, and a scenario session records one scored event per turn.",
+      "notes": "Pinned with an exact event count in the Russian gate measurement; duplicate event ids are a real defect because `Store::append_evidence` ignores conflicting ids (`ON CONFLICT DO NOTHING`).",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/EVIDENCE-IDENTITY-001/cargo-test-2026-10-14.txt"
+      ],
+      "updated": "2026-10-14"
+    },
+    "RU-GOAL-PREREQ-001": {
+      "task_id": "RU-GOAL-PREREQ-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Russian on-ramp goal prerequisites are satisfied and enforced",
+      "activity": "idle",
+      "summary": "The Russian on-ramp gate is reachable: practising the cyrillic prerequisite on its own dimension unlocks the greetings goal through the engine.",
+      "notes": "67 prerequisite concepts, hard prerequisite on orthography-recognition to `independent`; the measurement reaches the gate on the final required concept. The earlier claim that the desktop could not reach it was wrong: two authored prompt families make `Independent` reachable.",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/RU-GOAL-PREREQ-001/cargo-test-2026-10-14.txt"
+      ],
+      "updated": "2026-10-14"
+    },
+    "GOAL-DISPLAY-QUALIFIER-001": {
+      "task_id": "GOAL-DISPLAY-QUALIFIER-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Goal display states evidence coverage and cannot overstate one concept",
+      "activity": "idle",
+      "summary": "The goal surface states which dimension a prerequisite or level applies to, including locked goals and their blocking reason.",
+      "notes": "`GoalDimensionView` carries `state_kebab`/`source`/`independent_evidence_at`, and the goal map reports `locked` plus `prerequisites` with dimension and required state. Frontend coverage is component-level (`home.test.tsx`); DOM-level journey coverage belongs to JOURNEY-SUITE-001.",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/GOAL-DISPLAY-QUALIFIER-001/cargo-test-2026-10-14.txt",
+        "state/evidence/GATE-2026-10-14/vitest-2026-10-14.txt"
+      ],
+      "updated": "2026-10-14"
+    },
+    "SPEECH-DISPATCH-001": {
+      "task_id": "SPEECH-DISPATCH-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Speech checks only run the measures the installed runtime instruments, for the pack language",
+      "activity": "idle",
+      "summary": "Speech features declare the pack locale and ASR language they target, and abstain before touching audio when the measure is not instrumented for that language.",
+      "notes": "The aligner language comes from the pack manifest (uninstalled or manifest-less packs yield `pack-locale-unknown`); the pronunciation surface pins its `feature-not-instrumented` abstention.",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/SPEECH-DISPATCH-001/cargo-test-2026-10-14.txt"
+      ],
+      "updated": "2026-10-14"
+    },
+    "AUTHORED-STAGE-001": {
+      "task_id": "AUTHORED-STAGE-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Packs author stages, and the desktop runs the pack's order",
+      "activity": "idle",
+      "summary": "The authored two-stage progression is a real ladder: the same content id through a supported stage and then a transfer stage reaches a higher state, with one prompt family per stage.",
+      "notes": "`running_the_authored_stages_makes_independent_reachable` covers the ladder; placement still caps at `supported` because one assessment sample yields one prompt family.",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/AUTHORED-STAGE-001/cargo-test-2026-10-14.txt"
+      ],
+      "updated": "2026-10-14"
+    },
+    "CONTENT-DEPTH-001": {
+      "task_id": "CONTENT-DEPTH-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Reviewable journey content instead of template volume",
+      "activity": "idle",
+      "summary": "Upper-level content depth is measured by template coverage and by adding the missing B1/B2 journey content the audit named.",
+      "notes": "The audit (`tools/audit_content_templates.py`, wired into `scripts/ci.sh`) reports per-level activity-form coverage; the Russian journey units (810-818) add past-events, practical-problems and style-register content with listening and speaking activities, and the Japanese pack gained two scenario conversations plus six journey units. Every journey row is draft: `languages/{ru,ja}-*/review/WORKLIST-2026-10-14.md` records zero qualified-human records, and pack audio was generated without SoX (unnormalised levels).",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/CONTENT-DEPTH-001/template-audit-2026-10-14.txt",
+        "state/evidence/CONTENT-DEPTH-001/template-audit-tests-2026-10-14.txt",
+        "state/evidence/CONTENT-DEPTH-001/pack-gates-2026-10-14.txt"
+      ],
+      "updated": "2026-10-14"
+    },
+    "ASSESSMENT-RUNNABILITY-001": {
+      "task_id": "ASSESSMENT-RUNNABILITY-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Assessment claims separate definitions from runnable practice and evidence",
+      "activity": "idle",
+      "summary": "Placement never substitutes or repeats a diagnostic item, and the release coverage report separates authored, mined, assessment and runtime-evidence layers.",
+      "notes": "The placement plan matches goal and modality, skips a goal whose sample content was already used, and abstains rather than swap in a different kind of item.",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/ASSESSMENT-RUNNABILITY-001/cargo-test-2026-10-14.txt",
+        "docs/assessment/RELEASE_COVERAGE_RU.yaml"
+      ],
+      "updated": "2026-10-14"
+    },
+    "EXPORT-MINED-001": {
+      "task_id": "EXPORT-MINED-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Profile export carries mined support-vocabulary items",
+      "activity": "idle",
+      "summary": "Export carries the mined partition, rejects a duplicate profile instead of silently merging, and re-issues ids on import.",
+      "notes": "Export format version 2; import runs in a `BEGIN IMMEDIATE` transaction and a colliding profile id is reported, not merged.",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/EXPORT-MINED-001/cargo-test-2026-10-14.txt"
+      ],
+      "updated": "2026-10-14"
+    },
+    "RESTORE-ATOMIC-001": {
+      "task_id": "RESTORE-ATOMIC-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Backup restore is a discoverable transactional flow",
+      "activity": "idle",
+      "summary": "Restore is preview-then-apply with a safe failure mode: a bad bundle cannot half-write a profile.",
+      "notes": "`profile_import_preview_at` / `profile_import_at` plus the settings restore controls; storage tests cover the rollback path.",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/RESTORE-ATOMIC-001/cargo-test-2026-10-14.txt"
+      ],
+      "updated": "2026-10-14"
+    },
+    "PLAYBACK-LIFECYCLE-001": {
+      "task_id": "PLAYBACK-LIFECYCLE-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Recording playback survives navigation and failed playback is reported",
+      "activity": "idle",
+      "summary": "Audio playback is single-owner: a new attempt revokes the previous object URL, a revoked URL is never re-attached, and a failed load reports once and settles the control.",
+      "notes": "`apps/desktop/src/playback.ts` owns the lifecycle (5 tests: revoke on ended, revoke on error, no double revoke, play rejection settles, unplayed retained URL released); App revokes on unmount and the surface renders a `playback-error` alert. No DOM library exists, so coverage is unit-level.",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/GATE-2026-10-14/vitest-2026-10-14.txt"
+      ],
+      "updated": "2026-10-14"
+    },
+    "MIC-TRACK-LIFECYCLE-001": {
+      "task_id": "MIC-TRACK-LIFECYCLE-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Every capture stream and track is stopped on cancel, submit, navigation, unmount, and limit",
+      "activity": "idle",
+      "summary": "The microphone is a single-owner resource: it is stopped on every exit path, bounded in duration, and a second owner is refused.",
+      "notes": "`apps/desktop/src/capture.ts` (`CaptureOwner`, `captureLimitReached`, `MAX_CAPTURE_SECONDS`); lifecycle coverage is unit-level for the same runner reason as above.",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/GATE-2026-10-14/vitest-2026-10-14.txt"
+      ],
+      "updated": "2026-10-14"
+    },
+    "DOC-CONTRACT-RECONCILE-001": {
+      "task_id": "DOC-CONTRACT-RECONCILE-001",
+      "status": "blocked",
+      "attempts": 1,
+      "title": "Onboarding and specification claims match the shipped system",
+      "activity": "idle",
+      "summary": "Docs and claims that a human has to arbitrate are staged for owner decision: the pack license metadata, the ADRs awaiting acceptance, and the coverage wording that overstates what the desktop can reach.",
+      "notes": "Owner decision outstanding; not self-certified by an agent (AGENTS: AI cannot clear a human gate). The wrong claim about `Independent` reachability is corrected in this ledger; the remaining reconciliations (CC-BY-3.0 pack metadata under a CC-BY-4.0 label, ADR-0026/0028/0029/0030/0031 acceptance, O-03, O-06, O-07, O-08) are owner-only.",
+      "dependencies": [],
+      "evidence": [],
+      "updated": "2026-10-14",
+      "blocker": "Owner decision outstanding; not self-certified by an agent (AGENTS: AI cannot clear a human gate)."
+    },
+    "BUILD-IDENTITY-FRESHNESS-001": {
+      "task_id": "BUILD-IDENTITY-FRESHNESS-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Build identity is rebuilt when the commit or source changes",
+      "activity": "idle",
+      "summary": "The build identity stamp re-runs when the inputs it reads change, so a runtime report cannot be bound to stale bytes.",
+      "notes": "`apps/desktop/src-tauri/build.rs` declares `.git/HEAD`, the branch ref, `packed-refs`, the index and the crate sources; the recorded probe re-runs after touching `src-tauri/src/lib.rs`.",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/BUILD-IDENTITY-FRESHNESS-001/build-rebuild-2026-10-14.txt"
+      ],
+      "updated": "2026-10-14"
+    },
+    "CAPABILITY-HUB-001": {
+      "task_id": "CAPABILITY-HUB-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "The practice hub advertises only what the current build and pack can do, and says so before the dead end",
+      "activity": "idle",
+      "summary": "The practice hub describes capabilities by what the learner can do and gates the ones the installed pack cannot serve.",
+      "notes": "Kanji drills are hidden until the pack has kanji content (with an honest empty state), the writing surface reveals the form a miss expected, and hub blurbs state whether a mode is graded, guided or formative.",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/CAPABILITY-HUB-001/writing-tests-2026-10-14.txt",
+        "state/evidence/GATE-2026-10-14/vitest-2026-10-14.txt"
+      ],
+      "updated": "2026-10-14"
+    },
+    "LEARNER-COPY-HYGIENE-001": {
+      "task_id": "LEARNER-COPY-HYGIENE-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Learner-facing copy carries no internal identifiers",
+      "activity": "idle",
+      "summary": "Learner-facing copy names the thing instead of the internal identifier, and onboarding does not promise more than the app can do.",
+      "notes": "`tools/audit_learner_copy.py` (added by this fix, run by `scripts/ci.sh` and the CI `schemas` job) scans the renderer sources for the project's own ticket/ADR/gate ids inside string literals and JSX text: 26 source files scanned, 22 test files skipped, 0 findings. Ids stay in comments, tests and docs; onboarding copy was reworded to match the actual capability.",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/LEARNER-COPY-HYGIENE-001/copy-audit-2026-10-14.txt",
+        "state/evidence/LEARNER-COPY-HYGIENE-001/copy-audit-tests-2026-10-14.txt"
+      ],
+      "updated": "2026-10-14"
+    },
+    "GUIDED-SESSION-001": {
+      "task_id": "GUIDED-SESSION-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "Today presents one bounded session instead of an exhaustive queue",
+      "activity": "idle",
+      "summary": "The learner opens one guided session, works one next task, can pause and resume, and finishes honestly.",
+      "notes": "Recorded as a written card for this batch: the underlying pieces exist (lesson encounter, practice runner, attempt groups, support accounting), but the begin/next/pause/resume/finish journey is not wired end to end. Half-wiring it would misrepresent the review.",
+      "dependencies": [],
+      "evidence": [],
+      "updated": "2026-10-14"
+    },
+    "CANDO-PROGRESS-001": {
+      "task_id": "CANDO-PROGRESS-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "Progress leads with can-do decisions and keeps IDs as detail",
+      "activity": "idle",
+      "summary": "Progress is presented can-do first, with ids and confidence as optional detail.",
+      "notes": "Card recorded from the review; the goal map and coverage display are the seam to build on.",
+      "dependencies": [],
+      "evidence": [],
+      "updated": "2026-10-14"
+    },
+    "INSTALL-UX-001": {
+      "task_id": "INSTALL-UX-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "Installs have real progress, failure recovery, and a receipt",
+      "activity": "idle",
+      "summary": "Pack install is bounded and honest: real progress, cancel/retry/resume, a receipt, and an explicit decision on pre-archived bundles.",
+      "notes": "The transport hardening is done (PACK-DL-ALLOWLIST-001); the progress/cancel/retry surface and the pre-archived-bundle ADR are not, and the bundle decision is an owner call.",
+      "dependencies": [],
+      "evidence": [],
+      "updated": "2026-10-14"
+    },
+    "CONTRIBUTOR-REVIEW-PACKET-001": {
+      "task_id": "CONTRIBUTOR-REVIEW-PACKET-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "A beginner contributor can run one useful check without learning the whole system",
+      "activity": "idle",
+      "summary": "A contributor gets a bounded five-item review packet that shows what the gates check and what a reviewer has to sign off.",
+      "notes": "Recorded as a card: `docs/PACK_AUTHORING_CONTRACT.md`, the pack gates and the review worklists are the inputs. Content sign-off stays a qualified-human act.",
+      "dependencies": [],
+      "evidence": [],
+      "updated": "2026-10-14"
+    },
+    "JOURNEY-SUITE-001": {
+      "task_id": "JOURNEY-SUITE-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "Automated end-to-end journeys cover the shipped desktop product",
+      "activity": "idle",
+      "summary": "Mounted end-to-end journeys run against the real components instead of command-level tests.",
+      "notes": "Blocked on a runner that does not exist in this tree: there is no DOM library (`jsdom`/`happy-dom` absent), no testing-library, and no `environment:` in the vitest config, so the suite is node-only. Pinning the DOM library and native module version is the first step of the card.",
+      "dependencies": [],
+      "evidence": [],
+      "updated": "2026-10-14"
+    },
+    "RELEASE-EVIDENCE-001": {
+      "task_id": "RELEASE-EVIDENCE-001",
+      "status": "blocked",
+      "attempts": 1,
+      "title": "Release evidence is measured from the artifact",
+      "activity": "idle",
+      "summary": "The release-candidate evidence set: platform runtime reports, accessibility and security review, acceptance review, and the desktop gates re-run on a clean clone.",
+      "notes": "Owner decision outstanding; not self-certified by an agent (AGENTS: AI cannot clear a human gate). SEC-001, ACC-001, REVIEW-001 acceptance, ADR acceptance and the O-0x decisions are owner-owned; an agent records measurements and cannot clear them. The next RC re-run of the release gates is an owner-visible action.",
+      "dependencies": [
+        "ACC-001",
+        "SEC-001"
+      ],
+      "evidence": [],
+      "updated": "2026-10-14",
+      "blocker": "Owner decision outstanding; not self-certified by an agent (AGENTS: AI cannot clear a human gate)."
     }
   },
-  "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence."
+  "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence.",
+  "current_release_candidate": "v0.4.0-rc3"
 }

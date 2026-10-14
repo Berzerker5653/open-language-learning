@@ -1518,6 +1518,21 @@ tasks:
   - LIC-001
   - PERF-002
   - REVIEW-001
+  - PACK-DL-ALLOWLIST-001
+  - MINE-PLAN-001
+  - PLAN-SCOPE-001
+  - SUPPORT-ACCOUNTING-001
+  - EVIDENCE-IDENTITY-001
+  - RU-GOAL-PREREQ-001
+  - GOAL-DISPLAY-QUALIFIER-001
+  - SPEECH-DISPATCH-001
+  - AUTHORED-STAGE-001
+  - CONTENT-DEPTH-001
+  - ASSESSMENT-RUNNABILITY-001
+  - EXPORT-MINED-001
+  - RESTORE-ATOMIC-001
+  - PLAYBACK-LIFECYCLE-001
+  - MIC-TRACK-LIFECYCLE-001
   read_first:
   - docs/09_TESTING_AND_ACCEPTANCE.md
   - docs/13_RELEASE_AND_DISTRIBUTION.md
@@ -1608,6 +1623,448 @@ tasks:
     modes.
   - Core reading/listening content remains usable where technically appropriate.
   required_for_desktop_1_0: false
+- id: PACK-DL-ALLOWLIST-001
+  milestone: M10
+  priority: P1
+  title: >-
+    Pack downloads are host-allowlisted, bounded in size, and count redirects instead of looping
+  dependencies:
+  - PACK-004
+  - PACK-005
+  read_first:
+  - crates/langpack/src/archive.rs
+  - apps/desktop/src-tauri/src/packs.rs
+  - docs/07_TECHNICAL_ARCHITECTURE.md
+  acceptance:
+  - >-
+    HTTPS + host allowlist + DNS/IP policy are enforced before the first byte, and every redirect hop is
+    re-validated against all three with a bounded hop count.
+  - A size cap aborts a too-large or lying download instead of buffering it.
+  - >-
+    Both pinned catalog entries install through the native transport as a live proof, and no un-pinned
+    third-party pack download reaches a user.
+  required_for_desktop_1_0: true
+- id: MINE-PLAN-001
+  milestone: M10
+  priority: P1
+  title: >-
+    Mined items get their own scheduler partition so the plan cannot starve
+  dependencies:
+  - LEARN-002
+  - K-14
+  read_first:
+  - crates/learner-model/src/lib.rs
+  - crates/storage/src/mined.rs
+  - crates/scheduler/src/planner.rs
+  acceptance:
+  - >-
+    Mined-item scheduling state cannot overwrite or be overwritten by content-item state (separate partition
+    or versioned schedule identity).
+  - >-
+    A learner with many mined items still sees due content in the plan, and a plan with zero due content says
+    so honestly.
+  required_for_desktop_1_0: true
+- id: PLAN-SCOPE-001
+  milestone: M10
+  priority: P2
+  title: Plan and mastery lookups are scoped to the active pack or to global items
+  dependencies:
+  - MINE-PLAN-001
+  - K-14
+  read_first:
+  - crates/learner-model/src/lib.rs
+  - crates/storage/src/scheduler.rs
+  - apps/desktop/src-tauri/src/lib.rs
+  acceptance:
+  - >-
+    Plan and mastery lookups filter by pack, by global (mined/support), or by an explicit all-scope query;
+    unscoped scans are documented, bounded, and performance-tested.
+  - >-
+    Switching the studied pack cannot reschedule or expose mastery for content owned by another pack (engine
+    coverage).
+  required_for_desktop_1_0: true
+- id: SUPPORT-ACCOUNTING-001
+  milestone: M10
+  priority: P1
+  title: Support actions are recorded with one shared vocabulary and never credited
+  dependencies:
+  - LEARN-004
+  read_first:
+  - crates/learner-model/src/policy.rs
+  - crates/activity/src/support.rs
+  - crates/domain/src/mastery.rs
+  acceptance:
+  - >-
+    The engine records the support actions the learner used in the attempt group, with a stable vocabulary
+    shared with the policy file.
+  - >-
+    Recorded actions cannot advance independent or flexible, and the recorded names are exactly the names in
+    docs/assessment/MASTERY_POLICY.yaml.
+  required_for_desktop_1_0: true
+- id: EVIDENCE-IDENTITY-001
+  milestone: M10
+  priority: P1
+  title: >-
+    Evidence identity is a prompt family with an app-issued session id, never an event id
+  dependencies:
+  - LEARN-002
+  read_first:
+  - crates/learner-model/src/evidence.rs
+  - crates/activity/src/scenario.rs
+  - apps/desktop/src-tauri/src/lib.rs
+  acceptance:
+  - >-
+    Evidence keying uses an explicit prompt family plus an app-issued session/run id; no content-derived event
+    id can appear as an evidence key.
+  - >-
+    Scenario and lesson runs produce a bounded evidence set (one per prompt family per session unless an
+    authored stage justifies another), asserted by an engine test.
+  required_for_desktop_1_0: true
+- id: RU-GOAL-PREREQ-001
+  milestone: M10
+  priority: P1
+  title: Russian on-ramp goal prerequisites are satisfied and enforced
+  dependencies:
+  - PACK-005
+  - K-34
+  read_first:
+  - apps/desktop/src-tauri/src/lib.rs
+  - docs/assessment/RELEASE_COVERAGE_RU.yaml
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  acceptance:
+  - >-
+    The Cyrillic concept ids named as Russian goal prerequisites exist in the shipped pack; an audit enumerates
+    any dangling goal or concept reference in either pack.
+  - >-
+    A recorded prerequisite outcome moves the gated goal from locked to available; prerequisite state alone
+    never produces that change, and pack content stays free of engine vocabulary.
+  required_for_desktop_1_0: true
+- id: GOAL-DISPLAY-QUALIFIER-001
+  milestone: M10
+  priority: P2
+  title: Goal display states evidence coverage and cannot overstate one concept
+  dependencies:
+  - K-34
+  read_first:
+  - apps/desktop/src-tauri/src/lib.rs
+  - apps/desktop/src/home.tsx
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  acceptance:
+  - >-
+    A multi-concept goal displays the evidence coverage and weakest-link state; a single exemplar
+    cannot move the goal row to an achieved-looking state.
+  - A test with one strong concept and several unseen ones proves the headline state stays unachieved.
+  required_for_desktop_1_0: true
+- id: SPEECH-DISPATCH-001
+  milestone: M10
+  priority: P1
+  title: >-
+    Speech checks only run the measures the installed runtime instruments, for the pack language
+  dependencies:
+  - SPEECH-006
+  read_first:
+  - crates/speech-api/src/lib.rs
+  - crates/speech-runtime/src/acoustic.rs
+  - docs/SPEECH_FEATURE_ROADMAP.md
+  acceptance:
+  - >-
+    A declared feature absent from the installed runtime returns an explicit unsupported or
+    not-instrumented abstention before any audio work.
+  - >-
+    Feature IDs and measure IDs are registered identifiers; model/language selection is pack- and
+    profile-scoped, and no uncalibrated or cross-language result is presented as evidence.
+  - >-
+    The UI names the affected feature, the absent capability, and the alternative path, pinned by the
+    pronunciation surface's abstention test.
+  required_for_desktop_1_0: true
+- id: AUTHORED-STAGE-001
+  milestone: M10
+  priority: P1
+  title: Packs author stages, and the desktop runs the pack's order
+  dependencies:
+  - ACT-001
+  - PACK-AI-001
+  read_first:
+  - crates/domain/src/curriculum.rs
+  - apps/desktop/src/lesson.tsx
+  - apps/desktop/src-tauri/src/lib.rs
+  acceptance:
+  - >-
+    Unit records name stages, their order, and their support relationships; the engine can return an ordered
+    lesson plan with an explicit teaching stage and prompt family.
+  - >-
+    The desktop runs the authored stages in order instead of inferring them; engine and UI tests prove
+    independent practice is reachable after authored scaffolds.
+  required_for_desktop_1_0: true
+- id: CONTENT-DEPTH-001
+  milestone: M10
+  priority: P1
+  title: Reviewable journey content instead of template volume
+  dependencies:
+  - K-16
+  - JA-A1-001
+  - REVIEW-001
+  read_first:
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  - docs/assessment/CONTENT_TEMPLATE_FINDINGS.md
+  - tools/audit_content_templates.py
+  acceptance:
+  - >-
+    The highest-frequency templates are audited and the thin B1/B2 and Russian A2-B2 bands gain genuinely new
+    situations, dialogues, register contrasts, and productive tasks, with provenance and review status.
+  - >-
+    Near-duplicate volume is capped and measured; new content is review-pending until qualified human review
+    records it.
+  required_for_desktop_1_0: true
+- id: ASSESSMENT-RUNNABILITY-001
+  milestone: M10
+  priority: P2
+  title: Assessment claims separate definitions from runnable practice and evidence
+  dependencies:
+  - K-16
+  - READ-001
+  read_first:
+  - docs/assessment/RELEASE_COVERAGE_RU.yaml
+  - docs/assessment/RELEASE_COVERAGE.yaml
+  - apps/desktop/src-tauri/src/lib.rs
+  acceptance:
+  - >-
+    Placement samples exercise the modality and communicative task defined by the rubric; it never substitutes
+    an unrelated ready activity.
+  - >-
+    Published coverage separates rubric definitions, runnable practice, valid evidence, and human review status
+    for Russian and Japanese.
+  required_for_desktop_1_0: true
+- id: EXPORT-MINED-001
+  milestone: M10
+  priority: P2
+  title: Profile export carries mined support-vocabulary items
+  dependencies:
+  - DATA-002
+  - K-14
+  read_first:
+  - crates/storage/src/export.rs
+  - crates/storage/src/mined.rs
+  acceptance:
+  - >-
+    A v2 export profile contains mined items, their mastery, their scheduler partition, and their event
+    history, with exact round-trip coverage.
+  - Migration rules for v1 bundles are explicit; support items never masquerade as pack content.
+  required_for_desktop_1_0: true
+- id: RESTORE-ATOMIC-001
+  milestone: M10
+  priority: P2
+  title: Backup restore is a discoverable transactional flow
+  dependencies:
+  - DATA-002
+  read_first:
+  - crates/storage/src/export.rs
+  - apps/desktop/src/settings.tsx
+  acceptance:
+  - >-
+    Settings offers restore, explains what it replaces and preserves, and completes in one transaction with
+    rollback or recovery for partial failure.
+  - A test covers overwrite, migration, and collision behaviour for every profile state.
+  required_for_desktop_1_0: true
+- id: PLAYBACK-LIFECYCLE-001
+  milestone: M10
+  priority: P2
+  title: Recording playback survives navigation and failed playback is reported
+  dependencies:
+  - UX-001
+  read_first:
+  - apps/desktop/src/App.tsx
+  - apps/desktop/src/playback.ts
+  acceptance:
+  - >-
+    Object-URL lifetimes belong to the owning view; leaving and returning to a completed attempt can still play
+    its recording.
+  - A failed playback gives a visible retry or alternative path, and an unplayed retained URL is released.
+  required_for_desktop_1_0: true
+- id: MIC-TRACK-LIFECYCLE-001
+  milestone: M10
+  priority: P1
+  title: >-
+    Every capture stream and track is stopped on cancel, submit, navigation, unmount, and limit
+  dependencies:
+  - SPEECH-005
+  read_first:
+  - apps/desktop/src/capture.ts
+  - apps/desktop/src/App.tsx
+  acceptance:
+  - >-
+    Every capture path stops the MediaStream tracks, including the path that submits an already-prepared blob
+    URL.
+  - >-
+    A component or integration test observes track stop on every path (this finding is internal:
+    microphone lifecycle, not a public claim).
+  required_for_desktop_1_0: true
+- id: DOC-CONTRACT-RECONCILE-001
+  milestone: M10
+  priority: P2
+  title: Onboarding and specification claims match the shipped system
+  dependencies:
+  - REVIEW-001
+  - LIC-002
+  read_first:
+  - README.md
+  - docs/00_MASTER_SPEC.md
+  - docs/18_PUBLIC_CLAIMS_AND_SCOPE.md
+  acceptance:
+  - >-
+    Onboarding names the actual destinations and capabilities; published release, pack version, review,
+    coverage, and licensing statements are measured from the artifact.
+  - >-
+    The 1.0 course-coverage target is either accepted or amended by the owner (an owner decision), and
+    reconciliation stops at docs, task IDs, or an owner-approved ADR.
+  required_for_desktop_1_0: false
+- id: BUILD-IDENTITY-FRESHNESS-001
+  milestone: M10
+  priority: P2
+  title: Build identity is rebuilt when the commit or source changes
+  dependencies: []
+  read_first:
+  - apps/desktop/src-tauri/build.rs
+  - docs/13_RELEASE_AND_DISTRIBUTION.md
+  acceptance:
+  - >-
+    Build-identity metadata cannot be stale after a commit or source change, and the test suite does not depend
+    on the dirty-worktree exception.
+  required_for_desktop_1_0: false
+- id: CAPABILITY-HUB-001
+  milestone: M10
+  priority: P2
+  title: >-
+    The practice hub advertises only what the current build and pack can do, and says so before the
+    dead end
+  dependencies:
+  - UX-001
+  read_first:
+  - apps/desktop/src/hub.tsx
+  - apps/desktop/src/settings.tsx
+  - docs/18_PUBLIC_CLAIMS_AND_SCOPE.md
+  acceptance:
+  - >-
+    The hub and onboarding show capability status from the active build and pack (for example Kanji only where
+    taught), and speech readiness is stated above the controls with a direct fix or alternative.
+  - >-
+    Writing practice reveals the expected form after a miss; guided modes say they are guided; the active task
+    never leaks the expected answer.
+  required_for_desktop_1_0: false
+- id: LEARNER-COPY-HYGIENE-001
+  milestone: M10
+  priority: P2
+  title: Learner-facing copy carries no internal identifiers
+  dependencies:
+  - UX-001
+  read_first:
+  - apps/desktop/src/onboarding.tsx
+  - docs/01_PRODUCT_AND_UX.md
+  acceptance:
+  - >-
+    A scan of rendered learner-facing copy finds no internal task IDs, ADR numbers, or review labels; fixture
+    copy is not presented as a user promise.
+  required_for_desktop_1_0: false
+- id: GUIDED-SESSION-001
+  milestone: M10
+  priority: P2
+  title: Today presents one bounded session instead of an exhaustive queue
+  dependencies:
+  - UX-001
+  - POLISH-001
+  read_first:
+  - apps/desktop/src/home.tsx
+  - docs/01_PRODUCT_AND_UX.md
+  acceptance:
+  - >-
+    One primary begin action starts a session with a clear scope and exit state; one next task is visible and
+    its prerequisite or blocker is explained; pause/resume and an honest finish are defined.
+  - The full queue remains available but is no longer the primary structure.
+  required_for_desktop_1_0: false
+- id: CANDO-PROGRESS-001
+  milestone: M10
+  priority: P2
+  title: Progress leads with can-do decisions and keeps IDs as detail
+  dependencies:
+  - UX-002
+  - K-34
+  read_first:
+  - apps/desktop/src/home.tsx
+  - docs/01_PRODUCT_AND_UX.md
+  acceptance:
+  - >-
+    Progress answers what the learner can now do, what changed, and what to do next before showing
+    activity counts; internal IDs, confidence, and mastery labels remain available as detail.
+  required_for_desktop_1_0: false
+- id: INSTALL-UX-001
+  milestone: M10
+  priority: P2
+  title: Installs have real progress, failure recovery, and a receipt
+  dependencies:
+  - PACK-004
+  - UX-001
+  read_first:
+  - apps/desktop/src/language.tsx
+  - crates/langpack/src/archive.rs
+  acceptance:
+  - >-
+    Installation reports real progress, can be cancelled, retried, or resumed, and finishes with a receipt
+    naming the version, source, and permissions granted.
+  - A pre-archived bundle is specified only after the owner accepts the distribution trade-off.
+  required_for_desktop_1_0: false
+- id: CONTRIBUTOR-REVIEW-PACKET-001
+  milestone: M10
+  priority: P3
+  title: >-
+    A beginner contributor can run one useful check without learning the whole
+    system
+  dependencies:
+  - PACK-AI-001
+  read_first:
+  - CONTRIBUTING.md
+  - docs/QUICKSTART_PACK_AUTHORING.md
+  acceptance:
+  - >-
+    A beginner can run one check, understand a finding, make a bounded correction, and know what reviewers will
+    examine in five items or fewer.
+  - Every command and concept used is discoverable from the contributing route.
+  required_for_desktop_1_0: false
+- id: JOURNEY-SUITE-001
+  milestone: M10
+  priority: P2
+  title: Automated end-to-end journeys cover the shipped desktop product
+  dependencies:
+  - POLISH-001
+  - UX-001
+  read_first:
+  - apps/desktop/src/App.test.tsx
+  - docs/09_TESTING_AND_ACCEPTANCE.md
+  acceptance:
+  - >-
+    The onboarding-to-first-session, pack install-to-practice, speech-abstention, and profile
+    export-to-restore paths are automated end-to-end.
+  - >-
+    The runner is pinned (dom library and native module version), and a failure names the user-visible
+    outcome, not an implementation detail.
+  required_for_desktop_1_0: false
+- id: RELEASE-EVIDENCE-001
+  milestone: M10
+  priority: P2
+  title: Release evidence is measured from the artifact
+  dependencies:
+  - REL-001
+  - LIC-002
+  read_first:
+  - docs/13_RELEASE_AND_DISTRIBUTION.md
+  - docs/10_LICENSING_AND_PROVENANCE.md
+  acceptance:
+  - >-
+    A release record names the commit and artifact checksums, and hands-on evidence states the tested
+    platform, build, and outcome.
+  - >-
+    Pack publication status is reconciled with the catalog and third-party notices, with no claim that
+    unpublished packs were shipped.
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -1659,4 +2116,14 @@ execution_scope:
   - K-46
   - RTL-001
   - LIC-002
+  - DOC-CONTRACT-RECONCILE-001
+  - BUILD-IDENTITY-FRESHNESS-001
+  - CAPABILITY-HUB-001
+  - LEARNER-COPY-HYGIENE-001
+  - GUIDED-SESSION-001
+  - CANDO-PROGRESS-001
+  - INSTALL-UX-001
+  - CONTRIBUTOR-REVIEW-PACKET-001
+  - JOURNEY-SUITE-001
+  - RELEASE-EVIDENCE-001
   public_publication_authorized: false

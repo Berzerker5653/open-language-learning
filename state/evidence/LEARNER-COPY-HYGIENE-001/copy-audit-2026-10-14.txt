@@ -1,0 +1,6 @@
+# I04 learner copy audit over both frontends
+# date: 2026-10-14T11:59:01-06:00  host: GamingPC
+$ .venv/bin/python tools/audit_learner_copy.py
+LEARNER COPY AUDIT v1.0.0: 26 source files scanned, 22 test files skipped
+findings: 0
+exit=0

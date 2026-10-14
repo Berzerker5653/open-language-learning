@@ -1,0 +1,9 @@
+# R13 placement runs the declared construct
+# date: 2026-10-14T11:47:46-06:00  host: GamingPC
+$ cargo test -q -p lts-desktop --lib -- placement_never_substitutes_or_repeats_a_diagnostic_item
+
+running 1 test
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 139 filtered out; finished in 0.16s
+
+exit=0

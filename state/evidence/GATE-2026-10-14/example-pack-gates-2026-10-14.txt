@@ -1,0 +1,34 @@
+# authoring-template and example-pack conformance
+# date: 2026-10-14T11:59:10-06:00  host: GamingPC
+$ bash -c cargo run -q -p lts-langpack-cli -- lint tools/pack-templates/example-pack; for pack in examples/eo-community examples/ar-ma; do for g in validate lint audit-curriculum audit-lexicon audit-licenses audit-sources test; do echo "--- $g $pack"; cargo run -q -p lts-langpack-cli -- "$g" "$pack" 2>&1 | tail -1; done; done
+info[media_manifest_absent] media/manifest.jsonl: the pack declares 4 audio-addressable item(s) (sentences, contrast items, lexicon entries) but has no media/manifest.jsonl: nothing synthesizes at read time anymore (ADR-0024), so every listening feature on this pack would be silent; bake audio with scripts/generate-pack-audio.py (ADR-0016, ADR-0023)
+lint: 0 error(s), 0 warning(s)
+--- validate examples/eo-community
+validate(scaffold): 0 error(s), 0 warning(s)
+--- lint examples/eo-community
+lint: 0 error(s), 0 warning(s)
+--- audit-curriculum examples/eo-community
+audit-curriculum: 0 error(s), 0 warning(s)
+--- audit-lexicon examples/eo-community
+audit-lexicon: 0 error(s), 0 warning(s)
+--- audit-licenses examples/eo-community
+audit-licenses: 0 error(s), 0 warning(s)
+--- audit-sources examples/eo-community
+audit-sources: 0 error(s), 0 warning(s)
+--- test examples/eo-community
+test: 0 error(s), 0 warning(s)
+--- validate examples/ar-ma
+validate(scaffold): 0 error(s), 0 warning(s)
+--- lint examples/ar-ma
+lint: 0 error(s), 0 warning(s)
+--- audit-curriculum examples/ar-ma
+audit-curriculum: 0 error(s), 0 warning(s)
+--- audit-lexicon examples/ar-ma
+audit-lexicon: 0 error(s), 0 warning(s)
+--- audit-licenses examples/ar-ma
+audit-licenses: 0 error(s), 0 warning(s)
+--- audit-sources examples/ar-ma
+audit-sources: 0 error(s), 0 warning(s)
+--- test examples/ar-ma
+test: 0 error(s), 0 warning(s)
+exit=0

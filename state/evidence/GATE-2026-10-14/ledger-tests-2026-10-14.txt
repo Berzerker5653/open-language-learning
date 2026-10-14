@@ -1,0 +1,9 @@
+# ledger validator tests
+# date: 2026-10-14T12:11:23-06:00  host: GamingPC
+$ .venv/bin/python -m unittest discover -s tools -p test_validate_handoff.py
+.....................................
+----------------------------------------------------------------------
+Ran 37 tests in 385.959s
+
+OK
+exit=0

@@ -1,0 +1,9 @@
+# R11 authored stages reach the desktop
+# date: 2026-10-14T11:45:22-06:00  host: GamingPC
+$ cargo test -q -p lts-desktop --lib -- the_authored
+
+running 3 tests
+...
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 137 filtered out; finished in 0.18s
+
+exit=0

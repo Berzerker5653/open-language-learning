@@ -1,0 +1,6 @@
+# rust format + clippy -D warnings
+# date: 2026-10-14T12:18:00-06:00  host: GamingPC
+$ cargo fmt --all --check && cargo clippy --workspace --all-targets -- -D warnings
+   Compiling lts-desktop v0.4.0-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 4.83s
+exit=0
