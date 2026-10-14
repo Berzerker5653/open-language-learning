@@ -66,7 +66,16 @@ CI for the starting head (ec47a0a): run 38500470318 — success
   (windows-latest) · platform-compile (macos-latest) all success;
   platform-bundles skipped (tag-only). The run at e25f986 (38499519823) was
   cancelled as superseded by that push after its desktop-smoke job passed.
-CI for this follow-up's own head: recorded in the commit that follows it.
+CI for the follow-up commits:
+  run 38504343326 (head 2b508ce, the panel extraction): cancelled as superseded by
+  the push of the listing fix (cancel-in-progress per workflow + ref). Green before
+  the cancellation: desktop-smoke, schemas, web, security, platform-compile on
+  windows-latest and macos-latest; rust was mid-run.
+  run 38507181469 (head ed914a4, which contains both follow-up commits): success —
+  rust · schemas · web · security · desktop-smoke · platform-compile
+  (windows-latest) · platform-compile (macos-latest), platform-bundles skipped
+  (tag-only). So the extracted panels and the listing fix are both proven on
+  runners at ed914a4.
 
 A second gap, found by checking what ADR-0029 claimed rather than what the code
 did (same tree):
