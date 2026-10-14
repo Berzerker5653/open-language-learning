@@ -2,6 +2,8 @@
 
 Start with `README.md` and the relevant design document. For code changes, follow `AGENTS.md`. For language content, follow `docs/04_LANGUAGE_PACK_SPEC.md`, `docs/10_LICENSING_AND_PROVENANCE.md`, and `docs/16_CONTENT_AUTHORING_AND_REVIEW.md`.
 
+If you are fixing one thing in a language pack, start with the bounded five-item packet at `docs/20_CONTRIBUTOR_REVIEW_PACKET.md`: the exact check to run, how to read its findings, what you may change directly, and what counts as evidence.
+
 ## Development commands (Linux reference environment)
 
 Prerequisites: Node.js >= 26, pnpm 12.8.1 (`packageManager` field; e.g. `npm i -g pnpm@12.8.1`),

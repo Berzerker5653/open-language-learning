@@ -135,6 +135,7 @@ These are non-negotiable project decisions, recorded as ADRs and enforced by the
 | `docs/17_SPEECH_BENCHMARK_PLAN.md` | provider and calibration protocol |
 | `docs/18_PUBLIC_CLAIMS_AND_SCOPE.md` | claim and completeness gates |
 | `docs/19_PROJECT_FILE_ARCHITECTURE.md` | file ownership boundaries |
+| `docs/20_CONTRIBUTOR_REVIEW_PACKET.md` | the five-item packet for a one-change contribution |
 | `docs/SOURCES.md` | research and source registry |
 
 Living state: `tasks/KANBAN.md` (what is being worked on and what is blocked), `state/task-state.json` (the release ledger), `docs/adr/` (every architectural decision and its status).

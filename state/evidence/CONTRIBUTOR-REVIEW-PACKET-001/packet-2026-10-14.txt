@@ -1,0 +1,51 @@
+# CONTRIBUTOR-REVIEW-PACKET-001 — the five-item packet, verified
+# date: 2026-10-14  host: GamingPC (the commands below were executed on Omarchy
+# against this snapshot; the cite spot-checks were re-run on GamingPC)
+
+Deliverable: `docs/20_CONTRIBUTOR_REVIEW_PACKET.md` (180 lines, next free
+number after docs/19), plus a pointer from `CONTRIBUTING.md` and a row in the
+README document table.
+
+## Commands the packet tells a contributor to run — executed on Omarchy
+
+| command | defined/run at | measured |
+| --- | --- | --- |
+| `cargo run -q -p lts-langpack-cli -- validate languages/ja-JP` | `scripts/ci.sh:17`, `ci.yml:60` | bare checkout: 4,894 × `error[media_missing]`, exit 1; after restore: `validate(scaffold): 0 error(s), 0 warning(s)`, exit 0 |
+| `cargo run -q -p lts-langpack-cli -- lint languages/ja-JP` | `scripts/ci.sh:18`, `ci.yml:61` | `lint: 0 error(s), 0 warning(s)`, exit 0 |
+| `cargo run -q -p lts-langpack-cli -- test languages/ja-JP` | `scripts/ci.sh:19`, `ci.yml:65` | `test: 0 error(s), 0 warning(s)`, exit 0 |
+| `./scripts/fetch-pack-audio.sh --pack-dir languages/ja-JP` | usage block `scripts/fetch-pack-audio.sh:50-60` | exit 0; 4,902 rows checked, 4,894 restored (the 18 tracked journey rows needed no restore) |
+| `python tools/validate_handoff.py` | `ci.yml:253`, `scripts/ci.sh:62` | `HANDOFF VALIDATION PASSED (1959 data files checked)`, exit 0 |
+| `python tools/audit_content_templates.py languages/ja-JP languages/ru-RU` | `ci.yml:266`, `scripts/ci.sh:67` | counted findings, exit 0 |
+| `python tools/audit_learner_copy.py` | `ci.yml:270`, `scripts/ci.sh:69` | `findings: 0`, exit 0 |
+
+The example finding in item 2 is that run's own output, not a composed
+example:
+
+```
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+```
+
+## Cite spot-checks on GamingPC (each printed line is the cited line)
+
+$ sed -n '232p' crates/langpack-cli/src/main.rs
+            println!("{sev}[{}] {loc}: {}", d.code, d.message);
+$ sed -n '992p' crates/langpack-cli/src/main.rs        # lint fails on warnings too
+            if errors > 0 || warnings > 0 {
+$ sed -n '1019p' crates/langpack-cli/src/main.rs       # test fails on errors only
+            if errors > 0 {
+$ sed -n '381p' tools/validate_handoff.py
+        self.warn("scope", "handoff structure checked; SDK completeness, linguistic correctness, source rights, calibration quality, build/install/runtime/UX/privacy/security remain unverified")
+$ sed -n '400p' tools/validate_handoff.py
+        print(f"{result['mode'].upper()} VALIDATION {'PASSED' if result['passed'] else 'FAILED'} ({audit.checked} data files checked)")
+$ sed -n '1002p' crates/langpack/src/pack.rs
+                        "review_promotion_unsupported",
+$ grep -n "CI OK" scripts/ci.sh
+84:echo "CI OK"
+
+Correction applied during integration: the packet cited `scripts/ci.sh:83` for
+`CI OK`; the real line is 84. §1 now also records the bounded ADR-0032 media
+exception instead of stating the gitignore rule flatly.
+
+Not claimed: the pnpm and desktop-smoke steps are described from
+`.github/workflows/ci.yml` job/line numbers, because no pnpm exists on Omarchy;
+the packet does not say they were run locally.
