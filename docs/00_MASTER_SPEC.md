@@ -260,9 +260,9 @@ Release 1.0 requires:
 - local learner profile and persistence;
 - curriculum/mastery/session engine;
 - language-pack SDK + schema + validation CLI;
-- installable Japanese reference pack with validated, qualified-human-reviewed on-ramp through B2-like communicative coverage, checked against a finite approved coverage manifest;
+- installable Japanese reference pack with on-ramp through B2-like communicative coverage, checked against a finite approved coverage manifest; the content posture is the owner-recorded one (ADR-0017): first-party content is AI-created and labelled as such, and qualified human review stays an owner/community path (O-02) rather than a 1.0 release gate;
 - listening and speech-recognition practice;
-- pronunciation feedback with calibrated confidence and explicit limitations, including at least one high-value Japanese contrast qualified for automatic feedback within a declared useful coverage envelope; guided-only previews do not fulfill this stable-release gate;
+- pronunciation feedback that is guided-only for 1.0, with explicit limitations and abstention (ADR-0017 decision 1); calibrated automatic feedback for at least one high-value Japanese contrast remains the funded target, and its consent instrument, labeler rubric and runbook stay in the repo, but `SPEECH-007` is out of the required-for-1.0 chain until a consented panel exists;
 - reading/writing support for Japanese scripts;
 - game/scenario layer sufficient to make language use the primary interaction;
 - export/import;
@@ -271,7 +271,7 @@ Release 1.0 requires:
 - license/provenance audit;
 - complete automated release test suite.
 
-The stable 1.0 target is Japanese on-ramp through B2-like communicative coverage, consistent with the README and roadmap. This is a project coverage target, not official certification or a guarantee that every learner reaches B2. The pack may not be labeled B2 complete until mapped coverage, valid assessments, qualified human review, and the release gates support that claim. Partial/A1/A2 previews may ship as explicitly limited alpha/beta builds. Reducing the stable 1.0 target requires an explicit owner scope decision and synchronized changes to the specification, roadmap, and public claims; an implementation agent must not silently narrow it.
+The stable 1.0 target is Japanese on-ramp through B2-like communicative coverage, consistent with the README and roadmap. This is a project coverage target, not official certification or a guarantee that every learner reaches B2. The pack may not be labeled B2 complete until mapped coverage, valid assessments, qualified human review, and the release gates support that claim. Partial/A1/A2 previews may ship as explicitly limited alpha/beta builds. Reducing the stable 1.0 target requires an explicit owner scope decision and synchronized changes to the specification, roadmap, and public claims; an implementation agent must not silently narrow it. ADR-0017 (accepted, owner 2026-10-08) is that recorded decision for the review-gate and pronunciation-calibration items listed above; the coverage target itself is unchanged.
 
 No policy or acceptance checklist in this handoff is evidence that its gate has already passed. Calibration, human review, learning efficacy, and supported-platform conformance require actual future results.
 

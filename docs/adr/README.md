@@ -44,5 +44,7 @@ Existing:
 - 0027 default catalog URL for released builds (`LTS_PACK_CATALOG_URL` still overrides; empty value disables) — **Accepted 2026-10-13**
 - 0028 licence-permissiveness detection in the pack audit (`license_less_permissive_than_source`, reported at info; ids outside the CC table unjudged) — **Proposed (agent-authored, 2026-10-13)**
 - 0029 direction model for right-to-left packs (per-container `dir` from manifest `capabilities.rtl`; shell and romanization stay LTR) — **Proposed (agent-authored, 2026-10-13)**
+- 0030 attempt identity and disqualifying support (identity is an input, never a guess; policy 0.2.0 `support.disqualifying_for`) — **Proposed (agent-authored, 2026-10-14)**
+- 0031 goal prerequisites aggregate over declared concepts (`required_concepts` decides a goal-level gate; no goal-id evidence rows) — **Proposed (agent-authored, 2026-10-14)**
 
 Template: `template.md`.

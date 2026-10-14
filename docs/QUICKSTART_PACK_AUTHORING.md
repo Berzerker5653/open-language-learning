@@ -18,10 +18,11 @@ Decide these as manifest fields, not as prose:
   `language/orthography.yaml` (an undeclared id is `script_unknown`). There is
   no engine script allowlist: Arabic, Cyrillic, Hangul, Georgian work because
   your pack declares them. Adding a script is authoring, not an engine change.
-- **Direction.** `capabilities.rtl` is honest to declare when the content is
-  right-to-left, but know what it buys today: nothing in `apps/desktop` reads
-  it, so an RTL pack installs and validates while the UI still lays out
-  left-to-right. Say so in the pack's notes rather than implying rendered RTL.
+- **Direction.** Declare `capabilities.rtl` when the content is right-to-left —
+  it is read. Since RTL-001 the host takes the flag from the installed pack's own
+  manifest and flips only pack-text containers (`dir="rtl"` plus the manifest
+  locale in `lang`), while romanization, Latin glosses and app chrome stay
+  left-to-right (ADR-0029; fixtures in `apps/desktop/src/rtl-direction.test.tsx`).
 - **World.** Declaring `world:` requires parsable `world/environments.jsonl`
   rows (`world_collection_missing` otherwise).
 

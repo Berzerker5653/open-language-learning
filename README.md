@@ -18,9 +18,11 @@ Download the package for your distro from the [latest release](https://github.co
 | `open-language-learning-platform_0.4.0-alpha.1_amd64.AppImage` | 73 MB | single executable for any x86-64 distro, base app (run `chmod +x`, then launch) |
 | same names with `_amd64-aligner` | 84 MB / 145 MB | the same app plus the built-in speech aligner (whisper.cpp + its tiny model), so pronunciation feedback works with no model download |
 
+What is downloadable is the **0.4.0-alpha.1 publication** (language packs at 0.4.0). `main` has moved past it: fixes and content changes are merged there but no newer artifact has been published, so a source checkout and the download are deliberately different builds. The corrected-pack (0.4.1) and next-artifact decisions are owner actions (O-01b, O-06), not something CI performs.
+
 Start the app, then **Settings → Language packs → install** and pick Japanese or Russian. That fetches the published pack (~320 MB each, audio included) from the in-app catalog — no configuration, no account, nothing to compile (ADR-0027). You can instead import a `.lpk` file you were given. Once a pack and, if you want speech, the aligner build are installed, the core loop runs fully offline; disconnect and it keeps working.
 
-The first launch walks you through a name, the pack, and a microphone choice. Installing a reference pack is not instant — it unpacks about 336 MB of audio. On this development machine the whole first run including that install completes in about 24 s; on a 2-core CI runner the same stage was still unfinished after 240 s, so give it time on a modest machine. The notice names the stage the engine is actually on, so a waiting screen is not a stuck one.
+The first launch walks you through a name, the pack, and a microphone choice. Installing a reference pack is not instant — it unpacks about 336 MB of audio, and how long that takes is a property of the machine, not of the app: on a 2-core CI runner the stage was still unfinished after 240 s, so give it time on a modest machine. The notice names the stage the engine is actually on, so a waiting screen is not a stuck one.
 
 
 ![The Today view after installing the Japanese reference pack: a greeting, what to practise now, a time-budget choice, and a pack banner stating the content is not human-reviewed](docs/images/app-today.png)
@@ -29,9 +31,9 @@ That banner is deliberate. It is the app's own statement of the language pack's 
 
 ## What is in the app
 
-Thirteen areas, all reachable from the sidebar: **Today** (what to practise now), **Practice**, **My Words**, **Progress**, **Pronunciation**, **Speaking**, **Scenarios**, **Shadowing**, **Reading**, **Writing**, **Kanji** (Japanese), **Placement** (finding your starting level), **Settings**. Speaking and listening are treated as separate skills from reading: recognising a word never marks you as able to say or understand it.
+Five destinations on the sidebar — **Today** (what to practise now), **Practice**, **My Words**, **Progress**, **Settings** — and Practice opens a hub of eight modes: **Pronunciation**, **Speaking**, **Writing**, **Scenarios**, **Shadowing**, **Reading**, **Kanji** (Japanese), **Placement** (finding your starting level). Speaking and listening are treated as separate skills from reading: recognising a word never marks you as able to say or understand it.
 
-Reference-pack coverage, measured on this tree: `ja-JP` 75 goals / 786 units / 4,563 activities, `ru-RU` 60 goals / 809 units / 3,197 activities, spanning on-ramp through B2 in both languages. Every reference in the unit graph resolves — 0 dangling links across 786+809 units and 26,819+15,555 content references.
+Reference-pack coverage, measured on this tree on 2026-10-14: `ja-JP` 75 goals / 792 units / 4,587 activities, `ru-RU` 60 goals / 818 units / 3,248 activities, spanning on-ramp through B2 in both languages. Every reference in the unit graph resolves — `audit-curriculum` fails the build on a dangling link, so the zero is a gate, not an estimate.
 
 ## What it deliberately does not do
 
