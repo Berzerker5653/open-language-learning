@@ -1251,26 +1251,26 @@
     },
     "CONTRIBUTOR-REVIEW-PACKET-001": {
       "task_id": "CONTRIBUTOR-REVIEW-PACKET-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "A beginner contributor can run one useful check without learning the whole system",
       "activity": "idle",
       "summary": "A contributor gets a bounded five-item review packet that shows what the gates check and what a reviewer has to sign off.",
-      "notes": "Recorded as a card: `docs/PACK_AUTHORING_CONTRACT.md`, the pack gates and the review worklists are the inputs. Content sign-off stays a qualified-human act.",
+      "notes": "Authored on Omarchy against this snapshot; the pack-gate, fetch-audio, handoff-validator and auditor commands in items 1 and 5 were executed there, while the pnpm and desktop-smoke steps are cited from `.github/workflows/ci.yml` job/line numbers only because Omarchy has no pnpm. Cite spot-checks on GamingPC corrected `scripts/ci.sh:83` to `:84` for the `CI OK` marker, and section 1 now records the bounded ADR-0032 media exception. Content sign-off stays a qualified-human act.",
       "dependencies": [],
-      "evidence": [],
+      "evidence": ["state/evidence/CONTRIBUTOR-REVIEW-PACKET-001/packet-2026-10-14.txt"],
       "updated": "2026-10-14"
     },
     "JOURNEY-SUITE-001": {
       "task_id": "JOURNEY-SUITE-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "Automated end-to-end journeys cover the shipped desktop product",
       "activity": "idle",
       "summary": "Mounted end-to-end journeys run against the real components instead of command-level tests.",
-      "notes": "Blocked on a runner that does not exist in this tree: there is no DOM library (`jsdom`/`happy-dom` absent), no testing-library, and no `environment:` in the vitest config, so the suite is node-only. Pinning the DOM library and native module version is the first step of the card.",
+      "notes": "Executed on Hermes worker, the only pnpm host in the lab: `happy-dom` 21.0.1 pinned, `apps/desktop/vite.config.ts` split into node and dom vitest projects (the node project must declare `css: true` because projects do not inherit container test options), four journeys under `apps/desktop/src/journeys/`. Measured 24 files / 222 tests on both hosts (node 20 files / 218 tests baseline preserved, dom 4 files / 4 tests); GamingPC has no pnpm binary, so the local run unpacks `happy-dom` plus its four runtime deps into the gitignored root `node_modules/` instead, and the same command without them reports `Errors 4 errors` rather than skipping, so the suite cannot quietly lose DOM coverage. Sensitivity proven by mutating the refusal copy at `apps/desktop/src/home.tsx:160`: the pack-install journey failed with the rendered DOM quoted, 2 failed / 220 passed, then the mutation was reverted and the suite returned 222/222. Integration corrections made on GamingPC after review: restored `typescript` that the first pass deleted from `apps/desktop/package.json` and the lockfile importer, and replaced node `Buffer` with `atob`/`Uint8Array`/`DataView` so the recording decode is webview-legal.",
       "dependencies": [],
-      "evidence": [],
+      "evidence": ["state/evidence/JOURNEY-SUITE-001/vitest-2026-10-14.txt"],
       "updated": "2026-10-14"
     },
     "RELEASE-EVIDENCE-001": {
