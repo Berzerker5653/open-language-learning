@@ -2,11 +2,13 @@
 // actually has active — never a hardcoded fallback id. App.tsx builds those
 // payloads through loadSessionPack + packRequest/packAttemptRequest, so a
 // fake `inv` sees exactly the payload the Tauri command would receive.
-// Mounting <App/> is not a seam this repo can drive: vitest here runs in
-// node (no DOM dependency is pinned), and detectInvoke() returns null
-// without `window.__TAURI_INTERNALS__`, so a mounted App would issue no
-// invokes at all. These tests cover the pack-resolution and request-
-// building code that the drill panels call.
+// Mounting <App/> is covered, just not here: this file keeps the node
+// environment, and vitest 5.0.3 opts a file into a DOM by project (see
+// vite.config.ts). The four mounted learner journeys are in
+// src/journeys/*.journey.tsx — same fake `inv` idea, but the bridge is the
+// real one App.tsx probes for (`window.__TAURI_INTERNALS__`) and the clicks
+// are DOM clicks. What stays here is the pack resolution and request
+// building the drill panels call.
 import { describe, expect, it } from "vitest";
 import {
   NO_ACTIVE_PACK,

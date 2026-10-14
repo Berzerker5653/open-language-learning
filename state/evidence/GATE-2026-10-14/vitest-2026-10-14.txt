@@ -1,5 +1,12 @@
 # frontend suites (desktop + ui)
-# date: 2026-10-14T12:08:01-06:00  host: GamingPC
+# date: 2026-10-14T16:05:57-06:00  host: GamingPC
+# the desktop suite now runs as two vitest projects: node (20 files / 218 tests,
+# the pre-existing baseline) and dom (4 files / 4 tests —
+# src/journeys/*.journey.tsx under happy-dom 21.0.1). GamingPC has no pnpm
+# binary, so the dom project needed happy-dom plus its four runtime deps
+# unpacked into the gitignored root node_modules/; the canonical install
+# (`pnpm install --frozen-lockfile`) and the same counts were verified on Hermes
+# worker, and CI's `web` job runs `pnpm test` on every push.
 $ bash -c cd apps/desktop && npx vitest run && cd ../../packages/ui && npx vitest run --passWithNoTests
 npm notice run @openlang/desktop@0.4.0-alpha.1 npx
 npm notice run 'vitest' run
@@ -7,12 +14,12 @@ npm notice run 'vitest' run
  RUN  v5.0.3 /home/hunter/game-dev/LTS/apps/desktop
 
 
- Test Files  20 passed (20)
-      Tests  218 passed (218)
-   Start at  12:08:01
-   Duration  365ms (transform 72%, import 18%, tests 7%, worker 2%)
+ Test Files  24 passed (24)
+      Tests  222 passed (222)
+   Start at  16:05:57
+   Duration  675ms (transform 57%, import 17%, environment 13%, tests 11%, worker 2%)
 
-  Transform  transforming modules took 2.72s · 72% of tracked time, re-done on every run
+  Transform  |node| transforming modules took 3.14s · 73% of tracked time, re-done on every run
              persist transforms across runs with fsModuleCache: true
              on CI this only helps when the cache directory is persisted between runs
              learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
@@ -25,7 +32,7 @@ npm notice run 'vitest' run --passWithNoTests
 
  Test Files  2 passed (2)
       Tests  10 passed (10)
-   Start at  12:08:02
-   Duration  129ms (import 44%, transform 41%, tests 10%, worker 5%)
+   Start at  16:05:58
+   Duration  129ms (import 45%, transform 40%, tests 10%, worker 5%)
 
 exit=0

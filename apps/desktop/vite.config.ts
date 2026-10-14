@@ -18,7 +18,32 @@ export default defineConfig({
     target: "es2022",
   },
   test: {
-    // the a11y audit reads the palette stylesheet via ?raw (K-33)
-    css: true,
+    // JOURNEY-SUITE-001: node stays the default environment for every existing
+    // suite. vitest 5.0.3 has no per-file switch any more — the
+    // `@vitest-environment` docblock and `environmentMatchGlobs` are both gone
+    // from the installed build — so the supported opt-in is `test.projects`,
+    // and declaring projects turns this config into a container: each
+    // environment has to be spelled out. Only src/journeys/*.journey.tsx gets
+    // a DOM.
+    // A project entry is a Vite config, so its own options sit under `test` —
+    // and a container-level test option is not inherited by the projects, so
+    // the options belong to the project that uses them: the a11y audit reads
+    // the palette stylesheet via ?raw (K-33), hence `css: true` on node.
+    projects: [
+      {
+        test: {
+          name: "node",
+          environment: "node",
+          css: true,
+        },
+      },
+      {
+        test: {
+          name: "dom",
+          environment: "happy-dom",
+          include: ["src/journeys/*.journey.tsx"],
+        },
+      },
+    ],
   },
 });

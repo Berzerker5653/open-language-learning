@@ -1,0 +1,98 @@
+# JOURNEY-SUITE-001 — mounted learner journeys, measured
+# date: 2026-10-14  hosts: Hermes worker (canonical pnpm install) and GamingPC
+# (GamingPC has no pnpm binary, so happy-dom was placed in the gitignored node
+# module tree by hand — see "local install path" below. CI's `web` job runs the
+# canonical pnpm command on every push.)
+
+## Canonical run — Hermes worker, pnpm 12.8.1, node 26
+
+$ pnpm install --frozen-lockfile
+✓ Lockfile passes supply-chain policies (203 entries in 3.1s)
+Lockfile is up to date, resolution step is skipped
+Packages: +151
+Progress: resolved 151, reused 151, downloaded 0, added 151, done
+Done in 3.2s using pnpm v12.8.1
+
+$ pnpm --filter @openlang/desktop test
+ Test Files  24 passed (24)
+      Tests  222 passed (222)
+
+$ pnpm typecheck   → apps/desktop typecheck: Done
+$ pnpm fmt:check   → All matched files use Prettier code style!
+$ pnpm lint        → clean
+
+## Local run — GamingPC, node 26, npm-managed tree
+
+$ cd apps/desktop && npx vitest run
+ Test Files  24 passed (24)
+      Tests  222 passed (222)
+   Duration  670ms (transform 56%, import 16%, environment 14%, tests 12%, worker 2%)
+
+$ cd apps/desktop && npx vitest run --project dom
+ Test Files  4 passed (4)
+      Tests  4 passed (4)
+   Duration  564ms (environment 35%, transform 30%, tests 24%, import 11%, worker 1%)
+
+Per project for the whole suite: node 20 files / 218 tests (the pre-existing
+baseline, `a11y.test.tsx` still green because the node project now declares
+`css: true` — declaring `test.projects` turns the root config into a container
+and projects do not inherit container test options); dom 4 files / 4 tests under
+happy-dom 21.0.1.
+
+Before the dependency existed on this host the same command reported
+`Test Files 20 passed (20)` with `Errors 4 errors`
+(`Cannot find package 'happy-dom' imported from …/.pnpm/vitest@5.0.3_vite@8.3.2/…`)
+— the four journey files error out rather than silently skipping, which is why
+the suite cannot quietly lose DOM coverage.
+
+### local install path (not the canonical one)
+
+`happy-dom@21.0.1` plus its four runtime deps (`entities@7.0.1`,
+`whatwg-mimetype@3.0.0`, `buffer-image-size@0.6.4`, `ws@8.21.0`) were unpacked
+with `npm pack` into the repo-root `node_modules/` (gitignored, `.gitignore:61`);
+they go there because vitest resolves the environment from its own location
+inside `node_modules/.pnpm/`. No lockfile or manifest was touched: the pinned
+dependency is declared in `apps/desktop/package.json` and `pnpm-lock.yaml`, and
+`pnpm install --frozen-lockfile` above proves the two agree.
+
+## Sensitivity check — the suite fails when the product regresses
+
+The refusal copy the pack-install journey asserts lives in
+`apps/desktop/src/home.tsx:160`. Changing it to `No pack selected.` and re-running:
+
+ FAIL  |dom| src/journeys/pack-install.journey.tsx > pack install (journey b)
+         > turns an honest refusal into a graded writing target and character cards
+AssertionError: expected 'Hi SamNo pack selected. language pack…'
+  to contain 'No language is set for this profile'
+ Test Files  1 failed (1)
+ Suite total: Test Files  2 failed | 22 passed (24)   Tests  2 failed | 220 passed (222)
+
+The failure names the user-visible outcome and quotes the rendered DOM, and it
+lands in under a second. The mutation was reverted with `git checkout`, and the
+suite returns `24 passed (24) / 222 passed (222)`.
+
+## The four journeys
+
+| file | what it walks | result |
+| --- | --- | --- |
+| first-run.journey.tsx | privacy notice → name gate → profile created → pack install unlocks Continue → microphone optional → Home names the learner, plan summary "2 activities · about 3 minutes" → authored lesson teaches はじめまして → drill graded "Correct" | pass |
+| pack-install.journey.tsx | a profile with no pack is refused and says why ("No language is set for this profile", no answer field rendered, exactly one `writing_task` call) → Settings → catalog install → "installed (v0.4.0)" → choose → the writing target renders and grades ("Try again") | pass |
+| no-speech-model.journey.tsx | dictation target from the pack → real capture frames reach a 48 kHz 16-bit mono WAV (RIFF/WAVE, sample rate at offset 24, 44 + 4096·2 bytes) → the result card abstains: "No speech model is selected.", "Settings → Speech", "this check abstains", and no match/mismatch card exists | pass |
+| export-restore.journey.tsx | plan statement before export ("2 activities · about 3 minutes", "Next up: …") → export path shown → restore preview reports "backup format version 2", 2 saved words / 4 recorded attempts / 3 goals / 2 scheduled reviews → the learner-facing statement after restore matches | pass |
+
+No journey asserts that a fake was called; assertions are on rendered text and
+DOM state, with engine payloads checked only at the IPC boundary. The journey
+that could not be driven honestly was deleted rather than stubbed — none was.
+
+## Integration fixes made on GamingPC after review
+
+- The first pass deleted `typescript` from `apps/desktop/package.json` and from
+  the `pnpm-lock.yaml` apps/desktop importer; both restored.
+- `no-speech-model.journey.tsx` decoded the recording with node's `Buffer`
+  (TS2591 under the app's tsconfig); rewritten with `atob` + `Uint8Array` +
+  `DataView`, which is what a webview has.
+
+$ npx tsc --noEmit        # apps/desktop, GamingPC — no output, no errors
+$ npx prettier --check apps/desktop/src/journeys/
+All matched files use Prettier code style!
+$ npx eslint apps/desktop/src/journeys/     # clean

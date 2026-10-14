@@ -1,5 +1,9 @@
 # web format + lint + typecheck (pnpm scripts, run with npx)
-# date: 2026-10-14T12:11:06-06:00  host: GamingPC
+# date: 2026-10-14T16:06:11-06:00  host: GamingPC
+# re-run after the four mounted journeys landed, so the new
+# apps/desktop/src/journeys/ files and docs/20 are inside the prettier and
+# eslint scope and apps/desktop tsc has typechecked them (happy-dom 21.0.1
+# pinned in apps/desktop/package.json).
 $ bash -c npx prettier --check . && npx eslint . && (cd apps/desktop && npx tsc --noEmit) && (cd packages/ui && npx tsc --noEmit)
 npm notice run open-language-learning-platform@0.1.0 npx
 npm notice run 'prettier' --check .
