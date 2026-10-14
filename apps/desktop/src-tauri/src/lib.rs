@@ -1097,6 +1097,11 @@ fn kanji_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<KanjiE
 struct ContrastEntry {
     id: String,
     description: String,
+    /// The phonological feature the pack declares this contrast drills
+    /// (e.g. `ru.phon.obstruent-voicing`); empty when the pack omits it.
+    /// Instruction and analysis dispatch read this instead of the engine
+    /// assuming a language.
+    feature_id: String,
     items: Vec<ContrastItem>,
     /// Optional production-scoring target declared by the pack (language-
     /// neutral number; the engine never infers phonology).
@@ -1108,6 +1113,7 @@ struct ContrastItem {
     text: String,
 }
 
+#[derive(Clone)]
 struct ContrastProduction {
     measure: String,
     expected_ratio: f64,
@@ -1174,6 +1180,11 @@ fn contrast_entries(
                 .get("description")
                 .and_then(|v| v.as_str())
                 .unwrap_or("phonological contrast")
+                .to_string(),
+            feature_id: entry
+                .get("feature_id")
+                .and_then(|v| v.as_str())
+                .unwrap_or("")
                 .to_string(),
             items,
             production,
@@ -1469,6 +1480,155 @@ fn profile_export(profile_id: String) -> Result<String, String> {
     profile_export_at(&data_dir(), &profile_id)
 }
 
+/// What a backup on disk contains and what restoring it would mean,
+/// computed read-only before anything is written (review finding R06: the
+/// learner must be able to see what a restore will do, and what it did).
+#[derive(serde::Serialize)]
+struct ImportPreview {
+    format_version: u32,
+    supported: bool,
+    source_profile_name: String,
+    exported_at: String,
+    events: usize,
+    corrections: usize,
+    goals: usize,
+    mastery: usize,
+    saved_words: usize,
+    scheduled_items: usize,
+    pack_installs: usize,
+    selected_packs: usize,
+    recordings: usize,
+    warnings: Vec<String>,
+}
+
+/// What actually landed after a restore, read back from the store rather
+/// than echoed from the bundle's own claims.
+#[derive(serde::Serialize)]
+struct ImportOutcome {
+    profile_id: String,
+    display_name: String,
+    events: usize,
+    goals: usize,
+    saved_words: usize,
+    scheduled_items: usize,
+    warnings: Vec<String>,
+}
+
+fn parse_mode(mode: &str) -> Result<lts_storage::ImportMode, String> {
+    match mode {
+        "new" => Ok(lts_storage::ImportMode::NewProfile),
+        "overwrite" => Ok(lts_storage::ImportMode::Overwrite),
+        other => Err(format!("unknown restore mode '{other}'")),
+    }
+}
+
+fn read_bundle(path: &Path) -> Result<lts_storage::ExportBundle, String> {
+    let text = std::fs::read_to_string(path)
+        .map_err(|e| format!("could not read that backup file: {e}"))?;
+    serde_json::from_str(&text)
+        .map_err(|e| format!("that file is not a readable profile backup: {e}"))
+}
+
+fn preview_bundle(
+    bundle: &lts_storage::ExportBundle,
+    mode: &lts_storage::ImportMode,
+) -> ImportPreview {
+    let supported = bundle.format_version >= lts_storage::MIN_SUPPORTED_FORMAT_VERSION
+        && bundle.format_version <= lts_storage::EXPORT_FORMAT_VERSION;
+    let mut warnings = Vec::new();
+    if !supported {
+        warnings.push(format!(
+            "this backup uses data format version {}, which this version of the app cannot read",
+            bundle.format_version
+        ));
+    }
+    if bundle.evidence.is_empty() {
+        warnings.push("this backup contains no recorded attempts".into());
+    }
+    if bundle.mined_items.is_empty() {
+        warnings.push("this backup contains no saved words".into());
+    }
+    let recordings = bundle.recordings.as_ref().map_or(0, |rows| rows.len());
+    if recordings > 0 {
+        warnings.push(format!(
+            "{recordings} recording entries are listed; captured audio is never written into a backup, so the audio itself will not be restored"
+        ));
+    }
+    if matches!(mode, lts_storage::ImportMode::Overwrite) {
+        warnings.push("restoring replaces the existing profile with this backup's contents".into());
+    }
+    ImportPreview {
+        format_version: bundle.format_version,
+        supported,
+        source_profile_name: bundle.profile.display_name.clone(),
+        exported_at: bundle.exported_at.clone(),
+        events: bundle.evidence.len(),
+        corrections: bundle.corrections.len(),
+        goals: bundle.goals.len(),
+        mastery: bundle.mastery_snapshots.len(),
+        saved_words: bundle.mined_items.len(),
+        scheduled_items: bundle.scheduler_state.len(),
+        pack_installs: bundle.pack_installations.len(),
+        selected_packs: bundle.selected_packs.len(),
+        recordings,
+        warnings,
+    }
+}
+
+fn profile_import_preview_at(path: &str, mode: &str) -> Result<ImportPreview, String> {
+    let mode = parse_mode(mode)?;
+    let bundle = read_bundle(&std::path::PathBuf::from(path))?;
+    Ok(preview_bundle(&bundle, &mode))
+}
+
+#[tauri::command]
+fn profile_import_preview(path: String, mode: String) -> Result<ImportPreview, String> {
+    profile_import_preview_at(&path, &mode)
+}
+
+fn profile_import_at(data: &Path, path: &str, mode: &str) -> Result<ImportOutcome, String> {
+    let mode = parse_mode(mode)?;
+    let bundle = read_bundle(&std::path::PathBuf::from(path))?;
+    let preview = preview_bundle(&bundle, &mode);
+    if !preview.supported {
+        return Err(format!(
+            "unsupported backup format version {}",
+            bundle.format_version
+        ));
+    }
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let profile_id = store
+        .import_profile(&bundle, &mode)
+        .map_err(|e| format!("the restore was rejected and nothing was changed: {e}"))?;
+    // Report the restored state as the store actually holds it.
+    let profile = store
+        .get_profile(&profile_id)
+        .map_err(|e| e.to_string())?
+        .ok_or_else(|| "the restored profile could not be read back".to_string())?;
+    Ok(ImportOutcome {
+        profile_id: profile_id.clone(),
+        display_name: profile.display_name,
+        events: store
+            .evidence_count(&profile_id)
+            .map_err(|e| e.to_string())? as usize,
+        goals: store.goals(&profile_id).map_err(|e| e.to_string())?.len(),
+        saved_words: store
+            .mined_items(&profile_id)
+            .map_err(|e| e.to_string())?
+            .len(),
+        scheduled_items: store
+            .scheduler_state(&profile_id)
+            .map_err(|e| e.to_string())?
+            .len(),
+        warnings: preview.warnings,
+    })
+}
+
+#[tauri::command]
+fn profile_import(path: String, mode: String) -> Result<ImportOutcome, String> {
+    profile_import_at(&data_dir(), &path, &mode)
+}
+
 /// The other half of that promise. `Store::delete_profile` is idempotent
 /// at the SQL level, so the profile is validated first: deleting an
 /// already-deleted or unknown profile errors instead of silently
@@ -1537,6 +1697,69 @@ struct PackPrereq {
     required_state: String,
     strength: String,
 }
+/// How strongly a learner holds a *goal* in one dimension. A goal is a
+/// can-do claim over the concepts it declares in `required_concepts`, so it
+/// holds only as strongly as its weakest declared concept: mastery is
+/// derived per content id and never per goal id, so there is no single row
+/// to read honestly (R08/R09, ADR-0031). A goal that declares no concepts
+/// has no declared evidence to rest on and therefore never holds — the pack
+/// has to say what the goal means.
+fn goal_derived_state(
+    goal: &PackGoal,
+    dim: lts_domain::ActivityModality,
+    derived: &[lts_learner_model::DerivedMastery],
+) -> lts_domain::MasteryState {
+    if goal.required_concepts.is_empty() {
+        return lts_domain::MasteryState::Unseen;
+    }
+    goal.required_concepts
+        .iter()
+        .map(|c| {
+            derived
+                .iter()
+                .find(|d| &d.content_id == c && d.dimension == dim)
+                .map(|d| d.state)
+                .unwrap_or(lts_domain::MasteryState::Unseen)
+        })
+        .min()
+        .unwrap_or(lts_domain::MasteryState::Unseen)
+}
+
+/// Evaluate one prerequisite edge. A target that names another goal is
+/// settled by that goal's declared evidence; a target that names content is
+/// settled by the derived row for that content and dimension, as before. An
+/// unparseable dimension or state never satisfies: a malformed edge fails
+/// closed rather than unlocking a world.
+fn prereq_satisfied(
+    p: &PackPrereq,
+    goals: &[PackGoal],
+    derived: &[lts_learner_model::DerivedMastery],
+) -> bool {
+    let (dim, req) = match (
+        parse_dimension(&p.dimension),
+        parse_state(&p.required_state),
+    ) {
+        (Some(dim), Some(req)) => (dim, req),
+        _ => return false,
+    };
+    if let Some(goal) = goals.iter().find(|g| g.id == p.target) {
+        return goal_derived_state(goal, dim, derived) >= req;
+    }
+    derived
+        .iter()
+        .any(|d| d.content_id == p.target && d.dimension == dim && d.state >= req)
+}
+
+/// True when a goal still has a hard prerequisite the learner has not met.
+fn goal_is_locked(
+    goal: &PackGoal,
+    goals: &[PackGoal],
+    derived: &[lts_learner_model::DerivedMastery],
+) -> bool {
+    goal.prerequisites
+        .iter()
+        .any(|p| p.strength == "hard" && !prereq_satisfied(p, goals, derived))
+}
 
 /// Re-derive mastery for every (content, dimension) pair the evidence
 /// log mentions. Derivation is from the append-only log, so progress
@@ -1550,10 +1773,45 @@ fn derive_pairs(
     let events = store
         .evidence_for_profile(profile_id)
         .map_err(|e| e.to_string())?;
+    // Review finding R07: candidates and credit are scoped to the packs
+    // this profile actually studies. Evidence recorded against a pack the
+    // profile has switched away from contributes no pairs and no credit,
+    // so switching language surfaces only that language's state — and
+    // switching back restores the reviews and mastery that were always on
+    // disk. A content id whose evidence names exactly one pack is judged
+    // only on that pack's evidence, so two packs declaring the same id
+    // cannot share credit; ambiguous ids keep their whole (selected) set.
+    let selected: std::collections::HashSet<String> = store
+        .selected_packs(profile_id)
+        .map_err(|e| e.to_string())?
+        .into_iter()
+        .map(|(pack_id, _version)| pack_id)
+        .collect();
+    // Nothing selected means nothing to scope against: a profile that has
+    // evidence but no active pack still has to see its own record.
+    let scoped = !selected.is_empty();
     let mut pairs: Vec<(String, lts_domain::ActivityModality)> = Vec::new();
+    let mut owners: std::collections::HashMap<String, Option<String>> =
+        std::collections::HashMap::new();
     for ev in &events {
+        if scoped && !ev.pack_id.is_empty() && !selected.contains(&ev.pack_id) {
+            continue;
+        }
         for t in &ev.targets {
             pairs.push((t.as_str().to_string(), ev.modality));
+            let content = t.as_str();
+            if ev.pack_id.is_empty() {
+                // Unattributed evidence cannot name an owner, so it can
+                // never scope the ids it touches.
+                owners.insert(content.to_string(), None);
+            } else {
+                let entry = owners
+                    .entry(content.to_string())
+                    .or_insert_with(|| Some(ev.pack_id.clone()));
+                if entry.as_deref() != Some(ev.pack_id.as_str()) {
+                    *entry = None;
+                }
+            }
         }
     }
     pairs.sort_by(|a, b| (&a.0, dimension_kebab(a.1)).cmp(&(&b.0, dimension_kebab(b.1))));
@@ -1561,8 +1819,20 @@ fn derive_pairs(
     pairs
         .into_iter()
         .map(|(content, dim)| {
-            lts_learner_model::derive::derive_mastery(&policy, &content, dim, &events, &[], now_rfc)
-                .map_err(|e| format!("derive {content}/{}: {e}", dimension_kebab(dim)))
+            let scope = owners
+                .get(&content)
+                .and_then(|owner| owner.as_deref())
+                .filter(|pack_id| !pack_id.is_empty());
+            lts_learner_model::derive::derive_mastery_in_pack(
+                &policy,
+                &content,
+                dim,
+                &events,
+                &[],
+                now_rfc,
+                scope,
+            )
+            .map_err(|e| format!("derive {content}/{}: {e}", dimension_kebab(dim)))
         })
         .collect()
 }
@@ -1591,21 +1861,9 @@ fn progression_items(
             continue;
         };
         let goals: PackGoals = serde_yaml::from_str(&text).map_err(|e| e.to_string())?;
-        for goal in goals.goals {
-            let satisfied = goal.prerequisites.iter().all(|p| {
-                if p.strength != "hard" {
-                    return true;
-                }
-                match (
-                    parse_dimension(&p.dimension),
-                    parse_state(&p.required_state),
-                ) {
-                    (Some(dim), Some(req)) => derived
-                        .iter()
-                        .any(|d| d.content_id == p.target && d.dimension == dim && d.state >= req),
-                    _ => false,
-                }
-            });
+        let all = goals.goals;
+        for goal in &all {
+            let satisfied = !goal_is_locked(goal, &all, derived);
             let untouched = !goal
                 .required_concepts
                 .iter()
@@ -2114,9 +2372,69 @@ fn add_new_item_candidates(
     Ok(())
 }
 
+/// Every content id an installed pack version declares, cached for the
+/// process: a pack version directory is immutable, so the set cannot
+/// change under a running app (the same invariant `LEXICON_CACHE` relies
+/// on). A missing or unreadable file simply contributes nothing.
+static PACK_CONTENT_CACHE: std::sync::LazyLock<
+    std::sync::Mutex<
+        std::collections::HashMap<PathBuf, std::sync::Arc<std::collections::HashSet<String>>>,
+    >,
+> = std::sync::LazyLock::new(|| std::sync::Mutex::new(Default::default()));
+
+fn pack_content_ids(
+    data: &Path,
+    pack_id: &str,
+    version: &str,
+) -> std::sync::Arc<std::collections::HashSet<String>> {
+    let root = data.join("packs").join(pack_id).join(version);
+    let mut cache = PACK_CONTENT_CACHE.lock().unwrap_or_else(|e| e.into_inner());
+    if let Some(hit) = cache.get(&root) {
+        return std::sync::Arc::clone(hit);
+    }
+    let mut ids = std::collections::HashSet::new();
+    collect_content_ids(&root, &mut ids);
+    let ids = std::sync::Arc::new(ids);
+    cache.insert(root, std::sync::Arc::clone(&ids));
+    ids
+}
+
+/// One depth-first pass over a pack version directory: every `"id"` field
+/// in every `*.jsonl` line that parses as a content id. Ids that are not
+/// valid content ids are ignored, so nothing here can become a path.
+fn collect_content_ids(dir: &Path, ids: &mut std::collections::HashSet<String>) {
+    let Ok(entries) = std::fs::read_dir(dir) else {
+        return;
+    };
+    for entry in entries.flatten() {
+        let path = entry.path();
+        if path.is_dir() {
+            collect_content_ids(&path, ids);
+            continue;
+        }
+        if path.extension().and_then(|e| e.to_str()) != Some("jsonl") {
+            continue;
+        }
+        let Ok(text) = std::fs::read_to_string(&path) else {
+            continue;
+        };
+        for line in text.lines() {
+            let Ok(value) = serde_json::from_str::<serde_json::Value>(line) else {
+                continue;
+            };
+            if let Some(id) = value.get("id").and_then(|v| v.as_str()) {
+                if lts_domain::ContentId::parse(id).is_ok() {
+                    ids.insert(id.to_string());
+                }
+            }
+        }
+    }
+}
+
 /// Compose a time-budgeted session from scheduler values: due reviews
-/// (retrievability), weak skills (derived confidence), and curriculum
-/// progression. Never a trivial "next card" queue (docs/01).
+/// (retrievability), weak skills (derived confidence), curriculum
+/// progression, and the learner's own mined words. Never a trivial "next
+/// card" queue (docs/01).
 fn build_plan(
     data: &Path,
     profile_id: &str,
@@ -2129,6 +2447,22 @@ fn build_plan(
         w: lts_scheduler::fsrs::DEFAULT_W,
         request_ret: lts_scheduler::fsrs::DEFAULT_REQUEST_RET,
     };
+    // Review finding R07: a plan is built from the packs this profile
+    // studies. Scheduler rows left behind by another language stay out of
+    // this plan (they return when the learner switches back), and
+    // `derive_pairs` applies the same scope to weak-skill candidates.
+    let selections = store
+        .selected_packs(profile_id)
+        .map_err(|e| e.to_string())?;
+    let studied: std::collections::HashSet<String> = selections
+        .iter()
+        .flat_map(|(pack_id, version)| {
+            pack_content_ids(data, pack_id, version)
+                .iter()
+                .cloned()
+                .collect::<Vec<String>>()
+        })
+        .collect();
     let mut due_reviews = Vec::new();
     for rec in store
         .due_items(profile_id, lts_scheduler::SPIKE_VERSION, &now_rfc)
@@ -2138,15 +2472,43 @@ fn build_plan(
             serde_json::from_str(&rec.params_json).map_err(|e| e.to_string())?;
         let (content_id, modality) =
             split_item_id(&rec.item_id).ok_or_else(|| format!("bad item id {}", rec.item_id))?;
+        if !studied.contains(&content_id) {
+            continue;
+        }
         due_reviews.push(lts_scheduler::DueReviewItem {
-            item_id: rec.item_id,
-            content_id,
-            modality,
             retrievability: lts_scheduler::Scheduler::retrievability(
                 &spike,
                 &state,
                 now_secs as i64,
             ),
+            item_id: rec.item_id,
+            content_id,
+            modality,
+            saved: false,
+        });
+    }
+    // Review finding R02: a word mined from real input is scheduled under
+    // its own tag and DOES reach Today, spending the same review share as
+    // pack content. The plan carries it as `saved-review` so the UI routes
+    // it to the saved-word surface and grades it through `mine_grade`; it
+    // writes no evidence and can never grant pack-content mastery.
+    for rec in store
+        .due_items(profile_id, lts_scheduler::MINED_SCHEDULER, &now_rfc)
+        .map_err(|e| e.to_string())?
+    {
+        let state: lts_scheduler::ItemState =
+            serde_json::from_str(&rec.params_json).map_err(|e| e.to_string())?;
+        let item_id = rec.item_id;
+        due_reviews.push(lts_scheduler::DueReviewItem {
+            retrievability: lts_scheduler::Scheduler::retrievability(
+                &spike,
+                &state,
+                now_secs as i64,
+            ),
+            content_id: item_id.clone(),
+            modality: lts_domain::ActivityModality::RecallMeaning,
+            saved: true,
+            item_id,
         });
     }
     let derived = derive_pairs(&store, profile_id, &now_rfc)?;
@@ -2269,6 +2631,9 @@ struct PlanView {
 fn reason_kebab(r: lts_scheduler::PlanReason) -> &'static str {
     match r {
         lts_scheduler::PlanReason::DueReview => "due-review",
+        // The learner's own mined word: same review share, different
+        // surface, never pack-content mastery (review finding R02).
+        lts_scheduler::PlanReason::SavedReview => "saved-review",
         lts_scheduler::PlanReason::WeakSkill => "weak-skill",
         lts_scheduler::PlanReason::Progression => "progression",
     }
@@ -2323,18 +2688,7 @@ fn goal_rank_map(
     });
     let units = pack_units(root);
     for (goal_rank, goal) in goals.iter().enumerate() {
-        let locked = goal.prerequisites.iter().any(|p| {
-            p.strength == "hard"
-                && !match (
-                    parse_dimension(&p.dimension),
-                    parse_state(&p.required_state),
-                ) {
-                    (Some(dim), Some(req)) => derived
-                        .iter()
-                        .any(|d| d.content_id == p.target && d.dimension == dim && d.state >= req),
-                    _ => false,
-                }
-        });
+        let locked = goal_is_locked(goal, &goals, derived);
         if locked {
             continue;
         }
@@ -2431,6 +2785,15 @@ fn build_plan_view(
                     e.gloss.clone().unwrap_or_default(),
                 ));
             }
+        }
+    }
+    // A mined word is learner-owned, so its display info comes from the
+    // profile's own mined rows rather than any pack (review finding R02).
+    if let Ok(items) = store.mined_items(profile_id) {
+        for m in items {
+            display
+                .entry(m.id)
+                .or_insert((m.surface, m.reading, m.gloss.unwrap_or_default()));
         }
     }
     Ok(PlanView {
@@ -2693,11 +3056,21 @@ fn progress_summary(profile_id: String) -> Result<Vec<ProgressRow>, String> {
 #[derive(Serialize, PartialEq, Debug)]
 struct GoalDimensionView {
     modality: String,
-    /// Best derived state across the goal's required concepts for this
-    /// modality; "unseen" when no evidence exists yet.
+    /// R09: the goal's state for this modality under the same policy that
+    /// gates its prerequisites — the *weakest* declared concept, so one
+    /// mastered concept out of several can never display the goal as
+    /// achieved. "unseen" when no evidence exists yet.
     state: &'static str,
-    /// The required concept furthest along, for honest labeling.
+    /// Coverage under that policy: how many concepts the goal declares, and
+    /// how many of them have any evidence, so partial progress stays legible
+    /// instead of collapsing to "nothing".
+    concepts_total: usize,
+    concepts_seen: usize,
+    /// The furthest-along declared concept and its state, explicitly labelled
+    /// as an exemplar in the UI: a sample of what works, never the goal's
+    /// own status.
     exemplar: Option<String>,
+    best_state: &'static str,
 }
 
 #[derive(Serialize, PartialEq, Debug)]
@@ -3214,27 +3587,20 @@ fn goal_map_at(data: &Path, profile_id: &str) -> Result<Vec<GoalMapView>, String
         for path in pack_goal_files(&root) {
             let text = std::fs::read_to_string(&path).map_err(|e| e.to_string())?;
             let goals: PackGoals = serde_yaml::from_str(&text).map_err(|e| e.to_string())?;
-            for goal in goals.goals {
+            let all = goals.goals;
+            for goal in &all {
                 let prerequisites: Vec<GoalPrereqView> = goal
                     .prerequisites
                     .iter()
-                    .map(|p| {
-                        let satisfied = match (
-                            parse_dimension(&p.dimension),
-                            parse_state(&p.required_state),
-                        ) {
-                            (Some(dim), Some(req)) => derived.iter().any(|d| {
-                                d.content_id == p.target && d.dimension == dim && d.state >= req
-                            }),
-                            _ => false,
-                        };
-                        GoalPrereqView {
-                            target: p.target.clone(),
-                            dimension: p.dimension.clone(),
-                            required_state: p.required_state.clone(),
-                            strength: p.strength.clone(),
-                            satisfied,
-                        }
+                    .map(|p| GoalPrereqView {
+                        target: p.target.clone(),
+                        dimension: p.dimension.clone(),
+                        required_state: p.required_state.clone(),
+                        strength: p.strength.clone(),
+                        // A prerequisite naming another goal is settled by
+                        // that goal's declared concepts, never by a mastery
+                        // row for a goal id, which cannot exist (R08).
+                        satisfied: prereq_satisfied(p, &all, &derived),
                     })
                     .collect();
                 let locked = prerequisites
@@ -3246,32 +3612,49 @@ fn goal_map_at(data: &Path, profile_id: &str) -> Result<Vec<GoalMapView>, String
                     .iter()
                     .filter_map(|m| {
                         let dim = parse_goal_modality(m)?;
-                        let best = goal
+                        let pairs: Vec<(&String, Option<lts_domain::MasteryState>)> = goal
                             .required_concepts
                             .iter()
-                            .filter_map(|c| {
-                                derived
-                                    .iter()
-                                    .find(|d| &d.content_id == c && d.dimension == dim)
+                            .map(|c| {
+                                (
+                                    c,
+                                    derived
+                                        .iter()
+                                        .find(|d| &d.content_id == c && d.dimension == dim)
+                                        .map(|d| d.state),
+                                )
                             })
-                            .max_by_key(|d| d.state);
+                            .collect();
+                        // R09: the headline state is the aggregate the
+                        // prerequisite policy already uses — every declared
+                        // concept has to hold — while the best concept stays
+                        // on the view, labelled as an exemplar. Concepts stay
+                        // individually scored; the goal does not inherit the
+                        // strongest one.
+                        let best = pairs
+                            .iter()
+                            .filter_map(|(c, s)| s.map(|s| (*c, s)))
+                            .max_by_key(|(_, s)| *s);
                         Some(GoalDimensionView {
                             modality: m.clone(),
-                            state: state_kebab(
-                                best.map(|d| d.state)
+                            state: state_kebab(goal_derived_state(goal, dim, &derived)),
+                            concepts_total: pairs.len(),
+                            concepts_seen: pairs.iter().filter(|(_, s)| s.is_some()).count(),
+                            exemplar: best.map(|(c, _)| c.clone()),
+                            best_state: state_kebab(
+                                best.map(|(_, s)| s)
                                     .unwrap_or(lts_domain::MasteryState::Unseen),
                             ),
-                            exemplar: best.map(|d| d.content_id.clone()),
                         })
                     })
                     .collect();
                 out.push(GoalMapView {
                     pack_id: pack_id.clone(),
-                    id: goal.id,
-                    description: goal.description,
-                    band: goal.band,
-                    review_status: goal.review_status,
-                    modalities: goal.modalities,
+                    id: goal.id.clone(),
+                    description: goal.description.clone(),
+                    band: goal.band.clone(),
+                    review_status: goal.review_status.clone(),
+                    modalities: goal.modalities.clone(),
                     assessed,
                     locked,
                     prerequisites,
@@ -3605,15 +3988,30 @@ fn media_ids_uncached(pack_dir: &Path) -> std::collections::HashSet<String> {
     out
 }
 
-/// Pack-driven pronunciation demo pair: the first vowel-length contrast in
-/// the installed pack's phonology data (fallback: first contrast). Keeps
-/// language content in the pack, not the app (docs/07).
+/// Pack-driven pronunciation drill pair: the FIRST contrast the installed
+/// pack declares, in pack order. The engine never ranks contrasts by
+/// language or feature — it drills what the pack declares and carries
+/// that declared identity so instruction and analysis can dispatch on it
+/// (docs/07).
 #[derive(Serialize, Clone)]
 struct PronunciationDemo {
     short_unit: String,
     long_unit: String,
     short_text: String,
     long_text: String,
+    /// The contrast the pack declares; attempt/media ids stay
+    /// `{contrast_id}-{index}`, the media/manifest.jsonl convention.
+    contrast_id: String,
+    /// The phonological feature the pack declares (e.g.
+    /// `ja.phon.vowel-length`); empty when the pack omits it.
+    feature_id: String,
+    /// The pack's own one-line description of the contrast: the
+    /// instruction copy lives in the pack, not the app.
+    description: String,
+    /// The production measure the pack declares (e.g.
+    /// `voiced-duration-ratio`); None when it declares none — there is
+    /// then nothing to score, only listen/repeat.
+    measure: Option<String>,
 }
 
 #[tauri::command]
@@ -3636,7 +4034,6 @@ fn pronunciation_demo_at(data: &Path, pack_id: &str) -> Result<PronunciationDemo
         .clone();
     let text = std::fs::read_to_string(path)
         .map_err(|_| "pack declares no phonology contrasts".to_string())?;
-    let mut fallback: Option<PronunciationDemo> = None;
     for line in text.lines().filter(|l| !l.trim().is_empty()) {
         let v: serde_json::Value =
             serde_json::from_str(line).map_err(|_| "bad contrasts.jsonl".to_string())?;
@@ -3654,18 +4051,23 @@ fn pronunciation_demo_at(data: &Path, pack_id: &str) -> Result<PronunciationDemo
             long_unit: format!("{id}-1"),
             short_text: items[0]["text"].as_str().unwrap_or("").to_string(),
             long_text: items[1]["text"].as_str().unwrap_or("").to_string(),
+            contrast_id: id.to_string(),
+            feature_id: v["feature_id"].as_str().unwrap_or("").to_string(),
+            description: v
+                .get("description")
+                .and_then(|d| d.as_str())
+                .unwrap_or("phonological contrast")
+                .to_string(),
+            measure: v
+                .get("production")
+                .and_then(|p| p.get("measure"))
+                .and_then(|m| m.as_str())
+                .map(str::to_string),
         };
-        if v["feature_id"]
-            .as_str()
-            .is_some_and(|f| f.contains("vowel-length"))
-        {
-            return Ok(demo);
-        }
-        if fallback.is_none() {
-            fallback = Some(demo);
-        }
+        // The first declared contrast wins: no language-specific ranking.
+        return Ok(demo);
     }
-    fallback.ok_or_else(|| "pack declares no phonology contrasts".into())
+    Err("pack declares no phonology contrasts".into())
 }
 
 /// Where a bundled build's aligner payload lives (`<resource_dir>/aligner`).
@@ -3898,6 +4300,39 @@ async fn aligner_status() -> AlignerStatus {
     }
 }
 
+/// The production measures this app ships an interpreter for. Exactly one
+/// entry per interpreter in `speech-runtime`; a new measure is added here
+/// and nowhere else — `pronunciation_check_at` dispatches on this list.
+const INSTRUMENTED_MEASURES: &[&str] = &["voiced-duration-ratio"];
+
+/// The target locale the installed pack declares in its manifest
+/// (e.g. `ja-JP`). The app never assumes a language.
+fn pack_target_locale(pack_dir: &Path) -> Result<String, String> {
+    let text = std::fs::read_to_string(pack_dir.join("manifest.yaml"))
+        .map_err(|_| "pack-locale-unknown".to_string())?;
+    let doc: serde_yaml::Value =
+        serde_yaml::from_str(&text).map_err(|_| "pack-locale-unknown".to_string())?;
+    doc.get("target_locale")
+        .and_then(|v| v.as_str())
+        .filter(|s| !s.is_empty())
+        .map(str::to_string)
+        .ok_or_else(|| "pack-locale-unknown".to_string())
+}
+
+/// ASR language code for the aligner, derived from the pack manifest: the
+/// primary subtag of the declared target locale (`ja-JP` → `ja`,
+/// `ru-RU` → `ru`). A missing or corrupt manifest is an honest error,
+/// never a silent default — a wrong-language aligner is worse than none.
+fn pack_asr_language(pack_dir: &Path) -> Result<String, String> {
+    let locale = pack_target_locale(pack_dir)?;
+    locale
+        .split('-')
+        .next()
+        .filter(|s| !s.is_empty())
+        .map(|s| s.to_ascii_lowercase())
+        .ok_or_else(|| "pack-locale-unknown".to_string())
+}
+
 #[tauri::command]
 fn pronunciation_check(attempt: PronunciationAttempt) -> Result<PronunciationResult, String> {
     pronunciation_check_at(&data_dir(), attempt)
@@ -3931,12 +4366,48 @@ fn pronunciation_check_at(
     let version = lts_langpack::archive::current_version(&attempt.pack_id, &packs_root)
         .ok_or("pack not installed")?;
     let pack_dir = packs_root.join(&attempt.pack_id).join(&version);
+    // R10: dispatch on the declared feature, never the language. Resolve the
+    // contrast record for the drilled pair once; instruction, ASR locale and
+    // analysis all read the same declaration.
+    let contrast = contrast_id_for_unit(&attempt.short_unit).and_then(|cid| {
+        contrast_entries(data, &attempt.pack_id, &version)
+            .ok()?
+            .into_iter()
+            .find(|e| e.id == cid)
+    });
+    let declared = contrast
+        .as_ref()
+        .and_then(|c| c.production.clone())
+        .filter(|p| INSTRUMENTED_MEASURES.contains(&p.measure.as_str()));
+    if contrast.is_some() && declared.is_none() {
+        // The pack declares a contrast this app has no interpreter for
+        // (e.g. Russian obstruent voicing). Honest limitation BEFORE any
+        // audio or aligner is touched: listen/repeat practice, explicitly
+        // not scored.
+        return Ok(PronunciationResult {
+            corrections: Vec::new(),
+            abstain_reason: Some("feature-not-instrumented".into()),
+            pitch: empty_pitch("not-instrumented"),
+            mode: "guided",
+            mode_reason: Some("feature-not-instrumented".into()),
+        });
+    }
+    // ASR language comes from the installed pack manifest, never a
+    // hardcoded locale.
+    let target_locale = match pack_target_locale(&pack_dir) {
+        Ok(locale) => locale,
+        Err(_) => return Ok(abstain("pack-locale-unknown".into())),
+    };
+    let asr_language = match pack_asr_language(&pack_dir) {
+        Ok(lang) => lang,
+        Err(_) => return Ok(abstain("pack-locale-unknown".into())),
+    };
     let pref = models::load_speech_pref(data);
     let aligner = match aligner_probe(data) {
         Ok(src) => lts_speech_runtime::WhisperConstrainedAligner {
             binary: src.binary,
             model: src.model,
-            language: "ja".into(),
+            language: asr_language,
             threshold: 0.6,
         },
         Err(miss) => return Ok(abstain(aligner_miss_reason(&miss))),
@@ -3951,23 +4422,13 @@ fn pronunciation_check_at(
         lts_speech_api::ProviderOutcome::Usable { value, .. } => value,
         other => return Ok(abstain(outcome_reason(&other))),
     };
-    // Production target: prefer a pack-declared ratio (language-neutral; the
-    // engine never infers phonology). Fall back to a reference recording,
-    // gated on a genuine contrast. When a target is declared, reference media
-    // is optional and used only for the pitch contour.
+    // Production target fallback: when no declared ratio applies, gate on a
+    // reference recording with a genuine contrast. When a target is declared
+    // above, reference media is optional and used only for the pitch contour.
     // Media ids for contrast items are `{contrast-id}-{index}` (what
     // scripts/generate-pack-audio.py writes into media/manifest.jsonl); the
     // older demo ids spelled them `.short`/`.long`. Both map back to the
     // contrast record that declares the production target.
-    let declared = contrast_id_for_unit(&attempt.short_unit)
-        .and_then(|cid| {
-            contrast_entries(data, &attempt.pack_id, &version)
-                .ok()?
-                .into_iter()
-                .find(|e| e.id == cid)?
-                .production
-        })
-        .filter(|p| p.measure == "voiced-duration-ratio");
 
     let short_ref = media_file(&pack_dir, &short);
     let long_ref = media_file(&pack_dir, &long);
@@ -4100,13 +4561,18 @@ fn pronunciation_check_at(
             version: version.clone(),
             sha256: None,
         },
-        variety: "standard-japanese".into(),
+        variety: target_locale,
         context: "pronunciation-practice".into(),
     };
-    let eligibility = match load_records(&pack_dir)
-        .into_iter()
-        .find(|r| r.feature_id == "ja.phon.long-vowel")
-    {
+    let record = match contrast.as_ref().map(|c| c.feature_id.clone()) {
+        // Fails closed: only a calibration record bound to the feature this
+        // contrast declares can authorise automatic scoring.
+        Some(feature) if !feature.is_empty() => load_records(&pack_dir)
+            .into_iter()
+            .find(|r| r.feature_id == feature),
+        _ => None,
+    };
+    let eligibility = match record {
         None => lts_speech_api::calibration::Eligibility::Guided {
             reason: "no-calibration-record".into(),
         },
@@ -4450,9 +4916,22 @@ fn writing_submit(
     item_id: String,
     answer: String,
     used_hint: bool,
+    // Which scaffold was taken — "reading" or "romaji". Recorded as the
+    // concrete support action, not collapsed into a flag, because the
+    // policy disqualifies support per action: `romaji-substitution`
+    // supplies the written form and can never count as independent
+    // production (review finding R04, docs/03 §5).
+    hint_kind: Option<String>,
+    // App-generated id of the session the task was presented in.
+    // Immediate retries inside one session share an attempt group, so a
+    // retry cannot manufacture a second observation (docs/03 §5).
+    session_id: Option<String>,
 ) -> Result<lts_activity::writing::WritingGrade, String> {
     let data = data_dir();
     checked_unit(&item_id)?;
+    if is_mined_item(&item_id) {
+        return Err("mined words never produce mastery evidence".into());
+    }
     let tasks = writing_tasks_for_profile(&data, &profile_id)?;
     let task = tasks
         .iter()
@@ -4468,31 +4947,44 @@ fn writing_submit(
     let now = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
         .map_err(|e| e.to_string())?;
-    let event = lts_learner_model::AttemptDraft::new(
+    use lts_domain::support_actions as sa;
+    // Support is recorded as the concrete scaffold, at the docs/03 §5 level
+    // for a text/reading cue (3). Level 1 used to be recorded here, which
+    // the policy counts as "minimal help" — so a hinted answer could reach
+    // `independent` (review finding R04).
+    let (support_level, support_actions) = match hint_kind.as_deref() {
+        Some("romaji") => (3u8, vec![sa::ROMAJI_SUBSTITUTION.to_string()]),
+        _ if used_hint => (3, vec![sa::SUPPLIED_READING.to_string()]),
+        _ => (0, Vec::new()),
+    };
+    let mut draft = lts_learner_model::AttemptDraft::new(
         vec![lts_domain::ContentId::parse(&item_id).map_err(|_| "invalid item id")?],
         lts_domain::ActivityModality::ProductionWriting,
         lts_domain::ContentId::parse(&item_id).map_err(|_| "invalid activity id")?,
         pack_id,
         &version,
     )
-    .support(
-        lts_domain::SupportLevel::new(if used_hint { 1 } else { 0 }).ok_or("bad support")?,
-        if used_hint {
-            vec!["writing-hint".to_string()]
+    // The prompt the learner answered IS this content record, so repeated
+    // attempts at it are one prompt family, not several.
+    .prompt_family(lts_domain::ContentId::parse(&item_id).map_err(|_| "invalid prompt")?);
+    if let Some(session) = session_id.as_deref() {
+        draft = draft.attempt_group(format!("{session}:{item_id}"));
+    }
+    let event = draft
+        .support(
+            lts_domain::SupportLevel::new(support_level).ok_or("bad support")?,
+            support_actions,
+        )
+        .scored(if grade.correct {
+            lts_domain::Score::Correct
         } else {
-            vec![]
-        },
-    )
-    .scored(if grade.correct {
-        lts_domain::Score::Correct
-    } else {
-        lts_domain::Score::Incorrect
-    })
-    .finish(
-        lts_domain::EventId::new(format!("write-{}-{}", now.as_secs(), now.subsec_nanos())),
-        rfc3339_utc(now.as_secs()),
-        lts_domain::ProfileId::new(&profile_id),
-    );
+            lts_domain::Score::Incorrect
+        })
+        .finish(
+            lts_domain::EventId::new(format!("write-{}-{}", now.as_secs(), now.subsec_nanos())),
+            rfc3339_utc(now.as_secs()),
+            lts_domain::ProfileId::new(&profile_id),
+        );
     store.append_evidence(&event).map_err(|e| e.to_string())?;
     Ok(grade)
 }
@@ -5611,7 +6103,7 @@ fn mine_add_at(
         .scheduler_state(profile_id)
         .map_err(|e| e.to_string())?
         .into_iter()
-        .find(|r| r.item_id == outcome.id && r.scheduler == lts_scheduler::SPIKE_VERSION)
+        .find(|r| r.item_id == outcome.id && r.scheduler == lts_scheduler::MINED_SCHEDULER)
         .map(|r| r.due_at);
     Ok(MinedItemView {
         id: outcome.id,
@@ -5636,7 +6128,7 @@ fn mine_list_at(data: &Path, profile_id: &str) -> Result<Vec<MinedItemView>, Str
         .scheduler_state(profile_id)
         .map_err(|e| e.to_string())?
         .into_iter()
-        .filter(|r| is_mined_item(&r.item_id) && r.scheduler == lts_scheduler::SPIKE_VERSION)
+        .filter(|r| is_mined_item(&r.item_id) && r.scheduler == lts_scheduler::MINED_SCHEDULER)
         .map(|r| (r.item_id, r.due_at))
         .collect();
     Ok(store
@@ -5712,7 +6204,7 @@ fn mine_grade_at(
         .scheduler_state(profile_id)
         .map_err(|e| e.to_string())?
         .into_iter()
-        .find(|r| r.item_id == item_id && r.scheduler == lts_scheduler::SPIKE_VERSION)
+        .find(|r| r.item_id == item_id && r.scheduler == lts_scheduler::MINED_SCHEDULER)
         .map(|r| serde_json::from_str::<lts_scheduler::ItemState>(&r.params_json))
         .transpose()
         .map_err(|e| e.to_string())?;
@@ -5729,7 +6221,7 @@ fn mine_grade_at(
             profile_id,
             &lts_storage::SchedulerRecord {
                 item_id: item_id.to_string(),
-                scheduler: lts_scheduler::SPIKE_VERSION.to_string(),
+                scheduler: lts_scheduler::MINED_SCHEDULER.to_string(),
                 params_json: serde_json::to_string(&decision.state).map_err(|e| e.to_string())?,
                 due_at: due_at.clone(),
             },
@@ -5820,6 +6312,10 @@ fn practice_task(
 /// Grade a choice natively, record recall-meaning evidence, and upsert
 /// the scheduler row so the item later appears in due reviews.
 #[tauri::command]
+// Tauri IPC binds one flat named argument per field, so the command shell is
+// as wide as the call it names; the grouping lives one layer down in
+// `SubmitOpts`, which every non-IPC caller uses.
+#[allow(clippy::too_many_arguments)]
 fn practice_submit(
     profile_id: String,
     content_id: String,
@@ -5827,17 +6323,34 @@ fn practice_submit(
     choice_index: usize,
     answer: Option<String>,
     reveal_reading: bool,
+    // App-generated id of the session the task was presented in, so
+    // immediate retries stay one attempt group (docs/03 §5).
+    session_id: Option<String>,
+    // R11: the authored activity the app actually ran for this item (a
+    // `lesson_plan` stage id). Evidence attributes to the stage, so a
+    // scaffolded cloze and an unsupported recall of one word are two
+    // prompts, not one prompt disguised as two.
+    stage_id: Option<String>,
 ) -> Result<PracticeGrade, String> {
-    practice_submit_at(
+    practice_submit_inner(
         &data_dir(),
         &profile_id,
         &content_id,
         &modality,
         choice_index,
-        answer,
-        reveal_reading,
+        SubmitOpts {
+            answer,
+            reveal_reading,
+            diagnostic: None,
+            session_id: session_id.as_deref(),
+            stage: stage_id.as_deref(),
+        },
     )
 }
+#[cfg(test)]
+/// Session-less form used by the existing tests and any caller that has no
+/// session identity to assert: evidence still carries its prompt family,
+/// but retries are not collapsed into one attempt group.
 fn practice_submit_at(
     data: &Path,
     profile_id: &str,
@@ -5857,6 +6370,8 @@ fn practice_submit_at(
             answer,
             reveal_reading,
             diagnostic: None,
+            session_id: None,
+            stage: None,
         },
     )
 }
@@ -5868,6 +6383,12 @@ struct SubmitOpts<'a> {
     answer: Option<String>,
     reveal_reading: bool,
     diagnostic: Option<&'a str>,
+    /// Session the task was presented in; retries inside it share one
+    /// attempt group and so yield one observation.
+    session_id: Option<&'a str>,
+    /// R11: the pack-declared activity stage that ran, when one ran. It
+    /// becomes the attempt's activity *and* prompt identity.
+    stage: Option<&'a str>,
 }
 
 fn practice_submit_inner(
@@ -5878,6 +6399,12 @@ fn practice_submit_inner(
     choice_index: usize,
     opts: SubmitOpts<'_>,
 ) -> Result<PracticeGrade, String> {
+    if is_mined_item(content_id) {
+        // Mined words are learner-owned reviews (K-14/D8): they are graded
+        // through the mined scheduler and must never mint pack-content
+        // mastery evidence, whatever a crafted task id claims.
+        return Err("mined words never produce mastery evidence".into());
+    }
     let (task, correct_choice, reveals) =
         practice_build(data, profile_id, content_id, modality, opts.reveal_reading)?;
     let correct = if task.typed {
@@ -5902,14 +6429,16 @@ fn practice_submit_inner(
         .duration_since(std::time::UNIX_EPOCH)
         .map_err(|e| e.to_string())?;
     let dim = parse_dimension(modality).ok_or("unknown modality")?;
-    // Engine neutrality (AGENTS.md): the practiced item IS the activity;
-    // no language-specific activity id literals in the engine. Every
-    // modality attributes evidence to the content record itself, the
-    // same pattern the orthography/sentence/contrast paths already used.
-    let activity_id = content_id;
-    // K-15: a diagnostic attempt is attributed to the pack assessment.
-    let activity_id = opts.diagnostic.unwrap_or(activity_id);
-    let event = lts_learner_model::AttemptDraft::new(
+    // Prompt and activity identity. A diagnostic attempt attributes to the
+    // pack assessment (K-15). An attempt the app ran as a pack-declared
+    // stage attributes to that stage (R11): the authored encounter, the
+    // supported cloze and the unsupported recall of one word are three
+    // different prompts, which is the only honest way for a learner to
+    // reach Independent on that word at all. With neither, the practiced
+    // item is the prompt — never an invented id, and never a per-event id
+    // that manufactures prompt diversity out of repetition (R04).
+    let activity_id = opts.diagnostic.or(opts.stage).unwrap_or(content_id);
+    let mut draft = lts_learner_model::AttemptDraft::new(
         vec![lts_domain::ContentId::parse(content_id).map_err(|_| "invalid item id")?],
         dim,
         lts_domain::ContentId::parse(activity_id).map_err(|_| "invalid activity id")?,
@@ -5921,24 +6450,40 @@ fn practice_submit_inner(
     } else {
         lts_domain::AssessmentKind::Formative
     })
-    .support(
-        // A reading revealed against the auto-fade rule is a form cue:
-        // support level 3, with the actual reveal actions recorded
-        // (docs/03 §5; the success is never independent).
-        lts_domain::SupportLevel::new(if reveals.is_empty() { 0 } else { 3 })
-            .ok_or("bad support")?,
-        reveals,
-    )
-    .scored(if correct {
-        lts_domain::Score::Correct
-    } else {
-        lts_domain::Score::Incorrect
-    })
-    .finish(
-        lts_domain::EventId::new(format!("practice-{}-{}", now.as_secs(), now.subsec_nanos())),
-        rfc3339_utc(now.as_secs()),
-        lts_domain::ProfileId::new(profile_id),
+    // The prompt the learner answered: the pack-declared stage when the app
+    // ran one (R11 — the encounter, the supported cloze and the unsupported
+    // recall of one word are three prompts, which is what makes Independent
+    // reachable at all), otherwise the content record itself. Either way two
+    // attempts at one prompt are one prompt family, so prompt diversity can
+    // never be manufactured out of repetition (review finding R04).
+    .prompt_family(
+        lts_domain::ContentId::parse(opts.stage.unwrap_or(content_id))
+            .map_err(|_| "invalid prompt")?,
     );
+    if let Some(session) = opts.session_id {
+        // Immediate retries inside one session are one attempt group: the
+        // policy collapses them to a single observation (docs/03 §5).
+        draft = draft.attempt_group(format!("{session}:{content_id}"));
+    }
+    let event = draft
+        .support(
+            // A reading revealed against the auto-fade rule is a form cue:
+            // support level 3, with the actual reveal actions recorded
+            // (docs/03 §5; the success is never independent).
+            lts_domain::SupportLevel::new(if reveals.is_empty() { 0 } else { 3 })
+                .ok_or("bad support")?,
+            reveals,
+        )
+        .scored(if correct {
+            lts_domain::Score::Correct
+        } else {
+            lts_domain::Score::Incorrect
+        })
+        .finish(
+            lts_domain::EventId::new(format!("practice-{}-{}", now.as_secs(), now.subsec_nanos())),
+            rfc3339_utc(now.as_secs()),
+            lts_domain::ProfileId::new(profile_id),
+        );
     store.append_evidence(&event).map_err(|e| e.to_string())?;
     if dim == lts_domain::ActivityModality::OrthographyRecognition {
         establish_kana_literacy(data, &store, profile_id, pack_id, &version, now.as_secs())?;
@@ -6013,6 +6558,12 @@ struct PackUnit {
     /// subject names itself.
     #[serde(default)]
     requires_unit: Vec<PackUnitGate>,
+    /// R11: the unit's own teaching copy, shown when the app runs the unit
+    /// rather than a detached drill.
+    #[serde(default)]
+    title: String,
+    #[serde(default)]
+    summary: String,
     #[serde(default)]
     activities: Vec<PackUnitActivity>,
 }
@@ -6029,9 +6580,220 @@ struct PackUnitGate {
 
 #[derive(serde::Deserialize)]
 struct PackUnitActivity {
+    /// R11: the authored activity's own id. When the app runs this stage,
+    /// evidence attributes to it, so a cloze and a free recall over one
+    /// content id are two prompts rather than one disguised as one.
+    #[serde(default)]
+    id: String,
+    /// R11: the declared stage name (`encounter-read`, `cloze`, `recall`,
+    /// `scenario`, …). `type` is a Rust keyword, hence the rename.
+    #[serde(rename = "type", default)]
+    activity_type: String,
+    /// R11: declared support level (0 = an unsupported attempt). Support
+    /// accounting has to match what the learner was actually given.
+    #[serde(default)]
+    support_level: u32,
+    /// R11: the scenario an interaction stage runs, when the pack names one.
+    #[serde(default)]
+    scenario_id: Option<String>,
     modality: String,
     #[serde(default)]
     content_refs: Vec<String>,
+}
+
+/// R11: a grammar concept the pack declares, enough for the app to show the
+/// explanation an authored encounter points at.
+#[derive(serde::Deserialize, Clone)]
+struct GrammarEntry {
+    id: String,
+    #[serde(default)]
+    name: String,
+    #[serde(default)]
+    definition: String,
+}
+
+/// Every `grammar/concepts.jsonl` row of an installed pack. A pack without a
+/// grammar directory is not an error: it declares none.
+fn grammar_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<GrammarEntry>, String> {
+    let text = jsonl_dir_texts(data, pack_id, version, "grammar")?.join("\n");
+    let mut out = Vec::new();
+    for line in text.lines() {
+        let Ok(row) = serde_json::from_str::<GrammarEntry>(line) else {
+            continue;
+        };
+        if !row.id.is_empty() {
+            out.push(row);
+        }
+    }
+    Ok(out)
+}
+
+/// R11: one content record as the learner is shown it — the material itself,
+/// not a prompt about it. Only kinds the pack actually ships are resolved;
+/// an unknown reference is skipped rather than dressed up with its id.
+#[derive(Serialize)]
+struct LessonContent {
+    content_id: String,
+    kind: &'static str,
+    display: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    reading: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    gloss: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    explanation: Option<String>,
+}
+
+/// One authored stage of a unit: the pack's activity id, name and support
+/// level, with the material it presents.
+#[derive(Serialize)]
+struct LessonStage {
+    activity_id: String,
+    activity_type: String,
+    stage_kind: &'static str,
+    modality: String,
+    support_level: u32,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    scenario_id: Option<String>,
+    content: Vec<LessonContent>,
+}
+
+/// The authored journey a piece of content lives in: the unit that declares
+/// it and every stage that unit wrote, in declared order.
+#[derive(Serialize)]
+struct LessonPlan {
+    unit_id: String,
+    goal_id: String,
+    title: String,
+    summary: String,
+    stages: Vec<LessonStage>,
+}
+
+/// What a declared activity asks of the learner. Reads only the pack's own
+/// `type` and `support_level` — the engine matches no language, subject or
+/// teaching theory here. A type this app does not know still runs, honestly
+/// labelled `practice`, instead of being guessed into a stage it never was.
+fn stage_kind(activity_type: &str, support_level: u32) -> &'static str {
+    match activity_type {
+        "encounter" | "encounter-read" | "encounter-listen" | "encounter-watch" => "encounter",
+        "scenario" => "interaction",
+        "recall" | "produce" | "cloze" | "dictation" | "match" | "recall-choice"
+        | "listen-and-choose" | "retrieval" => {
+            if support_level == 0 {
+                "independent"
+            } else {
+                "scaffolded"
+            }
+        }
+        _ => "practice",
+    }
+}
+
+/// R11: the unit journey behind one plan item. The desktop used to flatten a
+/// unit into dimension drills and throw the authored stages away, so a
+/// zero-knowledge learner met a question with no encounter first. This hands
+/// back the unit's stages in the order the pack wrote them; `None` when no
+/// unit declares the content (a mined word, or a pack that ships content
+/// without a unit).
+fn lesson_plan_at(
+    data: &Path,
+    profile_id: &str,
+    content_id: &str,
+) -> Result<Option<LessonPlan>, String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    for (pack_id, _v) in store
+        .selected_packs(profile_id)
+        .map_err(|e| e.to_string())?
+    {
+        let Some(version) = lts_langpack::archive::current_version(&pack_id, &data.join("packs"))
+        else {
+            continue;
+        };
+        let root = data.join("packs").join(&pack_id).join(&version);
+        let units = pack_units(&root);
+        let Some(unit) = units.iter().find(|u| {
+            u.activities
+                .iter()
+                .any(|a| a.content_refs.iter().any(|r| r == content_id))
+        }) else {
+            continue;
+        };
+        let lex = lexicon_entries(data, &pack_id, &version)?;
+        let sentences = sentence_entries(data, &pack_id, &version)?;
+        let orth = orth_entries(data, &pack_id, &version)?;
+        let grammar = grammar_entries(data, &pack_id, &version)?;
+        let resolve = |id: &str| -> Option<LessonContent> {
+            if let Some(e) = lex.iter().find(|e| e.id == id) {
+                return Some(LessonContent {
+                    content_id: id.to_string(),
+                    kind: "lexicon",
+                    display: e.surface.clone(),
+                    reading: e.reading.clone(),
+                    gloss: Some(e.gloss.clone()),
+                    explanation: None,
+                });
+            }
+            if let Some(e) = sentences.iter().find(|e| e.id == id) {
+                return Some(LessonContent {
+                    content_id: id.to_string(),
+                    kind: "sentence",
+                    display: e.text.clone(),
+                    reading: e.reading.clone(),
+                    gloss: e.gloss.clone(),
+                    explanation: None,
+                });
+            }
+            if let Some(e) = orth.iter().find(|e| e.id == id) {
+                return Some(LessonContent {
+                    content_id: id.to_string(),
+                    kind: "orthography",
+                    display: e.symbol.clone(),
+                    reading: Some(e.reading.clone()),
+                    gloss: None,
+                    explanation: None,
+                });
+            }
+            if let Some(g) = grammar.iter().find(|g| g.id == id) {
+                return Some(LessonContent {
+                    content_id: id.to_string(),
+                    kind: "grammar",
+                    display: g.name.clone(),
+                    reading: None,
+                    gloss: None,
+                    explanation: (!g.definition.is_empty()).then(|| g.definition.clone()),
+                });
+            }
+            None
+        };
+        let stages = unit
+            .activities
+            .iter()
+            .map(|a| LessonStage {
+                activity_id: a.id.clone(),
+                activity_type: a.activity_type.clone(),
+                stage_kind: stage_kind(&a.activity_type, a.support_level),
+                modality: a.modality.clone(),
+                support_level: a.support_level,
+                scenario_id: a.scenario_id.clone(),
+                content: a.content_refs.iter().filter_map(|r| resolve(r)).collect(),
+            })
+            .collect();
+        return Ok(Some(LessonPlan {
+            unit_id: unit.id.clone(),
+            goal_id: unit.goal_id.clone(),
+            title: unit.title.clone(),
+            summary: unit.summary.clone(),
+            stages,
+        }));
+    }
+    Ok(None)
+}
+
+/// R11: the authored journey behind a plan item, for the Today runner to
+/// present before it asks for evidence.
+#[tauri::command]
+fn lesson_plan(profile_id: String, content_id: String) -> Result<Option<LessonPlan>, String> {
+    lesson_plan_at(&data_dir(), &profile_id, &content_id)
 }
 
 #[derive(Serialize)]
@@ -6117,6 +6879,7 @@ fn placement_plan_at(data: &Path, profile_id: &str) -> Result<Vec<PlacementItem>
     let assessments = pack_assessments(&root)?;
     let units = pack_units(&root);
     let mut items = Vec::new();
+    let mut used: std::collections::HashSet<String> = std::collections::HashSet::new();
     for a in assessments.iter() {
         let runner = match a.modality.as_str() {
             "reading" => "recall-meaning",
@@ -6124,22 +6887,24 @@ fn placement_plan_at(data: &Path, profile_id: &str) -> Result<Vec<PlacementItem>
             // No low-stakes auto-runner for these constructs yet.
             _ => continue,
         };
-        let Some(unit) = units.iter().find(|u| u.goal_id == a.goal_id) else {
-            continue;
-        };
-        let Some(content) = unit
-            .activities
+        // R13: an assessment id may only be recorded against a task that runs
+        // the construct it names. A rubric that exists but has no runnable
+        // activity at its own modality abstains — substituting, say, a reading
+        // item under a listening assessment id would manufacture evidence for
+        // a construct nobody exercised. Scanning every unit for the goal and
+        // skipping already-planned content also keeps two diagnostics from
+        // becoming the same question twice.
+        let content = units
             .iter()
-            .find(|ac| ac.modality == a.modality && !ac.content_refs.is_empty())
-            .or_else(|| {
-                unit.activities
-                    .iter()
-                    .find(|ac| !ac.content_refs.is_empty())
-            })
-            .and_then(|ac| ac.content_refs.first())
-        else {
+            .filter(|u| u.goal_id == a.goal_id)
+            .flat_map(|u| u.activities.iter())
+            .filter(|ac| ac.modality == a.modality)
+            .flat_map(|ac| ac.content_refs.iter())
+            .find(|c| !used.contains(*c));
+        let Some(content) = content else {
             continue;
         };
+        used.insert(content.clone());
         items.push(PlacementItem {
             assessment_id: a.id.clone(),
             goal_id: a.goal_id.clone(),
@@ -6162,7 +6927,10 @@ fn placement_submit(
     content_id: String,
     modality: String,
     choice_index: usize,
+    session_id: Option<String>,
 ) -> Result<PracticeGrade, String> {
+    // R04: placement presents its questions as one sitting, so the session
+    // id travels with them; two answers on one prompt stay one observation.
     practice_submit_inner(
         &data_dir(),
         &profile_id,
@@ -6173,6 +6941,8 @@ fn placement_submit(
             answer: None,
             reveal_reading: false,
             diagnostic: Some(&assessment_id),
+            session_id: session_id.as_deref(),
+            stage: None,
         },
     )
 }
@@ -6194,7 +6964,16 @@ fn scenario_start(
     scenario_id: String,
     sessions: tauri::State<'_, scenarios::SessionStore>,
 ) -> Result<scenarios::ScenarioView, String> {
-    scenarios::start_at(&data_dir(), &profile_id, &scenario_id, &sessions)
+    // R03: every start is a new sitting, so replaying a scenario records
+    // fresh evidence instead of colliding with the first run's ids.
+    let session_id = format!("sess-{}", uuid::Uuid::new_v4());
+    scenarios::start_at(
+        &data_dir(),
+        &profile_id,
+        &scenario_id,
+        &session_id,
+        &sessions,
+    )
 }
 
 #[tauri::command]
@@ -6701,6 +7480,8 @@ pub fn run() {
             get_romaji_mode,
             set_romaji_mode,
             profile_export,
+            profile_import_preview,
+            profile_import,
             profile_delete,
             pack_claims,
             catalog_packs,
@@ -6713,6 +7494,7 @@ pub fn run() {
             writing_submit,
             practice_task,
             practice_submit,
+            lesson_plan,
             placement_plan,
             placement_submit,
             kanji_list,
@@ -6952,6 +7734,287 @@ mod tests {
         );
     }
 
+    /// R11 (golden unit): the fixture unit declares an encounter, a recall,
+    /// a typed production, a supported shadow, a cloze, a dictation and a
+    /// scenario — each with its own id, type and support level. The desktop
+    /// kept only modality plus content refs and threw the rest away, so a
+    /// zero-knowledge learner met a drill with no authored instruction in
+    /// front of it. The unit journey has to survive into the app, in the
+    /// order the pack wrote it.
+    #[test]
+    fn the_authored_unit_journey_reaches_the_desktop() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Mira").unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
+        let plan = lesson_plan_at(data, &p.id, "ja.lex.demo.konnichiwa")
+            .unwrap()
+            .expect("the fixture unit declares this word");
+        assert_eq!(plan.unit_id, "ja.unit.demo.greetings");
+        assert_eq!(plan.title, "First greetings");
+        let stages: Vec<(&str, &str, u32)> = plan
+            .stages
+            .iter()
+            .map(|s| (s.activity_id.as_str(), s.stage_kind, s.support_level))
+            .collect();
+        assert_eq!(
+            stages,
+            vec![
+                ("ja.activity.demo.encounter-greet", "encounter", 0),
+                ("ja.activity.demo.recall-greet", "independent", 0),
+                ("ja.activity.demo.type-greet", "independent", 0),
+                ("ja.activity.demo.shadow-greet", "practice", 3),
+                ("ja.activity.demo.cloze-greet", "scaffolded", 1),
+                ("ja.activity.demo.dictation-greet", "scaffolded", 1),
+                ("ja.activity.demo.scenario-greet", "interaction", 2),
+            ],
+            "every declared stage, in the unit's declared order",
+        );
+        // An encounter presents material; the app must have the material.
+        let encounter = plan
+            .stages
+            .iter()
+            .find(|s| s.stage_kind == "encounter")
+            .unwrap();
+        assert_eq!(encounter.content.len(), 1);
+        assert_eq!(encounter.content[0].kind, "lexicon");
+        assert!(!encounter.content[0].display.is_empty());
+        assert!(encounter.content[0].gloss.is_some());
+        // The interaction stage carries the scenario the pack named, so the
+        // app can open it instead of guessing.
+        let scenario = plan
+            .stages
+            .iter()
+            .find(|s| s.stage_kind == "interaction")
+            .unwrap();
+        assert_eq!(
+            scenario.scenario_id.as_deref(),
+            Some("ja.scenario.demo.first-meeting")
+        );
+        // Other content in the same unit resolves through the same journey…
+        let sentence = lesson_plan_at(data, &p.id, "ja.sent.demo.hajimemashite")
+            .unwrap()
+            .expect("the same unit declares this sentence");
+        assert_eq!(sentence.unit_id, "ja.unit.demo.greetings");
+        // …and content no unit declares has no journey. The app says so
+        // rather than inventing an encounter nobody authored.
+        assert!(
+            lesson_plan_at(data, &p.id, "ja.lex.demo.watashi")
+                .unwrap()
+                .is_none()
+        );
+    }
+
+    /// R11: declared type and order are not decoration. The same content,
+    /// authored with the drill before the encounter, has to come back that
+    /// way: the app runs the pack's lesson, not its own idea of one.
+    #[test]
+    fn the_authored_order_changes_what_the_app_runs() {
+        let staged = tempfile::tempdir().unwrap();
+        let src =
+            PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../tests/fixtures/packs/ja-demo");
+        copy_tree(&src, &staged.path().join("ja-demo"));
+        std::fs::write(
+            staged
+                .path()
+                .join("ja-demo/curriculum/units/000-greetings.yaml"),
+            r#"id: "ja.unit.demo.greetings"
+goal_id: "ja.goal.demo.greet"
+title: "First greetings, drill first"
+estimated_minutes: 5
+activities:
+  - id: "ja.activity.demo.recall-greet"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["ja.lex.demo.konnichiwa"]
+  - id: "ja.activity.demo.encounter-greet"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["ja.lex.demo.konnichiwa"]
+"#,
+        )
+        .unwrap();
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (bytes, _sha) = lts_langpack::archive::build(&staged.path().join("ja-demo")).unwrap();
+        let outcome = lts_langpack::archive::install(&bytes, &data.join("packs")).unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        store
+            .record_installation(&lts_storage::PackInstallation {
+                pack_id: outcome.pack_id.clone(),
+                version: outcome.version.clone(),
+                installed_at: rfc3339_utc(now_secs()),
+                trust_state: "community".into(),
+            })
+            .unwrap();
+        let p = create_local_profile(data, "Mira").unwrap();
+        store
+            .set_active_pack(&p.id, &outcome.pack_id, &outcome.version)
+            .unwrap();
+        let plan = lesson_plan_at(data, &p.id, "ja.lex.demo.konnichiwa")
+            .unwrap()
+            .expect("the reordered unit still declares this word");
+        let kinds: Vec<&str> = plan.stages.iter().map(|s| s.stage_kind).collect();
+        assert_eq!(
+            kinds,
+            vec!["independent", "encounter"],
+            "what the learner is asked first follows the pack's declaration",
+        );
+    }
+
+    /// R11: the stages have to leave their mark on the evidence. Two clean
+    /// successes at one word from one prompt cap at Supported (the R04
+    /// control); the same word through two different authored stages is two
+    /// prompts, and only then does Independent become reachable.
+    #[test]
+    fn running_the_authored_stages_makes_independent_reachable() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Mira").unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
+        let task = practice_task_at(
+            data,
+            &p.id,
+            "ja.lex.demo.konnichiwa",
+            "recall-meaning",
+            false,
+        )
+        .unwrap();
+        let idx = task
+            .choices
+            .iter()
+            .position(|c| c == "hello")
+            .expect("the correct gloss is among the choices");
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let state_of = || {
+            derive_pairs(&store, &p.id, "2025-11-13T00:00:00Z")
+                .unwrap()
+                .into_iter()
+                .find(|d| d.content_id == "ja.lex.demo.konnichiwa")
+                .map(|d| d.state)
+        };
+        let run = |stage: &str| {
+            practice_submit_inner(
+                data,
+                &p.id,
+                "ja.lex.demo.konnichiwa",
+                "recall-meaning",
+                idx,
+                SubmitOpts {
+                    answer: None,
+                    reveal_reading: false,
+                    diagnostic: None,
+                    session_id: None,
+                    stage: Some(stage),
+                },
+            )
+            .unwrap()
+        };
+        // One authored stage, run twice: the same prompt, so repetition
+        // still cannot buy Independent.
+        assert!(run("ja.activity.demo.encounter-greet").correct);
+        assert!(run("ja.activity.demo.encounter-greet").correct);
+        assert_ne!(
+            state_of(),
+            Some(lts_domain::MasteryState::Independent),
+            "two attempts at one stage are still one prompt"
+        );
+        // A different authored stage over the same word is a different
+        // prompt, and the identity recorded says which one it was.
+        assert!(run("ja.activity.demo.recall-greet").correct);
+        let events = store.evidence_for_profile(&p.id).unwrap();
+        let families: std::collections::BTreeSet<&str> = events
+            .iter()
+            .map(|e| e.prompt_family_id.as_ref().expect("stage prompt").as_str())
+            .collect();
+        assert_eq!(
+            families,
+            std::collections::BTreeSet::from([
+                "ja.activity.demo.encounter-greet",
+                "ja.activity.demo.recall-greet",
+            ]),
+            "the evidence names the stage that was actually run"
+        );
+        assert_eq!(
+            state_of(),
+            Some(lts_domain::MasteryState::Independent),
+            "distinct authored prompts are what unlock Independent"
+        );
+    }
+
+    /// R13: a diagnostic id may only be recorded against a task that runs the
+    /// construct it names. A rubric with no runnable activity at its own
+    /// modality abstains instead of borrowing an unrelated item, and a second
+    /// assessment over one content record never becomes the same question
+    /// twice.
+    #[test]
+    fn placement_never_substitutes_or_repeats_a_diagnostic_item() {
+        let staged = tempfile::tempdir().unwrap();
+        let src =
+            PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../tests/fixtures/packs/ja-demo");
+        copy_tree(&src, &staged.path().join("ja-demo"));
+        std::fs::write(
+            staged.path().join("ja-demo/assessments/definitions.jsonl"),
+            concat!(
+                "{\"id\":\"ja.assess.demo.greet\",\"goal_id\":\"ja.goal.demo.greet\",\"kind\":\"recall\",\"modality\":\"reading\",\"rubric\":{\"scale\":\"observed\",\"criteria\":[\"phrase matched to situation\"]},\"review_status\":\"draft\"}\n",
+                "{\"id\":\"ja.assess.demo.greet-again\",\"goal_id\":\"ja.goal.demo.greet\",\"kind\":\"recall\",\"modality\":\"reading\",\"rubric\":{\"scale\":\"observed\",\"criteria\":[\"phrase matched again\"]},\"review_status\":\"draft\"}\n",
+                "{\"id\":\"ja.assess.demo.kana-listen\",\"goal_id\":\"ja.goal.demo.kana-hiragana\",\"kind\":\"recall\",\"modality\":\"listening\",\"rubric\":{\"scale\":\"observed\",\"criteria\":[\"symbol heard\"]},\"review_status\":\"draft\"}\n",
+                "{\"id\":\"ja.assess.demo.kana-recognize\",\"goal_id\":\"ja.goal.demo.kana-hiragana\",\"kind\":\"recall\",\"modality\":\"reading\",\"rubric\":{\"scale\":\"observed\",\"criteria\":[\"symbol mapped to reading\"]},\"review_status\":\"review-needed\"}\n",
+            ),
+        )
+        .unwrap();
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (bytes, _sha) = lts_langpack::archive::build(&staged.path().join("ja-demo")).unwrap();
+        let outcome = lts_langpack::archive::install(&bytes, &data.join("packs")).unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        store
+            .record_installation(&lts_storage::PackInstallation {
+                pack_id: outcome.pack_id.clone(),
+                version: outcome.version.clone(),
+                installed_at: rfc3339_utc(now_secs()),
+                trust_state: "community".into(),
+            })
+            .unwrap();
+        let p = create_local_profile(data, "Mira").unwrap();
+        store
+            .set_active_pack(&p.id, &outcome.pack_id, &outcome.version)
+            .unwrap();
+        let plan = placement_plan_at(data, &p.id).unwrap();
+        let planned: Vec<(&str, &str, &str)> = plan
+            .iter()
+            .map(|i| {
+                (
+                    i.assessment_id.as_str(),
+                    i.content_id.as_str(),
+                    i.modality.as_str(),
+                )
+            })
+            .collect();
+        assert_eq!(
+            planned,
+            vec![
+                (
+                    "ja.assess.demo.greet",
+                    "ja.lex.demo.konnichiwa",
+                    "recall-meaning"
+                ),
+                (
+                    "ja.assess.demo.kana-recognize",
+                    "ja.orth.hira.a",
+                    "recall-meaning"
+                ),
+            ],
+            "only assessments with a runnable task of their own declared construct are \
+             planned: a second reading rubric over the same single record and a listening \
+             rubric whose goal declares no listening activity both abstain, and no two \
+             questions are the same item"
+        );
+    }
     /// Owner defect 2026-10-12: the wizard's pack list was bundled-only,
     /// so an imported .lpk was invisible and the learner had to install
     /// a pack they already owned all over again.
@@ -7066,9 +8129,128 @@ mod tests {
         // "Hear reference" and the pitch contour could never resolve.
         assert_eq!(demo.short_unit, "ja.contrast.vowel-length.obasan-0");
         assert_eq!(demo.long_unit, "ja.contrast.vowel-length.obasan-1");
+        // R10: the demo carries the contrast's identity and the pack's own
+        // instruction copy, so the screen teaches the declared contrast.
+        assert_eq!(demo.contrast_id, "ja.contrast.vowel-length.obasan");
+        assert_eq!(demo.feature_id, "ja.phon.vowel-length");
+        assert_eq!(demo.measure.as_deref(), Some("voiced-duration-ratio"));
         // Packs without phonology data abstain rather than invent content.
         install_bundled_pack(data, "org.openlanguage.eo-demo").unwrap();
         assert!(pronunciation_demo_at(data, "org.openlanguage.eo-demo").is_err());
+    }
+
+    /// R10: the Russian pack's first declared contrast is a consonant
+    /// voicing pair. The demo carries the pack's own pair, words and
+    /// description, and reports no production measure — which is what keeps
+    /// the analysis path from borrowing the Japanese vowel-length interpreter.
+    #[test]
+    fn russian_contrast_arrives_as_the_packs_own_pair() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (bytes, _sha) = lts_langpack::archive::build(
+            &PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../languages/ru-RU"),
+        )
+        .unwrap();
+        lts_langpack::archive::install(&bytes, &data.join("packs")).unwrap();
+        let demo = pronunciation_demo_at(data, "org.openlanguage.ru-ru.reference").unwrap();
+        assert_eq!(demo.contrast_id, "ru.contrast.voicing.dt");
+        assert_eq!(demo.short_text, "дом");
+        assert_eq!(demo.long_text, "том");
+        assert_eq!(demo.feature_id, "ru.phon.obstruent-voicing");
+        assert_eq!(demo.measure, None, "the pack declares no production target");
+        assert!(
+            demo.description.contains("voiceless"),
+            "instruction copy comes from the pack: {}",
+            demo.description
+        );
+    }
+
+    /// R10: a declared feature the app has no interpreter for is an honest
+    /// limitation, reached before the aligner or the model are touched: no
+    /// Japanese analysis, no guessed whisper locale, and the attempt stays
+    /// guided and unscored.
+    #[test]
+    fn a_contrast_the_app_cannot_measure_stays_listening_practice() {
+        use base64::Engine;
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (bytes, _sha) = lts_langpack::archive::build(
+            &PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../languages/ru-RU"),
+        )
+        .unwrap();
+        lts_langpack::archive::install(&bytes, &data.join("packs")).unwrap();
+        let attempt = PronunciationAttempt {
+            pack_id: "org.openlanguage.ru-ru.reference".into(),
+            short_unit: "ru.contrast.voicing.dt-0".into(),
+            long_unit: "ru.contrast.voicing.dt-1".into(),
+            short_text: "дом".into(),
+            long_text: "том".into(),
+            wav_b64: base64::engine::general_purpose::STANDARD.encode(
+                lts_speech_runtime::to_wav16(&lts_speech_api::AudioBuffer {
+                    samples: vec![0.0f32; 1600],
+                    sample_rate_hz: 16000,
+                }),
+            ),
+        };
+        let res = pronunciation_check_at(data, attempt).unwrap();
+        assert_eq!(res.mode, "guided");
+        assert_eq!(
+            res.mode_reason.as_deref(),
+            Some("feature-not-instrumented"),
+            "the limitation is named, not hidden"
+        );
+        assert_eq!(
+            res.abstain_reason.as_deref(),
+            Some("feature-not-instrumented")
+        );
+        assert!(res.corrections.is_empty());
+        assert_eq!(
+            res.pitch.unavailable_reason.as_deref(),
+            Some("not-instrumented")
+        );
+    }
+
+    /// R10: the aligner language is the installed pack's declared locale,
+    /// never a literal. A pack whose manifest cannot be read abstains rather
+    /// than defaulting to Japanese.
+    #[test]
+    fn the_aligner_language_comes_from_the_pack_manifest() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let (bytes, _sha) = lts_langpack::archive::build(
+            &PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../languages/ru-RU"),
+        )
+        .unwrap();
+        lts_langpack::archive::install(&bytes, &data.join("packs")).unwrap();
+        let dir = |pack: &str| {
+            let version = lts_langpack::archive::current_version(pack, &data.join("packs"))
+                .unwrap_or_else(|| {
+                    panic!("{pack} has no current pointer in the installed-pack store")
+                });
+            data.join("packs").join(pack).join(version)
+        };
+        assert_eq!(
+            pack_asr_language(&dir("org.openlanguage.ja-jp.reference")).unwrap(),
+            "ja"
+        );
+        assert_eq!(
+            pack_asr_language(&dir("org.openlanguage.ru-ru.reference")).unwrap(),
+            "ru"
+        );
+        // The honest abstention is a pack directory whose manifest cannot be
+        // read. An id the store has never heard of fails one step earlier, in
+        // the store lookup, so it proves nothing about the locale read.
+        assert_eq!(
+            pack_asr_language(
+                &data
+                    .join("packs")
+                    .join("org.openlanguage.does-not-exist")
+                    .join("0.0.0")
+            )
+            .unwrap_err(),
+            "pack-locale-unknown"
+        );
     }
 
     /// K-90/ADR-0024: with the synthesis chain deleted, "the pack ships no
@@ -8430,6 +9612,21 @@ mod tests {
     /// a handful of events and the second is not.
     #[test]
     fn world_unlocks_follow_pack_declared_capabilities() {
+        // R07: mastery credit is scoped to the pack the profile studies.
+        // The shared `attempt` fixture stamps the ja-demo pack, so this
+        // test restamps its own — mislabelled evidence would otherwise be
+        // (correctly) refused and look like missing mastery.
+        let attempt = |target: &str,
+                       modality: lts_domain::ActivityModality,
+                       family: &str,
+                       support: u8,
+                       at: &str,
+                       id: &str,
+                       profile: &str| {
+            let mut ev = attempt(target, modality, family, support, at, id, profile);
+            ev.pack_id = "org.openlanguage.ja-jp.reference".into();
+            ev
+        };
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
@@ -8577,12 +9774,238 @@ mod tests {
         let other = create_local_profile(data, "Nobody").unwrap();
         assert_eq!(world_state_at(data, &other.id).unwrap(), vec![]);
     }
+    /// R08: the Russian on-ramp has to be walkable, not decorative. A fresh
+    /// profile is pointed at the pack's declared first Cyrillic instruction;
+    /// the greetings gate opens on genuine recognition evidence across the
+    /// whole alphabet that goal declares; wrong-dimension, partial and absent
+    /// evidence leave it shut.
+    #[test]
+    fn russian_cyrillic_practice_unlocks_the_greetings_gate() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let pack = "org.openlanguage.ru-ru.reference";
+        // The Russian reference pack ships in the repo tree, not in the
+        // production bundle list, so it is staged the way the pack-gate tests
+        // stage it: build the archive from an absolute path, never the cwd.
+        let pack_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../languages/ru-RU");
+        let (bytes, _sha) = lts_langpack::archive::build(&pack_dir).unwrap();
+        let outcome = lts_langpack::archive::install(&bytes, &data.join("packs")).unwrap();
+        let p = create_local_profile(data, "Mira").unwrap();
+        let version = lts_langpack::archive::current_version(pack, &data.join("packs")).unwrap();
+        let root = data.join("packs").join(pack).join(&version);
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        store
+            .record_installation(&lts_storage::PackInstallation {
+                pack_id: outcome.pack_id.clone(),
+                version: outcome.version.clone(),
+                installed_at: rfc3339_utc(now_secs()),
+                trust_state: "community".into(),
+            })
+            .unwrap();
+        store.set_active_pack(&p.id, pack, &version).unwrap();
+
+        // The alphabet the pack declares, straight from its own data.
+        let letters: Vec<String> = std::fs::read_to_string(root.join("orthography/cyrillic.jsonl"))
+            .unwrap()
+            .lines()
+            .filter_map(|line| serde_json::from_str::<serde_json::Value>(line).ok())
+            .filter_map(|row| row.get("id").and_then(|id| id.as_str().map(String::from)))
+            .collect();
+        assert_eq!(letters.len(), 67, "33 letter pairs plus the stress mark");
+
+        // Two clean successes for one letter, from two different prompts:
+        // the policy's own bar for Independent, at the requested dimension.
+        let practise = |target: &str, dim: lts_domain::ActivityModality, tag: &str| {
+            for (i, family) in ["first", "second"].iter().enumerate() {
+                let mut ev = attempt(
+                    target,
+                    dim,
+                    &format!("ru.expr.cyrillic.{tag}-{family}"),
+                    0,
+                    "2026-10-06T09:00:00Z",
+                    // Event ids are unique keys: one id per (letter, attempt,
+                    // dimension). Reusing an id for a second dimension would be
+                    // dropped by the append instead of replacing the first.
+                    &format!("ru-ev-{tag}-{i}-{}", dimension_kebab(dim)),
+                    &p.id,
+                );
+                ev.pack_id = pack.into();
+                store.append_evidence(&ev).unwrap();
+            }
+        };
+        let goal = |id: &str| {
+            goal_map_at(data, &p.id)
+                .unwrap()
+                .into_iter()
+                .find(|g| g.id == id)
+                .expect("the reference pack declares this goal")
+        };
+        let units = pack_units(&root);
+        let greeting_refs: Vec<String> = units
+            .iter()
+            .filter(|u| u.goal_id == "ru.goal.on-ramp.greetings")
+            .flat_map(|u| u.activities.iter().flat_map(|a| a.content_refs.clone()))
+            .collect();
+        assert!(
+            !greeting_refs.is_empty(),
+            "the greetings goal has taught content behind the gate"
+        );
+
+        // The new-material stream is where a goal-level lock is learner
+        // visible: `progression_items` only offers a goal's first required
+        // concept once that goal's own prerequisites hold. The ru pack
+        // declares no unit-level phase gates at all, so `locked_new_content`
+        // (which covers `requires_unit`) has nothing to say about this pack.
+        let offered = |stamp: &str| -> Vec<String> {
+            let derived = derive_pairs(&store, &p.id, stamp).unwrap();
+            progression_items(data, &store, &p.id, &derived)
+                .unwrap()
+                .into_iter()
+                .map(|i| i.content_id)
+                .collect()
+        };
+        let goals_yaml: serde_yaml::Value = serde_yaml::from_str(
+            &std::fs::read_to_string(root.join("curriculum/goals.yaml")).unwrap(),
+        )
+        .unwrap();
+        let first_required = |goal_id: &str| -> String {
+            goals_yaml["goals"]
+                .as_sequence()
+                .unwrap()
+                .iter()
+                .find(|g| g["id"].as_str() == Some(goal_id))
+                .and_then(|g| g["required_concepts"].as_sequence())
+                .and_then(|c| c.first())
+                .and_then(|c| c.as_str())
+                .map(String::from)
+                .unwrap_or_else(|| panic!("{goal_id} declares no required concepts"))
+        };
+        let greeting_entry = first_required("ru.goal.on-ramp.greetings");
+
+        // (1) A brand-new profile reaches the declared first Cyrillic
+        // instruction: the pack's own script-introduction unit, in the pack's
+        // teaching order, and its letters are learnable on day one.
+        let steps = first_run_steps_at(data, &p.id).unwrap();
+        assert_eq!(
+            steps.first().and_then(|s| s.content_id.as_deref()),
+            Some("ru.orth.cyrillic.a-upper"),
+            "first run must lead with the pack's declared script introduction"
+        );
+        assert_eq!(
+            steps.first().and_then(|s| s.goal_id.as_deref()),
+            Some("ru.goal.on-ramp.cyrillic")
+        );
+        let plan_ids = || -> Vec<String> {
+            build_plan_view(data, &p.id, 60, 1_762_128_000)
+                .unwrap()
+                .items
+                .iter()
+                .map(|i| i.content_id.clone())
+                .collect()
+        };
+        assert!(
+            plan_ids().iter().any(|id| letters.contains(id)),
+            "the alphabet must be learnable from the first day: {:?}",
+            plan_ids()
+        );
+
+        // (3) Nothing earned: the gate is shut, and the locked goal offers
+        // nothing to plan.
+        assert!(
+            goal("ru.goal.on-ramp.greetings").locked,
+            "greetings start locked"
+        );
+        assert!(
+            !offered("2026-10-07T00:00:00Z").contains(&greeting_entry),
+            "a locked goal never reaches the new-material stream: {greeting_entry}"
+        );
+
+        // Wrong dimension: meaning-recall over the whole alphabet does not
+        // satisfy a recognition requirement.
+        for letter in &letters {
+            practise(letter, lts_domain::ActivityModality::RecallMeaning, letter);
+        }
+        assert!(
+            goal("ru.goal.on-ramp.greetings").locked,
+            "the wrong dimension cannot open a goal gate"
+        );
+
+        // The right dimension, but one letter skipped: the goal claims the
+        // whole alphabet, so its weakest declared concept decides.
+        for letter in letters.iter().take(letters.len() - 1) {
+            practise(
+                letter,
+                lts_domain::ActivityModality::OrthographyRecognition,
+                letter,
+            );
+        }
+        assert!(
+            goal("ru.goal.on-ramp.greetings").locked,
+            "partial coverage cannot satisfy a whole-alphabet goal"
+        );
+
+        // (2) The declared evidence, complete: the gate opens.
+        practise(
+            letters.last().unwrap(),
+            lts_domain::ActivityModality::OrthographyRecognition,
+            letters.last().unwrap(),
+        );
+        let greetings = goal("ru.goal.on-ramp.greetings");
+        let derived = derive_pairs(&store, &p.id, "2026-10-07T00:00:00Z").unwrap();
+        let weak: Vec<String> = letters
+            .iter()
+            .map(|l| {
+                let s = derived
+                    .iter()
+                    .find(|d| {
+                        &d.content_id == l
+                            && d.dimension == lts_domain::ActivityModality::OrthographyRecognition
+                    })
+                    .map(|d| state_kebab(d.state))
+                    .unwrap_or("unseen");
+                format!("{l}={s}")
+            })
+            .filter(|s| !s.ends_with("=independent"))
+            .collect();
+        assert_eq!(
+            store.evidence_count(&p.id).unwrap(),
+            268,
+            "every appended attempt is stored — a dropped append would make the gate look \
+             unearned rather than report the gap"
+        );
+        assert!(weak.is_empty(), "concepts short of independent: {weak:?}");
+        assert!(
+            !greetings.locked,
+            "genuine recognition evidence opens the gate"
+        );
+        assert!(
+            greetings.prerequisites.iter().all(|p| p.satisfied),
+            "the Cyrillic prerequisite reports satisfied: {:?}",
+            greetings.prerequisites
+        );
+        assert!(
+            offered("2026-10-08T00:00:00Z").contains(&greeting_entry),
+            "the opened goal offers its first required concept as new material"
+        );
+    }
 
     /// K-40: the goal map surfaces installed-pack goals (not unit
     /// counts) with prereq structure and per-dimension mastery derived
     /// from evidence only.
     #[test]
     fn goal_map_surfaces_pack_goals_with_prereqs_and_mastery() {
+        // R07: restamp the shared fixture's pack id for this profile's pack.
+        let attempt = |target: &str,
+                       modality: lts_domain::ActivityModality,
+                       family: &str,
+                       support: u8,
+                       at: &str,
+                       id: &str,
+                       profile: &str| {
+            let mut ev = attempt(target, modality, family, support, at, id, profile);
+            ev.pack_id = "org.openlanguage.ja-jp.reference".into();
+            ev
+        };
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
@@ -8608,7 +10031,8 @@ mod tests {
             "no evidence yet: every dimension starts unseen"
         );
 
-        // Evidence on one required concept moves that dimension only.
+        // R09: evidence on one required concept of a multi-concept goal
+        // raises that concept's exemplar line — not the goal's headline.
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
         let ev = attempt(
             "ja.orth.hira.a",
@@ -8630,7 +10054,22 @@ mod tests {
             .iter()
             .find(|d| d.modality == "reading")
             .unwrap();
-        assert_ne!(reading.state, "unseen", "derived mastery moves the row");
+        assert_eq!(
+            reading.concepts_seen, 1,
+            "one concept of the goal's set now has evidence"
+        );
+        assert!(
+            reading.concepts_total > 1,
+            "the kana goal declares several concepts, so coverage is partial"
+        );
+        assert_eq!(
+            reading.state, "unseen",
+            "R09: one mastered concept among untouched ones cannot display the goal as achieved"
+        );
+        assert_ne!(
+            reading.best_state, "unseen",
+            "the furthest concept's own state stays visible, qualified"
+        );
         assert_eq!(reading.exemplar.as_deref(), Some("ja.orth.hira.a"));
     }
 
@@ -9028,6 +10467,131 @@ mod tests {
             "a second delete errors"
         );
         assert!(profile_export_at(data, &p.id).is_err());
+    }
+
+    /// R05/R06 (DATA-002 reopen): the backup carries the learner's own
+    /// saved words, and restoring it is a visible, all-or-nothing journey.
+    /// A preview is read-only; the restore reports what the store actually
+    /// holds afterwards; restoring into the same store leaves the original
+    /// intact; and a bundle this build cannot read is refused with a reason.
+    #[test]
+    fn a_supported_backup_restores_saved_words_and_history() {
+        let src = tempfile::tempdir().unwrap();
+        let data_a = src.path();
+        install_bundled_pack(data_a, "org.openlanguage.ja-jp.reference").unwrap();
+        install_bundled_pack(data_a, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data_a, "Hunter").unwrap();
+        finish_onboarding(
+            data_a,
+            &p.id,
+            Some("org.openlanguage.ja-jp.reference"),
+            true,
+        )
+        .unwrap();
+        let cat = mine_add_at(
+            data_a,
+            &p.id,
+            "猫".into(),
+            Some("ねこ".into()),
+            Some("cat".into()),
+            "es.story.demo.cat".into(),
+        )
+        .unwrap();
+        mine_add_at(
+            data_a,
+            &p.id,
+            "犬".into(),
+            None,
+            Some("dog".into()),
+            "es.story.demo.walk".into(),
+        )
+        .unwrap();
+        mine_grade_at(data_a, &p.id, &cat.id, false).unwrap();
+        {
+            let store = lts_storage::Store::open(data_a.join("profiles.db")).unwrap();
+            store
+                .append_evidence(&attempt(
+                    "ja.lex.demo.konnichiwa",
+                    lts_domain::ActivityModality::RecallMeaning,
+                    "ja.expr.demo.greet-a",
+                    0,
+                    "2026-10-05T12:00:00Z",
+                    "ev-restored-1",
+                    &p.id,
+                ))
+                .unwrap();
+        }
+        let path = profile_export_at(data_a, &p.id).unwrap();
+
+        // Read-only preview first: the learner sees what the backup holds.
+        let preview = profile_import_preview_at(&path, "new").unwrap();
+        assert!(preview.supported);
+        assert_eq!(preview.source_profile_name, "Hunter");
+        assert_eq!(preview.saved_words, 2, "saved words are in the backup");
+        assert_eq!(preview.events, 1);
+        assert!(preview.recordings == 0, "no audio travels in a backup");
+
+        // The same bundle restored on an empty machine.
+        let dst = tempfile::tempdir().unwrap();
+        let outcome = profile_import_at(dst.path(), &path, "new").unwrap();
+        assert_eq!(outcome.display_name, "Hunter");
+        assert_eq!(outcome.saved_words, 2, "saved words survive the move");
+        assert_eq!(outcome.events, 1, "observation history survives the move");
+        assert!(
+            outcome.scheduled_items >= 1,
+            "the saved word's due state survives the move"
+        );
+        {
+            let store = lts_storage::Store::open(dst.path().join("profiles.db")).unwrap();
+            let words = store.mined_items(&outcome.profile_id).unwrap();
+            assert!(words.iter().any(|w| w.surface == "猫"
+                && w.reading.as_deref() == Some("ねこ")
+                && w.source_citation == "es.story.demo.cat"));
+            let schedule = store.scheduler_state(&outcome.profile_id).unwrap();
+            assert!(
+                schedule
+                    .iter()
+                    .any(|s| s.scheduler == lts_scheduler::MINED_SCHEDULER
+                        && words.iter().any(|w| w.id == s.item_id)),
+                "the restored schedule is anchored to a word that exists here"
+            );
+        }
+
+        // Restoring into the store that already holds this profile must not
+        // empty or clobber it (the finding's regression).
+        let again = profile_import_at(data_a, &path, "new").unwrap();
+        assert_eq!(again.saved_words, 2);
+        assert_eq!(again.events, 1, "the copy keeps its observations");
+        {
+            let store = lts_storage::Store::open(data_a.join("profiles.db")).unwrap();
+            assert_eq!(
+                store.evidence_count(&p.id).unwrap(),
+                1,
+                "the original profile is untouched"
+            );
+            assert_eq!(store.mined_items(&p.id).unwrap().len(), 2);
+        }
+
+        // An unreadable or future-dated bundle says so instead of guessing.
+        let mut doc: serde_json::Value =
+            serde_json::from_str(&std::fs::read_to_string(&path).unwrap()).unwrap();
+        doc["format_version"] = serde_json::json!(999);
+        let future = data_a.join("future.json");
+        std::fs::write(&future, doc.to_string()).unwrap();
+        let preview = profile_import_preview_at(future.to_str().unwrap(), "new").unwrap();
+        assert!(!preview.supported);
+        assert!(
+            preview
+                .warnings
+                .iter()
+                .any(|w| w.contains("format version 999"))
+        );
+        assert!(
+            profile_import_at(dst.path(), future.to_str().unwrap(), "new").is_err(),
+            "an unsupported bundle is refused"
+        );
+        assert!(profile_import_preview_at("/nonexistent/nope.json", "new").is_err());
+        assert!(profile_import_preview_at(&path, "sideways").is_err());
     }
 
     /// Every install reports its stages; this test is about the install gate,
@@ -9472,6 +11036,18 @@ mod tests {
     /// soon as the hiragana chart is learned.
     #[test]
     fn katakana_and_kana_words_unlock_with_the_letters_they_need() {
+        // R07: restamp the shared fixture's pack id for this profile's pack.
+        let attempt = |target: &str,
+                       modality: lts_domain::ActivityModality,
+                       family: &str,
+                       support: u8,
+                       at: &str,
+                       id: &str,
+                       profile: &str| {
+            let mut ev = attempt(target, modality, family, support, at, id, profile);
+            ev.pack_id = "org.openlanguage.ja-jp.reference".into();
+            ev
+        };
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
@@ -9767,7 +11343,7 @@ mod tests {
                 .unwrap()
                 .contains("ja.lex.demo.konnichiwa")
         );
-        assert!(scenarios::start_at(data, &p.id, sid, &sessions).is_err());
+        assert!(scenarios::start_at(data, &p.id, sid, "sess-locked", &sessions).is_err());
 
         // Meet the hard prerequisite: two independent successes
         // (support <= 1) across two prompt families.
@@ -9801,7 +11377,7 @@ mod tests {
 
         // Session flow: wrong intent offers pack-declared recovery;
         // recovery resolves back to the node; ladder support is recorded.
-        let view = scenarios::start_at(data, &p.id, sid, &sessions).unwrap();
+        let view = scenarios::start_at(data, &p.id, sid, "sess-1", &sessions).unwrap();
         assert_eq!(view.node.actions, ["greeting"]);
         let step = scenarios::attempt_at(data, &p.id, sid, "small-talk", &sessions).unwrap();
         assert_eq!(step.result, "not-satisfied");
@@ -9856,6 +11432,39 @@ mod tests {
                 .any(|t| t.as_str() == "ja.activity.demo.sc.ask-name")
                 && e.support_level.value() == 0
         }));
+
+        // R03: a second sitting of the same scenario is a fresh
+        // observation, not a collision. Event ids and attempt groups used
+        // to be keyed on the scenario id alone, so this second finish
+        // recorded nothing — the store's `ON CONFLICT(event_id) DO NOTHING`
+        // swallowed every row — while the app still reported a completed
+        // scenario.
+        scenarios::start_at(data, &p.id, sid, "sess-2", &sessions).unwrap();
+        assert_eq!(
+            scenarios::attempt_at(data, &p.id, sid, "greeting", &sessions)
+                .unwrap()
+                .result,
+            "advanced"
+        );
+        assert_eq!(
+            scenarios::attempt_at(data, &p.id, sid, "name-question", &sessions)
+                .unwrap()
+                .result,
+            "completed"
+        );
+        let again = scenarios::finish_at(data, &p.id, sid, &sessions).unwrap();
+        assert_eq!(again.nodes_completed, 2, "the replay completes its nodes");
+        let replayed = store.evidence_for_profile(&p.id).unwrap();
+        let inter: Vec<_> = replayed
+            .iter()
+            .filter(|e| e.modality == lts_domain::ActivityModality::Interaction)
+            .collect();
+        assert_eq!(inter.len(), 4, "both sittings keep their evidence");
+        let groups: std::collections::HashSet<&str> = inter
+            .iter()
+            .map(|e| e.attempt_group_id.as_deref().unwrap_or_default())
+            .collect();
+        assert_eq!(groups.len(), 4, "each sitting keeps its own attempt groups");
 
         // The session is consumed by finish; further attempts error.
         assert!(scenarios::attempt_at(data, &p.id, sid, "greeting", &sessions).is_err());
@@ -10436,7 +12045,7 @@ mod tests {
                 &p.id,
                 &lts_storage::SchedulerRecord {
                     item_id: item.id.clone(),
-                    scheduler: lts_scheduler::SPIKE_VERSION.to_string(),
+                    scheduler: lts_scheduler::MINED_SCHEDULER.to_string(),
                     params_json: rows[0].params_json.clone(),
                     due_at: "2026-10-01T00:00:00Z".to_string(),
                 },
@@ -10445,6 +12054,371 @@ mod tests {
         let due = mine_due_at(data, &p.id).unwrap();
         assert_eq!(due.len(), 1, "the back-dated word is now due");
         assert_eq!(due[0].id, item.id);
+    }
+
+    // --- Review remediation: findings R02, R07, R04 ---------------------
+
+    /// Review finding R02: a mined word that is due must reach Today's
+    /// plan. Before the fix the pack scheduler was asked to split a
+    /// `mine-…` id, `split_item_id` returned None, and the whole plan
+    /// failed with "bad item id mine-…" — one saved word broke Today for
+    /// every budget. Grading a mined word must also stay out of
+    /// pack-content mastery.
+    #[test]
+    fn a_due_mined_word_reaches_todays_plan_without_touching_mastery() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
+
+        let mined = mine_add_at(
+            data,
+            &p.id,
+            "ねこ".to_string(),
+            None,
+            Some("cat".to_string()),
+            "ja.story.demo.first-meeting".to_string(),
+        )
+        .unwrap();
+        // The Words surface's own grading path decides when it is next due.
+        let due_at = mine_grade_at(data, &p.id, &mined.id, true).unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let row = store
+            .scheduler_state(&p.id)
+            .unwrap()
+            .into_iter()
+            .find(|r| r.item_id == mined.id)
+            .expect("grading a mined word schedules it");
+        assert_eq!(
+            row.scheduler,
+            lts_scheduler::MINED_SCHEDULER,
+            "mined rows live in their own scheduler partition, never the pack's"
+        );
+        // Time passing is simulated by rewriting the row's stored due time
+        // to a moment before `now_secs`. `params_json` — the scheduler's
+        // own interval — is written back untouched, never shortened.
+        let now_secs: u64 = 1_762_128_000;
+        assert!(
+            due_at > rfc3339_utc(now_secs),
+            "a freshly graded card is not due at the simulated clock"
+        );
+        store
+            .save_scheduler_state(
+                &p.id,
+                &lts_storage::SchedulerRecord {
+                    item_id: mined.id.clone(),
+                    scheduler: lts_scheduler::MINED_SCHEDULER.into(),
+                    params_json: row.params_json.clone(),
+                    due_at: rfc3339_utc(now_secs - 60),
+                },
+            )
+            .unwrap();
+
+        let plan = build_plan(data, &p.id, 5, now_secs).unwrap();
+        let saved: Vec<_> = plan
+            .items
+            .iter()
+            .filter(|i| i.reason == lts_scheduler::PlanReason::SavedReview)
+            .collect();
+        assert_eq!(saved.len(), 1, "the mined word is planned exactly once");
+        assert_eq!(saved[0].content_id, mined.id);
+        assert!(
+            plan.items
+                .iter()
+                .any(|i| i.reason == lts_scheduler::PlanReason::Progression),
+            "the saved word spends part of the review share, it does not replace the lesson"
+        );
+
+        // Today can render the card from the learner's own text: mined
+        // words are not in any pack lexicon, so the plan view must carry
+        // them from the profile's mined rows.
+        let view = build_plan_view(data, &p.id, 5, now_secs).unwrap();
+        let card = view.items.iter().find(|i| i.item_id == mined.id).unwrap();
+        assert_eq!(card.reason, "saved-review");
+        assert_eq!(card.kind, "review");
+        assert_eq!(card.surface.as_deref(), Some("ねこ"));
+        assert_eq!(card.gloss.as_deref(), Some("cat"));
+
+        // Restart is just a new store handle (what every command opens):
+        // the Words review still sees the due item.
+        assert!(
+            mine_due_at(data, &p.id)
+                .unwrap()
+                .iter()
+                .any(|m| m.id == mined.id)
+        );
+
+        // And it never becomes mastery evidence, directly or by a crafted
+        // task id.
+        assert!(
+            store.evidence_for_profile(&p.id).unwrap().is_empty(),
+            "mined practice records no evidence at all"
+        );
+        assert!(
+            derive_pairs(&store, &p.id, &rfc3339_utc(now_secs))
+                .unwrap()
+                .iter()
+                .all(|d| !d.content_id.starts_with("mine-"))
+        );
+        assert!(
+            practice_submit_at(data, &p.id, &mined.id, "recall-meaning", 0, None, false).is_err(),
+            "a mined id can never mint pack-content evidence"
+        );
+    }
+
+    /// Review finding R07: switching the studied pack changes which due
+    /// rows and which credit are in play, and switching back restores
+    /// both. A row or an evidence event belonging to another language
+    /// must not reach this language's plan, weak-skill candidates, or
+    /// mastery.
+    #[test]
+    fn switching_the_studied_pack_changes_what_the_plan_and_mastery_see() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let reference_version = lts_langpack::archive::current_version(
+            "org.openlanguage.ja-jp.reference",
+            &data.join("packs"),
+        )
+        .unwrap();
+
+        let now_secs: u64 = 1_762_128_000;
+        let state = lts_scheduler::ItemState {
+            stability_days: 1.0,
+            difficulty: 5.0,
+            reps: 2,
+            lapses: 0,
+            last_review: (now_secs - 3 * 86_400) as i64,
+        };
+        for item in [
+            "ja.lex.demo.hajimemashite#recall-meaning",
+            "ja.lex.food-drink.kohi#recall-meaning",
+        ] {
+            store
+                .save_scheduler_state(
+                    &p.id,
+                    &lts_storage::SchedulerRecord {
+                        item_id: item.into(),
+                        scheduler: lts_scheduler::SPIKE_VERSION.into(),
+                        params_json: serde_json::to_string(&state).unwrap(),
+                        due_at: rfc3339_utc(now_secs - 60),
+                    },
+                )
+                .unwrap();
+        }
+        store
+            .append_evidence(&attempt(
+                "ja.lex.demo.hajimemashite",
+                lts_domain::ActivityModality::RecallMeaning,
+                "ja.expr.demo.greet-a",
+                0,
+                "2025-11-01T00:00:00Z",
+                "ev-ja-r07",
+                &p.id,
+            ))
+            .unwrap();
+        store
+            .append_evidence(
+                &lts_learner_model::AttemptDraft::new(
+                    vec![cid("ja.lex.food-drink.kohi")],
+                    lts_domain::ActivityModality::RecallMeaning,
+                    cid("ja.activity.demo.recall-choice"),
+                    "org.openlanguage.ja-jp.reference",
+                    reference_version.as_str(),
+                )
+                .prompt_family(cid("ja.expr.food-drink.a"))
+                .support(lts_domain::SupportLevel::new(0).unwrap(), vec![])
+                .scored(lts_domain::Score::Correct)
+                .finish(
+                    lts_domain::EventId::new("ev-ref-r07"),
+                    "2025-11-01T00:00:00Z",
+                    lts_domain::ProfileId::new(&p.id),
+                ),
+            )
+            .unwrap();
+
+        let content_ids = |plan: &lts_scheduler::SessionPlan| -> Vec<String> {
+            plan.items.iter().map(|i| i.content_id.clone()).collect()
+        };
+        let derived_ids = |d: &Vec<lts_learner_model::DerivedMastery>| -> Vec<String> {
+            d.iter().map(|m| m.content_id.clone()).collect()
+        };
+
+        // Studying the demo pack: the reference pack's due row and its
+        // evidence are both invisible to this plan and this derivation.
+        let plan_ja = build_plan(data, &p.id, 5, now_secs).unwrap();
+        assert!(
+            content_ids(&plan_ja)
+                .iter()
+                .any(|c| c == "ja.lex.demo.hajimemashite")
+        );
+        assert!(
+            !content_ids(&plan_ja)
+                .iter()
+                .any(|c| c == "ja.lex.food-drink.kohi"),
+            "another pack's due row cannot enter this plan"
+        );
+        let derived_ja = derive_pairs(&store, &p.id, &rfc3339_utc(now_secs)).unwrap();
+        assert!(
+            derived_ids(&derived_ja)
+                .iter()
+                .any(|c| c == "ja.lex.demo.hajimemashite")
+        );
+        assert!(
+            !derived_ids(&derived_ja)
+                .iter()
+                .any(|c| c == "ja.lex.food-drink.kohi"),
+            "another pack's evidence cannot become a weak-skill candidate here"
+        );
+
+        // Switch packs: the same profile, the same stored rows, but only
+        // the newly selected pack's candidates and credit are in play.
+        store
+            .set_active_pack(
+                &p.id,
+                "org.openlanguage.ja-jp.reference",
+                &reference_version,
+            )
+            .unwrap();
+        let plan_alt = build_plan(data, &p.id, 5, now_secs).unwrap();
+        assert!(
+            content_ids(&plan_alt)
+                .iter()
+                .any(|c| c == "ja.lex.food-drink.kohi")
+        );
+        assert!(
+            !content_ids(&plan_alt)
+                .iter()
+                .any(|c| c == "ja.lex.demo.hajimemashite"),
+            "the previous pack's due rows stay on disk, out of this plan"
+        );
+        let derived_alt = derive_pairs(&store, &p.id, &rfc3339_utc(now_secs)).unwrap();
+        assert!(
+            derived_ids(&derived_alt)
+                .iter()
+                .any(|c| c == "ja.lex.food-drink.kohi")
+        );
+        assert!(
+            !derived_ids(&derived_alt)
+                .iter()
+                .any(|c| c == "ja.lex.demo.hajimemashite")
+        );
+
+        // Switching back restores the original reviews and mastery
+        // untouched — nothing was deleted or rewritten by the switch.
+        store
+            .set_active_pack(&p.id, "org.openlanguage.ja-demo", "0.1.0")
+            .unwrap();
+        let plan_back = build_plan(data, &p.id, 5, now_secs).unwrap();
+        assert!(
+            content_ids(&plan_back)
+                .iter()
+                .any(|c| c == "ja.lex.demo.hajimemashite")
+        );
+        let derived_back = derive_pairs(&store, &p.id, &rfc3339_utc(now_secs)).unwrap();
+        assert!(
+            derived_back
+                .iter()
+                .any(|d| d.content_id == "ja.lex.demo.hajimemashite"
+                    && d.state != lts_domain::MasteryState::Unseen)
+        );
+    }
+
+    /// Review finding R04: what the desktop records decides what the
+    /// policy may claim. Two immediate retries of one presented task are
+    /// one observation; repetition on one prompt stays `supported` and
+    /// never becomes `independent`, which requires more than one prompt.
+    #[test]
+    fn recorded_attempts_keep_retry_practice_and_genuine_variation_apart() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
+
+        let t = practice_task_at(
+            data,
+            &p.id,
+            "ja.lex.demo.konnichiwa",
+            "recall-meaning",
+            false,
+        )
+        .unwrap();
+        let idx = t
+            .choices
+            .iter()
+            .position(|c| c == "hello")
+            .expect("the correct gloss is among the choices");
+        let submit = |session: &str| {
+            practice_submit_inner(
+                data,
+                &p.id,
+                "ja.lex.demo.konnichiwa",
+                "recall-meaning",
+                idx,
+                SubmitOpts {
+                    answer: None,
+                    reveal_reading: false,
+                    diagnostic: None,
+                    session_id: Some(session),
+                    stage: None,
+                },
+            )
+            .unwrap()
+        };
+
+        // Same session, same presented task, immediate retry: one attempt
+        // group, therefore one observation, therefore only `introduced`.
+        assert!(submit("sess-1").correct);
+        assert!(submit("sess-1").correct);
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let events = store.evidence_for_profile(&p.id).unwrap();
+        assert_eq!(events.len(), 2, "both attempts are recorded");
+        assert!(
+            events
+                .iter()
+                .all(|e| e.attempt_group_id.as_deref() == Some("sess-1:ja.lex.demo.konnichiwa")),
+            "retries of one presented task share one attempt group"
+        );
+        assert!(
+            events
+                .iter()
+                .all(|e| e.prompt_family_id.as_ref().map(|p| p.as_str())
+                    == Some("ja.lex.demo.konnichiwa"))
+        );
+        let state_of = || {
+            derive_pairs(&store, &p.id, "2025-11-13T00:00:00Z")
+                .unwrap()
+                .into_iter()
+                .find(|d| d.content_id == "ja.lex.demo.konnichiwa")
+                .map(|d| d.state)
+        };
+        assert_eq!(
+            state_of(),
+            Some(lts_domain::MasteryState::Introduced),
+            "an immediate retry is the same observation, not a second one"
+        );
+
+        // Two later sessions: three separate observations now, but every
+        // one is the same prompt, and `independent` requires more than one
+        // prompt (docs/03 §5). Repetition alone cannot buy it.
+        submit("sess-2");
+        submit("sess-3");
+        assert_eq!(
+            state_of(),
+            Some(lts_domain::MasteryState::Supported),
+            "scaffolded successes on one prompt cap at supported"
+        );
+        assert_eq!(
+            store.evidence_for_profile(&p.id).unwrap().len(),
+            4,
+            "the history is append-only: nothing was merged away"
+        );
     }
 
     #[test]
@@ -10754,7 +12728,7 @@ mod tests {
     }
 
     #[test]
-    fn placement_records_diagnostic_evidence_and_unlocks() {
+    fn placement_records_diagnostic_evidence_within_one_prompt() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
@@ -10784,9 +12758,9 @@ mod tests {
             "greet goal locked before diagnosis"
         );
 
-        // Two correct support-0 diagnostic answers reach `independent`
-        // through the normal derivation path (policy fixture
-        // known-diagnostic-reaches-independent).
+        // Two correct support-0 diagnostic answers on ONE prompt. R04:
+        // that is repetition, not flexible retrieval, so the normal
+        // derivation path takes the pair to `supported` and stops.
         for _ in 0..2 {
             let (t, correct_choice, _) =
                 practice_build(data, &p.id, &greet.content_id, &greet.modality, false).unwrap();
@@ -10801,6 +12775,8 @@ mod tests {
                     answer: None,
                     reveal_reading: false,
                     diagnostic: Some(&greet.assessment_id),
+                    session_id: None,
+                    stage: None,
                 },
             )
             .unwrap();
@@ -10825,8 +12801,11 @@ mod tests {
                 .all(|e| e.activity_id.as_str() == "ja.assess.demo.greet")
         );
 
-        // Known foundation unlocked: state rose and the gated goal now
-        // enters the progression stream.
+        // Measured consequence of R04: a single prompt cannot satisfy an
+        // `independent` prerequisite, so the gated goal stays locked. It
+        // unlocks once the learner meets that content on a second prompt,
+        // which the current task generators do not yet produce — tracked
+        // as ACTIVITY-MODEL-001 (review R11).
         let derived = derive_pairs(&store, &p.id, &rfc3339_utc(1_760_000_000)).unwrap();
         assert_eq!(
             derived
@@ -10835,15 +12814,15 @@ mod tests {
                     && d.dimension == lts_domain::ActivityModality::RecallMeaning)
                 .unwrap()
                 .state,
-            lts_domain::MasteryState::Independent,
-            "diagnostic unlocks known foundations"
+            lts_domain::MasteryState::Supported,
+            "two same-prompt diagnostics stop at supported"
         );
         assert!(
-            progression_items(data, &store, &p.id, &derived)
+            !progression_items(data, &store, &p.id, &derived)
                 .unwrap()
                 .iter()
                 .any(|i| i.content_id == "ja.grammar.demo.greetings"),
-            "greet goal unlocks after diagnosis"
+            "one prompt does not satisfy an `independent` prerequisite"
         );
     }
 

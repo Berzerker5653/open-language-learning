@@ -5,9 +5,21 @@
 /// says "the current version" is unbindable, so the binary carries the commit it
 /// was compiled from and surfaces it in Settings.
 fn main() {
-    // The commit changes whenever HEAD moves; a dirty tree changes the bytes
-    // without moving HEAD, so both are tracked.
+    // R15: the stamp has to be recomputed whenever anything it reads changes.
+    // `.git/HEAD` alone is not enough: it only moves on a checkout, while a
+    // commit moves the *branch ref* (or `packed-refs`) and a staged change
+    // moves the index. Once any `rerun-if-changed` line is printed cargo stops
+    // watching the package by default, so the crate's own sources are named
+    // too — an edited source is exactly the case where a stale dirty flag
+    // would misrepresent the bytes being compiled.
     println!("cargo:rerun-if-changed=../../../.git/HEAD");
+    println!("cargo:rerun-if-changed=../../../.git/packed-refs");
+    println!("cargo:rerun-if-changed=../../../.git/index");
+    if let Some(r) = head_ref() {
+        println!("cargo:rerun-if-changed=../../../.git/{r}");
+    }
+    println!("cargo:rerun-if-changed=src");
+    println!("cargo:rerun-if-changed=build.rs");
 
     let commit = git(&["rev-parse", "--short", "HEAD"]);
     let dirty = !git(&["status", "--porcelain"]).is_empty();
@@ -39,4 +51,12 @@ fn git(args: &[&str]) -> String {
             }
         })
         .unwrap_or_default()
+}
+
+/// The ref `HEAD` points at, as a path under `.git` (`refs/heads/main`).
+/// A detached HEAD names no ref file; the `HEAD` watch already covers it.
+fn head_ref() -> Option<String> {
+    let head = std::fs::read_to_string("../../../.git/HEAD").ok()?;
+    let line = head.trim().strip_prefix("ref:")?.trim();
+    (!line.is_empty()).then(|| line.to_string())
 }

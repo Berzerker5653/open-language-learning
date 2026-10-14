@@ -24,8 +24,27 @@ use std::io::Read;
 use std::path::{Path, PathBuf};
 
 const MAX_CATALOG_BYTES: u64 = 1 << 20;
-/// GitHub release page redirects and the asset CDN it resolves to.
-const ALLOWED_HOSTS: [&str; 2] = ["github.com", "objects.githubusercontent.com"];
+/// Hosts a pack download may sit on, checked for the start URL *and*
+/// every redirect hop. This allowlist is the thing that stops a
+/// compromised catalog from bouncing the client to an arbitrary
+/// server: whatever a catalog entry claims, the transport only ever
+/// talks to these hosts.
+/// - `github.com`: the start host of every release-download URL
+///   shipped in `catalog/packs.json`
+///   (`https://github.com/<owner>/<repo>/releases/download/<tag>/<file>`);
+/// - `objects.githubusercontent.com`: GitHub's long-standing
+///   release-asset CDN, where older release assets still redirect;
+/// - `release-assets.githubusercontent.com`: the GitHub release-asset
+///   CDN that `/releases/download/` URLs redirect to today — both
+///   pinned reference-pack entries 302 here (R01).
+const ALLOWED_HOSTS: [&str; 3] = [
+    "github.com",
+    "objects.githubusercontent.com",
+    "release-assets.githubusercontent.com",
+];
+// Initial request plus at most this many redirects; enforced by
+// `url_policy`, which `fetch_capped` drives on every live hop.
+const MAX_REDIRECT_HOPS: usize = 5;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PackEntry {
@@ -249,47 +268,88 @@ fn next_hop(
     Ok(next)
 }
 
+/// Check the start URL under the same rules the hops are checked under:
+/// https always, allowlisted host when the download requires it.
+fn checked_start(start: &str, require_allowlisted: bool) -> Result<url::Url, String> {
+    let url = url::Url::parse(start).map_err(|_| "bad url")?;
+    if url.scheme() != "https" {
+        return Err("url must be https".into());
+    }
+    if require_allowlisted {
+        let host = url.host_str().ok_or("url has no host")?;
+        if !ALLOWED_HOSTS.contains(&host) {
+            return Err(format!("host {host} not allowlisted"));
+        }
+    }
+    Ok(url)
+}
+
+/// The redirect policy as a pure function: `start` plus the `location`
+/// values a server returned, resolved one hop at a time into the full
+/// chain. Rules: https on the start URL and every hop; every host
+/// allowlisted (start and hops) when `require_allowlisted`; at most
+/// `MAX_REDIRECT_HOPS` redirects. No socket is involved, so the tests
+/// can replay a scripted chain offline — and `fetch_capped` replays
+/// every live `Location` back through this same function, so the
+/// scripted chain is exactly the chain a real download walks (R01).
+pub(crate) fn url_policy(
+    start: &str,
+    hops: &[String],
+    require_allowlisted: bool,
+) -> Result<Vec<url::Url>, String> {
+    let mut chain = vec![checked_start(start, require_allowlisted)?];
+    for (i, loc) in hops.iter().enumerate() {
+        if i >= MAX_REDIRECT_HOPS {
+            return Err("too many redirects".into());
+        }
+        chain.push(next_hop(&chain[i], loc, require_allowlisted)?);
+    }
+    Ok(chain)
+}
+
 /// GET with per-hop policy and a hard size cap. `require_allowlisted`
 /// enforces the GitHub host allowlist on every hop (pack downloads);
-/// the operator-configured catalog URL is only held to https.
+/// the operator-configured catalog URL is only held to https. ureq
+/// never follows a redirect itself (`redirects(0)`): each `Location`
+/// goes through `url_policy`, and only the re-resolved chain head is
+/// ever requested.
 fn fetch_capped(start: &str, max_bytes: u64, require_allowlisted: bool) -> Result<Vec<u8>, String> {
-    let mut url = url::Url::parse(start).map_err(|_| "bad url")?;
-    for _ in 0..=5 {
-        if url.scheme() != "https" {
-            return Err("url must be https".into());
-        }
-        if require_allowlisted {
-            let host = url.host_str().ok_or("url has no host")?;
-            if !ALLOWED_HOSTS.contains(&host) {
-                return Err(format!("host {host} not allowlisted"));
-            }
-        }
-        let agent = ureq::AgentBuilder::new().redirects(0).build();
+    let agent = ureq::AgentBuilder::new().redirects(0).build();
+    let mut hops: Vec<String> = Vec::new();
+    loop {
+        let url = url_policy(start, &hops, require_allowlisted)?
+            .pop()
+            .expect("url_policy never returns an empty chain");
         let resp = agent
             .get(url.as_str())
             .call()
             .map_err(|e| format!("fetch failed: {e}"))?;
-        if (300..400).contains(&resp.status()) {
-            let loc = resp.header("location").ok_or("redirect without location")?;
-            url = next_hop(&url, loc, require_allowlisted)?;
-            continue;
+        if !(300..400).contains(&resp.status()) {
+            return read_capped(resp.into_reader(), max_bytes);
         }
-        let mut bytes = Vec::new();
-        let mut reader = resp.into_reader();
-        let mut buf = [0u8; 1 << 16];
-        loop {
-            let n = reader.read(&mut buf).map_err(|e| format!("read: {e}"))?;
-            if n == 0 {
-                break;
-            }
-            bytes.extend_from_slice(&buf[..n]);
-            if bytes.len() as u64 > max_bytes {
-                return Err("response exceeded size limit".into());
-            }
-        }
-        return Ok(bytes);
+        let loc = resp.header("location").ok_or("redirect without location")?;
+        hops.push(loc.to_string());
     }
-    Err("too many redirects".into())
+}
+
+/// Drain a response body under the hard size cap: the read aborts the
+/// moment the running total passes `max_bytes`, so an oversized body
+/// never lands in memory in full. Separate from the socket so tests can
+/// drive it with an in-memory reader.
+fn read_capped(mut reader: impl Read, max_bytes: u64) -> Result<Vec<u8>, String> {
+    let mut bytes = Vec::new();
+    let mut buf = [0u8; 1 << 16];
+    loop {
+        let n = reader.read(&mut buf).map_err(|e| format!("read: {e}"))?;
+        if n == 0 {
+            break;
+        }
+        bytes.extend_from_slice(&buf[..n]);
+        if bytes.len() as u64 > max_bytes {
+            return Err("response exceeded size limit".into());
+        }
+    }
+    Ok(bytes)
 }
 
 fn hex_sha256(bytes: &[u8]) -> String {
@@ -671,6 +731,133 @@ mod tests {
         assert_eq!(moved.host_str().unwrap(), "cdn.example.org");
         assert!(next_hop(&cat, "http://cdn.example.org/packs.json", false).is_err());
     }
+    /// R01 acceptance: the redirect rules live in one pure function that
+    /// `fetch_capped` replays every live `Location` through, so these
+    /// scripted chains are exactly what a real download walks — with no
+    /// socket, no timing, and no flakiness.
+    #[test]
+    fn scripted_redirect_chains_are_accepted_or_refused_hop_by_hop() {
+        let start = "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.4.0/ja-jp-reference-0.4.0.lpk";
+        // What GitHub actually answers today for a release-download URL:
+        // a 302 to the release-asset CDN. Both pinned catalog entries take
+        // this hop, so refusing it is what broke native install (R01).
+        let asset_cdn = "https://release-assets.githubusercontent.com/github-production-release-asset/1/2?Expires=1&Signature=x";
+        let chain = url_policy(start, &[asset_cdn.into()], true)
+            .expect("GitHub's asset hop is allowlisted");
+        assert_eq!(chain.len(), 2);
+        assert_eq!(chain[0].host_str().unwrap(), "github.com");
+        assert_eq!(
+            chain[1].host_str().unwrap(),
+            "release-assets.githubusercontent.com"
+        );
+
+        // The full documented chain still works too: the long-standing
+        // object CDN redirecting on to the current release-asset CDN.
+        let chain = url_policy(
+            start,
+            &[
+                "https://objects.githubusercontent.com/github-production-release-asset/1/2?x=1".into(),
+                "https://release-assets.githubusercontent.com/github-production-release-asset/1/2?Expires=1&Signature=x".into(),
+            ],
+            true,
+        )
+        .expect("github -> objects -> release-assets is accepted");
+        assert_eq!(chain.len(), 3);
+        assert_eq!(
+            chain[1].host_str().unwrap(),
+            "objects.githubusercontent.com"
+        );
+        assert_eq!(
+            chain[2].host_str().unwrap(),
+            "release-assets.githubusercontent.com"
+        );
+
+        // A bounce to an arbitrary host, even after an allowed first hop.
+        assert!(
+            url_policy(
+                start,
+                &[asset_cdn.into(), "https://evil.example/p.lpk".into()],
+                true
+            )
+            .is_err()
+        );
+        // An https -> http downgrade mid-chain is refused.
+        assert!(
+            url_policy(
+                start,
+                &["http://release-assets.githubusercontent.com/x".into()],
+                true
+            )
+            .is_err()
+        );
+        // A relative Location stays on the current host.
+        let moved = url_policy(asset_cdn, &["/other/path".into()], true).unwrap();
+        assert_eq!(
+            moved[1].as_str(),
+            "https://release-assets.githubusercontent.com/other/path"
+        );
+        // The hop budget is enforced: at the limit it resolves, one more is
+        // refused instead of followed (a loop cannot spin the client).
+        let looping = "https://github.com/o/r/redirect".to_string();
+        assert!(url_policy(start, &vec![looping.clone(); MAX_REDIRECT_HOPS], true).is_ok());
+        assert!(url_policy(start, &vec![looping; MAX_REDIRECT_HOPS + 1], true).is_err());
+        // The start URL is held to the same rules as a hop: no off-allowlist
+        // host, no plaintext.
+        assert!(url_policy("https://evil.example/p.lpk", &[], true).is_err());
+        assert!(url_policy("http://github.com/o/r/x", &[], true).is_err());
+        // The operator-configured catalog is https-only, not host-locked.
+        assert!(
+            url_policy(
+                "https://example.org/packs.json",
+                &["https://cdn.example.org/packs.json".into()],
+                false
+            )
+            .is_ok()
+        );
+        assert!(
+            url_policy(
+                "https://example.org/packs.json",
+                &["http://cdn.example.org/packs.json".into()],
+                false
+            )
+            .is_err()
+        );
+    }
+
+    /// R01 acceptance: the URLs actually shipped in `catalog/packs.json`
+    /// pass the transport policy a download walks, including GitHub's real
+    /// asset hop. If the catalog ever points at http or off-allowlist, this
+    /// fails in review instead of at a learner's first install.
+    #[test]
+    fn every_pinned_catalog_entry_passes_the_download_policy() {
+        let path = concat!(env!("CARGO_MANIFEST_DIR"), "/../../../catalog/packs.json");
+        let text =
+            std::fs::read_to_string(path).expect("the shipped catalog must be readable here");
+        let catalog: PackCatalog = serde_json::from_str(&text).unwrap();
+        let asset_cdn = "https://release-assets.githubusercontent.com/github-production-release-asset/1/2?Expires=1&Signature=x";
+        let mut ids = Vec::new();
+        for e in &catalog.packs {
+            validate_entry(e).unwrap_or_else(|why| panic!("{}: {why}", e.pack_id));
+            let chain = url_policy(&e.url, &[asset_cdn.into()], true).unwrap_or_else(|why| {
+                panic!("{}: transport policy refused {}: {why}", e.pack_id, e.url)
+            });
+            assert_eq!(chain[0].host_str().unwrap(), "github.com");
+            assert_eq!(
+                chain[1].host_str().unwrap(),
+                "release-assets.githubusercontent.com"
+            );
+            assert!(e.size_bytes > 0, "a pinned entry must name its size");
+            assert_eq!(e.sha256.len(), 64, "a pinned entry must name its hash");
+            ids.push(e.pack_id.clone());
+        }
+        assert_eq!(
+            ids,
+            vec![
+                "org.openlanguage.ja-jp.reference",
+                "org.openlanguage.ru-ru.reference"
+            ]
+        );
+    }
 
     /// K-62: the owner's complaint was an install that gave no sign of life.
     /// The stage sequence is the contract the renderer draws its line from, so
@@ -730,5 +917,50 @@ mod tests {
         .unwrap_err();
         assert!(err.contains("checksum"), "{err}");
         assert_eq!(stages, vec!["verify"]);
+    }
+
+    /// R01: the hardened transport has to carry the archives the shipped
+    /// catalog actually pins, not only fixtures. This is the only test in the
+    /// tree that touches the network (both reference packs, ~634 MB), so it is
+    /// `#[ignore]`d and the release evidence runs it explicitly.
+    #[test]
+    #[ignore = "downloads both pinned reference packs (~634 MB)"]
+    fn both_pinned_catalog_entries_install_through_the_native_transport() {
+        let catalog_path =
+            PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../catalog/packs.json");
+        let catalog: PackCatalog =
+            serde_json::from_str(&fs::read_to_string(catalog_path).unwrap()).unwrap();
+        let ids: Vec<&str> = catalog.packs.iter().map(|e| e.pack_id.as_str()).collect();
+        assert_eq!(
+            ids,
+            vec![
+                "org.openlanguage.ja-jp.reference",
+                "org.openlanguage.ru-ru.reference"
+            ],
+            "the shipped catalog is what this test covers"
+        );
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        write_cache(data, &catalog);
+        for pin in &catalog.packs {
+            validate_entry(pin).unwrap();
+            let inst = install_from_catalog_report(data, &pin.pack_id, &mut no_progress)
+                .expect("the pinned archive installs through the native transport");
+            assert_eq!(inst.version, pin.version);
+            assert_eq!(inst.locale, pin.locale);
+            assert!(!inst.display_name.is_empty());
+        }
+        let installed: Vec<(String, String)> = installed_packs(data)
+            .into_iter()
+            .map(|p| (p.pack_id, p.version))
+            .collect();
+        assert_eq!(
+            installed,
+            vec![
+                ("org.openlanguage.ja-jp.reference".into(), "0.4.0".into()),
+                ("org.openlanguage.ru-ru.reference".into(), "0.4.0".into()),
+            ],
+            "both pinned entries are on disk after one transport run"
+        );
     }
 }

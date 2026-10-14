@@ -535,11 +535,14 @@ fn view_of(data: &Path, sc: &PackScenario, session: &ScenarioSession) -> Scenari
     }
 }
 
-/// Begin (or restart) a session. Enforces the unlock gate.
+/// Begin (or restart) a session. Enforces the unlock gate. `session_id`
+/// names this sitting: it is what keeps a replay's evidence separate from an
+/// earlier run's instead of colliding with it (review finding R03).
 pub fn start_at(
     data: &Path,
     profile_id: &str,
     scenario_id: &str,
+    session_id: &str,
     sessions: &SessionStore,
 ) -> Result<ScenarioView, String> {
     let summaries = list_at(data, profile_id)?;
@@ -565,7 +568,7 @@ pub fn start_at(
         }
     }
     let (_pack_id, sc) = found.ok_or("scenario not found")?;
-    let session = ScenarioSession::begin(&sc).ok_or("scenario has no nodes")?;
+    let session = ScenarioSession::begin(&sc, session_id).ok_or("scenario has no nodes")?;
     let view = view_of(data, &sc, &session);
     let mut guard = sessions.lock().map_err(|_| "session store poisoned")?;
     guard.insert(session_key(profile_id, scenario_id), session);
@@ -744,7 +747,16 @@ pub fn finish_at(
         |i| rfc3339_utc(base + i as u64),
     );
     for ev in &events {
-        store.append_evidence(ev).map_err(|e| e.to_string())?;
+        // R03: the store refuses a duplicate event id rather than
+        // double-counting. A refusal means this attempt was never recorded,
+        // so reporting a finished scenario would misstate the learner's
+        // record — surface it as an error instead.
+        if !store.append_evidence(ev).map_err(|e| e.to_string())? {
+            return Err(format!(
+                "evidence for {} was not recorded",
+                ev.event_id.as_str()
+            ));
+        }
     }
     Ok(OutcomeView {
         nodes_completed: outcome.nodes.iter().filter(|n| n.succeeded).count() as u32,

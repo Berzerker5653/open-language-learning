@@ -2472,6 +2472,7 @@ dependencies = [
  "tempfile",
  "ureq",
  "url",
+ "uuid",
  "zip",
 ]
 

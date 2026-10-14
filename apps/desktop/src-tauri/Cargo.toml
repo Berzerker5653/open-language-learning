@@ -32,6 +32,7 @@ lts-activity.workspace = true
 lts-world.workspace = true
 lts-speech-api.workspace = true
 lts-speech-runtime.workspace = true
+uuid.workspace = true
 base64 = "0.22"
 sha2 = "0.10"
 ureq = "2.10"
