@@ -115,6 +115,32 @@ fn japanese_declares_exactly_one_script_introduction_unit() {
         "ja-JP must declare exactly one script-introduction unit: {declared:?}"
     );
 }
+/// R08: the Russian on-ramp promises Cyrillic before anything else, so it
+/// has to declare the same single cue. Without it a brand-new Russian
+/// profile gets no first instruction at all, while the goals behind it stay
+/// gated on evidence the learner was never pointed at.
+#[test]
+fn russian_declares_exactly_one_script_introduction_unit() {
+    let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../languages/ru-RU");
+    let pack = Pack::load_dir(&root).unwrap();
+    let declared: Vec<&str> = pack
+        .instances()
+        .iter()
+        .filter(|i| i.schema == "unit")
+        .filter(|i| {
+            i.value
+                .get("capabilities")
+                .and_then(|c| c.as_array())
+                .is_some_and(|caps| caps.iter().any(|c| c == "script-introduction"))
+        })
+        .map(|i| i.value["id"].as_str().unwrap_or("?"))
+        .collect();
+    assert_eq!(
+        declared,
+        ["ru.unit.on-ramp.cyrillic-a-o-m-t"],
+        "ru-RU must declare exactly one script-introduction unit: {declared:?}"
+    );
+}
 
 #[test]
 fn valid_full_covers_every_content_type() {

@@ -34,6 +34,12 @@ pub struct Eligibility {
 pub struct Support {
     pub independent_max_level: u8,
     pub supported_max_level: u8,
+    /// Support that supplies the assessed construct invalidates the
+    /// evidence for that dimension only (docs/03 §5). Keyed by dimension
+    /// kebab name (`production-writing`, `comprehension-reading`, …);
+    /// enforced by `observations`, not just declared.
+    #[serde(default)]
+    pub disqualifying_for: std::collections::HashMap<String, Vec<String>>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -176,6 +182,23 @@ impl Policy {
         {
             return Err("mismatch downgrade needs a positive trigger count".into());
         }
+        // A `disqualifying_for` entry is only protective if both its key and
+        // its action names are real vocabulary: a typo would silently switch
+        // the rule off, so both sides are checked against the canonical
+        // dimension names and `lts_domain::support_actions::ALL`.
+        for (dimension, actions) in &self.support.disqualifying_for {
+            serde_yaml::from_str::<lts_domain::MasteryDimension>(&format!("\"{dimension}\""))
+                .map_err(|_| {
+                    format!("disqualifying_for key {dimension:?} is not a canonical dimension")
+                })?;
+            for action in actions {
+                if !lts_domain::support_actions::ALL.contains(&action.as_str()) {
+                    return Err(format!(
+                        "unknown support action {action:?} under disqualifying_for[{dimension}]"
+                    ));
+                }
+            }
+        }
         if self.fixtures.is_empty() {
             return Err("the policy must ship worked fixtures".into());
         }
@@ -197,6 +220,11 @@ pub struct FixEvent {
     pub prompt_family_id: Option<String>,
     pub assessment_kind: Option<AssessmentKind>,
     pub attempt_group_id: Option<String>,
+    /// Support the learner actually consumed, from the canonical
+    /// `lts_domain::support_actions` vocabulary. Optional so older
+    /// fixtures keep working; enforcement is on real evidence.
+    #[serde(default)]
+    pub support_actions: Vec<String>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -233,13 +261,18 @@ pub struct Decision {
     pub policy_version: String,
 }
 
-/// One observation after attempt-group collapsing.
+/// One observation after attempt-group collapsing and disqualifying-support
+/// exclusion. `prompt` is the identity used for the independent stage's
+/// prompt-diversity count; `family` is the declared prompt family used for
+/// the transfer/flexible stage and is `None` when the evidence never
+/// recorded one — absence may never be counted as diversity.
 pub struct Obs {
     pub at: i64,
     pub score: Score,
     pub support: u8,
-    pub prompt: String,
-    pub family: String,
+    pub prompt: Option<String>,
+    pub family: Option<String>,
+    pub support_actions: Vec<String>,
     pub assessment: Option<AssessmentKind>,
 }
 
@@ -278,24 +311,61 @@ pub struct ObsInput<'a> {
     pub occurred_at: &'a str,
     pub score: Score,
     pub support: u8,
+    pub activity_id: &'a str,
     pub prompt_family_id: Option<&'a str>,
     pub attempt_group_id: Option<&'a str>,
+    pub support_actions: &'a [String],
     pub assessment: Option<AssessmentKind>,
 }
 
-/// Collapse attempt groups (one observation per group, last scored wins)
-/// and return time-ordered observations.
-pub fn observations(policy: &Policy, mut inputs: Vec<ObsInput<'_>>) -> Result<Vec<Obs>, String> {
+/// Dimension/assessment key as written in the policy artifact
+/// (`production-writing`, `transfer`).
+fn kebab<T: serde::Serialize>(value: &T) -> String {
+    serde_json::to_string(value)
+        .unwrap_or_default()
+        .trim_matches('"')
+        .to_string()
+}
+
+/// Build the observations that count for one dimension: attempt groups
+/// collapse (one observation per group, last scored wins), evidence whose
+/// recorded support supplies the assessed construct is dropped for this
+/// dimension, and prompt identity comes from the declared prompt family —
+/// falling back to the activity's stable identity, NEVER the event id. An
+/// event id is unique per attempt, so falling back to it would manufacture
+/// prompt diversity out of repetitions of one task (policy revision 0.2.0,
+/// review finding R04).
+pub fn observations(
+    policy: &Policy,
+    dimension: ActivityModality,
+    mut inputs: Vec<ObsInput<'_>>,
+) -> Result<Vec<Obs>, String> {
     inputs.sort_by(|a, b| (a.occurred_at, a.event_id).cmp(&(b.occurred_at, b.event_id)));
+    let disqualifying: std::collections::HashSet<&str> = policy
+        .support
+        .disqualifying_for
+        .get(&kebab(&dimension))
+        .map(|actions| actions.iter().map(|a| a.as_str()).collect())
+        .unwrap_or_default();
     let mut obs: Vec<Obs> = Vec::new();
     let mut by_group: std::collections::HashMap<&str, usize> = std::collections::HashMap::new();
     for e in inputs {
+        if e.support_actions
+            .iter()
+            .any(|a| disqualifying.contains(a.as_str()))
+        {
+            // Support that hands over the assessed construct is not evidence
+            // for that dimension in either direction: it neither raises nor
+            // lowers mastery (docs/03 §5).
+            continue;
+        }
         let o = Obs {
             at: epoch_seconds(e.occurred_at)?,
             score: e.score,
             support: e.support,
-            prompt: e.prompt_family_id.unwrap_or(e.event_id).to_string(),
-            family: e.prompt_family_id.unwrap_or(e.event_id).to_string(),
+            prompt: Some(e.prompt_family_id.unwrap_or(e.activity_id).to_string()),
+            family: e.prompt_family_id.map(str::to_string),
+            support_actions: e.support_actions.iter().map(|s| s.to_string()).collect(),
             assessment: e.assessment,
         };
         match e.attempt_group_id {
@@ -344,7 +414,7 @@ pub fn ladder(policy: &Policy, obs: &[Obs]) -> MasteryState {
         .filter(|o| full(o, t.independent.max_support_level))
         .collect();
     let distinct_prompts: std::collections::HashSet<&str> =
-        ind_ok.iter().map(|o| o.prompt.as_str()).collect();
+        ind_ok.iter().filter_map(|o| o.prompt.as_deref()).collect();
     if ind_ok.len() >= t.independent.min_successes
         && distinct_prompts.len() >= t.independent.min_distinct_prompts
     {
@@ -355,18 +425,10 @@ pub fn ladder(policy: &Policy, obs: &[Obs]) -> MasteryState {
         .filter(|o| full(o, t.flexible.max_support_level))
         .collect();
     let families: std::collections::HashSet<&str> =
-        flex_ok.iter().map(|o| o.family.as_str()).collect();
-    let has_novel_assessment = flex_ok.iter().any(|o| {
-        o.assessment.map(|a| {
-            let name = serde_json::to_string(&a)
-                .unwrap()
-                .trim_matches('"')
-                .to_string();
-            t.flexible
-                .requires_assessment_kinds
-                .iter()
-                .any(|k| k == &name)
-        }) == Some(true)
+        flex_ok.iter().filter_map(|o| o.family.as_deref()).collect();
+    let has_novel_assessment = flex_ok.iter().flat_map(|o| o.assessment).any(|a| {
+        let name = kebab(&a);
+        t.flexible.requires_assessment_kinds.contains(&name)
     });
     if flex_ok.len() >= t.flexible.min_successes
         && families.len() >= t.flexible.min_distinct_prompt_families
@@ -443,12 +505,14 @@ pub fn derive(
             occurred_at: &e.occurred_at,
             score: e.score.unwrap(),
             support: e.support_level,
+            activity_id: &e.activity_id,
             prompt_family_id: e.prompt_family_id.as_deref(),
             attempt_group_id: e.attempt_group_id.as_deref(),
+            support_actions: &e.support_actions,
             assessment: e.assessment_kind,
         })
         .collect();
-    let obs = observations(policy, inputs)?;
+    let obs = observations(policy, dimension, inputs)?;
     Ok(Decision {
         dimension,
         state: ladder(policy, &obs),

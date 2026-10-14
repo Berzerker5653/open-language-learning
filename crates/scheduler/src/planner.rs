@@ -24,6 +24,11 @@ pub const BUDGET_PRESETS: [u32; 4] = [5, 10, 20, 30];
 #[serde(rename_all = "kebab-case")]
 pub enum PlanReason {
     DueReview,
+    /// A review of a learner-owned (sentence-mined) item. It spends the
+    /// same review share as pack-content reviews but is routed to a
+    /// different surface and can never grant pack-content mastery
+    /// (review finding R02).
+    SavedReview,
     WeakSkill,
     Progression,
 }
@@ -38,6 +43,10 @@ pub struct DueReviewItem {
     pub modality: ActivityModality,
     /// Current estimated retrievability; lower = more urgent.
     pub retrievability: f64,
+    /// True for learner-owned (mined) items, which have their own
+    /// scheduler partition and their own review surface.
+    #[serde(default)]
+    pub saved: bool,
 }
 
 /// A content/dimension pair with low derived mastery confidence.
@@ -200,7 +209,11 @@ pub fn plan_session(
                 item_id: r.item_id.clone(),
                 content_id: r.content_id.clone(),
                 modality: r.modality,
-                reason: PlanReason::DueReview,
+                reason: if r.saved {
+                    PlanReason::SavedReview
+                } else {
+                    PlanReason::DueReview
+                },
                 est_seconds: config.review_seconds,
             });
             plan.total_seconds += config.review_seconds;
@@ -261,7 +274,11 @@ pub fn plan_session(
                             item_id: r.item_id.clone(),
                             content_id: r.content_id.clone(),
                             modality: r.modality,
-                            reason: PlanReason::DueReview,
+                            reason: if r.saved {
+                                PlanReason::SavedReview
+                            } else {
+                                PlanReason::DueReview
+                            },
                             est_seconds: config.review_seconds,
                         });
                         plan.total_seconds += config.review_seconds;

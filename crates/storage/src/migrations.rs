@@ -14,7 +14,7 @@
 use crate::error::Error;
 use rusqlite::Connection;
 
-pub const SCHEMA_VERSION: i64 = 4;
+pub const SCHEMA_VERSION: i64 = 5;
 
 struct Migration {
     version: i64,
@@ -168,6 +168,18 @@ CREATE TABLE mined_items (
 );
 ",
     },
+    Migration {
+        version: 5,
+        sql: "
+-- Learner-owned (sentence-mined) rows get their own scheduler tag. The
+-- algorithm is identical; the tag is the partition, so a plan built for a
+-- language pack can never pick up a mined row and a mined review can never
+-- be mistaken for pack content (review finding R02).
+UPDATE scheduler_state
+   SET scheduler = 'fsrs-spike-0.1.0+mined'
+ WHERE item_id LIKE 'mine-%' AND scheduler = 'fsrs-spike-0.1.0';
+",
+    },
 ];
 
 pub(crate) fn migrate(conn: &Connection) -> Result<(), Error> {
@@ -210,5 +222,56 @@ mod tests {
             assert_eq!(m.version, (i + 1) as i64);
         }
         assert_eq!(MIGRATIONS.last().unwrap().version, SCHEMA_VERSION);
+    }
+
+    /// Migration 5 is an upgrade-path test on a pre-5 database: mined
+    /// (learner-owned) scheduler rows move to their own tag, pack rows do
+    /// not move. The tag string here is the same literal the migration
+    /// writes; `crates/scheduler::MINED_SCHEDULER` and this SQL are kept
+    /// in agreement by a desktop-side test (storage may not depend on the
+    /// scheduler crate — docs/07).
+    #[test]
+    fn mined_scheduler_rows_are_partitioned_on_upgrade() {
+        let conn = Connection::open_in_memory().unwrap();
+        migrate(&conn).unwrap();
+        // Rewind to exactly what a v4 database on disk looks like: the
+        // marker, the ledger row, and the rows the migration must rewrite.
+        conn.execute_batch(
+            "PRAGMA user_version = 4;
+             DELETE FROM schema_migrations WHERE version = 5;",
+        )
+        .unwrap();
+        conn.execute(
+            "INSERT INTO profiles(id, display_name, created_at)
+             VALUES ('p1', 'P', '2026-10-01T00:00:00Z')",
+            [],
+        )
+        .unwrap();
+        for item in ["mine-1760000000-1", "ja.lex.demo.konnichiwa#recall-meaning"] {
+            conn.execute(
+                "INSERT INTO scheduler_state(profile_id, item_id, scheduler, params_json, due_at)
+                 VALUES ('p1', ?1, 'fsrs-spike-0.1.0', '{}', '2026-10-14T00:00:00Z')",
+                [item],
+            )
+            .unwrap();
+        }
+        migrate(&conn).unwrap();
+        let tag = |item: &str| -> String {
+            conn.query_row(
+                "SELECT scheduler FROM scheduler_state WHERE item_id = ?1",
+                [item],
+                |r| r.get(0),
+            )
+            .unwrap()
+        };
+        assert_eq!(tag("mine-1760000000-1"), "fsrs-spike-0.1.0+mined");
+        assert_eq!(
+            tag("ja.lex.demo.konnichiwa#recall-meaning"),
+            "fsrs-spike-0.1.0",
+            "pack rows keep their tag"
+        );
+        // Idempotent: re-running the whole history changes nothing.
+        migrate(&conn).unwrap();
+        assert_eq!(tag("mine-1760000000-1"), "fsrs-spike-0.1.0+mined");
     }
 }

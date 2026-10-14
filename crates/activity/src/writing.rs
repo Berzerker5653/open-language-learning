@@ -117,6 +117,11 @@ pub struct WritingGrade {
     pub correct: bool,
     /// True when an accepted variant (not the canonical form) matched.
     pub matched_variant: bool,
+    /// The canonical form this task asked for (review finding I03). It travels
+    /// with the verdict, never with the task: `writing_task` ships no expected
+    /// string (K-12), while the practice hub promises that a miss shows the
+    /// form it expected.
+    pub expected: String,
 }
 
 pub fn grade_writing(input: &str, task: &WritingTask) -> WritingGrade {
@@ -125,17 +130,20 @@ pub fn grade_writing(input: &str, task: &WritingTask) -> WritingGrade {
         return WritingGrade {
             correct: false,
             matched_variant: false,
+            expected: task.answer.clone(),
         };
     }
     if typed == normalize_typed(&task.answer) {
         return WritingGrade {
             correct: true,
             matched_variant: false,
+            expected: task.answer.clone(),
         };
     }
     let matched = task.accepted.iter().any(|a| typed == normalize_typed(a));
     WritingGrade {
         correct: matched,
         matched_variant: matched,
+        expected: task.answer.clone(),
     }
 }

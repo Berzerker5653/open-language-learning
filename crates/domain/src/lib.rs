@@ -20,6 +20,7 @@ pub use evidence::{
     ActivityModality, AssessmentKind, EvidenceCorrection, EvidenceEvent, Outcome, Score,
 };
 pub use ids::{ContentId, ContentKind, EventId, IdError, LocaleTag, PackId, ProfileId};
+pub use mastery::support_actions;
 pub use mastery::{EvidenceAvailability, MasteryDimension, MasteryState, SupportLevel};
 pub use pack::{
     DeclaredCapability, FeatureMode, LicenseSummary, PackManifest, TextDirection, TrustState,

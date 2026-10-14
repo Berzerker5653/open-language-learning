@@ -6,6 +6,12 @@ use serde::{Deserialize, Serialize};
 
 pub const SPIKE_VERSION: &str = "fsrs-spike-0.1.0";
 
+/// Scheduler tag for learner-owned (sentence-mined) items. Identical
+/// parameters to `SPIKE_VERSION`, but a separate tag: a plan built for a
+/// pack must never pick up a mined row (and vice versa), and mined
+/// practice can never reach pack-content mastery (review finding R02).
+pub const MINED_SCHEDULER: &str = "fsrs-spike-0.1.0+mined";
+
 /// Retrieval rating for a scheduled review (FSRS grading scale 1..=4).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub enum Rating {

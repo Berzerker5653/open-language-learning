@@ -26,7 +26,7 @@ fn fixture(name: &str) -> Fixture {
 #[test]
 fn policy_is_versioned_and_marks_thresholds_provisional() {
     let p = policy();
-    assert_eq!(p.policy_version, "0.1.0");
+    assert_eq!(p.policy_version, "0.2.0");
     assert_eq!(p.status, "provisional-hypotheses");
     assert_eq!(p.schema_version, 1);
 }
@@ -112,5 +112,21 @@ fn policy_validation_rejects_broken_artifacts() {
     assert!(
         Policy::load(&broken).is_err(),
         "single-response mastery allowed"
+    );
+
+    // A disqualifier name must be real vocabulary: a typo would silently
+    // switch the rule off (policy 0.2.0 enforcement).
+    let broken = base.replace("supplied-reading]", "supplied-reding]");
+    assert_ne!(base, broken, "fixture text must contain the disqualifier");
+    assert!(
+        Policy::load(&broken).is_err(),
+        "unknown support action accepted under disqualifying_for"
+    );
+
+    // A disqualifier key must be a canonical dimension name.
+    let broken = base.replace("production-writing: [", "production-writeh: [");
+    assert!(
+        Policy::load(&broken).is_err(),
+        "unknown dimension key accepted under disqualifying_for"
     );
 }

@@ -14,4 +14,6 @@ pub enum Error {
     TooNew { found: i64, max: i64 },
     #[error("not found: {0}")]
     NotFound(String),
+    #[error("already present: {0}")]
+    AlreadyExists(String),
 }

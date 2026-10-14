@@ -12,6 +12,7 @@ fn reviews(n: usize, ret: f64, m: ActivityModality) -> Vec<DueReviewItem> {
             content_id: format!("c-{}", i % 7),
             modality: m,
             retrievability: ret,
+            saved: false,
         })
         .collect()
 }
@@ -128,6 +129,37 @@ fn modality_repetition_limit_is_enforced() {
 }
 
 #[test]
+fn learner_owned_reviews_plan_as_saved_reviews_not_pack_reviews() {
+    let owned = vec![DueReviewItem {
+        item_id: "mine-1".into(),
+        content_id: "mined-word".into(),
+        modality: RecallMeaning,
+        retrievability: 0.5,
+        saved: true,
+    }];
+    let owned_plan = plan_session(
+        &cfg(10),
+        &PlannerInputs {
+            due_reviews: owned,
+            weak_skills: vec![],
+            progression: vec![],
+        },
+    )
+    .unwrap();
+    assert_eq!(owned_plan.items[0].reason, PlanReason::SavedReview);
+    let pack_plan = plan_session(
+        &cfg(10),
+        &PlannerInputs {
+            due_reviews: reviews(1, 0.5, RecallMeaning),
+            weak_skills: vec![],
+            progression: vec![],
+        },
+    )
+    .unwrap();
+    assert_eq!(pack_plan.items[0].reason, PlanReason::DueReview);
+}
+
+#[test]
 fn plans_are_reproducible_with_fixed_input_and_seed() {
     let inputs = PlannerInputs {
         due_reviews: vec![
@@ -136,12 +168,14 @@ fn plans_are_reproducible_with_fixed_input_and_seed() {
                 content_id: "c1".into(),
                 modality: RecallMeaning,
                 retrievability: 0.9,
+                saved: false,
             },
             DueReviewItem {
                 item_id: "a".into(),
                 content_id: "c2".into(),
                 modality: RecallMeaning,
                 retrievability: 0.9,
+                saved: false,
             },
         ],
         weak_skills: vec![WeakSkillItem {

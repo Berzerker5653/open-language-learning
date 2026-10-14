@@ -95,7 +95,7 @@ fn migrations_apply_forward_from_initial_schema() {
         .unwrap()
         .collect::<Result<_, _>>()
         .unwrap();
-    assert_eq!(versions, vec![1, 2, 3, 4]);
+    assert_eq!(versions, vec![1, 2, 3, 4, 5]);
 }
 
 #[test]

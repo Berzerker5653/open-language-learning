@@ -67,6 +67,22 @@ fn grading_accepts_canonical_and_declared_variants() {
 }
 
 #[test]
+fn a_miss_carries_the_form_the_task_asked_for() {
+    // Review finding I03: the practice hub promises that a miss shows the form
+    // it expected. The verdict carries it; the task the learner sees before
+    // answering never does (K-12).
+    let t = task();
+    let miss = grade_writing("私は", &t);
+    assert!(!miss.correct);
+    assert_eq!(miss.expected, "私");
+    let empty = grade_writing("", &t);
+    assert_eq!(empty.expected, "私");
+    let prompt = serde_json::to_string(&render_writing_prompt(&t, WritingHint::None)).unwrap();
+    assert!(!prompt.contains("私"));
+    assert!(!prompt.contains("\"answer\""));
+}
+
+#[test]
 fn hints_are_support_not_answers() {
     let t = task();
     let p = render_writing_prompt(&t, WritingHint::Reading);

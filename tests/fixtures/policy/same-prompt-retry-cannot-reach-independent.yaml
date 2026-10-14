@@ -1,0 +1,32 @@
+name: same-prompt-retry-cannot-reach-independent
+notes: >
+  Review finding R04: two correct attempts at one task with no declared
+  prompt family (the shape the desktop used to record). Prompt identity
+  falls back to the activity's stable identity, never to the unique event
+  id, so these repetitions are ONE prompt and the state caps at
+  `supported` — the independent stage needs distinct prompts.
+events:
+  - event_id: ev-1
+    occurred_at: "2026-10-02T12:00:00Z"
+    modality: production-writing
+    outcome: scored
+    score: correct
+    support_level: 0
+    activity_id: ru.activity.cloze-case
+    prompt_family_id: null
+    assessment_kind: formative
+    attempt_group_id: null
+  - event_id: ev-2
+    occurred_at: "2026-10-02T12:01:00Z"
+    modality: production-writing
+    outcome: scored
+    score: correct
+    support_level: 0
+    activity_id: ru.activity.cloze-case
+    prompt_family_id: null
+    assessment_kind: formative
+    attempt_group_id: null
+corrections: []
+expectations:
+  - dimension: production-writing
+    expected_state: supported

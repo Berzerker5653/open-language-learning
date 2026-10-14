@@ -12,8 +12,22 @@
 # policy_version. Derived decisions and evidence interpretation always
 # record the policy_version in effect (mastery_snapshots.policy_version,
 # evidence_events.policy_version).
+#
+# REVISION 0.2.0 (2026-10-14, review findings R03/R04; ADR-0030):
+# evidence identity and disqualifying support are now enforced, not just
+# declared. (1) Prompt identity for the `independent` stage falls back to
+# the activity's stable identity instead of the unique event id, so
+# repetitions of one task can no longer masquerade as prompt diversity.
+# (2) A missing `prompt_family_id` never counts toward the `flexible`
+# stage's distinct-prompt-families requirement. (3) `support.disqualifying_for`
+# is applied when observations are built: evidence whose recorded support
+# supplied the assessed construct grants no credit for that dimension and
+# is never counted as a mismatch. Thresholds are unchanged, so this is a
+# derivation-only revision: stored evidence is append-only and untouched,
+# and affected dimensions are simply re-derived (mastery_snapshots are
+# recomputed, no data migration).
 
-policy_version: "0.1.0"
+policy_version: "0.2.0"
 schema_version: 1
 status: provisional-hypotheses
 
@@ -202,3 +216,6 @@ fixtures:
   - transfer-then-delayed-recheck-reaches-retained
   - confident-mismatches-regress-one-step
   - deferred-speaking-track-no-fabricated-credit
+  - same-prompt-retry-cannot-reach-independent
+  - disqualifying-support-blocks-independent
+  - immediate-retry-counts-as-one-observation

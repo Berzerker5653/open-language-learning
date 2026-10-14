@@ -33,10 +33,14 @@ pub struct NodeRecord {
     pub succeeded: bool,
 }
 
-/// Finalized scenario session.
+/// Finalized scenario session. `session_id` identifies one sitting: the
+/// same scenario replayed tomorrow is a different session, so its evidence
+/// stays a separate observation instead of colliding with the first run
+/// (review finding R03).
 #[derive(Debug, Clone, Serialize)]
 pub struct ScenarioOutcome {
     pub scenario_id: String,
+    pub session_id: String,
     pub nodes: Vec<NodeRecord>,
     pub transfers_completed: Vec<String>,
     pub transfer_requirement_met: bool,
@@ -45,6 +49,7 @@ pub struct ScenarioOutcome {
 /// One in-progress scenario session.
 pub struct ScenarioSession {
     scenario: PackScenario,
+    session_id: String,
     current: String,
     active_recovery: Option<RecoveryBranch>,
     support_used: Vec<u8>,
@@ -54,11 +59,14 @@ pub struct ScenarioSession {
 }
 
 impl ScenarioSession {
-    /// Begin at the scenario's first node.
-    pub fn begin(scenario: &PackScenario) -> Option<Self> {
+    /// Begin at the scenario's first node. `session_id` is supplied by the
+    /// caller (the app owns session identity, so the engine stays
+    /// deterministic and testable) and must be unique per sitting.
+    pub fn begin(scenario: &PackScenario, session_id: &str) -> Option<Self> {
         let first = scenario.nodes.first()?.id.clone();
         Some(Self {
             scenario: scenario.clone(),
+            session_id: session_id.to_string(),
             current: first,
             active_recovery: None,
             support_used: Vec::new(),
@@ -225,6 +233,7 @@ impl ScenarioSession {
         let met = self.transfer_requirement_met();
         ScenarioOutcome {
             scenario_id: self.scenario.id,
+            session_id: self.session_id,
             nodes: self.records,
             transfers_completed: self.transfers,
             transfer_requirement_met: met,
@@ -249,11 +258,20 @@ impl ScenarioSession {
                 AttemptDraft::new(
                     vec![node_id.clone()],
                     lts_domain::ActivityModality::Interaction,
-                    node_id,
+                    node_id.clone(),
                     pack_id,
                     pack_version,
                 )
-                .attempt_group(format!("{}:{}", outcome.scenario_id, rec.node_id))
+                // R03: the node is the prompt the learner answered, so it
+                // is the prompt family; the attempt group is scoped to this
+                // sitting, and the event id carries the session so a replay
+                // can never be swallowed by an `ON CONFLICT` on the first
+                // run's id.
+                .prompt_family(node_id)
+                .attempt_group(format!(
+                    "{}:{}:{}",
+                    outcome.scenario_id, outcome.session_id, rec.node_id
+                ))
                 .support(
                     SupportLevel::new(rec.support_level).unwrap_or_else(SupportLevel::independent),
                     Vec::new(),
@@ -264,7 +282,10 @@ impl ScenarioSession {
                     Score::Incorrect
                 })
                 .finish(
-                    EventId::new(format!("{}:node:{}", outcome.scenario_id, i)),
+                    EventId::new(format!(
+                        "{}:{}:node:{}",
+                        outcome.scenario_id, outcome.session_id, i
+                    )),
                     clock(i),
                     profile_id.clone(),
                 )

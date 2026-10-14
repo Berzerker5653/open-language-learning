@@ -181,7 +181,7 @@ fn reading_evidence_is_independent_from_listening_and_speaking() {
     assert!(
         out.evidence
             .support_actions
-            .contains(&"romaji-revealed".to_string())
+            .contains(&"romaji-substitution".to_string())
     );
     assert!(!out.independent_success);
 

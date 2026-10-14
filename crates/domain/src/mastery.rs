@@ -68,6 +68,63 @@ pub enum EvidenceAvailability {
 pub struct SupportLevel(u8);
 
 pub const MAX_SUPPORT_LEVEL: u8 = 5;
+/// Canonical support-action vocabulary, recorded in
+/// `evidence_events.support_actions_json`.
+///
+/// One source for three consumers: the scaffold ladder
+/// (`lts_activity::support::SupportAction::label`) emits these names,
+/// `docs/assessment/MASTERY_POLICY.yaml` `support.disqualifying_for` lists
+/// them per assessed dimension, and the policy drops matching evidence for
+/// that dimension only (docs/03 §5). Anything outside `ALL` is a policy
+/// validation error, so a typo can never silently disable a disqualifier.
+pub mod support_actions {
+    // Scaffolds available during an attempt (docs/03 §5 ladder).
+    pub const CONTEXT_CUE: &str = "context-cue";
+    pub const REPLAY: &str = "replay";
+    pub const SLOW_INPUT: &str = "slow-input";
+    pub const MEANING_HINT: &str = "meaning-hint";
+    pub const TEXT_CUE: &str = "text-cue";
+    pub const WORD_BANK: &str = "word-bank";
+    pub const CHOICE_SUPPORT: &str = "choice-support";
+    pub const PARTIAL_TRANSLATION: &str = "partial-translation";
+    pub const RESPONSE_TEMPLATE: &str = "response-template";
+    pub const FULL_TRANSLATION: &str = "full-translation";
+    pub const MODELED_RESPONSE: &str = "modeled-response";
+    // Reveals that hand over the assessed construct: disqualifying for the
+    // dimension they supply, never for the others.
+    pub const SUPPLIED_READING: &str = "supplied-reading";
+    pub const ROMAJI_SUBSTITUTION: &str = "romaji-substitution";
+    pub const AUDIO_PLAYBACK_OF_TARGET: &str = "audio-playback-of-target";
+    pub const TRANSLATION: &str = "translation";
+    pub const TRANSCRIPT: &str = "transcript";
+    pub const DICTATION_OF_TARGET: &str = "dictation-of-target";
+    pub const TEXT_INPUT_SUBSTITUTION: &str = "text-input-substitution";
+    pub const TARGET_VISIBLE_IN_OPTIONS: &str = "target-visible-in-options";
+
+    /// Every name the policy may list. The policy loader rejects unknown
+    /// names for the same reason the ladder emits only these.
+    pub const ALL: [&str; 19] = [
+        CONTEXT_CUE,
+        REPLAY,
+        SLOW_INPUT,
+        MEANING_HINT,
+        TEXT_CUE,
+        WORD_BANK,
+        CHOICE_SUPPORT,
+        PARTIAL_TRANSLATION,
+        RESPONSE_TEMPLATE,
+        FULL_TRANSLATION,
+        MODELED_RESPONSE,
+        SUPPLIED_READING,
+        ROMAJI_SUBSTITUTION,
+        AUDIO_PLAYBACK_OF_TARGET,
+        TRANSLATION,
+        TRANSCRIPT,
+        DICTATION_OF_TARGET,
+        TEXT_INPUT_SUBSTITUTION,
+        TARGET_VISIBLE_IN_OPTIONS,
+    ];
+}
 
 impl SupportLevel {
     pub fn new(level: u8) -> Option<Self> {

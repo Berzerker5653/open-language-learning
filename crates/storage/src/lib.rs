@@ -20,7 +20,10 @@ mod scheduler;
 
 pub use error::Error;
 pub use evidence::{NewRecording, Recording};
-pub use export::{EXPORT_FORMAT_VERSION, ExportBundle, ExportOptions, ImportError, ImportMode};
+pub use export::{
+    EXPORT_FORMAT_VERSION, ExportBundle, ExportOptions, ImportError, ImportMode,
+    MIN_SUPPORTED_FORMAT_VERSION,
+};
 pub use mastery::MasterySnapshot;
 pub use migrations::SCHEMA_VERSION;
 pub use mined::{AddMinedOutcome, MinedItem, NewMinedItem};

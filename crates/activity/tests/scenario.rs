@@ -25,7 +25,7 @@ fn walk(session: &mut ScenarioSession, intents: &[&str]) -> Vec<StepResult> {
 #[test]
 fn graph_supports_intents_ladder_recovery_and_transfers() {
     let scenario = load("valid-full", "intro.yaml");
-    let mut s = ScenarioSession::begin(&scenario).unwrap();
+    let mut s = ScenarioSession::begin(&scenario, "sess-1").unwrap();
 
     // Intents: wrong action is rejected and names the pack-defined
     // recovery branches.
@@ -79,7 +79,7 @@ fn graph_supports_intents_ladder_recovery_and_transfers() {
 #[test]
 fn evidence_events_record_support_per_node() {
     let scenario = load("valid-full", "intro.yaml");
-    let mut s = ScenarioSession::begin(&scenario).unwrap();
+    let mut s = ScenarioSession::begin(&scenario, "sess-1").unwrap();
     s.use_support(3);
     s.attempt("greeting");
     s.attempt("name-question");
@@ -100,7 +100,12 @@ fn evidence_events_record_support_per_node() {
     );
     assert_eq!(
         events[0].attempt_group_id.as_deref(),
-        Some("es.scenario.intro.meeting:es.activity.intro.meeting.open")
+        Some("es.scenario.intro.meeting:sess-1:es.activity.intro.meeting.open")
+    );
+    assert_eq!(
+        events[0].prompt_family_id.as_ref().map(|p| p.as_str()),
+        Some("es.activity.intro.meeting.open"),
+        "the node the learner answered is the prompt"
     );
 }
 
@@ -113,7 +118,7 @@ fn runtime_is_language_agnostic() {
     let ja = load("ja-curriculum-draft", "service.yaml");
 
     for scenario in [&es, &ja] {
-        let mut s = ScenarioSession::begin(scenario).unwrap();
+        let mut s = ScenarioSession::begin(scenario, "sess-runtime").unwrap();
         let first = s.current_node().id.clone();
 
         // A wrong intent at the opening node yields recovery options.
@@ -161,7 +166,7 @@ fn ja_seed_first_meeting_graph_runs_end_to_end() {
     assert_eq!(scenario.nodes.len(), 3);
     assert_eq!(scenario.transfer_variants_required, 2);
 
-    let mut s = ScenarioSession::begin(&scenario).unwrap();
+    let mut s = ScenarioSession::begin(&scenario, "sess-ja").unwrap();
     // Wrong intent at the opening node names the pack-defined repair.
     assert_eq!(
         s.attempt("say-closing"),
@@ -203,4 +208,46 @@ fn ja_seed_first_meeting_graph_runs_end_to_end() {
     assert_eq!(out.nodes.len(), 3);
     assert!(out.nodes.iter().all(|n| n.succeeded));
     assert!(out.transfer_requirement_met);
+}
+
+/// Review finding R03: the same scenario run twice must not share event ids
+/// or attempt groups. Keyed on the scenario id alone, a replay collided
+/// with the first run: the store's `ON CONFLICT(event_id) DO NOTHING`
+/// discarded the second run's rows, and the policy treated a later sitting
+/// as a retry of the first.
+#[test]
+fn replaying_a_scenario_is_a_separate_sitting() {
+    let scenario = load("valid-full", "intro.yaml");
+    let run = |session: &str| -> Vec<String> {
+        let mut s = ScenarioSession::begin(&scenario, session).unwrap();
+        s.attempt("greeting");
+        s.attempt("name-question");
+        let out = s.finish();
+        ScenarioSession::evidence_events(
+            &out,
+            "org.openlanguage.test-full",
+            "0.1.0",
+            &lts_domain::ProfileId::new("p1"),
+            |i| format!("2026-10-0{i}:12:00:00Z"),
+        )
+        .iter()
+        .map(|e| {
+            format!(
+                "{}|{}",
+                e.event_id.as_str(),
+                e.attempt_group_id.as_deref().unwrap_or("")
+            )
+        })
+        .collect()
+    };
+    let first = run("sess-a");
+    let second = run("sess-b");
+    assert_eq!(first.len(), 2);
+    assert_eq!(second.len(), 2);
+    for row in &second {
+        assert!(
+            !first.contains(row),
+            "the replay reused a first-run identity: {row}"
+        );
+    }
 }

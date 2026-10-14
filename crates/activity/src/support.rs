@@ -56,22 +56,30 @@ impl SupportAction {
         }
     }
 
-    /// Stable machine-readable label recorded in evidence.
+    /// Stable machine-readable label recorded in evidence. The names live
+    /// in `lts_domain::support_actions` — the same vocabulary
+    /// `MASTERY_POLICY.yaml` `support.disqualifying_for` lists and the
+    /// policy enforces — so a scaffold the learner took can never be
+    /// recorded under a name the rules do not know.
     pub fn label(self) -> &'static str {
+        use lts_domain::support_actions as sa;
         match self {
-            Self::ContextCue => "context-cue",
-            Self::Replay => "replay",
-            Self::SlowInput => "slow-input",
-            Self::MeaningHint => "meaning-hint",
-            Self::TextCue => "text-cue",
-            Self::WordBank => "word-bank",
-            Self::ChoiceSupport => "choice-support",
-            Self::PartialTranslation => "partial-translation",
-            Self::ResponseTemplate => "response-template",
-            Self::FullTranslation => "full-translation",
-            Self::ModeledResponse => "modeled-response",
-            Self::SuppliedReading => "supplied-reading",
-            Self::RomajiReveal => "romaji-revealed",
+            Self::ContextCue => sa::CONTEXT_CUE,
+            Self::Replay => sa::REPLAY,
+            Self::SlowInput => sa::SLOW_INPUT,
+            Self::MeaningHint => sa::MEANING_HINT,
+            Self::TextCue => sa::TEXT_CUE,
+            Self::WordBank => sa::WORD_BANK,
+            Self::ChoiceSupport => sa::CHOICE_SUPPORT,
+            Self::PartialTranslation => sa::PARTIAL_TRANSLATION,
+            Self::ResponseTemplate => sa::RESPONSE_TEMPLATE,
+            Self::FullTranslation => sa::FULL_TRANSLATION,
+            Self::ModeledResponse => sa::MODELED_RESPONSE,
+            Self::SuppliedReading => sa::SUPPLIED_READING,
+            // The romaji reveal is the romanisation crutch the policy names
+            // `romaji-substitution` (policy 0.2.0): one name, one meaning,
+            // so the disqualifier for production-writing actually matches.
+            Self::RomajiReveal => sa::ROMAJI_SUBSTITUTION,
         }
     }
 

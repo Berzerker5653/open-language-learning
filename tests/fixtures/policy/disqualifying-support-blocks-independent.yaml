@@ -1,0 +1,46 @@
+name: disqualifying-support-blocks-independent
+notes: >
+  Review finding R04: writing attempts answered after the romaji of the
+  target were shown. `support.disqualifying_for.production-writing` lists
+  `romaji-substitution`, so this support supplies the assessed construct:
+  the evidence grants no credit for production-writing at all, in either
+  direction — three hinted "correct" answers never reach `independent`,
+  and they are not treated as failures.
+events:
+  - event_id: ev-1
+    occurred_at: "2026-10-02T12:00:00Z"
+    modality: production-writing
+    outcome: scored
+    score: correct
+    support_level: 1
+    support_actions: [romaji-substitution]
+    activity_id: ja.activity.writing-romaji
+    prompt_family_id: ja.expr.reply.email
+    assessment_kind: formative
+    attempt_group_id: null
+  - event_id: ev-2
+    occurred_at: "2026-10-02T12:05:00Z"
+    modality: production-writing
+    outcome: scored
+    score: correct
+    support_level: 1
+    support_actions: [romaji-substitution]
+    activity_id: ja.activity.writing-romaji
+    prompt_family_id: ja.expr.reply.email.work
+    assessment_kind: formative
+    attempt_group_id: null
+  - event_id: ev-3
+    occurred_at: "2026-10-02T12:09:00Z"
+    modality: production-writing
+    outcome: scored
+    score: correct
+    support_level: 1
+    support_actions: [romaji-substitution]
+    activity_id: ja.activity.writing-romaji
+    prompt_family_id: ja.expr.reply.email.friend
+    assessment_kind: formative
+    attempt_group_id: null
+corrections: []
+expectations:
+  - dimension: production-writing
+    expected_state: unseen

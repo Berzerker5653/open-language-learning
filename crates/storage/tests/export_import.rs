@@ -7,7 +7,7 @@ use lts_domain::{
 };
 use lts_storage::{
     ContentVersion, ExportOptions, ImportError, ImportMode, LearnerGoal, MasterySnapshot,
-    NewRecording, PackInstallation, SchedulerRecord, Store,
+    NewMinedItem, NewRecording, PackInstallation, SchedulerRecord, Store,
 };
 use serde_json::json;
 
@@ -115,6 +115,45 @@ fn seed(store: &Store) -> String {
             },
         )
         .unwrap();
+    // Saved words (word mining) are learner-owned content, with the
+    // schedule row anchored to one of them (review finding R05).
+    store
+        .add_mined(
+            pid,
+            NewMinedItem {
+                id: "mine-cat",
+                surface: "猫",
+                reading: Some("ねこ"),
+                gloss: Some("cat"),
+                source_citation: "es.story.demo.cat",
+                created_at: "2026-10-02T00:00:00Z",
+            },
+        )
+        .unwrap();
+    store
+        .add_mined(
+            pid,
+            NewMinedItem {
+                id: "mine-dog",
+                surface: "犬",
+                reading: None,
+                gloss: Some("dog"),
+                source_citation: "",
+                created_at: "2026-10-02T00:00:00Z",
+            },
+        )
+        .unwrap();
+    store
+        .save_scheduler_state(
+            pid,
+            &SchedulerRecord {
+                item_id: "mine-cat".into(),
+                scheduler: "fsrs-spike-0.1.0+mined".into(),
+                params_json: "{\"stability_days\":2.0}".into(),
+                due_at: "2026-10-06T00:00:00Z".into(),
+            },
+        )
+        .unwrap();
     store
         .retain_recording(
             pid,
@@ -169,6 +208,25 @@ fn round_trip_preserves_evidence_mastery_inputs_and_settings() {
         dst.scheduler_state(&new_id).unwrap(),
         bundle.scheduler_state
     );
+    // R05: the learner's own words come back — surface, reading, gloss and
+    // citation — together with the schedule row that holds their due state.
+    assert_eq!(dst.mined_items(&new_id).unwrap(), bundle.mined_items);
+    assert_eq!(
+        dst.mined_items(&new_id)
+            .unwrap()
+            .iter()
+            .find(|m| m.id == "mine-cat")
+            .unwrap()
+            .source_citation,
+        "es.story.demo.cat"
+    );
+    let restored_schedule = dst.scheduler_state(&new_id).unwrap();
+    let mined_row = restored_schedule
+        .iter()
+        .find(|s| s.item_id == "mine-cat")
+        .expect("the saved word's schedule survives the round trip");
+    assert_eq!(mined_row.due_at, "2026-10-06T00:00:00Z");
+    assert_eq!(mined_row.scheduler, "fsrs-spike-0.1.0+mined");
     assert_eq!(dst.selected_packs(&new_id).unwrap(), bundle.selected_packs);
     assert_eq!(
         dst.content_version("org.openlanguage.test", "es.lex.greet.hola")
@@ -279,4 +337,153 @@ fn unknown_bundle_versions_are_rejected() {
             .unwrap_err(),
         ImportError::UnsupportedFormatVersion(999)
     ));
+}
+
+/// R05 acceptance: an old-format bundle stays importable. Version 1 has no
+/// `mined_items` field at all; it must still restore the learner's record
+/// rather than being rejected, and it honestly carries no saved words.
+#[test]
+fn version_1_bundles_remain_importable_without_saved_words() {
+    let src = Store::in_memory().unwrap();
+    let pid = seed(&src);
+    let bundle = src
+        .export_profile(&pid, "2026-10-04T00:00:00Z", &ExportOptions::default())
+        .unwrap();
+    assert_eq!(bundle.format_version, 2, "exports write the current format");
+    let mut doc = serde_json::to_value(&bundle).unwrap();
+    doc["format_version"] = json!(1);
+    doc.as_object_mut().unwrap().remove("mined_items");
+
+    let dst = Store::in_memory().unwrap();
+    let legacy: lts_storage::ExportBundle = serde_json::from_str(&doc.to_string()).unwrap();
+    assert!(legacy.mined_items.is_empty());
+    let new_id = dst
+        .import_profile(&legacy, &ImportMode::NewProfile)
+        .expect("a version 1 bundle stays importable");
+    assert_eq!(dst.evidence_count(&new_id).unwrap(), 2);
+    assert_eq!(
+        dst.get_profile(&new_id).unwrap().unwrap().display_name,
+        "Test Learner"
+    );
+    assert!(
+        dst.mined_items(&new_id).unwrap().is_empty(),
+        "a version 1 bundle carries no saved words to restore"
+    );
+}
+
+/// R06 acceptance: restoring a backup into the same store must not quietly
+/// lose observations. Global ids (events, corrections, saved words,
+/// recordings) collide with the rows the original profile still owns, so the
+/// copy gets its own ids and keeps every row it carried.
+#[test]
+fn restoring_into_the_same_store_keeps_every_observation() {
+    let store = Store::in_memory().unwrap();
+    let pid = seed(&store);
+    let bundle = store
+        .export_profile(
+            &pid,
+            "2026-10-04T00:00:00Z",
+            &ExportOptions {
+                include_recordings: true,
+            },
+        )
+        .unwrap();
+
+    let copy = store
+        .import_profile(&bundle, &ImportMode::NewProfile)
+        .unwrap();
+    assert_ne!(copy, pid);
+    assert_eq!(
+        store.evidence_count(&copy).unwrap(),
+        2,
+        "the copy keeps both attempts, not zero"
+    );
+    assert_eq!(
+        store.evidence_count(&pid).unwrap(),
+        2,
+        "the original is untouched"
+    );
+    assert_eq!(store.mined_items(&copy).unwrap().len(), 2);
+    assert_eq!(
+        store
+            .mined_items(&copy)
+            .unwrap()
+            .iter()
+            .filter(|m| m.surface == "猫")
+            .count(),
+        1
+    );
+    // Saved words had to be re-issued (the original owns those ids), and the
+    // schedule row follows the word it belongs to.
+    let copy_ids: Vec<String> = store
+        .mined_items(&copy)
+        .unwrap()
+        .iter()
+        .map(|m| m.id.clone())
+        .collect();
+    assert!(!copy_ids.contains(&"mine-cat".to_string()));
+    let schedule = store.scheduler_state(&copy).unwrap();
+    assert_eq!(schedule.len(), 2, "both schedule rows moved to the copy");
+    assert!(
+        schedule
+            .iter()
+            .any(|s| copy_ids.contains(&s.item_id) && s.scheduler == "fsrs-spike-0.1.0+mined"),
+        "the saved word's schedule is anchored to the restored word"
+    );
+    // The correction still names an event that belongs to the copy.
+    let corrected = store.corrected_event_ids(&copy).unwrap();
+    assert_eq!(corrected.len(), 1);
+    assert!(
+        store
+            .evidence_for_profile(&copy)
+            .unwrap()
+            .iter()
+            .any(|e| e.event_id.as_str() == corrected[0]),
+        "a correction cannot be left pointing at another profile's event"
+    );
+}
+
+/// R06 acceptance: every import failure leaves existing data unchanged. The
+/// probe writes a deliberately contradictory bundle (two saved words with the
+/// same surface, which the store forbids per profile). Because `Overwrite`
+/// deletes the profile first, an unwound attempt would have destroyed the
+/// learner's words and still reported an error.
+#[test]
+fn a_failed_import_leaves_existing_data_exactly_as_it_was() {
+    let store = Store::in_memory().unwrap();
+    let pid = seed(&store);
+    let mut bundle = store
+        .export_profile(&pid, "2026-10-04T00:00:00Z", &ExportOptions::default())
+        .unwrap();
+    let mut saved = bundle.mined_items.clone();
+    let mut clone = saved[0].clone();
+    clone.id = "mine-dupe".into();
+    saved.push(clone);
+    bundle.mined_items = saved;
+
+    let before_words = store.mined_items(&pid).unwrap();
+    let before_events = store.evidence_count(&pid).unwrap();
+    let err = store
+        .import_profile(&bundle, &ImportMode::Overwrite)
+        .expect_err("a bundle that violates the store's own rules must fail");
+    assert!(
+        format!("{err}").contains("already present") || format!("{err}").contains("UNIQUE"),
+        "unexpected error: {err}"
+    );
+    assert_eq!(
+        store
+            .get_profile(&pid)
+            .expect("readable")
+            .expect("the failed overwrite kept the profile")
+            .display_name,
+        "Test Learner"
+    );
+    assert_eq!(
+        store.mined_items(&pid).unwrap(),
+        before_words,
+        "saved words survived the failed restore"
+    );
+    assert_eq!(store.evidence_count(&pid).unwrap(), before_events);
+    assert_eq!(store.goals(&pid).unwrap().len(), 1);
+    assert_eq!(store.scheduler_state(&pid).unwrap().len(), 2);
 }

@@ -37,6 +37,32 @@ pub fn derive_mastery(
     corrections: &[EvidenceCorrection],
     now: &str,
 ) -> Result<DerivedMastery, String> {
+    derive_mastery_in_pack(
+        policy,
+        content_id,
+        dimension,
+        events,
+        corrections,
+        now,
+        None,
+    )
+}
+
+/// Derivation with pack scope. When `pack_scope` names a pack, only
+/// evidence recorded against that pack (or recorded before pack
+/// attribution existed) can grant credit for the content id, so two
+/// installed packs that declare the same content id never share mastery
+/// (review finding R07). Unattributed evidence stays visible: dropping it
+/// would silently erase a learner's history.
+pub fn derive_mastery_in_pack(
+    policy: &Policy,
+    content_id: &str,
+    dimension: ActivityModality,
+    events: &[EvidenceEvent],
+    corrections: &[EvidenceCorrection],
+    now: &str,
+    pack_scope: Option<&str>,
+) -> Result<DerivedMastery, String> {
     let excluded: std::collections::HashSet<&str> = corrections
         .iter()
         .flat_map(|c| c.references.iter().map(|r| r.as_str()))
@@ -44,6 +70,7 @@ pub fn derive_mastery(
 
     let inputs: Vec<ObsInput<'_>> = events
         .iter()
+        .filter(|e| pack_scope.is_none_or(|p| e.pack_id.is_empty() || e.pack_id == p))
         .filter(|e| e.modality == dimension)
         .filter(|e| e.targets.iter().any(|t| t.as_str() == content_id))
         .filter(|e| !excluded.contains(e.event_id.as_str()))
@@ -53,13 +80,17 @@ pub fn derive_mastery(
             occurred_at: &e.occurred_at,
             score: e.score.unwrap(),
             support: e.support_level.value(),
+            activity_id: e.activity_id.as_str(),
             prompt_family_id: e.prompt_family_id.as_ref().map(|p| p.as_str()),
             attempt_group_id: e.attempt_group_id.as_deref(),
+            support_actions: &e.support_actions,
             assessment: e.assessment_kind,
         })
         .collect();
 
-    let obs = policy::observations(policy, inputs)?;
+    // Dimension-scoped: the policy drops evidence whose recorded support
+    // supplied this dimension's assessed construct before the ladder runs.
+    let obs = policy::observations(policy, dimension, inputs)?;
     let state = policy::ladder(policy, &obs);
     let confidence = confidence(policy, &obs, state, now)?;
     let needs_refresh = state != MasteryState::Unseen
@@ -109,9 +140,13 @@ fn confidence(
         successes.iter().map(|o| o.support as f32).sum::<f32>() / successes.len() as f32
     };
     let support_factor = (1.0 - 0.08 * avg_support).max(0.5);
-    // Diversity: distinct prompt families out of 3.
-    let families: std::collections::HashSet<&str> =
-        successes.iter().map(|o| o.family.as_str()).collect();
+    // Diversity: distinct declared prompt families out of 3. Evidence that
+    // never recorded a family contributes no diversity credit — absence is
+    // not evidence of variety (policy 0.2.0).
+    let families: std::collections::HashSet<&str> = successes
+        .iter()
+        .filter_map(|o| o.family.as_deref())
+        .collect();
     let diversity_factor = 0.6 + 0.4 * (families.len() as f32 / 3.0).min(1.0);
     // Recency: full weight for 30 days, linear to 0.5 by 90, floor 0.5.
     let recency_factor = match obs.last() {
