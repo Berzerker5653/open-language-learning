@@ -45,7 +45,9 @@ describe("ruby annotation (K-54)", () => {
     expect(html).not.toContain("<rt>");
     expect(html).not.toContain("<ruby");
     expect(html).toContain("watashi");
-    expect(html).toContain('<small class="romaji">watashi</small>');
+    // ADR-0029: the transliteration run is pinned LTR too, so it stays
+    // readable when the pack container around it is RTL.
+    expect(html).toContain('<small class="romaji" dir="ltr">watashi</small>');
     // Mixed kana+latin readings are transliterations too: kept out of <rt>.
     expect(render("私", "watashi (わたし)")).not.toContain("<rt>");
     // A kana reading is unaffected: it is the rt annotation.

@@ -17,6 +17,8 @@ export interface InstalledPack {
   display_name: string;
   locale: string;
   trust_state: string;
+  /** `capabilities.rtl` from the pack manifest (ADR-0029). */
+  rtl: boolean;
 }
 
 export interface CatalogEntry {

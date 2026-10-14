@@ -2468,10 +2468,15 @@ export function App() {
   // the active pack's own review-posture tallies, shown wherever the
   // pack is named. Null (no claim) until installed/claims data loads.
   const activeClaims = claims?.find((c) => c.pack_id === activeIds[0]);
+  // ADR-0029: the pack's own manifest declares whether its content is written
+  // right-to-left (`capabilities.rtl`); the host reads it and ships it on the
+  // installed-pack listing. It steers only pack-text containers, never the
+  // banner or route navigation.
+  const activeRecord = installed.find((i) => i.pack_id === activeIds[0]);
   const activePack =
     activeIds[0] && activeClaims
       ? {
-          name: installed.find((i) => i.pack_id === activeIds[0])?.display_name ?? activeIds[0],
+          name: activeRecord?.display_name ?? activeIds[0],
           posture: packPosture(activeClaims.postures),
         }
       : null;
@@ -2480,6 +2485,8 @@ export function App() {
     <AppShell
       productName="Open Language Learning Platform"
       nav={[]}
+      packDirection={activeRecord?.rtl ? "rtl" : "ltr"}
+      packLocale={activeRecord?.locale}
       routeNav={
         <nav aria-label="Routes" className="routes">
           {/* K-81 option A (owner 2026-10-10): five destinations. The modes
@@ -2969,7 +2976,11 @@ export function App() {
           )}
           {kanjiActive && kanjiTask ? (
             <div className="field">
-              <p className="prompt" lang="ja">
+              <p
+                className="prompt"
+                dir={activeRecord?.rtl ? "rtl" : undefined}
+                lang={activeRecord?.locale}
+              >
                 {kanjiActive.character}
               </p>
               <p>
@@ -2978,7 +2989,7 @@ export function App() {
                   {kanjiActive.mnemonic ? (
                     <>
                       {" — "}
-                      <em>{kanjiActive.mnemonic}</em>
+                      <em dir="ltr">{kanjiActive.mnemonic}</em>
                     </>
                   ) : null}
                 </small>
@@ -2999,7 +3010,9 @@ export function App() {
               {kanjiCards.map((c) => (
                 <li key={c.id}>
                   <button type="button" className="btn" onClick={() => void startKanji(c)}>
-                    <span lang="ja">{c.character}</span>{" "}
+                    <span dir={activeRecord?.rtl ? "rtl" : undefined} lang={activeRecord?.locale}>
+                      {c.character}
+                    </span>{" "}
                     <small>
                       {(c.meaning_due ?? c.reading_due)
                         ? `due ${c.meaning_due ?? c.reading_due}`

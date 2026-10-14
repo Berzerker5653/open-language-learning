@@ -9,6 +9,7 @@ const installed: InstalledPack[] = [
     display_name: "Japanese (demo lexicon)",
     locale: "ja-JP",
     trust_state: "community",
+    rtl: false,
   },
   {
     pack_id: "community.example.esperanto",
@@ -16,6 +17,7 @@ const installed: InstalledPack[] = [
     display_name: "Esperanto Community Pack",
     locale: "eo",
     trust_state: "community",
+    rtl: false,
   },
 ];
 

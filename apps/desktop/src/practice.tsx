@@ -5,6 +5,7 @@
  */
 import { StressText } from "./stress";
 import { Ruby } from "./ruby";
+import { LatinText, PackText, usePackTextAttrs } from "@openlang/ui";
 
 export interface PracticeTaskView {
   item_id: string;
@@ -64,13 +65,15 @@ export interface PracticeRunnerProps {
 }
 
 export function PracticeRunner(p: PracticeRunnerProps) {
+  const packAttrs = usePackTextAttrs();
+
   return (
     <section aria-label="Practice">
       {p.routeHeading ? <h1>{p.routeHeading}</h1> : null}
       {p.task.surface ? (
         <>
           <h2>{p.heading ?? "What does this mean?"}</h2>
-          <p className="prompt" lang="ja">
+          <p className="prompt" {...packAttrs}>
             <Ruby surface={p.task.surface} furigana={p.task.furigana} />
           </p>
           {p.task.slots && p.task.slots.length > 0 ? (
@@ -88,13 +91,15 @@ export function PracticeRunner(p: PracticeRunnerProps) {
             </div>
           ) : null}
           {p.task.reading && (
-            <p lang="ja">
+            <p {...packAttrs}>
               <small>{p.stress ? <StressText text={p.task.reading} /> : p.task.reading}</small>
             </p>
           )}
           {p.task.romaji && (
             <p>
-              <small>{p.task.romaji}</small>
+              <small>
+                <LatinText>{p.task.romaji}</LatinText>
+              </small>
             </p>
           )}
           {!p.graded && !p.revealed && p.onReveal && (
@@ -158,7 +163,7 @@ export function PracticeRunner(p: PracticeRunnerProps) {
               disabled={p.graded}
               onClick={() => p.onChoose(i)}
             >
-              {choice}
+              <PackText>{choice}</PackText>
             </button>
           ))}
         </div>

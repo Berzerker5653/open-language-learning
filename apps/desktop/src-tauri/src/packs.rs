@@ -73,6 +73,10 @@ pub struct InstalledPack {
     pub display_name: String,
     pub locale: String,
     pub trust_state: String,
+    /// `capabilities.rtl` from the installed pack's own manifest.yaml; the
+    /// renderer flips text containers on this, see ADR-0029. Absent means
+    /// false, the schema default (`schemas/language-pack-manifest.schema.json`).
+    pub rtl: bool,
 }
 
 fn is_hex64(s: &str) -> bool {
@@ -410,7 +414,7 @@ fn display_for(data: &Path, pack_id: &str, version: &str, trust: &str) -> Instal
         .join(pack_id)
         .join(version)
         .join("manifest.yaml");
-    let (display_name, locale) = fs::read_to_string(&manifest)
+    let (display_name, locale, rtl) = fs::read_to_string(&manifest)
         .ok()
         .and_then(|s| serde_yaml::from_str::<serde_yaml::Value>(&s).ok())
         .map(|v| {
@@ -420,15 +424,21 @@ fn display_for(data: &Path, pack_id: &str, version: &str, trust: &str) -> Instal
                     .unwrap_or_default()
                     .to_string()
             };
-            (g("display_name"), g("target_locale"))
+            let rtl = v
+                .get("capabilities")
+                .and_then(|c| c.get("rtl"))
+                .and_then(|x| x.as_bool())
+                .unwrap_or(false);
+            (g("display_name"), g("target_locale"), rtl)
         })
-        .unwrap_or_else(|| (pack_id.to_string(), String::new()));
+        .unwrap_or_else(|| (pack_id.to_string(), String::new(), false));
     InstalledPack {
         pack_id: pack_id.into(),
         version: version.into(),
         display_name,
         locale,
         trust_state: trust.into(),
+        rtl,
     }
 }
 

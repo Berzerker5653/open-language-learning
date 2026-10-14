@@ -6,6 +6,7 @@
  * recording and IPC live in the App container so this stays testable.
  */
 
+import { LatinText, usePackTextAttrs } from "@openlang/ui";
 export interface DictationResult {
   matched: boolean | null;
   heard: string;
@@ -56,6 +57,7 @@ function reasonLabel(reason: string): string {
 
 export function DictationPractice(props: DictationProps) {
   const { sentence, target, result, recording, hasAttempt } = props;
+  const packAttrs = usePackTextAttrs();
   return (
     <section aria-label="Dictation practice">
       <h2>Speaking: say the sentence</h2>
@@ -65,12 +67,14 @@ export function DictationPractice(props: DictationProps) {
       </p>
       {sentence && (
         <div className="card" data-testid="dict-sentence">
-          <blockquote lang="ja" className="target-word">
+          <blockquote className="target-word" {...packAttrs}>
             {sentence.text}
           </blockquote>
           {sentence.gloss && (
             <p>
-              <small>{sentence.gloss}</small>
+              <small>
+                <LatinText>{sentence.gloss}</LatinText>
+              </small>
             </p>
           )}
           <button type="button" className="btn btn--quiet" onClick={() => props.onNewSentence()}>
@@ -82,7 +86,7 @@ export function DictationPractice(props: DictationProps) {
         Sentence to read (edit to use your own)
         <input
           type="text"
-          lang="ja"
+          {...packAttrs}
           value={target}
           onChange={(e) => props.onTargetChange(e.target.value)}
           disabled={recording}
@@ -111,12 +115,12 @@ export function DictationPractice(props: DictationProps) {
         <div aria-live="polite" className="card">
           {result.matched === true ? (
             <p data-testid="dict-match" className="notice">
-              That matches — I heard: <strong lang="ja">{result.heard}</strong>
+              That matches — I heard: <strong {...packAttrs}>{result.heard}</strong>
             </p>
           ) : result.matched === false ? (
             <p data-testid="dict-mismatch" className="notice">
-              I heard: <strong lang="ja">{result.heard}</strong> — that does not match{" "}
-              <strong lang="ja">{result.target}</strong>. Try again.
+              I heard: <strong {...packAttrs}>{result.heard}</strong> — that does not match{" "}
+              <strong {...packAttrs}>{result.target}</strong>. Try again.
             </p>
           ) : (
             <p data-testid="dict-abstain" className="notice">

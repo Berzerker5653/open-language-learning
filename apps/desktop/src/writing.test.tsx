@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
+import { PackDirectionProvider } from "@openlang/ui";
 import { WritingPractice } from "./writing";
 
 describe("writing practice surface", () => {
@@ -16,7 +17,25 @@ describe("writing practice surface", () => {
       />,
     );
     expect(html).toContain('type="text"');
-    expect(html).toContain('lang="ja"');
+    // ADR-0029: no hardcoded language tag. The answer field's language comes
+    // from the active pack, so an RTL pack gets an RTL ar-MA field and this
+    // provider-less render carries no `lang` at all.
+    expect(html).not.toContain('lang="ja"');
+    const arabic = renderToStaticMarkup(
+      <PackDirectionProvider rtl locale="ar-MA">
+        <WritingPractice
+          task={{ item_id: "ar.lex.salam", prompt_text: "السلام" }}
+          draft=""
+          graded={false}
+          correct={false}
+          onDraft={() => {}}
+          onSubmit={() => {}}
+          onHint={() => {}}
+        />
+      </PackDirectionProvider>,
+    );
+    expect(arabic).toContain('<p class="prompt" dir="rtl" lang="ar-MA">السلام</p>');
+    expect(arabic).toContain('id="writing-answer" type="text" dir="rtl" lang="ar-MA"');
     expect(html).toContain("IME supported");
     // No handwriting/stroke/canvas surface exists.
     for (const banned of ["canvas", "stroke", "handwriting", "trace"]) {

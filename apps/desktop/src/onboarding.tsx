@@ -7,6 +7,7 @@
  * live in the container so every step is renderable in tests.
  */
 import { progressLine, type EngineProgress } from "./progress";
+import { PackText } from "@openlang/ui";
 
 export interface PrivacyNotice {
   title: string;
@@ -18,6 +19,8 @@ export interface PackCandidate {
   display_name: string;
   locale: string;
   maturity: string;
+  /** `capabilities.rtl` from the pack manifest (ADR-0029). */
+  rtl: boolean;
 }
 
 export type OnboardingStep =
@@ -184,7 +187,10 @@ export function Onboarding(p: OnboardingProps) {
                     checked={p.selectedPack === pack.pack_id}
                     onChange={() => p.onSelectPack(pack.pack_id)}
                   />
-                  {pack.display_name} ({pack.locale}, {pack.maturity})
+                  <PackText rtl={pack.rtl} locale={pack.locale} tag="span">
+                    {pack.display_name}
+                  </PackText>{" "}
+                  ({pack.locale}, {pack.maturity})
                 </label>
                 <button
                   type="button"

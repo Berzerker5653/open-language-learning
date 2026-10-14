@@ -6,6 +6,7 @@
  * numeric grades and no mastery are ever shown here (docs/05).
  */
 
+import { PackText, usePackTextAttrs } from "@openlang/ui";
 export interface PronunciationCorrection {
   feature_id: string;
   band: string;
@@ -96,16 +97,17 @@ export interface PronunciationProps {
 
 export function PronunciationPractice(props: PronunciationProps) {
   const { shortText, longText, result, recording, hasAttempt } = props;
+  const packAttrs = usePackTextAttrs();
   return (
     <section aria-label="Pronunciation practice">
       <h1>Pronunciation: long vs short vowels</h1>
       <p className="prompt">
         Say both words, one after the other:{" "}
-        <strong lang="ja" className="target-word">
+        <strong className="target-word" {...packAttrs}>
           {shortText}
         </strong>{" "}
         then{" "}
-        <strong lang="ja" className="target-word">
+        <strong className="target-word" {...packAttrs}>
           {longText}
         </strong>
         . They differ only in vowel length — the second holds the あ about twice as long.
@@ -116,14 +118,14 @@ export function PronunciationPractice(props: PronunciationProps) {
           className="btn btn--quiet"
           onClick={() => props.onPlayReference("short")}
         >
-          Hear reference: {shortText}
+          Hear reference: <PackText>{shortText}</PackText>
         </button>
         <button
           type="button"
           className="btn btn--quiet"
           onClick={() => props.onPlayReference("long")}
         >
-          Hear reference: {longText}
+          Hear reference: <PackText>{longText}</PackText>
         </button>
         <button
           type="button"

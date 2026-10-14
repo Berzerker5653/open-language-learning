@@ -3,6 +3,7 @@
  * Japanese answers. The platform IME handles kana conversion; the app
  * never requires handwriting and renders no stroke/canvas surface.
  */
+import { usePackTextAttrs } from "@openlang/ui";
 import { StressText } from "./stress";
 
 export interface WritingTaskView {
@@ -26,22 +27,29 @@ export interface WritingPracticeProps {
 }
 
 export function WritingPractice(p: WritingPracticeProps) {
+  const packAttrs = usePackTextAttrs();
   return (
     <section aria-label="Writing practice">
       <h1>Writing practice</h1>
-      <p className="prompt">{p.task.prompt_text}</p>
+      <p className="prompt" {...packAttrs}>
+        {p.task.prompt_text}
+      </p>
       {p.task.reading_hint && (
-        <p aria-label="Reading hint" lang="ja">
+        <p aria-label="Reading hint" {...packAttrs}>
           {p.stress ? <StressText text={p.task.reading_hint} /> : p.task.reading_hint}
         </p>
       )}
-      {p.task.romaji_hint && <p aria-label="Romaji hint">{p.task.romaji_hint}</p>}
+      {p.task.romaji_hint && (
+        <p aria-label="Romaji hint" dir="ltr">
+          {p.task.romaji_hint}
+        </p>
+      )}
       <div className="field">
         <label htmlFor="writing-answer">Type the answer in Japanese (IME supported)</label>
         <input
           id="writing-answer"
           type="text"
-          lang="ja"
+          {...packAttrs}
           value={p.draft}
           onChange={(e) => p.onDraft(e.target.value)}
         />

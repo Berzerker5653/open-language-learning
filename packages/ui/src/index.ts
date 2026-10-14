@@ -4,3 +4,4 @@
  */
 
 export { AppShell } from "./AppShell.js";
+export { LatinText, PackDirectionProvider, PackText, usePackTextAttrs } from "./pack-direction.js";

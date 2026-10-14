@@ -99,6 +99,7 @@ const onboarding: OnboardingProps = {
       display_name: "Japanese demo",
       locale: "ja-JP",
       maturity: "community",
+      rtl: false,
     },
   ],
   selectedPack: null,

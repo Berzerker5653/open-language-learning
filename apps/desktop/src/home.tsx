@@ -7,6 +7,7 @@
  * streak/attendance surface anywhere (ADR-0002).
  */
 
+import { LatinText, PackText } from "@openlang/ui";
 export interface PlannedItem {
   item_id: string;
   content_id: string;
@@ -149,7 +150,7 @@ export function Home(p: HomeProps) {
       {p.noPack ? null : <p className="prompt">what to practice now</p>}
       {p.activePack ? (
         <p className="meta pack-posture">
-          <strong>{p.activePack.name}</strong> — {p.activePack.posture}
+          <PackText tag="strong">{p.activePack.name}</PackText> — {p.activePack.posture}
         </p>
       ) : p.noPack ? (
         <p className="notice" role="status">
@@ -174,7 +175,9 @@ export function Home(p: HomeProps) {
             {firstRun.map((step) => (
               <li key={step.goal_id ?? step.content_id ?? step.label}>
                 <span className="plan-reason">{KIND_LABELS[step.kind]}</span>
-                <span className="first-run-label">{step.label}</span>
+                <PackText tag="span" className="first-run-label">
+                  {step.label}
+                </PackText>
               </li>
             ))}
           </ol>
@@ -219,13 +222,13 @@ export function Home(p: HomeProps) {
                     <>
                       <span className="plan-reason">{REASON_LABELS[item.reason]}</span>
                       {item.surface ? (
-                        <strong className="plan-surface" lang="ja">
+                        <PackText tag="strong" className="plan-surface">
                           {item.surface}
-                        </strong>
+                        </PackText>
                       ) : (
                         <code>{item.content_id}</code>
                       )}
-                      {item.gloss && <span className="plan-gloss">{item.gloss}</span>}
+                      {item.gloss && <LatinText>{item.gloss}</LatinText>}
                     </>
                   );
                   return (

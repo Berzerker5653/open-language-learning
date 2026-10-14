@@ -5,6 +5,8 @@
  * never branches on language content.
  */
 
+import { PackText, usePackTextAttrs } from "@openlang/ui";
+
 /** K-75 readiness tier, derived natively from the pack goal map plus
  * derived mastery. The list arrives already ordered by it: playable, then
  * near, then later. */
@@ -96,6 +98,8 @@ function LockBadge({ kind, band }: { kind?: ScenarioLockKind | null; band?: stri
 }
 
 export function ScenarioPanel(p: ScenarioPanelProps) {
+  const packAttrs = usePackTextAttrs();
+
   if (p.outcome && !p.active) {
     return (
       <section aria-label="Scenario result">
@@ -125,14 +129,18 @@ export function ScenarioPanel(p: ScenarioPanelProps) {
     const failed = p.lastStep?.result === "not-satisfied";
     return (
       <section aria-label="Scenario">
-        <h2>{s.title}</h2>
-        {s.situation && <p className="notice">{s.situation}</p>}
+        <h2 {...packAttrs}>{s.title}</h2>
+        {s.situation && (
+          <p className="notice" {...packAttrs}>
+            {s.situation}
+          </p>
+        )}
         {p.error && (
           <p role="alert" className="alert">
             {p.error}
           </p>
         )}
-        <p aria-live="polite" className="prompt">
+        <p aria-live="polite" className="prompt" {...packAttrs}>
           {s.node.prompt}
         </p>
         {failed && (
@@ -154,7 +162,7 @@ export function ScenarioPanel(p: ScenarioPanelProps) {
                 className="btn btn--quiet"
                 onClick={() => p.onAttempt(a)}
               >
-                {a}
+                <PackText>{a}</PackText>
               </button>
             ))}
           </div>
@@ -168,7 +176,7 @@ export function ScenarioPanel(p: ScenarioPanelProps) {
                 className="btn btn--quiet"
                 onClick={() => p.onRecovery(r.id)}
               >
-                {r.prompt}
+                <PackText>{r.prompt}</PackText>
               </button>
             ))}
           </div>
@@ -237,17 +245,21 @@ export function ScenarioPanel(p: ScenarioPanelProps) {
       )}
       {recommended ? (
         <p className="notice" data-recommended-pointer="true">
-          Recommended next: {recommended.title}
+          Recommended next: <PackText>{recommended.title}</PackText>
         </p>
       ) : null}
       <ul className="scenario-list">
         {p.scenarios.map((s) => (
           <li key={s.scenario_id}>
             <h3>
-              {s.title}
+              <PackText>{s.title}</PackText>
               {s.recommended ? <span className="badge badge--active">recommended next</span> : null}
             </h3>
-            {s.situation && <p className="notice">{s.situation}</p>}
+            {s.situation && (
+              <p className="notice" {...packAttrs}>
+                {s.situation}
+              </p>
+            )}
             {s.unlocked ? (
               <div className="btn-row">
                 <button

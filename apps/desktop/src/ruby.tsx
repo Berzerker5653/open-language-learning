@@ -78,7 +78,9 @@ export function Ruby({ surface, furigana }: RubyProps) {
     return (
       <>
         {surface}
-        <small className="romaji">{reading}</small>
+        <small className="romaji" dir="ltr">
+          {reading}
+        </small>
       </>
     );
   }

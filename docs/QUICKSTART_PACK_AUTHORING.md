@@ -169,9 +169,13 @@ reach full pack conformance with **zero engine edits** (`crates/`, `apps/` and
 quality. Both stay `maturity: experimental`; the audio is labelled placeholder
 silence; the Arabic forms are standard-Arabic flavoured and unverified as
 Darija, which is recorded in `examples/ar-ma/review/UNRESOLVED.md`; and
-declaring RTL surfaced a real engine gap — nothing in `apps/desktop` reads
-`capabilities.rtl`, so the pack installs and then renders left-to-right. That
-gap is tracked as `RTL-001`; the measurements are in
+declaring RTL first surfaced a real gap — nothing in `apps/desktop` read
+`capabilities.rtl`, so the pack installed and then rendered left-to-right.
+`RTL-001` closed it: the host reads the flag out of the installed pack's own
+manifest and the renderer flips only pack-text containers (`dir="rtl"` plus the
+manifest locale in `lang`), while romanization, Latin glosses and the app chrome
+stay left-to-right — see `docs/adr/0029-rtl-direction-model.md` and
+`apps/desktop/src/rtl-direction.test.tsx`. The original measurements are in
 `state/evidence/PACK-AI-001/`.
 
 ## 5. Package, ship, roll back

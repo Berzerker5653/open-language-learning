@@ -116,6 +116,9 @@ struct PackCandidate {
     display_name: String,
     locale: String,
     maturity: String,
+    /// `capabilities.rtl` from the candidate's manifest.yaml; the renderer
+    /// flips its text containers on this (ADR-0029). Absent means false.
+    pub rtl: bool,
 }
 
 /// Pack display names come from the pack manifest's own `display_name`
@@ -133,11 +136,29 @@ fn manifest_display_name(pack_path: &Path, pack_id: &str) -> String {
         })
         .unwrap_or_else(|| pack_id.to_string())
 }
+
 /// K-59 (ADR-0019 variant pattern): where a pack-bundled build's staged
 /// pack sources live (`<resource_dir>/packs`). Set once at startup from
 /// the resource dir, exactly like `BUNDLED_SIDECAR`; unset for bare/dev
 /// builds, which resolve from the repo tree as always.
 static BUNDLED_PACKS: std::sync::OnceLock<PathBuf> = std::sync::OnceLock::new();
+
+/// `capabilities.rtl` read from the pack directory's own manifest.yaml.
+/// Absent key or absent file means false, the schema default
+/// (`schemas/language-pack-manifest.schema.json`); a non-bool value counts
+/// as absent. ADR-0029: this is the only renderer-facing use of the flag —
+/// the engine never consults it.
+fn manifest_rtl(pack_dir: &Path) -> bool {
+    std::fs::read_to_string(pack_dir.join("manifest.yaml"))
+        .ok()
+        .and_then(|s| serde_yaml::from_str::<serde_yaml::Value>(&s).ok())
+        .and_then(|v| {
+            v.get("capabilities")
+                .and_then(|c| c.get("rtl"))
+                .and_then(|x| x.as_bool())
+        })
+        .unwrap_or(false)
+}
 
 /// The dev-tree candidate table, named for reuse: production
 /// `bundled_packs()` and the K-59 dev-precedence test read the same
@@ -195,6 +216,7 @@ fn bundled_packs_at(
                         display_name: manifest_display_name(&path, pack_id),
                         locale: (*locale).into(),
                         maturity: (*maturity).into(),
+                        rtl: manifest_rtl(&path),
                     },
                     path,
                 )
@@ -239,6 +261,7 @@ fn bundled_packs_at(
                         display_name: manifest_display_name(&path, &entry.pack_id),
                         locale: entry.locale.clone(),
                         maturity: entry.maturity.clone(),
+                        rtl: manifest_rtl(&path),
                     },
                     path,
                 ))
@@ -283,6 +306,7 @@ fn available_packs_at(repo_root: &Path, data: &Path) -> Vec<PackCandidate> {
             display_name: installed.display_name,
             locale: installed.locale,
             maturity: installed.trust_state,
+            rtl: installed.rtl,
         });
     }
     out
@@ -6778,6 +6802,9 @@ mod tests {
             display_name: "test fixture".into(),
             locale: "ja-JP".into(),
             maturity: "community".into(),
+            // The fixture pack declares no capabilities.rtl, and the
+            // schema default is false.
+            rtl: false,
         })
     }
 
@@ -9033,6 +9060,70 @@ mod tests {
         assert_eq!(packs::installed_packs(data).len(), 1);
         // A pack that was never installed cannot be switched to.
         assert!(packs::switch_pack(data, &p.id, "community.example.absent").is_err());
+    }
+
+    /// ADR-0029: the renderer can only flip text containers if the flag
+    /// crosses IPC. An installed pack that declares `capabilities.rtl: true`
+    /// carries it through both `installed_packs` and the wizard's
+    /// `available_packs_at`; a pack whose manifest omits the key reports
+    /// false, the schema default.
+    #[test]
+    fn rtl_capability_reaches_the_renderer_through_pack_listing() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../..");
+        // examples/ar-ma declares capabilities.rtl: true and is gate-clean
+        // (scripts/ci.sh validates it with `langpack validate`).
+        let (bytes, _sha) = lts_langpack::archive::build(&root.join("examples/ar-ma")).unwrap();
+        use base64::Engine;
+        let b64 = base64::engine::general_purpose::STANDARD.encode(&bytes);
+        let inst = packs::import_pack_b64_report(data, &b64, &mut drop_stage).unwrap();
+        assert_eq!(inst.pack_id, "org.openlanguage.ar.scaffold");
+        assert!(inst.rtl, "declared capabilities.rtl reaches IPC");
+        let json = serde_json::to_value(&inst).unwrap();
+        assert_eq!(
+            json["rtl"],
+            serde_json::json!(true),
+            "the IPC payload carries rtl"
+        );
+
+        // A second pack with no capabilities.rtl key at all reports false.
+        let ja_dir = root.join("tests/fixtures/packs/ja-demo");
+        let (ja_bytes, _ja_sha) = lts_langpack::archive::build(&ja_dir).unwrap();
+        let ja_b64 = base64::engine::general_purpose::STANDARD.encode(&ja_bytes);
+        let ja = packs::import_pack_b64_report(data, &ja_b64, &mut drop_stage).unwrap();
+        assert_eq!(ja.pack_id, "org.openlanguage.ja-demo");
+        assert!(
+            !ja.rtl,
+            "absent capabilities.rtl means the schema default, false"
+        );
+
+        let listed = packs::installed_packs(data);
+        let ar_listed = listed
+            .iter()
+            .find(|p| p.pack_id == "org.openlanguage.ar.scaffold")
+            .expect("the installed RTL pack is listed");
+        assert!(ar_listed.rtl);
+        let candidates = available_packs_at(&root.join("apps/desktop"), data);
+        let ar = candidates
+            .iter()
+            .find(|c| c.pack_id == "org.openlanguage.ar.scaffold")
+            .expect("the installed RTL pack is offered to the wizard");
+        assert!(ar.rtl);
+        assert_eq!(
+            ar.locale, "ar-MA",
+            "the candidate locale comes from the manifest too"
+        );
+        let eo_dir = root.join("tests/fixtures/packs/eo-demo");
+        let (eo_bytes, _eo_sha) = lts_langpack::archive::build(&eo_dir).unwrap();
+        let eo_b64 = base64::engine::general_purpose::STANDARD.encode(&eo_bytes);
+        packs::import_pack_b64_report(data, &eo_b64, &mut drop_stage).unwrap();
+        let candidates = available_packs_at(&root.join("apps/desktop"), data);
+        let eo = candidates
+            .iter()
+            .find(|c| c.pack_id == "org.openlanguage.eo-demo")
+            .expect("the installed eo-demo fixture is offered to the wizard");
+        assert!(!eo.rtl, "non-RTL packs keep dir=ltr rendering");
     }
 
     /// Preview first-run journey on the ORIGINAL eo-demo pack: select +

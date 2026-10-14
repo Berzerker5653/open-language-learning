@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-13",
-  "active_task": "LIC-002",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "blocked",
@@ -902,16 +902,33 @@
       ]
     },
     "RTL-001": {
-      "status": "ready",
-      "attempts": 0,
-      "last_error": null,
-      "evidence": []
-    },
-    "LIC-002": {
-      "status": "in_progress",
+      "status": "done",
       "attempts": 1,
       "last_error": null,
-      "evidence": []
+      "evidence": [
+        "state/evidence/RTL-001/gates-2026-10-13.txt",
+        "apps/desktop/src/rtl-direction.test.tsx",
+        "packages/ui/src/pack-direction.tsx",
+        "packages/ui/src/pack-direction.test.tsx",
+        "apps/desktop/src-tauri/src/lib.rs",
+        "apps/desktop/src-tauri/src/packs.rs",
+        "docs/adr/0029-rtl-direction-model.md"
+      ]
+    },
+    "LIC-002": {
+      "status": "done",
+      "attempts": 1,
+      "last_error": null,
+      "evidence": [
+        "state/evidence/LIC-002/gates-2026-10-13.txt",
+        "crates/langpack/src/audit.rs",
+        "crates/langpack/tests/audit.rs",
+        "tests/fixtures/packs/valid-license-bysa-dropped/manifest.yaml",
+        "tests/fixtures/packs/valid-license-bysa-kept/manifest.yaml",
+        "docs/adr/0028-license-permissiveness-detection.md",
+        "docs/10_LICENSING_AND_PROVENANCE.md",
+        "docs/QUICKSTART_PACK_AUTHORING.md"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence."

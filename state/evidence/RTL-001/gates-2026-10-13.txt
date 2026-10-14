@@ -1,0 +1,31 @@
+RTL-001 direction model — 2026-10-13, working tree; node v26, rust 1.97.1
+final tree after the scenario/dictation/pronunciation conversions; the Rust side was unchanged by them
+
+=== packages/ui: direction primitives (ADR-0029) ===
+ Test Files  2 passed (2)
+      Tests  10 passed (10)
+
+=== apps/desktop: full vitest suite ===
+ Test Files  17 passed (17)
+      Tests  184 passed (184)
+
+=== apps/desktop: the RTL fixture test (verbose) ===
+ ✓ src/rtl-direction.test.tsx > pack direction (RTL-001, ADR-0029) > renders pack content right-to-left for a pack that declares rtl 8ms
+ ✓ src/rtl-direction.test.tsx > pack direction (RTL-001, ADR-0029) > keeps the shell itself left-to-right for an RTL pack 1ms
+ ✓ src/rtl-direction.test.tsx > pack direction (RTL-001, ADR-0029) > leaves an LTR pack unflipped but still language-tagged 1ms
+ ✓ src/rtl-direction.test.tsx > pack direction (RTL-001, ADR-0029) > flips the practice prompt and choices while romanization stays LTR 1ms
+ ✓ src/rtl-direction.test.tsx > pack direction (RTL-001, ADR-0029) > flips scenario dialogue but not the support chrome 1ms
+      Tests  5 passed (5)
+
+=== apps/desktop: tsc --noEmit ===
+tsc exit=0
+
+=== eslint + prettier over apps/desktop/src + packages/ui/src ===
+eslint exit=0
+All matched files use Prettier code style!
+
+=== rust (same tree; no Rust change after this section was captured) ===
+cargo test -p lts-desktop: test result: ok. 125 passed; 0 failed; 0 ignored; finished in 406.98s
+  includes rtl_capability_reaches_the_renderer_through_pack_listing (ar-MA archive -> installed_packs/available_packs_at)
+cargo fmt --all --check: clean
+cargo clippy -p lts-desktop --all-targets -- -D warnings: clean

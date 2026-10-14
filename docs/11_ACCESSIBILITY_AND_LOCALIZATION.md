@@ -63,6 +63,20 @@ Application chrome is separate from target-language curriculum. Support localiza
 
 Use explicit language/direction metadata for chrome and mixed-language content so assistive technology can select suitable pronunciation. Localization must cover error/recovery, privacy/permission, progress and uncertainty messages, text expansion, plural/number/date formatting, and pseudolocalized/RTL regression fixtures. Specify the interface locales actually shipped; infrastructure support does not imply all translations are available or reviewed.
 
+RTL-001 gave the direction half of that requirement a concrete model. The only
+interface locale shipped is English; no chrome translation exists yet. A pack
+that declares `capabilities.rtl` flips only the containers rendering its own
+text — `dir="rtl"` with the manifest locale in `lang` — while the banner, route
+navigation, app-authored prompts, romanization and Latin glosses stay
+left-to-right, so a mixed-script pack stays readable instead of being bidi-scrambled.
+The flag is read from the pack's own manifest (`apps/desktop/src-tauri/src/packs.rs`
+for installed packs, `lib.rs::manifest_rtl` for bundled/dev candidates), never
+inferred from the locale. `docs/adr/0029-rtl-direction-model.md` records why the
+shell is deliberately not mirrored; `apps/desktop/src/rtl-direction.test.tsx` and
+`packages/ui/src/pack-direction.test.tsx` are the RTL regression fixtures. Still
+open in this section: translated chrome and resource files, text expansion,
+plural/number/date formatting, and a pseudolocalized pass.
+
 ## Typography
 
 Language packs may declare font/script requirements, but do not distribute font files unless license permits. Prefer system/fallback font stacks where practical.
