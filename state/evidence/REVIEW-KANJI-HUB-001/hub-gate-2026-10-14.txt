@@ -1,0 +1,10 @@
+# kanji hub-card availability gate: focused rust test
+# date: 2026-10-14T13:23:41-06:00  host: GamingPC
+
+$ cargo test -p lts-desktop --lib -- the_hub_gate_for_the_kanji_drill
+
+running 1 test
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 140 filtered out; finished in 0.23s
+
+exit=0

@@ -1186,11 +1186,13 @@
       "title": "The practice hub advertises only what the current build and pack can do, and says so before the dead end",
       "activity": "idle",
       "summary": "The practice hub describes capabilities by what the learner can do and gates the ones the installed pack cannot serve.",
-      "notes": "Kanji drills are hidden until the pack has kanji content (with an honest empty state), the writing surface reveals the form a miss expected, and hub blurbs state whether a mode is graded, guided or formative.",
+      "notes": "Kanji drills are hidden until the pack has kanji content (with an honest empty state), the writing surface reveals the form a miss expected, and hub blurbs state whether a mode is graded, guided or formative. Defect found by CI on 2026-10-14 (run 38618485760) and fixed in the same batch: the hub's kanji gate was wired to the drill's lazily-loaded card list (`kanjiCards.length > 0`), which is empty until the mode opens, so the Kanji card hid itself and the drill became unreachable — the desktop walkthrough failed with `hub card \"Kanji\" missing`. The gate now comes from the pack: a cheap `kanji_available` read (`!kanji_entries(..).is_empty()` for the active pack) fetched when the profile is active, defaulting to available when the read fails so a failed capability probe never silently removes a mode. Evidence: focused Rust test (ja-demo advertises the drill, eo-demo does not) and the full desktop walkthrough against the release binary under xvfb — 13 routes walked, `route:Kanji` acked, no walkthrough error.",
       "dependencies": [],
       "evidence": [
         "state/evidence/CAPABILITY-HUB-001/writing-tests-2026-10-14.txt",
-        "state/evidence/GATE-2026-10-14/vitest-2026-10-14.txt"
+        "state/evidence/GATE-2026-10-14/vitest-2026-10-14.txt",
+        "state/evidence/REVIEW-KANJI-HUB-001/hub-gate-2026-10-14.txt",
+        "state/evidence/REVIEW-KANJI-HUB-001/walkthrough-2026-10-14.txt"
       ],
       "updated": "2026-10-14"
     },

@@ -1,0 +1,31 @@
+# desktop walkthrough against the release binary (real UI surface, xvfb)
+# proves the Kanji hub card is reachable after the availability-gate fix
+# date: 2026-10-14T13:26:30-06:00  host: GamingPC
+
+$ ./target/release/lts-desktop  # under xvfb-run, LTS_DATA_DIR=mktemp, LTS_SMOKE_FILE=mktemp, timeout 900
+MESA-EGL: warning: DRI3 error: Could not get DRI3 device
+MESA-EGL: warning: Ensure your X server supports DRI3 to get accelerated rendering
+launch exit=0
+
+$ grep -c "^smoke-ok route:" $MARKER
+13
+$ grep "^smoke-ok walkthrough-error" $MARKER  (empty means none)
+$ grep -E "^smoke-ok (route:|route-ms:Kanji|fresh-plan:|first-run:|mic-picker:|aligner:)" $MARKER
+smoke-ok fresh-plan:5
+smoke-ok first-run:3
+smoke-ok route:Today
+smoke-ok route:Practice
+smoke-ok route:My Words
+smoke-ok route:Progress
+smoke-ok route:Settings
+smoke-ok mic-picker:present
+smoke-ok route:Pronunciation
+smoke-ok route:Speaking
+smoke-ok route:Writing
+smoke-ok route:Scenarios
+smoke-ok route:Shadowing
+smoke-ok route:Reading
+smoke-ok route-ms:Kanji:81
+smoke-ok route:Kanji
+smoke-ok route:Placement
+smoke-ok aligner:no:speech-model-off

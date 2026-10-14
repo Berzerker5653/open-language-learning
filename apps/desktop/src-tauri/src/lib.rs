@@ -5477,6 +5477,24 @@ fn kanji_list(profile_id: String) -> Result<Vec<KanjiCard>, String> {
     kanji_list_at(&data_dir(), &profile_id)
 }
 
+/// I03: can the active pack run the kanji drill at all? The hub asks this
+/// *before* it shows the card, so the answer must come from the pack's data
+/// and never from the drill's own lazily-loaded card list -- that list is
+/// empty until the mode opens, which would hide the card forever and make
+/// the drill unreachable.
+fn kanji_available_at(data: &Path, profile_id: &str) -> Result<bool, String> {
+    let active = packs::active_pack(data, profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    Ok(!kanji_entries(data, pack_id, &version)?.is_empty())
+}
+
+#[tauri::command]
+fn kanji_available(profile_id: String) -> Result<bool, String> {
+    kanji_available_at(&data_dir(), &profile_id)
+}
+
 /// K-10 perceptual discrimination runner: play one member of a
 /// pack-declared phonological contrast (minimal pair / HVPT set) and
 /// ask which was heard. The target member is chosen deterministically
@@ -7498,6 +7516,7 @@ pub fn run() {
             placement_plan,
             placement_submit,
             kanji_list,
+            kanji_available,
             scenario_list,
             scenario_start,
             scenario_attempt,
@@ -12927,6 +12946,33 @@ activities:
         );
         assert_eq!(yasu.status, "review-needed");
         assert!(yasu.mnemonic.is_some(), "mnemonic surfaces for the UI");
+    }
+
+    #[test]
+    fn the_hub_gate_for_the_kanji_drill_comes_from_the_pack_not_from_the_card_list() {
+        // I03: the hub advertises a mode only when the pack can run it. The
+        // probe must read pack data, not the drill's lazily-loaded cards:
+        // CI run 38618485760 walked into `hub card "Kanji" missing` because
+        // the gate used that list, which is empty until the mode is opened.
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
+        assert!(
+            kanji_available_at(data, &p.id).unwrap(),
+            "a pack with character instruction advertises the drill"
+        );
+
+        let other = tempfile::tempdir().unwrap();
+        let data2 = other.path();
+        install_bundled_pack(data2, "org.openlanguage.eo-demo").unwrap();
+        let p2 = create_local_profile(data2, "Zamenhof").unwrap();
+        finish_onboarding(data2, &p2.id, Some("org.openlanguage.eo-demo"), false).unwrap();
+        assert!(
+            !kanji_available_at(data2, &p2.id).unwrap(),
+            "a pack that teaches no characters must not advertise the drill"
+        );
     }
 
     #[test]

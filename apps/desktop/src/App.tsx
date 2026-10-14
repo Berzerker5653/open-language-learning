@@ -391,6 +391,13 @@ export function App() {
   const [kanjiCorrect, setKanjiCorrect] = useState(false);
   const [kanjiCorrectChoice, setKanjiCorrectChoice] = useState("");
   const [kanjiError, setKanjiError] = useState<string | null>(null);
+  // I03: the hub advertises the kanji drill only when the active pack has
+  // character data. The answer comes from `kanji_available`, never from
+  // `kanjiCards`: that list is loaded when the mode opens, so gating on it
+  // hides the card and makes the drill unreachable. Unknown counts as
+  // available — a failed capability read must not quietly delete a mode, and
+  // the mode screen itself reports the real error.
+  const [kanjiAvailable, setKanjiAvailable] = useState(true);
   // SETTINGS-001: engine-backed settings state. micEnabled mirrors the
   // stored `microphone-enabled`; it gates getUserMedia at the capture
   // site, so a wrong value here is a privacy bug, not a cosmetic one.
@@ -917,6 +924,20 @@ export function App() {
       .then((v) => setBuildIdentity(v as BuildIdentity))
       .catch(() => setBuildIdentity({ version: "unknown", commit: "unknown", dirty: false }));
   }, [inv]);
+
+  // I03: ask the engine whether this profile's pack teaches characters, so the
+  // hub can advertise the kanji drill before anything has been opened.
+  useEffect(() => {
+    if (!inv || !profileId) return;
+    let live = true;
+    setKanjiAvailable(true);
+    void inv("kanji_available", { profileId })
+      .then((v) => live && setKanjiAvailable(Boolean(v)))
+      .catch(() => live && setKanjiAvailable(true));
+    return () => {
+      live = false;
+    };
+  }, [inv, profileId]);
 
   async function installSpeechModel(modelId: string) {
     if (!inv) return;
@@ -2715,7 +2736,7 @@ export function App() {
         </p>
       ) : null}
       {route === "hub" ? (
-        <PracticeHub onOpen={openMode} kanjiAvailable={kanjiCards.length > 0} />
+        <PracticeHub onOpen={openMode} kanjiAvailable={kanjiAvailable} />
       ) : route === "pronunciation" ? (
         <>
           {audioMsg && (
