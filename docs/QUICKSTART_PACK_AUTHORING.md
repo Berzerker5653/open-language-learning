@@ -214,8 +214,12 @@ the banner is the control working, not a defect.
    warnings included, not as expected);
 2. the source/licence matrix — each source's licence as its holder writes it,
    and the pack licence no more permissive than the most restrictive source it
-   derives from (`audit-licenses` proves the other direction only; this is how
-   0.4.0 shipped `CC-BY-4.0` over a BY-SA mirror);
+   derives from. **No gate checks this today**: `audit-licenses` inspects
+   redistribution flags, reference-only claims and unknown licence ids, and never
+   compares the pack's declared `content_license` with the licences of the sources
+   its records cite — that is how 0.4.0 shipped `CC-BY-4.0` over CC BY-SA
+   dictionary data. `LIC-002` exists to change that; until it lands, the check is
+   yours.
 3. `review/UNRESOLVED.md`: every unverified claim, dialect/variant question and
    register judgement that needs a native speaker;
 4. an explicit list of everything left at 0, stubbed or placeholder, audio
