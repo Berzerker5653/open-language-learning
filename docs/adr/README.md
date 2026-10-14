@@ -46,5 +46,6 @@ Existing:
 - 0029 direction model for right-to-left packs (per-container `dir` from manifest `capabilities.rtl`; shell and romanization stay LTR) — **Proposed (agent-authored, 2026-10-13)**
 - 0030 attempt identity and disqualifying support (identity is an input, never a guess; policy 0.2.0 `support.disqualifying_for`) — **Proposed (agent-authored, 2026-10-14)**
 - 0031 goal prerequisites aggregate over declared concepts (`required_concepts` decides a goal-level gate; no goal-id evidence rows) — **Proposed (agent-authored, 2026-10-14)**
+- 0032 track pack media bytes that outrun the pinned published archive (18 journey assets; bounded exception that ends at republish) — **Proposed (agent-authored, 2026-10-14)**
 
 Template: `template.md`.

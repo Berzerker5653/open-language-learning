@@ -1,0 +1,11 @@
+# media verification — every manifest row present and hash-correct in the tree (ADR-0024 + ADR-0032)
+# date: 2026-10-14T12:46:51-06:00  host: GamingPC
+
+$ ./scripts/fetch-pack-audio.sh --verify-only --pack-dir languages/ja-JP
+fetch-pack-audio: summary languages/ja-JP: rows checked=4902 files valid=4902 files restored=0 files already valid=4902 rows failing=0
+exit=0
+
+$ ./scripts/fetch-pack-audio.sh --verify-only --pack-dir languages/ru-RU
+fetch-pack-audio: summary languages/ru-RU: rows checked=4856 files valid=4856 files restored=0 files already valid=4856 rows failing=0
+exit=0
+

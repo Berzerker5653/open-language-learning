@@ -327,8 +327,8 @@ The audio-less archive that `build` once emitted after a loud warning
 is gone: with no runtime synthesis an uncovered item is permanent
 silence, so failing the gate loudly at build/install is the honest
 shape. Consequence: a pack can only publish after its bake has run. Both
-reference packs are baked in the working tree (ja-JP 4,894 manifest rows,
-ru-RU 4,846, 2026-10-13), which is why their 0.4.0 archives carry audio.
+reference packs were baked with 4,894 (ja-JP) and 4,846 (ru-RU) manifest rows
+on 2026-10-13, which is what their published 0.4.0 archives carry.
 A fresh checkout has the manifests **without** the gitignored `.wav` bytes, and
 that is not a cosmetic gap: measured on the public repo 2026-10-13 (run
 `38432671203`), `cargo test --workspace` fails 8 desktop tests that install the
@@ -350,11 +350,25 @@ CI (`rust`, `desktop-smoke`) now restores both reference packs before the steps
 that need them, caching the archives by `hashFiles('catalog/packs.json')` and
 re-verifying on every cache hit, and because the audio is now present CI also
 runs install-mode `test` for both packs instead of skipping it. Measured on this
-tree: `--verify-only` reports `rows checked=4894 … rows failing=0` for ja-JP and
-`rows checked=4846 … rows failing=0` for ru-RU. A contributor needs one command
-per pack before `cargo test --workspace`. The pairing itself stays enforced on the
+tree: `--verify-only` reports `rows checked=4902 … rows failing=0` for ja-JP and
+`rows checked=4856 … rows failing=0` for ru-RU (2026-10-14). A contributor needs
+one command per pack before `cargo test --workspace`. The pairing itself stays
+enforced on the
 release path (`scripts/build-catalog.sh` bakes, then builds) and pinned by
 `crates/langpack/tests/media.rs`.
+
+The tree can also run **ahead** of a published archive, and the same step says
+so: after the 2026-10-14 content-depth batch, the manifests declare 4,902 ja-JP
+and 4,856 ru-RU rows while the pinned 0.4.0 archives carry 4,894 and 4,846, and
+CI (`rust`, `desktop-smoke`) failed the restore with the eighteen unmatched ids
+named (`the archive carries no ja.sent.office-notice-time.wav matching the
+manifest row`). Refusing is correct — the alternative is a checkout whose
+listening items have no audio. ADR-0032 (Proposed) records the temporary
+answer: those 18 journey assets are tracked in git by name, bounded and
+enumerated in `.gitignore`, until the owner republishes both packs at a version
+whose archive covers them, at which point the tracked files and the negations
+are deleted and ADR-0024's rule stands alone. Republishing is an owner action
+(`docs/15` scope rule), so an agent cannot close this by itself.
 
 The app reads audio provenance from the manifest rather than assuming a file in
 `media/` is a licensed recording, and resolves a media id through the manifest's
