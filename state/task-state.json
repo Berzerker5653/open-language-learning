@@ -927,7 +927,9 @@
         "tests/fixtures/packs/valid-license-bysa-kept/manifest.yaml",
         "docs/adr/0028-license-permissiveness-detection.md",
         "docs/10_LICENSING_AND_PROVENANCE.md",
-        "docs/QUICKSTART_PACK_AUTHORING.md"
+        "docs/QUICKSTART_PACK_AUTHORING.md",
+        "state/evidence/LIC-002/owner-decision-O-01a-2026-10-13.md",
+        "languages/ja-JP/manifest.yaml"
       ]
     }
   },

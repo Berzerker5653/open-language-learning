@@ -18,7 +18,7 @@ The sample unit exists to exercise the format. Treat linguistic examples as cont
 The phonology inventory (`language/phonology.yaml`) was ported from the JA-RES-002 fixture during K-30: teach/reference-only modes plus one `assess-guided` pitch-accent feature — no `assess-automatic` claims, because automatic scoring requires a bound calibrated speech profile. Speech profiles remain empty: no provider, model, human-reviewed targets, or calibration evidence exists for this pack. Requested model capabilities are research targets, not availability promises.
 
 Install is **not** license-blocked: LIC-001 closed 2026-10-04, `manifest.yaml`
-sets `content_license: CC-BY-4.0` with `redistribution_allowed: true`, and
+sets `content_license: CC-BY-SA-4.0` with `redistribution_allowed: true`, and
 `licenses.jsonl` carries five records — original drafts, model output, baked
 audio, and two `derived-from-source` records for the dictionary-sourced lexicon
 and kanji layers. (Corrected 2026-10-13: this README previously asserted a
@@ -34,11 +34,14 @@ Electronic Dictionary Research and Development Group, licensed CC BY-SA 4.0
 AI-drafted text and no dictionary definition text is reproduced; the 2026-10-05
 external review record states the dataset is not mirrored in this repo. The
 ShareAlike obligation attaches to the dictionary-derived layer, which is why
-those two inventory records declare `CC-BY-SA-4.0` while the pack-level
-`content_license` for original material stays CC-BY-4.0. `sources.jsonl` lists
-`edrdg-jmdict` and `jmdict-simplified` as consulted references. Whether the
-**pack-level** license should itself become CC-BY-SA-4.0 is an owner licensing
-decision, open as of 2026-10-13 — not something an agent may settle.
+those two inventory records declare `CC-BY-SA-4.0`. Since 2026-10-13 the
+pack-level `content_license` is `CC-BY-SA-4.0` as well: the owner settled that
+question (O-01(a)) the day `audit-licenses` began reporting the mismatch at
+`info` severity. Records for material we made — drafts, model output, baked
+audio — stay `CC-BY-4.0`, which is what we can grant for our own work. The
+published 0.4.0 archive predates the pack-level change and needs the 0.4.1
+republish (O-01(b)). `sources.jsonl` lists `edrdg-jmdict` and
+`jmdict-simplified` as consulted references.
 
 Listening audio is generated, never hand-collected or committed (ADR-0016):
 `scripts/generate-pack-audio.py` synthesizes every audio-addressable item with

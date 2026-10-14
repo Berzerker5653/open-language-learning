@@ -73,14 +73,19 @@ the pack, and suppressing it is a licensing decision, not a build decision.
 - The audit now answers the question the licence docs already claimed it
   answered, so `docs/10_LICENSING_AND_PROVENANCE.md` and the pack-authoring
   contract were corrected in the same change to describe what actually runs.
-- Existing fixtures and packs that carry this defect now report it. The
-  `valid-audit` fixture keeps its BY claim over a BY-SA source on purpose: it is
-  evidence that the finding fires on real-shaped data and that it does not stop
-  the gate. `languages/ja-JP` emits the manifest-level `Info` from
-  `audit-licenses` and every other gate, and still clears all seven pack gates
-  with exit 0 — measured, not assumed.
-- Promotion is a deliberate ladder, each step owner-gated: `Info` (now) →
-  `Warning` once O-01(a) is resolved and no shipped pack trips the check →
+
+- Packs carrying the defect reported it. `languages/ja-JP` emitted the
+  manifest-level `Info` from `audit-licenses` on every gate run while still
+  clearing all seven pack gates with exit 0 — measured, not assumed. The owner
+  then resolved O-01(a) on 2026-10-13 by declaring the pack `CC-BY-SA-4.0`,
+  which is what its dictionary layer obliges, so the finding no longer fires
+  there; `valid-license-bysa-dropped` and `valid-audit` keep a deliberately
+  wrong declaration on purpose, so the check stays covered.
+
+- Promotion stays a deliberate ladder, each step owner-gated: `Info` (now) →
+  `Warning` once no *released* pack trips the check (O-01(a) is settled; what
+  remains is O-01(b), republishing 0.4.1 with the corrected declaration, since
+  the published 0.4.0 archive still carries the old one) →
   `Error` only with a migration path for third-party packs. This ADR must be
   amended, not silently bypassed, at each step.
 - The obligation table is CC-only, so a future pack under, say, an ODbL source
@@ -120,5 +125,7 @@ the pack, and suppressing it is a licensing decision, not a build decision.
   not make.
 - The seven pack gates (`validate`, `lint`, `audit-curriculum`, `audit-lexicon`,
   `audit-licenses`, `audit-sources`, `test`) run over `languages/ja-JP`,
-  `languages/ru-RU`, `examples/eo-community` and `examples/ar-ma` all exit 0,
-  with the ja-JP manifest `Info` present in the licence audit output.
+  `languages/ru-RU`, `examples/eo-community` and `examples/ar-ma` all exit 0.
+  Measured twice: before the declaration fix `languages/ja-JP` printed one
+  `Info` naming `edrdg-jmdict` (28/28 invocations still exit 0), and after the
+  fix no shipped pack prints that line at all.

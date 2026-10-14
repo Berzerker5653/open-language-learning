@@ -30,5 +30,5 @@ requested_model_capabilities:
   - "alignment.ja"
   - "f0"
 license:
-  content_license: "CC-BY-4.0"
+  content_license: "CC-BY-SA-4.0"
   redistribution_allowed: true

@@ -447,11 +447,13 @@ record still said kokoro/sherpa-onnx), and two `derived-from-source` records at
 **CC-BY-SA-4.0** were added for the dictionary-sourced lexicon and kanji layers
 with the EDRDG attribution — the pack README had asserted a dictionary-data record
 that did not exist. So the downloadable 0.4.0 archive predates that correction and
-understates a ShareAlike obligation; it should be republished as 0.4.1 alongside
-the owner's still-open decision on whether the **pack-level** `content_license`
-(currently CC-BY-4.0) should itself become CC-BY-SA-4.0. `audit-licenses` does not
-currently flag a pack whose declared content license is more permissive than a
-source it derives from — a gate gap worth closing, not a claim to paper over.
+understates a ShareAlike obligation; it should be republished as 0.4.1. The
+paired **pack-level** decision (O-01(a)) was settled by the owner on 2026-10-13:
+`languages/ja-JP/manifest.yaml` now declares **CC-BY-SA-4.0**, because its
+lexicon and kanji layers descend from the EDRDG JMDict dictionary. The gap is now
+checked rather than asserted: `audit-licenses` compares a declared licence with
+the licences of the sources it derives from (ADR-0028) and reported this
+mismatch at `info` severity on every run until the declaration was fixed.
 
 ## Authentic updates and interrupted downloads
 

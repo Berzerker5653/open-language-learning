@@ -164,9 +164,9 @@ categories:
         the derived layer: `languages/ja-JP/licenses.jsonl` now carries
         `lic-lexicon-dictionary` and `lic-kanji-dictionary` at CC-BY-SA-4.0 with
         the EDRDG attribution (added 2026-10-13, when the pack README's claim of a
-        dictionary-data record was found to be untrue). Whether the pack-level
-        content_license (CC-BY-4.0) should become CC-BY-SA-4.0 is an open owner
-        licensing decision.
+        dictionary-data record was found to be untrue). The pack-level
+        content_license question (O-01(a)) was settled by the owner on
+        2026-10-13: the manifest now declares CC-BY-SA-4.0.
     - id: kanjidic2
       title: KANJIDIC2 (kanji dictionary)
       org: EDRDG

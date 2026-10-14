@@ -103,12 +103,13 @@ manifest's `content_license` against every source the pack contributes from
 `license_less_permissive_than_source` at `info` severity when the declaration
 drops a `ShareAlike`, `NonCommercial` or `NoDerivatives` obligation. Licence ids
 outside that Creative-Commons table (proprietary terms, `LicenseRef-*`) are not
-judged at all. See `docs/adr/0028-license-permissiveness-detection.md`: promotion
-to warning or error is an owner decision gated on O-01(a), because
-`languages/ja-JP` declares `CC-BY-4.0` while the dictionary source it builds
-from (`edrdg-jmdict`) is `CC-BY-SA-4.0`, and now reports itself doing so while
-still clearing every gate; `languages/ru-RU`'s `CC0-1.0` declaration over its
-reference-only CC-BY-NC verification pointer is correctly not flagged.
+judged at all. See `docs/adr/0028-license-permissiveness-detection.md`.
+`languages/ja-JP` declared `CC-BY-4.0` while the dictionary source it builds from
+(`edrdg-jmdict`) is `CC-BY-SA-4.0`, and the audit reported that on every gate run
+until the owner resolved O-01(a) on 2026-10-13 by declaring the pack
+`CC-BY-SA-4.0`; the downloadable 0.4.0 archive still carries the older
+declaration until it is republished (O-01(b)), which is why `catalog/packs.json`
+deliberately keeps `CC-BY-4.0` for that released artifact.
 
 ## Attribution UI
 
