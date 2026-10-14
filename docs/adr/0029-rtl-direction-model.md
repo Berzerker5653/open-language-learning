@@ -52,9 +52,15 @@ Per-container direction, with the app chrome fixed LTR:
   surfaces hardcoded. That hardcode was the same class of bug as the direction
   one: it asserted a language from app code. No pack-text element may hardcode a
   language tag; the manifest is the source.
-- Listings that show several packs at once (the setup wizard, the language
-  panel) are app chrome: they set direction per element from each pack's own
-  `rtl`, never from the active pack.
+- Listings that show several packs at once (the setup wizard, the installed-pack
+  list in the language panel) are app chrome: they set direction per element
+  from each pack's own `rtl` (`PackCandidate.rtl`, `InstalledPack.rtl`), never
+  from the active pack — otherwise installing an RTL pack would right-align
+  every other pack's name. A catalog entry carries no `rtl` today
+  (`catalog/packs.json` publishes id, version, licence and size), so a
+  download-catalog name renders in the document direction; if a published pack
+  ever has an RTL display name, the catalog entry has to carry the flag before
+  the renderer can honour it.
 
 - The pack-text surfaces this covers: the session plan (`home`), practice and
   placement (both through `PracticeRunner`, including the phrase-slot display),
@@ -121,6 +127,12 @@ Per-container direction, with the app chrome fixed LTR:
   citation inputs carry neither.
 - `packages/ui/src/pack-direction.test.tsx` pins the helper behaviour the
   surfaces depend on, including the no-provider default.
+
+- `apps/desktop/src/language.test.tsx` pins the per-element rule for the
+  installed-pack list: an `ar-MA` pack's display name renders
+  `<span dir="rtl" lang="ar-MA">` while the `eo` pack listed next to it renders
+  `<span lang="eo">` with no direction, proving the active pack does not decide
+  another pack's name.
 - Rust side: `apps/desktop/src-tauri/src/lib.rs` test
   `rtl_capability_reaches_the_renderer_through_pack_listing` proves
   `capabilities.rtl` crosses IPC through `installed_packs` and

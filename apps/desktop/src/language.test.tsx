@@ -233,4 +233,26 @@ describe("language panel", () => {
     });
     expect(withPercent).toContain("40%");
   });
+
+  it("names each installed pack in that pack's own direction (ADR-0029)", () => {
+    // The panel lists several packs at once, so the active pack's direction
+    // must not decide the name of any other pack: direction is per element,
+    // taken from each pack's own `capabilities.rtl`.
+    const html = render({
+      installed: [
+        ...installed,
+        {
+          pack_id: "org.openlanguage.ar.scaffold",
+          version: "0.1.0",
+          display_name: "السلام عليكم",
+          locale: "ar-MA",
+          trust_state: "experimental",
+          rtl: true,
+        },
+      ],
+    });
+    expect(html).toContain('<span dir="rtl" lang="ar-MA">السلام عليكم</span>');
+    // An LTR pack in the same list gains a language tag and no direction.
+    expect(html).toContain('<span lang="eo">Esperanto Community Pack</span>');
+  });
 });

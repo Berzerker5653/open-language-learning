@@ -68,6 +68,37 @@ CI for the starting head (ec47a0a): run 38500470318 — success
   cancelled as superseded by that push after its desktop-smoke job passed.
 CI for this follow-up's own head: recorded in the commit that follows it.
 
+A second gap, found by checking what ADR-0029 claimed rather than what the code
+did (same tree):
+  The ADR said listings set direction "per element from each pack's own rtl".
+  True for onboarding.tsx (PackText rtl={pack.rtl} locale={pack.locale} at line
+  190); false for the installed-pack list in language.tsx, where the InstalledPack
+  type already carried rtl (line 21) while the list printed {i.display_name} with
+  no direction at all — an ar-MA pack's own name would have rendered mis-ordered
+  inside Settings. Fixed: that name now renders through PackText with the pack's
+  own rtl and locale.
+  Deliberately NOT applied to the download-catalog list: CatalogEntry has no rtl
+  field, because catalog/packs.json publishes id, version, license and size only,
+  so there is nothing honest to render the direction from. The ADR now states that
+  limit instead of over-claiming coverage.
+  Test: language.test.tsx "names each installed pack in that pack's own direction
+  (ADR-0029)" — the ar-MA pack renders <span dir="rtl" lang="ar-MA"> next to an eo
+  pack rendering <span lang="eo"> with no direction, which is what proves the
+  active pack does not decide another pack's name.
+  Measured after: desktop vitest 190/190, rtl-direction 10/10, tsc --noEmit clean,
+  eslint --max-warnings 0 clean, prettier clean.
+
+On the standing validate WARN for examples/minimal-language-pack: measured, not
+assumed. validate/lint report 1 error (script_unknown) and install-mode test 4
+errors (license_inventory_missing, redistribution_blocked, script_unknown,
+sources_missing) — exactly what docs/04_LANGUAGE_PACK_SPEC.md:8 and
+tools/AI_LANGUAGE_PACK_AUTHOR_PROMPT.md:15 say, and both docs point authors at
+tools/pack-templates/example-pack/ and tests/fixtures/packs/ja-demo/ instead. The
+fixture is also in tools/validate_handoff.py's required-file list (line 360) and
+listed in PACKAGE_MANIFEST.md. So the WARN is a deliberate fixture warning about
+a manifest illustration, not rot: no change made, and the docs' claims are still
+true as of this head.
+
 Still not covered by any test (stated so it is not mistaken for coverage): the
 direction model has no end-to-end proof on a real RTL pack in the running app —
 no installed 0.4.0 pack declares rtl, and examples/ar-ma is only built into an

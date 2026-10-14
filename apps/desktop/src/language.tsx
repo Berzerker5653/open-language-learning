@@ -7,6 +7,7 @@
  * and runtime availability — lives in the single Settings → Speech card;
  * nothing here duplicates it.
  */
+import { PackText } from "@openlang/ui";
 import { progressLine, type EngineProgress } from "./progress";
 
 import type { DisplaySettingsView } from "./stress";
@@ -188,7 +189,10 @@ export function LanguagePanel(p: LanguagePanelProps) {
             const claims = p.claims?.find((x) => x.pack_id === i.pack_id);
             return (
               <li key={i.pack_id} data-active={p.activeIds.includes(i.pack_id) ? "yes" : "no"}>
-                {i.display_name} ({i.locale}) — v{i.version}, {i.trust_state}
+                <PackText rtl={i.rtl} locale={i.locale} tag="span">
+                  {i.display_name}
+                </PackText>{" "}
+                ({i.locale}) — v{i.version}, {i.trust_state}
                 {p.activeIds.includes(i.pack_id) ? (
                   <span className="badge badge--active">learning this language</span>
                 ) : (
