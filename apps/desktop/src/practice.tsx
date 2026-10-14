@@ -80,11 +80,15 @@ export function PracticeRunner(p: PracticeRunnerProps) {
             <div className="meta" role="group" aria-label="Phrase structure">
               {p.task.slots.map((slot, i) => (
                 <p key={i}>
-                  <span className={slot.target ? "badge" : undefined}>{slot.text}</span>
+                  <PackText tag="span" className={slot.target ? "badge" : undefined}>
+                    {slot.text}
+                  </PackText>
                   {slot.target ? " — the part to change" : ""}
                   {slot.label ? ` (${slot.label})` : ""}
                   {slot.alternatives.length > 0 ? (
-                    <small> can also be: {slot.alternatives.join(", ")}</small>
+                    <small>
+                      can also be: <PackText>{slot.alternatives.join(", ")}</PackText>
+                    </small>
                   ) : null}
                 </p>
               ))}

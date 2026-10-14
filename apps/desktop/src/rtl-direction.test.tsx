@@ -9,7 +9,10 @@ import type { ReactNode } from "react";
 import { AppShell } from "@openlang/ui";
 import { Home, type SessionPlan } from "./home";
 import { PracticeRunner, type PracticeTaskView } from "./practice";
+import { ReadingPanel, type ReadingPanelProps, type Story } from "./reading";
 import { ScenarioPanel, type ScenarioView } from "./scenario";
+import { ShadowingPanel, type ShadowTarget } from "./shadowing";
+import { MyWordsPanel, type MineItem } from "./words";
 
 const arabicPlan: SessionPlan = {
   items: [
@@ -174,5 +177,190 @@ describe("pack direction (RTL-001, ADR-0029)", () => {
     expect(html).toContain('<span dir="rtl" lang="ar-MA">بخير</span>');
     // The support ladder is app chrome: no direction of its own.
     expect(html).toContain("<legend>Support</legend>");
+  });
+
+  // The three surfaces that used to live inline in App.tsx: extracted into
+  // panels so this direction contract is testable at all, then fixed.
+  const arabicStory: Story = {
+    id: "ar.story.salam",
+    title: "السلام عليكم",
+    status: "draft",
+    sentences: [
+      {
+        content_id: "ar.sentence.1",
+        text: "كيف حالك؟",
+        furigana: null,
+        romaji: "kayfa haluk?",
+        faded_by_mastery: false,
+        gloss: "How are you?",
+        status: "draft",
+        known: [
+          {
+            id: "ar.lex.hal",
+            surface: "حالك",
+            reading: null,
+            romaji: "haluk",
+            gloss: "your condition",
+            status: "draft",
+          },
+        ],
+      },
+    ],
+  };
+
+  function readingPanel(overrides: Partial<ReadingPanelProps> = {}) {
+    return (
+      <ReadingPanel
+        storyList={[
+          {
+            id: arabicStory.id,
+            title: arabicStory.title,
+            description: null,
+            status: "draft",
+            sentence_count: 1,
+          },
+        ]}
+        storyActive={arabicStory}
+        storyLookup="ar.sentence.1"
+        storyError={null}
+        onOpenStory={() => {}}
+        onBack={() => {}}
+        onPlaySentence={() => {}}
+        onToggleLookup={() => {}}
+        onMine={() => {}}
+        {...overrides}
+      />
+    );
+  }
+
+  it("flips story titles, sentences and looked-up words, but not the reading prose", () => {
+    const html = shell("rtl", "ar-MA", readingPanel());
+    // Story title inside the app's own h1: the heading stays, the run flips.
+    expect(html).toContain('<h1><span dir="rtl" lang="ar-MA">السلام عليكم</span></h1>');
+    // Sentence surface (Ruby renders bare text, so the container carries it).
+    expect(html).toContain('<span dir="rtl" lang="ar-MA">كيف حالك؟</span>');
+    // Looked-up pack word flips with the sentence it came from.
+    expect(html).toContain('<span dir="rtl" lang="ar-MA">حالك</span>');
+    // Romaji and the English gloss stay readable inside the RTL block.
+    expect(html).toContain('<span dir="ltr" lang="en">kayfa haluk?</span>');
+    expect(html).toContain('<span dir="ltr" lang="en">How are you?</span>');
+    // Explanatory prose is app chrome.
+    expect(html).toContain('<p class="empty">Read along at your level.');
+  });
+
+  it("names each story in the pack direction and leaves an LTR pack unflipped", () => {
+    const listHtml = shell("rtl", "ar-MA", readingPanel({ storyActive: null, storyLookup: null }));
+    expect(listHtml).toContain('<span dir="rtl" lang="ar-MA">السلام عليكم</span> (1)');
+    const japaneseStory: Story = { ...arabicStory, title: "はじめまして", sentences: [] };
+    const jaHtml = shell(
+      "ltr",
+      "ja-JP",
+      readingPanel({ storyActive: japaneseStory, storyLookup: null }),
+    );
+    expect(jaHtml).toContain('<span lang="ja-JP">はじめまして</span>');
+    expect(jaHtml).not.toContain('dir="rtl"');
+  });
+
+  it("flips the shadowing target and reading scaffold while romanization stays LTR", () => {
+    const targets: ShadowTarget[] = [
+      {
+        content_id: "ar.audio.salam",
+        surface: "السلام عليكم",
+        reading: "وعليكم السلام",
+        romaji: "as-salamu alaykum",
+      },
+      {
+        content_id: "ar.audio.marhaban",
+        surface: "مرحبا",
+        reading: null,
+        romaji: "marhaban",
+      },
+    ];
+    const html = shell(
+      "rtl",
+      "ar-MA",
+      <ShadowingPanel
+        items={targets}
+        index={0}
+        error={null}
+        audioMsg={null}
+        recording={false}
+        attemptUrl={null}
+        onRetry={() => {}}
+        onOpenSetup={() => {}}
+        onPlayModel={() => {}}
+        onRecord={() => {}}
+        onStop={() => {}}
+        onPlayAttempt={() => {}}
+        onStep={() => {}}
+      />,
+    );
+    expect(html).toContain('<p dir="rtl" lang="ar-MA" class="surface">السلام عليكم</p>');
+    expect(html).toContain('<p class="reading" dir="rtl" lang="ar-MA">وعليكم السلام</p>');
+    // The first target has a pack-script reading; romanization is not shown.
+    expect(html).not.toContain("as-salamu alaykum");
+  });
+
+  it("shows the romanization-only shadowing target left-to-right", () => {
+    const targets: ShadowTarget[] = [
+      { content_id: "ar.audio.marhaban", surface: "مرحبا", reading: null, romaji: "marhaban" },
+    ];
+    const html = shell(
+      "rtl",
+      "ar-MA",
+      <ShadowingPanel
+        items={targets}
+        index={0}
+        error={null}
+        audioMsg={null}
+        recording={false}
+        attemptUrl={null}
+        onRetry={() => {}}
+        onOpenSetup={() => {}}
+        onPlayModel={() => {}}
+        onRecord={() => {}}
+        onStop={() => {}}
+        onPlayAttempt={() => {}}
+        onStep={() => {}}
+      />,
+    );
+    expect(html).toContain('<p dir="rtl" lang="ar-MA" class="surface">مرحبا</p>');
+    expect(html).toContain('<p class="reading"><span dir="ltr" lang="en">marhaban</span></p>');
+  });
+
+  it("carries pack direction through the review card and the add-word inputs", () => {
+    const item: MineItem = {
+      id: "mine-1",
+      surface: "حالك",
+      reading: "حالك",
+      gloss: "your condition",
+      source_citation: "ar.story.salam#1",
+      created_at: "2026-10-14T00:00:00Z",
+      due_at: null,
+    };
+    const html = shell(
+      "rtl",
+      "ar-MA",
+      <MyWordsPanel
+        items={[item]}
+        review={{ item, revealed: true }}
+        error={null}
+        notice={null}
+        draft={{ surface: "مرحبا", reading: "", gloss: "hello", source: "" }}
+        onDraftChange={() => {}}
+        onAdd={() => {}}
+        onRemove={() => {}}
+        onGrade={() => {}}
+        onStartReview={() => {}}
+        onReveal={() => {}}
+      />,
+    );
+    expect(html).toContain('<p dir="rtl" lang="ar-MA" class="prompt">حالك</p>');
+    expect(html).toMatch(/<input id="mine-surface"[^>]*dir="rtl"/);
+    expect(html).toMatch(/<input id="mine-reading"[^>]*lang="ar-MA"/);
+    // The learner's own meaning/citation notes are not pack text.
+    expect(html).toMatch(/<input id="mine-gloss"[^>]*value="hello"[^>]*\/>/);
+    expect(html).not.toMatch(/<input id="mine-gloss"[^>]*dir=/);
+    expect(html).not.toMatch(/<input id="mine-source"[^>]*dir=/);
   });
 });

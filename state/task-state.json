@@ -908,6 +908,10 @@
       "evidence": [
         "state/evidence/RTL-001/gates-2026-10-13.txt",
         "apps/desktop/src/rtl-direction.test.tsx",
+        "state/evidence/RTL-001/surfaces-followup-2026-10-13.txt",
+        "apps/desktop/src/reading.tsx",
+        "apps/desktop/src/shadowing.tsx",
+        "apps/desktop/src/words.tsx",
         "packages/ui/src/pack-direction.tsx",
         "packages/ui/src/pack-direction.test.tsx",
         "apps/desktop/src-tauri/src/lib.rs",

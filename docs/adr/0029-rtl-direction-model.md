@@ -56,6 +56,19 @@ Per-container direction, with the app chrome fixed LTR:
   panel) are app chrome: they set direction per element from each pack's own
   `rtl`, never from the active pack.
 
+- The pack-text surfaces this covers: the session plan (`home`), practice and
+  placement (both through `PracticeRunner`, including the phrase-slot display),
+  dictation, pronunciation, shadowing, writing, scenarios, graded reading, "my
+  words" — the review card, the mined-word list and the surface/reading inputs,
+  whose content is pack-language — and the kanji card. Reading, shadowing and
+  "my words" existed only as JSX inline in `App.tsx`, where no test could reach
+  them (`App.test.tsx` records why `<App/>` cannot be mounted in this suite);
+  they are now `reading.tsx`, `shadowing.tsx` and `words.tsx` panel modules,
+  which is the convention every other route already follows, so the direction
+  contract is testable at the surface it applies to. The first RTL-001 pass
+  missed those three, which is how the extraction was found to be necessary
+  rather than cosmetic.
+
 ## Consequences
 
 - `capabilities.rtl` becomes a real, observed field. A pack that declares it
@@ -99,6 +112,13 @@ Per-container direction, with the app chrome fixed LTR:
   `lang="ar-MA"`; the Latin gloss and the romanization in the same block carry
   `dir="ltr"`; the banner contains no `dir`; and the ja-JP control render gains
   a language tag but no direction flip.
+
+- The same file covers the three extracted panels: story titles, sentence text
+  and looked-up words flip, while the sentence romaji, the English gloss and a
+  romanization-only shadowing scaffold stay `dir="ltr"`; the shadowing surface
+  and reading scaffold flip; the mined-word review card and the surface/reading
+  inputs carry the pack's `dir`/`lang`, and the learner's own meaning and
+  citation inputs carry neither.
 - `packages/ui/src/pack-direction.test.tsx` pins the helper behaviour the
   surfaces depend on, including the no-provider default.
 - Rust side: `apps/desktop/src-tauri/src/lib.rs` test

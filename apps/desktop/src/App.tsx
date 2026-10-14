@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { AppShell } from "@openlang/ui";
+import { AppShell, PackText } from "@openlang/ui";
 import {
   Onboarding,
   type OnboardingStep,
@@ -37,7 +37,9 @@ import {
 import { WritingPractice, type WritingTaskView } from "./writing";
 import { PracticeRunner, type PracticeTaskView } from "./practice";
 import { stressEnabled, type DisplaySettingsView } from "./stress";
-import { Ruby } from "./ruby";
+import { ReadingPanel, type Story, type StorySummary } from "./reading";
+import { ShadowingPanel, type ShadowTarget } from "./shadowing";
+import { MyWordsPanel, type MineItem } from "./words";
 import {
   ScenarioPanel,
   type ScenarioOutcomeView,
@@ -53,7 +55,7 @@ import {
   type Microphone,
   type SpeakerOutput,
 } from "./capture";
-import { audioFailureMessage, isMediaMissing, shadowTargetsState } from "./speech-readiness";
+import { audioFailureMessage, isMediaMissing } from "./speech-readiness";
 import type { EngineProgress } from "./progress";
 
 export type Invoke = (cmd: string, args?: Record<string, unknown>) => Promise<unknown>;
@@ -370,64 +372,20 @@ export function App() {
   }, [step, route]);
   // K-76: null until the first real load answers, so the surface can tell
   // "still loading" apart from "this pack has no targets".
-  const [shadowItems, setShadowItems] = useState<
-    { content_id: string; surface: string; reading: string | null; romaji: string | null }[] | null
-  >(null);
+  const [shadowItems, setShadowItems] = useState<ShadowTarget[] | null>(null);
   const [shadowIdx, setShadowIdx] = useState(0);
-  const [storyList, setStoryList] = useState<
-    {
-      id: string;
-      title: string;
-      description: string | null;
-      status: string;
-      sentence_count: number;
-    }[]
-  >([]);
-  const [storyActive, setStoryActive] = useState<{
-    id: string;
-    title: string;
-    sentences: {
-      content_id: string;
-      text: string;
-      furigana: string | null;
-      romaji: string | null;
-      faded_by_mastery: boolean;
-      gloss: string | null;
-      status: string;
-      known: {
-        id: string;
-        surface: string;
-        reading: string | null;
-        romaji: string | null;
-        gloss: string;
-        status: string;
-      }[];
-    }[];
-    status: string;
-  } | null>(null);
+  const [storyList, setStoryList] = useState<StorySummary[]>([]);
+  const [storyActive, setStoryActive] = useState<Story | null>(null);
   const [storyLookup, setStoryLookup] = useState<string | null>(null);
   const [storyError, setStoryError] = useState<string | null>(null);
-  const [mineItems, setMineItems] = useState<
-    {
-      id: string;
-      surface: string;
-      reading: string | null;
-      gloss: string | null;
-      source_citation: string;
-      created_at: string;
-      due_at: string | null;
-    }[]
-  >([]);
+  const [mineItems, setMineItems] = useState<MineItem[]>([]);
   const [mineSurface, setMineSurface] = useState("");
   const [mineReading, setMineReading] = useState("");
   const [mineGloss, setMineGloss] = useState("");
   const [mineSource, setMineSource] = useState("");
   const [mineError, setMineError] = useState<string | null>(null);
   const [mineNotice, setMineNotice] = useState<string | null>(null);
-  const [mineReview, setMineReview] = useState<{
-    item: (typeof mineItems)[number];
-    revealed: boolean;
-  } | null>(null);
+  const [mineReview, setMineReview] = useState<{ item: MineItem; revealed: boolean } | null>(null);
   const [shadowError, setShadowError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -1864,8 +1822,6 @@ export function App() {
     }
   }
 
-  const shadowCurrent = shadowItems?.[shadowIdx] ?? null;
-
   // K-13: graded reading — formative input practice. No scoring, no
   // evidence; scaffolds fade by mastery natively, audio is media-first.
   async function openReading() {
@@ -2607,311 +2563,64 @@ export function App() {
           />
         </>
       ) : route === "shadowing" ? (
-        <section aria-label="Shadowing">
-          <h1>Shadowing</h1>
-          <p className="empty">
-            Play the model audio, speak along with it, then play your recording back. Shadowing is
-            formative practice: nothing is scored or saved.
-          </p>
-          {shadowError && (
-            <p role="alert" className="alert">
-              {shadowError}
-            </p>
-          )}
-          {audioMsg && (
-            <p role="status" className="notice">
-              {audioMsg}
-            </p>
-          )}
-          {!shadowCurrent ? (
-            shadowTargetsState(shadowItems, shadowError) === "error" ? (
-              // K-76/W-08: a failed target read must never read as "this
-              // pack has no targets" — the pack and the mic may be fine
-              // while the read (or a half-finished install) failed. Name
-              // the failure, offer the retry, offer setup when relevant.
-              <div>
-                <p className="empty">
-                  The shadowing targets could not be loaded, so the practice controls are not shown.
-                  This is a load failure, not an empty pack.
-                </p>
-                <div className="btn-row">
-                  <button type="button" className="btn" onClick={openShadowing}>
-                    Retry
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn--quiet"
-                    onClick={() => void openSettings()}
-                  >
-                    Check language and speech setup
-                  </button>
-                </div>
-              </div>
-            ) : shadowTargetsState(shadowItems, shadowError) === "loading" ? (
-              <p className="empty" role="status">
-                Loading shadowing targets from the installed pack…
-              </p>
-            ) : (
-              <p className="empty">No shadowing targets are available in this pack yet.</p>
-            )
-          ) : (
-            <>
-              <p className="surface">{shadowCurrent.surface}</p>
-              {(shadowCurrent.reading ?? shadowCurrent.romaji) && (
-                <p className="reading">{shadowCurrent.reading ?? shadowCurrent.romaji}</p>
-              )}
-              <div className="btn-row">
-                <button type="button" className="btn" onClick={() => void playShadowModel()}>
-                  Play model audio
-                </button>
-                {!recording ? (
-                  <button type="button" className="btn" onClick={recordAttempt}>
-                    Record
-                  </button>
-                ) : (
-                  <button type="button" className="btn" onClick={stopAndCheck}>
-                    Stop
-                  </button>
-                )}
-                {attemptUrl && (
-                  <button
-                    type="button"
-                    className="btn btn--quiet"
-                    onClick={() => playBlobUrl(attemptUrl)}
-                  >
-                    Play my recording
-                  </button>
-                )}
-              </div>
-              <div className="btn-row">
-                <button
-                  type="button"
-                  className="btn btn--quiet"
-                  disabled={shadowIdx === 0}
-                  onClick={() => setShadowIdx((i) => Math.max(0, i - 1))}
-                >
-                  Previous
-                </button>
-                <span>
-                  {shadowIdx + 1} / {shadowItems?.length ?? 0}
-                </span>
-                <button
-                  type="button"
-                  className="btn btn--quiet"
-                  disabled={shadowIdx >= (shadowItems?.length ?? 0) - 1}
-                  onClick={() =>
-                    setShadowIdx((i) => Math.min((shadowItems?.length ?? 0) - 1, i + 1))
-                  }
-                >
-                  Next
-                </button>
-              </div>
-            </>
-          )}
-        </section>
+        <ShadowingPanel
+          items={shadowItems}
+          index={shadowIdx}
+          error={shadowError}
+          audioMsg={audioMsg}
+          recording={recording}
+          attemptUrl={attemptUrl}
+          onRetry={() => void openShadowing()}
+          onOpenSetup={() => void openSettings()}
+          onPlayModel={() => void playShadowModel()}
+          onRecord={recordAttempt}
+          onStop={stopAndCheck}
+          onPlayAttempt={() => {
+            if (attemptUrl) playBlobUrl(attemptUrl);
+          }}
+          onStep={(delta) =>
+            setShadowIdx((i) => Math.max(0, Math.min((shadowItems?.length ?? 0) - 1, i + delta)))
+          }
+        />
       ) : route === "reading" ? (
-        <section aria-label="Graded reading">
-          <h1>{storyActive ? storyActive.title : "Graded reading"}</h1>
-          <p className="empty">
-            Read along at your level. Tapping a sentence plays its audio and looks up the words from
-            your pack that appear in it. Reading is formative: nothing is scored or saved.
-          </p>
-          {storyError && (
-            <p role="alert" className="alert">
-              {storyError}
-            </p>
-          )}
-          {!storyActive ? (
-            storyList.length === 0 ? (
-              <p className="empty">No stories are available in this pack yet.</p>
-            ) : (
-              <div role="group" aria-label="Stories" className="btn-row">
-                {storyList.map((s) => (
-                  <button
-                    key={s.id}
-                    type="button"
-                    className="btn btn--quiet"
-                    onClick={() => void openStory(s.id)}
-                  >
-                    {s.title} ({s.sentence_count})
-                  </button>
-                ))}
-              </div>
-            )
-          ) : (
-            <>
-              <div className="btn-row">
-                <button type="button" className="btn btn--quiet" onClick={() => void openReading()}>
-                  All stories
-                </button>
-              </div>
-              {storyActive.sentences.map((s) => (
-                <div key={s.content_id} className="field">
-                  <button
-                    type="button"
-                    className="btn btn--quiet"
-                    onClick={() => {
-                      setStoryLookup(storyLookup === s.content_id ? null : s.content_id);
-                      void playStoryAudio(s.content_id);
-                    }}
-                  >
-                    <Ruby surface={s.text} furigana={s.furigana} />
-                  </button>
-                  {s.romaji && (
-                    <p>
-                      <small>{s.romaji}</small>
-                    </p>
-                  )}
-                  {storyLookup === s.content_id && (
-                    <div role="group" aria-label="Word lookup">
-                      {s.gloss && <p className="notice">{s.gloss}</p>}
-                      {s.known.length === 0 ? (
-                        <p className="empty">No pack words match this sentence yet.</p>
-                      ) : (
-                        <ul>
-                          {s.known.map((w) => (
-                            <li key={w.id}>
-                              {w.surface}
-                              {w.reading ? ` (${w.reading})` : ""}
-                              {w.romaji ? ` ${w.romaji}` : ""} — {w.gloss}
-                              {"  "}
-                              <button
-                                type="button"
-                                className="btn btn--quiet"
-                                onClick={() => void mineFromStory(w.surface, w.reading, w.gloss)}
-                              >
-                                Mine
-                              </button>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </>
-          )}
-        </section>
+        <ReadingPanel
+          storyList={storyList}
+          storyActive={storyActive}
+          storyLookup={storyLookup}
+          storyError={storyError}
+          onOpenStory={(id) => void openStory(id)}
+          onBack={() => void openReading()}
+          onPlaySentence={(id) => void playStoryAudio(id)}
+          onToggleLookup={(id) => setStoryLookup(storyLookup === id ? null : id)}
+          onMine={(surface, reading, gloss) => void mineFromStory(surface, reading, gloss)}
+        />
       ) : route === "words" ? (
-        <section aria-label="My words">
-          <h1>My words</h1>
-          <p className="empty">
-            Words you chose to keep, with where you met them. Reviews are self-graded and stay on
-            this device; they never count as mastery evidence.
-          </p>
-          {mineError && (
-            <p role="alert" className="alert">
-              {mineError}
-            </p>
-          )}
-          {mineNotice && (
-            <p role="status" className="notice">
-              {mineNotice}
-            </p>
-          )}
-          {mineReview ? (
-            <div className="field">
-              <p className="prompt">{mineReview.item.surface}</p>
-              {mineReview.revealed ? (
-                <>
-                  <p>{mineReview.item.gloss ?? mineReview.item.reading ?? "(no gloss)"}</p>
-                  <p className="notice">Met in: {mineReview.item.source_citation}</p>
-                  <div className="btn-row">
-                    <button type="button" className="btn" onClick={() => void gradeMine(false)}>
-                      I knew it
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn--quiet"
-                      onClick={() => void gradeMine(true)}
-                    >
-                      Again
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <div className="btn-row">
-                  <button
-                    type="button"
-                    className="btn btn--primary"
-                    onClick={() => setMineReview({ ...mineReview, revealed: true })}
-                  >
-                    Reveal
-                  </button>
-                </div>
-              )}
-            </div>
-          ) : (
-            <div className="btn-row">
-              <button type="button" className="btn btn--primary" onClick={startMineReview}>
-                Review due words
-              </button>
-            </div>
-          )}
-          <div className="field">
-            <label htmlFor="mine-surface">Word or phrase</label>
-            <input
-              id="mine-surface"
-              value={mineSurface}
-              onChange={(e) => setMineSurface(e.target.value)}
-            />
-            <label htmlFor="mine-reading">Reading (optional)</label>
-            <input
-              id="mine-reading"
-              value={mineReading}
-              onChange={(e) => setMineReading(e.target.value)}
-            />
-            <label htmlFor="mine-gloss">Meaning (optional)</label>
-            <input
-              id="mine-gloss"
-              value={mineGloss}
-              onChange={(e) => setMineGloss(e.target.value)}
-            />
-            <label htmlFor="mine-source">Where did you meet it? (citation)</label>
-            <input
-              id="mine-source"
-              value={mineSource}
-              onChange={(e) => setMineSource(e.target.value)}
-            />
-            <div className="btn-row">
-              <button
-                type="button"
-                className="btn btn--primary"
-                disabled={mineSurface.trim() === ""}
-                onClick={() => void addMine()}
-              >
-                Add to my words
-              </button>
-            </div>
-          </div>
-          {mineItems.length === 0 ? (
-            <p className="empty">Nothing mined yet. Add a word above or from a story lookup.</p>
-          ) : (
-            <ul>
-              {mineItems.map((m) => (
-                <li key={m.id}>
-                  {m.surface}
-                  {m.reading ? ` (${m.reading})` : ""}
-                  {m.gloss ? ` — ${m.gloss}` : ""}
-                  {"  ·  "}
-                  <small>
-                    {m.source_citation}
-                    {m.due_at ? ` · due ${m.due_at.slice(0, 10)}` : " · not scheduled yet"}
-                  </small>
-                  {"  "}
-                  <button
-                    type="button"
-                    className="btn btn--quiet"
-                    onClick={() => void removeMine(m.id)}
-                  >
-                    Remove
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
+        <MyWordsPanel
+          items={mineItems}
+          review={mineReview}
+          error={mineError}
+          notice={mineNotice}
+          draft={{
+            surface: mineSurface,
+            reading: mineReading,
+            gloss: mineGloss,
+            source: mineSource,
+          }}
+          onDraftChange={(field, value) =>
+            field === "surface"
+              ? setMineSurface(value)
+              : field === "reading"
+                ? setMineReading(value)
+                : field === "gloss"
+                  ? setMineGloss(value)
+                  : setMineSource(value)
+          }
+          onAdd={() => void addMine()}
+          onRemove={(id) => void removeMine(id)}
+          onGrade={(again) => void gradeMine(again)}
+          onStartReview={startMineReview}
+          onReveal={() => setMineReview((r) => (r ? { ...r, revealed: true } : r))}
+        />
       ) : route === "placement" ? (
         <section aria-label="Placement">
           <h1>Placement</h1>
@@ -2976,16 +2685,12 @@ export function App() {
           )}
           {kanjiActive && kanjiTask ? (
             <div className="field">
-              <p
-                className="prompt"
-                dir={activeRecord?.rtl ? "rtl" : undefined}
-                lang={activeRecord?.locale}
-              >
+              <PackText tag="p" className="prompt">
                 {kanjiActive.character}
-              </p>
+              </PackText>
               <p>
                 <small>
-                  {kanjiActive.radicals.join(" + ")}
+                  <PackText tag="span">{kanjiActive.radicals.join(" + ")}</PackText>
                   {kanjiActive.mnemonic ? (
                     <>
                       {" — "}
@@ -3010,9 +2715,7 @@ export function App() {
               {kanjiCards.map((c) => (
                 <li key={c.id}>
                   <button type="button" className="btn" onClick={() => void startKanji(c)}>
-                    <span dir={activeRecord?.rtl ? "rtl" : undefined} lang={activeRecord?.locale}>
-                      {c.character}
-                    </span>{" "}
+                    <PackText tag="span">{c.character}</PackText>{" "}
                     <small>
                       {(c.meaning_due ?? c.reading_due)
                         ? `due ${c.meaning_due ?? c.reading_due}`
