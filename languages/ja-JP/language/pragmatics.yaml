@@ -115,3 +115,20 @@ situations:
     typical_registers:
       - ja.register.polite-neutral
       - ja.register.plain-casual
+  - id: ja.situation.office
+    name: "Routine office communication"
+    description: >
+      Internal notices, room booking, and replies between colleagues,
+      with clients possible on the same thread; polite wording is the
+      safe default, casual wording is relationship-bound.
+    typical_registers:
+      - ja.register.polite-neutral
+      - ja.register.plain-casual
+  - id: ja.situation.movie-discussion
+    name: "Talking about a film with someone"
+    description: >
+      Recommending, describing, and reacting to a film after watching
+      it; register follows how well the speakers know each other.
+    typical_registers:
+      - ja.register.plain-casual
+      - ja.register.polite-neutral

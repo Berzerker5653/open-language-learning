@@ -1,0 +1,71 @@
+# ai-assisted draft unit (R12 journey ru B1 practical-problems, stage 6 delayed reuse); qualified review pending.
+id: ru.unit.b1.jprob-03
+goal_id: ru.goal.b1.practical-problems
+title: "Повтор: письмо и ответ"
+summary: сказал, что придёт; написал, что заменит — отсроченное повторное использование.
+estimated_minutes: 6
+# K-70/ADR-0022 phase gate: reuse surfaces only after the core unit content
+# reached `supported`.
+requires_unit:
+- unit: ru.unit.b1.jprob-01
+  state: supported
+activities:
+- id: ru.activity.b1.u815-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.b1.report-chto
+  - ru.grammar.b1.proshu-requests
+- id: ru.activity.b1.u815-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.j1
+  - ru.sent.b1.j3
+- id: ru.activity.b1.u815-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.sent.b1.j1
+  - ru.sent.b1.j2
+  - ru.sent.b1.j3
+  - ru.lex.problems.obrashchenie
+  - ru.lex.problems.master
+- id: ru.activity.b1.u815-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.j1
+  - ru.sent.b1.j3
+  - ru.sent.b1.j2
+- id: ru.activity.b1.u815-speak
+  type: retrieval
+  modality: speaking
+  support_level: 0
+  content_refs:
+  - ru.sent.b1.j1
+  - ru.sent.b1.j3
+  - ru.sent.b1.j2
+generation_contract:
+  allowed_vocab:
+  - ru.sent.b1.j1
+  - ru.sent.b1.j2
+  - ru.sent.b1.j3
+  - ru.lex.problems.obrashchenie
+  - ru.lex.problems.master
+  allowed_grammar:
+  - ru.grammar.b1.report-chto
+  - ru.grammar.b1.proshu-requests
+  new_item_budget: 0
+  register:
+  - ru.register.formal-vy
+  expected_interpretations:
+  - 'Delayed reuse: both reported-speech letters recalled without new items.'
+  prohibited_ambiguity:
+  - No new request formulas; reuse прошу and the reported что-clauses.
+  target_proficiency: B1
+  validation_method: choice

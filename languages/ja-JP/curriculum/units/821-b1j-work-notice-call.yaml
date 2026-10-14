@@ -1,0 +1,62 @@
+# ai-assisted draft unit (R12 journey ja B1 work-professional, stage 5 changed context); qualified review pending.
+id: ja.unit.b1-work-notice-call
+goal_id: ja.goal.b1.work-professional
+title: "Meeting notice: the follow-up call"
+summary: "The same notice on the phone: thanking for a notice, asking a question by email."
+estimated_minutes: 9
+# Changed context: the office-phone situation is authored as scenario
+# ja.scenario.b1.office.notice-call (situation ja.situation.office); the unit
+# reuses the journey's sentences, humble and request concepts, and かいぎ.
+activities:
+- id: ja.activity.b1-work-notice-call-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.sent.office-thanks-notice
+  - ja.sent.office-question-email
+  - ja.sent.office-notice-time
+  - ja.lex.work.kaigi
+- id: ja.activity.b1-work-notice-call-scenario
+  type: scenario
+  modality: interaction
+  support_level: 2
+  scenario_id: ja.scenario.b1.office.notice-call
+  content_refs:
+  - ja.sent.office-notice-time
+  - ja.sent.office-room-reserve
+  - ja.sent.office-thanks-notice
+  - ja.grammar.b1.te-itadakimasu
+- id: ja.activity.b1-work-notice-call-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.office-thanks-notice
+  - ja.sent.office-question-email
+- id: ja.activity.b1-work-notice-call-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.office-thanks-notice
+  - ja.sent.office-question-email
+generation_contract:
+  allowed_vocab:
+  - ja.sent.office-thanks-notice
+  - ja.sent.office-question-email
+  - ja.sent.office-notice-time
+  - ja.sent.office-room-reserve
+  - ja.lex.work.kaigi
+  allowed_grammar:
+  - ja.grammar.b1.keigo-kenjo-intro
+  - ja.grammar.b1.te-itadakimasu
+  new_item_budget: 2
+  register:
+  - ja.register.polite-neutral
+  expected_interpretations:
+  - 'Same office notice content on the phone: receive thanks (いただき) and the email-question line, taught chunks only.'
+  prohibited_ambiguity:
+  - Do not answer the scenario prompts with plain-style imperatives to a colleague on the phone.
+  target_proficiency: B1
+  validation_method: human-review

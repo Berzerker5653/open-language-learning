@@ -1,0 +1,77 @@
+# ai-assisted draft unit (R12 journey ru B1 practical-problems, stages 1-4); qualified review pending.
+id: ru.unit.b1.jprob-01
+goal_id: ru.goal.b1.practical-problems
+title: "Письмо о неисправности"
+summary: не работает обогреватель, мастер сказал, что придёт — сообщение о проблеме и сообщение о её причине.
+estimated_minutes: 9
+activities:
+- id: ru.activity.b1.u813-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.j1
+  - ru.sent.b1.j2
+  - ru.lex.problems.nepoladka
+  - ru.lex.problems.obrashchenie
+  - ru.lex.problems.master
+- id: ru.activity.b1.u813-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.b1.report-chto
+  - ru.grammar.b1.proshu-requests
+  - ru.grammar.a2.connectors
+- id: ru.activity.b1.u813-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.j1
+  - ru.sent.b1.j2
+- id: ru.activity.b1.u813-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.sent.b1.j1
+  - ru.sent.b1.j2
+  - ru.lex.problems.nepoladka
+  - ru.lex.problems.obrashchenie
+  - ru.lex.problems.master
+- id: ru.activity.b1.u813-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.j1
+  - ru.sent.b1.j2
+- id: ru.activity.b1.u813-speak
+  type: retrieval
+  modality: speaking
+  support_level: 0
+  content_refs:
+  - ru.sent.b1.j1
+  - ru.sent.b1.j2
+generation_contract:
+  allowed_vocab:
+  - ru.sent.b1.j1
+  - ru.sent.b1.j2
+  - ru.lex.problems.nepoladka
+  - ru.lex.problems.obrashchenie
+  - ru.lex.problems.master
+  allowed_grammar:
+  - ru.grammar.b1.report-chto
+  - ru.grammar.b1.proshu-requests
+  - ru.grammar.a2.connectors
+  new_item_budget: 3
+  register:
+  - ru.register.formal-vy
+  expected_interpretations:
+  - 'Reporting a failure and reporting what the repairman said: прошу + inf and сказал, что + clause, taught chunks only.'
+  prohibited_ambiguity:
+  - Do not shorten the request to imperative singular; this register uses прошу or the Вы-form.
+  - "Do not backshift the reported clause: сказал, что придёт stays future."
+  target_proficiency: B1
+  validation_method: choice

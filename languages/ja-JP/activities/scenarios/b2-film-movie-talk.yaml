@@ -1,0 +1,48 @@
+# ai-assisted draft scenario (R12 journey, B2 film talk); wording pending qualified review.
+id: ja.scenario.b2.film.movie-talk
+goal_id: ja.goal.b2.film-analysis
+title: "Talking about a film after watching it"
+situation: ja.situation.movie-discussion
+register: ja.register.plain-casual
+nodes:
+- id: ja.scenario.b2.film.movie-talk.react
+  prompt: "A friend asks about the film you watched. Give one honest reaction that concedes a drawback but states the stronger point (contrast in one sentence)."
+  expected_actions:
+  - concede-drawback
+  - state-main-point
+  next:
+  - ja.scenario.b2.film.movie-talk.source
+  recovery:
+  - id: ja.scenario.b2.film.movie-talk.repair-unclear
+    prompt: "Your friend did not follow which part you liked. Name one concrete point."
+    expected_actions:
+    - give-concrete-point
+    to: ja.scenario.b2.film.movie-talk.react
+- id: ja.scenario.b2.film.movie-talk.source
+  prompt: "Say who recommended the film to you (favor direction matters), and what the teacher or a friend pointed out about it."
+  expected_actions:
+  - name-recommender
+  - favor-direction
+  next:
+  - ja.scenario.b2.film.movie-talk.recommend
+- id: ja.scenario.b2.film.movie-talk.recommend
+  prompt: "The friend has not seen it yet. Offer to lend or push them to watch it, and close the conversation."
+  expected_actions:
+  - offer-recommend
+  - close-talk
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Model response in Japanese script with romaji scaffold
+- support_level: 5
+  description: Full suggested wording including a first-language gloss
+transfer_variants_required: 2
+transfer_variants:
+- id: ja.scenario.b2.film.movie-talk.coworker-polite
+  description: "The same film talk with a coworker you address politely"
+  changed_variable: "relationship and register"
+- id: ja.scenario.b2.film.movie-talk.documentary
+  description: "Talking about a documentary instead of a feature film"
+  changed_variable: "film type"

@@ -6,19 +6,29 @@
 # passes the machine-verifiable gates below. Narrowing the required set is an
 # owner scope decision requiring recorded rationale, never a silent edit.
 #
-# STATUS (re-measured against pack source 2026-10-13; measured 2026-10-12 at
-# v0.3.0): pack org.openlanguage.ru-ru.reference is v0.4.0 with 60 goals
-# (6 on-ramp, 9 A1, 10 A2, 13 B1, 22 B2) and 809 units, plus 240 assessment
-# definitions (the 2026-10-12 note said 810 units; the tree held 809 that day
-# too, so that figure was a miscount). That is NOT a completeness claim: unit
-# counts are context only and may never establish band completeness (docs/18).
-# All 60 objectives are now ASSESSED across all four modalities — reading,
-# writing, listening and speaking (240 assessments, 60 per modality): the earlier
-# reading/writing-only gap is closed at the authored level. This is still NOT a
-# band-completeness claim — every assessment is `review_status: draft` with zero
-# qualified-human review records (BLK-REVIEW-CAPACITY), so every band stays
-# `partial (review pending)` until the review_core gate passes. Speaking/listening
-# assessments render guided/unscored until docs/17 speech qualification (ADR-0017).
+# STATUS (re-measured against pack source 2026-10-14; earlier notes measured
+# 2026-10-12/13): pack org.openlanguage.ru-ru.reference is v0.4.0 with 60 goals
+# (6 on-ramp, 9 A1, 10 A2, 13 B1, 22 B2), 818 units / 3,248 unit activities and
+# 240 assessment definitions. The earlier note said "809 units" and "810 units"
+# on adjacent days; both were counts of a moving tree, and neither was a
+# completeness claim. Finding R13 requires the four layers to be stated apart:
+#   * DEFINITION — 240 rubric records exist: 60 each for reading, writing,
+#     listening and speaking. A record only proves somebody wrote a rubric.
+#   * RUNNABLE PRACTICE — unit activities by declared modality in this tree:
+#     reading 1,629, writing 1,601, listening 9, speaking 9. The listening and
+#     speaking activities live in the nine journey units (810-818, goals
+#     a2.past-events, b1.practical-problems, b2.style-register), so those three
+#     goals now have an offline task that actually runs each claimed modality.
+#     The other 57 goals still have listening/speaking definitions with nothing
+#     runnable behind them; placement abstains on those instead of substituting
+#     a reading item under a listening assessment id.
+#   * VALID EVIDENCE — no learner evidence exists for the journey content in
+#     this tree, and all 240 assessments carry `review_status: draft`.
+#   * REVIEW — zero qualified-human review records (BLK-REVIEW-CAPACITY), so
+#     every band stays `partial (review pending)` until the review_core gate
+#     passes. Speaking and listening feedback renders guided/unscored until
+#     docs/17 speech qualification (ADR-0017).
+# Counts of units or rubrics may never establish band completeness (docs/18).
 
 coverage_version: "1.0.0"
 schema_version: 1

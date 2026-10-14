@@ -1,0 +1,63 @@
+# ai-assisted draft unit (R12 journey ja B2 film-analysis, stage 5 changed context); qualified review pending.
+id: ja.unit.b2-film-with-friends
+goal_id: ja.goal.b2.film-analysis
+title: "Film talk after the screening"
+summary: "The same evaluation content talking with a friend: the teacher's point and recommending it on."
+estimated_minutes: 9
+# Changed context: the movie-discussion situation is authored as scenario
+# ja.scenario.b2.film.movie-talk (situation ja.situation.movie-discussion);
+# reuses journey sentences and both favor/contrast concepts.
+activities:
+- id: ja.activity.b2-film-friends-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.sent.film-teacher-points
+  - ja.sent.film-recommend-friend
+  - ja.sent.film-friend-recommended
+  - ja.lex.film.eiga
+- id: ja.activity.b2-film-friends-scenario
+  type: scenario
+  modality: interaction
+  support_level: 2
+  scenario_id: ja.scenario.b2.film.movie-talk
+  content_refs:
+  - ja.sent.film-long-interesting
+  - ja.sent.film-friend-recommended
+  - ja.sent.film-recommend-friend
+  - ja.grammar.b2.te-age-kure-morai
+- id: ja.activity.b2-film-friends-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.film-teacher-points
+  - ja.sent.film-recommend-friend
+- id: ja.activity.b2-film-friends-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.film-teacher-points
+  - ja.sent.film-recommend-friend
+  - ja.lex.film.eiga
+generation_contract:
+  allowed_vocab:
+  - ja.sent.film-teacher-points
+  - ja.sent.film-recommend-friend
+  - ja.sent.film-friend-recommended
+  - ja.sent.film-long-interesting
+  - ja.lex.film.eiga
+  allowed_grammar:
+  - ja.grammar.b2.ga-concessive
+  - ja.grammar.b2.te-age-kure-morai
+  new_item_budget: 2
+  register:
+  - ja.register.plain-casual
+  expected_interpretations:
+  - 'Same film content with a friend: くださいました/もらった/あげたい favor directions kept straight.'
+  prohibited_ambiguity:
+  - "Do not switch favor direction: もらった (received) cannot become もらってくれた about one's own action."
+  target_proficiency: B2
+  validation_method: human-review

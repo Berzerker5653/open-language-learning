@@ -260,3 +260,12 @@ jobs:
       # PACK-AI-001: the scaffold's own invariants (media coverage/hash, script
       # declaration, placeholder-audio honesty) without cargo, network or TTS.
       - run: python -m unittest discover -s scripts -p 'test_new_pack.py'
+      # R12: counted template repetition in the shipped packs, plus the
+      # auditor's own invariants. A count is a review input, not a claim about
+      # teaching quality.
+      - run: python tools/audit_content_templates.py languages/ja-JP languages/ru-RU
+      - run: python -m unittest discover -s tools -p 'test_audit_content_templates.py'
+      # I04: the project's own ticket/ADR/gate ids must stay out of sentences
+      # the learner reads.
+      - run: python tools/audit_learner_copy.py
+      - run: python -m unittest discover -s tools -p 'test_audit_learner_copy.py'

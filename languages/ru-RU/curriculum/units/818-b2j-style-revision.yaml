@@ -1,0 +1,75 @@
+# ai-assisted draft unit (R12 journey ru B2 style-register, stage 6 delayed reuse); qualified review pending.
+id: ru.unit.b2.jstyle-03
+goal_id: ru.goal.b2.style-register
+title: "Повтор: правка и отправка"
+summary: посмотрите, сверьте, уточните — отсроченное повторное использование регистровой правки.
+estimated_minutes: 6
+# K-70/ADR-0022 phase gate: reuse surfaces only after the core unit content
+# reached `supported`.
+requires_unit:
+- unit: ru.unit.b2.jstyle-01
+  state: supported
+activities:
+- id: ru.activity.b2.u818-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.b2.imperative-vy-forms
+  - ru.grammar.b2.prefixed-noun-forms
+- id: ru.activity.b2.u818-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.j2
+  - ru.sent.b2.j4
+- id: ru.activity.b2.u818-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.sent.b2.j1
+  - ru.sent.b2.j2
+  - ru.sent.b2.j3
+  - ru.sent.b2.j4
+  - ru.lex.style.nadpiska
+  - ru.lex.style.sveryat
+- id: ru.activity.b2.u818-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.j2
+  - ru.sent.b2.j4
+  - ru.sent.b2.j1
+  - ru.sent.b2.j3
+- id: ru.activity.b2.u818-speak
+  type: retrieval
+  modality: speaking
+  support_level: 0
+  content_refs:
+  - ru.sent.b2.j2
+  - ru.sent.b2.j4
+  - ru.sent.b2.j1
+  - ru.sent.b2.j3
+generation_contract:
+  allowed_vocab:
+  - ru.sent.b2.j1
+  - ru.sent.b2.j2
+  - ru.sent.b2.j3
+  - ru.sent.b2.j4
+  - ru.lex.style.nadpiska
+  - ru.lex.style.sveryat
+  allowed_grammar:
+  - ru.grammar.b2.imperative-vy-forms
+  - ru.grammar.b2.prefixed-noun-forms
+  new_item_budget: 0
+  register:
+  - ru.register.formal-vy
+  expected_interpretations:
+  - 'Delayed reuse: the four Вы-register editing sentences recalled without new items.'
+  prohibited_ambiguity:
+  - No new imperative forms; reuse the taught -ите set.
+  target_proficiency: B2
+  validation_method: choice

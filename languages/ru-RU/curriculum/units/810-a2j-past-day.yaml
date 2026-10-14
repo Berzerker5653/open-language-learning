@@ -1,0 +1,76 @@
+# ai-assisted draft unit (R12 journey ru A2 past-events, stage 1-4); content refs are pack data; qualified review pending.
+id: ru.unit.a2.jpast-01
+goal_id: ru.goal.a2.past-events
+title: "Вчера и в прошлом году"
+summary: были, ужинали, ездил, гулял and ходил — рассказ о завершённом вчерашнем дне.
+estimated_minutes: 9
+activities:
+- id: ru.activity.a2.u810-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.j1
+  - ru.sent.a2.j2
+  - ru.lex.pastevents.vchera
+  - ru.lex.pastevents.byli
+  - ru.lex.pastevents.gulyat
+- id: ru.activity.a2.u810-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.a2.past-tense
+  - ru.grammar.a2.past-motion-hodil
+  - ru.grammar.a2.time-connectors
+- id: ru.activity.a2.u810-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.j1
+  - ru.sent.a2.j2
+- id: ru.activity.a2.u810-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.sent.a2.j1
+  - ru.sent.a2.j2
+  - ru.lex.pastevents.vchera
+  - ru.lex.pastevents.byli
+  - ru.lex.pastevents.gulyat
+- id: ru.activity.a2.u810-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.j1
+  - ru.sent.a2.j2
+- id: ru.activity.a2.u810-speak
+  type: retrieval
+  modality: speaking
+  support_level: 0
+  content_refs:
+  - ru.sent.a2.j1
+  - ru.sent.a2.j2
+generation_contract:
+  allowed_vocab:
+  - ru.sent.a2.j1
+  - ru.sent.a2.j2
+  - ru.lex.pastevents.vchera
+  - ru.lex.pastevents.byli
+  - ru.lex.pastevents.gulyat
+  allowed_grammar:
+  - ru.grammar.a2.past-tense
+  - ru.grammar.a2.past-motion-hodil
+  - ru.grammar.a2.time-connectors
+  new_item_budget: 3
+  register: []
+  expected_interpretations:
+  - 'Narrating a finished yesterday: past -л forms and ходил/ездил for completed visits, taught forms only.'
+  prohibited_ambiguity:
+  - Do not use present forms to talk about вчера; use the supplied -л forms.
+  - Do not use пошёл/поехал here; this lesson only covers завершённый ход (ходил/ездил/был).
+  target_proficiency: A2
+  validation_method: choice

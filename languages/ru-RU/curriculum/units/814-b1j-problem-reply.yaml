@@ -1,0 +1,71 @@
+# ai-assisted draft unit (R12 journey ru B1 practical-problems, stage 5 changed context); qualified review pending.
+id: ru.unit.b1.jprob-02
+goal_id: ru.goal.b1.practical-problems
+title: "Ответ мастера"
+summary: мастер написал, что заменит деталь — то же сообщение о проблеме глазами мастера.
+estimated_minutes: 8
+# Reuses journey content (reported speech, request chunk, master/обращение vocab)
+# in the changed situation declared at world/environments.jsonl
+# `report-a-problem-writing`.
+activities:
+- id: ru.activity.b1.u814-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.j3
+  - ru.sent.b1.j2
+  - ru.lex.problems.master
+  - ru.lex.problems.prosba
+- id: ru.activity.b1.u814-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.b1.report-chto
+  - ru.grammar.b1.proshu-requests
+- id: ru.activity.b1.u814-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.j3
+- id: ru.activity.b1.u814-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.sent.b1.j3
+  - ru.lex.problems.prosba
+- id: ru.activity.b1.u814-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.j3
+  - ru.sent.b1.j2
+- id: ru.activity.b1.u814-speak
+  type: retrieval
+  modality: speaking
+  support_level: 0
+  content_refs:
+  - ru.sent.b1.j3
+  - ru.sent.b1.j2
+generation_contract:
+  allowed_vocab:
+  - ru.sent.b1.j3
+  - ru.sent.b1.j2
+  - ru.lex.problems.master
+  - ru.lex.problems.prosba
+  allowed_grammar:
+  - ru.grammar.b1.report-chto
+  - ru.grammar.b1.proshu-requests
+  new_item_budget: 1
+  register:
+  - ru.register.formal-vy
+  expected_interpretations:
+  - 'The same failure reported from the repairman side: написал, что заменит, taught chunks only.'
+  prohibited_ambiguity:
+  - Do not confuse просьба (a request) with обращение (an address/appeal).
+  target_proficiency: B1
+  validation_method: choice

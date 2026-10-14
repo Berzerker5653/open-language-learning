@@ -1,0 +1,70 @@
+# ai-assisted draft unit (R12 journey ru A2 past-events, stage 5 changed context); qualified review pending.
+id: ru.unit.a2.jpast-02
+goal_id: ru.goal.a2.past-events
+title: "Вчерашний рабочий день"
+summary: была на работе, писала письма — тот же вчерашний рассказ в рабочем окружении.
+estimated_minutes: 8
+# Reuses journey content (sentence, grammar, adverbs) in the changed situation
+# declared at world/environments.jsonl `talk-about-yesterday`.
+activities:
+- id: ru.activity.a2.u811-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.j3
+  - ru.sent.a2.j1
+  - ru.lex.pastevents.byla
+  - ru.lex.pastevents.rabotal
+- id: ru.activity.a2.u811-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.a2.past-tense
+  - ru.grammar.a2.past-motion-hodil
+- id: ru.activity.a2.u811-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.j3
+- id: ru.activity.a2.u811-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.sent.a2.j3
+  - ru.lex.pastevents.byla
+  - ru.lex.pastevents.rabotal
+- id: ru.activity.a2.u811-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.j3
+  - ru.sent.a2.j1
+- id: ru.activity.a2.u811-speak
+  type: retrieval
+  modality: speaking
+  support_level: 0
+  content_refs:
+  - ru.sent.a2.j3
+  - ru.sent.a2.j1
+generation_contract:
+  allowed_vocab:
+  - ru.sent.a2.j3
+  - ru.sent.a2.j1
+  - ru.lex.pastevents.byla
+  - ru.lex.pastevents.rabotal
+  allowed_grammar:
+  - ru.grammar.a2.past-tense
+  - ru.grammar.a2.past-motion-hodil
+  new_item_budget: 1
+  register: []
+  expected_interpretations:
+  - 'Same yesterday-telling, work setting: была/были + place and -л past forms, taught forms only.'
+  prohibited_ambiguity:
+  - Do not mix вчера narration with сегодня/zavtra forms.
+  target_proficiency: A2
+  validation_method: choice

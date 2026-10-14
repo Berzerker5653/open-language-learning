@@ -1,0 +1,48 @@
+# ai-assisted draft scenario (R12 journey, B1 office); wording pending qualified review.
+id: ja.scenario.b1.office.notice-call
+goal_id: ja.goal.b1.work-professional
+title: "Calling a colleague about tomorrow's meeting"
+situation: ja.situation.office
+register: ja.register.polite-neutral
+nodes:
+- id: ja.scenario.b1.office.notice-call.open
+  prompt: "You call a colleague. Tell them the new time of tomorrow's meeting, using humble wording for your own act of informing."
+  expected_actions:
+  - state-meeting-time
+  - humble-inform
+  next:
+  - ja.scenario.b1.office.notice-call.room
+  recovery:
+  - id: ja.scenario.b1.office.notice-call.repair-repeat
+    prompt: "The colleague did not catch the time. Repeat it and ask them to confirm."
+    expected_actions:
+    - repeat-time
+    - ask-confirm
+    to: ja.scenario.b1.office.notice-call.open
+- id: ja.scenario.b1.office.notice-call.room
+  prompt: "Ask the colleague to reserve a meeting room, using a polite 〜ていただけますか request."
+  expected_actions:
+  - request-room
+  next:
+  - ja.scenario.b1.office.notice-call.close
+- id: ja.scenario.b1.office.notice-call.close
+  prompt: "Thank them for the confirmation and close the call."
+  expected_actions:
+  - thank
+  - close-call
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Model response in Japanese script with romaji scaffold
+- support_level: 5
+  description: Full suggested wording including a first-language gloss
+transfer_variants_required: 2
+transfer_variants:
+- id: ja.scenario.b1.office.notice-call.email-thread
+  description: "The same content as a short email thread instead of a call"
+  changed_variable: "channel (phone to email)"
+- id: ja.scenario.b1.office.notice-call.client-side
+  description: "Informing an outside client about a meeting change"
+  changed_variable: "who is informed (colleague to client)"

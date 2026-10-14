@@ -1,0 +1,68 @@
+# ai-assisted draft unit (R12 journey ja B2 film-analysis, stages 1-4); content refs are pack data; qualified review pending.
+id: ja.unit.b2-film-opinion
+goal_id: ja.goal.b2.film-analysis
+title: "Film opinion: concessive が and favor verbs"
+summary: "B2 film evaluation: ながいが、おもしろい contrast; もらった relative clause."
+estimated_minutes: 9
+activities:
+- id: ja.activity.b2-film-opinion-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.sent.film-long-interesting
+  - ja.sent.film-friend-recommended
+  - ja.lex.film.eiga
+  - ja.lex.film.kantoku
+- id: ja.activity.b2-film-opinion-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.grammar.b2.ga-concessive
+  - ja.grammar.b2.te-age-kure-morai
+  - ja.grammar.syntax.relative-clauses
+- id: ja.activity.b2-film-opinion-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.film-long-interesting
+  - ja.sent.film-friend-recommended
+- id: ja.activity.b2-film-opinion-recall
+  type: recall-choice
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.sent.film-long-interesting
+  - ja.sent.film-friend-recommended
+  - ja.grammar.b2.ga-concessive
+  - ja.grammar.b2.te-age-kure-morai
+- id: ja.activity.b2-film-opinion-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.film-long-interesting
+  - ja.sent.film-friend-recommended
+  - ja.lex.film.eiga
+  - ja.lex.film.kantoku
+generation_contract:
+  allowed_vocab:
+  - ja.sent.film-long-interesting
+  - ja.sent.film-friend-recommended
+  - ja.lex.film.eiga
+  - ja.lex.film.kantoku
+  allowed_grammar:
+  - ja.grammar.b2.ga-concessive
+  - ja.grammar.b2.te-age-kure-morai
+  - ja.grammar.syntax.relative-clauses
+  new_item_budget: 4
+  register:
+  - ja.register.polite-neutral
+  expected_interpretations:
+  - 'Film evaluation: concede one drawback with mid-sentence が, then the stronger point; report who recommended it with てもらった.'
+  prohibited_ambiguity:
+  - The が in ながい が is the conjunction 'but', not the subject marker.
+  target_proficiency: B2
+  validation_method: choice

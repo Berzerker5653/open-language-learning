@@ -1,0 +1,65 @@
+# ai-assisted draft unit (R12 journey ja B1 work-professional, stages 1-4); content refs are pack data; qualified review pending.
+id: ja.unit.b1-work-notice
+goal_id: ja.goal.b1.work-professional
+title: "Meeting notice: informing the team"
+summary: B1 polite notice of a meeting time; humble いたします and the polite request いただけますか.
+estimated_minutes: 9
+activities:
+- id: ja.activity.b1-work-notice-enc
+  type: encounter-read
+  modality: reading
+  support_level: 5
+  content_refs:
+  - ja.sent.office-notice-time
+  - ja.sent.office-room-reserve
+  - ja.lex.work.kaigi
+- id: ja.activity.b1-work-notice-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.grammar.b1.keigo-kenjo-intro
+  - ja.grammar.b1.te-itadakimasu
+  - ja.grammar.politeness.register
+- id: ja.activity.b1-work-notice-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.office-notice-time
+  - ja.sent.office-room-reserve
+- id: ja.activity.b1-work-notice-recall
+  type: recall-choice
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.sent.office-notice-time
+  - ja.sent.office-room-reserve
+  - ja.grammar.b1.keigo-kenjo-intro
+  - ja.grammar.b1.te-itadakimasu
+- id: ja.activity.b1-work-notice-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.office-notice-time
+  - ja.sent.office-room-reserve
+  - ja.lex.work.kaigi
+generation_contract:
+  allowed_vocab:
+  - ja.sent.office-notice-time
+  - ja.sent.office-room-reserve
+  - ja.lex.work.kaigi
+  allowed_grammar:
+  - ja.grammar.b1.keigo-kenjo-intro
+  - ja.grammar.b1.te-itadakimasu
+  - ja.grammar.politeness.register
+  new_item_budget: 4
+  register:
+  - ja.register.polite-neutral
+  expected_interpretations:
+  - 'Noticing a meeting politely: humble いたします for own informing and ていただけますか as a request, taught chunks only.'
+  prohibited_ambiguity:
+  - Do not use humble いたします for the listener's action; that side is honorific (see b1.keigo-soncho-intro).
+  target_proficiency: B1
+  validation_method: choice

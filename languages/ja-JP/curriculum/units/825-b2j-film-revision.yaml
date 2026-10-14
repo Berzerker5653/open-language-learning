@@ -1,0 +1,55 @@
+# ai-assisted draft unit (R12 journey ja B2 film-analysis, stage 6 delayed reuse); qualified review pending.
+id: ja.unit.b2-film-revision
+goal_id: ja.goal.b2.film-analysis
+title: "Review: film evaluation language"
+summary: Delayed reuse of the four film sentences and the contrast/favor concepts.
+estimated_minutes: 6
+# K-70/ADR-0022 phase gate: reuse surfaces only after the core unit content
+# reached `supported`.
+requires_unit:
+- unit: ja.unit.b2-film-opinion
+  state: supported
+activities:
+- id: ja.activity.b2-film-rev-retrieve
+  type: retrieval
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.grammar.b2.ga-concessive
+  - ja.grammar.b2.te-age-kure-morai
+- id: ja.activity.b2-film-rev-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.film-long-interesting
+  - ja.sent.film-teacher-points
+- id: ja.activity.b2-film-rev-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.film-long-interesting
+  - ja.sent.film-friend-recommended
+  - ja.sent.film-teacher-points
+  - ja.sent.film-recommend-friend
+  - ja.lex.film.eiga
+generation_contract:
+  allowed_vocab:
+  - ja.sent.film-long-interesting
+  - ja.sent.film-friend-recommended
+  - ja.sent.film-teacher-points
+  - ja.sent.film-recommend-friend
+  - ja.lex.film.eiga
+  allowed_grammar:
+  - ja.grammar.b2.ga-concessive
+  - ja.grammar.b2.te-age-kure-morai
+  new_item_budget: 0
+  register:
+  - ja.register.polite-neutral
+  expected_interpretations:
+  - 'Delayed reuse: all four film sentences recalled with no new items.'
+  prohibited_ambiguity:
+  - No new conjunctions; reuse が, てもらった, くださいました only.
+  target_proficiency: B2
+  validation_method: choice

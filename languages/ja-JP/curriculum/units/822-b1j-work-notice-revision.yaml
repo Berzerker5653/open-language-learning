@@ -1,0 +1,55 @@
+# ai-assisted draft unit (R12 journey ja B1 work-professional, stage 6 delayed reuse); qualified review pending.
+id: ja.unit.b1-work-notice-revision
+goal_id: ja.goal.b1.work-professional
+title: "Review: office notice language"
+summary: Delayed reuse of the notice sentences and the humble/request concepts.
+estimated_minutes: 6
+# K-70/ADR-0022 phase gate: reuse surfaces only after the core unit content
+# reached `supported`.
+requires_unit:
+- unit: ja.unit.b1-work-notice
+  state: supported
+activities:
+- id: ja.activity.b1-work-notice-rev-retrieve
+  type: retrieval
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.grammar.b1.keigo-kenjo-intro
+  - ja.grammar.b1.te-itadakimasu
+- id: ja.activity.b1-work-notice-rev-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.office-notice-time
+  - ja.sent.office-question-email
+- id: ja.activity.b1-work-notice-rev-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.office-notice-time
+  - ja.sent.office-room-reserve
+  - ja.sent.office-thanks-notice
+  - ja.sent.office-question-email
+  - ja.lex.work.kaigi
+generation_contract:
+  allowed_vocab:
+  - ja.sent.office-notice-time
+  - ja.sent.office-room-reserve
+  - ja.sent.office-thanks-notice
+  - ja.sent.office-question-email
+  - ja.lex.work.kaigi
+  allowed_grammar:
+  - ja.grammar.b1.keigo-kenjo-intro
+  - ja.grammar.b1.te-itadakimasu
+  new_item_budget: 0
+  register:
+  - ja.register.polite-neutral
+  expected_interpretations:
+  - 'Delayed reuse: all four office-notice sentences recalled with no new items.'
+  prohibited_ambiguity:
+  - No new keigo forms; reuse いたします and ていただきます only.
+  target_proficiency: B1
+  validation_method: choice

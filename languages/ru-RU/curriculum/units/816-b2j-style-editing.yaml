@@ -1,0 +1,72 @@
+# ai-assisted draft unit (R12 journey ru B2 style-register, stages 1-4); qualified review pending.
+id: ru.unit.b2.jstyle-01
+goal_id: ru.goal.b2.style-register
+title: "Правка по-деловому"
+summary: посмотрите, исправьте, подпишите, сверьте — вежливая правка текста формами на -ите.
+estimated_minutes: 9
+activities:
+- id: ru.activity.b2.u816-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.j1
+  - ru.sent.b2.j2
+  - ru.lex.style.nadpiska
+  - ru.lex.style.sveryat
+- id: ru.activity.b2.u816-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.b2.imperative-vy-forms
+  - ru.grammar.b2.prefixed-noun-forms
+- id: ru.activity.b2.u816-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.j1
+  - ru.sent.b2.j2
+- id: ru.activity.b2.u816-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.sent.b2.j1
+  - ru.sent.b2.j2
+  - ru.lex.style.nadpiska
+  - ru.lex.style.sveryat
+- id: ru.activity.b2.u816-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.j1
+  - ru.sent.b2.j2
+- id: ru.activity.b2.u816-speak
+  type: retrieval
+  modality: speaking
+  support_level: 0
+  content_refs:
+  - ru.sent.b2.j1
+  - ru.sent.b2.j2
+generation_contract:
+  allowed_vocab:
+  - ru.sent.b2.j1
+  - ru.sent.b2.j2
+  - ru.lex.style.nadpiska
+  - ru.lex.style.sveryat
+  allowed_grammar:
+  - ru.grammar.b2.imperative-vy-forms
+  - ru.grammar.b2.prefixed-noun-forms
+  new_item_budget: 4
+  register:
+  - ru.register.formal-vy
+  expected_interpretations:
+  - 'Editing instructions in Вы-register: -ите imperatives and the noun надписка from надписать, taught forms only.'
+  prohibited_ambiguity:
+  - Do not use the ты imperative (посмотри) with a Вы contact.
+  - Do not confuse надписка (an annotation/overwriting) with подпись (a signature).
+  target_proficiency: B2
+  validation_method: choice

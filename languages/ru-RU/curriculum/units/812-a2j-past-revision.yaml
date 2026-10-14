@@ -1,0 +1,72 @@
+# ai-assisted draft unit (R12 journey ru A2 past-events, stage 6 delayed reuse); qualified review pending.
+id: ru.unit.a2.jpast-03
+goal_id: ru.goal.a2.past-events
+title: "Повтор: вчерашний день"
+summary: были, ездил, была на работе — отсроченное повторное использование.
+estimated_minutes: 6
+# K-70/ADR-0022 phase gate: this reuse unit may surface as NEW material only
+# after the journey's core unit content has been introduced at `supported`.
+requires_unit:
+- unit: ru.unit.a2.jpast-01
+  state: supported
+activities:
+- id: ru.activity.a2.u812-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.a2.past-tense
+  - ru.grammar.a2.past-motion-hodil
+  - ru.grammar.a2.time-connectors
+- id: ru.activity.a2.u812-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.j2
+  - ru.sent.a2.j3
+- id: ru.activity.a2.u812-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.sent.a2.j1
+  - ru.sent.a2.j2
+  - ru.sent.a2.j3
+  - ru.lex.pastevents.vchera
+  - ru.lex.pastevents.byli
+- id: ru.activity.a2.u812-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.j2
+  - ru.sent.a2.j3
+  - ru.sent.a2.j1
+- id: ru.activity.a2.u812-speak
+  type: retrieval
+  modality: speaking
+  support_level: 0
+  content_refs:
+  - ru.sent.a2.j2
+  - ru.sent.a2.j3
+  - ru.sent.a2.j1
+generation_contract:
+  allowed_vocab:
+  - ru.sent.a2.j1
+  - ru.sent.a2.j2
+  - ru.sent.a2.j3
+  - ru.lex.pastevents.vchera
+  - ru.lex.pastevents.byli
+  allowed_grammar:
+  - ru.grammar.a2.past-tense
+  - ru.grammar.a2.past-motion-hodil
+  - ru.grammar.a2.time-connectors
+  new_item_budget: 0
+  register: []
+  expected_interpretations:
+  - 'Delayed reuse of the yesterday journey: the same past forms recalled without new items.'
+  prohibited_ambiguity:
+  - No new verbs or adverbs; reuse only the taught yesterday forms.
+  target_proficiency: A2
+  validation_method: choice

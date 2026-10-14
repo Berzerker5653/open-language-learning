@@ -1,0 +1,75 @@
+# ai-assisted draft unit (R12 journey ru B2 style-register, stage 5 changed context); qualified review pending.
+id: ru.unit.b2.jstyle-02
+goal_id: ru.goal.b2.style-register
+title: "Перед отправкой"
+summary: сверьте цифры, уточните форму обращения — та же правка перед отправкой письма.
+estimated_minutes: 8
+# Reuses journey content (imperative-vy concept, prefixed nouns, сверять/nadpiska
+# vocab, sentence j1) in the changed situation declared at
+# world/environments.jsonl `polite-request-desk` and the pre-send workflow.
+activities:
+- id: ru.activity.b2.u817-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.j3
+  - ru.sent.b2.j4
+  - ru.lex.style.opiska
+  - ru.lex.style.sveryat
+- id: ru.activity.b2.u817-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.b2.imperative-vy-forms
+  - ru.grammar.b2.prefixed-noun-forms
+  - ru.grammar.b2-pered-otpravkoy
+- id: ru.activity.b2.u817-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.j3
+  - ru.sent.b2.j4
+- id: ru.activity.b2.u817-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.sent.b2.j3
+  - ru.sent.b2.j4
+  - ru.lex.style.opiska
+- id: ru.activity.b2.u817-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.j3
+  - ru.sent.b2.j4
+- id: ru.activity.b2.u817-speak
+  type: retrieval
+  modality: speaking
+  support_level: 0
+  content_refs:
+  - ru.sent.b2.j3
+  - ru.sent.b2.j4
+generation_contract:
+  allowed_vocab:
+  - ru.sent.b2.j3
+  - ru.sent.b2.j4
+  - ru.lex.style.opiska
+  - ru.lex.style.sveryat
+  allowed_grammar:
+  - ru.grammar.b2.imperative-vy-forms
+  - ru.grammar.b2.prefixed-noun-forms
+  - ru.grammar.b2-pered-otpravkoy
+  new_item_budget: 2
+  register:
+  - ru.register.formal-vy
+  expected_interpretations:
+  - 'Pre-send checking with the same Вы-form imperatives: сверьте, уточните; опечатка vs описка stays distinct.'
+  prohibited_ambiguity:
+  - Do not confuse опечатка (typing error) with описка (slip of the pen).
+  target_proficiency: B2
+  validation_method: choice

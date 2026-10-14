@@ -3,6 +3,8 @@ goal_id: "ru.goal.on-ramp.cyrillic"
 title: "Printed Cyrillic: А а, О о, М м, Т т"
 summary: "Start here before unit 000. Recognize these printed case pairs, match each letter to its partner and copy the requested case. Letter-name labels are not audio tasks."
 estimated_minutes: 5
+capabilities:
+- script-introduction
 activities:
   - id: "ru.activity.on-ramp.cyrillic-a-o-m-t-read"
     type: "encounter-read"
