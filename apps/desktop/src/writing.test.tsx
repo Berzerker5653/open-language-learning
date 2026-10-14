@@ -70,4 +70,42 @@ describe("writing practice surface", () => {
     expect(hinted).toContain("Reading hint");
     expect(hinted).toContain("Correct");
   });
+
+  it("I03: a miss shows the form the task asked for, and only after Check", () => {
+    const handlers = { onDraft: () => {}, onSubmit: () => {}, onHint: () => {} };
+    const before = renderToStaticMarkup(
+      <WritingPractice
+        task={{ item_id: "ja.lex.demo.watashi", prompt_text: "I (neutral polite)" }}
+        draft="watashi"
+        graded={false}
+        correct={false}
+        {...handlers}
+      />,
+    );
+    // The task itself must never carry the answer into the attempt.
+    expect(before).not.toContain("writing-expected");
+    const miss = renderToStaticMarkup(
+      <WritingPractice
+        task={{ item_id: "ja.lex.demo.watashi", prompt_text: "I (neutral polite)" }}
+        draft="watashi"
+        graded
+        correct={false}
+        expected="私"
+        {...handlers}
+      />,
+    );
+    expect(miss).toContain('data-testid="writing-expected"');
+    expect(miss).toContain("<strong>私</strong>");
+    const hit = renderToStaticMarkup(
+      <WritingPractice
+        task={{ item_id: "ja.lex.demo.watashi", prompt_text: "I (neutral polite)" }}
+        draft="私"
+        graded
+        correct
+        expected="私"
+        {...handlers}
+      />,
+    );
+    expect(hit).not.toContain("writing-expected");
+  });
 });

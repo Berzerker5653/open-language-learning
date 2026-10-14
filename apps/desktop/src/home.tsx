@@ -12,7 +12,7 @@ export interface PlannedItem {
   item_id: string;
   content_id: string;
   modality: string;
-  reason: "due-review" | "weak-skill" | "progression";
+  reason: "due-review" | "saved-review" | "weak-skill" | "progression";
   /** K-66: the engine's own classification of why this item is here —
    * `review` keeps something alive, `introduction` is material the
    * learner has never met. Derived from `reason` on the Rust side
@@ -61,6 +61,9 @@ export const BUDGET_PRESETS = [5, 10, 20, 30];
 
 const REASON_LABELS: Record<PlannedItem["reason"], string> = {
   "due-review": "Due for review",
+  // R02: a card the learner saved from a text, scheduled by its own
+  // (mined) scheduler. It never touches pack mastery.
+  "saved-review": "Review a saved word",
   "weak-skill": "Strengthen a weak spot",
   progression: "New material",
 };
@@ -361,7 +364,10 @@ export function ProgressView({ rows }: { rows: ProgressRow[] }) {
 export interface GoalDimension {
   modality: string;
   state: string;
+  concepts_total: number;
+  concepts_seen: number;
   exemplar: string | null;
+  best_state: string;
 }
 
 export interface GoalPrereq {
@@ -475,9 +481,25 @@ export function GoalMap({ goals }: { goals: GoalCard[] }) {
                       )}
                       <ul className="goal-dims">
                         {g.dimensions.map((d) => (
-                          <li key={d.modality}>
+                          <li
+                            key={d.modality}
+                            data-coverage={`${d.concepts_seen}/${d.concepts_total}`}
+                          >
                             <span className="meta">{d.modality}</span>{" "}
                             <span data-state={d.state}>{STATE_LABELS[d.state] ?? d.state}</span>
+                            {/* R09: the headline state is the weakest declared
+                                concept, so a goal with one strong concept and
+                                several untouched ones cannot read as achieved.
+                                The furthest concept is named as an exemplar
+                                and the remaining coverage is stated. */}
+                            {d.concepts_total > 1 && d.state !== d.best_state ? (
+                              <span className="meta">
+                                {" "}
+                                — {d.concepts_seen} of {d.concepts_total} concepts have evidence;
+                                the strongest ({d.exemplar}) is{" "}
+                                {STATE_LABELS[d.best_state] ?? d.best_state}
+                              </span>
+                            ) : null}
                           </li>
                         ))}
                       </ul>

@@ -23,14 +23,19 @@ export const HUB_MODES: { id: HubMode; label: string; blurb: string }[] = [
     blurb: "Hear the difference between similar words; guided feedback on your attempts.",
   },
   {
+    // I03: the card says what the screen actually asks. This mode is
+    // read-aloud recognition; listen-and-type dictation is a separate
+    // practice task, so nothing here may blur the two.
     id: "dictation",
     label: "Speaking",
-    blurb: "Listen and type what you hear, one sentence at a time.",
+    blurb: "Read a sentence aloud and see what the local model heard. Guided: nothing is graded.",
   },
   {
+    // I03: the promise matches the check — a written answer compared with the
+    // form the pack expects, never an open-ended composition with corrections.
     id: "writing",
     label: "Writing",
-    blurb: "Compose with the words you know and get corrections.",
+    blurb: "Write the answer the pack asks for; a miss shows the form it expected.",
   },
   {
     id: "scenarios",
@@ -59,7 +64,19 @@ export const HUB_MODES: { id: HubMode; label: string; blurb: string }[] = [
   },
 ];
 
-export function PracticeHub({ onOpen }: { onOpen(mode: HubMode): void }) {
+export function PracticeHub({
+  onOpen,
+  kanjiAvailable = true,
+}: {
+  onOpen(mode: HubMode): void;
+  /**
+   * I03: a mode is only advertised when the active pack can actually run it.
+   * Kanji drills come from the pack's own orthography data, so a pack that
+   * teaches no kanji must not offer the card at all.
+   */
+  kanjiAvailable?: boolean;
+}) {
+  const modes = HUB_MODES.filter((m) => m.id !== "kanji" || kanjiAvailable);
   return (
     <section aria-label="Practice modes">
       <h1>Practice</h1>
@@ -68,7 +85,7 @@ export function PracticeHub({ onOpen }: { onOpen(mode: HubMode): void }) {
         like; each keeps its own honesty about what is scored and what is not.
       </p>
       <ul className="pack-list">
-        {HUB_MODES.map((m) => (
+        {modes.map((m) => (
           <li key={m.id}>
             <button type="button" className="btn" onClick={() => onOpen(m.id)}>
               {m.label}

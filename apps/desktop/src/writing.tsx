@@ -18,6 +18,11 @@ export interface WritingPracticeProps {
   draft: string;
   graded: boolean;
   correct: boolean;
+  /// I03: the form this task asked for, present only on a graded miss. The
+  /// pre-attempt response carries no expected string (K-12); showing it after
+  /// Check is what the practice hub promises — "a miss shows the form it
+  /// expected".
+  expected?: string;
   onDraft(value: string): void;
   onSubmit(): void;
   onHint(kind: "reading" | "romaji"): void;
@@ -45,7 +50,9 @@ export function WritingPractice(p: WritingPracticeProps) {
         </p>
       )}
       <div className="field">
-        <label htmlFor="writing-answer">Type the answer in Japanese (IME supported)</label>
+        <label htmlFor="writing-answer">
+          Type the answer in the language you are learning (IME supported)
+        </label>
         <input
           id="writing-answer"
           type="text"
@@ -80,6 +87,11 @@ export function WritingPractice(p: WritingPracticeProps) {
       >
         {p.graded ? (p.correct ? "Correct" : "Try again") : ""}
       </p>
+      {p.graded && !p.correct && p.expected ? (
+        <p className="meta" data-testid="writing-expected" {...packAttrs}>
+          The form this task asked for: <strong>{p.expected}</strong>
+        </p>
+      ) : null}
     </section>
   );
 }

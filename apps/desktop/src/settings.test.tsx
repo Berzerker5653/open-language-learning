@@ -39,6 +39,12 @@ const base: SettingsProps = {
   deviceTier: null,
   exportPath: null,
   onExport: () => {},
+  restorePath: "",
+  restorePreview: null,
+  restoreOutcome: null,
+  onRestorePathChange: () => {},
+  onPreviewRestore: () => {},
+  onConfirmRestore: () => {},
   deleteArmed: false,
   onArmDelete: () => {},
   onCancelDelete: () => {},
@@ -226,6 +232,53 @@ describe("settings", () => {
     expect(cpu).toContain('data-aligner="no"');
   });
 
+  it("I03: readiness is stated before the controls, with the alternative named", () => {
+    // The finding was that a learner reached a control that could not work
+    // before learning why. Readiness has to be readable above the picker.
+    const html = render({
+      microphoneEnabled: false,
+      speechModel: "org.openlanguage.speech.whisper-ggml-tiny",
+      speechModels: [
+        {
+          id: "org.openlanguage.speech.whisper-ggml-tiny",
+          version: "1",
+          license_code: "MIT",
+          installed: false,
+          installable: true,
+          size_bytes: 86000000,
+        },
+      ],
+    });
+    expect(html.indexOf('data-testid="settings-speech-readiness"')).toBeLessThan(
+      html.indexOf('id="speech-model"'),
+    );
+    expect(html).toContain(
+      "Microphone: off — speaking activities abstain and nothing is recorded.",
+    );
+    expect(html).toContain(
+      "is selected but not on this device yet — download it below, or speaking checks abstain.",
+    );
+  });
+
+  it("I03: a ready device is reported as ready", () => {
+    const html = render({
+      microphoneEnabled: true,
+      speechModel: "org.openlanguage.speech.whisper-ggml-tiny",
+      speechModels: [
+        {
+          id: "org.openlanguage.speech.whisper-ggml-tiny",
+          version: "1",
+          license_code: "MIT",
+          installed: true,
+          installable: true,
+          size_bytes: 86000000,
+        },
+      ],
+    });
+    expect(html).toContain("Microphone: allowed.");
+    expect(html).toContain("org.openlanguage.speech.whisper-ggml-tiny is already on this device.");
+  });
+
   it("the model list carries sizes, licenses, and the detected recommendation", () => {
     const html = render({
       speechModels: [
@@ -307,5 +360,83 @@ describe("settings", () => {
     // Capable but unnamed outputs: a sentence, not a dropdown of blanks.
     const empty = render({ canRouteOutput: true, playbackOutputs: [] });
     expect(empty).toContain("has not revealed any output names");
+  });
+  /// R05/R06 (DATA-002 reopen): the export copy names the saved words the
+  /// bundle carries, and a restore is preview-first — the learner sees what
+  /// the backup holds before anything is written, an unsupported backup gets
+  /// no restore control, and the result states what the store holds after.
+  it("names saved words in the export and shows a backup before restoring it", () => {
+    expect(render()).toContain("saved words, and review schedule");
+
+    // Nothing checked yet: no counts, no restore control.
+    const idle = render({ restorePath: "/home/hunter/backup.json" });
+    expect(idle).not.toContain("settings-restore-preview");
+    expect(idle).not.toContain("Restore as a new profile");
+
+    const backup = {
+      format_version: 2,
+      supported: true,
+      source_profile_name: "Hunter",
+      exported_at: "2026-10-14T09:00:00Z",
+      events: 12,
+      corrections: 1,
+      goals: 3,
+      mastery: 4,
+      saved_words: 7,
+      scheduled_items: 9,
+      pack_installs: 2,
+      selected_packs: 1,
+      recordings: 0,
+      warnings: [],
+    };
+    // Static markup splits interpolated text with comments; flatten it so the
+    // sentence can be asserted as the learner reads it.
+    const flat = (html: string) => html.replace(/<!--.*?-->/g, "");
+    const checked = flat(
+      render({ restorePath: "/home/hunter/backup.json", restorePreview: backup }),
+    );
+    expect(checked).toContain("Hunter");
+    expect(checked).toContain("7 saved words");
+    expect(checked).toContain("12 recorded attempts");
+    expect(checked).toContain("9 scheduled reviews");
+    expect(checked).toContain("2 language packs");
+    expect(checked).toContain("Restore as a new profile");
+    expect(checked).not.toContain("settings-restore-result");
+
+    // A backup this build cannot read is explained, never offered.
+    const future = flat(
+      render({
+        restorePath: "/home/hunter/future.json",
+        restorePreview: {
+          ...backup,
+          supported: false,
+          format_version: 999,
+          warnings: [
+            "this backup uses data format version 999, which this version of the app cannot read",
+          ],
+        },
+      }),
+    );
+    expect(future).not.toContain("Restore as a new profile");
+    expect(future).toContain("format version 999");
+    expect(future).toContain("settings-restore-warnings");
+
+    // After a restore the panel reports the restored state.
+    const done = flat(
+      render({
+        restoreOutcome: {
+          profile_id: "prof-restored",
+          display_name: "Hunter",
+          events: 12,
+          goals: 3,
+          saved_words: 7,
+          scheduled_items: 9,
+          warnings: [],
+        },
+      }),
+    );
+    expect(done).toContain("Restored as Hunter");
+    expect(done).toContain("On this device now: 7 saved words, 12 recorded attempts");
+    expect(done).toContain("always creates a new profile");
   });
 });

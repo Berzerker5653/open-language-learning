@@ -7,6 +7,11 @@ import { EMPTY_PITCH, PronunciationPractice } from "./pronunciation";
 const base = {
   shortText: "おばさん",
   longText: "おばあさん",
+  // R10: the instruction sentence is the pack's declaration, never the
+  // app's memory of one language's phonology.
+  description: "Contrastive long vowel: おばさん (aunt) vs おばあさん (grandmother)",
+  featureId: "ja.phon.vowel-length",
+  measure: "voiced-duration-ratio",
   recording: false,
   hasAttempt: false,
   onRecord: () => undefined,
@@ -149,5 +154,50 @@ describe("PronunciationPractice", () => {
     const html = renderToStaticMarkup(<PronunciationPractice {...base} recording result={null} />);
     expect(html).toContain("Stop and check");
     expect(html).not.toContain("Record attempt");
+  });
+
+  it("teaches a Russian voicing contrast in the pack's own words (R10)", () => {
+    const html = renderToStaticMarkup(
+      <PronunciationPractice
+        {...base}
+        shortText="дом"
+        longText="том"
+        description="Voiced [d] versus voiceless [t] in word-initial stops."
+        featureId="ru.phon.obstruent-voicing"
+        measure={null}
+        result={null}
+      />,
+    );
+    expect(html).toContain("Voiced [d] versus voiceless [t]");
+    expect(html).toContain("Hear reference: дом");
+    expect(html).toContain('data-feature="ru.phon.obstruent-voicing"');
+    // The Japanese vowel-length lesson must never be spoken about a pair
+    // the pack declares as a different contrast.
+    expect(html).not.toContain("holding the あ");
+    expect(html).not.toMatch(/vowel length|twice as long/);
+  });
+
+  it("offers listen and repeat, not a score, for a contrast the app cannot measure", () => {
+    const html = renderToStaticMarkup(
+      <PronunciationPractice
+        {...base}
+        shortText="дом"
+        longText="том"
+        description="Voiced [d] versus voiceless [t] in word-initial stops."
+        featureId="ru.phon.obstruent-voicing"
+        measure={null}
+        result={{
+          corrections: [],
+          abstain_reason: "feature-not-instrumented",
+          pitch: EMPTY_PITCH,
+          mode: "guided",
+          mode_reason: "feature-not-instrumented",
+        }}
+      />,
+    );
+    expect(html).toContain("cannot analyse yet");
+    expect(html).toContain("not scored");
+    expect(html).toContain("Guided feedback only");
+    expect(html).not.toMatch(/vowel length|holding the あ/);
   });
 });

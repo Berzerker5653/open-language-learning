@@ -36,6 +36,8 @@ import {
 } from "./language";
 import { WritingPractice, type WritingTaskView } from "./writing";
 import { PracticeRunner, type PracticeTaskView } from "./practice";
+import { LessonEncounter, stageForDrill, type LessonPlan } from "./lesson";
+import { playClip } from "./playback";
 import { stressEnabled, type DisplaySettingsView } from "./stress";
 import { ReadingPanel, type Story, type StorySummary } from "./reading";
 import { ShadowingPanel, type ShadowTarget } from "./shadowing";
@@ -47,11 +49,21 @@ import {
   type ScenarioSummaryView,
   type ScenarioView,
 } from "./scenario";
-import { Settings, type BuildIdentity, type RomajiMode } from "./settings";
 import {
+  Settings,
+  type BuildIdentity,
+  type ImportOutcome,
+  type ImportPreview,
+  type RomajiMode,
+} from "./settings";
+import {
+  CaptureOwner,
+  captureLimitReached,
   listMicrophones,
   listOutputs,
+  MAX_CAPTURE_SECONDS,
   openMicrophone,
+  type CaptureSessionLike,
   type Microphone,
   type SpeakerOutput,
 } from "./capture";
@@ -251,6 +263,25 @@ export function App() {
   const [displayName, setDisplayName] = useState("");
   const [budget, setBudget] = useState(5);
   const [plan, setPlan] = useState<SessionPlan>(EMPTY_PLAN);
+  // Review finding R04: the engine needs an attempt identity to tell a
+  // retry apart from genuine variation. One id per presented plan: retries
+  // of a task the learner is looking at collapse into a single observation
+  // (docs/03 §5), while a refetched plan — budget change, refresh, profile
+  // switch — is a new session and its attempts are new observations. It is
+  // never derived from the plan's contents or the clock: a fresh id per
+  // call collapses nothing, a clock-derived id merges unrelated days.
+  const planSessionRef = useRef("");
+  // R04: a supplied reading and a romaji reveal disqualify different
+  // mastery dimensions, so the engine needs which hint was used, not just
+  // that some hint was.
+  const [writingHintKind, setWritingHintKind] = useState<"reading" | "romaji" | null>(null);
+  function applyPlan(next: SessionPlan) {
+    planSessionRef.current =
+      typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+        ? crypto.randomUUID()
+        : `plan-${Math.random().toString(36).slice(2, 10)}`;
+    setPlan(next);
+  }
   // K-66: derived guidance from the engine. `undefined` = home_state has
   // not answered; `null` = the pack declares no goal map. The app never
   // composes these strings itself (ADR-0020).
@@ -268,6 +299,16 @@ export function App() {
   const [recording, setRecording] = useState(false);
   const [attemptUrl, setAttemptUrl] = useState<string | null>(null);
   const [environments, setEnvironments] = useState<WorldEnvironment[]>([]);
+  // R14: a failed playback must be something the learner can see, not a
+  // silent Audio error in the console.
+  const [playbackError, setPlaybackError] = useState<string | null>(null);
+  // R14: a retained recording URL lives until it is replaced or this screen
+  // goes away. Nothing else may revoke it while state still holds it.
+  useEffect(() => {
+    return () => {
+      if (attemptUrl) URL.revokeObjectURL(attemptUrl);
+    };
+  }, [attemptUrl]);
   const [goals, setGoals] = useState<GoalCard[]>([]);
   const [installed, setInstalled] = useState<InstalledPack[]>([]);
   const [claims, setClaims] = useState<PackClaims[] | null>(null);
@@ -294,6 +335,7 @@ export function App() {
   const [writingDraft, setWritingDraft] = useState("");
   const [writingGraded, setWritingGraded] = useState(false);
   const [writingCorrect, setWritingCorrect] = useState(false);
+  const [writingExpected, setWritingExpected] = useState("");
   const [writingUsedHint, setWritingUsedHint] = useState(false);
   const [writingError, setWritingError] = useState<string | null>(null);
   const [practiceTarget, setPracticeTarget] = useState<{
@@ -306,6 +348,10 @@ export function App() {
   const [practiceCorrect, setPracticeCorrect] = useState(false);
   const [practiceCorrectChoice, setPracticeCorrectChoice] = useState("");
   const [practiceError, setPracticeError] = useState<string | null>(null);
+  // R11: the journey the pack authored the item with, and whether the
+  // learner has moved past its encounter into the drill.
+  const [lesson, setLesson] = useState<LessonPlan | null>(null);
+  const [lessonSeen, setLessonSeen] = useState(false);
   const [practiceRevealed, setPracticeRevealed] = useState(false);
   const [scenarioList, setScenarioList] = useState<ScenarioSummaryView[]>([]);
   const [scenarioActive, setScenarioActive] = useState<ScenarioView | null>(null);
@@ -360,6 +406,15 @@ export function App() {
   const [canRouteOutput, setCanRouteOutput] = useState(false);
   const [romajiMode, setRomajiMode] = useState<RomajiMode>("auto");
   const [settingsExportPath, setSettingsExportPath] = useState<string | null>(null);
+  // R06: restoring is preview-first. `restoreChecked` remembers exactly which
+  // path was checked, so editing the field drops a stale preview instead of
+  // letting a confirm write a file the learner never saw.
+  const [restorePath, setRestorePath] = useState("");
+  const [restoreChecked, setRestoreChecked] = useState<{
+    path: string;
+    preview: ImportPreview;
+  } | null>(null);
+  const [restoreOutcome, setRestoreOutcome] = useState<ImportOutcome | null>(null);
   const [settingsDeleteArmed, setSettingsDeleteArmed] = useState(false);
   const [settingsSwitchArmed, setSettingsSwitchArmed] = useState(false);
   const [settingsError, setSettingsError] = useState<string | null>(null);
@@ -471,7 +526,7 @@ export function App() {
             profileId: p.id,
           })) as { display_name: string; plan: SessionPlan; next_goal: NextGoalView | null };
           setDisplayName(home.display_name);
-          setPlan(home.plan);
+          applyPlan(home.plan);
           setNextGoal(home.next_goal);
           // K-66: on a fresh profile every planned item is an
           // introduction, and first-run guidance must be non-empty for
@@ -1087,7 +1142,7 @@ export function App() {
           next_goal: NextGoalView | null;
         };
         setDisplayName(home.display_name);
-        setPlan(home.plan);
+        applyPlan(home.plan);
         setNextGoal(home.next_goal);
         setFirstRunSteps((await inv("first_run_steps", { profileId })) as FirstRunStep[]);
         const envs = (await inv("world_state", { profileId })) as WorldEnvironment[];
@@ -1129,7 +1184,7 @@ export function App() {
         next_goal: NextGoalView | null;
       };
       setDisplayName(home.display_name);
-      setPlan(home.plan);
+      applyPlan(home.plan);
       setNextGoal(home.next_goal);
       setFirstRunSteps((await inv("first_run_steps", { profileId: p.id })) as FirstRunStep[]);
       const envs = (await inv("world_state", { profileId: p.id })) as WorldEnvironment[];
@@ -1147,7 +1202,7 @@ export function App() {
     setBudget(minutes);
     if (inv && profileId) {
       try {
-        setPlan((await inv("practice_plan", { profileId, minutes })) as SessionPlan);
+        applyPlan((await inv("practice_plan", { profileId, minutes })) as SessionPlan);
       } catch (e) {
         // The optimistic value is only real once the engine has rebuilt the
         // plan around it; otherwise the learner keeps the old budget.
@@ -1295,6 +1350,40 @@ export function App() {
       setSettingsError(String(e));
     }
   }
+  // R06: the check is read-only; the write only happens on the labelled
+  // confirm control, always as a new profile, never over the profile in use.
+  async function previewRestore() {
+    if (!inv) return;
+    setSettingsError(null);
+    setRestoreOutcome(null);
+    const path = restorePath.trim();
+    try {
+      const preview = (await inv("profile_import_preview", {
+        path,
+        mode: "new",
+      })) as ImportPreview;
+      setRestoreChecked({ path, preview });
+    } catch (e) {
+      setRestoreChecked(null);
+      setSettingsError(String(e));
+    }
+  }
+
+  async function confirmRestore() {
+    if (!inv || !restoreChecked || !restoreChecked.preview.supported) return;
+    setSettingsError(null);
+    try {
+      const outcome = (await inv("profile_import", {
+        path: restoreChecked.path,
+        mode: "new",
+      })) as ImportOutcome;
+      setRestoreOutcome(outcome);
+      // The restored profile is in the picker without a restart.
+      setProfiles((await inv("list_profiles")) as ProfileSummary[]);
+    } catch (e) {
+      setSettingsError(String(e));
+    }
+  }
 
   // Two-step delete: the first click only arms the confirmation; only
   // the labelled confirm control fires `profile_delete` (never a
@@ -1311,7 +1400,7 @@ export function App() {
     // The profile no longer exists: back to the wizard, clean state.
     setProfileId(null);
     setDisplayName("");
-    setPlan(EMPTY_PLAN);
+    applyPlan(EMPTY_PLAN);
     setEnvironments([]);
     setGoals([]);
     setProgress([]);
@@ -1335,7 +1424,7 @@ export function App() {
     setSettingsError(null);
     setProfileId(null);
     setDisplayName("");
-    setPlan(EMPTY_PLAN);
+    applyPlan(EMPTY_PLAN);
     setEnvironments([]);
     setGoals([]);
     setProgress([]);
@@ -1384,8 +1473,10 @@ export function App() {
     setWritingLoaded(false);
     setWritingDraft("");
     setWritingGraded(false);
+    setWritingExpected("");
     setWritingScaffold({});
     setWritingUsedHint(false);
+    setWritingHintKind(null);
     if (inv && profileId) {
       try {
         const t = (await inv("writing_task", { profileId })) as {
@@ -1415,6 +1506,7 @@ export function App() {
 
   function showWritingHint(kind: "reading" | "romaji") {
     setWritingUsedHint(true);
+    setWritingHintKind(kind);
     setWritingTask((prev) =>
       prev
         ? {
@@ -1436,8 +1528,11 @@ export function App() {
           itemId: writingTask.item_id,
           answer: writingDraft,
           usedHint: writingUsedHint,
-        })) as { correct: boolean };
+          hintKind: writingHintKind,
+          sessionId: planSessionRef.current,
+        })) as { correct: boolean; expected?: string };
         setWritingCorrect(grade.correct);
+        setWritingExpected(grade.correct ? "" : (grade.expected ?? ""));
         setWritingGraded(true);
       } catch (e) {
         setWritingError(String(e));
@@ -1448,11 +1543,51 @@ export function App() {
   // UX-003: first lessons. Plan items are runnable; grading, evidence,
   // and scheduling happen natively.
   async function openPractice(item: PlannedItem) {
+    // Review finding R02: a saved (mined) word is scheduled by its own
+    // scheduler and has no pack content behind it, so it opens the saved
+    // word's review card — a pack practice task on a `mine-…` id could only
+    // fail, and mined practice must never become mastery evidence.
+    if (item.reason === "saved-review") {
+      const miner = detectInvoke();
+      if (!miner || !profileId) return;
+      try {
+        // The engine owns what "due" means (D8): ask it for the due list
+        // and open that word's card instead of re-deriving due-ness here.
+        const due = (await miner("mine_due", { profileId })) as MineItem[];
+        const found = due.find((m) => m.id === item.content_id);
+        setRoute("words");
+        if (!found) {
+          setMineNotice("That saved word is not due right now.");
+          return;
+        }
+        setMineNotice(null);
+        setMineReview({ item: found, revealed: false });
+      } catch (e) {
+        setMineError(String(e));
+      }
+      return;
+    }
     setPracticeError(null);
     setPracticeGraded(false);
     setPracticeCorrectChoice("");
     setPracticeRevealed(false);
     setPracticeTarget({ contentId: item.content_id, modality: item.modality });
+    setLesson(null);
+    setLessonSeen(false);
+    if (inv && profileId) {
+      try {
+        setLesson(
+          (await inv("lesson_plan", {
+            profileId,
+            contentId: item.content_id,
+          })) as LessonPlan | null,
+        );
+      } catch {
+        // A unit that declares no activities has no lesson to show; the
+        // drill alone is the honest fallback, never a fabricated summary.
+        setLesson(null);
+      }
+    }
     if (inv && profileId) {
       setPracticeAudio(null);
       setPracticeAudioError(null);
@@ -1511,6 +1646,8 @@ export function App() {
         modality: practiceTarget.modality,
         choiceIndex: index,
         revealReading: practiceRevealed,
+        sessionId: planSessionRef.current,
+        stageId: stageForDrill(lesson, practiceTarget.modality),
       })) as { correct: boolean; correct_choice: string };
       setPracticeCorrect(g.correct);
       setPracticeCorrectChoice(g.correct_choice);
@@ -1532,6 +1669,8 @@ export function App() {
         choiceIndex: 0,
         answer: practiceDraft,
         revealReading: practiceRevealed,
+        sessionId: planSessionRef.current,
+        stageId: stageForDrill(lesson, practiceTarget.modality),
       })) as { correct: boolean; correct_choice: string };
       setPracticeCorrect(g.correct);
       setPracticeCorrectChoice(g.correct_choice);
@@ -1550,7 +1689,7 @@ export function App() {
     setPracticeRevealed(false);
     if (inv && profileId) {
       try {
-        setPlan((await inv("practice_plan", { profileId, minutes: budget })) as SessionPlan);
+        applyPlan((await inv("practice_plan", { profileId, minutes: budget })) as SessionPlan);
       } catch (e) {
         setPracticeError(`The plan could not be refreshed: ${String(e)}`);
       }
@@ -1558,9 +1697,11 @@ export function App() {
   }
 
   // K-15: placement — low-stakes diagnosis per pack assessment. Each
-  // goal gets two support-0 questions (two correct diagnostic answers
-  // across prompts reach `independent`, so known foundations unlock via
-  // prerequisite gating). Evidence is tagged Diagnostic natively.
+  // assessment gets two support-0 questions, and the session id tells the
+  // engine they were presented together: two correct answers on one prompt
+  // establish `supported`, not `independent`, which needs a second prompt
+  // (R04; the multi-prompt generators are ACTIVITY-MODEL-001). Evidence is
+  // tagged Diagnostic natively.
   async function openPlacement() {
     setRoute("placement");
     setPlacementFinished(false);
@@ -1604,6 +1745,7 @@ export function App() {
         contentId: item.content_id,
         modality: item.modality,
         choiceIndex: index,
+        sessionId: planSessionRef.current,
       })) as { correct: boolean; correct_choice: string };
       if (g.correct) setPlacementHits((c) => c + 1);
       setPlacementCorrect(g.correct);
@@ -1695,6 +1837,7 @@ export function App() {
         modality: kanjiStage === "meaning" ? "recall-meaning" : "orthography-recognition",
         choiceIndex: index,
         revealReading: false,
+        sessionId: planSessionRef.current,
       })) as { correct: boolean; correct_choice: string };
       setKanjiCorrect(g.correct);
       setKanjiCorrectChoice(g.correct_choice);
@@ -2118,6 +2261,10 @@ export function App() {
     long_unit: string;
     short_text: string;
     long_text: string;
+    contrast_id: string;
+    feature_id: string;
+    description: string;
+    measure: string | null;
   }
   const [pronDemo, setPronDemo] = useState<PronDemo | null>(null);
   useEffect(() => {
@@ -2144,7 +2291,7 @@ export function App() {
     };
   }, [selectedPack]);
 
-  function playBlobUrl(url: string) {
+  function playBlobUrl(url: string, retained = false) {
     const audio = new Audio(url);
     // K-88: honour this profile's output device. If the chosen device has
     // vanished or this webview refuses to route, the system default answers
@@ -2160,13 +2307,18 @@ export function App() {
         });
       }
     }
-    // Playbacks are one-shot blobs: once the webview is done with the decoded
-    // sample (or it fails outright) the URL must go, or every played clip
-    // pins its audio for the rest of the session.
-    const release = () => URL.revokeObjectURL(url);
-    audio.addEventListener("ended", release);
-    audio.addEventListener("error", release);
-    void audio.play().catch(() => release());
+    // R14: URL lifetime and the learner-visible complaint live in `playClip`,
+    // where they are testable without a webview: a one-shot clip is revoked
+    // when the webview is done with it, a retained recording is not, and a
+    // failure always reaches the learner instead of the console.
+    playClip({
+      url,
+      retained,
+      audio,
+      revoke: (u) => URL.revokeObjectURL(u),
+      onError: setPlaybackError,
+      onClearError: () => setPlaybackError(null),
+    });
   }
 
   async function playReference(which: "short" | "long") {
@@ -2297,20 +2449,20 @@ export function App() {
   // WebKitGTK does not enable MediaRecorder, so capture PCM directly via
   // WebAudio (enabled by default) and build the WAV in JS. The attempt
   // lives in memory only (docs/08); nothing audio is ever persisted.
-  interface Capture {
-    ctx: AudioContext;
-    src: MediaStreamAudioSourceNode;
-    proc: ScriptProcessorNode;
-    stream: MediaStream;
+  // L01: the recording is owned by `captureOwner`, so every way out of the
+  // flow — Stop, navigation, profile change, microphone off, unmount — goes
+  // through one place that hands the device back.
+  interface Capture extends CaptureSessionLike {
     bufs: Float32Array[];
+    rate: number;
   }
-  const captureRef = useRef<Capture | null>(null);
+  const captureOwner = useRef(new CaptureOwner<Capture>()).current;
   const captureRouteRef = useRef<"pronunciation" | "dictation">("pronunciation");
 
   function recordAttempt() {
     void (async () => {
-      let stream: MediaStream;
-      let fallbackNote: string | null;
+      let fallbackNote: string | null = null;
+      let unsupported: string | null = null;
       // SETTINGS-001: the stored `microphone-enabled` setting is enforced
       // at the capture site — while it is off, getUserMedia is never
       // requested. (Without the native engine no setting exists.)
@@ -2320,49 +2472,86 @@ export function App() {
         );
         return;
       }
+      let cap: Capture | null;
       try {
-        // K-64: record from the device this profile chose, when it chose one.
-        const opened = await openMicrophone(navigator.mediaDevices, micDevice);
-        stream = opened.stream;
-        fallbackNote = opened.fellBack
-          ? "Your saved microphone was not available, so this recording used the system default. Pick it again in Settings."
-          : null;
-        // A successful grant is also when the browser starts naming devices,
-        // so the Settings picker fills up without a restart.
-        await refreshMicrophones();
+        cap = await captureOwner.begin(async () => {
+          // K-64: record from the device this profile chose, when it chose one.
+          const opened = await openMicrophone(navigator.mediaDevices, micDevice);
+          // A successful grant is also when the browser starts naming devices,
+          // so the Settings picker fills up without a restart.
+          await refreshMicrophones();
+          fallbackNote = opened.fellBack
+            ? "Your saved microphone was not available, so this recording used the system default. Pick it again in Settings."
+            : null;
+          const ctx = new AudioContext();
+          try {
+            const src = ctx.createMediaStreamSource(opened.stream);
+            const proc = ctx.createScriptProcessor(4096, 1, 1);
+            const bufs: Float32Array[] = [];
+            const rate = ctx.sampleRate;
+            let closed = false;
+            proc.onaudioprocess = (e) => {
+              if (closed) return;
+              bufs.push(new Float32Array(e.inputBuffer.getChannelData(0)));
+              // L01: a recording nobody stops still has to end. The limit
+              // path runs the same stop control the learner would press, so
+              // the frames stop growing and the attempt is reported.
+              if (captureLimitReached(bufs.length, 4096, rate)) stopAtLimit();
+            };
+            src.connect(proc);
+            proc.connect(ctx.destination);
+            return {
+              bufs,
+              rate,
+              close: () => {
+                if (closed) return;
+                closed = true;
+                proc.onaudioprocess = null;
+                proc.disconnect();
+                src.disconnect();
+                opened.stream.getTracks().forEach((t) => t.stop());
+                void ctx.close();
+              },
+            };
+          } catch (e) {
+            // The graph failed after the device was granted: hand the device
+            // back before reporting, and name what actually failed.
+            opened.stream.getTracks().forEach((t) => t.stop());
+            void ctx.close();
+            unsupported = `Audio capture is not supported here: ${String(e)}`;
+            throw e;
+          }
+        });
       } catch (e) {
-        setAudioMsg(`Microphone unavailable: ${String(e)}`);
+        setAudioMsg(unsupported ?? `Microphone unavailable: ${String(e)}`);
         return;
       }
-      try {
-        const ctx = new AudioContext();
-        const src = ctx.createMediaStreamSource(stream);
-        const proc = ctx.createScriptProcessor(4096, 1, 1);
-        const bufs: Float32Array[] = [];
-        proc.onaudioprocess = (e) => bufs.push(new Float32Array(e.inputBuffer.getChannelData(0)));
-        src.connect(proc);
-        proc.connect(ctx.destination);
-        captureRef.current = { ctx, src, proc, stream, bufs };
-        setAudioMsg(fallbackNote);
-        setRecording(true);
-      } catch (e) {
-        stream.getTracks().forEach((t) => t.stop());
-        setAudioMsg(`Audio capture is not supported here: ${String(e)}`);
+      if (!cap) {
+        // L01: the learner left, switched profile or turned the microphone
+        // off while the browser was still deciding. The grant that arrived
+        // afterwards was closed by the owner instead of starting a recording
+        // on a screen nobody is looking at.
+        return;
       }
+      setAudioMsg(fallbackNote);
+      setRecording(true);
     })();
+  }
+
+  /** L01: the duration bound fired. End the recording the way the Stop
+   *  control does, and say why it ended. */
+  function stopAtLimit() {
+    if (!captureOwner.active()) return;
+    setAudioMsg(`That recording stopped on its own at the ${MAX_CAPTURE_SECONDS}-second limit.`);
+    stopAndCheck();
   }
 
   function stopAndCheck() {
     setRecording(false);
-    const cap = captureRef.current;
-    captureRef.current = null;
+    const cap = captureOwner.finish();
     if (!cap) return;
-    cap.proc.onaudioprocess = null;
-    cap.proc.disconnect();
-    cap.src.disconnect();
-    cap.stream.getTracks().forEach((t) => t.stop());
-    const rate = cap.ctx.sampleRate;
-    void cap.ctx.close();
+    // L01: giving the device back is not optional on any path.
+    cap.close();
     const total = cap.bufs.reduce((n, b) => n + b.length, 0);
     const pcm = new Float32Array(total);
     let off = 0;
@@ -2374,7 +2563,7 @@ export function App() {
     for (let i = 0; i < pcm.length; i++) {
       i16[i] = Math.max(-32767, Math.min(32767, Math.round((pcm[i] ?? 0) * 32767)));
     }
-    const wav = toWav16(i16, rate);
+    const wav = toWav16(i16, cap.rate);
     if (attemptUrl) URL.revokeObjectURL(attemptUrl);
     setAttemptUrl(URL.createObjectURL(new Blob([wav], { type: "audio/wav" })));
     if (captureRouteRef.current === "dictation") {
@@ -2383,6 +2572,21 @@ export function App() {
       void analyzeWav(wav);
     }
   }
+
+  // L01: capture belongs to the flow that opened it. Leaving the screen
+  // (route/step), switching or leaving the profile, changing installed packs,
+  // or turning the microphone off abandons an in-flight recording: the device
+  // is released and the frames dropped, so nothing audio survives its screen
+  // and no audio state carries into the next profile.
+  useEffect(() => {
+    captureOwner.cancel();
+    setRecording(false);
+    setAudioMsg(null);
+  }, [captureOwner, profileId, micEnabled, route, step, installedPacks]);
+
+  // The same release when the app itself goes away (window closed, the
+  // profile list swapped the tree out).
+  useEffect(() => () => captureOwner.cancel(), [captureOwner]);
 
   if (step !== "done") {
     return (
@@ -2505,8 +2709,13 @@ export function App() {
         </nav>
       }
     >
+      {playbackError ? (
+        <p role="alert" className="alert" data-testid="playback-error">
+          {playbackError}
+        </p>
+      ) : null}
       {route === "hub" ? (
-        <PracticeHub onOpen={openMode} />
+        <PracticeHub onOpen={openMode} kanjiAvailable={kanjiCards.length > 0} />
       ) : route === "pronunciation" ? (
         <>
           {audioMsg && (
@@ -2518,6 +2727,9 @@ export function App() {
             <PronunciationPractice
               shortText={pronDemo.short_text}
               longText={pronDemo.long_text}
+              description={pronDemo.description}
+              featureId={pronDemo.feature_id}
+              measure={pronDemo.measure}
               result={pronResult}
               recording={recording}
               hasAttempt={attemptUrl !== null}
@@ -2527,7 +2739,7 @@ export function App() {
               }}
               onStop={stopAndCheck}
               onPlayReference={(w) => void playReference(w)}
-              onPlayAttempt={() => attemptUrl && playBlobUrl(attemptUrl)}
+              onPlayAttempt={() => attemptUrl && playBlobUrl(attemptUrl, true)}
             />
           ) : (
             <section aria-label="Pronunciation">
@@ -2559,7 +2771,7 @@ export function App() {
               recordAttempt();
             }}
             onStop={stopAndCheck}
-            onPlayAttempt={() => attemptUrl && playBlobUrl(attemptUrl)}
+            onPlayAttempt={() => attemptUrl && playBlobUrl(attemptUrl, true)}
           />
         </>
       ) : route === "shadowing" ? (
@@ -2576,7 +2788,7 @@ export function App() {
           onRecord={recordAttempt}
           onStop={stopAndCheck}
           onPlayAttempt={() => {
-            if (attemptUrl) playBlobUrl(attemptUrl);
+            if (attemptUrl) playBlobUrl(attemptUrl, true);
           }}
           onStep={(delta) =>
             setShadowIdx((i) => Math.max(0, Math.min((shadowItems?.length ?? 0) - 1, i + delta)))
@@ -2710,7 +2922,7 @@ export function App() {
                 onNext={() => void nextKanji()}
               />
             </div>
-          ) : (
+          ) : kanjiCards.length ? (
             <ul className="story-list">
               {kanjiCards.map((c) => (
                 <li key={c.id}>
@@ -2725,6 +2937,10 @@ export function App() {
                 </li>
               ))}
             </ul>
+          ) : (
+            <p className="empty">
+              Your current pack teaches no kanji, so there is nothing to drill here.
+            </p>
           )}
         </section>
       ) : route === "progress" ? (
@@ -2758,6 +2974,7 @@ export function App() {
               draft={writingDraft}
               graded={writingGraded}
               correct={writingCorrect}
+              expected={writingExpected}
               onDraft={setWritingDraft}
               onSubmit={() => void submitWriting()}
               stress={stressEnabled(display)}
@@ -2840,6 +3057,19 @@ export function App() {
             buildIdentity={buildIdentity}
             exportPath={settingsExportPath}
             onExport={() => void exportProfileData()}
+            restorePath={restorePath}
+            restorePreview={
+              restoreChecked && restoreChecked.path === restorePath.trim()
+                ? restoreChecked.preview
+                : null
+            }
+            restoreOutcome={restoreOutcome}
+            onRestorePathChange={(path) => {
+              setRestorePath(path);
+              setRestoreOutcome(null);
+            }}
+            onPreviewRestore={() => void previewRestore()}
+            onConfirmRestore={() => void confirmRestore()}
             deleteArmed={settingsDeleteArmed}
             onArmDelete={() => setSettingsDeleteArmed(true)}
             onCancelDelete={() => setSettingsDeleteArmed(false)}
@@ -2862,40 +3092,67 @@ export function App() {
               {practiceError}
             </p>
           )}
-          <PracticeRunner
-            routeHeading="Practice"
-            task={practiceTask}
-            graded={practiceGraded}
-            correct={practiceCorrect}
-            correctChoice={practiceCorrectChoice}
-            audioSource={
-              practiceAudio ? (practiceAudio.source as "licensed-recording" | "model-output") : null
-            }
-            audioError={practiceAudioError}
-            onChoose={(i) => void choosePractice(i)}
-            onNext={() => void finishPractice()}
-            onPlayAudio={playPracticeAudio}
-            heading={
-              practiceTarget.modality === "orthography-recognition"
-                ? "Which one matches?"
-                : practiceTarget.modality === "production-writing"
-                  ? "Fill in the blank"
-                  : undefined
-            }
-            draft={practiceDraft}
-            onDraft={setPracticeDraft}
-            onCheck={() => void checkPractice()}
-            stress={stressEnabled(display)}
-            revealed={practiceRevealed}
-            onReveal={
-              practiceTarget.modality === "orthography-recognition" ||
-              practiceTarget.modality === "phonological-discrimination" ||
-              practiceTarget.modality === "production-writing" ||
-              practiceTarget.modality === "orthographic-encoding"
-                ? undefined
-                : () => void revealPracticeReading()
-            }
-          />
+          {lesson && !lessonSeen ? (
+            <LessonEncounter
+              lesson={lesson}
+              onStart={() => setLessonSeen(true)}
+              onScenario={(scenarioId) => {
+                void startScenario(scenarioId);
+                setRoute("scenarios");
+              }}
+            />
+          ) : (
+            <>
+              {lesson ? (
+                <div className="btn-row">
+                  <button
+                    type="button"
+                    className="btn"
+                    data-testid="lesson-revisit"
+                    onClick={() => setLessonSeen(false)}
+                  >
+                    Show the lesson again
+                  </button>
+                </div>
+              ) : null}
+              <PracticeRunner
+                routeHeading="Practice"
+                task={practiceTask}
+                graded={practiceGraded}
+                correct={practiceCorrect}
+                correctChoice={practiceCorrectChoice}
+                audioSource={
+                  practiceAudio
+                    ? (practiceAudio.source as "licensed-recording" | "model-output")
+                    : null
+                }
+                audioError={practiceAudioError}
+                onChoose={(i) => void choosePractice(i)}
+                onNext={() => void finishPractice()}
+                onPlayAudio={playPracticeAudio}
+                heading={
+                  practiceTarget.modality === "orthography-recognition"
+                    ? "Which one matches?"
+                    : practiceTarget.modality === "production-writing"
+                      ? "Fill in the blank"
+                      : undefined
+                }
+                draft={practiceDraft}
+                onDraft={setPracticeDraft}
+                onCheck={() => void checkPractice()}
+                stress={stressEnabled(display)}
+                revealed={practiceRevealed}
+                onReveal={
+                  practiceTarget.modality === "orthography-recognition" ||
+                  practiceTarget.modality === "phonological-discrimination" ||
+                  practiceTarget.modality === "production-writing" ||
+                  practiceTarget.modality === "orthographic-encoding"
+                    ? undefined
+                    : () => void revealPracticeReading()
+                }
+              />
+            </>
+          )}
         </>
       ) : practiceTarget ? (
         <section aria-label="Practice">

@@ -70,6 +70,8 @@ const REASON_TEXT: Record<string, string> = {
     "Feedback cannot run: this build carries a speech alignment runtime, but this CPU is below the instruction set it was compiled for. This attempt is not scored; other practice is unaffected.",
   "reference-media-missing": "The reference recording for this exercise is missing from the pack.",
   "reference-media-invalid": "The reference recording could not be read.",
+  "feature-not-instrumented":
+    "This pair drills a sound contrast this app cannot analyse yet. Use Hear reference, then record to listen and repeat — this attempt is not scored.",
 };
 
 function reasonLabel(reason: string): string {
@@ -86,6 +88,14 @@ function reasonLabel(reason: string): string {
 export interface PronunciationProps {
   shortText: string;
   longText: string;
+  /** The installed pack's own description of the contrast being drilled:
+   *  the instruction sentence belongs to the pack, never to the app. */
+  description: string;
+  /** The phonological feature the pack declares for this pair. */
+  featureId: string;
+  /** The production measure the pack declares; null when it declares none,
+   *  in which case there is nothing to score, only listen/repeat. */
+  measure: string | null;
   result: PronunciationResult | null;
   recording: boolean;
   hasAttempt: boolean;
@@ -96,11 +106,16 @@ export interface PronunciationProps {
 }
 
 export function PronunciationPractice(props: PronunciationProps) {
-  const { shortText, longText, result, recording, hasAttempt } = props;
+  const { shortText, longText, description, featureId, measure, result, recording, hasAttempt } =
+    props;
   const packAttrs = usePackTextAttrs();
   return (
-    <section aria-label="Pronunciation practice">
-      <h1>Pronunciation: long vs short vowels</h1>
+    <section
+      aria-label="Pronunciation practice"
+      data-feature={featureId}
+      data-measure={measure ?? ""}
+    >
+      <h1>Pronunciation</h1>
       <p className="prompt">
         Say both words, one after the other:{" "}
         <strong className="target-word" {...packAttrs}>
@@ -110,7 +125,10 @@ export function PronunciationPractice(props: PronunciationProps) {
         <strong className="target-word" {...packAttrs}>
           {longText}
         </strong>
-        . They differ only in vowel length — the second holds the あ about twice as long.
+        . {description}
+        {measure === "voiced-duration-ratio"
+          ? " They differ only in how long the vowel is held — the second sustains it about twice as long."
+          : ""}
       </p>
       <div role="group" aria-label="Playback" className="btn-row">
         <button

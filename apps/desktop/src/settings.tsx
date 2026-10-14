@@ -36,6 +36,36 @@ export interface BuildIdentity {
   commit: string;
   dirty: boolean;
 }
+/** What `profile_import_preview` answers: what a backup on disk holds, and
+ *  whether this build can read it. Read-only — nothing has been written. */
+export interface ImportPreview {
+  format_version: number;
+  supported: boolean;
+  source_profile_name: string;
+  exported_at: string;
+  events: number;
+  corrections: number;
+  goals: number;
+  mastery: number;
+  saved_words: number;
+  scheduled_items: number;
+  pack_installs: number;
+  selected_packs: number;
+  recordings: number;
+  warnings: string[];
+}
+
+/** What `profile_import` answers: the state the store actually holds after
+ *  a restore, read back rather than echoed from the file. */
+export interface ImportOutcome {
+  profile_id: string;
+  display_name: string;
+  events: number;
+  goals: number;
+  saved_words: number;
+  scheduled_items: number;
+  warnings: string[];
+}
 
 export interface SettingsProps {
   /** Stored `microphone-enabled` for this profile (false when unset). */
@@ -71,6 +101,14 @@ export interface SettingsProps {
   /** Path returned by the last `profile_export`, null until one runs. */
   exportPath: string | null;
   onExport(): void;
+  /** R06: a backup path the learner named, plus what the engine said about
+   *  it. Nothing is written until `onConfirmRestore`. */
+  restorePath: string;
+  restorePreview: ImportPreview | null;
+  restoreOutcome: ImportOutcome | null;
+  onRestorePathChange(path: string): void;
+  onPreviewRestore(): void;
+  onConfirmRestore(): void;
   /** Two-step delete: armed=false shows only the arming control. */
   deleteArmed: boolean;
   onArmDelete(): void;
@@ -116,6 +154,31 @@ function alignerLine(a: AlignerStatus | null): string {
     default:
       return "Speech runtime: this build does not include whisper.cpp, so pronunciation feedback and dictation abstain. Downloading a model here does not change that.";
   }
+}
+
+/**
+ * I03: readiness before the controls. A learner should learn what speaking can
+ * actually do on this device before reaching a control that cannot do it —
+ * microphone, the selected model's presence, and the runtime status, in one
+ * line, with the fix or the alternative named.
+ */
+export function speechReadiness(
+  microphoneEnabled: boolean,
+  speechModel: string,
+  speechModels: { id: string; installed: boolean }[],
+  aligner: AlignerStatus | null,
+): string {
+  const mic = microphoneEnabled
+    ? "Microphone: allowed."
+    : "Microphone: off — speaking activities abstain and nothing is recorded.";
+  const chosen = speechModels.find((m) => m.id === speechModel);
+  const model =
+    speechModel === "off" || !chosen
+      ? "Speech model: off — speaking checks say so instead of guessing."
+      : chosen.installed
+        ? `Speech model: ${speechModel} is already on this device.`
+        : `Speech model: ${speechModel} is selected but not on this device yet — download it below, or speaking checks abstain.`;
+  return `${mic} ${model} ${alignerLine(aligner)}`;
 }
 
 export function Settings(p: SettingsProps) {
@@ -208,9 +271,9 @@ export function Settings(p: SettingsProps) {
           <small>
             The privacy notice promises you can export or delete your local profile data at any time
             — both are here, and switching profiles starts here too. Switching only leaves the
-            current profile; it deletes nothing. The export is a readable JSON file with your
-            profile, settings, learning evidence, and schedule. Recording metadata is not included,
-            and no audio is ever part of an export.
+            current profile; it deletes nothing. An export is a readable JSON file holding your
+            profile, settings, learning evidence, saved words, and review schedule. Recording
+            metadata is not included, and no audio is ever part of an export.
           </small>
         </p>
         <div className="btn-row">
@@ -222,6 +285,80 @@ export function Settings(p: SettingsProps) {
           <p className="notice" data-testid="settings-export-path">
             Export written to: {p.exportPath}
           </p>
+        )}
+        <div className="field">
+          <label htmlFor="restore-path">Restore from a backup file</label>
+          <input
+            id="restore-path"
+            type="text"
+            data-testid="settings-restore-path"
+            value={p.restorePath}
+            onChange={(e) => p.onRestorePathChange(e.target.value)}
+            placeholder="path shown by Export profile data"
+          />
+        </div>
+        <div className="btn-row">
+          <button
+            type="button"
+            className="btn btn--quiet"
+            data-testid="settings-restore-check"
+            onClick={p.onPreviewRestore}
+            disabled={p.restorePath.trim() === ""}
+          >
+            Check a backup…
+          </button>
+        </div>
+        {p.restorePreview && (
+          <div className="notice" data-testid="settings-restore-preview">
+            <p>
+              <strong>{p.restorePreview.source_profile_name}</strong>, exported{" "}
+              {p.restorePreview.exported_at} (backup format version{" "}
+              {p.restorePreview.format_version}).
+            </p>
+            <ul>
+              <li>{p.restorePreview.saved_words} saved words</li>
+              <li>{p.restorePreview.events} recorded attempts</li>
+              <li>{p.restorePreview.goals} goals</li>
+              <li>{p.restorePreview.scheduled_items} scheduled reviews</li>
+              <li>{p.restorePreview.pack_installs} language packs</li>
+            </ul>
+            {p.restorePreview.warnings.length > 0 && (
+              <ul data-testid="settings-restore-warnings">
+                {p.restorePreview.warnings.map((warning) => (
+                  <li key={warning}>{warning}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+        {p.restorePreview?.supported ? (
+          <div className="btn-row">
+            <button
+              type="button"
+              className="btn btn--primary"
+              data-testid="settings-restore-confirm"
+              onClick={p.onConfirmRestore}
+            >
+              Restore as a new profile
+            </button>
+          </div>
+        ) : null}
+        {p.restoreOutcome && (
+          <div className="notice" data-testid="settings-restore-result">
+            <p>
+              Restored as {p.restoreOutcome.display_name}. On this device now:{" "}
+              {p.restoreOutcome.saved_words} saved words, {p.restoreOutcome.events} recorded
+              attempts, {p.restoreOutcome.goals} goals, and {p.restoreOutcome.scheduled_items}{" "}
+              scheduled reviews.
+            </p>
+            <p>
+              <small data-testid="settings-restore-note">
+                A restore reads a backup you exported. Nothing changed until you confirmed, the
+                restore always creates a new profile instead of replacing the one you use, and a
+                backup this version cannot read is refused rather than guessed at.
+              </small>
+            </p>
+          </div>
         )}
         {p.switchArmed ? (
           <div role="group" aria-label="Switch profile confirmation" className="btn-row">
@@ -271,6 +408,15 @@ export function Settings(p: SettingsProps) {
 
       <div className="card">
         <h3>Speech</h3>
+        {/* I03: this summary sits above the picker on purpose — the status is
+            read before the controls are offered, not after a dead end. */}
+        <p
+          className="meta pack-posture"
+          data-aligner={p.aligner?.available ? "yes" : "no"}
+          data-testid="settings-speech-readiness"
+        >
+          {speechReadiness(p.microphoneEnabled, p.speechModel, p.speechModels, p.aligner)}
+        </p>
         <label htmlFor="speech-model">
           Active speech model
           <select
@@ -386,9 +532,6 @@ export function Settings(p: SettingsProps) {
             feedback and dictation recognition also need a recognition runtime: where it is absent,
             those checks abstain, and choosing or downloading a model does not change that.
           </small>
-        </p>
-        <p className="meta pack-posture" data-aligner={p.aligner?.available ? "yes" : "no"}>
-          {alignerLine(p.aligner)}
         </p>
       </div>
 

@@ -342,7 +342,16 @@ describe("goal map", () => {
             assessed: true,
             locked: false,
             prerequisites: [],
-            dimensions: [{ modality: "reading", state: "supported", exemplar: "ja.orth.hira.a" }],
+            dimensions: [
+              {
+                modality: "reading",
+                state: "supported",
+                concepts_total: 1,
+                concepts_seen: 1,
+                exemplar: "ja.orth.hira.a",
+                best_state: "supported",
+              },
+            ],
           },
           {
             pack_id: "org.openlanguage.ja-jp.reference",
@@ -363,8 +372,22 @@ describe("goal map", () => {
               },
             ],
             dimensions: [
-              { modality: "listening", state: "unseen", exemplar: null },
-              { modality: "interaction", state: "unseen", exemplar: null },
+              {
+                modality: "listening",
+                state: "unseen",
+                concepts_total: 3,
+                concepts_seen: 0,
+                exemplar: null,
+                best_state: "unseen",
+              },
+              {
+                modality: "interaction",
+                state: "unseen",
+                concepts_total: 3,
+                concepts_seen: 0,
+                exemplar: null,
+                best_state: "unseen",
+              },
             ],
           },
         ]}
@@ -398,7 +421,16 @@ describe("goal map", () => {
       assessed: true,
       locked: false,
       prerequisites: [],
-      dimensions: [{ modality: "reading", state: "unseen", exemplar: null }],
+      dimensions: [
+        {
+          modality: "reading",
+          state: "unseen",
+          concepts_total: 1,
+          concepts_seen: 0,
+          exemplar: null,
+          best_state: "unseen",
+        },
+      ],
     });
     const html = renderToStaticMarkup(<GoalMap goals={[goal("novice"), goal(null), goal("A2")]} />);
     // Unknown tokens are the pack's vocabulary: shown verbatim, not hidden.
@@ -410,6 +442,44 @@ describe("goal map", () => {
     expect(html).toContain("familiar routines");
     expect(html).toContain('data-band="other"');
     expect(html).toContain("Unlabelled");
+  });
+
+  it("R09: one strong concept never shows a multi-concept goal as achieved", () => {
+    const html = renderToStaticMarkup(
+      <GoalMap
+        goals={[
+          {
+            pack_id: "org.openlanguage.ja-jp.reference",
+            id: "ja.goal.a2.describe-photo",
+            description: "Describe a photo in a few sentences.",
+            band: "a2",
+            review_status: "draft",
+            modalities: ["reading"],
+            assessed: true,
+            locked: false,
+            prerequisites: [],
+            dimensions: [
+              {
+                modality: "reading",
+                // The engine's aggregate: every declared concept must hold,
+                // so three untouched concepts keep the goal unseen.
+                state: "unseen",
+                concepts_total: 4,
+                concepts_seen: 1,
+                exemplar: "ja.grammar.demo.adjectives",
+                best_state: "independent",
+              },
+            ],
+          },
+        ]}
+      />,
+    );
+    expect(html).toContain('data-state="unseen"');
+    expect(html).toContain('data-coverage="1/4"');
+    expect(html).toContain("1 of 4 concepts have evidence");
+    expect(html).toContain("ja.grammar.demo.adjectives");
+    // The strong concept is named as the exemplar, not as the goal's state.
+    expect(html).toContain("strongest (ja.grammar.demo.adjectives) is independent");
   });
 
   it("is honest when no pack goals exist", () => {

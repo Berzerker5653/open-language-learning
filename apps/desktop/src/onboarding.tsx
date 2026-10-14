@@ -263,7 +263,7 @@ export function Onboarding(p: OnboardingProps) {
             Speaking activities need a microphone, but it is never required. You can skip this and
             enable it later in Settings; skipping never blocks progress. Enabling it continues to a
             speech setup step — saying "yes" to the microphone never leaves you to find the
-            downloads on your own (K-72).
+            downloads on your own.
           </p>
           <div className="btn-row">
             <button type="button" className="btn btn--primary" onClick={p.onEnableMic}>

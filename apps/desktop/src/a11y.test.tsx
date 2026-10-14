@@ -181,6 +181,9 @@ const surfaces: Record<string, string> = {
     <PronunciationPractice
       shortText="おばさん"
       longText="おばあさん"
+      description="Contrastive long vowel: おばさん (aunt) vs おばあさん (grandmother)"
+      featureId="ja.phon.vowel-length"
+      measure="voiced-duration-ratio"
       recording={false}
       hasAttempt={false}
       result={null}
@@ -194,6 +197,9 @@ const surfaces: Record<string, string> = {
     <PronunciationPractice
       shortText="おばさん"
       longText="おばあさん"
+      description="Contrastive long vowel: おばさん (aunt) vs おばあさん (grandmother)"
+      featureId="ja.phon.vowel-length"
+      measure="voiced-duration-ratio"
       recording={false}
       hasAttempt={true}
       result={{
@@ -330,6 +336,9 @@ describe("automated accessibility audit (ACC-001 auto portion)", () => {
       <PronunciationPractice
         shortText="おばさん"
         longText="おばあさん"
+        description="Contrastive long vowel: おばさん (aunt) vs おばあさん (grandmother)"
+        featureId="ja.phon.vowel-length"
+        measure="voiced-duration-ratio"
         recording={false}
         hasAttempt={false}
         result={null}
