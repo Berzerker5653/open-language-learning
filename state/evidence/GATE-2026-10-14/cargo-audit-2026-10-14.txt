@@ -1,0 +1,38 @@
+# cargo audit — dependency advisory gate (post rustls 0.23.46 bump)
+# date: 2026-10-14  host: GamingPC
+
+$ cargo audit
+
+Crate:     proc-macro-error
+Version:   1.0.4
+Warning:   unmaintained
+Title:     proc-macro-error is unmaintained
+Date:      2024-09-01
+ID:        RUSTSEC-2024-0370
+URL:       https://rustsec.org/advisories/RUSTSEC-2024-0370
+
+Crate:     unsafe-libyaml
+Version:   0.2.11
+Warning:   unmaintained
+Title:     unsafe-libyaml is unmaintained
+Date:      2024-03-25
+ID:        RUSTSEC-2024-0449
+URL:       https://rustsec.org/advisories/RUSTSEC-2024-0449
+
+Crate:     glib
+Version:   0.18.5
+Warning:   unsound
+Title:     Unsoundness in `Iterator` and `DoubleEndedIterator` impls for `glib::VariantStrIter`
+Date:      2024-03-30
+ID:        RUSTSEC-2024-0429
+URL:       https://rustsec.org/advisories/RUSTSEC-2024-0429
+
+warning: 3 allowed warnings found
+
+exit=0
+
+Context: CI run 38615154690 turned `security` red on a newly published advisory,
+RUSTSEC-2026-0346 ("Debug impls for client session values expose TLS secrets",
+rustls 0.23.45; solution: update to >=0.23.46). `cargo update -p rustls` moved
+only that package (0.23.45 -> 0.23.46). After the bump the audit above names
+only the three pre-existing allowed warnings; the 0.23.46 advisory is gone.

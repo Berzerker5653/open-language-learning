@@ -1,6 +1,33 @@
-# rust format + clippy -D warnings
-# date: 2026-10-14T12:18:00-06:00  host: GamingPC
-$ cargo fmt --all --check && cargo clippy --workspace --all-targets -- -D warnings
-   Compiling lts-desktop v0.4.0-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 4.83s
+# cargo fmt + clippy gate
+# date: 2026-10-14T12:46:38-06:00  host: GamingPC
+
+$ cargo fmt --all --check
 exit=0
+
+$ cargo clippy --workspace --all-targets -- -D warnings
+    Checking tempfile v3.27.0
+   Compiling rustls v0.23.46
+    Checking libdbus-sys v0.2.7
+    Checking x11-dl v2.21.0
+   Compiling lts-desktop v0.4.0-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Checking dbus v0.9.12
+    Checking lts-speech-runtime v0.1.0 (/home/hunter/game-dev/LTS/crates/speech-runtime)
+    Checking lts-learner-model v0.1.0 (/home/hunter/game-dev/LTS/crates/learner-model)
+    Checking lts-storage v0.1.0 (/home/hunter/game-dev/LTS/crates/storage)
+    Checking wry v0.57.0
+    Checking tao v0.37.1
+    Checking tokio-rustls v0.26.6
+    Checking rustls-platform-verifier v0.7.1
+    Checking ureq v2.12.1
+    Checking hyper-rustls v0.27.10
+    Checking reqwest v0.13.5
+    Checking tauri-runtime-wry v2.12.1
+    Checking tauri v2.12.1
+    Checking jsonschema v0.58.5
+    Checking lts-langpack v0.1.0 (/home/hunter/game-dev/LTS/crates/langpack)
+    Checking lts-activity v0.1.0 (/home/hunter/game-dev/LTS/crates/activity)
+    Checking lts-langpack-cli v0.1.0 (/home/hunter/game-dev/LTS/crates/langpack-cli)
+    Checking tauri-plugin-single-instance v2.5.2
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 8.95s
+exit=0
+
