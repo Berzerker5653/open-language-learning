@@ -1,0 +1,41 @@
+LIC-002 licence-permissiveness gate — 2026-10-13, rust 1.97.1, working tree at 73779ad + the audit.rs change
+command form: cargo run -q -p lts-langpack-cli -- <gate> <pack>
+
+exit=0  validate languages/ja-JP
+exit=0  lint languages/ja-JP
+exit=0  audit-curriculum languages/ja-JP
+exit=0  audit-lexicon languages/ja-JP
+exit=0  audit-licenses languages/ja-JP
+info[license_less_permissive_than_source] manifest.yaml/license/content_license: pack content_license "CC-BY-4.0" drops ShareAlike imposed by cited source "edrdg-jmdict" (CC-BY-SA-4.0); the derived work has to carry those terms
+exit=0  audit-sources languages/ja-JP
+exit=0  test languages/ja-JP
+info[license_less_permissive_than_source] manifest.yaml/license/content_license: pack content_license "CC-BY-4.0" drops ShareAlike imposed by cited source "edrdg-jmdict" (CC-BY-SA-4.0); the derived work has to carry those terms
+exit=0  validate languages/ru-RU
+exit=0  lint languages/ru-RU
+exit=0  audit-curriculum languages/ru-RU
+exit=0  audit-lexicon languages/ru-RU
+exit=0  audit-licenses languages/ru-RU
+exit=0  audit-sources languages/ru-RU
+exit=0  test languages/ru-RU
+exit=0  validate examples/eo-community
+exit=0  lint examples/eo-community
+exit=0  audit-curriculum examples/eo-community
+exit=0  audit-lexicon examples/eo-community
+exit=0  audit-licenses examples/eo-community
+exit=0  audit-sources examples/eo-community
+exit=0  test examples/eo-community
+exit=0  validate examples/ar-ma
+exit=0  lint examples/ar-ma
+exit=0  audit-curriculum examples/ar-ma
+exit=0  audit-lexicon examples/ar-ma
+exit=0  audit-licenses examples/ar-ma
+exit=0  audit-sources examples/ar-ma
+exit=0  test examples/ar-ma
+
+--- cargo test -p lts-langpack --test audit ---
+test source_provenance_flags_gaps_and_term_conflicts ... ok
+test clean_source_chain_has_no_provenance_warnings ... ok
+test seed_pack_licensed_and_reports_sources ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.00s
+

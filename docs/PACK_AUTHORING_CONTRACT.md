@@ -87,6 +87,7 @@ langpack audit-curriculum <pack>  # prereq cycles, mirror agreement, dead goals
 langpack audit-sources <pack>     # provenance completeness
 langpack audit-lexicon <pack>    # script purity + Cyrillic stress self-consistency
 langpack audit-licenses <pack>    # redistribution gates + attribution report
+                                  # + declared-licence-vs-source check (info)
 langpack test <pack>              # install-mode validation + all audits (release gate; audio must be baked first)
 langpack build <pack> -o out.lpk  # deterministic archive; requires scaffold-clean AND baked audio
 ```

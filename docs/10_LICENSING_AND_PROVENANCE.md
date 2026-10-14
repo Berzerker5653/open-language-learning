@@ -91,7 +91,24 @@ Original project-generated art/audio should have contributor/license records. If
 - `unknown` redistribution status;
 - reference-only source copied into pack;
 - attribution requirement with no generated attribution entry;
-- incompatible license combination that the policy marks blocking.
+- declared licence drops an obligation the cited source imposes
+  (`license_less_permissive_than_source`) — detected, not yet blocking.
+
+The first four bullets are implemented as build-blocking errors. The fifth is
+implemented as a report, not a failure: `audit-licenses` compares the licence a
+pack declares against the licence of the source it cites, at both levels where a
+pack states one — every `derived-from-source` inventory record, and the
+manifest's `content_license` against every source the pack contributes from
+(`access.mode: reference-only` pointers are skipped) — and emits
+`license_less_permissive_than_source` at `info` severity when the declaration
+drops a `ShareAlike`, `NonCommercial` or `NoDerivatives` obligation. Licence ids
+outside that Creative-Commons table (proprietary terms, `LicenseRef-*`) are not
+judged at all. See `docs/adr/0028-license-permissiveness-detection.md`: promotion
+to warning or error is an owner decision gated on O-01(a), because
+`languages/ja-JP` declares `CC-BY-4.0` while the dictionary source it builds
+from (`edrdg-jmdict`) is `CC-BY-SA-4.0`, and now reports itself doing so while
+still clearing every gate; `languages/ru-RU`'s `CC0-1.0` declaration over its
+reference-only CC-BY-NC verification pointer is correctly not flagged.
 
 ## Attribution UI
 

@@ -135,3 +135,51 @@ fn clean_source_chain_has_no_provenance_warnings() {
         "clean provenance: {diags:?}"
     );
 }
+
+// LIC-002: the toolchain's first licence comparison. It reports a declared
+// licence that drops an obligation the cited source imposes — ShareAlike,
+// NonCommercial or NoDerivatives — at both levels a pack states a licence: the
+// inventory record for derived material, and the manifest's content licence.
+#[test]
+fn by_over_a_by_sa_source_names_the_dropped_obligation() {
+    let (diags, _) = audit("valid-license-bysa-dropped");
+    let found: Vec<&lts_langpack::Diagnostic> = diags
+        .iter()
+        .filter(|d| d.code == "license_less_permissive_than_source")
+        .collect();
+    // One finding for the inventory record, one for the manifest.
+    assert_eq!(found.len(), 2, "{diags:?}");
+    assert!(
+        found.iter().all(|d| d.severity == Severity::Info),
+        "must report without blocking: {found:?}"
+    );
+    let text: Vec<&str> = found.iter().map(|d| d.message.as_str()).collect();
+    let joined = text.join("\n");
+    assert!(joined.contains("ShareAlike"), "{joined}");
+    assert!(joined.contains("src-dict"), "{joined}");
+    assert!(
+        !error_codes(&diags).contains(&"license_less_permissive_than_source"),
+        "{diags:?}"
+    );
+}
+
+#[test]
+fn matching_and_unjudgeable_licences_produce_no_finding() {
+    // Three non-findings, each a different reason: BY-SA over a BY-SA source
+    // carries the obligation; a bespoke id such as LicenseRef-Internal-1.0 is
+    // never compared; and a `reference-only` source contributes no distributed
+    // material, so the pack's licence is not measured against it
+    // (languages/ru-RU is that last shape — CC0 content over a CC-BY-NC
+    // verification pointer).
+    let (diags, _) = audit("valid-license-bysa-kept");
+    assert!(
+        diags
+            .iter()
+            .all(|d| d.code != "license_less_permissive_than_source"),
+        "{diags:?}"
+    );
+    assert!(
+        diags.iter().all(|d| d.severity != Severity::Error),
+        "{diags:?}"
+    );
+}

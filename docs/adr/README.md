@@ -42,5 +42,6 @@ Existing:
 - 0025 CEFR-band coverage is the pack level model; tier-scoped packs are first-class — **Accepted by the owner 2026-10-12**
 - 0026 a profile may exist without an active language pack; the wizard offers every pack the device already has — **Proposed (owner-directed, 2026-10-12)**
 - 0027 default catalog URL for released builds (`LTS_PACK_CATALOG_URL` still overrides; empty value disables) — **Accepted 2026-10-13**
+- 0028 licence-permissiveness detection in the pack audit (`license_less_permissive_than_source`, reported at info; ids outside the CC table unjudged) — **Proposed (agent-authored, 2026-10-13)**
 
 Template: `template.md`.

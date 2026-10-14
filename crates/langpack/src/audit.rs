@@ -34,6 +34,62 @@ fn unknown_license(spdx: Option<&str>) -> bool {
         }
     }
 }
+/// The three obligations a Creative-Commons-style id can impose on downstream
+/// copies. This is the toolchain's only licence comparison and it answers one
+/// question: does the licence a pack declares for its material drop an
+/// obligation the source's licence imposes? Ids outside this table —
+/// proprietary terms, "All rights reserved", a bespoke pack licence — are
+/// deliberately left unjudged rather than guessed at. LIC-002,
+/// docs/adr/0028-license-permissiveness-detection.md.
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+struct Obligations {
+    share_alike: bool,
+    non_commercial: bool,
+    no_derivatives: bool,
+}
+
+fn obligations(spdx: Option<&str>) -> Option<Obligations> {
+    if unknown_license(spdx) {
+        return None;
+    }
+    let dashes = spdx?.trim().to_ascii_uppercase().replace(' ', "-");
+    if dashes == "CC0" || dashes == "CC0-1.0" {
+        return Some(Obligations {
+            share_alike: false,
+            non_commercial: false,
+            no_derivatives: false,
+        });
+    }
+    if !dashes.starts_with("CC-BY") {
+        return None;
+    }
+    Some(Obligations {
+        share_alike: dashes.contains("-SA"),
+        non_commercial: dashes.contains("-NC"),
+        no_derivatives: dashes.contains("-ND"),
+    })
+}
+
+/// Names the obligations `source` imposes that `declared` does not carry.
+/// `None` means "not comparable" or "nothing dropped" — the two are
+/// intentionally indistinguishable here, because neither is a finding.
+fn dropped_obligations(source: Option<&str>, declared: Option<&str>) -> Option<String> {
+    let (s, d) = (obligations(source)?, obligations(declared)?);
+    let mut lost: Vec<&str> = Vec::new();
+    if s.share_alike && !d.share_alike {
+        lost.push("ShareAlike");
+    }
+    if s.non_commercial && !d.non_commercial {
+        lost.push("NonCommercial");
+    }
+    if s.no_derivatives && !d.no_derivatives {
+        lost.push("NoDerivatives");
+    }
+    if lost.is_empty() {
+        return None;
+    }
+    Some(lost.join(" + "))
+}
 
 impl Pack {
     /// Source provenance completeness audit (PACK-005 `audit-sources`).
@@ -237,6 +293,35 @@ impl Pack {
                         Severity::Error,
                     ));
                 }
+                // LIC-002: the direction 0.4.0 lost — a BY-SA source with the
+                // derived work declared under BY. Info severity, not Warning:
+                // the reference packs still carry an unresolved terms decision
+                // (owner gate O-01(a)), so this reports rather than blocks.
+                // docs/adr/0028-license-permissiveness-detection.md records the
+                // promotion path.
+                if let Some(lost) = dropped_obligations(
+                    src.get("license")
+                        .and_then(|l| l.get("spdx"))
+                        .and_then(Value::as_str),
+                    spdx,
+                ) {
+                    diags.push(Diagnostic::new(
+                        &inst.file,
+                        format!("{}/license/spdx", inst.pointer),
+                        "license_less_permissive_than_source",
+                        format!(
+                            "derived material {id:?} is declared {} but cites source {src_id:?} under {}; the declaration drops {}",
+                            spdx.unwrap_or("?"),
+                            src.get("license")
+                                .and_then(|l| l.get("spdx"))
+                                .and_then(Value::as_str)
+                                .unwrap_or("?"),
+                            lost
+                        ),
+                        Severity::Info,
+                    ));
+                }
+
                 let attribution_required = src
                     .get("use")
                     .and_then(|u| u.get("attribution_required"))
@@ -259,6 +344,61 @@ impl Pack {
                         "missing_attribution",
                         format!("source {src_id:?} requires attribution but inventory entry {id:?} carries none"),
                         Severity::Error,
+                    ));
+                }
+            }
+        }
+
+        // The same direction at the level a learner sees: the manifest's
+        // declared content licence versus every source the pack contributes
+        // from. A ShareAlike or NonCommercial source obliges the whole derived
+        // work, so a pack cannot declare BY over one. Sources in
+        // `access.mode: reference-only` are skipped: they contribute no
+        // distributed material (the audit rejects a bundled asset that cites
+        // one), so a CC0 declaration over a verification pointer is honest, not
+        // a dropped obligation.
+        let manifest_inst = self
+            .instances
+            .iter()
+            .find(|i| i.schema == "language-pack-manifest");
+        if let Some(manifest) = self.manifest.as_ref().zip(manifest_inst.as_ref()) {
+            let declared = manifest
+                .0
+                .get("license")
+                .and_then(|l| l.get("content_license"))
+                .and_then(Value::as_str)
+                .filter(|s| !unknown_license(Some(*s)));
+            if let Some(declared) = declared {
+                for inst in self.instances.iter().filter(|i| i.schema == "source-entry") {
+                    let Some(src_id) = inst.value.get("id").and_then(Value::as_str) else {
+                        continue;
+                    };
+                    let source_spdx = inst
+                        .value
+                        .get("license")
+                        .and_then(|l| l.get("spdx"))
+                        .and_then(Value::as_str);
+                    if inst
+                        .value
+                        .get("access")
+                        .and_then(|a| a.get("mode"))
+                        .and_then(Value::as_str)
+                        == Some("reference-only")
+                    {
+                        continue;
+                    }
+                    let Some(lost) = dropped_obligations(source_spdx, Some(declared)) else {
+                        continue;
+                    };
+                    diags.push(Diagnostic::new(
+                        &manifest.1.file,
+                        "/license/content_license",
+                        "license_less_permissive_than_source",
+                        format!(
+                            "pack content_license {declared:?} drops {lost} imposed by cited source {src_id:?} ({}); the derived work has to carry those terms",
+                            source_spdx.unwrap_or("?")
+                        ),
+                        Severity::Info,
                     ));
                 }
             }

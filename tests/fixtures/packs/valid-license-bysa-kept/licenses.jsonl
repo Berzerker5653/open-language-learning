@@ -1,0 +1,3 @@
+{"id":"inv-entries","scope":{"kind":"derived-from-source","source_id":"src-dict"},"license":{"spdx":"CC-BY-SA-4.0"},"redistribution_allowed":true,"attribution":"Dictionary data © dictionary contributors (CC-BY-SA-4.0); modified."}
+{"id":"inv-custom","scope":{"kind":"derived-from-source","source_id":"src-custom"},"license":{"spdx":"CC-BY-4.0"},"redistribution_allowed":true,"attribution":"Reproduced under an internal agreement."}
+{"id":"inv-original","scope":{"kind":"pack-original"},"license":{"spdx":"CC-BY-4.0"},"redistribution_allowed":true}
