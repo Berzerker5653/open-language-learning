@@ -8305,9 +8305,17 @@ activities:
 
     #[test]
     fn plan_generation_stays_fast_on_the_reference_pack() {
-        // POLISH-001 latency baseline: plan generation over the full
-        // on-ramp pack stays well inside the interactive budget. The
-        // bound is a generous regression guard, not a benchmark.
+        // POLISH-001 latency guard, recalibrated on 2026-10-14 from measured
+        // numbers. The first plan build in a process also pays to read the pack
+        // from cold pages — lexicon, sentences, kanji, curriculum — because the
+        // parse cache is per version root and every test installs into a fresh
+        // store, so that first number measures the machine and its page cache:
+        // 294 ms cold / 95 ms repeat on this host, 1.447 s cold on a 2-core CI
+        // runner (run 38624968580), about five times slower. Cold therefore gets
+        // a coarse ceiling that still catches a real blow-up, and the repeat
+        // build gets a hardware-scaled bound; the interactive promise itself is
+        // enforced where the user feels it, by the walkthrough's per-route stall
+        // guard (`route-ms:Today:79` on this pack).
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
@@ -8315,11 +8323,30 @@ activities:
         packs::switch_pack(data, &p.id, "org.openlanguage.ja-jp.reference").unwrap();
         let start = std::time::Instant::now();
         let view = build_plan_view(data, &p.id, 5, 1_760_000_000).unwrap();
-        let elapsed = start.elapsed();
-        println!("plan_generation: {elapsed:?} ({} items)", view.items.len());
+        let cold = start.elapsed();
+        let start = std::time::Instant::now();
+        let again = build_plan_view(data, &p.id, 5, 1_760_000_000).unwrap();
+        let warm = start.elapsed();
+        println!(
+            "plan_generation: cold {cold:?} / warm {warm:?} ({} items)",
+            view.items.len()
+        );
         assert!(
-            elapsed.as_millis() < 1000,
-            "plan generation regressed: {elapsed:?}"
+            !view.items.is_empty(),
+            "a five-minute budget on the reference pack must produce items"
+        );
+        assert_eq!(
+            again.items.len(),
+            view.items.len(),
+            "the same clock reading gives the same plan"
+        );
+        assert!(
+            cold.as_millis() < 8_000,
+            "cold plan build blew up: {cold:?} (measured 294 ms here, 1.447 s on CI)"
+        );
+        assert!(
+            warm.as_millis() < 600,
+            "repeat plan build regressed: {warm:?} (measured 95 ms here)"
         );
     }
 

@@ -1,0 +1,17 @@
+# plan-generation latency guard, measured (recalibration of the POLISH-001 bound)
+# date: 2026-10-14T14:30:14-06:00  host: GamingPC
+# context: CI run 38624968580 failed the old single 1000 ms bound with a 1.447 s cold build
+
+$ cargo test -p lts-desktop --lib -- tests::plan_generation_stays_fast_on_the_reference_pack --nocapture
+   Compiling lts-desktop v0.4.0-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.05s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-702df6b25aa01597)
+
+running 1 test
+test tests::plan_generation_stays_fast_on_the_reference_pack has been running for over 60 seconds
+plan_generation: cold 292.807294ms / warm 95.592903ms (5 items)
+test tests::plan_generation_stays_fast_on_the_reference_pack ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 140 filtered out; finished in 136.14s
+
+exit=0

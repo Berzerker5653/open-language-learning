@@ -1,5 +1,5 @@
 # cargo fmt + clippy gate
-# date: 2026-10-14T13:34:26-06:00  host: GamingPC
+# date: 2026-10-14T14:40:36-06:00  host: GamingPC
 
 $ cargo fmt --all --check
 exit=0
@@ -9,11 +9,11 @@ $ cargo clippy --workspace --all-targets -- -D warnings
     Checking x11-dl v2.21.0
    Compiling lts-desktop v0.4.0-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
     Checking dbus v0.9.12
-    Checking wry v0.57.0
     Checking tao v0.37.1
+    Checking wry v0.57.0
     Checking tauri-runtime-wry v2.12.1
     Checking tauri v2.12.1
     Checking tauri-plugin-single-instance v2.5.2
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 8.27s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 9.85s
 exit=0
 
