@@ -36,3 +36,24 @@ npm notice run 'vitest' run --passWithNoTests
    Duration  129ms (import 45%, transform 40%, tests 10%, worker 5%)
 
 exit=0
+
+## CI execution — run 38645447729, job `web` (116131032647), head f17e8b3
+
+$ pnpm install --frozen-lockfile
+✓ Lockfile passes supply-chain policies (203 entries in 1.6s)
+Lockfile is up to date, resolution step is skipped
+
+$ pnpm test                       # apps/desktop lines from the job log
+apps/desktop test:  ✓  dom  src/journeys/first-run.journey.tsx (1 test) 150ms
+apps/desktop test:  ✓  dom  src/journeys/no-speech-model.journey.tsx (1 test) 221ms
+apps/desktop test:  ✓  dom  src/journeys/pack-install.journey.tsx (1 test) 230ms
+apps/desktop test:  ✓  dom  src/journeys/export-restore.journey.tsx (1 test) 219ms
+apps/desktop test:  Test Files  24 passed (24)
+apps/desktop test:       Tests  222 passed (222)
+apps/desktop test:    Duration  2.98s (environment 29%, tests 25%, import 22%, transform 21%, worker 2%)
+
+Job `web` conclusion: success (`pnpm install --frozen-lockfile`, `fmt:check`,
+`lint`, `typecheck`, `test`, `build` all ran). Workspace totals in the same job:
+`packages/shared` 1 file, `packages/ui` 2 files. The four journeys therefore
+execute on every push; this host cannot install them with pnpm (no pnpm binary),
+which is why the canonical counts come from Hermes worker and from CI.

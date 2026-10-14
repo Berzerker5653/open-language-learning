@@ -96,3 +96,20 @@ $ npx tsc --noEmit        # apps/desktop, GamingPC — no output, no errors
 $ npx prettier --check apps/desktop/src/journeys/
 All matched files use Prettier code style!
 $ npx eslint apps/desktop/src/journeys/     # clean
+
+## CI is the durable per-push proof — run 38645447729, job `web` (116131032647), head f17e8b3
+
+`pnpm install --frozen-lockfile` resolved happy-dom 21.0.1 from the committed
+lockfile ("Lockfile is up to date, resolution step is skipped"), and `pnpm test`
+then ran the four journeys under the dom project:
+
+apps/desktop test:  ✓  dom  src/journeys/first-run.journey.tsx (1 test) 150ms
+apps/desktop test:  ✓  dom  src/journeys/no-speech-model.journey.tsx (1 test) 221ms
+apps/desktop test:  ✓  dom  src/journeys/pack-install.journey.tsx (1 test) 230ms
+apps/desktop test:  ✓  dom  src/journeys/export-restore.journey.tsx (1 test) 219ms
+apps/desktop test:  Test Files  24 passed (24)
+apps/desktop test:       Tests  222 passed (222)
+apps/desktop test:    Duration  2.98s (environment 29%, tests 25%, import 22%, transform 21%, worker 2%)
+
+Job `web` conclusion: success. A mounted-app regression (the class of defect the
+Kanji hub gate was) now fails CI, not just a local run on one machine.
