@@ -1,0 +1,75 @@
+RTL-001 follow-up — three shipped surfaces were missed by the first pass (2026-10-13)
+
+Measured first (the gap):
+  grep -n 'route === "' apps/desktop/src/App.tsx
+    hub, pronunciation, dictation, shadowing, reading, words, placement, kanji,
+    progress, writing, scenarios, settings
+  grep -rn "PackText|usePackTextAttrs|LatinText" apps/desktop/src/App.tsx
+    -> no matches: the kanji surfaces carried hand-rolled dir/lang attributes and
+       the shadowing, reading and words routes carried none at all.
+  So an ar-MA pack that installed and practised correctly still rendered its
+  story titles, sentence text, looked-up words, shadowing targets and mined-word
+  cards left-to-right. Graded reading also hardcoded nothing for romaji/gloss, so
+  Latin scaffolding sat inside whatever direction its ancestor happened to have.
+
+Why the missed routes were untestable where they were:
+  apps/desktop/src/App.test.tsx header: "Mounting <App/> is not a seam this repo
+  can drive: vitest here runs in node (no DOM dependency is pinned), and
+  detectInvoke() returns null without window.__TAURI_INTERNALS__".
+  The route JSX was inline inside App(), so no render test could reach it.
+
+Change (matches the existing panel convention — practice.tsx, scenario.tsx,
+dictation.tsx, pronunciation.tsx, hub.tsx are already separate panel modules):
+  new apps/desktop/src/reading.tsx    (ReadingPanel + Story/StorySummary/StorySentence/StoryWord)
+  new apps/desktop/src/shadowing.tsx  (ShadowingPanel + ShadowTarget)
+  new apps/desktop/src/words.tsx      (MyWordsPanel + MineItem/MineDraft)
+  App.tsx now renders the three panels and shares those types instead of
+  repeating anonymous state types; the dead shadowCurrent derivation and the
+  now-unused shadowTargetsState import were removed with the JSX.
+  Direction applied: story title (inside the app's own h1), story button labels,
+  sentence surface (Ruby keeps rendering bare text, the container carries dir),
+  looked-up words, shadowing surface + pack-script reading, mined-word review
+  prompt, mined-word list surfaces/readings, the surface and reading inputs.
+  Latin scaffolding pinned dir="ltr": sentence romaji, sentence gloss, lookup
+  romaji/gloss, a romanization-only shadowing scaffold. Learner-entered meaning
+  and citation inputs deliberately carry neither dir nor lang.
+  Same defect class, same pass: kanji prompt and kanji card moved from
+  hand-rolled dir={activeRecord?.rtl…}/lang={activeRecord?.locale} to the shared
+  PackText primitive, and phrase-slot text (task.slots) now carries direction.
+
+Tests added (apps/desktop/src/rtl-direction.test.tsx, same ar-MA fixture as the
+original pass, so the direction claims are all measured against one pack):
+  - "flips story titles, sentences and looked-up words, but not the reading prose"
+  - "names each story in the pack direction and leaves an LTR pack unflipped"
+    (ja-JP control: <span lang="ja-JP"> and no dir="rtl" anywhere)
+  - "flips the shadowing target and reading scaffold while romanization stays LTR"
+  - "shows the romanization-only shadowing target left-to-right"
+  - "carries pack direction through the review card and the add-word inputs"
+    (asserts mine-gloss / mine-source carry no dir)
+
+Commands and results:
+  cd apps/desktop && npx vitest run
+    Test Files  17 passed (17)
+         Tests  189 passed (189)          (baseline before this change: 184)
+  npx vitest run src/rtl-direction.test.tsx
+    Test Files  1 passed (1)
+         Tests  10 passed (10)            (5 original + 5 new)
+  npx tsc --noEmit                        clean
+  npx eslint src --max-warnings 0         clean
+  npx prettier --check apps/desktop/src packages/ui/src
+    All matched files use Prettier code style!
+  cargo test --workspace (head ec47a0a, the tree this follow-up starts from)
+    exit=0, every suite "test result: ok", zero failures
+
+CI for the starting head (ec47a0a): run 38500470318 — success
+  rust · schemas · web · security · desktop-smoke · platform-compile
+  (windows-latest) · platform-compile (macos-latest) all success;
+  platform-bundles skipped (tag-only). The run at e25f986 (38499519823) was
+  cancelled as superseded by that push after its desktop-smoke job passed.
+CI for this follow-up's own head: recorded in the commit that follows it.
+
+Still not covered by any test (stated so it is not mistaken for coverage): the
+direction model has no end-to-end proof on a real RTL pack in the running app —
+no installed 0.4.0 pack declares rtl, and examples/ar-ma is only built into an
+archive by the lib.rs IPC test. The hands-on pass (gate O-06) is where an ar-MA
+install would be exercised visually.

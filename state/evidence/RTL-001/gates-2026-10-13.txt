@@ -29,3 +29,18 @@ cargo test -p lts-desktop: test result: ok. 125 passed; 0 failed; 0 ignored; fin
   includes rtl_capability_reaches_the_renderer_through_pack_listing (ar-MA archive -> installed_packs/available_packs_at)
 cargo fmt --all --check: clean
 cargo clippy -p lts-desktop --all-targets -- -D warnings: clean
+
+=== CI (GitHub Actions, .github/workflows/ci.yml) ===
+run 38499519823 (head e25f986 — this head): cancelled as superseded by the
+  licence push (cancel-in-progress groups by workflow + ref). Jobs at the moment
+  of cancellation: desktop-smoke success, schemas success, web success,
+  security success, platform-compile (windows-latest) success,
+  platform-compile (macos-latest) success; rust was mid-run, so the Rust suite
+  for this head was never measured on a runner.
+run 38500470318 (head ec47a0a — same commits plus the licence change): success
+  rust success · schemas success · web success · security success
+  desktop-smoke success · platform-compile (windows-latest) success
+  platform-compile (macos-latest) success · platform-bundles skipped (tag-only)
+So the Rust/IPC half of this task is proven on a runner at ec47a0a, not at e25f986.
+Follow-up (three surfaces the first pass missed, plus their tests):
+  state/evidence/RTL-001/surfaces-followup-2026-10-13.txt

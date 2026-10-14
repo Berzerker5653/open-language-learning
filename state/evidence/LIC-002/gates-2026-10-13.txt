@@ -39,3 +39,14 @@ test seed_pack_licensed_and_reports_sources ... ok
 
 test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.00s
 
+
+=== CI (GitHub Actions, .github/workflows/ci.yml) ===
+run 38499519823 (head e25f986): cancelled — superseded by the push that made
+  this head (cancel-in-progress groups by workflow + ref). Its desktop-smoke
+  job had already finished green before the cancellation.
+run 38500470318 (head ec47a0a — the tree this evidence describes): success
+  rust success · schemas success · web success · security success
+  desktop-smoke success · platform-compile (windows-latest) success
+  platform-compile (macos-latest) success · platform-bundles skipped (tag-only)
+local cross-check at the same head: cargo test --workspace exit 0 (every suite
+  "test result: ok", no failures), matching the rust job.
