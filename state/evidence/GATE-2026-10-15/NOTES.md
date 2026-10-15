@@ -122,3 +122,25 @@ by symlink from this host's prepared trees — the only way the web and schemas 
 can run on a host with no pnpm and no cached wheelhouse. A CI-equivalent dependency
 install (`pnpm install --frozen-lockfile`) still requires pnpm, which only the Hermes
 worker has.
+
+## Update, same day: the pnpm caveat is closed locally, and CI parity at the batch head
+
+The last sentence above is superseded. The pinned `pnpm@12.8.1` (from
+`packageManager`) is now installed **in isolation** on the Gaming PC — `npm pack` +
+sha512/shasum checked against registry metadata, wrapper running `bin/pnpm.mjs` under
+`~/.local/opt/pnpm-12.8.1`; no global tool changed. Two host facts that cost a cycle to
+learn: `npm install pnpm` yields **no binary** under npm 12 (install scripts are blocked)
+and node 26.11.1 ships no corepack.
+
+Re-measured in a fresh `git worktree` at `fd76786` with no `node_modules` present:
+`pnpm install --frozen-lockfile` exit 0 (`Packages: +151`, 171 MB), then `pnpm fmt:check`,
+`pnpm lint`, `pnpm -r typecheck`, `pnpm -r test`, `pnpm -r build` all green in that tree.
+**Still not proven: a cold-network install** — pnpm reported `resolved 151, reused 151,
+downloaded 0`, i.e. the content-addressable store was warm. Lockfile *resolution* is
+supported; first-download behaviour is a CI-only claim.
+
+CI at `fd76786` (the batch base, before the 0.4.1 bump): run `38757754128` completed
+`success`; jobs `rust`, `web`, `desktop-smoke`, `schemas`, `security`,
+`platform-compile (windows-latest)`, `platform-compile (macos-latest)` all `success`;
+`platform-bundles` `skipped` (manual trigger only). The 0.4.1 manifest bump and the new
+`crates/langpack/tests/media_upgrade.rs` are covered only by the run this batch pushes.

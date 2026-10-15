@@ -484,6 +484,30 @@ checked rather than asserted: `audit-licenses` compares a declared licence with
 the licences of the sources it derives from (ADR-0028) and reported this
 mismatch at `info` severity on every run until the declaration was fixed.
 
+### Immutability of published artifacts (measured 2026-10-15; owner decision open)
+
+The catalog pins each archive by `sha256`, and installation re-verifies every member
+digest (`crates/langpack/src/archive.rs:287`) — so a swapped asset **fails closed**. That
+is detection on the consumer side, not prevention on the hosting side. Measured on this
+repository: **zero rulesets**, **7 releases all `immutable: false`**, `main` "protected"
+only by an effectively empty branch rule, and
+`GET /repos/Berzerker5653/open-language-learning/immutable-releases` → `200
+{"enabled":false,"enforced_by_owner":false}`. Today nothing blocks force-pushing a release
+tag onto another commit, deleting and recreating it, `DELETE`-ing an asset and re-uploading
+a different file under the same name (new asset id, new digest), or re-pointing a release
+with `PATCH tag_name`.
+
+Sequencing fact, because it is easy to get backwards: GitHub **immutable releases** lock the
+Git tag *and* the assets and emit a release attestation, but apply only to **future**
+releases — enabling them after an upload leaves that release mutable, and no republish
+workflow is documented. A **tag ruleset** is what covers tags that already exist. Push
+rulesets are irrelevant here (Team-plan, private/internal-only, and content-scoped) and
+legacy tag-protection rules are GHES-only and deprecated.
+
+Enabling either mechanism is a repository-settings write and stays an owner action; **neither
+was applied**. Probe transcripts, the mechanism→prevents→availability table and the proposed
+ruleset JSON: `state/evidence/O-08-2026-10-15/mechanisms-2026-10-15.md`.
+
 ## Authentic updates and interrupted downloads
 
 Application updates use authenticated signed metadata/artifacts when that update channel exists; checksum-only metadata obtained from the same untrusted location is not publisher authentication. Trusted pack/model catalogs bind source URL, version, license/terms, size and digest to an authenticated catalog record. Third-party unsigned packs remain explicitly lower trust. Signature indicates publisher/integrity, not linguistic correctness.
