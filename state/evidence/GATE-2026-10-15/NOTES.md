@@ -193,3 +193,10 @@ So the pair of runs is the evidence for the coupling recorded in the RC notes: `
 and `8be62a2` (manifest back at the published `0.4.0`) passes all of them without any gate
 being weakened. CI reference table for the day: `fd76786` → `38757754128` success;
 `b5bafc8` → `38772271396` failure (2 jobs); `8be62a2` → `38774132358` success.
+
+And at the evidence-only head that carries this file's earlier sections: `eaefadf` → run
+`38781477556`, conclusion **success** (watch exit 0, 3,152 s): `rust`, `web`,
+`desktop-smoke`, `schemas`, `security`, `platform-compile (windows-latest)`,
+`platform-compile (macos-latest)` all `success`; `platform-bundles` `skipped`. No pack,
+schema, data-model, provider, privacy, platform or release-gate behavior changed after
+`8be62a2`, so no further CI-relevant surface was touched by the evidence commits.
