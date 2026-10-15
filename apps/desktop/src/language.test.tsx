@@ -258,8 +258,8 @@ describe("language panel", () => {
     expect(unpacking).toContain("Unpacking and checking the content");
   });
 
-  it("offers cancel only while the engine can still honor it", () => {
-    for (const stage of ["fetch", "verify"]) {
+  it("offers cancel during fetch, verify and unpacking, and not after the store swap", () => {
+    for (const stage of ["fetch", "verify", "install"]) {
       const html = render({
         progress: {
           operation: "install-pack",
@@ -270,20 +270,20 @@ describe("language panel", () => {
       });
       expect(html).toContain("Cancel install");
     }
-    // Once the unpack has begun the install runs to completion; the button
-    // is absent then rather than pretending to work.
-    const unpacking = render({
+    // `record` runs after the store swap: there is nothing left to stop, so
+    // the button is absent rather than pretending to work.
+    const recording = render({
       progress: {
         operation: "install-pack",
         subject: "community.example.esperanto",
-        stage: "install",
+        stage: "record",
         percent: null,
       },
     });
-    expect(unpacking).not.toContain("Cancel install");
+    expect(recording).not.toContain("Cancel install");
   });
 
-  it("renders the cancelled state honestly: nothing installed, retry restarts the download", () => {
+  it("renders the cancelled state honestly: nothing installed, retry continues the download", () => {
     const html = render({
       outcome: {
         kind: "cancelled",
@@ -293,10 +293,11 @@ describe("language panel", () => {
     });
     expect(html).toContain("Install of community.example.esperanto was cancelled.");
     expect(html).toContain("Nothing was installed");
-    // No fake resume: the copy states the download starts over.
-    expect(html).toContain("downloads the whole pack again");
-    expect(html).toContain("does not continue where it stopped");
-    expect(html).not.toMatch(/resume/i);
+    // The engine keeps the bytes it already downloaded, so the copy says the
+    // retry continues — and no longer claims a resume that did not exist.
+    expect(html).toContain("continues the download where it stopped");
+    expect(html).not.toContain("downloads the whole pack again");
+    expect(html).not.toContain("does not continue where it stopped");
     expect(html).toContain("Install again");
     expect(html).toContain('aria-live="polite"');
   });

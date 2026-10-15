@@ -2005,6 +2005,7 @@ tasks:
   - UX-001
   read_first:
   - apps/desktop/src/language.tsx
+  - apps/desktop/src-tauri/src/packs.rs
   - crates/langpack/src/archive.rs
   acceptance:
   - >-
@@ -2064,6 +2065,80 @@ tasks:
   - >-
     Pack publication status is reconciled with the catalog and third-party notices, with no claim that
     unpublished packs were shipped.
+  required_for_desktop_1_0: false
+- id: A11Y-FLOW-001
+  milestone: M10
+  priority: P2
+  title: >-
+    Route changes carry focus and announcement; empty views carry one action
+  dependencies:
+  - UX-001
+  - K-33
+  read_first:
+  - apps/desktop/src/App.tsx
+  - apps/desktop/src/home.tsx
+  - apps/desktop/src/a11y.test.tsx
+  - docs/11_ACCESSIBILITY_AND_LOCALIZATION.md
+  acceptance:
+  - >-
+    Changing route leaves focus and the accessible name of the changed region on the new route's own
+    heading, proven by a mounted interaction test rather than a static render.
+  - >-
+    A view with no active pack offers exactly one next action and prints no time-budget control and no
+    zero-count plan summary; loading, error and empty states stay distinguishable.
+  - >-
+    A keyboard-only journey reaches and activates a route's primary action without a trap, and text
+    input never submits in the middle of an IME composition.
+  # The human screen-reader matrix stays with ACC-001 / owner gate O-03; this task
+  # covers only what can be proven in the mounted DOM runtime.
+  required_for_desktop_1_0: false
+- id: RU-MODALITY-PRACTICE-001
+  milestone: M10
+  priority: P1
+  title: Russian practice covers the modalities its rubrics claim
+  dependencies:
+  - ASSESSMENT-RUNNABILITY-001
+  - RU-GOAL-PREREQ-001
+  read_first:
+  - languages/ru-RU/curriculum/units/818-b2j-style-revision.yaml
+  - docs/assessment/RELEASE_COVERAGE_RU.yaml
+  - docs/adr/0017-unfunded-ai-only-posture.md
+  acceptance:
+  - >-
+    Measured baseline on 2026-10-15: 818 Russian units declare 1,589 encounter-read, 798 recall, 776
+    cloze, 9 retrieval and 9 listen-and-choose activities, and no speaking activity, against 60 listening
+    and 60 speaking rubric records. This task is not done until every claimed modality has runnable
+    unit activities the planner can actually serve.
+  - >-
+    At least one offline journey per claimed modality executes the declared task type against Russian
+    pack content; guided speaking stays unscored per ADR-0017 and abstains when no runtime model exists.
+  - >-
+    The coverage report keeps rubric definition, runnable practice, valid evidence and review status as
+    separate counts, and never lets a rubric count imply enacted practice.
+  required_for_desktop_1_0: false
+- id: UPPERBAND-TASK-JOURNEYS-001
+  milestone: M10
+  priority: P1
+  title: Representative upper-band goals run their stated capability as a task
+  dependencies:
+  - CONTENT-DEPTH-001
+  read_first:
+  - tools/audit_content_templates.py
+  - languages/ru-RU/curriculum/units/809-rev-10.yaml
+  - languages/ja-JP/curriculum/units/500-film-language.yaml
+  - docs/assessment/RELEASE_COVERAGE_RU.yaml
+  acceptance:
+  - >-
+    For a named representative goal per upper band (A2, B1, B2) in each language, the pack declares a
+    runnable task sequence that exercises the capability the goal names, including meaningful input,
+    scaffolded response, independent response, a changed context and delayed reuse.
+  - >-
+    Unit counts and resolved references never appear as evidence of instructional depth; the template
+    audit stays in CI and its findings stay reported even when they are not yet fixed.
+  - >-
+    The authored content itself remains pending qualified human review (JA-A2-002 / JA-B1-002 / JA-B2-002
+    and the Russian review queue); completing the task means the tasks exist and run, not that the
+    content is approved.
   required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
@@ -2126,4 +2201,7 @@ execution_scope:
   - CONTRIBUTOR-REVIEW-PACKET-001
   - JOURNEY-SUITE-001
   - RELEASE-EVIDENCE-001
+  - A11Y-FLOW-001
+  - RU-MODALITY-PRACTICE-001
+  - UPPERBAND-TASK-JOURNEYS-001
   public_publication_authorized: false

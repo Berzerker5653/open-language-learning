@@ -200,3 +200,44 @@ And at the evidence-only head that carries this file's earlier sections: `eaefad
 `platform-compile (macos-latest)` all `success`; `platform-bundles` `skipped`. No pack,
 schema, data-model, provider, privacy, platform or release-gate behavior changed after
 `8be62a2`, so no further CI-relevant surface was touched by the evidence commits.
+
+## UI/UX round: issue #1 items I04 and I05 (I08 untouched)
+
+The two CI heads after `8be62a2` were also watched, closing the chain that the
+revert head started: `02f7df8` → run `38788822884` conclusion **success**, and
+`e032e16` (the re-derived 24-box checklist) → run `38801290123` conclusion
+**success** (watch exit 0, 3,107 s). Per job in both: `rust`, `web`,
+`desktop-smoke`, `schemas`, `security`, `platform-compile (windows-latest)`,
+`platform-compile (macos-latest)` `success`; `platform-bundles` `skipped`.
+CI reference table for the day therefore reads: `fd76786` → `38757754128`
+success; `b5bafc8` → `38772271396` failure (2 jobs); `8be62a2` → `38774132358`
+success; `eaefadf` → `38781477556` success; `02f7df8` → `38788822884` success;
+`e032e16` → `38801290123` success.
+
+What the round itself changed, and the local gate before pushing:
+
+- I04's engineering half (route-change focus to the destination `h1`; a no-pack
+  Today that withholds the budget control, the zero-count summary and the empty
+  paragraph; a mounted keyboard-only journey) — `A11Y-FLOW-001`, evidence in
+  `state/evidence/A11Y-FLOW-2026-10-15/NOTES.md`.
+- I05's engine half (cancel inside unpacking through a new
+  `install_with_cancel` hook; byte-range resume of an interrupted download with
+  sidecar-bound partials; free-space preflight and a named ENOSPC error) —
+  `INSTALL-UX-001`, evidence in
+  `state/evidence/INSTALL-UX-001/RESUME-CANCEL-PREFLIGHT-2026-10-15.md`.
+- Local gates at this working state: `cargo fmt --all --check` clean;
+  `cargo clippy -p lts-desktop -p lts-langpack --all-targets -- -D warnings`
+  clean; `cargo test -p lts-desktop --lib packs::tests` 23 passed / 0 failed / 1
+  ignored; `cargo test -p lts-langpack --test archive` 10 passed; all seven pack
+  gates exit 0 on `languages/ja-JP` and `languages/ru-RU`;
+  `pnpm fmt:check` / `pnpm lint` / `pnpm -r typecheck` clean and `pnpm -r test`
+  at 27 files / 240 tests (desktop) plus 10 (packages/ui);
+  `tools/validate_handoff.py` still `PASSED (1960 data files checked)` with only
+  the two standing WARNs, also under `--require-explicit-ledger-records`;
+  `tools/audit_learner_copy.py` 0 findings over 34 files.
+
+Not closed by this round, and not closable by an agent: issue #1 items I04 (needs
+the human Linux/Orca matrix — ACC-001, gate O-03), I05 (needs fresh-artifact
+timing plus the `PERF-002` device tiers, i.e. publication), R12 (qualified band
+review), R13 (ru listening/speaking practice) and I08 (owner gates D2/D3 plus
+SEC-001, PLAT-001 Windows/macOS runtime, D12).

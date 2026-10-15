@@ -99,6 +99,70 @@ fn install_upgrade_rollback_cycle() {
     );
 }
 
+/// I05: a cancel pressed while the archive is being unpacked must not leave
+/// the learner looking at an installed (or half-installed) pack. The store is
+/// byte-for-byte what it was, and the same bytes install cleanly on retry.
+#[test]
+fn a_cancelled_unpack_leaves_the_store_untouched() {
+    let store = tempfile::tempdir().unwrap();
+    let (bytes, _) = archive::build(&fixture("valid-minimal")).unwrap();
+    let entries = archive::inspect(&bytes).unwrap().files.len();
+    assert!(entries >= 2, "fixture needs entries to abort between");
+
+    // Cancel before the first entry is extracted.
+    let err = archive::install_with_cancel(&bytes, store.path(), &|| true).unwrap_err();
+    assert!(matches!(err, archive::ArchiveError::Cancelled), "{err}");
+
+    // Cancel one entry in: the hook is consulted once per entry, so this
+    // aborts after the first file landed in staging and before the store was
+    // renamed into place.
+    let seen = std::cell::Cell::new(0usize);
+    let hook = || {
+        seen.set(seen.get() + 1);
+        seen.get() > 1
+    };
+    let err = archive::install_with_cancel(&bytes, store.path(), &hook).unwrap_err();
+    assert!(matches!(err, archive::ArchiveError::Cancelled), "{err}");
+    assert!(seen.get() >= 2, "the hook has to be consulted per entry");
+
+    // Nothing about the store changed: no `current` pointer, no version
+    // directory, and no leftover staging files.
+    assert_eq!(
+        archive::current_version("org.openlanguage.test-minimal", store.path()),
+        None
+    );
+    assert!(
+        !store.path().join("org.openlanguage.test-minimal").exists(),
+        "a cancelled install must not create the pack directory"
+    );
+    assert!(
+        walk(store.path()).is_empty(),
+        "no partial files left behind"
+    );
+
+    // Retrying with no cancel installs the very same archive.
+    let out = archive::install(&bytes, store.path()).unwrap();
+    assert_eq!(out.version, "0.1.0");
+    assert_eq!(out.pack_id, "org.openlanguage.test-minimal");
+}
+
+/// The wrapper has to be exactly the old behavior: no hook, no cancel.
+#[test]
+fn install_is_install_with_cancel_that_never_fires() {
+    let one = tempfile::tempdir().unwrap();
+    let two = tempfile::tempdir().unwrap();
+    let (bytes, sha) = archive::build(&fixture("valid-minimal")).unwrap();
+    let plain = archive::install(&bytes, one.path()).unwrap();
+    let wrapped = archive::install_with_cancel(&bytes, two.path(), &|| false).unwrap();
+    assert_eq!(plain.pack_id, wrapped.pack_id);
+    assert_eq!(plain.version, wrapped.version);
+    assert_eq!(archive::hex_sha256(&bytes), sha);
+    assert_eq!(
+        fs::read(wrapped.directory.join("manifest.yaml")).unwrap(),
+        fs::read(plain.directory.join("manifest.yaml")).unwrap()
+    );
+}
+
 #[test]
 fn install_rejects_path_traversal() {
     let store = tempfile::tempdir().unwrap();

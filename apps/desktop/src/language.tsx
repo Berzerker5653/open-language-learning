@@ -116,9 +116,10 @@ export interface LanguagePanelProps {
   claims: PackClaims[] | null;
   /// K-62: the stage a long install reported, or null when nothing is running.
   progress?: EngineProgress | null;
-  /// The engine only honors a cancel during fetch and verify — once the
-  /// unpack has started it runs to completion (the store swap is atomic) —
-  /// so the cancel control appears exactly while the engine can act on it.
+  /// The engine can act on a cancel during fetch, verify and unpacking: the
+  /// unpack is consulted once per archive entry and the pack store is only
+  /// touched after the whole archive has passed its checks, so the cancel
+  /// control appears exactly while the engine can honor it.
   onCancelInstall?(): void;
   /// The last install attempt that did not succeed, or null.
   outcome?: InstallOutcome | null;
@@ -126,7 +127,7 @@ export interface LanguagePanelProps {
   receipt?: InstallReceipt | null;
 }
 
-const CANCELLABLE_STAGES = ["fetch", "verify"];
+const CANCELLABLE_STAGES = ["fetch", "verify", "install"];
 
 /// Plain-language names for the manifest `capabilities` keys
 /// (`schemas/language-pack-manifest.schema.json`). An unknown key still
@@ -231,9 +232,9 @@ export function LanguagePanel(p: LanguagePanelProps) {
       {p.progress &&
         p.progress.operation === "install-pack" &&
         CANCELLABLE_STAGES.includes(p.progress.stage) && (
-          // The engine can still stop this install, so the learner may ask
-          // it to. During unpacking this control is absent rather than a
-          // button that would do nothing.
+          // The engine can still stop this install, so the learner may ask it
+          // to: a cancel mid-transfer stops at the next byte boundary, and a
+          // cancel during unpacking leaves no version installed.
           <button type="button" className="btn btn--quiet" onClick={() => p.onCancelInstall?.()}>
             Cancel install
           </button>
@@ -246,9 +247,10 @@ export function LanguagePanel(p: LanguagePanelProps) {
         >
           <p>
             {outcome.kind === "cancelled"
-              ? // Honest about the limit: a cancelled download does not pick
-                // up where it stopped — retrying fetches the pack again.
-                `Install of ${outcome.pack_id} was cancelled. Nothing was installed, and installing again downloads the whole pack again — a cancelled download does not continue where it stopped.`
+              ? // Honest about what a retry costs: the bytes already
+                // downloaded stay on disk, so installing again continues the
+                // transfer instead of starting it over.
+                `Install of ${outcome.pack_id} was cancelled. Nothing was installed, and installing again continues the download where it stopped.`
               : `Installing ${outcome.pack_id} failed: ${outcome.message}`}
           </p>
           <button

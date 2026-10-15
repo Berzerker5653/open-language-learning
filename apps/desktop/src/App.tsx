@@ -449,10 +449,21 @@ export function App() {
   const [settingsError, setSettingsError] = useState<string | null>(null);
 
   const [practiceDraft, setPracticeDraft] = useState("");
-  // The sticky header hides content when the page is scrolled; reset the
-  // scroll position whenever the onboarding step or main route changes.
+  // A route change is a navigation, not a re-render: the sticky header
+  // would hide the top of the new page (reset the scroll), and both screen
+  // readers and sighted keyboard users otherwise stay parked in the old
+  // content. Focus the new route's own h1 — every route surface renders
+  // exactly one, so announcing it *is* the navigation announcement. While
+  // the onboarding wizard owns the flow it manages its own focus.
+  const routeHeading = useRef<HTMLElement | null>(null);
   useEffect(() => {
     window.scrollTo(0, 0);
+    if (step !== "done") return;
+    const heading = document.querySelector<HTMLElement>("#main h1");
+    if (!heading || heading === routeHeading.current) return;
+    routeHeading.current = heading;
+    heading.tabIndex = -1;
+    heading.focus({ preventScroll: true });
   }, [step, route]);
   // K-76: null until the first real load answers, so the surface can tell
   // "still loading" apart from "this pack has no targets".
@@ -933,10 +944,11 @@ export function App() {
     await refreshLanguages();
   }
 
-  // Cancel asks the engine to stop the transfer of the pack whose progress
-  // is on screen; the engine answers through the normal failure path with
-  // its `install cancelled` reason, so the outcome shows as cancelled —
-  // never as a client-side guess that nothing happened.
+  // Cancel asks the engine to stop the install whose progress is on screen —
+  // the transfer or the unpack, whichever is running. The engine answers
+  // through the normal failure path with its `install cancelled` reason, so
+  // the outcome shows as cancelled — never as a client-side guess that
+  // nothing happened.
   async function cancelInstall() {
     if (!inv) return;
     const subject = engineProgress?.subject;

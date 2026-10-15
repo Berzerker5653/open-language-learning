@@ -217,22 +217,26 @@ export function Home(p: HomeProps) {
           </ol>
         </section>
       ) : null}
-      <div role="group" aria-label="Time budget" className="seg">
-        {BUDGET_PRESETS.map((m) => (
-          <button
-            key={m}
-            type="button"
-            className="seg-btn"
-            aria-pressed={p.activeBudget === m}
-            onClick={() => p.onBudget(m)}
-          >
-            {m} min
-          </button>
-        ))}
-      </div>
-      <p className="plan-summary">
-        {p.plan.items.length} activities · about {Math.round(p.plan.total_seconds / 60)} minutes
-      </p>
+      {p.noPack ? null : (
+        <>
+          <div role="group" aria-label="Time budget" className="seg">
+            {BUDGET_PRESETS.map((m) => (
+              <button
+                key={m}
+                type="button"
+                className="seg-btn"
+                aria-pressed={p.activeBudget === m}
+                onClick={() => p.onBudget(m)}
+              >
+                {m} min
+              </button>
+            ))}
+          </div>
+          <p className="plan-summary">
+            {p.plan.items.length} activities · about {Math.round(p.plan.total_seconds / 60)} minutes
+          </p>
+        </>
+      )}
       {p.sessionOutcome ? (
         <section aria-label="Session summary" className="session-summary">
           <p role="status">
@@ -294,9 +298,11 @@ export function Home(p: HomeProps) {
         </div>
       ) : null}
       {p.plan.items.length === 0 ? (
-        <p className="empty">
-          Nothing is due right now. Come back when reviews are due, or explore new material.
-        </p>
+        p.noPack ? null : (
+          <p className="empty">
+            Nothing is due right now. Come back when reviews are due, or explore new material.
+          </p>
+        )
       ) : (
         <>
           <p className="meta plan-secondary">

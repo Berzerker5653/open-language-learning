@@ -1239,14 +1239,19 @@
     },
     "INSTALL-UX-001": {
       "task_id": "INSTALL-UX-001",
-      "status": "ready",
+      "status": "review",
       "attempts": 1,
       "title": "Installs have real progress, failure recovery, and a receipt",
-      "activity": "idle",
+      "activity": "awaiting-human-acceptance",
       "summary": "Pack install is bounded and honest: real progress, cancel/retry/resume, a receipt, and an explicit decision on pre-archived bundles.",
-      "notes": "Transport hardening is done (PACK-DL-ALLOWLIST-001). Implemented 2026-10-15: `engine-progress` carries a measured fetch percent from the pinned `PackEntry.size_bytes`, `verify`/unpack are named as unmeasurable rather than faked, cancel is honoured at chunk/redirect/phase boundaries (`cancel_pack_install` + `INSTALL_CANCEL`), and an `InstallReceipt` (pack/version/source host/sha256/size/capabilities) reaches the UI with Cancel and Retry. Not implemented and disclosed: resume-as-continuation (a cancelled install restarts from byte zero) and cancel during unpacking, which needs an archive-crate progress callback; the pre-archived-bundle question stays an owner decision. Evidence: state/evidence/INSTALL-UX-001/ENGINE-SLICE-2026-10-15.md.",
+      "notes": "Transport hardening is done (PACK-DL-ALLOWLIST-001). Implemented 2026-10-15: `engine-progress` carries a measured fetch percent from the pinned `PackEntry.size_bytes`, `verify`/unpack are named as unmeasurable rather than faked, cancel is honoured at chunk/redirect/phase boundaries (`cancel_pack_install` + `INSTALL_CANCEL`), and an `InstallReceipt` (pack/version/source host/sha256/size/capabilities) reaches the UI with Cancel and Retry. The second slice the same day closed both disclosed gaps: `lts_langpack::archive::install_with_cancel` takes a hook consulted per archive entry and again before the store is touched, and because extraction is staging-then-rename an abort leaves no version directory and never moves the `current` pointer; a cancelled transfer keeps its bytes in `partial-<key>.part` beside a sidecar naming url/sha256/size, so a retry sends `Range: bytes=<n>-`, adopts the prefix only on a `206`, and still checks the completed file against the pinned size and SHA-256 before the pack gate sees it — a `200` answer, a corrupt or foreign sidecar, or an oversized part restarts from zero. `install_from_catalog_report` refuses an install that cannot fit (free space from `statvfs` on unix, skipped rather than guessed elsewhere) and names a disk that fills during unpack. The renderer offers Cancel during fetch/verify/install and its copy now says a retry continues where it stopped. Still open and owner-gated: the measured timing half of issue #1 item I05 (fresh-artifact install and resume timed separately on the tiers `PERF-002` freezes) needs a published artifact, and the pre-archived-bundle question stays an owner decision. Evidence: state/evidence/INSTALL-UX-001/ENGINE-SLICE-2026-10-15.md, state/evidence/INSTALL-UX-001/RESUME-CANCEL-PREFLIGHT-2026-10-15.md.",
       "dependencies": [],
-      "evidence": [],
+      "evidence": [
+        "state/evidence/INSTALL-UX-001/ENGINE-SLICE-2026-10-15.md",
+        "state/evidence/INSTALL-UX-001/RESUME-CANCEL-PREFLIGHT-2026-10-15.md",
+        "apps/desktop/src-tauri/src/packs.rs",
+        "crates/langpack/src/archive.rs"
+      ],
       "updated": "2026-10-15"
     },
     "CONTRIBUTOR-REVIEW-PACKET-001": {
@@ -1540,6 +1545,55 @@
       ],
       "updated": "2026-10-15",
       "blocker": "Six required dependencies are blocked on human or owner actions (AT pass, security disposition, real-platform runtime, performance tiers, qualified band review, clean-boot bundle smoke) and the pack republish is owner-only."
+    },
+    "A11Y-FLOW-001": {
+      "task_id": "A11Y-FLOW-001",
+      "status": "review",
+      "attempts": 1,
+      "title": "Route changes carry focus and announcement; empty views carry one action",
+      "activity": "awaiting-human-acceptance",
+      "summary": "I04's remaining engineering half: managed focus/heading on route change, a no-pack Today view with one action and no budget control or zero-count summary, a keyboard-only mounted journey, and IME-safe input.",
+      "notes": "Opened 2026-10-15 from issue #1 item I04 after re-checking the tree: `apps/desktop/src/App.tsx:453-456` only calls `window.scrollTo(0, 0)` on route change, so focus and the announcement stay on the old content, and in `home.tsx` the `Time budget` group (`:220-232`) and the `plan-summary` line (`:233-235`, renders `0 activities · about 0 minutes`) still render under `noPack`. The automated a11y suite from K-33 (`a11y.test.tsx`: tabindex, accessible names, labels, landmarks, single h1, live regions, contrast, reduced-motion) stays green and is extended, not relaxed. The human screen-reader matrix remains ACC-001 / owner gate O-03, so this task closing does not close I04. Implemented 2026-10-15: the route-change effect now scrolls, then moves focus to the new route's `h1` (`tabIndex = -1`, `preventScroll`) on every step except `done`; `home.tsx` withholds the `Time budget` group, the `plan-summary` line and the zero-count empty paragraph under `noPack` so the view carries one action; `apps/desktop/src/journeys/keyboard.journey.tsx` walks Tab and Enter from the resume picker through a no-pack Today into Settings, Language packs and Practice, asserting the focus target at each stop. Measured: with the two source files stashed the new journey and the extended `home.test.tsx` case both fail; with them `apps/desktop` reports 27 files / 240 tests passing and `a11y.test.tsx` is untouched. No Enter-submit handler exists anywhere in `apps/desktop/src`, so the IME hazard the checklist bullet names has no code path to fix today, and adding Enter-to-submit would be new scope rather than a fix.",
+      "dependencies": [
+        "UX-001",
+        "K-33"
+      ],
+      "evidence": [
+        "apps/desktop/src/journeys/keyboard.journey.tsx",
+        "apps/desktop/src/App.tsx",
+        "apps/desktop/src/home.tsx",
+        "state/evidence/A11Y-FLOW-2026-10-15/NOTES.md"
+      ],
+      "updated": "2026-10-15"
+    },
+    "RU-MODALITY-PRACTICE-001": {
+      "task_id": "RU-MODALITY-PRACTICE-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "Russian practice covers the modalities its rubrics claim",
+      "activity": "idle",
+      "summary": "Make the listening and speaking modalities the Russian rubrics claim actually runnable offline, with one journey per claimed modality.",
+      "notes": "Opened 2026-10-15 from issue #1 item R13, which stayed unchecked even though ASSESSMENT-RUNNABILITY-001 closed its own acceptance (placement refusal). Measured on this tree: `grep -ho 'type: …' languages/ru-RU/curriculum/units/*.yaml` gives 1,589 encounter-read, 798 recall, 776 cloze, 9 retrieval, 9 listen-and-choose and no speaking activity across 818 units, against 60 listening + 60 speaking rubric records. Speaking scoring is capped by ADR-0017 (guided only) and by the absence of a runtime model, so the offline half is listening practice plus honest abstention elsewhere.",
+      "dependencies": [
+        "ASSESSMENT-RUNNABILITY-001",
+        "RU-GOAL-PREREQ-001"
+      ],
+      "evidence": [],
+      "updated": "2026-10-15"
+    },
+    "UPPERBAND-TASK-JOURNEYS-001": {
+      "task_id": "UPPERBAND-TASK-JOURNEYS-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "Representative upper-band goals run their stated capability as a task",
+      "activity": "idle",
+      "summary": "For named A2/B1/B2 goals in both languages, declare runnable task sequences that exercise the stated capability, including changed context and delayed reuse.",
+      "notes": "Opened 2026-10-15 from issue #1 item R12, which stayed unchecked although CONTENT-DEPTH-001 closed its own acceptance (template audit in CI, units 810-818). Depth is still not enacted: ru `b2` has 400 units on one 2-element grammar set with the `это _` skeleton repeated 400 times, and the band review cards JA-A2-002 / JA-B1-002 / JA-B2-002 plus the Russian queue remain blocked on qualified human review — this task can only make the tasks exist and run, never certify the content.",
+      "dependencies": [
+        "CONTENT-DEPTH-001"
+      ],
+      "evidence": [],
+      "updated": "2026-10-15"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence.",

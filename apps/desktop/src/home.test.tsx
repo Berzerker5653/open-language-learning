@@ -121,6 +121,17 @@ describe("home", () => {
     // claimed about a language this profile is not studying.
     expect(html).not.toContain("pack-posture");
     expect(html).not.toContain("Where to begin");
+    // A time budget and a zero-count plan summary are noise when there is
+    // no pack: the budget tunes a plan that cannot exist, and "0 activities
+    // · about 0 minutes" is a number with no meaning. The one control that
+    // resolves the state is already in the notice.
+    expect(html).not.toContain('aria-label="Time budget"');
+    expect(html).not.toContain("plan-summary");
+    expect(html).not.toContain("activities · about");
+    // The with-a-pack empty state stays reachable (pinned above) but is not
+    // stacked under the missing-language notice: that view offers exactly
+    // one next action.
+    expect(html).not.toContain("Nothing is due right now");
   });
 
   it("makes recall-meaning plan items runnable with the actual word", () => {

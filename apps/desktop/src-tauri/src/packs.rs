@@ -20,7 +20,7 @@ use base64::Engine as _;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::fs;
-use std::io::Read;
+use std::io::{Read, Write};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicBool, Ordering};
 
@@ -382,6 +382,349 @@ fn read_capped(
     Ok(bytes)
 }
 
+/// Sidecar binding a partial download to the one catalog artifact those
+/// bytes belong to. A partial is never identified by name alone: the URL,
+/// the pinned digest and the pinned size all have to agree before a retry
+/// will append to it.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+struct PartialMeta {
+    url: String,
+    sha256: String,
+    size_bytes: u64,
+}
+
+/// Cache key for one pinned artifact. Re-pinning a release asset (new digest
+/// or size, or a moved URL) changes the key, so a stale partial can never be
+/// adopted by the entry that replaced it.
+fn resume_key(entry: &PackEntry) -> String {
+    hex_sha256(
+        format!(
+            "{}\u{1}{}\u{1}{}",
+            entry.url, entry.sha256, entry.size_bytes
+        )
+        .as_bytes(),
+    )
+}
+
+fn partial_paths(data: &Path, entry: &PackEntry) -> (PathBuf, PathBuf) {
+    let key = resume_key(entry);
+    (
+        data.join(format!("partial-{key}.part")),
+        data.join(format!("partial-{key}.part.meta")),
+    )
+}
+
+/// The byte range a retry asks the server for; nothing at all when there is
+/// nothing on disk to continue.
+fn range_header(have: u64) -> Option<String> {
+    (have > 0).then(|| format!("bytes={have}-"))
+}
+
+/// What the answer to a ranged request means for the bytes already on disk.
+enum Resume {
+    /// The server honoured the range: its body continues the file.
+    Append,
+    /// The body is the whole archive — which includes a plain `200` from a
+    /// server that ignored `Range`, and any answer at all when nothing usable
+    /// is on disk. The partial is discarded rather than appended to.
+    Restart,
+}
+
+fn resume_decision(status: u16, have: u64) -> Resume {
+    if status == 206 && have > 0 {
+        Resume::Append
+    } else {
+        Resume::Restart
+    }
+}
+
+/// A partial download in the data directory: the bytes plus the sidecar that
+/// says which artifact they are a prefix of. This is what makes an
+/// interrupted install cost the bytes still in flight instead of the whole
+/// archive (I05). It never makes the install less strict — the finished file
+/// is still SHA-256 checked against the catalog entry before a byte of it
+/// reaches the pack store, and a digest mismatch throws the partial away.
+struct PartialDownload {
+    part: PathBuf,
+    meta: PathBuf,
+}
+
+impl PartialDownload {
+    fn for_entry(data: &Path, entry: &PackEntry) -> PartialDownload {
+        let (part, meta) = partial_paths(data, entry);
+        PartialDownload { part, meta }
+    }
+
+    /// Bytes usable for a retry: sidecar present, parseable, naming this
+    /// exact artifact, with the file on disk no larger than the pinned size.
+    /// Anything else is deleted on the spot and reported as zero, so a
+    /// leftover can only ever cost a re-download, never a wrong install.
+    fn usable(&self, entry: &PackEntry) -> u64 {
+        let want = PartialMeta {
+            url: entry.url.clone(),
+            sha256: entry.sha256.clone(),
+            size_bytes: entry.size_bytes,
+        };
+        let raw = match fs::read(&self.meta) {
+            Ok(b) => b,
+            Err(_) => {
+                self.discard();
+                return 0;
+            }
+        };
+        let got: PartialMeta = match serde_json::from_slice(&raw) {
+            Ok(m) => m,
+            Err(_) => {
+                self.discard();
+                return 0;
+            }
+        };
+        if got != want {
+            self.discard();
+            return 0;
+        }
+        let len = match fs::metadata(&self.part) {
+            Ok(m) => m.len(),
+            Err(_) => {
+                self.discard();
+                return 0;
+            }
+        };
+        if len > entry.size_bytes {
+            self.discard();
+            return 0;
+        }
+        len
+    }
+
+    /// Open the destination for this attempt: append to the bytes kept, so
+    /// the new write lands at end of file, or truncate and start over when the
+    /// server is sending the whole archive. Without `append` a write would
+    /// overwrite the prefix from offset zero and the finished file would fail
+    /// the digest — resume would be silently impossible.
+    fn open(&self, append: bool) -> Result<fs::File, String> {
+        let mut opts = fs::OpenOptions::new();
+        opts.write(true).create(true);
+        if append {
+            opts.append(true);
+        } else {
+            opts.truncate(true);
+        }
+        opts.open(&self.part)
+            .map_err(|e| format!("partial download: {e}"))
+    }
+
+    /// Write the sidecar before the first byte of this attempt, so a crash
+    /// mid-transfer still leaves a retry able to identify what is on disk.
+    fn write_meta(&self, entry: &PackEntry) {
+        let meta = PartialMeta {
+            url: entry.url.clone(),
+            sha256: entry.sha256.clone(),
+            size_bytes: entry.size_bytes,
+        };
+        if let Ok(bytes) = serde_json::to_vec(&meta) {
+            let _ = fs::write(&self.meta, bytes);
+        }
+    }
+
+    /// Drop the partial and its sidecar: after a verified download (a finished
+    /// install leaves no debris), and whenever the bytes on disk are no longer
+    /// trustworthy.
+    fn discard(&self) {
+        let _ = fs::remove_file(&self.part);
+        let _ = fs::remove_file(&self.meta);
+    }
+}
+
+/// Remove partials for artifacts this entry does not pin, so an old download
+/// of a replaced release asset does not sit in the user's data directory
+/// forever eating the space the next install needs.
+fn prune_partials(data: &Path, entry: &PackEntry) {
+    let keep = partial_paths(data, entry);
+    let read = match fs::read_dir(data) {
+        Ok(rd) => rd,
+        Err(_) => return,
+    };
+    for dent in read.flatten() {
+        let path = dent.path();
+        let name = match path.file_name().and_then(|s| s.to_str()) {
+            Some(n) => n.to_string(),
+            None => continue,
+        };
+        if !name.starts_with("partial-") {
+            continue;
+        }
+        if path != keep.0 && path != keep.1 {
+            let _ = fs::remove_file(path);
+        }
+    }
+}
+
+/// A full disk has to read as a full disk, not as "install failed": the
+/// learner's next action is freeing space, not pressing the same button.
+fn write_error(e: &std::io::Error) -> String {
+    if e.kind() == std::io::ErrorKind::StorageFull || e.raw_os_error() == Some(28) {
+        return "not enough space left on device to finish installing".into();
+    }
+    format!("write: {e}")
+}
+
+/// Drain a response body onto disk under the hard size cap, starting from
+/// `already` bytes on disk. Same rules as `read_capped` — abort the moment
+/// the running total passes the cap, hand the real cumulative count to
+/// `on_bytes`, consult `cancelled` before every chunk — except the bytes land
+/// in a file, which is what makes an interrupted transfer resumable. Returns
+/// the total bytes now on disk.
+fn drain_into_file(
+    mut reader: impl Read,
+    mut file: fs::File,
+    already: u64,
+    max_bytes: u64,
+    on_bytes: &mut dyn FnMut(u64),
+    cancelled: &dyn Fn() -> bool,
+) -> Result<u64, String> {
+    let mut total = already;
+    let mut buf = [0u8; 1 << 16];
+    loop {
+        if cancelled() {
+            return Err(CANCELLED.into());
+        }
+        let n = reader.read(&mut buf).map_err(|e| format!("read: {e}"))?;
+        if n == 0 {
+            break;
+        }
+        if total + n as u64 > max_bytes {
+            return Err("response exceeded size limit".into());
+        }
+        file.write_all(&buf[..n]).map_err(|e| write_error(&e))?;
+        total += n as u64;
+        on_bytes(total);
+    }
+    file.flush().map_err(|e| write_error(&e))?;
+    Ok(total)
+}
+
+/// `fetch_capped` with resumable bytes on disk (I05). The transport rules are
+/// unchanged and still enforced per hop: https start, the GitHub allowlist on
+/// the start URL and every `Location`, at most `MAX_REDIRECT_HOPS`, `cancelled`
+/// honored before every hop and every chunk. The difference is that a retry
+/// sends `Range: bytes=<n>-` for the prefix it already holds and accepts that
+/// prefix only if the server answers `206`; the completed file is then checked
+/// against the pinned digest and size before the caller sees it.
+fn fetch_capped_resumable(
+    entry: &PackEntry,
+    require_allowlisted: bool,
+    partial: &PartialDownload,
+    on_bytes: &mut dyn FnMut(u64),
+    cancelled: &dyn Fn() -> bool,
+) -> Result<Vec<u8>, String> {
+    let agent = ureq::AgentBuilder::new().redirects(0).build();
+    let mut hops: Vec<String> = Vec::new();
+    let have = partial.usable(entry);
+    // A previous attempt already landed every pinned byte (a crash between the
+    // last write and the checksum, say): verify what is on disk instead of
+    // asking the server for a range that starts at the end of the file.
+    if have == entry.size_bytes {
+        return finalize_partial(partial, entry);
+    }
+    loop {
+        if cancelled() {
+            return Err(CANCELLED.into());
+        }
+        let url = url_policy(&entry.url, &hops, require_allowlisted)?
+            .pop()
+            .expect("url_policy never returns an empty chain");
+        let mut req = agent.get(url.as_str());
+        if let Some(range) = range_header(have) {
+            req = req.set("Range", &range);
+        }
+        let resp = req.call().map_err(|e| format!("fetch failed: {e}"))?;
+        if !(300..400).contains(&resp.status()) {
+            let append = matches!(resume_decision(resp.status(), have), Resume::Append);
+            let file = partial.open(append)?;
+            partial.write_meta(entry);
+            drain_into_file(
+                resp.into_reader(),
+                file,
+                if append { have } else { 0 },
+                entry.size_bytes,
+                on_bytes,
+                cancelled,
+            )?;
+            break;
+        }
+        let loc = resp.header("location").ok_or("redirect without location")?;
+        hops.push(loc.to_string());
+    }
+    finalize_partial(partial, entry)
+}
+
+/// Turn the bytes on disk into an answer: they have to be exactly the pinned
+/// size and hash to the pinned digest. A refusal removes the file, so the next
+/// attempt cannot inherit bad bytes. A verified file stays put until the install
+/// that consumed it settles, which is what makes a cancel during unpacking
+/// retryable without downloading the archive a second time.
+fn finalize_partial(partial: &PartialDownload, entry: &PackEntry) -> Result<Vec<u8>, String> {
+    let bytes = fs::read(&partial.part).map_err(|e| format!("partial download: {e}"))?;
+    if bytes.len() as u64 != entry.size_bytes {
+        partial.discard();
+        return Err(format!(
+            "download incomplete: got {} of {} bytes",
+            bytes.len(),
+            entry.size_bytes
+        ));
+    }
+    if hex_sha256(&bytes) != entry.sha256 {
+        partial.discard();
+        return Err("archive checksum does not match catalog entry".into());
+    }
+    Ok(bytes)
+}
+
+/// Free space an install is expected to need: the archive itself, the staging
+/// copy the installer unpacks into, and the installed copy that survives.
+/// Text-and-audio packs of this size land within a small multiple of their
+/// archive, so this is a conservative expectation, not a measurement — it is
+/// used only to refuse a download that cannot possibly finish.
+fn estimated_install_bytes(entry: &PackEntry) -> u64 {
+    entry.size_bytes.saturating_mul(3)
+}
+
+/// The refusal when the pack cannot fit. It names the pack, the space the
+/// install expects to need, and what is actually free: "install failed" gives
+/// the learner nothing to act on, freeing space gives them the next step.
+fn space_error(entry: &PackEntry, need: u64, free: u64) -> String {
+    format!(
+        "not enough free space: {} needs about {} MB and this device has {} MB free",
+        entry.display_name,
+        need / 1_000_000,
+        free / 1_000_000
+    )
+}
+
+/// Bytes available to this user on the filesystem holding `path`, or `None`
+/// where there is no cheap way to ask (Windows). A `None` skips the preflight
+/// rather than guessing at it.
+#[cfg(unix)]
+fn free_bytes(path: &Path) -> Option<u64> {
+    use std::ffi::CString;
+    use std::os::unix::ffi::OsStrExt;
+    let c = CString::new(path.as_os_str().as_bytes()).ok()?;
+    // SAFETY: `statvfs` only writes through the pointer into a
+    // zero-initialized `statvfs` of the correct type, and the path is a valid
+    // NUL-terminated C string.
+    let mut stat: libc::statvfs = unsafe { std::mem::zeroed() };
+    if unsafe { libc::statvfs(c.as_ptr(), &mut stat) } != 0 {
+        return None;
+    }
+    Some(stat.f_frsize as u64 * stat.f_bavail as u64)
+}
+
+#[cfg(not(unix))]
+fn free_bytes(_path: &Path) -> Option<u64> {
+    None
+}
+
 /// Percent of the pinned archive actually transferred. The denominator is
 /// the size the catalog entry pinned, so the number is a real measured
 /// fraction; it never exceeds 100 no matter what the server sends.
@@ -408,9 +751,10 @@ pub use crate::progress::Progress;
 /// happen *before* the work they name, which is the whole point: a stage
 /// announced after it finished would still leave the learner watching a
 /// frozen button. `cancelled` is honored at the phase boundaries that have
-/// not started yet (before the checksum, before unpacking); once the
-/// unpack has begun the install runs to completion, because the swap into
-/// the pack store is atomic and a half-unpacked version is never visible.
+/// not started yet (before the checksum, before unpacking) and inside the
+/// unpack itself: the hook runs once per archive entry and again immediately
+/// before the store is touched, so an abort leaves no version directory and
+/// never moves the `current` pointer.
 pub fn install_pack_bytes_report(
     data: &Path,
     bytes: &[u8],
@@ -446,8 +790,18 @@ pub fn install_pack_bytes_report(
         return Err(CANCELLED.into());
     }
     report(&Progress::stage("install-pack", &am.pack_id, "install"));
-    let outcome = lts_langpack::archive::install(bytes, &data.join("packs"))
-        .map_err(|e| format!("install rejected: {e}"))?;
+    // The unpack is cancellable on the same terms as the download: the hook
+    // is consulted per archive entry, and an abort drops the staging
+    // directory without touching the pack store.
+    let outcome =
+        match lts_langpack::archive::install_with_cancel(bytes, &data.join("packs"), cancelled) {
+            Ok(o) => o,
+            Err(lts_langpack::archive::ArchiveError::Cancelled) => {
+                report(&Progress::stage("install-pack", &am.pack_id, "cancelled"));
+                return Err(CANCELLED.into());
+            }
+            Err(e) => return Err(format!("install rejected: {e}")),
+        };
     let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
     // Community installs NEVER self-upgrade trust: the catalog's claimed
     // review status is metadata, not a review record (docs/16).
@@ -475,11 +829,13 @@ pub fn install_pack_bytes_report(
 /// install), reporting the stage it is in and, during the download, the
 /// fraction of the pinned archive actually transferred (K-62 + the real
 /// progress half of INSTALL-UX-001). `cancel` stops the transfer at the
-/// next byte boundary; a cancelled install records nothing and the store
-/// still shows no version of the pack. Offline reinstall of an
-/// already-installed pack is a no-op success with no receipt — nothing was
-/// fetched or verified this run, and a receipt that says otherwise would
-/// be a lie.
+/// next byte boundary, and it also stops an unpack that has already begun; a
+/// cancelled install records nothing and the store still shows no version of
+/// the pack. Bytes already downloaded stay on disk, so the next attempt
+/// continues the transfer instead of re-fetching the whole archive. Offline
+/// reinstall of an already-installed pack is a no-op success with no receipt
+/// — nothing was fetched or verified this run, and a receipt that says
+/// otherwise would be a lie.
 pub fn install_from_catalog_report(
     data: &Path,
     pack_id: &str,
@@ -506,6 +862,20 @@ pub fn install_from_catalog_report(
             });
         }
     }
+    // Ask before spending the learner's bandwidth and disk. A pack that
+    // cannot possibly fit is refused now, with a reason that names free space,
+    // instead of failing at the last byte of the unpack; `None` from
+    // `free_bytes` skips the check rather than guessing at it.
+    if let Some(free) = free_bytes(data) {
+        let need = estimated_install_bytes(entry);
+        if free < need {
+            return Err(space_error(entry, need, free));
+        }
+    }
+    // Continue an interrupted transfer if one is on disk for this exact
+    // artifact, and clear partials for artifacts this catalog no longer pins.
+    prune_partials(data, entry);
+    let partial = PartialDownload::for_entry(data, entry);
     // The catalog entry pins the exact archive size, so bytes already read
     // are a real fraction of known work: percent advances only when a whole
     // new percent of *measured* bytes is in, and verify/install stay named
@@ -526,13 +896,7 @@ pub fn install_from_catalog_report(
                 ));
             }
         };
-        fetch_capped(
-            &entry.url,
-            entry.size_bytes,
-            true,
-            &mut on_bytes,
-            &cancelled,
-        )
+        fetch_capped_resumable(entry, true, &partial, &mut on_bytes, &cancelled)
     };
     let bytes = match fetch {
         Ok(b) => b,
@@ -543,7 +907,24 @@ pub fn install_from_catalog_report(
             return Err(e);
         }
     };
-    let installed = install_pack_bytes_report(data, &bytes, Some(entry), &mut report, &cancelled)?;
+    let installed =
+        match install_pack_bytes_report(data, &bytes, Some(entry), &mut report, &cancelled) {
+            Ok(v) => {
+                // The pack is in the store: the downloaded archive has done
+                // its job, and its bytes are the learner's disk space.
+                partial.discard();
+                v
+            }
+            Err(e) => {
+                // A cancel keeps the bytes so the retry does not re-fetch them.
+                // Any other failure means this archive was refused, and holding
+                // onto it would only eat the space the learner needs instead.
+                if e != CANCELLED {
+                    partial.discard();
+                }
+                return Err(e);
+            }
+        };
     Ok(InstallResult {
         installed,
         receipt: Some(receipt_for(entry, &bytes, data)),
@@ -1287,5 +1668,298 @@ mod tests {
         assert_eq!(r.sha256, e.sha256, "the verified digest is the pin");
         assert_eq!(r.size_bytes, bytes.len() as u64);
         assert_eq!(r.capabilities, vec!["reading", "speaking", "writing"]);
+    }
+
+    /// I05: an interrupted transfer costs the bytes still in flight, not the
+    /// whole archive. The first attempt is cancelled partway through; the pack
+    /// store shows nothing at all; the next attempt appends to what survived
+    /// and the finished bytes still have to carry the pinned digest.
+    #[test]
+    fn an_interrupted_download_resumes_from_the_bytes_on_disk() {
+        use std::io::Cursor;
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        // Big enough to span several read chunks, so a cancel lands mid-stream.
+        let full: Vec<u8> = (0..400_000u32).map(|i| (i % 251) as u8).collect();
+        let mut e = entry("https://github.com/o/r/releases/download/v1/big.lpk");
+        e.size_bytes = full.len() as u64;
+        e.sha256 = hex_sha256(&full);
+        let partial = PartialDownload::for_entry(data, &e);
+
+        let cut = (full.len() / 2) as u64;
+        let flag = AtomicBool::new(false);
+        let err = drain_into_file(
+            Cursor::new(&full[..]),
+            {
+                let f = partial.open(false).unwrap();
+                partial.write_meta(&e);
+                f
+            },
+            0,
+            e.size_bytes,
+            &mut |done| {
+                if done >= cut {
+                    flag.store(true, Ordering::Relaxed);
+                }
+            },
+            &|| flag.load(Ordering::Relaxed),
+        )
+        .unwrap_err();
+        assert_eq!(err, CANCELLED);
+
+        // Nothing about the install exists yet: the learner never sees a pack
+        // that was not finished, and there is no half-written version to undo.
+        assert!(installed_packs(data).is_empty());
+        assert!(
+            lts_langpack::archive::current_version(
+                "community.example.japanese",
+                &data.join("packs")
+            )
+            .is_none()
+        );
+
+        // The prefix is worth keeping, and it is strictly less than the whole.
+        let kept = partial.usable(&e);
+        assert!(
+            kept > 0 && kept < e.size_bytes,
+            "kept {kept} of {}",
+            e.size_bytes
+        );
+
+        // Attempt two: only the missing bytes move, and the total is real.
+        let seen: std::cell::RefCell<Vec<u64>> = std::cell::RefCell::new(Vec::new());
+        let total = drain_into_file(
+            Cursor::new(&full[kept as usize..]),
+            partial.open(true).unwrap(),
+            kept,
+            e.size_bytes,
+            &mut |done| seen.borrow_mut().push(done),
+            &never_cancelled,
+        )
+        .unwrap();
+        assert_eq!(total, e.size_bytes);
+        let first = seen
+            .borrow()
+            .first()
+            .copied()
+            .expect("progress was reported");
+        let last = seen
+            .borrow()
+            .last()
+            .copied()
+            .expect("progress was reported");
+        assert!(
+            first > kept,
+            "a resumed attempt counts the bytes already on disk, not only the ones fetched now"
+        );
+        assert_eq!(last, e.size_bytes, "the fraction ends on the pinned total");
+        let resumed = finalize_partial(&partial, &e).unwrap();
+        assert_eq!(resumed, full, "the spliced file is the pinned archive");
+        // A verified archive stays on disk until the install that consumed it
+        // settles, so a cancel during unpacking is still retryable without a
+        // second download. A catalog change clears the bytes it no longer pins.
+        assert_eq!(partial.usable(&e), e.size_bytes);
+        let mut repinned = e.clone();
+        repinned.sha256 = "c".repeat(64);
+        prune_partials(data, &repinned);
+        assert!(
+            !partial.part.exists() && !partial.meta.exists(),
+            "a catalog change clears the bytes it no longer pins"
+        );
+    }
+
+    /// The sidecar is the only thing identifying a partial, so it is checked
+    /// against the catalog entry in full. Anything that does not name this
+    /// exact artifact — re-pinned digest, moved URL, corrupt file, a part
+    /// longer than the pinned size — is deleted instead of spliced.
+    #[test]
+    fn an_unidentifiable_partial_is_refused_and_cleared() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let full: Vec<u8> = (0..5_000u32).map(|i| (i % 251) as u8).collect();
+        let mut e = entry("https://github.com/o/r/releases/download/v1/p.lpk");
+        e.size_bytes = full.len() as u64;
+        e.sha256 = hex_sha256(&full);
+        let partial = PartialDownload::for_entry(data, &e);
+        fs::write(&partial.part, &full[..2_000]).unwrap();
+        partial.write_meta(&e);
+        assert_eq!(partial.usable(&e), 2_000, "the honest case works");
+
+        // The catalog re-pins the asset: same URL, different digest.
+        let mut repinned = e.clone();
+        repinned.sha256 = "b".repeat(64);
+        fs::write(
+            &partial.meta,
+            serde_json::to_vec(&PartialMeta {
+                url: repinned.url.clone(),
+                sha256: repinned.sha256.clone(),
+                size_bytes: repinned.size_bytes,
+            })
+            .unwrap(),
+        )
+        .unwrap();
+        assert_eq!(
+            partial.usable(&e),
+            0,
+            "a partial naming another artifact starts from zero"
+        );
+        assert!(
+            !partial.part.exists(),
+            "the refused bytes are deleted, not kept for later"
+        );
+
+        // A corrupt sidecar and an over-long part are refused the same way.
+        fs::write(&partial.part, &full[..2_000]).unwrap();
+        fs::write(&partial.meta, b"not json").unwrap();
+        assert_eq!(partial.usable(&e), 0);
+        fs::write(&partial.part, vec![0u8; full.len() + 1]).unwrap();
+        partial.write_meta(&e);
+        assert_eq!(partial.usable(&e), 0, "more than the pinned size is a lie");
+        assert!(!partial.part.exists());
+
+        // Re-establish this entry's own partial: the refusals above deleted it.
+        fs::write(&partial.part, &full[..2_000]).unwrap();
+        partial.write_meta(&e);
+        // Partials for artifacts this entry does not pin are pruned away.
+        let stale = data.join("partial-00000000000000000000000000000000.part");
+        fs::write(&stale, b"leftover from a replaced release asset").unwrap();
+        prune_partials(data, &e);
+        assert!(!stale.exists());
+        assert!(partial.part.exists(), "this entry's own partial survives");
+    }
+
+    /// The resume rules spelled out: no range when there is nothing to
+    /// continue, and only a `206` may be appended to. A server that ignored
+    /// `Range` answers `200` with the whole archive, so appending to the
+    /// partial would duplicate it — that answer restarts the file instead.
+    #[test]
+    fn a_retry_asks_for_the_missing_bytes_and_only_trusts_a_partial_answer() {
+        assert_eq!(range_header(0), None);
+        assert_eq!(range_header(4_096).as_deref(), Some("bytes=4096-"));
+        assert!(matches!(resume_decision(206, 4_096), Resume::Append));
+        assert!(matches!(resume_decision(200, 4_096), Resume::Restart));
+        assert!(matches!(resume_decision(206, 0), Resume::Restart));
+        assert!(matches!(resume_decision(404, 4_096), Resume::Restart));
+    }
+
+    /// Bytes already on disk are never adopted blindly: they have to be the
+    /// exact pinned size and hash to the exact pinned digest, and a refusal
+    /// removes them so the next attempt cannot inherit a corrupted file.
+    #[test]
+    fn a_partial_on_disk_is_verified_before_anything_is_installed() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let full = ja_demo_archive();
+        let mut e = entry("https://github.com/o/r/releases/download/v0.1.0/ja-demo.lpk");
+        e.pack_id = "org.openlanguage.ja-demo".into();
+        e.version = "0.1.0".into();
+        e.size_bytes = full.len() as u64;
+        e.sha256 = hex_sha256(&full);
+        let partial = PartialDownload::for_entry(data, &e);
+
+        // A previous attempt landed every byte and died before the checksum.
+        fs::write(&partial.part, &full).unwrap();
+        partial.write_meta(&e);
+        assert_eq!(partial.usable(&e), e.size_bytes);
+        let resumed = finalize_partial(&partial, &e).unwrap();
+        assert_eq!(resumed, full);
+        // Those bytes go through the same install gate as a fresh download.
+        let inst =
+            install_pack_bytes_report(data, &resumed, Some(&e), &mut no_progress, &never_cancelled)
+                .unwrap();
+        assert_eq!(inst.pack_id, "org.openlanguage.ja-demo");
+        assert_eq!(
+            lts_langpack::archive::current_version("org.openlanguage.ja-demo", &data.join("packs"))
+                .as_deref(),
+            Some("0.1.0")
+        );
+        // The bytes remain available for a retry until the install settles; the
+        // store gate above re-validated every one of them either way.
+        assert_eq!(partial.usable(&e), e.size_bytes);
+
+        // Right length, wrong bytes: refused, and not left on disk.
+        fs::write(&partial.part, vec![9u8; full.len()]).unwrap();
+        partial.write_meta(&e);
+        let err = finalize_partial(&partial, &e).unwrap_err();
+        assert!(err.contains("checksum"), "{err}");
+        assert!(!partial.part.exists());
+
+        // One byte short of the pinned size is a refusal, not a truncated pack.
+        fs::write(&partial.part, &full[..full.len() - 1]).unwrap();
+        partial.write_meta(&e);
+        let err = finalize_partial(&partial, &e).unwrap_err();
+        assert!(err.contains("incomplete"), "{err}");
+        assert!(!partial.part.exists());
+    }
+
+    /// A full disk and an impossible plan both have to name themselves: these
+    /// strings are what the learner reads in the alert, and "install failed"
+    /// tells them nothing they can act on.
+    #[test]
+    fn a_full_disk_is_named_rather_than_reported_as_a_generic_failure() {
+        let enospc = std::io::Error::from_raw_os_error(28);
+        let msg = write_error(&enospc);
+        assert!(msg.contains("space left on device"), "{msg}");
+        // Any other write failure keeps its own explanation.
+        let other = std::io::Error::new(std::io::ErrorKind::PermissionDenied, "denied");
+        assert!(write_error(&other).starts_with("write:"), "{other:?}");
+
+        // The preflight expectation covers the archive, the staging copy and
+        // the installed copy; the refusal quotes both numbers.
+        let mut e = entry("https://github.com/o/r/releases/download/v1/p.lpk");
+        e.size_bytes = 300_000_000;
+        assert_eq!(estimated_install_bytes(&e), 900_000_000);
+        let refusal = space_error(&e, estimated_install_bytes(&e), 120_000_000);
+        assert!(refusal.contains("free space"), "{refusal}");
+        assert!(refusal.contains("Example Japanese"), "{refusal}");
+        assert!(
+            refusal.contains("900 MB") && refusal.contains("120 MB"),
+            "{refusal}"
+        );
+
+        // The platform plumbing answers something sane where it answers at all.
+        if cfg!(unix) {
+            let free = free_bytes(std::path::Path::new(".")).expect("unix has statvfs");
+            assert!(free > 0, "free space read as {free}");
+        }
+    }
+
+    /// The unpack is now cancellable too: a cancel that arrives while the
+    /// archive is being extracted stops the install, reports the terminal
+    /// `cancelled` stage, and leaves the pack store exactly as it was.
+    #[test]
+    fn cancelling_during_unpacking_leaves_no_pack_installed() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let bytes = ja_demo_archive();
+        let seen = std::cell::Cell::new(0usize);
+        let mut e = entry("https://github.com/o/r/releases/download/v0.1.0/ja-demo.lpk");
+        e.pack_id = "org.openlanguage.ja-demo".into();
+        e.version = "0.1.0".into();
+        e.size_bytes = bytes.len() as u64;
+        e.sha256 = hex_sha256(&bytes);
+        let mut stages: Vec<&str> = Vec::new();
+        let err = install_pack_bytes_report(
+            data,
+            &bytes,
+            Some(&e),
+            &mut |p: &Progress| stages.push(p.stage),
+            // `install_pack_bytes_report` consults the flag twice before the
+            // unpack begins, so the third call is the extraction loop's own.
+            &|| {
+                seen.set(seen.get() + 1);
+                seen.get() > 2
+            },
+        )
+        .unwrap_err();
+        assert_eq!(err, CANCELLED, "{err}");
+        assert_eq!(stages, vec!["verify", "install", "cancelled"]);
+        assert!(seen.get() >= 3, "the unpack itself was reached");
+        assert!(installed_packs(data).is_empty());
+        assert_eq!(
+            lts_langpack::archive::current_version("org.openlanguage.ja-demo", &data.join("packs")),
+            None,
+            "a cancelled unpack leaves no version installed"
+        );
     }
 }

@@ -40,5 +40,10 @@ url = "2.5"
 zip.workspace = true
 tauri-plugin-single-instance = "2.4.5"
 
+[target.'cfg(unix)'.dependencies]
+# Free-space preflight for pack installs (statvfs). Windows keeps compiling
+# without it: `free_bytes` there answers `None` and the check is skipped.
+libc = "0.2"
+
 [dev-dependencies]
 tempfile.workspace = true

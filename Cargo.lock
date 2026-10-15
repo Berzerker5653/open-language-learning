@@ -2453,6 +2453,7 @@ name = "lts-desktop"
 version = "0.4.0-alpha.1"
 dependencies = [
  "base64 0.22.1",
+ "libc",
  "lts-activity",
  "lts-domain",
  "lts-langpack",

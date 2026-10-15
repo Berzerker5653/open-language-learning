@@ -278,7 +278,12 @@ the distribution trade-off. Today every catalog install streams one pinned
 `.lpk` archive from a GitHub release asset (`catalog/packs.json`; transport
 and gates in `apps/desktop/src-tauri/src/packs.rs` — download, SHA-256
 verification against the pin, unpack through the pack gate), with real
-download progress, cancel and clean retry, but no partial-byte resume.
+download progress, cancel honored during fetch, verify and unpack, and — as of
+2026-10-15 — a retry that continues a download from the bytes already on disk,
+re-verified against the pinned digest before anything installs. That resume is
+client-side over the same single pinned archive, so it neither needs nor
+pre-empts a bundle format; the open question below is payload layout, not
+resume.
 The open trade-off to accept or reject before anything is specified:
 pre-archiving distribution payloads (pre-built archive sets, chunked assets,
 or CDN-side layout) versus the single pinned archive — what that costs in

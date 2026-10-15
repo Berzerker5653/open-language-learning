@@ -53,6 +53,8 @@ pub enum ArchiveError {
     Invalid(String),
     #[error("pack rejected by install validation: {0}")]
     Validation(String),
+    #[error("install cancelled")]
+    Cancelled,
 }
 
 pub fn hex_sha256(bytes: &[u8]) -> String {
@@ -221,6 +223,22 @@ pub struct InstallOutcome {
 
 /// Verify and install an archive into a pack store.
 pub fn install(bytes: &[u8], store: &Path) -> Result<InstallOutcome, ArchiveError> {
+    install_with_cancel(bytes, store, &|| false)
+}
+
+/// `install`, plus a cancellation hook consulted before every entry is
+/// extracted and again immediately before the store itself is touched. A
+/// `true` return aborts with `ArchiveError::Cancelled`.
+///
+/// Aborting is safe by construction: extraction lands in a staging
+/// directory that is only renamed into place on success, so a cancelled
+/// install leaves no version directory and never moves the `current`
+/// pointer — the store is exactly what it was before the call.
+pub fn install_with_cancel(
+    bytes: &[u8],
+    store: &Path,
+    cancelled: &dyn Fn() -> bool,
+) -> Result<InstallOutcome, ArchiveError> {
     let am = inspect(bytes)?;
     let mut zip = zip::ZipArchive::new(Cursor::new(bytes))?;
 
@@ -273,6 +291,9 @@ pub fn install(bytes: &[u8], store: &Path) -> Result<InstallOutcome, ArchiveErro
     fs::create_dir_all(store)?;
     let staging = tempfile::tempdir_in(store)?;
     for f in &am.files {
+        if cancelled() {
+            return Err(ArchiveError::Cancelled);
+        }
         let rel = safe_rel(&f.path).unwrap();
         let mut data = Vec::new();
         std::io::Read::take(zip.by_name(&f.path)?, f.size + 1).read_to_end(&mut data)?;
@@ -338,6 +359,11 @@ pub fn install(bytes: &[u8], store: &Path) -> Result<InstallOutcome, ArchiveErro
                 .and_then(serde_json::Value::as_str)
                 .unwrap_or("?")
         )));
+    }
+    // The last honest cancel point: from here on the store itself changes,
+    // so the decision has to be made before it does.
+    if cancelled() {
+        return Err(ArchiveError::Cancelled);
     }
 
     let pack_dir = store.join(&pack_id);
