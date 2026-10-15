@@ -47,5 +47,6 @@ Existing:
 - 0030 attempt identity and disqualifying support (identity is an input, never a guess; policy 0.2.0 `support.disqualifying_for`) — **Proposed (agent-authored, 2026-10-14)**
 - 0031 goal prerequisites aggregate over declared concepts (`required_concepts` decides a goal-level gate; no goal-id evidence rows) — **Proposed (agent-authored, 2026-10-14)**
 - 0032 track pack media bytes that outrun the pinned published archive (18 journey assets; bounded exception that ends at republish) — **Proposed (agent-authored, 2026-10-14)**
+- 0033 explicit ledger records for release-path roadmap tasks (`--require-explicit-ledger-records`, off by default; every required task now carries a record) — **Proposed (agent-authored, 2026-10-15)**
 
 Template: `template.md`.

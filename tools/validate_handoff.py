@@ -89,9 +89,10 @@ def semver_tuple(value):
 
 
 class Audit:
-    def __init__(self, root, release=False):
+    def __init__(self, root, release=False, require_ledger=False):
         self.root = Path(root).resolve()
         self.release = release
+        self.require_ledger = require_ledger
         self.errors = []
         self.warnings = []
         self.cache = {}
@@ -355,6 +356,18 @@ class Audit:
             self.fail("task-state", "active_task must identify an in_progress roadmap task")
         if in_progress != ([active] if active else []):
             self.fail("task-state", "exactly the active_task may be in_progress")
+        if self.require_ledger:
+            # Proposed policy (docs/adr/0033, Status: Proposed, so off by default): a
+            # task on the desktop-1.0 release path must carry an explicit ledger
+            # record. Without one, docs/15 derivation lets a human-gated card report
+            # as ready merely because its dependencies are done.
+            for ident, task in tasks.items():
+                if ident in states:
+                    continue
+                if task.get("required_for_desktop_1_0") is True:
+                    self.fail("task-state", f"required task {ident} has no explicit ledger record")
+                else:
+                    self.warn("task-state", f"optional task {ident} has no explicit ledger record")
 
     def run(self):
         required = ["README.md", "START_HERE_OMP.md", "AGENTS.md", "docs/00_MASTER_SPEC.md", "state/STATUS.md", "schemas/README.md", "tasks/ROADMAP.yaml", "state/task-state.json", "languages/ja-JP/manifest.yaml", "examples/minimal-language-pack/manifest.yaml"]
@@ -386,9 +399,11 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT, help="validate a separate copy without executing its content")
     parser.add_argument("--release-readiness", action="store_true", help="strict pack data preflight; never certifies app/linguistic release quality")
+    parser.add_argument("--require-explicit-ledger-records", action="store_true",
+                        help="fail any desktop-1.0-required roadmap task that has no state/task-state.json record (proposed policy, ADR-0033)")
     parser.add_argument("--json", action="store_true", help="machine-readable diagnostics")
     args = parser.parse_args(argv)
-    audit = Audit(args.root, args.release_readiness).run()
+    audit = Audit(args.root, args.release_readiness, args.require_explicit_ledger_records).run()
     result = {"mode": "pack-data-preflight" if args.release_readiness else "handoff", "passed": not audit.errors, "data_files_checked": audit.checked, "errors": audit.errors, "warnings": audit.warnings}
     if args.json:
         print(json.dumps(result, indent=2, ensure_ascii=False))

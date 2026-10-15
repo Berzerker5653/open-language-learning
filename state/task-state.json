@@ -1457,6 +1457,89 @@
       ],
       "updated": "2026-10-15",
       "blocker": "Declared hardware/model tiers do not exist yet and two dependencies (PLAT-001, SPEECH-007) are blocked."
+    },
+    "JA-A2-001": {
+      "task_id": "JA-A2-001",
+      "status": "blocked",
+      "attempts": 1,
+      "title": "Author A2-like Japanese goal/scenario coverage",
+      "activity": "idle",
+      "summary": "A2-like daily transactions and descriptions with transfer tasks, varied speakers and varied wording, passing curriculum, source and licence audits.",
+      "notes": "Recorded 2026-10-15 during 0.4.1 preparation: required for desktop 1.0, previously ROADMAP-only, so docs/15 derivation reported it ready from JA-A1-003 and SCENARIO-001 (both done). The authored increment is real and machine-audited: units 808-819, 12 scenarios with `transfer_variants_required: 2`, 136 lexicon and 144 sentences, 8 pragmatics situations; `validate`, `lint`, `audit-curriculum`, `audit-lexicon` and `audit-licenses` all exit 0 at the 0.4.1 candidate run. What an agent cannot do is certify the acceptance wording 'varied speakers and wording' — that is the A2 band review (JA-A2-002, blocked) — and the card's dependency JA-A1-003 is blocked, so it cannot honestly move to review or done.",
+      "dependencies": [
+        "JA-A1-003",
+        "SCENARIO-001"
+      ],
+      "evidence": [
+        "languages/ja-JP/curriculum/units/808-shop-find-item.yaml",
+        "languages/ja-JP/curriculum/units/819-comm-text-reschedule.yaml",
+        "state/evidence/RC-0.4.1-2026-10-15/NOTES.md"
+      ],
+      "updated": "2026-10-15",
+      "blocker": "A1 band review (JA-A1-003) is blocked by BLK-REVIEW-CAPACITY, and the A2 acceptance judgement belongs to JA-A2-002, which no qualified reviewer has recorded."
+    },
+    "JA-B1-001": {
+      "task_id": "JA-B1-001",
+      "status": "blocked",
+      "attempts": 1,
+      "title": "Author B1-like independent-use Japanese coverage",
+      "activity": "idle",
+      "summary": "Connected discourse, common independent situations, repair and clarification, broader reading and listening, materially reduced translation dependence, and transfer plus delayed-retention checks.",
+      "notes": "Recorded 2026-10-15: required for desktop 1.0, previously ROADMAP-only. The member-level accounting of the 0.4.1 candidate shows what actually exists at B1: three new units (`820-b1j-work-notice`, `821-b1j-work-notice-call`, `822-b1j-work-notice-revision`) and the new scenario/sentence files; every pack gate exits 0. That is a draft increment, not B1 coverage: the acceptance criteria about reduced translation dependence and delayed-retention evidence are unmet, and the band's review record (JA-B1-002) does not exist.",
+      "dependencies": [
+        "JA-A2-002",
+        "GAME-001"
+      ],
+      "evidence": [
+        "languages/ja-JP/curriculum/units/820-b1j-work-notice.yaml",
+        "state/evidence/RC-0.4.1-2026-10-15/diff-ja-JP.txt"
+      ],
+      "updated": "2026-10-15",
+      "blocker": "Depends on the A2 band review (JA-A2-002, blocked by BLK-REVIEW-CAPACITY); the B1 acceptance evidence itself (translation independence, delayed retention) has not been produced."
+    },
+    "JA-B2-001": {
+      "task_id": "JA-B2-001",
+      "status": "blocked",
+      "attempts": 1,
+      "title": "Author B2-like Japanese reference coverage",
+      "activity": "idle",
+      "summary": "A declared B2-like capability map with curriculum, scenarios, assessments and transfer evidence; broader natural-speed listening and varied text genres; substantially expanded pragmatics and register coverage.",
+      "notes": "Recorded 2026-10-15: required for desktop 1.0 and the deepest content hole on the release path. The 0.4.1 accounting adds three B2 units (`823-b2j-film-opinion`, `824-b2j-film-with-friends`, `825-b2j-film-revision`) and one pragmatics file change; nothing else at B2 was authored this cycle. `state/evidence/O-06-2026-10-10/owner-report.md` and the R12 content-template audit record the counted thinness at the upper bands, and `languages/ja-JP/review/WORKLIST-2026-10-14.md` lists the B2 items as `draft` awaiting review.",
+      "dependencies": [
+        "JA-B1-002"
+      ],
+      "evidence": [
+        "languages/ja-JP/curriculum/units/823-b2j-film-opinion.yaml",
+        "languages/ja-JP/review/WORKLIST-2026-10-14.md",
+        "docs/assessment/RELEASE_COVERAGE.yaml"
+      ],
+      "updated": "2026-10-15",
+      "blocker": "Depends on the B1 band review (JA-B1-002, blocked); the B2 capability map and its transfer/listening evidence are not authored to acceptance."
+    },
+    "REL-001": {
+      "task_id": "REL-001",
+      "status": "blocked",
+      "attempts": 1,
+      "title": "1.0 release candidate full gate",
+      "activity": "idle",
+      "summary": "All 1.0 release gates pass from a clean checkout; licence/source/model attribution audit is clean; known limitations and supported claims are documented.",
+      "notes": "Recorded 2026-10-15: the completion task itself had no ledger record, so the release gate's own state was implicit rather than declared. It is blocked, not derivable: ACC-001 needs a human assistive-technology pass, SEC-001 a human disposition, PLAT-001 real Windows/macOS runtime reports, PERF-002 the declared tiers, JA-B2-002 and the other band reviews a qualified human record, RELEASE-EVIDENCE-001 a clean-boot bundle smoke, and the reference-pack republish (O-01b) is owner-only. Machine-side work that is genuinely done and on record: clean-clone `scripts/ci.sh` returning `CI OK`, CI green at `fd76786` (run 38757754128, every job success), the 0.4.1 candidate archives with member-level accounting against the published 0.4.0 archives, and locally built deb/AppImage artifacts including a headless start.",
+      "dependencies": [
+        "ACC-001",
+        "SEC-001",
+        "PLAT-001",
+        "PERF-002",
+        "REVIEW-001",
+        "JA-B2-002"
+      ],
+      "evidence": [
+        "state/evidence/GATE-2026-10-15/clean-clone-head-ci.txt",
+        "state/evidence/RC-0.4.1-2026-10-15/NOTES.md",
+        "state/evidence/BUNDLE-LOCAL-2026-10-15/NOTES.md",
+        "state/evidence/O-01B-2026-10-15/NOTES.md"
+      ],
+      "updated": "2026-10-15",
+      "blocker": "Six required dependencies are blocked on human or owner actions (AT pass, security disposition, real-platform runtime, performance tiers, qualified band review, clean-boot bundle smoke) and the pack republish is owner-only."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence.",
