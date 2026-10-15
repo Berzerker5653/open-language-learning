@@ -170,3 +170,12 @@ Verification after the revert: `fetch-pack-audio.sh --verify-only` reports
 `validate` / `lint` / `audit-licenses` / `audit-sources` report no findings for both packs;
 `tools/validate_handoff.py` and `--require-explicit-ledger-records` both end
 `HANDOFF VALIDATION PASSED (1959 data files checked)` with the two standing WARNs.
+
+## Baseline note: the data-file count is now 1960, not 1959
+
+The validator walks `schemas/ languages/ examples/ tasks/ state/` and parses every
+`.yaml/.yml/.json/.jsonl` it finds (`tools/validate_handoff.py:376-382`), so filing
+`state/evidence/O-07/radical-changes-2026-10-15.json` (the 57-record O-07 change log) moved
+both modes to `HANDOFF VALIDATION PASSED (1960 data files checked)`. **No pack data changed**;
+every earlier `1959` figure in the day's records is a correct historical measurement of its
+own tree, and the two standing WARNs are unchanged. Treat 1960 as the current baseline.
