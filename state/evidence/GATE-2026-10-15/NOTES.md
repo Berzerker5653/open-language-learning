@@ -241,3 +241,19 @@ the human Linux/Orca matrix — ACC-001, gate O-03), I05 (needs fresh-artifact
 timing plus the `PERF-002` device tiers, i.e. publication), R12 (qualified band
 review), R13 (ru listening/speaking practice) and I08 (owner gates D2/D3 plus
 SEC-001, PLAT-001 Windows/macOS runtime, D12).
+
+### Runs for the UI/UX round itself
+
+`5d93fac` (the I04 + I05 slice) → run `38815458078`, conclusion **success**
+(watch exit 0, 2,575 s): `rust`, `web`, `desktop-smoke`, `schemas`, `security`,
+`platform-compile (windows-latest)`, `platform-compile (macos-latest)` all
+`success`; `platform-bundles` `skipped` (manual trigger only).
+
+`19a753c` (audit-worksheet notes describing what the keyboard slice changed
+under the human AT run) → run `38820330303`, conclusion **success** (watch exit
+0, 2,192 s), same per-job pattern.
+
+The push carrying this line also carries `9187f0d`, which rewords two
+partial-download errors so a full disk is named instead of surfacing an os error
+string; its run is the gate for that copy change and is recorded in the Actions
+log rather than here.
