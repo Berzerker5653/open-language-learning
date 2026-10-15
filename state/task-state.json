@@ -1422,7 +1422,7 @@
       "title": "Windows/macOS desktop parity",
       "activity": "idle",
       "summary": "Automated builds and critical end-to-end paths pass on Linux, Windows and macOS, with per-platform speech/model behaviour and install paths documented.",
-      "notes": "Recorded 2026-10-15 (REL-001 recheck): required for desktop 1.0, previously ROADMAP-only, so docs/15 derivation reported it ready. Measured from `.github/workflows/ci.yml` today: `platform-compile` runs `pnpm build` plus `cargo check -p lts-desktop --all-targets` on windows-latest and macos-latest — compile-only, and the workflow says so; `platform-bundles` is manual (`workflow_dispatch`) and produces **unsigned release** bundles whose artifact names carry the `UNTESTED` marker; every runtime check (`desktop-smoke` and the walkthrough) runs on ubuntu-24.04 only. `docs/platform/PLATFORM_REPORTS.yaml` states that `tested_platforms` is maintainer/owner runtime evidence and is Linux-only today, and holds no Windows/macOS record. Closing this needs Windows/macOS devices or runner capacity (owner gate O-10) plus human runtime reports; a successful bundle proves only that it linked.",
+      "notes": "Recorded 2026-10-15 (REL-001 recheck): required for desktop 1.0, previously ROADMAP-only, so docs/15 derivation reported it ready. Measured from `.github/workflows/ci.yml` today: `platform-compile` runs `pnpm build` plus `cargo check -p lts-desktop --all-targets` on windows-latest and macos-latest — compile-only, and the workflow says so; `platform-bundles` is manual (`workflow_dispatch`) and produces **unsigned release** bundles whose artifact names carry the `UNTESTED` marker; every runtime check (`desktop-smoke` and the walkthrough) runs on ubuntu-24.04 only. `docs/platform/PLATFORM_REPORTS.yaml` states that `tested_platforms` is maintainer/owner runtime evidence and is Linux-only today, and holds no Windows/macOS record. Closing this needs Windows/macOS devices or paid CI runners plus human runtime reports. No owner gate records that purchase decision today: K-34 chose compile-only parity (owner decision 2026-10-03, recorded in the `platform-compile` job comment) and ADR-0015 allows untested bundles to exist so users can file reports (owner decision 2026-10-07).",
       "dependencies": [
         "JA-B2-002",
         "SPEECH-003",
@@ -1435,7 +1435,7 @@
         ".github/workflows/ci.yml"
       ],
       "updated": "2026-10-15",
-      "blocker": "Needs Windows and macOS devices or purchased runner capacity (O-10) plus human runtime reports; builds alone are not parity evidence."
+      "blocker": "Needs Windows and macOS devices or paid runner capacity (an unopened spend decision) plus human runtime reports; builds alone are not parity evidence."
     },
     "PERF-002": {
       "task_id": "PERF-002",

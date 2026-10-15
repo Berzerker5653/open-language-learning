@@ -82,11 +82,43 @@ restored neither. `scripts/ci.sh` now runs `--verify-only` for both packs
 `.github/workflows/ci.yml` additionally runs `scripts/test_renormalize_pack_audio.py`
 so the loudness suite is CI-enforced, as `scripts/ci.sh` already did.
 
-After that change, rerun in the same clean clone: media step
-`rows checked=4856 files restored=4846 already valid=10 failing=0` for both
-packs, **59 `test result: ok`**, `CARGO_EXIT=0`. Both runs' stdout was captured
-in the session only: my `tee state/evidence/GATE-2026-10-15/clean-clone-ci.txt`
-target directory does not exist inside a fresh clone (the gate evidence dir is
-untracked at `b35f03e`), so no log file was written. The durable log for this
-claim is produced by re-running `scripts/ci.sh` in a fresh clone of the pushed
-commit, which is where the fix actually lands.
+After that change the media stage passed in that clone — ru
+`rows checked=4856 files restored=4846 files already valid=10 rows failing=0`,
+ja `4902 / 4894 / 8 / 0` — and the Rust suite reached **59 `test result: ok`**.
+That run still did not finish, and the reason matters: `scripts/ci.sh`
+hard-required `pnpm`, which does not exist on this host
+(`== web: install ==` → `pnpm: command not found`, exit 127). So no clean clone had
+ever run the whole local gate on this machine: the "suite runs from a clean clone"
+claim had only ever been established for the Rust half.
+
+Fixed at HEAD `84b9658`. The web stage now selects a dependency runner: pnpm when
+present (what CI uses, `pnpm install --frozen-lockfile`), otherwise npm against an
+**already-prepared** root `node_modules`, walking `apps/*` and `packages/*`
+explicitly because `pnpm -r` has no npm equivalent here (no npm workspaces field)
+and the repository ships no `package-lock.json`, so an `npm install` would resolve
+dependencies unpinned. A host with neither fails with a named error instead of 127.
+
+Recorded run in `clean-clone-head-ci.txt` — fresh `git clone` of HEAD, `scripts/ci.sh`:
+
+| stage | result |
+|---|---|
+| rust format, clippy | pass |
+| packs: media | `media already valid: languages/ja-JP`, then `… ru-RU` — the first pass through this directory had already downloaded 4,894 + 4,846 files, so this log shows the verify path, not the download |
+| rust test | **59 `test result: ok`** |
+| packs conformance (ja-JP, ru-RU, eo-community, ar-ma) | pass |
+| web dependency runner | `using npm 12.2.0 against the prepared node_modules (no pnpm here; no install performed)` |
+| web fmt:check | `All matched files use Prettier code style!` |
+| web typecheck | all six workspace packages (`apps/desktop`, `learner-ui`, `scenario-ui`, `schemas`, `shared`, `ui`) |
+| web lint | pass |
+| web test | `apps/desktop` 26 files / 239 tests, `shared` 1/2, `ui` 2/10; `learner-ui`, `scenario-ui`, `schemas` have no test files and run under `--passWithNoTests` |
+| web build | `vite build` |
+| schemas/handoff | `HANDOFF VALIDATION PASSED (1959 data files checked)` + the two standing WARNs |
+| security mirror | `cargo audit` over 562 crate deps — the two known warnings (`proc-macro-error` unmaintained, `glib` unsoundness), no vulnerability; secret scan: 500 commits, 61.55 MB, **no leaks found** |
+| total | `CI OK`, `CI_EXIT=0` |
+
+Caveat stated plainly: root `node_modules/`, every package's `node_modules/` and
+`.venv/` are gitignored, so a fresh clone has none of them. They were supplied here
+by symlink from this host's prepared trees — the only way the web and schemas stages
+can run on a host with no pnpm and no cached wheelhouse. A CI-equivalent dependency
+install (`pnpm install --frozen-lockfile`) still requires pnpm, which only the Hermes
+worker has.

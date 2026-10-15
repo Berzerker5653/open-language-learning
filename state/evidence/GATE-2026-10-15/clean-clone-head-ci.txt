@@ -1,0 +1,1181 @@
+== rust: format ==
+== rust: clippy ==
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.51s
+== packs: media (gitignored bulk audio; parity with the CI restore step) ==
+media already valid: languages/ja-JP
+media already valid: languages/ru-RU
+== rust: test ==
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.25s
+     Running unittests src/lib.rs (target/debug/deps/lts_activity-fd0e81a5869349e0)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/reading.rs (target/debug/deps/reading-65502c3670290fc3)
+
+running 5 tests
+test canonical_text_remains_japanese_script ... ok
+test on_demand_reveal_is_always_available_and_counts_as_support ... ok
+test visibility_responds_to_mastery ... ok
+test visibility_responds_to_settings_and_kana_literacy ... ok
+test reading_evidence_is_independent_from_listening_and_speaking ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/runtime.rs (target/debug/deps/runtime-a4248d857fca087e)
+
+running 5 tests
+test modality_dimension_mapping_is_conservative ... ok
+test unknown_activity_types_are_rejected ... ok
+test all_four_activity_kinds_render_from_pack_data ... ok
+test hints_replays_translations_emit_support_evidence ... ok
+test correct_with_strong_help_is_not_independent_success ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/scenario.rs (target/debug/deps/scenario-9b81c29b4d953537)
+
+running 5 tests
+test graph_supports_intents_ladder_recovery_and_transfers ... ok
+test evidence_events_record_support_per_node ... ok
+test replaying_a_scenario_is_a_separate_sitting ... ok
+test runtime_is_language_agnostic ... ok
+test ja_seed_first_meeting_graph_runs_end_to_end ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.62s
+
+     Running tests/writing.rs (target/debug/deps/writing-07b6da87dd9c93e4)
+
+running 5 tests
+test grading_accepts_canonical_and_declared_variants ... ok
+test hints_are_support_not_answers ... ok
+test a_miss_carries_the_form_the_task_asked_for ... ok
+test keyboard_is_the_only_input_surface_no_handwriting_required ... ok
+test writing_evidence_is_distinct_from_recognition ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_audio-5a0b6a764650fa7f)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-5a31b29eee165d6b)
+
+running 145 tests
+test packs::tests::both_pinned_catalog_entries_install_through_the_native_transport ... ignored, downloads both pinned reference packs (~634 MB)
+test models::tests::a_placeholder_url_is_refused_whatever_the_marker_says ... ok
+test models::tests::catalog_entries_are_pinned_and_licensed ... ok
+test models::tests::unpublished_payloads_are_never_offered_or_fetched ... ok
+test packs::tests::the_published_catalog_is_the_default_and_explicit_config_overrides_it ... ok
+test progress::tests::an_unknown_fraction_stays_absent_instead_of_becoming_zero ... ok
+test progress::tests::a_stage_crosses_the_boundary_with_the_field_names_the_renderer_reads ... ok
+test packs::tests::a_cancelled_transfer_stops_at_the_next_byte_boundary ... ok
+test models::tests::speech_pref_defaults_off_and_validates_selection ... ok
+test scenarios::tests::a_mixed_gate_stays_the_actionable_one_and_lists_every_rung ... ok
+test scenarios::tests::nothing_is_recommended_while_every_scenario_is_locked ... ok
+test scenarios::tests::a_goal_gate_is_labelled_a_later_curriculum_stage ... ok
+test scenarios::tests::near_rows_sit_between_playable_and_later_rows ... ok
+test scenarios::tests::a_content_gate_names_the_capability_and_how_to_unlock_it ... ok
+test packcache::tests::warming_a_pack_that_cannot_load_caches_nothing ... ok
+test packs::tests::entries_are_hardened ... ok
+test scenarios::tests::playable_rows_lead_later_stage_rows_in_either_input_order ... ok
+test models::tests::fetch_failure_leaves_no_partial_install ... ok
+test models::tests::a_model_install_reports_received_bytes_and_nothing_invented ... ok
+test packs::tests::fetch_progress_counts_the_bytes_actually_read ... ok
+test models::tests::install_is_checksummed_atomic_and_removable ... ok
+test scenarios::tests::readiness_is_later_for_an_untouched_later_stage_or_an_undefined_goal ... ok
+test models::tests::model_status_stops_rehashing_until_files_actually_change ... ok
+test scenarios::tests::readiness_and_lock_kinds_serialize_as_the_ts_union_strings ... ok
+test scenarios::tests::readiness_is_near_when_the_gate_is_part_open_or_the_same_stage ... ok
+test scenarios::tests::readiness_is_playable_only_when_the_hard_gate_is_met ... ok
+test packs::tests::redirect_hops_stay_on_allowlisted_hosts_for_downloads ... ok
+test packs::tests::every_pinned_catalog_entry_passes_the_download_policy ... ok
+test scenarios::tests::the_recommendation_is_the_first_playable_row_and_there_is_one ... ok
+test packs::tests::scripted_redirect_chains_are_accepted_or_refused_hop_by_hop ... ok
+test scenarios::tests::scenario_views_serialize_snake_case_keys ... ok
+test scenarios::tests::within_a_tier_the_band_ladder_then_the_smallest_gate_wins ... ok
+test tests::a_disabled_speech_model_is_reported_as_opted_out ... ok
+test tests::band_sort_key_places_unknown_and_missing_bands_after_the_ladder ... ok
+test tests::a_bundled_payload_whose_bytes_disagree_with_the_manifest_is_refused ... ok
+test tests::build_identity_reports_a_version_and_a_quotable_commit ... ok
+test tests::a_payload_the_cpu_cannot_run_says_so_instead_of_claiming_absence ... ok
+test models::tests::directory_entry_installs_verifies_and_rejects_unsafe_archives ... ok
+test tests::device_tier_detection_recommends_by_measured_capacity ... ok
+test tests::an_incomplete_payload_never_runs_and_does_not_shadow_the_dev_path ... ok
+test tests::a_bundled_packs_sidecar_that_fails_closed_yields_no_candidates ... ok
+test tests::a_new_lexicon_version_is_never_answered_with_the_old_versions_rows ... ok
+test tests::a_unit_parse_is_shared_per_version_root_and_never_across_roots ... ok
+test packs::tests::catalog_cache_roundtrip_and_view ... ok
+test packs::tests::import_rejects_garbage_honestly ... ok
+test tests::a_profile_with_no_language_can_still_be_entered ... ok
+test tests::finishing_onboarding_rejects_a_pack_that_is_not_installed ... ok
+test packs::tests::catalog_status_is_honest_when_unset_offline_or_cached ... ok
+test packs::tests::a_rejected_checksum_stops_after_the_stage_that_failed ... ok
+test packs::tests::tampered_archive_is_rejected ... ok
+test packs::tests::cancelling_after_verify_leaves_no_pack_installed ... ok
+test tests::an_installed_pack_that_is_not_bundled_appears_in_the_wizard_list ... ok
+test tests::goal_rank_map_follows_the_band_ladder_and_asks_nothing_of_locked_or_unrunnable_content ... ok
+test tests::dictation_check_abstains_when_model_off ... ok
+test tests::dictation_check_abstains_on_silence ... ok
+test tests::duplicate_mine_returns_the_original_id_instead_of_an_error ... ok
+test tests::learned_kana_folding_folds_marks_and_size_but_not_the_moraic_nasal ... ok
+test tests::fresh_user_onramp_flow_persists_and_resumes ... ok
+test tests::discrimination_runner_records_phonological_dimension_evidence ... ok
+test tests::first_run_steps_make_no_script_claim_for_a_pack_without_the_declaration ... ok
+test tests::a_due_mined_word_reaches_todays_plan_without_touching_mastery ... ok
+test tests::list_and_resume_profiles_round_trip ... ok
+test tests::cloze_and_dictation_grade_typed_answers_on_correct_dimensions ... ok
+test tests::onboarding_can_finish_with_no_pack_and_still_saves_the_mic_choice ... ok
+test tests::kanji_drill_uses_existing_dimensions_and_srs_gates_resurfacing ... ok
+test tests::media_provenance_comes_from_the_pack_manifest_not_file_presence ... ok
+test tests::personalize_progression_favors_developing_dimensions ... ok
+test tests::mined_words_schedule_without_touching_mastery_evidence ... ok
+test tests::pick_reading_ranks_by_structure_and_never_returns_a_transliteration ... ok
+test tests::listening_runner_hides_transcript_and_schedules_listening_row ... ok
+test tests::new_profile_gets_first_lessons_and_runner_records_evidence ... ok
+test tests::orth_recognition_runner_records_evidence_and_establishes_kana_literacy ... ok
+test tests::dictation_check_matches_spoken_target ... ok
+test tests::dictation_check_flags_clear_mismatch ... ok
+test tests::placement_never_substitutes_or_repeats_a_diagnostic_item ... ok
+test tests::placement_records_diagnostic_evidence_within_one_prompt ... ok
+test tests::plan_uses_scheduler_values_under_budget ... ok
+test tests::progress_shows_modality_differences ... ok
+test tests::pronunciation_check_abstains_when_speech_model_is_off ... ok
+test packcache::tests::a_new_version_is_never_served_from_the_old_versions_entry ... ok
+test scenarios::tests::the_shipped_pack_leads_with_an_openable_scenario_for_a_fresh_profile ... ok
+test packs::tests::an_import_reports_only_the_stages_it_can_perform ... ok
+test packs::tests::import_validates_then_installs_as_community ... ok
+test tests::a_pack_without_environments_gives_an_empty_world ... ok
+test packs::tests::a_catalog_install_reports_each_stage_before_doing_it ... ok
+test tests::rfc3339_conversion_is_correct ... ok
+test packs::tests::the_receipt_names_the_version_source_and_verified_sha ... ok
+test tests::community_import_installs_and_switches_learning_language ... ok
+test tests::a_pack_bundled_build_resolves_candidates_from_staged_resources ... ok
+test tests::reference_audio_follows_the_manifest_and_refuses_traversal ... ok
+test tests::proposed_listening_items_point_at_audio_the_pack_declares ... ok
+test tests::recorded_attempts_keep_retry_practice_and_genuine_variation_apart ... ok
+test tests::preview_journey_select_activity_restart_switch_retain ... ok
+test tests::reader_fades_scaffolds_and_reveals_record_support ... ok
+test tests::running_the_authored_stages_makes_independent_reachable ... ok
+test tests::settings_microphone_and_romaji_round_trip ... ok
+test tests::sentence_listening_practises_declared_audio_without_the_transcript ... ok
+test tests::scenario_locks_until_prereqs_then_records_interaction_evidence ... ok
+test tests::story_lookup_returns_spans_not_substrings ... ok
+test tests::shadowing_targets_come_from_pack_and_record_no_evidence ... ok
+test tests::rtl_capability_reaches_the_renderer_through_pack_listing ... ok
+test tests::speech_audio_reports_an_honest_media_miss_when_the_pack_ships_no_recording ... ok
+test tests::speech_audio_serves_pack_media_and_rejects_bad_ids ... ok
+test tests::story_reader_shows_scaffolds_and_lookup_without_evidence ... ok
+test tests::pronunciation_check_abstains_on_weak_reference_and_mismatch ... ok
+test tests::the_blank_window_workaround_forces_the_fallback_renderer_only_when_unset ... ok
+test tests::the_bundled_sidecar_outranks_the_dev_vendor_tree ... ok
+test tests::the_authored_order_changes_what_the_app_runs ... ok
+test tests::the_dev_repo_tree_beats_staged_resources_when_both_exist ... ok
+test tests::the_authored_unit_journey_reaches_the_desktop ... ok
+test tests::the_word_filter_checks_only_declared_kana_forms ... ok
+test tests::unknown_model_id_is_rejected_before_any_download ... ok
+test tests::the_hub_gate_for_the_kanji_drill_comes_from_the_pack_not_from_the_card_list ... ok
+test tests::a_contrast_the_app_cannot_measure_stays_listening_practice has been running for over 60 seconds
+test tests::a_fresh_ja_jp_plan_is_all_introductions_in_the_packs_goal_order has been running for over 60 seconds
+test tests::a_supported_backup_restores_saved_words_and_history has been running for over 60 seconds
+test tests::an_installed_pack_that_is_also_bundled_is_listed_exactly_once has been running for over 60 seconds
+test tests::bundled_japanese_pack_installs_and_records has been running for over 60 seconds
+test tests::bundled_pack_phrase_entries_carry_valid_slots has been running for over 60 seconds
+test tests::day_one_never_seeds_katakana_or_words_with_unlearned_kana has been running for over 60 seconds
+test tests::dictation_target_prefers_kana_only_and_rotates has been running for over 60 seconds
+test tests::first_run_steps_lead_with_the_declared_script_in_its_teaching_order has been running for over 60 seconds
+test tests::goal_map_ignores_activity_volume has been running for over 60 seconds
+test tests::goal_map_orders_bands_by_ladder_not_ascii has been running for over 60 seconds
+test tests::goal_map_surfaces_pack_goals_with_prereqs_and_mastery has been running for over 60 seconds
+test tests::installing_a_pack_warms_its_content_for_the_first_visit has been running for over 60 seconds
+test tests::katakana_and_kana_words_unlock_with_the_letters_they_need has been running for over 60 seconds
+test tests::lexicon_entries_covers_all_pack_lexicon_files has been running for over 60 seconds
+test tests::pack_claims_report_installed_pack_data_without_upgrading_trust has been running for over 60 seconds
+test tests::phrase_entries_carry_slots_and_target_the_right_slot has been running for over 60 seconds
+test tests::plan_generation_stays_fast_on_the_reference_pack has been running for over 60 seconds
+test tests::profile_export_writes_bundle_and_delete_is_one_shot has been running for over 60 seconds
+test tests::pronunciation_check_uses_pack_declared_target_without_media has been running for over 60 seconds
+test tests::pronunciation_demo_comes_from_pack_contrasts has been running for over 60 seconds
+test tests::reading_lookup_of_the_self_intro_sentence_names_the_word_not_its_interior has been running for over 60 seconds
+test tests::russian_contrast_arrives_as_the_packs_own_pair has been running for over 60 seconds
+test tests::russian_cyrillic_practice_unlocks_the_greetings_gate has been running for over 60 seconds
+test tests::sharded_pack_directories_reach_every_reader has been running for over 60 seconds
+test tests::situation_ids_resolve_to_human_labels has been running for over 60 seconds
+test tests::stress_display_settings_are_data_driven_and_persisted has been running for over 60 seconds
+test tests::switching_the_studied_pack_changes_what_the_plan_and_mastery_see has been running for over 60 seconds
+test tests::the_aligner_language_comes_from_the_pack_manifest has been running for over 60 seconds
+test tests::the_claim_report_survives_a_trust_change_without_lying_about_it has been running for over 60 seconds
+test tests::world_unlocks_follow_pack_declared_capabilities has been running for over 60 seconds
+test tests::writing_targets_are_parsed_once_per_version_root has been running for over 60 seconds
+test tests::a_contrast_the_app_cannot_measure_stays_listening_practice ... ok
+test tests::russian_cyrillic_practice_unlocks_the_greetings_gate ... ok
+test tests::russian_contrast_arrives_as_the_packs_own_pair ... ok
+test tests::an_installed_pack_that_is_also_bundled_is_listed_exactly_once ... ok
+test tests::a_supported_backup_restores_saved_words_and_history ... ok
+test tests::goal_map_orders_bands_by_ladder_not_ascii ... ok
+test tests::dictation_target_prefers_kana_only_and_rotates ... ok
+test tests::pack_claims_report_installed_pack_data_without_upgrading_trust ... ok
+test tests::goal_map_ignores_activity_volume ... ok
+test tests::bundled_japanese_pack_installs_and_records ... ok
+test tests::sharded_pack_directories_reach_every_reader ... ok
+test tests::bundled_pack_phrase_entries_carry_valid_slots ... ok
+test tests::situation_ids_resolve_to_human_labels ... ok
+test tests::installing_a_pack_warms_its_content_for_the_first_visit ... ok
+test tests::the_claim_report_survives_a_trust_change_without_lying_about_it ... ok
+test tests::day_one_never_seeds_katakana_or_words_with_unlearned_kana ... ok
+test tests::reading_lookup_of_the_self_intro_sentence_names_the_word_not_its_interior ... ok
+test tests::first_run_steps_lead_with_the_declared_script_in_its_teaching_order ... ok
+test tests::pronunciation_check_uses_pack_declared_target_without_media ... ok
+test tests::katakana_and_kana_words_unlock_with_the_letters_they_need ... ok
+test tests::goal_map_surfaces_pack_goals_with_prereqs_and_mastery ... ok
+test tests::switching_the_studied_pack_changes_what_the_plan_and_mastery_see ... ok
+test tests::writing_targets_are_parsed_once_per_version_root ... ok
+test tests::phrase_entries_carry_slots_and_target_the_right_slot ... ok
+test tests::profile_export_writes_bundle_and_delete_is_one_shot ... ok
+test tests::plan_generation_stays_fast_on_the_reference_pack ... ok
+test tests::lexicon_entries_covers_all_pack_lexicon_files ... ok
+test tests::world_unlocks_follow_pack_declared_capabilities ... ok
+test tests::pronunciation_demo_comes_from_pack_contrasts ... ok
+test tests::a_fresh_ja_jp_plan_is_all_introductions_in_the_packs_goal_order ... ok
+test tests::the_aligner_language_comes_from_the_pack_manifest ... ok
+test tests::stress_display_settings_are_data_driven_and_persisted ... ok
+
+test result: ok. 144 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 410.62s
+
+     Running unittests src/main.rs (target/debug/deps/lts_desktop-f9de91c63b478594)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_domain-65ee4ee816d655be)
+
+running 20 tests
+test curriculum::tests::only_prerequisite_edges_are_hard_gates ... ok
+test curriculum::tests::prerequisite_record_is_scoped_by_dimension_and_state ... ok
+test curriculum::tests::serde_kebab_case ... ok
+test ids::tests::locale_tags ... ok
+test evidence::tests::only_scored_outcomes_count ... ok
+test ids::tests::model_is_locale_independent ... ok
+test evidence::tests::serde_roundtrip ... ok
+test ids::tests::pack_ids ... ok
+test ids::tests::parses_documented_examples ... ok
+test ids::tests::rejects_malformed_ids ... ok
+test ids::tests::serde_roundtrip_kebab_string ... ok
+test mastery::tests::serde_kebab_case ... ok
+test mastery::tests::state_order_is_canonical ... ok
+test mastery::tests::support_level_bounds ... ok
+test pack::tests::model_handles_any_locale_identically ... ok
+test pack::tests::trust_state_order_is_monotonic ... ok
+test pack::tests::unresolved_license_is_explicit_not_implicit ... ok
+test versioning::tests::accepts_prerelease_and_build_metadata ... ok
+test versioning::tests::engine_range_semantics ... ok
+test versioning::tests::prerelease_orders_before_release ... ok
+
+test result: ok. 20 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_langpack-681b7f3a8c7f70a1)
+
+running 4 tests
+test migrate::tests::bare_prerequisites_become_reviewable_records ... ok
+test migrate::tests::bare_prerequisites_are_rejected_by_0_2_schema ... ok
+test migrate::tests::migrated_goal_validates_against_0_2_schema ... ok
+test migrate::tests::migrated_records_trigger_review_warning ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/archive.rs (target/debug/deps/archive-690db6d9d7b33de1)
+
+running 8 tests
+test install_rejects_path_traversal ... ok
+test build_rejects_invalid_pack ... ok
+test install_rejects_unlisted_and_symlink_entries ... ok
+test install_rejects_hash_mismatch ... ok
+test install_enforces_install_mode_gates ... ok
+test build_is_deterministic ... ok
+test install_upgrade_rollback_cycle ... ok
+test install_rejects_decompression_bomb ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.47s
+
+     Running tests/audit.rs (target/debug/deps/audit-2c72d0e3cb4049cd)
+
+running 9 tests
+test clean_chain_audits_and_reports_attribution ... ok
+test by_over_a_by_sa_source_names_the_dropped_obligation ... ok
+test reference_only_source_cannot_be_bundled ... ok
+test matching_and_unjudgeable_licences_produce_no_finding ... ok
+test attribution_requirement_without_entry_fails ... ok
+test unknown_license_blocks_reference_build ... ok
+test source_provenance_flags_gaps_and_term_conflicts ... ok
+test clean_source_chain_has_no_provenance_warnings ... ok
+test seed_pack_licensed_and_reports_sources ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.65s
+
+     Running tests/ja_contrasts.rs (target/debug/deps/ja_contrasts-3ffdcc8942547413)
+
+running 2 tests
+test vowel_length_pairs_declare_mora_derived_targets ... ok
+test contrasts_validate_against_v02_schema ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/ja_dependency_map.rs (target/debug/deps/ja_dependency_map-5ba6775be67f1ff3)
+
+running 3 tests
+test politeness_is_contextual_not_binary ... ok
+test concepts_cover_every_goal_required_concept ... ok
+test validator_reports_no_cycles_or_missing_dependencies ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/ja_goal_graph.rs (target/debug/deps/ja_goal_graph-e40416901fd3c218)
+
+running 4 tests
+test goals_have_modalities_assessments_and_framework_refs ... ok
+test bands_cover_onramp_through_release_band ... ok
+test prerequisites_resolve_and_are_acyclic ... ok
+test every_goal_validates_against_v02_goal_schema ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/ja_orthography.rs (target/debug/deps/ja_orthography-bc1cc21bc95ecaa3)
+
+running 4 tests
+test reading_and_writing_competencies_are_separate ... ok
+test romaji_fade_is_specified_and_never_gates ... ok
+test scaffold_policy_covers_all_five_scaffolds ... ok
+test scripts_document_validates_against_v02_schema ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/ja_phonology.rs (target/debug/deps/ja_phonology-9a9896a2ce3df143)
+
+running 3 tests
+test required_feature_areas_are_encoded ... ok
+test no_automatic_scoring_without_calibration ... ok
+test inventory_validates_against_v02_phonology_schema ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/leximport.rs (target/debug/deps/leximport-c0d0044b6856bbd3)
+
+running 6 tests
+test non_redistributable_source_is_rejected ... ok
+test deterministic_ids_and_collision_handling ... ok
+test imported_data_never_becomes_teaching_order ... ok
+test import_is_reproducible_and_separated_from_curriculum ... ok
+test attribution_and_license_requirements_are_generated ... ok
+test pack_still_validates_after_import ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/media.rs (target/debug/deps/media-212ac2fcee56063e)
+
+running 15 tests
+test undeclared_media_file_is_caught ... ok
+test a_pack_with_audio_addressable_items_and_no_media_manifest_fails_install ... ok
+test partially_built_media_is_refused_in_every_mode ... ok
+test unbuilt_media_blocks_install_and_speaks_once_in_a_checkout ... ok
+test lexicon_row_fed_the_kanji_surface_fails_tie_and_names_the_reading ... ok
+test lexicon_audio_must_speak_a_scripted_reading_never_a_transliteration ... ok
+test a_built_manifest_that_misses_an_addressable_item_fails_the_install_gate ... ok
+test contrast_item_audio_ties_to_the_item_reading_and_counts_reading_gaps ... ok
+test declared_asset_matching_its_bytes_is_clean ... ok
+test tampered_audio_fails_whatever_the_mode ... ok
+test drifting_media_is_refused_by_build ... ok
+test a_partially_built_pack_never_builds ... ok
+test an_unbuilt_pack_never_builds_since_nothing_falls_back_anymore ... ok
+test non_synthesized_audio_is_never_judged_against_declared_readings ... ok
+test synthesized_audio_must_record_the_declared_reading_not_the_surface_or_romaji ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running tests/source_matrix.rs (target/debug/deps/source_matrix-2477492989755b27)
+
+running 3 tests
+test nonshippable_entries_have_alternative_or_blocker ... ok
+test matrix_covers_required_categories ... ok
+test every_entry_is_classified_with_registry_fields ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/transliteration.rs (target/debug/deps/transliteration-6c4d9440670372c4)
+
+running 8 tests
+test sentence_romaji_may_contain_digits ... ok
+test sentence_romaji_with_kana_is_flagged ... ok
+test mixed_script_text_keeps_whichever_kana_label_it_carries ... ok
+test script_neutral_marks_keep_kana_labels_clean ... ok
+test transliteration_reading_with_kana_or_digit_is_flagged_and_names_the_kana ... ok
+test script_label_disagreeing_with_its_own_text_is_flagged ... ok
+test well_formed_transliteration_is_left_alone ... ok
+test the_validator_adopts_the_romaji_rules_and_nothing_else_from_the_audit ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/unit_gates.rs (target/debug/deps/unit_gates-7a2ad52dd5d6d6d3)
+
+running 7 tests
+test a_gate_cycle_locks_every_unit_on_it_and_is_rejected ... ok
+test a_unit_gated_on_itself_can_never_be_introduced ... ok
+test a_gate_target_that_is_not_a_unit_is_rejected ... ok
+test a_gate_state_outside_the_mastery_vocabulary_fails_the_schema ... ok
+test a_gate_on_an_undeclared_id_travels_the_unresolved_reference_path ... ok
+test a_declared_gate_on_a_real_unit_validates_clean ... ok
+test the_japanese_pack_gates_katakana_on_every_hiragana_chart_unit ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.62s
+
+     Running tests/validate.rs (target/debug/deps/validate-8a03aa42f5f12aeb)
+
+running 38 tests
+test lexicon_script_contamination_and_stress_defects_are_caught ... ok
+test inverted_engine_range_fails ... ok
+test manifest_scripts_must_match_orthography_ids ... ok
+test dead_goal_audit_reports_unreachable_goals ... ok
+test prerequisite_cycles_fail_with_cycle_path ... ok
+test bad_id_grammar_fails ... ok
+test dependency_mirror_must_agree_with_content_prerequisites ... ok
+test bare_prerequisite_ids_fail_in_0_2 ... ok
+test locale_mismatch_fails ... ok
+test cloze_target_not_in_text_fails ... ok
+test duplicate_ids_fail ... ok
+test diagnostics_carry_actionable_locations ... ok
+test out_of_range_support_level_fails ... ok
+test migrated_prerequisites_warn_for_human_review ... ok
+test draft_unresolved_reference_and_license_gates_block_install ... ok
+test scaffold_draft_is_accepted_as_scaffold_only ... ok
+test stray_file_under_review_dir_flagged ... ok
+test generation_contract_envelopes_unit_content ... ok
+test review_governance_paths_accepted ... ok
+test status_flip_with_review_record_is_clean ... ok
+test goals_sharding_accepted ... ok
+test deferred_modality_prerequisites_are_representable ... ok
+test sentence_content_validates_in_0_2 ... ok
+test unknown_capability_string_fails_validation ... ok
+test undeclared_reference_warns_in_scaffold_and_errors_in_install ... ok
+test ai_only_approval_cannot_promote_to_verified ... ok
+test matching_dependency_mirror_is_clean ... ok
+test media_assets_load_as_binary_and_pack_stays_clean ... ok
+test capability_declaration_with_items_validates_clean ... ok
+test capability_without_items_is_exactly_one_error ... ok
+test valid_minimal_is_clean_in_both_modes ... ok
+test unit_without_capabilities_key_validates_as_before ... ok
+test engine_version_compatibility_is_checked ... ok
+test valid_full_covers_every_content_type ... ok
+test russian_declares_exactly_one_script_introduction_unit ... ok
+test japanese_declares_exactly_one_script_introduction_unit ... ok
+test japanese_seed_is_install_eligible ... ok
+test japanese_draft_seed_validates_as_scaffold ... ok
+
+test result: ok. 38 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 9.95s
+
+     Running tests/world.rs (target/debug/deps/world-5938b9dcd62353c0)
+
+running 8 tests
+test a_row_is_rejected_when_it_names_a_state_the_engine_does_not_have ... ok
+test an_unlock_rule_must_point_at_content_the_pack_declares ... ok
+test a_pack_without_the_collection_stays_clean_and_yields_nothing ... ok
+test declared_environments_validate_and_are_returned_typed ... ok
+test declaring_a_collection_without_rows_is_a_pack_bug ... ok
+test environment_ids_are_pack_unique ... ok
+test an_unlock_on_an_unrecordable_dimension_is_rejected ... ok
+test a_listening_unlock_needs_audio_the_pack_declares ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running unittests src/main.rs (target/debug/deps/langpack-d92914e3e9d87579)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/cli.rs (target/debug/deps/cli-c22ba4f7ef5485dd)
+
+running 9 tests
+test audit_curriculum_and_sources_commands ... ok
+test goals_shards_dedupe_ids_across_files ... ok
+test new_unit_and_lexicon_scaffold_validate_clean ... ok
+test community_platform_reports_confirm_but_never_promote ... ok
+test catalog_upsert_from_built_archive ... ok
+test lint_fails_on_warnings ... ok
+test worked_example_template_pack_stays_clean ... ok
+test init_validate_build_inspect_round_trip ... ok
+test test_gate_passes_licensed_seed_and_blocks_bad_packs ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 9.31s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_learner_model-b2dfec08a7c936fa)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/derive.rs (target/debug/deps/derive-56e0e01fecf03d94)
+
+running 4 tests
+test supported_success_is_weaker_evidence_than_independent ... ok
+test regression_and_needs_refresh_are_possible ... ok
+test reading_success_never_grants_speaking_mastery ... ok
+test snapshots_record_algorithm_and_policy_versions ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/evidence.rs (target/debug/deps/evidence-8cb9df0017322129)
+
+running 3 tests
+test typed_attempt_carries_support_confidence_and_versions ... ok
+test technical_speech_failure_is_distinct_from_learner_error ... ok
+test events_remain_queryable_after_restart ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/policy.rs (target/debug/deps/policy-f9593702a5b69921)
+
+running 5 tests
+test policy_is_versioned_and_marks_thresholds_provisional ... ok
+test required_scenario_coverage ... ok
+test single_success_never_reaches_independent_even_repeated_same_prompt ... ok
+test every_declared_fixture_exists_and_derives_expected_states ... ok
+test policy_validation_rejects_broken_artifacts ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_scheduler-3b4db6c71944af51)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/planner.rs (target/debug/deps/planner-8c24c5252c0198cc)
+
+running 8 tests
+test balances_due_review_weak_skills_and_progression ... ok
+test every_planned_item_has_a_learning_reason_no_attendance_objective ... ok
+test fill_phase_terminates_when_nothing_fits_anymore ... ok
+test invalid_configs_are_rejected ... ok
+test learner_owned_reviews_plan_as_saved_reviews_not_pack_reviews ... ok
+test plans_are_reproducible_with_fixed_input_and_seed ... ok
+test budget_presets_5_10_20_30_plus_all_fit_and_grow ... ok
+test modality_repetition_limit_is_enforced ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/spike.rs (target/debug/deps/spike-4aba1eae3719f632)
+
+running 5 tests
+test items_schedule_by_due_time_not_attendance ... ok
+test deterministic_under_test_clock ... ok
+test stability_grows_on_success_and_falls_on_lapse ... ok
+test unscored_attempts_are_never_reviews ... ok
+test scheduler_state_persists_and_queries_due_items ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_security-42b977c376d5f97d)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_speech_api-c04cb9fe4e1eb33a)
+
+running 9 tests
+test calibration::tests::exact_match_inside_envelope_qualifies_automatic ... ok
+test calibration::tests::measured_limit_breaches_block ... ok
+test calibration::tests::missing_metrics_never_qualify ... ok
+test calibration::tests::outside_envelope_stays_guided ... ok
+test calibration::tests::unfilled_thresholds_never_qualify ... ok
+test calibration::tests::version_or_hash_drift_invalidates ... ok
+test tests::mismatch_is_the_only_non_usable_linguistic_signal ... ok
+test tests::audio_duration_and_serde ... ok
+test tests::providers_are_object_safe ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_speech_runtime-c1b7484fea7ad47b)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/alignment.rs (target/debug/deps/alignment-47114982c1ae1bd4)
+
+running 6 tests
+test matched_phrase_aligns_with_confidence ... ok
+test no_recognized_speech_abstains ... ok
+test multi_unit_phrase_maps_each_unit ... ok
+test wrong_expected_text_mismatches_never_partial_aligns ... ok
+test unreliable_unit_is_dropped_but_phrase_still_aligns ... ok
+test real_whisper_aligns_fixture_and_abstains_on_mismatch ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.64s
+
+     Running tests/pronunciation.rs (target/debug/deps/pronunciation-528ee7f3293773fc)
+
+running 6 tests
+test asr_success_alone_is_not_a_pronunciation_score ... ok
+test duration_features_measure_voiced_spans ... ok
+test low_alignment_confidence_abstains_with_reason ... ok
+test short_long_vowel_gets_actionable_feedback ... ok
+test overlong_and_close_bands_are_distinct ... ok
+test real_pipeline_verifies_then_interprets_reference_pair ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.66s
+
+     Running tests/prosody.rs (target/debug/deps/prosody-bd65067b82f45d86)
+
+running 4 tests
+test silence_is_masked_not_low_pitch ... ok
+test tracks_stable_pitch_with_reliability ... ok
+test octave_jump_frames_are_masked ... ok
+test normalized_contour_is_speaker_range_invariant ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
+     Running tests/sidecar.rs (target/debug/deps/sidecar-c082a1a73f67a1b9)
+
+running 11 tests
+test cpu_gate_tracks_detection_not_hardcoded_answers ... ok
+test a_tampered_payload_byte_fails_the_deep_check_and_names_the_file ... ok
+test declared_file_one_byte_short_is_incomplete_naming_that_path ... ok
+test future_schema_is_rejected ... ok
+test payload_for_other_platform_mismatches_with_both_values ... ok
+test runtime_env_prepends_binary_dir_and_keeps_existing_entry ... ok
+test missing_manifest_is_reported_with_dir ... ok
+test wrong_component_is_rejected ... ok
+test well_formed_payload_loads_with_usable_paths ... ok
+test symlinked_payload_entry_is_incomplete ... ok
+test aligner_child_sees_payload_library_path_and_parses_its_json ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/speech_pipeline.rs (target/debug/deps/speech_pipeline-37f6a82496105ad7)
+
+running 3 tests
+test pipeline_segments_speech_and_recognizes_locally ... ok
+test quality_rejections_are_neutral_and_retryable ... ok
+test real_sherpa_recognizes_installed_model_offline ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.47s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_storage-e4e2c3065028b140)
+
+running 3 tests
+test migrations::tests::migrations_are_sequential_and_complete_history ... ok
+test migrations::tests::mined_scheduler_rows_are_partitioned_on_upgrade ... ok
+test tests::in_memory_store_migrates_to_head ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/concurrency.rs (target/debug/deps/concurrency-e57be542189fb298)
+
+running 1 test
+test two_stores_on_one_file_never_lose_a_write ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.34s
+
+     Running tests/export_import.rs (target/debug/deps/export_import-c12aea49b437c1a0)
+
+running 7 tests
+test restoring_into_the_same_store_keeps_every_observation ... ok
+test a_failed_import_leaves_existing_data_exactly_as_it_was ... ok
+test unknown_bundle_versions_are_rejected ... ok
+test version_1_bundles_remain_importable_without_saved_words ... ok
+test recordings_are_opt_in_to_export ... ok
+test round_trip_preserves_evidence_mastery_inputs_and_settings ... ok
+test import_never_silently_overwrites_an_existing_profile ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/store.rs (target/debug/deps/store-12058ac9cb32551c)
+
+running 8 tests
+test settings_goals_and_pack_records_round_trip ... ok
+test profile_created_without_account_or_network ... ok
+test delete_profile_removes_app_owned_learner_data ... ok
+test mined_items_crud_and_cascade ... ok
+test duplicate_mined_surface_keeps_the_original_row_and_srs_history ... ok
+test no_audio_blobs_and_no_recordings_by_default ... ok
+test evidence_survives_restart_and_rejects_duplicate_ids ... ok
+test migrations_apply_forward_from_initial_schema ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_world-402b2005074cca65)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/world.rs (target/debug/deps/world-130953c5e008d775)
+
+running 3 tests
+test capabilities_unlock_not_anything_else ... ok
+test state_order_is_monotonic ... ok
+test evaluation_is_deterministic_in_capabilities_only ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_activity
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_audio
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_desktop
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_domain
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_langpack
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_learner_model
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_scheduler
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_security
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_speech_api
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_speech_runtime
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_storage
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_world
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+== packs: conformance (ja-JP + ru-RU + example template) ==
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+validate(scaffold): 0 error(s), 0 warning(s)
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+lint: 0 error(s), 0 warning(s)
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+test: 0 error(s), 0 warning(s)
+info[media_item_without_reading] media/manifest.jsonl: 3637 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ru.contrast.palatalization.brat-0, ru.contrast.palatalization.brat-1, ru.contrast.palatalization.luk-0, ru.contrast.palatalization.luk-1, ru.contrast.voicing.bp-0, ru.contrast.voicing.bp-1, ru.contrast.voicing.dt-0, ru.contrast.voicing.dt-1 (first 8 shown); authoring readings is human linguistic work and stays a review-pending record (K-65)
+validate(scaffold): 0 error(s), 0 warning(s)
+info[media_item_without_reading] media/manifest.jsonl: 3637 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ru.contrast.palatalization.brat-0, ru.contrast.palatalization.brat-1, ru.contrast.palatalization.luk-0, ru.contrast.palatalization.luk-1, ru.contrast.voicing.bp-0, ru.contrast.voicing.bp-1, ru.contrast.voicing.dt-0, ru.contrast.voicing.dt-1 (first 8 shown); authoring readings is human linguistic work and stays a review-pending record (K-65)
+lint: 0 error(s), 0 warning(s)
+info[media_item_without_reading] media/manifest.jsonl: 3637 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ru.contrast.palatalization.brat-0, ru.contrast.palatalization.brat-1, ru.contrast.palatalization.luk-0, ru.contrast.palatalization.luk-1, ru.contrast.voicing.bp-0, ru.contrast.voicing.bp-1, ru.contrast.voicing.dt-0, ru.contrast.voicing.dt-1 (first 8 shown); authoring readings is human linguistic work and stays a review-pending record (K-65)
+test: 0 error(s), 0 warning(s)
+info[media_manifest_absent] media/manifest.jsonl: the pack declares 4 audio-addressable item(s) (sentences, contrast items, lexicon entries) but has no media/manifest.jsonl: nothing synthesizes at read time anymore (ADR-0024), so every listening feature on this pack would be silent; bake audio with scripts/generate-pack-audio.py (ADR-0016, ADR-0023)
+lint: 0 error(s), 0 warning(s)
+info[media_item_without_reading] media/manifest.jsonl: 6 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: eo.sent.scaffold-00, eo.sent.scaffold-01, eo.sent.scaffold-02, eo.sent.scaffold-03, eo.contrast.scaffold-0, eo.contrast.scaffold-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+validate(scaffold): 0 error(s), 0 warning(s)
+info[media_item_without_reading] media/manifest.jsonl: 6 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: eo.sent.scaffold-00, eo.sent.scaffold-01, eo.sent.scaffold-02, eo.sent.scaffold-03, eo.contrast.scaffold-0, eo.contrast.scaffold-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+lint: 0 error(s), 0 warning(s)
+audit-curriculum: 0 error(s), 0 warning(s)
+audit-lexicon: 0 error(s), 0 warning(s)
+audit-licenses: 0 error(s), 0 warning(s)
+audit-sources: 0 error(s), 0 warning(s)
+info[media_item_without_reading] media/manifest.jsonl: 6 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: eo.sent.scaffold-00, eo.sent.scaffold-01, eo.sent.scaffold-02, eo.sent.scaffold-03, eo.contrast.scaffold-0, eo.contrast.scaffold-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+test: 0 error(s), 0 warning(s)
+info[media_item_without_reading] media/manifest.jsonl: 6 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ar.sent.scaffold-00, ar.sent.scaffold-01, ar.sent.scaffold-02, ar.sent.scaffold-03, ar.contrast.scaffold-0, ar.contrast.scaffold-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+validate(scaffold): 0 error(s), 0 warning(s)
+info[media_item_without_reading] media/manifest.jsonl: 6 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ar.sent.scaffold-00, ar.sent.scaffold-01, ar.sent.scaffold-02, ar.sent.scaffold-03, ar.contrast.scaffold-0, ar.contrast.scaffold-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+lint: 0 error(s), 0 warning(s)
+audit-curriculum: 0 error(s), 0 warning(s)
+audit-lexicon: 0 error(s), 0 warning(s)
+audit-licenses: 0 error(s), 0 warning(s)
+audit-sources: 0 error(s), 0 warning(s)
+info[media_item_without_reading] media/manifest.jsonl: 6 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ar.sent.scaffold-00, ar.sent.scaffold-01, ar.sent.scaffold-02, ar.sent.scaffold-03, ar.contrast.scaffold-0, ar.contrast.scaffold-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+test: 0 error(s), 0 warning(s)
+== web: dependency runner ==
+using npm 12.2.0 against the prepared node_modules (no pnpm here; no install performed)
+== web: fmt:check ==
+Checking formatting...
+All matched files use Prettier code style!
+== web: typecheck ==
+-- apps/desktop typecheck
+npm notice run @openlang/desktop@0.4.0-alpha.1 typecheck
+npm notice run tsc --noEmit
+-- packages/learner-ui typecheck
+npm notice run @openlang/learner-ui@0.1.0 typecheck
+npm notice run tsc --noEmit
+-- packages/scenario-ui typecheck
+npm notice run @openlang/scenario-ui@0.1.0 typecheck
+npm notice run tsc --noEmit
+-- packages/schemas typecheck
+npm notice run @openlang/schemas@0.1.0 typecheck
+npm notice run tsc --noEmit
+-- packages/shared typecheck
+npm notice run @openlang/shared@0.1.0 typecheck
+npm notice run tsc --noEmit
+-- packages/ui typecheck
+npm notice run @openlang/ui@0.1.0 typecheck
+npm notice run tsc --noEmit
+== web: lint ==
+== web: test ==
+-- apps/desktop test
+npm notice run @openlang/desktop@0.4.0-alpha.1 test
+npm notice run vitest run --passWithNoTests
+
+ RUN  v5.0.3 /home/hunter/game-dev/LTS/tmp/clean-clone-head/apps/desktop
+
+
+ Test Files  26 passed (26)
+      Tests  239 passed (239)
+   Start at  09:01:23
+   Duration  837ms (transform 54%, environment 18%, import 14%, tests 12%, worker 2%)
+
+  Transform  |node| transforming modules took 3.71s · 75% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             on CI this only helps when the cache directory is persisted between runs
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+
+-- packages/learner-ui test
+npm notice run @openlang/learner-ui@0.1.0 test
+npm notice run vitest run --passWithNoTests
+
+ RUN  v5.0.3 /home/hunter/game-dev/LTS/tmp/clean-clone-head/packages/learner-ui
+
+No test files found, exiting with code 0
+
+include: **/*.{test,spec}.?(c|m)[jt]s?(x)
+exclude:  **/node_modules/**, **/.git/**
+
+-- packages/scenario-ui test
+npm notice run @openlang/scenario-ui@0.1.0 test
+npm notice run vitest run --passWithNoTests
+
+ RUN  v5.0.3 /home/hunter/game-dev/LTS/tmp/clean-clone-head/packages/scenario-ui
+
+No test files found, exiting with code 0
+
+include: **/*.{test,spec}.?(c|m)[jt]s?(x)
+exclude:  **/node_modules/**, **/.git/**
+
+-- packages/schemas test
+npm notice run @openlang/schemas@0.1.0 test
+npm notice run vitest run --passWithNoTests
+
+ RUN  v5.0.3 /home/hunter/game-dev/LTS/tmp/clean-clone-head/packages/schemas
+
+No test files found, exiting with code 0
+
+include: **/*.{test,spec}.?(c|m)[jt]s?(x)
+exclude:  **/node_modules/**, **/.git/**
+
+-- packages/shared test
+npm notice run @openlang/shared@0.1.0 test
+npm notice run vitest run --passWithNoTests
+
+ RUN  v5.0.3 /home/hunter/game-dev/LTS/tmp/clean-clone-head/packages/shared
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  09:01:25
+   Duration  97ms (transform 53%, import 27%, worker 11%, tests 8%)
+
+-- packages/ui test
+npm notice run @openlang/ui@0.1.0 test
+npm notice run vitest run --passWithNoTests
+
+ RUN  v5.0.3 /home/hunter/game-dev/LTS/tmp/clean-clone-head/packages/ui
+
+
+ Test Files  2 passed (2)
+      Tests  10 passed (10)
+   Start at  09:01:26
+   Duration  135ms (import 43%, transform 40%, tests 10%, worker 7%)
+
+== web: build ==
+-- apps/desktop build
+npm notice run @openlang/desktop@0.4.0-alpha.1 build
+npm notice run vite build
+vite v8.3.2 building client environment for production...
+transforming...
+✓ 43 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:   0.29 kB
+dist/assets/index-BpHLNvKe.css   10.24 kB │ gzip:   2.78 kB
+dist/assets/event-CL_fXJAH.js     1.03 kB │ gzip:   0.54 kB
+dist/assets/index-Cr63ToFA.js   342.21 kB │ gzip: 101.59 kB
+
+[33m[INEFFECTIVE_DYNAMIC_IMPORT] [0m../../../../node_modules/.pnpm/@tauri-apps+api@2.12.1/node_modules/@tauri-apps/api/core.js is dynamically imported by src/App.tsx but also statically imported by ../../../../node_modules/.pnpm/@tauri-apps+api@2.12.1/node_modules/@tauri-apps/api/event.js, src/main.tsx, dynamic import will not move module into another chunk.
+
+✓ built in 146ms
+== schemas/handoff ==
+WARN examples/minimal-language-pack: manifest-only onboarding fixture; no instructional content or full pack conformance
+WARN scope: handoff structure checked; SDK completeness, linguistic correctness, source rights, calibration quality, build/install/runtime/UX/privacy/security remain unverified
+HANDOFF VALIDATION PASSED (1959 data files checked)
+.....................................
+----------------------------------------------------------------------
+Ran 37 tests in 368.631s
+
+OK
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.029s
+
+OK
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.303s
+
+OK
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.480s
+
+OK
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.626s
+
+OK
+content-template repetition audit
+========================================
+Structural repetition signals measured from pack files only. These counts queue qualified human review; they make NO claim about CEFR level correctness, linguistic quality, or pedagogical validity, and reference resolution / identical counts do not certify instructional depth.
+
+pack languages/ja-JP: 831 sentences in 4 file(s), 792 units; 92 finding(s)
+  [leading-token] sentences/journeys-2026-10-14.jsonl: prefix 'ともたち' in 2/8 sentences (share 25.00%)
+  [skeleton] band a1: skeleton '_ _' repeated 53x
+  [skeleton] band a1: skeleton '_ _ _' repeated 25x
+  [skeleton] band a1: skeleton '_ _ _ _' repeated 7x
+  [skeleton] band a1: skeleton '_' repeated 2x
+  [skeleton] band a1: skeleton '_ _ desu' repeated 2x
+  [skeleton] band a1: skeleton '_ desu' repeated 2x
+  [skeleton] band a2: skeleton '_ _ _' repeated 50x
+  [skeleton] band a2: skeleton '_ _' repeated 32x
+  [skeleton] band a2: skeleton '_ _ _ _' repeated 10x
+  [skeleton] band a2: skeleton '_ o _ _' repeated 6x
+  [skeleton] band a2: skeleton '_ wa _ desu ka' repeated 4x
+  [skeleton] band a2: skeleton '_ wa _ ka' repeated 4x
+  [skeleton] band a2: skeleton '_' repeated 3x
+  [skeleton] band a2: skeleton '_ _ _ yo' repeated 3x
+  [skeleton] band a2: skeleton '_ _ ni _' repeated 3x
+  [skeleton] band a2: skeleton '_ desu' repeated 3x
+  [skeleton] band a2: skeleton '_ kara _ ga _' repeated 3x
+  [skeleton] band a2: skeleton '_ ni _ _ _' repeated 3x
+  [skeleton] band a2: skeleton '_ ni _ ka' repeated 3x
+  [skeleton] band a2: skeleton '_ no _ desu' repeated 3x
+  [skeleton] band a2: skeleton '_ _ _ desu' repeated 2x
+  [skeleton] band a2: skeleton '_ _ _ desu ka' repeated 2x
+  [skeleton] band a2: skeleton '_ _ desu' repeated 2x
+  [skeleton] band a2: skeleton '_ _ ni _ o _ _' repeated 2x
+  [skeleton] band a2: skeleton '_ _ yo' repeated 2x
+  [skeleton] band a2: skeleton '_ de _' repeated 2x
+  [skeleton] band a2: skeleton '_ de _ _ no desu ga' repeated 2x
+  [skeleton] band a2: skeleton '_ desu ka' repeated 2x
+  [skeleton] band a2: skeleton '_ desu ka _ desu ka' repeated 2x
+  [skeleton] band a2: skeleton '_ mo _ ka' repeated 2x
+  [skeleton] band a2: skeleton '_ ni _' repeated 2x
+  [skeleton] band a2: skeleton '_ ni _ _' repeated 2x
+  [skeleton] band a2: skeleton '_ o _' repeated 2x
+  [skeleton] band a2: skeleton '_ o _ _ _' repeated 2x
+  [skeleton] band a2: skeleton '_ o _ ka' repeated 2x
+  [skeleton] band a2: skeleton '_ wa _ _ ni _' repeated 2x
+  [skeleton] band b1: skeleton '_ _ _ _ _' repeated 48x
+  [skeleton] band b1: skeleton '_ _ _ _ _ _ _' repeated 42x
+  [skeleton] band b1: skeleton '_ _ _ _ _ _' repeated 29x
+  [skeleton] band b1: skeleton '_ _ _ _' repeated 12x
+  [skeleton] band b1: skeleton '_ _ _ _ _ _ _ _' repeated 12x
+  [skeleton] band b1: skeleton '_ _ _' repeated 10x
+  [skeleton] band b1: skeleton '_ _ _ _ _ _ _ _ _' repeated 2x
+  [skeleton] band b2: skeleton '_ _ _ _ _' repeated 131x
+  [skeleton] band b2: skeleton '_ _ _ _ _ _' repeated 110x
+  [skeleton] band b2: skeleton '_ _ _ _ _ _ _' repeated 23x
+  [skeleton] band b2: skeleton '_ _ _' repeated 20x
+  [skeleton] band b2: skeleton '_ _ _ _' repeated 14x
+  [skeleton] band b2: skeleton '_ _ _ _ _ _ _ _' repeated 13x
+  [skeleton] band b2: skeleton '_ _ _ _ _ _ _ _ _' repeated 2x
+  [skeleton] band b2: skeleton '_ _ _ _ _ _ _ _ _ _ _' repeated 2x
+  [skeleton] band on-ramp: skeleton '_' repeated 3x
+  [skeleton] band on-ramp: skeleton '_ _' repeated 3x
+  [skeleton] band on-ramp: skeleton '_ _ _' repeated 2x
+  [skeleton] band unbanded: skeleton '_ _' repeated 6x
+  [skeleton] band unbanded: skeleton '_ _ _ _ _' repeated 5x
+  [skeleton] band unbanded: skeleton '_ _ _' repeated 3x
+  [skeleton] band unbanded: skeleton '_ _ _ _' repeated 2x
+  [identical-grammar-sets] band a1: 7 units share the same 2-element grammar-concept set: ja.unit.describe-things, ja.unit.health-body-head, ja.unit.narrative-once-upon, ja.unit.narrative-story-feelings, ja.unit.transport-directions, ja.unit.transport-near-far, ja.unit.transport-timetable-speed
+  [identical-grammar-sets] band a1: 2 units share the same 1-element grammar-concept set: ja.unit.numbers-counters, ja.unit.shopping-prices
+  [identical-grammar-sets] band a1: 2 units share the same 1-element grammar-concept set: ja.unit.classroom-phrases, ja.unit.keeping-talk-going
+  [identical-grammar-sets] band a1: 3 units share the same 1-element grammar-concept set: ja.unit.health-habits, ja.unit.weather-talk, ja.unit.work-school-people
+  [identical-grammar-sets] band a1: 3 units share the same 2-element grammar-concept set: ja.unit.home-adverbs-home, ja.unit.home-rooms, ja.unit.transport-travel-airport
+  [identical-grammar-sets] band a1: 7 units share the same 1-element grammar-concept set: ja.unit.health-body-limbs, ja.unit.home-chores, ja.unit.leisure-ball-sports, ja.unit.leisure-media-basics, ja.unit.leisure-reading-media, ja.unit.work-adverbs-degree, ja.unit.work-study
+  [identical-grammar-sets] band a1: 2 units share the same 2-element grammar-concept set: ja.unit.health-sick-ok, ja.unit.home-house-adjectives
+  [identical-grammar-sets] band a1: 4 units share the same 2-element grammar-concept set: ja.unit.health-medicine, ja.unit.home-furniture, ja.unit.home-in-out-verbs, ja.unit.narrative-people-voice
+  [identical-grammar-sets] band a1: 2 units share the same 1-element grammar-concept set: ja.unit.health-clinic-visit, ja.unit.narrative-land-sea
+  [identical-grammar-sets] band a1: 2 units share the same 2-element grammar-concept set: ja.unit.home-home-appliances, ja.unit.leisure-like-dislike
+  [identical-grammar-sets] band a1: 2 units share the same 2-element grammar-concept set: ja.unit.leisure-play-listen, ja.unit.work-job-hunt
+  [identical-grammar-sets] band a1: 2 units share the same 2-element grammar-concept set: ja.unit.home-chore-verbs, ja.unit.narrative-lose-find
+  [identical-grammar-sets] band a1: 2 units share the same 2-element grammar-concept set: ja.unit.narrative-think-remember, ja.unit.work-classroom
+  [identical-grammar-sets] band a2: 9 units share the same 1-element grammar-concept set: ja.unit.admin-holidays, ja.unit.admin-household, ja.unit.body-hospital, ja.unit.city-police-fire, ja.unit.comm-contact, ja.unit.comm-questions, ja.unit.rel-grandparents, ja.unit.weather-seasons, ja.unit.weather-summer-things
+  [identical-grammar-sets] band a2: 18 units share the same 1-element grammar-concept set: ja.unit.admin-banking, ja.unit.body-clinic-visit2, ja.unit.body-prevention, ja.unit.city-city-hall, ja.unit.comm-social, ja.unit.comm-translation, ja.unit.comm-writing, ja.unit.ent-music, ja.unit.ent-venues, ja.unit.shopping-paying, ja.unit.sports-combat, ja.unit.sports-gym, … (+6 more, see --json)
+  [identical-grammar-sets] band a2: 21 units share the same 1-element grammar-concept set: ja.unit.admin-applications, ja.unit.admin-appointments, ja.unit.admin-documents, ja.unit.admin-insurance, ja.unit.admin-money-out, ja.unit.body-symptoms, ja.unit.city-shops, ja.unit.comm-sounds, ja.unit.ent-games, ja.unit.ent-tv, ja.unit.food-dairy-sweets, ja.unit.food-dishes, … (+9 more, see --json)
+  [identical-grammar-sets] band a2: 2 units share the same 2-element grammar-concept set: ja.unit.city-time-every, ja.unit.city-time-this
+  [identical-grammar-sets] band a2: 11 units share the same 1-element grammar-concept set: ja.unit.body-body-parts2, ja.unit.comm-greetings2, ja.unit.ent-people, ja.unit.ent-sports, ja.unit.food-meals, ja.unit.food-tastes, ja.unit.food-treats, ja.unit.rel-bonds, ja.unit.rel-family, ja.unit.rel-family-members, ja.unit.weather-cold-warm
+  [identical-grammar-sets] band a2: 4 units share the same 1-element grammar-concept set: ja.unit.admin-confirm, ja.unit.admin-money-in, ja.unit.food-cooking-verbs, ja.unit.shopping-fitting
+  [identical-grammar-sets] band a2: 4 units share the same 1-element grammar-concept set: ja.unit.ent-results, ja.unit.shopping-money, ja.unit.shopping-numbers-shop, ja.unit.weather-temperature
+  [identical-grammar-sets] band a2: 2 units share the same 1-element grammar-concept set: ja.unit.shopping-counters1, ja.unit.shopping-counters2
+  [identical-grammar-sets] band a2: 3 units share the same 1-element grammar-concept set: ja.unit.body-minor-ailments, ja.unit.rel-feelings, ja.unit.weather-small-big
+  [identical-grammar-sets] band a2: 2 units share the same 1-element grammar-concept set: ja.unit.body-habits, ja.unit.comm-how-to
+  [identical-grammar-sets] band a2: 2 units share the same 1-element grammar-concept set: ja.unit.body-checkup, ja.unit.rel-life-events
+  [identical-grammar-sets] band a2: 2 units share the same 1-element grammar-concept set: ja.unit.weather-storms, ja.unit.weather-weather-talk
+  [identical-grammar-sets] band a2: 2 units share the same 1-element grammar-concept set: ja.unit.ent-parties, ja.unit.sports-fitness
+  [identical-grammar-sets] band a2: 3 units share the same 1-element grammar-concept set: ja.unit.rel-memories, ja.unit.sports-competition, ja.unit.sports-recovery
+  [identical-grammar-sets] band b1: 155 units share the same 1-element grammar-concept set: ja.unit.accepting-feedback, ja.unit.ai-tool-talk, ja.unit.anecdote-telling, ja.unit.application-essay, ja.unit.argument-paragraphs, ja.unit.article-summary, ja.unit.attending-ceremonies, ja.unit.background-setting, ja.unit.balanced-nutrition, ja.unit.booking-problems, ja.unit.border-documentation, ja.unit.building-suspense, … (+143 more, see --json)
+  [identical-grammar-sets] band b1: 2 units share the same 2-element grammar-concept set: ja.unit.b1-work-notice-call, ja.unit.b1-work-notice-revision
+  [identical-grammar-sets] band b2: 313 units share the same 1-element grammar-concept set: ja.unit.660-motivation-theory, ja.unit.661-personality-psychology, ja.unit.662-development-stages, ja.unit.663-social-psychology, ja.unit.664-emotion-theory, ja.unit.666-wellbeing-research, ja.unit.667-behavior-change, ja.unit.669-language-and-mind, ja.unit.670-decision-science, ja.unit.671-mental-health-policy, ja.unit.673-public-health, ja.unit.674-epidemiology-basics, … (+301 more, see --json)
+  [identical-grammar-sets] band b2: 2 units share the same 2-element grammar-concept set: ja.unit.b2-film-revision, ja.unit.b2-film-with-friends
+  [identical-grammar-sets] band on-ramp: 3 units share the same 1-element grammar-concept set: ja.unit.greetings-times, ja.unit.partings, ja.unit.politeness-basics
+  [no-stage-progression] unit ja.unit.sound-contrasts (band a1): activity types ['hvpt'] = stage kinds ['scaffolded']; no scaffolded->independent->changed-context progression detected
+
+pack languages/ru-RU: 825 sentences in 3 file(s), 818 units; 35 finding(s)
+  [leading-token] sentences/content-parity-2026-10-12.jsonl: prefix 'я' in 6/40 sentences (share 15.00%)
+  [leading-token] sentences/entries.jsonl: prefix 'это' in 741/775 sentences (share 95.61%)
+  [leading-token] sentences/journeys-2026-10-14.jsonl: prefix 'в' in 2/10 sentences (share 20.00%)
+  [skeleton] band a1: skeleton 'это _' repeated 61x
+  [skeleton] band a1: skeleton 'это наш _' repeated 2x
+  [skeleton] band a2: skeleton 'это _' repeated 78x
+  [skeleton] band a2: skeleton '_ _ _ _' repeated 6x
+  [skeleton] band a2: skeleton 'это _ _ _' repeated 3x
+  [skeleton] band a2: skeleton 'она _ _' repeated 2x
+  [skeleton] band b1: skeleton 'это _' repeated 188x
+  [skeleton] band b1: skeleton 'он _' repeated 3x
+  [skeleton] band b1: skeleton 'это _ _' repeated 3x
+  [skeleton] band b1: skeleton '_ _' repeated 2x
+  [skeleton] band b1: skeleton '_ _ _' repeated 2x
+  [skeleton] band b2: skeleton 'это _' repeated 400x
+  [skeleton] band b2: skeleton '_ _ _ _ и _ _' repeated 2x
+  [skeleton] band on-ramp: skeleton 'это _' repeated 3x
+  [skeleton] band on-ramp: skeleton '_ _' repeated 2x
+  [skeleton] band unbanded: skeleton '_ _ _' repeated 5x
+  [skeleton] band unbanded: skeleton '_ _ _ _' repeated 5x
+  [skeleton] band unbanded: skeleton '_ _' repeated 2x
+  [skeleton] band unbanded: skeleton '_ _ в _ _' repeated 2x
+  [skeleton] band unbanded: skeleton '_ _ и _' repeated 2x
+  [skeleton] band unbanded: skeleton '_ _ на _' repeated 2x
+  [skeleton] band unbanded: skeleton 'мы _ _ _' repeated 2x
+  [skeleton] band unbanded: skeleton 'я _ _' repeated 2x
+  [identical-grammar-sets] band a1: 64 units share the same 2-element grammar-concept set: ru.unit.a1.basic-messages-01, ru.unit.a1.basic-messages-02, ru.unit.a1.basic-messages-03, ru.unit.a1.basic-messages-04, ru.unit.a1.basic-messages-05, ru.unit.a1.basic-messages-06, ru.unit.a1.basic-messages-07, ru.unit.a1.basic-messages-09, ru.unit.a1.city-01, ru.unit.a1.city-02, ru.unit.a1.city-03, ru.unit.a1.city-04, … (+52 more, see --json)
+  [identical-grammar-sets] band a2: 99 units share the same 2-element grammar-concept set: ru.unit.a2.comparisons-01, ru.unit.a2.comparisons-02, ru.unit.a2.comparisons-03, ru.unit.a2.comparisons-04, ru.unit.a2.comparisons-05, ru.unit.a2.comparisons-06, ru.unit.a2.comparisons-07, ru.unit.a2.comparisons-08, ru.unit.a2.comparisons-09, ru.unit.a2.comparisons-10, ru.unit.a2.connected-messages-01, ru.unit.a2.connected-messages-02, … (+87 more, see --json)
+  [identical-grammar-sets] band a2: 2 units share the same 3-element grammar-concept set: ru.unit.a2.jpast-01, ru.unit.a2.jpast-03
+  [identical-grammar-sets] band b1: 200 units share the same 2-element grammar-concept set: ru.unit.b1.culture-media-01, ru.unit.b1.culture-media-02, ru.unit.b1.culture-media-03, ru.unit.b1.culture-media-04, ru.unit.b1.culture-media-05, ru.unit.b1.culture-media-06, ru.unit.b1.culture-media-07, ru.unit.b1.culture-media-08, ru.unit.b1.culture-media-09, ru.unit.b1.culture-media-10, ru.unit.b1.feelings-01, ru.unit.b1.feelings-02, … (+188 more, see --json)
+  [identical-grammar-sets] band b1: 2 units share the same 2-element grammar-concept set: ru.unit.b1.jprob-02, ru.unit.b1.jprob-03
+  [identical-grammar-sets] band b2: 400 units share the same 2-element grammar-concept set: ru.unit.b2.app-01, ru.unit.b2.app-02, ru.unit.b2.app-03, ru.unit.b2.app-04, ru.unit.b2.app-05, ru.unit.b2.app-06, ru.unit.b2.app-07, ru.unit.b2.app-08, ru.unit.b2.app-09, ru.unit.b2.app-10, ru.unit.b2.argue-01, ru.unit.b2.argue-02, … (+388 more, see --json)
+  [identical-grammar-sets] band b2: 2 units share the same 2-element grammar-concept set: ru.unit.b2.jstyle-01, ru.unit.b2.jstyle-03
+  [identical-grammar-sets] band on-ramp: 4 units share the same 1-element grammar-concept set: ru.unit.on-ramp.classroom-01, ru.unit.on-ramp.classroom-02, ru.unit.on-ramp.greetings-01, ru.unit.on-ramp.greetings-02
+  [identical-grammar-sets] band on-ramp: 2 units share the same 1-element grammar-concept set: ru.unit.on-ramp.numbers-01, ru.unit.on-ramp.numbers-02
+..content-template repetition audit
+========================================
+Structural repetition signals measured from pack files only. These counts queue qualified human review; they make NO claim about CEFR level correctness, linguistic quality, or pedagogical validity, and reference resolution / identical counts do not certify instructional depth.
+
+pack /tmp/tmp52ys4lqr: 0 sentences in 0 file(s), 0 units; 0 finding(s)
+.........
+----------------------------------------------------------------------
+Ran 11 tests in 0.006s
+
+OK
+LEARNER COPY AUDIT v1.0.0: 33 source files scanned, 22 test files skipped
+findings: 0
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+OK
+== security: advisory + secret scans (mirror of CI security job) ==
+    Fetching advisory database from `https://github.com/RustSec/advisory-db.git`
+      Loaded 1329 security advisories (from /home/hunter/.cargo/advisory-db)
+    Updating crates.io index
+    Scanning Cargo.lock for vulnerabilities (562 crate dependencies)
+Crate:     proc-macro-error
+Version:   1.0.4
+Warning:   unmaintained
+Title:     proc-macro-error is unmaintained
+Date:      2024-09-01
+ID:        RUSTSEC-2024-0370
+URL:       https://rustsec.org/advisories/RUSTSEC-2024-0370
+
+Crate:     unsafe-libyaml
+Version:   0.2.11
+Warning:   unmaintained
+Title:     unsafe-libyaml is unmaintained
+Date:      2024-03-25
+ID:        RUSTSEC-2024-0449
+URL:       https://rustsec.org/advisories/RUSTSEC-2024-0449
+
+Crate:     glib
+Version:   0.18.5
+Warning:   unsound
+Title:     Unsoundness in `Iterator` and `DoubleEndedIterator` impls for `glib::VariantStrIter`
+Date:      2024-03-30
+ID:        RUSTSEC-2024-0429
+URL:       https://rustsec.org/advisories/RUSTSEC-2024-0429
+
+warning: 3 allowed warnings found
+
+    ○
+    │╲
+    │ ○
+    ○ ░
+    ░    gitleaks
+
+9:07AM INF Unknown SCM platform. Use --platform to include links in findings. host=
+9:07AM INF 500 commits scanned.
+9:07AM INF scanned ~61549838 bytes (61.55 MB) in 2.34s
+9:07AM INF no leaks found
+CI OK
+CI_EXIT=0
