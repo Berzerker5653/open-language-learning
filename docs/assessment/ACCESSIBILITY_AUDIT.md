@@ -75,12 +75,19 @@ text is announced as Japanese. Column **IME** only applies where listed.
 | 11 | Progress (goal map) | band section headings and glosses (`Getting started`, `A1`…), per-modality state per goal, `locked` vs `open` announced, prerequisite text | — | ☐ |
 | 12 | Languages | pack name as the manifest spells it, pack posture statement, version, install-from-path flow incl. error messages | install path | ☐ |
 | 13 | Settings | every field label, catalog URL field, speech device tier note, storage/export controls | — | ☐ |
-| 14 | failure paths | offline pack install failure, missing TTS asset, missing microphone permission — each announced with the reason, not just a red border | — | ☐ |
+| 14 | failure paths | offline pack install failure, missing TTS asset, missing microphone permission — each announced with the reason, not just a red border; and an install cancelled mid-download or mid-unpack announcing that nothing was installed and that a retry continues the download | — | ☐ |
 
 For each failure record: route, component/file, what Orca actually said, what it
 should have said, and the condition (zoom/motion/keyboard). Fix semantics in the
 component as it is built (`docs/11`); do not add audit-only workarounds, and do
 not mark anything "as designed" that a screen-reader user cannot perceive.
+
+Focus handling changed on 2026-10-15 (`A11Y-FLOW-001`): a route change now moves
+focus to the destination route's own heading, so the first thing each row above
+should record is whether Orca announces the new heading (and does not leave the
+announcement on content that already left). The automated keyboard journey
+`apps/desktop/src/journeys/keyboard.journey.tsx` proves focus *lands* there; it
+proves nothing about what is announced, which is exactly this worksheet's job.
 
 ## 4. Known risk to test first
 
@@ -91,6 +98,13 @@ release-relevant ones for a Japanese pack; if they fail, file the defect with
 the exact engine version — the app cannot fix webview composition bugs itself
 and the fallback (kana-only input with a romaji helper) is a product decision,
 not an implementation detail.
+
+Measured on 2026-10-15, so the run is not wasted on a phantom: nothing in
+`apps/desktop/src` handles `Enter`, `isComposing` or `compositionstart` — every
+submit is a button click (`writing.tsx:27,74`) — so an app-side "Enter submits
+the form" defect is not reachable in this build. If IBus/WebKitGTK still commits
+a conversion into a submit, that is the webview's behavior: record it with the
+exact engine version rather than looking for a handler to remove.
 
 Furigana is currently a sibling `<small>` line, not ruby markup:
 `apps/desktop/src/practice.tsx:67-69` and `App.tsx:1772-1774` render the reading
