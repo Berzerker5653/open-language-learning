@@ -22,7 +22,7 @@ Two version numbers stay separate throughout:
 | Licence propagation | the CLI emits `license: "CC-BY-SA-4.0"` for ja (was `CC-BY-4.0`), ru unchanged at `CC0-1.0`; proof: published ja `manifest.yaml` 769 B vs candidate 772 B, the inserted `-SA` |
 | Cached-media safety | pinned by `crates/langpack/tests/media_upgrade.rs` (3 tests, 3 passed) |
 | Clean-environment install | fresh worktree, no `node_modules`: `pnpm install --frozen-lockfile` exit 0 (151 packages), `fmt:check`/`lint`/`typecheck`/`test`/`build` green. **Not** a cold-network proof (`downloaded 0`, warm store) |
-| Desktop bundles built locally | AppImage `119,142,904 B`, deb `12,493,856 B`, binary `37,728,352 B`; deb `Depends: libwebkit2gtk-4.1-0, libgtk-3-0`; AppImage starts headless; **rendered UI not proven** |
+| Desktop bundles built locally | **finalized** AppImage `72,837,624 B` sha256 `8c3b5913…` (the raw `tauri build` output is `119,142,904 B` and ships the build host's WebKit — not distributable, `scripts/finalize-appimage.sh` closes that), deb `12,493,856 B` with `Depends: libwebkit2gtk-4.1-0, libgtk-3-0`, binary `37,728,352 B`; headless start proven before the owner's own `lts-desktop` instance was running; **rendered UI not proven** |
 | Ledger completeness | all 66 `required_for_desktop_1_0` ROADMAP tasks now carry a ledger record; the four new ones are `blocked` with named blockers |
 | Ledger validator | `tools/validate_handoff.py --require-explicit-ledger-records` implemented; **opt-in**, default output byte-identical to the old baseline |
 | O-07 | mapped, a fix verified, **not applied**; decision needed (§2 D1) |
@@ -89,12 +89,19 @@ does not change the content posture, since both packs already ship labelled
 previously exhausted; releases are not Actions minutes, but storage/bandwidth billing is
 an account fact you own.
 
-**Evidence.** `state/evidence/RC-0.4.1-2026-10-15/{NOTES.md,SUMMARY.txt,diff-*.txt,rc-inspect-*.txt,published-*.txt}`.
+**Evidence.** `state/evidence/RC-0.4.1-2026-10-15/{NOTES.md,SUMMARY.txt,diff-*.txt,rc-inspect-*.txt,published-*.txt,catalogue-proposal-diff.txt}`.
 
 **Next action after approval.** Owner: tag + upload two assets (order per D3), hand-edit
 the two catalogue entries, run `./tmp/account-040-041.sh` against the new `latest` to
 close the accounting. Agents: docs/13 provenance table entries + the `audit_catalog`
 digest cross-check idea in D3.
+
+One field in that hand-edit is a decision, not a build fact: the CLI proposal also changes ja
+`display_name` from `Japanese Reference Pack (Draft)` to `Japanese Reference Pack`, because
+`languages/ja-JP/manifest.yaml:3` dropped the suffix at 0.2.1 while `catalog/packs.json:7`
+kept it. Copying the proposal renames the pack in the desktop catalogue; keeping `(Draft)`
+keeps a name the pack no longer declares. Field-by-field diff:
+`state/evidence/RC-0.4.1-2026-10-15/catalogue-proposal-diff.txt`.
 
 ### D3 — Repository protection: enable immutable releases **before** publishing
 

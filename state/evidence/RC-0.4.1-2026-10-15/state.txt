@@ -1,0 +1,28 @@
+HEAD=fd767860038f7a43b522ee565df1e45a20c5270c
+tree_state=19 modified paths
+ M docs/15_AUTONOMOUS_DEVELOPMENT.md
+ M docs/adr/README.md
+ M languages/ja-JP/manifest.yaml
+ M languages/ru-RU/manifest.yaml
+ M state/evidence/O-01B-2026-10-15/NOTES.md
+ M state/evidence/O-08-2026-10-15/rulesets-probe.md
+ M state/task-state.json
+ M tasks/KANBAN.md
+ M tools/validate_handoff.py
+?? -
+?? crates/langpack/tests/media_upgrade.rs
+?? docs/adr/0033-explicit-ledger-records-for-release-path-tasks.md
+?? state/evidence/ADR-ACCEPTANCE-2026-10-15/
+?? state/evidence/BUNDLE-LOCAL-2026-10-15/
+?? state/evidence/O-07/decision-2026-10-15.md
+?? state/evidence/O-07/patch-drop-unverified-radicals.patch
+?? state/evidence/O-07/verification-2026-10-15.txt
+?? state/evidence/O-08-2026-10-15/mechanisms-2026-10-15.md
+?? state/evidence/RC-0.4.1-2026-10-15/
+--- manifests as shipped ---
+1532a0f0cdb71522e87fa261fefec9f91ef12c557cc4b5b7aece455dc4b51e26  languages/ja-JP/manifest.yaml
+version: "0.4.1"
+  content_license: "CC-BY-SA-4.0"
+dbfcf3e10fad86745b5b894fac017a3a16e467fcf74b68e27d602f3058b14d5e  languages/ru-RU/manifest.yaml
+version: "0.4.1"
+  content_license: "CC0-1.0"

@@ -61,7 +61,7 @@ host; CI covers that path on every push.
 | stage | result |
 |---|---|
 | `pnpm tauri build --no-bundle` | exit 0 → `target/release/lts-desktop` 37,728,352 B, sha256 `c87c8cf05b2de5e760757e7a483cfdd5aa3de02620e9e701d264776657ea20b6` (release build 2m23s, incremental) |
-| `pnpm tauri build --bundles appimage` | exit 0 → `open-language-learning-platform_0.4.0-alpha.1_amd64.AppImage` 119,142,904 B, sha256 `2a5fa861bf639e64ec15cffb8fd0e063f52963d67adc42352a386824867c6d62` |
+| `pnpm tauri build --bundles appimage` | exit 0 → `open-language-learning-platform_0.4.0-alpha.1_amd64.AppImage` 119,142,904 B, sha256 `2a5fa861bf639e64ec15cffb8fd0e063f52963d67adc42352a386824867c6d62` — **this is the raw linuxdeploy output and is not a distributable artifact**; see "Finalize step" below |
 | `pnpm tauri build --bundles deb` | exit 0 → `open-language-learning-platform_0.4.0-alpha.1_amd64.deb` 12,493,856 B, sha256 `3de3b3bb8d5df9ca0bb15b93413306e150aee4e1afde733a8907d62b7497671f` |
 
 `ar t` on the deb gives `debian-binary control.tar.gz data.tar.gz`; its `control` is
@@ -118,3 +118,42 @@ display (or the owner's `mode.smoke` path) is still required.
 is not the clean-boot smoke and hands-on evidence that card asks for, and nothing here
 was published. What changed is that "the bundle cannot be built on this host" is no
 longer true, and the specific machine-performable checks are now listed with results.
+
+## Finalize step: the 119 MB AppImage was the wrong artifact
+
+Recorded after the fact, because the first pass here reported only the linuxdeploy output
+and that number is misleading. Proof: `--appimage-extract` the 119 MB file and
+`find squashfs-root -name 'libwebkit2gtk-4.1*' -o -name 'libjavascriptcoregtk-4.1*'`
+returns **both libraries** — exactly the K-59-follow defect: WebKitGTK bakes its
+helper-process directory (`WebKitWebProcess`, `WebKitNetworkProcess`, `injected-bundle`)
+into the `.so` at compile time, on this machine a `$HOME` path, and an AppImage mounted at
+`/` can never provide a private `$HOME`, so every foreign host SIGABRTs at webview spawn.
+The deb has no such problem because it declares those as package dependencies.
+
+`scripts/finalize-appimage.sh <AppDir>` (needs `~/.cache/tauri/linuxdeploy-*.AppImage`,
+which the bundle build already downloaded) was run against
+`…/bundle/appimage/open-language-learning-platform.AppDir`:
+
+- size **119,142,904 B → 72,837,624 B**, new sha256 `8c3b591395c4f8fdf44ebfbdce08bfe96390f0c1ae5b75eff5846433baaa70ee`;
+- re-extract and the same `find` returns **0** hits;
+- `ldd` on the AppDir binary now resolves `libwebkit2gtk-4.1.so.0 => /usr/lib/…`, i.e. the
+  target's system WebKit, which matches the deb's `Depends:` and is the documented Tauri
+  runtime dependency;
+- `scripts/test-finalize-appimage.sh` → `ok`, exit 0.
+
+Sanity comparison against the published artifact: the 0.4.0-alpha.1 plain AppImage on the
+release is **72,739,320 B** — the same finalize shape, 98,304 B apart because the content
+tree moved. So the published asset was finalized and this host's first build was not.
+
+**Headless-start re-check is currently blocked, and why.** After finalizing, the AppImage
+exits in ~3 s with status 0 and creates no storage: `pgrep` shows the **owner's running
+`lts-desktop` (pid 3200353)**, and `tauri-plugin-single-instance` focuses the existing
+window and lets the second instance exit cleanly. That is the guard, not a crash — but it
+means the "starts headless" observation above cannot be repeated while the owner's app is
+open, and killing the owner's process is not mine to do. Any future headless bundle smoke
+must either stop that instance first (owner's call) or run with a distinct
+`identifier`/`XDG_*` pair, which is what the app's single-instance key derives from.
+
+Consequence for `RELEASE-EVIDENCE-001` and for anyone quoting bundle numbers: **use the
+finalized 72,837,624 B / `8c3b5913…` figure**, and state finalize status whenever an
+AppImage size is reported.

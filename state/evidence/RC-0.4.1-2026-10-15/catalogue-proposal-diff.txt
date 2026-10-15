@@ -1,0 +1,17 @@
+# tracked catalog/packs.json entry  vs  `langpack catalog` proposal for the 0.4.1 candidate
+# proposal file: dist/rc-0.4.1/packs.json (gitignored scratch; the tracked file is hand-edited by the owner)
+# generated 2026-10-15 from archives built at HEAD (ja sha 7d9c7045..., ru sha 9eb074fa...)
+
+org.openlanguage.ja-jp.reference
+  display_name: 'Japanese Reference Pack (Draft)'  ->  'Japanese Reference Pack'
+  license: 'CC-BY-4.0'  ->  'CC-BY-SA-4.0'
+  sha256: 'f0aa971f30ec88c0f09ca86085d04133616944d9fff6a75345bf31931b713a5f'  ->  '7d9c70453e0469d8dc4e53eda27b5f4eafdfee443d2e3f4e2406d5b6238db460'
+  size_bytes: 317429131  ->  318721333
+  url: 'https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.4.0/ja-jp-reference-0.4.0.lpk'  ->  'https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.4.1/ja-jp-reference-0.4.1.lpk'
+  version: '0.4.0'  ->  '0.4.1'
+
+org.openlanguage.ru-ru.reference
+  sha256: '899e0c67a71d165a706afd216817c53b9ee9a56d34a99f1197aeec29a8ea3e14'  ->  '9eb074fa8d59f508108bc0fa8c698e1ddbd7458648ee2d829edeb36fbcfc1d7a'
+  size_bytes: 316616342  ->  318489935
+  url: 'https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.0/ru-ru-reference-0.4.0.lpk'  ->  'https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.1/ru-ru-reference-0.4.1.lpk'
+  version: '0.4.0'  ->  '0.4.1'

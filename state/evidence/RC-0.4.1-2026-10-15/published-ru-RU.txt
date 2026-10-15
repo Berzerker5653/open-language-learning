@@ -1,0 +1,7 @@
+pack_id=org.openlanguage.ru-ru.reference
+$ curl -fsSL -o dist/rc-0.4.1/published/ru-ru-reference-0.4.0.lpk https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.0/ru-ru-reference-0.4.0.lpk
+(reusing the copy already on disk; its sha256 equals the catalogue pin)
+DOWNLOAD_EXIT=0
+catalogue pin: sha256=899e0c67a71d165a706afd216817c53b9ee9a56d34a99f1197aeec29a8ea3e14 size_bytes=316616342
+actual bytes=316616342
+actual sha256=899e0c67a71d165a706afd216817c53b9ee9a56d34a99f1197aeec29a8ea3e14

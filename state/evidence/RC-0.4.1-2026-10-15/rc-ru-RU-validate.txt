@@ -1,0 +1,4 @@
+$ cargo run -q -p lts-langpack-cli -- validate languages/ru-RU
+info[media_item_without_reading] media/manifest.jsonl: 3637 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ru.contrast.palatalization.brat-0, ru.contrast.palatalization.brat-1, ru.contrast.palatalization.luk-0, ru.contrast.palatalization.luk-1, ru.contrast.voicing.bp-0, ru.contrast.voicing.bp-1, ru.contrast.voicing.dt-0, ru.contrast.voicing.dt-1 (first 8 shown); authoring readings is human linguistic work and stays a review-pending record (K-65)
+validate(scaffold): 0 error(s), 0 warning(s)
+EXIT=0

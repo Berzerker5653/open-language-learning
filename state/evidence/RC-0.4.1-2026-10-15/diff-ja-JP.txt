@@ -1,0 +1,53 @@
+--- ja-JP member-level accounting: published 0.4.0 vs candidate 0.4.1 ---
+members 0.4.0 = 5846
+members 0.4.1 = 5864
+identical (size+hash) = 5840
+same path, different bytes = 6
+changed paths (path, 0.4.0 hash, 0.4.1 hash):
+README.md e6c5cc8fefa6 5884755276cc
+grammar/concepts.jsonl eda810b6cd70 e742d0505e7e
+language/pragmatics.yaml 367e1c9934bb 1a2f43ac4b47
+licenses.jsonl ac5e0c4ea666 b7174bffd35a
+manifest.yaml 57efd5ffe10f 1532a0f0cdb7
+media/manifest.jsonl 3e8c7d1571a4 a471471992d6
+added in 0.4.1:
+145964 e06fcf6e2f3d media/ja.sent.office-thanks-notice.wav
+153644 14926e089393 media/ja.sent.office-question-email.wav
+161324 57b0f426019d media/ja.sent.office-notice-time.wav
+169004 3fb33a7848e5 media/ja.sent.film-teacher-points.wav
+1714 7b654c19161d curriculum/units/825-b2j-film-revision.yaml
+1741 9fbde2bf4030 curriculum/units/822-b1j-work-notice-revision.yaml
+1898 b06fdf93b0ec activities/scenarios/b1-office-notice-call.yaml
+195884 6eec297ecd47 media/ja.sent.film-long-interesting.wav
+1985 b3a4096572a4 activities/scenarios/b2-film-movie-talk.yaml
+2094 b15de53cb222 curriculum/units/820-b1j-work-notice.yaml
+211244 a5f6a09301d8 media/ja.sent.office-room-reserve.wav
+211244 b42660875534 media/ja.sent.film-recommend-friend.wav
+2158 c5e714846f7e curriculum/units/821-b1j-work-notice-call.yaml
+2162 7b958579eb5c curriculum/units/823-b2j-film-opinion.yaml
+2178 b6359dfa5add curriculum/units/824-b2j-film-with-friends.yaml
+318764 47c299bf6b51 media/ja.sent.film-friend-recommended.wav
+3229 b7174bffd35a licenses.jsonl
+3322502 a471471992d6 media/manifest.jsonl
+5177 1a2f43ac4b47 language/pragmatics.yaml
+5334 aa6d6cfa09ab sentences/journeys-2026-10-14.jsonl
+5834 c8f7597b4a37 review/WORKLIST-2026-10-14.md
+6351 5884755276cc README.md
+772 1532a0f0cdb7 manifest.yaml
+99831 e742d0505e7e grammar/concepts.jsonl
+removed in 0.4.1:
+1065 ac5e0c4ea666 licenses.jsonl
+3315477 3e8c7d1571a4 media/manifest.jsonl
+4470 367e1c9934bb language/pragmatics.yaml
+4684 e6c5cc8fefa6 README.md
+769 57efd5ffe10f manifest.yaml
+94110 eda810b6cd70 grammar/concepts.jsonl
+--- git-tracked journey assets in each archive ---
+media/ja.sent.film-friend-recommended.wav      0.4.0=0 0.4.1=1
+media/ja.sent.film-long-interesting.wav        0.4.0=0 0.4.1=1
+media/ja.sent.film-recommend-friend.wav        0.4.0=0 0.4.1=1
+media/ja.sent.film-teacher-points.wav          0.4.0=0 0.4.1=1
+media/ja.sent.office-notice-time.wav           0.4.0=0 0.4.1=1
+media/ja.sent.office-question-email.wav        0.4.0=0 0.4.1=1
+media/ja.sent.office-room-reserve.wav          0.4.0=0 0.4.1=1
+media/ja.sent.office-thanks-notice.wav         0.4.0=0 0.4.1=1

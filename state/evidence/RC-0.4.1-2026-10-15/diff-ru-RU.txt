@@ -1,0 +1,58 @@
+--- ru-RU member-level accounting: published 0.4.0 vs candidate 0.4.1 ---
+members 0.4.0 = 5767
+members 0.4.1 = 5788
+identical (size+hash) = 5761
+same path, different bytes = 6
+changed paths (path, 0.4.0 hash, 0.4.1 hash):
+curriculum/goals.yaml a9d7bcf00856 2062178229e7
+curriculum/units/010-cyrillic-a-o-m-t.yaml 6ad564bc2f16 71ccf25108f0
+grammar/concepts.jsonl 09c291bc78ae 0f78a598adc7
+manifest.yaml c2b0393fa645 dbfcf3e10fad
+media/manifest.jsonl 9a80935b0061 6196710eb525
+world/environments.jsonl a0551ef909b9 be820469eba9
+added in 0.4.1:
+161324 2a7e240a6ea5 media/ru.sent.a2.j1.wav
+165164 7396a77f7fbd media/ru.sent.a2.j3.wav
+172844 f9fe5e442586 media/ru.sent.b2.j4.wav
+1992 b47d8f0525ec curriculum/units/815-b1j-problem-revision.yaml
+199724 4dababce3be2 media/ru.sent.b1.j2.wav
+2047 1410bab60407 curriculum/units/811-a2j-past-workday.yaml
+2053 0a2b4377df10 curriculum/units/812-a2j-past-revision.yaml
+2080 7ca738495bb2 curriculum/units/818-b2j-style-revision.yaml
+2099 ba453267c80d curriculum/units/816-b2j-style-editing.yaml
+2106 6d3d985ee31c curriculum/units/814-b1j-problem-reply.yaml
+2254 78bb0149d7a8 curriculum/units/810-a2j-past-day.yaml
+2279 752157f2f871 curriculum/units/817-b2j-style-presend.yaml
+2315 9da3065a6d35 curriculum/units/813-b1j-problem-letter.yaml
+2317 71ccf25108f0 curriculum/units/010-cyrillic-a-o-m-t.yaml
+234284 07bc3d82ba3c media/ru.sent.b2.j3.wav
+241964 1ac4a6717091 media/ru.sent.b1.j3.wav
+2515 be820469eba9 world/environments.jsonl
+253484 a625d42d17f5 media/ru.sent.a2.j2.wav
+272684 08d9ee99bec6 media/ru.sent.b2.j2.wav
+284204 00f13683acbf media/ru.sent.b2.j1.wav
+314924 fbc08d7149d5 media/ru.sent.b1.j1.wav
+3817890 6196710eb525 media/manifest.jsonl
+5442 dcdb12bd6b4d sentences/journeys-2026-10-14.jsonl
+6783 f78f4603dccb review/WORKLIST-2026-10-14.md
+68471 2062178229e7 curriculum/goals.yaml
+713 dbfcf3e10fad manifest.yaml
+89815 0f78a598adc7 grammar/concepts.jsonl
+removed in 0.4.1:
+1624 a0551ef909b9 world/environments.jsonl
+2281 6ad564bc2f16 curriculum/units/010-cyrillic-a-o-m-t.yaml
+3808971 9a80935b0061 media/manifest.jsonl
+66459 a9d7bcf00856 curriculum/goals.yaml
+713 c2b0393fa645 manifest.yaml
+84337 09c291bc78ae grammar/concepts.jsonl
+--- git-tracked journey assets in each archive ---
+media/ru.sent.a2.j1.wav                        0.4.0=0 0.4.1=1
+media/ru.sent.a2.j2.wav                        0.4.0=0 0.4.1=1
+media/ru.sent.a2.j3.wav                        0.4.0=0 0.4.1=1
+media/ru.sent.b1.j1.wav                        0.4.0=0 0.4.1=1
+media/ru.sent.b1.j2.wav                        0.4.0=0 0.4.1=1
+media/ru.sent.b1.j3.wav                        0.4.0=0 0.4.1=1
+media/ru.sent.b2.j1.wav                        0.4.0=0 0.4.1=1
+media/ru.sent.b2.j2.wav                        0.4.0=0 0.4.1=1
+media/ru.sent.b2.j3.wav                        0.4.0=0 0.4.1=1
+media/ru.sent.b2.j4.wav                        0.4.0=0 0.4.1=1
