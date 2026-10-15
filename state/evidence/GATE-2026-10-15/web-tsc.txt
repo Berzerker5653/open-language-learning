@@ -1,0 +1,4 @@
+$ bash -c cd apps/desktop && npx tsc --noEmit
+npm notice run @openlang/desktop@0.4.0-alpha.1 npx
+npm notice run 'tsc' --noEmit
+EXIT=0

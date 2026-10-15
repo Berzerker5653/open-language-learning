@@ -1,0 +1,4 @@
+$ npx eslint .
+npm notice run open-language-learning-platform@0.1.0 npx
+npm notice run 'eslint' .
+EXIT=0

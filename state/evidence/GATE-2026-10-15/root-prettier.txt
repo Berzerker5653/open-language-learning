@@ -1,0 +1,6 @@
+$ npx prettier --check .
+npm notice run open-language-learning-platform@0.1.0 npx
+npm notice run 'prettier' --check .
+Checking formatting...
+All matched files use Prettier code style!
+EXIT=0

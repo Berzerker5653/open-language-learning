@@ -1,0 +1,258 @@
+$ cargo test --workspace
+   Compiling lts-desktop v0.4.0-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.20s
+     Running unittests src/lib.rs (target/debug/deps/lts_activity-fd0e81a5869349e0)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/reading.rs (target/debug/deps/reading-65502c3670290fc3)
+
+running 5 tests
+test canonical_text_remains_japanese_script ... ok
+test on_demand_reveal_is_always_available_and_counts_as_support ... ok
+test visibility_responds_to_settings_and_kana_literacy ... ok
+test visibility_responds_to_mastery ... ok
+test reading_evidence_is_independent_from_listening_and_speaking ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/runtime.rs (target/debug/deps/runtime-a4248d857fca087e)
+
+running 5 tests
+test unknown_activity_types_are_rejected ... ok
+test modality_dimension_mapping_is_conservative ... ok
+test all_four_activity_kinds_render_from_pack_data ... ok
+test hints_replays_translations_emit_support_evidence ... ok
+test correct_with_strong_help_is_not_independent_success ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/scenario.rs (target/debug/deps/scenario-9b81c29b4d953537)
+
+running 5 tests
+test replaying_a_scenario_is_a_separate_sitting ... ok
+test graph_supports_intents_ladder_recovery_and_transfers ... ok
+test evidence_events_record_support_per_node ... ok
+test runtime_is_language_agnostic ... ok
+test ja_seed_first_meeting_graph_runs_end_to_end ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.61s
+
+     Running tests/writing.rs (target/debug/deps/writing-07b6da87dd9c93e4)
+
+running 5 tests
+test grading_accepts_canonical_and_declared_variants ... ok
+test hints_are_support_not_answers ... ok
+test a_miss_carries_the_form_the_task_asked_for ... ok
+test keyboard_is_the_only_input_surface_no_handwriting_required ... ok
+test writing_evidence_is_distinct_from_recognition ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_audio-5a0b6a764650fa7f)
+
+running 1 test
+test tests::crate_identifies_itself ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-5a31b29eee165d6b)
+
+running 145 tests
+test models::tests::a_placeholder_url_is_refused_whatever_the_marker_says ... ok
+test models::tests::catalog_entries_are_pinned_and_licensed ... ok
+test models::tests::fetch_failure_leaves_no_partial_install ... ok
+test models::tests::unpublished_payloads_are_never_offered_or_fetched ... ok
+test packcache::tests::warming_a_pack_that_cannot_load_caches_nothing ... ok
+test packs::tests::both_pinned_catalog_entries_install_through_the_native_transport ... ignored, downloads both pinned reference packs (~634 MB)
+test models::tests::a_model_install_reports_received_bytes_and_nothing_invented ... ok
+test models::tests::speech_pref_defaults_off_and_validates_selection ... ok
+test models::tests::install_is_checksummed_atomic_and_removable ... ok
+test models::tests::model_status_stops_rehashing_until_files_actually_change ... ok
+test packs::tests::entries_are_hardened ... ok
+test packs::tests::every_pinned_catalog_entry_passes_the_download_policy ... ok
+test packs::tests::redirect_hops_stay_on_allowlisted_hosts_for_downloads ... ok
+test packs::tests::a_cancelled_transfer_stops_at_the_next_byte_boundary ... ok
+test packs::tests::the_published_catalog_is_the_default_and_explicit_config_overrides_it ... ok
+test packs::tests::scripted_redirect_chains_are_accepted_or_refused_hop_by_hop ... ok
+test packs::tests::fetch_progress_counts_the_bytes_actually_read ... ok
+test progress::tests::a_stage_crosses_the_boundary_with_the_field_names_the_renderer_reads ... ok
+test progress::tests::an_unknown_fraction_stays_absent_instead_of_becoming_zero ... ok
+test scenarios::tests::a_content_gate_names_the_capability_and_how_to_unlock_it ... ok
+test scenarios::tests::a_goal_gate_is_labelled_a_later_curriculum_stage ... ok
+test scenarios::tests::a_mixed_gate_stays_the_actionable_one_and_lists_every_rung ... ok
+test scenarios::tests::nothing_is_recommended_while_every_scenario_is_locked ... ok
+test scenarios::tests::near_rows_sit_between_playable_and_later_rows ... ok
+test scenarios::tests::playable_rows_lead_later_stage_rows_in_either_input_order ... ok
+test scenarios::tests::readiness_and_lock_kinds_serialize_as_the_ts_union_strings ... ok
+test scenarios::tests::readiness_is_later_for_an_untouched_later_stage_or_an_undefined_goal ... ok
+test scenarios::tests::readiness_is_near_when_the_gate_is_part_open_or_the_same_stage ... ok
+test scenarios::tests::readiness_is_playable_only_when_the_hard_gate_is_met ... ok
+test scenarios::tests::the_recommendation_is_the_first_playable_row_and_there_is_one ... ok
+test scenarios::tests::scenario_views_serialize_snake_case_keys ... ok
+test scenarios::tests::within_a_tier_the_band_ladder_then_the_smallest_gate_wins ... ok
+test tests::a_disabled_speech_model_is_reported_as_opted_out ... ok
+test tests::band_sort_key_places_unknown_and_missing_bands_after_the_ladder ... ok
+test tests::build_identity_reports_a_version_and_a_quotable_commit ... ok
+test models::tests::directory_entry_installs_verifies_and_rejects_unsafe_archives ... ok
+test tests::a_bundled_payload_whose_bytes_disagree_with_the_manifest_is_refused ... ok
+test tests::a_payload_the_cpu_cannot_run_says_so_instead_of_claiming_absence ... ok
+test tests::device_tier_detection_recommends_by_measured_capacity ... ok
+test tests::an_incomplete_payload_never_runs_and_does_not_shadow_the_dev_path ... ok
+test tests::a_bundled_packs_sidecar_that_fails_closed_yields_no_candidates ... ok
+test tests::a_new_lexicon_version_is_never_answered_with_the_old_versions_rows ... ok
+test tests::a_unit_parse_is_shared_per_version_root_and_never_across_roots ... ok
+test packs::tests::catalog_cache_roundtrip_and_view ... ok
+test packs::tests::import_rejects_garbage_honestly ... ok
+test tests::a_profile_with_no_language_can_still_be_entered ... ok
+test packs::tests::catalog_status_is_honest_when_unset_offline_or_cached ... ok
+test tests::finishing_onboarding_rejects_a_pack_that_is_not_installed ... ok
+test packs::tests::tampered_archive_is_rejected ... ok
+test packs::tests::a_rejected_checksum_stops_after_the_stage_that_failed ... ok
+test packs::tests::cancelling_after_verify_leaves_no_pack_installed ... ok
+test tests::dictation_check_abstains_on_silence ... ok
+test tests::goal_rank_map_follows_the_band_ladder_and_asks_nothing_of_locked_or_unrunnable_content ... ok
+test tests::dictation_check_abstains_when_model_off ... ok
+test tests::an_installed_pack_that_is_not_bundled_appears_in_the_wizard_list ... ok
+test tests::fresh_user_onramp_flow_persists_and_resumes ... ok
+test tests::learned_kana_folding_folds_marks_and_size_but_not_the_moraic_nasal ... ok
+test tests::duplicate_mine_returns_the_original_id_instead_of_an_error ... ok
+test tests::list_and_resume_profiles_round_trip ... ok
+test tests::first_run_steps_make_no_script_claim_for_a_pack_without_the_declaration ... ok
+test tests::discrimination_runner_records_phonological_dimension_evidence ... ok
+test tests::a_due_mined_word_reaches_todays_plan_without_touching_mastery ... ok
+test tests::cloze_and_dictation_grade_typed_answers_on_correct_dimensions ... ok
+test tests::onboarding_can_finish_with_no_pack_and_still_saves_the_mic_choice ... ok
+test tests::media_provenance_comes_from_the_pack_manifest_not_file_presence ... ok
+test tests::kanji_drill_uses_existing_dimensions_and_srs_gates_resurfacing ... ok
+test tests::personalize_progression_favors_developing_dimensions ... ok
+test tests::listening_runner_hides_transcript_and_schedules_listening_row ... ok
+test tests::pick_reading_ranks_by_structure_and_never_returns_a_transliteration ... ok
+test tests::mined_words_schedule_without_touching_mastery_evidence ... ok
+test tests::new_profile_gets_first_lessons_and_runner_records_evidence ... ok
+test tests::orth_recognition_runner_records_evidence_and_establishes_kana_literacy ... ok
+test tests::dictation_check_flags_clear_mismatch ... ok
+test tests::placement_never_substitutes_or_repeats_a_diagnostic_item ... ok
+test tests::dictation_check_matches_spoken_target ... ok
+test tests::placement_records_diagnostic_evidence_within_one_prompt ... ok
+test tests::plan_uses_scheduler_values_under_budget ... ok
+test tests::progress_shows_modality_differences ... ok
+test packcache::tests::a_new_version_is_never_served_from_the_old_versions_entry ... ok
+test scenarios::tests::the_shipped_pack_leads_with_an_openable_scenario_for_a_fresh_profile ... ok
+test packs::tests::import_validates_then_installs_as_community ... ok
+test packs::tests::an_import_reports_only_the_stages_it_can_perform ... ok
+test tests::community_import_installs_and_switches_learning_language ... ok
+test packs::tests::a_catalog_install_reports_each_stage_before_doing_it ... ok
+test tests::a_pack_without_environments_gives_an_empty_world ... ok
+test tests::rfc3339_conversion_is_correct ... ok
+test packs::tests::the_receipt_names_the_version_source_and_verified_sha ... ok
+test tests::a_pack_bundled_build_resolves_candidates_from_staged_resources ... ok
+test tests::pronunciation_check_abstains_when_speech_model_is_off ... ok
+test tests::proposed_listening_items_point_at_audio_the_pack_declares ... ok
+test tests::reference_audio_follows_the_manifest_and_refuses_traversal ... ok
+test tests::recorded_attempts_keep_retry_practice_and_genuine_variation_apart ... ok
+test tests::preview_journey_select_activity_restart_switch_retain ... ok
+test tests::reader_fades_scaffolds_and_reveals_record_support ... ok
+test tests::running_the_authored_stages_makes_independent_reachable ... ok
+test tests::settings_microphone_and_romaji_round_trip ... ok
+test tests::rtl_capability_reaches_the_renderer_through_pack_listing ... ok
+test tests::sentence_listening_practises_declared_audio_without_the_transcript ... ok
+test tests::story_lookup_returns_spans_not_substrings ... ok
+test tests::scenario_locks_until_prereqs_then_records_interaction_evidence ... ok
+test tests::shadowing_targets_come_from_pack_and_record_no_evidence ... ok
+test tests::speech_audio_reports_an_honest_media_miss_when_the_pack_ships_no_recording ... ok
+test tests::speech_audio_serves_pack_media_and_rejects_bad_ids ... ok
+test tests::story_reader_shows_scaffolds_and_lookup_without_evidence ... ok
+test tests::pronunciation_check_abstains_on_weak_reference_and_mismatch ... ok
+test tests::the_blank_window_workaround_forces_the_fallback_renderer_only_when_unset ... ok
+test tests::the_bundled_sidecar_outranks_the_dev_vendor_tree ... ok
+test tests::the_authored_order_changes_what_the_app_runs ... ok
+test tests::the_dev_repo_tree_beats_staged_resources_when_both_exist ... ok
+test tests::the_authored_unit_journey_reaches_the_desktop ... ok
+test tests::the_word_filter_checks_only_declared_kana_forms ... ok
+test tests::unknown_model_id_is_rejected_before_any_download ... ok
+test tests::the_hub_gate_for_the_kanji_drill_comes_from_the_pack_not_from_the_card_list ... ok
+test tests::a_contrast_the_app_cannot_measure_stays_listening_practice has been running for over 60 seconds
+test tests::a_fresh_ja_jp_plan_is_all_introductions_in_the_packs_goal_order has been running for over 60 seconds
+test tests::a_supported_backup_restores_saved_words_and_history has been running for over 60 seconds
+test tests::an_installed_pack_that_is_also_bundled_is_listed_exactly_once has been running for over 60 seconds
+test tests::bundled_japanese_pack_installs_and_records has been running for over 60 seconds
+test tests::bundled_pack_phrase_entries_carry_valid_slots has been running for over 60 seconds
+test tests::day_one_never_seeds_katakana_or_words_with_unlearned_kana has been running for over 60 seconds
+test tests::dictation_target_prefers_kana_only_and_rotates has been running for over 60 seconds
+test tests::first_run_steps_lead_with_the_declared_script_in_its_teaching_order has been running for over 60 seconds
+test tests::goal_map_ignores_activity_volume has been running for over 60 seconds
+test tests::goal_map_orders_bands_by_ladder_not_ascii has been running for over 60 seconds
+test tests::goal_map_surfaces_pack_goals_with_prereqs_and_mastery has been running for over 60 seconds
+test tests::installing_a_pack_warms_its_content_for_the_first_visit has been running for over 60 seconds
+test tests::katakana_and_kana_words_unlock_with_the_letters_they_need has been running for over 60 seconds
+test tests::lexicon_entries_covers_all_pack_lexicon_files has been running for over 60 seconds
+test tests::pack_claims_report_installed_pack_data_without_upgrading_trust has been running for over 60 seconds
+test tests::phrase_entries_carry_slots_and_target_the_right_slot has been running for over 60 seconds
+test tests::plan_generation_stays_fast_on_the_reference_pack has been running for over 60 seconds
+test tests::profile_export_writes_bundle_and_delete_is_one_shot has been running for over 60 seconds
+test tests::pronunciation_check_uses_pack_declared_target_without_media has been running for over 60 seconds
+test tests::pronunciation_demo_comes_from_pack_contrasts has been running for over 60 seconds
+test tests::reading_lookup_of_the_self_intro_sentence_names_the_word_not_its_interior has been running for over 60 seconds
+test tests::russian_contrast_arrives_as_the_packs_own_pair has been running for over 60 seconds
+test tests::russian_cyrillic_practice_unlocks_the_greetings_gate has been running for over 60 seconds
+test tests::sharded_pack_directories_reach_every_reader has been running for over 60 seconds
+test tests::situation_ids_resolve_to_human_labels has been running for over 60 seconds
+test tests::stress_display_settings_are_data_driven_and_persisted has been running for over 60 seconds
+test tests::switching_the_studied_pack_changes_what_the_plan_and_mastery_see has been running for over 60 seconds
+test tests::the_aligner_language_comes_from_the_pack_manifest has been running for over 60 seconds
+test tests::the_claim_report_survives_a_trust_change_without_lying_about_it has been running for over 60 seconds
+test tests::world_unlocks_follow_pack_declared_capabilities has been running for over 60 seconds
+test tests::writing_targets_are_parsed_once_per_version_root has been running for over 60 seconds
+test tests::day_one_never_seeds_katakana_or_words_with_unlearned_kana ... ok
+test tests::a_contrast_the_app_cannot_measure_stays_listening_practice ... ok
+test tests::first_run_steps_lead_with_the_declared_script_in_its_teaching_order ... ok
+test tests::lexicon_entries_covers_all_pack_lexicon_files ... ok
+test tests::pack_claims_report_installed_pack_data_without_upgrading_trust ... ok
+test tests::a_fresh_ja_jp_plan_is_all_introductions_in_the_packs_goal_order ... ok
+test tests::russian_cyrillic_practice_unlocks_the_greetings_gate ... ok
+test tests::reading_lookup_of_the_self_intro_sentence_names_the_word_not_its_interior ... ok
+test tests::russian_contrast_arrives_as_the_packs_own_pair ... ok
+test tests::goal_map_orders_bands_by_ladder_not_ascii ... ok
+test tests::pronunciation_check_uses_pack_declared_target_without_media ... ok
+test tests::bundled_japanese_pack_installs_and_records ... ok
+test tests::a_supported_backup_restores_saved_words_and_history ... ok
+test tests::bundled_pack_phrase_entries_carry_valid_slots ... ok
+test tests::phrase_entries_carry_slots_and_target_the_right_slot ... ok
+test tests::profile_export_writes_bundle_and_delete_is_one_shot ... ok
+test tests::an_installed_pack_that_is_also_bundled_is_listed_exactly_once ... ok
+test tests::dictation_target_prefers_kana_only_and_rotates ... ok
+test tests::situation_ids_resolve_to_human_labels ... ok
+test tests::writing_targets_are_parsed_once_per_version_root ... ok
+test tests::plan_generation_stays_fast_on_the_reference_pack ... FAILED
+test tests::katakana_and_kana_words_unlock_with_the_letters_they_need ... ok
+test tests::sharded_pack_directories_reach_every_reader ... ok
+test tests::goal_map_ignores_activity_volume ... ok
+test tests::goal_map_surfaces_pack_goals_with_prereqs_and_mastery ... ok
+test tests::installing_a_pack_warms_its_content_for_the_first_visit ... ok
+test tests::world_unlocks_follow_pack_declared_capabilities ... ok
+test tests::switching_the_studied_pack_changes_what_the_plan_and_mastery_see ... ok
+test tests::pronunciation_demo_comes_from_pack_contrasts ... ok
+test tests::the_claim_report_survives_a_trust_change_without_lying_about_it ... ok
+test tests::the_aligner_language_comes_from_the_pack_manifest ... ok
+test tests::stress_display_settings_are_data_driven_and_persisted ... ok
+
+failures:
+
+---- tests::plan_generation_stays_fast_on_the_reference_pack stdout ----
+plan_generation: cold 299.608604ms / warm 394.664156ms (5 items)
+
+thread 'tests::plan_generation_stays_fast_on_the_reference_pack' (2748087) panicked at apps/desktop/src-tauri/src/lib.rs:8404:9:
+repeat plan build costs more than the build that warmed the parse cache: cold 299.608604ms / warm 394.664156ms (local 294/95, CI 787/796)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::plan_generation_stays_fast_on_the_reference_pack
+
+test result: FAILED. 143 passed; 1 failed; 1 ignored; 0 measured; 0 filtered out; finished in 453.57s
+
+error: test failed, to rerun pass `-p lts-desktop --lib`
+EXIT=101

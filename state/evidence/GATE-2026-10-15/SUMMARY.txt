@@ -1,0 +1,64 @@
+fmt                                exit=0
+clippy                             exit=0
+cargo-test                         exit=101
+pack-ja-JP-validate                exit=0
+pack-ja-JP-lint                    exit=0
+pack-ja-JP-test                    exit=0
+pack-ja-JP-audit-curriculum        exit=0
+pack-ja-JP-audit-lexicon           exit=0
+pack-ja-JP-audit-licenses          exit=0
+pack-ja-JP-audit-sources           exit=0
+pack-ru-RU-validate                exit=0
+pack-ru-RU-lint                    exit=0
+pack-ru-RU-test                    exit=0
+pack-ru-RU-audit-curriculum        exit=0
+pack-ru-RU-audit-lexicon           exit=0
+pack-ru-RU-audit-licenses          exit=0
+pack-ru-RU-audit-sources           exit=0
+example-eo-community-validate      exit=0
+example-eo-community-lint          exit=0
+example-eo-community-test          exit=0
+example-eo-community-audit-curriculum exit=0
+example-eo-community-audit-lexicon exit=0
+example-eo-community-audit-licenses exit=0
+example-eo-community-audit-sources exit=0
+example-ar-ma-validate             exit=0
+example-ar-ma-lint                 exit=0
+example-ar-ma-test                 exit=0
+example-ar-ma-audit-curriculum     exit=0
+example-ar-ma-audit-lexicon        exit=0
+example-ar-ma-audit-licenses       exit=0
+example-ar-ma-audit-sources        exit=0
+template-pack-lint                 exit=0
+web-tsc                            exit=0
+web-vitest                         exit=0
+root-prettier                      exit=0
+root-eslint                        exit=0
+restore-ja                         exit=0
+restore-ru                         exit=0
+audio-tool-tests                   exit=0
+fetch-audio-tests                  exit=0
+content-template-audit             exit=0
+content-template-tests             exit=0
+learner-copy-audit                 exit=0
+learner-copy-tests                 exit=0
+handoff-validation                 exit=0
+---- pack gate error/warning lines ----
+      4 audit-curriculum: 0 error(s), 0 warning(s)
+      4 audit-lexicon: 0 error(s), 0 warning(s)
+      4 audit-licenses: 0 error(s), 0 warning(s)
+      4 audit-sources: 0 error(s), 0 warning(s)
+      5 lint: 0 error(s), 0 warning(s)
+      4 test: 0 error(s), 0 warning(s)
+      4 validate(scaffold): 0 error(s), 0 warning(s)
+---- web totals ----
+ Test Files  26 passed (26)
+      Tests  239 passed (239)
+---- cargo test totals ----
+6
+1
+---- handoff validation tail ----
+WARN scope: handoff structure checked; SDK completeness, linguistic correctness, source rights, calibration quality, build/install/runtime/UX/privacy/security remain unverified
+HANDOFF VALIDATION PASSED (1959 data files checked)
+EXIT=0
+GATE_BATCH_DONE

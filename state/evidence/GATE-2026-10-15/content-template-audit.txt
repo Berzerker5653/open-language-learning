@@ -1,0 +1,136 @@
+$ .venv/bin/python tools/audit_content_templates.py languages/ja-JP languages/ru-RU
+content-template repetition audit
+========================================
+Structural repetition signals measured from pack files only. These counts queue qualified human review; they make NO claim about CEFR level correctness, linguistic quality, or pedagogical validity, and reference resolution / identical counts do not certify instructional depth.
+
+pack languages/ja-JP: 831 sentences in 4 file(s), 792 units; 92 finding(s)
+  [leading-token] sentences/journeys-2026-10-14.jsonl: prefix 'ともたち' in 2/8 sentences (share 25.00%)
+  [skeleton] band a1: skeleton '_ _' repeated 53x
+  [skeleton] band a1: skeleton '_ _ _' repeated 25x
+  [skeleton] band a1: skeleton '_ _ _ _' repeated 7x
+  [skeleton] band a1: skeleton '_' repeated 2x
+  [skeleton] band a1: skeleton '_ _ desu' repeated 2x
+  [skeleton] band a1: skeleton '_ desu' repeated 2x
+  [skeleton] band a2: skeleton '_ _ _' repeated 50x
+  [skeleton] band a2: skeleton '_ _' repeated 32x
+  [skeleton] band a2: skeleton '_ _ _ _' repeated 10x
+  [skeleton] band a2: skeleton '_ o _ _' repeated 6x
+  [skeleton] band a2: skeleton '_ wa _ desu ka' repeated 4x
+  [skeleton] band a2: skeleton '_ wa _ ka' repeated 4x
+  [skeleton] band a2: skeleton '_' repeated 3x
+  [skeleton] band a2: skeleton '_ _ _ yo' repeated 3x
+  [skeleton] band a2: skeleton '_ _ ni _' repeated 3x
+  [skeleton] band a2: skeleton '_ desu' repeated 3x
+  [skeleton] band a2: skeleton '_ kara _ ga _' repeated 3x
+  [skeleton] band a2: skeleton '_ ni _ _ _' repeated 3x
+  [skeleton] band a2: skeleton '_ ni _ ka' repeated 3x
+  [skeleton] band a2: skeleton '_ no _ desu' repeated 3x
+  [skeleton] band a2: skeleton '_ _ _ desu' repeated 2x
+  [skeleton] band a2: skeleton '_ _ _ desu ka' repeated 2x
+  [skeleton] band a2: skeleton '_ _ desu' repeated 2x
+  [skeleton] band a2: skeleton '_ _ ni _ o _ _' repeated 2x
+  [skeleton] band a2: skeleton '_ _ yo' repeated 2x
+  [skeleton] band a2: skeleton '_ de _' repeated 2x
+  [skeleton] band a2: skeleton '_ de _ _ no desu ga' repeated 2x
+  [skeleton] band a2: skeleton '_ desu ka' repeated 2x
+  [skeleton] band a2: skeleton '_ desu ka _ desu ka' repeated 2x
+  [skeleton] band a2: skeleton '_ mo _ ka' repeated 2x
+  [skeleton] band a2: skeleton '_ ni _' repeated 2x
+  [skeleton] band a2: skeleton '_ ni _ _' repeated 2x
+  [skeleton] band a2: skeleton '_ o _' repeated 2x
+  [skeleton] band a2: skeleton '_ o _ _ _' repeated 2x
+  [skeleton] band a2: skeleton '_ o _ ka' repeated 2x
+  [skeleton] band a2: skeleton '_ wa _ _ ni _' repeated 2x
+  [skeleton] band b1: skeleton '_ _ _ _ _' repeated 48x
+  [skeleton] band b1: skeleton '_ _ _ _ _ _ _' repeated 42x
+  [skeleton] band b1: skeleton '_ _ _ _ _ _' repeated 29x
+  [skeleton] band b1: skeleton '_ _ _ _' repeated 12x
+  [skeleton] band b1: skeleton '_ _ _ _ _ _ _ _' repeated 12x
+  [skeleton] band b1: skeleton '_ _ _' repeated 10x
+  [skeleton] band b1: skeleton '_ _ _ _ _ _ _ _ _' repeated 2x
+  [skeleton] band b2: skeleton '_ _ _ _ _' repeated 131x
+  [skeleton] band b2: skeleton '_ _ _ _ _ _' repeated 110x
+  [skeleton] band b2: skeleton '_ _ _ _ _ _ _' repeated 23x
+  [skeleton] band b2: skeleton '_ _ _' repeated 20x
+  [skeleton] band b2: skeleton '_ _ _ _' repeated 14x
+  [skeleton] band b2: skeleton '_ _ _ _ _ _ _ _' repeated 13x
+  [skeleton] band b2: skeleton '_ _ _ _ _ _ _ _ _' repeated 2x
+  [skeleton] band b2: skeleton '_ _ _ _ _ _ _ _ _ _ _' repeated 2x
+  [skeleton] band on-ramp: skeleton '_' repeated 3x
+  [skeleton] band on-ramp: skeleton '_ _' repeated 3x
+  [skeleton] band on-ramp: skeleton '_ _ _' repeated 2x
+  [skeleton] band unbanded: skeleton '_ _' repeated 6x
+  [skeleton] band unbanded: skeleton '_ _ _ _ _' repeated 5x
+  [skeleton] band unbanded: skeleton '_ _ _' repeated 3x
+  [skeleton] band unbanded: skeleton '_ _ _ _' repeated 2x
+  [identical-grammar-sets] band a1: 7 units share the same 2-element grammar-concept set: ja.unit.describe-things, ja.unit.health-body-head, ja.unit.narrative-once-upon, ja.unit.narrative-story-feelings, ja.unit.transport-directions, ja.unit.transport-near-far, ja.unit.transport-timetable-speed
+  [identical-grammar-sets] band a1: 2 units share the same 1-element grammar-concept set: ja.unit.numbers-counters, ja.unit.shopping-prices
+  [identical-grammar-sets] band a1: 2 units share the same 1-element grammar-concept set: ja.unit.classroom-phrases, ja.unit.keeping-talk-going
+  [identical-grammar-sets] band a1: 3 units share the same 1-element grammar-concept set: ja.unit.health-habits, ja.unit.weather-talk, ja.unit.work-school-people
+  [identical-grammar-sets] band a1: 3 units share the same 2-element grammar-concept set: ja.unit.home-adverbs-home, ja.unit.home-rooms, ja.unit.transport-travel-airport
+  [identical-grammar-sets] band a1: 7 units share the same 1-element grammar-concept set: ja.unit.health-body-limbs, ja.unit.home-chores, ja.unit.leisure-ball-sports, ja.unit.leisure-media-basics, ja.unit.leisure-reading-media, ja.unit.work-adverbs-degree, ja.unit.work-study
+  [identical-grammar-sets] band a1: 2 units share the same 2-element grammar-concept set: ja.unit.health-sick-ok, ja.unit.home-house-adjectives
+  [identical-grammar-sets] band a1: 4 units share the same 2-element grammar-concept set: ja.unit.health-medicine, ja.unit.home-furniture, ja.unit.home-in-out-verbs, ja.unit.narrative-people-voice
+  [identical-grammar-sets] band a1: 2 units share the same 1-element grammar-concept set: ja.unit.health-clinic-visit, ja.unit.narrative-land-sea
+  [identical-grammar-sets] band a1: 2 units share the same 2-element grammar-concept set: ja.unit.home-home-appliances, ja.unit.leisure-like-dislike
+  [identical-grammar-sets] band a1: 2 units share the same 2-element grammar-concept set: ja.unit.leisure-play-listen, ja.unit.work-job-hunt
+  [identical-grammar-sets] band a1: 2 units share the same 2-element grammar-concept set: ja.unit.home-chore-verbs, ja.unit.narrative-lose-find
+  [identical-grammar-sets] band a1: 2 units share the same 2-element grammar-concept set: ja.unit.narrative-think-remember, ja.unit.work-classroom
+  [identical-grammar-sets] band a2: 9 units share the same 1-element grammar-concept set: ja.unit.admin-holidays, ja.unit.admin-household, ja.unit.body-hospital, ja.unit.city-police-fire, ja.unit.comm-contact, ja.unit.comm-questions, ja.unit.rel-grandparents, ja.unit.weather-seasons, ja.unit.weather-summer-things
+  [identical-grammar-sets] band a2: 18 units share the same 1-element grammar-concept set: ja.unit.admin-banking, ja.unit.body-clinic-visit2, ja.unit.body-prevention, ja.unit.city-city-hall, ja.unit.comm-social, ja.unit.comm-translation, ja.unit.comm-writing, ja.unit.ent-music, ja.unit.ent-venues, ja.unit.shopping-paying, ja.unit.sports-combat, ja.unit.sports-gym, … (+6 more, see --json)
+  [identical-grammar-sets] band a2: 21 units share the same 1-element grammar-concept set: ja.unit.admin-applications, ja.unit.admin-appointments, ja.unit.admin-documents, ja.unit.admin-insurance, ja.unit.admin-money-out, ja.unit.body-symptoms, ja.unit.city-shops, ja.unit.comm-sounds, ja.unit.ent-games, ja.unit.ent-tv, ja.unit.food-dairy-sweets, ja.unit.food-dishes, … (+9 more, see --json)
+  [identical-grammar-sets] band a2: 2 units share the same 2-element grammar-concept set: ja.unit.city-time-every, ja.unit.city-time-this
+  [identical-grammar-sets] band a2: 11 units share the same 1-element grammar-concept set: ja.unit.body-body-parts2, ja.unit.comm-greetings2, ja.unit.ent-people, ja.unit.ent-sports, ja.unit.food-meals, ja.unit.food-tastes, ja.unit.food-treats, ja.unit.rel-bonds, ja.unit.rel-family, ja.unit.rel-family-members, ja.unit.weather-cold-warm
+  [identical-grammar-sets] band a2: 4 units share the same 1-element grammar-concept set: ja.unit.admin-confirm, ja.unit.admin-money-in, ja.unit.food-cooking-verbs, ja.unit.shopping-fitting
+  [identical-grammar-sets] band a2: 4 units share the same 1-element grammar-concept set: ja.unit.ent-results, ja.unit.shopping-money, ja.unit.shopping-numbers-shop, ja.unit.weather-temperature
+  [identical-grammar-sets] band a2: 2 units share the same 1-element grammar-concept set: ja.unit.shopping-counters1, ja.unit.shopping-counters2
+  [identical-grammar-sets] band a2: 3 units share the same 1-element grammar-concept set: ja.unit.body-minor-ailments, ja.unit.rel-feelings, ja.unit.weather-small-big
+  [identical-grammar-sets] band a2: 2 units share the same 1-element grammar-concept set: ja.unit.body-habits, ja.unit.comm-how-to
+  [identical-grammar-sets] band a2: 2 units share the same 1-element grammar-concept set: ja.unit.body-checkup, ja.unit.rel-life-events
+  [identical-grammar-sets] band a2: 2 units share the same 1-element grammar-concept set: ja.unit.weather-storms, ja.unit.weather-weather-talk
+  [identical-grammar-sets] band a2: 2 units share the same 1-element grammar-concept set: ja.unit.ent-parties, ja.unit.sports-fitness
+  [identical-grammar-sets] band a2: 3 units share the same 1-element grammar-concept set: ja.unit.rel-memories, ja.unit.sports-competition, ja.unit.sports-recovery
+  [identical-grammar-sets] band b1: 155 units share the same 1-element grammar-concept set: ja.unit.accepting-feedback, ja.unit.ai-tool-talk, ja.unit.anecdote-telling, ja.unit.application-essay, ja.unit.argument-paragraphs, ja.unit.article-summary, ja.unit.attending-ceremonies, ja.unit.background-setting, ja.unit.balanced-nutrition, ja.unit.booking-problems, ja.unit.border-documentation, ja.unit.building-suspense, … (+143 more, see --json)
+  [identical-grammar-sets] band b1: 2 units share the same 2-element grammar-concept set: ja.unit.b1-work-notice-call, ja.unit.b1-work-notice-revision
+  [identical-grammar-sets] band b2: 313 units share the same 1-element grammar-concept set: ja.unit.660-motivation-theory, ja.unit.661-personality-psychology, ja.unit.662-development-stages, ja.unit.663-social-psychology, ja.unit.664-emotion-theory, ja.unit.666-wellbeing-research, ja.unit.667-behavior-change, ja.unit.669-language-and-mind, ja.unit.670-decision-science, ja.unit.671-mental-health-policy, ja.unit.673-public-health, ja.unit.674-epidemiology-basics, … (+301 more, see --json)
+  [identical-grammar-sets] band b2: 2 units share the same 2-element grammar-concept set: ja.unit.b2-film-revision, ja.unit.b2-film-with-friends
+  [identical-grammar-sets] band on-ramp: 3 units share the same 1-element grammar-concept set: ja.unit.greetings-times, ja.unit.partings, ja.unit.politeness-basics
+  [no-stage-progression] unit ja.unit.sound-contrasts (band a1): activity types ['hvpt'] = stage kinds ['scaffolded']; no scaffolded->independent->changed-context progression detected
+
+pack languages/ru-RU: 825 sentences in 3 file(s), 818 units; 35 finding(s)
+  [leading-token] sentences/content-parity-2026-10-12.jsonl: prefix 'я' in 6/40 sentences (share 15.00%)
+  [leading-token] sentences/entries.jsonl: prefix 'это' in 741/775 sentences (share 95.61%)
+  [leading-token] sentences/journeys-2026-10-14.jsonl: prefix 'в' in 2/10 sentences (share 20.00%)
+  [skeleton] band a1: skeleton 'это _' repeated 61x
+  [skeleton] band a1: skeleton 'это наш _' repeated 2x
+  [skeleton] band a2: skeleton 'это _' repeated 78x
+  [skeleton] band a2: skeleton '_ _ _ _' repeated 6x
+  [skeleton] band a2: skeleton 'это _ _ _' repeated 3x
+  [skeleton] band a2: skeleton 'она _ _' repeated 2x
+  [skeleton] band b1: skeleton 'это _' repeated 188x
+  [skeleton] band b1: skeleton 'он _' repeated 3x
+  [skeleton] band b1: skeleton 'это _ _' repeated 3x
+  [skeleton] band b1: skeleton '_ _' repeated 2x
+  [skeleton] band b1: skeleton '_ _ _' repeated 2x
+  [skeleton] band b2: skeleton 'это _' repeated 400x
+  [skeleton] band b2: skeleton '_ _ _ _ и _ _' repeated 2x
+  [skeleton] band on-ramp: skeleton 'это _' repeated 3x
+  [skeleton] band on-ramp: skeleton '_ _' repeated 2x
+  [skeleton] band unbanded: skeleton '_ _ _' repeated 5x
+  [skeleton] band unbanded: skeleton '_ _ _ _' repeated 5x
+  [skeleton] band unbanded: skeleton '_ _' repeated 2x
+  [skeleton] band unbanded: skeleton '_ _ в _ _' repeated 2x
+  [skeleton] band unbanded: skeleton '_ _ и _' repeated 2x
+  [skeleton] band unbanded: skeleton '_ _ на _' repeated 2x
+  [skeleton] band unbanded: skeleton 'мы _ _ _' repeated 2x
+  [skeleton] band unbanded: skeleton 'я _ _' repeated 2x
+  [identical-grammar-sets] band a1: 64 units share the same 2-element grammar-concept set: ru.unit.a1.basic-messages-01, ru.unit.a1.basic-messages-02, ru.unit.a1.basic-messages-03, ru.unit.a1.basic-messages-04, ru.unit.a1.basic-messages-05, ru.unit.a1.basic-messages-06, ru.unit.a1.basic-messages-07, ru.unit.a1.basic-messages-09, ru.unit.a1.city-01, ru.unit.a1.city-02, ru.unit.a1.city-03, ru.unit.a1.city-04, … (+52 more, see --json)
+  [identical-grammar-sets] band a2: 99 units share the same 2-element grammar-concept set: ru.unit.a2.comparisons-01, ru.unit.a2.comparisons-02, ru.unit.a2.comparisons-03, ru.unit.a2.comparisons-04, ru.unit.a2.comparisons-05, ru.unit.a2.comparisons-06, ru.unit.a2.comparisons-07, ru.unit.a2.comparisons-08, ru.unit.a2.comparisons-09, ru.unit.a2.comparisons-10, ru.unit.a2.connected-messages-01, ru.unit.a2.connected-messages-02, … (+87 more, see --json)
+  [identical-grammar-sets] band a2: 2 units share the same 3-element grammar-concept set: ru.unit.a2.jpast-01, ru.unit.a2.jpast-03
+  [identical-grammar-sets] band b1: 200 units share the same 2-element grammar-concept set: ru.unit.b1.culture-media-01, ru.unit.b1.culture-media-02, ru.unit.b1.culture-media-03, ru.unit.b1.culture-media-04, ru.unit.b1.culture-media-05, ru.unit.b1.culture-media-06, ru.unit.b1.culture-media-07, ru.unit.b1.culture-media-08, ru.unit.b1.culture-media-09, ru.unit.b1.culture-media-10, ru.unit.b1.feelings-01, ru.unit.b1.feelings-02, … (+188 more, see --json)
+  [identical-grammar-sets] band b1: 2 units share the same 2-element grammar-concept set: ru.unit.b1.jprob-02, ru.unit.b1.jprob-03
+  [identical-grammar-sets] band b2: 400 units share the same 2-element grammar-concept set: ru.unit.b2.app-01, ru.unit.b2.app-02, ru.unit.b2.app-03, ru.unit.b2.app-04, ru.unit.b2.app-05, ru.unit.b2.app-06, ru.unit.b2.app-07, ru.unit.b2.app-08, ru.unit.b2.app-09, ru.unit.b2.app-10, ru.unit.b2.argue-01, ru.unit.b2.argue-02, … (+388 more, see --json)
+  [identical-grammar-sets] band b2: 2 units share the same 2-element grammar-concept set: ru.unit.b2.jstyle-01, ru.unit.b2.jstyle-03
+  [identical-grammar-sets] band on-ramp: 4 units share the same 1-element grammar-concept set: ru.unit.on-ramp.classroom-01, ru.unit.on-ramp.classroom-02, ru.unit.on-ramp.greetings-01, ru.unit.on-ramp.greetings-02
+  [identical-grammar-sets] band on-ramp: 2 units share the same 1-element grammar-concept set: ru.unit.on-ramp.numbers-01, ru.unit.on-ramp.numbers-02
+EXIT=0

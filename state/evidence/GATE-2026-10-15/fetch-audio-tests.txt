@@ -1,0 +1,7 @@
+$ python3 -m unittest scripts/test_fetch_pack_audio.py
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.302s
+
+OK
+EXIT=0

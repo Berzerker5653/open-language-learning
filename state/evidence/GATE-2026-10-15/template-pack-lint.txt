@@ -1,0 +1,4 @@
+$ cargo run -q -p lts-langpack-cli -- lint tools/pack-templates/example-pack
+info[media_manifest_absent] media/manifest.jsonl: the pack declares 4 audio-addressable item(s) (sentences, contrast items, lexicon entries) but has no media/manifest.jsonl: nothing synthesizes at read time anymore (ADR-0024), so every listening feature on this pack would be silent; bake audio with scripts/generate-pack-audio.py (ADR-0016, ADR-0023)
+lint: 0 error(s), 0 warning(s)
+EXIT=0

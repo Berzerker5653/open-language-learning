@@ -1,0 +1,4 @@
+$ cargo clippy --workspace --all-targets -- -D warnings
+   Compiling lts-desktop v0.4.0-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.70s
+EXIT=0

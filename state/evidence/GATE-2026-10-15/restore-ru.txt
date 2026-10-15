@@ -1,0 +1,3 @@
+$ ./scripts/fetch-pack-audio.sh --pack-dir languages/ru-RU --work-dir tmp/pack-audio --verify-only
+fetch-pack-audio: summary languages/ru-RU: rows checked=4856 files valid=4856 files restored=0 files already valid=4856 rows failing=0
+EXIT=0

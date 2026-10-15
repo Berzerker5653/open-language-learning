@@ -1,0 +1,18 @@
+$ bash -c cd apps/desktop && npx vitest run
+npm notice run @openlang/desktop@0.4.0-alpha.1 npx
+npm notice run 'vitest' run
+
+ RUN  v5.0.3 /home/hunter/game-dev/LTS/apps/desktop
+
+
+ Test Files  26 passed (26)
+      Tests  239 passed (239)
+   Start at  07:28:09
+   Duration  865ms (transform 51%, environment 19%, import 15%, tests 12%, worker 2%)
+
+  Transform  |node| transforming modules took 3.49s · 72% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             on CI this only helps when the cache directory is persisted between runs
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+
+EXIT=0

@@ -1,0 +1,4 @@
+$ .venv/bin/python tools/audit_learner_copy.py
+LEARNER COPY AUDIT v1.0.0: 33 source files scanned, 22 test files skipped
+findings: 0
+EXIT=0

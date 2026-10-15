@@ -1,0 +1,3 @@
+$ cargo run -q -p lts-langpack-cli -- audit-licenses examples/eo-community
+audit-licenses: 0 error(s), 0 warning(s)
+EXIT=0

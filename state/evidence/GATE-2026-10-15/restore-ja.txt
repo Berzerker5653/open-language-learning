@@ -1,0 +1,3 @@
+$ ./scripts/fetch-pack-audio.sh --pack-dir languages/ja-JP --work-dir tmp/pack-audio --verify-only
+fetch-pack-audio: summary languages/ja-JP: rows checked=4902 files valid=4902 files restored=0 files already valid=4902 rows failing=0
+EXIT=0

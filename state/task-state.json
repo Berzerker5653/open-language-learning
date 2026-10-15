@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-10-14",
+  "updated": "2026-10-15",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -1073,7 +1073,7 @@
       "title": "Reviewable journey content instead of template volume",
       "activity": "idle",
       "summary": "Upper-level content depth is measured by template coverage and by adding the missing B1/B2 journey content the audit named.",
-      "notes": "The audit (`tools/audit_content_templates.py`, wired into `scripts/ci.sh`) reports per-level activity-form coverage; the Russian journey units (810-818) add past-events, practical-problems and style-register content with listening and speaking activities, and the Japanese pack gained two scenario conversations plus six journey units. Every journey row is draft: `languages/{ru,ja}-*/review/WORKLIST-2026-10-14.md` records zero qualified-human records, and pack audio was generated without SoX (unnormalised levels). ADR-0032 (Proposed) records the media consequence: the tree declares 4902 ja-JP / 4856 ru-RU manifest rows while the pinned published 0.4.0 archives carry 4894 / 4846, because the 18 journey sentences were authored after publication. CI run 38615154690 proved it (rust + desktop-smoke failed the restore step naming exactly those ids). Fix: those 18 generated assets (3.9 MB) are now tracked by name in .gitignore so CI can verify them offline; the exception is bounded and is deleted when the owner republishes at 0.4.1, which must therefore carry these assets. Evidence: fetch-pack-audio.sh --verify-only now reports rows failing=0 at 4902/4856 (state/evidence/CONTENT-DEPTH-001/media-verify-2026-10-14.txt).",
+      "notes": "The audit (`tools/audit_content_templates.py`, wired into `scripts/ci.sh`) reports per-level activity-form coverage; the Russian journey units (810-818) add past-events, practical-problems and style-register content with listening and speaking activities, and the Japanese pack gained two scenario conversations plus six journey units. Every journey row is draft: `languages/{ru,ja}-*/review/WORKLIST-2026-10-14.md` records zero qualified-human records. Audio loudness is now measured rather than assumed: normalisation is pure Python in `scripts/generate-pack-audio.py::normalize_wav` and never required SoX; re-applying that DSP to all 18 tracked assets returns byte-identical audio at gain 1.00x with every peak at or under round(0.70 * 32767), and `scripts/renormalize_pack_audio.py` plus `scripts/test_renormalize_pack_audio.py` enforce it in `scripts/ci.sh` and the CI `schemas` job. The earlier 'pack audio was generated without SoX (unnormalised levels)' statement is retracted (state/evidence/AUDIO-NORMALIZATION-2026-10-15/NOTES.md). ADR-0032 (Proposed) records the media consequence: the tree declares 4902 ja-JP / 4856 ru-RU manifest rows while the pinned published 0.4.0 archives carry 4894 / 4846, because the 18 journey sentences were authored after publication. CI run 38615154690 proved it (rust + desktop-smoke failed the restore step naming exactly those ids). Fix: those 18 generated assets (3.9 MB) are now tracked by name in .gitignore so CI can verify them offline; the exception is bounded and is deleted when the owner republishes at 0.4.1, which must therefore carry these assets. Evidence: fetch-pack-audio.sh --verify-only now reports rows failing=0 at 4902/4856 (state/evidence/CONTENT-DEPTH-001/media-verify-2026-10-14.txt).",
       "dependencies": [],
       "evidence": [
         "state/evidence/CONTENT-DEPTH-001/template-audit-2026-10-14.txt",
@@ -1215,27 +1215,27 @@
     },
     "GUIDED-SESSION-001": {
       "task_id": "GUIDED-SESSION-001",
-      "status": "ready",
+      "status": "review",
       "attempts": 1,
       "title": "Today presents one bounded session instead of an exhaustive queue",
       "activity": "idle",
       "summary": "The learner opens one guided session, works one next task, can pause and resume, and finishes honestly.",
-      "notes": "Recorded as a written card for this batch: the underlying pieces exist (lesson encounter, practice runner, attempt groups, support accounting), but the begin/next/pause/resume/finish journey is not wired end to end. Half-wiring it would misrepresent the review.",
+      "notes": "Implemented 2026-10-15: one begin action over the engine's own plan (copy names the scope and the exit), a queue snapshot taken at begin so 'N of M' cannot drift when `practice_plan` re-plans, pause/resume plus stop/finish summaries, and the per-activity rows demoted under 'Or do one activity on its own:' rather than removed. The session is in-run only: no partial-session state is persisted, and no persisted-session claim is made. Acceptance is walked item by item in the evidence file; the UX judgement stays with the owner's hands-on pass (O-06), so the card sits in review, not done.",
       "dependencies": [],
-      "evidence": [],
-      "updated": "2026-10-14"
+      "evidence": ["state/evidence/GUIDED-SESSION-001/IMPLEMENTATION-2026-10-15.md"],
+      "updated": "2026-10-15"
     },
     "CANDO-PROGRESS-001": {
       "task_id": "CANDO-PROGRESS-001",
-      "status": "ready",
+      "status": "review",
       "attempts": 1,
       "title": "Progress leads with can-do decisions and keeps IDs as detail",
       "activity": "idle",
       "summary": "Progress is presented can-do first, with ids and confidence as optional detail.",
-      "notes": "Card recorded from the review; the goal map and coverage display are the seam to build on.",
+      "notes": "Implemented 2026-10-15: `CanDoSummary` leads the Progress route — can-do lines are the pack's own goal text gated on engine capability state, 'What changed' comes from the scheduler's `needs_refresh` flag, and the next step is the pack's declared path, with abstain copy instead of invention. `GoalMap` and `ProgressView` were demoted to detail and the route's single-h1 accessibility fixture was rebuilt to match the real composition rather than relaxed. The can-do lines quote draft pack text, so content promotion still needs a human review record, and acceptance of the wording belongs to the owner's hands-on pass (O-06).",
       "dependencies": [],
-      "evidence": [],
-      "updated": "2026-10-14"
+      "evidence": ["state/evidence/CANDO-PROGRESS-001/IMPLEMENTATION-2026-10-15.md"],
+      "updated": "2026-10-15"
     },
     "INSTALL-UX-001": {
       "task_id": "INSTALL-UX-001",
@@ -1244,10 +1244,10 @@
       "title": "Installs have real progress, failure recovery, and a receipt",
       "activity": "idle",
       "summary": "Pack install is bounded and honest: real progress, cancel/retry/resume, a receipt, and an explicit decision on pre-archived bundles.",
-      "notes": "The transport hardening is done (PACK-DL-ALLOWLIST-001); the progress/cancel/retry surface and the pre-archived-bundle ADR are not, and the bundle decision is an owner call.",
+      "notes": "Transport hardening is done (PACK-DL-ALLOWLIST-001). Implemented 2026-10-15: `engine-progress` carries a measured fetch percent from the pinned `PackEntry.size_bytes`, `verify`/unpack are named as unmeasurable rather than faked, cancel is honoured at chunk/redirect/phase boundaries (`cancel_pack_install` + `INSTALL_CANCEL`), and an `InstallReceipt` (pack/version/source host/sha256/size/capabilities) reaches the UI with Cancel and Retry. Not implemented and disclosed: resume-as-continuation (a cancelled install restarts from byte zero) and cancel during unpacking, which needs an archive-crate progress callback; the pre-archived-bundle question stays an owner decision. Evidence: state/evidence/INSTALL-UX-001/ENGINE-SLICE-2026-10-15.md.",
       "dependencies": [],
       "evidence": [],
-      "updated": "2026-10-14"
+      "updated": "2026-10-15"
     },
     "CONTRIBUTOR-REVIEW-PACKET-001": {
       "task_id": "CONTRIBUTOR-REVIEW-PACKET-001",
@@ -1288,6 +1288,175 @@
       "evidence": [],
       "updated": "2026-10-14",
       "blocker": "Owner decision outstanding; not self-certified by an agent (AGENTS: AI cannot clear a human gate)."
+    },
+    "JA-A1-003": {
+      "task_id": "JA-A1-003",
+      "status": "blocked",
+      "attempts": 1,
+      "title": "Qualified Japanese content review — A1",
+      "activity": "idle",
+      "summary": "A1 band coverage and correctness judged by a qualified human reviewer under the REVIEW-001 gate, for one named pack version.",
+      "notes": "Recorded 2026-10-15 while rechecking REL-001: this card had no ledger entry, and docs/15 derivation would report it as ready because both ROADMAP dependencies (JA-A1-002, REVIEW-001) are done. That derivation is wrong for a human review gate, so the gate is recorded here as blocked. No qualified-human band review record exists in the repository for any version: the pack manifest carries `experimental: true`, the catalog entry says `review_status: \"community\"`, and every JA worklist says the content is AI-drafted with `review_status` held at `draft`. The reviewer kit and the current worklist exist; what is missing is a reviewer.",
+      "dependencies": [
+        "JA-A1-002",
+        "REVIEW-001"
+      ],
+      "evidence": [
+        "languages/ja-JP/review/REVIEWER_KIT.md",
+        "languages/ja-JP/review/REVIEW_POLICY.yaml",
+        "languages/ja-JP/review/WORKLIST-2026-10-14.md"
+      ],
+      "updated": "2026-10-15",
+      "blocker": "Needs a qualified human reviewer; an AI cannot self-certify band coverage or correctness (docs/15, AGENTS)."
+    },
+    "JA-A2-002": {
+      "task_id": "JA-A2-002",
+      "status": "blocked",
+      "attempts": 1,
+      "title": "Qualified Japanese content review — A2",
+      "activity": "idle",
+      "summary": "A2 band coverage and correctness judged by a qualified human reviewer under the REVIEW-001 gate, for one named pack version.",
+      "notes": "Recorded 2026-10-15 (REL-001 recheck). Previously ROADMAP-only, so derivation reported readiness from JA-A2-001 and REVIEW-001. Same gate as JA-A1-003: no band review verdict is recorded anywhere in the repository.",
+      "dependencies": [
+        "JA-A2-001",
+        "REVIEW-001"
+      ],
+      "evidence": [
+        "languages/ja-JP/review/REVIEWER_KIT.md",
+        "languages/ja-JP/review/WORKLIST-2026-10-14.md"
+      ],
+      "updated": "2026-10-15",
+      "blocker": "Needs a qualified human reviewer for the A2 band of a named pack version."
+    },
+    "JA-B1-002": {
+      "task_id": "JA-B1-002",
+      "status": "blocked",
+      "attempts": 1,
+      "title": "Qualified Japanese content review — B1",
+      "activity": "idle",
+      "summary": "B1 band coverage and correctness judged by a qualified human reviewer under the REVIEW-001 gate, for one named pack version.",
+      "notes": "Recorded 2026-10-15 (REL-001 recheck). Previously ROADMAP-only. The 2026-10-14 worklist closes review finding R12 for `ja.goal.b1.work-professional` with complete task journeys, and states in its own baseline that 155 of 198 B1 units cited only the object particle before that change and that the on-ramp band units remain unreviewed — the draft content is ready for a reviewer, not reviewed.",
+      "dependencies": [
+        "JA-B1-001",
+        "REVIEW-001"
+      ],
+      "evidence": [
+        "languages/ja-JP/review/REVIEWER_KIT.md",
+        "languages/ja-JP/review/WORKLIST-2026-10-14.md"
+      ],
+      "updated": "2026-10-15",
+      "blocker": "Needs a qualified human reviewer for the B1 band of a named pack version."
+    },
+    "JA-B2-002": {
+      "task_id": "JA-B2-002",
+      "status": "blocked",
+      "attempts": 1,
+      "title": "Qualified Japanese content review — B2",
+      "activity": "idle",
+      "summary": "B2 band coverage and correctness judged by a qualified human reviewer under the REVIEW-001 gate; gates every public framework-alignment claim and blocks stable 1.0 if evidence is insufficient.",
+      "notes": "Recorded 2026-10-15 (REL-001 recheck). This is the dependency that four required release cards share (ACC-001, SEC-001, PLAT-001, PERF-002): while it had no ledger entry, all four derived as ready, which no release gate should silently permit. The B2 journey work (R12, `ja.goal.b2.film-analysis`) is drafted and gated at `draft`; the review verdict is the missing part.",
+      "dependencies": [
+        "JA-B2-001",
+        "REVIEW-001"
+      ],
+      "evidence": [
+        "languages/ja-JP/review/REVIEWER_KIT.md",
+        "languages/ja-JP/review/WORKLIST-2026-10-14.md"
+      ],
+      "updated": "2026-10-15",
+      "blocker": "Needs a qualified human reviewer for the B2 band; insufficient evidence keeps stable 1.0 blocked and preview packs labelled partial rather than shrinking the stable target."
+    },
+    "ACC-001": {
+      "task_id": "ACC-001",
+      "status": "blocked",
+      "attempts": 1,
+      "title": "Accessibility release audit",
+      "activity": "idle",
+      "summary": "Keyboard, screen-reader, zoom, reduced-motion, colour and caption gates pass for the critical learner paths.",
+      "notes": "Recorded 2026-10-15 (REL-001 recheck): required for desktop 1.0, previously ROADMAP-only, and it derived as ready through done dependencies even though the human/device pass is what remains. What exists today is automated: `apps/desktop/src/a11y.test.tsx` renders every route at role level and asserts heading, label and landmark semantics — its `progress` fixture had to be rebuilt on 2026-10-15 when that route's composition changed, which is evidence the fixture mirrors the real route instead of being relaxed — plus the keyboard/focus and reduced-motion assertions in the desktop suite. Measured 2026-10-15: the desktop web checks are green with 26 files / 239 tests including those suites. What cannot be measured on this host: real screen-reader interaction (Orca/VoiceOver/NVDA), OS magnifier and high-contrast settings, and assistive-technology-specific focus behaviour.",
+      "dependencies": [
+        "JA-B2-002",
+        "GAME-001",
+        "READ-001",
+        "WRITE-001",
+        "TTS-001",
+        "SPEECH-007"
+      ],
+      "evidence": [
+        "apps/desktop/src/a11y.test.tsx",
+        "docs/11_ACCESSIBILITY_AND_LOCALIZATION.md",
+        "state/evidence/O-06-2026-10-10/owner-report.md"
+      ],
+      "updated": "2026-10-15",
+      "blocker": "Screen-reader and OS-setting passes need assistive technology and a human reviewer on Linux (Orca+Firefox, IBus/Mozc), macOS and Windows; none is available on the gaming PC."
+    },
+    "SEC-001": {
+      "task_id": "SEC-001",
+      "status": "blocked",
+      "attempts": 1,
+      "title": "Security/privacy release audit",
+      "activity": "idle",
+      "summary": "Malicious-pack suite, no unexpected speech upload in local mode, and secrets/logging/recording-retention gates all pass.",
+      "notes": "Recorded 2026-10-15 (REL-001 recheck): required for desktop 1.0, previously ROADMAP-only, so docs/15 derivation reported it ready. The automated work on record is explicitly **partial** (2026-10-06 artifact): `cargo audit` across 528 crates (0 vulnerabilities, 2 warnings — an unmaintained build-time proc macro and a transitive glib unsoundness), a heuristic secret-pattern grep because gitleaks was not installed, and a manual licence audit. What the acceptance bullets additionally require is not covered by that artifact: the pack-install defences are enforced by tests that run today (`reference_audio_follows_the_manifest_and_refuses_traversal` in `apps/desktop/src-tauri/src/lib.rs:11776`, `tampered_archive_is_rejected` and `redirect_hops_stay_on_allowlisted_hosts_for_downloads` in `apps/desktop/src-tauri/src/packs.rs`), but there is no consolidated malicious-pack suite, no privacy review of provider upload paths, and no logging/recording-retention gate. Acceptance is a human disposition: an agent can run suites and record results, it cannot accept residual risk or sign off privacy.",
+      "dependencies": [
+        "PACK-004",
+        "DATA-002",
+        "SPEECH-005",
+        "JA-B2-002",
+        "TTS-001",
+        "SPEECH-007",
+        "WRITE-001",
+        "GAME-001"
+      ],
+      "evidence": [
+        "state/evidence/SEC-001/automated-2026-10-06.txt",
+        "SECURITY.md"
+      ],
+      "updated": "2026-10-15",
+      "blocker": "Owner/human disposition of findings and privacy sign-off; automated suites pass but acceptance is not an agent's to grant."
+    },
+    "PLAT-001": {
+      "task_id": "PLAT-001",
+      "status": "blocked",
+      "attempts": 1,
+      "title": "Windows/macOS desktop parity",
+      "activity": "idle",
+      "summary": "Automated builds and critical end-to-end paths pass on Linux, Windows and macOS, with per-platform speech/model behaviour and install paths documented.",
+      "notes": "Recorded 2026-10-15 (REL-001 recheck): required for desktop 1.0, previously ROADMAP-only, so docs/15 derivation reported it ready. Measured from `.github/workflows/ci.yml` today: `platform-compile` runs `pnpm build` plus `cargo check -p lts-desktop --all-targets` on windows-latest and macos-latest — compile-only, and the workflow says so; `platform-bundles` is manual (`workflow_dispatch`) and produces **unsigned release** bundles whose artifact names carry the `UNTESTED` marker; every runtime check (`desktop-smoke` and the walkthrough) runs on ubuntu-24.04 only. `docs/platform/PLATFORM_REPORTS.yaml` states that `tested_platforms` is maintainer/owner runtime evidence and is Linux-only today, and holds no Windows/macOS record. Closing this needs Windows/macOS devices or runner capacity (owner gate O-10) plus human runtime reports; a successful bundle proves only that it linked.",
+      "dependencies": [
+        "JA-B2-002",
+        "SPEECH-003",
+        "WRITE-001",
+        "TTS-001",
+        "SPEECH-007"
+      ],
+      "evidence": [
+        "docs/platform/PLATFORM_REPORTS.yaml",
+        ".github/workflows/ci.yml"
+      ],
+      "updated": "2026-10-15",
+      "blocker": "Needs Windows and macOS devices or purchased runner capacity (O-10) plus human runtime reports; builds alone are not parity evidence."
+    },
+    "PERF-002": {
+      "task_id": "PERF-002",
+      "status": "blocked",
+      "attempts": 1,
+      "title": "Measure release performance on supported configurations",
+      "activity": "idle",
+      "summary": "Frozen performance budgets pass on every declared desktop hardware/model tier, with repeatable scripts, p50/p95, RAM/VRAM, startup, disk and UI-responsiveness evidence, and recovery under load.",
+      "notes": "Recorded 2026-10-15 (REL-001 recheck): required for desktop 1.0, previously ROADMAP-only. Existing evidence is a single Linux tier (`tier-omarchy-2026-10-08.md`, plus ASR/TTS summaries and the CI timings). The declared tier set, the budget table, and the load/recovery runs under cancellation and model failure are what remain; PERF-002 also depends on PLAT-001 and SPEECH-007, both blocked.",
+      "dependencies": [
+        "PERF-001",
+        "PLAT-001",
+        "SPEECH-007",
+        "JA-B2-002"
+      ],
+      "evidence": [
+        "state/evidence/PERF-001/tier-omarchy-2026-10-08.md",
+        "state/evidence/PERF-001/ci-2026-10-02.txt"
+      ],
+      "updated": "2026-10-15",
+      "blocker": "Declared hardware/model tiers do not exist yet and two dependencies (PLAT-001, SPEECH-007) are blocked."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence.",

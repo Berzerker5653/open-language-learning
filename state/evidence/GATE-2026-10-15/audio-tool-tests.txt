@@ -1,0 +1,7 @@
+$ python3 -m unittest scripts/test_renormalize_pack_audio.py
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.478s
+
+OK
+EXIT=0
