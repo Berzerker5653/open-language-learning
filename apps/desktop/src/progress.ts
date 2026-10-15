@@ -19,6 +19,7 @@ const COPY: Record<string, string> = {
   "install-pack.verify": "Checking the download against what the catalog promised",
   "install-pack.install": "Unpacking and checking the content — this can take a minute",
   "install-pack.record": "Recording the installed pack",
+  "install-pack.cancelled": "Install cancelled",
   "install-model.fetch": "Downloading the speech model",
   "install-model.record": "Recording the installed model",
 };

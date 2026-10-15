@@ -22,6 +22,7 @@ use sha2::{Digest, Sha256};
 use std::fs;
 use std::io::Read;
 use std::path::{Path, PathBuf};
+use std::sync::atomic::{AtomicBool, Ordering};
 
 const MAX_CATALOG_BYTES: u64 = 1 << 20;
 /// Hosts a pack download may sit on, checked for the start URL *and*
@@ -160,7 +161,9 @@ pub fn load_cache(data: &Path) -> Option<PackCatalog> {
 /// Fetch + validate the catalog. Ok(catalog) on success (cache updated);
 /// Err carries a human-readable status for the UI.
 pub fn fetch_catalog(url: &str) -> Result<PackCatalog, String> {
-    let bytes = fetch_capped(url, MAX_CATALOG_BYTES, false)
+    // The catalog itself is small and fast: no byte progress to measure and
+    // no transfer the learner would try to cancel.
+    let bytes = fetch_capped(url, MAX_CATALOG_BYTES, false, &mut |_| {}, &|| false)
         .map_err(|e| format!("catalog fetch failed: {e}"))?;
     let catalog: PackCatalog =
         serde_json::from_slice(&bytes).map_err(|e| format!("catalog invalid: {e}"))?;
@@ -312,11 +315,22 @@ pub(crate) fn url_policy(
 /// the operator-configured catalog URL is only held to https. ureq
 /// never follows a redirect itself (`redirects(0)`): each `Location`
 /// goes through `url_policy`, and only the re-resolved chain head is
-/// ever requested.
-fn fetch_capped(start: &str, max_bytes: u64, require_allowlisted: bool) -> Result<Vec<u8>, String> {
+/// ever requested. `on_bytes` sees the running total actually read and
+/// `cancelled` is consulted before every hop and every read chunk, so
+/// a cancel stops the transfer at the next byte boundary.
+fn fetch_capped(
+    start: &str,
+    max_bytes: u64,
+    require_allowlisted: bool,
+    on_bytes: &mut dyn FnMut(u64),
+    cancelled: &dyn Fn() -> bool,
+) -> Result<Vec<u8>, String> {
     let agent = ureq::AgentBuilder::new().redirects(0).build();
     let mut hops: Vec<String> = Vec::new();
     loop {
+        if cancelled() {
+            return Err(CANCELLED.into());
+        }
         let url = url_policy(start, &hops, require_allowlisted)?
             .pop()
             .expect("url_policy never returns an empty chain");
@@ -325,21 +339,36 @@ fn fetch_capped(start: &str, max_bytes: u64, require_allowlisted: bool) -> Resul
             .call()
             .map_err(|e| format!("fetch failed: {e}"))?;
         if !(300..400).contains(&resp.status()) {
-            return read_capped(resp.into_reader(), max_bytes);
+            return read_capped(resp.into_reader(), max_bytes, on_bytes, cancelled);
         }
         let loc = resp.header("location").ok_or("redirect without location")?;
         hops.push(loc.to_string());
     }
 }
 
+/// The one error string every cancelled install shares; the renderer turns
+/// it into the "cancelled, nothing was installed" state rather than a
+/// generic failure.
+pub const CANCELLED: &str = "install cancelled";
+
 /// Drain a response body under the hard size cap: the read aborts the
 /// moment the running total passes `max_bytes`, so an oversized body
 /// never lands in memory in full. Separate from the socket so tests can
-/// drive it with an in-memory reader.
-fn read_capped(mut reader: impl Read, max_bytes: u64) -> Result<Vec<u8>, String> {
+/// drive it with an in-memory reader. `on_bytes` is called with the real
+/// cumulative count after every chunk (measured progress, never a timer),
+/// and `cancelled` is consulted before every chunk.
+fn read_capped(
+    mut reader: impl Read,
+    max_bytes: u64,
+    on_bytes: &mut dyn FnMut(u64),
+    cancelled: &dyn Fn() -> bool,
+) -> Result<Vec<u8>, String> {
     let mut bytes = Vec::new();
     let mut buf = [0u8; 1 << 16];
     loop {
+        if cancelled() {
+            return Err(CANCELLED.into());
+        }
         let n = reader.read(&mut buf).map_err(|e| format!("read: {e}"))?;
         if n == 0 {
             break;
@@ -348,8 +377,19 @@ fn read_capped(mut reader: impl Read, max_bytes: u64) -> Result<Vec<u8>, String>
         if bytes.len() as u64 > max_bytes {
             return Err("response exceeded size limit".into());
         }
+        on_bytes(bytes.len() as u64);
     }
     Ok(bytes)
+}
+
+/// Percent of the pinned archive actually transferred. The denominator is
+/// the size the catalog entry pinned, so the number is a real measured
+/// fraction; it never exceeds 100 no matter what the server sends.
+fn fetch_percent(done: u64, pinned: u64) -> u8 {
+    if pinned == 0 {
+        return 0;
+    }
+    ((done.min(pinned) * 100) / pinned).min(100) as u8
 }
 
 fn hex_sha256(bytes: &[u8]) -> String {
@@ -367,16 +407,24 @@ pub use crate::progress::Progress;
 /// imports. With `expected`, checksum and identity must match. Reports
 /// happen *before* the work they name, which is the whole point: a stage
 /// announced after it finished would still leave the learner watching a
-/// frozen button.
+/// frozen button. `cancelled` is honored at the phase boundaries that have
+/// not started yet (before the checksum, before unpacking); once the
+/// unpack has begun the install runs to completion, because the swap into
+/// the pack store is atomic and a half-unpacked version is never visible.
 pub fn install_pack_bytes_report(
     data: &Path,
     bytes: &[u8],
     expected: Option<&PackEntry>,
     mut report: impl FnMut(&Progress),
+    cancelled: &dyn Fn() -> bool,
 ) -> Result<InstalledPack, String> {
     let subject = expected
         .map(|e| e.pack_id.clone())
         .unwrap_or_else(|| "imported pack".to_string());
+    if cancelled() {
+        report(&Progress::stage("install-pack", &subject, "cancelled"));
+        return Err(CANCELLED.into());
+    }
     if let Some(e) = expected {
         validate_entry(e)?;
         if bytes.len() as u64 > e.size_bytes {
@@ -392,6 +440,10 @@ pub fn install_pack_bytes_report(
         if am.pack_id != e.pack_id || am.version != e.version {
             return Err("archive identity does not match catalog entry".into());
         }
+    }
+    if cancelled() {
+        report(&Progress::stage("install-pack", &am.pack_id, "cancelled"));
+        return Err(CANCELLED.into());
     }
     report(&Progress::stage("install-pack", &am.pack_id, "install"));
     let outcome = lts_langpack::archive::install(bytes, &data.join("packs"))
@@ -420,13 +472,21 @@ pub fn install_pack_bytes_report(
 }
 
 /// Install the catalog-cached entry for `pack_id` (download -> verify ->
-/// install), reporting the stage it is in (K-62). Offline reinstall of an
-/// already-installed pack is a no-op success.
+/// install), reporting the stage it is in and, during the download, the
+/// fraction of the pinned archive actually transferred (K-62 + the real
+/// progress half of INSTALL-UX-001). `cancel` stops the transfer at the
+/// next byte boundary; a cancelled install records nothing and the store
+/// still shows no version of the pack. Offline reinstall of an
+/// already-installed pack is a no-op success with no receipt — nothing was
+/// fetched or verified this run, and a receipt that says otherwise would
+/// be a lie.
 pub fn install_from_catalog_report(
     data: &Path,
     pack_id: &str,
     mut report: impl FnMut(&Progress),
-) -> Result<InstalledPack, String> {
+    cancel: &AtomicBool,
+) -> Result<InstallResult, String> {
+    let cancelled = || cancel.load(Ordering::Relaxed);
     if !valid_pack_id(pack_id) {
         return Err("bad pack id".into());
     }
@@ -440,19 +500,59 @@ pub fn install_from_catalog_report(
     validate_entry(entry)?;
     if let Some(v) = lts_langpack::archive::current_version(pack_id, &data.join("packs")) {
         if v == entry.version {
-            return Ok(display_for(data, pack_id, &v, "community"));
+            return Ok(InstallResult {
+                installed: display_for(data, pack_id, &v, "community"),
+                receipt: None,
+            });
         }
     }
-    // A catalog entry knows the archive size, but the fetch is one blocking
-    // call: a percentage claimed mid-flight would be invented, so the stage is
-    // named and left honestly indeterminate.
+    // The catalog entry pins the exact archive size, so bytes already read
+    // are a real fraction of known work: percent advances only when a whole
+    // new percent of *measured* bytes is in, and verify/install stay named
+    // without a number because their work is single-pass and unmeasured.
     report(&Progress::stage("install-pack", pack_id, "fetch"));
-    let bytes = fetch_capped(&entry.url, entry.size_bytes, true)?;
-    install_pack_bytes_report(data, &bytes, Some(entry), &mut report)
+    let pinned = entry.size_bytes;
+    let mut last_pct: u8 = 0;
+    let fetch = {
+        let mut on_bytes = |done: u64| {
+            let pct = fetch_percent(done, pinned);
+            if pct != last_pct {
+                last_pct = pct;
+                report(&Progress::with_percent(
+                    "install-pack",
+                    pack_id,
+                    "fetch",
+                    pct,
+                ));
+            }
+        };
+        fetch_capped(
+            &entry.url,
+            entry.size_bytes,
+            true,
+            &mut on_bytes,
+            &cancelled,
+        )
+    };
+    let bytes = match fetch {
+        Ok(b) => b,
+        Err(e) => {
+            if e == CANCELLED {
+                report(&Progress::stage("install-pack", pack_id, "cancelled"));
+            }
+            return Err(e);
+        }
+    };
+    let installed = install_pack_bytes_report(data, &bytes, Some(entry), &mut report, &cancelled)?;
+    Ok(InstallResult {
+        installed,
+        receipt: Some(receipt_for(entry, &bytes, data)),
+    })
 }
 
 /// Import a locally supplied archive (bytes never carry paths through IPC;
 /// the UI reads the file and sends contents), reporting each stage (K-62).
+/// The bytes are already on this device, so there is no transfer to cancel.
 pub fn import_pack_b64_report(
     data: &Path,
     data_b64: &str,
@@ -464,7 +564,80 @@ pub fn import_pack_b64_report(
     if bytes.len() as u64 > lts_langpack::archive::MAX_TOTAL_BYTES {
         return Err("archive exceeds size limit".into());
     }
-    install_pack_bytes_report(data, &bytes, None, report)
+    install_pack_bytes_report(data, &bytes, None, report, &|| false)
+}
+
+/// What a finished catalog install can honestly name: the pack version,
+/// where the bytes came from, the digest that was verified against this
+/// run's bytes, the size that actually arrived, and the capabilities the
+/// installed pack's own manifest declares. No field is invented.
+#[derive(Debug, Clone, Serialize)]
+pub struct InstallReceipt {
+    pub pack_id: String,
+    pub version: String,
+    pub source_url: String,
+    pub source_host: String,
+    /// SHA-256 computed over the fetched bytes and required to equal the
+    /// catalog pin before anything was unpacked.
+    pub sha256: String,
+    pub size_bytes: u64,
+    /// `capabilities` keys the installed manifest sets true, sorted.
+    pub capabilities: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct InstallResult {
+    pub installed: InstalledPack,
+    /// None when the install was a no-op (already-current version: no
+    /// download and verification happened this run).
+    pub receipt: Option<InstallReceipt>,
+}
+
+fn receipt_for(entry: &PackEntry, fetched: &[u8], data: &Path) -> InstallReceipt {
+    InstallReceipt {
+        pack_id: entry.pack_id.clone(),
+        version: entry.version.clone(),
+        source_url: entry.url.clone(),
+        source_host: url::Url::parse(&entry.url)
+            .ok()
+            .and_then(|u| u.host_str().map(str::to_string))
+            .unwrap_or_default(),
+        sha256: hex_sha256(fetched),
+        size_bytes: fetched.len() as u64,
+        capabilities: declared_capabilities(data, &entry.pack_id, &entry.version),
+    }
+}
+
+/// The capabilities an installed pack version declares true in its own
+/// manifest. Never a fixed list: an absent or unparseable manifest yields
+/// nothing, and only `true` values are named — the receipt cannot grant
+/// what the pack itself did not claim.
+pub fn declared_capabilities(data: &Path, pack_id: &str, version: &str) -> Vec<String> {
+    let manifest = data
+        .join("packs")
+        .join(pack_id)
+        .join(version)
+        .join("manifest.yaml");
+    let mut caps: Vec<String> = fs::read_to_string(&manifest)
+        .ok()
+        .and_then(|s| serde_yaml::from_str::<serde_yaml::Value>(&s).ok())
+        .and_then(|v| {
+            let m = v.get("capabilities")?.as_mapping()?;
+            Some(
+                m.iter()
+                    .filter_map(|(k, val)| {
+                        if val.as_bool() == Some(true) {
+                            k.as_str().map(str::to_string)
+                        } else {
+                            None
+                        }
+                    })
+                    .collect(),
+            )
+        })
+        .unwrap_or_default();
+    caps.sort();
+    caps
 }
 
 fn display_for(data: &Path, pack_id: &str, version: &str, trust: &str) -> InstalledPack {
@@ -629,6 +802,12 @@ mod tests {
     /// they hand the install a reporter that drops the stages.
     fn no_progress(_: &Progress) {}
 
+    /// Tests that are not about cancellation hand the install a flag nobody
+    /// ever sets.
+    fn never_cancelled() -> bool {
+        false
+    }
+
     #[test]
     fn import_rejects_garbage_honestly() {
         let tmp = tempfile::tempdir().unwrap();
@@ -679,7 +858,10 @@ mod tests {
         e.version = "0.1.0".into();
         e.size_bytes = bytes.len() as u64;
         e.sha256 = "b".repeat(64);
-        assert!(install_pack_bytes_report(data, &bytes, Some(&e), &mut no_progress).is_err());
+        assert!(
+            install_pack_bytes_report(data, &bytes, Some(&e), &mut no_progress, &never_cancelled)
+                .is_err()
+        );
         assert!(
             lts_langpack::archive::current_version("org.openlanguage.ja-demo", &data.join("packs"))
                 .is_none()
@@ -688,7 +870,10 @@ mod tests {
         let mut e2 = e.clone();
         e2.sha256 = hex_sha256(&bytes);
         e2.version = "9.9.9".into();
-        assert!(install_pack_bytes_report(data, &bytes, Some(&e2), &mut no_progress).is_err());
+        assert!(
+            install_pack_bytes_report(data, &bytes, Some(&e2), &mut no_progress, &never_cancelled)
+                .is_err()
+        );
     }
 
     #[test]
@@ -874,16 +1059,23 @@ mod tests {
         e.size_bytes = bytes.len() as u64;
         e.sha256 = hex_sha256(&bytes);
         let mut seen: Vec<(&'static str, Option<u8>)> = Vec::new();
-        install_pack_bytes_report(data, &bytes, Some(&e), &mut |p: &Progress| {
-            seen.push((p.stage, p.percent));
-        })
+        install_pack_bytes_report(
+            data,
+            &bytes,
+            Some(&e),
+            &mut |p: &Progress| {
+                seen.push((p.stage, p.percent));
+            },
+            &never_cancelled,
+        )
         .unwrap();
         assert_eq!(
             seen.iter().map(|(s, _)| *s).collect::<Vec<_>>(),
             vec!["verify", "install", "record"]
         );
         // None of these stages has a real fraction to report, and inventing one
-        // is exactly the failure this card exists to prevent.
+        // is exactly the failure this card exists to prevent; the bytes-read
+        // fraction belongs to the fetch stage, which never ran here.
         assert!(seen.iter().all(|(_, pct)| pct.is_none()));
     }
 
@@ -911,9 +1103,13 @@ mod tests {
         e.size_bytes = bytes.len() as u64;
         e.sha256 = "b".repeat(64);
         let mut stages: Vec<&str> = Vec::new();
-        let err = install_pack_bytes_report(tmp.path(), &bytes, Some(&e), &mut |p: &Progress| {
-            stages.push(p.stage)
-        })
+        let err = install_pack_bytes_report(
+            tmp.path(),
+            &bytes,
+            Some(&e),
+            &mut |p: &Progress| stages.push(p.stage),
+            &never_cancelled,
+        )
         .unwrap_err();
         assert!(err.contains("checksum"), "{err}");
         assert_eq!(stages, vec!["verify"]);
@@ -944,11 +1140,20 @@ mod tests {
         write_cache(data, &catalog);
         for pin in &catalog.packs {
             validate_entry(pin).unwrap();
-            let inst = install_from_catalog_report(data, &pin.pack_id, &mut no_progress)
-                .expect("the pinned archive installs through the native transport");
+            let res = install_from_catalog_report(
+                data,
+                &pin.pack_id,
+                &mut no_progress,
+                &AtomicBool::new(false),
+            )
+            .expect("the pinned archive installs through the native transport");
+            let inst = res.installed;
             assert_eq!(inst.version, pin.version);
             assert_eq!(inst.locale, pin.locale);
             assert!(!inst.display_name.is_empty());
+            let receipt = res.receipt.expect("a fetched install carries a receipt");
+            assert_eq!(receipt.sha256, pin.sha256, "the verified digest is the pin");
+            assert_eq!(receipt.source_host, "github.com");
         }
         let installed: Vec<(String, String)> = installed_packs(data)
             .into_iter()
@@ -962,5 +1167,125 @@ mod tests {
             ],
             "both pinned entries are on disk after one transport run"
         );
+    }
+
+    /// INSTALL-UX-001: the fetch percentage is real measured bytes over the
+    /// size the catalog pinned — it moves only when bytes actually arrive,
+    /// and it can never exceed 100 no matter what the server sends.
+    #[test]
+    fn fetch_progress_counts_the_bytes_actually_read() {
+        use std::io::Cursor;
+        let body = vec![7u8; 200_000];
+        let mut totals: Vec<u64> = Vec::new();
+        let got = read_capped(
+            Cursor::new(&body),
+            1 << 20,
+            &mut |done| totals.push(done),
+            &never_cancelled,
+        )
+        .unwrap();
+        assert_eq!(got.len(), 200_000);
+        assert_eq!(*totals.last().unwrap(), 200_000);
+        assert!(
+            totals.windows(2).all(|w| w[1] > w[0]),
+            "progress only ever advances on measured bytes"
+        );
+        assert_eq!(fetch_percent(0, 3_200_000), 0);
+        assert_eq!(fetch_percent(65_536, 3_200_000), 2);
+        assert_eq!(fetch_percent(200_000, 200_000), 100);
+        // A body smaller than the pinned claim shows as it is measured —
+        // it is never rounded up to 100 (the checksum rejects it after).
+        assert_eq!(fetch_percent(3_000_000, 3_200_000), 93);
+        assert_eq!(fetch_percent(3_200_000, 3_200_000), 100);
+        assert_eq!(fetch_percent(3_500_000, 3_200_000), 100);
+    }
+
+    /// A cancel set while bytes are moving stops the loop before the next
+    /// read — the transfer itself, not just the UI, is what halts.
+    #[test]
+    fn a_cancelled_transfer_stops_at_the_next_byte_boundary() {
+        use std::io::Cursor;
+        let body = vec![7u8; 1 << 20];
+        let flag = AtomicBool::new(false);
+        let mut chunks = 0;
+        let err = read_capped(
+            Cursor::new(&body),
+            u64::MAX,
+            &mut |_| {
+                chunks += 1;
+                flag.store(true, Ordering::Relaxed);
+            },
+            &|| flag.load(Ordering::Relaxed),
+        )
+        .unwrap_err();
+        assert_eq!(err, CANCELLED);
+        assert_eq!(chunks, 1, "the flag is seen before the second read");
+    }
+
+    /// A cancel that arrives after the checksum passed must stop before any
+    /// unpacking, and the store must be exactly as if nothing had happened:
+    /// no version visible, no install record.
+    #[test]
+    fn cancelling_after_verify_leaves_no_pack_installed() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let bytes = ja_demo_archive();
+        let flag = AtomicBool::new(false);
+        let mut e = entry("https://github.com/o/r/releases/download/v0.1.0/ja-demo.lpk");
+        e.pack_id = "org.openlanguage.ja-demo".into();
+        e.version = "0.1.0".into();
+        e.size_bytes = bytes.len() as u64;
+        e.sha256 = hex_sha256(&bytes);
+        let mut stages: Vec<&str> = Vec::new();
+        let err = install_pack_bytes_report(
+            data,
+            &bytes,
+            Some(&e),
+            &mut |p: &Progress| {
+                stages.push(p.stage);
+                if p.stage == "verify" {
+                    flag.store(true, Ordering::Relaxed);
+                }
+            },
+            &|| flag.load(Ordering::Relaxed),
+        )
+        .unwrap_err();
+        assert_eq!(err, CANCELLED);
+        assert_eq!(stages, vec!["verify", "cancelled"]);
+        assert!(installed_packs(data).is_empty());
+        assert!(
+            lts_langpack::archive::current_version("org.openlanguage.ja-demo", &data.join("packs"))
+                .is_none()
+        );
+    }
+
+    /// The receipt is the install's proof: pack id, version, the catalog
+    /// entry and host the bytes came from, the digest computed over the
+    /// fetched bytes, the size that arrived, and only the capabilities the
+    /// installed manifest actually declares true (`listening: false` in
+    /// this fixture must not appear).
+    #[test]
+    fn the_receipt_names_the_version_source_and_verified_sha() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let bytes = ja_demo_archive();
+        let url = "https://github.com/o/r/releases/download/v0.1.0/ja-demo.lpk";
+        let mut e = entry(url);
+        e.pack_id = "org.openlanguage.ja-demo".into();
+        e.version = "0.1.0".into();
+        e.size_bytes = bytes.len() as u64;
+        e.sha256 = hex_sha256(&bytes);
+        let inst =
+            install_pack_bytes_report(data, &bytes, Some(&e), &mut no_progress, &never_cancelled)
+                .unwrap();
+        let r = receipt_for(&e, &bytes, data);
+        assert_eq!(r.pack_id, inst.pack_id);
+        assert_eq!(r.version, "0.1.0");
+        assert_eq!(r.source_url, url);
+        assert_eq!(r.source_host, "github.com");
+        assert_eq!(r.sha256, hex_sha256(&bytes));
+        assert_eq!(r.sha256, e.sha256, "the verified digest is the pin");
+        assert_eq!(r.size_bytes, bytes.len() as u64);
+        assert_eq!(r.capabilities, vec!["reading", "speaking", "writing"]);
     }
 }

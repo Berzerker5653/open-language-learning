@@ -270,6 +270,21 @@ ADR-0024 retired the synthesis overlay (`dist/variants/tauri.tts.json`
 no longer exists), so pack+aligner is the complete overlay set and no
 TTS-carrying combination remains to verify.
 
+### Pre-archived pack bundle — OPEN (owner decision, INSTALL-UX-001 acceptance criterion 2)
+
+As of 2026-10-15 this is **not specified and not implemented**, by design: the
+card states a pre-archived bundle is specified only after the owner accepts
+the distribution trade-off. Today every catalog install streams one pinned
+`.lpk` archive from a GitHub release asset (`catalog/packs.json`; transport
+and gates in `apps/desktop/src-tauri/src/packs.rs` — download, SHA-256
+verification against the pin, unpack through the pack gate), with real
+download progress, cancel and clean retry, but no partial-byte resume.
+The open trade-off to accept or reject before anything is specified:
+pre-archiving distribution payloads (pre-built archive sets, chunked assets,
+or CDN-side layout) versus the single pinned archive — what that costs in
+release-asset churn, pinning/republish rules, and install-side resume
+behavior. Until the owner rules, nothing may be built toward a bundle format.
+
 ## Mobile
 
 Tauri 2 supports Android/iOS targets, but mobile is a separate milestone because microphone permissions, app-store packaging, model memory/storage, background behavior, and native dependencies need validation.

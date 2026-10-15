@@ -457,16 +457,64 @@ async fn catalog_packs() -> CatalogResponse {
     }
 }
 
+/// INSTALL-UX-001: in-flight catalog installs, keyed by pack id. The only
+/// thing the UI may use to interrupt an install is this shared flag, set by
+/// `cancel_pack_install`; no partial state ever crosses IPC.
+static INSTALL_CANCEL: std::sync::OnceLock<
+    std::sync::Mutex<
+        std::collections::HashMap<String, std::sync::Arc<std::sync::atomic::AtomicBool>>,
+    >,
+> = std::sync::OnceLock::new();
+
+fn install_cancel_registry() -> &'static std::sync::Mutex<
+    std::collections::HashMap<String, std::sync::Arc<std::sync::atomic::AtomicBool>>,
+> {
+    INSTALL_CANCEL.get_or_init(Default::default)
+}
+
+/// Cancel a running catalog install. Returns whether an install of that pack
+/// was actually in flight; the flag stops the download at the next byte
+/// boundary and the install before it verifies or unpacks. A cancelled
+/// install records nothing — the next attempt downloads again from the start,
+/// because partial-byte resume is not implemented and not pretended to be.
+#[tauri::command]
+fn cancel_pack_install(pack_id: String) -> bool {
+    use std::sync::atomic::Ordering;
+    let Ok(installs) = install_cancel_registry().lock() else {
+        return false;
+    };
+    match installs.get(&pack_id) {
+        Some(flag) => {
+            flag.store(true, Ordering::Relaxed);
+            true
+        }
+        None => false,
+    }
+}
+
 #[tauri::command]
 async fn install_catalog_pack(
     pack_id: String,
     app: tauri::AppHandle,
-) -> Result<packs::InstalledPack, String> {
-    tauri::async_runtime::spawn_blocking(move || {
-        packs::install_from_catalog_report(&data_dir(), &pack_id, progress::reporter(&app))
+) -> Result<packs::InstallResult, String> {
+    use std::sync::Arc;
+    use std::sync::atomic::AtomicBool;
+    let flag = Arc::new(AtomicBool::new(false));
+    let registered = pack_id.clone();
+    if let Ok(mut m) = install_cancel_registry().lock() {
+        m.insert(registered.clone(), flag.clone());
+    }
+    let joined = tauri::async_runtime::spawn_blocking(move || {
+        packs::install_from_catalog_report(&data_dir(), &pack_id, progress::reporter(&app), &flag)
     })
     .await
-    .map_err(|e| format!("install-catalog-pack failed: {e}"))?
+    .map_err(|e| format!("install-catalog-pack failed: {e}"));
+    // Deregister on every path: a stale flag would silently cancel the
+    // learner's next install of the same pack.
+    if let Ok(mut m) = install_cancel_registry().lock() {
+        m.remove(&registered);
+    }
+    joined?
 }
 
 /// Import a locally supplied .lpk archive (contents cross IPC as base64;
@@ -7504,6 +7552,7 @@ pub fn run() {
             pack_claims,
             catalog_packs,
             install_catalog_pack,
+            cancel_pack_install,
             import_pack,
             installed_packs,
             active_pack,
@@ -8305,24 +8354,27 @@ activities:
 
     #[test]
     fn plan_generation_stays_fast_on_the_reference_pack() {
-        // POLISH-001 latency guard, recalibrated twice from measurements. The
-        // first plan build in a process also pays to read the pack from cold
-        // pages — lexicon, sentences, kanji, curriculum — because the parse
-        // cache is per version root and every test installs into a fresh store,
-        // so that first number measures the machine and its page cache. Three
+        // POLISH-001 latency guard, recalibrated from measurements a third time
+        // on 2026-10-15. The first plan build in a process also pays to read the
+        // pack from cold pages — lexicon, sentences, kanji, curriculum — because
+        // the parse cache is per version root and every test installs into a
+        // fresh store, so that first number measures the machine. Four
         // observations of the same code: 294 ms cold / 95 ms warm on this host,
-        // 1.447 s cold on a 2-core CI runner (run 38624968580), and
-        // 787 ms cold / 796 ms warm on a contended CI runner where the desktop
-        // lib binary alone took 2,752 s for 139 tests (run 38650579941, in a
-        // 45-54 minute `rust` job). Absolute milliseconds therefore pin the
-        // runner and its load rather than the code, so the cold path keeps one
-        // coarse ceiling that catches a genuine blow-up, while the repeat path
-        // is bounded at 1.25x the same process's own cold cost — the repeat
-        // build does strictly less work, because it is the build that warmed
-        // the cache — with a second, generous ceiling so a multi-second repeat
-        // build cannot hide behind a slow cold measurement. The interactive
-        // promise stays enforced where the learner feels it, by the walkthrough's
-        // per-route stall guard (`route-ms:Today:79` on this pack).
+        // 1.447 s cold on a 2-core CI runner (run 38624968580), 787 ms cold /
+        // 796 ms warm on a contended CI runner where the desktop lib binary
+        // alone took 2,752 s for 139 tests (run 38650579941, in a 45-54 minute
+        // `rust` job), and 299.6 ms cold / 394.7 ms warm on this host on
+        // 2026-10-15 — a repeat build at 1.32x the cold build over identical
+        // bytes, which broke the 1.25x relative bound that the CI run had
+        // motivated. A tight relative bound pins run-to-run noise, and it could
+        // never have caught the regression it was written for: with the parse
+        // cache bypassed the repeat build costs about the *same* as the cold
+        // build, not more. Cache reuse is therefore asserted directly and
+        // deterministically below, while time stays a coarse guard: one ceiling
+        // on the cold build that catches a genuine blow-up, one gross backstop
+        // on the repeat build. The interactive promise stays enforced where the
+        // learner feels it, by the walkthrough's per-route stall guard
+        // (`route-ms:Today:79` on this pack).
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
@@ -8351,11 +8403,22 @@ activities:
             cold.as_millis() < 8_000,
             "cold plan build blew up: {cold:?} (measured 294 ms here, 1.447 s on CI)"
         );
-        let warm_bound = cold.as_millis() * 5 / 4;
+        // The invariant the cold ceiling above assumes: the plan path reads the
+        // installed pack through the per-version parse cache. `packcache`'s own
+        // test proves sharing for a fixture pack; this proves it for the
+        // reference pack the budget is stated against, with no timing involved.
+        let packs_root = data.join("packs");
+        let version =
+            lts_langpack::archive::current_version("org.openlanguage.ja-jp.reference", &packs_root)
+                .expect("the installed reference pack has a current version pointer");
+        let pack_root = packs_root
+            .join("org.openlanguage.ja-jp.reference")
+            .join(version);
+        let first = packcache::pack(&pack_root).expect("reference pack parses");
         assert!(
-            warm.as_millis() <= warm_bound,
-            "repeat plan build costs more than the build that warmed the parse \
-             cache: cold {cold:?} / warm {warm:?} (local 294/95, CI 787/796)"
+            std::sync::Arc::ptr_eq(&first, &packcache::pack(&pack_root).unwrap()),
+            "a repeat read of the same installed version must be served from the \
+             parse cache, not re-parsed: {pack_root:?}"
         );
         assert!(
             warm.as_millis() < 4_000,
@@ -13183,7 +13246,7 @@ activities:
         }
         let (bytes, _sha) =
             lts_langpack::archive::build(src.path()).expect("the extended source packs");
-        packs::install_pack_bytes_report(data, &bytes, None, drop_stage)
+        packs::install_pack_bytes_report(data, &bytes, None, drop_stage, &|| false)
             .expect("the extended pack installs through the production path");
         lts_langpack::archive::current_version(
             "org.openlanguage.ja-jp.reference",

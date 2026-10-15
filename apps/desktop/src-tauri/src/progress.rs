@@ -15,7 +15,8 @@ pub struct Progress {
     pub operation: &'static str,
     /// What is being worked on: a pack or model id.
     pub subject: String,
-    /// The phase entered: `prepare`, `fetch`, `verify`, `install`, `record`.
+    /// The phase entered: `prepare`, `fetch`, `verify`, `install`, `record`,
+    /// or the terminal `cancelled` (an operation a cancel stopped).
     pub stage: &'static str,
     /// Genuine fraction of completed work, 0-100, or `None` when the engine
     /// does not know one.

@@ -233,6 +233,110 @@ describe("language panel", () => {
     });
     expect(withPercent).toContain("40%");
   });
+  it("shows measured download progress and never a number for an unmeasured phase", () => {
+    // The percentage is bytes the engine actually read over the size the
+    // catalog pinned; a phase the engine cannot measure names itself with
+    // no number at all.
+    const running = render({
+      progress: {
+        operation: "install-pack",
+        subject: "community.example.esperanto",
+        stage: "fetch",
+        percent: 40,
+      },
+    });
+    expect(running).toContain("Downloading the language pack — 40% done");
+    const unpacking = render({
+      progress: {
+        operation: "install-pack",
+        subject: "community.example.esperanto",
+        stage: "install",
+        percent: null,
+      },
+    });
+    expect(unpacking).not.toMatch(/\d+\s*%/);
+    expect(unpacking).toContain("Unpacking and checking the content");
+  });
+
+  it("offers cancel only while the engine can still honor it", () => {
+    for (const stage of ["fetch", "verify"]) {
+      const html = render({
+        progress: {
+          operation: "install-pack",
+          subject: "community.example.esperanto",
+          stage,
+          percent: stage === "fetch" ? 40 : null,
+        },
+      });
+      expect(html).toContain("Cancel install");
+    }
+    // Once the unpack has begun the install runs to completion; the button
+    // is absent then rather than pretending to work.
+    const unpacking = render({
+      progress: {
+        operation: "install-pack",
+        subject: "community.example.esperanto",
+        stage: "install",
+        percent: null,
+      },
+    });
+    expect(unpacking).not.toContain("Cancel install");
+  });
+
+  it("renders the cancelled state honestly: nothing installed, retry restarts the download", () => {
+    const html = render({
+      outcome: {
+        kind: "cancelled",
+        pack_id: "community.example.esperanto",
+        message: "install cancelled",
+      },
+    });
+    expect(html).toContain("Install of community.example.esperanto was cancelled.");
+    expect(html).toContain("Nothing was installed");
+    // No fake resume: the copy states the download starts over.
+    expect(html).toContain("downloads the whole pack again");
+    expect(html).toContain("does not continue where it stopped");
+    expect(html).not.toMatch(/resume/i);
+    expect(html).toContain("Install again");
+    expect(html).toContain('aria-live="polite"');
+  });
+
+  it("renders a failed install with the engine's reason and a retry affordance", () => {
+    const html = render({
+      outcome: {
+        kind: "failed",
+        pack_id: "community.example.esperanto",
+        message: "archive checksum does not match catalog entry",
+      },
+    });
+    expect(html).toContain('role="alert"');
+    expect(html).toContain("archive checksum does not match catalog entry");
+    expect(html).toContain("Try again");
+  });
+
+  it("ends a successful install with a receipt naming version, source, sha and declared capabilities", () => {
+    const html = render({
+      receipt: {
+        pack_id: "community.example.esperanto",
+        version: "2.2.0",
+        source_url: "https://github.com/example/eo/releases/download/v2.2.0/eo.lpk",
+        source_host: "github.com",
+        sha256: "a".repeat(64),
+        size_bytes: 3_200_000,
+        capabilities: ["reading", "writing"],
+      },
+    });
+    expect(html).toContain("community.example.esperanto");
+    expect(html).toContain("v2.2.0");
+    expect(html).toContain("github.com");
+    expect(html).toContain("https://github.com/example/eo/releases/download/v2.2.0/eo.lpk");
+    expect(html).toContain("a".repeat(64));
+    expect(html).toContain("3.1 MB");
+    // Only declared capabilities appear — the receipt cannot promise what
+    // the pack's manifest does not state.
+    expect(html).toContain("reading, writing");
+    expect(html).not.toContain("listening");
+  });
 
   it("names each installed pack in that pack's own direction (ADR-0029)", () => {
     // The panel lists several packs at once, so the active pack's direction

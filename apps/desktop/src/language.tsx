@@ -78,6 +78,28 @@ export interface PackClaims {
   postures: { kind: string; posture: string; count: number }[];
   provenance: { id: string; title: string; url: string; license: string; access: string }[];
 }
+/// INSTALL-UX-001: what a finished catalog install can prove. Every field
+/// is measured by the engine this run — the digest is the one that was
+/// verified against the fetched bytes, and `capabilities` are the keys the
+/// installed pack's own manifest declares true (never an invented list).
+export interface InstallReceipt {
+  pack_id: string;
+  version: string;
+  source_url: string;
+  source_host: string;
+  sha256: string;
+  size_bytes: number;
+  capabilities: string[];
+}
+
+/// How the last catalog install attempt ended, when it did not succeed.
+/// `message` is the engine's own failure reason, not a styled-over it.
+export interface InstallOutcome {
+  kind: "cancelled" | "failed";
+  pack_id: string;
+  message: string;
+}
+
 export interface LanguagePanelProps {
   installed: InstalledPack[];
   activeIds: string[];
@@ -94,7 +116,31 @@ export interface LanguagePanelProps {
   claims: PackClaims[] | null;
   /// K-62: the stage a long install reported, or null when nothing is running.
   progress?: EngineProgress | null;
+  /// The engine only honors a cancel during fetch and verify — once the
+  /// unpack has started it runs to completion (the store swap is atomic) —
+  /// so the cancel control appears exactly while the engine can act on it.
+  onCancelInstall?(): void;
+  /// The last install attempt that did not succeed, or null.
+  outcome?: InstallOutcome | null;
+  /// The receipt from the most recent successful catalog install, or null.
+  receipt?: InstallReceipt | null;
 }
+
+const CANCELLABLE_STAGES = ["fetch", "verify"];
+
+/// Plain-language names for the manifest `capabilities` keys
+/// (`schemas/language-pack-manifest.schema.json`). An unknown key still
+/// renders verbatim — the receipt must not silently drop what a pack declares.
+const CAPABILITY_LABELS: Record<string, string> = {
+  listening: "listening",
+  speaking: "speaking",
+  reading: "reading",
+  writing: "writing",
+  pronunciation_assessment: "pronunciation feedback",
+  prosody_assessment: "prosody feedback",
+  handwriting: "handwriting",
+  rtl: "right-to-left text",
+};
 
 const STATUS_LABELS: Record<string, string> = {
   live: "Community catalog is live.",
@@ -158,6 +204,8 @@ export async function readFileB64(file: File): Promise<string> {
 }
 
 export function LanguagePanel(p: LanguagePanelProps) {
+  const outcome = p.outcome ?? null;
+  const receipt = p.receipt ?? null;
   return (
     <section aria-label="Language packs">
       <h1>Language packs</h1>
@@ -174,10 +222,66 @@ export function LanguagePanel(p: LanguagePanelProps) {
       )}
       {p.progress && (
         // K-62: the learner watches the operation instead of wondering whether
-        // the button did anything. Only a stage the engine entered is named.
+        // the button did anything. Only a stage the engine entered is named,
+        // and the percentage only when the engine measured one.
         <p role="status" aria-live="polite" className="notice">
           {progressLine(p.progress)}
         </p>
+      )}
+      {p.progress &&
+        p.progress.operation === "install-pack" &&
+        CANCELLABLE_STAGES.includes(p.progress.stage) && (
+          // The engine can still stop this install, so the learner may ask
+          // it to. During unpacking this control is absent rather than a
+          // button that would do nothing.
+          <button type="button" className="btn btn--quiet" onClick={() => p.onCancelInstall?.()}>
+            Cancel install
+          </button>
+        )}
+      {outcome && (
+        <div
+          role={outcome.kind === "failed" ? "alert" : "status"}
+          aria-live="polite"
+          className={outcome.kind === "failed" ? "alert" : "notice"}
+        >
+          <p>
+            {outcome.kind === "cancelled"
+              ? // Honest about the limit: a cancelled download does not pick
+                // up where it stopped — retrying fetches the pack again.
+                `Install of ${outcome.pack_id} was cancelled. Nothing was installed, and installing again downloads the whole pack again — a cancelled download does not continue where it stopped.`
+              : `Installing ${outcome.pack_id} failed: ${outcome.message}`}
+          </p>
+          <button
+            type="button"
+            className="btn btn--primary"
+            onClick={() => outcome && p.onInstallCatalog(outcome.pack_id)}
+          >
+            {outcome.kind === "cancelled" ? "Install again" : "Try again"}
+          </button>
+        </div>
+      )}
+      {receipt && (
+        // A receipt, not a celebration: what was installed, from where, the
+        // digest that was verified, how many bytes arrived, and only what
+        // the pack's own manifest says it covers.
+        <section aria-label="Install receipt" className="receipt">
+          <p role="status">
+            Installed <strong>{receipt.pack_id}</strong> v{receipt.version} — this is what was
+            verified.
+          </p>
+          <ul className="meta-list">
+            <li>downloaded from: {receipt.source_host}</li>
+            <li>catalog entry: {receipt.source_url}</li>
+            <li>verified SHA-256: {receipt.sha256}</li>
+            <li>size downloaded: {megabytes(receipt.size_bytes)} MB</li>
+            <li>
+              capabilities declared by the pack:{" "}
+              {receipt.capabilities.length > 0
+                ? receipt.capabilities.map((c) => CAPABILITY_LABELS[c] ?? c).join(", ")
+                : "the pack declares no capabilities"}
+            </li>
+          </ul>
+        </section>
       )}
 
       <h2>Installed packs</h2>
