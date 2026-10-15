@@ -17,9 +17,14 @@ import {
   type SessionPlan,
   type GoalCard,
   GoalMap,
+  CanDoSummary,
   type WorldEnvironment,
   type NextGoalView,
   type FirstRunStep,
+  RUNNABLE_MODALITIES,
+  type SessionOutcomeView,
+  type SessionStatus,
+  type SessionView,
 } from "./home";
 import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./pronunciation";
 import { DictationPractice, type DictationResult, type DictationSentence } from "./dictation";
@@ -33,6 +38,8 @@ import {
   type SpeechModel,
   type DeviceTier,
   type AlignerStatus,
+  type InstallOutcome,
+  type InstallReceipt,
 } from "./language";
 import { WritingPractice, type WritingTaskView } from "./writing";
 import { PracticeRunner, type PracticeTaskView } from "./practice";
@@ -317,6 +324,8 @@ export function App() {
   const [catalogStatus, setCatalogStatus] = useState("no-catalog-url");
   const [audioMsg, setAudioMsg] = useState<string | null>(null);
   const [langError, setLangError] = useState<string | null>(null);
+  const [installOutcome, setInstallOutcome] = useState<InstallOutcome | null>(null);
+  const [installReceipt, setInstallReceipt] = useState<InstallReceipt | null>(null);
   const [alignerStatus, setAlignerStatus] = useState<AlignerStatus | null>(null);
   const [buildIdentity, setBuildIdentity] = useState<BuildIdentity | null>(null);
   const [speechModels, setSpeechModels] = useState<SpeechModel[]>([]);
@@ -353,6 +362,19 @@ export function App() {
   const [lesson, setLesson] = useState<LessonPlan | null>(null);
   const [lessonSeen, setLessonSeen] = useState(false);
   const [practiceRevealed, setPracticeRevealed] = useState(false);
+  // One bounded session over the plan the planner already produced. The
+  // queue is a snapshot taken when the learner begins, so "3 of 5" cannot
+  // drift when the plan is re-planned after each activity. It lives in a ref
+  // because the loop advances inside async handlers, and it is deliberately
+  // not persisted: a session is for this sitting.
+  const [session, setSession] = useState<SessionView | null>(null);
+  const [sessionOutcome, setSessionOutcome] = useState<SessionOutcomeView | null>(null);
+  const sessionQueueRef = useRef<{
+    items: PlannedItem[];
+    index: number;
+    done: number;
+    notRunnable: number;
+  } | null>(null);
   const [scenarioList, setScenarioList] = useState<ScenarioSummaryView[]>([]);
   const [scenarioActive, setScenarioActive] = useState<ScenarioView | null>(null);
   const [scenarioStep, setScenarioStep] = useState<ScenarioStepResult | null>(null);
@@ -453,11 +475,15 @@ export function App() {
   useEffect(() => {
     const inv = detectInvoke();
     if (!inv) return;
-    if (walkthroughRan) return;
-    walkthroughRan = true;
     void (async () => {
       const mode = (await inv("app_mode")) as { smoke: boolean };
       if (mode.smoke) {
+        // The headless walkthrough is a once-per-process act, and it belongs
+        // to the smoke branch alone: a StrictMode dev remount — or a test
+        // that mounts the app twice — must still reach the returning-learner
+        // resume below, instead of stranding it at the wizard.
+        if (walkthroughRan) return;
+        walkthroughRan = true;
         await inv("smoke_ack", { note: "home" });
         // POLISH-001: full-route walkthrough. Drive onboarding
         // deterministically (local profile + bundled default pack), then
@@ -886,15 +912,36 @@ export function App() {
 
   async function installCatalogPack(packId: string) {
     if (!inv) return;
+    setInstallOutcome(null);
+    setInstallReceipt(null);
+    setLangError(null);
     try {
-      await inv("install_catalog_pack", { packId });
-      setLangError(null);
+      const res = (await inv("install_catalog_pack", { packId })) as {
+        receipt: InstallReceipt | null;
+      } | null;
+      if (res?.receipt) setInstallReceipt(res.receipt);
     } catch (e) {
-      setLangError(String(e));
+      const reason = String(e).replace(/^install-catalog-pack failed:\s*/, "");
+      setInstallOutcome(
+        reason.includes("install cancelled")
+          ? { kind: "cancelled", pack_id: packId, message: reason }
+          : { kind: "failed", pack_id: packId, message: reason },
+      );
     } finally {
       setEngineProgress(null);
     }
     await refreshLanguages();
+  }
+
+  // Cancel asks the engine to stop the transfer of the pack whose progress
+  // is on screen; the engine answers through the normal failure path with
+  // its `install cancelled` reason, so the outcome shows as cancelled —
+  // never as a client-side guess that nothing happened.
+  async function cancelInstall() {
+    if (!inv) return;
+    const subject = engineProgress?.subject;
+    if (!subject) return;
+    await inv("cancel_pack_install", { packId: subject }).catch(() => undefined);
   }
 
   async function importPack(dataB64: string) {
@@ -1715,6 +1762,103 @@ export function App() {
         setPracticeError(`The plan could not be refreshed: ${String(e)}`);
       }
     }
+    // A session keeps working the activities it started with; the refreshed
+    // plan is read the next time Home is, not re-selected mid-session.
+    if (sessionQueueRef.current) void advanceSession(1);
+  }
+
+  /// An activity belongs to a session only if this build has a practice
+  /// screen for it: the hub's verb table is that guarantee, and a saved word
+  /// opens a review card instead of a runner. Anything else is named in the
+  /// session summary rather than silently dropped.
+  function isSessionRunnable(item: PlannedItem): boolean {
+    return item.reason !== "saved-review" && RUNNABLE_MODALITIES[item.modality] !== undefined;
+  }
+
+  function publishSession(status: SessionStatus | null) {
+    const q = sessionQueueRef.current;
+    setSession(
+      q && status
+        ? { status, total: q.items.length, done: q.done, notRunnable: q.notRunnable }
+        : null,
+    );
+  }
+
+  async function startSession() {
+    const runnable = plan.items.filter(isSessionRunnable);
+    const notRunnable = plan.items.length - runnable.length;
+    if (runnable.length === 0) {
+      // Nothing this build can run: name that instead of opening a loop.
+      setSessionOutcome({ done: 0, total: plan.items.length, reason: "finished", notRunnable });
+      return;
+    }
+    const first = runnable[0];
+    if (!first) return; // the empty case above already covers this
+    sessionQueueRef.current = { items: runnable, index: 0, done: 0, notRunnable };
+    setSessionOutcome(null);
+    publishSession("running");
+    await openPractice(first);
+  }
+
+  /// `counted` is the activity that just ended. When the snapshot runs out
+  /// the session closes with a plain summary — no reward language, and no
+  /// claim that an activity the learner never did was finished.
+  async function advanceSession(counted: number) {
+    const q = sessionQueueRef.current;
+    if (!q) return;
+    q.done += counted;
+    q.index += 1;
+    const next = q.items[q.index];
+    if (next) {
+      publishSession("running");
+      await openPractice(next);
+      return;
+    }
+    const outcome: SessionOutcomeView = {
+      done: q.done,
+      total: q.items.length + q.notRunnable,
+      reason: "finished",
+      notRunnable: q.notRunnable,
+    };
+    sessionQueueRef.current = null;
+    setSession(null);
+    setSessionOutcome(outcome);
+  }
+
+  function closeSession(reason: "stopped") {
+    const q = sessionQueueRef.current;
+    if (!q) return;
+    const outcome: SessionOutcomeView = {
+      done: q.done,
+      total: q.items.length + q.notRunnable,
+      reason,
+      notRunnable: q.notRunnable,
+    };
+    sessionQueueRef.current = null;
+    setSession(null);
+    setSessionOutcome(outcome);
+    setPracticeTarget(null);
+    setPracticeTask(null);
+    setLesson(null);
+    setLessonSeen(false);
+  }
+
+  function pauseSession() {
+    if (!sessionQueueRef.current) return;
+    setPracticeTarget(null);
+    setPracticeTask(null);
+    setLesson(null);
+    setLessonSeen(false);
+    publishSession("paused");
+  }
+
+  async function resumeSession() {
+    const q = sessionQueueRef.current;
+    if (!q) return;
+    const current = q.items[q.index];
+    if (!current) return; // an exhausted queue has already closed the session
+    publishSession("running");
+    await openPractice(current);
   }
 
   // K-15: placement — low-stakes diagnosis per pack assessment. Each
@@ -2977,6 +3121,7 @@ export function App() {
           {progressLoading && <p className="empty">Loading progress…</p>}
           {!progressError && (
             <>
+              <CanDoSummary goals={goals} rows={progress} nextGoal={nextGoal} />
               <GoalMap goals={goals} />
               <ProgressView rows={progress} />
             </>
@@ -3058,6 +3203,9 @@ export function App() {
             onSelectStressMode={(m) => void setStressMode(m)}
             claims={claims}
             progress={engineProgress}
+            outcome={installOutcome}
+            receipt={installReceipt}
+            onCancelInstall={() => void cancelInstall()}
           />
           <Settings
             microphoneEnabled={micEnabled}
@@ -3150,6 +3298,13 @@ export function App() {
                 audioError={practiceAudioError}
                 onChoose={(i) => void choosePractice(i)}
                 onNext={() => void finishPractice()}
+                nextLabel={
+                  session
+                    ? session.total - session.done > 1
+                      ? "Continue to next activity"
+                      : "Finish session"
+                    : undefined
+                }
                 onPlayAudio={playPracticeAudio}
                 heading={
                   practiceTarget.modality === "orthography-recognition"
@@ -3174,6 +3329,26 @@ export function App() {
               />
             </>
           )}
+          {session ? (
+            <div className="btn-row">
+              <button
+                type="button"
+                className="btn btn--quiet"
+                data-session-pause
+                onClick={pauseSession}
+              >
+                Pause session
+              </button>
+              <button
+                type="button"
+                className="btn btn--quiet"
+                data-session-stop
+                onClick={() => closeSession("stopped")}
+              >
+                Stop session
+              </button>
+            </div>
+          ) : null}
         </>
       ) : practiceTarget ? (
         <section aria-label="Practice">
@@ -3204,6 +3379,12 @@ export function App() {
           nextGoal={nextGoal}
           firstRunSteps={firstRunSteps}
           onStart={(item) => void openPractice(item)}
+          onStartSession={() => void startSession()}
+          session={session}
+          sessionOutcome={sessionOutcome}
+          onResumeSession={() => void resumeSession()}
+          onStopSession={() => closeSession("stopped")}
+          onDismissSessionSummary={() => setSessionOutcome(null)}
         />
       )}
     </AppShell>

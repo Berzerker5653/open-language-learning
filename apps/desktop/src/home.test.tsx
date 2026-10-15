@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
-import { GoalMap, Home, ProgressView, type PlannedItem, type SessionPlan } from "./home";
+import {
+  CanDoSummary,
+  GoalMap,
+  Home,
+  ProgressView,
+  type PlannedItem,
+  type SessionPlan,
+} from "./home";
 
 const plan: SessionPlan = {
   items: [
@@ -485,5 +492,164 @@ describe("goal map", () => {
   it("is honest when no pack goals exist", () => {
     const html = renderToStaticMarkup(<GoalMap goals={[]} />);
     expect(html).toContain("No goals are available yet");
+  });
+});
+
+describe("one bounded session on Home", () => {
+  const base = {
+    displayName: "Hunter",
+    plan,
+    activeBudget: 5,
+    onBudget: () => {},
+    onStart: () => {},
+  };
+
+  it("offers one begin action that names the scope and the exit", () => {
+    const html = renderToStaticMarkup(<Home {...base} onStartSession={() => {}} />);
+    expect(html).toContain("data-session-begin");
+    expect(html).toContain("3 activities, about 2 minutes");
+    expect(html).toContain("You can stop at any point");
+    expect(html).toContain("what you finish is saved");
+    // The queue stays reachable, but as the alternative to the session.
+    expect(html).toContain("Or do one activity on its own:");
+    expect(html).toContain('class="plan-item"');
+  });
+
+  it("offers no begin action when there is nothing to begin", () => {
+    const empty: SessionPlan = { ...plan, items: [], total_seconds: 0 };
+    const html = renderToStaticMarkup(<Home {...base} plan={empty} onStartSession={() => {}} />);
+    expect(html).not.toContain("data-session-begin");
+    expect(html).toContain("Nothing is due right now");
+  });
+
+  it("says what a paused session has left, and offers the way back in", () => {
+    const html = renderToStaticMarkup(
+      <Home
+        {...base}
+        session={{ status: "paused", total: 3, done: 2, notRunnable: 0 }}
+        onResumeSession={() => {}}
+        onStopSession={() => {}}
+      />,
+    );
+    expect(html).toContain("Session paused — 1 left to do.");
+    expect(html).toContain("Resume session");
+    expect(html).toContain("Stop session");
+    expect(html).not.toContain("data-session-begin");
+  });
+
+  it("keeps a running session visible when the learner navigates away", () => {
+    const html = renderToStaticMarkup(
+      <Home
+        {...base}
+        session={{ status: "running", total: 3, done: 1, notRunnable: 0 }}
+        onResumeSession={() => {}}
+        onStopSession={() => {}}
+      />,
+    );
+    expect(html).toContain("Session in progress — 1 of 3 done.");
+    expect(html).toContain("Go back to it");
+  });
+
+  it("finishes with counts, not rewards, and names what this build could not run", () => {
+    const html = renderToStaticMarkup(
+      <Home
+        {...base}
+        sessionOutcome={{ done: 2, total: 3, reason: "finished", notRunnable: 1 }}
+        onDismissSessionSummary={() => {}}
+      />,
+    );
+    expect(html).toContain("Session finished — 2 of 3 activities.");
+    expect(html).toContain("1 planned activity has no practice screen in this build yet.");
+    expect(html).toMatch(/class="session-summary"/);
+    // No streak/points/badge surface is introduced by the session (ADR-0002).
+    expect(html).not.toMatch(/streak|points|badge|🔥/i);
+  });
+
+  it("says plainly that a stopped session left work on the plan", () => {
+    const html = renderToStaticMarkup(
+      <Home
+        {...base}
+        sessionOutcome={{ done: 1, total: 3, reason: "stopped", notRunnable: 0 }}
+        onDismissSessionSummary={() => {}}
+      />,
+    );
+    expect(html).toContain("Session stopped after 1 of 3 activities.");
+    expect(html).toContain("What you finished is saved. The rest is still on your plan.");
+    expect(html).not.toContain("no practice screen in this build");
+  });
+});
+
+describe("what you can do now", () => {
+  const goal = {
+    pack_id: "org.openlanguage.ja-jp.reference",
+    id: "org.openlanguage.ja-jp.reference.goal.family",
+    description: "Talk about family",
+    band: "on-ramp",
+    review_status: "draft",
+    modalities: ["recall-meaning"],
+    assessed: true,
+    locked: false,
+    prerequisites: [],
+    dimensions: [
+      {
+        modality: "recall-meaning",
+        state: "independent",
+        concepts_total: 1,
+        concepts_seen: 1,
+        exemplar: "ja.lex.demo.obaasan",
+        best_state: "independent",
+      },
+    ],
+  };
+
+  it("names the can-do claim and the fading skills, and the next step", () => {
+    const html = renderToStaticMarkup(
+      <CanDoSummary
+        goals={[goal]}
+        rows={[
+          {
+            content_id: "ja.lex.demo.obaasan",
+            dimension: "recall-meaning",
+            state: "independent",
+            confidence: 0.8,
+            needs_refresh: true,
+          },
+        ]}
+        nextGoal={{
+          pack_id: goal.pack_id,
+          goal_id: goal.id,
+          description: "Greet someone and say who you are",
+          band: "on-ramp",
+        }}
+      />,
+    );
+    expect(html).toContain("Talk about family");
+    // The modality is named as the action, not as the internal vocabulary.
+    expect(html).toContain("used in practice: Recall");
+    expect(html).toContain("1 skill is getting old");
+    expect(html).toContain("Next up: ");
+    expect(html).toContain("<strong>Greet someone and say who you are</strong>");
+    expect(html).toContain("capability state, not an activity diary");
+    // The headline answer is the pack's text; ids stay in the detail table.
+    expect(html).not.toContain("<h1>org.openlanguage");
+  });
+
+  it("makes no can-do claim the evidence does not support", () => {
+    const html = renderToStaticMarkup(<CanDoSummary goals={[]} rows={[]} nextGoal={null} />);
+    expect(html).toContain("Nothing has been used well enough yet");
+    expect(html).toContain("Nothing you have learned is close to being forgotten.");
+    expect(html).toContain("This pack declares no learning path yet");
+  });
+
+  it("does not claim a goal is usable while its evidence is only unseen", () => {
+    const unseen = {
+      ...goal,
+      dimensions: [
+        { ...goal.dimensions[0]!, state: "unseen", concepts_seen: 0, best_state: "unseen" },
+      ],
+    };
+    const html = renderToStaticMarkup(<CanDoSummary goals={[unseen]} rows={[]} nextGoal={null} />);
+    expect(html).toContain("Nothing has been used well enough yet");
+    expect(html).not.toContain("Talk about family");
   });
 });

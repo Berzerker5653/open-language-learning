@@ -190,11 +190,53 @@ Use bounded asynchronous queues, cancellation/timeouts, and recoverable provider
 
 A language-pack install or speech-model download runs long enough that a silent window reads as a dead button. The native side therefore reports the phase it is entering on one Tauri event channel, `engine-progress`, carrying `{operation, subject, stage, percent}`:
 
-- `stage` is a phase the engine really enters: `prepare` (build the archive from pack source files), `fetch` (download), `verify` (check it against the hash the catalog pinned), `install` (unpack and validate through the pack gate), `record` (write the install or model record). A stage is emitted before the work it names, a stage that never ran is never announced, and a failed `verify` ends the sequence there — the learner is never told content is being unpacked after the checksum already rejected it.
-- `percent` is present only when a fraction of finished work is genuinely known. Model manifests pin every file's size, so the share of bytes already fetched and verified is exact; it does not move inside one in-flight file, because that would be an estimate of work in flight. Pack installs have no such fraction and report none.
+- `stage` is a phase the engine really enters: `prepare` (build the archive from pack source files), `fetch` (download), `verify` (check it against the hash the catalog pinned), `install` (unpack and validate through the pack gate), `record` (write the install or model record), or the terminal `cancelled` (an operation a cancel stopped). A stage is emitted before the work it names, a stage that never ran is never announced, a failed `verify` ends the sequence there — the learner is never told content is being unpacked after the checksum already rejected it — and a cancel announces `cancelled` instead of pretending a later phase ran.
+- `percent` is present only when a fraction of finished work is genuinely known. Model manifests pin every file's size, so the share of bytes already fetched and verified is exact. A pack download's pinned catalog entry pins the archive size, so the fetch percent is bytes actually read over that pin: it advances only on measured bytes, never within one in-flight read beyond what arrived, and never reaches 100 unless the pinned bytes did. `verify`, `install` and `record` are single-pass with no known fraction and report none — naming the phase instead of inventing a number.
 - The renderer maps stage names to plain-language copy in an `aria-live="polite"` line, shows a percentage only when the engine sent one, and never advances an indicator on a timer. Losing the event channel is never an operation error: progress is a nicety, the operation still reports its own failure.
 
-The contract is tested on both sides: the desktop crate pins the stage sequence for each path (catalog install, local import, model install with its real percentages) and the payload field names, because the renderer reads them by name; the desktop smoke walkthrough asserts the renderer actually received the pack-install stages over the live channel.
+The contract is tested on both sides: the desktop crate pins the stage sequence for each path (catalog install, local import, model install with its real percentages), the bytes-measured fetch fraction, the cancel boundaries, the receipt payload and the event field names, because the renderer reads them by name; the desktop smoke walkthrough asserts the renderer actually received the pack-install stages over the live channel.
+
+### Cancel, retry and the install receipt
+
+`cancel_pack_install(pack_id)` sets a per-operation flag the running install consults at every read-chunk boundary of the download and at every phase boundary before it verifies or unpacks; the control is offered in the UI only while the engine can still honor it. A cancelled install leaves the store exactly as it was — unpacking is atomic into `<data>/packs/<pack-id>/<version>/`, so a half-installed version is never visible — and fails with the fixed reason `install cancelled`. The renderer turns that into a distinct state from a failure: nothing was installed, and because partial-byte resume is not implemented, installing again re-downloads from the start; the copy says so. Any failed install (cancel or otherwise) keeps the install button as a retry that re-runs the whole operation, and the failure reason is shown verbatim, never styled over.
+
+A successful catalog install returns an `InstallReceipt` with the installed record: pack id, version, the catalog entry's source URL and host, the SHA-256 computed over the fetched bytes and matched against the pin, the size that actually arrived, and the `capabilities` keys the installed manifest itself declares true — an absent manifest yields nothing, and the receipt can never grant a capability the pack did not declare. The renderer shows it as a receipt under the progress region.
+
+## The plan is one bounded session, and Progress leads with can-do
+
+Decided 2026-10-15 (GUIDED-SESSION-001, CANDO-PROGRESS-001). Both are renderer
+contracts; the planner and the mastery policy are untouched.
+
+**Home offers one begin action for the whole plan**, not a launcher per task.
+`home.tsx` renders "Start today's plan — N activities, about M minutes" with
+the exit named beside it ("You can stop at any point: what you finish is
+saved, and the rest stays on your plan"). `App.tsx` (`startSession`,
+`advanceSession`, `pauseSession`, `resumeSession`, `closeSession`) walks a
+snapshot of the plan taken when the learner begins, so the `practice_plan`
+re-plan that follows every activity cannot move the goalposts under "3 of 5".
+Pause leaves the runner and the hub states what is left; Resume reopens the
+interrupted activity. The end reports plain counts — "Session finished — 2 of
+2 activities", or "Session stopped after 0 of 2 activities. The rest is still
+on your plan." — and activities this build has no practice screen for are
+named as such and never counted as done. The per-activity buttons stay, under
+"Or do one activity on its own": the queue is demoted, not removed. No reward
+surface appears anywhere in the flow (ADR-0002). A session is for one run of
+the app: it is not persisted across restarts, and no copy claims otherwise.
+
+**Progress answers in the learner's order.** `CanDoSummary` (same file) renders
+what the learner can do now — the pack's own goal text for the modalities whose
+engine state is `supported` or `independent` — then what changed (the
+scheduler's own `needs_refresh` flag, not an invented diary), then what to do
+next (the pack's next declared goal), each abstaining instead of guessing.
+Internal ids, confidence, and mastery labels remain below it in `ProgressView`
+under a heading that says they are detail. The goal map and the detail table
+lost their `<h1>`s so the page has exactly one heading at the top, which the
+accessibility audit asserts.
+
+**The headless walkthrough guard is branch-local.** The boot effect's
+once-per-process `walkthroughRan` flag now guards only the smoke branch, so a
+StrictMode dev remount still reaches the returning-profile resume instead of
+being stranded at the wizard.
 
 ## Installed pack versions are immutable, and the app relies on that
 

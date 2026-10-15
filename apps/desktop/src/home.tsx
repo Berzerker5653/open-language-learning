@@ -57,6 +57,28 @@ export interface FirstRunStep {
   goal_id: string | null;
 }
 
+/**
+ * One bounded session over the plan. Presentational contract only: App owns
+ * the loop, Home renders what it is told. `total` is fixed when the session
+ * begins, so "N of M" stays honest even when the plan refreshes underneath.
+ */
+export type SessionStatus = "running" | "paused";
+
+export interface SessionView {
+  status: SessionStatus;
+  total: number;
+  done: number;
+  /** Planned activities this build cannot run; never counted as done. */
+  notRunnable: number;
+}
+
+export interface SessionOutcomeView {
+  done: number;
+  total: number;
+  reason: "finished" | "stopped";
+  notRunnable: number;
+}
+
 export const BUDGET_PRESETS = [5, 10, 20, 30];
 
 const REASON_LABELS: Record<PlannedItem["reason"], string> = {
@@ -93,7 +115,7 @@ const FIRST_RUN_MAX = 3;
  * (apps/desktop/src-tauri/src/lib.rs); the verb is what the learner will
  * actually do, so the button says so instead of a generic "Start".
  */
-const RUNNABLE_MODALITIES: Record<string, string> = {
+export const RUNNABLE_MODALITIES: Record<string, string> = {
   "recall-meaning": "Recall",
   "comprehension-listening": "Listen",
   "phonological-discrimination": "Hear the difference",
@@ -135,6 +157,15 @@ export interface HomeProps {
   /// K-66: the first-run steps from `first_run_steps`: pack-declared
   /// labels only. Empty, or not loaded yet, renders no section.
   firstRunSteps?: FirstRunStep[];
+  /// One begin action for the whole plan; the per-activity buttons below it
+  /// stay available but secondary.
+  onStartSession?(): void;
+  session?: SessionView | null;
+  sessionOutcome?: SessionOutcomeView | null;
+  onPauseSession?(): void;
+  onResumeSession?(): void;
+  onStopSession?(): void;
+  onDismissSessionSummary?(): void;
 }
 
 export function Home(p: HomeProps) {
@@ -202,67 +233,132 @@ export function Home(p: HomeProps) {
       <p className="plan-summary">
         {p.plan.items.length} activities · about {Math.round(p.plan.total_seconds / 60)} minutes
       </p>
+      {p.sessionOutcome ? (
+        <section aria-label="Session summary" className="session-summary">
+          <p role="status">
+            {p.sessionOutcome.reason === "stopped"
+              ? `Session stopped after ${p.sessionOutcome.done} of ${p.sessionOutcome.total} activities.`
+              : `Session finished — ${p.sessionOutcome.done} of ${p.sessionOutcome.total} activities.`}
+          </p>
+          <p className="meta">
+            {p.sessionOutcome.reason === "stopped"
+              ? "What you finished is saved. The rest is still on your plan."
+              : "Everything the session could run, it ran."}
+            {p.sessionOutcome.notRunnable > 0
+              ? ` ${p.sessionOutcome.notRunnable} planned activity has no practice screen in this build yet.`
+              : ""}
+          </p>
+          {p.onDismissSessionSummary ? (
+            <div className="btn-row">
+              <button type="button" className="btn btn--quiet" onClick={p.onDismissSessionSummary}>
+                Back to the plan
+              </button>
+            </div>
+          ) : null}
+        </section>
+      ) : p.session ? (
+        <section aria-label="Today's session" className="session-panel">
+          <p role="status">
+            {p.session.status === "running"
+              ? `Session in progress — ${p.session.done} of ${p.session.total} done.`
+              : `Session paused — ${p.session.total - p.session.done} left to do.`}
+          </p>
+          <div className="btn-row">
+            {p.onResumeSession ? (
+              <button type="button" className="btn btn--primary" onClick={p.onResumeSession}>
+                {p.session.status === "running" ? "Go back to it" : "Resume session"}
+              </button>
+            ) : null}
+            {p.onStopSession ? (
+              <button type="button" className="btn btn--quiet" onClick={p.onStopSession}>
+                Stop session
+              </button>
+            ) : null}
+          </div>
+        </section>
+      ) : p.plan.items.length > 0 && p.onStartSession ? (
+        <div className="session-begin">
+          <button
+            type="button"
+            className="btn btn--primary"
+            data-session-begin
+            onClick={p.onStartSession}
+          >
+            Start today's plan — {p.plan.items.length} activities, about{" "}
+            {Math.round(p.plan.total_seconds / 60)} minutes
+          </button>
+          <p className="meta">
+            One activity at a time. You can stop at any point: what you finish is saved, and the
+            rest stays on your plan.
+          </p>
+        </div>
+      ) : null}
       {p.plan.items.length === 0 ? (
         <p className="empty">
           Nothing is due right now. Come back when reviews are due, or explore new material.
         </p>
       ) : (
-        PLAN_KIND_ORDER.map((kind) => {
-          const items = p.plan.items.filter((item) => item.kind === kind);
-          if (items.length === 0) return null;
-          return (
-            <section key={kind} className="plan-group" aria-label={KIND_LABELS[kind]}>
-              <h2>{KIND_LABELS[kind]}</h2>
-              {kind === "introduction" ? (
-                <p>
-                  <small>Nothing is recorded until you do one of these.</small>
-                </p>
-              ) : null}
-              <ul className="plan-list">
-                {items.map((item) => {
-                  const verb = RUNNABLE_MODALITIES[item.modality];
-                  const label = (
-                    <>
-                      <span className="plan-reason">{REASON_LABELS[item.reason]}</span>
-                      {item.surface ? (
-                        <PackText tag="strong" className="plan-surface">
-                          {item.surface}
-                        </PackText>
-                      ) : (
-                        <code>{item.content_id}</code>
-                      )}
-                      {item.gloss && <LatinText>{item.gloss}</LatinText>}
-                    </>
-                  );
-                  return (
-                    <li key={item.item_id}>
-                      {p.onStart && verb ? (
-                        <button
-                          type="button"
-                          className="plan-item"
-                          onClick={() => p.onStart!(item)}
-                        >
-                          {label}
-                          <span className="meta">
-                            {verb} · ~{item.est_seconds}s
-                          </span>
-                        </button>
-                      ) : (
-                        <>
-                          {label}
-                          <span className="meta">
-                            {item.modality}, ~{item.est_seconds}s
-                            {p.onStart ? " — no practice runner for this yet" : ""}
-                          </span>
-                        </>
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
-            </section>
-          );
-        })
+        <>
+          <p className="meta plan-secondary">
+            <small>Or do one activity on its own:</small>
+          </p>
+          {PLAN_KIND_ORDER.map((kind) => {
+            const items = p.plan.items.filter((item) => item.kind === kind);
+            if (items.length === 0) return null;
+            return (
+              <section key={kind} className="plan-group" aria-label={KIND_LABELS[kind]}>
+                <h2>{KIND_LABELS[kind]}</h2>
+                {kind === "introduction" ? (
+                  <p>
+                    <small>Nothing is recorded until you do one of these.</small>
+                  </p>
+                ) : null}
+                <ul className="plan-list">
+                  {items.map((item) => {
+                    const verb = RUNNABLE_MODALITIES[item.modality];
+                    const label = (
+                      <>
+                        <span className="plan-reason">{REASON_LABELS[item.reason]}</span>
+                        {item.surface ? (
+                          <PackText tag="strong" className="plan-surface">
+                            {item.surface}
+                          </PackText>
+                        ) : (
+                          <code>{item.content_id}</code>
+                        )}
+                        {item.gloss && <LatinText>{item.gloss}</LatinText>}
+                      </>
+                    );
+                    return (
+                      <li key={item.item_id}>
+                        {p.onStart && verb ? (
+                          <button
+                            type="button"
+                            className="plan-item"
+                            onClick={() => p.onStart!(item)}
+                          >
+                            {label}
+                            <span className="meta">
+                              {verb} · ~{item.est_seconds}s
+                            </span>
+                          </button>
+                        ) : (
+                          <>
+                            {label}
+                            <span className="meta">
+                              {item.modality}, ~{item.est_seconds}s
+                              {p.onStart ? " — no practice runner for this yet" : ""}
+                            </span>
+                          </>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </section>
+            );
+          })}
+        </>
       )}
       {p.nextGoal === undefined ? null : p.nextGoal === null ? (
         <p className="empty next-goal-none">
@@ -312,6 +408,79 @@ export interface ProgressRow {
   confidence: number;
   needs_refresh: boolean;
 }
+/**
+ * Progress answers three questions before it shows any numbers: what the
+ * learner can do now, what changed, and what to do next. Every line is derived
+ * from what the engine already reports — the pack's own goal text, the
+ * per-modality capability states, and the scheduler's own `needs_refresh` flag
+ * — and the panel abstains rather than inventing a narrative the engine cannot
+ * support (ADR-0020 §1). Ids, confidence, and mastery labels stay below it, as
+ * detail.
+ */
+const CAN_DO_STATES = ["independent", "supported"];
+
+export function CanDoSummary(p: {
+  goals: GoalCard[];
+  rows: ProgressRow[];
+  nextGoal?: NextGoalView | null;
+}) {
+  const canDo = p.goals
+    .map((g) => ({
+      goal: g,
+      modalities: g.dimensions
+        .filter((d) => CAN_DO_STATES.includes(d.best_state))
+        .map((d) => RUNNABLE_MODALITIES[d.modality] ?? d.modality),
+    }))
+    .filter((entry) => entry.modalities.length > 0);
+  const fading = p.rows.filter((row) => row.needs_refresh);
+  return (
+    <section aria-label="What you can do now" className="cando">
+      <h1>What you can do now</h1>
+      {canDo.length === 0 ? (
+        <p className="empty">
+          Nothing has been used well enough yet for this app to say you can do it. That claim comes
+          from practice, not from time spent here.
+        </p>
+      ) : (
+        <ul className="cando-list">
+          {canDo.map(({ goal, modalities }) => (
+            <li key={goal.id} data-goal={goal.id}>
+              <PackText tag="strong">{goal.description}</PackText>
+              <span className="meta"> used in practice: {modalities.join(", ")}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+      <h2>What changed</h2>
+      {fading.length === 0 ? (
+        <p className="meta">Nothing you have learned is close to being forgotten.</p>
+      ) : (
+        <p className="meta">
+          {fading.length} {fading.length === 1 ? "skill is" : "skills are"} getting old — the
+          scheduler wants them reviewed before they fade.
+        </p>
+      )}
+      <p className="meta">
+        <small>
+          This is what the recorded evidence says today; the app keeps capability state, not an
+          activity diary.
+        </small>
+      </p>
+      <h2>What to do next</h2>
+      {p.nextGoal === undefined ? null : p.nextGoal === null ? (
+        <p className="meta">
+          This pack declares no learning path yet, so there is no next step to name. Choose one
+          under Settings → Language packs.
+        </p>
+      ) : (
+        <p className="meta next-goal" data-goal={p.nextGoal.goal_id}>
+          Next up: <strong>{p.nextGoal.description}</strong> — the plan names the activities that
+          lead there.
+        </p>
+      )}
+    </section>
+  );
+}
 
 export function ProgressView({ rows }: { rows: ProgressRow[] }) {
   const byContent = new Map<string, ProgressRow[]>();
@@ -322,8 +491,11 @@ export function ProgressView({ rows }: { rows: ProgressRow[] }) {
   }
   return (
     <section aria-label="Progress">
-      <h1>Capability progress</h1>
-      <p>Each skill grows independently — reading does not imply speaking.</p>
+      <h2>Recorded detail</h2>
+      <p>
+        The numbers behind those answers: internal ids, confidence, and mastery labels. Each skill
+        grows independently — reading does not imply speaking.
+      </p>
       {rows.length === 0 ? (
         <p className="empty">No evidence yet. Practice to see capability differences here.</p>
       ) : (
@@ -444,7 +616,7 @@ export function GoalMap({ goals }: { goals: GoalCard[] }) {
   }
   return (
     <section aria-label="Goal map">
-      <h1>Capabilities you are building</h1>
+      <h2>Capabilities you are building</h2>
       <p>
         <small>
           Each goal grows per modality from what you can actually do — reading does not imply

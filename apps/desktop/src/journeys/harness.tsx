@@ -683,6 +683,56 @@ export class LearnerEngine {
         p.events += 1;
         return { correct, correct_choice: w ? w.choices[w.answer] : "" };
       }
+      case "progress_summary": {
+        const p = this.profile(args.profileId);
+        const pack = this.activePack(p);
+        // The same row shape the engine sends (lib.rs `progress_summary`): one
+        // row per scheduled item's dimension, with the scheduler's own
+        // `needs_refresh` flag. The due review row is flagged as fading so the
+        // Progress page has a real change signal to report, not a made-up one.
+        return pack.schedule.map((s, i) => ({
+          content_id: s.content_id,
+          dimension: s.modality,
+          state: s.kind === "introduction" ? "unseen" : "independent",
+          confidence: s.kind === "introduction" ? 0 : 0.8,
+          needs_refresh: s.reason === "due-review" && i === 1,
+        }));
+      }
+      case "goal_map": {
+        const p = this.profile(args.profileId);
+        const pack = this.activePack(p);
+        // One card per goal the pack's own schedule names, in the engine's
+        // `GoalMapView` shape. Descriptions are pack display strings; the
+        // per-modality state is the fake's capability answer for that goal.
+        const text: Record<string, string> = {
+          greetings: "Greet someone and say who you are",
+          family: "Talk about family",
+        };
+        const names = [...new Set(pack.schedule.map((s) => s.goal))];
+        return names.map((goal) => {
+          const dims = pack.schedule.filter((s) => s.goal === goal);
+          const reached = dims.some((s) => s.kind !== "introduction");
+          return {
+            pack_id: pack.id,
+            id: `${pack.id}.goal.${goal}`,
+            description: text[goal] ?? goal,
+            band: "on-ramp",
+            review_status: "draft",
+            modalities: dims.map((s) => s.modality),
+            assessed: reached,
+            locked: false,
+            prerequisites: [],
+            dimensions: dims.map((s) => ({
+              modality: s.modality,
+              state: reached ? "independent" : "unseen",
+              concepts_total: dims.length,
+              concepts_seen: reached ? dims.length : 0,
+              exemplar: reached ? (s.content_id ?? null) : null,
+              best_state: reached ? "independent" : "unseen",
+            })),
+          };
+        });
+      }
       case "writing_task": {
         const pack = this.activePack(this.profile(args.profileId));
         return pack.writing;

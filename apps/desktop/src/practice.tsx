@@ -54,6 +54,9 @@ export interface PracticeRunnerProps {
   heading?: string;
   onChoose(index: number): void;
   onNext(): void;
+  /// Session label for the graded follow-up action; the default is the
+  /// single-activity wording.
+  nextLabel?: string;
   onPlayAudio?(): void;
   onReveal?(): void;
   /// K-41: highlight U+0301-stressed vowels in readings (display-only).
@@ -183,7 +186,7 @@ export function PracticeRunner(p: PracticeRunnerProps) {
       {p.graded && (
         <div className="btn-row">
           <button type="button" className="btn btn--primary" onClick={p.onNext}>
-            Back to plan
+            {p.nextLabel ?? "Back to plan"}
           </button>
         </div>
       )}

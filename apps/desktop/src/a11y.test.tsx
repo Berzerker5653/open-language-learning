@@ -6,7 +6,7 @@
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 import { AppShell } from "@openlang/ui";
-import { Home, ProgressView, type SessionPlan } from "./home";
+import { CanDoSummary, Home, ProgressView, type SessionPlan } from "./home";
 import { PracticeRunner, type PracticeRunnerProps } from "./practice";
 import { ScenarioPanel, type ScenarioPanelProps, type ScenarioView } from "./scenario";
 import { PronunciationPractice, EMPTY_PITCH } from "./pronunciation";
@@ -159,20 +159,36 @@ const surfaces: Record<string, string> = {
       activeBudget={5}
       onBudget={() => {}}
       onStart={() => {}}
+      onStartSession={() => {}}
     />,
   ),
   progress: renderToStaticMarkup(
-    <ProgressView
-      rows={[
-        {
-          content_id: "ja.lex.demo.a",
-          dimension: "recall-meaning",
-          state: "supported",
-          confidence: 0.6,
-          needs_refresh: false,
-        },
-      ]}
-    />,
+    <>
+      <CanDoSummary
+        goals={[]}
+        rows={[
+          {
+            content_id: "ja.lex.demo.a",
+            dimension: "recall-meaning",
+            state: "supported",
+            confidence: 0.6,
+            needs_refresh: false,
+          },
+        ]}
+        nextGoal={null}
+      />
+      <ProgressView
+        rows={[
+          {
+            content_id: "ja.lex.demo.a",
+            dimension: "recall-meaning",
+            state: "supported",
+            confidence: 0.6,
+            needs_refresh: false,
+          },
+        ]}
+      />
+    </>,
   ),
   practice: renderToStaticMarkup(<PracticeRunner {...practice} />),
   hub: renderToStaticMarkup(<PracticeHub onOpen={() => {}} />),
