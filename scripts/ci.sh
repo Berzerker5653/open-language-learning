@@ -10,6 +10,29 @@ cargo fmt --all --check
 echo "== rust: clippy =="
 cargo clippy --workspace --all-targets -- -D warnings
 
+
+echo "== packs: media (gitignored bulk audio; parity with the CI restore step) =="
+# The reference packs' bulk .wav files are gitignored, so a fresh clone cannot
+# pass the media-declared gates until they are restored — the same two calls
+# .github/workflows/ci.yml makes in the rust and desktop-smoke jobs. Already
+# complete? verify-only costs no download. SKIP_PACK_AUDIO=1 refuses the
+# download for an offline run (it then fails loudly rather than testing a
+# tree that cannot pass).
+restore_pack_audio() {
+  local dir=$1
+  if ./scripts/fetch-pack-audio.sh --pack-dir "$dir" --work-dir tmp/pack-audio --verify-only >/dev/null 2>&1; then
+    echo "media already valid: $dir"
+  elif [[ "${SKIP_PACK_AUDIO:-0}" == "1" ]]; then
+    echo "FAIL: $dir media is not complete and SKIP_PACK_AUDIO=1 refused the download" >&2
+    exit 1
+  else
+    ./scripts/fetch-pack-audio.sh --pack-dir "$dir" --work-dir tmp/pack-audio
+  fi
+}
+for pack_dir in languages/ja-JP languages/ru-RU; do
+  restore_pack_audio "$pack_dir"
+done
+
 echo "== rust: test =="
 cargo test --workspace
 
@@ -63,6 +86,7 @@ fi
 .venv/bin/python -m unittest discover -s tools -p 'test_validate_handoff.py'
 .venv/bin/python scripts/test_generate_pack_audio.py
 .venv/bin/python scripts/test_fetch_pack_audio.py
+.venv/bin/python scripts/test_renormalize_pack_audio.py
 .venv/bin/python -m unittest discover -s scripts -p 'test_new_pack.py'
 .venv/bin/python tools/audit_content_templates.py languages/ja-JP languages/ru-RU
 .venv/bin/python -m unittest discover -s tools -p 'test_audit_content_templates.py'

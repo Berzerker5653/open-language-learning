@@ -257,6 +257,11 @@ jobs:
       # desktop-smoke jobs depend on (synthetic pack + local archive, no
       # network/cargo).
       - run: python scripts/test_fetch_pack_audio.py
+      # AUDIO-NORM: loudness conformance for the tracked journey assets. The
+      # tool re-applies generate-pack-audio.py's own `normalize_wav` (it never
+      # needed sox) and rewrites only the manifest rows its bytes actually
+      # changed, so the shipped audio and its notes cannot drift apart.
+      - run: python scripts/test_renormalize_pack_audio.py
       # PACK-AI-001: the scaffold's own invariants (media coverage/hash, script
       # declaration, placeholder-audio honesty) without cargo, network or TTS.
       - run: python -m unittest discover -s scripts -p 'test_new_pack.py'

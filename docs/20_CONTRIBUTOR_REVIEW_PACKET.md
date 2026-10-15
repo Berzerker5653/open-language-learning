@@ -28,14 +28,21 @@ and the gate fails without them — a bare checkout prints ~4.9k
 `error[media_missing]` lines and exits 1. One bounded exception: the 18
 journey assets that postdate the pinned archive are tracked by name until
 the packs are republished (ADR-0032). Restore the published,
-catalog-pinned archive first:
+catalog-pinned archive for **each** pack — the script's own default is
+`languages/ja-JP`, so a call with no `--pack-dir` leaves `ru-RU`
+unpopulated and its tests failing on missing media:
 
 ```sh
-./scripts/fetch-pack-audio.sh --pack-dir languages/ja-JP
+./scripts/fetch-pack-audio.sh --pack-dir languages/ja-JP --work-dir tmp/pack-audio
+./scripts/fetch-pack-audio.sh --pack-dir languages/ru-RU --work-dir tmp/pack-audio
 ```
 
 (`scripts/fetch-pack-audio.sh`, options in the usage block at lines
 50-60; needs network, `--verify-only` checks an existing tree offline.)
+`scripts/ci.sh` now performs both restores: it verifies each pack's media
+first, downloads only what is missing, and stops with a named failure
+instead of testing a half-populated tree — set `SKIP_PACK_AUDIO=1` to
+refuse the download and see that failure.
 
 A passing run prints one summary line per gate, verified on this
 snapshot on 2026-10-14:
