@@ -65,3 +65,15 @@ non-emptiness of the plan (asserted exactly), a blow-up ceiling on each path, an
 a repeat path no more than 25% more expensive than the build that warmed it. The
 user-visible latency promise stays enforced on the real surface, by the
 walkthrough's per-route stall guard.
+
+## Confirmed on CI
+
+Run `38656691408` (head `295198c`, the guard change) is green across every job.
+The `rust` job took 3,142 s — longer than the failing run's 3,040 s, so the
+runner was no less loaded, and the guard passed; the guard prints its cold/warm
+pair only when it fails, so no CI numbers are claimed beyond that. Other jobs at
+the same head: `web` 26 s, with the four journeys executing under the dom project
+(`first-run` 118 ms, `pack-install` 149 ms, `no-speech-model` 161 ms,
+`export-restore` 176 ms, `apps/desktop` 24 test files), `desktop-smoke` 635 s,
+`schemas` 569 s, `security` 164 s, `platform-compile` windows 153 s / macos 73 s,
+`platform-bundles` skipped (owner-gated).
