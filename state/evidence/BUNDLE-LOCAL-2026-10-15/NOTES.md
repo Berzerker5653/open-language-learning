@@ -157,3 +157,54 @@ must either stop that instance first (owner's call) or run with a distinct
 Consequence for `RELEASE-EVIDENCE-001` and for anyone quoting bundle numbers: **use the
 finalized 72,837,624 B / `8c3b5913…` figure**, and state finalize status whenever an
 AppImage size is reported.
+
+## deb installability check: the declared dependency names are pre-t64
+
+Non-interactive check on the built deb, and it fails for current distros.
+
+Payload facts (`ar x` + `readelf -d usr/bin/lts-desktop`): the binary's direct `NEEDED`
+list is `libwebview`-adjacent plus GTK — `libwebkit2gtk-4.1.so.0`,
+`libjavascriptcoregtk-4.1.so.0`, `libsoup-3.0.so.0`, `libgtk-3.so.0`, `libgdk-3.so.0`,
+`libgdk_pixbuf-2.0.so.0`, `libgio/glib/gobject-2.0`, `libcairo.so.2`, `libdbus-1.so.3`
+plus `libc/libm/libgcc_s/ld-linux`. `ldd` resolves every one on this host (0 "not found").
+The generated control declares only:
+
+```
+Depends: libwebkit2gtk-4.1-0, libgtk-3-0
+```
+
+Checked against the distro metadata the clean-boot test would actually use:
+
+- Debian trixie `libwebkit2gtk-4.1-0` (2.54.0-1~deb13u2) depends on
+  `libjavascriptcoregtk-4.1-0` (exact same version), `libsoup-3.0-0 (>= 3.0.3)`,
+  `libgtk-3-0t64 (>= 3.23.0)`, `libglib2.0-0t64`, `libcairo2`, `libgdk-pixbuf-2.0-0` — so
+  every `NEEDED` entry except `libdbus-1.so.3` is covered transitively, and dbus arrives
+  through `libgtk-3-0t64 → libatk-bridge2.0-0t64 → libdbus-1-3` (chain read from the
+  Ubuntu noble package page).
+- The blocker: **`libgtk-3-0` no longer exists as a package name.**
+  `packages.debian.org/stable/amd64/libgtk-3-0` returns "Package not available in this
+  suite", and Ubuntu noble ships `libgtk-3-0t64` (3.24.41-4ubuntu1.1). So
+  `apt install ./open-language-learning-platform_0.4.0-alpha.1_amd64.deb` cannot be
+  satisfied on Ubuntu 24.04 LTS or Debian 13; it is fine on Ubuntu 22.04 / Debian
+  bookworm, which still carry the old name.
+
+Fix attempt, measured and reverted: `bundle.linux.deb.depends` is **append-only**. Adding
+`["libwebkit2gtk-4.1-0", "libgtk-3-0 | libgtk-3-0t64", "libdbus-1-3"]` produced
+
+```
+Depends: libwebkit2gtk-4.1-0, libgtk-3-0 | libgtk-3-0t64, libdbus-1-3, libwebkit2gtk-4.1-0, libgtk-3-0
+```
+
+(deb 12,493,922 B sha256 `1e33cc3680d06b9331f8a12a46ef781e13f3b946b76d7670bfa1ed212b258208`,
+against the unmodified 12,493,856 B sha256 `3de3b3bb…`). The auto-detected `libgtk-3-0`
+stays in the list, so the config cannot remove the broken entry. The edit was reverted;
+`apps/desktop/src-tauri/tauri.conf.json` in the tree is unchanged from `HEAD`.
+
+One measurement trap worth recording: sourcing `scripts/tauri-env.sh` sets
+`CARGO_TARGET_DIR` to the repo-root `target/`, so bundle output lands in
+`target/release/bundle/…` and **not** in `apps/desktop/src-tauri/target/release/bundle/…`.
+Both trees exist on this machine, and reading the stale one makes an unchanged sha look
+like "the build did nothing".
+
+The choice between pinning the tested distro, post-processing the control file, or taking
+it upstream is recorded as decision **D12** in `state/evidence/OWNER-QUEUE-2026-10-15.md`.

@@ -234,6 +234,27 @@ of the required set and stays `blocked` rather than `done`. No new decision unle
 want consented-panel data collected at some point, which is the only thing that could ever
 turn the accuracy claim on (docs/18, ADR-0013).
 
+
+### D12 — Which Linux distros must the deb install on? (found by the bundle check)
+
+**Exact approval requested.** Pick the installability target for the deb: (a) **pin the
+tested distro** to Ubuntu 22.04 / Debian bookworm for the alpha and state it in docs/13 +
+docs/21, (b) let me add a `scripts/finalize-deb.sh` that rewrites the control `Depends`
+after bundling (the AppImage already has that precedent in `scripts/finalize-appimage.sh`),
+or (c) carry it as an upstream tauri-cli issue and leave the deb as generated.
+
+**Why it is a decision and not a bug I should fix silently:** the generated control says
+`Depends: libwebkit2gtk-4.1-0, libgtk-3-0`, and `libgtk-3-0` no longer exists as a package
+name in Debian 13 (trixie) or Ubuntu 24.04 (noble) — the runtime there is `libgtk-3-0t64`.
+So the deb is uninstallable-by-metadata on current LTS distros and fine on 22.04/bookworm.
+`bundle.linux.deb.depends` cannot fix it: measured append-only, the auto-detected
+`libgtk-3-0` stays in the list. Which answer is right depends on what you intend to clean-boot
+for `RELEASE-EVIDENCE-001` — if that machine is 24.04, option (a) is not available.
+
+**Recommendation.** (b) if the clean-boot target is 24.04/Debian 13, (a) if it is 22.04.
+Either way the check output is in `state/evidence/BUNDLE-LOCAL-2026-10-15/NOTES.md`
+("deb installability check").
+
 ---
 
 ## 3. Open human-only checks (no agent can close these)
