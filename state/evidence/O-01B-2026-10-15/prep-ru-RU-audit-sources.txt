@@ -1,0 +1,3 @@
+$ cargo run -q -p lts-langpack-cli -- audit-sources tmp/0.4.1-prep/ru-RU
+audit-sources: 0 error(s), 0 warning(s)
+EXIT=0

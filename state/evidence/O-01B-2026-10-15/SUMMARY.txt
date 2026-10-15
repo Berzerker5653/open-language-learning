@@ -1,0 +1,41 @@
+prep-ja-JP-validate                      exit=0
+prep-ja-JP-lint                          exit=0
+prep-ja-JP-test                          exit=0
+prep-ja-JP-audit-curriculum              exit=0
+prep-ja-JP-audit-lexicon                 exit=0
+prep-ja-JP-audit-licenses                exit=0
+prep-ja-JP-audit-sources                 exit=0
+build-ja-JP                              exit=0
+archive: dist/preview-0.4.1/prep-ja-JP-audit-sources-0.4.1.lpk
+bytes=318721333
+7d9c70453e0469d8dc4e53eda27b5f4eafdfee443d2e3f4e2406d5b6238db460  dist/preview-0.4.1/prep-ja-JP-audit-sources-0.4.1.lpk
+inspect-ja-JP                            exit=0
+archive entries: 5867
+install-ja-JP                            exit=0
+prep-ru-RU-validate                      exit=0
+prep-ru-RU-lint                          exit=0
+prep-ru-RU-test                          exit=0
+prep-ru-RU-audit-curriculum              exit=0
+prep-ru-RU-audit-lexicon                 exit=0
+prep-ru-RU-audit-licenses                exit=0
+prep-ru-RU-audit-sources                 exit=0
+build-ru-RU                              exit=0
+archive: dist/preview-0.4.1/prep-ru-RU-audit-sources-0.4.1.lpk
+bytes=318489935
+9eb074fa8d59f508108bc0fa8c698e1ddbd7458648ee2d829edeb36fbcfc1d7a  dist/preview-0.4.1/prep-ru-RU-audit-sources-0.4.1.lpk
+inspect-ru-RU                            exit=0
+archive entries: 5791
+install-ru-RU                            exit=0
+draft-catalog                            exit=0
+---- proposed catalog entries (license/version/sha/size) ----
+      "license": "CC-BY-SA-4.0",
+      "pack_id": "org.openlanguage.ja-jp.reference",
+      "sha256": "7d9c70453e0469d8dc4e53eda27b5f4eafdfee443d2e3f4e2406d5b6238db460",
+      "size_bytes": 318721333,
+      "version": "0.4.1"
+      "license": "CC0-1.0",
+      "pack_id": "org.openlanguage.ru-ru.reference",
+      "sha256": "9eb074fa8d59f508108bc0fa8c698e1ddbd7458648ee2d829edeb36fbcfc1d7a",
+      "size_bytes": 318489935,
+      "version": "0.4.1"
+PREP_041_DONE

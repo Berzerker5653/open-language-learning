@@ -1,0 +1,4 @@
+$ cargo run -q -p lts-langpack-cli -- build tmp/0.4.1-prep/ru-RU -o dist/preview-0.4.1/prep-ru-RU-audit-sources-0.4.1.lpk
+built dist/preview-0.4.1/prep-ru-RU-audit-sources-0.4.1.lpk (318489935 bytes)
+sha256 9eb074fa8d59f508108bc0fa8c698e1ddbd7458648ee2d829edeb36fbcfc1d7a
+EXIT=0
