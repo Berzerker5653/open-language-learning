@@ -510,8 +510,9 @@ impl PartialDownload {
         } else {
             opts.truncate(true);
         }
-        opts.open(&self.part)
-            .map_err(|e| format!("partial download: {e}"))
+        // A disk that is already full fails right here, and that has to read
+        // as a full disk, not as an os error string.
+        opts.open(&self.part).map_err(|e| write_error(&e))
     }
 
     /// Write the sidecar before the first byte of this attempt, so a crash
@@ -665,7 +666,8 @@ fn fetch_capped_resumable(
 /// that consumed it settles, which is what makes a cancel during unpacking
 /// retryable without downloading the archive a second time.
 fn finalize_partial(partial: &PartialDownload, entry: &PackEntry) -> Result<Vec<u8>, String> {
-    let bytes = fs::read(&partial.part).map_err(|e| format!("partial download: {e}"))?;
+    let bytes =
+        fs::read(&partial.part).map_err(|e| format!("could not read the downloaded bytes: {e}"))?;
     if bytes.len() as u64 != entry.size_bytes {
         partial.discard();
         return Err(format!(

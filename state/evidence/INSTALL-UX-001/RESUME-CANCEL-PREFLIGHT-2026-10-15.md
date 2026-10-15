@@ -83,7 +83,7 @@ checksum; one byte short fails as incomplete; both refusals delete the file).
 ## Free space, stated before the download and named if it fills
 
 - `estimated_install_bytes` = 3 × pinned archive size (archive + staging copy +
-  installed copy), documented as a conservative expectation rather than a
+  installed copy), documented as a conservative expectation, not a
   measurement, and used only to refuse an install that cannot finish.
 - `free_bytes` asks `statvfs` under `#[cfg(unix)]` (new
   `[target.'cfg(unix)'.dependencies] libc`); on non-unix it answers `None` and
@@ -92,7 +92,9 @@ checksum; one byte short fails as incomplete; both refusals delete the file).
 - The refusal names the pack, the space expected and the space free; it reaches
   the learner verbatim through the install alert.
 - A disk that fills *during* unpacking maps ENOSPC to "not enough space left on
-  device to finish installing" instead of an opaque `io:` string.
+  device to finish installing" instead of an opaque `io:` string, and the same
+  mapping covers opening the partial file, so a disk that is already full says
+  so before any byte is transferred.
 
 ## Copy and contract that had to change with it
 
