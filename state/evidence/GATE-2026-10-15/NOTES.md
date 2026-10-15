@@ -179,3 +179,17 @@ The validator walks `schemas/ languages/ examples/ tasks/ state/` and parses eve
 both modes to `HANDOFF VALIDATION PASSED (1960 data files checked)`. **No pack data changed**;
 every earlier `1959` figure in the day's records is a correct historical measurement of its
 own tree, and the two standing WARNs are unchanged. Treat 1960 as the current baseline.
+
+## Green again: per-job conclusion at the revert head
+
+`8be62a2` (revert of the tracked pack bump) → Actions run `38774132358`, conclusion
+**success**, watched to completion (`gh run watch --exit-status` exit 0, 3,144 s wall).
+Per job: `rust` success, `web` success, `desktop-smoke` success, `schemas` success,
+`security` success, `platform-compile (windows-latest)` success,
+`platform-compile (macos-latest)` success, `platform-bundles` skipped (manual trigger only).
+
+So the pair of runs is the evidence for the coupling recorded in the RC notes: `b5bafc8`
+(manifest at `0.4.1`, catalogue at `0.4.0`) failed exactly the two jobs that restore audio,
+and `8be62a2` (manifest back at the published `0.4.0`) passes all of them without any gate
+being weakened. CI reference table for the day: `fd76786` → `38757754128` success;
+`b5bafc8` → `38772271396` failure (2 jobs); `8be62a2` → `38774132358` success.
