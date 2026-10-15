@@ -59,23 +59,50 @@ for pack in examples/eo-community examples/ar-ma; do
   cargo run -q -p lts-langpack-cli -- test             "$pack"
 done
 
-echo "== web: install =="
-pnpm install --frozen-lockfile
+echo "== web: dependency runner =="
+# CI uses pnpm (packageManager pin + pnpm-lock.yaml). A host without pnpm can run
+# the same checks through npm against an already-prepared root node_modules — but
+# never `npm install`: the repository ships no package-lock.json, so an npm install
+# would resolve dependencies unpinned.
+if command -v pnpm >/dev/null 2>&1; then
+  echo "using pnpm $(pnpm --version)"
+  echo "== web: install =="
+  pnpm install --frozen-lockfile
+  web() {
+    case $1 in
+      fmt:check) pnpm fmt:check ;;
+      lint) pnpm lint ;;
+      *) pnpm -r "$1" ;;
+    esac
+  }
+elif [[ -d node_modules ]]; then
+  echo "using npm $(npm --version) against the prepared node_modules (no pnpm here; no install performed)"
+  # `pnpm -r` walks pnpm-workspace.yaml (apps/*, packages/*) and this repo defines no
+  # npm workspaces field, so the same set is walked explicitly. Root-level checks map
+  # to the binaries already present in node_modules/.
+  web() {
+    case $1 in
+      fmt:check) ./node_modules/.bin/prettier --check . ;;
+      lint) ./node_modules/.bin/eslint . ;;
+      *)
+        for pkg in apps/*/ packages/*/; do
+          [[ -f "$pkg/package.json" ]] || continue
+          grep -q "\"$1\":" "$pkg/package.json" || continue
+          echo "-- ${pkg%/} $1"
+          (cd "$pkg" && npm run "$1")
+        done
+        ;;
+    esac
+  }
+else
+  echo "FAIL: the web stage needs pnpm, or a prepared root node_modules to run through npm" >&2
+  exit 1
+fi
 
-echo "== web: format =="
-pnpm fmt:check
-
-echo "== web: typecheck =="
-pnpm typecheck
-
-echo "== web: lint =="
-pnpm lint
-
-echo "== web: test =="
-pnpm test
-
-echo "== web: build =="
-pnpm build
+for stage in fmt:check typecheck lint test build; do
+  echo "== web: $stage =="
+  web "$stage"
+done
 
 echo "== schemas/handoff =="
 if [ ! -d .venv ]; then
