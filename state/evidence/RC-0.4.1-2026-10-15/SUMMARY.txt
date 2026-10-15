@@ -82,3 +82,11 @@ rc-draft-catalog                           exit=0
       "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.1/ru-ru-reference-0.4.1.lpk",
       "version": "0.4.1"
 RC_041_DONE
+
+--- note, later the same day ---
+The manifest lines above were captured while the tracked tree carried the 0.4.1 bump. That
+bump was then reverted on main (commit 8be62a2): CI restores a checkout's audio by
+<pack_id, version> from catalog/packs.json, which has no 0.4.1 entry until the archives are
+published, so bumping ahead of publication turns the rust and desktop-smoke jobs red (run
+38772271396). The archives themselves are 0.4.1-built and unchanged - digests re-verified
+after the revert. See NOTES.md, "Version bump reverted on the tracked tree".

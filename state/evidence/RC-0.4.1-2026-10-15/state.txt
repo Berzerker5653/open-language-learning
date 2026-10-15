@@ -26,3 +26,20 @@ version: "0.4.1"
 dbfcf3e10fad86745b5b894fac017a3a16e467fcf74b68e27d602f3058b14d5e  languages/ru-RU/manifest.yaml
 version: "0.4.1"
   content_license: "CC0-1.0"
+
+--- correction, later the same day ---
+The two manifest hashes above were taken while the tracked tree carried the 0.4.1 bump.
+That bump has since been reverted on `main` (commit `8be62a2`) because
+`scripts/fetch-pack-audio.sh` resolves a checkout's audio by `<pack_id, version>` in
+`catalog/packs.json`, and an unpublished manifest version has no entry to restore from -
+see NOTES.md, "Version bump reverted on the tracked tree". Tracked manifests now hash:
+64dfaa3ba41d87dc84bea35cbb298d6172432263e9c2136b1a06d46c26be515b  languages/ja-JP/manifest.yaml
+version: "0.4.0"
+  content_license: "CC-BY-SA-4.0"
+c2b0393fa64533499ec9f96a5ee05097948bb7651c1e6956a655773de7505c72  languages/ru-RU/manifest.yaml
+version: "0.4.0"
+  content_license: "CC0-1.0"
+The candidate archives were deliberately built with `0.4.1` in the manifest, so their
+internal manifests still read 0.4.1. Re-verified after the revert:
+7d9c70453e0469d8dc4e53eda27b5f4eafdfee443d2e3f4e2406d5b6238db460  dist/rc-0.4.1/ja-jp-reference-0.4.1.lpk (318721333 B)
+9eb074fa8d59f508108bc0fa8c698e1ddbd7458648ee2d829edeb36fbcfc1d7a  dist/rc-0.4.1/ru-ru-reference-0.4.1.lpk (318489935 B)
