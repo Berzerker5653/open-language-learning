@@ -49,20 +49,26 @@ changes the 0.4.1 archive sha, so this must land before the freeze.
 
 | option | what it means | consequence |
 | --- | --- | --- |
-| **A (recommended).** Re-source `radicals` from KANJIDIC2/KRADFILE (or the jmdict-simplified `kanjidic2-en`/`kradfile` conversions), add a `derived-from-source` record with the CC BY-SA 4.0 licence + attribution, and change the 84 records' `sources` to `edrdg-jmdict` (+ the kanji dictionary source) | honest data, correct licence chain, ShareAlike obligation widens to the kanji layer | needs the attribution text and one more source record; biggest diff; I can prepare it, you verify |
+| **A (recommended; now verified to the same standard as B).** Re-source `radicals` from **KRADFILE** (the jmdict-simplified 3.6.2 `kradfile` conversion), add pack records `sources.jsonl:kradfile` + `licenses.jsonl:lic-kanji-radicals` at CC BY-SA 4.0 with EDRDG attribution and pinned hashes, and append `kradfile` to each record's `sources` span. Naming the source `edrdg-kanjidic2` would be wrong: KANJIDIC2 itself is used by nothing in the pack, which would repeat this ticket's failure mode | honest, attributed, licence-declared data; the decomposition line survives; ShareAlike already matches the 2026-10-13 pack-level ja decision | measured: **57/84** lists change (20 already byte-identical, 7 reorder, 0 characters missing from KRADFILE), no schema or frontend change; 7 pack gates 0/0, `lts-langpack` 7+38+8 ok, `lts-desktop --lib` **144/0/1**, both validator modes and the learner-copy audit unchanged. Costs: **22/84** cards would show the character as its own only element, **62/84** list nested elements, **23/84** contain stroke stand-ins `ノ ハ ヨ ｜`, and **17/84** authored mnemonics name an element the new list drops |
 | **B.** Apply the prepared patch: drop `radicals` from all 84 records, relax `required` in `schemas/v0.2/kanji.schema.json`, guard the UI | removes the unverified claim, ships nothing unsourced | visible feature loss in the Kanji drill (the 84 cards stop showing stroke components); needs a schema-version note; verified: 7 gates 0/0, `lts-langpack` suite ok incl. 38/38 `validate`, kanji tests ok, typecheck/prettier/vitest ok, `examples/eo-community`/`ar-ma` unaffected (`state/evidence/O-07/verification-2026-10-15.txt`) |
 | **C.** Defer to 0.4.2 | 0.4.1 publishes as measured | the 0.4.1 archive keeps showing 21+ wrong radical sets to learners and keeps `sources: ["jf-standard"]` on data the repo says may not be redistributed from that source |
 
 Rejected option, stated so it is not proposed again: re-word the licence notes only. The
 21/84 disjoint measurement makes this a correctness problem, not a labelling problem.
 
-**Evidence.** `state/evidence/O-07/decision-2026-10-15.md`,
+**Evidence.** `state/evidence/O-07/decision-2026-10-15.md` (§5 option B, §5b option A),
 `…/jmdict-simplified-compare-2026-10-15.md`, `…/kanjidic-compare-2026-10-13.md`,
-`…/patch-drop-unverified-radicals.patch` (228 lines, applies at HEAD, unapplied).
+`…/patch-drop-unverified-radicals.patch` (228 lines, option B) and
+`…/patch-resource-radicals-kradfile.patch` (243 lines, 6 files, +107/−88, option A) — both
+`git apply --check` clean at the current tree, both **unapplied**; verification transcripts
+`…/verification-2026-10-15.txt` and `…/verification-optionA-2026-10-15.txt`.
 
-**Next action once you answer.** A or B: I implement on the tracked tree, re-run the
-pack gates plus `cargo test --workspace`, rebuild the archives, re-issue the numbers.
-C: I record the deferral in the ledger (`O-07` note) and proceed to D2.
+**Next action once you answer.** A or B: I land the verified patch on the tracked tree,
+re-run the pack gates plus `cargo test --workspace`, rebuild both archives (the digests
+change either way), re-issue the numbers, then D2. A also opens two follow-up cards —
+the EDRDG §3 app-surface attribution (the app renders no pack attribution at all today) and
+the §4 data-refresh procedure — plus 17 mnemonics that need human re-authoring. C: I record
+the deferral in the ledger (`O-07` note) and proceed to D2.
 
 ### D2 — Publish the 0.4.1 reference packs (O-01b)
 

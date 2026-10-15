@@ -1,0 +1,724 @@
+[
+  {
+    "id": "ja.kanji.ni",
+    "character": "二",
+    "old": [
+      "一"
+    ],
+    "new": [
+      "二"
+    ]
+  },
+  {
+    "id": "ja.kanji.san",
+    "character": "三",
+    "old": [
+      "一"
+    ],
+    "new": [
+      "一",
+      "二"
+    ]
+  },
+  {
+    "id": "ja.kanji.yon",
+    "character": "四",
+    "old": [
+      "口"
+    ],
+    "new": [
+      "儿",
+      "囗"
+    ]
+  },
+  {
+    "id": "ja.kanji.go",
+    "character": "五",
+    "old": [
+      "二"
+    ],
+    "new": [
+      "五"
+    ]
+  },
+  {
+    "id": "ja.kanji.roku",
+    "character": "六",
+    "old": [
+      "八"
+    ],
+    "new": [
+      "ハ",
+      "亠"
+    ]
+  },
+  {
+    "id": "ja.kanji.hachi",
+    "character": "八",
+    "old": [
+      "八"
+    ],
+    "new": [
+      "ハ"
+    ]
+  },
+  {
+    "id": "ja.kanji.kyuu",
+    "character": "九",
+    "old": [
+      "乙"
+    ],
+    "new": [
+      "九"
+    ]
+  },
+  {
+    "id": "ja.kanji.sen",
+    "character": "千",
+    "old": [
+      "十",
+      "丿"
+    ],
+    "new": [
+      "ノ",
+      "十"
+    ]
+  },
+  {
+    "id": "ja.kanji.man",
+    "character": "万",
+    "old": [
+      "艹"
+    ],
+    "new": [
+      "｜",
+      "ノ",
+      "一"
+    ]
+  },
+  {
+    "id": "ja.kanji.oo",
+    "character": "大",
+    "old": [
+      "大",
+      "人"
+    ],
+    "new": [
+      "大"
+    ]
+  },
+  {
+    "id": "ja.kanji.naka",
+    "character": "中",
+    "old": [
+      "中"
+    ],
+    "new": [
+      "｜",
+      "口"
+    ]
+  },
+  {
+    "id": "ja.kanji.ue",
+    "character": "上",
+    "old": [
+      "丨",
+      "一"
+    ],
+    "new": [
+      "一",
+      "卜"
+    ]
+  },
+  {
+    "id": "ja.kanji.shita",
+    "character": "下",
+    "old": [
+      "一",
+      "卜"
+    ],
+    "new": [
+      "｜",
+      "一",
+      "卜"
+    ]
+  },
+  {
+    "id": "ja.kanji.hidari",
+    "character": "左",
+    "old": [
+      "ナ",
+      "工"
+    ],
+    "new": [
+      "ノ",
+      "一",
+      "工"
+    ]
+  },
+  {
+    "id": "ja.kanji.migi",
+    "character": "右",
+    "old": [
+      "ナ",
+      "口"
+    ],
+    "new": [
+      "ノ",
+      "一",
+      "口"
+    ]
+  },
+  {
+    "id": "ja.kanji.kuchi",
+    "character": "口",
+    "old": [
+      "口"
+    ],
+    "new": [
+      "囗",
+      "口"
+    ]
+  },
+  {
+    "id": "ja.kanji.ashi",
+    "character": "足",
+    "old": [
+      "口",
+      "止"
+    ],
+    "new": [
+      "口",
+      "足",
+      "止"
+    ]
+  },
+  {
+    "id": "ja.kanji.ki",
+    "character": "木",
+    "old": [
+      "木",
+      "十"
+    ],
+    "new": [
+      "木"
+    ]
+  },
+  {
+    "id": "ja.kanji.toshi",
+    "character": "年",
+    "old": [
+      "丿",
+      "干"
+    ],
+    "new": [
+      "ノ",
+      "一",
+      "干",
+      "乞"
+    ]
+  },
+  {
+    "id": "ja.kanji.ji",
+    "character": "時",
+    "old": [
+      "日",
+      "寺"
+    ],
+    "new": [
+      "寸",
+      "土",
+      "日"
+    ]
+  },
+  {
+    "id": "ja.kanji.ima",
+    "character": "今",
+    "old": [
+      "今",
+      "丶"
+    ],
+    "new": [
+      "个",
+      "一"
+    ]
+  },
+  {
+    "id": "ja.kanji.ato",
+    "character": "後",
+    "old": [
+      "彳"
+    ],
+    "new": [
+      "夂",
+      "幺",
+      "彳"
+    ]
+  },
+  {
+    "id": "ja.kanji.go-n",
+    "character": "午",
+    "old": [
+      "丿",
+      "十"
+    ],
+    "new": [
+      "ノ",
+      "干",
+      "十",
+      "乞"
+    ]
+  },
+  {
+    "id": "ja.kanji.mae",
+    "character": "前",
+    "old": [
+      "月"
+    ],
+    "new": [
+      "一",
+      "刈",
+      "月",
+      "并"
+    ]
+  },
+  {
+    "id": "ja.kanji.kuni",
+    "character": "国",
+    "old": [
+      "囗",
+      "玉"
+    ],
+    "new": [
+      "王",
+      "囗",
+      "丶"
+    ]
+  },
+  {
+    "id": "ja.kanji.nani",
+    "character": "何",
+    "old": [
+      "亻",
+      "可"
+    ],
+    "new": [
+      "化",
+      "口",
+      "亅",
+      "一"
+    ]
+  },
+  {
+    "id": "ja.kanji.mi",
+    "character": "見",
+    "old": [
+      "目",
+      "儿"
+    ],
+    "new": [
+      "見",
+      "目",
+      "儿"
+    ]
+  },
+  {
+    "id": "ja.kanji.yomu",
+    "character": "読",
+    "old": [
+      "言",
+      "売"
+    ],
+    "new": [
+      "言",
+      "士",
+      "儿",
+      "冖"
+    ]
+  },
+  {
+    "id": "ja.kanji.kaku",
+    "character": "書",
+    "old": [
+      "書"
+    ],
+    "new": [
+      "日",
+      "聿"
+    ]
+  },
+  {
+    "id": "ja.kanji.taberu",
+    "character": "食",
+    "old": [
+      "人",
+      "良"
+    ],
+    "new": [
+      "食"
+    ]
+  },
+  {
+    "id": "ja.kanji.iku",
+    "character": "行",
+    "old": [
+      "彳",
+      "亍"
+    ],
+    "new": [
+      "行",
+      "彳"
+    ]
+  },
+  {
+    "id": "ja.kanji.kuru",
+    "character": "来",
+    "old": [
+      "来"
+    ],
+    "new": [
+      "｜",
+      "二",
+      "米",
+      "亠",
+      "木"
+    ]
+  },
+  {
+    "id": "ja.kanji.kaeru",
+    "character": "帰",
+    "old": [
+      "中",
+      "止"
+    ],
+    "new": [
+      "ヨ",
+      "刈",
+      "巾",
+      "冖"
+    ]
+  },
+  {
+    "id": "ja.kanji.deru",
+    "character": "出",
+    "old": [
+      "山"
+    ],
+    "new": [
+      "｜",
+      "山",
+      "凵"
+    ]
+  },
+  {
+    "id": "ja.kanji.hairu",
+    "character": "入",
+    "old": [
+      "人",
+      "丶"
+    ],
+    "new": [
+      "入"
+    ]
+  },
+  {
+    "id": "ja.kanji.nana",
+    "character": "七",
+    "old": [
+      "一"
+    ],
+    "new": [
+      "乙",
+      "匕",
+      "ノ"
+    ]
+  },
+  {
+    "id": "ja.kanji.weather.ten",
+    "character": "天",
+    "old": [
+      "一",
+      "大"
+    ],
+    "new": [
+      "一",
+      "大",
+      "二"
+    ]
+  },
+  {
+    "id": "ja.kanji.weather.ki",
+    "character": "気",
+    "old": [
+      "气"
+    ],
+    "new": [
+      "气",
+      "丶",
+      "ノ",
+      "乞"
+    ]
+  },
+  {
+    "id": "ja.kanji.weather.fuu",
+    "character": "風",
+    "old": [
+      "几",
+      "虫"
+    ],
+    "new": [
+      "風",
+      "几",
+      "虫",
+      "ノ"
+    ]
+  },
+  {
+    "id": "ja.kanji.weather.un",
+    "character": "雲",
+    "old": [
+      "雨",
+      "云"
+    ],
+    "new": [
+      "一",
+      "雨",
+      "二",
+      "厶"
+    ]
+  },
+  {
+    "id": "ja.kanji.weather.sei",
+    "character": "晴",
+    "old": [
+      "日",
+      "青"
+    ],
+    "new": [
+      "月",
+      "青",
+      "土",
+      "二",
+      "日",
+      "亠"
+    ]
+  },
+  {
+    "id": "ja.kanji.place.ka",
+    "character": "花",
+    "old": [
+      "艹",
+      "化"
+    ],
+    "new": [
+      "化",
+      "匕",
+      "艾"
+    ]
+  },
+  {
+    "id": "ja.kanji.place.chou",
+    "character": "町",
+    "old": [
+      "田",
+      "丁"
+    ],
+    "new": [
+      "一",
+      "田",
+      "亅"
+    ]
+  },
+  {
+    "id": "ja.kanji.place.sha",
+    "character": "者",
+    "old": [
+      "土",
+      "日"
+    ],
+    "new": [
+      "日",
+      "老"
+    ]
+  },
+  {
+    "id": "ja.kanji.body.tai",
+    "character": "体",
+    "old": [
+      "亻",
+      "本"
+    ],
+    "new": [
+      "木",
+      "一",
+      "化"
+    ]
+  },
+  {
+    "id": "ja.kanji.body.tou",
+    "character": "頭",
+    "old": [
+      "豆",
+      "頁"
+    ],
+    "new": [
+      "貝",
+      "目",
+      "ハ",
+      "口",
+      "豆",
+      "并",
+      "頁"
+    ]
+  },
+  {
+    "id": "ja.kanji.admin.ki",
+    "character": "期",
+    "old": [
+      "其",
+      "月"
+    ],
+    "new": [
+      "甘",
+      "月",
+      "ハ"
+    ]
+  },
+  {
+    "id": "ja.kanji.admin.kai",
+    "character": "会",
+    "old": [
+      "人",
+      "日"
+    ],
+    "new": [
+      "二",
+      "个",
+      "厶"
+    ]
+  },
+  {
+    "id": "ja.kanji.admin.hen",
+    "character": "変",
+    "old": [
+      "亦",
+      "頁"
+    ],
+    "new": [
+      "亠",
+      "夂"
+    ]
+  },
+  {
+    "id": "ja.kanji.film.ei",
+    "character": "映",
+    "old": [
+      "日",
+      "央"
+    ],
+    "new": [
+      "ノ",
+      "日",
+      "大",
+      "冖"
+    ]
+  },
+  {
+    "id": "ja.kanji.film.e",
+    "character": "絵",
+    "old": [
+      "糸",
+      "会"
+    ],
+    "new": [
+      "糸",
+      "幺",
+      "小",
+      "二",
+      "个",
+      "厶"
+    ]
+  },
+  {
+    "id": "ja.kanji.sport.kyou",
+    "character": "強",
+    "old": [
+      "弓",
+      "虫"
+    ],
+    "new": [
+      "弓",
+      "虫",
+      "厶"
+    ]
+  },
+  {
+    "id": "ja.kanji.rel.yuu",
+    "character": "友",
+    "old": [
+      "友"
+    ],
+    "new": [
+      "ノ",
+      "一",
+      "又"
+    ]
+  },
+  {
+    "id": "ja.kanji.rel.ai",
+    "character": "愛",
+    "old": [
+      "爪",
+      "心",
+      "夂"
+    ],
+    "new": [
+      "心",
+      "爪",
+      "冖",
+      "夂"
+    ]
+  },
+  {
+    "id": "ja.kanji.rel.wa",
+    "character": "話",
+    "old": [
+      "言",
+      "舌"
+    ],
+    "new": [
+      "言",
+      "口",
+      "舌"
+    ]
+  },
+  {
+    "id": "ja.kanji.city.kai",
+    "character": "届",
+    "old": [
+      "尸",
+      "刀",
+      "田"
+    ],
+    "new": [
+      "｜",
+      "日",
+      "尸",
+      "田"
+    ]
+  },
+  {
+    "id": "ja.kanji.city.shi",
+    "character": "使",
+    "old": [
+      "亻",
+      "吏"
+    ],
+    "new": [
+      "ノ",
+      "一",
+      "化",
+      "口"
+    ]
+  }
+]

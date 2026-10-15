@@ -1,0 +1,149 @@
+=== patch inventory
+ docs/provenance/JA_SOURCE_MATRIX.yaml |   12 +++-
+ languages/ja-JP/kanji/a2-topics.jsonl |   56 ++++++++---------
+ languages/ja-JP/kanji/entries.jsonl   |  112 +++++++++++++++++----------------
+ languages/ja-JP/licenses.jsonl        |    3 +
+ languages/ja-JP/sources.jsonl         |    1 
+ third-party/notices/NOTICE.md         |   11 +++
+ 6 files changed, 107 insertions(+), 88 deletions(-)
+
+=== git apply --check (against clean main tree at 42082d4)
+APPLY-CHECK-OK
+APPLIED
+ M docs/provenance/JA_SOURCE_MATRIX.yaml
+ M languages/ja-JP/kanji/a2-topics.jsonl
+ M languages/ja-JP/kanji/entries.jsonl
+ M languages/ja-JP/licenses.jsonl
+ M languages/ja-JP/sources.jsonl
+ M third-party/notices/NOTICE.md
+?? state/evidence/O-07/patch-resource-radicals-kradfile.patch
+?? state/evidence/O-07/verification-optionA-2026-10-15.txt
+
+=== pack gates on the patched languages/ja-JP (media present in the tracked tree)
+gate validate         exit=0 | validate(scaffold): 0 error(s), 0 warning(s)
+gate lint             exit=0 | lint: 0 error(s), 0 warning(s)
+gate test             exit=0 | test: 0 error(s), 0 warning(s)
+gate audit-curriculum exit=0 | audit-curriculum: 0 error(s), 0 warning(s)
+gate audit-lexicon    exit=0 | audit-lexicon: 0 error(s), 0 warning(s)
+gate audit-licenses   exit=0 | audit-licenses: 0 error(s), 0 warning(s)
+gate audit-sources    exit=0 | audit-sources: 0 error(s), 0 warning(s)
+
+=== ru-RU unaffected (same gates, unpatched pack)
+gate validate         exit=0 | validate(scaffold): 0 error(s), 0 warning(s)
+gate lint             exit=0 | lint: 0 error(s), 0 warning(s)
+gate audit-licenses   exit=0 | audit-licenses: 0 error(s), 0 warning(s)
+gate audit-sources    exit=0 | audit-sources: 0 error(s), 0 warning(s)
+
+=== cargo test -q -p lts-langpack (tests read ../../languages/ja-JP)
+
+running 8 tests
+........
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+
+running 7 tests
+.......
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.64s
+
+
+running 38 tests
+......................................
+test result: ok. 38 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 12.17s
+
+
+running 8 tests
+........
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+=== handoff validator, default mode
+WARN examples/minimal-language-pack: manifest-only onboarding fixture; no instructional content or full pack conformance
+WARN scope: handoff structure checked; SDK completeness, linguistic correctness, source rights, calibration quality, build/install/runtime/UX/privacy/security remain unverified
+HANDOFF VALIDATION PASSED (1959 data files checked)
+=== handoff validator, --require-explicit-ledger-records
+WARN scope: handoff structure checked; SDK completeness, linguistic correctness, source rights, calibration quality, build/install/runtime/UX/privacy/security remain unverified
+HANDOFF VALIDATION PASSED (1959 data files checked)
+=== learner copy audit
+LEARNER COPY AUDIT v1.0.0: 33 source files scanned, 22 test files skipped
+findings: 0
+
+=== UI-consequence measurement over the patched data
+records 84
+radical-list length min/max/mean: 1/7/2.45
+non-CJK elements used: ノハヨ｜
+records containing at least one such element: 23
+records whose only element is the character itself: 22 一二五九十人大小目耳手木日月山川田女食入雨心
+records listing nested/overlapping elements: 62
+
+=== revert
+?? state/evidence/O-07/patch-resource-radicals-kradfile.patch
+?? state/evidence/O-07/verification-optionA-2026-10-15.txt
+REVERTED-EXIT=0
+
+=== follow-up measurement (same day): mnemonic drift
+The patch was re-applied, measured, and reverted again; afterwards
+`git status --porcelain` listed only this file and the patch, and `git apply --check`
+still passed. Method: for each record, take the single-character elements the authored
+`mnemonic` names in parentheses (the pack's convention, e.g. "Work (工) under a worker's
+left hand (ナ)."), and ask whether every named element is still in the `radicals` list the
+patch produces.
+
+    records 84
+    mnemonics naming an element absent from the new list: 17
+
+Examples (character, elements the mnemonic names, new list, mnemonic text):
+    左  [工, ナ] -> [ノ, 一, 工]   "Work (工) under a worker's left hand (ナ)."
+    時  [日, 寺] -> [寸, 土, 日]   "Sun (日) plus temple (寺) bells mark the hours"
+    国  [玉, 囗] -> [王, 囗, 丶]   "Jade (玉) guarded within walls (囗) — country."
+    何  [亻]     -> [化, 口, 亅, 一] "A person (亻) asking — what?"
+    読  [言, 売] -> [言, 士, 儿, 冖] "Words (言) sold (売) in books — to read."
+    食  [人, 良] -> [食]          "A person (人) at a good (良) meal — to eat."
+
+So option A keeps the decomposition line but desynchronizes it from 17 of the 84 authored
+mnemonics; those mnemonics would need re-authoring (human content work, band review) for the
+card to read consistently. This is a content cost, not a correctness failure: every gate
+above stays green either way.
+
+=== state after all measurements
+Tree clean except untracked evidence; patch applies to the current tree unchanged.
+
+=== artifacts filed with this transcript
+- `state/evidence/O-07/patch-resource-radicals-kradfile.patch` — the change (6 files).
+- `state/evidence/O-07/derive-radicals-from-kradfile.py` — the transform exactly as run. It
+  replaces only the `"radicals"` and `"sources"` literals by bracket-walking the JSON, then
+  asserts the reparsed object keeps the same key order and identical values for every other
+  key, and exits 1 if any pack character is absent from KRADFILE. Its paths are the scratch
+  ones (`tmp/o07-optionA/wt`, `tmp/o07-optionA/ref/kradfile-3.6.2.json`); re-running needs a
+  worktree plus the dataset, which is not committed - rebuild it from
+  `kradfile-3.6.2+20260928191014.json.tgz` (106,129 B, sha256
+  5948198f92fe5afd2ed85f27d1b204b9a2fed258c128edaac147d73ee69c9d97) and check the extracted
+  JSON against 90369021899d89159ee6e079bccd7d83915daa3191f0c6ed7efc2473e088c086.
+- `state/evidence/O-07/radical-changes-2026-10-15.json` — the 57 changed records with the
+  old and new element sets, for the human content review.
+
+Honest scope note, corrected mid-run: I first wrote that the desktop crate does not read
+this data. That was wrong - `apps/desktop/src-tauri/src/lib.rs` takes `radicals` from the
+active pack (`str_array("radicals")`, :1119) and several tests install the **bundled**
+reference pack from a dev-shaped repo tree (`install_bundled_pack`, :7781 and :8119), so the
+crate does exercise pack-derived content. It was therefore re-run with the patch applied.
+
+=== desktop suite with the patch applied
+`git apply state/evidence/O-07/patch-resource-radicals-kradfile.patch` (reported APPLIED),
+then `cargo test -p lts-desktop --lib`:
+
+    test result: ok. 144 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 431.95s
+    TEST_EXIT=0
+
+Including the pack-shaped tests that matter here: `plan_generation_stays_fast_on_the_reference_pack`,
+`an_installed_pack_that_is_also_bundled_is_listed_exactly_once`,
+`day_one_never_seeds_katakana_or_words_with_unlearned_kana`,
+`world_unlocks_follow_pack_declared_capabilities`,
+`pronunciation_demo_comes_from_pack_contrasts`, `the_aligner_language_comes_from_the_pack_manifest`.
+Reverted afterwards with `git checkout -- languages/ja-JP docs/provenance third-party/notices`;
+`git status --porcelain` then listed only the intended evidence edits. Note: 144 tests here vs
+the 139 figure quoted from the CI desktop-smoke job - same suite, `--lib` binary only.
