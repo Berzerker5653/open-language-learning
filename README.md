@@ -136,6 +136,7 @@ These are non-negotiable project decisions, recorded as ADRs and enforced by the
 | `docs/18_PUBLIC_CLAIMS_AND_SCOPE.md` | claim and completeness gates |
 | `docs/19_PROJECT_FILE_ARCHITECTURE.md` | file ownership boundaries |
 | `docs/20_CONTRIBUTOR_REVIEW_PACKET.md` | the five-item packet for a one-change contribution |
+| `docs/21_HUMAN_REVIEW_RUNBOOKS.md` | the three human-only gates as executable runbooks: assistive-technology pass, hands-on product pass, qualified language review |
 | `docs/SOURCES.md` | research and source registry |
 
 Living state: `tasks/KANBAN.md` (what is being worked on and what is blocked), `state/task-state.json` (the release ledger), `docs/adr/` (every architectural decision and its status).

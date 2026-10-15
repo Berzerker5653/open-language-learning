@@ -67,7 +67,8 @@ $ git status --porcelain languages/            # empty: no bytes changed
   unrelated tracked row is left untouched.
 - `scripts/ci.sh` now restores **both** packs' media with
   `fetch-pack-audio.sh --pack-dir <dir> --verify-only` before the Rust suite
-  (`SKIP_PACK_AUDIO=1` skips with a named failure), which is what CI already did.
+  (`SKIP_PACK_AUDIO=1` refuses the download and fails with a named error), which is
+  what CI already did.
   That closes the local-gate gap that made the desktop-lib tests fail in a clean
   clone run on 2026-10-15.
 
