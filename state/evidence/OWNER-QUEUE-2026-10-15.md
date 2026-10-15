@@ -89,6 +89,18 @@ does not change the content posture, since both packs already ship labelled
 previously exhausted; releases are not Actions minutes, but storage/bandwidth billing is
 an account fact you own.
 
+**The release action is atomic — measured cost of splitting it.** With the manifests at
+`0.4.1` and the catalogue still pinning `0.4.0`, CI's audio-restore step refuses and `rust`
++ `desktop-smoke` go red (run `38772271396` at `b5bafc8`; verbatim message and per-job
+conclusions in `state/evidence/GATE-2026-10-15/NOTES.md`, § "the batch head went red"). The
+tracked bump has therefore been reverted; `fetch-pack-audio.sh --verify-only` again reports
+4902 / 4856 rows with 0 failing. Landing this release means one change that does all of:
+`git apply state/evidence/RC-0.4.1-2026-10-15/version-bump.patch` → rebuild (or reuse the
+`dist/rc-0.4.1/*.lpk` on disk — gitignored, so they exist only on this machine) → enable
+immutable releases (D3) → tag + upload both assets → hand-edit both `catalog/packs.json`
+entries. Any subset leaves CI red; that is the gate working, not a flake to fix.
+
+
 **Evidence.** `state/evidence/RC-0.4.1-2026-10-15/{NOTES.md,SUMMARY.txt,diff-*.txt,rc-inspect-*.txt,published-*.txt,catalogue-proposal-diff.txt}`.
 
 **Next action after approval.** Owner: tag + upload two assets (order per D3), hand-edit

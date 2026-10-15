@@ -186,3 +186,42 @@ bump while `catalog/packs.json:7` still says `(Draft)`. A hand-edit that copies 
 silently renames the pack in the desktop catalogue; a hand-edit that keeps `(Draft)` keeps a
 name the pack no longer declares. Either is defensible; it must be a choice, not an accident.
 The ru entry needs no such decision — manifest and catalogue agree on `(Draft)` there.
+
+## Version bump reverted on the tracked tree — the bump rides publication
+
+Measured at the pushed batch head `b5bafc8`, Actions run `38772271396`: `rust` (job
+`116550909282`) and `desktop-smoke` (job `116550909671`) failed at the step "Restore
+reference-pack audio (published archives)"; `web`, `schemas`, `security`,
+`platform-compile (windows-latest)` and `platform-compile (macos-latest)` were `success` and
+`platform-bundles` was `skipped`. Verbatim refusal:
+
+```
+fetch-pack-audio: catalog: no single catalog/packs.json entry for org.openlanguage.ja-jp.reference 0.4.1 — the pack archive must be published (owner gate O-05) before its audio can be restored into a checkout
+```
+
+`scripts/fetch-pack-audio.sh` looks the archive up by `<pack_id, version>` in
+`catalog/packs.json`, which is the hand-maintained record of **published** archives. A
+manifest version with no published entry is therefore unbuildable in CI by design — the same
+gate that caught the archive-vs-tree divergence recorded in ADR-0032. Making it fall back to
+the newest published version was rejected: a checkout would then restore media that does not
+correspond to the pack version it declares.
+
+The candidate archives are unaffected (they were built from the bumped tree, and rebuilding
+from that tree reproduces the same digests), but the bump cannot land on its own. Ordered
+release recipe, all in one owner-landed change:
+
+1. `git apply state/evidence/RC-0.4.1-2026-10-15/version-bump.patch` — verified with
+   `git apply --check` against the reverted tree (only the two `version:` lines change);
+2. rebuild both `.lpk` files (`dist/rc-0.4.1/build-rc-0.4.1.sh` shape; deterministic, expect
+   the exact shas recorded above) or reuse the files on disk at `dist/rc-0.4.1/` — note
+   `dist/` is gitignored, so those archives exist only on this machine;
+3. enable immutable releases (**before** the upload, so 0.4.1 itself is locked — decision D3);
+4. tag `org.openlanguage.ja-jp.reference-0.4.1` / `org.openlanguage.ru-ru.reference-0.4.1`
+   and upload the assets under the URL convention in docs/13;
+5. hand-edit the two `catalog/packs.json` entries (`version`, `size`, `sha256`, `url`, and
+   the ja `display_name` question above) — never `scripts/build-catalog.sh` on the tracked file;
+6. push; CI goes green at the bumped version because the catalogue now resolves.
+
+Until that change lands the tracked manifests stay at `0.4.0`, matching the published pins:
+`fetch-pack-audio.sh --verify-only` then reports `rows checked=4902 … rows failing=0` (ja)
+and `4856 … 0` (ru).

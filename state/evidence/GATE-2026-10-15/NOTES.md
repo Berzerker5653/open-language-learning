@@ -144,3 +144,29 @@ CI at `fd76786` (the batch base, before the 0.4.1 bump): run `38757754128` compl
 `platform-compile (windows-latest)`, `platform-compile (macos-latest)` all `success`;
 `platform-bundles` `skipped` (manual trigger only). The 0.4.1 manifest bump and the new
 `crates/langpack/tests/media_upgrade.rs` are covered only by the run this batch pushes.
+
+## Update: the batch head went red, and the cause was the version bump
+
+Pushed batch head `b5bafc8` → run `38772271396` conclusion `failure`. Per job: `web`,
+`schemas`, `security`, `platform-compile (windows-latest)`,
+`platform-compile (macos-latest)` `success`; `platform-bundles` `skipped`; **`rust` (job
+`116550909282`) and `desktop-smoke` (job `116550909671`) `failure`** — both at the step
+"Restore reference-pack audio (published archives)", identical refusal, verbatim:
+
+```
+fetch-pack-audio: catalog: no single catalog/packs.json entry for org.openlanguage.ja-jp.reference 0.4.1 — the pack archive must be published (owner gate O-05) before its audio can be restored into a checkout
+```
+
+`scripts/fetch-pack-audio.sh` resolves audio by `<pack_id, version>` in
+`catalog/packs.json`, and the catalogue still pins the published `0.4.0`. Bumping the
+manifest ahead of publication therefore breaks restore, exactly as ADR-0032's gate is meant
+to. The gate is working, not flaking; weakening the fallback was rejected. The tracked bump
+is reverted and now lives only as `state/evidence/RC-0.4.1-2026-10-15/version-bump.patch`
+(`git apply --check` clean against the reverted tree), so it can land only together with
+publication and the two hand-edited catalogue entries — see queue **D2**.
+
+Verification after the revert: `fetch-pack-audio.sh --verify-only` reports
+`rows checked=4902 … rows failing=0` (ja) and `4856 … 0` (ru);
+`validate` / `lint` / `audit-licenses` / `audit-sources` report no findings for both packs;
+`tools/validate_handoff.py` and `--require-explicit-ledger-records` both end
+`HANDOFF VALIDATION PASSED (1959 data files checked)` with the two standing WARNs.
