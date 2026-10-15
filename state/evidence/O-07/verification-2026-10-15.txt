@@ -1,0 +1,37 @@
+# O-07 patch verification, 2026-10-15, GamingPC
+# scratch worktree: git worktree add tmp/wt-clean HEAD (fd76786); ja media symlinked from the main tree (gitignored bulk files)
+worktree at: fd767860038f7a43b522ee565df1e45a20c5270c  modified:
+ M apps/desktop/src/App.tsx
+ M languages/ja-JP/kanji/a2-topics.jsonl
+ M languages/ja-JP/kanji/entries.jsonl
+ M schemas/v0.2/kanji.schema.json
+
+## pack gates with the patched schema (CLI rebuilt in tmp/cargo-wt)
+validate           exit=0 errors=0 warnings=0
+lint               exit=0 errors=0 warnings=0
+test               exit=0 errors=0 warnings=0
+audit-curriculum   exit=0 errors=0 warnings=0
+audit-lexicon      exit=0 errors=0 warnings=0
+audit-licenses     exit=0 errors=0 warnings=0
+audit-sources      exit=0 errors=0 warnings=0
+
+## cargo test -p lts-langpack (patched schema, media linked)
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.82s
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.63s
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.63s
+test result: ok. 38 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 9.31s
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+## cargo test -p lts-desktop --lib kanji
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 143 filtered out; finished in 0.25s

@@ -1,0 +1,544 @@
+### stage: web test (clean worktree)
+packages/schemas test: include: **/*.{test,spec}.?(c|m)[jt]s?(x)
+packages/schemas test: exclude:  **/node_modules/**, **/.git/**
+packages/schemas test: 
+packages/learner-ui test: Done
+packages/ui test$ vitest run --passWithNoTests
+packages/scenario-ui test: Done
+packages/schemas test: Done
+packages/shared test: 
+packages/shared test:  Test Files  1 passed (1)
+packages/shared test:       Tests  2 passed (2)
+packages/shared test:    Start at  09:38:54
+packages/shared test:    Duration  140ms (transform 54%, import 29%, tests 8%, worker 8%)
+packages/shared test: 
+packages/shared test: Done
+packages/ui test: 
+packages/ui test:  RUN  v5.0.3 /home/hunter/game-dev/LTS/tmp/wt-clean/packages/ui
+packages/ui test: 
+packages/ui test: 
+packages/ui test:  Test Files  2 passed (2)
+packages/ui test:       Tests  10 passed (10)
+packages/ui test:    Start at  09:38:54
+packages/ui test:    Duration  178ms (import 46%, transform 41%, tests 8%, worker 4%)
+packages/ui test: 
+packages/ui test: Done
+apps/desktop test$ vitest run --passWithNoTests
+apps/desktop test: 
+apps/desktop test:  RUN  v5.0.3 /home/hunter/game-dev/LTS/tmp/wt-clean/apps/desktop
+apps/desktop test: 
+apps/desktop test: 
+apps/desktop test:  Test Files  26 passed (26)
+apps/desktop test:       Tests  239 passed (239)
+apps/desktop test:    Start at  09:38:54
+apps/desktop test:    Duration  1.35s (transform 59%, environment 15%, import 14%, tests 10%, worker 1%)
+apps/desktop test: 
+apps/desktop test:   Transform  |node| transforming modules took 6.82s · 77% of tracked time, re-done on every run
+apps/desktop test:              persist transforms across runs with fsModuleCache: true
+apps/desktop test:              on CI this only helps when the cache directory is persisted between runs
+apps/desktop test:              learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+apps/desktop test: 
+apps/desktop test: Done
+WEBTEST_EXIT=0
+### stage: web build (clean worktree)
+$ vite build
+vite v8.3.2 building client environment for production...
+transforming...
+✓ 43 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:   0.29 kB
+dist/assets/index-BpHLNvKe.css   10.24 kB │ gzip:   2.78 kB
+dist/assets/event-CL_fXJAH.js     1.03 kB │ gzip:   0.54 kB
+dist/assets/index-Cr63ToFA.js   342.21 kB │ gzip: 101.59 kB
+
+[33m[INEFFECTIVE_DYNAMIC_IMPORT] [0m../../node_modules/.pnpm/@tauri-apps+api@2.12.1/node_modules/@tauri-apps/api/core.js is dynamically imported by src/App.tsx but also statically imported by src/main.tsx, ../../node_modules/.pnpm/@tauri-apps+api@2.12.1/node_modules/@tauri-apps/api/event.js, dynamic import will not move module into another chunk.
+
+✓ built in 211ms
+WEBBUILD_EXIT=0
+### pkg-config webkit2gtk-4.1: 2.52.6
+### stage: tauri build --no-bundle
+   Compiling lts-desktop v0.4.0-alpha.1 (/home/hunter/game-dev/LTS/tmp/wt-clean/apps/desktop/src-tauri)
+   Compiling cairo-rs v0.18.5
+   Compiling atk v0.18.2
+   Compiling javascriptcore-rs v1.1.2
+   Compiling pango v0.18.3
+   Compiling gdk-pixbuf v0.18.5
+   Compiling soup3 v0.5.0
+   Compiling gdk v0.18.2
+   Compiling rustls-webpki v0.103.15
+   Compiling gdkx11 v0.18.2
+   Compiling tokio-rustls v0.26.6
+   Compiling rustls-platform-verifier v0.7.1
+   Compiling ureq v2.12.1
+   Compiling hyper-rustls v0.27.10
+   Compiling reqwest v0.13.5
+   Compiling jsonschema v0.58.5
+   Compiling lts-langpack v0.1.0 (/home/hunter/game-dev/LTS/tmp/wt-clean/crates/langpack)
+   Compiling lts-activity v0.1.0 (/home/hunter/game-dev/LTS/tmp/wt-clean/crates/activity)
+   Compiling webkit2gtk v2.0.2
+   Compiling tao v0.37.1
+   Compiling tauri-plugin-single-instance v2.5.2
+   Compiling rusqlite v0.37.0
+   Compiling lts-storage v0.1.0 (/home/hunter/game-dev/LTS/tmp/wt-clean/crates/storage)
+    Finished `release` profile [optimized] target(s) in 2m 23s
+       Built application at: /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/lts-desktop
+NOBUNDLE_EXIT=0
+### stage: tauri build --bundles appimage
+$ tauri build --bundles appimage
+        Info Looking up installed tauri packages to check mismatched versions...
+        Warn The bundle identifier "org.openlanguage.app" set in `"tauri.conf.json" identifier` ends with `.app`. This is not recommended because it conflicts with the application bundle extension on macOS.
+     Running beforeBuildCommand `pnpm build`
+$ vite build
+vite v8.3.2 building client environment for production...
+transforming...
+✓ 43 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:   0.29 kB
+dist/assets/index-BpHLNvKe.css   10.24 kB │ gzip:   2.78 kB
+dist/assets/event-CL_fXJAH.js     1.03 kB │ gzip:   0.54 kB
+dist/assets/index-Cr63ToFA.js   342.21 kB │ gzip: 101.59 kB
+
+[33m[INEFFECTIVE_DYNAMIC_IMPORT] [0m../../node_modules/.pnpm/@tauri-apps+api@2.12.1/node_modules/@tauri-apps/api/core.js is dynamically imported by src/App.tsx but also statically imported by src/main.tsx, ../../node_modules/.pnpm/@tauri-apps+api@2.12.1/node_modules/@tauri-apps/api/event.js, dynamic import will not move module into another chunk.
+
+✓ built in 181ms
+   Compiling lts-desktop v0.4.0-alpha.1 (/home/hunter/game-dev/LTS/tmp/wt-clean/apps/desktop/src-tauri)
+    Finished `release` profile [optimized] target(s) in 48.15s
+       Built application at: /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/lts-desktop
+        Info Patching /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/lts-desktop with bundle type information: appimage
+    Bundling open-language-learning-platform_0.4.0-alpha.1_amd64.AppImage (/home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform_0.4.0-alpha.1_amd64.AppImage)
+    Finished 1 bundle at:
+        /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform_0.4.0-alpha.1_amd64.AppImage (113.62 MiB)
+
+APPIMAGE_EXIT=0
+### stage: tauri build --bundles deb
+$ tauri build --bundles deb
+        Info Looking up installed tauri packages to check mismatched versions...
+        Warn The bundle identifier "org.openlanguage.app" set in `"tauri.conf.json" identifier` ends with `.app`. This is not recommended because it conflicts with the application bundle extension on macOS.
+     Running beforeBuildCommand `pnpm build`
+$ vite build
+vite v8.3.2 building client environment for production...
+transforming...
+✓ 43 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:   0.29 kB
+dist/assets/index-BpHLNvKe.css   10.24 kB │ gzip:   2.78 kB
+dist/assets/event-CL_fXJAH.js     1.03 kB │ gzip:   0.54 kB
+dist/assets/index-Cr63ToFA.js   342.21 kB │ gzip: 101.59 kB
+
+[33m[INEFFECTIVE_DYNAMIC_IMPORT] [0m../../node_modules/.pnpm/@tauri-apps+api@2.12.1/node_modules/@tauri-apps/api/core.js is dynamically imported by src/App.tsx but also statically imported by src/main.tsx, ../../node_modules/.pnpm/@tauri-apps+api@2.12.1/node_modules/@tauri-apps/api/event.js, dynamic import will not move module into another chunk.
+
+✓ built in 199ms
+   Compiling lts-desktop v0.4.0-alpha.1 (/home/hunter/game-dev/LTS/tmp/wt-clean/apps/desktop/src-tauri)
+    Finished `release` profile [optimized] target(s) in 44.81s
+       Built application at: /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/lts-desktop
+        Info Patching /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/lts-desktop with bundle type information: deb
+    Bundling open-language-learning-platform_0.4.0-alpha.1_amd64.deb (/home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/deb/open-language-learning-platform_0.4.0-alpha.1_amd64.deb)
+    Finished 1 bundle at:
+        /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/deb/open-language-learning-platform_0.4.0-alpha.1_amd64.deb (11.92 MiB)
+
+DEB_EXIT=0
+### artifacts
+37767977  0cb39f3836c4b0f648338127a1fb5f13aabb99dee066ee6d8c31fe8805491840  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/bin/lts-desktop
+425  900b56caf0c8239c19f0ecf9aea2a6c26d2c24dda5ddc2de5766659433dc5b72  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/icons/hicolor/32x32/apps/lts-desktop.png
+740  5974f36d4a3bdb12d11c0e641af5d111d73179c15871802b14c7ffbdd3d3da06  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/icons/hicolor/128x128/apps/lts-desktop.png
+1049  9b7390f143ccfd94336554016b9d98b6c6b55385b31c598de2635779a85ef15a  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/icons/hicolor/256x256@2/apps/lts-desktop.png
+1842  e9acbb1c88c273a1417150b61a22fef45baa48da60031d5405f031d5dc153d37  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/icons/hicolor/512x512/apps/lts-desktop.png
+225  f6a71a6eb1f30bad85d74df8728cb2f1f90a88221967c193476fa84562189b95  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/applications/open-language-learning-platform.desktop
+650  86aa19fbdf31374c52377eee5ce2d2a8d08623a240e23d39fbe6a68b2ecc4d99  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.nm-applet.eap.gschema.xml
+61  e0d0b1903d351390277e203bab8edbb922d94b7d2eb3554ee757f5e460bdafd0  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/zz_cachyos.org.gnome.login-screen.gschema.override
+3063  ba7792b62dbb72b02aaa8dc184c01649c95b403cb1c958eb11a37b63d44b4fef  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.freedesktop.pulseaudio.gschema.xml
+14216  b5347cc42968617f2f12e7a29feaf272f8289d3e602e380840aecbfffbe05d7b  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.Meld.gschema.xml
+2917  44a12f339042a3f5568a9cc86bb617fabaf4a25836b8c9510aa9de22431930c6  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/gschema.dtd
+8234  ebdb45ae137313015d747580b9fb3c3c09b082bc9b06bccd3c83c0d8d24ef514  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.enums.xml
+448  5b1e65629a77dcd201f4d86932ad62c0c41ec61fb117f151966d13e69411e2dc  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.system.locale.gschema.xml
+1159  3fe90ebe8c851340249a1febe741b777c65b49a823201ead02f341be861060ed  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.system.location.gschema.xml
+6363  0f02db915e726017c17c1619ee9fd8f9ee7e6d4698f0fc160a0eb88b29f2bafd  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.system.proxy.gschema.xml
+845  6e67c6d900b0e698681454948dc6a11904edc1059af69d83ae8ff1c69abfe4ca  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.a11y.applications.gschema.xml
+828  f471028deedc07708638c7ea056ed1c6eb6632b987905321085288e836f337a8  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.a11y.gschema.xml
+1311  4c5fd28b1cd931d09d07594435b344e1c9cde4496bd6c3141e3bdf00d5f03e6a  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.a11y.interface.gschema.xml
+4897  429b25000a947e1b03724546e88b0f3dd6d3bac42addaec36d6cf81062c89cbb  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.a11y.keyboard.gschema.xml
+9380  0316beb1020bf0e1594c1578d4ee17044d8d4f04a58e788631b054503f07e0a0  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.a11y.magnifier.gschema.xml
+2907  2409903ede1c85e899ff6576bc9711b9016704ee0434c22287d34d7e8c888c36  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.a11y.mouse.gschema.xml
+1841  f6a6be999af5d5ed29079432182af7708adefc0a2c7beeb7418254487ee4b772  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.app-folders.gschema.xml
+2612  5947187d029261164eb3e938b529aafff3b3625f2f0bdc6185bbf5776afd28c6  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.background.gschema.xml
+5751  de47dd4e0b171c1eb0b7e81761a78f23d043abe662895e37e39a314f96bb192b  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.break-reminders.gschema.xml
+863  9c2f2169d8cc6cc818179e340db60e3edf1f1d804b0e84415d1ad1c7315d01e0  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.calendar.gschema.xml
+439  db8f91d8966e24570844f4f0e52b6d5e4d0212cb398c71509f5f3cab6b39d292  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.datetime.gschema.xml
+3095  a7c99035d26c1065e9c06541515d06e5ed4d105313f18afad44e628ba32ff280  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.default-applications.gschema.xml
+2839  1255b1e6ba8fcccf43a87ff6ca2343fd55b99f2d89a936556ff1fa6a9b23069e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.input-sources.gschema.xml
+13555  ff7b0f1f22c85ee8a134ca4ce78eb293f416409032efefdde9a5923f1bc2d478  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.interface.gschema.xml
+3463  3578e779ecee25ec24cb69e7170411c03f578ecda3f48455b86305b442fcad65  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.lockdown.gschema.xml
+2604  cdaa8e9740fb99852b237cfae8efcd0bb85d2de8b32ea483aad4919e3c87bb10  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.media-handling.gschema.xml
+2838  b7e983b5fa4cedccba7e6494c89de0997274986cdc69377a51589d97ac07acb4  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.notifications.gschema.xml
+26250  01fe11549cb6ad0bb6617c67a92f87ef6bfa8817a7e6ef2e2bd3a74c04655ec4  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.peripherals.gschema.xml
+4907  304f26f2030d538f0e7ab1a8bae486e2b5e5879bc55c618e8931dc822284abd5  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.privacy.gschema.xml
+1384  252058749b1c7c24fc497061f7c15623d7fffe988c3961b17ee05e7ae4fd9d51  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.screen-time-limits.gschema.xml
+6204  82e61a216bfe8bdad9b98400389cb179f149071dba8ff89720a03cc83ca633a8  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.screensaver.gschema.xml
+1906  00e6c4931d9a4005be80abae2d28bb7b716724cedc19c7be9e6d015a0ac0ea9c  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.search-providers.gschema.xml
+927  a18788e5bc793c92ed0763c57aa33560a07527e785029c6d7fb224c95796c858  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.session.gschema.xml
+1055  ff7dcae2b2b3d6109bf4d75511f0ce1538e39b0593bfcd33f35f12653c62be92  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.sound.gschema.xml
+601  445beb4a08060536ffa8824c583d670767e27a821cc865f5c2c571245812820d  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.thumbnail-cache.gschema.xml
+866  899bfc15c310051674714addc541824556a1e6d65b32cb715cba18662dc6ea02  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.thumbnailers.gschema.xml
+13590  23ab886d75e93a79b5829677d1d41f55d4ec27a823b239e9f1b80d5b7dd64efa  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.wm.keybindings.gschema.xml
+12393  cccc86360fb6fbe451e8b27c97d756c711d85dc21bc191075dab2b8613b055a1  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gnome.desktop.wm.preferences.gschema.xml
+931  e476913ef61e6719ff56c2e4c5b8b276af3020bfb0d007263c2a241835730882  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gtk.Settings.ColorChooser.gschema.xml
+833  de0685fdc2f6e890e32445a79aa938e5566b8dd406dd71d6c6a66c69e3f941e3  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gtk.Settings.Debug.gschema.xml
+623  22aba28a5a78745d87eeded88f1b86f7ddea24b1b90771151ef494c660a1b591  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gtk.Settings.EmojiChooser.gschema.xml
+6212  c7089f41d22b3854c05fe4996ff271949b40148a40b9c6f0ae0349792dc94b77  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gtk.Settings.FileChooser.gschema.xml
+1239  0a716456c56ff6a4f3ad1d72b2205b2e982a231a9586cba32bc7d1bcc93cf45a  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gtk.gtk4.Inspector.gschema.xml
+941  3c60a020ac823ad9c02394c8579296711a148fb6e15dac1c4dffa3470303af32  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gtk.gtk4.Settings.ColorChooser.gschema.xml
+840  f3093b00e9184a19289f0755345e3414921aafe15433342b36b327ade2048998  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gtk.gtk4.Settings.Debug.gschema.xml
+678  893b260569e832bb96bfa5ff95893f85d81543069799f22bf66dd419ad50a702  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gtk.gtk4.Settings.EmojiChooser.gschema.xml
+6537  e7a7482f7937a0588961613df2b14e509b08c1281bdb0b12ab279856d7d8fcea  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/org.gtk.gtk4.Settings.FileChooser.gschema.xml
+54143  418b0f4d60f0bcc9aa1a77c44b2110b8baf7a34d27405176447a9164836df010  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/share/glib-2.0/schemas/gschemas.compiled
+10913  eb29c8d0a6476ed96bd943d3b80a70efd9627baf8d85893dd9002f7e4b9d9cc9  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/webkit2gtk-4.1/WebKitNetworkProcess
+10913  431b31014e757ba9df2d9d1d9b34bae31ff7531a8ad14829e49d1d3dff64600e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/webkit2gtk-4.1/WebKitWebProcess
+10913  9d9eb95157059d31aa95f5f50c97116f08c38f813223dd43124079326a9ad334  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/webkit2gtk-4.1/injected-bundle/libwebkit2gtkinjectedbundle.so
+80673  0d2a2d7093d9d205887d5b9c7d50c85a9cb1dd1b24d10e4463e48cfa434db953  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libenchant-2.so.2
+41809  cba3a30713c43b8ace8e5f8ab14a918c3e978c04c7d5808204b710b99270f2d7  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgstallocators-1.0.so.0
+111473  d5e71d6d37f0dc68cb2b797b69ce121ab67cd3f32c86855d8fe1114802b36eb7  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgstapp-1.0.so.0
+586281  e087a9f9696573cd20ab873dac47d23fd63a6f93b777558a85aed32db334cf1c  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgstaudio-1.0.so.0
+581689  60fd93adf7244867ce93e6caf97f5df9b176212dbe33a23485c51340123a8aa6  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgstbase-1.0.so.0
+48257  ad2bbc81eca192feb0f0357a15c66f24c61654573225574816dd2e1405bf2012  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgstfft-1.0.so.0
+649641  317581522a3e4eb641a61f293e1bb763c5d1cbf2ad5e4c82d6897656a63bc6fd  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgstgl-1.0.so.0
+301145  b3a0c616730fe620c8a1f4a5875710f0943aba81477a2995440f667e9c4de73d  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgstpbutils-1.0.so.0
+1596201  343d65aaff7dd8b84705a9537692a4363f3ed81e15b7595cb7be02d59958aaf1  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgstreamer-1.0.so.0
+269617  f25d81714e8ae5f3e8583502152ce5c60d6c2359c095c9cd2b9c9900e9fb8e92  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgsttag-1.0.so.0
+943441  a2f342209c11b88b3af18533b0778bf24b04a40ad378fbc95d06fcce5ca6f575  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgstvideo-1.0.so.0
+20313  b5f5baf7b5b1802b35e89cf41474a6c31576e0fb4ae6eb500eafe7cc0c3067d1  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libharfbuzz-icu.so.0
+35825  689bf75768c9b62be86a2915f60b4ad642d0e56612cbba32f62a3eaf49ee1bcc  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libhyphen.so.0
+38331353  9ddd129a36486fd0b590c201ba744424ddb4da1867948e495a4274b29064b55a  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libjavascriptcoregtk-4.1.so.0
+345161  a14d1015e340ac8ebf2020dcf71c4cdfdc62f0db61265f969abec1182125f8a5  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libmanette-0.2.so.0
+1146209  b20f62abd8c64f00175807931eb910806dcc24fae3de1da732ab898e976cee13  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/liborc-0.4.so.0
+73849  85bda3ff9fc5381b8c48039c249ae56fa13f80947bbebade1cf4120549d4fe45  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libunwind.so.8
+7224177  952f1dc25eaf3083d2a56a190d93bd536d079b783dcfcc8c6939e307134f8fda  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libSvtAv1Enc.so.4
+19193  a74d63d75934fb01472345b359a878ddb93f72db36d7f5e595a94c7f3535d32d  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libXau.so.6
+19489  928b1251eba6fb71c30bb9ff504dc833b07672a2cd9dee37ee63e09571d07329  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libXcomposite.so.1
+58697  121d5ae733a778cf2096f8b07703dbde489e47ef1fa8f1aaeb6c7cbb79ef4a7f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libXcursor.so.1
+19241  7a9ba709315c88b6fbfbcffb5c3986437cf16afe23679913eb31a30a785278d7  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libXdamage.so.1
+32401  1f6871c4732192689741bb429b24f02808310f8dfc7c5b6c2982bfd069701936  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libXdmcp.so.6
+105721  b01a1d499e55039a4244f21c656d5bc8266f852fdf6f8cf51d1e404286ffd8dd  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libXext.so.6
+36833  3e355de951350359441c26393c3a8990bf1dc9e6903aa0a267358a0cb3efe5e6  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libXfixes.so.3
+95761  1a35695beae0fbe68a3bc8d7502a26e733068fd307f3421684461495ff2b0491  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libXi.so.6
+19289  9dc604acea7d958ce0eb8f70f8c44ef65c6fd08188a03af03c73ffe9f12aa49d  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libXinerama.so.1
+62369  db535d8d9673d358d2a4772db8e8bda6b3a9e51c6f7b1e4385baad39ab1c03c2  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libXrandr.so.2
+57641  8a56e698c28bfb138db64f97b45b9b9077084aea8b50e2dbe540a23df1537d51  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libXrender.so.1
+8659857  a091c3ab39ae6d58c7c69ba99c0824b3d82779078bb4b1e4ebbe86248f2a02c4  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libaom.so.3
+180265  f8aa972b2576eb178c0f4648ea8c73e567669a16958573b0674b93eb4330576d  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libatk-1.0.so.0
+283089  d0397fd87776ad5aa45ad2c31d8d1203953df7ec7f9be58ed806fa3fb246346a  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libatk-bridge-2.0.so.0
+42817  f726e94e023cea99b97a8cc0a3afb1802b8527b3a1fda929934d2ee305ab9275  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libatomic.so.1
+309505  856ac30559123f22f54055b6df42c4d981d6a34ace721bc621821068e3dbb853  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libatspi.so.0
+357057  20905cd003bb50090735247e68d11d0322d9897d101a145739d81d2f7a203c21  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libavif.so.16
+307049  b47c219fa5043d5332e27a5f9eb2ed893cf9d21c8d5139f0ee1c19f3d7f6c8a8  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libblkid.so.1
+146233  d8abecb2bebd70b75ddc641c6591f51e45f3163f8f4264ebc857b2fdfdfd10b0  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libbrotlicommon.so.1
+64761  717edd40d29e22dda744da7c2761ed582c6db6d6d8ec719c0e7c012076f1d904  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libbrotlidec.so.1
+965873  28315ed312bccf6af7adf68bfc321503e2ed8f6b32a125d242238b23129d0a8e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libbrotlienc.so.1
+81457  a34ffbc4069d6fda021ae36e8accfaeae579a4cf964a281bbba6e03f37ffe250  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libbz2.so.1.0
+41241  81ff6519c6b18d959f99cd7577ad7d3ac743c06eb93368c0394e312faa0a00ec  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libcairo-gobject.so.2
+1792137  2c1b76df2ea0e5185e1da59ccb61c6fadcb4dc82d62c734ecdf8afd926fdeb3b  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libcairo.so.2
+111001  29069bf1313f048ef5b65c52f6b3c993293f712740e9e44d87438b2262103bca  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libcloudproviders.so.0
+7038585  b32f933e5c46a382a46d91088b3e397032217d407c83f32363d419dad5300cec  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libcrypto.so.3
+36481  a3a3176ca011cff0b0646ff25b971d8e8887307413ed207da044f511049c3d13  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libdatrie.so.1
+2166233  392f62204a76a13c4c0e5412e8fdcae20c90704abed78a33fc2f95779bfa2db8  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libdav1d.so.7
+386121  35ca6645b5d2d7d79d55c4c8921f9ad210b65ae5b648b86ec5f5e2346045945e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libdbus-1.so.3
+677129  8f5c7a56772f9489670dd7b422525b5d134d9fb87b33fb326b6d9f288edd992c  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libdw.so.1
+125073  0abe3b072d46e066b9b2fcfb8d56bb15d373d095e40030b1f3783bf5507a3121  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libelf.so.1
+1293817  6ecd5521e3df4238df8e6ce16bc86d47d1ec2751b7112744744243bc468da809  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libepoxy.so.0
+96401  f4a7a8de7ec72251f6525b93bf73ff8fc94f69e32aed86135d193e0558933a03  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libevdev.so.2
+61929  fdaaabca47c8e2bb9f479eda5a0f6c003cb00ae735142d92d3a08107ad7fe704  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libffi.so.8
+2365657  565cf142924517f8ee65b4c5cab3070b22e09a90fac1f3483cf283f9dbaa3656  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgcrypt.so.20
+1147561  d90637d38fe0f4be59ca7271f1aed0a26d98ecd3d823303df47955ec410e80bf  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgdk-3.so.0
+336513  8b20838d966121cc5accacc93e5a4db7ff53f383a682a311f894c67391bb82bd  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgdk_pixbuf-2.0.so.0
+2183561  ba4d112bf6ce30d2cf9d7593af53b744e553c9a5e255ecd6d55b2168e71f8021  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgio-2.0.so.0
+1652145  3c02e38924ff7d7711bdabe79398be22469d9d272c9e3f46f683c87ee8ffdac6  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libglib-2.0.so.0
+4779017  305bd85be88f7ffcb85adc855ec48baa3c3912e57639a98198a26f9e40d52807  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libglycin-2.so.0
+29081  bed0a794b3eba396d117eac002e7817d0880ace7c45e07d0bb09d61246197524  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgmodule-2.0.so.0
+490633  50065964b479d0142c285a688eff3de8f13f25c44e8e2e4839de958df080cccf  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgobject-2.0.so.0
+144001  526a5914d0bc11d4c0bd1961d5556048c6dcbe9548cb89bd3988b986536c3e3c  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgraphite2.so.3
+440433  312ff4665cc8f00dc349bb3daa9f00bd62ff320e70187f12e673448584dcebfc  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgssapi_krb5.so.2
+8365441  afdc5f36d73d8d6a46246bfc4b1bde448f26b74b15aaf299d53fc0e6dba37c9b  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgtk-3.so.0
+57105  fb1ae56da66ebdd40f099c1e5d778412d04d0cab794f799e3a3d0ac8a43ea89d  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgudev-1.0.so.0
+32521  e08ace24833b90c5199d6acd9644404c07c0f7be36c95afcf8d9d29c6e4f271c  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libhidapi-hidraw.so.0
+66257  0e1ef75cf38809e1066e2be6c0693d80cf6c9364f642e0f423d821c9ec635be7  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libhwy.so.1
+33117337  97d111f56a689857020e3e278cad1127ab1ff1d3561f55c4d7e62acd56693fa6  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libicudata.so.78
+4571881  99af3480ab0a57bdf73049861579b516956e97f094d5ebda5f6cf7230aac7b93  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libicui18n.so.78
+2590433  6ec6aa672eabe3a933b3b8ebe001440afd8902d34cc42e2fc408170eb9185bfe  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libicuuc.so.78
+142881  a9a10367d215e373a45835ab07bb3b7bf90247349b10ae4df822b70c050573f7  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libidn2.so.0
+686104  fe4057e89f864538bac2455fd0a18f6ffb2867eb5abc3a4b488b0c82daa3dc0c  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libjpeg.so.8
+200313  c13a50f8c646c29ec47c9f3aac2384956f9c9a21f5a1260a5fa23e7825af466f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libjson-glib-1.0.so.0
+5648537  c5add41a95a1df08e630c7216bcc4165d9a530bf96756c36b484eb5028d7cec9  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libjxl.so.0.12
+208385  e5028a216a7ad9e2e3bd94356bfb54f332d0756d194437b07625ecfc3cdbd4ba  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libjxl_cms.so.0.12
+219409  69ae0cb3d636430f4809ccf6c1503f8360cc2f27122bd7de71a47ceec4fd9f98  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libk5crypto.so.3
+28865  5d1e0f3fdeceec896463d6ce9f47baf294eaa11a5cb40ed61dd18697b21ea79e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libkeyutils.so.1
+1084849  07afe52d3e6cc4f996262514c79fbcb97a16aeb8cf28dd57ff45f16cba200275  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libkrb5.so.3
+67721  0260de43cb3a80f39e6cc7130354b82b47f649637fc18ec7bdccc96279f2af7e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libkrb5support.so.0
+617577  0709d39f9a8139679400d73b3fdd78aff766142b9e8c2f3d9af293f0352da439  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/liblcms2.so.2
+224241  b3be1884f15d208a605671f44982f6a4c489e8470e88cf1d79b27d7fbe5d51d3  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/liblzma.so.5
+446737  afb326decacd41d4c9751e354cc0908ace7c286b8f76705702ecba2175783e52  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libmount.so.1
+199553  187b4bb480a0ccab47217f4c3fcce2690195a7f83b9eef0a2fb36b9ad256f03f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libnghttp2.so.14
+536425  62d1220e27a5130fe6a181dd88290c68561229669ecc7a9decc087b3f06f5033  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libpango-1.0.so.0
+82577  9040c9f02a4aeb1654d2cde07e5b2604c2cb8f6f5dab44df42defc1228e1509e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libpangocairo-1.0.so.0
+144841  e76dfb32826b870ac8d538b14d9d924d31cb4722cf6b93eac9fa05baf2068e11  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libpangoft2-1.0.so.0
+857857  a2b323222f92c0e3ede4c608f088cbae5ed648625d97258ed086082d4c593010  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libpcre2-8.so.0
+1390889  5c616fe1a0323cc0e810c97fb686f0fa6229514aa41dfd190bc1976a6c0a64ee  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libpixman-1.so.0
+359425  1d056f57f3092d47b6b55069a2e86368e3532296f1525d5fa4d2e91980907b4f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libpng16.so.16
+81241  f18a58f9c3fbfcff60ef364bc801a56a4d93835f88447d4a2b8afba9778563ae  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libpsl.so.5
+3247121  bc82d244922a5403f7b2c0e6f9a93fd0839544fd36206089a2fd9e878dc92a3f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/librav1e.so.0.8
+212785  825445a4a02a4dd9bfa4d3d510d5e0bc93337b24e82e6f346f5dcab67a7e30d4  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libseccomp.so.2
+335601  db65a7c386c72ac50c5bfd64839d60c90479a91ca9bf82f10a1e0bd7f08d0bdd  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libsecret-1.so.0
+47841  db109823949e66be1891005d5d1650cf8048386f3f90dac1e856ea2cff59abfc  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libsharpyuv.so.0
+702409  db6cccbee622f3f9aeb28830ae953ba30a87162f681c1b28752dfcb7a79e28ac  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libsoup-3.0.so.0
+1673352  ed6d64cda82d195b7c28781a6effd6b591e52266dbe0b803d1337507ab6f9896  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libsqlite3.so.0
+1380641  936b0b4b8fe439bf3b512fc2540de7be2f8927fcd77dc35ebb37ca725ca12ad0  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libsystemd.so.0
+106593  52b13d4df36d4fae3f6fc69313410b64fe79692394b04b80bd808a91917a20a8  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libtasn1.so.6
+54161  19bf3badabcd4514acce562d5f1e80ad945853bc6d84ebcd15a882f74c158bf8  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libthai.so.0
+875792  0317b378a390319779d20394a40a7520dabde0169b7378f71560f2cb02a060a8  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libtinysparql-3.0.so.0
+711017  66f41652dd90c809c7026135d4a40dfed90b35304f37a6727247bc7bd414beaf  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libtss2-esys.so.0
+343265  f543312f8a845480fddb171015cbae8e6bb5279cd531a38aacecd378fcefa741  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libtss2-mu.so.0
+35785  0cb78924e25a08baaf0e0879360a67e0e731e2f27158f4667344140f622e7764  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libtss2-rc.so.0
+160049  52b9a12849425938ad8547241f0f47c9b2a7a0d844e29f5542809dcfecb28c2b  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libtss2-sys.so.1
+36665  92ed18ee860b3f9bba07c59f6706e15daa5109d6a6eeda4c1b3928e8c55f2039  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libtss2-tctildr.so.0
+335985  2830f1f6bdea825b50ebeb4accfdd3ecc36d00b16e306ff67cacf372626db715  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libudev.so.1
+2090585  6efad651041ca65633b07588f7ebc1781c3649faf07f60bec5475eb12a58b48f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libunistring.so.5
+36953  0a925a2c35ff382a49b505db4a3e211c2fb60a17b70ebde545364a74d30a2aa4  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libwayland-cursor.so.0
+19041  c1d7cbf4400b87cbe2ed4107e22829472008bd38cd6d02c1b01a88cd5776e5a2  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libwayland-egl.so.1
+102801  ceb2acf2002efb5c4f2585daff734b915960ba070a18cd0d3d78bb2d5e0c979e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libwayland-server.so.0
+931281  f912c180cf359d539055ba9a614c6476c6e1adcdf07da2755881136dc1b3fbf9  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libwebp.so.7
+27913  56e340ab8cb57df27be014321d418467936633c26081d4fe51cb25e68c52e963  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libwebpdemux.so.2
+57153  50a2cd4a87d534e033b170ae62f70358e03f4e5dfd11b2bd0e976749fc86a329  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libwebpmux.so.3
+79193  64063190e1e0e8450d3400f028d41e38a617338884bc703f92c94364d55a8f4c  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libxcb-render.so.0
+19713  18c6f4aa1ded8ba31b67b8e17eeb3a04ae3dc58f3a459b64c5342ae38e6fd350  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libxcb-shm.so.0
+449801  8cc34cde1afd74cf457dfdbb200e4c9e90a2943f7cce657e77dddf610b064b79  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libxkbcommon.so.0
+1608185  91bb6f35846c4d4d284ccfb5b0e3b85d37173ceb9d23c0f1888f796200a788ff  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libxml2.so.16
+281201  ed803958f223f8efe6c711828897962a34559ede243cccd1e2b4f58d06495882  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libxslt.so.1
+1378913  e1899302b5942444687a6f3c401f7eb4cf247ae75e4101745bfc4e99a3274af5  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libyuv.so
+1146385  91ebe1c2373f1496228d177f3a513c12db198bfd17499a7a7a9e1c3c4b23370c  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libzstd.so.1
+70284  87093278996ca4ab6637273ce2ac0c0a3290f8d41c583e3ffa1e9cfd3cb15df8  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Colord-1.0.typelib
+26600  6edee680a14ee78f746c29089a6b9c9d1fc4ba449875ac13678cc554b3652b4f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Json-1.0.typelib
+680  c6e4c088ee6154609aea3982346699c4e297e1b5fab9b92d3bbc3d19befc3b07  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Libproxy-1.0.typelib
+38912  e41ea620c9d28113dc76aaa4c22d1feb599e8eda573e7176cb63848ef939f7ec  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Graphene-1.0.typelib
+8460  ae820f285842eecafcfa5204dd5e26e70f12cae6be0eb865b1938979b6b253d0  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GUdev-1.0.typelib
+30660  7078fc26d63c02e369b6d6c05a9c26c6ad4b5e2f95954868c3dac769e1c883cf  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GUPnP-1.6.typelib
+2340  a65fce34defbab113a2e1a047b9ce99dfaaed4ecff987cd8cda41d6a6ab896dc  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GUPnPIgd-1.6.typelib
+20648  d49a686bb84504e198fa8d2bd89337d278dd96bd2e93cb1b253e1d78a6faeb2b  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Polkit-1.0.typelib
+4220  516ca2f66fc5dfa9e699248e4eb379db866d5c1b0a5bca9ed1b76f297fc58eb2  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/PolkitAgent-1.0.typelib
+171436  6bb30dd8000441bd8ae7795c828f5074e000b6882fcba9e8f51839945bd27870  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Mbim-1.0.typelib
+5624  bd8b8b2b1dd349d06ea900de43dba27013d67ce9106a33fe98044d9a434f973c  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Qrtr-1.0.typelib
+1066032  8d59ee0b0fabe7a21e6519ec5469b611a12017cbac2151de1b79388a71e19efd  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Qmi-1.0.typelib
+351680  29dc310effd32613949aefd8762976d3b29db2a57a78d4d6baff35efc9a73efa  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/ModemManager-1.0.typelib
+14904  9d2eea8e4b77855880f2ecd123e3f8d291c2fccc8b2af53db0cc876b6549db6f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/NMA4-1.0.typelib
+6832  1734bcc4896e47c144e035c1effa90a2c16e5863580ff9646c135f9ec72b4174  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Notify-0.7.typelib
+68976  77e57af2420b102f420f518789024e0542751554bb91f43531b18e915a48c071  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GtkSource-4.typelib
+29424  c52033d6d1bfdc3acbcb1759b46cdd6dcaf199144f7462538d5c72f88862563e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GIRepository-2.0.typelib
+712  0843f4d6a549703df7c07f8e96d3c47752123ecf910c7571d786f5347fa02234  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/DBus-1.0.typelib
+560  2aa3277d88103f0c475700cd56fcadbcd7ddb2a588cff93696efd4922e151807  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/DBusGLib-1.0.typelib
+948  3d9a4b9f5645a5e2bbe8c74538e11a9bf64dc0c559e16b8689bdede41d3a2c8c  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GL-1.0.typelib
+133740  4f128af7f1e5a1f1697c830795eb457f6b1263c92b4797300dddc6f8f71d2810  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Vulkan-1.0.typelib
+14680  5cbad042e62d37dca8ce907f25a4fe205395b4cdc3999461a64a2e0db09b4e06  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/cairo-1.0.typelib
+400  eafb681ad77f80f43f9f758c8b5b91c58ff2586132318e61c92f521e46937bf3  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/fontconfig-2.0.typelib
+344  77695d83d33b8f84f252b7c0e05adced1e9feb3b3a43431f0be8b0fc53d2343a  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/freetype2-2.0.typelib
+668  4af5467d48dc3f9c34bb4afd1edf2433d5d0d9c975e9df60fb2494728541b48f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/libxml2-2.0.typelib
+228  da70f44d2e0be1cd17faf054870f5c00dbf4194e910f4dd5d82db54016d8f74e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/win32-1.0.typelib
+240  e55b4e0489c9aac5c7f055f4a1b40e0f92417e0db7c02d1611d342a3396c0890  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/xfixes-4.0.typelib
+464  601ef13b68bc881aa959a86fd75f483c73fb82a882bd6ccd37e38405426989f7  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/xft-2.0.typelib
+836  4710677d822f9379412bf6e7d78a10525fc178697f2481e636f16c146e32332b  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/xlib-2.0.typelib
+640  860b43fd4ff40bae47b48111ff49d432acf96c0211a95b26df5ae8c32179591e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/xrandr-1.3.typelib
+117024  e2368f2fb56428f7f7594b174178b7df4902cfcf6ea642649f8f28ea512838b6  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/BlockDev-3.0.typelib
+15928  eeab880706d0572ce868d3b02ba5dcb5f184be9526d3c487890fadbb1722e069  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Accounts-1.0.typelib
+18336  f67ee9b92118aa00aed3590936fad072de2f3755cee99852d1e336fe3219ad0f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Malcontent-0.typelib
+8452  554dd1eb0d218a821a5c0d4361b077295aac83843652ea6ff660249222b2cdd0  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Avahi-0.6.typelib
+1300  6e51f800235fa34f2e01683f6a8525bc6db669de05e833402dede073f25d3ff4  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/AvahiCore-0.6.typelib
+8188  6a789639453e79b1e64aada8049a744daac8d7e3adce81c4564535ee7f5251aa  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GSSDP-1.6.typelib
+10584  209759e5ca777603f1d1c8aed032ffb915fc58c3025f6770ea1486993a8f72d5  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/AccountsService-1.0.typelib
+25448  0f50ca4305667c22b1c9a5518dbedf752388298cea1ce3417d243147e0e33818  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Xmlb-2.0.typelib
+5944  a049b213b1b9cf29f89c7684e560a9e09af38d243a53d1c6d644adff4a321d6e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Passim-1.0.typelib
+79588  fba465e95bd46e1b09333144f4fe72ff0d52bd340e28c560b0d8aaac394fba9b  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Pango-1.0.typelib
+4616  0e95de7f44d9fbd762b85ade92687960becdc5debfb07b8d18e4bf203c92b1d6  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/PangoCairo-1.0.typelib
+2856  2cb63ba8e28045a9b2c9ea0bc4b0c297dc1a0193e09a5b50cb5a0f22b3a76c6c  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/PangoFT2-1.0.typelib
+3928  ff668e157919493543b8280080e64d288e25b1cd7a5fe8125f8277c209c529fd  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/PangoFc-1.0.typelib
+5584  b0d70d120ea6443e95bdfb26485d05440f6566d08e695d170969d922300dfe18  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/PangoOT-1.0.typelib
+4280  a6a0683b6e9a9a2c88f99422a9768b4c900daf22074bbcfe145cafe3365bbe57  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/PangoXft-1.0.typelib
+188496  ce1a2281b8e1ae7406fde71cce1cf1bb4ebadcfff8e9adfcb1c54277c1234be2  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/UDisks-2.0.typelib
+79120  5c840b35008c1d863f0c151b68d04ecc218590636d83bc5458312f26a0efefa8  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/OSTree-1.0.typelib
+87140  2646435823b38dd3505e16aa52b093676cff924537ea250e3832e15facee5b4b  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Poppler-0.18.typelib
+20432  49a3b42d1bbfeea7bd7e8e09a7da19f05a104d64bd120a0b3e72ba6df3b61f73  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Nice-0.1.typelib
+14384  e3552ba178f3731a16f68afe4c8590900ecb2ffe622034e2c0323b9c7d385ead  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/CloudProviders-0.3.typelib
+31848  71780275531c2d028973b9b5d97d8abbb9778ec28c76e90048f4637c921fc177  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Gck-2.typelib
+43624  2157844fc603b308b061cbda314622da3b38fb935f05a34dcc4f0341d5112493  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Gcr-4.typelib
+26184  8b26e9a4da8fe3b15d8dd57b226319076570ca01f7ce54c75ba235a1fd687c9f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Secret-1.typelib
+103304  1f1f0ddee26237aaf5abe1fcafb36965e0401e37510d1fb7d8717ba425852e4c  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Fwupd-2.0.typelib
+93932  c68478e6fe560412b0e80b149932baab2743fee2510c39a21043e24118b60e21  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Vips-8.0.typelib
+101900  2fb99a003a3c53ef5dc25ff2c346cab939192fe7cb089743a14ba16e06d6456a  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/AppStream-1.0.typelib
+22328  b6132be6aa568ec6d4cec72279ab7decdacbadd0dd70492121fd37ba552b3797  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/AppStreamCompose-1.0.typelib
+37988  79e9b28e6bb24f06ea676fc6a1f53be79f77e5e5e1f83c9b2b22ecb35f450164  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Flatpak-1.0.typelib
+38788  05e3487e98b8487c253395cdb294d2e5bc5942d2e7ff45cb363135d89d2543ce  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Gsf-1.typelib
+74820  31001ccc3a0930ee07d7a6ec20c29f93211328dcf0e960aa1ceb3804c1b75277  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Wp-0.5.typelib
+127672  0797385b7650f803bb6a79cf95629184253fb1123ce17e71b82253366ee6060c  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/ICal-4.0.typelib
+218256  8e8a861547db98054524d54d4dab341d0c73f9628cbcceae490525f815f2052d  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/ICalGLib-4.0.typelib
+363748  a8b28a7a3f19cff59ebbd7a1231d762b40f87fb788d6ecc60fda3d42fc2d7dc4  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/NM-1.0.typelib
+11676  a6018eaba2f369def3eae7deab9ed15ed168375220527ad5548521e23272c635  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/UPowerGlib-1.0.typelib
+162504  dacb364b42088fa24975c6e1ba514659e224504df933339fa47518778ca72a32  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/HarfBuzz-0.0.typelib
+16656  1f1cccdf434daf7b6fc0ffe5d7c6fd31a823f7c78b9d498e05de8ff7f8474a5f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Dbusmenu-0.4.typelib
+4100  d218cbc67fc948148617e41a539fd1d0ab3172d46e422eec71fa72c769aa713e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/DbusmenuGtk3-0.4.typelib
+8592  ebf006fa0da1360d0cee2f1d62cb95e87279220f02f0997eb2155bd8743cbaa6  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/AyatanaAppIndicator3-0.1.typelib
+24960  7f66e78bc30fd03c2e6d6f8d5c948d644dc91754c890288815d27c33feea4e93  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GIRepository-3.0.typelib
+230552  10f247646a1f637c65788fecac0e2c56704e41369ec37612d7876bdf94c5210a  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GLib-2.0.typelib
+2152  64a3035e9a5f05f9beca9e219f6fb8b8296c90a13f7e72fa7b158e0d395833bd  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GLibUnix-2.0.typelib
+1908  ec36617a747237088af3642ef94532689fb3d52023510a05ac0840a7cc8c7dd2  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GModule-2.0.typelib
+66424  9183189e8ff86c2bd8438252948ce0eed61480ee28d63c916ffbcac1f818bc64  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GObject-2.0.typelib
+361984  36b96c50584be14d4a4a5482e31aaf67cbb873893d62c19e54f766a85158b5bf  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Gio-2.0.typelib
+14164  d2b667eb1198d43cf8ba44efe2da730d0069dd4f0e9cb8385761c003bd4d4566  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GioUnix-2.0.typelib
+14152  35b6842e0ed0816a9ef34d7ce4d35260720c1e0cbe0954ec9f1a43ea8c27dc35  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Gly-2.typelib
+19872  6596f18b0b8f4babdf866ed9047c89204e2786c3dfd67dcf719f57124de02304  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GdkPixbuf-2.0.typelib
+2372  fbabd7fb451967b585722b47c6a70a045ddd1b3bae818f514db9981769936f4e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GdkPixdata-2.0.typelib
+8712  5950fb2b8db7bcec7ed78c66c00a19155f5d75e28b1bf6b1a91aa87813ff71bf  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Rsvg-2.0.typelib
+12400  33cc701a37143cae904b0838ba6edc03248dcc03fc1ff4e0d3dea96eb13f15c3  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GDesktopEnums-3.0.typelib
+75860  db95e9650074726d4e19b56a4f7a4a9c13c18b93d8ae65dc596e69ef321135ee  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Atk-1.0.typelib
+64004  ea6eaa46ee8dfed6944ebbe2ba14c55e9dea55a5c70947f9688936ae0bdc00b6  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Atspi-2.0.typelib
+73348  0120d5afc431abcaed1ed26a80b8366e93778c7ff01782d341770384d0bea1d4  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Soup-3.0.typelib
+25500  937952c33054bd55137db9e5fafd8ca4c3008f7a3f0170f93b3611cf98c60b46  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Tracker-3.0.typelib
+25516  bab394ac201b6d3ac08b639de6585a1e57b545f8f6a2df7463380a7089168161  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Tsparql-3.0.typelib
+235840  d5492509eb5dcf4c6e61e9963aae7eff878758d38d7c7f7e226577318759c43a  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Gdk-3.0.typelib
+10944  903efec0bfe5268cc82aebc6a99c0e3ebfed4af63138c1bdc581766cdaf91bc9  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GdkX11-3.0.typelib
+679420  02c07aa34dcfa3cb275dc84d548d051f48e9f8dc1cbd4c8d31afe245bdda5e28  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Gtk-3.0.typelib
+259724  a3ac9b4a365d76f00c567653171e69caa843e5931d1f09cd3977a337beb4357e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Gst-1.0.typelib
+55044  4ac70c72b6121bb456633415991e93c6fdcf13ab89981a49200f3118abe9057b  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstBase-1.0.typelib
+14636  36e68b9fe9fe795784a94efc661aa80099aa58aaa1b84981bd0f729273753a24  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstCheck-1.0.typelib
+7356  f914a056fb72edceb14bfd063c0fabd5d13b8e4d83da06832bb37d0bab48bea6  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstController-1.0.typelib
+6700  12af6b15b5aada3ccce94c85750e2093929d4bd0a59150edd71807693fcf22ef  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstNet-1.0.typelib
+5188  274bb523a524274c42a98e000c563e13b8b10b4c44d5e3b856e2dd17951f5596  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstAllocators-1.0.typelib
+12676  5875c9eb93739432e47c71a4d280f7b00d64d850a11587aa67c33de2b4a64a26  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstApp-1.0.typelib
+64908  c3ec498d39eb3378a2914cadee9432d8e3b01466559c0b85101bd1400311546f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstAudio-1.0.typelib
+70616  5c2ecfe369e84f650e0c65cae7fee1e58d5cb50857341579e23742c3abfa19f2  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstGL-1.0.typelib
+5916  d32a4a58166c81b887ca97fc7176b995fc197d19c137c63723cb513c3d8fd012  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstGLEGL-1.0.typelib
+1052  6a01c78de8ff8fd1a0415e31930d4351cd8e7e544db56684071280d76c57672d  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstGLWayland-1.0.typelib
+856  06d4783692faa633355ec2a7a2a1c3397ddbdf280e18c6d1238c87575a6c6d47  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstGLX11-1.0.typelib
+30844  73853d155d4e3fe1815cd61ce4e0f865b9bcca1d2ae3a728b9e51dc6ed373b18  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstPbutils-1.0.typelib
+41700  1051423ca43770e4e3d46f632788b3a3505133472ea2d06ed5ed561463a54067  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstRtp-1.0.typelib
+37620  aa16784bd131ae8cd3965bee3adc70862105d63baced4471db1f93226d2ce8b8  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstRtsp-1.0.typelib
+25336  3eee7eb30097a13a05d7bfa17fb73dc4ec245be8a32e5a7b1705efdac195bf8a  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstSdp-1.0.typelib
+15056  e34d23fe96707408e43c6dd2e1b995b6105ef83cb2f0fe74c0caee17f3f7d4ae  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstTag-1.0.typelib
+126232  0eb26af75d973255fa9626eb2f25959a5f402b276e83a4c4e4f16449a34f7764  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstVideo-1.0.typelib
+12084  0161115986a4f8af2c4a28b3c4322f6063bbb475bcc963eddeef76ee5736e7a4  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/CudaGst-1.0.typelib
+16860  ef9f2b31732598684499b9a79c44eb4d2b426e72f1e830a1f08d0836ef3d74a9  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstAnalytics-1.0.typelib
+7680  11cb518be4ffcd8be04d1c27d276138a819e6622819d1ddd98de973c12c6ce22  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstBadAudio-1.0.typelib
+185496  8d3dda7fbb5336f09b8de1ed97786bfc94351672265a314dbdfc649f99921336  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstCodecParsers-1.0.typelib
+33332  46bbef2d684644976da53ade305ae946229e1f42bd3e24b8c6125520d1bc2143  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstCodecs-1.0.typelib
+11248  2cdf9c0c2bc2b77a5be7711b4fb5d94dba066c906a2453e6339c761e6c511f9f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstCuda-1.0.typelib
+10524  20034a5dd783a23ab693686dfb3b701a7f6fa9c0e7cf3d09e652b9994f872201  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstDxva-1.0.typelib
+2004  49743f43f23e102c34a2ba9eceea09d0ab5510f83d1d99dda213056e442d138a  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstInsertBin-1.0.typelib
+78712  713f7309e6e4fe9f51ef06cdbfe4077ed1a2da7eb23ff7df866d06bae114d75a  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstMpegts-1.0.typelib
+8184  181bc8f5657987ceea426d3311e8fa0a4c4d70d6b2a28fdecfb0ef1a5305d2e2  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstMse-1.0.typelib
+22528  c867fcb757f23c056d75723d8a3f38ddf25f05ffd17bf6f9f5b8d222a0cddfb5  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstPlay-1.0.typelib
+16064  40921041f069f0258191eabaa3f753fff5de90f76d3dee1807c09ad2c1fd604e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstPlayer-1.0.typelib
+6344  57c2b713e1d1633f70199454af21c93f929b612d53cbe050a2c88e60ee598915  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstTranscoder-1.0.typelib
+7696  d2a639a10d3158f37f92c39d842c86294260f9c57acade5f744edaaa0b1220f4  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstVa-1.0.typelib
+47588  8eea1e25448640d53aab775bb178dfa16316f940fab2b5ba23fc77bf5cf849ca  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstVulkan-1.0.typelib
+1084  f7815b6bdc6682c78eb4b8e273d5c0ecc0c2bdb81647e0b0aef85174e65a34e9  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstVulkanWayland-1.0.typelib
+788  0beba6d056c317147f1ecbfb21bc29bb2cdfd361d9997a6460767e16ea9737e4  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstVulkanXCB-1.0.typelib
+23776  0b794648201bbf9a747086a6f3d891633f7fedd9860732a8e88b5e0c4d7a9d7f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GstWebRTC-1.0.typelib
+2000  38d5127ae5c577bb0671ddd010f6e413fea53a2532a3392a70ee04f68a43a5fe  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/ZBar-1.0.typelib
+238172  463aa063d0443b8ceacf3d6db3c88b5b595e5d1516814a8a00e29ab67de8e87e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Gdk-4.0.typelib
+3480  3f46bbcfc2a6448c5444a3dec8555f2d8dc83bc8227ccf62ca45fa6eb2a582f6  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GdkWayland-4.0.typelib
+8816  31896f6836329583b0f5f8d99e7be1236e11f787f7cb7b8a70a2c0f9de97a066  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/GdkX11-4.0.typelib
+51088  eae0e154299fb9f81fd8ae9b9f7bf1f64f4367a010e2c676ac4ef487ca0ee999  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Gsk-4.0.typelib
+571540  3daafbef461001efa84aaa0ffeb12190383dcd09e0a0f50440747ec6504460aa  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Gtk-4.0.typelib
+1924  985db2bc561c2d94d3f56c0d076f438b8c18623a02a7248aa2226901e72eed5f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Ministream-1.typelib
+161236  81048b00be0c95f1aba250a823da50721e07ae51fe32a05b4dabeaf6459d0228  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Adw-1.typelib
+4756  75e2415e8e8dd42b7db99e218647875e4277e63ebcf89f7f802a687801f27be4  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/Manette-0.2.typelib
+18720  3a842389fbb1a8dfefe222e7e5c9a55b9c132f30d8b427483f8a0dc9cfef4329  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/JavaScriptCore-4.1.typelib
+146320  d61c839abab85483084a6e853657748f862eef2e21264a85428f8f2bf895d787  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/WebKit2-4.1.typelib
+178100  a3d34271f001fc86385e675b4e35f0f5f3de0d4dead5bd72cc253f7676527eba  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/girepository-1.0/WebKit2WebExtension-4.1.typelib
+0  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gio/modules/.keep
+71529  a19919b13452c0a6aa6c7e0e31a1587423bfd95cb44f059bf5f3bea819627bc4  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gio/modules/libdconfsettings.so
+30025  f608a134eb648735b0d41fac1185b988eace2dbe9855c10c9204af44bc4d5c82  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gio/modules/libgiognomeproxy.so
+150553  c082c0a593a1b2641f01f49a26c5fa8b6ac00161c663f6f74fe1493fe4c8e725  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gio/modules/libgiognutls.so
+25273  70b7b283aa449ba1f5826a1007fb1896b13a3c60ca66e2f8a244de88a0a21e83  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gio/modules/libgiolibproxy.so
+150  2fe7ad576c5bec7552846c4a3fd662ebc0c9c398eb8e9e4b416e51862cb9e74d  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gio/modules/giomodule.cache
+31753  85a9d9ab58f699bbf4c0221267eb8af9c615260042f02e703c6f9ccc308a590b  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/3.0.0/immodules/im-am-et.so
+19649  29b8da19287236f44d585283dfd56d8916e3e6b273b307e7fe9f47f9e719fc68  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/3.0.0/immodules/im-broadway.so
+19465  09218f1308aff17c8aaf93c3b26d4ee332caa7c32adee5749fbe609213ba8aaa  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/3.0.0/immodules/im-cedilla.so
+19465  f55011b49a0955ca1132c0416fad917fe7e727e52cd96d3d2e2c22cfe85a8004  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/3.0.0/immodules/im-cyrillic-translit.so
+19465  3c2bdb6ef8b163bdca800f6f5fed28c08297e15ea471f53d66218c06a1ffdf38  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/3.0.0/immodules/im-inuktitut.so
+19465  e61badc512e64e544d45b61e43ac1b727bb30053aebf26dfafeb5843098f41db  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/3.0.0/immodules/im-ipa.so
+25001  d24cf156cfb903fd2659a313d7d1b6d988bc178b11acdec033f350f32d252391  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/3.0.0/immodules/im-multipress.so
+19969  ab1618922c44d54652ee1af7842064f1a4c7eaad7a9fec2be4e451dcc1a8e32e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/3.0.0/immodules/im-thai.so
+31753  d967e2de33eebaf77f6d871a0198b5dd9bf0d1d667a56adfe929a54faf206b36  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/3.0.0/immodules/im-ti-er.so
+31753  ec3b4828b4b7fa4912a9c1fcc2bafae1a417e173424893eda6502292ed438656  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/3.0.0/immodules/im-ti-et.so
+19465  e4d4e7949b5a29e6df3bb89ddd56c1d5c84001b0d3eadd8e349656c0bf365978  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/3.0.0/immodules/im-viqr.so
+37649  2f98efbb6b4d2e5c1278a3e478ca511f5f08752b8b9a4571a35f1ecd050ef3ee  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/3.0.0/immodules/im-wayland.so
+52137  0f101ccada9949b95f0325a1bf05edd1a28c1e22cb7e1dcf68920b2c475cdc5c  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/3.0.0/immodules/im-xim.so
+155233  6ad6ea8b03c32c33b88d20d58050aaeaa43f74ebc8ec4cb2ee1b4ddc59f7f2f8  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/3.0.0/printbackends/libprintbackend-cups.so
+31801  69490331b8b70edd2acf01cdf42cdecb2e00af1b3c4887693370c0d17c6e7149  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/3.0.0/printbackends/libprintbackend-file.so
+26489  7131edef96d67e86eb48d6ff5c1b2b0afd6b3f97c05c5d5b8a238b59944259f4  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/3.0.0/printbackends/libprintbackend-lpr.so
+1343  114d1af2bc03e50ec548bfd9482b878a933a47023369e74d3c5f1dc3976a8866  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/3.0.0/immodules.cache
+34761  6fbb9ab3ee2c6ead9f86db3840751ed7281d24c2b637f5049d9fd9fa2ddff7f9  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/modules/libcanberra-gtk3-module.so
+19305  7ef2f33278fca42ff6846244e99d86226900a44330b1bf6146cc820ea427ae43  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/modules/libcolorreload-gtk-module.so
+19785  3395059a62e2a4da55ec300304a93fe00b3741b47f478f87725eee89e7a9b0f5  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gtk-3.0/modules/libwindow-decorations-gtk-module.so
+20129  87c58c38a35e938fd80962563f136a4c17fc32f57cc25925fdd18482e73684ca  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gdk-pixbuf-2.0/2.10.0/loaders/libopenraw_pixbuf.so
+766  6421f665c5b85a3493a3f562331bc04560d8858fb24ddd3bc025031a2eab0cc6  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache
+84561  86388142ead3d1b89b09fef282ff3303829ed0cf071622c3a7b4db0a859fccb8  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libavahi-client.so.3
+63537  57b83aba46a3dc8ff5bf355edbba2b19ae47e91782be1b37e1fd0f8a6812868e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libavahi-common.so.3
+28625  e81e6919237dfae874af2466fdc53990c1b0b8db3b90886fbff92e3fcbc01119  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libcanberra-gtk3.so.0
+71712  b6887f13b12ac6158b965e0ac577685803a589d093095045c86f19d6bcf9fc10  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libcanberra.so.0
+385825  e8230590e942ea466a62ec7811c3be2073b597ba5260672dc983bec89070d1c7  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libcolord.so.2
+636721  3226f3d8a1ad57970dd7f9e5c0398490d8877784ce37805c5a69210621a00185  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libcups.so.2
+1406537  015f90b0290af97e79d37f7526481aba129dc00ac09af735301c1ba8191726d1  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libcurl.so.4
+322537  5b693e175d9005593344156049d819c94f65b2d54e7935be35da8ea4d55bc045  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libduktape.so.207
+336513  8b20838d966121cc5accacc93e5a4db7ff53f383a682a311f894c67391bb82bd  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgdk_pixbuf-2.0.so
+336513  8b20838d966121cc5accacc93e5a4db7ff53f383a682a311f894c67391bb82bd  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgdk_pixbuf-2.0.so.0.4400.8
+2183561  ba4d112bf6ce30d2cf9d7593af53b744e553c9a5e255ecd6d55b2168e71f8021  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgio-2.0.so
+2183561  ba4d112bf6ce30d2cf9d7593af53b744e553c9a5e255ecd6d55b2168e71f8021  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgio-2.0.so.0.9000.1
+2559985  368c32ba5968d3b0763bcbfefc904743e34350f9cbed77b39edba3e4359a191d  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgnutls.so.30
+490633  50065964b479d0142c285a688eff3de8f13f25c44e8e2e4839de958df080cccf  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgobject-2.0.so
+490633  50065964b479d0142c285a688eff3de8f13f25c44e8e2e4839de958df080cccf  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libgobject-2.0.so.0.9000.1
+321625  1dd12db1f7d2ae2f929506a03d09d6311706c32e40f79f48d42b72eab7ce06f1  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libhogweed.so.7
+4036665  144db08a14b8ab60b134707f4bd2f1bf0699a9559273c80b1c668932706ee45c  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libleancrypto.so.1.9
+57881  82420be4a2973ad7cff06df5091ef261a78e3d3e62bd9dba758087c33a7c14ee  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libltdl.so.7
+450561  ad8094c1768d807317a842dfcc2b9bce3aaf1097c33bde7e11484957bdc645ff  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libnettle.so.9
+190737  5fd994e8dacd5a70306c4f86b60ca10e66c0daad346a775816ce6bab75eb7359  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libnghttp3.so.9
+468697  962ca9abfa98f0792df6cd3d9f3f5716f666634eef7ae064941124c07e24c7a9  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libngtcp2.so.16
+60161  8bcadb69c59aae2c10ea966ac08e49b195ff9ef9d66b7ca0ac8748ce8ca8f180  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libngtcp2_crypto_ossl.so.0
+49473  f2b59ee8485edc7e141c8c243b066a99e736d134c488bf8270762c42cba79f0b  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libogg.so.0
+3377217  ae6e13ac40e52da58f11e02b55fa0a801ec432391d5db625cb98c19849143cf1  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libopenraw.so.9
+2358849  45c6aa8ff3439ff9c74d88cd1adddbef5f300e79c8526fb5258d2006ae874ef7  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libp11-kit.so.0
+536425  62d1220e27a5130fe6a181dd88290c68561229669ecc7a9decc087b3f06f5033  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libpango-1.0.so
+536425  62d1220e27a5130fe6a181dd88290c68561229669ecc7a9decc087b3f06f5033  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libpango-1.0.so.0.5800.2
+82577  9040c9f02a4aeb1654d2cde07e5b2604c2cb8f6f5dab44df42defc1228e1509e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libpangocairo-1.0.so
+82577  9040c9f02a4aeb1654d2cde07e5b2604c2cb8f6f5dab44df42defc1228e1509e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libpangocairo-1.0.so.0.5800.2
+144841  e76dfb32826b870ac8d538b14d9d924d31cb4722cf6b93eac9fa05baf2068e11  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libpangoft2-1.0.so
+144841  e76dfb32826b870ac8d538b14d9d924d31cb4722cf6b93eac9fa05baf2068e11  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libpangoft2-1.0.so.0.5800.2
+59432  22893985e7da18a78b7c11ce52f88e851354a1b81ad9308462ff42f92490bddc  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libpxbackend-1.0.so
+14208  de2c4795874b49a6785bb265be8ba8ba7dd72bc775de320631c6674e36a88149  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libproxy.so.1
+4857169  8912635abdd2f151b5b3f867e47de6c880a51ecff6ca78340d9686f99cababed  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/librsvg-2.so
+4857169  8912635abdd2f151b5b3f867e47de6c880a51ecff6ca78340d9686f99cababed  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/librsvg-2.so.2
+4857169  8912635abdd2f151b5b3f867e47de6c880a51ecff6ca78340d9686f99cababed  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/librsvg-2.so.2.63.2
+382777  6592fb74ac4b485b63e865e25b74bdb2c32e348f81eadd4e5c8e89726eeef890  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libssh2.so.1
+1180905  1833e039fc298be703ee6f86993c171fb2247c650a983432b0c5a61f34f6962f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libssl.so.3
+129385  a50c931a7c2bd41dbeab090daeee0845569ebaf383e85a73a09a1e1232b316b1  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libtdb.so.1
+301497  2e2ae111936206e4fb3524c91a67ea4ba849f43696134376972eacc6b4cef869  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libvorbis.so.0
+49257  dee7d92f0c0734ad3afff72a0f93c03f86dfed80b5aea55cda515322ba2af23c  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libvorbisfile.so.3
+93853553  689624707fbd62ad8fda3f1a2afeeab4e350cd8f703ef6ac181f6d1017c69a10  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib/libwebkit2gtk-4.1.so.0
+4552  ac76253201fbee9891aa8adeb8cce7ac53f11bf1c466f5fe350d41eb3cbfc1f9  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib64/webkit2gtk-4.1/WebKitNetworkProcess
+4552  afe6c0f50e08a762747c65e4b7fc04551960338af72c67649f287b3c4808f2e5  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib64/webkit2gtk-4.1/WebKitWebProcess
+4792  dda3f0925107da7c3a322816b286ee3592c160a131a156550099ea3f00be3e9e  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/usr/lib64/webkit2gtk-4.1/injected-bundle/libwebkit2gtkinjectedbundle.so
+1842  e9acbb1c88c273a1417150b61a22fef45baa48da60031d5405f031d5dc153d37  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/open-language-learning-platform.png
+1594  b817312524dc34aff9faa0f2cf1f91f8a17cede909816cde85f11e7fcf8882a5  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/apprun-hooks/linuxdeploy-plugin-gtk.sh
+31552  f30140a43a0a59e46db21bdefdf749b9e9f2c6946e92afabbacf98b8ae73fb4f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/AppRun.wrapped
+274  eb0b254ac0dae6543e6dd7cd02e1baf40a060de95b927313122d6b46323c00aa  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform.AppDir/AppRun
+119142904  2a5fa861bf639e64ec15cffb8fd0e063f52963d67adc42352a386824867c6d62  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/appimage/open-language-learning-platform_0.4.0-alpha.1_amd64.AppImage
+37728352  63356468beaeda0dad4e78cf50042d5ed792848118cba4436d7db0c805c677b2  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/deb/open-language-learning-platform_0.4.0-alpha.1_amd64/data/usr/bin/lts-desktop
+425  900b56caf0c8239c19f0ecf9aea2a6c26d2c24dda5ddc2de5766659433dc5b72  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/deb/open-language-learning-platform_0.4.0-alpha.1_amd64/data/usr/share/icons/hicolor/32x32/apps/lts-desktop.png
+740  5974f36d4a3bdb12d11c0e641af5d111d73179c15871802b14c7ffbdd3d3da06  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/deb/open-language-learning-platform_0.4.0-alpha.1_amd64/data/usr/share/icons/hicolor/128x128/apps/lts-desktop.png
+1049  9b7390f143ccfd94336554016b9d98b6c6b55385b31c598de2635779a85ef15a  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/deb/open-language-learning-platform_0.4.0-alpha.1_amd64/data/usr/share/icons/hicolor/256x256@2/apps/lts-desktop.png
+1842  e9acbb1c88c273a1417150b61a22fef45baa48da60031d5405f031d5dc153d37  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/deb/open-language-learning-platform_0.4.0-alpha.1_amd64/data/usr/share/icons/hicolor/512x512/apps/lts-desktop.png
+225  f6a71a6eb1f30bad85d74df8728cb2f1f90a88221967c193476fa84562189b95  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/deb/open-language-learning-platform_0.4.0-alpha.1_amd64/data/usr/share/applications/open-language-learning-platform.desktop
+271  63678a36eec677dc6df70be4828b21b10e05a8c7b1e89a91ca69681e7144b636  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/deb/open-language-learning-platform_0.4.0-alpha.1_amd64/control/control
+499  3a9591e613e64c9320269e56fabe28f25885e0452c136b0835cae6d5f93c31ef  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/deb/open-language-learning-platform_0.4.0-alpha.1_amd64/control/md5sums
+4  d526eb4e878a23ef26ae190031b4efd2d58ed66789ac049ea3dbaf74c9df7402  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/deb/open-language-learning-platform_0.4.0-alpha.1_amd64/debian-binary
+541  bad7de9187478502cfbbfda925cf4a79354a8fdac3b4e69353fdea2fcdadf8ae  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/deb/open-language-learning-platform_0.4.0-alpha.1_amd64/control.tar.gz
+12493122  1569ef0d042eeb43682ae2216783953d4e1e2bed1a185c106a8a799483f2b829  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/deb/open-language-learning-platform_0.4.0-alpha.1_amd64/data.tar.gz
+12493856  3de3b3bb8d5df9ca0bb15b93413306e150aee4e1afde733a8907d62b7497671f  /home/hunter/game-dev/LTS/apps/desktop/src-tauri/target/release/bundle/deb/open-language-learning-platform_0.4.0-alpha.1_amd64.deb

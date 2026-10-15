@@ -17,9 +17,20 @@ and that difference is one line:
 ```
 
 So every byte of content in these archives is the content in the tracked tree; only
-the version string was raised. Nothing under `languages/**` was modified, because a
-tracked version bump would invalidate the `0.4.0` pins/tests and would pre-empt the
-owner's decision.
+the version string was raised. Nothing under `languages/**` was modified at the time,
+so this preparation could not pre-empt the owner's decision.
+
+**Corrected 2026-10-15.** The reason originally given for not bumping the tracked tree
+— that a bump "would invalidate the `0.4.0` pins/tests" — is false, and the file paths
+listed here as pins are not all real. Measured at `fd76786`: no test asserts the
+tracked pack version. The only `0.4.0` assertions are the live-install test
+`apps/desktop/src-tauri/src/packs.rs:1124`, whose expected versions come from the
+catalogue pins, and historical fixtures (`packs.rs:925`,
+`apps/desktop/src/journeys/harness.tsx:113`, `pack-install.journey.tsx:59,61`).
+`crates/speech/tests/rust_asr_sanity.rs`, `apps/desktop/src-tauri/tests/commands.rs`
+and `tests/test_pack_build.py` do not exist in this repository. The bump is now on the
+tracked tree, and the archives, gates and member-level accounting are re-measured in
+`state/evidence/RC-0.4.1-2026-10-15/NOTES.md`.
 
 Builder: `tmp/build-041.sh` (scratch), logs in this directory, table in
 `SUMMARY.txt`.
@@ -90,24 +101,41 @@ copies can go.
 The `license` row is the substantive one: `catalog/packs.json:8` has said
 `CC-BY-4.0` for ja since the entry was added, while the pack declares
 `content_license: "CC-BY-SA-4.0"` (`languages/ja-JP/manifest.yaml:33`). The CLI takes
-the licence from the pack, so regenerating the entry corrects it. Whether the pack or
-the catalogue is the wrong one is owner gate **O-01a** (CC-BY vs CC-BY-SA); the two
-cannot both stand. ru's entry already agreed with its manifest, so the earlier claim
-that both entries were mislabelled was wrong and is corrected in
-`tasks/KANBAN.md` (republish-packs row).
+the licence from the pack, so regenerating the entry corrects it. **The licence itself
+is not an open question:** owner gate O-01a was decided on 2026-10-13 in favour of
+`CC-BY-SA-4.0` for the pack
+(`state/evidence/LIC-002/owner-decision-O-01a-2026-10-13.md:8-16`), and
+`catalog/packs.json` was deliberately left at `CC-BY-4.0` because that entry describes
+the already-published 0.4.0 artifact, whose embedded manifest still says `CC-BY-4.0`
+(measured: the published archive's `manifest.yaml` is 769 B, the 0.4.1 candidate's is
+772 B — the inserted `-SA`). ru's entry agrees with its manifest (`CC0-1.0`), so the
+earlier claim that both catalogue entries were mislabelled was wrong and is corrected
+in `tasks/KANBAN.md` (republish-packs row). The catalogue licence changes as part of
+publishing a 0.4.1 entry, not before.
 
-## Sequence the owner would authorize (nothing below is done)
+## Owner sequence — status of each step
 
-1. Bump `version:` in `languages/{ja-JP,ru-RU}/manifest.yaml` on the tracked tree and
-   commit (that is what makes these archives reproducible from the repo instead of
-   from a scratch copy).
-2. Build the archives from the tracked tree; record sha256/bytes.
-3. Create the tag and the release assets — **check the tag ruleset first**: the
-   proposed O-08 ruleset with `restrict creations` would block a new tag until it is
-   either applied after tagging or configured to allow the release actor
-   (`state/evidence/O-08-2026-10-15/rulesets-probe.md`).
-4. Replace the two `catalog/packs.json` entries by hand (never `scripts/build-catalog.sh`).
-5. Then end ADR-0032: delete the 18 tracked media files and the `.gitignore` exception
-   block, and move the ADR to Accepted with the end condition met.
+1. **Done 2026-10-15, on the tracked tree.** `version:` in
+   `languages/{ja-JP,ru-RU}/manifest.yaml` bumped to `0.4.1`; this is what makes the
+   archives reproducible from the repository instead of from a scratch copy.
+2. **Done.** Archives built from the tracked tree; bytes, sha256, member counts, the
+   install round-trip and a member-level accounting against the published 0.4.0
+   archives are in `state/evidence/RC-0.4.1-2026-10-15/NOTES.md`.
+3. **Owner only.** Consider the repository-protection order **first**: enable
+   immutable releases (`PUT /repos/…/immutable-releases`) *before* publishing, because
+   it only locks **future** releases — publishing 0.4.1 first leaves it mutable, and no
+   republish workflow is documented. A pattern-scoped tag ruleset then covers the seven
+   tags that already exist. Today **zero rulesets exist**, so nothing blocks tag
+   creation or movement; the earlier claim that a push ruleset would have protected tags
+   was wrong (that feature is Team-plan, private/internal-only, content-scoped).
+   Measured state, docs quotes and the proposed JSON:
+   `state/evidence/O-08-2026-10-15/mechanisms-2026-10-15.md`. Nothing was applied.
+   Then create the tag and upload the two assets.
+4. **Owner only.** Replace the two `catalog/packs.json` entries by hand — never
+   `scripts/build-catalog.sh`, which drops the platform fields and invents URLs.
+5. **Owner only, and only after 3 and 4 are verified to work.** Then end ADR-0032:
+   delete the 18 tracked media files and the `.gitignore` exception block; moving the
+   ADR to `Accepted` is a human decision.
 
-Steps 1–5 touch published state and the licence question, so they need the owner.
+Steps 3-5 publish state. The tracked journey audio stays in git until replacement
+distribution is published **and** verified.

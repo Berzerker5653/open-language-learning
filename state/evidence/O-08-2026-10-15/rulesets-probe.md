@@ -80,8 +80,30 @@ request that was actually sent successfully.
 ## What this changes about the risk
 
 Even before any ruleset, a **moved tag cannot install wrong bytes**: the engine
-verifies the pinned `sha256` before install (`crates/langpack/src/archive.rs:302`),
+verifies the pinned `sha256` before install (`crates/langpack/src/archive.rs:287`),
 so a retagged release fails closed. The ruleset adds repository-level
 immutability (nobody force-pushes or deletes a pinned tag), which is what the
 catalog's `sha256` pins assume socially. That is a defence-in-depth decision for
 the owner, not a fix for a live defect.
+
+## Correction, later the same day
+
+`mechanisms-2026-10-15.md` is the authoritative version of this note. Three things
+written above are wrong or incomplete:
+
+1. The digest check is `archive.rs:287` (`if hex_sha256(&data) != f.sha256`); line
+   302 is the `pack.validate(Mode::Install, None)` gate. Re-confirmed by reading the
+   file.
+2. "the 7 release tags" is right but the release count was mis-stated elsewhere as 6:
+   `GET /releases --paginate` returns **7** releases and `GET /tags` returns **7** tags.
+3. The proposed `~ALL` shape is superseded by a pattern-scoped one, and it is not the
+   primary recommendation. **GitHub immutable releases** (`GET
+   /repos/Berzerker5653/open-language-learning/immutable-releases` → HTTP 200
+   `{"enabled":false,"enforced_by_owner":false}`, re-verified) is the purpose-built
+   mechanism: it locks the tag *and* the assets and emits a Sigstore-style
+   attestation. It applies to **future** releases only, so the ordering that matters
+   is: enable immutability **before** publishing 0.4.1, and use a tag ruleset to
+   cover the seven tags that already exist. A push ruleset would not help at all —
+   that feature is Team-plan, private/internal-only and content-scoped.
+
+No remote setting was created, edited or deleted by either note.
