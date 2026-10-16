@@ -84,6 +84,17 @@ that layer. Whether the ja-JP **pack-level** license should also become
 CC-BY-SA-4.0 is an open owner licensing decision (raised 2026-10-13), not
 something an agent may settle.
 
+A third ShareAlike record exists in the prepared O-07 option-A patch (not landed): the
+kanji `radicals` element lists are **KRADFILE** data — "files relating to the
+decomposition of the 6,355 kanji in JIS X 0208 into their visible components" — © EDRDG,
+CC BY-SA 4.0, consumed through the jmdict-simplified 3.6.2 `kradfile` conversion and
+cross-checked against `ftp.edrdg.org/pub/Nihongo/kradfile.gz`. Two licence duties come with
+it and are **open work items**, not satisfied paperwork: §3 asks that the acknowledgement
+appear in an app "About"/"Sources" surface rather than only in files (the app renders no
+pack attribution at all today — see the paragraph below), and §4 requires a procedure for
+keeping incorporated EDRDG-derived data up to date. The pack's `sources.jsonl` pins the
+exact conversion release and file hashes so that update check is concrete.
+
 Attribution for pack content is data, not UI: it lives in each pack's
 `licenses.jsonl`, `sources.jsonl` and `README.md`. No installed pack's
 attribution is currently rendered anywhere in the app — a known gap, not a

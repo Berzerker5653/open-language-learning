@@ -195,9 +195,15 @@ categories:
       redistribution: derived
       attribution: KRADFILE © EDRDG, CC BY-SA 4.0
       notes: >
-        Research source only; not cited by any pack record as of 2026-10-13. See
-        the kanjidic2 note on the unrecorded provenance of the kanji `radicals`
-        field.
+        Research source as of 2026-10-13 (not cited by any pack record then). The prepared
+        O-07 option-A patch — NOT landed, see `state/evidence/O-07/` — changes that: it adds
+        the pack `sources.jsonl` record `kradfile` and licence record `lic-kanji-radicals`,
+        names `kradfile` in the per-record `sources` spans of all 84 `kanji/*.jsonl` rows, and
+        replaces every `radicals` list with the KRADFILE element list (20 already byte-identical,
+        7 same set in a different order, 57 changed). Licence verified 2026-10-15 at
+        edrdg.org/edrdg/licence.html: CC BY-SA 4.0, §2 covers RADKFILE/KRADFILE and files
+        derived from them, §3 requires an app-surface acknowledgement, §4 requires a data-refresh
+        procedure. KRADFILE2/RADKFILE2 (JIS X 0212) are separately held by Jim Rose and unused.
     - id: unidic
       title: UniDic (morphological dictionary, NINJAL)
       org: NINJAL
