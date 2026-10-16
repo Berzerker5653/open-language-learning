@@ -35,6 +35,17 @@ Two version numbers stay separate throughout:
 
 ### D1 — Do we act on O-07 before freezing 0.4.1? **Blocking; decide first.**
 
+> **RESOLVED 2026-10-16 — the owner chose A, and it is applied.** Verified on the applied
+> tree rather than on the patch text: 57 of 84 lists changed content, 20 were already
+> byte-identical, 7 reorder-only, 0 characters missing, 0 empty or duplicated lists, and no
+> kanji record now claims `jf-standard` as its only provenance. 29 pack-gate invocations and
+> `cargo test --workspace` exit 0. The licence duties A triggers and the costs it exposes are
+> cards, not loose ends: `JA-KANJI-ATTRIBUTION-001` (app-surface acknowledgement),
+> `JA-KANJI-REFRESH-001` (currency procedure), `JA-KANJI-DECOMP-UI-001` (display rule),
+> `JA-KANJI-MNEMONICS-001` (17 mnemonics — `blocked` on a human author, not `ready`).
+> Decision record: `state/evidence/O-07/decision-2026-10-16.md`. D2 and D3 stay open as
+> questions, but **the numbers under D2 changed** — see the note there.
+
 **Decision.** The 84 shipped kanji records misdescribe their own provenance, and the
 `radicals` field is wrong in a measurable fraction of records: 21/84 sets are disjoint
 from the KANJIDIC2/KRADFILE-derived lists and the indexing radical is absent from 24
@@ -79,6 +90,13 @@ the deferral in the ledger (`O-07` note) and proceed to D2.
 **Recommendation.** Publish, but only after D1 and D3, and let the **owner** perform the
 tag and asset upload (publication is an owner act in this project; agents have built
 everything up to the boundary).
+
+**Current numbers (2026-10-16).** The O-07 change rebuilt both candidates. ja is now
+**318,722,747 B, sha256 `e697ee92f6602c3373ebe5910f0dfbee8e50edcb3e9a25b2890efba5a5964690`**
+(+1,414 B, same 5,864 members); ru is byte-identical at 318,489,935 B `9eb074fa…1d7a`. The
+ja digest quoted elsewhere in this queue and in `RC-0.4.1-2026-10-15/NOTES.md`
+(`7d9c7045…b460`) is stale. `dist/rc-0.4.1/` on this machine already holds the current
+files; an archive copied before 2026-10-16 is the wrong one.
 
 **What publishing changes for users.** ja gains 18 sentence/phrase audio assets and the
 `CC-BY-SA-4.0` licence string; both packs gain grammar/goal/environment content recorded
