@@ -83,6 +83,13 @@ the deferral in the ledger (`O-07` note) and proceed to D2.
 
 ### D2 — Publish the 0.4.1 reference packs (O-01b)
 
+> **AUTHORIZED 2026-10-16 — publish both, ja display name without `(Draft)`.** The
+> preparation half is on the tracked tree as one commit (`20f994d`): manifest bump plus both
+> catalogue entries hand-edited to the current pins, verified against the archives by size and
+> SHA-256. The tag + upload is still yours, with copy-paste commands and the reason one `main`
+> run goes red in between: `state/evidence/RC-0.4.1-2026-10-15/publish-runbook.md`. D3 landed
+> first, as recommended, so both releases will be immutable.
+
 **Exact approval requested.** "Publish `org.openlanguage.ja-jp.reference-0.4.1` and
 `org.openlanguage.ru-ru.reference-0.4.1` as GitHub release assets, and let the two
 `catalog/packs.json` entries be replaced by hand."
