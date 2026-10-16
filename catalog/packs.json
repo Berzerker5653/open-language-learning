@@ -4,8 +4,8 @@
   "packs": [
     {
       "author": "Open Language Learning Platform contributors",
-      "display_name": "Japanese Reference Pack (Draft)",
-      "license": "CC-BY-4.0",
+      "display_name": "Japanese Reference Pack",
+      "license": "CC-BY-SA-4.0",
       "locale": "ja-JP",
       "min_sdk_version": "0.1.0",
       "pack_id": "org.openlanguage.ja-jp.reference",
@@ -13,10 +13,10 @@
       "tested_platforms": ["linux"],
       "community_confirmed_platforms": [],
       "untested_platforms": ["windows", "macos"],
-      "sha256": "f0aa971f30ec88c0f09ca86085d04133616944d9fff6a75345bf31931b713a5f",
-      "size_bytes": 317429131,
-      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.4.0/ja-jp-reference-0.4.0.lpk",
-      "version": "0.4.0"
+      "sha256": "e697ee92f6602c3373ebe5910f0dfbee8e50edcb3e9a25b2890efba5a5964690",
+      "size_bytes": 318722747,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.4.1/ja-jp-reference-0.4.1.lpk",
+      "version": "0.4.1"
     },
     {
       "author": "Open Language Learning Platform contributors",
@@ -29,10 +29,10 @@
       "tested_platforms": ["linux"],
       "community_confirmed_platforms": [],
       "untested_platforms": ["windows", "macos"],
-      "sha256": "899e0c67a71d165a706afd216817c53b9ee9a56d34a99f1197aeec29a8ea3e14",
-      "size_bytes": 316616342,
-      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.0/ru-ru-reference-0.4.0.lpk",
-      "version": "0.4.0"
+      "sha256": "9eb074fa8d59f508108bc0fa8c698e1ddbd7458648ee2d829edeb36fbcfc1d7a",
+      "size_bytes": 318489935,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.1/ru-ru-reference-0.4.1.lpk",
+      "version": "0.4.1"
     }
   ],
   "tested_platforms": ["linux"],

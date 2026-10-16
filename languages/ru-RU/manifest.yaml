@@ -1,7 +1,7 @@
 schema_version: "0.2"
 pack_id: "org.openlanguage.ru-ru.reference"
 display_name: "Russian Reference Pack (Draft)"
-version: "0.4.0"
+version: "0.4.1"
 target_locale: "ru-RU"
 source_locales: ["en-US"]
 engine:
