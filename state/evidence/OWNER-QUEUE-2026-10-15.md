@@ -141,6 +141,14 @@ keeps a name the pack no longer declares. Field-by-field diff:
 
 ### D3 — Repository protection: enable immutable releases **before** publishing
 
+> **RESOLVED 2026-10-16 — applied.** Immutable releases read **`enabled: true`**, and tag
+> ruleset `release-tags` (id `25246378`) is active with `deletion` + `update` rules. Two
+> corrections to this entry: the proposed pattern-scoped ruleset is **not accepted here**
+> (exact tag names, `*`, and `org.openlanguage.*` all 422; only `~ALL` works for a `tag`
+> target), so the applied ruleset covers all tags; and it has no `creation` rule, so 0.4.1 tag
+> creation stays open. Immutability now covers releases made from today, not the seven that
+> exist. Read-backs and probes: `state/evidence/O-08-2026-10-16/applied.md`.
+
 **Exact approval requested.** "Enable immutable releases on this repository"
 (`gh api -X PUT repos/Berzerker5653/open-language-learning/immutable-releases`), and
 optionally "create the proposed tag ruleset for `org.openlanguage.**` and

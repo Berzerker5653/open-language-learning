@@ -2,6 +2,14 @@
 
 Scope: read-only determination (docs + `gh api` GETs; `gh` authenticated as the repo owner). **No remote setting was created, edited, or deleted.** This builds on `state/evidence/O-08-2026-10-15/rulesets-probe.md` and corrects two of its conclusions (see §6).
 
+> **Superseded in one part, 2026-10-16.** The proposed ruleset JSON below (§5) was applied on
+> 2026-10-16 **with a different pattern**: this repository rejects `ref_name` patterns for a
+> `tag` target — exact tag names, `*`, and `org.openlanguage.*` all returned `422 Invalid
+> target patterns` — and accepts only `~ALL`. The applied ruleset (`release-tags`, id
+> `25246378`, `deletion` + `update`) is therefore broader than proposed, and immutable
+> releases are now `enabled: true`. Read-backs and the probe table:
+> `state/evidence/O-08-2026-10-16/applied.md`.
+
 ## 1. Repo / plan context
 
 `GET /repos/Berzerker5653/open-language-learning` → 200:
