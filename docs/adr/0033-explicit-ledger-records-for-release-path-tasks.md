@@ -68,3 +68,12 @@ Proposed. If the owner accepts, the flag can be added to `scripts/ci.sh` and
 `state/task-state.json` should be amended to say the derivation rule no longer applies to
 required tasks. Until then the flag is available for review and the default output is
 unchanged.
+
+**Applied 2026-10-16 under decision-queue item D5b** (the owner chose "adopt ADR-0033 and
+enable the flag in CI"). The strict invocation is now what CI runs, in both
+`scripts/ci.sh:112` and `.github/workflows/ci.yml:253`, and the `note` in
+`state/task-state.json` carries the derivation carve-out. Measured in the same change: the
+plain and strict runs both print `HANDOFF VALIDATION PASSED (1960 data files checked)`;
+strict adds four WARNs for optional tasks with no record (`AI-001`, `PLAT-002`, `ADV-001`,
+`WEB-001`) and no failures. Line 3 still reads **Proposed** — that line is the owner's
+signature, not a build fact.

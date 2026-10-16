@@ -91,11 +91,14 @@ The roadmap contains immutable requirements and dependency edges; `state/task-st
 
 An explicit `ready` or `retryable` never bypasses incomplete dependencies. Only one task may be `in_progress` in this single-agent workflow, matching `active_task`. `done` requires nonempty acceptance evidence references and completed dependencies. A task in `review` still blocks dependents. A retry requires a recorded error/strategy and increments attempts without discarding previous evidence. State writes must be atomic and recoverable.
 
-A proposed validator check (`tools/validate_handoff.py --require-explicit-ledger-records`,
-`docs/adr/0033-explicit-ledger-records-for-release-path-tasks.md`) would additionally
-require an explicit ledger record for every task flagged `required_for_desktop_1_0`. It is
-**not enabled**: until the owner accepts that ADR, absence keeps deriving readiness exactly
-as above, and the check exists for review only.
+The validator check `tools/validate_handoff.py --require-explicit-ledger-records`
+(`docs/adr/0033-explicit-ledger-records-for-release-path-tasks.md`) additionally requires an
+explicit ledger record for every task flagged `required_for_desktop_1_0`. The owner adopted
+that policy on 2026-10-16 (decision-queue item D5b), so CI now runs it in strict mode at both
+call sites (`scripts/ci.sh:112`, `.github/workflows/ci.yml:253`); the plain invocation still
+derives readiness exactly as above, which keeps older baselines quotable. ADR-0033's own
+`Status:` line stays `Proposed` until the owner signs it: an agent can change what CI runs,
+not who agreed.
 
 If requirements or content change after completion, mark affected tasks for re-review and rerun affected acceptance checks before counting them complete. Record the review invalidation; do not leave stale `done` statuses merely because an older test passed.
 

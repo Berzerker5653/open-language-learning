@@ -47,8 +47,96 @@ dependency graph. Two non-vulnerability warnings:
 - Action: none; re-check at release gates. It disappears when the
   glib-macros chain moves to syn 2 only.
 
+## 2026-10-16 re-scan and owner acceptance (queue item D8)
+
+`cargo audit` at `e18c9df` (Rust 1.97.1, 562 crate dependencies):
+`warning: 4 allowed warnings found`, exit 0. The audit step is wired in CI
+at `.github/workflows/ci.yml:230` and carries **no** allow-list file, so
+warnings exit 0 by design — this note, not the exit code, is the record that
+a human read them.
+
+The owner accepted the three advisory-bearing warnings on 2026-10-16.
+
+| id | package | class | disposition |
+| --- | --- | --- | --- |
+| RUSTSEC-2024-0429 | glib 0.18.5 | unsoundness (see above) | accepted; upstream-owned, unpatchable under tauri 2.12 / gtk 0.18 |
+| RUSTSEC-2024-0370 | proc-macro-error 1.0.4 | unmaintained (see above) | accepted; compile-time only |
+| RUSTSEC-2024-0449 | unsafe-libyaml 0.2.11 | unmaintained | accepted with the reachability note below |
+
+### unsafe-libyaml 0.2.11 / RUSTSEC-2024-0449 — reachable, and still not a vulnerability
+
+The 2026-10-10 note did not cover this one, and the honest reading is
+**reachable**, unlike glib:
+
+- `cargo tree -i unsafe-libyaml -e normal --workspace`: unsafe-libyaml 0.2.11
+  has exactly one consumer, `serde_yaml 0.9.34+deprecated`, which is a normal
+  (runtime) dependency of `lts-langpack`, `lts-langpack-cli`, `lts-learner-model`
+  and `lts-desktop`.
+- The live call path is `parse_document` (`crates/langpack/src/pack.rs:1372`),
+  which parses **pack** documents, so a third-party pack's YAML does reach this
+  parser. That is untrusted input by the security boundary in AGENTS.md.
+
+- No advisory exists: the warning class is `unmaintained`, not a defect, and
+  nothing in the RustSec database names a flaw in unsafe-libyaml. The crate is
+  a thin unsafe wrapper around the libyaml parser, so "unmaintained" means no
+  future fixes will land, not that a known fix is being withheld.
+- No in-tree upgrade path: `cargo update -p unsafe-libyaml --dry-run` and
+  `cargo update -p serde_yaml --dry-run` both report `Locking 0 packages` —
+  0.2.11 and 0.9.34 are already the newest resolvable versions, and the
+  `serde_yaml` line itself is published as `0.9.34+deprecated`.
+- Mitigating structure: pack YAML is parsed into a `serde_yaml::Value`, then
+  re-serialised through a JSON-compatibility gate before anything is read, and
+  the pack is schema-validated under size caps before install.
+- Residual risk: the wrapper we depend on is deprecated upstream, so this
+  surface ages badly. Replacing `serde_yaml` (not just unsafe-libyaml) is a
+  candidate card — **owner decision, no card opened**.
+
+### zip 8.6.0 — yanked (the fourth warning: dispositioned 2026-10-16, bump scheduled after publication)
+
+Not an advisory: `cargo audit` prints `Crate: zip, Version: 8.6.0,
+Warning: yanked`. It was absent from the 2026-10-10 scan because the pin came
+later, and it is a **direct** dependency — `Cargo.toml:33`
+(`zip = { version = "8.6.0", default-features = false, features = ["deflate"] }`),
+used by `lts-langpack` for `.lpk` read/write and by `lts-desktop` for pack
+validation and export.
+
+Measured 2026-10-16:
+
+- crates.io lists the whole `8.x` line (`8.3.0`…`8.6.0`) and `9.0.0`–`9.0.3`
+  as yanked; only **9.0.4**, published 2026-10-16, is installable. The
+  upstream changelog (`zip-rs/zip2`) gives no reason for the yanks.
+- `cargo update -p zip` refuses with "version 8.6.0 is yanked". The committed
+  `Cargo.lock` still builds — a yanked version installs when it is pinned —
+  but no lock regeneration can select it again, and 8.x gets no further fixes.
+- Bump cost, measured then reverted: with `zip = "9.0.4"` the workspace
+  compiles after **three one-line changes**, because `name()` now returns
+  `Result<Cow<str>, ZipError>` (`crates/langpack/src/archive.rs:269`,
+  `crates/langpack/tests/archive.rs:207`, `crates/langpack/tests/archive.rs:280`).
+  `cargo check --workspace --all-targets` exit 0, `cargo test -p lts-langpack`
+  green, and `cargo audit` then reports 3 allowed warnings.
+- Release reproducibility: the same pack built with 8.6.0 and with 9.0.4 is
+  **byte-identical** — example pack, 3976 B,
+  sha256 `7938e5fba60e3ceffdf7e796c229b29f3ec57493a959dc35ac53a92ad9434bcc`
+  either way — so the 0.4.1 pack digests survive a bump.
+- Reachability of what 9.x fixed: 9.0.1/9.0.2/9.0.4 harden the crate's own
+  extraction (symlink handling, two entries landing on one path, a separator
+  inside one verbatim path component). Our install path never calls
+  `ZipArchive::extract`; those guards are ours — `safe_rel`, the manifest
+  allow-list, symlink rejection via `unix_mode`, `take(size + 1)` plus sha256
+  verification, staging directory and rename
+  (`crates/langpack/src/archive.rs:245-319`). Staying on 8.6.0 therefore
+  leaves no known gap in this code; the cost of staying is reproducibility and
+  future fixes only.
+
+Status: **dispositioned 2026-10-16 — bump after the 0.4.1 packs are published** (queue item
+D8b, option b). The owner had accepted three warnings under D8 without having seen this
+fourth one, and chose not to change the app toolchain while release assets are being
+uploaded. So: `zip 8.6.0` stays pinned through the publication window, the audit warning
+stays visible, and `zip = "9.0.4"` plus the three `name()` changes land as one standalone
+commit immediately afterwards. Until then any regenerated `Cargo.lock` cannot reproduce this
+tree — that cost is now owned, not unnoticed. Board rows: `zip-bump-9`, owner gate **O-09**.
+
 ## Re-check command
 
-`cargo audit --json` from repo root (the CI `security`-adjacent step is
-not yet wired; adding machete/audit gating was recorded as backlog-only in
-the sweep — owner decision).
+`cargo audit` from the repo root; CI runs it at
+`.github/workflows/ci.yml:230` with no allow-list file.

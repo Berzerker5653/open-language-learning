@@ -109,7 +109,7 @@ if [ ! -d .venv ]; then
   python3 -m venv .venv
 fi
 .venv/bin/python -m pip install -q -r tools/requirements.txt
-.venv/bin/python tools/validate_handoff.py
+.venv/bin/python tools/validate_handoff.py --require-explicit-ledger-records
 .venv/bin/python -m unittest discover -s tools -p 'test_validate_handoff.py'
 .venv/bin/python scripts/test_generate_pack_audio.py
 .venv/bin/python scripts/test_fetch_pack_audio.py

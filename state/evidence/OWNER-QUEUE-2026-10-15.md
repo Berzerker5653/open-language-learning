@@ -22,11 +22,11 @@ Two version numbers stay separate throughout:
 | Licence propagation | the CLI emits `license: "CC-BY-SA-4.0"` for ja (was `CC-BY-4.0`), ru unchanged at `CC0-1.0`; proof: published ja `manifest.yaml` 769 B vs candidate 772 B, the inserted `-SA` |
 | Cached-media safety | pinned by `crates/langpack/tests/media_upgrade.rs` (3 tests, 3 passed) |
 | Clean-environment install | fresh worktree, no `node_modules`: `pnpm install --frozen-lockfile` exit 0 (151 packages), `fmt:check`/`lint`/`typecheck`/`test`/`build` green. **Not** a cold-network proof (`downloaded 0`, warm store) |
-| Desktop bundles built locally | **finalized** AppImage `72,837,624 B` sha256 `8c3b5913…` (the raw `tauri build` output is `119,142,904 B` and ships the build host's WebKit — not distributable, `scripts/finalize-appimage.sh` closes that), deb `12,493,856 B` with `Depends: libwebkit2gtk-4.1-0, libgtk-3-0`, binary `37,728,352 B`; headless start proven before the owner's own `lts-desktop` instance was running; **rendered UI not proven** |
+| Desktop bundles built locally | **finalized** AppImage `72,837,624 B` sha256 `8c3b5913…` (the raw `tauri build` output is `119,142,904 B` and ships the build host's WebKit — not distributable, `scripts/finalize-appimage.sh` closes that), deb `12,493,856 B` with `Depends: libwebkit2gtk-4.1-0, libgtk-3-0` — needs `scripts/finalize-deb.sh` before it installs on Ubuntu 24.04 or Debian 13 (D12, now written), binary `37,728,352 B`; headless start proven before the owner's own `lts-desktop` instance was running; **rendered UI not proven** |
 | Ledger completeness | all 66 `required_for_desktop_1_0` ROADMAP tasks now carry a ledger record; the four new ones are `blocked` with named blockers |
-| Ledger validator | `tools/validate_handoff.py --require-explicit-ledger-records` implemented; **opt-in**, default output byte-identical to the old baseline |
-| O-07 | mapped, a fix verified, **not applied**; decision needed (§2 D1) |
-| Repository protection | measured read-only; nothing applied (§2 D3) |
+| Ledger validator | `tools/validate_handoff.py --require-explicit-ledger-records` implemented and **enabled in CI** at both call sites (`scripts/ci.sh:112`, `.github/workflows/ci.yml:253`); the plain invocation still reproduces the old baseline |
+| O-07 | **applied 2026-10-16** under D1 option A; four follow-up cards opened, one `blocked` on a human author (§2 D1) |
+| Repository protection | **applied 2026-10-16** under D3: immutable releases enabled, tag ruleset `release-tags` (`25246378`) active on all tags (§2 D3) |
 | ADR acceptance briefs | written per ADR; statuses unchanged (§2 D5) |
 
 ---
@@ -212,6 +212,14 @@ regardless; the status line only records who agreed).
 
 ### D5b — ADR-0033: adopt the ledger-completeness policy?
 
+> **ADOPTED 2026-10-16 — enabled in CI.** The flag is now the CI invocation in both
+> places (`scripts/ci.sh:112`, `.github/workflows/ci.yml:253`). Re-measured today: plain and
+> strict both print `HANDOFF VALIDATION PASSED (1960 data files checked)`; strict adds four
+> WARNs for optional tasks with no explicit record (`AI-001`, `PLAT-002`, `ADV-001`,
+> `WEB-001`) — warnings, not failures, so CI stays green. The plain invocation is untouched
+> for anyone quoting an older baseline. **What is still yours:** `Status: Accepted` on line 3
+> of ADR-0026–0031 **and 0033** — an agent cannot sign the status line.
+
 **Exact approval requested.** "Adopt ADR-0033 and enable
 `--require-explicit-ledger-records` in `scripts/ci.sh`."
 
@@ -235,6 +243,12 @@ tree at commit X", after §3's first four rows are closed.
 
 ### D7 — Accessibility: AT host and scheduling
 
+> **ANSWERED 2026-10-16 — the owner will schedule the Linux/Orca pass.** ACC-001 therefore
+> stays a hard blocker for the desktop RC and no ADR-0015 scope note is written. Nothing
+> agent-side moves this row: the worksheet (`docs/assessment/ACCESSIBILITY_AUDIT.md`) is
+> ready, and the pass needs a human AT user on a machine with Orca plus a Japanese voice.
+> `REL-001` stays `blocked` behind it, honestly.
+
 **Exact approval requested.** Two separate things: (i) "an AT pass will be performed on
 <host + screen reader>" — NVDA/VoiceOver/Orca matrix per `docs/assessment/ACCESSIBILITY_AUDIT.md`;
 (ii) whether ACC-001 remains a hard blocker for the desktop RC given nothing else can move
@@ -251,13 +265,64 @@ that.
 
 ### D8 — SEC-001 disposition
 
+> **PARTLY RESOLVED 2026-10-16 — the three you saw are accepted; there is a fourth.** Live
+> `cargo audit` at `e18c9df`: 562 crate dependencies, **4 allowed warnings**, exit 0. The
+> three advisories (glib 0.18.5 unsound, proc-macro-error 1.0.4, unsafe-libyaml 0.2.11) are
+> dispositioned and accepted; the 2026-10-16 section of
+> `state/notes/SEC-001-dependency-disposition.md` now carries the reachability evidence,
+> including the correction that unsafe-libyaml **is** reachable from pack YAML while glib is
+> not. The fourth — a yanked direct pin — was never in front of you: see **D8b** below.
+> SEC-001 itself stays `blocked`: accepting residual risk is a human act.
+
 **Exact approval requested.** "Accept the three allowed `cargo audit` warnings
 (glib, proc-macro-error, unsafe-libyaml) as dispositioned, with dispositions recorded in
 `state/notes/SEC-001-dependency-disposition.md`", or name replacements/upgrades you want
 first. `RUSTSEC-2026-0346` (rustls `Debug` leaking secrets) is already fixed by the lock
 bump; `cargo audit` exits 0 with only the allowed set.
 
+### D8b — the fourth audit warning: the yanked `zip 8.6.0` pin (found 2026-10-16)
+
+> **DISPOSITIONED 2026-10-16 — bump after 0.4.1 publishes.** The owner chose option (b): the
+> release toolchain stays frozen through the publication window, and `zip 8.6.0` → `9.0.4`
+> becomes a small standalone commit immediately afterwards, carrying the three one-line
+> `name()` changes. Until it lands the audit warning stays visible and the pin stays
+> unselectable for any regenerated lock; that trade is now owned rather than unnoticed.
+> Logged as owner gate **O-09** on the board.
+
+**What it is.** Not a vulnerability. `cargo audit` prints `Crate: zip, Version: 8.6.0,
+Warning: yanked`. The maintainer withdrew the entire 8.x line (`8.3.0`…`8.6.0`) plus
+`9.0.0`–`9.0.3`; only **9.0.4**, published today, is installable, and the upstream changelog
+gives no reason. It is a **direct** dependency (`Cargo.toml:33`,
+`features = ["deflate"]`) used for every `.lpk` read and write.
+
+**Why it is not urgent.** The committed `Cargo.lock` keeps building — a yanked version still
+installs when it is pinned — and our install guards are ours, not the crate's `extract()`
+(`safe_rel`, the manifest allow-list, symlink rejection via `unix_mode`, `take(size+1)` plus
+sha256, staging directory then rename), so the extraction hardening 9.x added closes no gap
+in this code.
+
+**What staying costs.** No lock regeneration can ever select 8.6.0 again — `cargo update -p
+zip` refuses with "version 8.6.0 is yanked" — and 8.x receives no further fixes.
+
+**Measured cost of moving** (probed in the working tree, then reverted; nothing is applied):
+with `zip = "9.0.4"` the workspace compiles after **three one-line changes**, because
+`name()` returns `Result<Cow<str>, ZipError>` now (`crates/langpack/src/archive.rs:269`,
+`crates/langpack/tests/archive.rs:207`, `crates/langpack/tests/archive.rs:280`);
+`cargo check --workspace --all-targets` exit 0; `cargo test -p lts-langpack` green; audit
+then reports 3 allowed warnings. The rebuilt pack archive is **byte-identical** to the 8.6.0
+build (example pack, 3976 B, sha256 `7938e5fb…4bcc` either way), so the 0.4.1 digests
+survive the move.
+
+**Options.** (a) bump before the 0.4.1 tag, so one toolchain builds the release; (b) bump
+immediately after publication as a normal dependency change; (c) leave the pin and re-check
+at the next release gate. **Recommendation: (b)** — the packs are data and their digests are
+already computed, and swapping the app toolchain mid-publication buys nothing except a new
+variable in the release window.
+
 ### D9 — PERF-002: performance budget freeze
+
+> **CONFIRMED 2026-10-16 — not frozen.** The provisional state stands and no budget ADR is
+> written: `typical` is measured, `high`/GPU and the `low`-tier rows are not.
 
 **Exact approval requested.** "Freeze the tier budgets" — which per PERF-001 requires a
 separate ADR (budgets are currently `status: provisional, frozen: false`).
@@ -267,6 +332,11 @@ on this lab (no CUDA device, no real `low`-tier device), so a freeze would pin
 provisional numbers to a contract. `typical` is measured.
 
 ### D10 — Qualified-review posture (confirm, don't re-decide)
+
+> **CONFIRMED 2026-10-16 — ADR-0017 §2 stands.** Qualified-human review is not a
+> desktop-1.0 release blocker, and promotion past `draft` still needs a human record the
+> validator enforces. `JA-A1-003`, `JA-A2-002`, `JA-B1-002`, `JA-B2-002` stay `blocked` on a
+> reviewer, not on code.
 
 **Exact approval requested.** Confirm ADR-0017 §2 still stands: qualified-human review is
 not a desktop-1.0 release blocker, while promotion of content past `draft` still requires a
@@ -280,6 +350,10 @@ reviewer and `REVIEWER_KIT.md`, not code.
 
 ### D11 — Speech calibration (confirm only)
 
+> **CONFIRMED 2026-10-16 — no change.** Guided-only pronunciation feedback ships;
+> `SPEECH-007` stays out of the required set and `blocked`. Consent-panel collection remains
+> the only route to an accuracy claim and is not being opened.
+
 O-04 is decided (ADR-0017): guided-only pronunciation feedback ships; `SPEECH-007` is out
 of the required set and stays `blocked` rather than `done`. No new decision unless you
 want consented-panel data collected at some point, which is the only thing that could ever
@@ -287,6 +361,18 @@ turn the accuracy claim on (docs/18, ADR-0013).
 
 
 ### D12 — Which Linux distros must the deb install on? (found by the bundle check)
+
+> **RESOLVED 2026-10-16 — option (b), written and tested.** `scripts/finalize-deb.sh`
+> rewrites only the bare `libgtk-3-0` entry into `libgtk-3-0t64 | libgtk-3-0` (alternative
+> first, so pre-t64 systems still resolve) and repacks the `ar` archive with the compressor
+> the bundle already used — there is no dpkg on this host. It proves its own invariants:
+> every other control field identical, the data member's sha256 unchanged, member names
+> preserved. `scripts/test-finalize-deb.sh` pins gzip and zstd fixtures, an unrelated
+> `Depends` left alone, a non-`ar` path rejected, and a re-run that is byte-stable rather
+> than a failure. Proven on the real local bundle: `libgtk-3-0` →
+> `libgtk-3-0t64 | libgtk-3-0`, 12,493,922 B → 12,493,970 B, data member `19288d37…`
+> identical. Documented in docs/13 beside the AppImage finalize step. Option (a) is off the
+> table if the clean-boot evidence machine is 24.04, as this item assumed.
 
 **Exact approval requested.** Pick the installability target for the deb: (a) **pin the
 tested distro** to Ubuntu 22.04 / Debian bookworm for the alpha and state it in docs/13 +
@@ -315,8 +401,8 @@ Either way the check output is in `state/evidence/BUNDLE-LOCAL-2026-10-15/NOTES.
 | O-06 hands-on app pass | owner-declared gate; `scripts/smoke-desktop.sh` also needs port 127.0.0.1:1420, held by the owner's dev server | open |
 | AppImage clean-boot install + smoke | needs a machine without this build environment | open — AppImage builds and starts headless here, but rendered UI was **not** proven (black captures under Xvfb) |
 | Windows + macOS runtime | binaries cross-compile; never executed | open |
-| ACC-001 screen-reader matrix + IME audit | requires a human AT user | open |
-| SEC-001 disposition | owner gate on residual advisories | open (D8) |
-| Qualified band review (4 cards) | cannot be self-certified | open (D10) |
+| ACC-001 screen-reader matrix + IME audit | requires a human AT user | open — D7 asks when |
+| SEC-001 disposition | owner gate on residual advisories | the three advisories are accepted (D8); **D8b** still needs your disposition |
+| Qualified band review (4 cards) | cannot be self-certified | posture confirmed (D10); the four cards wait on a reviewer, not on code |
 | Clean cold-network dependency install | this host's pnpm store is warm (`downloaded 0`); CI covers it | unverified locally |
 | `--release-readiness` validation | honest **5 FAILs**: ja-JP, ru-RU, ar-ma, eo-community experimental/unreviewed; minimal pack not releasable | not a bug to fix |
