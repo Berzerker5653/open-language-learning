@@ -1,0 +1,19 @@
+HEAD=0a463f5fe64214c21cb144592422928e3e3050b1
+tree_state=10 modified paths
+ M docs/provenance/JA_SOURCE_MATRIX.yaml
+ M languages/ja-JP/kanji/a2-topics.jsonl
+ M languages/ja-JP/kanji/entries.jsonl
+ M languages/ja-JP/licenses.jsonl
+ M languages/ja-JP/manifest.yaml
+ M languages/ja-JP/sources.jsonl
+ M languages/ru-RU/manifest.yaml
+ M state/evidence/RC-0.4.1-2026-10-15/build-rc-0.4.1.sh
+ M third-party/notices/NOTICE.md
+?? state/evidence/RC-0.4.1-2026-10-15/post-d1/
+--- manifests as shipped ---
+1532a0f0cdb71522e87fa261fefec9f91ef12c557cc4b5b7aece455dc4b51e26  languages/ja-JP/manifest.yaml
+version: "0.4.1"
+  content_license: "CC-BY-SA-4.0"
+dbfcf3e10fad86745b5b894fac017a3a16e467fcf74b68e27d602f3058b14d5e  languages/ru-RU/manifest.yaml
+version: "0.4.1"
+  content_license: "CC0-1.0"

@@ -1,0 +1,69 @@
+HEAD=0a463f5fe64214c21cb144592422928e3e3050b1
+tree_state=10 modified paths
+ M docs/provenance/JA_SOURCE_MATRIX.yaml
+ M languages/ja-JP/kanji/a2-topics.jsonl
+ M languages/ja-JP/kanji/entries.jsonl
+ M languages/ja-JP/licenses.jsonl
+ M languages/ja-JP/manifest.yaml
+ M languages/ja-JP/sources.jsonl
+ M languages/ru-RU/manifest.yaml
+ M state/evidence/RC-0.4.1-2026-10-15/build-rc-0.4.1.sh
+ M third-party/notices/NOTICE.md
+?? state/evidence/RC-0.4.1-2026-10-15/post-d1/
+--- manifests as shipped ---
+1532a0f0cdb71522e87fa261fefec9f91ef12c557cc4b5b7aece455dc4b51e26  languages/ja-JP/manifest.yaml
+version: "0.4.1"
+  content_license: "CC-BY-SA-4.0"
+dbfcf3e10fad86745b5b894fac017a3a16e467fcf74b68e27d602f3058b14d5e  languages/ru-RU/manifest.yaml
+version: "0.4.1"
+  content_license: "CC0-1.0"
+rc-ja-JP-validate                          exit=0
+rc-ja-JP-lint                              exit=0
+rc-ja-JP-test                              exit=0
+rc-ja-JP-audit-curriculum                  exit=0
+rc-ja-JP-audit-lexicon                     exit=0
+rc-ja-JP-audit-licenses                    exit=0
+rc-ja-JP-audit-sources                     exit=0
+rc-build-ja-JP                             exit=0
+archive: dist/rc-0.4.1/ja-jp-reference-0.4.1.lpk
+bytes=318722747
+e697ee92f6602c3373ebe5910f0dfbee8e50edcb3e9a25b2890efba5a5964690  dist/rc-0.4.1/ja-jp-reference-0.4.1.lpk
+rc-inspect-ja-JP                           exit=0
+archive members=5864 media_members=4903
+git-tracked media files=8 absent_from_archive=0
+rc-install-ja-JP                           exit=0
+store layout: dist/rc-0.4.1/store-ja-JP/org.openlanguage.ja-jp.reference dist/rc-0.4.1/store-ja-JP/org.openlanguage.ja-jp.reference/0.4.1 dist/rc-0.4.1/store-ja-JP/org.openlanguage.ja-jp.reference/current 
+current pointer: 0.4.1
+media files in installed tree: 4902
+rc-ru-RU-validate                          exit=0
+rc-ru-RU-lint                              exit=0
+rc-ru-RU-test                              exit=0
+rc-ru-RU-audit-curriculum                  exit=0
+rc-ru-RU-audit-lexicon                     exit=0
+rc-ru-RU-audit-licenses                    exit=0
+rc-ru-RU-audit-sources                     exit=0
+rc-build-ru-RU                             exit=0
+archive: dist/rc-0.4.1/ru-ru-reference-0.4.1.lpk
+bytes=318489935
+9eb074fa8d59f508108bc0fa8c698e1ddbd7458648ee2d829edeb36fbcfc1d7a  dist/rc-0.4.1/ru-ru-reference-0.4.1.lpk
+rc-inspect-ru-RU                           exit=0
+archive members=5788 media_members=4857
+git-tracked media files=10 absent_from_archive=0
+rc-install-ru-RU                           exit=0
+store layout: dist/rc-0.4.1/store-ru-RU/org.openlanguage.ru-ru.reference dist/rc-0.4.1/store-ru-RU/org.openlanguage.ru-ru.reference/0.4.1 dist/rc-0.4.1/store-ru-RU/org.openlanguage.ru-ru.reference/current 
+current pointer: 0.4.1
+media files in installed tree: 4856
+rc-draft-catalog                           exit=0
+      "license": "CC-BY-SA-4.0",
+      "pack_id": "org.openlanguage.ja-jp.reference",
+      "sha256": "e697ee92f6602c3373ebe5910f0dfbee8e50edcb3e9a25b2890efba5a5964690",
+      "size_bytes": 318722747,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.4.1/ja-jp-reference-0.4.1.lpk",
+      "version": "0.4.1"
+      "license": "CC0-1.0",
+      "pack_id": "org.openlanguage.ru-ru.reference",
+      "sha256": "9eb074fa8d59f508108bc0fa8c698e1ddbd7458648ee2d829edeb36fbcfc1d7a",
+      "size_bytes": 318489935,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.1/ru-ru-reference-0.4.1.lpk",
+      "version": "0.4.1"
+RC_041_DONE

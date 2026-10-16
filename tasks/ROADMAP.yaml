@@ -2140,6 +2140,95 @@ tasks:
     and the Russian review queue); completing the task means the tasks exist and run, not that the
     content is approved.
   required_for_desktop_1_0: false
+- id: JA-KANJI-ATTRIBUTION-001
+  milestone: M10
+  priority: P1
+  title: >-
+    The app surfaces the source acknowledgements its installed packs declare
+  dependencies:
+  - UX-001
+  read_first:
+  - languages/ja-JP/sources.jsonl
+  - languages/ja-JP/licenses.jsonl
+  - third-party/notices/NOTICE.md
+  - apps/desktop/src/App.tsx
+  acceptance:
+  - >-
+    A learner-reachable surface names every source the installed pack declares (for ja-JP: the EDRDG
+    JMdict/JMnedict layer and the KRADFILE decomposition layer) with licence and pinned version, rendered
+    from the pack's own `sources.jsonl` / `licenses.jsonl` rather than from strings compiled into the app.
+  - >-
+    The EDRDG acknowledgement duty is met on the app surface, not only in the repository, and the pack-level
+    notice in `third-party/notices/NOTICE.md` is cited as the full text.
+  - >-
+    A pack that declares no sources is shown as unattributed, and the app never invents an attribution or a
+    licence claim it cannot read from the pack; the learner-copy audit stays at zero findings.
+  # The duty predates the O-07 re-sourcing: the published 0.4.0 ja pack already ships CC BY-SA EDRDG
+  # data with no app-surface acknowledgement. Not marked required_for_desktop_1_0 because promoting a
+  # card into the release gate is an owner decision, not an agent one.
+  required_for_desktop_1_0: false
+- id: JA-KANJI-REFRESH-001
+  milestone: M10
+  priority: P2
+  title: EDRDG-derived pack data has a pinned, repeatable refresh path
+  dependencies:
+  - PACK-004
+  read_first:
+  - state/evidence/O-07/derive-radicals-from-kradfile.py
+  - languages/ja-JP/sources.jsonl
+  - docs/provenance/JA_SOURCE_MATRIX.yaml
+  acceptance:
+  - >-
+    The derivation lives in `scripts/` rather than an evidence folder, pins the jmdict-simplified release
+    `3.6.2+20260928191014` and the sha256 of every consumed file, and reproduces the shipped `radicals`
+    lists byte-for-byte against those pinned inputs.
+  - >-
+    Re-running against newer upstream data prints a drift report (which records change, which characters
+    disappear) and writes nothing until a human asks; CI never refreshes pack content.
+  - >-
+    The pack `sources.jsonl` pin and the script's pin are one value, so an `audit-sources` failure is a real
+    signal that declared provenance no longer matches shipped data.
+  required_for_desktop_1_0: false
+- id: JA-KANJI-DECOMP-UI-001
+  milestone: M10
+  priority: P2
+  title: The kanji drill handles degenerate decomposition lists honestly
+  dependencies:
+  - UX-001
+  read_first:
+  - apps/desktop/src/App.tsx
+  - languages/ja-JP/kanji/entries.jsonl
+  acceptance:
+  - >-
+    Measured after the O-07 re-sourcing: 22 of 84 cards present the character as its own sole element and
+    23 of 84 contain a non-CJK stroke stand-in (`ノ ハ ヨ |`). The drill states a rule for each case instead
+    of rendering them unexplained, and the rule is written down rather than inferred from the render.
+  - >-
+    The nested-element case (KRADFILE lists every visible element, so `口` appears inside `舌` for `話`) is
+    presented as a decomposition, not as independent components, or is suppressed with a reason.
+  - >-
+    No learner-facing string explains the change by naming a ticket, an ADR or a patch.
+  required_for_desktop_1_0: false
+- id: JA-KANJI-MNEMONICS-001
+  milestone: M10
+  priority: P2
+  title: Kanji mnemonics match the sourced decomposition they describe
+  dependencies:
+  - PACK-004
+  read_first:
+  - languages/ja-JP/kanji/entries.jsonl
+  - languages/ja-JP/kanji/a2-topics.jsonl
+  acceptance:
+  - >-
+    17 of 84 authored mnemonics name an element the sourced list no longer contains (国: "Jade (玉) guarded
+    within walls" against the new `王 囗 丶`). Each is re-authored by a human or dropped, and the mismatch
+    count is measured before and after rather than asserted.
+  - >-
+    An automated check reports the mismatch count so it cannot silently grow; the check does not author
+    replacement text.
+  # Human content authoring: an AI re-write would put unreviewed text into a pack whose review queue is
+  # already the reason content stays labelled draft.
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -2204,4 +2293,8 @@ execution_scope:
   - A11Y-FLOW-001
   - RU-MODALITY-PRACTICE-001
   - UPPERBAND-TASK-JOURNEYS-001
+  - JA-KANJI-ATTRIBUTION-001
+  - JA-KANJI-REFRESH-001
+  - JA-KANJI-DECOMP-UI-001
+  - JA-KANJI-MNEMONICS-001
   public_publication_authorized: false

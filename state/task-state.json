@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-10-15",
+  "updated": "2026-10-16",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -1594,6 +1594,76 @@
       ],
       "evidence": [],
       "updated": "2026-10-15"
+    },
+    "JA-KANJI-ATTRIBUTION-001": {
+      "task_id": "JA-KANJI-ATTRIBUTION-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "The app surfaces the source acknowledgements its installed packs declare",
+      "activity": "idle",
+      "summary": "Render each installed pack's declared sources and licences on a learner-reachable surface, so the EDRDG attribution duty is met where the data is shown.",
+      "notes": "Opened 2026-10-16 when the owner chose option A for O-07: the applied patch adds `kradfile` (EDRDG, CC BY-SA 4.0) as a declared source of the 84 kanji `radicals` lists, and the EDRDG licence asks for the acknowledgement in an app About/Sources surface. `apps/desktop/src` renders no pack attribution at all today, so the duty already applies to the CC BY-SA JMdict layer shipped in the published 0.4.0 ja pack — this card is not created by the re-sourcing, it is disclosed by it. Not marked required_for_desktop_1_0: promoting a card into the release gate is an owner decision, so it is queued as a decision rather than taken.",
+      "dependencies": [
+        "UX-001"
+      ],
+      "evidence": [
+        "state/evidence/O-07/decision-2026-10-16.md",
+        "third-party/notices/NOTICE.md",
+        "languages/ja-JP/sources.jsonl"
+      ],
+      "updated": "2026-10-16"
+    },
+    "JA-KANJI-REFRESH-001": {
+      "task_id": "JA-KANJI-REFRESH-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "EDRDG-derived pack data has a pinned, repeatable refresh path",
+      "activity": "idle",
+      "summary": "Promote the radicals derivation from an evidence script into `scripts/` with pinned upstream release and hashes, a drift report, and no unattended writes.",
+      "notes": "Opened 2026-10-16 with the O-07 option-A decision: the EDRDG licence also requires a procedure for keeping incorporated derived data current. The derivation used for the landed change is `state/evidence/O-07/derive-radicals-from-kradfile.py`, and the new `kradfile` source record pins jmdict-simplified release `3.6.2+20260928191014` plus file hashes, so the pin and the script must be made to agree rather than drift apart.",
+      "dependencies": [
+        "PACK-004"
+      ],
+      "evidence": [
+        "state/evidence/O-07/derive-radicals-from-kradfile.py",
+        "state/evidence/O-07/decision-2026-10-16.md"
+      ],
+      "updated": "2026-10-16"
+    },
+    "JA-KANJI-DECOMP-UI-001": {
+      "task_id": "JA-KANJI-DECOMP-UI-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "The kanji drill handles degenerate decomposition lists honestly",
+      "activity": "idle",
+      "summary": "State and implement a display rule for the decomposition cases KRADFILE exposes: self-as-sole-element, stroke stand-ins, and nested elements.",
+      "notes": "Opened 2026-10-16 from the measured learner-facing cost of option A (recorded before it was chosen): radical-list min/max/mean is 1/7/2.45; 22 of 84 cards present the character as its own sole element; 62 of 84 list nested elements; 23 of 84 contain the non-CJK stand-ins `ノ ハ ヨ |` that KRADFILE uses for strokes with no standalone glyph. The drill renders whatever is in the field today, so the rule has to be written down rather than inferred from a screenshot.",
+      "dependencies": [
+        "UX-001"
+      ],
+      "evidence": [
+        "state/evidence/O-07/decision-2026-10-15.md",
+        "state/evidence/O-07/radical-changes-2026-10-15.json"
+      ],
+      "updated": "2026-10-16"
+    },
+    "JA-KANJI-MNEMONICS-001": {
+      "task_id": "JA-KANJI-MNEMONICS-001",
+      "status": "blocked",
+      "attempts": 1,
+      "title": "Kanji mnemonics match the sourced decomposition they describe",
+      "activity": "idle",
+      "summary": "Re-author or drop the 17 of 84 mnemonics that name an element the sourced radical list no longer contains.",
+      "notes": "Opened 2026-10-16 as the accepted cost of option A, measured before the decision: 17 of 84 authored mnemonics name an element no longer in the list (国: \"Jade (玉) guarded within walls\" against the new `王 囗 丶`). The mismatch count is a machine check; authoring replacement text is not, and an AI re-write would put more unreviewed prose into a pack whose review queue is already the reason content stays labelled draft.",
+      "last_error": "needs a human content author; no qualified reviewer is assigned (JA-A2-002 / JA-B1-002 / JA-B2-002 are blocked on the same thing)",
+      "dependencies": [
+        "PACK-004"
+      ],
+      "evidence": [
+        "state/evidence/O-07/decision-2026-10-15.md",
+        "state/evidence/O-07/radical-changes-2026-10-15.json"
+      ],
+      "updated": "2026-10-16"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence.",

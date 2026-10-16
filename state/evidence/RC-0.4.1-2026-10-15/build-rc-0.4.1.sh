@@ -3,9 +3,12 @@
 # Preparation only: no tag, no upload, no catalogue edit. Evidence only.
 set -uo pipefail
 cd /home/hunter/game-dev/LTS
-export CARGO_TARGET_DIR=$PWD/tmp/cargo-rc
-E=state/evidence/RC-0.4.1-2026-10-15
-D=dist/rc-0.4.1
+# Evidence dir, output dir and cargo target dir are overridable so a later
+# rebuild (e.g. after the O-07 radicals re-sourcing) records into its own
+# subdir without overwriting the run it supersedes.
+export CARGO_TARGET_DIR=${RC_CARGO_TARGET_DIR:-$PWD/tmp/cargo-rc}
+E=${RC_E:-state/evidence/RC-0.4.1-2026-10-15}
+D=${RC_D:-dist/rc-0.4.1}
 mkdir -p "$E" "$D"
 : >"$E/SUMMARY.txt"
 

@@ -10,6 +10,16 @@ Reproduce with `./state/evidence/RC-0.4.1-2026-10-15/build-rc-0.4.1.sh` then
 the published archives unless a pin-verified copy already sits in `dist/rc-0.4.1/published/`).
 Logs: `SUMMARY.txt`, `state.txt`, `rc-*.txt`, `published-*.txt`, `diff-*.txt`.
 
+> **Superseded 2026-10-16.** The O-07 kanji re-sourcing (owner decision, applied) changed
+> ja pack content, so the ja digest quoted throughout this file — `7d9c7045…b460`,
+> 318,721,333 B — is **stale**. The current candidate is **318,722,747 B, sha256
+> `e697ee92f6602c3373ebe5910f0dfbee8e50edcb3e9a25b2890efba5a5964690`**; ru is unchanged at
+> 318,489,935 B `9eb074fa…1d7a`. The rebuild and its full log live in
+> `state/evidence/RC-0.4.1-2026-10-15/post-d1/` and the decision behind it in
+> `state/evidence/O-07/decision-2026-10-16.md`. Everything else in this file — the
+> member-by-member accounting against 0.4.0, the licence propagation, the coupling between
+> the manifest bump and `catalog/packs.json` — still holds.
+
 ## Exact state that was built and validated
 
 | item | value |
