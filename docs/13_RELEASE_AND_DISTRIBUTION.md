@@ -524,6 +524,16 @@ host (162 s, `state/evidence/RC-0.4.1-2026-10-15/publication-2026-10-16.md` §4)
 pinned literal `0.4.0` versions and now derives them from the shipped catalogue, so the
 assertion follows a release instead of blocking one.
 
+**CI on `main` is green again (run `38935030658`, head `06effd0`, 2026-10-16).** `rust`,
+`web`, `schemas`, `security`, `desktop-smoke` and both `platform-compile` legs finished
+`success`; the only non-green row is `platform-bundles` = `skipped`, which
+`.github/workflows/ci.yml:179` gates on `workflow_dispatch` — it was `skipped` on the earlier
+failing push runs too, so nothing is hiding there. The two prior push runs (`38924884357`,
+`38927443654`) failed on `rust` + `desktop-smoke` at `Restore reference-pack audio` with
+`curl: (22) … 404 … org.openlanguage.ja-jp.reference-0.4.1/ja-jp-reference-0.4.1.lpk`: the
+restore gate refusing an unpublished pin, exactly as designed. With the 0.4.1 pair live, the
+ordering this section insists on — bake → publish → restore — is satisfied end to end.
+
 **Licensing paper corrected after publication.** The published ja-JP 0.4.0
 archive carries three `licenses.jsonl` records. The tree now carries five: the
 baked-audio record was corrected to name the Qwen3-TTS bake engine (ADR-0023; the

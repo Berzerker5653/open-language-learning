@@ -101,10 +101,14 @@ already carried the `zip 9.0.4` bump (queue item D8b), so this run also exercise
 
 `38924884357` (`6bf9cef`) and `38927443654` (`8cee375`) both failed **before** the assets
 existed, on `rust` + `desktop-smoke` at `Restore reference-pack audio` with
-`curl: (22) … 404 … org.openlanguage.ja-jp.reference-0.4.1/ja-jp-reference-0.4.1.lpk`;
-`web`, `schemas`, `security`, both `platform-compile` legs and `platform-bundles` were green.
-The first run on a head pushed after this file's verification is the one that must be green;
-its id and job conclusions go in `tasks/KANBAN.md` and `docs/13`.
+`curl: (22) … 404 … org.openlanguage.ja-jp.reference-0.4.1/ja-jp-reference-0.4.1.lpk`.
+
+**First green `main`: `38935030658`, head `06effd0`, `completed / success` (2026-10-16)** —
+`rust`, `web`, `schemas`, `security`, `desktop-smoke`, `platform-compile (windows-latest)` and
+`platform-compile (macos-latest)` all `success`. The one non-green row, `platform-bundles`, is
+`skipped` by design: `ci.yml:179` is `if: github.event_name == 'workflow_dispatch'`, and that
+job was `skipped` on the two failing push runs as well. The line in this file's first draft
+that called `platform-bundles` green was wrong and is corrected here rather than carried.
 
 ## 6. What changed for the project, and what did not
 
