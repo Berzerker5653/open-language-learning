@@ -1,10 +1,10 @@
 # Owner checklist — 2026-10-16
 
-Everything an agent may execute is executed. `main` is `6648da6`; CI is green twice in a row
-(`38935030658` on `06effd0`, `38942299310` on `6648da6` — `rust`, `web`, `schemas`, `security`,
-`desktop-smoke`, `platform-compile (windows)`, `platform-compile (macos)` all `success`;
-`platform-bundles` is `skipped` because `ci.yml:179` gates it on `workflow_dispatch`). Both
-reference packs are published at **0.4.1** and immutable.
+Everything an agent may execute is executed. Both reference packs are published at **0.4.1** and
+immutable, and the working tree at `HEAD` contains every agent-side follow-up: publication records,
+the media-in-git exception removal (D4), the `zip` bump (D8b), the CI records, this checklist, its
+two review packets, and the stale-doc corrections to both 2026-10-14 worklists and
+`scripts/build-catalog.sh`. CI status per run is recorded in `tasks/KANBAN.md` (`ci-green-main`).
 
 This file is the part only you can do. Nothing here is marked done; the human checks stay open
 (§7). Companion detail lives in `state/evidence/OWNER-CHECKLIST-2026-10-16/`.

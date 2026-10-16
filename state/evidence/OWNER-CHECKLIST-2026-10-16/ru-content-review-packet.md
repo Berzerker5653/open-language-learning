@@ -1,13 +1,15 @@
 # Russian content review packet — what has no human verdict
 
 Companion to `state/evidence/OWNER-CHECKLIST-2026-10-16.md` §5b. Prepared 2026-10-16 from
-`6648da6`. Raw evidence in this directory:
+`6648da6`, extended on 2026-10-16 with §5-§6 measured on the published tree (`20f994d` + follow-ups).
+Raw evidence in this directory:
 
 ```
 git-ru-040-to-041-numstat.txt   git-ru-040-to-041.log   git-ru-041-to-head.log
 audit-content-templates-ru.txt  audit-learner-copy-ru.txt  audit-learner-copy-default-roots.txt
 validate-handoff-default.txt    validate-handoff-strict.txt
 gh-readback-ru-ru-0.4.0.txt     gh-readback-ru-ru-0.4.1.txt
+ru-unreviewed-inventory.txt     fix-ru-stress-blast-radius.txt   fix-ru-stress-replica-main.txt
 ```
 
 ## 1. Inventory: every Russian change between the two published versions
