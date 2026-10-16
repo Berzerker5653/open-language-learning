@@ -25,9 +25,9 @@ sources, and lexicon audits (`crates/langpack-cli/src/main.rs:987-990`).
 
 One prerequisite: reference-pack `.wav` bytes are gitignored (ADR-0016)
 and the gate fails without them — a bare checkout prints ~4.9k
-`error[media_missing]` lines and exits 1. One bounded exception: the 18
-journey assets that postdate the pinned archive are tracked by name until
-the packs are republished (ADR-0032). Restore the published,
+`error[media_missing]` lines and exits 1. That includes the 18 journey
+assets: their tracked-by-name exception (ADR-0032) was deleted on
+2026-10-16 once both packs were republished at 0.4.1. Restore the published,
 catalog-pinned archive for **each** pack — the script's own default is
 `languages/ja-JP`, so a call with no `--pack-dir` leaves `ru-RU`
 unpopulated and its tests failing on missing media:

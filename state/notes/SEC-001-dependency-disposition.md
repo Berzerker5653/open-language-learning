@@ -91,7 +91,7 @@ The 2026-10-10 note did not cover this one, and the honest reading is
   surface ages badly. Replacing `serde_yaml` (not just unsafe-libyaml) is a
   candidate card — **owner decision, no card opened**.
 
-### zip 8.6.0 — yanked (the fourth warning: dispositioned 2026-10-16, bump scheduled after publication)
+### zip 9.0.4 — the fourth warning: bump executed 2026-10-16
 
 Not an advisory: `cargo audit` prints `Crate: zip, Version: 8.6.0,
 Warning: yanked`. It was absent from the 2026-10-10 scan because the pin came
@@ -108,7 +108,7 @@ Measured 2026-10-16:
 - `cargo update -p zip` refuses with "version 8.6.0 is yanked". The committed
   `Cargo.lock` still builds — a yanked version installs when it is pinned —
   but no lock regeneration can select it again, and 8.x gets no further fixes.
-- Bump cost, measured then reverted: with `zip = "9.0.4"` the workspace
+- Bump cost, measured 2026-10-16 and executed the same day: with `zip = "9.0.4"` the workspace
   compiles after **three one-line changes**, because `name()` now returns
   `Result<Cow<str>, ZipError>` (`crates/langpack/src/archive.rs:269`,
   `crates/langpack/tests/archive.rs:207`, `crates/langpack/tests/archive.rs:280`).
@@ -128,13 +128,20 @@ Measured 2026-10-16:
   leaves no known gap in this code; the cost of staying is reproducibility and
   future fixes only.
 
-Status: **dispositioned 2026-10-16 — bump after the 0.4.1 packs are published** (queue item
-D8b, option b). The owner had accepted three warnings under D8 without having seen this
-fourth one, and chose not to change the app toolchain while release assets are being
-uploaded. So: `zip 8.6.0` stays pinned through the publication window, the audit warning
-stays visible, and `zip = "9.0.4"` plus the three `name()` changes land as one standalone
-commit immediately afterwards. Until then any regenerated `Cargo.lock` cannot reproduce this
-tree — that cost is now owned, not unnoticed. Board rows: `zip-bump-9`, owner gate **O-09**.
+Status: **bump executed 2026-10-16** (queue item D8b, option b), immediately after the
+0.4.1 packs were published — the publication-window deferral above is history.
+`Cargo.toml:33` moved from `zip = "8.6.0"` to `zip = "9.0.4"`, and `cargo update -p zip`
+relocked with no collateral: the only lock deltas are the zip entry (new deps `nix 0.31.3`
++ `cfg_aliases 0.2.2`, both pulled in by zip itself) and `tempfile`'s getrandom edge moving
+from 0.3.4 to 0.4.3, a version already locked before the bump. The three `name()` changes
+listed above are in the tree. `cargo check --workspace --all-targets` exit 0;
+`cargo test -p lts-langpack` green; `cargo test --workspace` green. The example pack rebuilt
+under 9.0.4 is byte-identical to the pre-bump build — 3976 B, sha256
+`7938e5fba60e3ceffdf7e796c229b29f3ec57493a959dc35ac53a92ad9434bcc` — so the published 0.4.1
+pack digests stand. `cargo audit` now prints `warning: 3 allowed warnings found`, exit 0:
+the yanked-zip warning is gone, leaving only the three accepted warnings above. Until the
+relock commit lands, the working tree — not 8.6.0 — is the reproducible state. Board rows:
+`zip-bump-9`, owner gate **O-09**.
 
 ## Re-check command
 

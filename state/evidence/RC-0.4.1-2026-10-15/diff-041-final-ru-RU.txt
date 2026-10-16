@@ -1,0 +1,10 @@
+--- ru-RU: PUBLISHED 0.4.1 vs the CURRENT uploaded candidate ---
+published members = 5788  candidate members = 5788
+identical (size+hash) = 5788
+added in published:
+removed in published:
+(archive sha256 both sides: 9eb074fa8d59f508108bc0fa8c698e1ddbd7458648ee2d829edeb36fbcfc1d7a / 9eb074fa8d59f508108bc0fa8c698e1ddbd7458648ee2d829edeb36fbcfc1d7a)
+
+--- and the same published archive vs the PRE-D1 candidate (rc-inspect-ru-RU.txt) ---
+identical = 5788
+changed by O-07 (path, pre-D1, published):

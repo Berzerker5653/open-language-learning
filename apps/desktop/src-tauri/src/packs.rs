@@ -1542,13 +1542,14 @@ mod tests {
             .into_iter()
             .map(|p| (p.pack_id, p.version))
             .collect();
+        let expected: Vec<(String, String)> = catalog
+            .packs
+            .iter()
+            .map(|pin| (pin.pack_id.clone(), pin.version.clone()))
+            .collect();
         assert_eq!(
-            installed,
-            vec![
-                ("org.openlanguage.ja-jp.reference".into(), "0.4.0".into()),
-                ("org.openlanguage.ru-ru.reference".into(), "0.4.0".into()),
-            ],
-            "both pinned entries are on disk after one transport run"
+            installed, expected,
+            "both pinned entries install at exactly the version the shipped catalog pins"
         );
     }
 

@@ -1402,7 +1402,7 @@
       "title": "Security/privacy release audit",
       "activity": "idle",
       "summary": "Malicious-pack suite, no unexpected speech upload in local mode, and secrets/logging/recording-retention gates all pass.",
-      "notes": "Recorded 2026-10-15 (REL-001 recheck): required for desktop 1.0, previously ROADMAP-only, so docs/15 derivation reported it ready. The automated work on record is explicitly **partial** (2026-10-06 artifact): `cargo audit` across 528 crates (0 vulnerabilities, 2 warnings — an unmaintained build-time proc macro and a transitive glib unsoundness), a heuristic secret-pattern grep because gitleaks was not installed, and a manual licence audit. What the acceptance bullets additionally require is not covered by that artifact: the pack-install defences are enforced by tests that run today (`reference_audio_follows_the_manifest_and_refuses_traversal` in `apps/desktop/src-tauri/src/lib.rs:11776`, `tampered_archive_is_rejected` and `redirect_hops_stay_on_allowlisted_hosts_for_downloads` in `apps/desktop/src-tauri/src/packs.rs`), but there is no consolidated malicious-pack suite, no privacy review of provider upload paths, and no logging/recording-retention gate. Acceptance is a human disposition: an agent can run suites and record results, it cannot accept residual risk or sign off privacy. Re-scan 2026-10-16 (owner queue D8): `cargo audit` at `e18c9df` reports 4 allowed warnings over 562 crate dependencies and exits 0. The owner accepted the three advisory-bearing warnings (glib 0.18.5 unsoundness, proc-macro-error 1.0.4, unsafe-libyaml 0.2.11) on 2026-10-16; the fourth, the yanked direct pin `zip 8.6.0`, is recorded as pending disposition with its reachability evidence and the measured bump cost in `state/notes/SEC-001-dependency-disposition.md`.",
+      "notes": "Recorded 2026-10-15 (REL-001 recheck): required for desktop 1.0, previously ROADMAP-only, so docs/15 derivation reported it ready. The automated work on record is explicitly **partial** (2026-10-06 artifact): `cargo audit` across 528 crates (0 vulnerabilities, 2 warnings — an unmaintained build-time proc macro and a transitive glib unsoundness), a heuristic secret-pattern grep because gitleaks was not installed, and a manual licence audit. What the acceptance bullets additionally require is not covered by that artifact: the pack-install defences are enforced by tests that run today (`reference_audio_follows_the_manifest_and_refuses_traversal` in `apps/desktop/src-tauri/src/lib.rs:11776`, `tampered_archive_is_rejected` and `redirect_hops_stay_on_allowlisted_hosts_for_downloads` in `apps/desktop/src-tauri/src/packs.rs`), but there is no consolidated malicious-pack suite, no privacy review of provider upload paths, and no logging/recording-retention gate. Acceptance is a human disposition: an agent can run suites and record results, it cannot accept residual risk or sign off privacy. Re-scan 2026-10-16 (owner queue D8): `cargo audit` at `e18c9df` reports 4 allowed warnings over 562 crate dependencies and exits 0. The owner accepted the three advisory-bearing warnings (glib 0.18.5 unsoundness, proc-macro-error 1.0.4, unsafe-libyaml 0.2.11) on 2026-10-16; the fourth, the yanked direct pin `zip 8.6.0`, is recorded as pending disposition with its reachability evidence and the measured bump cost in `state/notes/SEC-001-dependency-disposition.md`. Executed 2026-10-16 (queue item D8b): the pin is now `zip 9.0.4` — three one-line `name()` call sites (`crates/langpack/src/archive.rs:269`, `crates/langpack/tests/archive.rs:207`, `:280`), a relock adding only `nix 0.31.3` + `cfg_aliases 0.2.2` plus tempfile's getrandom edge 0.3.4 → 0.4.3, `cargo check --workspace --all-targets` exit 0 and `cargo test --workspace` green, and an example-pack `.lpk` byte-identical across the bump (3,976 B, sha256 `7938e5fba60e3ceffdf7e796c229b29f3ec57493a959dc35ac53a92ad9434bcc`), so no published digest moves; `cargo audit` now prints 3 allowed warnings, exit 0. What still needs a human is acceptance of the three remaining warnings.",
       "dependencies": [
         "PACK-004",
         "DATA-002",
@@ -1542,7 +1542,8 @@
         "state/evidence/GATE-2026-10-15/clean-clone-head-ci.txt",
         "state/evidence/RC-0.4.1-2026-10-15/NOTES.md",
         "state/evidence/BUNDLE-LOCAL-2026-10-15/NOTES.md",
-        "state/evidence/O-01B-2026-10-15/NOTES.md"
+        "state/evidence/O-01B-2026-10-15/NOTES.md",
+        "state/evidence/RC-0.4.1-2026-10-15/publication-2026-10-16.md"
       ],
       "updated": "2026-10-15",
       "blocker": "Six required dependencies are blocked on human or owner actions (AT pass, security disposition, real-platform runtime, performance tiers, qualified band review, clean-boot bundle smoke) and the pack republish is owner-only."
@@ -1663,6 +1664,23 @@
       "evidence": [
         "state/evidence/O-07/decision-2026-10-15.md",
         "state/evidence/O-07/radical-changes-2026-10-15.json"
+      ],
+      "updated": "2026-10-16"
+    },
+    "PACK-UPDATE-UX-001": {
+      "task_id": "PACK-UPDATE-UX-001",
+      "status": "ready",
+      "attempts": 0,
+      "title": "A newer catalogue version of an installed pack is offered as an update",
+      "activity": "idle",
+      "summary": "The store treats a pack as installed by pack_id only, so a published newer version of an installed pack offers the learner nothing.",
+      "notes": "Opened 2026-10-16, when 0.4.1 became the first genuinely offered upgrade for an installed pack: `apps/desktop/src/App.tsx:266` keeps `installedPacks` as pack ids and `App.tsx:842` builds that list with `installed.map((i) => i.pack_id)`, so an installed 0.4.0 and a catalogue pinning 0.4.1 render the same row with no action. `installed_packs` already returns versions, so the information is in the IPC payload and only the UI state is id-keyed. The card had been asserted in the 2026-10-16 owner queue before it existed here; this record is where it now actually lives.",
+      "last_error": null,
+      "dependencies": [
+        "PACK-DL-ALLOWLIST-001"
+      ],
+      "evidence": [
+        "state/evidence/RC-0.4.1-2026-10-15/publication-2026-10-16.md"
       ],
       "updated": "2026-10-16"
     }

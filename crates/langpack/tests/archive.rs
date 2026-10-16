@@ -204,7 +204,7 @@ fn install_rejects_hash_mismatch() {
     let opts = zip::write::SimpleFileOptions::default();
     for i in 0..zip.len() {
         let mut f = zip.by_index(i).unwrap();
-        let name = f.name().to_string();
+        let name = f.name().unwrap().to_string();
         let mut data = Vec::new();
         std::io::Read::read_to_end(&mut f, &mut data).unwrap();
         if name == "lexicon/entries.jsonl" {
@@ -277,7 +277,7 @@ fn install_rejects_unlisted_and_symlink_entries() {
     let opts = zip::write::SimpleFileOptions::default();
     for i in 0..zip.len() {
         let mut f = zip.by_index(i).unwrap();
-        let name = f.name().to_string();
+        let name = f.name().unwrap().to_string();
         let mut data = Vec::new();
         std::io::Read::read_to_end(&mut f, &mut data).unwrap();
         out.start_file(name.as_str(), opts).unwrap();

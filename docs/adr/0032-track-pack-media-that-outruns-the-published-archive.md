@@ -63,6 +63,18 @@ rule.
   synthesizer and model hash, and mark the content draft pending qualified
   human review.
 
+Executed 2026-10-16 (queue item D4): the end step ran with owner
+authorization. Both reference packs were republished at 0.4.1
+(`org.openlanguage.ja-jp.reference-0.4.1`,
+`org.openlanguage.ru-ru.reference-0.4.1`, release commit
+`20f994df05478f92b9d2399bbf655066e21ffda6`), and all 18 journey asset
+basenames were matched against the published archives' member listings before
+any deletion. The 18 tracked `.wav` files were removed from git and this
+ADR's `.gitignore` exception block was deleted, returning to ADR-0024's
+blanket rule (`languages/*/media/*.wav`). `scripts/fetch-pack-audio.sh` now
+restores both packs' audio from the published 0.4.1 archives: 4,902 ja-JP
+rows and 4,856 ru-RU rows checked, 0 rows failing.
+
 ## Alternatives
 
 - **Republish both packs now at 0.4.1.** Cleanest, and it is already the owner's

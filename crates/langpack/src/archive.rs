@@ -266,7 +266,7 @@ pub fn install_with_cancel(
     }
     let manifest_paths: BTreeSet<&str> = am.files.iter().map(|f| f.path.as_str()).collect();
     for i in 0..zip.len() {
-        let name = zip.by_index(i)?.name().to_string();
+        let name = zip.by_index(i)?.name()?.to_string();
         if name == MANIFEST_ENTRY {
             continue;
         }

@@ -1,0 +1,8 @@
+pack_id=org.openlanguage.ru-ru.reference
+$ curl -fsSL -o dist/rc-0.4.1/published/ru-ru-reference-0.4.1.lpk https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.1/ru-ru-reference-0.4.1.lpk
+DOWNLOAD_EXIT=0
+catalogue pin: sha256=9eb074fa8d59f508108bc0fa8c698e1ddbd7458648ee2d829edeb36fbcfc1d7a size_bytes=318489935
+actual bytes=318489935
+actual sha256=9eb074fa8d59f508108bc0fa8c698e1ddbd7458648ee2d829edeb36fbcfc1d7a
+--- GitHub-reported asset digest ---
+["org.openlanguage.ru-ru.reference-0.4.1",true,"20f994df05478f92b9d2399bbf655066e21ffda6",["ru-ru-reference-0.4.1.lpk",318489935,"sha256:9eb074fa8d59f508108bc0fa8c698e1ddbd7458648ee2d829edeb36fbcfc1d7a","uploaded"]]

@@ -7,7 +7,7 @@ Two version numbers stay separate throughout:
 
 | thing | version | where |
 | --- | --- | --- |
-| reference packs (content) | published `0.4.0` → candidate `0.4.1` | `languages/{ja-JP,ru-RU}/manifest.yaml:4`, `catalog/packs.json` |
+| reference packs (content) | **published `0.4.1` (2026-10-16)**; `0.4.0` stays downloadable for rollback | `languages/{ja-JP,ru-RU}/manifest.yaml:4`, `catalog/packs.json` |
 | application shell | `0.4.0-alpha.1` (pre-release) | `apps/desktop/package.json:3`, `apps/desktop/src-tauri/tauri.conf.json:4`, tag `open-language-learning-platform-0.4.0-alpha.1` |
 
 ---
@@ -17,8 +17,8 @@ Two version numbers stay separate throughout:
 | item | state |
 | --- | --- |
 | 0.4.1 version bump on the tracked tree | 2 lines; every gate still 0/0; CI green at the pre-bump `fd76786` (`38757754128`: rust, web, desktop-smoke, schemas, security, platform-compile win+mac all success) |
-| Candidate archives built locally from the tracked tree | ja `318,721,333 B` sha256 `7d9c7045…b460`; ru `318,489,935 B` sha256 `9eb074fa…1d7a`; byte-reproducible across two independent builds; published 0.4.0 archives re-downloaded and match their catalogue pins by size **and** sha256 |
-| 18 journey audio assets in the candidate | 18/18 present in the archive listings — ADR-0032's stated end condition is met |
+| Candidate archives built locally from the tracked tree | after the O-07 rebuild: ja `318,722,747 B` sha256 `e697ee92…4690`; ru `318,489,935 B` sha256 `9eb074fa…1d7a` (the pre-D1 ja value `7d9c7045…b460` is superseded); byte-reproducible across two independent builds; published 0.4.0 archives re-downloaded and match their catalogue pins by size **and** sha256 |
+| 18 journey audio assets in the candidate | 18/18 present in the archive listings, and re-confirmed 18/18 inside the **published** 0.4.1 archives — ADR-0032's stated end condition is met |
 | Licence propagation | the CLI emits `license: "CC-BY-SA-4.0"` for ja (was `CC-BY-4.0`), ru unchanged at `CC0-1.0`; proof: published ja `manifest.yaml` 769 B vs candidate 772 B, the inserted `-SA` |
 | Cached-media safety | pinned by `crates/langpack/tests/media_upgrade.rs` (3 tests, 3 passed) |
 | Clean-environment install | fresh worktree, no `node_modules`: `pnpm install --frozen-lockfile` exit 0 (151 packages), `fmt:check`/`lint`/`typecheck`/`test`/`build` green. **Not** a cold-network proof (`downloaded 0`, warm store) |
@@ -27,6 +27,7 @@ Two version numbers stay separate throughout:
 | Ledger validator | `tools/validate_handoff.py --require-explicit-ledger-records` implemented and **enabled in CI** at both call sites (`scripts/ci.sh:112`, `.github/workflows/ci.yml:253`); the plain invocation still reproduces the old baseline |
 | O-07 | **applied 2026-10-16** under D1 option A; four follow-up cards opened, one `blocked` on a human author (§2 D1) |
 | Repository protection | **applied 2026-10-16** under D3: immutable releases enabled, tag ruleset `release-tags` (`25246378`) active on all tags (§2 D3) |
+| Reference packs published at 0.4.1 | **done 2026-10-16** under D2 (the tag-and-upload act delegated to the agent on request): both tags → `20f994df05478f92b9d2399bbf655066e21ffda6`, both `isImmutable: true`, re-downloaded from the public URLs and matched against the catalogue pins and member-by-member against the uploaded candidate (`state/evidence/RC-0.4.1-2026-10-15/publication-2026-10-16.md`) |
 | ADR acceptance briefs | written per ADR; statuses unchanged (§2 D5) |
 
 ---
@@ -86,9 +87,11 @@ the deferral in the ledger (`O-07` note) and proceed to D2.
 > **AUTHORIZED 2026-10-16 — publish both, ja display name without `(Draft)`.** The
 > preparation half is on the tracked tree as one commit (`20f994d`): manifest bump plus both
 > catalogue entries hand-edited to the current pins, verified against the archives by size and
-> SHA-256. The tag + upload is still yours, with copy-paste commands and the reason one `main`
-> run goes red in between: `state/evidence/RC-0.4.1-2026-10-15/publish-runbook.md`. D3 landed
-> first, as recommended, so both releases will be immutable.
+> SHA-256. **DONE 2026-10-16.** The tag-and-upload act was delegated to the agent on request
+> ("Yes — you publish both now") and executed; the commands, the round trip and the reason one
+> `main` run went red in between are in `RC-0.4.1-2026-10-15/publish-runbook.md` and
+> `RC-0.4.1-2026-10-15/publication-2026-10-16.md`. D3 landed first, as recommended, so both
+> releases came back `isImmutable: true`.
 >
 > First attempt returned `HTTP 422 Release.target_commitish is invalid` twice because
 > `--target` carried the abbreviated SHA; `gh` needs the full 40 characters, so the runbook now
@@ -97,6 +100,13 @@ the deferral in the ledger (`O-07` note) and proceed to D2.
 > the ja 0.4.1 asset in `rust` and `desktop-smoke` only; `web`, `schemas`, `security`, both
 > `platform-compile` legs and `platform-bundles` were green, which covers the new strict ledger
 > validator and the audit gate.
+>
+> Published pair: `org.openlanguage.ja-jp.reference-0.4.1` (318,722,747 B,
+> `e697ee92…4690`) and `org.openlanguage.ru-ru.reference-0.4.1` (318,489,935 B,
+> `9eb074fa…1d7a`), both tags → `20f994df05478f92b9d2399bbf655066e21ffda6`. Re-downloaded from
+> the public URLs: bytes, sha256 and the catalogue pin all match, and every member matches the
+> uploaded candidate (ja 5,864/5,864, ru 5,788/5,788). The 0.4.1 catalogue entries the
+> desktop app reads are therefore live, and the 0.4.0 archives stay downloadable for rollback.
 
 **Exact approval requested.** "Publish `org.openlanguage.ja-jp.reference-0.4.1` and
 `org.openlanguage.ru-ru.reference-0.4.1` as GitHub release assets, and let the two
@@ -198,6 +208,18 @@ and the exception comment from `.gitignore`."
 demonstrably met (18/18 assets in the candidate listings), and leaving the exception in
 place keeps a tracked-asset habit the ADR exists to end.
 
+> **EXECUTED 2026-10-16.** The 18 tracked copies are gone —
+> `git ls-files 'languages/*/media/*.wav'` goes **18 → 0** and total tracked `.wav`
+> **65 → 47** — and the `.gitignore` exception block with its 18 negations is deleted, leaving
+> the blanket `languages/*/media/*.wav` rule (0 remaining `!…wav` lines; `git check-ignore -v`
+> confirms the rule now matches). Coverage was proved before deleting: every one of the 18
+> basenames appears in the matching published archive, and those archives' sha256 equals the
+> catalogue pins (D2 above; member accounting in `RC-0.4.1-2026-10-15/diff-041-*.txt`).
+> `scripts/fetch-pack-audio.sh --verify-only` then reports **ja 4,902 rows / 0 failing** and
+> **ru 4,856 rows / 0 failing**, so the restore step is now the only path that materialises
+> those bytes — the way the other ~9,700 pack assets already worked. ADR-0032 carries an
+> "Executed 2026-10-16" note; its `Status:` line is untouched and still yours.
+
 **Consequence.** Those 18 `.wav` files stop being in git (they already are today); CI's
 audio restore step becomes the only path that materialises them, which is how the other
 ~4,900 assets work.
@@ -296,6 +318,18 @@ bump; `cargo audit` exits 0 with only the allowed set.
 > `name()` changes. Until it lands the audit warning stays visible and the pin stays
 > unselectable for any regenerated lock; that trade is now owned rather than unnoticed.
 > Logged as owner gate **O-09** on the board.
+
+> **EXECUTED 2026-10-16, after publication.** `Cargo.toml:33` is now
+> `zip = { version = "9.0.4", … }` and `cargo update -p zip` relocked with the only deltas
+> being the zip entry (pulling its own new `nix 0.31.3` + `cfg_aliases 0.2.2`) and tempfile's
+> getrandom edge moving to `0.4.3`, a version already in the lock. The three `name()` sites
+> are the whole code change: `crates/langpack/src/archive.rs:269` (`?`),
+> `crates/langpack/tests/archive.rs:207` and `:280` (`.unwrap()`). `cargo check --workspace
+> --all-targets` exit 0, `cargo test --workspace` green, and the example pack `.lpk` is
+> byte-identical across the bump — 3,976 B, sha256
+> `7938e5fba60e3ceffdf7e796c229b29f3ec57493a959dc35ac53a92ad9434bcc` — which is what keeps the
+> published 0.4.1 digests valid. `cargo audit` now reports **3 allowed warnings**, exit 0: the
+> yanked-zip line is gone, leaving exactly the three the owner accepted above.
 
 **What it is.** Not a vulnerability. `cargo audit` prints `Crate: zip, Version: 8.6.0,
 Warning: yanked`. The maintainer withdrew the entire 8.x line (`8.3.0`…`8.6.0`) plus
@@ -409,7 +443,7 @@ Either way the check output is in `state/evidence/BUNDLE-LOCAL-2026-10-15/NOTES.
 | O-06 hands-on app pass | owner-declared gate; `scripts/smoke-desktop.sh` also needs port 127.0.0.1:1420, held by the owner's dev server | open |
 | AppImage clean-boot install + smoke | needs a machine without this build environment | open — AppImage builds and starts headless here, but rendered UI was **not** proven (black captures under Xvfb) |
 | Windows + macOS runtime | binaries cross-compile; never executed | open |
-| ACC-001 screen-reader matrix + IME audit | requires a human AT user | open — D7 asks when |
+| ACC-001 screen-reader matrix + IME audit | requires a human AT user | open — **D7 answered 2026-10-16: the owner will schedule the Linux/Orca pass**, so ACC-001 stays a hard desktop-RC blocker (no ADR-0015 carve-out written) |
 | SEC-001 disposition | owner gate on residual advisories | the three advisories are accepted (D8); **D8b** still needs your disposition |
 | Qualified band review (4 cards) | cannot be self-certified | posture confirmed (D10); the four cards wait on a reviewer, not on code |
 | Clean cold-network dependency install | this host's pnpm store is warm (`downloaded 0`); CI covers it | unverified locally |

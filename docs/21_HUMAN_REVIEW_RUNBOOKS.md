@@ -187,34 +187,36 @@ them those rows stay empty (`docs/assessment/ACCESSIBILITY_AUDIT.md:23-25`).
 
 Owner gate: `tasks/KANBAN.md`, open-question row **O-06** — "AI cannot perform or
 sign it", the repo went public 2026-10-13 but the pass is still open. Run it against
-the published 0.4.0 artifact; if the owner authorizes O-01b first, run it against a
-0.4.1 build instead — that is the only state in which the 18 journey clips exist in
-an installed pack at all (Runbook C.2).
+the published 0.4.0 artifact; the owner authorized O-01b on 2026-10-16, so run
+it against the published 0.4.1 release instead — that is the state in which the
+18 journey clips sit in an installed pack (Runbook C.2).
 `state/evidence/O-06-2026-10-10/owner-report.md`. Host: the owner's machine;
 build leg on **GamingPC**.
 
 ## B.0 State to know before clicking
 
-- Catalog pins both reference packs at `0.4.0` (`catalog/packs.json:19,35`;
-  live-fetch proof: `cargo test -p lts-desktop --lib -- --ignored both_pinned` →
+- Catalog pins both reference packs at `0.4.1` (`catalog/packs.json:19,35`,
+  republished 2026-10-16; live-fetch proof of the pin mechanism, taken at `0.4.0`: `cargo test -p lts-desktop --lib -- --ignored both_pinned` →
   1 passed in 76.16 s,
   `VERIFIED-ELSEWHERE-2026-10-14`,
   `state/evidence/PACK-DL-ALLOWLIST-001/live-install-2026-10-14.txt`).
 - The owner's installed store still holds `0.2.0` (open-question row O-06);
   switching the active pack happens in Settings ▸ Language packs.
-- 0.4.1 is owed for two reasons, and they are not the same: the **ja-JP** catalogue
-  entry's licence label is wrong (`catalog/packs.json:8` says `CC-BY-4.0` while the
+- The two reasons 0.4.1 was owed, and they were not the same: the **ja-JP** catalogue
+  entry's licence label was wrong (`catalog/packs.json:8` said `CC-BY-4.0` while the
   pack declares `content_license: "CC-BY-SA-4.0"`, `languages/ja-JP/manifest.yaml:33`
-  — this is owner gate O-01a), and **both** published 0.4.0 archives predate the 18
-  journey assets (`.gitignore` exception block, ADR-0032). The ru entry already reads
+  — owner gate O-01a; the 0.4.1 entry now reads `CC-BY-SA-4.0`), and **both**
+  published 0.4.0 archives predated the 18 journey assets (the `.gitignore`
+  exception block, ADR-0032). The ru entry already read
   `CC0-1.0` (`catalog/packs.json:24`, matching `languages/ru-RU/manifest.yaml:30`), so
   the earlier "wrong on both entries" was inaccurate for ru and has been retracted.
-  0.4.1 archives are built and measured but **not published**
-  (`state/evidence/O-01B-2026-10-15/NOTES.md`). Expect a 0.4.0 install to be missing
-  those 18 clips until 0.4.1 ships (Runbook C.2).
-- A fresh-profile install pulls one reference pack: **~317 MB of archive**
-  (317,429,131 B ja / 316,616,342 B ru), which unpacks to ~336 MiB
-  (`scripts/smoke-desktop.sh:50-51`); ~634 MB if both packs are installed. Time it
+  0.4.1 is now published (the pre-publication build record is
+  `state/evidence/O-01B-2026-10-15/NOTES.md`); the 0.4.1 archives carry all 18
+  clips, and the git exception plus the 18 tracked wavs were deleted on
+  2026-10-16 (queue item D4), so a 0.4.1 install is complete (Runbook C.2).
+- A fresh-profile install pulls one reference pack: **~319 MB of archive** at 0.4.1
+  (318,722,747 B ja / 318,489,935 B ru), which unpacked to ~336 MiB on the 0.4.0 archive
+  (`scripts/smoke-desktop.sh:50-51`); ~637 MB if both packs are installed. Time it
   rather than assuming a budget — no install-duration measurement exists in the
   repository, and the 900 s figure in CI is the walkthrough window
   (`LTS_SMOKE_TIMEOUT`), not an install.
@@ -361,13 +363,14 @@ combining mark is correct, not a defect.
 
 ## C.2 Playing the 18 new clips from a plain checkout
 
-All 18 journey assets are tracked (unlike the ~9.7k bulk rows, which stay
-gitignored):
+No journey asset is tracked any more: the ADR-0032 exception was deleted on
+2026-10-16, so all 18 sit behind the same blanket gitignore rule as the
+~9.7k bulk rows, and are restored from the published 0.4.1 archives:
 
 ```sh
-git ls-files 'languages/*/media/*.wav' | wc -l          # VERIFIED-HERE (GamingPC) → 18
-ls languages/ja-JP/media/ja.sent.office-notice-time.wav # VERIFIED-HERE (GamingPC) — 8 ja: office-notice-time, office-question-email, office-room-reserve, office-thanks-notice, film-long-interesting, film-friend-recommended, film-teacher-points, film-recommend-friend
-ls languages/ru-RU/media/ru.sent.a2.j1.wav             # VERIFIED-HERE (GamingPC) — 10 ru: {a2,b1}.j{1,2,3} plus b2.j{1,2,3,4}
+git ls-files 'languages/*/media/*.wav' | wc -l          # VERIFIED-HERE 2026-10-16 → 0
+ls languages/ja-JP/media/ja.sent.office-notice-time.wav # restored + gitignored — 8 ja: office-notice-time, office-question-email, office-room-reserve, office-thanks-notice, film-long-interesting, film-friend-recommended, film-teacher-points, film-recommend-friend
+ls languages/ru-RU/media/ru.sent.a2.j1.wav             # restored + gitignored — 10 ru: {a2,b1}.j{1,2,3} plus b2.j{1,2,3,4}
 ```
 
 The manifest rows for all 18 exist — the "Audio bake obligation (blocked)"
@@ -380,25 +383,32 @@ grep -c 'ru.sent.a2.j1' languages/ru-RU/media/manifest.jsonl                    
 
 ```sh
 ./scripts/fetch-pack-audio.sh --help                            # VERIFIED-HERE (GamingPC) → usage: scripts/fetch-pack-audio.sh [options]; --pack-dir DIR (default languages/ja-JP), --catalog FILE, --work-dir DIR, --verify-only (offline, no network, no cargo)
-./scripts/fetch-pack-audio.sh --verify-only --pack-dir languages/ja-JP   # VERIFIED-IN-SNAPSHOT (an Omarchy job clone, bare checkout)
-./scripts/fetch-pack-audio.sh --verify-only --pack-dir languages/ru-RU   # VERIFIED-IN-SNAPSHOT (an Omarchy job clone, bare checkout)
+./scripts/fetch-pack-audio.sh --pack-dir languages/ja-JP --work-dir tmp/pack-audio
+./scripts/fetch-pack-audio.sh --pack-dir languages/ru-RU --work-dir tmp/pack-audio
+./scripts/fetch-pack-audio.sh --verify-only --pack-dir languages/ja-JP
+./scripts/fetch-pack-audio.sh --verify-only --pack-dir languages/ru-RU
 ```
 
 ```
-ja: summary languages/ja-JP: rows checked=4902 files valid=8 files restored=0 files already valid=8 rows failing=4894   (exit=1)
-ru: summary languages/ru-RU: rows checked=4856 files valid=10 files restored=0 files already valid=10 rows failing=4846  (exit=1)
+restore ja: summary languages/ja-JP: rows checked=4902 files valid=4902 files restored=8 files already valid=4894 rows failing=0   (exit=0)
+restore ru: summary languages/ru-RU: rows checked=4856 files valid=4856 files restored=10 files already valid=4846 rows failing=0  (exit=0)
+verify  ja: summary languages/ja-JP: rows checked=4902 files valid=4902 files restored=0 files already valid=4902 rows failing=0   (exit=0)
+verify  ru: summary languages/ru-RU: rows checked=4856 files valid=4856 files restored=0 files already valid=4856 rows failing=0   (exit=0)
 ```
 
-Read this correctly: in a plain git checkout the 18 tracked journey assets
-verify as valid ("files already valid"), the ~9.7k gitignored bulk rows report
-`file missing`, and the script exits 1 — that is the gate working, not a
-broken pack. On GamingPC and in CI, where the bulk audio is already present (or is
-restored first), the same command reports `rows failing=0`
+All four VERIFIED-HERE 2026-10-16.
+
+Read this correctly: the 18 journey assets no longer ride in the checkout —
+they come from the published 0.4.1 archives like the ~9.7k bulk rows. A bare
+checkout before any restore reports every row missing and exits 1; that is the
+gate working, not a broken pack. On GamingPC and in CI, where the bulk audio
+is already present (or is restored first), the same command reports
+`rows failing=0`
 (`state/evidence/AUDIO-NORMALIZATION-2026-10-15/NOTES.md:80-82`,
-`VERIFIED-ELSEWHERE-2026-10-15`). The 18 files are tracked by name under a
-commented `.gitignore` exception (ADR-0032, the `ci-archive-ahead` row of `tasks/KANBAN.md`) and are
-**not** in the published 0.4.0 archives yet (the `republish-packs` row of `tasks/KANBAN.md`), so an
-in-app fresh install still cannot hear them — another reason 0.4.1 is owed.
+`VERIFIED-ELSEWHERE-2026-10-15`). The 18 files are no longer tracked by name
+and carry no `.gitignore` exception (ADR-0032's end step ran 2026-10-16,
+queue item D4); they are in the published 0.4.1 archives, so an in-app fresh
+install hears them too.
 
 ## C.3 Listening questions the audio now raises
 

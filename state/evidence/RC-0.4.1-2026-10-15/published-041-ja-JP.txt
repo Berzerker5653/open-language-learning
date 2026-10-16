@@ -1,0 +1,8 @@
+pack_id=org.openlanguage.ja-jp.reference
+$ curl -fsSL -o dist/rc-0.4.1/published/ja-jp-reference-0.4.1.lpk https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.4.1/ja-jp-reference-0.4.1.lpk
+DOWNLOAD_EXIT=0
+catalogue pin: sha256=e697ee92f6602c3373ebe5910f0dfbee8e50edcb3e9a25b2890efba5a5964690 size_bytes=318722747
+actual bytes=318722747
+actual sha256=e697ee92f6602c3373ebe5910f0dfbee8e50edcb3e9a25b2890efba5a5964690
+--- GitHub-reported asset digest ---
+["org.openlanguage.ja-jp.reference-0.4.1",true,"20f994df05478f92b9d2399bbf655066e21ffda6",["ja-jp-reference-0.4.1.lpk",318722747,"sha256:e697ee92f6602c3373ebe5910f0dfbee8e50edcb3e9a25b2890efba5a5964690","uploaded"]]

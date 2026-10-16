@@ -25,30 +25,6 @@ private-recordings/
 # asset); the .wav bytes themselves never enter history.
 languages/*/media/*.wav
 
-# ADR-0032 (Proposed): 18 journey assets were authored after the pinned 0.4.0
-# archives were published, so no published archive can supply their bytes and
-# `scripts/fetch-pack-audio.sh` cannot restore them. They are tracked by name,
-# not by widening the rule above; delete this block and the files when the
-# owner republishes both packs at 0.4.1 (owner decision O-01b).
-!languages/ja-JP/media/ja.sent.office-notice-time.wav
-!languages/ja-JP/media/ja.sent.office-room-reserve.wav
-!languages/ja-JP/media/ja.sent.office-thanks-notice.wav
-!languages/ja-JP/media/ja.sent.office-question-email.wav
-!languages/ja-JP/media/ja.sent.film-long-interesting.wav
-!languages/ja-JP/media/ja.sent.film-friend-recommended.wav
-!languages/ja-JP/media/ja.sent.film-teacher-points.wav
-!languages/ja-JP/media/ja.sent.film-recommend-friend.wav
-!languages/ru-RU/media/ru.sent.a2.j1.wav
-!languages/ru-RU/media/ru.sent.a2.j2.wav
-!languages/ru-RU/media/ru.sent.a2.j3.wav
-!languages/ru-RU/media/ru.sent.b1.j1.wav
-!languages/ru-RU/media/ru.sent.b1.j2.wav
-!languages/ru-RU/media/ru.sent.b1.j3.wav
-!languages/ru-RU/media/ru.sent.b2.j1.wav
-!languages/ru-RU/media/ru.sent.b2.j2.wav
-!languages/ru-RU/media/ru.sent.b2.j3.wav
-!languages/ru-RU/media/ru.sent.b2.j4.wav
-
 # ASR round-trip QA + bake-repair convergence scratch (scripts/qa-asr.py,
 # scripts/bake-repair-loop.sh): per-run logs/JSONL, never history.
 qa-r*.log

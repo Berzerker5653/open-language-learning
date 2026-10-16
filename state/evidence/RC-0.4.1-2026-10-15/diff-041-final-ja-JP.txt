@@ -1,0 +1,18 @@
+--- ja-JP: PUBLISHED 0.4.1 vs the CURRENT uploaded candidate ---
+published members = 5864  candidate members = 5864
+identical (size+hash) = 5864
+added in published:
+removed in published:
+(archive sha256 both sides: e697ee92f6602c3373ebe5910f0dfbee8e50edcb3e9a25b2890efba5a5964690 / e697ee92f6602c3373ebe5910f0dfbee8e50edcb3e9a25b2890efba5a5964690)
+
+--- and the same published archive vs the PRE-D1 candidate (rc-inspect-ja-JP.txt) ---
+identical = 5860
+changed by O-07 (path, pre-D1, published):
+	18149 f12fc6b475c7 kanji/a2-topics.jsonl
+	30768 fec48d2f6016 kanji/entries.jsonl
+	4380 b9244bab0823 licenses.jsonl
+	8253 646b1bd8cab1 sources.jsonl
+17561 7521ca59f032 kanji/a2-topics.jsonl
+29858 4cb8e2c973e9 kanji/entries.jsonl
+3229 b7174bffd35a licenses.jsonl
+6139 606f7f4d0e67 sources.jsonl

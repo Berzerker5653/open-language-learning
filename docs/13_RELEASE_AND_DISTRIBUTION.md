@@ -402,12 +402,17 @@ and 4,856 ru-RU rows while the pinned 0.4.0 archives carry 4,894 and 4,846, and
 CI (`rust`, `desktop-smoke`) failed the restore with the eighteen unmatched ids
 named (`the archive carries no ja.sent.office-notice-time.wav matching the
 manifest row`). Refusing is correct — the alternative is a checkout whose
-listening items have no audio. ADR-0032 (Proposed) records the temporary
-answer: those 18 journey assets are tracked in git by name, bounded and
-enumerated in `.gitignore`, until the owner republishes both packs at a version
+listening items have no audio. ADR-0032 (Proposed) recorded the temporary
+answer: those 18 journey assets tracked in git by name, bounded and
+enumerated in `.gitignore`, until both packs were republished at a version
 whose archive covers them, at which point the tracked files and the negations
-are deleted and ADR-0024's rule stands alone. Republishing is an owner action
-(`docs/15` scope rule), so an agent cannot close this by itself.
+are deleted and ADR-0024's rule stands alone. **That end condition was met on
+2026-10-16:** the published 0.4.1 archives contain all 18 ids, verified
+member-by-member in `state/evidence/RC-0.4.1-2026-10-15/diff-041-{ja-JP,ru-RU}.txt`,
+and the tracked copies plus the `.gitignore` negations were removed the same
+day (queue item D4). The scope rule held throughout: republishing stayed an
+owner act, and the owner authorized the publication and explicitly delegated
+the tag-and-upload execution (`state/evidence/RC-0.4.1-2026-10-15/publication-2026-10-16.md`).
 
 The app reads audio provenance from the manifest rather than assuming a file in
 `media/` is a licensed recording, and resolves a media id through the manifest's
@@ -493,6 +498,32 @@ machine: unauthenticated `GET` of the raw catalog returns 200,
 (`installed org.openlanguage.ja-jp.reference v0.4.0`). GitHub computes the same
 `sha256:` digests for every uploaded asset.
 
+**Published reference-pack provenance (2026-10-16).** Both packs are now published at
+**0.4.1**, and both tags resolve to the single commit whose tree pins them
+(`20f994df05478f92b9d2399bbf655066e21ffda6`):
+
+| release tag | asset | bytes | sha256 | immutable |
+| --- | --- | --- | --- | --- |
+| `org.openlanguage.ja-jp.reference-0.4.1` | `ja-jp-reference-0.4.1.lpk` | 318,722,747 | `e697ee92f6602c3373ebe5910f0dfbee8e50edcb3e9a25b2890efba5a5964690` | yes |
+| `org.openlanguage.ru-ru.reference-0.4.1` | `ru-ru-reference-0.4.1.lpk` | 318,489,935 | `9eb074fa8d59f508108bc0fa8c698e1ddbd7458648ee2d829edeb36fbcfc1d7a` | yes |
+| `org.openlanguage.ja-jp.reference-0.4.0` (`70ec6830611ef67a2e54b0305c09f38b58798de6`) | `ja-jp-reference-0.4.0.lpk` | 317,429,131 | `f0aa971f30ec88c0f09ca86085d04133616944d9fff6a75345bf31931b713a5f` | no |
+| `org.openlanguage.ru-ru.reference-0.4.0` (same older commit) | `ru-ru-reference-0.4.0.lpk` | 316,616,342 | `899e0c67a71d165a706afd216817c53b9ee9a56d34a99f1197aeec29a8ea3e14` | no |
+
+The 0.4.1 pair was published under the owner's queue decision **D2**, with the owner
+explicitly delegating the tag-and-upload act itself; the command transcript, the round-trip
+re-download, and the member-level accounting that shows the served bytes are exactly the
+candidate built from that tree (5,864/5,864 ja members and 5,788/5,788 ru members identical by
+size and content hash) are in `state/evidence/RC-0.4.1-2026-10-15/publication-2026-10-16.md`.
+The 0.4.0 rows stay listed because an installed 0.4.0 store keeps its rollback target, and they
+predate immutable releases, so they remain mutable — the tag ruleset below is what limits them.
+
+The 0.4.1 pair is also the first proven through the **client** transport rather than only the
+CLI: the ignored live-proof test fetched both pinned archives, installed them into a fresh
+store, and each receipt's `sha256` equalled the catalogue pin with `github.com` as the source
+host (162 s, `state/evidence/RC-0.4.1-2026-10-15/publication-2026-10-16.md` §4). That test had
+pinned literal `0.4.0` versions and now derives them from the shipped catalogue, so the
+assertion follows a release instead of blocking one.
+
 **Licensing paper corrected after publication.** The published ja-JP 0.4.0
 archive carries three `licenses.jsonl` records. The tree now carries five: the
 baked-audio record was corrected to name the Qwen3-TTS bake engine (ADR-0023; the
@@ -508,7 +539,7 @@ checked rather than asserted: `audit-licenses` compares a declared licence with
 the licences of the sources it derives from (ADR-0028) and reported this
 mismatch at `info` severity on every run until the declaration was fixed.
 
-### Immutability of published artifacts (measured 2026-10-15; owner decision open)
+### Immutability of published artifacts (measured 2026-10-15; **applied 2026-10-16**)
 
 The catalog pins each archive by `sha256`, and installation re-verifies every member
 digest (`crates/langpack/src/archive.rs:287`) — so a swapped asset **fails closed**. That
@@ -528,9 +559,15 @@ workflow is documented. A **tag ruleset** is what covers tags that already exist
 rulesets are irrelevant here (Team-plan, private/internal-only, and content-scoped) and
 legacy tag-protection rules are GHES-only and deprecated.
 
-Enabling either mechanism is a repository-settings write and stays an owner action; **neither
-was applied**. Probe transcripts, the mechanism→prevents→availability table and the proposed
-ruleset JSON: `state/evidence/O-08-2026-10-15/mechanisms-2026-10-15.md`.
+**Applied 2026-10-16 under queue decision D3 ("enable both").** `immutable-releases` now reads
+`{"enabled":true,"enforced_by_owner":false}`, and the `release-tags` ruleset (id 25246378,
+`target: tag`, `enforcement: active`, `include: ["~ALL"]`, rules `update` + `deletion`) blocks
+re-pointing or deleting any tag — the API rejects `ref_name` patterns for `target: tag`, so the
+coverage is deliberately every tag rather than a pack-tag prefix. The 0.4.1 pair is the first
+release under both mechanisms and reads back `isImmutable: true`. The seven older releases stay
+editable as the sequencing paragraph predicted, which is why the ruleset was enabled first: it
+is the only thing that constrains their tags. Applying this was a repository-settings write and
+the owner performed/authorized it; read-back evidence: `state/evidence/O-08-2026-10-16/applied.md`.
 
 ## Authentic updates and interrupted downloads
 

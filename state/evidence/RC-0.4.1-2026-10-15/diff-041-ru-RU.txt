@@ -1,0 +1,18 @@
+--- ru-RU member-level accounting: PUBLISHED 0.4.1 vs uploaded CANDIDATE 0.4.1 ---
+members published = 5788
+members candidate = 5788
+identical (size+hash) = 5788
+added in published:
+removed in published:
+--- the 18 ADR-0032 journey assets inside the PUBLISHED archive ---
+media/ru.sent.a2.j1.wav                        published=1 candidate=1
+media/ru.sent.a2.j2.wav                        published=1 candidate=1
+media/ru.sent.a2.j3.wav                        published=1 candidate=1
+media/ru.sent.b1.j1.wav                        published=1 candidate=1
+media/ru.sent.b1.j2.wav                        published=1 candidate=1
+media/ru.sent.b1.j3.wav                        published=1 candidate=1
+media/ru.sent.b2.j1.wav                        published=1 candidate=1
+media/ru.sent.b2.j2.wav                        published=1 candidate=1
+media/ru.sent.b2.j3.wav                        published=1 candidate=1
+media/ru.sent.b2.j4.wav                        published=1 candidate=1
+--- pack version reported by inspect ---
