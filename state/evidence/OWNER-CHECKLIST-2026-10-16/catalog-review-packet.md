@@ -37,17 +37,32 @@ generated candidate. Identical unless stated otherwise.
 
 - `scripts/build-catalog.sh` writes **`dist/preview/packs.json`** only (gitignored). It never
   touches the tracked `catalog/packs.json`; merging entries into it is owner gate O-05
-  (`scripts/build-catalog.sh:55-56`). Regeneration therefore cannot clobber the live catalogue.
-- Cost of running it: it rebuilds four archives — `ja-jp-reference`, `ru-ru-reference`,
-  `ja-demo`, `eo-demo` (`:43-46`) — and with `WITH_PACK_AUDIO=1` it runs the Qwen3-TTS bake for
-  ja-JP first (`:37-41`). On a machine without the bake venv, leave that flag off: the media
-  already baked into `languages/ja-JP/media/` is what gets archived.
-- Verdict: **the tracked catalogue is consistent with what the toolchain produces for the published
-  archives**, field for field, including the licence value that motivated the 0.4.1 republish. What
-  a regeneration would lose is your two prose fields and `catalog_version: "0.1.0"`.
-- The catalogue entries' digests match the live immutable assets byte for byte
-  (`gh-readback-*.txt` in this directory); the client transport was proven against these pins
-  end-to-end (`state/evidence/RC-0.4.1-2026-10-15/publication-2026-10-16.md` §4).
+  (`scripts/build-catalog.sh:55-56`).
+- Cost of running it: it rebuilds four archives — `ja-jp-reference`, `ru-ru-reference`, `ja-demo`,
+  `eo-demo` (`:43-46`) — so the draft carries **four** entries where the tracked file has two: you
+  drop `ja-demo` and `eo-demo` by hand. With `WITH_PACK_AUDIO=1` it bakes Qwen3-TTS audio for
+  **ja-JP only** (`:37-41`); ru audio is never baked by this script.
+- **The in-place trap.** `langpack catalog` reads and then rewrites whatever `--file` you give it
+  (`crates/langpack-cli/src/main.rs:1169-1181`); the fresh root object (`catalog_version: "1"` plus
+  a one-line note) is used only when that file is missing. A draft therefore has no `platform_note`,
+  `catalog_version: "1"`, and the short note. Copying the draft over the tracked file would silently
+  delete the owner prose — that is exactly what the `diff` step in checklist §5a exists to catch.
+- Derivation detail, so you know what is yours and what is not: the entry for a `pack_id` is deleted
+  and replaced, then the array re-sorted (`main.rs:1239-1256`); platform fields are re-stamped per
+  entry (`main.rs:922-924`) and at the root (`main.rs:936-937`). Today `docs/platform/PLATFORM_REPORTS.yaml:51`
+  is `reports: []`, which is why `community_confirmed_platforms` is `[]` and `untested_platforms` is
+  `["windows","macos"]`. `tested_platforms: ["linux"]` is maintainer-owned and never derived from reports.
+- **The published pins cannot be reproduced.** `sha256`/`size_bytes` are computed from freshly built
+  bytes (`main.rs:1249-1250`); synthesis is not byte-reproducible
+  (`docs/13_RELEASE_AND_DISTRIBUTION.md:419-421`: "a regeneration is a pack change (version bump,
+  fresh catalog hashes …)"); and a fresh checkout has no `.wav` bytes at all, while
+  `crates/langpack/src/archive.rs:97` refuses to build an archive that omits declared media. Any
+  regeneration therefore produces **different digests**, which means a new pack version (0.4.2) and a
+  catalogue that no longer describes the 0.4.1 assets. Regenerate only when you intend to publish
+  again — not to "check" the file.
+- Verdict: the tracked file already matches what the toolchain produced for the archives you
+  published, field for field. There is no content drift here to review; the only judgement left is
+  cosmetic (§3).
 
 ## 3. The decisions sitting on this file
 
@@ -56,6 +71,10 @@ generated candidate. Identical unless stated otherwise.
    manifest field, so it needs a content change plus a new version, not a catalogue edit.
 3. Whether `tested_platforms: ["linux"]` stays accurate — it does today; a Windows/macOS runtime
    report fills `community_confirmed_platforms`, never this field (ADR-0015).
-4. `review_status: community` is the author's claim. Nothing in the app upgrades it, and it stays
-   `community` until a real `reviews.jsonl` record exists — which is the same lever as the band
-   reviews.
+4. `review_status: community` is not hand-written either: `main.rs:1246` derives it from the pack
+   manifest — `maturity` in `reference|certified|reviewed` yields `reviewed`, anything else yields
+   `community`. Both packs are `maturity: "experimental"` (`languages/ja-JP/manifest.yaml:10`,
+   `languages/ru-RU/manifest.yaml:10`), so no regeneration can ever print `reviewed` for them. The
+   lever is a human pack change: calibrated reviewer records in `languages/<pack>/reviews.jsonl`
+   first (ADR-0003), then the manifest maturity flip, then a new release. Nothing you can type into
+   the catalogue changes it.

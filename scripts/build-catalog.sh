@@ -32,8 +32,12 @@ build_pack() {
 # build refuses an audio-less pack, because ADR-0024 removed the on-demand
 # synthesis that used to make one survivable. The bake runs Qwen3-TTS
 # CustomVoice (ADR-0023) through ~/.venvs/qwen-tts; release builds set
-# WITH_PACK_AUDIO=1 with that venv staged. A pack with no media at all (the
-# ru-RU draft) still archives but fails the install gate until it is baked.
+# WITH_PACK_AUDIO=1 with that venv staged. The loop covers ja-JP only: re-synthesising
+# ru-RU here would change audio that 0.4.0 already shipped, and synthesis is not
+# byte-reproducible. ru media is restored from the published archive instead
+# (scripts/fetch-pack-audio.sh --pack-dir languages/ru-RU), and a fresh checkout must do
+# that before building, because archive::build refuses an archive whose declared media is
+# absent (crates/langpack/src/archive.rs:97).
 if [[ "${WITH_PACK_AUDIO:-0}" == "1" ]]; then
   for pack in languages/ja-JP; do
     python3 scripts/generate-pack-audio.py --pack "$pack"

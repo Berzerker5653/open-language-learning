@@ -64,7 +64,7 @@ defect — do not let a reviewer mass-"fix" that.
 
 ## 4. Questions the audio reopened (no code change can answer them)
 
-`languages/ru-RU/review/WORKLIST-2026-10-14.md:66-71` kept the three new environments at
+`languages/ru-RU/review/WORKLIST-2026-10-14.md:66-72` set the three new environments at
 `recall-meaning` rather than `comprehension-listening` because "no audio exists yet — re-check
 modality choice after the audio bake". Audio exists now (baked, and inside the published 0.4.1
 archive). A reviewer must decide whether those three environments become listening; that decision
@@ -78,38 +78,93 @@ The 18 new clips' **loudness** needs no review (all re-normalise byte-identicall
 `state/evidence/AUDIO-NORMALIZATION-2026-10-15/NOTES.md:14-23`). What a reviewer judges is the
 *character* of each clip and whether it matches the reading shown to the learner.
 
-## 5. `tmp/fix-ru-stress.py` — owner-only, deliberately not run
+## 5. `tmp/fix-ru-stress.py` — owner-only, and its blast radius is measured
 
-Read, not executed. What it does (`tmp/fix-ru-stress.py`):
+Read, never executed. What it does:
 
-1. Loads Zaliznyak 6th ed. from `tmp/zaliznyak/dictionary/{Нарицательные,Глаголы}` (present here,
-   5.0 MB) into a `{letters-lowercased-ё→е: set(stressed headwords)}` index.
-2. For **every** row of **every** `languages/ru-RU/lexicon/*.jsonl` — 4,015 rows total — it takes
-   `forms[0].text` and `readings[0].text`, converts precomposed Latin accented vowels (`é á ú ó í
-   ü ý …`) into Cyrillic + U+0301, and then:
-   - if a Zaliznyak headword matches the letters but not the stress position, it **adopts the
-     Zaliznyak stressed headword** (`:59-84`);
-   - then a letter repair: if the stressed letter-strings have equal length and the stress index is
-     preserved, it rebuilds the reading from the form's own letters (`:85-90`).
-3. It rewrites each lexicon file **in place** and prints `ru entries: {total}, readings changed:
-   {changed}`. The changed-row count is only knowable by running it — that run is yours.
+1. Indexes Zaliznyak 6th ed. from `tmp/zaliznyak/dictionary/{Нарицательные,Глаголы}` — 36 files
+   (31 + 5), ~94k headwords — and dies at `:23-25` if either directory is missing. Both are
+   gitignored (`.gitignore:62 tmp/`; `git ls-files tmp` is empty), so the script cannot run on a
+   fresh clone or in CI.
+2. Scope: `languages/ru-RU/lexicon/*.jsonl` only — 84 files, 4,015 rows. It reads `forms[0].text`
+   and `readings[0].text`, converts precomposed Latin accented vowels into Cyrillic + U+0301, adopts
+   a matching-but-differently-stressed Zaliznyak headword (`:59-84`), then a letter repair
+   (`:85-90`). It cannot reach the journey sentences, units, goals or media.
+3. It writes only `readings[0].text` (`:93`) and then re-emits **all 84 files unconditionally**
+   (`:97`); there is no argparse, no dry-run, no backup.
 
-Preconditions and consequences if you run it:
+**Measured without running it.** I made a faithful copy of the script with the write at `:97`
+replaced by a no-op and an extra print per changed row, and ran that copy. Output:
+`ru entries: 4015, readings changed: 1`, and `git status --porcelain languages/ru-RU/lexicon` stayed
+empty. One row, in one file:
 
-- Worktree must be clean and ideally backed up: it truncates and rewrites four-plus jsonl files with
-  no backup and no diff output.
-- It is a **pack content change**: 0.4.1 is published and immutable, so the pack must be version
-  bumped, `langpack test`-ed, re-baked for any affected media rows, and republished as a new version
-  — never patched in place.
-- Each changed reading needs provenance: Zaliznyak 6th ed. as the authority belongs in
-  `languages/ru-RU/sources.jsonl`/`licenses.jsonl` with its licence and access date, and AGENTS.md
-  forbids committing third-party data without redistribution approval — check the dictionary data's
-  licence before it ever lands in git (it currently sits in `tmp/`).
-- Reviewers should still see the affected rows: the tool is an authority shortcut for **stress**,
-  not for meaning, register or part of speech, and the 85 `pos-low-confidence` / 9
-  `gender-conflict` / 43 `plural-only-noun` rows are untouched by it.
+| file | id | now | proposed |
+|---|---|---|---|
+| `languages/ru-RU/lexicon/narration.jsonl:4` | `ru.lex.narration.totchas` | `тотча́с` | `то́тча́с` |
 
-## 6. What a verdict has to look like
+Raw capture of that run — the row's own annotations and the licence record included — is
+`fix-ru-stress-replica-main.txt` in this directory; the throwaway copy was deleted afterwards.
+
+The difference is real, not a script artifact: the headword in the pinned checkout is `то́тча́с`
+(secondary stress on the initial о) at `tmp/zaliznyak/dictionary/Нарицательные/С.txt:81`. It
+contradicts that row's own annotations — `"stress verified against zalizniak-2010 (2026-10-05);
+human review still required"` and `"Stress and word form verified against Zalizniak 6th ed.
+(checkout c39322c) on 2026-10-05"`. So either the 2026-10-05 check dropped a secondary stress mark,
+or someone deliberately chose not to print secondary stress for learners. **That is a
+Russian-speaker's typographic decision, not an agent fix.** Running the script silently overwrites a
+recorded "verified" annotation, which is exactly the kind of change the review record exists to
+catch.
+
+Rights: the pack declares this source `CC-BY-NC-4.0`, `access.mode: reference-only`,
+`redistribution_allowed: false`, "the dataset is NOT bundled or mirrored in this repo"
+(`languages/ru-RU/sources.jsonl:2`). The local `tmp/` copy matches that declaration (verification
+only); nothing from it may enter git, and the only durable artefact of a fix is the changed reading
+plus the source id already on the row.
+
+If you adopt it: 0.4.1 is immutable, so this is a new pack version — bump, `langpack test`, re-bake
+the affected clip if any, republish. The reviewer-visible diff is one token.
+
+## 6. How much of the pack still has no human verdict
+
+All of the numbers below were produced in this session by read-only scans.
+
+- **Depth.** 818 ru unit files: on-ramp 20, A1 90, A2 102, B1 203, **B2 403**. 60 goals: on-ramp 6,
+  A1 9, A2 10, B1 13, **B2 22**. **763 units** cite only the two on-ramp grammar concepts
+  (`ru.grammar.on-ramp.eto-identification`, `ru.grammar.on-ramp.zero-present-copula`) — A1 64, A2 99,
+  B1 200, B2 400 (a further 5 on-ramp units do the same, correctly) — matching the worklist's own
+  `:93-95` statement (99/200/400) that these need band-appropriate rework and that bulk-rewriting
+  them now "would fake depth". The +68 goal lines and +340 unit lines you published are new surface
+  at the top of a shallow middle.
+- **Provenance never moved.** `git log --oneline 70ec683..HEAD -- languages/ru-RU/licenses.jsonl
+  languages/ru-RU/sources.jsonl` is **empty** while 847 content lines landed. `licenses.jsonl` is one
+  row (`lic-ru-original`, pack-original, CC0-1.0); `sources.jsonl` is two rows.
+- **Every media row self-declares as unreviewed**: the note "AI output, not a human recording and not
+  human-reviewed" appears in 4,856 ru and 4,902 ja manifest rows, including the ten new clips, which
+  are now inside an immutable published archive (`members-041pub-ru-RU.txt`, one hit each). There is
+  no undo; the only forward path is a reviewed re-release.
+- **The tracked worklist is entirely open.** `grep -c '^\s*- \[x\]'` on
+  `languages/ru-RU/review/WORKLIST-2026-10-14.md` returns 0 (it uses prose items, not checkboxes), and
+  `:95-96` says plainly: "Human review artifacts (calibrated reviewer, `review_status` transitions)
+  remain open for every id above." Its bake-obligation section (`:74-89`) was rewritten in this pass:
+  it used to assert the ten sentences had no media rows, which stopped being true at 0.4.1. Fixing a
+  worksheet's stale facts is an agent-doable edit; **deciding** its items never is.
+- **A re-check is due.** `:66-72` kept `ru.env.talk-about-yesterday`, `ru.env.report-a-problem-writing`
+  and `ru.env.polite-request-desk` on `recall-meaning`, with the reason given as "no audio exists yet
+  … re-check modality choice after the audio bake". The audio exists in 0.4.1, so three shipped
+  environments are now arguably mis-modelled — a reviewer decides, code cannot.
+- **Maturity.** Every new sentence row is `status: "draft"`, notes "ai-drafted; human review required",
+  and `languages/ru-RU/manifest.yaml:10` is still `maturity: "experimental"`. The immutable 0.4.1 pack
+  therefore ships content that describes itself as draft.
+- **Why "the audits are green" is not a verdict.** `validate_handoff.py` ends with "WARN scope: handoff
+  structure checked; SDK completeness, linguistic correctness, source rights, calibration quality,
+  build/install/runtime/UX/privacy/security remain unverified"; `audit_learner_copy.py` scans only
+  `*.ts`/`*.tsx` under `apps/desktop/src` and `packages/ui/src`, so pack content can never register a
+  finding there. The two content findings (`langpack audit templates` → 35 ru warnings) are the
+  machine-visible half of the list above.
+- **Owner-only ticks for this content** live in issue #1: **R12** (journey coverage) and **R13** (band
+  depth), plus the worklist items — none of which an agent may close.
+
+## 7. What a verdict has to look like
 
 One PR per reviewer that adds `languages/ru-RU/reviews.jsonl` (does not exist yet — the first review
 PR creates it) **and** flips the reviewed items off `draft`; a bare flip fails the validator

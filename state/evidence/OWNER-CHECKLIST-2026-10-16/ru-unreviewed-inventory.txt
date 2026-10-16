@@ -1,0 +1,64 @@
+ru-RU content carrying NO human verdict — inventory beyond the 12 files Main lists
+All line refs are in the named file. Band census produced read-only from
+languages/ru-RU/curriculum/units/*.yaml + goals.yaml (band taken from each unit's goal_id).
+
+A. CURRICULUM DEPTH (the +68 goals.yaml lines and units 810-818 sit inside this)
+  unit files: 818; per band: on-ramp 20, A1 90, A2 102, B1 203, B2 403
+  goals: 60; per band: on-ramp 6, A1 9, A2 10, B1 13, B2 22
+  units whose grammar refs are ONLY the two on-ramp concepts
+  (ru.grammar.on-ramp.eto-identification + ru.grammar.on-ramp.zero-present-copula):
+    on-ramp 5, A1 64, A2 99, B1 200, B2 400  = 768 units; 765 share that identical set;
+    38 distinct grammar-ref sets across all 818 units.
+  languages/ru-RU/review/WORKLIST-2026-10-14.md:85-87 states this is deliberate:
+    "99 A2, 200 B1, 400 B2 pre-existing units still cite only the two on-ramp grammar concepts; they
+     need band-appropriate rework (bulk rewriting now would fake depth and was explicitly not done)."
+  => every one of those 768 units needs a reviewer; none is closed.
+
+B. NAMED OPEN ITEMS IN THE TRACKED WORKLIST (languages/ru-RU/review/WORKLIST-2026-10-14.md)
+  :37-40   4 grammar concepts awaiting human verification (a2 past-tense, a2 past-motion-hodil,
+           b1 proshu-requests, b2 imperative-vy-forms; all review_status pending).
+  :50-52   per-unit acceptance criteria for units 810-818 (810 header comment
+           languages/ru-RU/curriculum/units/810-a2j-past-day.yaml:1 "qualified review pending"), plus
+           "confirm that is the intended schedule semantics" for 3 units with requires_unit, 1 with capabilities.
+  :56-64   34 activity ids listed for review (810:3, 811:4, 812:3, 813:4, 814:3, 815:4, 816:3, 817:4, 818:4).
+  :89-90   "Human review artifacts (calibrated reviewer, review_status transitions) remain open for
+           every id above." The worklist contains zero checked boxes (`grep -c '^\s*- \[x\]'` -> 0),
+           so nothing in it is self-certified closed.
+  :66-71   environment modality re-check is DUE and undone: ru.env.talk-about-yesterday,
+           ru.env.report-a-problem-writing, ru.env.polite-request-desk use recall-meaning "because no
+           audio exists yet ... re-check modality choice after the audio bake." The audio now exists in
+           0.4.1 (see C), so the re-check is owed.
+  :72-81   the worklist's audio-bake obligation is now stale: it asserts the 10 journey sentences have
+           no manifest rows; they do now (media/manifest.jsonl grew +10 in 70ec683..20f994d).
+
+C. THE 10 NEW AUDIO ASSETS THEMSELVES
+  media/ru.sent.{a2.j1,a2.j2,a2.j3,b1.j1,b1.j2,b1.j3,b2.j1,b2.j2,b2.j3,b2.j4}.wav are inside the
+  published, immutable 0.4.1 archive — one hit each in
+  state/evidence/RC-0.4.1-2026-10-15/members-041pub-ru-RU.txt (grep -c 'ru\.sent\.a2\.j1\.wav' -> 1).
+  Each manifest row's notes: "AI output, not a human recording and not human-reviewed"; generator
+  qwen3-tts-customvoice-1.7b voice ono_anna, model_sha256 a0829281b6ac..., and the source sentences
+  carry generation.notes "no stress marks supplied". No human listening verdict exists.
+
+D. PROVENANCE FOR THE NEW CONTENT IS UNVERIFIED BY A HUMAN
+  languages/ru-RU/licenses.jsonl = 1 row (lic-ru-original, pack-original, CC0-1.0).
+  languages/ru-RU/sources.jsonl = 2 rows (ru-original CC0; zalizniak-2010 CC-BY-NC-4.0 reference-only).
+  `git log --oneline 70ec683..HEAD -- languages/ru-RU/licenses.jsonl languages/ru-RU/sources.jsonl`
+    -> empty: neither file changed while +847 content lines landed. The new sentences/units cite
+    "sources": ["ru-original"], "status": "draft", notes "ai-drafted; human review required".
+  state/evidence/RC-0.4.1-2026-10-15/rc-ru-RU-audit-licenses.txt and rc-ru-RU-audit-sources.txt both
+    report "0 error(s), 0 warning(s)" — mechanical file checks, no human authorship/rights verdict.
+  Also note languages/ru-RU/manifest.yaml:10 `maturity: "experimental"` while both packs are now
+    published immutable with draft-status content rows.
+
+E. WHERE THE GREEN AUTOMATION MISSES THIS (why "all green" is not a verdict)
+  tools/validate_handoff.py: 1,960 data files checked, 0 errors; its own WARN: "handoff structure
+    checked; SDK completeness, linguistic correctness, source rights..."
+  tools/audit_content_templates.py: 825 ru sentences / 818 units -> 35 findings, e.g. skeleton "это _"
+    used 400x in B2, 188x in B1 (state/evidence/OWNER-CHECKLIST-2026-10-16/audit-content-templates-ru.txt).
+  tools/audit_learner_copy.py:39,192-197 walks *.ts/*.tsx only -> languages/ru-RU scores
+    "0 source files scanned ... findings: 0" (see audit-learner-copy-ru.txt).
+
+F. OWNER-ONLY LEVERS THAT CLOSE ru GAPS
+  issue #1 open checkboxes R12 (journeys) and R13 (band depth) — tickable by the owner only.
+  scripts/build-catalog.sh:8,56 declares catalog/packs.json merging "owner gate O-05"; running the
+    script is owner-only per the brief.

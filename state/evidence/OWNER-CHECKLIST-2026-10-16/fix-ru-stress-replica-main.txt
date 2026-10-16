@@ -1,0 +1,53 @@
+ru-RU stress script measured by a write-free copy (main session, 2026-10-16)
+
+The owner-only script `tmp/fix-ru-stress.py` was NOT run, moved or deleted. A byte-faithful copy at
+/tmp/ru-stress-replica.py was produced mechanically: line 97 (`open(path, "w", ...).write(...)`)
+replaced by `pass`, one `print` added after the changed-row assignment at :94, and `ROOT` pointed at
+this checkout (the original derives it from the script's own location). Nothing else changed.
+
+  $ python3 /tmp/ru-stress-replica.py
+  CHANGE narration.jsonl ru.lex.narration.totchas 'тотча́с' -> 'то́тча́с'
+  ru entries: 4015, readings changed: 1
+  replica_exit=0
+
+  $ git status --porcelain languages/ru-RU/lexicon | wc -l
+  0                      # nothing was written
+
+Dictionary state the run depended on (gitignored, never in a clone):
+
+  $ ls tmp/zaliznyak/dictionary/
+  Глаголы  Нарицательные  Собственные.txt
+  $ ls tmp/zaliznyak/dictionary/Нарицательные | wc -l   # 31
+  $ ls tmp/zaliznyak/dictionary/Глаголы | wc -l         # 5
+
+The headword behind the proposed change:
+
+  $ grep -rn "то́тча́с" tmp/zaliznyak/dictionary/
+  tmp/zaliznyak/dictionary/Нарицательные/С.txt:81:то́тча́с н
+
+The row it would change, with its own contradicting annotation:
+
+  languages/ru-RU/lexicon/narration.jsonl:4  id ru.lex.narration.totchas  status draft
+    forms[0].text        тотчас
+    readings[0].text     тотча́с            ->  то́тча́с
+    sources              ["ru-original", "zalizniak-2010"]
+    generation.notes     "ai-drafted; stress verified against zalizniak-2010 (2026-10-05);
+                          human review still required"
+    notes                "Stress and word form verified against Zalizniak 6th ed.
+                          (gramdict/zalizniak-2010 checkout c39322c) on 2026-10-05
+                          (see docs/review/2026-10-05-external-pack-review.md). … human review required"
+
+Licence position for the source that authorises the change:
+
+  languages/ru-RU/sources.jsonl:2  id zalizniak-2010
+    license.spdx       CC-BY-NC-4.0 ("non-commercial verification use only")
+    access.mode        reference-only
+    access.notes       "…the dataset is NOT bundled or mirrored in this repo and no dictionary
+                        text is reproduced in pack content…"
+    use.redistribution_allowed  false
+    use.attribution_required    true
+
+Independent corroboration of the scope figures: the same scan of
+languages/ru-RU/lexicon/*.jsonl counts 84 files / 4,015 rows, and the packet's
+state/evidence/OWNER-CHECKLIST-2026-10-16/fix-ru-stress-blast-radius.txt (subagent replica) reports
+the same single changed row. The replica script was deleted after this capture.

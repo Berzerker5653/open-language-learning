@@ -1,0 +1,38 @@
+tmp/fix-ru-stress.py — blast radius, measured READ-ONLY (the script itself was NEVER run)
+Owner-only act. Method: a throwaway read-only python replica of the script's logic, run with
+writes removed; the script's own print at tmp/fix-ru-stress.py:99 would report the same totals.
+
+PRECONDITIONS (all satisfied in this working tree)
+  tmp/fix-ru-stress.py:9-10   ROOT = parent of tmp/; DDIR = ROOT/tmp/zaliznyak/dictionary
+  tmp/fix-ru-stress.py:25     os.listdir(DDIR/ subdir) crashes if a dir is absent.
+  Present: tmp/zaliznyak/dictionary/Нарицательные (31 files), tmp/zaliznyak/dictionary/Глаголы (5 files).
+    (Собственные is a plain FILE here, not a dict dir; the script never reads it.)
+  The dictionary is gitignored: .gitignore:62 `tmp/` — `git ls-files tmp` is empty. It is NOT in any
+    checkout, so this script cannot run on a fresh clone or in CI.
+  Dict load (replica): 36 files, 94,005 keys.
+
+SCOPE OF WRITES
+  Files iterated: every *.jsonl in languages/ru-RU/lexicon ONLY (tmp/fix-ru-stress.py:46-50) = 84 files.
+    sentences/, curriculum/, media/ are NOT touched, so the new journey text is unaffected.
+  Field mutated: e["readings"][0]["text"] only (tmp/fix-ru-stress.py:93). forms, glosses, sources,
+    generation notes, status are left as-is.
+  Every one of the 84 files is re-emitted and written back unconditionally
+    (tmp/fix-ru-stress.py:94,96,97 — changed rows `json.dumps(e, ensure_ascii=False)`, unchanged rows
+    verbatim, then "\n".join(out) + "\n"). No backup, no dry-run, no target override (no argparse/sys).
+
+MEASURED OUTCOME IF RUN TODAY
+  lexicon rows scanned: 4,015
+  rows that would change: 1
+  files whose bytes would change: 1 of 84 (the other 83 re-emit byte-identically → no git diff)
+  the single row: languages/ru-RU/lexicon/narration.jsonl:4  id ru.lex.narration.totchas
+      form "тотчас": reading "тотча́с"  ->  "то́тча́с"   (extra stress mark on the initial о)
+      re-emitted line keeps identical key order and spacing; only that one token differs.
+  Pass attribution: Zaliznyak adoption pass (tmp/fix-ru-stress.py:59-84). The Latin-accent repair pass
+    (tmp/fix-ru-stress.py:19-20,47) fires on 0 rows; the letter-repair pass
+    (tmp/fix-ru-stress.py:86-90) fires on 0 rows.
+  The same row already asserts the opposite conclusion in its own note:
+    "Stress and word form verified against Zalizniak 6th ed. (gramdict/zalizniak-2010 checkout
+     c39322c) on 2026-10-05 (see docs/review/2026-10-05-external-pack-review.md)."
+  => the one pending change is a linguistic-correctness judgement about where Zaliznyak 6th ed. puts
+     the stress in тотчас. Human/Russian-speaker call, not an agent call.
+  Row context: status "draft"; "sources": ["ru-original", "zalizniak-2010"].

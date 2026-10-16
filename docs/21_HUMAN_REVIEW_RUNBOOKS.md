@@ -373,8 +373,9 @@ ls languages/ja-JP/media/ja.sent.office-notice-time.wav # restored + gitignored 
 ls languages/ru-RU/media/ru.sent.a2.j1.wav             # restored + gitignored — 10 ru: {a2,b1}.j{1,2,3} plus b2.j{1,2,3,4}
 ```
 
-The manifest rows for all 18 exist — the "Audio bake obligation (blocked)"
-sections in both 2026-10-14 worklists (`ja:66-73`, `ru:72-81`) are **stale**:
+The manifest rows for all 18 exist. Both 2026-10-14 worklists now carry a corrected
+"Audio bake obligation — discharged by 0.4.1; the listening check is still open" section
+(`ja:66-82`, `ru:74-89`); the bake question is closed there, the listening question is not.
 
 ```sh
 grep -c 'ja.sent.office-notice-time\|ja.sent.film-friend-recommended' languages/ja-JP/media/manifest.jsonl   # VERIFIED-HERE (GamingPC) → 2
@@ -419,11 +420,10 @@ install hears them too.
   rows: ja `rows updated=0 … failing=0`, ru `rows updated=0 … failing=0`
   (`:48-54`, `VERIFIED-ELSEWHERE-2026-10-15`). What the reviewer judges is the
   *character* and whether each clip matches the reading the learner is shown.
-- ru modality is now an open question: `languages/ru-RU/review/WORKLIST-2026-10-14.md:66-71`
-  kept the three new environments at `recall-meaning` instead of
-  `comprehension-listening` "no audio exists yet — re-check modality choice
-  after the audio bake". Audio exists now; say whether those three
-  environments should become listening.
+- ru modality is now an open question: `languages/ru-RU/review/WORKLIST-2026-10-14.md:66-72`
+  kept the three new environments at `recall-meaning` instead of `comprehension-listening`, on the
+  ground that no audio existed (the worksheet now records the bake as discharged). Audio exists now;
+  say whether those three environments should become listening.
 - ja per-sentence questions are listed per id in
   `languages/ja-JP/review/WORKLIST-2026-10-14.md:22-29` (e.g. `開始します` vs
   `始まります`; `ありがとうございます` vs `ありがとうございました`; i-adjective

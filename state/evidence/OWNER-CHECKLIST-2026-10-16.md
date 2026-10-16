@@ -233,11 +233,23 @@ the archives that were uploaded); the diff against the tracked file is only pros
 | `catalog_version` | differs: generated `"1"` vs tracked `"0.1.0"` | hand-set in the tracked file |
 | root `note` and `platform_note` | differ: the generated file has only a one-line note | hand-authored prose in the tracked file |
 
-Consequence you should decide on: `scripts/build-catalog.sh` writes to **`dist/preview/packs.json`**
-(gitignored) and never touches `catalog/packs.json` — merging is owner gate O-05 (`:55-56`). So
-regenerating cannot clobber the tracked catalogue; what it costs is a rebuild of both archives plus
-the fixture packs (`:43-46`), and a merge that would drop your two prose fields and reset
-`catalog_version` if pasted verbatim. Cross-check against the live host any time:
+Full field-by-field packet, with the exact derivation line for each value:
+`state/evidence/OWNER-CHECKLIST-2026-10-16/catalog-review-packet.md`.
+
+Two facts to hold onto before you run anything:
+
+- `scripts/build-catalog.sh` writes **`dist/preview/packs.json`** only (gitignored); merging into the
+  tracked file is owner gate O-05 (`:55-56`). But `langpack catalog` itself rewrites whatever
+  `--file` you hand it (`crates/langpack-cli/src/main.rs:1169-1181`), and a fresh draft carries
+  `catalog_version: "1"`, a one-line note, **no** `platform_note`, and two extra entries
+  (`tests/fixtures/packs/{ja-demo,eo-demo}`, `scripts/build-catalog.sh:43-46`). Pasting a draft over
+  the tracked file silently deletes your prose.
+- The candidate above is reproducible **only** because it was built from the bytes you uploaded.
+  `sha256`/`size_bytes` are measured off freshly built archives (`main.rs:1249-1250`) and synthesis is
+  not byte-reproducible (`docs/13_RELEASE_AND_DISTRIBUTION.md:419-421`); a fresh checkout has no
+  `.wav` bytes at all. So a regeneration is a pack change — new digests, new version, a catalogue that
+  no longer describes 0.4.1 — and is never a way to "re-derive" the published pins. Cross-check
+  against the live host instead, any time:
 
 ```sh
 gh release view org.openlanguage.ja-jp.reference-0.4.1 --json tagName,isImmutable,targetCommitish,url,assets \
@@ -270,6 +282,30 @@ Between `20f994d` and `HEAD` **nothing** ru-content-wise: the only ru changes af
 tree are the 10 `.wav` files leaving git (queue item D4). Full numstat:
 `state/evidence/OWNER-CHECKLIST-2026-10-16/git-ru-040-to-041-numstat.txt`.
 
+Packet with every number and its source line:
+`state/evidence/OWNER-CHECKLIST-2026-10-16/ru-content-review-packet.md`. The state you are approving,
+measured today:
+
+- **Zero human provenance work accompanied it.** `git log 70ec683..HEAD --
+  languages/ru-RU/licenses.jsonl languages/ru-RU/sources.jsonl` is empty while 847 content lines
+  landed; `licenses.jsonl` is still one row, `sources.jsonl` two.
+- **Every media row says it is unreviewed**: "AI output, not a human recording and not
+  human-reviewed" appears in 4,856 ru and 4,902 ja manifest rows, including the ten clips now inside
+  the immutable 0.4.1 archive. No human has listened to them, and there is no undo.
+- **Depth behind the new surface**: 818 ru units (on-ramp 20, A1 90, A2 102, B1 203, **B2 403**), 60
+  goals; **763 units** cite only the two on-ramp grammar concepts (A1 64, A2 99, B1 200, B2 400).
+- **The worklist is entirely open** — `languages/ru-RU/review/WORKLIST-2026-10-14.md` has 0 checked
+  boxes and says at `:95-96` that review artefacts "remain open for every id above". Its
+  bake-obligation section (`:74-89`) was rewritten in this pass because its facts had gone stale at
+  0.4.1; the review items themselves are untouched.
+- **Maturity unchanged**: `languages/ru-RU/manifest.yaml:10` is `maturity: "experimental"`, every new
+  sentence row is `status: "draft"` with "ai-drafted; human review required".
+- **What the green audits do not mean**: `validate_handoff.py` ends with a WARN that linguistic
+  correctness, source rights and calibration quality remain unverified, and
+  `tools/audit_learner_copy.py` scans only `*.ts`/`*.tsx` under `apps/desktop/src` and
+  `packages/ui/src` — it can never report anything about pack content, so its "0 findings" is not
+  evidence about these sentences.
+
 Playing the 10 ru (and 8 ja) clips from a plain checkout — they are no longer tracked, they come
 from the published archive:
 
@@ -289,14 +325,21 @@ not be waved through: ru `b2` = 400 units riding on one 2-element grammar set wi
 skeleton 400 times (`UPPERBAND-TASK-JOURNEYS-001`).
 
 Three ru questions the audio reopened, waiting on a reviewer, not on code
-(`languages/ru-RU/review/WORKLIST-2026-10-14.md:66-71`): the three new environments were kept at
-`recall-meaning` because "no audio exists yet" — audio exists now, so a reviewer must say whether
+(`languages/ru-RU/review/WORKLIST-2026-10-14.md:66-72`): the three new environments were kept at
+`recall-meaning` on the ground that no audio existed — audio exists now, so a reviewer must say whether
 they become `comprehension-listening`. Per-sentence checks are at `:24-33` (`гулял` gender, the
 `неполадку` four-case cloze chain, `опечаток` genitive plural).
 
-`tmp/fix-ru-stress.py` is yours to run or delete: I have not run it, moved it or deleted it;
-its intent and blast radius are described in
-`state/evidence/OWNER-CHECKLIST-2026-10-16/ru-content-review-packet.md`.
+`tmp/fix-ru-stress.py` is yours to run, rewrite or delete: I have not run it, moved it or deleted
+it. I did measure it, by running a byte-faithful copy with its single write call replaced by a no-op:
+`ru entries: 4015, readings changed: 1`. The one row is
+`languages/ru-RU/lexicon/narration.jsonl:4` (`ru.lex.narration.totchas`), which would go from
+`тотча́с` to `то́тча́с` — matching the pinned Zaliznyak headword
+(`tmp/zaliznyak/dictionary/Нарицательные/С.txt:81`) while contradicting that row's own note that its
+stress was already "verified against zalizniak-2010 (2026-10-05)". Whether a learner reading should
+carry that secondary stress is a Russian-speaker's call, and adopting it is a pack change (new
+version), not a patch. Full reasoning and the licence position:
+`state/evidence/OWNER-CHECKLIST-2026-10-16/ru-content-review-packet.md` §5.
 
 ---
 
@@ -333,6 +376,7 @@ flowchart LR
 | **PLAT-001** | external (hardware/spend) | **Do not block on it — record the scope decision instead.** | ADR-0015 already encodes the honest posture: `tested_platforms: ["linux"]`, `untested_platforms: ["windows","macos"]`, and the CLI refuses to let a build or a report populate `tested_platforms`. Bundles are produced and labelled untested. Keeping the label honest costs nothing; buying machines or paid runner minutes is your spend decision, and D15's `community_confirmed_platforms` path gives you a non-purchase route via runtime reports. |
 | **PERF-002** | provisional data + external | **Partial blocker: require the `typical` tier only.** | D9 keeps budgets provisional and only `typical` is measured. Blocking 1.0 on three tiers while the hardware list doesn't exist stalls the release on a document; blocking a *performance claim* on the measured tier is the meaningful version. |
 | **The band-review chain** (`JA-A1-003 → … → JA-B2-002`, plus `JA-A2-001/B1-001/B2-001`) | qualified human | **Do not let it block a labelled-draft release; do let it block any completeness claim.** | `REVIEW_POLICY.yaml:120-125` gives you the recorded lever: `accept_draft_labeling_at_release` — content ships labelled draft/unreviewed and band-completeness claims are forbidden. That is already the shipped posture (everything in the R12 batches is `draft`), and D10 kept qualified review out of the required set. The chain only becomes a blocker the moment you want the pack called reviewed. |
+| **18 AI-baked clips now frozen in published releases** (10 ru in 0.4.1, 8 ja in 0.4.0) | human listening | **Cannot block 0.4.1 retroactively; make it a gate on the next pack version.** | Every row of both `media/manifest.jsonl` files states "AI output, not a human recording and not human-reviewed" (4,856 ru / 4,902 ja) and nobody has listened. Because releases are immutable, a bad clip can only be fixed by a new version — and any re-release re-verifies every declared asset (`media_asset_missing`, `crates/langpack/src/audit.rs:994`) and rebuilds the archive (`crates/langpack/src/archive.rs:97` refuses absent declared media). The cheapest listening pass is the one before the next bake. |
 | **`PACK-UPDATE-UX-001`**, `JA-KANJI-DECOMP-UI-001`, `JA-KANJI-REFRESH-001`, `UPPERBAND-TASK-JOURNEYS-001`, `RU-MODALITY-PRACTICE-001`, `A11Y-FLOW-001` (human half), `SPEECH-007`, `TTS-003` | mixed | **Do not add to the gate.** | The update affordance already exists in Settings ▸ Language packs; the drill-display rule is copy work; the refresh procedure is a duty with a date, not a gate; upper-band depth is exactly what the review chain is for. Keep them as the post-1.0 queue. |
 
 Practical consequence: the shortest path to a defensible desktop RC is **(1)** one AT user on one
@@ -355,4 +399,8 @@ Russian and Japanese content ships labelled unreviewed, with no completeness cla
 | ADR-0026, 0028, 0029, 0030, 0031, 0032, 0033 `Status:` lines | open (§1) |
 | Issue #1 checkboxes R12, R13, I04, I05, I08 | open, untouched |
 | `A11Y-FLOW-001`, `INSTALL-UX-001`, `CANDO-PROGRESS-001`, `GUIDED-SESSION-001` | `review` — agent-built, human acceptance open |
-| `tmp/fix-ru-stress.py`, `scripts/build-catalog.sh` regeneration | owner-only, not run |
+| `ru.lex.narration.totchas` stress (`тотча́с` vs Zaliznyak's `то́тча́с`) | open, one row, §5b |
+| Three ru environment modality decisions (`recall-meaning` → `comprehension-listening`?) | open; the audio reason no longer exists |
+| `catalog_version`, ru `display_name` "(Draft)" | open cosmetic calls, §5a; nothing machine-generated needs changing |
+| Listening pass for the 18 shipped AI clips | open, §6; only fixable through a new pack version |
+| `tmp/fix-ru-stress.py`, `scripts/build-catalog.sh` regeneration | owner-only; never run (blast radius measured by a write-free copy, §5b) |
