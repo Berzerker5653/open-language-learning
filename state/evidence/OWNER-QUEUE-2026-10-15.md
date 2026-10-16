@@ -89,6 +89,14 @@ the deferral in the ledger (`O-07` note) and proceed to D2.
 > SHA-256. The tag + upload is still yours, with copy-paste commands and the reason one `main`
 > run goes red in between: `state/evidence/RC-0.4.1-2026-10-15/publish-runbook.md`. D3 landed
 > first, as recommended, so both releases will be immutable.
+>
+> First attempt returned `HTTP 422 Release.target_commitish is invalid` twice because
+> `--target` carried the abbreviated SHA; `gh` needs the full 40 characters, so the runbook now
+> uses `20f994df05478f92b9d2399bbf655066e21ffda6`. Nothing half-created: the tag query still
+> answers 404. Run `38924884357` (head `6bf9cef`) then failed on exactly the predicted 404 for
+> the ja 0.4.1 asset in `rust` and `desktop-smoke` only; `web`, `schemas`, `security`, both
+> `platform-compile` legs and `platform-bundles` were green, which covers the new strict ledger
+> validator and the audit gate.
 
 **Exact approval requested.** "Publish `org.openlanguage.ja-jp.reference-0.4.1` and
 `org.openlanguage.ru-ru.reference-0.4.1` as GitHub release assets, and let the two
