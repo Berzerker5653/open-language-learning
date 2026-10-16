@@ -1,0 +1,36 @@
+$ git log --no-decorate --format="%h %ad %an %s" --date=short 70ec6830611ef67a2e54b0305c09f38b58798de6..20f994df05478f92b9d2399bbf655066e21ffda6 -- languages/ru-RU
+20f994d 2026-10-16 Berzerker5653 feat(pack,catalog): publish 0.4.1 — bump both manifests and pin the new archives
+8be62a2 2026-10-15 Berzerker5653 ci: revert the tracked pack version bump - it rides publication
+df10c69 2026-10-15 Berzerker5653 release(pack): bump reference packs to 0.4.1 and pin media-upgrade behavior
+fa7e336 2026-10-14 Berzerker5653 fix(ci): give the post-0.4.0 journey rows audio CI can verify
+6e16fec 2026-10-14 Berzerker5653 feat(content): count template repetition and author the upper-band gap
+
+$ git diff --stat 70ec683..20f994d -- languages/ru-RU
+ languages/ru-RU/curriculum/goals.yaml              |  69 +++++++++++++++-
+ .../curriculum/units/010-cyrillic-a-o-m-t.yaml     |   2 +
+ .../ru-RU/curriculum/units/810-a2j-past-day.yaml   |  76 +++++++++++++++++
+ .../curriculum/units/811-a2j-past-workday.yaml     |  70 ++++++++++++++++
+ .../curriculum/units/812-a2j-past-revision.yaml    |  72 +++++++++++++++++
+ .../curriculum/units/813-b1j-problem-letter.yaml   |  77 ++++++++++++++++++
+ .../curriculum/units/814-b1j-problem-reply.yaml    |  71 ++++++++++++++++
+ .../curriculum/units/815-b1j-problem-revision.yaml |  71 ++++++++++++++++
+ .../curriculum/units/816-b2j-style-editing.yaml    |  72 +++++++++++++++++
+ .../curriculum/units/817-b2j-style-presend.yaml    |  75 +++++++++++++++++
+ .../curriculum/units/818-b2j-style-revision.yaml   |  75 +++++++++++++++++
+ languages/ru-RU/grammar/concepts.jsonl             |   4 +
+ languages/ru-RU/manifest.yaml                      |   2 +-
+ languages/ru-RU/media/manifest.jsonl               |  10 +++
+ languages/ru-RU/media/ru.sent.a2.j1.wav            | Bin 0 -> 161324 bytes
+ languages/ru-RU/media/ru.sent.a2.j2.wav            | Bin 0 -> 253484 bytes
+ languages/ru-RU/media/ru.sent.a2.j3.wav            | Bin 0 -> 165164 bytes
+ languages/ru-RU/media/ru.sent.b1.j1.wav            | Bin 0 -> 314924 bytes
+ languages/ru-RU/media/ru.sent.b1.j2.wav            | Bin 0 -> 199724 bytes
+ languages/ru-RU/media/ru.sent.b1.j3.wav            | Bin 0 -> 241964 bytes
+ languages/ru-RU/media/ru.sent.b2.j1.wav            | Bin 0 -> 284204 bytes
+ languages/ru-RU/media/ru.sent.b2.j2.wav            | Bin 0 -> 272684 bytes
+ languages/ru-RU/media/ru.sent.b2.j3.wav            | Bin 0 -> 234284 bytes
+ languages/ru-RU/media/ru.sent.b2.j4.wav            | Bin 0 -> 172844 bytes
+ languages/ru-RU/review/WORKLIST-2026-10-14.md      |  90 +++++++++++++++++++++
+ .../ru-RU/sentences/journeys-2026-10-14.jsonl      |  10 +++
+ languages/ru-RU/world/environments.jsonl           |   3 +
+ 27 files changed, 847 insertions(+), 2 deletions(-)

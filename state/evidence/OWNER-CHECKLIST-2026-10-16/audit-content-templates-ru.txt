@@ -1,0 +1,40 @@
+content-template repetition audit
+========================================
+Structural repetition signals measured from pack files only. These counts queue qualified human review; they make NO claim about CEFR level correctness, linguistic quality, or pedagogical validity, and reference resolution / identical counts do not certify instructional depth.
+
+pack languages/ru-RU: 825 sentences in 3 file(s), 818 units; 35 finding(s)
+  [leading-token] sentences/content-parity-2026-10-12.jsonl: prefix 'я' in 6/40 sentences (share 15.00%)
+  [leading-token] sentences/entries.jsonl: prefix 'это' in 741/775 sentences (share 95.61%)
+  [leading-token] sentences/journeys-2026-10-14.jsonl: prefix 'в' in 2/10 sentences (share 20.00%)
+  [skeleton] band a1: skeleton 'это _' repeated 61x
+  [skeleton] band a1: skeleton 'это наш _' repeated 2x
+  [skeleton] band a2: skeleton 'это _' repeated 78x
+  [skeleton] band a2: skeleton '_ _ _ _' repeated 6x
+  [skeleton] band a2: skeleton 'это _ _ _' repeated 3x
+  [skeleton] band a2: skeleton 'она _ _' repeated 2x
+  [skeleton] band b1: skeleton 'это _' repeated 188x
+  [skeleton] band b1: skeleton 'он _' repeated 3x
+  [skeleton] band b1: skeleton 'это _ _' repeated 3x
+  [skeleton] band b1: skeleton '_ _' repeated 2x
+  [skeleton] band b1: skeleton '_ _ _' repeated 2x
+  [skeleton] band b2: skeleton 'это _' repeated 400x
+  [skeleton] band b2: skeleton '_ _ _ _ и _ _' repeated 2x
+  [skeleton] band on-ramp: skeleton 'это _' repeated 3x
+  [skeleton] band on-ramp: skeleton '_ _' repeated 2x
+  [skeleton] band unbanded: skeleton '_ _ _' repeated 5x
+  [skeleton] band unbanded: skeleton '_ _ _ _' repeated 5x
+  [skeleton] band unbanded: skeleton '_ _' repeated 2x
+  [skeleton] band unbanded: skeleton '_ _ в _ _' repeated 2x
+  [skeleton] band unbanded: skeleton '_ _ и _' repeated 2x
+  [skeleton] band unbanded: skeleton '_ _ на _' repeated 2x
+  [skeleton] band unbanded: skeleton 'мы _ _ _' repeated 2x
+  [skeleton] band unbanded: skeleton 'я _ _' repeated 2x
+  [identical-grammar-sets] band a1: 64 units share the same 2-element grammar-concept set: ru.unit.a1.basic-messages-01, ru.unit.a1.basic-messages-02, ru.unit.a1.basic-messages-03, ru.unit.a1.basic-messages-04, ru.unit.a1.basic-messages-05, ru.unit.a1.basic-messages-06, ru.unit.a1.basic-messages-07, ru.unit.a1.basic-messages-09, ru.unit.a1.city-01, ru.unit.a1.city-02, ru.unit.a1.city-03, ru.unit.a1.city-04, … (+52 more, see --json)
+  [identical-grammar-sets] band a2: 99 units share the same 2-element grammar-concept set: ru.unit.a2.comparisons-01, ru.unit.a2.comparisons-02, ru.unit.a2.comparisons-03, ru.unit.a2.comparisons-04, ru.unit.a2.comparisons-05, ru.unit.a2.comparisons-06, ru.unit.a2.comparisons-07, ru.unit.a2.comparisons-08, ru.unit.a2.comparisons-09, ru.unit.a2.comparisons-10, ru.unit.a2.connected-messages-01, ru.unit.a2.connected-messages-02, … (+87 more, see --json)
+  [identical-grammar-sets] band a2: 2 units share the same 3-element grammar-concept set: ru.unit.a2.jpast-01, ru.unit.a2.jpast-03
+  [identical-grammar-sets] band b1: 200 units share the same 2-element grammar-concept set: ru.unit.b1.culture-media-01, ru.unit.b1.culture-media-02, ru.unit.b1.culture-media-03, ru.unit.b1.culture-media-04, ru.unit.b1.culture-media-05, ru.unit.b1.culture-media-06, ru.unit.b1.culture-media-07, ru.unit.b1.culture-media-08, ru.unit.b1.culture-media-09, ru.unit.b1.culture-media-10, ru.unit.b1.feelings-01, ru.unit.b1.feelings-02, … (+188 more, see --json)
+  [identical-grammar-sets] band b1: 2 units share the same 2-element grammar-concept set: ru.unit.b1.jprob-02, ru.unit.b1.jprob-03
+  [identical-grammar-sets] band b2: 400 units share the same 2-element grammar-concept set: ru.unit.b2.app-01, ru.unit.b2.app-02, ru.unit.b2.app-03, ru.unit.b2.app-04, ru.unit.b2.app-05, ru.unit.b2.app-06, ru.unit.b2.app-07, ru.unit.b2.app-08, ru.unit.b2.app-09, ru.unit.b2.app-10, ru.unit.b2.argue-01, ru.unit.b2.argue-02, … (+388 more, see --json)
+  [identical-grammar-sets] band b2: 2 units share the same 2-element grammar-concept set: ru.unit.b2.jstyle-01, ru.unit.b2.jstyle-03
+  [identical-grammar-sets] band on-ramp: 4 units share the same 1-element grammar-concept set: ru.unit.on-ramp.classroom-01, ru.unit.on-ramp.classroom-02, ru.unit.on-ramp.greetings-01, ru.unit.on-ramp.greetings-02
+  [identical-grammar-sets] band on-ramp: 2 units share the same 1-element grammar-concept set: ru.unit.on-ramp.numbers-01, ru.unit.on-ramp.numbers-02

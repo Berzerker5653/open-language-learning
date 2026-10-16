@@ -126,7 +126,11 @@ that called `platform-bundles` green was wrong and is corrected here rather than
   `7938e5fba60e3ceffdf7e796c229b29f3ec57493a959dc35ac53a92ad9434bcc`), which is the evidence
   that a pack-toolchain bump cannot move a published digest. §4's live proof ran afterwards, so
   9.0.4 is exercised on the real install path and `cargo audit` is down to 3 allowed warnings.
-- Not changed: the store still marks a pack Installed by `pack_id`, so a 0.4.0 user sees no
-  upgrade affordance for 0.4.1 — measured and carded as `PACK-UPDATE-UX-001`, deliberately not
-  folded into this commit. The application shell remains `0.4.0-alpha.1` (queue item D6: no app
-  release now).
+- Not changed: the upgrade affordance. **Correction to this file's first draft**, which claimed a
+  0.4.0 user "sees no upgrade affordance": `packs.rs:238-241` fills each catalogue row's
+  `installed_version` from the store and `language.tsx:419-429` renders a primary
+  `Update to v{version}` button whenever it differs from the pin (asserted by
+  `language.test.tsx:115`). The real gap, carded as `PACK-UPDATE-UX-001`, is discovery and the
+  wizard: `installed_version` has one consumer in `apps/desktop/src`, and the wizard's install
+  check is id-only (`App.tsx:266,842`; `onboarding.tsx:95,200,205`). Deliberately not folded into
+  this commit. The application shell remains `0.4.0-alpha.1` (queue item D6: no app release now).

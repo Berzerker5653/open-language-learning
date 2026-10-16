@@ -1,0 +1,3 @@
+WARN examples/minimal-language-pack: manifest-only onboarding fixture; no instructional content or full pack conformance
+WARN scope: handoff structure checked; SDK completeness, linguistic correctness, source rights, calibration quality, build/install/runtime/UX/privacy/security remain unverified
+HANDOFF VALIDATION PASSED (1960 data files checked)

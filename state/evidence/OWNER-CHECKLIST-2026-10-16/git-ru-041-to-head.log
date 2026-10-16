@@ -1,0 +1,27 @@
+$ git log --no-decorate --format="%h %ad %an %s" --date=short 20f994d..HEAD -- languages/ru-RU
+06effd0 2026-10-16 Berzerker5653 release(pack): record the 0.4.1 publication, retire the media exception, bump zip 9.0.4
+
+$ git diff --stat 20f994d..HEAD -- languages/ru-RU
+ languages/ru-RU/media/ru.sent.a2.j1.wav | Bin 161324 -> 0 bytes
+ languages/ru-RU/media/ru.sent.a2.j2.wav | Bin 253484 -> 0 bytes
+ languages/ru-RU/media/ru.sent.a2.j3.wav | Bin 165164 -> 0 bytes
+ languages/ru-RU/media/ru.sent.b1.j1.wav | Bin 314924 -> 0 bytes
+ languages/ru-RU/media/ru.sent.b1.j2.wav | Bin 199724 -> 0 bytes
+ languages/ru-RU/media/ru.sent.b1.j3.wav | Bin 241964 -> 0 bytes
+ languages/ru-RU/media/ru.sent.b2.j1.wav | Bin 284204 -> 0 bytes
+ languages/ru-RU/media/ru.sent.b2.j2.wav | Bin 272684 -> 0 bytes
+ languages/ru-RU/media/ru.sent.b2.j3.wav | Bin 234284 -> 0 bytes
+ languages/ru-RU/media/ru.sent.b2.j4.wav | Bin 172844 -> 0 bytes
+ 10 files changed, 0 insertions(+), 0 deletions(-)
+
+$ git diff --numstat 20f994d..HEAD -- languages/ru-RU
+-	-	languages/ru-RU/media/ru.sent.a2.j1.wav
+-	-	languages/ru-RU/media/ru.sent.a2.j2.wav
+-	-	languages/ru-RU/media/ru.sent.a2.j3.wav
+-	-	languages/ru-RU/media/ru.sent.b1.j1.wav
+-	-	languages/ru-RU/media/ru.sent.b1.j2.wav
+-	-	languages/ru-RU/media/ru.sent.b1.j3.wav
+-	-	languages/ru-RU/media/ru.sent.b2.j1.wav
+-	-	languages/ru-RU/media/ru.sent.b2.j2.wav
+-	-	languages/ru-RU/media/ru.sent.b2.j3.wav
+-	-	languages/ru-RU/media/ru.sent.b2.j4.wav

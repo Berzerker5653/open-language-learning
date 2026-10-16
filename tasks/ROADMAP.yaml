@@ -2237,16 +2237,20 @@ tasks:
   - PACK-DL-ALLOWLIST-001
   read_first:
   - apps/desktop/src/App.tsx
+  - apps/desktop/src/language.tsx
   - apps/desktop/src-tauri/src/packs.rs
   - catalog/packs.json
   - state/evidence/RC-0.4.1-2026-10-15/publication-2026-10-16.md
   acceptance:
   - >-
-    Measured at publication time: `App.tsx:266` keeps `installedPacks` as a list of pack **ids**
-    (`setInstalledPacks(installed.map((i) => i.pack_id))`, `App.tsx:842`), so with 0.4.0 installed and
-    the catalogue pinning 0.4.1 the store row still reads as already installed and offers no action —
-    an alpha user has no path to 0.4.1 from the UI. The card's first criterion is that this state is
-    reachable: the row names the installed version and the available version and offers one action.
+    Corrected 2026-10-16 against the code: the affordance exists but is hidden.
+    `apps/desktop/src-tauri/src/packs.rs:238-241` fills `installed_version` per catalogue row and
+    `apps/desktop/src/language.tsx:419-429` renders `Update to v{version}` when it differs from the
+    pin (`language.test.tsx:115`). The gap is discovery and the wizard: `installed_version` has one
+    consumer in `apps/desktop/src`, and `App.tsx:266,842` keep `installedPacks` as pack ids, so
+    `onboarding.tsx:95,200,205` treat any installed version as satisfying the row. The first
+    criterion is that a learner who never opens the pack panel is told an update exists, and that
+    onboarding states the installed version next to the pinned one.
   - >-
     The update re-verifies against the new pin before it activates and keeps the previous version in
     the store for rollback, the invariant already pinned by `crates/langpack/tests/media_upgrade.rs`.
