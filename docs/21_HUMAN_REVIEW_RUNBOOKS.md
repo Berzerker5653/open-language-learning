@@ -112,6 +112,15 @@ and the smoke script needs that port free.
 Built bundles land in `apps/desktop/src-tauri/target/release/bundle/` if the
 runner prefers a packaged build over `tauri dev`.
 
+A packaged **deb** needs one step before it installs on a current LTS target:
+`./scripts/finalize-deb.sh <the.deb>` rewrites the generated `Depends: … libgtk-3-0`
+entry into `libgtk-3-0t64 | libgtk-3-0`, because `libgtk-3-0` no longer exists as a
+package name on Ubuntu 24.04 or Debian 13 — without it `apt install ./the.deb` fails by
+metadata there, while Ubuntu 22.04 and bookworm are fine. The script reports the before
+and after `Depends:` lines and proves nothing else changed (the data member's sha256 and
+every other control field); `scripts/test-finalize-deb.sh` pins that behaviour. Record in
+A.1 which build you finalized, since finalizing changes the package digest.
+
 ## A.3 The 14 journeys, in order
 
 Work the matrix at `docs/assessment/ACCESSIBILITY_AUDIT.md:63-78`. Each row:

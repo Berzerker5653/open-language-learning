@@ -146,6 +146,25 @@ intact; regression pinned by `scripts/test-finalize-appimage.sh`.
 ADR-0015 platform status for the variant still awaits a human runtime
 report.
 
+The deb carries its own portability defect, closed the same way. The
+tauri-generated `Depends:` names `libgtk-3-0`, which Ubuntu 24.04 and
+Debian 13 renamed to `libgtk-3-0t64`, so installing the package on either
+target fails on an unsatisfiable dependency (decision D12, 2026-10-16).
+`scripts/finalize-deb.sh` rewrites that single entry to
+`libgtk-3-0t64 | libgtk-3-0` — alternative first, so the older name still
+resolves on pre-t64 systems — and changes nothing else. There is no dpkg on
+the build host, so it unpacks the `ar` archive, patches `./control`, and
+repacks with the compressor the bundle already used, asserting that the data
+member's hash and every other control field are unchanged. It refuses a
+non-`ar` input, leaves an unrelated `Depends` alone, and is byte-stable, so a
+re-run cannot drift a published digest. Measured 2026-10-16 on the local
+0.4.0-alpha.1 bundle: `libgtk-3-0` → `libgtk-3-0t64 | libgtk-3-0`, data
+member `19288d37…` identical before and after, 12,493,922 B → 12,493,970 B;
+the duplicate entries that artifact inherited from the reverted 2026-10-15
+experiment are left in place because they are valid. Fixture test:
+`scripts/test-finalize-deb.sh`. Run the finalizer after every deb bundle
+build, before a package is offered to anyone.
+
 The payload is `apps/desktop/sidecar/<platform>/`: `bin/`
 (whisper-cli plus libwhisper.so.1, libggml.so.0, libggml-cpu.so.0,
 libggml-base.so.0, libgomp.so.1 as real bytes, never symlinks),
