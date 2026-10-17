@@ -264,6 +264,9 @@ type Scenario = {
     goals?: number;
   }[];
   installed?: string[];
+  /** Each listed command fails loudly on its FIRST call and answers
+   * normally after: for journeys that exercise degraded-read paths. */
+  failOnce?: string[];
 };
 
 export class LearnerEngine {
@@ -285,6 +288,8 @@ export class LearnerEngine {
   private nextProfile = 1;
   private nextCallback = 1;
   private nextListener = 1;
+  private readonly failOnceList: string[] = [];
+  private readonly failedOnce = new Set<string>();
   speechModel = "off";
   models: {
     id: string;
@@ -309,6 +314,7 @@ export class LearnerEngine {
   ];
 
   constructor(scenario: Scenario = {}) {
+    this.failOnceList = scenario.failOnce ?? [];
     for (const id of scenario.installed ?? []) this.install(id);
     for (const seed of scenario.profiles ?? []) {
       const active = seed.active ?? null;
@@ -333,6 +339,10 @@ export class LearnerEngine {
   /** The bridge hands this to `@tauri-apps/api/core`; it records and routes. */
   run(cmd: string, args: Record<string, unknown> = {}): Promise<unknown> {
     this.calls.push({ cmd, args });
+    if (this.failOnceList.includes(cmd) && !this.failedOnce.has(cmd)) {
+      this.failedOnce.add(cmd);
+      throw new Error(`injected failure: ${cmd}`);
+    }
     return Promise.resolve(this.answer(cmd, args));
   }
 

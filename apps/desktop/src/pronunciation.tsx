@@ -68,6 +68,13 @@ const REASON_TEXT: Record<string, string> = {
     "Feedback cannot run: this device has no speech alignment runtime, and installing a speech model does not add one. This attempt is not scored; other practice is unaffected.",
   "aligner-cpu-unsupported":
     "Feedback cannot run: this build carries a speech alignment runtime, but this CPU is below the instruction set it was compiled for. This attempt is not scored; other practice is unaffected.",
+  // Engine faults are the app's failure, never the learner's: these must never
+  // fall through to the generic "abstained" uncertainty copy, which reads as
+  // doubt about the recording and invites another attempt.
+  "abstained:engine-error":
+    "Feedback cannot run: the speech engine reported an internal error while checking this attempt. The fault is ours, not yours — nothing about your pronunciation can be judged, and this attempt is not scored.",
+  "sidecar-timeout":
+    "Feedback cannot run: the speech engine did not answer in time, so its check was abandoned. The fault is ours, not yours — nothing about your pronunciation can be judged, and this attempt is not scored.",
   "reference-media-missing": "The reference recording for this exercise is missing from the pack.",
   "reference-media-invalid": "The reference recording could not be read.",
   "feature-not-instrumented":

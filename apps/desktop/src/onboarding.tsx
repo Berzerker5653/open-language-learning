@@ -54,6 +54,10 @@ export interface OnboardingProps {
   packs: PackCandidate[];
   selectedPack: string | null;
   installedPacks: string[];
+  /** Set when the launch-time `installed_packs` read failed: installed
+   * state is genuinely unknown, and the step says so rather than
+   * rendering a confident-but-wrong Install button (sweep-ts-dup-install). */
+  installedUnknown?: boolean;
   profileName: string;
   onProfileName(value: string): void;
   onCreateProfile(): void;
@@ -176,6 +180,12 @@ export function Onboarding(p: OnboardingProps) {
       {p.step === "packs" && (
         <div className="card">
           <h1>Choose a language pack</h1>
+          {p.installedUnknown && (
+            <p role="status" aria-live="polite" className="notice">
+              The app could not check which packs are already installed. If a pack is already on
+              this device, installing it again does nothing.
+            </p>
+          )}
           <fieldset>
             <legend>Available packs</legend>
             {p.packs.map((pack) => (

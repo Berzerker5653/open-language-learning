@@ -200,4 +200,65 @@ describe("PronunciationPractice", () => {
     expect(html).toContain("Guided feedback only");
     expect(html).not.toMatch(/vowel length|holding the あ/);
   });
+
+  // sweep-ts-engine-error-copy: App.tsx fabricates abstain_reason
+  // "abstained:engine-error" when pronunciation_check rejects, and the backend
+  // reports "sidecar-timeout". Both must render fault-honest copy instead of
+  // falling through to the generic "abstained" uncertainty string.
+  it("names an engine error as the app's fault, not learner-side uncertainty", () => {
+    const html = renderToStaticMarkup(
+      <PronunciationPractice
+        {...base}
+        result={{
+          corrections: [],
+          abstain_reason: "abstained:engine-error",
+          pitch: EMPTY_PITCH,
+          mode: "guided",
+          mode_reason: "no-calibration-record",
+        }}
+      />,
+    );
+    expect(html).toContain("speech engine reported an internal error");
+    expect(html).toContain("The fault is ours, not yours");
+    expect(html).toContain("not scored");
+    // The generic abstained fallback may never render for a known fault token.
+    expect(html).not.toContain("not confident enough to give feedback");
+    expect(html).not.toMatch(/Please try again/);
+  });
+
+  it("names a sidecar timeout as the app's fault, never low-confidence hedging", () => {
+    const html = renderToStaticMarkup(
+      <PronunciationPractice
+        {...base}
+        result={{
+          corrections: [],
+          abstain_reason: "sidecar-timeout",
+          pitch: EMPTY_PITCH,
+          mode: "guided",
+          mode_reason: "no-calibration-record",
+        }}
+      />,
+    );
+    expect(html).toContain("did not answer in time");
+    expect(html).toContain("The fault is ours, not yours");
+    expect(html).toContain("not scored");
+    expect(html).not.toContain("not confident enough to give feedback");
+    expect(html).not.toMatch(/Please try again/);
+  });
+
+  it("keeps the generic abstention hedge for unknown abstained tokens", () => {
+    const html = renderToStaticMarkup(
+      <PronunciationPractice
+        {...base}
+        result={{
+          corrections: [],
+          abstain_reason: "abstained:low-signal",
+          pitch: EMPTY_PITCH,
+          mode: "guided",
+          mode_reason: "no-calibration-record",
+        }}
+      />,
+    );
+    expect(html).toContain("not confident enough to give feedback");
+  });
 });

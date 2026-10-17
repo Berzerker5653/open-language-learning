@@ -19,13 +19,25 @@ else
   # pnpm missing (e.g. bare node installs): build the same artifacts
   # directly. Debug WebviewUrl::default() loads the devUrl, so also
   # serve the frontend on :1420 for the walkthrough.
+  # sweep-smoke-trap: refuse to walk a stranger's server. A run that died
+  # used to orphan vite on :1420, and the next run's --strictPort vite then
+  # exited while the webview loaded the PREVIOUS run's server — a green smoke
+  # over someone else's dev server. The check comes before ANY work so a
+  # doomed run costs nothing.
+  if (exec 3<>/dev/tcp/127.0.0.1/1420) 2>/dev/null; then
+    exec 3<&- 3>&-
+    echo "FAIL: 127.0.0.1:1420 is already bound — a dev server is left over; kill it before re-running" >&2
+    exit 1
+  fi
   (cd apps/desktop && ./node_modules/.bin/vite build)
   # vite must run from apps/desktop: the config's root is the app dir,
   # so a repo-root cwd serves index.html 404 and the webview hangs.
   (cd apps/desktop && exec ../../apps/desktop/node_modules/.bin/vite --port 1420 --strictPort) \
     > /tmp/lts-smoke-vite.log 2>&1 &
   VITE_PID=$!
-  trap 'kill "$VITE_PID" 2>/dev/null || true' EXIT
+  # One composed trap shape used for the whole run (re-installed unchanged
+  # after the temp files exist): kill vite AND clean — never one or the other.
+  trap 'kill "${VITE_PID:-0}" 2>/dev/null || true; [ -n "${MARKER:-}" ] && rm -f "$MARKER"; [ -n "${DATA:-}" ] && rm -rf "$DATA"; true' EXIT
   sleep 2
   cargo build -p lts-desktop
 fi
@@ -38,7 +50,7 @@ fi
 
 MARKER=$(mktemp -u /tmp/lts-smoke.XXXXXX)
 DATA=$(mktemp -d /tmp/lts-smoke-data.XXXXXX)
-trap 'rm -f "$MARKER"; rm -rf "$DATA"' EXIT
+trap 'kill "${VITE_PID:-0}" 2>/dev/null || true; rm -f "$MARKER"; rm -rf "$DATA"' EXIT
 
 echo "== launch under Xvfb =="
 # With webkit2gtk in the user-local sysroot, WebKitGTK still resolves helper

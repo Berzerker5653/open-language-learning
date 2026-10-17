@@ -1531,7 +1531,7 @@ fn profile_export(profile_id: String) -> Result<String, String> {
 /// What a backup on disk contains and what restoring it would mean,
 /// computed read-only before anything is written (review finding R06: the
 /// learner must be able to see what a restore will do, and what it did).
-#[derive(serde::Serialize)]
+#[derive(serde::Serialize, Debug)]
 struct ImportPreview {
     format_version: u32,
     supported: bool,
@@ -1623,20 +1623,45 @@ fn preview_bundle(
     }
 }
 
-fn profile_import_preview_at(path: &str, mode: &str) -> Result<ImportPreview, String> {
+/// sweep-profile-import-path: these commands used to read any absolute
+/// path the webview named. Grepping `apps/desktop/src` (App.tsx
+/// `previewRestore`, the free-text `settings-restore-path` field,
+/// settings.tsx placeholder "path shown by Export profile data") shows
+/// no native file dialog ever picks this path — a session-grant would
+/// have no dialog pick to record. Containment is therefore the
+/// enforceable invariant: the backup must live inside the app data
+/// directory, exactly where `profile_export` writes it
+/// (`<data>/exports/`). Canonicalizing both sides first means `..`
+/// segments and symlinks planted inside the data dir cannot escape the
+/// prefix check.
+fn resolve_bundle_path(data: &Path, path: &str) -> Result<PathBuf, String> {
+    let resolved =
+        std::fs::canonicalize(path).map_err(|e| format!("could not read that backup file: {e}"))?;
+    let root = std::fs::canonicalize(data)
+        .map_err(|_| "the app data directory is unavailable".to_string())?;
+    if !resolved.starts_with(&root) {
+        return Err(format!(
+            "that path is outside the app data directory ({}); use the path shown by Export profile data",
+            root.display()
+        ));
+    }
+    Ok(resolved)
+}
+
+fn profile_import_preview_at(data: &Path, path: &str, mode: &str) -> Result<ImportPreview, String> {
     let mode = parse_mode(mode)?;
-    let bundle = read_bundle(&std::path::PathBuf::from(path))?;
+    let bundle = read_bundle(&resolve_bundle_path(data, path)?)?;
     Ok(preview_bundle(&bundle, &mode))
 }
 
 #[tauri::command]
 fn profile_import_preview(path: String, mode: String) -> Result<ImportPreview, String> {
-    profile_import_preview_at(&path, &mode)
+    profile_import_preview_at(&data_dir(), &path, &mode)
 }
 
 fn profile_import_at(data: &Path, path: &str, mode: &str) -> Result<ImportOutcome, String> {
     let mode = parse_mode(mode)?;
-    let bundle = read_bundle(&std::path::PathBuf::from(path))?;
+    let bundle = read_bundle(&resolve_bundle_path(data, path)?)?;
     let preview = preview_bundle(&bundle, &mode);
     if !preview.supported {
         return Err(format!(
@@ -4457,6 +4482,7 @@ fn pronunciation_check_at(
             model: src.model,
             language: asr_language,
             threshold: 0.6,
+            timeout: None,
         },
         Err(miss) => return Ok(abstain(aligner_miss_reason(&miss))),
     };
@@ -4695,9 +4721,22 @@ fn dictation_check_at(data: &Path, attempt: DictationAttempt) -> Result<Dictatio
     if matches!(q, lts_speech_api::ProviderOutcome::QualityRejected { .. }) {
         return Ok(abstain(outcome_reason(&q), String::new()));
     }
-    let tokens =
-        lts_speech_runtime::alignment::run_whisper_words(&src.binary, &src.model, "ja", &audio)
-            .map_err(|e| e.to_string())?;
+    let tokens = match lts_speech_runtime::alignment::run_whisper_words(
+        &src.binary,
+        &src.model,
+        "ja",
+        &audio,
+        None,
+    ) {
+        Ok(t) => t,
+        // A sidecar killed at its deadline leaves dictation neutral —
+        // unjudged, not an error toast (frontend already maps unknown
+        // reasons).
+        Err(r) if r == lts_speech_runtime::sidecar::SIDECAR_TIMEOUT_REASON => {
+            return Ok(abstain(r, String::new()));
+        }
+        Err(e) => return Err(e),
+    };
     let heard: String = tokens
         .iter()
         .map(|t| t.text.trim())
@@ -7503,6 +7542,13 @@ pub fn run() {
             // slowest thing they do.
             let warm_dir = data_dir();
             std::thread::spawn(move || warm_installed(&warm_dir));
+            // sweep-tmp-audio-privacy: plaintext sidecar WAVs stage in
+            // one private directory; a killed or crashed run can leave
+            // leftovers, so every start clears anything far too old to
+            // belong to a live call (sidecar calls take seconds).
+            lts_speech_runtime::sidecar::sweep_stale_audio_tmp(std::time::Duration::from_secs(
+                3600,
+            ));
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -10646,7 +10692,7 @@ activities:
         let path = profile_export_at(data_a, &p.id).unwrap();
 
         // Read-only preview first: the learner sees what the backup holds.
-        let preview = profile_import_preview_at(&path, "new").unwrap();
+        let preview = profile_import_preview_at(data_a, &path, "new").unwrap();
         assert!(preview.supported);
         assert_eq!(preview.source_profile_name, "Hunter");
         assert_eq!(preview.saved_words, 2, "saved words are in the backup");
@@ -10655,7 +10701,13 @@ activities:
 
         // The same bundle restored on an empty machine.
         let dst = tempfile::tempdir().unwrap();
-        let outcome = profile_import_at(dst.path(), &path, "new").unwrap();
+        // Contained restore: the bundle has to live in the destination
+        // data dir — a learner copies the export there (or exports on
+        // that machine); a foreign absolute path is refused (below).
+        std::fs::create_dir_all(dst.path().join("exports")).unwrap();
+        let dst_bundle = dst.path().join("exports/backup.json");
+        std::fs::copy(&path, &dst_bundle).unwrap();
+        let outcome = profile_import_at(dst.path(), dst_bundle.to_str().unwrap(), "new").unwrap();
         assert_eq!(outcome.display_name, "Hunter");
         assert_eq!(outcome.saved_words, 2, "saved words survive the move");
         assert_eq!(outcome.events, 1, "observation history survives the move");
@@ -10700,7 +10752,7 @@ activities:
         doc["format_version"] = serde_json::json!(999);
         let future = data_a.join("future.json");
         std::fs::write(&future, doc.to_string()).unwrap();
-        let preview = profile_import_preview_at(future.to_str().unwrap(), "new").unwrap();
+        let preview = profile_import_preview_at(data_a, future.to_str().unwrap(), "new").unwrap();
         assert!(!preview.supported);
         assert!(
             preview
@@ -10709,11 +10761,63 @@ activities:
                 .any(|w| w.contains("format version 999"))
         );
         assert!(
-            profile_import_at(dst.path(), future.to_str().unwrap(), "new").is_err(),
+            profile_import_at(data_a, future.to_str().unwrap(), "new").is_err(),
             "an unsupported bundle is refused"
         );
-        assert!(profile_import_preview_at("/nonexistent/nope.json", "new").is_err());
-        assert!(profile_import_preview_at(&path, "sideways").is_err());
+        assert!(profile_import_preview_at(data_a, "/nonexistent/nope.json", "new").is_err());
+        assert!(profile_import_preview_at(data_a, &path, "sideways").is_err());
+
+        // sweep-profile-import-path: a bundle that does not live inside
+        // this data dir is refused — both as a plain foreign absolute
+        // path and as a symlink planted inside the data dir that
+        // canonicalizes outside it.
+        let elsewhere = tempfile::tempdir().unwrap();
+        let outside = elsewhere.path().join("evil.json");
+        std::fs::write(&outside, std::fs::read_to_string(&path).unwrap()).unwrap();
+        let err = profile_import_preview_at(data_a, outside.to_str().unwrap(), "new").unwrap_err();
+        assert!(err.contains("outside the app data directory"), "{err}");
+        assert!(
+            profile_import_at(data_a, outside.to_str().unwrap(), "new").is_err(),
+            "the write path refuses containment escapes too"
+        );
+        #[cfg(unix)]
+        {
+            let link = data_a.join("exports/link.json");
+            std::os::unix::fs::symlink(&outside, &link).unwrap();
+            let err = profile_import_preview_at(data_a, link.to_str().unwrap(), "new").unwrap_err();
+            assert!(err.contains("outside the app data directory"), "{err}");
+        }
+    }
+
+    /// sweep-profile-import-path: containment decided without any pack
+    /// install, so it runs even where generated pack audio is absent
+    /// (unlike the full restore journey test above).
+    #[test]
+    fn profile_import_path_must_live_inside_the_data_dir() {
+        let data = tempfile::tempdir().unwrap();
+        std::fs::create_dir_all(data.path().join("exports")).unwrap();
+        let inside = data.path().join("exports/backup.json");
+        std::fs::write(&inside, "{}").unwrap();
+        assert!(resolve_bundle_path(data.path(), inside.to_str().unwrap()).is_ok());
+
+        let elsewhere = tempfile::tempdir().unwrap();
+        let outside = elsewhere.path().join("evil.json");
+        std::fs::write(&outside, "{}").unwrap();
+        let err = resolve_bundle_path(data.path(), outside.to_str().unwrap()).unwrap_err();
+        assert!(err.contains("outside the app data directory"), "{err}");
+
+        // A symlink planted inside the data dir canonicalizes outside:
+        // the prefix check sees the target, not the link location.
+        #[cfg(unix)]
+        {
+            let link = data.path().join("exports/link.json");
+            std::os::unix::fs::symlink(&outside, &link).unwrap();
+            let err = resolve_bundle_path(data.path(), link.to_str().unwrap()).unwrap_err();
+            assert!(err.contains("outside the app data directory"), "{err}");
+        }
+
+        // A never-existing path says so (canonicalize), before any read.
+        assert!(resolve_bundle_path(data.path(), "/nonexistent/nope.json").is_err());
     }
 
     /// Every install reports its stages; this test is about the install gate,

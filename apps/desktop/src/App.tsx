@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { AppShell, PackText } from "@openlang/ui";
+import { invoke } from "@tauri-apps/api/core";
 import {
   Onboarding,
   type OnboardingStep,
@@ -102,9 +103,7 @@ function after<T>(ms: number, value: T): Promise<T> {
 function detectInvoke(): Invoke | null {
   if (typeof window !== "undefined" && "__TAURI_INTERNALS__" in window) {
     return (cmd, args) =>
-      import("@tauri-apps/api/core").then((m) =>
-        m.invoke(cmd, args).catch((e: unknown) => Promise.reject(explainPackAbsence(e))),
-      );
+      invoke(cmd, args).catch((e: unknown) => Promise.reject(explainPackAbsence(e)));
   }
   return null;
 }
@@ -264,6 +263,7 @@ export function App() {
    * pack-scoped call uses it. Null means no pack is active. */
   const [selectedPack, setSelectedPack] = useState<string | null>(null);
   const [installedPacks, setInstalledPacks] = useState<string[]>([]);
+  const [installedUnknown, setInstalledUnknown] = useState(false);
   const [profileName, setProfileName] = useState("");
   const [profiles, setProfiles] = useState<ProfileSummary[]>([]);
   const [profileId, setProfileId] = useState<string | null>(null);
@@ -584,7 +584,9 @@ export function App() {
           const goalRows = (await inv("goal_map", { profileId: p.id })) as GoalCard[];
           await inv("smoke_ack", { note: `goal-map:${goalRows.length}` });
           setStep("done");
-          await painted(4);
+          // sweep-walkthrough-stall: no bare frame wait — a frozen rAF must
+          // name itself instead of parking the walkthrough unmarked.
+          await paintedOrStall("hub-paint");
           const buttons = Array.from(document.querySelectorAll('nav[aria-label="Routes"] button'));
           for (const b of buttons) {
             const label = (b.textContent ?? "").trim();
@@ -645,7 +647,7 @@ export function App() {
             "Placement",
           ]) {
             practiceTab.click();
-            await painted(3);
+            await paintedOrStall("practice-tab");
             const card = Array.from(
               document.querySelectorAll('[aria-label="Practice modes"] button'),
             ).find((b) => (b.textContent ?? "").trim() === mode) as HTMLButtonElement | undefined;
@@ -831,17 +833,19 @@ export function App() {
       }
       try {
         setNotice((await inv("privacy_notice")) as PrivacyNotice);
-        // The wizard offers both bundled references and anything already on
-        // the device, and it has to know which of those are installed: an
-        // installed pack is selectable with no install click.
-        const [candidates, installed] = await Promise.all([
-          inv("available_packs") as Promise<PackCandidate[]>,
-          inv("installed_packs") as Promise<InstalledPack[]>,
-        ]);
-        setPacks(candidates);
-        setInstalledPacks(installed.map((i) => i.pack_id));
+        setPacks((await inv("available_packs")) as PackCandidate[]);
       } catch {
         /* defaults render; onboarding install step will surface errors */
+      }
+      // sweep-ts-dup-install: installed state is its own read, because a
+      // failure here must not render confident Install buttons for packs
+      // already on the device — the step says the state is unknown instead,
+      // and install() re-checks before moving bytes.
+      try {
+        const installed = (await inv("installed_packs")) as InstalledPack[];
+        setInstalledPacks(installed.map((i) => i.pack_id));
+      } catch {
+        setInstalledUnknown(true);
       }
     })();
   }, []);
@@ -1086,6 +1090,19 @@ export function App() {
   async function install(id: string) {
     setOnboardError(null);
     if (inv) {
+      // sweep-ts-dup-install: the disabled-state may be stale if the launch
+      // read failed; a fresh check keeps the label honest and skips a
+      // pointless call (the engine no-ops an already-current install).
+      try {
+        const fresh = (await inv("installed_packs")) as InstalledPack[];
+        if (fresh.some((i) => i.pack_id === id)) {
+          setInstalledPacks((prev) => (prev.includes(id) ? prev : [...prev, id]));
+          setInstalledUnknown(false);
+          return;
+        }
+      } catch {
+        /* still unknown: proceed — the engine no-ops a current install */
+      }
       setInstallingPack(id);
       try {
         // K-73 made this command async, so `engine-progress` events now
@@ -2430,9 +2447,10 @@ export function App() {
     }
   }
   // SPEECH-005: guided pronunciation practice. The attempt blob lives in
-  // memory only (docs/08); nothing audio is ever persisted. The contrast
-  // pair comes from the installed pack's phonology data (K-32), never from
-  // app-internal language content.
+  // memory only (docs/08); the engine stages short-lived WAVs in a private
+  // temp dir it sweeps at startup, and no audio is ever uploaded or kept.
+  // The contrast pair comes from the installed pack's phonology data (K-32),
+  // never from app-internal language content.
   interface PronDemo {
     short_unit: string;
     long_unit: string;
@@ -2625,7 +2643,8 @@ export function App() {
 
   // WebKitGTK does not enable MediaRecorder, so capture PCM directly via
   // WebAudio (enabled by default) and build the WAV in JS. The attempt
-  // lives in memory only (docs/08); nothing audio is ever persisted.
+  // lives in memory only (docs/08); the scoring engine stages it briefly in a
+  // private temp dir it sweeps at startup — never uploaded, never kept.
   // L01: the recording is owned by `captureOwner`, so every way out of the
   // flow — Stop, navigation, profile change, microphone off, unmount — goes
   // through one place that hands the device back.
@@ -2774,6 +2793,7 @@ export function App() {
           packs={packs}
           selectedPack={selectedPack}
           installedPacks={installedPacks}
+          installedUnknown={installedUnknown}
           profileName={profileName}
           onProfileName={setProfileName}
           onCreateProfile={() => void createProfile()}
