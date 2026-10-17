@@ -300,3 +300,35 @@ fn install_enforces_install_mode_gates() {
     assert!(msg.contains("declared_unresolved_reference"), "{msg}");
     assert!(msg.contains("redistribution_blocked"), "{msg}");
 }
+
+/// sweep-manifest-bomb: `inspect`/`read_entry` must cap an entry on its
+/// DECOMPRESSED size. The desktop caller caps only the compressed
+/// archive bytes (1 GiB), so a tiny MANIFEST.json that inflates past
+/// `MAX_ENTRY_RAW_BYTES` would otherwise be materialized whole.
+#[test]
+fn inspect_and_read_entry_reject_decompressed_bombs() {
+    let big = vec![b'A'; 20 * 1024 * 1024]; // highly compressible
+    let mut zip = zip::ZipWriter::new(Cursor::new(Vec::new()));
+    let opts = zip::write::SimpleFileOptions::default()
+        .compression_method(zip::CompressionMethod::Deflated);
+    zip.start_file(archive::MANIFEST_ENTRY, opts).unwrap();
+    zip.write_all(&big).unwrap();
+    zip.start_file("manifest.yaml", opts).unwrap();
+    zip.write_all(&big).unwrap();
+    let bytes = zip.finish().unwrap().into_inner();
+    assert!(bytes.len() < 1024 * 1024, "bomb is tiny compressed");
+
+    let err = archive::inspect(&bytes).unwrap_err();
+    let msg = err.to_string();
+    assert!(
+        msg.contains(archive::MANIFEST_ENTRY) && msg.contains("inflates past"),
+        "{msg}"
+    );
+
+    let err = archive::read_entry(&bytes, "manifest.yaml").unwrap_err();
+    let msg = err.to_string();
+    assert!(
+        msg.contains("manifest.yaml") && msg.contains("inflates past"),
+        "{msg}"
+    );
+}

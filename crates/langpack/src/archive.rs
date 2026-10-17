@@ -27,6 +27,16 @@ pub const MAX_FILE_BYTES: u64 = 32 * 1024 * 1024;
 /// and extraction cap at declared size stay unchanged.
 pub const MAX_TOTAL_BYTES: u64 = 1024 * 1024 * 1024;
 
+/// Cap on the DECOMPRESSED bytes of an entry read into memory by
+/// `inspect`/`read_entry`. Those paths only ever serve JSON/YAML
+/// metadata (MANIFEST.json, manifest.yaml); a real manifest for the
+/// largest shipped pack is well under a MiB, so 16 MiB is generous
+/// headroom while refusing a manifest-entry zip bomb that would be
+/// capped at MAX_TOTAL_BYTES *compressed* by the desktop caller.
+/// Extraction (`install`) keeps its own cap at each entry's declared
+/// size.
+pub const MAX_ENTRY_RAW_BYTES: u64 = 16 * 1024 * 1024;
+
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct FileEntry {
     pub path: String,
@@ -170,11 +180,26 @@ pub fn build(dir: &Path) -> Result<(Vec<u8>, String), String> {
     Ok((bytes, sha))
 }
 
+/// Read a single entry's decompressed bytes, refusing anything that
+/// inflates past [`MAX_ENTRY_RAW_BYTES`] (read `cap + 1`, error when
+/// more arrived — the bomb never has to be fully materialized beyond
+/// the cap).
+fn read_entry_bounded<R: Read>(entry: R, name: &str) -> Result<Vec<u8>, ArchiveError> {
+    let mut buf = Vec::new();
+    entry.take(MAX_ENTRY_RAW_BYTES + 1).read_to_end(&mut buf)?;
+    if buf.len() as u64 > MAX_ENTRY_RAW_BYTES {
+        return Err(ArchiveError::Invalid(format!(
+            "decompression bomb: {name:?} inflates past the {} byte entry cap",
+            MAX_ENTRY_RAW_BYTES
+        )));
+    }
+    Ok(buf)
+}
+
 /// Read the archive manifest without extracting anything.
 pub fn inspect(bytes: &[u8]) -> Result<ArchiveManifest, ArchiveError> {
     let mut zip = zip::ZipArchive::new(Cursor::new(bytes))?;
-    let mut buf = Vec::new();
-    zip.by_name(MANIFEST_ENTRY)?.read_to_end(&mut buf)?;
+    let buf = read_entry_bounded(zip.by_name(MANIFEST_ENTRY)?, MANIFEST_ENTRY)?;
     let am: ArchiveManifest = serde_json::from_slice(&buf)
         .map_err(|e| ArchiveError::Invalid(format!("bad MANIFEST.json: {e}")))?;
     if am.format != FORMAT {
@@ -189,9 +214,7 @@ pub fn inspect(bytes: &[u8]) -> Result<ArchiveManifest, ArchiveError> {
 /// Read a single named entry from the archive without extracting to disk.
 pub fn read_entry(bytes: &[u8], name: &str) -> Result<Vec<u8>, ArchiveError> {
     let mut zip = zip::ZipArchive::new(Cursor::new(bytes))?;
-    let mut buf = Vec::new();
-    zip.by_name(name)?.read_to_end(&mut buf)?;
-    Ok(buf)
+    read_entry_bounded(zip.by_name(name)?, name)
 }
 
 /// Validate a zip entry name; None when unsafe (traversal, absolute,
