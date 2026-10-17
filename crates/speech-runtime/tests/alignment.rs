@@ -137,6 +137,7 @@ fn real_whisper_aligns_fixture_and_abstains_on_mismatch() {
         model,
         language: "ja".into(),
         threshold: 0.6,
+        timeout: None,
     };
     assert!(!aligner.info().requires_network);
 
@@ -171,4 +172,41 @@ fn real_whisper_aligns_fixture_and_abstains_on_mismatch() {
         ),
         "expected abstention on mismatch, got {out2:?}"
     );
+}
+
+/// sweep-sidecar-timeout: the aligner maps a sidecar killed at its
+/// deadline to a neutral `Abstained` (reason exactly `sidecar-timeout`),
+/// never a ProviderError — unavailable evidence is not a failure verdict.
+#[cfg(unix)]
+#[test]
+fn wedged_sidecar_abstains_with_sidecar_timeout() {
+    use std::os::unix::fs::PermissionsExt;
+    let tmp = tempfile::tempdir().unwrap();
+    let script = tmp.path().join("whisper-cli");
+    std::fs::write(&script, "#!/bin/sh\nsleep 300\n").unwrap();
+    std::fs::set_permissions(&script, std::fs::Permissions::from_mode(0o755)).unwrap();
+    let aligner = lts_speech_runtime::alignment::WhisperConstrainedAligner {
+        binary: script,
+        model: tmp.path().join("ggml-tiny.bin"),
+        language: "ja".into(),
+        threshold: 0.6,
+        timeout: Some(std::time::Duration::from_millis(300)),
+    };
+    let audio = lts_speech_api::AudioBuffer {
+        samples: vec![0.0f32; 160],
+        sample_rate_hz: 16_000,
+    };
+    let expected = ExpectedUtterance {
+        content_id: "ja.test.wedged".into(),
+        units: units(&["こんにちは"]),
+    };
+    match aligner.align(&audio, &expected) {
+        lts_speech_api::ProviderOutcome::Abstained { reason } => {
+            assert_eq!(
+                reason.as_str(),
+                lts_speech_runtime::sidecar::SIDECAR_TIMEOUT_REASON
+            );
+        }
+        other => panic!("expected Abstained, got {other:?}"),
+    }
 }

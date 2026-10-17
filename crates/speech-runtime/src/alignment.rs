@@ -13,6 +13,7 @@ use serde::Deserialize;
 use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::process::Command;
+use std::time::Duration;
 
 use crate::asr::to_wav16;
 use crate::sidecar;
@@ -44,34 +45,30 @@ struct WhisperOffsets {
 }
 
 /// Run whisper.cpp with word timestamps over `audio`; returns tokens.
+///
+/// The child runs under a wall-clock deadline
+/// ([`sidecar::call_timeout`], overridable via `timeout`): a wedged
+/// whisper.cpp is killed and reaped, and the error is then exactly
+/// [`sidecar::SIDECAR_TIMEOUT_REASON`] — the caller turns that into a
+/// neutral abstention instead of hanging forever.
 pub fn run_whisper_words(
     binary: &Path,
     model: &Path,
     language: &str,
     audio: &AudioBuffer,
+    timeout: Option<Duration>,
 ) -> Result<Vec<WordToken>, String> {
-    // Unique per call: pid separates processes, an atomic counter separates
-    // concurrent calls in one process. Keying on audio length alone collided
-    // when two runs shared identical audio (parallel tests clobbered each
-    // other's temp wav/json).
-    static ALIGN_SEQ: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
-    let seq = ALIGN_SEQ.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
-    let stem = std::env::temp_dir().join(format!("lts-align-{}-{}", std::process::id(), seq));
-    let wav = {
-        let mut p = stem.clone();
-        p.set_extension("wav");
-        p
-    };
-    {
-        let mut f = std::fs::File::create(&wav).map_err(|e| e.to_string())?;
-        f.write_all(&to_wav16(audio)).map_err(|e| e.to_string())?;
-        f.flush().map_err(|e| e.to_string())?;
-    }
+    // Staged privately (0700 dir, 0600 wav) instead of loose
+    // world-readable files in the shared temp dir.
+    let (mut f, wav) = sidecar::create_staged_wav("lts-align").map_err(|e| e.to_string())?;
+    f.write_all(&to_wav16(audio)).map_err(|e| e.to_string())?;
+    f.flush().map_err(|e| e.to_string())?;
+    drop(f);
     let mut cmd = Command::new(binary);
     // Staged payloads carry a build-machine RUNPATH; point the child at the
     // payload's own lib dir (no-op layout-wise when the binary sits alone).
     sidecar::apply_runtime_env(&mut cmd, binary);
-    let status = cmd
+    let spawned = cmd
         .arg("-m")
         .arg(model)
         .arg("-l")
@@ -83,7 +80,7 @@ pub fn run_whisper_words(
         .arg(&wav)
         .stdout(std::process::Stdio::null())
         .stderr(std::process::Stdio::null())
-        .status();
+        .spawn();
     // whisper.cpp writes `<input>` + ".json" (i.e. stem.wav.json).
     let json_path = {
         let mut p = wav.clone();
@@ -91,8 +88,14 @@ pub fn run_whisper_words(
         p
     };
     let result = (|| {
-        let Ok(status) = status else {
+        let Ok(mut child) = spawned else {
             return Err("whisper-spawn-failed".to_string());
+        };
+        let deadline = sidecar::call_timeout(audio.samples.len(), audio.sample_rate_hz, timeout);
+        let status = match sidecar::wait_with_deadline(&mut child, deadline) {
+            Ok(Some(status)) => status,
+            Ok(None) => return Err(sidecar::SIDECAR_TIMEOUT_REASON.to_string()),
+            Err(_) => return Err("whisper-wait-failed".to_string()),
         };
         if !status.success() {
             return Err("whisper-nonzero-exit".to_string());
@@ -258,6 +261,10 @@ pub struct WhisperConstrainedAligner {
     pub model: PathBuf,
     pub language: String,
     pub threshold: f32,
+    /// Wall-clock budget per sidecar call; `None` derives
+    /// `max(30 s, 8 x audio seconds)` via [`sidecar::call_timeout`].
+    /// Tests inject short deadlines.
+    pub timeout: Option<Duration>,
 }
 
 impl AlignmentProvider for WhisperConstrainedAligner {
@@ -276,9 +283,22 @@ impl AlignmentProvider for WhisperConstrainedAligner {
         audio: &AudioBuffer,
         expected: &ExpectedUtterance,
     ) -> ProviderOutcome<Alignment> {
-        let tokens = match run_whisper_words(&self.binary, &self.model, &self.language, audio) {
+        let tokens = match run_whisper_words(
+            &self.binary,
+            &self.model,
+            &self.language,
+            audio,
+            self.timeout,
+        ) {
             Ok(t) => t,
             Err(reason) => {
+                // A killed sidecar is unavailable evidence, not a failing
+                // verdict: neutral abstention the frontend already maps.
+                if reason == sidecar::SIDECAR_TIMEOUT_REASON {
+                    return ProviderOutcome::Abstained {
+                        reason: ReasonCode::new(sidecar::SIDECAR_TIMEOUT_REASON),
+                    };
+                }
                 return ProviderOutcome::ProviderError {
                     reason: ReasonCode::new(reason),
                 };

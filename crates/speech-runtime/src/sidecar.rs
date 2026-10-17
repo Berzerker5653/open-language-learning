@@ -18,6 +18,7 @@
 use serde::Deserialize;
 use sha2::{Digest, Sha256};
 use std::path::{Component, Path, PathBuf};
+use std::time::Duration;
 
 pub const MANIFEST_FILE: &str = "SIDECAR.yaml";
 pub const EXPECTED_COMPONENT: &str = "whisper.cpp-aligner";
@@ -398,4 +399,200 @@ fn file_sha256_matches(path: &Path, expected_hex: &str) -> bool {
     let digest = hasher.finalize();
     let hex: String = digest.iter().map(|b| format!("{b:02x}")).collect();
     hex.eq_ignore_ascii_case(expected_hex)
+}
+
+// ---- Subprocess hygiene: call deadlines + private WAV staging ----
+
+/// Floor for one sidecar wall-clock budget: whisper.cpp pads even a short
+/// clip into its 30 s window, and loading the 77 MB model alone takes
+/// seconds on a slow CPU.
+pub const MIN_SIDECAR_TIMEOUT: Duration = Duration::from_secs(30);
+
+/// Deadline scaling over audio duration: sidecar work is roughly linear in
+/// audio seconds; 8x leaves headroom for cold model loads and slow CPUs.
+pub const SIDECAR_TIMEOUT_AUDIO_FACTOR: u64 = 8;
+
+/// Reason the providers abstain when a sidecar overruns its deadline (a
+/// neutral abstention: unjudged, not a failure verdict).
+pub const SIDECAR_TIMEOUT_REASON: &str = "sidecar-timeout";
+
+/// Poll interval traded for kill responsiveness.
+const SIDECAR_POLL_INTERVAL: Duration = Duration::from_millis(20);
+
+/// Wall-clock budget for one sidecar call over `samples` at
+/// `sample_rate_hz`: `max(MIN_SIDECAR_TIMEOUT,
+/// SIDECAR_TIMEOUT_AUDIO_FACTOR * audio_seconds)`. `deadline_override`
+/// replaces the derived value — tests inject short deadlines so a wedged
+/// sidecar is observed being killed quickly.
+pub fn call_timeout(
+    samples: usize,
+    sample_rate_hz: u32,
+    deadline_override: Option<Duration>,
+) -> Duration {
+    if let Some(d) = deadline_override {
+        return d;
+    }
+    if sample_rate_hz == 0 {
+        return MIN_SIDECAR_TIMEOUT;
+    }
+    let audio_ms = (samples as u64)
+        .saturating_mul(1000)
+        .saturating_div(sample_rate_hz as u64);
+    let scaled = audio_ms.saturating_mul(SIDECAR_TIMEOUT_AUDIO_FACTOR);
+    Duration::from_millis(scaled.max(MIN_SIDECAR_TIMEOUT.as_millis() as u64))
+}
+
+/// Wait for a spawned sidecar, but never past `deadline`: poll `try_wait`
+/// with small sleeps, and on expiry kill the child and reap it (no zombie,
+/// no permanently wedged caller). `Ok(None)` means the deadline expired.
+pub fn wait_with_deadline(
+    child: &mut std::process::Child,
+    deadline: Duration,
+) -> std::io::Result<Option<std::process::ExitStatus>> {
+    let start = std::time::Instant::now();
+    loop {
+        if let Some(status) = child.try_wait()? {
+            return Ok(Some(status));
+        }
+        if start.elapsed() >= deadline {
+            let _ = child.kill();
+            let _ = child.wait();
+            return Ok(None);
+        }
+        std::thread::sleep(SIDECAR_POLL_INTERVAL);
+    }
+}
+
+/// `wait_with_deadline` for children with piped stdout/stderr: collects
+/// the `Output` when the child finishes inside the deadline. Takes the
+/// child by value because reading the pipes consumes them.
+pub fn output_with_deadline(
+    mut child: std::process::Child,
+    deadline: Duration,
+) -> std::io::Result<Option<std::process::Output>> {
+    let status = match wait_with_deadline(&mut child, deadline)? {
+        Some(status) => status,
+        None => return Ok(None),
+    };
+    // The child has exited: the pipes are at EOF, so draining them here
+    // cannot block (sidecar stdout is a transcript, not a stream).
+    let mut stdout = Vec::new();
+    let mut stderr = Vec::new();
+    if let Some(mut out) = child.stdout.take() {
+        std::io::Read::read_to_end(&mut out, &mut stdout)?;
+    }
+    if let Some(mut err) = child.stderr.take() {
+        std::io::Read::read_to_end(&mut err, &mut stderr)?;
+    }
+    Ok(Some(std::process::Output {
+        status,
+        stdout,
+        stderr,
+    }))
+}
+
+/// Dedicated staging directory for the plaintext WAVs handed to sidecars.
+/// Not loose files in the shared temp dir (audit sweep-tmp-audio-privacy):
+/// dir 0700, files 0600, so recordings never sit world-readable while a
+/// sidecar runs.
+fn audio_tmp_dir_path() -> PathBuf {
+    std::env::temp_dir().join("lts-speech-audio")
+}
+
+/// Ensure the staging dir exists and is private. Created with mode 0700
+/// up front (not chmod-after-create), and an existing entry is reused
+/// only when it is a real directory we can chmod — on unix chmod
+/// succeeding is the ownership proof — and a symlink is never followed;
+/// anything foreign fails closed instead of trusting it. Tolerates the
+/// concurrent-creation race (parallel tests/calls in one process).
+pub fn audio_tmp_dir() -> std::io::Result<PathBuf> {
+    let dir = audio_tmp_dir_path();
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::{DirBuilderExt, PermissionsExt};
+        if let Err(e) = std::fs::DirBuilder::new().mode(0o700).create(&dir) {
+            if e.kind() != std::io::ErrorKind::AlreadyExists {
+                return Err(e);
+            }
+        }
+        let md = std::fs::symlink_metadata(&dir)?;
+        if !md.file_type().is_dir() {
+            return Err(std::io::Error::new(
+                std::io::ErrorKind::AlreadyExists,
+                "staging path exists and is not a directory",
+            ));
+        }
+        std::fs::set_permissions(&dir, std::fs::Permissions::from_mode(0o700))?;
+    }
+    #[cfg(not(unix))]
+    {
+        std::fs::create_dir_all(&dir)?;
+    }
+    Ok(dir)
+}
+
+/// Create a unique private staging WAV (0600 on unix, created with O_EXCL
+/// so no window opens between create and chmod). Unique per call: pid
+/// separates processes, an atomic counter separates concurrent calls in
+/// one process. Keying on audio length alone collided when two runs
+/// shared identical audio (parallel tests clobbered each other's temp
+/// wav/json).
+pub fn create_staged_wav(prefix: &str) -> std::io::Result<(std::fs::File, PathBuf)> {
+    static STAGE_SEQ: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
+    let seq = STAGE_SEQ.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+    let path = audio_tmp_dir()?.join(format!("{prefix}-{}-{seq}.wav", std::process::id()));
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::OpenOptionsExt;
+        let f = std::fs::OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .mode(0o600)
+            .open(&path)?;
+        Ok((f, path))
+    }
+    #[cfg(not(unix))]
+    {
+        let f = std::fs::File::options()
+            .write(true)
+            .create_new(true)
+            .open(&path)?;
+        Ok((f, path))
+    }
+}
+
+/// Remove plaintext staging leftovers from runs whose sidecar was killed
+/// or crashed before its fast-path cleanup ran. Call once at app startup;
+/// `max_age` protects in-flight calls (one call takes seconds, so a live
+/// file is far younger than any startup threshold). Per-entry errors are
+/// ignored — a sweep must never fail startup — and the count of removed
+/// files is returned.
+pub fn sweep_stale_audio_tmp(max_age: Duration) -> usize {
+    let Ok(entries) = std::fs::read_dir(audio_tmp_dir_path()) else {
+        return 0;
+    };
+    let now = std::time::SystemTime::now();
+    let mut removed = 0;
+    for entry in entries.flatten() {
+        let Ok(md) = entry.metadata() else {
+            continue;
+        };
+        if !md.is_file() {
+            continue;
+        }
+        let stale = match md.modified() {
+            Ok(m) => match now.duration_since(m) {
+                Ok(age) => age >= max_age,
+                // mtime in the future: young, keep it.
+                Err(_) => false,
+            },
+            // No usable mtime: err toward removal; the directory only ever
+            // holds our own staging files.
+            Err(_) => true,
+        };
+        if stale && std::fs::remove_file(entry.path()).is_ok() {
+            removed += 1;
+        }
+    }
+    removed
 }

@@ -271,10 +271,90 @@ printf '%s\n' '{"transcription":[{"text":"あ","offsets":{"from":0,"to":100}}]}'
         &tmp.path().join("model/ggml-tiny.bin"),
         "ja",
         &audio,
+        None,
     )
     .expect("fake whisper-cli should succeed through run_whisper_words");
     assert_eq!(tokens.len(), 1);
     assert_eq!(tokens[0].text, "あ");
     assert_eq!(tokens[0].from_ms, 0);
     assert_eq!(tokens[0].to_ms, 100);
+}
+
+/// sweep-sidecar-timeout: a wedged whisper.cpp child is killed and reaped
+/// at the injected deadline, surfacing as the exact reason
+/// `sidecar-timeout` instead of hanging the caller forever.
+#[cfg(unix)]
+#[test]
+fn wedged_whisper_child_is_killed_at_the_deadline() {
+    let tmp = TempDir::new().unwrap();
+    let script = tmp.path().join("whisper-cli");
+    let mut f = std::fs::File::create(&script).unwrap();
+    f.write_all(b"#!/bin/sh\nsleep 300\n").unwrap();
+    drop(f);
+    std::fs::set_permissions(&script, std::os::unix::fs::PermissionsExt::from_mode(0o755)).unwrap();
+    let audio = AudioBuffer {
+        samples: vec![0.0f32; 160],
+        sample_rate_hz: 16_000,
+    };
+    let started = std::time::Instant::now();
+    let err = lts_speech_runtime::alignment::run_whisper_words(
+        &script,
+        &tmp.path().join("model/ggml-tiny.bin"),
+        "ja",
+        &audio,
+        Some(std::time::Duration::from_millis(300)),
+    )
+    .expect_err("a sidecar that never finishes must not return tokens");
+    let elapsed = started.elapsed();
+    assert_eq!(err, sidecar::SIDECAR_TIMEOUT_REASON);
+    // The deadline is enforced, not merely observed after the child's own
+    // 300 s sleep.
+    assert!(
+        elapsed < std::time::Duration::from_secs(5),
+        "took {elapsed:?}"
+    );
+}
+
+/// sweep-tmp-audio-privacy: staged WAVs live in a dedicated private dir
+/// (dir 0700, file 0600); the startup sweep removes stale leftovers from
+/// killed/crashed runs but never a file that is young enough to be
+/// in-flight.
+#[cfg(unix)]
+#[test]
+fn staged_wavs_are_private_and_stale_ones_get_swept() {
+    use std::os::unix::fs::PermissionsExt;
+    let (f, wav) = sidecar::create_staged_wav("lts-test-stage").unwrap();
+    let dir = wav.parent().unwrap().to_path_buf();
+    assert_eq!(
+        std::fs::metadata(&dir).unwrap().permissions().mode() & 0o777,
+        0o700,
+        "staging dir must be owner-only"
+    );
+    assert_eq!(
+        f.metadata().unwrap().permissions().mode() & 0o777,
+        0o600,
+        "staged wav must not be group/other readable"
+    );
+    drop(f);
+
+    // Age the first file into staleness; a fresh one stands in for an
+    // in-flight sidecar call.
+    let past = std::time::SystemTime::UNIX_EPOCH + std::time::Duration::from_secs(1);
+    std::fs::File::options()
+        .write(true)
+        .open(&wav)
+        .unwrap()
+        .set_modified(past)
+        .unwrap();
+    let (fresh, fresh_path) = sidecar::create_staged_wav("lts-test-stage").unwrap();
+    drop(fresh);
+
+    let removed = sidecar::sweep_stale_audio_tmp(std::time::Duration::from_secs(60));
+    assert!(removed >= 1, "the stale file should have been swept");
+    assert!(!wav.exists(), "stale staging file must be removed");
+    assert!(
+        fresh_path.exists(),
+        "a file younger than the threshold is in use, keep it"
+    );
+    let _ = std::fs::remove_file(&fresh_path);
 }

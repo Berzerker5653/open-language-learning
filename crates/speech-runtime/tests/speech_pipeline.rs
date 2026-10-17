@@ -149,6 +149,7 @@ fn real_sherpa_recognizes_installed_model_offline() {
         tokens: model.join("tiny-tokens.txt"),
         language: "ja".into(),
         num_threads: 4,
+        timeout: None,
     };
     assert!(!asr.info().requires_network);
     let res = asr.recognize(&slice, &RecognitionHints::default());
@@ -157,4 +158,41 @@ fn real_sherpa_recognizes_installed_model_offline() {
         transcript.contains("こんにちは"),
         "expected こんにちは, got {transcript:?}"
     );
+}
+
+/// sweep-sidecar-timeout: a wedged sherpa child is killed at the injected
+/// deadline and recognition abstains neutrally with reason exactly
+/// `sidecar-timeout` (never a hang, never a wrong-transcript path).
+#[cfg(unix)]
+#[test]
+fn wedged_sherpa_child_abstains_sidecar_timeout() {
+    use std::os::unix::fs::PermissionsExt;
+    let tmp = tempfile::tempdir().unwrap();
+    let script = tmp.path().join("sherpa-onnx-offline");
+    std::fs::write(&script, "#!/bin/sh\nsleep 300\n").unwrap();
+    std::fs::set_permissions(&script, std::fs::Permissions::from_mode(0o755)).unwrap();
+    let asr = SherpaSubprocessAsr {
+        binary: script,
+        encoder: tmp.path().join("tiny-encoder.onnx"),
+        decoder: tmp.path().join("tiny-decoder.onnx"),
+        tokens: tmp.path().join("tiny-tokens.txt"),
+        language: "ja".into(),
+        num_threads: 1,
+        timeout: Some(std::time::Duration::from_millis(300)),
+    };
+    let started = std::time::Instant::now();
+    let res = asr.recognize(&silence(), &RecognitionHints::default());
+    assert!(
+        started.elapsed() < std::time::Duration::from_secs(5),
+        "deadline must kill the wedged child, not wait it out"
+    );
+    match res {
+        ProviderOutcome::Abstained { reason } => {
+            assert_eq!(
+                reason.as_str(),
+                lts_speech_runtime::sidecar::SIDECAR_TIMEOUT_REASON
+            );
+        }
+        other => panic!("expected Abstained, got {other:?}"),
+    }
 }

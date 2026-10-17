@@ -183,6 +183,7 @@ fn real_pipeline_verifies_then_interprets_reference_pair() {
         model,
         language: "ja".into(),
         threshold: 0.6,
+        timeout: None,
     };
     let expected = lts_speech_api::ExpectedUtterance {
         content_id: "ja.lex.demo.obasan".into(),

@@ -171,6 +171,7 @@ fn main() {
         model,
         language: "ja".into(),
         threshold: 0.6,
+        timeout: None,
     };
 
     let mut clips: Vec<PathBuf> = Vec::new();

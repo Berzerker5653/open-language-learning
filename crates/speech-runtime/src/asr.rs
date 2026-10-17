@@ -11,7 +11,10 @@ use lts_speech_api::{
 };
 use std::io::Write;
 use std::path::PathBuf;
-use std::process::Command;
+use std::process::{Command, Stdio};
+use std::time::Duration;
+
+use crate::sidecar;
 
 /// Mono 16-bit PCM WAV bytes (RIFF) from an in-memory buffer.
 pub fn to_wav16(audio: &AudioBuffer) -> Vec<u8> {
@@ -82,20 +85,10 @@ pub struct SherpaSubprocessAsr {
     pub tokens: PathBuf,
     pub language: String,
     pub num_threads: u32,
-}
-
-impl SherpaSubprocessAsr {
-    fn write_temp_wav(&self, audio: &AudioBuffer) -> Result<PathBuf, String> {
-        let path = std::env::temp_dir().join(format!(
-            "lts-asr-{}-{}.wav",
-            std::process::id(),
-            audio.samples.len()
-        ));
-        let mut f = std::fs::File::create(&path).map_err(|e| e.to_string())?;
-        f.write_all(&to_wav16(audio)).map_err(|e| e.to_string())?;
-        f.flush().map_err(|e| e.to_string())?;
-        Ok(path)
-    }
+    /// Wall-clock budget per sidecar call; `None` derives
+    /// `max(30 s, 8 x audio seconds)` via [`sidecar::call_timeout`].
+    /// Tests inject short deadlines.
+    pub timeout: Option<Duration>,
 }
 
 impl SpeechRecognitionProvider for SherpaSubprocessAsr {
@@ -114,28 +107,60 @@ impl SpeechRecognitionProvider for SherpaSubprocessAsr {
         audio: &AudioBuffer,
         _hints: &RecognitionHints,
     ) -> ProviderOutcome<RecognitionResult> {
-        let wav = match self.write_temp_wav(audio) {
-            Ok(p) => p,
-            Err(reason) => {
+        // Staged privately (0700 dir, 0600 wav): plaintext recordings must
+        // never sit world-readable in the shared temp dir.
+        let (mut f, wav) = match sidecar::create_staged_wav("lts-asr") {
+            Ok(pair) => pair,
+            Err(e) => {
                 return ProviderOutcome::ProviderError {
-                    reason: ReasonCode::new(reason),
+                    reason: ReasonCode::new(e.to_string()),
                 };
             }
         };
-        let out = Command::new(&self.binary)
-            .arg("--model-type=whisper")
+        let staged = f.write_all(&to_wav16(audio)).and_then(|_| f.flush());
+        if let Err(e) = staged {
+            let _ = std::fs::remove_file(&wav);
+            return ProviderOutcome::ProviderError {
+                reason: ReasonCode::new(e.to_string()),
+            };
+        }
+        drop(f);
+        let mut cmd = Command::new(&self.binary);
+        cmd.arg("--model-type=whisper")
             .arg(format!("--whisper-encoder={}", self.encoder.display()))
             .arg(format!("--whisper-decoder={}", self.decoder.display()))
             .arg(format!("--whisper-language={}", self.language))
             .arg(format!("--tokens={}", self.tokens.display()))
             .arg(format!("--num-threads={}", self.num_threads))
-            .arg(&wav)
-            .output();
+            .arg(&wav);
+        // A wedged sherpa process is killed and reaped at the deadline
+        // (max 30 s / 8x audio, injectable): unavailable evidence, not a
+        // verdict — the outcome is a neutral abstention.
+        let deadline =
+            sidecar::call_timeout(audio.samples.len(), audio.sample_rate_hz, self.timeout);
+        let spawned = cmd.stdout(Stdio::piped()).stderr(Stdio::piped()).spawn();
+        let out = match spawned {
+            Ok(child) => sidecar::output_with_deadline(child, deadline),
+            Err(_) => {
+                let _ = std::fs::remove_file(&wav);
+                return ProviderOutcome::ProviderError {
+                    reason: ReasonCode::new("asr-spawn-failed"),
+                };
+            }
+        };
         let _ = std::fs::remove_file(&wav);
-        let Ok(output) = out else {
-            return ProviderOutcome::ProviderError {
-                reason: ReasonCode::new("asr-spawn-failed"),
-            };
+        let output = match out {
+            Ok(Some(output)) => output,
+            Ok(None) => {
+                return ProviderOutcome::Abstained {
+                    reason: ReasonCode::new(sidecar::SIDECAR_TIMEOUT_REASON),
+                };
+            }
+            Err(_) => {
+                return ProviderOutcome::ProviderError {
+                    reason: ReasonCode::new("asr-wait-failed"),
+                };
+            }
         };
         if !output.status.success() {
             return ProviderOutcome::ProviderError {
