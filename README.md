@@ -18,7 +18,7 @@ Download the package for your distro from the [latest release](https://github.co
 | `open-language-learning-platform_0.4.0-alpha.1_amd64.AppImage` | 73 MB | single executable for any x86-64 distro, base app (run `chmod +x`, then launch) |
 | same names with `_amd64-aligner` | 84 MB / 145 MB | the same app plus the built-in speech aligner (whisper.cpp + its tiny model), so pronunciation feedback works with no model download |
 
-What is downloadable is the **0.4.0-alpha.1 publication** (language packs at 0.4.0). `main` has moved past it: fixes and content changes are merged there but no newer artifact has been published, so a source checkout and the download are deliberately different builds. The corrected-pack (0.4.1) and next-artifact decisions are owner actions (O-01b, O-06), not something CI performs.
+What is downloadable is the **0.4.0-alpha.1 publication**. The in-app catalog serves the **0.4.1 corrected language packs** (published 2026-10-16; `catalog/packs.json` pins both archives by size and SHA-256), so a fresh install picks the corrected packs regardless of which app artifact you start from. `main` has moved past the app artifact: fixes and content changes are merged there but no newer artifact has been published, so a source checkout and the download are deliberately different builds. The next-artifact decision is an owner action (O-06), not something CI performs.
 
 Start the app, then **Settings → Language packs → install** and pick Japanese or Russian. That fetches the published pack (~320 MB each, audio included) from the in-app catalog — no configuration, no account, nothing to compile (ADR-0027). You can instead import a `.lpk` file you were given. Once a pack and, if you want speech, the aligner build are installed, the core loop runs fully offline; disconnect and it keeps working.
 
@@ -48,7 +48,7 @@ Read this before recommending it to someone still learning.
 
 - **Every piece of pack content is AI-drafted and has never had a qualified human review.** All 75/75 Japanese and 60/60 Russian goals are `review_status: draft`; no content record anywhere is `validated` or `verified`. The app never claims otherwise, and `docs/18_PUBLIC_CLAIMS_AND_SCOPE.md` forbids surfaces that imply review which did not happen.
 - **Speech feedback is uncalibrated** — useful for practice, not a measurement.
-- **Open release gates** (`state/task-state.json`, 9 of 51 still required for `REL-001`): assistive-technology audit (ACC-001), performance tiers (PERF-002), platform parity (PLAT-001), security and privacy audit (SEC-001), the AI pack-authoring kit (PACK-AI-001), and depth in the thin CEFR bands (JA-A2/B1/B2 coverage tasks have scaffolding but no acceptance record). These are tracked in `tasks/KANBAN.md`.
+- **Open release gates** (`state/task-state.json`, 8 of 66 still required for `REL-001`): assistive-technology audit (ACC-001), performance tiers (PERF-002), platform parity (PLAT-001), security and privacy audit (SEC-001), the release gate itself (REL-001), and depth in the thin CEFR bands (JA-A2/B1/B2 coverage tasks have scaffolding but no acceptance record). These are tracked in `tasks/KANBAN.md`.
 - **Windows and macOS are untested**, and the app is Linux-only in practice today.
 
 ## Contributing
