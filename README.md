@@ -48,7 +48,7 @@ Read this before recommending it to someone still learning.
 
 - **Every piece of pack content is AI-drafted and has never had a qualified human review.** All 75/75 Japanese and 60/60 Russian goals are `review_status: draft`; no content record anywhere is `validated` or `verified`. The app never claims otherwise, and `docs/18_PUBLIC_CLAIMS_AND_SCOPE.md` forbids surfaces that imply review which did not happen.
 - **Speech feedback is uncalibrated** — useful for practice, not a measurement.
-- **Open release gates** (`state/task-state.json`, 8 of 66 still required for `REL-001`): assistive-technology audit (ACC-001), performance tiers (PERF-002), platform parity (PLAT-001), security and privacy audit (SEC-001), the release gate itself (REL-001), and depth in the thin CEFR bands (JA-A2/B1/B2 coverage tasks have scaffolding but no acceptance record). These are tracked in `tasks/KANBAN.md`.
+- **Open release gates** (`state/task-state.json`, 9 of 67 still required for `REL-001`): assistive-technology audit (ACC-001), performance tiers (PERF-002), platform parity (PLAT-001), security and privacy audit (SEC-001), the EDRDG/JMdict attribution the licence owes on an app surface (JA-KANJI-ATTRIBUTION-001), depth in the thin CEFR bands (JA-A2-001, JA-B1-001, JA-B2-001 — the scaffolding exists, the B1+/B2 coverage claims do not, and qualified human review is the only thing that can earn them), and the release gate itself (REL-001). These are tracked in `tasks/KANBAN.md`.
 - **Windows and macOS are untested**, and the app is Linux-only in practice today.
 
 ## Contributing

@@ -813,6 +813,8 @@ tasks:
   - Listening/speaking/reading/writing tracks are represented where appropriate.
   - Automated curriculum audit passes.
   required_for_desktop_1_0: true
+# Band review gate: this card gates the band-completeness CLAIM for its band (docs/00 release-gate
+# rules, docs/18), not the desktop release path. Owner ruling 2026-10-17, recorded in ADR-0034.
 - id: JA-A1-003
   milestone: M6
   priority: P0
@@ -873,6 +875,10 @@ tasks:
   # so calibration data is no longer a release blocker. Re-enable by funding the
   # consented panel in benchmarks/speech/datasets/SOURCING.md; the protocol,
   # consent instrument and labeler rubric stay in the repo.
+  # Dependency edges into ACC-001 / PERF-002 / PLAT-001 / SEC-001 / REL-001 were removed on
+  # 2026-10-17 so the graph matches docs/00_MASTER_SPEC.md ("`SPEECH-007` is out of the required-for-
+  # 1.0 chain until a consented panel exists") and ADR-0017 §2. The card stays live as optional work
+  # in execution_scope.optional_tasks; shipped speech features are still gated by SPEECH-006.
   required_for_desktop_1_0: false
 - id: K-01
   milestone: M6
@@ -1280,7 +1286,6 @@ tasks:
   priority: P0
   title: Author A2-like Japanese goal/scenario coverage
   dependencies:
-  - JA-A1-003
   - SCENARIO-001
   read_first:
   - docs/06_JAPANESE_REFERENCE.md
@@ -1290,6 +1295,8 @@ tasks:
   - Routine daily transactions/descriptions include transfer tasks and varied speakers/wording.
   - Curriculum/source/license audits pass.
   required_for_desktop_1_0: true
+# Band review gate: this card gates the band-completeness CLAIM for its band (docs/00 release-gate
+# rules, docs/18), not the desktop release path. Owner ruling 2026-10-17, recorded in ADR-0034.
 - id: JA-A2-002
   milestone: M7
   priority: P0
@@ -1335,7 +1342,6 @@ tasks:
   priority: P0
   title: Author B1-like independent-use Japanese coverage
   dependencies:
-  - JA-A2-002
   - GAME-001
   read_first:
   - docs/06_JAPANESE_REFERENCE.md
@@ -1347,6 +1353,8 @@ tasks:
   - Translation dependence is materially reduced.
   - Transfer and delayed retention checks exist.
   required_for_desktop_1_0: true
+# Band review gate: this card gates the band-completeness CLAIM for its band (docs/00 release-gate
+# rules, docs/18), not the desktop release path. Owner ruling 2026-10-17, recorded in ADR-0034.
 - id: JA-B1-002
   milestone: M8
   priority: P0
@@ -1371,8 +1379,7 @@ tasks:
   milestone: M9
   priority: P0
   title: Author B2-like Japanese reference coverage
-  dependencies:
-  - JA-B1-002
+  dependencies: []
   read_first:
   - docs/06_JAPANESE_REFERENCE.md
   - docs/03_CURRICULUM_AND_MASTERY.md
@@ -1382,6 +1389,8 @@ tasks:
   - Broader natural-speed listening and varied text genres are represented.
   - Pragmatics/register coverage is substantially expanded.
   required_for_desktop_1_0: true
+# Band review gate: this card gates the band-completeness CLAIM for its band (docs/00 release-gate
+# rules, docs/18), not the desktop release path. Owner ruling 2026-10-17, recorded in ADR-0034.
 - id: JA-B2-002
   milestone: M9
   priority: P0
@@ -1410,12 +1419,10 @@ tasks:
   priority: P0
   title: Accessibility release audit
   dependencies:
-  - JA-B2-002
   - GAME-001
   - READ-001
   - WRITE-001
   - TTS-001
-  - SPEECH-007
   read_first:
   - docs/11_ACCESSIBILITY_AND_LOCALIZATION.md
   - docs/09_TESTING_AND_ACCEPTANCE.md
@@ -1456,8 +1463,6 @@ tasks:
   dependencies:
   - PERF-001
   - PLAT-001
-  - SPEECH-007
-  - JA-B2-002
   read_first:
   - docs/07_TECHNICAL_ARCHITECTURE.md
   - docs/09_TESTING_AND_ACCEPTANCE.md
@@ -1473,11 +1478,9 @@ tasks:
   priority: P0
   title: Windows/macOS desktop parity
   dependencies:
-  - JA-B2-002
   - SPEECH-003
   - WRITE-001
   - TTS-001
-  - SPEECH-007
   read_first:
   - docs/13_RELEASE_AND_DISTRIBUTION.md
   acceptance:
@@ -1506,7 +1509,6 @@ tasks:
   - ACC-001
   - SEC-001
   - PLAT-001
-  - JA-B2-002
   - DATA-002
   - PACK-AI-001
   - PACK-005
@@ -1514,7 +1516,6 @@ tasks:
   - WRITE-001
   - TTS-001
   - SPEECH-006
-  - SPEECH-007
   - LIC-001
   - PERF-002
   - REVIEW-001
@@ -1533,6 +1534,15 @@ tasks:
   - RESTORE-ATOMIC-001
   - PLAYBACK-LIFECYCLE-001
   - MIC-TRACK-LIFECYCLE-001
+  # The A2/B1/B2 authoring cards are listed directly here because the release-edge detours through
+  # their band review cards were removed 2026-10-17 (owner ruling, ADR-0034): those review cards gate
+  # the band-completeness claim, not the release path, so REL-001 itself carries the required-card
+  # reachability that tools/validate_handoff.py enforces.
+  - JA-A1-002
+  - JA-A2-001
+  - JA-B1-001
+  - JA-B2-001
+  - JA-KANJI-ATTRIBUTION-001
   read_first:
   - docs/09_TESTING_AND_ACCEPTANCE.md
   - docs/13_RELEASE_AND_DISTRIBUTION.md
@@ -1583,9 +1593,7 @@ tasks:
   - PACK-004
   - DATA-002
   - SPEECH-005
-  - JA-B2-002
   - TTS-001
-  - SPEECH-007
   - WRITE-001
   - GAME-001
   read_first:
@@ -2163,10 +2171,11 @@ tasks:
   - >-
     A pack that declares no sources is shown as unattributed, and the app never invents an attribution or a
     licence claim it cannot read from the pack; the learner-copy audit stays at zero findings.
-  # The duty predates the O-07 re-sourcing: the published 0.4.0 ja pack already ships CC BY-SA EDRDG
-  # data with no app-surface acknowledgement. Not marked required_for_desktop_1_0 because promoting a
-  # card into the release gate is an owner decision, not an agent one.
-  required_for_desktop_1_0: false
+  # The duty predates the O-07 re-sourcing: the published ja pack already ships CC BY-SA EDRDG data
+  # with no app-surface acknowledgement. Promoted into the release gate by the owner on 2026-10-17
+  # during the release-readiness review: shipping CC BY-SA data without an in-app acknowledgement is
+  # a licence obligation, so the card is now required_for_desktop_1_0.
+  required_for_desktop_1_0: true
 - id: JA-KANJI-REFRESH-001
   milestone: M10
   priority: P2
@@ -2174,7 +2183,8 @@ tasks:
   dependencies:
   - PACK-004
   read_first:
-  - state/evidence/O-07/derive-radicals-from-kradfile.py
+  - scripts/derive-kanji-radicals.py
+  - state/evidence/O-07/refresh-2026-10-17.md
   - languages/ja-JP/sources.jsonl
   - docs/provenance/JA_SOURCE_MATRIX.yaml
   acceptance:
@@ -2325,7 +2335,6 @@ execution_scope:
   - A11Y-FLOW-001
   - RU-MODALITY-PRACTICE-001
   - UPPERBAND-TASK-JOURNEYS-001
-  - JA-KANJI-ATTRIBUTION-001
   - JA-KANJI-REFRESH-001
   - JA-KANJI-DECOMP-UI-001
   - JA-KANJI-MNEMONICS-001
