@@ -12,6 +12,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
 | review-claim-decisions | owner, docs | Documentation now matches the shipped system (versions, coverage, posture), but the remaining decisions are the owner's: the 1.0 course-coverage target and the hands-on pass against the published artifact. (Republishing 0.4.1 was decided and shipped — see the done section.) | DOC-CONTRACT-RECONCILE-001 |
+| ru-042-republish | pack, owner | The ru-RU stress correction (`то́тчас`, not `тотча́с` — Zaliznyak permits only one primary mark; the double-mark form was never schema-valid and was dropped from all six learner sites) plus the batch provenance row and the rename to "Russian Reference Pack" landed on **0.4.2**, and the stale clip was re-baked from the corrected reading (sha `abefb681…` → `b4b4e490…`). Both halves now block on the owner: `scripts/build-catalog.sh` + a 0.4.2 publish (O-05), because `fetch-pack-audio.sh` resolves audio by `<pack_id, version>` and the published 0.4.1 archive still speaks the wrong stress. Until then a clean-clone ru audio restore fails by design; hosts holding the clips pass `--verify-only`. Evidence: `state/evidence/RU-042/`. Provenance reconstruction is ADR-0035, `Status: Proposed`. | — |
 
 ## in review — 2026-10-15 (agent-implemented, human acceptance open)
 
