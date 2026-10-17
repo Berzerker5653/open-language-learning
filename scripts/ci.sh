@@ -115,6 +115,7 @@ fi
 .venv/bin/python scripts/test_fetch_pack_audio.py
 .venv/bin/python scripts/test_renormalize_pack_audio.py
 .venv/bin/python -m unittest discover -s scripts -p 'test_new_pack.py'
+.venv/bin/python -m unittest discover -s scripts -p 'test_derive_kanji_radicals.py'
 .venv/bin/python tools/audit_content_templates.py languages/ja-JP languages/ru-RU
 .venv/bin/python -m unittest discover -s tools -p 'test_audit_content_templates.py'
 .venv/bin/python tools/audit_learner_copy.py

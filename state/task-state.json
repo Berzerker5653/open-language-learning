@@ -1617,20 +1617,21 @@
     },
     "JA-KANJI-REFRESH-001": {
       "task_id": "JA-KANJI-REFRESH-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "EDRDG-derived pack data has a pinned, repeatable refresh path",
       "activity": "idle",
       "summary": "Promote the radicals derivation from an evidence script into `scripts/` with pinned upstream release and hashes, a drift report, and no unattended writes.",
-      "notes": "Opened 2026-10-16 with the O-07 option-A decision: the EDRDG licence also requires a procedure for keeping incorporated derived data current. The derivation used for the landed change is `state/evidence/O-07/derive-radicals-from-kradfile.py`, and the new `kradfile` source record pins jmdict-simplified release `3.6.2+20260928191014` plus file hashes, so the pin and the script must be made to agree rather than drift apart.",
+      "notes": "Opened 2026-10-16 with the O-07 option-A decision: the EDRDG licence also requires a procedure for keeping incorporated derived data current. Closed 2026-10-17: the derivation now lives at `scripts/derive-kanji-radicals.py` and the evidence-folder one-off (`state/evidence/O-07/derive-radicals-from-kradfile.py`, git blob `2643410`) is deleted with its transform carried into the script. The script reads its release pin from the pack's own `sources.jsonl` `jmdict-simplified` row, so the pin is one stored value rather than two. Measured on GamingPC against a fresh download: check mode prints `radicals spans byte-identical: 84/84` and `sources spans byte-identical: 84/84`, exit 0, `git status --porcelain languages/` empty; drift mode against the newer release `3.6.2+20261012204142` prints `UNPINNED INPUT (no sha256 pin for this release); writes are refused` and reports 0 changed radical sets and 0 removed characters, because the extracted `kradfile-3.6.2.json` member hashes identically (`90369021899d89159ee6e079bccd7d83915daa3191f0c6ed7efc2473e088c086`) in both releases — upstream data has not drifted, so the pack stays pinned to `3.6.2+20260928191014`. Exit codes measured: pinned `--check` 0, `--write` against an unpinned release 2, `--check --write` together 2. CI runs only the unit tests (`.venv/bin/python -m unittest discover -s scripts -p 'test_derive_kanji_radicals.py'` → `Ran 8 tests … OK` on Python 3.14.8), never a refresh.",
       "dependencies": [
         "PACK-004"
       ],
       "evidence": [
-        "state/evidence/O-07/derive-radicals-from-kradfile.py",
-        "state/evidence/O-07/decision-2026-10-16.md"
+        "state/evidence/O-07/refresh-2026-10-17.md",
+        "state/evidence/O-07/decision-2026-10-16.md",
+        "scripts/derive-kanji-radicals.py"
       ],
-      "updated": "2026-10-16"
+      "updated": "2026-10-17"
     },
     "JA-KANJI-DECOMP-UI-001": {
       "task_id": "JA-KANJI-DECOMP-UI-001",
