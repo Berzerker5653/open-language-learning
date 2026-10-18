@@ -97,11 +97,30 @@ it needs root:
 sudo pacman -S --needed orca ibus ibus-anthy espeak-ng speech-dispatcher gnome-session
 ```
 
-`ibus-mozc` is not in this host's enabled repos (`pacman -Si ibus-mozc` →
-nothing); `ibus-anthy 1.5.18-1` and `fcitx5-mozc 3.34.6345.2-1` are, so record
-which engine you actually added. `gnome-session` is in the line only because
-A.1 pins GNOME — the host runs KDE Plasma on Wayland, and running Orca there
-instead is an owner choice to write into the A.1 row, not a default.
+Re-measured the same day at `9c16cc7` (`pacman -Q`, both lab hosts): GamingPC still
+has **only** `at-spi2-core 2.62.1-1.1` — no `orca`, no `ibus`, no `ibus-anthy`, no
+`espeak-ng`, no `speech-dispatcher`, no `gnome-session`; Omarchy has none of them and
+sits on `tty` (`XDG_SESSION_TYPE` unset), so it cannot host the pass at all. Two
+things the owner has to decide *before* the run, because they change what the
+environment row says:
+
+1. **Session type.** GamingPC is `XDG_SESSION_TYPE=wayland`,
+   `XDG_CURRENT_DESKTOP=KDE`. `gnome-session` is in the package list above to give
+   the pass a GNOME session, which is the environment the worksheet assumes. If the
+   pass is run inside the existing KDE session instead, that is a different pinned
+   environment: write `KDE Plasma + Wayland` in the row, not "GNOME", and note the
+   Orca version and a11y-bus state as observed there.
+2. **IME engine.** `ibus-mozc` is **not in the enabled repos** (measured:
+   `pacman -Si ibus-mozc` → `package 'ibus-mozc' was not found`), so the runnable
+   choice is `ibus-anthy`, with `fcitx5-mozc 3.34.6345.2-1` as the alternative if
+   the engine, not IBus, is what matters. Composition behaviour differs between
+   Anthy and Mozc, so the row must name the engine that was used.
+
+One collision to avoid while starting the app for the pass:
+`scripts/smoke-desktop.sh:17` waits on `127.0.0.1:1420`, and it **fails** if that
+port is already listening. The owner's own `vite` dev server (PID recorded in
+`state/evidence/OWNER-RESIDUE-2026-10-18/at-ime-2026-10-18.md`) holds it now, so
+either stop it or launch the built binary directly.
 
 ## A.2 Setup and log capture
 
