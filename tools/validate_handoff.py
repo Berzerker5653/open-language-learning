@@ -400,7 +400,7 @@ def main(argv=None):
     parser.add_argument("--root", type=Path, default=ROOT, help="validate a separate copy without executing its content")
     parser.add_argument("--release-readiness", action="store_true", help="strict pack data preflight; never certifies app/linguistic release quality")
     parser.add_argument("--require-explicit-ledger-records", action="store_true",
-                        help="fail any desktop-1.0-required roadmap task that has no state/task-state.json record (proposed policy, ADR-0033)")
+                        help="fail any desktop-1.0-required roadmap task that has no state/task-state.json record (policy adopted by the owner 2026-10-16, ADR-0033; this is the invocation CI runs)")
     parser.add_argument("--json", action="store_true", help="machine-readable diagnostics")
     args = parser.parse_args(argv)
     audit = Audit(args.root, args.release_readiness, args.require_explicit_ledger_records).run()

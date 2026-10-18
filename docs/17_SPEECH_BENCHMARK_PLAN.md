@@ -128,4 +128,14 @@ The provider ADR, human annotation protocol, feature-specific passing evidence, 
 
 ## Stable release minimum
 
-SPEECH-007 must qualify at least one high-value Japanese pronunciation contrast for automatic feedback within a useful declared coverage envelope before stable desktop 1.0. Unsupported or unreliable features remain guided/reference. If no feature qualifies, keep stable 1.0 blocked and guided-only builds labeled alpha/beta; record the feasibility evidence for an explicit owner scope decision rather than passing an empty automatic-feature gate.
+SPEECH-007 must qualify at least one high-value Japanese pronunciation contrast for automatic
+feedback within a useful declared coverage envelope **before any release ships automatic
+pronunciation scoring** — not before desktop 1.0. `docs/00_MASTER_SPEC.md:265` leaves automatic
+speech scoring out of the desktop 1.0 feature set, accepted ADR-0017 keeps desktop 1.0 free of
+speech-accuracy work, and the ROADMAP edges that had made SPEECH-007 a `REL-001` predecessor
+were removed on 2026-10-17 (recorded in ADR-0034). Desktop 1.0 therefore ships pronunciation
+feedback in guided/reference mode: the learner hears the model output and their own recording,
+with no automatic correctness verdict and no confidence claim. Unsupported or unreliable
+features remain guided/reference. If no feature qualifies, the automatic-feedback release stays
+blocked and its builds remain labeled guided; record the feasibility evidence for an explicit
+owner scope decision rather than passing an empty automatic-feature gate.
