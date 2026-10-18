@@ -1,7 +1,8 @@
 # Owner-only residue — 2026-10-18
 
 HEAD `9ca19fd feat(packs): declare runnable task sequences for one goal per band`;
-`main` is **ahead 19** of `origin/main` — nothing in this list was pushed.
+`main` is **ahead of `origin/main`** — nothing here was pushed (19 ahead when
+measured at `9ca19fd`; this report and the log rows sit on top, also unpushed).
 Supersedes nothing in `OWNER-QUEUE-2026-10-15.md` / `OWNER-CHECKLIST-2026-10-16.md`;
 it re-measures their blockers against today's tree and names the one command that
 is actually missing.
@@ -105,7 +106,7 @@ runtime report.
 
 ## 4. Publishing — blocked on your authorization, not on work
 
-- `main` is **ahead 19** of `origin/main`. I did not push.
+- `main` is **ahead of `origin/main`**, growing with each log commit. I did not push.
 - Evidence comments on `issue://1` for **R12, R13, I04, I05, I08** are queued and
   unposted: posting is external publication (AGENTS: needs direct owner
   authorization), and it should follow the push so the comments can name shipped

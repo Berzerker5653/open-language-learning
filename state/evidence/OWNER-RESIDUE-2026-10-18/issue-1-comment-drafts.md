@@ -1,7 +1,8 @@
 # issue #1 — evidence comments, ready to post (owner authorization required)
 
 Nothing below is posted. AGENTS.md requires direct owner authorization for
-external publication, and posting should follow the push: `main` is ahead 19, so
+external publication, and posting should follow the push: `main` is **ahead of
+`origin/main`**, so
 the SHAs these comments name do not exist on GitHub yet.
 
 Checkbox advice: **R12 and R13 can be checked** by the owner against the evidence
@@ -152,7 +153,7 @@ Status comment; the checkbox stays open, and nothing in it can be closed by an
 agent.
 
 Machine-side, on record: clean-clone `scripts/ci.sh` returns `CI OK`; CI green on
-the **pushed** `main` at `fd76786` (run 38757754128 — the 19 unpushed commits
+the **pushed** `main` at `fd76786` (run 38757754128 — the commits on local `main`
 have not been through CI); the 0.4.1 candidate archives carry member-level accounting against the
 published 0.4.0 archives (`state/evidence/RC-0.4.1-2026-10-15/`); `cargo audit
 --deny warnings` fails closed against `.cargo/audit.toml` (measured rc 1 with six
@@ -170,6 +171,6 @@ install away and still `HUMAN-ONLY`; **the 0.4.1 republish question** (O-01/O-05
 **security disposition** (SEC-001); **performance tiers** (PERF-002 above);
 **review capacity** — 5 open ru worklist items, 0 closed, all 120 rubrics draft.
 
-One hygiene note for whoever reads this later: `main` is currently **ahead 19** of
+One hygiene note for whoever reads this later: `main` is **ahead of
 `origin/main`, so any evidence posted before a push names commits that do not yet
 exist publicly.
