@@ -1,0 +1,44 @@
+## ja input-engine availability on GamingPC (repo search, read-only)
+cachyos-extra-v3/fcitx5-anthy 5.1.11-1.1
+    Anthy Wrapper for Fcitx5
+cachyos-extra-v3/ibus-anthy 1.5.18-1.1
+    Japanese input method Anthy IMEngine for IBus Framework
+extra/anthy 9100h-7
+    Hiragana text to Kana Kanji mixed text Japanese input method
+extra/fcitx5-anthy 5.1.11-1
+    Anthy Wrapper for Fcitx5
+extra/fcitx5-mozc 3.34.6345.2-1
+    Fcitx5 Module of A Japanese Input Method for Chromium OS, Windows, Mac and Linux (the Open Source Edition of Google Japanese Input)
+extra/ibus-anthy 1.5.18-1
+    Japanese input method Anthy IMEngine for IBus Framework
+--- orca deps of interest
+Repository      : extra
+Depends On      : at-spi2-core  dconf  glib2  glibc  gobject-introspection-runtime  gsettings-desktop-schemas  gst-plugins-base  gst-plugins-good  gstreamer  gtk3  hicolor-icon-theme  libgcc  liblouis  libwnck3  pango  python  python-brltty  python-cairo  python-dasbus  python-dbus  python-gobject  python-psutil  python-setproctitle  speech-dispatcher  xorg-xkbcomp  xorg-xmodmap
+
+## PERF-002 tier measurability, 2026-10-18
+### GamingPC GPU / CUDA (docs/performance/BUDGETS.yaml declares high = CUDA-capable >=12 GB VRAM)
+GPU 0: NVIDIA GeForce RTX 5090 (UUID: GPU-f9542919-e525-ef12-5e49-8bced48ea405)
+nvcc     /opt/cuda/bin/nvcc
+cuda-gdb /opt/cuda/bin/cuda-gdb
+/opt/cuda
+no CUDA toolkit install found
+
+### CUDA/accelerator features declared by the speech runtime
+(none above = no CUDA feature in the workspace manifests)
+
+### tier evidence on disk
+asr-base
+asr-tiny
+ci-2026-10-02.txt
+tier-omarchy-2026-10-08.md
+tts-20261008T150029Z-summary.json
+
+### declared tiers vs measured
+20:  ref-dev:
+28:  low:
+36:  typical:
+43:  high:
+55:  trials:
+59:  percentiles: [p50, p95]
+67:  conditions:
+72:  artifacts: "tests/performance/results/<run-id>/summary.json per tests/performance/README.md"

@@ -88,6 +88,21 @@ values: the system pkg-config sees **2.54.1**, while the app is linked against
 `PKG_CONFIG_PATH`. Record the AT host's own two values, and record which one the
 bundle was built against.
 
+Measured on GamingPC 2026-10-18 (`state/evidence/OWNER-RESIDUE-2026-10-18/`):
+none of those packages is installed on any lab host, and `at-spi2-core` is
+already present, so the whole bootstrap is one command — run by the owner, since
+it needs root:
+
+```sh
+sudo pacman -S --needed orca ibus ibus-anthy espeak-ng speech-dispatcher gnome-session
+```
+
+`ibus-mozc` is not in this host's enabled repos (`pacman -Si ibus-mozc` →
+nothing); `ibus-anthy 1.5.18-1` and `fcitx5-mozc 3.34.6345.2-1` are, so record
+which engine you actually added. `gnome-session` is in the line only because
+A.1 pins GNOME — the host runs KDE Plasma on Wayland, and running Orca there
+instead is an owner choice to write into the A.1 row, not a default.
+
 ## A.2 Setup and log capture
 
 Per `docs/assessment/ACCESSIBILITY_AUDIT.md:44-55`: Orca running with a
