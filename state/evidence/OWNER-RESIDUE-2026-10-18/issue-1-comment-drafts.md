@@ -1,9 +1,23 @@
 # issue #1 — evidence comments, ready to post (owner authorization required)
 
-Nothing below is posted. AGENTS.md requires direct owner authorization for
-external publication, and posting should follow the push: `main` is **ahead of
-`origin/main`**, so
-the SHAs these comments name do not exist on GitHub yet.
+**Posted 2026-10-18 after the owner authorized the push and the 0.4.2 publication.**
+This file was written while `main` was still ahead of `origin/main`; that is no longer
+true, and the five comments are live:
+
+| item | comment | checkbox after posting |
+| --- | --- | --- |
+| R12 | `#issuecomment-6253664891` | checked |
+| R13 | `#issuecomment-6253665087` | checked |
+| I04 | `#issuecomment-6253665255` | **left unchecked** — AT/IME half is human |
+| I05 | `#issuecomment-6253665397` | **left unchecked** — copy/UX half is human |
+| I08 | `#issuecomment-6255482355` | **left unchecked** — platform reports, SEC-001, PERF-002, review capacity |
+
+The R12/R13 boxes were flipped in the issue body by exact-string replacement
+(`assert count == 1`) and the diff read back as exactly two changed lines. The **I08
+section below is the pre-publication draft**: the text actually posted names 0.4.2 as
+published, with digests, the public round trip and the CI sequence, because the packs
+went live while this draft was being written. R12, R13, I04 and I05 were posted as
+drafted.
 
 Checkbox advice: **R12 and R13 can be checked** by the owner against the evidence
 below. **I04, I05 and I08 must stay unchecked** — each still has a human or
@@ -148,6 +162,14 @@ the `high` tier cannot be measured against the **pinned CPU-only** aligner build
 ---
 
 ## I08 — Finish the existing release evidence against actual artifacts
+
+**Superseded by what was posted** — `#issuecomment-6255482355`. This draft predates the
+0.4.2 publication, so it describes the pack release as pending; the live comment names
+it done (tags → `fb6858d`, digests, twice-built archives, member accounting, the public
+restore round trip at `4856`/`4902` rows `failing=0`, `both_pinned` passing in 111.99 s)
+and adds the CI sequence through green run `39166395880`, including the
+`scripts/smoke-desktop.sh` `kill 0` self-SIGTERM that failed `desktop-smoke` twice
+before `4e99828` fixed it.
 
 Status comment; the checkbox stays open, and nothing in it can be closed by an
 agent.

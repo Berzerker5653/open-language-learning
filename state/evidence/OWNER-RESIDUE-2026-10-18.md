@@ -106,6 +106,30 @@ runtime report.
 
 ## 4. Publishing — blocked on your authorization, not on work
 
+**Executed later the same day; the bullets below are kept as the record of what was
+waiting, and this block supersedes them.**
+
+- `main` pushed as authorized: `5a0d1f0..fb6858d`, `fb6858d..d035551`,
+  `d035551..9c16cc7`, `9c16cc7..31ce5fb`, `31ce5fb..4e99828`, `4e99828..f159999`.
+  `HEAD` equals `origin/main`.
+- All five comments posted (URLs and checkbox outcomes in
+  `issue-1-comment-drafts.md` §top). R12 and R13 are checked in the issue body;
+  I04, I05 and I08 deliberately are not.
+- **0.4.2 is published** for both reference packs under the owner's authorization:
+  tags `org.openlanguage.{ja-jp,ru-ru}.reference-0.4.2` → `fb6858d3e42f9325682c080186ad71177028f205`,
+  ja `318,724,406 B` sha256 `b03cf88671d8…63d764a81`, ru `318,491,600 B` sha256
+  `3b3dc25694b6…e38386d4`, catalogue re-pinned in the same commit, ru browse title no
+  longer `(Draft)`. So the "cutting 0.4.2 is your decision" bullet is spent, and the
+  archives a newcomer downloads now contain unit 826 and the retargeted transfer
+  stages. Record: `state/evidence/RC-0.4.2-2026-10-18/publication-2026-10-18.md`
+  (§§1–7, green run `39166395880` over `4e99828`).
+- The §3 blocker analysis stands, and got a decision brief:
+  `state/evidence/PERF-HIGH-TIER-2026-10-18.md`. `docs/21` A.1 now pins the AT-host
+  facts (package state on both lab hosts, `wayland`/`KDE`, `ibus-mozc` absent, the
+  `:1420` collision) for the I04 pass.
+- App release still untouched: desktop stays `0.4.0-alpha.1`; 0.4.2 is a pack release
+  only, and the next app artifact is O-06.
+
 - `main` is **ahead of `origin/main`**, growing with each log commit. I did not push.
 - Evidence comments on `issue://1` for **R12, R13, I04, I05, I08** are queued and
   unposted: posting is external publication (AGENTS: needs direct owner
