@@ -117,10 +117,13 @@ environment row says:
    Anthy and Mozc, so the row must name the engine that was used.
 
 One collision to avoid while starting the app for the pass:
-`scripts/smoke-desktop.sh:17` waits on `127.0.0.1:1420`, and it **fails** if that
-port is already listening. The owner's own `vite` dev server (PID recorded in
-`state/evidence/OWNER-RESIDUE-2026-10-18/at-ime-2026-10-18.md`) holds it now, so
-either stop it or launch the built binary directly.
+`scripts/smoke-desktop.sh:27` probes `127.0.0.1:1420` before it does any work and
+refuses with `FAIL: 127.0.0.1:1420 is already bound` (exit 1) if a listener holds it.
+That applies on this host: the probe sits in the branch the script takes when pnpm is
+absent, and GamingPC has no pnpm (`command -v pnpm` → nothing), which is also why the
+local smoke run starts its own vite. The owner's own `vite` dev server (PID recorded in
+`state/evidence/OWNER-RESIDUE-2026-10-18/at-ime-2026-10-18.md`) holds that port, so stop
+it first or launch the built binary directly.
 
 ## A.2 Setup and log capture
 

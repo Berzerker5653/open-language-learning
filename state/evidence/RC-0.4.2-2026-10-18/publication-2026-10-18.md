@@ -120,11 +120,17 @@ Two failures had to be diagnosed to get there, and neither was the pack content:
    `VITE_PID` is unset, so it executed `kill 0` and SIGTERM'd its own process group
    while exiting. Reproduced in one line
    (`bash -c 'trap "kill \"${VITE_PID:-0}\" 2>/dev/null || true; true" EXIT; echo ok'`
-   → `ok`, exit 143), fixed by guarding the kill, and verified on this host at this
-   tree: `SMOKE OK (13 routes walked)`, `SMOKE SCRIPT EXIT=0`, 154.84 s wall
-   (`LTS_SMOKE_TIMEOUT=900`). `6cae160` (2026-10-17 15:16) introduced that trap shape;
-   it survived a day because every run since then died earlier, at the restore step, so
-   the smoke step never ran.
+   → `ok`, exit 143; the same trap guarded → exit 0), then fixed by guarding the kill.
+   Verification, split honestly: the fix is proven **on the branch that broke** by
+   `39166395880` above, where `desktop-smoke` is `success` on the fixed head after two
+   deaths at 143. A local rerun at this tree (`SMOKE OK (13 routes walked)`,
+   `SMOKE SCRIPT EXIT=0`, 154.84 s wall at `LTS_SMOKE_TIMEOUT=900`) covers the
+   **fallback vite branch**, not that one — GamingPC has no pnpm (`command -v pnpm`
+   returns nothing), so the run started its own vite, `VITE_PID` was set, and the trap
+   was already correct there; what it establishes is that the guard did not break the
+   vite path. `6cae160` (2026-10-17 15:16) introduced that trap shape; it survived a
+   day because every run since then died earlier, at the restore step, so the smoke
+   step never ran.
 2. The earlier `39155073665` / `39157289475` restore failures, documented in §6: the
    first is ADR-0032's ordering working as designed, the second pure timing.
 
