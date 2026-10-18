@@ -131,6 +131,18 @@ export interface WorldEnvironment {
   missing: string[];
 }
 
+/// PACK-UPDATE-UX-001: an installed pack the pack catalogue lists at a different
+/// version. Built in App.tsx from the same `catalog_packs` read the Settings
+/// panel renders, so Home, the hub and Settings cannot disagree about whether an
+/// update exists. Both versions are carried because the app may itself be
+/// packaged against an older reference pack than the catalogue lists.
+export interface PackUpdate {
+  pack_id: string;
+  display_name: string;
+  installed_version: string;
+  available_version: string;
+}
+
 export interface HomeProps {
   displayName: string;
   plan: SessionPlan;
@@ -149,6 +161,10 @@ export interface HomeProps {
   /// "what to practice now" heading that promises nothing.
   noPack?: boolean;
   onChooseLanguage?(): void;
+  /// PACK-UPDATE-UX-001: stale packs on this device. Empty means the engine and
+  /// the catalogue agree on every version, and Home then says nothing about
+  /// versions at all.
+  updates?: PackUpdate[];
   /// K-66: the next reachable goal from the active pack's goal map, as
   /// `home_state` reports it. `undefined` while that call has not
   /// answered; `null` when the pack declares no goal map — Home then
@@ -196,6 +212,22 @@ export function Home(p: HomeProps) {
             </button>
           ) : null}
         </p>
+      ) : null}
+      {(p.updates ?? []).length > 0 ? (
+        <div className="notice pack-updates" role="status">
+          {(p.updates ?? []).map((u) => (
+            <p key={u.pack_id} className="pack-version">
+              <PackText tag="strong">{u.display_name}</PackText> version{" "}
+              {u.installed_version} is on this device. The pack catalogue lists version{" "}
+              {u.available_version}.
+            </p>
+          ))}
+          {p.onChooseLanguage ? (
+            <button type="button" className="btn btn--quiet" onClick={p.onChooseLanguage}>
+              Review pack updates
+            </button>
+          ) : null}
+        </div>
       ) : null}
       {firstRun.length > 0 ? (
         <section aria-label="First steps" className="first-run">

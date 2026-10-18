@@ -28,4 +28,28 @@ describe("PracticeHub", () => {
     expect(withoutKanji).toContain("Scenarios");
     expect(withoutKanji).toContain("Placement");
   });
+
+  it("names both versions when the catalogue lists a different one, and offers review", () => {
+    const html = renderToStaticMarkup(
+      <PracticeHub
+        onOpen={open}
+        updates={[
+          {
+            pack_id: "org.openlanguage.ja-demo",
+            display_name: "Japanese",
+            installed_version: "0.4.0",
+            available_version: "0.4.1",
+          },
+        ]}
+        onOpenLanguagePacks={open}
+      />,
+    );
+    expect(html).toContain("Japanese");
+    expect(html).toContain("version 0.4.0 is on this device.");
+    expect(html).toContain("The pack catalogue lists version 0.4.1.");
+    expect(html).toContain("Review pack updates");
+    // The app may be packaged against a newer pack than the catalogue
+    // lists, so the copy names both versions and claims no ordering.
+    expect(html).not.toMatch(/newer|latest|out of date|up to date/i);
+  });
 });

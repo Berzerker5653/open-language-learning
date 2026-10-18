@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-10-16",
+  "updated": "2026-10-17",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -1673,20 +1673,21 @@
     },
     "PACK-UPDATE-UX-001": {
       "task_id": "PACK-UPDATE-UX-001",
-      "status": "ready",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "title": "A newer catalogue version of an installed pack is offered as an update",
       "activity": "idle",
-      "summary": "A catalogue update for an installed pack is offered only inside the language-pack panel; nothing surfaces it elsewhere, and the onboarding wizard matches installs by pack_id alone.",
-      "notes": "Opened 2026-10-16, corrected the same day after reading the code rather than the earlier note. What exists: `apps/desktop/src-tauri/src/packs.rs:238-241` sets every catalogue view's `installed_version` from the installed store, and `apps/desktop/src/language.tsx:419-429` renders a primary `Update to v{version}` button when it differs from the pinned version (asserted by `apps/desktop/src/language.test.tsx:115`). So an alpha user CAN reach 0.4.1 from Settings ▸ Language packs. What is missing: (1) discovery — `installed_version` has exactly one consumer in `apps/desktop/src`, so no badge or notice anywhere else tells a learner an update exists; (2) the wizard is version-blind — `App.tsx:266` keeps `installedPacks` as pack ids (`App.tsx:842`), and `onboarding.tsx:95,200,205` gate on `installedPacks.includes(pack_id)`, so onboarding can complete against a pack older than the catalogue pin while labelling it Installed. The card had been asserted in the 2026-10-16 owner queue before it existed here; this record is where it now actually lives.",
+      "summary": "One installed-pack record feeds Home, the practice hub and the onboarding wizard, so a pack the catalogue lists at a different version is shown with both versions plus an update control wherever the learner already is.",
+      "notes": "Implemented 2026-10-17. `installedPacks: string[]` is gone from App.tsx and from OnboardingProps: the single record is `installed: InstalledPack[]` (App.tsx:320) filled by `refreshInstalled()` (App.tsx:931-942), which returns the records it read or null when the read failed and sets `installedUnknown` so the wizard still offers retry and Skip for now. Boot gained its own `catalog_packs` read in a separate try/catch (App.tsx:849-858) because `catalog` is otherwise empty during the wizard. The derived block (App.tsx:2840-2867) joins `available_version` onto each wizard row from `catalog` and derives `packUpdates` purely from entries whose non-null `installed_version` differs from `version`, so Home, the hub and Settings read one derivation. `updateFromCatalog(id)` (App.tsx:947-972) calls the same `install_catalog_pack` command Settings uses, then re-reads installed packs and the catalogue; `install(id)` re-checks through `refreshInstalled()` instead of fabricating a record, because `install_pack` returns a PackCandidate with no version (lib.rs:422-432) while `import_pack` (lib.rs:523) returns the full record. The wizard renders both versions in three states (stale, matching, no listed version) and the update control is a sibling of the untouched Install/Installed button; Continue is never disabled for a version mismatch. Learner copy never says newer or latest and never promises progress survives an update. Measured on GamingPC: `npx tsc --noEmit` 0 errors; `npx vitest run` 29 files / 253 tests (baseline 29 / 246), per-file counts 15->18 onboarding, 25->26 home, 3->4 hub, 10->10 a11y; `tools/audit_learner_copy.py` findings: 0. Criterion 2 rests on engine code unchanged here: the download re-verifies against the pin (packs.rs:846-900) and `crates/langpack/tests/media_upgrade.rs:161` keeps the previous version for rollback. `scripts/smoke-desktop.sh` stays owner-side because 127.0.0.1:1420 is held by the owner's running app.",
       "last_error": null,
       "dependencies": [
         "PACK-DL-ALLOWLIST-001"
       ],
       "evidence": [
+        "state/evidence/PACK-UPDATE-UX-001/update-ux.md",
         "state/evidence/RC-0.4.1-2026-10-15/publication-2026-10-16.md"
       ],
-      "updated": "2026-10-16"
+      "updated": "2026-10-17"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

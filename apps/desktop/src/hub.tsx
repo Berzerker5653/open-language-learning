@@ -6,6 +6,9 @@
  * what is formative vs scored, matching each route's own framing.
  */
 
+import { PackText } from "@openlang/ui";
+import type { PackUpdate } from "./home";
+
 export type HubMode =
   | "pronunciation"
   | "dictation"
@@ -67,6 +70,8 @@ export const HUB_MODES: { id: HubMode; label: string; blurb: string }[] = [
 export function PracticeHub({
   onOpen,
   kanjiAvailable = true,
+  updates = [],
+  onOpenLanguagePacks,
 }: {
   onOpen(mode: HubMode): void;
   /**
@@ -75,6 +80,11 @@ export function PracticeHub({
    * teaches no kanji must not offer the card at all.
    */
   kanjiAvailable?: boolean;
+  /// PACK-UPDATE-UX-001: installed packs the pack catalogue lists at a different
+  /// version, from the same derivation App.tsx feeds Home and Settings. Empty
+  /// means the app and the catalogue agree, and the hub stays silent.
+  updates?: PackUpdate[];
+  onOpenLanguagePacks?(): void;
 }) {
   const modes = HUB_MODES.filter((m) => m.id !== "kanji" || kanjiAvailable);
   return (
@@ -84,6 +94,22 @@ export function PracticeHub({
         The guided path is on Today. These are the self-directed modes — pick whichever you feel
         like; each keeps its own honesty about what is scored and what is not.
       </p>
+      {updates.length > 0 ? (
+        <div className="notice pack-updates" role="status">
+          {updates.map((u) => (
+            <p key={u.pack_id} className="pack-version">
+              <PackText tag="strong">{u.display_name}</PackText> version{" "}
+              {u.installed_version} is on this device. The pack catalogue lists version{" "}
+              {u.available_version}.
+            </p>
+          ))}
+          {onOpenLanguagePacks ? (
+            <button type="button" className="btn btn--quiet" onClick={onOpenLanguagePacks}>
+              Review pack updates
+            </button>
+          ) : null}
+        </div>
+      ) : null}
       <ul className="pack-list">
         {modes.map((m) => (
           <li key={m.id}>

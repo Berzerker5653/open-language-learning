@@ -1,4 +1,5 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import { isValidElement as isElement, type ReactElement, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import {
   CanDoSummary,
@@ -310,6 +311,83 @@ describe("home", () => {
       <Home displayName="Hunter" plan={plan} activeBudget={5} onBudget={() => {}} />,
     );
     expect(none).not.toContain("Where to begin");
+  });
+
+  // No DOM in this suite (see the header note in onboarding.test.tsx): a
+  // "click" is the onClick prop on the element tree the component returned.
+  // Home is presentational and hook-free, so calling it gives that tree.
+  function childNodes(el: ReactElement): ReactNode[] {
+    const props: unknown = el.props;
+    if (props && typeof props === "object" && "children" in props) {
+      const kids: unknown = props.children;
+      return Array.isArray(kids) ? (kids as ReactNode[]) : [kids as ReactNode];
+    }
+    return [];
+  }
+
+  function collectButtons(node: ReactNode, out: ReactElement[] = []): ReactElement[] {
+    if (Array.isArray(node)) {
+      for (const child of node) collectButtons(child, out);
+      return out;
+    }
+    if (!isElement(node)) return out;
+    if (node.type === "button") out.push(node);
+    collectButtons(childNodes(node), out);
+    return out;
+  }
+
+  function buttonLabeled(
+    root: ReactElement,
+    label: string,
+  ): ReactElement<{ onClick?: () => void }> {
+    const found = collectButtons(root).find((el) =>
+      childNodes(el).some((k) => typeof k === "string" && k.includes(label)),
+    );
+    if (!found) throw new Error(`no button labeled "${label}"`);
+    return found as ReactElement<{ onClick?: () => void }>;
+  }
+
+  it("names both versions when the catalogue lists a different one, and routes review to language & packs", () => {
+    const update = {
+      pack_id: "org.openlanguage.ja-demo",
+      display_name: "Japanese",
+      installed_version: "0.4.0",
+      available_version: "0.4.1",
+    };
+    const onChooseLanguage = vi.fn();
+    const html = renderToStaticMarkup(
+      <Home
+        displayName="Hunter"
+        plan={plan}
+        activeBudget={5}
+        onBudget={() => {}}
+        updates={[update]}
+        onChooseLanguage={onChooseLanguage}
+      />,
+    );
+    expect(html).toContain("Japanese");
+    expect(html).toContain("version 0.4.0 is on this device.");
+    expect(html).toContain("The pack catalogue lists version 0.4.1.");
+    expect(html).toContain("Review pack updates");
+    // The app may be packaged against a newer pack than the catalogue
+    // lists, so the copy names both versions and claims no ordering.
+    expect(html).not.toMatch(/newer|latest|out of date|up to date/i);
+    const home = Home({
+      displayName: "Hunter",
+      plan,
+      activeBudget: 5,
+      onBudget: () => {},
+      updates: [update],
+      onChooseLanguage,
+    });
+    buttonLabeled(home, "Review pack updates").props.onClick?.();
+    expect(onChooseLanguage).toHaveBeenCalledTimes(1);
+    // Nothing to review: the version prose is absent entirely.
+    expect(
+      renderToStaticMarkup(
+        <Home displayName="Hunter" plan={plan} activeBudget={5} onBudget={() => {}} />,
+      ),
+    ).not.toContain("pack catalogue lists");
   });
 });
 

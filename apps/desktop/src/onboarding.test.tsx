@@ -1,7 +1,31 @@
 import { describe, expect, it, vi } from "vitest";
 import { isValidElement as isElement, type ReactElement, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { Onboarding, type OnboardingProps } from "./onboarding";
+import { Onboarding, type OnboardingProps, type PackCandidate } from "./onboarding";
+import type { InstalledPack } from "./language";
+
+// A pack already on this device, in the shape `installed_packs` reports. The
+// wizard used to keep its own list of ids, which is how Home, the wizard and
+// Settings drifted apart (PACK-UPDATE-UX-001).
+const jaOnDevice: InstalledPack = {
+  pack_id: "org.openlanguage.ja-demo",
+  version: "0.4.0",
+  display_name: "Japanese — demo lexicon (EDRDG-derived)",
+  locale: "ja-JP",
+  trust_state: "community",
+  rtl: false,
+};
+
+// The same pack as the wizard sees it: `available_packs_at` reports identity and
+// maturity, but never a version — the version facts come from the installed
+// record and the catalogue separately.
+const jaCandidate: PackCandidate = {
+  pack_id: "org.openlanguage.ja-demo",
+  display_name: "Japanese — demo lexicon (EDRDG-derived)",
+  locale: "ja-JP",
+  maturity: "community",
+  rtl: false,
+};
 
 const base: OnboardingProps = {
   step: "welcome",
@@ -12,22 +36,15 @@ const base: OnboardingProps = {
       "Recordings stay local; nothing is uploaded without your explicit choice.",
     ],
   },
-  packs: [
-    {
-      pack_id: "org.openlanguage.ja-demo",
-      display_name: "Japanese — demo lexicon (EDRDG-derived)",
-      locale: "ja-JP",
-      maturity: "community",
-      rtl: false,
-    },
-  ],
+  packs: [jaCandidate],
   selectedPack: null,
-  installedPacks: [],
+  installed: [],
   profileName: "",
   onProfileName: () => {},
   onCreateProfile: () => {},
   onSelectPack: () => {},
   onInstall: () => {},
+  onUpdatePack: () => {},
   onLocatePack: () => {},
   onSkipPack: () => {},
   onEnableMic: () => {},
@@ -111,7 +128,7 @@ describe("onboarding", () => {
     const ready = render({
       step: "packs",
       selectedPack: "org.openlanguage.ja-demo",
-      installedPacks: ["org.openlanguage.ja-demo"],
+      installed: [jaOnDevice],
     });
     expect(ready).toContain(">Installed<");
     expect(ready).toContain(">Continue</button>");
@@ -154,7 +171,6 @@ describe("onboarding", () => {
     const html = render({
       step: "packs",
       selectedPack: "org.openlanguage.ja-demo",
-      installedPacks: [],
       error: "Could not install that pack: disk full",
     });
     // Visible, actionable path: retry the install or pick another pack
@@ -261,7 +277,7 @@ describe("onboarding", () => {
   });
 
   // Owner regression (2026-10-12): the wizard list now includes imported
-  // and catalog-installed packs, and the container populates installedPacks
+  // and catalog-installed packs, and the container holds InstalledPack records
   // — so a pack already on this device is selectable straight to Continue,
   // with no redundant Install click.
   it("unlocks Continue when a listed pack is already installed and selected", () => {
@@ -277,7 +293,7 @@ describe("onboarding", () => {
         },
       ],
       selectedPack: "org.openlanguage.imported-ja",
-      installedPacks: ["org.openlanguage.imported-ja"],
+      installed: [{ ...jaOnDevice, pack_id: "org.openlanguage.imported-ja" }],
     });
     expect(html).toContain("Imported Japanese pack");
     expect(html).toContain("(ja-JP, community)");
@@ -298,7 +314,7 @@ describe("onboarding", () => {
 
   it("keeps Skip for now available with nothing installed and wires it to the container", () => {
     const skipPack = vi.fn();
-    const html = render({ step: "packs", installedPacks: [] });
+    const html = render({ step: "packs" });
     expect(html).toContain("Skip for now");
     const skip = buttonLabeled(tree({ step: "packs", onSkipPack: skipPack }), "Skip for now");
     // A learner with no installed pack is never trapped: the skip control
@@ -314,5 +330,59 @@ describe("onboarding", () => {
     expect(html).toContain("Select an installed pack to continue");
     expect(html).toContain('aria-describedby="packs-continue-note"');
     expect(html).toMatch(/disabled=""[^>]*>\s*Continue/);
+  });
+
+  // PACK-UPDATE-UX-001: the wizard used to say nothing when an installed pack was
+  // not the version the pack catalogue offered, and could show Install for a pack
+  // the container already knew about. The two surfaces now read the same records.
+  it("names both versions and offers a working update for a stale pack", () => {
+    const step: Partial<OnboardingProps> = {
+      step: "packs",
+      packs: [{ ...jaCandidate, available_version: "0.4.1" }],
+      installed: [jaOnDevice],
+      selectedPack: "org.openlanguage.ja-demo",
+    };
+    const onUpdatePack = vi.fn();
+    const html = render(step);
+    expect(html).toContain("Version 0.4.0 is on this device.");
+    expect(html).toContain("The pack catalogue lists version 0.4.1.");
+    // No ordering claim anywhere: the app may itself be packaged against the
+    // older reference pack, so only the two facts are stated.
+    expect(html).not.toMatch(/newer|latest|out of date|up to date/i);
+    // The existing Install control is still the honest done-state, and a stale
+    // pack never dead-ends the wizard: Continue stays live.
+    expect(html).toMatch(/disabled=""[^>]*>\s*Installed</);
+    expect(html).not.toMatch(/disabled=""[^>]*>\s*Continue/);
+    const update = buttonLabeled(tree({ ...step, onUpdatePack }), "Update to v");
+    expect(update.props.disabled).toBeFalsy();
+    update.props.onClick?.();
+    expect(onUpdatePack).toHaveBeenCalledWith("org.openlanguage.ja-demo");
+  });
+
+  it("confirms a matching version without inventing an update control", () => {
+    const html = render({
+      step: "packs",
+      packs: [{ ...jaCandidate, available_version: "0.4.0" }],
+      installed: [jaOnDevice],
+      selectedPack: "org.openlanguage.ja-demo",
+    });
+    expect(html).toContain("Version 0.4.0 is on this device.");
+    expect(html).toContain("That matches the version the catalogue lists.");
+    expect(html).not.toContain("Update to v");
+    expect(html).toMatch(/disabled=""[^>]*>\s*Installed</);
+    expect(html).not.toMatch(/disabled=""[^>]*>\s*Continue/);
+  });
+
+  it("states only the on-device version when no catalogue version is listed", () => {
+    const html = render({
+      step: "packs",
+      installed: [jaOnDevice],
+      selectedPack: "org.openlanguage.ja-demo",
+    });
+    // base.packs[0] carries no available_version: no comparison may be claimed.
+    expect(html).toContain("Version 0.4.0 is on this device.");
+    expect(html).not.toContain("catalogue lists");
+    expect(html).not.toContain("matches the version");
+    expect(html).not.toContain("Update to v");
   });
 });

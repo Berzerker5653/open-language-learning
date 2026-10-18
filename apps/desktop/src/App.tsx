@@ -12,6 +12,7 @@ import {
 import { PracticeHub, type HubMode } from "./hub";
 import {
   Home,
+  type PackUpdate,
   type PlannedItem,
   ProgressView,
   type ProgressRow,
@@ -262,7 +263,6 @@ export function App() {
    * a returning session (no wizard) has the profile's own pack and every
    * pack-scoped call uses it. Null means no pack is active. */
   const [selectedPack, setSelectedPack] = useState<string | null>(null);
-  const [installedPacks, setInstalledPacks] = useState<string[]>([]);
   const [installedUnknown, setInstalledUnknown] = useState(false);
   const [profileName, setProfileName] = useState("");
   const [profiles, setProfiles] = useState<ProfileSummary[]>([]);
@@ -841,11 +841,20 @@ export function App() {
       // failure here must not render confident Install buttons for packs
       // already on the device — the step says the state is unknown instead,
       // and install() re-checks before moving bytes.
+      await refreshInstalled();
+      // PACK-UPDATE-UX-001: the wizard may name a catalogue version only if
+      // the catalogue has been read, so boot reads it here too (a cached
+      // local read on the engine's blocking pool). A failure leaves the
+      // version prose silent rather than wrong.
       try {
-        const installed = (await inv("installed_packs")) as InstalledPack[];
-        setInstalledPacks(installed.map((i) => i.pack_id));
+        const cat = (await inv("catalog_packs")) as {
+          entries: CatalogEntry[];
+          status: string;
+        };
+        setCatalog(cat.entries);
+        setCatalogStatus(cat.status);
       } catch {
-        setInstalledUnknown(true);
+        /* no catalogue read: the wizard stays version-silent */
       }
     })();
   }, []);
@@ -912,6 +921,54 @@ export function App() {
     }
     setCatalog(catalog.entries);
     setCatalogStatus(catalog.status);
+  }
+
+  // PACK-UPDATE-UX-001: one read, one container update. The wizard used to
+  // keep its own list of installed ids while Settings kept InstalledPack
+  // records, which is exactly how the two drifted apart. Every install path
+  // now re-reads the same records the panel renders, so a pack landing on
+  // the device updates one state and both surfaces see it.
+  async function refreshInstalled(): Promise<InstalledPack[] | null> {
+    if (!inv) return null;
+    try {
+      const fresh = (await inv("installed_packs")) as InstalledPack[];
+      setInstalled(fresh);
+      setInstalledUnknown(false);
+      return fresh;
+    } catch {
+      setInstalledUnknown(true);
+      return null;
+    }
+  }
+
+  // PACK-UPDATE-UX-001: the wizard's Update control. install_catalog_pack is the
+  // same path the Settings panel uses, so there is one write path per source.
+  // Afterwards both containers are refreshed from the engine and the catalogue
+  // rather than edited by hand: a stale row only clears when the records say so.
+  async function updateFromCatalog(id: string) {
+    if (!inv) return;
+    setOnboardError(null);
+    setInstallingPack(id);
+    try {
+      await inv("install_catalog_pack", { packId: id });
+    } catch (e) {
+      setOnboardError(`Could not update that pack: ${String(e)}`);
+      return;
+    } finally {
+      setInstallingPack(null);
+      setEngineProgress(null);
+    }
+    await refreshInstalled();
+    try {
+      const cat = (await inv("catalog_packs")) as {
+        entries: CatalogEntry[];
+        status: string;
+      };
+      setCatalog(cat.entries);
+      setCatalogStatus(cat.status);
+    } catch {
+      // The rows keep the last-known facts; the notice does not invent a version.
+    }
   }
 
   async function switchLearning(packId: string) {
@@ -1093,16 +1150,8 @@ export function App() {
       // sweep-ts-dup-install: the disabled-state may be stale if the launch
       // read failed; a fresh check keeps the label honest and skips a
       // pointless call (the engine no-ops an already-current install).
-      try {
-        const fresh = (await inv("installed_packs")) as InstalledPack[];
-        if (fresh.some((i) => i.pack_id === id)) {
-          setInstalledPacks((prev) => (prev.includes(id) ? prev : [...prev, id]));
-          setInstalledUnknown(false);
-          return;
-        }
-      } catch {
-        /* still unknown: proceed — the engine no-ops a current install */
-      }
+      const fresh = await refreshInstalled();
+      if (fresh?.some((i) => i.pack_id === id)) return;
       setInstallingPack(id);
       try {
         // K-73 made this command async, so `engine-progress` events now
@@ -1116,8 +1165,14 @@ export function App() {
         setInstallingPack(null);
         setEngineProgress(null);
       }
+      // PACK-UPDATE-UX-001: take the record from the same authoritative
+      // read every other surface uses. `install_pack` answers a
+      // PackCandidate with no version (lib.rs:422-432), so nothing here
+      // invents one; a failed re-read leaves the step saying its state is
+      // unknown, where retry, another pack, the file input and "Skip for
+      // now" all stay available.
+      await refreshInstalled();
     }
-    setInstalledPacks((prev) => (prev.includes(id) ? prev : [...prev, id]));
   }
 
   // Owner 2026-10-12: a pack downloaded outside the app has to be usable the
@@ -1132,8 +1187,10 @@ export function App() {
       const imported = (await inv("import_pack", {
         dataB64: await readFileB64(file),
       })) as InstalledPack;
-      setInstalledPacks((prev) =>
-        prev.includes(imported.pack_id) ? prev : [...prev, imported.pack_id],
+      setInstalled((prev) =>
+        prev.some((i) => i.pack_id === imported.pack_id)
+          ? prev
+          : [...prev, imported],
       );
       setPacks((await inv("available_packs")) as PackCandidate[]);
       setSelectedPack(imported.pack_id);
@@ -2778,21 +2835,46 @@ export function App() {
     captureOwner.cancel();
     setRecording(false);
     setAudioMsg(null);
-  }, [captureOwner, profileId, micEnabled, route, step, installedPacks]);
+  }, [captureOwner, profileId, micEnabled, route, step, installed]);
 
   // The same release when the app itself goes away (window closed, the
   // profile list swapped the tree out).
   useEffect(() => () => captureOwner.cancel(), [captureOwner]);
 
+  // PACK-UPDATE-UX-001: `available_packs` answers a PackCandidate with no
+  // version field at all (lib.rs:287-313), so the wizard can only name a
+  // catalogue version by joining against the catalogue this process has
+  // read. No catalogue entry for a pack means no second version claim —
+  // the step then says one version and nothing more.
+  const wizardPacks = packs.map((pack) => ({
+    ...pack,
+    available_version:
+      catalog.find((c) => c.pack_id === pack.pack_id)?.version ?? null,
+  }));
+  // The same join the Language packs panel makes per row (language.tsx:462):
+  // a pack on the device whose installed version is not the catalogue
+  // version has an update, and Settings is where it is applied.
+  const packUpdates: PackUpdate[] = [];
+  for (const entry of catalog) {
+    if (entry.installed_version !== null && entry.installed_version !== entry.version) {
+      packUpdates.push({
+        pack_id: entry.pack_id,
+        display_name: entry.display_name,
+        installed_version: entry.installed_version,
+        available_version: entry.version,
+      });
+    }
+  }
   if (step !== "done") {
     return (
       <AppShell productName="Open Language Learning Platform" nav={[]}>
         <Onboarding
           step={step}
           notice={notice}
-          packs={packs}
+          packs={wizardPacks}
           selectedPack={selectedPack}
-          installedPacks={installedPacks}
+          installed={installed}
+          onUpdatePack={(id) => void updateFromCatalog(id)}
           installedUnknown={installedUnknown}
           profileName={profileName}
           onProfileName={setProfileName}
@@ -2912,7 +2994,12 @@ export function App() {
         </p>
       ) : null}
       {route === "hub" ? (
-        <PracticeHub onOpen={openMode} kanjiAvailable={kanjiAvailable} />
+        <PracticeHub
+          onOpen={openMode}
+          kanjiAvailable={kanjiAvailable}
+          updates={packUpdates}
+          onOpenLanguagePacks={() => setRoute("settings")}
+        />
       ) : route === "pronunciation" ? (
         <>
           {audioMsg && (
@@ -3404,6 +3491,7 @@ export function App() {
           activePack={activePack}
           noPack={activeIds.length === 0}
           onChooseLanguage={() => setRoute("settings")}
+          updates={packUpdates}
           plan={plan}
           activeBudget={budget}
           onBudget={(m) => void changeBudget(m)}

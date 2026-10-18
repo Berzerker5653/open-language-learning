@@ -8,6 +8,7 @@
  */
 import { progressLine, type EngineProgress } from "./progress";
 import { PackText } from "@openlang/ui";
+import type { InstalledPack } from "./language";
 
 export interface PrivacyNotice {
   title: string;
@@ -21,6 +22,13 @@ export interface PackCandidate {
   maturity: string;
   /** `capabilities.rtl` from the pack manifest (ADR-0029). */
   rtl: boolean;
+  /**
+   * What the pack catalogue currently offers for this pack, when a catalogue read
+   * succeeded. `available_packs` itself carries no version (lib.rs), so App joins
+   * it from `catalog_packs`; null means the app has no listed version to compare
+   * against and must say nothing about versions.
+   */
+  available_version?: string | null;
 }
 
 export type OnboardingStep =
@@ -53,7 +61,7 @@ export interface OnboardingProps {
   notice: PrivacyNotice;
   packs: PackCandidate[];
   selectedPack: string | null;
-  installedPacks: string[];
+  installed: InstalledPack[];
   /** Set when the launch-time `installed_packs` read failed: installed
    * state is genuinely unknown, and the step says so rather than
    * rendering a confident-but-wrong Install button (sweep-ts-dup-install). */
@@ -86,6 +94,11 @@ export interface OnboardingProps {
   error?: string | null;
   progress?: EngineProgress | null;
   installing?: string | null;
+  /**
+   * Update an already-installed pack to the catalogue version. Required, not
+   * optional: a row that can be stale must always render a working control.
+   */
+  onUpdatePack(packId: string): void;
 }
 
 export function Onboarding(p: OnboardingProps) {
@@ -96,7 +109,8 @@ export function Onboarding(p: OnboardingProps) {
   // every pack-scoped read already resolve to "nothing yet". After a failed
   // install the actionable paths are retry, another pack, or a local file;
   // Continue is explained, never silently disabled.
-  const canContinue = p.selectedPack !== null && p.installedPacks.includes(p.selectedPack);
+  const canContinue =
+    p.selectedPack !== null && p.installed.some((i) => i.pack_id === p.selectedPack);
   return (
     <section aria-label="Onboarding">
       {p.step !== "resume" && (
@@ -188,38 +202,68 @@ export function Onboarding(p: OnboardingProps) {
           )}
           <fieldset>
             <legend>Available packs</legend>
-            {p.packs.map((pack) => (
-              <div key={pack.pack_id} className="radio-row">
-                <label>
-                  <input
-                    type="radio"
-                    name="pack"
-                    checked={p.selectedPack === pack.pack_id}
-                    onChange={() => p.onSelectPack(pack.pack_id)}
-                  />
-                  <PackText rtl={pack.rtl} locale={pack.locale} tag="span">
-                    {pack.display_name}
-                  </PackText>{" "}
-                  ({pack.locale}, {pack.maturity})
-                </label>
-                <button
-                  type="button"
-                  className="btn btn--quiet"
-                  onClick={() => p.onInstall(pack.pack_id)}
-                  disabled={
-                    p.installedPacks.includes(pack.pack_id) ||
-                    (p.installing !== null && p.installing !== undefined)
-                  }
-                  aria-busy={p.installing === pack.pack_id}
-                >
-                  {p.installedPacks.includes(pack.pack_id)
-                    ? "Installed"
-                    : p.installing === pack.pack_id
-                      ? "Installing…"
-                      : "Install"}
-                </button>
-              </div>
-            ))}
+            {p.packs.map((pack) => {
+              const onDevice = p.installed.find((i) => i.pack_id === pack.pack_id);
+              const listed = pack.available_version ?? null;
+              const stale =
+                onDevice !== undefined && listed !== null && listed !== onDevice.version;
+              const versionLine =
+                onDevice === undefined
+                  ? null
+                  : listed === null
+                    ? `Version ${onDevice.version} is on this device.`
+                    : listed === onDevice.version
+                      ? `Version ${onDevice.version} is on this device. That matches the version the catalogue lists.`
+                      : `Version ${onDevice.version} is on this device. The pack catalogue lists version ${listed}.`;
+              return (
+                <div key={pack.pack_id} className="radio-row">
+                  <label>
+                    <input
+                      type="radio"
+                      name="pack"
+                      checked={p.selectedPack === pack.pack_id}
+                      onChange={() => p.onSelectPack(pack.pack_id)}
+                    />
+                    <PackText rtl={pack.rtl} locale={pack.locale} tag="span">
+                      {pack.display_name}
+                    </PackText>{" "}
+                    ({pack.locale}, {pack.maturity})
+                  </label>
+                  <button
+                    type="button"
+                    className="btn btn--quiet"
+                    onClick={() => p.onInstall(pack.pack_id)}
+                    disabled={
+                      onDevice !== undefined ||
+                      (p.installing !== null && p.installing !== undefined)
+                    }
+                    aria-busy={p.installing === pack.pack_id}
+                  >
+                    {onDevice !== undefined
+                      ? "Installed"
+                      : p.installing === pack.pack_id
+                        ? "Installing…"
+                        : "Install"}
+                  </button>
+                  {stale ? (
+                    <button
+                      type="button"
+                      className="btn btn--quiet"
+                      onClick={() => p.onUpdatePack(pack.pack_id)}
+                      disabled={p.installing !== null && p.installing !== undefined}
+                      aria-busy={p.installing === pack.pack_id}
+                    >
+                      Update to v{listed}
+                    </button>
+                  ) : null}
+                  {versionLine ? (
+                    <p className={stale ? "notice pack-version" : "meta pack-version"}>
+                      {versionLine}
+                    </p>
+                  ) : null}
+                </div>
+              );
+            })}
           </fieldset>
           <p>
             <small>
