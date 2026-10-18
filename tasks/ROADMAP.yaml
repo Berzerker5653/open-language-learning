@@ -2251,6 +2251,7 @@ tasks:
   - apps/desktop/src-tauri/src/packs.rs
   - catalog/packs.json
   - state/evidence/RC-0.4.1-2026-10-15/publication-2026-10-16.md
+  - state/evidence/RC-0.4.2-2026-10-18/publication-2026-10-18.md
   acceptance:
   - >-
     Corrected 2026-10-16 against the code: the affordance exists but is hidden.

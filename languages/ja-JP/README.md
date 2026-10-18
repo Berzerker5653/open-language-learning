@@ -39,8 +39,9 @@ pack-level `content_license` is `CC-BY-SA-4.0` as well: the owner settled that
 question (O-01(a)) the day `audit-licenses` began reporting the mismatch at
 `info` severity. Records for material we made — drafts, model output, baked
 audio — stay `CC-BY-4.0`, which is what we can grant for our own work. The
-published 0.4.0 archive predates the pack-level change and needs the 0.4.1
-republish (O-01(b)). `sources.jsonl` lists `edrdg-jmdict` and
+published 0.4.0 archive predated the pack-level change; the 0.4.1 republish
+(O-01(b)) shipped on 2026-10-16 and the live published archive is 0.4.2
+(published 2026-10-18). `sources.jsonl` lists `edrdg-jmdict` and
 `jmdict-simplified` as consulted references.
 
 Listening audio is generated, never hand-collected or committed (ADR-0016):

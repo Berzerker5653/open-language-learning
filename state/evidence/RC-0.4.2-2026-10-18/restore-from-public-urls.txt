@@ -1,0 +1,17 @@
+$ ./scripts/fetch-pack-audio.sh --pack-dir languages/ru-RU --work-dir tmp/pack-audio
+fetch-pack-audio: restoring org.openlanguage.ru-ru.reference 0.4.2 audio into languages/ru-RU (archive ru-ru-reference-0.4.2.lpk)
+fetch-pack-audio: unpacking through: cargo run -q -p lts-langpack-cli -- install
+installed org.openlanguage.ru-ru.reference v0.4.2 at tmp/pack-audio/store/org.openlanguage.ru-ru.reference/0.4.2
+fetch-pack-audio: summary languages/ru-RU: rows checked=4856 files valid=4856 files restored=0 files already valid=4856 rows failing=0
+EXIT=0
+
+$ ./scripts/fetch-pack-audio.sh --pack-dir languages/ja-JP --work-dir tmp/pack-audio
+fetch-pack-audio: restoring org.openlanguage.ja-jp.reference 0.4.2 audio into languages/ja-JP (archive ja-jp-reference-0.4.2.lpk)
+fetch-pack-audio: unpacking through: cargo run -q -p lts-langpack-cli -- install
+installed org.openlanguage.ja-jp.reference v0.4.2 at tmp/pack-audio/store/org.openlanguage.ja-jp.reference/0.4.2
+fetch-pack-audio: summary languages/ja-JP: rows checked=4902 files valid=4902 files restored=0 files already valid=4902 rows failing=0
+EXIT=0
+
+$ sha256 of the archives pulled from the public URLs
+b03cf88671d86de2c4ef481c07b16fcb2725f0dcd61a71df0e2182a63d764a81  tmp/pack-audio/ja-jp-reference-0.4.2.lpk
+3b3dc25694b60f899f675982721df23b7c5bb7a3471f0457298ae0e1e38386d4  tmp/pack-audio/ru-ru-reference-0.4.2.lpk

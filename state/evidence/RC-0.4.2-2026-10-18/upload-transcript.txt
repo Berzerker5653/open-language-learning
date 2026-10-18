@@ -1,0 +1,18 @@
+$ gh release create org.openlanguage.ja-jp.reference-0.4.2 <ja lpk> --target fb6858d3e42f9325682c080186ad71177028f205 --title 'Japanese Reference Pack 0.4.2' --notes-file release-notes-ja.md
+https://github.com/Berzerker5653/open-language-learning/releases/tag/org.openlanguage.ja-jp.reference-0.4.2
+EXIT=0
+
+$ gh release create org.openlanguage.ru-ru.reference-0.4.2 <ru lpk> --target fb6858d3e42f9325682c080186ad71177028f205 --title 'Russian Reference Pack 0.4.2' --notes-file release-notes-ru.md
+https://github.com/Berzerker5653/open-language-learning/releases/tag/org.openlanguage.ru-ru.reference-0.4.2
+EXIT=0
+
+$ gh release view (both, read back)
+{"assets":[{"digest":"sha256:b03cf88671d86de2c4ef481c07b16fcb2725f0dcd61a71df0e2182a63d764a81","name":"ja-jp-reference-0.4.2.lpk","size":318724406,"updatedAt":"2026-10-18T19:09:46Z"}],"draft":false,"name":"Japanese Reference Pack 0.4.2","pre":false,"tag":"org.openlanguage.ja-jp.reference-0.4.2"}
+{"assets":[{"digest":"sha256:3b3dc25694b60f899f675982721df23b7c5bb7a3471f0457298ae0e1e38386d4","name":"ru-ru-reference-0.4.2.lpk","size":318491600,"updatedAt":"2026-10-18T19:11:04Z"}],"draft":false,"name":"Russian Reference Pack 0.4.2","pre":false,"tag":"org.openlanguage.ru-ru.reference-0.4.2"}
+
+$ immutable-releases state
+{"enabled":true,"enforced_by_owner":false}
+
+$ tag targets
+org.openlanguage.ja-jp.reference-0.4.2 -> fb6858d3e42f9325682c080186ad71177028f205
+org.openlanguage.ru-ru.reference-0.4.2 -> fb6858d3e42f9325682c080186ad71177028f205

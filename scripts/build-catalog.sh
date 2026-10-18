@@ -33,8 +33,12 @@ build_pack() {
 # synthesis that used to make one survivable. The bake runs Qwen3-TTS
 # CustomVoice (ADR-0023) through ~/.venvs/qwen-tts; release builds set
 # WITH_PACK_AUDIO=1 with that venv staged. The loop covers ja-JP only: re-synthesising
-# ru-RU here would change audio that 0.4.0 already shipped, and synthesis is not
-# byte-reproducible. ru media is restored from the published archive instead
+# ru-RU here would change audio that the live published archive already ships
+# (0.4.2, published 2026-10-18), and synthesis is not byte-reproducible. The one
+# ru clip re-baked since 0.4.1 — `то́тчас`,
+# `media/ru.lex.narration.totchas.wav` — was baked deliberately under the RU-042
+# queue and published at 0.4.2, never by this loop. ru media is restored from the
+# published archive instead
 # (scripts/fetch-pack-audio.sh --pack-dir languages/ru-RU), and a fresh checkout must do
 # that before building, because archive::build refuses an archive whose declared media is
 # absent (crates/langpack/src/archive.rs:97).

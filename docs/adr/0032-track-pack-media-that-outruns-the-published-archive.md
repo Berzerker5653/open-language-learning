@@ -80,6 +80,16 @@ blanket rule (`languages/*/media/*.wav`). `scripts/fetch-pack-audio.sh` now
 restores both packs' audio from the published 0.4.1 archives: 4,902 ja-JP
 rows and 4,856 ru-RU rows checked, 0 rows failing.
 
+Executed 2026-10-18 (`ru-042-republish`, under O-05): the stress-corrected pair was
+published at 0.4.2 (`org.openlanguage.ja-jp.reference-0.4.2`,
+`org.openlanguage.ru-ru.reference-0.4.2`, release commit
+`fb6858d3e42f9325682c080186ad71177028f205`), and the re-baked `то́тчас` clip
+(`media/ru.lex.narration.totchas.wav`, member sha `abefb681…` → `b4b4e490…`) sits in
+the published ru archive. Measured on 2026-10-18 against the published 0.4.2
+archives: `scripts/fetch-pack-audio.sh` restores 4,902 ja-JP rows and 4,856 ru-RU
+rows, 0 rows failing, and the downloaded archives' sha256 equal the catalogue pins
+(`state/evidence/RC-0.4.2-2026-10-18/restore-from-public-urls.txt`).
+
 ## Alternatives
 
 - **Republish both packs now at 0.4.1.** Cleanest, and it is already the owner's

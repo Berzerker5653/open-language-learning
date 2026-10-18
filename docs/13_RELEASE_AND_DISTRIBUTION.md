@@ -504,6 +504,8 @@ machine: unauthenticated `GET` of the raw catalog returns 200,
 
 | release tag | asset | bytes | sha256 | immutable |
 | --- | --- | --- | --- | --- |
+| `org.openlanguage.ja-jp.reference-0.4.2` | `ja-jp-reference-0.4.2.lpk` | 318,724,406 | `b03cf88671d86de2c4ef481c07b16fcb2725f0dcd61a71df0e2182a63d764a81` | yes |
+| `org.openlanguage.ru-ru.reference-0.4.2` | `ru-ru-reference-0.4.2.lpk` | 318,491,600 | `3b3dc25694b60f899f675982721df23b7c5bb7a3471f0457298ae0e1e38386d4` | yes |
 | `org.openlanguage.ja-jp.reference-0.4.1` | `ja-jp-reference-0.4.1.lpk` | 318,722,747 | `e697ee92f6602c3373ebe5910f0dfbee8e50edcb3e9a25b2890efba5a5964690` | yes |
 | `org.openlanguage.ru-ru.reference-0.4.1` | `ru-ru-reference-0.4.1.lpk` | 318,489,935 | `9eb074fa8d59f508108bc0fa8c698e1ddbd7458648ee2d829edeb36fbcfc1d7a` | yes |
 | `org.openlanguage.ja-jp.reference-0.4.0` (`70ec6830611ef67a2e54b0305c09f38b58798de6`) | `ja-jp-reference-0.4.0.lpk` | 317,429,131 | `f0aa971f30ec88c0f09ca86085d04133616944d9fff6a75345bf31931b713a5f` | no |
@@ -514,8 +516,10 @@ explicitly delegating the tag-and-upload act itself; the command transcript, the
 re-download, and the member-level accounting that shows the served bytes are exactly the
 candidate built from that tree (5,864/5,864 ja members and 5,788/5,788 ru members identical by
 size and content hash) are in `state/evidence/RC-0.4.1-2026-10-15/publication-2026-10-16.md`.
-The 0.4.0 rows stay listed because an installed 0.4.0 store keeps its rollback target, and they
-predate immutable releases, so they remain mutable — the tag ruleset below is what limits them.
+The 0.4.1 rows stay listed for the same reason the 0.4.0 rows do: an installed pack
+store keeps the version it installed, so a 0.4.1 store's rollback target has to remain
+fetchable. The 0.4.1 and 0.4.2 pairs are both immutable under the ruleset below; the two
+0.4.0 rows predate it, so they remain mutable — the ruleset is what limits them now.
 
 The 0.4.1 pair is also the first proven through the **client** transport rather than only the
 CLI: the ignored live-proof test fetched both pinned archives, installed them into a fresh
@@ -523,6 +527,25 @@ store, and each receipt's `sha256` equalled the catalogue pin with `github.com` 
 host (162 s, `state/evidence/RC-0.4.1-2026-10-15/publication-2026-10-16.md` §4). That test had
 pinned literal `0.4.0` versions and now derives them from the shipped catalogue, so the
 assertion follows a release instead of blocking one.
+
+**Published reference-pack provenance (2026-10-18).** The corrected pair is live at
+`0.4.2`: `org.openlanguage.ja-jp.reference-0.4.2` and
+`org.openlanguage.ru-ru.reference-0.4.2` both resolve to commit
+`fb6858d3e42f9325682c080186ad71177028f205`
+(`state/evidence/RC-0.4.2-2026-10-18/upload-transcript.txt`, `state.txt`). The two
+archives are ja-JP `ja-jp-reference-0.4.2.lpk` (318,724,406 bytes, sha256
+`b03cf88671d86de2c4ef481c07b16fcb2725f0dcd61a71df0e2182a63d764a81`) and ru-RU
+`ru-ru-reference-0.4.2.lpk` (318,491,600 bytes, sha256
+`3b3dc25694b60f899f675982721df23b7c5bb7a3471f0457298ae0e1e38386d4`), and the
+accounting against 0.4.1 is exact: 5,865 ja-JP members against 4,902 manifest rows
+(delta 0), 5,789 ru-RU members against 4,856 rows (delta 0), 5,857 ja-JP and 5,779
+ru-RU entries byte-identical to 0.4.1, and every other difference named in
+`diff-041-to-042-ja-JP.txt` / `diff-041-to-042-ru-RU.txt` — including the re-baked
+`то́тчас` clip (`media/ru.lex.narration.totchas.wav`: 80,684 B
+`abefb6819fea…` → 76,844 B `b4b4e4902b35…`). The candidate was built twice from
+`5a0d1f0` byte-identically (`…/REPRODUCIBILITY.txt`). Both releases read back
+non-draft and non-prerelease, and GitHub's own computed `sha256:` digest for each asset
+equals the catalogue pin (`…/upload-transcript.txt`).
 
 **CI on `main` is green again (run `38935030658`, head `06effd0`, 2026-10-16).** `rust`,
 `web`, `schemas`, `security`, `desktop-smoke` and both `platform-compile` legs finished
@@ -533,6 +556,10 @@ failing push runs too, so nothing is hiding there. The two prior push runs (`389
 `curl: (22) … 404 … org.openlanguage.ja-jp.reference-0.4.1/ja-jp-reference-0.4.1.lpk`: the
 restore gate refusing an unpublished pin, exactly as designed. With the 0.4.1 pair live, the
 ordering this section insists on — bake → publish → restore — is satisfied end to end.
+The same gate re-broke the moment the manifests named 0.4.2 while the catalog still
+pinned 0.4.1 — run `39155073665`, `rust` and `desktop-smoke`, by design — and the
+published 0.4.2 pair satisfies it again
+(`state/evidence/RC-0.4.2-2026-10-18/build-rc-0.4.2.sh:10-11`).
 
 **Licensing paper corrected after publication.** The published ja-JP 0.4.0
 archive carries three `licenses.jsonl` records. The tree now carries five: the

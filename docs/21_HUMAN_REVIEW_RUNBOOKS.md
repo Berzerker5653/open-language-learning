@@ -201,17 +201,17 @@ them those rows stay empty (`docs/assessment/ACCESSIBILITY_AUDIT.md:23-25`).
 # Runbook B — Owner hands-on pass (O-06)
 
 Owner gate: `tasks/KANBAN.md`, open-question row **O-06** — "AI cannot perform or
-sign it", the repo went public 2026-10-13 but the pass is still open. Run it against
-the published 0.4.0 artifact; the owner authorized O-01b on 2026-10-16, so run
-it against the published 0.4.1 release instead — that is the state in which the
-18 journey clips sit in an installed pack (Runbook C.2).
+sign it", the repo went public 2026-10-13 but the pass is still open. The owner
+authorized O-01b on 2026-10-16; the pass now runs against the published 0.4.2 release
+(2026-10-18) — that is the state in which the 18 journey clips and the re-baked
+`то́тчас` clip sit in an installed pack (Runbook C.2).
 `state/evidence/O-06-2026-10-10/owner-report.md`. Host: the owner's machine;
 build leg on **GamingPC**.
 
 ## B.0 State to know before clicking
 
-- Catalog pins both reference packs at `0.4.1` (`catalog/packs.json:19,35`,
-  republished 2026-10-16; live-fetch proof of the pin mechanism, taken at `0.4.0`: `cargo test -p lts-desktop --lib -- --ignored both_pinned` →
+- Catalog pins both reference packs at `0.4.2` (`catalog/packs.json:19,35`,
+  republished 2026-10-18; live-fetch proof of the pin mechanism, taken at `0.4.0`: `cargo test -p lts-desktop --lib -- --ignored both_pinned` →
   1 passed in 76.16 s,
   `VERIFIED-ELSEWHERE-2026-10-14`,
   `state/evidence/PACK-DL-ALLOWLIST-001/live-install-2026-10-14.txt`).
@@ -229,8 +229,8 @@ build leg on **GamingPC**.
   `state/evidence/O-01B-2026-10-15/NOTES.md`); the 0.4.1 archives carry all 18
   clips, and the git exception plus the 18 tracked wavs were deleted on
   2026-10-16 (queue item D4), so a 0.4.1 install is complete (Runbook C.2).
-- A fresh-profile install pulls one reference pack: **~319 MB of archive** at 0.4.1
-  (318,722,747 B ja / 318,489,935 B ru), which unpacked to ~336 MiB on the 0.4.0 archive
+- A fresh-profile install pulls one reference pack: **~319 MB of archive** at 0.4.2
+  (318,724,406 B ja / 318,491,600 B ru), which unpacked to ~336 MiB on the 0.4.0 archive
   (`scripts/smoke-desktop.sh:50-51`); ~637 MB if both packs are installed. Time it
   rather than assuming a budget — no install-duration measurement exists in the
   repository, and the 900 s figure in CI is the walkthrough window
@@ -389,7 +389,7 @@ combining mark is correct, not a defect.
 
 No journey asset is tracked any more: the ADR-0032 exception was deleted on
 2026-10-16, so all 18 sit behind the same blanket gitignore rule as the
-~9.7k bulk rows, and are restored from the published 0.4.1 archives:
+~9.7k bulk rows, and are restored from the published 0.4.2 archives:
 
 ```sh
 git ls-files 'languages/*/media/*.wav' | wc -l          # VERIFIED-HERE 2026-10-16 → 0
@@ -424,7 +424,7 @@ verify  ru: summary languages/ru-RU: rows checked=4856 files valid=4856 files re
 All four VERIFIED-HERE 2026-10-16.
 
 Read this correctly: the 18 journey assets no longer ride in the checkout —
-they come from the published 0.4.1 archives like the ~9.7k bulk rows. A bare
+they come from the published 0.4.2 archives like the ~9.7k bulk rows. A bare
 checkout before any restore reports every row missing and exits 1; that is the
 gate working, not a broken pack. On GamingPC and in CI, where the bulk audio
 is already present (or is restored first), the same command reports
@@ -432,7 +432,7 @@ is already present (or is restored first), the same command reports
 (`state/evidence/AUDIO-NORMALIZATION-2026-10-15/NOTES.md:80-82`,
 `VERIFIED-ELSEWHERE-2026-10-15`). The 18 files are no longer tracked by name
 and carry no `.gitignore` exception (ADR-0032's end step ran 2026-10-16,
-queue item D4); they are in the published 0.4.1 archives, so an in-app fresh
+queue item D4); they are in the published 0.4.2 archives, so an in-app fresh
 install hears them too.
 
 ## C.3 Listening questions the audio now raises
@@ -501,10 +501,11 @@ overstating it is the one failure mode this schema exists to catch.
 
 ## What stays blocked after these runbooks
 
-Self-work does not close them: owner time for O-06 (and O-01/O-05's 0.4.1
-decision), a Windows and a macOS machine, one AT user with a Linux desktop,
-and `BLK-REVIEW-CAPACITY` — no qualified reviewer engaged since 2026-10-04
-(ja: `languages/ja-JP/review/REVIEWER_KIT.md:73-75`; ru:
+Self-work does not close them: owner time for O-06 (the O-01/O-05 chain closed with
+the 0.4.2 publication of 2026-10-18, board row `ru-042-republish`), a Windows and a
+macOS machine, one AT user with a Linux desktop, and `BLK-REVIEW-CAPACITY` — no
+qualified reviewer engaged since 2026-10-04 (ja:
+`languages/ja-JP/review/REVIEWER_KIT.md:73-75`; ru:
 `languages/ru-RU/review/REVIEWER_KIT.md:87-89`). Everything
 above is preparation: the environment probe, the machine legs with their real
 outputs, the stale-doc corrections, and a queue a person can actually work.

@@ -87,9 +87,10 @@ the pack, and suppressing it is a licensing decision, not a build decision.
   wrong declaration on purpose, so the check stays covered.
 
 - Promotion stays a deliberate ladder, each step owner-gated: `Info` (now) →
-  `Warning` once no *released* pack trips the check (O-01(a) is settled; what
-  remains is O-01(b), republishing 0.4.1 with the corrected declaration, since
-  the published 0.4.0 archive still carries the old one) →
+  `Warning` once no *released* pack trips the check — a condition now met: O-01(a) was
+  settled 2026-10-13, O-01(b) shipped at 0.4.1 on 2026-10-16, and the live published
+  pair is 0.4.2 (2026-10-18), so no released pack carries the old declaration and the
+  promotion is purely an owner decision →
   `Error` only with a migration path for third-party packs. This ADR must be
   amended, not silently bypassed, at each step.
 - The obligation table is CC-only, so a future pack under, say, an ODbL source
