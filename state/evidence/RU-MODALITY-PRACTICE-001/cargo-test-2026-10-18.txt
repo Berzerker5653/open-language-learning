@@ -1,0 +1,18 @@
+# cargo test -p lts-desktop, 2026-10-18, gamingpc (HEAD 50989f8c + this card's changes)
+
+## full crate suite (cargo test -p lts-desktop)
+running 160 tests
+test result: ok. 159 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 411.30s
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+## the six Russian tests, run by exact name
+test tests::dictation_abstains_rather_than_comparing_in_an_undeclared_language ... ok
+test tests::the_lesson_plan_names_the_runner_for_every_declared_stage ... ok
+test tests::a_speaking_attempt_is_refused_before_any_mastery_write ... ok
+test tests::the_writing_pair_builds_a_typed_cloze_task ... ok
+test tests::comprehension_listening_runs_over_a_russian_pack_sentence ... ok
+test tests::the_speaking_pair_builds_a_guided_unscored_task ... ok
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 154 filtered out; finished in 0.01s

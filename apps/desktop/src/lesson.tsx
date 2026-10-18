@@ -8,6 +8,11 @@ import { PackText } from "@openlang/ui";
  * teaches resolved from the pack. Nothing here re-ranks or re-labels the
  * journey, and nothing here decides what the learner is allowed to do
  * next — that is the progression engine's job (ADR-0022).
+ *
+ * RU-MODALITY-PRACTICE-001: each stage also names the runner the engine
+ * actually has for it (`runner`), and the encounter surfaces that name —
+ * a stage with no runner key is one the pack declared but nothing
+ * executes, and it must read exactly that way, never as practice.
  */
 
 export interface LessonContent {
@@ -23,6 +28,11 @@ export interface LessonStage {
   activity_id: string;
   activity_type: string;
   stage_kind: string;
+  /// RU-MODALITY-PRACTICE-001: the runner that serves this declared
+  /// (type, modality) pair. The key is absent — not null — when the pack
+  /// declared the stage but no runner can serve it: declared, not
+  /// practice. Mirrors `activity_runner` in lib.rs.
+  runner?: string;
   modality: string;
   support_level: number;
   scenario_id?: string | null;
@@ -63,13 +73,6 @@ export function stageForDrill(lesson: LessonPlan | null, modality: string): stri
   return null;
 }
 
-/** Stages that teach rather than test: the encounter and any explained item. */
-export function teachingStages(lesson: LessonPlan): LessonStage[] {
-  return lesson.stages.filter(
-    (stage) => stage.stage_kind === "encounter" || stage.content.some((c) => c.explanation),
-  );
-}
-
 function LessonContentItem({ item }: { item: LessonContent }) {
   return (
     <li className="lesson__item" data-content={item.content_id} data-kind={item.kind}>
@@ -96,15 +99,25 @@ export function LessonEncounter({
   onStart: () => void;
   onScenario: (scenarioId: string) => void;
 }) {
-  const teaching = teachingStages(lesson);
   const conversation = lesson.stages.find((stage) => stage.scenario_id);
+  const declared = lesson.stages.filter((stage) => stage !== conversation);
   return (
     <section aria-label="Lesson" className="lesson" data-testid="lesson-encounter">
       <h1>{lesson.title || "Lesson"}</h1>
       {lesson.summary ? <p className="lesson__summary">{lesson.summary}</p> : null}
-      {teaching.map((stage) => (
-        <section className="lesson__stage" data-stage={stage.activity_id} key={stage.activity_id}>
+      {declared.map((stage) => (
+        <section
+          className="lesson__stage"
+          data-stage={stage.activity_id}
+          data-runner={stage.runner ?? "none"}
+          key={stage.activity_id}
+        >
           <h2>{STAGE_LABEL[stage.stage_kind] ?? "First look"}</h2>
+          <p className="meta lesson__runner">
+            {stage.runner
+              ? `Served by the ${stage.runner} runner.`
+              : "Declared, but not runnable: no runner serves this stage yet."}
+          </p>
           <ul className="lesson__items">
             {stage.content.map((item) => (
               <LessonContentItem item={item} key={item.content_id} />

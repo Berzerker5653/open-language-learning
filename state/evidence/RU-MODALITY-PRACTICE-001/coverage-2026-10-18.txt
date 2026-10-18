@@ -1,0 +1,185 @@
+LANGUAGE PACK COVERAGE MEASUREMENT — FIVE SEPARATE COUNTS
+(the five layers are never collapsed or summed into one coverage number)
+
+POLICY PREAMBLE (docs/assessment/MASTERY_POLICY.yaml)
+  policy_version: 0.2.0   status: provisional-hypotheses
+  eligibility.counted_outcomes: ['scored']
+  eligibility.never_linguistic: ['technical-failure', 'abstained', 'skipped', 'deferred', 'excluded']
+  eligibility.require_score_for_scored: True
+  status is `provisional-hypotheses`: every numeric threshold below is a
+  provisional engineering hypothesis, not a calibrated constant.
+
+ENGINE RUNNABLE TABLE parsed from apps/desktop/src-tauri/src/lib.rs :: fn activity_runner — 13 runner arms:
+  ('encounter', _ (any) => "encounter")
+  ('encounter-listen', _ (any) => "encounter")
+  ('encounter-read', _ (any) => "encounter")
+  ('encounter-watch', _ (any) => "encounter")
+  ('explanation', _ (any) => "encounter")
+  ('guided-discovery', _ (any) => "encounter")
+  ('introduction', _ (any) => "encounter")
+  ('cloze', writing => "cloze")
+  ('recall', writing => "typed")
+  ('retrieval', writing => "typed")
+  ('recall', reading => "recall-meaning")
+  ('retrieval', speaking => "guided-speaking")
+  ('listen-and-choose', listening => "comprehension-listening")
+
+================ PACK: languages/ja-JP ================
+LAYER 1 — DECLARED (what the pack promises)
+  units: 792   activities: 4587   goals: 75
+  activities grouped by (type, modality):
+    cloze                  reading          2
+    cloze                  writing       1446
+    comprehension          listening        1
+    dictation              listening        1
+    encounter              reading          1
+    encounter-read         reading        790
+    fill-blank             writing          1
+    hvpt                   listening        4
+    listen-and-choose      listening      763
+    match                  reading        765
+    recall                 reading          3
+    recall                 writing          6
+    recall-choice          reading         11
+    recall-choice          speaking       754
+    retrieval              reading          2
+    retrieval              speaking        18
+    scenario               interaction     19
+  activities with a missing key (id/type/modality): 0
+  goals by modality (a goal counts once per declared modality):
+    interaction      5
+    listening       69
+    reading         65
+    speaking        71
+    writing         56
+LAYER 2 — RUNNABLE PRACTICE (an engine runner exists for the pair)
+  activities with a runner: 3027
+  activities with no runner (None): 1560
+  runner usage over declared activities:
+    cloze                       1446
+    comprehension-listening      763
+    encounter                    791
+    guided-speaking               18
+    recall-meaning                 3
+    typed                          6
+  GAPS: declared (type, modality) pairs with NO runner:
+    (cloze, reading): 2 activities; e.g. ja.activity.eatv-cloze, ja.activity.shop-cloze
+    (comprehension, listening): 1 activities; e.g. ja.activity.onramp.listen-greet
+    (dictation, listening): 1 activities; e.g. ja.activity.day-dict
+    (fill-blank, writing): 1 activities; e.g. ja.activity.day-write
+    (hvpt, listening): 4 activities; e.g. ja.activity.snd-hvpt1, ja.activity.snd-hvpt2, ja.activity.snd-hvpt3
+    (match, reading): 765 activities; e.g. ja.activity.kana-hira-vk-match, ja.activity.kana-hira-stn-match, ja.activity.kana-hira-hmyrw-match
+    (recall-choice, reading): 11 activities; e.g. ja.activity.kana-hira-vk-recall, ja.activity.kana-hira-stn-recall, ja.activity.kana-hira-hmyrw-recall
+    (recall-choice, speaking): 754 activities; e.g. ja.activity.ga-recall, ja.activity.to-recall, ja.activity.transport-station-tickets-speak
+    (retrieval, reading): 2 activities; e.g. ja.activity.b1-work-notice-rev-retrieve, ja.activity.b2-film-rev-retrieve
+    (scenario, interaction): 19 activities; e.g. ja.activity.onramp.scenario-greet, ja.activity.intro-scenario, ja.activity.food-scenario
+LAYER 3 — SERVABLE PRACTICE (runnable AND the pack can actually serve it)
+  servable activities: 2909
+  non-servable activities: 1678 (an activity may appear under several reasons)
+    missing media row                    118  e.g. ja.activity.food-food-talk-listen, ja.activity.shopping-can-do-listen, ja.activity.ent-feelings-listen
+    no runner (see layer 2)             1560  e.g. ja.activity.onramp.listen-greet, ja.activity.onramp.scenario-greet, ja.activity.kana-hira-vk-match
+LAYER 4 — VALID EVIDENCE (can this activity produce evidence that may count?)
+  evidence over RUNNABLE activities only (counted_outcomes: ['scored']):
+  activities per mastery dimension:
+    comprehension-listening      763
+    production-speaking           18
+    production-writing          1452
+    recall-meaning                 3
+    (none)                       791
+  can produce scored evidence: 2218
+  formative-only (speaking never scored; encounter files nothing): 809
+  no evidence possible (no runner, see layer 2): 1560
+LAYER 5 — REVIEW POSTURE (is the content fit to ship, independent of runnability)
+  sources.jsonl: 9 sources, by license.spdx:
+    Apache-2.0          1
+    CC-BY-4.0           2
+    CC-BY-SA-4.0        3
+    CC0-1.0             1
+    NOASSERTION         1
+    UNLICENSED          1
+  sources whose title mentions AI/model drafting: 2
+    - ai-drafted-kana: AI-drafted kana mnemonics (this pack)
+    - ai-drafted-extension: AI-drafted extension content for the ja-JP full-kit plan (this pack)
+  media/manifest.jsonl: 4902 rows, by provenance:
+    model-output     4902
+  by synthesizer.runtime (where present):
+    qwen3-tts        4902
+  review/: REVIEW_POLICY.yaml present; REVIEWER_KIT.md present
+  human review queues (dated WORKLIST-*.md):
+    WORKLIST-2026-10-05.md: open checkboxes 0, closed 0
+    WORKLIST-2026-10-08.md: open checkboxes 0, closed 0
+    WORKLIST-2026-10-12.md: open checkboxes 0, closed 0
+    WORKLIST-2026-10-14.md: open checkboxes 0, closed 0
+  newest WORKLIST by filename date: WORKLIST-2026-10-14.md — contains no `- [ ]` / `- [x]` checkbox counts
+  review posture is not a coverage count
+
+================ PACK: languages/ru-RU ================
+LAYER 1 — DECLARED (what the pack promises)
+  units: 818   activities: 3248   goals: 60
+  activities grouped by (type, modality):
+    cloze                  writing        783
+    encounter-read         reading       1609
+    listen-and-choose      listening        9
+    recall                 reading         20
+    recall                 writing        818
+    retrieval              speaking         9
+  activities with a missing key (id/type/modality): 0
+  goals by modality (a goal counts once per declared modality):
+    listening       60
+    reading         60
+    speaking        60
+    writing         60
+LAYER 2 — RUNNABLE PRACTICE (an engine runner exists for the pair)
+  activities with a runner: 3248
+  activities with no runner (None): 0
+  runner usage over declared activities:
+    cloze                        783
+    comprehension-listening        9
+    encounter                   1609
+    guided-speaking                9
+    recall-meaning                20
+    typed                        818
+  GAPS: declared (type, modality) pairs with NO runner:
+    (none)
+LAYER 3 — SERVABLE PRACTICE (runnable AND the pack can actually serve it)
+  servable activities: 3248
+  non-servable activities: 0 (an activity may appear under several reasons)
+LAYER 4 — VALID EVIDENCE (can this activity produce evidence that may count?)
+  evidence over RUNNABLE activities only (counted_outcomes: ['scored']):
+  activities per mastery dimension:
+    comprehension-listening        9
+    production-speaking            9
+    production-writing          1601
+    recall-meaning                20
+    (none)                      1609
+  can produce scored evidence: 1630
+  formative-only (speaking never scored; encounter files nothing): 1618
+  no evidence possible (no runner, see layer 2): 0
+LAYER 5 — REVIEW POSTURE (is the content fit to ship, independent of runnability)
+  sources.jsonl: 3 sources, by license.spdx:
+    CC-BY-NC-4.0        1
+    CC0-1.0             2
+  sources whose title mentions AI/model drafting: 2
+    - ru-original: Original AI-drafted Russian pack content created in this conversation; not dictionary-sourced
+    - ru-batch-70ec683-20f994d: ru-RU content batch authored inside this repository by AI drafting between commits 70ec6830611ef67a2
+  media/manifest.jsonl: 4856 rows, by provenance:
+    model-output     4856
+  by synthesizer.runtime (where present):
+    qwen3-tts        4856
+  review/: REVIEW_POLICY.yaml present; REVIEWER_KIT.md present
+  human review queues (dated WORKLIST-*.md):
+    WORKLIST-2026-10-05.md: open checkboxes 0, closed 0
+    WORKLIST-2026-10-12.md: open checkboxes 5, closed 0
+    WORKLIST-2026-10-14.md: open checkboxes 0, closed 0
+  newest WORKLIST by filename date: WORKLIST-2026-10-14.md — contains no `- [ ]` / `- [x]` checkbox counts
+  review posture is not a coverage count
+
+FOOTER — SPEAKING EVIDENCE
+  support.disqualifying_for.production-speaking: ['text-input-substitution', 'response-template']   (MASTERY_POLICY.yaml)
+  A typed substitution NEVER yields valid speaking evidence: the engine
+  refuses to score speaking attempts (`practice_submit_inner` refuses;
+  `speaking_sentence_task_build` is guided-only), and the policy lists
+  `text-input-substitution` as disqualifying support for `production-speaking`.
+  ADR-0017 decision 1 ("Speech feedback in desktop 1.0 is guided-only. No
+  automated pronunciation score, no automatic pronunciation mastery") is at:
+  docs/adr/0017-unfunded-ai-only-posture.md

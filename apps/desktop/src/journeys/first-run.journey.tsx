@@ -44,7 +44,11 @@ describe("first run (journey a)", () => {
     // rather than silently dead until a pack is on the device.
     expect(app.text('[aria-label="Onboarding"] h1')).toBe("Choose a language pack");
     const packRow = [...document.querySelectorAll('[name="pack"]')];
-    expect(packRow).toHaveLength(2);
+    expect(packRow).toHaveLength(3);
+    const ru = packRow.find((input) =>
+      (input.closest("label")?.textContent ?? "").includes("Russian"),
+    );
+    if (!ru) throw new Error("the Russian pack was not offered in the wizard");
     const ja = packRow.find((input) =>
       (input.closest("label")?.textContent ?? "").includes("Japanese"),
     ) as HTMLInputElement | undefined;

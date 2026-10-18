@@ -36,7 +36,7 @@ import type {
 } from "../language";
 import type { DictationResult, DictationSentence } from "../dictation";
 import type { PracticeTaskView } from "../practice";
-import type { LessonPlan } from "../lesson";
+import type { LessonContent, LessonPlan } from "../lesson";
 import type { DisplaySettingsView } from "../stress";
 import type { BuildIdentity, ImportOutcome, ImportPreview } from "../settings";
 import type { RomajiMode } from "../settings";
@@ -50,6 +50,149 @@ const NO_PACK_TOKEN = "no active language pack";
 
 export const JA = "org.openlanguage.ja-jp.reference";
 const EO = "org.openlanguage.eo-demo";
+/** RU-MODALITY-PRACTICE-001: the RU pack the modality journeys run on.
+ * The catalog entry mirrors the shipped pack verbatim: id, display name,
+ * version, and maturity are `languages/ru-RU/manifest.yaml`'s own values
+ * (`org.openlanguage.ru-ru.reference`, "Russian Reference Pack", 0.4.2,
+ * experimental), and the content ids are the real ones from
+ * languages/ru-RU/curriculum/units/818-b2j-style-revision.yaml (unit
+ * `ru.unit.b2.jstyle-03`, goal `ru.goal.b2.style-register`, sentences
+ * `ru.sent.b2.j1`..`j4`). */
+export const RU = "org.openlanguage.ru-ru.reference";
+
+/** The RU sentences the fixture declares: shared by the pack's sentence
+ * list, the lesson fixture, and the `practice_task` answer spaces — one
+ * source for the declared data, as one file is for a real pack. */
+const RU_SENTENCES: DictationSentence[] = [
+  {
+    id: "ru.sent.b2.j1",
+    text: "Посмотрите, пожалуйста, третий абзац и исправьте ошибку.",
+    reading: "Посмотрите, пожалуйста, третий абзац и исправьте ошибку.",
+    gloss: "Please look at the third paragraph and correct the mistake.",
+  },
+  {
+    id: "ru.sent.b2.j2",
+    text: "Подпишите, пожалуйста, последнюю страницу и сверьте надписи.",
+    reading: "Подпишите, пожалуйста, последнюю страницу и сверьте надписи.",
+    gloss: "Please sign the last page and check the annotations.",
+  },
+  {
+    id: "ru.sent.b2.j3",
+    text: "Перед отправкой письма сверьте цифры: опечатка меняет смысл.",
+    reading: "Перед отправкой письма сверьте цифры: опечатка меняет смысл.",
+    gloss: "Before sending the letter, check the figures: a typo changes the meaning.",
+  },
+  {
+    id: "ru.sent.b2.j4",
+    text: "Прежде чем отвечать на письмо, уточните форму обращения.",
+    reading: "Прежде чем отвечать на письмо, уточните форму обращения.",
+    gloss: "Before replying to the letter, check the form of address.",
+  },
+];
+
+/** The resolved content `lesson_plan_at` hands back for the ids one
+ * activity declares (lib.rs: every content ref becomes a LessonContent). */
+const ruLessonContent = (...ids: string[]): LessonContent[] =>
+  ids.map((id) => {
+    const s = RU_SENTENCES.find((x) => x.id === id)!;
+    return {
+      content_id: s.id,
+      kind: "sentence",
+      display: s.text,
+      reading: s.reading,
+      gloss: s.gloss,
+    };
+  });
+
+/** The two lexicon rows unit 818 declares, verbatim from
+ * `languages/ru-RU/lexicon/style4.jsonl` (`ru.lex.style.nadpiska`,
+ * `ru.lex.style.sveryat`). */
+const RU_LEXICON = [
+  {
+    id: "ru.lex.style.nadpiska",
+    surface: "надписка",
+    reading: "надпи́ска",
+    gloss: "inscription, overwriting",
+  },
+  {
+    id: "ru.lex.style.sveryat",
+    surface: "сверять",
+    reading: "сверя́ть",
+    gloss: "to check against, collate",
+  },
+];
+
+/** The two grammar concepts unit 818 declares, verbatim (name and
+ * definition) from `languages/ru-RU/grammar/concepts.jsonl`. */
+const RU_GRAMMAR = [
+  {
+    id: "ru.grammar.b2.imperative-vy-forms",
+    name: "Вы-form commands: -ите imperatives",
+    definition:
+      "Polite requests to one person addressed as Вы use the -ите imperative: посмотрите, подпишите, сверьте, уточните, and with a prefix such as по-: посмотрите. The same verb in the informal ты form ends in -и/-ь (посмотри), which is appropriate only where ты address fits; mixing the forms is a register error, not a grammar error. Add пожалуйста for courtesy; перед отправкой/сверьте belong to written workflow phrasing.",
+  },
+  {
+    id: "ru.grammar.b2.prefixed-noun-forms",
+    name: "Prefixed result nouns: запись, надписка, переписка",
+    definition:
+      "Russian forms result/action nouns from prefixed verbs with the -к suffix: записать → запись (an entry, a record), надписать → надписка (an overwriting, an inscription), переписать → переписка (correspondence). The prefix changes meaning in ways a learner cannot always predict, so each noun needs its own dictionary check; glosses here are working labels.",
+  },
+];
+
+/** How lib.rs's grammar resolve shapes a grammar content ref: the concept's
+ * name as display, its definition as explanation, no reading and no gloss. */
+const ruGrammarContent = (...ids: string[]): LessonContent[] =>
+  RU_GRAMMAR.filter((g) => ids.includes(g.id)).map((g) => ({
+    content_id: g.id,
+    kind: "grammar",
+    display: g.name,
+    explanation: g.definition,
+  }));
+
+/** How it shapes a lexicon ref: surface, reading, and gloss together. */
+const ruLexiconContent = (...ids: string[]): LessonContent[] =>
+  RU_LEXICON.filter((w) => ids.includes(w.id)).map((w) => ({
+    content_id: w.id,
+    kind: "lexicon",
+    display: w.surface,
+    reading: w.reading,
+    gloss: w.gloss,
+  }));
+
+/** The bytes the RU media answers stand in for. The shipped pack declares
+ * these four assets in `languages/ru-RU/media/manifest.jsonl` (one of 4856
+ * rows, every one of them `provenance: model-output`, synthesizer
+ * `qwen3-tts`), but the generated `.wav` files are gitignored — the fixture
+ * answers the row's shape (24 kHz mono PCM WAV base64), not 5.9 seconds of
+ * qwen3-tts output. */
+const RU_MEDIA_WAV_B64 = (() => {
+  const sampleRate = 24000;
+  const samples = 2400;
+  const bytes = 44 + samples * 2;
+  const buf = new ArrayBuffer(bytes);
+  const view = new DataView(buf);
+  const tag = (at: number, text: string) => {
+    for (let i = 0; i < 4; i++) view.setUint8(at + i, text.charCodeAt(i));
+  };
+  tag(0, "RIFF");
+  view.setUint32(4, bytes - 8, true);
+  tag(8, "WAVE");
+  tag(12, "fmt ");
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true);
+  view.setUint16(22, 1, true);
+  view.setUint32(24, sampleRate, true);
+  view.setUint32(28, sampleRate * 2, true);
+  view.setUint16(32, 2, true);
+  view.setUint16(34, 16, true);
+  tag(36, "data");
+  view.setUint32(40, samples * 2, true);
+  for (let i = 0; i < samples; i++) {
+    view.setInt16(44 + i * 2, Math.round(Math.sin(i / 10) * 8000), true);
+  }
+  const bytes8 = new Uint8Array(buf);
+  return btoa(String.fromCharCode(...Array.from(bytes8)));
+})();
 
 type Call = { cmd: string; args: Record<string, unknown> };
 
@@ -109,6 +252,12 @@ interface Pack {
     description: string;
     measure: string | null;
   } | null;
+  /** The authored unit lesson this pack hands `lesson_plan`; null when the
+   * pack's fixture carries none (the word-shaped fallback answer runs). */
+  lesson: LessonPlan | null;
+  /** Pack-declared cloze targets per sentence id, mirrored from the real
+   * pack's `cloze_targets`; the first is the target the typed cloze blanks. */
+  clozeTargets: Record<string, string[]>;
 }
 
 const PACKS: Record<string, Pack> = {
@@ -219,6 +368,8 @@ const PACKS: Record<string, Pack> = {
       description: "Contrastive long vowel: おばさん (aunt) vs おばあさん (grandmother)",
       measure: "voiced-duration-ratio",
     },
+    lesson: null,
+    clozeTargets: {},
   },
   [EO]: {
     id: EO,
@@ -261,6 +412,164 @@ const PACKS: Record<string, Pack> = {
       answer_romaji: "saluton",
     },
     contrast: null,
+    lesson: null,
+    clozeTargets: {},
+  },
+  [RU]: {
+    id: RU,
+    version: "0.4.2",
+    display_name: "Russian Reference Pack",
+    locale: "ru-RU",
+    maturity: "experimental",
+    trust_state: "community",
+    rtl: false,
+    kanji: false,
+    drills: [],
+    words: RU_LEXICON.map((entry) => ({
+      ...entry,
+      // The choice pool lib.rs draws on is the pack's own glosses, never
+      // invented filler; the two unit-818 rows answer for each other.
+      choices: RU_LEXICON.map((x) => x.gloss),
+      answer: RU_LEXICON.indexOf(entry),
+    })),
+    schedule: [
+      {
+        content_id: "ru.sent.b2.j2",
+        modality: "comprehension-listening",
+        reason: "progression",
+        kind: "introduction",
+        est_seconds: 60,
+        goal: "style-register",
+      },
+      {
+        content_id: "ru.sent.b2.j2",
+        modality: "production-writing",
+        reason: "progression",
+        kind: "introduction",
+        est_seconds: 90,
+        goal: "style-register",
+      },
+      {
+        content_id: "ru.sent.b2.j3",
+        modality: "production-speaking",
+        reason: "progression",
+        kind: "introduction",
+        est_seconds: 45,
+        goal: "style-register",
+      },
+      // The review rows carry dimensions the scheduler can actually hold
+      // RU evidence for: production-writing (the pack scores 1,601 writing
+      // stages) and recall-meaning (the 20 recall/reading stages RU
+      // declares). Both have a runner, so both are startable. RU has no
+      // comprehension-reading evidence at all, so that dimension — and the
+      // inert "no practice runner" row it would produce — is a ja-JP fact
+      // (1,560 unrunnable declared activities), not a Russian prop.
+      {
+        content_id: "ru.lex.style.nadpiska",
+        modality: "production-writing",
+        reason: "due-review",
+        kind: "review",
+        est_seconds: 40,
+        goal: "style-register",
+      },
+      {
+        content_id: "ru.lex.style.sveryat",
+        modality: "recall-meaning",
+        reason: "due-review",
+        kind: "review",
+        est_seconds: 30,
+        goal: "style-register",
+      },
+    ],
+    sentences: RU_SENTENCES,
+    writing: {
+      item_id: "ru.lex.style.nadpiska",
+      prompt_text: "Write the word for: inscription, overwriting",
+      answer_reading: "надписка",
+      answer_romaji: "nadpiska",
+    },
+    contrast: null,
+    // The stage set the engine answers for this unit: unit 818's REAL five
+    // (languages/ru-RU/curriculum/units/818-b2j-style-revision.yaml, ids,
+    // types, modalities, and support levels verbatim), each labelled by the
+    // engine's own `stage_kind` and named by its `activity_runner` table
+    // (lib.rs). Every pair this unit declares has a runner — encounter-read
+    // is the presentation pair the shipped RU pack declares 1609 times, and
+    // the engine runs it — so, unlike the earlier fixture, there is no
+    // declared-but-unrunnable stage here to fake.
+    lesson: {
+      unit_id: "ru.unit.b2.jstyle-03",
+      goal_id: "ru.goal.b2.style-register",
+      title: "Повтор: правка и отправка",
+      summary:
+        "посмотрите, сверьте, уточните — отсроченное повторное использование регистровой правки.",
+      stages: [
+        {
+          activity_id: "ru.activity.b2.u818-grammar",
+          activity_type: "encounter-read",
+          stage_kind: "encounter",
+          runner: "encounter",
+          modality: "reading",
+          support_level: 1,
+          content: ruGrammarContent(
+            "ru.grammar.b2.imperative-vy-forms",
+            "ru.grammar.b2.prefixed-noun-forms",
+          ),
+        },
+        {
+          activity_id: "ru.activity.b2.u818-cloze",
+          activity_type: "cloze",
+          stage_kind: "scaffolded",
+          runner: "cloze",
+          modality: "writing",
+          support_level: 1,
+          content: ruLessonContent("ru.sent.b2.j2", "ru.sent.b2.j4"),
+        },
+        {
+          activity_id: "ru.activity.b2.u818-write",
+          activity_type: "recall",
+          stage_kind: "independent",
+          runner: "typed",
+          modality: "writing",
+          support_level: 0,
+          content: [
+            ...ruLessonContent("ru.sent.b2.j1", "ru.sent.b2.j2", "ru.sent.b2.j3", "ru.sent.b2.j4"),
+            ...ruLexiconContent("ru.lex.style.nadpiska", "ru.lex.style.sveryat"),
+          ],
+        },
+        {
+          activity_id: "ru.activity.b2.u818-listen",
+          activity_type: "listen-and-choose",
+          stage_kind: "scaffolded",
+          runner: "comprehension-listening",
+          modality: "listening",
+          support_level: 1,
+          content: ruLessonContent(
+            "ru.sent.b2.j2",
+            "ru.sent.b2.j4",
+            "ru.sent.b2.j1",
+            "ru.sent.b2.j3",
+          ),
+        },
+        {
+          activity_id: "ru.activity.b2.u818-speak",
+          activity_type: "retrieval",
+          stage_kind: "independent",
+          runner: "guided-speaking",
+          modality: "speaking",
+          support_level: 0,
+          content: ruLessonContent(
+            "ru.sent.b2.j2",
+            "ru.sent.b2.j4",
+            "ru.sent.b2.j1",
+            "ru.sent.b2.j3",
+          ),
+        },
+      ],
+    },
+    // The real `cloze_targets` of the real `ru.sent.b2.j2` row; the typed
+    // cloze blanks the first, as the pack declares it.
+    clozeTargets: { "ru.sent.b2.j2": ["Подпишите", "сверьте"] },
   },
 };
 
@@ -474,6 +783,9 @@ export class LearnerEngine {
     const pack = p.active ? PACKS[p.active] : undefined;
     const items: PlannedItem[] = p.schedule.map((s) => {
       const w = pack ? this.word(pack, s.content_id) : undefined;
+      // lib.rs `build_plan_view` fills display info from lexicon AND pack
+      // sentences; the RU fixture's rows are sentences.
+      const sentence = pack && !w ? pack.sentences.find((x) => x.id === s.content_id) : undefined;
       return {
         item_id: `${s.content_id}#${s.modality}`,
         content_id: s.content_id,
@@ -481,8 +793,8 @@ export class LearnerEngine {
         reason: s.reason,
         kind: s.kind,
         est_seconds: s.est_seconds,
-        surface: w?.surface ?? null,
-        gloss: w?.gloss ?? null,
+        surface: w?.surface ?? sentence?.text ?? null,
+        gloss: w?.gloss ?? sentence?.gloss ?? null,
       };
     });
     return {
@@ -707,6 +1019,17 @@ export class LearnerEngine {
         } satisfies AlignerStatus;
       case "lesson_plan": {
         const pack = this.activePack(this.profile(args.profileId));
+        // RU-MODALITY-PRACTICE-001: a pack that authors a unit hands back that
+        // unit's plan verbatim — every stage carrying the runner key the
+        // engine's `activity_runner` computes for its declared pair, and no
+        // runner key (absent, as `skip_serializing_if` drops the engine's
+        // None) only for a pair nothing executes.
+        if (pack.lesson) {
+          const declared = pack.lesson.stages.some((stage) =>
+            stage.content.some((c) => c.content_id === String(args.contentId)),
+          );
+          return declared ? pack.lesson : null;
+        }
         const w = this.word(pack, String(args.contentId));
         if (!w) return null;
         return {
@@ -740,8 +1063,62 @@ export class LearnerEngine {
         const pack = this.activePack(this.profile(args.profileId));
         const drill = pack.drills.find((c) => c.id === String(args.contentId));
         if (drill) return this.drillTask(pack, drill, String(args.modality)).view;
+        const modality = String(args.modality);
+        // RU-MODALITY-PRACTICE-001: the sentence runners, mirroring
+        // `practice_build` — production-speaking is the guided sentence card
+        // (`mode: "guided"`, nothing to submit), production-writing types a
+        // cloze with the pack-declared target blanked, comprehension-
+        // listening hides the transcript and answers in the pack's glosses.
+        // A scored task carries no `mode` key at all, exactly as
+        // `skip_serializing_if` drops the engine's None.
+        const sentence = pack.sentences.find((s) => s.id === String(args.contentId));
+        if (sentence) {
+          if (modality === "production-speaking")
+            return {
+              item_id: `${sentence.id}#production-speaking`,
+              surface: sentence.text,
+              reading: sentence.reading,
+              furigana: null,
+              romaji: null,
+              faded_by_mastery: false,
+              choices: [],
+              typed: false,
+              mode: "guided",
+            } satisfies PracticeTaskView;
+          if (modality === "production-writing") {
+            const target = pack.clozeTargets[sentence.id]?.[0];
+            if (!target) throw "no practice runner for this activity yet";
+            return {
+              item_id: `${sentence.id}#production-writing`,
+              surface: sentence.text.replace(target, "______"),
+              reading: null,
+              furigana: null,
+              romaji: null,
+              faded_by_mastery: false,
+              choices: [],
+              typed: true,
+            } satisfies PracticeTaskView;
+          }
+          if (modality === "comprehension-listening")
+            return {
+              item_id: `${sentence.id}#comprehension-listening`,
+              surface: null,
+              reading: null,
+              furigana: null,
+              romaji: null,
+              faded_by_mastery: false,
+              choices: pack.sentences.map((s) => s.gloss),
+              typed: false,
+            } satisfies PracticeTaskView;
+          // A whitelisted dimension over content it cannot serve stays the
+          // engine's honest refusal, not a stand-in task.
+          throw "no practice runner for this activity yet";
+        }
         const w = this.word(pack, String(args.contentId));
         if (!w) throw new Error(`no such content: ${String(args.contentId)}`);
+        // Speaking over a lexicon word keeps lib.rs `speaking_sentence_task_build`'s
+        // refusal: only a pack sentence is servable.
+        if (modality === "production-speaking") throw "no practice runner for this activity yet";
         return {
           item_id: `${w.id}#${String(args.modality)}`,
           surface: w.surface,
@@ -755,6 +1132,30 @@ export class LearnerEngine {
       case "practice_submit": {
         const p = this.profile(args.profileId);
         const pack = this.activePack(p);
+        const modality = String(args.modality);
+        // RU-MODALITY-PRACTICE-001 / ADR-0017 decision 1: mirrors
+        // `practice_submit_inner` — a speaking attempt is refused before any
+        // task is built, so no evidence or scheduler row can exist, whatever
+        // the caller's modality string claims.
+        if (modality === "production-speaking") throw "speaking attempts are never scored";
+        const contentId = String(args.contentId);
+        const sentence = pack.sentences.find((s) => s.id === contentId);
+        if (sentence && modality === "comprehension-listening") {
+          const choices = pack.sentences.map((s) => s.gloss);
+          const index = Number(args.choiceIndex ?? 0);
+          p.events += 1;
+          return { correct: choices[index] === sentence.gloss, correct_choice: sentence.gloss };
+        }
+        if (sentence && modality === "production-writing") {
+          // Typed grading is exact-match on the trimmed target; the expected
+          // string never travels with the task.
+          const target = pack.clozeTargets[contentId]?.[0] ?? "";
+          p.events += 1;
+          return {
+            correct: String(args.answer ?? "").trim() === target,
+            correct_choice: target,
+          };
+        }
         // A kanji id grades against the other characters' meanings/readings,
         // the same choice pool `kanji_task_build` builds.
         const drill = pack.drills.find((c) => c.id === String(args.contentId));
@@ -844,6 +1245,22 @@ export class LearnerEngine {
       case "dictation_check": {
         const attempt = (args.attempt ?? {}) as Record<string, unknown>;
         const target = String(attempt.target_text ?? "");
+        // RU-MODALITY-PRACTICE-001: mirrors `dictation_check_at` for the
+        // shipped pack — the ASR language now comes from the pack manifest
+        // (`pack_asr_language`, lib.rs), and this manifest's `target_locale:
+        // ru-RU` resolves to "ru", so the check proceeds to the aligner
+        // probe. This machine has no speech aligner, so it abstains BEFORE
+        // any model runs. Russian audio never receives a `matched: false`
+        // verdict (ADR-0017 forbids manufacturing one).
+        if (String(attempt.pack_id ?? "") === RU) {
+          return {
+            matched: null,
+            heard: "",
+            target,
+            abstain_reason: "aligner-unavailable",
+            mode: "guided",
+          } satisfies DictationResult;
+        }
         // Grounded in lib.rs `aligner_probe` + `dictation_check_at`: with the
         // model preference off the check abstains and never answers a verdict.
         if (this.speechModel === "off") {
@@ -863,6 +1280,25 @@ export class LearnerEngine {
           abstain_reason: null,
           mode: "guided",
         } satisfies DictationResult;
+      }
+      case "listening_audio": {
+        // The RU fixture answers exactly as lib.rs `listening_audio_at`
+        // answers for a pack whose media manifest declares the asset: the
+        // shipped pack's media/manifest.jsonl has 4856 rows, including one
+        // for each of `ru.sent.b2.j1`..`j4` — every one `provenance:
+        // model-output`, synthesizer `qwen3-tts` — so the answer is playable
+        // bytes labelled with that provenance. A checkout without the
+        // generated `.wav` bytes (they are gitignored) takes the engine's
+        // miss path instead, which other tests already exercise.
+        const pack = this.activePack(this.profile(args.profileId));
+        if (pack.id === RU && RU_SENTENCES.some((s) => s.id === String(args.contentId))) {
+          return { wav_b64: RU_MEDIA_WAV_B64, source: "model-output" };
+        }
+        // A fixture pack that ships no media keeps the honest answer: the
+        // engine's own miss (lib.rs `MEDIA_MISSING_CODE`). It is thrown as
+        // the bare string Tauri rejects command errors with, so the app's
+        // K-78 idiom parses the token and quotes the engine's sentence.
+        throw "media-asset-missing: This pack does not ship audio for this item, and the app never synthesizes speech, so there is nothing to play.";
       }
       case "profile_export": {
         const p = this.profile(args.profileId);
@@ -1148,4 +1584,20 @@ export function grantMicrophone(): void {
     configurable: true,
     value: FakeAudioContext,
   });
+}
+
+/** Count the playbacks the app actually starts: wraps the media element's
+ * own `play()`, which happy-dom runs for real (it resolves and dispatches
+ * `play`/`playing`). A Play button that never reaches `play()` is a dead
+ * button, and this count says so — the alternative is a learner pressing it
+ * on a broken card and no test noticing. */
+export function trackAudioPlayback(): () => number {
+  let plays = 0;
+  const proto = window.HTMLMediaElement.prototype;
+  const realPlay = proto.play;
+  proto.play = async function play(this: HTMLMediaElement): Promise<void> {
+    plays += 1;
+    return realPlay.call(this);
+  };
+  return () => plays;
 }

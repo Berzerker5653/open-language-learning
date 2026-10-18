@@ -2,10 +2,15 @@
  * UX-003 first lessons: the runnable multiple-choice recall-meaning
  * runner. The UI only sends the chosen index; grading, evidence, and
  * scheduling happen natively (the correct answer never crosses IPC).
+ *
+ * RU-MODALITY-PRACTICE-001 adds one posture the task itself carries:
+ * `mode: "guided"` is formative — speak-along only, never a submit, a
+ * verdict, or a score.
  */
 import { StressText } from "./stress";
 import { Ruby } from "./ruby";
 import { LatinText, PackText, usePackTextAttrs } from "@openlang/ui";
+import type { DictationResult } from "./dictation";
 
 export interface PracticeTaskView {
   item_id: string;
@@ -33,6 +38,12 @@ export interface PracticeTaskView {
     label?: string | null;
     target: boolean;
   }[];
+  /// RU-MODALITY-PRACTICE-001: the scoring posture the runner that built
+  /// this task reports. Absent = scored practice, exactly as before;
+  /// "guided" = formative only — no submit, no correct/incorrect, no
+  /// score (mirrors `PracticeTask::mode` in lib.rs, which skips the key
+  /// when the runner is scored).
+  mode?: "guided";
 }
 
 export interface PracticeRunnerProps {
@@ -65,10 +76,103 @@ export interface PracticeRunnerProps {
   draft?: string;
   onDraft?(value: string): void;
   onCheck?(): void;
+  /// Guided-speaking card only: the formative speak-along affordances.
+  /// The recording belongs to this card; its free-ASR check result is
+  /// shown as an abstention notice, never as a verdict.
+  speakCheck?: DictationResult | null;
+  recording?: boolean;
+  hasAttempt?: boolean;
+  onRecord?(): void;
+  onStop?(): void;
+  onPlayAttempt?(): void;
+}
+
+/**
+ * RU-MODALITY-PRACTICE-001: the formative guided-speaking card. The
+ * engine already decided the posture (`mode: "guided"` on the task);
+ * this view mirrors it — the declared sentence, its reading, and
+ * speak-along affordances only. There is no submit control because a
+ * speaking attempt is refused natively (`practice_submit` answers
+ * "speaking attempts are never scored"), and nothing here renders a
+ * score, a correct/incorrect verdict, or a matched badge
+ * (ADR-0017 decision 1).
+ */
+function speakCheckNotice(result: DictationResult): string {
+  if (result.abstain_reason === "pack-locale-unknown")
+    return "The spoken check abstained: this pack declares no target locale, so the app has no speech-recognition language to compare your recording against. Nothing was judged, and nothing here is scored.";
+  if (result.abstain_reason)
+    return `The spoken check abstained (${result.abstain_reason}). Nothing was judged, and nothing here is scored.`;
+  if (result.heard)
+    return `The check heard: “${result.heard}”. Compare it with the sentence yourself — nothing here is scored.`;
+  return "The spoken check came back with nothing to report. Nothing here is scored.";
 }
 
 export function PracticeRunner(p: PracticeRunnerProps) {
   const packAttrs = usePackTextAttrs();
+  if (p.task.mode === "guided") {
+    return (
+      <section aria-label="Practice" className="practice-guided">
+        {p.routeHeading ? <h1>{p.routeHeading}</h1> : null}
+        <h2>Say the sentence aloud</h2>
+        <p className="prompt" {...packAttrs}>
+          <Ruby surface={p.task.surface ?? ""} furigana={p.task.furigana} />
+        </p>
+        {p.task.reading ? (
+          <p {...packAttrs}>
+            <small>{p.stress ? <StressText text={p.task.reading} /> : p.task.reading}</small>
+          </p>
+        ) : null}
+        {p.audioError ? (
+          <p className="notice">{p.audioError}</p>
+        ) : (
+          <div className="btn-row">
+            <button
+              type="button"
+              className="btn btn--primary"
+              aria-label="Play the model audio"
+              onClick={() => p.onPlayAudio?.()}
+            >
+              ▶ Play the sentence
+            </button>
+            {p.audioSource === "model-output" && (
+              <small className="notice">synthesized voice (model output)</small>
+            )}
+          </div>
+        )}
+        <div role="group" aria-label="Recording" className="btn-row">
+          {p.recording ? (
+            <button type="button" className="btn btn--primary" onClick={() => p.onStop?.()}>
+              Stop
+            </button>
+          ) : (
+            <button type="button" className="btn btn--primary" onClick={() => p.onRecord?.()}>
+              Record yourself
+            </button>
+          )}
+          <button
+            type="button"
+            className="btn btn--quiet"
+            onClick={() => p.onPlayAttempt?.()}
+            disabled={!p.hasAttempt}
+          >
+            Hear your recording
+          </button>
+        </div>
+        <div aria-live="polite">
+          {p.speakCheck ? (
+            <p data-testid="speak-check" className="notice">
+              {speakCheckNotice(p.speakCheck)}
+            </p>
+          ) : null}
+        </div>
+        <p>
+          <small data-testid="guided-mode">
+            Speaking practice is formative: it is not scored, and it never counts toward mastery.
+          </small>
+        </p>
+      </section>
+    );
+  }
 
   return (
     <section aria-label="Practice">

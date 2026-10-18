@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { AppShell, PackText } from "@openlang/ui";
 import { invoke } from "@tauri-apps/api/core";
 import {
@@ -385,6 +385,10 @@ export function App() {
     null,
   );
   const [practiceAudioError, setPracticeAudioError] = useState<string | null>(null);
+  // RU-MODALITY-PRACTICE-001: the free-ASR check for the guided-speaking
+  // card's recording. Formative only: this result feeds that card's
+  // abstention notice, never a verdict, evidence, or mastery.
+  const [practiceSpeakCheck, setPracticeSpeakCheck] = useState<DictationResult | null>(null);
   const [placementItems, setPlacementItems] = useState<
     { assessment_id: string; goal_id: string; content_id: string; modality: string }[]
   >([]);
@@ -860,7 +864,12 @@ export function App() {
     })();
   }, []);
 
-  const inv = detectInvoke();
+  // The bridge is app-wide and installed before the first render, so its
+  // identity must be stable: a fresh closure per render re-fires every effect
+  // that lists `inv` as a dependency, and an effect that resets state on
+  // re-entry (kanji availability) then loops forever for any pack that
+  // answers false — an RU pack, for instance.
+  const inv = useMemo(() => detectInvoke(), []);
   // K-62: one status line driven by what the engine reports, never by a timer
   // the UI invents. Stages are pushed to a module-level witness as well so the
   // headless walkthrough can prove the channel actually delivered them.
@@ -1726,6 +1735,7 @@ export function App() {
     setPracticeGraded(false);
     setPracticeCorrectChoice("");
     setPracticeRevealed(false);
+    setPracticeSpeakCheck(null);
     setPracticeTarget({ contentId: item.content_id, modality: item.modality });
     setLesson(null);
     setLessonSeen(false);
@@ -1757,7 +1767,11 @@ export function App() {
         if (
           item.modality === "comprehension-listening" ||
           item.modality === "phonological-discrimination" ||
-          item.modality === "orthographic-encoding"
+          item.modality === "orthographic-encoding" ||
+          // RU-MODALITY-PRACTICE-001: the guided-speaking card plays the
+          // pack recording of the sentence it shows; the same honest
+          // media miss (K-78) says so when the pack ships none.
+          item.modality === "production-speaking"
         ) {
           try {
             const a = (await inv(
@@ -1842,6 +1856,7 @@ export function App() {
     setPracticeAudioError(null);
     setPracticeDraft("");
     setPracticeRevealed(false);
+    setPracticeSpeakCheck(null);
     if (inv && profileId) {
       try {
         applyPlan((await inv("practice_plan", { profileId, minutes: budget })) as SessionPlan);
@@ -2667,6 +2682,46 @@ export function App() {
     }
   }
 
+  // RU-MODALITY-PRACTICE-001: the guided-speaking card's clip is never
+  // scored — the same posture as the shadowing early-return above, where
+  // a recording belongs to a surface with no scorer. It goes to
+  // `dictation_check` only so the engine's own abstention vocabulary can
+  // answer (missing pack locale, missing model, rejected quality), and
+  // the result lands in state that card alone renders (ADR-0017 decision 1).
+  async function analyzeSpeaking(wav: Uint8Array) {
+    const inv = detectInvoke();
+    const target = practiceTask?.surface ?? "";
+    if (!inv) {
+      setPracticeSpeakCheck({
+        matched: null,
+        heard: "",
+        target,
+        abstain_reason: "aligner-unavailable",
+        mode: "guided",
+      });
+      return;
+    }
+    try {
+      const req = await packAttemptRequest<DictationResult>(inv, selectedPack, "dictation_check", {
+        target_text: target,
+        wav_b64: toB64(wav),
+      });
+      if (!req.ok) {
+        setAudioMsg(req.error);
+        return;
+      }
+      setPracticeSpeakCheck(req.value);
+    } catch {
+      setPracticeSpeakCheck({
+        matched: null,
+        heard: "",
+        target,
+        abstain_reason: "aligner-unavailable",
+        mode: "guided",
+      });
+    }
+  }
+
   async function fetchDictation(offset: number) {
     const inv = detectInvoke();
     if (!inv) return;
@@ -2711,7 +2766,9 @@ export function App() {
     rate: number;
   }
   const captureOwner = useRef(new CaptureOwner<Capture>()).current;
-  const captureRouteRef = useRef<"pronunciation" | "dictation">("pronunciation");
+  const captureRouteRef = useRef<"pronunciation" | "dictation" | "practice-speaking">(
+    "pronunciation",
+  );
 
   function recordAttempt() {
     void (async () => {
@@ -2822,6 +2879,8 @@ export function App() {
     setAttemptUrl(URL.createObjectURL(new Blob([wav], { type: "audio/wav" })));
     if (captureRouteRef.current === "dictation") {
       void analyzeDictation(wav);
+    } else if (captureRouteRef.current === "practice-speaking") {
+      void analyzeSpeaking(wav);
     } else {
       void analyzeWav(wav);
     }
@@ -3457,6 +3516,17 @@ export function App() {
                     ? undefined
                     : () => void revealPracticeReading()
                 }
+                speakCheck={practiceSpeakCheck}
+                recording={recording}
+                hasAttempt={attemptUrl !== null}
+                onRecord={() => {
+                  captureRouteRef.current = "practice-speaking";
+                  recordAttempt();
+                }}
+                onStop={stopAndCheck}
+                onPlayAttempt={() => {
+                  if (attemptUrl) playBlobUrl(attemptUrl, true);
+                }}
               />
             </>
           )}

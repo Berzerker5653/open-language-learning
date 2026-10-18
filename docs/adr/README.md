@@ -50,5 +50,6 @@ Existing:
 - 0033 explicit ledger records for release-path roadmap tasks (`--require-explicit-ledger-records`, now on by default in CI; every required task carries a record) — **Accepted 2026-10-17** (applied 2026-10-16 under D5b)
 - 0034 band-review gates, the SPEECH-007 release edges, and kanji attribution — **Proposed (agent-authored, 2026-10-17)**; it records graph and promotion changes the owner directed on 2026-10-17, and the graph is already on disk while the ADR awaits signature
 - 0035 reconstructing provenance batches after the fact (batch row ids from the tag range; reconstructed records carry the actual retrieval date) — **Proposed (agent-authored, 2026-10-17)**
+- 0036 the engine's activity-runner table is the denominator for runnable practice (one arm per (type, modality); the coverage tool parses lib.rs instead of restating the table) — **Accepted 2026-10-18**
 
 Template: `template.md`.

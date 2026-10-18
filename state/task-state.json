@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-10-17",
+  "updated": "2026-10-18",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -1570,18 +1570,23 @@
     },
     "RU-MODALITY-PRACTICE-001": {
       "task_id": "RU-MODALITY-PRACTICE-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "Russian practice covers the modalities its rubrics claim",
       "activity": "idle",
-      "summary": "Make the listening and speaking modalities the Russian rubrics claim actually runnable offline, with one journey per claimed modality.",
-      "notes": "Opened 2026-10-15 from issue #1 item R13, which stayed unchecked even though ASSESSMENT-RUNNABILITY-001 closed its own acceptance (placement refusal). Measured on this tree: `grep -ho 'type: …' languages/ru-RU/curriculum/units/*.yaml` gives 1,589 encounter-read, 798 recall, 776 cloze, 9 retrieval, 9 listen-and-choose and no speaking activity across 818 units, against 60 listening + 60 speaking rubric records. Speaking scoring is capped by ADR-0017 (guided only) and by the absence of a runtime model, so the offline half is listening practice plus honest abstention elsewhere.",
+      "summary": "Every activity type the Russian pack declares now executes in the engine, the lesson plan names the runner serving each stage, and one offline journey proves one runner per claimed modality with speaking left unscored.",
+      "notes": "Opened 2026-10-15 from issue #1 item R13. The card's grep baseline (1,589 encounter-read, 798 recall, 776 cloze, 9 retrieval, 9 listen-and-choose, no speaking) was superseded by pack v0.4.2: on 2026-10-18 the tool counts 1,609 encounter-read, 818 recall (798 writing + 20 reading), 783 cloze, 9 retrieval/speaking and 9 listen-and-choose = 3,248 declared activities across 818 units. `tools/measure_language_coverage.py` parses the engine's `activity_runner` table rather than grepping pack YAML, so runnable practice is measured rather than asserted: 3,248 declared = 3,248 runnable = 3,248 servable, with the ja-JP control (1,560 unrunnable) in the same run proving the zeros are not a default. The 2026-10-14 line in `docs/assessment/RELEASE_COVERAGE_RU.yaml` that called reading 1,629 / writing 1,601 / listening 9 / speaking 9 RUNNABLE PRACTICE was a category error: those are DECLARED modality counts. Reading stayed on encounter presentation instead of a fake cloze because `stage_kind` already classified `encounter-read` that way, so 1,609 servable activities were merely unlabelled; `match`, `game`, `pattern-transform` and the assessment types still have no runner and still report as declared-but-unrunnable. Speaking is guided-only per ADR-0017: the engine refuses a typed substitution with `no practice runner for this activity yet`, no mastery record is written, no verdict is shown, and dictation abstains (`aligner-unavailable` offline) with the ASR language taken from the pack manifest instead of the hardcoded `ja` that manufactured `matched: false`.",
       "dependencies": [
         "ASSESSMENT-RUNNABILITY-001",
         "RU-GOAL-PREREQ-001"
       ],
-      "evidence": [],
-      "updated": "2026-10-15"
+      "evidence": [
+        "state/evidence/RU-MODALITY-PRACTICE-001/ACCEPTANCE.md",
+        "state/evidence/RU-MODALITY-PRACTICE-001/cargo-test-2026-10-18.txt",
+        "state/evidence/RU-MODALITY-PRACTICE-001/coverage-2026-10-18.txt",
+        "docs/assessment/RELEASE_COVERAGE_RU.yaml"
+      ],
+      "updated": "2026-10-18"
     },
     "UPPERBAND-TASK-JOURNEYS-001": {
       "task_id": "UPPERBAND-TASK-JOURNEYS-001",

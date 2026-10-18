@@ -122,6 +122,10 @@ export const RUNNABLE_MODALITIES: Record<string, string> = {
   "orthography-recognition": "Recognise the script",
   "production-writing": "Write it",
   "orthographic-encoding": "Type what you hear",
+  // RU-MODALITY-PRACTICE-001: mirrors the gate's speaking pass — the
+  // guided-speaking runner is startable, but formative only: its card
+  // offers speak-along, never a score, submit, or mastery.
+  "production-speaking": "Say it aloud",
 };
 
 export interface WorldEnvironment {

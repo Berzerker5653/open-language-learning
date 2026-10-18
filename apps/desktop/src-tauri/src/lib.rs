@@ -4738,6 +4738,20 @@ fn dictation_check_at(data: &Path, attempt: DictationAttempt) -> Result<Dictatio
         abstain_reason: Some(reason),
         mode: "guided",
     };
+    // RU-MODALITY-PRACTICE-001: the recognizer language comes from the
+    // installed pack, never a hardcoded locale. Comparing a Russian
+    // learner's audio against a Japanese transcript manufactures
+    // `matched: Some(false)` — a false verdict about the learner, which
+    // ADR-0017 forbids. A pack that declares no usable ASR locale
+    // abstains before the sidecar ever runs.
+    let packs_root = data.join("packs");
+    let version = lts_langpack::archive::current_version(&attempt.pack_id, &packs_root)
+        .ok_or("pack not installed")?;
+    let pack_dir = packs_root.join(&attempt.pack_id).join(&version);
+    let asr_language = match pack_asr_language(&pack_dir) {
+        Ok(lang) => lang,
+        Err(_) => return Ok(abstain("pack-locale-unknown".into(), String::new())),
+    };
     // Dictation needs the recognizer output rather than the aligner object, so it
     // keeps the resolved paths (ADR-0019: one probe, one priority, one vocabulary
     // of reasons).
@@ -4762,7 +4776,7 @@ fn dictation_check_at(data: &Path, attempt: DictationAttempt) -> Result<Dictatio
     let tokens = match lts_speech_runtime::alignment::run_whisper_words(
         &src.binary,
         &src.model,
-        "ja",
+        &asr_language,
         &audio,
         None,
     ) {
@@ -5148,6 +5162,12 @@ struct PracticeTask {
     /// fixed frame + variable parts). Display-only: grading, evidence,
     /// and scheduling never consult it.
     slots: Vec<PhraseSlotView>,
+    /// RU-MODALITY-PRACTICE-001: the scoring posture of the runner that
+    /// built this task. Absent = scored practice (the attempt may become
+    /// mastery evidence); `Some("guided")` = formative only: no score and
+    /// no submit path.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    mode: Option<&'static str>,
 }
 
 #[derive(Serialize, PartialEq, Debug)]
@@ -5265,21 +5285,32 @@ fn practice_build(
 ) -> Result<(PracticeTask, String, Vec<String>), String> {
     checked_unit(content_id)?;
     let dim = parse_dimension(modality).ok_or("unknown modality")?;
-    if !matches!(
-        dim,
-        lts_domain::ActivityModality::RecallMeaning
-            | lts_domain::ActivityModality::ComprehensionListening
-            | lts_domain::ActivityModality::OrthographyRecognition
-            | lts_domain::ActivityModality::PhonologicalDiscrimination
-            | lts_domain::ActivityModality::ProductionWriting
-            | lts_domain::ActivityModality::OrthographicEncoding
-    ) {
+    // RU-MODALITY-PRACTICE-001: production-speaking rides exactly one
+    // runner (guided-speaking over a pack sentence, below). It passes the
+    // gate so that runner's sentence check can answer honestly; a speaking
+    // drill over anything else still gets the "no runner" refusal, and no
+    // speaking attempt is ever scored (`practice_submit_inner` rejects it).
+    let speaking = dim == lts_domain::ActivityModality::ProductionSpeaking;
+    if !speaking
+        && !matches!(
+            dim,
+            lts_domain::ActivityModality::RecallMeaning
+                | lts_domain::ActivityModality::ComprehensionListening
+                | lts_domain::ActivityModality::OrthographyRecognition
+                | lts_domain::ActivityModality::PhonologicalDiscrimination
+                | lts_domain::ActivityModality::ProductionWriting
+                | lts_domain::ActivityModality::OrthographicEncoding
+        )
+    {
         return Err("no practice runner for this activity yet".to_string());
     }
     let active = packs::active_pack(data, profile_id)?;
     let pack_id = active.first().ok_or("no active language pack")?;
     let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
         .ok_or("pack not installed")?;
+    if speaking {
+        return speaking_sentence_task_build(data, pack_id, &version, content_id);
+    }
     // K-12: typed runners. Cloze blanks a pack-declared target in the
     // sentence (production-writing: the target is never visible);
     // dictation hides the text entirely and grades the transcription
@@ -5374,6 +5405,7 @@ fn practice_build(
         choices,
         slots,
         typed: false,
+        mode: None,
         status: entry.status.clone(),
     };
     let correct = entry.gloss.clone();
@@ -5433,9 +5465,51 @@ fn listening_sentence_task_build(
         choices,
         slots: Vec::new(),
         typed: false,
+        mode: None,
         status: entry.status.clone(),
     };
     Ok((task, gloss, Vec::new()))
+}
+
+/// RU-MODALITY-PRACTICE-001 guided-speaking runner: the learner says a
+/// pack-declared sentence aloud; the app shows the declared text and its
+/// declared reading. The utterance is never scored — ADR-0017 decision 1
+/// keeps production ASR out of mastery, and `practice_submit_inner`
+/// refuses speaking attempts outright — so the task carries
+/// `mode: "guided"` (formative: no score, no submit) and no choices.
+/// Only a pack SENTENCE is servable; a speaking drill over a lexicon word
+/// keeps the honest "no practice runner" answer instead of inventing one.
+fn speaking_sentence_task_build(
+    data: &Path,
+    pack_id: &str,
+    version: &str,
+    content_id: &str,
+) -> Result<(PracticeTask, String, Vec<String>), String> {
+    let entry = sentence_entries(data, pack_id, version)?
+        .into_iter()
+        .find(|e| e.id == content_id)
+        .ok_or("no practice runner for this activity yet")?;
+    let item_id = format!(
+        "{content_id}#{}",
+        dimension_kebab(lts_domain::ActivityModality::ProductionSpeaking)
+    );
+    let task = PracticeTask {
+        item_id,
+        surface: Some(entry.text.clone()),
+        reading: entry.reading.clone(),
+        furigana: None,
+        romaji: None,
+        faded_by_mastery: false,
+        choices: Vec::new(),
+        typed: false,
+        mode: Some("guided"),
+        status: entry.status.clone(),
+        slots: Vec::new(),
+    };
+    // Guided mode is never graded; the second tuple slot only keeps the
+    // shared builder shape, and the submit path is refused before any
+    // caller reads it.
+    Ok((task, entry.text, Vec::new()))
 }
 
 /// K-04 script-instruction runner: symbol<->reading choice task from
@@ -5489,6 +5563,7 @@ fn orth_task_build(
         faded_by_mastery: false,
         choices,
         typed: false,
+        mode: None,
         status: entry.status.clone(),
         slots: Vec::new(),
     };
@@ -5548,6 +5623,7 @@ fn kanji_task_build(
         faded_by_mastery: false,
         choices,
         typed: false,
+        mode: None,
         status: entry.status.clone(),
         slots: Vec::new(),
     };
@@ -5653,6 +5729,7 @@ fn contrast_task_build(
         faded_by_mastery: false,
         choices,
         typed: false,
+        mode: None,
         status: entry.status.clone(),
         slots: Vec::new(),
     };
@@ -5826,6 +5903,7 @@ fn cloze_task_build(
         faded_by_mastery: false,
         choices: Vec::new(),
         typed: true,
+        mode: None,
         status: entry.status.clone(),
         slots: Vec::new(),
     };
@@ -5854,6 +5932,7 @@ fn dictation_task_build(
         faded_by_mastery: false,
         choices: Vec::new(),
         typed: true,
+        mode: None,
         status: entry.status,
         slots: Vec::new(),
     };
@@ -6548,6 +6627,21 @@ fn practice_submit_inner(
         // mastery evidence, whatever a crafted task id claims.
         return Err("mined words never produce mastery evidence".into());
     }
+    // RU-MODALITY-PRACTICE-001 / ADR-0017 decision 1: production-speaking
+    // has exactly one scored ASR path in production (free dictation), and
+    // even that lands only as a guided check — it mints no mastery event.
+    // A typed or clicked substitution can never be speaking evidence:
+    // docs/assessment/MASTERY_POLICY.yaml:74 lists text-input-substitution
+    // and response-template as disqualifying support for
+    // production-speaking. So a speaking attempt is refused outright —
+    // before its task is built and before any evidence or scheduler row
+    // exists — whatever the caller's modality string claims.
+    if matches!(
+        parse_dimension(modality),
+        Some(lts_domain::ActivityModality::ProductionSpeaking)
+    ) {
+        return Err("speaking attempts are never scored".into());
+    }
     let (task, correct_choice, reveals) =
         practice_build(data, profile_id, content_id, modality, opts.reveal_reading)?;
     let correct = if task.typed {
@@ -6796,6 +6890,12 @@ struct LessonStage {
     stage_kind: &'static str,
     modality: String,
     support_level: u32,
+    /// RU-MODALITY-PRACTICE-001: the runner the engine actually has for
+    /// this declared pair; absent means the pack declares it and nothing
+    /// executes it yet. The planner offers a stage as executable exactly
+    /// where this names a runner.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    runner: Option<&'static str>,
     #[serde(skip_serializing_if = "Option::is_none")]
     scenario_id: Option<String>,
     content: Vec<LessonContent>,
@@ -6829,6 +6929,47 @@ fn stage_kind(activity_type: &str, support_level: u32) -> &'static str {
             }
         }
         _ => "practice",
+    }
+}
+
+/// RU-MODALITY-PRACTICE-001: the runner the engine actually has for one
+/// declared (`type`, `modality`) pair, or `None` when the pack declares
+/// something nothing executes yet. Same honesty as `stage_kind`: unknown
+/// pairs answer `None`, never a guessed runner — the planner shows a
+/// declared stage without a runner as declared-but-unavailable.
+///
+/// The presentation arm mirrors `stage_kind`'s encounter list plus the names
+/// other packs use for that role. The RU pack's 1609 presentation stages are
+/// all `encounter-read`, and `stage_kind` already calls them encounter stages:
+/// labelling them "no runner serves this stage" while the lesson renders them
+/// as encounter would be a measurement lie in both directions.
+///
+/// `None` is what `tools/measure_language_coverage.py` counts as
+/// "declared, but not runnable practice", so the published coverage numbers
+/// and this table cannot drift apart.
+fn activity_runner(activity_type: &str, modality: &str) -> Option<&'static str> {
+    match (activity_type, modality) {
+        // Encounter stages: the pack's own text, audio, and explanation.
+        (
+            "introduction" | "explanation" | "guided-discovery" | "encounter" | "encounter-read"
+            | "encounter-listen" | "encounter-watch",
+            _,
+        ) => Some("encounter"),
+        ("cloze", "writing") => Some("cloze"),
+        ("recall", "writing") | ("retrieval", "writing") => Some("typed"),
+        ("recall", "reading") => Some("recall-meaning"),
+        // Speaking rides exactly one runner, and that runner is formative: it
+        // builds a card, never a verdict (ADR-0017 decision 1,
+        // `speaking_sentence_task_build`).
+        ("retrieval", "speaking") => Some("guided-speaking"),
+        ("listen-and-choose", "listening") => Some("comprehension-listening"),
+        // Everything else a pack may declare — `match`, `game`,
+        // `pattern-transform`, `character-writing`, `listen-and-draw`,
+        // `situational-dialogue`, `roleplay-scenario`, `story-reading`,
+        // bare `reading`/`listening`, the two `listening-discrimination-*`
+        // types, `timed-assessment`, `diagnostic-test`,
+        // `placement-test` — is declared but unrunnable.
+        _ => None,
     }
 }
 
@@ -6915,6 +7056,7 @@ fn lesson_plan_at(
                 activity_id: a.id.clone(),
                 activity_type: a.activity_type.clone(),
                 stage_kind: stage_kind(&a.activity_type, a.support_level),
+                runner: activity_runner(&a.activity_type, &a.modality),
                 modality: a.modality.clone(),
                 support_level: a.support_level,
                 scenario_id: a.scenario_id.clone(),
@@ -13605,5 +13747,330 @@ activities:
             writing_tasks(data, id, "9.9.9").is_err(),
             "a failed parse caches nothing"
         );
+    }
+
+    /// RU-MODALITY-PRACTICE-001: an RU-shaped fixture pack — Cyrillic
+    /// sentences with `reading` == `text` and a distinct gloss each, one
+    /// `media/manifest.jsonl` row per sentence (the `.wav` bytes are
+    /// gitignored, so the manifest row is the contract for tests), and one
+    /// unit declaring every pair this card makes runnable plus one pair
+    /// that stays declared-but-unrunnable (`match` + `reading`).
+    /// The manifest deliberately declares NO `target_locale`:
+    /// `pack_asr_language` must fail on this pack, so the dictation
+    /// abstention test is honest — a declared RU locale would resolve and
+    /// the run would prove nothing. (This pack format carries the locale
+    /// in `manifest.yaml`; there is no `manifest.json` languages block in
+    /// this tree for it to declare.)
+    fn install_ru_shaped_pack(data: &Path) -> (String, ProfileInfo) {
+        let pack = "org.openlanguage.ru-fixture";
+        let version = "0.1.0";
+        let root = data.join("packs").join(pack).join(version);
+        std::fs::create_dir_all(root.join("curriculum/units")).unwrap();
+        std::fs::create_dir_all(root.join("lexicon")).unwrap();
+        std::fs::create_dir_all(root.join("sentences")).unwrap();
+        std::fs::create_dir_all(root.join("grammar")).unwrap();
+        std::fs::create_dir_all(root.join("media")).unwrap();
+        std::fs::write(data.join("packs").join(pack).join("current"), version).unwrap();
+        // No `target_locale` line, on purpose: see the doc comment above.
+        std::fs::write(
+            root.join("manifest.yaml"),
+            "schema_version: \"0.2\"\n\
+             pack_id: \"org.openlanguage.ru-fixture\"\n\
+             display_name: \"RU-Shaped Fixture\"\n\
+             version: \"0.1.0\"\n\
+             source_locales: [\"en-US\"]\n\
+             maturity: \"experimental\"\n",
+        )
+        .unwrap();
+        std::fs::write(
+            root.join("curriculum/goals.yaml"),
+            "goals:\n\
+             - id: ru.goal.fixture.greet\n  band: on-ramp\n  description: Greet people.\n  modalities: [reading, listening, speaking, writing]\n",
+        )
+        .unwrap();
+        std::fs::write(
+            root.join("curriculum/units/001-first.yaml"),
+            r#"id: "ru.unit.fixture.first"
+goal_id: "ru.goal.fixture.greet"
+title: "Первые слова"
+summary: "A greeting unit in the shape the RU pack declares."
+activities:
+  - id: "ru.activity.fixture.encounter"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 3
+    content_refs: ["ru.sent.fixture.privet-mir"]
+  - id: "ru.activity.fixture.listen"
+    type: "listen-and-choose"
+    modality: "listening"
+    support_level: 0
+    content_refs: ["ru.sent.fixture.privet-mir"]
+  - id: "ru.activity.fixture.cloze"
+    type: "cloze"
+    modality: "writing"
+    support_level: 0
+    content_refs: ["ru.sent.fixture.kak-dela"]
+  - id: "ru.activity.fixture.speak"
+    type: "retrieval"
+    modality: "speaking"
+    support_level: 2
+    content_refs: ["ru.sent.fixture.spasibo"]
+  - id: "ru.activity.fixture.match"
+    type: "match"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["ru.lex.fixture.horosho"]
+"#,
+        )
+        .unwrap();
+        // lesson_plan_at reads every content kind; an empty concepts file
+        // is the pack's honest "I declare none".
+        std::fs::write(root.join("grammar/concepts.jsonl"), "").unwrap();
+        // Glosses are Cyrillic so the choice distractors are too: the
+        // engine shows declared data, it never translates or compares
+        // languages itself.
+        std::fs::write(
+            root.join("sentences/sentences.jsonl"),
+            "{\"id\":\"ru.sent.fixture.privet-mir\",\"text\":\"Привет, мир!\",\"reading\":\"Привет, мир!\",\"gloss\":\"Приветствие миру\",\"cloze_targets\":[\"Привет\"],\"status\":\"approved\"}\n\
+             {\"id\":\"ru.sent.fixture.kak-dela\",\"text\":\"Как дела?\",\"reading\":\"Как дела?\",\"gloss\":\"Вопрос о делах\",\"cloze_targets\":[\"Как\"],\"status\":\"approved\"}\n\
+             {\"id\":\"ru.sent.fixture.spasibo\",\"text\":\"Спасибо.\",\"reading\":\"Спасибо.\",\"gloss\":\"Благодарность\",\"cloze_targets\":[\"Спасибо\"],\"status\":\"approved\"}\n\
+             {\"id\":\"ru.sent.fixture.pozhaluysta\",\"text\":\"Пожалуйста.\",\"reading\":\"Пожалуйста.\",\"gloss\":\"Вежливый ответ\",\"cloze_targets\":[\"Пожалуйста\"],\"status\":\"approved\"}\n",
+        )
+        .unwrap();
+        std::fs::write(
+            root.join("lexicon/entries.jsonl"),
+            "{\"id\":\"ru.lex.fixture.horosho\",\"forms\":[{\"text\":\"хорошо\",\"is_primary\":true}],\"glosses\":{\"en\":[\"good\"]},\"status\":\"approved\"}\n",
+        )
+        .unwrap();
+        // ADR-0016: one manifest row per media id; the row, not a file,
+        // is what the engine trusts.
+        let mut media = String::new();
+        for id in [
+            "ru.sent.fixture.privet-mir",
+            "ru.sent.fixture.kak-dela",
+            "ru.sent.fixture.spasibo",
+            "ru.sent.fixture.pozhaluysta",
+        ] {
+            media.push_str(&format!(
+                "{{\"id\":\"{id}\",\"file\":\"media/{id}.wav\",\"provenance\":\"curated\"}}\n"
+            ));
+        }
+        std::fs::write(root.join("media/manifest.jsonl"), media).unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        store
+            .record_installation(&lts_storage::PackInstallation {
+                pack_id: pack.into(),
+                version: version.into(),
+                installed_at: rfc3339_utc(now_secs()),
+                trust_state: "community".into(),
+            })
+            .unwrap();
+        let profile = create_local_profile(data, "Katya").unwrap();
+        store.set_active_pack(&profile.id, pack, version).unwrap();
+        (pack.to_string(), profile)
+    }
+
+    /// K-92 (RU-MODALITY-PRACTICE-001): comprehension-listening already
+    /// runs over an RU pack sentence — the answer space is the pack's own
+    /// glosses, and the transcript stays hidden.
+    #[test]
+    fn comprehension_listening_runs_over_a_russian_pack_sentence() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        let task = practice_task_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.privet-mir",
+            "comprehension-listening",
+            false,
+        )
+        .unwrap();
+        assert_eq!(
+            task.item_id,
+            "ru.sent.fixture.privet-mir#comprehension-listening"
+        );
+        // A visible transcript disqualifies this dimension's evidence.
+        assert!(task.surface.is_none());
+        assert!(task.reading.is_none());
+        assert_eq!(
+            task.choices.len(),
+            4,
+            "correct gloss plus three distractors"
+        );
+        let distinct: std::collections::HashSet<&String> = task.choices.iter().collect();
+        assert_eq!(distinct.len(), 4, "the distractors are distinct");
+        assert!(task.choices.iter().any(|c| c == "Приветствие миру"));
+        assert!(
+            task.choices
+                .iter()
+                .filter(|c| c.as_str() != "Приветствие миру")
+                .all(|g| g.chars().any(|ch| ('а'..='я').contains(&ch))),
+            "distractors are the pack's own Cyrillic glosses: {:?}",
+            task.choices
+        );
+    }
+
+    /// K-93 (RU-MODALITY-PRACTICE-001): the `cloze` + `writing` pair the
+    /// RU pack declares builds the typed cloze task.
+    #[test]
+    fn the_writing_pair_builds_a_typed_cloze_task() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        let task = practice_task_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.kak-dela",
+            "production-writing",
+            false,
+        )
+        .expect("the writing pair is runnable");
+        assert!(task.typed, "a typed runner, not choices");
+        assert!(task.choices.is_empty());
+        assert_eq!(task.surface.as_deref(), Some("______ дела?"));
+        assert_eq!(task.mode, None, "a scored runner carries no guided mode");
+    }
+
+    /// K-94 (RU-MODALITY-PRACTICE-001): the `retrieval` + `speaking` pair
+    /// over a pack sentence builds the guided-speaking task — formative,
+    /// no choices, nothing to submit a score for. A speaking drill over a
+    /// lexicon WORD stays an honest refusal.
+    #[test]
+    fn the_speaking_pair_builds_a_guided_unscored_task() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        let task = practice_task_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.spasibo",
+            "production-speaking",
+            false,
+        )
+        .expect("a pack sentence carries the guided-speaking runner");
+        assert_eq!(task.item_id, "ru.sent.fixture.spasibo#production-speaking");
+        assert_eq!(task.mode, Some("guided"), "formative: no score, no submit");
+        assert!(task.choices.is_empty());
+        assert!(!task.typed);
+        assert_eq!(task.surface.as_deref(), Some("Спасибо."));
+        assert_eq!(task.reading.as_deref(), Some("Спасибо."));
+        // Not a sentence, no runner: the honest refusal, not a guess.
+        assert_eq!(
+            practice_task_at(
+                data,
+                &p.id,
+                "ru.lex.fixture.horosho",
+                "production-speaking",
+                false
+            )
+            .err(),
+            Some("no practice runner for this activity yet".to_string())
+        );
+    }
+
+    /// K-95 (RU-MODALITY-PRACTICE-001): the ADR-0017 guard. A speaking
+    /// attempt is refused before any mastery write, and the refusal
+    /// changes nothing in the learner's records.
+    #[test]
+    fn a_speaking_attempt_is_refused_before_any_mastery_write() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let before = (
+            store.evidence_count(&p.id).unwrap(),
+            store.scheduler_state(&p.id).unwrap().len(),
+        );
+        // `PracticeGrade` is not Debug: compare the error through `err()`.
+        let err = practice_submit_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.spasibo",
+            "production-speaking",
+            0,
+            None,
+            false,
+        )
+        .err();
+        assert_eq!(
+            err,
+            Some("speaking attempts are never scored".to_string()),
+            "speaking evidence can never be minted by a typed submit"
+        );
+        let after = (
+            store.evidence_count(&p.id).unwrap(),
+            store.scheduler_state(&p.id).unwrap().len(),
+        );
+        assert_eq!(
+            before, after,
+            "the refusal writes no evidence and no scheduler row"
+        );
+    }
+
+    /// K-96 (RU-MODALITY-PRACTICE-001): the planner names the runner for
+    /// every declared stage — including `None` for a pair the pack
+    /// declares but nothing executes.
+    #[test]
+    fn the_lesson_plan_names_the_runner_for_every_declared_stage() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        let plan = lesson_plan_at(data, &p.id, "ru.sent.fixture.privet-mir")
+            .unwrap()
+            .expect("the fixture unit declares this sentence");
+        let runners: Vec<Option<&str>> = plan.stages.iter().map(|s| s.runner).collect();
+        assert_eq!(
+            runners,
+            vec![
+                Some("encounter"),
+                Some("comprehension-listening"),
+                Some("cloze"),
+                Some("guided-speaking"),
+                // `match` + `reading`: declared, nothing executes it yet.
+                None,
+            ],
+            "one runner per stage exactly as the engine can run it",
+        );
+        // The rest of the table, at the pair level.
+        assert_eq!(activity_runner("recall", "writing"), Some("typed"));
+        assert_eq!(activity_runner("retrieval", "writing"), Some("typed"));
+        assert_eq!(activity_runner("recall", "reading"), Some("recall-meaning"));
+        assert_eq!(
+            activity_runner("explanation", "listening"),
+            Some("encounter")
+        );
+        assert_eq!(
+            activity_runner("encounter-read", "reading"),
+            Some("encounter"),
+            "the presentation pair the real RU pack declares 1609 times",
+        );
+        assert_eq!(activity_runner("story-reading", "reading"), None);
+        assert_eq!(activity_runner("timed-assessment", "writing"), None);
+    }
+
+    /// K-97 (RU-MODALITY-PRACTICE-001): dictation never runs a recognizer
+    /// in a language the pack did not declare. The RU-shaped fixture
+    /// declares no ASR locale, so the answer is the abstention vocabulary
+    /// — never a false `matched: Some(false)` about the learner.
+    #[test]
+    fn dictation_abstains_rather_than_comparing_in_an_undeclared_language() {
+        use base64::Engine;
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (pack, _p) = install_ru_shaped_pack(data);
+        let res = dictation_check_at(
+            data,
+            DictationAttempt {
+                pack_id: pack,
+                target_text: "Спасибо.".into(),
+                wav_b64: base64::engine::general_purpose::STANDARD.encode(b"not-a-wav"),
+            },
+        )
+        .unwrap();
+        assert_eq!(res.abstain_reason.as_deref(), Some("pack-locale-unknown"));
+        assert_eq!(res.matched, None, "no verdict about the learner at all");
+        assert!(res.heard.is_empty(), "nothing was recognized");
+        assert_eq!(res.mode, "guided");
     }
 }

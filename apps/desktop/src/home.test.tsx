@@ -194,6 +194,7 @@ describe("home", () => {
       "orthography-recognition",
       "production-writing",
       "orthographic-encoding",
+      "production-speaking",
     ]) {
       const html = render(modality);
       expect(html).toContain('class="plan-item"');

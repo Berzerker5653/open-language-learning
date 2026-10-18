@@ -3,7 +3,7 @@
 // Presentation only; what is allowed next stays the engine's decision.
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
-import { LessonEncounter, stageForDrill, teachingStages, type LessonPlan } from "./lesson";
+import { LessonEncounter, stageForDrill, type LessonPlan } from "./lesson";
 
 const lesson: LessonPlan = {
   unit_id: "ja.unit.demo.greetings",
@@ -15,6 +15,7 @@ const lesson: LessonPlan = {
       activity_id: "ja.activity.demo.encounter-greet",
       activity_type: "encounter-read",
       stage_kind: "encounter",
+      runner: "encounter",
       modality: "comprehension-reading",
       support_level: 3,
       content: [
@@ -46,6 +47,7 @@ const lesson: LessonPlan = {
       activity_id: "ja.activity.demo.recall-greet",
       activity_type: "recall",
       stage_kind: "independent",
+      runner: "recall-meaning",
       modality: "comprehension-reading",
       support_level: 0,
       content: [
@@ -61,6 +63,7 @@ const lesson: LessonPlan = {
       activity_id: "ja.activity.demo.cloze-greet",
       activity_type: "cloze",
       stage_kind: "scaffolded",
+      runner: "cloze",
       modality: "production-writing",
       support_level: 2,
       content: [],
@@ -93,15 +96,6 @@ describe("stageForDrill", () => {
   });
 });
 
-describe("teachingStages", () => {
-  it("keeps the encounter and explained stages, drops the drills", () => {
-    expect(teachingStages(lesson).map((s) => s.activity_id)).toEqual([
-      "ja.activity.demo.encounter-greet",
-      "ja.activity.demo.grammar-greet",
-    ]);
-  });
-});
-
 describe("LessonEncounter", () => {
   const html = renderToStaticMarkup(
     <LessonEncounter lesson={lesson} onStart={() => undefined} onScenario={() => undefined} />,
@@ -118,6 +112,18 @@ describe("LessonEncounter", () => {
 
   it("shows the pack's grammar explanation instead of the app inventing one", () => {
     expect(html).toContain("は marks the topic of the sentence.");
+  });
+
+  it("names the runner that serves each stage and says plainly when none does", () => {
+    expect(html).toContain("Served by the encounter runner.");
+    expect(html).toContain("Served by the recall-meaning runner.");
+    expect(html).toContain("Served by the cloze runner.");
+    // `grammar-study` is a pair the pack declares that nothing executes —
+    // lib.rs `activity_runner` answers it `None` — and the screen says so
+    // rather than presenting it as practice. (`encounter-read` is NOT such
+    // a stage: the engine names the encounter runner for it, and the
+    // fixture above carries that runner.)
+    expect(html).toContain("Declared, but not runnable: no runner serves this stage yet.");
   });
 
   it("offers the conversation stage only when the pack declares one", () => {
