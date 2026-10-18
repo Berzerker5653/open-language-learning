@@ -4,6 +4,13 @@ goal_id: ru.goal.a2.past-events
 title: "Вчера и в прошлом году"
 summary: были, ужинали, ездил, гулял and ходил — рассказ о завершённом вчерашнем дне.
 estimated_minutes: 9
+# ADR-0037: this unit claims the a2 past-events task sequence end to end.
+task_sequence:
+  input: ru.activity.a2.u810-read
+  scaffolded: ru.activity.a2.u810-cloze
+  independent: ru.activity.a2.u810-write
+  transfer: ru.activity.a2.u811-speak
+  reuse: ru.activity.a2.u812-write
 activities:
 - id: ru.activity.a2.u810-read
   type: encounter-read

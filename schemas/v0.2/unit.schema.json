@@ -84,6 +84,19 @@
           "state": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/masteryState" }
         }
       }
+    },
+    "task_sequence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["input", "scaffolded", "independent", "transfer", "reuse"],
+      "description": "ADR-0037: this unit claims a task sequence that exercises its goal end to end: meaningful input, a scaffolded response, an independent response, the same language in a changed context, and delayed reuse. Each role names exactly one activity id declared by this pack. `input`, `scaffolded` and `independent` name activities of this unit; `transfer` and `reuse` may name activities of a later unit in the same goal. The claim is checkable, not executable: tools/audit_content_templates.py verifies that every named activity has an engine runner, that the scaffolded stage carries support while the independent stage carries none, that the transfer stage really changes context (it names a scenario, or it lives in a different unit that reuses this unit's content), and that the reuse stage's unit is phase-gated on this unit (`task-sequence-*`). Nothing in the engine reads this field; naming a sequence causes nothing to execute. A pack that omits it keeps existing behavior.",
+      "properties": {
+        "input": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+        "scaffolded": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+        "independent": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+        "transfer": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+        "reuse": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" }
+      }
     }
   }
 }

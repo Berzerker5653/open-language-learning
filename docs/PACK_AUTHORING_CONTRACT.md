@@ -293,6 +293,16 @@ Author one lesson at a time:
    state. The engine applies it to the NEW pool only — due reviews keep
    scheduling — and gates that can never pass (self-reference, a
    non-unit target, a gate cycle) are validation errors in every mode.
+7. When a lesson family is meant to exercise a whole goal, declare the
+   sequence with `task_sequence` (ADR-0037): `input`, `scaffolded`,
+   `independent`, `transfer`, `reuse`, each naming one activity id in the
+   pack. Put the first three on the introducing unit; let `transfer` name the
+   changed-context activity (a scenario stage, or a stage in a later unit
+   that reuses the same content refs) and `reuse` name a stage in a unit that
+   `requires_unit`-gates on the introducing unit. Only name activities the
+   engine can actually run — the audit reports a named-but-unrunnable role as
+   `task-sequence-unrunnable` rather than pretending the stage exists. A
+   speaking stage stays guided: it writes no mastery score (ADR-0017).
 
 ## Chunking conventions (packs past A1)
 

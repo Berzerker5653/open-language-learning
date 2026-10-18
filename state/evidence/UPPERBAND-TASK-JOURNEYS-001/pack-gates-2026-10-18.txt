@@ -1,0 +1,34 @@
+# UPPERBAND-TASK-JOURNEYS-001 — pack gates, 2026-10-18
+$ cargo run -p lts-langpack-cli -- lint languages/ru-RU
+info[media_item_without_reading] media/manifest.jsonl: 3637 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ru.contrast.palatalization.brat-0, ru.contrast.palatalization.brat-1, ru.contrast.palatalization.luk-0, ru.contrast.palatalization.luk-1, ru.contrast.voicing.bp-0, ru.contrast.voicing.bp-1, ru.contrast.voicing.dt-0, ru.contrast.voicing.dt-1 (first 8 shown); authoring readings is human linguistic work and stays a review-pending record (K-65)
+info[unused_source] sources.jsonl/2: source "ru-batch-70ec683-20f994d" is not referenced by any content record
+lint: 0 error(s), 0 warning(s)
+$ cargo run -p lts-langpack-cli -- test languages/ru-RU
+info[media_item_without_reading] media/manifest.jsonl: 3637 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ru.contrast.palatalization.brat-0, ru.contrast.palatalization.brat-1, ru.contrast.palatalization.luk-0, ru.contrast.palatalization.luk-1, ru.contrast.voicing.bp-0, ru.contrast.voicing.bp-1, ru.contrast.voicing.dt-0, ru.contrast.voicing.dt-1 (first 8 shown); authoring readings is human linguistic work and stays a review-pending record (K-65)
+info[unused_source] sources.jsonl/2: source "ru-batch-70ec683-20f994d" is not referenced by any content record
+test: 0 error(s), 0 warning(s)
+$ cargo run -p lts-langpack-cli -- lint languages/ja-JP
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+lint: 0 error(s), 0 warning(s)
+$ cargo run -p lts-langpack-cli -- test languages/ja-JP
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+test: 0 error(s), 0 warning(s)
+$ .venv/bin/python tools/audit_learner_copy.py
+LEARNER COPY AUDIT v1.0.0: 40 source files scanned, 23 test files skipped
+findings: 0
+$ .venv/bin/python tools/audit_content_templates.py --require-band a2 --require-band b1 --require-band b2 languages/ru-RU (task-sequence lines only)
+0
+$ cargo run -p lts-langpack-cli -- validate languages/ru-RU | lint | test  (both packs, final tree)
+validate languages/ru-RU: validate(scaffold): 0 error(s), 0 warning(s)
+lint languages/ru-RU: lint: 0 error(s), 0 warning(s)
+test languages/ru-RU: test: 0 error(s), 0 warning(s)
+validate languages/ja-JP: validate(scaffold): 0 error(s), 0 warning(s)
+lint languages/ja-JP: lint: 0 error(s), 0 warning(s)
+test languages/ja-JP: test: 0 error(s), 0 warning(s)
+
+$ .venv/bin/python tools/audit_learner_copy.py
+LEARNER COPY AUDIT v1.0.0: 40 source files scanned, 23 test files skipped
+findings: 0

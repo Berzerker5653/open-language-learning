@@ -267,6 +267,27 @@ a declared unit (`unit_gate_not_a_unit`), or a unit in a gate cycle
 (`unit_gate_cycle`) — is an error in every mode; a gate on an undeclared id
 follows the unresolved-reference rule.
 
+A unit may declare an optional `task_sequence` object (ADR-0037): five
+required roles — `input`, `scaffolded`, `independent`, `transfer`, `reuse` —
+each naming one activity id in the pack. It states, in pack data, that this
+unit's goal is exercised end to end: the learner meets the language with
+meaningful input, responds with support, responds without support, uses the
+same items in a changed context, and meets them again later. `input`,
+`scaffolded` and `independent` name activities of this unit; `transfer` and
+`reuse` may name activities of a later unit in the same goal, which is how a
+pack that splits a journey across units (introduce, changed context, delayed
+reuse) declares one sequence instead of three unrelated lessons. The field is
+a claim, not an instruction: nothing in the engine reads it and naming a
+sequence executes nothing. `tools/audit_content_templates.py` checks the
+claim — every named activity has an engine runner, the scaffolded stage
+carries support while the independent stage carries none, the transfer stage
+really changes context (it names a scenario, or it lives in a different unit
+that reuses this unit's content), and the reuse stage's unit is phase-gated
+on this unit — and reports the failures as findings (`task-sequence-*`)
+without failing CI, because a sequence claim is a coverage statement, not a
+release gate. A pack or band that declares no sequence is reported once per
+band (`task-sequence-missing-band`), not once per unit.
+
 ## Speech profile
 
 The pack declares:

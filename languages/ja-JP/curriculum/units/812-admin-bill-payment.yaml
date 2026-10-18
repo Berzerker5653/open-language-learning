@@ -4,6 +4,13 @@ goal_id: ja.goal.a2.daily-admin
 title: "Paying a bill"
 summary: "Paying a public-fee slip at the store counter."
 estimated_minutes: 8
+# ADR-0037: this unit claims the a2 daily-admin task sequence end to end.
+task_sequence:
+  input: ja.activity.admin-bill-payment-enc
+  scaffolded: ja.activity.admin-bill-payment-cloze0
+  independent: ja.activity.admin-bill-payment-write
+  transfer: ja.activity.admin-bill-payment-scenario
+  reuse: ja.activity.admin-bill-payment-rev-write
 generation_contract:
   allowed_vocab:
   - ja.lex.admin2.tesuuryou
@@ -265,7 +272,22 @@ activities:
   content_refs:
   - ja.sent.a2.pay.friend-pay-now
 - id: ja.activity.admin-bill-payment-scenario
-  type: scenario
-  modality: interaction
+  type: retrieval
+  modality: speaking
   support_level: 2
   scenario_id: ja.scenario.a2.admin.bill-payment
+  content_refs:
+  - ja.sent.a2.pay.pay-here-possible
+  - ja.sent.a2.pay.clerk-cash-or-card
+  - ja.sent.a2.pay.want-receipt
+  - ja.lex.admin2.tesuuryou
+- id: ja.activity.admin-bill-payment-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.a2.pay.pay-here-possible
+  - ja.sent.a2.pay.want-to-pay-fee
+  - ja.sent.a2.pay.when-deadline
+  - ja.sent.a2.pay.must-by-20th
+  - ja.lex.admin2.harau

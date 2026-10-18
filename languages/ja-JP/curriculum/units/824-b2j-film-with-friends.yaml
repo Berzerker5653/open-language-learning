@@ -18,8 +18,8 @@ activities:
   - ja.sent.film-friend-recommended
   - ja.lex.film.eiga
 - id: ja.activity.b2-film-friends-scenario
-  type: scenario
-  modality: interaction
+  type: retrieval
+  modality: speaking
   support_level: 2
   scenario_id: ja.scenario.b2.film.movie-talk
   content_refs:

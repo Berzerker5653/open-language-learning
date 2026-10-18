@@ -4,6 +4,13 @@ goal_id: ru.goal.b1.practical-problems
 title: "Письмо о неисправности"
 summary: не работает обогреватель, мастер сказал, что придёт — сообщение о проблеме и сообщение о её причине.
 estimated_minutes: 9
+# ADR-0037: this unit claims the b1 practical-problems task sequence end to end.
+task_sequence:
+  input: ru.activity.b1.u813-read
+  scaffolded: ru.activity.b1.u813-cloze
+  independent: ru.activity.b1.u813-write
+  transfer: ru.activity.b1.u814-speak
+  reuse: ru.activity.b1.u815-write
 activities:
 - id: ru.activity.b1.u813-read
   type: encounter-read

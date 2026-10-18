@@ -1,0 +1,55 @@
+# UPPERBAND-TASK-JOURNEYS-001 — cargo gates, 2026-10-18
+$ cargo test -p lts-desktop
+test tests::reading_lookup_of_the_self_intro_sentence_names_the_word_not_its_interior ... ok
+test tests::dictation_target_prefers_kana_only_and_rotates ... ok
+test tests::a_fresh_ja_jp_plan_is_all_introductions_in_the_packs_goal_order ... ok
+test tests::installing_a_pack_warms_its_content_for_the_first_visit ... ok
+test tests::sharded_pack_directories_reach_every_reader ... ok
+test tests::plan_generation_stays_fast_on_the_reference_pack ... ok
+test tests::world_unlocks_follow_pack_declared_capabilities ... ok
+test tests::first_run_steps_lead_with_the_declared_script_in_its_teaching_order ... ok
+test tests::pronunciation_demo_comes_from_pack_contrasts ... ok
+test tests::switching_the_studied_pack_changes_what_the_plan_and_mastery_see ... ok
+test tests::writing_targets_are_parsed_once_per_version_root has been running for over 60 seconds
+test tests::stress_display_settings_are_data_driven_and_persisted ... ok
+test tests::the_aligner_language_comes_from_the_pack_manifest ... ok
+test tests::writing_targets_are_parsed_once_per_version_root ... ok
+test tests::provenance_payload_covers_every_installed_pack_verbatim ... ok
+
+test result: ok. 160 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 462.70s
+
+     Running unittests src/main.rs (target/debug/deps/lts_desktop-92c21001967a09e8)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_desktop
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+$ cargo fmt --all --check
+fmt ok
+$ cargo clippy --workspace --all-targets -- -D warnings
+14268 |                 serde_json::to_value(&plan(plain.path(), &undeclared.id, handle)).unwrap(),
+      |                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: change this to: `plan(plain.path(), &undeclared.id, handle)`
+      |
+      = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.97.0/index.html#needless_borrows_for_generic_args
+
+error: could not compile `lts-desktop` (lib test) due to 2 previous errors
+$ cargo clippy --workspace --all-targets -- -D warnings (after the needless-borrow fix)
+   Compiling lts-desktop v0.4.0-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.01s
+clippy exit=0
+$ cargo fmt --all --check
+fmt ok
+$ cargo test -p lts-desktop a_declared_task_sequence
+test tests::a_declared_task_sequence_loads_and_names_a_runner_for_every_stage ... ok
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 160 filtered out; finished in 0.01s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+$ cargo test -p lts-desktop  (final tree, after the clippy fix)
+test result: ok. 160 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 489.87s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

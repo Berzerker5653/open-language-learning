@@ -4,6 +4,13 @@ goal_id: ru.goal.b2.style-register
 title: "Правка по-деловому"
 summary: посмотрите, исправьте, подпишите, сверьте — вежливая правка текста формами на -ите.
 estimated_minutes: 9
+# ADR-0037: this unit claims the b2 style-register task sequence end to end.
+task_sequence:
+  input: ru.activity.b2.u816-read
+  scaffolded: ru.activity.b2.u816-cloze
+  independent: ru.activity.b2.u816-write
+  transfer: ru.activity.b2.u817-speak
+  reuse: ru.activity.b2.u818-write
 activities:
 - id: ru.activity.b2.u816-read
   type: encounter-read

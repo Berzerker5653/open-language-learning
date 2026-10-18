@@ -4,6 +4,13 @@ goal_id: ja.goal.b1.work-professional
 title: "Meeting notice: informing the team"
 summary: B1 polite notice of a meeting time; humble いたします and the polite request いただけますか.
 estimated_minutes: 9
+# ADR-0037: this unit claims the b1 work-professional task sequence end to end.
+task_sequence:
+  input: ja.activity.b1-work-notice-enc
+  scaffolded: ja.activity.b1-work-notice-cloze
+  independent: ja.activity.b1-work-notice-write
+  transfer: ja.activity.b1-work-notice-call-scenario
+  reuse: ja.activity.b1-work-notice-rev-write
 activities:
 - id: ja.activity.b1-work-notice-enc
   type: encounter-read

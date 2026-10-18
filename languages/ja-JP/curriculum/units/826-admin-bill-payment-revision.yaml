@@ -1,0 +1,62 @@
+# ai-assisted draft unit (UPPERBAND-TASK-JOURNEYS-001 delayed reuse for A2 admin-bill-payment); content refs are pack data; qualified review pending.
+id: ja.unit.admin-bill-payment-revision
+goal_id: ja.goal.a2.daily-admin
+title: "Review: paying a bill"
+summary: Delayed reuse of the bill-payment counter sentences and the fee and deadline words.
+estimated_minutes: 6
+# K-70/ADR-0022 phase gate: reuse surfaces only after the core unit content
+# reached `supported`.
+requires_unit:
+- unit: ja.unit.admin-bill-payment
+  state: supported
+activities:
+- id: ja.activity.admin-bill-payment-rev-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.a2.pay.pay-here-possible
+- id: ja.activity.admin-bill-payment-rev-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.a2.pay.pay-here-possible
+  - ja.sent.a2.pay.want-to-pay-fee
+  - ja.sent.a2.pay.want-receipt
+  - ja.lex.admin2.harau
+- id: ja.activity.admin-bill-payment-rev-recall
+  type: recall
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.sent.a2.pay.when-deadline
+  - ja.sent.a2.pay.must-by-20th
+  - ja.lex.admin2.tesuuryou
+generation_contract:
+  allowed_vocab:
+  - ja.sent.a2.pay.pay-here-possible
+  - ja.sent.a2.pay.want-to-pay-fee
+  - ja.sent.a2.pay.want-receipt
+  - ja.lex.admin2.harau
+  - ja.sent.a2.pay.when-deadline
+  - ja.sent.a2.pay.must-by-20th
+  - ja.lex.admin2.tesuuryou
+  allowed_grammar:
+  - ja.grammar.verb.polite-masu
+  - ja.grammar.verb.tai-desu
+  - ja.grammar.verb.kanoukei-intro
+  - ja.grammar.verb.nakereba-naranai
+  - ja.grammar.particle.object-wo
+  - ja.grammar.particle.topic-wa
+  - ja.grammar.particle.de-means
+  - ja.grammar.time.expressions
+  new_item_budget: 0
+  register:
+  - ja.register.polite-neutral
+  expected_interpretations:
+  - 'Delayed reuse: the counter payment questions and the deadline line recalled with no new items.'
+  prohibited_ambiguity:
+  - No new grammar; reuse 支払えますか, 払いたい and 払わなければなりません only.
+  target_proficiency: A2
+  validation_method: choice

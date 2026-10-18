@@ -65,7 +65,7 @@ measurement:
   measured: "2026-10-18"
   runner_table_source: "apps/desktop/src-tauri/src/lib.rs :: fn activity_runner — parsed from Rust at run time, never duplicated in this tool or in this file"
   mastery_policy: "docs/assessment/MASTERY_POLICY.yaml — policy_version 0.2.0, status provisional-hypotheses, counted_outcomes [scored]"
-  control_pack: "languages/ja-JP measured in the same run: 3,027 of 4,587 activities runnable, 1,560 declared without a runner, 118 listen-and-choose blocked on missing media rows. The ru-RU zeros are measured, not a default."
+  control_pack: "languages/ja-JP measured in the same run: 793 units, 3,034 of 4,591 activities runnable, 1,557 declared without a runner, 118 listen-and-choose blocked on missing media rows. The ru-RU zeros are measured, not a default."
   environment_caveat: >-
     The .wav bytes under languages/*/media/ are gitignored (ADR-0016), so a
     clean remote snapshot shows audio-gated test failures that are artifacts of

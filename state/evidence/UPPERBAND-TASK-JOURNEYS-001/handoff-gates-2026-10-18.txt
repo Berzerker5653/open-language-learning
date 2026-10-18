@@ -1,0 +1,29 @@
+# UPPERBAND-TASK-JOURNEYS-001 — handoff gates, 2026-10-18 (final tree)
+
+$ .venv/bin/python tools/validate_handoff.py --require-explicit-ledger-records
+WARN examples/minimal-language-pack: manifest-only onboarding fixture; no instructional content or full pack conformance
+WARN task-state: optional task AI-001 has no explicit ledger record
+WARN task-state: optional task PLAT-002 has no explicit ledger record
+WARN task-state: optional task ADV-001 has no explicit ledger record
+WARN task-state: optional task WEB-001 has no explicit ledger record
+WARN scope: handoff structure checked; SDK completeness, linguistic correctness, source rights, calibration quality, build/install/runtime/UX/privacy/security remain unverified
+HANDOFF VALIDATION PASSED (1961 data files checked)
+validate_handoff exit=0
+
+$ .venv/bin/python -m unittest discover -s tools
+  [task-sequence-missing-band] band b2: no complete task_sequence declaration in this band (--require-band)
+...................................................................
+----------------------------------------------------------------------
+Ran 69 tests in 389.993s
+
+OK
+
+$ .venv/bin/python tools/validate_handoff.py --require-explicit-ledger-records  (re-run after the evidence list gained this file)
+WARN examples/minimal-language-pack: manifest-only onboarding fixture; no instructional content or full pack conformance
+WARN task-state: optional task AI-001 has no explicit ledger record
+WARN task-state: optional task PLAT-002 has no explicit ledger record
+WARN task-state: optional task ADV-001 has no explicit ledger record
+WARN task-state: optional task WEB-001 has no explicit ledger record
+WARN scope: handoff structure checked; SDK completeness, linguistic correctness, source rights, calibration quality, build/install/runtime/UX/privacy/security remain unverified
+HANDOFF VALIDATION PASSED (1961 data files checked)
+validate_handoff exit=0

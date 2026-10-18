@@ -57,7 +57,11 @@ const EO = "org.openlanguage.eo-demo";
  * experimental), and the content ids are the real ones from
  * languages/ru-RU/curriculum/units/818-b2j-style-revision.yaml (unit
  * `ru.unit.b2.jstyle-03`, goal `ru.goal.b2.style-register`, sentences
- * `ru.sent.b2.j1`..`j4`). */
+ * `ru.sent.b2.j1`..`j4`). For UPPERBAND-TASK-JOURNEYS-001 the fixture
+ * also mirrors the a2 past-events sentences, lexicon rows, grammar
+ * concepts and unit lessons from curriculum/units/810-a2j-past-day.yaml,
+ * 811-a2j-past-workday.yaml, sentences/journeys-2026-10-14.jsonl,
+ * lexicon/pastevents.jsonl and grammar/concepts.jsonl. */
 export const RU = "org.openlanguage.ru-ru.reference";
 
 /** The RU sentences the fixture declares: shared by the pack's sentence
@@ -87,6 +91,24 @@ const RU_SENTENCES: DictationSentence[] = [
     text: "Прежде чем отвечать на письмо, уточните форму обращения.",
     reading: "Прежде чем отвечать на письмо, уточните форму обращения.",
     gloss: "Before replying to the letter, check the form of address.",
+  },
+  {
+    id: "ru.sent.a2.j1",
+    text: "Вчера вечером мы были в театре, а потом ужинали дома.",
+    reading: "Вчера вечером мы были в театре, а потом ужинали дома.",
+    gloss: "Yesterday evening we were at the theatre, and then we had dinner at home.",
+  },
+  {
+    id: "ru.sent.a2.j2",
+    text: "В прошлом году я ездил в Москву и много гулял.",
+    reading: "В прошлом году я ездил в Москву и много гулял.",
+    gloss: "Last year I went to Moscow (and came back) and walked a lot.",
+  },
+  {
+    id: "ru.sent.a2.j3",
+    text: "Утром она была на работе, а вечером писала письма.",
+    reading: "Утром она была на работе, а вечером писала письма.",
+    gloss: "In the morning she was at work, and in the evening she wrote letters.",
   },
 ];
 
@@ -122,8 +144,47 @@ const RU_LEXICON = [
   },
 ];
 
-/** The two grammar concepts unit 818 declares, verbatim (name and
- * definition) from `languages/ru-RU/grammar/concepts.jsonl`. */
+/** The three past-events lexicon rows the upper-band fixture mirrors,
+ * verbatim from `languages/ru-RU/lexicon/pastevents.jsonl`
+ * (`ru.lex.pastevents.vchera`, `ru.lex.pastevents.byli`,
+ * `ru.lex.pastevents.gulyat`). A sibling of `RU_LEXICON`, never merged
+ * into it: `RU_LEXICON`'s glosses are unit 818's choice pool, and this
+ * family pools only its own three glosses, each row answering itself. */
+const RU_PASTEVENTS_LEXICON = [
+  {
+    id: "ru.lex.pastevents.vchera",
+    surface: "вчера",
+    reading: "вчера́",
+    gloss: "yesterday",
+  },
+  {
+    id: "ru.lex.pastevents.byli",
+    surface: "были",
+    reading: "бы́ли",
+    gloss: "were",
+  },
+  {
+    id: "ru.lex.pastevents.gulyat",
+    surface: "гулять",
+    reading: "гуля́ть",
+    gloss: "to walk",
+  },
+  {
+    id: "ru.lex.pastevents.byla",
+    surface: "была",
+    reading: "была́",
+    gloss: "was (f)",
+  },
+  {
+    id: "ru.lex.pastevents.rabotal",
+    surface: "работать",
+    reading: "рабо́тать",
+    gloss: "to work",
+  },
+];
+/** The grammar concepts the fixtures mirror, verbatim (name and
+ * definition) from `languages/ru-RU/grammar/concepts.jsonl`: unit 818's
+ * two, then the past-events unit's three (rows 26, 27 and 166). */
 const RU_GRAMMAR = [
   {
     id: "ru.grammar.b2.imperative-vy-forms",
@@ -136,6 +197,24 @@ const RU_GRAMMAR = [
     name: "Prefixed result nouns: запись, надписка, переписка",
     definition:
       "Russian forms result/action nouns from prefixed verbs with the -к suffix: записать → запись (an entry, a record), надписать → надписка (an overwriting, an inscription), переписать → переписка (correspondence). The prefix changes meaning in ways a learner cannot always predict, so each noun needs its own dictionary check; glosses here are working labels.",
+  },
+  {
+    id: "ru.grammar.a2.past-tense",
+    name: "Past tense",
+    definition:
+      "Past tense uses the -л ending agreeing in gender: я читал, она читала, оно было, они были. Learn the supplied past forms as given; do not invent new stems.",
+  },
+  {
+    id: "ru.grammar.a2.time-connectors",
+    name: "Time sequence connectors",
+    definition:
+      "Sequence events with сначала (first), потом (then) and потом again; place vchera or segodnya at the start: Сначала работа, потом встреча. Do not decline these connectors.",
+  },
+  {
+    id: "ru.grammar.a2.past-motion-hodil",
+    name: "ходил / ездил for past 'went (and came back)'",
+    definition:
+      "For a completed visit one usually uses был/была + place, or the past of the indeterminate motion verbs ходить/ездить: вчера я ходил в театр, в прошлом году я ездил в Москву. These forms imply the round trip is over; the direction-specific пошёл/поехал describe the departure and need their own lesson. Learn the supplied forms as given.",
   },
 ];
 
@@ -151,13 +230,15 @@ const ruGrammarContent = (...ids: string[]): LessonContent[] =>
 
 /** How it shapes a lexicon ref: surface, reading, and gloss together. */
 const ruLexiconContent = (...ids: string[]): LessonContent[] =>
-  RU_LEXICON.filter((w) => ids.includes(w.id)).map((w) => ({
-    content_id: w.id,
-    kind: "lexicon",
-    display: w.surface,
-    reading: w.reading,
-    gloss: w.gloss,
-  }));
+  [...RU_LEXICON, ...RU_PASTEVENTS_LEXICON]
+    .filter((w) => ids.includes(w.id))
+    .map((w) => ({
+      content_id: w.id,
+      kind: "lexicon",
+      display: w.surface,
+      reading: w.reading,
+      gloss: w.gloss,
+    }));
 
 /** The bytes the RU media answers stand in for. The shipped pack declares
  * these four assets in `languages/ru-RU/media/manifest.jsonl` (one of 4856
@@ -252,9 +333,13 @@ interface Pack {
     description: string;
     measure: string | null;
   } | null;
-  /** The authored unit lesson this pack hands `lesson_plan`; null when the
-   * pack's fixture carries none (the word-shaped fallback answer runs). */
-  lesson: LessonPlan | null;
+  /** The authored unit lessons this pack hands `lesson_plan`, in pack
+   * order: `lesson_plan` answers a content id with the FIRST lesson whose
+   * stage content declares it — mirroring `lesson_plan_at` in lib.rs,
+   * which resolves a content id to the first unit declaring it — and only
+   * when none of them does does the word-shaped fallback answer run.
+   * Empty when the pack's fixture carries no authored unit. */
+  lessons: LessonPlan[];
   /** Pack-declared cloze targets per sentence id, mirrored from the real
    * pack's `cloze_targets`; the first is the target the typed cloze blanks. */
   clozeTargets: Record<string, string[]>;
@@ -368,7 +453,7 @@ const PACKS: Record<string, Pack> = {
       description: "Contrastive long vowel: おばさん (aunt) vs おばあさん (grandmother)",
       measure: "voiced-duration-ratio",
     },
-    lesson: null,
+    lessons: [],
     clozeTargets: {},
   },
   [EO]: {
@@ -412,7 +497,7 @@ const PACKS: Record<string, Pack> = {
       answer_romaji: "saluton",
     },
     contrast: null,
-    lesson: null,
+    lessons: [],
     clozeTargets: {},
   },
   [RU]: {
@@ -425,13 +510,22 @@ const PACKS: Record<string, Pack> = {
     rtl: false,
     kanji: false,
     drills: [],
-    words: RU_LEXICON.map((entry) => ({
-      ...entry,
-      // The choice pool lib.rs draws on is the pack's own glosses, never
-      // invented filler; the two unit-818 rows answer for each other.
-      choices: RU_LEXICON.map((x) => x.gloss),
-      answer: RU_LEXICON.indexOf(entry),
-    })),
+    words: [
+      ...RU_LEXICON.map((entry) => ({
+        ...entry,
+        // The choice pool lib.rs draws on is the pack's own glosses, never
+        // invented filler; the two unit-818 rows answer for each other.
+        choices: RU_LEXICON.map((x) => x.gloss),
+        answer: RU_LEXICON.indexOf(entry),
+      })),
+      ...RU_PASTEVENTS_LEXICON.map((entry) => ({
+        ...entry,
+        // The past-events family pools only its own three glosses; each
+        // row answers for itself.
+        choices: RU_PASTEVENTS_LEXICON.map((x) => x.gloss),
+        answer: RU_PASTEVENTS_LEXICON.indexOf(entry),
+      })),
+    ],
     schedule: [
       {
         content_id: "ru.sent.b2.j2",
@@ -489,87 +583,267 @@ const PACKS: Record<string, Pack> = {
       answer_romaji: "nadpiska",
     },
     contrast: null,
-    // The stage set the engine answers for this unit: unit 818's REAL five
+    // The stage sets the engine answers for this pack's authored units.
+    // First unit 818's REAL five
     // (languages/ru-RU/curriculum/units/818-b2j-style-revision.yaml, ids,
     // types, modalities, and support levels verbatim), each labelled by the
     // engine's own `stage_kind` and named by its `activity_runner` table
     // (lib.rs). Every pair this unit declares has a runner — encounter-read
     // is the presentation pair the shipped RU pack declares 1609 times, and
     // the engine runs it — so, unlike the earlier fixture, there is no
-    // declared-but-unrunnable stage here to fake.
-    lesson: {
-      unit_id: "ru.unit.b2.jstyle-03",
-      goal_id: "ru.goal.b2.style-register",
-      title: "Повтор: правка и отправка",
-      summary:
-        "посмотрите, сверьте, уточните — отсроченное повторное использование регистровой правки.",
-      stages: [
-        {
-          activity_id: "ru.activity.b2.u818-grammar",
-          activity_type: "encounter-read",
-          stage_kind: "encounter",
-          runner: "encounter",
-          modality: "reading",
-          support_level: 1,
-          content: ruGrammarContent(
-            "ru.grammar.b2.imperative-vy-forms",
-            "ru.grammar.b2.prefixed-noun-forms",
-          ),
-        },
-        {
-          activity_id: "ru.activity.b2.u818-cloze",
-          activity_type: "cloze",
-          stage_kind: "scaffolded",
-          runner: "cloze",
-          modality: "writing",
-          support_level: 1,
-          content: ruLessonContent("ru.sent.b2.j2", "ru.sent.b2.j4"),
-        },
-        {
-          activity_id: "ru.activity.b2.u818-write",
-          activity_type: "recall",
-          stage_kind: "independent",
-          runner: "typed",
-          modality: "writing",
-          support_level: 0,
-          content: [
-            ...ruLessonContent("ru.sent.b2.j1", "ru.sent.b2.j2", "ru.sent.b2.j3", "ru.sent.b2.j4"),
-            ...ruLexiconContent("ru.lex.style.nadpiska", "ru.lex.style.sveryat"),
-          ],
-        },
-        {
-          activity_id: "ru.activity.b2.u818-listen",
-          activity_type: "listen-and-choose",
-          stage_kind: "scaffolded",
-          runner: "comprehension-listening",
-          modality: "listening",
-          support_level: 1,
-          content: ruLessonContent(
-            "ru.sent.b2.j2",
-            "ru.sent.b2.j4",
-            "ru.sent.b2.j1",
-            "ru.sent.b2.j3",
-          ),
-        },
-        {
-          activity_id: "ru.activity.b2.u818-speak",
-          activity_type: "retrieval",
-          stage_kind: "independent",
-          runner: "guided-speaking",
-          modality: "speaking",
-          support_level: 0,
-          content: ruLessonContent(
-            "ru.sent.b2.j2",
-            "ru.sent.b2.j4",
-            "ru.sent.b2.j1",
-            "ru.sent.b2.j3",
-          ),
-        },
-      ],
+    // declared-but-unrunnable stage here to fake. Then the A2 past-events
+    // pair the UPPERBAND-TASK-JOURNEYS-001 journey runs: units
+    // 810-a2j-past-day.yaml and 811-a2j-past-workday.yaml, every stage's
+    // id, type, modality and support level verbatim from the YAML, the
+    // `stage_kind` and `runner` the engine's tables (lib.rs) compute for
+    // those pairs, and the content refs each activity declares resolved by
+    // the fixture's own resolvers — including unit 811's two extra lexicon
+    // refs (`ru.lex.pastevents.byla`, `ru.lex.pastevents.rabotal`), mirrored
+    // verbatim from `languages/ru-RU/lexicon/pastevents.jsonl`, so the
+    // changed-context unit resolves every ref it declares. The delayed-reuse
+    // unit 812 is phase-gated
+    // (`requires_unit: jpast-01 at supported`) and is NOT mirrored: no
+    // frontend request may be planned from it at this surface.
+    lessons: [
+      {
+        unit_id: "ru.unit.b2.jstyle-03",
+        goal_id: "ru.goal.b2.style-register",
+        title: "Повтор: правка и отправка",
+        summary:
+          "посмотрите, сверьте, уточните — отсроченное повторное использование регистровой правки.",
+        stages: [
+          {
+            activity_id: "ru.activity.b2.u818-grammar",
+            activity_type: "encounter-read",
+            stage_kind: "encounter",
+            runner: "encounter",
+            modality: "reading",
+            support_level: 1,
+            content: ruGrammarContent(
+              "ru.grammar.b2.imperative-vy-forms",
+              "ru.grammar.b2.prefixed-noun-forms",
+            ),
+          },
+          {
+            activity_id: "ru.activity.b2.u818-cloze",
+            activity_type: "cloze",
+            stage_kind: "scaffolded",
+            runner: "cloze",
+            modality: "writing",
+            support_level: 1,
+            content: ruLessonContent("ru.sent.b2.j2", "ru.sent.b2.j4"),
+          },
+          {
+            activity_id: "ru.activity.b2.u818-write",
+            activity_type: "recall",
+            stage_kind: "independent",
+            runner: "typed",
+            modality: "writing",
+            support_level: 0,
+            content: [
+              ...ruLessonContent(
+                "ru.sent.b2.j1",
+                "ru.sent.b2.j2",
+                "ru.sent.b2.j3",
+                "ru.sent.b2.j4",
+              ),
+              ...ruLexiconContent("ru.lex.style.nadpiska", "ru.lex.style.sveryat"),
+            ],
+          },
+          {
+            activity_id: "ru.activity.b2.u818-listen",
+            activity_type: "listen-and-choose",
+            stage_kind: "scaffolded",
+            runner: "comprehension-listening",
+            modality: "listening",
+            support_level: 1,
+            content: ruLessonContent(
+              "ru.sent.b2.j2",
+              "ru.sent.b2.j4",
+              "ru.sent.b2.j1",
+              "ru.sent.b2.j3",
+            ),
+          },
+          {
+            activity_id: "ru.activity.b2.u818-speak",
+            activity_type: "retrieval",
+            stage_kind: "independent",
+            runner: "guided-speaking",
+            modality: "speaking",
+            support_level: 0,
+            content: ruLessonContent(
+              "ru.sent.b2.j2",
+              "ru.sent.b2.j4",
+              "ru.sent.b2.j1",
+              "ru.sent.b2.j3",
+            ),
+          },
+        ],
+      },
+      // Unit 810 — the sequence's input, scaffolded response and
+      // independent response, in the pack's declared order (read, grammar,
+      // cloze, write, listen, speak).
+      {
+        unit_id: "ru.unit.a2.jpast-01",
+        goal_id: "ru.goal.a2.past-events",
+        title: "Вчера и в прошлом году",
+        summary: "были, ужинали, ездил, гулял и ходил — рассказ о завершённом вчерашнем дне.",
+        stages: [
+          {
+            activity_id: "ru.activity.a2.u810-read",
+            activity_type: "encounter-read",
+            stage_kind: "encounter",
+            runner: "encounter",
+            modality: "reading",
+            support_level: 1,
+            content: [
+              ...ruLessonContent("ru.sent.a2.j1", "ru.sent.a2.j2"),
+              ...ruLexiconContent(
+                "ru.lex.pastevents.vchera",
+                "ru.lex.pastevents.byli",
+                "ru.lex.pastevents.gulyat",
+              ),
+            ],
+          },
+          {
+            activity_id: "ru.activity.a2.u810-grammar",
+            activity_type: "encounter-read",
+            stage_kind: "encounter",
+            runner: "encounter",
+            modality: "reading",
+            support_level: 1,
+            content: ruGrammarContent(
+              "ru.grammar.a2.past-tense",
+              "ru.grammar.a2.past-motion-hodil",
+              "ru.grammar.a2.time-connectors",
+            ),
+          },
+          {
+            activity_id: "ru.activity.a2.u810-cloze",
+            activity_type: "cloze",
+            stage_kind: "scaffolded",
+            runner: "cloze",
+            modality: "writing",
+            support_level: 1,
+            content: ruLessonContent("ru.sent.a2.j1", "ru.sent.a2.j2"),
+          },
+          {
+            activity_id: "ru.activity.a2.u810-write",
+            activity_type: "recall",
+            stage_kind: "independent",
+            runner: "typed",
+            modality: "writing",
+            support_level: 0,
+            content: [
+              ...ruLessonContent("ru.sent.a2.j1", "ru.sent.a2.j2"),
+              ...ruLexiconContent(
+                "ru.lex.pastevents.vchera",
+                "ru.lex.pastevents.byli",
+                "ru.lex.pastevents.gulyat",
+              ),
+            ],
+          },
+          {
+            activity_id: "ru.activity.a2.u810-listen",
+            activity_type: "listen-and-choose",
+            stage_kind: "scaffolded",
+            runner: "comprehension-listening",
+            modality: "listening",
+            support_level: 1,
+            content: ruLessonContent("ru.sent.a2.j1", "ru.sent.a2.j2"),
+          },
+          {
+            activity_id: "ru.activity.a2.u810-speak",
+            activity_type: "retrieval",
+            stage_kind: "independent",
+            runner: "guided-speaking",
+            modality: "speaking",
+            support_level: 0,
+            content: ruLessonContent("ru.sent.a2.j1", "ru.sent.a2.j2"),
+          },
+        ],
+      },
+      // Unit 811 — the changed context, same declared shape with its own
+      // ids and refs.
+      {
+        unit_id: "ru.unit.a2.jpast-02",
+        goal_id: "ru.goal.a2.past-events",
+        title: "Вчерашний рабочий день",
+        summary: "была на работе, писала письма — тот же вчерашний рассказ в рабочем окружении.",
+        stages: [
+          {
+            activity_id: "ru.activity.a2.u811-read",
+            activity_type: "encounter-read",
+            stage_kind: "encounter",
+            runner: "encounter",
+            modality: "reading",
+            support_level: 1,
+            content: [
+              ...ruLessonContent("ru.sent.a2.j3", "ru.sent.a2.j1"),
+              ...ruLexiconContent("ru.lex.pastevents.byla", "ru.lex.pastevents.rabotal"),
+            ],
+          },
+          {
+            activity_id: "ru.activity.a2.u811-grammar",
+            activity_type: "encounter-read",
+            stage_kind: "encounter",
+            runner: "encounter",
+            modality: "reading",
+            support_level: 1,
+            content: ruGrammarContent(
+              "ru.grammar.a2.past-tense",
+              "ru.grammar.a2.past-motion-hodil",
+            ),
+          },
+          {
+            activity_id: "ru.activity.a2.u811-cloze",
+            activity_type: "cloze",
+            stage_kind: "scaffolded",
+            runner: "cloze",
+            modality: "writing",
+            support_level: 1,
+            content: ruLessonContent("ru.sent.a2.j3"),
+          },
+          {
+            activity_id: "ru.activity.a2.u811-write",
+            activity_type: "recall",
+            stage_kind: "independent",
+            runner: "typed",
+            modality: "writing",
+            support_level: 0,
+            content: [
+              ...ruLessonContent("ru.sent.a2.j3"),
+              ...ruLexiconContent("ru.lex.pastevents.byla", "ru.lex.pastevents.rabotal"),
+            ],
+          },
+          {
+            activity_id: "ru.activity.a2.u811-listen",
+            activity_type: "listen-and-choose",
+            stage_kind: "scaffolded",
+            runner: "comprehension-listening",
+            modality: "listening",
+            support_level: 1,
+            content: ruLessonContent("ru.sent.a2.j3", "ru.sent.a2.j1"),
+          },
+          {
+            activity_id: "ru.activity.a2.u811-speak",
+            activity_type: "retrieval",
+            stage_kind: "independent",
+            runner: "guided-speaking",
+            modality: "speaking",
+            support_level: 0,
+            content: ruLessonContent("ru.sent.a2.j3", "ru.sent.a2.j1"),
+          },
+        ],
+      },
+    ],
+    // The real `cloze_targets` of the real `ru.sent` rows this fixture
+    // mirrors; the typed cloze blanks the first, as the pack declares it.
+    clozeTargets: {
+      "ru.sent.b2.j2": ["Подпишите", "сверьте"],
+      "ru.sent.a2.j1": ["были", "ужинали"],
+      "ru.sent.a2.j3": ["работе", "писала"],
     },
-    // The real `cloze_targets` of the real `ru.sent.b2.j2` row; the typed
-    // cloze blanks the first, as the pack declares it.
-    clozeTargets: { "ru.sent.b2.j2": ["Подпишите", "сверьте"] },
   },
 };
 
@@ -598,6 +872,9 @@ type Scenario = {
     events?: number;
     savedWords?: number;
     goals?: number;
+    /** The rows this profile's plan is built from, used in place of the
+     * pack's fixture schedule (the constructor falls back to it). */
+    schedule?: Scheduled[];
   }[];
   installed?: string[];
   /** Each listed command fails loudly on its FIRST call and answers
@@ -660,7 +937,11 @@ export class LearnerEngine {
         display_name: seed.display_name,
         active,
         installs: active ? [active] : [],
-        schedule: pack ? pack.schedule.map((s) => ({ ...s })) : [],
+        schedule: seed.schedule
+          ? seed.schedule.map((s) => ({ ...s }))
+          : pack
+            ? pack.schedule.map((s) => ({ ...s }))
+            : [],
         budget: 5,
         micEnabled: seed.micEnabled ?? false,
         romaji: "auto",
@@ -1019,17 +1300,22 @@ export class LearnerEngine {
         } satisfies AlignerStatus;
       case "lesson_plan": {
         const pack = this.activePack(this.profile(args.profileId));
-        // RU-MODALITY-PRACTICE-001: a pack that authors a unit hands back that
-        // unit's plan verbatim — every stage carrying the runner key the
-        // engine's `activity_runner` computes for its declared pair, and no
-        // runner key (absent, as `skip_serializing_if` drops the engine's
-        // None) only for a pair nothing executes.
-        if (pack.lesson) {
-          const declared = pack.lesson.stages.some((stage) =>
+        // RU-MODALITY-PRACTICE-001 / UPPERBAND-TASK-JOURNEYS-001: a pack
+        // that authored units hands back the FIRST unit whose stage
+        // content declares the asked content id — the same
+        // first-declaring resolution `lesson_plan_at` performs over the
+        // pack's units in lib.rs — every stage carrying the runner key the
+        // engine's `activity_runner` computes for its declared pair, and
+        // no runner key (absent, as `skip_serializing_if` drops the
+        // engine's None) only for a pair nothing executes. Only when no
+        // authored unit declares the content does the word-shaped answer
+        // run.
+        const lesson = pack.lessons.find((l) =>
+          l.stages.some((stage) =>
             stage.content.some((c) => c.content_id === String(args.contentId)),
-          );
-          return declared ? pack.lesson : null;
-        }
+          ),
+        );
+        if (lesson) return lesson;
         const w = this.word(pack, String(args.contentId));
         if (!w) return null;
         return {

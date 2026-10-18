@@ -322,6 +322,15 @@ The R12 batches: `languages/ja-JP/review/WORKLIST-2026-10-14.md` (goals
 `ru.goal.b2.style-register`). Both are entirely AI-drafted and every id still
 carries `status`/`review_status: draft`.
 
+Each of those goals is now represented by a pack-declared `task_sequence`
+(ADR-0037): one unit per upper band names the encounter, scaffolded and
+independent stages of its own, plus a changed-context stage and a gated reuse
+stage in a later unit of the same goal. The audit machine-checks that the five
+named activities exist, have an engine runner, and carry the right support and
+gate shape; it cannot check whether they are the *right* five. The declaration
+is authored data like the sentences beside it — reviewing the goal means
+reviewing those role choices too.
+
 Machine-side queue (rerun these; they never promote anything):
 
 ```sh

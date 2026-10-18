@@ -7,7 +7,9 @@ depth."
 `tools/audit_content_templates.py` is a deterministic, standard-library-only
 auditor that measures structural repetition signals in language packs
 (leading-token share, token-skeleton repeats, identical grammar-concept
-reference sets per band, and single-stage-kind units). Every number below is
+reference sets per band, single-stage-kind units, and whether each upper band
+in the pack declares a runnable task sequence for at least one goal, per
+`docs/adr/0037-pack-declared-task-sequences.md`). Every number below is
 derived from the pack files themselves.
 
 **These are structural repetition signals queued for qualified human

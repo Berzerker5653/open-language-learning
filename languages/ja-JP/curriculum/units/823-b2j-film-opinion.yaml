@@ -4,6 +4,13 @@ goal_id: ja.goal.b2.film-analysis
 title: "Film opinion: concessive が and favor verbs"
 summary: "B2 film evaluation: ながいが、おもしろい contrast; もらった relative clause."
 estimated_minutes: 9
+# ADR-0037: this unit claims the b2 film-analysis task sequence end to end.
+task_sequence:
+  input: ja.activity.b2-film-opinion-enc
+  scaffolded: ja.activity.b2-film-opinion-cloze
+  independent: ja.activity.b2-film-opinion-write
+  transfer: ja.activity.b2-film-friends-scenario
+  reuse: ja.activity.b2-film-rev-write
 activities:
 - id: ja.activity.b2-film-opinion-enc
   type: encounter-read

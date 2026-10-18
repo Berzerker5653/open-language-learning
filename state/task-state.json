@@ -1590,17 +1590,26 @@
     },
     "UPPERBAND-TASK-JOURNEYS-001": {
       "task_id": "UPPERBAND-TASK-JOURNEYS-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "Representative upper-band goals run their stated capability as a task",
       "activity": "idle",
       "summary": "For named A2/B1/B2 goals in both languages, declare runnable task sequences that exercise the stated capability, including changed context and delayed reuse.",
-      "notes": "Opened 2026-10-15 from issue #1 item R12, which stayed unchecked although CONTENT-DEPTH-001 closed its own acceptance (template audit in CI, units 810-818). Depth is still not enacted: ru `b2` has 400 units on one 2-element grammar set with the `это _` skeleton repeated 400 times, and the band review cards JA-A2-002 / JA-B1-002 / JA-B2-002 plus the Russian queue remain blocked on qualified human review — this task can only make the tasks exist and run, never certify the content.",
+      "notes": "Opened 2026-10-15 from issue #1 item R12, which stayed unchecked although CONTENT-DEPTH-001 closed its own acceptance (template audit in CI, units 810-818). Closed 2026-10-18. ADR-0037 adds the optional v0.2 `task_sequence` unit field — five roles (`input`, `scaffolded`, `independent`, `transfer`, `reuse`), each naming one activity id — and `tools/audit_content_templates.py` now checks the claim against the engine's own `activity_runner` table (ADR-0036), staying advisory: findings report, exit stays 0, absence is reported once per band via `--require-band a2,b1,b2`. Six representatives complete, one per upper band per pack: `ru.goal.a2.past-events` (jpast-01 → jpast-02 changed context → jpast-03 gated reuse), `ru.goal.b1.practical-problems` (jprob-01/-02/-03), `ru.goal.b2.style-register` (jstyle-01/-02/-03), `ja.goal.a2.daily-admin` (admin-bill-payment → new unit 826 gated reuse), `ja.goal.b1.work-professional` (b1-work-notice → -call → -revision), `ja.goal.b2.film-analysis` (b2-film-opinion → -with-friends → -revision). The three RU families needed no content change at all — the shape was already in the pack and only the declaration was missing. ja needed three `scenario`/`interaction` activities retargeted to `retrieval`/`speaking` (the engine's `guided-speaking` runner; still formative, ADR-0017), one new independent `recall`/`writing` stage in unit 812, and one new gated reuse unit. Delayed reuse rides the ADR-0022 `requires_unit` gate at `supported`; no interval field was invented, because nothing in the scheduler honours a day count authored in a unit file. The engine reads nothing new: one test, `a_declared_task_sequence_loads_and_names_a_runner_for_every_stage`, proves a unit carrying the block plans identically with and without it and names a runner for every stage. Learner surface: `apps/desktop/src/journeys/upperband-sequence.journey.tsx` runs the RU A2 sequence in the real <App/> — encounter, scaffolded cloze, independent typed write, and a speaking card with no submit, no verdict and no score. Re-measured coverage: ru-RU unchanged (3,248 declared = runnable = servable, six pairs); the ja-JP control moved from 3,027/4,587 to 3,034/4,591 with 1,557 declared without a runner, and the control sentence in `docs/assessment/RELEASE_COVERAGE_RU.yaml` was rewritten from that run (35 doc claims re-checked, none missing). Depth is still not enacted: ru `b2` has 400 units on one 2-element grammar set with the `это _` skeleton repeated 400 times — the audit still reports it — and the band review cards JA-A2-002 / JA-B1-002 / JA-B2-002 plus the Russian queue remain blocked on qualified human review. This card made the tasks exist and run; it certifies no wording.",
       "dependencies": [
         "CONTENT-DEPTH-001"
       ],
-      "evidence": [],
-      "updated": "2026-10-15"
+      "evidence": [
+        "state/evidence/UPPERBAND-TASK-JOURNEYS-001/ACCEPTANCE.md",
+        "state/evidence/UPPERBAND-TASK-JOURNEYS-001/audit-2026-10-18.txt",
+        "state/evidence/UPPERBAND-TASK-JOURNEYS-001/coverage-crosscheck-2026-10-18.txt",
+        "state/evidence/UPPERBAND-TASK-JOURNEYS-001/pack-gates-2026-10-18.txt",
+        "state/evidence/UPPERBAND-TASK-JOURNEYS-001/web-gates-2026-10-18.txt",
+        "state/evidence/UPPERBAND-TASK-JOURNEYS-001/cargo-test-2026-10-18.txt",
+        "state/evidence/UPPERBAND-TASK-JOURNEYS-001/handoff-gates-2026-10-18.txt",
+        "docs/adr/0037-pack-declared-task-sequences.md"
+      ],
+      "updated": "2026-10-18"
     },
     "JA-KANJI-ATTRIBUTION-001": {
       "task_id": "JA-KANJI-ATTRIBUTION-001",

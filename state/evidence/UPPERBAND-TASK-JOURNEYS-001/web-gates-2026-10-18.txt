@@ -1,0 +1,50 @@
+# UPPERBAND-TASK-JOURNEYS-001 — web gates, 2026-10-18 (cwd apps/desktop unless noted)
+$ npx vitest run
+ Test Files  33 passed (33)
+      Tests  266 passed (266)
+vitest exit=0
+$ npx tsc --noEmit
+npm notice run @openlang/desktop@0.4.0-alpha.1 npx
+npm notice run 'tsc' --noEmit
+tsc ok
+$ npx eslint .
+npm notice run @openlang/desktop@0.4.0-alpha.1 npx
+npm notice run 'eslint' .
+eslint ok
+$ npx vite build
+
+✓ built in 152ms
+$ npx prettier --check .   (repo root)
+[warn] apps/desktop/src/App.tsx
+[warn] apps/desktop/src/home.tsx
+[warn] apps/desktop/src/hub.tsx
+[warn] apps/desktop/src/journeys/harness.tsx
+[warn] apps/desktop/src/journeys/kanji-decomp.journey.tsx
+[warn] apps/desktop/src/kanji-decomposition.ts
+$ npx vitest run (final tree)
+ Test Files  33 passed (33)
+      Tests  266 passed (266)
+$ npx tsc --noEmit
+npm notice run @openlang/desktop@0.4.0-alpha.1 npx
+npm notice run 'tsc' --noEmit
+tsc clean
+$ npx eslint .
+npm notice run @openlang/desktop@0.4.0-alpha.1 npx
+npm notice run 'eslint' .
+eslint clean
+$ npx vite build (final tree)
+dist/assets/index-CBdad6kP.js   349.97 kB │ gzip: 103.39 kB
+
+✓ built in 140ms
+
+$ npx prettier --check .  (repo root, final tree)
+npm notice run open-language-learning-platform@0.1.0 npx
+npm notice run 'prettier' --check .
+Checking formatting...
+[warn] apps/desktop/src/App.tsx
+[warn] apps/desktop/src/home.tsx
+[warn] apps/desktop/src/hub.tsx
+[warn] apps/desktop/src/journeys/harness.tsx
+[warn] apps/desktop/src/journeys/kanji-decomp.journey.tsx
+[warn] apps/desktop/src/kanji-decomposition.ts
+[warn] Code style issues found in 6 files. Run Prettier with --write to fix.

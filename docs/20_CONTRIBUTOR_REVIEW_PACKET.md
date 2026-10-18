@@ -144,9 +144,10 @@ Checks, not virtues. CI runs six jobs; reviewers read job output:
   --require-explicit-ledger-records` (259) and its own test suite (260),
   the pack-audio and new-pack script tests (261, 265, 270, 273),
   `python tools/audit_content_templates.py languages/ja-JP
-  languages/ru-RU` (277) — repetition counts are review inputs, not
-  quality claims (274-276) — and `python tools/audit_learner_copy.py`
-  (281): project ids must not appear in learner-facing copy.
+  languages/ru-RU` (277) — repetition counts and the pack-declared
+  `task_sequence` claims of ADR-0037 are review inputs, not quality claims
+  (274-276) — and `python tools/audit_learner_copy.py` (281): project ids must
+  not appear in learner-facing copy.
 
 On a content PR specifically they check: every status flip carries a
 qualifying approved record (`pack.rs:1002`); `reviewer_category` is

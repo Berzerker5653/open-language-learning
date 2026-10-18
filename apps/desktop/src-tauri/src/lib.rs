@@ -14049,6 +14049,283 @@ activities:
         assert_eq!(activity_runner("timed-assessment", "writing"), None);
     }
 
+    /// ADR-0037: the fixture journey family that mirrors the shipped
+    /// RU A2 past-events trio (`810`/`811`/`812`): an introducing unit
+    /// claiming the goal's whole `task_sequence`, a changed-context unit
+    /// holding the `transfer` stage, and a `requires_unit`-gated revision
+    /// unit holding the `reuse` stage. `declared` toggles whether the
+    /// introducing unit's YAML carries the `task_sequence:` block; the
+    /// engine's `PackUnit` has no such field, so both variants must read
+    /// identically to the planner.
+    fn install_task_sequence_journey(data: &Path, declared: bool) -> (String, ProfileInfo) {
+        let pack = "org.openlanguage.ru-journey-fixture";
+        let version = "0.1.0";
+        let root = data.join("packs").join(pack).join(version);
+        std::fs::create_dir_all(root.join("curriculum/units")).unwrap();
+        std::fs::create_dir_all(root.join("lexicon")).unwrap();
+        std::fs::create_dir_all(root.join("sentences")).unwrap();
+        std::fs::create_dir_all(root.join("grammar")).unwrap();
+        std::fs::create_dir_all(root.join("media")).unwrap();
+        std::fs::write(data.join("packs").join(pack).join("current"), version).unwrap();
+        std::fs::write(
+            root.join("manifest.yaml"),
+            "schema_version: \"0.2\"\n\
+             pack_id: \"org.openlanguage.ru-journey-fixture\"\n\
+             display_name: \"RU-Journey Fixture\"\n\
+             version: \"0.1.0\"\n\
+             source_locales: [\"en-US\"]\n\
+             maturity: \"experimental\"\n",
+        )
+        .unwrap();
+        std::fs::write(
+            root.join("curriculum/goals.yaml"),
+            "goals:\n\
+             - id: ru.goal.fixture.journey\n  band: a2\n  description: Tell stories about a finished past day.\n  modalities: [reading, listening, speaking, writing]\n",
+        )
+        .unwrap();
+        // Block-style, the same five keys the shipped `810` declares.
+        let task_sequence = if declared {
+            r#"task_sequence:
+  input: ru.activity.fixture.sq1-read
+  scaffolded: ru.activity.fixture.sq1-cloze
+  independent: ru.activity.fixture.sq1-write
+  transfer: ru.activity.fixture.sq2-speak
+  reuse: ru.activity.fixture.sq3-write
+"#
+        } else {
+            ""
+        };
+        std::fs::write(
+            root.join("curriculum/units/001-introducing.yaml"),
+            format!(
+                r#"id: ru.unit.fixture.seq-01
+goal_id: ru.goal.fixture.journey
+title: "Вчера и в прошлом году"
+summary: были, гуляли — the introducing unit of the fixture yesterday journey.
+estimated_minutes: 9
+{task_sequence}activities:
+- id: ru.activity.fixture.sq1-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.fixture.j1
+  - ru.sent.fixture.j2
+  - ru.lex.fixture.vchera
+- id: ru.activity.fixture.sq1-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ru.sent.fixture.j1
+  - ru.sent.fixture.j2
+- id: ru.activity.fixture.sq1-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.sent.fixture.j1
+  - ru.sent.fixture.j2
+- id: ru.activity.fixture.sq1-speak
+  type: retrieval
+  modality: speaking
+  support_level: 0
+  content_refs:
+  - ru.sent.fixture.j1
+  - ru.sent.fixture.j2
+"#
+            ),
+        )
+        .unwrap();
+        std::fs::write(
+            root.join("curriculum/units/002-changed-context.yaml"),
+            r#"id: ru.unit.fixture.seq-02
+goal_id: ru.goal.fixture.journey
+title: "Вчерашний рабочий день"
+summary: The same yesterday story in the changed work setting.
+activities:
+- id: ru.activity.fixture.sq2-read
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.fixture.j3
+  - ru.sent.fixture.j1
+- id: ru.activity.fixture.sq2-speak
+  type: retrieval
+  modality: speaking
+  support_level: 0
+  content_refs:
+  - ru.sent.fixture.j3
+  - ru.sent.fixture.j1
+"#,
+        )
+        .unwrap();
+        std::fs::write(
+            root.join("curriculum/units/003-revision.yaml"),
+            r#"id: ru.unit.fixture.seq-03
+goal_id: ru.goal.fixture.journey
+title: "Повтор: вчерашний день"
+summary: Delayed reuse, gated on the introducing unit's content.
+requires_unit:
+- unit: ru.unit.fixture.seq-01
+  state: supported
+activities:
+- id: ru.activity.fixture.sq3-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.grammar.fixture.past-tense
+- id: ru.activity.fixture.sq3-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ru.sent.fixture.j1
+  - ru.sent.fixture.j2
+  - ru.sent.fixture.j3
+  - ru.lex.fixture.ezdil
+"#,
+        )
+        .unwrap();
+        std::fs::write(
+            root.join("grammar/concepts.jsonl"),
+            "{\"id\":\"ru.grammar.fixture.past-tense\",\"name\":\"Минулое время\",\"definition\":\"-л forms for a finished past day.\"}\n",
+        )
+        .unwrap();
+        std::fs::write(
+            root.join("sentences/sentences.jsonl"),
+            "{\"id\":\"ru.sent.fixture.j1\",\"text\":\"Вчера были в парке.\",\"reading\":\"Вчера были в парке.\",\"gloss\":\"Вчерашний парк\",\"cloze_targets\":[\"были\"],\"status\":\"approved\"}\n\
+             {\"id\":\"ru.sent.fixture.j2\",\"text\":\"Вечером долго гуляли.\",\"reading\":\"Вечером долго гуляли.\",\"gloss\":\"Вечерняя прогулка\",\"cloze_targets\":[\"гуляли\"],\"status\":\"approved\"}\n\
+             {\"id\":\"ru.sent.fixture.j3\",\"text\":\"Вчера была на работе.\",\"reading\":\"Вчера была на работе.\",\"gloss\":\"Вчерашний рабочий день\",\"cloze_targets\":[\"была\"],\"status\":\"approved\"}\n",
+        )
+        .unwrap();
+        std::fs::write(
+            root.join("lexicon/entries.jsonl"),
+            "{\"id\":\"ru.lex.fixture.vchera\",\"forms\":[{\"text\":\"вчера\",\"is_primary\":true}],\"glosses\":{\"en\":[\"yesterday\"]},\"status\":\"approved\"}\n\
+             {\"id\":\"ru.lex.fixture.ezdil\",\"forms\":[{\"text\":\"ездил\",\"is_primary\":true}],\"glosses\":{\"en\":[\"went (by transport)\"]},\"status\":\"approved\"}\n",
+        )
+        .unwrap();
+        // ADR-0016: one manifest row per media id, as the RU pack ships.
+        let mut media = String::new();
+        for id in [
+            "ru.sent.fixture.j1",
+            "ru.sent.fixture.j2",
+            "ru.sent.fixture.j3",
+        ] {
+            media.push_str(&format!(
+                "{{\"id\":\"{id}\",\"file\":\"media/{id}.wav\",\"provenance\":\"curated\"}}\n"
+            ));
+        }
+        std::fs::write(root.join("media/manifest.jsonl"), media).unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        store
+            .record_installation(&lts_storage::PackInstallation {
+                pack_id: pack.into(),
+                version: version.into(),
+                installed_at: rfc3339_utc(now_secs()),
+                trust_state: "community".into(),
+            })
+            .unwrap();
+        let profile = create_local_profile(data, "Katya").unwrap();
+        store.set_active_pack(&profile.id, pack, version).unwrap();
+        (pack.to_string(), profile)
+    }
+
+    /// ADR-0037: `unit.schema.json` gained an optional top-level
+    /// `task_sequence` key, and the engine deliberately reads no such
+    /// field. Install the same journey-family pack twice — with and
+    /// without the block — and require the planner to agree exactly, then
+    /// name a runner for every stage the sequence spans. The shipped
+    /// journey's activities declare no `scenario_id` on any of these
+    /// speaking stages, so this fixture mirrors that and pins nothing.
+    #[test]
+    fn a_declared_task_sequence_loads_and_names_a_runner_for_every_stage() {
+        let seq = tempfile::tempdir().unwrap();
+        let plain = tempfile::tempdir().unwrap();
+        let (_pack, declared) = install_task_sequence_journey(seq.path(), true);
+        let (_pack, undeclared) = install_task_sequence_journey(plain.path(), false);
+        let plan = |data: &Path, profile: &str, handle: &str| -> LessonPlan {
+            lesson_plan_at(data, profile, handle)
+                .unwrap()
+                .unwrap_or_else(|| panic!("the fixture journey plans {handle}"))
+        };
+        // `lesson_plan_at` returns the first unit declaring the content,
+        // so the handles pick the intended unit: `ru.lex.fixture.ezdil`
+        // appears only in the revision unit's reuse stage, which keeps
+        // that plan reachable behind the two earlier files.
+        let handles = [
+            "ru.sent.fixture.j1",
+            "ru.sent.fixture.j3",
+            "ru.lex.fixture.ezdil",
+        ];
+        // (1) The optional field cannot break the loader: the same pack
+        // plans identically with and without the `task_sequence` block.
+        for handle in handles {
+            assert_eq!(
+                serde_json::to_value(plan(seq.path(), &declared.id, handle)).unwrap(),
+                serde_json::to_value(plan(plain.path(), &undeclared.id, handle)).unwrap(),
+                "the same journey plans the same with or without `task_sequence`",
+            );
+        }
+        // (2) The introducing unit's plan names a runner for every stage
+        // the sequence declares, at the support levels the pack wrote.
+        let introducing = plan(seq.path(), &declared.id, "ru.sent.fixture.j1");
+        assert_eq!(introducing.unit_id, "ru.unit.fixture.seq-01");
+        let stages: Vec<(&str, &str, u32, &str)> = introducing
+            .stages
+            .iter()
+            .map(|s| {
+                (
+                    s.activity_type.as_str(),
+                    s.modality.as_str(),
+                    s.support_level,
+                    s.stage_kind,
+                )
+            })
+            .collect();
+        assert_eq!(
+            stages,
+            vec![
+                ("encounter-read", "reading", 1, "encounter"),
+                ("cloze", "writing", 1, "scaffolded"),
+                ("recall", "writing", 0, "independent"),
+                ("retrieval", "speaking", 0, "independent"),
+            ],
+            "input, scaffolded, independent and the unit's own speaking stage",
+        );
+        let runners =
+            |p: &LessonPlan| -> Vec<Option<&str>> { p.stages.iter().map(|s| s.runner).collect() };
+        assert_eq!(
+            runners(&introducing),
+            vec![
+                Some("encounter"),
+                Some("cloze"),
+                Some("typed"),
+                Some("guided-speaking"),
+            ],
+            "every stage of the introducing unit has a runner",
+        );
+        // (3) The changed-context unit names the transfer stage's
+        // speaking runner…
+        let changed = plan(seq.path(), &declared.id, "ru.sent.fixture.j3");
+        assert_eq!(changed.unit_id, "ru.unit.fixture.seq-02");
+        assert_eq!(
+            runners(&changed),
+            vec![Some("encounter"), Some("guided-speaking")],
+            "the transfer stage rides the formative speaking runner",
+        );
+        // …and so does every stage of the gated reuse unit.
+        let revision = plan(seq.path(), &declared.id, "ru.lex.fixture.ezdil");
+        assert_eq!(revision.unit_id, "ru.unit.fixture.seq-03");
+        assert_eq!(
+            runners(&revision),
+            vec![Some("encounter"), Some("typed")],
+            "the reuse stage's recall/writing names the typed runner",
+        );
+    }
+
     /// K-97 (RU-MODALITY-PRACTICE-001): dictation never runs a recognizer
     /// in a language the pack did not declare. The RU-shaped fixture
     /// declares no ASR locale, so the answer is the abstention vocabulary

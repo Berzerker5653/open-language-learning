@@ -18,8 +18,8 @@ activities:
   - ja.sent.office-notice-time
   - ja.lex.work.kaigi
 - id: ja.activity.b1-work-notice-call-scenario
-  type: scenario
-  modality: interaction
+  type: retrieval
+  modality: speaking
   support_level: 2
   scenario_id: ja.scenario.b1.office.notice-call
   content_refs:

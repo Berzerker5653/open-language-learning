@@ -1,0 +1,38 @@
+# UPPERBAND-TASK-JOURNEYS-001 — coverage claim cross-check, 2026-10-18
+# $ .venv/bin/python tools/measure_language_coverage.py --pack languages/ru-RU --pack languages/ja-JP --json
+  ok   DECLARED 3,248 activities
+  ok   818 units
+  ok   60 goals
+  ok   six (type,modality) pairs
+  ok   pair encounter-read/reading 1,609
+  ok   pair recall/writing 818
+  ok   pair cloze/writing 783
+  ok   pair recall/reading 20
+  ok   pair listen-and-choose/listening 9
+  ok   pair retrieval/speaking 9
+  ok   reading 1,629
+  ok   writing 1,601
+  ok   listening 9 / speaking 9
+  ok   goals declare all four modalities (60 each)
+  ok   RUNNABLE 3,248 with runner / 0 without
+  ok   no unrunnable declared pairs
+  ok   runner encounter 1,609
+  ok   runner typed 818
+  ok   runner cloze 783
+  ok   runner recall-meaning 20
+  ok   runner comprehension-listening 9
+  ok   runner guided-speaking 9
+  ok   SERVABLE 3,248 / 0 blocked
+  ok   evidence production-writing 1,601
+  ok   evidence (none) 1,609
+  ok   evidence recall-meaning 20
+  ok   evidence comprehension-listening 9
+  ok   evidence production-speaking 9
+  ok   1,630 scored-capable / 1,618 formative-only
+  ok   3 sources (CC0 x2, CC-BY-NC x1)
+  ok   4,856 media rows, all model-output
+  ok   control ja: 793 units / 3,034 runnable / 1,557 unrunnable
+  ok   control ja: 118 blocked on missing media rows
+  ok   measurement.invocation matches this run
+  ok   measured date 2026-10-18
+checked 35 claims; MISSING: none
