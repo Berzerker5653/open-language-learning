@@ -113,6 +113,11 @@ runtime report.
   acceptance evidence in `state/evidence/UPPERBAND-TASK-JOURNEYS-001/` and
   `state/evidence/RU-MODALITY-PRACTICE-001/`; the checkbox in `issue://1` still
   reads unchecked.
+- Drafted and ready to paste, needing only your authorization:
+  `state/evidence/OWNER-RESIDUE-2026-10-18/issue-1-comment-drafts.md` — one
+  section per item. R12 and R13 are checkable against the recorded evidence;
+  I04, I05 and I08 are written as status comments and their checkboxes must stay
+  open, because each still has a human or artifact-level half.
 - Reference-pack republish (O-01b) and any app release (D6) stay yours; the
   0.4.1 archives and member-level accounting are already on record under
   `state/evidence/RC-0.4.1-2026-10-15/`.
