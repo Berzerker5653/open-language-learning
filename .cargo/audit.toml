@@ -1,0 +1,130 @@
+# cargo-audit configuration for the LTS workspace.
+#
+# CI runs `cargo audit --deny warnings` from the repository root
+# (scripts/ci.sh, .github/workflows/ci.yml `security` job), so this file is the
+# allow-list that makes the advisory gate fail closed: anything not listed here
+# breaks the build. Ignoring an advisory is a recorded risk decision, not a
+# fix - each entry states why it is not actionable in this repo today and what
+# removes it.
+#
+# Measured 2026-10-17 on this Cargo.lock with cargo-audit 0.22.2 and cargo
+# 1.97.1: six warnings. `cargo audit --deny warnings` exits 1 with `error: 6
+# denied warnings found!` while this file is moved aside, and exits 0 with it
+# in place - that rc flip is the proof the allow-list is honoured. (Plain
+# `cargo audit` prints `warning: 6 allowed warnings found` either way, so that
+# line is not evidence.)
+# Dependency chains below are `cargo tree --workspace -i <crate>` output
+# (cargo 1.97.1), not assumptions about Tauri.
+#
+# Rationale: glib, gtk, zbus and therefore proc-macro-error are Linux-only in
+# the graph - `cargo tree --workspace -i <crate> --target
+# x86_64-pc-windows-msvc` and `--target aarch64-apple-darwin` return an empty
+# tree for each; `--target x86_64-unknown-linux-gnu` resolves them.
+[advisories]
+ignore = [
+    # RUSTSEC-2024-0370 proc-macro-error 1.0.4 - unmaintained; cargo-audit
+    # lists no patched version, and `cargo update -p proc-macro-error
+    # --dry-run` locks 0 packages (1.0.4 is the newest resolvable release).
+    # Chain (cargo tree --workspace -i proc-macro-error): glib-macros 0.18.5
+    # (proc-macro) <- glib 0.18.5 <- gtk 0.18.2 <- muda 0.20.0 / tao 0.37.1 /
+    # tauri 2.12.1 / tauri-runtime-wry 2.12.1 / webkit2gtk 2.0.2 <-
+    # lts-desktop. It is a build-time dependency of derive macros only
+    # (`proc_macro_error` appears in the glib-macros-0.18.5/src derive
+    # implementations), so it is absent from the shipped binary, and the whole
+    # subtree is Linux-only (see header). Removable when the gtk-rs 0.18
+    # bindings under Tauri move off proc-macro-error, i.e. a tauri/wry release
+    # built on gtk-rs >= 0.20.
+    "RUSTSEC-2024-0370",
+
+    # RUSTSEC-2024-0449 unsafe-libyaml 0.2.11 - unmaintained (advisory dated
+    # 2024-03-25); `cargo update -p unsafe-libyaml --dry-run` locks 0 packages,
+    # so 0.2.11 is the newest resolvable release and future parser bugs would
+    # not be fixed here.
+    # Chain: serde_yaml 0.9.34+deprecated <- lts-desktop, lts-langpack,
+    # lts-langpack-cli, lts-learner-model, lts-speech-api, lts-speech-runtime -
+    # i.e. it is our own dependency, not a Tauri one, and it IS reachable:
+    # serde_yaml is the YAML reader for pack, sidecar, corpus and policy files
+    # (crates/langpack/src/pack.rs, crates/langpack-cli/src/main.rs,
+    # crates/learner-model/src/policy.rs, crates/speech-api/src/calibration.rs,
+    # crates/speech-runtime/src/sidecar.rs and
+    # apps/desktop/src-tauri/src/{lib,packs,scenarios}.rs), including YAML
+    # inside third-party packs, which is the untrusted-input path.
+    # Unmaintained is a maintenance signal: cargo-audit claims no
+    # vulnerability and lists no patched version for this advisory.
+    # Removable by a code change in this repo, not an upstream bump: retire
+    # deprecated serde_yaml for a maintained pure-Rust parser and migrate the
+    # call sites above.
+    "RUSTSEC-2024-0449",
+
+    # RUSTSEC-2026-0371 zbus_names 4.3.4 - unmaintained: the advisory links
+    # z-galaxy/zbus#2043, the merge of the zvariant/zbus_names/zvariant_derive
+    # crates into zbus 6. No patched release exists for the standalone crate;
+    # `cargo update -p zbus --dry-run` locks 0 packages (5.19.0 is the newest
+    # 5.x).
+    # Chain: zbus 5.19.0 and zbus_macros 5.19.0 <- tauri-plugin-single-instance
+    # 2.5.2 <- lts-desktop (declared `tauri-plugin-single-instance = "2.4.5"`
+    # in apps/desktop/src-tauri/Cargo.toml, resolved 2.5.2; the plugin pulls
+    # zbus only under `cfg(target_os = "linux")`). Reachable at runtime on
+    # Linux: the plugin registers the D-Bus single-instance handshake
+    # (apps/desktop/src-tauri/src/lib.rs:7541), and its
+    # src/platform_impl/linux.rs uses zbus::blocking::Connection,
+    # zbus::blocking::connection::Builder, zbus::names::WellKnownName and the
+    # #[interface] macro, so name parsing goes through this crate. Our own
+    # sources never name zbus/zvariant (grep of crates/ and apps/: 0 hits).
+    # Removable when tauri-plugin-single-instance depends on zbus >= 6, where
+    # these crates no longer exist as separate dependencies. Measured
+    # 2026-10-17: `cargo update -p tauri-plugin-single-instance` resolves
+    # 2.5.4, and the graph after that bump is still zbus 5.19.0 ->
+    # zbus_names 4.3.4, so the bump clears nothing (lockfile left unchanged).
+    "RUSTSEC-2026-0371",
+
+    # RUSTSEC-2026-0370 zvariant 5.15.0 - unmaintained for the same reason as
+    # zbus_names (merged into zbus 6). `cargo update -p zvariant --dry-run`
+    # offers only 5.15.1, and the advisory still fires against 5.15.1 once
+    # that bump is applied (measured), so no compatible bump clears it.
+    # Chain: zbus 5.19.0, zbus_macros 5.19.0, zbus_names 4.3.4 <-
+    # tauri-plugin-single-instance 2.5.2 <- lts-desktop (Linux-only target
+    # dependency). Reachable: zvariant is the D-Bus wire-format layer the
+    # single-instance handshake serializes through, so the unmaintained code
+    # does run on Linux startup, unlike the build-time entries above. No
+    # specific vulnerability is claimed by this advisory.
+    # Removable with the same tauri-plugin-single-instance -> zbus >= 6 bump;
+    # no upstream release provides it yet (see the zbus_names entry).
+    "RUSTSEC-2026-0370",
+
+    # RUSTSEC-2026-0372 zvariant_derive 5.15.0 - unmaintained; same merge into
+    # zbus 6.
+    # Chain: zvariant 5.15.0 <- zbus 5.19.0 / zbus_macros 5.19.0 / zbus_names
+    # 4.3.4 <- tauri-plugin-single-instance 2.5.2 <- lts-desktop (Linux-only).
+    # It is a proc-macro crate (derive support for zvariant), so it executes
+    # while compiling the plugin, not in the shipped binary; our code never
+    # applies its derives.
+    # Removable with the tauri-plugin-single-instance -> zbus >= 6 bump.
+    "RUSTSEC-2026-0372",
+
+    # RUSTSEC-2024-0429 glib 0.18.5 - category `unsound`, title "Unsoundness
+    # in `Iterator` and `DoubleEndedIterator` impls for
+    # `glib::VariantStrIter`": an iterator could yield `&str` slices that are
+    # not valid UTF-8, i.e. a soundness report (potential UB), not a proven
+    # memory-safety exploit. cargo-audit lists no patched version for the
+    # resolved 0.18 series.
+    # Chain: glib 0.18.5 <- atk 0.18.2, cairo-rs 0.18.5, gdk 0.18.2,
+    # gdk-pixbuf 0.18.5, gdkx11 0.18.2, gio 0.18.4, javascriptcore-rs 1.1.2,
+    # pango 0.18.3, soup3 0.5.0, webkit2gtk 2.0.2 <- gtk 0.18.2 <- muda 0.20.0,
+    # tao 0.37.1, tauri 2.12.1, tauri-runtime 2.12.1, tauri-runtime-wry 2.12.1,
+    # wry 0.57.0, webkit2gtk 2.0.2 <- lts-desktop. Linux-only in the graph.
+    # Reachability (measured): 0 matches for `VariantStrIter` in the Rust
+    # sources under crates/ and apps/, and 0 matches for `VariantStrIter`,
+    # `array_iter_str` or `get_str_array` in the local registry copies of
+    # tauri-2.12.1, tao-0.37.1, wry-0.57.0, muda-0.20.0 and webkit2gtk-2.0.2.
+    # The only entry point is glib::Variant::array_iter_str()
+    # (glib-0.18.5/src/variant.rs:843). Not exhaustively audited: the other
+    # ~550 graph crates were not searched, so "not reachable" here means "not
+    # found in our code or the direct Tauri stack", which is weaker than proof.
+    # Removable only by moving the Linux stack off gtk-rs 0.18: `cargo update
+    # -p glib --dry-run` locks 0 packages, because 0.18.5 is the ceiling
+    # inside the requirements the gtk 0.18.2 bindings carry, which come from
+    # tauri/wry/webkit2gtk 2.0.2. Needs a tauri/wry release built on gtk-rs
+    # >= 0.20, or dropping the gtk3 stack.
+    "RUSTSEC-2024-0429",
+]

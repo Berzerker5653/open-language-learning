@@ -121,9 +121,17 @@ fi
 .venv/bin/python tools/audit_learner_copy.py
 .venv/bin/python -m unittest discover -s tools -p 'test_audit_learner_copy.py'
 
+# The advisory gate below fails closed: any finding outside the allow-list in
+# .cargo/audit.toml exits non-zero. The secret scan mirrors the CI gitleaks job.
+# Measurements behind the six-entry allow-list:
+# state/evidence/SEC-001/cargo-audit-posture.md.
 echo "== security: advisory + secret scans (mirror of CI security job) =="
 if command -v cargo-audit >/dev/null 2>&1; then
-  cargo audit
+  # cargo-audit 0.22.2 spells the fail-closed flag `--deny warnings`; measured on
+  # this toolchain, `--deny-warnings` exits 2 as an unknown argument.
+  # The allow-list is `.cargo/audit.toml`, resolved from this repo root - the
+  # same working directory as the GitHub `security` job.
+  cargo audit --deny warnings
 else
   echo "SKIP cargo-audit (install: cargo install cargo-audit --locked)"
 fi

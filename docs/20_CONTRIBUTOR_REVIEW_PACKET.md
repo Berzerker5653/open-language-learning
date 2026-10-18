@@ -136,14 +136,17 @@ Checks, not virtues. CI runs six jobs; reviewers read job output:
 - `platform-compile` (149): Windows/macOS compile only; runtime
   behavior on those platforms is untested by CI (145-148).
 - `security` (210): gitleaks secret scan (219), `pnpm audit
-  --audit-level=high` (228), `cargo audit` (233), SBOM via
-  `tools/sbom.py` (237).
-- `schemas` (244): `python tools/validate_handoff.py` (253) and its own
-  tests (254, 259, 262), `python tools/audit_content_templates.py
-  languages/ja-JP languages/ru-RU` (266) — repetition counts are review
-  inputs, not quality claims (263-265) — and `python
-  tools/audit_learner_copy.py` (270): project ids must not appear in
-  learner-facing copy.
+  --audit-level=high` (228), `cargo audit --deny warnings` (239) — that
+  scan fails closed against the allow-list in `.cargo/audit.toml`, so a
+  new advisory breaks the build instead of printing a warning that
+  `cargo audit` alone exits 0 on — and SBOM via `tools/sbom.py` (243).
+- `schemas` (250): `python tools/validate_handoff.py
+  --require-explicit-ledger-records` (259) and its own test suite (260),
+  the pack-audio and new-pack script tests (261, 265, 270, 273),
+  `python tools/audit_content_templates.py languages/ja-JP
+  languages/ru-RU` (277) — repetition counts are review inputs, not
+  quality claims (274-276) — and `python tools/audit_learner_copy.py`
+  (281): project ids must not appear in learner-facing copy.
 
 On a content PR specifically they check: every status flip carries a
 qualifying approved record (`pack.rs:1002`); `reviewer_category` is

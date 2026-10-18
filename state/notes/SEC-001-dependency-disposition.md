@@ -143,7 +143,46 @@ the yanked-zip warning is gone, leaving only the three accepted warnings above. 
 relock commit lands, the working tree — not 8.6.0 — is the reproducible state. Board rows:
 `zip-bump-9`, owner gate **O-09**.
 
+## 2026-10-17 addendum — the gate now fails closed, and the set is six
+
+Two standing claims in this note are superseded; the reachability findings are not.
+
+- **Superseded (the gate).** "CI runs it at `.github/workflows/ci.yml:230` with no allow-list file"
+  is false as of 2026-10-17. CI (`.github/workflows/ci.yml`) and the local mirror
+  (`scripts/ci.sh:134`) now run `cargo audit --deny warnings` against the allow-list
+  `.cargo/audit.toml`. Measured pair: with that file moved aside the command exits **1**
+  (`error: 6 denied warnings found!`); with it in place, **0**. A seventh advisory now fails the
+  build instead of printing a warning.
+- **Superseded (the count).** "3 allowed warnings" is stale. Three `unmaintained` advisories were
+  published 2026-10-16 and appeared in the next scan: RUSTSEC-2026-0371 (`zbus_names 4.3.4`),
+  RUSTSEC-2026-0370 (`zvariant`, 5.15.0 in `Cargo.lock`) and RUSTSEC-2026-0372
+  (`zvariant_derive 5.15.0`). All three are reached through one edge only:
+  `tauri-plugin-single-instance 2.5.2 → zbus 5.19.0`, and that plugin pins
+  `zbus = "5.9"` in its own manifest, so `cargo update -p zbus --dry-run` reports
+  `Locking 0 packages`. Under `x86_64-pc-windows-msvc` and `aarch64-apple-darwin` the whole
+  `zbus`/`glib` subtree resolves to nothing (`cargo tree … --target …` →
+  `warning: nothing to print.`), so these five ignores are Linux-only.
+- **Not superseded.** `zvariant` is the same code path the 2026-10-16 acceptance already weighed:
+  the plugin's Linux D-Bus single-instance check, reachable at startup
+  (`apps/desktop/src-tauri/src/lib.rs:7541`), with no crate of ours linking `zbus`/`zvariant`
+  (`grep -rn "zbus\|zvariant" crates apps --include=*.rs` → no matches). The unsafe-libyaml
+  reachability finding above (untrusted pack YAML through `parse_document`,
+  `crates/langpack/src/pack.rs:1372`) and the "no patched 0.18-series glib" position both stand.
+- **This is not a fix.** All six entries are ignores, capped at six so a new advisory cannot slip
+  in quietly. No dependency was bumped: the only two moves cargo offered
+  (`tauri-plugin-single-instance` 2.5.2→2.5.4, `zvariant` 5.15.0→5.15.1) were applied for real and
+  re-scanned, cleared none of the six, and `Cargo.lock` was restored. `SEC-001` remains `blocked`.
+
+Per-dependency rationale now sits beside each entry in `.cargo/audit.toml`. Full measurements —
+chains, cross-target resolution, `cargo update --dry-run` ceilings, the rc pairs and the
+reachability greps — are in `state/evidence/SEC-001/cargo-audit-posture.md`.
+
 ## Re-check command
 
-`cargo audit` from the repo root; CI runs it at
-`.github/workflows/ci.yml:230` with no allow-list file.
+```bash
+cargo audit --deny warnings        # allow-list: .cargo/audit.toml, run from the repo root
+```
+
+Trust the exit code, not the summary: plain `cargo audit` prints
+`warning: 6 allowed warnings found` and exits 0 whether or not the allow-list is present, so the
+printed count proves only that the scan ran.

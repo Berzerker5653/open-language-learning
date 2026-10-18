@@ -230,7 +230,13 @@ jobs:
       - name: Rust advisory audit
         run: |
           cargo install cargo-audit --locked
-          cargo audit
+          # Fail closed: any advisory not in the allow-list exits non-zero.
+          # Measured on cargo-audit 0.22.2: only `--deny warnings` is accepted;
+          # `--deny-warnings` exits 2 as an unknown argument.
+          # Allow-list: .cargo/audit.toml, resolved from the repository root
+          # (this job's default working directory). Rationale + measurements:
+          # state/evidence/SEC-001/cargo-audit-posture.md.
+          cargo audit --deny warnings
       - name: SBOM (CycloneDX 1.5, Rust + npm)
         run: |
           python3 -m pip install --quiet PyYAML==6.0.3
