@@ -131,6 +131,14 @@ Two failures had to be diagnosed to get there, and neither was the pack content:
    vite path. `6cae160` (2026-10-17 15:16) introduced that trap shape; it survived a
    day because every run since then died earlier, at the restore step, so the smoke
    step never ran.
+
+   The fix also has a proof that does not depend on CI: the exact guarded trap statement
+   at `scripts/smoke-desktop.sh:62`, evaluated in a subshell with `VITE_PID` unset — the
+   shape the pnpm branch produces — prints `SMOKE OK (13 routes walked)` and exits **0**,
+   while the pre-fix statement in the same position exits **143**. The contrast run also
+   exposes a second, quieter defect: because the self-SIGTERM aborts the trap mid-way, the
+   pre-fix shape never reaches `rm -rf "$DATA"`, so every smoke run that "passed" on CI
+   leaked its `mktemp -d` data directory into `/tmp` on the runner.
 2. The earlier `39155073665` / `39157289475` restore failures, documented in §6: the
    first is ADR-0032's ordering working as designed, the second pure timing.
 
