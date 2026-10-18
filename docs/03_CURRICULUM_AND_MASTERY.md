@@ -123,6 +123,61 @@ character content id, and the SRS scheduler decides when each character
 resurfaces. Kanji reading evidence never counts toward the kana-literacy
 roll-up, which only considers the pack's kana chart units.
 
+The drill states the rule behind an element list rather than joining the
+glyphs and leaving the learner to decide what the list means
+(JA-KANJI-DECOMP-UI-001). Every element list the shipped ja-JP pack
+carries is in exactly one of three cases; `kanji-decomposition.ts`
+classifies each card and its three sentences are the only wording the
+drill renders. The counts below were measured over the 84 cards the pack
+ships after the O-07 re-sourcing (56 in `kanji/entries.jsonl`, 28 in
+`kanji/a2-topics.jsonl`), all of them `status: draft`.
+
+Elements that are neither the character itself nor a writing stroke are
+presented as a decomposition: "Made of these elements, which can overlap
+or sit inside one another." KRADFILE lists every visible element, so the
+`口` listed for `話` sits inside `舌`, which sits inside `話`: that is
+nesting, not two independent components, and the drill says so instead of
+implying independence. The sentence describes the source list rather than
+running a lookup over the deck: `話` lists `言`, `口` and `舌`, and neither
+`言` nor `舌` is itself a card in this pack, so asking "is this element
+another card's character?" would have missed exactly this case. 62 of the
+84 cards list something besides the character, and 61 of those list
+something that is neither the character nor a stroke; the three cases
+below partition all 84 — 61 with parts, 22 learned whole, 1 written in
+strokes alone. 45 cards list an element that is another card's character.
+
+When a list collapses to a single element the wording is singular ("Made
+of this element."): 8 of the 84 read that way, `森` listing only `木` and
+`中` listing `｜` and `口` and being left with one part. Where a list
+holds both elements and strokes, the joined elements show and the
+sentence adds "The strokes it is written with are not parts."; that is
+the other 22 of the 23 cards that carry a stand-in.
+
+A character listed as its own only element is rendered as "Learned as a
+whole character — this pack lists no smaller parts for it." and the list
+is dropped, because a character is never a part of itself. That is 22 of
+the 84 cards (`一 九 二 五 人 入 十 大 女 小 山 川 心 手 日 月 木 田 目 耳
+雨 食`). Five further cards repeat themselves among other elements (`風`
+lists `風 几 虫 ノ`, as do `口`, `足`, `見`, `行`); the self-reference is
+dropped there too, and the other elements still show.
+
+A list of writing strokes is rendered as "Written with strokes — this
+character is not built from separate parts." KRADFILE writes four strokes
+with katakana stand-ins, `ノ`, `ハ`, `ヨ` and fullwidth `｜` (U+FF5C); 23
+of the 84 cards contain one, and they are omitted from the parts join with
+the omission named ("The strokes it is written with are not parts."). One
+card, `八`, lists nothing but its own stroke `ハ`, so its list is
+suppressed outright with that reason rather than joined. Sixty-one cards
+list real elements as well as strokes, so a stroke in a list is normal and
+never means the card went unexplained.
+
+A list length is never presented as a stroke count: `七` lists three
+elements and is written with two strokes, so no learner-facing wording
+counts anything. The dot `丶` and hook `亅` that KRADFILE also lists are
+radicals rather than stand-ins and remain elements. The classification is
+pinned by unit tests over the shipped pack files and by a journey test
+that renders the drill and asserts the three sentences.
+
 ## 5. Mastery state machine
 
 States are derived, not blindly incremented:

@@ -46,6 +46,7 @@ import {
 import { WritingPractice, type WritingTaskView } from "./writing";
 import { PracticeRunner, type PracticeTaskView } from "./practice";
 import { LessonEncounter, stageForDrill, type LessonPlan } from "./lesson";
+import { describeKanjiDecomposition } from "./kanji-decomposition";
 import { playClip } from "./playback";
 import { stressEnabled, type DisplaySettingsView } from "./stress";
 import { ReadingPanel, type Story, type StorySummary } from "./reading";
@@ -2865,6 +2866,11 @@ export function App() {
       });
     }
   }
+  // JA-KANJI-DECOMP-UI-001: an element list is not always a list of parts, so
+  // the drill names the case the card is in rather than joining glyphs
+  // unexplained; kanji-decomposition.ts states the rule.
+  const kanjiDecomposition = kanjiActive ? describeKanjiDecomposition(kanjiActive) : null;
+
   if (step !== "done") {
     return (
       <AppShell productName="Open Language Learning Platform" nav={[]}>
@@ -3186,7 +3192,13 @@ export function App() {
               </PackText>
               <p>
                 <small>
-                  <PackText tag="span">{kanjiActive.radicals.join(" + ")}</PackText>
+                  <span>{kanjiDecomposition?.label}</span>
+                  {kanjiDecomposition?.showParts ? (
+                    <>
+                      {" "}
+                      <PackText tag="span">{kanjiDecomposition.parts.join(" + ")}</PackText>
+                    </>
+                  ) : null}
                   {kanjiActive.mnemonic ? (
                     <>
                       {" — "}

@@ -88,6 +88,10 @@ interface Pack {
     id: string;
     character: string;
     radicals: string[];
+    /** The choice pool lib.rs `kanji_task_build` draws on: meanings for a
+     * meaning drill, readings for a reading drill. */
+    meanings: string[];
+    readings: string[];
     mnemonic: string | null;
     status: string;
   }[];
@@ -118,10 +122,33 @@ const PACKS: Record<string, Pack> = {
     rtl: false,
     kanji: true,
     drills: [
+      // The three shapes the shipped ja-JP pack actually contains: a list of
+      // parts (祖母), a character listed as its own only element (一), and a
+      // list of writing strokes (八 -> ハ). See docs/03 on the drill's rule.
       {
         id: "ja.kan.demo.obaasan",
         character: "祖母",
         radicals: ["女", "亻", "木"],
+        meanings: ["grandmother"],
+        readings: ["そぼ"],
+        mnemonic: null,
+        status: "new",
+      },
+      {
+        id: "ja.kan.demo.ichi",
+        character: "一",
+        radicals: ["一"],
+        meanings: ["one"],
+        readings: ["いち"],
+        mnemonic: null,
+        status: "new",
+      },
+      {
+        id: "ja.kan.demo.hachi",
+        character: "八",
+        radicals: ["ハ"],
+        meanings: ["eight"],
+        readings: ["はち"],
         mnemonic: null,
         status: "new",
       },
@@ -410,6 +437,39 @@ export class LearnerEngine {
     return pack.words.find((w) => w.id === contentId);
   }
 
+  /** `practice_task`/`practice_submit` for a kanji content id, mirroring lib.rs
+   * `kanji_task_build`: the distractors are the other characters' meanings (or
+   * readings), never invented filler. */
+  private drillTask(
+    pack: Pack,
+    card: Pack["drills"][number],
+    modality: string,
+  ): { view: PracticeTaskView; answer: string; choices: string[] } {
+    const reading = modality === "orthography-recognition";
+    const label = (c: Pack["drills"][number]): string =>
+      (reading ? c.readings[0] : c.meanings[0]) ?? c.character;
+    const answer = label(card);
+    const choices = [
+      ...new Set(
+        pack.drills.filter((c) => c.id !== card.id).map(label).slice(0, 3),
+      ),
+      answer,
+    ];
+    return {
+      view: {
+        item_id: `${card.id}#${modality}`,
+        surface: card.character,
+        reading: null,
+        furigana: null,
+        romaji: null,
+        faded_by_mastery: false,
+        choices,
+      },
+      answer,
+      choices,
+    };
+  }
+
   private plan(p: Profile, minutes = p.budget): SessionPlan {
     const pack = p.active ? PACKS[p.active] : undefined;
     const items: PlannedItem[] = p.schedule.map((s) => {
@@ -613,8 +673,14 @@ export class LearnerEngine {
       case "kanji_available":
         return this.activePack(this.profile(args.profileId)).kanji;
       case "kanji_list":
+        // Exactly the card the engine sends (lib.rs `KanjiCard`), so a fixture
+        // field the engine withholds cannot leak into what the drill reads.
         return this.activePack(this.profile(args.profileId)).drills.map((c) => ({
-          ...c,
+          id: c.id,
+          character: c.character,
+          radicals: c.radicals,
+          mnemonic: c.mnemonic,
+          status: c.status,
           meaning_due: null,
           reading_due: null,
         }));
@@ -672,6 +738,8 @@ export class LearnerEngine {
       }
       case "practice_task": {
         const pack = this.activePack(this.profile(args.profileId));
+        const drill = pack.drills.find((c) => c.id === String(args.contentId));
+        if (drill) return this.drillTask(pack, drill, String(args.modality)).view;
         const w = this.word(pack, String(args.contentId));
         if (!w) throw new Error(`no such content: ${String(args.contentId)}`);
         return {
@@ -687,6 +755,18 @@ export class LearnerEngine {
       case "practice_submit": {
         const p = this.profile(args.profileId);
         const pack = this.activePack(p);
+        // A kanji id grades against the other characters' meanings/readings,
+        // the same choice pool `kanji_task_build` builds.
+        const drill = pack.drills.find((c) => c.id === String(args.contentId));
+        if (drill) {
+          const task = this.drillTask(pack, drill, String(args.modality));
+          const index = Number(args.choiceIndex ?? 0);
+          p.events += 1;
+          return {
+            correct: task.choices[index] === task.answer,
+            correct_choice: task.answer,
+          };
+        }
         const w = this.word(pack, String(args.contentId));
         const index = Number(args.choiceIndex ?? 0);
         const correct = w?.answer === index;

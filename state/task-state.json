@@ -1638,20 +1638,21 @@
     },
     "JA-KANJI-DECOMP-UI-001": {
       "task_id": "JA-KANJI-DECOMP-UI-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "The kanji drill handles degenerate decomposition lists honestly",
       "activity": "idle",
       "summary": "State and implement a display rule for the decomposition cases KRADFILE exposes: self-as-sole-element, stroke stand-ins, and nested elements.",
-      "notes": "Opened 2026-10-16 from the measured learner-facing cost of option A (recorded before it was chosen): radical-list min/max/mean is 1/7/2.45; 22 of 84 cards present the character as its own sole element; 62 of 84 list nested elements; 23 of 84 contain the non-CJK stand-ins `ノ ハ ヨ |` that KRADFILE uses for strokes with no standalone glyph. The drill renders whatever is in the field today, so the rule has to be written down rather than inferred from a screenshot.",
+      "notes": "Closed 2026-10-18 with the rule written down in apps/desktop/src/kanji-decomposition.ts and the K-16 section of docs/03_CURRICULUM_AND_MASTERY.md rather than inferred from the render; App.tsx:2868-2871 derives it and App.tsx:3188-3209 renders it. Opened 2026-10-16 from the measured learner-facing cost of option A (recorded before it was chosen): radical-list min/max/mean is 1/7/2.45; 22 of 84 cards present the character as its own sole element; 62 of 84 list nested elements; 23 of 84 contain the non-CJK stand-ins `ノ ハ ヨ |` that KRADFILE uses for strokes with no standalone glyph (the last is FULLWIDTH VERTICAL LINE U+FF5C, not an ASCII pipe). Re-measured after implementation: 22 whole, 1 strokes-only (八 -> [ハ]), 61 with real parts (8 single-element, 53 multi-element; 22 of those also carry strokes). 5 cards list the character among other elements (風 口 足 見 行) and those self-references are dropped. Nesting is framed in the multi-element sentence instead of computed per card: 話 lists 言/口/舌, and neither 言 nor 舌 is a card, so a cross-card lookup would have missed the acceptance example.",
       "dependencies": [
         "UX-001"
       ],
       "evidence": [
+        "state/evidence/JA-KANJI-DECOMP-UI-001/decomposition-rule.md",
         "state/evidence/O-07/decision-2026-10-15.md",
         "state/evidence/O-07/radical-changes-2026-10-15.json"
       ],
-      "updated": "2026-10-16"
+      "updated": "2026-10-18"
     },
     "JA-KANJI-MNEMONICS-001": {
       "task_id": "JA-KANJI-MNEMONICS-001",
