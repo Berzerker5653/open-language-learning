@@ -1706,5 +1706,5 @@
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
-  "current_release_candidate": "v0.4.1 (published 2026-10-16; state/evidence/RC-0.4.1-2026-10-15/publication-2026-10-16.md). Pack 0.4.2 is prepared in-tree as of 2026-10-17 and is not published: no 0.4.2 tag, catalogue pin or release asset exists, so no release-candidate label was invented for it. Nothing in the build consumes this field; it is documentation."
+  "current_release_candidate": "v0.4.2 (published 2026-10-18; state/evidence/RC-0.4.2-2026-10-18/). Both pack manifests declare 0.4.2 and `catalog/packs.json` pins both 0.4.2 archives by size and SHA-256; the 0.4.1 and 0.4.0 releases stay live as rollback targets. The app artifact is still 0.4.0-alpha.1 — no app release (O-06). Nothing in the build consumes this field; it is documentation."
 }

@@ -1,0 +1,43 @@
+--- ja-JP: PUBLISHED 0.4.1 -> CANDIDATE 0.4.2 (bytes + 12-hex hash + path) ---
+published 0.4.1 members = 5864   candidate 0.4.2 members = 5865
+identical (size+hash)   = 5857
+added in 0.4.2:
+2072 a260a2494cd0 curriculum/units/826-admin-bill-payment-revision.yaml
+2156 d69556d8c03e curriculum/units/821-b1j-work-notice-call.yaml
+2176 ba141cc2fd5c curriculum/units/824-b2j-film-with-friends.yaml
+2423 2c9e006113e3 curriculum/units/820-b1j-work-notice.yaml
+2479 6dbf6401c6c1 curriculum/units/823-b2j-film-opinion.yaml
+6359 5148a910e588 review/WORKLIST-2026-10-14.md
+772 8f8514239179 manifest.yaml
+8621 a86453e2d918 curriculum/units/812-admin-bill-payment.yaml
+removed in 0.4.2:
+2094 b15de53cb222 curriculum/units/820-b1j-work-notice.yaml
+2158 c5e714846f7e curriculum/units/821-b1j-work-notice-call.yaml
+2162 7b958579eb5c curriculum/units/823-b2j-film-opinion.yaml
+2178 b6359dfa5add curriculum/units/824-b2j-film-with-friends.yaml
+5834 c8f7597b4a37 review/WORKLIST-2026-10-14.md
+772 1532a0f0cdb7 manifest.yaml
+7859 22f020a9657e curriculum/units/812-admin-bill-payment.yaml
+present on both sides with different bytes:
+  curriculum/units/812-admin-bill-payment.yaml
+    0.4.1: 7859 22f020a9657e curriculum/units/812-admin-bill-payment.yaml
+    0.4.2: 8621 a86453e2d918 curriculum/units/812-admin-bill-payment.yaml
+  curriculum/units/820-b1j-work-notice.yaml
+    0.4.1: 2094 b15de53cb222 curriculum/units/820-b1j-work-notice.yaml
+    0.4.2: 2423 2c9e006113e3 curriculum/units/820-b1j-work-notice.yaml
+  curriculum/units/821-b1j-work-notice-call.yaml
+    0.4.1: 2158 c5e714846f7e curriculum/units/821-b1j-work-notice-call.yaml
+    0.4.2: 2156 d69556d8c03e curriculum/units/821-b1j-work-notice-call.yaml
+  curriculum/units/823-b2j-film-opinion.yaml
+    0.4.1: 2162 7b958579eb5c curriculum/units/823-b2j-film-opinion.yaml
+    0.4.2: 2479 6dbf6401c6c1 curriculum/units/823-b2j-film-opinion.yaml
+  curriculum/units/824-b2j-film-with-friends.yaml
+    0.4.1: 2178 b6359dfa5add curriculum/units/824-b2j-film-with-friends.yaml
+    0.4.2: 2176 ba141cc2fd5c curriculum/units/824-b2j-film-with-friends.yaml
+  manifest.yaml
+    0.4.1: 772 1532a0f0cdb7 manifest.yaml
+    0.4.2: 772 8f8514239179 manifest.yaml
+  review/WORKLIST-2026-10-14.md
+    0.4.1: 5834 c8f7597b4a37 review/WORKLIST-2026-10-14.md
+    0.4.2: 6359 5148a910e588 review/WORKLIST-2026-10-14.md
+

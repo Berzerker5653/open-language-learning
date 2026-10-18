@@ -1,0 +1,3 @@
+$ cargo run -q -p lts-langpack-cli -- install dist/rc-0.4.2/ru-ru-reference-0.4.2.lpk --store dist/rc-0.4.2/store-ru-RU
+installed org.openlanguage.ru-ru.reference v0.4.2 at dist/rc-0.4.2/store-ru-RU/org.openlanguage.ru-ru.reference/0.4.2
+EXIT=0

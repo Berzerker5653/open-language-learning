@@ -1,0 +1,53 @@
+--- ru-RU: PUBLISHED 0.4.1 -> CANDIDATE 0.4.2 (bytes + 12-hex hash + path) ---
+published 0.4.1 members = 5788   candidate 0.4.2 members = 5789
+identical (size+hash)   = 5779
+added in 0.4.2:
+2379 897f1e9afc7c curriculum/units/816-b2j-style-editing.yaml
+2397 5364b4dea0e7 README.md
+2531 940aeeb10dba curriculum/units/810-a2j-past-day.yaml
+2599 1f514460eec3 curriculum/units/813-b1j-problem-letter.yaml
+3529 aec544dc03b4 sources.jsonl
+36270 20780f8e9611 lexicon/narration.jsonl
+3818086 5965f5810004 media/manifest.jsonl
+705 c8076ef70a0c manifest.yaml
+7414 0a5deca46f72 review/WORKLIST-2026-10-14.md
+76844 b4b4e4902b35 media/ru.lex.narration.totchas.wav
+removed in 0.4.2:
+1891 bd8eb33142a5 sources.jsonl
+2099 ba453267c80d curriculum/units/816-b2j-style-editing.yaml
+2254 78bb0149d7a8 curriculum/units/810-a2j-past-day.yaml
+2315 9da3065a6d35 curriculum/units/813-b1j-problem-letter.yaml
+35964 a6b059e8bc96 lexicon/narration.jsonl
+3817890 6196710eb525 media/manifest.jsonl
+6783 f78f4603dccb review/WORKLIST-2026-10-14.md
+713 dbfcf3e10fad manifest.yaml
+80684 abefb6819fea media/ru.lex.narration.totchas.wav
+present on both sides with different bytes:
+  curriculum/units/810-a2j-past-day.yaml
+    0.4.1: 2254 78bb0149d7a8 curriculum/units/810-a2j-past-day.yaml
+    0.4.2: 2531 940aeeb10dba curriculum/units/810-a2j-past-day.yaml
+  curriculum/units/813-b1j-problem-letter.yaml
+    0.4.1: 2315 9da3065a6d35 curriculum/units/813-b1j-problem-letter.yaml
+    0.4.2: 2599 1f514460eec3 curriculum/units/813-b1j-problem-letter.yaml
+  curriculum/units/816-b2j-style-editing.yaml
+    0.4.1: 2099 ba453267c80d curriculum/units/816-b2j-style-editing.yaml
+    0.4.2: 2379 897f1e9afc7c curriculum/units/816-b2j-style-editing.yaml
+  lexicon/narration.jsonl
+    0.4.1: 35964 a6b059e8bc96 lexicon/narration.jsonl
+    0.4.2: 36270 20780f8e9611 lexicon/narration.jsonl
+  manifest.yaml
+    0.4.1: 713 dbfcf3e10fad manifest.yaml
+    0.4.2: 705 c8076ef70a0c manifest.yaml
+  media/manifest.jsonl
+    0.4.1: 3817890 6196710eb525 media/manifest.jsonl
+    0.4.2: 3818086 5965f5810004 media/manifest.jsonl
+  media/ru.lex.narration.totchas.wav
+    0.4.1: 80684 abefb6819fea media/ru.lex.narration.totchas.wav
+    0.4.2: 76844 b4b4e4902b35 media/ru.lex.narration.totchas.wav
+  review/WORKLIST-2026-10-14.md
+    0.4.1: 6783 f78f4603dccb review/WORKLIST-2026-10-14.md
+    0.4.2: 7414 0a5deca46f72 review/WORKLIST-2026-10-14.md
+  sources.jsonl
+    0.4.1: 1891 bd8eb33142a5 sources.jsonl
+    0.4.2: 3529 aec544dc03b4 sources.jsonl
+

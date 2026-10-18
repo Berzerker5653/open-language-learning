@@ -1,0 +1,147 @@
+HEAD=5a0d1f0ab3cb3c707f995e8152abc4d73d4eef83
+dirty_paths=2
+ M languages/ja-JP/manifest.yaml
+?? state/evidence/RC-0.4.2-2026-10-18/
+--- manifests as shipped ---
+8f851423917969dcf2c94f75cd2d70f6f6d6bf6529ab2d5ea15a9fc1439e3d1a  languages/ja-JP/manifest.yaml
+version: "0.4.2"
+  content_license: "CC-BY-SA-4.0"
+c8076ef70a0cd1ef8b472ea9049866e58b3f520a3f84f57a2e530ecba3a5229c  languages/ru-RU/manifest.yaml
+version: "0.4.2"
+  content_license: "CC0-1.0"
+rc-ja-JP-validate                            exit=0
+rc-ja-JP-lint                                exit=0
+rc-ja-JP-test                                exit=0
+rc-ja-JP-audit-curriculum                    exit=0
+rc-ja-JP-audit-lexicon                       exit=0
+rc-ja-JP-audit-licenses                      exit=0
+rc-ja-JP-audit-sources                       exit=0
+rc-build-ja-JP                               exit=0
+archive: dist/rc-0.4.2/ja-jp-reference-0.4.2.lpk
+bytes=318724406
+b03cf88671d86de2c4ef481c07b16fcb2725f0dcd61a71df0e2182a63d764a81  dist/rc-0.4.2/ja-jp-reference-0.4.2.lpk
+rc-inspect-ja-JP                             exit=0
+archive members=5865 media_members=4902
+manifest_rows=4902 media_members=4902 delta=0
+published 0.4.1 members = 5864   candidate 0.4.2 members = 5865
+identical (size+hash)   = 5857
+added in 0.4.2:
+2072 a260a2494cd0 curriculum/units/826-admin-bill-payment-revision.yaml
+2156 d69556d8c03e curriculum/units/821-b1j-work-notice-call.yaml
+2176 ba141cc2fd5c curriculum/units/824-b2j-film-with-friends.yaml
+2423 2c9e006113e3 curriculum/units/820-b1j-work-notice.yaml
+2479 6dbf6401c6c1 curriculum/units/823-b2j-film-opinion.yaml
+6359 5148a910e588 review/WORKLIST-2026-10-14.md
+772 8f8514239179 manifest.yaml
+8621 a86453e2d918 curriculum/units/812-admin-bill-payment.yaml
+removed in 0.4.2:
+2094 b15de53cb222 curriculum/units/820-b1j-work-notice.yaml
+2158 c5e714846f7e curriculum/units/821-b1j-work-notice-call.yaml
+2162 7b958579eb5c curriculum/units/823-b2j-film-opinion.yaml
+2178 b6359dfa5add curriculum/units/824-b2j-film-with-friends.yaml
+5834 c8f7597b4a37 review/WORKLIST-2026-10-14.md
+772 1532a0f0cdb7 manifest.yaml
+7859 22f020a9657e curriculum/units/812-admin-bill-payment.yaml
+present on both sides with different bytes:
+  curriculum/units/812-admin-bill-payment.yaml
+    0.4.1: 7859 22f020a9657e curriculum/units/812-admin-bill-payment.yaml
+    0.4.2: 8621 a86453e2d918 curriculum/units/812-admin-bill-payment.yaml
+  curriculum/units/820-b1j-work-notice.yaml
+    0.4.1: 2094 b15de53cb222 curriculum/units/820-b1j-work-notice.yaml
+    0.4.2: 2423 2c9e006113e3 curriculum/units/820-b1j-work-notice.yaml
+  curriculum/units/821-b1j-work-notice-call.yaml
+    0.4.1: 2158 c5e714846f7e curriculum/units/821-b1j-work-notice-call.yaml
+    0.4.2: 2156 d69556d8c03e curriculum/units/821-b1j-work-notice-call.yaml
+  curriculum/units/823-b2j-film-opinion.yaml
+    0.4.1: 2162 7b958579eb5c curriculum/units/823-b2j-film-opinion.yaml
+    0.4.2: 2479 6dbf6401c6c1 curriculum/units/823-b2j-film-opinion.yaml
+  curriculum/units/824-b2j-film-with-friends.yaml
+    0.4.1: 2178 b6359dfa5add curriculum/units/824-b2j-film-with-friends.yaml
+    0.4.2: 2176 ba141cc2fd5c curriculum/units/824-b2j-film-with-friends.yaml
+  manifest.yaml
+    0.4.1: 772 1532a0f0cdb7 manifest.yaml
+    0.4.2: 772 8f8514239179 manifest.yaml
+  review/WORKLIST-2026-10-14.md
+    0.4.1: 5834 c8f7597b4a37 review/WORKLIST-2026-10-14.md
+rc-install-ja-JP                             exit=0
+store layout: dist/rc-0.4.2/store-ja-JP/org.openlanguage.ja-jp.reference dist/rc-0.4.2/store-ja-JP/org.openlanguage.ja-jp.reference/0.4.2 dist/rc-0.4.2/store-ja-JP/org.openlanguage.ja-jp.reference/current 
+current pointer: 0.4.2
+media files in installed tree: 4902
+store layout: dist/rc-0.4.2/store-ja-JP/org.openlanguage.ja-jp.reference dist/rc-0.4.2/store-ja-JP/org.openlanguage.ja-jp.reference/0.4.2 dist/rc-0.4.2/store-ja-JP/org.openlanguage.ja-jp.reference/current 
+current pointer: 0.4.2
+media files in installed tree: 4902
+rc-ru-RU-validate                            exit=0
+rc-ru-RU-lint                                exit=0
+rc-ru-RU-test                                exit=0
+rc-ru-RU-audit-curriculum                    exit=0
+rc-ru-RU-audit-lexicon                       exit=0
+rc-ru-RU-audit-licenses                      exit=0
+rc-ru-RU-audit-sources                       exit=0
+rc-build-ru-RU                               exit=0
+archive: dist/rc-0.4.2/ru-ru-reference-0.4.2.lpk
+bytes=318491600
+3b3dc25694b60f899f675982721df23b7c5bb7a3471f0457298ae0e1e38386d4  dist/rc-0.4.2/ru-ru-reference-0.4.2.lpk
+rc-inspect-ru-RU                             exit=0
+archive members=5789 media_members=4856
+manifest_rows=4856 media_members=4856 delta=0
+published 0.4.1 members = 5788   candidate 0.4.2 members = 5789
+identical (size+hash)   = 5779
+added in 0.4.2:
+2379 897f1e9afc7c curriculum/units/816-b2j-style-editing.yaml
+2397 5364b4dea0e7 README.md
+2531 940aeeb10dba curriculum/units/810-a2j-past-day.yaml
+2599 1f514460eec3 curriculum/units/813-b1j-problem-letter.yaml
+3529 aec544dc03b4 sources.jsonl
+36270 20780f8e9611 lexicon/narration.jsonl
+3818086 5965f5810004 media/manifest.jsonl
+705 c8076ef70a0c manifest.yaml
+7414 0a5deca46f72 review/WORKLIST-2026-10-14.md
+76844 b4b4e4902b35 media/ru.lex.narration.totchas.wav
+removed in 0.4.2:
+1891 bd8eb33142a5 sources.jsonl
+2099 ba453267c80d curriculum/units/816-b2j-style-editing.yaml
+2254 78bb0149d7a8 curriculum/units/810-a2j-past-day.yaml
+2315 9da3065a6d35 curriculum/units/813-b1j-problem-letter.yaml
+35964 a6b059e8bc96 lexicon/narration.jsonl
+3817890 6196710eb525 media/manifest.jsonl
+6783 f78f4603dccb review/WORKLIST-2026-10-14.md
+713 dbfcf3e10fad manifest.yaml
+80684 abefb6819fea media/ru.lex.narration.totchas.wav
+present on both sides with different bytes:
+  curriculum/units/810-a2j-past-day.yaml
+    0.4.1: 2254 78bb0149d7a8 curriculum/units/810-a2j-past-day.yaml
+    0.4.2: 2531 940aeeb10dba curriculum/units/810-a2j-past-day.yaml
+  curriculum/units/813-b1j-problem-letter.yaml
+    0.4.1: 2315 9da3065a6d35 curriculum/units/813-b1j-problem-letter.yaml
+    0.4.2: 2599 1f514460eec3 curriculum/units/813-b1j-problem-letter.yaml
+  curriculum/units/816-b2j-style-editing.yaml
+    0.4.1: 2099 ba453267c80d curriculum/units/816-b2j-style-editing.yaml
+    0.4.2: 2379 897f1e9afc7c curriculum/units/816-b2j-style-editing.yaml
+  lexicon/narration.jsonl
+    0.4.1: 35964 a6b059e8bc96 lexicon/narration.jsonl
+    0.4.2: 36270 20780f8e9611 lexicon/narration.jsonl
+  manifest.yaml
+    0.4.1: 713 dbfcf3e10fad manifest.yaml
+    0.4.2: 705 c8076ef70a0c manifest.yaml
+  media/manifest.jsonl
+rc-install-ru-RU                             exit=0
+store layout: dist/rc-0.4.2/store-ru-RU/org.openlanguage.ru-ru.reference dist/rc-0.4.2/store-ru-RU/org.openlanguage.ru-ru.reference/0.4.2 dist/rc-0.4.2/store-ru-RU/org.openlanguage.ru-ru.reference/current 
+current pointer: 0.4.2
+media files in installed tree: 4856
+store layout: dist/rc-0.4.2/store-ru-RU/org.openlanguage.ru-ru.reference dist/rc-0.4.2/store-ru-RU/org.openlanguage.ru-ru.reference/0.4.2 dist/rc-0.4.2/store-ru-RU/org.openlanguage.ru-ru.reference/current 
+current pointer: 0.4.2
+media files in installed tree: 4856
+rc-draft-catalog                             exit=0
+      "license": "CC-BY-SA-4.0",
+      "pack_id": "org.openlanguage.ja-jp.reference",
+      "sha256": "b03cf88671d86de2c4ef481c07b16fcb2725f0dcd61a71df0e2182a63d764a81",
+      "size_bytes": 318724406,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.4.2/ja-jp-reference-0.4.2.lpk",
+      "version": "0.4.2"
+      "license": "CC0-1.0",
+      "pack_id": "org.openlanguage.ru-ru.reference",
+      "sha256": "3b3dc25694b60f899f675982721df23b7c5bb7a3471f0457298ae0e1e38386d4",
+      "size_bytes": 318491600,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.2/ru-ru-reference-0.4.2.lpk",
+      "version": "0.4.2"
+RC_042_DONE

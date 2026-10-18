@@ -1,0 +1,6 @@
+store layout: dist/rc-0.4.2/store-ja-JP/org.openlanguage.ja-jp.reference dist/rc-0.4.2/store-ja-JP/org.openlanguage.ja-jp.reference/0.4.2 dist/rc-0.4.2/store-ja-JP/org.openlanguage.ja-jp.reference/current 
+current pointer: 0.4.2
+media files in installed tree: 4902
+store layout: dist/rc-0.4.2/store-ja-JP/org.openlanguage.ja-jp.reference dist/rc-0.4.2/store-ja-JP/org.openlanguage.ja-jp.reference/0.4.2 dist/rc-0.4.2/store-ja-JP/org.openlanguage.ja-jp.reference/current 
+current pointer: 0.4.2
+media files in installed tree: 4902

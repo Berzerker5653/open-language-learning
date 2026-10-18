@@ -13,14 +13,14 @@
       "tested_platforms": ["linux"],
       "community_confirmed_platforms": [],
       "untested_platforms": ["windows", "macos"],
-      "sha256": "e697ee92f6602c3373ebe5910f0dfbee8e50edcb3e9a25b2890efba5a5964690",
-      "size_bytes": 318722747,
-      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.4.1/ja-jp-reference-0.4.1.lpk",
-      "version": "0.4.1"
+      "sha256": "b03cf88671d86de2c4ef481c07b16fcb2725f0dcd61a71df0e2182a63d764a81",
+      "size_bytes": 318724406,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.4.2/ja-jp-reference-0.4.2.lpk",
+      "version": "0.4.2"
     },
     {
       "author": "Open Language Learning Platform contributors",
-      "display_name": "Russian Reference Pack (Draft)",
+      "display_name": "Russian Reference Pack",
       "license": "CC0-1.0",
       "locale": "ru-RU",
       "min_sdk_version": "0.1.0",
@@ -29,10 +29,10 @@
       "tested_platforms": ["linux"],
       "community_confirmed_platforms": [],
       "untested_platforms": ["windows", "macos"],
-      "sha256": "9eb074fa8d59f508108bc0fa8c698e1ddbd7458648ee2d829edeb36fbcfc1d7a",
-      "size_bytes": 318489935,
-      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.1/ru-ru-reference-0.4.1.lpk",
-      "version": "0.4.1"
+      "sha256": "3b3dc25694b60f899f675982721df23b7c5bb7a3471f0457298ae0e1e38386d4",
+      "size_bytes": 318491600,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.2/ru-ru-reference-0.4.2.lpk",
+      "version": "0.4.2"
     }
   ],
   "tested_platforms": ["linux"],
