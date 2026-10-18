@@ -1041,7 +1041,10 @@ export class LearnerEngine {
     const answer = label(card);
     const choices = [
       ...new Set(
-        pack.drills.filter((c) => c.id !== card.id).map(label).slice(0, 3),
+        pack.drills
+          .filter((c) => c.id !== card.id)
+          .map(label)
+          .slice(0, 3),
       ),
       answer,
     ];

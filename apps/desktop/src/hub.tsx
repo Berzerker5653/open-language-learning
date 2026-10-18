@@ -98,9 +98,8 @@ export function PracticeHub({
         <div className="notice pack-updates" role="status">
           {updates.map((u) => (
             <p key={u.pack_id} className="pack-version">
-              <PackText tag="strong">{u.display_name}</PackText> version{" "}
-              {u.installed_version} is on this device. The pack catalogue lists version{" "}
-              {u.available_version}.
+              <PackText tag="strong">{u.display_name}</PackText> version {u.installed_version} is on
+              this device. The pack catalogue lists version {u.available_version}.
             </p>
           ))}
           {onOpenLanguagePacks ? (

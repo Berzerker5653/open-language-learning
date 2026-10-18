@@ -37,9 +37,7 @@ describe("the kanji drill states the rule behind each element list", () => {
   it("frames an element list as a decomposition that may nest", async () => {
     app = await openDrill("祖母");
     const line = app.text('[aria-label="Kanji"] .field small');
-    expect(line).toContain(
-      "Made of these elements, which can overlap or sit inside one another.",
-    );
+    expect(line).toContain("Made of these elements, which can overlap or sit inside one another.");
     expect(line).toContain("女 + 亻 + 木");
     expect(line).not.toContain("no smaller parts");
   });

@@ -52,9 +52,7 @@ const PARTS_LABEL = "Made of these elements, which can overlap or sit inside one
 const STROKE_NOTE = " The strokes it is written with are not parts.";
 
 export function describeKanjiDecomposition(card: KanjiElementList): KanjiDecomposition {
-  const strokeStandIns = card.radicals.filter((glyph) =>
-    STROKE_STAND_INS.includes(glyph),
-  ).length;
+  const strokeStandIns = card.radicals.filter((glyph) => STROKE_STAND_INS.includes(glyph)).length;
   const parts = card.radicals.filter(
     (glyph) => !STROKE_STAND_INS.includes(glyph) && glyph !== card.character,
   );

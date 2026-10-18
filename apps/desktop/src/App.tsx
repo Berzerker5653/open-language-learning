@@ -1198,9 +1198,7 @@ export function App() {
         dataB64: await readFileB64(file),
       })) as InstalledPack;
       setInstalled((prev) =>
-        prev.some((i) => i.pack_id === imported.pack_id)
-          ? prev
-          : [...prev, imported],
+        prev.some((i) => i.pack_id === imported.pack_id) ? prev : [...prev, imported],
       );
       setPacks((await inv("available_packs")) as PackCandidate[]);
       setSelectedPack(imported.pack_id);
@@ -2908,8 +2906,7 @@ export function App() {
   // the step then says one version and nothing more.
   const wizardPacks = packs.map((pack) => ({
     ...pack,
-    available_version:
-      catalog.find((c) => c.pack_id === pack.pack_id)?.version ?? null,
+    available_version: catalog.find((c) => c.pack_id === pack.pack_id)?.version ?? null,
   }));
   // The same join the Language packs panel makes per row (language.tsx:462):
   // a pack on the device whose installed version is not the catalogue
