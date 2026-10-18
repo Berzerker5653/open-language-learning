@@ -37,7 +37,13 @@ else
   VITE_PID=$!
   # One composed trap shape used for the whole run (re-installed unchanged
   # after the temp files exist): kill vite AND clean — never one or the other.
-  trap 'kill "${VITE_PID:-0}" 2>/dev/null || true; [ -n "${MARKER:-}" ] && rm -f "$MARKER"; [ -n "${DATA:-}" ] && rm -rf "$DATA"; true' EXIT
+  # The guard is load-bearing: `kill "${VITE_PID:-0}"` would run `kill 0` when
+  # vite was never started (the pnpm branch, which is what CI takes), and `kill
+  # 0` signals the whole process group — the script kills itself, so a passing
+  # walkthrough exits 143 and the step goes red anyway. Seen in run 39161115585
+  # on 2026-10-18: the log ends with `SMOKE OK (13 routes walked)` followed by
+  # `Process completed with exit code 143`, twice, on two separate attempts.
+  trap 'if [ -n "${VITE_PID:-}" ]; then kill "${VITE_PID}" 2>/dev/null || true; fi; [ -n "${MARKER:-}" ] && rm -f "$MARKER"; [ -n "${DATA:-}" ] && rm -rf "$DATA"; true' EXIT
   sleep 2
   cargo build -p lts-desktop
 fi
@@ -50,7 +56,10 @@ fi
 
 MARKER=$(mktemp -u /tmp/lts-smoke.XXXXXX)
 DATA=$(mktemp -d /tmp/lts-smoke-data.XXXXXX)
-trap 'kill "${VITE_PID:-0}" 2>/dev/null || true; rm -f "$MARKER"; rm -rf "$DATA"' EXIT
+# Same guard as above, and this is the one that bit CI: with pnpm present the
+# vite branch never runs, so an unguarded `kill "${VITE_PID:-0}"` becomes
+# `kill 0`, SIGTERMing the script's own process group during EXIT.
+trap 'if [ -n "${VITE_PID:-}" ]; then kill "${VITE_PID}" 2>/dev/null || true; fi; rm -f "$MARKER"; rm -rf "$DATA"' EXIT
 
 echo "== launch under Xvfb =="
 # With webkit2gtk in the user-local sysroot, WebKitGTK still resolves helper
