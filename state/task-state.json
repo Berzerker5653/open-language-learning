@@ -1599,21 +1599,24 @@
     },
     "JA-KANJI-ATTRIBUTION-001": {
       "task_id": "JA-KANJI-ATTRIBUTION-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "The app surfaces the source acknowledgements its installed packs declare",
       "activity": "idle",
       "summary": "Render each installed pack's declared sources and licences on a learner-reachable surface, so the EDRDG attribution duty is met where the data is shown.",
-      "notes": "Opened 2026-10-16 when the owner chose option A for O-07: the applied patch adds `kradfile` (EDRDG, CC BY-SA 4.0) as a declared source of the 84 kanji `radicals` lists, and the EDRDG licence asks for the acknowledgement in an app About/Sources surface. `apps/desktop/src` renders no pack attribution at all today, so the duty already applies to the CC BY-SA JMdict layer shipped in the published 0.4.0 ja pack — this card is not created by the re-sourcing, it is disclosed by it. Not marked required_for_desktop_1_0: promoting a card into the release gate is an owner decision, so it is queued as a decision rather than taken.",
+      "notes": "Closed 2026-10-17 under the owner ruling recorded in ADR-0034, which made this card required for the desktop release candidate. The Language packs panel now renders each installed pack's declared sources from pack data instead of a hardcoded table: `content_claims()` in `apps/desktop/src-tauri/src/lib.rs` projects `sources.jsonl` joined against `licenses.jsonl` onto `PackClaims.provenance`, and `apps/desktop/src/language.tsx` renders the pack's own attribution text (falling back to `title` verbatim, never a composed sentence), the SPDX licence and its text URL, the access mode, and the pinned release from `access.notes` verbatim, with an explicit state for a pack that declares nothing. Measured on the real installed packs: 9 declared sources for ja-JP including the `kradfile` row that the 84 kanji `radicals` lists reference, and 3 for ru-ru including the Zaliznyak row whose title carries commit `c39322cb50aec024dd46aa182796520f77bf3dab`; `cargo test -q -p lts-desktop --lib` 153 passed / 0 failed / 1 ignored with `cargo fmt --check` and `cargo clippy --all-targets -- -D warnings` clean; `npx tsc --noEmit` clean and `npx vitest run src/language.test.tsx` 17 passed; `tools/audit_learner_copy.py` 0 findings. EDRDG section 3 (acknowledgement in an about/sources screen) is met in-app with `third-party/notices/NOTICE.md` cited as the complete pack-level list; section 4 (the update-notification procedure) and the undeclared pack-level licence stay open as owner actions.",
       "dependencies": [
         "UX-001"
       ],
       "evidence": [
         "state/evidence/O-07/decision-2026-10-16.md",
+        "state/evidence/JA-KANJI-ATTRIBUTION-001/attribution-surface.md",
         "third-party/notices/NOTICE.md",
-        "languages/ja-JP/sources.jsonl"
+        "languages/ja-JP/sources.jsonl",
+        "apps/desktop/src/language.tsx",
+        "apps/desktop/src-tauri/src/lib.rs"
       ],
-      "updated": "2026-10-16"
+      "updated": "2026-10-17"
     },
     "JA-KANJI-REFRESH-001": {
       "task_id": "JA-KANJI-REFRESH-001",

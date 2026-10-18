@@ -76,7 +76,30 @@ export interface PackClaims {
     stories: number;
   };
   postures: { kind: string; posture: string; count: number }[];
-  provenance: { id: string; title: string; url: string; license: string; access: string }[];
+  provenance: {
+    id: string;
+    title: string;
+    url: string;
+    license: string;
+    access: string;
+    /// URL of the licence text for the SPDX `license` (e.g. the EDRDG
+    /// licence page), and the source's own preferred attribution line —
+    /// the panel falls back to `title` and never synthesises one. The
+    /// backend sends "" when a field is absent; "" renders as nothing.
+    license_text_url?: string;
+    attribution_text?: string;
+    /// Verbatim notes on how the data was obtained — the pinned
+    /// release/commit of the consumed bytes lives here; rendered as-is,
+    /// never parsed or reformatted.
+    access_notes?: string;
+    retrieved?: string;
+    /// sha256 of the consumed file: audit-trail evidence, kept in a
+    /// data attribute, not learner-facing prose.
+    content_hash?: string;
+    attribution_required?: boolean;
+    redistribution_allowed?: boolean;
+    use_notes?: string;
+  }[];
 }
 /// INSTALL-UX-001: what a finished catalog install can prove. Every field
 /// is measured by the engine this run — the digest is the one that was
@@ -353,20 +376,40 @@ export function LanguagePanel(p: LanguagePanelProps) {
               </ul>
             </>
           )}
-          {c.provenance.length > 0 && (
-            <>
-              <h4>Stated sources</h4>
-              <ul className="meta-list">
-                {c.provenance.map((s) => (
-                  <li key={s.id}>
-                    {s.title}
-                    {s.license ? ` — ${s.license}` : ""}
-                    {s.access ? ` (${s.access})` : ""}
-                  </li>
-                ))}
-              </ul>
-            </>
+          <h4>Stated sources</h4>
+          {c.provenance.length === 0 ? (
+            <p className="empty">
+              This pack declares no sources — its shipped content carries no attribution.
+            </p>
+          ) : (
+            <ul className="meta-list">
+              {c.provenance.map((s) => (
+                <li key={s.id} data-content-hash={s.content_hash || undefined}>
+                  {s.attribution_text || s.title}
+                  {s.license && !s.license_text_url ? ` — ${s.license}` : ""}
+                  {s.license_text_url ? (
+                    <>
+                      {" — "}
+                      <a href={s.license_text_url}>
+                        {s.license ? `${s.license} license text` : "license text"}
+                      </a>
+                    </>
+                  ) : s.url ? (
+                    <>
+                      {" — "}
+                      <a href={s.url}>source</a>
+                    </>
+                  ) : null}
+                  {s.access ? ` (${s.access})` : ""}
+                  {s.access_notes ? <span className="meta"> · {s.access_notes}</span> : null}
+                  {s.retrieved ? <span className="meta"> retrieved {s.retrieved}</span> : null}
+                </li>
+              ))}
+            </ul>
           )}
+          <p className="meta">
+            The complete pack-level notice list ships in <code>third-party/notices/NOTICE.md</code>.
+          </p>
         </div>
       ))}
 

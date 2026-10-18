@@ -31,12 +31,12 @@ spot-checks*, and it is **not** population calibration. We must never convert
 ## Where we already are
 
 Measured against the ledger on 2026-10-17: the ROADMAP carries 130 tasks, 67 of them flagged
-`required_for_desktop_1_0`; the state ledger records 100 `done`, 17 `blocked`, 4 `review`, 5
-`ready`. Nine required tasks are still open — `JA-A2-001`, `JA-B1-001`, `JA-B2-001` (band
+`required_for_desktop_1_0`; the state ledger records 101 `done`, 17 `blocked`, 4 `review`, 4
+`ready`. Eight required tasks are still open — `JA-A2-001`, `JA-B1-001`, `JA-B2-001` (band
 authoring waiting on qualified human review capacity), `ACC-001`, `PERF-002`, `PLAT-001`,
-`SEC-001`, `REL-001` itself, and `JA-KANJI-ATTRIBUTION-001` (pack attribution, promoted onto
-the release path on 2026-10-17; the reasoning is recorded in ADR-0034). The guided feature
-set is largely shipped in the preview: SRS practice + planner + derived mastery
+`SEC-001` and `REL-001` itself. (`JA-KANJI-ATTRIBUTION-001` was promoted onto the release path
+on 2026-10-17 and closed the same day; the promotion reasoning is recorded in ADR-0034.) The
+guided feature set is largely shipped in the preview: SRS practice + planner + derived mastery
 (uncalibrated, capped at 0.9), local storage/migrations, pack pipeline, reading
 (interlinear), writing/composition, sentence mining, kanji, placement, scenarios,
 shadowing, perceptual discrimination, listening, dictation (ADR-0012), the

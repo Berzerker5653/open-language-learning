@@ -71,6 +71,66 @@ const allUnreviewedClaims: PackClaims[] = [
   },
 ];
 
+// The ja-JP pack as it actually ships: two EDRDG sources, each with its
+// own attribution line, a licence-text URL, and a pinned release/commit
+// in access_notes that must surface verbatim.
+const jaSourcedClaims: PackClaims[] = [
+  {
+    pack_id: "org.openlanguage.ja-demo",
+    version: "0.2.0",
+    trust_state: "community",
+    counts: {
+      units: 30,
+      goals: 75,
+      assessments: 12,
+      lexicon: 3920,
+      sentences: 40,
+      grammar: 18,
+      orthography: 46,
+      kanji: 2136,
+      phonological_contrasts: 6,
+      stories: 3,
+    },
+    postures: [{ kind: "lexicon", posture: "draft", count: 3920 }],
+    provenance: [
+      {
+        id: "edrdg-jmdict",
+        title: "JMdict/JMnedict electronic dictionary project",
+        url: "https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project",
+        license: "CC-BY-SA-4.0",
+        access: "public",
+        license_text_url: "https://www.edrdg.org/edrdg/licence.html",
+        attribution_text:
+          "JMdict/JMnedict © Electronic Dictionary Research and Development Group, CC BY-SA 4.0",
+        retrieved: "2026-09-30",
+        access_notes:
+          "jmdict-simplified release 3.6.2, commit 4f9c2a1e7b8d5e6c0a1b3f4d5e6c7a8b9c0d1e2f",
+        content_hash: "9d2f4b6a1c8e0d3f5a7b9c1e3f5a7b9d1e3f5a7b9c1e3f5a7b9d1e3f5a7b9c1e",
+        attribution_required: true,
+        redistribution_allowed: true,
+        use_notes: "",
+      },
+      {
+        id: "kradfile",
+        title:
+          "KRADFILE - EDRDG kanji visible-component/decomposition file (consumed via the jmdict-simplified 3.6.2 conversion)",
+        url: "https://www.edrdg.org/kradfile/kradfile.html",
+        license: "CC-BY-SA-4.0",
+        access: "public",
+        license_text_url: "https://www.edrdg.org/edrdg/licence.html",
+        attribution_text:
+          "Radical/decomposition data: KRADFILE © Electronic Dictionary Research and Development Group, CC BY-SA 4.0 (https://www.edrdg.org/edrdg/licence.html)",
+        retrieved: "2026-09-30",
+        access_notes: "jmdict-simplified release 3.6.2, kanji directory 2024-03-19",
+        content_hash: "1a3c5e7b9d1f3a5c7e9b1d3f5a7c9e1b3d5f7a9c1e3b5d7f9a1c3e5b7d9f1a3c",
+        attribution_required: true,
+        redistribution_allowed: true,
+        use_notes: "",
+      },
+    ],
+  },
+];
+
 function render(over: Partial<Parameters<typeof LanguagePanel>[0]> = {}) {
   return renderToStaticMarkup(
     <LanguagePanel
@@ -359,5 +419,44 @@ describe("language panel", () => {
     expect(html).toContain('<span dir="rtl" lang="ar-MA">السلام عليكم</span>');
     // An LTR pack in the same list gains a language tag and no direction.
     expect(html).toContain('<span lang="eo">Esperanto Community Pack</span>');
+  });
+
+  it("renders each declared source's attribution, licence-text link and pinned release", () => {
+    const html = render({ claims: jaSourcedClaims });
+    // Both EDRDG sources show their OWN attribution lines, not titles or ids.
+    expect(html).toContain(
+      "JMdict/JMnedict © Electronic Dictionary Research and Development Group, CC BY-SA 4.0",
+    );
+    expect(html).toContain(
+      "Radical/decomposition data: KRADFILE © Electronic Dictionary Research and Development Group, CC BY-SA 4.0",
+    );
+    expect(html).not.toContain("edrdg-jmdict");
+    // The licence links to the licence TEXT, labelled as such.
+    expect(html).toContain('href="https://www.edrdg.org/edrdg/licence.html"');
+    expect(html).toContain("CC-BY-SA-4.0 license text");
+    // The pinned release/commit lives in access_notes and renders verbatim.
+    expect(html).toContain(
+      "jmdict-simplified release 3.6.2, commit 4f9c2a1e7b8d5e6c0a1b3f4d5e6c7a8b9c0d1e2f",
+    );
+    expect(html).toContain("jmdict-simplified release 3.6.2, kanji directory 2024-03-19");
+    // Retrieval dates surface; bare hashes never become prose.
+    expect(html).toContain("retrieved 2026-09-30");
+    expect(html).not.toContain("9d2f4b6a1c8e0d3f5a7b9c1e3f5a7b9d1e3f5a7b9c1e3f5a7b9d1e3f5a7b9c1e<");
+    // The surface points at the complete notice list instead of posing as it.
+    expect(html).toContain("third-party/notices/NOTICE.md");
+  });
+
+  it("says plainly when a pack declares no sources, and fabricates no source line", () => {
+    const html = render({
+      claims: jaSourcedClaims.map((c) => ({ ...c, provenance: [] })),
+    });
+    // The section stays, stating the unattributed state.
+    expect(html).toContain("Stated sources");
+    expect(html).toContain("This pack declares no sources");
+    const region = html.slice(html.indexOf("Stated sources"), html.indexOf("Display settings"));
+    expect(region).not.toMatch(/<li/);
+    expect(region).not.toContain("http");
+    // The pointer to the full notice list is unconditional.
+    expect(region).toContain("third-party/notices/NOTICE.md");
   });
 });

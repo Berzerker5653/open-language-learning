@@ -3384,6 +3384,23 @@ struct ProvenanceClaim {
     url: String,
     license: String,
     access: String,
+    /// `license.text_url`: where the full licence text lives, as declared.
+    license_text_url: String,
+    /// `use.attribution_text`: the exact text the pack asks to see. Empty
+    /// when the row declares no specific wording; the surface falls back to
+    /// the title and never composes an attribution string of its own.
+    attribution_text: String,
+    retrieved: String,
+    content_hash: String,
+    /// `access.notes`, verbatim. Pinned versions live here (and sometimes in
+    /// `title`); they are rendered as declared, never parsed or reformatted.
+    access_notes: String,
+    /// `use.notes`, verbatim: duties the pack attaches to its own use.
+    use_notes: String,
+    /// `use.attribution_required`, schema-defaulting to true.
+    attribution_required: bool,
+    /// `use.redistribution_allowed`, defaulting to false when undeclared.
+    redistribution_allowed: bool,
 }
 
 #[derive(Serialize)]
@@ -3546,6 +3563,19 @@ fn content_claims(root: &Path) -> ContentClaims {
                     .unwrap_or_default()
                     .to_string()
             };
+            let gs = |a: &str, b: &str| {
+                v.get(a)
+                    .and_then(|x| x.get(b))
+                    .and_then(|x| x.as_str())
+                    .unwrap_or_default()
+                    .to_string()
+            };
+            let gb = |a: &str, b: &str, d: bool| {
+                v.get(a)
+                    .and_then(|x| x.get(b))
+                    .and_then(|x| x.as_bool())
+                    .unwrap_or(d)
+            };
             if g("id").is_empty() {
                 continue;
             }
@@ -3565,6 +3595,14 @@ fn content_claims(root: &Path) -> ContentClaims {
                     .and_then(|m| m.as_str())
                     .unwrap_or_default()
                     .to_string(),
+                license_text_url: gs("license", "text_url"),
+                attribution_text: gs("use", "attribution_text"),
+                retrieved: g("retrieved"),
+                content_hash: g("content_hash"),
+                access_notes: gs("access", "notes"),
+                use_notes: gs("use", "notes"),
+                attribution_required: gb("use", "attribution_required", true),
+                redistribution_allowed: gb("use", "redistribution_allowed", false),
             });
         }
     }
@@ -10396,8 +10434,151 @@ activities:
         );
 
         // Provenance surfaces as claims with license/access metadata.
-        assert!(!c.provenance.is_empty());
-        assert!(c.provenance.iter().any(|s| !s.title.is_empty()));
+        // JA-KANJI-ATTRIBUTION-001: the declared sources arrive field-for-field
+        // from languages/ja-JP/sources.jsonl -- licence ids, licence-text URLs,
+        // the pinned releases the pack puts in `title`/`access.notes`, retrieved
+        // dates, content hashes, and the exact attribution text the pack asks
+        // to see. The surface renders these; it adds none of them.
+        let prov = &c.provenance;
+        let src = |id: &str| {
+            prov.iter()
+                .find(|s| s.id == id)
+                .unwrap_or_else(|| panic!("sources.jsonl row {id} missing from the payload"))
+        };
+        let krad = src("kradfile");
+        assert_eq!(
+            krad.license, "CC-BY-SA-4.0",
+            "the EDRDG row carries its licence"
+        );
+        assert_eq!(
+            krad.license_text_url,
+            "https://www.edrdg.org/edrdg/licence.html"
+        );
+        assert_eq!(krad.retrieved, "2026-10-15");
+        assert_eq!(
+            krad.content_hash,
+            "90369021899d89159ee6e079bccd7d83915daa3191f0c6ed7efc2473e088c086"
+        );
+        assert_eq!(
+            krad.attribution_text,
+            "Radical/decomposition data: KRADFILE © Electronic Dictionary Research and Development Group, CC BY-SA 4.0 (https://www.edrdg.org/edrdg/licence.html)"
+        );
+        // The pin is rendered verbatim from the pack's own words: the
+        // conversion release lives in access.notes, never parsed out.
+        assert!(
+            krad.access_notes
+                .contains("kradfile-3.6.2+20260928191014.json.tgz")
+        );
+        assert!(krad.access_notes.contains("kradfile-3.6.2.json"));
+        // The pack's licence duties ride along verbatim in use.notes.
+        assert!(krad.use_notes.contains("About/Sources surface"));
+        assert!(krad.attribution_required);
+        assert!(krad.redistribution_allowed);
+        let jmd = src("jmdict-simplified");
+        assert!(jmd.title.contains("3.6.2+20260928191014"), "pin in title");
+        assert!(jmd.access_notes.contains("this exact release"));
+        assert_eq!(
+            jmd.license_text_url,
+            "https://creativecommons.org/licenses/by-sa/4.0/"
+        );
+        assert_eq!(jmd.retrieved, "2026-10-05");
+        assert_eq!(
+            jmd.content_hash,
+            "5f54504a62a7f45741e1bf6fd28f6e1e5add6405f2829748cc004a802839a3aa"
+        );
+        let edrdg = src("edrdg-jmdict");
+        assert_eq!(
+            edrdg.attribution_text,
+            "JMdict/JMnedict © Electronic Dictionary Research and Development Group, CC BY-SA 4.0"
+        );
+        assert_eq!(edrdg.license, "CC-BY-SA-4.0");
+        // Every declared row must carry its licence id: nothing gets an
+        // invented one, and none is dropped.
+        assert_eq!(prov.len(), 9);
+        assert!(prov.iter().all(|s| !s.license.is_empty()));
+    }
+
+    /// Every installed pack's declared sources reach the payload with their
+    /// own fields, including rows that opt out of attribution (ru-original)
+    /// and rows whose pin is a git commit (zalizniak-2010).
+    #[test]
+    fn provenance_payload_covers_every_installed_pack_verbatim() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        // The Russian reference pack is not in the production bundle list, so
+        // `install_bundled_pack` cannot stage it: it goes in the way the
+        // pack-gate tests stage it, built from an absolute repo path and then
+        // recorded in the store, because the claims report walks
+        // installations.
+        let ru_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../languages/ru-RU");
+        let (ru_bytes, _ru_sha) = lts_langpack::archive::build(&ru_dir).unwrap();
+        let ru_outcome = lts_langpack::archive::install(&ru_bytes, &data.join("packs")).unwrap();
+        let ru_store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        ru_store
+            .record_installation(&lts_storage::PackInstallation {
+                pack_id: ru_outcome.pack_id.clone(),
+                version: ru_outcome.version.clone(),
+                installed_at: rfc3339_utc(now_secs()),
+                trust_state: "community".into(),
+            })
+            .unwrap();
+        let claims = pack_claims_at(data).unwrap();
+        let for_pack = |id: &str| {
+            claims
+                .iter()
+                .find(|c| c.pack_id == id)
+                .unwrap_or_else(|| panic!("{id} missing from the claims report"))
+        };
+        let ru = for_pack("org.openlanguage.ru-ru.reference");
+        let row = |id: &str| {
+            ru.provenance
+                .iter()
+                .find(|s| s.id == id)
+                .unwrap_or_else(|| panic!("sources.jsonl row {id} missing"))
+        };
+        assert_eq!(ru.provenance.len(), 3);
+        let orig = row("ru-original");
+        assert_eq!(orig.license, "CC0-1.0");
+        assert_eq!(
+            orig.license_text_url,
+            "https://creativecommons.org/publicdomain/zero/1.0/"
+        );
+        // The row says no attribution is required and declares no text: the
+        // payload must not invent either.
+        assert!(!orig.attribution_required);
+        assert!(orig.attribution_text.is_empty());
+        let zal = row("zalizniak-2010");
+        assert_eq!(zal.license, "CC-BY-NC-4.0");
+        // A commit pin, rendered from the pack's own words.
+        assert!(
+            zal.title
+                .contains("c39322cb50aec024dd46aa182796520f77bf3dab")
+        );
+        // ja-JP still rides along beside it.
+        assert!(
+            !for_pack("org.openlanguage.ja-jp.reference")
+                .provenance
+                .is_empty()
+        );
+    }
+
+    /// Empty provenance is explicit: a pack that declares no sources yields
+    /// no claims at all -- the payload never invents attribution. (The strict
+    /// install gate in `crates/langpack/src/pack.rs` rejects packs with a
+    /// missing sources.jsonl/licenses.jsonl today, so such a pack reaches the
+    /// surface only through hand-import or future pack paths; the card still
+    /// requires the payload to stay empty, and the surface renders the empty
+    /// list as "declares no sources" rather than silence.)
+    #[test]
+    fn a_pack_without_declared_sources_gets_an_empty_provenance_payload() {
+        let dir = tempfile::tempdir().unwrap();
+        let root = dir.path().join("pack");
+        std::fs::create_dir_all(&root).unwrap();
+        // ContentClaims is a tuple; provenance is element 2.
+        assert!(content_claims(&root).2.is_empty());
+        std::fs::write(root.join("sources.jsonl"), "\n").unwrap();
+        assert!(content_claims(&root).2.is_empty());
     }
 
     /// K-63: the claim report memoizes the content-derived tallies per pack
