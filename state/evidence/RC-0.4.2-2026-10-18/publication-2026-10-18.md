@@ -88,3 +88,45 @@ client, not only the CLI.
   restore) is what this gate enforces.
 - The run over the commit that follows is the one expected to be green end to end; it
   is recorded in §7.
+
+## 7. CI green run, and what stood between the publication and it
+
+Run **`39166395880`** — <https://github.com/Berzerker5653/open-language-learning/actions/runs/39166395880>
+— over head `4e998283fd7d8aa57891bbf24df45eb8f6c39127`:
+
+| job | conclusion |
+| --- | --- |
+| `rust` | success |
+| `web` | success |
+| `schemas` | success |
+| `security` | success |
+| `platform-compile (windows-latest)` | success |
+| `platform-compile (macos-latest)` | success |
+| `desktop-smoke` | success |
+| `platform-bundles` | skipped (manual, unsigned — unchanged posture) |
+
+`rust` and `desktop-smoke` both ran `Restore reference-pack audio (published
+archives)` green against the live 0.4.2 pair, which is the gate §§4–5 proved by hand.
+
+Two failures had to be diagnosed to get there, and neither was the pack content:
+
+1. **`39161115585` (head `31ce5fb`), attempts 1 and 2** — `rust`, `web`, `schemas`,
+   `security` and both `platform-compile` legs green; `desktop-smoke` red at
+   `Run ./scripts/smoke-desktop.sh`, both times, with the step log ending
+   `SMOKE OK (13 routes walked)` followed by
+   `##[error]Process completed with exit code 143`. Not a flake and not the app: the
+   `EXIT` trap at `scripts/smoke-desktop.sh:59` ran `kill "${VITE_PID:-0}"`, and on the
+   pnpm branch — which is the branch CI takes, because the job installs pnpm —
+   `VITE_PID` is unset, so it executed `kill 0` and SIGTERM'd its own process group
+   while exiting. Reproduced in one line
+   (`bash -c 'trap "kill \"${VITE_PID:-0}\" 2>/dev/null || true; true" EXIT; echo ok'`
+   → `ok`, exit 143), fixed by guarding the kill, and verified on this host at this
+   tree: `SMOKE OK (13 routes walked)`, `SMOKE SCRIPT EXIT=0`, 154.84 s wall
+   (`LTS_SMOKE_TIMEOUT=900`). `6cae160` (2026-10-17 15:16) introduced that trap shape;
+   it survived a day because every run since then died earlier, at the restore step, so
+   the smoke step never ran.
+2. The earlier `39155073665` / `39157289475` restore failures, documented in §6: the
+   first is ADR-0032's ordering working as designed, the second pure timing.
+
+Nothing in this section changed a pack, an archive, a pin or a budget. The only code
+change is the trap guard in `4e99828`.
