@@ -167,7 +167,8 @@ manual, unsigned and artifact-named `-UNTESTED-`, and
 `docs/platform/PLATFORM_REPORTS.yaml` holds no Windows or macOS record, which
 needs devices or runner spend plus a human report bound to the exact
 `app_commit` and `pack_sha256`; **AT pass** — see the I04 comment, one package
-install away and still `HUMAN-ONLY`; **the 0.4.1 republish question** (O-01/O-05);
+install away and still `HUMAN-ONLY`; **a pack release that carries the new
+declarations** — the published 0.4.1 archives predate them;
 **security disposition** (SEC-001); **performance tiers** (PERF-002 above);
 **review capacity** — 5 open ru worklist items, 0 closed, all 120 rubrics draft.
 

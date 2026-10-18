@@ -119,9 +119,16 @@ runtime report.
   section per item. R12 and R13 are checkable against the recorded evidence;
   I04, I05 and I08 are written as status comments and their checkboxes must stay
   open, because each still has a human or artifact-level half.
-- Reference-pack republish (O-01b) and any app release (D6) stay yours; the
-  0.4.1 archives and member-level accounting are already on record under
-  `state/evidence/RC-0.4.1-2026-10-15/`.
+- **The 0.4.1 pack republish is done** (O-01(b), executed 2026-10-16 under D2;
+  `catalog/packs.json` pins `0.4.1` for both packs, archives and member-level
+  accounting in `state/evidence/RC-0.4.1-2026-10-15/`). What is open now is the
+  *next* release: today's commits change both packs — new `ja` unit 826, three
+  retargeted transfer stages, six `task_sequence` declarations — so the archives
+  a newcomer downloads today do not contain them. Cutting 0.4.2 is your decision;
+  I bumped no pack version.
+- **App release (D6)** still means no app release: the desktop stays
+  `0.4.0-alpha.1` pre-release. Nothing this session built or published an app
+  artifact.
 
 ## 5. Rights decisions still open
 
