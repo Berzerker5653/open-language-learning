@@ -1,8 +1,10 @@
 # ADR 0033: Explicit ledger records for release-path roadmap tasks
 
-Status: **Proposed** — agent-authored 2026-10-15. Acceptance is an owner decision, and the
-validator behaviour described here is deliberately **off by default** so that adopting this
-policy is a visible act rather than a side effect of a tooling change.
+Status: **Accepted** (2026-10-17) — agent-authored 2026-10-15; the owner
+signed the ADR on 2026-10-17. The strict check is no longer opt-in:
+`--require-explicit-ledger-records` has been the invocation CI runs since
+2026-10-16 (`scripts/ci.sh:112`, `.github/workflows/ci.yml:253`), so adopting
+the policy is already a matter of record rather than a pending act.
 
 ## Context
 
@@ -25,12 +27,15 @@ explicit record.
 
 ## Decision
 
-Make the gap machine-detectable, without making the policy mandatory:
+Make the gap machine-detectable, without (at the time of the decision) making
+the policy mandatory — the owner made it mandatory on 2026-10-16 under D5b;
+see Status.
 
 1. `tools/validate_handoff.py --require-explicit-ledger-records` fails for any roadmap task
    with `required_for_desktop_1_0: true` that has no `state/task-state.json` record, and
-   warns for optional ones. Default runs are byte-for-byte unchanged
-   (`HANDOFF VALIDATION PASSED (1959 data files checked)` with the same two WARNs).
+   warns for optional ones. Default runs were byte-for-byte unchanged as of
+   this decision (`HANDOFF VALIDATION PASSED (1959 data files checked)` with
+   the same two WARNs); the strict invocation has since become the default.
 2. Release-path cards that depend on a human act get an explicit record with a named
    `blocker`, even though `blocked` is the more restrictive state. Recording a blocker
    cannot enable work; it only prevents an agent from mistaking silence for permission.
@@ -54,20 +59,21 @@ Make the gap machine-detectable, without making the policy mandatory:
 - **Keep derivation alone.** Cheapest, and it is what the repository does today; the cost
   is that a required card added tomorrow can read `ready` for exactly the reason these
   eight did.
-- **Turn the flag on by default now.** Fails the current baseline until every required card
-  has a record (true as of this change) but silently makes an agent-authored policy
-  binding, which is the thing this ADR exists to avoid.
+- **Turn the flag on by default now.** Rejected here because it fails the
+  current baseline until every required card has a record and silently makes an
+  agent-authored policy binding — the owner chose this anyway on 2026-10-16
+  under D5b, after the records existed.
 - **Move gating metadata into `ROADMAP.yaml`** (e.g. a `human_gated: true` field) and
   validate that instead. More precise, but it splits one fact across two files and requires
   annotating 122 tasks; the required flag plus the ledger already expresses it.
 
 ## Status
 
-Proposed. If the owner accepts, the flag can be added to `scripts/ci.sh` and
-`.github/workflows/ci.yml` in a one-line change per file, and the `note` in
-`state/task-state.json` should be amended to say the derivation rule no longer applies to
-required tasks. Until then the flag is available for review and the default output is
-unchanged.
+Accepted 2026-10-17, and already in force: the strict invocation ran in CI from
+2026-10-16 onward. What acceptance obliges going forward is upkeep, not
+tooling — every card promoted to `required_for_desktop_1_0` needs a ledger
+record with a named blocker before `--require-explicit-ledger-records` can
+pass, which is the mechanism that caught `SPEECH-007` and `O-07`.
 
 **Applied 2026-10-16 under decision-queue item D5b** (the owner chose "adopt ADR-0033 and
 enable the flag in CI"). The strict invocation is now what CI runs, in both
@@ -75,5 +81,6 @@ enable the flag in CI"). The strict invocation is now what CI runs, in both
 `state/task-state.json` carries the derivation carve-out. Measured in the same change: the
 plain and strict runs both print `HANDOFF VALIDATION PASSED (1960 data files checked)`;
 strict adds four WARNs for optional tasks with no record (`AI-001`, `PLAT-002`, `ADV-001`,
-`WEB-001`) and no failures. Line 3 still reads **Proposed** — that line is the owner's
-signature, not a build fact.
+`WEB-001`) and no failures. Line 3 read **Proposed** in that change on purpose:
+that line was the owner's signature, not a build fact, and it was signed on
+2026-10-17.

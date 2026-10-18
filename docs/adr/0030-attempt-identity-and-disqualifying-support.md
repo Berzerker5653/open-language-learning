@@ -1,6 +1,14 @@
 # ADR 0030: Attempt identity and disqualifying support
 
-Status: Proposed — agent-authored; acceptance is an owner decision.
+Status: Accepted (2026-10-17) — agent-authored; the owner signed the ADR on
+2026-10-17. Implemented in `crates/learner-model/src/policy.rs`: attempt-group
+collapsing and disqualifying-support filtering in `observations` (`:338`,
+attempt key `prompt_family_id.unwrap_or(activity_id)` at `:366`), ladder
+selection at `:388`, `derive` at `:487`, `epoch_seconds` at `:279`, and the
+`disqualifying_for` vocabulary validation at `:185-197` — the last pinned by
+`crates/learner-model/tests/policy.rs:117-126`, which shows a typo'd support
+action and a non-canonical dimension key are both rejected.
+
 Date: 2026-10-14
 
 ## Context

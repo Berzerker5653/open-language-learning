@@ -1,7 +1,11 @@
 # ADR 0028: Licence-permissiveness detection in the pack audit
 
-Status: Proposed — agent-authored; acceptance and any promotion past `Info`
-severity are owner decisions (O-01(a), ADR acceptance).
+Status: Accepted (2026-10-17) — agent-authored; the owner signed the ADR on
+2026-10-17. Severity is unchanged by that signature: the detection still ships
+at `Info` in `crates/langpack/src/audit.rs` (the permissiveness classification)
+and is pinned by `crates/langpack/tests/audit.rs:28` and `:66`. Any promotion
+past `Info` remains a separate owner decision (O-01(a)).
+
 Date: 2026-10-13
 
 ## Context

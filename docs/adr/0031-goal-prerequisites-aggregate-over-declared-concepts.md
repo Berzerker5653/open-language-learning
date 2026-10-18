@@ -1,6 +1,14 @@
 # ADR 0031: Goal prerequisites aggregate over declared concepts
 
-Status: Proposed — agent-authored; acceptance is an owner decision.
+Status: Accepted (2026-10-17) — agent-authored; the owner signed the ADR on
+2026-10-17. Implemented in `apps/desktop/src-tauri/src/lib.rs`:
+`goal_derived_state` (`:1780`) aggregates the concepts a goal declares, and
+`prereq_satisfied` (`:1806`, the aggregate comparison at `:1819`) consults that
+aggregate instead of the single declared-concept row; the same aggregate feeds
+the UI state at `:3713`. Pinned end to end by
+`crates/langpack/tests/ja_goal_graph.rs:47`, which resolves every Japanese
+prerequisite edge inside the graph.
+
 Date: 2026-10-14
 
 ## Context

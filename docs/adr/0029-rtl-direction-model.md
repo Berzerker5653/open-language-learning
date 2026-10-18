@@ -1,6 +1,13 @@
 # ADR 0029: Direction model for right-to-left packs
 
-Status: Proposed — agent-authored; acceptance is an owner decision.
+Status: Accepted (2026-10-17) — agent-authored; the owner signed the ADR on
+2026-10-17. Shipped and pinned by `apps/desktop/src/rtl-direction.test.tsx`:
+pack content flips (`:74`), the shell stays LTR (`:92`), an LTR pack is
+language-tagged but unflipped (`:111`), prompts and choices flip while
+romanization stays LTR (`:127`), scenario dialogue flips without the support
+chrome (`:146`), and stories flip title, sentences and looked-up words but not
+the reading prose (`:236`).
+
 Date: 2026-10-13
 
 ## Context

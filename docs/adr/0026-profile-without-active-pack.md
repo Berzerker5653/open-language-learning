@@ -1,9 +1,12 @@
 # ADR 0026: a profile may exist without an active language pack; the wizard offers every pack the device already has
 
-Status: Proposed — the owner directed the behavior in-chat 2026-10-12 ("we can
-also just add in a skip button for choosing a language pack", "fix now +
-re-test"). Acceptance is an owner act; an agent cannot accept an ADR, per
-`AGENTS.md` / `docs/15`.
+Status: Accepted (2026-10-17) — the owner directed the behavior in-chat
+2026-10-12 ("we can also just add in a skip button for choosing a language
+pack", "fix now + re-test") and signed the ADR on 2026-10-17. Shipped:
+`available_packs_at` (`apps/desktop/src-tauri/src/lib.rs:287`, consumed by the
+wizard at `:318`) offers every pack the device has, pinned by
+`an_installed_pack_that_is_not_bundled_appears_in_the_wizard_list` and
+`an_installed_pack_that_is_also_bundled_is_listed_exactly_once` in the same file.
 
 Date: 2026-10-12
 

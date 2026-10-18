@@ -40,13 +40,15 @@ Existing:
 - 0023 Qwen3-TTS CustomVoice replaces Kokoro as the pack-audio BAKE engine (ADR-0016 mechanism unchanged; its "runtime fallback" clause later retired by 0024) — **Accepted 2026-10-10**
 - 0024 no runtime TTS — language packs are the only speech audio; supersedes ADR-0009's variant axis and the runtime-fallback role in ADR-0016/0023 (K-90/TTS-004) — **Accepted 2026-10-10**
 - 0025 CEFR-band coverage is the pack level model; tier-scoped packs are first-class — **Accepted by the owner 2026-10-12**
-- 0026 a profile may exist without an active language pack; the wizard offers every pack the device already has — **Proposed (owner-directed, 2026-10-12)**
+- 0026 a profile may exist without an active language pack; the wizard offers every pack the device already has — **Accepted 2026-10-17 (owner-directed 2026-10-12)**
 - 0027 default catalog URL for released builds (`LTS_PACK_CATALOG_URL` still overrides; empty value disables) — **Accepted 2026-10-13**
-- 0028 licence-permissiveness detection in the pack audit (`license_less_permissive_than_source`, reported at info; ids outside the CC table unjudged) — **Proposed (agent-authored, 2026-10-13)**
-- 0029 direction model for right-to-left packs (per-container `dir` from manifest `capabilities.rtl`; shell and romanization stay LTR) — **Proposed (agent-authored, 2026-10-13)**
-- 0030 attempt identity and disqualifying support (identity is an input, never a guess; policy 0.2.0 `support.disqualifying_for`) — **Proposed (agent-authored, 2026-10-14)**
-- 0031 goal prerequisites aggregate over declared concepts (`required_concepts` decides a goal-level gate; no goal-id evidence rows) — **Proposed (agent-authored, 2026-10-14)**
-- 0032 track pack media bytes that outrun the pinned published archive (18 journey assets; bounded exception that ends at republish) — **Proposed (agent-authored, 2026-10-14)**
-- 0033 explicit ledger records for release-path roadmap tasks (`--require-explicit-ledger-records`, off by default; every required task now carries a record) — **Proposed (agent-authored, 2026-10-15)**
+- 0028 licence-permissiveness detection in the pack audit (`license_less_permissive_than_source`, reported at info; ids outside the CC table unjudged) — **Accepted 2026-10-17** (severity stays `Info`; promoting it is a separate owner decision)
+- 0029 direction model for right-to-left packs (per-container `dir` from manifest `capabilities.rtl`; shell and romanization stay LTR) — **Accepted 2026-10-17**
+- 0030 attempt identity and disqualifying support (identity is an input, never a guess; policy 0.2.0 `support.disqualifying_for`) — **Accepted 2026-10-17**
+- 0031 goal prerequisites aggregate over declared concepts (`required_concepts` decides a goal-level gate; no goal-id evidence rows) — **Accepted 2026-10-17**
+- 0032 track pack media bytes that outrun the pinned published archive (18 journey assets; bounded exception that ends at republish) — **Accepted 2026-10-17** (the exception was deleted 2026-10-16; the record is now historical)
+- 0033 explicit ledger records for release-path roadmap tasks (`--require-explicit-ledger-records`, now on by default in CI; every required task carries a record) — **Accepted 2026-10-17** (applied 2026-10-16 under D5b)
+- 0034 band-review gates, the SPEECH-007 release edges, and kanji attribution — **Proposed (agent-authored, 2026-10-17)**; it records graph and promotion changes the owner directed on 2026-10-17, and the graph is already on disk while the ADR awaits signature
+- 0035 reconstructing provenance batches after the fact (batch row ids from the tag range; reconstructed records carry the actual retrieval date) — **Proposed (agent-authored, 2026-10-17)**
 
 Template: `template.md`.

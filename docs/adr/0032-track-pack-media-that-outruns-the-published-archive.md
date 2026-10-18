@@ -1,7 +1,12 @@
 # ADR 0032: Track pack media bytes that outrun the pinned published archive
 
-Status: Proposed — agent-authored; acceptance is an owner decision, and the
-exception is deleted the moment the owner republishes the reference packs.
+Status: Accepted (2026-10-17) — agent-authored; the owner signed the ADR on
+2026-10-17. The temporary exception this ADR authorized was executed and then
+deleted on 2026-10-16 under decision-queue item D4, when the reference packs
+were republished at 0.4.1, so the document now records history rather than
+live policy. The same media/manifest coupling it describes is why the Russian
+0.4.2 stress correction (`state/evidence/RU-042/`) forces another republish.
+
 Date: 2026-10-14
 
 ## Context
