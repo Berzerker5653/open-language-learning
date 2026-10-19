@@ -229,8 +229,10 @@ goals and a coverage map listing only A1.
 - `manifest.yaml` — every required field (schema_version, pack_id, version,
   target_locale, source_locales, engine, maturity, capabilities{listening,
   speaking, reading, writing}, license), honestly-set optional capabilities
-  (`pronunciation_assessment`, `prosody_assessment`, `handwriting`, `rtl`),
-  plus `scripts`, `world`, and `requested_model_capabilities`;
+  (`pronunciation_assessment`, `prosody_assessment`, `handwriting`, `rtl`,
+  `scenario_help` — declaring the last promises the U07 help guarantee and
+  must be kept (ADR-0038)), plus `scripts`, `world`, and
+  `requested_model_capabilities`;
 - `language/{identity,normalization,orthography,phonology,pragmatics}.yaml`;
 - `orthography/*.jsonl` — one shard per taught script;
 - `phonology/contrasts.jsonl`;

@@ -676,14 +676,37 @@ fn unit_without_capabilities_key_validates_as_before() {
 // scenario onto a temp copy of `valid-minimal` so the codes are pinned
 // without freezing a whole fixture tree per case.
 
-fn pack_with_scenario(scenario_yaml: &str) -> (tempfile::TempDir, Pack) {
+fn fixture_copy() -> tempfile::TempDir {
     let tmp = tempfile::tempdir().expect("tempdir");
     let seed =
         PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/packs/valid-minimal");
     copy_dir(&seed, tmp.path());
-    let dir = tmp.path().join("activities/scenarios");
+    tmp
+}
+
+fn add_scenario(dir: &std::path::Path, scenario_yaml: &str) {
+    let dir = dir.join("activities/scenarios");
     std::fs::create_dir_all(&dir).expect("scenarios dir");
     std::fs::write(dir.join("000-help.yaml"), scenario_yaml).expect("write scenario");
+}
+
+fn pack_with_scenario(scenario_yaml: &str, help_declared: bool) -> (tempfile::TempDir, Pack) {
+    let tmp = fixture_copy();
+    if help_declared {
+        // ADR-0038: the U07 codes only fire for packs that declared the
+        // promise; the fixture manifest is otherwise shared unmodified.
+        let manifest = tmp.path().join("manifest.yaml");
+        let text = std::fs::read_to_string(&manifest).expect("fixture manifest");
+        std::fs::write(
+            &manifest,
+            text.replace(
+                "  writing: true\n",
+                "  writing: true\n  scenario_help: true\n",
+            ),
+        )
+        .expect("declare scenario_help");
+    }
+    add_scenario(tmp.path(), scenario_yaml);
     let pack = Pack::load_dir(tmp.path()).expect("load pack");
     (tmp, pack)
 }
@@ -726,7 +749,7 @@ const U07_LABELLED: &str = "  action_labels:\n    ask-time: Ask what time it is\
 #[test]
 fn scenario_rung_without_payload_is_undelivered_help() {
     for mode in [Mode::Scaffold, Mode::Install] {
-        let (_tmp, pack) = pack_with_scenario(&u07_scenario("", U07_RUNGED_LADDER));
+        let (_tmp, pack) = pack_with_scenario(&u07_scenario("", U07_RUNGED_LADDER), true);
         let diags = pack.validate(mode, None);
         let hits: Vec<&lts_langpack::Diagnostic> = diags
             .iter()
@@ -751,7 +774,8 @@ fn scenario_rung_without_payload_is_undelivered_help() {
 fn scenario_intent_token_without_label_is_unlabelled_action() {
     // Help is delivered, so the only defect left is the bare token.
     for mode in [Mode::Scaffold, Mode::Install] {
-        let (_tmp, pack) = pack_with_scenario(&u07_scenario(U07_HELP_DELIVERED, U07_RUNGED_LADDER));
+        let (_tmp, pack) =
+            pack_with_scenario(&u07_scenario(U07_HELP_DELIVERED, U07_RUNGED_LADDER), true);
         let diags = pack.validate(mode, None);
         let hits: Vec<&lts_langpack::Diagnostic> = diags
             .iter()
@@ -778,7 +802,7 @@ fn scenario_choices_help_below_two_options_is_error() {
         "  support:\n    - level: 2\n      kind: choices\n      text: Pick a reply.\n      options: [What time is it?]\n",
         U07_RUNGED_LADDER,
     );
-    let (_tmp, pack) = pack_with_scenario(&yaml);
+    let (_tmp, pack) = pack_with_scenario(&yaml, true);
     let diags = pack.validate(Mode::Scaffold, None);
     let hits: Vec<&lts_langpack::Diagnostic> = diags
         .iter()
@@ -799,10 +823,13 @@ fn scenario_choices_help_below_two_options_is_error() {
 
 #[test]
 fn scenario_with_labels_and_delivered_help_validates_clean() {
-    let (_tmp, pack) = pack_with_scenario(&u07_scenario(
-        &format!("{U07_LABELLED}{U07_HELP_DELIVERED}"),
-        U07_RUNGED_LADDER,
-    ));
+    let (_tmp, pack) = pack_with_scenario(
+        &u07_scenario(
+            &format!("{U07_LABELLED}{U07_HELP_DELIVERED}"),
+            U07_RUNGED_LADDER,
+        ),
+        true,
+    );
     for mode in [Mode::Scaffold, Mode::Install] {
         let diags = pack.validate(mode, None);
         assert_eq!(
@@ -817,7 +844,7 @@ fn scenario_with_labels_and_delivered_help_validates_clean() {
 fn scenario_without_rungs_or_labels_stays_valid_as_before() {
     // 0.1-era shape inside a 0.2 pack: no rung > 0, no action_labels
     // key -> neither U07 rule fires.
-    let (_tmp, pack) = pack_with_scenario(&u07_scenario("", U07_INDEPENDENT_LADDER));
+    let (_tmp, pack) = pack_with_scenario(&u07_scenario("", U07_INDEPENDENT_LADDER), true);
     for mode in [Mode::Scaffold, Mode::Install] {
         let diags = pack.validate(mode, None);
         assert_eq!(
@@ -829,6 +856,92 @@ fn scenario_without_rungs_or_labels_stays_valid_as_before() {
             !diags.iter().any(|d| d.code.starts_with("scenario_support_")
                 || d.code == "scenario_action_label_missing"),
             "the U07 rules must not fire without rungs or labels: {diags:?}"
+        );
+    }
+}
+
+#[test]
+fn pack_without_declared_help_promise_is_exempt_from_u07() {
+    // ADR-0038: the shipped 0.4.2 archives published before the promise
+    // carries `scenario_help`, and the CI install gate must accept them
+    // unchanged — identical payload-less scenario, no manifest key.
+    for mode in [Mode::Scaffold, Mode::Install] {
+        let (_tmp, pack) = pack_with_scenario(&u07_scenario("", U07_RUNGED_LADDER), false);
+        let diags = pack.validate(mode, None);
+        assert!(
+            !diags
+                .iter()
+                .any(|d| d.code == "scenario_support_rung_undelivered"
+                    || d.code == "scenario_action_label_missing"
+                    || d.code == "scenario_support_choices_small"),
+            "an undeclared promise must never produce the U07 codes ({mode:?}): {diags:?}"
+        );
+        assert_eq!(
+            error_count(&diags),
+            0,
+            "exemption adds no collateral errors ({mode:?}): {diags:?}"
+        );
+    }
+}
+
+#[test]
+fn manifest_rejects_non_boolean_scenario_help() {
+    let tmp = fixture_copy();
+    add_scenario(tmp.path(), &u07_scenario("", U07_RUNGED_LADDER));
+    let manifest = tmp.path().join("manifest.yaml");
+    let text = std::fs::read_to_string(&manifest).expect("fixture manifest");
+    std::fs::write(
+        &manifest,
+        text.replace(
+            "  writing: true\n",
+            "  writing: true\n  scenario_help: \"yes\"\n",
+        ),
+    )
+    .expect("write non-bool scenario_help");
+    // Load after the rewrite: `Pack` holds the parsed manifest from load time.
+    let pack = Pack::load_dir(tmp.path()).expect("load pack");
+    let diags = pack.validate(Mode::Scaffold, None);
+    let hits: Vec<&lts_langpack::Diagnostic> = diags
+        .iter()
+        .filter(|d| d.code == "schema" && d.file == "manifest.yaml")
+        .collect();
+    assert_eq!(
+        hits.len(),
+        1,
+        "non-bool must be a manifest schema error: {diags:?}"
+    );
+    assert_eq!(hits[0].severity, Severity::Error);
+    assert_eq!(hits[0].path, "/capabilities/scenario_help");
+    assert!(
+        hits[0].message.contains("not of type"),
+        "the error must be a type refusal at that path: {}",
+        hits[0].message
+    );
+}
+
+#[test]
+fn shipped_packs_keep_the_declared_help_promise() {
+    // No-rot guard: every pack that declares the U07 promise must actually
+    // satisfy it (full validation for ja-JP/ru-RU is pinned above); this
+    // parse-only check pins the declaration itself, never load full packs.
+    let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+    for rel in [
+        "languages/ja-JP/manifest.yaml",
+        "languages/ru-RU/manifest.yaml",
+        "examples/eo-community/manifest.yaml",
+        "examples/ar-ma/manifest.yaml",
+        "tools/pack-templates/example-pack/manifest.yaml",
+    ] {
+        let text = std::fs::read_to_string(root.join(rel)).unwrap_or_else(|e| panic!("{rel}: {e}"));
+        let manifest: serde_yaml::Value =
+            serde_yaml::from_str(&text).unwrap_or_else(|e| panic!("{rel}: {e}"));
+        assert_eq!(
+            manifest
+                .get("capabilities")
+                .and_then(|c| c.get("scenario_help"))
+                .and_then(|v| v.as_bool()),
+            Some(true),
+            "{rel} must declare capabilities.scenario_help: true"
         );
     }
 }

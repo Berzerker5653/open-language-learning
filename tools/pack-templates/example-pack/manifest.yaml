@@ -13,6 +13,7 @@ capabilities:
   speaking: false
   reading: true
   writing: true
+  scenario_help: true
 license:
   content_license: "CC0-1.0"
   redistribution_allowed: true

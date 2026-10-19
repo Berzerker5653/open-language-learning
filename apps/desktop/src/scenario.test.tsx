@@ -23,8 +23,8 @@ const active: ScenarioView = {
     ],
   },
   ladder: [
-    { support_level: 0, description: "No supports" },
-    { support_level: 3, description: "Word bank with hiragana and romaji" },
+    { support_level: 0, description: "No supports", delivered: false },
+    { support_level: 3, description: "Word bank with hiragana and romaji", delivered: true },
   ],
   transfers: [
     {
@@ -196,6 +196,28 @@ describe("scenario panel", () => {
 
   it("shows no help card until a rung delivers one", () => {
     const html = render({ active });
+    expect(html).not.toContain('data-testid="scenario-help"');
+  });
+
+  // Runtime honesty: packs published before 2026-10-19 (0.4.0–0.4.2)
+  // declare ladder rungs but carry no per-node support payloads. The
+  // rung must not offer a button that silently does nothing: it is
+  // disabled, the reason is stated in words, and no help card appears.
+  it("refuses an undeliverable rung: disabled, annotated, and no help card", () => {
+    const html = render({
+      active: {
+        ...active,
+        ladder: [
+          {
+            support_level: 3,
+            description: "Word bank with hiragana and romaji",
+            delivered: false,
+          },
+        ],
+      },
+    });
+    expect(html).toContain('disabled=""');
+    expect(html).toContain("no help content at this level in this pack");
     expect(html).not.toContain('data-testid="scenario-help"');
   });
 

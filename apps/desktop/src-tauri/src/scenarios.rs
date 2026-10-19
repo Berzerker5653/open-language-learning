@@ -105,6 +105,13 @@ pub struct NodeView {
 pub struct LadderView {
     pub support_level: u8,
     pub description: String,
+    /// True when the CURRENT node carries a support payload at this
+    /// level. Packs published before 2026-10-19 (0.4.0–0.4.2) declare
+    /// ladder rungs but ship no per-node `support` payloads; for those
+    /// the rung is not pressable: the UI disables it and says why, and
+    /// `support_at` refuses it without consuming it or stamping the
+    /// node's evidence.
+    pub delivered: bool,
 }
 
 /// U07: the help a ladder rung actually delivered. A rung the learner
@@ -562,6 +569,7 @@ fn view_of(data: &Path, sc: &PackScenario, session: &ScenarioSession) -> Scenari
             .map(|s| LadderView {
                 support_level: s.support_level,
                 description: s.description.clone(),
+                delivered: node.support.iter().any(|p| p.level == s.support_level),
             })
             .collect(),
         transfers: sc
@@ -689,6 +697,17 @@ pub fn support_at(
     sessions: &SessionStore,
 ) -> Result<ScenarioView, String> {
     let ((), sc) = with_session(sessions, profile_id, scenario_id, data, |s| {
+        // Honesty before mutation: resolve payload availability for the
+        // requested level on the CURRENT node FIRST. A pack that declares
+        // the rung but carries no payload for this step must not consume
+        // it (support_used) nor stamp the node's evidence (support_level)
+        // — a phantom rung press used to silently void the node's
+        // contribution to the supported stage.
+        if !s.current_node().support.iter().any(|p| p.level == level) {
+            return Err(format!(
+                "this pack delivers no help at level {level} for this step"
+            ));
+        }
         if s.use_support(level) {
             Ok(())
         } else {
@@ -895,6 +914,7 @@ mod tests {
             ladder: vec![LadderView {
                 support_level: 1,
                 description: "First ladder rung".into(),
+                delivered: true,
             }],
             transfers: vec![TransferView {
                 id: "transfer-1".into(),
@@ -944,6 +964,18 @@ mod tests {
             .collect();
         action_keys.sort();
         assert_eq!(action_keys, ["intent", "label"]);
+        // U07: every ladder rung on the wire carries `delivered` — the
+        // UI disables (and annotates) rungs the pack cannot deliver, so
+        // the key is wire contract like the action split.
+        let rung = serde_json::to_value(&view.ladder[0]).expect("rung serializes");
+        let mut rung_keys: Vec<String> = rung
+            .as_object()
+            .expect("rung is an object")
+            .keys()
+            .cloned()
+            .collect();
+        rung_keys.sort();
+        assert_eq!(rung_keys, ["delivered", "description", "support_level"]);
         let help = serde_json::to_value(view.delivered_help.as_ref().expect("help delivered"))
             .expect("help serializes");
         let mut help_keys: Vec<String> = help

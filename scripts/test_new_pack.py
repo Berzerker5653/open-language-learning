@@ -23,8 +23,12 @@ whether it is lying about anything:
 * an unknown script or a non-empty output directory is refused without writing;
 * a language with no built-in content gets labelled placeholders, never
   invented words.
+* scenario help is delivered as declared: the manifest declares
+  `capabilities.scenario_help: true` (ADR-0038) and every node carries a
+  `support` payload for every ladder rung > 0 and an `action_labels` entry
+  for every `expected_actions` token.
 
-Run: python -m unittest scripts.test_new_pack -v
+Run: python -m unittest discover -s scripts -p 'test_new_pack.py'   (as in scripts/ci.sh)
 """
 
 import hashlib
@@ -66,6 +70,55 @@ def jsonl(pack: Path, rel: str) -> list[dict]:
 
 def manifest_text(pack: Path) -> str:
     return (pack / "manifest.yaml").read_text(encoding="utf-8")
+
+
+def scenario_texts(pack: Path) -> list[str]:
+    return [f.read_text(encoding="utf-8")
+            for f in sorted((pack / "activities" / "scenarios").glob("*.yaml"))]
+
+
+def parse_scenario(text: str) -> dict:
+    """Minimal indentation walk: node tokens/labels/support levels + ladder rungs.
+
+    PyYAML is not in the scripts test stdlib-only environment, and the
+    scaffold emits a fixed shape; this reads exactly the fields the pins
+    below need.
+    """
+    ladder, nodes, node, section = [], [], None, None
+    subsection = None
+    for line in text.splitlines():
+        if not line.strip() or line.lstrip().startswith("#"):
+            continue
+        indent = len(line) - len(line.lstrip())
+        stripped = line.strip()
+        if indent == 0:
+            section = stripped.split(":", 1)[0]
+            node = None
+            subsection = None
+            continue
+        if section == "support_ladder" and stripped.startswith("- support_level:"):
+            ladder.append(int(stripped.split(":", 1)[1]))
+        elif section == "nodes":
+            if stripped.startswith("- id:"):
+                node = {"tokens": [], "labels": set(), "levels": []}
+                nodes.append(node)
+                subsection = None
+            elif node is not None:
+                key, _, value = stripped.partition(":")
+                key = key.strip()
+                value = value.strip()
+                if indent == 4:
+                    if key == "expected_actions" and value.startswith("["):
+                        node["tokens"] += [t.strip().strip('"')
+                                          for t in value[1:-1].split(",") if t.strip()]
+                    subsection = key if value == "" else None
+                elif stripped.startswith("- level:"):
+                    node["levels"].append(int(value))
+                elif value == "" and indent >= 4:
+                    subsection = key
+                elif subsection == "action_labels" and value:
+                    node["labels"].add(key.strip('"'))
+    return {"ladder": ladder, "nodes": nodes}
 
 
 class NewPackTest(unittest.TestCase):
@@ -186,6 +239,21 @@ class NewPackTest(unittest.TestCase):
         pack = self.scaffold("--band", "A2")
         goals = (pack / "curriculum" / "goals.yaml").read_text(encoding="utf-8")
         self.assertEqual(goals.count('band: "A2"'), goals.count("- id:"))
+
+    def test_scenario_delivers_every_declared_rung_and_label(self):
+        pack = self.scaffold()
+        self.assertIn("scenario_help: true", manifest_text(pack))
+        scenarios = scenario_texts(pack)
+        self.assertTrue(scenarios, "scaffold ships no scenario")
+        for text in scenarios:
+            parsed = parse_scenario(text)
+            rungs = [level for level in parsed["ladder"] if level > 0]
+            self.assertTrue(rungs, "ladder should have a rung > 0 to deliver")
+            for node in parsed["nodes"]:
+                self.assertEqual(sorted(rungs), sorted(node["levels"]),
+                                 "every ladder rung > 0 needs a support payload on every node")
+                self.assertEqual(set(node["tokens"]), node["labels"],
+                                 "every expected_actions token needs an action_labels entry")
 
     def test_unknown_script_and_dirty_output_are_refused(self):
         out = self.root / "bad"

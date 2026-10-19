@@ -21,6 +21,7 @@ capabilities:
   prosody_assessment: false
   handwriting: false
   rtl: false
+  scenario_help: true
 requested_model_capabilities:
   - "asr.ru"
   - "vad"

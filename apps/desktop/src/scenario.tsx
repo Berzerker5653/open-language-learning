@@ -61,7 +61,11 @@ export interface ScenarioView {
   title: string;
   situation?: string | null;
   node: ScenarioNodeView;
-  ladder: { support_level: number; description: string }[];
+  /** One support-ladder rung. `delivered` is false when the current
+   * node carries no help payload at this level — a pack that declares
+   * the rung (pre-2026-10-19 packs) cannot honor it here, so the button
+   * is disabled and says why. */
+  ladder: { support_level: number; description: string; delivered: boolean }[];
   transfers: { id: string; description: string; done: boolean }[];
   transfers_required: number;
   support_used: number[];
@@ -242,15 +246,19 @@ export function ScenarioPanel(p: ScenarioPanelProps) {
         <fieldset className="ladder">
           <legend>Support</legend>
           {s.ladder.map((l) => (
-            <button
-              key={l.support_level}
-              type="button"
-              className="btn btn--quiet"
-              disabled={s.support_used.includes(l.support_level)}
-              onClick={() => p.onSupport(l.support_level)}
-            >
-              {l.description}
-            </button>
+            <span key={l.support_level} className="ladder-rung">
+              <button
+                type="button"
+                className="btn btn--quiet"
+                disabled={!l.delivered || s.support_used.includes(l.support_level)}
+                onClick={() => p.onSupport(l.support_level)}
+              >
+                {l.description}
+              </button>
+              {!l.delivered && (
+                <span className="ladder-note">no help content at this level in this pack</span>
+              )}
+            </span>
           ))}
         </fieldset>
         {s.transfers_required > 0 && (

@@ -90,6 +90,19 @@ impl Pack {
             .collect()
     }
 
+    /// `capabilities.scenario_help` read from this pack's parsed manifest
+    /// (ADR-0038). Absent key means false, the schema default; a non-bool
+    /// value counts as absent. The U07 scenario-help codes are an opt-in
+    /// promise: a pack that never declared it keeps installing.
+    fn help_guarantee_declared(&self) -> bool {
+        self.manifest
+            .as_ref()
+            .and_then(|m| m.get("capabilities"))
+            .and_then(|c| c.get("scenario_help"))
+            .and_then(Value::as_bool)
+            .unwrap_or(false)
+    }
+
     /// Load every classified document under `root`. Parse failures are
     /// collected, not fatal, so one bad file does not hide the rest.
     pub fn load_dir(root: &Path) -> Result<Pack, io::Error> {
@@ -445,10 +458,12 @@ impl Pack {
                             }
                         }
                     }
-                    if inst.v2 {
-                        // U07: a ladder rung the learner can press is a
-                        // promise; 0.2 scenarios must deliver help at
-                        // every rung and label every intent token.
+                    if inst.v2 && self.help_guarantee_declared() {
+                        // U07/ADR-0038: a ladder rung the learner can press
+                        // is a promise, but strictness applies only to packs
+                        // that declared `capabilities.scenario_help`; 0.2
+                        // archives published before the promise stay
+                        // installable.
                         scenario_help_guarantees(
                             &inst.file,
                             &inst.pointer,
@@ -1102,7 +1117,9 @@ fn array<'a>(value: &'a Value, field: &str) -> Vec<(usize, &'a Value)> {
 /// is in the labelled regime (the node declares `action_labels` or the
 /// ladder has any rung > 0); and `choices` help must offer at least two
 /// readable replies. 0.1-era scenario docs predate the fields and stay
-/// outside these rules (`inst.v2` gate at the call site).
+/// outside these rules, and packs that never made the promise (no
+/// `capabilities.scenario_help`, ADR-0038) are exempt — both gates live at
+/// the call site (`inst.v2 && help_guarantee_declared`).
 fn scenario_help_guarantees(file: &str, base: &str, doc: &Value, diags: &mut Vec<Diagnostic>) {
     let scenario_id = doc.get("id").and_then(Value::as_str).unwrap_or("");
     let rungs: Vec<u64> = array(doc, "support_ladder")

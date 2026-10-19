@@ -15,6 +15,7 @@ capabilities:
   reading: true
   writing: true
   rtl: true
+  scenario_help: true
 license:
   content_license: "CC-BY-SA-4.0"
   redistribution_allowed: true

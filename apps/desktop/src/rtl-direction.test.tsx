@@ -154,7 +154,7 @@ describe("pack direction (RTL-001, ADR-0029)", () => {
         actions: [{ intent: "reply-well", label: "بخير" }],
         recovery: [],
       },
-      ladder: [{ support_level: 1, description: "Show an example" }],
+      ladder: [{ support_level: 1, description: "Show an example", delivered: true }],
       transfers: [],
       transfers_required: 0,
       support_used: [],

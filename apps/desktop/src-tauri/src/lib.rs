@@ -12482,6 +12482,15 @@ activities:
         // own action_labels must be the label, never the token.
         assert_eq!(view.node.actions[0].intent, "greeting");
         assert_eq!(view.node.actions[0].label, "Greet them back");
+        // U07: the ladder wire states which rungs this pack can honor at
+        // this node: level 0 ("No supports") carries no payload, while
+        // rungs 3 and 5 are backed by per-node `support` entries.
+        let delivered: Vec<(u8, bool)> = view
+            .ladder
+            .iter()
+            .map(|r| (r.support_level, r.delivered))
+            .collect();
+        assert_eq!(delivered, [(0, false), (3, true), (5, true)]);
         let step = scenarios::attempt_at(data, &p.id, sid, "small-talk", &sessions).unwrap();
         assert_eq!(step.result, "not-satisfied");
         assert_eq!(step.recovery, vec!["ja.activity.demo.sc.repair-repeat"]);
@@ -12582,6 +12591,157 @@ activities:
 
         // The session is consumed by finish; further attempts error.
         assert!(scenarios::attempt_at(data, &p.id, sid, "greeting", &sessions).is_err());
+    }
+
+    // U07 counterpart: the packs published before 2026-10-19 (0.4.0–0.4.2)
+    // declare support_ladder rungs but carry NO per-node `support`
+    // payloads. Pressing such a rung used to consume it and stamp the
+    // node's evidence with the phantom level (3/5) while delivering
+    // nothing — which voids the node's contribution to the supported
+    // stage (MASTERY_POLICY supported_max_level: 3). The runtime must
+    // instead refuse the rung, keep support_used clean, and record the
+    // node WITHOUT any support stamp.
+    #[test]
+    fn scenario_rungs_without_payloads_are_refused_without_voiding_the_node() {
+        const LADDER_WITHOUT_PAYLOADS: &str = "\
+id: \"ja.scenario.demo.first-meeting\"
+goal_id: \"ja.goal.demo.greet\"
+title: \"First meeting\"
+situation: \"Meeting someone for the first time\"
+register: \"neutral-polite\"
+nodes:
+  - id: \"ja.activity.demo.sc.open\"
+    prompt: \"Someone bows and greets you: こんにちは。Respond with a greeting.\"
+    expected_actions: [\"greeting\"]
+    action_labels:
+      greeting: \"Greet them back\"
+    next: [\"ja.activity.demo.sc.ask-name\"]
+  - id: \"ja.activity.demo.sc.ask-name\"
+    prompt: \"They answer politely. Keep the conversation going: ask their name.\"
+    expected_actions: [\"name-question\"]
+    action_labels:
+      name-question: \"Ask their name\"
+    next: []
+support_ladder:
+  - support_level: 0
+    description: \"No supports\"
+  - support_level: 3
+    description: \"Word bank with hiragana and romaji\"
+  - support_level: 5
+    description: \"Full modeled response you can repeat\"
+transfer_variants_required: 1
+transfer_variants:
+  - id: \"ja.scenario.demo.first-meeting.formal\"
+    description: \"Greet a senior colleague in a formal setting\"
+    changed_variable: \"register\"
+";
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+
+        // Publish the pre-2026-10-19 shape on disk: the installed scenario
+        // keeps its declared ladder but loses every per-node `support`
+        // payload. Rewritten before any scenario command parses the pack,
+        // so the runtime cache only ever sees the payload-free bytes.
+        let version =
+            lts_langpack::archive::current_version("org.openlanguage.ja-demo", &data.join("packs"))
+                .unwrap();
+        std::fs::write(
+            data.join("packs")
+                .join("org.openlanguage.ja-demo")
+                .join(&version)
+                .join("activities/scenarios/first-meeting.yaml"),
+            LADDER_WITHOUT_PAYLOADS,
+        )
+        .unwrap();
+
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
+        // Meet the hard prerequisite, as the payload-bearing test does.
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        for (fam, id, at) in [
+            (
+                "ja.expr.demo.scen-p1",
+                "ev-prereq-a",
+                "2026-10-01T00:00:00Z",
+            ),
+            (
+                "ja.expr.demo.scen-p2",
+                "ev-prereq-b",
+                "2026-10-01T00:05:00Z",
+            ),
+        ] {
+            store
+                .append_evidence(&attempt(
+                    "ja.lex.demo.konnichiwa",
+                    lts_domain::ActivityModality::RecallMeaning,
+                    fam,
+                    0,
+                    at,
+                    id,
+                    &p.id,
+                ))
+                .unwrap();
+        }
+        let sessions = scenarios::SessionStore::default();
+        let sid = "ja.scenario.demo.first-meeting";
+        let view = scenarios::start_at(data, &p.id, sid, "sess-np", &sessions).unwrap();
+
+        // The wire carries the pack's honesty: every declared rung is
+        // undeliverable at the current node.
+        for rung in &view.ladder {
+            assert!(
+                !rung.delivered,
+                "rung {} has no payload on disk; delivered must be false",
+                rung.support_level
+            );
+        }
+
+        // Pressing a declared rung errors, naming the pack as the cause.
+        let err = match scenarios::support_at(data, &p.id, sid, 3, &sessions) {
+            Ok(_) => panic!("a rung with no payload on this node must be refused"),
+            Err(e) => e,
+        };
+        assert!(
+            err.contains("this pack delivers no help"),
+            "the error must name the pack: {err}"
+        );
+
+        // The rung was NOT consumed: the node is still walkable and its
+        // view shows an empty support_used.
+        let step = scenarios::attempt_at(data, &p.id, sid, "greeting", &sessions).unwrap();
+        assert_eq!(step.result, "advanced");
+        assert!(
+            step.view.support_used.is_empty(),
+            "the refused rung must not enter support_used: {:?}",
+            step.view.support_used
+        );
+        let step = scenarios::attempt_at(data, &p.id, sid, "name-question", &sessions).unwrap();
+        assert_eq!(step.result, "completed");
+        scenarios::transfer_at(
+            data,
+            &p.id,
+            sid,
+            "ja.scenario.demo.first-meeting.formal",
+            &sessions,
+        )
+        .unwrap();
+        let out = scenarios::finish_at(data, &p.id, sid, &sessions).unwrap();
+        assert_eq!(out.nodes_completed, 2);
+
+        // Evidence: both nodes are recorded WITHOUT a support stamp — the
+        // refused press left no trace in the stored event.
+        let events = store.evidence_for_profile(&p.id).unwrap();
+        let inter: Vec<_> = events
+            .iter()
+            .filter(|e| e.modality == lts_domain::ActivityModality::Interaction)
+            .collect();
+        assert_eq!(inter.len(), 2);
+        let levels: Vec<u8> = inter.iter().map(|e| e.support_level.value()).collect();
+        assert!(
+            levels.iter().all(|v| *v == 0),
+            "no node evidence may carry a support stamp: {levels:?}"
+        );
     }
 
     #[test]

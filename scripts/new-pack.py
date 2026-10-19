@@ -147,7 +147,11 @@ class Pack:
 
     # ---------- files ----------
     def manifest(self) -> None:
-        caps = ["listening: true", "speaking: true", "reading: true", "writing: true"]
+        caps = ["listening: true", "speaking: true", "reading: true", "writing: true",
+                # ADR-0038: the scaffold keeps the U07 help promise, so it
+                # must declare it (scenario() delivers per-rung payloads and
+                # per-token labels to match).
+                "scenario_help: true"]
         if self.rtl:
             caps.append("rtl: true")
             self.unresolved.append(
@@ -435,10 +439,22 @@ class Pack:
                     f"  - id: {yq(self.pid('activity', 'scn.open'))}",
                     '    prompt: "Greet the other person."',
                     '    expected_actions: ["greeting"]',
+                    "    action_labels:",
+                    '      greeting: "Greet the other person"',
+                    "    support:",
+                    "      - level: 3",
+                    "        kind: hint",
+                    '        text: "Think of a friendly greeting you already know."',
                     f"    next: [{yq(self.pid('activity', 'scn.ask'))}]",
                     f"  - id: {yq(self.pid('activity', 'scn.ask'))}",
                     '    prompt: "Say what you are doing: learning this language."',
                     '    expected_actions: ["self-description"]',
+                    "    action_labels:",
+                    '      self-description: "Say you are learning the language"',
+                    "    support:",
+                    "      - level: 3",
+                    "        kind: hint",
+                    '        text: "Say that you are learning this language."',
                     "    next: []",
                     "support_ladder:",
                     "  - support_level: 0",

@@ -68,7 +68,8 @@
         "pronunciation_assessment": { "type": "boolean", "default": false },
         "prosody_assessment": { "type": "boolean", "default": false },
         "handwriting": { "type": "boolean", "default": false },
-        "rtl": { "type": "boolean", "default": false }
+        "rtl": { "type": "boolean", "default": false },
+        "scenario_help": { "type": "boolean", "default": false, "description": "U07 promise: every support-ladder rung above 0 delivers a payload on every scenario node and every expected_actions token (incl. recovery branches) carries a learner-facing label. Absent means the pack never made the promise, so packs published before 2026-10-19 stay installable." }
       }
     },
     "requested_model_capabilities": {

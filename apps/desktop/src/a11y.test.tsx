@@ -58,7 +58,7 @@ const active: ScenarioView = {
     actions: [{ intent: "greeting", label: "Greet them" }],
     recovery: [],
   },
-  ladder: [{ support_level: 0, description: "No supports" }],
+  ladder: [{ support_level: 0, description: "No supports", delivered: false }],
   transfers: [],
   transfers_required: 1,
   support_used: [],

@@ -99,6 +99,125 @@ fn install_upgrade_rollback_cycle() {
     );
 }
 
+/// ADR-0038 regression pin for the 0.4.2 CI failure ("pack rejected by
+/// install validation: 215 error(s)"): the U07 scenario-help codes are an
+/// opt-in promise. The same payload-less ladder-3 scenario must install
+/// when the pack never declared `capabilities.scenario_help`, and must be
+/// refused when it did.
+const U07_PAYLOAD_LESS_SCENARIO: &str = "\
+id: es.scenario.u07.help
+goal_id: es.goal.intro.greet
+title: Ask the time
+nodes:
+- id: es.scenario.u07.help.open
+  prompt: Ask a passer-by what time it is.
+  expected_actions: [ask-time]
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Word bank
+transfer_variants_required: 0
+";
+
+fn scenario_copy(declare_promise: bool) -> tempfile::TempDir {
+    let tmp = tempfile::tempdir().unwrap();
+    copy_pack(&fixture("valid-minimal"), tmp.path());
+    if declare_promise {
+        let manifest = tmp.path().join("manifest.yaml");
+        let text = fs::read_to_string(&manifest).unwrap();
+        fs::write(
+            &manifest,
+            text.replace(
+                "  writing: true\n",
+                "  writing: true\n  scenario_help: true\n",
+            ),
+        )
+        .unwrap();
+    }
+    let dir = tmp.path().join("activities/scenarios");
+    fs::create_dir_all(&dir).unwrap();
+    fs::write(dir.join("900-u07.yaml"), U07_PAYLOAD_LESS_SCENARIO).unwrap();
+    tmp
+}
+
+/// Re-sign an archive with a new `manifest.yaml` body: the same zip
+/// entries, MANIFEST.json rebuilt with fresh hashes. This is the only way
+/// to reach the install gate with a declared-promise pack, since `build`
+/// itself refuses one before it ever emits bytes.
+fn resign_with_manifest(bytes: &[u8], manifest_body: &[u8]) -> Vec<u8> {
+    let am = archive::inspect(bytes).unwrap();
+    let mut files: Vec<(String, Vec<u8>)> = Vec::new();
+    for f in &am.files {
+        let body = if f.path == "manifest.yaml" {
+            manifest_body.to_vec()
+        } else {
+            archive::read_entry(bytes, &f.path).unwrap()
+        };
+        files.push((f.path.clone(), body));
+    }
+    let entries: Vec<archive::FileEntry> = files
+        .iter()
+        .map(|(path, body)| archive::FileEntry {
+            path: path.clone(),
+            sha256: archive::hex_sha256(body),
+            size: body.len() as u64,
+        })
+        .collect();
+    let am = archive::ArchiveManifest {
+        files: entries,
+        ..am
+    };
+    let mut zip = zip::ZipWriter::new(Cursor::new(Vec::new()));
+    let opts = zip::write::SimpleFileOptions::default();
+    zip.start_file(archive::MANIFEST_ENTRY, opts).unwrap();
+    zip.write_all(&serde_json::to_vec(&am).unwrap()).unwrap();
+    for (path, body) in &files {
+        zip.start_file(path, opts).unwrap();
+        zip.write_all(body).unwrap();
+    }
+    zip.finish().unwrap().into_inner()
+}
+
+#[test]
+fn undeclared_help_promise_installs_payload_less_scenario() {
+    let store = tempfile::tempdir().unwrap();
+    let pack_dir = scenario_copy(false);
+    let (bytes, _) = archive::build(pack_dir.path())
+        .expect("a pack that never declared scenario_help must still build");
+    let out = archive::install(&bytes, store.path())
+        .expect("pre-promise archives (the 0.4.2 shape) must stay installable");
+    assert_eq!(out.pack_id, "org.openlanguage.test-minimal");
+}
+
+#[test]
+fn declared_help_promise_blocks_payload_less_scenario_at_build_and_install() {
+    // Build refuses the declared pack up front (strictness applies in
+    // scaffold posture too)…
+    let declared_dir = scenario_copy(true);
+    let build_err = archive::build(declared_dir.path())
+        .expect_err("a declared promise must be enforced at build");
+    assert!(
+        build_err.contains("ladder level 3 is not delivered"),
+        "the refusal must name the undelivered rung: {build_err}"
+    );
+    // …and the install gate refuses an archive whose pack declares the
+    // promise: same undeclared-built bytes, manifest re-declared.
+    let store = tempfile::tempdir().unwrap();
+    let (bytes, _) = archive::build(scenario_copy(false).path()).unwrap();
+    let declared_manifest = fs::read_to_string(declared_dir.path().join("manifest.yaml")).unwrap();
+    let bytes = resign_with_manifest(&bytes, declared_manifest.as_bytes());
+    let err = archive::install(&bytes, store.path())
+        .expect_err("a declared promise must be enforced at install");
+    assert!(matches!(err, archive::ArchiveError::Validation(_)), "{err}");
+    assert!(
+        err.to_string()
+            .contains("scenario_support_rung_undelivered"),
+        "the refusal must name the undelivered rung: {err}"
+    );
+}
+
 /// I05: a cancel pressed while the archive is being unpacked must not leave
 /// the learner looking at an installed (or half-installed) pack. The store is
 /// byte-for-byte what it was, and the same bytes install cleanly on retry.

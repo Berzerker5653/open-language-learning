@@ -323,14 +323,20 @@ what a button shows, and the runtime substitutes a generic word when a
 label is absent — and `support` payloads: `{level, kind, text}` with
 `kind` in `hint|model|gloss|choices`, plus `options` (≥ 2 readable replies)
 for `choices`. Both fields are optional at schema level so 0.1-era packs
-stay valid, but in 0.2 scenario docs the validator enforces the promise:
+stay valid. The validator enforces the promise for packs that declare it:
+manifest `capabilities.scenario_help: true` (ADR-0038; absent means false,
+a non-bool is a schema error) makes
 `scenario_support_rung_undelivered` (every ladder level > 0 needs a
 level-matching payload on every node), `scenario_action_label_missing`
 (every declared intent token, recovery-branch tokens included, needs a
 label once the pack is in the labelled regime), and
 `scenario_support_choices_small` (choices help with fewer than two
-options). A pressed ladder rung must deliver its payload — an empty
-support button is a validation error, not a UI disappointment.
+options) errors in both authoring and install posture. Archives published
+before the promise do not declare it and stay installable. Either way the
+runtime refuses a ladder rung the current node has no payload for — before
+consuming it or stamping the learner's evidence — and says why
+(ADR-0038). A pressed-but-empty support button is a validation error in a
+declaring pack and an honest refusal in any other, never a silent no-op.
 
 ## World environments (`world/environments.jsonl`, ADR-0018)
 
