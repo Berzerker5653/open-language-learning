@@ -10,6 +10,17 @@ nodes:
   expected_actions:
   - get-attention
   - ask-location
+  action_labels:
+    ask-repeat: "Politely ask them to repeat"
+    get-attention: "Politely get a passer-by's attention"
+    ask-location: "Ask where the station is"
+  support:
+    - level: 3
+      kind: model
+      text: "すみません、えきは どこですか。 (sumimasen, eki wa doko desu ka)"
+    - level: 5
+      kind: gloss
+      text: "Get attention with すみません (sumimasen) — 'excuse me'. Then ask: えきは どこですか (eki wa doko desu ka) — 'where is the station?'. えき (eki) is 'station'; どこ (doko) is 'where'."
   next:
   - ja.scenario.directions.station.confirm
   recovery:
@@ -22,13 +33,32 @@ nodes:
   prompt: They point. Confirm whether it is here or there.
   expected_actions:
   - confirm-location
+  action_labels:
+    confirm-location: "Confirm whether it is here or over there"
+  support:
+    - level: 3
+      kind: model
+      text: "あちらですか。 (achira desu ka)"
+    - level: 5
+      kind: gloss
+      text: "Check which place the pointing means: あちらですか (achira desu ka) — 'is it over there?'. あちら (achira) is 'over there' and ここ (koko) is 'here'."
   next:
   - ja.scenario.directions.station.close
 - id: ja.scenario.directions.station.close
   prompt: Thank the person and go.
   expected_actions:
   - say-thanks
+  action_labels:
+    say-thanks: "Thank the person politely"
+  support:
+    - level: 3
+      kind: model
+      text: "ありがとうございます。 (arigatou gozaimasu)"
+    - level: 5
+      kind: gloss
+      text: "Thank them with the pack's polite thank-you: ありがとうございます (arigatou gozaimasu) — 'thank you very much'."
   next: []
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 support_ladder:
 - support_level: 0
   description: No supports

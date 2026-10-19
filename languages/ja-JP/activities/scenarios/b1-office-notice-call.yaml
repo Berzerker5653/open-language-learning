@@ -10,6 +10,18 @@ nodes:
   expected_actions:
   - state-meeting-time
   - humble-inform
+  action_labels:
+    ask-confirm: "Ask them to confirm it"
+    repeat-time: "Repeat it clearly"
+    state-meeting-time: "State the new time for tomorrow's meeting"
+    humble-inform: "Use humble wording for informing"
+  support:
+    - level: 3
+      kind: model
+      text: "あした の かいぎ は 十時 に かわりました。おしらせ いたします。 (ashita no kaigi wa juuji ni kawarimashita. oshirase itashimasu)"
+    - level: 5
+      kind: gloss
+      text: "State the new time: あした の かいぎ は 十時 です (ashita no kaigi wa juuji desu) — 'tomorrow's meeting is at ten'. For your own act of informing use the humble verb おしらせ いたします (oshirase itashimasu) — 'I humbly inform'; いたします is the humble form of します."
   next:
   - ja.scenario.b1.office.notice-call.room
   recovery:
@@ -23,6 +35,15 @@ nodes:
   prompt: "Ask the colleague to reserve a meeting room, using a polite 〜ていただけますか request."
   expected_actions:
   - request-room
+  action_labels:
+    request-room: "Ask the colleague to reserve a meeting room"
+  support:
+    - level: 3
+      kind: model
+      text: "かいぎしつ を よやく して いただけますか。 (kaigishitsu o yoyaku shite itadakemasu ka)"
+    - level: 5
+      kind: gloss
+      text: "Build the favor request with 〜て いただけますか (te itadakemasu ka) — 'could you please do ~ for me?'. かいぎしつ (kaigishitsu) is 'meeting room'; よやくする (yoyaku suru) is 'to reserve'."
   next:
   - ja.scenario.b1.office.notice-call.close
 - id: ja.scenario.b1.office.notice-call.close
@@ -30,7 +51,18 @@ nodes:
   expected_actions:
   - thank
   - close-call
+  action_labels:
+    thank: "Thank them for confirming"
+    close-call: "Close the call politely"
+  support:
+    - level: 3
+      kind: model
+      text: "おしらせ いただき、ありがとうございます。それでは、失礼します。 (oshirase itadaki, arigatou gozaimasu. sore dewa, shitsurei shimasu)"
+    - level: 5
+      kind: gloss
+      text: "Thank the confirmation with the pack phrase おしらせ いただき、ありがとうございます (oshirase itadaki, arigatou gozaimasu) — 'thank you for letting me know'. Close a call with それでは、失礼します (sore dewa, shitsurei shimasu) — polite 'well then, goodbye'."
   next: []
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 support_ladder:
 - support_level: 0
   description: No supports

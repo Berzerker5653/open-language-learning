@@ -10,6 +10,17 @@ nodes:
   expected_actions:
   - state-problem
   - ask-exchange
+  action_labels:
+    ask-repeat: "Politely ask them to repeat"
+    state-problem: "Explain what is wrong with the item"
+    ask-exchange: "Ask for an exchange"
+  support:
+    - level: 3
+      kind: model
+      text: "すみません、キズが あります。交換して もらえますか。 (sumimasen, kizu ga arimasu. koukan shite moraemasu ka)"
+    - level: 5
+      kind: gloss
+      text: "Name the problem: キズ (kizu) 'scratch'; 〜があります — 'there is ~'. Exchange with the pack question 交換してもらえますか (koukan shite moraemasu ka) — 'could you exchange it for me?' (交換 koukan 'exchange', 〜てもらう = favor done to you)."
   next:
   - ja.scenario.a2.shop.return-exchange.receipt
   recovery:
@@ -22,6 +33,15 @@ nodes:
   prompt: "The clerk asks for the receipt. Say you have it and hand it over."
   expected_actions:
   - present-receipt
+  action_labels:
+    present-receipt: "Say you have the receipt and hand it over"
+  support:
+    - level: 3
+      kind: model
+      text: "領収書が あります。どうぞ。 (ryoushuusho ga arimasu. douzo)"
+    - level: 5
+      kind: gloss
+      text: "Answer the clerk's 領収書はありますか (ryoushuusho wa arimasu ka, 'do you have the receipt?') with 領収書があります — 'I have the receipt'. 領収書 (ryoushuusho) 'receipt'; どうぞ (douzo) — 'here you are' when handing it over."
   next:
   - ja.scenario.a2.shop.return-exchange.wait
 - id: ja.scenario.a2.shop.return-exchange.wait
@@ -29,7 +49,18 @@ nodes:
   expected_actions:
   - say-thanks
   - say-closing
+  action_labels:
+    say-thanks: "Thank the clerk"
+    say-closing: "Close the visit politely"
+  support:
+    - level: 3
+      kind: model
+      text: "ありがとうございます。また きます。 (arigatou gozaimasu. mata kimasu)"
+    - level: 5
+      kind: gloss
+      text: "Thank with ありがとうございます (arigatou gozaimasu) — 'thank you very much'. Answer the shop's またお越しください ('please come again') with またきます (mata kimasu) — 'I will come again'."
   next: []
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 support_ladder:
 - support_level: 0
   description: No supports

@@ -9,6 +9,16 @@ nodes:
   prompt: "You lost your bag near the station. At the police box, say you lost something."
   expected_actions:
   - report-loss
+  action_labels:
+    ask-repeat: "Politely ask them to repeat"
+    report-loss: "Say you lost something"
+  support:
+    - level: 3
+      kind: model
+      text: "落とし物を したのですが。 (otoshimono o shita no desu ga)"
+    - level: 5
+      kind: gloss
+      text: "Use the koban opener from the pack: 落とし物 (otoshimono) — 'lost item'; 〜したのですが — 'I (did) ~, but…', the soft way to open a request."
   next:
   - ja.scenario.a2.city.lost-found.describe
   recovery:
@@ -22,6 +32,16 @@ nodes:
   expected_actions:
   - describe-item
   - state-location
+  action_labels:
+    describe-item: "Describe the lost bag"
+    state-location: "Say where you lost it"
+  support:
+    - level: 3
+      kind: model
+      text: "黒いかばんを なくしました。駅の まわりです。 (kuroi kaban o nakushimashita. eki no mawari desu)"
+    - level: 5
+      kind: gloss
+      text: "Both lines are pack phrases: 黒いかばんをなくしました (kuroi kaban o nakushimashita) — 'I lost a black bag' (なくす nakusu, 'to lose'); 駅のまわりです (eki no mawari desu) — 'around the station'."
   next:
   - ja.scenario.a2.city.lost-found.contact
 - id: ja.scenario.a2.city.lost-found.contact
@@ -29,7 +49,18 @@ nodes:
   expected_actions:
   - ask-contact
   - say-thanks
+  action_labels:
+    ask-contact: "Ask if they will contact you if it is found"
+    say-thanks: "Close with thanks"
+  support:
+    - level: 3
+      kind: model
+      text: "もし 見つけたら、連絡しますか。ありがとうございます。 (moshi mitsuketara, renraku shimasu ka. arigatou gozaimasu)"
+    - level: 5
+      kind: gloss
+      text: "Pack question: もし見つけたら、連絡しますか (moshi mitsuketara, renraku shimasu ka) — 'will you contact me if you find it?'. 見つける (mitsukeru) 'to find'; 連絡 (renraku) 'contact'. Close with ありがとうございます."
   next: []
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 support_ladder:
 - support_level: 0
   description: No supports

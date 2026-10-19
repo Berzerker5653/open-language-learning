@@ -8,6 +8,17 @@ nodes:
   expected_actions:
   - greet
   - ask-wellbeing
+  action_labels:
+    ask-repeat: "Politely ask them to repeat"
+    greet: "Greet the person"
+    ask-wellbeing: "Ask how they are"
+  support:
+    - level: 3
+      kind: model
+      text: "При́вет! Как твои́ де́ла? (Privet! Kak tvoi dela?)"
+    - level: 5
+      kind: gloss
+      text: "Greet with the pack greetings: При́вет (Privet) — informal 'hi', or здра́вствуйте (Zdravstvuyte) — polite 'hello'. Ask with the pack line Как твои́ де́ла? (kak tvoi dela?) — 'how are you doing?'"
   next:
   - ru.scenario.greetings.meeting.respond
   recovery:
@@ -21,13 +32,33 @@ nodes:
   expected_actions:
   - answer-wellbeing
   - ask-back
+  action_labels:
+    answer-wellbeing: "Say how you are"
+    ask-back: "Ask them back"
+  support:
+    - level: 3
+      kind: model
+      text: "Спаси́бо, у меня́ всё хорошо́. А у вас? (Spasibo, u menya vsyo khorosho. A u vas?)"
+    - level: 5
+      kind: gloss
+      text: "Answer: у меня́ всё хорошо́ (u menya vsyo khorosho) — 'everything is fine with me' (хорошо́ = 'good, fine'). Ask back with А у вас? (a u vas?) — 'and you?' (formal 'you')."
   next:
   - ru.scenario.greetings.meeting.close
 - id: ru.scenario.greetings.meeting.close
   prompt: End the exchange courteously.
   expected_actions:
   - say-goodbye
+  action_labels:
+    say-goodbye: "End the exchange with a polite goodbye"
+  support:
+    - level: 3
+      kind: model
+      text: "До свида́ния! (Do svidaniya!)"
+    - level: 5
+      kind: gloss
+      text: "Close with the pack word До свида́ния (do svidaniya) — 'goodbye', the courteous default. Among friends пока́ (poka) also works."
   next: []
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 support_ladder:
 - support_level: 0
   description: No supports

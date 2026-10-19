@@ -9,6 +9,16 @@ nodes:
   prompt: "You have a box to send. Tell the clerk you want to send a parcel."
   expected_actions:
   - state-send-request
+  action_labels:
+    ask-repeat: "Politely ask them to repeat"
+    state-send-request: "Say you want to send a parcel"
+  support:
+    - level: 3
+      kind: model
+      text: "荷物を 送りたいです。 (nimotsu o okuritai desu)"
+    - level: 5
+      kind: gloss
+      text: "Use the pack opener: 荷物 (nimotsu) — 'parcel/luggage'; 送りたい (okuritai) — 'want to send'. 送る (okuru) is 'to send'."
   next:
   - ja.scenario.a2.city.send-parcel.contents
   recovery:
@@ -21,6 +31,15 @@ nodes:
   prompt: "The clerk asks what is inside. Say what the contents are."
   expected_actions:
   - state-contents
+  action_labels:
+    state-contents: "Say what is inside the box"
+  support:
+    - level: 3
+      kind: model
+      text: "中身は 本と 服です。 (nakami wa hon to fuku desu)"
+    - level: 5
+      kind: gloss
+      text: "Answer the clerk's 中身は何ですか (nakami wa nan desu ka, 'what are the contents?') by listing them: 中身 (nakami) 'contents'; 本 (hon) 'books'; 服 (fuku) 'clothes'."
   next:
   - ja.scenario.a2.city.send-parcel.price
 - id: ja.scenario.a2.city.send-parcel.price
@@ -28,7 +47,18 @@ nodes:
   expected_actions:
   - ask-price
   - confirm-arrival
+  action_labels:
+    ask-price: "Ask the shipping cost"
+    confirm-arrival: "Ask if it arrives in three days"
+  support:
+    - level: 3
+      kind: model
+      text: "送料は いくらですか。三日で 届きますか。 (souryou wa ikura desu ka. mikka de todokimasu ka)"
+    - level: 5
+      kind: gloss
+      text: "Both lines follow pack phrases: 送料はいくらですか (souryou wa ikura desu ka) — 'how much is the shipping?' (送料 souryou = shipping cost); 三日で届きます (mikka de todokimasu) — 'it arrives in three days', asked as 届きますか."
   next: []
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 support_ladder:
 - support_level: 0
   description: No supports

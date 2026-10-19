@@ -9,6 +9,16 @@ nodes:
   prompt: "You feel sick. Call the clinic and say you want an appointment."
   expected_actions:
   - state-appoint-request
+  action_labels:
+    ask-repeat: "Politely ask them to repeat"
+    state-appoint-request: "Say you want to make an appointment"
+  support:
+    - level: 3
+      kind: model
+      text: "電話で 予約したいのですが。 (denwa de yoyaku shitai no desu ga)"
+    - level: 5
+      kind: gloss
+      text: "Use the pack's appointment opener: 電話で (denwa de) — 'by phone'; 予約 (yoyaku) — 'appointment/reservation'; 〜したいのですが — the soft 'I would like to ~'."
   next:
   - ja.scenario.a2.body.clinic-phone.symptom
   recovery:
@@ -22,6 +32,16 @@ nodes:
   expected_actions:
   - state-symptom
   - ask-slot
+  action_labels:
+    state-symptom: "Describe your fever and cough"
+    ask-slot: "Ask for a morning time slot"
+  support:
+    - level: 3
+      kind: model
+      text: "昨日から 熱と せきが あります。午前の 受付は いつですか。 (kinou kara netsu to seki ga arimasu. gozen no uketsuke wa itsu desu ka)"
+    - level: 5
+      kind: gloss
+      text: "Report symptoms with the pack forms: 昨日から熱があります (kinou kara netsu ga arimasu) 'fever since yesterday', せきもあります (seki mo arimasu) 'also a cough'. Morning: 午前 (gozen); 受付 (uketsuke) 'reception (hours)'."
   next:
   - ja.scenario.a2.body.clinic-phone.close
 - id: ja.scenario.a2.body.clinic-phone.close
@@ -29,7 +49,18 @@ nodes:
   expected_actions:
   - confirm-time
   - request-change
+  action_labels:
+    confirm-time: "Confirm the appointment time"
+    request-change: "Ask them to note the change you need"
+  support:
+    - level: 3
+      kind: model
+      text: "三時に お願いします。火曜日に 変更できますか。 (san-ji ni onegai shimasu. kayoubi ni henkou dekimasu ka)"
+    - level: 5
+      kind: gloss
+      text: "Confirm with the pack phrase 三時にお願いします (san-ji ni onegai shimasu) — 'three o'clock, please'. Ask about changes: 変更 (henkou) 'change'; 変更できますか (henkou dekimasu ka) — 'can I change it?'."
   next: []
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 support_ladder:
 - support_level: 0
   description: No supports

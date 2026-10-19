@@ -10,6 +10,17 @@ nodes:
   expected_actions:
   - concede-drawback
   - state-main-point
+  action_labels:
+    give-concrete-point: "Name one concrete point"
+    concede-drawback: "Admit one weakness of the film"
+    state-main-point: "State your stronger point"
+  support:
+    - level: 3
+      kind: model
+      text: "長かったけど、この映画はとてもおもしろいよ。 (nagakatta kedo, kono eiga wa totemo omoshiroi yo)"
+    - level: 5
+      kind: gloss
+      text: "Concede, then contrast in one sentence: 長かったけど (nagakatta kedo) — 'it was long, but…', followed by your main point とてもおもしろい (totemo omoshiroi) — 'really interesting'. Keep plain-casual forms here."
   next:
   - ja.scenario.b2.film.movie-talk.source
   recovery:
@@ -23,6 +34,16 @@ nodes:
   expected_actions:
   - name-recommender
   - favor-direction
+  action_labels:
+    name-recommender: "Say who recommended the film"
+    favor-direction: "Mark the favor as done for you"
+  support:
+    - level: 3
+      kind: model
+      text: "この映画は ともだちに しょうかい してもらったんだよ。 (kono eiga wa tomodachi ni shokai shite morattanda yo)"
+    - level: 5
+      kind: gloss
+      text: "Favor direction uses 〜てもらう (te morau): someone did ~ for you. ともだちに しょうかい してもらった (tomodachi ni shokai shite moratta) — 'a friend recommended it to me'; しょうかいする (shokai suru) is 'to recommend, to introduce'."
   next:
   - ja.scenario.b2.film.movie-talk.recommend
 - id: ja.scenario.b2.film.movie-talk.recommend
@@ -30,7 +51,18 @@ nodes:
   expected_actions:
   - offer-recommend
   - close-talk
+  action_labels:
+    offer-recommend: "Offer to lend it and push them to watch"
+    close-talk: "Close the conversation"
+  support:
+    - level: 3
+      kind: model
+      text: "おもしろいから、ぜひ みてよ。DVD も かして あげるよ。じゃ、またね。 (omoshiroi kara, zehi mite yo. DVD mo kashite ageru yo. ja, mata ne)"
+    - level: 5
+      kind: gloss
+      text: "Push them with ぜひ plus the te-form: ぜひ みて (zehi mite) — 'please do watch it'. Lending stays casual: かして あげる (kashite ageru) — 'I will lend it to you'. Close with じゃ、また (ja, mata) — 'see you'."
   next: []
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 support_ladder:
 - support_level: 0
   description: No supports

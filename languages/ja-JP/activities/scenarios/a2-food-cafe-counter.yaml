@@ -9,6 +9,16 @@ nodes:
   prompt: "At the counter, greet the order and say what you want."
   expected_actions:
   - state-order
+  action_labels:
+    ask-slowly: "Politely ask them to speak slowly"
+    state-order: "Say what you want to order"
+  support:
+    - level: 3
+      kind: model
+      text: "コーヒーを 一つ ください。 (koohii o hitotsu kudasai)"
+    - level: 5
+      kind: gloss
+      text: "Order with the pack pattern Xを一つください (X o hitotsu kudasai) — 'one X, please'. コーヒー (koohii) 'coffee'; 一つ (hitotsu) 'one'; ください (kudasai) the polite 'please give'."
   next:
   - ja.scenario.a2.food.cafe-counter.detail
   recovery:
@@ -22,6 +32,16 @@ nodes:
   expected_actions:
   - choose-style
   - modify-order
+  action_labels:
+    choose-style: "Choose hot or iced"
+    modify-order: "Change the order if needed"
+  support:
+    - level: 3
+      kind: model
+      text: "アイスで おねがいします。すみません、アイスに 変えます。 (aisu ni onegai shimasu. sumimasen, aisu ni kaemasu)"
+    - level: 5
+      kind: gloss
+      text: "Answer the clerk's ホットですか、アイスですか (hotto desu ka, aisu desu ka, 'hot or iced?'): アイスでお願いします — 'iced, please'. To change: pack line すみません、アイスに変えます (sumimasen, aisu ni kaemasu) — 'sorry, I will change it to iced'; 変える (kaeru) 'to change'."
   next:
   - ja.scenario.a2.food.cafe-counter.pay
 - id: ja.scenario.a2.food.cafe-counter.pay
@@ -30,7 +50,19 @@ nodes:
   - ask-bill
   - pay
   - say-thanks
+  action_labels:
+    ask-bill: "Ask for the bill"
+    pay: "Pay with points"
+    say-thanks: "Close with thanks"
+  support:
+    - level: 3
+      kind: model
+      text: "会計を おねがいします。ポイントで 払います。ありがとうございます。 (kaikei o onegai shimasu. pointo de haraimasu. arigatou gozaimasu)"
+    - level: 5
+      kind: gloss
+      text: "Pack lines: 会計をおねがいします (kaikei o onegai shimasu) — 'the bill, please' (会計 kaikei 'the bill'). Pay with points: ポイントで払います (pointo de haraimasu) — 'I will pay with points'; 払う (harau) 'to pay'. Close with ありがとうございます."
   next: []
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 support_ladder:
 - support_level: 0
   description: No supports

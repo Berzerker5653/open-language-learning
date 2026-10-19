@@ -9,6 +9,16 @@ nodes:
   prompt: "Call the restaurant. Say you want to make a reservation."
   expected_actions:
   - state-reserve-request
+  action_labels:
+    ask-repeat: "Politely ask them to repeat"
+    state-reserve-request: "Say you want to make a reservation"
+  support:
+    - level: 3
+      kind: model
+      text: "電話で 予約したいのですが。 (denwa de yoyaku shitai no desu ga)"
+    - level: 5
+      kind: gloss
+      text: "Use the pack opener verbatim: 電話で予約したいのですが (denwa de yoyaku shitai no desu ga) — 'I would like to make a reservation by phone'. 予約 (yoyaku) 'reservation'; 〜したいのですが softens 'I would like to ~'."
   next:
   - ja.scenario.a2.food.reserve-phone.details
   recovery:
@@ -22,6 +32,16 @@ nodes:
   expected_actions:
   - state-size
   - state-time
+  action_labels:
+    state-size: "Give the party size"
+    state-time: "Give the time"
+  support:
+    - level: 3
+      kind: model
+      text: "四人で、七時に おねがいします。 (yonin de, shichi-ji ni onegai shimasu)"
+    - level: 5
+      kind: gloss
+      text: "Answer 何名さまですか (nanmei-sama desu ka, 'for how many people?') with the pack line 四人で、七時におねがいします (yonin de, shichi-ji ni onegai shimasu) — 'four people, at seven, please'. 四人 (yonin) 'four people'; 〜時 (ji) 'o'clock'."
   next:
   - ja.scenario.a2.food.reserve-phone.name
 - id: ja.scenario.a2.food.reserve-phone.name
@@ -29,7 +49,18 @@ nodes:
   expected_actions:
   - state-name
   - confirm-booking
+  action_labels:
+    state-name: "Give your name"
+    confirm-booking: "Ask for confirmation of the booking"
+  support:
+    - level: 3
+      kind: model
+      text: "山田です。予約で 合っていますか。よろしく おねがいします。 (yamada desu. yoyaku de otte imasu ka. yoroshiku onegaishimasu)"
+    - level: 5
+      kind: gloss
+      text: "Give your name as in the pack: 山田です (Yamada desu) — 'this is Yamada'. Confirm the booking: 予約 (yoyaku) 'reservation'. Close with どうぞよろしくお願いします (douzo yoroshiku onegaishimasu), the standard polite sign-off."
   next: []
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 support_ladder:
 - support_level: 0
   description: No supports

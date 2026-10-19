@@ -9,6 +9,16 @@ nodes:
   prompt: "You have a cold. At the pharmacy, say you are looking for cold medicine."
   expected_actions:
   - state-need
+  action_labels:
+    ask-repeat: "Politely ask them to repeat"
+    state-need: "Say you are looking for cold medicine"
+  support:
+    - level: 3
+      kind: model
+      text: "風邪薬を 探しているのですが。 (kaze-gusuri o sagashite iru no desu ga)"
+    - level: 5
+      kind: gloss
+      text: "Use the pack's pharmacy opener: 風邪薬 (kaze-gusuri) — 'cold medicine'; 探している (sagashite iru) — 'looking for', softened with のですが."
   next:
   - ja.scenario.a2.body.pharmacy.symptom
   recovery:
@@ -22,6 +32,16 @@ nodes:
   expected_actions:
   - state-symptom
   - ask-dose
+  action_labels:
+    state-symptom: "Describe your fever and cough"
+    ask-dose: "Ask how to take the medicine"
+  support:
+    - level: 3
+      kind: model
+      text: "熱と せきが あります。この薬は どう のみますか。 (netsu to seki ga arimasu. kono kusuri wa dou nomimasu ka)"
+    - level: 5
+      kind: gloss
+      text: "State symptoms with the pack form 熱とせきがあります (netsu to seki ga arimasu) — 'I have a fever and a cough'. Ask dosing: 薬 (kusuri) 'medicine'; どう飲みますか (dou nomimasu ka) — 'how do I take it?'."
   next:
   - ja.scenario.a2.body.pharmacy.question
 - id: ja.scenario.a2.body.pharmacy.question
@@ -30,7 +50,19 @@ nodes:
   - ask-safety
   - ask-price
   - say-thanks
+  action_labels:
+    ask-safety: "Ask about side effects"
+    ask-price: "Ask the price"
+    say-thanks: "Buy and close with thanks"
+  support:
+    - level: 3
+      kind: model
+      text: "副作用は ありますか。いくらに なりますか。ありがとうございます。 (fukusayou wa arimasu ka. ikura ni narimasu ka. arigatou gozaimasu)"
+    - level: 5
+      kind: gloss
+      text: "All three lines are pack phrases: 副作用はありますか (fukusayou wa arimasu ka) — 'are there side effects?' (副作用 = side effects); いくらになりますか (ikura ni narimasu ka) — 'how much will it be?'; ありがとうございます — 'thank you very much'."
   next: []
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 support_ladder:
 - support_level: 0
   description: No supports

@@ -9,6 +9,16 @@ nodes:
   prompt: "You will be late for a meeting. Send a text that you are running late."
   expected_actions:
   - state-delay
+  action_labels:
+    state-location: "Say where you are now"
+    state-delay: "Say you are running late"
+  support:
+    - level: 3
+      kind: model
+      text: "すみません、少し 遅れます。 (sumimasen, sukoshi okuremasu)"
+    - level: 5
+      kind: gloss
+      text: "Apologize and state the delay: 遅れます (okuremasu) — 'I will be late'; 少し (sukoshi) 'a little'. Pack model line: すみません、少し遅れます."
   next:
   - ja.scenario.a2.comm.text-reschedule.time
   recovery:
@@ -21,6 +31,15 @@ nodes:
   prompt: "Your friend asks what time you will arrive. Give a time."
   expected_actions:
   - state-time
+  action_labels:
+    state-time: "Give your arrival time"
+  support:
+    - level: 3
+      kind: model
+      text: "六時ごろに  つきます。 (rokuji goro ni tsukimasu)"
+    - level: 5
+      kind: gloss
+      text: "Answer the pack question 何時につきますか (nan-ji ni tsukimasu ka, 'what time will you arrive?') with a time: 六時ごろにつきます (rokuji goro ni tsukimasu) — 'I will arrive around six'; 着く (tsuku) 'to arrive'."
   next:
   - ja.scenario.a2.comm.text-reschedule.meet
 - id: ja.scenario.a2.comm.text-reschedule.meet
@@ -28,7 +47,18 @@ nodes:
   expected_actions:
   - agree-meeting-point
   - confirm-short
+  action_labels:
+    agree-meeting-point: "Agree where to meet"
+    confirm-short: "Send a short confirmation"
+  support:
+    - level: 3
+      kind: model
+      text: "えきの 出口で まちます。了解! (eki no deguchi de machimasu. ryoukai!)"
+    - level: 5
+      kind: gloss
+      text: "Pack lines: えきの出口でまちます (eki no deguchi de machimasu) — 'I will wait at the station exit' (出口 deguchi 'exit', 待つ matsu 'to wait'); short text confirmation: 了解 (ryoukai) — 'got it!'."
   next: []
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 support_ladder:
 - support_level: 0
   description: No supports

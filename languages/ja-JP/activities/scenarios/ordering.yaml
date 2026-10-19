@@ -9,6 +9,16 @@ nodes:
   prompt: Sit down and say what you would like to eat or drink.
   expected_actions:
   - state-order
+  action_labels:
+    ask-slowly: "Politely ask them to speak slowly"
+    state-order: "Say what you would like to order"
+  support:
+    - level: 3
+      kind: model
+      text: "コーヒーを一つください。 (koohii o hitotsu kudasai)"
+    - level: 5
+      kind: gloss
+      text: "Name your order and add ください: コーヒーを一つください (koohii o hitotsu kudasai) — 'one coffee, please'. ください (kudasai) is the polite 'please give me'; swap in any menu item."
   next:
   - ja.scenario.restaurant.order.receive
   recovery:
@@ -21,13 +31,32 @@ nodes:
   prompt: Your food arrives. Say the phrase you use before eating.
   expected_actions:
   - say-before-eating
+  action_labels:
+    say-before-eating: "Say the set phrase before eating"
+  support:
+    - level: 3
+      kind: model
+      text: "いただきます。 (itadakimasu)"
+    - level: 5
+      kind: gloss
+      text: "Before eating, people say the set phrase いただきます (itadakimasu) — roughly 'I gratefully receive this meal'. There is no exact English match; just use the phrase."
   next:
   - ja.scenario.restaurant.order.close
 - id: ja.scenario.restaurant.order.close
   prompt: You finish. Say the phrase you use after eating and ask for nothing else.
   expected_actions:
   - say-after-eating
+  action_labels:
+    say-after-eating: "Say the set phrase after eating"
+  support:
+    - level: 3
+      kind: model
+      text: "ごちそうさまでした。 (gochisou-sama deshita)"
+    - level: 5
+      kind: gloss
+      text: "After finishing, say ごちそうさまでした (gochisou-sama deshita) — the set phrase thanking whoever provided the meal, roughly 'that was a feast, thank you'."
   next: []
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 support_ladder:
 - support_level: 0
   description: No supports

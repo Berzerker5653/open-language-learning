@@ -7,6 +7,16 @@ nodes:
   prompt: Ask for something you need in a simple, polite way.
   expected_actions:
   - request-item
+  action_labels:
+    rephrase-request: "Rephrase it another way"
+    request-item: "Ask for something you need"
+  support:
+    - level: 3
+      kind: model
+      text: "Дайте́ пожа́луйста чай. (Dayte pozhaluysta chay.)"
+    - level: 5
+      kind: gloss
+      text: "Ask with Дайте́ (Dayte) — 'give', plus the pack word пожа́луйста (pozhaluysta) — 'please': Дайте́ пожа́луйста чай — 'Tea, please.' Put the thing you need right after Дайте́."
   next:
   - ru.scenario.everyday.needs.clarify
   recovery:
@@ -19,13 +29,32 @@ nodes:
   prompt: Answer a simple follow-up question about what you want.
   expected_actions:
   - answer-request-detail
+  action_labels:
+    answer-request-detail: "Answer what exactly you want"
+  support:
+    - level: 3
+      kind: model
+      text: "Я хочу́ чай без са́хара. (Ya khochu chay bez sakhara.)"
+    - level: 5
+      kind: gloss
+      text: "Say what you want with Я хочу́ … (Ya khochu ...) — 'I want …'. Reuse the pack chunk без са́хара (bez sakhara) — 'without sugar': Я хочу́ чай без са́хара — 'I want tea without sugar.'"
   next:
   - ru.scenario.everyday.needs.thanks
 - id: ru.scenario.everyday.needs.thanks
   prompt: Thank the person.
   expected_actions:
   - say-thanks
+  action_labels:
+    say-thanks: "Thank the person"
+  support:
+    - level: 3
+      kind: model
+      text: "Спаси́бо! (Spasibo!)"
+    - level: 5
+      kind: gloss
+      text: "Thank them with the pack word Спаси́бо (spasibo) — 'thank you'. The usual reply is пожа́луйста (pozhaluysta) — 'you are welcome'."
   next: []
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 support_ladder:
 - support_level: 0
   description: No supports

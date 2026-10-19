@@ -10,6 +10,17 @@ nodes:
   expected_actions:
   - answer-phone
   - identify-self
+  action_labels:
+    ask-repeat: "Politely ask them to repeat"
+    answer-phone: "Pick up the phone"
+    identify-self: "Give your name"
+  support:
+    - level: 3
+      kind: model
+      text: "もしもし、山田です。 (moshi moshi, yamada desu)"
+    - level: 5
+      kind: gloss
+      text: "Answer the phone with もしもし (moshi moshi) — 'hello (on the phone)', then your name + です (desu): 山田です (Yamada desu) — 'this is Yamada'."
   next:
   - ja.scenario.a2.comm.answer-phone.caller
   recovery:
@@ -23,6 +34,16 @@ nodes:
   expected_actions:
   - confirm-presence
   - offer-help
+  action_labels:
+    confirm-presence: "Say whether the person is there"
+    offer-help: "Offer to help the caller"
+  support:
+    - level: 3
+      kind: model
+      text: "今、いえに いません。伝言を おねがいします。 (ima, ie ni imasen. dengon o onegai shimasu)"
+    - level: 5
+      kind: gloss
+      text: "Absence: 今、いえにいません (ima, ie ni imasen) — 'he/she is not home now'. Offer help: 伝言 (dengon) is 'message'; 伝言をおねがいします — 'please leave a message, please'."
   next:
   - ja.scenario.a2.comm.answer-phone.message
 - id: ja.scenario.a2.comm.answer-phone.message
@@ -30,7 +51,18 @@ nodes:
   expected_actions:
   - take-message
   - promise-pass
+  action_labels:
+    take-message: "Take down the message"
+    promise-pass: "Promise to pass it on"
+  support:
+    - level: 3
+      kind: model
+      text: "名前と 電話番号を かきます。あとで 伝えます。 (namae to denwabangou o kakimasu. ato de tsutaemasu)"
+    - level: 5
+      kind: gloss
+      text: "Offer to write it down: 名前 (namae) 'name', 電話番号 (denwabangou) 'phone number', 書きます (kakimasu) 'I will write'. Promise: 伝える (tsutaeru) 'to pass on'; あとで伝えます (ato de tsutaemasu) — 'I will pass it on later'."
   next: []
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 support_ladder:
 - support_level: 0
   description: No supports

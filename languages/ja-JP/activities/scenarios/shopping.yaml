@@ -9,6 +9,16 @@ nodes:
   prompt: You pick up an item. Ask how much it is.
   expected_actions:
   - ask-price
+  action_labels:
+    ask-repeat: "Politely ask them to repeat"
+    ask-price: "Ask how much the item is"
+  support:
+    - level: 3
+      kind: model
+      text: "すみません、これはいくらですか。 (sumimasen, kore wa ikura desu ka)"
+    - level: 5
+      kind: gloss
+      text: "Ask the price: これはいくらですか (kore wa ikura desu ka) — 'how much is this?'. Start with すみません (sumimasen) to get the shopkeeper's attention; いくら (ikura) means 'how much'."
   next:
   - ja.scenario.shopping.market.buy
   recovery:
@@ -22,13 +32,33 @@ nodes:
   expected_actions:
   - state-buy
   - hand-money
+  action_labels:
+    state-buy: "Say you will take the item"
+    hand-money: "Offer to pay now"
+  support:
+    - level: 3
+      kind: model
+      text: "これをください。ここで払います。 (kore o kudasai. koko de haraimasu)"
+    - level: 5
+      kind: gloss
+      text: "Say you want it: これをください (kore o kudasai) — 'this one, please'. For handing over money: ここで払います (koko de haraimasu) — 'I will pay here'; 払う (harau) is 'to pay'."
   next:
   - ja.scenario.shopping.market.close
 - id: ja.scenario.shopping.market.close
   prompt: They thank you. Close with a polite thanks.
   expected_actions:
   - say-thanks
+  action_labels:
+    say-thanks: "Close with a polite thank-you"
+  support:
+    - level: 3
+      kind: model
+      text: "ありがとうございます。 (arigatou gozaimasu)"
+    - level: 5
+      kind: gloss
+      text: "Close with the polite thank-you used across this pack: ありがとうございます (arigatou gozaimasu) — 'thank you very much'."
   next: []
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 support_ladder:
 - support_level: 0
   description: No supports

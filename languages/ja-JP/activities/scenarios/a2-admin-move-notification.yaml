@@ -9,6 +9,16 @@ nodes:
   prompt: "You moved recently. At the window, say you want to file a moving notification."
   expected_actions:
   - state-purpose
+  action_labels:
+    ask-list: "Ask which ones are needed"
+    state-purpose: "Say you want to file a moving notification"
+  support:
+    - level: 3
+      kind: model
+      text: "引っ越しの 届出を したいのですが。 (hikkoshi no todoke o shitai no desu ga)"
+    - level: 5
+      kind: gloss
+      text: "State your purpose with the soft opener 〜したいのですが (~shitai no desu ga) — 'I would like to ~ but…'. 引っ越し (hikkoshi) is 'moving'; 届出 (todoke) is 'notification/registration'."
   next:
   - ja.scenario.a2.admin.move-notification.docs
   recovery:
@@ -22,6 +32,16 @@ nodes:
   expected_actions:
   - confirm-docs
   - ask-requirements
+  action_labels:
+    confirm-docs: "Say which documents you have"
+    ask-requirements: "Ask what else is needed"
+  support:
+    - level: 3
+      kind: model
+      text: "印鑑と 身分証明書が あります。ほかに なにが いますか。 (inkan to mibunshoumeisho ga arimasu. hoka ni nani ga irimasu ka)"
+    - level: 5
+      kind: gloss
+      text: "Say what you have: 印鑑 (inkan) 'seal', 身分証明書 (mibunshoumeisho) 'ID'; あります (arimasu) — 'I have'. Ask about the rest: ほかになにがいますか (hoka ni nani ga irimasu ka) — 'what else is needed?'."
   next:
   - ja.scenario.a2.admin.move-notification.sign
 - id: ja.scenario.a2.admin.move-notification.sign
@@ -29,7 +49,18 @@ nodes:
   expected_actions:
   - sign-form
   - ask-certificate
+  action_labels:
+    sign-form: "Sign the form"
+    ask-certificate: "Ask whether a certificate is also needed"
+  support:
+    - level: 3
+      kind: model
+      text: "ここに 署名します。住民票も いりますか。 (koko ni shomei shimasu. juuminhyou mo irimasu ka)"
+    - level: 5
+      kind: gloss
+      text: "Sign: 署名します (shomei shimasu) — 'I will sign' (the clerk points with ここに署名してください, 'please sign here'). Certificate: 住民票 (juuminhyou) is 'resident certificate'; 住民票もいりますか — 'do I also need a resident certificate?'."
   next: []
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 support_ladder:
 - support_level: 0
   description: No supports
