@@ -7,10 +7,22 @@ nodes:
   - id: "ar.activity.scn.open"
     prompt: "Greet the other person."
     expected_actions: ["greeting"]
+    action_labels:
+      greeting: "Greet the other person"
+    support:
+      - level: 3
+        kind: model
+        text: "السلام عليكم (as-salamu alaykum)"
     next: ["ar.activity.scn.ask"]
   - id: "ar.activity.scn.ask"
     prompt: "Say what you are doing: learning this language."
     expected_actions: ["self-description"]
+    action_labels:
+      self-description: "Say you are learning the language"
+    support:
+      - level: 3
+        kind: model
+        text: "أنا أتعلم هذه اللغة (ana a-ta'allamu hadhihi al-lugha)"
     next: []
 support_ladder:
   - support_level: 0
