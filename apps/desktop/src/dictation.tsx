@@ -18,7 +18,9 @@ export interface DictationResult {
 export interface DictationSentence {
   id: string;
   text: string;
-  reading: string;
+  /** Kana cue when the pack declares one; null for scripts without reading
+   *  fields (Russian) — the surface text is then the comparison target (U04). */
+  reading: string | null;
   gloss: string;
 }
 

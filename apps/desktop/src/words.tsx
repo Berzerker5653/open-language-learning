@@ -38,6 +38,8 @@ export interface MyWordsPanelProps {
   onAdd(): void;
   onRemove(id: string): void;
   onGrade(again: boolean): void;
+  onReviewNow(id: string): void;
+  onStartNewReview(): void;
   onStartReview(): void;
   onReveal(): void;
 }
@@ -98,6 +100,11 @@ export function MyWordsPanel(p: MyWordsPanelProps) {
           <button type="button" className="btn btn--primary" onClick={p.onStartReview}>
             Review due words
           </button>
+          {p.items.some((m) => !m.due_at) && (
+            <button type="button" className="btn btn--quiet" onClick={p.onStartNewReview}>
+              Review new words
+            </button>
+          )}
         </div>
       )}
       <div className="field">
@@ -160,6 +167,16 @@ export function MyWordsPanel(p: MyWordsPanelProps) {
                 {m.source_citation}
                 {m.due_at ? ` · due ${m.due_at.slice(0, 10)}` : " · not scheduled yet"}
               </small>
+              {"  "}
+              {!m.due_at && (
+                <button
+                  type="button"
+                  className="btn btn--quiet"
+                  onClick={() => p.onReviewNow(m.id)}
+                >
+                  Review now
+                </button>
+              )}
               {"  "}
               <button type="button" className="btn btn--quiet" onClick={() => p.onRemove(m.id)}>
                 Remove

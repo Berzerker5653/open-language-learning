@@ -229,6 +229,56 @@ function toB64(bytes: Uint8Array): string {
 }
 
 /**
+ * U05: what the placement pass declined to ask, in the engine's own words.
+ * A rubric with no low-stakes auto-runner is reported, never presented as a
+ * runnable question; the status and reason strings travel from
+ * `placement_coverage` unchanged — this component only groups and labels.
+ */
+function PlacementCoverageNote({
+  rows,
+}: {
+  rows: { assessment_id: string; goal_id: string; status: string; reason?: string }[];
+}) {
+  if (rows.length === 0) return null;
+  const planned = rows.filter((r) => r.status === "planned").length;
+  const declined = rows.filter((r) => r.status !== "planned");
+  const COPY: Record<string, string> = {
+    "no-runner": "no low-stakes auto-runner exists for that skill yet",
+    "no-content": "no content at the right level can serve that rubric",
+    "modality-unsupported": "no runner can ask about that construct yet",
+  };
+  const byStatus = new Map<string, { n: number; sample?: string }>();
+  for (const r of declined) {
+    const g = byStatus.get(r.status) ?? { n: 0, sample: r.reason };
+    g.n += 1;
+    byStatus.set(r.status, g);
+  }
+  return (
+    <div className="field" data-testid="placement-coverage">
+      <p>
+        {planned} question{planned === 1 ? "" : "s"} ready
+        {declined.length > 0 ? `, ${declined.length} rubrics the engine will not fake` : ""}.
+      </p>
+      {declined.length > 0 && (
+        <ul>
+          {[...byStatus.entries()].map(([status, g]) => (
+            <li key={status}>
+              {g.n} · {COPY[status] ?? status}
+              {g.sample && (
+                <details>
+                  <summary>engine reason</summary>
+                  <code>{g.sample}</code>
+                </details>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+/**
  * Desktop UI host. UX-001 onboarding (privacy notice, local profile,
  * Japanese pack install, skippable microphone), then UX-002 home /
  * time-budget practice / capability progress. The smoke handshake
@@ -279,6 +329,11 @@ export function App() {
   // never derived from the plan's contents or the clock: a fresh id per
   // call collapses nothing, a clock-derived id merges unrelated days.
   const planSessionRef = useRef("");
+  // U02: every pack-scoped async fill carries the generation it started
+  // under; a language switch bumps the generation so late old-pack
+  // responses are dropped instead of repopulating the screen.
+  const packSwitchGen = useRef(0);
+  const [packSwitching, setPackSwitching] = useState(false);
   // R04: a supplied reading and a romaji reveal disqualify different
   // mastery dimensions, so the engine needs which hint was used, not just
   // that some hint was.
@@ -300,7 +355,10 @@ export function App() {
   const [progressLoading, setProgressLoading] = useState(false);
   const [writingLoaded, setWritingLoaded] = useState(false);
   const [pronResult, setPronResult] = useState<PronunciationResult | null>(null);
-  const [dictTarget, setDictTarget] = useState("おばあさん");
+  // No hardcoded language here (U04): the target arrives from the ACTIVE
+  // pack's sentence pool; switching packs refetches, and a fetch failure
+  // clears it rather than leaving another language behind.
+  const [dictTarget, setDictTarget] = useState("");
   const [dictResult, setDictResult] = useState<DictationResult | null>(null);
   const [dictSentence, setDictSentence] = useState<DictationSentence | null>(null);
   const [dictOffset, setDictOffset] = useState(0);
@@ -400,6 +458,13 @@ export function App() {
   const [placementHits, setPlacementHits] = useState(0);
   const [placementFinished, setPlacementFinished] = useState(false);
   const [placementError, setPlacementError] = useState<string | null>(null);
+  // U05: what the engine made of every declared rubric — `planned` rows plus
+  // honest abstentions with machine-readable reasons. Fetched when the
+  // Placement surface opens, never in the boot batch (the scan is a full
+  // pack pass with per-pair build verification).
+  const [placementCoverage, setPlacementCoverage] = useState<
+    { assessment_id: string; goal_id: string; status: string; reason?: string }[]
+  >([]);
   const [kanjiCards, setKanjiCards] = useState<
     {
       id: string;
@@ -981,6 +1046,15 @@ export function App() {
     }
   }
 
+  // U02: a language change is one coordinated transition, not a settings
+  // refresh. The native switch lands first; then every display the old pack
+  // filled is dropped — plan snapshot, in-flight task, lesson, placement
+  // run, story, shadowing, dictation, phonology demo, kanji drill — before
+  // the new pack answers, so an old card can never submit against the new
+  // pack. Learner-owned state (mined words, profile settings) is kept:
+  // those belong to the learner, not the language. The profile-entry reads
+  // then re-run under a generation guard; `packSwitching` is the loading
+  // promise Home shows while the new context settles.
   async function switchLearning(packId: string) {
     if (!inv || !profileId) return;
     try {
@@ -988,8 +1062,75 @@ export function App() {
       setLangError(null);
     } catch (e) {
       setLangError(String(e));
+      return;
     }
+    const gen = ++packSwitchGen.current;
+    setPackSwitching(true);
+    setRoute("practice");
+    applyPlan(EMPTY_PLAN);
+    setNextGoal(undefined);
+    setFirstRunSteps([]);
+    setEnvironments([]);
+    setPracticeTarget(null);
+    setPracticeTask(null);
+    setPracticeGraded(false);
+    setPracticeCorrect(false);
+    setPracticeCorrectChoice("");
+    setPracticeSpeakCheck(null);
+    setLesson(null);
+    setLessonSeen(false);
+    setPlacementItems([]);
+    setPlacementIdx(0);
+    setPlacementTask(null);
+    setPlacementGraded(false);
+    setPlacementCorrect(false);
+    setPlacementCorrectChoice("");
+    setPlacementHits(0);
+    setPlacementFinished(false);
+    setPlacementError(null);
+    setPlacementCoverage([]);
+    setShadowItems(null);
+    setShadowIdx(0);
+    setStoryList([]);
+    setStoryActive(null);
+    setStoryLookup(null);
+    setPronDemo(null);
+    setPronResult(null);
+    setDictSentence(null);
+    setDictTarget("");
+    setDictResult(null);
+    setDictOffset(0);
+    setKanjiCards([]);
+    setKanjiActive(null);
+    setKanjiStage(null);
+    setKanjiTask(null);
+    setKanjiGraded(false);
+    setKanjiCorrect(false);
+    setKanjiCorrectChoice("");
+    setKanjiError(null);
     await refreshLanguages();
+    try {
+      const home = (await inv("home_state", { profileId })) as {
+        display_name: string;
+        plan: SessionPlan;
+        next_goal: NextGoalView | null;
+      };
+      if (gen !== packSwitchGen.current) return;
+      setDisplayName(home.display_name);
+      applyPlan(home.plan);
+      setNextGoal(home.next_goal);
+      setFirstRunSteps((await inv("first_run_steps", { profileId })) as FirstRunStep[]);
+      if (gen !== packSwitchGen.current) return;
+      setEnvironments((await inv("world_state", { profileId })) as WorldEnvironment[]);
+      setDisplay((await inv("display_settings", { profileId })) as DisplaySettingsView);
+      await loadProfilePrefs(profileId);
+    } catch (e) {
+      if (gen === packSwitchGen.current) {
+        setLangError(`The language was switched, but the screens could not re-read: ${String(e)}`);
+      }
+    } finally {
+      if (gen === packSwitchGen.current) setPackSwitching(false);
+    }
   }
 
   async function installCatalogPack(packId: string) {
@@ -1067,7 +1208,10 @@ export function App() {
     return () => {
       live = false;
     };
-  }, [inv, profileId]);
+    // U02: `selectedPack` changes only when the session's active pack does,
+    // so the probe re-runs exactly once per pack change (U01's acceptance)
+    // and never on typing or unrelated display state.
+  }, [inv, profileId, selectedPack]);
 
   async function installSpeechModel(modelId: string) {
     if (!inv) return;
@@ -1973,6 +2117,7 @@ export function App() {
     setPlacementGraded(false);
     setPlacementHits(0);
     setPlacementError(null);
+    setPlacementCoverage([]);
     const inv = detectInvoke();
     if (!inv || !profileId) return;
     try {
@@ -1996,6 +2141,20 @@ export function App() {
       }
     } catch (e) {
       setPlacementError(String(e));
+    }
+    // U05: the coverage pass is presentation, not the run — a failure here
+    // leaves the questions alone and simply says nothing extra.
+    try {
+      setPlacementCoverage(
+        (await inv("placement_coverage", { profileId })) as {
+          assessment_id: string;
+          goal_id: string;
+          status: string;
+          reason?: string;
+        }[],
+      );
+    } catch {
+      setPlacementCoverage([]);
     }
   }
 
@@ -2386,6 +2545,34 @@ export function App() {
     }
   }
 
+  // U03: the engine answers which saved words were never scheduled; the UI
+  // opens the existing reveal+self-grade card for one of them. The first
+  // grade then goes through `mine_grade`, which seeds the schedule — the
+  // same single grading path due reviews use.
+  async function startNewMineReview() {
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    try {
+      const fresh = (await inv("mine_new", { profileId })) as typeof mineItems;
+      const [first] = fresh;
+      if (!first) {
+        setMineNotice("No new words are waiting for their first review.");
+        return;
+      }
+      setMineNotice(null);
+      setMineReview({ item: first, revealed: false });
+    } catch (e) {
+      setMineError(String(e));
+    }
+  }
+
+  function reviewMineNow(id: string) {
+    const item = mineItems.find((m) => m.id === id);
+    if (!item || item.due_at) return;
+    setMineNotice(null);
+    setMineReview({ item, revealed: false });
+  }
+
   // READ-001: revealing a faded scaffold refetches the task with the
   // reading shown; the submit then records it as support (level 3).
   async function revealPracticeReading() {
@@ -2648,6 +2835,12 @@ export function App() {
   }
 
   async function analyzeDictation(wav: Uint8Array) {
+    // A failed sentence fetch leaves no comparison target; comparing against
+    // nothing would manufacture a mismatch verdict (U04). Hold instead.
+    if (!dictTarget.trim()) {
+      setAudioMsg("No sentence loaded yet — wait for one, or type your own above.");
+      return;
+    }
     const inv = detectInvoke();
     if (!inv) {
       setDictResult({
@@ -2730,13 +2923,19 @@ export function App() {
       if (!req.ok) {
         setAudioMsg(req.error);
         setDictSentence(null);
+        // An unavailable pool never leaves last pack's sentence behind as a
+        // comparison target (U04); the record guard then holds.
+        setDictTarget("");
         return;
       }
       setDictSentence(req.value);
-      setDictTarget(req.value.reading);
+      // Scripts with a reading field cue the learner with it; scripts without
+      // (Russian) compare against the surface itself.
+      setDictTarget(req.value.reading ?? req.value.text);
       setDictResult(null);
     } catch {
       setDictSentence(null);
+      setDictTarget("");
     }
   }
 
@@ -3177,6 +3376,8 @@ export function App() {
           onRemove={(id) => void removeMine(id)}
           onGrade={(again) => void gradeMine(again)}
           onStartReview={startMineReview}
+          onReviewNow={(id) => reviewMineNow(id)}
+          onStartNewReview={() => void startNewMineReview()}
           onReveal={() => setMineReview((r) => (r ? { ...r, revealed: true } : r))}
         />
       ) : route === "placement" ? (
@@ -3186,6 +3387,7 @@ export function App() {
             Low-stakes checks on what you may already know — two quick questions per goal. Correct
             answers mark known foundations, and practice skips ahead automatically.
           </p>
+          <PlacementCoverageNote rows={placementCoverage} />
           {placementError && (
             <p role="alert" className="alert">
               {placementError}
@@ -3572,6 +3774,7 @@ export function App() {
           onChooseLanguage={() => setRoute("settings")}
           updates={packUpdates}
           plan={plan}
+          packSwitching={packSwitching}
           activeBudget={budget}
           onBudget={(m) => void changeBudget(m)}
           environments={environments}

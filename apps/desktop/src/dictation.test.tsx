@@ -5,7 +5,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { DictationPractice, type DictationResult } from "./dictation";
 
 const base = {
-  sentence: null as { id: string; text: string; reading: string; gloss: string } | null,
+  sentence: null as { id: string; text: string; reading: string | null; gloss: string } | null,
   target: "おばあさん",
   onTargetChange: () => {},
   onNewSentence: () => {},
@@ -116,5 +116,25 @@ describe("dictation practice", () => {
     expect(html).toContain("おはようございます。");
     expect(html).toContain("Good morning.");
     expect(html).toContain("New sentence");
+  });
+
+  it("renders a pack sentence with no reading field (U04)", () => {
+    // Russian has no kana cue: the surface travels as the comparison target
+    // and the card still shows text + gloss.
+    const html = renderToStaticMarkup(
+      <DictationPractice
+        {...base}
+        target="Посмотрите, пожалуйста, третий абзац и исправьте ошибку."
+        result={null}
+        sentence={{
+          id: "ru.sent.b2.j1",
+          text: "Посмотрите, пожалуйста, третий абзац и исправьте ошибку.",
+          reading: null,
+          gloss: "Please look at the third paragraph and correct the mistake.",
+        }}
+      />,
+    );
+    expect(html).toContain("Посмотрите");
+    expect(html).toContain("Please look at the third paragraph");
   });
 });

@@ -353,6 +353,8 @@ describe("pack direction (RTL-001, ADR-0029)", () => {
         onGrade={() => {}}
         onStartReview={() => {}}
         onReveal={() => {}}
+        onReviewNow={() => {}}
+        onStartNewReview={() => {}}
       />,
     );
     expect(html).toContain('<p dir="rtl" lang="ar-MA" class="prompt">حالك</p>');

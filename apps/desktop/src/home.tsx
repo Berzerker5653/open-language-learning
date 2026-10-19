@@ -186,6 +186,10 @@ export interface HomeProps {
   onResumeSession?(): void;
   onStopSession?(): void;
   onDismissSessionSummary?(): void;
+  /// U02: a language change clears the pack-scoped displays before the new
+  /// pack re-answers; Home says so while that settles instead of showing a
+  /// plan that belongs to the language being left.
+  packSwitching?: boolean;
 }
 
 export function Home(p: HomeProps) {
@@ -201,6 +205,11 @@ export function Home(p: HomeProps) {
   return (
     <section aria-label="Practice">
       <h1>Hi {p.displayName}</h1>
+      {p.packSwitching ? (
+        <p className="notice" role="status">
+          Switching languages — the plan, goal and places below update as the new pack answers.
+        </p>
+      ) : null}
       {p.noPack ? null : <p className="prompt">what to practice now</p>}
       {p.activePack ? (
         <p className="meta pack-posture">
