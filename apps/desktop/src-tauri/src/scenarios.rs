@@ -81,13 +81,23 @@ pub struct RecoveryView {
     pub prompt: String,
 }
 
+/// U07: one respond button. `intent` is the internal pack token the
+/// runtime matches against `expected_actions`; `label` is the learner-
+/// facing wording from the pack's `action_labels` (or a generic word).
+/// The token must never be rendered as the label.
+#[derive(Serialize)]
+pub struct ActionView {
+    pub intent: String,
+    pub label: String,
+}
+
 #[derive(Serialize)]
 pub struct NodeView {
     pub id: String,
     pub prompt: String,
-    /// Pack-declared intents the learner can attempt at this prompt.
+    /// U07: pack-declared intents the learner can attempt at this prompt.
     /// An empty list means free response (any attempt advances).
-    pub actions: Vec<String>,
+    pub actions: Vec<ActionView>,
     pub recovery: Vec<RecoveryView>,
 }
 
@@ -95,6 +105,17 @@ pub struct NodeView {
 pub struct LadderView {
     pub support_level: u8,
     pub description: String,
+}
+
+/// U07: the help a ladder rung actually delivered. A rung the learner
+/// can press is a promise; `support_at` fills this from the current
+/// node's `support` payload at that level, and validation guarantees
+/// every rung > 0 in a 0.2 scenario has one.
+#[derive(Serialize)]
+pub struct HelpView {
+    pub kind: String,
+    pub text: String,
+    pub options: Vec<String>,
 }
 
 #[derive(Serialize)]
@@ -114,6 +135,9 @@ pub struct ScenarioView {
     pub transfers: Vec<TransferView>,
     pub transfers_required: u32,
     pub support_used: Vec<u8>,
+    /// U07: set only by `support_at`, from the rung's payload; None on
+    /// every other command so stale help never lingers on a new prompt.
+    pub delivered_help: Option<HelpView>,
 }
 
 #[derive(Serialize)]
@@ -129,7 +153,16 @@ pub struct StepView {
 #[derive(Serialize)]
 pub struct OutcomeView {
     pub nodes_completed: u32,
+    /// U08: exchange nodes the scenario declares, so the UI can report a
+    /// partial walk honestly rather than claiming completion.
+    pub exchanges_total: u32,
+    /// U08: true only when the chain reached its terminal node and the
+    /// transfer requirement is met — never from the button press itself.
+    pub completed: bool,
     pub transfers_completed: u32,
+    /// U08: the pack-declared requirement (may be 0), so the transfer
+    /// line names the actual number instead of a bare "at least".
+    pub transfers_required: u32,
     pub transfer_requirement_met: bool,
 }
 
@@ -503,7 +536,17 @@ fn view_of(data: &Path, sc: &PackScenario, session: &ScenarioSession) -> Scenari
         node: NodeView {
             id: node.id.clone(),
             prompt: prompt.to_string(),
-            actions: actions.to_vec(),
+            actions: actions
+                .iter()
+                .map(|intent| ActionView {
+                    intent: intent.clone(),
+                    label: node
+                        .action_labels
+                        .get(intent.as_str())
+                        .cloned()
+                        .unwrap_or_else(|| "Respond".to_string()),
+                })
+                .collect(),
             recovery: node
                 .recovery
                 .iter()
@@ -532,6 +575,9 @@ fn view_of(data: &Path, sc: &PackScenario, session: &ScenarioSession) -> Scenari
             .collect(),
         transfers_required: sc.transfer_variants_required,
         support_used: Vec::new(),
+        // U07: help is delivered by `support_at` only; every other
+        // command shows a fresh (or advanced) prompt, so no stale card.
+        delivered_help: None,
     }
 }
 
@@ -655,8 +701,21 @@ pub fn support_at(
     let session = guard
         .get_mut(&session_key(profile_id, scenario_id))
         .ok_or("no session")?;
+    // U07: the rung the learner just pressed must deliver the pack's
+    // help payload for this node at this level — never an empty box.
+    let delivered = session
+        .current_node()
+        .support
+        .iter()
+        .find(|s| s.level == level)
+        .map(|s| HelpView {
+            kind: s.kind.clone(),
+            text: s.text.clone(),
+            options: s.options.clone(),
+        });
     let mut view = view_of(data, &sc, session);
     view.support_used = session.support_used_snapshot();
+    view.delivered_help = delivered;
     Ok(view)
 }
 
@@ -760,7 +819,10 @@ pub fn finish_at(
     }
     Ok(OutcomeView {
         nodes_completed: outcome.nodes.iter().filter(|n| n.succeeded).count() as u32,
+        exchanges_total: outcome.exchanges_total as u32,
+        completed: outcome.completed,
         transfers_completed: outcome.transfers_completed.len() as u32,
+        transfers_required: outcome.transfers_required,
         transfer_requirement_met: outcome.transfer_requirement_met,
     })
 }
@@ -821,7 +883,10 @@ mod tests {
             node: NodeView {
                 id: "node-1".into(),
                 prompt: "How do you answer?".into(),
-                actions: vec!["greeting".into()],
+                actions: vec![ActionView {
+                    intent: "greeting".into(),
+                    label: "Greet them back".into(),
+                }],
                 recovery: vec![RecoveryView {
                     id: "recovery-1".into(),
                     prompt: "Try a smaller move".into(),
@@ -838,6 +903,11 @@ mod tests {
             }],
             transfers_required: 1,
             support_used: vec![1],
+            delivered_help: Some(HelpView {
+                kind: "model".into(),
+                text: "こんにちは。".into(),
+                options: Vec::new(),
+            }),
         };
         let mut keys: Vec<String> = serde_json::to_value(&view)
             .expect("view serializes")
@@ -850,6 +920,7 @@ mod tests {
         assert_eq!(
             keys,
             [
+                "delivered_help",
                 "ladder",
                 "node",
                 "scenario_id",
@@ -857,6 +928,59 @@ mod tests {
                 "support_used",
                 "title",
                 "transfers",
+                "transfers_required"
+            ]
+        );
+
+        // U07: the button split is wire contract — the UI renders
+        // `label` and submits `intent`, and the help card branches on
+        // `kind`/`text`/`options`. A rename kills both silently.
+        let action = serde_json::to_value(&view.node.actions[0]).expect("action serializes");
+        let mut action_keys: Vec<String> = action
+            .as_object()
+            .expect("action is an object")
+            .keys()
+            .cloned()
+            .collect();
+        action_keys.sort();
+        assert_eq!(action_keys, ["intent", "label"]);
+        let help = serde_json::to_value(view.delivered_help.as_ref().expect("help delivered"))
+            .expect("help serializes");
+        let mut help_keys: Vec<String> = help
+            .as_object()
+            .expect("help is an object")
+            .keys()
+            .cloned()
+            .collect();
+        help_keys.sort();
+        assert_eq!(help_keys, ["kind", "options", "text"]);
+
+        // U08: the finish view carries the honest totals; the TS side
+        // branches on `completed`, so both keys are wire contract.
+        let outcome = OutcomeView {
+            nodes_completed: 2,
+            exchanges_total: 3,
+            completed: false,
+            transfers_completed: 0,
+            transfers_required: 1,
+            transfer_requirement_met: false,
+        };
+        let mut keys: Vec<String> = serde_json::to_value(&outcome)
+            .expect("outcome serializes")
+            .as_object()
+            .expect("outcome is an object")
+            .keys()
+            .cloned()
+            .collect();
+        keys.sort();
+        assert_eq!(
+            keys,
+            [
+                "completed",
+                "exchanges_total",
+                "nodes_completed",
+                "transfer_requirement_met",
+                "transfers_completed",
                 "transfers_required"
             ]
         );

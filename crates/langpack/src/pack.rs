@@ -445,6 +445,17 @@ impl Pack {
                             }
                         }
                     }
+                    if inst.v2 {
+                        // U07: a ladder rung the learner can press is a
+                        // promise; 0.2 scenarios must deliver help at
+                        // every rung and label every intent token.
+                        scenario_help_guarantees(
+                            &inst.file,
+                            &inst.pointer,
+                            &inst.value,
+                            &mut diags,
+                        );
+                    }
                 }
                 "orthography" => {
                     for (i, s) in array(&inst.value, "scripts") {
@@ -1080,6 +1091,100 @@ fn array<'a>(value: &'a Value, field: &str) -> Vec<(usize, &'a Value)> {
         .and_then(Value::as_array)
         .map(|items| items.iter().enumerate().collect())
         .unwrap_or_default()
+}
+
+/// U07 (review finding): scenario support buttons must promise help AND
+/// deliver it, and internal intent tokens must never be learner-facing.
+/// For a 0.2 scenario document: every ladder rung with `support_level`
+/// > 0 needs a level-matching `support` payload on EVERY node; every
+/// `expected_actions` token (node-level or in a recovery branch) needs
+/// a learner-facing entry in the node's `action_labels` once the pack
+/// is in the labelled regime (the node declares `action_labels` or the
+/// ladder has any rung > 0); and `choices` help must offer at least two
+/// readable replies. 0.1-era scenario docs predate the fields and stay
+/// outside these rules (`inst.v2` gate at the call site).
+fn scenario_help_guarantees(file: &str, base: &str, doc: &Value, diags: &mut Vec<Diagnostic>) {
+    let scenario_id = doc.get("id").and_then(Value::as_str).unwrap_or("");
+    let rungs: Vec<u64> = array(doc, "support_ladder")
+        .into_iter()
+        .filter_map(|(_, step)| step.get("support_level").and_then(Value::as_u64))
+        .filter(|level| *level > 0)
+        .collect();
+    for (i, node) in array(doc, "nodes") {
+        let node_path = format!("{base}/nodes/{i}");
+        let node_id = node.get("id").and_then(Value::as_str).unwrap_or("");
+
+        for rung in &rungs {
+            let delivered = array(node, "support")
+                .iter()
+                .any(|(_, s)| s.get("level").and_then(Value::as_u64) == Some(*rung));
+            if !delivered {
+                diags.push(Diagnostic::new(
+                    file,
+                    node_path.clone(),
+                    "scenario_support_rung_undelivered",
+                    format!(
+                        "scenario {scenario_id:?} ladder level {rung} is not delivered by a support payload on node {node_id:?}"
+                    ),
+                    Severity::Error,
+                ));
+            }
+        }
+
+        if !rungs.is_empty() || node.get("action_labels").is_some() {
+            let labels = node.get("action_labels").and_then(Value::as_object);
+            let mut tokens: Vec<(&str, String)> = Vec::new();
+            for (j, a) in array(node, "expected_actions") {
+                if let Some(t) = a.as_str() {
+                    tokens.push((t, format!("{node_path}/expected_actions/{j}")));
+                }
+            }
+            for (k, branch) in array(node, "recovery") {
+                for (j, a) in array(branch, "expected_actions") {
+                    if let Some(t) = a.as_str() {
+                        tokens.push((t, format!("{node_path}/recovery/{k}/expected_actions/{j}")));
+                    }
+                }
+            }
+            for (token, path) in tokens {
+                let labelled = labels
+                    .and_then(|m| m.get(token))
+                    .and_then(Value::as_str)
+                    .is_some_and(|s| !s.is_empty());
+                if !labelled {
+                    diags.push(Diagnostic::new(
+                        file,
+                        path,
+                        "scenario_action_label_missing",
+                        format!(
+                            "node {node_id:?} offers the internal intent token {token:?} without a learner-facing label in action_labels"
+                        ),
+                        Severity::Error,
+                    ));
+                }
+            }
+        }
+
+        for (j, s) in array(node, "support") {
+            if s.get("kind").and_then(Value::as_str) == Some("choices") {
+                let offered = s
+                    .get("options")
+                    .and_then(Value::as_array)
+                    .map_or(0, |opts| opts.len());
+                if offered < 2 {
+                    diags.push(Diagnostic::new(
+                        file,
+                        format!("{node_path}/support/{j}/options"),
+                        "scenario_support_choices_small",
+                        format!(
+                            "choices support on node {node_id:?} offers {offered} option(s); a choice list needs at least 2 readable replies"
+                        ),
+                        Severity::Error,
+                    ));
+                }
+            }
+        }
+    }
 }
 
 /// K-70/ADR-0022: reachability along `requires_unit` gate edges, for the

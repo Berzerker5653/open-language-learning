@@ -33,10 +33,26 @@ export interface ScenarioSummaryView {
   recommended?: boolean;
 }
 
+/** U07: one respond button. `intent` is the internal pack token the
+ * runtime matches; `label` is the learner-facing wording from the pack
+ * (never the token). */
+export interface ScenarioActionView {
+  intent: string;
+  label: string;
+}
+
+/** U07: the help a support-ladder rung actually delivered — the rung
+ * button is a promise, and this is the payload behind it. */
+export interface ScenarioHelpView {
+  kind: "hint" | "model" | "gloss" | "choices";
+  text: string;
+  options: string[];
+}
+
 export interface ScenarioNodeView {
   id: string;
   prompt: string;
-  actions: string[];
+  actions: ScenarioActionView[];
   recovery: { id: string; prompt: string }[];
 }
 
@@ -49,6 +65,8 @@ export interface ScenarioView {
   transfers: { id: string; description: string; done: boolean }[];
   transfers_required: number;
   support_used: number[];
+  /** U07: set only by the support command, from the rung's payload. */
+  delivered_help?: ScenarioHelpView | null;
 }
 
 export interface ScenarioStepResult {
@@ -59,7 +77,16 @@ export interface ScenarioStepResult {
 
 export interface ScenarioOutcomeView {
   nodes_completed: number;
+  /** U08: exchange nodes the scenario declares — the denominator of a
+   * partial walk, so an early end is never labelled completion. */
+  exchanges_total: number;
+  /** U08: true only when the chain reached its terminal node and the
+   * transfer requirement was met; never set by the button press itself. */
+  completed: boolean;
   transfers_completed: number;
+  /** U08: pack-declared requirement (0 = none), so the transfer line can
+   * state the actual number instead of a bare "at least". */
+  transfers_required: number;
   transfer_requirement_met: boolean;
 }
 
@@ -97,19 +124,34 @@ function LockBadge({ kind, band }: { kind?: ScenarioLockKind | null; band?: stri
   );
 }
 
+/** U07: heading for a delivered help card. The kind comes from the
+ * pack's schema-enum, so every payload announces what it is. */
+const HELP_HEADINGS: Record<ScenarioHelpView["kind"], string> = {
+  hint: "A hint",
+  model: "Model you can read first",
+  gloss: "Meaning support",
+  choices: "Possible replies",
+};
+
 export function ScenarioPanel(p: ScenarioPanelProps) {
   const packAttrs = usePackTextAttrs();
 
   if (p.outcome && !p.active) {
+    const o = p.outcome;
+    // U08: "Scenario complete" only when the walk actually reached the
+    // chain's terminal node. Ending early keeps the earned evidence and
+    // says exactly that, with the real transfer requirement.
+    const exchanges = `${o.nodes_completed} of ${o.exchanges_total} exchange${o.exchanges_total === 1 ? "" : "s"} completed`;
+    const transfers =
+      o.transfers_required > 0
+        ? `${o.transfers_completed} of ${o.transfers_required} transfer exchanges`
+        : null;
+    const stats = [o.completed ? exchanges : null, transfers].filter((s) => s !== null);
     return (
       <section aria-label="Scenario result">
-        <h2>Scenario complete</h2>
-        <p aria-live="polite">
-          {p.outcome.nodes_completed} exchanges completed · {p.outcome.transfers_completed} of{" "}
-          {p.outcome.transfer_requirement_met ? "" : "at least "}
-          transfer variant{p.outcome.transfer_requirement_met ? "" : "s"} performed
-        </p>
-        {!p.outcome.transfer_requirement_met && (
+        <h2>{o.completed ? "Scenario complete" : `Practice saved — ${exchanges}`}</h2>
+        {stats.length > 0 && <p aria-live="polite">{stats.join(" · ")}</p>}
+        {!o.transfer_requirement_met && (
           <p className="notice">
             Transfer variants show you can flex the same capability in a new setting. Try one before
             finishing next time.
@@ -153,16 +195,32 @@ export function ScenarioPanel(p: ScenarioPanelProps) {
             That worked — the conversation moved on.
           </p>
         )}
+        {s.delivered_help && (
+          <div aria-live="polite" data-testid="scenario-help" className="help-card">
+            <h3>{HELP_HEADINGS[s.delivered_help.kind] ?? "Support"}</h3>
+            <p className="help-body" {...packAttrs}>
+              {s.delivered_help.text}
+            </p>
+            {s.delivered_help.options.length > 0 && (
+              <ul className="help-options" {...packAttrs}>
+                {s.delivered_help.options.map((o) => (
+                  <li key={o}>{o}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
         {s.node.actions.length > 0 && (
           <div role="group" aria-label="Ways to respond" className="btn-row">
             {s.node.actions.map((a) => (
               <button
-                key={a}
+                key={a.intent}
                 type="button"
                 className="btn btn--quiet"
-                onClick={() => p.onAttempt(a)}
+                data-intent={a.intent}
+                onClick={() => p.onAttempt(a.intent)}
               >
-                <PackText>{a}</PackText>
+                <PackText>{a.label}</PackText>
               </button>
             ))}
           </div>
@@ -215,7 +273,7 @@ export function ScenarioPanel(p: ScenarioPanelProps) {
         )}
         <div className="btn-row">
           <button type="button" className="btn btn--primary" onClick={p.onFinish}>
-            Finish scenario
+            End session
           </button>
           <button type="button" className="btn btn--quiet" onClick={p.onBack}>
             Leave

@@ -44,6 +44,16 @@ pub struct ScenarioOutcome {
     pub nodes: Vec<NodeRecord>,
     pub transfers_completed: Vec<String>,
     pub transfer_requirement_met: bool,
+    /// U08: exchange nodes the scenario declares, so ending a session
+    /// early can label the work honestly instead of claiming completion.
+    pub exchanges_total: usize,
+    /// U08: transfer variants the pack requires (may be 0), so the UI can
+    /// state the actual number rather than a bare "at least".
+    pub transfers_required: u32,
+    /// U08: true only when the walk reached the chain's terminal node AND
+    /// the transfer requirement is met. Pressing the end-session button is
+    /// never what makes this true.
+    pub completed: bool,
 }
 
 /// One in-progress scenario session.
@@ -56,6 +66,9 @@ pub struct ScenarioSession {
     attempts: u32,
     records: Vec<NodeRecord>,
     transfers: Vec<String>,
+    // U08: set only when an accepted intent closed the chain's terminal
+    // node; finish() turns this plus the transfer gate into `completed`.
+    chain_complete: bool,
 }
 
 impl ScenarioSession {
@@ -73,6 +86,7 @@ impl ScenarioSession {
             attempts: 0,
             records: Vec::new(),
             transfers: Vec::new(),
+            chain_complete: false,
         })
     }
 
@@ -195,7 +209,12 @@ impl ScenarioSession {
                 self.current = next.clone();
                 StepResult::Advanced { to: next }
             }
-            None => StepResult::Completed,
+            None => {
+                // U08: reaching the terminal node is the only path that
+                // can later report `completed: true` at finish.
+                self.chain_complete = true;
+                StepResult::Completed
+            }
         }
     }
 
@@ -228,7 +247,9 @@ impl ScenarioSession {
         self.transfers.iter().any(|t| t == variant_id)
     }
 
-    /// Finalize: node records + transfer coverage.
+    /// Finalize: node records + transfer coverage. U08: the evidence from
+    /// a partial walk survives untouched; only the `completed` label is
+    /// withheld when the chain was cut short.
     pub fn finish(self) -> ScenarioOutcome {
         let met = self.transfer_requirement_met();
         ScenarioOutcome {
@@ -237,6 +258,11 @@ impl ScenarioSession {
             nodes: self.records,
             transfers_completed: self.transfers,
             transfer_requirement_met: met,
+            exchanges_total: self.scenario.nodes.len(),
+            transfers_required: self.scenario.transfer_variants_required,
+            // U08: completion is earned by the walk, never by the
+            // learner pressing the button.
+            completed: self.chain_complete && met,
         }
     }
 
@@ -291,5 +317,134 @@ impl ScenarioSession {
                 )
             })
             .collect()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::spec::{LadderStep, ScenarioNode, TransferVariant};
+
+    /// A linear chain of `n` exchange nodes with a pack-declared transfer
+    /// requirement, built from data so the U08 semantics are pinned without
+    /// depending on any fixture pack.
+    fn chain(n: u32, transfers_required: u32) -> PackScenario {
+        let nodes = (0..n)
+            .map(|i| ScenarioNode {
+                id: format!("es.scenario.u08.n{i}"),
+                prompt: format!("Exchange {i}"),
+                expected_actions: vec![format!("go{i}")],
+                action_labels: Default::default(),
+                support: Vec::new(),
+                next: if i + 1 < n {
+                    vec![format!("es.scenario.u08.n{}", i + 1)]
+                } else {
+                    Vec::new()
+                },
+                recovery: Vec::new(),
+            })
+            .collect();
+        let transfer_variants = (0..transfers_required)
+            .map(|i| TransferVariant {
+                id: format!("es.scenario.u08.v{i}"),
+                description: format!("Transfer {i}"),
+                changed_variable: None,
+            })
+            .collect();
+        PackScenario {
+            id: "es.scenario.u08".into(),
+            goal_id: "es.goal.u08".into(),
+            title: "U08 chain".into(),
+            situation: None,
+            register: None,
+            nodes,
+            support_ladder: vec![LadderStep {
+                support_level: 0,
+                description: "independent".into(),
+            }],
+            transfer_variants_required: transfers_required,
+            transfer_variants,
+        }
+    }
+
+    #[test]
+    fn early_finish_is_partial_not_complete() {
+        // U08: pressing the end-session button after 1 of 3 exchanges is
+        // saved work, not scenario completion.
+        let scenario = chain(3, 1);
+        let mut s = ScenarioSession::begin(&scenario, "sess-partial").unwrap();
+        assert_eq!(
+            s.attempt("go0"),
+            StepResult::Advanced {
+                to: "es.scenario.u08.n1".into()
+            }
+        );
+        let out = s.finish();
+        assert!(!out.completed, "a cut-short chain is never complete");
+        assert_eq!(out.exchanges_total, 3);
+        assert_eq!(out.nodes.len(), 1, "the visited exchanges are the evidence");
+        assert_eq!(out.transfers_required, 1);
+        assert!(!out.transfer_requirement_met);
+        // The legitimate evidence earned before finishing survives: exactly
+        // one scored event, for the one exchange that succeeded.
+        let events = ScenarioSession::evidence_events(
+            &out,
+            "org.openlanguage.test",
+            "0.1.0",
+            &ProfileId::new("profile-1"),
+            |i| format!("2026-10-19T00:00:0{i}Z"),
+        );
+        assert_eq!(events.len(), 1);
+    }
+
+    #[test]
+    fn full_walk_with_transfer_requirement_is_complete() {
+        let scenario = chain(3, 1);
+        let mut s = ScenarioSession::begin(&scenario, "sess-full").unwrap();
+        assert_eq!(
+            s.attempt("go0"),
+            StepResult::Advanced {
+                to: "es.scenario.u08.n1".into()
+            }
+        );
+        assert_eq!(
+            s.attempt("go1"),
+            StepResult::Advanced {
+                to: "es.scenario.u08.n2".into()
+            }
+        );
+        assert_eq!(s.attempt("go2"), StepResult::Completed);
+        assert!(s.complete_transfer("es.scenario.u08.v0"));
+        let out = s.finish();
+        assert!(out.completed);
+        assert_eq!(out.exchanges_total, 3);
+        assert_eq!(out.nodes.len(), 3);
+    }
+
+    #[test]
+    fn chain_reached_but_transfer_unmet_is_not_complete() {
+        // "Completed" means the required exchanges AND the transfer gate;
+        // StepResult::Completed alone is chain reach, not scenario done.
+        let scenario = chain(2, 1);
+        let mut s = ScenarioSession::begin(&scenario, "sess-no-transfer").unwrap();
+        s.attempt("go0");
+        assert_eq!(s.attempt("go1"), StepResult::Completed);
+        let out = s.finish();
+        assert!(!out.completed);
+        assert_eq!(out.exchanges_total, 2);
+        assert_eq!(out.nodes.len(), 2);
+    }
+
+    #[test]
+    fn single_exchange_scenario_completes_exactly() {
+        // Singular counts: one declared exchange, done once, no transfers.
+        let scenario = chain(1, 0);
+        let mut s = ScenarioSession::begin(&scenario, "sess-single").unwrap();
+        assert_eq!(s.attempt("go0"), StepResult::Completed);
+        let out = s.finish();
+        assert!(out.completed);
+        assert_eq!(out.exchanges_total, 1);
+        assert_eq!(out.nodes.len(), 1);
+        assert_eq!(out.transfers_required, 0);
     }
 }

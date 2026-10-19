@@ -7,6 +7,16 @@ nodes:
   - id: "ja.activity.demo.sc.open"
     prompt: "Someone bows and greets you: こんにちは。Respond with a greeting."
     expected_actions: ["greeting"]
+    action_labels:
+      greeting: "Greet them back"
+      request-repetition: "Ask them to repeat"
+    support:
+      - level: 3
+        kind: model
+        text: "こんにちは。 konnichiwa."
+      - level: 5
+        kind: model
+        text: "こんにちは。(konnichiwa.) — 'hello, good afternoon.' Repeat it back with a small bow."
     next: ["ja.activity.demo.sc.ask-name"]
     recovery:
       - id: "ja.activity.demo.sc.repair-repeat"
@@ -16,6 +26,15 @@ nodes:
   - id: "ja.activity.demo.sc.ask-name"
     prompt: "They answer politely. Keep the conversation going: ask their name."
     expected_actions: ["name-question"]
+    action_labels:
+      name-question: "Ask their name"
+    support:
+      - level: 3
+        kind: model
+        text: "おなまえは。(o-namae wa.)"
+      - level: 5
+        kind: model
+        text: "お名前は？(o-namae wa?) — 'And your name is?' — the natural short way to ask."
     next: []
 support_ladder:
   - support_level: 0

@@ -7,6 +7,17 @@ nodes:
   - id: "ja.scenario.b1.service.open"
     prompt: "Explain the problem to the shop assistant"
     expected_actions: ["state-problem", "request-repair"]
+    action_labels:
+      state-problem: "Explain what is wrong"
+      request-repair: "Ask for it to be fixed"
+      clarify: "Put it in simpler words"
+    support:
+      - level: 2
+        kind: hint
+        text: "Start with a short apology, then point at what is broken."
+      - level: 4
+        kind: gloss
+        text: "The assistant is asking which fix you want — repair or exchange."
     next: ["ja.scenario.b1.service.agree"]
     recovery:
       - id: "ja.scenario.b1.service.repair-clarify"
@@ -16,6 +27,15 @@ nodes:
   - id: "ja.scenario.b1.service.agree"
     prompt: "Agree on the next step"
     expected_actions: ["confirm-next-step"]
+    action_labels:
+      confirm-next-step: "Agree what happens next"
+    support:
+      - level: 2
+        kind: hint
+        text: "Say yes, and when you will come back."
+      - level: 4
+        kind: gloss
+        text: "They are proposing a time to collect it — agree, or suggest another time."
     next: []
 support_ladder:
   - support_level: 0

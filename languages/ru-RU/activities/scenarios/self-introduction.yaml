@@ -1,4 +1,5 @@
 # ai-assisted draft scenario (ru parity 2026-10-12); wording pending qualified review.
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 id: ru.scenario.self-intro.first-meeting
 goal_id: ru.goal.on-ramp.self-introduction
 title: Introducing yourself
@@ -7,18 +8,45 @@ nodes:
   prompt: Say your name to someone you have just met.
   expected_actions:
   - state-name
+  action_labels:
+    state-name: "Say your name"
+  support:
+  - level: 3
+    kind: model
+    text: "Меня зовут А́нна. (меня́ зову́т А́нна.)"
+  - level: 5
+    kind: model
+    text: "Меня зовут Анна. (меня́ зову́т А́нна.) — 'My name is Anna.' Swap in your own name."
   next:
   - ru.scenario.self-intro.first-meeting.detail
 - id: ru.scenario.self-intro.first-meeting.detail
   prompt: Add one simple fact about yourself (where you are from or what you do).
   expected_actions:
   - state-origin-or-role
+  action_labels:
+    state-origin-or-role: "Say where you are from or what you do"
+  support:
+  - level: 3
+    kind: model
+    text: "Я студе́нтка из Францо́ии."
+  - level: 5
+    kind: model
+    text: "Я студентка из Франции. — 'I am a university student from France.' Swap in your own city, job, or study."
   next:
   - ru.scenario.self-intro.first-meeting.close
 - id: ru.scenario.self-intro.first-meeting.close
   prompt: Express that you are glad to meet them.
   expected_actions:
   - express-pleasure-to-meet
+  action_labels:
+    express-pleasure-to-meet: "Say you are glad to meet them"
+  support:
+  - level: 3
+    kind: model
+    text: "О́чень прия́тно."
+  - level: 5
+    kind: model
+    text: "Очень приятно. — 'Pleased to meet you.' The standard set phrase at a first meeting."
   next: []
 support_ladder:
 - support_level: 0

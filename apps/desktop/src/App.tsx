@@ -45,7 +45,7 @@ import {
 } from "./language";
 import { WritingPractice, type WritingTaskView } from "./writing";
 import { PracticeRunner, type PracticeTaskView } from "./practice";
-import { LessonEncounter, stageForDrill, type LessonPlan } from "./lesson";
+import { LessonEncounter, drillStageId, stagePositionLabel, type LessonPlan } from "./lesson";
 import { describeKanjiDecomposition } from "./kanji-decomposition";
 import { playClip } from "./playback";
 import { stressEnabled, type DisplaySettingsView } from "./stress";
@@ -821,7 +821,10 @@ export function App() {
               const action = document.querySelector(
                 '[aria-label="Ways to respond"] button',
               ) as HTMLButtonElement | null;
-              const intent = (action?.textContent ?? "").trim();
+              // U07: the button text is the learner-facing label, never
+              // the intent token; the walkthrough reads the machine-side
+              // attribute exactly as the click handler receives it.
+              const intent = (action?.getAttribute("data-intent") ?? "").trim();
               try {
                 if (intent) {
                   const step = (await inv("scenario_attempt", {
@@ -1958,7 +1961,7 @@ export function App() {
         choiceIndex: index,
         revealReading: practiceRevealed,
         sessionId: planSessionRef.current,
-        stageId: stageForDrill(lesson, practiceTarget.modality),
+        stageId: drillStageId(lesson),
       })) as { correct: boolean; correct_choice: string };
       setPracticeCorrect(g.correct);
       setPracticeCorrectChoice(g.correct_choice);
@@ -1981,7 +1984,7 @@ export function App() {
         answer: practiceDraft,
         revealReading: practiceRevealed,
         sessionId: planSessionRef.current,
-        stageId: stageForDrill(lesson, practiceTarget.modality),
+        stageId: drillStageId(lesson),
       })) as { correct: boolean; correct_choice: string };
       setPracticeCorrect(g.correct);
       setPracticeCorrectChoice(g.correct_choice);
@@ -3661,6 +3664,13 @@ export function App() {
             />
           ) : (
             <>
+              {lesson && stagePositionLabel(lesson) ? (
+                // U06: the learner sees where the engine's cursor sits on
+                // the authored journey, from the unit's real counts.
+                <p className="meta" data-testid="practice-stage-position">
+                  {stagePositionLabel(lesson)}
+                </p>
+              ) : null}
               {lesson ? (
                 <div className="btn-row">
                   <button

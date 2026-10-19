@@ -666,3 +666,169 @@ fn unit_without_capabilities_key_validates_as_before() {
         );
     }
 }
+
+// --- U07 (review finding): scenario help must be delivered, tokens
+// must never be learner-facing labels ---
+// A ladder rung the learner can press is a promise: every rung > 0 in
+// a 0.2 scenario needs a support payload on every node, every
+// expected_actions token needs a learner-facing action_labels entry,
+// and choices help needs at least two replies. Each case drops one
+// scenario onto a temp copy of `valid-minimal` so the codes are pinned
+// without freezing a whole fixture tree per case.
+
+fn pack_with_scenario(scenario_yaml: &str) -> (tempfile::TempDir, Pack) {
+    let tmp = tempfile::tempdir().expect("tempdir");
+    let seed =
+        PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/packs/valid-minimal");
+    copy_dir(&seed, tmp.path());
+    let dir = tmp.path().join("activities/scenarios");
+    std::fs::create_dir_all(&dir).expect("scenarios dir");
+    std::fs::write(dir.join("000-help.yaml"), scenario_yaml).expect("write scenario");
+    let pack = Pack::load_dir(tmp.path()).expect("load pack");
+    (tmp, pack)
+}
+
+const U07_RUNGED_LADDER: &str = "\
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 2
+  description: Key phrase card
+transfer_variants_required: 0
+";
+const U07_INDEPENDENT_LADDER: &str = "\
+support_ladder:
+- support_level: 0
+  description: No supports
+transfer_variants_required: 0
+";
+
+fn u07_scenario(node_extra: &str, ladder: &str) -> String {
+    format!(
+        "\
+id: es.scenario.u07.help
+goal_id: es.goal.intro.greet
+title: Ask the time
+nodes:
+- id: es.scenario.u07.help.open
+  prompt: Ask a passer-by what time it is.
+  expected_actions: [ask-time]
+{node_extra}  next: []
+{ladder}"
+    )
+}
+
+// (Explicit \n escapes: a `"\`-continuation would strip the first
+// line's two-space node indent, producing invalid YAML.)
+const U07_HELP_DELIVERED: &str = "  support:\n    - level: 2\n      kind: gloss\n      text: Say the words that ask for the time.\n";
+const U07_LABELLED: &str = "  action_labels:\n    ask-time: Ask what time it is\n";
+
+#[test]
+fn scenario_rung_without_payload_is_undelivered_help() {
+    for mode in [Mode::Scaffold, Mode::Install] {
+        let (_tmp, pack) = pack_with_scenario(&u07_scenario("", U07_RUNGED_LADDER));
+        let diags = pack.validate(mode, None);
+        let hits: Vec<&lts_langpack::Diagnostic> = diags
+            .iter()
+            .filter(|d| d.code == "scenario_support_rung_undelivered")
+            .collect();
+        assert_eq!(
+            hits.len(),
+            1,
+            "one undelivered rung -> exactly one error ({mode:?}): {diags:?}"
+        );
+        assert_eq!(hits[0].severity, Severity::Error);
+        assert!(
+            hits[0].message.contains("level 2")
+                && hits[0].message.contains("es.scenario.u07.help.open"),
+            "diagnostic must name the rung and the node: {}",
+            hits[0].message
+        );
+    }
+}
+
+#[test]
+fn scenario_intent_token_without_label_is_unlabelled_action() {
+    // Help is delivered, so the only defect left is the bare token.
+    for mode in [Mode::Scaffold, Mode::Install] {
+        let (_tmp, pack) = pack_with_scenario(&u07_scenario(U07_HELP_DELIVERED, U07_RUNGED_LADDER));
+        let diags = pack.validate(mode, None);
+        let hits: Vec<&lts_langpack::Diagnostic> = diags
+            .iter()
+            .filter(|d| d.code == "scenario_action_label_missing")
+            .collect();
+        assert_eq!(
+            hits.len(),
+            1,
+            "one unlabelled token -> exactly one error ({mode:?}): {diags:?}"
+        );
+        assert_eq!(hits[0].severity, Severity::Error);
+        assert!(
+            hits[0].message.contains("ask-time"),
+            "diagnostic must name the token: {}",
+            hits[0].message
+        );
+        assert_eq!(error_count(&diags), 1, "no collateral errors: {diags:?}");
+    }
+}
+
+#[test]
+fn scenario_choices_help_below_two_options_is_error() {
+    let yaml = u07_scenario(
+        "  support:\n    - level: 2\n      kind: choices\n      text: Pick a reply.\n      options: [What time is it?]\n",
+        U07_RUNGED_LADDER,
+    );
+    let (_tmp, pack) = pack_with_scenario(&yaml);
+    let diags = pack.validate(Mode::Scaffold, None);
+    let hits: Vec<&lts_langpack::Diagnostic> = diags
+        .iter()
+        .filter(|d| d.code == "scenario_support_choices_small")
+        .collect();
+    assert_eq!(
+        hits.len(),
+        1,
+        "one option in a choices payload -> exactly one error: {diags:?}"
+    );
+    assert_eq!(hits[0].severity, Severity::Error);
+    assert!(
+        hits[0].path.ends_with("/nodes/0/support/0/options"),
+        "{}",
+        hits[0].path
+    );
+}
+
+#[test]
+fn scenario_with_labels_and_delivered_help_validates_clean() {
+    let (_tmp, pack) = pack_with_scenario(&u07_scenario(
+        &format!("{U07_LABELLED}{U07_HELP_DELIVERED}"),
+        U07_RUNGED_LADDER,
+    ));
+    for mode in [Mode::Scaffold, Mode::Install] {
+        let diags = pack.validate(mode, None);
+        assert_eq!(
+            error_count(&diags),
+            0,
+            "labelled + delivered help must be clean ({mode:?}): {diags:?}"
+        );
+    }
+}
+
+#[test]
+fn scenario_without_rungs_or_labels_stays_valid_as_before() {
+    // 0.1-era shape inside a 0.2 pack: no rung > 0, no action_labels
+    // key -> neither U07 rule fires.
+    let (_tmp, pack) = pack_with_scenario(&u07_scenario("", U07_INDEPENDENT_LADDER));
+    for mode in [Mode::Scaffold, Mode::Install] {
+        let diags = pack.validate(mode, None);
+        assert_eq!(
+            error_count(&diags),
+            0,
+            "ladder of rungs 0 must stay clean ({mode:?}): {diags:?}"
+        );
+        assert!(
+            !diags.iter().any(|d| d.code.starts_with("scenario_support_")
+                || d.code == "scenario_action_label_missing"),
+            "the U07 rules must not fire without rungs or labels: {diags:?}"
+        );
+    }
+}

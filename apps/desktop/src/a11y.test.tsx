@@ -55,7 +55,7 @@ const active: ScenarioView = {
   node: {
     id: "ja.scenario.demo.sc.open",
     prompt: "Greet them.",
-    actions: ["greeting"],
+    actions: [{ intent: "greeting", label: "Greet them" }],
     recovery: [],
   },
   ladder: [{ support_level: 0, description: "No supports" }],

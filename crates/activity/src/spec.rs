@@ -170,12 +170,35 @@ pub struct RecoveryBranch {
     pub to: Option<String>,
 }
 
+/// U07: one help payload tied to a support-ladder rung. The semantic
+/// validator (lts_langpack) guarantees every rung > 0 is delivered by
+/// every node in a 0.2 scenario; the runtime shows the entry whose level
+/// matches the rung the learner pressed.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct NodeSupport {
+    pub level: u8,
+    /// "hint" | "model" | "gloss" | "choices" (0.2 scenario schema).
+    pub kind: String,
+    pub text: String,
+    /// Readable reply strings; required (>= 2) when kind == "choices".
+    #[serde(default)]
+    pub options: Vec<String>,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ScenarioNode {
     pub id: String,
     pub prompt: String,
     #[serde(default)]
     pub expected_actions: Vec<String>,
+    /// U07: learner-facing wording for each intent token. The raw token
+    /// must never be a button label; a missing label falls back to a
+    /// generic word at the wire boundary.
+    #[serde(default)]
+    pub action_labels: std::collections::BTreeMap<String, String>,
+    /// U07: help payloads delivered when the learner takes a ladder rung.
+    #[serde(default)]
+    pub support: Vec<NodeSupport>,
     #[serde(default)]
     pub next: Vec<String>,
     #[serde(default)]

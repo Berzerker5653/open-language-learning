@@ -7,6 +7,14 @@ nodes:
   - id: "es.activity.intro.meeting.open"
     prompt: "Greet your new colleague"
     expected_actions: ["greeting", "self-introduction"]
+    action_labels:
+      greeting: "Greet them"
+      self-introduction: "Say your name"
+      request-repetition: "Ask them to repeat"
+    support:
+      - level: 3
+        kind: model
+        text: "Hola. Me llamo Alex."
     next: ["es.activity.intro.meeting.ask-name"]
     recovery:
       - id: "es.activity.intro.meeting.repair-repeat"
@@ -16,6 +24,12 @@ nodes:
   - id: "es.activity.intro.meeting.ask-name"
     prompt: "Ask your colleague's name"
     expected_actions: ["name-question"]
+    action_labels:
+      name-question: "Ask their name"
+    support:
+      - level: 3
+        kind: model
+        text: "¿Cómo te llamas?"
     next: []
 support_ladder:
   - support_level: 0

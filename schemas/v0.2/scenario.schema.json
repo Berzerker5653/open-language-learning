@@ -22,6 +22,26 @@
           "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
           "prompt": { "type": "string", "minLength": 1 },
           "expected_actions": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "action_labels": {
+            "type": "object",
+            "description": "U07: learner-facing label for every declared intent token. The raw token must never be what the learner sees on a button; the runtime falls back to a generic word when a label is absent.",
+            "additionalProperties": { "type": "string", "minLength": 1 }
+          },
+          "support": {
+            "type": "array",
+            "description": "U07: help payloads keyed to support-ladder rungs. A ladder rung the learner can press must deliver content at that level (pack.rs `scenario_support_rung_undelivered`).",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["level", "kind", "text"],
+              "properties": {
+                "level": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/supportLevel" },
+                "kind": { "enum": ["hint", "model", "gloss", "choices"] },
+                "text": { "type": "string", "minLength": 1 },
+                "options": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+              }
+            }
+          },
           "next": {
             "type": "array",
             "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" }

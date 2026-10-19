@@ -148,7 +148,12 @@ describe("pack direction (RTL-001, ADR-0029)", () => {
       scenario_id: "ar.sc.salam",
       title: "السلام عليكم",
       situation: "لقاء أول",
-      node: { id: "n1", prompt: "كيف حالك؟", actions: ["بخير"], recovery: [] },
+      node: {
+        id: "n1",
+        prompt: "كيف حالك؟",
+        actions: [{ intent: "reply-well", label: "بخير" }],
+        recovery: [],
+      },
       ladder: [{ support_level: 1, description: "Show an example" }],
       transfers: [],
       transfers_required: 0,

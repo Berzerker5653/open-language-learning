@@ -6933,11 +6933,20 @@ struct LessonStage {
     runner: Option<&'static str>,
     #[serde(skip_serializing_if = "Option::is_none")]
     scenario_id: Option<String>,
+    /// U06: whether the learner state already accounts for this stage. A
+    /// scored stage is done once an attempt attributed to it exists — the
+    /// evidence activity id is the stage id `practice_submit_inner`
+    /// recorded (R11). A presentation (encounter) stage is met once the
+    /// learner has acted on a scored stage authored after it: the cursor
+    /// moves in declared order, so acting later means the encounter was
+    /// passed, and returning to review a word must not replay it.
+    done: bool,
     content: Vec<LessonContent>,
 }
 
 /// The authored journey a piece of content lives in: the unit that declares
-/// it and every stage that unit wrote, in declared order.
+/// it and every stage that unit wrote, in declared order, with the engine's
+/// practice cursor over it (U06).
 #[derive(Serialize)]
 struct LessonPlan {
     unit_id: String,
@@ -6945,6 +6954,21 @@ struct LessonPlan {
     title: String,
     summary: String,
     stages: Vec<LessonStage>,
+    /// U06: the authored stage the practice runner should answer next for
+    /// this unit: the first stage in declared order that a scored runner
+    /// serves and the learner has not met. Absent when the authored
+    /// journey is exhausted — the honest finish, never a guessed stage.
+    /// A submission carries this id, never `null`, whenever it exists.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    next_stage_id: Option<String>,
+    /// 1-based position of `next_stage_id` among the unit's runnable
+    /// stages, for the learner-facing "stage 2 of 5" line. Absent exactly
+    /// with no next stage.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    stage_position: Option<u32>,
+    /// Count of the unit's runnable stages (the 5 in "stage 2 of 5"):
+    /// every declared stage a runner serves, presentations included.
+    stage_total: u32,
 }
 
 /// What a declared activity asks of the learner. Reads only the pack's own
@@ -7006,6 +7030,17 @@ fn activity_runner(activity_type: &str, modality: &str) -> Option<&'static str> 
         // `placement-test` — is declared but unrunnable.
         _ => None,
     }
+}
+/// U06: whether this stage can carry a scored practice attempt, and so
+/// whether the cursor may offer it. A presentation (`encounter` runner)
+/// is seen, never answered; the guided-speaking card is formative and
+/// mints no evidence at all (ADR-0017 decision 1), so it never completes
+/// either — the speaking card stays listed in the lesson, but a unit
+/// whose only unmet stage is that card reads as exhausted for the
+/// cursor, honestly. A stage with no runner was declared but is nothing
+/// this engine executes.
+fn has_scored_runner(stage: &LessonStage) -> bool {
+    matches!(stage.runner, Some(r) if r != "encounter" && r != "guided-speaking")
 }
 
 /// R11: the unit journey behind one plan item. The desktop used to flatten a
@@ -7084,7 +7119,7 @@ fn lesson_plan_at(
             }
             None
         };
-        let stages = unit
+        let mut stages: Vec<LessonStage> = unit
             .activities
             .iter()
             .map(|a| LessonStage {
@@ -7095,15 +7130,56 @@ fn lesson_plan_at(
                 modality: a.modality.clone(),
                 support_level: a.support_level,
                 scenario_id: a.scenario_id.clone(),
+                done: false,
                 content: a.content_refs.iter().filter_map(|r| resolve(r)).collect(),
             })
             .collect();
+        // U06: the practice cursor is read from learner truth, never
+        // guessed from modality. A submitted authored stage already left
+        // its mark as the evidence event's activity id
+        // (`practice_submit_inner`, R11), so the completed-stage record
+        // needs no second bookkeeping: the evidence table is it.
+        let practiced: std::collections::HashSet<String> = store
+            .evidence_for_profile(profile_id)
+            .map_err(|e| e.to_string())?
+            .into_iter()
+            .map(|e| e.activity_id.as_str().to_string())
+            .collect();
+        let met: Vec<bool> = stages
+            .iter()
+            .enumerate()
+            .map(|(i, stage)| {
+                practiced.contains(&stage.activity_id)
+                    || (stage.runner == Some("encounter")
+                        && stages[i + 1..].iter().any(|later| {
+                            has_scored_runner(later) && practiced.contains(&later.activity_id)
+                        }))
+            })
+            .collect();
+        for (stage, met) in stages.iter_mut().zip(met) {
+            stage.done = met;
+        }
+        // The cursor is the next authored stage the learner can act on
+        // with a scored runner: declared order throughout, presentations
+        // and declared-but-unrunnable stages skipped, and never a jump
+        // past an unmet stage — the supported cloze comes before the
+        // independent recall because the pack wrote it first, and the
+        // learner reaches the independent one only once the supported
+        // one's evidence exists.
+        let next_idx = stages.iter().position(|s| has_scored_runner(s) && !s.done);
+        let stage_total = stages.iter().filter(|s| s.runner.is_some()).count() as u32;
+        let next_stage_id = next_idx.map(|i| stages[i].activity_id.clone());
+        let stage_position =
+            next_idx.map(|i| stages[..=i].iter().filter(|s| s.runner.is_some()).count() as u32);
         return Ok(Some(LessonPlan {
             unit_id: unit.id.clone(),
             goal_id: unit.goal_id.clone(),
             title: unit.title.clone(),
             summary: unit.summary.clone(),
             stages,
+            next_stage_id,
+            stage_position,
+            stage_total,
         }));
     }
     Ok(None)
@@ -10313,13 +10389,33 @@ activities:
         // an empty box or a "no usable sentences" refusal.
         let tmp = tempfile::TempDir::new().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ru-ru.reference").unwrap();
-        let t = dictation_target_at(data, "org.openlanguage.ru-ru.reference", 0).unwrap();
+        // Staged as an installed tree, like the placement test: `archive::build`
+        // refuses this pack because its generated `media/*.wav` bytes are
+        // gitignored (K-90), and dictation only reads the installed root.
+        let pack = "org.openlanguage.ru-ru.reference";
+        let src = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../languages/ru-RU");
+        let version = std::fs::read_to_string(src.join("manifest.yaml"))
+            .unwrap()
+            .lines()
+            .find_map(|l| l.strip_prefix("version: "))
+            .unwrap_or_default()
+            .trim_matches('"')
+            .to_string();
+        copy_tree(&src, &data.join("packs").join(pack).join(&version));
+        std::fs::write(
+            data.join("packs").join(pack).join("current"),
+            version.as_bytes(),
+        )
+        .unwrap();
+        let t = dictation_target_at(data, pack, 0).unwrap();
         assert!(!t.text.is_empty());
         assert!(t.reading.is_none());
         let b = dictation_target_at(data, "org.openlanguage.ru-ru.reference", 1).unwrap();
         let wrap = dictation_target_at(data, "org.openlanguage.ru-ru.reference", 9999).unwrap();
-        assert!(!b.text.is_empty() && !wrap.text.is_empty(), "rotation wraps");
+        assert!(
+            !b.text.is_empty() && !wrap.text.is_empty(),
+            "rotation wraps"
+        );
     }
 
     #[test]
@@ -12382,7 +12478,10 @@ activities:
         // Session flow: wrong intent offers pack-declared recovery;
         // recovery resolves back to the node; ladder support is recorded.
         let view = scenarios::start_at(data, &p.id, sid, "sess-1", &sessions).unwrap();
-        assert_eq!(view.node.actions, ["greeting"]);
+        // U07: the wire carries intent + learner-facing label; the pack's
+        // own action_labels must be the label, never the token.
+        assert_eq!(view.node.actions[0].intent, "greeting");
+        assert_eq!(view.node.actions[0].label, "Greet them back");
         let step = scenarios::attempt_at(data, &p.id, sid, "small-talk", &sessions).unwrap();
         assert_eq!(step.result, "not-satisfied");
         assert_eq!(step.recovery, vec!["ja.activity.demo.sc.repair-repeat"]);
@@ -12399,9 +12498,20 @@ activities:
         assert_eq!(step.result, "advanced");
         // Undeclared ladder levels are rejected; declared ones recorded.
         assert!(scenarios::support_at(data, &p.id, sid, 4, &sessions).is_err());
-        scenarios::support_at(data, &p.id, sid, 3, &sessions).unwrap();
+        let helped = scenarios::support_at(data, &p.id, sid, 3, &sessions).unwrap();
+        // U07: a ladder rung the learner pressed must deliver the pack's
+        // help payload for this node at this level.
+        let help = helped
+            .delivered_help
+            .expect("rung 3 must deliver a support payload");
+        assert_eq!(help.kind, "model");
+        assert_eq!(help.text, "こんにちは。 konnichiwa.");
+        assert!(help.options.is_empty());
         let step = scenarios::attempt_at(data, &p.id, sid, "greeting", &sessions).unwrap();
         assert_eq!(step.result, "advanced");
+        // U07: help is per-prompt; an advanced view never carries a
+        // stale card from the previous node.
+        assert!(step.view.delivered_help.is_none());
         let step = scenarios::attempt_at(data, &p.id, sid, "name-question", &sessions).unwrap();
         assert_eq!(step.result, "completed");
         scenarios::transfer_at(
@@ -14802,6 +14912,204 @@ activities:
             vec![Some("encounter"), Some("typed")],
             "the reuse stage's recall/writing names the typed runner",
         );
+    }
+
+    /// U06: the practice runner follows the engine's cursor along the
+    /// authored stages instead of guessing one from the modality. A fresh
+    /// unit offers its scaffolded cloze — never the independent recall
+    /// authored behind it — and the cursor advances exactly one stage per
+    /// stage id actually submitted, so retries of the same supported
+    /// prompt never open the door to the independent or transfer stage.
+    /// The completed-stage record is the evidence the submit already
+    /// wrote (R11), so the mark survives a restart for free.
+    #[test]
+    fn the_practice_cursor_walks_the_authored_stages_in_order() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_task_sequence_journey(data, true);
+        let plan = || {
+            lesson_plan_at(data, &p.id, "ru.sent.fixture.j1")
+                .unwrap()
+                .expect("the fixture journey plans this sentence")
+        };
+        let submit = |stage: &str| {
+            practice_submit_inner(
+                data,
+                &p.id,
+                "ru.sent.fixture.j1",
+                "production-writing",
+                0,
+                SubmitOpts {
+                    answer: Some("были".into()),
+                    reveal_reading: false,
+                    diagnostic: None,
+                    session_id: None,
+                    stage: Some(stage),
+                },
+            )
+            .unwrap()
+        };
+
+        // Nothing met yet: the cursor names the authored scaffolded
+        // cloze — stage 2 of the unit's four runnable stages, behind the
+        // encounter presentation — and refuses to skip to the runnable
+        // independent recall or the speaking transfer behind it.
+        let fresh = plan();
+        assert_eq!(fresh.stage_total, 4);
+        assert_eq!(
+            fresh.next_stage_id.as_deref(),
+            Some("ru.activity.fixture.sq1-cloze"),
+            "the next eligible authored stage is the supported cloze",
+        );
+        assert_eq!(fresh.stage_position, Some(2));
+        assert_ne!(
+            fresh.next_stage_id.as_deref(),
+            Some("ru.activity.fixture.sq1-write"),
+            "the cursor refuses to jump to the independent stage while the supported cloze is unmet",
+        );
+        assert_eq!(
+            fresh
+                .stages
+                .iter()
+                .map(|s| (s.activity_id.as_str(), s.done))
+                .collect::<Vec<_>>(),
+            vec![
+                ("ru.activity.fixture.sq1-read", false),
+                ("ru.activity.fixture.sq1-cloze", false),
+                ("ru.activity.fixture.sq1-write", false),
+                ("ru.activity.fixture.sq1-speak", false),
+            ],
+        );
+
+        // The submission carries the cursor's stage id; the attempt lands
+        // in evidence attributed to it.
+        submit("ru.activity.fixture.sq1-cloze");
+
+        // The cursor advanced exactly one stage…
+        let after = plan();
+        assert_eq!(
+            after.next_stage_id.as_deref(),
+            Some("ru.activity.fixture.sq1-write"),
+            "the independent recall becomes reachable only now, under its own authored id",
+        );
+        assert_eq!(after.stage_position, Some(3));
+        // …the worked cloze reads done, and the encounter before it reads
+        // met: returning to review this word does not replay the unit's
+        // encounter list.
+        assert!(
+            after
+                .stages
+                .iter()
+                .any(|s| s.activity_id == "ru.activity.fixture.sq1-cloze" && s.done),
+        );
+        assert!(
+            after
+                .stages
+                .iter()
+                .any(|s| s.stage_kind == "encounter" && s.done),
+            "the presentation before the worked stage is passed, not replayed",
+        );
+
+        // A second attempt at the SAME supported prompt stays on the next
+        // authored stage: repetition cannot carry the learner past it, and
+        // never onto the formative speaking card.
+        submit("ru.activity.fixture.sq1-cloze");
+        assert_eq!(
+            plan().next_stage_id.as_deref(),
+            Some("ru.activity.fixture.sq1-write"),
+        );
+
+        // The independent recall finishes the scored stages. The speaking
+        // card is formative — it mints no evidence (ADR-0017 decision 1) —
+        // so the authored journey then reads exhausted rather than stuck
+        // on a stage nothing can complete.
+        submit("ru.activity.fixture.sq1-write");
+        let done = plan();
+        assert_eq!(
+            done.next_stage_id, None,
+            "honest finish: no authored scored stage is left",
+        );
+        assert_eq!(done.stage_position, None);
+        assert_eq!(done.stage_total, 4);
+        assert!(
+            done.stages
+                .iter()
+                .any(|s| s.activity_id == "ru.activity.fixture.sq1-speak" && !s.done),
+            "the formative speaking card never completes from evidence",
+        );
+    }
+
+    /// U06: the cursor only offers stages a runner can answer, and the
+    /// learner-facing counts are the real ones. The RU-shaped fixture's
+    /// `match` stage is declared but unrunnable, so it is neither a
+    /// cursor step nor part of the total.
+    #[test]
+    fn the_practice_cursor_skips_stages_no_runner_can_answer() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        let plan = || {
+            lesson_plan_at(data, &p.id, "ru.sent.fixture.privet-mir")
+                .unwrap()
+                .expect("the fixture unit declares this sentence")
+        };
+        let fresh = plan();
+        // Encounter, listen, cloze and speak have runners; the `match`
+        // stage does not, so it is not counted and never offered.
+        assert_eq!(fresh.stage_total, 4);
+        assert_eq!(
+            fresh.next_stage_id.as_deref(),
+            Some("ru.activity.fixture.listen"),
+            "the first authored scored stage: not the presentation, never the unrunnable match",
+        );
+        assert_eq!(fresh.stage_position, Some(2));
+        practice_submit_inner(
+            data,
+            &p.id,
+            "ru.sent.fixture.privet-mir",
+            "comprehension-listening",
+            0,
+            SubmitOpts {
+                answer: None,
+                reveal_reading: false,
+                diagnostic: None,
+                session_id: None,
+                stage: Some("ru.activity.fixture.listen"),
+            },
+        )
+        .unwrap();
+        let after = plan();
+        assert_eq!(
+            after.next_stage_id.as_deref(),
+            Some("ru.activity.fixture.cloze"),
+            "the cursor moves to the cloze authored next, past the unrunnable stage",
+        );
+        assert_eq!(after.stage_position, Some(3));
+        assert!(
+            after
+                .stages
+                .iter()
+                .any(|s| s.stage_kind == "encounter" && s.done),
+            "the encounter before the worked stage is not replayed on review",
+        );
+        // With the cloze done only the formative speaking card is left:
+        // no scored stage remains, so the honest answer is the finish.
+        practice_submit_inner(
+            data,
+            &p.id,
+            "ru.sent.fixture.privet-mir",
+            "production-writing",
+            0,
+            SubmitOpts {
+                answer: Some("Привет".into()),
+                reveal_reading: false,
+                diagnostic: None,
+                session_id: None,
+                stage: Some("ru.activity.fixture.cloze"),
+            },
+        )
+        .unwrap();
+        assert_eq!(plan().next_stage_id, None);
     }
 
     /// K-97 (RU-MODALITY-PRACTICE-001): dictation never runs a recognizer

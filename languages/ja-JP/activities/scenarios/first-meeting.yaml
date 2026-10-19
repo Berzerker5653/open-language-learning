@@ -4,6 +4,7 @@
 # deferred the graph until then. Dialogue wording requires qualified
 # human review (REVIEW-001) before promotion; prompts use the pack's
 # own draft lexicon items and working register labels.
+# U07 support payloads and action labels: ai-drafted 2026-10-19; qualified human review required (REVIEW-001).
 id: "ja.scenario.first-meeting.greeting"
 goal_id: "ja.goal.onramp.respond-to-greeting"
 title: "First meeting"
@@ -13,6 +14,16 @@ nodes:
   - id: "ja.scenario.first-meeting.greeting.open"
     prompt: "Someone you have not met before greets you: こんにちは。Reply with a fitting short greeting."
     expected_actions: ["respond-greeting"]
+    action_labels:
+      respond-greeting: "Greet them back"
+      ask-repeat: "Politely ask them to repeat the greeting"
+    support:
+      - level: 3
+        kind: model
+        text: "こんにちは。 konnichiwa."
+      - level: 5
+        kind: model
+        text: "こんにちは。(konnichiwa.) — the polite daytime greeting, said back to them."
     next: ["ja.scenario.first-meeting.greeting.introduce"]
     recovery:
       - id: "ja.scenario.first-meeting.greeting.repair-repeat"
@@ -22,6 +33,17 @@ nodes:
   - id: "ja.scenario.first-meeting.greeting.introduce"
     prompt: "They wait, smiling. Mark that you have not met before and give your name."
     expected_actions: ["state-first-meeting", "state-name"]
+    action_labels:
+      state-first-meeting: "Say this is a first meeting"
+      state-name: "Give your name"
+      ask-slowly: "Ask them to say their name slowly first"
+    support:
+      - level: 3
+        kind: model
+        text: "はじめまして。わたしの なまえは タナカです。 hajimemashite. watashi no namae wa Tanaka desu."
+      - level: 5
+        kind: model
+        text: "はじめまして。わたしの なまえは タナカです。(hajimemashite. watashi no namae wa Tanaka desu.) — 'How do you do — nice to meet you. My name is Tanaka.' Swap in your own name."
     next: ["ja.scenario.first-meeting.greeting.close"]
     recovery:
       - id: "ja.scenario.first-meeting.greeting.repair-slower"
@@ -31,6 +53,15 @@ nodes:
   - id: "ja.scenario.first-meeting.greeting.close"
     prompt: "Wrap up the introduction with a polite closing."
     expected_actions: ["say-closing"]
+    action_labels:
+      say-closing: "Close with the polite set phrase"
+    support:
+      - level: 3
+        kind: model
+        text: "どうぞ よろしく おねがいします。 douzo yoroshiku onegaishimasu."
+      - level: 5
+        kind: model
+        text: "どうぞ よろしく おねがいします。(douzo yoroshiku onegaishimasu.) — 'Pleased to meet you.' The set closing for an introduction."
     next: []
 support_ladder:
   - support_level: 0

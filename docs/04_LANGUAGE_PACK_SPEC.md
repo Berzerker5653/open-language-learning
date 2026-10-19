@@ -317,6 +317,21 @@ Scenario definitions should be data-driven where possible:
 - assessment targets;
 - difficulty variants.
 
+U07 (2026-10): scenario nodes may carry `action_labels` — a learner-facing
+label for every `expected_actions` token; the internal token must never be
+what a button shows, and the runtime substitutes a generic word when a
+label is absent — and `support` payloads: `{level, kind, text}` with
+`kind` in `hint|model|gloss|choices`, plus `options` (≥ 2 readable replies)
+for `choices`. Both fields are optional at schema level so 0.1-era packs
+stay valid, but in 0.2 scenario docs the validator enforces the promise:
+`scenario_support_rung_undelivered` (every ladder level > 0 needs a
+level-matching payload on every node), `scenario_action_label_missing`
+(every declared intent token, recovery-branch tokens included, needs a
+label once the pack is in the labelled regime), and
+`scenario_support_choices_small` (choices help with fewer than two
+options). A pressed ladder rung must deliver its payload — an empty
+support button is a validation error, not a UI disappointment.
+
 ## World environments (`world/environments.jsonl`, ADR-0018)
 
 Unlockable places are pack data; the engine ships none. The manifest key
