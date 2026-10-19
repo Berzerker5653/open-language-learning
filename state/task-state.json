@@ -1301,7 +1301,9 @@
         "ACC-001",
         "SEC-001"
       ],
-      "evidence": [],
+      "evidence": [
+        "state/evidence/RELEASE-EVIDENCE-001/ARTIFACT-PASS-2026-10-19.md"
+      ],
       "updated": "2026-10-19",
       "blocker": "Owner decision outstanding; not self-certified by an agent (AGENTS: AI cannot clear a human gate)."
     },
