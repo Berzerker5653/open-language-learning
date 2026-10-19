@@ -1352,7 +1352,7 @@ tasks:
     covered.
   - Translation dependence is materially reduced.
   - Transfer and delayed retention checks exist.
-  required_for_desktop_1_0: true
+  required_for_desktop_1_0: false  # owner coverage decision 2026-10-19: the 1.0 bar is reliable A1–A2 in both shipped languages (docs/18); B1 depth is roadmap work
 # Band review gate: this card gates the band-completeness CLAIM for its band (docs/00 release-gate
 # rules, docs/18), not the desktop release path. Owner ruling 2026-10-17, recorded in ADR-0034.
 - id: JA-B1-002
@@ -1388,7 +1388,7 @@ tasks:
   - Declared B2-like capability map has curriculum, scenarios, assessments, and transfer evidence.
   - Broader natural-speed listening and varied text genres are represented.
   - Pragmatics/register coverage is substantially expanded.
-  required_for_desktop_1_0: true
+  required_for_desktop_1_0: false  # owner coverage decision 2026-10-19: the 1.0 bar is reliable A1–A2 in both shipped languages (docs/18); B2 depth is roadmap work
 # Band review gate: this card gates the band-completeness CLAIM for its band (docs/00 release-gate
 # rules, docs/18), not the desktop release path. Owner ruling 2026-10-17, recorded in ADR-0034.
 - id: JA-B2-002
@@ -1534,14 +1534,14 @@ tasks:
   - RESTORE-ATOMIC-001
   - PLAYBACK-LIFECYCLE-001
   - MIC-TRACK-LIFECYCLE-001
-  # The A2/B1/B2 authoring cards are listed directly here because the release-edge detours through
+  # The A2 authoring card is listed directly here because the release-edge detours through
   # their band review cards were removed 2026-10-17 (owner ruling, ADR-0034): those review cards gate
   # the band-completeness claim, not the release path, so REL-001 itself carries the required-card
-  # reachability that tools/validate_handoff.py enforces.
+  # reachability that tools/validate_handoff.py enforces. The B1/B2 authoring cards were dropped
+  # from this list on 2026-10-19 under the owner's coverage decision (reliable A1–A2 in both
+  # shipped languages is the 1.0 bar, docs/18); they remain roadmap work.
   - JA-A1-002
   - JA-A2-001
-  - JA-B1-001
-  - JA-B2-001
   - JA-KANJI-ATTRIBUTION-001
   read_first:
   - docs/09_TESTING_AND_ACCEPTANCE.md
@@ -2289,6 +2289,8 @@ execution_scope:
   - JA-A2-002
   - JA-B1-002
   - JA-B2-002
+  - JA-B1-001
+  - JA-B2-001
   - SPEECH-007
   - K-01
   - K-02

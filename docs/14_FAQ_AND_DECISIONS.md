@@ -138,7 +138,7 @@ No. JLPT can be an optional reference/crosswalk later, but the product centers f
 
 Avoid vague "fluent in X days" claims. Report demonstrated abilities and framework-aligned coverage with clear limitations.
 
-Stable desktop 1.0 targets approved, mapped and qualified-reviewed Japanese on-ramp through B2-like coverage. Partial previews can ship as alpha/beta with clear limitations. Reducing the stable target requires an explicit owner decision. `REVIEW-001` must define a finite coverage/review policy before reference promotion: all scored/reused core targets require actual qualified human review; limited sampling is only for labeled lower-risk unscored practice. No AI, structural validator, or unexecuted checklist can stand in for that evidence.
+Stable desktop 1.0 targets reliable A1–A2 coverage in both shipped languages (ja-JP, ru-RU) — the owner's explicit 2026-10-19 decision recorded in `docs/18_PUBLIC_CLAIMS_AND_SCOPE.md`, replacing the earlier through-B2-like target. Partial previews can ship as alpha/beta with clear limitations. Changing the stable target requires another explicit owner decision. `REVIEW-001` must define a finite coverage/review policy before reference promotion: all scored/reused core targets require actual qualified human review; limited sampling is only for labeled lower-risk unscored practice. No AI, structural validator, or unexecuted checklist can stand in for that evidence.
 
 Course coverage is not a guarantee of learner proficiency or proof of this product's efficacy. Future calibration and effectiveness studies remain uncompleted until their actual evidence is recorded. Producing a reviewable release candidate does not itself authorize publication.
 

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-10-18",
+  "updated": "2026-10-19",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -1161,10 +1161,10 @@
       "title": "Onboarding and specification claims match the shipped system",
       "activity": "idle",
       "summary": "Docs and claims that a human has to arbitrate are staged for owner decision: the pack license metadata, the ADRs awaiting acceptance, and the coverage wording that overstates what the desktop can reach.",
-      "notes": "Owner decision outstanding; not self-certified by an agent (AGENTS: AI cannot clear a human gate). The wrong claim about `Independent` reachability is corrected in this ledger; the remaining reconciliations (CC-BY-3.0 pack metadata under a CC-BY-4.0 label, ADR-0026/0028/0029/0030/0031 acceptance, O-03, O-06, O-07, O-08) are owner-only. Add to the owner queue: republishing both packs at 0.4.1 (the licence-metadata fix, O-01b) must also bake the 18 journey rows added on 2026-10-14; until then ADR-0032 keeps those wavs tracked and the tree is deliberately ahead of the pinned archive by 8 ja + 10 ru rows.",
+      "notes": "Owner decision outstanding; not self-certified by an agent (AGENTS: AI cannot clear a human gate). The wrong claim about `Independent` reachability is corrected in this ledger; the remaining reconciliations (CC-BY-3.0 pack metadata under a CC-BY-4.0 label, ADR-0026/0028/0029/0030/0031 acceptance, O-03, O-06, O-07, O-08) are owner-only. Add to the owner queue: republishing both packs at 0.4.1 (the licence-metadata fix, O-01b) must also bake the 18 journey rows added on 2026-10-14; until then ADR-0032 keeps those wavs tracked and the tree is deliberately ahead of the pinned archive by 8 ja + 10 ru rows. Update 2026-10-19: the owner answered the coverage question — reliable A1–A2 in both shipped languages is the 1.0 bar — and it is recorded in docs/18; the B1/B2 depth tasks (JA-B1-001, JA-B2-001) are roadmap again, not release gates. Still blocked on the owner's hands-on acceptance pass and the release evidence trail.",
       "dependencies": [],
       "evidence": [],
-      "updated": "2026-10-14",
+      "updated": "2026-10-19",
       "blocker": "Owner decision outstanding; not self-certified by an agent (AGENTS: AI cannot clear a human gate)."
     },
     "BUILD-IDENTITY-FRESHNESS-001": {
@@ -1215,44 +1215,51 @@
     },
     "GUIDED-SESSION-001": {
       "task_id": "GUIDED-SESSION-001",
-      "status": "review",
+      "status": "done",
       "attempts": 1,
       "title": "Today presents one bounded session instead of an exhaustive queue",
       "activity": "idle",
       "summary": "The learner opens one guided session, works one next task, can pause and resume, and finishes honestly.",
-      "notes": "Implemented 2026-10-15: one begin action over the engine's own plan (copy names the scope and the exit), a queue snapshot taken at begin so 'N of M' cannot drift when `practice_plan` re-plans, pause/resume plus stop/finish summaries, and the per-activity rows demoted under 'Or do one activity on its own:' rather than removed. The session is in-run only: no partial-session state is persisted, and no persisted-session claim is made. Acceptance is walked item by item in the evidence file; the UX judgement stays with the owner's hands-on pass (O-06), so the card sits in review, not done.",
+      "notes": "Implemented 2026-10-15: one begin action over the engine's own plan (copy names the scope and the exit), a queue snapshot taken at begin so 'N of M' cannot drift when `practice_plan` re-plans, pause/resume plus stop/finish summaries, and the per-activity rows demoted under 'Or do one activity on its own:' rather than removed. The session is in-run only: no partial-session state is persisted, and no persisted-session claim is made. Acceptance is walked item by item in the evidence file; the UX judgement stays with the owner's hands-on pass (O-06), so the card sits in review, not done. Owner accepted the review card on 2026-10-19 together with the paired U-findings from the same review (see the acceptance evidence file); the acceptance covers the implemented behavior, not the separately owner-gated human passes.",
       "dependencies": [],
-      "evidence": ["state/evidence/GUIDED-SESSION-001/IMPLEMENTATION-2026-10-15.md"],
-      "updated": "2026-10-15"
+      "evidence": [
+        "state/evidence/GUIDED-SESSION-001/IMPLEMENTATION-2026-10-15.md",
+        "state/evidence/GUIDED-SESSION-001/OWNER-ACCEPTANCE-2026-10-19.md"
+      ],
+      "updated": "2026-10-19"
     },
     "CANDO-PROGRESS-001": {
       "task_id": "CANDO-PROGRESS-001",
-      "status": "review",
+      "status": "done",
       "attempts": 1,
       "title": "Progress leads with can-do decisions and keeps IDs as detail",
       "activity": "idle",
       "summary": "Progress is presented can-do first, with ids and confidence as optional detail.",
-      "notes": "Implemented 2026-10-15: `CanDoSummary` leads the Progress route — can-do lines are the pack's own goal text gated on engine capability state, 'What changed' comes from the scheduler's `needs_refresh` flag, and the next step is the pack's declared path, with abstain copy instead of invention. `GoalMap` and `ProgressView` were demoted to detail and the route's single-h1 accessibility fixture was rebuilt to match the real composition rather than relaxed. The can-do lines quote draft pack text, so content promotion still needs a human review record, and acceptance of the wording belongs to the owner's hands-on pass (O-06).",
+      "notes": "Implemented 2026-10-15: `CanDoSummary` leads the Progress route — can-do lines are the pack's own goal text gated on engine capability state, 'What changed' comes from the scheduler's `needs_refresh` flag, and the next step is the pack's declared path, with abstain copy instead of invention. `GoalMap` and `ProgressView` were demoted to detail and the route's single-h1 accessibility fixture was rebuilt to match the real composition rather than relaxed. The can-do lines quote draft pack text, so content promotion still needs a human review record, and acceptance of the wording belongs to the owner's hands-on pass (O-06). Owner accepted the review card on 2026-10-19 together with the paired U-findings from the same review (see the acceptance evidence file); the acceptance covers the implemented behavior, not the separately owner-gated human passes.",
       "dependencies": [],
-      "evidence": ["state/evidence/CANDO-PROGRESS-001/IMPLEMENTATION-2026-10-15.md"],
-      "updated": "2026-10-15"
+      "evidence": [
+        "state/evidence/CANDO-PROGRESS-001/IMPLEMENTATION-2026-10-15.md",
+        "state/evidence/CANDO-PROGRESS-001/OWNER-ACCEPTANCE-2026-10-19.md"
+      ],
+      "updated": "2026-10-19"
     },
     "INSTALL-UX-001": {
       "task_id": "INSTALL-UX-001",
-      "status": "review",
+      "status": "done",
       "attempts": 1,
       "title": "Installs have real progress, failure recovery, and a receipt",
       "activity": "awaiting-human-acceptance",
       "summary": "Pack install is bounded and honest: real progress, cancel/retry/resume, a receipt, and an explicit decision on pre-archived bundles.",
-      "notes": "Transport hardening is done (PACK-DL-ALLOWLIST-001). Implemented 2026-10-15: `engine-progress` carries a measured fetch percent from the pinned `PackEntry.size_bytes`, `verify`/unpack are named as unmeasurable rather than faked, cancel is honoured at chunk/redirect/phase boundaries (`cancel_pack_install` + `INSTALL_CANCEL`), and an `InstallReceipt` (pack/version/source host/sha256/size/capabilities) reaches the UI with Cancel and Retry. The second slice the same day closed both disclosed gaps: `lts_langpack::archive::install_with_cancel` takes a hook consulted per archive entry and again before the store is touched, and because extraction is staging-then-rename an abort leaves no version directory and never moves the `current` pointer; a cancelled transfer keeps its bytes in `partial-<key>.part` beside a sidecar naming url/sha256/size, so a retry sends `Range: bytes=<n>-`, adopts the prefix only on a `206`, and still checks the completed file against the pinned size and SHA-256 before the pack gate sees it — a `200` answer, a corrupt or foreign sidecar, or an oversized part restarts from zero. `install_from_catalog_report` refuses an install that cannot fit (free space from `statvfs` on unix, skipped rather than guessed elsewhere) and names a disk that fills during unpack. The renderer offers Cancel during fetch/verify/install and its copy now says a retry continues where it stopped. Still open and owner-gated: the measured timing half of issue #1 item I05 (fresh-artifact install and resume timed separately on the tiers `PERF-002` freezes) needs a published artifact, and the pre-archived-bundle question stays an owner decision. Evidence: state/evidence/INSTALL-UX-001/ENGINE-SLICE-2026-10-15.md, state/evidence/INSTALL-UX-001/RESUME-CANCEL-PREFLIGHT-2026-10-15.md.",
+      "notes": "Transport hardening is done (PACK-DL-ALLOWLIST-001). Implemented 2026-10-15: `engine-progress` carries a measured fetch percent from the pinned `PackEntry.size_bytes`, `verify`/unpack are named as unmeasurable rather than faked, cancel is honoured at chunk/redirect/phase boundaries (`cancel_pack_install` + `INSTALL_CANCEL`), and an `InstallReceipt` (pack/version/source host/sha256/size/capabilities) reaches the UI with Cancel and Retry. The second slice the same day closed both disclosed gaps: `lts_langpack::archive::install_with_cancel` takes a hook consulted per archive entry and again before the store is touched, and because extraction is staging-then-rename an abort leaves no version directory and never moves the `current` pointer; a cancelled transfer keeps its bytes in `partial-<key>.part` beside a sidecar naming url/sha256/size, so a retry sends `Range: bytes=<n>-`, adopts the prefix only on a `206`, and still checks the completed file against the pinned size and SHA-256 before the pack gate sees it — a `200` answer, a corrupt or foreign sidecar, or an oversized part restarts from zero. `install_from_catalog_report` refuses an install that cannot fit (free space from `statvfs` on unix, skipped rather than guessed elsewhere) and names a disk that fills during unpack. The renderer offers Cancel during fetch/verify/install and its copy now says a retry continues where it stopped. Still open and owner-gated: the measured timing half of issue #1 item I05 (fresh-artifact install and resume timed separately on the tiers `PERF-002` freezes) needs a published artifact, and the pre-archived-bundle question stays an owner decision. Evidence: state/evidence/INSTALL-UX-001/ENGINE-SLICE-2026-10-15.md, state/evidence/INSTALL-UX-001/RESUME-CANCEL-PREFLIGHT-2026-10-15.md. Owner accepted the review card on 2026-10-19 together with the paired U-findings from the same review (see the acceptance evidence file); the acceptance covers the implemented behavior, not the separately owner-gated human passes.",
       "dependencies": [],
       "evidence": [
         "state/evidence/INSTALL-UX-001/ENGINE-SLICE-2026-10-15.md",
         "state/evidence/INSTALL-UX-001/RESUME-CANCEL-PREFLIGHT-2026-10-15.md",
         "apps/desktop/src-tauri/src/packs.rs",
-        "crates/langpack/src/archive.rs"
+        "crates/langpack/src/archive.rs",
+        "state/evidence/INSTALL-UX-001/OWNER-ACCEPTANCE-2026-10-19.md"
       ],
-      "updated": "2026-10-15"
+      "updated": "2026-10-19"
     },
     "CONTRIBUTOR-REVIEW-PACKET-001": {
       "task_id": "CONTRIBUTOR-REVIEW-PACKET-001",
@@ -1263,7 +1270,9 @@
       "summary": "A contributor gets a bounded five-item review packet that shows what the gates check and what a reviewer has to sign off.",
       "notes": "Authored on Omarchy against this snapshot; the pack-gate, fetch-audio, handoff-validator and auditor commands in items 1 and 5 were executed there, while the pnpm and desktop-smoke steps are cited from `.github/workflows/ci.yml` job/line numbers only because Omarchy has no pnpm. Cite spot-checks on GamingPC corrected `scripts/ci.sh:83` to `:84` for the `CI OK` marker, and section 1 now records the bounded ADR-0032 media exception. Content sign-off stays a qualified-human act.",
       "dependencies": [],
-      "evidence": ["state/evidence/CONTRIBUTOR-REVIEW-PACKET-001/packet-2026-10-14.txt"],
+      "evidence": [
+        "state/evidence/CONTRIBUTOR-REVIEW-PACKET-001/packet-2026-10-14.txt"
+      ],
       "updated": "2026-10-14"
     },
     "JOURNEY-SUITE-001": {
@@ -1275,7 +1284,9 @@
       "summary": "Mounted end-to-end journeys run against the real components instead of command-level tests.",
       "notes": "Executed on Hermes worker, the only pnpm host in the lab: `happy-dom` 21.0.1 pinned, `apps/desktop/vite.config.ts` split into node and dom vitest projects (the node project must declare `css: true` because projects do not inherit container test options), four journeys under `apps/desktop/src/journeys/`. Measured 24 files / 222 tests on both hosts (node 20 files / 218 tests baseline preserved, dom 4 files / 4 tests); GamingPC has no pnpm binary, so the local run unpacks `happy-dom` plus its four runtime deps into the gitignored root `node_modules/` instead, and the same command without them reports `Errors 4 errors` rather than skipping, so the suite cannot quietly lose DOM coverage. Sensitivity proven by mutating the refusal copy at `apps/desktop/src/home.tsx:160`: the pack-install journey failed with the rendered DOM quoted, 2 failed / 220 passed, then the mutation was reverted and the suite returned 222/222. Integration corrections made on GamingPC after review: restored `typescript` that the first pass deleted from `apps/desktop/package.json` and the lockfile importer, and replaced node `Buffer` with `atob`/`Uint8Array`/`DataView` so the recording decode is webview-legal.",
       "dependencies": [],
-      "evidence": ["state/evidence/JOURNEY-SUITE-001/vitest-2026-10-14.txt"],
+      "evidence": [
+        "state/evidence/JOURNEY-SUITE-001/vitest-2026-10-14.txt"
+      ],
       "updated": "2026-10-14"
     },
     "RELEASE-EVIDENCE-001": {
@@ -1285,13 +1296,13 @@
       "title": "Release evidence is measured from the artifact",
       "activity": "idle",
       "summary": "The release-candidate evidence set: platform runtime reports, accessibility and security review, acceptance review, and the desktop gates re-run on a clean clone.",
-      "notes": "Owner decision outstanding; not self-certified by an agent (AGENTS: AI cannot clear a human gate). SEC-001, ACC-001, REVIEW-001 acceptance, ADR acceptance and the O-0x decisions are owner-owned; an agent records measurements and cannot clear them. The next RC re-run of the release gates is an owner-visible action.",
+      "notes": "Owner decision outstanding; not self-certified by an agent (AGENTS: AI cannot clear a human gate). SEC-001, ACC-001, REVIEW-001 acceptance, ADR acceptance and the O-0x decisions are owner-owned; an agent records measurements and cannot clear them. The next RC re-run of the release gates is an owner-visible action. Update 2026-10-19: the scripted artifact pass (release build, finalized deb, scripted smoke) is recorded under state/evidence/RELEASE-EVIDENCE-001/; the owner's hands-on pass remains open and this task stays blocked on it.",
       "dependencies": [
         "ACC-001",
         "SEC-001"
       ],
       "evidence": [],
-      "updated": "2026-10-14",
+      "updated": "2026-10-19",
       "blocker": "Owner decision outstanding; not self-certified by an agent (AGENTS: AI cannot clear a human gate)."
     },
     "JA-A1-003": {
@@ -1491,7 +1502,7 @@
       "title": "Author B1-like independent-use Japanese coverage",
       "activity": "idle",
       "summary": "Connected discourse, common independent situations, repair and clarification, broader reading and listening, materially reduced translation dependence, and transfer plus delayed-retention checks.",
-      "notes": "Recorded 2026-10-15: required for desktop 1.0, previously ROADMAP-only. The member-level accounting of the 0.4.1 candidate shows what actually exists at B1: three new units (`820-b1j-work-notice`, `821-b1j-work-notice-call`, `822-b1j-work-notice-revision`) and the new scenario/sentence files; every pack gate exits 0. That is a draft increment, not B1 coverage: the acceptance criteria about reduced translation dependence and delayed-retention evidence are unmet, and the band's review record (JA-B1-002) does not exist.",
+      "notes": "Recorded 2026-10-15: required for desktop 1.0, previously ROADMAP-only. The member-level accounting of the 0.4.1 candidate shows what actually exists at B1: three new units (`820-b1j-work-notice`, `821-b1j-work-notice-call`, `822-b1j-work-notice-revision`) and the new scenario/sentence files; every pack gate exits 0. That is a draft increment, not B1 coverage: the acceptance criteria about reduced translation dependence and delayed-retention evidence are unmet, and the band's review record (JA-B1-002) does not exist. Owner coverage decision 2026-10-19: reliable A1–A2 in both shipped languages is the 1.0 bar (docs/18), so this B-level depth task is roadmap work, not a 1.0 release gate; it stays blocked pending content work and qualified review regardless.",
       "dependencies": [
         "JA-A2-002",
         "GAME-001"
@@ -1500,7 +1511,7 @@
         "languages/ja-JP/curriculum/units/820-b1j-work-notice.yaml",
         "state/evidence/RC-0.4.1-2026-10-15/diff-ja-JP.txt"
       ],
-      "updated": "2026-10-15",
+      "updated": "2026-10-19",
       "blocker": "Depends on the A2 band review (JA-A2-002, blocked by BLK-REVIEW-CAPACITY); the B1 acceptance evidence itself (translation independence, delayed retention) has not been produced."
     },
     "JA-B2-001": {
@@ -1510,7 +1521,7 @@
       "title": "Author B2-like Japanese reference coverage",
       "activity": "idle",
       "summary": "A declared B2-like capability map with curriculum, scenarios, assessments and transfer evidence; broader natural-speed listening and varied text genres; substantially expanded pragmatics and register coverage.",
-      "notes": "Recorded 2026-10-15: required for desktop 1.0 and the deepest content hole on the release path. The 0.4.1 accounting adds three B2 units (`823-b2j-film-opinion`, `824-b2j-film-with-friends`, `825-b2j-film-revision`) and one pragmatics file change; nothing else at B2 was authored this cycle. `state/evidence/O-06-2026-10-10/owner-report.md` and the R12 content-template audit record the counted thinness at the upper bands, and `languages/ja-JP/review/WORKLIST-2026-10-14.md` lists the B2 items as `draft` awaiting review.",
+      "notes": "Recorded 2026-10-15: required for desktop 1.0 and the deepest content hole on the release path. The 0.4.1 accounting adds three B2 units (`823-b2j-film-opinion`, `824-b2j-film-with-friends`, `825-b2j-film-revision`) and one pragmatics file change; nothing else at B2 was authored this cycle. `state/evidence/O-06-2026-10-10/owner-report.md` and the R12 content-template audit record the counted thinness at the upper bands, and `languages/ja-JP/review/WORKLIST-2026-10-14.md` lists the B2 items as `draft` awaiting review. Owner coverage decision 2026-10-19: reliable A1–A2 in both shipped languages is the 1.0 bar (docs/18), so this B-level depth task is roadmap work, not a 1.0 release gate; it stays blocked pending content work and qualified review regardless.",
       "dependencies": [
         "JA-B1-002"
       ],
@@ -1519,7 +1530,7 @@
         "languages/ja-JP/review/WORKLIST-2026-10-14.md",
         "docs/assessment/RELEASE_COVERAGE.yaml"
       ],
-      "updated": "2026-10-15",
+      "updated": "2026-10-19",
       "blocker": "Depends on the B1 band review (JA-B1-002, blocked); the B2 capability map and its transfer/listening evidence are not authored to acceptance."
     },
     "REL-001": {
@@ -1550,12 +1561,12 @@
     },
     "A11Y-FLOW-001": {
       "task_id": "A11Y-FLOW-001",
-      "status": "review",
+      "status": "done",
       "attempts": 1,
       "title": "Route changes carry focus and announcement; empty views carry one action",
       "activity": "awaiting-human-acceptance",
       "summary": "I04's remaining engineering half: managed focus/heading on route change, a no-pack Today view with one action and no budget control or zero-count summary, a keyboard-only mounted journey, and IME-safe input.",
-      "notes": "Opened 2026-10-15 from issue #1 item I04 after re-checking the tree: `apps/desktop/src/App.tsx:453-456` only calls `window.scrollTo(0, 0)` on route change, so focus and the announcement stay on the old content, and in `home.tsx` the `Time budget` group (`:220-232`) and the `plan-summary` line (`:233-235`, renders `0 activities · about 0 minutes`) still render under `noPack`. The automated a11y suite from K-33 (`a11y.test.tsx`: tabindex, accessible names, labels, landmarks, single h1, live regions, contrast, reduced-motion) stays green and is extended, not relaxed. The human screen-reader matrix remains ACC-001 / owner gate O-03, so this task closing does not close I04. Implemented 2026-10-15: the route-change effect now scrolls, then moves focus to the new route's `h1` (`tabIndex = -1`, `preventScroll`) on every step except `done`; `home.tsx` withholds the `Time budget` group, the `plan-summary` line and the zero-count empty paragraph under `noPack` so the view carries one action; `apps/desktop/src/journeys/keyboard.journey.tsx` walks Tab and Enter from the resume picker through a no-pack Today into Settings, Language packs and Practice, asserting the focus target at each stop. Measured: with the two source files stashed the new journey and the extended `home.test.tsx` case both fail; with them `apps/desktop` reports 27 files / 240 tests passing and `a11y.test.tsx` is untouched. No Enter-submit handler exists anywhere in `apps/desktop/src`, so the IME hazard the checklist bullet names has no code path to fix today, and adding Enter-to-submit would be new scope rather than a fix.",
+      "notes": "Opened 2026-10-15 from issue #1 item I04 after re-checking the tree: `apps/desktop/src/App.tsx:453-456` only calls `window.scrollTo(0, 0)` on route change, so focus and the announcement stay on the old content, and in `home.tsx` the `Time budget` group (`:220-232`) and the `plan-summary` line (`:233-235`, renders `0 activities · about 0 minutes`) still render under `noPack`. The automated a11y suite from K-33 (`a11y.test.tsx`: tabindex, accessible names, labels, landmarks, single h1, live regions, contrast, reduced-motion) stays green and is extended, not relaxed. The human screen-reader matrix remains ACC-001 / owner gate O-03, so this task closing does not close I04. Implemented 2026-10-15: the route-change effect now scrolls, then moves focus to the new route's `h1` (`tabIndex = -1`, `preventScroll`) on every step except `done`; `home.tsx` withholds the `Time budget` group, the `plan-summary` line and the zero-count empty paragraph under `noPack` so the view carries one action; `apps/desktop/src/journeys/keyboard.journey.tsx` walks Tab and Enter from the resume picker through a no-pack Today into Settings, Language packs and Practice, asserting the focus target at each stop. Measured: with the two source files stashed the new journey and the extended `home.test.tsx` case both fail; with them `apps/desktop` reports 27 files / 240 tests passing and `a11y.test.tsx` is untouched. No Enter-submit handler exists anywhere in `apps/desktop/src`, so the IME hazard the checklist bullet names has no code path to fix today, and adding Enter-to-submit would be new scope rather than a fix. Owner accepted the review card on 2026-10-19 together with the paired U-findings from the same review (see the acceptance evidence file); the acceptance covers the implemented behavior, not the separately owner-gated human passes.",
       "dependencies": [
         "UX-001",
         "K-33"
@@ -1564,9 +1575,10 @@
         "apps/desktop/src/journeys/keyboard.journey.tsx",
         "apps/desktop/src/App.tsx",
         "apps/desktop/src/home.tsx",
-        "state/evidence/A11Y-FLOW-2026-10-15/NOTES.md"
+        "state/evidence/A11Y-FLOW-2026-10-15/NOTES.md",
+        "state/evidence/A11Y-FLOW-001/OWNER-ACCEPTANCE-2026-10-19.md"
       ],
-      "updated": "2026-10-15"
+      "updated": "2026-10-19"
     },
     "RU-MODALITY-PRACTICE-001": {
       "task_id": "RU-MODALITY-PRACTICE-001",

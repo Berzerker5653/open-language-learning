@@ -138,7 +138,7 @@ Do not expose personal reviewer details publicly unless they consent.
 
 `REVIEW-001` must establish future artifacts `languages/ja-JP/review/REVIEW_POLICY.yaml` and `docs/assessment/RELEASE_COVERAGE.yaml` before scored reference batches are promoted. Their existence in a plan is not evidence that review has occurred.
 
-The release coverage artifact freezes an approved finite set of required original Can-do objectives for each claimed band, on-ramp through B2-like for stable 1.0. Each row identifies framework/descriptor version and permitted reference, relevant modalities, contexts/text types and support conditions, required dependencies, units/scenarios, assessment IDs and rubric versions, review evidence, and explicit exclusions. Framework alignment needs a documented rationale for breadth and level, approved by qualified human curriculum/assessment reviewers; an author cannot define a tiny subset and call the entire band complete. A significant change to the required set requires recorded review and renewed claim assessment.
+The release coverage artifact freezes an approved finite set of required original Can-do objectives for each claimed band; for stable 1.0 the claimed bands are on-ramp through A2 in both shipped languages (owner decision 2026-10-19, `docs/18_PUBLIC_CLAIMS_AND_SCOPE.md`). Each row identifies framework/descriptor version and permitted reference, relevant modalities, contexts/text types and support conditions, required dependencies, units/scenarios, assessment IDs and rubric versions, review evidence, and explicit exclusions. Framework alignment needs a documented rationale for breadth and level, approved by qualified human curriculum/assessment reviewers; an author cannot define a tiny subset and call the entire band complete. A significant change to the required set requires recorded review and renewed claim assessment.
 
 Machine-verifiable gates require:
 
@@ -156,7 +156,7 @@ The checks are finite and automatable through coverage and evidence references; 
 
 Before making strong marketing claims, run pilot evaluation that includes delayed/transfer tasks. Product release can precede research publication, but claims must match evidence.
 
-Save a versioned evaluation protocol in the repository before data collection, using the metric definitions and claim rules in `docs/12_OBSERVABILITY_AND_RESEARCH.md`. A study plan, curriculum audit, or scheduler calibration is not proof that this product improves real-world proficiency. Honest partial previews may proceed without strong efficacy claims; stable 1.0 still requires its B2-like content/review and engineering gates.
+Save a versioned evaluation protocol in the repository before data collection, using the metric definitions and claim rules in `docs/12_OBSERVABILITY_AND_RESEARCH.md`. A study plan, curriculum audit, or scheduler calibration is not proof that this product improves real-world proficiency. Honest partial previews may proceed without strong efficacy claims; stable 1.0 still requires its A1–A2 content/review and engineering gates in both shipped languages.
 
 ## Definition of Done — task
 
@@ -180,9 +180,9 @@ All must pass:
 1. **Build:** reproducible supported desktop builds.
 2. **Offline:** core learning and installed local speech capability work with network disabled.
 3. **Persistence:** restart/recovery/migrations/export/import pass.
-4. **Pack:** Japanese reference pack and minimal example pass conformance.
+4. **Pack:** Japanese and Russian reference packs and minimal example pass conformance.
 5. **Security:** malicious-pack suite passes.
-6. **Curriculum:** approved finite on-ramp through B2-like coverage and qualified human review gates above pass; no critical/high graph/content/assessment error remains.
+6. **Curriculum:** approved finite on-ramp through A2 coverage in both shipped languages and qualified human review gates above pass; no critical/high graph/content/assessment error remains.
 7. **Speech:** each supported automatic feature has version-bound permissioned calibration evidence, speaker-separated held-out evaluation, preregistered/pre-specified feature-specific false-correction/false-negative/abstention limits and sample/uncertainty rationale, and measured abstention behavior; unqualified features stay guided/unscored. Missing qualification evidence fails the automatic-scoring gate. At least one high-value Japanese pronunciation contrast must qualify for automatic feedback within a useful declared coverage envelope; if none qualifies, stable desktop 1.0 remains blocked and guided-only builds stay previews unless the owner explicitly changes scope.
 8. **UX:** zero-to-first-use flow and short-session flow pass.
 9. **Accessibility:** criterion-level WCAG 2.2 AA/WCAG2ICT matrix and manual critical-journey assistive-technology/platform checks pass, including deferred-modality paths and honest evidence labels.

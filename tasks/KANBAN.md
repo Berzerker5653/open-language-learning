@@ -11,9 +11,9 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
-| review-claim-decisions | owner, docs | Documentation now matches the shipped system (versions, coverage, posture), but the remaining decisions are the owner's: the 1.0 course-coverage target and the hands-on pass against the published artifact. (Republishing 0.4.1 shipped in 2026-10-16 and the 0.4.2 pair shipped in 2026-10-18 — see the done sections.) | DOC-CONTRACT-RECONCILE-001 |
+| review-claim-decisions | owner, docs | Documentation now matches the shipped system (versions, coverage, posture). The owner answered the 1.0 course-coverage decision on 2026-10-19 — reliable A1–A2 in both shipped languages is the bar, recorded in `docs/18_PUBLIC_CLAIMS_AND_SCOPE.md`. What remains is the owner's hands-on acceptance pass against the published artifact (runbook in `docs/21_HUMAN_REVIEW_RUNBOOKS.md`; scripted build+deb+smoke evidence under `state/evidence/RELEASE-EVIDENCE-001/`). | DOC-CONTRACT-RECONCILE-001 |
 
-## in review — 2026-10-15 (agent-implemented, human acceptance open)
+## accepted — 2026-10-19 (agent-implemented through 2026-10-15; owner accepted the whole review column 2026-10-19)
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
