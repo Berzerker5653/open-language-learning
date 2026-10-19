@@ -3956,8 +3956,10 @@ struct DictationTarget {
     id: String,
     /// Surface form shown to the learner (may contain kanji).
     text: String,
-    /// Kana reading used as the recognition comparison target.
-    reading: String,
+    /// Kana reading used as the recognition comparison target when the pack
+    /// declares one; Russian rows have no reading fields and compare against
+    /// the surface text (U04).
+    reading: Option<String>,
     gloss: String,
 }
 
@@ -4831,9 +4833,10 @@ fn normalize_for_match(s: &str) -> Vec<char> {
 }
 
 /// Pick a sentence from the installed pack to dictate (roadmap feature B: tie
-/// dictation to curriculum instead of a free-text box). Prefers kana-only
-/// sentences so the free-ASR transcript compares cleanly to the reading;
-/// `offset` cycles the candidates for variety.
+/// dictation to curriculum instead of a free-text box). Prefers rows whose
+/// surface and reading normalize equal, so the free-ASR transcript compares
+/// cleanly to the cue; a pack whose script has no reading field (Russian)
+/// dictates its surface text (U04). `offset` cycles the candidates.
 fn dictation_target_at(data: &Path, pack_id: &str, offset: u32) -> Result<DictationTarget, String> {
     if !packs::valid_pack_id(pack_id) {
         return Err("pack not allowlisted".into());
@@ -4845,29 +4848,40 @@ fn dictation_target_at(data: &Path, pack_id: &str, offset: u32) -> Result<Dictat
         Ok(texts) => texts.join("\n"),
         Err(_) => return Err("pack declares no sentences".to_string()),
     };
-    let mut kana_only: Vec<DictationTarget> = Vec::new();
+    let mut clean_match: Vec<DictationTarget> = Vec::new();
     let mut all: Vec<DictationTarget> = Vec::new();
     for line in text.lines().filter(|l| !l.trim().is_empty()) {
         let v: serde_json::Value =
             serde_json::from_str(line).map_err(|_| "bad sentences entries".to_string())?;
+        let reading = v["reading"].as_str().unwrap_or("").to_string();
         let t = DictationTarget {
             id: v["id"].as_str().unwrap_or("").to_string(),
             text: v["text"].as_str().unwrap_or("").to_string(),
-            reading: v["reading"].as_str().unwrap_or("").to_string(),
+            // Russian rows carry no reading field at all: the surface IS the
+            // comparison target (U04). Absent reading travels as null so the
+            // frontend never renders an empty cue box.
+            reading: if reading.is_empty() {
+                None
+            } else {
+                Some(reading.clone())
+            },
             gloss: v["gloss"].as_str().unwrap_or("").to_string(),
         };
-        if t.text.is_empty() || t.reading.is_empty() {
+        if t.text.trim().is_empty() {
             continue;
         }
-        if normalize_for_match(&t.text) == normalize_for_match(&t.reading) {
-            kana_only.push(t.clone());
+        // Prefer rows whose surface and reading normalize to the same thing,
+        // so a kana transcript compares cleanly to the cue. For a pack with
+        // no readings, the pool below is already the right comparison.
+        if normalize_for_match(&t.text) == normalize_for_match(&reading) {
+            clean_match.push(t.clone());
         }
         all.push(t);
     }
-    let pool = if kana_only.is_empty() {
+    let pool = if clean_match.is_empty() {
         &all
     } else {
-        &kana_only
+        &clean_match
     };
     if pool.is_empty() {
         return Err("pack declares no usable sentences".into());
@@ -6401,6 +6415,23 @@ fn mine_due_at(data: &Path, profile_id: &str) -> Result<Vec<MinedItemView>, Stri
         .collect())
 }
 
+/// U03: a saved word that was never graded has no schedule, so `mine_due`
+/// can only ever answer honestly that it is not due — and no ordinary path
+/// ever opened its first review card. The engine owns that state too: this
+/// command answers which saved words have never been scheduled, so the UI
+/// never re-derives newness from `due_at` on its own. Grading one goes
+/// through `mine_grade` unchanged: the scheduler seeds its first state, and
+/// the word gains its first future due date.
+#[tauri::command]
+fn mine_new(profile_id: String) -> Result<Vec<MinedItemView>, String> {
+    mine_new_at(&data_dir(), &profile_id)
+}
+
+fn mine_new_at(data: &Path, profile_id: &str) -> Result<Vec<MinedItemView>, String> {
+    let all = mine_list_at(data, profile_id)?;
+    Ok(all.into_iter().filter(|m| m.due_at.is_none()).collect())
+}
+
 /// Self-graded recall review of a mined word (surface -> recall the
 /// meaning). Updates only the mined item's SRS row; no evidence.
 #[tauri::command]
@@ -6759,11 +6790,15 @@ fn practice_submit_inner(
 // ---------------------------------------------------------------------------
 // K-15: placement / diagnostic assessment (docs/03 §10). Packs declare
 // goal-linked assessments; the placement pass runs one low-stakes task
-// per assessment against its goal's unit content. Evidence is tagged
+// per assessment against its goal's unit content, and (U05) build-verifies
+// every pair through the runner table and the submit path's own task
+// builder before emitting it. Evidence is tagged
 // Diagnostic and flows through normal mastery derivation, so correct
 // answers raise state and known foundations unlock via the existing
 // prerequisite gating. Constructs without a low-stakes auto-runner
-// (speaking/writing/interaction) are skipped, never fabricated.
+// (speaking/writing/interaction) and rubrics with no content that builder
+// can serve are never fabricated: `placement_coverage` reports why each
+// one abstained.
 // ---------------------------------------------------------------------------
 
 #[derive(serde::Deserialize)]
@@ -7091,6 +7126,21 @@ struct PlacementItem {
     modality: String,
 }
 
+/// U05: what the placement pass made of one declared assessment. `planned`
+/// means a runnable question was emitted; every other status carries a
+/// machine-readable `reason` naming the concrete blocker, so the Placement
+/// surface can say "this rubric has no question because …" instead of
+/// silently offering a shorter test.
+#[derive(Serialize)]
+struct PlacementCoverage {
+    assessment_id: String,
+    goal_id: String,
+    /// `planned` | `no-runner` | `no-content` | `modality-unsupported`.
+    status: &'static str,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    reason: Option<String>,
+}
+
 /// K-63-follow: a placement plan needs every declared unit, and the reference
 /// pack declares 774 of them across 774 separate YAML files. Parsing them on
 /// each click cost ~420 ms to open the Placement tab — on content that cannot
@@ -7155,7 +7205,18 @@ fn pack_assessments(root: &Path) -> Result<std::sync::Arc<Vec<PackAssessment>>, 
     Ok(assessments)
 }
 
-fn placement_plan_at(data: &Path, profile_id: &str) -> Result<Vec<PlacementItem>, String> {
+/// U05: one pass over the active pack's declared assessments that both plans
+/// the questions and explains the ones it could not plan. A pair is emitted
+/// only after it survives the two gates the submit path itself enforces: the
+/// ADR-0036 runner table `activity_runner` for the declaring activity, and
+/// `practice_build` — the very task builder `placement_submit` runs (through
+/// `practice_submit_inner`). A pair that cannot build is never offered, so
+/// every planned question is presentable; the reason the others have no
+/// question is reported beside them by `placement_coverage_at`.
+fn placement_scan_at(
+    data: &Path,
+    profile_id: &str,
+) -> Result<(Vec<PlacementItem>, Vec<PlacementCoverage>), String> {
     let active = packs::active_pack(data, profile_id)?;
     let pack_id = active.first().ok_or("no active language pack")?;
     let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
@@ -7164,14 +7225,9 @@ fn placement_plan_at(data: &Path, profile_id: &str) -> Result<Vec<PlacementItem>
     let assessments = pack_assessments(&root)?;
     let units = pack_units(&root);
     let mut items = Vec::new();
+    let mut coverage = Vec::new();
     let mut used: std::collections::HashSet<String> = std::collections::HashSet::new();
     for a in assessments.iter() {
-        let runner = match a.modality.as_str() {
-            "reading" => "recall-meaning",
-            "listening" => "comprehension-listening",
-            // No low-stakes auto-runner for these constructs yet.
-            _ => continue,
-        };
         // R13: an assessment id may only be recorded against a task that runs
         // the construct it names. A rubric that exists but has no runnable
         // activity at its own modality abstains — substituting, say, a reading
@@ -7179,30 +7235,144 @@ fn placement_plan_at(data: &Path, profile_id: &str) -> Result<Vec<PlacementItem>
         // a construct nobody exercised. Scanning every unit for the goal and
         // skipping already-planned content also keeps two diagnostics from
         // becoming the same question twice.
-        let content = units
+        let runner: Option<&'static str> = match a.modality.as_str() {
+            "reading" => Some("recall-meaning"),
+            "listening" => Some("comprehension-listening"),
+            // No low-stakes auto-runner for these constructs yet.
+            _ => None,
+        };
+        let goal_units: Vec<&PackUnit> = units.iter().filter(|u| u.goal_id == a.goal_id).collect();
+        let declared: Vec<&PackUnitActivity> = goal_units
             .iter()
-            .filter(|u| u.goal_id == a.goal_id)
             .flat_map(|u| u.activities.iter())
             .filter(|ac| ac.modality == a.modality)
+            .collect();
+        let runnable: Vec<&PackUnitActivity> = declared
+            .iter()
+            .filter(|ac| activity_runner(&ac.activity_type, &ac.modality) == runner)
+            .copied()
+            .collect();
+        let candidates: Vec<&String> = runnable
+            .iter()
             .flat_map(|ac| ac.content_refs.iter())
-            .find(|c| !used.contains(*c));
-        let Some(content) = content else {
+            .collect();
+        let mut chosen: Option<String> = None;
+        let mut blocker: Option<String> = None;
+        if let Some(runner) = runner {
+            for c in candidates.iter().copied().filter(|c| !used.contains(*c)) {
+                // Build-verify through the builder the submit flow calls: a
+                // pair the app cannot present is not a question, however
+                // cleanly the pack declares it. The first pair that builds is
+                // the question; a failure records the concrete blocker.
+                match practice_build(data, profile_id, c, runner, false) {
+                    Ok(_) => {
+                        chosen = Some(c.clone());
+                        break;
+                    }
+                    Err(e) => blocker = Some(format!("{c}:{e}")),
+                }
+            }
+        }
+        if let Some(content_id) = chosen {
+            used.insert(content_id.clone());
+            items.push(PlacementItem {
+                assessment_id: a.id.clone(),
+                goal_id: a.goal_id.clone(),
+                content_id,
+                modality: runner.unwrap_or_default().to_string(),
+            });
+            coverage.push(PlacementCoverage {
+                assessment_id: a.id.clone(),
+                goal_id: a.goal_id.clone(),
+                status: "planned",
+                reason: None,
+            });
             continue;
+        }
+        // Nothing buildable for this rubric: name the concrete blocker, in the
+        // order the pack declares it, so the surface can explain the abstention
+        // instead of quietly shortening the test.
+        let (status, reason): (&'static str, String) = if runner.is_none() {
+            (
+                "no-runner",
+                format!("no-auto-runner-for-assessment-modality:{}", a.modality),
+            )
+        } else if goal_units.is_empty() {
+            ("no-content", format!("no-unit-declares-goal:{}", a.goal_id))
+        } else if declared.is_empty() {
+            (
+                "no-content",
+                format!("no-activity-at-modality:{}:{}", a.modality, a.goal_id),
+            )
+        } else if candidates.is_empty() {
+            if runnable.is_empty() {
+                // The goal's stages at this modality are ones the runner table
+                // has no practice runner for at all (a bare `match`, a
+                // `story-reading`), so nothing here can ever be a question.
+                let mut types: Vec<&str> = declared
+                    .iter()
+                    .map(|ac| ac.activity_type.as_str())
+                    .collect();
+                types.sort_unstable();
+                types.dedup();
+                (
+                    "modality-unsupported",
+                    format!(
+                        "no-runner-for-activity-type:{}+{}",
+                        types.join(","),
+                        a.modality
+                    ),
+                )
+            } else {
+                (
+                    "no-content",
+                    format!("no-content-refs-at-modality:{}", a.modality),
+                )
+            }
+        } else if blocker.is_none() {
+            (
+                "no-content",
+                format!("every-content-ref-already-planned:{}", candidates.len()),
+            )
+        } else {
+            (
+                "modality-unsupported",
+                format!(
+                    "builder-refused:{}:{}",
+                    runner.unwrap_or_default(),
+                    blocker.unwrap_or_default()
+                ),
+            )
         };
-        used.insert(content.clone());
-        items.push(PlacementItem {
+        coverage.push(PlacementCoverage {
             assessment_id: a.id.clone(),
             goal_id: a.goal_id.clone(),
-            content_id: content.clone(),
-            modality: runner.to_string(),
+            status,
+            reason: Some(reason),
         });
     }
-    Ok(items)
+    Ok((items, coverage))
+}
+
+fn placement_plan_at(data: &Path, profile_id: &str) -> Result<Vec<PlacementItem>, String> {
+    Ok(placement_scan_at(data, profile_id)?.0)
+}
+
+fn placement_coverage_at(data: &Path, profile_id: &str) -> Result<Vec<PlacementCoverage>, String> {
+    Ok(placement_scan_at(data, profile_id)?.1)
 }
 
 #[tauri::command]
 fn placement_plan(profile_id: String) -> Result<Vec<PlacementItem>, String> {
     placement_plan_at(&data_dir(), &profile_id)
+}
+
+/// U05: the honest counterpart of `placement_plan`. One entry per assessment
+/// the active pack declares: `planned`, or the machine-readable reason no
+/// runnable question exists for it.
+#[tauri::command]
+fn placement_coverage(profile_id: String) -> Result<Vec<PlacementCoverage>, String> {
+    placement_coverage_at(&data_dir(), &profile_id)
 }
 
 #[tauri::command]
@@ -7789,6 +7959,7 @@ pub fn run() {
             practice_submit,
             lesson_plan,
             placement_plan,
+            placement_coverage,
             placement_submit,
             kanji_list,
             kanji_available,
@@ -7810,6 +7981,7 @@ pub fn run() {
             mine_list,
             mine_remove,
             mine_due,
+            mine_new,
             mine_grade,
         ])
         .run(tauri::generate_context!())
@@ -8240,29 +8412,29 @@ activities:
         );
     }
 
-    /// R13: a diagnostic id may only be recorded against a task that runs the
-    /// construct it names. A rubric with no runnable activity at its own
-    /// modality abstains instead of borrowing an unrelated item, and a second
-    /// assessment over one content record never becomes the same question
-    /// twice.
-    #[test]
-    fn placement_never_substitutes_or_repeats_a_diagnostic_item() {
+    /// The fixture assessment table the R13/U05 placement tests share: two
+    /// reading rubrics over the one greetings record, a listening rubric for a
+    /// goal that declares no listening activity, and a reading rubric over
+    /// kana symbols.
+    const JA_DEMO_PLACEMENT_ASSESSMENTS: &str = concat!(
+        "{\"id\":\"ja.assess.demo.greet\",\"goal_id\":\"ja.goal.demo.greet\",\"kind\":\"recall\",\"modality\":\"reading\",\"rubric\":{\"scale\":\"observed\",\"criteria\":[\"phrase matched to situation\"]},\"review_status\":\"draft\"}\n",
+        "{\"id\":\"ja.assess.demo.greet-again\",\"goal_id\":\"ja.goal.demo.greet\",\"kind\":\"recall\",\"modality\":\"reading\",\"rubric\":{\"scale\":\"observed\",\"criteria\":[\"phrase matched again\"]},\"review_status\":\"draft\"}\n",
+        "{\"id\":\"ja.assess.demo.kana-listen\",\"goal_id\":\"ja.goal.demo.kana-hiragana\",\"kind\":\"recall\",\"modality\":\"listening\",\"rubric\":{\"scale\":\"observed\",\"criteria\":[\"symbol heard\"]},\"review_status\":\"draft\"}\n",
+        "{\"id\":\"ja.assess.demo.kana-recognize\",\"goal_id\":\"ja.goal.demo.kana-hiragana\",\"kind\":\"recall\",\"modality\":\"reading\",\"rubric\":{\"scale\":\"observed\",\"criteria\":[\"symbol mapped to reading\"]},\"review_status\":\"review-needed\"}\n",
+    );
+
+    /// The ja-demo fixture with a caller-supplied assessment table, installed
+    /// and active on a fresh profile — the shape every placement test needs.
+    fn install_ja_demo_with_assessments(data: &Path, assessments: &str) -> ProfileInfo {
         let staged = tempfile::tempdir().unwrap();
         let src =
             PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../tests/fixtures/packs/ja-demo");
         copy_tree(&src, &staged.path().join("ja-demo"));
         std::fs::write(
             staged.path().join("ja-demo/assessments/definitions.jsonl"),
-            concat!(
-                "{\"id\":\"ja.assess.demo.greet\",\"goal_id\":\"ja.goal.demo.greet\",\"kind\":\"recall\",\"modality\":\"reading\",\"rubric\":{\"scale\":\"observed\",\"criteria\":[\"phrase matched to situation\"]},\"review_status\":\"draft\"}\n",
-                "{\"id\":\"ja.assess.demo.greet-again\",\"goal_id\":\"ja.goal.demo.greet\",\"kind\":\"recall\",\"modality\":\"reading\",\"rubric\":{\"scale\":\"observed\",\"criteria\":[\"phrase matched again\"]},\"review_status\":\"draft\"}\n",
-                "{\"id\":\"ja.assess.demo.kana-listen\",\"goal_id\":\"ja.goal.demo.kana-hiragana\",\"kind\":\"recall\",\"modality\":\"listening\",\"rubric\":{\"scale\":\"observed\",\"criteria\":[\"symbol heard\"]},\"review_status\":\"draft\"}\n",
-                "{\"id\":\"ja.assess.demo.kana-recognize\",\"goal_id\":\"ja.goal.demo.kana-hiragana\",\"kind\":\"recall\",\"modality\":\"reading\",\"rubric\":{\"scale\":\"observed\",\"criteria\":[\"symbol mapped to reading\"]},\"review_status\":\"review-needed\"}\n",
-            ),
+            assessments,
         )
         .unwrap();
-        let tmp = tempfile::tempdir().unwrap();
-        let data = tmp.path();
         let (bytes, _sha) = lts_langpack::archive::build(&staged.path().join("ja-demo")).unwrap();
         let outcome = lts_langpack::archive::install(&bytes, &data.join("packs")).unwrap();
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
@@ -8278,6 +8450,20 @@ activities:
         store
             .set_active_pack(&p.id, &outcome.pack_id, &outcome.version)
             .unwrap();
+        p
+    }
+
+    /// R13: a diagnostic id may only be recorded against a task that runs the
+    /// construct it names. A rubric with no runnable activity at its own
+    /// modality abstains instead of borrowing an unrelated item, and a second
+    /// assessment over one content record never becomes the same question
+    /// twice. U05 tightened this: the kana rubric used to borrow a printed
+    /// symbol its runner cannot serve, so its abstention is now visible too.
+    #[test]
+    fn placement_never_substitutes_or_repeats_a_diagnostic_item() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let p = install_ja_demo_with_assessments(data, JA_DEMO_PLACEMENT_ASSESSMENTS);
         let plan = placement_plan_at(data, &p.id).unwrap();
         let planned: Vec<(&str, &str, &str)> = plan
             .iter()
@@ -8291,22 +8477,274 @@ activities:
             .collect();
         assert_eq!(
             planned,
-            vec![
-                (
-                    "ja.assess.demo.greet",
-                    "ja.lex.demo.konnichiwa",
-                    "recall-meaning"
-                ),
-                (
-                    "ja.assess.demo.kana-recognize",
-                    "ja.orth.hira.a",
-                    "recall-meaning"
-                ),
-            ],
+            vec![(
+                "ja.assess.demo.greet",
+                "ja.lex.demo.konnichiwa",
+                "recall-meaning"
+            )],
             "only assessments with a runnable task of their own declared construct are \
-             planned: a second reading rubric over the same single record and a listening \
-             rubric whose goal declares no listening activity both abstain, and no two \
-             questions are the same item"
+             planned: a second reading rubric over the same single record, a listening \
+             rubric whose goal declares no listening activity, and a reading rubric whose \
+             goal ships only printed symbols no recall runner serves all abstain, and no \
+             two questions are the same item"
+        );
+    }
+
+    /// U05: every emitted question is a question the submit path can actually
+    /// build. The check is `practice_build` itself — the task builder
+    /// `placement_submit` runs — never the plan's own text.
+    #[test]
+    fn every_planned_placement_question_survives_the_submit_task_builder() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let p = install_ja_demo_with_assessments(data, JA_DEMO_PLACEMENT_ASSESSMENTS);
+        let plan = placement_plan_at(data, &p.id).unwrap();
+        assert!(
+            !plan.is_empty(),
+            "the runnable rubric still plans a question"
+        );
+        for item in &plan {
+            practice_build(data, &p.id, &item.content_id, &item.modality, false).unwrap_or_else(
+                |e| {
+                    panic!(
+                        "planned {} over {} at {} must build: {e}",
+                        item.assessment_id, item.content_id, item.modality
+                    )
+                },
+            );
+        }
+    }
+
+    /// U05: an abstaining rubric is reported with the concrete blocker, so the
+    /// Placement surface can explain a shorter test instead of hiding it. One
+    /// row per declared assessment, in declared order.
+    #[test]
+    fn placement_coverage_names_why_a_rubric_has_no_question() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let p = install_ja_demo_with_assessments(data, JA_DEMO_PLACEMENT_ASSESSMENTS);
+        let cov = placement_coverage_at(data, &p.id).unwrap();
+        let ids: Vec<&str> = cov.iter().map(|c| c.assessment_id.as_str()).collect();
+        assert_eq!(
+            ids,
+            vec![
+                "ja.assess.demo.greet",
+                "ja.assess.demo.greet-again",
+                "ja.assess.demo.kana-listen",
+                "ja.assess.demo.kana-recognize",
+            ],
+            "coverage reports every declared assessment, planned or not"
+        );
+        assert_eq!(
+            (cov[0].status, cov[0].reason.as_deref()),
+            ("planned", None),
+            "the runnable rubric reports planned, with no blocker"
+        );
+        assert_eq!(
+            (cov[1].status, cov[1].reason.as_deref()),
+            ("no-content", Some("every-content-ref-already-planned:1")),
+            "the second reading rubric has nothing left that is not already a question"
+        );
+        assert_eq!(
+            (cov[2].status, cov[2].reason.as_deref()),
+            (
+                "no-content",
+                Some("no-activity-at-modality:listening:ja.goal.demo.kana-hiragana")
+            ),
+            "a listening rubric over a goal with no listening stage abstains"
+        );
+        assert_eq!(cov[3].status, "modality-unsupported");
+        let reason = cov[3].reason.as_deref().unwrap();
+        assert!(
+            reason.starts_with("builder-refused:recall-meaning:ja.orth.hira."),
+            "the reason names the runner and the content it refused: {reason}"
+        );
+        assert!(
+            reason.contains("unknown practice target"),
+            "the reason carries the builder's own blocker: {reason}"
+        );
+        assert_eq!(
+            cov.iter().filter(|c| c.status == "planned").count(),
+            placement_plan_at(data, &p.id).unwrap().len(),
+            "planned rows and emitted items are the same set"
+        );
+    }
+
+    /// U05: a construct with no placement auto-runner (writing, speaking) is
+    /// both excluded from the items and reported as `no-runner`, while the
+    /// constructs the runner table does serve stay planned.
+    #[test]
+    fn placement_coverage_reports_a_modality_with_no_auto_runner() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        let root = data
+            .join("packs")
+            .join("org.openlanguage.ru-fixture")
+            .join("0.1.0");
+        std::fs::create_dir_all(root.join("assessments")).unwrap();
+        std::fs::write(
+            root.join("assessments/definitions.jsonl"),
+            concat!(
+                "{\"id\":\"ru.assess.fixture.greet-listen\",\"goal_id\":\"ru.goal.fixture.greet\",\"kind\":\"recall\",\"modality\":\"listening\",\"rubric\":{\"scale\":\"observed\",\"criteria\":[\"heard meaning\"]},\"review_status\":\"draft\"}\n",
+                "{\"id\":\"ru.assess.fixture.greet-read\",\"goal_id\":\"ru.goal.fixture.greet\",\"kind\":\"recall\",\"modality\":\"reading\",\"rubric\":{\"scale\":\"observed\",\"criteria\":[\"seen meaning\"]},\"review_status\":\"draft\"}\n",
+                "{\"id\":\"ru.assess.fixture.greet-write\",\"goal_id\":\"ru.goal.fixture.greet\",\"kind\":\"production\",\"modality\":\"writing\",\"rubric\":{\"scale\":\"observed\",\"criteria\":[\"written form\"]},\"review_status\":\"draft\"}\n",
+                "{\"id\":\"ru.assess.fixture.greet-speak\",\"goal_id\":\"ru.goal.fixture.greet\",\"kind\":\"production\",\"modality\":\"speaking\",\"rubric\":{\"scale\":\"observed\",\"criteria\":[\"said form\"]},\"review_status\":\"draft\"}\n",
+            ),
+        )
+        .unwrap();
+        let plan = placement_plan_at(data, &p.id).unwrap();
+        let planned: Vec<&str> = plan.iter().map(|i| i.assessment_id.as_str()).collect();
+        assert_eq!(
+            planned,
+            vec!["ru.assess.fixture.greet-listen"],
+            "only the listening rubric gets a question: writing and speaking have no \
+             low-stakes auto-runner, and the goal's reading stages are an encounter and a \
+             match no recall runner serves"
+        );
+        let cov = placement_coverage_at(data, &p.id).unwrap();
+        let row = |id: &str| -> (&'static str, String) {
+            let c = cov
+                .iter()
+                .find(|c| c.assessment_id == id)
+                .unwrap_or_else(|| panic!("{id} is reported"));
+            (c.status, c.reason.clone().unwrap_or_default())
+        };
+        assert_eq!(
+            (
+                row("ru.assess.fixture.greet-listen").0,
+                row("ru.assess.fixture.greet-listen").1.as_str()
+            ),
+            ("planned", ""),
+            "listening over a pack sentence with declared audio is a question"
+        );
+        for modality in ["writing", "speaking"] {
+            let id = format!(
+                "ru.assess.fixture.greet-{}",
+                if modality == "writing" {
+                    "write"
+                } else {
+                    "speak"
+                }
+            );
+            assert_eq!(
+                row(&id),
+                (
+                    "no-runner",
+                    format!("no-auto-runner-for-assessment-modality:{modality}")
+                ),
+                "the modality with no auto-runner is named, not silently dropped"
+            );
+        }
+        assert_eq!(
+            row("ru.assess.fixture.greet-read"),
+            (
+                "modality-unsupported",
+                "no-runner-for-activity-type:encounter-read,match+reading".into()
+            ),
+            "the goal declares reading stages, but the runner table has no practice runner \
+             for the types it wrote"
+        );
+    }
+
+    /// U05 acceptance, on the pinned Russian reference pack: the FIRST planned
+    /// placement question is a question `practice_build` accepts. Before U05
+    /// the plan opened with the printed-Cyrillic recognition rubric, whose
+    /// recall runner has no servable content, so placement died on its first
+    /// card. The abstention is now reported instead of emitted.
+    #[test]
+    fn the_russian_reference_packs_first_placement_question_builds() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let pack = "org.openlanguage.ru-ru.reference";
+        // Staged as an installed tree, not an archive. `archive::build` refuses a
+        // pack whose gitignored generated `media/*.wav` bytes are absent (K-90), and
+        // that audio is regenerated per machine by scripts/generate-pack-audio.py.
+        // Placement reads the installed version root — `current` plus the tree — and
+        // the committed `media/manifest.jsonl` rows, never the archive, so the copy
+        // is the state the app actually sees.
+        let src = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../languages/ru-RU");
+        let version = std::fs::read_to_string(src.join("manifest.yaml"))
+            .unwrap()
+            .lines()
+            .find_map(|l| l.strip_prefix("version: "))
+            .unwrap_or_default()
+            .trim_matches('"')
+            .to_string();
+        assert!(!version.is_empty(), "the pinned pack declares a version");
+        copy_tree(&src, &data.join("packs").join(pack).join(&version));
+        std::fs::write(
+            data.join("packs").join(pack).join("current"),
+            version.as_bytes(),
+        )
+        .unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        store
+            .record_installation(&lts_storage::PackInstallation {
+                pack_id: pack.into(),
+                version: version.clone(),
+                installed_at: rfc3339_utc(now_secs()),
+                trust_state: "community".into(),
+            })
+            .unwrap();
+        let p = create_local_profile(data, "Mira").unwrap();
+        store.set_active_pack(&p.id, pack, &version).unwrap();
+
+        let plan = placement_plan_at(data, &p.id).unwrap();
+        assert!(
+            !plan.is_empty(),
+            "the reference pack has assessable constructs"
+        );
+        let first = &plan[0];
+        assert_eq!(
+            first.assessment_id, "ru.assess.on-ramp.greetings-recognition",
+            "the plan no longer opens with the printed-Cyrillic rubric: its goal's only \
+             reading stages are encounters and a match, so the recall runner has nothing \
+             servable and the rubric abstains (reported, not emitted)"
+        );
+        assert_eq!(
+            first.modality, "recall-meaning",
+            "the pack's first runnable rubric is a reading one"
+        );
+        practice_build(data, &p.id, &first.content_id, &first.modality, false).unwrap_or_else(
+            |e| {
+                panic!(
+                    "the first planned question ({} at {}) must build: {e}",
+                    first.content_id, first.modality
+                )
+            },
+        );
+        for item in &plan {
+            assert!(
+                practice_build(data, &p.id, &item.content_id, &item.modality, false).is_ok(),
+                "every planned ru question must build: {} over {}",
+                item.assessment_id,
+                item.content_id
+            );
+        }
+        // The construct the pack opens its placement with — printed Cyrillic
+        // recognition — is now an honest abstention instead of a dead card.
+        let cov = placement_coverage_at(data, &p.id).unwrap();
+        assert_eq!(
+            cov.iter().filter(|c| c.status == "planned").count(),
+            plan.len(),
+            "coverage's planned rows are exactly the emitted items"
+        );
+        let cyrillic = cov
+            .iter()
+            .find(|c| c.assessment_id == "ru.assess.on-ramp.cyrillic-recognition")
+            .expect("the rubric the pack declares first is still reported");
+        assert_eq!(cyrillic.status, "modality-unsupported");
+        let reason = cyrillic.reason.as_deref().unwrap();
+        assert!(
+            reason.starts_with("builder-refused:recall-meaning:ru.orth.cyrillic.")
+                && reason.contains("unknown practice target"),
+            "the blocker names the printed symbol no recall runner serves: {reason}"
+        );
+        assert!(
+            cov.iter().any(|c| c.status == "no-runner"
+                && c.reason.as_deref() == Some("no-auto-runner-for-assessment-modality:writing")),
+            "the pack's production rubrics abstain visibly"
         );
     }
     /// Owner defect 2026-10-12: the wizard's pack list was bundled-only,
@@ -9849,11 +10287,11 @@ activities:
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
         let t = dictation_target_at(data, "org.openlanguage.ja-jp.reference", 0).unwrap();
-        assert!(!t.text.is_empty() && !t.reading.is_empty());
+        assert!(!t.text.is_empty() && t.reading.is_some());
         // Preferred candidates are kana-only: text and reading normalize equal.
         assert_eq!(
             normalize_for_match(&t.text),
-            normalize_for_match(&t.reading)
+            normalize_for_match(&t.reading.unwrap())
         );
         // Rotation is deterministic and wraps without panic.
         let a0 = dictation_target_at(data, "org.openlanguage.ja-jp.reference", 0).unwrap();
@@ -9865,6 +10303,23 @@ activities:
             !b.id.is_empty() && !big.id.is_empty(),
             "large offset wraps to a valid target"
         );
+    }
+
+    #[test]
+    fn dictation_target_uses_the_surface_when_a_pack_has_no_readings() {
+        // U04: Russian rows carry no reading fields at all. Dictation in a
+        // Cyrillic pack must still have targets — the surface IS the
+        // comparison string, and the absent cue travels as null rather than
+        // an empty box or a "no usable sentences" refusal.
+        let tmp = tempfile::TempDir::new().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ru-ru.reference").unwrap();
+        let t = dictation_target_at(data, "org.openlanguage.ru-ru.reference", 0).unwrap();
+        assert!(!t.text.is_empty());
+        assert!(t.reading.is_none());
+        let b = dictation_target_at(data, "org.openlanguage.ru-ru.reference", 1).unwrap();
+        let wrap = dictation_target_at(data, "org.openlanguage.ru-ru.reference", 9999).unwrap();
+        assert!(!b.text.is_empty() && !wrap.text.is_empty(), "rotation wraps");
     }
 
     #[test]
@@ -12568,12 +13023,28 @@ activities:
             "a mined word with no schedule is not review-due"
         );
 
+        // U03: the sanctioned entry for a never-scheduled word is the
+        // engine's `mine_new` — never the due list, and never a client-side
+        // guess from a null `due_at`.
+        let fresh = mine_new_at(data, &p.id).unwrap();
+        assert_eq!(fresh.len(), 1, "the saved word is waiting as new");
+        assert_eq!(fresh[0].id, item.id);
+        assert!(
+            fresh[0].due_at.is_none(),
+            "a new row never carries a false due label"
+        );
+
         // Self-graded review schedules the mined item only.
         let due_at = mine_grade_at(data, &p.id, &item.id, false).unwrap();
         let listed = mine_list_at(data, &p.id).unwrap();
         assert_eq!(listed.len(), 1);
         assert!(listed[0].due_at.is_some());
         assert_eq!(listed[0].due_at.as_deref(), Some(due_at.as_str()));
+
+        assert!(
+            mine_new_at(data, &p.id).unwrap().is_empty(),
+            "the first grade gave the word a schedule — it is no longer new"
+        );
 
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
         // NEVER mastery evidence, and no pack-content scheduler rows.
@@ -13284,10 +13755,17 @@ activities:
         let p = create_local_profile(data, "Hunter").unwrap();
         finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
 
-        // One low-stakes task per pack assessment, built from the
-        // assessment's goal unit content.
+        // One low-stakes task per pack assessment that has a runnable
+        // question at its own construct, built from the assessment's goal
+        // unit content and build-verified before it is offered (U05).
         let plan = placement_plan_at(data, &p.id).unwrap();
-        assert_eq!(plan.len(), 2, "both ja-demo assessments plan tasks");
+        assert_eq!(
+            plan.len(),
+            1,
+            "only the greetings rubric plans a task: the kana rubric's goal ships printed \
+             symbols no recall-meaning runner serves, so U05 abstains instead of emitting a \
+             card the app cannot build"
+        );
         let greet = plan
             .iter()
             .find(|i| i.assessment_id == "ja.assess.demo.greet")
