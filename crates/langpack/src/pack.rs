@@ -1110,8 +1110,8 @@ fn array<'a>(value: &'a Value, field: &str) -> Vec<(usize, &'a Value)> {
 
 /// U07 (review finding): scenario support buttons must promise help AND
 /// deliver it, and internal intent tokens must never be learner-facing.
-/// For a 0.2 scenario document: every ladder rung with `support_level`
-/// > 0 needs a level-matching `support` payload on EVERY node; every
+/// For a 0.2 scenario document: every ladder rung whose
+/// `support_level` is above 0 needs a level-matching `support` payload on EVERY node; every
 /// `expected_actions` token (node-level or in a recovery branch) needs
 /// a learner-facing entry in the node's `action_labels` once the pack
 /// is in the labelled regime (the node declares `action_labels` or the
