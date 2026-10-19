@@ -182,6 +182,71 @@ const RU_PASTEVENTS_LEXICON = [
     gloss: "to work",
   },
 ];
+
+/** The RU lexicon family the placement journey runs against, verbatim from
+ * `languages/ru-RU/lexicon/greetings.jsonl` (first four rows). A third
+ * sibling family: its glosses pool only among themselves. */
+const RU_GREETINGS_LEXICON = [
+  {
+    id: "ru.lex.greetings.zdravstvuyte",
+    surface: "здравствуйте",
+    reading: "здра́вствуйте",
+    gloss: "hello (polite greeting)",
+  },
+  {
+    id: "ru.lex.greetings.dobroe-utro",
+    surface: "доброе утро",
+    reading: "до́брое у́тро",
+    gloss: "good morning",
+  },
+  {
+    id: "ru.lex.greetings.dobryy-den",
+    surface: "добрый день",
+    reading: "до́брый день",
+    gloss: "good afternoon; good day",
+  },
+  {
+    id: "ru.lex.greetings.dobryy-vecher",
+    surface: "добрый вечер",
+    reading: "до́брый ве́чер",
+    gloss: "good evening",
+  },
+];
+
+/** Placement for the RU pack, mirrored from the engine's measured answers on
+ * the pinned reference pack — lib.rs
+ * `the_russian_reference_packs_first_placement_question_builds` pins the
+ * eight-pair plan and the abstention reasons there. This fixture mirrors
+ * only the pairs it carries content for: the FIRST planned pair, plus the
+ * two abstentions that test renders must show, with the engine's own
+ * machine-readable reason strings. */
+const RU_PLACEMENT_PLAN = [
+  {
+    assessment_id: "ru.assess.on-ramp.greetings-recognition",
+    goal_id: "ru.goal.on-ramp.greetings",
+    content_id: "ru.lex.greetings.zdravstvuyte",
+    modality: "recall-meaning",
+  },
+];
+const RU_PLACEMENT_COVERAGE = [
+  {
+    assessment_id: "ru.assess.on-ramp.greetings-recognition",
+    goal_id: "ru.goal.on-ramp.greetings",
+    status: "planned",
+  },
+  {
+    assessment_id: "ru.assess.on-ramp.cyrillic-recognition",
+    goal_id: "ru.goal.on-ramp.cyrillic",
+    status: "modality-unsupported",
+    reason: "builder-refused:recall-meaning:ru.orth.cyrillic.a-upper:unknown practice target",
+  },
+  {
+    assessment_id: "ru.assess.on-ramp.greetings-writing",
+    goal_id: "ru.goal.on-ramp.greetings",
+    status: "no-runner",
+    reason: "no-auto-runner-for-assessment-modality:writing",
+  },
+];
 /** The grammar concepts the fixtures mirror, verbatim (name and
  * definition) from `languages/ru-RU/grammar/concepts.jsonl`: unit 818's
  * two, then the past-events unit's three (rows 26, 27 and 166). */
@@ -524,6 +589,12 @@ const PACKS: Record<string, Pack> = {
         // row answers for itself.
         choices: RU_PASTEVENTS_LEXICON.map((x) => x.gloss),
         answer: RU_PASTEVENTS_LEXICON.indexOf(entry),
+      })),
+      ...RU_GREETINGS_LEXICON.map((entry) => ({
+        ...entry,
+        // Placement questions pool over the greetings family's own glosses.
+        choices: RU_GREETINGS_LEXICON.map((x) => x.gloss),
+        answer: RU_GREETINGS_LEXICON.indexOf(entry),
       })),
     ],
     schedule: [
@@ -899,6 +970,21 @@ export class LearnerEngine {
   /** callbackId kept per event-listener id, so unlisten really removes it. */
   private readonly listeners = new Map<number, number>();
   private nextProfile = 1;
+  /** U03: the mined partition, mirroring lib.rs — rows carry the exact view
+   * fields, and `mine_grade` writes the schedule's due stamp. */
+  private mineRows = new Map<
+    string,
+    {
+      id: string;
+      surface: string;
+      reading: string | null;
+      gloss: string | null;
+      source_citation: string;
+      created_at: string;
+      due_at: string | null;
+    }[]
+  >();
+  private nextMine = 1;
   private nextCallback = 1;
   private nextListener = 1;
   private readonly failOnceList: string[] = [];
@@ -1266,6 +1352,64 @@ export class LearnerEngine {
         p.schedule = this.packById(packId).schedule.map((s) => ({ ...s }));
         return null;
       }
+      case "mine_add": {
+        const p = this.profile(args.profileId);
+        const rows = this.mineRows.get(p.id) ?? [];
+        const surface = String(args.surface).trim();
+        const kept = rows.find((r) => r.surface === surface);
+        if (kept) {
+          // K-61: a repeat mine keeps the original row and its history.
+          return { id: kept.id, was_new: false };
+        }
+        const row = {
+          id: `mine-${this.nextMine++}`,
+          surface,
+          reading: (args.reading as string | null) ?? null,
+          gloss: (args.gloss as string | null) ?? null,
+          source_citation: String(args.sourceCitation),
+          created_at: new Date().toISOString(),
+          due_at: null,
+        };
+        this.mineRows.set(p.id, [...rows, row]);
+        return { id: row.id, was_new: true };
+      }
+      case "mine_list": {
+        const p = this.profile(args.profileId);
+        return (this.mineRows.get(p.id) ?? []).map((r) => ({ ...r }));
+      }
+      case "mine_new": {
+        const p = this.profile(args.profileId);
+        return (this.mineRows.get(p.id) ?? [])
+          .filter((r) => r.due_at === null)
+          .map((r) => ({ ...r }));
+      }
+      case "mine_due": {
+        const p = this.profile(args.profileId);
+        const now = new Date().toISOString();
+        return (this.mineRows.get(p.id) ?? [])
+          .filter((r) => r.due_at !== null && r.due_at <= now)
+          .map((r) => ({ ...r }));
+      }
+      case "mine_grade": {
+        const p = this.profile(args.profileId);
+        const row = (this.mineRows.get(p.id) ?? []).find((r) => r.id === String(args.itemId));
+        if (!row) throw new Error("not a mined item id");
+        // lib.rs seeds the first schedule on the very first grade and
+        // returns the new due stamp. The fake schedules within the
+        // journey's reach (~150 ms) instead of days ahead — the UI must
+        // still never read due-ness from anything but `mine_due`.
+        row.due_at = new Date(Date.now() + (args.again ? 60 : 150)).toISOString();
+        return row.due_at;
+      }
+      case "mine_remove": {
+        const p = this.profile(args.profileId);
+        const rows = this.mineRows.get(p.id) ?? [];
+        this.mineRows.set(
+          p.id,
+          rows.filter((r) => r.id !== String(args.itemId)),
+        );
+        return true;
+      }
       case "kanji_available":
         return this.activePack(this.profile(args.profileId)).kanji;
       case "kanji_list":
@@ -1462,6 +1606,26 @@ export class LearnerEngine {
         const correct = w?.answer === index;
         p.events += 1;
         return { correct, correct_choice: w ? w.choices[w.answer] : "" };
+      }
+      case "placement_plan": {
+        const pack = this.activePack(this.profile(args.profileId));
+        return pack.id === RU ? RU_PLACEMENT_PLAN : [];
+      }
+      case "placement_coverage": {
+        // U05: every declared rubric, planned or not, with the engine's own
+        // reason strings — the frontend renders these, never a paraphrase.
+        const pack = this.activePack(this.profile(args.profileId));
+        return pack.id === RU ? RU_PLACEMENT_COVERAGE : [];
+      }
+      case "placement_submit": {
+        const p = this.profile(args.profileId);
+        const pack = this.activePack(p);
+        // lib.rs `placement_submit`: diagnostic evidence tagged Diagnostic
+        // natively; the verdict shape matches `practice_submit`.
+        const w = this.word(pack, String(args.contentId));
+        const index = Number(args.choiceIndex ?? 0);
+        p.events += 1;
+        return { correct: w?.answer === index, correct_choice: w ? w.choices[w.answer] : "" };
       }
       case "progress_summary": {
         const p = this.profile(args.profileId);
