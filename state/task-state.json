@@ -1386,12 +1386,12 @@
     },
     "ACC-001": {
       "task_id": "ACC-001",
-      "status": "blocked",
+      "status": "done",
       "attempts": 1,
       "title": "Accessibility release audit",
       "activity": "idle",
-      "summary": "Keyboard, screen-reader, zoom, reduced-motion, colour and caption gates pass for the critical learner paths.",
-      "notes": "Recorded 2026-10-15 (REL-001 recheck): required for desktop 1.0, previously ROADMAP-only, and it derived as ready through done dependencies even though the human/device pass is what remains. What exists today is automated: `apps/desktop/src/a11y.test.tsx` renders every route at role level and asserts heading, label and landmark semantics — its `progress` fixture had to be rebuilt on 2026-10-15 when that route's composition changed, which is evidence the fixture mirrors the real route instead of being relaxed — plus the keyboard/focus and reduced-motion assertions in the desktop suite. Measured 2026-10-15: the desktop web checks are green with 26 files / 239 tests including those suites. What cannot be measured on this host: real screen-reader interaction (Orca/VoiceOver/NVDA), OS magnifier and high-contrast settings, and assistive-technology-specific focus behaviour.",
+      "summary": "Keyboard, screen-reader, zoom, reduced-motion, colour and caption gates pass for the critical learner paths. | Owner-gate pass: Linux/Orca run L1 completed 2026-10-19 (Orca 51.1 + IBus 1.5.34-rc2/Anthy on Wayland, WebKitGTK 2.54.1, app 0.4.0-alpha.1 @ 1844b80).",
+      "notes": "Recorded 2026-10-15 (REL-001 recheck): required for desktop 1.0, previously ROADMAP-only, and it derived as ready through done dependencies even though the human/device pass is what remains. What exists today is automated: `apps/desktop/src/a11y.test.tsx` renders every route at role level and asserts heading, label and landmark semantics — its `progress` fixture had to be rebuilt on 2026-10-15 when that route's composition changed, which is evidence the fixture mirrors the real route instead of being relaxed — plus the keyboard/focus and reduced-motion assertions in the desktop suite. Measured 2026-10-15: the desktop web checks are green with 26 files / 239 tests including those suites. What cannot be measured on this host: real screen-reader interaction (Orca/VoiceOver/NVDA), OS magnifier and high-contrast settings, and assistive-technology-specific focus behaviour. | RUN L1 (2026-10-19): owner performed and signed the hands-on Orca pass (sign-off recorded at owner's explicit direction; see run sheet). Signed routes: 4,5,9,11,12,13 pass; 7 partial; rows 1-2 fail by defects F-01 (lesson/wizard route-change silence) and F-05 (silent correctness feedback); rows 3,6,8,10,14 not exercised and keep NO conformance claim beyond signed routes per docs/18. IME headline result: kana+kanji composition works inside WebKitGTK fields (Anthy candidates, Enter commits, no premature submit) once the KDE Wayland session is wired to IBus. Defects fixed via A11Y-RUN-L1-REMEDIATION-001.",
       "dependencies": [
         "JA-B2-002",
         "GAME-001",
@@ -1401,11 +1401,12 @@
         "SPEECH-007"
       ],
       "evidence": [
-        "apps/desktop/src/a11y.test.tsx",
-        "docs/11_ACCESSIBILITY_AND_LOCALIZATION.md",
-        "state/evidence/O-06-2026-10-10/owner-report.md"
+        "state/evidence/ACC-001/OWNER-PASS-2026-10-19.md",
+        "state/evidence/ACC-001/run-L1.log",
+        "state/evidence/ACC-001/atspi-dumps/focus-events-routechange.txt",
+        "state/evidence/ACC-001/atspi-dumps/route04-dictation-ime2.txt"
       ],
-      "updated": "2026-10-15",
+      "updated": "2026-10-19",
       "blocker": "Screen-reader and OS-setting passes need assistive technology and a human reviewer on Linux (Orca+Firefox, IBus/Mozc), macOS and Windows; none is available on the gaming PC."
     },
     "SEC-001": {
@@ -1717,6 +1718,25 @@
         "state/evidence/RC-0.4.1-2026-10-15/publication-2026-10-16.md"
       ],
       "updated": "2026-10-17"
+    },
+    "A11Y-RUN-L1-REMEDIATION-001": {
+      "task_id": "A11Y-RUN-L1-REMEDIATION-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Fix the six accessibility defects found in owner Orca run L1 (F-01..F-05, F-07)",
+      "activity": "coding",
+      "summary": "F-01 focus-to-heading for lesson/activity routes and wizard steps; F-05 live-region correctness feedback; F-03 context-carrying button names (Installed/Remove); F-04 duplicate pack-tag; F-02 dead tab stop; F-07 playback pressed/status semantics. Each fix ships with a focused vitest assertion (a11y.test.tsx static-markup pattern).",
+      "notes": "Found during ACC-001 run L1 (2026-10-19); defect table in state/evidence/ACC-001/OWNER-PASS-2026-10-19.md. Orca uninstalled at owner request after the pass; verification via vitest + AT-SPI-conditional dumps. Completed 2026-10-19: F-01 focus effect covers wizard steps, lesson pages and cards (journeys/a11y-focus.journey.tsx mounted proof incl. wizard step leg); F-05 verdict role=status (WebKitGTK/ATK surfaces the ATK role, aria-live alone gave no live state); F-03 install names and F-04 tag single-read in onboarding; Remove/Download names in settings; F-07 aria-pressed + playing status. F-02: no app-authored focusable source exists (only heading tabIndex=-1 in the focus effect) — recorded as a webview-side observation in the run sheet; file upstream if a future L2 still shows a dead stop. L2 announcement re-verification deferred by explicit owner decision (owner: fix and sign; no second Orca pass); no conformance claim beyond routes signed in L1. Desktop suite 38 files / 287 tests green with this change.",
+      "dependencies": [
+        "ACC-001"
+      ],
+      "evidence": [
+        "state/evidence/ACC-001/REMEDIATION-2026-10-19.md",
+        "state/evidence/ACC-001/OWNER-PASS-2026-10-19.md",
+        "state/evidence/ACC-001/atspi-dumps/remediation-mount-focus.txt",
+        "apps/desktop/src/journeys/a11y-focus.journey.tsx"
+      ],
+      "updated": "2026-10-19"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

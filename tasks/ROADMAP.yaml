@@ -1507,6 +1507,7 @@ tasks:
   title: 1.0 release candidate full gate
   dependencies:
   - ACC-001
+  - A11Y-RUN-L1-REMEDIATION-001
   - SEC-001
   - PLAT-001
   - DATA-002
@@ -2100,6 +2101,33 @@ tasks:
   # The human screen-reader matrix stays with ACC-001 / owner gate O-03; this task
   # covers only what can be proven in the mounted DOM runtime.
   required_for_desktop_1_0: false
+- id: A11Y-RUN-L1-REMEDIATION-001
+  milestone: M10
+  priority: P0
+  title: >-
+    Fix the six accessibility defects found in the owner Linux/Orca run L1
+    (lesson/step route silence, silent correctness feedback, ambiguous
+    Installed/Remove button names, duplicate pack tag, dead tab stop,
+    playback state)
+  dependencies:
+  - ACC-001
+  - A11Y-FLOW-001
+  read_first:
+  - state/evidence/ACC-001/OWNER-PASS-2026-10-19.md
+  - apps/desktop/src/hub.tsx
+  - apps/desktop/src/lesson.tsx
+  - apps/desktop/src/onboarding.tsx
+  - apps/desktop/src/practice.tsx
+  - apps/desktop/src/a11y.test.tsx
+  acceptance:
+  - >-
+    Lesson pages, activity card transitions and onboarding step changes move focus to their own
+    heading (same pattern as App.tsx route focus), proven by a mounted interaction test.
+  - >-
+    Correctness feedback regions carry polite live semantics so the moment of correctness is
+    announced; playback controls expose pressed/status state; ambiguous 'Installed'/'Remove'
+    button names carry their target; each asserted by focused vitest per the a11y.test.tsx pattern.
+  required_for_desktop_1_0: true
 - id: RU-MODALITY-PRACTICE-001
   milestone: M10
   priority: P1
