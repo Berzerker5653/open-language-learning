@@ -8292,17 +8292,18 @@ mod tests {
         }
     }
 
-    /// Test shim (K-32 cutover): bundled ids go through the production
-    /// install path; the retired ja-demo fixture installs directly from
-    /// tests/fixtures/packs so engine tests keep their stable content ids.
+    /// Test shim (K-32 cutover): the retired ja-demo fixture installs
+    /// directly from tests/fixtures/packs so engine tests keep their
+    /// stable content ids. K-75: reference packs no longer route here —
+    /// tests that only need one installed call `install_reference_pack_
+    /// _fast` below, which reuses the process-cached archive bytes.
+    /// Every remaining ja-jp.reference caller deliberately asserts the
+    /// production install path (fresh build, stage reports, cold-install
+    /// warming) and stays honest at the full cost.
     fn install_bundled_pack(data: &Path, pack_id: &str) -> Result<PackCandidate, String> {
-        let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../..");
-        if bundled_packs_at(&repo_root, BUNDLED_PACKS.get().map(PathBuf::as_path))
-            .iter()
-            .any(|(c, _)| c.pack_id == pack_id)
-        {
-            return crate::install_bundled_pack_report(data, pack_id, None, |_| {});
-        }
+        // K-59: the dev candidate table already names ja-jp.reference
+        // (and eo-demo), so every id that reaches here is a retired
+        // fixture.
         let name = pack_id
             .strip_prefix("org.openlanguage.")
             .filter(|n| !n.is_empty() && *n != "ja-jp.reference")
@@ -8332,6 +8333,82 @@ mod tests {
             // schema default is false.
             rtl: false,
         })
+    }
+
+    /// K-75: the built archive bytes per bundled pack id, shared across
+    /// the test process. Building the ja-JP archive (4,902 media files)
+    /// in the dev profile costs ~90 s on its own, and every test that
+    /// just needs an installed reference pack paid it again. The build is
+    /// deterministic, so one build serves every test; each test still
+    /// installs its OWN copy into its OWN temp data dir, exactly as the
+    /// production path does. Only the bytes are shared.
+    ///
+    /// Tests that must keep the FULL production route (a fresh build and
+    /// a cold install each time): bundled_japanese_pack_installs_and_
+    /// records, installing_a_pack_warms_its_content_for_the_first_visit,
+    /// an_installed_pack_that_is_also_bundled_is_listed_exactly_once,
+    /// provenance_payload_covers_every_installed_pack_verbatim, and the
+    /// ru install tests that build their archive inline.
+    static ARCHIVE_CACHE: std::sync::LazyLock<
+        std::sync::Mutex<std::collections::HashMap<String, Vec<u8>>>,
+    > = std::sync::LazyLock::new(Default::default);
+
+    /// The dev-tree source directory the production resolver would install
+    /// `pack_id` from — the same `bundled_packs_at` table production reads.
+    fn bundled_pack_source_dir(pack_id: &str) -> Option<PathBuf> {
+        let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../..");
+        bundled_packs_at(&repo_root, BUNDLED_PACKS.get().map(PathBuf::as_path))
+            .into_iter()
+            .find(|(c, _)| c.pack_id == pack_id)
+            .map(|(_, dir)| dir)
+    }
+
+    /// The archive for `pack_id`, built at most once per process. The
+    /// first caller builds under the lock; the others briefly block, then
+    /// reuse the identical bytes. (Poison from an unrelated panic stays
+    /// usable: the map holds only complete entries, and the test that
+    /// poisoned it already failed.)
+    fn cached_archive_bytes(pack_id: &str) -> Result<Vec<u8>, String> {
+        let dir = bundled_pack_source_dir(pack_id).ok_or("unknown pack id")?;
+        let mut cache = ARCHIVE_CACHE.lock().unwrap_or_else(|e| e.into_inner());
+        if let Some(bytes) = cache.get(pack_id) {
+            return Ok(bytes.clone());
+        }
+        let (bytes, _sha) = lts_langpack::archive::build(&dir).map_err(|e| e.to_string())?;
+        cache.insert(pack_id.to_string(), bytes.clone());
+        Ok(bytes)
+    }
+
+    /// Install a bundled reference pack the way `install_bundled_pack_
+    /// report` does — install, record, warm — but from the process-cached
+    /// archive bytes instead of a fresh build. Tests that assert the
+    /// INSTALL PATH itself (the archive build, the stage reports, a cold
+    /// install warming the caches) must keep the shim route; this helper
+    /// is for tests that only need the pack installed.
+    fn install_reference_pack_fast(data: &Path, pack_id: &str) -> Result<PackCandidate, String> {
+        let candidate = bundled_packs_at(
+            &PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../.."),
+            BUNDLED_PACKS.get().map(PathBuf::as_path),
+        )
+        .into_iter()
+        .find(|(c, _)| c.pack_id == pack_id)
+        .map(|(c, _)| c)
+        .ok_or("unknown pack id")?;
+        let bytes = cached_archive_bytes(pack_id)?;
+        let outcome = lts_langpack::archive::install(&bytes, &data.join("packs"))
+            .map_err(|e| e.to_string())?;
+        let store =
+            lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+        store
+            .record_installation(&lts_storage::PackInstallation {
+                pack_id: outcome.pack_id.clone(),
+                version: outcome.version.clone(),
+                installed_at: rfc3339_utc(now_secs()),
+                trust_state: "community".into(),
+            })
+            .map_err(|e| e.to_string())?;
+        warm_pack(data, &outcome.pack_id, &outcome.version);
+        Ok(candidate)
     }
 
     /// K-59: the pack-bundled variant resolves candidates from staged
@@ -8454,7 +8531,13 @@ mod tests {
         // K-32: the on-ramp reference pack is the bundled Japanese default;
         // it must pass the install-mode license gate (CC BY 4.0, owner
         // decision 2026-10-04).
-        let candidate = install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let candidate = crate::install_bundled_pack_report(
+            data,
+            "org.openlanguage.ja-jp.reference",
+            None,
+            |_| {},
+        )
+        .unwrap();
         assert_eq!(candidate.locale, "ja-JP");
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
         let insts = store.installations().unwrap();
@@ -9058,7 +9141,8 @@ activities:
         // for the same pack ("community"). The list must not double up.
         let repo = tmp.path().join("repo");
         std::fs::create_dir_all(repo.join("languages/ja-JP")).unwrap();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        crate::install_bundled_pack_report(data, "org.openlanguage.ja-jp.reference", None, |_| {})
+            .unwrap();
 
         let candidates = available_packs_at(&repo, data);
         let listed = candidates
@@ -9128,7 +9212,7 @@ activities:
     fn pronunciation_demo_comes_from_pack_contrasts() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let demo = pronunciation_demo_at(data, "org.openlanguage.ja-jp.reference").unwrap();
         // The pack's first vowel-length contrast is obasan/obaasan.
         assert_eq!(demo.short_text, "おばさん");
@@ -9145,7 +9229,7 @@ activities:
         assert_eq!(demo.feature_id, "ja.phon.vowel-length");
         assert_eq!(demo.measure.as_deref(), Some("voiced-duration-ratio"));
         // Packs without phonology data abstain rather than invent content.
-        install_bundled_pack(data, "org.openlanguage.eo-demo").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.eo-demo").unwrap();
         assert!(pronunciation_demo_at(data, "org.openlanguage.eo-demo").is_err());
     }
 
@@ -9227,7 +9311,7 @@ activities:
     fn the_aligner_language_comes_from_the_pack_manifest() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let (bytes, _sha) = lts_langpack::archive::build(
             &PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../languages/ru-RU"),
         )
@@ -9319,7 +9403,7 @@ activities:
         // (`route-ms:Today:79` on this pack).
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
         packs::switch_pack(data, &p.id, "org.openlanguage.ja-jp.reference").unwrap();
         let start = std::time::Instant::now();
@@ -9588,7 +9672,7 @@ activities:
         // plan renders raw content ids instead of surfaces.
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let version = lts_langpack::archive::current_version(
             "org.openlanguage.ja-jp.reference",
             &data.join("packs"),
@@ -9617,7 +9701,7 @@ activities:
         // future lexicon prune cannot silently regress it.
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let version = lts_langpack::archive::current_version(
             "org.openlanguage.ja-jp.reference",
             &data.join("packs"),
@@ -9644,7 +9728,7 @@ activities:
         // renders is an authoring bug worth failing on).
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let version = lts_langpack::archive::current_version(
             "org.openlanguage.ja-jp.reference",
             &data.join("packs"),
@@ -9697,7 +9781,7 @@ activities:
         // id (never an invented label) when the pack defines no name.
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         assert_eq!(
             scenarios::situation_label(data, "ja.situation.first-meeting").as_deref(),
             Some("An introduction where people have not met before")
@@ -10355,7 +10439,7 @@ activities:
         };
         let data = tmp.path();
         // ja-JP declares mora targets (obasan pair 1.25) and ships NO media.
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let packs_root = data.join("packs");
         let demo_ver =
             lts_langpack::archive::current_version("org.openlanguage.ja-demo", &packs_root)
@@ -10563,7 +10647,7 @@ activities:
     fn dictation_target_prefers_kana_only_and_rotates() {
         let tmp = tempfile::TempDir::new().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let t = dictation_target_at(data, "org.openlanguage.ja-jp.reference", 0).unwrap();
         assert!(!t.text.is_empty() && t.reading.is_some());
         // Preferred candidates are kana-only: text and reading normalize equal.
@@ -10730,7 +10814,7 @@ activities:
         };
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
         let version = lts_langpack::archive::current_version(
@@ -11109,7 +11193,7 @@ activities:
         };
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
         finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), false).unwrap();
         let goals = goal_map_at(data, &p.id).unwrap();
@@ -11182,7 +11266,7 @@ activities:
     fn goal_map_orders_bands_by_ladder_not_ascii() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
         finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), false).unwrap();
         let goals = goal_map_at(data, &p.id).unwrap();
@@ -11245,7 +11329,7 @@ activities:
     fn goal_map_ignores_activity_volume() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
         finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), false).unwrap();
         let before = goal_map_at(data, &p.id).unwrap();
@@ -11280,7 +11364,7 @@ activities:
     fn pack_claims_report_installed_pack_data_without_upgrading_trust() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
         finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), false).unwrap();
 
@@ -11400,9 +11484,10 @@ activities:
     fn provenance_payload_covers_every_installed_pack_verbatim() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        crate::install_bundled_pack_report(data, "org.openlanguage.ja-jp.reference", None, |_| {})
+            .unwrap();
         // The Russian reference pack is not in the production bundle list, so
-        // `install_bundled_pack` cannot stage it: it goes in the way the
+        // `install_bundled_pack_report` cannot stage it: it goes in the way
         // pack-gate tests stage it, built from an absolute repo path and then
         // recorded in the store, because the claims report walks
         // installations.
@@ -11484,7 +11569,7 @@ activities:
     fn the_claim_report_survives_a_trust_change_without_lying_about_it() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
 
         let first = pack_claims_at(data).unwrap();
         assert_eq!(first.len(), 1);
@@ -11574,7 +11659,7 @@ activities:
     fn stress_display_settings_are_data_driven_and_persisted() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         {
             let (bytes, _sha) = lts_langpack::archive::build(
                 &PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../languages/ru-RU"),
@@ -11706,7 +11791,7 @@ activities:
     fn profile_export_writes_bundle_and_delete_is_one_shot() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
         finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), true).unwrap();
 
@@ -11738,7 +11823,7 @@ activities:
     fn a_supported_backup_restores_saved_words_and_history() {
         let src = tempfile::tempdir().unwrap();
         let data_a = src.path();
-        install_bundled_pack(data_a, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data_a, "org.openlanguage.ja-jp.reference").unwrap();
         install_bundled_pack(data_a, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data_a, "Hunter").unwrap();
         finish_onboarding(
@@ -12016,7 +12101,7 @@ activities:
     fn preview_journey_select_activity_restart_switch_retain() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.eo-demo").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.eo-demo").unwrap();
         let p = create_local_profile(data, "Preview").unwrap();
         finish_onboarding(data, &p.id, Some("org.openlanguage.eo-demo"), false).unwrap();
         assert_eq!(
@@ -12204,7 +12289,7 @@ activities:
     fn a_fresh_ja_jp_plan_is_all_introductions_in_the_packs_goal_order() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
         finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), false).unwrap();
         let version = lts_langpack::archive::current_version(
@@ -12279,7 +12364,7 @@ activities:
     fn day_one_never_seeds_katakana_or_words_with_unlearned_kana() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
         finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), false).unwrap();
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
@@ -12368,7 +12453,7 @@ activities:
         };
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
         finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), false).unwrap();
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
@@ -12521,7 +12606,7 @@ activities:
     fn first_run_steps_lead_with_the_declared_script_in_its_teaching_order() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
         finish_onboarding(data, &p.id, Some("org.openlanguage.ja-jp.reference"), false).unwrap();
 
@@ -13685,7 +13770,7 @@ transfer_variants:
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference").unwrap();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
         finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
@@ -14538,7 +14623,7 @@ transfer_variants:
     fn installing_a_pack_warms_its_content_for_the_first_visit() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
-        install_bundled_pack(data, "org.openlanguage.ja-jp.reference")
+        crate::install_bundled_pack_report(data, "org.openlanguage.ja-jp.reference", None, |_| {})
             .expect("reference pack installs");
         let id = "org.openlanguage.ja-jp.reference";
         let version = lts_langpack::archive::current_version(id, &data.join("packs"))
