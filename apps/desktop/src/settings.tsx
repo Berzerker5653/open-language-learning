@@ -469,6 +469,7 @@ export function Settings(p: SettingsProps) {
                     type="button"
                     className="btn btn--quiet"
                     onClick={() => p.onDeleteModel(m.id)}
+                    aria-label={`Remove ${SPEECH_MODEL_LABELS[m.id] ?? m.id}`}
                   >
                     Remove
                   </button>
@@ -477,6 +478,7 @@ export function Settings(p: SettingsProps) {
                     type="button"
                     className="btn btn--primary"
                     onClick={() => p.onInstallModel(m.id)}
+                    aria-label={`Download ${SPEECH_MODEL_LABELS[m.id] ?? m.id}, about ${megabytes(m.size_bytes)} megabytes`}
                   >
                     Download ~{megabytes(m.size_bytes)} MB
                   </button>

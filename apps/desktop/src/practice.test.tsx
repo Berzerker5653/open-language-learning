@@ -247,6 +247,32 @@ describe("practice runner", () => {
     expect(after).toContain('aria-live="polite"');
   });
 
+  // F-05 (owner run L1): the verdict already carried aria-live and passed
+  // the tests above, yet WebKitGTK/ATK exposed no live state over AT-SPI
+  // and the owner heard nothing: the role attribute is what the bridge
+  // maps to a speakable status node.
+  it("carries the role the AT-SPI bridge announces (F-05)", () => {
+    expect(render({})).toMatch(/<p[^>]*role="status"[^>]*aria-live="polite"/);
+    expect(render({ graded: true, correct: true })).toMatch(
+      /<p[^>]*role="status"[^>]*aria-live="polite"/,
+    );
+  });
+
+  // F-07 (owner run L1): listening cards gave no perceivable play/stop
+  // signal — the button now carries a pressed state and a status region
+  // says "playing" while a clip runs.
+  it("exposes listening playback state to assistive tech (F-07)", () => {
+    const listening = {
+      item_id: "ja.lex.demo.konnichiwa#comprehension-listening",
+      surface: null,
+      choices: ["hello", "aunt"],
+    };
+    expect(render({ task: listening })).toContain('aria-pressed="false"');
+    const playing = render({ task: listening, playing: true });
+    expect(playing).toContain('aria-pressed="true"');
+    expect(playing).toContain(">playing<");
+  });
+
   it("carries one route h1 only when the runner is the whole route", () => {
     const standalone = render({ routeHeading: "Practice" });
     expect((standalone.match(/<h1\b/g) ?? []).length).toBe(1);

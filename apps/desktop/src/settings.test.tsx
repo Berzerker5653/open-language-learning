@@ -318,6 +318,12 @@ describe("settings", () => {
     expect(html).toContain("Whisper Base");
     expect(html).toContain("Download ~141.1 MB");
     expect(html).toContain("Remove");
+    // F-04 (run L1): the accessible name must carry WHICH model the
+    // button acts on — a focused "Remove"/"Download" alone says nothing.
+    expect(html).toContain('aria-label="Remove Whisper Small — largest download and memory"');
+    expect(html).toContain(
+      'aria-label="Download Whisper Base — larger download and memory, about 141.1 megabytes"',
+    );
     // Honest framing: size does not change pronunciation accuracy; the
     // recommendation comes from the detected device tier (K-46), never a
     // static constant — and it lands on exactly one row.

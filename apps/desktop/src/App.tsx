@@ -368,6 +368,10 @@ export function App() {
   // R14: a failed playback must be something the learner can see, not a
   // silent Audio error in the console.
   const [playbackError, setPlaybackError] = useState<string | null>(null);
+  // F-07 (run L1): while a listening clip plays, the play button carries a
+  // pressed state and a status region says "playing" — start/stop must be
+  // perceivable without sight of the waveform.
+  const [clipPlaying, setClipPlaying] = useState(false);
   // R14: a retained recording URL lives until it is replaced or this screen
   // goes away. Nothing else may revoke it while state still holds it.
   useEffect(() => {
@@ -519,22 +523,43 @@ export function App() {
   const [settingsError, setSettingsError] = useState<string | null>(null);
 
   const [practiceDraft, setPracticeDraft] = useState("");
-  // A route change is a navigation, not a re-render: the sticky header
-  // would hide the top of the new page (reset the scroll), and both screen
-  // readers and sighted keyboard users otherwise stay parked in the old
-  // content. Focus the new route's own h1 — every route surface renders
-  // exactly one, so announcing it *is* the navigation announcement. While
-  // the onboarding wizard owns the flow it manages its own focus.
+  // A route change, a wizard step change, a lesson page and an activity-card
+  // turn are all navigations: both screen readers and sighted keyboard users
+  // otherwise stay parked in the old content, and Orca announces nothing on
+  // arrival (F-01, owner run L1). Routes, wizard steps and lesson pages swap
+  // the `#main h1` node — a new node gets tabIndex -1 and focus, which IS the
+  // A new card announces its question h2 — the card header's h1 only says
+  // the activity name — and grading never moves focus off the card.
+  // Scrolling resets because the sticky header would
+  // otherwise hide the top of the new page.
   const routeHeading = useRef<HTMLElement | null>(null);
+  const cardKey = useRef<string | null>(null);
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (step !== "done") return;
-    const heading = document.querySelector<HTMLElement>("#main h1");
-    if (!heading || heading === routeHeading.current) return;
-    routeHeading.current = heading;
-    heading.tabIndex = -1;
-    heading.focus({ preventScroll: true });
-  }, [step, route]);
+    const h1 = document.querySelector<HTMLElement>("#main h1");
+    const item = practiceTask?.item_id ?? null;
+    // The task preloads while the lesson page is still up; the card only
+    // becomes the visible screen when its runner takes the content slot.
+    const cardShown = Boolean(practiceTask) && !(lesson && !lessonSeen);
+    if (item && cardShown && item !== cardKey.current) {
+      // A card just arrived. The card header remounts an h1 too ("Practice"),
+      // but the question h2 is what says what to do — announce that.
+      cardKey.current = item;
+      routeHeading.current = h1;
+      const target = document.querySelector<HTMLElement>("#main h2") ?? h1;
+      if (target) {
+        target.tabIndex = -1;
+        target.focus({ preventScroll: true });
+      }
+      return;
+    }
+    if (!item) cardKey.current = null;
+    if (h1 && h1 !== routeHeading.current) {
+      routeHeading.current = h1;
+      h1.tabIndex = -1;
+      h1.focus({ preventScroll: true });
+    }
+  }, [step, route, lesson, lessonSeen, practiceTask?.item_id]);
   // K-76: null until the first real load answers, so the surface can tell
   // "still loading" apart from "this pack has no targets".
   const [shadowItems, setShadowItems] = useState<ShadowTarget[] | null>(null);
@@ -2749,6 +2774,9 @@ export function App() {
 
   function playBlobUrl(url: string, retained = false) {
     const audio = new Audio(url);
+    audio.addEventListener("ended", () => setClipPlaying(false));
+    audio.addEventListener("error", () => setClipPlaying(false));
+    setClipPlaying(true);
     // K-88: honour this profile's output device. If the chosen device has
     // vanished or this webview refuses to route, the system default answers
     // and the clip still plays — one clip on the wrong speaker beats a
@@ -3705,6 +3733,7 @@ export function App() {
                     : undefined
                 }
                 onPlayAudio={playPracticeAudio}
+                playing={clipPlaying}
                 heading={
                   practiceTarget.modality === "orthography-recognition"
                     ? "Which one matches?"

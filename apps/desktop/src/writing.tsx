@@ -81,6 +81,7 @@ export function WritingPractice(p: WritingPracticeProps) {
           it — same discipline as the practice runner (PS-03). */}
       <p
         aria-live="polite"
+        role="status"
         className={
           p.graded ? (p.correct ? "verdict verdict--correct" : "verdict verdict--retry") : undefined
         }

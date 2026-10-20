@@ -69,6 +69,9 @@ export interface PracticeRunnerProps {
   /// single-activity wording.
   nextLabel?: string;
   onPlayAudio?(): void;
+  /// F-07: true while the listening clip is playing; drives the button's
+  /// pressed state and a spoken "playing" status.
+  playing?: boolean;
   onReveal?(): void;
   /// K-41: highlight U+0301-stressed vowels in readings (display-only).
   stress?: boolean;
@@ -232,10 +235,14 @@ export function PracticeRunner(p: PracticeRunnerProps) {
                 type="button"
                 className="btn btn--primary"
                 aria-label="Play the audio"
+                aria-pressed={p.playing === true}
                 onClick={() => p.onPlayAudio?.()}
               >
                 ▶ Play
               </button>
+              <small className="notice" role="status">
+                {p.playing ? "playing" : ""}
+              </small>
               {p.audioSource === "model-output" && (
                 <small className="notice">synthesized voice (model output)</small>
               )}
@@ -280,6 +287,7 @@ export function PracticeRunner(p: PracticeRunnerProps) {
         </div>
       )}
       <p
+        role="status"
         aria-live="polite"
         className={
           p.graded ? (p.correct ? "verdict verdict--correct" : "verdict verdict--retry") : undefined

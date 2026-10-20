@@ -333,6 +333,15 @@ describe("automated accessibility audit (ACC-001 auto portion)", () => {
     expect(surfaces.writing).toMatch(/aria-live="polite"/);
   });
 
+  // F-04 (run L1): a screen reader reads the focused element ALONE. An
+  // install button whose name is just "Install", and a maturity tag the
+  // AT won't speak, are invisible to the owner's Orca pass.
+  it("names pack actions with their pack and speaks the tag line (F-04)", () => {
+    const languageStep = renderToStaticMarkup(<Onboarding {...onboarding} step="packs" />);
+    expect(languageStep).toContain('aria-label="Install Japanese demo (ja-JP)"');
+    expect(languageStep).toContain('aria-hidden="true">(ja-JP, community)');
+  });
+
   it("live regions pre-exist their content (WCAG 4.1.3 timing rule)", () => {
     // The mutation must land inside an element that was already in the tree;
     // regions that mount together with the verdict are never announced.

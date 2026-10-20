@@ -227,7 +227,12 @@ export function Onboarding(p: OnboardingProps) {
                     <PackText rtl={pack.rtl} locale={pack.locale} tag="span">
                       {pack.display_name}
                     </PackText>{" "}
-                    ({pack.locale}, {pack.maturity})
+                    {/* F-04: the locale/maturity tag is already part of the
+                        radio's accessible name via the label text; exposing
+                        it again as child text made it read twice. */}
+                    <span aria-hidden="true">
+                      ({pack.locale}, {pack.maturity})
+                    </span>
                   </label>
                   <button
                     type="button"
@@ -238,6 +243,13 @@ export function Onboarding(p: OnboardingProps) {
                       (p.installing !== null && p.installing !== undefined)
                     }
                     aria-busy={p.installing === pack.pack_id}
+                    aria-label={
+                      onDevice !== undefined
+                        ? `Installed: ${pack.display_name} (${pack.locale})`
+                        : p.installing === pack.pack_id
+                          ? `Installing ${pack.display_name}`
+                          : `Install ${pack.display_name} (${pack.locale})`
+                    }
                   >
                     {onDevice !== undefined
                       ? "Installed"

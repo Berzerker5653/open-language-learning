@@ -1,0 +1,43 @@
+=== application: 'lts-desktop' ===
+[application] 'lts-desktop'
+  [frame] 'Open Language Learning Platform' states=showing
+    [filler] '' states=showing
+      [filler] ''
+        [filler] ''
+          [scroll pane] ''
+            [document web] 'Open Language Learning Platform' states=showing
+              [link] 'Skip to main content'
+              [landmark] '' states=showing
+              [landmark] '' states=showing
+                [landmark] 'Onboarding' states=showing
+                  [heading] 'Welcome back' states=focused,showing
+                  [paragraph] '' text='These profiles live on this device. Pick one to continue.' states=showing
+                  [panel] 'Profiles' text='￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼' states=showing
+                    [button] 'Hunter' states=showing
+                    [button] 'Tester' states=showing
+                    [button] 'Retest' states=showing
+                    [button] 'Writer' states=showing
+                    [button] 'Writer2' states=showing
+                    [button] 'Writer2' states=showing
+                    [button] 'Writer3' states=showing
+                    [button] 'Writer4' states=showing
+                    [button] 'Writer5' states=showing
+                    [button] 'Writer6' states=showing
+                    [button] 'Writer7' states=showing
+                    [button] 'Writer8' states=showing
+                    [button] 'Writer9' states=showing
+                    [button] 'MicTest' states=showing
+                    [button] 'Mic2' states=showing
+                    [button] 'Mic3' states=showing
+                    [button] 'Mic4' states=showing
+                    [button] 'Mic5' states=showing
+                    [button] 'Offline' states=showing
+                    [button] 'Hunter' states=showing
+                    [button] 'FirstCheck' states=showing
+                    [button] 'HunterTest' states=showing
+                    [button] 'Testing' states=showing
+                    [button] 'LoadPackTest' states=showing
+                    [button] 'Testing.Test' states=showing
+                    [button] 'Audit Test' states=showing
+                  [button] 'Create a new profile' states=showing
+
