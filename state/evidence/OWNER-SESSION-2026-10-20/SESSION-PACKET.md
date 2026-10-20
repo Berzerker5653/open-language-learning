@@ -7,7 +7,7 @@ Everything below was prepared and measured today; the boxes are yours.
 
 | artifact | where | size | sha256 |
 | --- | --- | --- | --- |
-| app `lts-desktop` **0.4.3-alpha.1** deb, finalized (t64-safe `Depends`) — rebuilt 2026-10-20 with the `derive_pairs` 8× plan-latency fix and the PERF-002 app-side probe (`state/evidence/PERF-002/plan10k-*`) | `target/release/bundle/deb/open-language-learning-platform_0.4.3-alpha.1_amd64.deb` | 12,596,228 B | `9c374399ac9ac4f6…9ba20931` |
+| app `lts-desktop` **0.4.3-alpha.1** deb, finalized (t64-safe `Depends`) — rebuilt 2026-10-20 at `b34538c` from the **security-bumped locks** (RUSTSEC-2026-0381/-0382/-0383 webpki intermediates + GHSA-587h-7wmj-h5pm/-698v-4r3x-3vcv/-r825-w8mm-5pxw vite 8.3.2→8.3.3, all patched same day; `state/evidence/SEC-001/`), incl. the `derive_pairs` 8× plan-latency fix and the PERF-002 app-side probe (`state/evidence/PERF-002/plan10k-*`). **Earlier-recorded debs (`9c374399…`, `b54d4c55…`) predate these bumps — do not ship them.** | `target/release/bundle/deb/open-language-learning-platform_0.4.3-alpha.1_amd64.deb` | 12,589,552 B | `a6d3953fddee8098a879a562cfb36306f64344bbba789bc3035fff978e26f239` |
 | ja-JP pack **0.4.3** `.lpk` (tracked tree incl. `capabilities.scenario_help`; `test` 0/0) | `~/staging/0.4.3/ja-JP-0.4.3.lpk` | 318,736,116 B | `9b17b23294df30f4…352719d6` |
 | ru-RU pack **0.4.3** `.lpk` (`test` 0/0) | `~/staging/0.4.3/ru-RU-0.4.3.lpk` | 318,493,155 B | `374d79e13db020fc…a2b96bc5` |
 
@@ -22,9 +22,12 @@ only after this session (see step 5).
 
 ## 1. Machine leg — already re-run today
 
-CI run `39459901584` (success, all jobs) at `d2f8069` — the SHA the deb is
+CI run `39504856417` (success, all jobs) at `b34538c` — the SHA the deb is
 built from — covers the scripted half: `desktop-smoke` (13-route walk), full
-rust suite, pack conformance, security scans. Optionally re-run live: `LTS_SMOKE_TIMEOUT=900 scripts/smoke-desktop.sh`
+rust suite (4 parallel partitions), pack conformance, security scans; wall
+time is now ~17 min (was 47) with every gate intact
+(`state/evidence/CI-TIME/ci-profile-2026-10-20.md`). Optionally re-run live:
+`LTS_SMOKE_TIMEOUT=900 scripts/smoke-desktop.sh`
 → expect `SMOKE OK (13 routes walked)`. Do not re-verify those by hand.
 
 ## 2. The human sweep (Runbook B, `docs/21_HUMAN_REVIEW_RUNBOOKS.md` §B.3)
@@ -84,9 +87,11 @@ no-upload / retention suites green in the same CI run.
 
 Gaming PC tier is measured (`state/evidence/PERF-002/gamingpc-2026-10-20.md`).
 The Omarchy leg needs `sudo`, which an agent cannot use there. Restaged today
-(2026-10-20) with the **fixed + instrumented** 0.4.3 binary (`sha256
-4c5dfb79…640e2c4e` — includes the webview perf probe), the
-finalized deb and both harnesses under `~/perf-0.4.3`. Close any running app
+(2026-10-20) with the **fixed + instrumented + security-bumped** 0.4.3 binary
+at `b34538c` (`sha256 4cb44c886d0305330431d123f386d1584643df8b8b9bb784c26a241a1804314d` —
+includes the webview perf probe, which also feeds the app-side responsiveness
+rows into the harness output), the matching finalized deb (`a6d3953f…`, 12,589,552 B)
+and both harnesses under `~/perf-0.4.3`. Close any running app
 instance there, then one line:
 
 ```sh
