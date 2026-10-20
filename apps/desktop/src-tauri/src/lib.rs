@@ -1903,15 +1903,28 @@ fn derive_pairs(
     // Nothing selected means nothing to scope against: a profile that has
     // evidence but no active pack still has to see its own record.
     let scoped = !selected.is_empty();
-    let mut pairs: Vec<(String, lts_domain::ActivityModality)> = Vec::new();
+    // PERF-002: bucket the corpus by (content, dimension) ONCE. The prior
+    // shape re-scanned every evidence row for every (content, dimension)
+    // pair — O(pairs × events) — costing a 10k-evidence profile ≈730 ms
+    // per practice_plan on flagship hardware (state/evidence/PERF-002/
+    // plan10k-gamingpc-2026-10-20.md). Bucket index lists inherit the
+    // store's (occurred_at, event_id) order, so each pair still sees its
+    // evidence chronologically, exactly as the full-scan filter did.
+    let mut buckets: std::collections::HashMap<
+        (String, lts_domain::ActivityModality),
+        Vec<usize>,
+    > = Default::default();
     let mut owners: std::collections::HashMap<String, Option<String>> =
         std::collections::HashMap::new();
-    for ev in &events {
+    for (idx, ev) in events.iter().enumerate() {
         if scoped && !ev.pack_id.is_empty() && !selected.contains(&ev.pack_id) {
             continue;
         }
         for t in &ev.targets {
-            pairs.push((t.as_str().to_string(), ev.modality));
+            buckets
+                .entry((t.as_str().to_string(), ev.modality))
+                .or_default()
+                .push(idx);
             let content = t.as_str();
             if ev.pack_id.is_empty() {
                 // Unattributed evidence cannot name an owner, so it can
@@ -1927,20 +1940,25 @@ fn derive_pairs(
             }
         }
     }
-    pairs.sort_by(|a, b| (&a.0, dimension_kebab(a.1)).cmp(&(&b.0, dimension_kebab(b.1))));
-    pairs.dedup_by(|a, b| a.0 == b.0 && a.1 == b.1);
-    pairs
+    let mut grouped: Vec<((String, lts_domain::ActivityModality), Vec<usize>)> =
+        buckets.into_iter().collect();
+    grouped.sort_by(|a, b| {
+        (&a.0 .0, dimension_kebab(a.0 .1)).cmp(&(&b.0 .0, dimension_kebab(b.0 .1)))
+    });
+    grouped
         .into_iter()
-        .map(|(content, dim)| {
+        .map(|((content, dim), idxs)| {
             let scope = owners
                 .get(&content)
                 .and_then(|owner| owner.as_deref())
                 .filter(|pack_id| !pack_id.is_empty());
+            let pair_events: Vec<lts_domain::EvidenceEvent> =
+                idxs.iter().map(|i| events[*i].clone()).collect();
             lts_learner_model::derive::derive_mastery_in_pack(
                 &policy,
                 &content,
                 dim,
-                &events,
+                &pair_events,
                 &[],
                 now_rfc,
                 scope,
