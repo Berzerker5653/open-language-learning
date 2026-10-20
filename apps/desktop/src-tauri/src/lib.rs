@@ -24,12 +24,14 @@ use std::path::PathBuf;
 #[derive(Serialize)]
 struct AppMode {
     smoke: bool,
+    smoke_perf: bool,
 }
 
 #[tauri::command]
 fn app_mode() -> AppMode {
     AppMode {
         smoke: std::env::var("LTS_SMOKE_FILE").is_ok(),
+        smoke_perf: std::env::var("LTS_SMOKE_PERF").is_ok(),
     }
 }
 
@@ -4777,6 +4779,138 @@ fn pronunciation_check_at(
     })
 }
 
+// PERF-002: app-side measurement for the two budget lines the CLI benchmarks
+// cannot answer (`app.ui_responsiveness_during_inference.*`,
+// `app.cancellation.asr_cancel_effect_ms`). The harness must set BOTH
+// LTS_SMOKE_FILE and LTS_SMOKE_PERF; a normal learner session never passes
+// this guard, so no measurement-only surface reaches the product.
+fn perf_guard() -> Result<(), String> {
+    if std::env::var("LTS_SMOKE_FILE").is_err() || std::env::var("LTS_SMOKE_PERF").is_err() {
+        return Err("perf-not-enabled".into());
+    }
+    Ok(())
+}
+
+#[derive(Serialize)]
+struct PerfAsrAttempt {
+    pack_id: String,
+    short_unit: String,
+    long_unit: String,
+    short_text: String,
+    long_text: String,
+    wav_b64: String,
+}
+
+/// Point the stored speech pref at an installed whisper GGML model and
+/// report which aligner the next real call will actually get. Mirrors the
+/// Rust integration test that proves `pronunciation_check` runs through the
+/// whisper sidecar, so the webview measures the same production path.
+#[tauri::command]
+fn perf_asr_setup() -> Result<String, String> {
+    perf_guard()?;
+    let data = data_dir();
+    crate::models::save_speech_pref(
+        &data,
+        &crate::models::SpeechPref {
+            asr_model: "org.openlanguage.speech.whisper-ggml-tiny".into(),
+        },
+    )?;
+    match aligner_probe(&data) {
+        Ok(src) => Ok(src
+            .model
+            .file_name()
+            .map(|n| n.to_string_lossy().into_owned())
+            .unwrap_or_else(|| "unknown".into())),
+        Err(miss) => Err(aligner_miss_reason(&miss)),
+    }
+}
+
+/// Build a real two-utterance pronunciation attempt from the installed
+/// pack's own model-output audio: short contrast clip, 0.2 s silence, long
+/// clip — the shape the aligner is measured on. Never touches a microphone
+/// (privacy: headless runs record nothing).
+#[tauri::command]
+fn perf_asr_attempt() -> Result<PerfAsrAttempt, String> {
+    use base64::Engine;
+    perf_guard()?;
+    let data = data_dir();
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let profile = store
+        .list_profiles()
+        .map_err(|e| e.to_string())?
+        .into_iter()
+        .next()
+        .ok_or("no profile")?;
+    let packs = store
+        .selected_packs(profile.id.as_str())
+        .map_err(|e| e.to_string())?;
+    let pack_id = packs
+        .first()
+        .map(|p| p.0.clone())
+        .ok_or("no selected pack")?;
+    if !packs::valid_pack_id(&pack_id) {
+        return Err("pack not allowlisted".into());
+    }
+    let packs_root = data.join("packs");
+    let version = lts_langpack::archive::current_version(&pack_id, &packs_root)
+        .ok_or("pack not installed")?;
+    let pack_dir = packs_root.join(&pack_id).join(&version);
+    let media = media_ids(&pack_dir);
+    let text = std::fs::read_to_string(pack_dir.join("phonology").join("contrasts.jsonl"))
+        .map_err(|_| "pack declares no phonology contrasts".to_string())?;
+    for line in text.lines().filter(|l| !l.trim().is_empty()) {
+        let v: serde_json::Value =
+            serde_json::from_str(line).map_err(|_| "bad contrasts.jsonl".to_string())?;
+        let id = v["id"].as_str().ok_or("contrast missing id")?;
+        let items = match v["items"].as_array() {
+            Some(a) if a.len() >= 2 => a,
+            _ => continue,
+        };
+        let measure = v
+            .get("production")
+            .and_then(|p| p.get("measure"))
+            .and_then(|m| m.as_str())
+            .unwrap_or("");
+        if !INSTRUMENTED_MEASURES.contains(&measure) {
+            continue;
+        }
+        let short_unit = format!("{id}-0");
+        let long_unit = format!("{id}-1");
+        if !(media.contains(&short_unit) && media.contains(&long_unit)) {
+            continue;
+        }
+        let media_dir = pack_dir.join("media");
+        let short = lts_speech_runtime::from_wav16(
+            &std::fs::read(media_dir.join(format!("{short_unit}.wav")))
+                .map_err(|e| format!("short media: {e}"))?,
+        )
+        .map_err(|e| format!("short wav: {e}"))?;
+        let long = lts_speech_runtime::from_wav16(
+            &std::fs::read(media_dir.join(format!("{long_unit}.wav")))
+                .map_err(|e| format!("long media: {e}"))?,
+        )
+        .map_err(|e| format!("long wav: {e}"))?;
+        let mut samples: Vec<f32> = short.samples.clone();
+        samples.extend(
+            std::iter::repeat_n(0.0f32, (0.2 * short.sample_rate_hz as f32) as usize)
+                .chain(long.samples.clone()),
+        );
+        let wav = lts_speech_runtime::to_wav16(&lts_speech_api::AudioBuffer {
+            samples,
+            sample_rate_hz: short.sample_rate_hz,
+        });
+        return Ok(PerfAsrAttempt {
+            pack_id,
+            short_unit,
+            long_unit,
+            short_text: items[0]["text"].as_str().unwrap_or("").to_string(),
+            long_text: items[1]["text"].as_str().unwrap_or("").to_string(),
+            wav_b64: base64::engine::general_purpose::STANDARD.encode(wav),
+        });
+    }
+    Err("no instrumented contrast with media".into())
+}
+
 /// Free-ASR dictation check (roadmap feature B). The learner reads a known
 /// sentence aloud; whisper.cpp transcribes it freely and we compare against
 /// the target. Fail-closed: an input-quality rejection, an empty transcript,
@@ -8055,6 +8189,8 @@ pub fn run() {
             recommended_speech_model,
             pronunciation_check,
             pronunciation_demo,
+            perf_asr_setup,
+            perf_asr_attempt,
             dictation_check,
             dictation_target,
             reference_audio,

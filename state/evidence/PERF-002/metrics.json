@@ -1,64 +1,81 @@
 {
   "schema": "perf-app/1.0",
-  "collected_utc": "2026-10-20T15:21:49Z",
+  "collected_utc": "2026-10-20T18:35:11Z",
   "binary": "target/release/lts-desktop",
   "startup": {
     "runs_ms": [
-      321,
-      790,
-      288,
-      345,
-      286
+      354,
+      273,
+      826,
+      335,
+      276
     ],
     "loadavg_per_run": [
-      "0.98 1.01 2.02",
-      "0.98 1.01 2.02",
-      "0.98 1.01 2.02",
-      "0.98 1.01 2.02",
-      "1.06 1.02 2.02"
+      "1.40 12.48 14.81",
+      "1.40 12.48 14.81",
+      "1.40 12.48 14.81",
+      "1.40 12.48 14.81",
+      "1.45 12.31 14.74"
     ],
     "n": 5,
-    "p50_ms": 321,
-    "p95_ms": 790,
+    "p50_ms": 335,
+    "p95_ms": 826,
     "boundary": "process exec -> first app marker (`smoke-ok home`)",
     "poll_resolution_ms": 10
   },
   "memory": {
-    "samples": 6,
+    "samples": 8,
     "interval_s": 2,
     "basis_main": "VmRSS of the lts-desktop process",
     "basis_tree": "main + direct children (WebKit web/network processes)",
     "main_mb": {
-      "min": 22,
-      "base_median": 331,
-      "peak": 595,
-      "peak_delta": 573
+      "min": 38,
+      "base_median": 321,
+      "peak": 594,
+      "peak_delta": 556
     },
     "tree_mb": {
-      "min": 22,
-      "base_median": 620,
-      "peak": 874,
-      "peak_delta": 852
+      "min": 38,
+      "base_median": 724,
+      "peak": 872,
+      "peak_delta": 834
     }
   },
   "walk": {
     "routes_acked": 13,
-    "practice_plan_ms": 16,
+    "practice_plan_ms": 15,
     "placement_plan_ms": 4,
-    "home_state_ms": 20,
+    "home_state_ms": 19,
     "fresh_plan_items": 5
   },
   "disk_bytes": {
-    "deb": 12579216,
-    "release_binary": 38025760,
+    "deb": 12596228,
+    "release_binary": 37958048,
     "appimage_stale": 144669176,
     "installed_packs": 423908433,
-    "throwaway_data_dir": 424053719
+    "throwaway_data_dir": 424053781
+  },
+  "probe": {
+    "model": "ggml-tiny.bin",
+    "skipped": "",
+    "asr_window": {
+      "raf_max_ms": 1057,
+      "longtasks": 0,
+      "inp_max_ms": 1930
+    },
+    "idle_window": {
+      "raf_max_ms": 17,
+      "inp_max_ms": 31
+    },
+    "cancellation": "abstained:no-product-seam"
   },
   "verdicts": {
     "startup_to_home_typical": "PASS",
     "startup_to_home_low": "PASS",
     "app_rss_base_mb": "PASS",
-    "base_install_mb": "PASS"
+    "base_install_mb": "PASS",
+    "resp_inp": "worst synthetic input->paint 1930 ms > 100 ms (single walk)",
+    "resp_block": "worst rAF gap 1057 ms > 50 ms (single walk; p95 not separable)",
+    "resp_cancel": "unevaluable:no-product-seam"
   }
 }

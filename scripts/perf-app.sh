@@ -179,7 +179,7 @@ if [ -z "$FAIL_REASON" ]; then
   DATA=$(mktemp -d /tmp/lts-perf-data.XXXXXX)
   WALKLOG=$(mktemp /tmp/lts-perf-walk.XXXXXX)
   LOAD_WALK_BEFORE=$(loadavg13)
-  LTS_DATA_DIR="$DATA" LTS_SMOKE_FILE="$MARK" timeout "$WALK_TIMEOUT" env "$BIN" >"$WALKLOG" 2>&1 &
+  LTS_DATA_DIR="$DATA" LTS_SMOKE_FILE="$MARK" LTS_SMOKE_PERF=1 timeout "$WALK_TIMEOUT" env "$BIN" >"$WALKLOG" 2>&1 &
   TPID=$!
   APPPID=""
   for _ in $(seq 1 100); do
@@ -230,10 +230,36 @@ if [ -z "$FAIL_REASON" ]; then
     FRESH_PLAN=$(grep '^smoke-ok fresh-plan:' "$MARK" | head -1 | cut -d: -f2 || true)
     ALIGNER=$(grep '^smoke-ok aligner:' "$MARK" | head -1 | sed 's/^smoke-ok aligner://' || true)
     SCENARIO=$(grep '^smoke-ok scenario-' "$MARK" | sed 's/^smoke-ok //' | tr '\n' ';' || true)
+    PERF_MODEL=$(grep '^smoke-ok perf:asr-model:' "$MARK" | head -1 | sed 's/^smoke-ok perf:asr-model://' || true)
+    PERF_SKIP=$(grep '^smoke-ok perf:asr-skipped:' "$MARK" | head -1 | sed 's/^smoke-ok perf:asr-skipped://' || true)
+    PERF_LINES=$(grep '^smoke-ok perf:' "$MARK" | sed 's/^smoke-ok //' | tr '\n' ';' || true)
+    RAF_ASR=$(grep '^smoke-ok perf:rafmax:asr-inference:' "$MARK" | head -1 | cut -d: -f4 || true)
+    LT_ASR=$(grep '^smoke-ok perf:longtasks:asr-inference:' "$MARK" | head -1 | cut -d: -f4 || true)
+    INP_ASR=$(grep '^smoke-ok perf:inp:asr-inference:' "$MARK" | head -1 | cut -d: -f4 || true)
+    RAF_IDLE=$(grep '^smoke-ok perf:rafmax:idle-baseline:' "$MARK" | head -1 | cut -d: -f4 || true)
+    INP_IDLE=$(grep '^smoke-ok perf:inp:idle-baseline:' "$MARK" | head -1 | cut -d: -f4 || true)
+    CHECK_MS=$(grep '^smoke-ok call-ms:pronunciation_check:' "$MARK" | cut -d: -f3 | tr '\n' ' ' || true)
+    V_RESP_BLOCK="unevaluable (probe abstained${PERF_SKIP:+: $PERF_SKIP})"
+    V_RESP_INP="unevaluable (probe abstained${PERF_SKIP:+: $PERF_SKIP})"
+    if [ -n "$RAF_ASR" ]; then
+      if [ "$RAF_ASR" -le 50 ]; then
+        V_RESP_BLOCK="worst rAF gap ${RAF_ASR} ms <= 50 ms (single walk; worst bounds p95)"
+      else
+        V_RESP_BLOCK="worst rAF gap ${RAF_ASR} ms > 50 ms (single walk; p95 not separable)"
+      fi
+    fi
+    if [ -n "$INP_ASR" ]; then
+      if [ "$INP_ASR" -le 100 ]; then
+        V_RESP_INP="worst synthetic input->paint ${INP_ASR} ms <= 100 ms (single walk)"
+      else
+        V_RESP_INP="worst synthetic input->paint ${INP_ASR} ms > 100 ms (single walk)"
+      fi
+    fi
     WALK_WALL="" # wall time is not the subject here; the walk's own markers carry the costs
     echo "  SMOKE OK ($NROUTES routes walked)"
     echo "  route-ms: $(echo "$ROUTE_MS" | tr '\n' ' ')"
     echo "  call-ms:  $(echo "$CALL_MS" | tr '\n' ' ')"
+    echo "  perf:   $(echo "$PERF_LINES" | tr ';' ' ')"
   else
     cp "$WALKLOG" "$OUT/walk-failed-log.txt" 2>/dev/null || true
     echo "  WALK FAILED: $FAIL_REASON" >&2
@@ -316,6 +342,10 @@ if [ -z "$FAIL_REASON" ]; then
     --argjson appimage_bytes "$APPIMAGE_BYTES" --argjson packs_bytes "$PACKS_BYTES" --argjson data_bytes "$DATA_BYTES" \
     --argjson v_startup_typical "\"$V_START_T\"" --argjson v_startup_low "\"$V_START_L\"" \
     --argjson v_mem "\"$V_MEM\"" --argjson v_disk "\"$V_DISK\"" \
+    --arg perf_model "${PERF_MODEL:-}" --arg perf_skip "${PERF_SKIP:-}" \
+    --argjson raf_asr "${RAF_ASR:-0}" --argjson lt_asr "${LT_ASR:-0}" --argjson inp_asr "${INP_ASR:-0}" \
+    --argjson raf_idle "${RAF_IDLE:-0}" --argjson inp_idle "${INP_IDLE:-0}" \
+    --argjson v_resp_block "\"$V_RESP_BLOCK\"" --argjson v_resp_inp "\"$V_RESP_INP\"" \
     '{schema:$schema, collected_utc:$ts, binary:$bin,
       startup:{runs_ms:$cold_ms, loadavg_per_run:$cold_loadavg, n:$cold_n, p50_ms:$cold_p50, p95_ms:$cold_p95,
         boundary:"process exec -> first app marker (`smoke-ok home`)",
@@ -328,8 +358,14 @@ if [ -z "$FAIL_REASON" ]; then
         home_state_ms:$plan_home_state_ms, fresh_plan_items:$fresh_plan_items},
       disk_bytes:{deb:$deb_bytes, release_binary:$binary_bytes, appimage_stale:$appimage_bytes,
         installed_packs:$packs_bytes, throwaway_data_dir:$data_bytes},
+      probe:{model:$perf_model, skipped:$perf_skip,
+        asr_window:{raf_max_ms:$raf_asr, longtasks:$lt_asr, inp_max_ms:$inp_asr},
+        idle_window:{raf_max_ms:$raf_idle, inp_max_ms:$inp_idle},
+        cancellation:"abstained:no-product-seam"},
       verdicts:{startup_to_home_typical:$v_startup_typical, startup_to_home_low:$v_startup_low,
-        app_rss_base_mb:$v_mem, base_install_mb:$v_disk}}' > "$OUT/metrics.json"
+        app_rss_base_mb:$v_mem, base_install_mb:$v_disk,
+        resp_inp:$v_resp_inp, resp_block:$v_resp_block,
+        resp_cancel:"unevaluable:no-product-seam"}}' > "$OUT/metrics.json"
 else
   jq -n --arg schema "perf-app/1.0" --arg ts "$(date -u +%FT%TZ)" --arg bin "$BIN" --arg reason "$FAIL_REASON" \
     '{schema:$schema, collected_utc:$ts, binary:$bin, failed:$true, failure:$reason}' > "$OUT/metrics.json"
@@ -436,6 +472,24 @@ profile without editing app code (out of scope for this card), so that line
 is recorded unevaluable below — the fresh-profile number is context, not a
 verdict on the 10k condition.
 
+## App-side responsiveness during inference (webview probe, LTS_SMOKE_PERF=1)
+
+Probe windows inside the real walkthrough; inference = three
+\`pronunciation_check\` calls through the installed aligner
+(${PERF_MODEL:-probe abstained}). Markers verbatim:
+
+\`\`\`
+$(echo "$PERF_LINES" | tr ';' '\n')
+\`\`\`
+
+Method notes: \`perf:rafmax\` = worst animation-frame gap in the window (the
+webview's main-thread blocking proxy); \`perf:inp\` = synthetic keydown ->
+double-rAF paint, sampled every 300 ms, worst value kept; \`perf:longtasks\` =
+PerformanceObserver long-task entries. \`app.cancellation.asr_cancel_effect_ms\`
+is deliberately NOT measured: the shipped whisper-cli invocation has no
+cancel seam, and the app says so (\`perf:cancel-skipped:no-product-seam\`)
+instead of inventing one to measure.
+
 ## Walk diagnostics (context, not budgets)
 
 - route-ms: $(echo "$ROUTE_MS" | tr '\n' ' ')
@@ -469,9 +523,9 @@ if [ -z "$FAIL_REASON" ]; then
 cat <<EOF
 | app.session_plan_10k_evidence_ms | typical | p50 50 / p95 150 ms | 10k-evidence condition not producible externally; fresh-profile practice_plan = ${PLAN_MS} ms | unevaluable (with recorded reference) |
 | app.session_plan_10k_evidence_ms | low | p50 120 / p95 400 ms | same as above | unevaluable (with recorded reference) |
-| app.ui_responsiveness_during_inference.input_to_paint_ms | all tiers | p95 100 ms | no ASR/TTS inference runs in the smoke walk; the BUDGETS method (synthetic key event -> rAF delta during inference) is not instrumentable from outside without app edits | unevaluable |
-| app.ui_responsiveness_during_inference.main_thread_max_block_ms | all tiers | p95 50 ms | same instrumentation gap as above | unevaluable |
-| app.cancellation.asr_cancel_effect_ms | all tiers | p95 250 ms | no ASR session exists in the smoke walk to cancel; app code has no external trigger for this path | unevaluable |
+| app.ui_responsiveness_during_inference.input_to_paint_ms | all tiers | p95 100 ms | probe during real whisper inference (${PERF_MODEL:-abstained}): worst synthetic input->paint ${INP_ASR:-n/a} ms, idle baseline worst ${INP_IDLE:-n/a} ms, longtasks in window ${LT_ASR:-n/a}; pronunciation_check call-ms: ${CHECK_MS:-none} | $V_RESP_INP |
+| app.ui_responsiveness_during_inference.main_thread_max_block_ms | all tiers | p95 50 ms | worst rAF gap during inference ${RAF_ASR:-n/a} ms, idle baseline worst ${RAF_IDLE:-n/a} ms (one walk) | $V_RESP_BLOCK |
+| app.cancellation.asr_cancel_effect_ms | all tiers | p95 250 ms | no cancel seam exists in the shipped whisper-cli invocation; the app emits perf:cancel-skipped:no-product-seam rather than a number from a fake path | unevaluable until a real cancel path ships |
 | memory.app_rss_base_mb | typical | 400 MB | base ${BASE_MB} MB (main VmRSS median; tree basis ${TBASE_MB} MB) | $V_MEM (main-process basis) |
 | memory.app_rss_base_mb | low | 400 MB | same measurement | $V_MEM (main-process basis) |
 | disk.base_install_mb | all tiers | 250 MB | deb ${DEB_MIB} MiB; installed release binary ${BIN_MIB} MiB | $V_DISK (deb basis; binary also under budget) |
@@ -489,9 +543,10 @@ cat <<EOF
 
 Adjacent lines outside this card's app/memory.app*/disk.* scope, for the
 record: \`memory.total_with_compact_model_mb\` and \`memory.gpu_vram_with_recommended_model_mb\`
-stay unevaluable here — no speech model was loaded during the app walk (the
-walk never starts ASR/TTS), so the app+model total and VRAM lines need the
-speech harnesses' RSS deltas plus a paired app run to combine.
+stay unevaluable here — the walk loads only the whisper GGML-tiny aligner
+inside the probe window (a dev-cache payload, not an installed model bundle),
+and headless Xvfb has no VRAM source, so the app+model total and VRAM lines
+need the speech harnesses' RSS deltas plus a paired app run to combine.
 
 ## Rerun on another machine
 

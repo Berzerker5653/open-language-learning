@@ -1,6 +1,6 @@
 {
   "schema": "perf-app/1.0",
-  "collected_utc": "2026-10-20T15:21:31Z",
+  "collected_utc": "2026-10-20T18:34:49Z",
   "os": "CachyOS",
   "kernel": "7.2.11-1-cachyos",
   "cpu": {
@@ -14,7 +14,7 @@
   },
   "memory": {
     "total_mb": 128710,
-    "available_mb": 52285,
+    "available_mb": 52296,
     "swap_total_mb": 128709
   },
   "gpu": {
@@ -23,5 +23,5 @@
     "nvidia_smi_l": "GPU 0: NVIDIA GeForce RTX 5090 (UUID: GPU-f9542919-e525-ef12-5e49-8bced48ea405)",
     "nvidia_vram": "NVIDIA GeForce RTX 5090, 32607 MiB"
   },
-  "loadavg_before": "0.98 1.01 2.02"
+  "loadavg_before": "1.40 12.48 14.81"
 }

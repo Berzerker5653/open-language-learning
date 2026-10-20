@@ -80,6 +80,7 @@ import {
 } from "./capture";
 import { audioFailureMessage, isMediaMissing } from "./speech-readiness";
 import type { EngineProgress } from "./progress";
+import { PerfProbe } from "./perf-probe";
 
 export type Invoke = (cmd: string, args?: Record<string, unknown>) => Promise<unknown>;
 /**
@@ -584,7 +585,7 @@ export function App() {
     const inv = detectInvoke();
     if (!inv) return;
     void (async () => {
-      const mode = (await inv("app_mode")) as { smoke: boolean };
+      const mode = (await inv("app_mode")) as { smoke: boolean; smoke_perf?: boolean };
       if (mode.smoke) {
         // The headless walkthrough is a once-per-process act, and it belongs
         // to the smoke branch alone: a StrictMode dev remount — or a test
@@ -801,6 +802,42 @@ export function App() {
           ];
           for (const [cmd, args] of warm) {
             await timed(cmd, args);
+          }
+          if (mode.smoke_perf) {
+            // PERF-002: the CLI benchmarks cannot answer
+            // app.ui_responsiveness_during_inference.*, so the walkthrough
+            // brackets a real aligner call (whisper sidecar, ADR-0019) with
+            // probe windows and lets the webview report its own numbers.
+            // Three calls: one cold (first subprocess), two warm.
+            const probe = new PerfProbe((note) => inv("smoke_ack", { note }));
+            try {
+              const model = (await inv("perf_asr_setup")) as string;
+              await inv("smoke_ack", { note: `perf:asr-model:${model}` });
+              const attempt = (await inv("perf_asr_attempt")) as {
+                pack_id: string;
+                short_unit: string;
+                long_unit: string;
+                short_text: string;
+                long_text: string;
+                wav_b64: string;
+              };
+              probe.start("asr-inference");
+              for (let i = 0; i < 3; i++) {
+                await inv("pronunciation_check", { attempt });
+              }
+              probe.stop();
+              probe.start("idle-baseline");
+              await new Promise((r) => setTimeout(r, 1500));
+              probe.stop();
+            } catch (e) {
+              // Abstain, don't fake: the marker names why there is no number.
+              await inv("smoke_ack", { note: `perf:asr-skipped:${String(e)}` });
+            }
+            await probe.flush();
+            // app.cancellation.asr_cancel_effect_ms: the shipped whisper-cli
+            // invocation has no cancel seam; inventing one to measure would
+            // measure the invention. State the abstention instead.
+            await inv("smoke_ack", { note: "perf:cancel-skipped:no-product-seam" });
           }
           // K-60: scenario actions died at the IPC boundary because the
           // native view structs renamed their keys to kebab-case. Walk

@@ -7,7 +7,7 @@ Everything below was prepared and measured today; the boxes are yours.
 
 | artifact | where | size | sha256 |
 | --- | --- | --- | --- |
-| app `lts-desktop` **0.4.3-alpha.1** deb, finalized (t64-safe `Depends`) — rebuilt 2026-10-20 with the `derive_pairs` 8× plan-latency fix (`state/evidence/PERF-002/plan10k-*`) | `target/release/bundle/deb/open-language-learning-platform_0.4.3-alpha.1_amd64.deb` | 12,588,776 B | `633c3307fe810e78…310a88c27` |
+| app `lts-desktop` **0.4.3-alpha.1** deb, finalized (t64-safe `Depends`) — rebuilt 2026-10-20 with the `derive_pairs` 8× plan-latency fix and the PERF-002 app-side probe (`state/evidence/PERF-002/plan10k-*`) | `target/release/bundle/deb/open-language-learning-platform_0.4.3-alpha.1_amd64.deb` | 12,596,228 B | `9c374399ac9ac4f6…9ba20931` |
 | ja-JP pack **0.4.3** `.lpk` (tracked tree incl. `capabilities.scenario_help`; `test` 0/0) | `~/staging/0.4.3/ja-JP-0.4.3.lpk` | 318,736,116 B | `9b17b23294df30f4…352719d6` |
 | ru-RU pack **0.4.3** `.lpk` (`test` 0/0) | `~/staging/0.4.3/ru-RU-0.4.3.lpk` | 318,493,155 B | `374d79e13db020fc…a2b96bc5` |
 
@@ -84,7 +84,8 @@ no-upload / retention suites green in the same CI run.
 
 Gaming PC tier is measured (`state/evidence/PERF-002/gamingpc-2026-10-20.md`).
 The Omarchy leg needs `sudo`, which an agent cannot use there. Restaged today
-(2026-10-20) with the **fixed** 0.4.3 binary (`sha256 91a1dd6b…4c86e7de`), the
+(2026-10-20) with the **fixed + instrumented** 0.4.3 binary (`sha256
+4c5dfb79…640e2c4e` — includes the webview perf probe), the
 finalized deb and both harnesses under `~/perf-0.4.3`. Close any running app
 instance there, then one line:
 
