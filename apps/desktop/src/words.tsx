@@ -10,6 +10,7 @@
  * stay untouched.
  */
 import { PackText, usePackTextAttrs } from "@openlang/ui";
+import { useKanaIME } from "./kana-ime";
 
 export interface MineItem {
   id: string;
@@ -42,10 +43,22 @@ export interface MyWordsPanelProps {
   onStartNewReview(): void;
   onStartReview(): void;
   onReveal(): void;
+  /// Issue #2 phase 1: in-app kana keyboard for the surface/reading fields.
+  kanaInput?: boolean;
 }
 
 export function MyWordsPanel(p: MyWordsPanelProps) {
   const packAttrs = usePackTextAttrs();
+  const kanaSurface = useKanaIME({
+    enabled: p.kanaInput === true,
+    value: p.draft.surface,
+    onDraft: (v) => p.onDraftChange("surface", v),
+  });
+  const kanaReading = useKanaIME({
+    enabled: p.kanaInput === true,
+    value: p.draft.reading,
+    onDraft: (v) => p.onDraftChange("reading", v),
+  });
   return (
     <section aria-label="My words">
       <h1>My words</h1>
@@ -112,14 +125,22 @@ export function MyWordsPanel(p: MyWordsPanelProps) {
         <input
           id="mine-surface"
           value={p.draft.surface}
-          onChange={(e) => p.onDraftChange("surface", e.target.value)}
+          onKeyDown={kanaSurface.onKeyDown}
+          onChange={(e) => {
+            kanaSurface.noteExternalEdit();
+            p.onDraftChange("surface", e.target.value);
+          }}
           {...packAttrs}
         />
         <label htmlFor="mine-reading">Reading (optional)</label>
         <input
           id="mine-reading"
           value={p.draft.reading}
-          onChange={(e) => p.onDraftChange("reading", e.target.value)}
+          onKeyDown={kanaReading.onKeyDown}
+          onChange={(e) => {
+            kanaReading.noteExternalEdit();
+            p.onDraftChange("reading", e.target.value);
+          }}
           {...packAttrs}
         />
         <label htmlFor="mine-gloss">Meaning (optional)</label>

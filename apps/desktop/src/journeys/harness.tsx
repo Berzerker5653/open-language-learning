@@ -39,7 +39,7 @@ import type { PracticeTaskView } from "../practice";
 import type { LessonContent, LessonPlan } from "../lesson";
 import type { DisplaySettingsView } from "../stress";
 import type { BuildIdentity, ImportOutcome, ImportPreview } from "../settings";
-import type { RomajiMode } from "../settings";
+import type { KanaKeyboardMode, RomajiMode } from "../settings";
 
 /** React 19 refuses `act` unless the host says the environment supports it. */
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
@@ -928,6 +928,7 @@ interface Profile {
   budget: number;
   micEnabled: boolean;
   romaji: RomajiMode;
+  kana: KanaKeyboardMode;
   events: number;
   goals: number;
   savedWords: number;
@@ -940,6 +941,7 @@ type Scenario = {
     display_name: string;
     active?: string | null;
     micEnabled?: boolean;
+    kana?: KanaKeyboardMode;
     events?: number;
     savedWords?: number;
     goals?: number;
@@ -1031,6 +1033,7 @@ export class LearnerEngine {
         budget: 5,
         micEnabled: seed.micEnabled ?? false,
         romaji: "auto",
+        kana: seed.kana ?? "off",
         events: seed.events ?? 0,
         goals: seed.goals ?? 2,
         savedWords: seed.savedWords ?? 0,
@@ -1250,6 +1253,7 @@ export class LearnerEngine {
           budget: 5,
           micEnabled: false,
           romaji: "auto",
+          kana: "off",
           events: 0,
           goals: 2,
           savedWords: 0,
@@ -1339,6 +1343,16 @@ export class LearnerEngine {
         return null;
       case "get_romaji_mode":
         return this.profile(args.profileId).romaji;
+      case "get_kana_keyboard":
+        return this.profile(args.profileId).kana;
+      case "set_kana_keyboard": {
+        const p = this.profile(args.profileId);
+        const mode = String(args.mode);
+        if (mode !== "off" && mode !== "romaji-kana")
+          throw "kana-keyboard must be off or romaji-kana";
+        p.kana = mode as KanaKeyboardMode;
+        return p.kana;
+      }
       case "active_pack": {
         const p = this.profile(args.profileId);
         return p.active ? [p.active] : [];
@@ -1763,6 +1777,7 @@ export class LearnerEngine {
             { key: "microphone-enabled", value: p.micEnabled },
             { key: "romaji-mode", value: p.romaji },
             { key: "study-budget", value: p.budget },
+            { key: "kana-keyboard", value: p.kana },
           ],
           goals: Array.from({ length: p.goals }, (_, i) => `${p.id}.goal.${i}`),
           pack_installations: p.installs.map((id) => ({
@@ -1820,6 +1835,7 @@ export class LearnerEngine {
           budget: Number(settings.get("study-budget") ?? 5),
           micEnabled: Boolean(settings.get("microphone-enabled")),
           romaji: String(settings.get("romaji-mode") ?? "auto") as RomajiMode,
+          kana: String(settings.get("kana-keyboard") ?? "off") as KanaKeyboardMode,
           events: (bundle.evidence as unknown[]).length,
           goals: (bundle.goals as unknown[]).length,
           savedWords: (bundle.mined_items as unknown[]).length,

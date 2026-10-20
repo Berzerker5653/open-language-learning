@@ -5,6 +5,7 @@
  */
 import { usePackTextAttrs } from "@openlang/ui";
 import { StressText } from "./stress";
+import { useKanaIME } from "./kana-ime";
 
 export interface WritingTaskView {
   item_id: string;
@@ -29,10 +30,18 @@ export interface WritingPracticeProps {
   /// K-41: highlight U+0301-stressed vowels in the reading hint
   /// (display-only).
   stress?: boolean;
+  /// Issue #2 phase 1: in-app kana keyboard (see practice.tsx); the label
+  /// stays honest — a platform IME remains supported either way.
+  kanaInput?: boolean;
 }
 
 export function WritingPractice(p: WritingPracticeProps) {
   const packAttrs = usePackTextAttrs();
+  const kanaIme = useKanaIME({
+    enabled: p.kanaInput === true,
+    value: p.draft,
+    onDraft: (v) => p.onDraft(v),
+  });
   return (
     <section aria-label="Writing practice">
       <h1>Writing practice</h1>
@@ -58,7 +67,11 @@ export function WritingPractice(p: WritingPracticeProps) {
           type="text"
           {...packAttrs}
           value={p.draft}
-          onChange={(e) => p.onDraft(e.target.value)}
+          onKeyDown={kanaIme.onKeyDown}
+          onChange={(e) => {
+            kanaIme.noteExternalEdit();
+            p.onDraft(e.target.value);
+          }}
         />
       </div>
       <div className="btn-row">

@@ -21,6 +21,8 @@ const base: SettingsProps = {
   onPickPlaybackDevice: () => {},
   romajiMode: "auto",
   onSetRomajiMode: () => {},
+  kanaKeyboard: "off",
+  onSetKanaKeyboard: () => {},
   speechModel: "off",
   speechModels: [
     {
@@ -117,6 +119,9 @@ describe("settings", () => {
     expect(render({ romajiMode: "auto" })).toMatch(/checked="" value="auto"/);
     expect(render({ romajiMode: "always" })).toMatch(/checked="" value="always"/);
     expect(render({ romajiMode: "off" })).not.toMatch(/checked="" value="auto"/);
+    // Issue #2: the in-app kana keyboard is a per-profile choice too.
+    expect(render({ kanaKeyboard: "romaji-kana" })).toMatch(/checked="" value="romaji-kana"/);
+    expect(render({ kanaKeyboard: "off" })).not.toMatch(/checked="" value="romaji-kana"/);
     // The scaffold policy's promise: never gates progression.
     expect(render()).toContain("never blocks progression");
   });

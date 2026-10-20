@@ -1488,6 +1488,46 @@ fn set_romaji_mode(profile_id: String, mode: String) -> Result<String, String> {
     set_romaji_mode_at(&data_dir(), &profile_id, &mode)
 }
 
+/// In-app kana keyboard (issue #2, phase 1): a per-profile choice of how
+/// the app turns keystrokes into target-language text. "off" is the
+/// status quo — the platform IME and zero interception by this app.
+/// "romaji-kana" activates the app's own converter on the learner's text
+/// fields so no system layout or IME change is required.
+fn kana_keyboard_at(data: &Path, profile_id: &str) -> Result<String, String> {
+    resume_profile_at(data, profile_id)?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    Ok(store
+        .get_setting(profile_id, "kana-keyboard")
+        .ok()
+        .flatten()
+        .and_then(|v| v.as_str().map(String::from))
+        .filter(|s| s == "romaji-kana")
+        .unwrap_or_else(|| "off".to_string()))
+}
+
+fn set_kana_keyboard_at(data: &Path, profile_id: &str, mode: &str) -> Result<String, String> {
+    let mode = match mode {
+        "off" | "romaji-kana" => mode,
+        _ => return Err("kana-keyboard must be off or romaji-kana".to_string()),
+    };
+    resume_profile_at(data, profile_id)?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    store
+        .set_setting(profile_id, "kana-keyboard", &serde_json::json!(mode))
+        .map_err(|e| e.to_string())?;
+    kana_keyboard_at(data, profile_id)
+}
+
+#[tauri::command]
+fn get_kana_keyboard(profile_id: String) -> Result<String, String> {
+    kana_keyboard_at(&data_dir(), &profile_id)
+}
+
+#[tauri::command]
+fn set_kana_keyboard(profile_id: String, mode: String) -> Result<String, String> {
+    set_kana_keyboard_at(&data_dir(), &profile_id, &mode)
+}
+
 /// The privacy notice promises "You can export … your local profile data
 /// at any time": write the versioned `ExportBundle` JSON under
 /// `<data>/exports/` and return the path. Recording *metadata* is
@@ -8017,6 +8057,8 @@ pub fn run() {
             set_playback_device,
             get_romaji_mode,
             set_romaji_mode,
+            get_kana_keyboard,
+            set_kana_keyboard,
             profile_export,
             profile_import_preview,
             profile_import,
@@ -11441,6 +11483,22 @@ activities:
             "always",
             "a rejected value never overwrites the stored one"
         );
+        // Issue #2 phase 1: the in-app kana keyboard follows the same
+        // per-profile shape — default off, strict enum, rejects never
+        // clobber the stored value.
+        assert_eq!(kana_keyboard_at(data, &p.id).unwrap(), "off");
+        assert_eq!(
+            set_kana_keyboard_at(data, &p.id, "romaji-kana").unwrap(),
+            "romaji-kana"
+        );
+        assert_eq!(kana_keyboard_at(data, &p.id).unwrap(), "romaji-kana");
+        assert!(set_kana_keyboard_at(data, &p.id, "kakasi").is_err());
+        assert_eq!(
+            kana_keyboard_at(data, &p.id).unwrap(),
+            "romaji-kana",
+            "a rejected value never overwrites the stored one"
+        );
+        assert_eq!(set_kana_keyboard_at(data, &p.id, "off").unwrap(), "off");
         // K-64: the chosen microphone is a profile setting like the others.
         // No stored device means the system default, which is a decision, not
         // a missing value — clearing must survive the same way choosing does.

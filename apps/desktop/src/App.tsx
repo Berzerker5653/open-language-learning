@@ -65,6 +65,7 @@ import {
   type ImportOutcome,
   type ImportPreview,
   type RomajiMode,
+  type KanaKeyboardMode,
 } from "./settings";
 import {
   CaptureOwner,
@@ -508,6 +509,7 @@ export function App() {
   const [playbackOutputs, setPlaybackOutputs] = useState<SpeakerOutput[]>([]);
   const [canRouteOutput, setCanRouteOutput] = useState(false);
   const [romajiMode, setRomajiMode] = useState<RomajiMode>("auto");
+  const [kanaKeyboard, setKanaKeyboard] = useState<KanaKeyboardMode>("off");
   const [settingsExportPath, setSettingsExportPath] = useState<string | null>(null);
   // R06: restoring is preview-first. `restoreChecked` remembers exactly which
   // path was checked, so editing the field drops a stale preview instead of
@@ -1566,6 +1568,7 @@ export function App() {
       setMicDevice((await inv("get_microphone_device", { profileId: pid })) as string | null);
       setPlaybackDevice((await inv("get_playback_device", { profileId: pid })) as string | null);
       setRomajiMode((await inv("get_romaji_mode", { profileId: pid })) as RomajiMode);
+      setKanaKeyboard((await inv("get_kana_keyboard", { profileId: pid })) as KanaKeyboardMode);
     } catch {
       /* keep the conservative defaults; opening Settings re-reads them */
     }
@@ -1583,6 +1586,7 @@ export function App() {
       setPlaybackDevice((await inv("get_playback_device", { profileId })) as string | null);
       setRomajiMode((await inv("get_romaji_mode", { profileId })) as RomajiMode);
       await refreshSpeech();
+      setKanaKeyboard((await inv("get_kana_keyboard", { profileId })) as KanaKeyboardMode);
       // K-77: Settings now hosts language-pack management and the speech
       // runtime status too, so opening it primes the reads the old
       // Languages tab did. K-90 deleted the synthesis status read.
@@ -1675,6 +1679,17 @@ export function App() {
     }
   }
 
+  // Issue #2 phase 1: the in-app kana keyboard is a profile setting that
+  // never touches the system layout.
+  async function setKanaKeyboardSetting(mode: KanaKeyboardMode) {
+    if (!inv || profileId === null) return;
+    setSettingsError(null);
+    try {
+      setKanaKeyboard((await inv("set_kana_keyboard", { profileId, mode })) as KanaKeyboardMode);
+    } catch (e) {
+      setSettingsError(String(e));
+    }
+  }
   async function exportProfileData() {
     if (!inv || !profileId) return;
     setSettingsError(null);
@@ -3348,6 +3363,7 @@ export function App() {
             }}
             onStop={stopAndCheck}
             onPlayAttempt={() => attemptUrl && playBlobUrl(attemptUrl, true)}
+            kanaInput={kanaKeyboard === "romaji-kana"}
           />
         </>
       ) : route === "shadowing" ? (
@@ -3394,6 +3410,7 @@ export function App() {
             gloss: mineGloss,
             source: mineSource,
           }}
+          kanaInput={kanaKeyboard === "romaji-kana"}
           onDraftChange={(field, value) =>
             field === "surface"
               ? setMineSurface(value)
@@ -3565,6 +3582,7 @@ export function App() {
               onSubmit={() => void submitWriting()}
               stress={stressEnabled(display)}
               onHint={showWritingHint}
+              kanaInput={kanaKeyboard === "romaji-kana"}
             />
           ) : writingError ? (
             // A failed read is an error, never the empty-state story: the
@@ -3636,6 +3654,8 @@ export function App() {
             onDetectMicrophones={() => void refreshMicrophones()}
             romajiMode={romajiMode}
             onSetRomajiMode={(m) => void setRomajiSetting(m)}
+            kanaKeyboard={kanaKeyboard}
+            onSetKanaKeyboard={(m) => void setKanaKeyboardSetting(m)}
             speechModel={speechModel}
             speechModels={speechModels}
             onSelectSpeechModel={(id) => void selectSpeechModel(id)}
@@ -3734,6 +3754,7 @@ export function App() {
                 }
                 onPlayAudio={playPracticeAudio}
                 playing={clipPlaying}
+                kanaInput={kanaKeyboard === "romaji-kana"}
                 heading={
                   practiceTarget.modality === "orthography-recognition"
                     ? "Which one matches?"

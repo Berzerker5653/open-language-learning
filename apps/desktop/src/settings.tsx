@@ -19,6 +19,9 @@ import type { Microphone, SpeakerOutput } from "./capture";
 import { megabytes, type AlignerStatus, type DeviceTier } from "./language";
 export type RomajiMode = "auto" | "always" | "off";
 
+/** In-app input method (issue #2 phase 1); "off" keeps the app passive. */
+export type KanaKeyboardMode = "off" | "romaji-kana";
+
 export interface SpeechModelPref {
   id: string;
   version: string;
@@ -88,6 +91,9 @@ export interface SettingsProps {
   /** Stored `romaji-mode` (exactly the reader's vocabulary). */
   romajiMode: RomajiMode;
   onSetRomajiMode(mode: RomajiMode): void;
+  /** Stored `kana-keyboard` (get/set_kana_keyboard). */
+  kanaKeyboard: KanaKeyboardMode;
+  onSetKanaKeyboard(mode: KanaKeyboardMode): void;
   /** The one speech-model preference app-wide (get/set_speech_model). */
   speechModel: string;
   speechModels: SpeechModelPref[];
@@ -128,6 +134,11 @@ const ROMAJI_MODES: { value: RomajiMode; label: string }[] = [
   { value: "auto", label: "Auto — fade as my reading grows" },
   { value: "always", label: "Always show romaji" },
   { value: "off", label: "Off — Japanese script only" },
+];
+
+const KANA_KEYBOARD_MODES: { value: KanaKeyboardMode; label: string }[] = [
+  { value: "off", label: "Off — I use the system keyboard or IME" },
+  { value: "romaji-kana", label: "On — type romaji, get kana, inside the app" },
 ];
 
 const SPEECH_MODEL_LABELS: Record<string, string> = {
@@ -261,6 +272,33 @@ export function Settings(p: SettingsProps) {
             Romaji is a temporary scaffold: content is stored in Japanese script, and Auto fades
             romanisation as reading grows. Your choice is honored everywhere and never blocks
             progression.
+          </small>
+        </p>
+      </div>
+      <div className="card">
+        <h3>Kana keyboard (in-app)</h3>
+        <fieldset>
+          <legend>Type Japanese in the app without changing the system keyboard</legend>
+          {KANA_KEYBOARD_MODES.map((m) => (
+            <label key={m.value} className="radio-row">
+              <input
+                type="radio"
+                name="kana-keyboard"
+                value={m.value}
+                checked={p.kanaKeyboard === m.value}
+                onChange={() => p.onSetKanaKeyboard(m.value)}
+              />{" "}
+              {m.label}
+            </label>
+          ))}
+        </fieldset>
+        <p>
+          <small>
+            Romaji is converted to kana inside the app's own answer fields — nothing is installed
+            and your system layout stays exactly as it is. A platform IME still works when you
+            prefer it: the app steps back while an IME is composing, and turns no key when this is
+            off. Kanji candidates follow the pack's own vocabulary in a later pass; free text
+            outside it stays kana.
           </small>
         </p>
       </div>

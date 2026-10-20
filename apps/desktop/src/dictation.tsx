@@ -7,6 +7,7 @@
  */
 
 import { LatinText, usePackTextAttrs } from "@openlang/ui";
+import { useKanaIME } from "./kana-ime";
 export interface DictationResult {
   matched: boolean | null;
   heard: string;
@@ -37,6 +38,8 @@ export interface DictationProps {
   onRecord: () => void;
   onStop: () => void;
   onPlayAttempt: () => void;
+  /// Issue #2 phase 1: in-app kana keyboard for the typed override field.
+  kanaInput?: boolean;
 }
 
 const REASON_TEXT: Record<string, string> = {
@@ -60,6 +63,11 @@ function reasonLabel(reason: string): string {
 export function DictationPractice(props: DictationProps) {
   const { sentence, target, result, recording, hasAttempt } = props;
   const packAttrs = usePackTextAttrs();
+  const kanaIme = useKanaIME({
+    enabled: props.kanaInput === true,
+    value: target,
+    onDraft: (v) => props.onTargetChange(v),
+  });
   return (
     <section aria-label="Dictation practice">
       <h2>Speaking: say the sentence</h2>
@@ -87,10 +95,15 @@ export function DictationPractice(props: DictationProps) {
       <label>
         Sentence to read (edit to use your own)
         <input
+          id="dictation-target"
           type="text"
           {...packAttrs}
           value={target}
-          onChange={(e) => props.onTargetChange(e.target.value)}
+          onKeyDown={kanaIme.onKeyDown}
+          onChange={(e) => {
+            kanaIme.noteExternalEdit();
+            props.onTargetChange(e.target.value);
+          }}
           disabled={recording}
         />
       </label>

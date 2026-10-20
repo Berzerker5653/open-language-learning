@@ -9,6 +9,7 @@
  */
 import { StressText } from "./stress";
 import { Ruby } from "./ruby";
+import { useKanaIME } from "./kana-ime";
 import { LatinText, PackText, usePackTextAttrs } from "@openlang/ui";
 import type { DictationResult } from "./dictation";
 
@@ -72,6 +73,9 @@ export interface PracticeRunnerProps {
   /// F-07: true while the listening clip is playing; drives the button's
   /// pressed state and a spoken "playing" status.
   playing?: boolean;
+  /// Issue #2 phase 1: the learner's in-app kana keyboard choice; when on,
+  /// the answer field converts romaji to kana without any system IME.
+  kanaInput?: boolean;
   onReveal?(): void;
   /// K-41: highlight U+0301-stressed vowels in readings (display-only).
   stress?: boolean;
@@ -112,6 +116,11 @@ function speakCheckNotice(result: DictationResult): string {
 
 export function PracticeRunner(p: PracticeRunnerProps) {
   const packAttrs = usePackTextAttrs();
+  const kanaIme = useKanaIME({
+    enabled: p.kanaInput === true,
+    value: p.draft ?? "",
+    onDraft: (v) => p.onDraft?.(v),
+  });
   if (p.task.mode === "guided") {
     return (
       <section aria-label="Practice" className="practice-guided">
@@ -258,7 +267,11 @@ export function PracticeRunner(p: PracticeRunnerProps) {
             type="text"
             value={p.draft ?? ""}
             disabled={p.graded}
-            onChange={(e) => p.onDraft?.(e.target.value)}
+            onKeyDown={kanaIme.onKeyDown}
+            onChange={(e) => {
+              kanaIme.noteExternalEdit();
+              p.onDraft?.(e.target.value);
+            }}
           />
           <div className="btn-row">
             <button
