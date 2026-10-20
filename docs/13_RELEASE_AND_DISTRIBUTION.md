@@ -11,7 +11,7 @@ Version separately:
 
 ## Desktop release
 
-Target signed/packaged releases for Linux, Windows, and macOS after platform gates pass. Linux is the primary development reference but not the only 1.0 target.
+1.0 ships **Linux x86-64 only** (ADR-0039, 2026-10-20): signed/packaged Linux releases are the target; Windows and macOS builds stay compile-checked and may be published as explicitly untested trials, with real parity (`PLAT-001`) a post-1.0 milestone. Linux is the primary development reference and today the only supported platform.
 
 ### Platform status ladder (PLAT-001, owner decisions 2026-10-03 and 2026-10-07, ADR-0015)
 

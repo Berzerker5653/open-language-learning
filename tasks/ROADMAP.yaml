@@ -1461,12 +1461,14 @@ tasks:
   priority: P0
   title: Measure release performance on supported configurations
   dependencies:
+  # ADR-0039: "supported configurations" are the declared Linux tiers; the
+  # PLAT-001 edge left with the platform scope, not the measurement work.
   - PERF-001
-  - PLAT-001
   read_first:
   - docs/07_TECHNICAL_ARCHITECTURE.md
   - docs/09_TESTING_AND_ACCEPTANCE.md
   - docs/17_SPEECH_BENCHMARK_PLAN.md
+  - docs/adr/0039-linux-only-desktop-1-0.md
   acceptance:
   - Frozen performance budgets pass on every declared desktop hardware/model tier with repeatable scripts and
     p50/p95, RAM/VRAM, startup, disk and UI responsiveness evidence.
@@ -1486,7 +1488,9 @@ tasks:
   acceptance:
   - Automated builds and critical E2E pass on Linux/Windows/macOS.
   - Speech/model behavior and install paths are documented per platform.
-  required_for_desktop_1_0: true
+  # ADR-0039 (2026-10-20): desktop 1.0 supports Linux only; parity returns as a
+  # post-1.0 milestone with real machines or user demand.
+  required_for_desktop_1_0: false
 - id: PLAT-002
   milestone: M10
   priority: P1
@@ -2153,6 +2157,26 @@ tasks:
     Phase 1 plan and decision record: GitHub issue #2
     (https://github.com/Berzerker5653/open-language-learning/issues/2).
   required_for_desktop_1_0: false
+- id: CONTENT-CONFIRM-001
+  milestone: M11
+  priority: P2
+  title: >-
+    In-app community confirmation of content correctness: attributed user
+    confirmations, never agent self-certification (ADR-0040)
+  dependencies: []
+  read_first:
+  - docs/adr/0040-ai-only-content-with-community-confirmation.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - >-
+    A confirmation is attributed to the profile that gave it, stored locally,
+    included in profile export, and rendered with its attribution; the app
+    shows what users confirmed, never a claim of expert verification.
+  - >-
+    No automatic path marks content checked: only an explicit action by a
+    user fluent in the language creates the mark, and packs keep their
+    declared review posture regardless.
+  required_for_desktop_1_0: false
 - id: RU-MODALITY-PRACTICE-001
   milestone: M10
   priority: P1
@@ -2396,4 +2420,6 @@ execution_scope:
   - JA-KANJI-MNEMONICS-001
   - PACK-UPDATE-UX-001
   - IN-APP-IME-001
+  - PLAT-001
+  - CONTENT-CONFIRM-001
   public_publication_authorized: false

@@ -123,6 +123,13 @@ Before the first batch is promoted, record a review protocol with:
 
 Native or near-native status is a useful qualification category but does not establish pedagogical or assessment expertise by itself. AI review can flag issues for a qualified reviewer and cannot serve as that human reviewer. Missing reviewer availability is a declared blocker to promotion, not permission to invent an approval.
 
+ADR-0040 (2026-10-20, owner directive): the project seeks no external
+qualified review — the only path by which content ever carries a confirmation
+mark is attributed community confirmation inside the app (roadmap
+`CONTENT-CONFIRM-001`), and until that ships every pack keeps its declared
+AI-authored, not-expert-verified posture. Everything above still binds
+claims: nothing may write `verified` for a human gate that does not exist.
+
 Automated speech feedback requires its own human-labeled calibration and release gate under `docs/17_SPEECH_BENCHMARK_PLAN.md`; a natural Japanese example is not proof that a model can score learners reliably. Listen to the actual reference/TTS output used in assessed lessons. Generated error audio and accent/G2P predictions remain hypotheses until checked. Material changes to content, audio, accepted variants or assessment targets require review of the affected scope and revalidation of related speech calibration.
 
 ## Corrections

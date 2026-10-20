@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-10-19",
+  "updated": "2026-10-20",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -822,7 +822,9 @@
         "state/evidence/SPEECH-007/prep-2026-10-06.txt",
         "state/evidence/SPEECH-007/probe-2026-10-06.txt",
         "benchmarks/speech/results/20261008T030000Z/summary.json"
-      ]
+      ],
+      "blocker": "Blocked by the owner's permanent posture (ADR-0040, 2026-10-20): the project seeks no external qualified review. This card stays blocked as the honest record that expert review has not happened and will not; content is AI-authored with machine gates, and only in-app attributed community confirmation (CONTENT-CONFIRM-001) can ever mark content confirmed.",
+      "updated": "2026-10-20"
     },
     "K-40": {
       "status": "done",
@@ -1324,8 +1326,8 @@
         "languages/ja-JP/review/REVIEW_POLICY.yaml",
         "languages/ja-JP/review/WORKLIST-2026-10-14.md"
       ],
-      "updated": "2026-10-15",
-      "blocker": "Needs a qualified human reviewer; an AI cannot self-certify band coverage or correctness (docs/15, AGENTS)."
+      "updated": "2026-10-20",
+      "blocker": "Blocked by the owner's permanent posture (ADR-0040, 2026-10-20): the project seeks no external qualified review. This card stays blocked as the honest record that expert review has not happened and will not; content is AI-authored with machine gates, and only in-app attributed community confirmation (CONTENT-CONFIRM-001) can ever mark content confirmed."
     },
     "JA-A2-002": {
       "task_id": "JA-A2-002",
@@ -1343,8 +1345,8 @@
         "languages/ja-JP/review/REVIEWER_KIT.md",
         "languages/ja-JP/review/WORKLIST-2026-10-14.md"
       ],
-      "updated": "2026-10-15",
-      "blocker": "Needs a qualified human reviewer for the A2 band of a named pack version."
+      "updated": "2026-10-20",
+      "blocker": "Blocked by the owner's permanent posture (ADR-0040, 2026-10-20): the project seeks no external qualified review. This card stays blocked as the honest record that expert review has not happened and will not; content is AI-authored with machine gates, and only in-app attributed community confirmation (CONTENT-CONFIRM-001) can ever mark content confirmed."
     },
     "JA-B1-002": {
       "task_id": "JA-B1-002",
@@ -1362,8 +1364,8 @@
         "languages/ja-JP/review/REVIEWER_KIT.md",
         "languages/ja-JP/review/WORKLIST-2026-10-14.md"
       ],
-      "updated": "2026-10-15",
-      "blocker": "Needs a qualified human reviewer for the B1 band of a named pack version."
+      "updated": "2026-10-20",
+      "blocker": "Blocked by the owner's permanent posture (ADR-0040, 2026-10-20): the project seeks no external qualified review. This card stays blocked as the honest record that expert review has not happened and will not; content is AI-authored with machine gates, and only in-app attributed community confirmation (CONTENT-CONFIRM-001) can ever mark content confirmed."
     },
     "JA-B2-002": {
       "task_id": "JA-B2-002",
@@ -1381,8 +1383,8 @@
         "languages/ja-JP/review/REVIEWER_KIT.md",
         "languages/ja-JP/review/WORKLIST-2026-10-14.md"
       ],
-      "updated": "2026-10-15",
-      "blocker": "Needs a qualified human reviewer for the B2 band; insufficient evidence keeps stable 1.0 blocked and preview packs labelled partial rather than shrinking the stable target."
+      "updated": "2026-10-20",
+      "blocker": "Blocked by the owner's permanent posture (ADR-0040, 2026-10-20): the project seeks no external qualified review. This card stays blocked as the honest record that expert review has not happened and will not; content is AI-authored with machine gates, and only in-app attributed community confirmation (CONTENT-CONFIRM-001) can ever mark content confirmed."
     },
     "ACC-001": {
       "task_id": "ACC-001",
@@ -1416,7 +1418,7 @@
       "title": "Security/privacy release audit",
       "activity": "idle",
       "summary": "Malicious-pack suite, no unexpected speech upload in local mode, and secrets/logging/recording-retention gates all pass.",
-      "notes": "Recorded 2026-10-15 (REL-001 recheck): required for desktop 1.0, previously ROADMAP-only, so docs/15 derivation reported it ready. The automated work on record is explicitly **partial** (2026-10-06 artifact): `cargo audit` across 528 crates (0 vulnerabilities, 2 warnings — an unmaintained build-time proc macro and a transitive glib unsoundness), a heuristic secret-pattern grep because gitleaks was not installed, and a manual licence audit. What the acceptance bullets additionally require is not covered by that artifact: the pack-install defences are enforced by tests that run today (`reference_audio_follows_the_manifest_and_refuses_traversal` in `apps/desktop/src-tauri/src/lib.rs:11776`, `tampered_archive_is_rejected` and `redirect_hops_stay_on_allowlisted_hosts_for_downloads` in `apps/desktop/src-tauri/src/packs.rs`), but there is no consolidated malicious-pack suite, no privacy review of provider upload paths, and no logging/recording-retention gate. Acceptance is a human disposition: an agent can run suites and record results, it cannot accept residual risk or sign off privacy. Re-scan 2026-10-16 (owner queue D8): `cargo audit` at `e18c9df` reports 4 allowed warnings over 562 crate dependencies and exits 0. The owner accepted the three advisory-bearing warnings (glib 0.18.5 unsoundness, proc-macro-error 1.0.4, unsafe-libyaml 0.2.11) on 2026-10-16; the fourth, the yanked direct pin `zip 8.6.0`, is recorded as pending disposition with its reachability evidence and the measured bump cost in `state/notes/SEC-001-dependency-disposition.md`. Executed 2026-10-16 (queue item D8b): the pin is now `zip 9.0.4` — three one-line `name()` call sites (`crates/langpack/src/archive.rs:269`, `crates/langpack/tests/archive.rs:207`, `:280`), a relock adding only `nix 0.31.3` + `cfg_aliases 0.2.2` plus tempfile's getrandom edge 0.3.4 → 0.4.3, `cargo check --workspace --all-targets` exit 0 and `cargo test --workspace` green, and an example-pack `.lpk` byte-identical across the bump (3,976 B, sha256 `7938e5fba60e3ceffdf7e796c229b29f3ec57493a959dc35ac53a92ad9434bcc`), so no published digest moves; `cargo audit` now prints 3 allowed warnings, exit 0. What still needs a human is acceptance of the three remaining warnings.",
+      "notes": "Recorded 2026-10-15 (REL-001 recheck): required for desktop 1.0, previously ROADMAP-only, so docs/15 derivation reported it ready. The automated work on record is explicitly **partial** (2026-10-06 artifact): `cargo audit` across 528 crates (0 vulnerabilities, 2 warnings — an unmaintained build-time proc macro and a transitive glib unsoundness), a heuristic secret-pattern grep because gitleaks was not installed, and a manual licence audit. What the acceptance bullets additionally require is not covered by that artifact: the pack-install defences are enforced by tests that run today (`reference_audio_follows_the_manifest_and_refuses_traversal` in `apps/desktop/src-tauri/src/lib.rs:11776`, `tampered_archive_is_rejected` and `redirect_hops_stay_on_allowlisted_hosts_for_downloads` in `apps/desktop/src-tauri/src/packs.rs`), but there is no consolidated malicious-pack suite, no privacy review of provider upload paths, and no logging/recording-retention gate. Acceptance is a human disposition: an agent can run suites and record results, it cannot accept residual risk or sign off privacy. Re-scan 2026-10-16 (owner queue D8): `cargo audit` at `e18c9df` reports 4 allowed warnings over 562 crate dependencies and exits 0. The owner accepted the three advisory-bearing warnings (glib 0.18.5 unsoundness, proc-macro-error 1.0.4, unsafe-libyaml 0.2.11) on 2026-10-16; the fourth, the yanked direct pin `zip 8.6.0`, is recorded as pending disposition with its reachability evidence and the measured bump cost in `state/notes/SEC-001-dependency-disposition.md`. Executed 2026-10-16 (queue item D8b): the pin is now `zip 9.0.4` — three one-line `name()` call sites (`crates/langpack/src/archive.rs:269`, `crates/langpack/tests/archive.rs:207`, `:280`), a relock adding only `nix 0.31.3` + `cfg_aliases 0.2.2` plus tempfile's getrandom edge 0.3.4 → 0.4.3, `cargo check --workspace --all-targets` exit 0 and `cargo test --workspace` green, and an example-pack `.lpk` byte-identical across the bump (3,976 B, sha256 `7938e5fba60e3ceffdf7e796c229b29f3ec57493a959dc35ac53a92ad9434bcc`), so no published digest moves; `cargo audit` now prints 3 allowed warnings, exit 0. What still needs a human is acceptance of the three remaining warnings.\n2026-10-20: automated evidence refreshed per owner direction; the 2026-10-09 warnings (glib, proc-macro-error) no longer appear in the current graph.",
       "dependencies": [
         "PACK-004",
         "DATA-002",
@@ -1430,10 +1432,11 @@
       "evidence": [
         "state/evidence/SEC-001/automated-2026-10-06.txt",
         "state/notes/SEC-001-dependency-disposition.md",
-        "SECURITY.md"
+        "SECURITY.md",
+        "state/evidence/SEC-001/fresh-2026-10-20.md"
       ],
-      "updated": "2026-10-16",
-      "blocker": "Owner/human disposition of findings and privacy sign-off; automated suites pass but acceptance is not an agent's to grant."
+      "updated": "2026-10-20",
+      "blocker": "Owner sign-off only: fresh 2026-10-20 scans on 3a4e16d show zero findings (cargo-audit 0/0 on 564 crates, gitleaks clean across all 587 commits, pnpm audit clean, CI security job green). What remains is the owner's disposition record and privacy sign-off — an agent cannot grant it."
     },
     "PLAT-001": {
       "task_id": "PLAT-001",
@@ -1442,50 +1445,45 @@
       "title": "Windows/macOS desktop parity",
       "activity": "idle",
       "summary": "Automated builds and critical end-to-end paths pass on Linux, Windows and macOS, with per-platform speech/model behaviour and install paths documented.",
-      "notes": "Recorded 2026-10-15 (REL-001 recheck): required for desktop 1.0, previously ROADMAP-only, so docs/15 derivation reported it ready. Measured from `.github/workflows/ci.yml` today: `platform-compile` runs `pnpm build` plus `cargo check -p lts-desktop --all-targets` on windows-latest and macos-latest — compile-only, and the workflow says so; `platform-bundles` is manual (`workflow_dispatch`) and produces **unsigned release** bundles whose artifact names carry the `UNTESTED` marker; every runtime check (`desktop-smoke` and the walkthrough) runs on ubuntu-24.04 only. `docs/platform/PLATFORM_REPORTS.yaml` states that `tested_platforms` is maintainer/owner runtime evidence and is Linux-only today, and holds no Windows/macOS record. Closing this needs Windows/macOS devices or paid CI runners plus human runtime reports. No owner gate records that purchase decision today: K-34 chose compile-only parity (owner decision 2026-10-03, recorded in the `platform-compile` job comment) and ADR-0015 allows untested bundles to exist so users can file reports (owner decision 2026-10-07).",
+      "notes": "Recorded 2026-10-15 (REL-001 recheck): required for desktop 1.0, previously ROADMAP-only, so docs/15 derivation reported it ready. Measured from `.github/workflows/ci.yml` today: `platform-compile` runs `pnpm build` plus `cargo check -p lts-desktop --all-targets` on windows-latest and macos-latest — compile-only, and the workflow says so; `platform-bundles` is manual (`workflow_dispatch`) and produces **unsigned release** bundles whose artifact names carry the `UNTESTED` marker; every runtime check (`desktop-smoke` and the walkthrough) runs on ubuntu-24.04 only. `docs/platform/PLATFORM_REPORTS.yaml` states that `tested_platforms` is maintainer/owner runtime evidence and is Linux-only today, and holds no Windows/macOS record. Closing this needs Windows/macOS devices or paid CI runners plus human runtime reports. No owner gate records that purchase decision today: K-34 chose compile-only parity (owner decision 2026-10-03, recorded in the `platform-compile` job comment) and ADR-0015 allows untested bundles to exist so users can file reports (owner decision 2026-10-07).\nRe-scoped 2026-10-20: kept blocked as the honest record that Windows/macOS runtime parity has never been evidenced; required_for_desktop_1_0 is now false.",
       "dependencies": [
-        "JA-B2-002",
         "SPEECH-003",
         "WRITE-001",
-        "TTS-001",
-        "SPEECH-007"
+        "TTS-001"
       ],
       "evidence": [
         "docs/platform/PLATFORM_REPORTS.yaml",
         ".github/workflows/ci.yml"
       ],
-      "updated": "2026-10-15",
-      "blocker": "Needs Windows and macOS devices or paid runner capacity (an unopened spend decision) plus human runtime reports; builds alone are not parity evidence."
+      "updated": "2026-10-20",
+      "blocker": "No longer gates desktop 1.0 (ADR-0039, owner decision 2026-10-20): desktop 1.0 is Linux x86-64 only. Returns post-1.0 with real devices or user demand; the compile-only CI matrix is unchanged."
     },
     "PERF-002": {
       "task_id": "PERF-002",
-      "status": "blocked",
+      "status": "ready",
       "attempts": 1,
       "title": "Measure release performance on supported configurations",
       "activity": "idle",
       "summary": "Frozen performance budgets pass on every declared desktop hardware/model tier, with repeatable scripts, p50/p95, RAM/VRAM, startup, disk and UI-responsiveness evidence, and recovery under load.",
-      "notes": "Recorded 2026-10-15 (REL-001 recheck): required for desktop 1.0, previously ROADMAP-only. Existing evidence is a single Linux tier (`tier-omarchy-2026-10-08.md`, plus ASR/TTS summaries and the CI timings). The declared tier set, the budget table, and the load/recovery runs under cancellation and model failure are what remain; PERF-002 also depends on PLAT-001 and SPEECH-007, both blocked.",
+      "notes": "Recorded 2026-10-15 (REL-001 recheck): required for desktop 1.0, previously ROADMAP-only. Existing evidence is a single Linux tier (`tier-omarchy-2026-10-08.md`, plus ASR/TTS summaries and the CI timings). The declared tier set, the budget table, and the load/recovery runs under cancellation and model failure are what remain; PERF-002 also depends on PLAT-001 and SPEECH-007, both blocked.\n2026-10-20 (ADR-0039): 'supported configurations' are the declared Linux tiers (Gaming PC tier and Omarchy tier already have PERF-001 evidence; a minimum tier still needs measurement). The PLAT-001 dependency edge left with the platform scope.",
       "dependencies": [
-        "PERF-001",
-        "PLAT-001",
-        "SPEECH-007",
-        "JA-B2-002"
+        "PERF-001"
       ],
       "evidence": [
         "state/evidence/PERF-001/tier-omarchy-2026-10-08.md",
         "state/evidence/PERF-001/ci-2026-10-02.txt"
       ],
-      "updated": "2026-10-15",
-      "blocker": "Declared hardware/model tiers do not exist yet and two dependencies (PLAT-001, SPEECH-007) are blocked."
+      "updated": "2026-10-20",
+      "blocker": null
     },
     "JA-A2-001": {
       "task_id": "JA-A2-001",
-      "status": "blocked",
+      "status": "done",
       "attempts": 1,
       "title": "Author A2-like Japanese goal/scenario coverage",
       "activity": "idle",
       "summary": "A2-like daily transactions and descriptions with transfer tasks, varied speakers and varied wording, passing curriculum, source and licence audits.",
-      "notes": "Recorded 2026-10-15 during 0.4.1 preparation: required for desktop 1.0, previously ROADMAP-only, so docs/15 derivation reported it ready from JA-A1-003 and SCENARIO-001 (both done). The authored increment is real and machine-audited: units 808-819, 12 scenarios with `transfer_variants_required: 2`, 136 lexicon and 144 sentences, 8 pragmatics situations; `validate`, `lint`, `audit-curriculum`, `audit-lexicon` and `audit-licenses` all exit 0 at the 0.4.1 candidate run. What an agent cannot do is certify the acceptance wording 'varied speakers and wording' — that is the A2 band review (JA-A2-002, blocked) — and the card's dependency JA-A1-003 is blocked, so it cannot honestly move to review or done.",
+      "notes": "Recorded 2026-10-15 during 0.4.1 preparation: required for desktop 1.0, previously ROADMAP-only, so docs/15 derivation reported it ready from JA-A1-003 and SCENARIO-001 (both done). The authored increment is real and machine-audited: units 808-819, 12 scenarios with `transfer_variants_required: 2`, 136 lexicon and 144 sentences, 8 pragmatics situations; `validate`, `lint`, `audit-curriculum`, `audit-lexicon` and `audit-licenses` all exit 0 at the 0.4.1 candidate run. What an agent cannot do is certify the acceptance wording 'varied speakers and wording' — that is the A2 band review (JA-A2-002, blocked) — and the card's dependency JA-A1-003 is blocked, so it cannot honestly move to review or done.\nClosed 2026-10-20 on the ADR-0040 bar: the increment is machine-audited (validate/lint/audit-curriculum at 0 errors) and the owner directed the card closed; the pack keeps its declared AI-authored, not-expert-verified posture, and no card claims human review.",
       "dependencies": [
         "JA-A1-003",
         "SCENARIO-001"
@@ -1493,9 +1491,11 @@
       "evidence": [
         "languages/ja-JP/curriculum/units/808-shop-find-item.yaml",
         "languages/ja-JP/curriculum/units/819-comm-text-reschedule.yaml",
-        "state/evidence/RC-0.4.1-2026-10-15/NOTES.md"
+        "state/evidence/RC-0.4.1-2026-10-15/NOTES.md",
+        "docs/adr/0040-ai-only-content-with-community-confirmation.md",
+        "state/evidence/OWNER-DIRECTIVES-2026-10-20/content-posture.md"
       ],
-      "updated": "2026-10-15",
+      "updated": "2026-10-20",
       "blocker": "A1 band review (JA-A1-003) is blocked by BLK-REVIEW-CAPACITY, and the A2 acceptance judgement belongs to JA-A2-002, which no qualified reviewer has recorded."
     },
     "JA-B1-001": {
@@ -1543,14 +1543,40 @@
       "title": "1.0 release candidate full gate",
       "activity": "idle",
       "summary": "All 1.0 release gates pass from a clean checkout; licence/source/model attribution audit is clean; known limitations and supported claims are documented.",
-      "notes": "Recorded 2026-10-15: the completion task itself had no ledger record, so the release gate's own state was implicit rather than declared. It is blocked, not derivable: ACC-001 needs a human assistive-technology pass, SEC-001 a human disposition, PLAT-001 real Windows/macOS runtime reports, PERF-002 the declared tiers, JA-B2-002 and the other band reviews a qualified human record, RELEASE-EVIDENCE-001 a clean-boot bundle smoke, and the reference-pack republish (O-01b) is owner-only. Machine-side work that is genuinely done and on record: clean-clone `scripts/ci.sh` returning `CI OK`, CI green at `fd76786` (run 38757754128, every job success), the 0.4.1 candidate archives with member-level accounting against the published 0.4.0 archives, and locally built deb/AppImage artifacts including a headless start.",
+      "notes": "Recorded 2026-10-15: the completion task itself had no ledger record, so the release gate's own state was implicit rather than declared. It is blocked, not derivable: ACC-001 needs a human assistive-technology pass, SEC-001 a human disposition, PLAT-001 real Windows/macOS runtime reports, PERF-002 the declared tiers, JA-B2-002 and the other band reviews a qualified human record, RELEASE-EVIDENCE-001 a clean-boot bundle smoke, and the reference-pack republish (O-01b) is owner-only. Machine-side work that is genuinely done and on record: clean-clone `scripts/ci.sh` returning `CI OK`, CI green at `fd76786` (run 38757754128, every job success), the 0.4.1 candidate archives with member-level accounting against the published 0.4.0 archives, and locally built deb/AppImage artifacts including a headless start.\nRechecked 2026-10-20 after ADR-0039 (Linux-only 1.0; PLAT-001 off the path) and ADR-0040 (no external review; JA-A2-001 closed on machine gates): the human-reviewer blocker is gone by owner decision, not by work, and the ledger's stale JA-B2-002/REVIEW-001-style edges were corrected against the ROADMAP.",
       "dependencies": [
         "ACC-001",
+        "A11Y-RUN-L1-REMEDIATION-001",
         "SEC-001",
         "PLAT-001",
+        "DATA-002",
+        "PACK-AI-001",
+        "PACK-005",
+        "READ-001",
+        "WRITE-001",
+        "TTS-001",
+        "SPEECH-006",
+        "LIC-001",
         "PERF-002",
         "REVIEW-001",
-        "JA-B2-002"
+        "PACK-DL-ALLOWLIST-001",
+        "MINE-PLAN-001",
+        "PLAN-SCOPE-001",
+        "SUPPORT-ACCOUNTING-001",
+        "EVIDENCE-IDENTITY-001",
+        "RU-GOAL-PREREQ-001",
+        "GOAL-DISPLAY-QUALIFIER-001",
+        "SPEECH-DISPATCH-001",
+        "AUTHORED-STAGE-001",
+        "CONTENT-DEPTH-001",
+        "ASSESSMENT-RUNNABILITY-001",
+        "EXPORT-MINED-001",
+        "RESTORE-ATOMIC-001",
+        "PLAYBACK-LIFECYCLE-001",
+        "MIC-TRACK-LIFECYCLE-001",
+        "JA-A1-002",
+        "JA-A2-001",
+        "JA-KANJI-ATTRIBUTION-001"
       ],
       "evidence": [
         "state/evidence/GATE-2026-10-15/clean-clone-head-ci.txt",
@@ -1559,8 +1585,8 @@
         "state/evidence/O-01B-2026-10-15/NOTES.md",
         "state/evidence/RC-0.4.1-2026-10-15/publication-2026-10-16.md"
       ],
-      "updated": "2026-10-15",
-      "blocker": "Six required dependencies are blocked on human or owner actions (AT pass, security disposition, real-platform runtime, performance tiers, qualified band review, clean-boot bundle smoke) and the pack republish is owner-only."
+      "updated": "2026-10-20",
+      "blocker": "Remaining 1.0 gaps (re-derived 2026-10-20): SEC-001 owner sign-off on fresh scans; the owner hands-on artifact pass (Runbook B / O-06, incl. the TTS-003 listening pass); PERF-002 measurement on the declared Linux tiers (ADR-0039); pack republish, which is owner-only. Every other dependency is done."
     },
     "A11Y-FLOW-001": {
       "task_id": "A11Y-FLOW-001",
@@ -1685,12 +1711,12 @@
     },
     "JA-KANJI-MNEMONICS-001": {
       "task_id": "JA-KANJI-MNEMONICS-001",
-      "status": "blocked",
+      "status": "ready",
       "attempts": 1,
       "title": "Kanji mnemonics match the sourced decomposition they describe",
       "activity": "idle",
       "summary": "Re-author or drop the 17 of 84 mnemonics that name an element the sourced radical list no longer contains.",
-      "notes": "Opened 2026-10-16 as the accepted cost of option A, measured before the decision: 17 of 84 authored mnemonics name an element no longer in the list (国: \"Jade (玉) guarded within walls\" against the new `王 囗 丶`). The mismatch count is a machine check; authoring replacement text is not, and an AI re-write would put more unreviewed prose into a pack whose review queue is already the reason content stays labelled draft.",
+      "notes": "Opened 2026-10-16 as the accepted cost of option A, measured before the decision: 17 of 84 authored mnemonics name an element no longer in the list (国: \"Jade (玉) guarded within walls\" against the new `王 囗 丶`). The mismatch count is a machine check; authoring replacement text is not, and an AI re-write would put more unreviewed prose into a pack whose review queue is already the reason content stays labelled draft.\nUnblocked 2026-10-20 under ADR-0040: AI may re-author the 17 mismatched mnemonics against the sourced decomposition; acceptance is the machine mismatch check 17 -> 0 plus validate/lint, with no claim beyond the pack's declared posture.",
       "last_error": "needs a human content author; no qualified reviewer is assigned (JA-A2-002 / JA-B1-002 / JA-B2-002 are blocked on the same thing)",
       "dependencies": [
         "PACK-004"
@@ -1699,7 +1725,8 @@
         "state/evidence/O-07/decision-2026-10-15.md",
         "state/evidence/O-07/radical-changes-2026-10-15.json"
       ],
-      "updated": "2026-10-16"
+      "updated": "2026-10-20",
+      "blocker": null
     },
     "PACK-UPDATE-UX-001": {
       "task_id": "PACK-UPDATE-UX-001",
