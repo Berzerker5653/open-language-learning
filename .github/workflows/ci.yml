@@ -52,18 +52,20 @@ jobs:
       # preserves the exact former `cargo test --workspace` contract.
       - run: cargo test --workspace --doc
 
-  # The heavy Rust tests, split into three parallel partitions. Partitioning
+  # The heavy Rust tests, split into four parallel partitions. Partitioning
   # (not nextest-specific) is what kills the tail: 33 heavyweight
   # reference-pack tests are ~9400 CPU-s, and a 4-core runner can only chew
   # ~240 CPU-s per minute. nextest gives stable hash-based partitioning AND
   # per-test report-time in the log forever. Same binaries, same tests, no
-  # filtering: partition i of 3 is a deterministic third of the whole suite.
+  # filtering: partition i of 4 is a deterministic quarter of the whole
+  # suite. (Run 39495816652: 3 partitions came back 566/1457/1415 s - the
+  # hash splits test COUNT, not cost, so 4 slices cut the critical path.)
   rust-test:
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
-        partition: [1, 2, 3]
+        partition: [1, 2, 3, 4]
     steps:
       - uses: actions/checkout@v5
       - name: Install Tauri system dependencies
