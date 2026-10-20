@@ -46,3 +46,11 @@ lto = "thin"
 # scoped opt-level cut it 3-5x without touching anyone else's debug info.
 [profile.dev.package."lts-langpack"]
 opt-level = 2
+
+# Same reason for the SHA-256 kernel: media auditing hashes ~409 MB of
+# wavs per reference pack (archive build, install verify, media audit);
+# sha2 at opt-level 0 runs an order of magnitude slower than optimized.
+# (Measured 2026-10-20: opt-level on lts-langpack alone left validate at
+# 10 s - the loop is in sha2, not the caller.)
+[profile.dev.package."sha2"]
+opt-level = 3
