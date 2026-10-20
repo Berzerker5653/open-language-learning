@@ -8260,6 +8260,16 @@ pub fn run() {
 mod tests {
     use super::*;
 
+    /// The perf commands are measurement-only and harness-gated: with the
+    /// smoke/perf env absent (i.e. every learner process) they must refuse,
+    /// so the probe surface can never be reached from the product.
+    #[test]
+    fn perf_commands_refuse_without_harness_env() {
+        assert_eq!(perf_guard(), Err("perf-not-enabled".into()));
+        assert!(perf_asr_attempt().is_err());
+        assert!(perf_asr_setup().is_err());
+    }
+
     /// ADR-0015 only counts a runtime report for a named build, so the identity
     /// the app prints has to be a real version and a real sha — never a
     /// placeholder. Building from a source tarball (no git) is allowed to say
