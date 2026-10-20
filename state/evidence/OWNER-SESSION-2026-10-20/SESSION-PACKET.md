@@ -31,6 +31,10 @@ rust suite, pack conformance, security scans. Optionally re-run live: `LTS_SMOKE
 
 Walk in the installed app and tick:
 
+Already machine-proved per item (with a fresh `SMOKE OK (13 routes walked)`
+run from today): `SWEEP-PRECHECK.md` in this folder — read it to know what
+you are *not* re-verifying.
+
 - [ ] 1. Five-tab nav + hub drill — relaunch is single-instance, tab latency normal (findings 1–2)
 - [ ] 2. Settings ▸ Profile data → Switch profile works (finding 9)
 - [ ] 3. Speech cards split + Playback output section — device picker **or** the honest "system sound settings decide" sentence; report which you see (finding 10)
@@ -44,6 +48,11 @@ Walk in the installed app and tick:
 Re-baked audio (Qwen3-TTS, ADR-0023) — the question is whether finding 11's
 "echoey, metallic, tinny" character survives in shipped clips. Play these ten
 (live in-app via a lesson/word card, or the files directly):
+
+All ten verified on disk today: sha256 + bytes match the pack media
+manifests 10/10; acoustic metrics (peaks/RMS/crest) tabulated in
+`TTS-CLIPS.md`. Fastest listen: `./TTS-PLAY.sh` (plays them in this
+order, 1 s gaps).
 
 | clip | text | verdict |
 | --- | --- | --- |
