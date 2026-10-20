@@ -22,9 +22,9 @@ only after this session (see step 5).
 
 ## 1. Machine leg — already re-run today
 
-CI run `39431801837` (success) covers the scripted half on this exact tree:
-`desktop-smoke` (13-route walk), full rust suite, pack conformance, security
-scans. Optionally re-run live: `LTS_SMOKE_TIMEOUT=900 scripts/smoke-desktop.sh`
+CI run `39459901584` (success, all jobs) at `d2f8069` — the SHA the deb is
+built from — covers the scripted half: `desktop-smoke` (13-route walk), full
+rust suite, pack conformance, security scans. Optionally re-run live: `LTS_SMOKE_TIMEOUT=900 scripts/smoke-desktop.sh`
 → expect `SMOKE OK (13 routes walked)`. Do not re-verify those by hand.
 
 ## 2. The human sweep (Runbook B, `docs/21_HUMAN_REVIEW_RUNBOOKS.md` §B.3)
@@ -62,11 +62,12 @@ Overall: ☐ re-bake accepted (TTS-003 done) ☐ issues listed: ____
 
 ## 4. SEC-001 sign-off
 
-Fresh scans on `3a4e16d` (`state/evidence/SEC-001/fresh-2026-10-20.md`):
+Fresh scans on the shipping SHA `d2f8069` (`state/evidence/SEC-001/fresh-2026-10-20.md`
+— originally run at `3a4e16d`, re-run today at `d2f8069` after the perf fix):
 cargo-audit 564 crates **0 vulnerabilities, no warnings**; **gitleaks over all
-587 commits: no leaks**; `pnpm audit`: none; CI security job green; the two
-2026-10-09 warnings are gone from the graph. Malicious-pack / no-upload /
-retention suites green in the same CI run.
+593 commits: no leaks**; `pnpm audit`: none; CI security job green on the same
+SHA; the two 2026-10-09 warnings are gone from the graph. Malicious-pack /
+no-upload / retention suites green in the same CI run.
 
 - [ ] I accept the security findings disposition (zero open findings) and give privacy sign-off — signature/date: ____
 
@@ -102,4 +103,4 @@ CI re-pins. Nothing is committed or published before that.
 | listening §3 | `TTS-003` |
 | sign-off §4 | `SEC-001` |
 | app artifact + CI-green evidence on file | `RELEASE-EVIDENCE-001` (its scripted half is `state/evidence/RELEASE-EVIDENCE-001/ARTIFACT-PASS-2026-10-19.md`) |
-| everything above recorded | the remaining `REL-001` dependency gap is just `PERF-002` (agent-measurable now on the Linux tiers, ADR-0039) |
+| everything above recorded | the remaining `REL-001` dependency gap is just `PERF-002` — Gaming PC tier measured and the plan-latency defect already fixed (90/93 ms); what's left is your §4b legs, the p50-line decision, and the two instrumentation lines (offer in the chat record) |
