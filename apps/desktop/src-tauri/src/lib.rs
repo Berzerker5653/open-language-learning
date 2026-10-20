@@ -1910,10 +1910,8 @@ fn derive_pairs(
     // plan10k-gamingpc-2026-10-20.md). Bucket index lists inherit the
     // store's (occurred_at, event_id) order, so each pair still sees its
     // evidence chronologically, exactly as the full-scan filter did.
-    let mut buckets: std::collections::HashMap<
-        (String, lts_domain::ActivityModality),
-        Vec<usize>,
-    > = Default::default();
+    let mut buckets: std::collections::HashMap<(String, lts_domain::ActivityModality), Vec<usize>> =
+        Default::default();
     let mut owners: std::collections::HashMap<String, Option<String>> =
         std::collections::HashMap::new();
     for (idx, ev) in events.iter().enumerate() {
@@ -1942,9 +1940,7 @@ fn derive_pairs(
     }
     let mut grouped: Vec<((String, lts_domain::ActivityModality), Vec<usize>)> =
         buckets.into_iter().collect();
-    grouped.sort_by(|a, b| {
-        (&a.0 .0, dimension_kebab(a.0 .1)).cmp(&(&b.0 .0, dimension_kebab(b.0 .1)))
-    });
+    grouped.sort_by(|a, b| (&a.0.0, dimension_kebab(a.0.1)).cmp(&(&b.0.0, dimension_kebab(b.0.1))));
     grouped
         .into_iter()
         .map(|((content, dim), idxs)| {
