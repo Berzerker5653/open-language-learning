@@ -7,14 +7,14 @@ Everything below was prepared and measured today; the boxes are yours.
 
 | artifact | where | size | sha256 |
 | --- | --- | --- | --- |
-| app `lts-desktop` **0.4.3-alpha.1** deb, finalized (t64-safe `Depends`) | `target/release/bundle/deb/open-language-learning-platform_0.4.3-alpha.1_amd64.deb` | 12,579,216 B | `87aaf4b5b02b34d1…19866b7cb` |
+| app `lts-desktop` **0.4.3-alpha.1** deb, finalized (t64-safe `Depends`) — rebuilt 2026-10-20 with the `derive_pairs` 8× plan-latency fix (`state/evidence/PERF-002/plan10k-*`) | `target/release/bundle/deb/open-language-learning-platform_0.4.3-alpha.1_amd64.deb` | 12,588,776 B | `633c3307fe810e78…310a88c27` |
 | ja-JP pack **0.4.3** `.lpk` (tracked tree incl. `capabilities.scenario_help`; `test` 0/0) | `~/staging/0.4.3/ja-JP-0.4.3.lpk` | 318,736,116 B | `9b17b23294df30f4…352719d6` |
 | ru-RU pack **0.4.3** `.lpk` (`test` 0/0) | `~/staging/0.4.3/ru-RU-0.4.3.lpk` | 318,493,155 B | `374d79e13db020fc…a2b96bc5` |
 
 Both archives pass the real installation gate: `langpack install --store`
 accepts both at 0 errors (store under `~/staging/0.4.3/store`).
 
-Install: `sudo apt install ./lts-desktop_0.4.3-alpha.1*.deb` (or run the
+Install: `sudo apt install ./open-language-learning-platform_0.4.3-alpha.1_amd64.deb` (or run the
 release binary directly), and stage the two `.lpk` files into the store with
 `langpack install --store <file>` before launching, or import them through
 Settings ▸ Language packs. Catalogue/republish stays owner-only and happens
@@ -73,13 +73,15 @@ retention suites green in the same CI run.
 ## 4b. Second perf tier (Omarchy) — one command that needs your password
 
 Gaming PC tier is measured (`state/evidence/PERF-002/gamingpc-2026-10-20.md`).
-The Omarchy leg needs `sudo`, which an agent cannot use there. Staged already:
-`~/perf-0.4.3` holds the 0.4.3 binary, deb and harness. Close any running app
+The Omarchy leg needs `sudo`, which an agent cannot use there. Restaged today
+(2026-10-20) with the **fixed** 0.4.3 binary (`sha256 91a1dd6b…4c86e7de`), the
+finalized deb and both harnesses under `~/perf-0.4.3`. Close any running app
 instance there, then:
 
 ```sh
 sudo pacman -S --noconfirm --needed xorg-server-xvfb
 cd ~/perf-0.4.3 && LTS_PERF_LABEL=omarchy scripts/perf-app.sh
+cd ~/perf-0.4.3 && LTS_PERF_LABEL=omarchy scripts/perf-plan10k.sh   # ~3 min
 ```
 
 It writes `state/evidence/PERF-002/` on that machine — leave it there and
