@@ -1,7 +1,9 @@
 # ADR-0034: Band review gates, the SPEECH-007 release edges, and attribution promotion
 
-- Status: Proposed (agent-authored, 2026-10-17; records a board/graph change the
-  owner ruled on 2026-10-17. The owner signs the `Status:` line; see ADR-0033.)
+- Status: **Accepted** (2026-10-19) — agent-authored 2026-10-17; records a
+  board/graph change the owner ruled on 2026-10-17, and the owner signed the
+  `Status:` line on 2026-10-19 ("accept", recorded at their in-session
+  direction; see ADR-0033.)
 - Date: 2026-09-29 (board surgery landed 2026-10-17)
 - Affects: tasks (task-state.json)
 

@@ -1,6 +1,6 @@
 # ADR 0035: Provenance by repository-batch reconstruction
 
-Status: Proposed
+Status: **Accepted** (2026-10-19) — agent-authored 2026-10-17; the owner signed the ADR on 2026-10-19 ("accept", recorded at their in-session direction)
 Date: 2026-10-17
 
 ## Context
