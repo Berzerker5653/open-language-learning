@@ -115,13 +115,15 @@ jobs:
           mkdir -p "${CARGO_HOME:-$HOME/.cargo}/bin"
           tar zxf /tmp/nextest.tar.gz -C "${CARGO_HOME:-$HOME/.cargo}/bin"
           cargo nextest --version
-      - name: cargo nextest run --workspace (partition ${{ matrix.partition }}/3)
+      - name: cargo nextest run --workspace (partition ${{ matrix.partition }}/4)
         # nextest 0.9.148 partition grammar is `--partition hash:i/n`
         # (--partition-index/-count were added in a later release; the wrong
-        # flags failed all three partitions on run 39493599808). hash: is a
-        # deterministic test-name hash: the same third runs every time, and
-        # the 33 heavy reference-pack tests scatter across partitions.
-        run: cargo nextest run --workspace --partition hash:${{ matrix.partition }}/3
+        # flags failed all three partitions on run 39493599808, and run
+        # 39499359358 proved the denominator must be bumped together with
+        # the matrix - hash:4/3 is refused). hash: is a deterministic
+        # test-name hash: the same quarter runs every time, and the 33
+        # heavy reference-pack tests scatter across partitions.
+        run: cargo nextest run --workspace --partition hash:${{ matrix.partition }}/4
 
   # Content gates on the pack trees. Its own job so a content regression is
   # visible at ~5 min instead of behind the test tail; the langpack CLI build
