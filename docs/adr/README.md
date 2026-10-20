@@ -52,6 +52,6 @@ Existing:
 - 0035 reconstructing provenance batches after the fact (batch row ids from the tag range; reconstructed records carry the actual retrieval date) — **Proposed (agent-authored, 2026-10-17)**
 - 0036 the engine's activity-runner table is the denominator for runnable practice (one arm per (type, modality); the coverage tool parses lib.rs instead of restating the table) — **Accepted 2026-10-18**
 - 0037 a task sequence is pack-declared data and the content audit checks it (five roles naming activities; delayed reuse rides the ADR-0022 gate, no invented intervals; findings stay advisory and the runner table stays single-sourced) — **Accepted 2026-10-18**
-- 0038 the scenario help guarantee is a pack-declared promise (`capabilities.scenario_help`, default false; pre-promise archives stay installable; runtime refuses rungs the pack cannot deliver) — **Proposed (agent-authored, 2026-10-19)**; owner signature required (install-gate posture, catalog claim)
+- 0038 the scenario help guarantee is a pack-declared promise (`capabilities.scenario_help`, default false; pre-promise archives stay installable; runtime refuses rungs the pack cannot deliver) — **Accepted 2026-10-19** (owner signed in-session; install-gate posture, catalog claim)
 
 Template: `template.md`.

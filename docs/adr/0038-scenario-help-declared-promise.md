@@ -1,7 +1,8 @@
 # ADR 0038: the scenario help guarantee is a pack-declared promise; archives published before it stay installable
 
-**Status:** Proposed (agent-authored, 2026-10-19) — owner signature required: it
-changes what the install gate accepts and restates a published-catalog property.
+**Status:** **Accepted** (2026-10-19) — agent-authored 2026-10-19; the owner
+signed the ADR on 2026-10-19 ("accept", recorded at their in-session direction):
+it changes what the install gate accepts and restates a published-catalog property.
 
 **Date:** 2026-10-19
 
