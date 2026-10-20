@@ -205,7 +205,7 @@ importers:
         version: 19.3.0(@types/react@19.3.0)
       '@vitejs/plugin-react':
         specifier: 6.1.1
-        version: 6.1.1(vite@8.3.2(@types/node@26.6.5))
+        version: 6.1.1(vite@8.3.3(@types/node@26.6.5))
       happy-dom:
         specifier: 21.0.1
         version: 21.0.1
@@ -213,11 +213,11 @@ importers:
         specifier: 7.0.2
         version: 7.0.2
       vite:
-        specifier: 8.3.2
-        version: 8.3.2(@types/node@26.6.5)
+        specifier: 8.3.3
+        version: 8.3.3(@types/node@26.6.5)
       vitest:
         specifier: 5.0.3
-        version: 5.0.3(@types/node@26.6.5)(happy-dom@21.0.1)(vite@8.3.2(@types/node@26.6.5))
+        version: 5.0.3(@types/node@26.6.5)(happy-dom@21.0.1)(vite@8.3.3(@types/node@26.6.5))
 
   packages/learner-ui:
     devDependencies:
@@ -232,7 +232,7 @@ importers:
         version: 7.0.2
       vitest:
         specifier: 5.0.3
-        version: 5.0.3(vite@8.3.2)
+        version: 5.0.3(@types/node@26.6.5)(happy-dom@21.0.1)(vite@8.3.3(@types/node@26.6.5))
 
   packages/scenario-ui:
     devDependencies:
@@ -247,7 +247,7 @@ importers:
         version: 7.0.2
       vitest:
         specifier: 5.0.3
-        version: 5.0.3(vite@8.3.2)
+        version: 5.0.3(@types/node@26.6.5)(happy-dom@21.0.1)(vite@8.3.3(@types/node@26.6.5))
 
   packages/schemas:
     devDependencies:
@@ -256,7 +256,7 @@ importers:
         version: 7.0.2
       vitest:
         specifier: 5.0.3
-        version: 5.0.3(vite@8.3.2)
+        version: 5.0.3(@types/node@26.6.5)(happy-dom@21.0.1)(vite@8.3.3(@types/node@26.6.5))
 
   packages/shared:
     devDependencies:
@@ -265,7 +265,7 @@ importers:
         version: 7.0.2
       vitest:
         specifier: 5.0.3
-        version: 5.0.3(vite@8.3.2)
+        version: 5.0.3(@types/node@26.6.5)(happy-dom@21.0.1)(vite@8.3.3(@types/node@26.6.5))
 
   packages/ui:
     devDependencies:
@@ -286,7 +286,7 @@ importers:
         version: 7.0.2
       vitest:
         specifier: 5.0.3
-        version: 5.0.3(vite@8.3.2)
+        version: 5.0.3(@types/node@26.6.5)(happy-dom@21.0.1)(vite@8.3.3(@types/node@26.6.5))
 
 packages:
 
@@ -1235,8 +1235,8 @@ packages:
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
-  vite@8.3.2:
-    resolution: {integrity: sha512-SQr1x6W5vVSbROg7vsyXIaxK9b0G7zsT68acdWWRmnBUsgDieLCRG+Rep9WdZgcposvv/GSnr4GUUBqB3vXq6w==}
+  vite@8.3.3:
+    resolution: {integrity: sha512-cTAldKPImjg6c+gk48U19POPn3GCBzZwpdsN8ZMEEcbpes+6/wvfqUd0C2y3qYY4wsj8PwgFwrZ/1jBPVttMSg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -1714,19 +1714,19 @@ snapshots:
   '@typescript/typescript-win32-x64@7.0.2':
     optional: true
 
-  '@vitejs/plugin-react@6.1.1(vite@8.3.2(@types/node@26.6.5))':
+  '@vitejs/plugin-react@6.1.1(vite@8.3.3(@types/node@26.6.5))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
-      vite: 8.3.2(@types/node@26.6.5)
+      vite: 8.3.3(@types/node@26.6.5)
 
-  '@vitest/mocker@5.0.3(vite@8.3.2)':
+  '@vitest/mocker@5.0.3(vite@8.3.3(@types/node@26.6.5))':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       '@vitest/spy': 5.0.3
       estree-walker: 3.0.3
       magic-string: 1.4.2
     optionalDependencies:
-      vite: 8.3.2(@types/node@26.6.5)
+      vite: 8.3.3(@types/node@26.6.5)
 
   '@vitest/spy@5.0.3': {}
 
@@ -2150,17 +2150,7 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  vite@8.3.2:
-    dependencies:
-      lightningcss: 1.33.0
-      picomatch: 4.0.7
-      postcss: 8.5.28
-      rolldown: 1.2.12
-      tinyglobby: 0.2.17
-    optionalDependencies:
-      fsevents: 2.3.3
-
-  vite@8.3.2(@types/node@26.6.5):
+  vite@8.3.3(@types/node@26.6.5):
     dependencies:
       lightningcss: 1.33.0
       picomatch: 4.0.7
@@ -2171,10 +2161,10 @@ snapshots:
       '@types/node': 26.6.5
       fsevents: 2.3.3
 
-  vitest@5.0.3(@types/node@26.6.5)(happy-dom@21.0.1)(vite@8.3.2(@types/node@26.6.5)):
+  vitest@5.0.3(@types/node@26.6.5)(happy-dom@21.0.1)(vite@8.3.3(@types/node@26.6.5)):
     dependencies:
       '@types/chai': 5.2.3
-      '@vitest/mocker': 5.0.3(vite@8.3.2)
+      '@vitest/mocker': 5.0.3(vite@8.3.3(@types/node@26.6.5))
       chai: 6.3.0
       es-module-lexer: 2.3.2
       expect-type: 1.4.0
@@ -2185,30 +2175,11 @@ snapshots:
       tinybench: 6.2.0
       tinyexec: 1.3.1
       tinyglobby: 0.2.17
-      vite: 8.3.2(@types/node@26.6.5)
+      vite: 8.3.3(@types/node@26.6.5)
       why-is-node-running: 3.2.1
     optionalDependencies:
       '@types/node': 26.6.5
       happy-dom: 21.0.1
-    transitivePeerDependencies:
-      - msw
-
-  vitest@5.0.3(vite@8.3.2):
-    dependencies:
-      '@types/chai': 5.2.3
-      '@vitest/mocker': 5.0.3(vite@8.3.2)
-      chai: 6.3.0
-      es-module-lexer: 2.3.2
-      expect-type: 1.4.0
-      magic-string: 1.4.2
-      obug: 2.2.1
-      picomatch: 4.0.7
-      std-env: 4.3.0
-      tinybench: 6.2.0
-      tinyexec: 1.3.1
-      tinyglobby: 0.2.17
-      vite: 8.3.2
-      why-is-node-running: 3.2.1
     transitivePeerDependencies:
       - msw
 
