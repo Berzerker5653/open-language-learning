@@ -70,6 +70,21 @@ retention suites green in the same CI run.
 
 - [ ] I accept the security findings disposition (zero open findings) and give privacy sign-off — signature/date: ____
 
+## 4b. Second perf tier (Omarchy) — one command that needs your password
+
+Gaming PC tier is measured (`state/evidence/PERF-002/gamingpc-2026-10-20.md`).
+The Omarchy leg needs `sudo`, which an agent cannot use there. Staged already:
+`~/perf-0.4.3` holds the 0.4.3 binary, deb and harness. Close any running app
+instance there, then:
+
+```sh
+sudo pacman -S --noconfirm --needed xorg-server-xvfb
+cd ~/perf-0.4.3 && LTS_PERF_LABEL=omarchy scripts/perf-app.sh
+```
+
+It writes `state/evidence/PERF-002/` on that machine — leave it there and
+point me at it, and I fold the tier into the freeze ADR.
+
 ## 5. Pack republish (only after ☑ above)
 
 Staged `.lpk` archives above are built from the tracked tree at **0.4.3**.

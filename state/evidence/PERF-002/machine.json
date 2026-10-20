@@ -1,0 +1,27 @@
+{
+  "schema": "perf-app/1.0",
+  "collected_utc": "2026-10-20T15:21:31Z",
+  "os": "CachyOS",
+  "kernel": "7.2.11-1-cachyos",
+  "cpu": {
+    "model": "AMD Ryzen 9 5950X 16-Core Processor",
+    "threads": 32,
+    "physical_cores": 16,
+    "sockets": "1",
+    "max_mhz": "5086.1812",
+    "governor": "powersave",
+    "avx512f_present": false
+  },
+  "memory": {
+    "total_mb": 128710,
+    "available_mb": 52285,
+    "swap_total_mb": 128709
+  },
+  "gpu": {
+    "lspci": "0b:00.0 VGA compatible controller: NVIDIA Corporation GB202 [GeForce RTX 5090] (rev a1)",
+    "nvidia_present": true,
+    "nvidia_smi_l": "GPU 0: NVIDIA GeForce RTX 5090 (UUID: GPU-f9542919-e525-ef12-5e49-8bced48ea405)",
+    "nvidia_vram": "NVIDIA GeForce RTX 5090, 32607 MiB"
+  },
+  "loadavg_before": "0.98 1.01 2.02"
+}
