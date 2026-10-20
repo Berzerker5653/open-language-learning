@@ -2128,6 +2128,31 @@ tasks:
     announced; playback controls expose pressed/status state; ambiguous 'Installed'/'Remove'
     button names carry their target; each asserted by focused vitest per the a11y.test.tsx pattern.
   required_for_desktop_1_0: true
+- id: IN-APP-IME-001
+  milestone: M10
+  priority: P2
+  title: >-
+    In-app kana keyboard: romaji→kana typing owned by the app (phase 1 shipped
+    on feature/in-app-ime); phase 2 adds pack-declared input methods and
+    lexicon-backed kanji candidates, phase 3 a native WebKitInputMethodContext
+  dependencies:
+  - ACC-001
+  read_first:
+  - apps/desktop/src/ime.ts
+  - apps/desktop/src/kana-ime.tsx
+  - docs/08_DATA_AND_PRIVACY.md
+  acceptance:
+  - >-
+    Packs may declare input methods (capabilities.input_methods) and ship a
+    lexicon; conversion candidates come from pack vocabulary with provenance,
+    never a baked-in word list in the engine.
+  - >-
+    Native IME-context path (WebKitInputMethodContext) verified with an AT
+    (Orca) session: preedit semantics visible, zero system-layout change.
+  - >-
+    Phase 1 plan and decision record: GitHub issue #2
+    (https://github.com/Berzerker5653/open-language-learning/issues/2).
+  required_for_desktop_1_0: false
 - id: RU-MODALITY-PRACTICE-001
   milestone: M10
   priority: P1
@@ -2370,4 +2395,5 @@ execution_scope:
   - JA-KANJI-DECOMP-UI-001
   - JA-KANJI-MNEMONICS-001
   - PACK-UPDATE-UX-001
+  - IN-APP-IME-001
   public_publication_authorized: false

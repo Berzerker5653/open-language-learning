@@ -111,6 +111,12 @@ The microphone permission toggle (`microphone-enabled`, default on) is enforced 
 capture: `recordAttempt` refuses `getUserMedia` and says why when the setting is
 off. A stored preference is not the only gate.
 
+The in-app kana keyboard (`kana-keyboard`, values `off` | `romaji-kana`, default
+`off`, `get_kana_keyboard`/`set_kana_keyboard`) is a per-profile preference: it
+selects the app's own romaji→kana typing layer for the answer fields and changes
+nothing about the system layout or OS IMEs. While it is off — or while an OS IME
+is composing — the app intercepts no keys (issue #2 phase 1).
+
 ## Pack threat model
 
 Assume third-party packs may be malicious.

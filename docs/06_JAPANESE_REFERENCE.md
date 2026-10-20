@@ -178,7 +178,8 @@ Use furigana adaptively: visible when needed, hideable at higher mastery, and av
 
 Separate:
 
-- selecting/typing via IME;
+- selecting/typing via IME — including the app's own kana keyboard, which needs
+  no system input method (see `kana-keyboard` in `docs/08_DATA_AND_PRIVACY.md`);
 - recalling kana/kanji forms;
 - handwriting where the device supports it;
 - composing messages/sentences/discourse.
