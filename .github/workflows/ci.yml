@@ -104,7 +104,14 @@ jobs:
           ./scripts/fetch-pack-audio.sh --pack-dir languages/ru-RU --work-dir tmp/pack-audio
       - name: Install cargo-nextest (prebuilt, pinned)
         run: |
-          curl -LSsF https://get.nexte.st/0.9.148/linux | tar zxf - -C "${CARGO_HOME:-$HOME/.cargo}/bin"
+          # Direct release asset: the get.nexte.st redirector served an HTML
+          # error page to the runners on run 39488964958, and piping it
+          # straight into tar gave "not recoverable" with no clue. Download,
+          # then extract, with retries.
+          curl -sSfL --retry 3 --retry-all-errors -o /tmp/nextest.tar.gz \
+            https://github.com/nextest-rs/nextest/releases/download/cargo-nextest-0.9.148/cargo-nextest-0.9.148-x86_64-unknown-linux-gnu.tar.gz
+          mkdir -p "${CARGO_HOME:-$HOME/.cargo}/bin"
+          tar zxf /tmp/nextest.tar.gz -C "${CARGO_HOME:-$HOME/.cargo}/bin"
           cargo nextest --version
       - name: cargo nextest run --workspace (partition ${{ matrix.partition }}/3)
         run: cargo nextest run --workspace --partition-index ${{ matrix.partition }} --partition-count 3

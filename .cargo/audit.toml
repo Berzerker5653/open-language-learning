@@ -127,4 +127,24 @@ ignore = [
     # tauri/wry/webkit2gtk 2.0.2. Needs a tauri/wry release built on gtk-rs
     # >= 0.20, or dropping the gtk3 stack.
     "RUSTSEC-2024-0429",
+
+    # RUSTSEC-2026-0381 webpki-roots 0.26.11 - the advisory (2026-10-19,
+    # distrusted emSign intermediates in the bundled root program) flags any
+    # webpki-roots below 1.0.10. But 0.26.11 carries NO root data itself:
+    # its Cargo.toml has exactly one dependency, `[dependencies.parent]
+    # package = "webpki-roots" version = "1"` (verified in the registry
+    # source, ~/.cargo/registry/src/*/webpki-roots-0.26.11/Cargo.toml), and
+    # this Cargo.lock resolves that parent to the PATCHED webpki-roots
+    # 1.0.10. The bytes ureq validates against ARE 1.0.10; the 0.26.11 hit
+    # is semver notation, not exposure. Recorded as not-applicable, not as
+    # accepted risk in old data.
+    # Chain: ureq 2.12.1 (declared `ureq = "2.10"` in
+    # apps/desktop/src-tauri/Cargo.toml; its TLS path uses the bundled roots)
+    # <- lts-desktop. The sibling hits from the same disclosure
+    # (rustls-webpki 0.103.16, webpki-roots 1.0.10, webpki-root-certs 1.0.10)
+    # were fixed by lock bumps on 2026-10-20. Removable when ureq moves to
+    # webpki-roots 1.x directly (ureq 3 migration - needs care around the
+    # redirects(0) download gate in packs.rs) or when a patched 0.26.x
+    # compat release publishes.
+    "RUSTSEC-2026-0381",
 ]
