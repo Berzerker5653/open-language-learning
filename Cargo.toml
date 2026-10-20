@@ -38,3 +38,11 @@ uuid = { version = "1", features = ["v4"] }
 
 [profile.release]
 lto = "thin"
+
+# CI-TIME 2026-10-20: building the reference-pack archive (~4,900 wavs,
+# hashed and zipped) is the hottest compute loop of the lts-desktop test
+# suite and of the pack conformance steps; at dev opt-level 0 it costs
+# ~90-130 s per build even with the test-side byte cache. One package-
+# scoped opt-level cut it 3-5x without touching anyone else's debug info.
+[profile.dev.package."lts-langpack"]
+opt-level = 2

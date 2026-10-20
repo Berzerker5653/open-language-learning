@@ -63,7 +63,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        partition: [0, 1, 2]
+        partition: [1, 2, 3]
     steps:
       - uses: actions/checkout@v5
       - name: Install Tauri system dependencies
@@ -114,7 +114,12 @@ jobs:
           tar zxf /tmp/nextest.tar.gz -C "${CARGO_HOME:-$HOME/.cargo}/bin"
           cargo nextest --version
       - name: cargo nextest run --workspace (partition ${{ matrix.partition }}/3)
-        run: cargo nextest run --workspace --partition-index ${{ matrix.partition }} --partition-count 3
+        # nextest 0.9.148 partition grammar is `--partition hash:i/n`
+        # (--partition-index/-count were added in a later release; the wrong
+        # flags failed all three partitions on run 39493599808). hash: is a
+        # deterministic test-name hash: the same third runs every time, and
+        # the 33 heavy reference-pack tests scatter across partitions.
+        run: cargo nextest run --workspace --partition hash:${{ matrix.partition }}/3
 
   # Content gates on the pack trees. Its own job so a content regression is
   # visible at ~5 min instead of behind the test tail; the langpack CLI build
