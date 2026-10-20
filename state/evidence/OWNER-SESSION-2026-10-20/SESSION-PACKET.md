@@ -77,16 +77,16 @@ Gaming PC tier is measured (`state/evidence/PERF-002/gamingpc-2026-10-20.md`).
 The Omarchy leg needs `sudo`, which an agent cannot use there. Restaged today
 (2026-10-20) with the **fixed** 0.4.3 binary (`sha256 91a1dd6b…4c86e7de`), the
 finalized deb and both harnesses under `~/perf-0.4.3`. Close any running app
-instance there, then:
+instance there, then one line:
 
 ```sh
-sudo pacman -S --noconfirm --needed xorg-server-xvfb
-cd ~/perf-0.4.3 && LTS_PERF_LABEL=omarchy scripts/perf-app.sh
-cd ~/perf-0.4.3 && LTS_PERF_LABEL=omarchy scripts/perf-plan10k.sh   # ~3 min
+cd ~/perf-0.4.3 && sudo pacman -S --noconfirm --needed xorg-server-xvfb && ./run.sh
 ```
 
-It writes `state/evidence/PERF-002/` on that machine — leave it there and
-point me at it, and I fold the tier into the freeze ADR.
+`run.sh` runs both harnesses (~6 min) and prints where the evidence
+landed. Leave it there and point me at it, and I fold the tier into
+the freeze ADR.
+
 
 ## 5. Pack republish (only after ☑ above)
 
