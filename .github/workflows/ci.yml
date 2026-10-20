@@ -16,8 +16,18 @@ concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# CI-TIME 2026-10-20 (profile: state/evidence/CI-TIME/ci-profile-2026-10-20.md).
+# Run 39459901584 took 46.9 min, and 46.7 of those minutes were ONE job: the
+# old single `rust` job serialized fmt+clippy+tests+conformance, and its
+# `cargo test --workspace` step alone ran 2459 s — 99.1% of that test CPU is
+# 33 `lts-desktop` lib tests that each rebuild the 409 MB reference-pack
+# archive in the dev profile. No gate was removed or weakened below: every
+# former step still runs and stays REQUIRED; the wall time drops because the
+# work is partitioned across parallel jobs instead of serialized.
 jobs:
-  rust:
+  # Verdicts that land in minutes: style, lints, script regressions, doc-test
+  # targets. These used to be buried behind 40+ minutes of test tail.
+  rust-static:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
@@ -28,6 +38,39 @@ jobs:
       - uses: dtolnay/rust-toolchain@1.97.1
         with:
           components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+      # Fast bash gate for the shipped aligner payload (ADR-0019): synthetic
+      # payload only, no network/cmake/cargo, seconds to run.
+      - name: Aligner sidecar staging script regression test
+        run: ./scripts/test-stage-aligner-sidecar.sh
+      - name: Pack bundle staging script regression test
+        run: ./scripts/test-stage-pack-bundle.sh
+      - run: cargo fmt --all --check
+      - run: cargo clippy --workspace --all-targets -- -D warnings
+      # The 12 Doc-tests targets (all currently example-free but compiled and
+      # asserted to exist) — nextest does not run doc tests, so this step
+      # preserves the exact former `cargo test --workspace` contract.
+      - run: cargo test --workspace --doc
+
+  # The heavy Rust tests, split into three parallel partitions. Partitioning
+  # (not nextest-specific) is what kills the tail: 33 heavyweight
+  # reference-pack tests are ~9400 CPU-s, and a 4-core runner can only chew
+  # ~240 CPU-s per minute. nextest gives stable hash-based partitioning AND
+  # per-test report-time in the log forever. Same binaries, same tests, no
+  # filtering: partition i of 3 is a deterministic third of the whole suite.
+  rust-test:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        partition: [0, 1, 2]
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Tauri system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libssl-dev librsvg2-dev
+      - uses: dtolnay/rust-toolchain@1.97.1
       - uses: Swatinem/rust-cache@v2
       # CI-AUDIO 2026-10-13: the .wav bytes under languages/*/media/ are
       # gitignored (ADR-0016), so a fresh checkout has the manifests without
@@ -42,19 +85,55 @@ jobs:
         with:
           path: tmp/pack-audio
           key: pack-audio-${{ hashFiles('catalog/packs.json') }}
+      # CI-TIME: on run 39459901584 the restore step itself cost 166 s per
+      # job even on an archive cache hit, because 9758 wavs were unpacked,
+      # copied and sha-re-verified every run. The restored TREE is now cached
+      # too, keyed on the same catalog pins; the script stamps the tree with
+      # the catalog hash and skips (exit 0) only when the stamp matches.
+      # Catalog change => new key + stamp mismatch => full verified restore.
+      - name: Cache restored pack-audio tree
+        uses: actions/cache@v4
+        with:
+          path: |
+            languages/ja-JP/media
+            languages/ru-RU/media
+          key: pack-media-${{ hashFiles('catalog/packs.json') }}
       - name: Restore reference-pack audio (published archives)
         run: |
           ./scripts/fetch-pack-audio.sh --pack-dir languages/ja-JP --work-dir tmp/pack-audio
           ./scripts/fetch-pack-audio.sh --pack-dir languages/ru-RU --work-dir tmp/pack-audio
-      # Fast bash gate for the shipped aligner payload (ADR-0019): synthetic
-      # payload only, no network/cmake/cargo, seconds to run.
-      - name: Aligner sidecar staging script regression test
-        run: ./scripts/test-stage-aligner-sidecar.sh
-      - name: Pack bundle staging script regression test
-        run: ./scripts/test-stage-pack-bundle.sh
-      - run: cargo fmt --all --check
-      - run: cargo clippy --workspace --all-targets -- -D warnings
-      - run: cargo test --workspace
+      - name: Install cargo-nextest (prebuilt, pinned)
+        run: |
+          curl -LSsF https://get.nexte.st/0.9.148/linux | tar zxf - -C "${CARGO_HOME:-$HOME/.cargo}/bin"
+          cargo nextest --version
+      - name: cargo nextest run --workspace (partition ${{ matrix.partition }}/3)
+        run: cargo nextest run --workspace --partition-index ${{ matrix.partition }} --partition-count 3
+
+  # Content gates on the pack trees. Its own job so a content regression is
+  # visible at ~5 min instead of behind the test tail; the langpack CLI build
+  # rides the same rust-cache.
+  rust-conformance:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@1.97.1
+      - uses: Swatinem/rust-cache@v2
+      - name: Cache published pack archives
+        uses: actions/cache@v4
+        with:
+          path: tmp/pack-audio
+          key: pack-audio-${{ hashFiles('catalog/packs.json') }}
+      - name: Cache restored pack-audio tree
+        uses: actions/cache@v4
+        with:
+          path: |
+            languages/ja-JP/media
+            languages/ru-RU/media
+          key: pack-media-${{ hashFiles('catalog/packs.json') }}
+      - name: Restore reference-pack audio (published archives)
+        run: |
+          ./scripts/fetch-pack-audio.sh --pack-dir languages/ja-JP --work-dir tmp/pack-audio
+          ./scripts/fetch-pack-audio.sh --pack-dir languages/ru-RU --work-dir tmp/pack-audio
       - name: Pack conformance (ja-JP + ru-RU + example template)
         run: |
           cargo run -q -p lts-langpack-cli -- validate languages/ja-JP
@@ -121,15 +200,19 @@ jobs:
           cache: pnpm
       - uses: dtolnay/rust-toolchain@1.97.1
       - uses: Swatinem/rust-cache@v2
-      # CI-AUDIO 2026-10-13: the .wav bytes under languages/*/media/ are
-      # gitignored (ADR-0016); smoke-desktop.sh builds pack archives and the
-      # silent-archive guard (crates/langpack/src/archive.rs) refuses an
-      # audio-less pack (ADR-0024). Restore the published archives first.
+      # CI-AUDIO: audio + restored-tree cache (see rust-test for the why).
       - name: Cache published pack archives
         uses: actions/cache@v4
         with:
           path: tmp/pack-audio
           key: pack-audio-${{ hashFiles('catalog/packs.json') }}
+      - name: Cache restored pack-audio tree
+        uses: actions/cache@v4
+        with:
+          path: |
+            languages/ja-JP/media
+            languages/ru-RU/media
+          key: pack-media-${{ hashFiles('catalog/packs.json') }}
       - name: Restore reference-pack audio (published archives)
         run: |
           ./scripts/fetch-pack-audio.sh --pack-dir languages/ja-JP --work-dir tmp/pack-audio
@@ -259,8 +342,8 @@ jobs:
       - run: python tools/validate_handoff.py --require-explicit-ledger-records
       - run: python -m unittest discover -s tools -p 'test_validate_handoff.py'
       - run: python scripts/test_generate_pack_audio.py
-      # CI-AUDIO: hermetic regression test for the restore path the rust and
-      # desktop-smoke jobs depend on (synthetic pack + local archive, no
+      # CI-AUDIO: hermetic regression test for the restore path the rust jobs
+      # and desktop-smoke depend on (synthetic pack + local archive, no
       # network/cargo).
       - run: python scripts/test_fetch_pack_audio.py
       # AUDIO-NORM: loudness conformance for the tracked journey assets. The

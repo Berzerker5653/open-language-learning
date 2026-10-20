@@ -200,6 +200,22 @@ VERSION=$(manifest_field version)
 require_tool curl
 
 [[ -f $CATALOG ]] || fail catalog "no catalog at $CATALOG"
+
+# CI-TIME 2026-10-20: the restore step cost 166 s per CI job even on an
+# archive cache hit (9758 wavs unpacked, copied and sha-re-verified every
+# run). CI now also caches the restored tree, keyed on the same
+# catalog/packs.json pins. The stamp records WHICH catalog hash the tree was
+# fully verified against; an identical catalog hash may skip, anything else
+# (fresh checkout: no stamp; catalog edited: hash mismatch) runs the full
+# verified path unchanged. The stamp lives at the pack root, outside media/,
+# so pack validation never sees it; it is gitignored like the audio.
+catalog_stamp=$(sha_of "$CATALOG")
+stamp_file="$PACK_DIR/.restored-stamp"
+if [[ -f $stamp_file && $(<"$stamp_file") == "$catalog_stamp" ]]; then
+  rows_planned=$(manifest_rows | grep -c . || true)
+  say "summary $PACK_DIR: catalog stamp ${catalog_stamp:0:12} matches a fully verified restored tree: rows checked=$rows_planned files valid=$rows_planned files restored=0 files already valid=$rows_planned rows failing=0"
+  exit 0
+fi
 entry_count=$(jq --arg id "$PACK_ID" --arg v "$VERSION" \
   '[.packs[]? | select(.pack_id==$id and .version==$v)] | length' "$CATALOG")
 if [[ $entry_count -ne 1 ]]; then
@@ -295,3 +311,7 @@ fi
 
 # Final audit: every tracked manifest row must now be satisfied.
 verify_pack
+
+# Stamp the verified tree with the exact catalog hash it was verified for
+# (the skip path above re-hashes nothing only when this matches).
+printf '%s\n' "$catalog_stamp" > "$PACK_DIR/.restored-stamp"
