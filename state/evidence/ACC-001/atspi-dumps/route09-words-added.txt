@@ -1,0 +1,42 @@
+=== application: 'lts-desktop' ===
+[application] 'lts-desktop'
+  [frame] 'Open Language Learning Platform' states=showing
+    [filler] '' states=showing
+      [filler] ''
+        [filler] ''
+          [scroll pane] ''
+            [document web] 'Open Language Learning Platform' states=showing
+              [link] 'Skip to main content'
+              [landmark] '' states=showing
+                [landmark] 'Routes' states=showing
+                  [button] 'Today' states=showing
+                  [button] 'Practice' states=showing
+                  [button] 'My Words' states=showing
+                  [button] 'Progress' states=showing
+                  [button] 'Settings' states=showing
+              [landmark] '' states=showing
+                [landmark] 'My words' states=showing
+                  [heading] 'My words' states=showing
+                  [paragraph] '' text='Words you chose to keep, with where you met them. Reviews are self-graded and stay on this device; they never count as mastery evidence.' states=showing
+                  [button] 'Review due words' states=showing
+                  [button] 'Review new words' states=showing
+                  [label] '' text='Word or phrase' states=showing
+                  [section] '' text='￼' states=showing
+                    [entry] 'Word or phrase' states=editable,showing
+                  [label] '' text='Reading (optional)' states=showing
+                  [section] '' text='￼' states=showing
+                    [entry] 'Reading (optional)' states=editable,showing
+                  [label] '' text='Meaning (optional)' states=showing
+                  [section] '' text='￼' states=showing
+                    [entry] 'Meaning (optional)' states=editable,showing
+                  [label] '' text='Where did you meet it? (citation)' states=showing
+                  [section] '' text='￼' states=showing
+                    [entry] 'Where did you meet it? (citation)' states=editable,showing
+                  [button] 'Add to my words' states=showing
+                  [list] '' states=showing
+                    [list item] 'ありがとうございます (ありがとうございます) — Thank you · manual · not scheduled yet' text='￼ありがとうございます (ありがとうございます) — Thank you · manual · not scheduled yet ￼  ￼' states=showing
+                      [text] '' text='• ' states=showing
+                      [button] 'Review now' states=showing
+                      [button] 'Remove' states=showing
+            [scroll bar] ''
+

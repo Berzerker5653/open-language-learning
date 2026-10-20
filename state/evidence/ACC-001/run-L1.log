@@ -1,0 +1,348 @@
+$ tauri dev
+     Running BeforeDevCommand (`pnpm dev`)
+$ vite
+     Running DevCommand (`cargo  run --no-default-features --color always --`)
+        Info Watching /home/hunter/game-dev/LTS/apps/desktop/src-tauri for changes...
+        Info Watching /home/hunter/game-dev/LTS/crates/activity for changes...
+        Info Watching /home/hunter/game-dev/LTS/crates/domain for changes...
+        Info Watching /home/hunter/game-dev/LTS/crates/langpack for changes...
+        Info Watching /home/hunter/game-dev/LTS/crates/learner-model for changes...
+        Info Watching /home/hunter/game-dev/LTS/crates/storage for changes...
+        Info Watching /home/hunter/game-dev/LTS/crates/scheduler for changes...
+        Info Watching /home/hunter/game-dev/LTS/crates/speech-api for changes...
+        Info Watching /home/hunter/game-dev/LTS/crates/speech-runtime for changes...
+        Info Watching /home/hunter/game-dev/LTS/crates/world for changes...
+[1m[92m   Compiling[0m aws-lc-sys v0.45.0
+[1m[92m   Compiling[0m x11-dl v2.21.0
+[1m[92m   Compiling[0m libdbus-sys v0.2.7
+[1m[92m   Compiling[0m glib-sys v0.18.1
+[1m[92m   Compiling[0m gobject-sys v0.18.0
+[1m[92m   Compiling[0m gio-sys v0.18.1
+[1m[92m   Compiling[0m gdk-sys v0.18.2
+[1m[92m   Compiling[0m cairo-sys-rs v0.18.2
+[1m[92m   Compiling[0m gdk-pixbuf-sys v0.18.0
+[1m[92m   Compiling[0m pango-sys v0.18.0
+[1m[92m   Compiling[0m atk-sys v0.18.2
+[1m[92m   Compiling[0m soup3-sys v0.5.0
+[1m[92m   Compiling[0m javascriptcore-rs-sys v1.1.1
+[1m[92m   Compiling[0m gdkx11-sys v0.18.2
+[1m[92m   Compiling[0m gtk-sys v0.18.2
+[1m[92m   Compiling[0m lts-desktop v0.4.0-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+[1m[96m    Building[0m [=====================>   ] 564/622: glib-sys, gtk-sys(build), l…[K[1m[92m   Compiling[0m gtk v0.18.2
+[1m[92m   Compiling[0m webkit2gtk-sys v2.0.2
+[1m[96m    Building[0m [=====================>   ] 565/622: glib-sys, gtk(build), lts-d…[1m[96m    Building[0m [=====================>   ] 566/622: glib-sys, lts-desktop(build…[K[1m[92m   Compiling[0m wry v0.57.0
+[1m[96m    Building[0m [=====================>   ] 567/622: glib-sys, lts-desktop(build…[K[1m[92m   Compiling[0m dbus v0.9.12
+[1m[96m    Building[0m [=====================>   ] 567/622: glib-sys, lts-desktop(build…[1m[96m    Building[0m [=====================>   ] 568/622: glib-sys, lts-desktop(build…[1m[96m    Building[0m [=====================>   ] 569/622: glib-sys, lts-desktop(build…[1m[96m    Building[0m [=====================>   ] 570/622: glib-sys, dbus, aws-lc-sys(…[1m[96m    Building[0m [=====================>   ] 570/622: glib-sys, gobject-sys, dbus…[1m[96m    Building[0m [=====================>   ] 571/622: glib-sys, gobject-sys, dbus…[1m[96m    Building[0m [=====================>   ] 572/622: gobject-sys, dbus, aws-lc-s…[1m[96m    Building[0m [=====================>   ] 572/622: javascriptcore-rs-sys, atk-…[1m[96m    Building[0m [======================>  ] 573/622: atk-sys, gio-sys, gobject-s…[1m[96m    Building[0m [======================>  ] 574/622: atk-sys, gio-sys, dbus, pan…[1m[96m    Building[0m [======================>  ] 575/622: atk-sys, gio-sys, dbus, aws…[1m[96m    Building[0m [======================>  ] 576/622: gio-sys, dbus, aws-lc-sys(b…[K[1m[92m   Compiling[0m glib v0.18.5
+[1m[96m    Building[0m [======================>  ] 576/622: gio-sys, gdk-pixbuf-sys, db…[1m[96m    Building[0m [======================>  ] 577/622: gio-sys, dbus, soup3-sys, a…[1m[96m    Building[0m [======================>  ] 578/622: gio-sys, dbus, aws-lc-sys(b…[1m[96m    Building[0m [======================>  ] 578/622: gio-sys, gtk-sys, dbus, aws…[1m[96m    Building[0m [======================>  ] 578/622: gdkx11-sys, gio-sys, gtk-sy…[K[1m[92m   Compiling[0m gdkwayland-sys v0.18.2
+[1m[96m    Building[0m [======================>  ] 578/622: gdkx11-sys, gio-sys, gtk-sy…[1m[96m    Building[0m [======================>  ] 579/622: gdkx11-sys, gio-sys, gtk-sy…[1m[96m    Building[0m [======================>  ] 580/622: gdkx11-sys, gio-sys, gtk-sy…[1m[96m    Building[0m [======================>  ] 581/622: gio-sys, gtk-sys, dbus, aws…[1m[96m    Building[0m [======================>  ] 582/622: gtk-sys, dbus, aws-lc-sys(b…[1m[96m    Building[0m [======================>  ] 582/622: webkit2gtk-sys, gtk-sys, db…[1m[96m    Building[0m [======================>  ] 583/622: webkit2gtk-sys, gtk-sys, db…[1m[96m    Building[0m [======================>  ] 584/622: webkit2gtk-sys, gtk-sys, aw…[1m[96m    Building[0m [======================>  ] 585/622: gtk-sys, aws-lc-sys(build),…[1m[96m    Building[0m [======================>  ] 586/622: aws-lc-sys(build), glib     [K[1m[92m   Compiling[0m gio v0.18.4
+[1m[92m   Compiling[0m cairo-rs v0.18.5
+[1m[92m   Compiling[0m atk v0.18.2
+[1m[92m   Compiling[0m javascriptcore-rs v1.1.2
+[1m[96m    Building[0m [======================>  ] 586/622: gio, cairo-rs, javascriptco…[K[1m[92m   Compiling[0m aws-lc-rs v1.18.1
+[1m[96m    Building[0m [======================>  ] 587/622: gio, cairo-rs, aws-lc-sys, …[K[1m[92m   Compiling[0m rustls v0.23.46
+[1m[96m    Building[0m [======================>  ] 588/622: rustls(build), gio, cairo-r…[1m[96m    Building[0m [======================>  ] 589/622: gio, cairo-rs, aws-lc-sys, …[1m[96m    Building[0m [======================>  ] 590/622: gio, cairo-rs, aws-lc-sys, …[1m[96m    Building[0m [======================>  ] 591/622: gio, cairo-rs, aws-lc-sys, …[1m[96m    Building[0m [======================>  ] 592/622: gio, aws-lc-sys, atk        [1m[96m    Building[0m [======================>  ] 592/622: gio, aws-lc-rs, aws-lc-sys,…[1m[96m    Building[0m [======================>  ] 593/622: gio, aws-lc-rs, atk         [1m[96m    Building[0m [======================>  ] 594/622: gio, aws-lc-rs              [K[1m[92m   Compiling[0m rustls-webpki v0.103.15
+[1m[96m    Building[0m [======================>  ] 594/622: gio, rustls-webpki, aws-lc-…[1m[96m    Building[0m [======================>  ] 595/622: gio, rustls-webpki          [1m[96m    Building[0m [======================>  ] 595/622: gio, rustls-webpki, rustls  [1m[96m    Building[0m [======================>  ] 596/622: gio, rustls                 [K[1m[92m   Compiling[0m tokio-rustls v0.26.6
+[1m[92m   Compiling[0m rustls-platform-verifier v0.7.1
+[1m[92m   Compiling[0m ureq v2.12.1
+[1m[96m    Building[0m [======================>  ] 596/622: ureq, tokio-rustls, gio, ru…[1m[96m    Building[0m [======================>  ] 597/622: ureq, tokio-rustls, gio, ru…[K[1m[92m   Compiling[0m hyper-rustls v0.27.10
+[1m[96m    Building[0m [======================>  ] 597/622: ureq, tokio-rustls, hyper-r…[1m[96m    Building[0m [=======================> ] 598/622: ureq, hyper-rustls, gio, ru…[K[1m[92m   Compiling[0m reqwest v0.13.5
+[1m[96m    Building[0m [=======================> ] 598/622: ureq, hyper-rustls, gio, re…[1m[96m    Building[0m [=======================> ] 599/622: ureq, gio, reqwest, rustls  [1m[96m    Building[0m [=======================> ] 600/622: gio, reqwest, rustls        [1m[96m    Building[0m [=======================> ] 601/622: gio, reqwest                [K[1m[92m   Compiling[0m jsonschema v0.58.5
+[1m[96m    Building[0m [=======================> ] 601/622: jsonschema, gio, reqwest    [1m[96m    Building[0m [=======================> ] 602/622: jsonschema, gio             [K[1m[92m   Compiling[0m pango v0.18.3
+[1m[92m   Compiling[0m gdk-pixbuf v0.18.5
+[1m[92m   Compiling[0m soup3 v0.5.0
+[1m[96m    Building[0m [=======================> ] 602/622: pango, jsonschema, gio, sou…[1m[96m    Building[0m [=======================> ] 603/622: pango, jsonschema, gio, sou…[1m[96m    Building[0m [=======================> ] 604/622: pango, jsonschema, soup3    [K[1m[92m   Compiling[0m gdk v0.18.2
+[1m[96m    Building[0m [=======================> ] 604/622: pango, jsonschema, soup3, g…[1m[96m    Building[0m [=======================> ] 605/622: jsonschema, soup3, gdk      [1m[96m    Building[0m [=======================> ] 606/622: jsonschema, gdk             [K[1m[92m   Compiling[0m lts-langpack v0.1.0 (/home/hunter/game-dev/LTS/crates/langpack)
+[1m[96m    Building[0m [=======================> ] 606/622: lts-langpack, jsonschema, g…[K[1m[92m   Compiling[0m lts-activity v0.1.0 (/home/hunter/game-dev/LTS/crates/activity)
+[1m[96m    Building[0m [=======================> ] 606/622: lts-langpack, jsonschema, l…[1m[96m    Building[0m [=======================> ] 607/622: jsonschema, lts-activity, g…[1m[96m    Building[0m [=======================> ] 608/622: jsonschema, gdk             [K[1m[92m   Compiling[0m gdkx11 v0.18.2
+[1m[96m    Building[0m [=======================> ] 608/622: jsonschema, gtk, gdkx11, gdk[1m[96m    Building[0m [=======================> ] 609/622: jsonschema, gtk, gdkx11     [1m[96m    Building[0m [=======================> ] 610/622: jsonschema, gtk             [1m[96m    Building[0m [=======================> ] 611/622: gtk                         [K[1m[92m   Compiling[0m webkit2gtk v2.0.2
+[1m[92m   Compiling[0m tao v0.37.1
+[1m[92m   Compiling[0m muda v0.20.0
+[1m[96m    Building[0m [=======================> ] 611/622: gtk, muda, webkit2gtk, tao  [1m[96m    Building[0m [=======================> ] 612/622: gtk, muda, webkit2gtk       [1m[96m    Building[0m [=======================> ] 613/622: gtk, webkit2gtk             [1m[96m    Building[0m [=======================> ] 614/622: webkit2gtk                  [K[1m[92m   Compiling[0m tauri-runtime v2.12.1
+[1m[96m    Building[0m [=======================> ] 614/622: webkit2gtk, tauri-runtime, …[1m[96m    Building[0m [=======================> ] 615/622: tauri-runtime, wry          [1m[96m    Building[0m [=======================> ] 616/622: wry                         [K[1m[92m   Compiling[0m tauri-runtime-wry v2.12.1
+[1m[96m    Building[0m [=======================> ] 616/622: wry, tauri-runtime-wry      [1m[96m    Building[0m [=======================> ] 617/622: tauri-runtime-wry           [K[1m[92m   Compiling[0m tauri v2.12.1
+[1m[96m    Building[0m [=======================> ] 617/622: tauri, tauri-runtime-wry    [1m[96m    Building[0m [=======================> ] 618/622: tauri                       [K[1m[92m   Compiling[0m tauri-plugin-single-instance v2.5.2
+[1m[96m    Building[0m [=======================> ] 618/622: tauri, tauri-plugin-single-…[1m[96m    Building[0m [=======================> ] 619/622: tauri                       [1m[96m    Building[0m [=======================> ] 620/622: lts-desktop                 [1m[96m    Building[0m [=======================> ] 621/622: lts-desktop(bin)            [K[1m[92m    Finished[0m ]8;;https://doc.rust-lang.org/cargo/reference/profiles.html#default-profiles\`dev` profile [unoptimized + debuginfo]]8;;\ target(s) in 35.90s
+[1m[92m     Running[0m `/home/hunter/game-dev/LTS/target/debug/lts-desktop`
+
+** (lts-desktop:952007): CRITICAL **: 15:40:03.942: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:40:03.942: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:40:03.943: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:40:03.943: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:50:48.037: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:50:48.037: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:50:48.037: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:50:48.038: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:52:27.646: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:52:27.646: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:52:27.647: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:52:27.647: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:53:12.990: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:53:12.990: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:53:12.991: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:53:12.991: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:53:34.616: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:53:40.836: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:53:40.836: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:53:40.836: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:53:40.837: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:54:14.446: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:54:14.446: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:54:14.446: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:54:14.447: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:54:25.116: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:54:25.117: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:54:25.117: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:54:25.117: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:54:40.415: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:54:40.415: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:54:40.416: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 15:54:40.416: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:03:24.570: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:03:24.570: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:03:24.571: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:03:24.571: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:06:59.758: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:06:59.758: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:06:59.758: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:06:59.759: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:08:16.972: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:08:16.972: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:08:16.973: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:08:16.973: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:09:16.502: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:09:16.502: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:09:16.503: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:09:16.503: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:10:15.286: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:10:15.287: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:10:15.288: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:10:15.288: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:11:56.107: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:11:56.107: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:11:56.108: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:11:56.108: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:13:01.594: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:13:01.594: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:13:01.594: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:13:01.595: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:13:29.176: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:13:29.176: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:13:29.176: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:13:29.177: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:14:46.437: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:14:46.437: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:14:46.437: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:14:46.438: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:15:47.296: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:15:47.297: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:15:47.297: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:15:47.297: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:17:43.015: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:17:43.016: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:17:43.016: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:17:43.016: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:19:20.552: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:19:20.552: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:19:20.552: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:19:20.553: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:20:38.926: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:20:38.926: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:20:38.926: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:20:38.927: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+WebKit wasn't able to find a WebVTT encoder. Subtitles handling will be degraded unless gst-plugins-bad is installed.
+GStreamer element fakevideosink not found. Please install it
+WebKit wasn't able to find a WebVTT encoder. Subtitles handling will be degraded unless gst-plugins-bad is installed.
+
+** (lts-desktop:952007): CRITICAL **: 16:22:24.242: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:22:24.242: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:22:24.242: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:22:24.243: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:28:47.128: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:28:47.128: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:28:47.128: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:28:47.129: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+WebKit wasn't able to find a WebVTT encoder. Subtitles handling will be degraded unless gst-plugins-bad is installed.
+
+** (lts-desktop:952007): CRITICAL **: 16:32:03.088: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:32:03.089: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:32:03.089: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:32:03.090: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+WebKit wasn't able to find a WebVTT encoder. Subtitles handling will be degraded unless gst-plugins-bad is installed.
+WebKit wasn't able to find a WebVTT encoder. Subtitles handling will be degraded unless gst-plugins-bad is installed.
+WebKit wasn't able to find a WebVTT encoder. Subtitles handling will be degraded unless gst-plugins-bad is installed.
+WebKit wasn't able to find a WebVTT encoder. Subtitles handling will be degraded unless gst-plugins-bad is installed.
+
+** (lts-desktop:952007): CRITICAL **: 16:37:57.493: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:37:57.493: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:37:57.493: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:37:57.494: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:38:42.970: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:38:42.970: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:38:42.970: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:38:42.971: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:40:36.768: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:40:36.768: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:40:36.768: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:40:36.769: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:42:09.297: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:42:09.297: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:42:09.297: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:42:09.298: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:43:00.548: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:43:00.548: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:43:00.549: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:43:00.549: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:43:55.172: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:43:55.172: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:43:55.173: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:43:55.173: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+WebKit wasn't able to find a WebVTT encoder. Subtitles handling will be degraded unless gst-plugins-bad is installed.
+
+** (lts-desktop:952007): CRITICAL **: 16:47:59.603: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:47:59.603: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:47:59.603: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 16:47:59.604: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 18:03:11.929: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 18:03:11.930: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 18:03:11.930: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 18:03:11.930: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 18:03:14.124: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 18:03:14.125: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 18:03:14.125: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 18:03:14.126: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 18:03:19.869: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 18:03:19.869: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 18:03:19.869: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+
+** (lts-desktop:952007): CRITICAL **: 18:03:19.870: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed

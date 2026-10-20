@@ -1,0 +1,49 @@
+=== application: 'lts-desktop' ===
+[application] 'lts-desktop'
+  [frame] 'Open Language Learning Platform' states=showing
+    [filler] '' states=showing
+      [filler] ''
+        [filler] ''
+          [scroll pane] ''
+            [document web] 'Open Language Learning Platform' states=showing
+              [link] 'Skip to main content'
+              [landmark] '' states=showing
+              [landmark] '' states=showing
+                [landmark] 'Onboarding' states=showing
+                  [list] 'Progress' states=showing
+                    [list item] '1 Welcome' states=showing
+                      [section] '' text='1' states=showing
+                    [list item] '2 Language' states=showing
+                      [section] '' text='2' states=showing
+                    [list item] '3 Microphone' states=showing
+                      [section] '' text='3' states=showing
+                    [list item] '4 Start' states=showing
+                      [section] '' text='4' states=showing
+                  [heading] 'Choose a language pack' states=showing
+                  [panel] 'Available packs' text='￼\n￼\nJapanese Reference Pack\n(ja-JP, experimental)\n￼￼\nVersion 0.2.0 is on this device. The pack catalogue lists version 0.4.2.\n\n￼\nEsperanto — original ' states=showing
+                    [label] '' text='Available packs' states=showing
+                    [label] '' states=showing
+                      [radio button] 'Japanese Reference Pack (ja-JP,experimental)' states=focused,showing
+                      [section] '' text='(ja-JP, experimental)' states=showing
+                    [button] 'Installed' states=showing
+                    [button] 'Update to v0.4.2' states=showing
+                    [paragraph] '' text='Version 0.2.0 is on this device. The pack catalogue lists version 0.4.2.' states=showing
+                    [label] '' states=showing
+                      [radio button] 'Esperanto — original demo (unreviewed) (eo,community)' states=showing
+                      [section] '' text='(eo, community)' states=showing
+                    [button] 'Installed' states=showing
+                    [paragraph] '' text='Version 0.1.0 is on this device.' states=showing
+                    [label] '' states=showing
+                      [radio button] 'Japanese (demo lexicon, EDRDG-derived) (ja-JP,community)' states=showing
+                      [section] '' text='(ja-JP, community)' states=showing
+                    [button] 'Installed' states=showing
+                    [paragraph] '' text='Version 0.1.0 is on this device.' states=showing
+                  [paragraph] '' text='A pack you already downloaded can be located here: it goes through the same validation as a catalog install, and once it is on this device you can sel' states=showing
+                  [section] '' text='￼'
+                    [button] 'Locate a language pack file' text='no file selected'
+                  [status bar] '' text='Select an installed pack to continue, or skip this and choose the language later in Settings.'
+                  [section] '' text='￼￼'
+                    [button] 'Continue'
+                    [button] 'Skip for now'
+            [scroll bar] ''
+

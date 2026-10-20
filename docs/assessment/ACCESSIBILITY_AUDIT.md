@@ -16,7 +16,7 @@ get a new row.
 
 | run | date | OS build | app version + commit | webview | AT + version | Japanese voice | IME | verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| L1 | | Linux: | `open-language-learning` @ `git rev-parse --short HEAD` | WebKitGTK: | Orca: | espeak-ng / other: | ibus + Mozc / Anthy: | ☐ pass ☐ fail |
+| L1 | 2026-10-19 | CachyOS, Linux 7.2.11-1-cachyos x86_64, KDE Plasma **Wayland** | `open-language-learning` 0.4.0-alpha.1 @ `1844b80` | WebKitGTK 2.54.1 | Orca 51.1 (rev 244bdadd9), AT-SPI2 2.62.1, speech-dispatcher 0.12.1 | espeak-ng 1.52.0 (app ja playback correct) | IBus 1.5.34-rc2 + Anthy 1.5.18-1.1 (session wired via System Settings ▸ Virtual Keyboard ▸ IBus Wayland) | ☑ partial — evidence `state/evidence/ACC-001/OWNER-PASS-2026-10-19.md`, `state/evidence/ACC-001/run-L1.log`, `state/evidence/ACC-001/atspi-dumps/` |
 | W1 | | Windows: | | WebView2: | NVDA: | | MS IME Japanese: | ☐ pass ☐ fail |
 | M1 | | macOS: | | WKWebView: | VoiceOver: | | Japanese input: | ☐ pass ☐ fail |
 
@@ -62,20 +62,20 @@ text is announced as Japanese. Column **IME** only applies where listed.
 
 | # | route (nav label) | what must be announced | IME | pass |
 | --- | --- | --- | --- | --- |
-| 1 | first run → onboarding | profile-name field label, single-choice pack list with radio state, privacy notice for microphone/speech before first enable | name field | ☐ |
-| 2 | Practice | card prompt in ja + its gloss, answer field label, correctness feedback without colour-only wording, keyboard shortcuts | if typed answer | ☐ |
-| 3 | Reading | passage in ja, sentence-level focus order, any gloss/reveal control announced | — | ☐ |
-| 4 | Dictation | playback control state (playing/stopped), typed-answer composition while converting kana→kanji, submit result | **yes** | ☐ |
-| 5 | Writing | prompt, input composition (candidate window, `Enter`/`Space` commit does not submit the form prematurely), correction feedback | **yes** | ☐ |
-| 6 | Pronunciation | contrast description, band wording read as text, the "not a diagnosis" framing, recorded-vs-model-output provenance label | — | ☐ |
-| 7 | Shadowing / Listening | audio start/stop, transcript toggle, the audio-provenance statement | — | ☐ |
-| 8 | Scenarios | turn order, each line's speaker, available replies as a list | if typed reply | ☐ |
-| 9 | Words / Kanji | entry headword (ja), reading, meaning; reading must not be the only distinguishing info | — | ☐ |
-| 10 | Placement | question, band, and that the result is provisional | — | ☐ |
-| 11 | Progress (goal map) | band section headings and glosses (`Getting started`, `A1`…), per-modality state per goal, `locked` vs `open` announced, prerequisite text | — | ☐ |
-| 12 | Languages | pack name as the manifest spells it, pack posture statement, version, install-from-path flow incl. error messages | install path | ☐ |
-| 13 | Settings | every field label, catalog URL field, speech device tier note, storage/export controls | — | ☐ |
-| 14 | failure paths | offline pack install failure, missing TTS asset, missing microphone permission — each announced with the reason, not just a red border; and an install cancelled mid-download or mid-unpack announcing that nothing was installed and that a retry continues the download | — | ☐ |
+| 1 | first run → onboarding | profile-name field label, single-choice pack list with radio state, privacy notice for microphone/speech before first enable | name field | ☐ F-01 (step-change arrival silent; labels/radios/privacy text all exposed — see run sheet) |
+| 2 | Practice | card prompt in ja + its gloss, answer field label, correctness feedback without colour-only wording, keyboard shortcuts | if typed | ☐ F-01/F-05 (feedback text present but silent; arrival silent) |
+| 3 | Reading | passage in ja, sentence-level focus order, any gloss/reveal control announced | — | — not exercised (no runnable reading card in installed pack) |
+| 4 | Dictation | playback control state (playing/stopped), typed-answer composition while converting kana→kanji, submit result | **yes** | ☑ IME: preedit+Anthy candidates inside WebKit entry, Enter commits into field only, submit via button; F-07 minor (no playing/stopped state) |
+| 5 | Writing | prompt, input composition (candidate window, `Enter`/`Space` commit does not submit the form prematurely), correction feedback | **yes** | ☑ IME: kanji candidate (有難う) committed into field; no premature submit; feedback silent → F-05 |
+| 6 | Pronunciation | contrast description, band wording read as text, the "not a diagnosis" framing, recorded-vs-model-output provenance label | — | — not exercised this run |
+| 7 | Shadowing / Listening | audio start/stop, transcript toggle, the audio-provenance statement | — | ☑ partial: provenance + named playback button arrive announced; F-07 playing state; no Shadowing card in pack |
+| 8 | Scenarios | turn order, each line's speaker, available replies as a list | if typed | — not exercised this run |
+| 9 | Words / Kanji | entry headword (ja), reading, meaning; reading must not be the only distinguishing info | — | ☑ saved entry reads headword→reading→meaning→source in order; form fully labeled |
+| 10 | Placement | question, band, and that the result is provisional | — | — not exercised (profile skipped placement) |
+| 11 | Progress (goal map) | band section headings and glosses (`Getting started`, `A1`…), per-modality state per goal, `locked` vs `open` announced, prerequisite text | — | ☑ band landmarks+glosses, `open` in item name, per-modality sublists, prerequisite wording present (no locked band reached) |
+| 12 | Languages | pack name as the manifest spells it, pack posture statement, version, install-from-path flow incl. error messages | install path | ☑ name+posture+version+claims+sources read; error path not fed |
+| 13 | Settings | every field label, catalog URL field, speech device tier note, storage/export controls | — | ☑ all groups labeled; F-03-family bare "Remove" buttons noted |
+| 14 | failure paths | offline pack install failure, missing TTS asset, missing microphone permission — each announced with the reason, not just a red border; and an install cancelled mid-download or mid-unpack announcing that nothing was installed and that a retry continues the download | — | — not exercised this run |
 
 For each failure record: route, component/file, what Orca actually said, what it
 should have said, and the condition (zoom/motion/keyboard). Fix semantics in the
@@ -120,11 +120,11 @@ this worksheet can settle.
 
 | field | value |
 | --- | --- |
-| auditor name / role | |
-| AT expertise (professional / regular user / assessor) | |
-| routes covered | |
-| unresolved defects + severity | |
-| date | |
+| auditor name / role | Berzerker5653, product owner |
+| AT expertise (professional / regular user / assessor) | product owner; first supervised Orca session (run L1) |
+| routes covered | 4, 5, 9, 11, 12, 13 pass; 7 partial; 1–2 fail by F-01/F-05; 3, 6, 8, 10, 14 not exercised |
+| unresolved defects + severity | F-01 high (lesson/wizard arrival silence), F-05 high (silent correctness feedback), F-03 medium (ambiguous Installed/Remove names), F-02/F-04/F-07 low — fix scheduled as `A11Y-RUN-L1-REMEDIATION-001`; rerun rows after fix with new L2 row |
+| date | 2026-10-19 |
 
 An incomplete matrix does not block development, but no release may claim
 accessibility conformance beyond the routes signed here (`docs/18`).

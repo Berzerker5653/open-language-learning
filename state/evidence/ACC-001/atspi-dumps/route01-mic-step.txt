@@ -1,0 +1,26 @@
+=== application: 'lts-desktop' ===
+[application] 'lts-desktop'
+  [frame] 'Open Language Learning Platform' states=showing
+    [filler] '' states=showing
+      [filler] ''
+        [filler] ''
+          [scroll pane] ''
+            [document web] 'Open Language Learning Platform' states=showing
+              [link] 'Skip to main content'
+              [landmark] '' states=showing
+              [landmark] '' states=showing
+                [landmark] 'Onboarding' states=showing
+                  [list] 'Progress' states=showing
+                    [list item] '1 Welcome' states=showing
+                      [section] '' text='1' states=showing
+                    [list item] '2 Language' states=showing
+                      [section] '' text='2' states=showing
+                    [list item] '3 Microphone' states=showing
+                      [section] '' text='3' states=showing
+                    [list item] '4 Start' states=showing
+                      [section] '' text='4' states=showing
+                  [heading] 'Microphone (optional)' states=showing
+                  [paragraph] '' text='Speaking activities need a microphone, but it is never required. You can skip this and enable it later in Settings; skipping never blocks progress. En' states=showing
+                  [button] 'Enable microphone' states=showing
+                  [button] 'Skip for now' states=showing
+

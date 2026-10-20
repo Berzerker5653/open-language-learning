@@ -1,0 +1,95 @@
+=== application: 'lts-desktop' ===
+[application] 'lts-desktop'
+  [frame] 'Open Language Learning Platform' states=showing
+    [filler] '' states=showing
+      [filler] ''
+        [filler] ''
+          [scroll pane] ''
+            [document web] 'Open Language Learning Platform' states=showing
+              [link] 'Skip to main content'
+              [landmark] '' states=showing
+                [landmark] 'Routes' states=showing
+                  [button] 'Today' states=showing
+                  [button] 'Practice' states=showing
+                  [button] 'My Words' states=showing
+                  [button] 'Progress' states=showing
+                  [button] 'Settings' states=showing
+              [landmark] '' states=showing
+                [landmark] 'Lesson' states=showing
+                  [heading] 'Hiragana: vowels and K-row' states=showing
+                  [paragraph] '' text='First ten hiragana with symbol/reading drills.' states=showing
+                  [paragraph] '' text='All authored stages complete.' states=showing
+                  [heading] 'First look' states=showing
+                  [paragraph] '' text='Served by the encounter runner.' states=showing
+                  [list] '' states=showing
+                    [list item] 'あa' text='￼あa' states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] 'いi' text='￼いi' states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] 'うu' text='￼うu' states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] 'えe' text='￼えe' states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] 'おo' text='￼おo' states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] 'かka' text='￼かka' states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] 'きki' text='￼きki' states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] 'くku' text='￼くku' states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] 'けke' text='￼けke' states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] 'こko' text='￼こko' states=showing
+                      [text] '' text='• ' states=showing
+                  [heading] 'With support' states=showing
+                  [paragraph] '' text='Declared, but not runnable: no runner serves this stage yet.' states=showing
+                  [list] '' states=showing
+                    [list item] 'あa' text='￼あa' states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] 'いi' text='￼いi' states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] 'うu' text='￼うu'
+                      [text] '' text='• '
+                    [list item] 'えe' text='￼えe'
+                      [text] '' text='• '
+                    [list item] 'おo' text='￼おo'
+                      [text] '' text='• '
+                    [list item] 'かka' text='￼かka'
+                      [text] '' text='• '
+                    [list item] 'きki' text='￼きki'
+                      [text] '' text='• '
+                    [list item] 'くku' text='￼くku'
+                      [text] '' text='• '
+                    [list item] 'けke' text='￼けke'
+                      [text] '' text='• '
+                    [list item] 'こko' text='￼こko'
+                      [text] '' text='• '
+                  [heading] 'With support'
+                  [paragraph] '' text='Declared, but not runnable: no runner serves this stage yet.'
+                  [list] ''
+                    [list item] 'あa' text='￼あa'
+                      [text] '' text='• '
+                    [list item] 'いi' text='￼いi'
+                      [text] '' text='• '
+                    [list item] 'うu' text='￼うu'
+                      [text] '' text='• '
+                    [list item] 'えe' text='￼えe'
+                      [text] '' text='• '
+                    [list item] 'おo' text='￼おo'
+                      [text] '' text='• '
+                    [list item] 'かka' text='￼かka'
+                      [text] '' text='• '
+                    [list item] 'きki' text='￼きki'
+                      [text] '' text='• '
+                    [list item] 'くku' text='￼くku'
+                      [text] '' text='• '
+                    [list item] 'けke' text='￼けke'
+                      [text] '' text='• '
+                    [list item] 'こko' text='￼こko'
+                      [text] '' text='• '
+                  [button] 'Start practising'
+                [button] 'Pause session'
+                [button] 'Stop session'
+            [scroll bar] ''
+

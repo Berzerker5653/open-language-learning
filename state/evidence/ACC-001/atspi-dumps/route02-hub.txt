@@ -1,0 +1,72 @@
+=== application: 'lts-desktop' ===
+[application] 'lts-desktop'
+  [frame] 'Open Language Learning Platform' states=showing
+    [filler] '' states=showing
+      [filler] ''
+        [filler] ''
+          [scroll pane] ''
+            [document web] 'Open Language Learning Platform' states=showing
+              [link] 'Skip to main content'
+              [landmark] '' states=showing
+                [landmark] 'Routes' states=showing
+                  [button] 'Today' states=showing
+                  [button] 'Practice' states=showing
+                  [button] 'My Words' states=showing
+                  [button] 'Progress' states=showing
+                  [button] 'Settings' states=showing
+              [landmark] '' states=showing
+                [landmark] 'Practice' states=showing
+                  [heading] 'Hi Audit Test' states=showing
+                  [paragraph] '' text='what to practice now' states=showing
+                  [paragraph] '' text='Japanese Reference Pack (Draft) — AI-generated content · not human-reviewed' states=showing
+                  [status bar] '' states=showing
+                    [paragraph] '' text='Japanese Reference Pack version 0.2.0 is on this device. The pack catalogue lists version 0.4.2.' states=showing
+                    [section] '' text='￼' states=showing
+                      [button] 'Review pack updates' states=showing
+                  [landmark] 'First steps' states=showing
+                    [heading] 'Where to begin' states=showing
+                    [paragraph] '' text='From the pack you are learning, in its order — the plan below carries the buttons.' states=showing
+                    [list] '' states=showing
+                      [list item] 'First lookあ (a)' text='￼First lookあ (a)' states=showing
+                        [text] '' text='1. ' states=showing
+                      [list item] 'First lookい' text='￼First lookい' states=showing
+                        [text] '' text='2. ' states=showing
+                      [list item] 'First lookう' text='￼First lookう' states=showing
+                        [text] '' text='3. ' states=showing
+                  [section] '' text='￼￼￼￼' states=showing
+                    [panel] 'Time budget' text='￼￼￼￼' states=showing
+                      [toggle button] '5 min' states=showing
+                      [toggle button] '10 min' states=showing
+                      [toggle button] '20 min' states=showing
+                      [toggle button] '30 min' states=showing
+                  [paragraph] '' text='5 activities · about 5 minutes' states=showing
+                  [section] '' text='￼' states=showing
+                    [button] "Start today's plan — 5 activities, about 5 minutes" states=showing
+                  [paragraph] '' text='One activity at a time. You can stop at any point: what you finish is saved, and the rest stays on your plan.' states=showing
+                  [paragraph] '' text='Or do one activity on its own:'
+                  [landmark] 'First look'
+                    [heading] 'First look'
+                    [paragraph] '' text='Nothing is recorded until you do one of these.'
+                    [panel] ''
+                      [list item] 'New material あ a comprehension-reading, ~60s — no practice runner for this yet' text='New material\nあ\na\ncomprehension-reading, ~60s — no practice runner for this yet\n'
+                        [unknown] '' text='あ'
+                      [list item] '' text='￼'
+                        [button] 'New material あ a Recognise the script · ~60s'
+                      [list item] '' text='￼'
+                        [button] 'New material い i Recognise the script · ~60s'
+                      [list item] '' text='￼'
+                        [button] 'New material う u Recognise the script · ~60s'
+                      [list item] '' text='￼'
+                        [button] 'New material ありがとうございます。 Thank you. Write it · ~60s'
+                  [paragraph] '' text='Next up: Recognize hiragana chart symbols on sight (both directions) well enough to read supported kana text.Getting started — first words and routine'
+                  [landmark] 'Environments'
+                    [heading] 'Places you can go'
+                    [paragraph] '' text='Places open as your capabilities grow — not from activity counts.'
+                    [panel] ''
+                      [list item] 'Checking the price at the cafe locked grows with: ja.lex.food-drink.kohi (RecallMeaning), ja.lex.food-drink.ocha (RecallMeaning), ja.sent.check-price (ComprehensionListening)' text='Checking the price at the cafe\nlocked\ngrows with: ja.lex.food-drink.kohi (RecallMeaning), ja.lex.food-drink.ocha (RecallMeaning), ja.sent.check-price '
+                      [list item] 'Order a drink at a café locked grows with: ja.sent.drink-coffee (ComprehensionListening), ja.sent.drink-coffee (ProductionWriting), ja.grammar.verb.polite-masu (RecallMeaning)' text='Order a drink at a café\nlocked\ngrows with: ja.sent.drink-coffee (ComprehensionListening), ja.sent.drink-coffee (ProductionWriting), ja.grammar.verb.po'
+                      [list item] 'Find a platform at the station locked grows with: ja.sent.where-station (ComprehensionListening), ja.sent.go-station (ComprehensionListening), ja.grammar.particle.goal-e (RecallMeaning)' text='Find a platform at the station\nlocked\ngrows with: ja.sent.where-station (ComprehensionListening), ja.sent.go-station (ComprehensionListening), ja.gram'
+                      [list item] 'Buy a ticket locked grows with: ja.lex.transport.kippu (RecallMeaning), ja.sent.buy-ticket (ComprehensionListening), ja.grammar.counters.basic (RecallMeaning)' text='Buy a ticket\nlocked\ngrows with: ja.lex.transport.kippu (RecallMeaning), ja.sent.buy-ticket (ComprehensionListening), ja.grammar.counters.basic (Recall'
+                      [list item] 'Introduce yourself locked grows with: ja.expr.introduction.hajimemashite (RecallMeaning), ja.sent.my-name-wa (ProductionWriting), ja.grammar.particle.topic-wa (RecallMeaning)' text='Introduce yourself\nlocked\ngrows with: ja.expr.introduction.hajimemashite (RecallMeaning), ja.sent.my-name-wa (ProductionWriting), ja.grammar.particle.'
+            [scroll bar] ''
+

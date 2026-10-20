@@ -1,0 +1,31 @@
+=== application: 'lts-desktop' ===
+[application] 'lts-desktop'
+  [frame] 'Open Language Learning Platform' states=showing
+    [filler] '' states=showing
+      [filler] ''
+        [filler] ''
+          [scroll pane] ''
+            [document web] 'Open Language Learning Platform' states=showing
+              [link] 'Skip to main content'
+              [landmark] '' states=showing
+                [landmark] 'Routes' states=showing
+                  [button] 'Today' states=showing
+                  [button] 'Practice' states=showing
+                  [button] 'My Words' states=showing
+                  [button] 'Progress' states=showing
+                  [button] 'Settings' states=showing
+              [landmark] '' states=showing
+                [paragraph] '' text='All authored stages complete.' states=showing
+                [button] 'Show the lesson again' states=showing
+                [landmark] 'Practice' states=showing
+                  [heading] 'Practice' states=showing
+                  [heading] 'What did you hear?' states=showing
+                  [button] 'Play the audio' states=showing
+                  [section] '' text='synthesized voice (model output)' states=showing
+                  [label] '' text='Type your answer' states=showing
+                  [section] '' text='￼' states=showing
+                    [entry] 'Type your answer' text='ありがと' states=editable,showing
+                  [button] 'Check' states=showing
+                  [paragraph] '' text='↻\xa0Not quite — the answer is "ありがとうございます。"' states=showing
+                  [button] 'Back to plan' states=showing
+

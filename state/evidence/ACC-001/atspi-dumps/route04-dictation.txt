@@ -1,0 +1,38 @@
+=== application: 'lts-desktop' ===
+[application] 'lts-desktop'
+  [frame] 'Open Language Learning Platform' states=showing
+    [filler] '' states=showing
+      [filler] ''
+        [filler] ''
+          [scroll pane] '' states=focused
+            [document web] 'Open Language Learning Platform' states=focused,showing
+              [link] 'Skip to main content'
+              [landmark] '' states=showing
+                [landmark] 'Routes' states=showing
+                  [button] 'Today' states=showing
+                  [button] 'Practice' states=showing
+                  [button] 'My Words' states=showing
+                  [button] 'Progress' states=showing
+                  [button] 'Settings' states=showing
+              [landmark] '' states=showing
+                [landmark] 'Lesson' states=showing
+                  [heading] 'Thanks and excuse me' states=showing
+                  [paragraph] '' text='Core polite phrases and when they fit.' states=showing
+                  [paragraph] '' text='All authored stages complete.' states=showing
+                  [heading] 'With support' states=showing
+                  [paragraph] '' text='Served by the guided-speaking runner.' states=showing
+                  [list] '' states=showing
+                    [list item] 'ありがとうございますありがとうございますthank you (polite)' text='￼ありがとうございますありがとうございますthank you (polite)' states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] 'ありがとうありがとうthanks (casual)' text='￼ありがとうありがとうthanks (casual)' states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] "すみませんすみませんexcuse me / I'm sorry (polite)" text="￼すみませんすみませんexcuse me / I'm sorry (polite)" states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] 'しつれいしますしつれいしますexcuse me (polite; leaving or intruding)' text='￼しつれいしますしつれいしますexcuse me (polite; leaving or intruding)' states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] 'ありがとうございます。ありがとうございますThank you.' text='￼ありがとうございます。ありがとうございますThank you.' states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] "すみません。すみませんExcuse me. / I'm sorry." text="￼すみません。すみませんExcuse me. / I'm sorry." states=showing
+                      [text] '' text='• ' states=showing
+                  [button] 'Start practising' states=focused,showing
+

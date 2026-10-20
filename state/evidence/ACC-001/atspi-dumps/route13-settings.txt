@@ -1,0 +1,236 @@
+=== application: 'lts-desktop' ===
+[application] 'lts-desktop'
+  [frame] 'Open Language Learning Platform' states=showing
+    [filler] '' states=showing
+      [filler] ''
+        [filler] ''
+          [scroll pane] ''
+            [document web] 'Open Language Learning Platform' states=showing
+              [link] 'Skip to main content'
+              [landmark] '' states=showing
+                [landmark] 'Routes' states=showing
+                  [button] 'Today' states=showing
+                  [button] 'Practice' states=showing
+                  [button] 'My Words' states=showing
+                  [button] 'Progress' states=showing
+                  [button] 'Settings' states=focused,showing
+              [landmark] '' states=showing
+                [landmark] 'Language packs' states=showing
+                  [heading] 'Language packs' states=showing
+                  [paragraph] '' text="This page changes the language you are learning. The app's own interface language is separate and unchanged. Installed packs work offline." states=showing
+                  [heading] 'Installed packs' states=showing
+                  [panel] '' states=showing
+                    [list item] 'Esperanto — original demo (unreviewed) (eo) — v0.1.0, community AI-generated content · not human-reviewed' text='Esperanto — original demo (unreviewed)\n(eo) — v0.1.0, community￼\nAI-generated content · not human-reviewed\n\n' states=showing
+                      [button] 'Learn this' states=showing
+                      [paragraph] '' text='AI-generated content · not human-reviewed' states=showing
+                    [list item] 'Japanese (demo lexicon, EDRDG-derived) (ja-JP) — v0.1.0, community AI-generated content · not human-reviewed' text='Japanese (demo lexicon, EDRDG-derived)\n(ja-JP) — v0.1.0, community￼\nAI-generated content · not human-reviewed\n\n' states=showing
+                      [button] 'Learn this' states=showing
+                      [paragraph] '' text='AI-generated content · not human-reviewed' states=showing
+                    [list item] 'Japanese Reference Pack (Draft) (ja-JP) — v0.2.0, community learning this language AI-generated content · not human-reviewed' text='Japanese Reference Pack (Draft)\n(ja-JP) — v0.2.0, community\nlearning this language\nAI-generated content · not human-reviewed\n\n' states=showing
+                      [paragraph] '' text='AI-generated content · not human-reviewed' states=showing
+                  [section] 'Content claims for org.openlanguage.eo-demo' text="What this pack claims (0.1.0)\nThese numbers are read from the pack's own files — they are the pack's claims, not our verification. Install posture sta" states=showing
+                    [heading] 'What this pack claims (0.1.0)' states=showing
+                    [paragraph] '' text="These numbers are read from the pack's own files — they are the pack's claims, not our verification. Install posture stays “community” regardless of t" states=showing
+                    [panel] '' states=showing
+                      [list item] '1 curriculum units' states=showing
+                      [list item] '1 communicative goals' states=showing
+                      [list item] '1 assessment definitions' states=showing
+                      [list item] '6 lexicon entries' states=showing
+                      [list item] '0 example sentences' states=showing
+                      [list item] '1 grammar concepts' states=showing
+                      [list item] '0 writing-system symbols' states=showing
+                      [list item] '0 kanji entries' states=showing
+                      [list item] '0 sound contrasts' states=showing
+                      [list item] '0 reading stories' states=showing
+                    [heading] "Review posture (the pack's own labels)"
+                    [panel] ''
+                      [list item] 'units: 1 unlabeled'
+                      [list item] 'goals: 1 AI-generated, unreviewed'
+                      [list item] 'assessments: 1 AI-generated, unreviewed'
+                      [list item] 'lexicon: 6 AI-generated, unreviewed'
+                      [list item] 'grammar: 1 AI-generated, unreviewed'
+                    [heading] 'Stated sources'
+                    [panel] ''
+                      [list item] '© Open Language Learning Platform contributors — CC BY 4.0 — (public) · authored originally for this project; no third-party text retrieved 2026-10-03' text='© Open Language Learning Platform contributors — CC BY 4.0 — ￼ (public) · authored originally for this project; no third-party text retrieved 2026-10-'
+                        [link] 'CC-BY-4.0 license text'
+                    [paragraph] '' text='The complete pack-level notice list ships in third-party/notices/NOTICE.md.'
+                      [section] '' text='third-party/notices/NOTICE.md'
+                  [section] 'Content claims for org.openlanguage.ja-demo' text="What this pack claims (0.1.0)\nThese numbers are read from the pack's own files — they are the pack's claims, not our verification. Install posture sta"
+                    [heading] 'What this pack claims (0.1.0)'
+                    [paragraph] '' text="These numbers are read from the pack's own files — they are the pack's claims, not our verification. Install posture stays “community” regardless of t"
+                    [panel] ''
+                      [list item] '1 curriculum units'
+                      [list item] '1 communicative goals'
+                      [list item] '1 assessment definitions'
+                      [list item] '5 lexicon entries'
+                      [list item] '0 example sentences'
+                      [list item] '1 grammar concepts'
+                      [list item] '0 writing-system symbols'
+                      [list item] '0 kanji entries'
+                      [list item] '0 sound contrasts'
+                      [list item] '0 reading stories'
+                    [heading] "Review posture (the pack's own labels)"
+                    [panel] ''
+                      [list item] 'units: 1 unlabeled'
+                      [list item] 'goals: 1 AI-generated, unreviewed'
+                      [list item] 'assessments: 1 AI-generated, unreviewed'
+                      [list item] 'lexicon: 5 AI-generated, unreviewed'
+                      [list item] 'grammar: 1 AI-generated, unreviewed'
+                    [heading] 'Stated sources'
+                    [panel] ''
+                      [list item] 'JMdict/JMnedict © Electronic Dictionary Research and Development Group, CC BY-SA 4.0 — (public) retrieved 2026-10-03' text='JMdict/JMnedict © Electronic Dictionary Research and Development Group, CC BY-SA 4.0 — ￼ (public) retrieved 2026-10-03'
+                        [link] 'CC-BY-SA-4.0 license text'
+                      [list item] 'Reference audio synthesized with Kokoro TTS (Apache-2.0) via sherpa-onnx — (public)retrieved 2026-10-03' text='Reference audio synthesized with Kokoro TTS (Apache-2.0) via sherpa-onnx — ￼ (public) retrieved 2026-10-03'
+                        [link] 'Apache-2.0 license text'
+                    [paragraph] '' text='The complete pack-level notice list ships in third-party/notices/NOTICE.md.'
+                      [section] '' text='third-party/notices/NOTICE.md'
+                  [section] 'Content claims for org.openlanguage.ja-jp.reference' text="What this pack claims (0.2.1)\nThese numbers are read from the pack's own files — they are the pack's claims, not our verification. Install posture sta"
+                    [heading] 'What this pack claims (0.2.1)'
+                    [paragraph] '' text="These numbers are read from the pack's own files — they are the pack's claims, not our verification. Install posture stays “community” regardless of t"
+                    [panel] ''
+                      [list item] '774 curriculum units'
+                      [list item] '75 communicative goals'
+                      [list item] '75 assessment definitions'
+                      [list item] '3921 lexicon entries'
+                      [list item] '679 example sentences'
+                      [list item] '164 grammar concepts'
+                      [list item] '147 writing-system symbols'
+                      [list item] '84 kanji entries'
+                      [list item] '7 sound contrasts'
+                      [list item] '3 reading stories'
+                    [heading] "Review posture (the pack's own labels)"
+                    [panel] ''
+                      [list item] 'units: 774 unlabeled'
+                      [list item] 'goals: 75 AI-generated, unreviewed'
+                      [list item] 'assessments: 74 AI-generated, unreviewed'
+                      [list item] 'assessments: 1 awaiting review'
+                      [list item] 'lexicon: 3919 AI-generated, unreviewed'
+                      [list item] 'lexicon: 2 awaiting review'
+                      [list item] 'sentences: 679 AI-generated, unreviewed'
+                      [list item] 'grammar: 160 AI-generated, unreviewed'
+                      [list item] 'grammar: 4 awaiting review'
+                      [list item] 'orthography: 147 awaiting review'
+                      [list item] 'kanji: 84 AI-generated, unreviewed'
+                      [list item] 'phonological contrasts: 7 AI-generated, unreviewed'
+                      [list item] 'stories: 3 AI-generated, unreviewed'
+                    [heading] 'Stated sources'
+                    [panel] ''
+                      [list item] 'The Japan Foundation — JF Standard for Japanese-Language Education — UNLICENSED — (reference-only) · framework ideas referenced; no descriptor or course text copied into this pack retrieved 2026-10-02' text='The Japan Foundation — JF Standard for Japanese-Language Education — UNLICENSED — ￼ (reference-only) · framework ideas referenced; no descriptor or co'
+                        [link] 'source'
+                      [list item] 'JMdict/JMnedict © Electronic Dictionary Research and Development Group, CC BY-SA 4.0 — (public) retrieved 2026-10-02' text='JMdict/JMnedict © Electronic Dictionary Research and Development Group, CC BY-SA 4.0 — ￼ (public) retrieved 2026-10-02'
+                        [link] 'CC-BY-SA-4.0 license text'
+                      [list item] 'See upstream component licenses and dictionary/voice notices — NOASSERTION — (reference-only) ·candidate tooling only; neither software nor derived targets are bundled as verified data retrieved 2026-10-02' text='See upstream component licenses and dictionary/voice notices — NOASSERTION — ￼ (reference-only) · candidate tooling only; neither software nor derived'
+                        [link] 'source'
+                      [list item] 'Mozilla Foundation — Common Voice Japanese Scripted Speech 27.0 (candidate source; not bundled) — (reference-only) · Exact release cv-corpus-27.0-2026-09-11; candidate ASR evaluation resource, not learner-pronunciation ground truth. The release page separately forbids speaker-identification attempts and re-hosting/re-sharing. Check exact access/use terms before download; fetch upstream rather than commit or bundle recordings. Treat the CC0 copyright label and stated access/use conditions as separate audit inputs; do not infer bundling permission from CC0 alone. retrieved 2026-10-02' text='Mozilla Foundation — Common Voice Japanese Scripted Speech 27.0 (candidate source; not bundled) — ￼ (reference-only) · Exact release cv-corpus-27.0-20'
+                        [link] 'CC0-1.0 license text'
+                      [list item] '© Open Language Learning Platform contributors — CC BY 4.0; content is ai-assisted original draft, unreviewed— CC-BY-4.0 — (public) · project-owned AI-assisted original draft content; no third-party text copied retrieved 2026-10-03' text='© Open Language Learning Platform contributors — CC BY 4.0; content is ai-assisted original draft, unreviewed — CC-BY-4.0 — ￼ (public) · project-owned'
+                        [link] 'source'
+                      [list item] '© Open Language Learning Platform contributors — CC BY 4.0; content is ai-assisted original draft, unreviewed— CC-BY-4.0 — (public) · project-owned AI-assisted original draft content; no third-party text copied retrieved 2026-10-04' text='© Open Language Learning Platform contributors — CC BY 4.0; content is ai-assisted original draft, unreviewed — CC-BY-4.0 — ￼ (public) · project-owned'
+                        [link] 'source'
+                      [list item] 'Verification data derived from JMdict © Electronic Dictionary Research and Development Group, CC BY-SA 4.0, via jmdict-simplified — (reference-only) · verification pointer only: entry forms/readings/glosses were checked against this exact release during the 2026-10-05 external accuracy review (docs/review/2026-10-05-external-pack-review.md); the dataset is NOT bundled or mirrored in this repo and no dictionary definition text is reproduced in pack content retrieved 2026-10-05' text='Verification data derived from JMdict © Electronic Dictionary Research and Development Group, CC BY-SA 4.0, via jmdict-simplified — ￼ (reference-only)'
+                        [link] 'CC-BY-SA-4.0 license text'
+                      [list item] 'Japanese speech audio synthesized with Kokoro (Apache-2.0) running on sherpa-onnx; espeak-ng-data (GPL-3.0) is staged with the optional TTS payload — Apache-2.0 — (public) · toolchain, not content: the exact versions used are recorded per asset in media/manifest.jsonl (runtime, model, model_sha256, voice, speed) retrieved 2026-10-07' text='Japanese speech audio synthesized with Kokoro (Apache-2.0) running on sherpa-onnx; espeak-ng-data (GPL-3.0) is staged with the optional TTS payload — '
+                        [link] 'source'
+                    [paragraph] '' text='The complete pack-level notice list ships in third-party/notices/NOTICE.md.'
+                      [section] '' text='third-party/notices/NOTICE.md'
+                  [heading] 'Display settings'
+                  [panel] 'Stress-mark visibility' text="Some packs mark stressed vowels (e.g. сего́дня). Highlight them in readings and hints. The current pack's data carries no stress marks, so nothing cha"
+                    [paragraph] '' text="Some packs mark stressed vowels (e.g. сего́дня). Highlight them in readings and hints. The current pack's data carries no stress marks, so nothing cha"
+                    [section] '' text='￼￼￼'
+                      [toggle button] 'Automatic'
+                      [toggle button] 'Always highlight'
+                      [toggle button] 'Off'
+                  [heading] 'Community catalog'
+                  [paragraph] '' text='Community catalog is live.'
+                  [paragraph] '' text='Community packs are made by their authors, not reviewed by us. They are declarative content only — they never run code. Every install is checksum-veri'
+                  [panel] ''
+                    [list item] 'Japanese Reference Pack (ja-JP) — community content by Open Language Learning Platform contributors' text='Japanese Reference Pack\n(ja-JP) — community content by Open Language Learning Platform contributors\nversion 0.4.2\nlicense: CC-BY-SA-4.0\nsize: 304.0 MB'
+                      [unknown] '' text='Japanese Reference Pack'
+                      [panel] ''
+                        [list item] 'version 0.4.2'
+                        [list item] 'license: CC-BY-SA-4.0'
+                        [list item] 'size: 304.0 MB'
+                        [list item] 'needs app SDK 0.1.0'
+                        [list item] "review status (author's claim): unreviewed"
+                      [button] 'Update to v0.4.2'
+                    [list item] 'Russian Reference Pack (ru-RU) — community content by Open Language Learning Platform contributors' text='Russian Reference Pack\n(ru-RU) — community content by Open Language Learning Platform contributors\nversion 0.4.2\nlicense: CC0-1.0\nsize: 303.7 MB\nneeds'
+                      [unknown] '' text='Russian Reference Pack'
+                      [panel] ''
+                        [list item] 'version 0.4.2'
+                        [list item] 'license: CC0-1.0'
+                        [list item] 'size: 303.7 MB'
+                        [list item] 'needs app SDK 0.1.0'
+                        [list item] "review status (author's claim): unreviewed"
+                      [button] 'Install v0.4.2'
+                  [heading] 'Import a pack file'
+                  [paragraph] '' text='Choose a .lpk pack archive from this device. It goes through the same validation as catalog installs.'
+                    [section] '' text='.lpk'
+                  [section] '' text='￼'
+                    [button] 'Import pack file' text='no file selected'
+                [landmark] 'Settings'
+                  [heading] 'Settings'
+                  [heading] 'Microphone'
+                  [label] ''
+                    [check box] 'Allow microphone access for speaking activities' states=checked
+                    [section] '' text='Allow microphone access for speaking activities'
+                  [paragraph] '' text='The setting is enforced: while it is off, the app never asks the system for microphone access — pressing Record shows a note pointing here instead. Sp'
+                  [section] '' text='Microphone to record from￼'
+                    [label] '' text='Microphone to record from￼'
+                      [combo box] 'Microphone to record from System default'
+                        [menu] ''
+                          [menu item] 'System default' states=selected,showing
+                  [paragraph] '' text='There is nothing to list yet: the browser only reveals microphone names after you allow microphone access once. Recording from the system default work'
+                  [paragraph] '' text='￼'
+                    [button] 'Detect microphones'
+                  [heading] 'Romaji (romanisation) display'
+                  [panel] 'Show romaji alongside Japanese text' text='￼\n￼Auto — fade as my reading grows\n￼Always show romaji\n￼Off — Japanese script only\n'
+                    [label] '' text='Show romaji alongside Japanese text'
+                    [label] ''
+                      [radio button] 'Auto — fade as my reading grows' states=checked
+                      [section] '' text='Auto — fade as my reading grows'
+                    [label] ''
+                      [radio button] 'Always show romaji'
+                      [section] '' text='Always show romaji'
+                    [label] ''
+                      [radio button] 'Off — Japanese script only'
+                      [section] '' text='Off — Japanese script only'
+                  [paragraph] '' text='Romaji is a temporary scaffold: content is stored in Japanese script, and Auto fades romanisation as reading grows. Your choice is honored everywhere '
+                  [heading] 'Profile data'
+                  [paragraph] '' text='The privacy notice promises you can export or delete your local profile data at any time — both are here, and switching profiles starts here too. Swit'
+                  [button] 'Export profile data'
+                  [label] '' text='Restore from a backup file'
+                  [section] '' text='￼'
+                    [entry] 'Restore from a backup file' states=editable
+                  [button] 'Check a backup…'
+                  [button] 'Switch profile…'
+                  [paragraph] '' text='Switching deletes nothing: each profile keeps its own progress, saved words, and settings, and waits for you in the picker.'
+                  [button] 'Delete profile data…'
+                  [paragraph] '' text='Deleting removes this profile and all of its learning data on this device, and cannot be undone. The app asks for one explicit confirmation before any'
+                  [heading] 'Speech'
+                  [paragraph] '' text='Microphone: allowed. Speech model: org.openlanguage.speech.whisper-ggml-small is already on this device. Speech runtime: whisper.cpp version unknown, '
+                  [section] '' text='Active speech model￼'
+                    [label] '' text='Active speech model￼'
+                      [combo box] 'Active speech model org.openlanguage.speech.whisper-ggml-small — v1.0.0, MIT (installed)'
+                        [menu] ''
+                          [menu item] 'Off — speaking activities abstain'
+                          [menu item] 'org.openlanguage.speech.whisper-ggml-tiny — v1.0.0, MIT (installed)'
+                          [menu item] 'org.openlanguage.speech.whisper-ggml-base — v1.0.0, MIT (installed)'
+                          [menu item] 'org.openlanguage.speech.whisper-ggml-small — v1.0.0, MIT (installed)' states=selected,showing
+                  [paragraph] '' text="This is the app's one speech-model preference; the models themselves are listed below with their sizes, licenses, and downloads."
+                  [heading] 'Speech recognition & pronunciation'
+                  [paragraph] '' text='Optional. These local models feed the speech-based checks — pronunciation alignment and dictation recognition — or you can turn them off above. They r'
+                  [panel] ''
+                    [list item] 'Whisper Tiny — smallest, lightest — 74.1 MB, MIT (installed)' text='Whisper Tiny — smallest, lightest — 74.1 MB, MIT (installed)￼\n'
+                      [button] 'Remove'
+                    [list item] 'Whisper Base — larger download and memory — 141.1 MB, MIT (installed)' text='Whisper Base — larger download and memory — 141.1 MB, MIT (installed)￼\n'
+                      [button] 'Remove'
+                    [list item] 'Whisper Small — largest download and memory — 465.0 MB, MIT (installed) recommended for this device' text='Whisper Small — largest download and memory — 465.0 MB, MIT (installed)\nrecommended for this device\n￼\n'
+                      [button] 'Remove'
+                  [heading] 'Playback output'
+                  [paragraph] '' text='This runtime cannot direct playback to a chosen device, so there is no picker here — the system sound settings decide where audio plays.'
+                  [heading] 'Speech runtimes'
+                  [paragraph] '' text='The engines this build ships and can load — honest status, not a choice. Pronunciation feedback and dictation recognition also need a recognition runt'
+                  [heading] 'About this build'
+                  [paragraph] '' text='Version 0.4.0-alpha.1, commit 1844b80 (built from a modified working tree). Please quote both lines when you report a platform problem — a report that'
+            [scroll bar] ''
+

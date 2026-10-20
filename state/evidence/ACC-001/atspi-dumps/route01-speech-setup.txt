@@ -1,0 +1,38 @@
+=== application: 'lts-desktop' ===
+[application] 'lts-desktop'
+  [frame] 'Open Language Learning Platform' states=showing
+    [filler] '' states=showing
+      [filler] ''
+        [filler] ''
+          [scroll pane] ''
+            [document web] 'Open Language Learning Platform' states=showing
+              [link] 'Skip to main content'
+              [landmark] '' states=showing
+              [landmark] '' states=showing
+                [landmark] 'Onboarding' states=showing
+                  [list] 'Progress' states=showing
+                    [list item] '1 Welcome' states=showing
+                      [section] '' text='1' states=showing
+                    [list item] '2 Language' states=showing
+                      [section] '' text='2' states=showing
+                    [list item] '3 Microphone' states=showing
+                      [section] '' text='3' states=showing
+                    [list item] '4 Speech' states=showing
+                      [section] '' text='4' states=showing
+                    [list item] '5 Start' states=showing
+                      [section] '' text='5' states=showing
+                  [heading] 'Speech setup' states=showing
+                  [paragraph] '' text='Speech components are downloaded once to this computer and shared by every language. Installing them now is optional — skipping is a clean choice and ' states=showing
+                  [list] '' text='Speech recognition (Whisper Whisper-ggml-tiny): installed\nSpeech recognition (Whisper Whisper-ggml-base): installed\nSpeech recognition (Whisper Whispe' states=showing
+                    [list item] 'Speech recognition (Whisper Whisper-ggml-tiny): installed' text='￼Speech recognition (Whisper Whisper-ggml-tiny): installed' states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] 'Speech recognition (Whisper Whisper-ggml-base): installed' text='￼Speech recognition (Whisper Whisper-ggml-base): installed' states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] 'Speech recognition (Whisper Whisper-ggml-small): installed' text='￼Speech recognition (Whisper Whisper-ggml-small): installed' states=showing
+                      [text] '' text='• ' states=showing
+                    [list item] 'Speech recognition (sherpa-onnx Whisper): installed' text='￼Speech recognition (sherpa-onnx Whisper): installed' states=showing
+                      [text] '' text='• ' states=showing
+                  [button] 'Install speech components' states=showing
+                  [button] 'Start with speech' states=showing
+                  [button] 'Skip for now' states=showing
+
