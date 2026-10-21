@@ -1896,6 +1896,18 @@
       "summary": "Owner proposal 2026-10-21: key-command toggle plus a clickable corner bubble showing the current input mode, on every in-app screen, generalized to ANY language the pack supports - never hardcoded to Japanese (owner: 'wouldn't make sense to have 日本語 if you're learning russian').",
       "notes": "Captured from the owner's item-7 sweep pass (packet section 2 item 7, 'that worked perfectly'): key-command toggle + corner bubble flippable by click. Clarified same day: (1) 'any window' = any window inside the OLLP program - app-chrome bubble, no tray/global-shortcut requirement; (2) 'this works for any language not just japanese. it wouldn't make sense to have 日本語 if you're learning russian' - the bubble label and the keyboard itself are resolved from the ACTIVE pack's declared capability + mapping data; a non-kana pack shows no bubble and no keyboard (ties to SETTINGS-PACK-CAPABILITY-001). Phase 1's kana converter is the instance; generalizing means pack-declared mapping assets + a converter, never a language branch in engine or UI; the per-profile 'kana-keyboard' setting key gets renamed at implementation. Screen-reader announcement of mode changes follows A11Y-FLOW-001 semantics.",
       "evidence": []
+    },
+    "PACK-UPDATE-BANNER-001": {
+      "task_id": "PACK-UPDATE-BANNER-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "The pack-update banner names the wrong installed version when several versions coexist",
+      "activity": "idle",
+      "summary": "hub/Home/Settings banner reports the LOWEST installed version when a pack has multiple installed rows: owner device showed 'version 0.2.0 is on this device' with 0.4.2 installed same day (current pointer 0.4.2) and profile selection 0.4.3; installed_packs (packs.rs:1061) emits one entry per row and the catalogue join find (packs.rs:238-241) keeps the first.",
+      "notes": "Found by the 2026-10-21 AT-SPI audit dump of the live hub. Also observed: installing the older catalogue pin (0.4.2) moved the store current pointer down from 0.4.3. Content for the active profile still resolves from the selected on-disk version, so learner content was unaffected - banner wording only.",
+      "evidence": [
+        "state/evidence/ACC-001/atspi-dumps/audit-2026-10-21.txt"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

@@ -1,0 +1,8 @@
+auditing 'lts-desktop' via AT-SPI (the same tree Orca reads)
+view 1 (as found): 12 actionable elements checked, 0 unnamed
+view after 'Today': 26 actionable elements checked, 0 unnamed
+view after 'Practice': 7 actionable elements checked, 0 unnamed
+view after 'My Words': 11 actionable elements checked, 0 unnamed
+view after 'Progress': 6 actionable elements checked, 0 unnamed
+view after 'Settings': 50 actionable elements checked, 0 unnamed
+PASS: 6 views audited, 0 unnamed actionable element(s)

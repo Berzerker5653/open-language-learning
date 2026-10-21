@@ -306,7 +306,15 @@ Run the checklist at `state/evidence/O-06-2026-10-10/owner-report.md:76` — all
    「私の名まえは何ですか」 (findings 5/6/11);
 5. re-test Shadowing controls and the scenario ladder/transfer variants
    (findings 7/8);
-6. K-81 nav sign-off.
+6. K-81 nav sign-off. Silent machine leg (added 2026-10-21, owner declined an
+   Orca reinstall): `scripts/a11y-atspi-audit.py lts-desktop --drill` reads the
+   exact AT-SPI tree Orca speaks — it asserts every actionable element in the
+   live tree carries a non-empty accessible name, locates the five hub nav
+   buttons from the tree itself, activates each over the a11y bus, re-audits
+   every destination, and returns the app to the first view. Exit 0 = PASS.
+   This settles the labeling half of K-81 without speech; the "what Orca
+   actually pronounced" half stays human unless the owner accepts the
+   machine evidence in its place.
 
 Also re-probe the two open content/model items: the "echoey, metallic, tinny"
 character of reference audio (finding 11 — level fixed at generation; the

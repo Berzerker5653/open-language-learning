@@ -46,6 +46,20 @@ you are *not* re-verifying.
 - [ ] 6. K-81 nav sign-off
 - [x] 7. **New: kana keyboard (issue #2)** — ☑ owner 2026-10-21: walked exactly as specified — On → live romaji→kana typing `k-o-n-n-i-c-h-i-w-a` →こんにちわ → Escape cancelled the pending syllable → Enter committed without adding → Off left typing untouched — verdict: "that worked perfectly." Owner follow-up captured as `IME-TOGGLE-UX-001`: shortcut toggle + a clickable corner bubble showing the current input mode (English/Japanese); owner clarified same day — "any window" means any window **inside the OLLP program**, so an in-app chrome bubble, no system tray requirement.
 
+Machine-side finding surfaced while auditing the live accessibility tree
+(2026-10-21): the hub status line read "Japanese Reference Pack version
+**0.2.0** is on this device" even though the in-app catalog install done for
+item 4 put **0.4.2** on the device the same day (registry rows
+`{0.2.0, 0.4.2}`; store `current` pointer → 0.4.2) and your profile selects
+**0.4.3**. Cause is mechanical: the update banner reports the *lowest*
+installed version when several coexist (`packs.rs:1061` lists every install,
+`packs.rs:238-241` keeps the first). Content was never affected — lessons and
+audio resolve from the version your profile selects — so this is wrong banner
+wording, not wrong data. Registered as `PACK-UPDATE-BANNER-001` (P2,
+optional scope): no 1.0 blocker unless you say otherwise. One §5-relevant
+fact learned here: the live catalog still pins **0.4.2**, so the in-app
+"Update to v0.4.2" button will offer the older pack until the republish.
+
 ## 3. TTS-003 listening pass (the last open item on that card)
 
 Re-baked audio (Qwen3-TTS, ADR-0023) — the question is whether finding 11's

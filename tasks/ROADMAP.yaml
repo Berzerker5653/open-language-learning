@@ -2552,6 +2552,37 @@ tasks:
     No learner-facing string names a ticket, ADR or version-migration detail; `tools/audit_learner_copy.py`
     stays at 0 findings.
   required_for_desktop_1_0: false
+- id: PACK-UPDATE-BANNER-001
+  milestone: M10
+  priority: P2
+  title: The pack-update banner names the wrong installed version when several versions coexist
+  dependencies:
+  - PACK-UPDATE-UX-001
+  read_first:
+  - apps/desktop/src-tauri/src/packs.rs
+  - apps/desktop/src/App.tsx
+  - apps/desktop/src/hub.tsx
+  acceptance:
+  - >-
+    Measured 2026-10-21 on the owner's device: the hub status line read
+    "Japanese Reference Pack version 0.2.0 is on this device" while the store
+    held 0.2.0/0.2.1/0.4.2/0.4.3, the `current` pointer read 0.4.2, and the
+    active profile selects 0.4.3. Cause: `installed_packs` (packs.rs:1061)
+    returns one row per `pack_installations` row and the catalogue join's
+    `find` (packs.rs:238-241) keeps the first — the lowest — version.
+  - >-
+    The banner's installed side must be the version that profile actually uses
+    (its selection, or the store `current` pointer), not the lowest installed;
+    Home, hub and Settings keep deriving the same fact.
+  - >-
+    Installing an OLDER catalogue version (observed: catalog install of 0.4.2
+    moved the `current` pointer down from 0.4.3) must not silently downgrade
+    the pointer; either refuse with honest copy or move the pointer only when
+    the installed version is newer, and a test pins the chosen behavior.
+  - >-
+    No learner-facing string names a ticket or internal table;
+    `tools/audit_learner_copy.py` stays at 0 findings.
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -2635,4 +2666,5 @@ execution_scope:
   - IN-APP-IME-001
   - PLAT-001
   - CONTENT-CONFIRM-001
+  - PACK-UPDATE-BANNER-001
   public_publication_authorized: false
