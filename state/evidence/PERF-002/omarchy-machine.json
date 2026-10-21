@@ -1,0 +1,27 @@
+{
+  "schema": "perf-app/1.0",
+  "collected_utc": "2026-10-21T00:12:28Z",
+  "os": "Omarchy",
+  "kernel": "7.2.5-3-omarchy",
+  "cpu": {
+    "model": "AMD RYZEN AI MAX+ 395 w/ Radeon 8060S",
+    "threads": 32,
+    "physical_cores": 16,
+    "sockets": "1",
+    "max_mhz": "5187.5000",
+    "governor": "performance",
+    "avx512f_present": true
+  },
+  "memory": {
+    "total_mb": 63928,
+    "available_mb": 45802,
+    "swap_total_mb": 127850
+  },
+  "gpu": {
+    "lspci": "c5:00.0 Display controller: Advanced Micro Devices, Inc. [AMD/ATI] Strix Halo [Radeon Graphics / Radeon 8050S Graphics / Radeon 8060S Graphics] (rev c1)",
+    "nvidia_present": false,
+    "nvidia_smi_l": "",
+    "nvidia_vram": ""
+  },
+  "loadavg_before": "0.00 0.02 0.00"
+}

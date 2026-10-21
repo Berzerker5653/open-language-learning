@@ -85,24 +85,24 @@ in the same CI run.
 
 - [ ] I accept the security findings disposition (zero open findings) and give privacy sign-off — signature/date: ____
 
-## 4b. Second perf tier (Omarchy) — one command that needs your password
+## 4b. Second perf tier (Omarchy) — ☑ DONE 2026-10-21
 
-Gaming PC tier is measured (`state/evidence/PERF-002/gamingpc-2026-10-20.md`).
-The Omarchy leg needs `sudo`, which an agent cannot use there. Restaged today
-(2026-10-20) with the **fixed + instrumented + security-bumped** 0.4.3 binary
-at `b34538c` (`sha256 4cb44c886d0305330431d123f386d1584643df8b8b9bb784c26a241a1804314d` —
-includes the webview perf probe, which also feeds the app-side responsiveness
-rows into the harness output), the matching finalized deb (`a6d3953f…`, 12,589,552 B)
-and both harnesses under `~/perf-0.4.3`. Close any running app
-instance there, then one line:
+**Complete.** Your xvfb install + first `./run.sh` was what surfaced the
+staging bug (bundled-pack resolution needs the cargo `.cargo-lock` marker
+beside a scp'd binary, and the staged pack tree was stale); fixed
+(`ee22703` + fresh re-stage incl. `<exe_dir>/packs/` bundle), and the full
+harness then ran green on the box. Results in
+`state/evidence/PERF-002/omarchy-*`: startup **p50 663 / p95 669 ms**
+(PASS both lines), 13-route walk `SMOKE OK`, plan10k **p50 60 / p95 61 ms**,
+and the responsiveness probe **passes on this tier**: worst input→paint
+30 ms / worst main-thread block 17 ms during real ggml-tiny inference,
+0 long tasks — against 1057/1930 ms on the Gaming PC. The 50/100 ms
+responsiveness lines are therefore *tier-inconsistent hardware behavior*,
+not app-impossible: Strix Halo (AVX-512) finishes whisper inside one idle
+window; the AVX2 Gaming PC does not. That makes your §4b-adjacent decision
+sharper: cap/prioritize the sidecar on AVX2-class machines, or recalibrate
+the lines per tier-class. No further owner action on this row.
 
-```sh
-cd ~/perf-0.4.3 && sudo pacman -S --noconfirm --needed xorg-server-xvfb && ./run.sh
-```
-
-`run.sh` runs both harnesses (~6 min) and prints where the evidence
-landed. Leave it there and point me at it, and I fold the tier into
-the freeze ADR.
 
 
 ## 5. Pack republish (only after ☑ above)
