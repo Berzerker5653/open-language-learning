@@ -1804,6 +1804,16 @@
       "summary": "Settings forces heavy scrolling past long prose blocks users do not need per visit; fold each to a one-line summary plus a disclosure expander, moving full text to the docs bundle.",
       "notes": "Raised by the owner during the 2026-10-21 acceptance sweep (S-2). Use native details/summary semantics so screen-reader access is preserved; nothing user-facing removed. Whether this rides REL-001 or lands at 1.0.x is an owner scope call.",
       "evidence": []
+    },
+    "JA-FUNCTION-WORD-LOOKUP-001": {
+      "task_id": "JA-FUNCTION-WORD-LOOKUP-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "Tap-lookup resolves closed-class words to their correct sense",
+      "activity": "idle",
+      "summary": "Reading tap-lookup offers the wrong sense for function words: the topic particle は surfaces the tooth noun and に surfaces 'two', because the pack lexicon has no particle entries; closed-class spans need correctly sourced lexicon entries plus a reading-consistency check.",
+      "notes": "Found 2026-10-21 by the owner's sweep (packet section 2 item 4 leg 2, finding S-3): the lookup panel under 「わたしの なまえは タナカです。」 listed 'は ha — tooth'. Pack data confirms lexicon/health4.jsonl carries は/tooth as the only は entry and lexicon/numbers has に/two, while particles live only as grammar concepts (ja.grammar.particle.*), invisible to the lexicon-driven panel; the なまえ/まえ half of the check PASSED (K-80 span fix holds on the real surface). Fix is pack content (add sourced particle entries, jmdict-simplified covers them, draft posture unchanged) plus a repo-side check that flags any story-sentence span whose entry conflicts with the sentence's declared reading (surface は vs reading wa at that span) or resolves to no entry. Whether this rides REL-001 or lands at 1.0.x is an owner scope call.",
+      "evidence": []
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

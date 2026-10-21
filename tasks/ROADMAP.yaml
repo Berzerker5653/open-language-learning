@@ -2363,6 +2363,27 @@ tasks:
     Each Settings prose block renders as a one-line summary with a native details/summary
     expander (screen-reader semantics preserved); the full text moves to the docs bundle.
   required_for_desktop_1_0: false
+- id: JA-FUNCTION-WORD-LOOKUP-001
+  milestone: M10
+  priority: P2
+  title: Tap-lookup resolves closed-class words to their correct sense
+  dependencies:
+  - PACK-004
+  read_first:
+  - languages/ja-JP/lexicon/health4.jsonl
+  - languages/ja-JP/stories/first-day.yaml
+  - apps/desktop/src-tauri/src/lib.rs
+  acceptance:
+  - >-
+    Lookup for は in 「わたしの なまえは タナカです。」 presents the topic particle
+    (declared reading, jmdict-simplified sourcing, draft posture) and never the tooth noun
+    for that span; likewise に must not answer as "two".
+  - >-
+    A repo-side check walks shipped story sentences and reports every closed-class span
+    whose lexicon resolution conflicts with the sentence's own declared reading (surface は
+    against reading wa at that span) or resolves to no entry at all; the report is empty
+    after the fix.
+  required_for_desktop_1_0: false
 - id: PACK-UPDATE-UX-001
   milestone: M10
   priority: P2
@@ -2461,6 +2482,7 @@ execution_scope:
   - RELEASE-EVIDENCE-001
   - SETTINGS-PACK-CAPABILITY-001
   - SETTINGS-TEXT-COLLAPSE-001
+  - JA-FUNCTION-WORD-LOOKUP-001
   - A11Y-FLOW-001
   - RU-MODALITY-PRACTICE-001
   - UPPERBAND-TASK-JOURNEYS-001
