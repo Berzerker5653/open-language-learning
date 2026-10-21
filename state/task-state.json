@@ -1886,6 +1886,16 @@
       "evidence": [
         "state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md"
       ]
+    },
+    "IME-TOGGLE-UX-001": {
+      "task_id": "IME-TOGGLE-UX-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "Kana keyboard - shortcut toggle plus always-visible input-mode bubble",
+      "activity": "idle",
+      "summary": "Owner proposal 2026-10-21: toggle the in-app kana keyboard with a key command, and show a clickable corner bubble naming the current input mode (English/Japanese) that flips the keyboard without memorizing a shortcut.",
+      "notes": "Captured from the owner's item-7 sweep pass (packet section 2 item 7, 'that worked perfectly'): 'it would be nice to have this option be togglable with a key command... a little bubble in the corner that shows what language you have the program set for... you can just click that bubble from any window and flip the keyboard'. Scope: per-profile setting toggle by documented shortcut from any in-app screen (honoring SETTINGS-PACK-CAPABILITY-001 gating); a persistent mode indicator with click-to-flip; system-wide reach evaluated honestly via Tauri v2 tray/global-shortcut (KDE status-notifier) including IBus coexistence - if OS-level reach is not viable on this stack, record the limit rather than fake it. Screen-reader announcement of mode changes (A11Y-FLOW-001 semantics).",
+      "evidence": []
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

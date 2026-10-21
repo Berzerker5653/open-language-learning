@@ -2490,6 +2490,26 @@ tasks:
     hardcoded per language) and name where each prerequisite is practiced; a fresh
     profile's scenario list contains no raw content ids in learner-facing copy.
   required_for_desktop_1_0: false
+- id: IME-TOGGLE-UX-001
+  milestone: M10
+  priority: P2
+  title: Kana keyboard - shortcut toggle plus always-visible input-mode bubble
+  dependencies:
+  - A11Y-FLOW-001
+  read_first:
+  - apps/desktop/src/kana-ime.tsx
+  - apps/desktop/src/settings.tsx
+  acceptance:
+  - >-
+    A documented in-app shortcut flips the per-profile kana-keyboard setting from
+    any screen without opening Settings; the toggle honors pack capability gating
+    (SETTINGS-PACK-CAPABILITY-001).
+  - >-
+    A persistent bubble shows the current input mode (English/Japanese) and clicking
+    it flips the keyboard; system-wide reach (from any window) is evaluated via the
+    Tauri v2 tray/global-shortcut path and either shipped or its limits recorded
+    honestly (IBus coexistence included). Mode changes announce to screen readers.
+  required_for_desktop_1_0: false
 - id: PACK-UPDATE-UX-001
   milestone: M10
   priority: P2
@@ -2595,6 +2615,7 @@ execution_scope:
   - SCENARIO-VIEW-CONSISTENCY-001
   - BUTTON-AFFORDANCE-001
   - SCENARIO-LOCK-COPY-001
+  - IME-TOGGLE-UX-001
   - A11Y-FLOW-001
   - RU-MODALITY-PRACTICE-001
   - UPPERBAND-TASK-JOURNEYS-001
