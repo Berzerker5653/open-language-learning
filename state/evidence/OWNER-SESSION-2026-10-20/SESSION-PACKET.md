@@ -7,7 +7,7 @@ Everything below was prepared and measured today; the boxes are yours.
 
 | artifact | where | size | sha256 |
 | --- | --- | --- | --- |
-| app `lts-desktop` **0.4.3-alpha.1** deb, finalized (t64-safe `Depends`) — rebuilt 2026-10-21 at `1348612` incl. the **PERF-002 responsiveness fix** (`pronunciation_check` off the main thread + sidecar `nice +10`) on top of the security-bumped locks (webpki RUSTSEC-2026-0381/-82/-83 + vite 8.3.3 GHSA trio, `state/evidence/SEC-001/`), the `derive_pairs` plan-latency fix and the perf probe. **Earlier-recorded debs (`9c374399…`, `b54d4c55…`, `a6d3953f…`) lack the responsiveness fix — do not ship them.** | `target/release/bundle/deb/open-language-learning-platform_0.4.3-alpha.1_amd64.deb` | 12,603,248 B | `7042d750ed77308bc031194b333e479cdab40e95b6f2d75aca7197123dcf7591` |
+| app `lts-desktop` **0.4.3-alpha.1** deb, finalized (t64-safe `Depends` + new hard `gstreamer1.0-plugins-good`) — rebuilt 2026-10-21 at `7cd1fe4` incl. the **CSP `media-src 'self' blob:` fix** (packaged-build audio defect, found by this sweep — see §2 item 4) on top of the PERF-002 responsiveness fix, security-bumped locks (webpki RUSTSEC-2026-0381/-82/-83 + vite 8.3.3 GHSA trio), `derive_pairs` plan-latency fix and perf probes. **Earlier-recorded debs (`9c374399…`, `b54d4c55…`, `a6d3953f…`, `7042d750…`) lack the CSP audio fix — do not ship them.** | `target/release/bundle/deb/open-language-learning-platform_0.4.3-alpha.1_amd64.deb` | 12,603,298 B | `78946e5d09662758678857c3f6f013b3ffbc6d7486d31edd134a79dc57e2e7ed` |
 | ja-JP pack **0.4.3** `.lpk` (tracked tree incl. `capabilities.scenario_help`; `test` 0/0) | `~/staging/0.4.3/ja-JP-0.4.3.lpk` | 318,736,116 B | `9b17b23294df30f4…352719d6` |
 | ru-RU pack **0.4.3** `.lpk` (`test` 0/0) | `~/staging/0.4.3/ru-RU-0.4.3.lpk` | 318,493,155 B | `374d79e13db020fc…a2b96bc5` |
 
@@ -22,7 +22,7 @@ only after this session (see step 5).
 
 ## 1. Machine leg — already re-run today
 
-CI run `39612780641` (success, all 13 jobs) at `1348612` — the SHA the
+CI run `39650735423` (success, all jobs) at `7cd1fe4` — the SHA the
 shipping deb+binary are built from — covers the scripted half:
 `desktop-smoke` (13-route walk), full rust suite (4 parallel partitions),
 pack conformance, security scans; wall ~18 min, every gate intact
@@ -38,10 +38,10 @@ Already machine-proved per item (with a fresh `SMOKE OK (13 routes walked)`
 run from today): `SWEEP-PRECHECK.md` in this folder — read it to know what
 you are *not* re-verifying.
 
-- [ ] 1. Five-tab nav + hub drill — relaunch is single-instance, tab latency normal (findings 1–2)
-- [ ] 2. Settings ▸ Profile data → Switch profile works (finding 9)
+- [x] 1. Five-tab nav + hub drill — relaunch is single-instance, tab latency normal (findings 1–2) — ☑ owner 2026-10-21: "flipped through the tabs and they loaded and worked just fine"
+- [x] 2. Settings ▸ Profile data → Switch profile works (finding 9) — ☑ owner 2026-10-21
 - [ ] 3. Speech cards split + Playback output section — device picker **or** the honest "system sound settings decide" sentence; report which you see (finding 10)
-- [ ] 4. Settings ▸ Language packs → switch active pack; audio plays loudness-normalised; tap-lookup なまえ in 「私の名まえは何ですか」 (findings 5/6/11)
+- [x] 4. Settings ▸ Language packs → switch active pack; audio plays loudness-normalised; tap-lookup なまえ in 「私の名まえは何ですか」 (findings 5/6/11) — ☑ owner 2026-10-21 ("OK the audio is working now", ru then ja). **This click exposed a release-blocking defect**: the shipped CSP had no `media-src`, and WebKitGTK 2.54.1 refuses `blob:`-URL media under `default-src 'self'` — pack audio was silent in EVERY packaged build (dev runs skipped CSP injection, so it had never been seen). Fixed at `7cd1fe4` (`media-src 'self' blob:` + deb hard-depends `gstreamer1.0-plugins-good`); rebuilt deb below. Machine side also repaired: the 2026-10-19 orca-cascade removal had silently dropped `gst-plugins-good` (owner reinstalled; `sudo pacman -S orca speech-dispatcher` still owed to restore the a11y stack for item 6). Note: in-app catalog download installs 0.4.2 (live catalog pins), while this packet's artifacts are 0.4.3 — step 5 republish closes that gap. Tap-lookup leg: ☐ still owed.
 - [ ] 5. Shadowing controls + scenario ladder/transfer variants (findings 7/8)
 - [ ] 6. K-81 nav sign-off
 - [ ] 7. **New: kana keyboard (issue #2)** — Settings ▸ "Kana keyboard (in-app)" → **On**; open My Words and type `k-o-n-n-i-c-h-i-w-a` → `こんにちわ` appears live; Escape mid-word cancels the syllable; Enter completes the word without adding it; switch **Off** and typing is untouched — your IBus/Anthy still behaves exactly as before. Verdict: ☐ works ☐ issues: ____

@@ -1528,6 +1528,7 @@ tasks:
   - MINE-PLAN-001
   - PLAN-SCOPE-001
   - SUPPORT-ACCOUNTING-001
+  - PACKAGED-AUDIO-CSP-001
   - EVIDENCE-IDENTITY-001
   - RU-GOAL-PREREQ-001
   - GOAL-DISPLAY-QUALIFIER-001
@@ -2316,6 +2317,52 @@ tasks:
   # Human content authoring: an AI re-write would put unreviewed text into a pack whose review queue is
   # already the reason content stays labelled draft.
   required_for_desktop_1_0: false
+- id: PACKAGED-AUDIO-CSP-001
+  milestone: M10
+  priority: P1
+  title: Pack audio plays in packaged (CSP-injected) desktop builds
+  dependencies:
+  - TTS-004
+  - PLAYBACK-LIFECYCLE-001
+  read_first:
+  - apps/desktop/src-tauri/tauri.conf.json
+  - apps/desktop/src/playback.ts
+  acceptance:
+  - >-
+    A packaged (release, CSP-injected) desktop build plays pack word audio on click
+    without PLAYBACK_FAILED; verified by an owner click on the shipping deb, not a dev run.
+  - >-
+    scripts/finalize-deb.sh fails any finalized deb whose Depends lacks
+    gstreamer1.0-plugins-good, so the WAV-demuxer runtime dependency cannot silently drop.
+  required_for_desktop_1_0: true
+- id: SETTINGS-PACK-CAPABILITY-001
+  milestone: M10
+  priority: P2
+  title: Settings sections are gated by the active pack's declared capabilities
+  dependencies:
+  - PACK-001
+  read_first:
+  - apps/desktop/src/App.tsx
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  acceptance:
+  - >-
+    With a non-kana active pack the "Kana keyboard (in-app)" toggle is absent; with a kana
+    pack it appears. The gate reads pack-declared capability metadata (manifest scripts:),
+    never a hardcoded language code.
+  required_for_desktop_1_0: false
+- id: SETTINGS-TEXT-COLLAPSE-001
+  milestone: M10
+  priority: P2
+  title: Settings prose blocks collapse to one-line summaries with expanders
+  dependencies:
+  - A11Y-FLOW-001
+  read_first:
+  - apps/desktop/src/App.tsx
+  acceptance:
+  - >-
+    Each Settings prose block renders as a one-line summary with a native details/summary
+    expander (screen-reader semantics preserved); the full text moves to the docs bundle.
+  required_for_desktop_1_0: false
 - id: PACK-UPDATE-UX-001
   milestone: M10
   priority: P2
@@ -2412,6 +2459,8 @@ execution_scope:
   - CONTRIBUTOR-REVIEW-PACKET-001
   - JOURNEY-SUITE-001
   - RELEASE-EVIDENCE-001
+  - SETTINGS-PACK-CAPABILITY-001
+  - SETTINGS-TEXT-COLLAPSE-001
   - A11Y-FLOW-001
   - RU-MODALITY-PRACTICE-001
   - UPPERBAND-TASK-JOURNEYS-001

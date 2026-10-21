@@ -109,6 +109,10 @@ if [[ "$had_bare" != "0" && "$after" != *"libgtk-3-0t64 | libgtk-3-0"* ]]; then
   echo "FAIL: a bare libgtk-3-0 entry is still unqualified: $after" >&2
   exit 1
 fi
+if [[ "$after" != *"gstreamer1.0-plugins-good"* ]]; then
+  echo "FAIL: Depends lacks gstreamer1.0-plugins-good - the WAV demuxer is a hard runtime requirement (media-first, ADR-0024): libwebkit2gtk only Recommends it, and without it every pack clip fails at the webview ($after)" >&2
+  exit 1
+fi
 if diff <(grep -v '^Depends:' "$work/orig/ctrl/control") <(grep -v '^Depends:' "$work/check/control") >/dev/null; then :; else
   echo "FAIL: control fields other than Depends changed" >&2
   diff <(grep -v '^Depends:' "$work/orig/ctrl/control") <(grep -v '^Depends:' "$work/check/control") >&2

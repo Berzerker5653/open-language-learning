@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-10-20",
+  "updated": "2026-10-21",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -1771,6 +1771,39 @@
         "apps/desktop/src/journeys/a11y-focus.journey.tsx"
       ],
       "updated": "2026-10-19"
+    },
+    "PACKAGED-AUDIO-CSP-001": {
+      "task_id": "PACKAGED-AUDIO-CSP-001",
+      "status": "done",
+      "attempts": 1,
+      "title": "Pack audio plays in packaged (CSP-injected) desktop builds",
+      "activity": "idle",
+      "summary": "The shipped CSP (default-src 'self', no media-src) made WebKitGTK 2.54.1 refuse blob:-URL media, silencing every pack clip in every packaged build; fix adds media-src 'self' blob: and a hard deb Depends on gstreamer1.0-plugins-good.",
+      "notes": "Found 2026-10-21 by the owner's 0.4.3 acceptance sweep (packet section 2 item 4): ru then ja audio failed with PLAYBACK_FAILED in the release binary while identical raw-webview probes played the same bytes in ~4 s. The 2026-10-08 feature-gap audit (state/notes/FEATURE-GAP-AUDIT-2026-10-08.md line 292) had already flagged the missing media-src as an inference and asked for an owner click; the sweep confirmed it. Dev runs never inject the CSP, which is why every earlier pass and machine smoke missed it. Fix at 7cd1fe4 (tauri.conf.json csp + bundle.linux.deb.depends; finalize-deb.sh now fails the build if the demuxer dep is missing). Rebuilt finalized deb 78946e5d09662758678857c3f6f013b3ffbc6d7486d31edd134a79dc57e2e7ed (12,603,298 B); owner re-clicked and confirmed: \"OK the audio is working now\". CI green run 39650735423; SEC-001 fifth re-run at the same SHA. Environmental co-cause of that day's failure (stale GStreamer registry after the 2026-10-19 orca-cascade removal of gst-plugins-good) was repaired on the box and is not the product defect.",
+      "evidence": [
+        "state/evidence/OWNER-SESSION-2026-10-20/SESSION-PACKET.md",
+        "state/evidence/SEC-001/fresh-2026-10-20.md"
+      ]
+    },
+    "SETTINGS-PACK-CAPABILITY-001": {
+      "task_id": "SETTINGS-PACK-CAPABILITY-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "Settings sections are gated by the active pack's declared capabilities, not hardcoded",
+      "activity": "idle",
+      "summary": "Settings currently shows Japanese-specific UI regardless of the active language (the kana keyboard toggle is offered to Russian learners). Gate script/input-method sections on capability metadata declared by the active pack.",
+      "notes": "Raised by the owner during the 2026-10-21 acceptance sweep (S-1): 'the settings window is hard coded to have japanese settings in it... should this program be modular so the settings match the needs of the language pack being used?' Agreed direction: packs declare capabilities (e.g. scripts: [kana]) in the manifest; the desktop hides/adjusts sections per active pack. First slice is small: one manifest field + one guard for the kana toggle. Whether this rides REL-001 or lands at 1.0.x is an owner scope call.",
+      "evidence": []
+    },
+    "SETTINGS-TEXT-COLLAPSE-001": {
+      "task_id": "SETTINGS-TEXT-COLLAPSE-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "Settings prose blocks collapse to one-line summaries with expanders",
+      "activity": "idle",
+      "summary": "Settings forces heavy scrolling past long prose blocks users do not need per visit; fold each to a one-line summary plus a disclosure expander, moving full text to the docs bundle.",
+      "notes": "Raised by the owner during the 2026-10-21 acceptance sweep (S-2). Use native details/summary semantics so screen-reader access is preserved; nothing user-facing removed. Whether this rides REL-001 or lands at 1.0.x is an owner scope call.",
+      "evidence": []
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
