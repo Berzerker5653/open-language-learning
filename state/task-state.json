@@ -1891,10 +1891,10 @@
       "task_id": "IME-TOGGLE-UX-001",
       "status": "ready",
       "attempts": 1,
-      "title": "Kana keyboard - shortcut toggle plus always-visible input-mode bubble",
+      "title": "In-app input keyboard - script-agnostic toggle plus input-mode bubble",
       "activity": "idle",
-      "summary": "Owner proposal 2026-10-21: toggle the in-app kana keyboard with a key command, and show a clickable corner bubble naming the current input mode (English/Japanese) that flips the keyboard from any screen inside the app (owner clarified: 'any window inside the OLLP program' - no system tray requirement).",
-      "notes": "Captured from the owner's item-7 sweep pass (packet section 2 item 7, 'that worked perfectly'): 'it would be nice to have this option be togglable with a key command... a little bubble in the corner that shows what language you have the program set for... you can just click that bubble from any window and flip the keyboard'. Clarified 2026-10-21: 'any window' = any window inside the OLLP program, so scope is app chrome, not the desktop tray. Scope: per-profile setting toggle by documented shortcut from any in-app screen (honoring SETTINGS-PACK-CAPABILITY-001 gating); a persistent bubble pinned to the app shell visible on every route with click-to-flip; screen-reader announcement of mode changes (A11Y-FLOW-001 semantics). IBus coexistence unchanged: the layer still stands down while an OS IME composes.",
+      "summary": "Owner proposal 2026-10-21: key-command toggle plus a clickable corner bubble showing the current input mode, on every in-app screen, generalized to ANY language the pack supports - never hardcoded to Japanese (owner: 'wouldn't make sense to have 日本語 if you're learning russian').",
+      "notes": "Captured from the owner's item-7 sweep pass (packet section 2 item 7, 'that worked perfectly'): key-command toggle + corner bubble flippable by click. Clarified same day: (1) 'any window' = any window inside the OLLP program - app-chrome bubble, no tray/global-shortcut requirement; (2) 'this works for any language not just japanese. it wouldn't make sense to have 日本語 if you're learning russian' - the bubble label and the keyboard itself are resolved from the ACTIVE pack's declared capability + mapping data; a non-kana pack shows no bubble and no keyboard (ties to SETTINGS-PACK-CAPABILITY-001). Phase 1's kana converter is the instance; generalizing means pack-declared mapping assets + a converter, never a language branch in engine or UI; the per-profile 'kana-keyboard' setting key gets renamed at implementation. Screen-reader announcement of mode changes follows A11Y-FLOW-001 semantics.",
       "evidence": []
     }
   },

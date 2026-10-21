@@ -2493,7 +2493,7 @@ tasks:
 - id: IME-TOGGLE-UX-001
   milestone: M10
   priority: P2
-  title: Kana keyboard - shortcut toggle plus always-visible input-mode bubble
+  title: In-app input keyboard - script-agnostic toggle plus input-mode bubble
   dependencies:
   - A11Y-FLOW-001
   read_first:
@@ -2501,15 +2501,23 @@ tasks:
   - apps/desktop/src/settings.tsx
   acceptance:
   - >-
-    A documented in-app shortcut flips the per-profile kana-keyboard setting from
-    any screen without opening Settings; the toggle honors pack capability gating
-    (SETTINGS-PACK-CAPABILITY-001).
+    A documented in-app shortcut flips the active pack's in-app keyboard setting
+    from any screen without opening Settings; the toggle honors pack capability
+    gating (SETTINGS-PACK-CAPABILITY-001).
   - >-
-    A persistent bubble pinned to the app chrome shows the current input mode
-    (English/Japanese) on every in-app screen and clicking it flips the keyboard;
-    the owner clarified 2026-10-21 that "any window" means any window inside the
-    program, so no system tray or OS-level requirement applies. Mode changes
-    announce to screen readers.
+    A persistent bubble pinned to the app chrome shows the current input mode on
+    every in-app screen and clicking it flips the keyboard. The mode label derives
+    from the ACTIVE pack's declared script metadata, never hardcoded - owner rule
+    2026-10-21: "this works for any language not just japanese. it wouldn't make
+    sense to have 日本語 if you're learning russian" - and the bubble is absent
+    when the active pack declares no in-app keyboard. Mode changes announce to
+    screen readers.
+  - >-
+    The input layer is generalized: the converter is resolved from pack-declared
+    capability plus mapping data (kana is phase 1's instance; the per-profile
+    setting key may be renamed accordingly at implementation). Adding another
+    script's keyboard is pack content plus a converter with no language branch in
+    engine or UI; a pack without mapping data ships no keyboard and no bubble.
   required_for_desktop_1_0: false
 - id: PACK-UPDATE-UX-001
   milestone: M10
