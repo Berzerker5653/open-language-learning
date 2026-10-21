@@ -111,7 +111,7 @@ day, CI-caught); CI green on run `39650735423` at the same SHA; the two
 2026-10-09 warnings are gone from the graph. Malicious-pack / no-upload /
 retention suites green in the same CI run.
 
-- [ ] I accept the security findings disposition (zero open findings) and give privacy sign-off — signature/date: ____
+- [x] I accept the security findings disposition (zero open findings) and give privacy sign-off — signature/date: **owner, 2026-10-21** (signed in the owner session after reviewing the §4 summary: five fresh re-runs at the shipping SHA `7cd1fe4`, all clean). Liability posture noted in-record: app ships Apache-2.0 with §7/§8 warranty/liability disclaimers; free distribution; misuse-of-software exposure governed by the licence, not this internal record.
 
 ## 4b. Second perf tier (Omarchy) — ☑ DONE 2026-10-21
 
