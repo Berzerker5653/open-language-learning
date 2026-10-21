@@ -126,6 +126,7 @@ impl SpeechRecognitionProvider for SherpaSubprocessAsr {
         }
         drop(f);
         let mut cmd = Command::new(&self.binary);
+        sidecar::lower_priority(&mut cmd);
         cmd.arg("--model-type=whisper")
             .arg(format!("--whisper-encoder={}", self.encoder.display()))
             .arg(format!("--whisper-decoder={}", self.decoder.display()))

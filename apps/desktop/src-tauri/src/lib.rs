@@ -4503,8 +4503,19 @@ fn pack_asr_language(pack_dir: &Path) -> Result<String, String> {
 }
 
 #[tauri::command]
-fn pronunciation_check(attempt: PronunciationAttempt) -> Result<PronunciationResult, String> {
-    pronunciation_check_at(&data_dir(), attempt)
+async fn pronunciation_check(attempt: PronunciationAttempt) -> Result<PronunciationResult, String> {
+    // PERF-002 (owner decision 2026-10-21: FIX sidecar saturation): a
+    // synchronous command runs on the main thread, and a ~1 s whisper
+    // burst there starves the webview event loop (measured worst rAF gap
+    // 980-1057 ms / input->paint 1770-1930 ms on the AVX2 Gaming PC,
+    // while the same path passes 100/50 on AVX-512 Omarchy - the line is
+    // duration, and duration on the main thread is the defect). The heavy
+    // path goes to the blocking pool like every other storage/voice
+    // command; nice +10 on the child (lts-speech-runtime sidecar) keeps
+    // the worker itself from hogging cores.
+    tauri::async_runtime::spawn_blocking(move || pronunciation_check_at(&data_dir(), attempt))
+        .await
+        .map_err(|e| format!("pronunciation-task-join: {e}"))?
 }
 
 fn pronunciation_check_at(

@@ -379,6 +379,32 @@ pub fn apply_runtime_env(cmd: &mut std::process::Command, binary: &Path) {
     }
 }
 
+/// PERF-002 responsiveness fix (owner decision 2026-10-21): a sidecar
+/// inference burst must never starve the UI process it runs beside. Every
+/// sidecar spawn lowers the CHILD's OS priority (nice +10) so the kernel
+/// scheduler always prefers the app's render/input threads over ggml
+/// worker threads; the sidecar keeps its full thread budget and simply
+/// yields when the UI wants a core. Linux is the only supported desktop
+/// target (ADR-0039), so non-Linux platforms keep today's behavior rather
+/// than a faked approximation.
+pub fn lower_priority(cmd: &mut std::process::Command) {
+    #[cfg(target_os = "linux")]
+    unsafe {
+        use std::os::unix::process::CommandExt;
+        cmd.pre_exec(|| {
+            // setpriority(2) is async-signal-safe; pre_exec closures run in
+            // the child between fork and exec. getuid's process only, so
+            // this can never touch another user's processes.
+            libc::setpriority(libc::PRIO_PROCESS, 0, 10);
+            Ok(())
+        });
+    }
+    #[cfg(not(target_os = "linux"))]
+    {
+        let _ = cmd;
+    }
+}
+
 /// Streaming digest comparison: 64 KiB chunks, so the 77 MB model never has
 /// to be held in memory.
 fn file_sha256_matches(path: &Path, expected_hex: &str) -> bool {

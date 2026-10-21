@@ -358,3 +358,29 @@ fn staged_wavs_are_private_and_stale_ones_get_swept() {
     );
     let _ = std::fs::remove_file(&fresh_path);
 }
+
+/// PERF-002 (owner decision 2026-10-21): sidecar children must yield the
+/// scheduler to the UI process. The observable contract is the child's OS
+/// nice value; /proc's field 19 (1-based) is it, read from the spawned
+/// child itself so the assertion covers the fork-to-exec hook, not just
+/// the parent's intent.
+#[cfg(target_os = "linux")]
+#[test]
+fn lowered_priority_children_run_at_nice_10() {
+    let mut cmd = std::process::Command::new("/bin/sh");
+    cmd.arg("-c").arg("cat /proc/self/stat");
+    sidecar::lower_priority(&mut cmd);
+    let out = cmd.output().expect("spawn must succeed");
+    assert!(out.status.success(), "child must run to completion");
+    let stat = String::from_utf8(out.stdout).expect("stat is UTF-8");
+    let nice: i32 = stat
+        .split_whitespace()
+        .nth(18)
+        .expect("/proc stat must have a nice field")
+        .parse()
+        .expect("nice field parses as i32");
+    assert_eq!(
+        nice, 10,
+        "the sidecar spawn hook must leave the child at nice +10"
+    );
+}

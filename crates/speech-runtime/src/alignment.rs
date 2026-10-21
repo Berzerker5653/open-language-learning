@@ -68,6 +68,7 @@ pub fn run_whisper_words(
     // Staged payloads carry a build-machine RUNPATH; point the child at the
     // payload's own lib dir (no-op layout-wise when the binary sits alone).
     sidecar::apply_runtime_env(&mut cmd, binary);
+    sidecar::lower_priority(&mut cmd);
     let spawned = cmd
         .arg("-m")
         .arg(model)
