@@ -2384,6 +2384,27 @@ tasks:
     against reading wa at that span) or resolves to no entry at all; the report is empty
     after the fix.
   required_for_desktop_1_0: false
+- id: SCENARIOS-SECTION-REVIEW-001
+  milestone: M10
+  priority: P1
+  title: Scenarios section end-to-end usability review and issue register
+  dependencies:
+  - SCENARIO-001
+  read_first:
+  - apps/desktop/src/scenario.tsx
+  - apps/desktop/src-tauri/src/scenarios.rs
+  - languages/ja-JP/activities/scenarios/a2-comm-answer-phone.yaml
+  acceptance:
+  - >-
+    A findings register exists (state/evidence/SCENARIOS-REVIEW-2026-10-21/) enumerating
+    every usability issue found across the Scenarios section — engine semantics, UI
+    affordances, pack scenario content — each with severity, file location and repro,
+    including the owner-reported symptoms (working Shadowing controls that render
+    disabled-looking; support/transfer clicks).
+  - >-
+    Every finding is either registered as a remediation card or explicitly dropped by the
+    owner with a stated reason; the section's acceptance itself remains the owner's.
+  required_for_desktop_1_0: false
 - id: PACK-UPDATE-UX-001
   milestone: M10
   priority: P2
@@ -2483,6 +2504,7 @@ execution_scope:
   - SETTINGS-PACK-CAPABILITY-001
   - SETTINGS-TEXT-COLLAPSE-001
   - JA-FUNCTION-WORD-LOOKUP-001
+  - SCENARIOS-SECTION-REVIEW-001
   - A11Y-FLOW-001
   - RU-MODALITY-PRACTICE-001
   - UPPERBAND-TASK-JOURNEYS-001

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-10-21",
-  "active_task": null,
+  "active_task": "SCENARIOS-SECTION-REVIEW-001",
   "tasks": {
     "TTS-003": {
       "status": "blocked",
@@ -1813,6 +1813,16 @@
       "activity": "idle",
       "summary": "Reading tap-lookup offers the wrong sense for function words: the topic particle は surfaces the tooth noun and に surfaces 'two', because the pack lexicon has no particle entries; closed-class spans need correctly sourced lexicon entries plus a reading-consistency check.",
       "notes": "Found 2026-10-21 by the owner's sweep (packet section 2 item 4 leg 2, finding S-3): the lookup panel under 「わたしの なまえは タナカです。」 listed 'は ha — tooth'. Pack data confirms lexicon/health4.jsonl carries は/tooth as the only は entry and lexicon/numbers has に/two, while particles live only as grammar concepts (ja.grammar.particle.*), invisible to the lexicon-driven panel; the なまえ/まえ half of the check PASSED (K-80 span fix holds on the real surface). Fix is pack content (add sourced particle entries, jmdict-simplified covers them, draft posture unchanged) plus a repo-side check that flags any story-sentence span whose entry conflicts with the sentence's declared reading (surface は vs reading wa at that span) or resolves to no entry. Whether this rides REL-001 or lands at 1.0.x is an owner scope call.",
+      "evidence": []
+    },
+    "SCENARIOS-SECTION-REVIEW-001": {
+      "task_id": "SCENARIOS-SECTION-REVIEW-001",
+      "status": "in_progress",
+      "attempts": 1,
+      "title": "Scenarios section end-to-end usability review and issue register",
+      "activity": "active",
+      "summary": "Owner rejected the Scenarios section in the 2026-10-21 sweep; reviewing engine semantics, pack scenario content and UI affordances together and registering every defect found.",
+      "notes": "Opened 2026-10-21 by the owner's item-5 verdict: 'a complete issue in itself... needs to be reviewed and evaluated as it currently stands.' Paired symptom from 5a (S-4): all four Shadowing buttons work end to end but render grey/disabled-looking - the 2026-10-10 finding 8 ('controls non-clickable') was an affordance bug all along; live probes had always shown the buttons enabled. Scope: ladder reachability from a fresh profile (locks, preconditions, unlock paths), support-box and transfer-variant click effects and counting, scenario_help gating (ADR-0038), pack scenario YAML completeness (ja + ru), disabled-state affordance and a11y semantics, honest failure states. Deliverable: findings register in state/evidence/SCENARIOS-REVIEW-2026-10-21/ with severity/location/repro per issue, each registered as a remediation card or owner-dropped; the section's acceptance itself stays the owner's call.",
       "evidence": []
     }
   },
