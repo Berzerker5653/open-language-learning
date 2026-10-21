@@ -1822,8 +1822,70 @@
       "title": "Scenarios section end-to-end usability review and issue register",
       "activity": "active",
       "summary": "Owner rejected the Scenarios section in the 2026-10-21 sweep; reviewing engine semantics, pack scenario content and UI affordances together and registering every defect found.",
-      "notes": "Opened 2026-10-21 by the owner's item-5 verdict: 'a complete issue in itself... needs to be reviewed and evaluated as it currently stands.' Paired symptom from 5a (S-4): all four Shadowing buttons work end to end but render grey/disabled-looking - the 2026-10-10 finding 8 ('controls non-clickable') was an affordance bug all along; live probes had always shown the buttons enabled. Scope: ladder reachability from a fresh profile (locks, preconditions, unlock paths), support-box and transfer-variant click effects and counting, scenario_help gating (ADR-0038), pack scenario YAML completeness (ja + ru), disabled-state affordance and a11y semantics, honest failure states. Deliverable: findings register in state/evidence/SCENARIOS-REVIEW-2026-10-21/ with severity/location/repro per issue, each registered as a remediation card or owner-dropped; the section's acceptance itself stays the owner's call.",
-      "evidence": []
+      "notes": "Opened 2026-10-21 by the owner's item-5 verdict: 'a complete issue in itself... needs to be reviewed and evaluated as it currently stands.' Paired symptom from 5a (S-4): all four Shadowing buttons work end to end but render grey/disabled-looking - the 2026-10-10 finding 8 ('controls non-clickable') was an affordance bug all along; live probes had always shown the buttons enabled. Scope: ladder reachability from a fresh profile (locks, preconditions, unlock paths), support-box and transfer-variant click effects and counting, scenario_help gating (ADR-0038), pack scenario YAML completeness (ja + ru), disabled-state affordance and a11y semantics, honest failure states. Deliverable: findings register in state/evidence/SCENARIOS-REVIEW-2026-10-21/ with severity/location/repro per issue, each registered as a remediation card or owner-dropped; the section's acceptance itself stays the owner's call. Register landed 2026-10-21: state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md - findings S-01..S-09 with file:line evidence, remediation cards SCENARIO-INTERACTION-001, SCENARIO-TRANSFER-001, SCENARIO-VIEW-CONSISTENCY-001, BUTTON-AFFORDANCE-001, SCENARIO-LOCK-COPY-001 registered ready. Awaiting owner acceptance of the register and scope calls on the cards; two delegated scout audits stalled at the 30-min cap (transcripts kept) and the walk was done directly.",
+      "evidence": [
+        "state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md"
+      ]
+    },
+    "SCENARIO-INTERACTION-001": {
+      "task_id": "SCENARIO-INTERACTION-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "Scenario decisions demand retrieval - distractor action sets, full-set completion, honest evidence",
+      "activity": "idle",
+      "summary": "Shipped scenarios are click-through toys: the rendered buttons ARE the expected answers, one click completes multi-action nodes, failure (and all 21 recovery branches) is unreachable, and the guided clicks stamp independent learner evidence.",
+      "notes": "Findings S-01/S-02/S-03 of state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md, from the owner's 2026-10-21 rejection of the section. Machine counts: 0/21 scenarios can fail; 21 recovery branches unreachable; 0/21 scenarios put target-language text in prompts (only two nodes embed any Japanese at all). Fix spans engine (distractor decision sets, full-set satisfaction, evidence gating) and pack content (target-language prompts). Evidence inflation touches the learner model product-wide, so this is P1 regardless of whether the section itself ships.",
+      "evidence": [
+        "state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md"
+      ]
+    },
+    "SCENARIO-TRANSFER-001": {
+      "task_id": "SCENARIO-TRANSFER-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "Transfer variants require real practice payloads, not checkbox clicks",
+      "activity": "idle",
+      "summary": "transfer_at/complete_transfer mark a declared variant done on a single click with no payload; transfer_variants_required:2 is met by two checkbox clicks - engagement maximizable without learning.",
+      "notes": "Finding S-04 of the 2026-10-21 findings register. Either variant payloads become completable content (mini-walk or recall step) or the requirement drops from packs that cannot honour it.",
+      "evidence": [
+        "state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md"
+      ]
+    },
+    "SCENARIO-VIEW-CONSISTENCY-001": {
+      "task_id": "SCENARIO-VIEW-CONSISTENCY-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "Scenario view keeps completed transfers; dead support rungs stop being buttons",
+      "activity": "idle",
+      "summary": "Completed transfers visually reset to 0/N after any action/support click (only transfer_at re-stamps done in the returned view), and the level-0 'No supports' ladder rung is a permanently disabled button on every node.",
+      "notes": "Findings S-05/S-07 of the 2026-10-21 findings register; repro sequence in the findings doc. One helper stamps transfer_done in every view-returning command plus a Rust test walking the sequence.",
+      "evidence": [
+        "state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md"
+      ]
+    },
+    "BUTTON-AFFORDANCE-001": {
+      "task_id": "BUTTON-AFFORDANCE-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "Working controls never render as disabled (bare .btn has no styling)",
+      "activity": "idle",
+      "summary": "Plain .btn in packages/ui/src/styles.css sets size only - no background, transparent border, no colour - so Shadowing's Play/Record/Stop (bare btn) look like grey dead text while genuinely disabled siblings look more alive. Root cause of owner finding S-4.",
+      "notes": "Finding S-06 of the 2026-10-21 findings register. bare btn is used across App/settings/words/lesson/hub/onboarding/shadowing; every control needs an explicit variant or plain .btn needs defined rest/hover/disabled treatments, with an affordance-distinction check.",
+      "evidence": [
+        "state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md"
+      ]
+    },
+    "SCENARIO-LOCK-COPY-001": {
+      "task_id": "SCENARIO-LOCK-COPY-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "Scenario lock reasons speak learner, not content ids",
+      "activity": "idle",
+      "summary": "Locked scenario rows emit raw ids ('practice ja.lex.demonstratives.koko to supported (speaking)'); a fresh profile sees one playable row plus a wall of ~20 locked tokens.",
+      "notes": "Finding S-08 of the 2026-10-21 findings register. Human names come from pack data (engine stays language-neutral) with a pointer to where each prerequisite is practiced.",
+      "evidence": [
+        "state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

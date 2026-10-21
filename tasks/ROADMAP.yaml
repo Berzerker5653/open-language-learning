@@ -2405,6 +2405,91 @@ tasks:
     Every finding is either registered as a remediation card or explicitly dropped by the
     owner with a stated reason; the section's acceptance itself remains the owner's.
   required_for_desktop_1_0: false
+- id: SCENARIO-INTERACTION-001
+  milestone: M10
+  priority: P1
+  title: Scenario decisions demand retrieval - distractor action sets, full-set completion, honest evidence
+  dependencies:
+  - SCENARIO-001
+  read_first:
+  - crates/activity/src/scenario.rs
+  - apps/desktop/src-tauri/src/scenarios.rs
+  - state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md
+  acceptance:
+  - >-
+    Each node's rendered action set is a strict superset of the accepted intents
+    (plausible wrong moves included); a wrong click yields not-satisfied and the
+    recovery branch actually renders. A node is satisfied only when its full declared
+    action set is performed.
+  - >-
+    A fully-guided click-through can no longer record independent learner evidence
+    (down-stamp or gate, with tests pinning both paths).
+  required_for_desktop_1_0: false
+- id: SCENARIO-TRANSFER-001
+  milestone: M10
+  priority: P2
+  title: Transfer variants require real practice payloads, not checkbox clicks
+  dependencies:
+  - SCENARIO-001
+  read_first:
+  - apps/desktop/src/scenario.tsx
+  - languages/ja-JP/activities/scenarios/a2-comm-answer-phone.yaml
+  acceptance:
+  - >-
+    Either every required transfer variant carries a completable payload (variant
+    mini-walk or recall step) and the done flag requires performing it, or the
+    requirement is removed from packs that cannot honour it; marking done by itself
+    never counts, with engine and UI tests.
+  required_for_desktop_1_0: false
+- id: SCENARIO-VIEW-CONSISTENCY-001
+  milestone: M10
+  priority: P2
+  title: Scenario view keeps completed transfers; dead support rungs stop being buttons
+  dependencies:
+  - SCENARIO-001
+  read_first:
+  - apps/desktop/src-tauri/src/scenarios.rs
+  - apps/desktop/src/scenario.tsx
+  acceptance:
+  - >-
+    A completed transfer's checkmark and counter survive every subsequent view
+    return (attempt, support, recovery) - a Rust test walks the exact sequence.
+  - >-
+    The level-0 "No supports" rung renders as an info line (or undelivered rungs are
+    omitted), never a disabled button apologising for missing content.
+  required_for_desktop_1_0: false
+- id: BUTTON-AFFORDANCE-001
+  milestone: M10
+  priority: P1
+  title: Working controls never render as disabled (bare .btn has no styling)
+  dependencies:
+  - A11Y-FLOW-001
+  read_first:
+  - packages/ui/src/styles.css
+  - apps/desktop/src/shadowing.tsx
+  acceptance:
+  - >-
+    No bare `btn` class remains in markup without a variant, or plain `.btn` gains
+    defined rest/hover/disabled treatments; the Shadowing Play/Record/Stop controls
+    visibly read as clickable while the disabled Previous reads as disabled.
+  - >-
+    Enabled-vs-disabled affordance distinction is asserted (computed-style test or
+    recorded visual proof), covering the seven files that use bare .btn.
+  required_for_desktop_1_0: false
+- id: SCENARIO-LOCK-COPY-001
+  milestone: M10
+  priority: P2
+  title: Scenario lock reasons speak learner, not content ids
+  dependencies:
+  - ACC-001
+  read_first:
+  - apps/desktop/src-tauri/src/scenarios.rs
+  acceptance:
+  - >-
+    Locked rows show human-readable capability names derived from pack data (never
+    hardcoded per language) and name where each prerequisite is practiced; a fresh
+    profile's scenario list contains no raw content ids in learner-facing copy.
+  required_for_desktop_1_0: false
 - id: PACK-UPDATE-UX-001
   milestone: M10
   priority: P2
@@ -2505,6 +2590,11 @@ execution_scope:
   - SETTINGS-TEXT-COLLAPSE-001
   - JA-FUNCTION-WORD-LOOKUP-001
   - SCENARIOS-SECTION-REVIEW-001
+  - SCENARIO-INTERACTION-001
+  - SCENARIO-TRANSFER-001
+  - SCENARIO-VIEW-CONSISTENCY-001
+  - BUTTON-AFFORDANCE-001
+  - SCENARIO-LOCK-COPY-001
   - A11Y-FLOW-001
   - RU-MODALITY-PRACTICE-001
   - UPPERBAND-TASK-JOURNEYS-001
