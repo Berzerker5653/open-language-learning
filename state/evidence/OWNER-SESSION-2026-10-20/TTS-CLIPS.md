@@ -36,14 +36,13 @@ rounded to 2 dp.
 | ja `media/ja.contrast.palatalization.hyaku-0.wav` | ひゃく | ok / match | -3.10 | -20.07 | 0.00 | 7.05 | -3.1 / -20.1 |
 | ja `media/ja.lex.numbers.go.wav` | ご | ok / match | -3.10 | -18.19 | 0.00 | 5.68 | -3.1 / -18.2 |
 | ja `media/ja.sent.scenario-reasoning.wav` | ようけん を かえて こうこ を かんがえました。 | ok / match | -3.10 | -22.18 | 0.00 | 9.00 | -3.1 / -22.2 |
-| ru `media/ru.contrast.palatalization.brat-0.wav` | брат | ok / match | -4.70 | -18.07 | 0.00 | 4.66 | -4.7 / -18.1 |
-| ru `media/ru.contrast.palatalization.brat-1.wav` | брать | ok / match | -4.77 | -17.22 | 0.00 | 4.19 | -4.8 / -17.2 |
+| ru `media/ru.contrast.palatalization.brat-1.wav` | брать | ok / match | -4.26 | -17.27 | 0.00 | 13.01 | -4.3 / -17.3 |
 | ru `media/ru.lex.numbers-time.chetyre.wav` | четы́ре | ok / match | -4.64 | -17.22 | 0.00 | 4.26 | -4.6 / -17.2 |
-| ru `media/ru.lex.shopping.perchatki.wav` | перча́тки | ok / match | -3.10 | -17.96 | 0.00 | 5.54 | -3.1 / -18.0 |
+| ru `media/ru.lex.shopping.perchatki.wav` | перча́тки | ok / match | -3.10 | -20.01 | 0.00 | 16.91 | -3.1 / -20.0 |
 
 All ten clips: full sha256 equal to the manifest row (first 8 for skim):
 f56fe9ff…, 07e94742…, 64ac33d7…, 0efc9656…, 82a4806c…, 7b46f098…,
-5b473cac…, adbac7e9…, 8e0dc59b…, fad16a30…
+5b473cac…, 1b95e5e7…, 8e0dc59b…, 3d168d27…
 
 ## Reading the numbers (not verdicts)
 
@@ -72,3 +71,11 @@ the 4.2–9.0 band reflects that phrase pause inside the RMS window. Gate:
 `scripts/qa-asr.py --ids` whisper round-trip **passed=1 MISMATCH=0**;
 `langpack test languages/ja-JP` **0 errors / 0 warnings**; manifest row
 re-hashed to `f56fe9ff…` (157,484 B, 3.28 s).
+
+ru pair (second re-listen): `brat-1` and `perchatki` re-synthesized through
+`scripts/bake-repair-loop.sh` (whisper round-trip as the convergence gate;
+2 rounds to zero failures — the first naive re-bakes FAILED that gate
+audibly: "брать"→"Абарати", "перча́тки"→"Печай, Оке", the owner's
+extra-sounds caught red-handed). Final shas `1b95e5e7…` (0.96 s) and
+`3d168d27…` (2.64 s — long for a disyllable, listed for the owner's
+next ear-check). ru 0.4.3 archive re-staged `d44624f1…` / 318,529,155 B.

@@ -9,7 +9,7 @@ Everything below was prepared and measured today; the boxes are yours.
 | --- | --- | --- | --- |
 | app `lts-desktop` **0.4.3-alpha.1** deb, finalized (t64-safe `Depends` + new hard `gstreamer1.0-plugins-good`) — rebuilt 2026-10-21 at `7cd1fe4` incl. the **CSP `media-src 'self' blob:` fix** (packaged-build audio defect, found by this sweep — see §2 item 4) on top of the PERF-002 responsiveness fix, security-bumped locks (webpki RUSTSEC-2026-0381/-82/-83 + vite 8.3.3 GHSA trio), `derive_pairs` plan-latency fix and perf probes. **Earlier-recorded debs (`9c374399…`, `b54d4c55…`, `a6d3953f…`, `7042d750…`) lack the CSP audio fix — do not ship them.** | `target/release/bundle/deb/open-language-learning-platform_0.4.3-alpha.1_amd64.deb` | 12,603,298 B | `78946e5d09662758678857c3f6f013b3ffbc6d7486d31edd134a79dc57e2e7ed` |
 | ja-JP pack **0.4.3** `.lpk` (tracked tree incl. `capabilities.scenario_help`; `test` 0/0; **rebuilt 2026-10-21 with the re-baked `drink-coffee` clip from §3** — supersedes `9b17b232…`/318,736,116 B) | `~/staging/0.4.3/ja-JP-0.4.3.lpk` | 318,719,276 B | `e7b201e2f403f03d…fa6e4cc0` |
-| ru-RU pack **0.4.3** `.lpk` (`test` 0/0) | `~/staging/0.4.3/ru-RU-0.4.3.lpk` | 318,493,155 B | `374d79e13db020fc…a2b96bc5` |
+| ru-RU pack **0.4.3** `.lpk` (`test` 0/0; **rebuilt 2026-10-21 with the repaired `brat-1` + `perchatki` clips from §3** — supersedes `374d79e1…`/318,493,155 B) | `~/staging/0.4.3/ru-RU-0.4.3.lpk` | 318,529,155 B | `d44624f1b66c694e…f52491747` |
 
 Both archives pass the real installation gate: `langpack install --store`
 accepts both at 0 errors (store under `~/staging/0.4.3/store`).
@@ -80,9 +80,9 @@ order, 1 s gaps).
 | ja `media/ja.lex.numbers.go.wav` | ご | ☑ ok |
 | ja `media/ja.sent.scenario-reasoning.wav` | ようけん を かえて こうこ を かんがえました。 | ☑ ok |
 | ru `media/ru.contrast.palatalization.brat-0.wav` | брат | ☑ ok |
-| ru `media/ru.contrast.palatalization.brat-1.wav` | брать | ☑ ok |
+| ru `media/ru.contrast.palatalization.brat-1.wav` | брать | ☑ ok → **re-flagged artifact on re-listen (owner 2026-10-21): "sounded like it had two aa in there"** — repaired via ASR-gated loop 2026-10-21 (`1b95e5e7…`, 0.96 s); owner re-listen owed |
 | ru `media/ru.lex.numbers-time.chetyre.wav` | четы́ре | ☑ ok |
-| ru `media/ru.lex.shopping.perchatki.wav` | перча́тки | ☑ ok |
+| ru `media/ru.lex.shopping.perchatki.wav` | перча́тки | ☑ ok → **re-flagged artifact on re-listen (owner 2026-10-21: "sounds like there is an extra sound in there")** — repaired via ASR-gated loop 2026-10-21 (`3d168d27…`, 2.64 s — LONG for a disyllable, flag for your ear); owner re-listen owed |
 
 Overall: ☑ **re-bake accepted** (TTS-003 done) — owner 2026-10-21: "the
 others are good". Qualities named: the ja clips are "a little breathy…
@@ -99,6 +99,21 @@ continuous speech + one natural phrase break, clip sha `f56fe9ff…`, whisper
 ASR round-trip **passed**, `langpack test languages/ja-JP` **0/0**, manifest
 row committed. ja 0.4.3 archive re-staged: `e7b201e2f403f03d…` /
 318,719,276 B (table above) — §5 publishes this pair.
+
+**Second re-listen (owner, 2026-10-21)** added two defect callouts on clips
+that had passed the first pass: `brat-1` ("two aa in there") and
+`perchatki` ("extra sound"). Machine confirmation: naive re-bakes FAILED
+the whisper round-trip outright (`брать` heard as "Абарати" — the owner's
+epenthesis, caught; `перча́тки` heard as "Печай, Оке"), proving (a) the
+owner's ears found real defects the word-level gate had missed in the
+original takes, and (b) the gate now bites when the take is bad. **Repair
+converged 2026-10-21** through `scripts/bake-repair-loop.sh` (synthesize →
+ASR round-trip → re-synthesize failures): 2 rounds, zero remaining
+failures; ru 0.4.3 archive re-staged `d44624f1…` / 318,529,155 B (table
+above). A NEW phoneme-level + structure-level QA pipeline (owner directive
+2026-10-21: checks must apply to **any** language) is under construction
+in this session; results recorded when green. Bad takes preserved as
+regression fixtures in `~/staging/qa-fixtures-2026-10-21/`.
 
 ## 4. SEC-001 sign-off
 
