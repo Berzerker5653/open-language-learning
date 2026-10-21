@@ -77,7 +77,12 @@ protocol:
 budgets:
   app:
     startup_to_home_interactive_ms: { typical: { p50: 800, p95: 2000 }, low: { p50: 1500, p95: 3500 } }
-    session_plan_10k_evidence_ms: { typical: { p50: 50, p95: 150 }, low: { p50: 120, p95: 400 } }
+    # 2026-10-21 owner decision (pre-freeze calibration, PERF-002): the
+    # provisional p50 50 target is exceeded on both measured high tiers
+    # (Gaming PC 90/93, Omarchy 60/61 - state/evidence/PERF-002/plan10k-*);
+    # the typical line moves to p50 100, p95 unchanged, low untouched.
+    # ADR-0041 still freezes the whole set after the responsiveness decision.
+    session_plan_10k_evidence_ms: { typical: { p50: 100, p95: 150 }, low: { p50: 120, p95: 400 } }
     ui_responsiveness_during_inference:
       input_to_paint_ms: { all_tiers: { p95: 100 } }
       main_thread_max_block_ms: { all_tiers: { p95: 50 } }

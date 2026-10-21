@@ -521,7 +521,7 @@ cat <<EOF
 EOF
 if [ -z "$FAIL_REASON" ]; then
 cat <<EOF
-| app.session_plan_10k_evidence_ms | typical | p50 50 / p95 150 ms | 10k-evidence condition not producible externally; fresh-profile practice_plan = ${PLAN_MS} ms | unevaluable (with recorded reference) |
+| app.session_plan_10k_evidence_ms | typical | p50 100 / p95 150 ms (owner-calibrated 2026-10-21, was p50 50) | 10k-evidence condition not producible externally; fresh-profile practice_plan = ${PLAN_MS} ms | unevaluable (with recorded reference) |
 | app.session_plan_10k_evidence_ms | low | p50 120 / p95 400 ms | same as above | unevaluable (with recorded reference) |
 | app.ui_responsiveness_during_inference.input_to_paint_ms | all tiers | p95 100 ms | probe during real whisper inference (${PERF_MODEL:-abstained}): worst synthetic input->paint ${INP_ASR:-n/a} ms, idle baseline worst ${INP_IDLE:-n/a} ms, longtasks in window ${LT_ASR:-n/a}; pronunciation_check call-ms: ${CHECK_MS:-none} | $V_RESP_INP |
 | app.ui_responsiveness_during_inference.main_thread_max_block_ms | all tiers | p95 50 ms | worst rAF gap during inference ${RAF_ASR:-n/a} ms, idle baseline worst ${RAF_IDLE:-n/a} ms (one walk) | $V_RESP_BLOCK |
