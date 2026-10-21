@@ -6,12 +6,21 @@
 # configuration may be transparently narrowed or dropped with compatible alternatives recorded,
 # but thresholds must never be raised silently to make a configuration pass (roadmap PERF-001).
 schema_version: "1.0"
-status: provisional
-frozen: false
+status: frozen
+frozen: true
+freeze_record: >
+  Frozen 2026-10-21 by ADR-0041: SPEECH-001 baseline spikes completed
+  2026-10-03 (state/evidence/SPEECH-001/) and ADR-0041 records the one
+  shipped provider/model combination per tier (whisper.cpp ggml-tiny CPU
+  sidecar, nice +10, blocking-pool offload; TTS is pre-baked media with
+  no runtime provider). PERF-002 measured the two supported Linux tiers
+  (ADR-0039); post-fix results and the honest unmeasured-low-tier and
+  unmeasurable-cancel-line records are in that ADR and
+  state/evidence/PERF-002/. Thresholds now change only through an ADR.
 freeze_condition: >
   Frozen when SPEECH-001 completes baseline provider spikes on the named tiers below and an ADR
   records the actual provider/model combinations per tier. PERF-002 measures against the frozen
-  values.
+  values. (Satisfied 2026-10-21 by ADR-0041.)
 
 # ---------------------------------------------------------------------------
 # Named OS/hardware tiers

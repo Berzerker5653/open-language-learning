@@ -7,7 +7,7 @@ Everything below was prepared and measured today; the boxes are yours.
 
 | artifact | where | size | sha256 |
 | --- | --- | --- | --- |
-| app `lts-desktop` **0.4.3-alpha.1** deb, finalized (t64-safe `Depends`) — rebuilt 2026-10-20 at `b34538c` from the **security-bumped locks** (RUSTSEC-2026-0381/-0382/-0383 webpki intermediates + GHSA-587h-7wmj-h5pm/-698v-4r3x-3vcv/-r825-w8mm-5pxw vite 8.3.2→8.3.3, all patched same day; `state/evidence/SEC-001/`), incl. the `derive_pairs` 8× plan-latency fix and the PERF-002 app-side probe (`state/evidence/PERF-002/plan10k-*`). **Earlier-recorded debs (`9c374399…`, `b54d4c55…`) predate these bumps — do not ship them.** | `target/release/bundle/deb/open-language-learning-platform_0.4.3-alpha.1_amd64.deb` | 12,589,552 B | `a6d3953fddee8098a879a562cfb36306f64344bbba789bc3035fff978e26f239` |
+| app `lts-desktop` **0.4.3-alpha.1** deb, finalized (t64-safe `Depends`) — rebuilt 2026-10-21 at `1348612` incl. the **PERF-002 responsiveness fix** (`pronunciation_check` off the main thread + sidecar `nice +10`) on top of the security-bumped locks (webpki RUSTSEC-2026-0381/-82/-83 + vite 8.3.3 GHSA trio, `state/evidence/SEC-001/`), the `derive_pairs` plan-latency fix and the perf probe. **Earlier-recorded debs (`9c374399…`, `b54d4c55…`, `a6d3953f…`) lack the responsiveness fix — do not ship them.** | `target/release/bundle/deb/open-language-learning-platform_0.4.3-alpha.1_amd64.deb` | 12,603,248 B | `7042d750ed77308bc031194b333e479cdab40e95b6f2d75aca7197123dcf7591` |
 | ja-JP pack **0.4.3** `.lpk` (tracked tree incl. `capabilities.scenario_help`; `test` 0/0) | `~/staging/0.4.3/ja-JP-0.4.3.lpk` | 318,736,116 B | `9b17b23294df30f4…352719d6` |
 | ru-RU pack **0.4.3** `.lpk` (`test` 0/0) | `~/staging/0.4.3/ru-RU-0.4.3.lpk` | 318,493,155 B | `374d79e13db020fc…a2b96bc5` |
 
@@ -22,10 +22,10 @@ only after this session (see step 5).
 
 ## 1. Machine leg — already re-run today
 
-CI run `39504856417` (success, all jobs) at `b34538c` — the SHA the deb is
-built from — covers the scripted half: `desktop-smoke` (13-route walk), full
-rust suite (4 parallel partitions), pack conformance, security scans; wall
-time is now ~17 min (was 47) with every gate intact
+CI run `39612780641` (success, all 13 jobs) at `1348612` — the SHA the
+shipping deb+binary are built from — covers the scripted half:
+`desktop-smoke` (13-route walk), full rust suite (4 parallel partitions),
+pack conformance, security scans; wall ~18 min, every gate intact
 (`state/evidence/CI-TIME/ci-profile-2026-10-20.md`). Optionally re-run live:
 `LTS_SMOKE_TIMEOUT=900 scripts/smoke-desktop.sh`
 → expect `SMOKE OK (13 routes walked)`. Do not re-verify those by hand.
@@ -74,14 +74,13 @@ Overall: ☐ re-bake accepted (TTS-003 done) ☐ issues listed: ____
 
 ## 4. SEC-001 sign-off
 
-Fresh scans on the shipping SHA `b34538c` (`state/evidence/SEC-001/fresh-2026-10-20.md`
-— run at `3a4e16d`, re-run at `d2f8069`, final third re-run at `b34538c` after
-the same-day advisory bumps): cargo-audit 564 crates **0 vulnerabilities, no
-warnings**; **gitleaks over all 609 commits: no leaks**; `pnpm audit`: none
-(vite 8.3.3 — three same-day GHSA patched same day, CI-caught); CI security
-job green on run `39504856417` at the same SHA; the two 2026-10-09 warnings
-are gone from the graph. Malicious-pack / no-upload / retention suites green
-in the same CI run.
+Fresh scans on the shipping SHA `1348612` (`state/evidence/SEC-001/fresh-2026-10-20.md`
+— four re-runs, latest at `1348612` 2026-10-21): cargo-audit 564 crates
+**0 vulnerabilities, no warnings**; **gitleaks over all 614 commits: no
+leaks**; `pnpm audit`: none (vite 8.3.3 — three same-day GHSA patched same
+day, CI-caught); CI security job green on run `39612780641` at the same
+SHA; the two 2026-10-09 warnings are gone from the graph. Malicious-pack /
+no-upload / retention suites green in the same CI run.
 
 - [ ] I accept the security findings disposition (zero open findings) and give privacy sign-off — signature/date: ____
 
@@ -96,12 +95,13 @@ harness then ran green on the box. Results in
 (PASS both lines), 13-route walk `SMOKE OK`, plan10k **p50 60 / p95 61 ms**,
 and the responsiveness probe **passes on this tier**: worst input→paint
 30 ms / worst main-thread block 17 ms during real ggml-tiny inference,
-0 long tasks — against 1057/1930 ms on the Gaming PC. The 50/100 ms
-responsiveness lines are therefore *tier-inconsistent hardware behavior*,
-not app-impossible: Strix Halo (AVX-512) finishes whisper inside one idle
-window; the AVX2 Gaming PC does not. That makes your §4b-adjacent decision
-sharper: cap/prioritize the sidecar on AVX2-class machines, or recalibrate
-the lines per tier-class. No further owner action on this row.
+0 long tasks (`omarchy-2026-10-20.md`). Your subsequent decision — **fix,
+not recalibrate** — shipped the same day: the stall was a synchronous
+Tauri command running whisper on the main thread, now offloaded
+(`1348612`); post-fix probes read **17/28 ms (Gaming PC)** and **18/30 ms
+(Omarchy)** during inference (`gamingpc-2026-10-21.md`,
+`omarchy-2026-10-21.md`), and ADR-0041 froze the budgets. No further
+owner action on this row.
 
 
 
@@ -120,4 +120,4 @@ CI re-pins. Nothing is committed or published before that.
 | listening §3 | `TTS-003` |
 | sign-off §4 | `SEC-001` |
 | app artifact + CI-green evidence on file | `RELEASE-EVIDENCE-001` (its scripted half is `state/evidence/RELEASE-EVIDENCE-001/ARTIFACT-PASS-2026-10-19.md`) |
-| everything above recorded | the remaining `REL-001` dependency gap is just `PERF-002` — Gaming PC tier measured and the plan-latency defect already fixed (90/93 ms); what's left is your §4b legs, the p50-line decision, and the two instrumentation lines (offer in the chat record) |
+| everything above recorded | `REL-001`'s remaining dependency gaps are ONLY these four ☑: `PERF-002` closed 2026-10-21 (both Linux tiers measured, two defects fixed, `docs/performance/BUDGETS.yaml` frozen by ADR-0041 — plan line p50 100, responsiveness 100/50 met at ≤30 ms on both tiers) |
