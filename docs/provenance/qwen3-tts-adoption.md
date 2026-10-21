@@ -80,6 +80,31 @@ re-synthesizes instead of relabelling. Covered by `ReusableTest` in
 - Speed: 2026-10-10 bake-off ran CPU-only (GamingPC GPU booked by this
   session's inference server); production bakes should use the GPU.
 
+## Re-evaluation 2026-10-21: OmniVoice / VoiceStudio (the "open ElevenLabs clone")
+
+Owner surfaced VoiceStudio (`debpalash/VoiceStudio`, AGPL-3.0 desktop app
+marketed as "the open-source, fully-local ElevenLabs alternative", 646
+languages). Its default engine is **k2-fsa/OmniVoice** (diffusion-LM
+architecture on a Qwen3-0.6B backbone; 24 kHz output; RTF ~0.025 on GPU;
+zero-shot cloning, voice design, pinyin/phoneme correction; paper
+arXiv:2604.00688) — technically the strongest new candidate since the
+2026-10-10 bake-off. **Decisive blocker:** the official model card states
+the code is Apache-2.0 but the **pre-trained model is CC-BY-NC** "due to
+constraints from its training data (e.g., Emilia)". Pack audio is derivative
+output of the engine, and our packs publish under a CC-BY-SA-4.0 / CC0-1.0
+stack with per-asset licence records kept honest by `audit-licenses`; an NC
+encumbrance on the weights would contaminate that chain. The current engine's
+weights (Qwen3-TTS CustomVoice) are Apache-2.0, which is precisely why the
+2026-10-10 decision is safe to re-run anywhere. VoiceStudio's own AGPL is
+not a media concern — the app is never shipped or linked. Same-week
+adjacent candidate Fish Audio Drama 3 (Oct 14, 2026, 35B) carries a "free
+for companies under $500k annual revenue" condition — incompatible with the
+same provenance posture, and an order of magnitude heavier to bake with.
+Decision: **Qwen3-TTS stays the bake engine.** Revisit OmniVoice only if
+k2-fsa ships commercially-licensed weights or the owner deliberately changes
+the media-licensing policy (owner decision, per docs/16).
+
+
 ## Board/roadmap
 
 K-89 (this adoption + full pack re-bake) → `tasks/ROADMAP.yaml` TTS-003.

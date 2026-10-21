@@ -30,7 +30,7 @@ rounded to 2 dp.
 
 | clip | text | integrity ok / hash-match | peak dB (astats) | RMS dB | Flat factor | Crest | max/mean dB (volumedetect) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| ja `media/ja.sent.drink-coffee.wav` | コーヒーを のみます | ok / match | -3.10 | -20.66 | 0.00 | 7.55 | -3.1 / -20.7 |
+| ja `media/ja.sent.drink-coffee.wav` | コーヒーを のみます | ok / match | -3.71 | -18.56 | 0.00 | 14.85 | -3.7 / -18.6 |
 | ja `media/ja.contrast.vowel-length.obasan-0.wav` | おばさん | ok / match | -3.84 | -17.06 | 0.00 | 4.58 | -3.8 / -17.1 |
 | ja `media/ja.contrast.vowel-length.obasan-1.wav` | おばあさん | ok / match | -3.10 | -17.72 | 0.00 | 5.38 | -3.1 / -17.7 |
 | ja `media/ja.contrast.palatalization.hyaku-0.wav` | ひゃく | ok / match | -3.10 | -20.07 | 0.00 | 7.05 | -3.1 / -20.1 |
@@ -42,7 +42,7 @@ rounded to 2 dp.
 | ru `media/ru.lex.shopping.perchatki.wav` | перча́тки | ok / match | -3.10 | -17.96 | 0.00 | 5.54 | -3.1 / -18.0 |
 
 All ten clips: full sha256 equal to the manifest row (first 8 for skim):
-49a0b6df…, 07e94742…, 64ac33d7…, 0efc9656…, 82a4806c…, 7b46f098…,
+f56fe9ff…, 07e94742…, 64ac33d7…, 0efc9656…, 82a4806c…, 7b46f098…,
 5b473cac…, adbac7e9…, 8e0dc59b…, fad16a30…
 
 ## Reading the numbers (not verdicts)
@@ -57,3 +57,18 @@ All ten clips: full sha256 equal to the manifest row (first 8 for skim):
   zero means no flat stretches were detected).
 - Crest factors 4.2–9.0 are ordinary speech dynamics; nothing here says the
   clips are free of the finding-11 character — that question is for your ears.
+
+## Post-verdict re-bake (2026-10-21)
+
+The owner named ONE defective clip: `ja.sent.drink-coffee` — "a bit of
+something in the beginning that sounds off". Machine confirmation of the old
+bytes: an 80–240 ms onset burst, then TWO ~1 s silence gaps inside a 4.32 s
+file — a fragmented bake the duration cap had let through. Re-baked alone via
+`scripts/generate-pack-audio.py --pack languages/ja-JP --only
+ja.sent.drink-coffee --force` (same engine/voice/normalization as every
+other row), envelope now continuous: コーヒーを (0.1–1.6 s), one 0.6 s
+phrase break, のみます (2.4–3.2 s), 3.28 s total. The crest of 14.9 above
+the 4.2–9.0 band reflects that phrase pause inside the RMS window. Gate:
+`scripts/qa-asr.py --ids` whisper round-trip **passed=1 MISMATCH=0**;
+`langpack test languages/ja-JP` **0 errors / 0 warnings**; manifest row
+re-hashed to `f56fe9ff…` (157,484 B, 3.28 s).

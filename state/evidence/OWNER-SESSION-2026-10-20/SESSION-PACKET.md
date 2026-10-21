@@ -8,7 +8,7 @@ Everything below was prepared and measured today; the boxes are yours.
 | artifact | where | size | sha256 |
 | --- | --- | --- | --- |
 | app `lts-desktop` **0.4.3-alpha.1** deb, finalized (t64-safe `Depends` + new hard `gstreamer1.0-plugins-good`) — rebuilt 2026-10-21 at `7cd1fe4` incl. the **CSP `media-src 'self' blob:` fix** (packaged-build audio defect, found by this sweep — see §2 item 4) on top of the PERF-002 responsiveness fix, security-bumped locks (webpki RUSTSEC-2026-0381/-82/-83 + vite 8.3.3 GHSA trio), `derive_pairs` plan-latency fix and perf probes. **Earlier-recorded debs (`9c374399…`, `b54d4c55…`, `a6d3953f…`, `7042d750…`) lack the CSP audio fix — do not ship them.** | `target/release/bundle/deb/open-language-learning-platform_0.4.3-alpha.1_amd64.deb` | 12,603,298 B | `78946e5d09662758678857c3f6f013b3ffbc6d7486d31edd134a79dc57e2e7ed` |
-| ja-JP pack **0.4.3** `.lpk` (tracked tree incl. `capabilities.scenario_help`; `test` 0/0) | `~/staging/0.4.3/ja-JP-0.4.3.lpk` | 318,736,116 B | `9b17b23294df30f4…352719d6` |
+| ja-JP pack **0.4.3** `.lpk` (tracked tree incl. `capabilities.scenario_help`; `test` 0/0; **rebuilt 2026-10-21 with the re-baked `drink-coffee` clip from §3** — supersedes `9b17b232…`/318,736,116 B) | `~/staging/0.4.3/ja-JP-0.4.3.lpk` | 318,719,276 B | `e7b201e2f403f03d…fa6e4cc0` |
 | ru-RU pack **0.4.3** `.lpk` (`test` 0/0) | `~/staging/0.4.3/ru-RU-0.4.3.lpk` | 318,493,155 B | `374d79e13db020fc…a2b96bc5` |
 
 Both archives pass the real installation gate: `langpack install --store`
@@ -73,18 +73,32 @@ order, 1 s gaps).
 
 | clip | text | verdict |
 | --- | --- | --- |
-| ja `media/ja.sent.drink-coffee.wav` | コーヒーを のみます | ☐ ok ☐ artifact |
-| ja `media/ja.contrast.vowel-length.obasan-0.wav` | おばさん | ☐ ☐ |
-| ja `media/ja.contrast.vowel-length.obasan-1.wav` | おばあさん | ☐ ☐ |
-| ja `media/ja.contrast.palatalization.hyaku-0.wav` | ひゃく | ☐ ☐ |
-| ja `media/ja.lex.numbers.go.wav` | ご | ☐ ☐ |
-| ja `media/ja.sent.scenario-reasoning.wav` | ようけん を かえて こうこ を かんがえました。 | ☐ ☐ |
-| ru `media/ru.contrast.palatalization.brat-0.wav` | брат | ☐ ☐ |
-| ru `media/ru.contrast.palatalization.brat-1.wav` | брать | ☐ ☐ |
-| ru `media/ru.lex.numbers-time.chetyre.wav` | четы́ре | ☐ ☐ |
-| ru `media/ru.lex.shopping.perchatki.wav` | перча́тки | ☐ ☐ |
+| ja `media/ja.sent.drink-coffee.wav` | コーヒーを のみます | ☑ **artifact**: "a bit of something in the beginning that sounds off" (owner 2026-10-21) |
+| ja `media/ja.contrast.vowel-length.obasan-0.wav` | おばさん | ☑ ok |
+| ja `media/ja.contrast.vowel-length.obasan-1.wav` | おばあさん | ☑ ok |
+| ja `media/ja.contrast.palatalization.hyaku-0.wav` | ひゃく | ☑ ok |
+| ja `media/ja.lex.numbers.go.wav` | ご | ☑ ok |
+| ja `media/ja.sent.scenario-reasoning.wav` | ようけん を かえて こうこ を かんがえました。 | ☑ ok |
+| ru `media/ru.contrast.palatalization.brat-0.wav` | брат | ☑ ok |
+| ru `media/ru.contrast.palatalization.brat-1.wav` | брать | ☑ ok |
+| ru `media/ru.lex.numbers-time.chetyre.wav` | четы́ре | ☑ ok |
+| ru `media/ru.lex.shopping.perchatki.wav` | перча́тки | ☑ ok |
 
-Overall: ☐ re-bake accepted (TTS-003 done) ☐ issues listed: ____
+Overall: ☑ **re-bake accepted** (TTS-003 done) — owner 2026-10-21: "the
+others are good". Qualities named: the ja clips are "a little breathy…
+not exactly an issue as you can still understand what they are saying" —
+recorded as accepted character, not a defect; finding 11's "echoey,
+metallic, tinny" is gone. ONE clip named with a defect: `drink-coffee`
+has something at the start that "sounds off" — being re-baked and
+re-verified below before any §5 republish.
+
+**Re-bake leg done 2026-10-21** — `ja.sent.drink-coffee` re-synthesized with
+the same engine/voice/normalization; the old bytes were measurably broken
+(onset burst + two ~1 s internal silence gaps in 4.32 s). New clip: 3.28 s,
+continuous speech + one natural phrase break, clip sha `f56fe9ff…`, whisper
+ASR round-trip **passed**, `langpack test languages/ja-JP` **0/0**, manifest
+row committed. ja 0.4.3 archive re-staged: `e7b201e2f403f03d…` /
+318,719,276 B (table above) — §5 publishes this pair.
 
 ## 4. SEC-001 sign-off
 

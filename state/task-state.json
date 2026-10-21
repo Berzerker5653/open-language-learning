@@ -4,16 +4,19 @@
   "active_task": "SCENARIOS-SECTION-REVIEW-001",
   "tasks": {
     "TTS-003": {
-      "status": "blocked",
+      "status": "done",
       "attempts": 1,
-      "last_error": "remaining acceptance item is the owner-gated listening pass over re-baked pack audio (packs republished at 0.4.0, see docs/13); the runtime-TTS half moved to TTS-004 under ADR-0024",
       "evidence": [
         "docs/provenance/qwen3-tts-adoption.md",
         "docs/adr/0023-pack-audio-bake-engine-qwen3-tts.md",
-        "languages/ja-JP/media/manifest.jsonl (reconciled, 4585e6a; 'test' 0/0)",
-        "languages/ru-RU/media/manifest.jsonl (baked+committed, d33745c; validate --mode install 0/0)",
-        "tasks/KANBAN.md (2026-10-12 audio-bake closure)"
-      ]
+        "languages/ja-JP/media/manifest.jsonl",
+        "languages/ru-RU/media/manifest.jsonl",
+        "state/evidence/OWNER-SESSION-2026-10-20/SESSION-PACKET.md",
+        "state/evidence/OWNER-SESSION-2026-10-20/TTS-CLIPS.md"
+      ],
+      "summary": "Owner listening pass complete 2026-10-21: re-bake ACCEPTED (finding 11's echoey/metallic/tinny character gone; ja 'a little breathy' accepted as intelligible character). One clip named defective (ja.sent.drink-coffee, 'something in the beginning sounds off') - old bytes measurably broken (80-240ms onset burst + two ~1s internal silence gaps in 4.32s); re-baked same engine, ASR round-trip passed, langpack test 0/0, ja 0.4.3 archive re-staged sha e7b201e2.../318,719,276 B before any republish.",
+      "notes": "Engine decision unchanged; 2026-10-21 re-evaluation of OmniVoice/VoiceStudio recorded in docs/provenance/qwen3-tts-adoption.md (CC-BY-NC weights disqualify it for shipped pack audio).",
+      "updated": "2026-10-21"
     },
     "TTS-004": {
       "status": "done",
