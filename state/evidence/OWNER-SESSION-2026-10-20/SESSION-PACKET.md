@@ -88,13 +88,14 @@ Overall: ☐ re-bake accepted (TTS-003 done) ☐ issues listed: ____
 
 ## 4. SEC-001 sign-off
 
-Fresh scans on the shipping SHA `1348612` (`state/evidence/SEC-001/fresh-2026-10-20.md`
-— four re-runs, latest at `1348612` 2026-10-21): cargo-audit 564 crates
-**0 vulnerabilities, no warnings**; **gitleaks over all 614 commits: no
+Fresh scans on the shipping SHA `7cd1fe4` — the SHA the shipping deb
+`78946e5d…` is built from (`state/evidence/SEC-001/fresh-2026-10-20.md`
+— FIVE re-runs, latest at `7cd1fe4` 2026-10-21): cargo-audit 564 crates
+**0 vulnerabilities, no warnings**; **gitleaks over all 615 commits: no
 leaks**; `pnpm audit`: none (vite 8.3.3 — three same-day GHSA patched same
-day, CI-caught); CI security job green on run `39612780641` at the same
-SHA; the two 2026-10-09 warnings are gone from the graph. Malicious-pack /
-no-upload / retention suites green in the same CI run.
+day, CI-caught); CI green on run `39650735423` at the same SHA; the two
+2026-10-09 warnings are gone from the graph. Malicious-pack / no-upload /
+retention suites green in the same CI run.
 
 - [ ] I accept the security findings disposition (zero open findings) and give privacy sign-off — signature/date: ____
 

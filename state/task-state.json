@@ -1435,8 +1435,8 @@
         "SECURITY.md",
         "state/evidence/SEC-001/fresh-2026-10-20.md"
       ],
-      "updated": "2026-10-20",
-      "blocker": "Owner sign-off only: fresh 2026-10-20 scans on 3a4e16d show zero findings (cargo-audit 0/0 on 564 crates, gitleaks clean across all 587 commits, pnpm audit clean, CI security job green). What remains is the owner's disposition record and privacy sign-off — an agent cannot grant it."
+      "updated": "2026-10-21",
+      "blocker": "Owner sign-off only: FIVE fresh re-runs on record, latest at the shipping SHA 7cd1fe4 (state/evidence/SEC-001/fresh-2026-10-20.md): cargo-audit 0 vulnerabilities / no warnings over 564 crates, gitleaks clean over all 615 commits, pnpm audit clean (vite 8.3.3), CI green run 39650735423 at the same SHA; malicious-pack / no-upload / retention suites green in the same run. What remains is the owner's disposition record and privacy sign-off — an agent cannot grant it."
     },
     "PLAT-001": {
       "task_id": "PLAT-001",
