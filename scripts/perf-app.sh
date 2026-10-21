@@ -367,8 +367,8 @@ if [ -z "$FAIL_REASON" ]; then
         resp_inp:$v_resp_inp, resp_block:$v_resp_block,
         resp_cancel:"unevaluable:no-product-seam"}}' > "$OUT/metrics.json"
 else
-  jq -n --arg schema "perf-app/1.0" --arg ts "$(date -u +%FT%TZ)" --arg bin "$BIN" --arg reason "$FAIL_REASON" \
-    '{schema:$schema, collected_utc:$ts, binary:$bin, failed:$true, failure:$reason}' > "$OUT/metrics.json"
+  jq -n --arg schema "perf-app/1.0" --arg ts "$(date -u +%FT%TZ)" --arg bin "$BIN" --arg reason "$FAIL_REASON" --argjson failed true \
+    '{schema:$schema, collected_utc:$ts, binary:$bin, failed:$failed, failure:$reason}' > "$OUT/metrics.json"
 fi
 
 EVID="$OUT/$LABEL-$DATE_TAG.md"
