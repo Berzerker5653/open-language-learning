@@ -1,0 +1,253 @@
+[qa-segments] FLAG ru.lex.argue.nadezhnost: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.argue.storonnik: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ru.lex.argue.sud: {'gap': {'s': 0.88, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.argue2.slichat: {'gap': {'s': 0.98, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.argue4.ploskost: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ru.lex.argue4.predvzyatyy: {'gap': {'s': 1.44, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.argue4.produmannyy: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.argue4.produmat: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.argue4.proschitat: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.argue4.protivorechivyy: {'gap': {'s': 1.4, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.city.biliet: {'gap': {'s': 1.04, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.comparisons.klassnyi: {'gap': {'s': 0.96, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.comparisons.plohoi: {'burst': {'runs': 1, 'ms': 40}, 'gap': {'s': 1.34, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.comparisons.uzhe: {'gap': {'s': 0.96, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.comparisons.zdorovee: {'gap': {'s': 0.96, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.critical.konstrukciya: {'gap': {'s': 1.34, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.critical.pristavka: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.critical.spryazhenie: {'gap': {'s': 0.98, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.critical.subordinaciya: {'gap': {'s': 1.14, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.critical2.stolknovenie: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.critical3.patent: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ru.lex.critical4.naitie: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.critical4.neopredelennost: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.critical4.predchuvstvie: {'gap': {'s': 1.56, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.critical4.prevestnik: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.critical4.yarklyk: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ru.lex.cult.cenitel: {'gap': {'s': 1.02, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.cult.govor: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.cult.krepost: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ru.lex.cult.nezavisimost: {'gap': {'s': 0.96, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.cult.povestvovatelnyy: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.cult.satiricheskiy: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ru.lex.cult.sushchestvovat: {'gap': {'s': 1.64, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.culture.hudozhnik: {'gap': {'s': 1.68, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.culture.kritik: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ru.lex.culture.stena2: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ru.lex.culture.stihotvorenie: {'gap': {'s': 1.3, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.feelings.hmuryj: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.feelings.nedorazumenie: {'gap': {'s': 1.38, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.feelings.sarkazm: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.food.desert: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.food.kafe: {'gap': {'s': 0.88, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.food.sol: {'gap': {'s': 1.18, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.future.veroyatnost: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.future2.chest: {'gap': {'s': 1.24, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.future2.predstav: {'gap': {'s': 1.54, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.future2.vygodnyy: {'burst': {'runs': 1, 'ms': 20}, 'gap': {'s': 1.24, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.home.spalnya: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ru.lex.home.stanciya: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.home.televizor: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.housing.uchastok: {'gap': {'s': 1.64, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.instructions.sledovat: {'gap': {'s': 1.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.learning.nagrada: {'gap': {'s': 0.98, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.learning.stranitsa: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ru.lex.messages.zvonok: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.messages2.podrobnost: {'gap': {'s': 1.22, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.messages2.priklyuchenie: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.messages2.zapomnit: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.narration.poluchilos: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.narration2.polnoch: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.narration2.v-to-vremya: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.neg.appetity: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.neg.detalizirovat: {'gap': {'s': 1.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.neg.ekvivalent: {'gap': {'s': 0.88, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.neg.lobbirovanie: {'gap': {'s': 1.66, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.neg.nesoglasovannost: {'gap': {'s': 0.88, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.neg.posrednichestvo: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.neg.primirit: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.neg.priostranovka: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.neg.prityazanie: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.neg.snishoditelnyy: {'gap': {'s': 1.16, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.neg.soglasovannost: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.neg.sopostavit: {'gap': {'s': 1.12, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.opinions.formulirovka: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.opinions.illustraciya: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.opinions.issledovanie: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.pastevents.potom: {'gap': {'s': 0.96, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.pastevents.vstrechal: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.personal.oni: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.personal.student: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ru.lex.problems.kvitantsiya: {'gap': {'s': 1.06, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.problems.obmenyat: {'burst': {'runs': 1, 'ms': 40}, 'gap': {'s': 1.04, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.problems.polovina: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ru.lex.problems.uladit: {'gap': {'s': 0.96, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.problems2.dokazatelstvo: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.problems2.povrezhdenie: {'gap': {'s': 1.26, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.prof.arbitrazhnyy: {'gap': {'s': 1.48, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.prof.distributor: {'gap': {'s': 1.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.prof.finansirovanie: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.prof.investirovat: {'gap': {'s': 1.18, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.prof.predstavitelstvo: {'gap': {'s': 1.12, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.prof.samoocenka: {'gap': {'s': 1.36, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.prof.skrepa: {'gap': {'s': 1.02, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.prof.soiskatel: {'gap': {'s': 1.16, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.prof.sprovoditelnyy: {'gap': {'s': 0.82, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.prof.taksa: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.prof.vneshstatnyy: {'gap': {'s': 1.04, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.prof.zanyatost: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.rel.pochita: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.rel.tsvety: {'gap': {'s': 1.74, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.respect.bespristrastnost: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.respect.podozritelost: {'gap': {'s': 1.32, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.respect.storona: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ru.lex.respect.taktichnost: {'gap': {'s': 1.26, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.sci.kompostirovanie: {'gap': {'s': 1.54, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.sci.naladchik: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ru.lex.sci.neizmerimyy: {'gap': {'s': 1.02, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.sci.neprochnyy: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.sci.poteplenie: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.sci.toksichnyy: {'gap': {'s': 0.96, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.sci.vosproizvodimost: {'gap': {'s': 1.24, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.sci.vychislitelnyy: {'gap': {'s': 1.26, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.sci.zakonomernyy: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.services.obmenyat: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.services.ofitsiant: {'gap': {'s': 1.0, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.shopping.deshevy: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.shopping.etiketka: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.shopping.staryy: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ru.lex.soc.aktiv: {'gap': {'s': 0.96, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.berezhlivost: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.bezotvetstvennost: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.diversificirovat: {'gap': {'s': 1.62, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.dobavochnyy: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.dobrovolets: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.kompensirovat: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.soc.kontrargumentaciya: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ru.lex.soc.mezhvedomstvennyy: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.nadzornyy: {'gap': {'s': 1.04, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.navazyvanie: {'gap': {'s': 0.96, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.nespravedlivost: {'gap': {'s': 1.24, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.podtasovat: {'gap': {'s': 1.56, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.pravitelstvennyy: {'gap': {'s': 1.08, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.pristrastnost: {'gap': {'s': 1.14, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.rastochitelnyy: {'gap': {'s': 1.26, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.ravnodushnyy: {'gap': {'s': 0.88, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.ravnovesnyy: {'gap': {'s': 0.88, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.razblokirovka: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.reinvestirovat: {'gap': {'s': 1.6, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.samodostatochnyy: {'gap': {'s': 1.12, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.samostoyatelnost: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.soc.tarifikatsiya: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.tsifrovoy: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ru.lex.soc.zakonodatelnyy: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.soc.zakonoproekt: {'gap': {'s': 1.02, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.socialplans.pomnit: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ru.lex.socialplans.svidanie: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ru.lex.study.mnozhestvo: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ru.lex.study.stoletie: {'gap': {'s': 1.24, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.study4.grotesk: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ru.lex.style.lyubeznost: {'gap': {'s': 1.44, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.style.nadpiska: {'gap': {'s': 1.46, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.style.ottachivat: {'gap': {'s': 1.52, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.style.podobostrastie: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ru.lex.style.smyagchenie: {'gap': {'s': 1.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.style.vypuklost: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.style.zabotlivost: {'gap': {'s': 1.16, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.summary2.fragment: {'gap': {'s': 1.5, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.summary2.szhatie: {'gap': {'s': 1.52, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.synthesis.posvyashchenie: {'gap': {'s': 1.18, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.synthesis2.kontrast: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.synthesis2.nabrosok: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.lex.synthesis3.arbitr: {'gap': {'s': 1.14, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.synthesis3.inspektor: {'gap': {'s': 1.36, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.synthesis3.turnir: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ru.lex.synthesis4.plotnost: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.timeplans.vesna: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.timeplans.vstrecha: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ru.lex.travel.bronirovat: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ru.lex.travel2.rasstroitsya: {'gap': {'s': 1.2, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.travel2.razocharovatsya: {'gap': {'s': 1.78, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.travel2.rekomendovat: {'gap': {'s': 1.0, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.travel2.valyuta: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.wellbeing.bolnichny: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ru.lex.wellbeing.sovet: {'gap': {'s': 1.06, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.wellbeing.temperatura: {'gap': {'s': 1.38, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.work.naladka: {'gap': {'s': 1.06, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.work.nastavnik: {'gap': {'s': 1.0, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.workstudy.chestnost: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.workstudy.iskrennost: {'gap': {'s': 2.8, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.workstudy.karierny: {'gap': {'s': 1.16, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.workstudy.sotrudnik: {'gap': {'s': 1.14, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.writing.rassylka: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.lex.writing2.perepisat: {'gap': {'s': 1.28, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.a1.u031: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.sent.a1.u041: {'gap': {'s': 1.26, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.a1.u067: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ru.sent.a1.u090: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.a1.u095: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.a2.j2: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.a2.u111: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.a2.u134: {'gap': {'s': 1.0, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.a2.u140: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.a2.u143: {'gap': {'s': 0.96, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.a2.u157: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.a2.u179: {'gap': {'s': 1.2, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.a2.u192: {'gap': {'s': 1.08, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.a2.u200: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.j1: {'gap': {'s': 1.02, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u211: {'gap': {'s': 0.88, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u216: {'gap': {'s': 1.08, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u220: {'gap': {'s': 1.28, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u222: {'gap': {'s': 1.24, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u235: {'gap': {'s': 1.74, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u239: {'gap': {'s': 1.34, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u249: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u250: {'gap': {'s': 1.58, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u259: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u271: {'gap': {'s': 1.12, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u272: {'gap': {'s': 1.42, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u276: {'gap': {'s': 1.32, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u277: {'gap': {'s': 1.56, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u302: {'gap': {'s': 1.16, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u305: {'gap': {'s': 1.56, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u316: {'gap': {'s': 1.14, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u318: {'gap': {'s': 1.28, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u370: {'gap': {'s': 1.98, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u372: {'gap': {'s': 1.86, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u375: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b1.u405: {'gap': {'s': 1.24, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.j1: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u432: {'gap': {'s': 1.14, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u436: {'gap': {'s': 1.06, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u473: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u482: {'gap': {'s': 1.16, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u489: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u491: {'gap': {'s': 0.98, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u518: {'gap': {'s': 1.28, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u522: {'gap': {'s': 1.62, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u545: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u550: {'gap': {'s': 1.02, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u564: {'gap': {'s': 1.2, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u579: {'gap': {'s': 2.06, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u589: {'gap': {'s': 1.22, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u605: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ru.sent.b2.u624: {'gap': {'s': 0.96, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u645: {'gap': {'s': 1.26, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u652: {'gap': {'s': 1.2, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u658: {'gap': {'s': 1.54, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u683: {'gap': {'s': 1.16, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u687: {'gap': {'s': 1.14, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u705: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ru.sent.b2.u727: {'gap': {'s': 1.2, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u737: {'gap': {'s': 1.0, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u749: {'gap': {'s': 1.08, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u751: {'gap': {'s': 1.42, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u755: {'gap': {'s': 1.44, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.b2.u779: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ru.sent.cp.p08: {'gap': {'s': 0.94, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.cp.p28: {'gap': {'s': 0.98, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.cp.p31: {'gap': {'s': 1.08, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.cp.p37: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ru.sent.cp.p39: {'gap': {'s': 1.22, 'count': 1, 'threshold': 0.8}}
+[qa-segments] 4856 clips -> state/evidence/PACK-AUDIO-VERIFICATION-001/segments-ru-RU.jsonl: 252 FLAG

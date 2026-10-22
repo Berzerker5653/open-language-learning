@@ -183,7 +183,13 @@ ASR_MODEL=<whisper ggml> WHISPER=<whisper-cli> bash scripts/qa-audit.sh language
 ```
 
 1. `scripts/qa-asr.py` — whisper round-trip: the clip must transcribe back
-   to the declared text (word content).
+   to the declared text (word content). Normalization (gate v2, from the
+   2026-10-21 full-corpus audit): Japanese folds kanji↔kana via pykakasi so
+   止める == とめる; whisper's stage directions (`*вздыхает*`, `(笑)`) and
+   laughter/sustained-vowel runs are defects — the audio really contains
+   those hallucinated vocalizations — so they fail the clip outright;
+   filler punctuation collapses. `scripts/qa-asr-rescore.py` re-grades an
+   existing audit JSONL under v2 without re-running whisper.
 2. `scripts/qa-segments.py` — ML-free structure: onset bursts, internal
    silences > 0.8 s, clipping, trailing noise (never content).
 3. `scripts/qa-pron.py` — phoneme-level RECORD layer: recognized phones,

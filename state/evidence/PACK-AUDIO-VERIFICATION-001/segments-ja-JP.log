@@ -1,0 +1,328 @@
+[qa-segments] FLAG ja.contrast.gemination.kite-1: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ja.lex.abst.fuyu2: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.academic.bunseki2: {'gap': {'s': 1.06, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.academic.hyou: {'gap': {'s': 1.18, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.academic.kouchiku: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ja.lex.academic.shiji: {'gap': {'s': 1.3, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.academic2.kikaku: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.academic2.tansaku: {'gap': {'s': 1.1, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.adjectives.atarashii: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ja.lex.admin.todoke-sho: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.admin.yoyaku-jima: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.admin.zei: {'gap': {'s': 1.22, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.advice2.kawa2: {'gap': {'s': 1.0, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.art2.chie: {'gap': {'s': 1.1, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.art2.minamo: {'gap': {'s': 1.52, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.art2.rinen: {'gap': {'s': 1.5, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.body.junyou: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ja.lex.body.touki: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ja.lex.body.yoku-naru: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.city.ginkou: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.city.ukeru: {'gap': {'s': 1.46, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.city2.danbooru: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.communication2.okureru: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ja.lex.critique.keiei: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.critique.koui: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ja.lex.critique.ouken: {'gap': {'s': 1.34, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.cult.fuyu: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.cult2.hogo2: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.cult2.sanka3: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ja.lex.culture.dentou: {'gap': {'s': 1.4, 'count': 3, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.culture.hokori: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ja.lex.debate2.sakuhin: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.edu.daigakuin: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ja.lex.edu.kougi: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.edu2.sakuin: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ja.lex.edu3.togihou: {'gap': {'s': 1.38, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.edu4.jiritsu: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ja.lex.edu4.jitsuryoku: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.edu4.koudou: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ja.lex.edu4.kuni: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.emotion.ki-mochi: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ja.lex.ent.kangei: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ja.lex.ent.serifu: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ja.lex.env.air: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ja.lex.env.kiko: {'gap': {'s': 2.26, 'count': 7, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.env2.gas: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ja.lex.env2.kesshin: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ja.lex.env3.houkoku3: {'gap': {'s': 1.22, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.env3.katsudou2: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ja.lex.env3.taniso2: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.env4.kyousei2: {'gap': {'s': 1.0, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.film.kanyuu: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ja.lex.film.shashin: {'gap': {'s': 1.02, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.film2.umi: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ja.lex.food.dashi: {'gap': {'s': 1.58, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.food.keeki: {'gap': {'s': 1.3, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.food.onigiri: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ja.lex.food.shokuji: {'gap': {'s': 1.64, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.food.su: {'gap': {'s': 1.02, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.food2.kaeru: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ja.lex.food2.tsumetai: {'gap': {'s': 1.12, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.formal.guchou: {'gap': {'s': 1.12, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.formal.mimai: {'gap': {'s': 1.12, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.formal2.bi: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ja.lex.formal2.shoukaijo: {'gap': {'s': 1.12, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.global.bunkou2: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ja.lex.global2.butsuryu: {'gap': {'s': 1.06, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.global2.seisan: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ja.lex.greetings.oyasumi-nasai: {'gap': {'s': 1.06, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.greetings.shitsurei-shimasu: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.health.kimochi: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ja.lex.health2.joutai: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.health2.karada: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.health2.kenkou2: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.health2.shinryo: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.health2.taikyuu: {'gap': {'s': 1.16, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.health4.jushin: {'gap': {'s': 1.1, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.health4.kaze-gusuri: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.health4.ukuu: {'gap': {'s': 0.98, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.history2.honne2: {'gap': {'s': 1.0, 'count': 3, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.history2.mousho: {'gap': {'s': 1.08, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.home.kurai: {'gap': {'s': 5.2, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.home.tana: {'gap': {'s': 1.06, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.home.yuka: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.humor2.kuchi: {'gap': {'s': 2.08, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.humor2.te2: {'burst': {'runs': 1, 'ms': 60}, 'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.law.houritsu: {'gap': {'s': 1.3, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.law.keiji: {'burst': {'runs': 2, 'ms': 120}}
+[qa-segments] FLAG ja.lex.law.soshou: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.law2.genshitsu: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ja.lex.law2.hihan: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.law2.igen: {'gap': {'s': 1.78, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.law2.keito: {'burst': {'runs': 2, 'ms': 80}}
+[qa-segments] FLAG ja.lex.law2.kyoka: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.law2.shiire: {'gap': {'s': 1.38, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.leisure.geemu: {'burst': {'runs': 1, 'ms': 80}, 'gap': {'s': 2.0, 'count': 3, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.leisure.hanashimasu: {'gap': {'s': 1.5, 'count': 4, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.leisure.karate: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ja.lex.leisure.nyuusu: {'gap': {'s': 3.74, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.leisure.oboemasu: {'gap': {'s': 0.88, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.leisure.shibaraku: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.ling.goin: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.ling.shiteki: {'gap': {'s': 1.2, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.ling2.go: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ja.lex.ling2.henyou: {'gap': {'s': 0.98, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.ling2.kanji2: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ja.lex.ling2.kansetsu: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.ling2.moji: {'gap': {'s': 1.48, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.lit.renga: {'gap': {'s': 1.16, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.lit2.bunken: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ja.lex.lit2.goju: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.lit2.shitei: {'gap': {'s': 0.88, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.lit3.hihyou: {'gap': {'s': 1.3, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.lit3.rei: {'gap': {'s': 1.26, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.lit3.yakimoku: {'gap': {'s': 0.96, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.med.kenkyuu: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ja.lex.med.seishin: {'gap': {'s': 2.88, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.med.teian: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.med2.denwa: {'gap': {'s': 1.22, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.media.denshi-media: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ja.lex.media2.kokunai: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.media3.risou3: {'gap': {'s': 1.88, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.narrative.mura: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.narrative.toki: {'gap': {'s': 2.96, 'count': 3, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.narrative.yuki: {'gap': {'s': 1.6, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.numbers.man: {'gap': {'s': 1.24, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.numbers.roku: {'gap': {'s': 1.28, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.objects.hon: {'gap': {'s': 1.6, 'count': 7, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.people.ani: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.philosophy.hasei: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.philosophy2.iryou: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.philosophy2.kanshou: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.philosophy2.kantei: {'burst': {'runs': 1, 'ms': 40}, 'gap': {'s': 1.0, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.philosophy2.kikai: {'gap': {'s': 1.52, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.play1.zokugo: {'gap': {'s': 1.06, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.play2.age: {'gap': {'s': 1.02, 'count': 3, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.play2.ishi: {'gap': {'s': 1.24, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.play2.ki: {'gap': {'s': 1.2, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.play2.koe: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ja.lex.play2.komi: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ja.lex.play2.kusa: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ja.lex.play2.tori: {'gap': {'s': 1.04, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.politics2.choushou: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ja.lex.politics2.fuhyou: {'gap': {'s': 0.96, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.politics2.giinkai: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.politics2.june: {'gap': {'s': 1.12, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.politics2.kikoku: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ja.lex.politics2.kogen: {'gap': {'s': 1.22, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.politics2.kokuho: {'gap': {'s': 1.56, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.politics2.seijigaku: {'gap': {'s': 1.16, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.politics2.shuryuu: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ja.lex.pronouns.kanojo: {'gap': {'s': 1.62, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.psych.jissen: {'gap': {'s': 1.08, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.psych.mokuteki: {'gap': {'s': 1.04, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.psych.nemuri: {'gap': {'s': 1.02, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.questions.dore: {'gap': {'s': 1.08, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.reg1.kougen: {'gap': {'s': 4.26, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.reg2.dansei: {'gap': {'s': 5.04, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.reg2.koukyuu: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ja.lex.rel.kyoudai-shita: {'burst': {'runs': 1, 'ms': 20}, 'gap': {'s': 1.02, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.rel1.kenzai: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.rel1.rikai: {'gap': {'s': 1.5, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.rel1.yamaimadara: {'gap': {'s': 1.16, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.rel2.fukki: {'gap': {'s': 1.04, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.rel2.koryu6: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ja.lex.rel2.omoshiroi2: {'gap': {'s': 1.12, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.science.chikyu: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ja.lex.science.kikai: {'burst': {'runs': 1, 'ms': 40}, 'gap': {'s': 1.44, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.science.yosoku: {'gap': {'s': 1.2, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.shopping.go-hyaku: {'gap': {'s': 1.32, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.society.chounakai: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.society.hatsuyaku: {'gap': {'s': 0.96, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.society2.byoudou: {'gap': {'s': 2.2, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.society3.iju: {'gap': {'s': 1.08, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.society3.toshi: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ja.lex.society4.jichikai: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ja.lex.society4.jiyuu: {'gap': {'s': 1.26, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.society4.kaihyou: {'gap': {'s': 1.4, 'count': 4, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.society4.kozou: {'gap': {'s': 1.56, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.society4.kyousou: {'gap': {'s': 0.98, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.society4.unyou: {'gap': {'s': 1.0, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.sports.bokushin: {'gap': {'s': 1.08, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.sports.janpu-ro-pu: {'gap': {'s': 0.98, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.sports.kendo: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.sports.ki: {'gap': {'s': 1.36, 'count': 6, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.sports.mawashi: {'gap': {'s': 1.1, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.story.itsumo: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.story.konna: {'gap': {'s': 1.78, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.story.wakusei: {'gap': {'s': 1.28, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.story2.kaiso: {'gap': {'s': 1.04, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.story2.kuchi2: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ja.lex.story2.mazui: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ja.lex.story2.mimi: {'gap': {'s': 1.02, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.story2.murasaki: {'gap': {'s': 1.02, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.story2.oishii2: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.story2.oto: {'gap': {'s': 1.24, 'count': 3, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.story2.uta: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.tech2.genkai: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ja.lex.tech2.komyuniti: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.tech2.shinko: {'gap': {'s': 0.96, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.time.ashita: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ja.lex.time.nanji: {'gap': {'s': 0.96, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.time.yoru: {'gap': {'s': 1.08, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.transport.demasu: {'gap': {'s': 1.32, 'count': 3, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.transport.kuukou: {'gap': {'s': 2.74, 'count': 8, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.transport.tokkyu: {'gap': {'s': 1.46, 'count': 8, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.transport.tooi: {'gap': {'s': 0.96, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.travel2.futsuu: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.travel2.issho: {'gap': {'s': 1.34, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.travel2.ryougae: {'gap': {'s': 1.32, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.travel2.tenkan: {'burst': {'runs': 2, 'ms': 80}}
+[qa-segments] FLAG ja.lex.urban.machi: {'gap': {'s': 1.1, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.urban2.hana: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ja.lex.urban2.kairou: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ja.lex.urban2.senso: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.verbs.kaimasu: {'burst': {'runs': 2, 'ms': 40}}
+[qa-segments] FLAG ja.lex.verbs.kimasu: {'gap': {'s': 1.58, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.weather2.fuyu: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.weather2.kousui: {'burst': {'runs': 1, 'ms': 40}}
+[qa-segments] FLAG ja.lex.weather2.tenki-yohou: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.weather2.tsuyu: {'gap': {'s': 1.24, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.work.jugyou: {'gap': {'s': 0.96, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.work.juku: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.work.kanryou-shimasu: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ja.lex.work.nobun: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.work2.shoubei: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.work2.taishou: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.work2.tenyaku: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.lex.work2.yuuryou: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.admin.post: {'gap': {'s': 1.46, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.clinic.fever-since-yesterday: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.clinic.friend-plain-went: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.clinic.three-please: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.health.pharmacy: {'gap': {'s': 1.02, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.lostfound.lost-at-station: {'gap': {'s': 0.88, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.lostfound.report-again: {'gap': {'s': 0.98, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.lostfound.where-lost: {'gap': {'s': 1.1, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.pay.card-possible: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.pay.clerk-fee-applies: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.pay.must-by-20th: {'gap': {'s': 1.02, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.pay.pay-here-possible: {'gap': {'s': 1.02, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.phone.answer-self: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.phone.message-please: {'gap': {'s': 1.24, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.phone.voicemail-gone: {'gap': {'s': 1.28, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.phone.wrong-number: {'gap': {'s': 0.88, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.post.shipping-how-much: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.post.want-to-send: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.reserve.friend-plain-booked: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.shop.ask-refund: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.shop.clerk-one-moment: {'burst': {'runs': 2, 'ms': 60}}
+[qa-segments] FLAG ja.sent.a2.shop.ill-take-this: {'gap': {'s': 1.06, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.a2.shop.what-kind-gift: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.absurd-humor: {'gap': {'s': 1.06, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.aesthetics-essay: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.art-and-culture: {'gap': {'s': 1.22, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.article-summary: {'gap': {'s': 1.1, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.ask-question: {'gap': {'s': 1.18, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.assessment-debate: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.background-setting: {'gap': {'s': 1.18, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.buy-ticket: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.call-friend: {'gap': {'s': 1.2, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.can-understand: {'gap': {'s': 1.02, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.check-balance: {'burst': {'runs': 2, 'ms': 160}}
+[qa-segments] FLAG ja.sent.circular-economy: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.climate-lowest: {'burst': {'runs': 1, 'ms': 20}}
+[qa-segments] FLAG ja.sent.climate-science: {'gap': {'s': 1.16, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.conflict-resolution: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.constitutional-ideas: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.cross-cultural-friendship: {'gap': {'s': 1.2, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.culture-shock: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.cured: {'gap': {'s': 1.06, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.custom-explain: {'gap': {'s': 1.0, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.data-ethics: {'gap': {'s': 1.22, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.diet-culture: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.diplomatic-style: {'gap': {'s': 1.1, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.documentary-critique: {'gap': {'s': 1.12, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.duty-versus-good: {'gap': {'s': 1.32, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.eat-breakfast: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.eat-fruit: {'gap': {'s': 1.1, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.economic-history-b: {'gap': {'s': 1.18, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.environmental-ethics: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.farewell-party: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.film-friend-recommended: {'gap': {'s': 0.98, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.fitness-club: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.gift-wrapping: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.global-cities: {'gap': {'s': 1.14, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.global-health: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.green-urban: {'burst': {'runs': 1, 'ms': 60}}
+[qa-segments] FLAG ja.sent.greet-day: {'gap': {'s': 0.84, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.health-debate: {'gap': {'s': 1.0, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.higher-education-future: {'gap': {'s': 1.02, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.international-agreements: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.interview-prep: {'gap': {'s': 1.24, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.language-identity: {'gap': {'s': 1.3, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.legal-news: {'gap': {'s': 0.98, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.lost-belongings: {'gap': {'s': 1.2, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.marriage-day: {'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.medical-ethics: {'gap': {'s': 0.98, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.migration-global: {'gap': {'s': 1.06, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.migration-identity: {'burst': {'runs': 1, 'ms': 40}, 'gap': {'s': 0.86, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.mood-chat: {'gap': {'s': 1.08, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.national-narrative: {'gap': {'s': 0.9, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.nature-protect: {'gap': {'s': 0.96, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.paragraph-point: {'gap': {'s': 1.16, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.parent-involvement: {'gap': {'s': 1.14, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.parliament-debate: {'gap': {'s': 1.0, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.privacy-law: {'gap': {'s': 1.38, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.protest-movements: {'gap': {'s': 1.9, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.recycle-bottle: {'gap': {'s': 1.3, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.regret: {'gap': {'s': 2.42, 'count': 2, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.risk-and-precaution: {'gap': {'s': 0.94, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.rural-urban-link: {'gap': {'s': 1.02, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.safety-password: {'gap': {'s': 1.14, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.send-letter: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.senpai-help: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.social-history: {'gap': {'s': 1.26, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.software-update: {'gap': {'s': 1.12, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.suddenly-rain: {'gap': {'s': 0.82, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.technology-ethics: {'gap': {'s': 1.46, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.there-is-cat: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ja.sent.thesis-construction: {'gap': {'s': 0.92, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.translate-sentence: {'gap': {'s': 1.24, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.university-system: {'gap': {'s': 1.44, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.urban-community: {'gap': {'s': 1.04, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.what-is-this: {'burst': {'runs': 1, 'ms': 80}}
+[qa-segments] FLAG ja.sent.winter-yuki: {'gap': {'s': 0.88, 'count': 1, 'threshold': 0.8}}
+[qa-segments] FLAG ja.sent.withdraw-money: {'gap': {'s': 1.0, 'count': 1, 'threshold': 0.8}}
+[qa-segments] 4902 clips -> state/evidence/PACK-AUDIO-VERIFICATION-001/segments-ja-JP.jsonl: 327 FLAG

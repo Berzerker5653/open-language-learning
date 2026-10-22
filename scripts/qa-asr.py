@@ -42,14 +42,23 @@ def kana(s: str) -> str:
         _KAKASI = pykakasi.kakasi()
     return "".join(x["hira"] for x in _KAKASI.convert(s))
 
+# Gate v2 (2026-10-21 full-corpus audit): whisper writes hallucinated audio
+# (sighs, laughter, drawn-out vowels) as stage directions or syllable runs.
+STAGE = re.compile(r"\*[^*]*\*|\([^)]*\)|（[^）]*）")
+RU_STAGE = re.compile(r"\b(смех|вздыхает|хихикает|шум|аплодисменты|музыка)\b")
+LAUGH = re.compile(r"(?:[хф][ауыэ][-. ]*){2,}|(?:[hw]a[-. ]*){2,}|ふ[ふヴー]*(?:[ ]ふ[ふヴー]*)+|は[はぁー]*(?:[ ]は[はぁー]*)+|えへ|ふふ")
+SUSTAIN = re.compile(r"([a-zа-яё])\1{5,}")
+
 
 def norm(s: str, ja: bool = False) -> str:
     # Cyrillic-aware: strip everything that is not a letter/digit, casefold.
     # For ja, also fold kanji to kana and drop spaces (word segmentation in
-    # whisper output is not part of what we verified).
+    # whisper output is not part of what we verified). Whitespace runs (from
+    # whisper "..." fillers) collapse to one space: they are punctuation, not
+    # audio content.
     if ja:
         s = kana(s)
-    out = re.sub(r"[^\w\d]+", " ", s.lower()).strip()
+    out = re.sub(r"\s+", " ", re.sub(r"[^\w\d]+", " ", s.lower())).strip()
     return out.replace(" ", "") if ja else out
 
 
@@ -68,14 +77,27 @@ def check(pack: Path, model: str, lang: str, whisper: str, row: dict) -> dict:
     except subprocess.TimeoutExpired:
         return {"id": row["id"], "status": "timeout", "text": row["text"]}
     heard = p.stdout.strip()
+    # Gate v2 (2026-10-21 full audit): whisper stage directions like
+    # *вздыхает* / (笑) mean the audio carries hallucinated non-word
+    # vocalizations (sighs, laughter): strip them for the ratio, but the
+    # clip still fails. Laughter and sustained-vowel runs fail outright.
+    reasons = []
+    if STAGE.search(heard) or RU_STAGE.search(heard):
+        reasons.append("hallucination-marker")
+    stripped = STAGE.sub(" ", heard)
+    if LAUGH.search(stripped) or SUSTAIN.search(stripped.lower()):
+        reasons.append("vocalization-run")
     ja = lang == "ja"
-    a, b = norm(row["text"], ja), norm(heard, ja)
+    a, b = norm(row["text"], ja), norm(stripped, ja)
     ratio = difflib.SequenceMatcher(None, a, b).ratio()
     # No substring rule: the 2026-10-11 probe showed real babble clips pass
     # it ("Мы с датата делаете…" for мы). An asset must round-trip whole.
-    ok = a == b or ratio >= 0.75
-    return {"id": row["id"], "status": "ok" if ok else "MISMATCH",
-            "ratio": round(ratio, 2), "text": row["text"], "heard": heard}
+    ok = (a == b or ratio >= 0.75) and not reasons
+    res = {"id": row["id"], "status": "ok" if ok else "MISMATCH",
+           "ratio": round(ratio, 2), "text": row["text"], "heard": heard}
+    if reasons:
+        res["reasons"] = reasons
+    return res
 
 
 def main() -> int:
