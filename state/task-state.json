@@ -18,6 +18,20 @@
       "notes": "Engine decision unchanged; 2026-10-21 re-evaluation of OmniVoice/VoiceStudio recorded in docs/provenance/qwen3-tts-adoption.md (CC-BY-NC weights disqualify it for shipped pack audio).",
       "updated": "2026-10-21"
     },
+    "PACK-AUDIO-VERIFICATION-001": {
+      "task_id": "PACK-AUDIO-VERIFICATION-001",
+      "status": "ready",
+      "attempts": 0,
+      "title": "Language-agnostic verification that every baked pack voice line says its text correctly (owner directive 2026-10-21)",
+      "activity": "idle",
+      "summary": "Three machine gates over every baked asset of every shipping pack: word-level ASR round-trip (qa-asr), ML-free acoustic-structure gate (qa-segments), phoneme-level comparison vs expected phones (qa-pron). FAILs repaired through the ASR-gated bake loop; audit record into pack provenance.",
+      "notes": "Registered 2026-10-21 after the owner's second TTS re-listen caught two defects the single whisper gate had passed: an epenthetic vowel in брать and an extra segment in перча́тки. Owner: 'we need to come up with a way to check our voice lines and make sure they are 110% accurate. This should apply to any and all languages' and 'lets fix this before we send it out' - hence required_for_desktop_1_0 true. Gates live at scripts/qa-asr.py, scripts/qa-segments.py, scripts/qa-pron.py (+qa_pron_g2p.py); regression fixtures under ~/staging/qa-fixtures-2026-10-21/ move into state/evidence as part of this card.",
+      "dependencies": [
+        "TTS-003"
+      ],
+      "evidence": [],
+      "updated": "2026-10-21"
+    },
     "TTS-004": {
       "status": "done",
       "attempts": 1,
@@ -1585,7 +1599,8 @@
         "MIC-TRACK-LIFECYCLE-001",
         "JA-A1-002",
         "JA-A2-001",
-        "JA-KANJI-ATTRIBUTION-001"
+        "JA-KANJI-ATTRIBUTION-001",
+        "PACK-AUDIO-VERIFICATION-001"
       ],
       "evidence": [
         "state/evidence/GATE-2026-10-15/clean-clone-head-ci.txt",

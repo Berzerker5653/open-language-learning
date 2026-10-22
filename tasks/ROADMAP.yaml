@@ -739,6 +739,23 @@ tasks:
   - "Pack version bumped and locally installed for owner verification; publishing stays gated by O-05."
   required_for_desktop_1_0: false
 
+- id: PACK-AUDIO-VERIFICATION-001
+  milestone: M6
+  priority: P1
+  title: "Language-agnostic verification that every baked pack voice line says its text correctly (owner directive 2026-10-21)"
+  dependencies:
+  - TTS-003
+  read_first:
+  - docs/05_SPEECH_SYSTEM.md
+  - state/evidence/OWNER-SESSION-2026-10-20/SESSION-PACKET.md
+  - scripts/qa-asr.py
+  acceptance:
+  - "Three machine gates run over every baked asset of every shipping pack: word-level ASR round-trip (scripts/qa-asr.py), ML-free acoustic-structure gate for onset bursts, internal gaps, trailing noise, clipping and syllable-nucleus count (scripts/qa-segments.py), and phoneme-level comparison against expected phones (scripts/qa-pron.py with scripts/qa_pron_g2p.py)."
+  - "The gates are language-agnostic by construction: expected phones and expected nuclei derive from the pack's own text through per-language mapping modules, and an unmapped language ABSTAINS explicitly instead of passing."
+  - "Every FAIL is repaired through the ASR-gated bake-repair loop until all gates are clean, or carries an explicit recorded owner disposition."
+  - "Regression fixtures for each known defect class (onset burst with internal gaps, epenthetic vowel, inserted segment) are kept and every gate run against them is recorded; the audit record lands in pack provenance and the pack authoring contract documents the verification step."
+  required_for_desktop_1_0: true
+
 - id: TTS-004
   milestone: M6
   priority: P1
@@ -1540,6 +1557,7 @@ tasks:
   - RESTORE-ATOMIC-001
   - PLAYBACK-LIFECYCLE-001
   - MIC-TRACK-LIFECYCLE-001
+  - PACK-AUDIO-VERIFICATION-001
   # The A2 authoring card is listed directly here because the release-edge detours through
   # their band review cards were removed 2026-10-17 (owner ruling, ADR-0034): those review cards gate
   # the band-completeness claim, not the release path, so REL-001 itself carries the required-card

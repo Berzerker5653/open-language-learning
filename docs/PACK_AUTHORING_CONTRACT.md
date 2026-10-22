@@ -172,6 +172,37 @@ Generated `.wav` bytes are gitignored; only `media/manifest.jsonl` is
 committed. `scripts/build-catalog.sh` regenerates the audio before
 `langpack build`, so the release path always bakes first.
 
+### Verifying the audio (PACK-AUDIO-VERIFICATION-001)
+
+Baked audio is certified by three machine gates before a pack is ever
+offered for release (owner directive 2026-10-21: voice lines must be
+machine-checked for accuracy, for any and all languages):
+
+```sh
+ASR_MODEL=<whisper ggml> WHISPER=<whisper-cli> bash scripts/qa-audit.sh languages/<pack> <asr-lang>
+```
+
+1. `scripts/qa-asr.py` — whisper round-trip: the clip must transcribe back
+   to the declared text (word content).
+2. `scripts/qa-segments.py` — ML-free structure: onset bursts, internal
+   silences > 0.8 s, clipping, trailing noise (never content).
+3. `scripts/qa-pron.py` — phoneme-level: phones recognized by the offline
+   XLSR-espeak model must match phones derived from the pack text. A new
+   language is a new mapping module (`scripts/qa_pron_g2p.py`): expected
+   phones and mora/vowel counts derive from the pack's own text, and an
+   unmapped language ABSTAINS explicitly — a gate never silently passes a
+   language it cannot read.
+
+Every FAIL re-enters `scripts/bake-repair-loop.sh` (all three gates wired
+in; default `ALL_GATES=1`) until clean or owner-dispositioned. The audit
+JSONL + repair record land under `state/evidence/PACK-AUDIO-VERIFICATION-001/`
+and are cited in the pack's provenance at publish time. The phoneme
+model weights are NOT shipped in the app or the pack — they are a
+development-time check only (the model is upstream CC-BY-NC; internal
+verification use, zero distribution). What no gate certifies: naturalness
+— the human listening pass remains the final word (see the READMEs for
+each gate's documented blind spots).
+
 ### CI vs the release path
 
 CI restores the published pack archives and then runs install-mode `test`,

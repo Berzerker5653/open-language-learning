@@ -31,7 +31,23 @@ while [ -s "$IDS" ] && [ "$ROUND" -lt "$MAXR" ]; do
   WCODE=${WHISPER_LANG:-$LANG}
   $VENV "$QA" --pack "$PACK" --model "$ASR_MODEL" --lang "$WCODE" \
     --workers 6 --ids "$IDS" --out "qa-r$ROUND.jsonl" $WFLAG > "qa-r$ROUND.log" 2>&1
-  grep ^FAIL "qa-r$ROUND.log" | sed -E 's/^FAIL ([^ ]+).*/\1/' | sort > "$WORKDIR/next"
+  grep ^FAIL "qa-r$ROUND.log" | sed -E 's/^FAIL ([^ ]+).*/\1/' > "$WORKDIR/f_asr"
+  : > "$WORKDIR/f_other"
+  if [ "${ALL_GATES:-1}" = 1 ] && [ -f scripts/qa-segments.py ]; then
+    # PACK-AUDIO-VERIFICATION-001: structure + phoneme gates join the ASR
+    # failures; their flags re-enter the same re-synthesis round.
+    $VENV scripts/qa-segments.py --pack "$PACK" --ids-file "$IDS" \
+        --out "qs-r$ROUND.jsonl" >> "qa-r$ROUND.log" 2>&1 || true
+    HF_HUB_OFFLINE=1 $VENV scripts/qa-pron.py --pack "$PACK" --ids-file "$IDS" \
+        --out "qp-r$ROUND.jsonl" >> "qa-r$ROUND.log" 2>&1 || true
+    for f in "qs-r$ROUND.jsonl" "qp-r$ROUND.jsonl"; do
+      [ -f "$f" ] && $VENV -c 'import json,sys
+for l in open(sys.argv[1]):
+    r=json.loads(l)
+    if r.get("verdict")=="FLAG": print(r["id"])' "$f" >> "$WORKDIR/f_other"
+    done
+  fi
+  sort -u "$WORKDIR/f_asr" "$WORKDIR/f_other" > "$WORKDIR/next"
   cp "$WORKDIR/next" "$IDS"
   echo "round $ROUND result: $(grep ^checked= qa-r$ROUND.log)"
 done
