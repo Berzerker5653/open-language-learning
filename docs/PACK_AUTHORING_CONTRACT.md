@@ -186,15 +186,19 @@ ASR_MODEL=<whisper ggml> WHISPER=<whisper-cli> bash scripts/qa-audit.sh language
    to the declared text (word content).
 2. `scripts/qa-segments.py` — ML-free structure: onset bursts, internal
    silences > 0.8 s, clipping, trailing noise (never content).
-3. `scripts/qa-pron.py` — phoneme-level: phones recognized by the offline
-   XLSR-espeak model must match phones derived from the pack text. A new
-   language is a new mapping module (`scripts/qa_pron_g2p.py`): expected
-   phones and mora/vowel counts derive from the pack's own text, and an
-   unmapped language ABSTAINS explicitly — a gate never silently passes a
-   language it cannot read.
+3. `scripts/qa-pron.py` — phoneme-level RECORD layer: recognized phones,
+   edit distance and a CTC alignment posterior are logged per clip for
+   human review and future re-calibration. It does not auto-flag:
+   calibration (2026-10-21) found no threshold separating known-bad from
+   certified-good clips with this recognizer — the README documents both
+   failed experiments. A new language is still a new mapping module
+   (`scripts/qa_pron_g2p.py`): expected phones derive from the pack's own
+   text, and an unmapped language ABSTAINS explicitly — the layer never
+   silently passes a language it cannot read.
 
-Every FAIL re-enters `scripts/bake-repair-loop.sh` (all three gates wired
-in; default `ALL_GATES=1`) until clean or owner-dispositioned. The audit
+Every certify-layer FAIL re-enters `scripts/bake-repair-loop.sh` (all
+layers run per round; default `ALL_GATES=1`) until clean or
+owner-dispositioned. The audit
 JSONL + repair record land under `state/evidence/PACK-AUDIO-VERIFICATION-001/`
 and are cited in the pack's provenance at publish time. The phoneme
 model weights are NOT shipped in the app or the pack — they are a

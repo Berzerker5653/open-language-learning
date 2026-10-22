@@ -750,10 +750,11 @@ tasks:
   - state/evidence/OWNER-SESSION-2026-10-20/SESSION-PACKET.md
   - scripts/qa-asr.py
   acceptance:
-  - "Three machine gates run over every baked asset of every shipping pack: word-level ASR round-trip (scripts/qa-asr.py), ML-free acoustic-structure gate for onset bursts, internal gaps, trailing noise, clipping and syllable-nucleus count (scripts/qa-segments.py), and phoneme-level comparison against expected phones (scripts/qa-pron.py with scripts/qa_pron_g2p.py)."
+  - "Three machine layers run over every baked asset of every shipping pack: two certify (word-level ASR round-trip scripts/qa-asr.py; ML-free acoustic-structure gate scripts/qa-segments.py for onset bursts, internal gaps, trailing noise, clipping) and one records (phoneme transcript + edit-distance + CTC alignment posterior, scripts/qa-pron.py with scripts/qa_pron_g2p.py - record-only because calibration on the fixtures found no separating threshold; README documents both experiments)."
   - "The gates are language-agnostic by construction: expected phones and expected nuclei derive from the pack's own text through per-language mapping modules, and an unmapped language ABSTAINS explicitly instead of passing."
-  - "Every FAIL is repaired through the ASR-gated bake-repair loop until all gates are clean, or carries an explicit recorded owner disposition."
-  - "Regression fixtures for each known defect class (onset burst with internal gaps, epenthetic vowel, inserted segment) are kept and every gate run against them is recorded; the audit record lands in pack provenance and the pack authoring contract documents the verification step."
+  - "Every certify-layer FAIL is repaired through the ASR-gated bake-repair loop until clean, or carries an explicit recorded owner disposition."
+  - "Regression fixtures for each known defect class (onset burst with internal gaps, epenthetic vowel, inserted segment) are kept and every layer run against them is recorded; the audit record lands in pack provenance and the pack authoring contract documents the verification step."
+  - "The residual defect class that machine layers demonstrably miss (sub-100 ms epenthetic vowels, inserted segments that whisper absorbs) is covered by a systematic owner listening pass with mandatory re-listen of every flagged or repaired clip."
   required_for_desktop_1_0: true
 
 - id: TTS-004

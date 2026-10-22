@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Phoneme-level pronunciation gate for baked pack audio (PACK-AUDIO-VERIFICATION).
+"""Phoneme-level record layer for baked pack audio (PACK-AUDIO-VERIFICATION).
 
 Recognizes phones in each clip with the offline CPU model
 ``facebook/wav2vec2-xlsr-53-espeak-cv-ft`` (wav2vec2-XLSR-53 fine-tuned for
@@ -7,12 +7,17 @@ espeak-IPA phone recognition; 1.2 GB, cached under ~/.cache/huggingface) and
 compares them to the phones derived from the manifest ``text`` by
 ``scripts/qa_pron_g2p.py``. Unknown language -> abstain (never silent pass).
 
+RECORD-ONLY by default: calibration (2026-10-21, README) showed neither the
+edit-distance rule nor the CTC alignment posterior separates owner-flagged
+defective takes from certified-good clips on these packs, so this layer
+writes measurements (phones, diff ops, dist_ratio, align_score) and does
+NOT flag. It is a human-review lead and a re-calibration substrate.
+
 Run with the qwen-tts venv (it carries torch/transformers):
   ~/.venvs/qwen-tts/bin/python scripts/qa-pron.py --pack languages/ru-RU \
       --ids-file ids.txt --out qa-pron.jsonl
-Exit 0 when no clip FLAGS, 1 otherwise. Per-clip JSONL: id, verdict,
-phones_expected, phones_recognized, ins/del/sub counts, distance ratio.
-Calibration and limits: scripts/qa-pron.README.md.
+Exit 0 unless --flag-ratio opt-in flags something. Full calibration
+numbers and limits: scripts/qa-pron.README.md.
 """
 from __future__ import annotations
 
@@ -82,10 +87,13 @@ def load_vocab(model_id: str) -> dict[int, str]:
 class Recognizer:
     def __init__(self, model_id: str = MODEL):
         self.i2t = load_vocab(model_id)
+        self.t2i = {t: i for i, t in self.i2t.items()}
         self.model = Wav2Vec2ForCTC.from_pretrained(model_id)
         self.model.eval()
 
-    def phones(self, path: Path) -> list[str]:
+
+    def forward(self, path: Path):
+        """Return (greedy CTC phone tokens, frame log-prob matrix)."""
         with wave.open(str(path)) as w:
             sr = w.getframerate()
             x = np.frombuffer(w.readframes(w.getnframes()),
@@ -96,7 +104,8 @@ class Recognizer:
             x = x.astype(np.float32)
         with torch.no_grad():
             logits = self.model(torch.from_numpy(x).unsqueeze(0)).logits[0]
-        ids = logits.argmax(-1).tolist()
+        lp = torch.log_softmax(logits, dim=-1).numpy()
+        ids = lp.argmax(-1).tolist()
         # proper CTC greedy: skip blanks, then collapse consecutive repeats
         blank = self.i2t.get(0, "|")
         out: list[str] = []
@@ -109,7 +118,36 @@ class Recognizer:
             if t != prev:
                 out.append(t)
             prev = t
-        return out
+        return out, lp
+
+    def align_score(self, lp, toks: list[str]):
+        """Best-path CTC log-probability of emitting `toks`, per frame.
+        -inf when a token is outside the model vocabulary."""
+        ids = [self.t2i.get(t) for t in toks]
+        if any(i is None for i in ids):
+            return None
+        L = len(ids)
+        if L == 0:
+            return None
+        states = 2 * L + 1
+        neg = -1e9
+        dp = [neg] * states
+        dp[0] = 0.0
+        dp[1] = float(lp[0][ids[0]])
+        for t in range(1, lp.shape[0]):
+            nd = list(dp)
+            row = lp[t]
+            for s in range(states):
+                best = dp[s]
+                if s > 0:
+                    best = max(best, dp[s - 1])
+                if s > 1 and s % 2 == 1 and ids[(s - 1) // 2] != ids[(s - 3) // 2]:
+                    best = max(best, dp[s - 2])
+                if best <= neg:
+                    continue
+                nd[s] = best + (float(row[ids[(s - 1) // 2]]) if s % 2 == 1 else 0.0)
+            dp = nd
+        return round(max(dp[states - 1], dp[states - 2]) / lp.shape[0], 4)
 
 
 def diff_stats(exp: list[str], rec: list[str]) -> dict:
@@ -141,17 +179,10 @@ def main() -> int:
     ap.add_argument("--out", type=Path, default=Path("qa-pron.jsonl"))
     ap.add_argument("--model", default=MODEL)
     ap.add_argument("--flag-ratio", type=float, default=None,
-                    help="FLAG when dist_ratio exceeds this (default per-lang)")
-    ap.add_argument("--max-reps", type=int, default=0,
-                    help="also FLAG when total repeat-collapse trims exceed N")
+                    help="opt-in experiment: FLAG when dist_ratio exceeds N. "
+                    "No calibrated value exists - this layer is RECORD-ONLY "
+                    "by default (README: calibration found no separation).")
     args = ap.parse_args()
-
-    # Per-language thresholds calibrated on the fixture/good sets (see
-    # README): ru margin good<=0.33 vs bad>=0.44; ja no bad fixtures exist,
-    # set to good-max + 0.05 until a fixture appears.
-    flag_ratio = args.flag_ratio
-    if flag_ratio is None:
-        flag_ratio = {"ru": 0.40, "ja": 0.45}
 
     manifest = args.pack / "media" / "manifest.jsonl"
     texts: dict[str, str] = {}
@@ -182,23 +213,22 @@ def main() -> int:
             row.update({"verdict": "ABSTAIN", "why": f"no G2P for lang={lang}"})
             n_abstain += 1
         else:
-            rp = rec.phones(args.pack / "media" / f"{cid}.wav")
+            rp, lp = rec.forward(args.pack / "media" / f"{cid}.wav")
             e, r_ = normalize(exp), normalize(rp)
             st = diff_stats(e, r_)
-            thr = flag_ratio.get(lang, 0.45)
+            score = rec.align_score(lp, e)
             ins_vowels = sum(
                 1 for op in st["ops"] if op.startswith("+")
                 and any(is_vowel(t) for t in op[1:].split()))
-            verdict = "FLAG" if st["dist_ratio"] > thr else "PASS"
-            row.update({"verdict": verdict,
-                        "expected": e, "recognized": r_, **{k2: v for k2, v in st.items() if k2 != "ops"},
-                        "ops": st["ops"], "threshold": thr, "ins_vowels": ins_vowels,
+            verdict = ("FLAG" if args.flag_ratio is not None
+                       and st["dist_ratio"] > args.flag_ratio else "PASS")
+            row.update({"verdict": verdict, "align_score": score,
+                        "expected": e, "recognized": r_,
+                        **{k2: v for k2, v in st.items() if k2 != "ops"},
+                        "ops": st["ops"], "ins_vowels": ins_vowels,
                         "text": text})
             if verdict == "FLAG":
                 n_flag += 1
-                print(f"[qa-pron] FLAG {cid}: ratio={st['dist_ratio']} "
-                      f"ins={st['ins']} del={st['del']} sub={st['sub']} ops={st['ops']}",
-                      file=sys.stderr)
         out_f.write(json.dumps(row, ensure_ascii=False) + "\n")
         if k % 200 == 0:
             print(f"[qa-pron] {k}/{len(ids)} {time.time()-t0:.0f}s "
