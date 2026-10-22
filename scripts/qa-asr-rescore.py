@@ -36,11 +36,21 @@ STAGE = re.compile(r"\*[^*]*\*|\([^)]*\)|（[^）]*）")
 RU_STAGE = re.compile(r"\b(смех|вздыхает|хихикает|шум|аплодисменты|музыка)\b")
 LAUGH = re.compile(r"(?:[хф][ауыэ][-. ]*){2,}|(?:[hw]a[-. ]*){2,}|ふ[ふヴー]*(?:[ ]ふ[ふヴー]*)+|は[はぁー]*(?:[ ]は[はぁー]*)+|えへ|ふふ")
 SUSTAIN = re.compile(r"([a-zа-яё])\1{5,}")
+import subprocess
+from functools import lru_cache
+@lru_cache(maxsize=65536)
+def _ipa_word(w):
+    p = subprocess.run(["espeak-ng", "-v", "ru", "--ipa", "-q", w],
+                       capture_output=True, text=True)
+    ipa = p.stdout.strip() or w
+    return re.sub(r"[ˈˌ'\"]", "", ipa)
+
 
 def clean_ru(s):
     s = s.lower().replace("ё", "е")
     s = "".join(c for c in s if c != "\u0301")
-    return re.sub(r"\s+", " ", re.sub(r"[^а-яa-z0-9]", " ", s)).strip()
+    s = re.sub(r"\s+", " ", re.sub(r"[^а-яa-z0-9]", " ", s)).strip()
+    return " ".join(_ipa_word(w) if re.fullmatch(r"[а-я0-9]+", w) else w for w in s.split())
 
 def rescore(row, pack):
     text, heard = row.get("text", ""), row.get("heard", "")

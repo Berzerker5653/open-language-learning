@@ -50,6 +50,31 @@ LAUGH = re.compile(r"(?:[хф][ауыэ][-. ]*){2,}|(?:[hw]a[-. ]*){2,}|ふ[ふ�
 SUSTAIN = re.compile(r"([a-zа-яё])\1{5,}")
 
 
+from functools import lru_cache
+
+
+@lru_cache(maxsize=65536)
+def _ipa_word(w: str) -> str:
+    p = subprocess.run(["espeak-ng", "-v", "ru", "--ipa", "-q", w],
+                       capture_output=True, text=True)
+    ipa = p.stdout.strip()
+    return re.sub(r"[ˈˌ'\"]", "", ipa) if ipa else w
+
+
+def ru_phon(s: str) -> str:
+    # Russian orthography != sound: род is SAID [рот], чек is SAID [чик]-ish.
+    # Comparing whisper's phonetic spelling against pack orthography flags
+    # correct clips. Fold both sides through espeak-ng's Russian G2P to IPA
+    # so the gate checks SOUND, not spelling (same principle as kana() for
+    # Japanese). Stress marks are stripped from the compare: whisper's
+    # spelling is not a reliable stress channel, so prosody stays the
+    # phoneme/record layer's and the owner's job, not this gate's.
+    return " ".join(
+        _ipa_word(w) if re.fullmatch(r"[а-я0-9]+", w) else w
+        for w in s.split()
+    )
+
+
 def norm(s: str, ja: bool = False) -> str:
     # Cyrillic-aware: strip everything that is not a letter/digit, casefold.
     # For ja, also fold kanji to kana and drop spaces (word segmentation in
@@ -59,7 +84,9 @@ def norm(s: str, ja: bool = False) -> str:
     if ja:
         s = kana(s)
     out = re.sub(r"\s+", " ", re.sub(r"[^\w\d]+", " ", s.lower())).strip()
-    return out.replace(" ", "") if ja else out
+    if ja:
+        return out.replace(" ", "")
+    return ru_phon("".join(c for c in out if c != "\u0301"))
 
 
 def check(pack: Path, model: str, lang: str, whisper: str, row: dict) -> dict:
