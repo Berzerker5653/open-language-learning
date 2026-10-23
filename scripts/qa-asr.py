@@ -45,7 +45,11 @@ def kana(s: str) -> str:
 # Gate v2 (2026-10-21 full-corpus audit): whisper writes hallucinated audio
 # (sighs, laughter, drawn-out vowels) as stage directions or syllable runs.
 STAGE = re.compile(r"\*[^*]*\*|\([^)]*\)|（[^）]*）")
-RU_STAGE = re.compile(r"\b(смех|вздыхает|хихикает|шум|аплодисменты|музыка)\b")
+# whisper renders hallucinated stage directions bracketed ("(смех)",
+# "[музыка]"); the bare words are legitimate content — a clip literally
+# saying "Это шум." failed here. The laughter/sustain character-run
+# gates still catch unbracketed vocalization runs.
+RU_STAGE = re.compile(r"[(\[]\s*(смех|вздыхает|хихикает|шум|аплодисменты|музыка)[)\]]")
 LAUGH = re.compile(r"(?:[хф][ауыэ][-. ]*){2,}|(?:[hw]a[-. ]*){2,}|ふ[ふヴー]*(?:[ ]ふ[ふヴー]*)+|は[はぁー]*(?:[ ]は[はぁー]*)+|えへ|ふふ")
 SUSTAIN = re.compile(r"([a-zа-яё])\1{5,}")
 

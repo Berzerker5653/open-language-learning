@@ -33,7 +33,7 @@ def fold_ja(s):
     return re.sub(r"[^a-z]", "", out)
 
 STAGE = re.compile(r"\*[^*]*\*|\([^)]*\)|（[^）]*）")
-RU_STAGE = re.compile(r"\b(смех|вздыхает|хихикает|шум|аплодисменты|музыка)\b")
+RU_STAGE = re.compile(r"[(\[]\s*(смех|вздыхает|хихикает|шум|аплодисменты|музыка)[)\]]")
 LAUGH = re.compile(r"(?:[хф][ауыэ][-. ]*){2,}|(?:[hw]a[-. ]*){2,}|ふ[ふヴー]*(?:[ ]ふ[ふヴー]*)+|は[はぁー]*(?:[ ]は[はぁー]*)+|えへ|ふふ")
 SUSTAIN = re.compile(r"([a-zа-яё])\1{5,}")
 import subprocess
@@ -91,7 +91,7 @@ def rescore(row, pack):
     stage = STAGE.findall(heard)
     stripped = STAGE.sub(" ", heard)
     reasons = []
-    if stage or RU_STAGE.search(stripped):
+    if stage or RU_STAGE.search(heard):
         reasons.append("hallucination-marker")
     if LAUGH.search(stripped) or SUSTAIN.search(stripped.lower()):
         reasons.append("vocalization-run")
