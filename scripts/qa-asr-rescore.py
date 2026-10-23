@@ -52,6 +52,38 @@ def clean_ru(s):
     s = re.sub(r"\s+", " ", re.sub(r"[^а-яa-z0-9]", " ", s)).strip()
     return " ".join(_ipa_word(w) if re.fullmatch(r"[а-я0-9]+", w) else w for w in s.split())
 
+def _hira(s):
+    import pykakasi
+    return "".join(x["hira"] for x in pykakasi.kakasi().convert(s))
+
+_JL = None
+def _ja_lexicon():
+    global _JL
+    if _JL is None:
+        _JL = {}
+        data = json.loads(open("/home/hunter/game-dev/LTS/tmp/jmdict/jmdict-eng-3.6.2.json", encoding="utf-8").read())
+        for e in data["words"]:
+            for k in e.get("kanji", []):
+                s = _JL.setdefault(k["text"], set())
+                for kn in e.get("kana", []):
+                    s.add(kn["text"])
+    return _JL
+
+def ja_rescue(heard, expected):
+    expected = expected.strip()
+    if not heard or not expected or re.search(r"\s", expected):
+        return False
+    spans = re.findall(r"[々〇\u4e00-\u9fff][\u3040-\u30ff々〇\u4e00-\u9fff]*", heard)
+    if not spans:
+        return False
+    want = _hira(expected)
+    for span in spans:
+        for reading in _ja_lexicon().get(span, ()):
+            if _hira(reading) == want:
+                return True
+    return False
+
+
 def rescore(row, pack):
     text, heard = row.get("text", ""), row.get("heard", "")
     if not heard:
@@ -72,6 +104,9 @@ def rescore(row, pack):
     row["ratio2"] = round(ratio, 3)
     row["reasons"] = reasons
     ok = ratio >= 0.75 and not reasons
+    if pack == "ja-JP" and not ok and not reasons and ja_rescue(heard, text):
+        ok = True
+        row["rescued"] = "jmdict"
     row["status2"] = "ok" if ok else "MISMATCH"
     if row["status"] in ("timeout", "wav-missing"):
         row["status2"] = row["status"]

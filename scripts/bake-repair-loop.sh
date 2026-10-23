@@ -38,8 +38,15 @@ while [ -s "$IDS" ] && [ "$ROUND" -lt "$MAXR" ]; do
     # failures; their flags re-enter the same re-synthesis round.
     $VENV scripts/qa-segments.py --pack "$PACK" --ids-file "$IDS" \
         --out "qs-r$ROUND.jsonl" >> "qa-r$ROUND.log" 2>&1 || true
-    HF_HUB_OFFLINE=1 $VENV scripts/qa-pron.py --pack "$PACK" --ids-file "$IDS" \
+    # qa-pron needs torch/numpy — $VENV (the QA venv) usually lacks them,
+    # so the record layer rides QP_VENV (qwen-tts interpreter). If neither
+    # can import numpy the step is SKIPPED LOUDLY: it is record-only, but
+    # the "all gates per round" claim in this header must stay true.
+    QP=${QP_VENV:-$HOME/.venvs/qwen-tts/bin/python}
+    $QP -c 'import numpy' >/dev/null 2>&1 && \
+      HF_HUB_OFFLINE=1 $QP scripts/qa-pron.py --pack "$PACK" --ids-file "$IDS" \
         --out "qp-r$ROUND.jsonl" >> "qa-r$ROUND.log" 2>&1 || true
+    [ -f "qp-r$ROUND.jsonl" ] || echo "WARN: qa-pron record layer skipped (no numpy under $QP)" >> "qa-r$ROUND.log"
     for f in "qs-r$ROUND.jsonl" "qp-r$ROUND.jsonl"; do
       [ -f "$f" ] && $VENV -c 'import json,sys
 for l in open(sys.argv[1]):

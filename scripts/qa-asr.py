@@ -89,6 +89,64 @@ def norm(s: str, ja: bool = False) -> str:
     return ru_phon("".join(c for c in out if c != "\u0301"))
 
 
+_JA_LEX = None
+
+def _ja_lexicon():
+    # JMDict full-form -> kana readings, for the homograph rescue below.
+    global _JA_LEX
+    if _JA_LEX is None:
+        _JA_LEX = {}
+        path = Path(__file__).resolve().parent.parent / "tmp/jmdict/jmdict-eng-3.6.2.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        for e in data["words"]:
+            for k in e.get("kanji", []):
+                s = _JA_LEX.setdefault(k["text"], set())
+                for kn in e.get("kana", []):
+                    s.add(kn["text"])
+    return _JA_LEX
+
+
+def ja_rescue(heard: str, expected: str) -> bool:
+    # kakasi can misread a kanji homograph (止める -> yameru, while the clip
+    # says とめる): the fold ratio then fails a CORRECT clip. For single-word
+    # assets, if a kanji span in whisper's transcript is a JMDict headword
+    # with the expected kana among its readings, the clip demonstrably said
+    # the declared word — pass, recorded as a dictionary reading check.
+    expected = expected.strip()
+    if not heard or not expected or re.search(r"\s", expected):
+        return False
+    spans = re.findall(r"[々〇\u4e00-\u9fff][\u3040-\u30ff々〇\u4e00-\u9fff]*", heard)
+    if not spans:
+        return False
+    want = kana(expected)
+    lex = _ja_lexicon()
+    for span in spans:
+        for reading in lex.get(span, ()):
+            if kana(reading) == want:
+                return True
+    return False
+
+
+def verdict(text: str, heard: str, lang: str):
+    """Gate v3 decision for one transcript pair: returns
+    (ok, ratio, reasons, rescued). Shared with bake-bestof.py."""
+    reasons = []
+    if STAGE.search(heard) or RU_STAGE.search(heard):
+        reasons.append("hallucination-marker")
+    stripped = STAGE.sub(" ", heard)
+    if LAUGH.search(stripped) or SUSTAIN.search(stripped.lower()):
+        reasons.append("vocalization-run")
+    ja = lang == "ja"
+    a, b = norm(text, ja), norm(stripped, ja)
+    ratio = difflib.SequenceMatcher(None, a, b).ratio()
+    ok = (a == b or ratio >= 0.75) and not reasons
+    rescued = False
+    if ja and not ok and not reasons and ja_rescue(heard, text):
+        ok = True
+        rescued = True
+    return ok, ratio, reasons, rescued
+
+
 def check(pack: Path, model: str, lang: str, whisper: str, row: dict) -> dict:
     wav = pack / row["file"]
     if not wav.exists():
@@ -104,26 +162,15 @@ def check(pack: Path, model: str, lang: str, whisper: str, row: dict) -> dict:
     except subprocess.TimeoutExpired:
         return {"id": row["id"], "status": "timeout", "text": row["text"]}
     heard = p.stdout.strip()
-    # Gate v2 (2026-10-21 full audit): whisper stage directions like
-    # *вздыхает* / (笑) mean the audio carries hallucinated non-word
-    # vocalizations (sighs, laughter): strip them for the ratio, but the
-    # clip still fails. Laughter and sustained-vowel runs fail outright.
-    reasons = []
-    if STAGE.search(heard) or RU_STAGE.search(heard):
-        reasons.append("hallucination-marker")
-    stripped = STAGE.sub(" ", heard)
-    if LAUGH.search(stripped) or SUSTAIN.search(stripped.lower()):
-        reasons.append("vocalization-run")
-    ja = lang == "ja"
-    a, b = norm(row["text"], ja), norm(stripped, ja)
-    ratio = difflib.SequenceMatcher(None, a, b).ratio()
-    # No substring rule: the 2026-10-11 probe showed real babble clips pass
-    # it ("Мы с датата делаете…" for мы). An asset must round-trip whole.
-    ok = (a == b or ratio >= 0.75) and not reasons
+    # Gate v3 (see verdict(): v2 stage/vocalization rules + ru phonemic
+    # fold + ja JMDict reading rescue).
+    ok, ratio, reasons, rescued = verdict(row["text"], heard, lang)
     res = {"id": row["id"], "status": "ok" if ok else "MISMATCH",
            "ratio": round(ratio, 2), "text": row["text"], "heard": heard}
     if reasons:
         res["reasons"] = reasons
+    if rescued:
+        res["rescued"] = "jmdict"
     return res
 
 
