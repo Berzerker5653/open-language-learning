@@ -15,6 +15,14 @@ rewritten in place (sha/bytes/seconds + a notes record "best-of-K: take t
 of K passed"); losers are discarded; the old wav is kept until a winner
 exists.
 
+Each settled asset is appended to --out and fsynced as it settles, and
+each winner's manifest row is persisted immediately (sibling tmp file +
+os.replace) instead of only at the end, so a killed run keeps everything
+already banked. --skip-done resumes from an existing --out: ids whose
+existing record result starts with "pass@" are skipped (their media and
+manifest row are already in place) and their records are carried into
+the final output.
+
 Usage:
   scripts/bake-bestof.py --pack languages/ru-RU --ids residual.txt --k 8 \
       --language russian --speaker ono_anna \
@@ -33,6 +41,7 @@ import datetime
 import hashlib
 import importlib.util
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -126,6 +135,8 @@ def main() -> int:
                     default=Path.home() / ".cache/lts-bench/tts/qwen3-tts-customvoice-1.7b")
     ap.add_argument("--jobs", type=int, default=4)
     ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--skip-done", action="store_true",
+                    help="resume: skip ids with a pass@ record in an existing --out")
     args = ap.parse_args()
 
     ids = [l.strip() for l in args.ids.read_text().splitlines() if l.strip()]
@@ -147,6 +158,30 @@ def main() -> int:
     tmpdir.mkdir(exist_ok=True)
     results_lock = threading.Lock()
     results = {}
+    todo = ids
+    if args.skip_done and args.out.exists():
+        wanted = set(ids)
+        for l in args.out.read_text().splitlines():
+            if not l.strip():
+                continue
+            rec = json.loads(l)
+            if rec.get("id") in wanted and rec.get("result", "").startswith("pass@"):
+                results[rec["id"]] = rec
+        todo = [i for i in ids if i not in results]
+        print(f"bestof: carrying {len(results)} pass@ records from {args.out}", file=sys.stderr)
+    else:
+        args.out.write_text("")
+
+    out_lock = threading.Lock()
+    manifest_lock = threading.Lock()
+
+    def persist_manifest():
+        tmp = manifest_path.parent / (manifest_path.name + ".tmp")
+        with manifest_lock:
+            with open(tmp, "w", encoding="utf-8") as f:
+                for asset_id in order:
+                    f.write(json.dumps(rows[asset_id], ensure_ascii=False) + "\n")
+            os.replace(tmp, manifest_path)
 
     def work(asset_id: str):
         sess = TtsSession(args.worker_python, args.tts_model, args.language, args.speaker)
@@ -184,18 +219,20 @@ def main() -> int:
         with results_lock:
             results[asset_id] = record
             done = len(results)
+        with out_lock:
+            with open(args.out, "a", encoding="utf-8") as f:
+                f.write(json.dumps(record, ensure_ascii=False) + "\n")
+                f.flush()
+                os.fsync(f.fileno())
+        if record["result"].startswith("pass@"):
+            persist_manifest()
         if done % 10 == 0:
             print(f"bestof: {done}/{len(ids)} assets settled", file=sys.stderr)
 
     with cf.ThreadPoolExecutor(max_workers=args.jobs) as ex:
-        list(ex.map(work, ids))
+        list(ex.map(work, todo))
 
-    # manifest rewritten whole (ordered) only if any winner
     winners = [i for i, r in results.items() if r["result"].startswith("pass@")]
-    if winners:
-        with open(manifest_path, "w", encoding="utf-8") as f:
-            for asset_id in order:
-                f.write(json.dumps(rows[asset_id], ensure_ascii=False) + "\n")
 
     with open(args.out, "w", encoding="utf-8") as f:
         for asset_id in ids:
