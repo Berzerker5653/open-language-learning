@@ -1,0 +1,20 @@
+[Unit]
+Description=LTS pack-audio best-of-K campaign chain (Omarchy)
+Documentation=file:///home/aih/LTS/campaign-chain.sh
+After=network-online.target
+
+[Service]
+Type=simple
+# lower CPU priority than the desktop: the box stays usable while it bakes
+Nice=5
+ExecStart=/usr/bin/sh /home/aih/LTS/campaign-chain.sh
+WorkingDirectory=/home/aih/LTS
+StandardOutput=append:/home/aih/LTS/campaign-chain.log
+StandardError=append:/home/aih/LTS/campaign-chain.log
+# bake-bestof.py exits 1 when ids end exhausted, which is expected; the
+# chain script owns its own progress-based retry loop, so no Restart= here
+Restart=no
+TimeoutStartSec=infinity
+
+[Install]
+WantedBy=default.target

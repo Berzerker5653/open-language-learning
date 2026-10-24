@@ -1,8 +1,11 @@
-# Resume check — audio campaign on Omarchy (rewritten 2026-10-23 17:10, after the box reboot)
+# Resume check — audio campaign on Omarchy (rewritten 2026-10-23 18:15, after the box reboot)
 
-Campaign compute runs entirely on Omarchy under `nohup` (survives this chat
-being shut down; it does **not** survive a reboot). GamingPC hosts the git
-repo + manifests; nothing heavy runs there.
+All campaign compute runs on Omarchy (owner needs GamingPC free). Since
+2026-10-23 18:09 the work is driven by `~/LTS/campaign-chain.sh` under the
+**systemd user unit `lts-campaign.service`** — it survives logout *and* a
+reboot (`Linger=yes` is set on that account), and resumes from the
+checkpoint instead of starting over. GamingPC hosts the git repo +
+manifests; nothing heavy runs there.
 
 ## What the 2026-10-23 reboot cost
 
@@ -17,39 +20,66 @@ repo + manifests; nothing heavy runs there.
   had it either. Ignore that line.
 * Zero harvest from that run: `bake-bestof.py` wrote `--out` and the
   manifest rows only after *all* 417 ids settled. Fixed the same day —
-  see "checkpointing" below.
+  every phase now checkpoints per settled asset and starts with
+  `--skip-done`, which is what makes the chain resumable.
 
-## Live now (measured 17:03–17:10)
+## Live now (state verified 18:09–18:14)
 
-* ru best-of-K restarted on Omarchy: pid `18573`,
-  `--ids bestof-ids-ru2.txt` (417 ids), K=8, jobs=4,
-  `--out ~/LTS/bestof-ru.jsonl`, log `~/LTS/bestof-ru.log`, crashed log
-  preserved as `~/LTS/bestof-ru.log.crashed-espeak`. Exact restart command
-  is stored in **`~/LTS/bestof-ru.command`**.
+* `campaign-chain.sh` runs the whole remaining campaign in order, each
+  phase resuming from its checkpoint jsonl with `--skip-done`:
+  1. **ru** best-of-K: `bestof-ids-ru2.txt` (417 ids), K=8, jobs=4 →
+     `bestof-ru.jsonl` / `bestof-ru.log`;
+  2. writes `bestof-ru-exhausted.txt` (the ids that used all K takes —
+     input for RU-RUNDOWN section D);
+  3. **ja** best-of-K: `bestof-ids-ja2.txt` (1,066 ids, verified on the
+     box: 0 ids missing from the ja manifest), K=6, jobs=4 →
+     `bestof-ja.jsonl` / `bestof-ja.log`.
+  A `flock` on `~/LTS/campaign.lock` keeps it single-instance (proved: a
+  manual second invocation logged "another campaign-chain instance holds
+  the lock; exiting"). Phases are gated on *distinct settled ids*, never
+  on the exit code — `bake-bestof.py` exits 1 when ids end exhausted,
+  which is the expected outcome, and a phase that makes no progress at
+  all stops rather than looping.
+* Resume proved on the real data: the old `nohup` ru run was stopped at
+  26 settled assets, the unit started, and the log printed
+  `bestof: carrying 12 pass@ records from bestof-ru.jsonl` — the 12
+  banked winners were not re-baked. Everything now runs inside the unit's
+  cgroup (`systemctl --user stop lts-campaign.service` kills the whole
+  TTS/whisper tree; `disable --now` also stops it surviving boot).
 * espeak-ng **1.52.0** rebuilt from source into `~/.local` (no root); its
   `espeak-ng -v ru --ipa -q` output is byte-identical to GamingPC's
-  `/usr/bin/espeak-ng` 1.52.0 on the six probe words (`шум`,
-  `аплодисменты`, `брать`, `лук`, `мука`, `Это шум.`).
-* Progress (measured 16:54:45 launch → 17:06:08, 11.4 min): 3 assets
-  settled — 2 `pass@3`, 1 `exhausted@8` — → **≈16 assets/h, ~26 h** for
-  the 417 at jobs=4. Each asset pays ~90 s of qwen3-tts model load (a
-  fresh worker per asset) plus up to K bake+grade cycles; memory holds at
-  ~49 GB of 62 GB with 4 workers, so jobs=8 is not available. Re-check:
-
-  ```
-  ssh omarchy 'wc -l ~/LTS/bestof-ru.jsonl; grep -ac "assets settled" ~/LTS/bestof-ru.log; ps -o etimes=,pid= -C python | head'
-  ```
-
-* checkpointing (the fix, `scripts/bake-bestof.py`): each settled asset is
-  appended to `--out` and fsynced, and each winner's manifest row is
-  persisted immediately (sibling tmp + `os.replace`). `--skip-done`
-  resumes a run: ids with a `pass@` record in an existing `--out` are
-  skipped, their media + manifest row are already in place. So after any
-  future reboot: `cat ~/LTS/bestof-ru.command`, add `--skip-done`, relaunch.
+  1.52.0 on the six probe words (`шум`, `аплодисменты`, `брать`, `лук`,
+  `мука`, `Это шум.`). pykakasi 2.3.0 is present in the qwen venv, so the
+  ja gate's kana folding runs under the same interpreter.
+* Measured rate: 25 assets settled in 73.5 min ≈ **20 assets/h**
+  (mean 6.0 takes/asset). So ru ≈ **20 h** total, ja (1,066 ids) ≈
+  **2.5 days** — call it ~3 days of continuous compute, and jobs=8 is not
+  an option: 4 workers already sit at ~31-49 GB of the 62 GB box.
+* **Exhausted share is high**: 14 of the first 26 settled ru ids used all
+  8 takes (`exhausted@8`) and only 12 passed. If that holds, ~220 of the
+  417 ru clips need owner disposition (remove = remove the content item),
+  not re-baking. Worth deciding before the ja phase spends 2.5 days on
+  the same wall.
 * ru drift check on Omarchy: all **4,856** ru wavs match their manifest
-  `sha256` (0 mismatch, 0 missing). The Omarchy ru manifest is now *ahead*
-  of GamingPC (winners land there first) — harvest it back, never overwrite
-  it from GamingPC.
+  `sha256` (0 mismatch, 0 missing) after the incremental writes. The
+  Omarchy ru manifest is *ahead* of GamingPC (winners land there first) —
+  harvest it back, never overwrite it from GamingPC.
+* Inspect:
+
+  ```
+  ssh omarchy 'systemctl --user status lts-campaign.service --no-pager | head -6; tail -5 ~/LTS/campaign-chain.log'
+  ssh omarchy 'cd ~/LTS; grep -aoE "\"result\": \"[a-z@0-9]+\"" bestof-ru.jsonl | sort | uniq -c'
+  ```
+
+  Deployed from copies kept in this directory (sha-identical to the box:
+  `campaign-chain.sh` → `~/LTS/`, `lts-campaign.service` →
+  `~/.config/systemd/user/`):
+  `systemctl --user daemon-reload && systemctl --user enable --now lts-campaign.service`.
+  Stop = `systemctl --user disable --now lts-campaign.service`. Rerun by
+  hand = `sh ~/LTS/campaign-chain.sh` (the flock refuses a second
+  instance). No cron/cronie on that box, so the user unit plus
+  `Linger=yes` (already set) is the only no-root boot path — which turns
+  the next reboot from "campaign over" into "resumed inside a minute".
 
 ## Harvested and folded (done 2026-10-23)
 
@@ -77,19 +107,22 @@ repo + manifests; nothing heavy runs there.
    manifest rows BACK Omarchy→GamingPC, then byte-resync the drifted
    manifest rows here (sha-scan snippet in commit `6d22be4` message
    context). Manifests are only ever edited on GamingPC.
-2. ja: run `scripts/bake-bestof.py` on Omarchy over
-   `bestof-ids-ja2.txt` (1,066 ids) — media/manifest parity is already
-   established above:
-   `--pack languages/ja-JP --k 4-6 --language japanese --lang ja
+2. ja best-of-K is **already queued as phase 3 of the chain** (K=6,
+   `--skip-done`, media/manifest parity established above), so nothing to
+   launch — just confirm `campaign-chain.log` shows the `ja:` line after
+   ru finishes. Reference command, if it ever has to be run by hand:
+   `PATH=$HOME/.local/bin:$PATH ~/.venvs/qwen-tts/bin/python
+   scripts/bake-bestof.py --pack languages/ja-JP --ids bestof-ids-ja2.txt
+   --k 6 --language japanese --lang ja
    --asr-model ~/models/ggml-large-v3-turbo.bin
    --whisper ~/whisper.cpp/build/bin/whisper-cli --jobs 4
-   --ids bestof-ids-ja2.txt --out ~/LTS/bestof-ja.jsonl`, with
-   `PATH=$HOME/.local/bin:$PATH` (espeak-ng for the gate's G2P fold).
-   Run it **after** the ru run exits — 8 concurrent 1.7 B fp32 TTS
-   processes want ~66 GB and the box has 62. Harvest winners + manifest
-   rows back after it fully exits.
+   --out ~/LTS/bestof-ja.jsonl --skip-done`. Never run ru and ja at once:
+   8 concurrent 1.7 B fp32 TTS workers want ~66 GB and the box has 62.
+   Harvest winners + manifest rows back only after a phase fully exits.
 3. Exhausted ids → RU-RUNDOWN section D (id, text, K attempts, per-take
-   heard) for owner disposition.
+   heard) for owner disposition. The chain already writes the id list to
+   `~/LTS/bestof-ru-exhausted.txt`; the per-take detail is in
+   `bestof-ru.jsonl`.
 4. `langpack test` both packs 0/0 → rebuild 0.4.3 lpks → re-stage
    `~/staging/0.4.3/{ru-RU,ja-JP}/media/` + store → packet §3 table →
    AUDIT doc → kanban row 15 → commit all + push.
