@@ -23,7 +23,7 @@ manifests; nothing heavy runs there.
   every phase now checkpoints per settled asset and starts with
   `--skip-done`, which is what makes the chain resumable.
 
-## Live now (state verified 18:09–18:14)
+## Live now (state verified 18:09–20:20; ru 89/417 distinct settled)
 
 * `campaign-chain.sh` runs the whole remaining campaign in order, each
   phase resuming from its checkpoint jsonl with `--skip-done`:
@@ -51,15 +51,19 @@ manifests; nothing heavy runs there.
   1.52.0 on the six probe words (`шум`, `аплодисменты`, `брать`, `лук`,
   `мука`, `Это шум.`). pykakasi 2.3.0 is present in the qwen venv, so the
   ja gate's kana folding runs under the same interpreter.
-* Measured rate: 25 assets settled in 73.5 min ≈ **20 assets/h**
-  (mean 6.0 takes/asset). So ru ≈ **20 h** total, ja (1,066 ids) ≈
-  **2.5 days** — call it ~3 days of continuous compute, and jobs=8 is not
-  an option: 4 workers already sit at ~31-49 GB of the 62 GB box.
-* **Exhausted share is high**: 14 of the first 26 settled ru ids used all
-  8 takes (`exhausted@8`) and only 12 passed. If that holds, ~220 of the
-  417 ru clips need owner disposition (remove = remove the content item),
-  not re-baking. Worth deciding before the ja phase spends 2.5 days on
-  the same wall.
+* Sustained rate (unit start 18:09:10 → 20:20, 131 min): 77 settled
+  records ≈ **35 assets/h**, mean 4.6 takes. So ru ≈ **10 h more**
+  (finish ~06:30 on 10-24) and ja (1,066 ids) ≈ **30 h** — **~1.7 days**
+  of compute, not the 3 days the first 11-minute sample suggested (that
+  window was model-load ramp-up plus unlucky draws). jobs=8 is still out:
+  4 workers peak at ~31-49 GB of the 62 GB box.
+* Exhausted share, corrected on 89 distinct ru ids: **24 exhausted@8
+  (27%)** and **65 passed** (29 of them at take 1). That projects ~110 of
+  the 417 needing owner disposition (remove = remove the content item),
+  not the ~220 the first 26 implied. Checkpoint line count runs ahead of
+  distinct ids (103 lines / 89 ids) because a resume re-bakes ids that
+  ended exhausted — fresh K samples can still pass, that is what
+  `--skip-done` deliberately does *not* carry over.
 * ru drift check on Omarchy: all **4,856** ru wavs match their manifest
   `sha256` (0 mismatch, 0 missing) after the incremental writes. The
   Omarchy ru manifest is *ahead* of GamingPC (winners land there first) —
