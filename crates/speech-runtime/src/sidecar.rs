@@ -489,27 +489,54 @@ pub fn wait_with_deadline(
     }
 }
 
+/// Upper bound on bytes collected from one sidecar pipe. A whisper JSON
+/// transcript for the largest accepted attempt (~10 MiB of audio) is a
+/// few tens of KiB; past this cap the child is broken or hostile, so
+/// each read stops after `MAX_SIDECAR_OUTPUT_BYTES + 1` bytes — the
+/// extra byte makes an overrun truncates the caller's JSON parse into
+/// a visible parse failure rather than a silent partial result.
+pub const MAX_SIDECAR_OUTPUT_BYTES: usize = 4 * 1024 * 1024;
+
+/// Drain one pipe on its own thread, bounded. The thread ends at EOF,
+/// which the kill inside `wait_with_deadline` guarantees even when the
+/// child must be stopped.
+fn spawn_drain<R: std::io::Read + Send + 'static>(mut pipe: R) -> std::thread::JoinHandle<Vec<u8>> {
+    std::thread::spawn(move || {
+        use std::io::Read;
+        let mut buf = Vec::new();
+        let limit = (MAX_SIDECAR_OUTPUT_BYTES + 1) as u64;
+        let _ = (&mut pipe).take(limit).read_to_end(&mut buf);
+        buf.truncate(MAX_SIDECAR_OUTPUT_BYTES);
+        buf
+    })
+}
+
 /// `wait_with_deadline` for children with piped stdout/stderr: collects
 /// the `Output` when the child finishes inside the deadline. Takes the
 /// child by value because reading the pipes consumes them.
+///
+/// Sweep finding 13 (2026-10-26): the pipes are drained CONCURRENTLY
+/// with the wait, not after it. An OS pipe buffer is ~64 KiB, so a
+/// child that writes more blocks on its next `write` and never exits —
+/// a drain-after-exit design kills that chatty-but-healthy child and
+/// misclassifies it as `sidecar-timeout`. Draining while waiting lets
+/// it finish; the cap keeps a hostile child from pinning unbounded RAM.
 pub fn output_with_deadline(
     mut child: std::process::Child,
     deadline: Duration,
 ) -> std::io::Result<Option<std::process::Output>> {
+    let stdout = child.stdout.take().map(spawn_drain);
+    let stderr = child.stderr.take().map(spawn_drain);
     let status = match wait_with_deadline(&mut child, deadline)? {
         Some(status) => status,
         None => return Ok(None),
     };
-    // The child has exited: the pipes are at EOF, so draining them here
-    // cannot block (sidecar stdout is a transcript, not a stream).
-    let mut stdout = Vec::new();
-    let mut stderr = Vec::new();
-    if let Some(mut out) = child.stdout.take() {
-        std::io::Read::read_to_end(&mut out, &mut stdout)?;
-    }
-    if let Some(mut err) = child.stderr.take() {
-        std::io::Read::read_to_end(&mut err, &mut stderr)?;
-    }
+    let join = |h: std::thread::JoinHandle<Vec<u8>>| {
+        h.join()
+            .map_err(|_| std::io::Error::other("sidecar pipe drain panicked"))
+    };
+    let stdout = stdout.map(join).transpose()?.unwrap_or_default();
+    let stderr = stderr.map(join).transpose()?.unwrap_or_default();
     Ok(Some(std::process::Output {
         status,
         stdout,

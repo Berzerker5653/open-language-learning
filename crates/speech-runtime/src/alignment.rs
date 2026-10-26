@@ -237,10 +237,20 @@ pub fn match_units(
             toks.dedup();
             let start_ms = toks.iter().map(|t| tokens[*t].from_ms).min().unwrap();
             let end_ms = toks.iter().map(|t| tokens[*t].to_ms).max().unwrap();
+            // Sweep finding 14 (2026-10-26): the millisecond offsets are
+            // child JSON, untrusted. `ms * rate / 1000` could overflow
+            // the u64 before the `as usize` cast even met `max_sample`
+            // — on release builds that wrapped to an arbitrary sample
+            // inside the buffer. Saturate first, then clamp.
+            let to_sample = |ms: u64| -> usize {
+                ms.saturating_mul(sample_rate_hz as u64)
+                    .saturating_div(1000)
+                    .min(max_sample as u64) as usize
+            };
             spans.push(AlignmentSpan {
                 unit_id: unit.clone(),
-                start_sample: ((start_ms * sample_rate_hz as u64 / 1000) as usize).min(max_sample),
-                end_sample: ((end_ms * sample_rate_hz as u64 / 1000) as usize).min(max_sample),
+                start_sample: to_sample(start_ms),
+                end_sample: to_sample(end_ms),
                 confidence: Some(conf),
             });
         }

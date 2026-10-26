@@ -210,3 +210,27 @@ fn wedged_sidecar_abstains_with_sidecar_timeout() {
         other => panic!("expected Abstained, got {other:?}"),
     }
 }
+
+#[test]
+fn garbage_offsets_from_the_child_clamp_into_the_buffer() {
+    // sweep finding 14 (2026-10-26): millisecond offsets arrive from
+    // sidecar JSON and are untrusted. The old span math multiplied
+    // `ms * rate` BEFORE clamping, so a garbage `u64::MAX` offset
+    // overflowed the u64 (debug panic / release wraps to an arbitrary
+    // sample). Saturating math plus the clamp keeps every span inside
+    // the buffer while the matched phrase still aligns.
+    let tokens = vec![WordToken {
+        text: " ねこ".into(),
+        from_ms: u64::MAX,
+        to_ms: u64::MAX,
+    }];
+    let a = match_units(&tokens, &units(&["ねこ"]), 48_000, 0.6, 1_000)
+        .value()
+        .expect("the phrase matches; only the offsets are garbage");
+    assert_eq!(a.spans.len(), 1);
+    assert!(
+        a.spans[0].start_sample <= 1_000 && a.spans[0].end_sample <= 1_000,
+        "span escaped the buffer: {:?}",
+        a.spans[0]
+    );
+}

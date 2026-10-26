@@ -384,3 +384,52 @@ fn lowered_priority_children_run_at_nice_10() {
         "the sidecar spawn hook must leave the child at nice +10"
     );
 }
+
+/// sweep finding 13 (2026-10-26): a child whose stdout exceeds the OS
+/// pipe buffer must not be killed at the deadline and misread as a
+/// timeout. Draining the pipes concurrently with the wait lets it
+/// finish; the byte cap keeps a hostile child from pinning unbounded
+/// memory instead.
+#[cfg(unix)]
+#[test]
+fn a_chatty_child_finishes_instead_of_being_misread_as_timed_out() {
+    let tmp = TempDir::new().unwrap();
+    let script = tmp.path().join("chatty");
+    let mut f = std::fs::File::create(&script).unwrap();
+    // 128 KiB: twice the Linux pipe buffer, far below the 4 MiB cap.
+    f.write_all(b"#!/bin/sh\nhead -c 131072 /dev/zero\n")
+        .unwrap();
+    drop(f);
+    std::fs::set_permissions(&script, std::os::unix::fs::PermissionsExt::from_mode(0o755)).unwrap();
+    let child = std::process::Command::new(&script)
+        .stdout(std::process::Stdio::piped())
+        .stderr(std::process::Stdio::piped())
+        .spawn()
+        .unwrap();
+    let out = sidecar::output_with_deadline(child, std::time::Duration::from_secs(5))
+        .unwrap()
+        .expect("a child that only writes a lot must finish, not hit the deadline");
+    assert!(out.status.success());
+    assert_eq!(out.stdout.len(), 131_072);
+
+    // Past the cap the read stops buffering; the caller's parse then
+    // fails on the truncated bytes rather than trusting a partial body.
+    let script = tmp.path().join("flood");
+    let mut f = std::fs::File::create(&script).unwrap();
+    f.write_all(b"#!/bin/sh\nhead -c 6291456 /dev/zero\n")
+        .unwrap();
+    drop(f);
+    std::fs::set_permissions(&script, std::os::unix::fs::PermissionsExt::from_mode(0o755)).unwrap();
+    let child = std::process::Command::new(&script)
+        .stdout(std::process::Stdio::piped())
+        .stderr(std::process::Stdio::piped())
+        .spawn()
+        .unwrap();
+    let out = sidecar::output_with_deadline(child, std::time::Duration::from_secs(10))
+        .unwrap()
+        .expect("the capped read must not hang");
+    // Past the cap the reader stops and closes, so the writer dies on
+    // EPIPE — bounded memory is the contract here, not the child's
+    // exit status (the truncated bytes make the caller's parse fail).
+    assert_eq!(out.stdout.len(), sidecar::MAX_SIDECAR_OUTPUT_BYTES);
+}

@@ -4988,7 +4988,13 @@ fn dictation_check_at(data: &Path, attempt: DictationAttempt) -> Result<Dictatio
         Err(r) if r == lts_speech_runtime::sidecar::SIDECAR_TIMEOUT_REASON => {
             return Ok(abstain(r, String::new()));
         }
-        Err(e) => return Err(e),
+        // Sweep finding 12 (2026-10-26): every other recognizer fault —
+        // spawn/wait failure, nonzero exit, or a sidecar JSON the parser
+        // rejects (whose serde message would otherwise cross IPC
+        // verbatim into learner copy) — abstains with the same
+        // fault-honest token the pronunciation surface already maps.
+        // The fault is ours, never a verdict about the learner.
+        Err(_) => return Ok(abstain("engine-error".into(), String::new())),
     };
     let heard: String = tokens
         .iter()
@@ -10652,6 +10658,61 @@ activities:
         .unwrap();
         assert_eq!(res.matched, None);
         assert_eq!(res.abstain_reason.as_deref(), Some("quality:silence"));
+    }
+
+    /// sweep finding 12 (2026-10-26): recognizer faults — a child that
+    /// exits nonzero, or one whose JSON the parser rejects — used to
+    /// cross IPC as raw `Err(String)` (serde text verbatim) into
+    /// learner copy. Every engine fault now abstains with the mapped
+    /// token the frontend already renders; only the learner's own bad
+    /// input still returns Err.
+    #[cfg(unix)]
+    #[test]
+    fn dictation_abstains_fault_honestly_when_the_recognizer_breaks() {
+        use base64::Engine;
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        crate::models::save_speech_pref(
+            data,
+            &crate::models::SpeechPref {
+                asr_model: "org.openlanguage.speech.whisper-ggml-tiny".into(),
+            },
+        )
+        .unwrap();
+        let vendor = data.join("vendor");
+        let bin = vendor.join("whisper.cpp/build/bin");
+        std::fs::create_dir_all(&bin).unwrap();
+        std::fs::write(vendor.join("ggml-tiny.bin"), b"model").unwrap();
+        unsafe { std::env::set_var("LTS_BENCH_VENDOR", &vendor) };
+        // Voiced input clears the quality gate, so the fault arm — not
+        // silence — is what answers.
+        let audio = lts_speech_runtime::to_wav16(&lts_speech_api::AudioBuffer {
+            samples: (0..16_000).map(|i| (i as f32 * 0.2).sin() * 0.6).collect(),
+            sample_rate_hz: 16_000,
+        });
+        let attempt = || DictationAttempt {
+            pack_id: "org.openlanguage.ja-demo".into(),
+            target_text: "おばあさん".into(),
+            wav_b64: base64::engine::general_purpose::STANDARD.encode(&audio),
+        };
+        let script = bin.join("whisper-cli");
+        std::fs::write(&script, "#!/bin/sh\nexit 3\n").unwrap();
+        std::fs::set_permissions(&script, std::os::unix::fs::PermissionsExt::from_mode(0o755))
+            .unwrap();
+        // (a) nonzero exit: Err before the fix, honest abstention now.
+        let res = dictation_check_at(data, attempt())
+            .expect("an engine fault must not surface as an IPC error");
+        assert_eq!(res.abstain_reason.as_deref(), Some("engine-error"));
+        assert_eq!(res.matched, None);
+        // (b) "successful" child with garbage JSON: the serde message
+        // never reaches the learner either.
+        std::fs::write(&script, "#!/bin/sh\nprintf 'not json' > \"$9.json\"\n").unwrap();
+        let res = dictation_check_at(data, attempt())
+            .expect("a sidecar parse fault must not surface as an IPC error");
+        assert_eq!(res.abstain_reason.as_deref(), Some("engine-error"));
+        assert_eq!(res.matched, None);
+        unsafe { std::env::remove_var("LTS_BENCH_VENDOR") };
     }
 
     #[test]
