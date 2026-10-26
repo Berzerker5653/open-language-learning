@@ -1491,10 +1491,81 @@ impl RefCollector<'_> {
     }
 }
 
+/// serde_yaml 0.9 has no recursion limit: pack-supplied flow nesting
+/// (`[[[[…`) overflows the parser stack, and a stack overflow cannot be
+/// caught. A cheap pre-scan refuses such documents as ordinary parse
+/// errors (`parse_error` diagnostics) before the parser ever sees them.
+/// Legitimate packs nest a handful of levels deep, nowhere near this
+/// cap — which matches the depth serde_json itself refuses.
+const MAX_YAML_FLOW_DEPTH: usize = 128;
+
+/// Count `[`/`{` nesting across the document while tracking quoted
+/// states (double quotes with `\` escapes, single quotes with `''`
+/// escapes) and `#` comments, so quoted or commented brackets do not
+/// count. The scan is deliberately heuristic: it only has to refuse
+/// input no real pack contains, so a mis-tracked quote can at worst
+/// reject a document that adversarial input would have crashed anyway.
+fn yaml_flow_too_deep(text: &str) -> bool {
+    let mut depth: usize = 0;
+    let mut quote: Option<char> = None;
+    let mut escaped = false;
+    let mut prev: Option<char> = None;
+    let mut chars = text.chars().peekable();
+    while let Some(c) = chars.next() {
+        match quote {
+            Some('"') => {
+                if escaped {
+                    escaped = false;
+                } else if c == '\\' {
+                    escaped = true;
+                } else if c == '"' {
+                    quote = None;
+                }
+            }
+            Some('\'') => {
+                if c == '\'' {
+                    if chars.peek() == Some(&'\'') {
+                        chars.next();
+                    } else {
+                        quote = None;
+                    }
+                }
+            }
+            None => {
+                if c == '#' && prev.is_none_or(|p| p == ' ' || p == '\t' || p == '\n') {
+                    // A comment runs to end of line: its brackets and
+                    // quotes carry no structure.
+                    while chars.peek().is_some_and(|&n| n != '\n') {
+                        chars.next();
+                    }
+                } else if c == '"' || c == '\'' {
+                    quote = Some(c);
+                } else if c == '[' || c == '{' {
+                    depth += 1;
+                    if depth > MAX_YAML_FLOW_DEPTH {
+                        return true;
+                    }
+                } else if c == ']' || c == '}' {
+                    depth = depth.saturating_sub(1);
+                }
+            }
+            _ => unreachable!("quote only ever holds a quote character"),
+        }
+        prev = Some(c);
+    }
+    false
+}
+
 fn parse_document(rel: &str, text: &str) -> Result<Value, String> {
     if rel.ends_with(".json") {
         serde_json::from_str(text).map_err(|e| e.to_string())
     } else {
+        if yaml_flow_too_deep(text) {
+            return Err(format!(
+                "YAML flow nesting exceeds {MAX_YAML_FLOW_DEPTH} levels; refused because \
+                 serde_yaml 0.9 has no recursion limit and deeper input crashes the parser"
+            ));
+        }
         let yaml: serde_yaml::Value = serde_yaml::from_str(text).map_err(|e| e.to_string())?;
         serde_json::to_value(&yaml)
             .map_err(|e| format!("non-JSON-compatible YAML mapping keys: {e}"))

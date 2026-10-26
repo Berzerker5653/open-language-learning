@@ -451,3 +451,177 @@ fn inspect_and_read_entry_reject_decompressed_bombs() {
         "{msg}"
     );
 }
+
+/// An archive with a consistent `MANIFEST.json` and arbitrary raw
+/// entries (name, payload) — how an entry-count bomb that no hand-
+/// written manifest could express is built.
+fn raw_archive(manifest: &archive::ArchiveManifest, entries: &[(&str, &[u8])]) -> Vec<u8> {
+    let mut zip = zip::ZipWriter::new(Cursor::new(Vec::new()));
+    let opts = zip::write::SimpleFileOptions::default();
+    zip.start_file(archive::MANIFEST_ENTRY, opts).unwrap();
+    zip.write_all(&serde_json::to_vec(manifest).unwrap())
+        .unwrap();
+    for (name, body) in entries {
+        zip.start_file(name, opts).unwrap();
+        zip.write_all(body).unwrap();
+    }
+    zip.finish().unwrap().into_inner()
+}
+
+fn evil_manifest(files: Vec<archive::FileEntry>, pack_id: &str) -> archive::ArchiveManifest {
+    archive::ArchiveManifest {
+        format: archive::FORMAT.into(),
+        pack_id: pack_id.into(),
+        version: "0.1.0".into(),
+        schema_version: "0.2".into(),
+        files,
+    }
+}
+
+/// sweep-pack-trust: the byte caps bound size, not entry COUNT. A
+/// manifest declaring more rows than `MAX_FILES` is refused before any
+/// extraction.
+#[test]
+fn install_rejects_manifest_over_the_entry_cap() {
+    let store = tempfile::tempdir().unwrap();
+    let files = (0..=archive::MAX_FILES)
+        .map(|i| archive::FileEntry {
+            path: format!("media/f{i}.bin"),
+            sha256: "0".repeat(64),
+            size: 1,
+        })
+        .collect();
+    let bytes = raw_archive(
+        &evil_manifest(files, "org.openlanguage.manysmall"),
+        &[("media/f0.bin", b"x")],
+    );
+    let err = archive::install(&bytes, store.path()).unwrap_err();
+    let msg = err.to_string();
+    assert!(msg.contains("entry cap") && msg.contains("20000"), "{msg}");
+    assert!(
+        walk(store.path()).is_empty(),
+        "refused before extraction: {store:?}"
+    );
+}
+
+/// The zip-scan side of the cap: a `files` list exactly at the cap
+/// passes the manifest gate, so only the entry scan can catch an
+/// archive carrying one more zip entry than the manifest lists. The
+/// refusal must name the cap, not the unlisted entry the same scan
+/// would (one check later) otherwise report.
+#[test]
+fn install_rejects_zip_with_more_entries_than_the_cap() {
+    let store = tempfile::tempdir().unwrap();
+    let files = (0..archive::MAX_FILES)
+        .map(|i| archive::FileEntry {
+            path: format!("media/f{i}.bin"),
+            sha256: "0".repeat(64),
+            size: 1,
+        })
+        .collect();
+    let manifest = evil_manifest(files, "org.openlanguage.dupecount");
+    let mut entries: Vec<(String, Vec<u8>)> = (0..archive::MAX_FILES)
+        .map(|i| (format!("media/f{i}.bin"), vec![b'x']))
+        .collect();
+    entries.push(("media/extra.bin".to_string(), b"x".to_vec()));
+    let refs: Vec<(&str, &[u8])> = entries
+        .iter()
+        .map(|(n, b)| (n.as_str(), b.as_slice()))
+        .collect();
+    let bytes = raw_archive(&manifest, &refs);
+    let err = archive::install(&bytes, store.path()).unwrap_err();
+    let msg = err.to_string();
+    assert!(
+        msg.contains("entry cap") && msg.contains("20000") && !msg.contains("unlisted"),
+        "{msg}"
+    );
+    assert!(
+        walk(store.path()).is_empty(),
+        "refused before extraction: {store:?}"
+    );
+}
+
+/// sweep-pack-trust: a same-version reinstall must never delete the
+/// live version before the new bytes take its name. The swap goes
+/// through a unique `.old-<nonce>` sibling; after a successful
+/// reinstall `current` resolves to the new bytes and no aside
+/// directories linger.
+#[test]
+fn same_version_reinstall_swaps_without_ever_gapping_current() {
+    let store = tempfile::tempdir().unwrap();
+    let pack_dir = tempfile::tempdir().unwrap();
+    copy_pack(&fixture("valid-minimal"), pack_dir.path());
+    let (bytes, _) = archive::build(pack_dir.path()).unwrap();
+    archive::install(&bytes, store.path()).unwrap();
+
+    let manifest_path = pack_dir.path().join("manifest.yaml");
+    let text = fs::read_to_string(&manifest_path).unwrap();
+    fs::write(&manifest_path, format!("{text}\n# reinstall\n")).unwrap();
+    let (bytes2, _) = archive::build(pack_dir.path()).unwrap();
+    let out = archive::install(&bytes2, store.path()).unwrap();
+    assert_eq!(out.version, "0.1.0");
+    assert_eq!(
+        archive::current_version("org.openlanguage.test-minimal", store.path()).as_deref(),
+        Some("0.1.0")
+    );
+    let version_dir = store.path().join("org.openlanguage.test-minimal/0.1.0");
+    assert!(
+        fs::read_to_string(version_dir.join("manifest.yaml"))
+            .unwrap()
+            .contains("# reinstall"),
+        "the new bytes took the version's name"
+    );
+    let siblings: Vec<String> = fs::read_dir(store.path().join("org.openlanguage.test-minimal"))
+        .unwrap()
+        .map(|e| e.unwrap().file_name().to_string_lossy().into_owned())
+        .collect();
+    assert_eq!(siblings.len(), 2, "no `.old-` leftovers: {siblings:?}");
+}
+
+/// A failed rename mid-reinstall restores the previous directory and
+/// leaves `current` resolving to complete bytes — the crash window the
+/// old delete-then-rename turned into a destroyed installed pack.
+#[test]
+fn failed_reinstall_restores_the_previous_version() {
+    use std::os::unix::fs::PermissionsExt;
+    let store = tempfile::tempdir().unwrap();
+    let pack_dir = tempfile::tempdir().unwrap();
+    copy_pack(&fixture("valid-minimal"), pack_dir.path());
+    let (bytes, _) = archive::build(pack_dir.path()).unwrap();
+    archive::install(&bytes, store.path()).unwrap();
+    let pack_store_dir = store.path().join("org.openlanguage.test-minimal");
+    let version_dir = pack_store_dir.join("0.1.0");
+    let before = fs::read(version_dir.join("manifest.yaml")).unwrap();
+
+    let manifest_path = pack_dir.path().join("manifest.yaml");
+    let text = fs::read_to_string(&manifest_path).unwrap();
+    fs::write(&manifest_path, format!("{text}\n# reinstall\n")).unwrap();
+    let (bytes2, _) = archive::build(pack_dir.path()).unwrap();
+
+    // Make the move-aside rename fail: a read-only pack directory
+    // refuses renaming entries inside it (EACCES).
+    fs::set_permissions(&pack_store_dir, fs::Permissions::from_mode(0o555)).unwrap();
+    let result = archive::install(&bytes2, store.path());
+    fs::set_permissions(&pack_store_dir, fs::Permissions::from_mode(0o755)).unwrap();
+    let err = result.unwrap_err();
+    assert!(err.to_string().starts_with("io: "), "{err}");
+
+    assert_eq!(
+        archive::current_version("org.openlanguage.test-minimal", store.path()).as_deref(),
+        Some("0.1.0"),
+        "current still names the installed version"
+    );
+    assert_eq!(
+        fs::read(version_dir.join("manifest.yaml")).unwrap(),
+        before,
+        "the live version must be intact and complete"
+    );
+
+    // With the store writable again, the retry installs the new bytes.
+    archive::install(&bytes2, store.path()).unwrap();
+    assert!(
+        fs::read_to_string(version_dir.join("manifest.yaml"))
+            .unwrap()
+            .contains("# reinstall")
+    );
+}

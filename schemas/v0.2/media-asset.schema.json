@@ -8,7 +8,7 @@
   "required": ["id", "file", "sha256", "bytes", "sample_rate", "channels", "provenance"],
   "properties": {
     "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
-    "file": { "type": "string", "pattern": "^media/[A-Za-z0-9._/-]+$" },
+    "file": { "type": "string", "pattern": "^media/(?:(?:[A-Za-z0-9._-]*[A-Za-z0-9_-][A-Za-z0-9._-]*)/)*(?:[A-Za-z0-9._-]*[A-Za-z0-9_-][A-Za-z0-9._-]*)$" },
     "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
     "bytes": { "type": "integer", "minimum": 1 },
     "sample_rate": { "type": "integer", "minimum": 8000 },

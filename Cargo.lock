@@ -2499,6 +2499,7 @@ version = "0.1.0"
 dependencies = [
  "jsonschema",
  "lts-domain",
+ "lts-security",
  "semver",
  "serde",
  "serde_json",
@@ -2547,6 +2548,9 @@ dependencies = [
 [[package]]
 name = "lts-security"
 version = "0.1.0"
+dependencies = [
+ "sha2 0.11.0",
+]
 
 [[package]]
 name = "lts-speech-api"

@@ -4,17 +4,19 @@
 //! Archive format `lts-pack/1`: a zip with sorted entries, fixed
 //! timestamps, a `MANIFEST.json` (pack identity + per-file SHA-256), and
 //! the pack files verbatim. Install verifies every hash, rejects path
-//! traversal, symlink entries, oversized files and decompression bombs
+//! traversal, symlink entries,
+//! oversized files, more entries than [`MAX_FILES`] and decompression bombs
 //! (written bytes exceeding the declared size), enforces install-mode
 //! pack validation, and only then atomically swaps the store pointer.
 
 use crate::pack::{Mode, Pack};
+pub use lts_security::digests::hex_sha256;
+use lts_security::paths::safe_rel;
 use serde::{Deserialize, Serialize};
-use sha2::{Digest, Sha256};
 use std::collections::BTreeSet;
 use std::fs;
 use std::io::{Cursor, Read, Write};
-use std::path::{Component, Path, PathBuf};
+use std::path::{Path, PathBuf};
 
 pub const MANIFEST_ENTRY: &str = "MANIFEST.json";
 pub const FORMAT: &str = "lts-pack/1";
@@ -36,6 +38,13 @@ pub const MAX_TOTAL_BYTES: u64 = 1024 * 1024 * 1024;
 /// Extraction (`install`) keeps its own cap at each entry's declared
 /// size.
 pub const MAX_ENTRY_RAW_BYTES: u64 = 16 * 1024 * 1024;
+
+/// Cap on the number of pack entries an archive may carry (`MANIFEST.json`
+/// itself excluded). The byte caps alone do not bound entry COUNT: an
+/// archive of ~10^6 one-byte entries passes them while costing the
+/// reader a central-directory record and a manifest row each. Shipped
+/// packs have 5,864/5,788 members, so 20,000 is real headroom.
+pub const MAX_FILES: usize = 20_000;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct FileEntry {
@@ -65,12 +74,6 @@ pub enum ArchiveError {
     Validation(String),
     #[error("install cancelled")]
     Cancelled,
-}
-
-pub fn hex_sha256(bytes: &[u8]) -> String {
-    let mut h = Sha256::new();
-    h.update(bytes);
-    h.finalize().iter().map(|b| format!("{b:02x}")).collect()
 }
 
 /// Build a deterministic `lts-pack/1` archive from a pack directory.
@@ -208,6 +211,12 @@ pub fn inspect(bytes: &[u8]) -> Result<ArchiveManifest, ArchiveError> {
             am.format
         )));
     }
+    if am.files.len() > MAX_FILES {
+        return Err(ArchiveError::Invalid(format!(
+            "MANIFEST.json lists {} files, over the entry cap of {MAX_FILES}",
+            am.files.len()
+        )));
+    }
     Ok(am)
 }
 
@@ -215,25 +224,6 @@ pub fn inspect(bytes: &[u8]) -> Result<ArchiveManifest, ArchiveError> {
 pub fn read_entry(bytes: &[u8], name: &str) -> Result<Vec<u8>, ArchiveError> {
     let mut zip = zip::ZipArchive::new(Cursor::new(bytes))?;
     read_entry_bounded(zip.by_name(name)?, name)
-}
-
-/// Validate a zip entry name; None when unsafe (traversal, absolute,
-/// backslash, drive letter, empty or dot components).
-fn safe_rel(name: &str) -> Option<String> {
-    if name.is_empty() || name.contains('\\') || name.contains(':') || name.starts_with('/') {
-        return None;
-    }
-    let mut parts = Vec::new();
-    for c in Path::new(name).components() {
-        match c {
-            Component::Normal(p) => parts.push(p.to_string_lossy().into_owned()),
-            _ => return None,
-        }
-    }
-    if parts.is_empty() {
-        return None;
-    }
-    Some(parts.join("/"))
 }
 
 #[derive(Debug)]
@@ -257,6 +247,15 @@ pub fn install(bytes: &[u8], store: &Path) -> Result<InstallOutcome, ArchiveErro
 /// directory that is only renamed into place on success, so a cancelled
 /// install leaves no version directory and never moves the `current`
 /// pointer — the store is exactly what it was before the call.
+///
+/// Replacing an already-installed version is safe in the same way: the
+/// previous version directory is renamed OUT to a unique
+/// `<version>.old-<nonce>` sibling before the new bytes take its name;
+/// if the rename into place fails the old directory is renamed back
+/// (best effort) and the error returned; only after the swap succeeded
+/// is `current` written and the old sibling removed. At every instant
+/// `current` resolves to a complete version directory — the previous
+/// bytes or the new bytes, never a gap.
 pub fn install_with_cancel(
     bytes: &[u8],
     store: &Path,
@@ -288,10 +287,17 @@ pub fn install_with_cancel(
         }
     }
     let manifest_paths: BTreeSet<&str> = am.files.iter().map(|f| f.path.as_str()).collect();
+    let mut counted = 0usize;
     for i in 0..zip.len() {
         let name = zip.by_index(i)?.name()?.to_string();
         if name == MANIFEST_ENTRY {
             continue;
+        }
+        counted += 1;
+        if counted > MAX_FILES {
+            return Err(ArchiveError::Invalid(format!(
+                "archive carries more entries than the entry cap of {MAX_FILES}"
+            )));
         }
         if safe_rel(&name).is_none() {
             return Err(ArchiveError::Invalid(format!(
@@ -398,10 +404,22 @@ pub fn install_with_cancel(
         .filter(|s| !s.is_empty());
     let dest = pack_dir.join(&version);
     if dest.exists() {
-        fs::remove_dir_all(&dest)?;
+        // Same-version reinstall: move the live version aside first, so
+        // `current` never resolves to a missing or half-written
+        // directory (crash/ENOSPC between delete and swap used to
+        // destroy the installed pack).
+        let aside = aside_sibling(&dest);
+        fs::rename(&dest, &aside)?;
+        if let Err(e) = fs::rename(staging.path(), &dest) {
+            let _ = fs::rename(&aside, &dest);
+            return Err(e.into());
+        }
+        write_current(&current_file, &version)?;
+        let _ = fs::remove_dir_all(&aside);
+    } else {
+        fs::rename(staging.path(), &dest)?;
+        write_current(&current_file, &version)?;
     }
-    fs::rename(staging.keep(), &dest)?;
-    write_current(&current_file, &version)?;
     Ok(InstallOutcome {
         pack_id,
         version,
@@ -414,6 +432,32 @@ fn write_current(current_file: &Path, version: &str) -> std::io::Result<()> {
     let tmp = current_file.with_extension("current.tmp");
     fs::write(&tmp, format!("{version}\n"))?;
     fs::rename(&tmp, current_file)
+}
+
+/// A unique, not-yet-existing `<version>.old-<nonce>` sibling of a
+/// version directory, used to move the previous version aside during a
+/// same-version reinstall. The name never parses as a semver version,
+/// so `rollback` never offers an aside directory.
+fn aside_sibling(dest: &Path) -> PathBuf {
+    let name = dest
+        .file_name()
+        .map(|n| n.to_string_lossy().into_owned())
+        .unwrap_or_else(|| "version".to_string());
+    let nonce = format!(
+        "{}-{:09x}",
+        std::process::id(),
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.subsec_nanos())
+            .unwrap_or(0)
+    );
+    let mut candidate = dest.with_file_name(format!("{name}.old-{nonce}"));
+    let mut n = 0u32;
+    while candidate.exists() {
+        n += 1;
+        candidate = dest.with_file_name(format!("{name}.old-{nonce}-{n}"));
+    }
+    candidate
 }
 
 /// Point `current` at another installed version (highest other semver by

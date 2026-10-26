@@ -1,6 +1,7 @@
 //! Conformance fixtures for the 0.2 pack validator (PACK-001/002).
 
 use lts_langpack::{Mode, Pack, Severity};
+use std::fs;
 use std::path::PathBuf;
 
 fn fixture(name: &str) -> PathBuf {
@@ -944,4 +945,41 @@ fn shipped_packs_keep_the_declared_help_promise() {
             "{rel} must declare capabilities.scenario_help: true"
         );
     }
+}
+
+/// sweep-pack-trust: serde_yaml 0.9 has no recursion limit — `[[[[…`
+/// overflowed the parser's stack, uncatchable. The pre-scan turns it
+/// into an ordinary `parse_error` diagnostic; documents under the cap
+/// still reach the parser (no false refusal on deeply nested flow data).
+#[test]
+fn deep_yaml_flow_nesting_is_a_diagnostic_not_a_stack_overflow() {
+    let tmp = tempfile::tempdir().unwrap();
+    copy_dir(&fixture("valid-minimal"), tmp.path());
+    let deep = tmp.path().join("activities/scenarios/901-deep.yaml");
+    fs::create_dir_all(deep.parent().unwrap()).unwrap();
+
+    fs::write(&deep, format!("{}{}\n", "[".repeat(200), "]".repeat(200))).unwrap();
+    let pack = Pack::load_dir(tmp.path()).expect("loading a hostile document must not crash");
+    let diags = pack.validate(Mode::Scaffold, None);
+    let hits: Vec<&lts_langpack::Diagnostic> = diags
+        .iter()
+        .filter(|d| d.code == "parse_error" && d.file == "activities/scenarios/901-deep.yaml")
+        .collect();
+    assert_eq!(
+        hits.len(),
+        1,
+        "expected exactly one parse refusal: {diags:?}"
+    );
+    assert!(hits[0].message.contains("nesting"), "{:?}", hits[0]);
+
+    // Under the cap, the document still parses.
+    fs::write(&deep, format!("{}{}\n", "[".repeat(120), "]".repeat(120))).unwrap();
+    let pack = Pack::load_dir(tmp.path()).unwrap();
+    let diags = pack.validate(Mode::Scaffold, None);
+    assert!(
+        !diags
+            .iter()
+            .any(|d| d.code == "parse_error" && d.file == "activities/scenarios/901-deep.yaml"),
+        "nesting under the cap must reach the parser: {diags:?}"
+    );
 }

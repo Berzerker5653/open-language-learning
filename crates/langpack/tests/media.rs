@@ -718,3 +718,69 @@ fn non_synthesized_audio_is_never_judged_against_declared_readings() {
             .contains(&"media_text_not_declared_reading".to_string())
     );
 }
+
+/// sweep-pack-trust read oracle: the row's `file` value is untrusted
+/// input. A `media/../../outside-secret.txt` row must become the error
+/// `media_path_unsafe` BEFORE any filesystem access — the audit may not
+/// disclose the size or SHA-256 of any file outside `media/`, which is
+/// exactly what install surfaced verbatim for its first five errors.
+#[test]
+fn dot_segment_media_row_is_refused_before_any_read() {
+    let tmp = tempfile::tempdir().unwrap();
+    let pack_root = tmp.path().join("pack");
+    // Pack root = tmp/pack, so `media/../../outside-secret.txt` resolves
+    // to tmp/outside-secret.txt — outside both `media/` and the pack.
+    let secret = b"a secret the pack must never read";
+    let secret_sha = hex_sha256(secret);
+    fs::write(tmp.path().join("outside-secret.txt"), secret).unwrap();
+
+    let body = wav_bytes(b"hello");
+    let sha = hex_sha256(&body);
+    let len = body.len() as u64;
+    let pack = pack_with(
+        &pack_root,
+        &[
+            row("ja.demo.kite-0", "media/ja.demo.kite-0.wav", &sha, len),
+            row(
+                "ja.demo.evil-0",
+                "media/../../outside-secret.txt",
+                &secret_sha,
+                secret.len() as u64,
+            ),
+        ],
+        &[("ja.demo.kite-0.wav", body)],
+    );
+    let diags = pack.audit_media(true);
+    let errs = codes(&diags, Severity::Error);
+    assert!(errs.contains(&"media_path_unsafe".to_string()), "{diags:?}");
+    // Nothing read from disk for the evil row: no size/hash/missing
+    // diagnostics built from outside bytes.
+    assert!(
+        !errs.iter().any(|c| c == "media_size_mismatch"
+            || c == "media_hash_mismatch"
+            || c == "media_missing"),
+        "{diags:?}"
+    );
+    let size_text = format!("is {} bytes", secret.len());
+    for d in &diags {
+        assert!(
+            !d.message.contains(&secret_sha),
+            "disclosed the outside file's SHA-256: {d:?}"
+        );
+        assert!(
+            !d.message.contains(&size_text),
+            "disclosed the outside file's byte length: {d:?}"
+        );
+    }
+    // Defense in depth: the tightened schema pattern also refuses dot
+    // segments, so install-mode validation flags the row too.
+    let install = pack.validate(Mode::Install, None);
+    let schema_hits: Vec<_> = install
+        .iter()
+        .filter(|d| d.code == "schema" && d.path.ends_with("/file"))
+        .collect();
+    assert!(
+        !schema_hits.is_empty(),
+        "the schema pattern must refuse dot segments: {install:?}"
+    );
+}

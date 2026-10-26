@@ -799,6 +799,12 @@ impl Pack {
     /// asset would leave the app labelling audio from file presence — exactly
     /// what the manifest exists to prevent.
     ///
+    /// A row whose declared `file` fails the safe component walk
+    /// (`lts_security::paths::media_rel`) is the error `media_path_unsafe`
+    /// and is never touched on disk — the declared path is itself
+    /// untrusted input (sweep-pack-trust: a raw join made this audit a
+    /// read oracle for any readable file).
+    ///
     /// Posture is decided first, per pack: **unbuilt** (no declared asset
     /// present at all — a source checkout, where the `.wav` bytes are gitignored
     /// and regenerated) yields one aggregated `media_unbuilt` diagnostic instead
@@ -927,6 +933,24 @@ impl Pack {
                     continue;
                 }
             };
+            // Declared paths are pack data: validate the component walk
+            // BEFORE any filesystem access on the value. A raw join of a
+            // `media/../..` row turned this audit into a read oracle that
+            // disclosed the size and SHA-256 of any readable file.
+            if lts_security::paths::media_rel(&rel).is_none() {
+                diags.push(Diagnostic::new(
+                    &row.file,
+                    format!("{}/file", row.pointer),
+                    "media_path_unsafe",
+                    format!(
+                        "{rel:?} is not a safe path strictly under media/; the audit will \
+                         not touch the filesystem for a declared path that can leave the \
+                         pack root"
+                    ),
+                    Severity::Error,
+                ));
+                continue;
+            }
             if !listed.insert(rel.clone()) {
                 diags.push(Diagnostic::new(
                     &row.file,
@@ -1045,7 +1069,7 @@ impl Pack {
                 }
             }
             if let Some(declared) = row.value.get("sha256").and_then(Value::as_str) {
-                let got = crate::archive::hex_sha256(&bytes);
+                let got = lts_security::digests::hex_sha256(&bytes);
                 if !got.eq_ignore_ascii_case(declared) {
                     diags.push(Diagnostic::new(
                         &row.file,

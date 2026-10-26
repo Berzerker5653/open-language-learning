@@ -129,6 +129,12 @@ read-time fallback, no downloadable synthesizer, no silent-pack posture.
 `media_asset_missing` — an audio-addressable item with no manifest row — is
 the only audio block in the product.
 
+Declared `file` paths are data, not permission: a row must name a path
+strictly under `media/` (no `.`/`..` segments, no leading `/`), validated by
+the schema pattern and again before any filesystem use — an escaping row is
+rejected as `media_path_unsafe` and never touched (2026-10-26 hardening;
+the audit used to `fs::read` a declared `media/../../x` verbatim).
+
 `media/manifest.jsonl` states what audio the pack carries, and the manifest is
 the only thing the app reads audio provenance from — never file presence
 (ADR-0016). The coverage gate enumerates audio-addressable items exactly as
