@@ -122,7 +122,12 @@ impl FsrsSpike {
 
     fn interval(&self, s: f64) -> f64 {
         // I = 9 * S * (1/r - 1); at r = 0.9 this is exactly S days.
-        9.0 * s * (1.0 / self.request_ret - 1.0)
+        // Sweep finding 10 (2026-10-26): the fields are public, so
+        // `request_ret` cannot be validated at construction — clamp at
+        // use. r = 0 makes the interval infinite, which overflowed
+        // `due_at` (debug panic, release never-due); r <= 0 or NaN-ish
+        // extremes go the same way.
+        9.0 * s * (1.0 / self.request_ret.clamp(0.01, 0.99) - 1.0)
     }
 }
 
@@ -176,7 +181,10 @@ impl Scheduler for FsrsSpike {
         };
         ScheduleDecision {
             state,
-            due_at: now + (interval_days * DAY).round() as i64,
+            // The cast saturates and the add saturates, so even extreme
+            // finite parameters produce a finite due date, never a wrapped
+            // one in the past (sweep finding 10, 2026-10-26).
+            due_at: now.saturating_add((interval_days * DAY).round() as i64),
             retrievability: r,
             interval_days,
         }

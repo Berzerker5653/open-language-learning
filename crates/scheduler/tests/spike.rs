@@ -170,3 +170,28 @@ fn rfc3339(epoch: i64) -> String {
         secs % 60
     )
 }
+
+#[test]
+fn degenerate_request_ret_still_yields_a_finite_due_date() {
+    // Sweep finding 10 (2026-10-26): FsrsSpike's fields are public, so a
+    // caller can set request_ret: 0.0 (or worse). r = 0 made the interval
+    // infinite — the due-date arithmetic overflowed (debug panic, release
+    // never-due). The clamp at use plus saturating math must keep the
+    // decision finite and future.
+    for ret in [0.0, -1.0, 1.0, 2.0] {
+        let sched = FsrsSpike {
+            request_ret: ret,
+            ..FsrsSpike::default()
+        };
+        let d = sched.review(None, Rating::Good, t0());
+        assert!(
+            d.due_at > t0() && d.due_at < i64::MAX,
+            "request_ret {ret} produced due_at {}",
+            d.due_at
+        );
+        assert!(d.interval_days.is_finite(), "request_ret {ret} interval");
+        // And a second review on that state must not blow up either.
+        let d2 = sched.review(Some(&d.state), Rating::Good, d.due_at);
+        assert!(d2.due_at > d.due_at && d2.due_at < i64::MAX);
+    }
+}

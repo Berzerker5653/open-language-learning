@@ -295,6 +295,17 @@ pub fn epoch_seconds(ts: &str) -> Result<i64, String> {
         return Err(format!("bad timestamp {ts}"));
     }
     let (y, m, d) = (nums[0], nums[1], nums[2]);
+    // Sweep finding 8 (2026-10-26): the digit parser accepted 2026-13-01
+    // and silently computed an epoch a year off. Calendar fields must
+    // range-check against the existing parse error.
+    if !(1..=12).contains(&m)
+        || !(1..=days_in_month(y, m)).contains(&d)
+        || !(0..=23).contains(&nums[3])
+        || !(0..=59).contains(&nums[4])
+        || !(0..=59).contains(&nums[5])
+    {
+        return Err(format!("bad timestamp {ts}"));
+    }
     // Days since epoch (Howard Hinnant's civil algorithm).
     let y = if m <= 2 { y - 1 } else { y };
     let era = (if y >= 0 { y } else { y - 399 }) / 400;
@@ -303,6 +314,15 @@ pub fn epoch_seconds(ts: &str) -> Result<i64, String> {
     let doy = (153 * mp + 2) / 5 + d - 1;
     let doe = yoe * 365 + yoe / 4 - yoe / 100 + doy;
     Ok((era * 146097 + doe - 719468) * 86400 + nums[3] * 3600 + nums[4] * 60 + nums[5])
+}
+
+fn days_in_month(y: i64, m: i64) -> i64 {
+    match m {
+        1 | 3 | 5 | 7 | 8 | 10 | 12 => 31,
+        4 | 6 | 9 | 11 => 30,
+        _ if (y % 4 == 0 && y % 100 != 0) || y % 400 == 0 => 29,
+        _ => 28,
+    }
 }
 
 /// Raw observation input before attempt-group collapsing.

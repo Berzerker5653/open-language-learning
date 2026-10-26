@@ -130,3 +130,22 @@ fn policy_validation_rejects_broken_artifacts() {
         "unknown dimension key accepted under disqualifying_for"
     );
 }
+
+#[test]
+fn epoch_seconds_rejects_impossible_calendar_fields() {
+    // Sweep finding 8 (2026-10-26): the digit parser accepted 2026-13-01
+    // and silently computed an epoch roughly a year off. Real stamps
+    // still parse; impossible ones now return the parse error.
+    assert!(lts_learner_model::policy::epoch_seconds("2026-13-01T00:00:00Z").is_err());
+    assert!(lts_learner_model::policy::epoch_seconds("2026-02-31T00:00:00Z").is_err());
+    assert!(lts_learner_model::policy::epoch_seconds("2026-10-03T24:00:00Z").is_err());
+    assert!(lts_learner_model::policy::epoch_seconds("2026-10-03T09:60:00Z").is_err());
+    // Leap year stays legal, non-leap February does not.
+    assert!(lts_learner_model::policy::epoch_seconds("2028-02-29T00:00:00Z").is_ok());
+    assert!(lts_learner_model::policy::epoch_seconds("2026-02-29T00:00:00Z").is_err());
+    // The canonical value the rest of the suite relies on is unchanged.
+    assert_eq!(
+        lts_learner_model::policy::epoch_seconds("2026-10-02T00:00:00Z"),
+        Ok(1_790_899_200)
+    );
+}
