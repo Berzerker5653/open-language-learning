@@ -82,6 +82,22 @@ describe("dictation practice", () => {
     expect(html).toContain("too quiet, too short, or clipped");
   });
 
+  it("owns an engine fault instead of hinting at the learner (sweep finding 12)", () => {
+    // The backend now abstains with `engine-error` / `sidecar-timeout`
+    // for its own recognizer faults; the copy must attribute the fault
+    // to the app, never render raw fault strings.
+    const html = withResult({
+      matched: null,
+      heard: "",
+      target: "おばあさん",
+      abstain_reason: "engine-error",
+      mode: "guided",
+    });
+    expect(html).toContain("faulted");
+    expect(html).toContain("our fault, not your speech");
+    expect(html).not.toContain("try again");
+  });
+
   it("states the guided-only, never-saved disclaimer", () => {
     const html = withResult({
       matched: true,

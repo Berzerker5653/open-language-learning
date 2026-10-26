@@ -51,6 +51,12 @@ const REASON_TEXT: Record<string, string> = {
     "Recognition cannot run: this build carries the speech runtime, but this CPU is below the instruction set it was compiled for. This check abstains; text and listening activities are unaffected.",
   "asr-no-speech": "I did not catch any speech. Try again a little louder.",
   uncertain: "I am not confident I caught that. Try again.",
+  // sweep finding 12 (2026-10-26): the recognizer faulting is the app's
+  // problem, and the copy must say so instead of hinting at the learner.
+  "engine-error":
+    "The speech recognizer faulted while checking that attempt, so nothing was judged — this is our fault, not your speech. Everything else works; we will want this fixed.",
+  "sidecar-timeout":
+    "The speech recognizer ran out of time on that attempt, so nothing was judged — our limit, not your speech. Try again, or use a shorter sentence.",
 };
 
 function reasonLabel(reason: string): string {
