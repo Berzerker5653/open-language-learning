@@ -89,4 +89,65 @@ describe("a language change refreshes the learner context (U02)", () => {
     expect(count("kanji_available")).toBe(3);
     expect(count("home_state")).toBe(3);
   });
+
+  it("a running session does not survive the language switch (sweep finding 15)", async () => {
+    const engine = new LearnerEngine({
+      profiles: [{ id: "dana", display_name: "Dana", active: JA }],
+      installed: [JA, RU],
+    });
+    app = await mountApp(engine);
+    await app.click(app.button(app.section("Profiles"), "Dana"));
+
+    // A session over the Japanese plan is running: its queue items belong
+    // to this pack, and answering them writes evidence for this pack.
+    await app.click(app.button(app.section("Practice"), "Start today's plan"));
+    await app.settle();
+    expect(document.querySelector('[aria-label="Lesson"]')).toBeTruthy();
+
+    // Mid-session, the learner switches to the other installed pack.
+    await app.click(app.button(app.section("Routes"), "Settings"));
+    await app.click(app.button(app.section("Language packs"), "Learn this"));
+    expect(engine.lastArgsFor("switch_pack")).toEqual({ profileId: "dana", packId: RU });
+    await app.settle();
+
+    // The session belonged to the old pack: no in-progress panel, no
+    // summary, and nothing to resume — the switchLearning comment's own
+    // promise that "an old card can never submit against the new pack".
+    expect(document.querySelector('[aria-label="Today\'s session"]')).toBeNull();
+    expect(document.querySelector('[aria-label="Session summary"]')).toBeNull();
+    expect(
+      [...document.querySelectorAll("button")].some((b) =>
+        (b.textContent ?? "").includes("Resume session"),
+      ),
+    ).toBe(false);
+    // And no evidence was written for the abandoned Japanese items.
+    expect(engine.appCalls().some((c) => c.cmd === "practice_submit")).toBe(false);
+  });
+
+  it("an in-flight budget change cannot strand the new pack on the old plan (sweep finding 22)", async () => {
+    const engine = new LearnerEngine({
+      profiles: [{ id: "dana", display_name: "Dana", active: JA }],
+      installed: [JA, RU],
+      delayOnce: ["practice_plan"],
+    });
+    app = await mountApp(engine);
+    await app.click(app.button(app.section("Profiles"), "Dana"));
+
+    // The budget change is dispatched, and its answer is deliberately
+    // late (40 ms): the learner switches packs before it lands.
+    await app.click(app.button(app.section("Practice"), "10 min"));
+    await app.click(app.button(app.section("Routes"), "Settings"));
+    await app.click(app.button(app.section("Language packs"), "Learn this"));
+    await app.settle();
+    expect(engine.lastArgsFor("switch_pack")).toEqual({ profileId: "dana", packId: RU });
+
+    // Let the late plan answer arrive. The generation guard must drop
+    // it: the plan on screen stays the one rebuilt for RU — the old
+    // JA plan (kana surfaces) may never reappear over the new pack.
+    await new Promise((r) => setTimeout(r, 150));
+    await app.settle();
+    const items = [...document.querySelectorAll(".plan-item")].map((b) => b.textContent ?? "");
+    expect(items.length).toBeGreaterThan(0);
+    expect(items.join("\n")).not.toMatch(/[\u3040-\u30ff]/);
+  });
 });

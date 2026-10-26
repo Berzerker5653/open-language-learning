@@ -102,4 +102,105 @@ describe("restarting resumes instead of re-onboarding (journey g)", () => {
     expect(app.text('[aria-label="Practice"] h1')).toBe("Hi Dana");
     expect(app.text(".plan-summary")).toBe("2 activities · about 3 minutes");
   });
+
+  it("a failed resume-list read names the failure and keeps the wizard usable (sweep finding 16)", async () => {
+    // The same device state as the first test, but the resume read itself
+    // fails: before the fix this was an unhandled rejection, a wizard with
+    // no explanation of why the returning learner was not on their picker.
+    const engine = new LearnerEngine({
+      profiles: [{ id: "dana", display_name: "Dana", active: JA }],
+      installed: [JA],
+      failOnce: ["list_profiles"],
+    });
+    app = await mountApp(engine);
+    await app.settle();
+
+    const wizard = app.text('[aria-label="Onboarding"]');
+    expect(wizard).toContain("Existing profiles could not be checked");
+    expect(wizard).not.toContain("Welcome back");
+    // Creating a profile remains reachable — the failure is not a dead end.
+    expect(document.querySelector("#profile-name")).not.toBeNull();
+  });
+
+  it("a failed active-pack read is attributed, never claimed as 'no language' (sweep finding 19)", async () => {
+    const engine = new LearnerEngine({
+      profiles: [{ id: "dana", display_name: "Dana", active: JA }],
+      installed: [JA],
+      failOnce: ["active_pack"],
+    });
+    app = await mountApp(engine);
+    await app.settle();
+    await app.click(app.button(app.section("Profiles"), "Dana"));
+    await app.settle();
+
+    // K-05 rule: the learner is inside the app anyway...
+    expect(app.text('[aria-label="Practice"] h1')).toBe("Hi Dana");
+    // ...and Home says the read failed instead of asserting the pack-less
+    // copy for a profile that does have an active pack on disk.
+    const home = app.section("Practice").textContent ?? "";
+    expect(home).toContain("could not read which language pack");
+    expect(home).not.toContain("No language is set for this profile");
+  });
+
+  it("a running session survives neither a profile switch nor a profile delete (sweep finding 15)", async () => {
+    const engine = new LearnerEngine({
+      profiles: [{ id: "dana", display_name: "Dana", active: JA }],
+      installed: [JA],
+    });
+    app = await mountApp(engine);
+    await app.click(app.button(app.section("Profiles"), "Dana"));
+
+    // A session is started, then PAUSED: the panel and the
+    // "Resume session" offer are exactly the state that must not
+    // outlive a profile switch or delete.
+    await app.click(app.button(app.section("Practice"), "Start today's plan"));
+    await app.settle();
+    await app.click(document.querySelector("[data-session-pause]")!);
+    await app.settle();
+    expect(app.section("Today's session").textContent).toContain("Session paused");
+    expect(app.button(app.section("Today's session"), "Resume session")).toBeTruthy();
+
+    // Switch profiles mid-session: the next profile must inherit no
+    // panel, no summary, and — once back on a plan — no "Resume
+    // session" for the old pack's snapshot.
+    await app.click(app.button(app.section("Routes"), "Settings"));
+    await app.click(app.button(app.section("Settings"), "Switch profile…"));
+    await app.click(app.button(app.section("Switch profile confirmation"), "Yes, switch profile"));
+    await app.settle();
+    expect(
+      [...document.querySelectorAll("button")].some((b) =>
+        (b.textContent ?? "").includes("Resume session"),
+      ),
+    ).toBe(false);
+    await app.click(app.button(app.section("Profiles"), "Dana"));
+    expect(document.querySelector('[aria-label="Today\'s session"]')).toBeNull();
+    expect(document.querySelector('[aria-label="Session summary"]')).toBeNull();
+    expect(
+      [...document.querySelectorAll("button")].some((b) =>
+        (b.textContent ?? "").includes("Resume session"),
+      ),
+    ).toBe(false);
+
+    // And deleting a profile mid-session tears the same state down.
+    await app.click(app.button(app.section("Practice"), "Start today's plan"));
+    await app.settle();
+    await app.click(document.querySelector("[data-session-pause]")!);
+    await app.settle();
+    await app.click(app.button(app.section("Routes"), "Settings"));
+    await app.click(app.button(app.section("Settings"), "Delete profile data…"));
+    await app.click(
+      app.button(
+        app.section("Delete confirmation"),
+        "Yes, delete this profile and all its local data",
+      ),
+    );
+    await app.settle();
+    expect(document.querySelector('[aria-label="Today\'s session"]')).toBeNull();
+    expect(document.querySelector('[aria-label="Session summary"]')).toBeNull();
+    expect(
+      [...document.querySelectorAll("button")].some((b) =>
+        (b.textContent ?? "").includes("Resume session"),
+      ),
+    ).toBe(false);
+  });
 });

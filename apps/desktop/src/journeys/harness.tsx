@@ -953,6 +953,10 @@ type Scenario = {
   /** Each listed command fails loudly on its FIRST call and answers
    * normally after: for journeys that exercise degraded-read paths. */
   failOnce?: string[];
+  /** Each listed command answers 40 ms late on its FIRST call and at
+   * once after: for journeys that race a write against a language
+   * switch to pin generation-guard behavior. */
+  delayOnce?: string[];
 };
 
 export class LearnerEngine {
@@ -991,6 +995,8 @@ export class LearnerEngine {
   private nextListener = 1;
   private readonly failOnceList: string[] = [];
   private readonly failedOnce = new Set<string>();
+  private readonly delayOnceList: string[] = [];
+  private readonly delayedOnce = new Set<string>();
   speechModel = "off";
   models: {
     id: string;
@@ -1016,6 +1022,7 @@ export class LearnerEngine {
 
   constructor(scenario: Scenario = {}) {
     this.failOnceList = scenario.failOnce ?? [];
+    this.delayOnceList = scenario.delayOnce ?? [];
     for (const id of scenario.installed ?? []) this.install(id);
     for (const seed of scenario.profiles ?? []) {
       const active = seed.active ?? null;
@@ -1048,6 +1055,17 @@ export class LearnerEngine {
     if (this.failOnceList.includes(cmd) && !this.failedOnce.has(cmd)) {
       this.failedOnce.add(cmd);
       throw new Error(`injected failure: ${cmd}`);
+    }
+    if (this.delayOnceList.includes(cmd) && !this.delayedOnce.has(cmd)) {
+      this.delayedOnce.add(cmd);
+      const { promise, resolve } = Promise.withResolvers<unknown>();
+      // The answer is computed at DISPATCH time and only lands late:
+      // the real engine builds a plan from the state the call started
+      // against, so a late arrival can carry a superseded snapshot —
+      // exactly what generation guards exist to drop.
+      const snapshot = this.answer(cmd, args);
+      setTimeout(() => resolve(snapshot), 40);
+      return promise;
     }
     return Promise.resolve(this.answer(cmd, args));
   }
@@ -1365,6 +1383,15 @@ export class LearnerEngine {
         if (!p.installs.includes(packId)) p.installs.push(packId);
         p.schedule = this.packById(packId).schedule.map((s) => ({ ...s }));
         return null;
+      }
+      case "practice_plan": {
+        // lib.rs `change_budget` semantics: the engine rebuilds the plan
+        // around the new budget and only then is the optimistic value
+        // real.
+        const p = this.profile(String(args.profileId));
+        const minutes = Number(args.minutes);
+        p.budget = minutes;
+        return this.plan(p, minutes);
       }
       case "mine_add": {
         const p = this.profile(args.profileId);
@@ -2069,4 +2096,40 @@ export function trackAudioPlayback(): () => number {
     return realPlay.call(this);
   };
   return () => plays;
+}
+
+/**
+ * Decode the base64 WAV a dictation attempt carries and report what it
+ * actually is, so a journey that claims "the shipped capture path recorded"
+ * can prove it (sweep finding 23, 2026-10-26: two journeys pinned the clip
+ * as merely "a non-empty string", contradicting their own headers). The
+ * decode uses the same web APIs the app has — `atob`/`DataView`, never
+ * node's `Buffer` — and throws when the bytes are not a RIFF/WAVE file at
+ * all. `frames` counts whole 4096-sample capture frames after the 44-byte
+ * header, the exact shape the capture seam emits.
+ */
+export function wavFacts(wavB64: unknown): { sampleRate: number; frames: number } {
+  if (typeof wavB64 !== "string" || wavB64.length === 0) {
+    throw new Error("the attempt carried no base64 WAV payload");
+  }
+  const raw = atob(wavB64);
+  const wav = Uint8Array.from(raw, (c) => c.charCodeAt(0));
+  const view = new DataView(wav.buffer);
+  const tag = (at: number) => String.fromCharCode(...Array.from(wav.subarray(at, at + 4)));
+  if (tag(0) !== "RIFF" || tag(8) !== "WAVE") {
+    throw new Error("the attempt payload is not a RIFF/WAVE file");
+  }
+  const sampleRate = view.getUint32(24, true);
+  const bits = view.getUint16(34, true);
+  const channels = view.getUint16(22, true);
+  if (sampleRate !== 48000 || bits !== 16 || channels !== 1) {
+    throw new Error(
+      `the WAV is not the capture format: ${sampleRate} Hz, ${bits} bit, ${channels} ch`,
+    );
+  }
+  const bytes = wav.length - 44;
+  if (bytes < 4096 * 2 || bytes % (4096 * 2) !== 0) {
+    throw new Error(`the WAV holds ${bytes} bytes — not whole 4096-sample frames`);
+  }
+  return { sampleRate, frames: bytes / (4096 * 2) };
 }

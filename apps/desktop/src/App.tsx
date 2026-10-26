@@ -317,6 +317,9 @@ export function App() {
    * pack-scoped call uses it. Null means no pack is active. */
   const [selectedPack, setSelectedPack] = useState<string | null>(null);
   const [installedUnknown, setInstalledUnknown] = useState(false);
+  // Sweep finding 19: "no active pack" and "the pack read failed" are
+  // different states; Home distinguishes them like `installedUnknown` does.
+  const [packsUnknown, setPacksUnknown] = useState(false);
   const [profileName, setProfileName] = useState("");
   const [profiles, setProfiles] = useState<ProfileSummary[]>([]);
   const [profileId, setProfileId] = useState<string | null>(null);
@@ -585,7 +588,14 @@ export function App() {
     const inv = detectInvoke();
     if (!inv) return;
     void (async () => {
-      const mode = (await inv("app_mode")) as { smoke: boolean; smoke_perf?: boolean };
+      let mode: { smoke: boolean; smoke_perf?: boolean } = { smoke: false };
+      try {
+        mode = (await inv("app_mode")) as { smoke: boolean; smoke_perf?: boolean };
+      } catch (e) {
+        // No mode answer: assume the ordinary app and keep booting — the
+        // silent rejection below would strand the learner anyway.
+        console.error("app_mode read failed", e);
+      }
       if (mode.smoke) {
         // The headless walkthrough is a once-per-process act, and it belongs
         // to the smoke branch alone: a StrictMode dev remount — or a test
@@ -963,10 +973,19 @@ export function App() {
       // onboarding (FIRST-LESSON known limit). This runs first: a pack
       // or notice failure must never strand a returning learner back at
       // the wizard.
-      const ps = (await inv("list_profiles")) as ProfileSummary[];
-      if (ps.length > 0) {
-        setProfiles(ps);
-        setStep("resume");
+      try {
+        const ps = (await inv("list_profiles")) as ProfileSummary[];
+        if (ps.length > 0) {
+          setProfiles(ps);
+          setStep("resume");
+        }
+      } catch (e) {
+        // K-05's stranding rule applies here too: if the resume list
+        // cannot be read the learner must be told, and creating a new
+        // local profile stays reachable from the welcome step.
+        setOnboardError(
+          `Existing profiles could not be checked: ${String(e)} You can create a new local profile, or restart the app to try again.`,
+        );
       }
       try {
         setNotice((await inv("privacy_notice")) as PrivacyNotice);
@@ -1044,12 +1063,20 @@ export function App() {
   async function refreshLanguages(pid?: string) {
     if (!inv) return;
     const active = pid ?? profileId;
-    const [installed, claims, session, catalog] = await Promise.all([
+    const results = await Promise.all([
       inv("installed_packs") as Promise<InstalledPack[]>,
       inv("pack_claims") as Promise<PackClaims[]>,
       active ? loadSessionPack(inv, active) : Promise.resolve(null),
       inv("catalog_packs") as Promise<{ entries: CatalogEntry[]; status: string }>,
-    ]);
+    ]).catch((e) => {
+      // Sweep finding 19: a failed pack read leaves the active-pack state
+      // UNKNOWN, not "none"; Home attributes the failure instead of
+      // claiming the profile has no language.
+      setPacksUnknown(true);
+      throw e;
+    });
+    const [installed, claims, session, catalog] = results;
+    setPacksUnknown(false);
     setInstalled(installed);
     setClaims(claims);
     if (session) {
@@ -1133,6 +1160,11 @@ export function App() {
     }
     const gen = ++packSwitchGen.current;
     setPackSwitching(true);
+    // A session belongs to the pack it was started in: tear it down here so
+    // Home can never offer "Resume session" over another pack's items.
+    sessionQueueRef.current = null;
+    setSession(null);
+    setSessionOutcome(null);
     setRoute("practice");
     applyPlan(EMPTY_PLAN);
     setNextGoal(undefined);
@@ -1175,8 +1207,8 @@ export function App() {
     setKanjiCorrect(false);
     setKanjiCorrectChoice("");
     setKanjiError(null);
-    await refreshLanguages();
     try {
+      await refreshLanguages();
       const home = (await inv("home_state", { profileId })) as {
         display_name: string;
         plan: SessionPlan;
@@ -1220,7 +1252,13 @@ export function App() {
     } finally {
       setEngineProgress(null);
     }
-    await refreshLanguages();
+    try {
+      await refreshLanguages();
+    } catch (e) {
+      // The write succeeded; only the re-read failed — say so, and let the
+      // receipt/outcome already on screen stand.
+      setLangError(`The pack list could not be re-read: ${String(e)}`);
+    }
   }
 
   // Cancel asks the engine to stop the install whose progress is on screen —
@@ -1245,7 +1283,11 @@ export function App() {
     } finally {
       setEngineProgress(null);
     }
-    await refreshLanguages();
+    try {
+      await refreshLanguages();
+    } catch (e) {
+      setLangError(`The pack list could not be re-read: ${String(e)}`);
+    }
   }
 
   async function refreshAligner() {
@@ -1290,7 +1332,11 @@ export function App() {
     } finally {
       setEngineProgress(null);
     }
-    await refreshSpeech();
+    try {
+      await refreshSpeech();
+    } catch (e) {
+      setLangError(`The speech model list could not be re-read: ${String(e)}`);
+    }
   }
 
   async function deleteSpeechModel(modelId: string) {
@@ -1301,7 +1347,11 @@ export function App() {
     } catch (e) {
       setLangError(String(e));
     }
-    await refreshSpeech();
+    try {
+      await refreshSpeech();
+    } catch (e) {
+      setLangError(`The speech model list could not be re-read: ${String(e)}`);
+    }
   }
 
   async function refreshSpeech() {
@@ -1339,7 +1389,11 @@ export function App() {
     } catch (e) {
       setLangError(String(e));
     }
-    await refreshSpeech();
+    try {
+      await refreshSpeech();
+    } catch (e) {
+      setLangError(`The speech model list could not be re-read: ${String(e)}`);
+    }
   }
 
   async function createProfile() {
@@ -1574,8 +1628,11 @@ export function App() {
     const previous = budget;
     setBudget(minutes);
     if (inv && profileId) {
+      const gen = packSwitchGen.current;
       try {
-        applyPlan((await inv("practice_plan", { profileId, minutes })) as SessionPlan);
+        const next = (await inv("practice_plan", { profileId, minutes })) as SessionPlan;
+        if (gen !== packSwitchGen.current) return;
+        applyPlan(next);
       } catch (e) {
         // The optimistic value is only real once the engine has rebuilt the
         // plan around it; otherwise the learner keeps the old budget.
@@ -1589,10 +1646,16 @@ export function App() {
 
   // K-41: stress-mark visibility toggle (display setting only).
   async function setStressMode(mode: "auto" | "on" | "off") {
-    if (inv && profileId) {
+    if (!inv || !profileId) return;
+    setSettingsError(null);
+    try {
       setDisplay(
         (await inv("set_display_settings", { profileId, stressMode: mode })) as DisplaySettingsView,
       );
+    } catch (e) {
+      // The engine did not answer, so `display` never changed — the toggle
+      // on screen still shows the real stored value. Say the write failed.
+      setSettingsError(`The stress-mark setting could not be saved: ${String(e)}`);
     }
   }
 
@@ -1617,23 +1680,33 @@ export function App() {
     setSettingsExportPath(null);
     setSettingsDeleteArmed(false);
     if (!inv || !profileId) return;
-    try {
+    // Sweep finding 20: one failed read must not abort the other primes —
+    // a broken speech catalogue takes neither the pack list nor the mic
+    // pickers down with it. Each block reports its own failure.
+    const fails: string[] = [];
+    const soft = async (label: string, run: () => Promise<unknown>) => {
+      try {
+        await run();
+      } catch (e) {
+        fails.push(`${label}: ${String(e)}`);
+      }
+    };
+    await soft("microphone and writing settings", async () => {
       setMicEnabled((await inv("get_microphone_enabled", { profileId })) as boolean);
       setMicDevice((await inv("get_microphone_device", { profileId })) as string | null);
       setPlaybackDevice((await inv("get_playback_device", { profileId })) as string | null);
       setRomajiMode((await inv("get_romaji_mode", { profileId })) as RomajiMode);
-      await refreshSpeech();
       setKanaKeyboard((await inv("get_kana_keyboard", { profileId })) as KanaKeyboardMode);
-      // K-77: Settings now hosts language-pack management and the speech
-      // runtime status too, so opening it primes the reads the old
-      // Languages tab did. K-90 deleted the synthesis status read.
-      await refreshLanguages();
-      await refreshAligner();
-      await refreshMicrophones();
-      await refreshOutputs();
-    } catch (e) {
-      setSettingsError(String(e));
-    }
+    });
+    // K-77: Settings now hosts language-pack management and the speech
+    // runtime status too, so opening it primes the reads the old
+    // Languages tab did. K-90 deleted the synthesis status read.
+    await soft("speech models", refreshSpeech);
+    await soft("language packs", () => refreshLanguages());
+    await soft("aligner status", refreshAligner);
+    await refreshMicrophones();
+    await refreshOutputs();
+    if (fails.length > 0) setSettingsError(fails.join(" "));
   }
 
   // K-64: names exist only after the browser has granted microphone access
@@ -1790,6 +1863,11 @@ export function App() {
     setEnvironments([]);
     setGoals([]);
     setProgress([]);
+    // Sweep finding 15: an in-flight or paused session belongs to the
+    // deleted profile — neither the panel nor the summary may survive it.
+    sessionQueueRef.current = null;
+    setSession(null);
+    setSessionOutcome(null);
     // D7: a deleted profile's active pack must not be carried into the
     // next session — there is no active pack until one is chosen.
     setSelectedPack(null);
@@ -1814,6 +1892,11 @@ export function App() {
     setEnvironments([]);
     setGoals([]);
     setProgress([]);
+    // Sweep finding 15: same discipline as deletion — the old profile's
+    // session (panel, summary, queue) must not carry into the next one.
+    sessionQueueRef.current = null;
+    setSession(null);
+    setSessionOutcome(null);
     // D7 discipline: no active pack until the next profile chooses one.
     setSelectedPack(null);
     setActiveIds([]);
@@ -3867,7 +3950,8 @@ export function App() {
         <Home
           displayName={displayName}
           activePack={activePack}
-          noPack={activeIds.length === 0}
+          noPack={activeIds.length === 0 && !packsUnknown}
+          packsUnknown={packsUnknown}
           onChooseLanguage={() => setRoute("settings")}
           updates={packUpdates}
           plan={plan}
