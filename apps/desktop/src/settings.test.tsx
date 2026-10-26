@@ -450,4 +450,52 @@ describe("settings", () => {
     expect(done).toContain("On this device now: 7 saved words, 12 recorded attempts");
     expect(done).toContain("always creates a new profile");
   });
+  it("keeps count grammar honest at exactly one item", () => {
+    // Sweep finding 24 (2026-10-26): the restore copy hard-wrote plural
+    // nouns, so a single pack read "1 language packs" to the learner.
+    // Both the preview and the result sentence must agree with the count.
+    const flat = (html: string) => html.replace(/<!--.*?-->/g, "");
+    const checked = flat(
+      render({
+        restorePath: "/home/hunter/one.json",
+        restorePreview: {
+          format_version: 2,
+          supported: true,
+          source_profile_name: "Solo",
+          exported_at: "2026-10-26T09:00:00Z",
+          events: 1,
+          corrections: 0,
+          goals: 1,
+          mastery: 0,
+          saved_words: 1,
+          scheduled_items: 1,
+          pack_installs: 1,
+          selected_packs: 1,
+          recordings: 0,
+          warnings: [],
+        },
+      }),
+    );
+    expect(checked).not.toContain("1 language packs");
+    expect(checked).not.toContain("1 saved words");
+    expect(checked).not.toContain("1 recorded attempts");
+    expect(checked).not.toContain("1 scheduled reviews");
+    expect(checked).toContain("1 language pack");
+    const done = flat(
+      render({
+        restoreOutcome: {
+          profile_id: "prof-one",
+          display_name: "Solo",
+          events: 1,
+          goals: 1,
+          saved_words: 1,
+          scheduled_items: 1,
+          warnings: [],
+        },
+      }),
+    );
+    expect(done).toContain(
+      "On this device now: 1 saved word, 1 recorded attempt, 1 goal, and 1 scheduled review.",
+    );
+  });
 });

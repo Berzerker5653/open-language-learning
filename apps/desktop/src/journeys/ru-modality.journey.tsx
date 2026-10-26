@@ -22,6 +22,7 @@ import {
   grantMicrophone,
   mountApp,
   trackAudioPlayback,
+  wavFacts,
   type Mounted,
 } from "./harness";
 
@@ -172,8 +173,11 @@ describe("RU modalities are served by their named runners (RU-MODALITY-PRACTICE-
     const attempt = (check?.attempt ?? {}) as Record<string, unknown>;
     expect(attempt.pack_id).toBe(RU);
     expect(attempt.target_text).toBe(RU_SENTENCE);
-    expect(typeof attempt.wav_b64).toBe("string");
-    expect((attempt.wav_b64 as string).length).toBeGreaterThan(0);
+    // Sweep finding 23 (2026-10-26): this header claims the shipped
+    // capture path recorded, so the payload must decode as that
+    // recording — a real 48 kHz mono WAV of whole capture frames, not
+    // just a non-empty string.
+    expect(wavFacts(attempt.wav_b64)).toEqual({ sampleRate: 48000, frames: 1 });
 
     // The card answers with the abstention, naming the missing capability —
     // this machine has no speech aligner — and never a match verdict.

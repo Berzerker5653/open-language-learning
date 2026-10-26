@@ -10,6 +10,7 @@
  */
 import { afterEach, describe, expect, it } from "vitest";
 import { JA, LearnerEngine, mountApp, type Mounted } from "./harness";
+import { counted } from "../settings";
 
 /** The learner-facing plan statement, exactly as Home renders it. */
 function planStatement(): string[] {
@@ -29,10 +30,18 @@ describe("export then restore (journey d)", () => {
 
   it("restores a backup as a new profile whose plan says the same thing", async () => {
     // A profile with a bit of history, so the backup has something to carry.
+    const history = { events: 4, savedWords: 2, goals: 3 };
     app = await mountApp(
       new LearnerEngine({
         profiles: [
-          { id: "dana", display_name: "Dana", active: JA, events: 4, savedWords: 2, goals: 3 },
+          {
+            id: "dana",
+            display_name: "Dana",
+            active: JA,
+            events: history.events,
+            savedWords: history.savedWords,
+            goals: history.goals,
+          },
         ],
         installed: [JA],
       }),
@@ -64,11 +73,17 @@ describe("export then restore (journey d)", () => {
     if (!preview) throw new Error("checking the backup showed no preview");
     expect(preview.textContent).toContain("Dana");
     expect(preview.textContent).toContain("backup format version 2");
-    expect(preview.textContent).toContain("2 saved words");
-    expect(preview.textContent).toContain("4 recorded attempts");
-    expect(preview.textContent).toContain("3 goals");
-    expect(preview.textContent).toContain("2 scheduled reviews");
-    expect(preview.textContent).toContain("1 language packs");
+    // Each count is spelled once, via the UI's own agreement rule. The
+    // harness derives two of them: one scheduled review per saved word,
+    // and the one JA pack installed above.
+    const counts = [
+      counted(history.savedWords, "saved word"),
+      counted(history.events, "recorded attempt"),
+      counted(history.goals, "goal"),
+      counted(history.savedWords, "scheduled review"),
+      counted(1, "language pack"),
+    ];
+    for (const c of counts) expect(preview.textContent).toContain(c);
 
     // Restore: always a new profile, never a replacement of the one in use.
     await app.click(document.querySelector('[data-testid="settings-restore-confirm"]')!);
@@ -76,8 +91,9 @@ describe("export then restore (journey d)", () => {
     expect(
       app.engine.appCalls().filter((c) => c.cmd === "profile_import" && c.args.mode !== "new"),
     ).toEqual([]);
+    const restored = counts.slice(0, 4);
     expect(app.text('[data-testid="settings-restore-result"]')).toContain(
-      "Restored as Dana. On this device now: 2 saved words, 4 recorded attempts, 3 goals, and 2 scheduled reviews.",
+      `Restored as Dana. On this device now: ${restored.slice(0, -1).join(", ")}, and ${restored.at(-1)}.`,
     );
 
     // Switch to what was restored — same name, different profile.

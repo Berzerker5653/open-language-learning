@@ -30,6 +30,7 @@ import {
   grantMicrophone,
   mountApp,
   trackAudioPlayback,
+  wavFacts,
   type Mounted,
 } from "./harness";
 
@@ -257,8 +258,9 @@ describe("one RU upper-band task_sequence runs end to end (UPPERBAND-TASK-JOURNE
     const attempt = (check?.attempt ?? {}) as Record<string, unknown>;
     expect(attempt.pack_id).toBe(RU);
     expect(attempt.target_text).toBe(J1);
-    expect(typeof attempt.wav_b64).toBe("string");
-    expect((attempt.wav_b64 as string).length).toBeGreaterThan(0);
+    // Sweep finding 23 (2026-10-26): the header claims the shipped
+    // capture path recorded — the payload decodes as that recording.
+    expect(wavFacts(attempt.wav_b64)).toEqual({ sampleRate: 48000, frames: 1 });
 
     // The card answers with the abstention, naming the missing capability —
     // this machine has no speech aligner — and never a match verdict.

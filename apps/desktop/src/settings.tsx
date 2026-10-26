@@ -167,6 +167,16 @@ function alignerLine(a: AlignerStatus | null): string {
   }
 }
 
+/// English count agreement for the restore copy: `counted(1, "saved word")`
+/// is "1 saved word", `counted(4, "saved word")` is "4 saved words". Sweep
+/// finding 24 (2026-10-26): the restore preview/result hard-wrote plural
+/// nouns, so a single item read "1 language packs" to the learner. Exported
+/// so the export/restore journey derives its expected copy from the same
+/// rule instead of restating the counts by hand.
+export function counted(n: number, singular: string): string {
+  return `${n} ${n === 1 ? singular : `${singular}s`}`;
+}
+
 /**
  * I03: readiness before the controls. A learner should learn what speaking can
  * actually do on this device before reaching a control that cannot do it —
@@ -354,11 +364,11 @@ export function Settings(p: SettingsProps) {
               {p.restorePreview.format_version}).
             </p>
             <ul>
-              <li>{p.restorePreview.saved_words} saved words</li>
-              <li>{p.restorePreview.events} recorded attempts</li>
-              <li>{p.restorePreview.goals} goals</li>
-              <li>{p.restorePreview.scheduled_items} scheduled reviews</li>
-              <li>{p.restorePreview.pack_installs} language packs</li>
+              <li>{counted(p.restorePreview.saved_words, "saved word")}</li>
+              <li>{counted(p.restorePreview.events, "recorded attempt")}</li>
+              <li>{counted(p.restorePreview.goals, "goal")}</li>
+              <li>{counted(p.restorePreview.scheduled_items, "scheduled review")}</li>
+              <li>{counted(p.restorePreview.pack_installs, "language pack")}</li>
             </ul>
             {p.restorePreview.warnings.length > 0 && (
               <ul data-testid="settings-restore-warnings">
@@ -385,9 +395,10 @@ export function Settings(p: SettingsProps) {
           <div className="notice" data-testid="settings-restore-result">
             <p>
               Restored as {p.restoreOutcome.display_name}. On this device now:{" "}
-              {p.restoreOutcome.saved_words} saved words, {p.restoreOutcome.events} recorded
-              attempts, {p.restoreOutcome.goals} goals, and {p.restoreOutcome.scheduled_items}{" "}
-              scheduled reviews.
+              {counted(p.restoreOutcome.saved_words, "saved word")},{" "}
+              {counted(p.restoreOutcome.events, "recorded attempt")},{" "}
+              {counted(p.restoreOutcome.goals, "goal")}, and{" "}
+              {counted(p.restoreOutcome.scheduled_items, "scheduled review")}.
             </p>
             <p>
               <small data-testid="settings-restore-note">

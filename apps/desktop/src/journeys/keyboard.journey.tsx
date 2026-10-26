@@ -101,10 +101,19 @@ describe("keyboard-only route walk", () => {
       (el) => el.textContent?.trim() === "Practice" && el.closest('nav[aria-label="Routes"]'),
     );
     if (!practice) throw new Error('the Routes nav has no tab-reachable "Practice" stop');
+    // Sweep finding 24 (2026-10-26): the old pin here was
+    // `appCalls().length > 0`, which any mount satisfies. What the hop
+    // really owes: the nav records the destination as the current page,
+    // and the destination page renders its own live content — not a bare
+    // heading with the previous route still underneath.
     await press(practice);
     const hubHeading = document.activeElement;
     expect(hubHeading?.tagName).toBe("H1");
     expect(hubHeading?.textContent?.trim()).toBe("Practice");
-    expect(engine.appCalls().length).toBeGreaterThan(0);
+    expect(
+      document.querySelector('nav[aria-label="Routes"] [aria-current="page"]')?.textContent?.trim(),
+    ).toBe("Practice");
+    const modes = document.querySelector('[aria-label="Practice modes"]');
+    expect(modes?.textContent).toContain("Pronunciation");
   });
 });
