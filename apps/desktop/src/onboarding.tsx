@@ -111,6 +111,12 @@ export function Onboarding(p: OnboardingProps) {
   // Continue is explained, never silently disabled.
   const canContinue =
     p.selectedPack !== null && p.installed.some((i) => i.pack_id === p.selectedPack);
+  // Sweep finding 22 (2026-10-26): "Start with speech" is disabled unless an
+  // installed component can LISTEN (recognition). Synthesis alone produces the
+  // pack's media but cannot hear an answer, so it does not unlock the button —
+  // and that reason must be shown, not left as a dead button. Computed once
+  // for both the button and the note that explains it.
+  const canStartSpeech = p.speechComponents.some((c) => c.installed && c.role === "recognition");
   return (
     <section aria-label="Onboarding">
       {p.step !== "resume" && (
@@ -185,9 +191,16 @@ export function Onboarding(p: OnboardingProps) {
             className="btn btn--primary"
             onClick={p.onCreateProfile}
             disabled={p.profileName.trim() === ""}
+            aria-describedby={p.profileName.trim() === "" ? "profile-create-note" : undefined}
           >
             Create local profile
           </button>
+          {p.profileName.trim() === "" ? (
+            <p className="notice" id="profile-create-note" role="status">
+              Type a name for the profile on this device, then Create unlocks it. The name stays on
+              this machine.
+            </p>
+          ) : null}
         </div>
       )}
 
@@ -365,7 +378,8 @@ export function Onboarding(p: OnboardingProps) {
           <ul className="speech-components">
             {p.speechComponents.map((c) => (
               <li key={c.id}>
-                {c.name}:{" "}
+                {c.name}{" "}
+                <span className="meta">({c.role === "recognition" ? "listens" : "speaks"})</span>:{" "}
                 {c.installed ? (
                   <span>installed</span>
                 ) : (
@@ -406,10 +420,21 @@ export function Onboarding(p: OnboardingProps) {
               // Speaking needs a recognition model; K-90 made pack media the
               // only spoken audio, and it rides on top of these activities —
               // a pack with no recording still runs them honestly.
-              disabled={!p.speechComponents.some((c) => c.installed && c.role === "recognition")}
+              disabled={!canStartSpeech}
+              aria-describedby={!canStartSpeech ? "speech-start-note" : undefined}
             >
               Start with speech
             </button>
+            {!canStartSpeech && p.speechComponents.length > 0 ? (
+              // A dead primary button with no cause mapping is the a11y defect:
+              // name exactly what is missing and how the button unlocks. The
+              // list above prints each component's role so "listens" ties back.
+              <p className="notice" id="speech-start-note" role="status">
+                Speaking needs a speech component that can listen (recognition), and none installed
+                here can yet. Install one above to unlock Start with speech, or skip for now and
+                everything stays text-only.
+              </p>
+            ) : null}
             <button type="button" className="btn btn--quiet" onClick={p.onSkipSpeech}>
               Skip for now
             </button>

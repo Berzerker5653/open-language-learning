@@ -108,4 +108,43 @@ describe("first run (journey a)", () => {
     expect(app.text('[aria-label="Practice"] [aria-live="polite"]')).toBe("Correct");
     expect(app.button(app.section("Practice"), "Back to plan")).toBeTruthy();
   });
+
+  it("explains every disabled wizard control instead of dead buttons (sweep finding 22)", async () => {
+    app = await mountApp(new LearnerEngine());
+    const wizard = app.section("Onboarding");
+
+    // The profile button starts shut — and says why, linked to itself.
+    const create = app.button(wizard, "Create local profile");
+    expect(create.disabled).toBe(true);
+    expect(create.getAttribute("aria-describedby")).toBe("profile-create-note");
+    expect(app.text("#profile-create-note")).toContain("Type a name");
+
+    const nameField = document.querySelector<HTMLInputElement>("#profile-name");
+    if (!nameField) throw new Error('the wizard rendered no "#profile-name" field');
+    await app.type(nameField, "Alex");
+    const create2 = app.button(wizard, "Create local profile");
+    expect(create2.disabled).toBe(false);
+    expect(create2.getAttribute("aria-describedby")).toBeNull();
+    await app.click(create2);
+
+    // To the speech step: pack installed, then "yes" to the microphone.
+    const ja = [...document.querySelectorAll('[name="pack"]')].find((input) =>
+      (input.closest("label")?.textContent ?? "").includes("Japanese"),
+    ) as HTMLInputElement;
+    await app.click(ja);
+    await app.click(app.button(wizard, "Install"));
+    await app.click(app.button(wizard, "Continue"));
+    await app.click(app.button(wizard, "Enable microphone"));
+    expect(app.text('[aria-label="Onboarding"] h1')).toBe("Speech setup");
+
+    // "Start with speech" is shut while no installed component can listen —
+    // and the note names the missing capability, joined to the button.
+    const start = app.button(wizard, "Start with speech");
+    expect(start.disabled).toBe(true);
+    expect(start.getAttribute("aria-describedby")).toBe("speech-start-note");
+    expect(app.text("#speech-start-note")).toContain("recognition");
+    // The component list prints each component's role, so "listens" in the
+    // note maps onto a visible fact about the listed model.
+    expect(wizard.textContent).toContain("(listens)");
+  });
 });

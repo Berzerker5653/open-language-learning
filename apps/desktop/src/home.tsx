@@ -164,6 +164,10 @@ export interface HomeProps {
   /// the one control that fixes it, instead of showing an empty plan under a
   /// "what to practice now" heading that promises nothing.
   noPack?: boolean;
+  /// Sweep finding 19 (2026-10-26): the active-pack read FAILED, so the app
+  /// does not know whether a pack is active. Home attributes the failure
+  /// instead of claiming "no language is set" — an unknown is not a none.
+  packsUnknown?: boolean;
   onChooseLanguage?(): void;
   /// PACK-UPDATE-UX-001: stale packs on this device. Empty means the engine and
   /// the catalogue agree on every version, and Home then says nothing about
@@ -210,10 +214,20 @@ export function Home(p: HomeProps) {
           Switching languages — the plan, goal and places below update as the new pack answers.
         </p>
       ) : null}
-      {p.noPack ? null : <p className="prompt">what to practice now</p>}
+      {p.noPack || p.packsUnknown ? null : <p className="prompt">what to practice now</p>}
       {p.activePack ? (
         <p className="meta pack-posture">
           <PackText tag="strong">{p.activePack.name}</PackText> — {p.activePack.posture}
+        </p>
+      ) : p.packsUnknown ? (
+        <p className="notice" role="status">
+          The app could not read which language pack this profile uses, so it cannot say what to
+          practise. Nothing was changed — this is a failed read, not a missing language.{" "}
+          {p.onChooseLanguage ? (
+            <button type="button" className="btn btn--quiet" onClick={p.onChooseLanguage}>
+              Check Language packs
+            </button>
+          ) : null}
         </p>
       ) : p.noPack ? (
         <p className="notice" role="status">
