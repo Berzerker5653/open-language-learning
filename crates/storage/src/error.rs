@@ -16,4 +16,8 @@ pub enum Error {
     NotFound(String),
     #[error("already present: {0}")]
     AlreadyExists(String),
+    /// A value the caller handed in cannot be stored honestly (e.g. a
+    /// non-canonical `due_at`; sweep finding 9, 2026-10-26).
+    #[error("invalid value: {0}")]
+    Invalid(String),
 }

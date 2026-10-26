@@ -487,3 +487,30 @@ fn a_failed_import_leaves_existing_data_exactly_as_it_was() {
     assert_eq!(store.goals(&pid).unwrap().len(), 1);
     assert_eq!(store.scheduler_state(&pid).unwrap().len(), 2);
 }
+
+#[test]
+fn failed_import_names_the_import_error() {
+    // Sweep finding 7 (2026-10-26): the error arm used to let a failed
+    // ROLLBACK replace the import error entirely (`.map_err(...)?` before
+    // returning `e`). The caller must see the failure it can act on:
+    // poison a write_bundle insert and check the error names the cause.
+    let src = Store::in_memory().unwrap();
+    let pid = seed(&src);
+    let bundle = src
+        .export_profile(&pid, "2026-10-04T00:00:00Z", &ExportOptions::default())
+        .unwrap();
+    let dst = Store::in_memory().unwrap();
+    dst.conn()
+        .execute_batch(
+            "CREATE TRIGGER poison_goal_insert BEFORE INSERT ON learner_goals
+             BEGIN SELECT RAISE(ABORT, 'poisoned import'); END;",
+        )
+        .unwrap();
+    let err = dst
+        .import_profile(&bundle, &ImportMode::NewProfile)
+        .unwrap_err();
+    let text = format!("{err}");
+    assert!(text.contains("poisoned import"), "{text}");
+    // The attempt unwound completely: no half-imported profile remains.
+    assert!(dst.list_profiles().unwrap().is_empty());
+}

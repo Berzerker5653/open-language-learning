@@ -83,6 +83,17 @@ pub enum ImportError {
     UnsupportedFormatVersion(u32),
     #[error("storage: {0}")]
     Storage(#[from] Error),
+    /// The import failed AND the compensating rollback failed: both are
+    /// named, the import error first (sweep finding 7, 2026-10-26) — the
+    /// caller has to act on the import failure, not discover a masked one.
+    // Boxed pair: the two rusqlite errors together blew the enum past
+    // clippy's `result_large_err` ceiling for every Result in this
+    // module; the display contract is unchanged.
+    #[error("import failed: {cause}; the rollback also failed: {rollback}")]
+    RollbackFailed {
+        cause: Box<Error>,
+        rollback: Box<Error>,
+    },
 }
 
 impl Store {
@@ -164,7 +175,16 @@ impl Store {
                 Ok(target_id)
             }
             Err(e) => {
-                self.conn.execute("ROLLBACK", []).map_err(Error::from)?;
+                // Sweep finding 7 (2026-10-26): when ROLLBACK itself
+                // failed this arm returned ONLY the rollback error, masking
+                // the import failure the caller has to act on. Name both,
+                // import error first.
+                if let Err(rb) = self.conn.execute("ROLLBACK", []) {
+                    return Err(ImportError::RollbackFailed {
+                        cause: Box::new(e),
+                        rollback: Box::new(Error::from(rb)),
+                    });
+                }
                 Err(e.into())
             }
         }

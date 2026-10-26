@@ -74,11 +74,30 @@ impl Store {
         pack_id: &str,
         version: &str,
     ) -> Result<(), Error> {
-        self.conn.execute(
-            "DELETE FROM profile_pack_selections WHERE profile_id = ?1",
-            params![profile_id],
-        )?;
-        self.select_pack(profile_id, pack_id, version)
+        // Sweep finding 5 (2026-10-26): the DELETE and the INSERT are one
+        // step. An INSERT failing after the DELETE left the profile with
+        // ZERO selections — breaking the one-language invariant (e318b357)
+        // and making every pack-scoped command refuse with "no active
+        // pack". Same explicit transaction the import path uses (export.rs).
+        self.conn.execute("BEGIN IMMEDIATE", [])?;
+        match (|| -> Result<(), Error> {
+            self.conn.execute(
+                "DELETE FROM profile_pack_selections WHERE profile_id = ?1",
+                params![profile_id],
+            )?;
+            self.select_pack(profile_id, pack_id, version)
+        })() {
+            Ok(()) => {
+                self.conn.execute("COMMIT", [])?;
+                Ok(())
+            }
+            Err(e) => {
+                // The caller must learn what failed: a rollback hiccup
+                // never masks the import/selection error itself.
+                let _ = self.conn.execute("ROLLBACK", []);
+                Err(e)
+            }
+        }
     }
 
     pub fn selected_packs(&self, profile_id: &str) -> Result<Vec<(String, String)>, Error> {

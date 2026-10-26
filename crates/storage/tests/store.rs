@@ -474,3 +474,127 @@ fn duplicate_mined_surface_keeps_the_original_row_and_srs_history() {
     assert!(other.was_new);
     assert_eq!(store.mined_items(&q.id).unwrap().len(), 1);
 }
+
+#[test]
+fn set_active_pack_is_all_or_nothing() {
+    // Sweep finding 5 (2026-10-26): the DELETE+INSERT swap must land as
+    // one step. A failed INSERT after the DELETE used to leave the profile
+    // with ZERO selections — breaking the one-language invariant and
+    // making every pack-scoped command refuse.
+    let store = lts_storage::Store::in_memory().unwrap();
+    let p = store.create_profile("Ana", "2026-10-02T09:00:00Z").unwrap();
+    store
+        .set_active_pack(&p.id, "org.openlanguage.ja", "1.0")
+        .unwrap();
+
+    // Force the swap's INSERT to fail for the marker pack only.
+    store
+        .conn()
+        .execute_batch(
+            "CREATE TRIGGER poison_pack_selection BEFORE INSERT ON profile_pack_selections
+             WHEN NEW.pack_id = 'pack-poison'
+             BEGIN SELECT RAISE(ABORT, 'poisoned insert'); END;",
+        )
+        .unwrap();
+    let err = store
+        .set_active_pack(&p.id, "pack-poison", "1.0")
+        .unwrap_err();
+    assert!(format!("{err}").contains("poisoned insert"), "{err}");
+    // The prior selection stands: the profile still has exactly one pack.
+    assert_eq!(
+        store.selected_packs(&p.id).unwrap(),
+        vec![("org.openlanguage.ja".to_string(), "1.0".to_string())]
+    );
+}
+
+#[test]
+fn remove_mined_rolls_back_when_the_srs_delete_fails() {
+    // Sweep finding 6 (2026-10-26): a failed second delete used to leave
+    // the word gone but its SRS row orphaned — exactly the state the
+    // function's own comment forbids.
+    let store = lts_storage::Store::in_memory().unwrap();
+    let p = store.create_profile("Ana", "2026-10-02T09:00:00Z").unwrap();
+    store
+        .add_mined(
+            &p.id,
+            lts_storage::NewMinedItem {
+                id: "mine-x",
+                surface: "neko",
+                reading: None,
+                gloss: Some("cat"),
+                source_citation: "manual",
+                created_at: "2026-10-02T09:00:00Z",
+            },
+        )
+        .unwrap();
+    store
+        .save_scheduler_state(
+            &p.id,
+            &lts_storage::SchedulerRecord {
+                item_id: "mine-x".into(),
+                scheduler: "fsrs-spike".into(),
+                params_json: "{}".into(),
+                due_at: "2026-10-03T09:00:00Z".into(),
+            },
+        )
+        .unwrap();
+    store
+        .conn()
+        .execute_batch(
+            "CREATE TRIGGER poison_srs_delete BEFORE DELETE ON scheduler_state
+             WHEN OLD.item_id = 'mine-x'
+             BEGIN SELECT RAISE(ABORT, 'poisoned delete'); END;",
+        )
+        .unwrap();
+    store.remove_mined(&p.id, "mine-x").unwrap_err();
+    // Both rows or neither: the word and its SRS row are still present.
+    assert_eq!(store.mined_items(&p.id).unwrap().len(), 1);
+    assert_eq!(store.scheduler_state(&p.id).unwrap().len(), 1);
+}
+
+#[test]
+fn scheduler_write_boundary_refuses_noncanonical_due_at() {
+    // Sweep finding 9 (2026-10-26): due_items orders TEXT timestamps,
+    // which is only true-time order for the canonical whole-second UTC
+    // shape; mixed-format rows must be refused at the write boundary.
+    let store = lts_storage::Store::in_memory().unwrap();
+    let p = store.create_profile("Ana", "2026-10-02T09:00:00Z").unwrap();
+    for bad in [
+        "2026-10-3T09:00:00Z",
+        "2026-10-03T09:00:00+00:00",
+        "2026-10-03T09:00:00.250Z",
+        "2026-10-03 09:00:00Z",
+    ] {
+        let err = store
+            .save_scheduler_state(
+                &p.id,
+                &lts_storage::SchedulerRecord {
+                    item_id: "a".into(),
+                    scheduler: "s".into(),
+                    params_json: "{}".into(),
+                    due_at: bad.into(),
+                },
+            )
+            .unwrap_err();
+        assert!(format!("{err}").contains("canonical"), "{bad}: {err}");
+    }
+    // Canonical values write and read back in time order.
+    for (item, due) in [("b", "2026-10-05T00:00:00Z"), ("a", "2026-10-04T00:00:00Z")] {
+        store
+            .save_scheduler_state(
+                &p.id,
+                &lts_storage::SchedulerRecord {
+                    item_id: item.into(),
+                    scheduler: "s".into(),
+                    params_json: "{}".into(),
+                    due_at: due.into(),
+                },
+            )
+            .unwrap();
+    }
+    let due = store.due_items(&p.id, "s", "2026-10-06T00:00:00Z").unwrap();
+    assert_eq!(
+        due.iter().map(|r| r.item_id.as_str()).collect::<Vec<_>>(),
+        ["a", "b"]
+    );
+}

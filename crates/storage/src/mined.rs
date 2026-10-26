@@ -107,16 +107,33 @@ impl Store {
     }
 
     pub fn remove_mined(&self, profile_id: &str, id: &str) -> Result<bool, Error> {
-        let removed = self.conn.execute(
-            "DELETE FROM mined_items WHERE profile_id = ?1 AND id = ?2",
-            params![profile_id, id],
-        )?;
-        // Drop the item's SRS row too: a deleted word must not keep
-        // resurfacing in reviews.
-        self.conn.execute(
-            "DELETE FROM scheduler_state WHERE profile_id = ?1 AND item_id = ?2",
-            params![profile_id, id],
-        )?;
-        Ok(removed > 0)
+        // Sweep finding 6 (2026-10-26): both deletes land in one
+        // transaction. A failed second delete used to leave the word gone
+        // but its SRS row orphaned — exactly the state the comment below
+        // forbids, where the deleted word's scheduler row can keep
+        // resurfacing under a reused id.
+        self.conn.execute("BEGIN IMMEDIATE", [])?;
+        match (|| -> Result<bool, Error> {
+            let removed = self.conn.execute(
+                "DELETE FROM mined_items WHERE profile_id = ?1 AND id = ?2",
+                params![profile_id, id],
+            )?;
+            // Drop the item's SRS row too: a deleted word must not keep
+            // resurfacing in reviews.
+            self.conn.execute(
+                "DELETE FROM scheduler_state WHERE profile_id = ?1 AND item_id = ?2",
+                params![profile_id, id],
+            )?;
+            Ok(removed > 0)
+        })() {
+            Ok(removed) => {
+                self.conn.execute("COMMIT", [])?;
+                Ok(removed)
+            }
+            Err(e) => {
+                let _ = self.conn.execute("ROLLBACK", []);
+                Err(e)
+            }
+        }
     }
 }
