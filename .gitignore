@@ -68,3 +68,7 @@ tmp/
 # logs). Working aid for the agents, not product content — the shipped
 # record lives in tasks/KANBAN.md done rows and state/ evidence.
 .project-sweep/
+
+# TS build info and audio-QA campaign outputs (2026-10-26 sweep hygiene card)
+*.tsbuildinfo
+qs-r*.jsonl

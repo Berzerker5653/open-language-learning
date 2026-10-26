@@ -36,26 +36,26 @@ short texts).
 **Experiment 1 — edit distance on CTC-greedy phones** (normalized
 distance vs expected, per-language threshold + vowel-insertion rule):
 
-| set | dist_ratio |
-| --- | --- |
-| ru good-120 | median 0.538, p90 0.833, max 1.111 |
-| ja good-120 | median 0.667, p90 1.000, max 1.429 |
-| `perchatki.old` (defective) | 0.5 — *below the good median* |
-| `brat-1.old` (defective) | 0.4 — the epenthetic vowel is not in the recognizer's transcript at all |
+| set                         | dist_ratio                                                              |
+| --------------------------- | ----------------------------------------------------------------------- |
+| ru good-120                 | median 0.538, p90 0.833, max 1.111                                      |
+| ja good-120                 | median 0.667, p90 1.000, max 1.429                                      |
+| `perchatki.old` (defective) | 0.5 — _below the good median_                                           |
+| `brat-1.old` (defective)    | 0.4 — the epenthetic vowel is not in the recognizer's transcript at all |
 
-Vowel-insertion ops appeared on 12/120 ru and 11/120 ja *good* clips
+Vowel-insertion ops appeared on 12/120 ru and 11/120 ja _good_ clips
 (recognizer artifacts: `+ː`, `+5`, `+a ː`). No threshold flags the
 fixtures without flagging most of the good set.
 
 **Experiment 2 — CTC forced-alignment posterior** (best-path log-prob of
 the expected phone sequence per frame):
 
-| set | align_score |
-| --- | --- |
-| ru good-120 | mean −0.435, range −1.44…−0.02 |
-| ja good-120 | mean −0.459, range −1.36…−0.02 |
-| `perchatki.old` | −0.55 (inside the good range) |
-| `brat-1.old` | −0.30 (better than the repaired replacement's −0.27…−0.32 band) |
+| set             | align_score                                                     |
+| --------------- | --------------------------------------------------------------- |
+| ru good-120     | mean −0.435, range −1.44…−0.02                                  |
+| ja good-120     | mean −0.459, range −1.36…−0.02                                  |
+| `perchatki.old` | −0.55 (inside the good range)                                   |
+| `brat-1.old`    | −0.30 (better than the repaired replacement's −0.27…−0.32 band) |
 
 Scores track word length/reduction complexity, not correctness: an
 XLSR-53 espeak-IPA recognizer simply is not precise enough on reduced
@@ -63,16 +63,16 @@ Russian and Japanese to certify or refute individual pronunciations.
 
 ## Consequences (adopted design)
 
-* `qa-pron` default verdict: PASS/ABSTAIN; metrics recorded per clip
+- `qa-pron` default verdict: PASS/ABSTAIN; metrics recorded per clip
   (`expected`, `recognized`, diff ops, `dist_ratio`, `align_score`,
   `ins_vowels`). `--flag-ratio N` exists only for experiments.
-* What CERTS content stays: `qa-asr.py` (word round-trip — caught both
+- What CERTS content stays: `qa-asr.py` (word round-trip — caught both
   botched re-bakes outright) and `qa-segments.py` (structure), plus the
   owner's listening pass; the residual class — epenthetic vowels and
   inserted segments that whisper absorbs and the envelope cannot see —
   is certified by human ears only, which is why the audit keeps an
   owner-review sample and why re-listens of flagged clips are mandatory.
-* Re-calibration path: a stronger forced aligner (e.g. MFA with
+- Re-calibration path: a stronger forced aligner (e.g. MFA with
   language-specific acoustic models) or finetuned recognizer; the
   JSONLs from every full audit are the substrate. If a calibrated
   threshold is ever found on fixtures + good sets, this flips back to a
