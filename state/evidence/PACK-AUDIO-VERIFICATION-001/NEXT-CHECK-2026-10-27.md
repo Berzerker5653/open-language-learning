@@ -40,12 +40,21 @@ from file timestamps (the bake log has none).
   local tree (ja 4,902 + ru 4,856 manifest rows, 0 mismatch, 0 missing).
 * Gate equivalence: 120 harvested winners re-run through both certifying gates
   here — **119/120 agree** (`local-recert-2026-10-27/LOCAL-RECERT-2026-10-27.md`).
-  The model file is byte-identical on both boxes. The one disagreement
-  (`ru.lex.comparisons.iz-za`) is whisper.cpp transcript reproducibility across
-  machines, not audio that changed hands; it is on the owner listening list.
+  The model file is byte-identical on both boxes; the one disagreement
+  (`ru.lex.comparisons.iz-za`) is **recognizer-build skew** - GamingPC runs
+  whisper.cpp `60c0be6` (`79b96a71…`), the campaign box `7e26d3b`
+  (`d9919437…`). Measured on that clip: gate decode `-np -nt` -> `Иосифа.`,
+  timestamped decode -> `Хи-о-зу-за!`, both deterministic, identical at
+  1/4/8/16 threads. Identity pins and the probe: `gate-identity-2026-10-27.txt`.
 * ASR gate cost here: ~510-580 clips/h at `--workers 4`, one bake tree peaks at
   7.9 GB RSS. `qa-asr.py` now checkpoints every verdict as it settles
   (`scripts/test_qa_asr.py` pins it), so an interrupted audit resumes.
+* Accepted follow-up (CPU-only, ~2 h at the measured clip rate, run **after**
+  the round-2 bake so it does not compete for cores): re-gate the 1,101
+  harvested round-1 winners with this box's binary. ~0.8% skew predicts ~9
+  deltas; disposition them rather than trusting a cert made by another build.
+  Publish-time provenance has to name the recognizer build + model sha, or
+  "certified" is not repeatable.
 
 ## For the owner (does not need the chain to finish)
 

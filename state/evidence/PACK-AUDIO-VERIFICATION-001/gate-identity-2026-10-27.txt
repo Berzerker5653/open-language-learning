@@ -1,0 +1,56 @@
+# ASR gate identity — PACK-AUDIO-VERIFICATION-001 (2026-10-27)
+
+Provenance pin for every verdict produced by the round-trip gate, because the
+one cross-machine disagreement in the 120-clip re-certification sample turned
+out to be about the *recognizer build*, not the audio.
+
+## Model (byte-identical on both boxes)
+
+    ggml-large-v3-turbo.bin
+    sha256 1fc70f774d38eb169993ac391eea357ef47c88757ef72ee5943879b7e8e2bc69
+    GamingPC  ~/.cache/lts-bench/ggml-large-v3-turbo.bin
+    Omarchy   ~/models/ggml-large-v3-turbo.bin
+
+## Recognizer binaries (NOT identical — this is the skew)
+
+| box | source commit | binary sha256 (16) | version |
+|---|---|---|---|
+| GamingPC | `60c0be6` "add check for ttype in whisper and parakeet (#4091)" | `79b96a71d8483b42` | whisper.cpp 1.9.5-dev |
+| Omarchy  | `7e26d3b` "examples: fixes example #4106 issue (#4107)"      | `d99194379aa747b8` | whisper.cpp 1.9.5-dev |
+
+Both builds are CPU-only in this path (`ldd` shows no CUDA; whisper reports
+`use gpu = 0`, `backends = 1`, `devices = 1`). GamingPC's campaign path is
+`state/evidence/PACK-AUDIO-VERIFICATION-001/whisper-gate.sh`, which execs the
+GamingPC binary with `-ng`; `-ng` is a no-op here (measured: with and without
+it the transcript is the same).
+
+## Gate invocation (single source of truth: `scripts/qa-asr.py:check`)
+
+    <whisper> -m <model> -l <lang> -np -nt <wav>
+
+## Measured sensitivity, one clip, same box, same model, same wav
+
+`ru.lex.comparisons.iz-za` (1.20 s, declared `и́з-за`, sha dd2744e234f5):
+
+    gate mode   (-np -nt, default 4 threads)          -> "Иосифа."      (ratio 0.14)
+    timestamped (no -nt, -t 1 / 4 / 8 / 16)           -> "Хи-о-зу-за!"  (x4)
+
+Each mode is deterministic run-to-run (gate mode run twice: identical) and
+**thread count changes nothing**. What changes the transcript is the decode
+mode: whisper's word-timestamp pass is a different decode path than the plain
+best-of-5 pass. The gate always uses `-np -nt`, so within one box the verdict
+is reproducible; across boxes with different builds it is not guaranteed.
+
+## Consequences accepted for round 2
+
+1. The 119/120 agreement figure is a **build-skew estimate**, not a defect
+   rate: at ~0.8% skew, roughly 9 of the 1,101 harvested round-1 winners may
+   not pass the local gate. Close-out step (CPU-only, ~2 h at the measured
+   510-580 clips/h, run AFTER the round-2 bake so it does not compete for the
+   same cores): re-gate exactly those 1,101 harvested ids with the GamingPC
+   binary and disposition the deltas.
+2. Publish-time provenance must name the recognizer build (commit + binary
+   sha256) alongside the model sha, or "certified" is not repeatable.
+3. Borderline clips (short stressed words, 1-2 s) where the ratio metric is
+   already weak are exactly where the build matters; those stay on the owner
+   listening list regardless of which build passes them.

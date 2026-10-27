@@ -30,9 +30,13 @@ equivalence**, not about the bytes.
 
 **119/120 agreement.** The single disagreement is
 `ru.lex.comparisons.iz-za`: the box certified it `pass@6`, the local round-trip
-hears `Иосифа.` for declared `и́з-за` (ratio 0.14, structure PASS). Both sides
-ran the same model file, so the difference is whisper.cpp transcript
-reproducibility across machines/thread counts, not the audio changing hands.
+ran the same model bytes, so the difference is the **recognizer build**: this
+box runs whisper.cpp `60c0be6` (binary `79b96a71…`) and the campaign box runs
+`7e26d3b` (binary `d9919437…`). The sensitivity is measured, not assumed: on
+this one clip the gate decode (`-np -nt`) yields `Иосифа.` while the
+timestamped decode yields `Хи-о-зу-за!` - each deterministic run-to-run, and
+identical at 1/4/8/16 threads, so thread count and `-ng` change nothing while
+the decode path and build do (`../gate-identity-2026-10-27.txt`).
 A preposition pair is exactly where whisper confabulates, so this is NOT
 evidence the clip is bad — but it is also not evidence it is fine, so it goes
 on the owner listening list rather than being waved through by either machine.
@@ -43,6 +47,14 @@ on the owner listening list rather than being waved through by either machine.
 CPU. One bake tree (TTS worker + whisper gate) peaks at 7.9 GB RSS. With the
 inference server stopped the full-corpus re-audit of both packs (9,758 clips)
 is ~17 h CPU here, or far less on the GPU once it is free.
+
+## Follow-up this measurement obliges
+
+119/120 across two different builds is a **build-skew estimate**, not a defect
+rate: ~0.8% predicts roughly 9 of the 1,101 harvested round-1 winners that
+would not pass the local gate. Close-out: re-gate exactly those 1,101 ids with
+the GamingPC binary (~2 h CPU at the rate above) after the round-2 bake, so
+every shipped cert traces to one named recognizer build.
 
 ## Related tooling change
 
