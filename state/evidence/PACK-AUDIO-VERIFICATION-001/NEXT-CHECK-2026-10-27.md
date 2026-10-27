@@ -80,6 +80,24 @@ Round 2 will shrink that list — regenerate both from the round-2 checkpoints
 (`python3 rundown-exhausted.py --date <date> --sheet disposition-<date>.csv`)
 before the listening session rather than disposing from this file.
 
+Rows you can actually disposition today: `round2=exhausted` (17 so far) - those
+carry 12 failed takes under identical gates. `round2=pending` rows are clips
+the campaign has not re-run yet; leave them.
+
+## When the queue finishes
+
+    sh close-round2.sh
+
+One command proves the campaign instead of asserting it: regenerates the packet
++ answer sheet from the round-2 checkpoints, re-hashes all 9,758 manifest rows
+against the bytes on disk, runs `lts-langpack-cli validate/lint/test` on both
+packs (the CI invocations), and prints the per-language tallies. It refuses
+while a bake is running (`--force` validates it against a mid-campaign
+snapshot) and never stages or publishes - the archive re-stage stays a
+separate, owner-authorized step. Queue integrity is already proven: the 382
+queued ids are exactly the 382 round-1 exhausted ids, 0 duplicates, 0 missing,
+0 extras.
+
 ## Loose end worth knowing
 
 `scripts/pack-audit.py` (the review-state/overdue auditor used for the 2026-10-05

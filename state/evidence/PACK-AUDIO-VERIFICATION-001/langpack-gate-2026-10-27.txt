@@ -29,3 +29,16 @@ work), and 3 unreferenced rows in `sources.jsonl`.
   (`docs/15`, AGENTS scope rule).
 * ru-RU is untouched so far: its batches (`ru-b00..b04`) run after the ja
   queue, so its pack gate re-run is listed with them.
+
+## Full-corpus byte audit (close-round2.sh step 2, run mid-campaign as a check)
+
+Every media row of both packs re-hashed from disk (streaming sha256 + byte
+length), not just the changed rows:
+
+    ja-JP: 4,902 rows | hash/size mismatches 0 | missing files 0
+    ru-RU: 4,856 rows | hash/size mismatches 0 | missing files 0
+
+So the harvested tree on this box is byte-consistent with its manifests end to
+end (9,758 assets). Both packs also pass `validate`/`lint`/`test` clean at the
+same moment, which is what `sh close-round2.sh` will re-prove when the queue
+finishes.
