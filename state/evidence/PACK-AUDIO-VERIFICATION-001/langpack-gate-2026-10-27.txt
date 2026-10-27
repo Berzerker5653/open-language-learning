@@ -1,0 +1,31 @@
+# Pack gate on the round-2 banked audio — 2026-10-27
+
+Run on GamingPC after batch `ja-b00` was banked (`025c6f9`: 8 ja ids certified
+clean on a fresh K=6 pass, their manifest rows rewritten with new
+sha/bytes/duration).
+
+## `lts-langpack-cli` (the same invocations CI runs, ci.yml:155-169)
+
+    validate languages/ja-JP  -> 0 error(s), 0 warning(s)
+    lint     languages/ja-JP  -> 0 error(s), 0 warning(s)
+    test     languages/ja-JP  -> 0 error(s), 0 warning(s)
+
+Informational records unchanged and still open by design: 8 media items whose
+content declares no reading (K-65, authoring readings is human linguistic
+work), and 3 unreferenced rows in `sources.jsonl`.
+
+## Direct byte check on exactly the changed rows
+
+8 rows were rewritten by the batch commit; each was re-hashed from disk:
+**0 mismatches** on sha256 and byte length.
+
+## What this does NOT cover
+
+* No pack archive was re-staged or published. The 0.4.3 staging under
+  `~/staging/` predates round 2, so the shipped archives are stale by these 8
+  assets (and by whatever later batches certify). Re-staging is deliberately
+  deferred until the round-2 queue settles - re-staging per batch would publish
+  a moving target - and republish itself needs explicit owner authorization
+  (`docs/15`, AGENTS scope rule).
+* ru-RU is untouched so far: its batches (`ru-b00..b04`) run after the ja
+  queue, so its pack gate re-run is listed with them.
