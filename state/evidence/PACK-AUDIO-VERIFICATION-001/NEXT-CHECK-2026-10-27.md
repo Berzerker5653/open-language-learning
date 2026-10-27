@@ -29,10 +29,25 @@ boxes have 32 cores, so "this computer is faster" is only true with the
 inference server stopped). The chain therefore clamps workers by MemAvailable
 at every bake start (`(avail-6)/8`) and caps each worker's OMP/MKL/BLAS pool at
 `nproc/jobs`; stop strata and restart the chain and it ramps to `jobs=8`.
+(The 72 s/take figure was the oversubscribed `jobs=2`, 16-threads-per-worker
+config. After capping each worker's pool at `nproc/jobs`, the measured steady
+rate is 128 takes in 53 min = **145 takes/h** at `jobs=3`.)
 `WATCH.sh` prints a WARNING line when MemAvailable drops under 8 GB.
 
 Take-rate and ETA come from the dashboard's rolling 15-minute measurement, not
 from file timestamps (the bake log has none).
+
+## Measured round-2 yield (the driver header's prediction was wrong)
+
+Batch `ja-b00` (25 ids, K=6, 128 takes, 53 min): **8 solved / 17 exhausted**.
+The plan claimed ~75% of the residue would clear. That was bad arithmetic:
+takes are i.i.d., ids are not exchangeable, and having already failed 6 fresh
+takes is evidence about the id, so conditioning on it lowers the estimate.
+Budget ~1 in 3 of the remaining 357 residue ids certifying (~120 new certs) and
+the rest turning into owner disposition; at 145 takes/h the remaining queue is
+~12 h of background CPU alongside inference. The re-failed ids now carry
+2K=12 failed takes under identical gates, which is a materially stronger
+basis for "remove or re-author" than one bad listening impression.
 
 ## Certified before spending any bake time
 
