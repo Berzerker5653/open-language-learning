@@ -168,3 +168,6 @@ for p in retry-batches/ru-b*.txt; do
 done
 
 say "local-chain done"
+echo "next: sh close-round2.sh          (packet + whole-corpus hash + pack gates + tallies)"
+echo "then: sh regate-harvest.sh        (re-cert the 1,101 round-1 winners on this build)"
+echo "both write evidence only; staging/publishing stays a separate owner step."
