@@ -64,10 +64,13 @@ basis for "remove or re-author" than one bad listening impression.
 * ASR gate cost here: ~510-580 clips/h at `--workers 4`, one bake tree peaks at
   7.9 GB RSS. `qa-asr.py` now checkpoints every verdict as it settles
   (`scripts/test_qa_asr.py` pins it), so an interrupted audit resumes.
-* Accepted follow-up (CPU-only, ~2 h at the measured clip rate, run **after**
-  the round-2 bake so it does not compete for cores): re-gate the 1,101
-  harvested round-1 winners with this box's binary. ~0.8% skew predicts ~9
-  deltas; disposition them rather than trusting a cert made by another build.
+* Accepted follow-up, scripted as `regate-harvest.sh` (CPU-only, ~2 h at the
+  measured clip rate, refuses to start while a bake is alive): re-gate the
+  1,101 harvested round-1 winners with this box's binary and emit
+  `deltas.jsonl` + `REGATE-<date>.md` — clips this box's shipping gate will not
+  pass, which go to the same disposition path as a round-2 exhaustion. ~0.8%
+  skew predicts ~9 deltas; disposition them rather than trusting a cert made by
+  another build.
   Publish-time provenance has to name the recognizer build + model sha, or
   "certified" is not repeatable.
 
