@@ -1,21 +1,24 @@
 #!/bin/sh
 # PACK-AUDIO-VERIFICATION-001 — best-of-K ROUND 2, executed on GamingPC.
 #
-# Round 1 (Omarchy, finished 2026-10-26) left 264 ja + 118 ru ids exhausted
-# at K=6 / K=8. The take distribution is i.i.d. (the TTS worker exposes no
-# seed), so a fresh round spends more draws on exactly those clips: with the
-# measured per-take pass rate the extra draws are expected to clear ~75% of
-# the ja and ~70% of the ru residue; whatever still fails is the honest
-# stubborn set for owner disposition.
+# Round 1 (Omarchy, finished 2026-10-26) left 264 ja + 118 ru ids exhausted at
+# K=6 / K=8. The first round-2 batch (ja-b00, 25 ids, K=6, measured
+# 2026-10-27) cleared **8 of 25 = 32%**, not the ~75% this header used to
+# predict. The error was statistical: individual takes are i.i.d. (the TTS
+# worker exposes no seed), but ids are not exchangeable - having already failed
+# 6 fresh takes is evidence about that id's pass probability, so conditioning on
+# it drags the round-2 estimate down. Plan on the measured rate: roughly one in
+# three residue clips certifies on a fresh K draws; the rest is owner work.
 #
 # Batches of 25 ids so a crash or a stop costs one batch, never the campaign:
 # each batch has its own checkpoint jsonl, is started with --skip-done, and is
 # committed (manifest rows + checkpoint + phase log) before the next starts.
 # Resumable: a batch whose checkpoint already has every id settled is skipped,
-# and `systemctl --user restart lts-local-chain.service` resumes inside the
-# current batch - that is also the immediate way to re-ramp worker count when
-# the inference server stops or starts. K matches round 1 (ja 6, ru 8) so a
-# clip that fails again has now failed K fresh i.i.d. draws: a clean statistic.
+# and `pkill -f bake-bestof.py` (or stopping and restarting this script)
+# resumes inside the current batch at whatever memory the machine has right
+# now. K matches round 1 (ja 6, ru 8) so a clip that fails again has now failed
+# 2K fresh draws under the same gates: a clean statistic for the disposition
+# packet, not a prediction about the next one.
 #
 # Memory: this box also hosts the GPU inference server, whose model holds
 # ~85 GB RSS. Measured 2026-10-27 with one live asset (bake-bestof.py +
@@ -120,18 +123,28 @@ batch() {
     after=$(settled "$out")
     if [ "$after" -ge "$total" ]; then break; fi
     if [ "$after" -le "$before" ]; then
-      say "$7: STALLED at $after/$total - abandoning this batch, the checkpoint keeps what settled"
+      say "$7: STALLED at $after/$total - stopping the chain (the loops exit 1 on a stalled batch)"
       return 1
     fi
     say "$7: progress $before -> $after of $total - resuming at current memory"
     before=$after
   done
   say "$7: settled $after/$total -> $(tally "$out")"
-  # bank the batch: manifest rows + checkpoint + phase log, nothing else
-  git -C "$REPO" add -- \
-      "languages/$(basename "$1")/media/manifest.jsonl" "$out" "${out%.jsonl}.log"
-  git -C "$REPO" commit -q -m "fix(PACK-AUDIO-VERIFICATION-001): round-2 best-of-K batch $7 ($(tally "$out"))" \
-    && say "$7: committed" || say "$7: COMMIT FAILED (checkpoint still on disk)"
+  # bank the batch: manifest rows + checkpoint + phase log, nothing else (the
+  # wavs themselves are not tracked; packs ship as hash-verified archives).
+  # The pathspec is resolved against $REPO because of `git -C`, so it must be
+  # REPO-relative: the first version passed HERE-relative basenames, `add`
+  # failed, and batch ja-b00 sat uncommitted until the failure was noticed.
+  rel=${HERE#"$REPO"/}
+  if git -C "$REPO" add -- \
+       "languages/$(basename "$1")/media/manifest.jsonl" \
+       "$rel/$out" "$rel/${out%.jsonl}.log" \
+     && git -C "$REPO" commit -q -m "fix(PACK-AUDIO-VERIFICATION-001): round-2 best-of-K batch $7 ($(tally "$out"))"; then
+    say "$7: committed"
+  else
+    say "$7: COMMIT FAILED (checkpoint still on disk)"
+    git -C "$REPO" status --short | sed "s|^|$7: git: |" >> "$LOG"
+  fi
   return 0
 }
 
