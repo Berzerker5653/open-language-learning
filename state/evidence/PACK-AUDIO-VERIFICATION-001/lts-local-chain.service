@@ -1,0 +1,32 @@
+# PACK-AUDIO-VERIFICATION-001 - round-2 best-of-K chain on GamingPC.
+#
+# Survives the assistant's session ending (Linger=yes is set on this account),
+# so the owner can stop the local inference server and let the box run the
+# campaign at full width. Boot-resumable: each batch restarts from its own
+# checkpoint with --skip-done.
+#
+#   start:  systemctl --user daemon-reload && systemctl --user enable --now lts-local-chain.service
+#   watch:  systemctl --user status lts-local-chain.service --no-pager
+#           tail -f ~/game-dev/LTS/state/evidence/PACK-AUDIO-VERIFICATION-001/local-chain.log
+#   stop:   systemctl --user disable --now lts-local-chain.service
+#
+# JOBS=8 assumes the inference server is STOPPED (~115 GB free; each bake tree
+# peaks at 7.9 GB -> 63 GB). With the server running, local-chain.sh clamps
+# jobs to what MemAvailable allows (typically 3), so starting it accidentally
+# with the LLM up is slow, not fatal.
+[Unit]
+Description=LTS pack-audio best-of-K round 2 (GamingPC)
+Documentation=file:///home/hunter/game-dev/LTS/state/evidence/PACK-AUDIO-VERIFICATION-001/local-chain.sh
+After=network-online.target
+
+[Service]
+Type=simple
+Environment=JOBS=8
+Nice=5
+WorkingDirectory=/home/hunter/game-dev/LTS/state/evidence/PACK-AUDIO-VERIFICATION-001
+ExecStart=/usr/bin/sh /home/hunter/game-dev/LTS/state/evidence/PACK-AUDIO-VERIFICATION-001/local-chain.sh
+StandardOutput=append:/home/hunter/game-dev/LTS/state/evidence/PACK-AUDIO-VERIFICATION-001/local-chain.out
+StandardError=inherit
+
+[Install]
+WantedBy=default.target
