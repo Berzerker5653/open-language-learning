@@ -103,12 +103,26 @@ def main() -> int:
 
     for lang, pack in PACKS.items():
         texts = text_of(pack)
+        # Round-2 checkpoints change what a disposition decision means: an id
+        # that passed a fresh K-pass is certified and leaves the packet; one
+        # that failed again is genuinely stubborn (2K failed draws under the
+        # same gates); one with no round-2 record has NOT been re-run yet and
+        # must not be disposed from stale round-1 evidence.
+        r2 = {}
+        for f in sorted(HERE.glob(f"bestof-{lang}-r2-*.jsonl")):
+            for line in f.read_text(encoding="utf-8").splitlines():
+                if line.strip():
+                    r = json.loads(line)
+                    r2[r["id"]] = r
         recs = []
         for line in (HERE / f"bestof-{lang}.jsonl").read_text(encoding="utf-8").splitlines():
             if not line.strip():
                 continue
             r = json.loads(line)
             if r["result"] != "exhausted":
+                continue
+            second = r2.get(r["id"])
+            if second is not None and second["result"] != "exhausted":
                 continue
             primary, tags = classify(r)
             final = r["takes"][-1]
@@ -117,13 +131,24 @@ def main() -> int:
                 "id": r["id"],
                 "text": texts.get(r["id"], ""),
                 "attempts": r["attempts"],
+                "round2": "pending" if second is None else "exhausted",
                 "final_stage": "structure" if "flags" in final else "asr",
                 "best_asr_ratio": max((t.get("ratio", 0.0) for t in r["takes"] if "flags" not in t), default=None),
                 "structure_flags": sorted({f for t in r["takes"] if "flags" in t for f in t["flags"]}),
                 "cause": primary,
                 "causes": tags,
-                "takes": [describe_take(t) for t in r["takes"]],
+                "takes": ["r1 " + describe_take(t) for t in r["takes"]],
             }
+            if second is not None:
+                rec["attempts_total"] = r["attempts"] + second["attempts"]
+                rec["causes"] = sorted(set(rec["causes"]) | set(classify(second)[1]))
+                rec["takes"] += ["r2 " + describe_take(t) for t in second["takes"]]
+                rec["best_asr_ratio"] = max(
+                    filter(lambda v: v is not None,
+                           [rec["best_asr_ratio"],
+                            max((t.get("ratio", 0.0) for t in second["takes"]
+                                 if "flags" not in t), default=None)]),
+                    default=None)
             recs.append(rec)
         recs.sort(key=lambda r: r["id"])
         per_pack[pack] = recs
@@ -133,18 +158,20 @@ def main() -> int:
         "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows_out), encoding="utf-8")
 
     md: list[str] = [
-        f"# Best-of-K round 1: exhausted voice lines - owner disposition ({args.date})",
+        f"# Best-of-K rounds 1+2: exhausted voice lines - owner disposition ({args.date})",
         "",
         "Every clip below was re-baked up to K takes on the campaign box and **every take",
         "failed the full gate** (acoustic structure + whisper large-v3-turbo round-trip):",
         "ru-RU 118 of 417 exhausted at K=8, ja-JP 264 of 1,066 exhausted at K=6. The",
         "per-take columns are the recorded gate evidence, not commentary.",
         "",
-        "Round 2 (a fresh best-of-K pass on these same ids, `local-chain.sh`) is running",
-        "on GamingPC; the take distribution is i.i.d., so ~75% of the ja and ~70% of the",
-        "ru residue is expected to clear. Expect this list to shrink before the listening",
-        "session - regenerate it from the round-2 checkpoints, do not hand-dispose from",
-        "this file alone.",
+        "Round 2 (`local-chain.sh`, GamingPC) re-bakes these same ids with fresh",
+        "draws. Measured on the first round-2 batch (ja-b00, 25 ids, K=6): **8",
+        "cleared, 17 did not** - the earlier '~75% will clear' expectation was wrong",
+        "(takes are i.i.d. but ids are not exchangeable: failing K draws already is",
+        "evidence about the id). Budget about a third certifying. Rows marked",
+        "`round2=pending` have not been re-run yet: do not dispose those from this",
+        "file, regenerate the packet from the round-2 checkpoints first.",
         "",
         "Options per clip (owner's call, cannot be self-certified by an agent):",
         "",
@@ -195,7 +222,8 @@ def main() -> int:
                 ev = "; ".join(r["takes"])
                 if len(ev) > 300:
                     ev = ev[:297] + "..."
-                md.append(f"| {r['id']} | {r['text']} | {r['attempts']} | {ev} |")
+                md.append(f"| {r['id']} | {r['text']} | {r.get('attempts_total', r['attempts'])}"
+                          f" takes, round2={r['round2']} | {ev} |")
             md.append("")
 
     (HERE / f"EXHAUSTED-{args.date}.md").write_text("\n".join(md), encoding="utf-8")
@@ -208,19 +236,22 @@ def main() -> int:
         import csv
         with open(HERE / args.sheet, "w", newline="", encoding="utf-8-sig") as fh:
             w = csv.writer(fh)
-            w.writerow(["batch", "pack", "id", "declared_text", "cause",
+            w.writerow(["batch", "pack", "id", "declared_text", "cause", "round2",
                         "takes_failed", "best_asr_ratio",
                         "owner_disposition", "note"])
             for pack in ("ru-RU", "ja-JP"):
                 for i, r in enumerate(per_pack[pack]):
                     w.writerow([i // args.batch_size + 1, pack, r["id"], r["text"],
-                                r["cause"], r["attempts"],
+                                r["cause"], r["round2"],
+                                r.get("attempts_total", r["attempts"]),
                                 "" if r["best_asr_ratio"] is None
                                 else f"{r['best_asr_ratio']:.2f}", "", ""])
 
     for pack in ("ru-RU", "ja-JP"):
         tally = collections.Counter(r["cause"] for r in per_pack[pack])
-        print(f"{pack}: {len(per_pack[pack])} exhausted | " + " ".join(f"{c}={n}" for c, n in tally.most_common()))
+        pending = sum(1 for r in per_pack[pack] if r["round2"] == "pending")
+        print(f"{pack}: {len(per_pack[pack])} exhausted | round2 pending={pending} | "
+              + " ".join(f"{c}={n}" for c, n in tally.most_common()))
     print(f"rows={len(rows_out)} -> exhausted-{args.date}.jsonl, EXHAUSTED-{args.date}.md")
     return 0
 
