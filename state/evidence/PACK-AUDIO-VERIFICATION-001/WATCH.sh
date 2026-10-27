@@ -38,15 +38,13 @@ for f in sorted(glob.glob(os.path.join(here, "retry-batches", "*.txt"))):
 # settled = assets whose round-2 checkpoint has a verdict
 done = {}
 for f in sorted(glob.glob(os.path.join(here, "bestof-*-r2-*.jsonl"))):
+    pack = "ja-JP" if "-ja-r2-" in f else "ru-RU"
     for line in open(f, encoding="utf-8"):
         if not line.strip():
             continue
         r = json.loads(line)
-        pack = "ja-JP" if "-ja-r2-" in f else "ru-RU"
         d = done.setdefault(pack, {"solved": 0, "exhausted": 0})
         d["solved" if r["result"] != "exhausted" else "exhausted"] += 1
-    m = os.path.getmtime(f)
-    newest = max(newest or m, m)
 
 K = {"ja-JP": 6, "ru-RU": 8}
 total_t = total_d = 0
@@ -60,11 +58,14 @@ for pack in ("ja-JP", "ru-RU"):
 
 # take rate: measured over a rolling 15-minute window from samples this
 # dashboard writes (the bake log carries no timestamps, so file times are not a
-# rate). takes = TTS generations logged by the newest round-2 bake log.
+# rate). takes = TTS generations logged since the chain's "bake start" marker,
+# so restarting the same batch never reads as a rate spike.
 logs = [f for f in glob.glob(os.path.join(here, "bestof-*-r2-*.log"))]
 if logs:
     log = max(logs, key=os.path.getmtime)
-    takes = sum(1 for l in open(log, errors="ignore") if "pad_token_id" in l)
+    lines = open(log, errors="ignore").read().splitlines()
+    marks = [i for i, l in enumerate(lines) if l.startswith("=== bake start")]
+    takes = sum(1 for l in lines[marks[-1]:] if "pad_token_id" in l)
     now = time.time()
     state = os.environ.get("WATCH_STATE", "/tmp/watch-r2-rate.state")
     samples = []

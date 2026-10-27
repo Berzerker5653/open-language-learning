@@ -107,6 +107,9 @@ batch() {
     # with the workers the machine can actually carry
     clamp_jobs
     say "$7: $before/$total settled, baking (K=$3, jobs=$JOBS, threads/job=$threads)"
+    # marker so the dashboard can count takes for THIS bake attempt, not since
+    # the first attempt on this checkpoint file
+    echo "=== bake start $(date -Is) jobs=$JOBS threads/job=$threads ===" >> "${out%.jsonl}.log"
     # torch defaults every worker to the physical core count, so N workers
     # oversubscribe badly (measured: 2 workers at 72 s/take). Cap each worker's
     # BLAS/OMP pool so jobs*threads stays near the core count instead.
@@ -117,7 +120,7 @@ batch() {
     after=$(settled "$out")
     if [ "$after" -ge "$total" ]; then break; fi
     if [ "$after" -le "$before" ]; then
-      say "$7: STALLED at $after/$total - stopping the chain"
+      say "$7: STALLED at $after/$total - abandoning this batch, the checkpoint keeps what settled"
       return 1
     fi
     say "$7: progress $before -> $after of $total - resuming at current memory"
