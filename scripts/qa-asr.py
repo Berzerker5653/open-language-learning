@@ -22,6 +22,7 @@ import argparse
 import concurrent.futures as cf
 import difflib
 import json
+import os
 import re
 import subprocess
 import sys
@@ -186,7 +187,9 @@ def main() -> int:
     ap.add_argument("--whisper", default=str(Path.home() / "whisper.cpp/build/bin/whisper-cli"))
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--ids", type=Path, help="only check these asset ids (one per line)")
-    ap.add_argument("--out", type=Path, help="write all results as jsonl")
+    ap.add_argument("--out", type=Path,
+                    help="jsonl of results; each row is appended as that asset settles, and an "
+                         "existing file is resumed (its ids are carried and not re-checked)")
     args = ap.parse_args()
 
     rows = [json.loads(l) for l in (args.pack / "media/manifest.jsonl").read_text().splitlines() if l.strip()]
@@ -194,19 +197,42 @@ def main() -> int:
         keep = {l.strip() for l in args.ids.read_text().splitlines() if l.strip()}
         rows = [r for r in rows if r["id"] in keep]
 
+    # Checkpoint as we go: a full-corpus pass runs for hours and a lost run
+    # means hours of whisper. Each verdict is flushed+fsynced the moment its
+    # asset settles, and re-running with the same --out keeps those rows and
+    # checks only what is left - so an interrupted audit resumes, it does not
+    # restart.
     results = []
-    with cf.ThreadPoolExecutor(max_workers=args.workers) as ex:
-        futs = [ex.submit(check, args.pack, args.model, args.lang, args.whisper, r) for r in rows]
-        for i, f in enumerate(cf.as_completed(futs), 1):
-            results.append(f.result())
-            if i % 250 == 0:
-                print(f"... {i}/{len(rows)} checked", file=sys.stderr)
+    if args.out and args.out.exists():
+        for l in args.out.read_text(encoding="utf-8").splitlines():
+            if l.strip():
+                results.append(json.loads(l))
+        done = {r["id"] for r in results}
+        rows = [r for r in rows if r["id"] not in done]
+        if results:
+            print(f"carrying {len(results)} settled rows from {args.out}; "
+                  f"{len(rows)} left to check", file=sys.stderr)
+        args.out.parent.mkdir(parents=True, exist_ok=True)
+    sink = args.out.open("a", encoding="utf-8") if args.out else None
+    try:
+        with cf.ThreadPoolExecutor(max_workers=args.workers) as ex:
+            futs = [ex.submit(check, args.pack, args.model, args.lang, args.whisper, r) for r in rows]
+            for i, f in enumerate(cf.as_completed(futs), 1):
+                res = f.result()
+                results.append(res)
+                if sink:
+                    sink.write(json.dumps(res, ensure_ascii=False) + "\n")
+                    sink.flush()
+                    os.fsync(sink.fileno())
+                if i % 250 == 0:
+                    print(f"... {i}/{len(rows)} checked", file=sys.stderr)
+    finally:
+        if sink:
+            sink.close()
 
     mismatches = [r for r in results if r["status"] == "MISMATCH"]
     timeouts = [r for r in results if r["status"] == "timeout"]
     missing = [r for r in results if r["status"] == "wav-missing"]
-    if args.out:
-        args.out.write_text("\n".join(json.dumps(r, ensure_ascii=False) for r in results) + "\n")
     # MISMATCH (real babble) or WAV-MISSING are genuine failures; TIMEOUT is an
     # infra signal — lower --workers and re-run — and must not fail the pass.
     print(f"checked={len(results)} "

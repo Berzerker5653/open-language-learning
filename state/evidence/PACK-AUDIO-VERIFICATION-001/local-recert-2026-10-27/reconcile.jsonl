@@ -1,0 +1,120 @@
+{"id": "ja.lex.abst.gainen", "pack": "ja-JP", "box_result": "pass@4", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "概念", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.abst.shomei", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.8, "local_heard": "正面", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.abst.hantai5", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.75, "local_heard": "ハンノン", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.abst2.hannou", "pack": "ja-JP", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 0.75, "local_heard": "はーんの?", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.abst2.koutei", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.8, "local_heard": "こうていって", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.abst2.juni2", "pack": "ja-JP", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "順位", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.abst2.shuuyou", "pack": "ja-JP", "box_result": "pass@4", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "収容", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.abst2.teigen", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.75, "local_heard": "ていけん", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.abst3.hikaku2", "pack": "ja-JP", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "比較", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.abst3.itchi", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "いっち", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.abst3.yoryo", "pack": "ja-JP", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 0.89, "local_heard": "考慮。", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic.bunko", "pack": "ja-JP", "box_result": "pass@4", "local_asr_status": "ok", "local_asr_ratio": 0.5, "local_heard": "分", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic.hyouji", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "表示…", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic.hyou", "pack": "ja-JP", "box_result": "pass@6", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "ひょう…", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic.inyou", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.75, "local_heard": "えいんよ", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic.kouchiku", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.8, "local_heard": "うっ…構築!", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic.mokuji", "pack": "ja-JP", "box_result": "pass@4", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "目次", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic.ronbun", "pack": "ja-JP", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 0.8, "local_heard": "へー論文。", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic.seika3", "pack": "ja-JP", "box_result": "pass@4", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "せいか", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic.shiji", "pack": "ja-JP", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "指示~", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic.teigi", "pack": "ja-JP", "box_result": "pass@5", "local_asr_status": "ok", "local_asr_ratio": 0.8, "local_heard": "てぎ", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic.shiryo4", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "しりょう。", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic2.hanron", "pack": "ja-JP", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 0.75, "local_heard": "ハンラン", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic2.juyou", "pack": "ja-JP", "box_result": "pass@4", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "重要。", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic2.kenri", "pack": "ja-JP", "box_result": "pass@6", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "ケンリ", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic2.kohyo", "pack": "ja-JP", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "好評", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic2.kentei", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.86, "local_heard": "ケンテ…", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic2.rondatate", "pack": "ja-JP", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "論立て", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic2.seido", "pack": "ja-JP", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "制度…", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic2.taiou", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.75, "local_heard": "太陽", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic2.taigen", "pack": "ja-JP", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "体現", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.academic2.yakuwari", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "役割", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.adjectives.ii", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "いい", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.admin.kin-yuu", "pack": "ja-JP", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 0.75, "local_heard": "金庫を…", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.admin.koseki", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "戸籍", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.admin.mibungou", "pack": "ja-JP", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 0.89, "local_heard": "身分語…", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.admin.nittei", "pack": "ja-JP", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 0.86, "local_heard": "にって", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.admin.torikae", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "取り替え", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.admin.tsuuka-chou", "pack": "ja-JP", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "通帳…", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.admin.yotei-hyou", "pack": "ja-JP", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 0.91, "local_heard": "予定ひょ~", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.admin2.nauhousho", "pack": "ja-JP", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 0.92, "local_heard": "農法省", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.admin2.shomei", "pack": "ja-JP", "box_result": "pass@6", "local_asr_status": "ok", "local_asr_ratio": 0.89, "local_heard": "照明", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.advice.fumei", "pack": "ja-JP", "box_result": "pass@4", "local_asr_status": "ok", "local_asr_ratio": 0.67, "local_heard": "不明、く明。", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.advice.iikata", "pack": "ja-JP", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 0.75, "local_heard": "えいかた", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.advice.koudan", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "降誕。", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.advice.koudou", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "行動?", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.advice.mei", "pack": "ja-JP", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "めい", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.advice.risei", "pack": "ja-JP", "box_result": "pass@6", "local_asr_status": "ok", "local_asr_ratio": 0.8, "local_heard": "リセ", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.advice.ronri", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.86, "local_heard": "ロンリー", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.advice.sagen", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "クゲン", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.advice2.hansei2", "pack": "ja-JP", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 0.75, "local_heard": "完成。", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.advice2.hito2", "pack": "ja-JP", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 0.0, "local_heard": "人", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.advice2.ie2", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "いえ", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.advice2.ishi2", "pack": "ja-JP", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "石", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.advice2.inoko2", "pack": "ja-JP", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "いのこ", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.advice2.isu2", "pack": "ja-JP", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "椅子…", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.advice2.kokuhan", "pack": "ja-JP", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "コクハン", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.advice2.kyoushou", "pack": "ja-JP", "box_result": "pass@4", "local_asr_status": "ok", "local_asr_ratio": 0.83, "local_heard": "今日しよう!", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.advice2.niwa2", "pack": "ja-JP", "box_result": "pass@4", "local_asr_status": "ok", "local_asr_ratio": 0.5, "local_heard": "庭…うっ…うっ…", "local_segments_verdict": "PASS"}
+{"id": "ja.lex.advice2.tetsudo", "pack": "ja-JP", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "鉄道…", "local_segments_verdict": "PASS"}
+{"id": "ru.contrast.stress.muka-0", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.8, "local_heard": "Ну-ка.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.city.biliet", "pack": "ru-RU", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 0.82, "local_heard": "Билеут.", "local_segments_verdict": "PASS"}
+{"id": "ru.contrast.stress.zamok-0", "pack": "ru-RU", "box_result": "pass@8", "local_asr_status": "ok", "local_asr_ratio": 0.86, "local_heard": "Зай омок.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.argue4.proschyot", "pack": "ru-RU", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 0.77, "local_heard": "Расчёт.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.city.chemodan", "pack": "ru-RU", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 0.87, "local_heard": "Чимода Юн", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.city.daleko", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Далеко.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.city.koncert", "pack": "ru-RU", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 0.76, "local_heard": "Конца орд!", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.city.nalevo", "pack": "ru-RU", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 0.8, "local_heard": "Нали-о.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.city.probka", "pack": "ru-RU", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 0.77, "local_heard": "Пробка!", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.city.ploshchadka", "pack": "ru-RU", "box_result": "pass@6", "local_asr_status": "ok", "local_asr_ratio": 0.84, "local_heard": "Площа утка.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.city.tam", "pack": "ru-RU", "box_result": "pass@4", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Там...", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.city.vkhod", "pack": "ru-RU", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 0.86, "local_heard": "Фот...", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.comparisons.chtoby", "pack": "ru-RU", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 0.77, "local_heard": "Стой бы!", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.comparisons.iz-za", "pack": "ru-RU", "box_result": "pass@6", "local_asr_status": "MISMATCH", "local_asr_ratio": 0.14, "local_heard": "Иосифа.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.comparisons.gonki", "pack": "ru-RU", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 0.75, "local_heard": "Угоюнки.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.comparisons.medlennee", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.89, "local_heard": "Медленнее!", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.comparisons.menshe", "pack": "ru-RU", "box_result": "pass@4", "local_asr_status": "ok", "local_asr_ratio": 0.77, "local_heard": "Меньше.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.comparisons.spokoinee", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.77, "local_heard": "Спокойнее её!", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.critical.deeprichastie", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.85, "local_heard": "Где причастие?", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.critical.frazeologizm", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.85, "local_heard": "Прозеологизм", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.critical.kalambur", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Каламбур!", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.critical.paronim", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Пароним.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.critical.padezh", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.77, "local_heard": "Пойдешь.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.critical2.lozung", "pack": "ru-RU", "box_result": "pass@5", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Лозунг.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.critical2.napor", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.77, "local_heard": "Ай, напор.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.critical3.reglament", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Регламент.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.critical3.ustav", "pack": "ru-RU", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Устав.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.critical4.empiricheskiy", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Эмпирический.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.critical4.kontrdovod", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.9, "local_heard": "Контрдавод?", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.critical4.naitie", "pack": "ru-RU", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Наитие!", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.critical4.samooobman", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.78, "local_heard": "Сам! Обман!", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.critical4.teorema", "pack": "ru-RU", "box_result": "pass@8", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "ТЕОРЕМА", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.cult.bilingv", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.75, "local_heard": "Биланг!", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.cult.etnos", "pack": "ru-RU", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Этнос.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.cult.cenitel", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Ценитель.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.cult.nonkonformist", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Нонконформист!", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.cult.koda", "pack": "ru-RU", "box_result": "pass@5", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Кода!", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.cult.persona", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Персона!", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.culture.galereya", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Галерея.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.culture.opera", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.86, "local_heard": "О, опера.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.experiences.nervnichat", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.97, "local_heard": "Не ровничать!", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.experiences.otvaga", "pack": "ru-RU", "box_result": "pass@4", "local_asr_status": "ok", "local_asr_ratio": 0.8, "local_heard": "Твоя га...", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.everyday.mama", "pack": "ru-RU", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 0.83, "local_heard": "Мау. Мау.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.experiences.pokhvala", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Похвала!", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.experiences.probovat", "pack": "ru-RU", "box_result": "pass@7", "local_asr_status": "ok", "local_asr_ratio": 0.84, "local_heard": "Пробовать!", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.experiences.prosto", "pack": "ru-RU", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 0.78, "local_heard": "Про-и-о-сто!", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.experiences.robost", "pack": "ru-RU", "box_result": "pass@4", "local_asr_status": "ok", "local_asr_ratio": 0.8, "local_heard": "Робость.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.experiences.veselo", "pack": "ru-RU", "box_result": "pass@4", "local_asr_status": "ok", "local_asr_ratio": 0.82, "local_heard": "Весело.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.experiences.volnenie", "pack": "ru-RU", "box_result": "pass@7", "local_asr_status": "ok", "local_asr_ratio": 0.96, "local_heard": "Волнение.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.experiences.vospominanie", "pack": "ru-RU", "box_result": "pass@6", "local_asr_status": "ok", "local_asr_ratio": 0.77, "local_heard": "Воспоминания.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.family.dedushka", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 0.94, "local_heard": "Дедушка.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.family.muzh", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Муш.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.family.nravitsya", "pack": "ru-RU", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 0.95, "local_heard": "Нравится.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.family.u-menya", "pack": "ru-RU", "box_result": "pass@4", "local_asr_status": "ok", "local_asr_ratio": 0.84, "local_heard": "У меня её...", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.feelings.bojazn", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Боязнь.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.feelings.toska", "pack": "ru-RU", "box_result": "pass@5", "local_asr_status": "ok", "local_asr_ratio": 0.83, "local_heard": "Это ска...", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.food.banan", "pack": "ru-RU", "box_result": "pass@3", "local_asr_status": "ok", "local_asr_ratio": 0.8, "local_heard": "Банна-он.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.family.znakomyy", "pack": "ru-RU", "box_result": "pass@2", "local_asr_status": "ok", "local_asr_ratio": 0.84, "local_heard": "Знака омый!", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.food.kafe", "pack": "ru-RU", "box_result": "pass@1", "local_asr_status": "ok", "local_asr_ratio": 1.0, "local_heard": "Кафе!", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.food.butylka", "pack": "ru-RU", "box_result": "pass@4", "local_asr_status": "ok", "local_asr_ratio": 0.8, "local_heard": "Бутылка.", "local_segments_verdict": "PASS"}

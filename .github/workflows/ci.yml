@@ -367,6 +367,11 @@ jobs:
       # needed sox) and rewrites only the manifest rows its bytes actually
       # changed, so the shipped audio and its notes cannot drift apart.
       - run: python scripts/test_renormalize_pack_audio.py
+      # PACK-AUDIO-VERIFICATION-001: the ASR round-trip gate's survivability -
+      # each verdict is checkpointed as its asset settles and a re-run carries
+      # settled rows instead of re-transcribing them (a killed hours-long audit
+      # must resume, not restart). Stubbed recognizer; no model, no network.
+      - run: python scripts/test_qa_asr.py
       # PACK-AI-001: the scaffold's own invariants (media coverage/hash, script
       # declaration, placeholder-audio honesty) without cargo, network or TTS.
       - run: python -m unittest discover -s scripts -p 'test_new_pack.py'
