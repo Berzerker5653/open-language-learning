@@ -94,6 +94,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", required=True)
     ap.add_argument("--batch-size", type=int, default=25)
+    ap.add_argument("--sheet", default=None,
+                    help="also write an owner disposition CSV with these rows")
     args = ap.parse_args()
 
     rows_out = []
@@ -197,6 +199,24 @@ def main() -> int:
             md.append("")
 
     (HERE / f"EXHAUSTED-{args.date}.md").write_text("\n".join(md), encoding="utf-8")
+
+    # The answer sheet: one row per exhausted clip, batch numbers identical to
+    # EXHAUSTED-PLAY.sh (index within the pack, in file order, per --batch-size),
+    # so "listen to ru 3" and "fill in ru batch 3" are the same 25 clips.
+    # utf-8-sig so LibreOffice reads the Cyrillic/kana without a import dialog.
+    if args.sheet:
+        import csv
+        with open(HERE / args.sheet, "w", newline="", encoding="utf-8-sig") as fh:
+            w = csv.writer(fh)
+            w.writerow(["batch", "pack", "id", "declared_text", "cause",
+                        "takes_failed", "best_asr_ratio",
+                        "owner_disposition", "note"])
+            for pack in ("ru-RU", "ja-JP"):
+                for i, r in enumerate(per_pack[pack]):
+                    w.writerow([i // args.batch_size + 1, pack, r["id"], r["text"],
+                                r["cause"], r["attempts"],
+                                "" if r["best_asr_ratio"] is None
+                                else f"{r['best_asr_ratio']:.2f}", "", ""])
 
     for pack in ("ru-RU", "ja-JP"):
         tally = collections.Counter(r["cause"] for r in per_pack[pack])
