@@ -1,0 +1,14 @@
+ja.lex.work.pen
+ja.lex.work2.hanrei
+ja.lex.work2.hoshou
+ja.lex.work2.roushi
+ja.lex.work2.teian
+ja.sent.a2.city.business-hours
+ja.sent.a2.clinic.morning-slot
+ja.sent.a2.reserve.four-at-seven
+ja.sent.explain-grammar
+ja.sent.hundred-yen
+ja.sent.rain-today
+ja.sent.today-monday
+ja.sent.wake-up
+ja.sent.weather-good
