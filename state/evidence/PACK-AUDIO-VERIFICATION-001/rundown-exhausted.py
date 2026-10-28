@@ -100,6 +100,7 @@ def main() -> int:
 
     rows_out = []
     per_pack: dict[str, list[dict]] = {}
+    stats: dict[str, dict] = {}
 
     for lang, pack in PACKS.items():
         texts = text_of(pack)
@@ -114,6 +115,22 @@ def main() -> int:
                 if line.strip():
                     r = json.loads(line)
                     r2[r["id"]] = r
+        # Header numbers are derived from the checkpoints, never typed in: the
+        # packet is the owner's decision document and a stale count in it is a
+        # false statement about how much bake effort a clip already cost.
+        r1_rows = [json.loads(l) for l in
+                   (HERE / f"bestof-{lang}.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
+        r1_ex = [r for r in r1_rows if r["result"] == "exhausted"]
+        done = [r2[r["id"]] for r in r1_ex if r2.get(r["id"]) is not None]
+        stats[pack] = {
+            "r1_in": len(r1_rows), "r1_ex": len(r1_ex),
+            "k_r1": max((r["attempts"] for r in r1_ex), default=0),
+            "r2_in": len(r1_ex), "r2_done": len(done),
+            "r2_certs": sum(1 for r in done if r["result"] != "exhausted"),
+            "k_r2": max((r["attempts"] for r in done), default=0),
+            "K_total": max((r["attempts"] + s["attempts"] for r, s in
+                            ((r, r2[r["id"]]) for r in r1_ex if r2.get(r["id"]))), default=0),
+        }
         recs = []
         for line in (HERE / f"bestof-{lang}.jsonl").read_text(encoding="utf-8").splitlines():
             if not line.strip():
@@ -157,22 +174,35 @@ def main() -> int:
     (HERE / f"exhausted-{args.date}.jsonl").write_text(
         "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows_out), encoding="utf-8")
 
+    S = stats
     md: list[str] = [
         f"# Best-of-K rounds 1+2: exhausted voice lines - owner disposition ({args.date})",
         "",
-        "Every clip below was re-baked up to K takes on the campaign box and **every take",
-        "failed the full gate** (acoustic structure + whisper large-v3-turbo round-trip):",
-        "ru-RU 118 of 417 exhausted at K=8, ja-JP 264 of 1,066 exhausted at K=6. The",
-        "per-take columns are the recorded gate evidence, not commentary.",
+        "Every clip below failed **every take** of both re-bake rounds under the full",
+        "gate (acoustic structure + whisper large-v3-turbo round-trip). The per-take",
+        "columns are the recorded gate evidence, not commentary.",
         "",
-        "Round 2 (`local-chain.sh`, GamingPC) re-bakes these same ids with fresh",
-        "draws. Measured on the first round-2 batch (ja-b00, 25 ids, K=6): **8",
-        "cleared, 17 did not** - the earlier '~75% will clear' expectation was wrong",
-        "(takes are i.i.d. but ids are not exchangeable: failing K draws already is",
-        "evidence about the id). Budget about a third certifying. Rows marked",
-        "`round2=pending` have not been re-run yet: do not dispose those from this",
-        "file, regenerate the packet from the round-2 checkpoints first.",
+        f"* round 1 (Omarchy): {S['ja-JP']['r1_in']} ja-JP ids at K={S['ja-JP']['k_r1']} "
+        f"and {S['ru-RU']['r1_in']} ru-RU ids at K={S['ru-RU']['k_r1']} entered best-of-K; "
+        f"{S['ja-JP']['r1_ex']} + {S['ru-RU']['r1_ex']} exhausted.",
+        f"* round 2 (GamingPC, `local-chain.sh`): all {S['ja-JP']['r2_in'] + S['ru-RU']['r2_in']} "
+        f"exhausted ids re-baked with fresh draws - "
+        f"{S['ja-JP']['r2_certs']} of {S['ja-JP']['r2_in']} ja-JP and "
+        f"{S['ru-RU']['r2_certs']} of {S['ru-RU']['r2_in']} ru-RU cleared "
+        f"({(S['ja-JP']['r2_certs'] + S['ru-RU']['r2_certs']) / max(1, S['ja-JP']['r2_in'] + S['ru-RU']['r2_in']):.0%} "
+        "of the residue, not the ~75% the plan expected: takes are i.i.d. but ids are "
+        "not exchangeable, so already having failed K draws is evidence about the id).",
+        f"* what is left, i.e. this packet: {len(rows_out)} clips, each carrying "
+        f"{S['ja-JP']['K_total']} (ja-JP) / {S['ru-RU']['K_total']} (ru-RU) failed takes "
+        "under identical gates - a materially stronger basis for remove/re-author than a "
+        "single bad listening impression.",
         "",
+    ]
+    if any(S[p]["r2_done"] < S[p]["r2_in"] for p in S):
+        md += ["Rows marked `round2=pending` have not been re-run yet: do not dispose",
+               "those from this file, regenerate the packet from the round-2 checkpoints",
+               "first.", ""]
+    md += ["",
         "Options per clip (owner's call, cannot be self-certified by an agent):",
         "",
         "* keep - listen and accept it (especially the `near-miss` bucket: the ratio",

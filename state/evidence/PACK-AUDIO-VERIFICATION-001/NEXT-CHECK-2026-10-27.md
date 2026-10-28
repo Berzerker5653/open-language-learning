@@ -1,11 +1,17 @@
 # Resume check — audio campaign on GamingPC (2026-10-27)
 
+**Status 2026-10-28 08:15: the round-2 queue is FINISHED** (all 16 batches
+settled and committed at 23:03 on 2026-10-27; `local-chain done`). Final
+tallies and the close-out evidence: `ROUND2-CLOSE-2026-10-28.md`. The rest of
+this file is the round-2 operating note — kept for how the box behaves under
+load, not because anything is still running.
+
 The owner moved round 2 off Omarchy ("smaller batches so we don't lose so
 much work... run it on this computer if we can as it's faster"). Everything
 below runs on GamingPC; the Omarchy note in `NEXT-CHECK-2026-10-24.md` is the
 history of round 1 only.
 
-## What is running, and how to watch it
+## How it ran, and how to watch a run like it
 
     sh state/evidence/PACK-AUDIO-VERIFICATION-001/local-chain.sh      # detached start
     sh state/evidence/PACK-AUDIO-VERIFICATION-001/WATCH.sh 20         # live dashboard
