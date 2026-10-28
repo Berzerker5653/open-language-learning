@@ -1,0 +1,7 @@
+[handoff] strata down; audit restarted at full width 2026-10-28T10:25:59-06:00
+[handoff] MemAvailable 114 GB
+workers=8 (requested 8, MemAvailable 114 GB)
+-- ja-JP: ASR round-trip over every manifest row
+FAIL ja.sent.a2.reserve.four-at-seven ratio=0.73 said='よにんで、しちじにおねがいします。' heard='4人で7時にお願いします'
+-- ru-RU: ASR round-trip over every manifest row
+Terminated                 WORKERS=8 sh reaudit-asr.sh
