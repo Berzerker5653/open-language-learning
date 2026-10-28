@@ -1,0 +1,39 @@
+fatal: pathspec 'bestof-ja-r2-ja-b00.jsonl' did not match any files
+On branch main
+Your branch is ahead of 'origin/main' by 22 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   languages/ja-JP/media/manifest.jsonl
+	modified:   state/evidence/ACC-001/run-L1.log
+	modified:   state/evidence/PACK-AUDIO-VERIFICATION-001/retry-batches/ja-b00.txt
+	modified:   state/evidence/PACK-AUDIO-VERIFICATION-001/retry-batches/ja-b01.txt
+	modified:   state/evidence/PACK-AUDIO-VERIFICATION-001/retry-batches/ja-b02.txt
+	modified:   state/evidence/PACK-AUDIO-VERIFICATION-001/retry-batches/ja-b03.txt
+	modified:   state/evidence/PACK-AUDIO-VERIFICATION-001/retry-batches/ja-b04.txt
+	modified:   state/evidence/PACK-AUDIO-VERIFICATION-001/retry-batches/ja-b05.txt
+	modified:   state/evidence/PACK-AUDIO-VERIFICATION-001/retry-batches/ru-b00.txt
+	modified:   state/evidence/PACK-AUDIO-VERIFICATION-001/retry-batches/ru-b01.txt
+	modified:   state/evidence/PACK-AUDIO-VERIFICATION-001/retry-batches/ru-b02.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	state/evidence/PACK-AUDIO-VERIFICATION-001/bestof-ja-r2-ja-b00.jsonl
+	state/evidence/PACK-AUDIO-VERIFICATION-001/bestof-ja-r2-ja-b00.log
+	state/evidence/PACK-AUDIO-VERIFICATION-001/local-chain.lock
+	state/evidence/PACK-AUDIO-VERIFICATION-001/local-chain.log
+	state/evidence/PACK-AUDIO-VERIFICATION-001/local-chain.out
+	state/evidence/PACK-AUDIO-VERIFICATION-001/retry-batches/ja-b06.txt
+	state/evidence/PACK-AUDIO-VERIFICATION-001/retry-batches/ja-b07.txt
+	state/evidence/PACK-AUDIO-VERIFICATION-001/retry-batches/ja-b08.txt
+	state/evidence/PACK-AUDIO-VERIFICATION-001/retry-batches/ja-b09.txt
+	state/evidence/PACK-AUDIO-VERIFICATION-001/retry-batches/ja-b10.txt
+	state/evidence/PACK-AUDIO-VERIFICATION-001/retry-batches/ru-b03.txt
+	state/evidence/PACK-AUDIO-VERIFICATION-001/retry-batches/ru-b04.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+next: sh close-round2.sh          (packet + whole-corpus hash + pack gates + tallies)
+then: sh regate-harvest.sh        (re-cert the 1,101 round-1 winners on this build)
+both write evidence only; staging/publishing stays a separate owner step.

@@ -1,0 +1,71 @@
+[2026-10-27T09:40:11-06:00] local-chain start (jobs=8)
+[2026-10-27T09:40:11-06:00] jobs clamped 8 -> 2 (MemAvailable 22 GB)
+[2026-10-27T09:40:11-06:00] ja ja-b*: 0/ settled, baking (K=6, jobs=2)
+[2026-10-27T09:40:12-06:00] ja ja-b*: STALLED at 0/ - stopping the chain
+[2026-10-27T09:41:11-06:00] local-chain start (jobs=8)
+[2026-10-27T09:41:11-06:00] jobs clamped 8 -> 2 (MemAvailable 23 GB)
+[2026-10-27T09:41:11-06:00] ja ja-b00: 0/25 settled, baking (K=6, jobs=2)
+[2026-10-27T09:41:11-06:00] ja ja-b00: STALLED at 0/25 - stopping the chain
+[2026-10-27T09:42:23-06:00] local-chain start (jobs=8)
+[2026-10-27T09:42:24-06:00] jobs clamped 8 -> 2 (MemAvailable 25 GB)
+[2026-10-27T09:42:24-06:00] ja ja-b00: 0/25 settled, baking (K=6, jobs=2)
+[2026-10-27T09:57:34-06:00] local-chain start (jobs=8)
+[2026-10-27T09:57:34-06:00] jobs clamped 8 -> 2 (MemAvailable 29 GB)
+[2026-10-27T09:57:34-06:00] ja ja-b00: 0/25 settled, baking (K=6, jobs=2, threads/job=16)
+[2026-10-27T10:03:07-06:00] local-chain start (jobs=8)
+[2026-10-27T10:03:07-06:00] jobs clamped 8 -> 3 (MemAvailable 30 GB)
+[2026-10-27T10:03:07-06:00] ja ja-b00: 0/25 settled, baking (K=6, jobs=3, threads/job=10)
+[2026-10-27T10:56:29-06:00] ja ja-b00: settled 25/25 -> 8 solved / 17 exhausted
+[2026-10-27T10:56:29-06:00] ja ja-b00: COMMIT FAILED (checkpoint still on disk)
+[2026-10-27T10:56:29-06:00] jobs clamped 8 -> 3 (MemAvailable 35 GB)
+[2026-10-27T10:56:29-06:00] ja ja-b01: 0/25 settled, baking (K=6, jobs=3, threads/job=10)
+[2026-10-27T11:00:56-06:00] local-chain start (jobs=8)
+[2026-10-27T11:00:56-06:00] ja ja-b00: already complete (25/25) - skipping
+[2026-10-27T11:00:56-06:00] jobs clamped 8 -> 3 (MemAvailable 35 GB)
+[2026-10-27T11:00:56-06:00] ja ja-b01: 0/25 settled, baking (K=6, jobs=3, threads/job=10)
+[2026-10-27T11:55:29-06:00] ja ja-b01: settled 25/25 -> 9 solved / 16 exhausted
+[2026-10-27T11:55:29-06:00] ja ja-b01: committed
+[2026-10-27T11:55:29-06:00] jobs clamped 8 -> 3 (MemAvailable 37 GB)
+[2026-10-27T11:55:29-06:00] ja ja-b02: 0/25 settled, baking (K=6, jobs=3, threads/job=10)
+[2026-10-27T12:55:59-06:00] ja ja-b02: settled 25/25 -> 8 solved / 17 exhausted
+[2026-10-27T12:55:59-06:00] ja ja-b02: committed
+[2026-10-27T12:55:59-06:00] ja ja-b03: 0/25 settled, baking (K=6, jobs=8, threads/job=4)
+[2026-10-27T13:36:38-06:00] ja ja-b03: settled 25/25 -> 12 solved / 13 exhausted
+[2026-10-27T13:36:38-06:00] ja ja-b03: committed
+[2026-10-27T13:36:38-06:00] ja ja-b04: 0/25 settled, baking (K=6, jobs=8, threads/job=4)
+[2026-10-27T14:13:52-06:00] ja ja-b04: settled 25/25 -> 13 solved / 12 exhausted
+[2026-10-27T14:13:52-06:00] ja ja-b04: committed
+[2026-10-27T14:13:52-06:00] ja ja-b05: 0/25 settled, baking (K=6, jobs=8, threads/job=4)
+[2026-10-27T14:56:07-06:00] ja ja-b05: settled 25/25 -> 11 solved / 14 exhausted
+[2026-10-27T14:56:07-06:00] ja ja-b05: committed
+[2026-10-27T14:56:07-06:00] ja ja-b06: 0/25 settled, baking (K=6, jobs=8, threads/job=4)
+[2026-10-27T15:36:28-06:00] ja ja-b06: settled 25/25 -> 13 solved / 12 exhausted
+[2026-10-27T15:36:28-06:00] ja ja-b06: committed
+[2026-10-27T15:36:28-06:00] ja ja-b07: 0/25 settled, baking (K=6, jobs=8, threads/job=4)
+[2026-10-27T16:37:14-06:00] ja ja-b07: settled 25/25 -> 10 solved / 15 exhausted
+[2026-10-27T16:37:15-06:00] ja ja-b07: committed
+[2026-10-27T16:37:15-06:00] ja ja-b08: 0/25 settled, baking (K=6, jobs=8, threads/job=4)
+[2026-10-27T17:07:51-06:00] ja ja-b08: settled 25/25 -> 14 solved / 11 exhausted
+[2026-10-27T17:07:51-06:00] ja ja-b08: committed
+[2026-10-27T17:07:51-06:00] ja ja-b09: 0/25 settled, baking (K=6, jobs=8, threads/job=4)
+[2026-10-27T17:35:48-06:00] ja ja-b09: settled 25/25 -> 18 solved / 7 exhausted
+[2026-10-27T17:35:48-06:00] ja ja-b09: committed
+[2026-10-27T17:35:48-06:00] ja ja-b10: 0/14 settled, baking (K=6, jobs=8, threads/job=4)
+[2026-10-27T18:00:49-06:00] ja ja-b10: settled 14/14 -> 3 solved / 11 exhausted
+[2026-10-27T18:00:49-06:00] ja ja-b10: committed
+[2026-10-27T18:00:49-06:00] ru ru-b00: 0/25 settled, baking (K=8, jobs=8, threads/job=4)
+[2026-10-27T19:07:53-06:00] ru ru-b00: settled 25/25 -> 8 solved / 17 exhausted
+[2026-10-27T19:07:53-06:00] ru ru-b00: committed
+[2026-10-27T19:07:53-06:00] ru ru-b01: 0/25 settled, baking (K=8, jobs=8, threads/job=4)
+[2026-10-27T20:15:25-06:00] ru ru-b01: settled 25/25 -> 7 solved / 18 exhausted
+[2026-10-27T20:15:25-06:00] ru ru-b01: committed
+[2026-10-27T20:15:26-06:00] ru ru-b02: 0/25 settled, baking (K=8, jobs=8, threads/job=4)
+[2026-10-27T21:15:21-06:00] ru ru-b02: settled 25/25 -> 5 solved / 20 exhausted
+[2026-10-27T21:15:21-06:00] ru ru-b02: committed
+[2026-10-27T21:15:21-06:00] ru ru-b03: 0/25 settled, baking (K=8, jobs=8, threads/job=4)
+[2026-10-27T22:07:42-06:00] ru ru-b03: settled 25/25 -> 5 solved / 20 exhausted
+[2026-10-27T22:07:42-06:00] ru ru-b03: committed
+[2026-10-27T22:07:42-06:00] ru ru-b04: 0/18 settled, baking (K=8, jobs=8, threads/job=4)
+[2026-10-27T23:03:30-06:00] ru ru-b04: settled 18/18 -> 1 solved / 17 exhausted
+[2026-10-27T23:03:30-06:00] ru ru-b04: committed
+[2026-10-27T23:03:30-06:00] local-chain done

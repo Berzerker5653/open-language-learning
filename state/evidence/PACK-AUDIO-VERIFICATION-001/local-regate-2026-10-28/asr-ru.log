@@ -1,0 +1,4 @@
+... 250/299 checked
+checked=299 passed=297 MISMATCH=2 TIMEOUT=0 WAV-MISSING=0
+FAIL ru.lex.comparisons.iz-za ratio=0.14 said='и́з-за' heard='Иосифа.'
+FAIL ru.lex.socialplans.napitok ratio=0.6 said='напи́ток' heard='Напию так.'
