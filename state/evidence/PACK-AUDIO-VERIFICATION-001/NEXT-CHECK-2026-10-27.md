@@ -25,6 +25,37 @@ committed (manifest rows + checkpoint + bake log) the moment it settles — the
 Stop with `pkill -f local-chain.sh` then `pkill -f bake-bestof.py`; restart
 resumes inside the current batch and re-reads memory at that point.
 
+## Status - 2026-10-28 evening (same run, half done)
+
+The handoff worked: the chain came up 10:26 with 8 workers (the clamp saw
+114 GB free), ran ja to completion, and moved to ru. The owner restarted
+strata around 15:00 for this session, so the ru rows now run alongside
+inference - slower than the strata-down window, same rules.
+
+- **ja: 4,902/4,902** (1,232 carried rows re-verified, verdicts preserved).
+  287 fail. Of those: 143 are already in the disposition packet; **0** were
+  certified by the campaign - the rounds that installed clips are
+  self-consistent with the gate that certified them; **144** are new: they
+  passed the old (since-deleted) build's pass in the asr6 audit and fail the
+  pinned one. They sit in the 0.2-0.7 ratio band: wrong-word clips
+  (`chie` heard "Cへ", `hyousou` heard "へよ", `fumin` heard "海") and cases
+  where the recognizer answered in kanji the kana-fold can't compare
+  (`rest-today` declared きょうは やすみます。, heard 今日は休みます - the
+  right sentence). Baking those 144 is cheap insurance: the loop only keeps
+  a take that passes, and the rest land in the owner packet.
+- **ru: 746/4,856** at ~890 clips/h (the box's CPU ceiling for this build:
+  ~32 s of wall per clip at 8 workers x ~3 threads). Remaining ~4,110 ≈
+  4.6 h unattended with strata off; longer with it on.
+- `round4-chain.sh` is running: it waits for the re-audit, then bakes exactly
+  the failures no campaign record explains, 25-id batches with one commit
+  each, ja (K=6) then ru (K=8), and re-runs the close-out at the end.
+
+Open follow-up for the gate itself (NOT mid-audit): the kana fold leaves
+kanji transcripts uncomparable - 33 of the 144. A heard-side G2P (the same
+JMDict resource the declared side already uses) would judge those properly
+instead of sending them to a bake. Deferred until this audit's tallies are
+committed.
+
 ## The constraint this box actually has
 
 GamingPC also serves inference: strata holds ~85-88 GB resident. Measured
