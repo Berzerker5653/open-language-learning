@@ -46,15 +46,55 @@ inference - slower than the strata-down window, same rules.
 - **ru: 746/4,856** at ~890 clips/h (the box's CPU ceiling for this build:
   ~32 s of wall per clip at 8 workers x ~3 threads). Remaining ~4,110 ≈
   4.6 h unattended with strata off; longer with it on.
-- `round4-chain.sh` is running: it waits for the re-audit, then bakes exactly
-  the failures no campaign record explains, 25-id batches with one commit
-  each, ja (K=6) then ru (K=8), and re-runs the close-out at the end.
+- `round4-chain.sh` waits for the re-audit, then bakes exactly the failures no
+  campaign record explains, 25-id batches with one commit each, ja (K=6) then
+  ru (K=8), and re-runs the close-out at the end.
 
 Open follow-up for the gate itself (NOT mid-audit): the kana fold leaves
 kanji transcripts uncomparable - 33 of the 144. A heard-side G2P (the same
 JMDict resource the declared side already uses) would judge those properly
 instead of sending them to a bake. Deferred until this audit's tallies are
 committed.
+
+## PAUSED 2026-10-28 15:20 at the owner's request
+
+Nothing campaign-related runs on this box now, and nothing will start itself:
+`lts-local-chain.service` was **disabled** (it was `enabled`, i.e.
+boot-resumable) and the round-2 unit is `inactive`. Killed: the re-audit driver
+and its whisper workers, `round4-chain.sh`, `handoff.sh` (one-shot, already
+done). `omp-strata.service` was left alone - that's your inference service, not
+campaign work. MemAvailable after the stop: 32 GB.
+
+Committed in `de70068`: **6,090 of 9,758 rows** of verdicts.
+
+| pack | audited | state |
+|---|---|---|
+| ja-JP | 4,902/4,902 | complete; 287 fail (143 already in the packet, 0 certified by the campaign, 144 unexplained) |
+| ru-RU | 1,188/4,856 | 428 carried verdicts + 760 fresh; **3,668 left** ≈ 4.6 h at 890/h strata-off, ~5 h alongside inference |
+
+### To resume (the one trap: pin the date)
+
+`qa-asr.py` resumes by skipping ids already in the output file - but the
+output path is derived from `DATE`, so a plain restart tomorrow opens
+`full-audit-2026-10-29/` and re-listens to all 9,758 clips.
+
+    cd state/evidence/PACK-AUDIO-VERIFICATION-001
+    DATE=2026-10-28 sh reaudit-asr.sh        # appends, skips finished ids
+    setsid nohup sh round4-chain.sh > round4.log 2>&1 < /dev/null &   # waits for the audit, then bakes
+
+Optionally re-arm the boot-resume unit first:
+`systemctl --user enable --now lts-local-chain.service` (round-2 batches are all
+complete, so it verifies and exits; it is not what drives the re-audit).
+
+### Not started yet (all of it resumes from committed files)
+
+- round-4 bakes for the 144 unexplained ja rows (and ru's equivalents);
+- ru fail tallies: `audit-fails.jsonl` is only written when the driver reaches
+  its reconciliation step, which it didn't - but the per-row verdicts are in
+  `full-audit-2026-10-28/asr-ru-RU.jsonl`, so the 144-style breakdown can be
+  computed from those rows without re-listening to anything;
+- `close-round2.sh` re-run to regenerate the owner packet (238 clips now, plus
+  whatever round 4 exhausts).
 
 ## The constraint this box actually has
 
