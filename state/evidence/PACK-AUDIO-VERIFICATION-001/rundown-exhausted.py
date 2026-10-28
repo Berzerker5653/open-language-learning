@@ -196,6 +196,11 @@ def main() -> int:
         f"{S['ja-JP']['K_total']} (ja-JP) / {S['ru-RU']['K_total']} (ru-RU) failed takes "
         "under identical gates - a materially stronger basis for remove/re-author than a "
         "single bad listening impression.",
+        "* what you will hear in the rundown is the clip that would ship: `bake-bestof.py`",
+        "  discards losing takes and keeps the old wav until a winner replaces it, so the",
+        "  bytes at `media/<id>.wav` are still the original bake, not one of the failed",
+        "  re-bakes. The manifest hash audit in `close-round2.sh` proves the recorded rows",
+        "  match those bytes.",
         "",
     ]
     if any(S[p]["r2_done"] < S[p]["r2_in"] for p in S):

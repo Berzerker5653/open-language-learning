@@ -7,6 +7,11 @@ columns are the recorded gate evidence, not commentary.
 * round 1 (Omarchy): 1066 ja-JP ids at K=6 and 417 ru-RU ids at K=8 entered best-of-K; 264 + 118 exhausted.
 * round 2 (GamingPC, `local-chain.sh`): all 382 exhausted ids re-baked with fresh draws - 119 of 264 ja-JP and 26 of 118 ru-RU cleared (38% of the residue, not the ~75% the plan expected: takes are i.i.d. but ids are not exchangeable, so already having failed K draws is evidence about the id).
 * what is left, i.e. this packet: 237 clips, each carrying 12 (ja-JP) / 16 (ru-RU) failed takes under identical gates - a materially stronger basis for remove/re-author than a single bad listening impression.
+* what you will hear in the rundown is the clip that would ship: `bake-bestof.py`
+  discards losing takes and keeps the old wav until a winner replaces it, so the
+  bytes at `media/<id>.wav` are still the original bake, not one of the failed
+  re-bakes. The manifest hash audit in `close-round2.sh` proves the recorded rows
+  match those bytes.
 
 
 Options per clip (owner's call, cannot be self-certified by an agent):
