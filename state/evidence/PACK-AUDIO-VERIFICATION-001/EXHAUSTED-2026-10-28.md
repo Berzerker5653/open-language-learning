@@ -1,12 +1,13 @@
-# Best-of-K rounds 1+2: exhausted voice lines - owner disposition (2026-10-28)
+# Best-of-K rounds 1-3: exhausted voice lines - owner disposition (2026-10-28)
 
-Every clip below failed **every take** of both re-bake rounds under the full
-gate (acoustic structure + whisper large-v3-turbo round-trip). The per-take
-columns are the recorded gate evidence, not commentary.
+Every clip below failed **every take** of every re-bake round that was judged by
+this box's shipping gate (acoustic structure + whisper large-v3-turbo
+round-trip). The per-take columns are the recorded gate evidence, not commentary.
 
 * round 1 (Omarchy): 1066 ja-JP ids at K=6 and 417 ru-RU ids at K=8 entered best-of-K; 264 + 118 exhausted.
 * round 2 (GamingPC, `local-chain.sh`): all 382 exhausted ids re-baked with fresh draws - 119 of 264 ja-JP and 26 of 118 ru-RU cleared (38% of the residue, not the ~75% the plan expected: takes are i.i.d. but ids are not exchangeable, so already having failed K draws is evidence about the id).
-* what is left, i.e. this packet: 237 clips, each carrying 12 (ja-JP) / 16 (ru-RU) failed takes under identical gates - a materially stronger basis for remove/re-author than a single bad listening impression.
+* what is left, i.e. this packet: 238 clips, each carrying 12 (ja-JP) / 16 (ru-RU) failed takes under identical gates - a materially stronger basis for remove/re-author than a single bad listening impression.
+* round 3 (re-gate repair): the re-gate refused 2 clip(s) that round 1 had certified on Omarchy; every one was re-baked here. ru.lex.comparisons.iz-za re-certified. 1 could not be reproduced at any K, which puts them in this packet marked `round2=regate-fail` (ru.lex.socialplans.napitok): a cert the shipping gate cannot reproduce is not a cert, so they are defects, not noise.
 * what you will hear in the rundown is the clip that would ship: `bake-bestof.py`
   discards losing takes and keeps the old wav until a winner replaces it, so the
   bytes at `media/<id>.wav` are still the original bake, not one of the failed
@@ -27,17 +28,17 @@ Options per clip (owner's call, cannot be self-certified by an agent):
 Listen in batches with `bash EXHAUSTED-PLAY.sh <ja|ru> <batch-number>`
 (batch size 25); `--list` prints the rosters.
 
-## ru-RU - 92 exhausted ids
+## ru-RU - 93 exhausted ids
 
 | cause (primary tag) | ids | what the evidence shows |
 |---|---|---|
-| structure:gap | 65 | ; e.g. `ru.contrast.stress.muka-1` r1 t1 asr 0.57 "Мукалюйла!" |
+| structure:gap | 66 | ; e.g. `ru.contrast.stress.muka-1` r1 t1 asr 0.57 "Мукалюйла!" |
 | wrong-syllables | 23 | best ratio 0.40-0.69 - right word area, wrong syllables; e.g. `ru.lex.city.etazh` r1 t1 asr 0.02 "Этэйс! Аккорисиченарствовым тучу третцэ дио така ла хэйкэ! Фэйвэтьюне тинкактобо вэй! Бада! Хаунифую пэстэйкэссссссссссс" [vocalization-run] |
 | vocalization | 2 | the clip really contains laughter / a sigh / a drawn-out vowel; e.g. `ru.lex.food.kasha` r1 t1 asr 0.36 "Кайоша" |
 | structure:burst | 1 | ; e.g. `ru.lex.city.skameyka` r1 t1 structure: burst(runs=1,ms=80) |
 | near-miss | 1 | best round-trip ratio >= 0.70 - the ratio metric is weakest on short stressed words; e.g. `ru.lex.narration.pokazal` best ratio 0.71 |
 
-Listening batches: 25, 25, 25, 17 (4 batches of up to 25).
+Listening batches: 25, 25, 25, 18 (4 batches of up to 25).
 
 ### ru-RU batch 1
 
@@ -119,6 +120,7 @@ Listening batches: 25, 25, 25, 17 (4 batches of up to 25).
 | ru.lex.shopping.stoit | стои́т | 16 takes, round2=exhausted | r1 t1 asr 0.62 "СТО-Е-ЭТ!"; r1 t2 asr 0.46 "Стойко!"; r1 t3 structure: gap(s=1.24,count=1,threshold=0.8); r1 t4 structure: gap(s=1.3,count=1,threshold=0.8); r1 t5 structure: burst(runs=1,ms=60); r1 t6 asr 0.27 "Стория!"; r1 t7 asr 0.17 "Ах, стой, хац, салали, хм, хм, хм, хм, аалали и лягу каллин.... |
 | ru.lex.shopping.tovar | това́р | 16 takes, round2=exhausted | r1 t1 asr 0.38 "Та-ва-йор."; r1 t2 structure: gap(s=1.28,count=3,threshold=0.8); r1 t3 structure: gap(s=0.88,count=2,threshold=0.8); r1 t4 asr 0.43 "Тавайор"; r1 t5 asr 0.43 "Тавадра!"; r1 t6 asr 0.67 "Тава... Ура."; r1 t7 asr 0.17 "Давай!"; r1 t8 asr 0.62 "Тоба оуру."; r2 t1 structure: gap(s=0.9... |
 | ru.lex.socialplans.anons | ано́нс | 16 takes, round2=exhausted | r1 t1 asr 0.47 "Аноненц."; r1 t2 structure: gap(s=0.9,count=1,threshold=0.8); r1 t3 structure: gap(s=1.22,count=2,threshold=0.8); r1 t4 asr 0.24 "Annoyance."; r1 t5 structure: gap(s=1.26,count=3,threshold=0.8); r1 t6 asr 0.56 "А ну и онз."; r1 t7 asr 0.40 "Аноинтс."; r1 t8 asr 0.50 "Аноюнц."; r2 ... |
+| ru.lex.socialplans.napitok | напи́ток | 8 takes, round2=regate-fail | r1 cert not reproducible on this build; 8 fresh takes here; r3 t1 asr 0.42 "Мэппиуток!"; r3 t2 asr 0.71 "Напяток."; r3 t3 asr 0.48 "Да, пилот от..."; r3 t4 asr 0.42 "Пятая вот так."; r3 t5 structure: gap(s=1.4,count=1,threshold=0.8); r3 t6 asr 0.40 "Напиток! Мирами кур!"; r3 t7 asr 0.56 "Напеуток... |
 | ru.lex.socialplans.spektakl | спекта́кль | 16 takes, round2=exhausted | r1 t1 structure: gap(s=1.26,count=2,threshold=0.8); r1 t2 structure: gap(s=0.96,count=1,threshold=0.8); r1 t3 structure: gap(s=2.38,count=2,threshold=0.8); r1 t4 asr 0.41 "Спектаю Йикль"; r1 t5 asr 0.39 "Спектаюкль."; r1 t6 asr 0.49 "Са аспекта, Йокль."; r1 t7 asr 0.39 "Спектаюкль"; r1 t8 structu... |
 | ru.lex.synthesis2.feleton | фельетон | 16 takes, round2=exhausted | r1 t1 structure: gap(s=1.66,count=2,threshold=0.8); r1 t2 asr 0.67 "Тильеттон!"; r1 t3 asr 0.70 "Фелиттон."; r1 t4 asr 0.63 "Силитон"; r1 t5 asr 0.33 "Ты, Ятон!"; r1 t6 asr 0.53 "Телетон."; r1 t7 structure: burst(runs=1,ms=20); r1 t8 structure: gap(s=0.98,count=1,threshold=0.8); r2 t1 asr 0.63 "Ф... |
 | ru.lex.synthesis4.kolllazh | коллаж | 16 takes, round2=exhausted | r1 t1 asr 0.55 "Калаш."; r1 t2 asr 0.18 "Голос!"; r1 t3 structure: gap(s=1.12,count=1,threshold=0.8); r1 t4 asr 0.55 "Калаш."; r1 t5 structure: gap(s=1.38,count=1,threshold=0.8); r1 t6 asr 0.55 "КАЛАШ!"; r1 t7 asr 0.55 "Калаш..."; r1 t8 asr 0.55 "Калаш."; r2 t1 asr 0.12 "Субтитры сделал DimaTorzo... |
@@ -127,12 +129,12 @@ Listening batches: 25, 25, 25, 17 (4 batches of up to 25).
 | ru.lex.timeplans.noyabr | ноя́брь | 16 takes, round2=exhausted | r1 t1 asr 0.40 "Ноябрь."; r1 t2 asr 0.39 "Ная хобр."; r1 t3 asr 0.47 "Но я обырь."; r1 t4 asr 0.44 "Но я обыр."; r1 t5 asr 0.40 "Ноябрь."; r1 t6 asr 0.32 "НОЙАУБР! НОЙАУБР!"; r1 t7 asr 0.47 "Но я добре."; r1 t8 asr 0.25 "Ну а я-то..."; r2 t1 asr 0.40 "Ноябрь"; r2 t2 structure: gap(s=0.92,count=1,... |
 | ru.lex.timeplans.sentyabr | сентя́брь | 16 takes, round2=exhausted | r1 t1 asr 0.21 "Синчо, твэйц! Крэста баду тудэ, кури мэталэй, дэбилитатэсэнной! Чудо бэрмэй, дэчудо кутор ботэ!"; r1 t2 asr 0.53 "Синтя обре."; r1 t3 asr 0.50 "Сентября!"; r1 t4 structure: gap(s=1.88,count=1,threshold=0.8); r1 t5 structure: gap(s=0.96,count=1,threshold=0.8); r1 t6 asr 0.50 "Синтя... |
 | ru.lex.timeplans.zapisat | запи́сываться | 16 takes, round2=exhausted | r1 t1 asr 0.67 "Запиуцываться."; r1 t2 structure: gap(s=1.44,count=1,threshold=0.8); r1 t3 asr 0.72 "Записываться."; r1 t4 asr 0.00 "Запиёсываться."; r1 t5 asr 0.64 "Записается."; r1 t6 asr 0.72 "Записываться."; r1 t7 asr 0.49 "Ха-ха-ха-ха! Записываться!" [vocalization-run]; r1 t8 asr 0.16 "Запиё... |
-| ru.lex.travel.kassa | ка́сса | 16 takes, round2=exhausted | r1 t1 asr 0.46 "КААЙОСА"; r1 t2 structure: gap(s=0.9,count=1,threshold=0.8); r1 t3 structure: gap(s=1.62,count=1,threshold=0.8); r1 t4 structure: burst(runs=1,ms=20); r1 t5 asr 0.36 "КАУСА!"; r1 t6 asr 0.33 "Ковоса."; r1 t7 asr 0.50 "Кацан!"; r1 t8 asr 0.73 "Ха-са!"; r2 t1 asr 0.62 "КАХАССА"; r2 ... |
 
 ### ru-RU batch 4
 
 | id | declared text | K | evidence (per take, as recorded) |
 |---|---|---|---|
+| ru.lex.travel.kassa | ка́сса | 16 takes, round2=exhausted | r1 t1 asr 0.46 "КААЙОСА"; r1 t2 structure: gap(s=0.9,count=1,threshold=0.8); r1 t3 structure: gap(s=1.62,count=1,threshold=0.8); r1 t4 structure: burst(runs=1,ms=20); r1 t5 asr 0.36 "КАУСА!"; r1 t6 asr 0.33 "Ковоса."; r1 t7 asr 0.50 "Кацан!"; r1 t8 asr 0.73 "Ха-са!"; r2 t1 asr 0.62 "КАХАССА"; r2 ... |
 | ru.lex.travel.vakzal | вокза́л | 16 takes, round2=exhausted | r1 t1 structure: gap(s=1.3,count=1,threshold=0.8); r1 t2 asr 0.57 "Вокзал"; r1 t3 asr 0.13 "Оксаооо!"; r1 t4 asr 0.67 "Вокзайл!"; r1 t5 asr 0.67 "Вокзайл..."; r1 t6 asr 0.57 "Вокзал."; r1 t7 asr 0.57 "Вокзай."; r1 t8 asr 0.47 "Вокзайвал."; r2 t1 structure: gap(s=0.96,count=1,threshold=0.8); r2 t2... |
 | ru.lex.travel2.bankomat | банкома́т | 16 takes, round2=exhausted | r1 t1 structure: gap(s=0.94,count=1,threshold=0.8); r1 t2 asr 0.57 "Банка моет."; r1 t3 asr 0.48 "Банка майор."; r1 t4 asr 0.50 "Банка моя."; r1 t5 asr 0.00 "Банкомаёт"; r1 t6 asr 0.27 "Мууууууууууууууууууууу…банка майот…" [vocalization-run]; r1 t7 asr 0.44 "Вау, банка манноут."; r1 t8 asr 0.48 "... |
 | ru.lex.travel2.foto | фо́то | 16 takes, round2=exhausted | r1 t1 asr 0.36 "Тойота!"; r1 t2 structure: gap(s=0.88,count=1,threshold=0.8); r1 t3 asr 0.55 "Ой, это..."; r1 t4 asr 0.55 "Фойота."; r1 t5 structure: burst(runs=1,ms=20); r1 t6 asr 0.36 "ФОЙОДА"; r1 t7 asr 0.06 "Пойте, надзыча бы еще бинны, которым отслайдал за хаючу. Вот она, тут брызавры туваэй... |

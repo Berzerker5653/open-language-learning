@@ -1,0 +1,2 @@
+{"id": "ru.lex.comparisons.iz-za", "pack": "ru-RU", "box_result": "pass@6", "local_asr_status": "MISMATCH", "local_asr_ratio": 0.14, "local_heard": "Иосифа.", "local_segments_verdict": "PASS"}
+{"id": "ru.lex.socialplans.napitok", "pack": "ru-RU", "box_result": "pass@7", "local_asr_status": "MISMATCH", "local_asr_ratio": 0.6, "local_heard": "Напию так.", "local_segments_verdict": "PASS"}

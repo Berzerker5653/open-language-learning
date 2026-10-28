@@ -1,0 +1,299 @@
+{"id": "ru.contrast.stress.zamok-0", "status": "ok", "ratio": 0.86, "text": "за́мок", "heard": "Зай омок."}
+{"id": "ru.lex.argue4.proschyot", "status": "ok", "ratio": 0.77, "text": "просчёт", "heard": "Расчёт."}
+{"id": "ru.contrast.stress.muka-0", "status": "ok", "ratio": 0.8, "text": "му́ка", "heard": "Ну-ка."}
+{"id": "ru.lex.city.biliet", "status": "ok", "ratio": 0.82, "text": "биле́т", "heard": "Билеут."}
+{"id": "ru.lex.city.daleko", "status": "ok", "ratio": 1.0, "text": "далеко́", "heard": "Далеко."}
+{"id": "ru.lex.city.chemodan", "status": "ok", "ratio": 0.87, "text": "чемода́н", "heard": "Чимода Юн"}
+{"id": "ru.lex.city.koncert", "status": "ok", "ratio": 0.76, "text": "конце́рт", "heard": "Конца орд!"}
+{"id": "ru.lex.city.nalevo", "status": "ok", "ratio": 0.8, "text": "нале́во", "heard": "Нали-о."}
+{"id": "ru.lex.city.ploshchadka", "status": "ok", "ratio": 0.84, "text": "площа́дка", "heard": "Площа утка."}
+{"id": "ru.lex.city.probka", "status": "ok", "ratio": 0.77, "text": "про́бка", "heard": "Пробка!"}
+{"id": "ru.lex.city.tam", "status": "ok", "ratio": 1.0, "text": "там", "heard": "Там..."}
+{"id": "ru.lex.city.vkhod", "status": "ok", "ratio": 0.86, "text": "вход", "heard": "Фот..."}
+{"id": "ru.lex.comparisons.gonki", "status": "ok", "ratio": 0.75, "text": "го́нки", "heard": "Угоюнки."}
+{"id": "ru.lex.comparisons.chtoby", "status": "ok", "ratio": 0.77, "text": "что́бы", "heard": "Стой бы!"}
+{"id": "ru.lex.comparisons.iz-za", "status": "MISMATCH", "ratio": 0.14, "text": "и́з-за", "heard": "Иосифа."}
+{"id": "ru.lex.comparisons.medlennee", "status": "ok", "ratio": 0.89, "text": "медле́ннее", "heard": "Медленнее!"}
+{"id": "ru.lex.comparisons.menshe", "status": "ok", "ratio": 0.77, "text": "ме́ньше", "heard": "Меньше."}
+{"id": "ru.lex.comparisons.spokoinee", "status": "ok", "ratio": 0.77, "text": "спокойне́е", "heard": "Спокойнее её!"}
+{"id": "ru.lex.critical.deeprichastie", "status": "ok", "ratio": 0.85, "text": "деепричастие", "heard": "Где причастие?"}
+{"id": "ru.lex.critical.frazeologizm", "status": "ok", "ratio": 0.85, "text": "фразеологизм", "heard": "Прозеологизм"}
+{"id": "ru.lex.critical.kalambur", "status": "ok", "ratio": 1.0, "text": "каламбур", "heard": "Каламбур!"}
+{"id": "ru.lex.critical.padezh", "status": "ok", "ratio": 0.77, "text": "падеж", "heard": "Пойдешь."}
+{"id": "ru.lex.critical.paronim", "status": "ok", "ratio": 1.0, "text": "пароним", "heard": "Пароним."}
+{"id": "ru.lex.critical2.lozung", "status": "ok", "ratio": 1.0, "text": "лозунг", "heard": "Лозунг."}
+{"id": "ru.lex.critical2.napor", "status": "ok", "ratio": 0.77, "text": "напор", "heard": "Ай, напор."}
+{"id": "ru.lex.critical3.reglament", "status": "ok", "ratio": 1.0, "text": "регламент", "heard": "Регламент."}
+{"id": "ru.lex.critical3.ustav", "status": "ok", "ratio": 1.0, "text": "устав", "heard": "Устав."}
+{"id": "ru.lex.critical4.empiricheskiy", "status": "ok", "ratio": 1.0, "text": "эмпирический", "heard": "Эмпирический."}
+{"id": "ru.lex.critical4.kontrdovod", "status": "ok", "ratio": 0.9, "text": "контрдовод", "heard": "Контрдавод?"}
+{"id": "ru.lex.critical4.naitie", "status": "ok", "ratio": 1.0, "text": "наитие", "heard": "Наитие!"}
+{"id": "ru.lex.critical4.samooobman", "status": "ok", "ratio": 0.78, "text": "самообман", "heard": "Сам! Обман!"}
+{"id": "ru.lex.critical4.teorema", "status": "ok", "ratio": 1.0, "text": "теорема", "heard": "ТЕОРЕМА"}
+{"id": "ru.lex.cult.bilingv", "status": "ok", "ratio": 0.75, "text": "билингв", "heard": "Биланг!"}
+{"id": "ru.lex.cult.etnos", "status": "ok", "ratio": 1.0, "text": "этнос", "heard": "Этнос."}
+{"id": "ru.lex.cult.cenitel", "status": "ok", "ratio": 1.0, "text": "ценитель", "heard": "Ценитель."}
+{"id": "ru.lex.cult.koda", "status": "ok", "ratio": 1.0, "text": "кода", "heard": "Кода!"}
+{"id": "ru.lex.cult.nonkonformist", "status": "ok", "ratio": 1.0, "text": "нонконформист", "heard": "Нонконформист!"}
+{"id": "ru.lex.culture.galereya", "status": "ok", "ratio": 1.0, "text": "галерея", "heard": "Галерея."}
+{"id": "ru.lex.cult.persona", "status": "ok", "ratio": 1.0, "text": "персона", "heard": "Персона!"}
+{"id": "ru.lex.culture.opera", "status": "ok", "ratio": 0.86, "text": "опера", "heard": "О, опера."}
+{"id": "ru.lex.experiences.nervnichat", "status": "ok", "ratio": 0.97, "text": "не́рвничать", "heard": "Не ровничать!"}
+{"id": "ru.lex.experiences.otvaga", "status": "ok", "ratio": 0.8, "text": "отва́га", "heard": "Твоя га..."}
+{"id": "ru.lex.experiences.pokhvala", "status": "ok", "ratio": 1.0, "text": "похвала́", "heard": "Похвала!"}
+{"id": "ru.lex.everyday.mama", "status": "ok", "ratio": 0.83, "text": "ма́ма", "heard": "Мау. Мау."}
+{"id": "ru.lex.experiences.probovat", "status": "ok", "ratio": 0.84, "text": "про́бовать", "heard": "Пробовать!"}
+{"id": "ru.lex.experiences.prosto", "status": "ok", "ratio": 0.78, "text": "про́сто", "heard": "Про-и-о-сто!"}
+{"id": "ru.lex.experiences.robost", "status": "ok", "ratio": 0.8, "text": "ро́бость", "heard": "Робость."}
+{"id": "ru.lex.experiences.veselo", "status": "ok", "ratio": 0.82, "text": "ве́село", "heard": "Весело."}
+{"id": "ru.lex.experiences.volnenie", "status": "ok", "ratio": 0.96, "text": "волне́ние", "heard": "Волнение."}
+{"id": "ru.lex.experiences.vospominanie", "status": "ok", "ratio": 0.77, "text": "воспомина́ние", "heard": "Воспоминания."}
+{"id": "ru.lex.family.dedushka", "status": "ok", "ratio": 0.94, "text": "де́душка", "heard": "Дедушка."}
+{"id": "ru.lex.family.muzh", "status": "ok", "ratio": 1.0, "text": "муж", "heard": "Муш."}
+{"id": "ru.lex.family.u-menya", "status": "ok", "ratio": 0.84, "text": "у меня́", "heard": "У меня её..."}
+{"id": "ru.lex.family.nravitsya", "status": "ok", "ratio": 0.95, "text": "нра́вится", "heard": "Нравится."}
+{"id": "ru.lex.feelings.bojazn", "status": "ok", "ratio": 1.0, "text": "боязнь", "heard": "Боязнь."}
+{"id": "ru.lex.family.znakomyy", "status": "ok", "ratio": 0.84, "text": "знако́мый", "heard": "Знака омый!"}
+{"id": "ru.lex.food.banan", "status": "ok", "ratio": 0.8, "text": "бана́н", "heard": "Банна-он."}
+{"id": "ru.lex.feelings.toska", "status": "ok", "ratio": 0.83, "text": "тоска", "heard": "Это ска..."}
+{"id": "ru.lex.food.butylka", "status": "ok", "ratio": 0.8, "text": "буты́лка", "heard": "Бутылка."}
+{"id": "ru.lex.food.kafe", "status": "ok", "ratio": 1.0, "text": "кафе́", "heard": "Кафе!"}
+{"id": "ru.lex.food.kholshch", "status": "ok", "ratio": 1.0, "text": "борщ", "heard": "Борщ."}
+{"id": "ru.lex.food.kolbasa", "status": "ok", "ratio": 0.78, "text": "колбаса́", "heard": "Колбаса это?"}
+{"id": "ru.lex.food.kushat", "status": "ok", "ratio": 0.77, "text": "ку́шать", "heard": "Кушать."}
+{"id": "ru.lex.food.maslo", "status": "ok", "ratio": 0.8, "text": "ма́сло", "heard": "Майя Слоу!"}
+{"id": "ru.lex.food.muka", "status": "ok", "ratio": 0.83, "text": "му́ка", "heard": "Мою-ка!"}
+{"id": "ru.lex.food.moloko", "status": "ok", "ratio": 0.86, "text": "молоко́", "heard": "Молоко-и."}
+{"id": "ru.lex.food.myaso", "status": "ok", "ratio": 0.77, "text": "мя́со", "heard": "МЯ ИСА!"}
+{"id": "ru.lex.food.ovoshchi", "status": "ok", "ratio": 0.86, "text": "о́вощи", "heard": "Ой, овощи!"}
+{"id": "ru.lex.food.povar", "status": "ok", "ratio": 0.8, "text": "по́вар", "heard": "Па-йо-вар."}
+{"id": "ru.lex.food.smetana", "status": "ok", "ratio": 0.8, "text": "смета́на", "heard": "Смета-йона!"}
+{"id": "ru.lex.food.yabloko", "status": "ok", "ratio": 0.8, "text": "я́блоко", "heard": "Явлоко."}
+{"id": "ru.lex.future.celoe", "status": "ok", "ratio": 0.86, "text": "целое", "heard": "Целые..."}
+{"id": "ru.lex.future.reshimost", "status": "ok", "ratio": 1.0, "text": "решимость", "heard": "Решимость!"}
+{"id": "ru.lex.future.ukhudshitsya", "status": "ok", "ratio": 1.0, "text": "ухудшится", "heard": "Ухудшится!"}
+{"id": "ru.lex.greetings.net", "status": "ok", "ratio": 1.0, "text": "нет", "heard": "Нет."}
+{"id": "ru.lex.home.botinki", "status": "ok", "ratio": 0.78, "text": "боти́нки", "heard": "Бучи гонки."}
+{"id": "ru.lex.home.chashka", "status": "ok", "ratio": 0.75, "text": "ча́шка", "heard": "ЧАЙШКА"}
+{"id": "ru.lex.home.mashina", "status": "ok", "ratio": 0.75, "text": "маши́на", "heard": "Маши, яна."}
+{"id": "ru.lex.home.obuv", "status": "ok", "ratio": 0.83, "text": "о́бувь", "heard": "Ой, обувь!"}
+{"id": "ru.lex.home.plita", "status": "ok", "ratio": 0.77, "text": "плита́", "heard": "Плитон!"}
+{"id": "ru.lex.home.rynok", "status": "ok", "ratio": 0.83, "text": "ры́нок", "heard": "Рыунок."}
+{"id": "ru.lex.home.shkaf", "status": "ok", "ratio": 1.0, "text": "шкаф", "heard": "Шкаф."}
+{"id": "ru.lex.home.stanciya", "status": "ok", "ratio": 0.95, "text": "ста́нция", "heard": "Станция"}
+{"id": "ru.lex.home.veshalka", "status": "ok", "ratio": 0.82, "text": "ве́шалка", "heard": "Вешалка."}
+{"id": "ru.lex.housing.dacha", "status": "ok", "ratio": 0.92, "text": "дача", "heard": "Удача."}
+{"id": "ru.lex.housing.ogorod", "status": "ok", "ratio": 1.0, "text": "огород", "heard": "Огород!"}
+{"id": "ru.lex.instructions.chast", "status": "ok", "ratio": 0.86, "text": "часть", "heard": "Честь!"}
+{"id": "ru.lex.instructions.gotovo", "status": "ok", "ratio": 0.77, "text": "го́тово", "heard": "Готово."}
+{"id": "ru.lex.instructions.ostorozhno", "status": "ok", "ratio": 0.84, "text": "осто́рожно", "heard": "Осторожно."}
+{"id": "ru.lex.instructions.rezat", "status": "ok", "ratio": 0.75, "text": "ре́зать", "heard": "РЕЙЗАТЬ!"}
+{"id": "ru.lex.media.brend", "status": "ok", "ratio": 1.0, "text": "бренд", "heard": "Бренд."}
+{"id": "ru.lex.media.ocherk", "status": "ok", "ratio": 0.77, "text": "очерк", "heard": "Чарк!"}
+{"id": "ru.lex.media.ohvat", "status": "ok", "ratio": 1.0, "text": "охват", "heard": "Охват!"}
+{"id": "ru.lex.media.redaktor", "status": "ok", "ratio": 0.75, "text": "редактор", "heard": "Хе-хе, редактор."}
+{"id": "ru.lex.messages.ideya", "status": "ok", "ratio": 0.77, "text": "иде́я", "heard": "Идяя!"}
+{"id": "ru.lex.media.post", "status": "ok", "ratio": 0.75, "text": "пост", "heard": "Бост."}
+{"id": "ru.lex.messages.nado", "status": "ok", "ratio": 0.77, "text": "на́до", "heard": "На-го-до"}
+{"id": "ru.lex.messages.poka", "status": "ok", "ratio": 1.0, "text": "пока́", "heard": "Пока!"}
+{"id": "ru.lex.messages.povod", "status": "ok", "ratio": 0.8, "text": "по́вод", "heard": "Пой ювот."}
+{"id": "ru.lex.messages.sozvon", "status": "ok", "ratio": 0.75, "text": "со́звон", "heard": "Сая звон!"}
+{"id": "ru.lex.messages.tema", "status": "ok", "ratio": 0.75, "text": "те́ма", "heard": "Че ху ма?"}
+{"id": "ru.lex.messages.vinovat", "status": "ok", "ratio": 0.76, "text": "винова́т", "heard": "Виного яд."}
+{"id": "ru.lex.messages.zanyat", "status": "ok", "ratio": 0.82, "text": "заня́т", "heard": "Заня, вот."}
+{"id": "ru.lex.messages.zvonok", "status": "ok", "ratio": 0.88, "text": "звоно́к", "heard": "Звоной, а?"}
+{"id": "ru.lex.messages2.epizod", "status": "ok", "ratio": 0.78, "text": "эпизо́д", "heard": "Эпизоди."}
+{"id": "ru.lex.messages2.mnenie", "status": "ok", "ratio": 0.76, "text": "мне́ние", "heard": "Мня уния."}
+{"id": "ru.lex.messages2.napisat", "status": "ok", "ratio": 0.82, "text": "напи́сать", "heard": "Напил усать."}
+{"id": "ru.lex.messages2.odnako", "status": "ok", "ratio": 0.75, "text": "одна́ко", "heard": "Одна юка."}
+{"id": "ru.lex.messages2.pamyat", "status": "ok", "ratio": 0.78, "text": "па́мять", "heard": "Пою мять."}
+{"id": "ru.lex.messages2.rano", "status": "ok", "ratio": 0.83, "text": "ра́но", "heard": "Раю-но..."}
+{"id": "ru.lex.messages2.skoro", "status": "ok", "ratio": 0.86, "text": "ско́ро", "heard": "Ско-и-ро."}
+{"id": "ru.lex.messages2.radovatsya", "status": "ok", "ratio": 0.82, "text": "ра́доваться", "heard": "Рая даваться."}
+{"id": "ru.lex.messages2.vspomnit", "status": "ok", "ratio": 0.8, "text": "вспо́мнить", "heard": "Эээ... вспомнить..."}
+{"id": "ru.lex.narration.detstvo", "status": "ok", "ratio": 0.82, "text": "де́тство", "heard": "ДЕТСТВА"}
+{"id": "ru.lex.narration.jeffekt", "status": "ok", "ratio": 0.8, "text": "эффе́кт", "heard": "Эффе-йокт!"}
+{"id": "ru.lex.narration.nadezhda", "status": "ok", "ratio": 0.8, "text": "наде́жда", "heard": "На, Диас, да."}
+{"id": "ru.lex.narration.posledstvie", "status": "ok", "ratio": 0.84, "text": "после́дствие", "heard": "После уйствия."}
+{"id": "ru.lex.narration.proval", "status": "ok", "ratio": 0.88, "text": "прова́л", "heard": "Прова-ла..."}
+{"id": "ru.lex.narration.sprosil", "status": "ok", "ratio": 0.78, "text": "спроси́л", "heard": "Спросил!"}
+{"id": "ru.lex.narration.vskore", "status": "ok", "ratio": 0.8, "text": "вско́ре", "heard": "Вскоре."}
+{"id": "ru.lex.narration.vyshlo", "status": "ok", "ratio": 0.77, "text": "вы́шло", "heard": "Вы ушла."}
+{"id": "ru.lex.narration2.dogadyvatsya", "status": "ok", "ratio": 0.75, "text": "дога́дываться", "heard": "Догаудываться."}
+{"id": "ru.lex.narration2.dumat", "status": "ok", "ratio": 0.75, "text": "ду́мать", "heard": "Бую мать."}
+{"id": "ru.lex.narration2.vremena", "status": "ok", "ratio": 1.0, "text": "времена́", "heard": "Времена."}
+{"id": "ru.lex.narration2.radost", "status": "ok", "ratio": 0.75, "text": "ра́дость", "heard": "Раудость."}
+{"id": "ru.lex.nature.derevo", "status": "ok", "ratio": 0.86, "text": "де́рево", "heard": "Где Юрево?"}
+{"id": "ru.lex.nature.gora", "status": "ok", "ratio": 0.8, "text": "гора́", "heard": "Горая."}
+{"id": "ru.lex.neg.detalizirovat", "status": "ok", "ratio": 1.0, "text": "детализировать", "heard": "детализировать."}
+{"id": "ru.lex.neg.lobhist", "status": "ok", "ratio": 0.75, "text": "лоббист", "heard": "Ладбист."}
+{"id": "ru.lex.neg.naotrez", "status": "ok", "ratio": 1.0, "text": "наотрез", "heard": "Наотрез."}
+{"id": "ru.lex.neg.otkaznoy", "status": "ok", "ratio": 1.0, "text": "отказной", "heard": "Отказной!"}
+{"id": "ru.lex.neg.parafraze", "status": "ok", "ratio": 1.0, "text": "парафраз", "heard": "Парафраз!"}
+{"id": "ru.lex.neg.sorazmernost", "status": "ok", "ratio": 0.93, "text": "соразмерность", "heard": "Соразмерности."}
+{"id": "ru.lex.numbers-time.vosem", "status": "ok", "ratio": 0.8, "text": "во́семь", "heard": "Восемь."}
+{"id": "ru.lex.opinions.cifra", "status": "ok", "ratio": 1.0, "text": "цифра", "heard": "Цифра."}
+{"id": "ru.lex.opinions.obobshchenie", "status": "ok", "ratio": 1.0, "text": "обобщение", "heard": "Обобщение."}
+{"id": "ru.lex.pastevents.byla", "status": "ok", "ratio": 0.75, "text": "была́", "heard": "Было."}
+{"id": "ru.lex.pastevents.eshche", "status": "ok", "ratio": 0.8, "text": "еще́", "heard": "И еще..."}
+{"id": "ru.lex.pastevents.proshloe", "status": "ok", "ratio": 0.82, "text": "про́шлое", "heard": "Прошлое."}
+{"id": "ru.lex.pastevents.posle", "status": "ok", "ratio": 0.77, "text": "по́сле", "heard": "После..."}
+{"id": "ru.lex.pastevents.sdelat", "status": "ok", "ratio": 0.82, "text": "сде́лать", "heard": "Сделать!"}
+{"id": "ru.lex.personal.anton", "status": "ok", "ratio": 0.8, "text": "Анто́н", "heard": "Антой он."}
+{"id": "ru.lex.personal.data-rozhdeniya", "status": "ok", "ratio": 0.76, "text": "да́та рожде́ния", "heard": "ДАЙТА! РАЖДИЮНИЯ!"}
+{"id": "ru.lex.personal.desyat", "status": "ok", "ratio": 0.82, "text": "де́сять", "heard": "Десять."}
+{"id": "ru.lex.personal.familiya", "status": "ok", "ratio": 0.76, "text": "фами́лия", "heard": "Фамилия."}
+{"id": "ru.lex.personal.god", "status": "ok", "ratio": 1.0, "text": "год", "heard": "Гот."}
+{"id": "ru.lex.personal.gorod", "status": "ok", "ratio": 0.75, "text": "го́род", "heard": "Го-йо-роць!"}
+{"id": "ru.lex.personal.imya", "status": "ok", "ratio": 0.83, "text": "и́мя", "heard": "И ё-мя!"}
+{"id": "ru.lex.personal.ispaniya", "status": "ok", "ratio": 0.75, "text": "Испа́ния", "heard": "Испа-йо-ни-я."}
+{"id": "ru.lex.personal.italiya", "status": "ok", "ratio": 0.84, "text": "Ита́лия", "heard": "Иташилия!"}
+{"id": "ru.lex.personal.ono", "status": "ok", "ratio": 1.0, "text": "оно́", "heard": "Оно!"}
+{"id": "ru.lex.personal.otchestvo", "status": "ok", "ratio": 0.83, "text": "о́тчество", "heard": "Ой, отчество!"}
+{"id": "ru.lex.personal.pasport", "status": "ok", "ratio": 0.89, "text": "па́спорт", "heard": "Паю спорт."}
+{"id": "ru.lex.personal.pochta", "status": "ok", "ratio": 0.8, "text": "по́чта", "heard": "ПОЧТА!"}
+{"id": "ru.lex.personal.shkola", "status": "ok", "ratio": 0.8, "text": "шко́ла", "heard": "ШКО-Я-ЛА"}
+{"id": "ru.lex.personal.tridtsat", "status": "ok", "ratio": 0.87, "text": "три́дцать", "heard": "Три-у-цать!"}
+{"id": "ru.lex.problems.lad", "status": "ok", "ratio": 1.0, "text": "лад", "heard": "Лад."}
+{"id": "ru.lex.problems.master", "status": "ok", "ratio": 0.82, "text": "ма́стер", "heard": "Мастер!"}
+{"id": "ru.lex.problems.naladit", "status": "ok", "ratio": 0.8, "text": "нала́дить", "heard": "Налаидить!"}
+{"id": "ru.lex.problems.nepoladka", "status": "ok", "ratio": 0.76, "text": "непола́дка", "heard": "Неполытка!"}
+{"id": "ru.lex.problems.prosba", "status": "ok", "ratio": 0.77, "text": "про́сьба", "heard": "Просьба!"}
+{"id": "ru.lex.problems.sposob", "status": "ok", "ratio": 0.75, "text": "спо́соб", "heard": "Спай усоп!"}
+{"id": "ru.lex.problems.summa", "status": "ok", "ratio": 0.77, "text": "су́мма", "heard": "Суя ма?"}
+{"id": "ru.lex.prof.bakalavr", "status": "ok", "ratio": 1.0, "text": "бакалавр", "heard": "Бакалавр."}
+{"id": "ru.lex.prof.faktoring", "status": "ok", "ratio": 1.0, "text": "факторинг", "heard": "Факторинг."}
+{"id": "ru.lex.prof.funkcional", "status": "ok", "ratio": 0.92, "text": "функционал", "heard": "А, функционал."}
+{"id": "ru.lex.prof.gramota", "status": "ok", "ratio": 1.0, "text": "грамота", "heard": "Грамота"}
+{"id": "ru.lex.prof.poshlina", "status": "ok", "ratio": 1.0, "text": "пошлина", "heard": "Пошлина."}
+{"id": "ru.lex.prof.potencial", "status": "ok", "ratio": 0.76, "text": "потенциал", "heard": "Потанциал!"}
+{"id": "ru.lex.prof.praktikant", "status": "ok", "ratio": 0.82, "text": "практикант", "heard": "Ректикант"}
+{"id": "ru.lex.prof.predstavitelstvo", "status": "ok", "ratio": 1.0, "text": "представительство", "heard": "Представительство..."}
+{"id": "ru.lex.prof.proshivka", "status": "ok", "ratio": 0.75, "text": "прошивка", "heard": "Расшивка!"}
+{"id": "ru.lex.prof.soglasovanie", "status": "ok", "ratio": 1.0, "text": "согласование", "heard": "Согласование."}
+{"id": "ru.lex.prof.sshivka", "status": "ok", "ratio": 0.77, "text": "сшивка", "heard": "Сышивка!"}
+{"id": "ru.lex.prof.stazhirovka", "status": "ok", "ratio": 1.0, "text": "стажировка", "heard": "Стажировка."}
+{"id": "ru.lex.prof.zanyatost", "status": "ok", "ratio": 1.0, "text": "занятость", "heard": "Занятость."}
+{"id": "ru.lex.rel.potomok", "status": "ok", "ratio": 1.0, "text": "потомок", "heard": "Потомок."}
+{"id": "ru.lex.rel.razgovor", "status": "ok", "ratio": 1.0, "text": "разговор", "heard": "Разговор..."}
+{"id": "ru.lex.rel.rodnya", "status": "ok", "ratio": 1.0, "text": "родня", "heard": "Родня."}
+{"id": "ru.lex.rel.vzaimnost", "status": "ok", "ratio": 1.0, "text": "взаимность", "heard": "Взаимность."}
+{"id": "ru.lex.respect.derzost", "status": "ok", "ratio": 1.0, "text": "дерзость", "heard": "ДЕРЗОСТЬ"}
+{"id": "ru.lex.routines.mesyats", "status": "ok", "ratio": 0.82, "text": "ме́сяц", "heard": "Месяц."}
+{"id": "ru.lex.routines.obedat", "status": "ok", "ratio": 0.95, "text": "обе́дать", "heard": "Обел. Дать."}
+{"id": "ru.lex.routines.raspisanie", "status": "ok", "ratio": 0.75, "text": "расписа́ние", "heard": "Расписа-ю-ни-е!"}
+{"id": "ru.lex.routines.segodnya", "status": "ok", "ratio": 0.84, "text": "сего́дня", "heard": "Сегодня"}
+{"id": "ru.lex.routines.zavtrak", "status": "ok", "ratio": 0.78, "text": "за́втрак", "heard": "Зайов трак!"}
+{"id": "ru.lex.routines.zavtrakat", "status": "ok", "ratio": 0.92, "text": "за́втракать", "heard": "Заю втракать!"}
+{"id": "ru.lex.sci.displey", "status": "ok", "ratio": 1.0, "text": "дисплей", "heard": "Дисплей."}
+{"id": "ru.lex.sci.invazivnyy", "status": "ok", "ratio": 0.82, "text": "инвазивный", "heard": "Инновазивный."}
+{"id": "ru.lex.sci.nevozobnovlyaemyy", "status": "ok", "ratio": 1.0, "text": "невозобновляемый", "heard": "Невозобновляемый."}
+{"id": "ru.lex.sci.ozonovyy", "status": "ok", "ratio": 0.93, "text": "озоновый", "heard": "Зоновый."}
+{"id": "ru.lex.sci.podshipnik", "status": "ok", "ratio": 1.0, "text": "подшипник", "heard": "Подшипник!"}
+{"id": "ru.lex.sci.shifrovanie", "status": "ok", "ratio": 1.0, "text": "шифрование", "heard": "ШИФРОВАНИЕ"}
+{"id": "ru.lex.sci.strahovoy", "status": "ok", "ratio": 1.0, "text": "страховой", "heard": "Страховой!"}
+{"id": "ru.lex.sci.tara", "status": "ok", "ratio": 1.0, "text": "тара", "heard": "Тара."}
+{"id": "ru.lex.services.ofitsiant", "status": "ok", "ratio": 0.83, "text": "официа́нт", "heard": "Офицы Сэн."}
+{"id": "ru.lex.services.poryadok", "status": "ok", "ratio": 0.78, "text": "поря́док", "heard": "Париадок."}
+{"id": "ru.lex.services.schet", "status": "ok", "ratio": 0.75, "text": "сче́т", "heard": "Счет."}
+{"id": "ru.lex.services.sdelka", "status": "ok", "ratio": 0.78, "text": "сде́лка", "heard": "Сделал-ка."}
+{"id": "ru.lex.services.skidka", "status": "ok", "ratio": 0.78, "text": "ски́дка", "heard": "Ски-йотка!"}
+{"id": "ru.lex.services.usloviya", "status": "ok", "ratio": 0.84, "text": "усло́вия", "heard": "Условия."}
+{"id": "ru.lex.services.zhaloba", "status": "ok", "ratio": 0.88, "text": "жа́лоба", "heard": "Жайя лоба."}
+{"id": "ru.lex.shopping.eshchyo", "status": "ok", "ratio": 1.0, "text": "еще́", "heard": "Еще..."}
+{"id": "ru.lex.shopping.podarok", "status": "ok", "ratio": 0.78, "text": "пода́рок", "heard": "Подаю рог."}
+{"id": "ru.lex.shopping.pokupatel", "status": "ok", "ratio": 0.76, "text": "покупа́тель", "heard": "Покупатель..."}
+{"id": "ru.lex.shopping.razmer", "status": "ok", "ratio": 0.75, "text": "разме́р", "heard": "Расмир!"}
+{"id": "ru.lex.shopping.staryy", "status": "ok", "ratio": 0.75, "text": "ста́рый", "heard": "Стартовый!"}
+{"id": "ru.lex.soc.tarifikatsiya", "status": "ok", "ratio": 1.0, "text": "тарификация", "heard": "Тарификация?"}
+{"id": "ru.lex.soc.vznos", "status": "ok", "ratio": 1.0, "text": "взнос", "heard": "Взнос."}
+{"id": "ru.lex.socialplans.muzyka2", "status": "ok", "ratio": 0.92, "text": "му́зыка", "heard": "Музыка."}
+{"id": "ru.lex.socialplans.napitok", "status": "MISMATCH", "ratio": 0.6, "text": "напи́ток", "heard": "Напию так."}
+{"id": "ru.lex.socialplans.podarok", "status": "ok", "ratio": 0.78, "text": "пода́рок", "heard": "Пада, йорок!"}
+{"id": "ru.lex.socialplans.pomnit", "status": "ok", "ratio": 0.8, "text": "по́мнить", "heard": "Поям нить."}
+{"id": "ru.lex.socialplans.soglasovat", "status": "ok", "ratio": 0.77, "text": "согласо́вывать", "heard": "Согласа я бывать."}
+{"id": "ru.lex.study.era", "status": "ok", "ratio": 1.0, "text": "эра", "heard": "Эра."}
+{"id": "ru.lex.study.kub", "status": "ok", "ratio": 1.0, "text": "куб", "heard": "Куп!"}
+{"id": "ru.lex.study.mig", "status": "ok", "ratio": 1.0, "text": "миг", "heard": "Мик."}
+{"id": "ru.lex.study.paradigma", "status": "ok", "ratio": 1.0, "text": "парадигма", "heard": "Парадигма!"}
+{"id": "ru.lex.study2.cep", "status": "ok", "ratio": 0.75, "text": "цепь", "heard": "Цыпь."}
+{"id": "ru.lex.study2.duga", "status": "ok", "ratio": 1.0, "text": "дуга", "heard": "Дуга."}
+{"id": "ru.lex.study2.lirika", "status": "ok", "ratio": 1.0, "text": "лирика", "heard": "Лирика."}
+{"id": "ru.lex.study2.partitura", "status": "ok", "ratio": 0.77, "text": "партитура", "heard": "Эх-эх, партитура..."}
+{"id": "ru.lex.study3.skrytyy", "status": "ok", "ratio": 1.0, "text": "скрытый", "heard": "Скрытый."}
+{"id": "ru.lex.study4.nahodka", "status": "ok", "ratio": 1.0, "text": "находка", "heard": "Находка!"}
+{"id": "ru.lex.study4.shirota", "status": "ok", "ratio": 1.0, "text": "широта", "heard": "широта."}
+{"id": "ru.lex.style.argo", "status": "ok", "ratio": 1.0, "text": "арго", "heard": "Арго!"}
+{"id": "ru.lex.style.bayka", "status": "ok", "ratio": 1.0, "text": "байка", "heard": "Байка."}
+{"id": "ru.lex.style.cenzor", "status": "ok", "ratio": 0.86, "text": "цензор", "heard": "Цинзар!"}
+{"id": "ru.lex.style.lest", "status": "ok", "ratio": 1.0, "text": "лесть", "heard": "ЛЕСТЬ"}
+{"id": "ru.lex.style.otrivistost", "status": "ok", "ratio": 1.0, "text": "отрывистость", "heard": "Отрывистость!"}
+{"id": "ru.lex.style.poshlyj", "status": "ok", "ratio": 0.92, "text": "пошлый", "heard": "Плошлый."}
+{"id": "ru.lex.style.rema", "status": "ok", "ratio": 1.0, "text": "рема", "heard": "Рема..."}
+{"id": "ru.lex.style.sherohovatost", "status": "ok", "ratio": 1.0, "text": "шероховатость", "heard": "Шероховатость"}
+{"id": "ru.lex.summary2.vykota", "status": "ok", "ratio": 1.0, "text": "высота", "heard": "Высота."}
+{"id": "ru.lex.synthesis.perelozenie", "status": "ok", "ratio": 1.0, "text": "переложение", "heard": "Переложение."}
+{"id": "ru.lex.synthesis2.karkas", "status": "ok", "ratio": 0.8, "text": "каркас", "heard": "Ах, каркас..."}
+{"id": "ru.lex.synthesis.samizdat", "status": "ok", "ratio": 0.94, "text": "самиздат", "heard": "Смездат!"}
+{"id": "ru.lex.synthesis2.novella", "status": "ok", "ratio": 0.75, "text": "новелла", "heard": "Навелло."}
+{"id": "ru.lex.synthesis2.otblesk", "status": "ok", "ratio": 1.0, "text": "отблеск", "heard": "Отблеск."}
+{"id": "ru.lex.synthesis2.vid", "status": "ok", "ratio": 1.0, "text": "вид", "heard": "Вид."}
+{"id": "ru.lex.synthesis3.otsenchik", "status": "ok", "ratio": 1.0, "text": "оценщик", "heard": "Оценщик."}
+{"id": "ru.lex.synthesis3.tozhestvo", "status": "ok", "ratio": 1.0, "text": "тождество", "heard": "Тождество!"}
+{"id": "ru.lex.synthesis4.birka", "status": "ok", "ratio": 1.0, "text": "бирка", "heard": "Бирка."}
+{"id": "ru.lex.synthesis4.zaem", "status": "ok", "ratio": 1.0, "text": "заём", "heard": "ЗАЁМ"}
+{"id": "ru.lex.timeplans.aromat", "status": "ok", "ratio": 0.88, "text": "арома́т", "heard": "АРОМА УТ"}
+{"id": "ru.lex.timeplans.dogovorit", "status": "ok", "ratio": 0.8, "text": "договори́ться", "heard": "Договорятся."}
+{"id": "ru.lex.timeplans.muzyka", "status": "ok", "ratio": 0.92, "text": "му́зыка", "heard": "Музыка!"}
+{"id": "ru.lex.timeplans.napomnit", "status": "ok", "ratio": 0.78, "text": "напо́мнить", "heard": "Напою нить."}
+{"id": "ru.lex.timeplans.vstrecha", "status": "ok", "ratio": 0.86, "text": "встре́ча", "heard": "Встреча!"}
+{"id": "ru.lex.timeplans.zavtrashniy", "status": "ok", "ratio": 0.81, "text": "за́втрашний", "heard": "Зая вытрашней!"}
+{"id": "ru.lex.travel.avtobus", "status": "ok", "ratio": 0.8, "text": "авто́бус", "heard": "Авто-йог-бус!"}
+{"id": "ru.lex.travel.doroga", "status": "ok", "ratio": 0.77, "text": "доро́га", "heard": "Дорого."}
+{"id": "ru.lex.travel.dokument", "status": "ok", "ratio": 0.76, "text": "докуме́нт", "heard": "ДОКУМЕТА"}
+{"id": "ru.lex.travel.passport", "status": "ok", "ratio": 0.89, "text": "па́спорт", "heard": "Пайт-спорт."}
+{"id": "ru.lex.travel.peron", "status": "ok", "ratio": 0.75, "text": "перро́н", "heard": "Перрай!"}
+{"id": "ru.lex.travel.poezd", "status": "ok", "ratio": 0.77, "text": "по́езд", "heard": "А, ест..."}
+{"id": "ru.lex.travel.provodnik", "status": "ok", "ratio": 0.76, "text": "проводни́к", "heard": "Проводню."}
+{"id": "ru.lex.travel.puteshestvie", "status": "ok", "ratio": 0.83, "text": "путеше́ствие", "heard": "Путешествие!"}
+{"id": "ru.lex.travel.skorost", "status": "ok", "ratio": 0.8, "text": "ско́рость", "heard": "Скаор. Рость."}
+{"id": "ru.lex.travel.taksy", "status": "ok", "ratio": 1.0, "text": "такси́", "heard": "Такси."}
+{"id": "ru.lex.travel.svetofor", "status": "ok", "ratio": 0.8, "text": "светофо́р", "heard": "Светохор!"}
+{"id": "ru.lex.travel.tamozhnya", "status": "ok", "ratio": 0.76, "text": "тамо́жня", "heard": "Та моя жня."}
+{"id": "ru.lex.travel.vagon", "status": "ok", "ratio": 0.75, "text": "ваго́н", "heard": "Увагой он."}
+{"id": "ru.lex.travel2.karta", "status": "ok", "ratio": 0.75, "text": "ка́рта", "heard": "Ка-и-р-та!"}
+{"id": "ru.lex.travel2.napravlenie", "status": "ok", "ratio": 0.76, "text": "направле́ние", "heard": "Направление."}
+{"id": "ru.lex.travel2.nayti", "status": "ok", "ratio": 1.0, "text": "найти́", "heard": "Найти..."}
+{"id": "ru.lex.travel2.orientir", "status": "ok", "ratio": 0.83, "text": "ориенти́р", "heard": "Ориентир!"}
+{"id": "ru.lex.wellbeing.nasmork", "status": "ok", "ratio": 0.8, "text": "на́сморк", "heard": "Насморг."}
+{"id": "ru.lex.wellbeing.kasel", "status": "ok", "ratio": 0.8, "text": "ка́шель", "heard": "Ка-ху-шел!"}
+{"id": "ru.lex.wellbeing.nervy", "status": "ok", "ratio": 0.92, "text": "не́рвы", "heard": "Нервы."}
+{"id": "ru.lex.wellbeing.terpenie", "status": "ok", "ratio": 0.85, "text": "терпе́ние", "heard": "Терпионие."}
+{"id": "ru.lex.wellbeing.travma", "status": "ok", "ratio": 0.77, "text": "тра́вма", "heard": "Травма!"}
+{"id": "ru.lex.wellbeing.travmatolog", "status": "ok", "ratio": 0.88, "text": "травмато́лог", "heard": "Травматый лог."}
+{"id": "ru.lex.wellbeing.ustalost", "status": "ok", "ratio": 0.8, "text": "уста́лость", "heard": "Уставлость."}
+{"id": "ru.lex.wellbeing.uvazhenie", "status": "ok", "ratio": 0.76, "text": "уваже́ние", "heard": "Уважение!"}
+{"id": "ru.lex.work.tovar", "status": "ok", "ratio": 1.0, "text": "товар", "heard": "Товар!"}
+{"id": "ru.lex.workstudy.dolzhnost", "status": "ok", "ratio": 0.76, "text": "до́лжность", "heard": "Да, ложность."}
+{"id": "ru.lex.workstudy.navyk", "status": "ok", "ratio": 0.91, "text": "на́вык", "heard": "Навык!"}
+{"id": "ru.lex.workstudy.chestnost", "status": "ok", "ratio": 0.76, "text": "че́стность", "heard": "ЧУСНАСТЬ!"}
+{"id": "ru.lex.workstudy.opyt", "status": "ok", "ratio": 0.83, "text": "о́пыт", "heard": "Ой, Пыть!"}
+{"id": "ru.lex.workstudy.organizator", "status": "ok", "ratio": 0.86, "text": "организа́тор", "heard": "Организа хутор"}
+{"id": "ru.lex.workstudy.vozrast", "status": "ok", "ratio": 0.94, "text": "во́зраст", "heard": "Во, взраст."}
+{"id": "ru.lex.writing.indeks", "status": "ok", "ratio": 1.0, "text": "индекс", "heard": "ИНДЕКС!"}
+{"id": "ru.lex.writing2.monolog", "status": "ok", "ratio": 1.0, "text": "монолог", "heard": "Монолог!"}
+{"id": "ru.lex.writing2.pauza", "status": "ok", "ratio": 1.0, "text": "пауза", "heard": "ПАУЗА!"}
+{"id": "ru.sent.b1.u223", "status": "ok", "ratio": 1.0, "text": "Это отъезд.", "heard": "Это отъезд."}
+{"id": "ru.sent.b2.u435", "status": "ok", "ratio": 0.86, "text": "Это вёрстка.", "heard": "Эта ёрстка..."}
+{"id": "ru.sent.b2.u452", "status": "ok", "ratio": 0.9, "text": "Это модель.", "heard": "Это модели."}
+{"id": "ru.sent.b2.u477", "status": "ok", "ratio": 1.0, "text": "Это верификация.", "heard": "Это верификация."}
+{"id": "ru.sent.b2.u604", "status": "ok", "ratio": 1.0, "text": "Это стажировка.", "heard": "Это стажировка!"}
+{"id": "ru.sent.b2.u608", "status": "ok", "ratio": 1.0, "text": "Это бакалавр.", "heard": "Это бакалавр."}
+{"id": "ru.sent.b2.u688", "status": "ok", "ratio": 1.0, "text": "Это фактология.", "heard": "Это фактология!"}
+{"id": "ru.sent.b2.u704", "status": "ok", "ratio": 0.8, "text": "Это антенна.", "heard": "Эта, антенна на."}
+{"id": "ru.sent.b2.u708", "status": "ok", "ratio": 1.0, "text": "Это износ.", "heard": "Это износ!"}
+{"id": "ru.sent.b2.u721", "status": "ok", "ratio": 1.0, "text": "Это плато.", "heard": "Это плато."}
+{"id": "ru.sent.b2.u749", "status": "ok", "ratio": 1.0, "text": "Это крепость.", "heard": "Это крепость!"}
+{"id": "ru.sent.b2.u774", "status": "ok", "ratio": 0.89, "text": "Это арго.", "heard": "А это Арго!"}
+{"id": "ru.sent.cp.p04", "status": "ok", "ratio": 0.79, "text": "Добро́ пожа́ловать!", "heard": "Добро пожаловать!"}
+{"id": "ru.sent.cp.p35", "status": "ok", "ratio": 0.76, "text": "Я пла́чу за проду́кты ка́рточкой.", "heard": "Я плавчу за продой октиках, тачкай."}

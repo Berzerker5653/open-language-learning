@@ -10,17 +10,19 @@ batches settled and committed, `local-chain done`.
 
 ## Final tallies
 
-| pack | media rows | entered best-of-K | round-1 certified (Omarchy) | round-2 certified (GamingPC) | still exhausted |
-|---|---|---|---|---|---|
-| ja-JP | 4,902 | 1,066 (K=6) | 802 | 119 | 145 |
-| ru-RU | 4,856 | 417 (K=8) | 299 | 26 | 92 |
-| total | 9,758 | 1,483 | 1,101 | 145 | 237 |
+| pack | media rows | entered best-of-K | round-1 certs (Omarchy) | round-2 certs (GamingPC) | round-3 certs (re-gate repair) | left for disposition |
+|---|---|---|---|---|---|---|
+| ja-JP | 4,902 | 1,066 (K=6) | 802 | 119 | 0 | 145 |
+| ru-RU | 4,856 | 417 (K=8) | 299, of which 297 re-pass this box's gate | 26 | 1 | 93 |
+| total | 9,758 | 1,483 | 1,101, of which 1,099 re-pass | 145 | 1 | 238 |
 
 The accounting closes: per pack, rows that never entered best-of-K (clean on
 their original take, or already repaired by the earlier ASR-gated repair
-rounds), plus round-1 certs, plus round-2 certs, plus this packet equals the
-manifest row count (ja 3,836 + 802 + 119 + 145 = 4,902; ru 4,439 + 299 + 26 +
-92 = 4,856).
+rounds), plus round-1 certs this box can reproduce, plus round-2 certs, plus
+round-3 certs, plus the disposition packet equals the manifest row count
+(ja 3,836 + 802 + 119 + 145 = 4,902; ru 4,439 + 297 + 26 + 1 + 93 = 4,856).
+**9,520 of 9,758 voice lines carry a cert this box's shipping gate can
+reproduce; 238 do not and are the owner's to disposition.**
 
 Round-2 yield was **38% of the residue**, not the ~75% the round-2 plan claimed.
 That expectation was bad arithmetic (takes are i.i.d., ids are not exchangeable:
@@ -68,29 +70,46 @@ Both certifying gates here run `whisper-gate.sh` -> GamingPC whisper.cpp
 being build skew, not a bad clip (`gate-identity-2026-10-27.txt`). Publish-time
 provenance has to name the build + model sha or "certified" is not repeatable.
 
-## In flight at the time of writing
+## Round 3: the re-gate obligation, closed
 
-* `regate-harvest.sh` re-certifying the 1,101 round-1 winners (audio harvested
-  from Omarchy) with this box's build -> `local-regate-2026-10-28/`
-  (`reconcile.jsonl`, `deltas.jsonl`, `REGATE-2026-10-28.md`). Predicted ~9
-  deltas at the measured skew.
-* `reaudit-asr.sh` re-running the ASR gate over **every** manifest row under
-  this build, seeded from the re-gate checkpoint so nothing is decoded twice,
-  reconciled against the campaign sets so any failure no campaign record
-  explains is listed by id (`full-audit-2026-10-28/audit-fails.jsonl`).
-  ~5 h per pack at the measured clip rate.
+`regate-harvest.sh` re-ran all 1,101 round-1 winners through **both** certifying
+gates with this box's build (79 min wall, not the predicted 2 h):
 
-Both write evidence only.
+* ja-JP: 802 checked, **802 pass**, 0 structure flags.
+* ru-RU: 299 checked, **297 pass**, 2 ASR deltas, 0 structure flags.
+
+| id | Omarchy cert | this box | verdict |
+|---|---|---|---|
+| `ru.lex.comparisons.iz-za` | `pass@6` | ratio 0.14, heard "Иосифа." | re-baked at K=8 here, **passed at take 4** (ratio 0.80, heard "И-о-з-а!"); installed and the manifest row re-hashed (`1ecba0d7…`, 107,564 B, 2.24 s at 24 kHz) and re-proved against disk |
+| `ru.lex.socialplans.napitok` | `pass@7` | ratio 0.60, heard "Напию так." | **exhausted 8 fresh takes** here (best ratio 0.71; takes heard "Мэппиуток!", "Напеуток.", "Напеток.") - now in the packet marked `round2=regate-fail` |
+
+Both were counted as certified and sat in the shipping ru pack. They are the
+real cost of the 119/120 recert: the two failures are not borderline ratios but
+different words, so "the two builds agree within 1%" was the right measurement
+and the wrong conclusion - 1% of 1,101 is 11 expected, 2 arrived, and each one
+is a defect rather than a coin flip. The disposition packet is now **238 rows**
+(ja 145 / ru 93); `rundown-exhausted.py` reads the `bestof-<lang>-r3-*.jsonl`
+checkpoints too, so round-3 outcomes enter the packet the same way round 2's do.
+
+## Still running
+
+`reaudit-asr.sh`: the ASR gate over **every** manifest row of both packs under
+this build, seeded from the re-gate checkpoint (2 delta ids deliberately dropped
+from the seed because their bytes changed afterwards) and reconciled against the
+campaign sets, so any failure no campaign record explains is listed by id in
+`full-audit-2026-10-28/audit-fails.jsonl`. ~9 h for both packs at the 3 workers
+the memory guard allows while the inference server is up; ~4 h with it stopped.
+Evidence only - it changes no pack bytes.
 
 ## What is not done
 
-1. **237 dispositions** (keep / remove / re-author) - `EXHAUSTED-2026-10-28.md`,
+1. **238 dispositions** (keep / remove / re-author) - `EXHAUSTED-2026-10-28.md`,
    answer sheet `disposition-2026-10-28.csv`, 10 listening batches via
-   `bash EXHAUSTED-PLAY.sh <ja|ru> <N>`. Cause tags: gap 160, wrong-syllables
+   `bash EXHAUSTED-PLAY.sh <ja|ru> <N>`. Cause tags: gap 161, wrong-syllables
    60, vocalization 8, burst 6, near-miss 3. This is a human call and cannot be
    self-certified by an agent.
 2. **Re-staging the 0.4.3 pack archives.** `~/staging/` predates the rounds, so
-   the staged archives are stale by 145 assets; `bash
+   the staged archives are stale by 146 replaced assets; `bash
    scripts/stage-pack-bundle.sh` after the audits, and publish itself needs
    explicit owner authorization (`docs/15`).
 3. The card stays open until the dispositions land and the ASR re-audit closes.

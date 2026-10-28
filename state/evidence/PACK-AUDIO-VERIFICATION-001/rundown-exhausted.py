@@ -115,6 +115,17 @@ def main() -> int:
                 if line.strip():
                     r = json.loads(line)
                     r2[r["id"]] = r
+        # Round 3 is the re-gate repair: clips that round 1 certified on the
+        # OTHER recognizer build and this box's gate refused (`REGATE-<date>.md`).
+        # A winner installed here is fine; one that exhausts at K joins this
+        # packet even though round 1 had passed it, because the cert that put it
+        # in the pack cannot be reproduced by the shipping gate.
+        r3 = {}
+        for f in sorted(HERE.glob(f"bestof-{lang}-r3-*.jsonl")):
+            for line in f.read_text(encoding="utf-8").splitlines():
+                if line.strip():
+                    r = json.loads(line)
+                    r3[r["id"]] = r
         # Header numbers are derived from the checkpoints, never typed in: the
         # packet is the owner's decision document and a stale count in it is a
         # false statement about how much bake effort a clip already cost.
@@ -131,6 +142,11 @@ def main() -> int:
             "K_total": max((r["attempts"] + s["attempts"] for r, s in
                             ((r, r2[r["id"]]) for r in r1_ex if r2.get(r["id"]))), default=0),
         }
+        r1_certs = {r["id"] for r in r1_rows if r["result"] != "exhausted"}
+        stats[pack]["delta_cert"] = sorted(i for i in r3
+                                           if i in r1_certs and r3[i]["result"] != "exhausted")
+        stats[pack]["delta_fail"] = sorted(i for i in r3
+                                           if i in r1_certs and r3[i]["result"] == "exhausted")
         recs = []
         for line in (HERE / f"bestof-{lang}.jsonl").read_text(encoding="utf-8").splitlines():
             if not line.strip():
@@ -167,6 +183,28 @@ def main() -> int:
                                  if "flags" not in t), default=None)]),
                     default=None)
             recs.append(rec)
+        for aid in sorted(r3):
+            third = r3[aid]
+            if aid not in r1_certs or third["result"] != "exhausted":
+                continue
+            primary, tags = classify(third)
+            final = third["takes"][-1]
+            recs.append({
+                "pack": pack,
+                "id": aid,
+                "text": texts.get(aid, ""),
+                "attempts": third["attempts"],
+                "attempts_total": third["attempts"],
+                "round2": "regate-fail",
+                "final_stage": "structure" if "flags" in final else "asr",
+                "best_asr_ratio": max((t.get("ratio", 0.0) for t in third["takes"]
+                                       if "flags" not in t), default=None),
+                "structure_flags": sorted({f for t in third["takes"] if "flags" in t for f in t["flags"]}),
+                "cause": primary,
+                "causes": tags,
+                "takes": [f"r1 cert not reproducible on this build; {len(third['takes'])} fresh takes here"]
+                         + ["r3 " + describe_take(t) for t in third["takes"]],
+            })
         recs.sort(key=lambda r: r["id"])
         per_pack[pack] = recs
         rows_out.extend(recs)
@@ -176,11 +214,11 @@ def main() -> int:
 
     S = stats
     md: list[str] = [
-        f"# Best-of-K rounds 1+2: exhausted voice lines - owner disposition ({args.date})",
+        f"# Best-of-K rounds 1-3: exhausted voice lines - owner disposition ({args.date})",
         "",
-        "Every clip below failed **every take** of both re-bake rounds under the full",
-        "gate (acoustic structure + whisper large-v3-turbo round-trip). The per-take",
-        "columns are the recorded gate evidence, not commentary.",
+        "Every clip below failed **every take** of every re-bake round that was judged by",
+        "this box's shipping gate (acoustic structure + whisper large-v3-turbo",
+        "round-trip). The per-take columns are the recorded gate evidence, not commentary.",
         "",
         f"* round 1 (Omarchy): {S['ja-JP']['r1_in']} ja-JP ids at K={S['ja-JP']['k_r1']} "
         f"and {S['ru-RU']['r1_in']} ru-RU ids at K={S['ru-RU']['k_r1']} entered best-of-K; "
@@ -196,6 +234,15 @@ def main() -> int:
         f"{S['ja-JP']['K_total']} (ja-JP) / {S['ru-RU']['K_total']} (ru-RU) failed takes "
         "under identical gates - a materially stronger basis for remove/re-author than a "
         "single bad listening impression.",
+        f"* round 3 (re-gate repair): the re-gate refused "
+        f"{len(S['ja-JP']['delta_cert']) + len(S['ru-RU']['delta_cert']) + len(S['ja-JP']['delta_fail']) + len(S['ru-RU']['delta_fail'])} "
+        "clip(s) that round 1 had certified on Omarchy; every one was re-baked here. "
+        f"{', '.join(S['ja-JP']['delta_cert'] + S['ru-RU']['delta_cert']) or 'none'} "
+        "re-certified. "
+        f"{len(S['ja-JP']['delta_fail']) + len(S['ru-RU']['delta_fail'])} could not be reproduced "
+        "at any K, which puts them in this packet marked `round2=regate-fail` "
+        f"({', '.join(S['ja-JP']['delta_fail'] + S['ru-RU']['delta_fail']) or 'none'}): a cert the "
+        "shipping gate cannot reproduce is not a cert, so they are defects, not noise.",
         "* what you will hear in the rundown is the clip that would ship: `bake-bestof.py`",
         "  discards losing takes and keeps the old wav until a winner replaces it, so the",
         "  bytes at `media/<id>.wav` are still the original bake, not one of the failed",

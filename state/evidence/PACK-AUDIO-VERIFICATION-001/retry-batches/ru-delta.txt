@@ -1,0 +1,2 @@
+ru.lex.comparisons.iz-za
+ru.lex.socialplans.napitok
