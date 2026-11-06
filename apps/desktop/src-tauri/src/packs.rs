@@ -195,6 +195,20 @@ pub fn catalog_view(data: &Path) -> (Vec<CatalogView>, String) {
 /// Env-independent core (url passed explicitly) so the honest status
 /// behavior is testable without mutating process environment.
 pub fn catalog_view_with(data: &Path, url: &str) -> (Vec<CatalogView>, String) {
+    catalog_view_profile_with(data, url, None)
+}
+
+/// The catalogue view resolved against a specific profile's pack selection
+/// (`Some`) or with no profile context (`None`). Both go through
+/// `installed_version_for`, so the banner fact Home, the hub and Settings
+/// show is always the same fact: the version the learner actually uses —
+/// never the lowest version sitting in the store (measured 2026-10-21: a
+/// device running 0.4.x claimed "version 0.2.0 is on this device").
+pub fn catalog_view_profile_with(
+    data: &Path,
+    url: &str,
+    profile_id: Option<&str>,
+) -> (Vec<CatalogView>, String) {
     let (catalog, status) = if url.is_empty() {
         let cached = load_cache(data);
         let status = if cached.is_some() {
@@ -220,7 +234,6 @@ pub fn catalog_view_with(data: &Path, url: &str) -> (Vec<CatalogView>, String) {
             }
         }
     };
-    let installed = installed_packs(data);
     let views = catalog
         .map(|c| {
             c.packs
@@ -235,10 +248,7 @@ pub fn catalog_view_with(data: &Path, url: &str) -> (Vec<CatalogView>, String) {
                     review_status: e.review_status.clone(),
                     min_sdk_version: e.min_sdk_version.clone(),
                     size_bytes: e.size_bytes,
-                    installed_version: installed
-                        .iter()
-                        .find(|i| i.pack_id == e.pack_id)
-                        .map(|i| i.version.clone()),
+                    installed_version: installed_version_for(data, profile_id, &e.pack_id),
                 })
                 .collect()
         })
@@ -792,18 +802,37 @@ pub fn install_pack_bytes_report(
         return Err(CANCELLED.into());
     }
     report(&Progress::stage("install-pack", &am.pack_id, "install"));
+    let packs_store = data.join("packs");
+    // What `current` points at right now. `install_with_cancel` writes
+    // `current` to whatever version it unpacks — including an older one —
+    // so the guard below needs the previous value before the install.
+    let previous = lts_langpack::archive::current_version(&am.pack_id, &packs_store);
     // The unpack is cancellable on the same terms as the download: the hook
     // is consulted per archive entry, and an abort drops the staging
     // directory without touching the pack store.
-    let outcome =
-        match lts_langpack::archive::install_with_cancel(bytes, &data.join("packs"), cancelled) {
-            Ok(o) => o,
-            Err(lts_langpack::archive::ArchiveError::Cancelled) => {
-                report(&Progress::stage("install-pack", &am.pack_id, "cancelled"));
-                return Err(CANCELLED.into());
-            }
-            Err(e) => return Err(format!("install rejected: {e}")),
-        };
+    let outcome = match lts_langpack::archive::install_with_cancel(bytes, &packs_store, cancelled) {
+        Ok(o) => o,
+        Err(lts_langpack::archive::ArchiveError::Cancelled) => {
+            report(&Progress::stage("install-pack", &am.pack_id, "cancelled"));
+            return Err(CANCELLED.into());
+        }
+        Err(e) => return Err(format!("install rejected: {e}")),
+    };
+    // Installing an older version must not silently downgrade `current` —
+    // that pointer drift is how a store ends up aimed at a version nobody
+    // chose. The chosen behavior (PACK-UPDATE-BANNER-001, pinned by test):
+    // the install proceeds, and the pointer moves only when the installed
+    // version is newer. Refusing instead would block content outright; a
+    // pointer that never regresses keeps the "is on this device" fact honest
+    // on every screen, and the older version stays on disk for an explicit
+    // selection. A failed restore means the previous version's directory is
+    // gone — the freshly installed version is then the only target that
+    // resolves at all, so there is nothing more honest left to do.
+    if let Some(prev) = previous.filter(|p| *p != outcome.version) {
+        if !version_is_newer(&outcome.version, &prev) {
+            let _ = lts_langpack::archive::rollback(&outcome.pack_id, &packs_store, Some(&prev));
+        }
+    }
     let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
     // Community installs NEVER self-upgrade trust: the catalog's claimed
     // review status is metadata, not a review record (docs/16).
@@ -1058,6 +1087,100 @@ fn display_for(data: &Path, pack_id: &str, version: &str, trust: &str) -> Instal
     }
 }
 
+/// Order two pack versions when both parse as semver. Pack versions are
+/// schema-gated to semver, so anything that does not parse is never allowed
+/// to move the `current` pointer: the conservative reading is "not newer".
+fn version_is_newer(candidate: &str, reference: &str) -> bool {
+    match (
+        lts_domain::SemVer::parse(candidate),
+        lts_domain::SemVer::parse(reference),
+    ) {
+        (Ok(a), Ok(b)) => a > b,
+        _ => false,
+    }
+}
+
+fn highest_version<'a>(versions: impl Iterator<Item = &'a str>) -> Option<&'a str> {
+    versions.reduce(|best, v| if version_is_newer(v, best) { v } else { best })
+}
+
+/// The version of `pack_id` this installation actually uses — the one fact
+/// a "version X is on this device" banner may claim. Resolution order:
+///
+/// 1. the profile's own selection, when it names an installed version
+///    (that profile picked that version to study);
+/// 2. with no profile context (`None`, what the profile-less `catalog_packs`
+///    and `installed_packs` commands use): that selection when every profile
+///    that selected this pack agrees on it — the only reading of "the
+///    profile" that keeps Home, hub and Settings on one fact. Profiles that
+///    disagree fall through to the pointer below;
+/// 3. the version the store's `current` pointer resolves to: what the pack
+///    engine actually reads content from;
+/// 4. otherwise the highest installed version.
+///
+/// Never the lowest installed row: a device holding 0.2.0 and 0.4.2 runs
+/// 0.4.2 (the measured 2026-10-21 bug showed "version 0.2.0 is on this
+/// device" on a store holding 0.2.0/0.2.1/0.4.2/0.4.3).
+pub fn installed_version_for(
+    data: &Path,
+    profile_id: Option<&str>,
+    pack_id: &str,
+) -> Option<String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).ok()?;
+    let installed: Vec<String> = store
+        .installations()
+        .ok()?
+        .into_iter()
+        .filter(|i| i.pack_id == pack_id)
+        .map(|i| i.version)
+        .collect();
+    if installed.is_empty() {
+        return None;
+    }
+    let is_installed = |v: &str| installed.iter().any(|i| i == v);
+    let selected: Option<String> = match profile_id {
+        Some(pid) => store
+            .selected_packs(pid)
+            .ok()?
+            .into_iter()
+            .find(|(id, _)| id == pack_id)
+            .map(|(_, v)| v),
+        None => {
+            let mut consensus: Option<String> = None;
+            for profile in store.list_profiles().ok()? {
+                if let Some((_, v)) = store
+                    .selected_packs(&profile.id)
+                    .ok()?
+                    .into_iter()
+                    .find(|(id, _)| id == pack_id)
+                {
+                    match &consensus {
+                        None => consensus = Some(v),
+                        Some(s) if *s != v => {
+                            // Profiles study different versions; there is no
+                            // single "the profile's selection" to show, so
+                            // fall back to the pointer the engine reads.
+                            consensus = None;
+                            break;
+                        }
+                        _ => {}
+                    }
+                }
+            }
+            consensus
+        }
+    };
+    if let Some(v) = selected.filter(|v| is_installed(v)) {
+        return Some(v);
+    }
+    if let Some(v) = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .filter(|v| is_installed(v))
+    {
+        return Some(v);
+    }
+    highest_version(installed.iter().map(String::as_str)).map(str::to_string)
+}
+
 pub fn installed_packs(data: &Path) -> Vec<InstalledPack> {
     let Ok(store) = lts_storage::Store::open(data.join("profiles.db")) else {
         return Vec::new();
@@ -1065,10 +1188,26 @@ pub fn installed_packs(data: &Path) -> Vec<InstalledPack> {
     let Ok(insts) = store.installations() else {
         return Vec::new();
     };
-    insts
-        .iter()
-        .map(|i| display_for(data, &i.pack_id, &i.version, &i.trust_state))
-        .collect()
+    // Exactly one row per pack, at the version actually in use
+    // (`installed_version_for`). pack_installations holds one row per
+    // installed *version*, and listing every row let the catalogue join
+    // name the lowest version on a multi-version device.
+    let mut out: Vec<InstalledPack> = Vec::new();
+    for inst in &insts {
+        if out.iter().any(|p| p.pack_id == inst.pack_id) {
+            continue;
+        }
+        let version = installed_version_for(data, None, &inst.pack_id)
+            .unwrap_or_else(|| inst.version.clone());
+        let trust = insts
+            .iter()
+            .find(|r| r.pack_id == inst.pack_id && r.version == version)
+            .unwrap_or(inst)
+            .trust_state
+            .clone();
+        out.push(display_for(data, &inst.pack_id, &version, &trust));
+    }
+    out
 }
 
 pub fn active_pack(data: &Path, profile_id: &str) -> Result<Vec<String>, String> {
@@ -1964,5 +2103,159 @@ mod tests {
             None,
             "a cancelled unpack leaves no version installed"
         );
+    }
+
+    /// Copy the ja-demo fixture so a test can re-version it: the manifest
+    /// schema only requires the version to be semver, and rewriting the one
+    /// top-level `version:` line is the smallest way to build a second
+    /// archive of the same pack.
+    fn copy_dir_all(src: &Path, dst: &Path) -> std::io::Result<()> {
+        fs::create_dir_all(dst)?;
+        for dent in fs::read_dir(src)? {
+            let dent = dent?;
+            let dest = dst.join(dent.file_name());
+            if dent.file_type()?.is_dir() {
+                copy_dir_all(&dent.path(), &dest)?;
+            } else {
+                fs::copy(dent.path(), &dest)?;
+            }
+        }
+        Ok(())
+    }
+
+    fn ja_archive_versioned(version: &str, work: &Path) -> Vec<u8> {
+        let src =
+            PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../tests/fixtures/packs/ja-demo");
+        copy_dir_all(&src, work).unwrap();
+        let manifest = work.join("manifest.yaml");
+        let text = fs::read_to_string(&manifest)
+            .unwrap()
+            // Anchored at a line start: `min_version: "0.1.0"` elsewhere in
+            // the manifest must stay put.
+            .replace("\nversion: \"0.1.0\"", &format!("\nversion: \"{version}\""));
+        fs::write(&manifest, text).unwrap();
+        lts_langpack::archive::build(work).unwrap().0
+    }
+
+    /// PACK-UPDATE-BANNER-001 acceptance 3: installing an older catalogue
+    /// version must not silently downgrade the store's `current` pointer.
+    /// The chosen behavior (pinned here): the install still lands — the older
+    /// version is on disk and recorded, available for an explicit selection —
+    /// but the pointer only ever moves to a newer version.
+    #[test]
+    fn installing_an_older_version_does_not_downgrade_the_current_pointer() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let work = data.join("fixture-work");
+        // The order the measured device drifted through: up, then older.
+        for v in ["0.2.0", "0.4.3", "0.2.1"] {
+            let bytes = ja_archive_versioned(v, &work);
+            install_pack_bytes_report(data, &bytes, None, &mut no_progress, &never_cancelled)
+                .unwrap_or_else(|e| panic!("{v} should install: {e}"));
+        }
+        let pointer = || {
+            lts_langpack::archive::current_version("org.openlanguage.ja-demo", &data.join("packs"))
+        };
+        assert_eq!(
+            pointer().as_deref(),
+            Some("0.4.3"),
+            "installing 0.2.1 over 0.4.3 must leave `current` at 0.4.3"
+        );
+        assert!(
+            data.join("packs/org.openlanguage.ja-demo/0.2.1").is_dir(),
+            "the older install is not destroyed: it stays available on disk"
+        );
+        // One row per pack at the version actually in use — the join can no
+        // longer find a lowest row.
+        assert_eq!(
+            installed_version_for(data, None, "org.openlanguage.ja-demo").as_deref(),
+            Some("0.4.3")
+        );
+        let listed = installed_packs(data);
+        assert_eq!(
+            listed.len(),
+            1,
+            "one row per pack, not one per installed version"
+        );
+        assert_eq!(listed[0].version, "0.4.3");
+        // The comparison is semver, and a version that cannot be ordered
+        // never moves the pointer.
+        assert!(version_is_newer("0.4.3", "0.4.2"));
+        assert!(!version_is_newer("0.2.1", "0.4.3"));
+        assert!(!version_is_newer("not-a-version", "0.1.0"));
+        assert!(!version_is_newer("0.1.0", "not-a-version"));
+    }
+
+    /// PACK-UPDATE-BANNER-001 acceptance 1+2: the banner's installed side is
+    /// the version the profile actually uses — its selection when it has one,
+    /// otherwise the store's `current` pointer — never the lowest installed
+    /// version, and the catalogue join Home, the hub and Settings read shows
+    /// that same fact.
+    #[test]
+    fn the_installed_fact_is_the_profile_selection_then_the_current_pointer() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let work = data.join("fixture-work");
+        for v in ["0.2.0", "0.4.2", "0.4.3"] {
+            let bytes = ja_archive_versioned(v, &work);
+            install_pack_bytes_report(data, &bytes, None, &mut no_progress, &never_cancelled)
+                .unwrap_or_else(|e| panic!("{v} should install: {e}"));
+        }
+        let pack = "org.openlanguage.ja-demo";
+        // No selection anywhere: the fact is the pointer — the store's
+        // 0.4.3, never the lowest row's 0.2.0.
+        assert_eq!(
+            installed_version_for(data, None, pack).as_deref(),
+            Some("0.4.3")
+        );
+        // A profile selection over an older installed version wins.
+        let p = crate::create_local_profile(data, "Chooser").unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        store.select_pack(&p.id, pack, "0.4.2").unwrap();
+        assert_eq!(
+            installed_version_for(data, Some(&p.id), pack).as_deref(),
+            Some("0.4.2")
+        );
+        // Profile-less surfaces agree with the selecting profile.
+        assert_eq!(
+            installed_version_for(data, None, pack).as_deref(),
+            Some("0.4.2")
+        );
+        // The catalogue join — what Home, the hub and Settings render —
+        // carries the same fact, not the lowest installed version.
+        let mut e = entry("https://github.com/o/r/releases/download/v0.4.3/ja-demo.lpk");
+        e.pack_id = pack.into();
+        e.version = "0.4.3".into();
+        write_cache(
+            data,
+            &PackCatalog {
+                catalog_version: "1".into(),
+                note: String::new(),
+                packs: vec![e],
+            },
+        );
+        let (views, _) = catalog_view_with(data, "");
+        assert_eq!(views[0].installed_version.as_deref(), Some("0.4.2"));
+        let (views, _) = catalog_view_profile_with(data, "", Some(&p.id));
+        assert_eq!(views[0].installed_version.as_deref(), Some("0.4.2"));
+        // A second profile selecting a different version: no single
+        // "profile's selection" exists, so the shared fact falls back to the
+        // pointer the engine reads, while each profile keeps its own.
+        let q = crate::create_local_profile(data, "Other").unwrap();
+        store.select_pack(&q.id, pack, "0.4.3").unwrap();
+        assert_eq!(
+            installed_version_for(data, Some(&p.id), pack).as_deref(),
+            Some("0.4.2")
+        );
+        assert_eq!(
+            installed_version_for(data, Some(&q.id), pack).as_deref(),
+            Some("0.4.3")
+        );
+        assert_eq!(
+            installed_version_for(data, None, pack).as_deref(),
+            Some("0.4.3")
+        );
+        let (views, _) = catalog_view_with(data, "");
+        assert_eq!(views[0].installed_version.as_deref(), Some("0.4.3"));
     }
 }
