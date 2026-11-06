@@ -1194,3 +1194,6 @@ Commit 4faeb31. Global Ctrl+Shift+K toggle from any in-app route; InputModeBubbl
 
 ## 2026-11-06 — SCENARIO-LOCK-COPY-001 closed (delegated, controller-verified)
 Commit 885a5f6. Locked scenario rows now read like a human: prerequisites named from the pack's own display data (lexicon glosses, grammar concept names, kana labels, goal-map descriptions) and each names the unit where it is practiced ("practice "here" to supported (recall-meaning) — practiced in "Asking where things are""). No raw content/goal ids in any fresh-profile locked row for ja or ru (regex-walk asserted); fallback phrase when no name exists. Controller re-ran scenarios suite 18/18 at HEAD. Kanban t_c5d9fc5a completed.
+
+## 2026-11-06 — Owner policy: audio QA is Russian-only
+Fiancé reviews Russian only; Japanese pack audio is accepted on trust. Stood down the full ja ASR audit (2,155/4,902 rows; 2,031 ok / 124 flagged kept as unrepaired snapshot) and the function-word particle repair loop. JA-FUNCTION-WORD-LOOKUP-001 completed (lookup 7/7, checker 14->0, 9 jmdict entries; clips ship un-audited by policy). PACK-AUDIO-VERIFICATION-001 closed: ru 4,856/4,856 certified; ja scope retired by owner. Kanban t_1e38bf90, t_6caacf66 completed.
