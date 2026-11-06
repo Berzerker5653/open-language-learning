@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-06T09:29:25",
+  "updated": "2026-11-06T09:34:08",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -1464,7 +1464,7 @@
       "title": "Windows/macOS desktop parity",
       "activity": "idle",
       "summary": "Automated builds and critical end-to-end paths pass on Linux, Windows and macOS, with per-platform speech/model behaviour and install paths documented.",
-      "notes": "Recorded 2026-10-15 (REL-001 recheck): required for desktop 1.0, previously ROADMAP-only, so docs/15 derivation reported it ready. Measured from `.github/workflows/ci.yml` today: `platform-compile` runs `pnpm build` plus `cargo check -p lts-desktop --all-targets` on windows-latest and macos-latest — compile-only, and the workflow says so; `platform-bundles` is manual (`workflow_dispatch`) and produces **unsigned release** bundles whose artifact names carry the `UNTESTED` marker; every runtime check (`desktop-smoke` and the walkthrough) runs on ubuntu-24.04 only. `docs/platform/PLATFORM_REPORTS.yaml` states that `tested_platforms` is maintainer/owner runtime evidence and is Linux-only today, and holds no Windows/macOS record. Closing this needs Windows/macOS devices or paid CI runners plus human runtime reports. No owner gate records that purchase decision today: K-34 chose compile-only parity (owner decision 2026-10-03, recorded in the `platform-compile` job comment) and ADR-0015 allows untested bundles to exist so users can file reports (owner decision 2026-10-07).\nRe-scoped 2026-10-20: kept blocked as the honest record that Windows/macOS runtime parity has never been evidenced; required_for_desktop_1_0 is now false.",
+      "notes": "Recorded 2026-10-15 (REL-001 recheck): required for desktop 1.0, previously ROADMAP-only, so docs/15 derivation reported it ready. Measured from `.github/workflows/ci.yml` today: `platform-compile` runs `pnpm build` plus `cargo check -p lts-desktop --all-targets` on windows-latest and macos-latest — compile-only, and the workflow says so; `platform-bundles` is manual (`workflow_dispatch`) and produces **unsigned release** bundles whose artifact names carry the `UNTESTED` marker; every runtime check (`desktop-smoke` and the walkthrough) runs on ubuntu-24.04 only. `docs/platform/PLATFORM_REPORTS.yaml` states that `tested_platforms` is maintainer/owner runtime evidence and is Linux-only today, and holds no Windows/macOS record. Closing this needs Windows/macOS devices or paid CI runners plus human runtime reports. No owner gate records that purchase decision today: K-34 chose compile-only parity (owner decision 2026-10-03, recorded in the `platform-compile` job comment) and ADR-0015 allows untested bundles to exist so users can file reports (owner decision 2026-10-07).\nRe-scoped 2026-10-20: kept blocked as the honest record that Windows/macOS runtime parity has never been evidenced; required_for_desktop_1_0 is now false. | Owner 2026-11-06: no Windows/macOS hardware in the lab; platform verification and fixes are community-report driven. Blocked in-house indefinitely.",
       "dependencies": [
         "SPEECH-003",
         "WRITE-001",
