@@ -1,0 +1,45 @@
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.functionword.ha-topic: first-request 12.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.functionword.ni: first-request 9.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.functionword.no: first-request 113.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.functionword.wo: first-request 65.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.functionword.he: first-request 8.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.functionword.ga: first-request 12.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.functionword.ka: first-request 8.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.functionword.mo: first-request 156.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.functionword.de: first-request 91.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+FAILED ja.lex.functionword.de: 13.6 s still exceeds 3.0 s cap after retries (runaway output)
+pack=languages/ja-JP assets=4910 generated=8 reused=0 bytes=372848680
+RENDER_EXIT=1

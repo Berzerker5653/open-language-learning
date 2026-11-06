@@ -1,0 +1,9 @@
+{"id": "ja.lex.functionword.he", "status": "MISMATCH", "ratio": 0.5, "text": "へ", "heard": "えへん", "reasons": ["vocalization-run"]}
+{"id": "ja.lex.functionword.ka", "status": "MISMATCH", "ratio": 0.67, "text": "か", "heard": "かっ"}
+{"id": "ja.lex.functionword.ga", "status": "ok", "ratio": 1.0, "text": "が", "heard": "が"}
+{"id": "ja.lex.functionword.no", "status": "ok", "ratio": 1.0, "text": "の", "heard": "の"}
+{"id": "ja.lex.functionword.mo", "status": "MISMATCH", "ratio": 0.67, "text": "も", "heard": "もう…"}
+{"id": "ja.lex.functionword.ha-topic", "status": "MISMATCH", "ratio": 0.5, "text": "わ", "heard": "うわっ"}
+{"id": "ja.lex.functionword.de", "status": "ok", "ratio": 1.0, "text": "で", "heard": "で"}
+{"id": "ja.lex.functionword.ni", "status": "MISMATCH", "ratio": 0.0, "text": "に", "heard": "ねえ。"}
+{"id": "ja.lex.functionword.wo", "status": "MISMATCH", "ratio": 0.0, "text": "を", "heard": "うぅぅ"}

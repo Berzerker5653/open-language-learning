@@ -1,0 +1,1 @@
+{"id": "ja.lex.functionword.ha-topic", "attempts": 2, "result": "exhausted", "takes": [{"take": 1, "ratio": 0.0, "reasons": [], "rescued": false, "heard": "う、う…。"}, {"take": 2, "stage": "segments", "flags": {"gap": {"s": 1.64, "count": 1, "threshold": 0.8}}}]}

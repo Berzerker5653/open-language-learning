@@ -755,6 +755,16 @@ struct LexEntry {
     /// parses the language itself.
     kind: String,
     slots: Vec<PhraseSlot>,
+    /// JA-FUNCTION-WORD-LOOKUP-001: the pack's declared part-of-speech
+    /// label, used only for the closed-class tie-break in span lookup
+    /// (never for grading or scheduling).
+    pos: Option<String>,
+    /// Every non-transliteration (script-tagged) reading the pack
+    /// declares. Span resolution matches a sentence's declared reading
+    /// against ANY of these, so a reading annotation that writes the
+    /// topic particle in its orthographic form (は for the word read
+    /// わ) still resolves to the particle entry.
+    readings: Vec<String>,
 }
 
 /// K-44: one variable part of a phrase, as declared by the pack.
@@ -972,6 +982,18 @@ fn parse_lexicon_entries(
                     .collect()
             })
             .unwrap_or_default();
+        let readings: Vec<String> = entry
+            .get("readings")
+            .and_then(|v| v.as_array())
+            .map(|a| {
+                a.iter()
+                    .filter(|r| r.get("transliteration_system").is_none())
+                    .filter_map(|r| r.get("text").and_then(|t| t.as_str()))
+                    .filter(|t| !t.is_empty())
+                    .map(String::from)
+                    .collect()
+            })
+            .unwrap_or_default();
         out.push(LexEntry {
             id: id.to_string(),
             surface: surface.to_string(),
@@ -985,6 +1007,11 @@ fn parse_lexicon_entries(
                 .to_string(),
             kind,
             slots,
+            pos: entry
+                .get("part_of_speech")
+                .and_then(|v| v.as_str())
+                .map(String::from),
+            readings,
         });
     }
     Ok(out)
@@ -6342,26 +6369,177 @@ async fn story_view(profile_id: String, story_id: String) -> Result<StoryView, S
 /// contains another surface (the ち/intelligence entry inside
 /// こんにちは), and a wrong dictionary lookup is what destroys pack
 /// trust. Ties (same start, same length) break on entry id.
+///
+/// JA-FUNCTION-WORD-LOOKUP-001: when the caller supplies the
+/// sentence's own declared reading, the entry chosen for a span must
+/// be one whose declared reading is readable at the span's position
+/// in that sentence reading — tapping は in 「わたしの なまえは
+/// タナカです。」 (read わ at that spot) presents the topic particle,
+/// never the homophone noun 歯 "tooth". Among candidates that all
+/// match at that position, a closed-class part of speech wins:
+/// に answers as the particle, not the number "two". With no declared
+/// reading the old K-80 rule stands unchanged (longest surface, id
+/// tie-break).
 fn sentence_word_spans<'a>(text: &str, lex: &'a [LexEntry]) -> Vec<&'a LexEntry> {
+    span_entries_dedup(&sentence_word_spans_with_reading(text, None, lex))
+}
+
+/// One entry per distinct id, in span order — what the reader panel
+/// shows (a surface that occurs twice in one sentence is listed once).
+fn span_entries_dedup<'a>(matches: &[SpanMatch<'a>]) -> Vec<&'a LexEntry> {
+    let mut out: Vec<&'a LexEntry> = Vec::new();
+    for m in matches {
+        if !out.iter().any(|e| e.id == m.entry.id) {
+            out.push(m.entry);
+        }
+    }
+    out
+}
+
+/// One span the reader lookup consumed, and whether the chosen entry's
+/// reading agreed with the sentence's declared reading at that spot.
+#[derive(Clone)]
+struct SpanMatch<'a> {
+    entry: &'a LexEntry,
+    /// Character offset of the span within the sentence text.
+    start: usize,
+    len: usize,
+    reading_agrees: bool,
+}
+
+/// Closed-class parts of speech as packs declare them. A learner
+/// tapping a short function-word span must not be answered with a
+/// homophone noun (topic particle answered as 歯 "tooth", dative
+/// particle answered as "two"): when several entries match the same
+/// span with a reading that agrees with the sentence, the closed-class
+/// entry wins the tie, because a closed-class surface occurs as a
+/// word far more often than its homophone.
+fn is_closed_class_pos(pos: Option<&str>) -> bool {
+    matches!(
+        pos,
+        Some("particle")
+            | Some("copula")
+            | Some("auxiliary")
+            | Some("auxiliary verb")
+            | Some("conjunction")
+    )
+}
+
+/// If one of the entry's declared readings is spelled exactly at
+/// reading-cursor `r`, its length in chars; None otherwise.
+fn reading_at(entry: &LexEntry, rc: &[char], r: usize) -> Option<usize> {
+    let candidates: Vec<&str> = if entry.readings.is_empty() {
+        entry.reading.as_deref().into_iter().collect()
+    } else {
+        entry.readings.iter().map(|s| s.as_str()).collect()
+    };
+    candidates.into_iter().find_map(|rd| {
+        let needle: Vec<char> = rd.chars().collect();
+        (!needle.is_empty()
+            && needle.len() <= rc.len() - r
+            && rc[r..r + needle.len()] == needle[..])
+            .then_some(needle.len())
+    })
+}
+
+/// K-80 + JA-FUNCTION-WORD-LOOKUP-001: span segmentation with optional
+/// reading-aware disambiguation (see `sentence_word_spans`).
+fn sentence_word_spans_with_reading<'a>(
+    text: &str,
+    reading: Option<&str>,
+    lex: &'a [LexEntry],
+) -> Vec<SpanMatch<'a>> {
     let chars: Vec<char> = text.chars().collect();
-    let mut surfaces: Vec<(Vec<char>, &LexEntry)> = lex
+    let rc: Option<Vec<char>> = reading.map(|r| r.chars().collect());
+    let mut surfaces: Vec<(Vec<char>, &'a LexEntry)> = lex
         .iter()
         .filter(|e| !e.surface.is_empty())
         .map(|e| (e.surface.chars().collect(), e))
         .collect();
     surfaces.sort_by(|a, b| b.0.len().cmp(&a.0.len()).then_with(|| a.1.id.cmp(&b.1.id)));
-    let mut out: Vec<&LexEntry> = Vec::new();
+    let mut out: Vec<SpanMatch<'a>> = Vec::new();
     let mut i = 0usize;
+    let mut r = 0usize; // cursor into the declared reading
     while i < chars.len() {
-        if let Some((span, entry)) = surfaces
+        if let Some((span, first)) = surfaces
             .iter()
             .find(|(s, _)| s.len() <= chars.len() - i && chars[i..i + s.len()] == s[..])
         {
-            if !out.iter().any(|e| e.id == entry.id) {
-                out.push(entry);
-            }
+            let (entry, agrees) = match &rc {
+                None => (*first, true),
+                Some(rc) => {
+                    // Same-surface candidates, entry-id order (the
+                    // surface list sorts ties by id).
+                    let cands: Vec<&'a LexEntry> = surfaces
+                        .iter()
+                        .filter(|(s, _)| *s == *span)
+                        .map(|(_, e)| *e)
+                        .collect();
+                    let direct: Vec<(&'a LexEntry, usize)> = cands
+                        .iter()
+                        .copied()
+                        .filter_map(|e| reading_at(e, rc, r).map(|n| (e, n)))
+                        .collect();
+                    if !direct.is_empty() {
+                        let (e, n) = direct
+                            .iter()
+                            .copied()
+                            .find(|(e, _)| is_closed_class_pos(e.pos.as_deref()))
+                            .unwrap_or(direct[0]);
+                        r += n;
+                        (e, true)
+                    } else {
+                        // Cursor drift (surfaces whose readings differ
+                        // in length from their spelling, e.g. katakana
+                        // names): look ahead within the current reading
+                        // word before giving up.
+                        let limit = rc[r..]
+                            .iter()
+                            .position(|c| *c == ' ')
+                            .map_or(rc.len(), |p| r + p);
+                        let found: Vec<(&'a LexEntry, usize, usize)> = cands
+                            .iter()
+                            .copied()
+                            .filter_map(|e| {
+                                (r + 1..=limit)
+                                    .find_map(|p| reading_at(e, rc, p).map(|n| (e, p, n)))
+                            })
+                            .collect();
+                        if let Some(&(e, p, n)) = found
+                            .iter()
+                            .find(|(e, _, _)| is_closed_class_pos(e.pos.as_deref()))
+                            .or_else(|| found.first())
+                        {
+                            r = p + n;
+                            (e, true)
+                        } else {
+                            // No candidate is readable where the sentence
+                            // says it should be: a genuine
+                            // reading/surface conflict, reported by the
+                            // pack checker and still resolved (an aid,
+                            // never a guarantee) by entry id.
+                            (cands[0], false)
+                        }
+                    }
+                }
+            };
+            out.push(SpanMatch {
+                entry,
+                start: i,
+                len: span.len(),
+                reading_agrees: agrees,
+            });
             i += span.len();
         } else {
+            if let Some(rc) = &rc {
+                if r < rc.len() && chars[i] == rc[r] {
+                    r += 1;
+                } else if chars[i] == ' ' {
+                    while r < rc.len() && rc[r] == ' ' {
+                        r += 1;
+                    }
+                }
+            }
             i += 1;
         }
     }
@@ -6397,11 +6575,20 @@ fn story_view_at(data: &Path, profile_id: &str, story_id: &str) -> Result<StoryV
             status: entry.status.clone(),
             kind: "sentence".into(),
             slots: Vec::new(),
+            pos: None,
+            readings: Vec::new(),
         };
         let display = reader_display(data, profile_id, &proxy, false);
         // Tap-to-lookup: one entry per covered token span, in sentence
         // order (K-80) — never every surface that appears as a substring.
-        let known: Vec<LexEntry> = sentence_word_spans(&entry.text, &lex)
+        // The sentence's declared reading disambiguates homophone
+        // surfaces (JA-FUNCTION-WORD-LOOKUP-001).
+        let known: Vec<LexEntry> =
+            span_entries_dedup(&sentence_word_spans_with_reading(
+                &entry.text,
+                entry.reading.as_deref(),
+                &lex,
+            ))
             .into_iter()
             .cloned()
             .collect();
@@ -13573,6 +13760,8 @@ transfer_variants:
                 status: "draft".into(),
                 kind: "word".into(),
                 slots: Vec::new(),
+                pos: None,
+                readings: Vec::new(),
             }
         }
         let lex = vec![
@@ -13611,6 +13800,288 @@ transfer_variants:
             .map(|e| e.id.clone())
             .collect();
         assert_eq!(got, vec!["lex.kore", "lex.phantom"]);
+    }
+
+    /// JA-FUNCTION-WORD-LOOKUP-001: pin the resolution rule against a
+    /// tiny synthetic lexicon — behaviour fixture, not pack claims.
+    /// With a declared sentence reading: (1) the entry chosen for a
+    /// span must be readable as the sentence reads it at that spot
+    /// (は read わ there → topic particle, never the tooth noun);
+    /// (2) when several entries match there, the closed-class part of
+    /// speech wins (に answers as the particle, not the number "two");
+    /// (3) a sentence reading that writes the topic particle in its
+    /// orthographic form (は) still resolves to the particle entry,
+    /// which declares both the pronunciation and the annotation form.
+    #[test]
+    fn reading_aware_span_lookup_prefers_closed_class_homophones() {
+        fn entry(id: &str, surface: &str, pos: Option<&str>, readings: &[&str]) -> LexEntry {
+            LexEntry {
+                id: id.into(),
+                surface: surface.into(),
+                reading: readings.first().map(|s| s.to_string()),
+                romaji: None,
+                gloss: id.into(),
+                status: "draft".into(),
+                kind: "word".into(),
+                slots: Vec::new(),
+                pos: pos.map(String::from),
+                readings: readings.iter().map(|s| s.to_string()).collect(),
+            }
+        }
+        let lex = vec![
+            entry("lex.ha-tooth", "は", Some("noun"), &["は"]),
+            entry(
+                "lex.ha-topic",
+                "は",
+                Some("particle"),
+                &["わ", "は"], // pronounced わ; may be annotated は
+            ),
+            entry("lex.ni-two", "に", Some("number"), &["に"]),
+            entry("lex.ni-particle", "に", Some("particle"), &["に"]),
+        ];
+        let ids = |text: &str, reading: &str| -> Vec<String> {
+            sentence_word_spans_with_reading(text, Some(reading), &lex)
+                .into_iter()
+                .map(|m| m.entry.id.clone())
+                .collect()
+        };
+        // The sentence reads the particle わ at that span.
+        assert_eq!(ids("なまえは", "なまえわ"), vec!["lex.ha-topic"]);
+        // The same particle annotated は: both entries are readable,
+        // the particle wins on the closed-class rule.
+        assert_eq!(ids("なまえは", "なまえは"), vec!["lex.ha-topic"]);
+        // に is read に by either entry: the particle beats the number.
+        assert_eq!(ids("がっこうへ に いきます", "がっこうえ に いきます"), vec!["lex.ni-particle"]);
+        // Without a declared reading the old id-order rule stands
+        // (ties break on entry id: lex.ha-tooth sorts first here).
+        assert_eq!(
+            sentence_word_spans("なまえは", &lex)
+                .into_iter()
+                .map(|e| e.id.clone())
+                .collect::<Vec<_>>(),
+            vec!["lex.ha-tooth"]
+        );
+    }
+
+    /// JA-FUNCTION-WORD-LOOKUP-001 acceptance 1, against the shipped
+    /// pack: tapping the は span of 「わたしの なまえは タナカです。」
+    /// (declared reading わ at that span) presents the topic particle
+    /// and never the tooth noun.
+    #[test]
+    fn reading_aware_lookup_of_the_self_intro_shows_the_topic_particle_not_the_tooth() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let version = lts_langpack::archive::current_version(
+            "org.openlanguage.ja-jp.reference",
+            &data.join("packs"),
+        )
+        .unwrap();
+        let lex = lexicon_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
+        let sentences = sentence_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
+        let sent = sentences
+            .iter()
+            .find(|e| e.id == "ja.sent.my-name-wa")
+            .expect("self-intro sentence must ship");
+        let ids: Vec<String> = span_entries_dedup(&sentence_word_spans_with_reading(
+            &sent.text,
+            sent.reading.as_deref(),
+            &lex,
+        ))
+        .into_iter()
+        .map(|e| e.id.clone())
+        .collect();
+        assert!(
+            ids.contains(&"ja.lex.functionword.ha-topic".to_string()),
+            "the topic particle must be the answer for the は span: {ids:?}"
+        );
+        assert!(
+            !ids.contains(&"ja.lex.health4.ha".to_string()),
+            "the tooth noun must never answer the topic-particle span: {ids:?}"
+        );
+    }
+
+    /// JA-FUNCTION-WORD-LOOKUP-001 acceptance 1 (second half), against
+    /// the shipped pack: a dative/locative に span must not resolve to
+    /// the number entry ("two").
+    #[test]
+    fn reading_aware_lookup_of_a_ni_particle_span_never_answers_two() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let version = lts_langpack::archive::current_version(
+            "org.openlanguage.ja-jp.reference",
+            &data.join("packs"),
+        )
+        .unwrap();
+        let lex = lexicon_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
+        let sentences = sentence_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
+        for sid in ["ja.sent.wake-up", "ja.sent.go-school", "ja.sent.come-home"] {
+            let sent = sentences
+                .iter()
+                .find(|e| e.id == sid)
+                .expect("story sentence must ship");
+            let ids: Vec<String> = span_entries_dedup(&sentence_word_spans_with_reading(
+                &sent.text,
+                sent.reading.as_deref(),
+                &lex,
+            ))
+            .into_iter()
+                    .map(|e| e.id.clone())
+                    .collect();
+                    assert!(
+                        !ids.contains(&"ja.lex.numbers.ni".to_string()),
+                "{sid}: the number 'two' must never answer a particle span: {ids:?}"
+            );
+        }
+        let wake = sentences
+            .iter()
+            .find(|e| e.id == "ja.sent.wake-up")
+            .unwrap();
+        let ids: Vec<String> = sentence_word_spans_with_reading(
+            &wake.text,
+            wake.reading.as_deref(),
+            &lex,
+        )
+        .into_iter()
+        .map(|m| m.entry.id.clone())
+        .collect();
+        assert!(
+            ids.contains(&"ja.lex.functionword.ni".to_string()),
+            "the に span of the wake-up sentence must answer as the particle: {ids:?}"
+        );
+    }
+
+    /// JA-FUNCTION-WORD-LOOKUP-001 acceptance 2: repo-side checker.
+    /// Walk every shipped story sentence, resolve each span through
+    /// the SAME reader path (`sentence_word_spans_with_reading` with
+    /// the sentence's declared reading), and report every closed-class
+    /// span that:
+    ///   (a) resolved to an entry whose reading conflicts with the
+    ///       sentence's own reading at that span (surface は against a
+    ///       reading wa spelled there),
+    ///   (b) sits uncovered — a closed-class word that resolves to no
+    ///       entry at all (an uncovered run bounded by spaces or
+    ///       punctuation that spells exactly a closed-class surface),
+    ///   (c) has no closed-class entry among the candidates for its
+    ///       surface, so the span could only ever answer with an
+    ///       open-class homophone (に answered only by "two").
+    /// The report must be empty; before the data fix it was not (the
+    /// counts are recorded in state/notes/JA-FUNCTION-WORD-LOOKUP-001.md).
+    #[test]
+    fn shipped_story_function_word_lookup_report_is_empty() {
+        const CLOSED_SURFACES: &[&str] = &[
+            "ました", "でした", "から", "です", "まで", "ます", "は", "に", "を", "が", "の", "へ",
+            "と", "か", "も", "で",
+        ];
+        let mut closed: Vec<&str> = CLOSED_SURFACES.to_vec();
+        closed.sort_by(|a, b| b.chars().count().cmp(&a.chars().count()));
+        let punct = |c: char| matches!(c, '。' | '、' | '！' | '？' | '・');
+
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let version = lts_langpack::archive::current_version(
+            "org.openlanguage.ja-jp.reference",
+            &data.join("packs"),
+        )
+        .unwrap();
+        let lex = lexicon_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
+        let sentences = sentence_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
+        let stories = story_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
+        assert!(!stories.is_empty(), "the reference pack must ship stories");
+
+        let mut report: Vec<String> = Vec::new();
+        for story in &stories {
+            for sid in &story.sentences {
+                let Some(sent) = sentences.iter().find(|e| e.id == *sid) else {
+                    continue;
+                };
+                let ms =
+                    sentence_word_spans_with_reading(&sent.text, sent.reading.as_deref(), &lex);
+                let chars: Vec<char> = sent.text.chars().collect();
+                let mut covered = vec![false; chars.len()];
+                for m in &ms {
+                    for c in &mut covered[m.start..m.start + m.len] {
+                        *c = true;
+                    }
+                }
+                for m in &ms {
+                    let surface = m.entry.surface.as_str();
+                    let closed_surface = CLOSED_SURFACES.contains(&surface);
+                    if !closed_surface && !is_closed_class_pos(m.entry.pos.as_deref()) {
+                        continue;
+                    }
+                    if !m.reading_agrees {
+                        report.push(format!(
+                            "{} / {}: span {surface:?} resolved to {} whose reading {:?} \
+                             conflicts with the sentence's declared reading at that span",
+                            story.id, sid, m.entry.id, m.entry.reading
+                        ));
+                    }
+                    if closed_surface
+                        && !lex
+                            .iter()
+                            .filter(|e| e.surface == surface)
+                            .any(|e| is_closed_class_pos(e.pos.as_deref()))
+                    {
+                        // A closed-class span answerable only by open-
+                        // class homophones: the surface (は) contradicts
+                        // how the sentence itself reads that spot — the
+                        // topic particle is read わ/wa, the tooth noun
+                        // (the only entry here) reads は/ha.
+                        report.push(format!(
+                            "{} / {}: closed-class span {surface:?} has only open-class entries ({}) \
+                             — the sentence declares romaji {:?} at that spot",
+                            story.id,
+                            sid,
+                            lex.iter()
+                                .filter(|e| e.surface == surface)
+                                .map(|e| e.id.as_str())
+                                .collect::<Vec<_>>()
+                                .join(", "),
+                            sent.romaji
+                        ));
+                    }
+                }
+                // (b): a maximal uncovered run that spells exactly a
+                // closed-class surface (whitespace/punctuation-trimmed)
+                // is a closed-class word no lexicon entry covers.
+                let mut p = 0usize;
+                while p < chars.len() {
+                    if covered[p] {
+                        p += 1;
+                        continue;
+                    }
+                    let mut q = p;
+                    while q < chars.len() && !covered[q] {
+                        q += 1;
+                    }
+                    let run: String = chars[p..q].iter().collect();
+                    // Spaces inside the run bound candidate words: an
+                    // unentered open-class word must not hide a
+                    // adjacent closed-class word from the check.
+                    for seg in run.split(' ') {
+                        let seg = seg.trim_matches(punct).to_string();
+                        if let Some(s) = closed.iter().find(|s| **s == seg) {
+                            report.push(format!(
+                                "{} / {}: no lexicon entry covers the closed-class word {s:?}",
+                                story.id, sid
+                            ));
+                        }
+                    }
+                    p = q;
+                }
+            }
+        }
+        for line in &report {
+            eprintln!("JA-LOOKUP-REPORT: {line}");
+        }
+        assert!(
+            report.is_empty(),
+            "{} closed-class span(s) mis-resolved in shipped stories",
+            report.len()
+        );
     }
 
     #[test]

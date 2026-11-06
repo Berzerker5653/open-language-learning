@@ -1,0 +1,6 @@
+ja.lex.functionword.ni
+ja.lex.functionword.wo
+ja.lex.functionword.he
+ja.lex.functionword.ha-topic
+ja.lex.functionword.ka
+ja.lex.functionword.mo

@@ -1,0 +1,14 @@
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.functionword.de: first-request 55.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+pack=languages/ja-JP assets=4911 generated=1 reused=0 bytes=372887124
+DE_TRY=1 EXIT=0
