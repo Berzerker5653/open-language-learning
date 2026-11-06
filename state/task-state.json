@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-06T06:30:00-07:00",
+  "updated": "2026-11-06T06:45:00-07:00",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -1851,12 +1851,12 @@
     },
     "SCENARIOS-SECTION-REVIEW-001": {
       "task_id": "SCENARIOS-SECTION-REVIEW-001",
-      "status": "review",
+      "status": "done",
       "attempts": 1,
       "title": "Scenarios section end-to-end usability review and issue register",
-      "activity": "awaiting-owner",
+      "activity": "owner-accepted-2026-11-06",
       "summary": "Owner rejected the Scenarios section in the 2026-10-21 sweep; reviewing engine semantics, pack scenario content and UI affordances together and registering every defect found.",
-      "notes": "Opened 2026-10-21 by the owner's item-5 verdict: 'a complete issue in itself... needs to be reviewed and evaluated as it currently stands.' Paired symptom from 5a (S-4): all four Shadowing buttons work end to end but render grey/disabled-looking - the 2026-10-10 finding 8 ('controls non-clickable') was an affordance bug all along; live probes had always shown the buttons enabled. Scope: ladder reachability from a fresh profile (locks, preconditions, unlock paths), support-box and transfer-variant click effects and counting, scenario_help gating (ADR-0038), pack scenario YAML completeness (ja + ru), disabled-state affordance and a11y semantics, honest failure states. Deliverable: findings register in state/evidence/SCENARIOS-REVIEW-2026-10-21/ with severity/location/repro per issue, each registered as a remediation card or owner-dropped; the section's acceptance itself stays the owner's call. Register landed 2026-10-21: state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md - findings S-01..S-09 with file:line evidence, remediation cards SCENARIO-INTERACTION-001, SCENARIO-TRANSFER-001, SCENARIO-VIEW-CONSISTENCY-001, BUTTON-AFFORDANCE-001, SCENARIO-LOCK-COPY-001 registered ready. Awaiting owner acceptance of the register and scope calls on the cards; two delegated scout audits stalled at the 30-min cap (transcripts kept) and the walk was done directly. | State move 2026-10-27: the agent-side review pass is complete (10 findings, every claim a file:line quote or machine count, in the evidence register). docs/15 allows only one in_progress task and PACK-AUDIO-VERIFICATION-001 owns it, so this card now sits in review: it needs the owner's evaluation and disposition of S-01..S-10, which an agent cannot self-certify. Fixes that follow from it need their own cards.",
+      "notes": "Opened 2026-10-21 by the owner's item-5 verdict: 'a complete issue in itself... needs to be reviewed and evaluated as it currently stands.' Paired symptom from 5a (S-4): all four Shadowing buttons work end to end but render grey/disabled-looking - the 2026-10-10 finding 8 ('controls non-clickable') was an affordance bug all along; live probes had always shown the buttons enabled. Scope: ladder reachability from a fresh profile (locks, preconditions, unlock paths), support-box and transfer-variant click effects and counting, scenario_help gating (ADR-0038), pack scenario YAML completeness (ja + ru), disabled-state affordance and a11y semantics, honest failure states. Deliverable: findings register in state/evidence/SCENARIOS-REVIEW-2026-10-21/ with severity/location/repro per issue, each registered as a remediation card or owner-dropped; the section's acceptance itself stays the owner's call. Register landed 2026-10-21: state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md - findings S-01..S-09 with file:line evidence, remediation cards SCENARIO-INTERACTION-001, SCENARIO-TRANSFER-001, SCENARIO-VIEW-CONSISTENCY-001, BUTTON-AFFORDANCE-001, SCENARIO-LOCK-COPY-001 registered ready. Awaiting owner acceptance of the register and scope calls on the cards; two delegated scout audits stalled at the 30-min cap (transcripts kept) and the walk was done directly. | State move 2026-10-27: the agent-side review pass is complete (10 findings, every claim a file:line quote or machine count, in the evidence register). docs/15 allows only one in_progress task and PACK-AUDIO-VERIFICATION-001 owns it, so this card now sits in review: it needs the owner's evaluation and disposition of S-01..S-10, which an agent cannot self-certify. Fixes that follow from it need their own cards. || REGISTER ACCEPTED by owner 2026-11-06 ('Yes' in session; all findings S-01..S-08 have remediation cards, S-09 rides REVIEW-001). Remediation campaign underway: BUTTON-AFFORDANCE-001 closed (16415e3); INTERACTION/TRANSFER/VIEW-CONSISTENCY/LOCK-COPY in progress.",
       "evidence": [
         "state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md"
       ],
